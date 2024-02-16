@@ -12,5 +12,4 @@ export class Intel extends APIResource {
 export namespace Intel {
   export import IndicatorFeeds = IndicatorFeedsAPI.IndicatorFeeds;
   export import Sinkholes = SinkholesAPI.Sinkholes;
-  export import SinkholeListResponse = SinkholesAPI.SinkholeListResponse;
 }

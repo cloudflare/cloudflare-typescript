@@ -5286,14 +5286,6 @@ Methods:
 
 ## Sinkholes
 
-Types:
-
-- <code><a href="./src/resources/intel/sinkholes.ts">SinkholeListResponse</a></code>
-
-Methods:
-
-- <code title="get /accounts/{account_identifier}/intel/sinkholes">client.intel.sinkholes.<a href="./src/resources/intel/sinkholes.ts">list</a>(accountIdentifier) -> SinkholeListResponse</code>
-
 # Rum
 
 ## SiteInfos
