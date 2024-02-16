@@ -33,7 +33,7 @@ export class AuditLogs extends APIResource {
 
 export type AuditLogAuditLogsGetAccountAuditLogsResponse =
   | AuditLogAuditLogsGetAccountAuditLogsResponse.UnionMember0
-  | AuditLogAuditLogsGetAccountAuditLogsResponse._6edTwAciAPIResponseCommon;
+  | AuditLogAuditLogsGetAccountAuditLogsResponse._1eJRmpNrAPIResponseCommon;
 
 export namespace AuditLogAuditLogsGetAccountAuditLogsResponse {
   export interface UnionMember0 {
@@ -145,10 +145,10 @@ export namespace AuditLogAuditLogsGetAccountAuditLogsResponse {
     }
   }
 
-  export interface _6edTwAciAPIResponseCommon {
-    errors: Array<_6edTwAciAPIResponseCommon.Error>;
+  export interface _1eJRmpNrAPIResponseCommon {
+    errors: Array<_1eJRmpNrAPIResponseCommon.Error>;
 
-    messages: Array<_6edTwAciAPIResponseCommon.Message>;
+    messages: Array<_1eJRmpNrAPIResponseCommon.Message>;
 
     result: unknown | Array<unknown> | string;
 
@@ -158,7 +158,7 @@ export namespace AuditLogAuditLogsGetAccountAuditLogsResponse {
     success: true;
   }
 
-  export namespace _6edTwAciAPIResponseCommon {
+  export namespace _1eJRmpNrAPIResponseCommon {
     export interface Error {
       code: number;
 
