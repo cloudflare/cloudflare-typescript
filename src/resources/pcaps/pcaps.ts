@@ -56,11 +56,11 @@ export class Pcaps extends APIResource {
 }
 
 export type PcapGetResponse =
-  | PcapGetResponse.RsDvnQmDPcapsResponseSimple
-  | PcapGetResponse.RsDvnQmDPcapsResponseFull;
+  | PcapGetResponse.Z0Vmh0HyPcapsResponseSimple
+  | PcapGetResponse.Z0Vmh0HyPcapsResponseFull;
 
 export namespace PcapGetResponse {
-  export interface RsDvnQmDPcapsResponseSimple {
+  export interface Z0Vmh0HyPcapsResponseSimple {
     /**
      * The ID for the packet capture.
      */
@@ -69,7 +69,7 @@ export namespace PcapGetResponse {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: RsDvnQmDPcapsResponseSimple.FilterV1;
+    filter_v1?: Z0Vmh0HyPcapsResponseSimple.FilterV1;
 
     /**
      * The status of the packet capture request.
@@ -106,7 +106,7 @@ export namespace PcapGetResponse {
     type?: 'simple' | 'full';
   }
 
-  export namespace RsDvnQmDPcapsResponseSimple {
+  export namespace Z0Vmh0HyPcapsResponseSimple {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
@@ -138,7 +138,7 @@ export namespace PcapGetResponse {
     }
   }
 
-  export interface RsDvnQmDPcapsResponseFull {
+  export interface Z0Vmh0HyPcapsResponseFull {
     /**
      * The ID for the packet capture.
      */
@@ -171,7 +171,7 @@ export namespace PcapGetResponse {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: RsDvnQmDPcapsResponseFull.FilterV1;
+    filter_v1?: Z0Vmh0HyPcapsResponseFull.FilterV1;
 
     /**
      * The status of the packet capture request.
@@ -208,7 +208,7 @@ export namespace PcapGetResponse {
     type?: 'simple' | 'full';
   }
 
-  export namespace RsDvnQmDPcapsResponseFull {
+  export namespace Z0Vmh0HyPcapsResponseFull {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
@@ -242,11 +242,11 @@ export namespace PcapGetResponse {
 }
 
 export type PcapMagicPcapCollectionCreatePcapRequestResponse =
-  | PcapMagicPcapCollectionCreatePcapRequestResponse.RsDvnQmDPcapsResponseSimple
-  | PcapMagicPcapCollectionCreatePcapRequestResponse.RsDvnQmDPcapsResponseFull;
+  | PcapMagicPcapCollectionCreatePcapRequestResponse.Z0Vmh0HyPcapsResponseSimple
+  | PcapMagicPcapCollectionCreatePcapRequestResponse.Z0Vmh0HyPcapsResponseFull;
 
 export namespace PcapMagicPcapCollectionCreatePcapRequestResponse {
-  export interface RsDvnQmDPcapsResponseSimple {
+  export interface Z0Vmh0HyPcapsResponseSimple {
     /**
      * The ID for the packet capture.
      */
@@ -255,7 +255,7 @@ export namespace PcapMagicPcapCollectionCreatePcapRequestResponse {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: RsDvnQmDPcapsResponseSimple.FilterV1;
+    filter_v1?: Z0Vmh0HyPcapsResponseSimple.FilterV1;
 
     /**
      * The status of the packet capture request.
@@ -292,7 +292,7 @@ export namespace PcapMagicPcapCollectionCreatePcapRequestResponse {
     type?: 'simple' | 'full';
   }
 
-  export namespace RsDvnQmDPcapsResponseSimple {
+  export namespace Z0Vmh0HyPcapsResponseSimple {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
@@ -324,7 +324,7 @@ export namespace PcapMagicPcapCollectionCreatePcapRequestResponse {
     }
   }
 
-  export interface RsDvnQmDPcapsResponseFull {
+  export interface Z0Vmh0HyPcapsResponseFull {
     /**
      * The ID for the packet capture.
      */
@@ -357,7 +357,7 @@ export namespace PcapMagicPcapCollectionCreatePcapRequestResponse {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: RsDvnQmDPcapsResponseFull.FilterV1;
+    filter_v1?: Z0Vmh0HyPcapsResponseFull.FilterV1;
 
     /**
      * The status of the packet capture request.
@@ -394,7 +394,7 @@ export namespace PcapMagicPcapCollectionCreatePcapRequestResponse {
     type?: 'simple' | 'full';
   }
 
-  export namespace RsDvnQmDPcapsResponseFull {
+  export namespace Z0Vmh0HyPcapsResponseFull {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
@@ -428,12 +428,12 @@ export namespace PcapMagicPcapCollectionCreatePcapRequestResponse {
 }
 
 export type PcapMagicPcapCollectionListPacketCaptureRequestsResponse = Array<
-  | PcapMagicPcapCollectionListPacketCaptureRequestsResponse.RsDvnQmDPcapsResponseSimple
-  | PcapMagicPcapCollectionListPacketCaptureRequestsResponse.RsDvnQmDPcapsResponseFull
+  | PcapMagicPcapCollectionListPacketCaptureRequestsResponse.Z0Vmh0HyPcapsResponseSimple
+  | PcapMagicPcapCollectionListPacketCaptureRequestsResponse.Z0Vmh0HyPcapsResponseFull
 >;
 
 export namespace PcapMagicPcapCollectionListPacketCaptureRequestsResponse {
-  export interface RsDvnQmDPcapsResponseSimple {
+  export interface Z0Vmh0HyPcapsResponseSimple {
     /**
      * The ID for the packet capture.
      */
@@ -442,7 +442,7 @@ export namespace PcapMagicPcapCollectionListPacketCaptureRequestsResponse {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: RsDvnQmDPcapsResponseSimple.FilterV1;
+    filter_v1?: Z0Vmh0HyPcapsResponseSimple.FilterV1;
 
     /**
      * The status of the packet capture request.
@@ -479,7 +479,7 @@ export namespace PcapMagicPcapCollectionListPacketCaptureRequestsResponse {
     type?: 'simple' | 'full';
   }
 
-  export namespace RsDvnQmDPcapsResponseSimple {
+  export namespace Z0Vmh0HyPcapsResponseSimple {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
@@ -511,7 +511,7 @@ export namespace PcapMagicPcapCollectionListPacketCaptureRequestsResponse {
     }
   }
 
-  export interface RsDvnQmDPcapsResponseFull {
+  export interface Z0Vmh0HyPcapsResponseFull {
     /**
      * The ID for the packet capture.
      */
@@ -544,7 +544,7 @@ export namespace PcapMagicPcapCollectionListPacketCaptureRequestsResponse {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: RsDvnQmDPcapsResponseFull.FilterV1;
+    filter_v1?: Z0Vmh0HyPcapsResponseFull.FilterV1;
 
     /**
      * The status of the packet capture request.
@@ -581,7 +581,7 @@ export namespace PcapMagicPcapCollectionListPacketCaptureRequestsResponse {
     type?: 'simple' | 'full';
   }
 
-  export namespace RsDvnQmDPcapsResponseFull {
+  export namespace Z0Vmh0HyPcapsResponseFull {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
@@ -615,11 +615,11 @@ export namespace PcapMagicPcapCollectionListPacketCaptureRequestsResponse {
 }
 
 export type PcapMagicPcapCollectionCreatePcapRequestParams =
-  | PcapMagicPcapCollectionCreatePcapRequestParams.RsDvnQmDPcapsRequestSimple
-  | PcapMagicPcapCollectionCreatePcapRequestParams.RsDvnQmDPcapsRequestFull;
+  | PcapMagicPcapCollectionCreatePcapRequestParams.Z0Vmh0HyPcapsRequestSimple
+  | PcapMagicPcapCollectionCreatePcapRequestParams.Z0Vmh0HyPcapsRequestFull;
 
 export namespace PcapMagicPcapCollectionCreatePcapRequestParams {
-  export interface RsDvnQmDPcapsRequestSimple {
+  export interface Z0Vmh0HyPcapsRequestSimple {
     /**
      * The limit of packets contained in a packet capture.
      */
@@ -644,10 +644,10 @@ export namespace PcapMagicPcapCollectionCreatePcapRequestParams {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: PcapMagicPcapCollectionCreatePcapRequestParams.RsDvnQmDPcapsRequestSimple.FilterV1;
+    filter_v1?: PcapMagicPcapCollectionCreatePcapRequestParams.Z0Vmh0HyPcapsRequestSimple.FilterV1;
   }
 
-  export namespace RsDvnQmDPcapsRequestSimple {
+  export namespace Z0Vmh0HyPcapsRequestSimple {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
@@ -679,7 +679,7 @@ export namespace PcapMagicPcapCollectionCreatePcapRequestParams {
     }
   }
 
-  export interface RsDvnQmDPcapsRequestFull {
+  export interface Z0Vmh0HyPcapsRequestFull {
     /**
      * The name of the data center used for the packet capture. This can be a specific
      * colo (ord02) or a multi-colo name (ORD). This field only applies to `full`
@@ -717,7 +717,7 @@ export namespace PcapMagicPcapCollectionCreatePcapRequestParams {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: PcapMagicPcapCollectionCreatePcapRequestParams.RsDvnQmDPcapsRequestFull.FilterV1;
+    filter_v1?: PcapMagicPcapCollectionCreatePcapRequestParams.Z0Vmh0HyPcapsRequestFull.FilterV1;
 
     /**
      * The limit of packets contained in a packet capture.
@@ -725,7 +725,7 @@ export namespace PcapMagicPcapCollectionCreatePcapRequestParams {
     packet_limit?: number;
   }
 
-  export namespace RsDvnQmDPcapsRequestFull {
+  export namespace Z0Vmh0HyPcapsRequestFull {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
