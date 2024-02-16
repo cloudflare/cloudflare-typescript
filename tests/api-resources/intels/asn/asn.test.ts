@@ -14,7 +14,7 @@ const cloudflare = new Cloudflare({
 describe('resource asn', () => {
   // skipped: tests are disabled for the time being
   test.skip('get', async () => {
-    const responsePromise = cloudflare.intels.asn.get('023e105f4ecef8ad9ca31a8372d0c353', {});
+    const responsePromise = cloudflare.intels.asn.get('023e105f4ecef8ad9ca31a8372d0c353', 0);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -28,7 +28,7 @@ describe('resource asn', () => {
   test.skip('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.intels.asn.get('023e105f4ecef8ad9ca31a8372d0c353', {}, { path: '/_stainless_unknown_path' }),
+      cloudflare.intels.asn.get('023e105f4ecef8ad9ca31a8372d0c353', 0, { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 });

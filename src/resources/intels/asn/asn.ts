@@ -11,7 +11,7 @@ export class Asn extends APIResource {
   /**
    * Get ASN Overview
    */
-  get(accountId: string, asn: unknown, options?: Core.RequestOptions): Core.APIPromise<AsnGetResponse> {
+  get(accountId: string, asn: number, options?: Core.RequestOptions): Core.APIPromise<AsnGetResponse> {
     return (
       this._client.get(`/accounts/${accountId}/intel/asn/${asn}`, options) as Core.APIPromise<{
         result: AsnGetResponse;
