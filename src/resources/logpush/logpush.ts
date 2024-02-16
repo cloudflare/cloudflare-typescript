@@ -18,9 +18,9 @@ export class Logpush extends APIResource {
 export namespace Logpush {
   export import Datasets = DatasetsAPI.Datasets;
   export import Edges = EdgesAPI.Edges;
-  export import EdgeCreateResponse = EdgesAPI.EdgeCreateResponse;
+  export import EdgeUpdateResponse = EdgesAPI.EdgeUpdateResponse;
   export import EdgeGetResponse = EdgesAPI.EdgeGetResponse;
-  export import EdgeCreateParams = EdgesAPI.EdgeCreateParams;
+  export import EdgeUpdateParams = EdgesAPI.EdgeUpdateParams;
   export import Jobs = JobsAPI.Jobs;
   export import JobCreateResponse = JobsAPI.JobCreateResponse;
   export import JobUpdateResponse = JobsAPI.JobUpdateResponse;

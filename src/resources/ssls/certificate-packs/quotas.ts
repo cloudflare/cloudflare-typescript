@@ -8,20 +8,23 @@ export class Quotas extends APIResource {
   /**
    * For a given zone, list certificate pack quotas.
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<QuotaGetResponse> {
+  certificatePacksGetCertificatePackQuotas(
+    zoneId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<QuotaCertificatePacksGetCertificatePackQuotasResponse> {
     return (
       this._client.get(`/zones/${zoneId}/ssl/certificate_packs/quota`, options) as Core.APIPromise<{
-        result: QuotaGetResponse;
+        result: QuotaCertificatePacksGetCertificatePackQuotasResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface QuotaGetResponse {
-  advanced?: QuotaGetResponse.Advanced;
+export interface QuotaCertificatePacksGetCertificatePackQuotasResponse {
+  advanced?: QuotaCertificatePacksGetCertificatePackQuotasResponse.Advanced;
 }
 
-export namespace QuotaGetResponse {
+export namespace QuotaCertificatePacksGetCertificatePackQuotasResponse {
   export interface Advanced {
     /**
      * Quantity Allocated.
@@ -36,5 +39,5 @@ export namespace QuotaGetResponse {
 }
 
 export namespace Quotas {
-  export import QuotaGetResponse = QuotasAPI.QuotaGetResponse;
+  export import QuotaCertificatePacksGetCertificatePackQuotasResponse = QuotasAPI.QuotaCertificatePacksGetCertificatePackQuotasResponse;
 }

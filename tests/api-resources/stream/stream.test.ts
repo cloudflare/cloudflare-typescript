@@ -13,8 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource stream', () => {
   // skipped: tests are disabled for the time being
-  test.skip('create', async () => {
-    const responsePromise = cloudflare.stream.create(
+  test.skip('update', async () => {
+    const responsePromise = cloudflare.stream.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'ea95132c15732412d22c1476fa83f27a',
       {},

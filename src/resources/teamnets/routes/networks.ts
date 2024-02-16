@@ -10,17 +10,17 @@ export class Networks extends APIResource {
    * Routes a private network through a Cloudflare Tunnel. The CIDR in
    * `ip_network_encoded` must be written in URL-encoded format.
    */
-  create(
+  update(
     accountId: string,
     ipNetworkEncoded: string,
-    body: NetworkCreateParams,
+    body: NetworkUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<NetworkCreateResponse> {
+  ): Core.APIPromise<NetworkUpdateResponse> {
     return (
       this._client.post(`/accounts/${accountId}/teamnet/routes/network/${ipNetworkEncoded}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: NetworkCreateResponse }>
+      }) as Core.APIPromise<{ result: NetworkUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -63,7 +63,7 @@ export class Networks extends APIResource {
   }
 }
 
-export interface NetworkCreateResponse {
+export interface NetworkUpdateResponse {
   /**
    * UUID of the route.
    */
@@ -143,7 +143,7 @@ export interface NetworkDeleteResponse {
   virtual_network_id?: unknown;
 }
 
-export interface NetworkCreateParams {
+export interface NetworkUpdateParams {
   /**
    * Optional remark describing the route.
    */
@@ -165,8 +165,8 @@ export interface NetworkDeleteParams {
 }
 
 export namespace Networks {
-  export import NetworkCreateResponse = NetworksAPI.NetworkCreateResponse;
+  export import NetworkUpdateResponse = NetworksAPI.NetworkUpdateResponse;
   export import NetworkDeleteResponse = NetworksAPI.NetworkDeleteResponse;
-  export import NetworkCreateParams = NetworksAPI.NetworkCreateParams;
+  export import NetworkUpdateParams = NetworksAPI.NetworkUpdateParams;
   export import NetworkDeleteParams = NetworksAPI.NetworkDeleteParams;
 }

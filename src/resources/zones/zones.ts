@@ -4,10 +4,10 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as ZonesAPI from 'cloudflare/resources/zones/zones';
-import * as HoldsAPI from 'cloudflare/resources/zones/holds';
+import * as HoldAPI from 'cloudflare/resources/zones/hold';
 
 export class Zones extends APIResource {
-  holds: HoldsAPI.Holds = new HoldsAPI.Holds(this._client);
+  hold: HoldAPI.Hold = new HoldAPI.Hold(this._client);
 
   /**
    * Create Zone
@@ -805,10 +805,10 @@ export namespace Zones {
   export import ZoneCreateParams = ZonesAPI.ZoneCreateParams;
   export import ZoneUpdateParams = ZonesAPI.ZoneUpdateParams;
   export import ZoneListParams = ZonesAPI.ZoneListParams;
-  export import Holds = HoldsAPI.Holds;
-  export import HoldEnforceResponse = HoldsAPI.HoldEnforceResponse;
-  export import HoldGetResponse = HoldsAPI.HoldGetResponse;
-  export import HoldRemoveResponse = HoldsAPI.HoldRemoveResponse;
-  export import HoldEnforceParams = HoldsAPI.HoldEnforceParams;
-  export import HoldRemoveParams = HoldsAPI.HoldRemoveParams;
+  export import Hold = HoldAPI.Hold;
+  export import HoldEnforceResponse = HoldAPI.HoldEnforceResponse;
+  export import HoldGetResponse = HoldAPI.HoldGetResponse;
+  export import HoldRemoveResponse = HoldAPI.HoldRemoveResponse;
+  export import HoldEnforceParams = HoldAPI.HoldEnforceParams;
+  export import HoldRemoveParams = HoldAPI.HoldRemoveParams;
 }

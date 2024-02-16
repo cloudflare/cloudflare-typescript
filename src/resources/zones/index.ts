@@ -6,8 +6,8 @@ export {
   HoldRemoveResponse,
   HoldEnforceParams,
   HoldRemoveParams,
-  Holds,
-} from './holds';
+  Hold,
+} from './hold';
 export {
   ZoneCreateResponse,
   ZoneUpdateResponse,

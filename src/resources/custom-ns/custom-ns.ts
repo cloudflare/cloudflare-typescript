@@ -166,5 +166,5 @@ export namespace CustomNs {
   export import Availabilities = AvailabilitiesAPI.Availabilities;
   export import AvailabilityGetResponse = AvailabilitiesAPI.AvailabilityGetResponse;
   export import Verifies = VerifiesAPI.Verifies;
-  export import VerifyCreateResponse = VerifiesAPI.VerifyCreateResponse;
+  export import VerifyUpdateResponse = VerifiesAPI.VerifyUpdateResponse;
 }
