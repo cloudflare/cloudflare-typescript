@@ -56,12 +56,12 @@ export interface PurgeCachZonePurgeResponse {
 }
 
 export type PurgeCachZonePurgeParams =
-  | PurgeCachZonePurgeParams.Ikgtf7G3Flex
-  | PurgeCachZonePurgeParams.Ikgtf7G3Everything
-  | PurgeCachZonePurgeParams.Ikgtf7G3Files;
+  | PurgeCachZonePurgeParams.JIaMi3xIFlex
+  | PurgeCachZonePurgeParams.JIaMi3xIEverything
+  | PurgeCachZonePurgeParams.JIaMi3xIFiles;
 
 export namespace PurgeCachZonePurgeParams {
-  export interface Ikgtf7G3Flex {
+  export interface JIaMi3xIFlex {
     hosts?: Array<string>;
 
     prefixes?: Array<string>;
@@ -69,16 +69,16 @@ export namespace PurgeCachZonePurgeParams {
     tags?: Array<string>;
   }
 
-  export interface Ikgtf7G3Everything {
+  export interface JIaMi3xIEverything {
     purge_everything?: boolean;
   }
 
-  export interface Ikgtf7G3Files {
-    files?: Array<string | PurgeCachZonePurgeParams.Ikgtf7G3Files.Ikgtf7G3URLAndHeaders>;
+  export interface JIaMi3xIFiles {
+    files?: Array<string | PurgeCachZonePurgeParams.JIaMi3xIFiles.JIaMi3xIURLAndHeaders>;
   }
 
-  export namespace Ikgtf7G3Files {
-    export interface Ikgtf7G3URLAndHeaders {
+  export namespace JIaMi3xIFiles {
+    export interface JIaMi3xIURLAndHeaders {
       headers?: unknown;
 
       url?: string;
