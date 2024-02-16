@@ -4061,7 +4061,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/request-tracers/traces.ts">Q19cOvCrTrace</a></code>
 - <code><a href="./src/resources/request-tracers/traces.ts">TraceCreateResponse</a></code>
 
 Methods:
