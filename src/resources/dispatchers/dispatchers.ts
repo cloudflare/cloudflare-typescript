@@ -9,8 +9,8 @@ export class Dispatchers extends APIResource {
 
 export namespace Dispatchers {
   export import Scripts = ScriptsAPI.Scripts;
-  export import ScriptRetrieveResponse = ScriptsAPI.ScriptRetrieveResponse;
   export import ScriptUpdateResponse = ScriptsAPI.ScriptUpdateResponse;
+  export import ScriptGetResponse = ScriptsAPI.ScriptGetResponse;
   export import ScriptUpdateParams = ScriptsAPI.ScriptUpdateParams;
   export import ScriptDeleteParams = ScriptsAPI.ScriptDeleteParams;
 }

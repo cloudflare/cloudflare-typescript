@@ -8,21 +8,21 @@ export class LastSeenIdentity extends APIResource {
   /**
    * Get last seen identity for a single user.
    */
-  retrieve(
+  get(
     identifier: string,
     id: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LastSeenIdentityRetrieveResponse> {
+  ): Core.APIPromise<LastSeenIdentityGetResponse> {
     return (
       this._client.get(
         `/accounts/${identifier}/access/users/${id}/last_seen_identity`,
         options,
-      ) as Core.APIPromise<{ result: LastSeenIdentityRetrieveResponse }>
+      ) as Core.APIPromise<{ result: LastSeenIdentityGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface LastSeenIdentityRetrieveResponse {
+export interface LastSeenIdentityGetResponse {
   account_id?: string;
 
   auth_status?: string;
@@ -31,17 +31,17 @@ export interface LastSeenIdentityRetrieveResponse {
 
   device_id?: string;
 
-  device_sessions?: Record<string, LastSeenIdentityRetrieveResponse.DeviceSessions>;
+  device_sessions?: Record<string, LastSeenIdentityGetResponse.DeviceSessions>;
 
-  devicePosture?: Record<string, LastSeenIdentityRetrieveResponse.DevicePosture>;
+  devicePosture?: Record<string, LastSeenIdentityGetResponse.DevicePosture>;
 
   email?: string;
 
-  geo?: LastSeenIdentityRetrieveResponse.Geo;
+  geo?: LastSeenIdentityGetResponse.Geo;
 
   iat?: number;
 
-  idp?: LastSeenIdentityRetrieveResponse.Idp;
+  idp?: LastSeenIdentityGetResponse.Idp;
 
   ip?: string;
 
@@ -49,7 +49,7 @@ export interface LastSeenIdentityRetrieveResponse {
 
   is_warp?: boolean;
 
-  mtls_auth?: LastSeenIdentityRetrieveResponse.MtlsAuth;
+  mtls_auth?: LastSeenIdentityGetResponse.MtlsAuth;
 
   service_token_id?: string;
 
@@ -60,7 +60,7 @@ export interface LastSeenIdentityRetrieveResponse {
   version?: number;
 }
 
-export namespace LastSeenIdentityRetrieveResponse {
+export namespace LastSeenIdentityGetResponse {
   export interface DeviceSessions {
     last_authenticated?: number;
   }
@@ -117,5 +117,5 @@ export namespace LastSeenIdentityRetrieveResponse {
 }
 
 export namespace LastSeenIdentity {
-  export import LastSeenIdentityRetrieveResponse = LastSeenIdentityAPI.LastSeenIdentityRetrieveResponse;
+  export import LastSeenIdentityGetResponse = LastSeenIdentityAPI.LastSeenIdentityGetResponse;
 }

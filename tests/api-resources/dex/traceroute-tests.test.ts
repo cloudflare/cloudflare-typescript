@@ -13,11 +13,11 @@ const cloudflare = new Cloudflare({
 
 describe('resource tracerouteTests', () => {
   // skipped: tests are disabled for the time being
-  test.skip('retrieve: only required params', async () => {
-    const responsePromise = cloudflare.dex.tracerouteTests.retrieve(
+  test.skip('get: only required params', async () => {
+    const responsePromise = cloudflare.dex.tracerouteTests.get(
       '01a7362d577a6c3019a474fd6f485823',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { interval: 'minute', timeEnd: '1689606812000', timeStart: '1689520412000' },
+      { interval: 'minute', timeEnd: 'string', timeStart: 'string' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,14 +29,14 @@ describe('resource tracerouteTests', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('retrieve: required and optional params', async () => {
-    const response = await cloudflare.dex.tracerouteTests.retrieve(
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.dex.tracerouteTests.get(
       '01a7362d577a6c3019a474fd6f485823',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       {
         interval: 'minute',
-        timeEnd: '1689606812000',
-        timeStart: '1689520412000',
+        timeEnd: 'string',
+        timeStart: 'string',
         colo: 'string',
         deviceId: ['string', 'string', 'string'],
       },
@@ -48,7 +48,7 @@ describe('resource tracerouteTests', () => {
     const responsePromise = cloudflare.dex.tracerouteTests.networkPath(
       '01a7362d577a6c3019a474fd6f485823',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { deviceId: 'string', interval: 'minute', timeEnd: '1689606812000', timeStart: '1689520412000' },
+      { deviceId: 'string', interval: 'minute', timeEnd: 'string', timeStart: 'string' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -64,7 +64,7 @@ describe('resource tracerouteTests', () => {
     const response = await cloudflare.dex.tracerouteTests.networkPath(
       '01a7362d577a6c3019a474fd6f485823',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { deviceId: 'string', interval: 'minute', timeEnd: '1689606812000', timeStart: '1689520412000' },
+      { deviceId: 'string', interval: 'minute', timeEnd: 'string', timeStart: 'string' },
     );
   });
 

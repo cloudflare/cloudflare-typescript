@@ -12,10 +12,10 @@ export {
 export { Rum } from './rum';
 export {
   SiteInfoCreateResponse,
-  SiteInfoRetrieveResponse,
   SiteInfoUpdateResponse,
   SiteInfoListResponse,
   SiteInfoDeleteResponse,
+  SiteInfoGetResponse,
   SiteInfoCreateParams,
   SiteInfoUpdateParams,
   SiteInfoListParams,

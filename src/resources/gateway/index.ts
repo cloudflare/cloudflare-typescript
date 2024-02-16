@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
-  AuditSSHSettingRetrieveResponse,
   AuditSSHSettingUpdateResponse,
+  AuditSSHSettingGetResponse,
   AuditSSHSettingUpdateParams,
   AuditSSHSettings,
 } from './audit-ssh-settings';

@@ -6,6 +6,38 @@ import * as CasAPI from 'cloudflare/resources/access/apps/cas';
 
 export class Cas extends APIResource {
   /**
+   * Generates a new short-lived certificate CA and public key.
+   */
+  create(
+    accountOrZone: string,
+    accountOrZoneId: string,
+    uuid: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CaCreateResponse> {
+    return (
+      this._client.post(
+        `/${accountOrZone}/${accountOrZoneId}/access/apps/${uuid}/ca`,
+        options,
+      ) as Core.APIPromise<{ result: CaCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Lists short-lived certificate CAs and their public keys.
+   */
+  list(
+    accountOrZone: string,
+    accountOrZoneId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CaListResponse | null> {
+    return (
+      this._client.get(`/${accountOrZone}/${accountOrZoneId}/access/apps/ca`, options) as Core.APIPromise<{
+        result: CaListResponse | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Deletes a short-lived certificate CA.
    */
   delete(
@@ -23,71 +55,29 @@ export class Cas extends APIResource {
   }
 
   /**
-   * Generates a new short-lived certificate CA and public key.
-   */
-  accessShortLivedCertificateCAsCreateAShortLivedCertificateCa(
-    accountOrZone: string,
-    accountOrZoneId: string,
-    uuid: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CaAccessShortLivedCertificateCAsCreateAShortLivedCertificateCaResponse> {
-    return (
-      this._client.post(
-        `/${accountOrZone}/${accountOrZoneId}/access/apps/${uuid}/ca`,
-        options,
-      ) as Core.APIPromise<{ result: CaAccessShortLivedCertificateCAsCreateAShortLivedCertificateCaResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Fetches a short-lived certificate CA and its public key.
    */
-  accessShortLivedCertificateCAsGetAShortLivedCertificateCa(
+  get(
     accountOrZone: string,
     accountOrZoneId: string,
     uuid: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CaAccessShortLivedCertificateCAsGetAShortLivedCertificateCaResponse> {
+  ): Core.APIPromise<CaGetResponse> {
     return (
       this._client.get(
         `/${accountOrZone}/${accountOrZoneId}/access/apps/${uuid}/ca`,
         options,
-      ) as Core.APIPromise<{ result: CaAccessShortLivedCertificateCAsGetAShortLivedCertificateCaResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Lists short-lived certificate CAs and their public keys.
-   */
-  accessShortLivedCertificateCAsListShortLivedCertificateCAs(
-    accountOrZone: string,
-    accountOrZoneId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CaAccessShortLivedCertificateCAsListShortLivedCertificateCAsResponse | null> {
-    return (
-      this._client.get(`/${accountOrZone}/${accountOrZoneId}/access/apps/ca`, options) as Core.APIPromise<{
-        result: CaAccessShortLivedCertificateCAsListShortLivedCertificateCAsResponse | null;
-      }>
+      ) as Core.APIPromise<{ result: CaGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface CaDeleteResponse {
-  /**
-   * The ID of the CA.
-   */
-  id?: string;
-}
+export type CaCreateResponse = unknown | string;
 
-export type CaAccessShortLivedCertificateCAsCreateAShortLivedCertificateCaResponse = unknown | string;
+export type CaListResponse = Array<CaListResponse.CaListResponseItem>;
 
-export type CaAccessShortLivedCertificateCAsGetAShortLivedCertificateCaResponse = unknown | string;
-
-export type CaAccessShortLivedCertificateCAsListShortLivedCertificateCAsResponse =
-  Array<CaAccessShortLivedCertificateCAsListShortLivedCertificateCAsResponse.CaAccessShortLivedCertificateCAsListShortLivedCertificateCAsResponseItem>;
-
-export namespace CaAccessShortLivedCertificateCAsListShortLivedCertificateCAsResponse {
-  export interface CaAccessShortLivedCertificateCAsListShortLivedCertificateCAsResponseItem {
+export namespace CaListResponse {
+  export interface CaListResponseItem {
     /**
      * The ID of the CA.
      */
@@ -106,9 +96,18 @@ export namespace CaAccessShortLivedCertificateCAsListShortLivedCertificateCAsRes
   }
 }
 
+export interface CaDeleteResponse {
+  /**
+   * The ID of the CA.
+   */
+  id?: string;
+}
+
+export type CaGetResponse = unknown | string;
+
 export namespace Cas {
+  export import CaCreateResponse = CasAPI.CaCreateResponse;
+  export import CaListResponse = CasAPI.CaListResponse;
   export import CaDeleteResponse = CasAPI.CaDeleteResponse;
-  export import CaAccessShortLivedCertificateCAsCreateAShortLivedCertificateCaResponse = CasAPI.CaAccessShortLivedCertificateCAsCreateAShortLivedCertificateCaResponse;
-  export import CaAccessShortLivedCertificateCAsGetAShortLivedCertificateCaResponse = CasAPI.CaAccessShortLivedCertificateCAsGetAShortLivedCertificateCaResponse;
-  export import CaAccessShortLivedCertificateCAsListShortLivedCertificateCAsResponse = CasAPI.CaAccessShortLivedCertificateCAsListShortLivedCertificateCAsResponse;
+  export import CaGetResponse = CasAPI.CaGetResponse;
 }

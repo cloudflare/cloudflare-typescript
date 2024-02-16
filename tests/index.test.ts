@@ -237,7 +237,8 @@ describe('instantiate client', () => {
     process.env['CLOUDFLARE_API_KEY'] = '144c9defac04969c7bfad8efaa8ea194';
     process.env['CLOUDFLARE_EMAIL'] = 'dev@cloudflare.com';
     process.env['CLOUDFLARE_API_TOKEN'] = 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY';
-    const client = new Cloudflare({ userServiceKey: 'My User Service Key' });
+    process.env['CLOUDFLARE_API_USER_SERVICE_KEY'] = 'My User Service Key';
+    const client = new Cloudflare();
     expect(client.apiKey).toBe('144c9defac04969c7bfad8efaa8ea194');
     expect(client.apiEmail).toBe('dev@cloudflare.com');
     expect(client.apiToken).toBe('Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY');
@@ -249,6 +250,7 @@ describe('instantiate client', () => {
     process.env['CLOUDFLARE_API_KEY'] = 'another 144c9defac04969c7bfad8efaa8ea194';
     process.env['CLOUDFLARE_EMAIL'] = 'another dev@cloudflare.com';
     process.env['CLOUDFLARE_API_TOKEN'] = 'another Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY';
+    process.env['CLOUDFLARE_API_USER_SERVICE_KEY'] = 'another My User Service Key';
     const client = new Cloudflare({
       apiKey: '144c9defac04969c7bfad8efaa8ea194',
       apiEmail: 'dev@cloudflare.com',

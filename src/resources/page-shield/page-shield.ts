@@ -11,12 +11,12 @@ export class PageShield extends APIResource {
 
 export namespace PageShield {
   export import Connections = ConnectionsAPI.Connections;
-  export import ConnectionRetrieveResponse = ConnectionsAPI.ConnectionRetrieveResponse;
+  export import ConnectionGetResponse = ConnectionsAPI.ConnectionGetResponse;
   export import Policies = PoliciesAPI.Policies;
   export import PolicyCreateResponse = PoliciesAPI.PolicyCreateResponse;
-  export import PolicyRetrieveResponse = PoliciesAPI.PolicyRetrieveResponse;
   export import PolicyUpdateResponse = PoliciesAPI.PolicyUpdateResponse;
   export import PolicyListResponse = PoliciesAPI.PolicyListResponse;
+  export import PolicyGetResponse = PoliciesAPI.PolicyGetResponse;
   export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
   export import PolicyUpdateParams = PoliciesAPI.PolicyUpdateParams;
 }

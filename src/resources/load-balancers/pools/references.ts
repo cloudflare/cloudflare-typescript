@@ -8,16 +8,16 @@ export class References extends APIResource {
   /**
    * Get the list of resources that reference the provided pool.
    */
-  accountLoadBalancerPoolsListPoolReferences(
-    accountIdentifier: string,
-    identifier: string,
+  list(
+    accountId: string,
+    poolId: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ReferenceAccountLoadBalancerPoolsListPoolReferencesResponse | null> {
+  ): Core.APIPromise<ReferenceListResponse | null> {
     return (
       this._client.get(
-        `/accounts/${accountIdentifier}/load_balancers/pools/${identifier}/references`,
+        `/accounts/${accountId}/load_balancers/pools/${poolId}/references`,
         options,
-      ) as Core.APIPromise<{ result: ReferenceAccountLoadBalancerPoolsListPoolReferencesResponse | null }>
+      ) as Core.APIPromise<{ result: ReferenceListResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -25,11 +25,10 @@ export class References extends APIResource {
 /**
  * List of resources that reference a given pool.
  */
-export type ReferenceAccountLoadBalancerPoolsListPoolReferencesResponse =
-  Array<ReferenceAccountLoadBalancerPoolsListPoolReferencesResponse.ReferenceAccountLoadBalancerPoolsListPoolReferencesResponseItem>;
+export type ReferenceListResponse = Array<ReferenceListResponse.ReferenceListResponseItem>;
 
-export namespace ReferenceAccountLoadBalancerPoolsListPoolReferencesResponse {
-  export interface ReferenceAccountLoadBalancerPoolsListPoolReferencesResponseItem {
+export namespace ReferenceListResponse {
+  export interface ReferenceListResponseItem {
     reference_type?: '*' | 'referral' | 'referrer';
 
     resource_id?: string;
@@ -41,5 +40,5 @@ export namespace ReferenceAccountLoadBalancerPoolsListPoolReferencesResponse {
 }
 
 export namespace References {
-  export import ReferenceAccountLoadBalancerPoolsListPoolReferencesResponse = ReferencesAPI.ReferenceAccountLoadBalancerPoolsListPoolReferencesResponse;
+  export import ReferenceListResponse = ReferencesAPI.ReferenceListResponse;
 }

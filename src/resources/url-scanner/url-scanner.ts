@@ -134,7 +134,7 @@ export namespace URLScanner {
   export import URLScannerScanParams = URLScannerAPI.URLScannerScanParams;
   export import Scans = ScansAPI.Scans;
   export import ScanCreateResponse = ScansAPI.ScanCreateResponse;
-  export import ScanRetrieveResponse = ScansAPI.ScanRetrieveResponse;
+  export import ScanGetResponse = ScansAPI.ScanGetResponse;
   export import ScanHarResponse = ScansAPI.ScanHarResponse;
   export import ScanCreateParams = ScansAPI.ScanCreateParams;
   export import ScanScreenshotParams = ScansAPI.ScanScreenshotParams;

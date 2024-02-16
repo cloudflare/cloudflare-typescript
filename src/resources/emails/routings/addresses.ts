@@ -7,22 +7,6 @@ import * as AddressesAPI from 'cloudflare/resources/emails/routings/addresses';
 
 export class Addresses extends APIResource {
   /**
-   * Gets information for a specific destination email already created.
-   */
-  retrieve(
-    accountIdentifier: string,
-    destinationAddressIdentifier: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AddressRetrieveResponse> {
-    return (
-      this._client.get(
-        `/accounts/${accountIdentifier}/email/routing/addresses/${destinationAddressIdentifier}`,
-        options,
-      ) as Core.APIPromise<{ result: AddressRetrieveResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Deletes a specific destination address.
    */
   delete(
@@ -86,40 +70,22 @@ export class Addresses extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
-}
-
-export interface AddressRetrieveResponse {
-  /**
-   * Destination address identifier.
-   */
-  id?: string;
 
   /**
-   * The date and time the destination address has been created.
+   * Gets information for a specific destination email already created.
    */
-  created?: string;
-
-  /**
-   * The contact email address of the user.
-   */
-  email?: string;
-
-  /**
-   * The date and time the destination address was last modified.
-   */
-  modified?: string;
-
-  /**
-   * Destination address tag. (Deprecated, replaced by destination address
-   * identifier)
-   */
-  tag?: string;
-
-  /**
-   * The date and time the destination address has been verified. Null means not
-   * verified yet.
-   */
-  verified?: string;
+  get(
+    accountIdentifier: string,
+    destinationAddressIdentifier: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AddressGetResponse> {
+    return (
+      this._client.get(
+        `/accounts/${accountIdentifier}/email/routing/addresses/${destinationAddressIdentifier}`,
+        options,
+      ) as Core.APIPromise<{ result: AddressGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
 export interface AddressDeleteResponse {
@@ -229,6 +195,40 @@ export namespace AddressEmailRoutingDestinationAddressesListDestinationAddresses
   }
 }
 
+export interface AddressGetResponse {
+  /**
+   * Destination address identifier.
+   */
+  id?: string;
+
+  /**
+   * The date and time the destination address has been created.
+   */
+  created?: string;
+
+  /**
+   * The contact email address of the user.
+   */
+  email?: string;
+
+  /**
+   * The date and time the destination address was last modified.
+   */
+  modified?: string;
+
+  /**
+   * Destination address tag. (Deprecated, replaced by destination address
+   * identifier)
+   */
+  tag?: string;
+
+  /**
+   * The date and time the destination address has been verified. Null means not
+   * verified yet.
+   */
+  verified?: string;
+}
+
 export interface AddressEmailRoutingDestinationAddressesCreateADestinationAddressParams {
   /**
    * The contact email address of the user.
@@ -259,10 +259,10 @@ export interface AddressEmailRoutingDestinationAddressesListDestinationAddresses
 }
 
 export namespace Addresses {
-  export import AddressRetrieveResponse = AddressesAPI.AddressRetrieveResponse;
   export import AddressDeleteResponse = AddressesAPI.AddressDeleteResponse;
   export import AddressEmailRoutingDestinationAddressesCreateADestinationAddressResponse = AddressesAPI.AddressEmailRoutingDestinationAddressesCreateADestinationAddressResponse;
   export import AddressEmailRoutingDestinationAddressesListDestinationAddressesResponse = AddressesAPI.AddressEmailRoutingDestinationAddressesListDestinationAddressesResponse;
+  export import AddressGetResponse = AddressesAPI.AddressGetResponse;
   export import AddressEmailRoutingDestinationAddressesCreateADestinationAddressParams = AddressesAPI.AddressEmailRoutingDestinationAddressesCreateADestinationAddressParams;
   export import AddressEmailRoutingDestinationAddressesListDestinationAddressesParams = AddressesAPI.AddressEmailRoutingDestinationAddressesListDestinationAddressesParams;
 }

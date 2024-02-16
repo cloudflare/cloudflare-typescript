@@ -10,33 +10,30 @@ export class Histogram extends APIResource {
    * Get an histogram from the previous 90 days of Cloudflare Speed Test data, split
    * into fixed bandwidth (Mbps), latency (ms) or jitter (ms) buckets.
    */
-  retrieve(
-    query?: HistogramRetrieveParams,
+  get(query?: HistogramGetParams, options?: Core.RequestOptions): Core.APIPromise<HistogramGetResponse>;
+  get(options?: Core.RequestOptions): Core.APIPromise<HistogramGetResponse>;
+  get(
+    query: HistogramGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<HistogramRetrieveResponse>;
-  retrieve(options?: Core.RequestOptions): Core.APIPromise<HistogramRetrieveResponse>;
-  retrieve(
-    query: HistogramRetrieveParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<HistogramRetrieveResponse> {
+  ): Core.APIPromise<HistogramGetResponse> {
     if (isRequestOptions(query)) {
-      return this.retrieve({}, query);
+      return this.get({}, query);
     }
     return (
       this._client.get('/radar/quality/speed/histogram', { query, ...options }) as Core.APIPromise<{
-        result: HistogramRetrieveResponse;
+        result: HistogramGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface HistogramRetrieveResponse {
-  histogram_0: HistogramRetrieveResponse.Histogram0;
+export interface HistogramGetResponse {
+  histogram_0: HistogramGetResponse.Histogram0;
 
   meta: unknown;
 }
 
-export namespace HistogramRetrieveResponse {
+export namespace HistogramGetResponse {
   export interface Histogram0 {
     bandwidthDownload: Array<string>;
 
@@ -46,7 +43,7 @@ export namespace HistogramRetrieveResponse {
   }
 }
 
-export interface HistogramRetrieveParams {
+export interface HistogramGetParams {
   /**
    * Array of comma separated list of ASNs, start with `-` to exclude from results.
    * For example, `-174, 3356` excludes results from AS174, but includes results from
@@ -88,6 +85,6 @@ export interface HistogramRetrieveParams {
 }
 
 export namespace Histogram {
-  export import HistogramRetrieveResponse = HistogramAPI.HistogramRetrieveResponse;
-  export import HistogramRetrieveParams = HistogramAPI.HistogramRetrieveParams;
+  export import HistogramGetResponse = HistogramAPI.HistogramGetResponse;
+  export import HistogramGetParams = HistogramAPI.HistogramGetParams;
 }

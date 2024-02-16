@@ -8,22 +8,6 @@ import { type Uploadable, multipartFormRequestOptions } from 'cloudflare/core';
 
 export class Content extends APIResource {
   /**
-   * Fetch script content from a script uploaded to a Workers for Platforms
-   * namespace.
-   */
-  retrieve(
-    accountId: string,
-    dispatchNamespace: string,
-    scriptName: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Response> {
-    return this._client.get(
-      `/accounts/${accountId}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/content`,
-      { ...options, __binaryResponse: true },
-    );
-  }
-
-  /**
    * Put script content for a script uploaded to a Workers for Platforms namespace.
    */
   update(
@@ -52,6 +36,22 @@ export class Content extends APIResource {
         }),
       ) as Core.APIPromise<{ result: ContentUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Fetch script content from a script uploaded to a Workers for Platforms
+   * namespace.
+   */
+  get(
+    accountId: string,
+    dispatchNamespace: string,
+    scriptName: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Response> {
+    return this._client.get(
+      `/accounts/${accountId}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/content`,
+      { ...options, __binaryResponse: true },
+    );
   }
 }
 

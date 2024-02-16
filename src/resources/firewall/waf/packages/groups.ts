@@ -7,26 +7,6 @@ import * as GroupsAPI from 'cloudflare/resources/firewall/waf/packages/groups';
 
 export class Groups extends APIResource {
   /**
-   * Fetches the details of a WAF rule group.
-   *
-   * **Note:** Applies only to the
-   * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
-   */
-  retrieve(
-    zoneId: string,
-    packageId: string,
-    groupId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<GroupRetrieveResponse> {
-    return (
-      this._client.get(
-        `/zones/${zoneId}/firewall/waf/packages/${packageId}/groups/${groupId}`,
-        options,
-      ) as Core.APIPromise<{ result: GroupRetrieveResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Updates a WAF rule group. You can update the state (`mode` parameter) of a rule
    * group.
    *
@@ -81,9 +61,27 @@ export class Groups extends APIResource {
       }) as Core.APIPromise<{ result: GroupListResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
-}
 
-export type GroupRetrieveResponse = unknown | Array<unknown> | string;
+  /**
+   * Fetches the details of a WAF rule group.
+   *
+   * **Note:** Applies only to the
+   * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
+   */
+  get(
+    zoneId: string,
+    packageId: string,
+    groupId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<GroupGetResponse> {
+    return (
+      this._client.get(
+        `/zones/${zoneId}/firewall/waf/packages/${packageId}/groups/${groupId}`,
+        options,
+      ) as Core.APIPromise<{ result: GroupGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+}
 
 export type GroupUpdateResponse = unknown | Array<unknown> | string;
 
@@ -135,6 +133,8 @@ export namespace GroupListResponse {
   }
 }
 
+export type GroupGetResponse = unknown | Array<unknown> | string;
+
 export interface GroupUpdateParams {
   /**
    * The state of the rules contained in the rule group. When `on`, the rules in the
@@ -178,9 +178,9 @@ export interface GroupListParams {
 }
 
 export namespace Groups {
-  export import GroupRetrieveResponse = GroupsAPI.GroupRetrieveResponse;
   export import GroupUpdateResponse = GroupsAPI.GroupUpdateResponse;
   export import GroupListResponse = GroupsAPI.GroupListResponse;
+  export import GroupGetResponse = GroupsAPI.GroupGetResponse;
   export import GroupUpdateParams = GroupsAPI.GroupUpdateParams;
   export import GroupListParams = GroupsAPI.GroupListParams;
 }

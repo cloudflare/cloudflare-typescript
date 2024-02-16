@@ -8,7 +8,7 @@ import * as HTTPTestsAPI from 'cloudflare/resources/dex/http-tests/http-tests';
 import * as TestsAPI from 'cloudflare/resources/dex/tests/tests';
 import * as TracerouteTestResultsAPI from 'cloudflare/resources/dex/traceroute-test-results/traceroute-test-results';
 
-export class Dex extends APIResource {
+export class DEX extends APIResource {
   colos: ColosAPI.Colos = new ColosAPI.Colos(this._client);
   fleetStatus: FleetStatusAPI.FleetStatus = new FleetStatusAPI.FleetStatus(this._client);
   httpTests: HTTPTestsAPI.HTTPTests = new HTTPTestsAPI.HTTPTests(this._client);
@@ -18,23 +18,23 @@ export class Dex extends APIResource {
   tracerouteTests: TracerouteTestsAPI.TracerouteTests = new TracerouteTestsAPI.TracerouteTests(this._client);
 }
 
-export namespace Dex {
+export namespace DEX {
   export import Colos = ColosAPI.Colos;
   export import ColoListResponse = ColosAPI.ColoListResponse;
   export import ColoListParams = ColosAPI.ColoListParams;
   export import FleetStatus = FleetStatusAPI.FleetStatus;
   export import HTTPTests = HTTPTestsAPI.HTTPTests;
-  export import HTTPTestRetrieveResponse = HTTPTestsAPI.HTTPTestRetrieveResponse;
-  export import HTTPTestRetrieveParams = HTTPTestsAPI.HTTPTestRetrieveParams;
+  export import HTTPTestGetResponse = HTTPTestsAPI.HTTPTestGetResponse;
+  export import HTTPTestGetParams = HTTPTestsAPI.HTTPTestGetParams;
   export import Tests = TestsAPI.Tests;
   export import TestListResponse = TestsAPI.TestListResponse;
   export import TestListParams = TestsAPI.TestListParams;
   export import TracerouteTestResults = TracerouteTestResultsAPI.TracerouteTestResults;
   export import TracerouteTests = TracerouteTestsAPI.TracerouteTests;
-  export import TracerouteTestRetrieveResponse = TracerouteTestsAPI.TracerouteTestRetrieveResponse;
+  export import TracerouteTestGetResponse = TracerouteTestsAPI.TracerouteTestGetResponse;
   export import TracerouteTestNetworkPathResponse = TracerouteTestsAPI.TracerouteTestNetworkPathResponse;
   export import TracerouteTestPercentilesResponse = TracerouteTestsAPI.TracerouteTestPercentilesResponse;
-  export import TracerouteTestRetrieveParams = TracerouteTestsAPI.TracerouteTestRetrieveParams;
+  export import TracerouteTestGetParams = TracerouteTestsAPI.TracerouteTestGetParams;
   export import TracerouteTestNetworkPathParams = TracerouteTestsAPI.TracerouteTestNetworkPathParams;
   export import TracerouteTestPercentilesParams = TracerouteTestsAPI.TracerouteTestPercentilesParams;
 }

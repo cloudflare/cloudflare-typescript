@@ -9,13 +9,13 @@ export class References extends APIResource {
    * Get the list of resources that reference the provided monitor.
    */
   accountLoadBalancerMonitorsListMonitorReferences(
-    accountIdentifier: string,
-    identifier: string,
+    accountId: string,
+    monitorId: string,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ReferenceAccountLoadBalancerMonitorsListMonitorReferencesResponse | null> {
     return (
       this._client.get(
-        `/accounts/${accountIdentifier}/load_balancers/monitors/${identifier}/references`,
+        `/accounts/${accountId}/load_balancers/monitors/${monitorId}/references`,
         options,
       ) as Core.APIPromise<{
         result: ReferenceAccountLoadBalancerMonitorsListMonitorReferencesResponse | null;

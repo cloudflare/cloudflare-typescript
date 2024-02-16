@@ -13,12 +13,11 @@ const cloudflare = new Cloudflare({
 
 describe('resource apps', () => {
   // skipped: tests are disabled for the time being
-  test.skip('retrieve', async () => {
-    const responsePromise = cloudflare.access.apps.retrieve(
-      'string',
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '023e105f4ecef8ad9ca31a8372d0c353',
-    );
+  test.skip('create: only required params', async () => {
+    const responsePromise = cloudflare.access.apps.create('string', '023e105f4ecef8ad9ca31a8372d0c353', {
+      domain: 'test.example.com/admin',
+      type: 'self_hosted',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -29,16 +28,48 @@ describe('resource apps', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('retrieve: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.access.apps.retrieve(
-        'string',
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('create: required and optional params', async () => {
+    const response = await cloudflare.access.apps.create('string', '023e105f4ecef8ad9ca31a8372d0c353', {
+      domain: 'test.example.com/admin',
+      type: 'self_hosted',
+      allow_authenticate_via_warp: true,
+      allowed_idps: [
+        '699d98642c564d2e855e9661899b7252',
+        '699d98642c564d2e855e9661899b7252',
+        '699d98642c564d2e855e9661899b7252',
+      ],
+      app_launcher_visible: true,
+      auto_redirect_to_identity: true,
+      cors_headers: {
+        allow_all_headers: true,
+        allow_all_methods: true,
+        allow_all_origins: true,
+        allow_credentials: true,
+        allowed_headers: [{}, {}, {}],
+        allowed_methods: ['GET'],
+        allowed_origins: ['https://example.com'],
+        max_age: -1,
+      },
+      custom_deny_message: 'string',
+      custom_deny_url: 'string',
+      custom_non_identity_deny_url: 'string',
+      custom_pages: [
+        '699d98642c564d2e855e9661899b7252',
+        '699d98642c564d2e855e9661899b7252',
+        '699d98642c564d2e855e9661899b7252',
+      ],
+      enable_binding_cookie: true,
+      http_only_cookie_attribute: true,
+      logo_url: 'https://www.cloudflare.com/img/logo-web-badges/cf-logo-on-white-bg.svg',
+      name: 'Admin Site',
+      path_cookie_attribute: true,
+      same_site_cookie_attribute: 'strict',
+      self_hosted_domains: ['test.example.com/admin', 'test.anotherexample.com/staff'],
+      service_auth_401_redirect: true,
+      session_duration: '24h',
+      skip_interstitial: true,
+      tags: ['engineers', 'engineers', 'engineers'],
+    });
   });
 
   // skipped: tests are disabled for the time being
@@ -109,6 +140,28 @@ describe('resource apps', () => {
   });
 
   // skipped: tests are disabled for the time being
+  test.skip('list', async () => {
+    const responsePromise = cloudflare.access.apps.list('string', '023e105f4ecef8ad9ca31a8372d0c353');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.access.apps.list('string', '023e105f4ecef8ad9ca31a8372d0c353', {
+        path: '/_stainless_unknown_path',
+      }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('delete', async () => {
     const responsePromise = cloudflare.access.apps.delete(
       'string',
@@ -138,74 +191,10 @@ describe('resource apps', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('accessApplicationsAddAnApplication: only required params', async () => {
-    const responsePromise = cloudflare.access.apps.accessApplicationsAddAnApplication(
+  test.skip('get', async () => {
+    const responsePromise = cloudflare.access.apps.get(
       'string',
       '023e105f4ecef8ad9ca31a8372d0c353',
-      { domain: 'test.example.com/admin', type: 'self_hosted' },
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('accessApplicationsAddAnApplication: required and optional params', async () => {
-    const response = await cloudflare.access.apps.accessApplicationsAddAnApplication(
-      'string',
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      {
-        domain: 'test.example.com/admin',
-        type: 'self_hosted',
-        allow_authenticate_via_warp: true,
-        allowed_idps: [
-          '699d98642c564d2e855e9661899b7252',
-          '699d98642c564d2e855e9661899b7252',
-          '699d98642c564d2e855e9661899b7252',
-        ],
-        app_launcher_visible: true,
-        auto_redirect_to_identity: true,
-        cors_headers: {
-          allow_all_headers: true,
-          allow_all_methods: true,
-          allow_all_origins: true,
-          allow_credentials: true,
-          allowed_headers: [{}, {}, {}],
-          allowed_methods: ['GET'],
-          allowed_origins: ['https://example.com'],
-          max_age: -1,
-        },
-        custom_deny_message: 'string',
-        custom_deny_url: 'string',
-        custom_non_identity_deny_url: 'string',
-        custom_pages: [
-          '699d98642c564d2e855e9661899b7252',
-          '699d98642c564d2e855e9661899b7252',
-          '699d98642c564d2e855e9661899b7252',
-        ],
-        enable_binding_cookie: true,
-        http_only_cookie_attribute: true,
-        logo_url: 'https://www.cloudflare.com/img/logo-web-badges/cf-logo-on-white-bg.svg',
-        name: 'Admin Site',
-        path_cookie_attribute: true,
-        same_site_cookie_attribute: 'strict',
-        self_hosted_domains: ['test.example.com/admin', 'test.anotherexample.com/staff'],
-        service_auth_401_redirect: true,
-        session_duration: '24h',
-        skip_interstitial: true,
-        tags: ['engineers', 'engineers', 'engineers'],
-      },
-    );
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('accessApplicationsListAccessApplications', async () => {
-    const responsePromise = cloudflare.access.apps.accessApplicationsListAccessApplications(
-      'string',
       '023e105f4ecef8ad9ca31a8372d0c353',
     );
     const rawResponse = await responsePromise.asResponse();
@@ -218,11 +207,12 @@ describe('resource apps', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('accessApplicationsListAccessApplications: request options instead of params are passed correctly', async () => {
+  test.skip('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.access.apps.accessApplicationsListAccessApplications(
+      cloudflare.access.apps.get(
         'string',
+        '023e105f4ecef8ad9ca31a8372d0c353',
         '023e105f4ecef8ad9ca31a8372d0c353',
         { path: '/_stainless_unknown_path' },
       ),

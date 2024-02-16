@@ -14,22 +14,22 @@ export class Iqi extends APIResource {
    * Get a summary (percentiles) of bandwidth, latency or DNS response time from the
    * Radar Internet Quality Index (IQI).
    */
-  retrieve(query: IqiRetrieveParams, options?: Core.RequestOptions): Core.APIPromise<IqiRetrieveResponse> {
+  get(query: IqiGetParams, options?: Core.RequestOptions): Core.APIPromise<IqiGetResponse> {
     return (
       this._client.get('/radar/quality/iqi/summary', { query, ...options }) as Core.APIPromise<{
-        result: IqiRetrieveResponse;
+        result: IqiGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface IqiRetrieveResponse {
-  meta: IqiRetrieveResponse.Meta;
+export interface IqiGetResponse {
+  meta: IqiGetResponse.Meta;
 
-  summary_0: IqiRetrieveResponse.Summary0;
+  summary_0: IqiGetResponse.Summary0;
 }
 
-export namespace IqiRetrieveResponse {
+export namespace IqiGetResponse {
   export interface Meta {
     dateRange: Array<Meta.DateRange>;
 
@@ -87,7 +87,7 @@ export namespace IqiRetrieveResponse {
   }
 }
 
-export interface IqiRetrieveParams {
+export interface IqiGetParams {
   /**
    * Which metric to return: bandwidth, latency or DNS response time.
    */
@@ -159,8 +159,8 @@ export interface IqiRetrieveParams {
 }
 
 export namespace Iqi {
-  export import IqiRetrieveResponse = IqiAPI.IqiRetrieveResponse;
-  export import IqiRetrieveParams = IqiAPI.IqiRetrieveParams;
+  export import IqiGetResponse = IqiAPI.IqiGetResponse;
+  export import IqiGetParams = IqiAPI.IqiGetParams;
   export import TimeseriesGroups = TimeseriesGroupsAPI.TimeseriesGroups;
   export import TimeseriesGroupListResponse = TimeseriesGroupsAPI.TimeseriesGroupListResponse;
   export import TimeseriesGroupListParams = TimeseriesGroupsAPI.TimeseriesGroupListParams;

@@ -6,23 +6,6 @@ import * as SettingsAPI from 'cloudflare/resources/workers-for-platforms/dispatc
 
 export class Settings extends APIResource {
   /**
-   * Get script settings from a script uploaded to a Workers for Platforms namespace.
-   */
-  retrieve(
-    accountId: string,
-    dispatchNamespace: string,
-    scriptName: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SettingRetrieveResponse> {
-    return (
-      this._client.get(
-        `/accounts/${accountId}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/settings`,
-        options,
-      ) as Core.APIPromise<{ result: SettingRetrieveResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Patch script metadata, such as bindings
    */
   update(
@@ -39,21 +22,38 @@ export class Settings extends APIResource {
       ) as Core.APIPromise<{ result: SettingUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Get script settings from a script uploaded to a Workers for Platforms namespace.
+   */
+  get(
+    accountId: string,
+    dispatchNamespace: string,
+    scriptName: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SettingGetResponse> {
+    return (
+      this._client.get(
+        `/accounts/${accountId}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/settings`,
+        options,
+      ) as Core.APIPromise<{ result: SettingGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
-export interface SettingRetrieveResponse {
+export interface SettingUpdateResponse {
   /**
    * List of bindings attached to this Worker
    */
   bindings?: Array<
-    | SettingRetrieveResponse.WorkersKvNamespaceBinding
-    | SettingRetrieveResponse.WorkersServiceBinding
-    | SettingRetrieveResponse.WorkersDoBinding
-    | SettingRetrieveResponse.WorkersR2Binding
-    | SettingRetrieveResponse.WorkersQueueBinding
-    | SettingRetrieveResponse.WorkersD1Binding
-    | SettingRetrieveResponse.WorkersDispatchNamespaceBinding
-    | SettingRetrieveResponse.WorkersMtlsCertBinding
+    | SettingUpdateResponse.WorkersKvNamespaceBinding
+    | SettingUpdateResponse.WorkersServiceBinding
+    | SettingUpdateResponse.WorkersDoBinding
+    | SettingUpdateResponse.WorkersR2Binding
+    | SettingUpdateResponse.WorkersQueueBinding
+    | SettingUpdateResponse.WorkersD1Binding
+    | SettingUpdateResponse.WorkersDispatchNamespaceBinding
+    | SettingUpdateResponse.WorkersMtlsCertBinding
   >;
 
   /**
@@ -75,10 +75,10 @@ export interface SettingRetrieveResponse {
    * Migrations to apply for Durable Objects associated with this Worker.
    */
   migrations?:
-    | SettingRetrieveResponse.WorkersSingleStepMigrations
-    | SettingRetrieveResponse.WorkersSteppedMigrations;
+    | SettingUpdateResponse.WorkersSingleStepMigrations
+    | SettingUpdateResponse.WorkersSteppedMigrations;
 
-  placement?: SettingRetrieveResponse.Placement;
+  placement?: SettingUpdateResponse.Placement;
 
   /**
    * Tags to help you manage your Workers
@@ -88,7 +88,7 @@ export interface SettingRetrieveResponse {
   /**
    * List of Workers that will consume logs from the attached Worker.
    */
-  tail_consumers?: Array<SettingRetrieveResponse.TailConsumer>;
+  tail_consumers?: Array<SettingUpdateResponse.TailConsumer>;
 
   /**
    * Specifies the usage model for the Worker (e.g. 'bundled' or 'unbound').
@@ -96,7 +96,7 @@ export interface SettingRetrieveResponse {
   usage_model?: string;
 }
 
-export namespace SettingRetrieveResponse {
+export namespace SettingUpdateResponse {
   export interface WorkersKvNamespaceBinding {
     /**
      * A JavaScript variable name for the binding.
@@ -440,19 +440,19 @@ export namespace SettingRetrieveResponse {
   }
 }
 
-export interface SettingUpdateResponse {
+export interface SettingGetResponse {
   /**
    * List of bindings attached to this Worker
    */
   bindings?: Array<
-    | SettingUpdateResponse.WorkersKvNamespaceBinding
-    | SettingUpdateResponse.WorkersServiceBinding
-    | SettingUpdateResponse.WorkersDoBinding
-    | SettingUpdateResponse.WorkersR2Binding
-    | SettingUpdateResponse.WorkersQueueBinding
-    | SettingUpdateResponse.WorkersD1Binding
-    | SettingUpdateResponse.WorkersDispatchNamespaceBinding
-    | SettingUpdateResponse.WorkersMtlsCertBinding
+    | SettingGetResponse.WorkersKvNamespaceBinding
+    | SettingGetResponse.WorkersServiceBinding
+    | SettingGetResponse.WorkersDoBinding
+    | SettingGetResponse.WorkersR2Binding
+    | SettingGetResponse.WorkersQueueBinding
+    | SettingGetResponse.WorkersD1Binding
+    | SettingGetResponse.WorkersDispatchNamespaceBinding
+    | SettingGetResponse.WorkersMtlsCertBinding
   >;
 
   /**
@@ -473,11 +473,9 @@ export interface SettingUpdateResponse {
   /**
    * Migrations to apply for Durable Objects associated with this Worker.
    */
-  migrations?:
-    | SettingUpdateResponse.WorkersSingleStepMigrations
-    | SettingUpdateResponse.WorkersSteppedMigrations;
+  migrations?: SettingGetResponse.WorkersSingleStepMigrations | SettingGetResponse.WorkersSteppedMigrations;
 
-  placement?: SettingUpdateResponse.Placement;
+  placement?: SettingGetResponse.Placement;
 
   /**
    * Tags to help you manage your Workers
@@ -487,7 +485,7 @@ export interface SettingUpdateResponse {
   /**
    * List of Workers that will consume logs from the attached Worker.
    */
-  tail_consumers?: Array<SettingUpdateResponse.TailConsumer>;
+  tail_consumers?: Array<SettingGetResponse.TailConsumer>;
 
   /**
    * Specifies the usage model for the Worker (e.g. 'bundled' or 'unbound').
@@ -495,7 +493,7 @@ export interface SettingUpdateResponse {
   usage_model?: string;
 }
 
-export namespace SettingUpdateResponse {
+export namespace SettingGetResponse {
   export interface WorkersKvNamespaceBinding {
     /**
      * A JavaScript variable name for the binding.
@@ -1214,7 +1212,7 @@ export namespace SettingUpdateParams {
 }
 
 export namespace Settings {
-  export import SettingRetrieveResponse = SettingsAPI.SettingRetrieveResponse;
   export import SettingUpdateResponse = SettingsAPI.SettingUpdateResponse;
+  export import SettingGetResponse = SettingsAPI.SettingGetResponse;
   export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;
 }

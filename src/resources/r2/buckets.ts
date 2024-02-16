@@ -22,21 +22,6 @@ export class Buckets extends APIResource {
   }
 
   /**
-   * Gets metadata for an existing R2 bucket.
-   */
-  retrieve(
-    accountId: string,
-    bucketName: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<BucketRetrieveResponse> {
-    return (
-      this._client.get(`/accounts/${accountId}/r2/buckets/${bucketName}`, options) as Core.APIPromise<{
-        result: BucketRetrieveResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Lists all R2 buckets on your account
    */
   list(
@@ -74,32 +59,27 @@ export class Buckets extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Gets metadata for an existing R2 bucket.
+   */
+  get(
+    accountId: string,
+    bucketName: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<BucketGetResponse> {
+    return (
+      this._client.get(`/accounts/${accountId}/r2/buckets/${bucketName}`, options) as Core.APIPromise<{
+        result: BucketGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
 /**
  * A single R2 bucket
  */
 export interface BucketCreateResponse {
-  /**
-   * Creation timestamp
-   */
-  creation_date?: string;
-
-  /**
-   * Location of the bucket
-   */
-  location?: 'apac' | 'eeur' | 'enam' | 'weur' | 'wnam';
-
-  /**
-   * Name of the bucket
-   */
-  name?: string;
-}
-
-/**
- * A single R2 bucket
- */
-export interface BucketRetrieveResponse {
   /**
    * Creation timestamp
    */
@@ -141,6 +121,26 @@ export namespace BucketListResponse {
 }
 
 export type BucketDeleteResponse = unknown;
+
+/**
+ * A single R2 bucket
+ */
+export interface BucketGetResponse {
+  /**
+   * Creation timestamp
+   */
+  creation_date?: string;
+
+  /**
+   * Location of the bucket
+   */
+  location?: 'apac' | 'eeur' | 'enam' | 'weur' | 'wnam';
+
+  /**
+   * Name of the bucket
+   */
+  name?: string;
+}
 
 export interface BucketCreateParams {
   /**
@@ -190,9 +190,9 @@ export interface BucketListParams {
 
 export namespace Buckets {
   export import BucketCreateResponse = BucketsAPI.BucketCreateResponse;
-  export import BucketRetrieveResponse = BucketsAPI.BucketRetrieveResponse;
   export import BucketListResponse = BucketsAPI.BucketListResponse;
   export import BucketDeleteResponse = BucketsAPI.BucketDeleteResponse;
+  export import BucketGetResponse = BucketsAPI.BucketGetResponse;
   export import BucketCreateParams = BucketsAPI.BucketCreateParams;
   export import BucketListParams = BucketsAPI.BucketListParams;
 }

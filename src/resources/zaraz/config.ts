@@ -6,19 +6,6 @@ import * as ConfigAPI from 'cloudflare/resources/zaraz/config';
 
 export class Config extends APIResource {
   /**
-   * Gets latest Zaraz configuration for a zone. It can be preview or published
-   * configuration, whichever was the last updated. Secret variables values will not
-   * be included.
-   */
-  retrieve(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<ConfigRetrieveResponse> {
-    return (
-      this._client.get(`/zones/${zoneId}/settings/zaraz/config`, options) as Core.APIPromise<{
-        result: ConfigRetrieveResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Updates Zaraz configuration for a zone.
    */
   update(
@@ -32,12 +19,25 @@ export class Config extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Gets latest Zaraz configuration for a zone. It can be preview or published
+   * configuration, whichever was the last updated. Secret variables values will not
+   * be included.
+   */
+  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<ConfigGetResponse> {
+    return (
+      this._client.get(`/zones/${zoneId}/settings/zaraz/config`, options) as Core.APIPromise<{
+        result: ConfigGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
 /**
  * Zaraz configuration
  */
-export interface ConfigRetrieveResponse {
+export interface ConfigUpdateResponse {
   /**
    * Data layer compatibility mode enabled.
    */
@@ -51,7 +51,7 @@ export interface ConfigRetrieveResponse {
   /**
    * General Zaraz settings.
    */
-  settings: ConfigRetrieveResponse.Settings;
+  settings: ConfigUpdateResponse.Settings;
 
   /**
    * Tools set up under Zaraz configuration, where key is the alpha-numeric tool ID
@@ -59,21 +59,21 @@ export interface ConfigRetrieveResponse {
    */
   tools: Record<
     string,
-    ConfigRetrieveResponse.ZarazManagedComponent | ConfigRetrieveResponse.ZarazCustomManagedComponent
+    ConfigUpdateResponse.ZarazManagedComponent | ConfigUpdateResponse.ZarazCustomManagedComponent
   >;
 
   /**
    * Triggers set up under Zaraz configuration, where key is the trigger
    * alpha-numeric ID and value is the trigger configuration.
    */
-  triggers: Record<string, ConfigRetrieveResponse.Triggers>;
+  triggers: Record<string, ConfigUpdateResponse.Triggers>;
 
   /**
    * Variables set up under Zaraz configuration, where key is the variable
    * alpha-numeric ID and value is the variable configuration. Values of variables of
    * type secret are not included.
    */
-  variables: Record<string, ConfigRetrieveResponse.UnionMember0 | ConfigRetrieveResponse.UnionMember1>;
+  variables: Record<string, ConfigUpdateResponse.UnionMember0 | ConfigUpdateResponse.UnionMember1>;
 
   /**
    * Zaraz internal version of the config.
@@ -83,7 +83,7 @@ export interface ConfigRetrieveResponse {
   /**
    * Consent management configuration.
    */
-  consent?: ConfigRetrieveResponse.Consent;
+  consent?: ConfigUpdateResponse.Consent;
 
   /**
    * Single Page Application support enabled.
@@ -91,7 +91,7 @@ export interface ConfigRetrieveResponse {
   historyChange?: boolean;
 }
 
-export namespace ConfigRetrieveResponse {
+export namespace ConfigUpdateResponse {
   /**
    * General Zaraz settings.
    */
@@ -773,7 +773,7 @@ export namespace ConfigRetrieveResponse {
 /**
  * Zaraz configuration
  */
-export interface ConfigUpdateResponse {
+export interface ConfigGetResponse {
   /**
    * Data layer compatibility mode enabled.
    */
@@ -787,7 +787,7 @@ export interface ConfigUpdateResponse {
   /**
    * General Zaraz settings.
    */
-  settings: ConfigUpdateResponse.Settings;
+  settings: ConfigGetResponse.Settings;
 
   /**
    * Tools set up under Zaraz configuration, where key is the alpha-numeric tool ID
@@ -795,21 +795,21 @@ export interface ConfigUpdateResponse {
    */
   tools: Record<
     string,
-    ConfigUpdateResponse.ZarazManagedComponent | ConfigUpdateResponse.ZarazCustomManagedComponent
+    ConfigGetResponse.ZarazManagedComponent | ConfigGetResponse.ZarazCustomManagedComponent
   >;
 
   /**
    * Triggers set up under Zaraz configuration, where key is the trigger
    * alpha-numeric ID and value is the trigger configuration.
    */
-  triggers: Record<string, ConfigUpdateResponse.Triggers>;
+  triggers: Record<string, ConfigGetResponse.Triggers>;
 
   /**
    * Variables set up under Zaraz configuration, where key is the variable
    * alpha-numeric ID and value is the variable configuration. Values of variables of
    * type secret are not included.
    */
-  variables: Record<string, ConfigUpdateResponse.UnionMember0 | ConfigUpdateResponse.UnionMember1>;
+  variables: Record<string, ConfigGetResponse.UnionMember0 | ConfigGetResponse.UnionMember1>;
 
   /**
    * Zaraz internal version of the config.
@@ -819,7 +819,7 @@ export interface ConfigUpdateResponse {
   /**
    * Consent management configuration.
    */
-  consent?: ConfigUpdateResponse.Consent;
+  consent?: ConfigGetResponse.Consent;
 
   /**
    * Single Page Application support enabled.
@@ -827,7 +827,7 @@ export interface ConfigUpdateResponse {
   historyChange?: boolean;
 }
 
-export namespace ConfigUpdateResponse {
+export namespace ConfigGetResponse {
   /**
    * General Zaraz settings.
    */
@@ -2300,7 +2300,7 @@ export namespace ConfigUpdateParams {
 }
 
 export namespace Config {
-  export import ConfigRetrieveResponse = ConfigAPI.ConfigRetrieveResponse;
   export import ConfigUpdateResponse = ConfigAPI.ConfigUpdateResponse;
+  export import ConfigGetResponse = ConfigAPI.ConfigGetResponse;
   export import ConfigUpdateParams = ConfigAPI.ConfigUpdateParams;
 }

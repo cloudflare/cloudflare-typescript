@@ -69,31 +69,31 @@ export class SpeedAPI extends APIResource {
   /**
    * Retrieves the test schedule for a page in a specific region.
    */
-  scheduleRetrieve(
+  scheduleGet(
     zoneId: string,
     url: string,
-    query?: SpeedAPIScheduleRetrieveParams,
+    query?: SpeedAPIScheduleGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SpeedAPIScheduleRetrieveResponse>;
-  scheduleRetrieve(
+  ): Core.APIPromise<SpeedAPIScheduleGetResponse>;
+  scheduleGet(
     zoneId: string,
     url: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SpeedAPIScheduleRetrieveResponse>;
-  scheduleRetrieve(
+  ): Core.APIPromise<SpeedAPIScheduleGetResponse>;
+  scheduleGet(
     zoneId: string,
     url: string,
-    query: SpeedAPIScheduleRetrieveParams | Core.RequestOptions = {},
+    query: SpeedAPIScheduleGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SpeedAPIScheduleRetrieveResponse> {
+  ): Core.APIPromise<SpeedAPIScheduleGetResponse> {
     if (isRequestOptions(query)) {
-      return this.scheduleRetrieve(zoneId, url, {}, query);
+      return this.scheduleGet(zoneId, url, {}, query);
     }
     return (
       this._client.get(`/zones/${zoneId}/speed_api/schedule/${url}`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: SpeedAPIScheduleRetrieveResponse }>
+      }) as Core.APIPromise<{ result: SpeedAPIScheduleGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -162,6 +162,23 @@ export class SpeedAPI extends APIResource {
   }
 
   /**
+   * Retrieves the result of a specific test.
+   */
+  testsGet(
+    zoneId: string,
+    url: string,
+    testId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SpeedAPITestsGetResponse> {
+    return (
+      this._client.get(
+        `/zones/${zoneId}/speed_api/pages/${url}/tests/${testId}`,
+        options,
+      ) as Core.APIPromise<{ result: SpeedAPITestsGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Test history (list of tests) for a specific webpage.
    */
   testsList(
@@ -185,23 +202,6 @@ export class SpeedAPI extends APIResource {
       return this.testsList(zoneId, url, {}, query);
     }
     return this._client.get(`/zones/${zoneId}/speed_api/pages/${url}/tests`, { query, ...options });
-  }
-
-  /**
-   * Retrieves the result of a specific test.
-   */
-  testsRetrieve(
-    zoneId: string,
-    url: string,
-    testId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SpeedAPITestsRetrieveResponse> {
-    return (
-      this._client.get(
-        `/zones/${zoneId}/speed_api/pages/${url}/tests/${testId}`,
-        options,
-      ) as Core.APIPromise<{ result: SpeedAPITestsRetrieveResponse }>
-    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -591,7 +591,7 @@ export interface SpeedAPIScheduleDeleteResponse {
 /**
  * The test schedule.
  */
-export interface SpeedAPIScheduleRetrieveResponse {
+export interface SpeedAPIScheduleGetResponse {
   /**
    * The frequency of the test.
    */
@@ -867,44 +867,7 @@ export interface SpeedAPITestsDeleteResponse {
   count?: number;
 }
 
-export interface SpeedAPITestsListResponse {
-  errors: Array<SpeedAPITestsListResponse.Error>;
-
-  messages: Array<SpeedAPITestsListResponse.Message>;
-
-  /**
-   * Whether the API call was successful.
-   */
-  success: boolean;
-
-  result_info?: SpeedAPITestsListResponse.ResultInfo;
-}
-
-export namespace SpeedAPITestsListResponse {
-  export interface Error {
-    code: number;
-
-    message: string;
-  }
-
-  export interface Message {
-    code: number;
-
-    message: string;
-  }
-
-  export interface ResultInfo {
-    count?: number;
-
-    page?: number;
-
-    per_page?: number;
-
-    total_count?: number;
-  }
-}
-
-export interface SpeedAPITestsRetrieveResponse {
+export interface SpeedAPITestsGetResponse {
   /**
    * UUID
    */
@@ -915,17 +878,17 @@ export interface SpeedAPITestsRetrieveResponse {
   /**
    * The Lighthouse report.
    */
-  desktopReport?: SpeedAPITestsRetrieveResponse.DesktopReport;
+  desktopReport?: SpeedAPITestsGetResponse.DesktopReport;
 
   /**
    * The Lighthouse report.
    */
-  mobileReport?: SpeedAPITestsRetrieveResponse.MobileReport;
+  mobileReport?: SpeedAPITestsGetResponse.MobileReport;
 
   /**
    * A test region with a label.
    */
-  region?: SpeedAPITestsRetrieveResponse.Region;
+  region?: SpeedAPITestsGetResponse.Region;
 
   /**
    * The frequency of the test.
@@ -938,7 +901,7 @@ export interface SpeedAPITestsRetrieveResponse {
   url?: string;
 }
 
-export namespace SpeedAPITestsRetrieveResponse {
+export namespace SpeedAPITestsGetResponse {
   /**
    * The Lighthouse report.
    */
@@ -1135,6 +1098,43 @@ export namespace SpeedAPITestsRetrieveResponse {
   }
 }
 
+export interface SpeedAPITestsListResponse {
+  errors: Array<SpeedAPITestsListResponse.Error>;
+
+  messages: Array<SpeedAPITestsListResponse.Message>;
+
+  /**
+   * Whether the API call was successful.
+   */
+  success: boolean;
+
+  result_info?: SpeedAPITestsListResponse.ResultInfo;
+}
+
+export namespace SpeedAPITestsListResponse {
+  export interface Error {
+    code: number;
+
+    message: string;
+  }
+
+  export interface Message {
+    code: number;
+
+    message: string;
+  }
+
+  export interface ResultInfo {
+    count?: number;
+
+    page?: number;
+
+    per_page?: number;
+
+    total_count?: number;
+  }
+}
+
 export interface SpeedAPITrendsListResponse {
   /**
    * Cumulative Layout Shift trend.
@@ -1205,7 +1205,7 @@ export interface SpeedAPIScheduleDeleteParams {
     | 'us-west1';
 }
 
-export interface SpeedAPIScheduleRetrieveParams {
+export interface SpeedAPIScheduleGetParams {
   /**
    * A test region.
    */
@@ -1368,14 +1368,14 @@ export namespace SpeedAPI {
   export import SpeedAPIAvailabilitiesListResponse = SpeedAPIAPI.SpeedAPIAvailabilitiesListResponse;
   export import SpeedAPIPagesListResponse = SpeedAPIAPI.SpeedAPIPagesListResponse;
   export import SpeedAPIScheduleDeleteResponse = SpeedAPIAPI.SpeedAPIScheduleDeleteResponse;
-  export import SpeedAPIScheduleRetrieveResponse = SpeedAPIAPI.SpeedAPIScheduleRetrieveResponse;
+  export import SpeedAPIScheduleGetResponse = SpeedAPIAPI.SpeedAPIScheduleGetResponse;
   export import SpeedAPITestsCreateResponse = SpeedAPIAPI.SpeedAPITestsCreateResponse;
   export import SpeedAPITestsDeleteResponse = SpeedAPIAPI.SpeedAPITestsDeleteResponse;
+  export import SpeedAPITestsGetResponse = SpeedAPIAPI.SpeedAPITestsGetResponse;
   export import SpeedAPITestsListResponse = SpeedAPIAPI.SpeedAPITestsListResponse;
-  export import SpeedAPITestsRetrieveResponse = SpeedAPIAPI.SpeedAPITestsRetrieveResponse;
   export import SpeedAPITrendsListResponse = SpeedAPIAPI.SpeedAPITrendsListResponse;
   export import SpeedAPIScheduleDeleteParams = SpeedAPIAPI.SpeedAPIScheduleDeleteParams;
-  export import SpeedAPIScheduleRetrieveParams = SpeedAPIAPI.SpeedAPIScheduleRetrieveParams;
+  export import SpeedAPIScheduleGetParams = SpeedAPIAPI.SpeedAPIScheduleGetParams;
   export import SpeedAPITestsCreateParams = SpeedAPIAPI.SpeedAPITestsCreateParams;
   export import SpeedAPITestsDeleteParams = SpeedAPIAPI.SpeedAPITestsDeleteParams;
   export import SpeedAPITestsListParams = SpeedAPIAPI.SpeedAPITestsListParams;

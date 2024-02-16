@@ -11,13 +11,13 @@ export class Packages extends APIResource {
 
 export namespace Packages {
   export import Groups = GroupsAPI.Groups;
-  export import GroupRetrieveResponse = GroupsAPI.GroupRetrieveResponse;
   export import GroupUpdateResponse = GroupsAPI.GroupUpdateResponse;
   export import GroupListResponse = GroupsAPI.GroupListResponse;
+  export import GroupGetResponse = GroupsAPI.GroupGetResponse;
   export import GroupUpdateParams = GroupsAPI.GroupUpdateParams;
   export import GroupListParams = GroupsAPI.GroupListParams;
   export import Rules = RulesAPI.Rules;
-  export import RuleRetrieveResponse = RulesAPI.RuleRetrieveResponse;
   export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
+  export import RuleGetResponse = RulesAPI.RuleGetResponse;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
 }

@@ -2,9 +2,9 @@
 
 export {
   IndicatorFeedCreateResponse,
-  IndicatorFeedRetrieveResponse,
   IndicatorFeedListResponse,
   IndicatorFeedDataResponse,
+  IndicatorFeedGetResponse,
   IndicatorFeedPermissionsAddResponse,
   IndicatorFeedPermissionsRemoveResponse,
   IndicatorFeedPermissionsViewResponse,

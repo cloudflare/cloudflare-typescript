@@ -9,16 +9,16 @@ export class Uuid extends APIResource {
    * Retrieve the account and zone specific unique identifier used as part of the
    * CNAME target for DCV Delegation.
    */
-  retrieve(zoneIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<UuidRetrieveResponse> {
+  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<UuidGetResponse> {
     return (
-      this._client.get(`/zones/${zoneIdentifier}/dcv_delegation/uuid`, options) as Core.APIPromise<{
-        result: UuidRetrieveResponse;
+      this._client.get(`/zones/${zoneId}/dcv_delegation/uuid`, options) as Core.APIPromise<{
+        result: UuidGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface UuidRetrieveResponse {
+export interface UuidGetResponse {
   /**
    * The DCV Delegation unique identifier.
    */
@@ -26,5 +26,5 @@ export interface UuidRetrieveResponse {
 }
 
 export namespace Uuid {
-  export import UuidRetrieveResponse = UuidAPI.UuidRetrieveResponse;
+  export import UuidGetResponse = UuidAPI.UuidGetResponse;
 }

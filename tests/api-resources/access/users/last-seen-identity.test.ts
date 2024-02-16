@@ -13,8 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource lastSeenIdentity', () => {
   // skipped: tests are disabled for the time being
-  test.skip('retrieve', async () => {
-    const responsePromise = cloudflare.access.users.lastSeenIdentity.retrieve(
+  test.skip('get', async () => {
+    const responsePromise = cloudflare.access.users.lastSeenIdentity.get(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
     );
@@ -28,10 +28,10 @@ describe('resource lastSeenIdentity', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('retrieve: request options instead of params are passed correctly', async () => {
+  test.skip('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.access.users.lastSeenIdentity.retrieve(
+      cloudflare.access.users.lastSeenIdentity.get(
         '023e105f4ecef8ad9ca31a8372d0c353',
         'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
         { path: '/_stainless_unknown_path' },

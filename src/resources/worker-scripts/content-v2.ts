@@ -8,7 +8,7 @@ export class ContentV2 extends APIResource {
   /**
    * Fetch script content only
    */
-  retrieve(accountId: string, scriptName: string, options?: Core.RequestOptions): Core.APIPromise<Response> {
+  get(accountId: string, scriptName: string, options?: Core.RequestOptions): Core.APIPromise<Response> {
     return this._client.get(`/accounts/${accountId}/workers/scripts/${scriptName}/content/v2`, {
       ...options,
       __binaryResponse: true,

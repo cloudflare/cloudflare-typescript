@@ -17,17 +17,6 @@ export class Policies extends APIResource {
   }
 
   /**
-   * Fetches a Page Shield policy by ID.
-   */
-  retrieve(
-    zoneId: string,
-    policyId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PolicyRetrieveResponse> {
-    return this._client.get(`/zones/${zoneId}/page_shield/policies/${policyId}`, options);
-  }
-
-  /**
    * Update a Page Shield policy by ID.
    */
   update(
@@ -59,42 +48,16 @@ export class Policies extends APIResource {
       headers: { Accept: '*/*', ...options?.headers },
     });
   }
+
+  /**
+   * Fetches a Page Shield policy by ID.
+   */
+  get(zoneId: string, policyId: string, options?: Core.RequestOptions): Core.APIPromise<PolicyGetResponse> {
+    return this._client.get(`/zones/${zoneId}/page_shield/policies/${policyId}`, options);
+  }
 }
 
 export interface PolicyCreateResponse {
-  /**
-   * The ID of the policy
-   */
-  id?: string;
-
-  /**
-   * The action to take if the expression matches
-   */
-  action?: 'allow' | 'log';
-
-  /**
-   * A description for the policy
-   */
-  description?: string;
-
-  /**
-   * Whether the policy is enabled
-   */
-  enabled?: boolean;
-
-  /**
-   * The expression which must match for the policy to be applied, using the
-   * Cloudflare Firewall rule expression syntax
-   */
-  expression?: string;
-
-  /**
-   * The policy which will be applied
-   */
-  value?: string;
-}
-
-export interface PolicyRetrieveResponse {
   /**
    * The ID of the policy
    */
@@ -197,6 +160,39 @@ export namespace PolicyListResponse {
   }
 }
 
+export interface PolicyGetResponse {
+  /**
+   * The ID of the policy
+   */
+  id?: string;
+
+  /**
+   * The action to take if the expression matches
+   */
+  action?: 'allow' | 'log';
+
+  /**
+   * A description for the policy
+   */
+  description?: string;
+
+  /**
+   * Whether the policy is enabled
+   */
+  enabled?: boolean;
+
+  /**
+   * The expression which must match for the policy to be applied, using the
+   * Cloudflare Firewall rule expression syntax
+   */
+  expression?: string;
+
+  /**
+   * The policy which will be applied
+   */
+  value?: string;
+}
+
 export interface PolicyCreateParams {
   /**
    * The action to take if the expression matches
@@ -255,9 +251,9 @@ export interface PolicyUpdateParams {
 
 export namespace Policies {
   export import PolicyCreateResponse = PoliciesAPI.PolicyCreateResponse;
-  export import PolicyRetrieveResponse = PoliciesAPI.PolicyRetrieveResponse;
   export import PolicyUpdateResponse = PoliciesAPI.PolicyUpdateResponse;
   export import PolicyListResponse = PoliciesAPI.PolicyListResponse;
+  export import PolicyGetResponse = PoliciesAPI.PolicyGetResponse;
   export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
   export import PolicyUpdateParams = PoliciesAPI.PolicyUpdateParams;
 }

@@ -11,7 +11,7 @@ export class Gateway extends APIResource {
 
 export namespace Gateway {
   export import AuditSSHSettings = AuditSSHSettingsAPI.AuditSSHSettings;
-  export import AuditSSHSettingRetrieveResponse = AuditSSHSettingsAPI.AuditSSHSettingRetrieveResponse;
   export import AuditSSHSettingUpdateResponse = AuditSSHSettingsAPI.AuditSSHSettingUpdateResponse;
+  export import AuditSSHSettingGetResponse = AuditSSHSettingsAPI.AuditSSHSettingGetResponse;
   export import AuditSSHSettingUpdateParams = AuditSSHSettingsAPI.AuditSSHSettingUpdateParams;
 }

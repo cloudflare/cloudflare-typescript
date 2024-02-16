@@ -6,17 +6,6 @@ import * as BotManagementsAPI from 'cloudflare/resources/bot-managements';
 
 export class BotManagements extends APIResource {
   /**
-   * Retrieve a zone's Bot Management Config
-   */
-  retrieve(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<BotManagementRetrieveResponse> {
-    return (
-      this._client.get(`/zones/${zoneId}/bot_management`, options) as Core.APIPromise<{
-        result: BotManagementRetrieveResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Updates the Bot Management configuration for a zone.
    *
    * This API is used to update:
@@ -39,15 +28,26 @@ export class BotManagements extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Retrieve a zone's Bot Management Config
+   */
+  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<BotManagementGetResponse> {
+    return (
+      this._client.get(`/zones/${zoneId}/bot_management`, options) as Core.APIPromise<{
+        result: BotManagementGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
-export type BotManagementRetrieveResponse =
-  | BotManagementRetrieveResponse.BotManagementBotFightModeConfig
-  | BotManagementRetrieveResponse.BotManagementSbfmDefinitelyConfig
-  | BotManagementRetrieveResponse.BotManagementSbfmLikelyConfig
-  | BotManagementRetrieveResponse.BotManagementBmSubscriptionConfig;
+export type BotManagementUpdateResponse =
+  | BotManagementUpdateResponse.BotManagementBotFightModeConfig
+  | BotManagementUpdateResponse.BotManagementSbfmDefinitelyConfig
+  | BotManagementUpdateResponse.BotManagementSbfmLikelyConfig
+  | BotManagementUpdateResponse.BotManagementBmSubscriptionConfig;
 
-export namespace BotManagementRetrieveResponse {
+export namespace BotManagementUpdateResponse {
   export interface BotManagementBotFightModeConfig {
     /**
      * Use lightweight, invisible JavaScript detections to improve Bot Management.
@@ -172,13 +172,13 @@ export namespace BotManagementRetrieveResponse {
   }
 }
 
-export type BotManagementUpdateResponse =
-  | BotManagementUpdateResponse.BotManagementBotFightModeConfig
-  | BotManagementUpdateResponse.BotManagementSbfmDefinitelyConfig
-  | BotManagementUpdateResponse.BotManagementSbfmLikelyConfig
-  | BotManagementUpdateResponse.BotManagementBmSubscriptionConfig;
+export type BotManagementGetResponse =
+  | BotManagementGetResponse.BotManagementBotFightModeConfig
+  | BotManagementGetResponse.BotManagementSbfmDefinitelyConfig
+  | BotManagementGetResponse.BotManagementSbfmLikelyConfig
+  | BotManagementGetResponse.BotManagementBmSubscriptionConfig;
 
-export namespace BotManagementUpdateResponse {
+export namespace BotManagementGetResponse {
   export interface BotManagementBotFightModeConfig {
     /**
      * Use lightweight, invisible JavaScript detections to improve Bot Management.
@@ -411,7 +411,7 @@ export namespace BotManagementUpdateParams {
 }
 
 export namespace BotManagements {
-  export import BotManagementRetrieveResponse = BotManagementsAPI.BotManagementRetrieveResponse;
   export import BotManagementUpdateResponse = BotManagementsAPI.BotManagementUpdateResponse;
+  export import BotManagementGetResponse = BotManagementsAPI.BotManagementGetResponse;
   export import BotManagementUpdateParams = BotManagementsAPI.BotManagementUpdateParams;
 }

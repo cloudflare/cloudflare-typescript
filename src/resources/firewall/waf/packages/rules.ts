@@ -6,26 +6,6 @@ import * as RulesAPI from 'cloudflare/resources/firewall/waf/packages/rules';
 
 export class Rules extends APIResource {
   /**
-   * Fetches the details of a WAF rule in a WAF package.
-   *
-   * **Note:** Applies only to the
-   * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
-   */
-  retrieve(
-    zoneId: string,
-    packageId: string,
-    ruleId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleRetrieveResponse> {
-    return (
-      this._client.get(
-        `/zones/${zoneId}/firewall/waf/packages/${packageId}/rules/${ruleId}`,
-        options,
-      ) as Core.APIPromise<{ result: RuleRetrieveResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Updates a WAF rule. You can only update the mode/action of the rule.
    *
    * **Note:** Applies only to the
@@ -45,9 +25,27 @@ export class Rules extends APIResource {
       }) as Core.APIPromise<{ result: RuleUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
-}
 
-export type RuleRetrieveResponse = unknown | Array<unknown> | string;
+  /**
+   * Fetches the details of a WAF rule in a WAF package.
+   *
+   * **Note:** Applies only to the
+   * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
+   */
+  get(
+    zoneId: string,
+    packageId: string,
+    ruleId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RuleGetResponse> {
+    return (
+      this._client.get(
+        `/zones/${zoneId}/firewall/waf/packages/${packageId}/rules/${ruleId}`,
+        options,
+      ) as Core.APIPromise<{ result: RuleGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+}
 
 /**
  * When triggered, anomaly detection WAF rules contribute to an overall threat
@@ -250,6 +248,8 @@ export namespace RuleUpdateResponse {
   }
 }
 
+export type RuleGetResponse = unknown | Array<unknown> | string;
+
 export interface RuleUpdateParams {
   /**
    * The mode/action of the rule when triggered. You must use a value from the
@@ -259,7 +259,7 @@ export interface RuleUpdateParams {
 }
 
 export namespace Rules {
-  export import RuleRetrieveResponse = RulesAPI.RuleRetrieveResponse;
   export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
+  export import RuleGetResponse = RulesAPI.RuleGetResponse;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
 }

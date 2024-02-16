@@ -3,16 +3,16 @@
 import { APIResource } from 'cloudflare/resource';
 import * as DatasetsAPI from 'cloudflare/resources/dlp/datasets';
 
-export class Dlp extends APIResource {
+export class DLP extends APIResource {
   datasets: DatasetsAPI.Datasets = new DatasetsAPI.Datasets(this._client);
 }
 
-export namespace Dlp {
+export namespace DLP {
   export import Datasets = DatasetsAPI.Datasets;
   export import DatasetCreateResponse = DatasetsAPI.DatasetCreateResponse;
-  export import DatasetRetrieveResponse = DatasetsAPI.DatasetRetrieveResponse;
   export import DatasetUpdateResponse = DatasetsAPI.DatasetUpdateResponse;
   export import DatasetListResponse = DatasetsAPI.DatasetListResponse;
+  export import DatasetGetResponse = DatasetsAPI.DatasetGetResponse;
   export import DatasetUploadResponse = DatasetsAPI.DatasetUploadResponse;
   export import DatasetUploadPrepareResponse = DatasetsAPI.DatasetUploadPrepareResponse;
   export import DatasetCreateParams = DatasetsAPI.DatasetCreateParams;

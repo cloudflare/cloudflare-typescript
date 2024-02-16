@@ -10,7 +10,7 @@ export class Zerotrust extends APIResource {
 
 export namespace Zerotrust {
   export import ConnectivitySettings = ConnectivitySettingsAPI.ConnectivitySettings;
-  export import ConnectivitySettingRetrieveResponse = ConnectivitySettingsAPI.ConnectivitySettingRetrieveResponse;
   export import ConnectivitySettingUpdateResponse = ConnectivitySettingsAPI.ConnectivitySettingUpdateResponse;
+  export import ConnectivitySettingGetResponse = ConnectivitySettingsAPI.ConnectivitySettingGetResponse;
   export import ConnectivitySettingUpdateParams = ConnectivitySettingsAPI.ConnectivitySettingUpdateParams;
 }

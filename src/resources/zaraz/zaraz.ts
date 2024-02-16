@@ -45,13 +45,13 @@ export namespace Zaraz {
   export import ZarazWorkflowUpdateResponse = ZarazAPI.ZarazWorkflowUpdateResponse;
   export import ZarazWorkflowUpdateParams = ZarazAPI.ZarazWorkflowUpdateParams;
   export import Config = ConfigAPI.Config;
-  export import ConfigRetrieveResponse = ConfigAPI.ConfigRetrieveResponse;
   export import ConfigUpdateResponse = ConfigAPI.ConfigUpdateResponse;
+  export import ConfigGetResponse = ConfigAPI.ConfigGetResponse;
   export import ConfigUpdateParams = ConfigAPI.ConfigUpdateParams;
   export import Default = DefaultAPI.Default;
-  export import DefaultRetrieveResponse = DefaultAPI.DefaultRetrieveResponse;
+  export import DefaultGetResponse = DefaultAPI.DefaultGetResponse;
   export import Export = ExportAPI.Export;
-  export import ExportRetrieveResponse = ExportAPI.ExportRetrieveResponse;
+  export import ExportGetResponse = ExportAPI.ExportGetResponse;
   export import History = HistoryAPI.History;
   export import HistoryUpdateResponse = HistoryAPI.HistoryUpdateResponse;
   export import HistoryListResponse = HistoryAPI.HistoryListResponse;
@@ -61,5 +61,5 @@ export namespace Zaraz {
   export import PublishCreateResponse = PublishAPI.PublishCreateResponse;
   export import PublishCreateParams = PublishAPI.PublishCreateParams;
   export import Workflow = WorkflowAPI.Workflow;
-  export import WorkflowRetrieveResponse = WorkflowAPI.WorkflowRetrieveResponse;
+  export import WorkflowGetResponse = WorkflowAPI.WorkflowGetResponse;
 }

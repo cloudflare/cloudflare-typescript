@@ -9,9 +9,9 @@ export class Regions extends APIResource {
   /**
    * Get a single region mapping.
    */
-  retrieve(
-    accountIdentifier: string,
-    regionCode:
+  get(
+    accountId: string,
+    regionId:
       | 'WNAM'
       | 'ENAM'
       | 'WEU'
@@ -26,12 +26,12 @@ export class Regions extends APIResource {
       | 'SEAS'
       | 'NEAS',
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RegionRetrieveResponse> {
+  ): Core.APIPromise<RegionGetResponse> {
     return (
       this._client.get(
-        `/accounts/${accountIdentifier}/load_balancers/regions/${regionCode}`,
+        `/accounts/${accountId}/load_balancers/regions/${regionId}`,
         options,
-      ) as Core.APIPromise<{ result: RegionRetrieveResponse }>
+      ) as Core.APIPromise<{ result: RegionGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -39,24 +39,24 @@ export class Regions extends APIResource {
    * List all region mappings.
    */
   loadBalancerRegionsListRegions(
-    accountIdentifier: string,
+    accountId: string,
     query?: RegionLoadBalancerRegionsListRegionsParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RegionLoadBalancerRegionsListRegionsResponse>;
   loadBalancerRegionsListRegions(
-    accountIdentifier: string,
+    accountId: string,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RegionLoadBalancerRegionsListRegionsResponse>;
   loadBalancerRegionsListRegions(
-    accountIdentifier: string,
+    accountId: string,
     query: RegionLoadBalancerRegionsListRegionsParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<RegionLoadBalancerRegionsListRegionsResponse> {
     if (isRequestOptions(query)) {
-      return this.loadBalancerRegionsListRegions(accountIdentifier, {}, query);
+      return this.loadBalancerRegionsListRegions(accountId, {}, query);
     }
     return (
-      this._client.get(`/accounts/${accountIdentifier}/load_balancers/regions`, {
+      this._client.get(`/accounts/${accountId}/load_balancers/regions`, {
         query,
         ...options,
       }) as Core.APIPromise<{ result: RegionLoadBalancerRegionsListRegionsResponse }>
@@ -67,7 +67,7 @@ export class Regions extends APIResource {
 /**
  * A list of countries and subdivisions mapped to a region.
  */
-export type RegionRetrieveResponse = unknown | string | null;
+export type RegionGetResponse = unknown | string | null;
 
 export type RegionLoadBalancerRegionsListRegionsResponse = unknown | string | null;
 
@@ -89,7 +89,7 @@ export interface RegionLoadBalancerRegionsListRegionsParams {
 }
 
 export namespace Regions {
-  export import RegionRetrieveResponse = RegionsAPI.RegionRetrieveResponse;
+  export import RegionGetResponse = RegionsAPI.RegionGetResponse;
   export import RegionLoadBalancerRegionsListRegionsResponse = RegionsAPI.RegionLoadBalancerRegionsListRegionsResponse;
   export import RegionLoadBalancerRegionsListRegionsParams = RegionsAPI.RegionLoadBalancerRegionsListRegionsParams;
 }

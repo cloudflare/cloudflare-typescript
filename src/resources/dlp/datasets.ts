@@ -21,21 +21,6 @@ export class Datasets extends APIResource {
   }
 
   /**
-   * Fetch a specific dataset with information about available versions.
-   */
-  retrieve(
-    accountId: string,
-    datasetId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DatasetRetrieveResponse> {
-    return (
-      this._client.get(`/accounts/${accountId}/dlp/datasets/${datasetId}`, options) as Core.APIPromise<{
-        result: DatasetRetrieveResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Update details about a dataset.
    */
   update(
@@ -73,6 +58,21 @@ export class Datasets extends APIResource {
       ...options,
       headers: { Accept: '*/*', ...options?.headers },
     });
+  }
+
+  /**
+   * Fetch a specific dataset with information about available versions.
+   */
+  get(
+    accountId: string,
+    datasetId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DatasetGetResponse> {
+    return (
+      this._client.get(`/accounts/${accountId}/dlp/datasets/${datasetId}`, options) as Core.APIPromise<{
+        result: DatasetGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -159,36 +159,6 @@ export namespace DatasetCreateResponse {
   }
 }
 
-export interface DatasetRetrieveResponse {
-  id: string;
-
-  created_at: string;
-
-  name: string;
-
-  num_cells: number;
-
-  secret: boolean;
-
-  status: 'empty' | 'uploading' | 'failed' | 'complete';
-
-  updated_at: string;
-
-  uploads: Array<DatasetRetrieveResponse.Upload>;
-
-  description?: string | null;
-}
-
-export namespace DatasetRetrieveResponse {
-  export interface Upload {
-    num_cells: number;
-
-    status: 'empty' | 'uploading' | 'failed' | 'complete';
-
-    version: number;
-  }
-}
-
 export interface DatasetUpdateResponse {
   id: string;
 
@@ -250,6 +220,36 @@ export namespace DatasetListResponse {
 
       version: number;
     }
+  }
+}
+
+export interface DatasetGetResponse {
+  id: string;
+
+  created_at: string;
+
+  name: string;
+
+  num_cells: number;
+
+  secret: boolean;
+
+  status: 'empty' | 'uploading' | 'failed' | 'complete';
+
+  updated_at: string;
+
+  uploads: Array<DatasetGetResponse.Upload>;
+
+  description?: string | null;
+}
+
+export namespace DatasetGetResponse {
+  export interface Upload {
+    num_cells: number;
+
+    status: 'empty' | 'uploading' | 'failed' | 'complete';
+
+    version: number;
   }
 }
 
@@ -315,9 +315,9 @@ export interface DatasetUploadParams {}
 
 export namespace Datasets {
   export import DatasetCreateResponse = DatasetsAPI.DatasetCreateResponse;
-  export import DatasetRetrieveResponse = DatasetsAPI.DatasetRetrieveResponse;
   export import DatasetUpdateResponse = DatasetsAPI.DatasetUpdateResponse;
   export import DatasetListResponse = DatasetsAPI.DatasetListResponse;
+  export import DatasetGetResponse = DatasetsAPI.DatasetGetResponse;
   export import DatasetUploadResponse = DatasetsAPI.DatasetUploadResponse;
   export import DatasetUploadPrepareResponse = DatasetsAPI.DatasetUploadPrepareResponse;
   export import DatasetCreateParams = DatasetsAPI.DatasetCreateParams;

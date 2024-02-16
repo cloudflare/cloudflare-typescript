@@ -3,45 +3,42 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
-import * as DkimAPI from 'cloudflare/resources/radar/emails/security/top/ases/dkim';
+import * as DKIMAPI from 'cloudflare/resources/radar/emails/security/top/ases/dkim';
 
-export class Dkim extends APIResource {
+export class DKIM extends APIResource {
   /**
    * Get the top autonomous systems (AS), by email DKIM validation.
    */
-  retrieve(
+  get(
     dkim: 'PASS' | 'NONE' | 'FAIL',
-    query?: DkimRetrieveParams,
+    query?: DKIMGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DkimRetrieveResponse>;
-  retrieve(
+  ): Core.APIPromise<DKIMGetResponse>;
+  get(dkim: 'PASS' | 'NONE' | 'FAIL', options?: Core.RequestOptions): Core.APIPromise<DKIMGetResponse>;
+  get(
     dkim: 'PASS' | 'NONE' | 'FAIL',
+    query: DKIMGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DkimRetrieveResponse>;
-  retrieve(
-    dkim: 'PASS' | 'NONE' | 'FAIL',
-    query: DkimRetrieveParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DkimRetrieveResponse> {
+  ): Core.APIPromise<DKIMGetResponse> {
     if (isRequestOptions(query)) {
-      return this.retrieve(dkim, {}, query);
+      return this.get(dkim, {}, query);
     }
     return (
       this._client.get(`/radar/email/security/top/ases/dkim/${dkim}`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: DkimRetrieveResponse }>
+      }) as Core.APIPromise<{ result: DKIMGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface DkimRetrieveResponse {
-  meta: DkimRetrieveResponse.Meta;
+export interface DKIMGetResponse {
+  meta: DKIMGetResponse.Meta;
 
-  top_0: Array<DkimRetrieveResponse.Top0>;
+  top_0: Array<DKIMGetResponse.Top0>;
 }
 
-export namespace DkimRetrieveResponse {
+export namespace DKIMGetResponse {
   export interface Meta {
     dateRange: Array<Meta.DateRange>;
 
@@ -97,7 +94,7 @@ export namespace DkimRetrieveResponse {
   }
 }
 
-export interface DkimRetrieveParams {
+export interface DKIMGetParams {
   /**
    * Filter for arc (Authenticated Received Chain).
    */
@@ -176,7 +173,7 @@ export interface DkimRetrieveParams {
   spf?: Array<'PASS' | 'NONE' | 'FAIL'>;
 }
 
-export namespace Dkim {
-  export import DkimRetrieveResponse = DkimAPI.DkimRetrieveResponse;
-  export import DkimRetrieveParams = DkimAPI.DkimRetrieveParams;
+export namespace DKIM {
+  export import DKIMGetResponse = DKIMAPI.DKIMGetResponse;
+  export import DKIMGetParams = DKIMAPI.DKIMGetParams;
 }

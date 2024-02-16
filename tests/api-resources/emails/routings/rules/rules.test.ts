@@ -13,33 +13,6 @@ const cloudflare = new Cloudflare({
 
 describe('resource rules', () => {
   // skipped: tests are disabled for the time being
-  test.skip('retrieve', async () => {
-    const responsePromise = cloudflare.emails.routings.rules.retrieve(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'a7e6fb77503c41d8a7f3113c6918f10c',
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('retrieve: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.emails.routings.rules.retrieve(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        'a7e6fb77503c41d8a7f3113c6918f10c',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
   test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.emails.routings.rules.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
@@ -280,6 +253,33 @@ describe('resource rules', () => {
       cloudflare.emails.routings.rules.emailRoutingRoutingRulesListRoutingRules(
         '023e105f4ecef8ad9ca31a8372d0c353',
         { enabled: true, page: 1, per_page: 5 },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get', async () => {
+    const responsePromise = cloudflare.emails.routings.rules.get(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      'a7e6fb77503c41d8a7f3113c6918f10c',
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.emails.routings.rules.get(
+        '023e105f4ecef8ad9ca31a8372d0c353',
+        'a7e6fb77503c41d8a7f3113c6918f10c',
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);

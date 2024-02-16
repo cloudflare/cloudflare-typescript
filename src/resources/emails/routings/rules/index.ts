@@ -7,11 +7,11 @@ export {
   CatchAlls,
 } from './catch-alls';
 export {
-  RuleRetrieveResponse,
   RuleUpdateResponse,
   RuleDeleteResponse,
   RuleEmailRoutingRoutingRulesCreateRoutingRuleResponse,
   RuleEmailRoutingRoutingRulesListRoutingRulesResponse,
+  RuleGetResponse,
   RuleUpdateParams,
   RuleEmailRoutingRoutingRulesCreateRoutingRuleParams,
   RuleEmailRoutingRoutingRulesListRoutingRulesParams,

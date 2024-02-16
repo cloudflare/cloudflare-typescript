@@ -13,39 +13,17 @@ const cloudflare = new Cloudflare({
 
 describe('resource config', () => {
   // skipped: tests are disabled for the time being
-  test.skip('retrieve', async () => {
-    const responsePromise = cloudflare.zaraz.config.retrieve('023e105f4ecef8ad9ca31a8372d0c353');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('retrieve: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.zaraz.config.retrieve('023e105f4ecef8ad9ca31a8372d0c353', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
   test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.zaraz.config.update('023e105f4ecef8ad9ca31a8372d0c353', {
       dataLayer: true,
-      debugKey: 'string',
+      debugKey: 'my-debug-key',
       settings: { autoInjectScript: true },
       tools: {
-        foo: {
+        aJvt: {
           blockingTriggers: ['string', 'string', 'string'],
-          defaultFields: { foo: 'string' },
+          defaultFields: { testKey: 'TEST123456' },
           enabled: true,
-          name: 'string',
+          name: 'Facebook Pixel',
           library: 'string',
           neoEvents: [
             { blockingTriggers: ['string', 'string', 'string'], data: {}, firingTriggers: ['string'] },
@@ -56,7 +34,7 @@ describe('resource config', () => {
         },
       },
       triggers: {
-        foo: {
+        ktBn: {
           excludeRules: [
             { id: 'string', match: 'string', op: 'CONTAINS', value: 'string' },
             { id: 'string', match: 'string', op: 'CONTAINS', value: 'string' },
@@ -70,8 +48,8 @@ describe('resource config', () => {
           name: 'string',
         },
       },
-      variables: { foo: { name: 'string', type: 'string', value: 'string' } },
-      zarazVersion: 0,
+      variables: { Autd: { name: 'ip', type: 'string', value: '{{ system.device.ip }}' } },
+      zarazVersion: 43,
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -86,7 +64,7 @@ describe('resource config', () => {
   test.skip('update: required and optional params', async () => {
     const response = await cloudflare.zaraz.config.update('023e105f4ecef8ad9ca31a8372d0c353', {
       dataLayer: true,
-      debugKey: 'string',
+      debugKey: 'my-debug-key',
       settings: {
         autoInjectScript: true,
         contextEnricher: { escapedWorkerName: 'string', workerTag: 'string' },
@@ -97,19 +75,19 @@ describe('resource config', () => {
         hideIPAddress: true,
         hideQueryParams: true,
         hideUserAgent: true,
-        initPath: 'string',
+        initPath: '/i',
         injectIframes: true,
         mcRootPath: 'string',
         scriptPath: 'string',
         trackPath: 'string',
       },
       tools: {
-        foo: {
+        aJvt: {
           blockingTriggers: ['string', 'string', 'string'],
-          defaultFields: { foo: 'string' },
+          defaultFields: { testKey: 'TEST123456' },
           defaultPurpose: 'string',
           enabled: true,
-          name: 'string',
+          name: 'Facebook Pixel',
           library: 'string',
           neoEvents: [
             { blockingTriggers: ['string', 'string', 'string'], data: {}, firingTriggers: ['string'] },
@@ -120,7 +98,7 @@ describe('resource config', () => {
         },
       },
       triggers: {
-        foo: {
+        ktBn: {
           description: 'string',
           excludeRules: [
             { id: 'string', match: 'string', op: 'CONTAINS', value: 'string' },
@@ -136,8 +114,8 @@ describe('resource config', () => {
           system: 'pageload',
         },
       },
-      variables: { foo: { name: 'string', type: 'string', value: 'string' } },
-      zarazVersion: 0,
+      variables: { Autd: { name: 'ip', type: 'string', value: '{{ system.device.ip }}' } },
+      zarazVersion: 43,
       consent: {
         buttonTextTranslations: {
           accept_all: { foo: 'string' },
@@ -149,11 +127,11 @@ describe('resource config', () => {
         companyStreetAddress: 'string',
         consentModalIntroHTML: 'string',
         consentModalIntroHTMLWithTranslations: { foo: 'string' },
-        cookieName: 'string',
+        cookieName: 'zaraz-consent',
         customCSS: 'string',
         customIntroDisclaimerDismissed: true,
         defaultLanguage: 'string',
-        enabled: true,
+        enabled: false,
         hideModal: true,
         purposes: { foo: { description: 'string', name: 'string' } },
         purposesWithTranslations: {
@@ -162,5 +140,25 @@ describe('resource config', () => {
       },
       historyChange: true,
     });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get', async () => {
+    const responsePromise = cloudflare.zaraz.config.get('023e105f4ecef8ad9ca31a8372d0c353');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.zaraz.config.get('023e105f4ecef8ad9ca31a8372d0c353', { path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 });

@@ -14,7 +14,7 @@ export namespace Scripts {
   export import ContentUpdateResponse = ContentAPI.ContentUpdateResponse;
   export import ContentUpdateParams = ContentAPI.ContentUpdateParams;
   export import Settings = SettingsAPI.Settings;
-  export import SettingRetrieveResponse = SettingsAPI.SettingRetrieveResponse;
   export import SettingUpdateResponse = SettingsAPI.SettingUpdateResponse;
+  export import SettingGetResponse = SettingsAPI.SettingGetResponse;
   export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;
 }

@@ -12,10 +12,10 @@ export class Rum extends APIResource {
 export namespace Rum {
   export import SiteInfos = SiteInfosAPI.SiteInfos;
   export import SiteInfoCreateResponse = SiteInfosAPI.SiteInfoCreateResponse;
-  export import SiteInfoRetrieveResponse = SiteInfosAPI.SiteInfoRetrieveResponse;
   export import SiteInfoUpdateResponse = SiteInfosAPI.SiteInfoUpdateResponse;
   export import SiteInfoListResponse = SiteInfosAPI.SiteInfoListResponse;
   export import SiteInfoDeleteResponse = SiteInfosAPI.SiteInfoDeleteResponse;
+  export import SiteInfoGetResponse = SiteInfosAPI.SiteInfoGetResponse;
   export import SiteInfoCreateParams = SiteInfosAPI.SiteInfoCreateParams;
   export import SiteInfoUpdateParams = SiteInfosAPI.SiteInfoUpdateParams;
   export import SiteInfoListParams = SiteInfosAPI.SiteInfoListParams;

@@ -2,9 +2,9 @@
 
 export {
   BucketCreateResponse,
-  BucketRetrieveResponse,
   BucketListResponse,
   BucketDeleteResponse,
+  BucketGetResponse,
   BucketCreateParams,
   BucketListParams,
   Buckets,

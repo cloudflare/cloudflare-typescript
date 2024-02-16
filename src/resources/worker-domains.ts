@@ -6,21 +6,6 @@ import * as WorkerDomainsAPI from 'cloudflare/resources/worker-domains';
 
 export class WorkerDomains extends APIResource {
   /**
-   * Gets a Worker domain.
-   */
-  retrieve(
-    accountId: unknown,
-    domainId: unknown,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<WorkerDomainRetrieveResponse> {
-    return (
-      this._client.get(`/accounts/${accountId}/workers/domains/${domainId}`, options) as Core.APIPromise<{
-        result: WorkerDomainRetrieveResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Detaches a Worker from a zone and hostname.
    */
   delete(accountId: unknown, domainId: unknown, options?: Core.RequestOptions): Core.APIPromise<void> {
@@ -29,9 +14,24 @@ export class WorkerDomains extends APIResource {
       headers: { Accept: '*/*', ...options?.headers },
     });
   }
+
+  /**
+   * Gets a Worker domain.
+   */
+  get(
+    accountId: unknown,
+    domainId: unknown,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<WorkerDomainGetResponse> {
+    return (
+      this._client.get(`/accounts/${accountId}/workers/domains/${domainId}`, options) as Core.APIPromise<{
+        result: WorkerDomainGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
-export interface WorkerDomainRetrieveResponse {
+export interface WorkerDomainGetResponse {
   /**
    * Identifer of the Worker Domain.
    */
@@ -64,5 +64,5 @@ export interface WorkerDomainRetrieveResponse {
 }
 
 export namespace WorkerDomains {
-  export import WorkerDomainRetrieveResponse = WorkerDomainsAPI.WorkerDomainRetrieveResponse;
+  export import WorkerDomainGetResponse = WorkerDomainsAPI.WorkerDomainGetResponse;
 }

@@ -8,10 +8,10 @@ export class Default extends APIResource {
   /**
    * Gets default Zaraz configuration for a zone.
    */
-  retrieve(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<DefaultRetrieveResponse> {
+  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<DefaultGetResponse> {
     return (
       this._client.get(`/zones/${zoneId}/settings/zaraz/default`, options) as Core.APIPromise<{
-        result: DefaultRetrieveResponse;
+        result: DefaultGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -20,7 +20,7 @@ export class Default extends APIResource {
 /**
  * Zaraz configuration
  */
-export interface DefaultRetrieveResponse {
+export interface DefaultGetResponse {
   /**
    * Data layer compatibility mode enabled.
    */
@@ -34,7 +34,7 @@ export interface DefaultRetrieveResponse {
   /**
    * General Zaraz settings.
    */
-  settings: DefaultRetrieveResponse.Settings;
+  settings: DefaultGetResponse.Settings;
 
   /**
    * Tools set up under Zaraz configuration, where key is the alpha-numeric tool ID
@@ -42,21 +42,21 @@ export interface DefaultRetrieveResponse {
    */
   tools: Record<
     string,
-    DefaultRetrieveResponse.ZarazManagedComponent | DefaultRetrieveResponse.ZarazCustomManagedComponent
+    DefaultGetResponse.ZarazManagedComponent | DefaultGetResponse.ZarazCustomManagedComponent
   >;
 
   /**
    * Triggers set up under Zaraz configuration, where key is the trigger
    * alpha-numeric ID and value is the trigger configuration.
    */
-  triggers: Record<string, DefaultRetrieveResponse.Triggers>;
+  triggers: Record<string, DefaultGetResponse.Triggers>;
 
   /**
    * Variables set up under Zaraz configuration, where key is the variable
    * alpha-numeric ID and value is the variable configuration. Values of variables of
    * type secret are not included.
    */
-  variables: Record<string, DefaultRetrieveResponse.UnionMember0 | DefaultRetrieveResponse.UnionMember1>;
+  variables: Record<string, DefaultGetResponse.UnionMember0 | DefaultGetResponse.UnionMember1>;
 
   /**
    * Zaraz internal version of the config.
@@ -66,7 +66,7 @@ export interface DefaultRetrieveResponse {
   /**
    * Consent management configuration.
    */
-  consent?: DefaultRetrieveResponse.Consent;
+  consent?: DefaultGetResponse.Consent;
 
   /**
    * Single Page Application support enabled.
@@ -74,7 +74,7 @@ export interface DefaultRetrieveResponse {
   historyChange?: boolean;
 }
 
-export namespace DefaultRetrieveResponse {
+export namespace DefaultGetResponse {
   /**
    * General Zaraz settings.
    */
@@ -754,5 +754,5 @@ export namespace DefaultRetrieveResponse {
 }
 
 export namespace Default {
-  export import DefaultRetrieveResponse = DefaultAPI.DefaultRetrieveResponse;
+  export import DefaultGetResponse = DefaultAPI.DefaultGetResponse;
 }

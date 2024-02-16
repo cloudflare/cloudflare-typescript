@@ -8,16 +8,16 @@ export class Previews extends APIResource {
   /**
    * Get the result of a previous preview operation using the provided preview_id.
    */
-  retrieve(
-    accountIdentifier: string,
+  get(
+    accountId: string,
     previewId: unknown,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PreviewRetrieveResponse> {
+  ): Core.APIPromise<PreviewGetResponse> {
     return (
       this._client.get(
-        `/accounts/${accountIdentifier}/load_balancers/preview/${previewId}`,
+        `/accounts/${accountId}/load_balancers/preview/${previewId}`,
         options,
-      ) as Core.APIPromise<{ result: PreviewRetrieveResponse }>
+      ) as Core.APIPromise<{ result: PreviewGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -25,19 +25,16 @@ export class Previews extends APIResource {
 /**
  * Resulting health data from a preview operation.
  */
-export type PreviewRetrieveResponse = Record<
-  string,
-  PreviewRetrieveResponse.unnamed_schema_with_map_parent_0
->;
+export type PreviewGetResponse = Record<string, PreviewGetResponse.unnamed_schema_with_map_parent_1>;
 
-export namespace PreviewRetrieveResponse {
-  export interface unnamed_schema_with_map_parent_0 {
+export namespace PreviewGetResponse {
+  export interface unnamed_schema_with_map_parent_1 {
     healthy?: boolean;
 
-    origins?: Array<Record<string, unnamed_schema_with_map_parent_0.load_balancing_origin_health_data>>;
+    origins?: Array<Record<string, unnamed_schema_with_map_parent_1.load_balancing_origin_health_data>>;
   }
 
-  export namespace unnamed_schema_with_map_parent_0 {
+  export namespace unnamed_schema_with_map_parent_1 {
     /**
      * The origin ipv4/ipv6 address or domain name mapped to it's health data.
      */
@@ -54,5 +51,5 @@ export namespace PreviewRetrieveResponse {
 }
 
 export namespace Previews {
-  export import PreviewRetrieveResponse = PreviewsAPI.PreviewRetrieveResponse;
+  export import PreviewGetResponse = PreviewsAPI.PreviewGetResponse;
 }

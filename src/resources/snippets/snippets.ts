@@ -13,21 +13,6 @@ export class Snippets extends APIResource {
   snippetRules: SnippetRulesAPI.SnippetRules = new SnippetRulesAPI.SnippetRules(this._client);
 
   /**
-   * Snippet
-   */
-  retrieve(
-    zoneIdentifier: string,
-    snippetName: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SnippetRetrieveResponse> {
-    return (
-      this._client.get(`/zones/${zoneIdentifier}/snippets/${snippetName}`, options) as Core.APIPromise<{
-        result: SnippetRetrieveResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Put Snippet
    */
   update(
@@ -83,26 +68,21 @@ export class Snippets extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
-}
-
-/**
- * Snippet Information
- */
-export interface SnippetRetrieveResponse {
-  /**
-   * Creation time of the snippet
-   */
-  created_on?: string;
 
   /**
-   * Modification time of the snippet
+   * Snippet
    */
-  modified_on?: string;
-
-  /**
-   * Snippet identifying name
-   */
-  snippet_name?: string;
+  get(
+    zoneIdentifier: string,
+    snippetName: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SnippetGetResponse> {
+    return (
+      this._client.get(`/zones/${zoneIdentifier}/snippets/${snippetName}`, options) as Core.APIPromise<{
+        result: SnippetGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
 /**
@@ -154,6 +134,26 @@ export namespace SnippetListResponse {
 
 export type SnippetDeleteResponse = unknown | Array<unknown> | string;
 
+/**
+ * Snippet Information
+ */
+export interface SnippetGetResponse {
+  /**
+   * Creation time of the snippet
+   */
+  created_on?: string;
+
+  /**
+   * Modification time of the snippet
+   */
+  modified_on?: string;
+
+  /**
+   * Snippet identifying name
+   */
+  snippet_name?: string;
+}
+
 export interface SnippetUpdateParams {
   /**
    * Content files of uploaded snippet
@@ -173,10 +173,10 @@ export namespace SnippetUpdateParams {
 }
 
 export namespace Snippets {
-  export import SnippetRetrieveResponse = SnippetsAPI.SnippetRetrieveResponse;
   export import SnippetUpdateResponse = SnippetsAPI.SnippetUpdateResponse;
   export import SnippetListResponse = SnippetsAPI.SnippetListResponse;
   export import SnippetDeleteResponse = SnippetsAPI.SnippetDeleteResponse;
+  export import SnippetGetResponse = SnippetsAPI.SnippetGetResponse;
   export import SnippetUpdateParams = SnippetsAPI.SnippetUpdateParams;
   export import Content = ContentAPI.Content;
   export import SnippetRules = SnippetRulesAPI.SnippetRules;

@@ -9,5 +9,5 @@ export class DcvDelegation extends APIResource {
 
 export namespace DcvDelegation {
   export import Uuid = UuidAPI.Uuid;
-  export import UuidRetrieveResponse = UuidAPI.UuidRetrieveResponse;
+  export import UuidGetResponse = UuidAPI.UuidGetResponse;
 }

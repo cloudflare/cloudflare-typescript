@@ -9,39 +9,36 @@ export class Dmarc extends APIResource {
   /**
    * Get the top autonomous systems (AS) by emails DMARC validation.
    */
-  retrieve(
+  get(
     dmarc: 'PASS' | 'NONE' | 'FAIL',
-    query?: DmarcRetrieveParams,
+    query?: DmarcGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DmarcRetrieveResponse>;
-  retrieve(
+  ): Core.APIPromise<DmarcGetResponse>;
+  get(dmarc: 'PASS' | 'NONE' | 'FAIL', options?: Core.RequestOptions): Core.APIPromise<DmarcGetResponse>;
+  get(
     dmarc: 'PASS' | 'NONE' | 'FAIL',
+    query: DmarcGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DmarcRetrieveResponse>;
-  retrieve(
-    dmarc: 'PASS' | 'NONE' | 'FAIL',
-    query: DmarcRetrieveParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DmarcRetrieveResponse> {
+  ): Core.APIPromise<DmarcGetResponse> {
     if (isRequestOptions(query)) {
-      return this.retrieve(dmarc, {}, query);
+      return this.get(dmarc, {}, query);
     }
     return (
       this._client.get(`/radar/email/security/top/ases/dmarc/${dmarc}`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: DmarcRetrieveResponse }>
+      }) as Core.APIPromise<{ result: DmarcGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface DmarcRetrieveResponse {
-  meta: DmarcRetrieveResponse.Meta;
+export interface DmarcGetResponse {
+  meta: DmarcGetResponse.Meta;
 
-  top_0: Array<DmarcRetrieveResponse.Top0>;
+  top_0: Array<DmarcGetResponse.Top0>;
 }
 
-export namespace DmarcRetrieveResponse {
+export namespace DmarcGetResponse {
   export interface Meta {
     dateRange: Array<Meta.DateRange>;
 
@@ -97,7 +94,7 @@ export namespace DmarcRetrieveResponse {
   }
 }
 
-export interface DmarcRetrieveParams {
+export interface DmarcGetParams {
   /**
    * Filter for arc (Authenticated Received Chain).
    */
@@ -177,6 +174,6 @@ export interface DmarcRetrieveParams {
 }
 
 export namespace Dmarc {
-  export import DmarcRetrieveResponse = DmarcAPI.DmarcRetrieveResponse;
-  export import DmarcRetrieveParams = DmarcAPI.DmarcRetrieveParams;
+  export import DmarcGetResponse = DmarcAPI.DmarcGetResponse;
+  export import DmarcGetParams = DmarcAPI.DmarcGetParams;
 }

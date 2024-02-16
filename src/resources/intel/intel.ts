@@ -12,9 +12,9 @@ export class Intel extends APIResource {
 export namespace Intel {
   export import IndicatorFeeds = IndicatorFeedsAPI.IndicatorFeeds;
   export import IndicatorFeedCreateResponse = IndicatorFeedsAPI.IndicatorFeedCreateResponse;
-  export import IndicatorFeedRetrieveResponse = IndicatorFeedsAPI.IndicatorFeedRetrieveResponse;
   export import IndicatorFeedListResponse = IndicatorFeedsAPI.IndicatorFeedListResponse;
   export import IndicatorFeedDataResponse = IndicatorFeedsAPI.IndicatorFeedDataResponse;
+  export import IndicatorFeedGetResponse = IndicatorFeedsAPI.IndicatorFeedGetResponse;
   export import IndicatorFeedPermissionsAddResponse = IndicatorFeedsAPI.IndicatorFeedPermissionsAddResponse;
   export import IndicatorFeedPermissionsRemoveResponse = IndicatorFeedsAPI.IndicatorFeedPermissionsRemoveResponse;
   export import IndicatorFeedPermissionsViewResponse = IndicatorFeedsAPI.IndicatorFeedPermissionsViewResponse;

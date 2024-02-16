@@ -9,13 +9,13 @@ export class Rules extends APIResource {
    * Creates a new rule in a Web Analytics ruleset.
    */
   create(
-    accountIdentifier: string,
-    rulesetIdentifier: string,
+    accountId: string,
+    rulesetId: string,
     body: RuleCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RuleCreateResponse> {
     return (
-      this._client.post(`/accounts/${accountIdentifier}/rum/v2/${rulesetIdentifier}/rule`, {
+      this._client.post(`/accounts/${accountId}/rum/v2/${rulesetId}/rule`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: RuleCreateResponse }>
@@ -26,14 +26,14 @@ export class Rules extends APIResource {
    * Updates a rule in a Web Analytics ruleset.
    */
   update(
-    accountIdentifier: string,
-    rulesetIdentifier: string,
-    ruleIdentifier: string,
+    accountId: string,
+    rulesetId: string,
+    ruleId: string,
     body: RuleUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RuleUpdateResponse> {
     return (
-      this._client.put(`/accounts/${accountIdentifier}/rum/v2/${rulesetIdentifier}/rule/${ruleIdentifier}`, {
+      this._client.put(`/accounts/${accountId}/rum/v2/${rulesetId}/rule/${ruleId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: RuleUpdateResponse }>
@@ -44,15 +44,14 @@ export class Rules extends APIResource {
    * Lists all the rules in a Web Analytics ruleset.
    */
   list(
-    accountIdentifier: string,
-    rulesetIdentifier: string,
+    accountId: string,
+    rulesetId: string,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RuleListResponse> {
     return (
-      this._client.get(
-        `/accounts/${accountIdentifier}/rum/v2/${rulesetIdentifier}/rules`,
-        options,
-      ) as Core.APIPromise<{ result: RuleListResponse }>
+      this._client.get(`/accounts/${accountId}/rum/v2/${rulesetId}/rules`, options) as Core.APIPromise<{
+        result: RuleListResponse;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -60,14 +59,14 @@ export class Rules extends APIResource {
    * Deletes an existing rule from a Web Analytics ruleset.
    */
   delete(
-    accountIdentifier: string,
-    rulesetIdentifier: string,
-    ruleIdentifier: string,
+    accountId: string,
+    rulesetId: string,
+    ruleId: string,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RuleDeleteResponse> {
     return (
       this._client.delete(
-        `/accounts/${accountIdentifier}/rum/v2/${rulesetIdentifier}/rule/${ruleIdentifier}`,
+        `/accounts/${accountId}/rum/v2/${rulesetId}/rule/${ruleId}`,
         options,
       ) as Core.APIPromise<{ result: RuleDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);

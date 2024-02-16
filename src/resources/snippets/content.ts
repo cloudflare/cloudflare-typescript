@@ -8,11 +8,7 @@ export class Content extends APIResource {
   /**
    * Snippet Content
    */
-  retrieve(
-    zoneIdentifier: string,
-    snippetName: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Response> {
+  get(zoneIdentifier: string, snippetName: string, options?: Core.RequestOptions): Core.APIPromise<Response> {
     return this._client.get(`/zones/${zoneIdentifier}/snippets/${snippetName}/content`, {
       ...options,
       __binaryResponse: true,

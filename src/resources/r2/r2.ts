@@ -10,9 +10,9 @@ export class R2 extends APIResource {
 export namespace R2 {
   export import Buckets = BucketsAPI.Buckets;
   export import BucketCreateResponse = BucketsAPI.BucketCreateResponse;
-  export import BucketRetrieveResponse = BucketsAPI.BucketRetrieveResponse;
   export import BucketListResponse = BucketsAPI.BucketListResponse;
   export import BucketDeleteResponse = BucketsAPI.BucketDeleteResponse;
+  export import BucketGetResponse = BucketsAPI.BucketGetResponse;
   export import BucketCreateParams = BucketsAPI.BucketCreateParams;
   export import BucketListParams = BucketsAPI.BucketListParams;
 }

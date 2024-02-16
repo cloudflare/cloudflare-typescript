@@ -1,17 +1,17 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
-  BgpPrefixRetrieveResponse,
-  BgpPrefixUpdateResponse,
-  BgpPrefixListResponse,
-  BgpPrefixUpdateParams,
-  BgpPrefixes,
+  BGPPrefixUpdateResponse,
+  BGPPrefixListResponse,
+  BGPPrefixGetResponse,
+  BGPPrefixUpdateParams,
+  BGPPrefixes,
 } from './bgp-prefixes';
 export {
   BindingCreateResponse,
-  BindingRetrieveResponse,
   BindingListResponse,
   BindingDeleteResponse,
+  BindingGetResponse,
   BindingCreateParams,
   Bindings,
 } from './bindings';
