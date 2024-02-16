@@ -56,12 +56,12 @@ export interface PurgeCachZonePurgeResponse {
 }
 
 export type PurgeCachZonePurgeParams =
-  | PurgeCachZonePurgeParams.NHaAylw4Flex
-  | PurgeCachZonePurgeParams.NHaAylw4Everything
-  | PurgeCachZonePurgeParams.NHaAylw4Files;
+  | PurgeCachZonePurgeParams.Hqgd066AFlex
+  | PurgeCachZonePurgeParams.Hqgd066AEverything
+  | PurgeCachZonePurgeParams.Hqgd066AFiles;
 
 export namespace PurgeCachZonePurgeParams {
-  export interface NHaAylw4Flex {
+  export interface Hqgd066AFlex {
     hosts?: Array<string>;
 
     prefixes?: Array<string>;
@@ -69,16 +69,16 @@ export namespace PurgeCachZonePurgeParams {
     tags?: Array<string>;
   }
 
-  export interface NHaAylw4Everything {
+  export interface Hqgd066AEverything {
     purge_everything?: boolean;
   }
 
-  export interface NHaAylw4Files {
-    files?: Array<string | PurgeCachZonePurgeParams.NHaAylw4Files.NHaAylw4URLAndHeaders>;
+  export interface Hqgd066AFiles {
+    files?: Array<string | PurgeCachZonePurgeParams.Hqgd066AFiles.Hqgd066AURLAndHeaders>;
   }
 
-  export namespace NHaAylw4Files {
-    export interface NHaAylw4URLAndHeaders {
+  export namespace Hqgd066AFiles {
+    export interface Hqgd066AURLAndHeaders {
       headers?: unknown;
 
       url?: string;
