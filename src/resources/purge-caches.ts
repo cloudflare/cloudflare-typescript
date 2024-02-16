@@ -56,12 +56,12 @@ export interface PurgeCachZonePurgeResponse {
 }
 
 export type PurgeCachZonePurgeParams =
-  | PurgeCachZonePurgeParams.CkpEqDfYFlex
-  | PurgeCachZonePurgeParams.CkpEqDfYEverything
-  | PurgeCachZonePurgeParams.CkpEqDfYFiles;
+  | PurgeCachZonePurgeParams._7mnXeLx2Flex
+  | PurgeCachZonePurgeParams._7mnXeLx2Everything
+  | PurgeCachZonePurgeParams._7mnXeLx2Files;
 
 export namespace PurgeCachZonePurgeParams {
-  export interface CkpEqDfYFlex {
+  export interface _7mnXeLx2Flex {
     hosts?: Array<string>;
 
     prefixes?: Array<string>;
@@ -69,16 +69,16 @@ export namespace PurgeCachZonePurgeParams {
     tags?: Array<string>;
   }
 
-  export interface CkpEqDfYEverything {
+  export interface _7mnXeLx2Everything {
     purge_everything?: boolean;
   }
 
-  export interface CkpEqDfYFiles {
-    files?: Array<string | PurgeCachZonePurgeParams.CkpEqDfYFiles.CkpEqDfYURLAndHeaders>;
+  export interface _7mnXeLx2Files {
+    files?: Array<string | PurgeCachZonePurgeParams._7mnXeLx2Files._7mnXeLx2URLAndHeaders>;
   }
 
-  export namespace CkpEqDfYFiles {
-    export interface CkpEqDfYURLAndHeaders {
+  export namespace _7mnXeLx2Files {
+    export interface _7mnXeLx2URLAndHeaders {
       headers?: unknown;
 
       url?: string;
