@@ -11,10 +11,10 @@ const cloudflare = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource hold', () => {
+describe('resource holds', () => {
   // skipped: tests are disabled for the time being
   test.skip('enforce', async () => {
-    const responsePromise = cloudflare.zones.hold.enforce('023e105f4ecef8ad9ca31a8372d0c353');
+    const responsePromise = cloudflare.zones.holds.enforce('023e105f4ecef8ad9ca31a8372d0c353');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -28,7 +28,9 @@ describe('resource hold', () => {
   test.skip('enforce: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.zones.hold.enforce('023e105f4ecef8ad9ca31a8372d0c353', { path: '/_stainless_unknown_path' }),
+      cloudflare.zones.holds.enforce('023e105f4ecef8ad9ca31a8372d0c353', {
+        path: '/_stainless_unknown_path',
+      }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
@@ -36,7 +38,7 @@ describe('resource hold', () => {
   test.skip('enforce: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.zones.hold.enforce(
+      cloudflare.zones.holds.enforce(
         '023e105f4ecef8ad9ca31a8372d0c353',
         { include_subdomains: true },
         { path: '/_stainless_unknown_path' },
@@ -46,7 +48,7 @@ describe('resource hold', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('get', async () => {
-    const responsePromise = cloudflare.zones.hold.get('023e105f4ecef8ad9ca31a8372d0c353');
+    const responsePromise = cloudflare.zones.holds.get('023e105f4ecef8ad9ca31a8372d0c353');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -60,13 +62,13 @@ describe('resource hold', () => {
   test.skip('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.zones.hold.get('023e105f4ecef8ad9ca31a8372d0c353', { path: '/_stainless_unknown_path' }),
+      cloudflare.zones.holds.get('023e105f4ecef8ad9ca31a8372d0c353', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
   test.skip('remove', async () => {
-    const responsePromise = cloudflare.zones.hold.remove('023e105f4ecef8ad9ca31a8372d0c353');
+    const responsePromise = cloudflare.zones.holds.remove('023e105f4ecef8ad9ca31a8372d0c353');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -80,7 +82,7 @@ describe('resource hold', () => {
   test.skip('remove: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.zones.hold.remove('023e105f4ecef8ad9ca31a8372d0c353', { path: '/_stainless_unknown_path' }),
+      cloudflare.zones.holds.remove('023e105f4ecef8ad9ca31a8372d0c353', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
@@ -88,7 +90,7 @@ describe('resource hold', () => {
   test.skip('remove: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.zones.hold.remove(
+      cloudflare.zones.holds.remove(
         '023e105f4ecef8ad9ca31a8372d0c353',
         { hold_after: 'string' },
         { path: '/_stainless_unknown_path' },

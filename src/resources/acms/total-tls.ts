@@ -8,14 +8,14 @@ export class TotalTLS extends APIResource {
   /**
    * Set Total TLS Settings or disable the feature for a Zone.
    */
-  update(
+  create(
     zoneId: string,
-    body: TotalTLSUpdateParams,
+    body: TotalTLSCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TotalTLSUpdateResponse> {
+  ): Core.APIPromise<TotalTLSCreateResponse> {
     return (
       this._client.post(`/zones/${zoneId}/acm/total_tls`, { body, ...options }) as Core.APIPromise<{
-        result: TotalTLSUpdateResponse;
+        result: TotalTLSCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -32,7 +32,7 @@ export class TotalTLS extends APIResource {
   }
 }
 
-export interface TotalTLSUpdateResponse {
+export interface TotalTLSCreateResponse {
   /**
    * The Certificate Authority that Total TLS certificates will be issued through.
    */
@@ -68,7 +68,7 @@ export interface TotalTLSGetResponse {
   validity_days?: 90;
 }
 
-export interface TotalTLSUpdateParams {
+export interface TotalTLSCreateParams {
   /**
    * If enabled, Total TLS will order a hostname specific TLS certificate for any
    * proxied A, AAAA, or CNAME record in your zone.
@@ -82,7 +82,7 @@ export interface TotalTLSUpdateParams {
 }
 
 export namespace TotalTLS {
-  export import TotalTLSUpdateResponse = TotalTLSAPI.TotalTLSUpdateResponse;
+  export import TotalTLSCreateResponse = TotalTLSAPI.TotalTLSCreateResponse;
   export import TotalTLSGetResponse = TotalTLSAPI.TotalTLSGetResponse;
-  export import TotalTLSUpdateParams = TotalTLSAPI.TotalTLSUpdateParams;
+  export import TotalTLSCreateParams = TotalTLSAPI.TotalTLSCreateParams;
 }

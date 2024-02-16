@@ -13,6 +13,18 @@ const cloudflare = new Cloudflare({
 
 describe('resource subscriptions', () => {
   // skipped: tests are disabled for the time being
+  test.skip('create', async () => {
+    const responsePromise = cloudflare.subscriptions.create('506e3185e9c882d175a2d0cb0093d9f2', {});
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('update', async () => {
     const responsePromise = cloudflare.subscriptions.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
@@ -83,11 +95,8 @@ describe('resource subscriptions', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('zoneSubscriptionCreateZoneSubscription', async () => {
-    const responsePromise = cloudflare.subscriptions.zoneSubscriptionCreateZoneSubscription(
-      '506e3185e9c882d175a2d0cb0093d9f2',
-      {},
-    );
+  test.skip('get', async () => {
+    const responsePromise = cloudflare.subscriptions.get('506e3185e9c882d175a2d0cb0093d9f2');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -95,6 +104,14 @@ describe('resource subscriptions', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.subscriptions.get('506e3185e9c882d175a2d0cb0093d9f2', { path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
@@ -110,29 +127,5 @@ describe('resource subscriptions', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('zoneSubscriptionZoneSubscriptionDetails', async () => {
-    const responsePromise = cloudflare.subscriptions.zoneSubscriptionZoneSubscriptionDetails(
-      '506e3185e9c882d175a2d0cb0093d9f2',
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('zoneSubscriptionZoneSubscriptionDetails: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.subscriptions.zoneSubscriptionZoneSubscriptionDetails('506e3185e9c882d175a2d0cb0093d9f2', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 });

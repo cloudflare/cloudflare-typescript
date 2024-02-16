@@ -89,5 +89,5 @@ export namespace Users {
   export import LastSeenIdentity = LastSeenIdentityAPI.LastSeenIdentity;
   export import LastSeenIdentityGetResponse = LastSeenIdentityAPI.LastSeenIdentityGetResponse;
   export import FailedLogins = FailedLoginsAPI.FailedLogins;
-  export import FailedLoginZeroTrustUsersGetFailedLoginsResponse = FailedLoginsAPI.FailedLoginZeroTrustUsersGetFailedLoginsResponse;
+  export import FailedLoginGetResponse = FailedLoginsAPI.FailedLoginGetResponse;
 }

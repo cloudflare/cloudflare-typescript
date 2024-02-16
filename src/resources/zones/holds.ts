@@ -3,9 +3,9 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
-import * as HoldAPI from 'cloudflare/resources/zones/hold';
+import * as HoldsAPI from 'cloudflare/resources/zones/holds';
 
-export class Hold extends APIResource {
+export class Holds extends APIResource {
   /**
    * Enforce a zone hold on the zone, blocking the creation and activation of zones
    * with this zone's hostname.
@@ -113,10 +113,10 @@ export interface HoldRemoveParams {
   hold_after?: string;
 }
 
-export namespace Hold {
-  export import HoldEnforceResponse = HoldAPI.HoldEnforceResponse;
-  export import HoldGetResponse = HoldAPI.HoldGetResponse;
-  export import HoldRemoveResponse = HoldAPI.HoldRemoveResponse;
-  export import HoldEnforceParams = HoldAPI.HoldEnforceParams;
-  export import HoldRemoveParams = HoldAPI.HoldRemoveParams;
+export namespace Holds {
+  export import HoldEnforceResponse = HoldsAPI.HoldEnforceResponse;
+  export import HoldGetResponse = HoldsAPI.HoldGetResponse;
+  export import HoldRemoveResponse = HoldsAPI.HoldRemoveResponse;
+  export import HoldEnforceParams = HoldsAPI.HoldEnforceParams;
+  export import HoldRemoveParams = HoldsAPI.HoldRemoveParams;
 }

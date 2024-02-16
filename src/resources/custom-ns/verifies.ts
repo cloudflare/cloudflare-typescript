@@ -8,26 +8,26 @@ export class Verifies extends APIResource {
   /**
    * Verify Account Custom Nameserver Glue Records
    */
-  update(accountId: string, options?: Core.RequestOptions): Core.APIPromise<VerifyUpdateResponse | null> {
+  create(accountId: string, options?: Core.RequestOptions): Core.APIPromise<VerifyCreateResponse | null> {
     return (
       this._client.post(`/accounts/${accountId}/custom_ns/verify`, options) as Core.APIPromise<{
-        result: VerifyUpdateResponse | null;
+        result: VerifyCreateResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type VerifyUpdateResponse = Array<VerifyUpdateResponse.VerifyUpdateResponseItem>;
+export type VerifyCreateResponse = Array<VerifyCreateResponse.VerifyCreateResponseItem>;
 
-export namespace VerifyUpdateResponse {
+export namespace VerifyCreateResponse {
   /**
    * A single account custom nameserver.
    */
-  export interface VerifyUpdateResponseItem {
+  export interface VerifyCreateResponseItem {
     /**
      * A and AAAA records associated with the nameserver.
      */
-    dns_records: Array<VerifyUpdateResponseItem.DNSRecord>;
+    dns_records: Array<VerifyCreateResponseItem.DNSRecord>;
 
     /**
      * The FQDN of the name server.
@@ -50,7 +50,7 @@ export namespace VerifyUpdateResponse {
     ns_set?: number;
   }
 
-  export namespace VerifyUpdateResponseItem {
+  export namespace VerifyCreateResponseItem {
     export interface DNSRecord {
       /**
        * DNS record type.
@@ -66,5 +66,5 @@ export namespace VerifyUpdateResponse {
 }
 
 export namespace Verifies {
-  export import VerifyUpdateResponse = VerifiesAPI.VerifyUpdateResponse;
+  export import VerifyCreateResponse = VerifiesAPI.VerifyCreateResponse;
 }

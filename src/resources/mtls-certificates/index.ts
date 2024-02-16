@@ -2,10 +2,10 @@
 
 export { AssociationListResponse, Associations } from './associations';
 export {
-  MtlsCertificateUpdateResponse,
+  MtlsCertificateCreateResponse,
   MtlsCertificateListResponse,
   MtlsCertificateDeleteResponse,
   MtlsCertificateGetResponse,
-  MtlsCertificateUpdateParams,
+  MtlsCertificateCreateParams,
   MtlsCertificates,
 } from './mtls-certificates';

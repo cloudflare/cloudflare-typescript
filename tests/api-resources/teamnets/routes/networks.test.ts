@@ -13,8 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource networks', () => {
   // skipped: tests are disabled for the time being
-  test.skip('update', async () => {
-    const responsePromise = cloudflare.teamnets.routes.networks.update(
+  test.skip('create', async () => {
+    const responsePromise = cloudflare.teamnets.routes.networks.create(
       '699d98642c564d2e855e9661899b7252',
       '172.16.0.0%2F16',
       {},

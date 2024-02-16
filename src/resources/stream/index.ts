@@ -55,10 +55,10 @@ export {
   LiveInputs,
 } from './live-inputs/index';
 export {
-  StreamUpdateResponse,
+  StreamCreateResponse,
   StreamGetResponse,
   StreamStreamVideosListVideosResponse,
-  StreamUpdateParams,
+  StreamCreateParams,
   StreamStreamVideosInitiateVideoUploadsUsingTusParams,
   StreamStreamVideosListVideosParams,
   Stream,

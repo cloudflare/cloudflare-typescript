@@ -13,8 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource totalTLS', () => {
   // skipped: tests are disabled for the time being
-  test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.acms.totalTLS.update('023e105f4ecef8ad9ca31a8372d0c353', {
+  test.skip('create: only required params', async () => {
+    const responsePromise = cloudflare.acms.totalTLS.create('023e105f4ecef8ad9ca31a8372d0c353', {
       enabled: true,
     });
     const rawResponse = await responsePromise.asResponse();
@@ -27,8 +27,8 @@ describe('resource totalTLS', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.acms.totalTLS.update('023e105f4ecef8ad9ca31a8372d0c353', {
+  test.skip('create: required and optional params', async () => {
+    const response = await cloudflare.acms.totalTLS.create('023e105f4ecef8ad9ca31a8372d0c353', {
       enabled: true,
       certificate_authority: 'google',
     });

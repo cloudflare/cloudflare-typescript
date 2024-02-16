@@ -8,25 +8,24 @@ export class FailedLogins extends APIResource {
   /**
    * Get all failed login attempts for a single user.
    */
-  zeroTrustUsersGetFailedLogins(
+  get(
     identifier: string,
     id: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<FailedLoginZeroTrustUsersGetFailedLoginsResponse | null> {
+  ): Core.APIPromise<FailedLoginGetResponse | null> {
     return (
       this._client.get(
         `/accounts/${identifier}/access/users/${id}/failed_logins`,
         options,
-      ) as Core.APIPromise<{ result: FailedLoginZeroTrustUsersGetFailedLoginsResponse | null }>
+      ) as Core.APIPromise<{ result: FailedLoginGetResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type FailedLoginZeroTrustUsersGetFailedLoginsResponse =
-  Array<FailedLoginZeroTrustUsersGetFailedLoginsResponse.FailedLoginZeroTrustUsersGetFailedLoginsResponseItem>;
+export type FailedLoginGetResponse = Array<FailedLoginGetResponse.FailedLoginGetResponseItem>;
 
-export namespace FailedLoginZeroTrustUsersGetFailedLoginsResponse {
-  export interface FailedLoginZeroTrustUsersGetFailedLoginsResponseItem {
+export namespace FailedLoginGetResponse {
+  export interface FailedLoginGetResponseItem {
     expiration?: number;
 
     metadata?: unknown;
@@ -34,5 +33,5 @@ export namespace FailedLoginZeroTrustUsersGetFailedLoginsResponse {
 }
 
 export namespace FailedLogins {
-  export import FailedLoginZeroTrustUsersGetFailedLoginsResponse = FailedLoginsAPI.FailedLoginZeroTrustUsersGetFailedLoginsResponse;
+  export import FailedLoginGetResponse = FailedLoginsAPI.FailedLoginGetResponse;
 }

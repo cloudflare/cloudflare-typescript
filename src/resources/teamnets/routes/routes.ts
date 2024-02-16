@@ -162,8 +162,8 @@ export namespace Routes {
   export import IPGetResponse = IPsAPI.IPGetResponse;
   export import IPGetParams = IPsAPI.IPGetParams;
   export import Networks = NetworksAPI.Networks;
-  export import NetworkUpdateResponse = NetworksAPI.NetworkUpdateResponse;
+  export import NetworkCreateResponse = NetworksAPI.NetworkCreateResponse;
   export import NetworkDeleteResponse = NetworksAPI.NetworkDeleteResponse;
-  export import NetworkUpdateParams = NetworksAPI.NetworkUpdateParams;
+  export import NetworkCreateParams = NetworksAPI.NetworkCreateParams;
   export import NetworkDeleteParams = NetworksAPI.NetworkDeleteParams;
 }

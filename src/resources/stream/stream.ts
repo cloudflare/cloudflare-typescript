@@ -36,17 +36,17 @@ export class Stream extends APIResource {
   /**
    * Edit details for a single video.
    */
-  update(
+  create(
     accountId: string,
     identifier: string,
-    body: StreamUpdateParams,
+    body: StreamCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<StreamUpdateResponse> {
+  ): Core.APIPromise<StreamCreateResponse> {
     return (
       this._client.post(`/accounts/${accountId}/stream/${identifier}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: StreamUpdateResponse }>
+      }) as Core.APIPromise<{ result: StreamCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -134,7 +134,7 @@ export class Stream extends APIResource {
   }
 }
 
-export interface StreamUpdateResponse {
+export interface StreamCreateResponse {
   /**
    * Lists the origins allowed to display the video. Enter allowed origin domains in
    * an array and use `*` for wildcard subdomains. Empty arrays allow the video to be
@@ -159,7 +159,7 @@ export interface StreamUpdateResponse {
    */
   duration?: number;
 
-  input?: StreamUpdateResponse.Input;
+  input?: StreamCreateResponse.Input;
 
   /**
    * The live input ID used to upload a video with Stream Live.
@@ -185,7 +185,7 @@ export interface StreamUpdateResponse {
    */
   modified?: string;
 
-  playback?: StreamUpdateResponse.Playback;
+  playback?: StreamCreateResponse.Playback;
 
   /**
    * The video's preview page URI. This field is omitted until encoding is complete.
@@ -229,7 +229,7 @@ export interface StreamUpdateResponse {
    * approximate percent of completion. If the `state` is `error`, `errorReasonCode`
    * and `errorReasonText` provide additional details.
    */
-  status?: StreamUpdateResponse.Status;
+  status?: StreamCreateResponse.Status;
 
   /**
    * The media item's thumbnail URI. This field is omitted until encoding is
@@ -261,10 +261,10 @@ export interface StreamUpdateResponse {
    */
   uploadExpiry?: string;
 
-  watermark?: StreamUpdateResponse.Watermark;
+  watermark?: StreamCreateResponse.Watermark;
 }
 
-export namespace StreamUpdateResponse {
+export namespace StreamCreateResponse {
   export interface Input {
     /**
      * The video height in pixels. A value of `-1` means the height is unknown. The
@@ -910,7 +910,7 @@ export namespace StreamStreamVideosListVideosResponse {
   }
 }
 
-export interface StreamUpdateParams {
+export interface StreamCreateParams {
   /**
    * Lists the origins allowed to display the video. Enter allowed origin domains in
    * an array and use `*` for wildcard subdomains. Empty arrays allow the video to be
@@ -1036,10 +1036,10 @@ export interface StreamStreamVideosListVideosParams {
 }
 
 export namespace Stream {
-  export import StreamUpdateResponse = StreamAPI.StreamUpdateResponse;
+  export import StreamCreateResponse = StreamAPI.StreamCreateResponse;
   export import StreamGetResponse = StreamAPI.StreamGetResponse;
   export import StreamStreamVideosListVideosResponse = StreamAPI.StreamStreamVideosListVideosResponse;
-  export import StreamUpdateParams = StreamAPI.StreamUpdateParams;
+  export import StreamCreateParams = StreamAPI.StreamCreateParams;
   export import StreamStreamVideosInitiateVideoUploadsUsingTusParams = StreamAPI.StreamStreamVideosInitiateVideoUploadsUsingTusParams;
   export import StreamStreamVideosListVideosParams = StreamAPI.StreamStreamVideosListVideosParams;
   export import AudioTracks = AudioTracksAPI.AudioTracks;

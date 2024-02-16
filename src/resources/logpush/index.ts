@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export { Datasets } from './datasets/index';
-export { EdgeUpdateResponse, EdgeGetResponse, EdgeUpdateParams, Edges } from './edges';
+export { EdgeCreateResponse, EdgeGetResponse, EdgeCreateParams, Edges } from './edges';
 export {
   JobCreateResponse,
   JobUpdateResponse,

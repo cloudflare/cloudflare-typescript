@@ -8,4 +8,4 @@ export {
   CustomNCreateParams,
   CustomNs,
 } from './custom-ns';
-export { VerifyUpdateResponse, Verifies } from './verifies';
+export { VerifyCreateResponse, Verifies } from './verifies';
