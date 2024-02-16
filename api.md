@@ -3415,14 +3415,6 @@ Methods:
 
 ## Traceroutes
 
-Types:
-
-- <code><a href="./src/resources/diagnostics/traceroutes.ts">TracerouteDiagnosticsTracerouteResponse</a></code>
-
-Methods:
-
-- <code title="post /accounts/{account_identifier}/diagnostics/traceroute">client.diagnostics.traceroutes.<a href="./src/resources/diagnostics/traceroutes.ts">diagnosticsTraceroute</a>(accountIdentifier, { ...params }) -> TracerouteDiagnosticsTracerouteResponse | null</code>
-
 # DLPs
 
 ## Patterns
