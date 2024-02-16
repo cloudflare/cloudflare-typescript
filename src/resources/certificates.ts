@@ -6,34 +6,6 @@ import * as CertificatesAPI from 'cloudflare/resources/certificates';
 
 export class Certificates extends APIResource {
   /**
-   * Create an Origin CA certificate. Use your Origin CA Key as your User Service Key
-   * when calling this endpoint ([see above](#requests)).
-   */
-  create(
-    body: CertificateCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CertificateCreateResponse> {
-    return (
-      this._client.post('/certificates', { body, ...options }) as Core.APIPromise<{
-        result: CertificateCreateResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * List all existing Origin CA certificates for a given zone. Use your Origin CA
-   * Key as your User Service Key when calling this endpoint
-   * ([see above](#requests)).
-   */
-  list(options?: Core.RequestOptions): Core.APIPromise<CertificateListResponse | null> {
-    return (
-      this._client.get('/certificates', options) as Core.APIPromise<{
-        result: CertificateListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Revoke an existing Origin CA certificate by its serial number. Use your Origin
    * CA Key as your User Service Key when calling this endpoint
    * ([see above](#requests)).
@@ -58,14 +30,54 @@ export class Certificates extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Create an Origin CA certificate. Use your Origin CA Key as your User Service Key
+   * when calling this endpoint ([see above](#requests)).
+   */
+  originCaCreateCertificate(
+    body: CertificateOriginCaCreateCertificateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CertificateOriginCaCreateCertificateResponse> {
+    return (
+      this._client.post('/certificates', { body, ...options }) as Core.APIPromise<{
+        result: CertificateOriginCaCreateCertificateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * List all existing Origin CA certificates for a given zone. Use your Origin CA
+   * Key as your User Service Key when calling this endpoint
+   * ([see above](#requests)).
+   */
+  originCaListCertificates(
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CertificateOriginCaListCertificatesResponse | null> {
+    return (
+      this._client.get('/certificates', options) as Core.APIPromise<{
+        result: CertificateOriginCaListCertificatesResponse | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
-export type CertificateCreateResponse = unknown | string;
+export interface CertificateDeleteResponse {
+  /**
+   * Identifier
+   */
+  id?: string;
+}
 
-export type CertificateListResponse = Array<CertificateListResponse.CertificateListResponseItem>;
+export type CertificateGetResponse = unknown | string;
 
-export namespace CertificateListResponse {
-  export interface CertificateListResponseItem {
+export type CertificateOriginCaCreateCertificateResponse = unknown | string;
+
+export type CertificateOriginCaListCertificatesResponse =
+  Array<CertificateOriginCaListCertificatesResponse.CertificateOriginCaListCertificatesResponseItem>;
+
+export namespace CertificateOriginCaListCertificatesResponse {
+  export interface CertificateOriginCaListCertificatesResponseItem {
     /**
      * The Certificate Signing Request (CSR). Must be newline-encoded.
      */
@@ -105,16 +117,7 @@ export namespace CertificateListResponse {
   }
 }
 
-export interface CertificateDeleteResponse {
-  /**
-   * Identifier
-   */
-  id?: string;
-}
-
-export type CertificateGetResponse = unknown | string;
-
-export interface CertificateCreateParams {
+export interface CertificateOriginCaCreateCertificateParams {
   /**
    * The Certificate Signing Request (CSR). Must be newline-encoded.
    */
@@ -139,9 +142,9 @@ export interface CertificateCreateParams {
 }
 
 export namespace Certificates {
-  export import CertificateCreateResponse = CertificatesAPI.CertificateCreateResponse;
-  export import CertificateListResponse = CertificatesAPI.CertificateListResponse;
   export import CertificateDeleteResponse = CertificatesAPI.CertificateDeleteResponse;
   export import CertificateGetResponse = CertificatesAPI.CertificateGetResponse;
-  export import CertificateCreateParams = CertificatesAPI.CertificateCreateParams;
+  export import CertificateOriginCaCreateCertificateResponse = CertificatesAPI.CertificateOriginCaCreateCertificateResponse;
+  export import CertificateOriginCaListCertificatesResponse = CertificatesAPI.CertificateOriginCaListCertificatesResponse;
+  export import CertificateOriginCaCreateCertificateParams = CertificatesAPI.CertificateOriginCaCreateCertificateParams;
 }

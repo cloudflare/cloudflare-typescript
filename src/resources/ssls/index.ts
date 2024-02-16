@@ -1,12 +1,16 @@
 // File generated from our OpenAPI spec by Stainless.
 
-export { AnalyzeCreateResponse, AnalyzeCreateParams, Analyzes } from './analyzes';
+export {
+  AnalyzeAnalyzeCertificateAnalyzeCertificateResponse,
+  AnalyzeAnalyzeCertificateAnalyzeCertificateParams,
+  Analyzes,
+} from './analyzes';
 export {
   CertificatePackUpdateResponse,
-  CertificatePackListResponse,
   CertificatePackDeleteResponse,
+  CertificatePackCertificatePacksListCertificatePacksResponse,
   CertificatePackGetResponse,
-  CertificatePackListParams,
+  CertificatePackCertificatePacksListCertificatePacksParams,
   CertificatePacks,
 } from './certificate-packs/index';
 export { RecommendationListResponse, Recommendations } from './recommendations';

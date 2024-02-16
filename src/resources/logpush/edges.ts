@@ -8,14 +8,14 @@ export class Edges extends APIResource {
   /**
    * Creates a new Instant Logs job for a zone.
    */
-  create(
+  update(
     zoneId: string,
-    body: EdgeCreateParams,
+    body: EdgeUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<EdgeCreateResponse | null> {
+  ): Core.APIPromise<EdgeUpdateResponse | null> {
     return (
       this._client.post(`/zones/${zoneId}/logpush/edge`, { body, ...options }) as Core.APIPromise<{
-        result: EdgeCreateResponse | null;
+        result: EdgeUpdateResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -32,7 +32,7 @@ export class Edges extends APIResource {
   }
 }
 
-export interface EdgeCreateResponse {
+export interface EdgeUpdateResponse {
   /**
    * Unique WebSocket address that will receive messages from Cloudflare’s edge.
    */
@@ -92,7 +92,7 @@ export namespace EdgeGetResponse {
   }
 }
 
-export interface EdgeCreateParams {
+export interface EdgeUpdateParams {
   /**
    * Comma-separated list of fields.
    */
@@ -111,7 +111,7 @@ export interface EdgeCreateParams {
 }
 
 export namespace Edges {
-  export import EdgeCreateResponse = EdgesAPI.EdgeCreateResponse;
+  export import EdgeUpdateResponse = EdgesAPI.EdgeUpdateResponse;
   export import EdgeGetResponse = EdgesAPI.EdgeGetResponse;
-  export import EdgeCreateParams = EdgesAPI.EdgeCreateParams;
+  export import EdgeUpdateParams = EdgesAPI.EdgeUpdateParams;
 }

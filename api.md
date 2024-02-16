@@ -16,17 +16,17 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/certificates.ts">CertificateCreateResponse</a></code>
-- <code><a href="./src/resources/certificates.ts">CertificateListResponse</a></code>
 - <code><a href="./src/resources/certificates.ts">CertificateDeleteResponse</a></code>
 - <code><a href="./src/resources/certificates.ts">CertificateGetResponse</a></code>
+- <code><a href="./src/resources/certificates.ts">CertificateOriginCaCreateCertificateResponse</a></code>
+- <code><a href="./src/resources/certificates.ts">CertificateOriginCaListCertificatesResponse</a></code>
 
 Methods:
 
-- <code title="post /certificates">client.certificates.<a href="./src/resources/certificates.ts">create</a>({ ...params }) -> CertificateCreateResponse</code>
-- <code title="get /certificates">client.certificates.<a href="./src/resources/certificates.ts">list</a>() -> CertificateListResponse | null</code>
 - <code title="delete /certificates/{certificate_id}">client.certificates.<a href="./src/resources/certificates.ts">delete</a>(certificateId) -> CertificateDeleteResponse</code>
 - <code title="get /certificates/{certificate_id}">client.certificates.<a href="./src/resources/certificates.ts">get</a>(certificateId) -> CertificateGetResponse</code>
+- <code title="post /certificates">client.certificates.<a href="./src/resources/certificates.ts">originCaCreateCertificate</a>({ ...params }) -> CertificateOriginCaCreateCertificateResponse</code>
+- <code title="get /certificates">client.certificates.<a href="./src/resources/certificates.ts">originCaListCertificates</a>() -> CertificateOriginCaListCertificatesResponse | null</code>
 
 # IPs
 
@@ -338,19 +338,19 @@ Methods:
 - <code title="delete /zones/{zone_id}">client.zones.<a href="./src/resources/zones/zones.ts">delete</a>(zoneId) -> ZoneDeleteResponse | null</code>
 - <code title="get /zones/{zone_id}">client.zones.<a href="./src/resources/zones/zones.ts">get</a>(zoneId) -> ZoneGetResponse</code>
 
-## Holds
+## Hold
 
 Types:
 
-- <code><a href="./src/resources/zones/holds.ts">HoldEnforceResponse</a></code>
-- <code><a href="./src/resources/zones/holds.ts">HoldGetResponse</a></code>
-- <code><a href="./src/resources/zones/holds.ts">HoldRemoveResponse</a></code>
+- <code><a href="./src/resources/zones/hold.ts">HoldEnforceResponse</a></code>
+- <code><a href="./src/resources/zones/hold.ts">HoldGetResponse</a></code>
+- <code><a href="./src/resources/zones/hold.ts">HoldRemoveResponse</a></code>
 
 Methods:
 
-- <code title="post /zones/{zone_id}/hold">client.zones.holds.<a href="./src/resources/zones/holds.ts">enforce</a>(zoneId, { ...params }) -> HoldEnforceResponse</code>
-- <code title="get /zones/{zone_id}/hold">client.zones.holds.<a href="./src/resources/zones/holds.ts">get</a>(zoneId) -> HoldGetResponse</code>
-- <code title="delete /zones/{zone_id}/hold">client.zones.holds.<a href="./src/resources/zones/holds.ts">remove</a>(zoneId, { ...params }) -> HoldRemoveResponse</code>
+- <code title="post /zones/{zone_id}/hold">client.zones.hold.<a href="./src/resources/zones/hold.ts">enforce</a>(zoneId, { ...params }) -> HoldEnforceResponse</code>
+- <code title="get /zones/{zone_id}/hold">client.zones.hold.<a href="./src/resources/zones/hold.ts">get</a>(zoneId) -> HoldGetResponse</code>
+- <code title="delete /zones/{zone_id}/hold">client.zones.hold.<a href="./src/resources/zones/hold.ts">remove</a>(zoneId, { ...params }) -> HoldRemoveResponse</code>
 
 # AI
 
@@ -788,11 +788,11 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/access/users/failed-logins.ts">FailedLoginGetResponse</a></code>
+- <code><a href="./src/resources/access/users/failed-logins.ts">FailedLoginZeroTrustUsersGetFailedLoginsResponse</a></code>
 
 Methods:
 
-- <code title="get /accounts/{identifier}/access/users/{id}/failed_logins">client.access.users.failedLogins.<a href="./src/resources/access/users/failed-logins.ts">get</a>(identifier, id) -> FailedLoginGetResponse | null</code>
+- <code title="get /accounts/{identifier}/access/users/{id}/failed_logins">client.access.users.failedLogins.<a href="./src/resources/access/users/failed-logins.ts">zeroTrustUsersGetFailedLogins</a>(identifier, id) -> FailedLoginZeroTrustUsersGetFailedLoginsResponse | null</code>
 
 ## CustomPages
 
@@ -860,47 +860,47 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/ssls/analyzes.ts">AnalyzeCreateResponse</a></code>
+- <code><a href="./src/resources/ssls/analyzes.ts">AnalyzeAnalyzeCertificateAnalyzeCertificateResponse</a></code>
 
 Methods:
 
-- <code title="post /zones/{zone_id}/ssl/analyze">client.ssls.analyzes.<a href="./src/resources/ssls/analyzes.ts">create</a>(zoneId, { ...params }) -> AnalyzeCreateResponse</code>
+- <code title="post /zones/{zone_id}/ssl/analyze">client.ssls.analyzes.<a href="./src/resources/ssls/analyzes.ts">analyzeCertificateAnalyzeCertificate</a>(zoneId, { ...params }) -> AnalyzeAnalyzeCertificateAnalyzeCertificateResponse</code>
 
 ## CertificatePacks
 
 Types:
 
 - <code><a href="./src/resources/ssls/certificate-packs/certificate-packs.ts">CertificatePackUpdateResponse</a></code>
-- <code><a href="./src/resources/ssls/certificate-packs/certificate-packs.ts">CertificatePackListResponse</a></code>
 - <code><a href="./src/resources/ssls/certificate-packs/certificate-packs.ts">CertificatePackDeleteResponse</a></code>
+- <code><a href="./src/resources/ssls/certificate-packs/certificate-packs.ts">CertificatePackCertificatePacksListCertificatePacksResponse</a></code>
 - <code><a href="./src/resources/ssls/certificate-packs/certificate-packs.ts">CertificatePackGetResponse</a></code>
 
 Methods:
 
 - <code title="patch /zones/{zone_id}/ssl/certificate_packs/{certificate_pack_id}">client.ssls.certificatePacks.<a href="./src/resources/ssls/certificate-packs/certificate-packs.ts">update</a>(zoneId, certificatePackId) -> CertificatePackUpdateResponse</code>
-- <code title="get /zones/{zone_id}/ssl/certificate_packs">client.ssls.certificatePacks.<a href="./src/resources/ssls/certificate-packs/certificate-packs.ts">list</a>(zoneId, { ...params }) -> CertificatePackListResponse | null</code>
 - <code title="delete /zones/{zone_id}/ssl/certificate_packs/{certificate_pack_id}">client.ssls.certificatePacks.<a href="./src/resources/ssls/certificate-packs/certificate-packs.ts">delete</a>(zoneId, certificatePackId) -> CertificatePackDeleteResponse</code>
+- <code title="get /zones/{zone_id}/ssl/certificate_packs">client.ssls.certificatePacks.<a href="./src/resources/ssls/certificate-packs/certificate-packs.ts">certificatePacksListCertificatePacks</a>(zoneId, { ...params }) -> CertificatePackCertificatePacksListCertificatePacksResponse | null</code>
 - <code title="get /zones/{zone_id}/ssl/certificate_packs/{certificate_pack_id}">client.ssls.certificatePacks.<a href="./src/resources/ssls/certificate-packs/certificate-packs.ts">get</a>(zoneId, certificatePackId) -> CertificatePackGetResponse</code>
 
 ### Orders
 
 Types:
 
-- <code><a href="./src/resources/ssls/certificate-packs/orders.ts">OrderCreateResponse</a></code>
+- <code><a href="./src/resources/ssls/certificate-packs/orders.ts">OrderCertificatePacksOrderAdvancedCertificateManagerCertificatePackResponse</a></code>
 
 Methods:
 
-- <code title="post /zones/{zone_id}/ssl/certificate_packs/order">client.ssls.certificatePacks.orders.<a href="./src/resources/ssls/certificate-packs/orders.ts">create</a>(zoneId, { ...params }) -> OrderCreateResponse</code>
+- <code title="post /zones/{zone_id}/ssl/certificate_packs/order">client.ssls.certificatePacks.orders.<a href="./src/resources/ssls/certificate-packs/orders.ts">certificatePacksOrderAdvancedCertificateManagerCertificatePack</a>(zoneId, { ...params }) -> OrderCertificatePacksOrderAdvancedCertificateManagerCertificatePackResponse</code>
 
 ### Quotas
 
 Types:
 
-- <code><a href="./src/resources/ssls/certificate-packs/quotas.ts">QuotaGetResponse</a></code>
+- <code><a href="./src/resources/ssls/certificate-packs/quotas.ts">QuotaCertificatePacksGetCertificatePackQuotasResponse</a></code>
 
 Methods:
 
-- <code title="get /zones/{zone_id}/ssl/certificate_packs/quota">client.ssls.certificatePacks.quotas.<a href="./src/resources/ssls/certificate-packs/quotas.ts">get</a>(zoneId) -> QuotaGetResponse</code>
+- <code title="get /zones/{zone_id}/ssl/certificate_packs/quota">client.ssls.certificatePacks.quotas.<a href="./src/resources/ssls/certificate-packs/quotas.ts">certificatePacksGetCertificatePackQuotas</a>(zoneId) -> QuotaCertificatePacksGetCertificatePackQuotasResponse</code>
 
 ## Recommendations
 
@@ -942,23 +942,23 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/subscriptions.ts">SubscriptionCreateResponse</a></code>
 - <code><a href="./src/resources/subscriptions.ts">SubscriptionUpdateResponse</a></code>
 - <code><a href="./src/resources/subscriptions.ts">SubscriptionDeleteResponse</a></code>
 - <code><a href="./src/resources/subscriptions.ts">SubscriptionAccountSubscriptionsCreateSubscriptionResponse</a></code>
 - <code><a href="./src/resources/subscriptions.ts">SubscriptionAccountSubscriptionsListSubscriptionsResponse</a></code>
-- <code><a href="./src/resources/subscriptions.ts">SubscriptionGetResponse</a></code>
+- <code><a href="./src/resources/subscriptions.ts">SubscriptionZoneSubscriptionCreateZoneSubscriptionResponse</a></code>
 - <code><a href="./src/resources/subscriptions.ts">SubscriptionZoneSubscriptionUpdateZoneSubscriptionResponse</a></code>
+- <code><a href="./src/resources/subscriptions.ts">SubscriptionZoneSubscriptionZoneSubscriptionDetailsResponse</a></code>
 
 Methods:
 
-- <code title="post /zones/{identifier}/subscription">client.subscriptions.<a href="./src/resources/subscriptions.ts">create</a>(identifier, { ...params }) -> SubscriptionCreateResponse</code>
 - <code title="put /accounts/{account_identifier}/subscriptions/{subscription_identifier}">client.subscriptions.<a href="./src/resources/subscriptions.ts">update</a>(accountIdentifier, subscriptionIdentifier, { ...params }) -> SubscriptionUpdateResponse</code>
 - <code title="delete /accounts/{account_identifier}/subscriptions/{subscription_identifier}">client.subscriptions.<a href="./src/resources/subscriptions.ts">delete</a>(accountIdentifier, subscriptionIdentifier) -> SubscriptionDeleteResponse</code>
 - <code title="post /accounts/{account_identifier}/subscriptions">client.subscriptions.<a href="./src/resources/subscriptions.ts">accountSubscriptionsCreateSubscription</a>(accountIdentifier, { ...params }) -> SubscriptionAccountSubscriptionsCreateSubscriptionResponse</code>
 - <code title="get /accounts/{account_identifier}/subscriptions">client.subscriptions.<a href="./src/resources/subscriptions.ts">accountSubscriptionsListSubscriptions</a>(accountIdentifier) -> SubscriptionAccountSubscriptionsListSubscriptionsResponse | null</code>
-- <code title="get /zones/{identifier}/subscription">client.subscriptions.<a href="./src/resources/subscriptions.ts">get</a>(identifier) -> SubscriptionGetResponse</code>
+- <code title="post /zones/{identifier}/subscription">client.subscriptions.<a href="./src/resources/subscriptions.ts">zoneSubscriptionCreateZoneSubscription</a>(identifier, { ...params }) -> SubscriptionZoneSubscriptionCreateZoneSubscriptionResponse</code>
 - <code title="put /zones/{identifier}/subscription">client.subscriptions.<a href="./src/resources/subscriptions.ts">zoneSubscriptionUpdateZoneSubscription</a>(identifier, { ...params }) -> SubscriptionZoneSubscriptionUpdateZoneSubscriptionResponse</code>
+- <code title="get /zones/{identifier}/subscription">client.subscriptions.<a href="./src/resources/subscriptions.ts">zoneSubscriptionZoneSubscriptionDetails</a>(identifier) -> SubscriptionZoneSubscriptionZoneSubscriptionDetailsResponse</code>
 
 # Acms
 
@@ -966,12 +966,12 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/acms/total-tls.ts">TotalTLSCreateResponse</a></code>
+- <code><a href="./src/resources/acms/total-tls.ts">TotalTLSUpdateResponse</a></code>
 - <code><a href="./src/resources/acms/total-tls.ts">TotalTLSGetResponse</a></code>
 
 Methods:
 
-- <code title="post /zones/{zone_id}/acm/total_tls">client.acms.totalTLS.<a href="./src/resources/acms/total-tls.ts">create</a>(zoneId, { ...params }) -> TotalTLSCreateResponse</code>
+- <code title="post /zones/{zone_id}/acm/total_tls">client.acms.totalTLS.<a href="./src/resources/acms/total-tls.ts">update</a>(zoneId, { ...params }) -> TotalTLSUpdateResponse</code>
 - <code title="get /zones/{zone_id}/acm/total_tls">client.acms.totalTLS.<a href="./src/resources/acms/total-tls.ts">get</a>(zoneId) -> TotalTLSGetResponse</code>
 
 # Analytics
@@ -1226,11 +1226,11 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/custom-ns/verifies.ts">VerifyCreateResponse</a></code>
+- <code><a href="./src/resources/custom-ns/verifies.ts">VerifyUpdateResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/custom_ns/verify">client.customNs.verifies.<a href="./src/resources/custom-ns/verifies.ts">create</a>(accountId) -> VerifyCreateResponse | null</code>
+- <code title="post /accounts/{account_id}/custom_ns/verify">client.customNs.verifies.<a href="./src/resources/custom-ns/verifies.ts">update</a>(accountId) -> VerifyUpdateResponse | null</code>
 
 # DNSRecords
 
@@ -1592,12 +1592,12 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/logpush/edges.ts">EdgeCreateResponse</a></code>
+- <code><a href="./src/resources/logpush/edges.ts">EdgeUpdateResponse</a></code>
 - <code><a href="./src/resources/logpush/edges.ts">EdgeGetResponse</a></code>
 
 Methods:
 
-- <code title="post /zones/{zone_id}/logpush/edge">client.logpush.edges.<a href="./src/resources/logpush/edges.ts">create</a>(zoneId, { ...params }) -> EdgeCreateResponse | null</code>
+- <code title="post /zones/{zone_id}/logpush/edge">client.logpush.edges.<a href="./src/resources/logpush/edges.ts">update</a>(zoneId, { ...params }) -> EdgeUpdateResponse | null</code>
 - <code title="get /zones/{zone_id}/logpush/edge">client.logpush.edges.<a href="./src/resources/logpush/edges.ts">get</a>(zoneId) -> EdgeGetResponse</code>
 
 ## Jobs
@@ -3886,14 +3886,14 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/mtls-certificates/mtls-certificates.ts">MtlsCertificateCreateResponse</a></code>
+- <code><a href="./src/resources/mtls-certificates/mtls-certificates.ts">MtlsCertificateUpdateResponse</a></code>
 - <code><a href="./src/resources/mtls-certificates/mtls-certificates.ts">MtlsCertificateListResponse</a></code>
 - <code><a href="./src/resources/mtls-certificates/mtls-certificates.ts">MtlsCertificateDeleteResponse</a></code>
 - <code><a href="./src/resources/mtls-certificates/mtls-certificates.ts">MtlsCertificateGetResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/mtls_certificates">client.mtlsCertificates.<a href="./src/resources/mtls-certificates/mtls-certificates.ts">create</a>(accountId, { ...params }) -> MtlsCertificateCreateResponse</code>
+- <code title="post /accounts/{account_id}/mtls_certificates">client.mtlsCertificates.<a href="./src/resources/mtls-certificates/mtls-certificates.ts">update</a>(accountId, { ...params }) -> MtlsCertificateUpdateResponse</code>
 - <code title="get /accounts/{account_id}/mtls_certificates">client.mtlsCertificates.<a href="./src/resources/mtls-certificates/mtls-certificates.ts">list</a>(accountId) -> MtlsCertificateListResponse | null</code>
 - <code title="delete /accounts/{account_id}/mtls_certificates/{mtls_certificate_id}">client.mtlsCertificates.<a href="./src/resources/mtls-certificates/mtls-certificates.ts">delete</a>(accountId, mtlsCertificateId) -> MtlsCertificateDeleteResponse</code>
 - <code title="get /accounts/{account_id}/mtls_certificates/{mtls_certificate_id}">client.mtlsCertificates.<a href="./src/resources/mtls-certificates/mtls-certificates.ts">get</a>(accountId, mtlsCertificateId) -> MtlsCertificateGetResponse</code>
@@ -4210,13 +4210,13 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/stream/stream.ts">StreamCreateResponse</a></code>
+- <code><a href="./src/resources/stream/stream.ts">StreamUpdateResponse</a></code>
 - <code><a href="./src/resources/stream/stream.ts">StreamGetResponse</a></code>
 - <code><a href="./src/resources/stream/stream.ts">StreamStreamVideosListVideosResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/stream/{identifier}">client.stream.<a href="./src/resources/stream/stream.ts">create</a>(accountId, identifier, { ...params }) -> StreamCreateResponse</code>
+- <code title="post /accounts/{account_id}/stream/{identifier}">client.stream.<a href="./src/resources/stream/stream.ts">update</a>(accountId, identifier, { ...params }) -> StreamUpdateResponse</code>
 - <code title="delete /accounts/{account_id}/stream/{identifier}">client.stream.<a href="./src/resources/stream/stream.ts">delete</a>(accountId, identifier) -> void</code>
 - <code title="get /accounts/{account_id}/stream/{identifier}">client.stream.<a href="./src/resources/stream/stream.ts">get</a>(accountId, identifier) -> StreamGetResponse</code>
 - <code title="post /accounts/{account_id}/stream">client.stream.<a href="./src/resources/stream/stream.ts">streamVideosInitiateVideoUploadsUsingTus</a>(accountId, { ...params }) -> void</code>
@@ -4428,12 +4428,12 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/teamnets/routes/networks.ts">NetworkCreateResponse</a></code>
+- <code><a href="./src/resources/teamnets/routes/networks.ts">NetworkUpdateResponse</a></code>
 - <code><a href="./src/resources/teamnets/routes/networks.ts">NetworkDeleteResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/teamnet/routes/network/{ip_network_encoded}">client.teamnets.routes.networks.<a href="./src/resources/teamnets/routes/networks.ts">create</a>(accountId, ipNetworkEncoded, { ...params }) -> NetworkCreateResponse</code>
+- <code title="post /accounts/{account_id}/teamnet/routes/network/{ip_network_encoded}">client.teamnets.routes.networks.<a href="./src/resources/teamnets/routes/networks.ts">update</a>(accountId, ipNetworkEncoded, { ...params }) -> NetworkUpdateResponse</code>
 - <code title="delete /accounts/{account_id}/teamnet/routes/network/{ip_network_encoded}">client.teamnets.routes.networks.<a href="./src/resources/teamnets/routes/networks.ts">delete</a>(accountId, ipNetworkEncoded, { ...params }) -> NetworkDeleteResponse</code>
 
 ## VirtualNetworks

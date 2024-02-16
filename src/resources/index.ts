@@ -75,11 +75,11 @@ export {
 } from './calls';
 export { CertificateAuthorities } from './certificate-authorities/certificate-authorities';
 export {
-  CertificateCreateResponse,
-  CertificateListResponse,
   CertificateDeleteResponse,
   CertificateGetResponse,
-  CertificateCreateParams,
+  CertificateOriginCaCreateCertificateResponse,
+  CertificateOriginCaListCertificatesResponse,
+  CertificateOriginCaCreateCertificateParams,
   Certificates,
 } from './certificates';
 export {
@@ -254,11 +254,11 @@ export {
 } from './memberships';
 export { Mnms } from './mnms/mnms';
 export {
-  MtlsCertificateCreateResponse,
+  MtlsCertificateUpdateResponse,
   MtlsCertificateListResponse,
   MtlsCertificateDeleteResponse,
   MtlsCertificateGetResponse,
-  MtlsCertificateCreateParams,
+  MtlsCertificateUpdateParams,
   MtlsCertificates,
 } from './mtls-certificates/mtls-certificates';
 export {
@@ -358,25 +358,25 @@ export {
 } from './speed-api/speed-api';
 export { Storage } from './storage/storage';
 export {
-  StreamCreateResponse,
+  StreamUpdateResponse,
   StreamGetResponse,
   StreamStreamVideosListVideosResponse,
-  StreamCreateParams,
+  StreamUpdateParams,
   StreamStreamVideosInitiateVideoUploadsUsingTusParams,
   StreamStreamVideosListVideosParams,
   Stream,
 } from './stream/stream';
 export {
-  SubscriptionCreateResponse,
   SubscriptionUpdateResponse,
   SubscriptionDeleteResponse,
   SubscriptionAccountSubscriptionsCreateSubscriptionResponse,
   SubscriptionAccountSubscriptionsListSubscriptionsResponse,
-  SubscriptionGetResponse,
+  SubscriptionZoneSubscriptionCreateZoneSubscriptionResponse,
   SubscriptionZoneSubscriptionUpdateZoneSubscriptionResponse,
-  SubscriptionCreateParams,
+  SubscriptionZoneSubscriptionZoneSubscriptionDetailsResponse,
   SubscriptionUpdateParams,
   SubscriptionAccountSubscriptionsCreateSubscriptionParams,
+  SubscriptionZoneSubscriptionCreateZoneSubscriptionParams,
   SubscriptionZoneSubscriptionUpdateZoneSubscriptionParams,
   Subscriptions,
 } from './subscriptions';

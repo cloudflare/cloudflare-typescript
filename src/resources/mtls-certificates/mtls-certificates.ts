@@ -11,14 +11,14 @@ export class MtlsCertificates extends APIResource {
   /**
    * Upload a certificate that you want to use with mTLS-enabled Cloudflare services.
    */
-  create(
+  update(
     accountId: string,
-    body: MtlsCertificateCreateParams,
+    body: MtlsCertificateUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MtlsCertificateCreateResponse> {
+  ): Core.APIPromise<MtlsCertificateUpdateResponse> {
     return (
       this._client.post(`/accounts/${accountId}/mtls_certificates`, { body, ...options }) as Core.APIPromise<{
-        result: MtlsCertificateCreateResponse;
+        result: MtlsCertificateUpdateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -71,7 +71,7 @@ export class MtlsCertificates extends APIResource {
   }
 }
 
-export interface MtlsCertificateCreateResponse {
+export interface MtlsCertificateUpdateResponse {
   /**
    * Identifier
    */
@@ -268,7 +268,7 @@ export interface MtlsCertificateGetResponse {
   uploaded_on?: string;
 }
 
-export interface MtlsCertificateCreateParams {
+export interface MtlsCertificateUpdateParams {
   /**
    * Indicates whether the certificate is a CA or leaf certificate.
    */
@@ -291,11 +291,11 @@ export interface MtlsCertificateCreateParams {
 }
 
 export namespace MtlsCertificates {
-  export import MtlsCertificateCreateResponse = MtlsCertificatesAPI.MtlsCertificateCreateResponse;
+  export import MtlsCertificateUpdateResponse = MtlsCertificatesAPI.MtlsCertificateUpdateResponse;
   export import MtlsCertificateListResponse = MtlsCertificatesAPI.MtlsCertificateListResponse;
   export import MtlsCertificateDeleteResponse = MtlsCertificatesAPI.MtlsCertificateDeleteResponse;
   export import MtlsCertificateGetResponse = MtlsCertificatesAPI.MtlsCertificateGetResponse;
-  export import MtlsCertificateCreateParams = MtlsCertificatesAPI.MtlsCertificateCreateParams;
+  export import MtlsCertificateUpdateParams = MtlsCertificatesAPI.MtlsCertificateUpdateParams;
   export import Associations = AssociationsAPI.Associations;
   export import AssociationListResponse = AssociationsAPI.AssociationListResponse;
 }

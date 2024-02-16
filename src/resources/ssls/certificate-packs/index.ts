@@ -2,11 +2,15 @@
 
 export {
   CertificatePackUpdateResponse,
-  CertificatePackListResponse,
   CertificatePackDeleteResponse,
+  CertificatePackCertificatePacksListCertificatePacksResponse,
   CertificatePackGetResponse,
-  CertificatePackListParams,
+  CertificatePackCertificatePacksListCertificatePacksParams,
   CertificatePacks,
 } from './certificate-packs';
-export { OrderCreateResponse, OrderCreateParams, Orders } from './orders';
-export { QuotaGetResponse, Quotas } from './quotas';
+export {
+  OrderCertificatePacksOrderAdvancedCertificateManagerCertificatePackResponse,
+  OrderCertificatePacksOrderAdvancedCertificateManagerCertificatePackParams,
+  Orders,
+} from './orders';
+export { QuotaCertificatePacksGetCertificatePackQuotasResponse, Quotas } from './quotas';

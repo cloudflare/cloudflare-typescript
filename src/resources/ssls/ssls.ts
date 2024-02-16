@@ -19,14 +19,14 @@ export class SSLs extends APIResource {
 
 export namespace SSLs {
   export import Analyzes = AnalyzesAPI.Analyzes;
-  export import AnalyzeCreateResponse = AnalyzesAPI.AnalyzeCreateResponse;
-  export import AnalyzeCreateParams = AnalyzesAPI.AnalyzeCreateParams;
+  export import AnalyzeAnalyzeCertificateAnalyzeCertificateResponse = AnalyzesAPI.AnalyzeAnalyzeCertificateAnalyzeCertificateResponse;
+  export import AnalyzeAnalyzeCertificateAnalyzeCertificateParams = AnalyzesAPI.AnalyzeAnalyzeCertificateAnalyzeCertificateParams;
   export import CertificatePacks = CertificatePacksAPI.CertificatePacks;
   export import CertificatePackUpdateResponse = CertificatePacksAPI.CertificatePackUpdateResponse;
-  export import CertificatePackListResponse = CertificatePacksAPI.CertificatePackListResponse;
   export import CertificatePackDeleteResponse = CertificatePacksAPI.CertificatePackDeleteResponse;
+  export import CertificatePackCertificatePacksListCertificatePacksResponse = CertificatePacksAPI.CertificatePackCertificatePacksListCertificatePacksResponse;
   export import CertificatePackGetResponse = CertificatePacksAPI.CertificatePackGetResponse;
-  export import CertificatePackListParams = CertificatePacksAPI.CertificatePackListParams;
+  export import CertificatePackCertificatePacksListCertificatePacksParams = CertificatePacksAPI.CertificatePackCertificatePacksListCertificatePacksParams;
   export import Recommendations = RecommendationsAPI.Recommendations;
   export import RecommendationListResponse = RecommendationsAPI.RecommendationListResponse;
   export import Universals = UniversalsAPI.Universals;

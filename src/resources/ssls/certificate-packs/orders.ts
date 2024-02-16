@@ -8,21 +8,23 @@ export class Orders extends APIResource {
   /**
    * For a given zone, order an advanced certificate pack.
    */
-  create(
+  certificatePacksOrderAdvancedCertificateManagerCertificatePack(
     zoneId: string,
-    body: OrderCreateParams,
+    body: OrderCertificatePacksOrderAdvancedCertificateManagerCertificatePackParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<OrderCreateResponse> {
+  ): Core.APIPromise<OrderCertificatePacksOrderAdvancedCertificateManagerCertificatePackResponse> {
     return (
       this._client.post(`/zones/${zoneId}/ssl/certificate_packs/order`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: OrderCreateResponse }>
+      }) as Core.APIPromise<{
+        result: OrderCertificatePacksOrderAdvancedCertificateManagerCertificatePackResponse;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface OrderCreateResponse {
+export interface OrderCertificatePacksOrderAdvancedCertificateManagerCertificatePackResponse {
   /**
    * Identifier
    */
@@ -89,7 +91,7 @@ export interface OrderCreateResponse {
   validity_days?: 14 | 30 | 90 | 365;
 }
 
-export interface OrderCreateParams {
+export interface OrderCertificatePacksOrderAdvancedCertificateManagerCertificatePackParams {
   /**
    * Certificate Authority selected for the order. For information on any certificate
    * authority specific details or restrictions
@@ -126,6 +128,6 @@ export interface OrderCreateParams {
 }
 
 export namespace Orders {
-  export import OrderCreateResponse = OrdersAPI.OrderCreateResponse;
-  export import OrderCreateParams = OrdersAPI.OrderCreateParams;
+  export import OrderCertificatePacksOrderAdvancedCertificateManagerCertificatePackResponse = OrdersAPI.OrderCertificatePacksOrderAdvancedCertificateManagerCertificatePackResponse;
+  export import OrderCertificatePacksOrderAdvancedCertificateManagerCertificatePackParams = OrdersAPI.OrderCertificatePacksOrderAdvancedCertificateManagerCertificatePackParams;
 }
