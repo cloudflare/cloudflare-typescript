@@ -30,6 +30,30 @@ export class CertificatePacks extends APIResource {
   }
 
   /**
+   * For a given zone, list all active certificate packs.
+   */
+  list(
+    zoneId: string,
+    query?: CertificatePackListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CertificatePackListResponse | null>;
+  list(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<CertificatePackListResponse | null>;
+  list(
+    zoneId: string,
+    query: CertificatePackListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CertificatePackListResponse | null> {
+    if (isRequestOptions(query)) {
+      return this.list(zoneId, {}, query);
+    }
+    return (
+      this._client.get(`/zones/${zoneId}/ssl/certificate_packs`, { query, ...options }) as Core.APIPromise<{
+        result: CertificatePackListResponse | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * For a given zone, delete an advanced certificate pack.
    */
   delete(
@@ -42,33 +66,6 @@ export class CertificatePacks extends APIResource {
         `/zones/${zoneId}/ssl/certificate_packs/${certificatePackId}`,
         options,
       ) as Core.APIPromise<{ result: CertificatePackDeleteResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * For a given zone, list all active certificate packs.
-   */
-  certificatePacksListCertificatePacks(
-    zoneId: string,
-    query?: CertificatePackCertificatePacksListCertificatePacksParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CertificatePackCertificatePacksListCertificatePacksResponse | null>;
-  certificatePacksListCertificatePacks(
-    zoneId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CertificatePackCertificatePacksListCertificatePacksResponse | null>;
-  certificatePacksListCertificatePacks(
-    zoneId: string,
-    query: CertificatePackCertificatePacksListCertificatePacksParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CertificatePackCertificatePacksListCertificatePacksResponse | null> {
-    if (isRequestOptions(query)) {
-      return this.certificatePacksListCertificatePacks(zoneId, {}, query);
-    }
-    return (
-      this._client.get(`/zones/${zoneId}/ssl/certificate_packs`, { query, ...options }) as Core.APIPromise<{
-        result: CertificatePackCertificatePacksListCertificatePacksResponse | null;
-      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -156,6 +153,8 @@ export interface CertificatePackUpdateResponse {
   validity_days?: 14 | 30 | 90 | 365;
 }
 
+export type CertificatePackListResponse = Array<unknown>;
+
 export interface CertificatePackDeleteResponse {
   /**
    * Identifier
@@ -163,11 +162,9 @@ export interface CertificatePackDeleteResponse {
   id?: string;
 }
 
-export type CertificatePackCertificatePacksListCertificatePacksResponse = Array<unknown>;
-
 export type CertificatePackGetResponse = unknown | string;
 
-export interface CertificatePackCertificatePacksListCertificatePacksParams {
+export interface CertificatePackListParams {
   /**
    * Include Certificate Packs of all statuses, not just active ones.
    */
@@ -176,13 +173,13 @@ export interface CertificatePackCertificatePacksListCertificatePacksParams {
 
 export namespace CertificatePacks {
   export import CertificatePackUpdateResponse = CertificatePacksAPI.CertificatePackUpdateResponse;
+  export import CertificatePackListResponse = CertificatePacksAPI.CertificatePackListResponse;
   export import CertificatePackDeleteResponse = CertificatePacksAPI.CertificatePackDeleteResponse;
-  export import CertificatePackCertificatePacksListCertificatePacksResponse = CertificatePacksAPI.CertificatePackCertificatePacksListCertificatePacksResponse;
   export import CertificatePackGetResponse = CertificatePacksAPI.CertificatePackGetResponse;
-  export import CertificatePackCertificatePacksListCertificatePacksParams = CertificatePacksAPI.CertificatePackCertificatePacksListCertificatePacksParams;
+  export import CertificatePackListParams = CertificatePacksAPI.CertificatePackListParams;
   export import Orders = OrdersAPI.Orders;
-  export import OrderCertificatePacksOrderAdvancedCertificateManagerCertificatePackResponse = OrdersAPI.OrderCertificatePacksOrderAdvancedCertificateManagerCertificatePackResponse;
-  export import OrderCertificatePacksOrderAdvancedCertificateManagerCertificatePackParams = OrdersAPI.OrderCertificatePacksOrderAdvancedCertificateManagerCertificatePackParams;
+  export import OrderCreateResponse = OrdersAPI.OrderCreateResponse;
+  export import OrderCreateParams = OrdersAPI.OrderCreateParams;
   export import Quotas = QuotasAPI.Quotas;
-  export import QuotaCertificatePacksGetCertificatePackQuotasResponse = QuotasAPI.QuotaCertificatePacksGetCertificatePackQuotasResponse;
+  export import QuotaGetResponse = QuotasAPI.QuotaGetResponse;
 }

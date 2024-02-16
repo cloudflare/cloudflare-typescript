@@ -362,11 +362,11 @@ export namespace Cloudflare {
   export import AccountListParams = API.AccountListParams;
 
   export import Certificates = API.Certificates;
+  export import CertificateCreateResponse = API.CertificateCreateResponse;
+  export import CertificateListResponse = API.CertificateListResponse;
   export import CertificateDeleteResponse = API.CertificateDeleteResponse;
   export import CertificateGetResponse = API.CertificateGetResponse;
-  export import CertificateOriginCaCreateCertificateResponse = API.CertificateOriginCaCreateCertificateResponse;
-  export import CertificateOriginCaListCertificatesResponse = API.CertificateOriginCaListCertificatesResponse;
-  export import CertificateOriginCaCreateCertificateParams = API.CertificateOriginCaCreateCertificateParams;
+  export import CertificateCreateParams = API.CertificateCreateParams;
 
   export import IPs = API.IPs;
   export import IPListResponse = API.IPListResponse;
@@ -419,16 +419,16 @@ export namespace Cloudflare {
   export import SSLs = API.SSLs;
 
   export import Subscriptions = API.Subscriptions;
+  export import SubscriptionCreateResponse = API.SubscriptionCreateResponse;
   export import SubscriptionUpdateResponse = API.SubscriptionUpdateResponse;
   export import SubscriptionDeleteResponse = API.SubscriptionDeleteResponse;
   export import SubscriptionAccountSubscriptionsCreateSubscriptionResponse = API.SubscriptionAccountSubscriptionsCreateSubscriptionResponse;
   export import SubscriptionAccountSubscriptionsListSubscriptionsResponse = API.SubscriptionAccountSubscriptionsListSubscriptionsResponse;
-  export import SubscriptionZoneSubscriptionCreateZoneSubscriptionResponse = API.SubscriptionZoneSubscriptionCreateZoneSubscriptionResponse;
+  export import SubscriptionGetResponse = API.SubscriptionGetResponse;
   export import SubscriptionZoneSubscriptionUpdateZoneSubscriptionResponse = API.SubscriptionZoneSubscriptionUpdateZoneSubscriptionResponse;
-  export import SubscriptionZoneSubscriptionZoneSubscriptionDetailsResponse = API.SubscriptionZoneSubscriptionZoneSubscriptionDetailsResponse;
+  export import SubscriptionCreateParams = API.SubscriptionCreateParams;
   export import SubscriptionUpdateParams = API.SubscriptionUpdateParams;
   export import SubscriptionAccountSubscriptionsCreateSubscriptionParams = API.SubscriptionAccountSubscriptionsCreateSubscriptionParams;
-  export import SubscriptionZoneSubscriptionCreateZoneSubscriptionParams = API.SubscriptionZoneSubscriptionCreateZoneSubscriptionParams;
   export import SubscriptionZoneSubscriptionUpdateZoneSubscriptionParams = API.SubscriptionZoneSubscriptionUpdateZoneSubscriptionParams;
 
   export import Acms = API.Acms;
@@ -666,11 +666,11 @@ export namespace Cloudflare {
   export import Mnms = API.Mnms;
 
   export import MtlsCertificates = API.MtlsCertificates;
-  export import MtlsCertificateUpdateResponse = API.MtlsCertificateUpdateResponse;
+  export import MtlsCertificateCreateResponse = API.MtlsCertificateCreateResponse;
   export import MtlsCertificateListResponse = API.MtlsCertificateListResponse;
   export import MtlsCertificateDeleteResponse = API.MtlsCertificateDeleteResponse;
   export import MtlsCertificateGetResponse = API.MtlsCertificateGetResponse;
-  export import MtlsCertificateUpdateParams = API.MtlsCertificateUpdateParams;
+  export import MtlsCertificateCreateParams = API.MtlsCertificateCreateParams;
 
   export import Pages = API.Pages;
 
@@ -693,10 +693,10 @@ export namespace Cloudflare {
   export import Storage = API.Storage;
 
   export import Stream = API.Stream;
-  export import StreamUpdateResponse = API.StreamUpdateResponse;
+  export import StreamCreateResponse = API.StreamCreateResponse;
   export import StreamGetResponse = API.StreamGetResponse;
   export import StreamStreamVideosListVideosResponse = API.StreamStreamVideosListVideosResponse;
-  export import StreamUpdateParams = API.StreamUpdateParams;
+  export import StreamCreateParams = API.StreamCreateParams;
   export import StreamStreamVideosInitiateVideoUploadsUsingTusParams = API.StreamStreamVideosInitiateVideoUploadsUsingTusParams;
   export import StreamStreamVideosListVideosParams = API.StreamStreamVideosListVideosParams;
 

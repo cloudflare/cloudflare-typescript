@@ -13,11 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource analyzes', () => {
   // skipped: tests are disabled for the time being
-  test.skip('analyzeCertificateAnalyzeCertificate', async () => {
-    const responsePromise = cloudflare.ssls.analyzes.analyzeCertificateAnalyzeCertificate(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      {},
-    );
+  test.skip('create', async () => {
+    const responsePromise = cloudflare.ssls.analyzes.create('023e105f4ecef8ad9ca31a8372d0c353', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

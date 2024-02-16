@@ -13,8 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource verifies', () => {
   // skipped: tests are disabled for the time being
-  test.skip('update', async () => {
-    const responsePromise = cloudflare.customNs.verifies.update('372e67954025e0ba6aaa6d586b9e0b59');
+  test.skip('create', async () => {
+    const responsePromise = cloudflare.customNs.verifies.create('372e67954025e0ba6aaa6d586b9e0b59');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

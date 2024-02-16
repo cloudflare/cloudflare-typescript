@@ -8,23 +8,21 @@ export class Orders extends APIResource {
   /**
    * For a given zone, order an advanced certificate pack.
    */
-  certificatePacksOrderAdvancedCertificateManagerCertificatePack(
+  create(
     zoneId: string,
-    body: OrderCertificatePacksOrderAdvancedCertificateManagerCertificatePackParams,
+    body: OrderCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<OrderCertificatePacksOrderAdvancedCertificateManagerCertificatePackResponse> {
+  ): Core.APIPromise<OrderCreateResponse> {
     return (
       this._client.post(`/zones/${zoneId}/ssl/certificate_packs/order`, {
         body,
         ...options,
-      }) as Core.APIPromise<{
-        result: OrderCertificatePacksOrderAdvancedCertificateManagerCertificatePackResponse;
-      }>
+      }) as Core.APIPromise<{ result: OrderCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface OrderCertificatePacksOrderAdvancedCertificateManagerCertificatePackResponse {
+export interface OrderCreateResponse {
   /**
    * Identifier
    */
@@ -91,7 +89,7 @@ export interface OrderCertificatePacksOrderAdvancedCertificateManagerCertificate
   validity_days?: 14 | 30 | 90 | 365;
 }
 
-export interface OrderCertificatePacksOrderAdvancedCertificateManagerCertificatePackParams {
+export interface OrderCreateParams {
   /**
    * Certificate Authority selected for the order. For information on any certificate
    * authority specific details or restrictions
@@ -128,6 +126,6 @@ export interface OrderCertificatePacksOrderAdvancedCertificateManagerCertificate
 }
 
 export namespace Orders {
-  export import OrderCertificatePacksOrderAdvancedCertificateManagerCertificatePackResponse = OrdersAPI.OrderCertificatePacksOrderAdvancedCertificateManagerCertificatePackResponse;
-  export import OrderCertificatePacksOrderAdvancedCertificateManagerCertificatePackParams = OrdersAPI.OrderCertificatePacksOrderAdvancedCertificateManagerCertificatePackParams;
+  export import OrderCreateResponse = OrdersAPI.OrderCreateResponse;
+  export import OrderCreateParams = OrdersAPI.OrderCreateParams;
 }

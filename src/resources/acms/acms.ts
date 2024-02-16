@@ -9,7 +9,7 @@ export class Acms extends APIResource {
 
 export namespace Acms {
   export import TotalTLS = TotalTLSAPI.TotalTLS;
-  export import TotalTLSUpdateResponse = TotalTLSAPI.TotalTLSUpdateResponse;
+  export import TotalTLSCreateResponse = TotalTLSAPI.TotalTLSCreateResponse;
   export import TotalTLSGetResponse = TotalTLSAPI.TotalTLSGetResponse;
-  export import TotalTLSUpdateParams = TotalTLSAPI.TotalTLSUpdateParams;
+  export import TotalTLSCreateParams = TotalTLSAPI.TotalTLSCreateParams;
 }

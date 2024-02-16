@@ -13,18 +13,17 @@ const cloudflare = new Cloudflare({
 
 describe('resource orders', () => {
   // skipped: tests are disabled for the time being
-  test.skip('certificatePacksOrderAdvancedCertificateManagerCertificatePack: only required params', async () => {
-    const responsePromise =
-      cloudflare.ssls.certificatePacks.orders.certificatePacksOrderAdvancedCertificateManagerCertificatePack(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        {
-          certificate_authority: 'lets_encrypt',
-          hosts: ['example.com', '*.example.com', 'www.example.com'],
-          type: 'advanced',
-          validation_method: 'txt',
-          validity_days: 14,
-        },
-      );
+  test.skip('create: only required params', async () => {
+    const responsePromise = cloudflare.ssls.certificatePacks.orders.create(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      {
+        certificate_authority: 'lets_encrypt',
+        hosts: ['example.com', '*.example.com', 'www.example.com'],
+        type: 'advanced',
+        validation_method: 'txt',
+        validity_days: 14,
+      },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -35,18 +34,17 @@ describe('resource orders', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('certificatePacksOrderAdvancedCertificateManagerCertificatePack: required and optional params', async () => {
-    const response =
-      await cloudflare.ssls.certificatePacks.orders.certificatePacksOrderAdvancedCertificateManagerCertificatePack(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        {
-          certificate_authority: 'lets_encrypt',
-          hosts: ['example.com', '*.example.com', 'www.example.com'],
-          type: 'advanced',
-          validation_method: 'txt',
-          validity_days: 14,
-          cloudflare_branding: false,
-        },
-      );
+  test.skip('create: required and optional params', async () => {
+    const response = await cloudflare.ssls.certificatePacks.orders.create(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      {
+        certificate_authority: 'lets_encrypt',
+        hosts: ['example.com', '*.example.com', 'www.example.com'],
+        type: 'advanced',
+        validation_method: 'txt',
+        validity_days: 14,
+        cloudflare_branding: false,
+      },
+    );
   });
 });

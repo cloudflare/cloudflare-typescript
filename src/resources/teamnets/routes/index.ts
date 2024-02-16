@@ -2,9 +2,9 @@
 
 export { IPGetResponse, IPGetParams, IPs } from './ips';
 export {
-  NetworkUpdateResponse,
+  NetworkCreateResponse,
   NetworkDeleteResponse,
-  NetworkUpdateParams,
+  NetworkCreateParams,
   NetworkDeleteParams,
   Networks,
 } from './networks';

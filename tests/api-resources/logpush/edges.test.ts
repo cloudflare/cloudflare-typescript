@@ -13,8 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource edges', () => {
   // skipped: tests are disabled for the time being
-  test.skip('update', async () => {
-    const responsePromise = cloudflare.logpush.edges.update('023e105f4ecef8ad9ca31a8372d0c353', {});
+  test.skip('create', async () => {
+    const responsePromise = cloudflare.logpush.edges.create('023e105f4ecef8ad9ca31a8372d0c353', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

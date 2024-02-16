@@ -9,22 +9,22 @@ export class Analyzes extends APIResource {
    * Returns the set of hostnames, the signature algorithm, and the expiration date
    * of the certificate.
    */
-  analyzeCertificateAnalyzeCertificate(
+  create(
     zoneId: string,
-    body: AnalyzeAnalyzeCertificateAnalyzeCertificateParams,
+    body: AnalyzeCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AnalyzeAnalyzeCertificateAnalyzeCertificateResponse> {
+  ): Core.APIPromise<AnalyzeCreateResponse> {
     return (
       this._client.post(`/zones/${zoneId}/ssl/analyze`, { body, ...options }) as Core.APIPromise<{
-        result: AnalyzeAnalyzeCertificateAnalyzeCertificateResponse;
+        result: AnalyzeCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type AnalyzeAnalyzeCertificateAnalyzeCertificateResponse = unknown | string;
+export type AnalyzeCreateResponse = unknown | string;
 
-export interface AnalyzeAnalyzeCertificateAnalyzeCertificateParams {
+export interface AnalyzeCreateParams {
   /**
    * A ubiquitous bundle has the highest probability of being verified everywhere,
    * even by clients using outdated or unusual trust stores. An optimal bundle uses
@@ -40,6 +40,6 @@ export interface AnalyzeAnalyzeCertificateAnalyzeCertificateParams {
 }
 
 export namespace Analyzes {
-  export import AnalyzeAnalyzeCertificateAnalyzeCertificateResponse = AnalyzesAPI.AnalyzeAnalyzeCertificateAnalyzeCertificateResponse;
-  export import AnalyzeAnalyzeCertificateAnalyzeCertificateParams = AnalyzesAPI.AnalyzeAnalyzeCertificateAnalyzeCertificateParams;
+  export import AnalyzeCreateResponse = AnalyzesAPI.AnalyzeCreateResponse;
+  export import AnalyzeCreateParams = AnalyzesAPI.AnalyzeCreateParams;
 }
