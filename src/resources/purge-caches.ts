@@ -56,12 +56,12 @@ export interface PurgeCachZonePurgeResponse {
 }
 
 export type PurgeCachZonePurgeParams =
-  | PurgeCachZonePurgeParams.GmuAcovcFlex
-  | PurgeCachZonePurgeParams.GmuAcovcEverything
-  | PurgeCachZonePurgeParams.GmuAcovcFiles;
+  | PurgeCachZonePurgeParams._2YeEfrNpFlex
+  | PurgeCachZonePurgeParams._2YeEfrNpEverything
+  | PurgeCachZonePurgeParams._2YeEfrNpFiles;
 
 export namespace PurgeCachZonePurgeParams {
-  export interface GmuAcovcFlex {
+  export interface _2YeEfrNpFlex {
     hosts?: Array<string>;
 
     prefixes?: Array<string>;
@@ -69,16 +69,16 @@ export namespace PurgeCachZonePurgeParams {
     tags?: Array<string>;
   }
 
-  export interface GmuAcovcEverything {
+  export interface _2YeEfrNpEverything {
     purge_everything?: boolean;
   }
 
-  export interface GmuAcovcFiles {
-    files?: Array<string | PurgeCachZonePurgeParams.GmuAcovcFiles.GmuAcovcURLAndHeaders>;
+  export interface _2YeEfrNpFiles {
+    files?: Array<string | PurgeCachZonePurgeParams._2YeEfrNpFiles._2YeEfrNpURLAndHeaders>;
   }
 
-  export namespace GmuAcovcFiles {
-    export interface GmuAcovcURLAndHeaders {
+  export namespace _2YeEfrNpFiles {
+    export interface _2YeEfrNpURLAndHeaders {
       headers?: unknown;
 
       url?: string;
