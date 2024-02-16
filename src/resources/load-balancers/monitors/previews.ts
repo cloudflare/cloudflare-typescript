@@ -10,13 +10,13 @@ export class Previews extends APIResource {
    * returned preview_id can be used in the preview endpoint to retrieve the results.
    */
   accountLoadBalancerMonitorsPreviewMonitor(
-    accountIdentifier: string,
-    identifier: string,
+    accountId: string,
+    monitorId: string,
     body: PreviewAccountLoadBalancerMonitorsPreviewMonitorParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PreviewAccountLoadBalancerMonitorsPreviewMonitorResponse> {
     return (
-      this._client.post(`/accounts/${accountIdentifier}/load_balancers/monitors/${identifier}/preview`, {
+      this._client.post(`/accounts/${accountId}/load_balancers/monitors/${monitorId}/preview`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: PreviewAccountLoadBalancerMonitorsPreviewMonitorResponse }>

@@ -13,8 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource configs', () => {
   // skipped: tests are disabled for the time being
-  test.skip('retrieve: only required params', async () => {
-    const responsePromise = cloudflare.zaraz.history.configs.retrieve('023e105f4ecef8ad9ca31a8372d0c353', {
+  test.skip('get: only required params', async () => {
+    const responsePromise = cloudflare.zaraz.history.configs.get('023e105f4ecef8ad9ca31a8372d0c353', {
       ids: [0, 0, 0],
     });
     const rawResponse = await responsePromise.asResponse();
@@ -27,8 +27,8 @@ describe('resource configs', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('retrieve: required and optional params', async () => {
-    const response = await cloudflare.zaraz.history.configs.retrieve('023e105f4ecef8ad9ca31a8372d0c353', {
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.zaraz.history.configs.get('023e105f4ecef8ad9ca31a8372d0c353', {
       ids: [0, 0, 0],
     });
   });

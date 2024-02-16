@@ -27,14 +27,10 @@ export class Scans extends APIResource {
   /**
    * Get URL scan by uuid
    */
-  retrieve(
-    accountId: string,
-    scanId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ScanRetrieveResponse> {
+  get(accountId: string, scanId: string, options?: Core.RequestOptions): Core.APIPromise<ScanGetResponse> {
     return (
       this._client.get(`/accounts/${accountId}/urlscanner/scan/${scanId}`, options) as Core.APIPromise<{
-        result: ScanRetrieveResponse;
+        result: ScanGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -100,11 +96,11 @@ export interface ScanCreateResponse {
   visibility: string;
 }
 
-export interface ScanRetrieveResponse {
-  scan: ScanRetrieveResponse.Scan;
+export interface ScanGetResponse {
+  scan: ScanGetResponse.Scan;
 }
 
-export namespace ScanRetrieveResponse {
+export namespace ScanGetResponse {
   export interface Scan {
     certificates: Array<Scan.Certificate>;
 
@@ -870,7 +866,7 @@ export interface ScanScreenshotParams {
 
 export namespace Scans {
   export import ScanCreateResponse = ScansAPI.ScanCreateResponse;
-  export import ScanRetrieveResponse = ScansAPI.ScanRetrieveResponse;
+  export import ScanGetResponse = ScansAPI.ScanGetResponse;
   export import ScanHarResponse = ScansAPI.ScanHarResponse;
   export import ScanCreateParams = ScansAPI.ScanCreateParams;
   export import ScanScreenshotParams = ScansAPI.ScanScreenshotParams;

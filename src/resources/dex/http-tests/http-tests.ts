@@ -12,30 +12,30 @@ export class HTTPTests extends APIResource {
    * Get test details and aggregate performance metrics for an http test for a given
    * time period between 1 hour and 7 days.
    */
-  retrieve(
+  get(
     accountId: string,
     testId: string,
-    query: HTTPTestRetrieveParams,
+    query: HTTPTestGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<HTTPTestRetrieveResponse> {
+  ): Core.APIPromise<HTTPTestGetResponse> {
     return (
       this._client.get(`/accounts/${accountId}/dex/http-tests/${testId}`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: HTTPTestRetrieveResponse }>
+      }) as Core.APIPromise<{ result: HTTPTestGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface HTTPTestRetrieveResponse {
+export interface HTTPTestGetResponse {
   /**
    * The url of the HTTP synthetic application test
    */
   host?: string;
 
-  httpStats?: HTTPTestRetrieveResponse.HTTPStats | null;
+  httpStats?: HTTPTestGetResponse.HTTPStats | null;
 
-  httpStatsByColo?: Array<HTTPTestRetrieveResponse.HTTPStatsByColo>;
+  httpStatsByColo?: Array<HTTPTestGetResponse.HTTPStatsByColo>;
 
   /**
    * The interval at which the HTTP synthetic application test is set to run.
@@ -55,7 +55,7 @@ export interface HTTPTestRetrieveResponse {
   name?: string;
 }
 
-export namespace HTTPTestRetrieveResponse {
+export namespace HTTPTestGetResponse {
   export interface HTTPStats {
     dnsResponseTimeMs: HTTPStats.DNSResponseTimeMs;
 
@@ -279,7 +279,7 @@ export namespace HTTPTestRetrieveResponse {
   }
 }
 
-export interface HTTPTestRetrieveParams {
+export interface HTTPTestGetParams {
   /**
    * Time interval for aggregate time slots.
    */
@@ -309,8 +309,8 @@ export interface HTTPTestRetrieveParams {
 }
 
 export namespace HTTPTests {
-  export import HTTPTestRetrieveResponse = HTTPTestsAPI.HTTPTestRetrieveResponse;
-  export import HTTPTestRetrieveParams = HTTPTestsAPI.HTTPTestRetrieveParams;
+  export import HTTPTestGetResponse = HTTPTestsAPI.HTTPTestGetResponse;
+  export import HTTPTestGetParams = HTTPTestsAPI.HTTPTestGetParams;
   export import Percentiles = PercentilesAPI.Percentiles;
   export import PercentileListResponse = PercentilesAPI.PercentileListResponse;
   export import PercentileListParams = PercentilesAPI.PercentileListParams;

@@ -2,16 +2,16 @@
 
 export { Content } from './content';
 export {
-  SnippetRetrieveResponse,
-  SnippetUpdateResponse,
-  SnippetListResponse,
-  SnippetDeleteResponse,
-  SnippetUpdateParams,
-  Snippets,
-} from './snippets';
-export {
   SnippetRuleUpdateResponse,
   SnippetRuleListResponse,
   SnippetRuleUpdateParams,
   SnippetRules,
 } from './snippet-rules';
+export {
+  SnippetUpdateResponse,
+  SnippetListResponse,
+  SnippetDeleteResponse,
+  SnippetGetResponse,
+  SnippetUpdateParams,
+  Snippets,
+} from './snippets';

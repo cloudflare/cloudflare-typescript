@@ -23,22 +23,6 @@ export class IndicatorFeeds extends APIResource {
   }
 
   /**
-   * Get indicator feed metadata
-   */
-  retrieve(
-    accountIdentifier: string,
-    feedId: number,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<IndicatorFeedRetrieveResponse> {
-    return (
-      this._client.get(
-        `/accounts/${accountIdentifier}/intel/indicator-feeds/${feedId}`,
-        options,
-      ) as Core.APIPromise<{ result: IndicatorFeedRetrieveResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Get indicator feeds owned by this account
    */
   list(accountIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<IndicatorFeedListResponse> {
@@ -57,6 +41,22 @@ export class IndicatorFeeds extends APIResource {
       ...options,
       headers: { Accept: 'text/csv', ...options?.headers },
     });
+  }
+
+  /**
+   * Get indicator feed metadata
+   */
+  get(
+    accountIdentifier: string,
+    feedId: number,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IndicatorFeedGetResponse> {
+    return (
+      this._client.get(
+        `/accounts/${accountIdentifier}/intel/indicator-feeds/${feedId}`,
+        options,
+      ) as Core.APIPromise<{ result: IndicatorFeedGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -151,38 +151,6 @@ export interface IndicatorFeedCreateResponse {
   name?: string;
 }
 
-export interface IndicatorFeedRetrieveResponse {
-  /**
-   * The unique identifier for the indicator feed
-   */
-  id?: number;
-
-  /**
-   * The date and time when the data entry was created
-   */
-  created_on?: string;
-
-  /**
-   * The description of the example test
-   */
-  description?: string;
-
-  /**
-   * Status of the latest snapshot uploaded
-   */
-  latest_upload_status?: 'Mirroring' | 'Unifying' | 'Loading' | 'Provisioning' | 'Complete' | 'Error';
-
-  /**
-   * The date and time when the data entry was last modified
-   */
-  modified_on?: string;
-
-  /**
-   * The name of the indicator feed
-   */
-  name?: string;
-}
-
 export type IndicatorFeedListResponse = Array<IndicatorFeedListResponse.IndicatorFeedListResponseItem>;
 
 export namespace IndicatorFeedListResponse {
@@ -215,6 +183,38 @@ export namespace IndicatorFeedListResponse {
 }
 
 export type IndicatorFeedDataResponse = string;
+
+export interface IndicatorFeedGetResponse {
+  /**
+   * The unique identifier for the indicator feed
+   */
+  id?: number;
+
+  /**
+   * The date and time when the data entry was created
+   */
+  created_on?: string;
+
+  /**
+   * The description of the example test
+   */
+  description?: string;
+
+  /**
+   * Status of the latest snapshot uploaded
+   */
+  latest_upload_status?: 'Mirroring' | 'Unifying' | 'Loading' | 'Provisioning' | 'Complete' | 'Error';
+
+  /**
+   * The date and time when the data entry was last modified
+   */
+  modified_on?: string;
+
+  /**
+   * The name of the indicator feed
+   */
+  name?: string;
+}
 
 export interface IndicatorFeedPermissionsAddResponse {
   /**
@@ -314,9 +314,9 @@ export interface IndicatorFeedSnapshotParams {
 
 export namespace IndicatorFeeds {
   export import IndicatorFeedCreateResponse = IndicatorFeedsAPI.IndicatorFeedCreateResponse;
-  export import IndicatorFeedRetrieveResponse = IndicatorFeedsAPI.IndicatorFeedRetrieveResponse;
   export import IndicatorFeedListResponse = IndicatorFeedsAPI.IndicatorFeedListResponse;
   export import IndicatorFeedDataResponse = IndicatorFeedsAPI.IndicatorFeedDataResponse;
+  export import IndicatorFeedGetResponse = IndicatorFeedsAPI.IndicatorFeedGetResponse;
   export import IndicatorFeedPermissionsAddResponse = IndicatorFeedsAPI.IndicatorFeedPermissionsAddResponse;
   export import IndicatorFeedPermissionsRemoveResponse = IndicatorFeedsAPI.IndicatorFeedPermissionsRemoveResponse;
   export import IndicatorFeedPermissionsViewResponse = IndicatorFeedsAPI.IndicatorFeedPermissionsViewResponse;

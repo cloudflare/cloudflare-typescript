@@ -5,12 +5,12 @@ import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as AsesAPI from 'cloudflare/resources/radar/emails/security/top/ases/ases';
 import * as ArcAPI from 'cloudflare/resources/radar/emails/security/top/ases/arc';
-import * as DkimAPI from 'cloudflare/resources/radar/emails/security/top/ases/dkim';
+import * as DKIMAPI from 'cloudflare/resources/radar/emails/security/top/ases/dkim';
 import * as DmarcAPI from 'cloudflare/resources/radar/emails/security/top/ases/dmarc';
 
 export class Ases extends APIResource {
   arc: ArcAPI.Arc = new ArcAPI.Arc(this._client);
-  dkim: DkimAPI.Dkim = new DkimAPI.Dkim(this._client);
+  dkim: DKIMAPI.DKIM = new DKIMAPI.DKIM(this._client);
   dmarc: DmarcAPI.Dmarc = new DmarcAPI.Dmarc(this._client);
 
   /**
@@ -184,12 +184,12 @@ export namespace Ases {
   export import AseListResponse = AsesAPI.AseListResponse;
   export import AseListParams = AsesAPI.AseListParams;
   export import Arc = ArcAPI.Arc;
-  export import ArcRetrieveResponse = ArcAPI.ArcRetrieveResponse;
-  export import ArcRetrieveParams = ArcAPI.ArcRetrieveParams;
-  export import Dkim = DkimAPI.Dkim;
-  export import DkimRetrieveResponse = DkimAPI.DkimRetrieveResponse;
-  export import DkimRetrieveParams = DkimAPI.DkimRetrieveParams;
+  export import ArcGetResponse = ArcAPI.ArcGetResponse;
+  export import ArcGetParams = ArcAPI.ArcGetParams;
+  export import DKIM = DKIMAPI.DKIM;
+  export import DKIMGetResponse = DKIMAPI.DKIMGetResponse;
+  export import DKIMGetParams = DKIMAPI.DKIMGetParams;
   export import Dmarc = DmarcAPI.Dmarc;
-  export import DmarcRetrieveResponse = DmarcAPI.DmarcRetrieveResponse;
-  export import DmarcRetrieveParams = DmarcAPI.DmarcRetrieveParams;
+  export import DmarcGetResponse = DmarcAPI.DmarcGetResponse;
+  export import DmarcGetParams = DmarcAPI.DmarcGetParams;
 }

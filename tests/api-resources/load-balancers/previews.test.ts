@@ -13,8 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource previews', () => {
   // skipped: tests are disabled for the time being
-  test.skip('retrieve', async () => {
-    const responsePromise = cloudflare.loadBalancers.previews.retrieve(
+  test.skip('get', async () => {
+    const responsePromise = cloudflare.loadBalancers.previews.get(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'p1aba936b94213e5b8dca0c0dbf1f9cc',
     );
@@ -28,10 +28,10 @@ describe('resource previews', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('retrieve: request options instead of params are passed correctly', async () => {
+  test.skip('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.loadBalancers.previews.retrieve(
+      cloudflare.loadBalancers.previews.get(
         '023e105f4ecef8ad9ca31a8372d0c353',
         'p1aba936b94213e5b8dca0c0dbf1f9cc',
         { path: '/_stainless_unknown_path' },

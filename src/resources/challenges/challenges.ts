@@ -10,10 +10,10 @@ export class Challenges extends APIResource {
 export namespace Challenges {
   export import Widgets = WidgetsAPI.Widgets;
   export import WidgetCreateResponse = WidgetsAPI.WidgetCreateResponse;
-  export import WidgetRetrieveResponse = WidgetsAPI.WidgetRetrieveResponse;
   export import WidgetUpdateResponse = WidgetsAPI.WidgetUpdateResponse;
   export import WidgetListResponse = WidgetsAPI.WidgetListResponse;
   export import WidgetDeleteResponse = WidgetsAPI.WidgetDeleteResponse;
+  export import WidgetGetResponse = WidgetsAPI.WidgetGetResponse;
   export import WidgetRotateSecretResponse = WidgetsAPI.WidgetRotateSecretResponse;
   export import WidgetCreateParams = WidgetsAPI.WidgetCreateParams;
   export import WidgetUpdateParams = WidgetsAPI.WidgetUpdateParams;

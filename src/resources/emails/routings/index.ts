@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
-  AddressRetrieveResponse,
   AddressDeleteResponse,
   AddressEmailRoutingDestinationAddressesCreateADestinationAddressResponse,
   AddressEmailRoutingDestinationAddressesListDestinationAddressesResponse,
+  AddressGetResponse,
   AddressEmailRoutingDestinationAddressesCreateADestinationAddressParams,
   AddressEmailRoutingDestinationAddressesListDestinationAddressesParams,
   Addresses,
@@ -14,11 +14,11 @@ export { DisableEmailRoutingSettingsDisableEmailRoutingResponse, Disables } from
 export { EnableEmailRoutingSettingsEnableEmailRoutingResponse, Enables } from './enables';
 export { RoutingEmailRoutingSettingsGetEmailRoutingSettingsResponse, Routings } from './routings';
 export {
-  RuleRetrieveResponse,
   RuleUpdateResponse,
   RuleDeleteResponse,
   RuleEmailRoutingRoutingRulesCreateRoutingRuleResponse,
   RuleEmailRoutingRoutingRulesListRoutingRulesResponse,
+  RuleGetResponse,
   RuleUpdateParams,
   RuleEmailRoutingRoutingRulesCreateRoutingRuleParams,
   RuleEmailRoutingRoutingRulesListRoutingRulesParams,

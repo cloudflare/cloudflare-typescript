@@ -1,0 +1,15 @@
+// File generated from our OpenAPI spec by Stainless.
+
+import { APIResource } from 'cloudflare/resource';
+import * as AggregatesAPI from 'cloudflare/resources/spectrums/analytics/aggregates/aggregates';
+import * as EventsAPI from 'cloudflare/resources/spectrums/analytics/events/events';
+
+export class Analytics extends APIResource {
+  aggregates: AggregatesAPI.Aggregates = new AggregatesAPI.Aggregates(this._client);
+  events: EventsAPI.Events = new EventsAPI.Events(this._client);
+}
+
+export namespace Analytics {
+  export import Aggregates = AggregatesAPI.Aggregates;
+  export import Events = EventsAPI.Events;
+}

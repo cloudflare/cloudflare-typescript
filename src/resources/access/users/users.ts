@@ -84,10 +84,10 @@ export namespace UserListResponse {
 export namespace Users {
   export import UserListResponse = UsersAPI.UserListResponse;
   export import ActiveSessions = ActiveSessionsAPI.ActiveSessions;
-  export import ActiveSessionRetrieveResponse = ActiveSessionsAPI.ActiveSessionRetrieveResponse;
   export import ActiveSessionListResponse = ActiveSessionsAPI.ActiveSessionListResponse;
+  export import ActiveSessionGetResponse = ActiveSessionsAPI.ActiveSessionGetResponse;
   export import LastSeenIdentity = LastSeenIdentityAPI.LastSeenIdentity;
-  export import LastSeenIdentityRetrieveResponse = LastSeenIdentityAPI.LastSeenIdentityRetrieveResponse;
+  export import LastSeenIdentityGetResponse = LastSeenIdentityAPI.LastSeenIdentityGetResponse;
   export import FailedLogins = FailedLoginsAPI.FailedLogins;
   export import FailedLoginZeroTrustUsersGetFailedLoginsResponse = FailedLoginsAPI.FailedLoginZeroTrustUsersGetFailedLoginsResponse;
 }

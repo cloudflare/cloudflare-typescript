@@ -10,33 +10,30 @@ export class Summary extends APIResource {
    * Get a summary of bandwidth, latency, jitter and packet loss, from the previous
    * 90 days of Cloudflare Speed Test data.
    */
-  retrieve(
-    query?: SummaryRetrieveParams,
+  get(query?: SummaryGetParams, options?: Core.RequestOptions): Core.APIPromise<SummaryGetResponse>;
+  get(options?: Core.RequestOptions): Core.APIPromise<SummaryGetResponse>;
+  get(
+    query: SummaryGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SummaryRetrieveResponse>;
-  retrieve(options?: Core.RequestOptions): Core.APIPromise<SummaryRetrieveResponse>;
-  retrieve(
-    query: SummaryRetrieveParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SummaryRetrieveResponse> {
+  ): Core.APIPromise<SummaryGetResponse> {
     if (isRequestOptions(query)) {
-      return this.retrieve({}, query);
+      return this.get({}, query);
     }
     return (
       this._client.get('/radar/quality/speed/summary', { query, ...options }) as Core.APIPromise<{
-        result: SummaryRetrieveResponse;
+        result: SummaryGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface SummaryRetrieveResponse {
-  meta: SummaryRetrieveResponse.Meta;
+export interface SummaryGetResponse {
+  meta: SummaryGetResponse.Meta;
 
-  summary_0: SummaryRetrieveResponse.Summary0;
+  summary_0: SummaryGetResponse.Summary0;
 }
 
-export namespace SummaryRetrieveResponse {
+export namespace SummaryGetResponse {
   export interface Meta {
     dateRange: Array<Meta.DateRange>;
 
@@ -102,7 +99,7 @@ export namespace SummaryRetrieveResponse {
   }
 }
 
-export interface SummaryRetrieveParams {
+export interface SummaryGetParams {
   /**
    * Array of comma separated list of ASNs, start with `-` to exclude from results.
    * For example, `-174, 3356` excludes results from AS174, but includes results from
@@ -134,6 +131,6 @@ export interface SummaryRetrieveParams {
 }
 
 export namespace Summary {
-  export import SummaryRetrieveResponse = SummaryAPI.SummaryRetrieveResponse;
-  export import SummaryRetrieveParams = SummaryAPI.SummaryRetrieveParams;
+  export import SummaryGetResponse = SummaryAPI.SummaryGetResponse;
+  export import SummaryGetParams = SummaryAPI.SummaryGetParams;
 }

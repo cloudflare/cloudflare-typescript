@@ -2,42 +2,25 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as BgpPrefixesAPI from 'cloudflare/resources/addressing/prefixes/bgp-prefixes';
+import * as BGPPrefixesAPI from 'cloudflare/resources/addressing/prefixes/bgp-prefixes';
 
-export class BgpPrefixes extends APIResource {
-  /**
-   * Retrieve a single BGP Prefix according to its identifier
-   */
-  retrieve(
-    accountIdentifier: string,
-    prefixIdentifier: string,
-    bgpPrefixIdentifier: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<BgpPrefixRetrieveResponse> {
-    return (
-      this._client.get(
-        `/accounts/${accountIdentifier}/addressing/prefixes/${prefixIdentifier}/bgp/prefixes/${bgpPrefixIdentifier}`,
-        options,
-      ) as Core.APIPromise<{ result: BgpPrefixRetrieveResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
+export class BGPPrefixes extends APIResource {
   /**
    * Update the properties of a BGP Prefix, such as the on demand advertisement
    * status (advertised or withdrawn).
    */
   update(
-    accountIdentifier: string,
-    prefixIdentifier: string,
-    bgpPrefixIdentifier: string,
-    body: BgpPrefixUpdateParams,
+    accountId: string,
+    prefixId: string,
+    bgpPrefixId: string,
+    body: BGPPrefixUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<BgpPrefixUpdateResponse> {
+  ): Core.APIPromise<BGPPrefixUpdateResponse> {
     return (
       this._client.patch(
-        `/accounts/${accountIdentifier}/addressing/prefixes/${prefixIdentifier}/bgp/prefixes/${bgpPrefixIdentifier}`,
+        `/accounts/${accountId}/addressing/prefixes/${prefixId}/bgp/prefixes/${bgpPrefixId}`,
         { body, ...options },
-      ) as Core.APIPromise<{ result: BgpPrefixUpdateResponse }>
+      ) as Core.APIPromise<{ result: BGPPrefixUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -48,20 +31,37 @@ export class BgpPrefixes extends APIResource {
    * Prefixes.
    */
   list(
-    accountIdentifier: string,
-    prefixIdentifier: string,
+    accountId: string,
+    prefixId: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<BgpPrefixListResponse | null> {
+  ): Core.APIPromise<BGPPrefixListResponse | null> {
     return (
       this._client.get(
-        `/accounts/${accountIdentifier}/addressing/prefixes/${prefixIdentifier}/bgp/prefixes`,
+        `/accounts/${accountId}/addressing/prefixes/${prefixId}/bgp/prefixes`,
         options,
-      ) as Core.APIPromise<{ result: BgpPrefixListResponse | null }>
+      ) as Core.APIPromise<{ result: BGPPrefixListResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Retrieve a single BGP Prefix according to its identifier
+   */
+  get(
+    accountId: string,
+    prefixId: string,
+    bgpPrefixId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<BGPPrefixGetResponse> {
+    return (
+      this._client.get(
+        `/accounts/${accountId}/addressing/prefixes/${prefixId}/bgp/prefixes/${bgpPrefixId}`,
+        options,
+      ) as Core.APIPromise<{ result: BGPPrefixGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface BgpPrefixRetrieveResponse {
+export interface BGPPrefixUpdateResponse {
   /**
    * Identifier
    */
@@ -72,7 +72,7 @@ export interface BgpPrefixRetrieveResponse {
    */
   asn?: number | null;
 
-  bgp_signal_opts?: BgpPrefixRetrieveResponse.BgpSignalOpts;
+  bgp_signal_opts?: BGPPrefixUpdateResponse.BGPSignalOpts;
 
   /**
    * IP Prefix in Classless Inter-Domain Routing format.
@@ -83,11 +83,11 @@ export interface BgpPrefixRetrieveResponse {
 
   modified_at?: string;
 
-  on_demand?: BgpPrefixRetrieveResponse.OnDemand;
+  on_demand?: BGPPrefixUpdateResponse.OnDemand;
 }
 
-export namespace BgpPrefixRetrieveResponse {
-  export interface BgpSignalOpts {
+export namespace BGPPrefixUpdateResponse {
+  export interface BGPSignalOpts {
     /**
      * Whether control of advertisement of the prefix to the Internet is enabled to be
      * performed via BGP signal
@@ -128,77 +128,10 @@ export namespace BgpPrefixRetrieveResponse {
   }
 }
 
-export interface BgpPrefixUpdateResponse {
-  /**
-   * Identifier
-   */
-  id?: string;
+export type BGPPrefixListResponse = Array<BGPPrefixListResponse.BGPPrefixListResponseItem>;
 
-  /**
-   * Autonomous System Number (ASN) the prefix will be advertised under.
-   */
-  asn?: number | null;
-
-  bgp_signal_opts?: BgpPrefixUpdateResponse.BgpSignalOpts;
-
-  /**
-   * IP Prefix in Classless Inter-Domain Routing format.
-   */
-  cidr?: string;
-
-  created_at?: string;
-
-  modified_at?: string;
-
-  on_demand?: BgpPrefixUpdateResponse.OnDemand;
-}
-
-export namespace BgpPrefixUpdateResponse {
-  export interface BgpSignalOpts {
-    /**
-     * Whether control of advertisement of the prefix to the Internet is enabled to be
-     * performed via BGP signal
-     */
-    enabled?: boolean;
-
-    /**
-     * Last time BGP signaling control was toggled. This field is null if BGP signaling
-     * has never been enabled.
-     */
-    modified_at?: string | null;
-  }
-
-  export interface OnDemand {
-    /**
-     * Prefix advertisement status to the Internet. This field is only not 'null' if on
-     * demand is enabled.
-     */
-    advertised?: boolean | null;
-
-    /**
-     * Last time the advertisement status was changed. This field is only not 'null' if
-     * on demand is enabled.
-     */
-    advertised_modified_at?: string | null;
-
-    /**
-     * Whether advertisement of the prefix to the Internet may be dynamically enabled
-     * or disabled.
-     */
-    on_demand_enabled?: boolean;
-
-    /**
-     * Whether advertisement status of the prefix is locked, meaning it cannot be
-     * changed.
-     */
-    on_demand_locked?: boolean;
-  }
-}
-
-export type BgpPrefixListResponse = Array<BgpPrefixListResponse.BgpPrefixListResponseItem>;
-
-export namespace BgpPrefixListResponse {
-  export interface BgpPrefixListResponseItem {
+export namespace BGPPrefixListResponse {
+  export interface BGPPrefixListResponseItem {
     /**
      * Identifier
      */
@@ -209,7 +142,7 @@ export namespace BgpPrefixListResponse {
      */
     asn?: number | null;
 
-    bgp_signal_opts?: BgpPrefixListResponseItem.BgpSignalOpts;
+    bgp_signal_opts?: BGPPrefixListResponseItem.BGPSignalOpts;
 
     /**
      * IP Prefix in Classless Inter-Domain Routing format.
@@ -220,11 +153,11 @@ export namespace BgpPrefixListResponse {
 
     modified_at?: string;
 
-    on_demand?: BgpPrefixListResponseItem.OnDemand;
+    on_demand?: BGPPrefixListResponseItem.OnDemand;
   }
 
-  export namespace BgpPrefixListResponseItem {
-    export interface BgpSignalOpts {
+  export namespace BGPPrefixListResponseItem {
+    export interface BGPSignalOpts {
       /**
        * Whether control of advertisement of the prefix to the Internet is enabled to be
        * performed via BGP signal
@@ -266,19 +199,86 @@ export namespace BgpPrefixListResponse {
   }
 }
 
-export interface BgpPrefixUpdateParams {
-  on_demand?: BgpPrefixUpdateParams.OnDemand;
+export interface BGPPrefixGetResponse {
+  /**
+   * Identifier
+   */
+  id?: string;
+
+  /**
+   * Autonomous System Number (ASN) the prefix will be advertised under.
+   */
+  asn?: number | null;
+
+  bgp_signal_opts?: BGPPrefixGetResponse.BGPSignalOpts;
+
+  /**
+   * IP Prefix in Classless Inter-Domain Routing format.
+   */
+  cidr?: string;
+
+  created_at?: string;
+
+  modified_at?: string;
+
+  on_demand?: BGPPrefixGetResponse.OnDemand;
 }
 
-export namespace BgpPrefixUpdateParams {
+export namespace BGPPrefixGetResponse {
+  export interface BGPSignalOpts {
+    /**
+     * Whether control of advertisement of the prefix to the Internet is enabled to be
+     * performed via BGP signal
+     */
+    enabled?: boolean;
+
+    /**
+     * Last time BGP signaling control was toggled. This field is null if BGP signaling
+     * has never been enabled.
+     */
+    modified_at?: string | null;
+  }
+
+  export interface OnDemand {
+    /**
+     * Prefix advertisement status to the Internet. This field is only not 'null' if on
+     * demand is enabled.
+     */
+    advertised?: boolean | null;
+
+    /**
+     * Last time the advertisement status was changed. This field is only not 'null' if
+     * on demand is enabled.
+     */
+    advertised_modified_at?: string | null;
+
+    /**
+     * Whether advertisement of the prefix to the Internet may be dynamically enabled
+     * or disabled.
+     */
+    on_demand_enabled?: boolean;
+
+    /**
+     * Whether advertisement status of the prefix is locked, meaning it cannot be
+     * changed.
+     */
+    on_demand_locked?: boolean;
+  }
+}
+
+export interface BGPPrefixUpdateParams {
+  on_demand?: BGPPrefixUpdateParams.OnDemand;
+}
+
+export namespace BGPPrefixUpdateParams {
   export interface OnDemand {
     advertised?: boolean;
   }
 }
 
-export namespace BgpPrefixes {
-  export import BgpPrefixRetrieveResponse = BgpPrefixesAPI.BgpPrefixRetrieveResponse;
-  export import BgpPrefixUpdateResponse = BgpPrefixesAPI.BgpPrefixUpdateResponse;
-  export import BgpPrefixListResponse = BgpPrefixesAPI.BgpPrefixListResponse;
-  export import BgpPrefixUpdateParams = BgpPrefixesAPI.BgpPrefixUpdateParams;
+export namespace BGPPrefixes {
+  export import BGPPrefixUpdateResponse = BGPPrefixesAPI.BGPPrefixUpdateResponse;
+  export import BGPPrefixListResponse = BGPPrefixesAPI.BGPPrefixListResponse;
+  export import BGPPrefixGetResponse = BGPPrefixesAPI.BGPPrefixGetResponse;
+  export import BGPPrefixUpdateParams = BGPPrefixesAPI.BGPPrefixUpdateParams;
 }

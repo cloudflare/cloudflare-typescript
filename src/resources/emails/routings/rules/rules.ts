@@ -10,22 +10,6 @@ export class Rules extends APIResource {
   catchAlls: CatchAllsAPI.CatchAlls = new CatchAllsAPI.CatchAlls(this._client);
 
   /**
-   * Get information for a specific routing rule already created.
-   */
-  retrieve(
-    zoneIdentifier: string,
-    ruleIdentifier: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleRetrieveResponse> {
-    return (
-      this._client.get(
-        `/zones/${zoneIdentifier}/email/routing/rules/${ruleIdentifier}`,
-        options,
-      ) as Core.APIPromise<{ result: RuleRetrieveResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Update actions and matches, or enable/disable specific routing rules.
    */
   update(
@@ -103,76 +87,21 @@ export class Rules extends APIResource {
       }) as Core.APIPromise<{ result: RuleEmailRoutingRoutingRulesListRoutingRulesResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
-}
-
-export interface RuleRetrieveResponse {
-  /**
-   * Routing rule identifier.
-   */
-  id?: string;
 
   /**
-   * List actions patterns.
+   * Get information for a specific routing rule already created.
    */
-  actions?: Array<RuleRetrieveResponse.Action>;
-
-  /**
-   * Routing rule status.
-   */
-  enabled?: true | false;
-
-  /**
-   * Matching patterns to forward to your actions.
-   */
-  matchers?: Array<RuleRetrieveResponse.Matcher>;
-
-  /**
-   * Routing rule name.
-   */
-  name?: string;
-
-  /**
-   * Priority of the routing rule.
-   */
-  priority?: number;
-
-  /**
-   * Routing rule tag. (Deprecated, replaced by routing rule identifier)
-   */
-  tag?: string;
-}
-
-export namespace RuleRetrieveResponse {
-  /**
-   * Actions pattern.
-   */
-  export interface Action {
-    /**
-     * Type of supported action.
-     */
-    type: 'drop' | 'forward' | 'worker';
-
-    value: Array<string>;
-  }
-
-  /**
-   * Matching pattern to forward your actions.
-   */
-  export interface Matcher {
-    /**
-     * Field for type matcher.
-     */
-    field: 'to';
-
-    /**
-     * Type of matcher.
-     */
-    type: 'literal';
-
-    /**
-     * Value for matcher.
-     */
-    value: string;
+  get(
+    zoneIdentifier: string,
+    ruleIdentifier: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RuleGetResponse> {
+    return (
+      this._client.get(
+        `/zones/${zoneIdentifier}/email/routing/rules/${ruleIdentifier}`,
+        options,
+      ) as Core.APIPromise<{ result: RuleGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -465,6 +394,77 @@ export namespace RuleEmailRoutingRoutingRulesListRoutingRulesResponse {
   }
 }
 
+export interface RuleGetResponse {
+  /**
+   * Routing rule identifier.
+   */
+  id?: string;
+
+  /**
+   * List actions patterns.
+   */
+  actions?: Array<RuleGetResponse.Action>;
+
+  /**
+   * Routing rule status.
+   */
+  enabled?: true | false;
+
+  /**
+   * Matching patterns to forward to your actions.
+   */
+  matchers?: Array<RuleGetResponse.Matcher>;
+
+  /**
+   * Routing rule name.
+   */
+  name?: string;
+
+  /**
+   * Priority of the routing rule.
+   */
+  priority?: number;
+
+  /**
+   * Routing rule tag. (Deprecated, replaced by routing rule identifier)
+   */
+  tag?: string;
+}
+
+export namespace RuleGetResponse {
+  /**
+   * Actions pattern.
+   */
+  export interface Action {
+    /**
+     * Type of supported action.
+     */
+    type: 'drop' | 'forward' | 'worker';
+
+    value: Array<string>;
+  }
+
+  /**
+   * Matching pattern to forward your actions.
+   */
+  export interface Matcher {
+    /**
+     * Field for type matcher.
+     */
+    field: 'to';
+
+    /**
+     * Type of matcher.
+     */
+    type: 'literal';
+
+    /**
+     * Value for matcher.
+     */
+    value: string;
+  }
+}
+
 export interface RuleUpdateParams {
   /**
    * List actions patterns.
@@ -605,11 +605,11 @@ export interface RuleEmailRoutingRoutingRulesListRoutingRulesParams {
 }
 
 export namespace Rules {
-  export import RuleRetrieveResponse = RulesAPI.RuleRetrieveResponse;
   export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
   export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
   export import RuleEmailRoutingRoutingRulesCreateRoutingRuleResponse = RulesAPI.RuleEmailRoutingRoutingRulesCreateRoutingRuleResponse;
   export import RuleEmailRoutingRoutingRulesListRoutingRulesResponse = RulesAPI.RuleEmailRoutingRoutingRulesListRoutingRulesResponse;
+  export import RuleGetResponse = RulesAPI.RuleGetResponse;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
   export import RuleEmailRoutingRoutingRulesCreateRoutingRuleParams = RulesAPI.RuleEmailRoutingRoutingRulesCreateRoutingRuleParams;
   export import RuleEmailRoutingRoutingRulesListRoutingRulesParams = RulesAPI.RuleEmailRoutingRoutingRulesListRoutingRulesParams;

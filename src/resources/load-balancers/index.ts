@@ -2,40 +2,38 @@
 
 export {
   LoadBalancerCreateResponse,
-  LoadBalancerRetrieveResponse,
   LoadBalancerUpdateResponse,
   LoadBalancerListResponse,
   LoadBalancerDeleteResponse,
+  LoadBalancerGetResponse,
   LoadBalancerCreateParams,
   LoadBalancerUpdateParams,
   LoadBalancers,
 } from './load-balancers';
 export {
-  MonitorRetrieveResponse,
+  MonitorCreateResponse,
   MonitorUpdateResponse,
+  MonitorListResponse,
   MonitorDeleteResponse,
-  MonitorAccountLoadBalancerMonitorsCreateMonitorResponse,
-  MonitorAccountLoadBalancerMonitorsListMonitorsResponse,
+  MonitorGetResponse,
+  MonitorCreateParams,
   MonitorUpdateParams,
-  MonitorAccountLoadBalancerMonitorsCreateMonitorParams,
   Monitors,
 } from './monitors/index';
 export {
-  PoolRetrieveResponse,
+  PoolCreateResponse,
   PoolUpdateResponse,
+  PoolListResponse,
   PoolDeleteResponse,
-  PoolAccountLoadBalancerPoolsCreatePoolResponse,
-  PoolAccountLoadBalancerPoolsListPoolsResponse,
-  PoolAccountLoadBalancerPoolsPatchPoolsResponse,
+  PoolGetResponse,
+  PoolCreateParams,
   PoolUpdateParams,
-  PoolAccountLoadBalancerPoolsCreatePoolParams,
-  PoolAccountLoadBalancerPoolsListPoolsParams,
-  PoolAccountLoadBalancerPoolsPatchPoolsParams,
+  PoolListParams,
   Pools,
 } from './pools/index';
-export { PreviewRetrieveResponse, Previews } from './previews';
+export { PreviewGetResponse, Previews } from './previews';
 export {
-  RegionRetrieveResponse,
+  RegionGetResponse,
   RegionLoadBalancerRegionsListRegionsResponse,
   RegionLoadBalancerRegionsListRegionsParams,
   Regions,

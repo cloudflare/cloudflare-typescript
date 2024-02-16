@@ -13,8 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource histogram', () => {
   // skipped: tests are disabled for the time being
-  test.skip('retrieve', async () => {
-    const responsePromise = cloudflare.radar.quality.speed.histogram.retrieve();
+  test.skip('get', async () => {
+    const responsePromise = cloudflare.radar.quality.speed.histogram.get();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -25,18 +25,18 @@ describe('resource histogram', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('retrieve: request options instead of params are passed correctly', async () => {
+  test.skip('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.quality.speed.histogram.retrieve({ path: '/_stainless_unknown_path' }),
+      cloudflare.radar.quality.speed.histogram.get({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('retrieve: request options and params are passed correctly', async () => {
+  test.skip('get: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.quality.speed.histogram.retrieve(
+      cloudflare.radar.quality.speed.histogram.get(
         {
           asn: ['string', 'string', 'string'],
           bucketSize: 0,

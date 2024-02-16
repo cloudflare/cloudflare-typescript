@@ -2,8 +2,8 @@
 
 export { Dispatchers } from './dispatchers';
 export {
-  ScriptRetrieveResponse,
   ScriptUpdateResponse,
+  ScriptGetResponse,
   ScriptUpdateParams,
   ScriptDeleteParams,
   Scripts,

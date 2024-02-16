@@ -83,19 +83,19 @@ export namespace Routings {
   export import Enables = EnablesAPI.Enables;
   export import EnableEmailRoutingSettingsEnableEmailRoutingResponse = EnablesAPI.EnableEmailRoutingSettingsEnableEmailRoutingResponse;
   export import Rules = RulesAPI.Rules;
-  export import RuleRetrieveResponse = RulesAPI.RuleRetrieveResponse;
   export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
   export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
   export import RuleEmailRoutingRoutingRulesCreateRoutingRuleResponse = RulesAPI.RuleEmailRoutingRoutingRulesCreateRoutingRuleResponse;
   export import RuleEmailRoutingRoutingRulesListRoutingRulesResponse = RulesAPI.RuleEmailRoutingRoutingRulesListRoutingRulesResponse;
+  export import RuleGetResponse = RulesAPI.RuleGetResponse;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
   export import RuleEmailRoutingRoutingRulesCreateRoutingRuleParams = RulesAPI.RuleEmailRoutingRoutingRulesCreateRoutingRuleParams;
   export import RuleEmailRoutingRoutingRulesListRoutingRulesParams = RulesAPI.RuleEmailRoutingRoutingRulesListRoutingRulesParams;
   export import Addresses = AddressesAPI.Addresses;
-  export import AddressRetrieveResponse = AddressesAPI.AddressRetrieveResponse;
   export import AddressDeleteResponse = AddressesAPI.AddressDeleteResponse;
   export import AddressEmailRoutingDestinationAddressesCreateADestinationAddressResponse = AddressesAPI.AddressEmailRoutingDestinationAddressesCreateADestinationAddressResponse;
   export import AddressEmailRoutingDestinationAddressesListDestinationAddressesResponse = AddressesAPI.AddressEmailRoutingDestinationAddressesListDestinationAddressesResponse;
+  export import AddressGetResponse = AddressesAPI.AddressGetResponse;
   export import AddressEmailRoutingDestinationAddressesCreateADestinationAddressParams = AddressesAPI.AddressEmailRoutingDestinationAddressesCreateADestinationAddressParams;
   export import AddressEmailRoutingDestinationAddressesListDestinationAddressesParams = AddressesAPI.AddressEmailRoutingDestinationAddressesListDestinationAddressesParams;
 }

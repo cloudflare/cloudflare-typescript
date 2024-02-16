@@ -3,10 +3,10 @@
 export { Challenges } from './challenges';
 export {
   WidgetCreateResponse,
-  WidgetRetrieveResponse,
   WidgetUpdateResponse,
   WidgetListResponse,
   WidgetDeleteResponse,
+  WidgetGetResponse,
   WidgetRotateSecretResponse,
   WidgetCreateParams,
   WidgetUpdateParams,

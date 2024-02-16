@@ -9,17 +9,17 @@ export class TracerouteTests extends APIResource {
    * Get test details and aggregate performance metrics for an traceroute test for a
    * given time period between 1 hour and 7 days.
    */
-  retrieve(
+  get(
     accountId: string,
     testId: string,
-    query: TracerouteTestRetrieveParams,
+    query: TracerouteTestGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TracerouteTestRetrieveResponse> {
+  ): Core.APIPromise<TracerouteTestGetResponse> {
     return (
       this._client.get(`/accounts/${accountId}/dex/traceroute-tests/${testId}`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: TracerouteTestRetrieveResponse }>
+      }) as Core.APIPromise<{ result: TracerouteTestGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -59,7 +59,7 @@ export class TracerouteTests extends APIResource {
   }
 }
 
-export interface TracerouteTestRetrieveResponse {
+export interface TracerouteTestGetResponse {
   /**
    * The host of the Traceroute synthetic application test
    */
@@ -77,12 +77,12 @@ export interface TracerouteTestRetrieveResponse {
    */
   name: string;
 
-  tracerouteStats?: TracerouteTestRetrieveResponse.TracerouteStats | null;
+  tracerouteStats?: TracerouteTestGetResponse.TracerouteStats | null;
 
-  tracerouteStatsByColo?: Array<TracerouteTestRetrieveResponse.TracerouteStatsByColo>;
+  tracerouteStatsByColo?: Array<TracerouteTestGetResponse.TracerouteStatsByColo>;
 }
 
-export namespace TracerouteTestRetrieveResponse {
+export namespace TracerouteTestGetResponse {
   export interface TracerouteStats {
     availabilityPct: TracerouteStats.AvailabilityPct;
 
@@ -492,7 +492,7 @@ export namespace TracerouteTestPercentilesResponse {
   }
 }
 
-export interface TracerouteTestRetrieveParams {
+export interface TracerouteTestGetParams {
   /**
    * Time interval for aggregate time slots.
    */
@@ -568,10 +568,10 @@ export interface TracerouteTestPercentilesParams {
 }
 
 export namespace TracerouteTests {
-  export import TracerouteTestRetrieveResponse = TracerouteTestsAPI.TracerouteTestRetrieveResponse;
+  export import TracerouteTestGetResponse = TracerouteTestsAPI.TracerouteTestGetResponse;
   export import TracerouteTestNetworkPathResponse = TracerouteTestsAPI.TracerouteTestNetworkPathResponse;
   export import TracerouteTestPercentilesResponse = TracerouteTestsAPI.TracerouteTestPercentilesResponse;
-  export import TracerouteTestRetrieveParams = TracerouteTestsAPI.TracerouteTestRetrieveParams;
+  export import TracerouteTestGetParams = TracerouteTestsAPI.TracerouteTestGetParams;
   export import TracerouteTestNetworkPathParams = TracerouteTestsAPI.TracerouteTestNetworkPathParams;
   export import TracerouteTestPercentilesParams = TracerouteTestsAPI.TracerouteTestPercentilesParams;
 }

@@ -6,21 +6,6 @@ import * as BookmarksAPI from 'cloudflare/resources/access/bookmarks';
 
 export class Bookmarks extends APIResource {
   /**
-   * Fetches a single Bookmark application.
-   */
-  retrieve(
-    identifier: unknown,
-    uuid: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<BookmarkRetrieveResponse> {
-    return (
-      this._client.get(`/accounts/${identifier}/access/bookmarks/${uuid}`, options) as Core.APIPromise<{
-        result: BookmarkRetrieveResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Updates a configured Bookmark application.
    */
   update(
@@ -63,37 +48,21 @@ export class Bookmarks extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
-}
-
-export interface BookmarkRetrieveResponse {
-  /**
-   * The unique identifier for the Bookmark application.
-   */
-  id?: unknown;
 
   /**
-   * Displays the application in the App Launcher.
+   * Fetches a single Bookmark application.
    */
-  app_launcher_visible?: boolean;
-
-  created_at?: string;
-
-  /**
-   * The domain of the Bookmark application.
-   */
-  domain?: string;
-
-  /**
-   * The image URL for the logo shown in the App Launcher dashboard.
-   */
-  logo_url?: string;
-
-  /**
-   * The name of the Bookmark application.
-   */
-  name?: string;
-
-  updated_at?: string;
+  get(
+    identifier: unknown,
+    uuid: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<BookmarkGetResponse> {
+    return (
+      this._client.get(`/accounts/${identifier}/access/bookmarks/${uuid}`, options) as Core.APIPromise<{
+        result: BookmarkGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
 export interface BookmarkUpdateResponse {
@@ -170,9 +139,40 @@ export namespace BookmarkAccessBookmarkApplicationsDeprecatedListBookmarkApplica
   }
 }
 
+export interface BookmarkGetResponse {
+  /**
+   * The unique identifier for the Bookmark application.
+   */
+  id?: unknown;
+
+  /**
+   * Displays the application in the App Launcher.
+   */
+  app_launcher_visible?: boolean;
+
+  created_at?: string;
+
+  /**
+   * The domain of the Bookmark application.
+   */
+  domain?: string;
+
+  /**
+   * The image URL for the logo shown in the App Launcher dashboard.
+   */
+  logo_url?: string;
+
+  /**
+   * The name of the Bookmark application.
+   */
+  name?: string;
+
+  updated_at?: string;
+}
+
 export namespace Bookmarks {
-  export import BookmarkRetrieveResponse = BookmarksAPI.BookmarkRetrieveResponse;
   export import BookmarkUpdateResponse = BookmarksAPI.BookmarkUpdateResponse;
   export import BookmarkDeleteResponse = BookmarksAPI.BookmarkDeleteResponse;
   export import BookmarkAccessBookmarkApplicationsDeprecatedListBookmarkApplicationsResponse = BookmarksAPI.BookmarkAccessBookmarkApplicationsDeprecatedListBookmarkApplicationsResponse;
+  export import BookmarkGetResponse = BookmarksAPI.BookmarkGetResponse;
 }

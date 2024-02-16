@@ -13,33 +13,6 @@ const cloudflare = new Cloudflare({
 
 describe('resource bookmarks', () => {
   // skipped: tests are disabled for the time being
-  test.skip('retrieve', async () => {
-    const responsePromise = cloudflare.access.bookmarks.retrieve(
-      '699d98642c564d2e855e9661899b7252',
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('retrieve: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.access.bookmarks.retrieve(
-        '699d98642c564d2e855e9661899b7252',
-        'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
   test.skip('update', async () => {
     const responsePromise = cloudflare.access.bookmarks.update(
       '699d98642c564d2e855e9661899b7252',
@@ -90,6 +63,33 @@ describe('resource bookmarks', () => {
     await expect(
       cloudflare.access.bookmarks.accessBookmarkApplicationsDeprecatedListBookmarkApplications(
         '699d98642c564d2e855e9661899b7252',
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get', async () => {
+    const responsePromise = cloudflare.access.bookmarks.get(
+      '699d98642c564d2e855e9661899b7252',
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.access.bookmarks.get(
+        '699d98642c564d2e855e9661899b7252',
+        'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);

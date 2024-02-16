@@ -2,4 +2,4 @@
 
 export { ContentUpdateResponse, ContentUpdateParams, Content } from './content';
 export { Scripts } from './scripts';
-export { SettingRetrieveResponse, SettingUpdateResponse, SettingUpdateParams, Settings } from './settings';
+export { SettingUpdateResponse, SettingGetResponse, SettingUpdateParams, Settings } from './settings';

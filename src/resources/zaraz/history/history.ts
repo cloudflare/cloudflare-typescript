@@ -846,6 +846,6 @@ export namespace History {
   export import HistoryUpdateParams = HistoryAPI.HistoryUpdateParams;
   export import HistoryListParams = HistoryAPI.HistoryListParams;
   export import Configs = ConfigsAPI.Configs;
-  export import ConfigRetrieveResponse = ConfigsAPI.ConfigRetrieveResponse;
-  export import ConfigRetrieveParams = ConfigsAPI.ConfigRetrieveParams;
+  export import ConfigGetResponse = ConfigsAPI.ConfigGetResponse;
+  export import ConfigGetParams = ConfigsAPI.ConfigGetParams;
 }

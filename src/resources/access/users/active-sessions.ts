@@ -6,23 +6,6 @@ import * as ActiveSessionsAPI from 'cloudflare/resources/access/users/active-ses
 
 export class ActiveSessions extends APIResource {
   /**
-   * Get an active session for a single user.
-   */
-  retrieve(
-    identifier: string,
-    id: string,
-    nonce: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ActiveSessionRetrieveResponse> {
-    return (
-      this._client.get(
-        `/accounts/${identifier}/access/users/${id}/active_sessions/${nonce}`,
-        options,
-      ) as Core.APIPromise<{ result: ActiveSessionRetrieveResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Get active sessions for a single user.
    */
   list(
@@ -37,9 +20,64 @@ export class ActiveSessions extends APIResource {
       ) as Core.APIPromise<{ result: ActiveSessionListResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Get an active session for a single user.
+   */
+  get(
+    identifier: string,
+    id: string,
+    nonce: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ActiveSessionGetResponse> {
+    return (
+      this._client.get(
+        `/accounts/${identifier}/access/users/${id}/active_sessions/${nonce}`,
+        options,
+      ) as Core.APIPromise<{ result: ActiveSessionGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
-export interface ActiveSessionRetrieveResponse {
+export type ActiveSessionListResponse = Array<ActiveSessionListResponse.ActiveSessionListResponseItem>;
+
+export namespace ActiveSessionListResponse {
+  export interface ActiveSessionListResponseItem {
+    expiration?: number;
+
+    metadata?: ActiveSessionListResponseItem.Metadata;
+
+    name?: string;
+  }
+
+  export namespace ActiveSessionListResponseItem {
+    export interface Metadata {
+      apps?: Record<string, Metadata.Apps>;
+
+      expires?: number;
+
+      iat?: number;
+
+      nonce?: string;
+
+      ttl?: number;
+    }
+
+    export namespace Metadata {
+      export interface Apps {
+        hostname?: string;
+
+        name?: string;
+
+        type?: string;
+
+        uid?: string;
+      }
+    }
+  }
+}
+
+export interface ActiveSessionGetResponse {
   account_id?: string;
 
   auth_status?: string;
@@ -48,17 +86,17 @@ export interface ActiveSessionRetrieveResponse {
 
   device_id?: string;
 
-  device_sessions?: Record<string, ActiveSessionRetrieveResponse.DeviceSessions>;
+  device_sessions?: Record<string, ActiveSessionGetResponse.DeviceSessions>;
 
-  devicePosture?: Record<string, ActiveSessionRetrieveResponse.DevicePosture>;
+  devicePosture?: Record<string, ActiveSessionGetResponse.DevicePosture>;
 
   email?: string;
 
-  geo?: ActiveSessionRetrieveResponse.Geo;
+  geo?: ActiveSessionGetResponse.Geo;
 
   iat?: number;
 
-  idp?: ActiveSessionRetrieveResponse.Idp;
+  idp?: ActiveSessionGetResponse.Idp;
 
   ip?: string;
 
@@ -68,7 +106,7 @@ export interface ActiveSessionRetrieveResponse {
 
   isActive?: boolean;
 
-  mtls_auth?: ActiveSessionRetrieveResponse.MtlsAuth;
+  mtls_auth?: ActiveSessionGetResponse.MtlsAuth;
 
   service_token_id?: string;
 
@@ -79,7 +117,7 @@ export interface ActiveSessionRetrieveResponse {
   version?: number;
 }
 
-export namespace ActiveSessionRetrieveResponse {
+export namespace ActiveSessionGetResponse {
   export interface DeviceSessions {
     last_authenticated?: number;
   }
@@ -135,45 +173,7 @@ export namespace ActiveSessionRetrieveResponse {
   }
 }
 
-export type ActiveSessionListResponse = Array<ActiveSessionListResponse.ActiveSessionListResponseItem>;
-
-export namespace ActiveSessionListResponse {
-  export interface ActiveSessionListResponseItem {
-    expiration?: number;
-
-    metadata?: ActiveSessionListResponseItem.Metadata;
-
-    name?: string;
-  }
-
-  export namespace ActiveSessionListResponseItem {
-    export interface Metadata {
-      apps?: Record<string, Metadata.Apps>;
-
-      expires?: number;
-
-      iat?: number;
-
-      nonce?: string;
-
-      ttl?: number;
-    }
-
-    export namespace Metadata {
-      export interface Apps {
-        hostname?: string;
-
-        name?: string;
-
-        type?: string;
-
-        uid?: string;
-      }
-    }
-  }
-}
-
 export namespace ActiveSessions {
-  export import ActiveSessionRetrieveResponse = ActiveSessionsAPI.ActiveSessionRetrieveResponse;
   export import ActiveSessionListResponse = ActiveSessionsAPI.ActiveSessionListResponse;
+  export import ActiveSessionGetResponse = ActiveSessionsAPI.ActiveSessionGetResponse;
 }

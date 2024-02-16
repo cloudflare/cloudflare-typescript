@@ -13,12 +13,11 @@ const cloudflare = new Cloudflare({
 
 describe('resource references', () => {
   // skipped: tests are disabled for the time being
-  test.skip('accountLoadBalancerPoolsListPoolReferences', async () => {
-    const responsePromise =
-      cloudflare.loadBalancers.pools.references.accountLoadBalancerPoolsListPoolReferences(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        '17b5962d775c646f3f9725cbc7a53df4',
-      );
+  test.skip('list', async () => {
+    const responsePromise = cloudflare.loadBalancers.pools.references.list(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '17b5962d775c646f3f9725cbc7a53df4',
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -29,10 +28,10 @@ describe('resource references', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('accountLoadBalancerPoolsListPoolReferences: request options instead of params are passed correctly', async () => {
+  test.skip('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.loadBalancers.pools.references.accountLoadBalancerPoolsListPoolReferences(
+      cloudflare.loadBalancers.pools.references.list(
         '023e105f4ecef8ad9ca31a8372d0c353',
         '17b5962d775c646f3f9725cbc7a53df4',
         { path: '/_stainless_unknown_path' },

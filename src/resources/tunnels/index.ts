@@ -2,10 +2,10 @@
 
 export { ConnectionDeleteResponse, ConnectionDeleteParams, Connections } from './connections';
 export {
-  TunnelRetrieveResponse,
   TunnelDeleteResponse,
   TunnelArgoTunnelCreateAnArgoTunnelResponse,
   TunnelArgoTunnelListArgoTunnelsResponse,
+  TunnelGetResponse,
   TunnelDeleteParams,
   TunnelArgoTunnelCreateAnArgoTunnelParams,
   TunnelArgoTunnelListArgoTunnelsParams,

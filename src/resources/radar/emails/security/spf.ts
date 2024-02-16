@@ -3,18 +3,18 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
-import * as SpfAPI from 'cloudflare/resources/radar/emails/security/spf';
+import * as SPFAPI from 'cloudflare/resources/radar/emails/security/spf';
 
-export class Spf extends APIResource {
+export class SPF extends APIResource {
   /**
    * Percentage distribution of emails classified per SPF validation over time.
    */
-  list(query?: SpfListParams, options?: Core.RequestOptions): Core.APIPromise<SpfListResponse>;
-  list(options?: Core.RequestOptions): Core.APIPromise<SpfListResponse>;
+  list(query?: SPFListParams, options?: Core.RequestOptions): Core.APIPromise<SPFListResponse>;
+  list(options?: Core.RequestOptions): Core.APIPromise<SPFListResponse>;
   list(
-    query: SpfListParams | Core.RequestOptions = {},
+    query: SPFListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SpfListResponse> {
+  ): Core.APIPromise<SPFListResponse> {
     if (isRequestOptions(query)) {
       return this.list({}, query);
     }
@@ -22,18 +22,18 @@ export class Spf extends APIResource {
       this._client.get('/radar/email/security/timeseries_groups/spf', {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: SpfListResponse }>
+      }) as Core.APIPromise<{ result: SPFListResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface SpfListResponse {
+export interface SPFListResponse {
   meta: unknown;
 
-  serie_0: SpfListResponse.Serie0;
+  serie_0: SPFListResponse.Serie0;
 }
 
-export namespace SpfListResponse {
+export namespace SPFListResponse {
   export interface Serie0 {
     FAIL: Array<string>;
 
@@ -43,7 +43,7 @@ export namespace SpfListResponse {
   }
 }
 
-export interface SpfListParams {
+export interface SPFListParams {
   /**
    * Aggregation interval results should be returned in (for example, in 15 minutes
    * or 1 hour intervals). Refer to
@@ -124,7 +124,7 @@ export interface SpfListParams {
   name?: Array<string>;
 }
 
-export namespace Spf {
-  export import SpfListResponse = SpfAPI.SpfListResponse;
-  export import SpfListParams = SpfAPI.SpfListParams;
+export namespace SPF {
+  export import SPFListResponse = SPFAPI.SPFListResponse;
+  export import SPFListParams = SPFAPI.SPFListParams;
 }

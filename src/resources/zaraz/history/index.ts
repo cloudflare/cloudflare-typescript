@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless.
 
-export { ConfigRetrieveResponse, ConfigRetrieveParams, Configs } from './configs';
+export { ConfigGetResponse, ConfigGetParams, Configs } from './configs';
 export {
   HistoryUpdateResponse,
   HistoryListResponse,

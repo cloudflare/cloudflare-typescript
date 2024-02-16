@@ -6,22 +6,6 @@ import * as DatabaseAPI from 'cloudflare/resources/d1/database';
 
 export class Database extends APIResource {
   /**
-   * Returns the specified D1 database.
-   */
-  retrieve(
-    accountIdentifier: string,
-    databaseIdentifier: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DatabaseRetrieveResponse> {
-    return (
-      this._client.get(
-        `/accounts/${accountIdentifier}/d1/database/${databaseIdentifier}`,
-        options,
-      ) as Core.APIPromise<{ result: DatabaseRetrieveResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Deletes the specified D1 database.
    */
   delete(
@@ -34,6 +18,22 @@ export class Database extends APIResource {
         `/accounts/${accountIdentifier}/d1/database/${databaseIdentifier}`,
         options,
       ) as Core.APIPromise<{ result: DatabaseDeleteResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Returns the specified D1 database.
+   */
+  get(
+    accountIdentifier: string,
+    databaseIdentifier: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DatabaseGetResponse> {
+    return (
+      this._client.get(
+        `/accounts/${accountIdentifier}/d1/database/${databaseIdentifier}`,
+        options,
+      ) as Core.APIPromise<{ result: DatabaseGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -55,7 +55,9 @@ export class Database extends APIResource {
   }
 }
 
-export interface DatabaseRetrieveResponse {
+export type DatabaseDeleteResponse = unknown | string;
+
+export interface DatabaseGetResponse {
   /**
    * Specifies the timestamp the resource was created as an ISO8601 string.
    */
@@ -74,8 +76,6 @@ export interface DatabaseRetrieveResponse {
 
   version?: string;
 }
-
-export type DatabaseDeleteResponse = unknown | string;
 
 export type DatabaseQueryResponse = Array<DatabaseQueryResponse.DatabaseQueryResponseItem>;
 
@@ -114,8 +114,8 @@ export interface DatabaseQueryParams {
 }
 
 export namespace Database {
-  export import DatabaseRetrieveResponse = DatabaseAPI.DatabaseRetrieveResponse;
   export import DatabaseDeleteResponse = DatabaseAPI.DatabaseDeleteResponse;
+  export import DatabaseGetResponse = DatabaseAPI.DatabaseGetResponse;
   export import DatabaseQueryResponse = DatabaseAPI.DatabaseQueryResponse;
   export import DatabaseQueryParams = DatabaseAPI.DatabaseQueryParams;
 }

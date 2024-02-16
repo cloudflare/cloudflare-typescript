@@ -8,10 +8,10 @@ export class Workflow extends APIResource {
   /**
    * Gets Zaraz workflow for a zone.
    */
-  retrieve(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<WorkflowRetrieveResponse> {
+  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<WorkflowGetResponse> {
     return (
       this._client.get(`/zones/${zoneId}/settings/zaraz/workflow`, options) as Core.APIPromise<{
-        result: WorkflowRetrieveResponse;
+        result: WorkflowGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -20,8 +20,8 @@ export class Workflow extends APIResource {
 /**
  * Zaraz workflow
  */
-export type WorkflowRetrieveResponse = 'realtime' | 'preview';
+export type WorkflowGetResponse = 'realtime' | 'preview';
 
 export namespace Workflow {
-  export import WorkflowRetrieveResponse = WorkflowAPI.WorkflowRetrieveResponse;
+  export import WorkflowGetResponse = WorkflowAPI.WorkflowGetResponse;
 }

@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
-  ConnectivitySettingRetrieveResponse,
   ConnectivitySettingUpdateResponse,
+  ConnectivitySettingGetResponse,
   ConnectivitySettingUpdateParams,
   ConnectivitySettings,
 } from './connectivity-settings';

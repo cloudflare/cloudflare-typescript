@@ -2,58 +2,58 @@
 
 export { Access } from './access';
 export {
-  AppRetrieveResponse,
+  AppCreateResponse,
   AppUpdateResponse,
+  AppListResponse,
   AppDeleteResponse,
-  AppAccessApplicationsAddAnApplicationResponse,
-  AppAccessApplicationsListAccessApplicationsResponse,
+  AppGetResponse,
+  AppCreateParams,
   AppUpdateParams,
-  AppAccessApplicationsAddAnApplicationParams,
   Apps,
 } from './apps/index';
 export {
-  BookmarkRetrieveResponse,
   BookmarkUpdateResponse,
   BookmarkDeleteResponse,
   BookmarkAccessBookmarkApplicationsDeprecatedListBookmarkApplicationsResponse,
+  BookmarkGetResponse,
   Bookmarks,
 } from './bookmarks';
 export {
-  CertificateRetrieveResponse,
   CertificateUpdateResponse,
   CertificateDeleteResponse,
   CertificateAccessMTLSAuthenticationAddAnMTLSCertificateResponse,
   CertificateAccessMTLSAuthenticationListMTLSCertificatesResponse,
+  CertificateGetResponse,
   CertificateUpdateParams,
   CertificateAccessMTLSAuthenticationAddAnMTLSCertificateParams,
   Certificates,
 } from './certificates/index';
 export {
   CustomPageCreateResponse,
-  CustomPageRetrieveResponse,
   CustomPageUpdateResponse,
   CustomPageListResponse,
   CustomPageDeleteResponse,
+  CustomPageGetResponse,
   CustomPageCreateParams,
   CustomPageUpdateParams,
   CustomPages,
 } from './custom-pages';
 export {
-  GroupRetrieveResponse,
   GroupUpdateResponse,
   GroupDeleteResponse,
   GroupAccessGroupsCreateAnAccessGroupResponse,
   GroupAccessGroupsListAccessGroupsResponse,
+  GroupGetResponse,
   GroupUpdateParams,
   GroupAccessGroupsCreateAnAccessGroupParams,
   Groups,
 } from './groups';
 export {
-  IdentityProviderRetrieveResponse,
   IdentityProviderUpdateResponse,
   IdentityProviderDeleteResponse,
   IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderResponse,
   IdentityProviderAccessIdentityProvidersListAccessIdentityProvidersResponse,
+  IdentityProviderGetResponse,
   IdentityProviderUpdateParams,
   IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams,
   IdentityProviders,
@@ -72,7 +72,7 @@ export {
   OrganizationZeroTrustOrganizationCreateYourZeroTrustOrganizationParams,
   OrganizationZeroTrustOrganizationUpdateYourZeroTrustOrganizationParams,
   Organizations,
-} from './organizations';
+} from './organizations/index';
 export {
   SeatZeroTrustSeatsUpdateAUserSeatResponse,
   SeatZeroTrustSeatsUpdateAUserSeatParams,

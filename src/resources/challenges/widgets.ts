@@ -25,22 +25,6 @@ export class Widgets extends APIResource {
   }
 
   /**
-   * Show a single challenge widget configuration.
-   */
-  retrieve(
-    accountIdentifier: string,
-    sitekey: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<WidgetRetrieveResponse> {
-    return (
-      this._client.get(
-        `/accounts/${accountIdentifier}/challenges/widgets/${sitekey}`,
-        options,
-      ) as Core.APIPromise<{ result: WidgetRetrieveResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Update the configuration of a widget.
    */
   update(
@@ -99,6 +83,22 @@ export class Widgets extends APIResource {
   }
 
   /**
+   * Show a single challenge widget configuration.
+   */
+  get(
+    accountIdentifier: string,
+    sitekey: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<WidgetGetResponse> {
+    return (
+      this._client.get(
+        `/accounts/${accountIdentifier}/challenges/widgets/${sitekey}`,
+        options,
+      ) as Core.APIPromise<{ result: WidgetGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Generate a new secret key for this widget. If `invalidate_immediately` is set to
    * `false`, the previous secret remains valid for 2 hours.
    *
@@ -123,67 +123,6 @@ export class Widgets extends APIResource {
  * A Turnstile widget's detailed configuration
  */
 export interface WidgetCreateResponse {
-  /**
-   * If bot_fight_mode is set to `true`, Cloudflare issues computationally expensive
-   * challenges in response to malicious bots (ENT only).
-   */
-  bot_fight_mode: boolean;
-
-  /**
-   * If Turnstile is embedded on a Cloudflare site and the widget should grant
-   * challenge clearance, this setting can determine the clearance level to be set
-   */
-  clearance_level: 'no_clearance' | 'jschallenge' | 'managed' | 'interactive';
-
-  /**
-   * When the widget was created.
-   */
-  created_on: string;
-
-  domains: Array<string>;
-
-  /**
-   * Widget Mode
-   */
-  mode: 'non-interactive' | 'invisible' | 'managed';
-
-  /**
-   * When the widget was modified.
-   */
-  modified_on: string;
-
-  /**
-   * Human readable widget name. Not unique. Cloudflare suggests that you set this to
-   * a meaningful string to make it easier to identify your widget, and where it is
-   * used.
-   */
-  name: string;
-
-  /**
-   * Do not show any Cloudflare branding on the widget (ENT only).
-   */
-  offlabel: boolean;
-
-  /**
-   * Region where this widget can be used.
-   */
-  region: 'world';
-
-  /**
-   * Secret key for this widget.
-   */
-  secret: string;
-
-  /**
-   * Widget item identifier tag.
-   */
-  sitekey: string;
-}
-
-/**
- * A Turnstile widget's detailed configuration
- */
-export interface WidgetRetrieveResponse {
   /**
    * If bot_fight_mode is set to `true`, Cloudflare issues computationally expensive
    * challenges in response to malicious bots (ENT only).
@@ -366,6 +305,67 @@ export namespace WidgetListResponse {
  * A Turnstile widget's detailed configuration
  */
 export interface WidgetDeleteResponse {
+  /**
+   * If bot_fight_mode is set to `true`, Cloudflare issues computationally expensive
+   * challenges in response to malicious bots (ENT only).
+   */
+  bot_fight_mode: boolean;
+
+  /**
+   * If Turnstile is embedded on a Cloudflare site and the widget should grant
+   * challenge clearance, this setting can determine the clearance level to be set
+   */
+  clearance_level: 'no_clearance' | 'jschallenge' | 'managed' | 'interactive';
+
+  /**
+   * When the widget was created.
+   */
+  created_on: string;
+
+  domains: Array<string>;
+
+  /**
+   * Widget Mode
+   */
+  mode: 'non-interactive' | 'invisible' | 'managed';
+
+  /**
+   * When the widget was modified.
+   */
+  modified_on: string;
+
+  /**
+   * Human readable widget name. Not unique. Cloudflare suggests that you set this to
+   * a meaningful string to make it easier to identify your widget, and where it is
+   * used.
+   */
+  name: string;
+
+  /**
+   * Do not show any Cloudflare branding on the widget (ENT only).
+   */
+  offlabel: boolean;
+
+  /**
+   * Region where this widget can be used.
+   */
+  region: 'world';
+
+  /**
+   * Secret key for this widget.
+   */
+  secret: string;
+
+  /**
+   * Widget item identifier tag.
+   */
+  sitekey: string;
+}
+
+/**
+ * A Turnstile widget's detailed configuration
+ */
+export interface WidgetGetResponse {
   /**
    * If bot_fight_mode is set to `true`, Cloudflare issues computationally expensive
    * challenges in response to malicious bots (ENT only).
@@ -612,10 +612,10 @@ export interface WidgetRotateSecretParams {
 
 export namespace Widgets {
   export import WidgetCreateResponse = WidgetsAPI.WidgetCreateResponse;
-  export import WidgetRetrieveResponse = WidgetsAPI.WidgetRetrieveResponse;
   export import WidgetUpdateResponse = WidgetsAPI.WidgetUpdateResponse;
   export import WidgetListResponse = WidgetsAPI.WidgetListResponse;
   export import WidgetDeleteResponse = WidgetsAPI.WidgetDeleteResponse;
+  export import WidgetGetResponse = WidgetsAPI.WidgetGetResponse;
   export import WidgetRotateSecretResponse = WidgetsAPI.WidgetRotateSecretResponse;
   export import WidgetCreateParams = WidgetsAPI.WidgetCreateParams;
   export import WidgetUpdateParams = WidgetsAPI.WidgetUpdateParams;

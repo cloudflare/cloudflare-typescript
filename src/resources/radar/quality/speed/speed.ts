@@ -13,10 +13,10 @@ export class Speed extends APIResource {
 
 export namespace Speed {
   export import Histogram = HistogramAPI.Histogram;
-  export import HistogramRetrieveResponse = HistogramAPI.HistogramRetrieveResponse;
-  export import HistogramRetrieveParams = HistogramAPI.HistogramRetrieveParams;
+  export import HistogramGetResponse = HistogramAPI.HistogramGetResponse;
+  export import HistogramGetParams = HistogramAPI.HistogramGetParams;
   export import Summary = SummaryAPI.Summary;
-  export import SummaryRetrieveResponse = SummaryAPI.SummaryRetrieveResponse;
-  export import SummaryRetrieveParams = SummaryAPI.SummaryRetrieveParams;
+  export import SummaryGetResponse = SummaryAPI.SummaryGetResponse;
+  export import SummaryGetParams = SummaryAPI.SummaryGetParams;
   export import Top = TopAPI.Top;
 }

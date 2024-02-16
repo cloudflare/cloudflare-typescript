@@ -22,21 +22,6 @@ export class CustomPages extends APIResource {
   }
 
   /**
-   * Fetches a custom page and also returns its HTML.
-   */
-  retrieve(
-    identifier: string,
-    uuid: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomPageRetrieveResponse> {
-    return (
-      this._client.get(`/accounts/${identifier}/access/custom_pages/${uuid}`, options) as Core.APIPromise<{
-        result: CustomPageRetrieveResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Update a custom page
    */
   update(
@@ -78,40 +63,24 @@ export class CustomPages extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Fetches a custom page and also returns its HTML.
+   */
+  get(
+    identifier: string,
+    uuid: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CustomPageGetResponse> {
+    return (
+      this._client.get(`/accounts/${identifier}/access/custom_pages/${uuid}`, options) as Core.APIPromise<{
+        result: CustomPageGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
 export interface CustomPageCreateResponse {
-  /**
-   * Custom page name.
-   */
-  name: string;
-
-  /**
-   * Custom page type.
-   */
-  type: 'identity_denied' | 'forbidden';
-
-  /**
-   * Number of apps the custom page is assigned to.
-   */
-  app_count?: number;
-
-  created_at?: string;
-
-  /**
-   * UUID
-   */
-  uid?: string;
-
-  updated_at?: string;
-}
-
-export interface CustomPageRetrieveResponse {
-  /**
-   * Custom page HTML.
-   */
-  custom_html: string;
-
   /**
    * Custom page name.
    */
@@ -200,6 +169,37 @@ export interface CustomPageDeleteResponse {
   id?: string;
 }
 
+export interface CustomPageGetResponse {
+  /**
+   * Custom page HTML.
+   */
+  custom_html: string;
+
+  /**
+   * Custom page name.
+   */
+  name: string;
+
+  /**
+   * Custom page type.
+   */
+  type: 'identity_denied' | 'forbidden';
+
+  /**
+   * Number of apps the custom page is assigned to.
+   */
+  app_count?: number;
+
+  created_at?: string;
+
+  /**
+   * UUID
+   */
+  uid?: string;
+
+  updated_at?: string;
+}
+
 export interface CustomPageCreateParams {
   /**
    * Custom page HTML.
@@ -246,10 +246,10 @@ export interface CustomPageUpdateParams {
 
 export namespace CustomPages {
   export import CustomPageCreateResponse = CustomPagesAPI.CustomPageCreateResponse;
-  export import CustomPageRetrieveResponse = CustomPagesAPI.CustomPageRetrieveResponse;
   export import CustomPageUpdateResponse = CustomPagesAPI.CustomPageUpdateResponse;
   export import CustomPageListResponse = CustomPagesAPI.CustomPageListResponse;
   export import CustomPageDeleteResponse = CustomPagesAPI.CustomPageDeleteResponse;
+  export import CustomPageGetResponse = CustomPagesAPI.CustomPageGetResponse;
   export import CustomPageCreateParams = CustomPagesAPI.CustomPageCreateParams;
   export import CustomPageUpdateParams = CustomPagesAPI.CustomPageUpdateParams;
 }

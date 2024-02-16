@@ -17,19 +17,19 @@ export class Apps extends APIResource {
   policies: PoliciesAPI.Policies = new PoliciesAPI.Policies(this._client);
 
   /**
-   * Fetches information about an Access application.
+   * Adds a new application to Access.
    */
-  retrieve(
+  create(
     accountOrZone: string,
     accountOrZoneId: string,
-    appId: string | string,
+    body: AppCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AppRetrieveResponse> {
+  ): Core.APIPromise<AppCreateResponse> {
     return (
-      this._client.get(
-        `/${accountOrZone}/${accountOrZoneId}/access/apps/${appId}`,
-        options,
-      ) as Core.APIPromise<{ result: AppRetrieveResponse }>
+      this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/apps`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: AppCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -52,6 +52,21 @@ export class Apps extends APIResource {
   }
 
   /**
+   * Lists all Access applications in an account or zone.
+   */
+  list(
+    accountOrZone: string,
+    accountOrZoneId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AppListResponse | null> {
+    return (
+      this._client.get(`/${accountOrZone}/${accountOrZoneId}/access/apps`, options) as Core.APIPromise<{
+        result: AppListResponse | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Deletes an application from Access.
    */
   delete(
@@ -69,49 +84,34 @@ export class Apps extends APIResource {
   }
 
   /**
-   * Adds a new application to Access.
+   * Fetches information about an Access application.
    */
-  accessApplicationsAddAnApplication(
+  get(
     accountOrZone: string,
     accountOrZoneId: string,
-    body: AppAccessApplicationsAddAnApplicationParams,
+    appId: string | string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AppAccessApplicationsAddAnApplicationResponse> {
+  ): Core.APIPromise<AppGetResponse> {
     return (
-      this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/apps`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: AppAccessApplicationsAddAnApplicationResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Lists all Access applications in an account or zone.
-   */
-  accessApplicationsListAccessApplications(
-    accountOrZone: string,
-    accountOrZoneId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AppAccessApplicationsListAccessApplicationsResponse | null> {
-    return (
-      this._client.get(`/${accountOrZone}/${accountOrZoneId}/access/apps`, options) as Core.APIPromise<{
-        result: AppAccessApplicationsListAccessApplicationsResponse | null;
-      }>
+      this._client.get(
+        `/${accountOrZone}/${accountOrZoneId}/access/apps/${appId}`,
+        options,
+      ) as Core.APIPromise<{ result: AppGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type AppRetrieveResponse =
-  | AppRetrieveResponse.SelfHostedApplication
-  | AppRetrieveResponse.SaaSApplication
-  | AppRetrieveResponse.BrowserSSHApplication
-  | AppRetrieveResponse.BrowserVncApplication
-  | AppRetrieveResponse.AppLauncherApplication
-  | AppRetrieveResponse.DeviceEnrollmentPermissionsApplication
-  | AppRetrieveResponse.BrowserIsolationPermissionsApplication
-  | AppRetrieveResponse.BookmarkApplication;
+export type AppCreateResponse =
+  | AppCreateResponse.SelfHostedApplication
+  | AppCreateResponse.SaaSApplication
+  | AppCreateResponse.BrowserSSHApplication
+  | AppCreateResponse.BrowserVncApplication
+  | AppCreateResponse.AppLauncherApplication
+  | AppCreateResponse.DeviceEnrollmentPermissionsApplication
+  | AppCreateResponse.BrowserIsolationPermissionsApplication
+  | AppCreateResponse.BookmarkApplication;
 
-export namespace AppRetrieveResponse {
+export namespace AppCreateResponse {
   export interface SelfHostedApplication {
     /**
      * The primary hostname and path that Access will secure. If the app is visible in
@@ -2041,6 +2041,977 @@ export namespace AppUpdateResponse {
   }
 }
 
+export type AppListResponse = Array<
+  | AppListResponse.SelfHostedApplication
+  | AppListResponse.SaaSApplication
+  | AppListResponse.BrowserSSHApplication
+  | AppListResponse.BrowserVncApplication
+  | AppListResponse.AppLauncherApplication
+  | AppListResponse.DeviceEnrollmentPermissionsApplication
+  | AppListResponse.BrowserIsolationPermissionsApplication
+  | AppListResponse.BookmarkApplication
+>;
+
+export namespace AppListResponse {
+  export interface SelfHostedApplication {
+    /**
+     * The primary hostname and path that Access will secure. If the app is visible in
+     * the App Launcher dashboard, this is the domain that will be displayed.
+     */
+    domain: string;
+
+    /**
+     * The application type.
+     */
+    type: string;
+
+    /**
+     * UUID
+     */
+    id?: string;
+
+    /**
+     * When set to true, users can authenticate to this application using their WARP
+     * session. When set to false this application will always require direct IdP
+     * authentication. This setting always overrides the organization setting for WARP
+     * authentication.
+     */
+    allow_authenticate_via_warp?: boolean;
+
+    /**
+     * The identity providers your users can select when connecting to this
+     * application. Defaults to all IdPs configured in your account.
+     */
+    allowed_idps?: Array<string>;
+
+    /**
+     * Displays the application in the App Launcher.
+     */
+    app_launcher_visible?: boolean;
+
+    /**
+     * Audience tag.
+     */
+    aud?: string;
+
+    /**
+     * When set to `true`, users skip the identity provider selection step during
+     * login. You must specify only one identity provider in allowed_idps.
+     */
+    auto_redirect_to_identity?: boolean;
+
+    cors_headers?: SelfHostedApplication.CorsHeaders;
+
+    created_at?: string;
+
+    /**
+     * The custom error message shown to a user when they are denied access to the
+     * application.
+     */
+    custom_deny_message?: string;
+
+    /**
+     * The custom URL a user is redirected to when they are denied access to the
+     * application when failing identity-based rules.
+     */
+    custom_deny_url?: string;
+
+    /**
+     * The custom URL a user is redirected to when they are denied access to the
+     * application when failing non-identity rules.
+     */
+    custom_non_identity_deny_url?: string;
+
+    /**
+     * The custom pages that will be displayed when applicable for this application
+     */
+    custom_pages?: Array<string>;
+
+    /**
+     * Enables the binding cookie, which increases security against compromised
+     * authorization tokens and CSRF attacks.
+     */
+    enable_binding_cookie?: boolean;
+
+    /**
+     * Enables the HttpOnly cookie attribute, which increases security against XSS
+     * attacks.
+     */
+    http_only_cookie_attribute?: boolean;
+
+    /**
+     * The image URL for the logo shown in the App Launcher dashboard.
+     */
+    logo_url?: string;
+
+    /**
+     * The name of the application.
+     */
+    name?: string;
+
+    /**
+     * Enables cookie paths to scope an application's JWT to the application path. If
+     * disabled, the JWT will scope to the hostname by default
+     */
+    path_cookie_attribute?: boolean;
+
+    /**
+     * Sets the SameSite cookie setting, which provides increased security against CSRF
+     * attacks.
+     */
+    same_site_cookie_attribute?: string;
+
+    /**
+     * List of domains that Access will secure.
+     */
+    self_hosted_domains?: Array<string>;
+
+    /**
+     * Returns a 401 status code when the request is blocked by a Service Auth policy.
+     */
+    service_auth_401_redirect?: boolean;
+
+    /**
+     * The amount of time that tokens issued for this application will be valid. Must
+     * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
+     * s, m, h.
+     */
+    session_duration?: string;
+
+    /**
+     * Enables automatic authentication through cloudflared.
+     */
+    skip_interstitial?: boolean;
+
+    /**
+     * The tags you want assigned to an application. Tags are used to filter
+     * applications in the App Launcher dashboard.
+     */
+    tags?: Array<string>;
+
+    updated_at?: string;
+  }
+
+  export namespace SelfHostedApplication {
+    export interface CorsHeaders {
+      /**
+       * Allows all HTTP request headers.
+       */
+      allow_all_headers?: boolean;
+
+      /**
+       * Allows all HTTP request methods.
+       */
+      allow_all_methods?: boolean;
+
+      /**
+       * Allows all origins.
+       */
+      allow_all_origins?: boolean;
+
+      /**
+       * When set to `true`, includes credentials (cookies, authorization headers, or TLS
+       * client certificates) with requests.
+       */
+      allow_credentials?: boolean;
+
+      /**
+       * Allowed HTTP request headers.
+       */
+      allowed_headers?: Array<unknown>;
+
+      /**
+       * Allowed HTTP request methods.
+       */
+      allowed_methods?: Array<
+        'GET' | 'POST' | 'HEAD' | 'PUT' | 'DELETE' | 'CONNECT' | 'OPTIONS' | 'TRACE' | 'PATCH'
+      >;
+
+      /**
+       * Allowed origins.
+       */
+      allowed_origins?: Array<unknown>;
+
+      /**
+       * The maximum number of seconds the results of a preflight request can be cached.
+       */
+      max_age?: number;
+    }
+  }
+
+  export interface SaaSApplication {
+    /**
+     * UUID
+     */
+    id?: string;
+
+    /**
+     * The identity providers your users can select when connecting to this
+     * application. Defaults to all IdPs configured in your account.
+     */
+    allowed_idps?: Array<string>;
+
+    /**
+     * Displays the application in the App Launcher.
+     */
+    app_launcher_visible?: boolean;
+
+    /**
+     * Audience tag.
+     */
+    aud?: string;
+
+    /**
+     * When set to `true`, users skip the identity provider selection step during
+     * login. You must specify only one identity provider in allowed_idps.
+     */
+    auto_redirect_to_identity?: boolean;
+
+    created_at?: string;
+
+    /**
+     * The custom pages that will be displayed when applicable for this application
+     */
+    custom_pages?: Array<string>;
+
+    /**
+     * The image URL for the logo shown in the App Launcher dashboard.
+     */
+    logo_url?: string;
+
+    /**
+     * The name of the application.
+     */
+    name?: string;
+
+    saas_app?: SaaSApplication.AccessSamlSaasApp | SaaSApplication.AccessOidcSaasApp;
+
+    /**
+     * The tags you want assigned to an application. Tags are used to filter
+     * applications in the App Launcher dashboard.
+     */
+    tags?: Array<string>;
+
+    /**
+     * The application type.
+     */
+    type?: string;
+
+    updated_at?: string;
+  }
+
+  export namespace SaaSApplication {
+    export interface AccessSamlSaasApp {
+      /**
+       * Optional identifier indicating the authentication protocol used for the saas
+       * app. Required for OIDC. Default if unset is "saml"
+       */
+      auth_type?: 'saml' | 'oidc';
+
+      /**
+       * The service provider's endpoint that is responsible for receiving and parsing a
+       * SAML assertion.
+       */
+      consumer_service_url?: string;
+
+      created_at?: string;
+
+      custom_attributes?: AccessSamlSaasApp.CustomAttributes;
+
+      /**
+       * The URL that the user will be redirected to after a successful login for IDP
+       * initiated logins.
+       */
+      default_relay_state?: string;
+
+      /**
+       * The unique identifier for your SaaS application.
+       */
+      idp_entity_id?: string;
+
+      /**
+       * The format of the name identifier sent to the SaaS application.
+       */
+      name_id_format?: 'id' | 'email';
+
+      /**
+       * A [JSONata](https://jsonata.org/) expression that transforms an application's
+       * user identities into a NameID value for its SAML assertion. This expression
+       * should evaluate to a singular string. The output of this expression can override
+       * the `name_id_format` setting.
+       */
+      name_id_transform_jsonata?: string;
+
+      /**
+       * The Access public certificate that will be used to verify your identity.
+       */
+      public_key?: string;
+
+      /**
+       * A globally unique name for an identity or service provider.
+       */
+      sp_entity_id?: string;
+
+      /**
+       * The endpoint where your SaaS application will send login requests.
+       */
+      sso_endpoint?: string;
+
+      updated_at?: string;
+    }
+
+    export namespace AccessSamlSaasApp {
+      export interface CustomAttributes {
+        /**
+         * The name of the attribute.
+         */
+        name?: string;
+
+        /**
+         * A globally unique name for an identity or service provider.
+         */
+        name_format?:
+          | 'urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified'
+          | 'urn:oasis:names:tc:SAML:2.0:attrname-format:basic'
+          | 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri';
+
+        source?: CustomAttributes.Source;
+      }
+
+      export namespace CustomAttributes {
+        export interface Source {
+          /**
+           * The name of the IdP attribute.
+           */
+          name?: string;
+        }
+      }
+    }
+
+    export interface AccessOidcSaasApp {
+      /**
+       * The URL where this applications tile redirects users
+       */
+      app_launcher_url?: string;
+
+      /**
+       * Identifier of the authentication protocol used for the saas app. Required for
+       * OIDC.
+       */
+      auth_type?: 'saml' | 'oidc';
+
+      /**
+       * The application client id
+       */
+      client_id?: string;
+
+      /**
+       * The application client secret, only returned on POST request.
+       */
+      client_secret?: string;
+
+      created_at?: string;
+
+      /**
+       * The OIDC flows supported by this application
+       */
+      grant_types?: Array<'authorization_code' | 'authorization_code_with_pkce'>;
+
+      /**
+       * A regex to filter Cloudflare groups returned in ID token and userinfo endpoint
+       */
+      group_filter_regex?: string;
+
+      /**
+       * The Access public certificate that will be used to verify your identity.
+       */
+      public_key?: string;
+
+      /**
+       * The permitted URL's for Cloudflare to return Authorization codes and Access/ID
+       * tokens
+       */
+      redirect_uris?: Array<string>;
+
+      /**
+       * Define the user information shared with access
+       */
+      scopes?: Array<'openid' | 'groups' | 'email' | 'profile'>;
+
+      updated_at?: string;
+    }
+  }
+
+  export interface BrowserSSHApplication {
+    /**
+     * The primary hostname and path that Access will secure. If the app is visible in
+     * the App Launcher dashboard, this is the domain that will be displayed.
+     */
+    domain: string;
+
+    /**
+     * The application type.
+     */
+    type: string;
+
+    /**
+     * UUID
+     */
+    id?: string;
+
+    /**
+     * When set to true, users can authenticate to this application using their WARP
+     * session. When set to false this application will always require direct IdP
+     * authentication. This setting always overrides the organization setting for WARP
+     * authentication.
+     */
+    allow_authenticate_via_warp?: boolean;
+
+    /**
+     * The identity providers your users can select when connecting to this
+     * application. Defaults to all IdPs configured in your account.
+     */
+    allowed_idps?: Array<string>;
+
+    /**
+     * Displays the application in the App Launcher.
+     */
+    app_launcher_visible?: boolean;
+
+    /**
+     * Audience tag.
+     */
+    aud?: string;
+
+    /**
+     * When set to `true`, users skip the identity provider selection step during
+     * login. You must specify only one identity provider in allowed_idps.
+     */
+    auto_redirect_to_identity?: boolean;
+
+    cors_headers?: BrowserSSHApplication.CorsHeaders;
+
+    created_at?: string;
+
+    /**
+     * The custom error message shown to a user when they are denied access to the
+     * application.
+     */
+    custom_deny_message?: string;
+
+    /**
+     * The custom URL a user is redirected to when they are denied access to the
+     * application when failing identity-based rules.
+     */
+    custom_deny_url?: string;
+
+    /**
+     * The custom URL a user is redirected to when they are denied access to the
+     * application when failing non-identity rules.
+     */
+    custom_non_identity_deny_url?: string;
+
+    /**
+     * The custom pages that will be displayed when applicable for this application
+     */
+    custom_pages?: Array<string>;
+
+    /**
+     * Enables the binding cookie, which increases security against compromised
+     * authorization tokens and CSRF attacks.
+     */
+    enable_binding_cookie?: boolean;
+
+    /**
+     * Enables the HttpOnly cookie attribute, which increases security against XSS
+     * attacks.
+     */
+    http_only_cookie_attribute?: boolean;
+
+    /**
+     * The image URL for the logo shown in the App Launcher dashboard.
+     */
+    logo_url?: string;
+
+    /**
+     * The name of the application.
+     */
+    name?: string;
+
+    /**
+     * Enables cookie paths to scope an application's JWT to the application path. If
+     * disabled, the JWT will scope to the hostname by default
+     */
+    path_cookie_attribute?: boolean;
+
+    /**
+     * Sets the SameSite cookie setting, which provides increased security against CSRF
+     * attacks.
+     */
+    same_site_cookie_attribute?: string;
+
+    /**
+     * List of domains that Access will secure.
+     */
+    self_hosted_domains?: Array<string>;
+
+    /**
+     * Returns a 401 status code when the request is blocked by a Service Auth policy.
+     */
+    service_auth_401_redirect?: boolean;
+
+    /**
+     * The amount of time that tokens issued for this application will be valid. Must
+     * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
+     * s, m, h.
+     */
+    session_duration?: string;
+
+    /**
+     * Enables automatic authentication through cloudflared.
+     */
+    skip_interstitial?: boolean;
+
+    /**
+     * The tags you want assigned to an application. Tags are used to filter
+     * applications in the App Launcher dashboard.
+     */
+    tags?: Array<string>;
+
+    updated_at?: string;
+  }
+
+  export namespace BrowserSSHApplication {
+    export interface CorsHeaders {
+      /**
+       * Allows all HTTP request headers.
+       */
+      allow_all_headers?: boolean;
+
+      /**
+       * Allows all HTTP request methods.
+       */
+      allow_all_methods?: boolean;
+
+      /**
+       * Allows all origins.
+       */
+      allow_all_origins?: boolean;
+
+      /**
+       * When set to `true`, includes credentials (cookies, authorization headers, or TLS
+       * client certificates) with requests.
+       */
+      allow_credentials?: boolean;
+
+      /**
+       * Allowed HTTP request headers.
+       */
+      allowed_headers?: Array<unknown>;
+
+      /**
+       * Allowed HTTP request methods.
+       */
+      allowed_methods?: Array<
+        'GET' | 'POST' | 'HEAD' | 'PUT' | 'DELETE' | 'CONNECT' | 'OPTIONS' | 'TRACE' | 'PATCH'
+      >;
+
+      /**
+       * Allowed origins.
+       */
+      allowed_origins?: Array<unknown>;
+
+      /**
+       * The maximum number of seconds the results of a preflight request can be cached.
+       */
+      max_age?: number;
+    }
+  }
+
+  export interface BrowserVncApplication {
+    /**
+     * The primary hostname and path that Access will secure. If the app is visible in
+     * the App Launcher dashboard, this is the domain that will be displayed.
+     */
+    domain: string;
+
+    /**
+     * The application type.
+     */
+    type: string;
+
+    /**
+     * UUID
+     */
+    id?: string;
+
+    /**
+     * When set to true, users can authenticate to this application using their WARP
+     * session. When set to false this application will always require direct IdP
+     * authentication. This setting always overrides the organization setting for WARP
+     * authentication.
+     */
+    allow_authenticate_via_warp?: boolean;
+
+    /**
+     * The identity providers your users can select when connecting to this
+     * application. Defaults to all IdPs configured in your account.
+     */
+    allowed_idps?: Array<string>;
+
+    /**
+     * Displays the application in the App Launcher.
+     */
+    app_launcher_visible?: boolean;
+
+    /**
+     * Audience tag.
+     */
+    aud?: string;
+
+    /**
+     * When set to `true`, users skip the identity provider selection step during
+     * login. You must specify only one identity provider in allowed_idps.
+     */
+    auto_redirect_to_identity?: boolean;
+
+    cors_headers?: BrowserVncApplication.CorsHeaders;
+
+    created_at?: string;
+
+    /**
+     * The custom error message shown to a user when they are denied access to the
+     * application.
+     */
+    custom_deny_message?: string;
+
+    /**
+     * The custom URL a user is redirected to when they are denied access to the
+     * application when failing identity-based rules.
+     */
+    custom_deny_url?: string;
+
+    /**
+     * The custom URL a user is redirected to when they are denied access to the
+     * application when failing non-identity rules.
+     */
+    custom_non_identity_deny_url?: string;
+
+    /**
+     * The custom pages that will be displayed when applicable for this application
+     */
+    custom_pages?: Array<string>;
+
+    /**
+     * Enables the binding cookie, which increases security against compromised
+     * authorization tokens and CSRF attacks.
+     */
+    enable_binding_cookie?: boolean;
+
+    /**
+     * Enables the HttpOnly cookie attribute, which increases security against XSS
+     * attacks.
+     */
+    http_only_cookie_attribute?: boolean;
+
+    /**
+     * The image URL for the logo shown in the App Launcher dashboard.
+     */
+    logo_url?: string;
+
+    /**
+     * The name of the application.
+     */
+    name?: string;
+
+    /**
+     * Enables cookie paths to scope an application's JWT to the application path. If
+     * disabled, the JWT will scope to the hostname by default
+     */
+    path_cookie_attribute?: boolean;
+
+    /**
+     * Sets the SameSite cookie setting, which provides increased security against CSRF
+     * attacks.
+     */
+    same_site_cookie_attribute?: string;
+
+    /**
+     * List of domains that Access will secure.
+     */
+    self_hosted_domains?: Array<string>;
+
+    /**
+     * Returns a 401 status code when the request is blocked by a Service Auth policy.
+     */
+    service_auth_401_redirect?: boolean;
+
+    /**
+     * The amount of time that tokens issued for this application will be valid. Must
+     * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
+     * s, m, h.
+     */
+    session_duration?: string;
+
+    /**
+     * Enables automatic authentication through cloudflared.
+     */
+    skip_interstitial?: boolean;
+
+    /**
+     * The tags you want assigned to an application. Tags are used to filter
+     * applications in the App Launcher dashboard.
+     */
+    tags?: Array<string>;
+
+    updated_at?: string;
+  }
+
+  export namespace BrowserVncApplication {
+    export interface CorsHeaders {
+      /**
+       * Allows all HTTP request headers.
+       */
+      allow_all_headers?: boolean;
+
+      /**
+       * Allows all HTTP request methods.
+       */
+      allow_all_methods?: boolean;
+
+      /**
+       * Allows all origins.
+       */
+      allow_all_origins?: boolean;
+
+      /**
+       * When set to `true`, includes credentials (cookies, authorization headers, or TLS
+       * client certificates) with requests.
+       */
+      allow_credentials?: boolean;
+
+      /**
+       * Allowed HTTP request headers.
+       */
+      allowed_headers?: Array<unknown>;
+
+      /**
+       * Allowed HTTP request methods.
+       */
+      allowed_methods?: Array<
+        'GET' | 'POST' | 'HEAD' | 'PUT' | 'DELETE' | 'CONNECT' | 'OPTIONS' | 'TRACE' | 'PATCH'
+      >;
+
+      /**
+       * Allowed origins.
+       */
+      allowed_origins?: Array<unknown>;
+
+      /**
+       * The maximum number of seconds the results of a preflight request can be cached.
+       */
+      max_age?: number;
+    }
+  }
+
+  export interface AppLauncherApplication {
+    /**
+     * The application type.
+     */
+    type: 'self_hosted' | 'saas' | 'ssh' | 'vnc' | 'app_launcher' | 'warp' | 'biso' | 'bookmark' | 'dash_sso';
+
+    /**
+     * UUID
+     */
+    id?: string;
+
+    /**
+     * The identity providers your users can select when connecting to this
+     * application. Defaults to all IdPs configured in your account.
+     */
+    allowed_idps?: Array<string>;
+
+    /**
+     * Audience tag.
+     */
+    aud?: string;
+
+    /**
+     * When set to `true`, users skip the identity provider selection step during
+     * login. You must specify only one identity provider in allowed_idps.
+     */
+    auto_redirect_to_identity?: boolean;
+
+    created_at?: string;
+
+    /**
+     * The primary hostname and path that Access will secure. If the app is visible in
+     * the App Launcher dashboard, this is the domain that will be displayed.
+     */
+    domain?: string;
+
+    /**
+     * The name of the application.
+     */
+    name?: string;
+
+    /**
+     * The amount of time that tokens issued for this application will be valid. Must
+     * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
+     * s, m, h.
+     */
+    session_duration?: string;
+
+    updated_at?: string;
+  }
+
+  export interface DeviceEnrollmentPermissionsApplication {
+    /**
+     * The application type.
+     */
+    type: 'self_hosted' | 'saas' | 'ssh' | 'vnc' | 'app_launcher' | 'warp' | 'biso' | 'bookmark' | 'dash_sso';
+
+    /**
+     * UUID
+     */
+    id?: string;
+
+    /**
+     * The identity providers your users can select when connecting to this
+     * application. Defaults to all IdPs configured in your account.
+     */
+    allowed_idps?: Array<string>;
+
+    /**
+     * Audience tag.
+     */
+    aud?: string;
+
+    /**
+     * When set to `true`, users skip the identity provider selection step during
+     * login. You must specify only one identity provider in allowed_idps.
+     */
+    auto_redirect_to_identity?: boolean;
+
+    created_at?: string;
+
+    /**
+     * The primary hostname and path that Access will secure. If the app is visible in
+     * the App Launcher dashboard, this is the domain that will be displayed.
+     */
+    domain?: string;
+
+    /**
+     * The name of the application.
+     */
+    name?: string;
+
+    /**
+     * The amount of time that tokens issued for this application will be valid. Must
+     * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
+     * s, m, h.
+     */
+    session_duration?: string;
+
+    updated_at?: string;
+  }
+
+  export interface BrowserIsolationPermissionsApplication {
+    /**
+     * The application type.
+     */
+    type: 'self_hosted' | 'saas' | 'ssh' | 'vnc' | 'app_launcher' | 'warp' | 'biso' | 'bookmark' | 'dash_sso';
+
+    /**
+     * UUID
+     */
+    id?: string;
+
+    /**
+     * The identity providers your users can select when connecting to this
+     * application. Defaults to all IdPs configured in your account.
+     */
+    allowed_idps?: Array<string>;
+
+    /**
+     * Audience tag.
+     */
+    aud?: string;
+
+    /**
+     * When set to `true`, users skip the identity provider selection step during
+     * login. You must specify only one identity provider in allowed_idps.
+     */
+    auto_redirect_to_identity?: boolean;
+
+    created_at?: string;
+
+    /**
+     * The primary hostname and path that Access will secure. If the app is visible in
+     * the App Launcher dashboard, this is the domain that will be displayed.
+     */
+    domain?: string;
+
+    /**
+     * The name of the application.
+     */
+    name?: string;
+
+    /**
+     * The amount of time that tokens issued for this application will be valid. Must
+     * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
+     * s, m, h.
+     */
+    session_duration?: string;
+
+    updated_at?: string;
+  }
+
+  export interface BookmarkApplication {
+    /**
+     * UUID
+     */
+    id?: string;
+
+    app_launcher_visible?: unknown;
+
+    /**
+     * Audience tag.
+     */
+    aud?: string;
+
+    created_at?: string;
+
+    /**
+     * The URL or domain of the bookmark.
+     */
+    domain?: unknown;
+
+    /**
+     * The image URL for the logo shown in the App Launcher dashboard.
+     */
+    logo_url?: string;
+
+    /**
+     * The name of the application.
+     */
+    name?: string;
+
+    /**
+     * The tags you want assigned to an application. Tags are used to filter
+     * applications in the App Launcher dashboard.
+     */
+    tags?: Array<string>;
+
+    /**
+     * The application type.
+     */
+    type?: string;
+
+    updated_at?: string;
+  }
+}
+
 export interface AppDeleteResponse {
   /**
    * UUID
@@ -2048,17 +3019,17 @@ export interface AppDeleteResponse {
   id?: string;
 }
 
-export type AppAccessApplicationsAddAnApplicationResponse =
-  | AppAccessApplicationsAddAnApplicationResponse.SelfHostedApplication
-  | AppAccessApplicationsAddAnApplicationResponse.SaaSApplication
-  | AppAccessApplicationsAddAnApplicationResponse.BrowserSSHApplication
-  | AppAccessApplicationsAddAnApplicationResponse.BrowserVncApplication
-  | AppAccessApplicationsAddAnApplicationResponse.AppLauncherApplication
-  | AppAccessApplicationsAddAnApplicationResponse.DeviceEnrollmentPermissionsApplication
-  | AppAccessApplicationsAddAnApplicationResponse.BrowserIsolationPermissionsApplication
-  | AppAccessApplicationsAddAnApplicationResponse.BookmarkApplication;
+export type AppGetResponse =
+  | AppGetResponse.SelfHostedApplication
+  | AppGetResponse.SaaSApplication
+  | AppGetResponse.BrowserSSHApplication
+  | AppGetResponse.BrowserVncApplication
+  | AppGetResponse.AppLauncherApplication
+  | AppGetResponse.DeviceEnrollmentPermissionsApplication
+  | AppGetResponse.BrowserIsolationPermissionsApplication
+  | AppGetResponse.BookmarkApplication;
 
-export namespace AppAccessApplicationsAddAnApplicationResponse {
+export namespace AppGetResponse {
   export interface SelfHostedApplication {
     /**
      * The primary hostname and path that Access will secure. If the app is visible in
@@ -3018,19 +3989,18 @@ export namespace AppAccessApplicationsAddAnApplicationResponse {
   }
 }
 
-export type AppAccessApplicationsListAccessApplicationsResponse = Array<
-  | AppAccessApplicationsListAccessApplicationsResponse.SelfHostedApplication
-  | AppAccessApplicationsListAccessApplicationsResponse.SaaSApplication
-  | AppAccessApplicationsListAccessApplicationsResponse.BrowserSSHApplication
-  | AppAccessApplicationsListAccessApplicationsResponse.BrowserVncApplication
-  | AppAccessApplicationsListAccessApplicationsResponse.AppLauncherApplication
-  | AppAccessApplicationsListAccessApplicationsResponse.DeviceEnrollmentPermissionsApplication
-  | AppAccessApplicationsListAccessApplicationsResponse.BrowserIsolationPermissionsApplication
-  | AppAccessApplicationsListAccessApplicationsResponse.BookmarkApplication
->;
+export type AppCreateParams =
+  | AppCreateParams.Variant0
+  | AppCreateParams.Variant1
+  | AppCreateParams.Variant2
+  | AppCreateParams.Variant3
+  | AppCreateParams.Variant4
+  | AppCreateParams.Variant5
+  | AppCreateParams.Variant6
+  | AppCreateParams.Variant7;
 
-export namespace AppAccessApplicationsListAccessApplicationsResponse {
-  export interface SelfHostedApplication {
+export namespace AppCreateParams {
+  export interface Variant0 {
     /**
      * The primary hostname and path that Access will secure. If the app is visible in
      * the App Launcher dashboard, this is the domain that will be displayed.
@@ -3041,11 +4011,6 @@ export namespace AppAccessApplicationsListAccessApplicationsResponse {
      * The application type.
      */
     type: string;
-
-    /**
-     * UUID
-     */
-    id?: string;
 
     /**
      * When set to true, users can authenticate to this application using their WARP
@@ -3067,19 +4032,12 @@ export namespace AppAccessApplicationsListAccessApplicationsResponse {
     app_launcher_visible?: boolean;
 
     /**
-     * Audience tag.
-     */
-    aud?: string;
-
-    /**
      * When set to `true`, users skip the identity provider selection step during
      * login. You must specify only one identity provider in allowed_idps.
      */
     auto_redirect_to_identity?: boolean;
 
-    cors_headers?: SelfHostedApplication.CorsHeaders;
-
-    created_at?: string;
+    cors_headers?: AppCreateParams.Variant0.CorsHeaders;
 
     /**
      * The custom error message shown to a user when they are denied access to the
@@ -3165,11 +4123,9 @@ export namespace AppAccessApplicationsListAccessApplicationsResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
-
-    updated_at?: string;
   }
 
-  export namespace SelfHostedApplication {
+  export namespace Variant0 {
     export interface CorsHeaders {
       /**
        * Allows all HTTP request headers.
@@ -3216,12 +4172,7 @@ export namespace AppAccessApplicationsListAccessApplicationsResponse {
     }
   }
 
-  export interface SaaSApplication {
-    /**
-     * UUID
-     */
-    id?: string;
-
+  export interface Variant1 {
     /**
      * The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
@@ -3234,17 +4185,10 @@ export namespace AppAccessApplicationsListAccessApplicationsResponse {
     app_launcher_visible?: boolean;
 
     /**
-     * Audience tag.
-     */
-    aud?: string;
-
-    /**
      * When set to `true`, users skip the identity provider selection step during
      * login. You must specify only one identity provider in allowed_idps.
      */
     auto_redirect_to_identity?: boolean;
-
-    created_at?: string;
 
     /**
      * The custom pages that will be displayed when applicable for this application
@@ -3261,7 +4205,7 @@ export namespace AppAccessApplicationsListAccessApplicationsResponse {
      */
     name?: string;
 
-    saas_app?: SaaSApplication.AccessSamlSaasApp | SaaSApplication.AccessOidcSaasApp;
+    saas_app?: AppCreateParams.Variant1.AccessSamlSaasApp | AppCreateParams.Variant1.AccessOidcSaasApp;
 
     /**
      * The tags you want assigned to an application. Tags are used to filter
@@ -3273,11 +4217,9 @@ export namespace AppAccessApplicationsListAccessApplicationsResponse {
      * The application type.
      */
     type?: string;
-
-    updated_at?: string;
   }
 
-  export namespace SaaSApplication {
+  export namespace Variant1 {
     export interface AccessSamlSaasApp {
       /**
        * Optional identifier indicating the authentication protocol used for the saas
@@ -3290,8 +4232,6 @@ export namespace AppAccessApplicationsListAccessApplicationsResponse {
        * SAML assertion.
        */
       consumer_service_url?: string;
-
-      created_at?: string;
 
       custom_attributes?: AccessSamlSaasApp.CustomAttributes;
 
@@ -3333,8 +4273,6 @@ export namespace AppAccessApplicationsListAccessApplicationsResponse {
        * The endpoint where your SaaS application will send login requests.
        */
       sso_endpoint?: string;
-
-      updated_at?: string;
     }
 
     export namespace AccessSamlSaasApp {
@@ -3387,8 +4325,6 @@ export namespace AppAccessApplicationsListAccessApplicationsResponse {
        */
       client_secret?: string;
 
-      created_at?: string;
-
       /**
        * The OIDC flows supported by this application
        */
@@ -3414,12 +4350,10 @@ export namespace AppAccessApplicationsListAccessApplicationsResponse {
        * Define the user information shared with access
        */
       scopes?: Array<'openid' | 'groups' | 'email' | 'profile'>;
-
-      updated_at?: string;
     }
   }
 
-  export interface BrowserSSHApplication {
+  export interface Variant2 {
     /**
      * The primary hostname and path that Access will secure. If the app is visible in
      * the App Launcher dashboard, this is the domain that will be displayed.
@@ -3430,11 +4364,6 @@ export namespace AppAccessApplicationsListAccessApplicationsResponse {
      * The application type.
      */
     type: string;
-
-    /**
-     * UUID
-     */
-    id?: string;
 
     /**
      * When set to true, users can authenticate to this application using their WARP
@@ -3456,19 +4385,12 @@ export namespace AppAccessApplicationsListAccessApplicationsResponse {
     app_launcher_visible?: boolean;
 
     /**
-     * Audience tag.
-     */
-    aud?: string;
-
-    /**
      * When set to `true`, users skip the identity provider selection step during
      * login. You must specify only one identity provider in allowed_idps.
      */
     auto_redirect_to_identity?: boolean;
 
-    cors_headers?: BrowserSSHApplication.CorsHeaders;
-
-    created_at?: string;
+    cors_headers?: AppCreateParams.Variant2.CorsHeaders;
 
     /**
      * The custom error message shown to a user when they are denied access to the
@@ -3554,11 +4476,9 @@ export namespace AppAccessApplicationsListAccessApplicationsResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
-
-    updated_at?: string;
   }
 
-  export namespace BrowserSSHApplication {
+  export namespace Variant2 {
     export interface CorsHeaders {
       /**
        * Allows all HTTP request headers.
@@ -3605,7 +4525,7 @@ export namespace AppAccessApplicationsListAccessApplicationsResponse {
     }
   }
 
-  export interface BrowserVncApplication {
+  export interface Variant3 {
     /**
      * The primary hostname and path that Access will secure. If the app is visible in
      * the App Launcher dashboard, this is the domain that will be displayed.
@@ -3616,11 +4536,6 @@ export namespace AppAccessApplicationsListAccessApplicationsResponse {
      * The application type.
      */
     type: string;
-
-    /**
-     * UUID
-     */
-    id?: string;
 
     /**
      * When set to true, users can authenticate to this application using their WARP
@@ -3642,19 +4557,12 @@ export namespace AppAccessApplicationsListAccessApplicationsResponse {
     app_launcher_visible?: boolean;
 
     /**
-     * Audience tag.
-     */
-    aud?: string;
-
-    /**
      * When set to `true`, users skip the identity provider selection step during
      * login. You must specify only one identity provider in allowed_idps.
      */
     auto_redirect_to_identity?: boolean;
 
-    cors_headers?: BrowserVncApplication.CorsHeaders;
-
-    created_at?: string;
+    cors_headers?: AppCreateParams.Variant3.CorsHeaders;
 
     /**
      * The custom error message shown to a user when they are denied access to the
@@ -3740,11 +4648,9 @@ export namespace AppAccessApplicationsListAccessApplicationsResponse {
      * applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
-
-    updated_at?: string;
   }
 
-  export namespace BrowserVncApplication {
+  export namespace Variant3 {
     export interface CorsHeaders {
       /**
        * Allows all HTTP request headers.
@@ -3791,16 +4697,11 @@ export namespace AppAccessApplicationsListAccessApplicationsResponse {
     }
   }
 
-  export interface AppLauncherApplication {
+  export interface Variant4 {
     /**
      * The application type.
      */
     type: 'self_hosted' | 'saas' | 'ssh' | 'vnc' | 'app_launcher' | 'warp' | 'biso' | 'bookmark' | 'dash_sso';
-
-    /**
-     * UUID
-     */
-    id?: string;
 
     /**
      * The identity providers your users can select when connecting to this
@@ -3809,28 +4710,10 @@ export namespace AppAccessApplicationsListAccessApplicationsResponse {
     allowed_idps?: Array<string>;
 
     /**
-     * Audience tag.
-     */
-    aud?: string;
-
-    /**
      * When set to `true`, users skip the identity provider selection step during
      * login. You must specify only one identity provider in allowed_idps.
      */
     auto_redirect_to_identity?: boolean;
-
-    created_at?: string;
-
-    /**
-     * The primary hostname and path that Access will secure. If the app is visible in
-     * the App Launcher dashboard, this is the domain that will be displayed.
-     */
-    domain?: string;
-
-    /**
-     * The name of the application.
-     */
-    name?: string;
 
     /**
      * The amount of time that tokens issued for this application will be valid. Must
@@ -3838,20 +4721,13 @@ export namespace AppAccessApplicationsListAccessApplicationsResponse {
      * s, m, h.
      */
     session_duration?: string;
-
-    updated_at?: string;
   }
 
-  export interface DeviceEnrollmentPermissionsApplication {
+  export interface Variant5 {
     /**
      * The application type.
      */
     type: 'self_hosted' | 'saas' | 'ssh' | 'vnc' | 'app_launcher' | 'warp' | 'biso' | 'bookmark' | 'dash_sso';
-
-    /**
-     * UUID
-     */
-    id?: string;
 
     /**
      * The identity providers your users can select when connecting to this
@@ -3860,28 +4736,10 @@ export namespace AppAccessApplicationsListAccessApplicationsResponse {
     allowed_idps?: Array<string>;
 
     /**
-     * Audience tag.
-     */
-    aud?: string;
-
-    /**
      * When set to `true`, users skip the identity provider selection step during
      * login. You must specify only one identity provider in allowed_idps.
      */
     auto_redirect_to_identity?: boolean;
-
-    created_at?: string;
-
-    /**
-     * The primary hostname and path that Access will secure. If the app is visible in
-     * the App Launcher dashboard, this is the domain that will be displayed.
-     */
-    domain?: string;
-
-    /**
-     * The name of the application.
-     */
-    name?: string;
 
     /**
      * The amount of time that tokens issued for this application will be valid. Must
@@ -3889,20 +4747,13 @@ export namespace AppAccessApplicationsListAccessApplicationsResponse {
      * s, m, h.
      */
     session_duration?: string;
-
-    updated_at?: string;
   }
 
-  export interface BrowserIsolationPermissionsApplication {
+  export interface Variant6 {
     /**
      * The application type.
      */
     type: 'self_hosted' | 'saas' | 'ssh' | 'vnc' | 'app_launcher' | 'warp' | 'biso' | 'bookmark' | 'dash_sso';
-
-    /**
-     * UUID
-     */
-    id?: string;
 
     /**
      * The identity providers your users can select when connecting to this
@@ -3911,28 +4762,10 @@ export namespace AppAccessApplicationsListAccessApplicationsResponse {
     allowed_idps?: Array<string>;
 
     /**
-     * Audience tag.
-     */
-    aud?: string;
-
-    /**
      * When set to `true`, users skip the identity provider selection step during
      * login. You must specify only one identity provider in allowed_idps.
      */
     auto_redirect_to_identity?: boolean;
-
-    created_at?: string;
-
-    /**
-     * The primary hostname and path that Access will secure. If the app is visible in
-     * the App Launcher dashboard, this is the domain that will be displayed.
-     */
-    domain?: string;
-
-    /**
-     * The name of the application.
-     */
-    name?: string;
 
     /**
      * The amount of time that tokens issued for this application will be valid. Must
@@ -3940,24 +4773,10 @@ export namespace AppAccessApplicationsListAccessApplicationsResponse {
      * s, m, h.
      */
     session_duration?: string;
-
-    updated_at?: string;
   }
 
-  export interface BookmarkApplication {
-    /**
-     * UUID
-     */
-    id?: string;
-
+  export interface Variant7 {
     app_launcher_visible?: unknown;
-
-    /**
-     * Audience tag.
-     */
-    aud?: string;
-
-    created_at?: string;
 
     /**
      * The URL or domain of the bookmark.
@@ -3984,8 +4803,6 @@ export namespace AppAccessApplicationsListAccessApplicationsResponse {
      * The application type.
      */
     type?: string;
-
-    updated_at?: string;
   }
 }
 
@@ -4806,848 +5623,31 @@ export namespace AppUpdateParams {
   }
 }
 
-export type AppAccessApplicationsAddAnApplicationParams =
-  | AppAccessApplicationsAddAnApplicationParams.Variant0
-  | AppAccessApplicationsAddAnApplicationParams.Variant1
-  | AppAccessApplicationsAddAnApplicationParams.Variant2
-  | AppAccessApplicationsAddAnApplicationParams.Variant3
-  | AppAccessApplicationsAddAnApplicationParams.Variant4
-  | AppAccessApplicationsAddAnApplicationParams.Variant5
-  | AppAccessApplicationsAddAnApplicationParams.Variant6
-  | AppAccessApplicationsAddAnApplicationParams.Variant7;
-
-export namespace AppAccessApplicationsAddAnApplicationParams {
-  export interface Variant0 {
-    /**
-     * The primary hostname and path that Access will secure. If the app is visible in
-     * the App Launcher dashboard, this is the domain that will be displayed.
-     */
-    domain: string;
-
-    /**
-     * The application type.
-     */
-    type: string;
-
-    /**
-     * When set to true, users can authenticate to this application using their WARP
-     * session. When set to false this application will always require direct IdP
-     * authentication. This setting always overrides the organization setting for WARP
-     * authentication.
-     */
-    allow_authenticate_via_warp?: boolean;
-
-    /**
-     * The identity providers your users can select when connecting to this
-     * application. Defaults to all IdPs configured in your account.
-     */
-    allowed_idps?: Array<string>;
-
-    /**
-     * Displays the application in the App Launcher.
-     */
-    app_launcher_visible?: boolean;
-
-    /**
-     * When set to `true`, users skip the identity provider selection step during
-     * login. You must specify only one identity provider in allowed_idps.
-     */
-    auto_redirect_to_identity?: boolean;
-
-    cors_headers?: AppAccessApplicationsAddAnApplicationParams.Variant0.CorsHeaders;
-
-    /**
-     * The custom error message shown to a user when they are denied access to the
-     * application.
-     */
-    custom_deny_message?: string;
-
-    /**
-     * The custom URL a user is redirected to when they are denied access to the
-     * application when failing identity-based rules.
-     */
-    custom_deny_url?: string;
-
-    /**
-     * The custom URL a user is redirected to when they are denied access to the
-     * application when failing non-identity rules.
-     */
-    custom_non_identity_deny_url?: string;
-
-    /**
-     * The custom pages that will be displayed when applicable for this application
-     */
-    custom_pages?: Array<string>;
-
-    /**
-     * Enables the binding cookie, which increases security against compromised
-     * authorization tokens and CSRF attacks.
-     */
-    enable_binding_cookie?: boolean;
-
-    /**
-     * Enables the HttpOnly cookie attribute, which increases security against XSS
-     * attacks.
-     */
-    http_only_cookie_attribute?: boolean;
-
-    /**
-     * The image URL for the logo shown in the App Launcher dashboard.
-     */
-    logo_url?: string;
-
-    /**
-     * The name of the application.
-     */
-    name?: string;
-
-    /**
-     * Enables cookie paths to scope an application's JWT to the application path. If
-     * disabled, the JWT will scope to the hostname by default
-     */
-    path_cookie_attribute?: boolean;
-
-    /**
-     * Sets the SameSite cookie setting, which provides increased security against CSRF
-     * attacks.
-     */
-    same_site_cookie_attribute?: string;
-
-    /**
-     * List of domains that Access will secure.
-     */
-    self_hosted_domains?: Array<string>;
-
-    /**
-     * Returns a 401 status code when the request is blocked by a Service Auth policy.
-     */
-    service_auth_401_redirect?: boolean;
-
-    /**
-     * The amount of time that tokens issued for this application will be valid. Must
-     * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
-     * s, m, h.
-     */
-    session_duration?: string;
-
-    /**
-     * Enables automatic authentication through cloudflared.
-     */
-    skip_interstitial?: boolean;
-
-    /**
-     * The tags you want assigned to an application. Tags are used to filter
-     * applications in the App Launcher dashboard.
-     */
-    tags?: Array<string>;
-  }
-
-  export namespace Variant0 {
-    export interface CorsHeaders {
-      /**
-       * Allows all HTTP request headers.
-       */
-      allow_all_headers?: boolean;
-
-      /**
-       * Allows all HTTP request methods.
-       */
-      allow_all_methods?: boolean;
-
-      /**
-       * Allows all origins.
-       */
-      allow_all_origins?: boolean;
-
-      /**
-       * When set to `true`, includes credentials (cookies, authorization headers, or TLS
-       * client certificates) with requests.
-       */
-      allow_credentials?: boolean;
-
-      /**
-       * Allowed HTTP request headers.
-       */
-      allowed_headers?: Array<unknown>;
-
-      /**
-       * Allowed HTTP request methods.
-       */
-      allowed_methods?: Array<
-        'GET' | 'POST' | 'HEAD' | 'PUT' | 'DELETE' | 'CONNECT' | 'OPTIONS' | 'TRACE' | 'PATCH'
-      >;
-
-      /**
-       * Allowed origins.
-       */
-      allowed_origins?: Array<unknown>;
-
-      /**
-       * The maximum number of seconds the results of a preflight request can be cached.
-       */
-      max_age?: number;
-    }
-  }
-
-  export interface Variant1 {
-    /**
-     * The identity providers your users can select when connecting to this
-     * application. Defaults to all IdPs configured in your account.
-     */
-    allowed_idps?: Array<string>;
-
-    /**
-     * Displays the application in the App Launcher.
-     */
-    app_launcher_visible?: boolean;
-
-    /**
-     * When set to `true`, users skip the identity provider selection step during
-     * login. You must specify only one identity provider in allowed_idps.
-     */
-    auto_redirect_to_identity?: boolean;
-
-    /**
-     * The custom pages that will be displayed when applicable for this application
-     */
-    custom_pages?: Array<string>;
-
-    /**
-     * The image URL for the logo shown in the App Launcher dashboard.
-     */
-    logo_url?: string;
-
-    /**
-     * The name of the application.
-     */
-    name?: string;
-
-    saas_app?:
-      | AppAccessApplicationsAddAnApplicationParams.Variant1.AccessSamlSaasApp
-      | AppAccessApplicationsAddAnApplicationParams.Variant1.AccessOidcSaasApp;
-
-    /**
-     * The tags you want assigned to an application. Tags are used to filter
-     * applications in the App Launcher dashboard.
-     */
-    tags?: Array<string>;
-
-    /**
-     * The application type.
-     */
-    type?: string;
-  }
-
-  export namespace Variant1 {
-    export interface AccessSamlSaasApp {
-      /**
-       * Optional identifier indicating the authentication protocol used for the saas
-       * app. Required for OIDC. Default if unset is "saml"
-       */
-      auth_type?: 'saml' | 'oidc';
-
-      /**
-       * The service provider's endpoint that is responsible for receiving and parsing a
-       * SAML assertion.
-       */
-      consumer_service_url?: string;
-
-      custom_attributes?: AccessSamlSaasApp.CustomAttributes;
-
-      /**
-       * The URL that the user will be redirected to after a successful login for IDP
-       * initiated logins.
-       */
-      default_relay_state?: string;
-
-      /**
-       * The unique identifier for your SaaS application.
-       */
-      idp_entity_id?: string;
-
-      /**
-       * The format of the name identifier sent to the SaaS application.
-       */
-      name_id_format?: 'id' | 'email';
-
-      /**
-       * A [JSONata](https://jsonata.org/) expression that transforms an application's
-       * user identities into a NameID value for its SAML assertion. This expression
-       * should evaluate to a singular string. The output of this expression can override
-       * the `name_id_format` setting.
-       */
-      name_id_transform_jsonata?: string;
-
-      /**
-       * The Access public certificate that will be used to verify your identity.
-       */
-      public_key?: string;
-
-      /**
-       * A globally unique name for an identity or service provider.
-       */
-      sp_entity_id?: string;
-
-      /**
-       * The endpoint where your SaaS application will send login requests.
-       */
-      sso_endpoint?: string;
-    }
-
-    export namespace AccessSamlSaasApp {
-      export interface CustomAttributes {
-        /**
-         * The name of the attribute.
-         */
-        name?: string;
-
-        /**
-         * A globally unique name for an identity or service provider.
-         */
-        name_format?:
-          | 'urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified'
-          | 'urn:oasis:names:tc:SAML:2.0:attrname-format:basic'
-          | 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri';
-
-        source?: CustomAttributes.Source;
-      }
-
-      export namespace CustomAttributes {
-        export interface Source {
-          /**
-           * The name of the IdP attribute.
-           */
-          name?: string;
-        }
-      }
-    }
-
-    export interface AccessOidcSaasApp {
-      /**
-       * The URL where this applications tile redirects users
-       */
-      app_launcher_url?: string;
-
-      /**
-       * Identifier of the authentication protocol used for the saas app. Required for
-       * OIDC.
-       */
-      auth_type?: 'saml' | 'oidc';
-
-      /**
-       * The application client id
-       */
-      client_id?: string;
-
-      /**
-       * The application client secret, only returned on POST request.
-       */
-      client_secret?: string;
-
-      /**
-       * The OIDC flows supported by this application
-       */
-      grant_types?: Array<'authorization_code' | 'authorization_code_with_pkce'>;
-
-      /**
-       * A regex to filter Cloudflare groups returned in ID token and userinfo endpoint
-       */
-      group_filter_regex?: string;
-
-      /**
-       * The Access public certificate that will be used to verify your identity.
-       */
-      public_key?: string;
-
-      /**
-       * The permitted URL's for Cloudflare to return Authorization codes and Access/ID
-       * tokens
-       */
-      redirect_uris?: Array<string>;
-
-      /**
-       * Define the user information shared with access
-       */
-      scopes?: Array<'openid' | 'groups' | 'email' | 'profile'>;
-    }
-  }
-
-  export interface Variant2 {
-    /**
-     * The primary hostname and path that Access will secure. If the app is visible in
-     * the App Launcher dashboard, this is the domain that will be displayed.
-     */
-    domain: string;
-
-    /**
-     * The application type.
-     */
-    type: string;
-
-    /**
-     * When set to true, users can authenticate to this application using their WARP
-     * session. When set to false this application will always require direct IdP
-     * authentication. This setting always overrides the organization setting for WARP
-     * authentication.
-     */
-    allow_authenticate_via_warp?: boolean;
-
-    /**
-     * The identity providers your users can select when connecting to this
-     * application. Defaults to all IdPs configured in your account.
-     */
-    allowed_idps?: Array<string>;
-
-    /**
-     * Displays the application in the App Launcher.
-     */
-    app_launcher_visible?: boolean;
-
-    /**
-     * When set to `true`, users skip the identity provider selection step during
-     * login. You must specify only one identity provider in allowed_idps.
-     */
-    auto_redirect_to_identity?: boolean;
-
-    cors_headers?: AppAccessApplicationsAddAnApplicationParams.Variant2.CorsHeaders;
-
-    /**
-     * The custom error message shown to a user when they are denied access to the
-     * application.
-     */
-    custom_deny_message?: string;
-
-    /**
-     * The custom URL a user is redirected to when they are denied access to the
-     * application when failing identity-based rules.
-     */
-    custom_deny_url?: string;
-
-    /**
-     * The custom URL a user is redirected to when they are denied access to the
-     * application when failing non-identity rules.
-     */
-    custom_non_identity_deny_url?: string;
-
-    /**
-     * The custom pages that will be displayed when applicable for this application
-     */
-    custom_pages?: Array<string>;
-
-    /**
-     * Enables the binding cookie, which increases security against compromised
-     * authorization tokens and CSRF attacks.
-     */
-    enable_binding_cookie?: boolean;
-
-    /**
-     * Enables the HttpOnly cookie attribute, which increases security against XSS
-     * attacks.
-     */
-    http_only_cookie_attribute?: boolean;
-
-    /**
-     * The image URL for the logo shown in the App Launcher dashboard.
-     */
-    logo_url?: string;
-
-    /**
-     * The name of the application.
-     */
-    name?: string;
-
-    /**
-     * Enables cookie paths to scope an application's JWT to the application path. If
-     * disabled, the JWT will scope to the hostname by default
-     */
-    path_cookie_attribute?: boolean;
-
-    /**
-     * Sets the SameSite cookie setting, which provides increased security against CSRF
-     * attacks.
-     */
-    same_site_cookie_attribute?: string;
-
-    /**
-     * List of domains that Access will secure.
-     */
-    self_hosted_domains?: Array<string>;
-
-    /**
-     * Returns a 401 status code when the request is blocked by a Service Auth policy.
-     */
-    service_auth_401_redirect?: boolean;
-
-    /**
-     * The amount of time that tokens issued for this application will be valid. Must
-     * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
-     * s, m, h.
-     */
-    session_duration?: string;
-
-    /**
-     * Enables automatic authentication through cloudflared.
-     */
-    skip_interstitial?: boolean;
-
-    /**
-     * The tags you want assigned to an application. Tags are used to filter
-     * applications in the App Launcher dashboard.
-     */
-    tags?: Array<string>;
-  }
-
-  export namespace Variant2 {
-    export interface CorsHeaders {
-      /**
-       * Allows all HTTP request headers.
-       */
-      allow_all_headers?: boolean;
-
-      /**
-       * Allows all HTTP request methods.
-       */
-      allow_all_methods?: boolean;
-
-      /**
-       * Allows all origins.
-       */
-      allow_all_origins?: boolean;
-
-      /**
-       * When set to `true`, includes credentials (cookies, authorization headers, or TLS
-       * client certificates) with requests.
-       */
-      allow_credentials?: boolean;
-
-      /**
-       * Allowed HTTP request headers.
-       */
-      allowed_headers?: Array<unknown>;
-
-      /**
-       * Allowed HTTP request methods.
-       */
-      allowed_methods?: Array<
-        'GET' | 'POST' | 'HEAD' | 'PUT' | 'DELETE' | 'CONNECT' | 'OPTIONS' | 'TRACE' | 'PATCH'
-      >;
-
-      /**
-       * Allowed origins.
-       */
-      allowed_origins?: Array<unknown>;
-
-      /**
-       * The maximum number of seconds the results of a preflight request can be cached.
-       */
-      max_age?: number;
-    }
-  }
-
-  export interface Variant3 {
-    /**
-     * The primary hostname and path that Access will secure. If the app is visible in
-     * the App Launcher dashboard, this is the domain that will be displayed.
-     */
-    domain: string;
-
-    /**
-     * The application type.
-     */
-    type: string;
-
-    /**
-     * When set to true, users can authenticate to this application using their WARP
-     * session. When set to false this application will always require direct IdP
-     * authentication. This setting always overrides the organization setting for WARP
-     * authentication.
-     */
-    allow_authenticate_via_warp?: boolean;
-
-    /**
-     * The identity providers your users can select when connecting to this
-     * application. Defaults to all IdPs configured in your account.
-     */
-    allowed_idps?: Array<string>;
-
-    /**
-     * Displays the application in the App Launcher.
-     */
-    app_launcher_visible?: boolean;
-
-    /**
-     * When set to `true`, users skip the identity provider selection step during
-     * login. You must specify only one identity provider in allowed_idps.
-     */
-    auto_redirect_to_identity?: boolean;
-
-    cors_headers?: AppAccessApplicationsAddAnApplicationParams.Variant3.CorsHeaders;
-
-    /**
-     * The custom error message shown to a user when they are denied access to the
-     * application.
-     */
-    custom_deny_message?: string;
-
-    /**
-     * The custom URL a user is redirected to when they are denied access to the
-     * application when failing identity-based rules.
-     */
-    custom_deny_url?: string;
-
-    /**
-     * The custom URL a user is redirected to when they are denied access to the
-     * application when failing non-identity rules.
-     */
-    custom_non_identity_deny_url?: string;
-
-    /**
-     * The custom pages that will be displayed when applicable for this application
-     */
-    custom_pages?: Array<string>;
-
-    /**
-     * Enables the binding cookie, which increases security against compromised
-     * authorization tokens and CSRF attacks.
-     */
-    enable_binding_cookie?: boolean;
-
-    /**
-     * Enables the HttpOnly cookie attribute, which increases security against XSS
-     * attacks.
-     */
-    http_only_cookie_attribute?: boolean;
-
-    /**
-     * The image URL for the logo shown in the App Launcher dashboard.
-     */
-    logo_url?: string;
-
-    /**
-     * The name of the application.
-     */
-    name?: string;
-
-    /**
-     * Enables cookie paths to scope an application's JWT to the application path. If
-     * disabled, the JWT will scope to the hostname by default
-     */
-    path_cookie_attribute?: boolean;
-
-    /**
-     * Sets the SameSite cookie setting, which provides increased security against CSRF
-     * attacks.
-     */
-    same_site_cookie_attribute?: string;
-
-    /**
-     * List of domains that Access will secure.
-     */
-    self_hosted_domains?: Array<string>;
-
-    /**
-     * Returns a 401 status code when the request is blocked by a Service Auth policy.
-     */
-    service_auth_401_redirect?: boolean;
-
-    /**
-     * The amount of time that tokens issued for this application will be valid. Must
-     * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
-     * s, m, h.
-     */
-    session_duration?: string;
-
-    /**
-     * Enables automatic authentication through cloudflared.
-     */
-    skip_interstitial?: boolean;
-
-    /**
-     * The tags you want assigned to an application. Tags are used to filter
-     * applications in the App Launcher dashboard.
-     */
-    tags?: Array<string>;
-  }
-
-  export namespace Variant3 {
-    export interface CorsHeaders {
-      /**
-       * Allows all HTTP request headers.
-       */
-      allow_all_headers?: boolean;
-
-      /**
-       * Allows all HTTP request methods.
-       */
-      allow_all_methods?: boolean;
-
-      /**
-       * Allows all origins.
-       */
-      allow_all_origins?: boolean;
-
-      /**
-       * When set to `true`, includes credentials (cookies, authorization headers, or TLS
-       * client certificates) with requests.
-       */
-      allow_credentials?: boolean;
-
-      /**
-       * Allowed HTTP request headers.
-       */
-      allowed_headers?: Array<unknown>;
-
-      /**
-       * Allowed HTTP request methods.
-       */
-      allowed_methods?: Array<
-        'GET' | 'POST' | 'HEAD' | 'PUT' | 'DELETE' | 'CONNECT' | 'OPTIONS' | 'TRACE' | 'PATCH'
-      >;
-
-      /**
-       * Allowed origins.
-       */
-      allowed_origins?: Array<unknown>;
-
-      /**
-       * The maximum number of seconds the results of a preflight request can be cached.
-       */
-      max_age?: number;
-    }
-  }
-
-  export interface Variant4 {
-    /**
-     * The application type.
-     */
-    type: 'self_hosted' | 'saas' | 'ssh' | 'vnc' | 'app_launcher' | 'warp' | 'biso' | 'bookmark' | 'dash_sso';
-
-    /**
-     * The identity providers your users can select when connecting to this
-     * application. Defaults to all IdPs configured in your account.
-     */
-    allowed_idps?: Array<string>;
-
-    /**
-     * When set to `true`, users skip the identity provider selection step during
-     * login. You must specify only one identity provider in allowed_idps.
-     */
-    auto_redirect_to_identity?: boolean;
-
-    /**
-     * The amount of time that tokens issued for this application will be valid. Must
-     * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
-     * s, m, h.
-     */
-    session_duration?: string;
-  }
-
-  export interface Variant5 {
-    /**
-     * The application type.
-     */
-    type: 'self_hosted' | 'saas' | 'ssh' | 'vnc' | 'app_launcher' | 'warp' | 'biso' | 'bookmark' | 'dash_sso';
-
-    /**
-     * The identity providers your users can select when connecting to this
-     * application. Defaults to all IdPs configured in your account.
-     */
-    allowed_idps?: Array<string>;
-
-    /**
-     * When set to `true`, users skip the identity provider selection step during
-     * login. You must specify only one identity provider in allowed_idps.
-     */
-    auto_redirect_to_identity?: boolean;
-
-    /**
-     * The amount of time that tokens issued for this application will be valid. Must
-     * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
-     * s, m, h.
-     */
-    session_duration?: string;
-  }
-
-  export interface Variant6 {
-    /**
-     * The application type.
-     */
-    type: 'self_hosted' | 'saas' | 'ssh' | 'vnc' | 'app_launcher' | 'warp' | 'biso' | 'bookmark' | 'dash_sso';
-
-    /**
-     * The identity providers your users can select when connecting to this
-     * application. Defaults to all IdPs configured in your account.
-     */
-    allowed_idps?: Array<string>;
-
-    /**
-     * When set to `true`, users skip the identity provider selection step during
-     * login. You must specify only one identity provider in allowed_idps.
-     */
-    auto_redirect_to_identity?: boolean;
-
-    /**
-     * The amount of time that tokens issued for this application will be valid. Must
-     * be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms,
-     * s, m, h.
-     */
-    session_duration?: string;
-  }
-
-  export interface Variant7 {
-    app_launcher_visible?: unknown;
-
-    /**
-     * The URL or domain of the bookmark.
-     */
-    domain?: unknown;
-
-    /**
-     * The image URL for the logo shown in the App Launcher dashboard.
-     */
-    logo_url?: string;
-
-    /**
-     * The name of the application.
-     */
-    name?: string;
-
-    /**
-     * The tags you want assigned to an application. Tags are used to filter
-     * applications in the App Launcher dashboard.
-     */
-    tags?: Array<string>;
-
-    /**
-     * The application type.
-     */
-    type?: string;
-  }
-}
-
 export namespace Apps {
-  export import AppRetrieveResponse = AppsAPI.AppRetrieveResponse;
+  export import AppCreateResponse = AppsAPI.AppCreateResponse;
   export import AppUpdateResponse = AppsAPI.AppUpdateResponse;
+  export import AppListResponse = AppsAPI.AppListResponse;
   export import AppDeleteResponse = AppsAPI.AppDeleteResponse;
-  export import AppAccessApplicationsAddAnApplicationResponse = AppsAPI.AppAccessApplicationsAddAnApplicationResponse;
-  export import AppAccessApplicationsListAccessApplicationsResponse = AppsAPI.AppAccessApplicationsListAccessApplicationsResponse;
+  export import AppGetResponse = AppsAPI.AppGetResponse;
+  export import AppCreateParams = AppsAPI.AppCreateParams;
   export import AppUpdateParams = AppsAPI.AppUpdateParams;
-  export import AppAccessApplicationsAddAnApplicationParams = AppsAPI.AppAccessApplicationsAddAnApplicationParams;
   export import Cas = CasAPI.Cas;
+  export import CaCreateResponse = CasAPI.CaCreateResponse;
+  export import CaListResponse = CasAPI.CaListResponse;
   export import CaDeleteResponse = CasAPI.CaDeleteResponse;
-  export import CaAccessShortLivedCertificateCAsCreateAShortLivedCertificateCaResponse = CasAPI.CaAccessShortLivedCertificateCAsCreateAShortLivedCertificateCaResponse;
-  export import CaAccessShortLivedCertificateCAsGetAShortLivedCertificateCaResponse = CasAPI.CaAccessShortLivedCertificateCAsGetAShortLivedCertificateCaResponse;
-  export import CaAccessShortLivedCertificateCAsListShortLivedCertificateCAsResponse = CasAPI.CaAccessShortLivedCertificateCAsListShortLivedCertificateCAsResponse;
+  export import CaGetResponse = CasAPI.CaGetResponse;
   export import RevokeTokens = RevokeTokensAPI.RevokeTokens;
   export import RevokeTokenAccessApplicationsRevokeServiceTokensResponse = RevokeTokensAPI.RevokeTokenAccessApplicationsRevokeServiceTokensResponse;
   export import UserPolicyChecks = UserPolicyChecksAPI.UserPolicyChecks;
   export import UserPolicyCheckAccessApplicationsTestAccessPoliciesResponse = UserPolicyChecksAPI.UserPolicyCheckAccessApplicationsTestAccessPoliciesResponse;
   export import Policies = PoliciesAPI.Policies;
-  export import PolicyRetrieveResponse = PoliciesAPI.PolicyRetrieveResponse;
+  export import PolicyCreateResponse = PoliciesAPI.PolicyCreateResponse;
   export import PolicyUpdateResponse = PoliciesAPI.PolicyUpdateResponse;
   export import PolicyDeleteResponse = PoliciesAPI.PolicyDeleteResponse;
   export import PolicyAccessPoliciesCreateAnAccessPolicyResponse = PoliciesAPI.PolicyAccessPoliciesCreateAnAccessPolicyResponse;
   export import PolicyAccessPoliciesListAccessPoliciesResponse = PoliciesAPI.PolicyAccessPoliciesListAccessPoliciesResponse;
+  export import PolicyGetResponse = PoliciesAPI.PolicyGetResponse;
+  export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
   export import PolicyUpdateParams = PoliciesAPI.PolicyUpdateParams;
   export import PolicyAccessPoliciesCreateAnAccessPolicyParams = PoliciesAPI.PolicyAccessPoliciesCreateAnAccessPolicyParams;
 }

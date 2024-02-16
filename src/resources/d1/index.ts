@@ -9,8 +9,8 @@ export {
   Databases,
 } from './databases';
 export {
-  DatabaseRetrieveResponse,
   DatabaseDeleteResponse,
+  DatabaseGetResponse,
   DatabaseQueryResponse,
   DatabaseQueryParams,
   Database,

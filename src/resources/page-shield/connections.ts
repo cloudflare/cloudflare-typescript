@@ -8,16 +8,16 @@ export class Connections extends APIResource {
   /**
    * Fetches a connection detected by Page Shield by connection ID.
    */
-  retrieve(
+  get(
     zoneId: string,
     connectionId: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ConnectionRetrieveResponse> {
+  ): Core.APIPromise<ConnectionGetResponse> {
     return this._client.get(`/zones/${zoneId}/page_shield/connections/${connectionId}`, options);
   }
 }
 
-export interface ConnectionRetrieveResponse {
+export interface ConnectionGetResponse {
   id?: unknown;
 
   added_at?: unknown;
@@ -40,5 +40,5 @@ export interface ConnectionRetrieveResponse {
 }
 
 export namespace Connections {
-  export import ConnectionRetrieveResponse = ConnectionsAPI.ConnectionRetrieveResponse;
+  export import ConnectionGetResponse = ConnectionsAPI.ConnectionGetResponse;
 }

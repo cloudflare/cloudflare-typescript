@@ -9,7 +9,7 @@ export class Export extends APIResource {
    * Exports full current published Zaraz configuration for a zone, secret variables
    * included.
    */
-  retrieve(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<ExportRetrieveResponse> {
+  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<ExportGetResponse> {
     return this._client.get(`/zones/${zoneId}/settings/zaraz/export`, options);
   }
 }
@@ -17,7 +17,7 @@ export class Export extends APIResource {
 /**
  * Zaraz configuration
  */
-export interface ExportRetrieveResponse {
+export interface ExportGetResponse {
   /**
    * Data layer compatibility mode enabled.
    */
@@ -31,7 +31,7 @@ export interface ExportRetrieveResponse {
   /**
    * General Zaraz settings.
    */
-  settings: ExportRetrieveResponse.Settings;
+  settings: ExportGetResponse.Settings;
 
   /**
    * Tools set up under Zaraz configuration, where key is the alpha-numeric tool ID
@@ -39,21 +39,21 @@ export interface ExportRetrieveResponse {
    */
   tools: Record<
     string,
-    ExportRetrieveResponse.ZarazManagedComponent | ExportRetrieveResponse.ZarazCustomManagedComponent
+    ExportGetResponse.ZarazManagedComponent | ExportGetResponse.ZarazCustomManagedComponent
   >;
 
   /**
    * Triggers set up under Zaraz configuration, where key is the trigger
    * alpha-numeric ID and value is the trigger configuration.
    */
-  triggers: Record<string, ExportRetrieveResponse.Triggers>;
+  triggers: Record<string, ExportGetResponse.Triggers>;
 
   /**
    * Variables set up under Zaraz configuration, where key is the variable
    * alpha-numeric ID and value is the variable configuration. Values of variables of
    * type secret are not included.
    */
-  variables: Record<string, ExportRetrieveResponse.UnionMember0 | ExportRetrieveResponse.UnionMember1>;
+  variables: Record<string, ExportGetResponse.UnionMember0 | ExportGetResponse.UnionMember1>;
 
   /**
    * Zaraz internal version of the config.
@@ -63,7 +63,7 @@ export interface ExportRetrieveResponse {
   /**
    * Consent management configuration.
    */
-  consent?: ExportRetrieveResponse.Consent;
+  consent?: ExportGetResponse.Consent;
 
   /**
    * Single Page Application support enabled.
@@ -71,7 +71,7 @@ export interface ExportRetrieveResponse {
   historyChange?: boolean;
 }
 
-export namespace ExportRetrieveResponse {
+export namespace ExportGetResponse {
   /**
    * General Zaraz settings.
    */
@@ -751,5 +751,5 @@ export namespace ExportRetrieveResponse {
 }
 
 export namespace Export {
-  export import ExportRetrieveResponse = ExportAPI.ExportRetrieveResponse;
+  export import ExportGetResponse = ExportAPI.ExportGetResponse;
 }

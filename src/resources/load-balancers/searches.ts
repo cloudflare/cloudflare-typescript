@@ -10,21 +10,21 @@ export class Searches extends APIResource {
    * Search for Load Balancing resources.
    */
   list(
-    accountIdentifier: string,
+    accountId: string,
     query?: SearchListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SearchListResponse | null>;
-  list(accountIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<SearchListResponse | null>;
+  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<SearchListResponse | null>;
   list(
-    accountIdentifier: string,
+    accountId: string,
     query: SearchListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<SearchListResponse | null> {
     if (isRequestOptions(query)) {
-      return this.list(accountIdentifier, {}, query);
+      return this.list(accountId, {}, query);
     }
     return (
-      this._client.get(`/accounts/${accountIdentifier}/load_balancers/search`, {
+      this._client.get(`/accounts/${accountId}/load_balancers/search`, {
         query,
         ...options,
       }) as Core.APIPromise<{ result: SearchListResponse | null }>

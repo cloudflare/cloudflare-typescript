@@ -7,23 +7,6 @@ import { type Uploadable, maybeMultipartFormRequestOptions } from 'cloudflare/co
 
 export class Scripts extends APIResource {
   /**
-   * Fetch information about a script uploaded to a Workers for Platforms namespace.
-   */
-  retrieve(
-    accountId: string,
-    dispatchNamespace: string,
-    scriptName: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ScriptRetrieveResponse> {
-    return (
-      this._client.get(
-        `/accounts/${accountId}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}`,
-        options,
-      ) as Core.APIPromise<{ result: ScriptRetrieveResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Upload a worker module to a Workers for Platforms namespace.
    */
   update(
@@ -58,98 +41,22 @@ export class Scripts extends APIResource {
       { query: { force }, ...options, headers: { Accept: '*/*', ...options?.headers } },
     );
   }
-}
-
-/**
- * Details about a worker uploaded to a Workers for Platforms namespace.
- */
-export interface ScriptRetrieveResponse {
-  /**
-   * When the script was created.
-   */
-  created_on?: string;
 
   /**
-   * Name of the Workers for Platforms dispatch namespace.
+   * Fetch information about a script uploaded to a Workers for Platforms namespace.
    */
-  dispatch_namespace?: string;
-
-  /**
-   * When the script was last modified.
-   */
-  modified_on?: string;
-
-  script?: ScriptRetrieveResponse.Script;
-}
-
-export namespace ScriptRetrieveResponse {
-  export interface Script {
-    /**
-     * The id of the script in the Workers system. Usually the script name.
-     */
-    id?: string;
-
-    /**
-     * When the script was created.
-     */
-    created_on?: string;
-
-    /**
-     * Hashed script content, can be used in a If-None-Match header when updating.
-     */
-    etag?: string;
-
-    /**
-     * Whether Logpush is turned on for the Worker.
-     */
-    logpush?: boolean;
-
-    /**
-     * When the script was last modified.
-     */
-    modified_on?: string;
-
-    /**
-     * Deprecated. Deployment metadata for internal usage.
-     */
-    pipeline_hash?: string;
-
-    /**
-     * Specifies the placement mode for the Worker (e.g. 'smart').
-     */
-    placement_mode?: string;
-
-    /**
-     * List of Workers that will consume logs from the attached Worker.
-     */
-    tail_consumers?: Array<Script.TailConsumer>;
-
-    /**
-     * Specifies the usage model for the Worker (e.g. 'bundled' or 'unbound').
-     */
-    usage_model?: string;
-  }
-
-  export namespace Script {
-    /**
-     * A reference to a script that will consume logs from the attached Worker.
-     */
-    export interface TailConsumer {
-      /**
-       * Name of Worker that is to be the consumer.
-       */
-      service: string;
-
-      /**
-       * Optional environment if the Worker utilizes one.
-       */
-      environment?: string;
-
-      /**
-       * Optional dispatch namespace the script belongs to.
-       */
-      namespace?: string;
-    }
+  get(
+    accountId: string,
+    dispatchNamespace: string,
+    scriptName: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ScriptGetResponse> {
+    return (
+      this._client.get(
+        `/accounts/${accountId}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}`,
+        options,
+      ) as Core.APIPromise<{ result: ScriptGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -219,6 +126,99 @@ export namespace ScriptUpdateResponse {
      * Optional dispatch namespace the script belongs to.
      */
     namespace?: string;
+  }
+}
+
+/**
+ * Details about a worker uploaded to a Workers for Platforms namespace.
+ */
+export interface ScriptGetResponse {
+  /**
+   * When the script was created.
+   */
+  created_on?: string;
+
+  /**
+   * Name of the Workers for Platforms dispatch namespace.
+   */
+  dispatch_namespace?: string;
+
+  /**
+   * When the script was last modified.
+   */
+  modified_on?: string;
+
+  script?: ScriptGetResponse.Script;
+}
+
+export namespace ScriptGetResponse {
+  export interface Script {
+    /**
+     * The id of the script in the Workers system. Usually the script name.
+     */
+    id?: string;
+
+    /**
+     * When the script was created.
+     */
+    created_on?: string;
+
+    /**
+     * Hashed script content, can be used in a If-None-Match header when updating.
+     */
+    etag?: string;
+
+    /**
+     * Whether Logpush is turned on for the Worker.
+     */
+    logpush?: boolean;
+
+    /**
+     * When the script was last modified.
+     */
+    modified_on?: string;
+
+    /**
+     * Deprecated. Deployment metadata for internal usage.
+     */
+    pipeline_hash?: string;
+
+    /**
+     * Specifies the placement mode for the Worker (e.g. 'smart').
+     */
+    placement_mode?: string;
+
+    /**
+     * List of Workers that will consume logs from the attached Worker.
+     */
+    tail_consumers?: Array<Script.TailConsumer>;
+
+    /**
+     * Specifies the usage model for the Worker (e.g. 'bundled' or 'unbound').
+     */
+    usage_model?: string;
+  }
+
+  export namespace Script {
+    /**
+     * A reference to a script that will consume logs from the attached Worker.
+     */
+    export interface TailConsumer {
+      /**
+       * Name of Worker that is to be the consumer.
+       */
+      service: string;
+
+      /**
+       * Optional environment if the Worker utilizes one.
+       */
+      environment?: string;
+
+      /**
+       * Optional dispatch namespace the script belongs to.
+       */
+      namespace?: string;
+    }
   }
 }
 
@@ -476,8 +476,8 @@ export interface ScriptDeleteParams {
 }
 
 export namespace Scripts {
-  export import ScriptRetrieveResponse = ScriptsAPI.ScriptRetrieveResponse;
   export import ScriptUpdateResponse = ScriptsAPI.ScriptUpdateResponse;
+  export import ScriptGetResponse = ScriptsAPI.ScriptGetResponse;
   export import ScriptUpdateParams = ScriptsAPI.ScriptUpdateParams;
   export import ScriptDeleteParams = ScriptsAPI.ScriptDeleteParams;
 }

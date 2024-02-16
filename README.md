@@ -4,7 +4,7 @@
 
 This library provides convenient access to the Cloudflare REST API from server-side TypeScript or JavaScript.
 
-The REST API documentation can be found [on developers.cloudflare.com](https://developers.cloudflare.com/api/). The full API of this library can be found in [api.md](api.md).
+The REST API documentation can be found [on developers.cloudflare.com](https://developers.cloudflare.com/api). The full API of this library can be found in [api.md](api.md).
 
 ## Installation
 
@@ -182,7 +182,7 @@ import Cloudflare from 'cloudflare';
 ```
 
 To do the inverse, add `import "cloudflare/shims/node"` (which does import polyfills).
-This can also be useful if you are getting the wrong TypeScript types for `Response` - more details [here](https://github.com/cloudflare/cloudflare-sdk-node/tree/main/src/_shims#readme).
+This can also be useful if you are getting the wrong TypeScript types for `Response` - more details [here](https://github.com/cloudflare/cloudflare-typescript/tree/main/src/_shims#readme).
 
 You may also provide a custom `fetch` function when instantiating the client,
 which can be used to inspect or alter the `Request` or `Response` before/after each request:
@@ -237,7 +237,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/cloudflare/cloudflare-sdk-node/issues) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/cloudflare/cloudflare-typescript/issues) with questions, bugs, or suggestions.
 
 ## Requirements
 

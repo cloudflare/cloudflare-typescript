@@ -53,35 +53,6 @@ describe('resource bindings', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('retrieve', async () => {
-    const responsePromise = cloudflare.addressing.prefixes.bindings.retrieve(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '023e105f4ecef8ad9ca31a8372d0c353',
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('retrieve: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.addressing.prefixes.bindings.retrieve(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
   test.skip('list', async () => {
     const responsePromise = cloudflare.addressing.prefixes.bindings.list(
       '023e105f4ecef8ad9ca31a8372d0c353',
@@ -129,6 +100,35 @@ describe('resource bindings', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.addressing.prefixes.bindings.delete(
+        '023e105f4ecef8ad9ca31a8372d0c353',
+        '023e105f4ecef8ad9ca31a8372d0c353',
+        '023e105f4ecef8ad9ca31a8372d0c353',
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get', async () => {
+    const responsePromise = cloudflare.addressing.prefixes.bindings.get(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '023e105f4ecef8ad9ca31a8372d0c353',
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.addressing.prefixes.bindings.get(
         '023e105f4ecef8ad9ca31a8372d0c353',
         '023e105f4ecef8ad9ca31a8372d0c353',
         '023e105f4ecef8ad9ca31a8372d0c353',

@@ -21,21 +21,6 @@ export class AccessTags extends APIResource {
   }
 
   /**
-   * Get a tag
-   */
-  retrieve(
-    identifier: string,
-    name: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessTagRetrieveResponse> {
-    return (
-      this._client.get(`/accounts/${identifier}/access/tags/${name}`, options) as Core.APIPromise<{
-        result: AccessTagRetrieveResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Update a tag
    */
   update(
@@ -66,31 +51,27 @@ export class AccessTags extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Get a tag
+   */
+  get(
+    identifier: string,
+    name: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AccessTagGetResponse> {
+    return (
+      this._client.get(`/accounts/${identifier}/access/tags/${name}`, options) as Core.APIPromise<{
+        result: AccessTagGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
 /**
  * A tag
  */
 export interface AccessTagCreateResponse {
-  /**
-   * The name of the tag
-   */
-  name: string;
-
-  /**
-   * The number of applications that have this tag
-   */
-  app_count?: number;
-
-  created_at?: string;
-
-  updated_at?: string;
-}
-
-/**
- * A tag
- */
-export interface AccessTagRetrieveResponse {
   /**
    * The name of the tag
    */
@@ -132,6 +113,25 @@ export interface AccessTagDeleteResponse {
   name?: string;
 }
 
+/**
+ * A tag
+ */
+export interface AccessTagGetResponse {
+  /**
+   * The name of the tag
+   */
+  name: string;
+
+  /**
+   * The number of applications that have this tag
+   */
+  app_count?: number;
+
+  created_at?: string;
+
+  updated_at?: string;
+}
+
 export interface AccessTagCreateParams {
   /**
    * The name of the tag
@@ -148,9 +148,9 @@ export interface AccessTagUpdateParams {
 
 export namespace AccessTags {
   export import AccessTagCreateResponse = AccessTagsAPI.AccessTagCreateResponse;
-  export import AccessTagRetrieveResponse = AccessTagsAPI.AccessTagRetrieveResponse;
   export import AccessTagUpdateResponse = AccessTagsAPI.AccessTagUpdateResponse;
   export import AccessTagDeleteResponse = AccessTagsAPI.AccessTagDeleteResponse;
+  export import AccessTagGetResponse = AccessTagsAPI.AccessTagGetResponse;
   export import AccessTagCreateParams = AccessTagsAPI.AccessTagCreateParams;
   export import AccessTagUpdateParams = AccessTagsAPI.AccessTagUpdateParams;
 }

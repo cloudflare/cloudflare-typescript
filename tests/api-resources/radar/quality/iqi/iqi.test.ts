@@ -13,8 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource iqi', () => {
   // skipped: tests are disabled for the time being
-  test.skip('retrieve: only required params', async () => {
-    const responsePromise = cloudflare.radar.quality.iqi.retrieve({ metric: 'BANDWIDTH' });
+  test.skip('get: only required params', async () => {
+    const responsePromise = cloudflare.radar.quality.iqi.get({ metric: 'BANDWIDTH' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -25,8 +25,8 @@ describe('resource iqi', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('retrieve: required and optional params', async () => {
-    const response = await cloudflare.radar.quality.iqi.retrieve({
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.radar.quality.iqi.get({
       metric: 'BANDWIDTH',
       asn: ['string', 'string', 'string'],
       continent: ['string', 'string', 'string'],

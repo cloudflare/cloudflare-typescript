@@ -13,11 +13,10 @@ const cloudflare = new Cloudflare({
 
 describe('resource monitors', () => {
   // skipped: tests are disabled for the time being
-  test.skip('retrieve', async () => {
-    const responsePromise = cloudflare.loadBalancers.monitors.retrieve(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'f1aba936b94213e5b8dca0c0dbf1f9cc',
-    );
+  test.skip('create: only required params', async () => {
+    const responsePromise = cloudflare.loadBalancers.monitors.create('023e105f4ecef8ad9ca31a8372d0c353', {
+      expected_codes: '2xx',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -28,15 +27,25 @@ describe('resource monitors', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('retrieve: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.loadBalancers.monitors.retrieve(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        'f1aba936b94213e5b8dca0c0dbf1f9cc',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('create: required and optional params', async () => {
+    const response = await cloudflare.loadBalancers.monitors.create('023e105f4ecef8ad9ca31a8372d0c353', {
+      expected_codes: '2xx',
+      allow_insecure: true,
+      consecutive_down: 0,
+      consecutive_up: 0,
+      description: 'Login page monitor',
+      expected_body: 'alive',
+      follow_redirects: true,
+      header: { Host: ['example.com'], 'X-App-ID': ['abc123'] },
+      interval: 0,
+      method: 'GET',
+      path: '/health',
+      port: 0,
+      probe_zone: 'example.com',
+      retries: 0,
+      timeout: 0,
+      type: 'https',
+    });
   });
 
   // skipped: tests are disabled for the time being
@@ -82,6 +91,28 @@ describe('resource monitors', () => {
   });
 
   // skipped: tests are disabled for the time being
+  test.skip('list', async () => {
+    const responsePromise = cloudflare.loadBalancers.monitors.list('023e105f4ecef8ad9ca31a8372d0c353');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.loadBalancers.monitors.list('023e105f4ecef8ad9ca31a8372d0c353', {
+        path: '/_stainless_unknown_path',
+      }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('delete', async () => {
     const responsePromise = cloudflare.loadBalancers.monitors.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
@@ -97,10 +128,10 @@ describe('resource monitors', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('accountLoadBalancerMonitorsCreateMonitor: only required params', async () => {
-    const responsePromise = cloudflare.loadBalancers.monitors.accountLoadBalancerMonitorsCreateMonitor(
+  test.skip('get', async () => {
+    const responsePromise = cloudflare.loadBalancers.monitors.get(
       '023e105f4ecef8ad9ca31a8372d0c353',
-      { expected_codes: '2xx' },
+      'f1aba936b94213e5b8dca0c0dbf1f9cc',
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -112,50 +143,12 @@ describe('resource monitors', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('accountLoadBalancerMonitorsCreateMonitor: required and optional params', async () => {
-    const response = await cloudflare.loadBalancers.monitors.accountLoadBalancerMonitorsCreateMonitor(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      {
-        expected_codes: '2xx',
-        allow_insecure: true,
-        consecutive_down: 0,
-        consecutive_up: 0,
-        description: 'Login page monitor',
-        expected_body: 'alive',
-        follow_redirects: true,
-        header: { Host: ['example.com'], 'X-App-ID': ['abc123'] },
-        interval: 0,
-        method: 'GET',
-        path: '/health',
-        port: 0,
-        probe_zone: 'example.com',
-        retries: 0,
-        timeout: 0,
-        type: 'https',
-      },
-    );
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('accountLoadBalancerMonitorsListMonitors', async () => {
-    const responsePromise = cloudflare.loadBalancers.monitors.accountLoadBalancerMonitorsListMonitors(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('accountLoadBalancerMonitorsListMonitors: request options instead of params are passed correctly', async () => {
+  test.skip('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.loadBalancers.monitors.accountLoadBalancerMonitorsListMonitors(
+      cloudflare.loadBalancers.monitors.get(
         '023e105f4ecef8ad9ca31a8372d0c353',
+        'f1aba936b94213e5b8dca0c0dbf1f9cc',
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);

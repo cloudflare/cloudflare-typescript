@@ -9,39 +9,36 @@ export class Arc extends APIResource {
   /**
    * Get the top autonomous systems (AS) by emails ARC validation.
    */
-  retrieve(
+  get(
     arc: 'PASS' | 'NONE' | 'FAIL',
-    query?: ArcRetrieveParams,
+    query?: ArcGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ArcRetrieveResponse>;
-  retrieve(
+  ): Core.APIPromise<ArcGetResponse>;
+  get(arc: 'PASS' | 'NONE' | 'FAIL', options?: Core.RequestOptions): Core.APIPromise<ArcGetResponse>;
+  get(
     arc: 'PASS' | 'NONE' | 'FAIL',
+    query: ArcGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ArcRetrieveResponse>;
-  retrieve(
-    arc: 'PASS' | 'NONE' | 'FAIL',
-    query: ArcRetrieveParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ArcRetrieveResponse> {
+  ): Core.APIPromise<ArcGetResponse> {
     if (isRequestOptions(query)) {
-      return this.retrieve(arc, {}, query);
+      return this.get(arc, {}, query);
     }
     return (
       this._client.get(`/radar/email/security/top/ases/arc/${arc}`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: ArcRetrieveResponse }>
+      }) as Core.APIPromise<{ result: ArcGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface ArcRetrieveResponse {
-  meta: ArcRetrieveResponse.Meta;
+export interface ArcGetResponse {
+  meta: ArcGetResponse.Meta;
 
-  top_0: Array<ArcRetrieveResponse.Top0>;
+  top_0: Array<ArcGetResponse.Top0>;
 }
 
-export namespace ArcRetrieveResponse {
+export namespace ArcGetResponse {
   export interface Meta {
     dateRange: Array<Meta.DateRange>;
 
@@ -97,7 +94,7 @@ export namespace ArcRetrieveResponse {
   }
 }
 
-export interface ArcRetrieveParams {
+export interface ArcGetParams {
   /**
    * Array of comma separated list of ASNs, start with `-` to exclude from results.
    * For example, `-174, 3356` excludes results from AS174, but includes results from
@@ -177,6 +174,6 @@ export interface ArcRetrieveParams {
 }
 
 export namespace Arc {
-  export import ArcRetrieveResponse = ArcAPI.ArcRetrieveResponse;
-  export import ArcRetrieveParams = ArcAPI.ArcRetrieveParams;
+  export import ArcGetResponse = ArcAPI.ArcGetResponse;
+  export import ArcGetParams = ArcAPI.ArcGetParams;
 }

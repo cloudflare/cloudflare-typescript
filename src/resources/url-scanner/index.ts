@@ -2,7 +2,7 @@
 
 export {
   ScanCreateResponse,
-  ScanRetrieveResponse,
+  ScanGetResponse,
   ScanHarResponse,
   ScanCreateParams,
   ScanScreenshotParams,

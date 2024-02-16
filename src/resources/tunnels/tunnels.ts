@@ -10,21 +10,6 @@ export class Tunnels extends APIResource {
   connections: ConnectionsAPI.Connections = new ConnectionsAPI.Connections(this._client);
 
   /**
-   * Fetches a single Argo Tunnel.
-   */
-  retrieve(
-    accountId: string,
-    tunnelId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TunnelRetrieveResponse> {
-    return (
-      this._client.get(`/accounts/${accountId}/tunnels/${tunnelId}`, options) as Core.APIPromise<{
-        result: TunnelRetrieveResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Deletes an Argo Tunnel from an account.
    */
   delete(
@@ -82,55 +67,20 @@ export class Tunnels extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
-}
-
-export interface TunnelRetrieveResponse {
-  /**
-   * UUID of the tunnel.
-   */
-  id: string;
 
   /**
-   * The tunnel connections between your origin and Cloudflare's edge.
+   * Fetches a single Argo Tunnel.
    */
-  connections: Array<TunnelRetrieveResponse.Connection>;
-
-  /**
-   * Timestamp of when the tunnel was created.
-   */
-  created_at: string;
-
-  /**
-   * A user-friendly name for the tunnel.
-   */
-  name: string;
-
-  /**
-   * Timestamp of when the tunnel was deleted. If `null`, the tunnel has not been
-   * deleted.
-   */
-  deleted_at?: string | null;
-}
-
-export namespace TunnelRetrieveResponse {
-  export interface Connection {
-    /**
-     * The Cloudflare data center used for this connection.
-     */
-    colo_name?: string;
-
-    /**
-     * Cloudflare continues to track connections for several minutes after they
-     * disconnect. This is an optimization to improve latency and reliability of
-     * reconnecting. If `true`, the connection has disconnected but is still being
-     * tracked. If `false`, the connection is actively serving traffic.
-     */
-    is_pending_reconnect?: boolean;
-
-    /**
-     * UUID of the Cloudflare Tunnel connection.
-     */
-    uuid?: string;
+  get(
+    accountId: string,
+    tunnelId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TunnelGetResponse> {
+    return (
+      this._client.get(`/accounts/${accountId}/tunnels/${tunnelId}`, options) as Core.APIPromise<{
+        result: TunnelGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -473,6 +423,56 @@ export namespace TunnelArgoTunnelListArgoTunnelsResponse {
   }
 }
 
+export interface TunnelGetResponse {
+  /**
+   * UUID of the tunnel.
+   */
+  id: string;
+
+  /**
+   * The tunnel connections between your origin and Cloudflare's edge.
+   */
+  connections: Array<TunnelGetResponse.Connection>;
+
+  /**
+   * Timestamp of when the tunnel was created.
+   */
+  created_at: string;
+
+  /**
+   * A user-friendly name for the tunnel.
+   */
+  name: string;
+
+  /**
+   * Timestamp of when the tunnel was deleted. If `null`, the tunnel has not been
+   * deleted.
+   */
+  deleted_at?: string | null;
+}
+
+export namespace TunnelGetResponse {
+  export interface Connection {
+    /**
+     * The Cloudflare data center used for this connection.
+     */
+    colo_name?: string;
+
+    /**
+     * Cloudflare continues to track connections for several minutes after they
+     * disconnect. This is an optimization to improve latency and reliability of
+     * reconnecting. If `true`, the connection has disconnected but is still being
+     * tracked. If `false`, the connection is actively serving traffic.
+     */
+    is_pending_reconnect?: boolean;
+
+    /**
+     * UUID of the Cloudflare Tunnel connection.
+     */
+    uuid?: string;
+  }
+}
+
 export type TunnelDeleteParams = unknown;
 
 export interface TunnelArgoTunnelCreateAnArgoTunnelParams {
@@ -531,10 +531,10 @@ export interface TunnelArgoTunnelListArgoTunnelsParams {
 }
 
 export namespace Tunnels {
-  export import TunnelRetrieveResponse = TunnelsAPI.TunnelRetrieveResponse;
   export import TunnelDeleteResponse = TunnelsAPI.TunnelDeleteResponse;
   export import TunnelArgoTunnelCreateAnArgoTunnelResponse = TunnelsAPI.TunnelArgoTunnelCreateAnArgoTunnelResponse;
   export import TunnelArgoTunnelListArgoTunnelsResponse = TunnelsAPI.TunnelArgoTunnelListArgoTunnelsResponse;
+  export import TunnelGetResponse = TunnelsAPI.TunnelGetResponse;
   export import TunnelDeleteParams = TunnelsAPI.TunnelDeleteParams;
   export import TunnelArgoTunnelCreateAnArgoTunnelParams = TunnelsAPI.TunnelArgoTunnelCreateAnArgoTunnelParams;
   export import TunnelArgoTunnelListArgoTunnelsParams = TunnelsAPI.TunnelArgoTunnelListArgoTunnelsParams;

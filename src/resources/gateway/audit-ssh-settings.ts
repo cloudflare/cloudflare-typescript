@@ -6,20 +6,6 @@ import * as AuditSSHSettingsAPI from 'cloudflare/resources/gateway/audit-ssh-set
 
 export class AuditSSHSettings extends APIResource {
   /**
-   * Get all Zero Trust Audit SSH settings for an account.
-   */
-  retrieve(
-    accountId: unknown,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AuditSSHSettingRetrieveResponse> {
-    return (
-      this._client.get(`/accounts/${accountId}/gateway/audit_ssh_settings`, options) as Core.APIPromise<{
-        result: AuditSSHSettingRetrieveResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Updates Zero Trust Audit SSH settings.
    */
   update(
@@ -34,9 +20,20 @@ export class AuditSSHSettings extends APIResource {
       }) as Core.APIPromise<{ result: AuditSSHSettingUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Get all Zero Trust Audit SSH settings for an account.
+   */
+  get(accountId: unknown, options?: Core.RequestOptions): Core.APIPromise<AuditSSHSettingGetResponse> {
+    return (
+      this._client.get(`/accounts/${accountId}/gateway/audit_ssh_settings`, options) as Core.APIPromise<{
+        result: AuditSSHSettingGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
-export interface AuditSSHSettingRetrieveResponse {
+export interface AuditSSHSettingUpdateResponse {
   created_at?: string;
 
   /**
@@ -52,7 +49,7 @@ export interface AuditSSHSettingRetrieveResponse {
   updated_at?: string;
 }
 
-export interface AuditSSHSettingUpdateResponse {
+export interface AuditSSHSettingGetResponse {
   created_at?: string;
 
   /**
@@ -81,7 +78,7 @@ export interface AuditSSHSettingUpdateParams {
 }
 
 export namespace AuditSSHSettings {
-  export import AuditSSHSettingRetrieveResponse = AuditSSHSettingsAPI.AuditSSHSettingRetrieveResponse;
   export import AuditSSHSettingUpdateResponse = AuditSSHSettingsAPI.AuditSSHSettingUpdateResponse;
+  export import AuditSSHSettingGetResponse = AuditSSHSettingsAPI.AuditSSHSettingGetResponse;
   export import AuditSSHSettingUpdateParams = AuditSSHSettingsAPI.AuditSSHSettingUpdateParams;
 }

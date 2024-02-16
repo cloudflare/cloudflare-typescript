@@ -1,0 +1,196 @@
+// File generated from our OpenAPI spec by Stainless.
+
+import * as Core from 'cloudflare/core';
+import { APIResource } from 'cloudflare/resource';
+import * as BrowserCacheTTLAPI from 'cloudflare/resources/settings/browser-cache-ttl';
+
+export class BrowserCacheTTL extends APIResource {
+  /**
+   * Browser Cache TTL (in seconds) specifies how long Cloudflare-cached resources
+   * will remain on your visitors' computers. Cloudflare will honor any larger times
+   * specified by your server.
+   * (https://support.cloudflare.com/hc/en-us/articles/200168276).
+   */
+  update(
+    zoneId: string,
+    body: BrowserCacheTTLUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<BrowserCacheTTLUpdateResponse> {
+    return (
+      this._client.patch(`/zones/${zoneId}/settings/browser_cache_ttl`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: BrowserCacheTTLUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Browser Cache TTL (in seconds) specifies how long Cloudflare-cached resources
+   * will remain on your visitors' computers. Cloudflare will honor any larger times
+   * specified by your server.
+   * (https://support.cloudflare.com/hc/en-us/articles/200168276).
+   */
+  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<BrowserCacheTTLGetResponse> {
+    return (
+      this._client.get(`/zones/${zoneId}/settings/browser_cache_ttl`, options) as Core.APIPromise<{
+        result: BrowserCacheTTLGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+}
+
+/**
+ * Browser Cache TTL (in seconds) specifies how long Cloudflare-cached resources
+ * will remain on your visitors' computers. Cloudflare will honor any larger times
+ * specified by your server.
+ * (https://support.cloudflare.com/hc/en-us/articles/200168276).
+ */
+export interface BrowserCacheTTLUpdateResponse {
+  /**
+   * ID of the zone setting.
+   */
+  id: 'browser_cache_ttl';
+
+  /**
+   * Current value of the zone setting.
+   */
+  value:
+    | 0
+    | 30
+    | 60
+    | 120
+    | 300
+    | 1200
+    | 1800
+    | 3600
+    | 7200
+    | 10800
+    | 14400
+    | 18000
+    | 28800
+    | 43200
+    | 57600
+    | 72000
+    | 86400
+    | 172800
+    | 259200
+    | 345600
+    | 432000
+    | 691200
+    | 1382400
+    | 2073600
+    | 2678400
+    | 5356800
+    | 16070400
+    | 31536000;
+
+  /**
+   * Whether or not this setting can be modified for this zone (based on your
+   * Cloudflare plan level).
+   */
+  editable?: true | false;
+
+  /**
+   * last time this setting was modified.
+   */
+  modified_on?: string | null;
+}
+
+/**
+ * Browser Cache TTL (in seconds) specifies how long Cloudflare-cached resources
+ * will remain on your visitors' computers. Cloudflare will honor any larger times
+ * specified by your server.
+ * (https://support.cloudflare.com/hc/en-us/articles/200168276).
+ */
+export interface BrowserCacheTTLGetResponse {
+  /**
+   * ID of the zone setting.
+   */
+  id: 'browser_cache_ttl';
+
+  /**
+   * Current value of the zone setting.
+   */
+  value:
+    | 0
+    | 30
+    | 60
+    | 120
+    | 300
+    | 1200
+    | 1800
+    | 3600
+    | 7200
+    | 10800
+    | 14400
+    | 18000
+    | 28800
+    | 43200
+    | 57600
+    | 72000
+    | 86400
+    | 172800
+    | 259200
+    | 345600
+    | 432000
+    | 691200
+    | 1382400
+    | 2073600
+    | 2678400
+    | 5356800
+    | 16070400
+    | 31536000;
+
+  /**
+   * Whether or not this setting can be modified for this zone (based on your
+   * Cloudflare plan level).
+   */
+  editable?: true | false;
+
+  /**
+   * last time this setting was modified.
+   */
+  modified_on?: string | null;
+}
+
+export interface BrowserCacheTTLUpdateParams {
+  /**
+   * Value of the zone setting. Notes: Setting a TTL of 0 is equivalent to selecting
+   * `Respect Existing Headers`
+   */
+  value:
+    | 0
+    | 30
+    | 60
+    | 120
+    | 300
+    | 1200
+    | 1800
+    | 3600
+    | 7200
+    | 10800
+    | 14400
+    | 18000
+    | 28800
+    | 43200
+    | 57600
+    | 72000
+    | 86400
+    | 172800
+    | 259200
+    | 345600
+    | 432000
+    | 691200
+    | 1382400
+    | 2073600
+    | 2678400
+    | 5356800
+    | 16070400
+    | 31536000;
+}
+
+export namespace BrowserCacheTTL {
+  export import BrowserCacheTTLUpdateResponse = BrowserCacheTTLAPI.BrowserCacheTTLUpdateResponse;
+  export import BrowserCacheTTLGetResponse = BrowserCacheTTLAPI.BrowserCacheTTLGetResponse;
+  export import BrowserCacheTTLUpdateParams = BrowserCacheTTLAPI.BrowserCacheTTLUpdateParams;
+}

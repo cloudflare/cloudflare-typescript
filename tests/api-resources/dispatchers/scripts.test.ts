@@ -13,35 +13,6 @@ const cloudflare = new Cloudflare({
 
 describe('resource scripts', () => {
   // skipped: tests are disabled for the time being
-  test.skip('retrieve', async () => {
-    const responsePromise = cloudflare.dispatchers.scripts.retrieve(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'my-dispatch-namespace',
-      'this-is_my_script-01',
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('retrieve: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.dispatchers.scripts.retrieve(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        'my-dispatch-namespace',
-        'this-is_my_script-01',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
   test.skip('update', async () => {
     const responsePromise = cloudflare.dispatchers.scripts.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
@@ -73,5 +44,34 @@ describe('resource scripts', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get', async () => {
+    const responsePromise = cloudflare.dispatchers.scripts.get(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      'my-dispatch-namespace',
+      'this-is_my_script-01',
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.dispatchers.scripts.get(
+        '023e105f4ecef8ad9ca31a8372d0c353',
+        'my-dispatch-namespace',
+        'this-is_my_script-01',
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 });

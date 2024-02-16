@@ -6,20 +6,6 @@ import * as ConnectivitySettingsAPI from 'cloudflare/resources/zerotrust/connect
 
 export class ConnectivitySettings extends APIResource {
   /**
-   * Gets the Zero Trust Connectivity Settings for the given account.
-   */
-  retrieve(
-    accountId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ConnectivitySettingRetrieveResponse> {
-    return (
-      this._client.get(`/accounts/${accountId}/zerotrust/connectivity_settings`, options) as Core.APIPromise<{
-        result: ConnectivitySettingRetrieveResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Updates the Zero Trust Connectivity Settings for the given account.
    */
   update(
@@ -34,9 +20,20 @@ export class ConnectivitySettings extends APIResource {
       }) as Core.APIPromise<{ result: ConnectivitySettingUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Gets the Zero Trust Connectivity Settings for the given account.
+   */
+  get(accountId: string, options?: Core.RequestOptions): Core.APIPromise<ConnectivitySettingGetResponse> {
+    return (
+      this._client.get(`/accounts/${accountId}/zerotrust/connectivity_settings`, options) as Core.APIPromise<{
+        result: ConnectivitySettingGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
-export interface ConnectivitySettingRetrieveResponse {
+export interface ConnectivitySettingUpdateResponse {
   /**
    * A flag to enable the ICMP proxy for the account network.
    */
@@ -48,7 +45,7 @@ export interface ConnectivitySettingRetrieveResponse {
   offramp_warp_enabled?: boolean;
 }
 
-export interface ConnectivitySettingUpdateResponse {
+export interface ConnectivitySettingGetResponse {
   /**
    * A flag to enable the ICMP proxy for the account network.
    */
@@ -73,7 +70,7 @@ export interface ConnectivitySettingUpdateParams {
 }
 
 export namespace ConnectivitySettings {
-  export import ConnectivitySettingRetrieveResponse = ConnectivitySettingsAPI.ConnectivitySettingRetrieveResponse;
   export import ConnectivitySettingUpdateResponse = ConnectivitySettingsAPI.ConnectivitySettingUpdateResponse;
+  export import ConnectivitySettingGetResponse = ConnectivitySettingsAPI.ConnectivitySettingGetResponse;
   export import ConnectivitySettingUpdateParams = ConnectivitySettingsAPI.ConnectivitySettingUpdateParams;
 }

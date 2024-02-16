@@ -8,16 +8,16 @@ export class Configs extends APIResource {
   /**
    * Gets a history of published Zaraz configurations by ID(s) for a zone.
    */
-  retrieve(
+  get(
     zoneId: string,
-    query: ConfigRetrieveParams,
+    query: ConfigGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ConfigRetrieveResponse> {
+  ): Core.APIPromise<ConfigGetResponse> {
     return (
       this._client.get(`/zones/${zoneId}/settings/zaraz/history/configs`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: ConfigRetrieveResponse }>
+      }) as Core.APIPromise<{ result: ConfigGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -25,10 +25,10 @@ export class Configs extends APIResource {
 /**
  * Object where keys are numericc onfiguration IDs
  */
-export type ConfigRetrieveResponse = Record<string, ConfigRetrieveResponse.unnamed_schema_with_map_parent_1>;
+export type ConfigGetResponse = Record<string, ConfigGetResponse.unnamed_schema_with_map_parent_2>;
 
-export namespace ConfigRetrieveResponse {
-  export interface unnamed_schema_with_map_parent_1 {
+export namespace ConfigGetResponse {
+  export interface unnamed_schema_with_map_parent_2 {
     /**
      * ID of the configuration
      */
@@ -37,7 +37,7 @@ export namespace ConfigRetrieveResponse {
     /**
      * Zaraz configuration
      */
-    config: unnamed_schema_with_map_parent_1.Config;
+    config: unnamed_schema_with_map_parent_2.Config;
 
     /**
      * Date and time the configuration was created
@@ -55,7 +55,7 @@ export namespace ConfigRetrieveResponse {
     userId: string;
   }
 
-  export namespace unnamed_schema_with_map_parent_1 {
+  export namespace unnamed_schema_with_map_parent_2 {
     /**
      * Zaraz configuration
      */
@@ -791,7 +791,7 @@ export namespace ConfigRetrieveResponse {
   }
 }
 
-export interface ConfigRetrieveParams {
+export interface ConfigGetParams {
   /**
    * Comma separated list of Zaraz configuration IDs
    */
@@ -799,6 +799,6 @@ export interface ConfigRetrieveParams {
 }
 
 export namespace Configs {
-  export import ConfigRetrieveResponse = ConfigsAPI.ConfigRetrieveResponse;
-  export import ConfigRetrieveParams = ConfigsAPI.ConfigRetrieveParams;
+  export import ConfigGetResponse = ConfigsAPI.ConfigGetResponse;
+  export import ConfigGetParams = ConfigsAPI.ConfigGetParams;
 }

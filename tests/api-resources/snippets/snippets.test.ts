@@ -13,31 +13,6 @@ const cloudflare = new Cloudflare({
 
 describe('resource snippets', () => {
   // skipped: tests are disabled for the time being
-  test.skip('retrieve', async () => {
-    const responsePromise = cloudflare.snippets.retrieve(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'snippet_name_01',
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('retrieve: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.snippets.retrieve('023e105f4ecef8ad9ca31a8372d0c353', 'snippet_name_01', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
   test.skip('update', async () => {
     const responsePromise = cloudflare.snippets.update('023e105f4ecef8ad9ca31a8372d0c353', 'snippet_name_01');
     const rawResponse = await responsePromise.asResponse();
@@ -112,6 +87,28 @@ describe('resource snippets', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.snippets.delete('023e105f4ecef8ad9ca31a8372d0c353', 'snippet_name_01', {
+        path: '/_stainless_unknown_path',
+      }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get', async () => {
+    const responsePromise = cloudflare.snippets.get('023e105f4ecef8ad9ca31a8372d0c353', 'snippet_name_01');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.snippets.get('023e105f4ecef8ad9ca31a8372d0c353', 'snippet_name_01', {
         path: '/_stainless_unknown_path',
       }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
