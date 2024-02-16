@@ -5284,28 +5284,6 @@ Methods:
 
 ## IndicatorFeeds
 
-Types:
-
-- <code><a href="./src/resources/intel/indicator-feeds.ts">IndicatorFeedCreateResponse</a></code>
-- <code><a href="./src/resources/intel/indicator-feeds.ts">IndicatorFeedListResponse</a></code>
-- <code><a href="./src/resources/intel/indicator-feeds.ts">IndicatorFeedDataResponse</a></code>
-- <code><a href="./src/resources/intel/indicator-feeds.ts">IndicatorFeedGetResponse</a></code>
-- <code><a href="./src/resources/intel/indicator-feeds.ts">IndicatorFeedPermissionsAddResponse</a></code>
-- <code><a href="./src/resources/intel/indicator-feeds.ts">IndicatorFeedPermissionsRemoveResponse</a></code>
-- <code><a href="./src/resources/intel/indicator-feeds.ts">IndicatorFeedPermissionsViewResponse</a></code>
-- <code><a href="./src/resources/intel/indicator-feeds.ts">IndicatorFeedSnapshotResponse</a></code>
-
-Methods:
-
-- <code title="post /accounts/{account_identifier}/intel/indicator-feeds">client.intel.indicatorFeeds.<a href="./src/resources/intel/indicator-feeds.ts">create</a>(accountIdentifier, { ...params }) -> IndicatorFeedCreateResponse</code>
-- <code title="get /accounts/{account_identifier}/intel/indicator-feeds">client.intel.indicatorFeeds.<a href="./src/resources/intel/indicator-feeds.ts">list</a>(accountIdentifier) -> IndicatorFeedListResponse</code>
-- <code title="get /accounts/{account_identifier}/intel/indicator-feeds/{feed_id}/data">client.intel.indicatorFeeds.<a href="./src/resources/intel/indicator-feeds.ts">data</a>(accountIdentifier, feedId) -> string</code>
-- <code title="get /accounts/{account_identifier}/intel/indicator-feeds/{feed_id}">client.intel.indicatorFeeds.<a href="./src/resources/intel/indicator-feeds.ts">get</a>(accountIdentifier, feedId) -> IndicatorFeedGetResponse</code>
-- <code title="put /accounts/{account_identifier}/intel/indicator-feeds/permissions/add">client.intel.indicatorFeeds.<a href="./src/resources/intel/indicator-feeds.ts">permissionsAdd</a>(accountIdentifier, { ...params }) -> IndicatorFeedPermissionsAddResponse</code>
-- <code title="put /accounts/{account_identifier}/intel/indicator-feeds/permissions/remove">client.intel.indicatorFeeds.<a href="./src/resources/intel/indicator-feeds.ts">permissionsRemove</a>(accountIdentifier, { ...params }) -> IndicatorFeedPermissionsRemoveResponse</code>
-- <code title="get /accounts/{account_identifier}/intel/indicator-feeds/permissions/view">client.intel.indicatorFeeds.<a href="./src/resources/intel/indicator-feeds.ts">permissionsView</a>(accountIdentifier) -> IndicatorFeedPermissionsViewResponse</code>
-- <code title="put /accounts/{account_identifier}/intel/indicator-feeds/{feed_id}/snapshot">client.intel.indicatorFeeds.<a href="./src/resources/intel/indicator-feeds.ts">snapshot</a>(accountIdentifier, feedId, { ...params }) -> IndicatorFeedSnapshotResponse</code>
-
 ## Sinkholes
 
 Types:
