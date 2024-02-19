@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as AccountsAPI from 'cloudflare/resources/accounts';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class Accounts extends APIResource {
   /**
@@ -24,20 +25,24 @@ export class Accounts extends APIResource {
   /**
    * List all accounts you have ownership or verified access to.
    */
-  list(query?: AccountListParams, options?: Core.RequestOptions): Core.APIPromise<AccountListResponse | null>;
-  list(options?: Core.RequestOptions): Core.APIPromise<AccountListResponse | null>;
+  list(
+    query?: AccountListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<AccountListResponsesV4PagePaginationArray, AccountListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<AccountListResponsesV4PagePaginationArray, AccountListResponse>;
   list(
     query: AccountListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccountListResponse | null> {
+  ): Core.PagePromise<AccountListResponsesV4PagePaginationArray, AccountListResponse> {
     if (isRequestOptions(query)) {
       return this.list({}, query);
     }
-    return (
-      this._client.get('/accounts', { query, ...options }) as Core.APIPromise<{
-        result: AccountListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList('/accounts', AccountListResponsesV4PagePaginationArray, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -50,9 +55,11 @@ export class Accounts extends APIResource {
   }
 }
 
+export class AccountListResponsesV4PagePaginationArray extends V4PagePaginationArray<AccountListResponse> {}
+
 export type AccountUpdateResponse = unknown | string | null;
 
-export type AccountListResponse = Array<unknown>;
+export type AccountListResponse = unknown;
 
 export type AccountGetResponse = unknown | string | null;
 
@@ -103,27 +110,18 @@ export namespace AccountUpdateParams {
   }
 }
 
-export interface AccountListParams {
+export interface AccountListParams extends V4PagePaginationArrayParams {
   /**
    * Direction to order results.
    */
   direction?: 'asc' | 'desc';
-
-  /**
-   * Page number of paginated results.
-   */
-  page?: number;
-
-  /**
-   * Maximum number of results per page.
-   */
-  per_page?: number;
 }
 
 export namespace Accounts {
   export import AccountUpdateResponse = AccountsAPI.AccountUpdateResponse;
   export import AccountListResponse = AccountsAPI.AccountListResponse;
   export import AccountGetResponse = AccountsAPI.AccountGetResponse;
+  export import AccountListResponsesV4PagePaginationArray = AccountsAPI.AccountListResponsesV4PagePaginationArray;
   export import AccountUpdateParams = AccountsAPI.AccountUpdateParams;
   export import AccountListParams = AccountsAPI.AccountListParams;
 }

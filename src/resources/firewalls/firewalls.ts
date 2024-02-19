@@ -45,6 +45,7 @@ export namespace Firewalls {
   export import AccessRuleListResponse = AccessRulesAPI.AccessRuleListResponse;
   export import AccessRuleDeleteResponse = AccessRulesAPI.AccessRuleDeleteResponse;
   export import AccessRuleGetResponse = AccessRulesAPI.AccessRuleGetResponse;
+  export import AccessRuleListResponsesV4PagePaginationArray = AccessRulesAPI.AccessRuleListResponsesV4PagePaginationArray;
   export import AccessRuleCreateParams = AccessRulesAPI.AccessRuleCreateParams;
   export import AccessRuleUpdateParams = AccessRulesAPI.AccessRuleUpdateParams;
   export import AccessRuleListParams = AccessRulesAPI.AccessRuleListParams;

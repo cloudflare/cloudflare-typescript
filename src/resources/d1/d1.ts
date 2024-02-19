@@ -13,6 +13,7 @@ export namespace D1 {
   export import Databases = DatabasesAPI.Databases;
   export import DatabaseCreateResponse = DatabasesAPI.DatabaseCreateResponse;
   export import DatabaseListResponse = DatabasesAPI.DatabaseListResponse;
+  export import DatabaseListResponsesV4PagePaginationArray = DatabasesAPI.DatabaseListResponsesV4PagePaginationArray;
   export import DatabaseCreateParams = DatabasesAPI.DatabaseCreateParams;
   export import DatabaseListParams = DatabasesAPI.DatabaseListParams;
   export import Database = DatabaseAPI.Database;

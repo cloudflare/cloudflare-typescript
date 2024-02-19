@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as MembershipsAPI from 'cloudflare/resources/memberships';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class Memberships extends APIResource {
   /**
@@ -27,20 +28,21 @@ export class Memberships extends APIResource {
   list(
     query?: MembershipListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MembershipListResponse | null>;
-  list(options?: Core.RequestOptions): Core.APIPromise<MembershipListResponse | null>;
+  ): Core.PagePromise<MembershipListResponsesV4PagePaginationArray, MembershipListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<MembershipListResponsesV4PagePaginationArray, MembershipListResponse>;
   list(
     query: MembershipListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MembershipListResponse | null> {
+  ): Core.PagePromise<MembershipListResponsesV4PagePaginationArray, MembershipListResponse> {
     if (isRequestOptions(query)) {
       return this.list({}, query);
     }
-    return (
-      this._client.get('/memberships', { query, ...options }) as Core.APIPromise<{
-        result: MembershipListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList('/memberships', MembershipListResponsesV4PagePaginationArray, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -66,205 +68,203 @@ export class Memberships extends APIResource {
   }
 }
 
+export class MembershipListResponsesV4PagePaginationArray extends V4PagePaginationArray<MembershipListResponse> {}
+
 export type MembershipUpdateResponse = unknown | string | null;
 
-export type MembershipListResponse = Array<MembershipListResponse.MembershipListResponseItem>;
+export interface MembershipListResponse {
+  /**
+   * Membership identifier tag.
+   */
+  id?: string;
+
+  account?: MembershipListResponse.Account;
+
+  /**
+   * Enterprise only. Indicates whether or not API access is enabled specifically for
+   * this user on a given account.
+   */
+  api_access_enabled?: boolean | null;
+
+  /**
+   * The unique activation code for the account membership.
+   */
+  code?: string;
+
+  /**
+   * All access permissions for the user at the account.
+   */
+  permissions?: MembershipListResponse.Permissions;
+
+  /**
+   * List of role names for the user at the account.
+   */
+  roles?: Array<string>;
+
+  /**
+   * Status of this membership.
+   */
+  status?: 'accepted' | 'pending' | 'rejected';
+}
 
 export namespace MembershipListResponse {
-  export interface MembershipListResponseItem {
+  export interface Account {
     /**
-     * Membership identifier tag.
+     * Identifier
      */
-    id?: string;
-
-    account?: MembershipListResponseItem.Account;
+    id: string;
 
     /**
-     * Enterprise only. Indicates whether or not API access is enabled specifically for
-     * this user on a given account.
+     * Account name
      */
-    api_access_enabled?: boolean | null;
+    name: string;
 
     /**
-     * The unique activation code for the account membership.
+     * Timestamp for the creation of the account
      */
-    code?: string;
+    created_on?: string;
 
     /**
-     * All access permissions for the user at the account.
+     * Account settings
      */
-    permissions?: MembershipListResponseItem.Permissions;
-
-    /**
-     * List of role names for the user at the account.
-     */
-    roles?: Array<string>;
-
-    /**
-     * Status of this membership.
-     */
-    status?: 'accepted' | 'pending' | 'rejected';
+    settings?: Account.Settings;
   }
 
-  export namespace MembershipListResponseItem {
-    export interface Account {
-      /**
-       * Identifier
-       */
-      id: string;
-
-      /**
-       * Account name
-       */
-      name: string;
-
-      /**
-       * Timestamp for the creation of the account
-       */
-      created_on?: string;
-
-      /**
-       * Account settings
-       */
-      settings?: Account.Settings;
-    }
-
-    export namespace Account {
-      /**
-       * Account settings
-       */
-      export interface Settings {
-        /**
-         * Specifies the default nameservers to be used for new zones added to this
-         * account.
-         *
-         * - `cloudflare.standard` for Cloudflare-branded nameservers
-         * - `custom.account` for account custom nameservers
-         * - `custom.tenant` for tenant custom nameservers
-         *
-         * See
-         * [Custom Nameservers](https://developers.cloudflare.com/dns/additional-options/custom-nameservers/)
-         * for more information.
-         */
-        default_nameservers?: 'cloudflare.standard' | 'custom.account' | 'custom.tenant';
-
-        /**
-         * Indicates whether membership in this account requires that Two-Factor
-         * Authentication is enabled
-         */
-        enforce_twofactor?: boolean;
-
-        /**
-         * Indicates whether new zones should use the account-level custom nameservers by
-         * default.
-         *
-         * Deprecated in favor of `default_nameservers`.
-         */
-        use_account_custom_ns_by_default?: boolean;
-      }
-    }
-
+  export namespace Account {
     /**
-     * All access permissions for the user at the account.
+     * Account settings
      */
-    export interface Permissions {
-      analytics?: Permissions.Analytics;
+    export interface Settings {
+      /**
+       * Specifies the default nameservers to be used for new zones added to this
+       * account.
+       *
+       * - `cloudflare.standard` for Cloudflare-branded nameservers
+       * - `custom.account` for account custom nameservers
+       * - `custom.tenant` for tenant custom nameservers
+       *
+       * See
+       * [Custom Nameservers](https://developers.cloudflare.com/dns/additional-options/custom-nameservers/)
+       * for more information.
+       */
+      default_nameservers?: 'cloudflare.standard' | 'custom.account' | 'custom.tenant';
 
-      billing?: Permissions.Billing;
+      /**
+       * Indicates whether membership in this account requires that Two-Factor
+       * Authentication is enabled
+       */
+      enforce_twofactor?: boolean;
 
-      cache_purge?: Permissions.CachePurge;
+      /**
+       * Indicates whether new zones should use the account-level custom nameservers by
+       * default.
+       *
+       * Deprecated in favor of `default_nameservers`.
+       */
+      use_account_custom_ns_by_default?: boolean;
+    }
+  }
 
-      dns?: Permissions.DNS;
+  /**
+   * All access permissions for the user at the account.
+   */
+  export interface Permissions {
+    analytics?: Permissions.Analytics;
 
-      dns_records?: Permissions.DNSRecords;
+    billing?: Permissions.Billing;
 
-      lb?: Permissions.Lb;
+    cache_purge?: Permissions.CachePurge;
 
-      logs?: Permissions.Logs;
+    dns?: Permissions.DNS;
 
-      organization?: Permissions.Organization;
+    dns_records?: Permissions.DNSRecords;
 
-      ssl?: Permissions.SSL;
+    lb?: Permissions.Lb;
 
-      waf?: Permissions.WAF;
+    logs?: Permissions.Logs;
 
-      zone_settings?: Permissions.ZoneSettings;
+    organization?: Permissions.Organization;
 
-      zones?: Permissions.Zones;
+    ssl?: Permissions.SSL;
+
+    waf?: Permissions.WAF;
+
+    zone_settings?: Permissions.ZoneSettings;
+
+    zones?: Permissions.Zones;
+  }
+
+  export namespace Permissions {
+    export interface Analytics {
+      read?: boolean;
+
+      write?: boolean;
     }
 
-    export namespace Permissions {
-      export interface Analytics {
-        read?: boolean;
+    export interface Billing {
+      read?: boolean;
 
-        write?: boolean;
-      }
+      write?: boolean;
+    }
 
-      export interface Billing {
-        read?: boolean;
+    export interface CachePurge {
+      read?: boolean;
 
-        write?: boolean;
-      }
+      write?: boolean;
+    }
 
-      export interface CachePurge {
-        read?: boolean;
+    export interface DNS {
+      read?: boolean;
 
-        write?: boolean;
-      }
+      write?: boolean;
+    }
 
-      export interface DNS {
-        read?: boolean;
+    export interface DNSRecords {
+      read?: boolean;
 
-        write?: boolean;
-      }
+      write?: boolean;
+    }
 
-      export interface DNSRecords {
-        read?: boolean;
+    export interface Lb {
+      read?: boolean;
 
-        write?: boolean;
-      }
+      write?: boolean;
+    }
 
-      export interface Lb {
-        read?: boolean;
+    export interface Logs {
+      read?: boolean;
 
-        write?: boolean;
-      }
+      write?: boolean;
+    }
 
-      export interface Logs {
-        read?: boolean;
+    export interface Organization {
+      read?: boolean;
 
-        write?: boolean;
-      }
+      write?: boolean;
+    }
 
-      export interface Organization {
-        read?: boolean;
+    export interface SSL {
+      read?: boolean;
 
-        write?: boolean;
-      }
+      write?: boolean;
+    }
 
-      export interface SSL {
-        read?: boolean;
+    export interface WAF {
+      read?: boolean;
 
-        write?: boolean;
-      }
+      write?: boolean;
+    }
 
-      export interface WAF {
-        read?: boolean;
+    export interface ZoneSettings {
+      read?: boolean;
 
-        write?: boolean;
-      }
+      write?: boolean;
+    }
 
-      export interface ZoneSettings {
-        read?: boolean;
+    export interface Zones {
+      read?: boolean;
 
-        write?: boolean;
-      }
-
-      export interface Zones {
-        read?: boolean;
-
-        write?: boolean;
-      }
+      write?: boolean;
     }
   }
 }
@@ -285,7 +285,7 @@ export interface MembershipUpdateParams {
   status: 'accepted' | 'rejected';
 }
 
-export interface MembershipListParams {
+export interface MembershipListParams extends V4PagePaginationArrayParams {
   account?: MembershipListParams.Account;
 
   /**
@@ -302,16 +302,6 @@ export interface MembershipListParams {
    * Field to order memberships by.
    */
   order?: 'id' | 'account.name' | 'status';
-
-  /**
-   * Page number of paginated results.
-   */
-  page?: number;
-
-  /**
-   * Number of memberships per page.
-   */
-  per_page?: number;
 
   /**
    * Status of this membership.
@@ -333,6 +323,7 @@ export namespace Memberships {
   export import MembershipListResponse = MembershipsAPI.MembershipListResponse;
   export import MembershipDeleteResponse = MembershipsAPI.MembershipDeleteResponse;
   export import MembershipGetResponse = MembershipsAPI.MembershipGetResponse;
+  export import MembershipListResponsesV4PagePaginationArray = MembershipsAPI.MembershipListResponsesV4PagePaginationArray;
   export import MembershipUpdateParams = MembershipsAPI.MembershipUpdateParams;
   export import MembershipListParams = MembershipsAPI.MembershipListParams;
 }

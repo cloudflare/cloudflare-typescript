@@ -22,5 +22,6 @@ export namespace WAF {
   export import Packages = PackagesAPI.Packages;
   export import PackageListResponse = PackagesAPI.PackageListResponse;
   export import PackageGetResponse = PackagesAPI.PackageGetResponse;
+  export import PackageListResponsesV4PagePaginationArray = PackagesAPI.PackageListResponsesV4PagePaginationArray;
   export import PackageListParams = PackagesAPI.PackageListParams;
 }

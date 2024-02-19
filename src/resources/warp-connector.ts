@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as WarpConnectorAPI from 'cloudflare/resources/warp-connector';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class WarpConnector extends APIResource {
   /**
@@ -45,21 +46,24 @@ export class WarpConnector extends APIResource {
     accountId: string,
     query?: WarpConnectorListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WarpConnectorListResponse | null>;
-  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<WarpConnectorListResponse | null>;
+  ): Core.PagePromise<WarpConnectorListResponsesV4PagePaginationArray, WarpConnectorListResponse>;
+  list(
+    accountId: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<WarpConnectorListResponsesV4PagePaginationArray, WarpConnectorListResponse>;
   list(
     accountId: string,
     query: WarpConnectorListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WarpConnectorListResponse | null> {
+  ): Core.PagePromise<WarpConnectorListResponsesV4PagePaginationArray, WarpConnectorListResponse> {
     if (isRequestOptions(query)) {
       return this.list(accountId, {}, query);
     }
-    return (
-      this._client.get(`/accounts/${accountId}/warp_connector`, { query, ...options }) as Core.APIPromise<{
-        result: WarpConnectorListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${accountId}/warp_connector`,
+      WarpConnectorListResponsesV4PagePaginationArray,
+      { query, ...options },
+    );
   }
 
   /**
@@ -94,6 +98,8 @@ export class WarpConnector extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class WarpConnectorListResponsesV4PagePaginationArray extends V4PagePaginationArray<WarpConnectorListResponse> {}
 
 /**
  * A Cloudflare Tunnel that connects your origin to Cloudflare's edge.
@@ -577,9 +583,12 @@ export namespace WarpConnectorUpdateResponse {
   }
 }
 
-export type WarpConnectorListResponse = Array<
-  WarpConnectorListResponse.TunnelCfdTunnel | WarpConnectorListResponse.TunnelWarpConnectorTunnel
->;
+/**
+ * A Cloudflare Tunnel that connects your origin to Cloudflare's edge.
+ */
+export type WarpConnectorListResponse =
+  | WarpConnectorListResponse.TunnelCfdTunnel
+  | WarpConnectorListResponse.TunnelWarpConnectorTunnel;
 
 export namespace WarpConnectorListResponse {
   /**
@@ -1317,7 +1326,7 @@ export interface WarpConnectorUpdateParams {
   tunnel_secret?: string;
 }
 
-export interface WarpConnectorListParams {
+export interface WarpConnectorListParams extends V4PagePaginationArrayParams {
   exclude_prefix?: string;
 
   /**
@@ -1339,16 +1348,6 @@ export interface WarpConnectorListParams {
    */
   name?: string;
 
-  /**
-   * Page number of paginated results.
-   */
-  page?: number;
-
-  /**
-   * Number of results to display.
-   */
-  per_page?: number;
-
   was_active_at?: string;
 
   was_inactive_at?: string;
@@ -1362,6 +1361,7 @@ export namespace WarpConnector {
   export import WarpConnectorListResponse = WarpConnectorAPI.WarpConnectorListResponse;
   export import WarpConnectorDeleteResponse = WarpConnectorAPI.WarpConnectorDeleteResponse;
   export import WarpConnectorGetResponse = WarpConnectorAPI.WarpConnectorGetResponse;
+  export import WarpConnectorListResponsesV4PagePaginationArray = WarpConnectorAPI.WarpConnectorListResponsesV4PagePaginationArray;
   export import WarpConnectorCreateParams = WarpConnectorAPI.WarpConnectorCreateParams;
   export import WarpConnectorUpdateParams = WarpConnectorAPI.WarpConnectorUpdateParams;
   export import WarpConnectorListParams = WarpConnectorAPI.WarpConnectorListParams;

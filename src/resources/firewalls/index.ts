@@ -9,6 +9,7 @@ export {
   AccessRuleCreateParams,
   AccessRuleUpdateParams,
   AccessRuleListParams,
+  AccessRuleListResponsesV4PagePaginationArray,
   AccessRules,
 } from './access-rules';
 export { Firewalls } from './firewalls';

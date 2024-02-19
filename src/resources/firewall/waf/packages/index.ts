@@ -6,6 +6,7 @@ export {
   GroupGetResponse,
   GroupUpdateParams,
   GroupListParams,
+  GroupListResponsesV4PagePaginationArray,
   Groups,
 } from './groups';
 export { Packages } from './packages';

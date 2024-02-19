@@ -28,6 +28,7 @@ export namespace DEX {
   export import HTTPTestGetParams = HTTPTestsAPI.HTTPTestGetParams;
   export import Tests = TestsAPI.Tests;
   export import TestListResponse = TestsAPI.TestListResponse;
+  export import TestListResponsesV4PagePagination = TestsAPI.TestListResponsesV4PagePagination;
   export import TestListParams = TestsAPI.TestListParams;
   export import TracerouteTestResults = TracerouteTestResultsAPI.TracerouteTestResults;
   export import TracerouteTests = TracerouteTestsAPI.TracerouteTests;

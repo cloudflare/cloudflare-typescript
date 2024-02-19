@@ -1,6 +1,11 @@
 // File generated from our OpenAPI spec by Stainless.
 
-export { AuditLogListResponse, AuditLogListParams, AuditLogs } from './audit-logs';
+export {
+  AuditLogListResponse,
+  AuditLogListParams,
+  AuditLogListResponsesV4PagePaginationArray,
+  AuditLogs,
+} from './audit-logs';
 export { Billings } from './billings/index';
 export { Firewalls } from './firewalls/index';
 export {

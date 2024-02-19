@@ -16,6 +16,7 @@ export namespace Rum {
   export import SiteInfoListResponse = SiteInfosAPI.SiteInfoListResponse;
   export import SiteInfoDeleteResponse = SiteInfosAPI.SiteInfoDeleteResponse;
   export import SiteInfoGetResponse = SiteInfosAPI.SiteInfoGetResponse;
+  export import SiteInfoListResponsesV4PagePaginationArray = SiteInfosAPI.SiteInfoListResponsesV4PagePaginationArray;
   export import SiteInfoCreateParams = SiteInfosAPI.SiteInfoCreateParams;
   export import SiteInfoUpdateParams = SiteInfosAPI.SiteInfoUpdateParams;
   export import SiteInfoListParams = SiteInfosAPI.SiteInfoListParams;

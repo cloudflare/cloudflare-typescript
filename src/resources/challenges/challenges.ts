@@ -15,6 +15,7 @@ export namespace Challenges {
   export import WidgetDeleteResponse = WidgetsAPI.WidgetDeleteResponse;
   export import WidgetGetResponse = WidgetsAPI.WidgetGetResponse;
   export import WidgetRotateSecretResponse = WidgetsAPI.WidgetRotateSecretResponse;
+  export import WidgetListResponsesV4PagePaginationArray = WidgetsAPI.WidgetListResponsesV4PagePaginationArray;
   export import WidgetCreateParams = WidgetsAPI.WidgetCreateParams;
   export import WidgetUpdateParams = WidgetsAPI.WidgetUpdateParams;
   export import WidgetListParams = WidgetsAPI.WidgetListParams;

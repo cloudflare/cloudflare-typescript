@@ -11,5 +11,11 @@ export {
   OverrideWAFOverridesListWAFOverridesParams,
   Overrides,
 } from './overrides';
-export { PackageListResponse, PackageGetResponse, PackageListParams, Packages } from './packages/index';
+export {
+  PackageListResponse,
+  PackageGetResponse,
+  PackageListParams,
+  PackageListResponsesV4PagePaginationArray,
+  Packages,
+} from './packages/index';
 export { WAF } from './waf';

@@ -20,6 +20,7 @@ export {
   AccountMemberCreateParams,
   AccountMemberUpdateParams,
   AccountMemberListParams,
+  AccountMemberListResponsesV4PagePaginationArray,
   AccountMembers,
 } from './account-members';
 export {
@@ -28,6 +29,7 @@ export {
   AccountGetResponse,
   AccountUpdateParams,
   AccountListParams,
+  AccountListResponsesV4PagePaginationArray,
   Accounts,
 } from './accounts';
 export { Acms } from './acms/acms';
@@ -114,6 +116,7 @@ export {
   CustomCertificateCreateParams,
   CustomCertificateUpdateParams,
   CustomCertificateListParams,
+  CustomCertificateListResponsesV4PagePaginationArray,
   CustomCertificates,
 } from './custom-certificates/custom-certificates';
 export {
@@ -148,6 +151,7 @@ export {
   DNSFirewallCreateParams,
   DNSFirewallUpdateParams,
   DNSFirewallListParams,
+  DNSFirewallListResponsesV4PagePaginationArray,
   DNSFirewalls,
 } from './dns-firewalls/dns-firewalls';
 export {
@@ -163,6 +167,7 @@ export {
   DNSRecordUpdateParams,
   DNSRecordListParams,
   DNSRecordImportParams,
+  DNSRecordListResponsesV4PagePaginationArray,
   DNSRecords,
 } from './dns-records';
 export { DNSSECUpdateResponse, DNSSECGetResponse, DNSSECUpdateParams, DNSSECs } from './dnssecs';
@@ -250,6 +255,7 @@ export {
   MembershipGetResponse,
   MembershipUpdateParams,
   MembershipListParams,
+  MembershipListResponsesV4PagePaginationArray,
   Memberships,
 } from './memberships';
 export { Mnms } from './mnms/mnms';
@@ -310,6 +316,7 @@ export {
   RateLimitGetResponse,
   RateLimitUpdateParams,
   RateLimitListParams,
+  RateLimitListResponsesV4PagePaginationArray,
   RateLimits,
 } from './rate-limits';
 export { Registrar } from './registrar/registrar';
@@ -426,6 +433,7 @@ export {
   WarpConnectorUpdateParams,
   WarpConnectorListParams,
   WarpConnectorDeleteParams,
+  WarpConnectorListResponsesV4PagePaginationArray,
   WarpConnector,
 } from './warp-connector';
 export { Web3s } from './web3s/web3s';
@@ -444,5 +452,6 @@ export {
   ZoneCreateParams,
   ZoneUpdateParams,
   ZoneListParams,
+  ZoneListResponsesV4PagePaginationArray,
   Zones,
 } from './zones/zones';

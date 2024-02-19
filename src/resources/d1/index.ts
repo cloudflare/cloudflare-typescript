@@ -6,6 +6,7 @@ export {
   DatabaseListResponse,
   DatabaseCreateParams,
   DatabaseListParams,
+  DatabaseListResponsesV4PagePaginationArray,
   Databases,
 } from './databases';
 export {

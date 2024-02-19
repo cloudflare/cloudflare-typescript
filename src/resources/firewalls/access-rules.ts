@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as AccessRulesAPI from 'cloudflare/resources/firewalls/access-rules';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class AccessRules extends APIResource {
   /**
@@ -56,27 +57,26 @@ export class AccessRules extends APIResource {
     accountOrZoneId: unknown,
     query?: AccessRuleListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessRuleListResponse | null>;
+  ): Core.PagePromise<AccessRuleListResponsesV4PagePaginationArray, AccessRuleListResponse>;
   list(
     accountOrZone: string,
     accountOrZoneId: unknown,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessRuleListResponse | null>;
+  ): Core.PagePromise<AccessRuleListResponsesV4PagePaginationArray, AccessRuleListResponse>;
   list(
     accountOrZone: string,
     accountOrZoneId: unknown,
     query: AccessRuleListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessRuleListResponse | null> {
+  ): Core.PagePromise<AccessRuleListResponsesV4PagePaginationArray, AccessRuleListResponse> {
     if (isRequestOptions(query)) {
       return this.list(accountOrZone, accountOrZoneId, {}, query);
     }
-    return (
-      this._client.get(`/${accountOrZone}/${accountOrZoneId}/firewall/access_rules/rules`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: AccessRuleListResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/${accountOrZone}/${accountOrZoneId}/firewall/access_rules/rules`,
+      AccessRuleListResponsesV4PagePaginationArray,
+      { query, ...options },
+    );
   }
 
   /**
@@ -116,11 +116,13 @@ export class AccessRules extends APIResource {
   }
 }
 
+export class AccessRuleListResponsesV4PagePaginationArray extends V4PagePaginationArray<AccessRuleListResponse> {}
+
 export type AccessRuleCreateResponse = unknown | string;
 
 export type AccessRuleUpdateResponse = unknown | string;
 
-export type AccessRuleListResponse = Array<unknown>;
+export type AccessRuleListResponse = unknown;
 
 export interface AccessRuleDeleteResponse {
   /**
@@ -321,7 +323,7 @@ export namespace AccessRuleUpdateParams {
   }
 }
 
-export interface AccessRuleListParams {
+export interface AccessRuleListParams extends V4PagePaginationArrayParams {
   /**
    * The direction used to sort returned rules.
    */
@@ -335,16 +337,6 @@ export interface AccessRuleListParams {
    * The field used to sort returned rules.
    */
   order?: 'configuration.target' | 'configuration.value' | 'mode';
-
-  /**
-   * Requested page within paginated list of results.
-   */
-  page?: number;
-
-  /**
-   * Maximum number of results requested.
-   */
-  per_page?: number;
 }
 
 export namespace AccessRuleListParams {
@@ -407,6 +399,7 @@ export namespace AccessRules {
   export import AccessRuleListResponse = AccessRulesAPI.AccessRuleListResponse;
   export import AccessRuleDeleteResponse = AccessRulesAPI.AccessRuleDeleteResponse;
   export import AccessRuleGetResponse = AccessRulesAPI.AccessRuleGetResponse;
+  export import AccessRuleListResponsesV4PagePaginationArray = AccessRulesAPI.AccessRuleListResponsesV4PagePaginationArray;
   export import AccessRuleCreateParams = AccessRulesAPI.AccessRuleCreateParams;
   export import AccessRuleUpdateParams = AccessRulesAPI.AccessRuleUpdateParams;
   export import AccessRuleListParams = AccessRulesAPI.AccessRuleListParams;

@@ -8,7 +8,13 @@ export {
   GroupWAFRuleGroupsListWAFRuleGroupsParams,
   Groups,
 } from './groups';
-export { PackageListResponse, PackageGetResponse, PackageListParams, Packages } from './packages';
+export {
+  PackageListResponse,
+  PackageGetResponse,
+  PackageListParams,
+  PackageListResponsesV4PagePaginationArray,
+  Packages,
+} from './packages';
 export {
   RuleUpdateResponse,
   RuleGetResponse,
