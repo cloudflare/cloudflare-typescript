@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as SiteInfosAPI from 'cloudflare/resources/rum/site-infos';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class SiteInfos extends APIResource {
   /**
@@ -45,22 +46,24 @@ export class SiteInfos extends APIResource {
     accountId: string,
     query?: SiteInfoListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SiteInfoListResponse>;
-  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<SiteInfoListResponse>;
+  ): Core.PagePromise<SiteInfoListResponsesV4PagePaginationArray, SiteInfoListResponse>;
+  list(
+    accountId: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<SiteInfoListResponsesV4PagePaginationArray, SiteInfoListResponse>;
   list(
     accountId: string,
     query: SiteInfoListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SiteInfoListResponse> {
+  ): Core.PagePromise<SiteInfoListResponsesV4PagePaginationArray, SiteInfoListResponse> {
     if (isRequestOptions(query)) {
       return this.list(accountId, {}, query);
     }
-    return (
-      this._client.get(`/accounts/${accountId}/rum/site_info/list`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: SiteInfoListResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${accountId}/rum/site_info/list`,
+      SiteInfoListResponsesV4PagePaginationArray,
+      { query, ...options },
+    );
   }
 
   /**
@@ -93,6 +96,8 @@ export class SiteInfos extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class SiteInfoListResponsesV4PagePaginationArray extends V4PagePaginationArray<SiteInfoListResponse> {}
 
 export interface SiteInfoCreateResponse {
   /**
@@ -262,91 +267,87 @@ export namespace SiteInfoUpdateResponse {
   }
 }
 
-export type SiteInfoListResponse = Array<SiteInfoListResponse.SiteInfoListResponseItem>;
+export interface SiteInfoListResponse {
+  /**
+   * If enabled, the JavaScript snippet is automatically injected for orange-clouded
+   * sites.
+   */
+  auto_install?: boolean;
+
+  created?: string;
+
+  /**
+   * A list of rules.
+   */
+  rules?: Array<SiteInfoListResponse.Rule>;
+
+  ruleset?: SiteInfoListResponse.Ruleset;
+
+  /**
+   * The Web Analytics site identifier.
+   */
+  site_tag?: string;
+
+  /**
+   * The Web Analytics site token.
+   */
+  site_token?: string;
+
+  /**
+   * Encoded JavaScript snippet.
+   */
+  snippet?: string;
+}
 
 export namespace SiteInfoListResponse {
-  export interface SiteInfoListResponseItem {
+  export interface Rule {
     /**
-     * If enabled, the JavaScript snippet is automatically injected for orange-clouded
-     * sites.
+     * The Web Analytics rule identifier.
      */
-    auto_install?: boolean;
+    id?: string;
 
     created?: string;
 
     /**
-     * A list of rules.
+     * The hostname the rule will be applied to.
      */
-    rules?: Array<SiteInfoListResponseItem.Rule>;
-
-    ruleset?: SiteInfoListResponseItem.Ruleset;
+    host?: string;
 
     /**
-     * The Web Analytics site identifier.
+     * Whether the rule includes or excludes traffic from being measured.
      */
-    site_tag?: string;
+    inclusive?: boolean;
 
     /**
-     * The Web Analytics site token.
+     * Whether the rule is paused or not.
      */
-    site_token?: string;
+    is_paused?: boolean;
 
     /**
-     * Encoded JavaScript snippet.
+     * The paths the rule will be applied to.
      */
-    snippet?: string;
+    paths?: Array<string>;
+
+    priority?: number;
   }
 
-  export namespace SiteInfoListResponseItem {
-    export interface Rule {
-      /**
-       * The Web Analytics rule identifier.
-       */
-      id?: string;
+  export interface Ruleset {
+    /**
+     * The Web Analytics ruleset identifier.
+     */
+    id?: string;
 
-      created?: string;
+    /**
+     * Whether the ruleset is enabled.
+     */
+    enabled?: boolean;
 
-      /**
-       * The hostname the rule will be applied to.
-       */
-      host?: string;
+    zone_name?: string;
 
-      /**
-       * Whether the rule includes or excludes traffic from being measured.
-       */
-      inclusive?: boolean;
-
-      /**
-       * Whether the rule is paused or not.
-       */
-      is_paused?: boolean;
-
-      /**
-       * The paths the rule will be applied to.
-       */
-      paths?: Array<string>;
-
-      priority?: number;
-    }
-
-    export interface Ruleset {
-      /**
-       * The Web Analytics ruleset identifier.
-       */
-      id?: string;
-
-      /**
-       * Whether the ruleset is enabled.
-       */
-      enabled?: boolean;
-
-      zone_name?: string;
-
-      /**
-       * The zone identifier.
-       */
-      zone_tag?: string;
-    }
+    /**
+     * The zone identifier.
+     */
+    zone_tag?: string;
   }
 }
 
@@ -477,21 +478,11 @@ export interface SiteInfoUpdateParams {
   zone_tag?: string;
 }
 
-export interface SiteInfoListParams {
+export interface SiteInfoListParams extends V4PagePaginationArrayParams {
   /**
    * The property used to sort the list of results.
    */
   order_by?: 'host' | 'created';
-
-  /**
-   * Current page within the paginated list of results.
-   */
-  page?: number;
-
-  /**
-   * Number of items to return per page of results.
-   */
-  per_page?: number;
 }
 
 export namespace SiteInfos {
@@ -500,6 +491,7 @@ export namespace SiteInfos {
   export import SiteInfoListResponse = SiteInfosAPI.SiteInfoListResponse;
   export import SiteInfoDeleteResponse = SiteInfosAPI.SiteInfoDeleteResponse;
   export import SiteInfoGetResponse = SiteInfosAPI.SiteInfoGetResponse;
+  export import SiteInfoListResponsesV4PagePaginationArray = SiteInfosAPI.SiteInfoListResponsesV4PagePaginationArray;
   export import SiteInfoCreateParams = SiteInfosAPI.SiteInfoCreateParams;
   export import SiteInfoUpdateParams = SiteInfosAPI.SiteInfoUpdateParams;
   export import SiteInfoListParams = SiteInfosAPI.SiteInfoListParams;

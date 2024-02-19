@@ -14,6 +14,7 @@ export namespace Packages {
   export import GroupUpdateResponse = GroupsAPI.GroupUpdateResponse;
   export import GroupListResponse = GroupsAPI.GroupListResponse;
   export import GroupGetResponse = GroupsAPI.GroupGetResponse;
+  export import GroupListResponsesV4PagePaginationArray = GroupsAPI.GroupListResponsesV4PagePaginationArray;
   export import GroupUpdateParams = GroupsAPI.GroupUpdateParams;
   export import GroupListParams = GroupsAPI.GroupListParams;
   export import Rules = RulesAPI.Rules;

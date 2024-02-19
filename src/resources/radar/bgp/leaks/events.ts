@@ -4,73 +4,100 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as EventsAPI from 'cloudflare/resources/radar/bgp/leaks/events';
+import { V4PagePagination, type V4PagePaginationParams } from 'cloudflare/pagination';
 
 export class Events extends APIResource {
   /**
    * Get the BGP route leak events (Beta).
    */
-  list(query?: EventListParams, options?: Core.RequestOptions): Core.APIPromise<EventListResponse>;
-  list(options?: Core.RequestOptions): Core.APIPromise<EventListResponse>;
+  list(
+    query?: EventListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<EventListResponsesV4PagePagination, EventListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<EventListResponsesV4PagePagination, EventListResponse>;
   list(
     query: EventListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<EventListResponse> {
+  ): Core.PagePromise<EventListResponsesV4PagePagination, EventListResponse> {
     if (isRequestOptions(query)) {
       return this.list({}, query);
     }
-    return (
-      this._client.get('/radar/bgp/leaks/events', { query, ...options }) as Core.APIPromise<{
-        result: EventListResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList('/radar/bgp/leaks/events', EventListResponsesV4PagePagination, {
+      query,
+      ...options,
+    });
   }
 }
 
-export interface EventListResponse {
-  asn_info: Array<EventListResponse.AsnInfo>;
+export class EventListResponsesV4PagePagination extends V4PagePagination<EventListResponse> {}
 
-  events: Array<EventListResponse.Event>;
+export interface EventListResponse {
+  result: EventListResponse.Result;
+
+  result_info: EventListResponse.ResultInfo;
+
+  success: boolean;
 }
 
 export namespace EventListResponse {
-  export interface AsnInfo {
-    asn: number;
+  export interface Result {
+    asn_info: Array<Result.AsnInfo>;
 
-    country_code: string;
-
-    org_name: string;
+    events: Array<Result.Event>;
   }
 
-  export interface Event {
-    id: number;
+  export namespace Result {
+    export interface AsnInfo {
+      asn: number;
 
-    countries: Array<string>;
+      country_code: string;
 
-    detected_ts: string;
+      org_name: string;
+    }
 
-    finished: boolean;
+    export interface Event {
+      id: number;
 
-    leak_asn: number;
+      countries: Array<string>;
 
-    leak_count: number;
+      detected_ts: string;
 
-    leak_seg: Array<number>;
+      finished: boolean;
 
-    leak_type: number;
+      leak_asn: number;
 
-    max_ts: string;
+      leak_count: number;
 
-    min_ts: string;
+      leak_seg: Array<number>;
 
-    origin_count: number;
+      leak_type: number;
 
-    peer_count: number;
+      max_ts: string;
 
-    prefix_count: number;
+      min_ts: string;
+
+      origin_count: number;
+
+      peer_count: number;
+
+      prefix_count: number;
+    }
+  }
+
+  export interface ResultInfo {
+    count: number;
+
+    page: number;
+
+    per_page: number;
+
+    total_count: number;
   }
 }
 
-export interface EventListParams {
+export interface EventListParams extends V4PagePaginationParams {
   /**
    * End of the date range (inclusive).
    */
@@ -128,16 +155,6 @@ export interface EventListParams {
   leakAsn?: number;
 
   /**
-   * Current page number, starting from 1
-   */
-  page?: number;
-
-  /**
-   * Number of entries per page
-   */
-  per_page?: number;
-
-  /**
    * Sort events by field
    */
   sortBy?: 'ID' | 'LEAKS' | 'PEERS' | 'PREFIXES' | 'ORIGINS' | 'TIME';
@@ -150,5 +167,6 @@ export interface EventListParams {
 
 export namespace Events {
   export import EventListResponse = EventsAPI.EventListResponse;
+  export import EventListResponsesV4PagePagination = EventsAPI.EventListResponsesV4PagePagination;
   export import EventListParams = EventsAPI.EventListParams;
 }

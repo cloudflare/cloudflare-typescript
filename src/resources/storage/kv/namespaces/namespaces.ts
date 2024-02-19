@@ -8,6 +8,7 @@ import * as BulksAPI from 'cloudflare/resources/storage/kv/namespaces/bulks';
 import * as KeysAPI from 'cloudflare/resources/storage/kv/namespaces/keys';
 import * as MetadataAPI from 'cloudflare/resources/storage/kv/namespaces/metadata';
 import * as ValuesAPI from 'cloudflare/resources/storage/kv/namespaces/values';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class Namespaces extends APIResource {
   bulks: BulksAPI.Bulks = new BulksAPI.Bulks(this._client);
@@ -39,22 +40,24 @@ export class Namespaces extends APIResource {
     accountId: string,
     query?: NamespaceListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<NamespaceListResponse | null>;
-  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<NamespaceListResponse | null>;
+  ): Core.PagePromise<NamespaceListResponsesV4PagePaginationArray, NamespaceListResponse>;
+  list(
+    accountId: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<NamespaceListResponsesV4PagePaginationArray, NamespaceListResponse>;
   list(
     accountId: string,
     query: NamespaceListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<NamespaceListResponse | null> {
+  ): Core.PagePromise<NamespaceListResponsesV4PagePaginationArray, NamespaceListResponse> {
     if (isRequestOptions(query)) {
       return this.list(accountId, {}, query);
     }
-    return (
-      this._client.get(`/accounts/${accountId}/storage/kv/namespaces`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: NamespaceListResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${accountId}/storage/kv/namespaces`,
+      NamespaceListResponsesV4PagePaginationArray,
+      { query, ...options },
+    );
   }
 
   /**
@@ -92,28 +95,26 @@ export class Namespaces extends APIResource {
   }
 }
 
+export class NamespaceListResponsesV4PagePaginationArray extends V4PagePaginationArray<NamespaceListResponse> {}
+
 export type NamespaceUpdateResponse = unknown | string;
 
-export type NamespaceListResponse = Array<NamespaceListResponse.NamespaceListResponseItem>;
+export interface NamespaceListResponse {
+  /**
+   * Namespace identifier tag.
+   */
+  id: string;
 
-export namespace NamespaceListResponse {
-  export interface NamespaceListResponseItem {
-    /**
-     * Namespace identifier tag.
-     */
-    id: string;
+  /**
+   * A human-readable string name for a Namespace.
+   */
+  title: string;
 
-    /**
-     * A human-readable string name for a Namespace.
-     */
-    title: string;
-
-    /**
-     * True if keys written on the URL will be URL-decoded before storing. For example,
-     * if set to "true", a key written on the URL as "%3F" will be stored as "?".
-     */
-    supports_url_encoding?: boolean;
-  }
+  /**
+   * True if keys written on the URL will be URL-decoded before storing. For example,
+   * if set to "true", a key written on the URL as "%3F" will be stored as "?".
+   */
+  supports_url_encoding?: boolean;
 }
 
 export type NamespaceDeleteResponse = unknown | string;
@@ -143,7 +144,7 @@ export interface NamespaceUpdateParams {
   title: string;
 }
 
-export interface NamespaceListParams {
+export interface NamespaceListParams extends V4PagePaginationArrayParams {
   /**
    * Direction to order namespaces.
    */
@@ -153,16 +154,6 @@ export interface NamespaceListParams {
    * Field to order results by.
    */
   order?: 'id' | 'title';
-
-  /**
-   * Page number of paginated results.
-   */
-  page?: number;
-
-  /**
-   * Maximum number of results per page.
-   */
-  per_page?: number;
 }
 
 export interface NamespaceWorkersKvNamespaceCreateANamespaceParams {
@@ -177,6 +168,7 @@ export namespace Namespaces {
   export import NamespaceListResponse = NamespacesAPI.NamespaceListResponse;
   export import NamespaceDeleteResponse = NamespacesAPI.NamespaceDeleteResponse;
   export import NamespaceWorkersKvNamespaceCreateANamespaceResponse = NamespacesAPI.NamespaceWorkersKvNamespaceCreateANamespaceResponse;
+  export import NamespaceListResponsesV4PagePaginationArray = NamespacesAPI.NamespaceListResponsesV4PagePaginationArray;
   export import NamespaceUpdateParams = NamespacesAPI.NamespaceUpdateParams;
   export import NamespaceListParams = NamespacesAPI.NamespaceListParams;
   export import NamespaceWorkersKvNamespaceCreateANamespaceParams = NamespacesAPI.NamespaceWorkersKvNamespaceCreateANamespaceParams;

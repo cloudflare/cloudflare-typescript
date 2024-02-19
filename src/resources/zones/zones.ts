@@ -5,6 +5,7 @@ import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as ZonesAPI from 'cloudflare/resources/zones/zones';
 import * as HoldAPI from 'cloudflare/resources/zones/hold';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class Zones extends APIResource {
   hold: HoldAPI.Hold = new HoldAPI.Hold(this._client);
@@ -36,18 +37,21 @@ export class Zones extends APIResource {
   /**
    * Lists, searches, sorts, and filters your zones.
    */
-  list(query?: ZoneListParams, options?: Core.RequestOptions): Core.APIPromise<ZoneListResponse>;
-  list(options?: Core.RequestOptions): Core.APIPromise<ZoneListResponse>;
+  list(
+    query?: ZoneListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ZoneListResponsesV4PagePaginationArray, ZoneListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ZoneListResponsesV4PagePaginationArray, ZoneListResponse>;
   list(
     query: ZoneListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneListResponse> {
+  ): Core.PagePromise<ZoneListResponsesV4PagePaginationArray, ZoneListResponse> {
     if (isRequestOptions(query)) {
       return this.list({}, query);
     }
-    return (
-      this._client.get('/zones', { query, ...options }) as Core.APIPromise<{ result: ZoneListResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList('/zones', ZoneListResponsesV4PagePaginationArray, { query, ...options });
   }
 
   /**
@@ -70,6 +74,8 @@ export class Zones extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class ZoneListResponsesV4PagePaginationArray extends V4PagePaginationArray<ZoneListResponse> {}
 
 export interface ZoneCreateResponse {
   /**
@@ -361,152 +367,148 @@ export namespace ZoneUpdateResponse {
   }
 }
 
-export type ZoneListResponse = Array<ZoneListResponse.ZoneListResponseItem>;
+export interface ZoneListResponse {
+  /**
+   * Identifier
+   */
+  id: string;
+
+  /**
+   * The account the zone belongs to
+   */
+  account: ZoneListResponse.Account;
+
+  /**
+   * The last time proof of ownership was detected and the zone was made active
+   */
+  activated_on: string | null;
+
+  /**
+   * When the zone was created
+   */
+  created_on: string;
+
+  /**
+   * The interval (in seconds) from when development mode expires (positive integer)
+   * or last expired (negative integer) for the domain. If development mode has never
+   * been enabled, this value is 0.
+   */
+  development_mode: number;
+
+  /**
+   * Metadata about the zone
+   */
+  meta: ZoneListResponse.Meta;
+
+  /**
+   * When the zone was last modified
+   */
+  modified_on: string;
+
+  /**
+   * The domain name
+   */
+  name: string;
+
+  /**
+   * DNS host at the time of switching to Cloudflare
+   */
+  original_dnshost: string | null;
+
+  /**
+   * Original name servers before moving to Cloudflare Notes: Is this only available
+   * for full zones?
+   */
+  original_name_servers: Array<string> | null;
+
+  /**
+   * Registrar for the domain at the time of switching to Cloudflare
+   */
+  original_registrar: string | null;
+
+  /**
+   * The owner of the zone
+   */
+  owner: ZoneListResponse.Owner;
+
+  /**
+   * An array of domains used for custom name servers. This is only available for
+   * Business and Enterprise plans.
+   */
+  vanity_name_servers?: Array<string>;
+}
 
 export namespace ZoneListResponse {
-  export interface ZoneListResponseItem {
+  /**
+   * The account the zone belongs to
+   */
+  export interface Account {
     /**
      * Identifier
      */
-    id: string;
+    id?: string;
 
     /**
-     * The account the zone belongs to
+     * The name of the account
      */
-    account: ZoneListResponseItem.Account;
-
-    /**
-     * The last time proof of ownership was detected and the zone was made active
-     */
-    activated_on: string | null;
-
-    /**
-     * When the zone was created
-     */
-    created_on: string;
-
-    /**
-     * The interval (in seconds) from when development mode expires (positive integer)
-     * or last expired (negative integer) for the domain. If development mode has never
-     * been enabled, this value is 0.
-     */
-    development_mode: number;
-
-    /**
-     * Metadata about the zone
-     */
-    meta: ZoneListResponseItem.Meta;
-
-    /**
-     * When the zone was last modified
-     */
-    modified_on: string;
-
-    /**
-     * The domain name
-     */
-    name: string;
-
-    /**
-     * DNS host at the time of switching to Cloudflare
-     */
-    original_dnshost: string | null;
-
-    /**
-     * Original name servers before moving to Cloudflare Notes: Is this only available
-     * for full zones?
-     */
-    original_name_servers: Array<string> | null;
-
-    /**
-     * Registrar for the domain at the time of switching to Cloudflare
-     */
-    original_registrar: string | null;
-
-    /**
-     * The owner of the zone
-     */
-    owner: ZoneListResponseItem.Owner;
-
-    /**
-     * An array of domains used for custom name servers. This is only available for
-     * Business and Enterprise plans.
-     */
-    vanity_name_servers?: Array<string>;
+    name?: string;
   }
 
-  export namespace ZoneListResponseItem {
+  /**
+   * Metadata about the zone
+   */
+  export interface Meta {
     /**
-     * The account the zone belongs to
+     * The zone is only configured for CDN
      */
-    export interface Account {
-      /**
-       * Identifier
-       */
-      id?: string;
-
-      /**
-       * The name of the account
-       */
-      name?: string;
-    }
+    cdn_only?: boolean;
 
     /**
-     * Metadata about the zone
+     * Number of Custom Certificates the zone can have
      */
-    export interface Meta {
-      /**
-       * The zone is only configured for CDN
-       */
-      cdn_only?: boolean;
-
-      /**
-       * Number of Custom Certificates the zone can have
-       */
-      custom_certificate_quota?: number;
-
-      /**
-       * The zone is only configured for DNS
-       */
-      dns_only?: boolean;
-
-      /**
-       * The zone is setup with Foundation DNS
-       */
-      foundation_dns?: boolean;
-
-      /**
-       * Number of Page Rules a zone can have
-       */
-      page_rule_quota?: number;
-
-      /**
-       * The zone has been flagged for phishing
-       */
-      phishing_detected?: boolean;
-
-      step?: number;
-    }
+    custom_certificate_quota?: number;
 
     /**
-     * The owner of the zone
+     * The zone is only configured for DNS
      */
-    export interface Owner {
-      /**
-       * Identifier
-       */
-      id?: string;
+    dns_only?: boolean;
 
-      /**
-       * Name of the owner
-       */
-      name?: string;
+    /**
+     * The zone is setup with Foundation DNS
+     */
+    foundation_dns?: boolean;
 
-      /**
-       * The type of owner
-       */
-      type?: string;
-    }
+    /**
+     * Number of Page Rules a zone can have
+     */
+    page_rule_quota?: number;
+
+    /**
+     * The zone has been flagged for phishing
+     */
+    phishing_detected?: boolean;
+
+    step?: number;
+  }
+
+  /**
+   * The owner of the zone
+   */
+  export interface Owner {
+    /**
+     * Identifier
+     */
+    id?: string;
+
+    /**
+     * Name of the owner
+     */
+    name?: string;
+
+    /**
+     * The type of owner
+     */
+    type?: string;
   }
 }
 
@@ -723,7 +725,7 @@ export namespace ZoneUpdateParams {
   }
 }
 
-export interface ZoneListParams {
+export interface ZoneListParams extends V4PagePaginationArrayParams {
   account?: ZoneListParams.Account;
 
   /**
@@ -755,16 +757,6 @@ export interface ZoneListParams {
    * Field to order zones by.
    */
   order?: 'name' | 'status' | 'account.id' | 'account.name';
-
-  /**
-   * Page number of paginated results.
-   */
-  page?: number;
-
-  /**
-   * Number of zones per page.
-   */
-  per_page?: number;
 
   /**
    * A zone status
@@ -802,6 +794,7 @@ export namespace Zones {
   export import ZoneListResponse = ZonesAPI.ZoneListResponse;
   export import ZoneDeleteResponse = ZonesAPI.ZoneDeleteResponse;
   export import ZoneGetResponse = ZonesAPI.ZoneGetResponse;
+  export import ZoneListResponsesV4PagePaginationArray = ZonesAPI.ZoneListResponsesV4PagePaginationArray;
   export import ZoneCreateParams = ZonesAPI.ZoneCreateParams;
   export import ZoneUpdateParams = ZonesAPI.ZoneUpdateParams;
   export import ZoneListParams = ZonesAPI.ZoneListParams;

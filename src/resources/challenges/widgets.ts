@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as WidgetsAPI from 'cloudflare/resources/challenges/widgets';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class Widgets extends APIResource {
   /**
@@ -48,22 +49,24 @@ export class Widgets extends APIResource {
     accountIdentifier: string,
     query?: WidgetListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WidgetListResponse>;
-  list(accountIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<WidgetListResponse>;
+  ): Core.PagePromise<WidgetListResponsesV4PagePaginationArray, WidgetListResponse>;
+  list(
+    accountIdentifier: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<WidgetListResponsesV4PagePaginationArray, WidgetListResponse>;
   list(
     accountIdentifier: string,
     query: WidgetListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WidgetListResponse> {
+  ): Core.PagePromise<WidgetListResponsesV4PagePaginationArray, WidgetListResponse> {
     if (isRequestOptions(query)) {
       return this.list(accountIdentifier, {}, query);
     }
-    return (
-      this._client.get(`/accounts/${accountIdentifier}/challenges/widgets`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: WidgetListResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${accountIdentifier}/challenges/widgets`,
+      WidgetListResponsesV4PagePaginationArray,
+      { query, ...options },
+    );
   }
 
   /**
@@ -118,6 +121,8 @@ export class Widgets extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class WidgetListResponsesV4PagePaginationArray extends V4PagePaginationArray<WidgetListResponse> {}
 
 /**
  * A Turnstile widget's detailed configuration
@@ -241,64 +246,60 @@ export interface WidgetUpdateResponse {
   sitekey: string;
 }
 
-export type WidgetListResponse = Array<WidgetListResponse.WidgetListResponseItem>;
-
-export namespace WidgetListResponse {
+/**
+ * A Turnstile Widgets configuration as it appears in listings
+ */
+export interface WidgetListResponse {
   /**
-   * A Turnstile Widgets configuration as it appears in listings
+   * If bot_fight_mode is set to `true`, Cloudflare issues computationally expensive
+   * challenges in response to malicious bots (ENT only).
    */
-  export interface WidgetListResponseItem {
-    /**
-     * If bot_fight_mode is set to `true`, Cloudflare issues computationally expensive
-     * challenges in response to malicious bots (ENT only).
-     */
-    bot_fight_mode: boolean;
+  bot_fight_mode: boolean;
 
-    /**
-     * If Turnstile is embedded on a Cloudflare site and the widget should grant
-     * challenge clearance, this setting can determine the clearance level to be set
-     */
-    clearance_level: 'no_clearance' | 'jschallenge' | 'managed' | 'interactive';
+  /**
+   * If Turnstile is embedded on a Cloudflare site and the widget should grant
+   * challenge clearance, this setting can determine the clearance level to be set
+   */
+  clearance_level: 'no_clearance' | 'jschallenge' | 'managed' | 'interactive';
 
-    /**
-     * When the widget was created.
-     */
-    created_on: string;
+  /**
+   * When the widget was created.
+   */
+  created_on: string;
 
-    domains: Array<string>;
+  domains: Array<string>;
 
-    /**
-     * Widget Mode
-     */
-    mode: 'non-interactive' | 'invisible' | 'managed';
+  /**
+   * Widget Mode
+   */
+  mode: 'non-interactive' | 'invisible' | 'managed';
 
-    /**
-     * When the widget was modified.
-     */
-    modified_on: string;
+  /**
+   * When the widget was modified.
+   */
+  modified_on: string;
 
-    /**
-     * Human readable widget name. Not unique. Cloudflare suggests that you set this to
-     * a meaningful string to make it easier to identify your widget, and where it is
-     * used.
-     */
-    name: string;
+  /**
+   * Human readable widget name. Not unique. Cloudflare suggests that you set this to
+   * a meaningful string to make it easier to identify your widget, and where it is
+   * used.
+   */
+  name: string;
 
-    /**
-     * Do not show any Cloudflare branding on the widget (ENT only).
-     */
-    offlabel: boolean;
+  /**
+   * Do not show any Cloudflare branding on the widget (ENT only).
+   */
+  offlabel: boolean;
 
-    /**
-     * Region where this widget can be used.
-     */
-    region: 'world';
+  /**
+   * Region where this widget can be used.
+   */
+  region: 'world';
 
-    /**
-     * Widget item identifier tag.
-     */
-    sitekey: string;
-  }
+  /**
+   * Widget item identifier tag.
+   */
+  sitekey: string;
 }
 
 /**
@@ -579,7 +580,7 @@ export interface WidgetUpdateParams {
   offlabel?: boolean;
 }
 
-export interface WidgetListParams {
+export interface WidgetListParams extends V4PagePaginationArrayParams {
   /**
    * Direction to order widgets.
    */
@@ -589,16 +590,6 @@ export interface WidgetListParams {
    * Field to order widgets by.
    */
   order?: 'id' | 'sitekey' | 'name' | 'created_on' | 'modified_on';
-
-  /**
-   * Page number of paginated results.
-   */
-  page?: number;
-
-  /**
-   * Number of items per page.
-   */
-  per_page?: number;
 }
 
 export interface WidgetRotateSecretParams {
@@ -617,6 +608,7 @@ export namespace Widgets {
   export import WidgetDeleteResponse = WidgetsAPI.WidgetDeleteResponse;
   export import WidgetGetResponse = WidgetsAPI.WidgetGetResponse;
   export import WidgetRotateSecretResponse = WidgetsAPI.WidgetRotateSecretResponse;
+  export import WidgetListResponsesV4PagePaginationArray = WidgetsAPI.WidgetListResponsesV4PagePaginationArray;
   export import WidgetCreateParams = WidgetsAPI.WidgetCreateParams;
   export import WidgetUpdateParams = WidgetsAPI.WidgetUpdateParams;
   export import WidgetListParams = WidgetsAPI.WidgetListParams;

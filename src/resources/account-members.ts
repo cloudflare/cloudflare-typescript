@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as AccountMembersAPI from 'cloudflare/resources/account-members';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class AccountMembers extends APIResource {
   /**
@@ -45,21 +46,24 @@ export class AccountMembers extends APIResource {
     accountId: unknown,
     query?: AccountMemberListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccountMemberListResponse | null>;
-  list(accountId: unknown, options?: Core.RequestOptions): Core.APIPromise<AccountMemberListResponse | null>;
+  ): Core.PagePromise<AccountMemberListResponsesV4PagePaginationArray, AccountMemberListResponse>;
+  list(
+    accountId: unknown,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<AccountMemberListResponsesV4PagePaginationArray, AccountMemberListResponse>;
   list(
     accountId: unknown,
     query: AccountMemberListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccountMemberListResponse | null> {
+  ): Core.PagePromise<AccountMemberListResponsesV4PagePaginationArray, AccountMemberListResponse> {
     if (isRequestOptions(query)) {
       return this.list(accountId, {}, query);
     }
-    return (
-      this._client.get(`/accounts/${accountId}/members`, { query, ...options }) as Core.APIPromise<{
-        result: AccountMemberListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${accountId}/members`,
+      AccountMemberListResponsesV4PagePaginationArray,
+      { query, ...options },
+    );
   }
 
   /**
@@ -92,6 +96,8 @@ export class AccountMembers extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class AccountMemberListResponsesV4PagePaginationArray extends V4PagePaginationArray<AccountMemberListResponse> {}
 
 export interface AccountMemberCreateResponse {
   /**
@@ -432,58 +438,54 @@ export namespace AccountMemberUpdateResponse {
   }
 }
 
-export type AccountMemberListResponse = Array<AccountMemberListResponse.AccountMemberListResponseItem>;
+export interface AccountMemberListResponse {
+  /**
+   * Identifier
+   */
+  id: string;
+
+  /**
+   * The contact email address of the user.
+   */
+  email: string;
+
+  /**
+   * Member Name.
+   */
+  name: string | null;
+
+  /**
+   * Roles assigned to this Member.
+   */
+  roles: Array<AccountMemberListResponse.Role>;
+
+  /**
+   * A member's status in the organization.
+   */
+  status: 'accepted' | 'invited';
+}
 
 export namespace AccountMemberListResponse {
-  export interface AccountMemberListResponseItem {
+  export interface Role {
     /**
-     * Identifier
+     * Role identifier tag.
      */
     id: string;
 
     /**
-     * The contact email address of the user.
+     * Description of role's permissions.
      */
-    email: string;
+    description: string;
 
     /**
-     * Member Name.
+     * Role Name.
      */
-    name: string | null;
+    name: string;
 
     /**
-     * Roles assigned to this Member.
+     * Access permissions for this User.
      */
-    roles: Array<AccountMemberListResponseItem.Role>;
-
-    /**
-     * A member's status in the organization.
-     */
-    status: 'accepted' | 'invited';
-  }
-
-  export namespace AccountMemberListResponseItem {
-    export interface Role {
-      /**
-       * Role identifier tag.
-       */
-      id: string;
-
-      /**
-       * Description of role's permissions.
-       */
-      description: string;
-
-      /**
-       * Role Name.
-       */
-      name: string;
-
-      /**
-       * Access permissions for this User.
-       */
-      permissions: Array<string>;
-    }
+    permissions: Array<string>;
   }
 }
 
@@ -691,7 +693,7 @@ export namespace AccountMemberUpdateParams {
   }
 }
 
-export interface AccountMemberListParams {
+export interface AccountMemberListParams extends V4PagePaginationArrayParams {
   /**
    * Direction to order results.
    */
@@ -701,16 +703,6 @@ export interface AccountMemberListParams {
    * Field to order results by.
    */
   order?: 'user.first_name' | 'user.last_name' | 'user.email' | 'status';
-
-  /**
-   * Page number of paginated results.
-   */
-  page?: number;
-
-  /**
-   * Maximum number of results per page.
-   */
-  per_page?: number;
 
   /**
    * A member's status in the account.
@@ -724,6 +716,7 @@ export namespace AccountMembers {
   export import AccountMemberListResponse = AccountMembersAPI.AccountMemberListResponse;
   export import AccountMemberDeleteResponse = AccountMembersAPI.AccountMemberDeleteResponse;
   export import AccountMemberGetResponse = AccountMembersAPI.AccountMemberGetResponse;
+  export import AccountMemberListResponsesV4PagePaginationArray = AccountMembersAPI.AccountMemberListResponsesV4PagePaginationArray;
   export import AccountMemberCreateParams = AccountMembersAPI.AccountMemberCreateParams;
   export import AccountMemberUpdateParams = AccountMembersAPI.AccountMemberUpdateParams;
   export import AccountMemberListParams = AccountMembersAPI.AccountMemberListParams;

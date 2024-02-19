@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as DatabasesAPI from 'cloudflare/resources/d1/databases';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class Databases extends APIResource {
   /**
@@ -28,23 +29,28 @@ export class Databases extends APIResource {
     accountId: string,
     query?: DatabaseListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DatabaseListResponse>;
-  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<DatabaseListResponse>;
+  ): Core.PagePromise<DatabaseListResponsesV4PagePaginationArray, DatabaseListResponse>;
+  list(
+    accountId: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<DatabaseListResponsesV4PagePaginationArray, DatabaseListResponse>;
   list(
     accountId: string,
     query: DatabaseListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DatabaseListResponse> {
+  ): Core.PagePromise<DatabaseListResponsesV4PagePaginationArray, DatabaseListResponse> {
     if (isRequestOptions(query)) {
       return this.list(accountId, {}, query);
     }
-    return (
-      this._client.get(`/accounts/${accountId}/d1/database`, { query, ...options }) as Core.APIPromise<{
-        result: DatabaseListResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${accountId}/d1/database`,
+      DatabaseListResponsesV4PagePaginationArray,
+      { query, ...options },
+    );
   }
 }
+
+export class DatabaseListResponsesV4PagePaginationArray extends V4PagePaginationArray<DatabaseListResponse> {}
 
 export interface DatabaseCreateResponse {
   /**
@@ -59,47 +65,34 @@ export interface DatabaseCreateResponse {
   version?: string;
 }
 
-export type DatabaseListResponse = Array<DatabaseListResponse.DatabaseListResponseItem>;
+export interface DatabaseListResponse {
+  /**
+   * Specifies the timestamp the resource was created as an ISO8601 string.
+   */
+  created_at?: unknown;
 
-export namespace DatabaseListResponse {
-  export interface DatabaseListResponseItem {
-    /**
-     * Specifies the timestamp the resource was created as an ISO8601 string.
-     */
-    created_at?: unknown;
+  name?: string;
 
-    name?: string;
+  uuid?: string;
 
-    uuid?: string;
-
-    version?: string;
-  }
+  version?: string;
 }
 
 export interface DatabaseCreateParams {
   name: string;
 }
 
-export interface DatabaseListParams {
+export interface DatabaseListParams extends V4PagePaginationArrayParams {
   /**
    * a database name to search for.
    */
   name?: string;
-
-  /**
-   * Page number of paginated results.
-   */
-  page?: number;
-
-  /**
-   * Number of items per page.
-   */
-  per_page?: number;
 }
 
 export namespace Databases {
   export import DatabaseCreateResponse = DatabasesAPI.DatabaseCreateResponse;
   export import DatabaseListResponse = DatabasesAPI.DatabaseListResponse;
+  export import DatabaseListResponsesV4PagePaginationArray = DatabasesAPI.DatabaseListResponsesV4PagePaginationArray;
   export import DatabaseCreateParams = DatabasesAPI.DatabaseCreateParams;
   export import DatabaseListParams = DatabasesAPI.DatabaseListParams;
 }

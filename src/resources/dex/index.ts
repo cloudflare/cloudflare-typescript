@@ -4,7 +4,7 @@ export { ColoListResponse, ColoListParams, Colos } from './colos';
 export { DEX } from './dex';
 export { FleetStatus } from './fleet-status/index';
 export { HTTPTestGetResponse, HTTPTestGetParams, HTTPTests } from './http-tests/index';
-export { TestListResponse, TestListParams, Tests } from './tests/index';
+export { TestListResponse, TestListParams, TestListResponsesV4PagePagination, Tests } from './tests/index';
 export {
   TracerouteTestGetResponse,
   TracerouteTestNetworkPathResponse,

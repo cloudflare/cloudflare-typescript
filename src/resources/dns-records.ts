@@ -5,6 +5,7 @@ import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as DNSRecordsAPI from 'cloudflare/resources/dns-records';
 import { multipartFormRequestOptions } from 'cloudflare/core';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class DNSRecords extends APIResource {
   /**
@@ -58,21 +59,24 @@ export class DNSRecords extends APIResource {
     zoneId: string,
     query?: DNSRecordListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DNSRecordListResponse | null>;
-  list(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<DNSRecordListResponse | null>;
+  ): Core.PagePromise<DNSRecordListResponsesV4PagePaginationArray, DNSRecordListResponse>;
+  list(
+    zoneId: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<DNSRecordListResponsesV4PagePaginationArray, DNSRecordListResponse>;
   list(
     zoneId: string,
     query: DNSRecordListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DNSRecordListResponse | null> {
+  ): Core.PagePromise<DNSRecordListResponsesV4PagePaginationArray, DNSRecordListResponse> {
     if (isRequestOptions(query)) {
       return this.list(zoneId, {}, query);
     }
-    return (
-      this._client.get(`/zones/${zoneId}/dns_records`, { query, ...options }) as Core.APIPromise<{
-        result: DNSRecordListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/zones/${zoneId}/dns_records`,
+      DNSRecordListResponsesV4PagePaginationArray,
+      { query, ...options },
+    );
   }
 
   /**
@@ -156,6 +160,8 @@ export class DNSRecords extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class DNSRecordListResponsesV4PagePaginationArray extends V4PagePaginationArray<DNSRecordListResponse> {}
 
 export type DNSRecordCreateResponse =
   | DNSRecordCreateResponse.DNSRecordsARecord
@@ -4895,7 +4901,7 @@ export namespace DNSRecordUpdateResponse {
   }
 }
 
-export type DNSRecordListResponse = Array<
+export type DNSRecordListResponse =
   | DNSRecordListResponse.DNSRecordsARecord
   | DNSRecordListResponse.DNSRecordsAaaaRecord
   | DNSRecordListResponse.DNSRecordsCaaRecord
@@ -4915,8 +4921,7 @@ export type DNSRecordListResponse = Array<
   | DNSRecordListResponse.DNSRecordsSvcbRecord
   | DNSRecordListResponse.DNSRecordsTlsaRecord
   | DNSRecordListResponse.DNSRecordsTxtRecord
-  | DNSRecordListResponse.DNSRecordsUriRecord
->;
+  | DNSRecordListResponse.DNSRecordsUriRecord;
 
 export namespace DNSRecordListResponse {
   export interface DNSRecordsARecord {
@@ -11968,7 +11973,7 @@ export namespace DNSRecordUpdateParams {
   }
 }
 
-export interface DNSRecordListParams {
+export interface DNSRecordListParams extends V4PagePaginationArrayParams {
   comment?: DNSRecordListParams.Comment;
 
   /**
@@ -11998,16 +12003,6 @@ export interface DNSRecordListParams {
    * Field to order DNS records by.
    */
   order?: 'type' | 'name' | 'content' | 'ttl' | 'proxied';
-
-  /**
-   * Page number of paginated results.
-   */
-  page?: number;
-
-  /**
-   * Number of DNS records per page.
-   */
-  per_page?: number;
 
   /**
    * Whether the record is receiving the performance and security benefits of
@@ -12163,6 +12158,7 @@ export namespace DNSRecords {
   export import DNSRecordGetResponse = DNSRecordsAPI.DNSRecordGetResponse;
   export import DNSRecordImportResponse = DNSRecordsAPI.DNSRecordImportResponse;
   export import DNSRecordScanResponse = DNSRecordsAPI.DNSRecordScanResponse;
+  export import DNSRecordListResponsesV4PagePaginationArray = DNSRecordsAPI.DNSRecordListResponsesV4PagePaginationArray;
   export import DNSRecordCreateParams = DNSRecordsAPI.DNSRecordCreateParams;
   export import DNSRecordUpdateParams = DNSRecordsAPI.DNSRecordUpdateParams;
   export import DNSRecordListParams = DNSRecordsAPI.DNSRecordListParams;

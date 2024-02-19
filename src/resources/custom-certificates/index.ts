@@ -9,6 +9,7 @@ export {
   CustomCertificateCreateParams,
   CustomCertificateUpdateParams,
   CustomCertificateListParams,
+  CustomCertificateListResponsesV4PagePaginationArray,
   CustomCertificates,
 } from './custom-certificates';
 export {

@@ -9,5 +9,6 @@ export {
   NamespaceUpdateParams,
   NamespaceListParams,
   NamespaceWorkersKvNamespaceCreateANamespaceParams,
+  NamespaceListResponsesV4PagePaginationArray,
   Namespaces,
 } from './namespaces/index';

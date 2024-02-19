@@ -5,6 +5,7 @@ import * as Errors from './error';
 import { type Agent } from './_shims/index';
 import * as Uploads from './uploads';
 import * as qs from 'qs';
+import * as Pagination from 'cloudflare/pagination';
 import * as API from 'cloudflare/resources/index';
 
 export interface ClientOptions {
@@ -354,10 +355,19 @@ export namespace Cloudflare {
 
   export import RequestOptions = Core.RequestOptions;
 
+  export import V4PagePagination = Pagination.V4PagePagination;
+  export import V4PagePaginationParams = Pagination.V4PagePaginationParams;
+  export import V4PagePaginationResponse = Pagination.V4PagePaginationResponse;
+
+  export import V4PagePaginationArray = Pagination.V4PagePaginationArray;
+  export import V4PagePaginationArrayParams = Pagination.V4PagePaginationArrayParams;
+  export import V4PagePaginationArrayResponse = Pagination.V4PagePaginationArrayResponse;
+
   export import Accounts = API.Accounts;
   export import AccountUpdateResponse = API.AccountUpdateResponse;
   export import AccountListResponse = API.AccountListResponse;
   export import AccountGetResponse = API.AccountGetResponse;
+  export import AccountListResponsesV4PagePaginationArray = API.AccountListResponsesV4PagePaginationArray;
   export import AccountUpdateParams = API.AccountUpdateParams;
   export import AccountListParams = API.AccountListParams;
 
@@ -377,6 +387,7 @@ export namespace Cloudflare {
   export import MembershipListResponse = API.MembershipListResponse;
   export import MembershipDeleteResponse = API.MembershipDeleteResponse;
   export import MembershipGetResponse = API.MembershipGetResponse;
+  export import MembershipListResponsesV4PagePaginationArray = API.MembershipListResponsesV4PagePaginationArray;
   export import MembershipUpdateParams = API.MembershipUpdateParams;
   export import MembershipListParams = API.MembershipListParams;
 
@@ -391,6 +402,7 @@ export namespace Cloudflare {
   export import ZoneListResponse = API.ZoneListResponse;
   export import ZoneDeleteResponse = API.ZoneDeleteResponse;
   export import ZoneGetResponse = API.ZoneGetResponse;
+  export import ZoneListResponsesV4PagePaginationArray = API.ZoneListResponsesV4PagePaginationArray;
   export import ZoneCreateParams = API.ZoneCreateParams;
   export import ZoneUpdateParams = API.ZoneUpdateParams;
   export import ZoneListParams = API.ZoneListParams;
@@ -463,6 +475,7 @@ export namespace Cloudflare {
   export import CustomCertificateListResponse = API.CustomCertificateListResponse;
   export import CustomCertificateDeleteResponse = API.CustomCertificateDeleteResponse;
   export import CustomCertificateGetResponse = API.CustomCertificateGetResponse;
+  export import CustomCertificateListResponsesV4PagePaginationArray = API.CustomCertificateListResponsesV4PagePaginationArray;
   export import CustomCertificateCreateParams = API.CustomCertificateCreateParams;
   export import CustomCertificateUpdateParams = API.CustomCertificateUpdateParams;
   export import CustomCertificateListParams = API.CustomCertificateListParams;
@@ -492,6 +505,7 @@ export namespace Cloudflare {
   export import DNSRecordGetResponse = API.DNSRecordGetResponse;
   export import DNSRecordImportResponse = API.DNSRecordImportResponse;
   export import DNSRecordScanResponse = API.DNSRecordScanResponse;
+  export import DNSRecordListResponsesV4PagePaginationArray = API.DNSRecordListResponsesV4PagePaginationArray;
   export import DNSRecordCreateParams = API.DNSRecordCreateParams;
   export import DNSRecordUpdateParams = API.DNSRecordUpdateParams;
   export import DNSRecordListParams = API.DNSRecordListParams;
@@ -561,6 +575,7 @@ export namespace Cloudflare {
   export import RateLimitUpdateResponse = API.RateLimitUpdateResponse;
   export import RateLimitListResponse = API.RateLimitListResponse;
   export import RateLimitGetResponse = API.RateLimitGetResponse;
+  export import RateLimitListResponsesV4PagePaginationArray = API.RateLimitListResponsesV4PagePaginationArray;
   export import RateLimitUpdateParams = API.RateLimitUpdateParams;
   export import RateLimitListParams = API.RateLimitListParams;
 
@@ -643,6 +658,7 @@ export namespace Cloudflare {
   export import DNSFirewallListResponse = API.DNSFirewallListResponse;
   export import DNSFirewallDeleteResponse = API.DNSFirewallDeleteResponse;
   export import DNSFirewallGetResponse = API.DNSFirewallGetResponse;
+  export import DNSFirewallListResponsesV4PagePaginationArray = API.DNSFirewallListResponsesV4PagePaginationArray;
   export import DNSFirewallCreateParams = API.DNSFirewallCreateParams;
   export import DNSFirewallUpdateParams = API.DNSFirewallUpdateParams;
   export import DNSFirewallListParams = API.DNSFirewallListParams;
@@ -659,6 +675,7 @@ export namespace Cloudflare {
   export import AccountMemberListResponse = API.AccountMemberListResponse;
   export import AccountMemberDeleteResponse = API.AccountMemberDeleteResponse;
   export import AccountMemberGetResponse = API.AccountMemberGetResponse;
+  export import AccountMemberListResponsesV4PagePaginationArray = API.AccountMemberListResponsesV4PagePaginationArray;
   export import AccountMemberCreateParams = API.AccountMemberCreateParams;
   export import AccountMemberUpdateParams = API.AccountMemberUpdateParams;
   export import AccountMemberListParams = API.AccountMemberListParams;
@@ -735,6 +752,7 @@ export namespace Cloudflare {
   export import WarpConnectorListResponse = API.WarpConnectorListResponse;
   export import WarpConnectorDeleteResponse = API.WarpConnectorDeleteResponse;
   export import WarpConnectorGetResponse = API.WarpConnectorGetResponse;
+  export import WarpConnectorListResponsesV4PagePaginationArray = API.WarpConnectorListResponsesV4PagePaginationArray;
   export import WarpConnectorCreateParams = API.WarpConnectorCreateParams;
   export import WarpConnectorUpdateParams = API.WarpConnectorUpdateParams;
   export import WarpConnectorListParams = API.WarpConnectorListParams;

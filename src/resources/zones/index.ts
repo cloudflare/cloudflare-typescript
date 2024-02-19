@@ -17,5 +17,6 @@ export {
   ZoneCreateParams,
   ZoneUpdateParams,
   ZoneListParams,
+  ZoneListResponsesV4PagePaginationArray,
   Zones,
 } from './zones';

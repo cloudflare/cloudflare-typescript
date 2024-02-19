@@ -12,5 +12,6 @@ export {
   WidgetUpdateParams,
   WidgetListParams,
   WidgetRotateSecretParams,
+  WidgetListResponsesV4PagePaginationArray,
   Widgets,
 } from './widgets';

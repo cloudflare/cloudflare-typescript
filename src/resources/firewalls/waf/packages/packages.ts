@@ -6,6 +6,7 @@ import { isRequestOptions } from 'cloudflare/core';
 import * as PackagesAPI from 'cloudflare/resources/firewalls/waf/packages/packages';
 import * as GroupsAPI from 'cloudflare/resources/firewalls/waf/packages/groups';
 import * as RulesAPI from 'cloudflare/resources/firewalls/waf/packages/rules';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class Packages extends APIResource {
   groups: GroupsAPI.Groups = new GroupsAPI.Groups(this._client);
@@ -21,17 +22,24 @@ export class Packages extends APIResource {
     zoneIdentifier: string,
     query?: PackageListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PackageListResponse>;
-  list(zoneIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<PackageListResponse>;
+  ): Core.PagePromise<PackageListResponsesV4PagePaginationArray, PackageListResponse>;
+  list(
+    zoneIdentifier: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<PackageListResponsesV4PagePaginationArray, PackageListResponse>;
   list(
     zoneIdentifier: string,
     query: PackageListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PackageListResponse> {
+  ): Core.PagePromise<PackageListResponsesV4PagePaginationArray, PackageListResponse> {
     if (isRequestOptions(query)) {
       return this.list(zoneIdentifier, {}, query);
     }
-    return this._client.get(`/zones/${zoneIdentifier}/firewall/waf/packages`, { query, ...options });
+    return this._client.getAPIList(
+      `/zones/${zoneIdentifier}/firewall/waf/packages`,
+      PackageListResponsesV4PagePaginationArray,
+      { query, ...options },
+    );
   }
 
   /**
@@ -48,6 +56,8 @@ export class Packages extends APIResource {
     return this._client.get(`/zones/${zoneIdentifier}/firewall/waf/packages/${identifier}`, options);
   }
 }
+
+export class PackageListResponsesV4PagePaginationArray extends V4PagePaginationArray<PackageListResponse> {}
 
 export type PackageListResponse =
   | PackageListResponse.LegacyJhsAPIResponseCollection
@@ -233,7 +243,7 @@ export namespace PackageGetResponse {
   }
 }
 
-export interface PackageListParams {
+export interface PackageListParams extends V4PagePaginationArrayParams {
   /**
    * The direction used to sort returned packages.
    */
@@ -249,21 +259,12 @@ export interface PackageListParams {
    * The field used to sort returned packages.
    */
   order?: 'name';
-
-  /**
-   * The page number of paginated results.
-   */
-  page?: number;
-
-  /**
-   * The number of packages per page.
-   */
-  per_page?: number;
 }
 
 export namespace Packages {
   export import PackageListResponse = PackagesAPI.PackageListResponse;
   export import PackageGetResponse = PackagesAPI.PackageGetResponse;
+  export import PackageListResponsesV4PagePaginationArray = PackagesAPI.PackageListResponsesV4PagePaginationArray;
   export import PackageListParams = PackagesAPI.PackageListParams;
   export import Groups = GroupsAPI.Groups;
   export import GroupUpdateResponse = GroupsAPI.GroupUpdateResponse;

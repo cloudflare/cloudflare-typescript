@@ -5,6 +5,7 @@ import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as CustomCertificatesAPI from 'cloudflare/resources/custom-certificates/custom-certificates';
 import * as PrioritizesAPI from 'cloudflare/resources/custom-certificates/prioritizes';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class CustomCertificates extends APIResource {
   prioritizes: PrioritizesAPI.Prioritizes = new PrioritizesAPI.Prioritizes(this._client);
@@ -52,21 +53,24 @@ export class CustomCertificates extends APIResource {
     zoneId: string,
     query?: CustomCertificateListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomCertificateListResponse | null>;
-  list(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<CustomCertificateListResponse | null>;
+  ): Core.PagePromise<CustomCertificateListResponsesV4PagePaginationArray, CustomCertificateListResponse>;
+  list(
+    zoneId: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<CustomCertificateListResponsesV4PagePaginationArray, CustomCertificateListResponse>;
   list(
     zoneId: string,
     query: CustomCertificateListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomCertificateListResponse | null> {
+  ): Core.PagePromise<CustomCertificateListResponsesV4PagePaginationArray, CustomCertificateListResponse> {
     if (isRequestOptions(query)) {
       return this.list(zoneId, {}, query);
     }
-    return (
-      this._client.get(`/zones/${zoneId}/custom_certificates`, { query, ...options }) as Core.APIPromise<{
-        result: CustomCertificateListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/zones/${zoneId}/custom_certificates`,
+      CustomCertificateListResponsesV4PagePaginationArray,
+      { query, ...options },
+    );
   }
 
   /**
@@ -102,183 +106,180 @@ export class CustomCertificates extends APIResource {
   }
 }
 
+export class CustomCertificateListResponsesV4PagePaginationArray extends V4PagePaginationArray<CustomCertificateListResponse> {}
+
 export type CustomCertificateCreateResponse = unknown | string;
 
 export type CustomCertificateUpdateResponse = unknown | string;
 
-export type CustomCertificateListResponse =
-  Array<CustomCertificateListResponse.CustomCertificateListResponseItem>;
+export interface CustomCertificateListResponse {
+  /**
+   * Identifier
+   */
+  id: string;
+
+  /**
+   * A ubiquitous bundle has the highest probability of being verified everywhere,
+   * even by clients using outdated or unusual trust stores. An optimal bundle uses
+   * the shortest chain and newest intermediates. And the force bundle verifies the
+   * chain, but does not otherwise modify it.
+   */
+  bundle_method: 'ubiquitous' | 'optimal' | 'force';
+
+  /**
+   * When the certificate from the authority expires.
+   */
+  expires_on: string;
+
+  hosts: Array<string>;
+
+  /**
+   * The certificate authority that issued the certificate.
+   */
+  issuer: string;
+
+  /**
+   * When the certificate was last modified.
+   */
+  modified_on: string;
+
+  /**
+   * The order/priority in which the certificate will be used in a request. The
+   * higher priority will break ties across overlapping 'legacy_custom' certificates,
+   * but 'legacy_custom' certificates will always supercede 'sni_custom'
+   * certificates.
+   */
+  priority: number;
+
+  /**
+   * The type of hash used for the certificate.
+   */
+  signature: string;
+
+  /**
+   * Status of the zone's custom SSL.
+   */
+  status: 'active' | 'expired' | 'deleted' | 'pending' | 'initializing';
+
+  /**
+   * When the certificate was uploaded to Cloudflare.
+   */
+  uploaded_on: string;
+
+  /**
+   * Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Specify the region where your private key can be held locally for optimal TLS
+   * performance. HTTPS connections to any excluded data center will still be fully
+   * encrypted, but will incur some latency while Keyless SSL is used to complete the
+   * handshake with the nearest allowed data center. Options allow distribution to
+   * only to U.S. data centers, only to E.U. data centers, or only to highest
+   * security data centers. Default distribution is to all Cloudflare datacenters,
+   * for optimal performance.
+   */
+  geo_restrictions?: CustomCertificateListResponse.GeoRestrictions;
+
+  keyless_server?: CustomCertificateListResponse.KeylessServer;
+
+  /**
+   * Specify the policy that determines the region where your private key will be
+   * held locally. HTTPS connections to any excluded data center will still be fully
+   * encrypted, but will incur some latency while Keyless SSL is used to complete the
+   * handshake with the nearest allowed data center. Any combination of countries,
+   * specified by their two letter country code
+   * (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+   * can be chosen, such as 'country: IN', as well as 'region: EU' which refers to
+   * the EU region. If there are too few data centers satisfying the policy, it will
+   * be rejected.
+   */
+  policy?: string;
+}
 
 export namespace CustomCertificateListResponse {
-  export interface CustomCertificateListResponseItem {
+  /**
+   * Specify the region where your private key can be held locally for optimal TLS
+   * performance. HTTPS connections to any excluded data center will still be fully
+   * encrypted, but will incur some latency while Keyless SSL is used to complete the
+   * handshake with the nearest allowed data center. Options allow distribution to
+   * only to U.S. data centers, only to E.U. data centers, or only to highest
+   * security data centers. Default distribution is to all Cloudflare datacenters,
+   * for optimal performance.
+   */
+  export interface GeoRestrictions {
+    label?: 'us' | 'eu' | 'highest_security';
+  }
+
+  export interface KeylessServer {
     /**
-     * Identifier
+     * Keyless certificate identifier tag.
      */
     id: string;
 
     /**
-     * A ubiquitous bundle has the highest probability of being verified everywhere,
-     * even by clients using outdated or unusual trust stores. An optimal bundle uses
-     * the shortest chain and newest intermediates. And the force bundle verifies the
-     * chain, but does not otherwise modify it.
+     * When the Keyless SSL was created.
      */
-    bundle_method: 'ubiquitous' | 'optimal' | 'force';
+    created_on: string;
 
     /**
-     * When the certificate from the authority expires.
+     * Whether or not the Keyless SSL is on or off.
      */
-    expires_on: string;
-
-    hosts: Array<string>;
+    enabled: boolean;
 
     /**
-     * The certificate authority that issued the certificate.
+     * The keyless SSL name.
      */
-    issuer: string;
+    host: string;
 
     /**
-     * When the certificate was last modified.
+     * When the Keyless SSL was last modified.
      */
     modified_on: string;
 
     /**
-     * The order/priority in which the certificate will be used in a request. The
-     * higher priority will break ties across overlapping 'legacy_custom' certificates,
-     * but 'legacy_custom' certificates will always supercede 'sni_custom'
-     * certificates.
+     * The keyless SSL name.
      */
-    priority: number;
+    name: string;
 
     /**
-     * The type of hash used for the certificate.
+     * Available permissions for the Keyless SSL for the current user requesting the
+     * item.
      */
-    signature: string;
+    permissions: Array<unknown>;
 
     /**
-     * Status of the zone's custom SSL.
+     * The keyless SSL port used to communicate between Cloudflare and the client's
+     * Keyless SSL server.
      */
-    status: 'active' | 'expired' | 'deleted' | 'pending' | 'initializing';
+    port: number;
 
     /**
-     * When the certificate was uploaded to Cloudflare.
+     * Status of the Keyless SSL.
      */
-    uploaded_on: string;
+    status: 'active' | 'deleted';
 
     /**
-     * Identifier
+     * Configuration for using Keyless SSL through a Cloudflare Tunnel
      */
-    zone_id: string;
-
-    /**
-     * Specify the region where your private key can be held locally for optimal TLS
-     * performance. HTTPS connections to any excluded data center will still be fully
-     * encrypted, but will incur some latency while Keyless SSL is used to complete the
-     * handshake with the nearest allowed data center. Options allow distribution to
-     * only to U.S. data centers, only to E.U. data centers, or only to highest
-     * security data centers. Default distribution is to all Cloudflare datacenters,
-     * for optimal performance.
-     */
-    geo_restrictions?: CustomCertificateListResponseItem.GeoRestrictions;
-
-    keyless_server?: CustomCertificateListResponseItem.KeylessServer;
-
-    /**
-     * Specify the policy that determines the region where your private key will be
-     * held locally. HTTPS connections to any excluded data center will still be fully
-     * encrypted, but will incur some latency while Keyless SSL is used to complete the
-     * handshake with the nearest allowed data center. Any combination of countries,
-     * specified by their two letter country code
-     * (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
-     * can be chosen, such as 'country: IN', as well as 'region: EU' which refers to
-     * the EU region. If there are too few data centers satisfying the policy, it will
-     * be rejected.
-     */
-    policy?: string;
+    tunnel?: KeylessServer.Tunnel;
   }
 
-  export namespace CustomCertificateListResponseItem {
+  export namespace KeylessServer {
     /**
-     * Specify the region where your private key can be held locally for optimal TLS
-     * performance. HTTPS connections to any excluded data center will still be fully
-     * encrypted, but will incur some latency while Keyless SSL is used to complete the
-     * handshake with the nearest allowed data center. Options allow distribution to
-     * only to U.S. data centers, only to E.U. data centers, or only to highest
-     * security data centers. Default distribution is to all Cloudflare datacenters,
-     * for optimal performance.
+     * Configuration for using Keyless SSL through a Cloudflare Tunnel
      */
-    export interface GeoRestrictions {
-      label?: 'us' | 'eu' | 'highest_security';
-    }
-
-    export interface KeylessServer {
+    export interface Tunnel {
       /**
-       * Keyless certificate identifier tag.
+       * Private IP of the Key Server Host
        */
-      id: string;
+      private_ip: string;
 
       /**
-       * When the Keyless SSL was created.
+       * Cloudflare Tunnel Virtual Network ID
        */
-      created_on: string;
-
-      /**
-       * Whether or not the Keyless SSL is on or off.
-       */
-      enabled: boolean;
-
-      /**
-       * The keyless SSL name.
-       */
-      host: string;
-
-      /**
-       * When the Keyless SSL was last modified.
-       */
-      modified_on: string;
-
-      /**
-       * The keyless SSL name.
-       */
-      name: string;
-
-      /**
-       * Available permissions for the Keyless SSL for the current user requesting the
-       * item.
-       */
-      permissions: Array<unknown>;
-
-      /**
-       * The keyless SSL port used to communicate between Cloudflare and the client's
-       * Keyless SSL server.
-       */
-      port: number;
-
-      /**
-       * Status of the Keyless SSL.
-       */
-      status: 'active' | 'deleted';
-
-      /**
-       * Configuration for using Keyless SSL through a Cloudflare Tunnel
-       */
-      tunnel?: KeylessServer.Tunnel;
-    }
-
-    export namespace KeylessServer {
-      /**
-       * Configuration for using Keyless SSL through a Cloudflare Tunnel
-       */
-      export interface Tunnel {
-        /**
-         * Private IP of the Key Server Host
-         */
-        private_ip: string;
-
-        /**
-         * Cloudflare Tunnel Virtual Network ID
-         */
-        vnet_id: string;
-      }
+      vnet_id: string;
     }
   }
 }
@@ -416,21 +417,11 @@ export namespace CustomCertificateUpdateParams {
   }
 }
 
-export interface CustomCertificateListParams {
+export interface CustomCertificateListParams extends V4PagePaginationArrayParams {
   /**
    * Whether to match all search requirements or at least one (any).
    */
   match?: 'any' | 'all';
-
-  /**
-   * Page number of paginated results.
-   */
-  page?: number;
-
-  /**
-   * Number of zones per page.
-   */
-  per_page?: number;
 }
 
 export namespace CustomCertificates {
@@ -439,6 +430,7 @@ export namespace CustomCertificates {
   export import CustomCertificateListResponse = CustomCertificatesAPI.CustomCertificateListResponse;
   export import CustomCertificateDeleteResponse = CustomCertificatesAPI.CustomCertificateDeleteResponse;
   export import CustomCertificateGetResponse = CustomCertificatesAPI.CustomCertificateGetResponse;
+  export import CustomCertificateListResponsesV4PagePaginationArray = CustomCertificatesAPI.CustomCertificateListResponsesV4PagePaginationArray;
   export import CustomCertificateCreateParams = CustomCertificatesAPI.CustomCertificateCreateParams;
   export import CustomCertificateUpdateParams = CustomCertificatesAPI.CustomCertificateUpdateParams;
   export import CustomCertificateListParams = CustomCertificatesAPI.CustomCertificateListParams;

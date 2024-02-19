@@ -5,6 +5,7 @@ import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as TestsAPI from 'cloudflare/resources/dex/tests/tests';
 import * as UniqueDevicesAPI from 'cloudflare/resources/dex/tests/unique-devices';
+import { V4PagePagination, type V4PagePaginationParams } from 'cloudflare/pagination';
 
 export class Tests extends APIResource {
   uniqueDevices: UniqueDevicesAPI.UniqueDevices = new UniqueDevicesAPI.UniqueDevices(this._client);
@@ -16,323 +17,378 @@ export class Tests extends APIResource {
     accountId: string,
     query?: TestListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TestListResponse>;
-  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<TestListResponse>;
+  ): Core.PagePromise<TestListResponsesV4PagePagination, TestListResponse>;
+  list(
+    accountId: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<TestListResponsesV4PagePagination, TestListResponse>;
   list(
     accountId: string,
     query: TestListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TestListResponse> {
+  ): Core.PagePromise<TestListResponsesV4PagePagination, TestListResponse> {
     if (isRequestOptions(query)) {
       return this.list(accountId, {}, query);
     }
-    return (
-      this._client.get(`/accounts/${accountId}/dex/tests`, { query, ...options }) as Core.APIPromise<{
-        result: TestListResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(`/accounts/${accountId}/dex/tests`, TestListResponsesV4PagePagination, {
+      query,
+      ...options,
+    });
   }
 }
 
+export class TestListResponsesV4PagePagination extends V4PagePagination<TestListResponse> {}
+
 export interface TestListResponse {
-  overviewMetrics: TestListResponse.OverviewMetrics;
+  errors: Array<TestListResponse.Error>;
+
+  messages: Array<TestListResponse.Message>;
+
+  result: TestListResponse.Result;
 
   /**
-   * array of test results objects.
+   * Whether the API call was successful
    */
-  tests: Array<TestListResponse.Test>;
+  success: true;
+
+  result_info?: TestListResponse.ResultInfo;
 }
 
 export namespace TestListResponse {
-  export interface OverviewMetrics {
-    /**
-     * number of tests.
-     */
-    testsTotal: number;
+  export interface Error {
+    code: number;
 
-    /**
-     * percentage availability for all traceroutes results in response
-     */
-    avgTracerouteAvailabilityPct?: number | null;
+    message: string;
   }
 
-  export interface Test {
-    /**
-     * API Resource UUID tag.
-     */
-    id: string;
+  export interface Message {
+    code: number;
 
-    /**
-     * date the test was created.
-     */
-    created: string;
-
-    /**
-     * the test description defined during configuration
-     */
-    description: string;
-
-    /**
-     * if true, then the test will run on targeted devices. Else, the test will not
-     * run.
-     */
-    enabled: boolean;
-
-    host: string;
-
-    /**
-     * The interval at which the synthetic application test is set to run.
-     */
-    interval: string;
-
-    /**
-     * test type, http or traceroute
-     */
-    kind: 'http' | 'traceroute';
-
-    /**
-     * name given to this test
-     */
-    name: string;
-
-    updated: string;
-
-    httpResults?: Test.HTTPResults | null;
-
-    httpResultsByColo?: Array<Test.HTTPResultsByColo>;
-
-    /**
-     * for HTTP, the method to use when running the test
-     */
-    method?: string;
-
-    tracerouteResults?: Test.TracerouteResults | null;
-
-    tracerouteResultsByColo?: Array<Test.TracerouteResultsByColo>;
+    message: string;
   }
 
-  export namespace Test {
-    export interface HTTPResults {
-      resourceFetchTime: HTTPResults.ResourceFetchTime;
-    }
+  export interface Result {
+    overviewMetrics: Result.OverviewMetrics;
 
-    export namespace HTTPResults {
-      export interface ResourceFetchTime {
-        history: Array<ResourceFetchTime.History>;
+    /**
+     * array of test results objects.
+     */
+    tests: Array<Result.Test>;
+  }
 
-        avgMs?: number | null;
-
-        overTime?: ResourceFetchTime.OverTime | null;
-      }
-
-      export namespace ResourceFetchTime {
-        export interface History {
-          timePeriod: History.TimePeriod;
-
-          avgMs?: number | null;
-
-          deltaPct?: number | null;
-        }
-
-        export namespace History {
-          export interface TimePeriod {
-            units: 'hours' | 'days' | 'testRuns';
-
-            value: number;
-          }
-        }
-
-        export interface OverTime {
-          timePeriod: OverTime.TimePeriod;
-
-          values: Array<OverTime.Value>;
-        }
-
-        export namespace OverTime {
-          export interface TimePeriod {
-            units: 'hours' | 'days' | 'testRuns';
-
-            value: number;
-          }
-
-          export interface Value {
-            avgMs: number;
-
-            timestamp: string;
-          }
-        }
-      }
-    }
-
-    export interface HTTPResultsByColo {
+  export namespace Result {
+    export interface OverviewMetrics {
       /**
-       * Cloudflare colo
+       * number of tests.
        */
-      colo: string;
+      testsTotal: number;
 
-      resourceFetchTime: HTTPResultsByColo.ResourceFetchTime;
-    }
-
-    export namespace HTTPResultsByColo {
-      export interface ResourceFetchTime {
-        history: Array<ResourceFetchTime.History>;
-
-        avgMs?: number | null;
-
-        overTime?: ResourceFetchTime.OverTime | null;
-      }
-
-      export namespace ResourceFetchTime {
-        export interface History {
-          timePeriod: History.TimePeriod;
-
-          avgMs?: number | null;
-
-          deltaPct?: number | null;
-        }
-
-        export namespace History {
-          export interface TimePeriod {
-            units: 'hours' | 'days' | 'testRuns';
-
-            value: number;
-          }
-        }
-
-        export interface OverTime {
-          timePeriod: OverTime.TimePeriod;
-
-          values: Array<OverTime.Value>;
-        }
-
-        export namespace OverTime {
-          export interface TimePeriod {
-            units: 'hours' | 'days' | 'testRuns';
-
-            value: number;
-          }
-
-          export interface Value {
-            avgMs: number;
-
-            timestamp: string;
-          }
-        }
-      }
-    }
-
-    export interface TracerouteResults {
-      roundTripTime: TracerouteResults.RoundTripTime;
-    }
-
-    export namespace TracerouteResults {
-      export interface RoundTripTime {
-        history: Array<RoundTripTime.History>;
-
-        avgMs?: number | null;
-
-        overTime?: RoundTripTime.OverTime | null;
-      }
-
-      export namespace RoundTripTime {
-        export interface History {
-          timePeriod: History.TimePeriod;
-
-          avgMs?: number | null;
-
-          deltaPct?: number | null;
-        }
-
-        export namespace History {
-          export interface TimePeriod {
-            units: 'hours' | 'days' | 'testRuns';
-
-            value: number;
-          }
-        }
-
-        export interface OverTime {
-          timePeriod: OverTime.TimePeriod;
-
-          values: Array<OverTime.Value>;
-        }
-
-        export namespace OverTime {
-          export interface TimePeriod {
-            units: 'hours' | 'days' | 'testRuns';
-
-            value: number;
-          }
-
-          export interface Value {
-            avgMs: number;
-
-            timestamp: string;
-          }
-        }
-      }
-    }
-
-    export interface TracerouteResultsByColo {
       /**
-       * Cloudflare colo
+       * percentage availability for all traceroutes results in response
        */
-      colo: string;
-
-      roundTripTime: TracerouteResultsByColo.RoundTripTime;
+      avgTracerouteAvailabilityPct?: number | null;
     }
 
-    export namespace TracerouteResultsByColo {
-      export interface RoundTripTime {
-        history: Array<RoundTripTime.History>;
+    export interface Test {
+      /**
+       * API Resource UUID tag.
+       */
+      id: string;
 
-        avgMs?: number | null;
+      /**
+       * date the test was created.
+       */
+      created: string;
 
-        overTime?: RoundTripTime.OverTime | null;
+      /**
+       * the test description defined during configuration
+       */
+      description: string;
+
+      /**
+       * if true, then the test will run on targeted devices. Else, the test will not
+       * run.
+       */
+      enabled: boolean;
+
+      host: string;
+
+      /**
+       * The interval at which the synthetic application test is set to run.
+       */
+      interval: string;
+
+      /**
+       * test type, http or traceroute
+       */
+      kind: 'http' | 'traceroute';
+
+      /**
+       * name given to this test
+       */
+      name: string;
+
+      updated: string;
+
+      httpResults?: Test.HTTPResults | null;
+
+      httpResultsByColo?: Array<Test.HTTPResultsByColo>;
+
+      /**
+       * for HTTP, the method to use when running the test
+       */
+      method?: string;
+
+      tracerouteResults?: Test.TracerouteResults | null;
+
+      tracerouteResultsByColo?: Array<Test.TracerouteResultsByColo>;
+    }
+
+    export namespace Test {
+      export interface HTTPResults {
+        resourceFetchTime: HTTPResults.ResourceFetchTime;
       }
 
-      export namespace RoundTripTime {
-        export interface History {
-          timePeriod: History.TimePeriod;
+      export namespace HTTPResults {
+        export interface ResourceFetchTime {
+          history: Array<ResourceFetchTime.History>;
 
           avgMs?: number | null;
 
-          deltaPct?: number | null;
+          overTime?: ResourceFetchTime.OverTime | null;
         }
 
-        export namespace History {
-          export interface TimePeriod {
-            units: 'hours' | 'days' | 'testRuns';
+        export namespace ResourceFetchTime {
+          export interface History {
+            timePeriod: History.TimePeriod;
 
-            value: number;
-          }
-        }
+            avgMs?: number | null;
 
-        export interface OverTime {
-          timePeriod: OverTime.TimePeriod;
-
-          values: Array<OverTime.Value>;
-        }
-
-        export namespace OverTime {
-          export interface TimePeriod {
-            units: 'hours' | 'days' | 'testRuns';
-
-            value: number;
+            deltaPct?: number | null;
           }
 
-          export interface Value {
-            avgMs: number;
+          export namespace History {
+            export interface TimePeriod {
+              units: 'hours' | 'days' | 'testRuns';
 
-            timestamp: string;
+              value: number;
+            }
+          }
+
+          export interface OverTime {
+            timePeriod: OverTime.TimePeriod;
+
+            values: Array<OverTime.Value>;
+          }
+
+          export namespace OverTime {
+            export interface TimePeriod {
+              units: 'hours' | 'days' | 'testRuns';
+
+              value: number;
+            }
+
+            export interface Value {
+              avgMs: number;
+
+              timestamp: string;
+            }
+          }
+        }
+      }
+
+      export interface HTTPResultsByColo {
+        /**
+         * Cloudflare colo
+         */
+        colo: string;
+
+        resourceFetchTime: HTTPResultsByColo.ResourceFetchTime;
+      }
+
+      export namespace HTTPResultsByColo {
+        export interface ResourceFetchTime {
+          history: Array<ResourceFetchTime.History>;
+
+          avgMs?: number | null;
+
+          overTime?: ResourceFetchTime.OverTime | null;
+        }
+
+        export namespace ResourceFetchTime {
+          export interface History {
+            timePeriod: History.TimePeriod;
+
+            avgMs?: number | null;
+
+            deltaPct?: number | null;
+          }
+
+          export namespace History {
+            export interface TimePeriod {
+              units: 'hours' | 'days' | 'testRuns';
+
+              value: number;
+            }
+          }
+
+          export interface OverTime {
+            timePeriod: OverTime.TimePeriod;
+
+            values: Array<OverTime.Value>;
+          }
+
+          export namespace OverTime {
+            export interface TimePeriod {
+              units: 'hours' | 'days' | 'testRuns';
+
+              value: number;
+            }
+
+            export interface Value {
+              avgMs: number;
+
+              timestamp: string;
+            }
+          }
+        }
+      }
+
+      export interface TracerouteResults {
+        roundTripTime: TracerouteResults.RoundTripTime;
+      }
+
+      export namespace TracerouteResults {
+        export interface RoundTripTime {
+          history: Array<RoundTripTime.History>;
+
+          avgMs?: number | null;
+
+          overTime?: RoundTripTime.OverTime | null;
+        }
+
+        export namespace RoundTripTime {
+          export interface History {
+            timePeriod: History.TimePeriod;
+
+            avgMs?: number | null;
+
+            deltaPct?: number | null;
+          }
+
+          export namespace History {
+            export interface TimePeriod {
+              units: 'hours' | 'days' | 'testRuns';
+
+              value: number;
+            }
+          }
+
+          export interface OverTime {
+            timePeriod: OverTime.TimePeriod;
+
+            values: Array<OverTime.Value>;
+          }
+
+          export namespace OverTime {
+            export interface TimePeriod {
+              units: 'hours' | 'days' | 'testRuns';
+
+              value: number;
+            }
+
+            export interface Value {
+              avgMs: number;
+
+              timestamp: string;
+            }
+          }
+        }
+      }
+
+      export interface TracerouteResultsByColo {
+        /**
+         * Cloudflare colo
+         */
+        colo: string;
+
+        roundTripTime: TracerouteResultsByColo.RoundTripTime;
+      }
+
+      export namespace TracerouteResultsByColo {
+        export interface RoundTripTime {
+          history: Array<RoundTripTime.History>;
+
+          avgMs?: number | null;
+
+          overTime?: RoundTripTime.OverTime | null;
+        }
+
+        export namespace RoundTripTime {
+          export interface History {
+            timePeriod: History.TimePeriod;
+
+            avgMs?: number | null;
+
+            deltaPct?: number | null;
+          }
+
+          export namespace History {
+            export interface TimePeriod {
+              units: 'hours' | 'days' | 'testRuns';
+
+              value: number;
+            }
+          }
+
+          export interface OverTime {
+            timePeriod: OverTime.TimePeriod;
+
+            values: Array<OverTime.Value>;
+          }
+
+          export namespace OverTime {
+            export interface TimePeriod {
+              units: 'hours' | 'days' | 'testRuns';
+
+              value: number;
+            }
+
+            export interface Value {
+              avgMs: number;
+
+              timestamp: string;
+            }
           }
         }
       }
     }
+  }
+
+  export interface ResultInfo {
+    /**
+     * Total number of results for the requested service
+     */
+    count?: number;
+
+    /**
+     * Current page within paginated list of results
+     */
+    page?: number;
+
+    /**
+     * Number of results per page of results
+     */
+    per_page?: number;
+
+    /**
+     * Total results available without any search parameters
+     */
+    total_count?: number;
   }
 }
 
-export interface TestListParams {
+export interface TestListParams extends V4PagePaginationParams {
   /**
    * Optionally filter result stats to a Cloudflare colo. Cannot be used in
    * combination with deviceId param.
@@ -346,16 +402,6 @@ export interface TestListParams {
   deviceId?: Array<string>;
 
   /**
-   * Page number of paginated results
-   */
-  page?: number;
-
-  /**
-   * Number of items per page
-   */
-  per_page?: number;
-
-  /**
    * Optionally filter results by test name
    */
   testName?: string;
@@ -363,6 +409,7 @@ export interface TestListParams {
 
 export namespace Tests {
   export import TestListResponse = TestsAPI.TestListResponse;
+  export import TestListResponsesV4PagePagination = TestsAPI.TestListResponsesV4PagePagination;
   export import TestListParams = TestsAPI.TestListParams;
   export import UniqueDevices = UniqueDevicesAPI.UniqueDevices;
   export import UniqueDeviceListResponse = UniqueDevicesAPI.UniqueDeviceListResponse;

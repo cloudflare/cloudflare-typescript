@@ -14,6 +14,7 @@ export class FleetStatus extends APIResource {
 export namespace FleetStatus {
   export import Devices = DevicesAPI.Devices;
   export import DeviceListResponse = DevicesAPI.DeviceListResponse;
+  export import DeviceListResponsesV4PagePaginationArray = DevicesAPI.DeviceListResponsesV4PagePaginationArray;
   export import DeviceListParams = DevicesAPI.DeviceListParams;
   export import Live = LiveAPI.Live;
   export import LiveListResponse = LiveAPI.LiveListResponse;

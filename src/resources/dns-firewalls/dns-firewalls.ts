@@ -5,6 +5,7 @@ import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as DNSFirewallsAPI from 'cloudflare/resources/dns-firewalls/dns-firewalls';
 import * as DNSAnalyticsAPI from 'cloudflare/resources/dns-firewalls/dns-analytics/dns-analytics';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class DNSFirewalls extends APIResource {
   dnsAnalytics: DNSAnalyticsAPI.DNSAnalytics = new DNSAnalyticsAPI.DNSAnalytics(this._client);
@@ -48,21 +49,24 @@ export class DNSFirewalls extends APIResource {
     accountId: string,
     query?: DNSFirewallListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DNSFirewallListResponse | null>;
-  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<DNSFirewallListResponse | null>;
+  ): Core.PagePromise<DNSFirewallListResponsesV4PagePaginationArray, DNSFirewallListResponse>;
+  list(
+    accountId: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<DNSFirewallListResponsesV4PagePaginationArray, DNSFirewallListResponse>;
   list(
     accountId: string,
     query: DNSFirewallListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DNSFirewallListResponse | null> {
+  ): Core.PagePromise<DNSFirewallListResponsesV4PagePaginationArray, DNSFirewallListResponse> {
     if (isRequestOptions(query)) {
       return this.list(accountId, {}, query);
     }
-    return (
-      this._client.get(`/accounts/${accountId}/dns_firewall`, { query, ...options }) as Core.APIPromise<{
-        result: DNSFirewallListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${accountId}/dns_firewall`,
+      DNSFirewallListResponsesV4PagePaginationArray,
+      { query, ...options },
+    );
   }
 
   /**
@@ -96,6 +100,8 @@ export class DNSFirewalls extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class DNSFirewallListResponsesV4PagePaginationArray extends V4PagePaginationArray<DNSFirewallListResponse> {}
 
 export interface DNSFirewallCreateResponse {
   /**
@@ -279,98 +285,94 @@ export namespace DNSFirewallUpdateResponse {
   }
 }
 
-export type DNSFirewallListResponse = Array<DNSFirewallListResponse.DNSFirewallListResponseItem>;
+export interface DNSFirewallListResponse {
+  /**
+   * Identifier
+   */
+  id: string;
+
+  /**
+   * Deprecate the response to ANY requests.
+   */
+  deprecate_any_requests: boolean;
+
+  dns_firewall_ips: Array<string | string>;
+
+  /**
+   * Forward client IP (resolver) subnet if no EDNS Client Subnet is sent.
+   */
+  ecs_fallback: boolean;
+
+  /**
+   * Maximum DNS Cache TTL.
+   */
+  maximum_cache_ttl: number;
+
+  /**
+   * Minimum DNS Cache TTL.
+   */
+  minimum_cache_ttl: number;
+
+  /**
+   * Last modification of DNS Firewall cluster.
+   */
+  modified_on: string;
+
+  /**
+   * DNS Firewall Cluster Name.
+   */
+  name: string;
+
+  upstream_ips: Array<string | string>;
+
+  /**
+   * Attack mitigation settings.
+   */
+  attack_mitigation?: DNSFirewallListResponse.AttackMitigation | null;
+
+  /**
+   * Negative DNS Cache TTL.
+   */
+  negative_cache_ttl?: number | null;
+
+  /**
+   * Deprecated alias for "upstream_ips".
+   */
+  origin_ips?: unknown;
+
+  /**
+   * Ratelimit in queries per second per datacenter (applies to DNS queries sent to
+   * the upstream nameservers configured on the cluster).
+   */
+  ratelimit?: number | null;
+
+  /**
+   * Number of retries for fetching DNS responses from upstream nameservers (not
+   * counting the initial attempt).
+   */
+  retries?: number;
+}
 
 export namespace DNSFirewallListResponse {
-  export interface DNSFirewallListResponseItem {
+  /**
+   * Attack mitigation settings.
+   */
+  export interface AttackMitigation {
     /**
-     * Identifier
+     * When enabled, random-prefix attacks are automatically mitigated and the upstream
+     * DNS servers protected.
      */
-    id: string;
-
-    /**
-     * Deprecate the response to ANY requests.
-     */
-    deprecate_any_requests: boolean;
-
-    dns_firewall_ips: Array<string | string>;
+    enabled?: boolean;
 
     /**
-     * Forward client IP (resolver) subnet if no EDNS Client Subnet is sent.
+     * Deprecated alias for "only_when_upstream_unhealthy".
      */
-    ecs_fallback: boolean;
+    only_when_origin_unhealthy?: unknown;
 
     /**
-     * Maximum DNS Cache TTL.
+     * Only mitigate attacks when upstream servers seem unhealthy.
      */
-    maximum_cache_ttl: number;
-
-    /**
-     * Minimum DNS Cache TTL.
-     */
-    minimum_cache_ttl: number;
-
-    /**
-     * Last modification of DNS Firewall cluster.
-     */
-    modified_on: string;
-
-    /**
-     * DNS Firewall Cluster Name.
-     */
-    name: string;
-
-    upstream_ips: Array<string | string>;
-
-    /**
-     * Attack mitigation settings.
-     */
-    attack_mitigation?: DNSFirewallListResponseItem.AttackMitigation | null;
-
-    /**
-     * Negative DNS Cache TTL.
-     */
-    negative_cache_ttl?: number | null;
-
-    /**
-     * Deprecated alias for "upstream_ips".
-     */
-    origin_ips?: unknown;
-
-    /**
-     * Ratelimit in queries per second per datacenter (applies to DNS queries sent to
-     * the upstream nameservers configured on the cluster).
-     */
-    ratelimit?: number | null;
-
-    /**
-     * Number of retries for fetching DNS responses from upstream nameservers (not
-     * counting the initial attempt).
-     */
-    retries?: number;
-  }
-
-  export namespace DNSFirewallListResponseItem {
-    /**
-     * Attack mitigation settings.
-     */
-    export interface AttackMitigation {
-      /**
-       * When enabled, random-prefix attacks are automatically mitigated and the upstream
-       * DNS servers protected.
-       */
-      enabled?: boolean;
-
-      /**
-       * Deprecated alias for "only_when_upstream_unhealthy".
-       */
-      only_when_origin_unhealthy?: unknown;
-
-      /**
-       * Only mitigate attacks when upstream servers seem unhealthy.
-       */
-      only_when_upstream_unhealthy?: boolean;
-    }
+    only_when_upstream_unhealthy?: boolean;
   }
 }
 
@@ -632,17 +634,7 @@ export namespace DNSFirewallUpdateParams {
   }
 }
 
-export interface DNSFirewallListParams {
-  /**
-   * Page number of paginated results.
-   */
-  page?: number;
-
-  /**
-   * Number of clusters per page.
-   */
-  per_page?: number;
-}
+export interface DNSFirewallListParams extends V4PagePaginationArrayParams {}
 
 export namespace DNSFirewalls {
   export import DNSFirewallCreateResponse = DNSFirewallsAPI.DNSFirewallCreateResponse;
@@ -650,6 +642,7 @@ export namespace DNSFirewalls {
   export import DNSFirewallListResponse = DNSFirewallsAPI.DNSFirewallListResponse;
   export import DNSFirewallDeleteResponse = DNSFirewallsAPI.DNSFirewallDeleteResponse;
   export import DNSFirewallGetResponse = DNSFirewallsAPI.DNSFirewallGetResponse;
+  export import DNSFirewallListResponsesV4PagePaginationArray = DNSFirewallsAPI.DNSFirewallListResponsesV4PagePaginationArray;
   export import DNSFirewallCreateParams = DNSFirewallsAPI.DNSFirewallCreateParams;
   export import DNSFirewallUpdateParams = DNSFirewallsAPI.DNSFirewallUpdateParams;
   export import DNSFirewallListParams = DNSFirewallsAPI.DNSFirewallListParams;

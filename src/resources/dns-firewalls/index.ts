@@ -10,5 +10,6 @@ export {
   DNSFirewallCreateParams,
   DNSFirewallUpdateParams,
   DNSFirewallListParams,
+  DNSFirewallListResponsesV4PagePaginationArray,
   DNSFirewalls,
 } from './dns-firewalls';

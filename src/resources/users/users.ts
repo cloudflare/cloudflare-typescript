@@ -86,6 +86,7 @@ export namespace Users {
   export import UserUserEditUserParams = UsersAPI.UserUserEditUserParams;
   export import AuditLogs = AuditLogsAPI.AuditLogs;
   export import AuditLogListResponse = AuditLogsAPI.AuditLogListResponse;
+  export import AuditLogListResponsesV4PagePaginationArray = AuditLogsAPI.AuditLogListResponsesV4PagePaginationArray;
   export import AuditLogListParams = AuditLogsAPI.AuditLogListParams;
   export import Billings = BillingsAPI.Billings;
   export import Firewalls = FirewallsAPI.Firewalls;

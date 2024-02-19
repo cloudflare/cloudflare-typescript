@@ -19,5 +19,6 @@ export {
   SiteInfoCreateParams,
   SiteInfoUpdateParams,
   SiteInfoListParams,
+  SiteInfoListResponsesV4PagePaginationArray,
   SiteInfos,
 } from './site-infos';
