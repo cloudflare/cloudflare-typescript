@@ -8,14 +8,14 @@ export class HTTP2 extends APIResource {
   /**
    * Value of the HTTP2 setting.
    */
-  update(
+  edit(
     zoneId: string,
-    body: HTTP2UpdateParams,
+    body: HTTP2EditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<HTTP2UpdateResponse> {
+  ): Core.APIPromise<HTTP2EditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/settings/http2`, { body, ...options }) as Core.APIPromise<{
-        result: HTTP2UpdateResponse;
+        result: HTTP2EditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -35,7 +35,7 @@ export class HTTP2 extends APIResource {
 /**
  * HTTP2 enabled for this zone.
  */
-export interface HTTP2UpdateResponse {
+export interface HTTP2EditResponse {
   /**
    * ID of the zone setting.
    */
@@ -84,7 +84,7 @@ export interface HTTP2GetResponse {
   modified_on?: string | null;
 }
 
-export interface HTTP2UpdateParams {
+export interface HTTP2EditParams {
   /**
    * Value of the HTTP2 setting.
    */
@@ -92,7 +92,7 @@ export interface HTTP2UpdateParams {
 }
 
 export namespace HTTP2 {
-  export import HTTP2UpdateResponse = HTTP2API.HTTP2UpdateResponse;
+  export import HTTP2EditResponse = HTTP2API.HTTP2EditResponse;
   export import HTTP2GetResponse = HTTP2API.HTTP2GetResponse;
-  export import HTTP2UpdateParams = HTTP2API.HTTP2UpdateParams;
+  export import HTTP2EditParams = HTTP2API.HTTP2EditParams;
 }

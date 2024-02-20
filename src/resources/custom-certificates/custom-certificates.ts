@@ -26,25 +26,6 @@ export class CustomCertificates extends APIResource {
   }
 
   /**
-   * Upload a new private key and/or PEM/CRT for the SSL certificate. Note: PATCHing
-   * a configuration for sni_custom certificates will result in a new resource id
-   * being returned, and the previous one being deleted.
-   */
-  update(
-    zoneId: string,
-    customCertificateId: string,
-    body: CustomCertificateUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomCertificateUpdateResponse> {
-    return (
-      this._client.patch(`/zones/${zoneId}/custom_certificates/${customCertificateId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: CustomCertificateUpdateResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * List, search, and filter all of your custom SSL certificates. The higher
    * priority will break ties across overlapping 'legacy_custom' certificates, but
    * 'legacy_custom' certificates will always supercede 'sni_custom' certificates.
@@ -90,6 +71,25 @@ export class CustomCertificates extends APIResource {
   }
 
   /**
+   * Upload a new private key and/or PEM/CRT for the SSL certificate. Note: PATCHing
+   * a configuration for sni_custom certificates will result in a new resource id
+   * being returned, and the previous one being deleted.
+   */
+  edit(
+    zoneId: string,
+    customCertificateId: string,
+    body: CustomCertificateEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CustomCertificateEditResponse> {
+    return (
+      this._client.patch(`/zones/${zoneId}/custom_certificates/${customCertificateId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: CustomCertificateEditResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * SSL Configuration Details
    */
   get(
@@ -109,8 +109,6 @@ export class CustomCertificates extends APIResource {
 export class CustomCertificateListResponsesV4PagePaginationArray extends V4PagePaginationArray<CustomCertificateListResponse> {}
 
 export type CustomCertificateCreateResponse = unknown | string;
-
-export type CustomCertificateUpdateResponse = unknown | string;
 
 export interface CustomCertificateListResponse {
   /**
@@ -291,6 +289,8 @@ export interface CustomCertificateDeleteResponse {
   id?: string;
 }
 
+export type CustomCertificateEditResponse = unknown | string;
+
 export type CustomCertificateGetResponse = unknown | string;
 
 export interface CustomCertificateCreateParams {
@@ -358,7 +358,14 @@ export namespace CustomCertificateCreateParams {
   }
 }
 
-export interface CustomCertificateUpdateParams {
+export interface CustomCertificateListParams extends V4PagePaginationArrayParams {
+  /**
+   * Whether to match all search requirements or at least one (any).
+   */
+  match?: 'any' | 'all';
+}
+
+export interface CustomCertificateEditParams {
   /**
    * A ubiquitous bundle has the highest probability of being verified everywhere,
    * even by clients using outdated or unusual trust stores. An optimal bundle uses
@@ -381,7 +388,7 @@ export interface CustomCertificateUpdateParams {
    * security data centers. Default distribution is to all Cloudflare datacenters,
    * for optimal performance.
    */
-  geo_restrictions?: CustomCertificateUpdateParams.GeoRestrictions;
+  geo_restrictions?: CustomCertificateEditParams.GeoRestrictions;
 
   /**
    * Specify the policy that determines the region where your private key will be
@@ -402,7 +409,7 @@ export interface CustomCertificateUpdateParams {
   private_key?: string;
 }
 
-export namespace CustomCertificateUpdateParams {
+export namespace CustomCertificateEditParams {
   /**
    * Specify the region where your private key can be held locally for optimal TLS
    * performance. HTTPS connections to any excluded data center will still be fully
@@ -417,24 +424,17 @@ export namespace CustomCertificateUpdateParams {
   }
 }
 
-export interface CustomCertificateListParams extends V4PagePaginationArrayParams {
-  /**
-   * Whether to match all search requirements or at least one (any).
-   */
-  match?: 'any' | 'all';
-}
-
 export namespace CustomCertificates {
   export import CustomCertificateCreateResponse = CustomCertificatesAPI.CustomCertificateCreateResponse;
-  export import CustomCertificateUpdateResponse = CustomCertificatesAPI.CustomCertificateUpdateResponse;
   export import CustomCertificateListResponse = CustomCertificatesAPI.CustomCertificateListResponse;
   export import CustomCertificateDeleteResponse = CustomCertificatesAPI.CustomCertificateDeleteResponse;
+  export import CustomCertificateEditResponse = CustomCertificatesAPI.CustomCertificateEditResponse;
   export import CustomCertificateGetResponse = CustomCertificatesAPI.CustomCertificateGetResponse;
   export import CustomCertificateListResponsesV4PagePaginationArray = CustomCertificatesAPI.CustomCertificateListResponsesV4PagePaginationArray;
   export import CustomCertificateCreateParams = CustomCertificatesAPI.CustomCertificateCreateParams;
-  export import CustomCertificateUpdateParams = CustomCertificatesAPI.CustomCertificateUpdateParams;
   export import CustomCertificateListParams = CustomCertificatesAPI.CustomCertificateListParams;
+  export import CustomCertificateEditParams = CustomCertificatesAPI.CustomCertificateEditParams;
   export import Prioritize = PrioritizeAPI.Prioritize;
-  export import PrioritizeReplaceResponse = PrioritizeAPI.PrioritizeReplaceResponse;
-  export import PrioritizeReplaceParams = PrioritizeAPI.PrioritizeReplaceParams;
+  export import PrioritizeUpdateResponse = PrioritizeAPI.PrioritizeUpdateResponse;
+  export import PrioritizeUpdateParams = PrioritizeAPI.PrioritizeUpdateParams;
 }

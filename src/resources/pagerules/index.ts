@@ -2,13 +2,13 @@
 
 export {
   PageruleCreateResponse,
+  PageruleUpdateResponse,
   PageruleListResponse,
   PageruleDeleteResponse,
   PageruleGetResponse,
-  PageruleReplaceResponse,
   PageruleCreateParams,
+  PageruleUpdateParams,
   PageruleListParams,
-  PageruleReplaceParams,
   Pagerules,
 } from './pagerules';
 export { SettingListResponse, Settings } from './settings';

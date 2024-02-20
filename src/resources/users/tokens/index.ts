@@ -3,15 +3,15 @@
 export { PermissionGroupListResponse, PermissionGroups } from './permission-groups';
 export {
   TokenCreateResponse,
+  TokenUpdateResponse,
   TokenListResponse,
   TokenDeleteResponse,
   TokenGetResponse,
-  TokenReplaceResponse,
   TokenVerifyResponse,
   TokenCreateParams,
+  TokenUpdateParams,
   TokenListParams,
-  TokenReplaceParams,
   TokenListResponsesV4PagePaginationArray,
   Tokens,
 } from './tokens';
-export { ValueReplaceResponse, ValueReplaceParams, Values } from './values';
+export { ValueUpdateResponse, ValueUpdateParams, Values } from './values';

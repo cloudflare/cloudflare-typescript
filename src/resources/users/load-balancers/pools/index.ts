@@ -3,13 +3,13 @@
 export { HealthListResponse, Health } from './health';
 export {
   PoolCreateResponse,
-  PoolUpdateResponse,
   PoolListResponse,
   PoolDeleteResponse,
+  PoolEditResponse,
   PoolGetResponse,
   PoolCreateParams,
-  PoolUpdateParams,
   PoolListParams,
+  PoolEditParams,
   Pools,
 } from './pools';
 export { PreviewCreateResponse, PreviewCreateParams, Previews } from './previews';

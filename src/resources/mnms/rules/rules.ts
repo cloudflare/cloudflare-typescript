@@ -24,18 +24,16 @@ export class Rules extends APIResource {
   }
 
   /**
-   * Update a network monitoring rule for account.
+   * Update network monitoring rules for account.
    */
   update(
     accountIdentifier: unknown,
-    ruleIdentifier: unknown,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RuleUpdateResponse | null> {
     return (
-      this._client.patch(
-        `/accounts/${accountIdentifier}/mnm/rules/${ruleIdentifier}`,
-        options,
-      ) as Core.APIPromise<{ result: RuleUpdateResponse | null }>
+      this._client.put(`/accounts/${accountIdentifier}/mnm/rules`, options) as Core.APIPromise<{
+        result: RuleUpdateResponse | null;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -67,6 +65,22 @@ export class Rules extends APIResource {
   }
 
   /**
+   * Update a network monitoring rule for account.
+   */
+  edit(
+    accountIdentifier: unknown,
+    ruleIdentifier: unknown,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RuleEditResponse | null> {
+    return (
+      this._client.patch(
+        `/accounts/${accountIdentifier}/mnm/rules/${ruleIdentifier}`,
+        options,
+      ) as Core.APIPromise<{ result: RuleEditResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * List a single network monitoring rule for account.
    */
   get(
@@ -79,20 +93,6 @@ export class Rules extends APIResource {
         `/accounts/${accountIdentifier}/mnm/rules/${ruleIdentifier}`,
         options,
       ) as Core.APIPromise<{ result: RuleGetResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Update network monitoring rules for account.
-   */
-  replace(
-    accountIdentifier: unknown,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleReplaceResponse | null> {
-    return (
-      this._client.put(`/accounts/${accountIdentifier}/mnm/rules`, options) as Core.APIPromise<{
-        result: RuleReplaceResponse | null;
-      }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -265,7 +265,7 @@ export interface RuleDeleteResponse {
   packet_threshold?: number;
 }
 
-export interface RuleGetResponse {
+export interface RuleEditResponse {
   /**
    * Toggle on if you would like Cloudflare to automatically advertise the IP
    * Prefixes within the rule via Magic Transit when the rule is triggered. Only
@@ -306,7 +306,7 @@ export interface RuleGetResponse {
   packet_threshold?: number;
 }
 
-export interface RuleReplaceResponse {
+export interface RuleGetResponse {
   /**
    * Toggle on if you would like Cloudflare to automatically advertise the IP
    * Prefixes within the rule via Magic Transit when the rule is triggered. Only
@@ -352,8 +352,8 @@ export namespace Rules {
   export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
   export import RuleListResponse = RulesAPI.RuleListResponse;
   export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
+  export import RuleEditResponse = RulesAPI.RuleEditResponse;
   export import RuleGetResponse = RulesAPI.RuleGetResponse;
-  export import RuleReplaceResponse = RulesAPI.RuleReplaceResponse;
   export import Advertisements = AdvertisementsAPI.Advertisements;
-  export import AdvertisementUpdateResponse = AdvertisementsAPI.AdvertisementUpdateResponse;
+  export import AdvertisementEditResponse = AdvertisementsAPI.AdvertisementEditResponse;
 }

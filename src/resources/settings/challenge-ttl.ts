@@ -12,14 +12,14 @@ export class ChallengeTTL extends APIResource {
    * setting and will attempt to honor any setting above 45 minutes.
    * (https://support.cloudflare.com/hc/en-us/articles/200170136).
    */
-  update(
+  edit(
     zoneId: string,
-    body: ChallengeTTLUpdateParams,
+    body: ChallengeTTLEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ChallengeTTLUpdateResponse> {
+  ): Core.APIPromise<ChallengeTTLEditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/settings/challenge_ttl`, { body, ...options }) as Core.APIPromise<{
-        result: ChallengeTTLUpdateResponse;
+        result: ChallengeTTLEditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -47,7 +47,7 @@ export class ChallengeTTL extends APIResource {
  * setting and will attempt to honor any setting above 45 minutes.
  * (https://support.cloudflare.com/hc/en-us/articles/200170136).
  */
-export interface ChallengeTTLUpdateResponse {
+export interface ChallengeTTLEditResponse {
   /**
    * ID of the zone setting.
    */
@@ -128,7 +128,7 @@ export interface ChallengeTTLGetResponse {
   modified_on?: string | null;
 }
 
-export interface ChallengeTTLUpdateParams {
+export interface ChallengeTTLEditParams {
   /**
    * Value of the zone setting.
    */
@@ -150,7 +150,7 @@ export interface ChallengeTTLUpdateParams {
 }
 
 export namespace ChallengeTTL {
-  export import ChallengeTTLUpdateResponse = ChallengeTTLAPI.ChallengeTTLUpdateResponse;
+  export import ChallengeTTLEditResponse = ChallengeTTLAPI.ChallengeTTLEditResponse;
   export import ChallengeTTLGetResponse = ChallengeTTLAPI.ChallengeTTLGetResponse;
-  export import ChallengeTTLUpdateParams = ChallengeTTLAPI.ChallengeTTLUpdateParams;
+  export import ChallengeTTLEditParams = ChallengeTTLAPI.ChallengeTTLEditParams;
 }

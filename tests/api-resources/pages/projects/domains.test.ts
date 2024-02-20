@@ -38,22 +38,6 @@ describe('resource domains', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('update', async () => {
-    const responsePromise = cloudflare.pages.projects.domains.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'this-is-my-project-01',
-      'string',
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
   test.skip('list', async () => {
     const responsePromise = cloudflare.pages.projects.domains.list(
       '023e105f4ecef8ad9ca31a8372d0c353',
@@ -81,6 +65,22 @@ describe('resource domains', () => {
   // skipped: tests are disabled for the time being
   test.skip('delete', async () => {
     const responsePromise = cloudflare.pages.projects.domains.delete(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      'this-is-my-project-01',
+      'string',
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('edit', async () => {
+    const responsePromise = cloudflare.pages.projects.domains.edit(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'this-is-my-project-01',
       'string',

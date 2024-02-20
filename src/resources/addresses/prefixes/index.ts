@@ -10,11 +10,11 @@ export {
 } from './delegations';
 export {
   PrefixCreateResponse,
-  PrefixUpdateResponse,
   PrefixListResponse,
   PrefixDeleteResponse,
+  PrefixEditResponse,
   PrefixGetResponse,
   PrefixCreateParams,
-  PrefixUpdateParams,
+  PrefixEditParams,
   Prefixes,
 } from './prefixes';

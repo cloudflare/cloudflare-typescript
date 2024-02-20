@@ -246,22 +246,6 @@ describe('resource loadBalancers', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('update', async () => {
-    const responsePromise = cloudflare.loadBalancers.update(
-      '699d98642c564d2e855e9661899b7252',
-      '699d98642c564d2e855e9661899b7252',
-      {},
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
   test.skip('list', async () => {
     const responsePromise = cloudflare.loadBalancers.list('699d98642c564d2e855e9661899b7252');
     const rawResponse = await responsePromise.asResponse();
@@ -286,6 +270,22 @@ describe('resource loadBalancers', () => {
     const responsePromise = cloudflare.loadBalancers.delete(
       '699d98642c564d2e855e9661899b7252',
       '699d98642c564d2e855e9661899b7252',
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('edit', async () => {
+    const responsePromise = cloudflare.loadBalancers.edit(
+      '699d98642c564d2e855e9661899b7252',
+      '699d98642c564d2e855e9661899b7252',
+      {},
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);

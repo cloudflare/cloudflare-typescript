@@ -26,6 +26,23 @@ export class IndicatorFeeds extends APIResource {
   }
 
   /**
+   * Update indicator feed data
+   */
+  update(
+    accountId: string,
+    feedId: number,
+    body: IndicatorFeedUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IndicatorFeedUpdateResponse> {
+    return (
+      this._client.put(
+        `/accounts/${accountId}/intel/indicator-feeds/${feedId}/snapshot`,
+        multipartFormRequestOptions({ body, ...options }),
+      ) as Core.APIPromise<{ result: IndicatorFeedUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Get indicator feeds owned by this account
    */
   list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<IndicatorFeedListResponse> {
@@ -60,23 +77,6 @@ export class IndicatorFeeds extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
-
-  /**
-   * Update indicator feed data
-   */
-  replace(
-    accountId: string,
-    feedId: number,
-    body: IndicatorFeedReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<IndicatorFeedReplaceResponse> {
-    return (
-      this._client.put(
-        `/accounts/${accountId}/intel/indicator-feeds/${feedId}/snapshot`,
-        multipartFormRequestOptions({ body, ...options }),
-      ) as Core.APIPromise<{ result: IndicatorFeedReplaceResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 
 export interface IndicatorFeedCreateResponse {
@@ -104,6 +104,23 @@ export interface IndicatorFeedCreateResponse {
    * The name of the indicator feed
    */
   name?: string;
+}
+
+export interface IndicatorFeedUpdateResponse {
+  /**
+   * Feed id
+   */
+  file_id?: number;
+
+  /**
+   * Name of the file unified in our system
+   */
+  filename?: string;
+
+  /**
+   * Current status of upload, should be unified
+   */
+  status?: string;
 }
 
 export type IndicatorFeedListResponse = Array<IndicatorFeedListResponse.IndicatorFeedListResponseItem>;
@@ -171,23 +188,6 @@ export interface IndicatorFeedGetResponse {
   name?: string;
 }
 
-export interface IndicatorFeedReplaceResponse {
-  /**
-   * Feed id
-   */
-  file_id?: number;
-
-  /**
-   * Name of the file unified in our system
-   */
-  filename?: string;
-
-  /**
-   * Current status of upload, should be unified
-   */
-  status?: string;
-}
-
 export interface IndicatorFeedCreateParams {
   /**
    * The description of the example test
@@ -200,7 +200,7 @@ export interface IndicatorFeedCreateParams {
   name?: string;
 }
 
-export interface IndicatorFeedReplaceParams {
+export interface IndicatorFeedUpdateParams {
   /**
    * The file to upload
    */
@@ -209,12 +209,12 @@ export interface IndicatorFeedReplaceParams {
 
 export namespace IndicatorFeeds {
   export import IndicatorFeedCreateResponse = IndicatorFeedsAPI.IndicatorFeedCreateResponse;
+  export import IndicatorFeedUpdateResponse = IndicatorFeedsAPI.IndicatorFeedUpdateResponse;
   export import IndicatorFeedListResponse = IndicatorFeedsAPI.IndicatorFeedListResponse;
   export import IndicatorFeedDataResponse = IndicatorFeedsAPI.IndicatorFeedDataResponse;
   export import IndicatorFeedGetResponse = IndicatorFeedsAPI.IndicatorFeedGetResponse;
-  export import IndicatorFeedReplaceResponse = IndicatorFeedsAPI.IndicatorFeedReplaceResponse;
   export import IndicatorFeedCreateParams = IndicatorFeedsAPI.IndicatorFeedCreateParams;
-  export import IndicatorFeedReplaceParams = IndicatorFeedsAPI.IndicatorFeedReplaceParams;
+  export import IndicatorFeedUpdateParams = IndicatorFeedsAPI.IndicatorFeedUpdateParams;
   export import Permissions = PermissionsAPI.Permissions;
   export import PermissionCreateResponse = PermissionsAPI.PermissionCreateResponse;
   export import PermissionListResponse = PermissionsAPI.PermissionListResponse;

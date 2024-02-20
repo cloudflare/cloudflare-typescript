@@ -10,11 +10,11 @@ export class AccessRules extends APIResource {
 export namespace AccessRules {
   export import Rules = RulesAPI.Rules;
   export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
-  export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
   export import RuleListResponse = RulesAPI.RuleListResponse;
   export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
+  export import RuleEditResponse = RulesAPI.RuleEditResponse;
   export import RuleListResponsesV4PagePaginationArray = RulesAPI.RuleListResponsesV4PagePaginationArray;
   export import RuleCreateParams = RulesAPI.RuleCreateParams;
-  export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
   export import RuleListParams = RulesAPI.RuleListParams;
+  export import RuleEditParams = RulesAPI.RuleEditParams;
 }

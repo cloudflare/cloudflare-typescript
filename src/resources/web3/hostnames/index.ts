@@ -2,12 +2,12 @@
 
 export {
   HostnameCreateResponse,
-  HostnameUpdateResponse,
   HostnameListResponse,
   HostnameDeleteResponse,
+  HostnameEditResponse,
   HostnameGetResponse,
   HostnameCreateParams,
-  HostnameUpdateParams,
+  HostnameEditParams,
   Hostnames,
 } from './hostnames';
 export { IpfsUniversalPaths } from './ipfs-universal-paths/index';

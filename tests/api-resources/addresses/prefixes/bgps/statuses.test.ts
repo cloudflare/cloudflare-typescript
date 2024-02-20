@@ -13,8 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource statuses', () => {
   // skipped: tests are disabled for the time being
-  test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.addresses.prefixes.bgps.statuses.update(
+  test.skip('edit: only required params', async () => {
+    const responsePromise = cloudflare.addresses.prefixes.bgps.statuses.edit(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
       { advertised: true },
@@ -29,8 +29,8 @@ describe('resource statuses', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.addresses.prefixes.bgps.statuses.update(
+  test.skip('edit: required and optional params', async () => {
+    const response = await cloudflare.addresses.prefixes.bgps.statuses.edit(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
       { advertised: true },

@@ -2,19 +2,19 @@
 
 export {
   LiveInputCreateResponse,
+  LiveInputUpdateResponse,
   LiveInputListResponse,
   LiveInputGetResponse,
-  LiveInputReplaceResponse,
   LiveInputCreateParams,
+  LiveInputUpdateParams,
   LiveInputListParams,
-  LiveInputReplaceParams,
   LiveInputs,
 } from './live-inputs';
 export {
   OutputCreateResponse,
+  OutputUpdateResponse,
   OutputListResponse,
-  OutputReplaceResponse,
   OutputCreateParams,
-  OutputReplaceParams,
+  OutputUpdateParams,
   Outputs,
 } from './outputs';

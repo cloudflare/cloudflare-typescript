@@ -11,14 +11,14 @@ export class Packages extends APIResource {
 
 export namespace Packages {
   export import Groups = GroupsAPI.Groups;
-  export import GroupUpdateResponse = GroupsAPI.GroupUpdateResponse;
   export import GroupListResponse = GroupsAPI.GroupListResponse;
+  export import GroupEditResponse = GroupsAPI.GroupEditResponse;
   export import GroupGetResponse = GroupsAPI.GroupGetResponse;
   export import GroupListResponsesV4PagePaginationArray = GroupsAPI.GroupListResponsesV4PagePaginationArray;
-  export import GroupUpdateParams = GroupsAPI.GroupUpdateParams;
   export import GroupListParams = GroupsAPI.GroupListParams;
+  export import GroupEditParams = GroupsAPI.GroupEditParams;
   export import Rules = RulesAPI.Rules;
-  export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
+  export import RuleEditResponse = RulesAPI.RuleEditResponse;
   export import RuleGetResponse = RulesAPI.RuleGetResponse;
-  export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
+  export import RuleEditParams = RulesAPI.RuleEditParams;
 }

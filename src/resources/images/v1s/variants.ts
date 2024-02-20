@@ -22,23 +22,6 @@ export class Variants extends APIResource {
   }
 
   /**
-   * Updating a variant purges the cache for all images associated with the variant.
-   */
-  update(
-    accountId: string,
-    variantId: unknown,
-    body: VariantUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<VariantUpdateResponse> {
-    return (
-      this._client.patch(`/accounts/${accountId}/images/v1/variants/${variantId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: VariantUpdateResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Lists existing variants.
    */
   list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<VariantListResponse> {
@@ -66,6 +49,23 @@ export class Variants extends APIResource {
   }
 
   /**
+   * Updating a variant purges the cache for all images associated with the variant.
+   */
+  edit(
+    accountId: string,
+    variantId: unknown,
+    body: VariantEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<VariantEditResponse> {
+    return (
+      this._client.patch(`/accounts/${accountId}/images/v1/variants/${variantId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: VariantEditResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Fetch details for a single variant.
    */
   get(
@@ -86,55 +86,6 @@ export interface VariantCreateResponse {
 }
 
 export namespace VariantCreateResponse {
-  export interface Variant {
-    id: unknown;
-
-    /**
-     * Allows you to define image resizing sizes for different use cases.
-     */
-    options: Variant.Options;
-
-    /**
-     * Indicates whether the variant can access an image without a signature,
-     * regardless of image access control.
-     */
-    neverRequireSignedURLs?: boolean;
-  }
-
-  export namespace Variant {
-    /**
-     * Allows you to define image resizing sizes for different use cases.
-     */
-    export interface Options {
-      /**
-       * The fit property describes how the width and height dimensions should be
-       * interpreted.
-       */
-      fit: 'scale-down' | 'contain' | 'cover' | 'crop' | 'pad';
-
-      /**
-       * Maximum height in image pixels.
-       */
-      height: number;
-
-      /**
-       * What EXIF data should be preserved in the output image.
-       */
-      metadata: 'keep' | 'copyright' | 'none';
-
-      /**
-       * Maximum width in image pixels.
-       */
-      width: number;
-    }
-  }
-}
-
-export interface VariantUpdateResponse {
-  variant?: VariantUpdateResponse.Variant;
-}
-
-export namespace VariantUpdateResponse {
   export interface Variant {
     id: unknown;
 
@@ -236,6 +187,55 @@ export namespace VariantListResponse {
 
 export type VariantDeleteResponse = unknown | string;
 
+export interface VariantEditResponse {
+  variant?: VariantEditResponse.Variant;
+}
+
+export namespace VariantEditResponse {
+  export interface Variant {
+    id: unknown;
+
+    /**
+     * Allows you to define image resizing sizes for different use cases.
+     */
+    options: Variant.Options;
+
+    /**
+     * Indicates whether the variant can access an image without a signature,
+     * regardless of image access control.
+     */
+    neverRequireSignedURLs?: boolean;
+  }
+
+  export namespace Variant {
+    /**
+     * Allows you to define image resizing sizes for different use cases.
+     */
+    export interface Options {
+      /**
+       * The fit property describes how the width and height dimensions should be
+       * interpreted.
+       */
+      fit: 'scale-down' | 'contain' | 'cover' | 'crop' | 'pad';
+
+      /**
+       * Maximum height in image pixels.
+       */
+      height: number;
+
+      /**
+       * What EXIF data should be preserved in the output image.
+       */
+      metadata: 'keep' | 'copyright' | 'none';
+
+      /**
+       * Maximum width in image pixels.
+       */
+      width: number;
+    }
+  }
+}
+
 export interface VariantGetResponse {
   variant?: VariantGetResponse.Variant;
 }
@@ -328,11 +328,11 @@ export namespace VariantCreateParams {
   }
 }
 
-export interface VariantUpdateParams {
+export interface VariantEditParams {
   /**
    * Allows you to define image resizing sizes for different use cases.
    */
-  options: VariantUpdateParams.Options;
+  options: VariantEditParams.Options;
 
   /**
    * Indicates whether the variant can access an image without a signature,
@@ -341,7 +341,7 @@ export interface VariantUpdateParams {
   neverRequireSignedURLs?: boolean;
 }
 
-export namespace VariantUpdateParams {
+export namespace VariantEditParams {
   /**
    * Allows you to define image resizing sizes for different use cases.
    */
@@ -371,10 +371,10 @@ export namespace VariantUpdateParams {
 
 export namespace Variants {
   export import VariantCreateResponse = VariantsAPI.VariantCreateResponse;
-  export import VariantUpdateResponse = VariantsAPI.VariantUpdateResponse;
   export import VariantListResponse = VariantsAPI.VariantListResponse;
   export import VariantDeleteResponse = VariantsAPI.VariantDeleteResponse;
+  export import VariantEditResponse = VariantsAPI.VariantEditResponse;
   export import VariantGetResponse = VariantsAPI.VariantGetResponse;
   export import VariantCreateParams = VariantsAPI.VariantCreateParams;
-  export import VariantUpdateParams = VariantsAPI.VariantUpdateParams;
+  export import VariantEditParams = VariantsAPI.VariantEditParams;
 }

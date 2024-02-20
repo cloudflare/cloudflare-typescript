@@ -11,16 +11,16 @@ export class ResponseBuffering extends APIResource {
    * it to be delivered in chunks. By default, the proxied server streams directly
    * and is not buffered by Cloudflare. This is limited to Enterprise Zones.
    */
-  update(
+  edit(
     zoneId: string,
-    body: ResponseBufferingUpdateParams,
+    body: ResponseBufferingEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ResponseBufferingUpdateResponse> {
+  ): Core.APIPromise<ResponseBufferingEditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/settings/response_buffering`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ResponseBufferingUpdateResponse }>
+      }) as Core.APIPromise<{ result: ResponseBufferingEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -45,7 +45,7 @@ export class ResponseBuffering extends APIResource {
  * it to be delivered in chunks. By default, the proxied server streams directly
  * and is not buffered by Cloudflare. This is limited to Enterprise Zones.
  */
-export interface ResponseBufferingUpdateResponse {
+export interface ResponseBufferingEditResponse {
   /**
    * ID of the zone setting.
    */
@@ -97,7 +97,7 @@ export interface ResponseBufferingGetResponse {
   modified_on?: string | null;
 }
 
-export interface ResponseBufferingUpdateParams {
+export interface ResponseBufferingEditParams {
   /**
    * Value of the zone setting.
    */
@@ -105,7 +105,7 @@ export interface ResponseBufferingUpdateParams {
 }
 
 export namespace ResponseBuffering {
-  export import ResponseBufferingUpdateResponse = ResponseBufferingAPI.ResponseBufferingUpdateResponse;
+  export import ResponseBufferingEditResponse = ResponseBufferingAPI.ResponseBufferingEditResponse;
   export import ResponseBufferingGetResponse = ResponseBufferingAPI.ResponseBufferingGetResponse;
-  export import ResponseBufferingUpdateParams = ResponseBufferingAPI.ResponseBufferingUpdateParams;
+  export import ResponseBufferingEditParams = ResponseBufferingAPI.ResponseBufferingEditParams;
 }

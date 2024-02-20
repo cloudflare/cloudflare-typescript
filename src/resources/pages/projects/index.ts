@@ -12,21 +12,21 @@ export {
 } from './deployments/index';
 export {
   DomainCreateResponse,
-  DomainUpdateResponse,
   DomainListResponse,
   DomainDeleteResponse,
+  DomainEditResponse,
   DomainGetResponse,
   DomainCreateParams,
   Domains,
 } from './domains';
 export {
   ProjectCreateResponse,
-  ProjectUpdateResponse,
   ProjectListResponse,
   ProjectDeleteResponse,
+  ProjectEditResponse,
   ProjectGetResponse,
   ProjectPurgeBuildCacheResponse,
   ProjectCreateParams,
-  ProjectUpdateParams,
+  ProjectEditParams,
   Projects,
 } from './projects';

@@ -13,8 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource connectivitySettings', () => {
   // skipped: tests are disabled for the time being
-  test.skip('update', async () => {
-    const responsePromise = cloudflare.zerotrust.connectivitySettings.update(
+  test.skip('edit', async () => {
+    const responsePromise = cloudflare.zerotrust.connectivitySettings.edit(
       '699d98642c564d2e855e9661899b7252',
       {},
     );

@@ -26,6 +26,24 @@ export class Certificates extends APIResource {
   }
 
   /**
+   * Updates a configured mTLS certificate.
+   */
+  update(
+    accountOrZone: string,
+    accountOrZoneId: string,
+    uuid: string,
+    body: CertificateUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CertificateUpdateResponse> {
+    return (
+      this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/certificates/${uuid}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: CertificateUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Lists all mTLS root certificates.
    */
   list(
@@ -74,27 +92,37 @@ export class Certificates extends APIResource {
       ) as Core.APIPromise<{ result: CertificateGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
-
-  /**
-   * Updates a configured mTLS certificate.
-   */
-  replace(
-    accountOrZone: string,
-    accountOrZoneId: string,
-    uuid: string,
-    body: CertificateReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CertificateReplaceResponse> {
-    return (
-      this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/certificates/${uuid}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: CertificateReplaceResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 
 export interface CertificateCreateResponse {
+  /**
+   * The ID of the application that will use this certificate.
+   */
+  id?: unknown;
+
+  /**
+   * The hostnames of the applications that will use this certificate.
+   */
+  associated_hostnames?: Array<string>;
+
+  created_at?: string;
+
+  expires_on?: string;
+
+  /**
+   * The MD5 fingerprint of the certificate.
+   */
+  fingerprint?: string;
+
+  /**
+   * The name of the certificate.
+   */
+  name?: string;
+
+  updated_at?: string;
+}
+
+export interface CertificateUpdateResponse {
   /**
    * The ID of the application that will use this certificate.
    */
@@ -189,34 +217,6 @@ export interface CertificateGetResponse {
   updated_at?: string;
 }
 
-export interface CertificateReplaceResponse {
-  /**
-   * The ID of the application that will use this certificate.
-   */
-  id?: unknown;
-
-  /**
-   * The hostnames of the applications that will use this certificate.
-   */
-  associated_hostnames?: Array<string>;
-
-  created_at?: string;
-
-  expires_on?: string;
-
-  /**
-   * The MD5 fingerprint of the certificate.
-   */
-  fingerprint?: string;
-
-  /**
-   * The name of the certificate.
-   */
-  name?: string;
-
-  updated_at?: string;
-}
-
 export interface CertificateCreateParams {
   /**
    * The certificate content.
@@ -234,7 +234,7 @@ export interface CertificateCreateParams {
   associated_hostnames?: Array<string>;
 }
 
-export interface CertificateReplaceParams {
+export interface CertificateUpdateParams {
   /**
    * The hostnames of the applications that will use this certificate.
    */
@@ -248,14 +248,14 @@ export interface CertificateReplaceParams {
 
 export namespace Certificates {
   export import CertificateCreateResponse = CertificatesAPI.CertificateCreateResponse;
+  export import CertificateUpdateResponse = CertificatesAPI.CertificateUpdateResponse;
   export import CertificateListResponse = CertificatesAPI.CertificateListResponse;
   export import CertificateDeleteResponse = CertificatesAPI.CertificateDeleteResponse;
   export import CertificateGetResponse = CertificatesAPI.CertificateGetResponse;
-  export import CertificateReplaceResponse = CertificatesAPI.CertificateReplaceResponse;
   export import CertificateCreateParams = CertificatesAPI.CertificateCreateParams;
-  export import CertificateReplaceParams = CertificatesAPI.CertificateReplaceParams;
+  export import CertificateUpdateParams = CertificatesAPI.CertificateUpdateParams;
   export import Settings = SettingsAPI.Settings;
+  export import SettingUpdateResponse = SettingsAPI.SettingUpdateResponse;
   export import SettingListResponse = SettingsAPI.SettingListResponse;
-  export import SettingReplaceResponse = SettingsAPI.SettingReplaceResponse;
-  export import SettingReplaceParams = SettingsAPI.SettingReplaceParams;
+  export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;
 }

@@ -8,16 +8,16 @@ export class SecurityHeaders extends APIResource {
   /**
    * Cloudflare security header for a zone.
    */
-  update(
+  edit(
     zoneId: string,
-    body: SecurityHeaderUpdateParams,
+    body: SecurityHeaderEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SecurityHeaderUpdateResponse> {
+  ): Core.APIPromise<SecurityHeaderEditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/settings/security_header`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: SecurityHeaderUpdateResponse }>
+      }) as Core.APIPromise<{ result: SecurityHeaderEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -36,7 +36,7 @@ export class SecurityHeaders extends APIResource {
 /**
  * Cloudflare security header for a zone.
  */
-export interface SecurityHeaderUpdateResponse {
+export interface SecurityHeaderEditResponse {
   /**
    * ID of the zone's security header.
    */
@@ -45,7 +45,7 @@ export interface SecurityHeaderUpdateResponse {
   /**
    * Current value of the zone setting.
    */
-  value: SecurityHeaderUpdateResponse.Value;
+  value: SecurityHeaderEditResponse.Value;
 
   /**
    * Whether or not this setting can be modified for this zone (based on your
@@ -59,7 +59,7 @@ export interface SecurityHeaderUpdateResponse {
   modified_on?: string | null;
 }
 
-export namespace SecurityHeaderUpdateResponse {
+export namespace SecurityHeaderEditResponse {
   /**
    * Current value of the zone setting.
    */
@@ -163,11 +163,11 @@ export namespace SecurityHeaderGetResponse {
   }
 }
 
-export interface SecurityHeaderUpdateParams {
-  value: SecurityHeaderUpdateParams.Value;
+export interface SecurityHeaderEditParams {
+  value: SecurityHeaderEditParams.Value;
 }
 
-export namespace SecurityHeaderUpdateParams {
+export namespace SecurityHeaderEditParams {
   export interface Value {
     /**
      * Strict Transport Security.
@@ -204,7 +204,7 @@ export namespace SecurityHeaderUpdateParams {
 }
 
 export namespace SecurityHeaders {
-  export import SecurityHeaderUpdateResponse = SecurityHeadersAPI.SecurityHeaderUpdateResponse;
+  export import SecurityHeaderEditResponse = SecurityHeadersAPI.SecurityHeaderEditResponse;
   export import SecurityHeaderGetResponse = SecurityHeadersAPI.SecurityHeaderGetResponse;
-  export import SecurityHeaderUpdateParams = SecurityHeadersAPI.SecurityHeaderUpdateParams;
+  export import SecurityHeaderEditParams = SecurityHeadersAPI.SecurityHeaderEditParams;
 }

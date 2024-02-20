@@ -15,12 +15,12 @@ export namespace Mnms {
   export import ConfigUpdateResponse = ConfigsAPI.ConfigUpdateResponse;
   export import ConfigListResponse = ConfigsAPI.ConfigListResponse;
   export import ConfigDeleteResponse = ConfigsAPI.ConfigDeleteResponse;
-  export import ConfigReplaceResponse = ConfigsAPI.ConfigReplaceResponse;
+  export import ConfigEditResponse = ConfigsAPI.ConfigEditResponse;
   export import Rules = RulesAPI.Rules;
   export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
   export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
   export import RuleListResponse = RulesAPI.RuleListResponse;
   export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
+  export import RuleEditResponse = RulesAPI.RuleEditResponse;
   export import RuleGetResponse = RulesAPI.RuleGetResponse;
-  export import RuleReplaceResponse = RulesAPI.RuleReplaceResponse;
 }

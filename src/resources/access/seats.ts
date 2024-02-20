@@ -9,23 +9,23 @@ export class Seats extends APIResource {
    * Removes a user from a Zero Trust seat when both `access_seat` and `gateway_seat`
    * are set to false.
    */
-  update(
+  edit(
     identifier: string,
-    body: SeatUpdateParams,
+    body: SeatEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SeatUpdateResponse | null> {
+  ): Core.APIPromise<SeatEditResponse | null> {
     return (
       this._client.patch(`/accounts/${identifier}/access/seats`, { body, ...options }) as Core.APIPromise<{
-        result: SeatUpdateResponse | null;
+        result: SeatEditResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type SeatUpdateResponse = Array<SeatUpdateResponse.SeatUpdateResponseItem>;
+export type SeatEditResponse = Array<SeatEditResponse.SeatEditResponseItem>;
 
-export namespace SeatUpdateResponse {
-  export interface SeatUpdateResponseItem {
+export namespace SeatEditResponse {
+  export interface SeatEditResponseItem {
     /**
      * True if the seat is part of Access.
      */
@@ -47,9 +47,9 @@ export namespace SeatUpdateResponse {
   }
 }
 
-export type SeatUpdateParams = Array<SeatUpdateParams.Body>;
+export type SeatEditParams = Array<SeatEditParams.Body>;
 
-export namespace SeatUpdateParams {
+export namespace SeatEditParams {
   export interface Body {
     /**
      * True if the seat is part of Access.
@@ -64,6 +64,6 @@ export namespace SeatUpdateParams {
 }
 
 export namespace Seats {
-  export import SeatUpdateResponse = SeatsAPI.SeatUpdateResponse;
-  export import SeatUpdateParams = SeatsAPI.SeatUpdateParams;
+  export import SeatEditResponse = SeatsAPI.SeatEditResponse;
+  export import SeatEditParams = SeatsAPI.SeatEditParams;
 }

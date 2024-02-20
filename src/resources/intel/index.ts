@@ -8,12 +8,12 @@ export { IPGetResponse, IPGetParams, IPs } from './ips';
 export { IPListGetResponse, IPLists } from './ip-lists';
 export {
   IndicatorFeedCreateResponse,
+  IndicatorFeedUpdateResponse,
   IndicatorFeedListResponse,
   IndicatorFeedDataResponse,
   IndicatorFeedGetResponse,
-  IndicatorFeedReplaceResponse,
   IndicatorFeedCreateParams,
-  IndicatorFeedReplaceParams,
+  IndicatorFeedUpdateParams,
   IndicatorFeeds,
 } from './indicator-feeds/index';
 export { Intel } from './intel';

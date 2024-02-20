@@ -6,6 +6,23 @@ import * as DomainsAPI from 'cloudflare/resources/registrar/domains';
 
 export class Domains extends APIResource {
   /**
+   * Update individual domain.
+   */
+  update(
+    accountId: string,
+    domainName: string,
+    body: DomainUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DomainUpdateResponse | null> {
+    return (
+      this._client.put(`/accounts/${accountId}/registrar/domains/${domainName}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: DomainUpdateResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * List domains handled by Registrar.
    */
   list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<DomainListResponse | null> {
@@ -30,24 +47,9 @@ export class Domains extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
-
-  /**
-   * Update individual domain.
-   */
-  replace(
-    accountId: string,
-    domainName: string,
-    body: DomainReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DomainReplaceResponse | null> {
-    return (
-      this._client.put(`/accounts/${accountId}/registrar/domains/${domainName}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: DomainReplaceResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
+
+export type DomainUpdateResponse = unknown | Array<unknown> | string;
 
 export type DomainListResponse = Array<DomainListResponse.DomainListResponseItem>;
 
@@ -228,9 +230,7 @@ export namespace DomainListResponse {
 
 export type DomainGetResponse = unknown | Array<unknown> | string;
 
-export type DomainReplaceResponse = unknown | Array<unknown> | string;
-
-export interface DomainReplaceParams {
+export interface DomainUpdateParams {
   /**
    * Auto-renew controls whether subscription is automatically renewed upon domain
    * expiration.
@@ -249,8 +249,8 @@ export interface DomainReplaceParams {
 }
 
 export namespace Domains {
+  export import DomainUpdateResponse = DomainsAPI.DomainUpdateResponse;
   export import DomainListResponse = DomainsAPI.DomainListResponse;
   export import DomainGetResponse = DomainsAPI.DomainGetResponse;
-  export import DomainReplaceResponse = DomainsAPI.DomainReplaceResponse;
-  export import DomainReplaceParams = DomainsAPI.DomainReplaceParams;
+  export import DomainUpdateParams = DomainsAPI.DomainUpdateParams;
 }

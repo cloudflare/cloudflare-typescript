@@ -25,6 +25,22 @@ describe('resource subscriptions', () => {
   });
 
   // skipped: tests are disabled for the time being
+  test.skip('update', async () => {
+    const responsePromise = cloudflare.subscriptions.update(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '506e3185e9c882d175a2d0cb0093d9f2',
+      {},
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('list', async () => {
     const responsePromise = cloudflare.subscriptions.list('023e105f4ecef8ad9ca31a8372d0c353');
     const rawResponse = await responsePromise.asResponse();
@@ -77,21 +93,5 @@ describe('resource subscriptions', () => {
     await expect(
       cloudflare.subscriptions.get('506e3185e9c882d175a2d0cb0093d9f2', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('replace', async () => {
-    const responsePromise = cloudflare.subscriptions.replace(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '506e3185e9c882d175a2d0cb0093d9f2',
-      {},
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
   });
 });

@@ -24,6 +24,23 @@ export class Lists extends APIResource {
   }
 
   /**
+   * Updates a configured Zero Trust list.
+   */
+  update(
+    accountId: unknown,
+    listId: string,
+    body: ListUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ListUpdateResponse> {
+    return (
+      this._client.put(`/accounts/${accountId}/gateway/lists/${listId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: ListUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Fetches all Zero Trust lists for an account.
    */
   list(accountId: unknown, options?: Core.RequestOptions): Core.APIPromise<ListListResponse | null> {
@@ -57,23 +74,6 @@ export class Lists extends APIResource {
       this._client.get(`/accounts/${accountId}/gateway/lists/${listId}`, options) as Core.APIPromise<{
         result: ListGetResponse;
       }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Updates a configured Zero Trust list.
-   */
-  replace(
-    accountId: unknown,
-    listId: string,
-    body: ListReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ListReplaceResponse> {
-    return (
-      this._client.put(`/accounts/${accountId}/gateway/lists/${listId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: ListReplaceResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -118,6 +118,37 @@ export namespace ListCreateResponse {
      */
     value?: string;
   }
+}
+
+export interface ListUpdateResponse {
+  /**
+   * API Resource UUID tag.
+   */
+  id?: string;
+
+  /**
+   * The number of items in the list.
+   */
+  count?: number;
+
+  created_at?: string;
+
+  /**
+   * The description of the list.
+   */
+  description?: string;
+
+  /**
+   * The name of the list.
+   */
+  name?: string;
+
+  /**
+   * The type of list.
+   */
+  type?: 'SERIAL' | 'URL' | 'DOMAIN' | 'EMAIL' | 'IP';
+
+  updated_at?: string;
 }
 
 export type ListListResponse = Array<ListListResponse.ListListResponseItem>;
@@ -188,37 +219,6 @@ export interface ListGetResponse {
   updated_at?: string;
 }
 
-export interface ListReplaceResponse {
-  /**
-   * API Resource UUID tag.
-   */
-  id?: string;
-
-  /**
-   * The number of items in the list.
-   */
-  count?: number;
-
-  created_at?: string;
-
-  /**
-   * The description of the list.
-   */
-  description?: string;
-
-  /**
-   * The name of the list.
-   */
-  name?: string;
-
-  /**
-   * The type of list.
-   */
-  type?: 'SERIAL' | 'URL' | 'DOMAIN' | 'EMAIL' | 'IP';
-
-  updated_at?: string;
-}
-
 export interface ListCreateParams {
   /**
    * The name of the list.
@@ -250,7 +250,7 @@ export namespace ListCreateParams {
   }
 }
 
-export interface ListReplaceParams {
+export interface ListUpdateParams {
   /**
    * The name of the list.
    */
@@ -264,12 +264,12 @@ export interface ListReplaceParams {
 
 export namespace Lists {
   export import ListCreateResponse = ListsAPI.ListCreateResponse;
+  export import ListUpdateResponse = ListsAPI.ListUpdateResponse;
   export import ListListResponse = ListsAPI.ListListResponse;
   export import ListDeleteResponse = ListsAPI.ListDeleteResponse;
   export import ListGetResponse = ListsAPI.ListGetResponse;
-  export import ListReplaceResponse = ListsAPI.ListReplaceResponse;
   export import ListCreateParams = ListsAPI.ListCreateParams;
-  export import ListReplaceParams = ListsAPI.ListReplaceParams;
+  export import ListUpdateParams = ListsAPI.ListUpdateParams;
   export import Items = ItemsAPI.Items;
   export import ItemListResponse = ItemsAPI.ItemListResponse;
 }

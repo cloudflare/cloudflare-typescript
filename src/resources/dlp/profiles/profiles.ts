@@ -469,13 +469,13 @@ export namespace Profiles {
   export import ProfileGetResponse = ProfilesAPI.ProfileGetResponse;
   export import Customs = CustomsAPI.Customs;
   export import CustomCreateResponse = CustomsAPI.CustomCreateResponse;
+  export import CustomUpdateResponse = CustomsAPI.CustomUpdateResponse;
   export import CustomDeleteResponse = CustomsAPI.CustomDeleteResponse;
   export import CustomGetResponse = CustomsAPI.CustomGetResponse;
-  export import CustomReplaceResponse = CustomsAPI.CustomReplaceResponse;
   export import CustomCreateParams = CustomsAPI.CustomCreateParams;
-  export import CustomReplaceParams = CustomsAPI.CustomReplaceParams;
+  export import CustomUpdateParams = CustomsAPI.CustomUpdateParams;
   export import Predefineds = PredefinedsAPI.Predefineds;
+  export import PredefinedUpdateResponse = PredefinedsAPI.PredefinedUpdateResponse;
   export import PredefinedGetResponse = PredefinedsAPI.PredefinedGetResponse;
-  export import PredefinedReplaceResponse = PredefinedsAPI.PredefinedReplaceResponse;
-  export import PredefinedReplaceParams = PredefinedsAPI.PredefinedReplaceParams;
+  export import PredefinedUpdateParams = PredefinedsAPI.PredefinedUpdateParams;
 }

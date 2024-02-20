@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
-  BGPPrefixUpdateResponse,
   BGPPrefixListResponse,
+  BGPPrefixEditResponse,
   BGPPrefixGetResponse,
-  BGPPrefixUpdateParams,
+  BGPPrefixEditParams,
   BGPPrefixes,
 } from './bgp-prefixes';
 export {

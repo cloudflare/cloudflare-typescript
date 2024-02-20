@@ -8,16 +8,16 @@ export class AutomaticHTTPSRewrites extends APIResource {
   /**
    * Enable the Automatic HTTPS Rewrites feature for this zone.
    */
-  update(
+  edit(
     zoneId: string,
-    body: AutomaticHTTPSRewriteUpdateParams,
+    body: AutomaticHTTPSRewriteEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AutomaticHTTPSRewriteUpdateResponse> {
+  ): Core.APIPromise<AutomaticHTTPSRewriteEditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/settings/automatic_https_rewrites`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: AutomaticHTTPSRewriteUpdateResponse }>
+      }) as Core.APIPromise<{ result: AutomaticHTTPSRewriteEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -36,7 +36,7 @@ export class AutomaticHTTPSRewrites extends APIResource {
 /**
  * Enable the Automatic HTTPS Rewrites feature for this zone.
  */
-export interface AutomaticHTTPSRewriteUpdateResponse {
+export interface AutomaticHTTPSRewriteEditResponse {
   /**
    * ID of the zone setting.
    */
@@ -85,7 +85,7 @@ export interface AutomaticHTTPSRewriteGetResponse {
   modified_on?: string | null;
 }
 
-export interface AutomaticHTTPSRewriteUpdateParams {
+export interface AutomaticHTTPSRewriteEditParams {
   /**
    * Value of the zone setting. Notes: Default value depends on the zone's plan
    * level.
@@ -94,7 +94,7 @@ export interface AutomaticHTTPSRewriteUpdateParams {
 }
 
 export namespace AutomaticHTTPSRewrites {
-  export import AutomaticHTTPSRewriteUpdateResponse = AutomaticHTTPSRewritesAPI.AutomaticHTTPSRewriteUpdateResponse;
+  export import AutomaticHTTPSRewriteEditResponse = AutomaticHTTPSRewritesAPI.AutomaticHTTPSRewriteEditResponse;
   export import AutomaticHTTPSRewriteGetResponse = AutomaticHTTPSRewritesAPI.AutomaticHTTPSRewriteGetResponse;
-  export import AutomaticHTTPSRewriteUpdateParams = AutomaticHTTPSRewritesAPI.AutomaticHTTPSRewriteUpdateParams;
+  export import AutomaticHTTPSRewriteEditParams = AutomaticHTTPSRewritesAPI.AutomaticHTTPSRewriteEditParams;
 }

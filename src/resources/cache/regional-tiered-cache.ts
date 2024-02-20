@@ -10,16 +10,16 @@ export class RegionalTieredCache extends APIResource {
    * upper tier. This can help improve performance for smart and custom tiered cache
    * topologies.
    */
-  update(
+  edit(
     zoneId: string,
-    body: RegionalTieredCacheUpdateParams,
+    body: RegionalTieredCacheEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RegionalTieredCacheUpdateResponse> {
+  ): Core.APIPromise<RegionalTieredCacheEditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/cache/regional_tiered_cache`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: RegionalTieredCacheUpdateResponse }>
+      }) as Core.APIPromise<{ result: RegionalTieredCacheEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -42,7 +42,7 @@ export class RegionalTieredCache extends APIResource {
  * upper tier. This can help improve performance for smart and custom tiered cache
  * topologies.
  */
-export interface RegionalTieredCacheUpdateResponse {
+export interface RegionalTieredCacheEditResponse {
   /**
    * ID of the zone setting.
    */
@@ -58,10 +58,10 @@ export interface RegionalTieredCacheUpdateResponse {
    * upper tier. This can help improve performance for smart and custom tiered cache
    * topologies.
    */
-  value: RegionalTieredCacheUpdateResponse.Value;
+  value: RegionalTieredCacheEditResponse.Value;
 }
 
-export namespace RegionalTieredCacheUpdateResponse {
+export namespace RegionalTieredCacheEditResponse {
   /**
    * Instructs Cloudflare to check a regional hub data center on the way to your
    * upper tier. This can help improve performance for smart and custom tiered cache
@@ -123,7 +123,7 @@ export namespace RegionalTieredCacheGetResponse {
   }
 }
 
-export interface RegionalTieredCacheUpdateParams {
+export interface RegionalTieredCacheEditParams {
   /**
    * Value of the Regional Tiered Cache zone setting.
    */
@@ -131,7 +131,7 @@ export interface RegionalTieredCacheUpdateParams {
 }
 
 export namespace RegionalTieredCache {
-  export import RegionalTieredCacheUpdateResponse = RegionalTieredCacheAPI.RegionalTieredCacheUpdateResponse;
+  export import RegionalTieredCacheEditResponse = RegionalTieredCacheAPI.RegionalTieredCacheEditResponse;
   export import RegionalTieredCacheGetResponse = RegionalTieredCacheAPI.RegionalTieredCacheGetResponse;
-  export import RegionalTieredCacheUpdateParams = RegionalTieredCacheAPI.RegionalTieredCacheUpdateParams;
+  export import RegionalTieredCacheEditParams = RegionalTieredCacheAPI.RegionalTieredCacheEditParams;
 }

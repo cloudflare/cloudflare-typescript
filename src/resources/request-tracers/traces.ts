@@ -22,23 +22,13 @@ export class Traces extends APIResource {
   }
 }
 
-/**
- * Trace result with an origin status code
- */
-export interface TraceCreateResponse {
-  /**
-   * HTTP Status code of zone response
-   */
-  status_code?: number;
+export type Bz6um997Trace = Array<Bz6um997Trace.Bz6um997TraceItem>;
 
-  trace?: Array<TraceCreateResponse.Trace>;
-}
-
-export namespace TraceCreateResponse {
+export namespace Bz6um997Trace {
   /**
    * List of steps acting on request/response
    */
-  export interface Trace {
+  export interface Bz6um997TraceItem {
     /**
      * If step type is rule, then action performed by this rule
      */
@@ -79,67 +69,25 @@ export namespace TraceCreateResponse {
      */
     step_name?: string;
 
-    trace?: Array<Trace.Trace>;
+    trace?: TracesAPI.Bz6um997Trace;
 
     /**
      * Tracing step type
      */
     type?: string;
   }
+}
 
-  export namespace Trace {
-    /**
-     * List of steps acting on request/response
-     */
-    export interface Trace {
-      /**
-       * If step type is rule, then action performed by this rule
-       */
-      action?: string;
+/**
+ * Trace result with an origin status code
+ */
+export interface TraceCreateResponse {
+  /**
+   * HTTP Status code of zone response
+   */
+  status_code?: number;
 
-      /**
-       * If step type is rule, then action parameters of this rule as JSON
-       */
-      action_parameters?: unknown;
-
-      /**
-       * If step type is rule or ruleset, the description of this entity
-       */
-      description?: string;
-
-      /**
-       * If step type is rule, then expression used to match for this rule
-       */
-      expression?: string;
-
-      /**
-       * If step type is ruleset, then kind of this ruleset
-       */
-      kind?: string;
-
-      /**
-       * Whether tracing step affected tracing request/response
-       */
-      matched?: boolean;
-
-      /**
-       * If step type is ruleset, then name of this ruleset
-       */
-      name?: string;
-
-      /**
-       * Tracing step identifying name
-       */
-      step_name?: string;
-
-      trace?: unknown;
-
-      /**
-       * Tracing step type
-       */
-      type?: string;
-    }
-  }
+  trace?: Bz6um997Trace;
 }
 
 export interface TraceCreateParams {
@@ -253,6 +201,7 @@ export namespace TraceCreateParams {
 }
 
 export namespace Traces {
+  export import Bz6um997Trace = TracesAPI.Bz6um997Trace;
   export import TraceCreateResponse = TracesAPI.TraceCreateResponse;
   export import TraceCreateParams = TracesAPI.TraceCreateParams;
 }

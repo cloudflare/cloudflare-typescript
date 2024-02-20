@@ -22,6 +22,23 @@ export class Calls extends APIResource {
   }
 
   /**
+   * Edit details for a single app.
+   */
+  update(
+    accountId: string,
+    appId: string,
+    body: CallUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CallUpdateResponse> {
+    return (
+      this._client.put(`/accounts/${accountId}/calls/apps/${appId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: CallUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Lists all apps in the Cloudflare account
    */
   list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<CallListResponse> {
@@ -57,23 +74,6 @@ export class Calls extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
-
-  /**
-   * Edit details for a single app.
-   */
-  replace(
-    accountId: string,
-    appId: string,
-    body: CallReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CallReplaceResponse> {
-    return (
-      this._client.put(`/accounts/${accountId}/calls/apps/${appId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: CallReplaceResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 
 export interface CallCreateResponse {
@@ -96,6 +96,28 @@ export interface CallCreateResponse {
    * Bearer token to use the Calls API.
    */
   secret?: string;
+
+  /**
+   * A Cloudflare-generated unique identifier for a item.
+   */
+  uid?: string;
+}
+
+export interface CallUpdateResponse {
+  /**
+   * The date and time the item was created.
+   */
+  created?: string;
+
+  /**
+   * The date and time the item was last modified.
+   */
+  modified?: string;
+
+  /**
+   * A short description of Calls app, not shown to end users.
+   */
+  name?: string;
 
   /**
    * A Cloudflare-generated unique identifier for a item.
@@ -173,28 +195,6 @@ export interface CallGetResponse {
   uid?: string;
 }
 
-export interface CallReplaceResponse {
-  /**
-   * The date and time the item was created.
-   */
-  created?: string;
-
-  /**
-   * The date and time the item was last modified.
-   */
-  modified?: string;
-
-  /**
-   * A short description of Calls app, not shown to end users.
-   */
-  name?: string;
-
-  /**
-   * A Cloudflare-generated unique identifier for a item.
-   */
-  uid?: string;
-}
-
 export interface CallCreateParams {
   /**
    * A short description of Calls app, not shown to end users.
@@ -202,7 +202,7 @@ export interface CallCreateParams {
   name?: string;
 }
 
-export interface CallReplaceParams {
+export interface CallUpdateParams {
   /**
    * A short description of Calls app, not shown to end users.
    */
@@ -211,10 +211,10 @@ export interface CallReplaceParams {
 
 export namespace Calls {
   export import CallCreateResponse = CallsAPI.CallCreateResponse;
+  export import CallUpdateResponse = CallsAPI.CallUpdateResponse;
   export import CallListResponse = CallsAPI.CallListResponse;
   export import CallDeleteResponse = CallsAPI.CallDeleteResponse;
   export import CallGetResponse = CallsAPI.CallGetResponse;
-  export import CallReplaceResponse = CallsAPI.CallReplaceResponse;
   export import CallCreateParams = CallsAPI.CallCreateParams;
-  export import CallReplaceParams = CallsAPI.CallReplaceParams;
+  export import CallUpdateParams = CallsAPI.CallUpdateParams;
 }

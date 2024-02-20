@@ -1,40 +1,40 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
+  CfInterconnectUpdateResponse,
   CfInterconnectListResponse,
   CfInterconnectGetResponse,
-  CfInterconnectReplaceResponse,
-  CfInterconnectReplaceParams,
+  CfInterconnectUpdateParams,
   CfInterconnects,
 } from './cf-interconnects';
 export {
   GreTunnelCreateResponse,
+  GreTunnelUpdateResponse,
   GreTunnelListResponse,
   GreTunnelDeleteResponse,
   GreTunnelGetResponse,
-  GreTunnelReplaceResponse,
   GreTunnelCreateParams,
-  GreTunnelReplaceParams,
+  GreTunnelUpdateParams,
   GreTunnels,
 } from './gre-tunnels';
 export {
   IpsecTunnelCreateResponse,
+  IpsecTunnelUpdateResponse,
   IpsecTunnelListResponse,
   IpsecTunnelDeleteResponse,
   IpsecTunnelGetResponse,
-  IpsecTunnelReplaceResponse,
   IpsecTunnelCreateParams,
-  IpsecTunnelReplaceParams,
+  IpsecTunnelUpdateParams,
   IpsecTunnels,
 } from './ipsec-tunnels/index';
 export { Magics } from './magics';
 export {
   RouteCreateResponse,
+  RouteUpdateResponse,
   RouteDeleteResponse,
   RouteGetResponse,
   RouteMagicStaticRoutesListRoutesResponse,
-  RouteReplaceResponse,
   RouteCreateParams,
-  RouteReplaceParams,
+  RouteUpdateParams,
   Routes,
 } from './routes';

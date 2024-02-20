@@ -69,8 +69,8 @@ describe('resource configs', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('replace', async () => {
-    const responsePromise = cloudflare.mnms.configs.replace('6f91088a406011ed95aed352566e8d4c');
+  test.skip('edit', async () => {
+    const responsePromise = cloudflare.mnms.configs.edit('6f91088a406011ed95aed352566e8d4c');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

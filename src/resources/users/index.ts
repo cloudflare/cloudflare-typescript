@@ -9,10 +9,10 @@ export {
 export { Billings } from './billings/index';
 export { Firewall } from './firewall/index';
 export {
-  InviteUpdateResponse,
   InviteListResponse,
+  InviteEditResponse,
   InviteGetResponse,
-  InviteUpdateParams,
+  InviteEditParams,
   Invites,
 } from './invites';
 export { LoadBalancers } from './load-balancers/index';
@@ -26,23 +26,23 @@ export {
   Organizations,
 } from './organizations';
 export {
+  SubscriptionUpdateResponse,
   SubscriptionListResponse,
   SubscriptionDeleteResponse,
-  SubscriptionReplaceResponse,
-  SubscriptionReplaceParams,
+  SubscriptionUpdateParams,
   Subscriptions,
 } from './subscriptions';
 export {
   TokenCreateResponse,
+  TokenUpdateResponse,
   TokenListResponse,
   TokenDeleteResponse,
   TokenGetResponse,
-  TokenReplaceResponse,
   TokenVerifyResponse,
   TokenCreateParams,
+  TokenUpdateParams,
   TokenListParams,
-  TokenReplaceParams,
   TokenListResponsesV4PagePaginationArray,
   Tokens,
 } from './tokens/index';
-export { UserUpdateResponse, UserListResponse, UserUpdateParams, Users } from './users';
+export { UserListResponse, UserEditResponse, UserEditParams, Users } from './users';

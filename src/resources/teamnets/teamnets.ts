@@ -16,10 +16,10 @@ export namespace Teamnets {
   export import RouteListParams = RoutesAPI.RouteListParams;
   export import VirtualNetworks = VirtualNetworksAPI.VirtualNetworks;
   export import VirtualNetworkCreateResponse = VirtualNetworksAPI.VirtualNetworkCreateResponse;
-  export import VirtualNetworkUpdateResponse = VirtualNetworksAPI.VirtualNetworkUpdateResponse;
   export import VirtualNetworkListResponse = VirtualNetworksAPI.VirtualNetworkListResponse;
   export import VirtualNetworkDeleteResponse = VirtualNetworksAPI.VirtualNetworkDeleteResponse;
+  export import VirtualNetworkEditResponse = VirtualNetworksAPI.VirtualNetworkEditResponse;
   export import VirtualNetworkCreateParams = VirtualNetworksAPI.VirtualNetworkCreateParams;
-  export import VirtualNetworkUpdateParams = VirtualNetworksAPI.VirtualNetworkUpdateParams;
   export import VirtualNetworkListParams = VirtualNetworksAPI.VirtualNetworkListParams;
+  export import VirtualNetworkEditParams = VirtualNetworksAPI.VirtualNetworkEditParams;
 }

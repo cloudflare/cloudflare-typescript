@@ -15,32 +15,32 @@ export class Magics extends APIResource {
 
 export namespace Magics {
   export import CfInterconnects = CfInterconnectsAPI.CfInterconnects;
+  export import CfInterconnectUpdateResponse = CfInterconnectsAPI.CfInterconnectUpdateResponse;
   export import CfInterconnectListResponse = CfInterconnectsAPI.CfInterconnectListResponse;
   export import CfInterconnectGetResponse = CfInterconnectsAPI.CfInterconnectGetResponse;
-  export import CfInterconnectReplaceResponse = CfInterconnectsAPI.CfInterconnectReplaceResponse;
-  export import CfInterconnectReplaceParams = CfInterconnectsAPI.CfInterconnectReplaceParams;
+  export import CfInterconnectUpdateParams = CfInterconnectsAPI.CfInterconnectUpdateParams;
   export import GreTunnels = GreTunnelsAPI.GreTunnels;
   export import GreTunnelCreateResponse = GreTunnelsAPI.GreTunnelCreateResponse;
+  export import GreTunnelUpdateResponse = GreTunnelsAPI.GreTunnelUpdateResponse;
   export import GreTunnelListResponse = GreTunnelsAPI.GreTunnelListResponse;
   export import GreTunnelDeleteResponse = GreTunnelsAPI.GreTunnelDeleteResponse;
   export import GreTunnelGetResponse = GreTunnelsAPI.GreTunnelGetResponse;
-  export import GreTunnelReplaceResponse = GreTunnelsAPI.GreTunnelReplaceResponse;
   export import GreTunnelCreateParams = GreTunnelsAPI.GreTunnelCreateParams;
-  export import GreTunnelReplaceParams = GreTunnelsAPI.GreTunnelReplaceParams;
+  export import GreTunnelUpdateParams = GreTunnelsAPI.GreTunnelUpdateParams;
   export import IpsecTunnels = IpsecTunnelsAPI.IpsecTunnels;
   export import IpsecTunnelCreateResponse = IpsecTunnelsAPI.IpsecTunnelCreateResponse;
+  export import IpsecTunnelUpdateResponse = IpsecTunnelsAPI.IpsecTunnelUpdateResponse;
   export import IpsecTunnelListResponse = IpsecTunnelsAPI.IpsecTunnelListResponse;
   export import IpsecTunnelDeleteResponse = IpsecTunnelsAPI.IpsecTunnelDeleteResponse;
   export import IpsecTunnelGetResponse = IpsecTunnelsAPI.IpsecTunnelGetResponse;
-  export import IpsecTunnelReplaceResponse = IpsecTunnelsAPI.IpsecTunnelReplaceResponse;
   export import IpsecTunnelCreateParams = IpsecTunnelsAPI.IpsecTunnelCreateParams;
-  export import IpsecTunnelReplaceParams = IpsecTunnelsAPI.IpsecTunnelReplaceParams;
+  export import IpsecTunnelUpdateParams = IpsecTunnelsAPI.IpsecTunnelUpdateParams;
   export import Routes = RoutesAPI.Routes;
   export import RouteCreateResponse = RoutesAPI.RouteCreateResponse;
+  export import RouteUpdateResponse = RoutesAPI.RouteUpdateResponse;
   export import RouteDeleteResponse = RoutesAPI.RouteDeleteResponse;
   export import RouteGetResponse = RoutesAPI.RouteGetResponse;
   export import RouteMagicStaticRoutesListRoutesResponse = RoutesAPI.RouteMagicStaticRoutesListRoutesResponse;
-  export import RouteReplaceResponse = RoutesAPI.RouteReplaceResponse;
   export import RouteCreateParams = RoutesAPI.RouteCreateParams;
-  export import RouteReplaceParams = RoutesAPI.RouteReplaceParams;
+  export import RouteUpdateParams = RoutesAPI.RouteUpdateParams;
 }

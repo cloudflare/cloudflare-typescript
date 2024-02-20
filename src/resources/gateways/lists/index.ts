@@ -3,11 +3,11 @@
 export { ItemListResponse, Items } from './items';
 export {
   ListCreateResponse,
+  ListUpdateResponse,
   ListListResponse,
   ListDeleteResponse,
   ListGetResponse,
-  ListReplaceResponse,
   ListCreateParams,
-  ListReplaceParams,
+  ListUpdateParams,
   Lists,
 } from './lists';

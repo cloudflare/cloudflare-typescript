@@ -8,16 +8,16 @@ export class Settings extends APIResource {
   /**
    * Patch zone-level Waiting Room settings
    */
-  update(
+  edit(
     zoneIdentifier: string,
-    body: SettingUpdateParams,
+    body: SettingEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SettingUpdateResponse> {
+  ): Core.APIPromise<SettingEditResponse> {
     return (
       this._client.patch(`/zones/${zoneIdentifier}/waiting_rooms/settings`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: SettingUpdateResponse }>
+      }) as Core.APIPromise<{ result: SettingEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -48,7 +48,7 @@ export namespace WaitingroomZoneSettingsResponse {
   }
 }
 
-export interface SettingUpdateResponse {
+export interface SettingEditResponse {
   /**
    * Whether to allow verified search engine crawlers to bypass all waiting rooms on
    * this zone. Verified search engine crawlers will not be tracked or counted by the
@@ -66,7 +66,7 @@ export interface SettingGetResponse {
   search_engine_crawler_bypass: boolean;
 }
 
-export interface SettingUpdateParams {
+export interface SettingEditParams {
   /**
    * Whether to allow verified search engine crawlers to bypass all waiting rooms on
    * this zone. Verified search engine crawlers will not be tracked or counted by the
@@ -77,7 +77,7 @@ export interface SettingUpdateParams {
 
 export namespace Settings {
   export import WaitingroomZoneSettingsResponse = SettingsAPI.WaitingroomZoneSettingsResponse;
-  export import SettingUpdateResponse = SettingsAPI.SettingUpdateResponse;
+  export import SettingEditResponse = SettingsAPI.SettingEditResponse;
   export import SettingGetResponse = SettingsAPI.SettingGetResponse;
-  export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;
+  export import SettingEditParams = SettingsAPI.SettingEditParams;
 }

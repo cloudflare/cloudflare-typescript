@@ -9,16 +9,16 @@ export class TrueClientIPHeader extends APIResource {
    * Allows customer to continue to use True Client IP (Akamai feature) in the
    * headers we send to the origin. This is limited to Enterprise Zones.
    */
-  update(
+  edit(
     zoneId: string,
-    body: TrueClientIPHeaderUpdateParams,
+    body: TrueClientIPHeaderEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TrueClientIPHeaderUpdateResponse> {
+  ): Core.APIPromise<TrueClientIPHeaderEditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/settings/true_client_ip_header`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: TrueClientIPHeaderUpdateResponse }>
+      }) as Core.APIPromise<{ result: TrueClientIPHeaderEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -39,7 +39,7 @@ export class TrueClientIPHeader extends APIResource {
  * Allows customer to continue to use True Client IP (Akamai feature) in the
  * headers we send to the origin. This is limited to Enterprise Zones.
  */
-export interface TrueClientIPHeaderUpdateResponse {
+export interface TrueClientIPHeaderEditResponse {
   /**
    * ID of the zone setting.
    */
@@ -89,7 +89,7 @@ export interface TrueClientIPHeaderGetResponse {
   modified_on?: string | null;
 }
 
-export interface TrueClientIPHeaderUpdateParams {
+export interface TrueClientIPHeaderEditParams {
   /**
    * Value of the zone setting.
    */
@@ -97,7 +97,7 @@ export interface TrueClientIPHeaderUpdateParams {
 }
 
 export namespace TrueClientIPHeader {
-  export import TrueClientIPHeaderUpdateResponse = TrueClientIPHeaderAPI.TrueClientIPHeaderUpdateResponse;
+  export import TrueClientIPHeaderEditResponse = TrueClientIPHeaderAPI.TrueClientIPHeaderEditResponse;
   export import TrueClientIPHeaderGetResponse = TrueClientIPHeaderAPI.TrueClientIPHeaderGetResponse;
-  export import TrueClientIPHeaderUpdateParams = TrueClientIPHeaderAPI.TrueClientIPHeaderUpdateParams;
+  export import TrueClientIPHeaderEditParams = TrueClientIPHeaderAPI.TrueClientIPHeaderEditParams;
 }

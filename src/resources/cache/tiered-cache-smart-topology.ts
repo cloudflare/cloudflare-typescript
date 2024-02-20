@@ -6,22 +6,6 @@ import * as TieredCacheSmartTopologyAPI from 'cloudflare/resources/cache/tiered-
 
 export class TieredCacheSmartTopology extends APIResource {
   /**
-   * Updates enablement of Tiered Cache
-   */
-  update(
-    zoneId: string,
-    body: TieredCacheSmartTopologyUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TieredCacheSmartTopologyUpdateResponse> {
-    return (
-      this._client.patch(`/zones/${zoneId}/cache/tiered_cache_smart_topology_enable`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: TieredCacheSmartTopologyUpdateResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Remvoves enablement of Smart Tiered Cache
    */
   delete(
@@ -33,6 +17,22 @@ export class TieredCacheSmartTopology extends APIResource {
         `/zones/${zoneId}/cache/tiered_cache_smart_topology_enable`,
         options,
       ) as Core.APIPromise<{ result: TieredCacheSmartTopologyDeleteResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Updates enablement of Tiered Cache
+   */
+  edit(
+    zoneId: string,
+    body: TieredCacheSmartTopologyEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TieredCacheSmartTopologyEditResponse> {
+    return (
+      this._client.patch(`/zones/${zoneId}/cache/tiered_cache_smart_topology_enable`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: TieredCacheSmartTopologyEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -49,13 +49,13 @@ export class TieredCacheSmartTopology extends APIResource {
   }
 }
 
-export type TieredCacheSmartTopologyUpdateResponse = unknown | string | null;
-
 export type TieredCacheSmartTopologyDeleteResponse = unknown | string | null;
+
+export type TieredCacheSmartTopologyEditResponse = unknown | string | null;
 
 export type TieredCacheSmartTopologyGetResponse = unknown | string | null;
 
-export interface TieredCacheSmartTopologyUpdateParams {
+export interface TieredCacheSmartTopologyEditParams {
   /**
    * Enables Tiered Cache.
    */
@@ -63,8 +63,8 @@ export interface TieredCacheSmartTopologyUpdateParams {
 }
 
 export namespace TieredCacheSmartTopology {
-  export import TieredCacheSmartTopologyUpdateResponse = TieredCacheSmartTopologyAPI.TieredCacheSmartTopologyUpdateResponse;
   export import TieredCacheSmartTopologyDeleteResponse = TieredCacheSmartTopologyAPI.TieredCacheSmartTopologyDeleteResponse;
+  export import TieredCacheSmartTopologyEditResponse = TieredCacheSmartTopologyAPI.TieredCacheSmartTopologyEditResponse;
   export import TieredCacheSmartTopologyGetResponse = TieredCacheSmartTopologyAPI.TieredCacheSmartTopologyGetResponse;
-  export import TieredCacheSmartTopologyUpdateParams = TieredCacheSmartTopologyAPI.TieredCacheSmartTopologyUpdateParams;
+  export import TieredCacheSmartTopologyEditParams = TieredCacheSmartTopologyAPI.TieredCacheSmartTopologyEditParams;
 }

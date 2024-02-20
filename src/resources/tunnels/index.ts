@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
+  ConfigurationUpdateResponse,
   ConfigurationListResponse,
-  ConfigurationReplaceResponse,
-  ConfigurationReplaceParams,
+  ConfigurationUpdateParams,
   Configurations,
 } from './configurations';
 export {
@@ -17,14 +17,14 @@ export { ManagementCreateResponse, ManagementCreateParams, Management } from './
 export { TokenGetResponse, Tokens } from './tokens';
 export {
   TunnelCreateResponse,
-  TunnelUpdateResponse,
   TunnelListResponse,
   TunnelDeleteResponse,
+  TunnelEditResponse,
   TunnelGetResponse,
   TunnelCreateParams,
-  TunnelUpdateParams,
   TunnelListParams,
   TunnelDeleteParams,
+  TunnelEditParams,
   TunnelListResponsesV4PagePaginationArray,
   Tunnels,
 } from './tunnels';

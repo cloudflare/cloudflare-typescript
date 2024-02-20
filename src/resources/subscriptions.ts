@@ -21,6 +21,23 @@ export class Subscriptions extends APIResource {
   }
 
   /**
+   * Updates an account subscription.
+   */
+  update(
+    accountIdentifier: string,
+    subscriptionIdentifier: string,
+    body: SubscriptionUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SubscriptionUpdateResponse> {
+    return (
+      this._client.put(`/accounts/${accountIdentifier}/subscriptions/${subscriptionIdentifier}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: SubscriptionUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Lists all of an account's subscriptions.
    */
   list(
@@ -60,26 +77,11 @@ export class Subscriptions extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
-
-  /**
-   * Updates an account subscription.
-   */
-  replace(
-    accountIdentifier: string,
-    subscriptionIdentifier: string,
-    body: SubscriptionReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SubscriptionReplaceResponse> {
-    return (
-      this._client.put(`/accounts/${accountIdentifier}/subscriptions/${subscriptionIdentifier}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: SubscriptionReplaceResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 
 export type SubscriptionCreateResponse = unknown | string | null;
+
+export type SubscriptionUpdateResponse = unknown | string | null;
 
 export type SubscriptionListResponse = Array<SubscriptionListResponse.SubscriptionListResponseItem>;
 
@@ -238,8 +240,6 @@ export interface SubscriptionDeleteResponse {
 
 export type SubscriptionGetResponse = unknown | string | null;
 
-export type SubscriptionReplaceResponse = unknown | string | null;
-
 export interface SubscriptionCreateParams {
   app?: SubscriptionCreateParams.App;
 
@@ -343,13 +343,13 @@ export namespace SubscriptionCreateParams {
   export interface Zone {}
 }
 
-export interface SubscriptionReplaceParams {
-  app?: SubscriptionReplaceParams.App;
+export interface SubscriptionUpdateParams {
+  app?: SubscriptionUpdateParams.App;
 
   /**
    * The list of add-ons subscribed to.
    */
-  component_values?: Array<SubscriptionReplaceParams.ComponentValue>;
+  component_values?: Array<SubscriptionUpdateParams.ComponentValue>;
 
   /**
    * How often the subscription is renewed automatically.
@@ -359,15 +359,15 @@ export interface SubscriptionReplaceParams {
   /**
    * The rate plan applied to the subscription.
    */
-  rate_plan?: SubscriptionReplaceParams.RatePlan;
+  rate_plan?: SubscriptionUpdateParams.RatePlan;
 
   /**
    * A simple zone object. May have null properties if not a zone subscription.
    */
-  zone?: SubscriptionReplaceParams.Zone;
+  zone?: SubscriptionUpdateParams.Zone;
 }
 
-export namespace SubscriptionReplaceParams {
+export namespace SubscriptionUpdateParams {
   export interface App {
     /**
      * app install id.
@@ -448,10 +448,10 @@ export namespace SubscriptionReplaceParams {
 
 export namespace Subscriptions {
   export import SubscriptionCreateResponse = SubscriptionsAPI.SubscriptionCreateResponse;
+  export import SubscriptionUpdateResponse = SubscriptionsAPI.SubscriptionUpdateResponse;
   export import SubscriptionListResponse = SubscriptionsAPI.SubscriptionListResponse;
   export import SubscriptionDeleteResponse = SubscriptionsAPI.SubscriptionDeleteResponse;
   export import SubscriptionGetResponse = SubscriptionsAPI.SubscriptionGetResponse;
-  export import SubscriptionReplaceResponse = SubscriptionsAPI.SubscriptionReplaceResponse;
   export import SubscriptionCreateParams = SubscriptionsAPI.SubscriptionCreateParams;
-  export import SubscriptionReplaceParams = SubscriptionsAPI.SubscriptionReplaceParams;
+  export import SubscriptionUpdateParams = SubscriptionsAPI.SubscriptionUpdateParams;
 }

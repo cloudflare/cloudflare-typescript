@@ -22,23 +22,6 @@ export class Rules extends APIResource {
   }
 
   /**
-   * Updates an IP Access rule defined at the user level. You can only update the
-   * rule action (`mode` parameter) and notes.
-   */
-  update(
-    identifier: string,
-    body: RuleUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleUpdateResponse | null> {
-    return (
-      this._client.patch(`/user/firewall/access_rules/rules/${identifier}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: RuleUpdateResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Fetches IP Access rules of the user. You can filter the results using several
    * optional parameters.
    */
@@ -73,6 +56,23 @@ export class Rules extends APIResource {
       this._client.delete(`/user/firewall/access_rules/rules/${identifier}`, options) as Core.APIPromise<{
         result: RuleDeleteResponse | null;
       }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Updates an IP Access rule defined at the user level. You can only update the
+   * rule action (`mode` parameter) and notes.
+   */
+  edit(
+    identifier: string,
+    body: RuleEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RuleEditResponse | null> {
+    return (
+      this._client.patch(`/user/firewall/access_rules/rules/${identifier}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: RuleEditResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -122,118 +122,6 @@ export interface RuleCreateResponse {
 }
 
 export namespace RuleCreateResponse {
-  export interface LegacyJhsIPConfiguration {
-    /**
-     * The configuration target. You must set the target to `ip` when specifying an IP
-     * address in the rule.
-     */
-    target?: 'ip';
-
-    /**
-     * The IP address to match. This address will be compared to the IP address of
-     * incoming requests.
-     */
-    value?: string;
-  }
-
-  export interface LegacyJhsIPV6Configuration {
-    /**
-     * The configuration target. You must set the target to `ip6` when specifying an
-     * IPv6 address in the rule.
-     */
-    target?: 'ip6';
-
-    /**
-     * The IPv6 address to match.
-     */
-    value?: string;
-  }
-
-  export interface LegacyJhsCidrConfiguration {
-    /**
-     * The configuration target. You must set the target to `ip_range` when specifying
-     * an IP address range in the rule.
-     */
-    target?: 'ip_range';
-
-    /**
-     * The IP address range to match. You can only use prefix lengths `/16` and `/24`
-     * for IPv4 ranges, and prefix lengths `/32`, `/48`, and `/64` for IPv6 ranges.
-     */
-    value?: string;
-  }
-
-  export interface LegacyJhsAsnConfiguration {
-    /**
-     * The configuration target. You must set the target to `asn` when specifying an
-     * Autonomous System Number (ASN) in the rule.
-     */
-    target?: 'asn';
-
-    /**
-     * The AS number to match.
-     */
-    value?: string;
-  }
-
-  export interface LegacyJhsCountryConfiguration {
-    /**
-     * The configuration target. You must set the target to `country` when specifying a
-     * country code in the rule.
-     */
-    target?: 'country';
-
-    /**
-     * The two-letter ISO-3166-1 alpha-2 code to match. For more information, refer to
-     * [IP Access rules: Parameters](https://developers.cloudflare.com/waf/tools/ip-access-rules/parameters/#country).
-     */
-    value?: string;
-  }
-}
-
-export interface RuleUpdateResponse {
-  /**
-   * The unique identifier of the IP Access rule.
-   */
-  id: string;
-
-  /**
-   * The available actions that a rule can apply to a matched request.
-   */
-  allowed_modes: Array<'block' | 'challenge' | 'whitelist' | 'js_challenge' | 'managed_challenge'>;
-
-  /**
-   * The rule configuration.
-   */
-  configuration:
-    | RuleUpdateResponse.LegacyJhsIPConfiguration
-    | RuleUpdateResponse.LegacyJhsIPV6Configuration
-    | RuleUpdateResponse.LegacyJhsCidrConfiguration
-    | RuleUpdateResponse.LegacyJhsAsnConfiguration
-    | RuleUpdateResponse.LegacyJhsCountryConfiguration;
-
-  /**
-   * The action to apply to a matched request.
-   */
-  mode: 'block' | 'challenge' | 'whitelist' | 'js_challenge' | 'managed_challenge';
-
-  /**
-   * The timestamp of when the rule was created.
-   */
-  created_on?: string;
-
-  /**
-   * The timestamp of when the rule was last modified.
-   */
-  modified_on?: string;
-
-  /**
-   * An informative summary of the rule, typically used as a reminder or explanation.
-   */
-  notes?: string;
-}
-
-export namespace RuleUpdateResponse {
   export interface LegacyJhsIPConfiguration {
     /**
      * The configuration target. You must set the target to `ip` when specifying an IP
@@ -422,6 +310,118 @@ export interface RuleDeleteResponse {
   id?: string;
 }
 
+export interface RuleEditResponse {
+  /**
+   * The unique identifier of the IP Access rule.
+   */
+  id: string;
+
+  /**
+   * The available actions that a rule can apply to a matched request.
+   */
+  allowed_modes: Array<'block' | 'challenge' | 'whitelist' | 'js_challenge' | 'managed_challenge'>;
+
+  /**
+   * The rule configuration.
+   */
+  configuration:
+    | RuleEditResponse.LegacyJhsIPConfiguration
+    | RuleEditResponse.LegacyJhsIPV6Configuration
+    | RuleEditResponse.LegacyJhsCidrConfiguration
+    | RuleEditResponse.LegacyJhsAsnConfiguration
+    | RuleEditResponse.LegacyJhsCountryConfiguration;
+
+  /**
+   * The action to apply to a matched request.
+   */
+  mode: 'block' | 'challenge' | 'whitelist' | 'js_challenge' | 'managed_challenge';
+
+  /**
+   * The timestamp of when the rule was created.
+   */
+  created_on?: string;
+
+  /**
+   * The timestamp of when the rule was last modified.
+   */
+  modified_on?: string;
+
+  /**
+   * An informative summary of the rule, typically used as a reminder or explanation.
+   */
+  notes?: string;
+}
+
+export namespace RuleEditResponse {
+  export interface LegacyJhsIPConfiguration {
+    /**
+     * The configuration target. You must set the target to `ip` when specifying an IP
+     * address in the rule.
+     */
+    target?: 'ip';
+
+    /**
+     * The IP address to match. This address will be compared to the IP address of
+     * incoming requests.
+     */
+    value?: string;
+  }
+
+  export interface LegacyJhsIPV6Configuration {
+    /**
+     * The configuration target. You must set the target to `ip6` when specifying an
+     * IPv6 address in the rule.
+     */
+    target?: 'ip6';
+
+    /**
+     * The IPv6 address to match.
+     */
+    value?: string;
+  }
+
+  export interface LegacyJhsCidrConfiguration {
+    /**
+     * The configuration target. You must set the target to `ip_range` when specifying
+     * an IP address range in the rule.
+     */
+    target?: 'ip_range';
+
+    /**
+     * The IP address range to match. You can only use prefix lengths `/16` and `/24`
+     * for IPv4 ranges, and prefix lengths `/32`, `/48`, and `/64` for IPv6 ranges.
+     */
+    value?: string;
+  }
+
+  export interface LegacyJhsAsnConfiguration {
+    /**
+     * The configuration target. You must set the target to `asn` when specifying an
+     * Autonomous System Number (ASN) in the rule.
+     */
+    target?: 'asn';
+
+    /**
+     * The AS number to match.
+     */
+    value?: string;
+  }
+
+  export interface LegacyJhsCountryConfiguration {
+    /**
+     * The configuration target. You must set the target to `country` when specifying a
+     * country code in the rule.
+     */
+    target?: 'country';
+
+    /**
+     * The two-letter ISO-3166-1 alpha-2 code to match. For more information, refer to
+     * [IP Access rules: Parameters](https://developers.cloudflare.com/waf/tools/ip-access-rules/parameters/#country).
+     */
+    value?: string;
+  }
+}
+
 export interface RuleCreateParams {
   /**
    * The rule configuration.
@@ -514,18 +514,6 @@ export namespace RuleCreateParams {
   }
 }
 
-export interface RuleUpdateParams {
-  /**
-   * The action to apply to a matched request.
-   */
-  mode?: 'block' | 'challenge' | 'whitelist' | 'js_challenge' | 'managed_challenge';
-
-  /**
-   * An informative summary of the rule, typically used as a reminder or explanation.
-   */
-  notes?: string;
-}
-
 export interface RuleListParams extends V4PagePaginationArrayParams {
   /**
    * The direction used to sort returned rules.
@@ -596,13 +584,25 @@ export namespace RuleListParams {
   }
 }
 
+export interface RuleEditParams {
+  /**
+   * The action to apply to a matched request.
+   */
+  mode?: 'block' | 'challenge' | 'whitelist' | 'js_challenge' | 'managed_challenge';
+
+  /**
+   * An informative summary of the rule, typically used as a reminder or explanation.
+   */
+  notes?: string;
+}
+
 export namespace Rules {
   export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
-  export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
   export import RuleListResponse = RulesAPI.RuleListResponse;
   export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
+  export import RuleEditResponse = RulesAPI.RuleEditResponse;
   export import RuleListResponsesV4PagePaginationArray = RulesAPI.RuleListResponsesV4PagePaginationArray;
   export import RuleCreateParams = RulesAPI.RuleCreateParams;
-  export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
   export import RuleListParams = RulesAPI.RuleListParams;
+  export import RuleEditParams = RulesAPI.RuleEditParams;
 }

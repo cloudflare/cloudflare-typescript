@@ -21,6 +21,23 @@ export class Tags extends APIResource {
   }
 
   /**
+   * Update a tag
+   */
+  update(
+    identifier: string,
+    tagName: string,
+    body: TagUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TagUpdateResponse> {
+    return (
+      this._client.put(`/accounts/${identifier}/access/tags/${tagName}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: TagUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * List tags
    */
   list(identifier: string, options?: Core.RequestOptions): Core.APIPromise<TagListResponse | null> {
@@ -56,29 +73,31 @@ export class Tags extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
-
-  /**
-   * Update a tag
-   */
-  replace(
-    identifier: string,
-    tagName: string,
-    body: TagReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TagReplaceResponse> {
-    return (
-      this._client.put(`/accounts/${identifier}/access/tags/${tagName}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: TagReplaceResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 
 /**
  * A tag
  */
 export interface TagCreateResponse {
+  /**
+   * The name of the tag
+   */
+  name: string;
+
+  /**
+   * The number of applications that have this tag
+   */
+  app_count?: number;
+
+  created_at?: string;
+
+  updated_at?: string;
+}
+
+/**
+ * A tag
+ */
+export interface TagUpdateResponse {
   /**
    * The name of the tag
    */
@@ -143,25 +162,6 @@ export interface TagGetResponse {
   updated_at?: string;
 }
 
-/**
- * A tag
- */
-export interface TagReplaceResponse {
-  /**
-   * The name of the tag
-   */
-  name: string;
-
-  /**
-   * The number of applications that have this tag
-   */
-  app_count?: number;
-
-  created_at?: string;
-
-  updated_at?: string;
-}
-
 export interface TagCreateParams {
   /**
    * The name of the tag
@@ -169,7 +169,7 @@ export interface TagCreateParams {
   name: string;
 }
 
-export interface TagReplaceParams {
+export interface TagUpdateParams {
   /**
    * The name of the tag
    */
@@ -178,10 +178,10 @@ export interface TagReplaceParams {
 
 export namespace Tags {
   export import TagCreateResponse = TagsAPI.TagCreateResponse;
+  export import TagUpdateResponse = TagsAPI.TagUpdateResponse;
   export import TagListResponse = TagsAPI.TagListResponse;
   export import TagDeleteResponse = TagsAPI.TagDeleteResponse;
   export import TagGetResponse = TagsAPI.TagGetResponse;
-  export import TagReplaceResponse = TagsAPI.TagReplaceResponse;
   export import TagCreateParams = TagsAPI.TagCreateParams;
-  export import TagReplaceParams = TagsAPI.TagReplaceParams;
+  export import TagUpdateParams = TagsAPI.TagUpdateParams;
 }

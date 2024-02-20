@@ -22,23 +22,6 @@ export class Integrations extends APIResource {
   }
 
   /**
-   * Updates a configured device posture integration.
-   */
-  update(
-    identifier: unknown,
-    uuid: string,
-    body: IntegrationUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<IntegrationUpdateResponse | null> {
-    return (
-      this._client.patch(`/accounts/${identifier}/devices/posture/integration/${uuid}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: IntegrationUpdateResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Delete a configured device posture integration.
    */
   delete(
@@ -51,6 +34,23 @@ export class Integrations extends APIResource {
         `/accounts/${identifier}/devices/posture/integration/${uuid}`,
         options,
       ) as Core.APIPromise<{ result: IntegrationDeleteResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Updates a configured device posture integration.
+   */
+  edit(
+    identifier: unknown,
+    uuid: string,
+    body: IntegrationEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IntegrationEditResponse | null> {
+    return (
+      this._client.patch(`/accounts/${identifier}/devices/posture/integration/${uuid}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: IntegrationEditResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -121,7 +121,9 @@ export namespace IntegrationCreateResponse {
   }
 }
 
-export interface IntegrationUpdateResponse {
+export type IntegrationDeleteResponse = unknown | string;
+
+export interface IntegrationEditResponse {
   /**
    * API UUID.
    */
@@ -130,7 +132,7 @@ export interface IntegrationUpdateResponse {
   /**
    * The configuration object containing third-party integration information.
    */
-  config?: IntegrationUpdateResponse.Config;
+  config?: IntegrationEditResponse.Config;
 
   /**
    * The interval between each posture check with the third-party API. Use `m` for
@@ -149,7 +151,7 @@ export interface IntegrationUpdateResponse {
   type?: 'workspace_one' | 'crowdstrike_s2s' | 'uptycs' | 'intune' | 'kolide' | 'tanium' | 'sentinelone_s2s';
 }
 
-export namespace IntegrationUpdateResponse {
+export namespace IntegrationEditResponse {
   /**
    * The configuration object containing third-party integration information.
    */
@@ -170,8 +172,6 @@ export namespace IntegrationUpdateResponse {
     client_id: string;
   }
 }
-
-export type IntegrationDeleteResponse = unknown | string;
 
 export interface IntegrationGetResponse {
   /**
@@ -386,18 +386,18 @@ export namespace IntegrationCreateParams {
   }
 }
 
-export interface IntegrationUpdateParams {
+export interface IntegrationEditParams {
   /**
    * The configuration object containing third-party integration information.
    */
   config?:
-    | IntegrationUpdateParams.TeamsDevicesWorkspaceOneConfigRequest
-    | IntegrationUpdateParams.TeamsDevicesCrowdstrikeConfigRequest
-    | IntegrationUpdateParams.TeamsDevicesUptycsConfigRequest
-    | IntegrationUpdateParams.TeamsDevicesIntuneConfigRequest
-    | IntegrationUpdateParams.TeamsDevicesKolideConfigRequest
-    | IntegrationUpdateParams.TeamsDevicesTaniumConfigRequest
-    | IntegrationUpdateParams.TeamsDevicesSentineloneS2sConfigRequest;
+    | IntegrationEditParams.TeamsDevicesWorkspaceOneConfigRequest
+    | IntegrationEditParams.TeamsDevicesCrowdstrikeConfigRequest
+    | IntegrationEditParams.TeamsDevicesUptycsConfigRequest
+    | IntegrationEditParams.TeamsDevicesIntuneConfigRequest
+    | IntegrationEditParams.TeamsDevicesKolideConfigRequest
+    | IntegrationEditParams.TeamsDevicesTaniumConfigRequest
+    | IntegrationEditParams.TeamsDevicesSentineloneS2sConfigRequest;
 
   /**
    * The interval between each posture check with the third-party API. Use `m` for
@@ -416,7 +416,7 @@ export interface IntegrationUpdateParams {
   type?: 'workspace_one' | 'crowdstrike_s2s' | 'uptycs' | 'intune' | 'kolide' | 'tanium' | 'sentinelone_s2s';
 }
 
-export namespace IntegrationUpdateParams {
+export namespace IntegrationEditParams {
   export interface TeamsDevicesWorkspaceOneConfigRequest {
     /**
      * The Workspace One API URL provided in the Workspace One Admin Dashboard.
@@ -551,9 +551,9 @@ export namespace IntegrationUpdateParams {
 
 export namespace Integrations {
   export import IntegrationCreateResponse = IntegrationsAPI.IntegrationCreateResponse;
-  export import IntegrationUpdateResponse = IntegrationsAPI.IntegrationUpdateResponse;
   export import IntegrationDeleteResponse = IntegrationsAPI.IntegrationDeleteResponse;
+  export import IntegrationEditResponse = IntegrationsAPI.IntegrationEditResponse;
   export import IntegrationGetResponse = IntegrationsAPI.IntegrationGetResponse;
   export import IntegrationCreateParams = IntegrationsAPI.IntegrationCreateParams;
-  export import IntegrationUpdateParams = IntegrationsAPI.IntegrationUpdateParams;
+  export import IntegrationEditParams = IntegrationsAPI.IntegrationEditParams;
 }

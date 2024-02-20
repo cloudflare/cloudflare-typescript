@@ -18,16 +18,16 @@ export class ServerSideExcludes extends APIResource {
    * resource moves through our network to the visitor's computer.
    * (https://support.cloudflare.com/hc/en-us/articles/200170036).
    */
-  update(
+  edit(
     zoneId: string,
-    body: ServerSideExcludeUpdateParams,
+    body: ServerSideExcludeEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ServerSideExcludeUpdateResponse> {
+  ): Core.APIPromise<ServerSideExcludeEditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/settings/server_side_exclude`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ServerSideExcludeUpdateResponse }>
+      }) as Core.APIPromise<{ result: ServerSideExcludeEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -66,7 +66,7 @@ export class ServerSideExcludes extends APIResource {
  * resource moves through our network to the visitor's computer.
  * (https://support.cloudflare.com/hc/en-us/articles/200170036).
  */
-export interface ServerSideExcludeUpdateResponse {
+export interface ServerSideExcludeEditResponse {
   /**
    * ID of the zone setting.
    */
@@ -125,7 +125,7 @@ export interface ServerSideExcludeGetResponse {
   modified_on?: string | null;
 }
 
-export interface ServerSideExcludeUpdateParams {
+export interface ServerSideExcludeEditParams {
   /**
    * Value of the zone setting.
    */
@@ -133,7 +133,7 @@ export interface ServerSideExcludeUpdateParams {
 }
 
 export namespace ServerSideExcludes {
-  export import ServerSideExcludeUpdateResponse = ServerSideExcludesAPI.ServerSideExcludeUpdateResponse;
+  export import ServerSideExcludeEditResponse = ServerSideExcludesAPI.ServerSideExcludeEditResponse;
   export import ServerSideExcludeGetResponse = ServerSideExcludesAPI.ServerSideExcludeGetResponse;
-  export import ServerSideExcludeUpdateParams = ServerSideExcludesAPI.ServerSideExcludeUpdateParams;
+  export import ServerSideExcludeEditParams = ServerSideExcludesAPI.ServerSideExcludeEditParams;
 }

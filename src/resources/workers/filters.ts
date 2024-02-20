@@ -21,6 +21,23 @@ export class Filters extends APIResource {
   }
 
   /**
+   * Update Filter
+   */
+  update(
+    zoneId: string,
+    filterId: string,
+    body: FilterUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<FilterUpdateResponse> {
+    return (
+      this._client.put(`/zones/${zoneId}/workers/filters/${filterId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: FilterUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * List Filters
    */
   list(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<FilterListResponse> {
@@ -45,23 +62,6 @@ export class Filters extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
-
-  /**
-   * Update Filter
-   */
-  replace(
-    zoneId: string,
-    filterId: string,
-    body: FilterReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<FilterReplaceResponse> {
-    return (
-      this._client.put(`/zones/${zoneId}/workers/filters/${filterId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: FilterReplaceResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 
 export interface FilterCreateResponse {
@@ -69,6 +69,17 @@ export interface FilterCreateResponse {
    * Identifier
    */
   id: string;
+}
+
+export interface FilterUpdateResponse {
+  /**
+   * Identifier
+   */
+  id: string;
+
+  enabled: boolean;
+
+  pattern: string;
 }
 
 export type FilterListResponse = Array<FilterListResponse.FilterListResponseItem>;
@@ -93,24 +104,13 @@ export interface FilterDeleteResponse {
   id: string;
 }
 
-export interface FilterReplaceResponse {
-  /**
-   * Identifier
-   */
-  id: string;
-
-  enabled: boolean;
-
-  pattern: string;
-}
-
 export interface FilterCreateParams {
   enabled: boolean;
 
   pattern: string;
 }
 
-export interface FilterReplaceParams {
+export interface FilterUpdateParams {
   enabled: boolean;
 
   pattern: string;
@@ -118,9 +118,9 @@ export interface FilterReplaceParams {
 
 export namespace Filters {
   export import FilterCreateResponse = FiltersAPI.FilterCreateResponse;
+  export import FilterUpdateResponse = FiltersAPI.FilterUpdateResponse;
   export import FilterListResponse = FiltersAPI.FilterListResponse;
   export import FilterDeleteResponse = FiltersAPI.FilterDeleteResponse;
-  export import FilterReplaceResponse = FiltersAPI.FilterReplaceResponse;
   export import FilterCreateParams = FiltersAPI.FilterCreateParams;
-  export import FilterReplaceParams = FiltersAPI.FilterReplaceParams;
+  export import FilterUpdateParams = FiltersAPI.FilterUpdateParams;
 }

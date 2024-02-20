@@ -2,12 +2,12 @@
 
 export {
   ListCreateResponse,
+  ListUpdateResponse,
   ListListResponse,
   ListDeleteResponse,
   ListGetResponse,
-  ListReplaceResponse,
   ListCreateParams,
-  ListReplaceParams,
+  ListUpdateParams,
   Lists,
 } from './lists/index';
 export { Rules } from './rules';

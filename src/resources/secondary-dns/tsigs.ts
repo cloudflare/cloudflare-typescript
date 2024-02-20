@@ -22,6 +22,23 @@ export class Tsigs extends APIResource {
   }
 
   /**
+   * Modify TSIG.
+   */
+  update(
+    accountId: unknown,
+    tsigId: unknown,
+    body: TsigUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TsigUpdateResponse> {
+    return (
+      this._client.put(`/accounts/${accountId}/secondary_dns/tsigs/${tsigId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: TsigUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * List TSIGs.
    */
   list(accountId: unknown, options?: Core.RequestOptions): Core.APIPromise<TsigListResponse | null> {
@@ -58,26 +75,28 @@ export class Tsigs extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
-
-  /**
-   * Modify TSIG.
-   */
-  replace(
-    accountId: unknown,
-    tsigId: unknown,
-    body: TsigReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TsigReplaceResponse> {
-    return (
-      this._client.put(`/accounts/${accountId}/secondary_dns/tsigs/${tsigId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: TsigReplaceResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 
 export interface TsigCreateResponse {
+  id: unknown;
+
+  /**
+   * TSIG algorithm.
+   */
+  algo: string;
+
+  /**
+   * TSIG key name.
+   */
+  name: string;
+
+  /**
+   * TSIG secret.
+   */
+  secret: string;
+}
+
+export interface TsigUpdateResponse {
   id: unknown;
 
   /**
@@ -142,25 +161,6 @@ export interface TsigGetResponse {
   secret: string;
 }
 
-export interface TsigReplaceResponse {
-  id: unknown;
-
-  /**
-   * TSIG algorithm.
-   */
-  algo: string;
-
-  /**
-   * TSIG key name.
-   */
-  name: string;
-
-  /**
-   * TSIG secret.
-   */
-  secret: string;
-}
-
 export interface TsigCreateParams {
   /**
    * TSIG algorithm.
@@ -178,7 +178,7 @@ export interface TsigCreateParams {
   secret: string;
 }
 
-export interface TsigReplaceParams {
+export interface TsigUpdateParams {
   /**
    * TSIG algorithm.
    */
@@ -197,10 +197,10 @@ export interface TsigReplaceParams {
 
 export namespace Tsigs {
   export import TsigCreateResponse = TsigsAPI.TsigCreateResponse;
+  export import TsigUpdateResponse = TsigsAPI.TsigUpdateResponse;
   export import TsigListResponse = TsigsAPI.TsigListResponse;
   export import TsigDeleteResponse = TsigsAPI.TsigDeleteResponse;
   export import TsigGetResponse = TsigsAPI.TsigGetResponse;
-  export import TsigReplaceResponse = TsigsAPI.TsigReplaceResponse;
   export import TsigCreateParams = TsigsAPI.TsigCreateParams;
-  export import TsigReplaceParams = TsigsAPI.TsigReplaceParams;
+  export import TsigUpdateParams = TsigsAPI.TsigUpdateParams;
 }

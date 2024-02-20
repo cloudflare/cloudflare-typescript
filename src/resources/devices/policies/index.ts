@@ -1,21 +1,21 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export { DefaultPolicyGetResponse, DefaultPolicy } from './default-policy';
-export { ExcludeListResponse, ExcludeReplaceResponse, ExcludeReplaceParams, Excludes } from './excludes';
+export { ExcludeUpdateResponse, ExcludeListResponse, ExcludeUpdateParams, Excludes } from './excludes';
 export {
+  FallbackDomainUpdateResponse,
   FallbackDomainListResponse,
-  FallbackDomainReplaceResponse,
-  FallbackDomainReplaceParams,
+  FallbackDomainUpdateParams,
   FallbackDomains,
 } from './fallback-domains';
-export { IncludeListResponse, IncludeReplaceResponse, IncludeReplaceParams, Includes } from './includes';
+export { IncludeUpdateResponse, IncludeListResponse, IncludeUpdateParams, Includes } from './includes';
 export {
   PolicyCreateResponse,
-  PolicyUpdateResponse,
   PolicyListResponse,
   PolicyDeleteResponse,
+  PolicyEditResponse,
   PolicyGetResponse,
   PolicyCreateParams,
-  PolicyUpdateParams,
+  PolicyEditParams,
   Policies,
 } from './policies';

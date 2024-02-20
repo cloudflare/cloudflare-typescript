@@ -2,23 +2,23 @@
 
 export {
   AddressMapCreateResponse,
-  AddressMapUpdateResponse,
   AddressMapListResponse,
   AddressMapDeleteResponse,
+  AddressMapEditResponse,
   AddressMapGetResponse,
   AddressMapCreateParams,
-  AddressMapUpdateParams,
+  AddressMapEditParams,
   AddressMaps,
 } from './address-maps/index';
 export { Addresses } from './addresses';
 export { LoaDocumentCreateResponse, LoaDocumentCreateParams, LoaDocuments } from './loa-documents/index';
 export {
   PrefixCreateResponse,
-  PrefixUpdateResponse,
   PrefixListResponse,
   PrefixDeleteResponse,
+  PrefixEditResponse,
   PrefixGetResponse,
   PrefixCreateParams,
-  PrefixUpdateParams,
+  PrefixEditParams,
   Prefixes,
 } from './prefixes/index';

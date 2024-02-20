@@ -13,23 +13,6 @@ const cloudflare = new Cloudflare({
 
 describe('resource groups', () => {
   // skipped: tests are disabled for the time being
-  test.skip('update', async () => {
-    const responsePromise = cloudflare.firewall.waf.packages.groups.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'a25a9a7e9c00afc1fb2e0245519d725b',
-      'a25a9a7e9c00afc1fb2e0245519d725b',
-      {},
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
   test.skip('list', async () => {
     const responsePromise = cloudflare.firewall.waf.packages.groups.list(
       '023e105f4ecef8ad9ca31a8372d0c353',
@@ -67,6 +50,23 @@ describe('resource groups', () => {
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('edit', async () => {
+    const responsePromise = cloudflare.firewall.waf.packages.groups.edit(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      'a25a9a7e9c00afc1fb2e0245519d725b',
+      'a25a9a7e9c00afc1fb2e0245519d725b',
+      {},
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
   });
 
   // skipped: tests are disabled for the time being

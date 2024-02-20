@@ -12,14 +12,14 @@ export class AlwaysOnline extends APIResource {
    * [Always Online](https://developers.cloudflare.com/cache/about/always-online) for
    * more information.
    */
-  update(
+  edit(
     zoneId: string,
-    body: AlwaysOnlineUpdateParams,
+    body: AlwaysOnlineEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AlwaysOnlineUpdateResponse> {
+  ): Core.APIPromise<AlwaysOnlineEditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/settings/always_online`, { body, ...options }) as Core.APIPromise<{
-        result: AlwaysOnlineUpdateResponse;
+        result: AlwaysOnlineEditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -47,7 +47,7 @@ export class AlwaysOnline extends APIResource {
  * [Always Online](https://developers.cloudflare.com/cache/about/always-online) for
  * more information.
  */
-export interface AlwaysOnlineUpdateResponse {
+export interface AlwaysOnlineEditResponse {
   /**
    * ID of the zone setting.
    */
@@ -100,7 +100,7 @@ export interface AlwaysOnlineGetResponse {
   modified_on?: string | null;
 }
 
-export interface AlwaysOnlineUpdateParams {
+export interface AlwaysOnlineEditParams {
   /**
    * Value of the zone setting.
    */
@@ -108,7 +108,7 @@ export interface AlwaysOnlineUpdateParams {
 }
 
 export namespace AlwaysOnline {
-  export import AlwaysOnlineUpdateResponse = AlwaysOnlineAPI.AlwaysOnlineUpdateResponse;
+  export import AlwaysOnlineEditResponse = AlwaysOnlineAPI.AlwaysOnlineEditResponse;
   export import AlwaysOnlineGetResponse = AlwaysOnlineAPI.AlwaysOnlineGetResponse;
-  export import AlwaysOnlineUpdateParams = AlwaysOnlineAPI.AlwaysOnlineUpdateParams;
+  export import AlwaysOnlineEditParams = AlwaysOnlineAPI.AlwaysOnlineEditParams;
 }

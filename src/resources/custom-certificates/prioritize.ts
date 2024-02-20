@@ -10,24 +10,24 @@ export class Prioritize extends APIResource {
    * should be used during a request. The higher priority will break ties across
    * overlapping 'legacy_custom' certificates.
    */
-  replace(
+  update(
     zoneId: string,
-    body: PrioritizeReplaceParams,
+    body: PrioritizeUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PrioritizeReplaceResponse | null> {
+  ): Core.APIPromise<PrioritizeUpdateResponse | null> {
     return (
       this._client.put(`/zones/${zoneId}/custom_certificates/prioritize`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: PrioritizeReplaceResponse | null }>
+      }) as Core.APIPromise<{ result: PrioritizeUpdateResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type PrioritizeReplaceResponse = Array<PrioritizeReplaceResponse.PrioritizeReplaceResponseItem>;
+export type PrioritizeUpdateResponse = Array<PrioritizeUpdateResponse.PrioritizeUpdateResponseItem>;
 
-export namespace PrioritizeReplaceResponse {
-  export interface PrioritizeReplaceResponseItem {
+export namespace PrioritizeUpdateResponse {
+  export interface PrioritizeUpdateResponseItem {
     /**
      * Identifier
      */
@@ -95,9 +95,9 @@ export namespace PrioritizeReplaceResponse {
      * security data centers. Default distribution is to all Cloudflare datacenters,
      * for optimal performance.
      */
-    geo_restrictions?: PrioritizeReplaceResponseItem.GeoRestrictions;
+    geo_restrictions?: PrioritizeUpdateResponseItem.GeoRestrictions;
 
-    keyless_server?: PrioritizeReplaceResponseItem.KeylessServer;
+    keyless_server?: PrioritizeUpdateResponseItem.KeylessServer;
 
     /**
      * Specify the policy that determines the region where your private key will be
@@ -113,7 +113,7 @@ export namespace PrioritizeReplaceResponse {
     policy?: string;
   }
 
-  export namespace PrioritizeReplaceResponseItem {
+  export namespace PrioritizeUpdateResponseItem {
     /**
      * Specify the region where your private key can be held locally for optimal TLS
      * performance. HTTPS connections to any excluded data center will still be fully
@@ -200,14 +200,14 @@ export namespace PrioritizeReplaceResponse {
   }
 }
 
-export interface PrioritizeReplaceParams {
+export interface PrioritizeUpdateParams {
   /**
    * Array of ordered certificates.
    */
-  certificates: Array<PrioritizeReplaceParams.Certificate>;
+  certificates: Array<PrioritizeUpdateParams.Certificate>;
 }
 
-export namespace PrioritizeReplaceParams {
+export namespace PrioritizeUpdateParams {
   export interface Certificate {
     /**
      * The order/priority in which the certificate will be used in a request. The
@@ -220,6 +220,6 @@ export namespace PrioritizeReplaceParams {
 }
 
 export namespace Prioritize {
-  export import PrioritizeReplaceResponse = PrioritizeAPI.PrioritizeReplaceResponse;
-  export import PrioritizeReplaceParams = PrioritizeAPI.PrioritizeReplaceParams;
+  export import PrioritizeUpdateResponse = PrioritizeAPI.PrioritizeUpdateResponse;
+  export import PrioritizeUpdateParams = PrioritizeAPI.PrioritizeUpdateParams;
 }

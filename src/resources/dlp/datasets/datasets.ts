@@ -24,6 +24,23 @@ export class Datasets extends APIResource {
   }
 
   /**
+   * Update details about a dataset.
+   */
+  update(
+    accountId: string,
+    datasetId: string,
+    body: DatasetUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DatasetUpdateResponse> {
+    return (
+      this._client.put(`/accounts/${accountId}/dlp/datasets/${datasetId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: DatasetUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Fetch all datasets with information about available versions.
    */
   list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<DatasetListResponse> {
@@ -58,23 +75,6 @@ export class Datasets extends APIResource {
       this._client.get(`/accounts/${accountId}/dlp/datasets/${datasetId}`, options) as Core.APIPromise<{
         result: DatasetGetResponse;
       }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Update details about a dataset.
-   */
-  replace(
-    accountId: string,
-    datasetId: string,
-    body: DatasetReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DatasetReplaceResponse> {
-    return (
-      this._client.put(`/accounts/${accountId}/dlp/datasets/${datasetId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: DatasetReplaceResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -125,6 +125,36 @@ export namespace DatasetCreateResponse {
 
       version: number;
     }
+  }
+}
+
+export interface DatasetUpdateResponse {
+  id: string;
+
+  created_at: string;
+
+  name: string;
+
+  num_cells: number;
+
+  secret: boolean;
+
+  status: 'empty' | 'uploading' | 'failed' | 'complete';
+
+  updated_at: string;
+
+  uploads: Array<DatasetUpdateResponse.Upload>;
+
+  description?: string | null;
+}
+
+export namespace DatasetUpdateResponse {
+  export interface Upload {
+    num_cells: number;
+
+    status: 'empty' | 'uploading' | 'failed' | 'complete';
+
+    version: number;
   }
 }
 
@@ -192,36 +222,6 @@ export namespace DatasetGetResponse {
   }
 }
 
-export interface DatasetReplaceResponse {
-  id: string;
-
-  created_at: string;
-
-  name: string;
-
-  num_cells: number;
-
-  secret: boolean;
-
-  status: 'empty' | 'uploading' | 'failed' | 'complete';
-
-  updated_at: string;
-
-  uploads: Array<DatasetReplaceResponse.Upload>;
-
-  description?: string | null;
-}
-
-export namespace DatasetReplaceResponse {
-  export interface Upload {
-    num_cells: number;
-
-    status: 'empty' | 'uploading' | 'failed' | 'complete';
-
-    version: number;
-  }
-}
-
 export interface DatasetCreateParams {
   name: string;
 
@@ -236,7 +236,7 @@ export interface DatasetCreateParams {
   secret?: boolean;
 }
 
-export interface DatasetReplaceParams {
+export interface DatasetUpdateParams {
   description?: string | null;
 
   name?: string | null;
@@ -244,13 +244,13 @@ export interface DatasetReplaceParams {
 
 export namespace Datasets {
   export import DatasetCreateResponse = DatasetsAPI.DatasetCreateResponse;
+  export import DatasetUpdateResponse = DatasetsAPI.DatasetUpdateResponse;
   export import DatasetListResponse = DatasetsAPI.DatasetListResponse;
   export import DatasetGetResponse = DatasetsAPI.DatasetGetResponse;
-  export import DatasetReplaceResponse = DatasetsAPI.DatasetReplaceResponse;
   export import DatasetCreateParams = DatasetsAPI.DatasetCreateParams;
-  export import DatasetReplaceParams = DatasetsAPI.DatasetReplaceParams;
+  export import DatasetUpdateParams = DatasetsAPI.DatasetUpdateParams;
   export import Upload = UploadAPI.Upload;
   export import UploadCreateResponse = UploadAPI.UploadCreateResponse;
-  export import UploadUpdateResponse = UploadAPI.UploadUpdateResponse;
-  export import UploadUpdateParams = UploadAPI.UploadUpdateParams;
+  export import UploadEditResponse = UploadAPI.UploadEditResponse;
+  export import UploadEditParams = UploadAPI.UploadEditParams;
 }

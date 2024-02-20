@@ -6,6 +6,25 @@ import * as CfInterconnectsAPI from 'cloudflare/resources/magics/cf-interconnect
 
 export class CfInterconnects extends APIResource {
   /**
+   * Updates a specific interconnect associated with an account. Use
+   * `?validate_only=true` as an optional query parameter to only run validation
+   * without persisting changes.
+   */
+  update(
+    accountIdentifier: string,
+    tunnelIdentifier: string,
+    body: CfInterconnectUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CfInterconnectUpdateResponse> {
+    return (
+      this._client.put(`/accounts/${accountIdentifier}/magic/cf_interconnects/${tunnelIdentifier}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: CfInterconnectUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Lists interconnects associated with an account.
    */
   list(
@@ -34,25 +53,12 @@ export class CfInterconnects extends APIResource {
       ) as Core.APIPromise<{ result: CfInterconnectGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
 
-  /**
-   * Updates a specific interconnect associated with an account. Use
-   * `?validate_only=true` as an optional query parameter to only run validation
-   * without persisting changes.
-   */
-  replace(
-    accountIdentifier: string,
-    tunnelIdentifier: string,
-    body: CfInterconnectReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CfInterconnectReplaceResponse> {
-    return (
-      this._client.put(`/accounts/${accountIdentifier}/magic/cf_interconnects/${tunnelIdentifier}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: CfInterconnectReplaceResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
+export interface CfInterconnectUpdateResponse {
+  modified?: boolean;
+
+  modified_interconnect?: unknown;
 }
 
 export interface CfInterconnectListResponse {
@@ -154,13 +160,7 @@ export interface CfInterconnectGetResponse {
   interconnect?: unknown;
 }
 
-export interface CfInterconnectReplaceResponse {
-  modified?: boolean;
-
-  modified_interconnect?: unknown;
-}
-
-export interface CfInterconnectReplaceParams {
+export interface CfInterconnectUpdateParams {
   /**
    * An optional description of the interconnect.
    */
@@ -169,9 +169,9 @@ export interface CfInterconnectReplaceParams {
   /**
    * The configuration specific to GRE interconnects.
    */
-  gre?: CfInterconnectReplaceParams.Gre;
+  gre?: CfInterconnectUpdateParams.Gre;
 
-  health_check?: CfInterconnectReplaceParams.HealthCheck;
+  health_check?: CfInterconnectUpdateParams.HealthCheck;
 
   /**
    * A 31-bit prefix (/31 in CIDR notation) supporting two hosts, one for each side
@@ -187,7 +187,7 @@ export interface CfInterconnectReplaceParams {
   mtu?: number;
 }
 
-export namespace CfInterconnectReplaceParams {
+export namespace CfInterconnectUpdateParams {
   /**
    * The configuration specific to GRE interconnects.
    */
@@ -225,8 +225,8 @@ export namespace CfInterconnectReplaceParams {
 }
 
 export namespace CfInterconnects {
+  export import CfInterconnectUpdateResponse = CfInterconnectsAPI.CfInterconnectUpdateResponse;
   export import CfInterconnectListResponse = CfInterconnectsAPI.CfInterconnectListResponse;
   export import CfInterconnectGetResponse = CfInterconnectsAPI.CfInterconnectGetResponse;
-  export import CfInterconnectReplaceResponse = CfInterconnectsAPI.CfInterconnectReplaceResponse;
-  export import CfInterconnectReplaceParams = CfInterconnectsAPI.CfInterconnectReplaceParams;
+  export import CfInterconnectUpdateParams = CfInterconnectsAPI.CfInterconnectUpdateParams;
 }

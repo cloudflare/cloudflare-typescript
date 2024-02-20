@@ -6,6 +6,28 @@ import * as BulkAPI from 'cloudflare/resources/storage/kv/namespaces/bulk';
 
 export class Bulk extends APIResource {
   /**
+   * Write multiple keys and values at once. Body should be an array of up to 10,000
+   * key-value pairs to be stored, along with optional expiration information.
+   * Existing values and expirations will be overwritten. If neither `expiration` nor
+   * `expiration_ttl` is specified, the key-value pair will never expire. If both are
+   * set, `expiration_ttl` is used and `expiration` is ignored. The entire request
+   * size must be 100 megabytes or less.
+   */
+  update(
+    accountId: string,
+    namespaceId: string,
+    body: BulkUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<BulkUpdateResponse> {
+    return (
+      this._client.put(`/accounts/${accountId}/storage/kv/namespaces/${namespaceId}/bulk`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: BulkUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Remove multiple KV pairs from the namespace. Body should be an array of up to
    * 10,000 keys to be removed.
    */
@@ -22,39 +44,15 @@ export class Bulk extends APIResource {
       }) as Core.APIPromise<{ result: BulkDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
-
-  /**
-   * Write multiple keys and values at once. Body should be an array of up to 10,000
-   * key-value pairs to be stored, along with optional expiration information.
-   * Existing values and expirations will be overwritten. If neither `expiration` nor
-   * `expiration_ttl` is specified, the key-value pair will never expire. If both are
-   * set, `expiration_ttl` is used and `expiration` is ignored. The entire request
-   * size must be 100 megabytes or less.
-   */
-  replace(
-    accountId: string,
-    namespaceId: string,
-    body: BulkReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<BulkReplaceResponse> {
-    return (
-      this._client.put(`/accounts/${accountId}/storage/kv/namespaces/${namespaceId}/bulk`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: BulkReplaceResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
+
+export type BulkUpdateResponse = unknown | string;
 
 export type BulkDeleteResponse = unknown | string;
 
-export type BulkReplaceResponse = unknown | string;
+export type BulkUpdateParams = Array<BulkUpdateParams.Body>;
 
-export type BulkDeleteParams = Array<string>;
-
-export type BulkReplaceParams = Array<BulkReplaceParams.Body>;
-
-export namespace BulkReplaceParams {
+export namespace BulkUpdateParams {
   export interface Body {
     /**
      * Whether or not the server should base64 decode the value before storing it.
@@ -93,9 +91,11 @@ export namespace BulkReplaceParams {
   }
 }
 
+export type BulkDeleteParams = Array<string>;
+
 export namespace Bulk {
+  export import BulkUpdateResponse = BulkAPI.BulkUpdateResponse;
   export import BulkDeleteResponse = BulkAPI.BulkDeleteResponse;
-  export import BulkReplaceResponse = BulkAPI.BulkReplaceResponse;
+  export import BulkUpdateParams = BulkAPI.BulkUpdateParams;
   export import BulkDeleteParams = BulkAPI.BulkDeleteParams;
-  export import BulkReplaceParams = BulkAPI.BulkReplaceParams;
 }

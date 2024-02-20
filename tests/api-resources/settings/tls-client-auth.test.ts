@@ -13,8 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource tlsClientAuth', () => {
   // skipped: tests are disabled for the time being
-  test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.settings.tlsClientAuth.update('023e105f4ecef8ad9ca31a8372d0c353', {
+  test.skip('edit: only required params', async () => {
+    const responsePromise = cloudflare.settings.tlsClientAuth.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       value: 'on',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -27,8 +27,8 @@ describe('resource tlsClientAuth', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.settings.tlsClientAuth.update('023e105f4ecef8ad9ca31a8372d0c353', {
+  test.skip('edit: required and optional params', async () => {
+    const response = await cloudflare.settings.tlsClientAuth.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       value: 'on',
     });
   });

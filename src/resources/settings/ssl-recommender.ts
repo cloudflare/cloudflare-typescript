@@ -10,16 +10,16 @@ export class SSLRecommender extends APIResource {
    * recommend (by sending periodic emails) the most secure SSL/TLS setting your
    * origin servers support.
    */
-  update(
+  edit(
     zoneId: string,
-    body: SSLRecommenderUpdateParams,
+    body: SSLRecommenderEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SSLRecommenderUpdateResponse> {
+  ): Core.APIPromise<SSLRecommenderEditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/settings/ssl_recommender`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: SSLRecommenderUpdateResponse }>
+      }) as Core.APIPromise<{ result: SSLRecommenderEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -42,7 +42,7 @@ export class SSLRecommender extends APIResource {
  * recommend (by sending periodic emails) the most secure SSL/TLS setting your
  * origin servers support.
  */
-export interface SSLRecommenderUpdateResponse {
+export interface SSLRecommenderEditResponse {
   /**
    * Enrollment value for SSL/TLS Recommender.
    */
@@ -71,16 +71,16 @@ export interface SSLRecommenderGetResponse {
   enabled?: boolean;
 }
 
-export interface SSLRecommenderUpdateParams {
+export interface SSLRecommenderEditParams {
   /**
    * Enrollment in the SSL/TLS Recommender service which tries to detect and
    * recommend (by sending periodic emails) the most secure SSL/TLS setting your
    * origin servers support.
    */
-  value: SSLRecommenderUpdateParams.Value;
+  value: SSLRecommenderEditParams.Value;
 }
 
-export namespace SSLRecommenderUpdateParams {
+export namespace SSLRecommenderEditParams {
   /**
    * Enrollment in the SSL/TLS Recommender service which tries to detect and
    * recommend (by sending periodic emails) the most secure SSL/TLS setting your
@@ -100,7 +100,7 @@ export namespace SSLRecommenderUpdateParams {
 }
 
 export namespace SSLRecommender {
-  export import SSLRecommenderUpdateResponse = SSLRecommenderAPI.SSLRecommenderUpdateResponse;
+  export import SSLRecommenderEditResponse = SSLRecommenderAPI.SSLRecommenderEditResponse;
   export import SSLRecommenderGetResponse = SSLRecommenderAPI.SSLRecommenderGetResponse;
-  export import SSLRecommenderUpdateParams = SSLRecommenderAPI.SSLRecommenderUpdateParams;
+  export import SSLRecommenderEditParams = SSLRecommenderAPI.SSLRecommenderEditParams;
 }

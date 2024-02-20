@@ -9,12 +9,12 @@ export {
 } from './histories';
 export {
   PolicyCreateResponse,
+  PolicyUpdateResponse,
   PolicyListResponse,
   PolicyDeleteResponse,
   PolicyGetResponse,
-  PolicyReplaceResponse,
   PolicyCreateParams,
-  PolicyReplaceParams,
+  PolicyUpdateParams,
   Policies,
 } from './policies';
 export { V3ListResponse, V3 } from './v3';

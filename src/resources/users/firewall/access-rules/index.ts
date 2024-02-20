@@ -3,12 +3,12 @@
 export { AccessRules } from './access-rules';
 export {
   RuleCreateResponse,
-  RuleUpdateResponse,
   RuleListResponse,
   RuleDeleteResponse,
+  RuleEditResponse,
   RuleCreateParams,
-  RuleUpdateParams,
   RuleListParams,
+  RuleEditParams,
   RuleListResponsesV4PagePaginationArray,
   Rules,
 } from './rules';

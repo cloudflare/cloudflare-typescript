@@ -11,16 +11,16 @@ export class ImageResizing extends APIResource {
    * [Image Resizing documentation](https://developers.cloudflare.com/images/) for
    * more information.
    */
-  update(
+  edit(
     zoneId: string,
-    body: ImageResizingUpdateParams,
+    body: ImageResizingEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ImageResizingUpdateResponse> {
+  ): Core.APIPromise<ImageResizingEditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/settings/image_resizing`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ImageResizingUpdateResponse }>
+      }) as Core.APIPromise<{ result: ImageResizingEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -45,7 +45,7 @@ export class ImageResizing extends APIResource {
  * [Image Resizing documentation](https://developers.cloudflare.com/images/) for
  * more information.
  */
-export interface ImageResizingUpdateResponse {
+export interface ImageResizingEditResponse {
   /**
    * ID of the zone setting.
    */
@@ -97,17 +97,17 @@ export interface ImageResizingGetResponse {
   modified_on?: string | null;
 }
 
-export interface ImageResizingUpdateParams {
+export interface ImageResizingEditParams {
   /**
    * Image Resizing provides on-demand resizing, conversion and optimisation for
    * images served through Cloudflare's network. Refer to the
    * [Image Resizing documentation](https://developers.cloudflare.com/images/) for
    * more information.
    */
-  value: ImageResizingUpdateParams.Value;
+  value: ImageResizingEditParams.Value;
 }
 
-export namespace ImageResizingUpdateParams {
+export namespace ImageResizingEditParams {
   /**
    * Image Resizing provides on-demand resizing, conversion and optimisation for
    * images served through Cloudflare's network. Refer to the
@@ -128,7 +128,7 @@ export namespace ImageResizingUpdateParams {
 }
 
 export namespace ImageResizing {
-  export import ImageResizingUpdateResponse = ImageResizingAPI.ImageResizingUpdateResponse;
+  export import ImageResizingEditResponse = ImageResizingAPI.ImageResizingEditResponse;
   export import ImageResizingGetResponse = ImageResizingAPI.ImageResizingGetResponse;
-  export import ImageResizingUpdateParams = ImageResizingAPI.ImageResizingUpdateParams;
+  export import ImageResizingEditParams = ImageResizingAPI.ImageResizingEditParams;
 }

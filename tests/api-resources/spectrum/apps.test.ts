@@ -46,6 +46,42 @@ describe('resource apps', () => {
   });
 
   // skipped: tests are disabled for the time being
+  test.skip('update: only required params', async () => {
+    const responsePromise = cloudflare.spectrum.apps.update(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      'ea95132c15732412d22c1476fa83f27a',
+      { dns: {}, origin_dns: {}, origin_port: 22, protocol: 'tcp/22' },
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('update: required and optional params', async () => {
+    const response = await cloudflare.spectrum.apps.update(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      'ea95132c15732412d22c1476fa83f27a',
+      {
+        dns: { name: 'ssh.example.com', type: 'CNAME' },
+        origin_dns: { name: 'origin.example.com', ttl: 600, type: '' },
+        origin_port: 22,
+        protocol: 'tcp/22',
+        argo_smart_routing: true,
+        edge_ips: { connectivity: 'all', type: 'dynamic' },
+        ip_firewall: true,
+        proxy_protocol: 'off',
+        tls: 'full',
+        traffic_type: 'direct',
+      },
+    );
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('list', async () => {
     const responsePromise = cloudflare.spectrum.apps.list('023e105f4ecef8ad9ca31a8372d0c353');
     const rawResponse = await responsePromise.asResponse();
@@ -115,41 +151,5 @@ describe('resource apps', () => {
         path: '/_stainless_unknown_path',
       }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('replace: only required params', async () => {
-    const responsePromise = cloudflare.spectrum.apps.replace(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'ea95132c15732412d22c1476fa83f27a',
-      { dns: {}, origin_dns: {}, origin_port: 22, protocol: 'tcp/22' },
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('replace: required and optional params', async () => {
-    const response = await cloudflare.spectrum.apps.replace(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'ea95132c15732412d22c1476fa83f27a',
-      {
-        dns: { name: 'ssh.example.com', type: 'CNAME' },
-        origin_dns: { name: 'origin.example.com', ttl: 600, type: '' },
-        origin_port: 22,
-        protocol: 'tcp/22',
-        argo_smart_routing: true,
-        edge_ips: { connectivity: 'all', type: 'dynamic' },
-        ip_firewall: true,
-        proxy_protocol: 'off',
-        tls: 'full',
-        traffic_type: 'direct',
-      },
-    );
   });
 });

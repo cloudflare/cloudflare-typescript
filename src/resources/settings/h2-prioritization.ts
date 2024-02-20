@@ -8,16 +8,16 @@ export class H2Prioritization extends APIResource {
   /**
    * Gets HTTP/2 Edge Prioritization setting.
    */
-  update(
+  edit(
     zoneId: string,
-    body: H2PrioritizationUpdateParams,
+    body: H2PrioritizationEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<H2PrioritizationUpdateResponse> {
+  ): Core.APIPromise<H2PrioritizationEditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/settings/h2_prioritization`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: H2PrioritizationUpdateResponse }>
+      }) as Core.APIPromise<{ result: H2PrioritizationEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -38,7 +38,7 @@ export class H2Prioritization extends APIResource {
  * HTTP/2 to improve page load performance. It also supports fine control of
  * content delivery when used in conjunction with Workers.
  */
-export interface H2PrioritizationUpdateResponse {
+export interface H2PrioritizationEditResponse {
   /**
    * ID of the zone setting.
    */
@@ -89,16 +89,16 @@ export interface H2PrioritizationGetResponse {
   modified_on?: string | null;
 }
 
-export interface H2PrioritizationUpdateParams {
+export interface H2PrioritizationEditParams {
   /**
    * HTTP/2 Edge Prioritization optimises the delivery of resources served through
    * HTTP/2 to improve page load performance. It also supports fine control of
    * content delivery when used in conjunction with Workers.
    */
-  value: H2PrioritizationUpdateParams.Value;
+  value: H2PrioritizationEditParams.Value;
 }
 
-export namespace H2PrioritizationUpdateParams {
+export namespace H2PrioritizationEditParams {
   /**
    * HTTP/2 Edge Prioritization optimises the delivery of resources served through
    * HTTP/2 to improve page load performance. It also supports fine control of
@@ -118,7 +118,7 @@ export namespace H2PrioritizationUpdateParams {
 }
 
 export namespace H2Prioritization {
-  export import H2PrioritizationUpdateResponse = H2PrioritizationAPI.H2PrioritizationUpdateResponse;
+  export import H2PrioritizationEditResponse = H2PrioritizationAPI.H2PrioritizationEditResponse;
   export import H2PrioritizationGetResponse = H2PrioritizationAPI.H2PrioritizationGetResponse;
-  export import H2PrioritizationUpdateParams = H2PrioritizationAPI.H2PrioritizationUpdateParams;
+  export import H2PrioritizationEditParams = H2PrioritizationAPI.H2PrioritizationEditParams;
 }

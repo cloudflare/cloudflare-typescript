@@ -5,23 +5,23 @@ export { KeyListResponse, Keys } from './keys';
 export { StatGetResponse, Stats } from './stats';
 export {
   V1CreateResponse,
-  V1UpdateResponse,
   V1ListResponse,
   V1DeleteResponse,
+  V1EditResponse,
   V1GetResponse,
   V1CreateParams,
-  V1UpdateParams,
   V1ListParams,
+  V1EditParams,
   V1ListResponsesV4PagePagination,
   V1s,
 } from './v1s';
 export {
   VariantCreateResponse,
-  VariantUpdateResponse,
   VariantListResponse,
   VariantDeleteResponse,
+  VariantEditResponse,
   VariantGetResponse,
   VariantCreateParams,
-  VariantUpdateParams,
+  VariantEditParams,
   Variants,
 } from './variants';

@@ -2,20 +2,20 @@
 
 export {
   IntegrationCreateResponse,
-  IntegrationUpdateResponse,
   IntegrationDeleteResponse,
+  IntegrationEditResponse,
   IntegrationGetResponse,
   IntegrationCreateParams,
-  IntegrationUpdateParams,
+  IntegrationEditParams,
   Integrations,
 } from './integrations';
 export {
   PostureCreateResponse,
+  PostureUpdateResponse,
   PostureListResponse,
   PostureDeleteResponse,
   PostureGetResponse,
-  PostureReplaceResponse,
   PostureCreateParams,
-  PostureReplaceParams,
+  PostureUpdateParams,
   Postures,
 } from './postures';

@@ -38,23 +38,6 @@ describe('resource audioTracks', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('update', async () => {
-    const responsePromise = cloudflare.stream.audioTracks.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'ea95132c15732412d22c1476fa83f27a',
-      'ea95132c15732412d22c1476fa83f27a',
-      {},
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
   test.skip('list', async () => {
     const responsePromise = cloudflare.stream.audioTracks.list(
       '023e105f4ecef8ad9ca31a8372d0c353',
@@ -108,5 +91,22 @@ describe('resource audioTracks', () => {
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('edit', async () => {
+    const responsePromise = cloudflare.stream.audioTracks.edit(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      'ea95132c15732412d22c1476fa83f27a',
+      'ea95132c15732412d22c1476fa83f27a',
+      {},
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
   });
 });

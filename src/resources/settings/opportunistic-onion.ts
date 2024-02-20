@@ -9,16 +9,16 @@ export class OpportunisticOnion extends APIResource {
    * Add an Alt-Svc header to all legitimate requests from Tor, allowing the
    * connection to use our onion services instead of exit nodes.
    */
-  update(
+  edit(
     zoneId: string,
-    body: OpportunisticOnionUpdateParams,
+    body: OpportunisticOnionEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<OpportunisticOnionUpdateResponse> {
+  ): Core.APIPromise<OpportunisticOnionEditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/settings/opportunistic_onion`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: OpportunisticOnionUpdateResponse }>
+      }) as Core.APIPromise<{ result: OpportunisticOnionEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -39,7 +39,7 @@ export class OpportunisticOnion extends APIResource {
  * Add an Alt-Svc header to all legitimate requests from Tor, allowing the
  * connection to use our onion services instead of exit nodes.
  */
-export interface OpportunisticOnionUpdateResponse {
+export interface OpportunisticOnionEditResponse {
   /**
    * ID of the zone setting.
    */
@@ -89,7 +89,7 @@ export interface OpportunisticOnionGetResponse {
   modified_on?: string | null;
 }
 
-export interface OpportunisticOnionUpdateParams {
+export interface OpportunisticOnionEditParams {
   /**
    * Value of the zone setting. Notes: Default value depends on the zone's plan
    * level.
@@ -98,7 +98,7 @@ export interface OpportunisticOnionUpdateParams {
 }
 
 export namespace OpportunisticOnion {
-  export import OpportunisticOnionUpdateResponse = OpportunisticOnionAPI.OpportunisticOnionUpdateResponse;
+  export import OpportunisticOnionEditResponse = OpportunisticOnionAPI.OpportunisticOnionEditResponse;
   export import OpportunisticOnionGetResponse = OpportunisticOnionAPI.OpportunisticOnionGetResponse;
-  export import OpportunisticOnionUpdateParams = OpportunisticOnionAPI.OpportunisticOnionUpdateParams;
+  export import OpportunisticOnionEditParams = OpportunisticOnionAPI.OpportunisticOnionEditParams;
 }

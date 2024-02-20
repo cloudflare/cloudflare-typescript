@@ -31,23 +31,6 @@ export class Policies extends APIResource {
   }
 
   /**
-   * Updates a configured device settings profile.
-   */
-  update(
-    identifier: unknown,
-    uuid: string,
-    body: PolicyUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PolicyUpdateResponse | null> {
-    return (
-      this._client.patch(`/accounts/${identifier}/devices/policy/${uuid}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: PolicyUpdateResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Fetches a list of the device settings profiles for an account.
    */
   list(identifier: unknown, options?: Core.RequestOptions): Core.APIPromise<PolicyListResponse | null> {
@@ -75,6 +58,23 @@ export class Policies extends APIResource {
   }
 
   /**
+   * Updates a configured device settings profile.
+   */
+  edit(
+    identifier: unknown,
+    uuid: string,
+    body: PolicyEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PolicyEditResponse | null> {
+    return (
+      this._client.patch(`/accounts/${identifier}/devices/policy/${uuid}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: PolicyEditResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Fetches a device settings profile by ID.
    */
   get(
@@ -91,8 +91,6 @@ export class Policies extends APIResource {
 }
 
 export type PolicyCreateResponse = Array<unknown>;
-
-export type PolicyUpdateResponse = Array<unknown>;
 
 export type PolicyListResponse = Array<PolicyListResponse.PolicyListResponseItem>;
 
@@ -460,6 +458,8 @@ export namespace PolicyDeleteResponse {
   }
 }
 
+export type PolicyEditResponse = Array<unknown>;
+
 export type PolicyGetResponse = Array<unknown>;
 
 export interface PolicyCreateParams {
@@ -568,7 +568,7 @@ export namespace PolicyCreateParams {
   }
 }
 
-export interface PolicyUpdateParams {
+export interface PolicyEditParams {
   /**
    * Whether to allow the user to switch WARP between modes.
    */
@@ -633,7 +633,7 @@ export interface PolicyUpdateParams {
    */
   precedence?: number;
 
-  service_mode_v2?: PolicyUpdateParams.ServiceModeV2;
+  service_mode_v2?: PolicyEditParams.ServiceModeV2;
 
   /**
    * The URL to launch when the Send Feedback button is clicked.
@@ -646,7 +646,7 @@ export interface PolicyUpdateParams {
   switch_locked?: boolean;
 }
 
-export namespace PolicyUpdateParams {
+export namespace PolicyEditParams {
   export interface ServiceModeV2 {
     /**
      * The mode to run the WARP client under.
@@ -662,24 +662,24 @@ export namespace PolicyUpdateParams {
 
 export namespace Policies {
   export import PolicyCreateResponse = PoliciesAPI.PolicyCreateResponse;
-  export import PolicyUpdateResponse = PoliciesAPI.PolicyUpdateResponse;
   export import PolicyListResponse = PoliciesAPI.PolicyListResponse;
   export import PolicyDeleteResponse = PoliciesAPI.PolicyDeleteResponse;
+  export import PolicyEditResponse = PoliciesAPI.PolicyEditResponse;
   export import PolicyGetResponse = PoliciesAPI.PolicyGetResponse;
   export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
-  export import PolicyUpdateParams = PoliciesAPI.PolicyUpdateParams;
+  export import PolicyEditParams = PoliciesAPI.PolicyEditParams;
   export import DefaultPolicy = DefaultPolicyAPI.DefaultPolicy;
   export import DefaultPolicyGetResponse = DefaultPolicyAPI.DefaultPolicyGetResponse;
   export import Excludes = ExcludesAPI.Excludes;
+  export import ExcludeUpdateResponse = ExcludesAPI.ExcludeUpdateResponse;
   export import ExcludeListResponse = ExcludesAPI.ExcludeListResponse;
-  export import ExcludeReplaceResponse = ExcludesAPI.ExcludeReplaceResponse;
-  export import ExcludeReplaceParams = ExcludesAPI.ExcludeReplaceParams;
+  export import ExcludeUpdateParams = ExcludesAPI.ExcludeUpdateParams;
   export import FallbackDomains = FallbackDomainsAPI.FallbackDomains;
+  export import FallbackDomainUpdateResponse = FallbackDomainsAPI.FallbackDomainUpdateResponse;
   export import FallbackDomainListResponse = FallbackDomainsAPI.FallbackDomainListResponse;
-  export import FallbackDomainReplaceResponse = FallbackDomainsAPI.FallbackDomainReplaceResponse;
-  export import FallbackDomainReplaceParams = FallbackDomainsAPI.FallbackDomainReplaceParams;
+  export import FallbackDomainUpdateParams = FallbackDomainsAPI.FallbackDomainUpdateParams;
   export import Includes = IncludesAPI.Includes;
+  export import IncludeUpdateResponse = IncludesAPI.IncludeUpdateResponse;
   export import IncludeListResponse = IncludesAPI.IncludeListResponse;
-  export import IncludeReplaceResponse = IncludesAPI.IncludeReplaceResponse;
-  export import IncludeReplaceParams = IncludesAPI.IncludeReplaceParams;
+  export import IncludeUpdateParams = IncludesAPI.IncludeUpdateParams;
 }

@@ -1,18 +1,18 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export { BindingListResponse, Bindings } from './bindings';
-export { ScheduleListResponse, ScheduleReplaceResponse, ScheduleReplaceParams, Schedules } from './schedules';
+export { ScheduleUpdateResponse, ScheduleListResponse, ScheduleUpdateParams, Schedules } from './schedules';
 export {
+  ScriptUpdateResponse,
   ScriptListResponse,
-  ScriptReplaceResponse,
+  ScriptUpdateParams,
   ScriptDeleteParams,
-  ScriptReplaceParams,
   Scripts,
 } from './scripts';
 export { TailCreateResponse, TailListResponse, TailDeleteResponse, Tail } from './tail';
 export {
+  UsageModelUpdateResponse,
   UsageModelGetResponse,
-  UsageModelReplaceResponse,
-  UsageModelReplaceParams,
+  UsageModelUpdateParams,
   UsageModel,
 } from './usage-model';

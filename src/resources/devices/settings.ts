@@ -6,6 +6,21 @@ import * as SettingsAPI from 'cloudflare/resources/devices/settings';
 
 export class Settings extends APIResource {
   /**
+   * Updates the current device settings for a Zero Trust account.
+   */
+  update(
+    identifier: unknown,
+    body: SettingUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SettingUpdateResponse | null> {
+    return (
+      this._client.put(`/accounts/${identifier}/devices/settings`, { body, ...options }) as Core.APIPromise<{
+        result: SettingUpdateResponse | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Describes the current device settings for a Zero Trust account.
    */
   list(identifier: unknown, options?: Core.RequestOptions): Core.APIPromise<SettingListResponse | null> {
@@ -15,21 +30,28 @@ export class Settings extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+
+export interface SettingUpdateResponse {
+  /**
+   * Enable gateway proxy filtering on TCP.
+   */
+  gateway_proxy_enabled?: boolean;
 
   /**
-   * Updates the current device settings for a Zero Trust account.
+   * Enable gateway proxy filtering on UDP.
    */
-  replace(
-    identifier: unknown,
-    body: SettingReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SettingReplaceResponse | null> {
-    return (
-      this._client.put(`/accounts/${identifier}/devices/settings`, { body, ...options }) as Core.APIPromise<{
-        result: SettingReplaceResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
+  gateway_udp_proxy_enabled?: boolean;
+
+  /**
+   * Enable installation of cloudflare managed root certificate.
+   */
+  root_certificate_installation_enabled?: boolean;
+
+  /**
+   * Enable using CGNAT virtual IPv4.
+   */
+  use_zt_virtual_ip?: boolean;
 }
 
 export interface SettingListResponse {
@@ -54,29 +76,7 @@ export interface SettingListResponse {
   use_zt_virtual_ip?: boolean;
 }
 
-export interface SettingReplaceResponse {
-  /**
-   * Enable gateway proxy filtering on TCP.
-   */
-  gateway_proxy_enabled?: boolean;
-
-  /**
-   * Enable gateway proxy filtering on UDP.
-   */
-  gateway_udp_proxy_enabled?: boolean;
-
-  /**
-   * Enable installation of cloudflare managed root certificate.
-   */
-  root_certificate_installation_enabled?: boolean;
-
-  /**
-   * Enable using CGNAT virtual IPv4.
-   */
-  use_zt_virtual_ip?: boolean;
-}
-
-export interface SettingReplaceParams {
+export interface SettingUpdateParams {
   /**
    * Enable gateway proxy filtering on TCP.
    */
@@ -99,7 +99,7 @@ export interface SettingReplaceParams {
 }
 
 export namespace Settings {
+  export import SettingUpdateResponse = SettingsAPI.SettingUpdateResponse;
   export import SettingListResponse = SettingsAPI.SettingListResponse;
-  export import SettingReplaceResponse = SettingsAPI.SettingReplaceResponse;
-  export import SettingReplaceParams = SettingsAPI.SettingReplaceParams;
+  export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;
 }

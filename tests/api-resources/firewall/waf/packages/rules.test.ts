@@ -13,8 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource rules', () => {
   // skipped: tests are disabled for the time being
-  test.skip('update', async () => {
-    const responsePromise = cloudflare.firewall.waf.packages.rules.update(
+  test.skip('edit', async () => {
+    const responsePromise = cloudflare.firewall.waf.packages.rules.edit(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'a25a9a7e9c00afc1fb2e0245519d725b',
       'a25a9a7e9c00afc1fb2e0245519d725b',

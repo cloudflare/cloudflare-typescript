@@ -8,21 +8,21 @@ export class Advertisements extends APIResource {
   /**
    * Update advertisement for rule.
    */
-  update(
+  edit(
     accountIdentifier: unknown,
     ruleIdentifier: unknown,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AdvertisementUpdateResponse | null> {
+  ): Core.APIPromise<AdvertisementEditResponse | null> {
     return (
       this._client.patch(
         `/accounts/${accountIdentifier}/mnm/rules/${ruleIdentifier}/advertisement`,
         options,
-      ) as Core.APIPromise<{ result: AdvertisementUpdateResponse | null }>
+      ) as Core.APIPromise<{ result: AdvertisementEditResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface AdvertisementUpdateResponse {
+export interface AdvertisementEditResponse {
   /**
    * Toggle on if you would like Cloudflare to automatically advertise the IP
    * Prefixes within the rule via Magic Transit when the rule is triggered. Only
@@ -32,5 +32,5 @@ export interface AdvertisementUpdateResponse {
 }
 
 export namespace Advertisements {
-  export import AdvertisementUpdateResponse = AdvertisementsAPI.AdvertisementUpdateResponse;
+  export import AdvertisementEditResponse = AdvertisementsAPI.AdvertisementEditResponse;
 }

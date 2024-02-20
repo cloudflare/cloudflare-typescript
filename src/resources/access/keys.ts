@@ -6,27 +6,27 @@ import * as KeysAPI from 'cloudflare/resources/access/keys';
 
 export class Keys extends APIResource {
   /**
+   * Updates the Access key rotation settings for an account.
+   */
+  update(
+    identifier: string,
+    body: KeyUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<KeyUpdateResponse> {
+    return (
+      this._client.put(`/accounts/${identifier}/access/keys`, { body, ...options }) as Core.APIPromise<{
+        result: KeyUpdateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Gets the Access key rotation settings for an account.
    */
   list(identifier: string, options?: Core.RequestOptions): Core.APIPromise<KeyListResponse> {
     return (
       this._client.get(`/accounts/${identifier}/access/keys`, options) as Core.APIPromise<{
         result: KeyListResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Updates the Access key rotation settings for an account.
-   */
-  replace(
-    identifier: string,
-    body: KeyReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<KeyReplaceResponse> {
-    return (
-      this._client.put(`/accounts/${identifier}/access/keys`, { body, ...options }) as Core.APIPromise<{
-        result: KeyReplaceResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -43,13 +43,13 @@ export class Keys extends APIResource {
   }
 }
 
-export type KeyListResponse = unknown | string;
+export type KeyUpdateResponse = unknown | string;
 
-export type KeyReplaceResponse = unknown | string;
+export type KeyListResponse = unknown | string;
 
 export type KeyRotateResponse = unknown | string;
 
-export interface KeyReplaceParams {
+export interface KeyUpdateParams {
   /**
    * The number of days between key rotations.
    */
@@ -57,8 +57,8 @@ export interface KeyReplaceParams {
 }
 
 export namespace Keys {
+  export import KeyUpdateResponse = KeysAPI.KeyUpdateResponse;
   export import KeyListResponse = KeysAPI.KeyListResponse;
-  export import KeyReplaceResponse = KeysAPI.KeyReplaceResponse;
   export import KeyRotateResponse = KeysAPI.KeyRotateResponse;
-  export import KeyReplaceParams = KeysAPI.KeyReplaceParams;
+  export import KeyUpdateParams = KeysAPI.KeyUpdateParams;
 }

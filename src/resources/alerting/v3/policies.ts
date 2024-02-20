@@ -22,6 +22,23 @@ export class Policies extends APIResource {
   }
 
   /**
+   * Update a Notification policy.
+   */
+  update(
+    accountId: string,
+    policyId: string,
+    body: PolicyUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PolicyUpdateResponse> {
+    return (
+      this._client.put(`/accounts/${accountId}/alerting/v3/policies/${policyId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: PolicyUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Get a list of all Notification policies.
    */
   list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<PolicyListResponse | null> {
@@ -63,26 +80,16 @@ export class Policies extends APIResource {
       ) as Core.APIPromise<{ result: PolicyGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
-
-  /**
-   * Update a Notification policy.
-   */
-  replace(
-    accountId: string,
-    policyId: string,
-    body: PolicyReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PolicyReplaceResponse> {
-    return (
-      this._client.put(`/accounts/${accountId}/alerting/v3/policies/${policyId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: PolicyReplaceResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 
 export interface PolicyCreateResponse {
+  /**
+   * UUID
+   */
+  id?: string;
+}
+
+export interface PolicyUpdateResponse {
   /**
    * UUID
    */
@@ -734,13 +741,6 @@ export namespace PolicyGetResponse {
   }
 }
 
-export interface PolicyReplaceResponse {
-  /**
-   * UUID
-   */
-  id?: string;
-}
-
 export interface PolicyCreateParams {
   /**
    * Refers to which event will trigger a Notification dispatch. You can use the
@@ -1050,7 +1050,7 @@ export namespace PolicyCreateParams {
   }
 }
 
-export interface PolicyReplaceParams {
+export interface PolicyUpdateParams {
   /**
    * Refers to which event will trigger a Notification dispatch. You can use the
    * endpoint to get available alert types which then will give you a list of
@@ -1127,13 +1127,13 @@ export interface PolicyReplaceParams {
    * that alert type based on some criteria. This is only available for select alert
    * types. See alert type documentation for more details.
    */
-  filters?: PolicyReplaceParams.Filters;
+  filters?: PolicyUpdateParams.Filters;
 
   /**
    * List of IDs that will be used when dispatching a notification. IDs for email
    * type will be the email address.
    */
-  mechanisms?: Record<string, Array<PolicyReplaceParams.Mechanisms>>;
+  mechanisms?: Record<string, Array<PolicyUpdateParams.Mechanisms>>;
 
   /**
    * Name of the policy.
@@ -1141,7 +1141,7 @@ export interface PolicyReplaceParams {
   name?: string;
 }
 
-export namespace PolicyReplaceParams {
+export namespace PolicyUpdateParams {
   /**
    * Optional filters that allow you to be alerted only on a subset of events for
    * that alert type based on some criteria. This is only available for select alert
@@ -1361,10 +1361,10 @@ export namespace PolicyReplaceParams {
 
 export namespace Policies {
   export import PolicyCreateResponse = PoliciesAPI.PolicyCreateResponse;
+  export import PolicyUpdateResponse = PoliciesAPI.PolicyUpdateResponse;
   export import PolicyListResponse = PoliciesAPI.PolicyListResponse;
   export import PolicyDeleteResponse = PoliciesAPI.PolicyDeleteResponse;
   export import PolicyGetResponse = PoliciesAPI.PolicyGetResponse;
-  export import PolicyReplaceResponse = PoliciesAPI.PolicyReplaceResponse;
   export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
-  export import PolicyReplaceParams = PoliciesAPI.PolicyReplaceParams;
+  export import PolicyUpdateParams = PoliciesAPI.PolicyUpdateParams;
 }

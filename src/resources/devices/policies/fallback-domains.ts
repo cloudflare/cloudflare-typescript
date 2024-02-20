@@ -6,6 +6,25 @@ import * as FallbackDomainsAPI from 'cloudflare/resources/devices/policies/fallb
 
 export class FallbackDomains extends APIResource {
   /**
+   * Sets the list of domains to bypass Gateway DNS resolution. These domains will
+   * use the specified local DNS resolver instead. This will only apply to the
+   * specified device settings profile.
+   */
+  update(
+    identifier: unknown,
+    uuid: string,
+    body: FallbackDomainUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<FallbackDomainUpdateResponse | null> {
+    return (
+      this._client.put(`/accounts/${identifier}/devices/policy/${uuid}/fallback_domains`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: FallbackDomainUpdateResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Fetches the list of domains to bypass Gateway DNS resolution from a specified
    * device settings profile. These domains will use the specified local DNS resolver
    * instead.
@@ -22,24 +41,27 @@ export class FallbackDomains extends APIResource {
       ) as Core.APIPromise<{ result: FallbackDomainListResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
 
-  /**
-   * Sets the list of domains to bypass Gateway DNS resolution. These domains will
-   * use the specified local DNS resolver instead. This will only apply to the
-   * specified device settings profile.
-   */
-  replace(
-    identifier: unknown,
-    uuid: string,
-    body: FallbackDomainReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<FallbackDomainReplaceResponse | null> {
-    return (
-      this._client.put(`/accounts/${identifier}/devices/policy/${uuid}/fallback_domains`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: FallbackDomainReplaceResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+export type FallbackDomainUpdateResponse =
+  Array<FallbackDomainUpdateResponse.FallbackDomainUpdateResponseItem>;
+
+export namespace FallbackDomainUpdateResponse {
+  export interface FallbackDomainUpdateResponseItem {
+    /**
+     * The domain suffix to match when resolving locally.
+     */
+    suffix: string;
+
+    /**
+     * A description of the fallback domain, displayed in the client UI.
+     */
+    description?: string;
+
+    /**
+     * A list of IP addresses to handle domain resolution.
+     */
+    dns_server?: Array<unknown>;
   }
 }
 
@@ -64,31 +86,9 @@ export namespace FallbackDomainListResponse {
   }
 }
 
-export type FallbackDomainReplaceResponse =
-  Array<FallbackDomainReplaceResponse.FallbackDomainReplaceResponseItem>;
+export type FallbackDomainUpdateParams = Array<FallbackDomainUpdateParams.Body>;
 
-export namespace FallbackDomainReplaceResponse {
-  export interface FallbackDomainReplaceResponseItem {
-    /**
-     * The domain suffix to match when resolving locally.
-     */
-    suffix: string;
-
-    /**
-     * A description of the fallback domain, displayed in the client UI.
-     */
-    description?: string;
-
-    /**
-     * A list of IP addresses to handle domain resolution.
-     */
-    dns_server?: Array<unknown>;
-  }
-}
-
-export type FallbackDomainReplaceParams = Array<FallbackDomainReplaceParams.Body>;
-
-export namespace FallbackDomainReplaceParams {
+export namespace FallbackDomainUpdateParams {
   export interface Body {
     /**
      * The domain suffix to match when resolving locally.
@@ -108,7 +108,7 @@ export namespace FallbackDomainReplaceParams {
 }
 
 export namespace FallbackDomains {
+  export import FallbackDomainUpdateResponse = FallbackDomainsAPI.FallbackDomainUpdateResponse;
   export import FallbackDomainListResponse = FallbackDomainsAPI.FallbackDomainListResponse;
-  export import FallbackDomainReplaceResponse = FallbackDomainsAPI.FallbackDomainReplaceResponse;
-  export import FallbackDomainReplaceParams = FallbackDomainsAPI.FallbackDomainReplaceParams;
+  export import FallbackDomainUpdateParams = FallbackDomainsAPI.FallbackDomainUpdateParams;
 }

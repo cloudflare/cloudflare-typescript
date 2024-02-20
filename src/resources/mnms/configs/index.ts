@@ -5,7 +5,7 @@ export {
   ConfigUpdateResponse,
   ConfigListResponse,
   ConfigDeleteResponse,
-  ConfigReplaceResponse,
+  ConfigEditResponse,
   Configs,
 } from './configs';
 export { FullListResponse, Fulls } from './fulls';

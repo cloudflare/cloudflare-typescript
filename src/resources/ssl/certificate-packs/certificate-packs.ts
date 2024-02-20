@@ -12,24 +12,6 @@ export class CertificatePacks extends APIResource {
   quota: QuotaAPI.Quota = new QuotaAPI.Quota(this._client);
 
   /**
-   * For a given zone, restart validation for an advanced certificate pack. This is
-   * only a validation operation for a Certificate Pack in a validation_timed_out
-   * status.
-   */
-  update(
-    zoneId: string,
-    certificatePackId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CertificatePackUpdateResponse> {
-    return (
-      this._client.patch(
-        `/zones/${zoneId}/ssl/certificate_packs/${certificatePackId}`,
-        options,
-      ) as Core.APIPromise<{ result: CertificatePackUpdateResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * For a given zone, list all active certificate packs.
    */
   list(
@@ -70,6 +52,24 @@ export class CertificatePacks extends APIResource {
   }
 
   /**
+   * For a given zone, restart validation for an advanced certificate pack. This is
+   * only a validation operation for a Certificate Pack in a validation_timed_out
+   * status.
+   */
+  edit(
+    zoneId: string,
+    certificatePackId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CertificatePackEditResponse> {
+    return (
+      this._client.patch(
+        `/zones/${zoneId}/ssl/certificate_packs/${certificatePackId}`,
+        options,
+      ) as Core.APIPromise<{ result: CertificatePackEditResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * For a given zone, get a certificate pack.
    */
   get(
@@ -86,7 +86,16 @@ export class CertificatePacks extends APIResource {
   }
 }
 
-export interface CertificatePackUpdateResponse {
+export type CertificatePackListResponse = Array<unknown>;
+
+export interface CertificatePackDeleteResponse {
+  /**
+   * Identifier
+   */
+  id?: string;
+}
+
+export interface CertificatePackEditResponse {
   /**
    * Identifier
    */
@@ -153,15 +162,6 @@ export interface CertificatePackUpdateResponse {
   validity_days?: 14 | 30 | 90 | 365;
 }
 
-export type CertificatePackListResponse = Array<unknown>;
-
-export interface CertificatePackDeleteResponse {
-  /**
-   * Identifier
-   */
-  id?: string;
-}
-
 export type CertificatePackGetResponse = unknown | string;
 
 export interface CertificatePackListParams {
@@ -172,9 +172,9 @@ export interface CertificatePackListParams {
 }
 
 export namespace CertificatePacks {
-  export import CertificatePackUpdateResponse = CertificatePacksAPI.CertificatePackUpdateResponse;
   export import CertificatePackListResponse = CertificatePacksAPI.CertificatePackListResponse;
   export import CertificatePackDeleteResponse = CertificatePacksAPI.CertificatePackDeleteResponse;
+  export import CertificatePackEditResponse = CertificatePacksAPI.CertificatePackEditResponse;
   export import CertificatePackGetResponse = CertificatePacksAPI.CertificatePackGetResponse;
   export import CertificatePackListParams = CertificatePacksAPI.CertificatePackListParams;
   export import Order = OrderAPI.Order;

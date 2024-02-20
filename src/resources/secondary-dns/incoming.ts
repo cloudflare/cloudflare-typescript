@@ -21,6 +21,21 @@ export class Incoming extends APIResource {
   }
 
   /**
+   * Update secondary zone configuration for incoming zone transfers.
+   */
+  update(
+    zoneId: unknown,
+    body: IncomingUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IncomingUpdateResponse> {
+    return (
+      this._client.put(`/zones/${zoneId}/secondary_dns/incoming`, { body, ...options }) as Core.APIPromise<{
+        result: IncomingUpdateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Delete secondary zone configuration for incoming zone transfers.
    */
   delete(zoneId: unknown, options?: Core.RequestOptions): Core.APIPromise<IncomingDeleteResponse> {
@@ -41,24 +56,49 @@ export class Incoming extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
-
-  /**
-   * Update secondary zone configuration for incoming zone transfers.
-   */
-  replace(
-    zoneId: unknown,
-    body: IncomingReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<IncomingReplaceResponse> {
-    return (
-      this._client.put(`/zones/${zoneId}/secondary_dns/incoming`, { body, ...options }) as Core.APIPromise<{
-        result: IncomingReplaceResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 
 export interface IncomingCreateResponse {
+  id?: unknown;
+
+  /**
+   * How often should a secondary zone auto refresh regardless of DNS NOTIFY. Not
+   * applicable for primary zones.
+   */
+  auto_refresh_seconds?: number;
+
+  /**
+   * The time for a specific event.
+   */
+  checked_time?: string;
+
+  /**
+   * The time for a specific event.
+   */
+  created_time?: string;
+
+  /**
+   * The time for a specific event.
+   */
+  modified_time?: string;
+
+  /**
+   * Zone name.
+   */
+  name?: string;
+
+  /**
+   * A list of peer tags.
+   */
+  peers?: Array<unknown>;
+
+  /**
+   * The serial number of the SOA for the given zone.
+   */
+  soa_serial?: number;
+}
+
+export interface IncomingUpdateResponse {
   id?: unknown;
 
   /**
@@ -142,46 +182,6 @@ export interface IncomingGetResponse {
   soa_serial?: number;
 }
 
-export interface IncomingReplaceResponse {
-  id?: unknown;
-
-  /**
-   * How often should a secondary zone auto refresh regardless of DNS NOTIFY. Not
-   * applicable for primary zones.
-   */
-  auto_refresh_seconds?: number;
-
-  /**
-   * The time for a specific event.
-   */
-  checked_time?: string;
-
-  /**
-   * The time for a specific event.
-   */
-  created_time?: string;
-
-  /**
-   * The time for a specific event.
-   */
-  modified_time?: string;
-
-  /**
-   * Zone name.
-   */
-  name?: string;
-
-  /**
-   * A list of peer tags.
-   */
-  peers?: Array<unknown>;
-
-  /**
-   * The serial number of the SOA for the given zone.
-   */
-  soa_serial?: number;
-}
-
 export interface IncomingCreateParams {
   /**
    * How often should a secondary zone auto refresh regardless of DNS NOTIFY. Not
@@ -200,7 +200,7 @@ export interface IncomingCreateParams {
   peers: Array<unknown>;
 }
 
-export interface IncomingReplaceParams {
+export interface IncomingUpdateParams {
   /**
    * How often should a secondary zone auto refresh regardless of DNS NOTIFY. Not
    * applicable for primary zones.
@@ -220,9 +220,9 @@ export interface IncomingReplaceParams {
 
 export namespace Incoming {
   export import IncomingCreateResponse = IncomingAPI.IncomingCreateResponse;
+  export import IncomingUpdateResponse = IncomingAPI.IncomingUpdateResponse;
   export import IncomingDeleteResponse = IncomingAPI.IncomingDeleteResponse;
   export import IncomingGetResponse = IncomingAPI.IncomingGetResponse;
-  export import IncomingReplaceResponse = IncomingAPI.IncomingReplaceResponse;
   export import IncomingCreateParams = IncomingAPI.IncomingCreateParams;
-  export import IncomingReplaceParams = IncomingAPI.IncomingReplaceParams;
+  export import IncomingUpdateParams = IncomingAPI.IncomingUpdateParams;
 }

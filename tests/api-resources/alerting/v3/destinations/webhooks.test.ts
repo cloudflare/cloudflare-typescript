@@ -40,6 +40,35 @@ describe('resource webhooks', () => {
   });
 
   // skipped: tests are disabled for the time being
+  test.skip('update: only required params', async () => {
+    const responsePromise = cloudflare.alerting.v3.destinations.webhooks.update(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      'b115d5ec-15c6-41ee-8b76-92c449b5227b',
+      { name: 'Slack Webhook', url: 'https://hooks.slack.com/services/Ds3fdBFbV/456464Gdd' },
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('update: required and optional params', async () => {
+    const response = await cloudflare.alerting.v3.destinations.webhooks.update(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      'b115d5ec-15c6-41ee-8b76-92c449b5227b',
+      {
+        name: 'Slack Webhook',
+        url: 'https://hooks.slack.com/services/Ds3fdBFbV/456464Gdd',
+        secret: 'string',
+      },
+    );
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('list', async () => {
     const responsePromise = cloudflare.alerting.v3.destinations.webhooks.list(
       '023e105f4ecef8ad9ca31a8372d0c353',
@@ -115,34 +144,5 @@ describe('resource webhooks', () => {
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('replace: only required params', async () => {
-    const responsePromise = cloudflare.alerting.v3.destinations.webhooks.replace(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'b115d5ec-15c6-41ee-8b76-92c449b5227b',
-      { name: 'Slack Webhook', url: 'https://hooks.slack.com/services/Ds3fdBFbV/456464Gdd' },
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('replace: required and optional params', async () => {
-    const response = await cloudflare.alerting.v3.destinations.webhooks.replace(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'b115d5ec-15c6-41ee-8b76-92c449b5227b',
-      {
-        name: 'Slack Webhook',
-        url: 'https://hooks.slack.com/services/Ds3fdBFbV/456464Gdd',
-        secret: 'string',
-      },
-    );
   });
 });

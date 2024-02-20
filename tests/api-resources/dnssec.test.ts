@@ -13,8 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource dnssec', () => {
   // skipped: tests are disabled for the time being
-  test.skip('update', async () => {
-    const responsePromise = cloudflare.dnssec.update('023e105f4ecef8ad9ca31a8372d0c353', {});
+  test.skip('delete', async () => {
+    const responsePromise = cloudflare.dnssec.delete('023e105f4ecef8ad9ca31a8372d0c353');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -25,8 +25,8 @@ describe('resource dnssec', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
-    const responsePromise = cloudflare.dnssec.delete('023e105f4ecef8ad9ca31a8372d0c353');
+  test.skip('edit', async () => {
+    const responsePromise = cloudflare.dnssec.edit('023e105f4ecef8ad9ca31a8372d0c353', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

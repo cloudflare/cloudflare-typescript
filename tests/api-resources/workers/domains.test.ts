@@ -13,6 +13,33 @@ const cloudflare = new Cloudflare({
 
 describe('resource domains', () => {
   // skipped: tests are disabled for the time being
+  test.skip('update: only required params', async () => {
+    const responsePromise = cloudflare.workers.domains.update('9a7806061c88ada191ed06f989cc3dac', {
+      environment: 'production',
+      hostname: 'foo.example.com',
+      service: 'foo',
+      zone_id: '593c9c94de529bbbfaac7c53ced0447d',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('update: required and optional params', async () => {
+    const response = await cloudflare.workers.domains.update('9a7806061c88ada191ed06f989cc3dac', {
+      environment: 'production',
+      hostname: 'foo.example.com',
+      service: 'foo',
+      zone_id: '593c9c94de529bbbfaac7c53ced0447d',
+    });
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('list', async () => {
     const responsePromise = cloudflare.workers.domains.list('9a7806061c88ada191ed06f989cc3dac');
     const rawResponse = await responsePromise.asResponse();
@@ -90,32 +117,5 @@ describe('resource domains', () => {
         path: '/_stainless_unknown_path',
       }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('replace: only required params', async () => {
-    const responsePromise = cloudflare.workers.domains.replace('9a7806061c88ada191ed06f989cc3dac', {
-      environment: 'production',
-      hostname: 'foo.example.com',
-      service: 'foo',
-      zone_id: '593c9c94de529bbbfaac7c53ced0447d',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('replace: required and optional params', async () => {
-    const response = await cloudflare.workers.domains.replace('9a7806061c88ada191ed06f989cc3dac', {
-      environment: 'production',
-      hostname: 'foo.example.com',
-      service: 'foo',
-      zone_id: '593c9c94de529bbbfaac7c53ced0447d',
-    });
   });
 });

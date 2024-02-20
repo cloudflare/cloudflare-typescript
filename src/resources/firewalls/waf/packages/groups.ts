@@ -8,28 +8,6 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudfl
 
 export class Groups extends APIResource {
   /**
-   * Updates a WAF rule group. You can update the state (`mode` parameter) of a rule
-   * group.
-   *
-   * **Note:** Applies only to the
-   * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
-   */
-  update(
-    zoneId: string,
-    packageId: string,
-    groupId: string,
-    body: GroupUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<GroupUpdateResponse> {
-    return (
-      this._client.patch(`/zones/${zoneId}/firewall/waf/packages/${packageId}/groups/${groupId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: GroupUpdateResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Fetches the WAF rule groups in a WAF package.
    *
    * **Note:** Applies only to the
@@ -63,6 +41,28 @@ export class Groups extends APIResource {
   }
 
   /**
+   * Updates a WAF rule group. You can update the state (`mode` parameter) of a rule
+   * group.
+   *
+   * **Note:** Applies only to the
+   * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
+   */
+  edit(
+    zoneId: string,
+    packageId: string,
+    groupId: string,
+    body: GroupEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<GroupEditResponse> {
+    return (
+      this._client.patch(`/zones/${zoneId}/firewall/waf/packages/${packageId}/groups/${groupId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: GroupEditResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Fetches the details of a WAF rule group.
    *
    * **Note:** Applies only to the
@@ -84,8 +84,6 @@ export class Groups extends APIResource {
 }
 
 export class GroupListResponsesV4PagePaginationArray extends V4PagePaginationArray<GroupListResponse> {}
-
-export type GroupUpdateResponse = unknown | Array<unknown> | string;
 
 export interface GroupListResponse {
   /**
@@ -131,15 +129,9 @@ export interface GroupListResponse {
   package_id?: string;
 }
 
-export type GroupGetResponse = unknown | Array<unknown> | string;
+export type GroupEditResponse = unknown | Array<unknown> | string;
 
-export interface GroupUpdateParams {
-  /**
-   * The state of the rules contained in the rule group. When `on`, the rules in the
-   * group are configurable/usable.
-   */
-  mode?: 'on' | 'off';
-}
+export type GroupGetResponse = unknown | Array<unknown> | string;
 
 export interface GroupListParams extends V4PagePaginationArrayParams {
   /**
@@ -165,11 +157,19 @@ export interface GroupListParams extends V4PagePaginationArrayParams {
   order?: 'mode' | 'rules_count';
 }
 
+export interface GroupEditParams {
+  /**
+   * The state of the rules contained in the rule group. When `on`, the rules in the
+   * group are configurable/usable.
+   */
+  mode?: 'on' | 'off';
+}
+
 export namespace Groups {
-  export import GroupUpdateResponse = GroupsAPI.GroupUpdateResponse;
   export import GroupListResponse = GroupsAPI.GroupListResponse;
+  export import GroupEditResponse = GroupsAPI.GroupEditResponse;
   export import GroupGetResponse = GroupsAPI.GroupGetResponse;
   export import GroupListResponsesV4PagePaginationArray = GroupsAPI.GroupListResponsesV4PagePaginationArray;
-  export import GroupUpdateParams = GroupsAPI.GroupUpdateParams;
   export import GroupListParams = GroupsAPI.GroupListParams;
+  export import GroupEditParams = GroupsAPI.GroupEditParams;
 }

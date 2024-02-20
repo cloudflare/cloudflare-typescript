@@ -11,13 +11,10 @@ const cloudflare = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource advertisements', () => {
+describe('resource cache', () => {
   // skipped: tests are disabled for the time being
-  test.skip('edit', async () => {
-    const responsePromise = cloudflare.mnms.rules.advertisements.edit(
-      '6f91088a406011ed95aed352566e8d4c',
-      '2890e6fa406311ed9b5a23f70f6fb8cf',
-    );
+  test.skip('purge', async () => {
+    const responsePromise = cloudflare.cache.purge('string', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

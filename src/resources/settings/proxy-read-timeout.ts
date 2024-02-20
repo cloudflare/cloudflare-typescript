@@ -8,16 +8,16 @@ export class ProxyReadTimeout extends APIResource {
   /**
    * Maximum time between two read operations from origin.
    */
-  update(
+  edit(
     zoneId: string,
-    body: ProxyReadTimeoutUpdateParams,
+    body: ProxyReadTimeoutEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ProxyReadTimeoutUpdateResponse> {
+  ): Core.APIPromise<ProxyReadTimeoutEditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/settings/proxy_read_timeout`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ProxyReadTimeoutUpdateResponse }>
+      }) as Core.APIPromise<{ result: ProxyReadTimeoutEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -36,7 +36,7 @@ export class ProxyReadTimeout extends APIResource {
 /**
  * Maximum time between two read operations from origin.
  */
-export interface ProxyReadTimeoutUpdateResponse {
+export interface ProxyReadTimeoutEditResponse {
   /**
    * ID of the zone setting.
    */
@@ -85,14 +85,14 @@ export interface ProxyReadTimeoutGetResponse {
   modified_on?: string | null;
 }
 
-export interface ProxyReadTimeoutUpdateParams {
+export interface ProxyReadTimeoutEditParams {
   /**
    * Maximum time between two read operations from origin.
    */
-  value: ProxyReadTimeoutUpdateParams.Value;
+  value: ProxyReadTimeoutEditParams.Value;
 }
 
-export namespace ProxyReadTimeoutUpdateParams {
+export namespace ProxyReadTimeoutEditParams {
   /**
    * Maximum time between two read operations from origin.
    */
@@ -110,7 +110,7 @@ export namespace ProxyReadTimeoutUpdateParams {
 }
 
 export namespace ProxyReadTimeout {
-  export import ProxyReadTimeoutUpdateResponse = ProxyReadTimeoutAPI.ProxyReadTimeoutUpdateResponse;
+  export import ProxyReadTimeoutEditResponse = ProxyReadTimeoutAPI.ProxyReadTimeoutEditResponse;
   export import ProxyReadTimeoutGetResponse = ProxyReadTimeoutAPI.ProxyReadTimeoutGetResponse;
-  export import ProxyReadTimeoutUpdateParams = ProxyReadTimeoutAPI.ProxyReadTimeoutUpdateParams;
+  export import ProxyReadTimeoutEditParams = ProxyReadTimeoutAPI.ProxyReadTimeoutEditParams;
 }

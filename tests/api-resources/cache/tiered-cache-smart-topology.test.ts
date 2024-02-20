@@ -13,29 +13,6 @@ const cloudflare = new Cloudflare({
 
 describe('resource tieredCacheSmartTopology', () => {
   // skipped: tests are disabled for the time being
-  test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.cache.tieredCacheSmartTopology.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      { value: 'on' },
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.cache.tieredCacheSmartTopology.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      { value: 'on' },
-    );
-  });
-
-  // skipped: tests are disabled for the time being
   test.skip('delete', async () => {
     const responsePromise = cloudflare.cache.tieredCacheSmartTopology.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
@@ -47,6 +24,29 @@ describe('resource tieredCacheSmartTopology', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('edit: only required params', async () => {
+    const responsePromise = cloudflare.cache.tieredCacheSmartTopology.edit(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      { value: 'on' },
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('edit: required and optional params', async () => {
+    const response = await cloudflare.cache.tieredCacheSmartTopology.edit(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      { value: 'on' },
+    );
   });
 
   // skipped: tests are disabled for the time being

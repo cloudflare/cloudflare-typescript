@@ -2,12 +2,12 @@
 
 export {
   IpsecTunnelCreateResponse,
+  IpsecTunnelUpdateResponse,
   IpsecTunnelListResponse,
   IpsecTunnelDeleteResponse,
   IpsecTunnelGetResponse,
-  IpsecTunnelReplaceResponse,
   IpsecTunnelCreateParams,
-  IpsecTunnelReplaceParams,
+  IpsecTunnelUpdateParams,
   IpsecTunnels,
 } from './ipsec-tunnels';
 export { PskGenerateCreateResponse, PskGenerates } from './psk-generates';

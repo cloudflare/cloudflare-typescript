@@ -22,6 +22,23 @@ export class Webhooks extends APIResource {
   }
 
   /**
+   * Update a webhook destination.
+   */
+  update(
+    accountId: string,
+    webhookId: string,
+    body: WebhookUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<WebhookUpdateResponse> {
+    return (
+      this._client.put(`/accounts/${accountId}/alerting/v3/destinations/webhooks/${webhookId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: WebhookUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Gets a list of all configured webhook destinations.
    */
   list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<WebhookListResponse | null> {
@@ -64,26 +81,16 @@ export class Webhooks extends APIResource {
       ) as Core.APIPromise<{ result: WebhookGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
-
-  /**
-   * Update a webhook destination.
-   */
-  replace(
-    accountId: string,
-    webhookId: string,
-    body: WebhookReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<WebhookReplaceResponse> {
-    return (
-      this._client.put(`/accounts/${accountId}/alerting/v3/destinations/webhooks/${webhookId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: WebhookReplaceResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 
 export interface WebhookCreateResponse {
+  /**
+   * UUID
+   */
+  id?: string;
+}
+
+export interface WebhookUpdateResponse {
   /**
    * UUID
    */
@@ -190,13 +197,6 @@ export interface WebhookGetResponse {
   url?: string;
 }
 
-export interface WebhookReplaceResponse {
-  /**
-   * UUID
-   */
-  id?: string;
-}
-
 export interface WebhookCreateParams {
   /**
    * The name of the webhook destination. This will be included in the request body
@@ -217,7 +217,7 @@ export interface WebhookCreateParams {
   secret?: string;
 }
 
-export interface WebhookReplaceParams {
+export interface WebhookUpdateParams {
   /**
    * The name of the webhook destination. This will be included in the request body
    * when you receive a webhook notification.
@@ -239,10 +239,10 @@ export interface WebhookReplaceParams {
 
 export namespace Webhooks {
   export import WebhookCreateResponse = WebhooksAPI.WebhookCreateResponse;
+  export import WebhookUpdateResponse = WebhooksAPI.WebhookUpdateResponse;
   export import WebhookListResponse = WebhooksAPI.WebhookListResponse;
   export import WebhookDeleteResponse = WebhooksAPI.WebhookDeleteResponse;
   export import WebhookGetResponse = WebhooksAPI.WebhookGetResponse;
-  export import WebhookReplaceResponse = WebhooksAPI.WebhookReplaceResponse;
   export import WebhookCreateParams = WebhooksAPI.WebhookCreateParams;
-  export import WebhookReplaceParams = WebhooksAPI.WebhookReplaceParams;
+  export import WebhookUpdateParams = WebhooksAPI.WebhookUpdateParams;
 }

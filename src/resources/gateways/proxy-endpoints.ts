@@ -22,23 +22,6 @@ export class ProxyEndpoints extends APIResource {
   }
 
   /**
-   * Updates a configured Zero Trust Gateway proxy endpoint.
-   */
-  update(
-    accountId: unknown,
-    proxyEndpointId: unknown,
-    body: ProxyEndpointUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ProxyEndpointUpdateResponse> {
-    return (
-      this._client.patch(`/accounts/${accountId}/gateway/proxy_endpoints/${proxyEndpointId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: ProxyEndpointUpdateResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Fetches a single Zero Trust Gateway proxy endpoint.
    */
   list(accountId: unknown, options?: Core.RequestOptions): Core.APIPromise<ProxyEndpointListResponse | null> {
@@ -66,6 +49,23 @@ export class ProxyEndpoints extends APIResource {
   }
 
   /**
+   * Updates a configured Zero Trust Gateway proxy endpoint.
+   */
+  edit(
+    accountId: unknown,
+    proxyEndpointId: unknown,
+    body: ProxyEndpointEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ProxyEndpointEditResponse> {
+    return (
+      this._client.patch(`/accounts/${accountId}/gateway/proxy_endpoints/${proxyEndpointId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: ProxyEndpointEditResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Fetches all Zero Trust Gateway proxy endpoints for an account.
    */
   get(
@@ -83,29 +83,6 @@ export class ProxyEndpoints extends APIResource {
 }
 
 export interface ProxyEndpointCreateResponse {
-  id?: unknown;
-
-  created_at?: string;
-
-  /**
-   * A list of CIDRs to restrict ingress connections.
-   */
-  ips?: Array<string>;
-
-  /**
-   * The name of the proxy endpoint.
-   */
-  name?: string;
-
-  /**
-   * The subdomain to be used as the destination in the proxy client.
-   */
-  subdomain?: string;
-
-  updated_at?: string;
-}
-
-export interface ProxyEndpointUpdateResponse {
   id?: unknown;
 
   created_at?: string;
@@ -157,6 +134,29 @@ export namespace ProxyEndpointListResponse {
 
 export type ProxyEndpointDeleteResponse = unknown | string;
 
+export interface ProxyEndpointEditResponse {
+  id?: unknown;
+
+  created_at?: string;
+
+  /**
+   * A list of CIDRs to restrict ingress connections.
+   */
+  ips?: Array<string>;
+
+  /**
+   * The name of the proxy endpoint.
+   */
+  name?: string;
+
+  /**
+   * The subdomain to be used as the destination in the proxy client.
+   */
+  subdomain?: string;
+
+  updated_at?: string;
+}
+
 export interface ProxyEndpointGetResponse {
   id?: unknown;
 
@@ -197,7 +197,7 @@ export interface ProxyEndpointCreateParams {
   subdomain?: string;
 }
 
-export interface ProxyEndpointUpdateParams {
+export interface ProxyEndpointEditParams {
   /**
    * A list of CIDRs to restrict ingress connections.
    */
@@ -216,10 +216,10 @@ export interface ProxyEndpointUpdateParams {
 
 export namespace ProxyEndpoints {
   export import ProxyEndpointCreateResponse = ProxyEndpointsAPI.ProxyEndpointCreateResponse;
-  export import ProxyEndpointUpdateResponse = ProxyEndpointsAPI.ProxyEndpointUpdateResponse;
   export import ProxyEndpointListResponse = ProxyEndpointsAPI.ProxyEndpointListResponse;
   export import ProxyEndpointDeleteResponse = ProxyEndpointsAPI.ProxyEndpointDeleteResponse;
+  export import ProxyEndpointEditResponse = ProxyEndpointsAPI.ProxyEndpointEditResponse;
   export import ProxyEndpointGetResponse = ProxyEndpointsAPI.ProxyEndpointGetResponse;
   export import ProxyEndpointCreateParams = ProxyEndpointsAPI.ProxyEndpointCreateParams;
-  export import ProxyEndpointUpdateParams = ProxyEndpointsAPI.ProxyEndpointUpdateParams;
+  export import ProxyEndpointEditParams = ProxyEndpointsAPI.ProxyEndpointEditParams;
 }

@@ -10,14 +10,14 @@ export class Polish extends APIResource {
    * Refer to our [blog post](http://blog.cloudflare.com/polish-solving-mobile-speed)
    * for more information.
    */
-  update(
+  edit(
     zoneId: string,
-    body: PolishUpdateParams,
+    body: PolishEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PolishUpdateResponse> {
+  ): Core.APIPromise<PolishEditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/settings/polish`, { body, ...options }) as Core.APIPromise<{
-        result: PolishUpdateResponse;
+        result: PolishEditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -44,7 +44,7 @@ export class Polish extends APIResource {
  * lower-resolution image first and ending in a higher-resolution version. Not
  * recommended for hi-res photography sites.
  */
-export interface PolishUpdateResponse {
+export interface PolishEditResponse {
   /**
    * ID of the zone setting.
    */
@@ -98,7 +98,7 @@ export interface PolishGetResponse {
   modified_on?: string | null;
 }
 
-export interface PolishUpdateParams {
+export interface PolishEditParams {
   /**
    * Removes metadata and compresses your images for faster page load times. Basic
    * (Lossless): Reduce the size of PNG, JPEG, and GIF files - no impact on visual
@@ -107,10 +107,10 @@ export interface PolishUpdateParams {
    * lower-resolution image first and ending in a higher-resolution version. Not
    * recommended for hi-res photography sites.
    */
-  value: PolishUpdateParams.Value;
+  value: PolishEditParams.Value;
 }
 
-export namespace PolishUpdateParams {
+export namespace PolishEditParams {
   /**
    * Removes metadata and compresses your images for faster page load times. Basic
    * (Lossless): Reduce the size of PNG, JPEG, and GIF files - no impact on visual
@@ -133,7 +133,7 @@ export namespace PolishUpdateParams {
 }
 
 export namespace Polish {
-  export import PolishUpdateResponse = PolishAPI.PolishUpdateResponse;
+  export import PolishEditResponse = PolishAPI.PolishEditResponse;
   export import PolishGetResponse = PolishAPI.PolishGetResponse;
-  export import PolishUpdateParams = PolishAPI.PolishUpdateParams;
+  export import PolishEditParams = PolishAPI.PolishEditParams;
 }

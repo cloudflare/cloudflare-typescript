@@ -3,12 +3,12 @@
 export { Pages } from './pages';
 export {
   ProjectCreateResponse,
-  ProjectUpdateResponse,
   ProjectListResponse,
   ProjectDeleteResponse,
+  ProjectEditResponse,
   ProjectGetResponse,
   ProjectPurgeBuildCacheResponse,
   ProjectCreateParams,
-  ProjectUpdateParams,
+  ProjectEditParams,
   Projects,
 } from './projects/index';

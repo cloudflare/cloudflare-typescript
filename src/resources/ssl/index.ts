@@ -2,9 +2,9 @@
 
 export { AnalyzeCreateResponse, AnalyzeCreateParams, Analyze } from './analyze';
 export {
-  CertificatePackUpdateResponse,
   CertificatePackListResponse,
   CertificatePackDeleteResponse,
+  CertificatePackEditResponse,
   CertificatePackGetResponse,
   CertificatePackListParams,
   CertificatePacks,
@@ -13,9 +13,9 @@ export { RecommendationListResponse, Recommendations } from './recommendations';
 export { SSL } from './ssl';
 export { Universal } from './universal/index';
 export {
-  VerificationUpdateResponse,
   VerificationListResponse,
-  VerificationUpdateParams,
+  VerificationEditResponse,
   VerificationListParams,
+  VerificationEditParams,
   Verification,
 } from './verification';

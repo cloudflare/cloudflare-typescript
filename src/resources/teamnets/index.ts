@@ -9,11 +9,11 @@ export {
 export { Teamnets } from './teamnets';
 export {
   VirtualNetworkCreateResponse,
-  VirtualNetworkUpdateResponse,
   VirtualNetworkListResponse,
   VirtualNetworkDeleteResponse,
+  VirtualNetworkEditResponse,
   VirtualNetworkCreateParams,
-  VirtualNetworkUpdateParams,
   VirtualNetworkListParams,
+  VirtualNetworkEditParams,
   VirtualNetworks,
 } from './virtual-networks';

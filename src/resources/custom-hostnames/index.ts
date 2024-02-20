@@ -2,20 +2,20 @@
 
 export {
   CustomHostnameCreateResponse,
-  CustomHostnameUpdateResponse,
   CustomHostnameListResponse,
   CustomHostnameDeleteResponse,
+  CustomHostnameEditResponse,
   CustomHostnameGetResponse,
   CustomHostnameCreateParams,
-  CustomHostnameUpdateParams,
   CustomHostnameListParams,
+  CustomHostnameEditParams,
   CustomHostnameListResponsesV4PagePaginationArray,
   CustomHostnames,
 } from './custom-hostnames';
 export {
+  FallbackOriginUpdateResponse,
   FallbackOriginDeleteResponse,
   FallbackOriginGetResponse,
-  FallbackOriginReplaceResponse,
-  FallbackOriginReplaceParams,
+  FallbackOriginUpdateParams,
   FallbackOrigin,
 } from './fallback-origin';

@@ -7,26 +7,6 @@ import * as VerificationAPI from 'cloudflare/resources/ssl/verification';
 
 export class Verification extends APIResource {
   /**
-   * Edit SSL validation method for a certificate pack. A PATCH request will request
-   * an immediate validation check on any certificate, and return the updated status.
-   * If a validation method is provided, the validation will be immediately attempted
-   * using that method.
-   */
-  update(
-    zoneId: string,
-    certificatePackId: string,
-    body: VerificationUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<VerificationUpdateResponse> {
-    return (
-      this._client.patch(`/zones/${zoneId}/ssl/verification/${certificatePackId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: VerificationUpdateResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Get SSL Verification Info for a Zone.
    */
   list(
@@ -49,18 +29,26 @@ export class Verification extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
-}
-
-export interface VerificationUpdateResponse {
-  /**
-   * Result status.
-   */
-  status?: string;
 
   /**
-   * Desired validation method.
+   * Edit SSL validation method for a certificate pack. A PATCH request will request
+   * an immediate validation check on any certificate, and return the updated status.
+   * If a validation method is provided, the validation will be immediately attempted
+   * using that method.
    */
-  validation_method?: 'http' | 'cname' | 'txt' | 'email';
+  edit(
+    zoneId: string,
+    certificatePackId: string,
+    body: VerificationEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<VerificationEditResponse> {
+    return (
+      this._client.patch(`/zones/${zoneId}/ssl/verification/${certificatePackId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: VerificationEditResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
 export type VerificationListResponse = Array<VerificationListResponse.VerificationListResponseItem>;
@@ -134,11 +122,16 @@ export namespace VerificationListResponse {
   }
 }
 
-export interface VerificationUpdateParams {
+export interface VerificationEditResponse {
+  /**
+   * Result status.
+   */
+  status?: string;
+
   /**
    * Desired validation method.
    */
-  validation_method: 'http' | 'cname' | 'txt' | 'email';
+  validation_method?: 'http' | 'cname' | 'txt' | 'email';
 }
 
 export interface VerificationListParams {
@@ -148,9 +141,16 @@ export interface VerificationListParams {
   retry?: true;
 }
 
+export interface VerificationEditParams {
+  /**
+   * Desired validation method.
+   */
+  validation_method: 'http' | 'cname' | 'txt' | 'email';
+}
+
 export namespace Verification {
-  export import VerificationUpdateResponse = VerificationAPI.VerificationUpdateResponse;
   export import VerificationListResponse = VerificationAPI.VerificationListResponse;
-  export import VerificationUpdateParams = VerificationAPI.VerificationUpdateParams;
+  export import VerificationEditResponse = VerificationAPI.VerificationEditResponse;
   export import VerificationListParams = VerificationAPI.VerificationListParams;
+  export import VerificationEditParams = VerificationAPI.VerificationEditParams;
 }

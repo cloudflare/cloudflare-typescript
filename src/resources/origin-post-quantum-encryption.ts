@@ -13,14 +13,16 @@ export class OriginPostQuantumEncryption extends APIResource {
    * algorithms are advertised but only used when requested by the origin, and off
    * means that PQ algorithms are not advertised
    */
-  get(
+  update(
     zoneId: string,
+    body: OriginPostQuantumEncryptionUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<OriginPostQuantumEncryptionGetResponse> {
+  ): Core.APIPromise<OriginPostQuantumEncryptionUpdateResponse> {
     return (
-      this._client.get(`/zones/${zoneId}/cache/origin_post_quantum_encryption`, options) as Core.APIPromise<{
-        result: OriginPostQuantumEncryptionGetResponse;
-      }>
+      this._client.put(`/zones/${zoneId}/cache/origin_post_quantum_encryption`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: OriginPostQuantumEncryptionUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -32,25 +34,23 @@ export class OriginPostQuantumEncryption extends APIResource {
    * algorithms are advertised but only used when requested by the origin, and off
    * means that PQ algorithms are not advertised
    */
-  replace(
+  get(
     zoneId: string,
-    body: OriginPostQuantumEncryptionReplaceParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<OriginPostQuantumEncryptionReplaceResponse> {
+  ): Core.APIPromise<OriginPostQuantumEncryptionGetResponse> {
     return (
-      this._client.put(`/zones/${zoneId}/cache/origin_post_quantum_encryption`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: OriginPostQuantumEncryptionReplaceResponse }>
+      this._client.get(`/zones/${zoneId}/cache/origin_post_quantum_encryption`, options) as Core.APIPromise<{
+        result: OriginPostQuantumEncryptionGetResponse;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
+export type OriginPostQuantumEncryptionUpdateResponse = unknown | string | null;
+
 export type OriginPostQuantumEncryptionGetResponse = unknown | string | null;
 
-export type OriginPostQuantumEncryptionReplaceResponse = unknown | string | null;
-
-export interface OriginPostQuantumEncryptionReplaceParams {
+export interface OriginPostQuantumEncryptionUpdateParams {
   /**
    * Value of the Origin Post Quantum Encryption Setting.
    */
@@ -58,7 +58,7 @@ export interface OriginPostQuantumEncryptionReplaceParams {
 }
 
 export namespace OriginPostQuantumEncryption {
+  export import OriginPostQuantumEncryptionUpdateResponse = OriginPostQuantumEncryptionAPI.OriginPostQuantumEncryptionUpdateResponse;
   export import OriginPostQuantumEncryptionGetResponse = OriginPostQuantumEncryptionAPI.OriginPostQuantumEncryptionGetResponse;
-  export import OriginPostQuantumEncryptionReplaceResponse = OriginPostQuantumEncryptionAPI.OriginPostQuantumEncryptionReplaceResponse;
-  export import OriginPostQuantumEncryptionReplaceParams = OriginPostQuantumEncryptionAPI.OriginPostQuantumEncryptionReplaceParams;
+  export import OriginPostQuantumEncryptionUpdateParams = OriginPostQuantumEncryptionAPI.OriginPostQuantumEncryptionUpdateParams;
 }

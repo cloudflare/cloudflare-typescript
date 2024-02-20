@@ -34,22 +34,6 @@ describe('resource warpConnector', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('update', async () => {
-    const responsePromise = cloudflare.warpConnector.update(
-      '699d98642c564d2e855e9661899b7252',
-      'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
-      {},
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
   test.skip('list', async () => {
     const responsePromise = cloudflare.warpConnector.list('699d98642c564d2e855e9661899b7252');
     const rawResponse = await responsePromise.asResponse();
@@ -114,6 +98,22 @@ describe('resource warpConnector', () => {
       'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
       {},
     );
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('edit', async () => {
+    const responsePromise = cloudflare.warpConnector.edit(
+      '699d98642c564d2e855e9661899b7252',
+      'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
+      {},
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
   });
 
   // skipped: tests are disabled for the time being

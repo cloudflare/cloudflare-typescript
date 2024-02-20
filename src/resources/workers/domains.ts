@@ -7,6 +7,21 @@ import * as DomainsAPI from 'cloudflare/resources/workers/domains';
 
 export class Domains extends APIResource {
   /**
+   * Attaches a Worker to a zone and hostname.
+   */
+  update(
+    accountId: unknown,
+    body: DomainUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DomainUpdateResponse> {
+    return (
+      this._client.put(`/accounts/${accountId}/workers/domains`, { body, ...options }) as Core.APIPromise<{
+        result: DomainUpdateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Lists all Worker Domains for an account.
    */
   list(
@@ -54,21 +69,38 @@ export class Domains extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+
+export interface DomainUpdateResponse {
+  /**
+   * Identifer of the Worker Domain.
+   */
+  id?: unknown;
 
   /**
-   * Attaches a Worker to a zone and hostname.
+   * Worker environment associated with the zone and hostname.
    */
-  replace(
-    accountId: unknown,
-    body: DomainReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DomainReplaceResponse> {
-    return (
-      this._client.put(`/accounts/${accountId}/workers/domains`, { body, ...options }) as Core.APIPromise<{
-        result: DomainReplaceResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
+  environment?: string;
+
+  /**
+   * Hostname of the Worker Domain.
+   */
+  hostname?: string;
+
+  /**
+   * Worker service associated with the zone and hostname.
+   */
+  service?: string;
+
+  /**
+   * Identifier of the zone.
+   */
+  zone_id?: unknown;
+
+  /**
+   * Name of the zone.
+   */
+  zone_name?: string;
 }
 
 export type DomainListResponse = Array<DomainListResponse.DomainListResponseItem>;
@@ -139,36 +171,26 @@ export interface DomainGetResponse {
   zone_name?: string;
 }
 
-export interface DomainReplaceResponse {
-  /**
-   * Identifer of the Worker Domain.
-   */
-  id?: unknown;
-
+export interface DomainUpdateParams {
   /**
    * Worker environment associated with the zone and hostname.
    */
-  environment?: string;
+  environment: string;
 
   /**
    * Hostname of the Worker Domain.
    */
-  hostname?: string;
+  hostname: string;
 
   /**
    * Worker service associated with the zone and hostname.
    */
-  service?: string;
+  service: string;
 
   /**
    * Identifier of the zone.
    */
-  zone_id?: unknown;
-
-  /**
-   * Name of the zone.
-   */
-  zone_name?: string;
+  zone_id: unknown;
 }
 
 export interface DomainListParams {
@@ -198,32 +220,10 @@ export interface DomainListParams {
   zone_name?: string;
 }
 
-export interface DomainReplaceParams {
-  /**
-   * Worker environment associated with the zone and hostname.
-   */
-  environment: string;
-
-  /**
-   * Hostname of the Worker Domain.
-   */
-  hostname: string;
-
-  /**
-   * Worker service associated with the zone and hostname.
-   */
-  service: string;
-
-  /**
-   * Identifier of the zone.
-   */
-  zone_id: unknown;
-}
-
 export namespace Domains {
+  export import DomainUpdateResponse = DomainsAPI.DomainUpdateResponse;
   export import DomainListResponse = DomainsAPI.DomainListResponse;
   export import DomainGetResponse = DomainsAPI.DomainGetResponse;
-  export import DomainReplaceResponse = DomainsAPI.DomainReplaceResponse;
+  export import DomainUpdateParams = DomainsAPI.DomainUpdateParams;
   export import DomainListParams = DomainsAPI.DomainListParams;
-  export import DomainReplaceParams = DomainsAPI.DomainReplaceParams;
 }

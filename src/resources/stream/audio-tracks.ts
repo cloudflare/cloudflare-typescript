@@ -23,26 +23,6 @@ export class AudioTracks extends APIResource {
   }
 
   /**
-   * Edits additional audio tracks on a video. Editing the default status of an audio
-   * track to `true` will mark all other audio tracks on the video default status to
-   * `false`.
-   */
-  update(
-    accountId: string,
-    identifier: string,
-    audioIdentifier: string,
-    body: AudioTrackUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AudioTrackUpdateResponse> {
-    return (
-      this._client.patch(`/accounts/${accountId}/stream/${identifier}/audio/${audioIdentifier}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: AudioTrackUpdateResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Lists additional audio tracks on a video. Note this API will not return
    * information for audio attached to the video upload.
    */
@@ -75,32 +55,29 @@ export class AudioTracks extends APIResource {
       ) as Core.APIPromise<{ result: AudioTrackDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Edits additional audio tracks on a video. Editing the default status of an audio
+   * track to `true` will mark all other audio tracks on the video default status to
+   * `false`.
+   */
+  edit(
+    accountId: string,
+    identifier: string,
+    audioIdentifier: string,
+    body: AudioTrackEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AudioTrackEditResponse> {
+    return (
+      this._client.patch(`/accounts/${accountId}/stream/${identifier}/audio/${audioIdentifier}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: AudioTrackEditResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
 export interface AudioTrackCreateResponse {
-  /**
-   * Denotes whether the audio track will be played by default in a player.
-   */
-  default?: boolean;
-
-  /**
-   * A string to uniquely identify the track amongst other audio track labels for the
-   * specified video.
-   */
-  label?: string;
-
-  /**
-   * Specifies the processing status of the video.
-   */
-  status?: 'queued' | 'ready' | 'error';
-
-  /**
-   * A Cloudflare-generated unique identifier for a media item.
-   */
-  uid?: string;
-}
-
-export interface AudioTrackUpdateResponse {
   /**
    * Denotes whether the audio track will be played by default in a player.
    */
@@ -152,6 +129,29 @@ export namespace AudioTrackListResponse {
 
 export type AudioTrackDeleteResponse = unknown | string;
 
+export interface AudioTrackEditResponse {
+  /**
+   * Denotes whether the audio track will be played by default in a player.
+   */
+  default?: boolean;
+
+  /**
+   * A string to uniquely identify the track amongst other audio track labels for the
+   * specified video.
+   */
+  label?: string;
+
+  /**
+   * Specifies the processing status of the video.
+   */
+  status?: 'queued' | 'ready' | 'error';
+
+  /**
+   * A Cloudflare-generated unique identifier for a media item.
+   */
+  uid?: string;
+}
+
 export interface AudioTrackCreateParams {
   /**
    * A string to uniquely identify the track amongst other audio track labels for the
@@ -167,7 +167,7 @@ export interface AudioTrackCreateParams {
   url?: string;
 }
 
-export interface AudioTrackUpdateParams {
+export interface AudioTrackEditParams {
   /**
    * Denotes whether the audio track will be played by default in a player.
    */
@@ -182,9 +182,9 @@ export interface AudioTrackUpdateParams {
 
 export namespace AudioTracks {
   export import AudioTrackCreateResponse = AudioTracksAPI.AudioTrackCreateResponse;
-  export import AudioTrackUpdateResponse = AudioTracksAPI.AudioTrackUpdateResponse;
   export import AudioTrackListResponse = AudioTracksAPI.AudioTrackListResponse;
   export import AudioTrackDeleteResponse = AudioTracksAPI.AudioTrackDeleteResponse;
+  export import AudioTrackEditResponse = AudioTracksAPI.AudioTrackEditResponse;
   export import AudioTrackCreateParams = AudioTracksAPI.AudioTrackCreateParams;
-  export import AudioTrackUpdateParams = AudioTracksAPI.AudioTrackUpdateParams;
+  export import AudioTrackEditParams = AudioTracksAPI.AudioTrackEditParams;
 }

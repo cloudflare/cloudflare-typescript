@@ -8,16 +8,16 @@ export class OpportunisticEncryption extends APIResource {
   /**
    * Changes Opportunistic Encryption setting.
    */
-  update(
+  edit(
     zoneId: string,
-    body: OpportunisticEncryptionUpdateParams,
+    body: OpportunisticEncryptionEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<OpportunisticEncryptionUpdateResponse> {
+  ): Core.APIPromise<OpportunisticEncryptionEditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/settings/opportunistic_encryption`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: OpportunisticEncryptionUpdateResponse }>
+      }) as Core.APIPromise<{ result: OpportunisticEncryptionEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -36,7 +36,7 @@ export class OpportunisticEncryption extends APIResource {
 /**
  * Enables the Opportunistic Encryption feature for a zone.
  */
-export interface OpportunisticEncryptionUpdateResponse {
+export interface OpportunisticEncryptionEditResponse {
   /**
    * ID of the zone setting.
    */
@@ -85,7 +85,7 @@ export interface OpportunisticEncryptionGetResponse {
   modified_on?: string | null;
 }
 
-export interface OpportunisticEncryptionUpdateParams {
+export interface OpportunisticEncryptionEditParams {
   /**
    * Value of the zone setting. Notes: Default value depends on the zone's plan
    * level.
@@ -94,7 +94,7 @@ export interface OpportunisticEncryptionUpdateParams {
 }
 
 export namespace OpportunisticEncryption {
-  export import OpportunisticEncryptionUpdateResponse = OpportunisticEncryptionAPI.OpportunisticEncryptionUpdateResponse;
+  export import OpportunisticEncryptionEditResponse = OpportunisticEncryptionAPI.OpportunisticEncryptionEditResponse;
   export import OpportunisticEncryptionGetResponse = OpportunisticEncryptionAPI.OpportunisticEncryptionGetResponse;
-  export import OpportunisticEncryptionUpdateParams = OpportunisticEncryptionAPI.OpportunisticEncryptionUpdateParams;
+  export import OpportunisticEncryptionEditParams = OpportunisticEncryptionAPI.OpportunisticEncryptionEditParams;
 }

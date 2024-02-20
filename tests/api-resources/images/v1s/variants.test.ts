@@ -37,30 +37,6 @@ describe('resource variants', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.images.v1s.variants.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'hero',
-      { options: { fit: 'scale-down', height: 768, metadata: 'none', width: 1366 } },
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.images.v1s.variants.update('023e105f4ecef8ad9ca31a8372d0c353', 'hero', {
-      options: { fit: 'scale-down', height: 768, metadata: 'none', width: 1366 },
-      neverRequireSignedURLs: true,
-    });
-  });
-
-  // skipped: tests are disabled for the time being
   test.skip('list', async () => {
     const responsePromise = cloudflare.images.v1s.variants.list('023e105f4ecef8ad9ca31a8372d0c353');
     const rawResponse = await responsePromise.asResponse();
@@ -92,6 +68,28 @@ describe('resource variants', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('edit: only required params', async () => {
+    const responsePromise = cloudflare.images.v1s.variants.edit('023e105f4ecef8ad9ca31a8372d0c353', 'hero', {
+      options: { fit: 'scale-down', height: 768, metadata: 'none', width: 1366 },
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('edit: required and optional params', async () => {
+    const response = await cloudflare.images.v1s.variants.edit('023e105f4ecef8ad9ca31a8372d0c353', 'hero', {
+      options: { fit: 'scale-down', height: 768, metadata: 'none', width: 1366 },
+      neverRequireSignedURLs: true,
+    });
   });
 
   // skipped: tests are disabled for the time being

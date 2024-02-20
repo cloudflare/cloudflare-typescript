@@ -9,16 +9,16 @@ export class TLSClientAuth extends APIResource {
    * TLS Client Auth requires Cloudflare to connect to your origin server using a
    * client certificate (Enterprise Only).
    */
-  update(
+  edit(
     zoneId: string,
-    body: TLSClientAuthUpdateParams,
+    body: TLSClientAuthEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TLSClientAuthUpdateResponse> {
+  ): Core.APIPromise<TLSClientAuthEditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/settings/tls_client_auth`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: TLSClientAuthUpdateResponse }>
+      }) as Core.APIPromise<{ result: TLSClientAuthEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -39,7 +39,7 @@ export class TLSClientAuth extends APIResource {
  * TLS Client Auth requires Cloudflare to connect to your origin server using a
  * client certificate (Enterprise Only).
  */
-export interface TLSClientAuthUpdateResponse {
+export interface TLSClientAuthEditResponse {
   /**
    * ID of the zone setting.
    */
@@ -89,7 +89,7 @@ export interface TLSClientAuthGetResponse {
   modified_on?: string | null;
 }
 
-export interface TLSClientAuthUpdateParams {
+export interface TLSClientAuthEditParams {
   /**
    * value of the zone setting.
    */
@@ -97,7 +97,7 @@ export interface TLSClientAuthUpdateParams {
 }
 
 export namespace TLSClientAuth {
-  export import TLSClientAuthUpdateResponse = TLSClientAuthAPI.TLSClientAuthUpdateResponse;
+  export import TLSClientAuthEditResponse = TLSClientAuthAPI.TLSClientAuthEditResponse;
   export import TLSClientAuthGetResponse = TLSClientAuthAPI.TLSClientAuthGetResponse;
-  export import TLSClientAuthUpdateParams = TLSClientAuthAPI.TLSClientAuthUpdateParams;
+  export import TLSClientAuthEditParams = TLSClientAuthAPI.TLSClientAuthEditParams;
 }

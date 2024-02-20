@@ -7,6 +7,29 @@ import { multipartFormRequestOptions } from 'cloudflare/core';
 
 export class Values extends APIResource {
   /**
+   * Write a value identified by a key. Use URL-encoding to use special characters
+   * (for example, `:`, `!`, `%`) in the key name. Body should be the value to be
+   * stored along with JSON metadata to be associated with the key/value pair.
+   * Existing values, expirations, and metadata will be overwritten. If neither
+   * `expiration` nor `expiration_ttl` is specified, the key-value pair will never
+   * expire. If both are set, `expiration_ttl` is used and `expiration` is ignored.
+   */
+  update(
+    accountId: string,
+    namespaceId: string,
+    keyName: string,
+    body: ValueUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ValueUpdateResponse> {
+    return (
+      this._client.put(
+        `/accounts/${accountId}/storage/kv/namespaces/${namespaceId}/values/${keyName}`,
+        multipartFormRequestOptions({ body, ...options }),
+      ) as Core.APIPromise<{ result: ValueUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Remove a KV pair from the namespace. Use URL-encoding to use special characters
    * (for example, `:`, `!`, `%`) in the key name.
    */
@@ -42,30 +65,9 @@ export class Values extends APIResource {
       headers: { Accept: 'application/json', ...options?.headers },
     });
   }
-
-  /**
-   * Write a value identified by a key. Use URL-encoding to use special characters
-   * (for example, `:`, `!`, `%`) in the key name. Body should be the value to be
-   * stored along with JSON metadata to be associated with the key/value pair.
-   * Existing values, expirations, and metadata will be overwritten. If neither
-   * `expiration` nor `expiration_ttl` is specified, the key-value pair will never
-   * expire. If both are set, `expiration_ttl` is used and `expiration` is ignored.
-   */
-  replace(
-    accountId: string,
-    namespaceId: string,
-    keyName: string,
-    body: ValueReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ValueReplaceResponse> {
-    return (
-      this._client.put(
-        `/accounts/${accountId}/storage/kv/namespaces/${namespaceId}/values/${keyName}`,
-        multipartFormRequestOptions({ body, ...options }),
-      ) as Core.APIPromise<{ result: ValueReplaceResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
+
+export type ValueUpdateResponse = unknown | string;
 
 export type ValueDeleteResponse = unknown | string;
 
@@ -74,9 +76,7 @@ export type ValueDeleteResponse = unknown | string;
  */
 export type ValueGetResponse = string;
 
-export type ValueReplaceResponse = unknown | string;
-
-export interface ValueReplaceParams {
+export interface ValueUpdateParams {
   /**
    * Arbitrary JSON to be associated with a key/value pair.
    */
@@ -89,8 +89,8 @@ export interface ValueReplaceParams {
 }
 
 export namespace Values {
+  export import ValueUpdateResponse = ValuesAPI.ValueUpdateResponse;
   export import ValueDeleteResponse = ValuesAPI.ValueDeleteResponse;
   export import ValueGetResponse = ValuesAPI.ValueGetResponse;
-  export import ValueReplaceResponse = ValuesAPI.ValueReplaceResponse;
-  export import ValueReplaceParams = ValuesAPI.ValueReplaceParams;
+  export import ValueUpdateParams = ValuesAPI.ValueUpdateParams;
 }

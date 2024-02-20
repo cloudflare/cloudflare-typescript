@@ -9,14 +9,14 @@ export class IPV6 extends APIResource {
    * Enable IPv6 on all subdomains that are Cloudflare enabled.
    * (https://support.cloudflare.com/hc/en-us/articles/200168586).
    */
-  update(
+  edit(
     zoneId: string,
-    body: IPV6UpdateParams,
+    body: IPV6EditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<IPV6UpdateResponse> {
+  ): Core.APIPromise<IPV6EditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/settings/ipv6`, { body, ...options }) as Core.APIPromise<{
-        result: IPV6UpdateResponse;
+        result: IPV6EditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -38,7 +38,7 @@ export class IPV6 extends APIResource {
  * Enable IPv6 on all subdomains that are Cloudflare enabled.
  * (https://support.cloudflare.com/hc/en-us/articles/200168586).
  */
-export interface IPV6UpdateResponse {
+export interface IPV6EditResponse {
   /**
    * ID of the zone setting.
    */
@@ -88,7 +88,7 @@ export interface IPV6GetResponse {
   modified_on?: string | null;
 }
 
-export interface IPV6UpdateParams {
+export interface IPV6EditParams {
   /**
    * Value of the zone setting.
    */
@@ -96,7 +96,7 @@ export interface IPV6UpdateParams {
 }
 
 export namespace IPV6 {
-  export import IPV6UpdateResponse = IPV6API.IPV6UpdateResponse;
+  export import IPV6EditResponse = IPV6API.IPV6EditResponse;
   export import IPV6GetResponse = IPV6API.IPV6GetResponse;
-  export import IPV6UpdateParams = IPV6API.IPV6UpdateParams;
+  export import IPV6EditParams = IPV6API.IPV6EditParams;
 }

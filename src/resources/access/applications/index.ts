@@ -2,24 +2,24 @@
 
 export {
   ApplicationCreateResponse,
+  ApplicationUpdateResponse,
   ApplicationListResponse,
   ApplicationDeleteResponse,
   ApplicationGetResponse,
-  ApplicationReplaceResponse,
   ApplicationRevokeTokensResponse,
   ApplicationCreateParams,
-  ApplicationReplaceParams,
+  ApplicationUpdateParams,
   Applications,
 } from './applications';
 export { CaCreateResponse, CaListResponse, CaDeleteResponse, CaGetResponse, Cas } from './cas';
 export {
   PolicyCreateResponse,
+  PolicyUpdateResponse,
   PolicyListResponse,
   PolicyDeleteResponse,
   PolicyGetResponse,
-  PolicyReplaceResponse,
   PolicyCreateParams,
-  PolicyReplaceParams,
+  PolicyUpdateParams,
   Policies,
 } from './policies';
 export { UserPolicyCheckListResponse, UserPolicyChecks } from './user-policy-checks';

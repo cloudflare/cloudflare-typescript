@@ -22,6 +22,23 @@ export class CustomPages extends APIResource {
   }
 
   /**
+   * Update a custom page
+   */
+  update(
+    identifier: string,
+    uuid: string,
+    body: CustomPageUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CustomPageUpdateResponse> {
+    return (
+      this._client.put(`/accounts/${identifier}/access/custom_pages/${uuid}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: CustomPageUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * List custom pages
    */
   list(identifier: string, options?: Core.RequestOptions): Core.APIPromise<CustomPageListResponse | null> {
@@ -61,26 +78,35 @@ export class CustomPages extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
-
-  /**
-   * Update a custom page
-   */
-  replace(
-    identifier: string,
-    uuid: string,
-    body: CustomPageReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomPageReplaceResponse> {
-    return (
-      this._client.put(`/accounts/${identifier}/access/custom_pages/${uuid}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: CustomPageReplaceResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 
 export interface CustomPageCreateResponse {
+  /**
+   * Custom page name.
+   */
+  name: string;
+
+  /**
+   * Custom page type.
+   */
+  type: 'identity_denied' | 'forbidden';
+
+  /**
+   * Number of apps the custom page is assigned to.
+   */
+  app_count?: number;
+
+  created_at?: string;
+
+  /**
+   * UUID
+   */
+  uid?: string;
+
+  updated_at?: string;
+}
+
+export interface CustomPageUpdateResponse {
   /**
    * Custom page name.
    */
@@ -174,32 +200,6 @@ export interface CustomPageGetResponse {
   updated_at?: string;
 }
 
-export interface CustomPageReplaceResponse {
-  /**
-   * Custom page name.
-   */
-  name: string;
-
-  /**
-   * Custom page type.
-   */
-  type: 'identity_denied' | 'forbidden';
-
-  /**
-   * Number of apps the custom page is assigned to.
-   */
-  app_count?: number;
-
-  created_at?: string;
-
-  /**
-   * UUID
-   */
-  uid?: string;
-
-  updated_at?: string;
-}
-
 export interface CustomPageCreateParams {
   /**
    * Custom page HTML.
@@ -222,7 +222,7 @@ export interface CustomPageCreateParams {
   app_count?: number;
 }
 
-export interface CustomPageReplaceParams {
+export interface CustomPageUpdateParams {
   /**
    * Custom page HTML.
    */
@@ -246,10 +246,10 @@ export interface CustomPageReplaceParams {
 
 export namespace CustomPages {
   export import CustomPageCreateResponse = CustomPagesAPI.CustomPageCreateResponse;
+  export import CustomPageUpdateResponse = CustomPagesAPI.CustomPageUpdateResponse;
   export import CustomPageListResponse = CustomPagesAPI.CustomPageListResponse;
   export import CustomPageDeleteResponse = CustomPagesAPI.CustomPageDeleteResponse;
   export import CustomPageGetResponse = CustomPagesAPI.CustomPageGetResponse;
-  export import CustomPageReplaceResponse = CustomPagesAPI.CustomPageReplaceResponse;
   export import CustomPageCreateParams = CustomPagesAPI.CustomPageCreateParams;
-  export import CustomPageReplaceParams = CustomPagesAPI.CustomPageReplaceParams;
+  export import CustomPageUpdateParams = CustomPagesAPI.CustomPageUpdateParams;
 }

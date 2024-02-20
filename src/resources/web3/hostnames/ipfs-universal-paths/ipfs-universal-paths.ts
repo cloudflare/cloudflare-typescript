@@ -9,7 +9,7 @@ export class IpfsUniversalPaths extends APIResource {
 
 export namespace IpfsUniversalPaths {
   export import ContentLists = ContentListsAPI.ContentLists;
+  export import ContentListUpdateResponse = ContentListsAPI.ContentListUpdateResponse;
   export import ContentListListResponse = ContentListsAPI.ContentListListResponse;
-  export import ContentListReplaceResponse = ContentListsAPI.ContentListReplaceResponse;
-  export import ContentListReplaceParams = ContentListsAPI.ContentListReplaceParams;
+  export import ContentListUpdateParams = ContentListsAPI.ContentListUpdateParams;
 }

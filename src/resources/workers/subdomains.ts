@@ -6,6 +6,21 @@ import * as SubdomainsAPI from 'cloudflare/resources/workers/subdomains';
 
 export class Subdomains extends APIResource {
   /**
+   * Creates a Workers subdomain for an account.
+   */
+  update(
+    accountId: string,
+    body: SubdomainUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SubdomainUpdateResponse> {
+    return (
+      this._client.put(`/accounts/${accountId}/workers/subdomain`, { body, ...options }) as Core.APIPromise<{
+        result: SubdomainUpdateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Returns a Workers subdomain for an account.
    */
   get(accountId: string, options?: Core.RequestOptions): Core.APIPromise<SubdomainGetResponse> {
@@ -15,35 +30,20 @@ export class Subdomains extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
 
-  /**
-   * Creates a Workers subdomain for an account.
-   */
-  replace(
-    accountId: string,
-    body: SubdomainReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SubdomainReplaceResponse> {
-    return (
-      this._client.put(`/accounts/${accountId}/workers/subdomain`, { body, ...options }) as Core.APIPromise<{
-        result: SubdomainReplaceResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
+export interface SubdomainUpdateResponse {
+  name?: unknown;
 }
 
 export interface SubdomainGetResponse {
   name?: unknown;
 }
 
-export interface SubdomainReplaceResponse {
-  name?: unknown;
-}
-
-export type SubdomainReplaceParams = unknown;
+export type SubdomainUpdateParams = unknown;
 
 export namespace Subdomains {
+  export import SubdomainUpdateResponse = SubdomainsAPI.SubdomainUpdateResponse;
   export import SubdomainGetResponse = SubdomainsAPI.SubdomainGetResponse;
-  export import SubdomainReplaceResponse = SubdomainsAPI.SubdomainReplaceResponse;
-  export import SubdomainReplaceParams = SubdomainsAPI.SubdomainReplaceParams;
+  export import SubdomainUpdateParams = SubdomainsAPI.SubdomainUpdateParams;
 }

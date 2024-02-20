@@ -9,7 +9,7 @@ export class BGPs extends APIResource {
 
 export namespace BGPs {
   export import Statuses = StatusesAPI.Statuses;
-  export import StatusUpdateResponse = StatusesAPI.StatusUpdateResponse;
+  export import StatusEditResponse = StatusesAPI.StatusEditResponse;
   export import StatusGetResponse = StatusesAPI.StatusGetResponse;
-  export import StatusUpdateParams = StatusesAPI.StatusUpdateParams;
+  export import StatusEditParams = StatusesAPI.StatusEditParams;
 }

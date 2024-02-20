@@ -2,14 +2,14 @@
 
 export {
   OutgoingCreateResponse,
+  OutgoingUpdateResponse,
   OutgoingDeleteResponse,
   OutgoingDisableResponse,
   OutgoingEnableResponse,
   OutgoingForceNotifyResponse,
   OutgoingGetResponse,
-  OutgoingReplaceResponse,
   OutgoingCreateParams,
-  OutgoingReplaceParams,
+  OutgoingUpdateParams,
   Outgoing,
 } from './outgoing';
 export { StatusGetResponse, Status } from './status';

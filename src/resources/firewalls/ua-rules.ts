@@ -24,6 +24,23 @@ export class UaRules extends APIResource {
   }
 
   /**
+   * Updates an existing User Agent Blocking rule.
+   */
+  update(
+    zoneIdentifier: string,
+    id: string,
+    body: UaRuleUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<UaRuleUpdateResponse | null> {
+    return (
+      this._client.put(`/zones/${zoneIdentifier}/firewall/ua_rules/${id}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: UaRuleUpdateResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Fetches User Agent Blocking rules in a zone. You can filter the results using
    * several optional parameters.
    */
@@ -80,28 +97,13 @@ export class UaRules extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
-
-  /**
-   * Updates an existing User Agent Blocking rule.
-   */
-  replace(
-    zoneIdentifier: string,
-    id: string,
-    body: UaRuleReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<UaRuleReplaceResponse | null> {
-    return (
-      this._client.put(`/zones/${zoneIdentifier}/firewall/ua_rules/${id}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: UaRuleReplaceResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 
 export class UaRuleListResponsesV4PagePaginationArray extends V4PagePaginationArray<UaRuleListResponse> {}
 
 export type UaRuleCreateResponse = unknown | string;
+
+export type UaRuleUpdateResponse = unknown | string;
 
 export interface UaRuleListResponse {
   /**
@@ -158,9 +160,9 @@ export interface UaRuleDeleteResponse {
 
 export type UaRuleGetResponse = unknown | string;
 
-export type UaRuleReplaceResponse = unknown | string;
-
 export type UaRuleCreateParams = unknown;
+
+export type UaRuleUpdateParams = unknown;
 
 export interface UaRuleListParams extends V4PagePaginationArrayParams {
   /**
@@ -179,16 +181,14 @@ export interface UaRuleListParams extends V4PagePaginationArrayParams {
   ua_search?: string;
 }
 
-export type UaRuleReplaceParams = unknown;
-
 export namespace UaRules {
   export import UaRuleCreateResponse = UaRulesAPI.UaRuleCreateResponse;
+  export import UaRuleUpdateResponse = UaRulesAPI.UaRuleUpdateResponse;
   export import UaRuleListResponse = UaRulesAPI.UaRuleListResponse;
   export import UaRuleDeleteResponse = UaRulesAPI.UaRuleDeleteResponse;
   export import UaRuleGetResponse = UaRulesAPI.UaRuleGetResponse;
-  export import UaRuleReplaceResponse = UaRulesAPI.UaRuleReplaceResponse;
   export import UaRuleListResponsesV4PagePaginationArray = UaRulesAPI.UaRuleListResponsesV4PagePaginationArray;
   export import UaRuleCreateParams = UaRulesAPI.UaRuleCreateParams;
+  export import UaRuleUpdateParams = UaRulesAPI.UaRuleUpdateParams;
   export import UaRuleListParams = UaRulesAPI.UaRuleListParams;
-  export import UaRuleReplaceParams = UaRulesAPI.UaRuleReplaceParams;
 }

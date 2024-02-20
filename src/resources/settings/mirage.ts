@@ -11,14 +11,14 @@ export class Mirage extends APIResource {
    * [blog post](http://blog.cloudflare.com/mirage2-solving-mobile-speed) for more
    * information.
    */
-  update(
+  edit(
     zoneId: string,
-    body: MirageUpdateParams,
+    body: MirageEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MirageUpdateResponse> {
+  ): Core.APIPromise<MirageEditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/settings/mirage`, { body, ...options }) as Core.APIPromise<{
-        result: MirageUpdateResponse;
+        result: MirageEditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -44,7 +44,7 @@ export class Mirage extends APIResource {
  * [our blog post](http://blog.cloudflare.com/mirage2-solving-mobile-speed) for
  * more information.
  */
-export interface MirageUpdateResponse {
+export interface MirageEditResponse {
   /**
    * ID of the zone setting.
    */
@@ -96,7 +96,7 @@ export interface MirageGetResponse {
   modified_on?: string | null;
 }
 
-export interface MirageUpdateParams {
+export interface MirageEditParams {
   /**
    * Value of the zone setting.
    */
@@ -104,7 +104,7 @@ export interface MirageUpdateParams {
 }
 
 export namespace Mirage {
-  export import MirageUpdateResponse = MirageAPI.MirageUpdateResponse;
+  export import MirageEditResponse = MirageAPI.MirageEditResponse;
   export import MirageGetResponse = MirageAPI.MirageGetResponse;
-  export import MirageUpdateParams = MirageAPI.MirageUpdateParams;
+  export import MirageEditParams = MirageAPI.MirageEditParams;
 }

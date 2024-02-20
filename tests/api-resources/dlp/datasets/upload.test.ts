@@ -38,8 +38,8 @@ describe('resource upload', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('update', async () => {
-    const responsePromise = cloudflare.dlp.datasets.upload.update(
+  test.skip('edit', async () => {
+    const responsePromise = cloudflare.dlp.datasets.upload.edit(
       'string',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       0,

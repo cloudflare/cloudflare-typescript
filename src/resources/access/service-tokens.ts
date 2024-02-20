@@ -25,6 +25,24 @@ export class ServiceTokens extends APIResource {
   }
 
   /**
+   * Updates a configured service token.
+   */
+  update(
+    accountOrZone: string,
+    accountOrZoneId: string,
+    uuid: string,
+    body: ServiceTokenUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ServiceTokenUpdateResponse> {
+    return (
+      this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/service_tokens/${uuid}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: ServiceTokenUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Lists all service tokens.
    */
   list(
@@ -74,24 +92,6 @@ export class ServiceTokens extends APIResource {
   }
 
   /**
-   * Updates a configured service token.
-   */
-  replace(
-    accountOrZone: string,
-    accountOrZoneId: string,
-    uuid: string,
-    body: ServiceTokenReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ServiceTokenReplaceResponse> {
-    return (
-      this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/service_tokens/${uuid}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: ServiceTokenReplaceResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Generates a new Client Secret for a service token and revokes the old one.
    */
   rotate(
@@ -125,6 +125,35 @@ export interface ServiceTokenCreateResponse {
    * `CF-Access-Client-Secret` request header.
    */
   client_secret?: string;
+
+  created_at?: string;
+
+  /**
+   * The duration for how long the service token will be valid. Must be in the format
+   * `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h. The
+   * default is 1 year in hours (8760h).
+   */
+  duration?: string;
+
+  /**
+   * The name of the service token.
+   */
+  name?: string;
+
+  updated_at?: string;
+}
+
+export interface ServiceTokenUpdateResponse {
+  /**
+   * The ID of the service token.
+   */
+  id?: unknown;
+
+  /**
+   * The Client ID for the service token. Access will check for this value in the
+   * `CF-Access-Client-ID` request header.
+   */
+  client_id?: string;
 
   created_at?: string;
 
@@ -234,35 +263,6 @@ export interface ServiceTokenRefreshResponse {
   updated_at?: string;
 }
 
-export interface ServiceTokenReplaceResponse {
-  /**
-   * The ID of the service token.
-   */
-  id?: unknown;
-
-  /**
-   * The Client ID for the service token. Access will check for this value in the
-   * `CF-Access-Client-ID` request header.
-   */
-  client_id?: string;
-
-  created_at?: string;
-
-  /**
-   * The duration for how long the service token will be valid. Must be in the format
-   * `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h. The
-   * default is 1 year in hours (8760h).
-   */
-  duration?: string;
-
-  /**
-   * The name of the service token.
-   */
-  name?: string;
-
-  updated_at?: string;
-}
-
 export interface ServiceTokenRotateResponse {
   /**
    * The ID of the service token.
@@ -312,7 +312,7 @@ export interface ServiceTokenCreateParams {
   duration?: string;
 }
 
-export interface ServiceTokenReplaceParams {
+export interface ServiceTokenUpdateParams {
   /**
    * The duration for how long the service token will be valid. Must be in the format
    * `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h. The
@@ -328,11 +328,11 @@ export interface ServiceTokenReplaceParams {
 
 export namespace ServiceTokens {
   export import ServiceTokenCreateResponse = ServiceTokensAPI.ServiceTokenCreateResponse;
+  export import ServiceTokenUpdateResponse = ServiceTokensAPI.ServiceTokenUpdateResponse;
   export import ServiceTokenListResponse = ServiceTokensAPI.ServiceTokenListResponse;
   export import ServiceTokenDeleteResponse = ServiceTokensAPI.ServiceTokenDeleteResponse;
   export import ServiceTokenRefreshResponse = ServiceTokensAPI.ServiceTokenRefreshResponse;
-  export import ServiceTokenReplaceResponse = ServiceTokensAPI.ServiceTokenReplaceResponse;
   export import ServiceTokenRotateResponse = ServiceTokensAPI.ServiceTokenRotateResponse;
   export import ServiceTokenCreateParams = ServiceTokensAPI.ServiceTokenCreateParams;
-  export import ServiceTokenReplaceParams = ServiceTokensAPI.ServiceTokenReplaceParams;
+  export import ServiceTokenUpdateParams = ServiceTokensAPI.ServiceTokenUpdateParams;
 }

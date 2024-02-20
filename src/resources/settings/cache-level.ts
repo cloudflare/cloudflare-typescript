@@ -12,14 +12,14 @@ export class CacheLevel extends APIResource {
    * aggressive setting will cache all static resources, including ones with a query
    * string. (https://support.cloudflare.com/hc/en-us/articles/200168256).
    */
-  update(
+  edit(
     zoneId: string,
-    body: CacheLevelUpdateParams,
+    body: CacheLevelEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CacheLevelUpdateResponse> {
+  ): Core.APIPromise<CacheLevelEditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/settings/cache_level`, { body, ...options }) as Core.APIPromise<{
-        result: CacheLevelUpdateResponse;
+        result: CacheLevelEditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -47,7 +47,7 @@ export class CacheLevel extends APIResource {
  * aggressive setting will cache all static resources, including ones with a query
  * string. (https://support.cloudflare.com/hc/en-us/articles/200168256).
  */
-export interface CacheLevelUpdateResponse {
+export interface CacheLevelEditResponse {
   /**
    * ID of the zone setting.
    */
@@ -100,7 +100,7 @@ export interface CacheLevelGetResponse {
   modified_on?: string | null;
 }
 
-export interface CacheLevelUpdateParams {
+export interface CacheLevelEditParams {
   /**
    * Value of the zone setting.
    */
@@ -108,7 +108,7 @@ export interface CacheLevelUpdateParams {
 }
 
 export namespace CacheLevel {
-  export import CacheLevelUpdateResponse = CacheLevelAPI.CacheLevelUpdateResponse;
+  export import CacheLevelEditResponse = CacheLevelAPI.CacheLevelEditResponse;
   export import CacheLevelGetResponse = CacheLevelAPI.CacheLevelGetResponse;
-  export import CacheLevelUpdateParams = CacheLevelAPI.CacheLevelUpdateParams;
+  export import CacheLevelEditParams = CacheLevelAPI.CacheLevelEditParams;
 }

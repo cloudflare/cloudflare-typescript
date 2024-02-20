@@ -8,14 +8,14 @@ export class TieredCaching extends APIResource {
   /**
    * Updates enablement of Tiered Caching
    */
-  update(
+  edit(
     zoneId: string,
-    body: TieredCachingUpdateParams,
+    body: TieredCachingEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TieredCachingUpdateResponse> {
+  ): Core.APIPromise<TieredCachingEditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/argo/tiered_caching`, { body, ...options }) as Core.APIPromise<{
-        result: TieredCachingUpdateResponse;
+        result: TieredCachingEditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -32,11 +32,11 @@ export class TieredCaching extends APIResource {
   }
 }
 
-export type TieredCachingUpdateResponse = unknown | string | null;
+export type TieredCachingEditResponse = unknown | string | null;
 
 export type TieredCachingGetResponse = unknown | string | null;
 
-export interface TieredCachingUpdateParams {
+export interface TieredCachingEditParams {
   /**
    * Enables Tiered Caching.
    */
@@ -44,7 +44,7 @@ export interface TieredCachingUpdateParams {
 }
 
 export namespace TieredCaching {
-  export import TieredCachingUpdateResponse = TieredCachingAPI.TieredCachingUpdateResponse;
+  export import TieredCachingEditResponse = TieredCachingAPI.TieredCachingEditResponse;
   export import TieredCachingGetResponse = TieredCachingAPI.TieredCachingGetResponse;
-  export import TieredCachingUpdateParams = TieredCachingAPI.TieredCachingUpdateParams;
+  export import TieredCachingEditParams = TieredCachingAPI.TieredCachingEditParams;
 }

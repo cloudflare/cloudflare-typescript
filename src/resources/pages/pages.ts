@@ -10,11 +10,11 @@ export class Pages extends APIResource {
 export namespace Pages {
   export import Projects = ProjectsAPI.Projects;
   export import ProjectCreateResponse = ProjectsAPI.ProjectCreateResponse;
-  export import ProjectUpdateResponse = ProjectsAPI.ProjectUpdateResponse;
   export import ProjectListResponse = ProjectsAPI.ProjectListResponse;
   export import ProjectDeleteResponse = ProjectsAPI.ProjectDeleteResponse;
+  export import ProjectEditResponse = ProjectsAPI.ProjectEditResponse;
   export import ProjectGetResponse = ProjectsAPI.ProjectGetResponse;
   export import ProjectPurgeBuildCacheResponse = ProjectsAPI.ProjectPurgeBuildCacheResponse;
   export import ProjectCreateParams = ProjectsAPI.ProjectCreateParams;
-  export import ProjectUpdateParams = ProjectsAPI.ProjectUpdateParams;
+  export import ProjectEditParams = ProjectsAPI.ProjectEditParams;
 }

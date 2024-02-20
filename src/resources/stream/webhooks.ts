@@ -6,6 +6,21 @@ import * as WebhooksAPI from 'cloudflare/resources/stream/webhooks';
 
 export class Webhooks extends APIResource {
   /**
+   * Creates a webhook notification.
+   */
+  update(
+    accountId: string,
+    body: WebhookUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<WebhookUpdateResponse> {
+    return (
+      this._client.put(`/accounts/${accountId}/stream/webhook`, { body, ...options }) as Core.APIPromise<{
+        result: WebhookUpdateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Deletes a webhook.
    */
   delete(accountId: string, options?: Core.RequestOptions): Core.APIPromise<WebhookDeleteResponse> {
@@ -26,30 +41,15 @@ export class Webhooks extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
-
-  /**
-   * Creates a webhook notification.
-   */
-  replace(
-    accountId: string,
-    body: WebhookReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<WebhookReplaceResponse> {
-    return (
-      this._client.put(`/accounts/${accountId}/stream/webhook`, { body, ...options }) as Core.APIPromise<{
-        result: WebhookReplaceResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
+
+export type WebhookUpdateResponse = unknown | string;
 
 export type WebhookDeleteResponse = unknown | string;
 
 export type WebhookGetResponse = unknown | string;
 
-export type WebhookReplaceResponse = unknown | string;
-
-export interface WebhookReplaceParams {
+export interface WebhookUpdateParams {
   /**
    * The URL where webhooks will be sent.
    */
@@ -57,8 +57,8 @@ export interface WebhookReplaceParams {
 }
 
 export namespace Webhooks {
+  export import WebhookUpdateResponse = WebhooksAPI.WebhookUpdateResponse;
   export import WebhookDeleteResponse = WebhooksAPI.WebhookDeleteResponse;
   export import WebhookGetResponse = WebhooksAPI.WebhookGetResponse;
-  export import WebhookReplaceResponse = WebhooksAPI.WebhookReplaceResponse;
-  export import WebhookReplaceParams = WebhooksAPI.WebhookReplaceParams;
+  export import WebhookUpdateParams = WebhooksAPI.WebhookUpdateParams;
 }

@@ -23,6 +23,24 @@ export class Routes extends APIResource {
   }
 
   /**
+   * Update a specific Magic static route. Use `?validate_only=true` as an optional
+   * query parameter to run validation only without persisting changes.
+   */
+  update(
+    accountIdentifier: string,
+    routeIdentifier: string,
+    body: RouteUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RouteUpdateResponse> {
+    return (
+      this._client.put(`/accounts/${accountIdentifier}/magic/routes/${routeIdentifier}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: RouteUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Disable and remove a specific Magic static route.
    */
   delete(
@@ -65,24 +83,6 @@ export class Routes extends APIResource {
       this._client.get(`/accounts/${accountIdentifier}/magic/routes`, options) as Core.APIPromise<{
         result: RouteMagicStaticRoutesListRoutesResponse;
       }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Update a specific Magic static route. Use `?validate_only=true` as an optional
-   * query parameter to run validation only without persisting changes.
-   */
-  replace(
-    accountIdentifier: string,
-    routeIdentifier: string,
-    body: RouteReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RouteReplaceResponse> {
-    return (
-      this._client.put(`/accounts/${accountIdentifier}/magic/routes/${routeIdentifier}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: RouteReplaceResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -155,6 +155,12 @@ export namespace RouteCreateResponse {
       colo_regions?: Array<string>;
     }
   }
+}
+
+export interface RouteUpdateResponse {
+  modified?: boolean;
+
+  modified_route?: unknown;
 }
 
 export interface RouteDeleteResponse {
@@ -237,15 +243,9 @@ export namespace RouteMagicStaticRoutesListRoutesResponse {
   }
 }
 
-export interface RouteReplaceResponse {
-  modified?: boolean;
-
-  modified_route?: unknown;
-}
-
 export type RouteCreateParams = unknown;
 
-export interface RouteReplaceParams {
+export interface RouteUpdateParams {
   /**
    * The next-hop IP Address for the static route.
    */
@@ -269,7 +269,7 @@ export interface RouteReplaceParams {
   /**
    * Used only for ECMP routes.
    */
-  scope?: RouteReplaceParams.Scope;
+  scope?: RouteUpdateParams.Scope;
 
   /**
    * Optional weight of the ECMP scope - if provided.
@@ -277,7 +277,7 @@ export interface RouteReplaceParams {
   weight?: number;
 }
 
-export namespace RouteReplaceParams {
+export namespace RouteUpdateParams {
   /**
    * Used only for ECMP routes.
    */
@@ -296,10 +296,10 @@ export namespace RouteReplaceParams {
 
 export namespace Routes {
   export import RouteCreateResponse = RoutesAPI.RouteCreateResponse;
+  export import RouteUpdateResponse = RoutesAPI.RouteUpdateResponse;
   export import RouteDeleteResponse = RoutesAPI.RouteDeleteResponse;
   export import RouteGetResponse = RoutesAPI.RouteGetResponse;
   export import RouteMagicStaticRoutesListRoutesResponse = RoutesAPI.RouteMagicStaticRoutesListRoutesResponse;
-  export import RouteReplaceResponse = RoutesAPI.RouteReplaceResponse;
   export import RouteCreateParams = RoutesAPI.RouteCreateParams;
-  export import RouteReplaceParams = RoutesAPI.RouteReplaceParams;
+  export import RouteUpdateParams = RoutesAPI.RouteUpdateParams;
 }

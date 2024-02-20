@@ -10,14 +10,14 @@ export class Websocket extends APIResource {
    * to
    * [Using Cloudflare with WebSockets](https://support.cloudflare.com/hc/en-us/articles/200169466-Using-Cloudflare-with-WebSockets).
    */
-  update(
+  edit(
     zoneId: string,
-    body: WebsocketUpdateParams,
+    body: WebsocketEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WebsocketUpdateResponse> {
+  ): Core.APIPromise<WebsocketEditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/settings/websockets`, { body, ...options }) as Core.APIPromise<{
-        result: WebsocketUpdateResponse;
+        result: WebsocketEditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -44,7 +44,7 @@ export class Websocket extends APIResource {
  * to
  * [Can I use Cloudflare with Websockets](https://support.cloudflare.com/hc/en-us/articles/200169466-Can-I-use-Cloudflare-with-WebSockets-).
  */
-export interface WebsocketUpdateResponse {
+export interface WebsocketEditResponse {
   /**
    * ID of the zone setting.
    */
@@ -99,7 +99,7 @@ export interface WebsocketGetResponse {
   modified_on?: string | null;
 }
 
-export interface WebsocketUpdateParams {
+export interface WebsocketEditParams {
   /**
    * Value of the zone setting.
    */
@@ -107,7 +107,7 @@ export interface WebsocketUpdateParams {
 }
 
 export namespace Websocket {
-  export import WebsocketUpdateResponse = WebsocketAPI.WebsocketUpdateResponse;
+  export import WebsocketEditResponse = WebsocketAPI.WebsocketEditResponse;
   export import WebsocketGetResponse = WebsocketAPI.WebsocketGetResponse;
-  export import WebsocketUpdateParams = WebsocketAPI.WebsocketUpdateParams;
+  export import WebsocketEditParams = WebsocketAPI.WebsocketEditParams;
 }

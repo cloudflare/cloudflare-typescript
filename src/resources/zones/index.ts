@@ -10,13 +10,13 @@ export {
 } from './holds';
 export {
   ZoneCreateResponse,
-  ZoneUpdateResponse,
   ZoneListResponse,
   ZoneDeleteResponse,
+  ZoneEditResponse,
   ZoneGetResponse,
   ZoneCreateParams,
-  ZoneUpdateParams,
   ZoneListParams,
+  ZoneEditParams,
   ZoneListResponsesV4PagePaginationArray,
   Zones,
 } from './zones';

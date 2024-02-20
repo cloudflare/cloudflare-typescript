@@ -24,6 +24,21 @@ export class Outgoing extends APIResource {
   }
 
   /**
+   * Update primary zone configuration for outgoing zone transfers.
+   */
+  update(
+    zoneId: unknown,
+    body: OutgoingUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<OutgoingUpdateResponse> {
+    return (
+      this._client.put(`/zones/${zoneId}/secondary_dns/outgoing`, { body, ...options }) as Core.APIPromise<{
+        result: OutgoingUpdateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Delete primary zone configuration for outgoing zone transfers.
    */
   delete(zoneId: unknown, options?: Core.RequestOptions): Core.APIPromise<OutgoingDeleteResponse> {
@@ -78,24 +93,43 @@ export class Outgoing extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
-
-  /**
-   * Update primary zone configuration for outgoing zone transfers.
-   */
-  replace(
-    zoneId: unknown,
-    body: OutgoingReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OutgoingReplaceResponse> {
-    return (
-      this._client.put(`/zones/${zoneId}/secondary_dns/outgoing`, { body, ...options }) as Core.APIPromise<{
-        result: OutgoingReplaceResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 
 export interface OutgoingCreateResponse {
+  id?: unknown;
+
+  /**
+   * The time for a specific event.
+   */
+  checked_time?: string;
+
+  /**
+   * The time for a specific event.
+   */
+  created_time?: string;
+
+  /**
+   * The time for a specific event.
+   */
+  last_transferred_time?: string;
+
+  /**
+   * Zone name.
+   */
+  name?: string;
+
+  /**
+   * A list of peer tags.
+   */
+  peers?: Array<unknown>;
+
+  /**
+   * The serial number of the SOA for the given zone.
+   */
+  soa_serial?: number;
+}
+
+export interface OutgoingUpdateResponse {
   id?: unknown;
 
   /**
@@ -183,40 +217,6 @@ export interface OutgoingGetResponse {
   soa_serial?: number;
 }
 
-export interface OutgoingReplaceResponse {
-  id?: unknown;
-
-  /**
-   * The time for a specific event.
-   */
-  checked_time?: string;
-
-  /**
-   * The time for a specific event.
-   */
-  created_time?: string;
-
-  /**
-   * The time for a specific event.
-   */
-  last_transferred_time?: string;
-
-  /**
-   * Zone name.
-   */
-  name?: string;
-
-  /**
-   * A list of peer tags.
-   */
-  peers?: Array<unknown>;
-
-  /**
-   * The serial number of the SOA for the given zone.
-   */
-  soa_serial?: number;
-}
-
 export interface OutgoingCreateParams {
   /**
    * Zone name.
@@ -229,7 +229,7 @@ export interface OutgoingCreateParams {
   peers: Array<unknown>;
 }
 
-export interface OutgoingReplaceParams {
+export interface OutgoingUpdateParams {
   /**
    * Zone name.
    */
@@ -243,14 +243,14 @@ export interface OutgoingReplaceParams {
 
 export namespace Outgoing {
   export import OutgoingCreateResponse = OutgoingAPI.OutgoingCreateResponse;
+  export import OutgoingUpdateResponse = OutgoingAPI.OutgoingUpdateResponse;
   export import OutgoingDeleteResponse = OutgoingAPI.OutgoingDeleteResponse;
   export import OutgoingDisableResponse = OutgoingAPI.OutgoingDisableResponse;
   export import OutgoingEnableResponse = OutgoingAPI.OutgoingEnableResponse;
   export import OutgoingForceNotifyResponse = OutgoingAPI.OutgoingForceNotifyResponse;
   export import OutgoingGetResponse = OutgoingAPI.OutgoingGetResponse;
-  export import OutgoingReplaceResponse = OutgoingAPI.OutgoingReplaceResponse;
   export import OutgoingCreateParams = OutgoingAPI.OutgoingCreateParams;
-  export import OutgoingReplaceParams = OutgoingAPI.OutgoingReplaceParams;
+  export import OutgoingUpdateParams = OutgoingAPI.OutgoingUpdateParams;
   export import Status = StatusAPI.Status;
   export import StatusGetResponse = StatusAPI.StatusGetResponse;
 }

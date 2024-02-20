@@ -12,14 +12,14 @@ export class BrowserCheck extends APIResource {
    * agent (also commonly used by abuse bots, crawlers or visitors).
    * (https://support.cloudflare.com/hc/en-us/articles/200170086).
    */
-  update(
+  edit(
     zoneId: string,
-    body: BrowserCheckUpdateParams,
+    body: BrowserCheckEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<BrowserCheckUpdateResponse> {
+  ): Core.APIPromise<BrowserCheckEditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/settings/browser_check`, { body, ...options }) as Core.APIPromise<{
-        result: BrowserCheckUpdateResponse;
+        result: BrowserCheckEditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -47,7 +47,7 @@ export class BrowserCheck extends APIResource {
  * agent (also commonly used by abuse bots, crawlers or visitors).
  * (https://support.cloudflare.com/hc/en-us/articles/200170086).
  */
-export interface BrowserCheckUpdateResponse {
+export interface BrowserCheckEditResponse {
   /**
    * ID of the zone setting.
    */
@@ -100,7 +100,7 @@ export interface BrowserCheckGetResponse {
   modified_on?: string | null;
 }
 
-export interface BrowserCheckUpdateParams {
+export interface BrowserCheckEditParams {
   /**
    * Value of the zone setting.
    */
@@ -108,7 +108,7 @@ export interface BrowserCheckUpdateParams {
 }
 
 export namespace BrowserCheck {
-  export import BrowserCheckUpdateResponse = BrowserCheckAPI.BrowserCheckUpdateResponse;
+  export import BrowserCheckEditResponse = BrowserCheckAPI.BrowserCheckEditResponse;
   export import BrowserCheckGetResponse = BrowserCheckAPI.BrowserCheckGetResponse;
-  export import BrowserCheckUpdateParams = BrowserCheckAPI.BrowserCheckUpdateParams;
+  export import BrowserCheckEditParams = BrowserCheckAPI.BrowserCheckEditParams;
 }

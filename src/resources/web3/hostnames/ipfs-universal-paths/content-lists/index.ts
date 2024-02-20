@@ -1,18 +1,18 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
+  ContentListUpdateResponse,
   ContentListListResponse,
-  ContentListReplaceResponse,
-  ContentListReplaceParams,
+  ContentListUpdateParams,
   ContentLists,
 } from './content-lists';
 export {
   EntryCreateResponse,
+  EntryUpdateResponse,
   EntryListResponse,
   EntryDeleteResponse,
   EntryGetResponse,
-  EntryReplaceResponse,
   EntryCreateParams,
-  EntryReplaceParams,
+  EntryUpdateParams,
   Entries,
 } from './entries';

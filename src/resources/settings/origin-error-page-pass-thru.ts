@@ -10,16 +10,16 @@ export class OriginErrorPagePassThru extends APIResource {
    * server instead of showing a default Cloudflare error page. This does not apply
    * to 522 errors and is limited to Enterprise Zones.
    */
-  update(
+  edit(
     zoneId: string,
-    body: OriginErrorPagePassThruUpdateParams,
+    body: OriginErrorPagePassThruEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<OriginErrorPagePassThruUpdateResponse> {
+  ): Core.APIPromise<OriginErrorPagePassThruEditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/settings/origin_error_page_pass_thru`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: OriginErrorPagePassThruUpdateResponse }>
+      }) as Core.APIPromise<{ result: OriginErrorPagePassThruEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -42,7 +42,7 @@ export class OriginErrorPagePassThru extends APIResource {
  * server instead of showing a default Cloudflare error page. This does not apply
  * to 522 errors and is limited to Enterprise Zones.
  */
-export interface OriginErrorPagePassThruUpdateResponse {
+export interface OriginErrorPagePassThruEditResponse {
   /**
    * ID of the zone setting.
    */
@@ -93,7 +93,7 @@ export interface OriginErrorPagePassThruGetResponse {
   modified_on?: string | null;
 }
 
-export interface OriginErrorPagePassThruUpdateParams {
+export interface OriginErrorPagePassThruEditParams {
   /**
    * Value of the zone setting.
    */
@@ -101,7 +101,7 @@ export interface OriginErrorPagePassThruUpdateParams {
 }
 
 export namespace OriginErrorPagePassThru {
-  export import OriginErrorPagePassThruUpdateResponse = OriginErrorPagePassThruAPI.OriginErrorPagePassThruUpdateResponse;
+  export import OriginErrorPagePassThruEditResponse = OriginErrorPagePassThruAPI.OriginErrorPagePassThruEditResponse;
   export import OriginErrorPagePassThruGetResponse = OriginErrorPagePassThruAPI.OriginErrorPagePassThruGetResponse;
-  export import OriginErrorPagePassThruUpdateParams = OriginErrorPagePassThruAPI.OriginErrorPagePassThruUpdateParams;
+  export import OriginErrorPagePassThruEditParams = OriginErrorPagePassThruAPI.OriginErrorPagePassThruEditParams;
 }

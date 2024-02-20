@@ -21,10 +21,10 @@ export namespace Destinations {
   export import PagerdutyLinkResponse = PagerdutyAPI.PagerdutyLinkResponse;
   export import Webhooks = WebhooksAPI.Webhooks;
   export import WebhookCreateResponse = WebhooksAPI.WebhookCreateResponse;
+  export import WebhookUpdateResponse = WebhooksAPI.WebhookUpdateResponse;
   export import WebhookListResponse = WebhooksAPI.WebhookListResponse;
   export import WebhookDeleteResponse = WebhooksAPI.WebhookDeleteResponse;
   export import WebhookGetResponse = WebhooksAPI.WebhookGetResponse;
-  export import WebhookReplaceResponse = WebhooksAPI.WebhookReplaceResponse;
   export import WebhookCreateParams = WebhooksAPI.WebhookCreateParams;
-  export import WebhookReplaceParams = WebhooksAPI.WebhookReplaceParams;
+  export import WebhookUpdateParams = WebhooksAPI.WebhookUpdateParams;
 }

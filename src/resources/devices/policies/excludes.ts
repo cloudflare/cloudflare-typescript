@@ -6,6 +6,22 @@ import * as ExcludesAPI from 'cloudflare/resources/devices/policies/excludes';
 
 export class Excludes extends APIResource {
   /**
+   * Sets the list of routes excluded from the WARP client's tunnel.
+   */
+  update(
+    identifier: unknown,
+    body: ExcludeUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ExcludeUpdateResponse | null> {
+    return (
+      this._client.put(`/accounts/${identifier}/devices/policy/exclude`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: ExcludeUpdateResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Fetches the list of routes excluded from the WARP client's tunnel.
    */
   list(identifier: unknown, options?: Core.RequestOptions): Core.APIPromise<ExcludeListResponse | null> {
@@ -15,21 +31,28 @@ export class Excludes extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
 
-  /**
-   * Sets the list of routes excluded from the WARP client's tunnel.
-   */
-  replace(
-    identifier: unknown,
-    body: ExcludeReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ExcludeReplaceResponse | null> {
-    return (
-      this._client.put(`/accounts/${identifier}/devices/policy/exclude`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: ExcludeReplaceResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+export type ExcludeUpdateResponse = Array<ExcludeUpdateResponse.ExcludeUpdateResponseItem>;
+
+export namespace ExcludeUpdateResponse {
+  export interface ExcludeUpdateResponseItem {
+    /**
+     * The address in CIDR format to exclude from the tunnel. If `address` is present,
+     * `host` must not be present.
+     */
+    address: string;
+
+    /**
+     * A description of the Split Tunnel item, displayed in the client UI.
+     */
+    description: string;
+
+    /**
+     * The domain name to exclude from the tunnel. If `host` is present, `address` must
+     * not be present.
+     */
+    host?: string;
   }
 }
 
@@ -56,32 +79,9 @@ export namespace ExcludeListResponse {
   }
 }
 
-export type ExcludeReplaceResponse = Array<ExcludeReplaceResponse.ExcludeReplaceResponseItem>;
+export type ExcludeUpdateParams = Array<ExcludeUpdateParams.Body>;
 
-export namespace ExcludeReplaceResponse {
-  export interface ExcludeReplaceResponseItem {
-    /**
-     * The address in CIDR format to exclude from the tunnel. If `address` is present,
-     * `host` must not be present.
-     */
-    address: string;
-
-    /**
-     * A description of the Split Tunnel item, displayed in the client UI.
-     */
-    description: string;
-
-    /**
-     * The domain name to exclude from the tunnel. If `host` is present, `address` must
-     * not be present.
-     */
-    host?: string;
-  }
-}
-
-export type ExcludeReplaceParams = Array<ExcludeReplaceParams.Body>;
-
-export namespace ExcludeReplaceParams {
+export namespace ExcludeUpdateParams {
   export interface Body {
     /**
      * The address in CIDR format to exclude from the tunnel. If `address` is present,
@@ -103,7 +103,7 @@ export namespace ExcludeReplaceParams {
 }
 
 export namespace Excludes {
+  export import ExcludeUpdateResponse = ExcludesAPI.ExcludeUpdateResponse;
   export import ExcludeListResponse = ExcludesAPI.ExcludeListResponse;
-  export import ExcludeReplaceResponse = ExcludesAPI.ExcludeReplaceResponse;
-  export import ExcludeReplaceParams = ExcludesAPI.ExcludeReplaceParams;
+  export import ExcludeUpdateParams = ExcludesAPI.ExcludeUpdateParams;
 }

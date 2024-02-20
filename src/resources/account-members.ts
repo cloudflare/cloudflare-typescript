@@ -23,6 +23,23 @@ export class AccountMembers extends APIResource {
   }
 
   /**
+   * Modify an account member.
+   */
+  update(
+    accountId: unknown,
+    memberId: string,
+    body: AccountMemberUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AccountMemberUpdateResponse> {
+    return (
+      this._client.put(`/accounts/${accountId}/members/${memberId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: AccountMemberUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * List all members of an account.
    */
   list(
@@ -78,23 +95,6 @@ export class AccountMembers extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
-
-  /**
-   * Modify an account member.
-   */
-  replace(
-    accountId: unknown,
-    memberId: string,
-    body: AccountMemberReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AccountMemberReplaceResponse> {
-    return (
-      this._client.put(`/accounts/${accountId}/members/${memberId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: AccountMemberReplaceResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 
 export class AccountMemberListResponsesV4PagePaginationArray extends V4PagePaginationArray<AccountMemberListResponse> {}
@@ -121,6 +121,173 @@ export interface AccountMemberCreateResponse {
 }
 
 export namespace AccountMemberCreateResponse {
+  export interface Role {
+    /**
+     * Role identifier tag.
+     */
+    id: string;
+
+    /**
+     * Description of role's permissions.
+     */
+    description: string;
+
+    /**
+     * Role name.
+     */
+    name: string;
+
+    permissions: Role.Permissions;
+  }
+
+  export namespace Role {
+    export interface Permissions {
+      analytics?: Permissions.Analytics;
+
+      billing?: Permissions.Billing;
+
+      cache_purge?: Permissions.CachePurge;
+
+      dns?: Permissions.DNS;
+
+      dns_records?: Permissions.DNSRecords;
+
+      lb?: Permissions.Lb;
+
+      logs?: Permissions.Logs;
+
+      organization?: Permissions.Organization;
+
+      ssl?: Permissions.SSL;
+
+      waf?: Permissions.WAF;
+
+      zone_settings?: Permissions.ZoneSettings;
+
+      zones?: Permissions.Zones;
+    }
+
+    export namespace Permissions {
+      export interface Analytics {
+        read?: boolean;
+
+        write?: boolean;
+      }
+
+      export interface Billing {
+        read?: boolean;
+
+        write?: boolean;
+      }
+
+      export interface CachePurge {
+        read?: boolean;
+
+        write?: boolean;
+      }
+
+      export interface DNS {
+        read?: boolean;
+
+        write?: boolean;
+      }
+
+      export interface DNSRecords {
+        read?: boolean;
+
+        write?: boolean;
+      }
+
+      export interface Lb {
+        read?: boolean;
+
+        write?: boolean;
+      }
+
+      export interface Logs {
+        read?: boolean;
+
+        write?: boolean;
+      }
+
+      export interface Organization {
+        read?: boolean;
+
+        write?: boolean;
+      }
+
+      export interface SSL {
+        read?: boolean;
+
+        write?: boolean;
+      }
+
+      export interface WAF {
+        read?: boolean;
+
+        write?: boolean;
+      }
+
+      export interface ZoneSettings {
+        read?: boolean;
+
+        write?: boolean;
+      }
+
+      export interface Zones {
+        read?: boolean;
+
+        write?: boolean;
+      }
+    }
+  }
+
+  export interface User {
+    /**
+     * The contact email address of the user.
+     */
+    email: string;
+
+    /**
+     * Identifier
+     */
+    id?: string;
+
+    /**
+     * User's first name
+     */
+    first_name?: string | null;
+
+    /**
+     * User's last name
+     */
+    last_name?: string | null;
+
+    /**
+     * Indicates whether two-factor authentication is enabled for the user account.
+     * Does not apply to API authentication.
+     */
+    two_factor_authentication_enabled?: boolean;
+  }
+}
+
+export interface AccountMemberUpdateResponse {
+  /**
+   * Membership identifier tag.
+   */
+  id: string;
+
+  /**
+   * Roles assigned to this member.
+   */
+  roles: Array<AccountMemberUpdateResponse.Role>;
+
+  status: unknown;
+
+  user: AccountMemberUpdateResponse.User;
+}
+
+export namespace AccountMemberUpdateResponse {
   export interface Role {
     /**
      * Role identifier tag.
@@ -496,173 +663,6 @@ export namespace AccountMemberGetResponse {
   }
 }
 
-export interface AccountMemberReplaceResponse {
-  /**
-   * Membership identifier tag.
-   */
-  id: string;
-
-  /**
-   * Roles assigned to this member.
-   */
-  roles: Array<AccountMemberReplaceResponse.Role>;
-
-  status: unknown;
-
-  user: AccountMemberReplaceResponse.User;
-}
-
-export namespace AccountMemberReplaceResponse {
-  export interface Role {
-    /**
-     * Role identifier tag.
-     */
-    id: string;
-
-    /**
-     * Description of role's permissions.
-     */
-    description: string;
-
-    /**
-     * Role name.
-     */
-    name: string;
-
-    permissions: Role.Permissions;
-  }
-
-  export namespace Role {
-    export interface Permissions {
-      analytics?: Permissions.Analytics;
-
-      billing?: Permissions.Billing;
-
-      cache_purge?: Permissions.CachePurge;
-
-      dns?: Permissions.DNS;
-
-      dns_records?: Permissions.DNSRecords;
-
-      lb?: Permissions.Lb;
-
-      logs?: Permissions.Logs;
-
-      organization?: Permissions.Organization;
-
-      ssl?: Permissions.SSL;
-
-      waf?: Permissions.WAF;
-
-      zone_settings?: Permissions.ZoneSettings;
-
-      zones?: Permissions.Zones;
-    }
-
-    export namespace Permissions {
-      export interface Analytics {
-        read?: boolean;
-
-        write?: boolean;
-      }
-
-      export interface Billing {
-        read?: boolean;
-
-        write?: boolean;
-      }
-
-      export interface CachePurge {
-        read?: boolean;
-
-        write?: boolean;
-      }
-
-      export interface DNS {
-        read?: boolean;
-
-        write?: boolean;
-      }
-
-      export interface DNSRecords {
-        read?: boolean;
-
-        write?: boolean;
-      }
-
-      export interface Lb {
-        read?: boolean;
-
-        write?: boolean;
-      }
-
-      export interface Logs {
-        read?: boolean;
-
-        write?: boolean;
-      }
-
-      export interface Organization {
-        read?: boolean;
-
-        write?: boolean;
-      }
-
-      export interface SSL {
-        read?: boolean;
-
-        write?: boolean;
-      }
-
-      export interface WAF {
-        read?: boolean;
-
-        write?: boolean;
-      }
-
-      export interface ZoneSettings {
-        read?: boolean;
-
-        write?: boolean;
-      }
-
-      export interface Zones {
-        read?: boolean;
-
-        write?: boolean;
-      }
-    }
-  }
-
-  export interface User {
-    /**
-     * The contact email address of the user.
-     */
-    email: string;
-
-    /**
-     * Identifier
-     */
-    id?: string;
-
-    /**
-     * User's first name
-     */
-    first_name?: string | null;
-
-    /**
-     * User's last name
-     */
-    last_name?: string | null;
-
-    /**
-     * Indicates whether two-factor authentication is enabled for the user account.
-     * Does not apply to API authentication.
-     */
-    two_factor_authentication_enabled?: boolean;
-  }
-}
-
 export interface AccountMemberCreateParams {
   /**
    * The contact email address of the user.
@@ -675,6 +675,22 @@ export interface AccountMemberCreateParams {
   roles: Array<string>;
 
   status?: 'accepted' | 'pending';
+}
+
+export interface AccountMemberUpdateParams {
+  /**
+   * Roles assigned to this member.
+   */
+  roles: Array<AccountMemberUpdateParams.Role>;
+}
+
+export namespace AccountMemberUpdateParams {
+  export interface Role {
+    /**
+     * Role identifier tag.
+     */
+    id: string;
+  }
 }
 
 export interface AccountMemberListParams extends V4PagePaginationArrayParams {
@@ -694,30 +710,14 @@ export interface AccountMemberListParams extends V4PagePaginationArrayParams {
   status?: 'accepted' | 'pending' | 'rejected';
 }
 
-export interface AccountMemberReplaceParams {
-  /**
-   * Roles assigned to this member.
-   */
-  roles: Array<AccountMemberReplaceParams.Role>;
-}
-
-export namespace AccountMemberReplaceParams {
-  export interface Role {
-    /**
-     * Role identifier tag.
-     */
-    id: string;
-  }
-}
-
 export namespace AccountMembers {
   export import AccountMemberCreateResponse = AccountMembersAPI.AccountMemberCreateResponse;
+  export import AccountMemberUpdateResponse = AccountMembersAPI.AccountMemberUpdateResponse;
   export import AccountMemberListResponse = AccountMembersAPI.AccountMemberListResponse;
   export import AccountMemberDeleteResponse = AccountMembersAPI.AccountMemberDeleteResponse;
   export import AccountMemberGetResponse = AccountMembersAPI.AccountMemberGetResponse;
-  export import AccountMemberReplaceResponse = AccountMembersAPI.AccountMemberReplaceResponse;
   export import AccountMemberListResponsesV4PagePaginationArray = AccountMembersAPI.AccountMemberListResponsesV4PagePaginationArray;
   export import AccountMemberCreateParams = AccountMembersAPI.AccountMemberCreateParams;
+  export import AccountMemberUpdateParams = AccountMembersAPI.AccountMemberUpdateParams;
   export import AccountMemberListParams = AccountMembersAPI.AccountMemberListParams;
-  export import AccountMemberReplaceParams = AccountMembersAPI.AccountMemberReplaceParams;
 }

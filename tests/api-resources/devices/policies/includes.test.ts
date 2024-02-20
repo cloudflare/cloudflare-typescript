@@ -13,6 +13,43 @@ const cloudflare = new Cloudflare({
 
 describe('resource includes', () => {
   // skipped: tests are disabled for the time being
+  test.skip('update: only required params', async () => {
+    const responsePromise = cloudflare.devices.policies.includes.update('699d98642c564d2e855e9661899b7252', [
+      { address: '192.0.2.0/24', description: 'Include testing domains from the tunnel' },
+      { address: '192.0.2.0/24', description: 'Include testing domains from the tunnel' },
+      { address: '192.0.2.0/24', description: 'Include testing domains from the tunnel' },
+    ]);
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('update: required and optional params', async () => {
+    const response = await cloudflare.devices.policies.includes.update('699d98642c564d2e855e9661899b7252', [
+      {
+        address: '192.0.2.0/24',
+        description: 'Include testing domains from the tunnel',
+        host: '*.example.com',
+      },
+      {
+        address: '192.0.2.0/24',
+        description: 'Include testing domains from the tunnel',
+        host: '*.example.com',
+      },
+      {
+        address: '192.0.2.0/24',
+        description: 'Include testing domains from the tunnel',
+        host: '*.example.com',
+      },
+    ]);
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('list', async () => {
     const responsePromise = cloudflare.devices.policies.includes.list('699d98642c564d2e855e9661899b7252');
     const rawResponse = await responsePromise.asResponse();
@@ -32,42 +69,5 @@ describe('resource includes', () => {
         path: '/_stainless_unknown_path',
       }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('replace: only required params', async () => {
-    const responsePromise = cloudflare.devices.policies.includes.replace('699d98642c564d2e855e9661899b7252', [
-      { address: '192.0.2.0/24', description: 'Include testing domains from the tunnel' },
-      { address: '192.0.2.0/24', description: 'Include testing domains from the tunnel' },
-      { address: '192.0.2.0/24', description: 'Include testing domains from the tunnel' },
-    ]);
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('replace: required and optional params', async () => {
-    const response = await cloudflare.devices.policies.includes.replace('699d98642c564d2e855e9661899b7252', [
-      {
-        address: '192.0.2.0/24',
-        description: 'Include testing domains from the tunnel',
-        host: '*.example.com',
-      },
-      {
-        address: '192.0.2.0/24',
-        description: 'Include testing domains from the tunnel',
-        host: '*.example.com',
-      },
-      {
-        address: '192.0.2.0/24',
-        description: 'Include testing domains from the tunnel',
-        host: '*.example.com',
-      },
-    ]);
   });
 });

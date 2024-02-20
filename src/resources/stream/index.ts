@@ -2,18 +2,18 @@
 
 export {
   AudioTrackCreateResponse,
-  AudioTrackUpdateResponse,
   AudioTrackListResponse,
   AudioTrackDeleteResponse,
+  AudioTrackEditResponse,
   AudioTrackCreateParams,
-  AudioTrackUpdateParams,
+  AudioTrackEditParams,
   AudioTracks,
 } from './audio-tracks';
 export {
+  CaptionUpdateResponse,
   CaptionListResponse,
   CaptionDeleteResponse,
-  CaptionReplaceResponse,
-  CaptionReplaceParams,
+  CaptionUpdateParams,
   Captions,
 } from './captions';
 export { ClipCreateResponse, ClipCreateParams, Clips } from './clips';
@@ -24,12 +24,12 @@ export { EmbedListResponse, Embeds } from './embeds';
 export { KeyCreateResponse, KeyListResponse, KeyDeleteResponse, Keys } from './keys';
 export {
   LiveInputCreateResponse,
+  LiveInputUpdateResponse,
   LiveInputListResponse,
   LiveInputGetResponse,
-  LiveInputReplaceResponse,
   LiveInputCreateParams,
+  LiveInputUpdateParams,
   LiveInputListParams,
-  LiveInputReplaceParams,
   LiveInputs,
 } from './live-inputs/index';
 export {
@@ -50,9 +50,9 @@ export {
   Watermarks,
 } from './watermarks';
 export {
+  WebhookUpdateResponse,
   WebhookDeleteResponse,
   WebhookGetResponse,
-  WebhookReplaceResponse,
-  WebhookReplaceParams,
+  WebhookUpdateParams,
   Webhooks,
 } from './webhooks';

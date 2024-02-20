@@ -8,16 +8,16 @@ export class ConnectivitySettings extends APIResource {
   /**
    * Updates the Zero Trust Connectivity Settings for the given account.
    */
-  update(
+  edit(
     accountId: string,
-    body: ConnectivitySettingUpdateParams,
+    body: ConnectivitySettingEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ConnectivitySettingUpdateResponse> {
+  ): Core.APIPromise<ConnectivitySettingEditResponse> {
     return (
       this._client.patch(`/accounts/${accountId}/zerotrust/connectivity_settings`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ConnectivitySettingUpdateResponse }>
+      }) as Core.APIPromise<{ result: ConnectivitySettingEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -33,7 +33,7 @@ export class ConnectivitySettings extends APIResource {
   }
 }
 
-export interface ConnectivitySettingUpdateResponse {
+export interface ConnectivitySettingEditResponse {
   /**
    * A flag to enable the ICMP proxy for the account network.
    */
@@ -57,7 +57,7 @@ export interface ConnectivitySettingGetResponse {
   offramp_warp_enabled?: boolean;
 }
 
-export interface ConnectivitySettingUpdateParams {
+export interface ConnectivitySettingEditParams {
   /**
    * A flag to enable the ICMP proxy for the account network.
    */
@@ -70,7 +70,7 @@ export interface ConnectivitySettingUpdateParams {
 }
 
 export namespace ConnectivitySettings {
-  export import ConnectivitySettingUpdateResponse = ConnectivitySettingsAPI.ConnectivitySettingUpdateResponse;
+  export import ConnectivitySettingEditResponse = ConnectivitySettingsAPI.ConnectivitySettingEditResponse;
   export import ConnectivitySettingGetResponse = ConnectivitySettingsAPI.ConnectivitySettingGetResponse;
-  export import ConnectivitySettingUpdateParams = ConnectivitySettingsAPI.ConnectivitySettingUpdateParams;
+  export import ConnectivitySettingEditParams = ConnectivitySettingsAPI.ConnectivitySettingEditParams;
 }

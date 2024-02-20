@@ -23,6 +23,22 @@ export class Filters extends APIResource {
   }
 
   /**
+   * Updates an existing filter.
+   */
+  update(
+    zoneIdentifier: string,
+    id: string,
+    body: FilterUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<FilterUpdateResponse | null> {
+    return (
+      this._client.put(`/zones/${zoneIdentifier}/filters/${id}`, { body, ...options }) as Core.APIPromise<{
+        result: FilterUpdateResponse | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Fetches filters in a zone. You can filter the results using several optional
    * parameters.
    */
@@ -79,22 +95,6 @@ export class Filters extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
-
-  /**
-   * Updates an existing filter.
-   */
-  replace(
-    zoneIdentifier: string,
-    id: string,
-    body: FilterReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<FilterReplaceResponse | null> {
-    return (
-      this._client.put(`/zones/${zoneIdentifier}/filters/${id}`, { body, ...options }) as Core.APIPromise<{
-        result: FilterReplaceResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 
 export class FilterListResponsesV4PagePaginationArray extends V4PagePaginationArray<FilterListResponse> {}
@@ -129,6 +129,34 @@ export namespace FilterCreateResponse {
      */
     ref?: string;
   }
+}
+
+export interface FilterUpdateResponse {
+  /**
+   * The unique identifier of the filter.
+   */
+  id: string;
+
+  /**
+   * The filter expression. For more information, refer to
+   * [Expressions](https://developers.cloudflare.com/ruleset-engine/rules-language/expressions/).
+   */
+  expression: string;
+
+  /**
+   * When true, indicates that the filter is currently paused.
+   */
+  paused: boolean;
+
+  /**
+   * An informative summary of the filter.
+   */
+  description?: string;
+
+  /**
+   * A short reference tag. Allows you to select related filters.
+   */
+  ref?: string;
 }
 
 export interface FilterListResponse {
@@ -215,35 +243,9 @@ export interface FilterGetResponse {
   ref?: string;
 }
 
-export interface FilterReplaceResponse {
-  /**
-   * The unique identifier of the filter.
-   */
-  id: string;
-
-  /**
-   * The filter expression. For more information, refer to
-   * [Expressions](https://developers.cloudflare.com/ruleset-engine/rules-language/expressions/).
-   */
-  expression: string;
-
-  /**
-   * When true, indicates that the filter is currently paused.
-   */
-  paused: boolean;
-
-  /**
-   * An informative summary of the filter.
-   */
-  description?: string;
-
-  /**
-   * A short reference tag. Allows you to select related filters.
-   */
-  ref?: string;
-}
-
 export type FilterCreateParams = unknown;
+
+export type FilterUpdateParams = unknown;
 
 export interface FilterListParams extends V4PagePaginationArrayParams {
   /**
@@ -267,16 +269,14 @@ export interface FilterListParams extends V4PagePaginationArrayParams {
   ref?: string;
 }
 
-export type FilterReplaceParams = unknown;
-
 export namespace Filters {
   export import FilterCreateResponse = FiltersAPI.FilterCreateResponse;
+  export import FilterUpdateResponse = FiltersAPI.FilterUpdateResponse;
   export import FilterListResponse = FiltersAPI.FilterListResponse;
   export import FilterDeleteResponse = FiltersAPI.FilterDeleteResponse;
   export import FilterGetResponse = FiltersAPI.FilterGetResponse;
-  export import FilterReplaceResponse = FiltersAPI.FilterReplaceResponse;
   export import FilterListResponsesV4PagePaginationArray = FiltersAPI.FilterListResponsesV4PagePaginationArray;
   export import FilterCreateParams = FiltersAPI.FilterCreateParams;
+  export import FilterUpdateParams = FiltersAPI.FilterUpdateParams;
   export import FilterListParams = FiltersAPI.FilterListParams;
-  export import FilterReplaceParams = FiltersAPI.FilterReplaceParams;
 }

@@ -10,6 +10,21 @@ export class History extends APIResource {
   configs: ConfigsAPI.Configs = new ConfigsAPI.Configs(this._client);
 
   /**
+   * Restores a historical published Zaraz configuration by ID for a zone.
+   */
+  update(
+    zoneId: string,
+    body: HistoryUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<HistoryUpdateResponse> {
+    return (
+      this._client.put(`/zones/${zoneId}/settings/zaraz/history`, { body, ...options }) as Core.APIPromise<{
+        result: HistoryUpdateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Lists a history of published Zaraz configuration records for a zone.
    */
   list(
@@ -32,58 +47,12 @@ export class History extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
-
-  /**
-   * Restores a historical published Zaraz configuration by ID for a zone.
-   */
-  replace(
-    zoneId: string,
-    body: HistoryReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<HistoryReplaceResponse> {
-    return (
-      this._client.put(`/zones/${zoneId}/settings/zaraz/history`, { body, ...options }) as Core.APIPromise<{
-        result: HistoryReplaceResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-}
-
-export type HistoryListResponse = Array<HistoryListResponse.HistoryListResponseItem>;
-
-export namespace HistoryListResponse {
-  export interface HistoryListResponseItem {
-    /**
-     * ID of the configuration
-     */
-    id: number;
-
-    /**
-     * Date and time the configuration was created
-     */
-    createdAt: string;
-
-    /**
-     * Configuration description provided by the user who published this configuration
-     */
-    description: string;
-
-    /**
-     * Date and time the configuration was last updated
-     */
-    updatedAt: string;
-
-    /**
-     * Alpha-numeric ID of the account user who published the configuration
-     */
-    userId: string;
-  }
 }
 
 /**
  * Zaraz configuration
  */
-export interface HistoryReplaceResponse {
+export interface HistoryUpdateResponse {
   /**
    * Data layer compatibility mode enabled.
    */
@@ -97,7 +66,7 @@ export interface HistoryReplaceResponse {
   /**
    * General Zaraz settings.
    */
-  settings: HistoryReplaceResponse.Settings;
+  settings: HistoryUpdateResponse.Settings;
 
   /**
    * Tools set up under Zaraz configuration, where key is the alpha-numeric tool ID
@@ -105,21 +74,21 @@ export interface HistoryReplaceResponse {
    */
   tools: Record<
     string,
-    HistoryReplaceResponse.ZarazManagedComponent | HistoryReplaceResponse.ZarazCustomManagedComponent
+    HistoryUpdateResponse.ZarazManagedComponent | HistoryUpdateResponse.ZarazCustomManagedComponent
   >;
 
   /**
    * Triggers set up under Zaraz configuration, where key is the trigger
    * alpha-numeric ID and value is the trigger configuration.
    */
-  triggers: Record<string, HistoryReplaceResponse.Triggers>;
+  triggers: Record<string, HistoryUpdateResponse.Triggers>;
 
   /**
    * Variables set up under Zaraz configuration, where key is the variable
    * alpha-numeric ID and value is the variable configuration. Values of variables of
    * type secret are not included.
    */
-  variables: Record<string, HistoryReplaceResponse.UnionMember0 | HistoryReplaceResponse.UnionMember1>;
+  variables: Record<string, HistoryUpdateResponse.UnionMember0 | HistoryUpdateResponse.UnionMember1>;
 
   /**
    * Zaraz internal version of the config.
@@ -129,7 +98,7 @@ export interface HistoryReplaceResponse {
   /**
    * Consent management configuration.
    */
-  consent?: HistoryReplaceResponse.Consent;
+  consent?: HistoryUpdateResponse.Consent;
 
   /**
    * Single Page Application support enabled.
@@ -137,7 +106,7 @@ export interface HistoryReplaceResponse {
   historyChange?: boolean;
 }
 
-export namespace HistoryReplaceResponse {
+export namespace HistoryUpdateResponse {
   /**
    * General Zaraz settings.
    */
@@ -816,6 +785,39 @@ export namespace HistoryReplaceResponse {
   }
 }
 
+export type HistoryListResponse = Array<HistoryListResponse.HistoryListResponseItem>;
+
+export namespace HistoryListResponse {
+  export interface HistoryListResponseItem {
+    /**
+     * ID of the configuration
+     */
+    id: number;
+
+    /**
+     * Date and time the configuration was created
+     */
+    createdAt: string;
+
+    /**
+     * Configuration description provided by the user who published this configuration
+     */
+    description: string;
+
+    /**
+     * Date and time the configuration was last updated
+     */
+    updatedAt: string;
+
+    /**
+     * Alpha-numeric ID of the account user who published the configuration
+     */
+    userId: string;
+  }
+}
+
+export type HistoryUpdateParams = number;
+
 export interface HistoryListParams {
   /**
    * Maximum amount of results to list. Default value is 10.
@@ -838,13 +840,11 @@ export interface HistoryListParams {
   sortOrder?: 'DESC' | 'ASC';
 }
 
-export type HistoryReplaceParams = number;
-
 export namespace History {
+  export import HistoryUpdateResponse = HistoryAPI.HistoryUpdateResponse;
   export import HistoryListResponse = HistoryAPI.HistoryListResponse;
-  export import HistoryReplaceResponse = HistoryAPI.HistoryReplaceResponse;
+  export import HistoryUpdateParams = HistoryAPI.HistoryUpdateParams;
   export import HistoryListParams = HistoryAPI.HistoryListParams;
-  export import HistoryReplaceParams = HistoryAPI.HistoryReplaceParams;
   export import Configs = ConfigsAPI.Configs;
   export import ConfigGetResponse = ConfigsAPI.ConfigGetResponse;
   export import ConfigGetParams = ConfigsAPI.ConfigGetParams;

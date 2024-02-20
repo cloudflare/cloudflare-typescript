@@ -7,6 +7,24 @@ import { type Uploadable, maybeMultipartFormRequestOptions } from 'cloudflare/co
 
 export class Scripts extends APIResource {
   /**
+   * Upload a worker module to a Workers for Platforms namespace.
+   */
+  update(
+    accountId: string,
+    dispatchNamespace: string,
+    scriptName: string,
+    body: ScriptUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ScriptUpdateResponse> {
+    return (
+      this._client.put(
+        `/accounts/${accountId}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}`,
+        maybeMultipartFormRequestOptions({ body, ...options }),
+      ) as Core.APIPromise<{ result: ScriptUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Delete a worker from a Workers for Platforms namespace. This call has no
    * response body on a successful delete.
    */
@@ -40,23 +58,74 @@ export class Scripts extends APIResource {
       ) as Core.APIPromise<{ result: ScriptGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+
+export interface ScriptUpdateResponse {
+  /**
+   * The id of the script in the Workers system. Usually the script name.
+   */
+  id?: string;
 
   /**
-   * Upload a worker module to a Workers for Platforms namespace.
+   * When the script was created.
    */
-  replace(
-    accountId: string,
-    dispatchNamespace: string,
-    scriptName: string,
-    body: ScriptReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ScriptReplaceResponse> {
-    return (
-      this._client.put(
-        `/accounts/${accountId}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}`,
-        maybeMultipartFormRequestOptions({ body, ...options }),
-      ) as Core.APIPromise<{ result: ScriptReplaceResponse }>
-    )._thenUnwrap((obj) => obj.result);
+  created_on?: string;
+
+  /**
+   * Hashed script content, can be used in a If-None-Match header when updating.
+   */
+  etag?: string;
+
+  /**
+   * Whether Logpush is turned on for the Worker.
+   */
+  logpush?: boolean;
+
+  /**
+   * When the script was last modified.
+   */
+  modified_on?: string;
+
+  /**
+   * Deprecated. Deployment metadata for internal usage.
+   */
+  pipeline_hash?: string;
+
+  /**
+   * Specifies the placement mode for the Worker (e.g. 'smart').
+   */
+  placement_mode?: string;
+
+  /**
+   * List of Workers that will consume logs from the attached Worker.
+   */
+  tail_consumers?: Array<ScriptUpdateResponse.TailConsumer>;
+
+  /**
+   * Specifies the usage model for the Worker (e.g. 'bundled' or 'unbound').
+   */
+  usage_model?: string;
+}
+
+export namespace ScriptUpdateResponse {
+  /**
+   * A reference to a script that will consume logs from the attached Worker.
+   */
+  export interface TailConsumer {
+    /**
+     * Name of Worker that is to be the consumer.
+     */
+    service: string;
+
+    /**
+     * Optional environment if the Worker utilizes one.
+     */
+    environment?: string;
+
+    /**
+     * Optional dispatch namespace the script belongs to.
+     */
+    namespace?: string;
   }
 }
 
@@ -153,87 +222,9 @@ export namespace ScriptGetResponse {
   }
 }
 
-export interface ScriptReplaceResponse {
-  /**
-   * The id of the script in the Workers system. Usually the script name.
-   */
-  id?: string;
+export type ScriptUpdateParams = ScriptUpdateParams.Variant0 | ScriptUpdateParams.Variant1;
 
-  /**
-   * When the script was created.
-   */
-  created_on?: string;
-
-  /**
-   * Hashed script content, can be used in a If-None-Match header when updating.
-   */
-  etag?: string;
-
-  /**
-   * Whether Logpush is turned on for the Worker.
-   */
-  logpush?: boolean;
-
-  /**
-   * When the script was last modified.
-   */
-  modified_on?: string;
-
-  /**
-   * Deprecated. Deployment metadata for internal usage.
-   */
-  pipeline_hash?: string;
-
-  /**
-   * Specifies the placement mode for the Worker (e.g. 'smart').
-   */
-  placement_mode?: string;
-
-  /**
-   * List of Workers that will consume logs from the attached Worker.
-   */
-  tail_consumers?: Array<ScriptReplaceResponse.TailConsumer>;
-
-  /**
-   * Specifies the usage model for the Worker (e.g. 'bundled' or 'unbound').
-   */
-  usage_model?: string;
-}
-
-export namespace ScriptReplaceResponse {
-  /**
-   * A reference to a script that will consume logs from the attached Worker.
-   */
-  export interface TailConsumer {
-    /**
-     * Name of Worker that is to be the consumer.
-     */
-    service: string;
-
-    /**
-     * Optional environment if the Worker utilizes one.
-     */
-    environment?: string;
-
-    /**
-     * Optional dispatch namespace the script belongs to.
-     */
-    namespace?: string;
-  }
-}
-
-export interface ScriptDeleteParams {
-  /**
-   * If set to true, delete will not be stopped by associated service binding,
-   * durable object, or other binding. Any of these associated bindings/durable
-   * objects will be deleted along with the script.
-   */
-  force?: boolean;
-}
-
-export type ScriptReplaceParams = ScriptReplaceParams.Variant0 | ScriptReplaceParams.Variant1;
-
-export namespace ScriptReplaceParams {
+export namespace ScriptUpdateParams {
   export interface Variant0 {
     /**
      * A module comprising a Worker script, often a javascript file. Multiple modules
@@ -245,7 +236,7 @@ export namespace ScriptReplaceParams {
     /**
      * JSON encoded metadata about the uploaded parts and Worker configuration.
      */
-    metadata?: ScriptReplaceParams.Variant0.Metadata;
+    metadata?: ScriptUpdateParams.Variant0.Metadata;
   }
 
   export namespace Variant0 {
@@ -475,9 +466,18 @@ export namespace ScriptReplaceParams {
   }
 }
 
+export interface ScriptDeleteParams {
+  /**
+   * If set to true, delete will not be stopped by associated service binding,
+   * durable object, or other binding. Any of these associated bindings/durable
+   * objects will be deleted along with the script.
+   */
+  force?: boolean;
+}
+
 export namespace Scripts {
+  export import ScriptUpdateResponse = ScriptsAPI.ScriptUpdateResponse;
   export import ScriptGetResponse = ScriptsAPI.ScriptGetResponse;
-  export import ScriptReplaceResponse = ScriptsAPI.ScriptReplaceResponse;
+  export import ScriptUpdateParams = ScriptsAPI.ScriptUpdateParams;
   export import ScriptDeleteParams = ScriptsAPI.ScriptDeleteParams;
-  export import ScriptReplaceParams = ScriptsAPI.ScriptReplaceParams;
 }

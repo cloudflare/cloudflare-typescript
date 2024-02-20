@@ -3,13 +3,13 @@
 export { DNSAnalytics } from './dns-analytics/index';
 export {
   DNSFirewallCreateResponse,
-  DNSFirewallUpdateResponse,
   DNSFirewallListResponse,
   DNSFirewallDeleteResponse,
+  DNSFirewallEditResponse,
   DNSFirewallGetResponse,
   DNSFirewallCreateParams,
-  DNSFirewallUpdateParams,
   DNSFirewallListParams,
+  DNSFirewallEditParams,
   DNSFirewallListResponsesV4PagePaginationArray,
   DNSFirewall,
 } from './dns-firewall';

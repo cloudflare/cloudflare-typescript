@@ -14,16 +14,16 @@ export class HotlinkProtection extends APIResource {
    * on their own pages.
    * (https://support.cloudflare.com/hc/en-us/articles/200170026).
    */
-  update(
+  edit(
     zoneId: string,
-    body: HotlinkProtectionUpdateParams,
+    body: HotlinkProtectionEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<HotlinkProtectionUpdateResponse> {
+  ): Core.APIPromise<HotlinkProtectionEditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/settings/hotlink_protection`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: HotlinkProtectionUpdateResponse }>
+      }) as Core.APIPromise<{ result: HotlinkProtectionEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -54,7 +54,7 @@ export class HotlinkProtection extends APIResource {
  * on their own pages.
  * (https://support.cloudflare.com/hc/en-us/articles/200170026).
  */
-export interface HotlinkProtectionUpdateResponse {
+export interface HotlinkProtectionEditResponse {
   /**
    * ID of the zone setting.
    */
@@ -109,7 +109,7 @@ export interface HotlinkProtectionGetResponse {
   modified_on?: string | null;
 }
 
-export interface HotlinkProtectionUpdateParams {
+export interface HotlinkProtectionEditParams {
   /**
    * Value of the zone setting.
    */
@@ -117,7 +117,7 @@ export interface HotlinkProtectionUpdateParams {
 }
 
 export namespace HotlinkProtection {
-  export import HotlinkProtectionUpdateResponse = HotlinkProtectionAPI.HotlinkProtectionUpdateResponse;
+  export import HotlinkProtectionEditResponse = HotlinkProtectionAPI.HotlinkProtectionEditResponse;
   export import HotlinkProtectionGetResponse = HotlinkProtectionAPI.HotlinkProtectionGetResponse;
-  export import HotlinkProtectionUpdateParams = HotlinkProtectionAPI.HotlinkProtectionUpdateParams;
+  export import HotlinkProtectionEditParams = HotlinkProtectionAPI.HotlinkProtectionEditParams;
 }

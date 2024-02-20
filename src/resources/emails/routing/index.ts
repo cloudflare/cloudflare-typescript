@@ -15,13 +15,13 @@ export { EnableCreateResponse, Enables } from './enables';
 export { RoutingGetResponse, Routing } from './routing';
 export {
   RuleCreateResponse,
+  RuleUpdateResponse,
   RuleListResponse,
   RuleDeleteResponse,
   RuleGetResponse,
-  RuleReplaceResponse,
   RuleCreateParams,
+  RuleUpdateParams,
   RuleListParams,
-  RuleReplaceParams,
   RuleListResponsesV4PagePaginationArray,
   Rules,
 } from './rules/index';

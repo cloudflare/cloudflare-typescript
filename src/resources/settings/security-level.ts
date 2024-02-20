@@ -11,16 +11,16 @@ export class SecurityLevel extends APIResource {
    * an individual security setting, the profile will become Custom.
    * (https://support.cloudflare.com/hc/en-us/articles/200170056).
    */
-  update(
+  edit(
     zoneId: string,
-    body: SecurityLevelUpdateParams,
+    body: SecurityLevelEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SecurityLevelUpdateResponse> {
+  ): Core.APIPromise<SecurityLevelEditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/settings/security_level`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: SecurityLevelUpdateResponse }>
+      }) as Core.APIPromise<{ result: SecurityLevelEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -45,7 +45,7 @@ export class SecurityLevel extends APIResource {
  * an individual security setting, the profile will become Custom.
  * (https://support.cloudflare.com/hc/en-us/articles/200170056).
  */
-export interface SecurityLevelUpdateResponse {
+export interface SecurityLevelEditResponse {
   /**
    * ID of the zone setting.
    */
@@ -97,7 +97,7 @@ export interface SecurityLevelGetResponse {
   modified_on?: string | null;
 }
 
-export interface SecurityLevelUpdateParams {
+export interface SecurityLevelEditParams {
   /**
    * Value of the zone setting.
    */
@@ -105,7 +105,7 @@ export interface SecurityLevelUpdateParams {
 }
 
 export namespace SecurityLevel {
-  export import SecurityLevelUpdateResponse = SecurityLevelAPI.SecurityLevelUpdateResponse;
+  export import SecurityLevelEditResponse = SecurityLevelAPI.SecurityLevelEditResponse;
   export import SecurityLevelGetResponse = SecurityLevelAPI.SecurityLevelGetResponse;
-  export import SecurityLevelUpdateParams = SecurityLevelAPI.SecurityLevelUpdateParams;
+  export import SecurityLevelEditParams = SecurityLevelAPI.SecurityLevelEditParams;
 }

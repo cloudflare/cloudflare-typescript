@@ -13,16 +13,16 @@ export class OriginMaxHTTPVersion extends APIResource {
    * for more information.). The default value is "2" for all plan types except ENT
    * where it is "1"
    */
-  update(
+  edit(
     zoneId: string,
-    body: OriginMaxHTTPVersionUpdateParams,
+    body: OriginMaxHTTPVersionEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<OriginMaxHTTPVersionUpdateResponse> {
+  ): Core.APIPromise<OriginMaxHTTPVersionEditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/settings/origin_max_http_version`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: OriginMaxHTTPVersionUpdateResponse }>
+      }) as Core.APIPromise<{ result: OriginMaxHTTPVersionEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -51,7 +51,7 @@ export class OriginMaxHTTPVersion extends APIResource {
  * for more information.). The default value is "2" for all plan types except ENT
  * where it is "1"
  */
-export interface OriginMaxHTTPVersionUpdateResponse {
+export interface OriginMaxHTTPVersionEditResponse {
   /**
    * Value of the zone setting.
    */
@@ -93,7 +93,7 @@ export interface OriginMaxHTTPVersionGetResponse {
   value: '2' | '1';
 }
 
-export interface OriginMaxHTTPVersionUpdateParams {
+export interface OriginMaxHTTPVersionEditParams {
   /**
    * Value of the Origin Max HTTP Version Setting.
    */
@@ -101,7 +101,7 @@ export interface OriginMaxHTTPVersionUpdateParams {
 }
 
 export namespace OriginMaxHTTPVersion {
-  export import OriginMaxHTTPVersionUpdateResponse = OriginMaxHTTPVersionAPI.OriginMaxHTTPVersionUpdateResponse;
+  export import OriginMaxHTTPVersionEditResponse = OriginMaxHTTPVersionAPI.OriginMaxHTTPVersionEditResponse;
   export import OriginMaxHTTPVersionGetResponse = OriginMaxHTTPVersionAPI.OriginMaxHTTPVersionGetResponse;
-  export import OriginMaxHTTPVersionUpdateParams = OriginMaxHTTPVersionAPI.OriginMaxHTTPVersionUpdateParams;
+  export import OriginMaxHTTPVersionEditParams = OriginMaxHTTPVersionAPI.OriginMaxHTTPVersionEditParams;
 }

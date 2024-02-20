@@ -13,8 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource h2Prioritization', () => {
   // skipped: tests are disabled for the time being
-  test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.settings.h2Prioritization.update('023e105f4ecef8ad9ca31a8372d0c353', {
+  test.skip('edit: only required params', async () => {
+    const responsePromise = cloudflare.settings.h2Prioritization.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       value: { id: 'h2_prioritization', value: 'on' },
     });
     const rawResponse = await responsePromise.asResponse();
@@ -27,8 +27,8 @@ describe('resource h2Prioritization', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.settings.h2Prioritization.update('023e105f4ecef8ad9ca31a8372d0c353', {
+  test.skip('edit: required and optional params', async () => {
+    const response = await cloudflare.settings.h2Prioritization.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       value: { id: 'h2_prioritization', value: 'on' },
     });
   });

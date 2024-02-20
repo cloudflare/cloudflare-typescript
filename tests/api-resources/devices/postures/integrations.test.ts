@@ -56,11 +56,10 @@ describe('resource integrations', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('update', async () => {
-    const responsePromise = cloudflare.devices.postures.integrations.update(
+  test.skip('delete', async () => {
+    const responsePromise = cloudflare.devices.postures.integrations.delete(
       '699d98642c564d2e855e9661899b7252',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      {},
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -72,10 +71,11 @@ describe('resource integrations', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
-    const responsePromise = cloudflare.devices.postures.integrations.delete(
+  test.skip('edit', async () => {
+    const responsePromise = cloudflare.devices.postures.integrations.edit(
       '699d98642c564d2e855e9661899b7252',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      {},
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
