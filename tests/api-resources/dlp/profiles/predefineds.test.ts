@@ -13,6 +13,22 @@ const cloudflare = new Cloudflare({
 
 describe('resource predefineds', () => {
   // skipped: tests are disabled for the time being
+  test.skip('update', async () => {
+    const responsePromise = cloudflare.dlp.profiles.predefineds.update(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '384e129d-25bd-403c-8019-bc19eb7a8a5f',
+      {},
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('get', async () => {
     const responsePromise = cloudflare.dlp.profiles.predefineds.get(
       '023e105f4ecef8ad9ca31a8372d0c353',
@@ -37,21 +53,5 @@ describe('resource predefineds', () => {
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('replace', async () => {
-    const responsePromise = cloudflare.dlp.profiles.predefineds.replace(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '384e129d-25bd-403c-8019-bc19eb7a8a5f',
-      {},
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
   });
 });

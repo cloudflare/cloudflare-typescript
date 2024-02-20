@@ -81,14 +81,14 @@ export namespace Routing {
   export import EnableCreateResponse = EnablesAPI.EnableCreateResponse;
   export import Rules = RulesAPI.Rules;
   export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
+  export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
   export import RuleListResponse = RulesAPI.RuleListResponse;
   export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
   export import RuleGetResponse = RulesAPI.RuleGetResponse;
-  export import RuleReplaceResponse = RulesAPI.RuleReplaceResponse;
   export import RuleListResponsesV4PagePaginationArray = RulesAPI.RuleListResponsesV4PagePaginationArray;
   export import RuleCreateParams = RulesAPI.RuleCreateParams;
+  export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
   export import RuleListParams = RulesAPI.RuleListParams;
-  export import RuleReplaceParams = RulesAPI.RuleReplaceParams;
   export import Addresses = AddressesAPI.Addresses;
   export import AddressCreateResponse = AddressesAPI.AddressCreateResponse;
   export import AddressDeleteResponse = AddressesAPI.AddressDeleteResponse;

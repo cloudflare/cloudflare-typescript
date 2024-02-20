@@ -11,11 +11,11 @@ export {
 } from './pagerduty';
 export {
   WebhookCreateResponse,
+  WebhookUpdateResponse,
   WebhookListResponse,
   WebhookDeleteResponse,
   WebhookGetResponse,
-  WebhookReplaceResponse,
   WebhookCreateParams,
-  WebhookReplaceParams,
+  WebhookUpdateParams,
   Webhooks,
 } from './webhooks';

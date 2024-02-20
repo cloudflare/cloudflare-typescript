@@ -11,10 +11,10 @@ export class Prefixes extends APIResource {
 
 export namespace Prefixes {
   export import BGPPrefixes = BGPPrefixesAPI.BGPPrefixes;
-  export import BGPPrefixUpdateResponse = BGPPrefixesAPI.BGPPrefixUpdateResponse;
   export import BGPPrefixListResponse = BGPPrefixesAPI.BGPPrefixListResponse;
+  export import BGPPrefixEditResponse = BGPPrefixesAPI.BGPPrefixEditResponse;
   export import BGPPrefixGetResponse = BGPPrefixesAPI.BGPPrefixGetResponse;
-  export import BGPPrefixUpdateParams = BGPPrefixesAPI.BGPPrefixUpdateParams;
+  export import BGPPrefixEditParams = BGPPrefixesAPI.BGPPrefixEditParams;
   export import Bindings = BindingsAPI.Bindings;
   export import BindingCreateResponse = BindingsAPI.BindingCreateResponse;
   export import BindingListResponse = BindingsAPI.BindingListResponse;

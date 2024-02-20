@@ -13,8 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource prioritize', () => {
   // skipped: tests are disabled for the time being
-  test.skip('replace: only required params', async () => {
-    const responsePromise = cloudflare.customCertificates.prioritize.replace(
+  test.skip('update: only required params', async () => {
+    const responsePromise = cloudflare.customCertificates.prioritize.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       { certificates: [{}, {}] },
     );
@@ -28,8 +28,8 @@ describe('resource prioritize', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('replace: required and optional params', async () => {
-    const response = await cloudflare.customCertificates.prioritize.replace(
+  test.skip('update: required and optional params', async () => {
+    const response = await cloudflare.customCertificates.prioritize.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       { certificates: [{ priority: 2 }, { priority: 1 }] },
     );

@@ -2,17 +2,17 @@
 
 export {
   CustomCreateResponse,
+  CustomUpdateResponse,
   CustomDeleteResponse,
   CustomGetResponse,
-  CustomReplaceResponse,
   CustomCreateParams,
-  CustomReplaceParams,
+  CustomUpdateParams,
   Customs,
 } from './customs';
 export {
+  PredefinedUpdateResponse,
   PredefinedGetResponse,
-  PredefinedReplaceResponse,
-  PredefinedReplaceParams,
+  PredefinedUpdateParams,
   Predefineds,
 } from './predefineds';
 export { ProfileListResponse, ProfileGetResponse, Profiles } from './profiles';

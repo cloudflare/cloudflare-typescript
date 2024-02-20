@@ -24,17 +24,17 @@ export class Rules extends APIResource {
   }
 
   /**
-   * Patches a rule for a waiting room.
+   * Only available for the Waiting Room Advanced subscription. Replaces all rules
+   * for a waiting room.
    */
   update(
     zoneIdentifier: string,
     waitingRoomId: unknown,
-    ruleId: string,
     body: RuleUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RuleUpdateResponse | null> {
     return (
-      this._client.patch(`/zones/${zoneIdentifier}/waiting_rooms/${waitingRoomId}/rules/${ruleId}`, {
+      this._client.put(`/zones/${zoneIdentifier}/waiting_rooms/${waitingRoomId}/rules`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: RuleUpdateResponse | null }>
@@ -75,20 +75,20 @@ export class Rules extends APIResource {
   }
 
   /**
-   * Only available for the Waiting Room Advanced subscription. Replaces all rules
-   * for a waiting room.
+   * Patches a rule for a waiting room.
    */
-  replace(
+  edit(
     zoneIdentifier: string,
     waitingRoomId: unknown,
-    body: RuleReplaceParams,
+    ruleId: string,
+    body: RuleEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleReplaceResponse | null> {
+  ): Core.APIPromise<RuleEditResponse | null> {
     return (
-      this._client.put(`/zones/${zoneIdentifier}/waiting_rooms/${waitingRoomId}/rules`, {
+      this._client.patch(`/zones/${zoneIdentifier}/waiting_rooms/${waitingRoomId}/rules/${ruleId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: RuleReplaceResponse | null }>
+      }) as Core.APIPromise<{ result: RuleEditResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -245,10 +245,10 @@ export namespace RuleDeleteResponse {
   }
 }
 
-export type RuleReplaceResponse = Array<RuleReplaceResponse.RuleReplaceResponseItem>;
+export type RuleEditResponse = Array<RuleEditResponse.RuleEditResponseItem>;
 
-export namespace RuleReplaceResponse {
-  export interface RuleReplaceResponseItem {
+export namespace RuleEditResponse {
+  export interface RuleEditResponseItem {
     /**
      * The ID of the rule.
      */
@@ -305,7 +305,33 @@ export interface RuleCreateParams {
   enabled?: boolean;
 }
 
-export interface RuleUpdateParams {
+export type RuleUpdateParams = Array<RuleUpdateParams.Body>;
+
+export namespace RuleUpdateParams {
+  export interface Body {
+    /**
+     * The action to take when the expression matches.
+     */
+    action: 'bypass_waiting_room';
+
+    /**
+     * Criteria defining when there is a match for the current rule.
+     */
+    expression: string;
+
+    /**
+     * The description of the rule.
+     */
+    description?: string;
+
+    /**
+     * When set to true, the rule is enabled.
+     */
+    enabled?: boolean;
+  }
+}
+
+export interface RuleEditParams {
   /**
    * The action to take when the expression matches.
    */
@@ -329,10 +355,10 @@ export interface RuleUpdateParams {
   /**
    * Reorder the position of a rule
    */
-  position?: RuleUpdateParams.Index | RuleUpdateParams.Before | RuleUpdateParams.After;
+  position?: RuleEditParams.Index | RuleEditParams.Before | RuleEditParams.After;
 }
 
-export namespace RuleUpdateParams {
+export namespace RuleEditParams {
   export interface Index {
     /**
      * Places the rule in the exact position specified by the integer number
@@ -360,39 +386,13 @@ export namespace RuleUpdateParams {
   }
 }
 
-export type RuleReplaceParams = Array<RuleReplaceParams.Body>;
-
-export namespace RuleReplaceParams {
-  export interface Body {
-    /**
-     * The action to take when the expression matches.
-     */
-    action: 'bypass_waiting_room';
-
-    /**
-     * Criteria defining when there is a match for the current rule.
-     */
-    expression: string;
-
-    /**
-     * The description of the rule.
-     */
-    description?: string;
-
-    /**
-     * When set to true, the rule is enabled.
-     */
-    enabled?: boolean;
-  }
-}
-
 export namespace Rules {
   export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
   export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
   export import RuleListResponse = RulesAPI.RuleListResponse;
   export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
-  export import RuleReplaceResponse = RulesAPI.RuleReplaceResponse;
+  export import RuleEditResponse = RulesAPI.RuleEditResponse;
   export import RuleCreateParams = RulesAPI.RuleCreateParams;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
-  export import RuleReplaceParams = RulesAPI.RuleReplaceParams;
+  export import RuleEditParams = RulesAPI.RuleEditParams;
 }

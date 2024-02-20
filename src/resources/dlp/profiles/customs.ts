@@ -22,6 +22,18 @@ export class Customs extends APIResource {
   }
 
   /**
+   * Updates a DLP custom profile.
+   */
+  update(
+    accountId: string,
+    profileId: string,
+    body: CustomUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CustomUpdateResponse> {
+    return this._client.put(`/accounts/${accountId}/dlp/profiles/custom/${profileId}`, { body, ...options });
+  }
+
+  /**
    * Deletes a DLP custom profile.
    */
   delete(
@@ -51,18 +63,6 @@ export class Customs extends APIResource {
         options,
       ) as Core.APIPromise<{ result: CustomGetResponse }>
     )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Updates a DLP custom profile.
-   */
-  replace(
-    accountId: string,
-    profileId: string,
-    body: CustomReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomReplaceResponse> {
-    return this._client.put(`/accounts/${accountId}/dlp/profiles/custom/${profileId}`, { body, ...options });
   }
 }
 
@@ -160,9 +160,7 @@ export namespace CustomCreateResponse {
   }
 }
 
-export type CustomDeleteResponse = unknown | string | null;
-
-export interface CustomGetResponse {
+export interface CustomUpdateResponse {
   /**
    * The ID for this profile
    */
@@ -183,7 +181,7 @@ export interface CustomGetResponse {
   /**
    * The entries for this profile.
    */
-  entries?: Array<CustomGetResponse.Entry>;
+  entries?: Array<CustomUpdateResponse.Entry>;
 
   /**
    * The name of the profile.
@@ -198,7 +196,7 @@ export interface CustomGetResponse {
   updated_at?: string;
 }
 
-export namespace CustomGetResponse {
+export namespace CustomUpdateResponse {
   /**
    * A custom entry that matches a profile
    */
@@ -252,7 +250,9 @@ export namespace CustomGetResponse {
   }
 }
 
-export interface CustomReplaceResponse {
+export type CustomDeleteResponse = unknown | string | null;
+
+export interface CustomGetResponse {
   /**
    * The ID for this profile
    */
@@ -273,7 +273,7 @@ export interface CustomReplaceResponse {
   /**
    * The entries for this profile.
    */
-  entries?: Array<CustomReplaceResponse.Entry>;
+  entries?: Array<CustomGetResponse.Entry>;
 
   /**
    * The name of the profile.
@@ -288,7 +288,7 @@ export interface CustomReplaceResponse {
   updated_at?: string;
 }
 
-export namespace CustomReplaceResponse {
+export namespace CustomGetResponse {
   /**
    * A custom entry that matches a profile
    */
@@ -410,7 +410,7 @@ export namespace CustomCreateParams {
   }
 }
 
-export interface CustomReplaceParams {
+export interface CustomUpdateParams {
   /**
    * Related DLP policies will trigger when the match count exceeds the number set.
    */
@@ -426,7 +426,7 @@ export interface CustomReplaceParams {
    * existing entry with that ID. Elements without ID will create new entries. Any
    * entry not in the list will be deleted.
    */
-  entries?: Array<CustomReplaceParams.Entry>;
+  entries?: Array<CustomUpdateParams.Entry>;
 
   /**
    * The name of the profile.
@@ -438,11 +438,11 @@ export interface CustomReplaceParams {
    * Microsoft Information Protection profiles).
    */
   shared_entries?: Array<
-    CustomReplaceParams.DLPSharedEntryUpdatePredefined | CustomReplaceParams.DLPSharedEntryUpdateIntegration
+    CustomUpdateParams.DLPSharedEntryUpdatePredefined | CustomUpdateParams.DLPSharedEntryUpdateIntegration
   >;
 }
 
-export namespace CustomReplaceParams {
+export namespace CustomUpdateParams {
   /**
    * A custom entry that matches a profile
    */
@@ -509,9 +509,9 @@ export namespace CustomReplaceParams {
 
 export namespace Customs {
   export import CustomCreateResponse = CustomsAPI.CustomCreateResponse;
+  export import CustomUpdateResponse = CustomsAPI.CustomUpdateResponse;
   export import CustomDeleteResponse = CustomsAPI.CustomDeleteResponse;
   export import CustomGetResponse = CustomsAPI.CustomGetResponse;
-  export import CustomReplaceResponse = CustomsAPI.CustomReplaceResponse;
   export import CustomCreateParams = CustomsAPI.CustomCreateParams;
-  export import CustomReplaceParams = CustomsAPI.CustomReplaceParams;
+  export import CustomUpdateParams = CustomsAPI.CustomUpdateParams;
 }

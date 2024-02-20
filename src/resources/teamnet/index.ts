@@ -2,10 +2,10 @@
 
 export {
   RouteCreateResponse,
-  RouteUpdateResponse,
   RouteDeleteResponse,
+  RouteEditResponse,
   RouteCreateParams,
-  RouteUpdateParams,
+  RouteEditParams,
   Routes,
 } from './routes';
 export { Teamnet } from './teamnet';

@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
-  ConnectivitySettingUpdateResponse,
+  ConnectivitySettingEditResponse,
   ConnectivitySettingGetResponse,
-  ConnectivitySettingUpdateParams,
+  ConnectivitySettingEditParams,
   ConnectivitySettings,
 } from './connectivity-settings';
 export { Zerotrust } from './zerotrust';

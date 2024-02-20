@@ -3,12 +3,12 @@
 export { Kv } from './kv';
 export {
   NamespaceCreateResponse,
+  NamespaceUpdateResponse,
   NamespaceListResponse,
   NamespaceDeleteResponse,
-  NamespaceReplaceResponse,
   NamespaceCreateParams,
+  NamespaceUpdateParams,
   NamespaceListParams,
-  NamespaceReplaceParams,
   NamespaceListResponsesV4PagePaginationArray,
   Namespaces,
 } from './namespaces/index';

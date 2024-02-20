@@ -6,6 +6,21 @@ import * as BookmarksAPI from 'cloudflare/resources/access/bookmarks';
 
 export class Bookmarks extends APIResource {
   /**
+   * Updates a configured Bookmark application.
+   */
+  update(
+    identifier: unknown,
+    uuid: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<BookmarkUpdateResponse> {
+    return (
+      this._client.put(`/accounts/${identifier}/access/bookmarks/${uuid}`, options) as Core.APIPromise<{
+        result: BookmarkUpdateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Lists Bookmark applications.
    */
   list(identifier: unknown, options?: Core.RequestOptions): Core.APIPromise<BookmarkListResponse | null> {
@@ -45,21 +60,37 @@ export class Bookmarks extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+
+export interface BookmarkUpdateResponse {
+  /**
+   * The unique identifier for the Bookmark application.
+   */
+  id?: unknown;
 
   /**
-   * Updates a configured Bookmark application.
+   * Displays the application in the App Launcher.
    */
-  replace(
-    identifier: unknown,
-    uuid: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<BookmarkReplaceResponse> {
-    return (
-      this._client.put(`/accounts/${identifier}/access/bookmarks/${uuid}`, options) as Core.APIPromise<{
-        result: BookmarkReplaceResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
+  app_launcher_visible?: boolean;
+
+  created_at?: string;
+
+  /**
+   * The domain of the Bookmark application.
+   */
+  domain?: string;
+
+  /**
+   * The image URL for the logo shown in the App Launcher dashboard.
+   */
+  logo_url?: string;
+
+  /**
+   * The name of the Bookmark application.
+   */
+  name?: string;
+
+  updated_at?: string;
 }
 
 export type BookmarkListResponse = Array<BookmarkListResponse.BookmarkListResponseItem>;
@@ -135,40 +166,9 @@ export interface BookmarkGetResponse {
   updated_at?: string;
 }
 
-export interface BookmarkReplaceResponse {
-  /**
-   * The unique identifier for the Bookmark application.
-   */
-  id?: unknown;
-
-  /**
-   * Displays the application in the App Launcher.
-   */
-  app_launcher_visible?: boolean;
-
-  created_at?: string;
-
-  /**
-   * The domain of the Bookmark application.
-   */
-  domain?: string;
-
-  /**
-   * The image URL for the logo shown in the App Launcher dashboard.
-   */
-  logo_url?: string;
-
-  /**
-   * The name of the Bookmark application.
-   */
-  name?: string;
-
-  updated_at?: string;
-}
-
 export namespace Bookmarks {
+  export import BookmarkUpdateResponse = BookmarksAPI.BookmarkUpdateResponse;
   export import BookmarkListResponse = BookmarksAPI.BookmarkListResponse;
   export import BookmarkDeleteResponse = BookmarksAPI.BookmarkDeleteResponse;
   export import BookmarkGetResponse = BookmarksAPI.BookmarkGetResponse;
-  export import BookmarkReplaceResponse = BookmarksAPI.BookmarkReplaceResponse;
 }

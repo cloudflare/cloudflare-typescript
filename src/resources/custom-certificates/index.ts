@@ -2,14 +2,14 @@
 
 export {
   CustomCertificateCreateResponse,
-  CustomCertificateUpdateResponse,
   CustomCertificateListResponse,
   CustomCertificateDeleteResponse,
+  CustomCertificateEditResponse,
   CustomCertificateGetResponse,
   CustomCertificateCreateParams,
-  CustomCertificateUpdateParams,
   CustomCertificateListParams,
+  CustomCertificateEditParams,
   CustomCertificateListResponsesV4PagePaginationArray,
   CustomCertificates,
 } from './custom-certificates';
-export { PrioritizeReplaceResponse, PrioritizeReplaceParams, Prioritize } from './prioritize';
+export { PrioritizeUpdateResponse, PrioritizeUpdateParams, Prioritize } from './prioritize';

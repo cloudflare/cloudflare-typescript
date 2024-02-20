@@ -2,12 +2,12 @@
 
 export {
   IndicatorFeedCreateResponse,
+  IndicatorFeedUpdateResponse,
   IndicatorFeedListResponse,
   IndicatorFeedDataResponse,
   IndicatorFeedGetResponse,
-  IndicatorFeedReplaceResponse,
   IndicatorFeedCreateParams,
-  IndicatorFeedReplaceParams,
+  IndicatorFeedUpdateParams,
   IndicatorFeeds,
 } from './indicator-feeds';
 export {

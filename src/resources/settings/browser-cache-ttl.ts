@@ -11,16 +11,16 @@ export class BrowserCacheTTL extends APIResource {
    * specified by your server.
    * (https://support.cloudflare.com/hc/en-us/articles/200168276).
    */
-  update(
+  edit(
     zoneId: string,
-    body: BrowserCacheTTLUpdateParams,
+    body: BrowserCacheTTLEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<BrowserCacheTTLUpdateResponse> {
+  ): Core.APIPromise<BrowserCacheTTLEditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/settings/browser_cache_ttl`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: BrowserCacheTTLUpdateResponse }>
+      }) as Core.APIPromise<{ result: BrowserCacheTTLEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -45,7 +45,7 @@ export class BrowserCacheTTL extends APIResource {
  * specified by your server.
  * (https://support.cloudflare.com/hc/en-us/articles/200168276).
  */
-export interface BrowserCacheTTLUpdateResponse {
+export interface BrowserCacheTTLEditResponse {
   /**
    * ID of the zone setting.
    */
@@ -153,7 +153,7 @@ export interface BrowserCacheTTLGetResponse {
   modified_on?: string | null;
 }
 
-export interface BrowserCacheTTLUpdateParams {
+export interface BrowserCacheTTLEditParams {
   /**
    * Value of the zone setting. Notes: Setting a TTL of 0 is equivalent to selecting
    * `Respect Existing Headers`
@@ -190,7 +190,7 @@ export interface BrowserCacheTTLUpdateParams {
 }
 
 export namespace BrowserCacheTTL {
-  export import BrowserCacheTTLUpdateResponse = BrowserCacheTTLAPI.BrowserCacheTTLUpdateResponse;
+  export import BrowserCacheTTLEditResponse = BrowserCacheTTLAPI.BrowserCacheTTLEditResponse;
   export import BrowserCacheTTLGetResponse = BrowserCacheTTLAPI.BrowserCacheTTLGetResponse;
-  export import BrowserCacheTTLUpdateParams = BrowserCacheTTLAPI.BrowserCacheTTLUpdateParams;
+  export import BrowserCacheTTLEditParams = BrowserCacheTTLAPI.BrowserCacheTTLEditParams;
 }

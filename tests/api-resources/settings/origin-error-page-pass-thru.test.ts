@@ -13,8 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource originErrorPagePassThru', () => {
   // skipped: tests are disabled for the time being
-  test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.settings.originErrorPagePassThru.update(
+  test.skip('edit: only required params', async () => {
+    const responsePromise = cloudflare.settings.originErrorPagePassThru.edit(
       '023e105f4ecef8ad9ca31a8372d0c353',
       { value: 'on' },
     );
@@ -28,8 +28,8 @@ describe('resource originErrorPagePassThru', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.settings.originErrorPagePassThru.update(
+  test.skip('edit: required and optional params', async () => {
+    const response = await cloudflare.settings.originErrorPagePassThru.edit(
       '023e105f4ecef8ad9ca31a8372d0c353',
       { value: 'on' },
     );

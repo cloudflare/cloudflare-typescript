@@ -26,15 +26,6 @@ export class Users extends APIResource {
   tokens: TokensAPI.Tokens = new TokensAPI.Tokens(this._client);
 
   /**
-   * Edit part of your user details.
-   */
-  update(body: UserUpdateParams, options?: Core.RequestOptions): Core.APIPromise<UserUpdateResponse> {
-    return (
-      this._client.patch('/user', { body, ...options }) as Core.APIPromise<{ result: UserUpdateResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * User Details
    */
   list(options?: Core.RequestOptions): Core.APIPromise<UserListResponse> {
@@ -42,13 +33,22 @@ export class Users extends APIResource {
       (obj) => obj.result,
     );
   }
-}
 
-export type UserUpdateResponse = unknown | string | null;
+  /**
+   * Edit part of your user details.
+   */
+  edit(body: UserEditParams, options?: Core.RequestOptions): Core.APIPromise<UserEditResponse> {
+    return (
+      this._client.patch('/user', { body, ...options }) as Core.APIPromise<{ result: UserEditResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+}
 
 export type UserListResponse = unknown | string | null;
 
-export interface UserUpdateParams {
+export type UserEditResponse = unknown | string | null;
+
+export interface UserEditParams {
   /**
    * The country in which the user lives.
    */
@@ -76,9 +76,9 @@ export interface UserUpdateParams {
 }
 
 export namespace Users {
-  export import UserUpdateResponse = UsersAPI.UserUpdateResponse;
   export import UserListResponse = UsersAPI.UserListResponse;
-  export import UserUpdateParams = UsersAPI.UserUpdateParams;
+  export import UserEditResponse = UsersAPI.UserEditResponse;
+  export import UserEditParams = UsersAPI.UserEditParams;
   export import AuditLogs = AuditLogsAPI.AuditLogs;
   export import AuditLogListResponse = AuditLogsAPI.AuditLogListResponse;
   export import AuditLogListResponsesV4PagePaginationArray = AuditLogsAPI.AuditLogListResponsesV4PagePaginationArray;
@@ -86,10 +86,10 @@ export namespace Users {
   export import Billings = BillingsAPI.Billings;
   export import Firewall = FirewallAPI.Firewall;
   export import Invites = InvitesAPI.Invites;
-  export import InviteUpdateResponse = InvitesAPI.InviteUpdateResponse;
   export import InviteListResponse = InvitesAPI.InviteListResponse;
+  export import InviteEditResponse = InvitesAPI.InviteEditResponse;
   export import InviteGetResponse = InvitesAPI.InviteGetResponse;
-  export import InviteUpdateParams = InvitesAPI.InviteUpdateParams;
+  export import InviteEditParams = InvitesAPI.InviteEditParams;
   export import LoadBalancers = LoadBalancersAPI.LoadBalancers;
   export import LoadBalancingAnalytics = LoadBalancingAnalyticsAPI.LoadBalancingAnalytics;
   export import Organizations = OrganizationsAPI.Organizations;
@@ -99,19 +99,19 @@ export namespace Users {
   export import OrganizationListResponsesV4PagePaginationArray = OrganizationsAPI.OrganizationListResponsesV4PagePaginationArray;
   export import OrganizationListParams = OrganizationsAPI.OrganizationListParams;
   export import Subscriptions = SubscriptionsAPI.Subscriptions;
+  export import SubscriptionUpdateResponse = SubscriptionsAPI.SubscriptionUpdateResponse;
   export import SubscriptionListResponse = SubscriptionsAPI.SubscriptionListResponse;
   export import SubscriptionDeleteResponse = SubscriptionsAPI.SubscriptionDeleteResponse;
-  export import SubscriptionReplaceResponse = SubscriptionsAPI.SubscriptionReplaceResponse;
-  export import SubscriptionReplaceParams = SubscriptionsAPI.SubscriptionReplaceParams;
+  export import SubscriptionUpdateParams = SubscriptionsAPI.SubscriptionUpdateParams;
   export import Tokens = TokensAPI.Tokens;
   export import TokenCreateResponse = TokensAPI.TokenCreateResponse;
+  export import TokenUpdateResponse = TokensAPI.TokenUpdateResponse;
   export import TokenListResponse = TokensAPI.TokenListResponse;
   export import TokenDeleteResponse = TokensAPI.TokenDeleteResponse;
   export import TokenGetResponse = TokensAPI.TokenGetResponse;
-  export import TokenReplaceResponse = TokensAPI.TokenReplaceResponse;
   export import TokenVerifyResponse = TokensAPI.TokenVerifyResponse;
   export import TokenListResponsesV4PagePaginationArray = TokensAPI.TokenListResponsesV4PagePaginationArray;
   export import TokenCreateParams = TokensAPI.TokenCreateParams;
+  export import TokenUpdateParams = TokensAPI.TokenUpdateParams;
   export import TokenListParams = TokensAPI.TokenListParams;
-  export import TokenReplaceParams = TokensAPI.TokenReplaceParams;
 }

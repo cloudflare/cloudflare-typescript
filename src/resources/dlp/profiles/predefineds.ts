@@ -6,6 +6,21 @@ import * as PredefinedsAPI from 'cloudflare/resources/dlp/profiles/predefineds';
 
 export class Predefineds extends APIResource {
   /**
+   * Updates a DLP predefined profile. Only supports enabling/disabling entries.
+   */
+  update(
+    accountId: string,
+    profileId: string,
+    body: PredefinedUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PredefinedUpdateResponse> {
+    return this._client.put(`/accounts/${accountId}/dlp/profiles/predefined/${profileId}`, {
+      body,
+      ...options,
+    });
+  }
+
+  /**
    * Fetches a predefined DLP profile.
    */
   get(
@@ -20,20 +35,59 @@ export class Predefineds extends APIResource {
       ) as Core.APIPromise<{ result: PredefinedGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+
+export interface PredefinedUpdateResponse {
+  /**
+   * The ID for this profile
+   */
+  id?: string;
 
   /**
-   * Updates a DLP predefined profile. Only supports enabling/disabling entries.
+   * Related DLP policies will trigger when the match count exceeds the number set.
    */
-  replace(
-    accountId: string,
-    profileId: string,
-    body: PredefinedReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PredefinedReplaceResponse> {
-    return this._client.put(`/accounts/${accountId}/dlp/profiles/predefined/${profileId}`, {
-      body,
-      ...options,
-    });
+  allowed_match_count?: number;
+
+  /**
+   * The entries for this profile.
+   */
+  entries?: Array<PredefinedUpdateResponse.Entry>;
+
+  /**
+   * The name of the profile.
+   */
+  name?: string;
+
+  /**
+   * The type of the profile.
+   */
+  type?: 'predefined';
+}
+
+export namespace PredefinedUpdateResponse {
+  /**
+   * A predefined entry that matches a profile
+   */
+  export interface Entry {
+    /**
+     * The ID for this entry
+     */
+    id?: string;
+
+    /**
+     * Whether the entry is enabled or not.
+     */
+    enabled?: boolean;
+
+    /**
+     * The name of the entry.
+     */
+    name?: string;
+
+    /**
+     * ID of the parent profile
+     */
+    profile_id?: unknown;
   }
 }
 
@@ -91,12 +145,7 @@ export namespace PredefinedGetResponse {
   }
 }
 
-export interface PredefinedReplaceResponse {
-  /**
-   * The ID for this profile
-   */
-  id?: string;
-
+export interface PredefinedUpdateParams {
   /**
    * Related DLP policies will trigger when the match count exceeds the number set.
    */
@@ -105,59 +154,10 @@ export interface PredefinedReplaceResponse {
   /**
    * The entries for this profile.
    */
-  entries?: Array<PredefinedReplaceResponse.Entry>;
-
-  /**
-   * The name of the profile.
-   */
-  name?: string;
-
-  /**
-   * The type of the profile.
-   */
-  type?: 'predefined';
+  entries?: Array<PredefinedUpdateParams.Entry>;
 }
 
-export namespace PredefinedReplaceResponse {
-  /**
-   * A predefined entry that matches a profile
-   */
-  export interface Entry {
-    /**
-     * The ID for this entry
-     */
-    id?: string;
-
-    /**
-     * Whether the entry is enabled or not.
-     */
-    enabled?: boolean;
-
-    /**
-     * The name of the entry.
-     */
-    name?: string;
-
-    /**
-     * ID of the parent profile
-     */
-    profile_id?: unknown;
-  }
-}
-
-export interface PredefinedReplaceParams {
-  /**
-   * Related DLP policies will trigger when the match count exceeds the number set.
-   */
-  allowed_match_count?: number;
-
-  /**
-   * The entries for this profile.
-   */
-  entries?: Array<PredefinedReplaceParams.Entry>;
-}
-
-export namespace PredefinedReplaceParams {
+export namespace PredefinedUpdateParams {
   export interface Entry {
     /**
      * Whether the entry is enabled or not.
@@ -167,7 +167,7 @@ export namespace PredefinedReplaceParams {
 }
 
 export namespace Predefineds {
+  export import PredefinedUpdateResponse = PredefinedsAPI.PredefinedUpdateResponse;
   export import PredefinedGetResponse = PredefinedsAPI.PredefinedGetResponse;
-  export import PredefinedReplaceResponse = PredefinedsAPI.PredefinedReplaceResponse;
-  export import PredefinedReplaceParams = PredefinedsAPI.PredefinedReplaceParams;
+  export import PredefinedUpdateParams = PredefinedsAPI.PredefinedUpdateParams;
 }

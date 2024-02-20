@@ -9,14 +9,14 @@ export class Brotli extends APIResource {
    * When the client requesting an asset supports the Brotli compression algorithm,
    * Cloudflare will serve a Brotli compressed version of the asset.
    */
-  update(
+  edit(
     zoneId: string,
-    body: BrotliUpdateParams,
+    body: BrotliEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<BrotliUpdateResponse> {
+  ): Core.APIPromise<BrotliEditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/settings/brotli`, { body, ...options }) as Core.APIPromise<{
-        result: BrotliUpdateResponse;
+        result: BrotliEditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -38,7 +38,7 @@ export class Brotli extends APIResource {
  * When the client requesting an asset supports the Brotli compression algorithm,
  * Cloudflare will serve a Brotli compressed version of the asset.
  */
-export interface BrotliUpdateResponse {
+export interface BrotliEditResponse {
   /**
    * ID of the zone setting.
    */
@@ -88,7 +88,7 @@ export interface BrotliGetResponse {
   modified_on?: string | null;
 }
 
-export interface BrotliUpdateParams {
+export interface BrotliEditParams {
   /**
    * Value of the zone setting.
    */
@@ -96,7 +96,7 @@ export interface BrotliUpdateParams {
 }
 
 export namespace Brotli {
-  export import BrotliUpdateResponse = BrotliAPI.BrotliUpdateResponse;
+  export import BrotliEditResponse = BrotliAPI.BrotliEditResponse;
   export import BrotliGetResponse = BrotliAPI.BrotliGetResponse;
-  export import BrotliUpdateParams = BrotliAPI.BrotliUpdateParams;
+  export import BrotliEditParams = BrotliAPI.BrotliEditParams;
 }

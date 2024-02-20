@@ -20,11 +20,12 @@ export class Configs extends APIResource {
   }
 
   /**
-   * Update fields in an existing network monitoring configuration.
+   * Update an existing network monitoring configuration, requires the entire
+   * configuration to be updated at once.
    */
   update(accountIdentifier: unknown, options?: Core.RequestOptions): Core.APIPromise<ConfigUpdateResponse> {
     return (
-      this._client.patch(`/accounts/${accountIdentifier}/mnm/config`, options) as Core.APIPromise<{
+      this._client.put(`/accounts/${accountIdentifier}/mnm/config`, options) as Core.APIPromise<{
         result: ConfigUpdateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -53,13 +54,12 @@ export class Configs extends APIResource {
   }
 
   /**
-   * Update an existing network monitoring configuration, requires the entire
-   * configuration to be updated at once.
+   * Update fields in an existing network monitoring configuration.
    */
-  replace(accountIdentifier: unknown, options?: Core.RequestOptions): Core.APIPromise<ConfigReplaceResponse> {
+  edit(accountIdentifier: unknown, options?: Core.RequestOptions): Core.APIPromise<ConfigEditResponse> {
     return (
-      this._client.put(`/accounts/${accountIdentifier}/mnm/config`, options) as Core.APIPromise<{
-        result: ConfigReplaceResponse;
+      this._client.patch(`/accounts/${accountIdentifier}/mnm/config`, options) as Core.APIPromise<{
+        result: ConfigEditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -125,7 +125,7 @@ export interface ConfigDeleteResponse {
   router_ips: Array<string>;
 }
 
-export interface ConfigReplaceResponse {
+export interface ConfigEditResponse {
   /**
    * Fallback sampling rate of flow messages being sent in packets per second. This
    * should match the packet sampling rate configured on the router.
@@ -145,7 +145,7 @@ export namespace Configs {
   export import ConfigUpdateResponse = ConfigsAPI.ConfigUpdateResponse;
   export import ConfigListResponse = ConfigsAPI.ConfigListResponse;
   export import ConfigDeleteResponse = ConfigsAPI.ConfigDeleteResponse;
-  export import ConfigReplaceResponse = ConfigsAPI.ConfigReplaceResponse;
+  export import ConfigEditResponse = ConfigsAPI.ConfigEditResponse;
   export import Fulls = FullsAPI.Fulls;
   export import FullListResponse = FullsAPI.FullListResponse;
 }

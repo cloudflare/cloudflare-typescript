@@ -13,8 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource cacheLevel', () => {
   // skipped: tests are disabled for the time being
-  test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.settings.cacheLevel.update('023e105f4ecef8ad9ca31a8372d0c353', {
+  test.skip('edit: only required params', async () => {
+    const responsePromise = cloudflare.settings.cacheLevel.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       value: 'aggressive',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -27,8 +27,8 @@ describe('resource cacheLevel', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.settings.cacheLevel.update('023e105f4ecef8ad9ca31a8372d0c353', {
+  test.skip('edit: required and optional params', async () => {
+    const response = await cloudflare.settings.cacheLevel.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       value: 'aggressive',
     });
   });

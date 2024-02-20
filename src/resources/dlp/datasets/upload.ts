@@ -24,18 +24,18 @@ export class Upload extends APIResource {
   /**
    * Upload a new version of a dataset.
    */
-  update(
+  edit(
     accountId: string,
     datasetId: string,
     version: number,
-    body: UploadUpdateParams,
+    body: UploadEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<UploadUpdateResponse> {
+  ): Core.APIPromise<UploadEditResponse> {
     return (
       this._client.post(
         `/accounts/${accountId}/dlp/datasets/${datasetId}/upload/${version}`,
         options,
-      ) as Core.APIPromise<{ result: UploadUpdateResponse }>
+      ) as Core.APIPromise<{ result: UploadEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -48,7 +48,7 @@ export interface UploadCreateResponse {
   secret?: string;
 }
 
-export interface UploadUpdateResponse {
+export interface UploadEditResponse {
   id: string;
 
   created_at: string;
@@ -63,12 +63,12 @@ export interface UploadUpdateResponse {
 
   updated_at: string;
 
-  uploads: Array<UploadUpdateResponse.Upload>;
+  uploads: Array<UploadEditResponse.Upload>;
 
   description?: string | null;
 }
 
-export namespace UploadUpdateResponse {
+export namespace UploadEditResponse {
   export interface Upload {
     num_cells: number;
 
@@ -78,10 +78,10 @@ export namespace UploadUpdateResponse {
   }
 }
 
-export interface UploadUpdateParams {}
+export interface UploadEditParams {}
 
 export namespace Upload {
   export import UploadCreateResponse = UploadAPI.UploadCreateResponse;
-  export import UploadUpdateResponse = UploadAPI.UploadUpdateResponse;
-  export import UploadUpdateParams = UploadAPI.UploadUpdateParams;
+  export import UploadEditResponse = UploadAPI.UploadEditResponse;
+  export import UploadEditParams = UploadAPI.UploadEditParams;
 }

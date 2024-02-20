@@ -13,6 +13,21 @@ export class PageShield extends APIResource {
   scripts: ScriptsAPI.Scripts = new ScriptsAPI.Scripts(this._client);
 
   /**
+   * Updates Page Shield settings.
+   */
+  update(
+    zoneId: string,
+    body: PageShieldUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PageShieldUpdateResponse> {
+    return (
+      this._client.put(`/zones/${zoneId}/page_shield`, { body, ...options }) as Core.APIPromise<{
+        result: PageShieldUpdateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Fetches the Page Shield settings.
    */
   list(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<PageShieldListResponse> {
@@ -22,21 +37,29 @@ export class PageShield extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+
+export interface PageShieldUpdateResponse {
+  /**
+   * When true, indicates that Page Shield is enabled.
+   */
+  enabled?: boolean;
 
   /**
-   * Updates Page Shield settings.
+   * The timestamp of when Page Shield was last updated.
    */
-  replace(
-    zoneId: string,
-    body: PageShieldReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PageShieldReplaceResponse> {
-    return (
-      this._client.put(`/zones/${zoneId}/page_shield`, { body, ...options }) as Core.APIPromise<{
-        result: PageShieldReplaceResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
+  updated_at?: string;
+
+  /**
+   * When true, CSP reports will be sent to
+   * https://csp-reporting.cloudflare.com/cdn-cgi/script_monitor/report
+   */
+  use_cloudflare_reporting_endpoint?: boolean;
+
+  /**
+   * When true, the paths associated with connections URLs will also be analyzed.
+   */
+  use_connection_url_path?: boolean;
 }
 
 export interface PageShieldListResponse {
@@ -62,30 +85,7 @@ export interface PageShieldListResponse {
   use_connection_url_path?: boolean;
 }
 
-export interface PageShieldReplaceResponse {
-  /**
-   * When true, indicates that Page Shield is enabled.
-   */
-  enabled?: boolean;
-
-  /**
-   * The timestamp of when Page Shield was last updated.
-   */
-  updated_at?: string;
-
-  /**
-   * When true, CSP reports will be sent to
-   * https://csp-reporting.cloudflare.com/cdn-cgi/script_monitor/report
-   */
-  use_cloudflare_reporting_endpoint?: boolean;
-
-  /**
-   * When true, the paths associated with connections URLs will also be analyzed.
-   */
-  use_connection_url_path?: boolean;
-}
-
-export interface PageShieldReplaceParams {
+export interface PageShieldUpdateParams {
   /**
    * When true, indicates that Page Shield is enabled.
    */
@@ -104,16 +104,16 @@ export interface PageShieldReplaceParams {
 }
 
 export namespace PageShield {
+  export import PageShieldUpdateResponse = PageShieldAPI.PageShieldUpdateResponse;
   export import PageShieldListResponse = PageShieldAPI.PageShieldListResponse;
-  export import PageShieldReplaceResponse = PageShieldAPI.PageShieldReplaceResponse;
-  export import PageShieldReplaceParams = PageShieldAPI.PageShieldReplaceParams;
+  export import PageShieldUpdateParams = PageShieldAPI.PageShieldUpdateParams;
   export import Policies = PoliciesAPI.Policies;
   export import PolicyCreateResponse = PoliciesAPI.PolicyCreateResponse;
+  export import PolicyUpdateResponse = PoliciesAPI.PolicyUpdateResponse;
   export import PolicyListResponse = PoliciesAPI.PolicyListResponse;
   export import PolicyGetResponse = PoliciesAPI.PolicyGetResponse;
-  export import PolicyReplaceResponse = PoliciesAPI.PolicyReplaceResponse;
   export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
-  export import PolicyReplaceParams = PoliciesAPI.PolicyReplaceParams;
+  export import PolicyUpdateParams = PoliciesAPI.PolicyUpdateParams;
   export import Connections = ConnectionsAPI.Connections;
   export import ConnectionListResponse = ConnectionsAPI.ConnectionListResponse;
   export import ConnectionGetResponse = ConnectionsAPI.ConnectionGetResponse;

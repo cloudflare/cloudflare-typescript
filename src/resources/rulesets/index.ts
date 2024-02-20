@@ -3,19 +3,19 @@
 export { PhaseGetResponse, Phases } from './phases';
 export {
   RuleCreateResponse,
-  RuleUpdateResponse,
   RuleDeleteResponse,
+  RuleEditResponse,
   RuleCreateParams,
-  RuleUpdateParams,
+  RuleEditParams,
   Rules,
 } from './rules';
 export {
   RulesetCreateResponse,
+  RulesetUpdateResponse,
   RulesetListResponse,
   RulesetGetResponse,
-  RulesetReplaceResponse,
   RulesetCreateParams,
-  RulesetReplaceParams,
+  RulesetUpdateParams,
   Rulesets,
 } from './rulesets';
 export { VersionListResponse, VersionGetResponse, Versions } from './versions/index';

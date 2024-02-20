@@ -34,6 +34,31 @@ describe('resource namespaces', () => {
   });
 
   // skipped: tests are disabled for the time being
+  test.skip('update: only required params', async () => {
+    const responsePromise = cloudflare.storage.kv.namespaces.update(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '0f2ac74b498b48028cb68387c421e279',
+      { title: 'My Own Namespace' },
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('update: required and optional params', async () => {
+    const response = await cloudflare.storage.kv.namespaces.update(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '0f2ac74b498b48028cb68387c421e279',
+      { title: 'My Own Namespace' },
+    );
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('list', async () => {
     const responsePromise = cloudflare.storage.kv.namespaces.list('023e105f4ecef8ad9ca31a8372d0c353');
     const rawResponse = await responsePromise.asResponse();
@@ -80,30 +105,5 @@ describe('resource namespaces', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('replace: only required params', async () => {
-    const responsePromise = cloudflare.storage.kv.namespaces.replace(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '0f2ac74b498b48028cb68387c421e279',
-      { title: 'My Own Namespace' },
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('replace: required and optional params', async () => {
-    const response = await cloudflare.storage.kv.namespaces.replace(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '0f2ac74b498b48028cb68387c421e279',
-      { title: 'My Own Namespace' },
-    );
   });
 });

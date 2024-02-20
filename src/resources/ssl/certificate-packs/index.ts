@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
-  CertificatePackUpdateResponse,
   CertificatePackListResponse,
   CertificatePackDeleteResponse,
+  CertificatePackEditResponse,
   CertificatePackGetResponse,
   CertificatePackListParams,
   CertificatePacks,

@@ -29,6 +29,23 @@ export class Rules extends APIResource {
   }
 
   /**
+   * Update actions and matches, or enable/disable specific routing rules.
+   */
+  update(
+    zoneIdentifier: string,
+    ruleIdentifier: string,
+    body: RuleUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RuleUpdateResponse> {
+    return (
+      this._client.put(`/zones/${zoneIdentifier}/email/routing/rules/${ruleIdentifier}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: RuleUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Lists existing routing rules.
    */
   list(
@@ -86,23 +103,6 @@ export class Rules extends APIResource {
       ) as Core.APIPromise<{ result: RuleGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
-
-  /**
-   * Update actions and matches, or enable/disable specific routing rules.
-   */
-  replace(
-    zoneIdentifier: string,
-    ruleIdentifier: string,
-    body: RuleReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleReplaceResponse> {
-    return (
-      this._client.put(`/zones/${zoneIdentifier}/email/routing/rules/${ruleIdentifier}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: RuleReplaceResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 
 export class RuleListResponsesV4PagePaginationArray extends V4PagePaginationArray<RuleListResponse> {}
@@ -145,6 +145,77 @@ export interface RuleCreateResponse {
 }
 
 export namespace RuleCreateResponse {
+  /**
+   * Actions pattern.
+   */
+  export interface Action {
+    /**
+     * Type of supported action.
+     */
+    type: 'drop' | 'forward' | 'worker';
+
+    value: Array<string>;
+  }
+
+  /**
+   * Matching pattern to forward your actions.
+   */
+  export interface Matcher {
+    /**
+     * Field for type matcher.
+     */
+    field: 'to';
+
+    /**
+     * Type of matcher.
+     */
+    type: 'literal';
+
+    /**
+     * Value for matcher.
+     */
+    value: string;
+  }
+}
+
+export interface RuleUpdateResponse {
+  /**
+   * Routing rule identifier.
+   */
+  id?: string;
+
+  /**
+   * List actions patterns.
+   */
+  actions?: Array<RuleUpdateResponse.Action>;
+
+  /**
+   * Routing rule status.
+   */
+  enabled?: true | false;
+
+  /**
+   * Matching patterns to forward to your actions.
+   */
+  matchers?: Array<RuleUpdateResponse.Matcher>;
+
+  /**
+   * Routing rule name.
+   */
+  name?: string;
+
+  /**
+   * Priority of the routing rule.
+   */
+  priority?: number;
+
+  /**
+   * Routing rule tag. (Deprecated, replaced by routing rule identifier)
+   */
+  tag?: string;
+}
+
+export namespace RuleUpdateResponse {
   /**
    * Actions pattern.
    */
@@ -391,77 +462,6 @@ export namespace RuleGetResponse {
   }
 }
 
-export interface RuleReplaceResponse {
-  /**
-   * Routing rule identifier.
-   */
-  id?: string;
-
-  /**
-   * List actions patterns.
-   */
-  actions?: Array<RuleReplaceResponse.Action>;
-
-  /**
-   * Routing rule status.
-   */
-  enabled?: true | false;
-
-  /**
-   * Matching patterns to forward to your actions.
-   */
-  matchers?: Array<RuleReplaceResponse.Matcher>;
-
-  /**
-   * Routing rule name.
-   */
-  name?: string;
-
-  /**
-   * Priority of the routing rule.
-   */
-  priority?: number;
-
-  /**
-   * Routing rule tag. (Deprecated, replaced by routing rule identifier)
-   */
-  tag?: string;
-}
-
-export namespace RuleReplaceResponse {
-  /**
-   * Actions pattern.
-   */
-  export interface Action {
-    /**
-     * Type of supported action.
-     */
-    type: 'drop' | 'forward' | 'worker';
-
-    value: Array<string>;
-  }
-
-  /**
-   * Matching pattern to forward your actions.
-   */
-  export interface Matcher {
-    /**
-     * Field for type matcher.
-     */
-    field: 'to';
-
-    /**
-     * Type of matcher.
-     */
-    type: 'literal';
-
-    /**
-     * Value for matcher.
-     */
-    value: string;
-  }
-}
-
 export interface RuleCreateParams {
   /**
    * List actions patterns.
@@ -523,23 +523,16 @@ export namespace RuleCreateParams {
   }
 }
 
-export interface RuleListParams extends V4PagePaginationArrayParams {
-  /**
-   * Filter by enabled routing rules.
-   */
-  enabled?: true | false;
-}
-
-export interface RuleReplaceParams {
+export interface RuleUpdateParams {
   /**
    * List actions patterns.
    */
-  actions: Array<RuleReplaceParams.Action>;
+  actions: Array<RuleUpdateParams.Action>;
 
   /**
    * Matching patterns to forward to your actions.
    */
-  matchers: Array<RuleReplaceParams.Matcher>;
+  matchers: Array<RuleUpdateParams.Matcher>;
 
   /**
    * Routing rule status.
@@ -557,7 +550,7 @@ export interface RuleReplaceParams {
   priority?: number;
 }
 
-export namespace RuleReplaceParams {
+export namespace RuleUpdateParams {
   /**
    * Actions pattern.
    */
@@ -591,18 +584,25 @@ export namespace RuleReplaceParams {
   }
 }
 
+export interface RuleListParams extends V4PagePaginationArrayParams {
+  /**
+   * Filter by enabled routing rules.
+   */
+  enabled?: true | false;
+}
+
 export namespace Rules {
   export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
+  export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
   export import RuleListResponse = RulesAPI.RuleListResponse;
   export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
   export import RuleGetResponse = RulesAPI.RuleGetResponse;
-  export import RuleReplaceResponse = RulesAPI.RuleReplaceResponse;
   export import RuleListResponsesV4PagePaginationArray = RulesAPI.RuleListResponsesV4PagePaginationArray;
   export import RuleCreateParams = RulesAPI.RuleCreateParams;
+  export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
   export import RuleListParams = RulesAPI.RuleListParams;
-  export import RuleReplaceParams = RulesAPI.RuleReplaceParams;
   export import CatchAlls = CatchAllsAPI.CatchAlls;
+  export import CatchAllUpdateResponse = CatchAllsAPI.CatchAllUpdateResponse;
   export import CatchAllGetResponse = CatchAllsAPI.CatchAllGetResponse;
-  export import CatchAllReplaceResponse = CatchAllsAPI.CatchAllReplaceResponse;
-  export import CatchAllReplaceParams = CatchAllsAPI.CatchAllReplaceParams;
+  export import CatchAllUpdateParams = CatchAllsAPI.CatchAllUpdateParams;
 }

@@ -6,27 +6,27 @@ import * as DNSSECAPI from 'cloudflare/resources/dnssec';
 
 export class DNSSEC extends APIResource {
   /**
-   * Enable or disable DNSSEC.
-   */
-  update(
-    zoneId: string,
-    body: DNSSECUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DNSSECUpdateResponse> {
-    return (
-      this._client.patch(`/zones/${zoneId}/dnssec`, { body, ...options }) as Core.APIPromise<{
-        result: DNSSECUpdateResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Delete DNSSEC.
    */
   delete(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<DNSSECDeleteResponse> {
     return (
       this._client.delete(`/zones/${zoneId}/dnssec`, options) as Core.APIPromise<{
         result: DNSSECDeleteResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Enable or disable DNSSEC.
+   */
+  edit(
+    zoneId: string,
+    body: DNSSECEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DNSSECEditResponse> {
+    return (
+      this._client.patch(`/zones/${zoneId}/dnssec`, { body, ...options }) as Core.APIPromise<{
+        result: DNSSECEditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -41,7 +41,9 @@ export class DNSSEC extends APIResource {
   }
 }
 
-export interface DNSSECUpdateResponse {
+export type DNSSECDeleteResponse = unknown | string;
+
+export interface DNSSECEditResponse {
   /**
    * Algorithm key code.
    */
@@ -120,8 +122,6 @@ export interface DNSSECUpdateResponse {
    */
   status?: 'active' | 'pending' | 'disabled' | 'pending-disabled' | 'error';
 }
-
-export type DNSSECDeleteResponse = unknown | string;
 
 export interface DNSSECGetResponse {
   /**
@@ -203,7 +203,7 @@ export interface DNSSECGetResponse {
   status?: 'active' | 'pending' | 'disabled' | 'pending-disabled' | 'error';
 }
 
-export interface DNSSECUpdateParams {
+export interface DNSSECEditParams {
   /**
    * If true, multi-signer DNSSEC is enabled on the zone, allowing multiple providers
    * to serve a DNSSEC-signed zone at the same time. This is required for DNSKEY
@@ -234,8 +234,8 @@ export interface DNSSECUpdateParams {
 }
 
 export namespace DNSSEC {
-  export import DNSSECUpdateResponse = DNSSECAPI.DNSSECUpdateResponse;
   export import DNSSECDeleteResponse = DNSSECAPI.DNSSECDeleteResponse;
+  export import DNSSECEditResponse = DNSSECAPI.DNSSECEditResponse;
   export import DNSSECGetResponse = DNSSECAPI.DNSSECGetResponse;
-  export import DNSSECUpdateParams = DNSSECAPI.DNSSECUpdateParams;
+  export import DNSSECEditParams = DNSSECAPI.DNSSECEditParams;
 }

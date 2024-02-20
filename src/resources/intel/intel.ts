@@ -52,12 +52,12 @@ export namespace Intel {
   export import WhoisGetParams = WhoisAPI.WhoisGetParams;
   export import IndicatorFeeds = IndicatorFeedsAPI.IndicatorFeeds;
   export import IndicatorFeedCreateResponse = IndicatorFeedsAPI.IndicatorFeedCreateResponse;
+  export import IndicatorFeedUpdateResponse = IndicatorFeedsAPI.IndicatorFeedUpdateResponse;
   export import IndicatorFeedListResponse = IndicatorFeedsAPI.IndicatorFeedListResponse;
   export import IndicatorFeedDataResponse = IndicatorFeedsAPI.IndicatorFeedDataResponse;
   export import IndicatorFeedGetResponse = IndicatorFeedsAPI.IndicatorFeedGetResponse;
-  export import IndicatorFeedReplaceResponse = IndicatorFeedsAPI.IndicatorFeedReplaceResponse;
   export import IndicatorFeedCreateParams = IndicatorFeedsAPI.IndicatorFeedCreateParams;
-  export import IndicatorFeedReplaceParams = IndicatorFeedsAPI.IndicatorFeedReplaceParams;
+  export import IndicatorFeedUpdateParams = IndicatorFeedsAPI.IndicatorFeedUpdateParams;
   export import Sinkholes = SinkholesAPI.Sinkholes;
   export import SinkholeListResponse = SinkholesAPI.SinkholeListResponse;
 }

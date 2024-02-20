@@ -1,29 +1,29 @@
 // File generated from our OpenAPI spec by Stainless.
 
-export { Cache } from './cache';
+export { CachePurgeResponse, CachePurgeParams, Cache } from './cache';
 export {
-  CacheReserveUpdateResponse,
   CacheReserveListResponse,
-  CacheReserveUpdateParams,
+  CacheReserveEditResponse,
+  CacheReserveEditParams,
   CacheReserves,
 } from './cache-reserves';
 export {
-  RegionalTieredCacheUpdateResponse,
+  RegionalTieredCacheEditResponse,
   RegionalTieredCacheGetResponse,
-  RegionalTieredCacheUpdateParams,
+  RegionalTieredCacheEditParams,
   RegionalTieredCache,
 } from './regional-tiered-cache';
 export {
-  TieredCacheSmartTopologyUpdateResponse,
   TieredCacheSmartTopologyDeleteResponse,
+  TieredCacheSmartTopologyEditResponse,
   TieredCacheSmartTopologyGetResponse,
-  TieredCacheSmartTopologyUpdateParams,
+  TieredCacheSmartTopologyEditParams,
   TieredCacheSmartTopology,
 } from './tiered-cache-smart-topology';
 export {
-  VariantUpdateResponse,
   VariantListResponse,
   VariantDeleteResponse,
-  VariantUpdateParams,
+  VariantEditResponse,
+  VariantEditParams,
   Variants,
 } from './variants';

@@ -25,6 +25,24 @@ export class Outputs extends APIResource {
   }
 
   /**
+   * Updates the state of an output.
+   */
+  update(
+    accountId: string,
+    liveInputIdentifier: string,
+    outputIdentifier: string,
+    body: OutputUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<OutputUpdateResponse> {
+    return (
+      this._client.put(
+        `/accounts/${accountId}/stream/live_inputs/${liveInputIdentifier}/outputs/${outputIdentifier}`,
+        { body, ...options },
+      ) as Core.APIPromise<{ result: OutputUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Retrieves all outputs associated with a specified live input.
    */
   list(
@@ -54,27 +72,35 @@ export class Outputs extends APIResource {
       { ...options, headers: { Accept: '*/*', ...options?.headers } },
     );
   }
-
-  /**
-   * Updates the state of an output.
-   */
-  replace(
-    accountId: string,
-    liveInputIdentifier: string,
-    outputIdentifier: string,
-    body: OutputReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OutputReplaceResponse> {
-    return (
-      this._client.put(
-        `/accounts/${accountId}/stream/live_inputs/${liveInputIdentifier}/outputs/${outputIdentifier}`,
-        { body, ...options },
-      ) as Core.APIPromise<{ result: OutputReplaceResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 
 export interface OutputCreateResponse {
+  /**
+   * When enabled, live video streamed to the associated live input will be sent to
+   * the output URL. When disabled, live video will not be sent to the output URL,
+   * even when streaming to the associated live input. Use this to control precisely
+   * when you start and stop simulcasting to specific destinations like YouTube and
+   * Twitch.
+   */
+  enabled?: boolean;
+
+  /**
+   * The streamKey used to authenticate against an output's target.
+   */
+  streamKey?: string;
+
+  /**
+   * A unique identifier for the output.
+   */
+  uid?: string;
+
+  /**
+   * The URL an output uses to restream.
+   */
+  url?: string;
+}
+
+export interface OutputUpdateResponse {
   /**
    * When enabled, live video streamed to the associated live input will be sent to
    * the output URL. When disabled, live video will not be sent to the output URL,
@@ -130,32 +156,6 @@ export namespace OutputListResponse {
   }
 }
 
-export interface OutputReplaceResponse {
-  /**
-   * When enabled, live video streamed to the associated live input will be sent to
-   * the output URL. When disabled, live video will not be sent to the output URL,
-   * even when streaming to the associated live input. Use this to control precisely
-   * when you start and stop simulcasting to specific destinations like YouTube and
-   * Twitch.
-   */
-  enabled?: boolean;
-
-  /**
-   * The streamKey used to authenticate against an output's target.
-   */
-  streamKey?: string;
-
-  /**
-   * A unique identifier for the output.
-   */
-  uid?: string;
-
-  /**
-   * The URL an output uses to restream.
-   */
-  url?: string;
-}
-
 export interface OutputCreateParams {
   /**
    * The streamKey used to authenticate against an output's target.
@@ -177,7 +177,7 @@ export interface OutputCreateParams {
   enabled?: boolean;
 }
 
-export interface OutputReplaceParams {
+export interface OutputUpdateParams {
   /**
    * When enabled, live video streamed to the associated live input will be sent to
    * the output URL. When disabled, live video will not be sent to the output URL,
@@ -190,8 +190,8 @@ export interface OutputReplaceParams {
 
 export namespace Outputs {
   export import OutputCreateResponse = OutputsAPI.OutputCreateResponse;
+  export import OutputUpdateResponse = OutputsAPI.OutputUpdateResponse;
   export import OutputListResponse = OutputsAPI.OutputListResponse;
-  export import OutputReplaceResponse = OutputsAPI.OutputReplaceResponse;
   export import OutputCreateParams = OutputsAPI.OutputCreateParams;
-  export import OutputReplaceParams = OutputsAPI.OutputReplaceParams;
+  export import OutputUpdateParams = OutputsAPI.OutputUpdateParams;
 }

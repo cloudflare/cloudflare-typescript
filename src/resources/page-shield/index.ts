@@ -7,18 +7,18 @@ export {
   Connections,
 } from './connections';
 export {
+  PageShieldUpdateResponse,
   PageShieldListResponse,
-  PageShieldReplaceResponse,
-  PageShieldReplaceParams,
+  PageShieldUpdateParams,
   PageShield,
 } from './page-shield';
 export {
   PolicyCreateResponse,
+  PolicyUpdateResponse,
   PolicyListResponse,
   PolicyGetResponse,
-  PolicyReplaceResponse,
   PolicyCreateParams,
-  PolicyReplaceParams,
+  PolicyUpdateParams,
   Policies,
 } from './policies';
 export { ScriptListResponse, ScriptGetResponse, ScriptListParams, Scripts } from './scripts';

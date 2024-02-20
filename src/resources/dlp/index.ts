@@ -3,18 +3,18 @@
 export { DLP } from './dlp';
 export {
   DatasetCreateResponse,
+  DatasetUpdateResponse,
   DatasetListResponse,
   DatasetGetResponse,
-  DatasetReplaceResponse,
   DatasetCreateParams,
-  DatasetReplaceParams,
+  DatasetUpdateParams,
   Datasets,
 } from './datasets/index';
 export { PatternValidateResponse, PatternValidateParams, Patterns } from './patterns';
 export {
+  PayloadLogUpdateResponse,
   PayloadLogGetResponse,
-  PayloadLogReplaceResponse,
-  PayloadLogReplaceParams,
+  PayloadLogUpdateParams,
   PayloadLogs,
 } from './payload-logs';
 export { ProfileListResponse, ProfileGetResponse, Profiles } from './profiles/index';

@@ -10,14 +10,14 @@ export class Webp extends APIResource {
    * offers a performance advantage over the original image format, Cloudflare will
    * serve a WebP version of the original image.
    */
-  update(
+  edit(
     zoneId: string,
-    body: WebpUpdateParams,
+    body: WebpEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WebpUpdateResponse> {
+  ): Core.APIPromise<WebpEditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/settings/webp`, { body, ...options }) as Core.APIPromise<{
-        result: WebpUpdateResponse;
+        result: WebpEditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -41,7 +41,7 @@ export class Webp extends APIResource {
  * offers a performance advantage over the original image format, Cloudflare will
  * serve a WebP version of the original image.
  */
-export interface WebpUpdateResponse {
+export interface WebpEditResponse {
   /**
    * ID of the zone setting.
    */
@@ -92,7 +92,7 @@ export interface WebpGetResponse {
   modified_on?: string | null;
 }
 
-export interface WebpUpdateParams {
+export interface WebpEditParams {
   /**
    * Value of the zone setting.
    */
@@ -100,7 +100,7 @@ export interface WebpUpdateParams {
 }
 
 export namespace Webp {
-  export import WebpUpdateResponse = WebpAPI.WebpUpdateResponse;
+  export import WebpEditResponse = WebpAPI.WebpEditResponse;
   export import WebpGetResponse = WebpAPI.WebpGetResponse;
-  export import WebpUpdateParams = WebpAPI.WebpUpdateParams;
+  export import WebpEditParams = WebpAPI.WebpEditParams;
 }

@@ -2,13 +2,13 @@
 
 export {
   OverrideCreateResponse,
+  OverrideUpdateResponse,
   OverrideListResponse,
   OverrideDeleteResponse,
   OverrideGetResponse,
-  OverrideReplaceResponse,
   OverrideCreateParams,
+  OverrideUpdateParams,
   OverrideListParams,
-  OverrideReplaceParams,
   OverrideListResponsesV4PagePaginationArray,
   Overrides,
 } from './overrides';

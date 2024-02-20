@@ -35,6 +35,23 @@ export class Namespaces extends APIResource {
   }
 
   /**
+   * Modifies a namespace's title.
+   */
+  update(
+    accountId: string,
+    namespaceId: string,
+    body: NamespaceUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<NamespaceUpdateResponse> {
+    return (
+      this._client.put(`/accounts/${accountId}/storage/kv/namespaces/${namespaceId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: NamespaceUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Returns the namespaces owned by an account.
    */
   list(
@@ -76,23 +93,6 @@ export class Namespaces extends APIResource {
       ) as Core.APIPromise<{ result: NamespaceDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
-
-  /**
-   * Modifies a namespace's title.
-   */
-  replace(
-    accountId: string,
-    namespaceId: string,
-    body: NamespaceReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<NamespaceReplaceResponse> {
-    return (
-      this._client.put(`/accounts/${accountId}/storage/kv/namespaces/${namespaceId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: NamespaceReplaceResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 
 export class NamespaceListResponsesV4PagePaginationArray extends V4PagePaginationArray<NamespaceListResponse> {}
@@ -115,6 +115,8 @@ export interface NamespaceCreateResponse {
   supports_url_encoding?: boolean;
 }
 
+export type NamespaceUpdateResponse = unknown | string;
+
 export interface NamespaceListResponse {
   /**
    * Namespace identifier tag.
@@ -135,9 +137,14 @@ export interface NamespaceListResponse {
 
 export type NamespaceDeleteResponse = unknown | string;
 
-export type NamespaceReplaceResponse = unknown | string;
-
 export interface NamespaceCreateParams {
+  /**
+   * A human-readable string name for a Namespace.
+   */
+  title: string;
+}
+
+export interface NamespaceUpdateParams {
   /**
    * A human-readable string name for a Namespace.
    */
@@ -156,35 +163,28 @@ export interface NamespaceListParams extends V4PagePaginationArrayParams {
   order?: 'id' | 'title';
 }
 
-export interface NamespaceReplaceParams {
-  /**
-   * A human-readable string name for a Namespace.
-   */
-  title: string;
-}
-
 export namespace Namespaces {
   export import NamespaceCreateResponse = NamespacesAPI.NamespaceCreateResponse;
+  export import NamespaceUpdateResponse = NamespacesAPI.NamespaceUpdateResponse;
   export import NamespaceListResponse = NamespacesAPI.NamespaceListResponse;
   export import NamespaceDeleteResponse = NamespacesAPI.NamespaceDeleteResponse;
-  export import NamespaceReplaceResponse = NamespacesAPI.NamespaceReplaceResponse;
   export import NamespaceListResponsesV4PagePaginationArray = NamespacesAPI.NamespaceListResponsesV4PagePaginationArray;
   export import NamespaceCreateParams = NamespacesAPI.NamespaceCreateParams;
+  export import NamespaceUpdateParams = NamespacesAPI.NamespaceUpdateParams;
   export import NamespaceListParams = NamespacesAPI.NamespaceListParams;
-  export import NamespaceReplaceParams = NamespacesAPI.NamespaceReplaceParams;
   export import Bulk = BulkAPI.Bulk;
+  export import BulkUpdateResponse = BulkAPI.BulkUpdateResponse;
   export import BulkDeleteResponse = BulkAPI.BulkDeleteResponse;
-  export import BulkReplaceResponse = BulkAPI.BulkReplaceResponse;
+  export import BulkUpdateParams = BulkAPI.BulkUpdateParams;
   export import BulkDeleteParams = BulkAPI.BulkDeleteParams;
-  export import BulkReplaceParams = BulkAPI.BulkReplaceParams;
   export import Keys = KeysAPI.Keys;
   export import KeyListResponse = KeysAPI.KeyListResponse;
   export import KeyListParams = KeysAPI.KeyListParams;
   export import Metadata = MetadataAPI.Metadata;
   export import MetadataGetResponse = MetadataAPI.MetadataGetResponse;
   export import Values = ValuesAPI.Values;
+  export import ValueUpdateResponse = ValuesAPI.ValueUpdateResponse;
   export import ValueDeleteResponse = ValuesAPI.ValueDeleteResponse;
   export import ValueGetResponse = ValuesAPI.ValueGetResponse;
-  export import ValueReplaceResponse = ValuesAPI.ValueReplaceResponse;
-  export import ValueReplaceParams = ValuesAPI.ValueReplaceParams;
+  export import ValueUpdateParams = ValuesAPI.ValueUpdateParams;
 }

@@ -13,6 +13,47 @@ const cloudflare = new Cloudflare({
 
 describe('resource fallbackDomains', () => {
   // skipped: tests are disabled for the time being
+  test.skip('update: only required params', async () => {
+    const responsePromise = cloudflare.devices.policies.fallbackDomains.update(
+      '699d98642c564d2e855e9661899b7252',
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      [{ suffix: 'example.com' }, { suffix: 'example.com' }, { suffix: 'example.com' }],
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('update: required and optional params', async () => {
+    const response = await cloudflare.devices.policies.fallbackDomains.update(
+      '699d98642c564d2e855e9661899b7252',
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      [
+        {
+          description: 'Domain bypass for local development',
+          dns_server: [{}, {}, {}],
+          suffix: 'example.com',
+        },
+        {
+          description: 'Domain bypass for local development',
+          dns_server: [{}, {}, {}],
+          suffix: 'example.com',
+        },
+        {
+          description: 'Domain bypass for local development',
+          dns_server: [{}, {}, {}],
+          suffix: 'example.com',
+        },
+      ],
+    );
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('list', async () => {
     const responsePromise = cloudflare.devices.policies.fallbackDomains.list(
       '699d98642c564d2e855e9661899b7252',
@@ -37,46 +78,5 @@ describe('resource fallbackDomains', () => {
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('replace: only required params', async () => {
-    const responsePromise = cloudflare.devices.policies.fallbackDomains.replace(
-      '699d98642c564d2e855e9661899b7252',
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      [{ suffix: 'example.com' }, { suffix: 'example.com' }, { suffix: 'example.com' }],
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('replace: required and optional params', async () => {
-    const response = await cloudflare.devices.policies.fallbackDomains.replace(
-      '699d98642c564d2e855e9661899b7252',
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      [
-        {
-          description: 'Domain bypass for local development',
-          dns_server: [{}, {}, {}],
-          suffix: 'example.com',
-        },
-        {
-          description: 'Domain bypass for local development',
-          dns_server: [{}, {}, {}],
-          suffix: 'example.com',
-        },
-        {
-          description: 'Domain bypass for local development',
-          dns_server: [{}, {}, {}],
-          suffix: 'example.com',
-        },
-      ],
-    );
   });
 });

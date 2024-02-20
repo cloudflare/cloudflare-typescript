@@ -13,33 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource bulk', () => {
   // skipped: tests are disabled for the time being
-  test.skip('delete: only required params', async () => {
-    const responsePromise = cloudflare.storage.kv.namespaces.bulk.delete(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '0f2ac74b498b48028cb68387c421e279',
-      ['My-Key', 'My-Key', 'My-Key'],
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('delete: required and optional params', async () => {
-    const response = await cloudflare.storage.kv.namespaces.bulk.delete(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '0f2ac74b498b48028cb68387c421e279',
-      ['My-Key', 'My-Key', 'My-Key'],
-    );
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('replace: only required params', async () => {
-    const responsePromise = cloudflare.storage.kv.namespaces.bulk.replace(
+  test.skip('update: only required params', async () => {
+    const responsePromise = cloudflare.storage.kv.namespaces.bulk.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '0f2ac74b498b48028cb68387c421e279',
       [{}, {}, {}],
@@ -54,8 +29,8 @@ describe('resource bulk', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('replace: required and optional params', async () => {
-    const response = await cloudflare.storage.kv.namespaces.bulk.replace(
+  test.skip('update: required and optional params', async () => {
+    const response = await cloudflare.storage.kv.namespaces.bulk.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '0f2ac74b498b48028cb68387c421e279',
       [
@@ -84,6 +59,31 @@ describe('resource bulk', () => {
           value: 'Some string',
         },
       ],
+    );
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('delete: only required params', async () => {
+    const responsePromise = cloudflare.storage.kv.namespaces.bulk.delete(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '0f2ac74b498b48028cb68387c421e279',
+      ['My-Key', 'My-Key', 'My-Key'],
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('delete: required and optional params', async () => {
+    const response = await cloudflare.storage.kv.namespaces.bulk.delete(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '0f2ac74b498b48028cb68387c421e279',
+      ['My-Key', 'My-Key', 'My-Key'],
     );
   });
 });

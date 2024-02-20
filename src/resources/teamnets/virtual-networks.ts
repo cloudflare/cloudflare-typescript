@@ -23,23 +23,6 @@ export class VirtualNetworks extends APIResource {
   }
 
   /**
-   * Updates an existing virtual network.
-   */
-  update(
-    accountId: string,
-    virtualNetworkId: string,
-    body: VirtualNetworkUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<VirtualNetworkUpdateResponse> {
-    return (
-      this._client.patch(`/accounts/${accountId}/teamnet/virtual_networks/${virtualNetworkId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: VirtualNetworkUpdateResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Lists and filters virtual networks in an account.
    */
   list(
@@ -79,11 +62,26 @@ export class VirtualNetworks extends APIResource {
       ) as Core.APIPromise<{ result: VirtualNetworkDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Updates an existing virtual network.
+   */
+  edit(
+    accountId: string,
+    virtualNetworkId: string,
+    body: VirtualNetworkEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<VirtualNetworkEditResponse> {
+    return (
+      this._client.patch(`/accounts/${accountId}/teamnet/virtual_networks/${virtualNetworkId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: VirtualNetworkEditResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
 export type VirtualNetworkCreateResponse = unknown | Array<unknown> | string;
-
-export type VirtualNetworkUpdateResponse = unknown | Array<unknown> | string;
 
 export type VirtualNetworkListResponse = Array<VirtualNetworkListResponse.VirtualNetworkListResponseItem>;
 
@@ -124,6 +122,8 @@ export namespace VirtualNetworkListResponse {
 
 export type VirtualNetworkDeleteResponse = unknown | Array<unknown> | string;
 
+export type VirtualNetworkEditResponse = unknown | Array<unknown> | string;
+
 export interface VirtualNetworkCreateParams {
   /**
    * A user-friendly name for the virtual network.
@@ -139,23 +139,6 @@ export interface VirtualNetworkCreateParams {
    * If `true`, this virtual network is the default for the account.
    */
   is_default?: boolean;
-}
-
-export interface VirtualNetworkUpdateParams {
-  /**
-   * Optional remark describing the virtual network.
-   */
-  comment?: string;
-
-  /**
-   * If `true`, this virtual network is the default for the account.
-   */
-  is_default_network?: boolean;
-
-  /**
-   * A user-friendly name for the virtual network.
-   */
-  name?: string;
 }
 
 export interface VirtualNetworkListParams {
@@ -182,12 +165,29 @@ export interface VirtualNetworkListParams {
   vnet_name?: string;
 }
 
+export interface VirtualNetworkEditParams {
+  /**
+   * Optional remark describing the virtual network.
+   */
+  comment?: string;
+
+  /**
+   * If `true`, this virtual network is the default for the account.
+   */
+  is_default_network?: boolean;
+
+  /**
+   * A user-friendly name for the virtual network.
+   */
+  name?: string;
+}
+
 export namespace VirtualNetworks {
   export import VirtualNetworkCreateResponse = VirtualNetworksAPI.VirtualNetworkCreateResponse;
-  export import VirtualNetworkUpdateResponse = VirtualNetworksAPI.VirtualNetworkUpdateResponse;
   export import VirtualNetworkListResponse = VirtualNetworksAPI.VirtualNetworkListResponse;
   export import VirtualNetworkDeleteResponse = VirtualNetworksAPI.VirtualNetworkDeleteResponse;
+  export import VirtualNetworkEditResponse = VirtualNetworksAPI.VirtualNetworkEditResponse;
   export import VirtualNetworkCreateParams = VirtualNetworksAPI.VirtualNetworkCreateParams;
-  export import VirtualNetworkUpdateParams = VirtualNetworksAPI.VirtualNetworkUpdateParams;
   export import VirtualNetworkListParams = VirtualNetworksAPI.VirtualNetworkListParams;
+  export import VirtualNetworkEditParams = VirtualNetworksAPI.VirtualNetworkEditParams;
 }

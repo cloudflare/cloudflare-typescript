@@ -26,6 +26,21 @@ export class Tokens extends APIResource {
   }
 
   /**
+   * Update an existing token.
+   */
+  update(
+    tokenId: unknown,
+    body: TokenUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TokenUpdateResponse> {
+    return (
+      this._client.put(`/user/tokens/${tokenId}`, { body, ...options }) as Core.APIPromise<{
+        result: TokenUpdateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * List all access tokens you created.
    */
   list(
@@ -69,21 +84,6 @@ export class Tokens extends APIResource {
   }
 
   /**
-   * Update an existing token.
-   */
-  replace(
-    tokenId: unknown,
-    body: TokenReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TokenReplaceResponse> {
-    return (
-      this._client.put(`/user/tokens/${tokenId}`, { body, ...options }) as Core.APIPromise<{
-        result: TokenReplaceResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Test whether a token works.
    */
   verify(options?: Core.RequestOptions): Core.APIPromise<TokenVerifyResponse> {
@@ -102,6 +102,8 @@ export interface TokenCreateResponse {
   value?: string;
 }
 
+export type TokenUpdateResponse = unknown | string | null;
+
 export type TokenListResponse = unknown;
 
 export interface TokenDeleteResponse {
@@ -112,8 +114,6 @@ export interface TokenDeleteResponse {
 }
 
 export type TokenGetResponse = unknown | string | null;
-
-export type TokenReplaceResponse = unknown | string | null;
 
 export interface TokenVerifyResponse {
   /**
@@ -214,14 +214,7 @@ export namespace TokenCreateParams {
   }
 }
 
-export interface TokenListParams extends V4PagePaginationArrayParams {
-  /**
-   * Direction to order results.
-   */
-  direction?: 'asc' | 'desc';
-}
-
-export interface TokenReplaceParams {
+export interface TokenUpdateParams {
   /**
    * Token name.
    */
@@ -230,14 +223,14 @@ export interface TokenReplaceParams {
   /**
    * List of access policies assigned to the token.
    */
-  policies: Array<TokenReplaceParams.Policy>;
+  policies: Array<TokenUpdateParams.Policy>;
 
   /**
    * Status of the token.
    */
   status: 'active' | 'disabled' | 'expired';
 
-  condition?: TokenReplaceParams.Condition;
+  condition?: TokenUpdateParams.Condition;
 
   /**
    * The expiration time on or after which the JWT MUST NOT be accepted for
@@ -251,7 +244,7 @@ export interface TokenReplaceParams {
   not_before?: string;
 }
 
-export namespace TokenReplaceParams {
+export namespace TokenUpdateParams {
   export interface Policy {
     /**
      * Allow or deny operations against the resources.
@@ -302,20 +295,27 @@ export namespace TokenReplaceParams {
   }
 }
 
+export interface TokenListParams extends V4PagePaginationArrayParams {
+  /**
+   * Direction to order results.
+   */
+  direction?: 'asc' | 'desc';
+}
+
 export namespace Tokens {
   export import TokenCreateResponse = TokensAPI.TokenCreateResponse;
+  export import TokenUpdateResponse = TokensAPI.TokenUpdateResponse;
   export import TokenListResponse = TokensAPI.TokenListResponse;
   export import TokenDeleteResponse = TokensAPI.TokenDeleteResponse;
   export import TokenGetResponse = TokensAPI.TokenGetResponse;
-  export import TokenReplaceResponse = TokensAPI.TokenReplaceResponse;
   export import TokenVerifyResponse = TokensAPI.TokenVerifyResponse;
   export import TokenListResponsesV4PagePaginationArray = TokensAPI.TokenListResponsesV4PagePaginationArray;
   export import TokenCreateParams = TokensAPI.TokenCreateParams;
+  export import TokenUpdateParams = TokensAPI.TokenUpdateParams;
   export import TokenListParams = TokensAPI.TokenListParams;
-  export import TokenReplaceParams = TokensAPI.TokenReplaceParams;
   export import PermissionGroups = PermissionGroupsAPI.PermissionGroups;
   export import PermissionGroupListResponse = PermissionGroupsAPI.PermissionGroupListResponse;
   export import Values = ValuesAPI.Values;
-  export import ValueReplaceResponse = ValuesAPI.ValueReplaceResponse;
-  export import ValueReplaceParams = ValuesAPI.ValueReplaceParams;
+  export import ValueUpdateResponse = ValuesAPI.ValueUpdateResponse;
+  export import ValueUpdateParams = ValuesAPI.ValueUpdateParams;
 }

@@ -24,6 +24,23 @@ export class Queues extends APIResource {
   }
 
   /**
+   * Updates a queue.
+   */
+  update(
+    accountId: string,
+    name: string,
+    body: QueueUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<QueueUpdateResponse | null> {
+    return (
+      this._client.put(`/accounts/${accountId}/workers/queues/${name}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: QueueUpdateResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Returns the queues owned by an account.
    */
   list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<QueueListResponse | null> {
@@ -63,26 +80,19 @@ export class Queues extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
-
-  /**
-   * Updates a queue.
-   */
-  replace(
-    accountId: string,
-    name: string,
-    body: QueueReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<QueueReplaceResponse | null> {
-    return (
-      this._client.put(`/accounts/${accountId}/workers/queues/${name}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: QueueReplaceResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 
 export interface QueueCreateResponse {
+  created_on?: unknown;
+
+  modified_on?: unknown;
+
+  queue_id?: unknown;
+
+  queue_name?: string;
+}
+
+export interface QueueUpdateResponse {
   created_on?: unknown;
 
   modified_on?: unknown;
@@ -134,33 +144,23 @@ export interface QueueGetResponse {
   queue_name?: string;
 }
 
-export interface QueueReplaceResponse {
-  created_on?: unknown;
-
-  modified_on?: unknown;
-
-  queue_id?: unknown;
-
-  queue_name?: string;
-}
-
 export type QueueCreateParams = unknown;
 
-export type QueueReplaceParams = unknown;
+export type QueueUpdateParams = unknown;
 
 export namespace Queues {
   export import QueueCreateResponse = QueuesAPI.QueueCreateResponse;
+  export import QueueUpdateResponse = QueuesAPI.QueueUpdateResponse;
   export import QueueListResponse = QueuesAPI.QueueListResponse;
   export import QueueDeleteResponse = QueuesAPI.QueueDeleteResponse;
   export import QueueGetResponse = QueuesAPI.QueueGetResponse;
-  export import QueueReplaceResponse = QueuesAPI.QueueReplaceResponse;
   export import QueueCreateParams = QueuesAPI.QueueCreateParams;
-  export import QueueReplaceParams = QueuesAPI.QueueReplaceParams;
+  export import QueueUpdateParams = QueuesAPI.QueueUpdateParams;
   export import Consumers = ConsumersAPI.Consumers;
   export import ConsumerCreateResponse = ConsumersAPI.ConsumerCreateResponse;
+  export import ConsumerUpdateResponse = ConsumersAPI.ConsumerUpdateResponse;
   export import ConsumerListResponse = ConsumersAPI.ConsumerListResponse;
   export import ConsumerDeleteResponse = ConsumersAPI.ConsumerDeleteResponse;
-  export import ConsumerReplaceResponse = ConsumersAPI.ConsumerReplaceResponse;
   export import ConsumerCreateParams = ConsumersAPI.ConsumerCreateParams;
-  export import ConsumerReplaceParams = ConsumersAPI.ConsumerReplaceParams;
+  export import ConsumerUpdateParams = ConsumersAPI.ConsumerUpdateParams;
 }

@@ -26,6 +26,23 @@ export class Lists extends APIResource {
   }
 
   /**
+   * Updates the description of a list.
+   */
+  update(
+    accountId: string,
+    listId: string,
+    body: ListUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ListUpdateResponse | null> {
+    return (
+      this._client.put(`/accounts/${accountId}/rules/lists/${listId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: ListUpdateResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Fetches all lists in the account.
    */
   list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<ListListResponse | null> {
@@ -65,26 +82,11 @@ export class Lists extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
-
-  /**
-   * Updates the description of a list.
-   */
-  replace(
-    accountId: string,
-    listId: string,
-    body: ListReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ListReplaceResponse | null> {
-    return (
-      this._client.put(`/accounts/${accountId}/rules/lists/${listId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: ListReplaceResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 
 export type ListCreateResponse = Array<unknown>;
+
+export type ListUpdateResponse = Array<unknown>;
 
 export type ListListResponse = Array<ListListResponse.ListListResponseItem>;
 
@@ -142,8 +144,6 @@ export interface ListDeleteResponse {
 
 export type ListGetResponse = Array<unknown>;
 
-export type ListReplaceResponse = Array<unknown>;
-
 export interface ListCreateParams {
   /**
    * The type of the list. Each type supports specific list items (IP addresses,
@@ -162,7 +162,7 @@ export interface ListCreateParams {
   description?: string;
 }
 
-export interface ListReplaceParams {
+export interface ListUpdateParams {
   /**
    * An informative summary of the list.
    */
@@ -171,22 +171,22 @@ export interface ListReplaceParams {
 
 export namespace Lists {
   export import ListCreateResponse = ListsAPI.ListCreateResponse;
+  export import ListUpdateResponse = ListsAPI.ListUpdateResponse;
   export import ListListResponse = ListsAPI.ListListResponse;
   export import ListDeleteResponse = ListsAPI.ListDeleteResponse;
   export import ListGetResponse = ListsAPI.ListGetResponse;
-  export import ListReplaceResponse = ListsAPI.ListReplaceResponse;
   export import ListCreateParams = ListsAPI.ListCreateParams;
-  export import ListReplaceParams = ListsAPI.ListReplaceParams;
+  export import ListUpdateParams = ListsAPI.ListUpdateParams;
   export import BulkOperations = BulkOperationsAPI.BulkOperations;
   export import BulkOperationGetResponse = BulkOperationsAPI.BulkOperationGetResponse;
   export import Items = ItemsAPI.Items;
   export import ItemCreateResponse = ItemsAPI.ItemCreateResponse;
+  export import ItemUpdateResponse = ItemsAPI.ItemUpdateResponse;
   export import ItemListResponse = ItemsAPI.ItemListResponse;
   export import ItemDeleteResponse = ItemsAPI.ItemDeleteResponse;
   export import ItemGetResponse = ItemsAPI.ItemGetResponse;
-  export import ItemReplaceResponse = ItemsAPI.ItemReplaceResponse;
   export import ItemCreateParams = ItemsAPI.ItemCreateParams;
+  export import ItemUpdateParams = ItemsAPI.ItemUpdateParams;
   export import ItemListParams = ItemsAPI.ItemListParams;
   export import ItemDeleteParams = ItemsAPI.ItemDeleteParams;
-  export import ItemReplaceParams = ItemsAPI.ItemReplaceParams;
 }

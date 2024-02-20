@@ -13,12 +13,12 @@ export namespace Spectrum {
   export import Analytics = AnalyticsAPI.Analytics;
   export import Apps = AppsAPI.Apps;
   export import AppCreateResponse = AppsAPI.AppCreateResponse;
+  export import AppUpdateResponse = AppsAPI.AppUpdateResponse;
   export import AppListResponse = AppsAPI.AppListResponse;
   export import AppDeleteResponse = AppsAPI.AppDeleteResponse;
   export import AppGetResponse = AppsAPI.AppGetResponse;
-  export import AppReplaceResponse = AppsAPI.AppReplaceResponse;
   export import AppListResponsesV4PagePaginationArray = AppsAPI.AppListResponsesV4PagePaginationArray;
   export import AppCreateParams = AppsAPI.AppCreateParams;
+  export import AppUpdateParams = AppsAPI.AppUpdateParams;
   export import AppListParams = AppsAPI.AppListParams;
-  export import AppReplaceParams = AppsAPI.AppReplaceParams;
 }

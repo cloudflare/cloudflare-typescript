@@ -8,18 +8,18 @@ export class Settings extends APIResource {
   /**
    * Patch script metadata, such as bindings
    */
-  update(
+  edit(
     accountId: string,
     dispatchNamespace: string,
     scriptName: string,
-    body: SettingUpdateParams,
+    body: SettingEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SettingUpdateResponse> {
+  ): Core.APIPromise<SettingEditResponse> {
     return (
       this._client.patch(
         `/accounts/${accountId}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/settings`,
         { body, ...options },
-      ) as Core.APIPromise<{ result: SettingUpdateResponse }>
+      ) as Core.APIPromise<{ result: SettingEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -41,19 +41,19 @@ export class Settings extends APIResource {
   }
 }
 
-export interface SettingUpdateResponse {
+export interface SettingEditResponse {
   /**
    * List of bindings attached to this Worker
    */
   bindings?: Array<
-    | SettingUpdateResponse.WorkersKvNamespaceBinding
-    | SettingUpdateResponse.WorkersServiceBinding
-    | SettingUpdateResponse.WorkersDoBinding
-    | SettingUpdateResponse.WorkersR2Binding
-    | SettingUpdateResponse.WorkersQueueBinding
-    | SettingUpdateResponse.WorkersD1Binding
-    | SettingUpdateResponse.WorkersDispatchNamespaceBinding
-    | SettingUpdateResponse.WorkersMtlsCertBinding
+    | SettingEditResponse.WorkersKvNamespaceBinding
+    | SettingEditResponse.WorkersServiceBinding
+    | SettingEditResponse.WorkersDoBinding
+    | SettingEditResponse.WorkersR2Binding
+    | SettingEditResponse.WorkersQueueBinding
+    | SettingEditResponse.WorkersD1Binding
+    | SettingEditResponse.WorkersDispatchNamespaceBinding
+    | SettingEditResponse.WorkersMtlsCertBinding
   >;
 
   /**
@@ -74,11 +74,9 @@ export interface SettingUpdateResponse {
   /**
    * Migrations to apply for Durable Objects associated with this Worker.
    */
-  migrations?:
-    | SettingUpdateResponse.WorkersSingleStepMigrations
-    | SettingUpdateResponse.WorkersSteppedMigrations;
+  migrations?: SettingEditResponse.WorkersSingleStepMigrations | SettingEditResponse.WorkersSteppedMigrations;
 
-  placement?: SettingUpdateResponse.Placement;
+  placement?: SettingEditResponse.Placement;
 
   /**
    * Tags to help you manage your Workers
@@ -88,7 +86,7 @@ export interface SettingUpdateResponse {
   /**
    * List of Workers that will consume logs from the attached Worker.
    */
-  tail_consumers?: Array<SettingUpdateResponse.TailConsumer>;
+  tail_consumers?: Array<SettingEditResponse.TailConsumer>;
 
   /**
    * Specifies the usage model for the Worker (e.g. 'bundled' or 'unbound').
@@ -96,7 +94,7 @@ export interface SettingUpdateResponse {
   usage_model?: string;
 }
 
-export namespace SettingUpdateResponse {
+export namespace SettingEditResponse {
   export interface WorkersKvNamespaceBinding {
     /**
      * A JavaScript variable name for the binding.
@@ -837,12 +835,12 @@ export namespace SettingGetResponse {
   }
 }
 
-export interface SettingUpdateParams {
-  errors: Array<SettingUpdateParams.Error>;
+export interface SettingEditParams {
+  errors: Array<SettingEditParams.Error>;
 
-  messages: Array<SettingUpdateParams.Message>;
+  messages: Array<SettingEditParams.Message>;
 
-  result: SettingUpdateParams.Result;
+  result: SettingEditParams.Result;
 
   /**
    * Whether the API call was successful
@@ -850,7 +848,7 @@ export interface SettingUpdateParams {
   success: true;
 }
 
-export namespace SettingUpdateParams {
+export namespace SettingEditParams {
   export interface Error {
     code: number;
 
@@ -1212,7 +1210,7 @@ export namespace SettingUpdateParams {
 }
 
 export namespace Settings {
-  export import SettingUpdateResponse = SettingsAPI.SettingUpdateResponse;
+  export import SettingEditResponse = SettingsAPI.SettingEditResponse;
   export import SettingGetResponse = SettingsAPI.SettingGetResponse;
-  export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;
+  export import SettingEditParams = SettingsAPI.SettingEditParams;
 }

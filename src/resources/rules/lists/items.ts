@@ -28,6 +28,28 @@ export class Items extends APIResource {
   }
 
   /**
+   * Removes all existing items from the list and adds the provided items to the
+   * list.
+   *
+   * This operation is asynchronous. To get current the operation status, invoke the
+   * [Get bulk operation status](/operations/lists-get-bulk-operation-status)
+   * endpoint with the returned `operation_id`.
+   */
+  update(
+    accountId: string,
+    listId: string,
+    body: ItemUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ItemUpdateResponse | null> {
+    return (
+      this._client.put(`/accounts/${accountId}/rules/lists/${listId}/items`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: ItemUpdateResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Fetches all the items in the list.
    */
   list(
@@ -95,31 +117,16 @@ export class Items extends APIResource {
       ) as Core.APIPromise<{ result: ItemGetResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
-
-  /**
-   * Removes all existing items from the list and adds the provided items to the
-   * list.
-   *
-   * This operation is asynchronous. To get current the operation status, invoke the
-   * [Get bulk operation status](/operations/lists-get-bulk-operation-status)
-   * endpoint with the returned `operation_id`.
-   */
-  replace(
-    accountId: string,
-    listId: string,
-    body: ItemReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ItemReplaceResponse | null> {
-    return (
-      this._client.put(`/accounts/${accountId}/rules/lists/${listId}/items`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: ItemReplaceResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 
 export interface ItemCreateResponse {
+  /**
+   * The unique operation ID of the asynchronous action.
+   */
+  operation_id?: string;
+}
+
+export interface ItemUpdateResponse {
   /**
    * The unique operation ID of the asynchronous action.
    */
@@ -174,16 +181,71 @@ export namespace ItemGetResponse {
   }
 }
 
-export interface ItemReplaceResponse {
-  /**
-   * The unique operation ID of the asynchronous action.
-   */
-  operation_id?: string;
-}
-
 export type ItemCreateParams = Array<ItemCreateParams.Body>;
 
 export namespace ItemCreateParams {
+  export interface Body {
+    /**
+     * A non-negative 32 bit integer
+     */
+    asn?: number;
+
+    /**
+     * An informative summary of the list item.
+     */
+    comment?: string;
+
+    /**
+     * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
+     * 0 to 9, wildcards (\*), and the hyphen (-).
+     */
+    hostname?: Body.Hostname;
+
+    /**
+     * An IPv4 address, an IPv4 CIDR, or an IPv6 CIDR. IPv6 CIDRs are limited to a
+     * maximum of /64.
+     */
+    ip?: string;
+
+    /**
+     * The definition of the redirect.
+     */
+    redirect?: Body.Redirect;
+  }
+
+  export namespace Body {
+    /**
+     * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
+     * 0 to 9, wildcards (\*), and the hyphen (-).
+     */
+    export interface Hostname {
+      url_hostname: string;
+    }
+
+    /**
+     * The definition of the redirect.
+     */
+    export interface Redirect {
+      source_url: string;
+
+      target_url: string;
+
+      include_subdomains?: boolean;
+
+      preserve_path_suffix?: boolean;
+
+      preserve_query_string?: boolean;
+
+      status_code?: 301 | 302 | 307 | 308;
+
+      subpath_matching?: boolean;
+    }
+  }
+}
+
+export type ItemUpdateParams = Array<ItemUpdateParams.Body>;
+
+export namespace ItemUpdateParams {
   export interface Body {
     /**
      * A non-negative 32 bit integer
@@ -279,76 +341,14 @@ export namespace ItemDeleteParams {
   }
 }
 
-export type ItemReplaceParams = Array<ItemReplaceParams.Body>;
-
-export namespace ItemReplaceParams {
-  export interface Body {
-    /**
-     * A non-negative 32 bit integer
-     */
-    asn?: number;
-
-    /**
-     * An informative summary of the list item.
-     */
-    comment?: string;
-
-    /**
-     * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
-     * 0 to 9, wildcards (\*), and the hyphen (-).
-     */
-    hostname?: Body.Hostname;
-
-    /**
-     * An IPv4 address, an IPv4 CIDR, or an IPv6 CIDR. IPv6 CIDRs are limited to a
-     * maximum of /64.
-     */
-    ip?: string;
-
-    /**
-     * The definition of the redirect.
-     */
-    redirect?: Body.Redirect;
-  }
-
-  export namespace Body {
-    /**
-     * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
-     * 0 to 9, wildcards (\*), and the hyphen (-).
-     */
-    export interface Hostname {
-      url_hostname: string;
-    }
-
-    /**
-     * The definition of the redirect.
-     */
-    export interface Redirect {
-      source_url: string;
-
-      target_url: string;
-
-      include_subdomains?: boolean;
-
-      preserve_path_suffix?: boolean;
-
-      preserve_query_string?: boolean;
-
-      status_code?: 301 | 302 | 307 | 308;
-
-      subpath_matching?: boolean;
-    }
-  }
-}
-
 export namespace Items {
   export import ItemCreateResponse = ItemsAPI.ItemCreateResponse;
+  export import ItemUpdateResponse = ItemsAPI.ItemUpdateResponse;
   export import ItemListResponse = ItemsAPI.ItemListResponse;
   export import ItemDeleteResponse = ItemsAPI.ItemDeleteResponse;
   export import ItemGetResponse = ItemsAPI.ItemGetResponse;
-  export import ItemReplaceResponse = ItemsAPI.ItemReplaceResponse;
   export import ItemCreateParams = ItemsAPI.ItemCreateParams;
+  export import ItemUpdateParams = ItemsAPI.ItemUpdateParams;
   export import ItemListParams = ItemsAPI.ItemListParams;
   export import ItemDeleteParams = ItemsAPI.ItemDeleteParams;
-  export import ItemReplaceParams = ItemsAPI.ItemReplaceParams;
 }

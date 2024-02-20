@@ -21,6 +21,23 @@ export class Routes extends APIResource {
   }
 
   /**
+   * Updates the URL pattern or Worker associated with a route.
+   */
+  update(
+    zoneId: string,
+    routeId: string,
+    body: RouteUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RouteUpdateResponse> {
+    return (
+      this._client.put(`/zones/${zoneId}/workers/routes/${routeId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: RouteUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Returns routes for a zone.
    */
   list(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<RouteListResponse> {
@@ -56,26 +73,23 @@ export class Routes extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
-
-  /**
-   * Updates the URL pattern or Worker associated with a route.
-   */
-  replace(
-    zoneId: string,
-    routeId: string,
-    body: RouteReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RouteReplaceResponse> {
-    return (
-      this._client.put(`/zones/${zoneId}/workers/routes/${routeId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: RouteReplaceResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 
 export type RouteCreateResponse = unknown | string;
+
+export interface RouteUpdateResponse {
+  /**
+   * Identifier
+   */
+  id: string;
+
+  pattern: string;
+
+  /**
+   * Name of the script, used in URLs and route configuration.
+   */
+  script: string;
+}
 
 export type RouteListResponse = Array<RouteListResponse.RouteListResponseItem>;
 
@@ -111,20 +125,6 @@ export interface RouteGetResponse {
   script: string;
 }
 
-export interface RouteReplaceResponse {
-  /**
-   * Identifier
-   */
-  id: string;
-
-  pattern: string;
-
-  /**
-   * Name of the script, used in URLs and route configuration.
-   */
-  script: string;
-}
-
 export interface RouteCreateParams {
   pattern: string;
 
@@ -134,7 +134,7 @@ export interface RouteCreateParams {
   script?: string;
 }
 
-export interface RouteReplaceParams {
+export interface RouteUpdateParams {
   pattern: string;
 
   /**
@@ -145,10 +145,10 @@ export interface RouteReplaceParams {
 
 export namespace Routes {
   export import RouteCreateResponse = RoutesAPI.RouteCreateResponse;
+  export import RouteUpdateResponse = RoutesAPI.RouteUpdateResponse;
   export import RouteListResponse = RoutesAPI.RouteListResponse;
   export import RouteDeleteResponse = RoutesAPI.RouteDeleteResponse;
   export import RouteGetResponse = RoutesAPI.RouteGetResponse;
-  export import RouteReplaceResponse = RoutesAPI.RouteReplaceResponse;
   export import RouteCreateParams = RoutesAPI.RouteCreateParams;
-  export import RouteReplaceParams = RoutesAPI.RouteReplaceParams;
+  export import RouteUpdateParams = RoutesAPI.RouteUpdateParams;
 }

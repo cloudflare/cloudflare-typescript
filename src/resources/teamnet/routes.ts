@@ -21,24 +21,6 @@ export class Routes extends APIResource {
   }
 
   /**
-   * Updates an existing private network route in an account. The fields that are
-   * meant to be updated should be provided in the body of the request.
-   */
-  update(
-    accountId: string,
-    routeId: string,
-    body: RouteUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RouteUpdateResponse> {
-    return (
-      this._client.patch(`/accounts/${accountId}/teamnet/routes/${routeId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: RouteUpdateResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Deletes a private network route from an account.
    */
   delete(
@@ -52,49 +34,27 @@ export class Routes extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Updates an existing private network route in an account. The fields that are
+   * meant to be updated should be provided in the body of the request.
+   */
+  edit(
+    accountId: string,
+    routeId: string,
+    body: RouteEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RouteEditResponse> {
+    return (
+      this._client.patch(`/accounts/${accountId}/teamnet/routes/${routeId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: RouteEditResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
 export interface RouteCreateResponse {
-  /**
-   * UUID of the route.
-   */
-  id?: string;
-
-  /**
-   * Optional remark describing the route.
-   */
-  comment?: string;
-
-  /**
-   * Timestamp of when the route was created.
-   */
-  created_at?: unknown;
-
-  /**
-   * Timestamp of when the route was deleted. If `null`, the route has not been
-   * deleted.
-   */
-  deleted_at?: string | null;
-
-  /**
-   * The private IPv4 or IPv6 range connected by the route, in CIDR notation.
-   */
-  network?: string;
-
-  /**
-   * UUID of the Cloudflare Tunnel serving the route.
-   */
-  tunnel_id?: unknown;
-
-  /**
-   * UUID of the Tunnel Virtual Network this route belongs to. If no virtual networks
-   * are configured, the route is assigned to the default virtual network of the
-   * account.
-   */
-  virtual_network_id?: unknown;
-}
-
-export interface RouteUpdateResponse {
   /**
    * UUID of the route.
    */
@@ -174,6 +134,46 @@ export interface RouteDeleteResponse {
   virtual_network_id?: unknown;
 }
 
+export interface RouteEditResponse {
+  /**
+   * UUID of the route.
+   */
+  id?: string;
+
+  /**
+   * Optional remark describing the route.
+   */
+  comment?: string;
+
+  /**
+   * Timestamp of when the route was created.
+   */
+  created_at?: unknown;
+
+  /**
+   * Timestamp of when the route was deleted. If `null`, the route has not been
+   * deleted.
+   */
+  deleted_at?: string | null;
+
+  /**
+   * The private IPv4 or IPv6 range connected by the route, in CIDR notation.
+   */
+  network?: string;
+
+  /**
+   * UUID of the Cloudflare Tunnel serving the route.
+   */
+  tunnel_id?: unknown;
+
+  /**
+   * UUID of the Tunnel Virtual Network this route belongs to. If no virtual networks
+   * are configured, the route is assigned to the default virtual network of the
+   * account.
+   */
+  virtual_network_id?: unknown;
+}
+
 export interface RouteCreateParams {
   /**
    * The private IPv4 or IPv6 range connected by the route, in CIDR notation.
@@ -193,7 +193,7 @@ export interface RouteCreateParams {
   virtual_network_id?: unknown;
 }
 
-export interface RouteUpdateParams {
+export interface RouteEditParams {
   /**
    * Optional remark describing the route.
    */
@@ -224,8 +224,8 @@ export interface RouteUpdateParams {
 
 export namespace Routes {
   export import RouteCreateResponse = RoutesAPI.RouteCreateResponse;
-  export import RouteUpdateResponse = RoutesAPI.RouteUpdateResponse;
   export import RouteDeleteResponse = RoutesAPI.RouteDeleteResponse;
+  export import RouteEditResponse = RoutesAPI.RouteEditResponse;
   export import RouteCreateParams = RoutesAPI.RouteCreateParams;
-  export import RouteUpdateParams = RoutesAPI.RouteUpdateParams;
+  export import RouteEditParams = RoutesAPI.RouteEditParams;
 }

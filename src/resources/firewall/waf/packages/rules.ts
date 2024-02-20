@@ -11,18 +11,18 @@ export class Rules extends APIResource {
    * **Note:** Applies only to the
    * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
    */
-  update(
+  edit(
     zoneId: string,
     packageId: string,
     ruleId: string,
-    body: RuleUpdateParams,
+    body: RuleEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleUpdateResponse> {
+  ): Core.APIPromise<RuleEditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/firewall/waf/packages/${packageId}/rules/${ruleId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: RuleUpdateResponse }>
+      }) as Core.APIPromise<{ result: RuleEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -53,12 +53,12 @@ export class Rules extends APIResource {
  * configure the total scoring threshold through the 'sensitivity' property of the
  * WAF package.
  */
-export type RuleUpdateResponse =
-  | RuleUpdateResponse.WAFManagedRulesAnomalyRule
-  | RuleUpdateResponse.WAFManagedRulesTraditionalDenyRule
-  | RuleUpdateResponse.WAFManagedRulesTraditionalAllowRule;
+export type RuleEditResponse =
+  | RuleEditResponse.WAFManagedRulesAnomalyRule
+  | RuleEditResponse.WAFManagedRulesTraditionalDenyRule
+  | RuleEditResponse.WAFManagedRulesTraditionalAllowRule;
 
-export namespace RuleUpdateResponse {
+export namespace RuleEditResponse {
   /**
    * When triggered, anomaly detection WAF rules contribute to an overall threat
    * score that will determine if a request is considered malicious. You can
@@ -250,7 +250,7 @@ export namespace RuleUpdateResponse {
 
 export type RuleGetResponse = unknown | Array<unknown> | string;
 
-export interface RuleUpdateParams {
+export interface RuleEditParams {
   /**
    * The mode/action of the rule when triggered. You must use a value from the
    * `allowed_modes` array of the current rule.
@@ -259,7 +259,7 @@ export interface RuleUpdateParams {
 }
 
 export namespace Rules {
-  export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
+  export import RuleEditResponse = RulesAPI.RuleEditResponse;
   export import RuleGetResponse = RulesAPI.RuleGetResponse;
-  export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
+  export import RuleEditParams = RulesAPI.RuleEditParams;
 }

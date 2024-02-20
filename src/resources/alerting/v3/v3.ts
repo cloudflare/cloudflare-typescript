@@ -35,10 +35,10 @@ export namespace V3 {
   export import HistoryListParams = HistoriesAPI.HistoryListParams;
   export import Policies = PoliciesAPI.Policies;
   export import PolicyCreateResponse = PoliciesAPI.PolicyCreateResponse;
+  export import PolicyUpdateResponse = PoliciesAPI.PolicyUpdateResponse;
   export import PolicyListResponse = PoliciesAPI.PolicyListResponse;
   export import PolicyDeleteResponse = PoliciesAPI.PolicyDeleteResponse;
   export import PolicyGetResponse = PoliciesAPI.PolicyGetResponse;
-  export import PolicyReplaceResponse = PoliciesAPI.PolicyReplaceResponse;
   export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
-  export import PolicyReplaceParams = PoliciesAPI.PolicyReplaceParams;
+  export import PolicyUpdateParams = PoliciesAPI.PolicyUpdateParams;
 }

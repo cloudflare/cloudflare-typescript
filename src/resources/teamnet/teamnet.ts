@@ -10,8 +10,8 @@ export class Teamnet extends APIResource {
 export namespace Teamnet {
   export import Routes = RoutesAPI.Routes;
   export import RouteCreateResponse = RoutesAPI.RouteCreateResponse;
-  export import RouteUpdateResponse = RoutesAPI.RouteUpdateResponse;
   export import RouteDeleteResponse = RoutesAPI.RouteDeleteResponse;
+  export import RouteEditResponse = RoutesAPI.RouteEditResponse;
   export import RouteCreateParams = RoutesAPI.RouteCreateParams;
-  export import RouteUpdateParams = RoutesAPI.RouteUpdateParams;
+  export import RouteEditParams = RoutesAPI.RouteEditParams;
 }

@@ -13,8 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource minTLSVersion', () => {
   // skipped: tests are disabled for the time being
-  test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.settings.minTLSVersion.update('023e105f4ecef8ad9ca31a8372d0c353', {
+  test.skip('edit: only required params', async () => {
+    const responsePromise = cloudflare.settings.minTLSVersion.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       value: '1.0',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -27,8 +27,8 @@ describe('resource minTLSVersion', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.settings.minTLSVersion.update('023e105f4ecef8ad9ca31a8372d0c353', {
+  test.skip('edit: required and optional params', async () => {
+    const response = await cloudflare.settings.minTLSVersion.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       value: '1.0',
     });
   });

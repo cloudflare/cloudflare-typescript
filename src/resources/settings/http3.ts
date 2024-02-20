@@ -8,14 +8,14 @@ export class HTTP3 extends APIResource {
   /**
    * Value of the HTTP3 setting.
    */
-  update(
+  edit(
     zoneId: string,
-    body: HTTP3UpdateParams,
+    body: HTTP3EditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<HTTP3UpdateResponse> {
+  ): Core.APIPromise<HTTP3EditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/settings/http3`, { body, ...options }) as Core.APIPromise<{
-        result: HTTP3UpdateResponse;
+        result: HTTP3EditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -35,7 +35,7 @@ export class HTTP3 extends APIResource {
 /**
  * HTTP3 enabled for this zone.
  */
-export interface HTTP3UpdateResponse {
+export interface HTTP3EditResponse {
   /**
    * ID of the zone setting.
    */
@@ -84,7 +84,7 @@ export interface HTTP3GetResponse {
   modified_on?: string | null;
 }
 
-export interface HTTP3UpdateParams {
+export interface HTTP3EditParams {
   /**
    * Value of the HTTP3 setting.
    */
@@ -92,7 +92,7 @@ export interface HTTP3UpdateParams {
 }
 
 export namespace HTTP3 {
-  export import HTTP3UpdateResponse = HTTP3API.HTTP3UpdateResponse;
+  export import HTTP3EditResponse = HTTP3API.HTTP3EditResponse;
   export import HTTP3GetResponse = HTTP3API.HTTP3GetResponse;
-  export import HTTP3UpdateParams = HTTP3API.HTTP3UpdateParams;
+  export import HTTP3EditParams = HTTP3API.HTTP3EditParams;
 }

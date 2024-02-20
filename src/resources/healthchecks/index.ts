@@ -2,12 +2,12 @@
 
 export {
   HealthcheckCreateResponse,
+  HealthcheckUpdateResponse,
   HealthcheckListResponse,
   HealthcheckDeleteResponse,
   HealthcheckGetResponse,
-  HealthcheckReplaceResponse,
   HealthcheckCreateParams,
-  HealthcheckReplaceParams,
+  HealthcheckUpdateParams,
   Healthchecks,
 } from './healthchecks';
 export {

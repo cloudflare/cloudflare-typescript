@@ -11,14 +11,14 @@ export class EarlyHints extends APIResource {
    * [Early Hints](https://developers.cloudflare.com/cache/about/early-hints) for
    * more information.
    */
-  update(
+  edit(
     zoneId: string,
-    body: EarlyHintUpdateParams,
+    body: EarlyHintEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<EarlyHintUpdateResponse> {
+  ): Core.APIPromise<EarlyHintEditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/settings/early_hints`, { body, ...options }) as Core.APIPromise<{
-        result: EarlyHintUpdateResponse;
+        result: EarlyHintEditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -44,7 +44,7 @@ export class EarlyHints extends APIResource {
  * [Early Hints](https://developers.cloudflare.com/cache/about/early-hints) for
  * more information.
  */
-export interface EarlyHintUpdateResponse {
+export interface EarlyHintEditResponse {
   /**
    * ID of the zone setting.
    */
@@ -96,7 +96,7 @@ export interface EarlyHintGetResponse {
   modified_on?: string | null;
 }
 
-export interface EarlyHintUpdateParams {
+export interface EarlyHintEditParams {
   /**
    * Value of the zone setting.
    */
@@ -104,7 +104,7 @@ export interface EarlyHintUpdateParams {
 }
 
 export namespace EarlyHints {
-  export import EarlyHintUpdateResponse = EarlyHintsAPI.EarlyHintUpdateResponse;
+  export import EarlyHintEditResponse = EarlyHintsAPI.EarlyHintEditResponse;
   export import EarlyHintGetResponse = EarlyHintsAPI.EarlyHintGetResponse;
-  export import EarlyHintUpdateParams = EarlyHintsAPI.EarlyHintUpdateParams;
+  export import EarlyHintEditParams = EarlyHintsAPI.EarlyHintEditParams;
 }

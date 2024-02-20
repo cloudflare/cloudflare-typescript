@@ -8,14 +8,14 @@ export class TLS1_3 extends APIResource {
   /**
    * Changes TLS 1.3 setting.
    */
-  update(
+  edit(
     zoneId: string,
-    body: TLS1_3UpdateParams,
+    body: TLS1_3EditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TLS1_3UpdateResponse> {
+  ): Core.APIPromise<TLS1_3EditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/settings/tls_1_3`, { body, ...options }) as Core.APIPromise<{
-        result: TLS1_3UpdateResponse;
+        result: TLS1_3EditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -35,7 +35,7 @@ export class TLS1_3 extends APIResource {
 /**
  * Enables Crypto TLS 1.3 feature for a zone.
  */
-export interface TLS1_3UpdateResponse {
+export interface TLS1_3EditResponse {
   /**
    * ID of the zone setting.
    */
@@ -84,7 +84,7 @@ export interface TLS1_3GetResponse {
   modified_on?: string | null;
 }
 
-export interface TLS1_3UpdateParams {
+export interface TLS1_3EditParams {
   /**
    * Value of the zone setting. Notes: Default value depends on the zone's plan
    * level.
@@ -93,7 +93,7 @@ export interface TLS1_3UpdateParams {
 }
 
 export namespace TLS1_3 {
-  export import TLS1_3UpdateResponse = TLS1_3API.TLS1_3UpdateResponse;
+  export import TLS1_3EditResponse = TLS1_3API.TLS1_3EditResponse;
   export import TLS1_3GetResponse = TLS1_3API.TLS1_3GetResponse;
-  export import TLS1_3UpdateParams = TLS1_3API.TLS1_3UpdateParams;
+  export import TLS1_3EditParams = TLS1_3API.TLS1_3EditParams;
 }

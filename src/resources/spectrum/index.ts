@@ -3,13 +3,13 @@
 export { Analytics } from './analytics/index';
 export {
   AppCreateResponse,
+  AppUpdateResponse,
   AppListResponse,
   AppDeleteResponse,
   AppGetResponse,
-  AppReplaceResponse,
   AppCreateParams,
+  AppUpdateParams,
   AppListParams,
-  AppReplaceParams,
   AppListResponsesV4PagePaginationArray,
   Apps,
 } from './apps';

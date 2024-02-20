@@ -24,6 +24,23 @@ export class Apps extends APIResource {
   }
 
   /**
+   * Updates a previously existing application's configuration that uses a name for
+   * the origin.
+   */
+  update(
+    zone: string,
+    appId: string,
+    body: AppUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AppUpdateResponse | null> {
+    return (
+      this._client.put(`/zones/${zone}/spectrum/apps/${appId}`, { body, ...options }) as Core.APIPromise<{
+        result: AppUpdateResponse | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Retrieves a list of currently existing Spectrum applications inside a zone.
    */
   list(
@@ -71,23 +88,6 @@ export class Apps extends APIResource {
     return (
       this._client.get(`/zones/${zone}/spectrum/apps/${appId}`, options) as Core.APIPromise<{
         result: AppGetResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Updates a previously existing application's configuration that uses a name for
-   * the origin.
-   */
-  replace(
-    zone: string,
-    appId: string,
-    body: AppReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AppReplaceResponse | null> {
-    return (
-      this._client.put(`/zones/${zone}/spectrum/apps/${appId}`, { body, ...options }) as Core.APIPromise<{
-        result: AppReplaceResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -243,18 +243,7 @@ export namespace AppCreateResponse {
   }
 }
 
-export type AppListResponse = unknown;
-
-export interface AppDeleteResponse {
-  /**
-   * Application identifier.
-   */
-  id?: string;
-}
-
-export type AppGetResponse = unknown | string;
-
-export interface AppReplaceResponse {
+export interface AppUpdateResponse {
   /**
    * Application identifier.
    */
@@ -274,12 +263,12 @@ export interface AppReplaceResponse {
   /**
    * The name and type of DNS record for the Spectrum application.
    */
-  dns?: AppReplaceResponse.DNS;
+  dns?: AppUpdateResponse.DNS;
 
   /**
    * The anycast edge IP configuration for the hostname of this application.
    */
-  edge_ips?: AppReplaceResponse.UnionMember0 | AppReplaceResponse.UnionMember1;
+  edge_ips?: AppUpdateResponse.UnionMember0 | AppUpdateResponse.UnionMember1;
 
   /**
    * Enables IP Access Rules for this application. Notes: Only available for TCP
@@ -295,7 +284,7 @@ export interface AppReplaceResponse {
   /**
    * The name and type of DNS record for the Spectrum application.
    */
-  origin_dns?: AppReplaceResponse.OriginDNS;
+  origin_dns?: AppUpdateResponse.OriginDNS;
 
   /**
    * The destination port at the origin. Only specified in conjunction with
@@ -335,7 +324,7 @@ export interface AppReplaceResponse {
   traffic_type?: 'direct' | 'http' | 'https';
 }
 
-export namespace AppReplaceResponse {
+export namespace AppUpdateResponse {
   /**
    * The name and type of DNS record for the Spectrum application.
    */
@@ -401,6 +390,17 @@ export namespace AppReplaceResponse {
     type?: '' | 'A' | 'AAAA' | 'SRV';
   }
 }
+
+export type AppListResponse = unknown;
+
+export interface AppDeleteResponse {
+  /**
+   * Application identifier.
+   */
+  id?: string;
+}
+
+export type AppGetResponse = unknown | string;
 
 export interface AppCreateParams {
   /**
@@ -535,28 +535,16 @@ export namespace AppCreateParams {
   }
 }
 
-export interface AppListParams extends V4PagePaginationArrayParams {
-  /**
-   * Sets the direction by which results are ordered.
-   */
-  direction?: 'asc' | 'desc';
-
-  /**
-   * Application field by which results are ordered.
-   */
-  order?: 'protocol' | 'app_id' | 'created_on' | 'modified_on' | 'dns';
-}
-
-export interface AppReplaceParams {
+export interface AppUpdateParams {
   /**
    * The name and type of DNS record for the Spectrum application.
    */
-  dns: AppReplaceParams.DNS;
+  dns: AppUpdateParams.DNS;
 
   /**
    * The name and type of DNS record for the Spectrum application.
    */
-  origin_dns: AppReplaceParams.OriginDNS;
+  origin_dns: AppUpdateParams.OriginDNS;
 
   /**
    * The destination port at the origin. Only specified in conjunction with
@@ -582,7 +570,7 @@ export interface AppReplaceParams {
   /**
    * The anycast edge IP configuration for the hostname of this application.
    */
-  edge_ips?: AppReplaceParams.UnionMember0 | AppReplaceParams.UnionMember1;
+  edge_ips?: AppUpdateParams.UnionMember0 | AppUpdateParams.UnionMember1;
 
   /**
    * Enables IP Access Rules for this application. Notes: Only available for TCP
@@ -613,7 +601,7 @@ export interface AppReplaceParams {
   traffic_type?: 'direct' | 'http' | 'https';
 }
 
-export namespace AppReplaceParams {
+export namespace AppUpdateParams {
   /**
    * The name and type of DNS record for the Spectrum application.
    */
@@ -680,14 +668,26 @@ export namespace AppReplaceParams {
   }
 }
 
+export interface AppListParams extends V4PagePaginationArrayParams {
+  /**
+   * Sets the direction by which results are ordered.
+   */
+  direction?: 'asc' | 'desc';
+
+  /**
+   * Application field by which results are ordered.
+   */
+  order?: 'protocol' | 'app_id' | 'created_on' | 'modified_on' | 'dns';
+}
+
 export namespace Apps {
   export import AppCreateResponse = AppsAPI.AppCreateResponse;
+  export import AppUpdateResponse = AppsAPI.AppUpdateResponse;
   export import AppListResponse = AppsAPI.AppListResponse;
   export import AppDeleteResponse = AppsAPI.AppDeleteResponse;
   export import AppGetResponse = AppsAPI.AppGetResponse;
-  export import AppReplaceResponse = AppsAPI.AppReplaceResponse;
   export import AppListResponsesV4PagePaginationArray = AppsAPI.AppListResponsesV4PagePaginationArray;
   export import AppCreateParams = AppsAPI.AppCreateParams;
+  export import AppUpdateParams = AppsAPI.AppUpdateParams;
   export import AppListParams = AppsAPI.AppListParams;
-  export import AppReplaceParams = AppsAPI.AppReplaceParams;
 }

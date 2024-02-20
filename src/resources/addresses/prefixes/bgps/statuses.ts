@@ -8,17 +8,17 @@ export class Statuses extends APIResource {
   /**
    * Advertise or withdraw BGP route for a prefix.
    */
-  update(
+  edit(
     accountId: string,
     prefixId: string,
-    body: StatusUpdateParams,
+    body: StatusEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<StatusUpdateResponse> {
+  ): Core.APIPromise<StatusEditResponse> {
     return (
       this._client.patch(`/accounts/${accountId}/addressing/prefixes/${prefixId}/bgp/status`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: StatusUpdateResponse }>
+      }) as Core.APIPromise<{ result: StatusEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -39,7 +39,7 @@ export class Statuses extends APIResource {
   }
 }
 
-export interface StatusUpdateResponse {
+export interface StatusEditResponse {
   /**
    * Enablement of prefix advertisement to the Internet.
    */
@@ -65,7 +65,7 @@ export interface StatusGetResponse {
   advertised_modified_at?: string | null;
 }
 
-export interface StatusUpdateParams {
+export interface StatusEditParams {
   /**
    * Enablement of prefix advertisement to the Internet.
    */
@@ -73,7 +73,7 @@ export interface StatusUpdateParams {
 }
 
 export namespace Statuses {
-  export import StatusUpdateResponse = StatusesAPI.StatusUpdateResponse;
+  export import StatusEditResponse = StatusesAPI.StatusEditResponse;
   export import StatusGetResponse = StatusesAPI.StatusGetResponse;
-  export import StatusUpdateParams = StatusesAPI.StatusUpdateParams;
+  export import StatusEditParams = StatusesAPI.StatusEditParams;
 }

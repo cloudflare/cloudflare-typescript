@@ -13,28 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource config', () => {
   // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
-    const responsePromise = cloudflare.zaraz.config.get('023e105f4ecef8ad9ca31a8372d0c353');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.zaraz.config.get('023e105f4ecef8ad9ca31a8372d0c353', { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('replace: only required params', async () => {
-    const responsePromise = cloudflare.zaraz.config.replace('023e105f4ecef8ad9ca31a8372d0c353', {
+  test.skip('update: only required params', async () => {
+    const responsePromise = cloudflare.zaraz.config.update('023e105f4ecef8ad9ca31a8372d0c353', {
       dataLayer: true,
       debugKey: 'my-debug-key',
       settings: { autoInjectScript: true },
@@ -81,8 +61,8 @@ describe('resource config', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('replace: required and optional params', async () => {
-    const response = await cloudflare.zaraz.config.replace('023e105f4ecef8ad9ca31a8372d0c353', {
+  test.skip('update: required and optional params', async () => {
+    const response = await cloudflare.zaraz.config.update('023e105f4ecef8ad9ca31a8372d0c353', {
       dataLayer: true,
       debugKey: 'my-debug-key',
       settings: {
@@ -160,5 +140,25 @@ describe('resource config', () => {
       },
       historyChange: true,
     });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get', async () => {
+    const responsePromise = cloudflare.zaraz.config.get('023e105f4ecef8ad9ca31a8372d0c353');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.zaraz.config.get('023e105f4ecef8ad9ca31a8372d0c353', { path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 });

@@ -37,22 +37,6 @@ describe('resource proxyEndpoints', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('update', async () => {
-    const responsePromise = cloudflare.gateways.proxyEndpoints.update(
-      '699d98642c564d2e855e9661899b7252',
-      'ed35569b41ce4d1facfe683550f54086',
-      {},
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
   test.skip('list', async () => {
     const responsePromise = cloudflare.gateways.proxyEndpoints.list('699d98642c564d2e855e9661899b7252');
     const rawResponse = await responsePromise.asResponse();
@@ -79,6 +63,22 @@ describe('resource proxyEndpoints', () => {
     const responsePromise = cloudflare.gateways.proxyEndpoints.delete(
       '699d98642c564d2e855e9661899b7252',
       'ed35569b41ce4d1facfe683550f54086',
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('edit', async () => {
+    const responsePromise = cloudflare.gateways.proxyEndpoints.edit(
+      '699d98642c564d2e855e9661899b7252',
+      'ed35569b41ce4d1facfe683550f54086',
+      {},
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);

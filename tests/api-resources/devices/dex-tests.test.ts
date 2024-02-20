@@ -41,6 +41,37 @@ describe('resource dexTests', () => {
   });
 
   // skipped: tests are disabled for the time being
+  test.skip('update: only required params', async () => {
+    const responsePromise = cloudflare.devices.dexTests.update(
+      '699d98642c564d2e855e9661899b7252',
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { data: {}, enabled: true, interval: '30m', name: 'HTTP dash health check' },
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('update: required and optional params', async () => {
+    const response = await cloudflare.devices.dexTests.update(
+      '699d98642c564d2e855e9661899b7252',
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      {
+        data: { host: 'https://dash.cloudflare.com', kind: 'http', method: 'GET' },
+        enabled: true,
+        interval: '30m',
+        name: 'HTTP dash health check',
+        description: 'Checks the dash endpoint every 30 minutes',
+      },
+    );
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('list', async () => {
     const responsePromise = cloudflare.devices.dexTests.list('699d98642c564d2e855e9661899b7252');
     const rawResponse = await responsePromise.asResponse();
@@ -114,36 +145,5 @@ describe('resource dexTests', () => {
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('replace: only required params', async () => {
-    const responsePromise = cloudflare.devices.dexTests.replace(
-      '699d98642c564d2e855e9661899b7252',
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { data: {}, enabled: true, interval: '30m', name: 'HTTP dash health check' },
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('replace: required and optional params', async () => {
-    const response = await cloudflare.devices.dexTests.replace(
-      '699d98642c564d2e855e9661899b7252',
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      {
-        data: { host: 'https://dash.cloudflare.com', kind: 'http', method: 'GET' },
-        enabled: true,
-        interval: '30m',
-        name: 'HTTP dash health check',
-        description: 'Checks the dash endpoint every 30 minutes',
-      },
-    );
   });
 });

@@ -6,6 +6,24 @@ import * as SettingsAPI from 'cloudflare/resources/origin-tls-client-auth/settin
 
 export class Settings extends APIResource {
   /**
+   * Enable or disable zone-level authenticated origin pulls. 'enabled' should be set
+   * true either before/after the certificate is uploaded to see the certificate in
+   * use.
+   */
+  update(
+    zoneId: string,
+    body: SettingUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SettingUpdateResponse> {
+    return (
+      this._client.put(`/zones/${zoneId}/origin_tls_client_auth/settings`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: SettingUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Get whether zone-level authenticated origin pulls is enabled or not. It is false
    * by default.
    */
@@ -16,24 +34,13 @@ export class Settings extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
 
+export interface SettingUpdateResponse {
   /**
-   * Enable or disable zone-level authenticated origin pulls. 'enabled' should be set
-   * true either before/after the certificate is uploaded to see the certificate in
-   * use.
+   * Indicates whether zone-level authenticated origin pulls is enabled.
    */
-  replace(
-    zoneId: string,
-    body: SettingReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SettingReplaceResponse> {
-    return (
-      this._client.put(`/zones/${zoneId}/origin_tls_client_auth/settings`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: SettingReplaceResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
+  enabled?: boolean;
 }
 
 export interface SettingGetResponse {
@@ -43,14 +50,7 @@ export interface SettingGetResponse {
   enabled?: boolean;
 }
 
-export interface SettingReplaceResponse {
-  /**
-   * Indicates whether zone-level authenticated origin pulls is enabled.
-   */
-  enabled?: boolean;
-}
-
-export interface SettingReplaceParams {
+export interface SettingUpdateParams {
   /**
    * Indicates whether zone-level authenticated origin pulls is enabled.
    */
@@ -58,7 +58,7 @@ export interface SettingReplaceParams {
 }
 
 export namespace Settings {
+  export import SettingUpdateResponse = SettingsAPI.SettingUpdateResponse;
   export import SettingGetResponse = SettingsAPI.SettingGetResponse;
-  export import SettingReplaceResponse = SettingsAPI.SettingReplaceResponse;
-  export import SettingReplaceParams = SettingsAPI.SettingReplaceParams;
+  export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;
 }

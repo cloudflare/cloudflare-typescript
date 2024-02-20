@@ -8,14 +8,14 @@ export class Ciphers extends APIResource {
   /**
    * Changes ciphers setting.
    */
-  update(
+  edit(
     zoneId: string,
-    body: CipherUpdateParams,
+    body: CipherEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CipherUpdateResponse> {
+  ): Core.APIPromise<CipherEditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/settings/ciphers`, { body, ...options }) as Core.APIPromise<{
-        result: CipherUpdateResponse;
+        result: CipherEditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -36,7 +36,7 @@ export class Ciphers extends APIResource {
  * An allowlist of ciphers for TLS termination. These ciphers must be in the
  * BoringSSL format.
  */
-export interface CipherUpdateResponse {
+export interface CipherEditResponse {
   /**
    * ID of the zone setting.
    */
@@ -86,7 +86,7 @@ export interface CipherGetResponse {
   modified_on?: string | null;
 }
 
-export interface CipherUpdateParams {
+export interface CipherEditParams {
   /**
    * Value of the zone setting.
    */
@@ -94,7 +94,7 @@ export interface CipherUpdateParams {
 }
 
 export namespace Ciphers {
-  export import CipherUpdateResponse = CiphersAPI.CipherUpdateResponse;
+  export import CipherEditResponse = CiphersAPI.CipherEditResponse;
   export import CipherGetResponse = CiphersAPI.CipherGetResponse;
-  export import CipherUpdateParams = CiphersAPI.CipherUpdateParams;
+  export import CipherEditParams = CiphersAPI.CipherEditParams;
 }

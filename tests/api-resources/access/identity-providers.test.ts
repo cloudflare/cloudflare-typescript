@@ -57,6 +57,52 @@ describe('resource identityProviders', () => {
   });
 
   // skipped: tests are disabled for the time being
+  test.skip('update: only required params', async () => {
+    const responsePromise = cloudflare.access.identityProviders.update(
+      'string',
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { config: {}, name: 'Widget Corps IDP', type: 'onetimepin' },
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('update: required and optional params', async () => {
+    const response = await cloudflare.access.identityProviders.update(
+      'string',
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      {
+        config: {
+          client_id: '<your client id>',
+          client_secret: '<your client secret>',
+          claims: ['email_verified', 'preferred_username', 'custom_claim_name'],
+          email_claim_name: 'custom_claim_name',
+          conditional_access_enabled: true,
+          directory_id: '<your azure directory uuid>',
+          support_groups: true,
+        },
+        name: 'Widget Corps IDP',
+        type: 'onetimepin',
+        scim_config: {
+          enabled: true,
+          group_member_deprovision: true,
+          seat_deprovision: true,
+          secret: 'string',
+          user_deprovision: true,
+        },
+      },
+    );
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('list', async () => {
     const responsePromise = cloudflare.access.identityProviders.list(
       'string',
@@ -137,51 +183,5 @@ describe('resource identityProviders', () => {
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('replace: only required params', async () => {
-    const responsePromise = cloudflare.access.identityProviders.replace(
-      'string',
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { config: {}, name: 'Widget Corps IDP', type: 'onetimepin' },
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('replace: required and optional params', async () => {
-    const response = await cloudflare.access.identityProviders.replace(
-      'string',
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      {
-        config: {
-          client_id: '<your client id>',
-          client_secret: '<your client secret>',
-          claims: ['email_verified', 'preferred_username', 'custom_claim_name'],
-          email_claim_name: 'custom_claim_name',
-          conditional_access_enabled: true,
-          directory_id: '<your azure directory uuid>',
-          support_groups: true,
-        },
-        name: 'Widget Corps IDP',
-        type: 'onetimepin',
-        scim_config: {
-          enabled: true,
-          group_member_deprovision: true,
-          seat_deprovision: true,
-          secret: 'string',
-          user_deprovision: true,
-        },
-      },
-    );
   });
 });

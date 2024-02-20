@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
-  GroupUpdateResponse,
   GroupListResponse,
+  GroupEditResponse,
   GroupGetResponse,
-  GroupUpdateParams,
   GroupListParams,
+  GroupEditParams,
   GroupListResponsesV4PagePaginationArray,
   Groups,
 } from './groups';
@@ -17,10 +17,10 @@ export {
   Packages,
 } from './packages';
 export {
-  RuleUpdateResponse,
+  RuleEditResponse,
   RuleGetResponse,
   RuleWAFRulesListWAFRulesResponse,
-  RuleUpdateParams,
+  RuleEditParams,
   RuleWAFRulesListWAFRulesParams,
   Rules,
 } from './rules';

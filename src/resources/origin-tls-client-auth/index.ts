@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
+  HostnameUpdateResponse,
   HostnameGetResponse,
-  HostnameReplaceResponse,
-  HostnameReplaceParams,
+  HostnameUpdateParams,
   Hostnames,
 } from './hostnames/index';
 export {
@@ -14,4 +14,4 @@ export {
   OriginTLSClientAuthCreateParams,
   OriginTLSClientAuth,
 } from './origin-tls-client-auth';
-export { SettingGetResponse, SettingReplaceResponse, SettingReplaceParams, Settings } from './settings';
+export { SettingUpdateResponse, SettingGetResponse, SettingUpdateParams, Settings } from './settings';

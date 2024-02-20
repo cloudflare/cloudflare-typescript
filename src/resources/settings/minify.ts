@@ -10,14 +10,14 @@ export class Minify extends APIResource {
    * [Using Cloudflare Auto Minify](https://support.cloudflare.com/hc/en-us/articles/200168196)
    * for more information.
    */
-  update(
+  edit(
     zoneId: string,
-    body: MinifyUpdateParams,
+    body: MinifyEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MinifyUpdateResponse> {
+  ): Core.APIPromise<MinifyEditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/settings/minify`, { body, ...options }) as Core.APIPromise<{
-        result: MinifyUpdateResponse;
+        result: MinifyEditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -41,7 +41,7 @@ export class Minify extends APIResource {
  * [Using Cloudflare Auto Minify](https://support.cloudflare.com/hc/en-us/articles/200168196)
  * for more information.
  */
-export interface MinifyUpdateResponse {
+export interface MinifyEditResponse {
   /**
    * Zone setting identifier.
    */
@@ -50,7 +50,7 @@ export interface MinifyUpdateResponse {
   /**
    * Current value of the zone setting.
    */
-  value: MinifyUpdateResponse.Value;
+  value: MinifyEditResponse.Value;
 
   /**
    * Whether or not this setting can be modified for this zone (based on your
@@ -64,7 +64,7 @@ export interface MinifyUpdateResponse {
   modified_on?: string | null;
 }
 
-export namespace MinifyUpdateResponse {
+export namespace MinifyEditResponse {
   /**
    * Current value of the zone setting.
    */
@@ -136,14 +136,14 @@ export namespace MinifyGetResponse {
   }
 }
 
-export interface MinifyUpdateParams {
+export interface MinifyEditParams {
   /**
    * Value of the zone setting.
    */
-  value: MinifyUpdateParams.Value;
+  value: MinifyEditParams.Value;
 }
 
-export namespace MinifyUpdateParams {
+export namespace MinifyEditParams {
   /**
    * Value of the zone setting.
    */
@@ -166,7 +166,7 @@ export namespace MinifyUpdateParams {
 }
 
 export namespace Minify {
-  export import MinifyUpdateResponse = MinifyAPI.MinifyUpdateResponse;
+  export import MinifyEditResponse = MinifyAPI.MinifyEditResponse;
   export import MinifyGetResponse = MinifyAPI.MinifyGetResponse;
-  export import MinifyUpdateParams = MinifyAPI.MinifyUpdateParams;
+  export import MinifyEditParams = MinifyAPI.MinifyEditParams;
 }

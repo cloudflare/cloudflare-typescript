@@ -10,14 +10,14 @@ export class FontSettings extends APIResource {
    * Hosted fonts from your own domain, boost performance, and enhance user privacy.
    * Refer to the Cloudflare Fonts documentation for more information.
    */
-  update(
+  edit(
     zoneId: string,
-    body: FontSettingUpdateParams,
+    body: FontSettingEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<FontSettingUpdateResponse> {
+  ): Core.APIPromise<FontSettingEditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/settings/fonts`, { body, ...options }) as Core.APIPromise<{
-        result: FontSettingUpdateResponse;
+        result: FontSettingEditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -41,7 +41,7 @@ export class FontSettings extends APIResource {
  * Hosted fonts from your own domain, boost performance, and enhance user privacy.
  * Refer to the Cloudflare Fonts documentation for more information.
  */
-export interface FontSettingUpdateResponse {
+export interface FontSettingEditResponse {
   /**
    * ID of the zone setting.
    */
@@ -92,7 +92,7 @@ export interface FontSettingGetResponse {
   modified_on?: string | null;
 }
 
-export interface FontSettingUpdateParams {
+export interface FontSettingEditParams {
   /**
    * Whether the feature is enabled or disabled.
    */
@@ -100,7 +100,7 @@ export interface FontSettingUpdateParams {
 }
 
 export namespace FontSettings {
-  export import FontSettingUpdateResponse = FontSettingsAPI.FontSettingUpdateResponse;
+  export import FontSettingEditResponse = FontSettingsAPI.FontSettingEditResponse;
   export import FontSettingGetResponse = FontSettingsAPI.FontSettingGetResponse;
-  export import FontSettingUpdateParams = FontSettingsAPI.FontSettingUpdateParams;
+  export import FontSettingEditParams = FontSettingsAPI.FontSettingEditParams;
 }

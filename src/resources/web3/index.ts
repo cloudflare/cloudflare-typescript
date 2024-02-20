@@ -2,12 +2,12 @@
 
 export {
   HostnameCreateResponse,
-  HostnameUpdateResponse,
   HostnameListResponse,
   HostnameDeleteResponse,
+  HostnameEditResponse,
   HostnameGetResponse,
   HostnameCreateParams,
-  HostnameUpdateParams,
+  HostnameEditParams,
   Hostnames,
 } from './hostnames/index';
 export { Web3 } from './web3';

@@ -5,7 +5,7 @@ export {
   ConfigUpdateResponse,
   ConfigListResponse,
   ConfigDeleteResponse,
-  ConfigReplaceResponse,
+  ConfigEditResponse,
   Configs,
 } from './configs/index';
 export { Mnms } from './mnms';
@@ -14,7 +14,7 @@ export {
   RuleUpdateResponse,
   RuleListResponse,
   RuleDeleteResponse,
+  RuleEditResponse,
   RuleGetResponse,
-  RuleReplaceResponse,
   Rules,
 } from './rules/index';

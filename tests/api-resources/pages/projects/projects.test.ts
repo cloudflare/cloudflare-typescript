@@ -25,55 +25,6 @@ describe('resource projects', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.pages.projects.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'this-is-my-project-01',
-      {
-        deployment_configs: {
-          production: {
-            compatibility_date: '2022-01-01',
-            compatibility_flags: ['url_standard'],
-            env_vars: {
-              BUILD_VERSION: { value: '3.3' },
-              delete_this_env_var: null,
-              secret_var: { type: 'secret_text', value: 'A_CMS_API_TOKEN' },
-            },
-          },
-        },
-      },
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.pages.projects.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'this-is-my-project-01',
-      {
-        deployment_configs: {
-          production: {
-            compatibility_date: '2022-01-01',
-            compatibility_flags: ['url_standard'],
-            env_vars: {
-              BUILD_VERSION: { value: '3.3' },
-              delete_this_env_var: null,
-              secret_var: { type: 'secret_text', value: 'A_CMS_API_TOKEN' },
-            },
-          },
-        },
-      },
-    );
-  });
-
-  // skipped: tests are disabled for the time being
   test.skip('list', async () => {
     const responsePromise = cloudflare.pages.projects.list('023e105f4ecef8ad9ca31a8372d0c353');
     const rawResponse = await responsePromise.asResponse();
@@ -108,6 +59,55 @@ describe('resource projects', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('edit: only required params', async () => {
+    const responsePromise = cloudflare.pages.projects.edit(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      'this-is-my-project-01',
+      {
+        deployment_configs: {
+          production: {
+            compatibility_date: '2022-01-01',
+            compatibility_flags: ['url_standard'],
+            env_vars: {
+              BUILD_VERSION: { value: '3.3' },
+              delete_this_env_var: null,
+              secret_var: { type: 'secret_text', value: 'A_CMS_API_TOKEN' },
+            },
+          },
+        },
+      },
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('edit: required and optional params', async () => {
+    const response = await cloudflare.pages.projects.edit(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      'this-is-my-project-01',
+      {
+        deployment_configs: {
+          production: {
+            compatibility_date: '2022-01-01',
+            compatibility_flags: ['url_standard'],
+            env_vars: {
+              BUILD_VERSION: { value: '3.3' },
+              delete_this_env_var: null,
+              secret_var: { type: 'secret_text', value: 'A_CMS_API_TOKEN' },
+            },
+          },
+        },
+      },
+    );
   });
 
   // skipped: tests are disabled for the time being

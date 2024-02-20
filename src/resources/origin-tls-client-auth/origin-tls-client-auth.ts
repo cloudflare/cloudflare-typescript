@@ -128,11 +128,11 @@ export namespace OriginTLSClientAuth {
   export import OriginTLSClientAuthGetResponse = OriginTLSClientAuthAPI.OriginTLSClientAuthGetResponse;
   export import OriginTLSClientAuthCreateParams = OriginTLSClientAuthAPI.OriginTLSClientAuthCreateParams;
   export import Hostnames = HostnamesAPI.Hostnames;
+  export import HostnameUpdateResponse = HostnamesAPI.HostnameUpdateResponse;
   export import HostnameGetResponse = HostnamesAPI.HostnameGetResponse;
-  export import HostnameReplaceResponse = HostnamesAPI.HostnameReplaceResponse;
-  export import HostnameReplaceParams = HostnamesAPI.HostnameReplaceParams;
+  export import HostnameUpdateParams = HostnamesAPI.HostnameUpdateParams;
   export import Settings = SettingsAPI.Settings;
+  export import SettingUpdateResponse = SettingsAPI.SettingUpdateResponse;
   export import SettingGetResponse = SettingsAPI.SettingGetResponse;
-  export import SettingReplaceResponse = SettingsAPI.SettingReplaceResponse;
-  export import SettingReplaceParams = SettingsAPI.SettingReplaceParams;
+  export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;
 }

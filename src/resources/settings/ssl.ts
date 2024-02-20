@@ -23,14 +23,10 @@ export class SSL extends APIResource {
    * expiration date in the future, and respond for the request domain name
    * (hostname). (https://support.cloudflare.com/hc/en-us/articles/200170416).
    */
-  update(
-    zoneId: string,
-    body: SSLUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SSLUpdateResponse> {
+  edit(zoneId: string, body: SSLEditParams, options?: Core.RequestOptions): Core.APIPromise<SSLEditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/settings/ssl`, { body, ...options }) as Core.APIPromise<{
-        result: SSLUpdateResponse;
+        result: SSLEditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -80,7 +76,7 @@ export class SSL extends APIResource {
  * expiration date in the future, and respond for the request domain name
  * (hostname). (https://support.cloudflare.com/hc/en-us/articles/200170416).
  */
-export interface SSLUpdateResponse {
+export interface SSLEditResponse {
   /**
    * ID of the zone setting.
    */
@@ -144,7 +140,7 @@ export interface SSLGetResponse {
   modified_on?: string | null;
 }
 
-export interface SSLUpdateParams {
+export interface SSLEditParams {
   /**
    * Value of the zone setting. Notes: Depends on the zone's plan level
    */
@@ -152,7 +148,7 @@ export interface SSLUpdateParams {
 }
 
 export namespace SSL {
-  export import SSLUpdateResponse = SSLAPI.SSLUpdateResponse;
+  export import SSLEditResponse = SSLAPI.SSLEditResponse;
   export import SSLGetResponse = SSLAPI.SSLGetResponse;
-  export import SSLUpdateParams = SSLAPI.SSLUpdateParams;
+  export import SSLEditParams = SSLAPI.SSLEditParams;
 }

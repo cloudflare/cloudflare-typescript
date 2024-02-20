@@ -22,6 +22,23 @@ export class Configs extends APIResource {
   }
 
   /**
+   * Updates and returns the specified Hyperdrive configuration.
+   */
+  update(
+    accountId: string,
+    hyperdriveId: string,
+    body: ConfigUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ConfigUpdateResponse | null> {
+    return (
+      this._client.put(`/accounts/${accountId}/hyperdrive/configs/${hyperdriveId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: ConfigUpdateResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Returns a list of Hyperdrives
    */
   list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<ConfigListResponse> {
@@ -63,26 +80,16 @@ export class Configs extends APIResource {
       ) as Core.APIPromise<{ result: ConfigGetResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
-
-  /**
-   * Updates and returns the specified Hyperdrive configuration.
-   */
-  replace(
-    accountId: string,
-    hyperdriveId: string,
-    body: ConfigReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ConfigReplaceResponse | null> {
-    return (
-      this._client.put(`/accounts/${accountId}/hyperdrive/configs/${hyperdriveId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: ConfigReplaceResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 
 export interface ConfigCreateResponse {
+  /**
+   * Identifier
+   */
+  id?: string;
+}
+
+export interface ConfigUpdateResponse {
   /**
    * Identifier
    */
@@ -109,13 +116,6 @@ export interface ConfigGetResponse {
   id?: string;
 }
 
-export interface ConfigReplaceResponse {
-  /**
-   * Identifier
-   */
-  id?: string;
-}
-
 export interface ConfigCreateParams {
   origin: ConfigCreateParams.Origin;
 }
@@ -130,11 +130,11 @@ export namespace ConfigCreateParams {
   }
 }
 
-export interface ConfigReplaceParams {
-  origin: ConfigReplaceParams.Origin;
+export interface ConfigUpdateParams {
+  origin: ConfigUpdateParams.Origin;
 }
 
-export namespace ConfigReplaceParams {
+export namespace ConfigUpdateParams {
   export interface Origin {
     /**
      * The password required to access your origin database. This value is write-only
@@ -146,10 +146,10 @@ export namespace ConfigReplaceParams {
 
 export namespace Configs {
   export import ConfigCreateResponse = ConfigsAPI.ConfigCreateResponse;
+  export import ConfigUpdateResponse = ConfigsAPI.ConfigUpdateResponse;
   export import ConfigListResponse = ConfigsAPI.ConfigListResponse;
   export import ConfigDeleteResponse = ConfigsAPI.ConfigDeleteResponse;
   export import ConfigGetResponse = ConfigsAPI.ConfigGetResponse;
-  export import ConfigReplaceResponse = ConfigsAPI.ConfigReplaceResponse;
   export import ConfigCreateParams = ConfigsAPI.ConfigCreateParams;
-  export import ConfigReplaceParams = ConfigsAPI.ConfigReplaceParams;
+  export import ConfigUpdateParams = ConfigsAPI.ConfigUpdateParams;
 }

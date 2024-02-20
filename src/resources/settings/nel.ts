@@ -10,14 +10,10 @@ export class NEL extends APIResource {
    * Refer to our [blog post](http://blog.cloudflare.com/nel-solving-mobile-speed)
    * for more information.
    */
-  update(
-    zoneId: string,
-    body: NELUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<NELUpdateResponse> {
+  edit(zoneId: string, body: NELEditParams, options?: Core.RequestOptions): Core.APIPromise<NELEditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/settings/nel`, { body, ...options }) as Core.APIPromise<{
-        result: NELUpdateResponse;
+        result: NELEditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -37,7 +33,7 @@ export class NEL extends APIResource {
 /**
  * Enable Network Error Logging reporting on your zone. (Beta)
  */
-export interface NELUpdateResponse {
+export interface NELEditResponse {
   /**
    * Zone setting identifier.
    */
@@ -46,7 +42,7 @@ export interface NELUpdateResponse {
   /**
    * Current value of the zone setting.
    */
-  value: NELUpdateResponse.Value;
+  value: NELEditResponse.Value;
 
   /**
    * Whether or not this setting can be modified for this zone (based on your
@@ -60,7 +56,7 @@ export interface NELUpdateResponse {
   modified_on?: string | null;
 }
 
-export namespace NELUpdateResponse {
+export namespace NELEditResponse {
   /**
    * Current value of the zone setting.
    */
@@ -104,14 +100,14 @@ export namespace NELGetResponse {
   }
 }
 
-export interface NELUpdateParams {
+export interface NELEditParams {
   /**
    * Enable Network Error Logging reporting on your zone. (Beta)
    */
-  value: NELUpdateParams.Value;
+  value: NELEditParams.Value;
 }
 
-export namespace NELUpdateParams {
+export namespace NELEditParams {
   /**
    * Enable Network Error Logging reporting on your zone. (Beta)
    */
@@ -138,7 +134,7 @@ export namespace NELUpdateParams {
 }
 
 export namespace NEL {
-  export import NELUpdateResponse = NELAPI.NELUpdateResponse;
+  export import NELEditResponse = NELAPI.NELEditResponse;
   export import NELGetResponse = NELAPI.NELGetResponse;
-  export import NELUpdateParams = NELAPI.NELUpdateParams;
+  export import NELEditParams = NELAPI.NELEditParams;
 }

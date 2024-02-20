@@ -17,14 +17,14 @@ export class RocketLoader extends APIResource {
    * [Understanding Rocket Loader](https://support.cloudflare.com/hc/articles/200168056)
    * for more information.
    */
-  update(
+  edit(
     zoneId: string,
-    body: RocketLoaderUpdateParams,
+    body: RocketLoaderEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RocketLoaderUpdateResponse> {
+  ): Core.APIPromise<RocketLoaderEditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/settings/rocket_loader`, { body, ...options }) as Core.APIPromise<{
-        result: RocketLoaderUpdateResponse;
+        result: RocketLoaderEditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -62,7 +62,7 @@ export class RocketLoader extends APIResource {
  * [Understanding Rocket Loader](https://support.cloudflare.com/hc/articles/200168056)
  * for more information.
  */
-export interface RocketLoaderUpdateResponse {
+export interface RocketLoaderEditResponse {
   /**
    * ID of the zone setting.
    */
@@ -120,7 +120,7 @@ export interface RocketLoaderGetResponse {
   modified_on?: string | null;
 }
 
-export interface RocketLoaderUpdateParams {
+export interface RocketLoaderEditParams {
   /**
    * Rocket Loader is a general-purpose asynchronous JavaScript optimisation that
    * prioritises rendering your content while loading your site's Javascript
@@ -133,10 +133,10 @@ export interface RocketLoaderUpdateParams {
    * [Understanding Rocket Loader](https://support.cloudflare.com/hc/articles/200168056)
    * for more information.
    */
-  value: RocketLoaderUpdateParams.Value;
+  value: RocketLoaderEditParams.Value;
 }
 
-export namespace RocketLoaderUpdateParams {
+export namespace RocketLoaderEditParams {
   /**
    * Rocket Loader is a general-purpose asynchronous JavaScript optimisation that
    * prioritises rendering your content while loading your site's Javascript
@@ -163,7 +163,7 @@ export namespace RocketLoaderUpdateParams {
 }
 
 export namespace RocketLoader {
-  export import RocketLoaderUpdateResponse = RocketLoaderAPI.RocketLoaderUpdateResponse;
+  export import RocketLoaderEditResponse = RocketLoaderAPI.RocketLoaderEditResponse;
   export import RocketLoaderGetResponse = RocketLoaderAPI.RocketLoaderGetResponse;
-  export import RocketLoaderUpdateParams = RocketLoaderAPI.RocketLoaderUpdateParams;
+  export import RocketLoaderEditParams = RocketLoaderAPI.RocketLoaderEditParams;
 }

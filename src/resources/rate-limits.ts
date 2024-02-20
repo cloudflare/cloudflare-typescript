@@ -24,23 +24,6 @@ export class RateLimits extends APIResource {
   }
 
   /**
-   * Updates an existing rate limit.
-   */
-  update(
-    zoneIdentifier: string,
-    id: string,
-    body: RateLimitUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RateLimitUpdateResponse | null> {
-    return (
-      this._client.put(`/zones/${zoneIdentifier}/rate_limits/${id}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: RateLimitUpdateResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Fetches the rate limits for a zone.
    */
   list(
@@ -83,6 +66,23 @@ export class RateLimits extends APIResource {
   }
 
   /**
+   * Updates an existing rate limit.
+   */
+  edit(
+    zoneIdentifier: string,
+    id: string,
+    body: RateLimitEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RateLimitEditResponse | null> {
+    return (
+      this._client.put(`/zones/${zoneIdentifier}/rate_limits/${id}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: RateLimitEditResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Fetches the details of a rate limit.
    */
   get(
@@ -101,8 +101,6 @@ export class RateLimits extends APIResource {
 export class RateLimitListResponsesV4PagePaginationArray extends V4PagePaginationArray<RateLimitListResponse> {}
 
 export type RateLimitCreateResponse = unknown | string;
-
-export type RateLimitUpdateResponse = unknown | string;
 
 export interface RateLimitListResponse {
   /**
@@ -288,22 +286,24 @@ export interface RateLimitDeleteResponse {
   id?: string;
 }
 
+export type RateLimitEditResponse = unknown | string;
+
 export type RateLimitGetResponse = unknown | string;
 
 export type RateLimitCreateParams = unknown;
 
-export type RateLimitUpdateParams = unknown;
-
 export interface RateLimitListParams extends V4PagePaginationArrayParams {}
+
+export type RateLimitEditParams = unknown;
 
 export namespace RateLimits {
   export import RateLimitCreateResponse = RateLimitsAPI.RateLimitCreateResponse;
-  export import RateLimitUpdateResponse = RateLimitsAPI.RateLimitUpdateResponse;
   export import RateLimitListResponse = RateLimitsAPI.RateLimitListResponse;
   export import RateLimitDeleteResponse = RateLimitsAPI.RateLimitDeleteResponse;
+  export import RateLimitEditResponse = RateLimitsAPI.RateLimitEditResponse;
   export import RateLimitGetResponse = RateLimitsAPI.RateLimitGetResponse;
   export import RateLimitListResponsesV4PagePaginationArray = RateLimitsAPI.RateLimitListResponsesV4PagePaginationArray;
   export import RateLimitCreateParams = RateLimitsAPI.RateLimitCreateParams;
-  export import RateLimitUpdateParams = RateLimitsAPI.RateLimitUpdateParams;
   export import RateLimitListParams = RateLimitsAPI.RateLimitListParams;
+  export import RateLimitEditParams = RateLimitsAPI.RateLimitEditParams;
 }

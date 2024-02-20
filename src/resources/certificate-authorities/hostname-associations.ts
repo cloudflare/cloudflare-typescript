@@ -7,6 +7,22 @@ import * as HostnameAssociationsAPI from 'cloudflare/resources/certificate-autho
 
 export class HostnameAssociations extends APIResource {
   /**
+   * Replace Hostname Associations
+   */
+  update(
+    zoneId: string,
+    body: HostnameAssociationUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<HostnameAssociationUpdateResponse> {
+    return (
+      this._client.put(`/zones/${zoneId}/certificate_authorities/hostname_associations`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: HostnameAssociationUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * List Hostname Associations
    */
   list(
@@ -30,22 +46,17 @@ export class HostnameAssociations extends APIResource {
       }) as Core.APIPromise<{ result: HostnameAssociationListResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+
+export interface HostnameAssociationUpdateResponse {
+  hostnames?: Array<string>;
 
   /**
-   * Replace Hostname Associations
+   * The UUID for a certificate that was uploaded to the mTLS Certificate Management
+   * endpoint. If no mtls_certificate_id is given, the hostnames will be associated
+   * to your active Cloudflare Managed CA.
    */
-  replace(
-    zoneId: string,
-    body: HostnameAssociationReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<HostnameAssociationReplaceResponse> {
-    return (
-      this._client.put(`/zones/${zoneId}/certificate_authorities/hostname_associations`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: HostnameAssociationReplaceResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
+  mtls_certificate_id?: string;
 }
 
 export interface HostnameAssociationListResponse {
@@ -59,7 +70,7 @@ export interface HostnameAssociationListResponse {
   mtls_certificate_id?: string;
 }
 
-export interface HostnameAssociationReplaceResponse {
+export interface HostnameAssociationUpdateParams {
   hostnames?: Array<string>;
 
   /**
@@ -79,20 +90,9 @@ export interface HostnameAssociationListParams {
   mtls_certificate_id?: string;
 }
 
-export interface HostnameAssociationReplaceParams {
-  hostnames?: Array<string>;
-
-  /**
-   * The UUID for a certificate that was uploaded to the mTLS Certificate Management
-   * endpoint. If no mtls_certificate_id is given, the hostnames will be associated
-   * to your active Cloudflare Managed CA.
-   */
-  mtls_certificate_id?: string;
-}
-
 export namespace HostnameAssociations {
+  export import HostnameAssociationUpdateResponse = HostnameAssociationsAPI.HostnameAssociationUpdateResponse;
   export import HostnameAssociationListResponse = HostnameAssociationsAPI.HostnameAssociationListResponse;
-  export import HostnameAssociationReplaceResponse = HostnameAssociationsAPI.HostnameAssociationReplaceResponse;
+  export import HostnameAssociationUpdateParams = HostnameAssociationsAPI.HostnameAssociationUpdateParams;
   export import HostnameAssociationListParams = HostnameAssociationsAPI.HostnameAssociationListParams;
-  export import HostnameAssociationReplaceParams = HostnameAssociationsAPI.HostnameAssociationReplaceParams;
 }

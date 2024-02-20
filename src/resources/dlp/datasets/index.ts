@@ -2,11 +2,11 @@
 
 export {
   DatasetCreateResponse,
+  DatasetUpdateResponse,
   DatasetListResponse,
   DatasetGetResponse,
-  DatasetReplaceResponse,
   DatasetCreateParams,
-  DatasetReplaceParams,
+  DatasetUpdateParams,
   Datasets,
 } from './datasets';
-export { UploadCreateResponse, UploadUpdateResponse, UploadUpdateParams, Upload } from './upload';
+export { UploadCreateResponse, UploadEditResponse, UploadEditParams, Upload } from './upload';

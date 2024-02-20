@@ -10,16 +10,16 @@ export class SortQueryStringForCache extends APIResource {
    * cache, regardless of the order of the query strings. This is limited to
    * Enterprise Zones.
    */
-  update(
+  edit(
     zoneId: string,
-    body: SortQueryStringForCacheUpdateParams,
+    body: SortQueryStringForCacheEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SortQueryStringForCacheUpdateResponse> {
+  ): Core.APIPromise<SortQueryStringForCacheEditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/settings/sort_query_string_for_cache`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: SortQueryStringForCacheUpdateResponse }>
+      }) as Core.APIPromise<{ result: SortQueryStringForCacheEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -42,7 +42,7 @@ export class SortQueryStringForCache extends APIResource {
  * cache, regardless of the order of the query strings. This is limited to
  * Enterprise Zones.
  */
-export interface SortQueryStringForCacheUpdateResponse {
+export interface SortQueryStringForCacheEditResponse {
   /**
    * ID of the zone setting.
    */
@@ -93,7 +93,7 @@ export interface SortQueryStringForCacheGetResponse {
   modified_on?: string | null;
 }
 
-export interface SortQueryStringForCacheUpdateParams {
+export interface SortQueryStringForCacheEditParams {
   /**
    * Value of the zone setting.
    */
@@ -101,7 +101,7 @@ export interface SortQueryStringForCacheUpdateParams {
 }
 
 export namespace SortQueryStringForCache {
-  export import SortQueryStringForCacheUpdateResponse = SortQueryStringForCacheAPI.SortQueryStringForCacheUpdateResponse;
+  export import SortQueryStringForCacheEditResponse = SortQueryStringForCacheAPI.SortQueryStringForCacheEditResponse;
   export import SortQueryStringForCacheGetResponse = SortQueryStringForCacheAPI.SortQueryStringForCacheGetResponse;
-  export import SortQueryStringForCacheUpdateParams = SortQueryStringForCacheAPI.SortQueryStringForCacheUpdateParams;
+  export import SortQueryStringForCacheEditParams = SortQueryStringForCacheAPI.SortQueryStringForCacheEditParams;
 }

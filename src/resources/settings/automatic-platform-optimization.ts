@@ -10,16 +10,16 @@ export class AutomaticPlatformOptimization extends APIResource {
    * serves your WordPress site from Cloudflare's edge network and caches third-party
    * fonts.
    */
-  update(
+  edit(
     zoneId: string,
-    body: AutomaticPlatformOptimizationUpdateParams,
+    body: AutomaticPlatformOptimizationEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AutomaticPlatformOptimizationUpdateResponse> {
+  ): Core.APIPromise<AutomaticPlatformOptimizationEditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/settings/automatic_platform_optimization`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: AutomaticPlatformOptimizationUpdateResponse }>
+      }) as Core.APIPromise<{ result: AutomaticPlatformOptimizationEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -41,7 +41,7 @@ export class AutomaticPlatformOptimization extends APIResource {
   }
 }
 
-export interface AutomaticPlatformOptimizationUpdateResponse {
+export interface AutomaticPlatformOptimizationEditResponse {
   /**
    * Indicates whether or not
    * [cache by device type](https://developers.cloudflare.com/automatic-platform-optimization/reference/cache-device-type/)
@@ -115,11 +115,11 @@ export interface AutomaticPlatformOptimizationGetResponse {
   wp_plugin: boolean;
 }
 
-export interface AutomaticPlatformOptimizationUpdateParams {
-  value: AutomaticPlatformOptimizationUpdateParams.Value;
+export interface AutomaticPlatformOptimizationEditParams {
+  value: AutomaticPlatformOptimizationEditParams.Value;
 }
 
-export namespace AutomaticPlatformOptimizationUpdateParams {
+export namespace AutomaticPlatformOptimizationEditParams {
   export interface Value {
     /**
      * Indicates whether or not
@@ -159,7 +159,7 @@ export namespace AutomaticPlatformOptimizationUpdateParams {
 }
 
 export namespace AutomaticPlatformOptimization {
-  export import AutomaticPlatformOptimizationUpdateResponse = AutomaticPlatformOptimizationAPI.AutomaticPlatformOptimizationUpdateResponse;
+  export import AutomaticPlatformOptimizationEditResponse = AutomaticPlatformOptimizationAPI.AutomaticPlatformOptimizationEditResponse;
   export import AutomaticPlatformOptimizationGetResponse = AutomaticPlatformOptimizationAPI.AutomaticPlatformOptimizationGetResponse;
-  export import AutomaticPlatformOptimizationUpdateParams = AutomaticPlatformOptimizationAPI.AutomaticPlatformOptimizationUpdateParams;
+  export import AutomaticPlatformOptimizationEditParams = AutomaticPlatformOptimizationAPI.AutomaticPlatformOptimizationEditParams;
 }

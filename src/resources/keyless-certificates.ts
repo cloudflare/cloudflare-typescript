@@ -21,24 +21,6 @@ export class KeylessCertificates extends APIResource {
   }
 
   /**
-   * This will update attributes of a Keyless SSL. Consists of one or more of the
-   * following: host,name,port.
-   */
-  update(
-    zoneId: string,
-    keylessCertificateId: string,
-    body: KeylessCertificateUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<KeylessCertificateUpdateResponse> {
-    return (
-      this._client.patch(`/zones/${zoneId}/keyless_certificates/${keylessCertificateId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: KeylessCertificateUpdateResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * List all Keyless SSL configurations for a given zone.
    */
   list(
@@ -65,6 +47,24 @@ export class KeylessCertificates extends APIResource {
         `/zones/${zoneId}/keyless_certificates/${keylessCertificateId}`,
         options,
       ) as Core.APIPromise<{ result: KeylessCertificateDeleteResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * This will update attributes of a Keyless SSL. Consists of one or more of the
+   * following: host,name,port.
+   */
+  edit(
+    zoneId: string,
+    keylessCertificateId: string,
+    body: KeylessCertificateEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<KeylessCertificateEditResponse> {
+    return (
+      this._client.patch(`/zones/${zoneId}/keyless_certificates/${keylessCertificateId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: KeylessCertificateEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -140,77 +140,6 @@ export interface KeylessCertificateCreateResponse {
 }
 
 export namespace KeylessCertificateCreateResponse {
-  /**
-   * Configuration for using Keyless SSL through a Cloudflare Tunnel
-   */
-  export interface Tunnel {
-    /**
-     * Private IP of the Key Server Host
-     */
-    private_ip: string;
-
-    /**
-     * Cloudflare Tunnel Virtual Network ID
-     */
-    vnet_id: string;
-  }
-}
-
-export interface KeylessCertificateUpdateResponse {
-  /**
-   * Keyless certificate identifier tag.
-   */
-  id: string;
-
-  /**
-   * When the Keyless SSL was created.
-   */
-  created_on: string;
-
-  /**
-   * Whether or not the Keyless SSL is on or off.
-   */
-  enabled: boolean;
-
-  /**
-   * The keyless SSL name.
-   */
-  host: string;
-
-  /**
-   * When the Keyless SSL was last modified.
-   */
-  modified_on: string;
-
-  /**
-   * The keyless SSL name.
-   */
-  name: string;
-
-  /**
-   * Available permissions for the Keyless SSL for the current user requesting the
-   * item.
-   */
-  permissions: Array<unknown>;
-
-  /**
-   * The keyless SSL port used to communicate between Cloudflare and the client's
-   * Keyless SSL server.
-   */
-  port: number;
-
-  /**
-   * Status of the Keyless SSL.
-   */
-  status: 'active' | 'deleted';
-
-  /**
-   * Configuration for using Keyless SSL through a Cloudflare Tunnel
-   */
-  tunnel?: KeylessCertificateUpdateResponse.Tunnel;
-}
-
-export namespace KeylessCertificateUpdateResponse {
   /**
    * Configuration for using Keyless SSL through a Cloudflare Tunnel
    */
@@ -308,6 +237,77 @@ export interface KeylessCertificateDeleteResponse {
    * Identifier
    */
   id?: string;
+}
+
+export interface KeylessCertificateEditResponse {
+  /**
+   * Keyless certificate identifier tag.
+   */
+  id: string;
+
+  /**
+   * When the Keyless SSL was created.
+   */
+  created_on: string;
+
+  /**
+   * Whether or not the Keyless SSL is on or off.
+   */
+  enabled: boolean;
+
+  /**
+   * The keyless SSL name.
+   */
+  host: string;
+
+  /**
+   * When the Keyless SSL was last modified.
+   */
+  modified_on: string;
+
+  /**
+   * The keyless SSL name.
+   */
+  name: string;
+
+  /**
+   * Available permissions for the Keyless SSL for the current user requesting the
+   * item.
+   */
+  permissions: Array<unknown>;
+
+  /**
+   * The keyless SSL port used to communicate between Cloudflare and the client's
+   * Keyless SSL server.
+   */
+  port: number;
+
+  /**
+   * Status of the Keyless SSL.
+   */
+  status: 'active' | 'deleted';
+
+  /**
+   * Configuration for using Keyless SSL through a Cloudflare Tunnel
+   */
+  tunnel?: KeylessCertificateEditResponse.Tunnel;
+}
+
+export namespace KeylessCertificateEditResponse {
+  /**
+   * Configuration for using Keyless SSL through a Cloudflare Tunnel
+   */
+  export interface Tunnel {
+    /**
+     * Private IP of the Key Server Host
+     */
+    private_ip: string;
+
+    /**
+     * Cloudflare Tunnel Virtual Network ID
+     */
+    vnet_id: string;
+  }
 }
 
 export interface KeylessCertificateGetResponse {
@@ -434,7 +434,7 @@ export namespace KeylessCertificateCreateParams {
   }
 }
 
-export interface KeylessCertificateUpdateParams {
+export interface KeylessCertificateEditParams {
   /**
    * Whether or not the Keyless SSL is on or off.
    */
@@ -459,10 +459,10 @@ export interface KeylessCertificateUpdateParams {
   /**
    * Configuration for using Keyless SSL through a Cloudflare Tunnel
    */
-  tunnel?: KeylessCertificateUpdateParams.Tunnel;
+  tunnel?: KeylessCertificateEditParams.Tunnel;
 }
 
-export namespace KeylessCertificateUpdateParams {
+export namespace KeylessCertificateEditParams {
   /**
    * Configuration for using Keyless SSL through a Cloudflare Tunnel
    */
@@ -481,10 +481,10 @@ export namespace KeylessCertificateUpdateParams {
 
 export namespace KeylessCertificates {
   export import KeylessCertificateCreateResponse = KeylessCertificatesAPI.KeylessCertificateCreateResponse;
-  export import KeylessCertificateUpdateResponse = KeylessCertificatesAPI.KeylessCertificateUpdateResponse;
   export import KeylessCertificateListResponse = KeylessCertificatesAPI.KeylessCertificateListResponse;
   export import KeylessCertificateDeleteResponse = KeylessCertificatesAPI.KeylessCertificateDeleteResponse;
+  export import KeylessCertificateEditResponse = KeylessCertificatesAPI.KeylessCertificateEditResponse;
   export import KeylessCertificateGetResponse = KeylessCertificatesAPI.KeylessCertificateGetResponse;
   export import KeylessCertificateCreateParams = KeylessCertificatesAPI.KeylessCertificateCreateParams;
-  export import KeylessCertificateUpdateParams = KeylessCertificatesAPI.KeylessCertificateUpdateParams;
+  export import KeylessCertificateEditParams = KeylessCertificatesAPI.KeylessCertificateEditParams;
 }

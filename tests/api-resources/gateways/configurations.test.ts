@@ -25,6 +25,18 @@ describe('resource configurations', () => {
   });
 
   // skipped: tests are disabled for the time being
+  test.skip('edit', async () => {
+    const responsePromise = cloudflare.gateways.configurations.edit('699d98642c564d2e855e9661899b7252', {});
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('get', async () => {
     const responsePromise = cloudflare.gateways.configurations.get('699d98642c564d2e855e9661899b7252');
     const rawResponse = await responsePromise.asResponse();
@@ -44,20 +56,5 @@ describe('resource configurations', () => {
         path: '/_stainless_unknown_path',
       }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('replace', async () => {
-    const responsePromise = cloudflare.gateways.configurations.replace(
-      '699d98642c564d2e855e9661899b7252',
-      {},
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
   });
 });

@@ -48,6 +48,43 @@ describe('resource consumers', () => {
   });
 
   // skipped: tests are disabled for the time being
+  test.skip('update: only required params', async () => {
+    const responsePromise = cloudflare.workers.queues.consumers.update(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      'example-queue',
+      'example-consumer',
+      {
+        dead_letter_queue: 'updated-example-dlq',
+        environment: 'production',
+        script_name: 'example-consumer',
+        settings: { batch_size: 100 },
+      },
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('update: required and optional params', async () => {
+    const response = await cloudflare.workers.queues.consumers.update(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      'example-queue',
+      'example-consumer',
+      {
+        dead_letter_queue: 'updated-example-dlq',
+        environment: 'production',
+        script_name: 'example-consumer',
+        settings: { batch_size: 100 },
+      },
+    );
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('list', async () => {
     const responsePromise = cloudflare.workers.queues.consumers.list(
       '023e105f4ecef8ad9ca31a8372d0c353',
@@ -86,42 +123,5 @@ describe('resource consumers', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('replace: only required params', async () => {
-    const responsePromise = cloudflare.workers.queues.consumers.replace(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'example-queue',
-      'example-consumer',
-      {
-        dead_letter_queue: 'updated-example-dlq',
-        environment: 'production',
-        script_name: 'example-consumer',
-        settings: { batch_size: 100 },
-      },
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('replace: required and optional params', async () => {
-    const response = await cloudflare.workers.queues.consumers.replace(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'example-queue',
-      'example-consumer',
-      {
-        dead_letter_queue: 'updated-example-dlq',
-        environment: 'production',
-        script_name: 'example-consumer',
-        settings: { batch_size: 100 },
-      },
-    );
   });
 });

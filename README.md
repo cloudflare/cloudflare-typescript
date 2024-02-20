@@ -130,7 +130,7 @@ const cloudflare = new Cloudflare({
 });
 
 // Override per-request:
-await cloudflare.zones.update('023e105f4ecef8ad9ca31a8372d0c353', {
+await cloudflare.zones.edit('023e105f4ecef8ad9ca31a8372d0c353', {
   timeout: 5 * 1000,
 });
 ```

@@ -23,6 +23,24 @@ export class Consumers extends APIResource {
   }
 
   /**
+   * Updates the consumer for a queue, or creates one if it does not exist.
+   */
+  update(
+    accountId: string,
+    name: string,
+    consumerName: string,
+    body: ConsumerUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ConsumerUpdateResponse | null> {
+    return (
+      this._client.put(`/accounts/${accountId}/workers/queues/${name}/consumers/${consumerName}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: ConsumerUpdateResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Returns the consumers for a queue.
    */
   list(
@@ -54,24 +72,6 @@ export class Consumers extends APIResource {
       ) as Core.APIPromise<{ result: ConsumerDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
-
-  /**
-   * Updates the consumer for a queue, or creates one if it does not exist.
-   */
-  replace(
-    accountId: string,
-    name: string,
-    consumerName: string,
-    body: ConsumerReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ConsumerReplaceResponse | null> {
-    return (
-      this._client.put(`/accounts/${accountId}/workers/queues/${name}/consumers/${consumerName}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: ConsumerReplaceResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 
 export interface ConsumerCreateResponse {
@@ -89,6 +89,30 @@ export interface ConsumerCreateResponse {
 }
 
 export namespace ConsumerCreateResponse {
+  export interface Settings {
+    batch_size?: number;
+
+    max_retries?: number;
+
+    max_wait_time_ms?: number;
+  }
+}
+
+export interface ConsumerUpdateResponse {
+  created_on?: unknown;
+
+  dead_letter_queue?: unknown;
+
+  environment?: unknown;
+
+  queue_name?: unknown;
+
+  script_name?: unknown;
+
+  settings?: ConsumerUpdateResponse.Settings;
+}
+
+export namespace ConsumerUpdateResponse {
   export interface Settings {
     batch_size?: number;
 
@@ -126,39 +150,15 @@ export namespace ConsumerListResponse {
 
 export type ConsumerDeleteResponse = unknown | Array<unknown> | string;
 
-export interface ConsumerReplaceResponse {
-  created_on?: unknown;
-
-  dead_letter_queue?: unknown;
-
-  environment?: unknown;
-
-  queue_name?: unknown;
-
-  script_name?: unknown;
-
-  settings?: ConsumerReplaceResponse.Settings;
-}
-
-export namespace ConsumerReplaceResponse {
-  export interface Settings {
-    batch_size?: number;
-
-    max_retries?: number;
-
-    max_wait_time_ms?: number;
-  }
-}
-
 export type ConsumerCreateParams = unknown;
 
-export type ConsumerReplaceParams = unknown;
+export type ConsumerUpdateParams = unknown;
 
 export namespace Consumers {
   export import ConsumerCreateResponse = ConsumersAPI.ConsumerCreateResponse;
+  export import ConsumerUpdateResponse = ConsumersAPI.ConsumerUpdateResponse;
   export import ConsumerListResponse = ConsumersAPI.ConsumerListResponse;
   export import ConsumerDeleteResponse = ConsumersAPI.ConsumerDeleteResponse;
-  export import ConsumerReplaceResponse = ConsumersAPI.ConsumerReplaceResponse;
   export import ConsumerCreateParams = ConsumersAPI.ConsumerCreateParams;
-  export import ConsumerReplaceParams = ConsumersAPI.ConsumerReplaceParams;
+  export import ConsumerUpdateParams = ConsumersAPI.ConsumerUpdateParams;
 }

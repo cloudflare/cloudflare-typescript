@@ -22,6 +22,23 @@ export class ACLs extends APIResource {
   }
 
   /**
+   * Modify ACL.
+   */
+  update(
+    accountId: unknown,
+    aclId: unknown,
+    body: ACLUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ACLUpdateResponse> {
+    return (
+      this._client.put(`/accounts/${accountId}/secondary_dns/acls/${aclId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: ACLUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * List ACLs.
    */
   list(accountId: unknown, options?: Core.RequestOptions): Core.APIPromise<ACLListResponse | null> {
@@ -57,26 +74,27 @@ export class ACLs extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
-
-  /**
-   * Modify ACL.
-   */
-  replace(
-    accountId: unknown,
-    aclId: unknown,
-    body: ACLReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ACLReplaceResponse> {
-    return (
-      this._client.put(`/accounts/${accountId}/secondary_dns/acls/${aclId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: ACLReplaceResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 
 export interface ACLCreateResponse {
+  id: unknown;
+
+  /**
+   * Allowed IPv4/IPv6 address range of primary or secondary nameservers. This will
+   * be applied for the entire account. The IP range is used to allow additional
+   * NOTIFY IPs for secondary zones and IPs Cloudflare allows AXFR/IXFR requests from
+   * for primary zones. CIDRs are limited to a maximum of /24 for IPv4 and /64 for
+   * IPv6 respectively.
+   */
+  ip_range: string;
+
+  /**
+   * The name of the acl.
+   */
+  name: string;
+}
+
+export interface ACLUpdateResponse {
   id: unknown;
 
   /**
@@ -138,27 +156,9 @@ export interface ACLGetResponse {
   name: string;
 }
 
-export interface ACLReplaceResponse {
-  id: unknown;
-
-  /**
-   * Allowed IPv4/IPv6 address range of primary or secondary nameservers. This will
-   * be applied for the entire account. The IP range is used to allow additional
-   * NOTIFY IPs for secondary zones and IPs Cloudflare allows AXFR/IXFR requests from
-   * for primary zones. CIDRs are limited to a maximum of /24 for IPv4 and /64 for
-   * IPv6 respectively.
-   */
-  ip_range: string;
-
-  /**
-   * The name of the acl.
-   */
-  name: string;
-}
-
 export type ACLCreateParams = unknown;
 
-export interface ACLReplaceParams {
+export interface ACLUpdateParams {
   /**
    * Allowed IPv4/IPv6 address range of primary or secondary nameservers. This will
    * be applied for the entire account. The IP range is used to allow additional
@@ -176,10 +176,10 @@ export interface ACLReplaceParams {
 
 export namespace ACLs {
   export import ACLCreateResponse = ACLsAPI.ACLCreateResponse;
+  export import ACLUpdateResponse = ACLsAPI.ACLUpdateResponse;
   export import ACLListResponse = ACLsAPI.ACLListResponse;
   export import ACLDeleteResponse = ACLsAPI.ACLDeleteResponse;
   export import ACLGetResponse = ACLsAPI.ACLGetResponse;
-  export import ACLReplaceResponse = ACLsAPI.ACLReplaceResponse;
   export import ACLCreateParams = ACLsAPI.ACLCreateParams;
-  export import ACLReplaceParams = ACLsAPI.ACLReplaceParams;
+  export import ACLUpdateParams = ACLsAPI.ACLUpdateParams;
 }

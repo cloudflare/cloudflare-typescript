@@ -23,23 +23,6 @@ export class Domains extends APIResource {
   }
 
   /**
-   * Retry the validation status of a single domain.
-   */
-  update(
-    accountId: string,
-    projectName: string,
-    domainName: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DomainUpdateResponse | null> {
-    return (
-      this._client.patch(
-        `/accounts/${accountId}/pages/projects/${projectName}/domains/${domainName}`,
-        options,
-      ) as Core.APIPromise<{ result: DomainUpdateResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Fetch a list of all domains associated with a Pages project.
    */
   list(
@@ -71,6 +54,23 @@ export class Domains extends APIResource {
   }
 
   /**
+   * Retry the validation status of a single domain.
+   */
+  edit(
+    accountId: string,
+    projectName: string,
+    domainName: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DomainEditResponse | null> {
+    return (
+      this._client.patch(
+        `/accounts/${accountId}/pages/projects/${projectName}/domains/${domainName}`,
+        options,
+      ) as Core.APIPromise<{ result: DomainEditResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Fetch a single domain.
    */
   get(
@@ -90,11 +90,11 @@ export class Domains extends APIResource {
 
 export type DomainCreateResponse = unknown | Array<unknown> | string;
 
-export type DomainUpdateResponse = unknown | Array<unknown> | string;
-
 export type DomainListResponse = Array<unknown>;
 
 export type DomainDeleteResponse = unknown;
+
+export type DomainEditResponse = unknown | Array<unknown> | string;
 
 export type DomainGetResponse = unknown | Array<unknown> | string;
 
@@ -102,9 +102,9 @@ export type DomainCreateParams = unknown;
 
 export namespace Domains {
   export import DomainCreateResponse = DomainsAPI.DomainCreateResponse;
-  export import DomainUpdateResponse = DomainsAPI.DomainUpdateResponse;
   export import DomainListResponse = DomainsAPI.DomainListResponse;
   export import DomainDeleteResponse = DomainsAPI.DomainDeleteResponse;
+  export import DomainEditResponse = DomainsAPI.DomainEditResponse;
   export import DomainGetResponse = DomainsAPI.DomainGetResponse;
   export import DomainCreateParams = DomainsAPI.DomainCreateParams;
 }

@@ -13,6 +13,37 @@ export class Snippets extends APIResource {
   snippetRules: SnippetRulesAPI.SnippetRules = new SnippetRulesAPI.SnippetRules(this._client);
 
   /**
+   * Put Snippet
+   */
+  update(
+    zoneIdentifier: string,
+    snippetName: string,
+    body?: SnippetUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SnippetUpdateResponse>;
+  update(
+    zoneIdentifier: string,
+    snippetName: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SnippetUpdateResponse>;
+  update(
+    zoneIdentifier: string,
+    snippetName: string,
+    body: SnippetUpdateParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SnippetUpdateResponse> {
+    if (isRequestOptions(body)) {
+      return this.update(zoneIdentifier, snippetName, {}, body);
+    }
+    return (
+      this._client.put(
+        `/zones/${zoneIdentifier}/snippets/${snippetName}`,
+        multipartFormRequestOptions({ body, ...options }),
+      ) as Core.APIPromise<{ result: SnippetUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * All Snippets
    */
   list(zoneIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<SnippetListResponse> {
@@ -52,37 +83,26 @@ export class Snippets extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+
+/**
+ * Snippet Information
+ */
+export interface SnippetUpdateResponse {
+  /**
+   * Creation time of the snippet
+   */
+  created_on?: string;
 
   /**
-   * Put Snippet
+   * Modification time of the snippet
    */
-  replace(
-    zoneIdentifier: string,
-    snippetName: string,
-    body?: SnippetReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SnippetReplaceResponse>;
-  replace(
-    zoneIdentifier: string,
-    snippetName: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SnippetReplaceResponse>;
-  replace(
-    zoneIdentifier: string,
-    snippetName: string,
-    body: SnippetReplaceParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SnippetReplaceResponse> {
-    if (isRequestOptions(body)) {
-      return this.replace(zoneIdentifier, snippetName, {}, body);
-    }
-    return (
-      this._client.put(
-        `/zones/${zoneIdentifier}/snippets/${snippetName}`,
-        multipartFormRequestOptions({ body, ...options }),
-      ) as Core.APIPromise<{ result: SnippetReplaceResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
+  modified_on?: string;
+
+  /**
+   * Snippet identifying name
+   */
+  snippet_name?: string;
 }
 
 /**
@@ -134,36 +154,16 @@ export interface SnippetGetResponse {
   snippet_name?: string;
 }
 
-/**
- * Snippet Information
- */
-export interface SnippetReplaceResponse {
-  /**
-   * Creation time of the snippet
-   */
-  created_on?: string;
-
-  /**
-   * Modification time of the snippet
-   */
-  modified_on?: string;
-
-  /**
-   * Snippet identifying name
-   */
-  snippet_name?: string;
-}
-
-export interface SnippetReplaceParams {
+export interface SnippetUpdateParams {
   /**
    * Content files of uploaded snippet
    */
   files?: string;
 
-  metadata?: SnippetReplaceParams.Metadata;
+  metadata?: SnippetUpdateParams.Metadata;
 }
 
-export namespace SnippetReplaceParams {
+export namespace SnippetUpdateParams {
   export interface Metadata {
     /**
      * Main module name of uploaded snippet
@@ -173,14 +173,14 @@ export namespace SnippetReplaceParams {
 }
 
 export namespace Snippets {
+  export import SnippetUpdateResponse = SnippetsAPI.SnippetUpdateResponse;
   export import SnippetListResponse = SnippetsAPI.SnippetListResponse;
   export import SnippetDeleteResponse = SnippetsAPI.SnippetDeleteResponse;
   export import SnippetGetResponse = SnippetsAPI.SnippetGetResponse;
-  export import SnippetReplaceResponse = SnippetsAPI.SnippetReplaceResponse;
-  export import SnippetReplaceParams = SnippetsAPI.SnippetReplaceParams;
+  export import SnippetUpdateParams = SnippetsAPI.SnippetUpdateParams;
   export import Content = ContentAPI.Content;
   export import SnippetRules = SnippetRulesAPI.SnippetRules;
+  export import SnippetRuleUpdateResponse = SnippetRulesAPI.SnippetRuleUpdateResponse;
   export import SnippetRuleListResponse = SnippetRulesAPI.SnippetRuleListResponse;
-  export import SnippetRuleReplaceResponse = SnippetRulesAPI.SnippetRuleReplaceResponse;
-  export import SnippetRuleReplaceParams = SnippetRulesAPI.SnippetRuleReplaceParams;
+  export import SnippetRuleUpdateParams = SnippetRulesAPI.SnippetRuleUpdateParams;
 }

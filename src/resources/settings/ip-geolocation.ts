@@ -10,16 +10,16 @@ export class IPGeolocation extends APIResource {
    * pass the country code to you.
    * (https://support.cloudflare.com/hc/en-us/articles/200168236).
    */
-  update(
+  edit(
     zoneId: string,
-    body: IPGeolocationUpdateParams,
+    body: IPGeolocationEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<IPGeolocationUpdateResponse> {
+  ): Core.APIPromise<IPGeolocationEditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/settings/ip_geolocation`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: IPGeolocationUpdateResponse }>
+      }) as Core.APIPromise<{ result: IPGeolocationEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -42,7 +42,7 @@ export class IPGeolocation extends APIResource {
  * pass the country code to you.
  * (https://support.cloudflare.com/hc/en-us/articles/200168236).
  */
-export interface IPGeolocationUpdateResponse {
+export interface IPGeolocationEditResponse {
   /**
    * ID of the zone setting.
    */
@@ -93,7 +93,7 @@ export interface IPGeolocationGetResponse {
   modified_on?: string | null;
 }
 
-export interface IPGeolocationUpdateParams {
+export interface IPGeolocationEditParams {
   /**
    * Value of the zone setting.
    */
@@ -101,7 +101,7 @@ export interface IPGeolocationUpdateParams {
 }
 
 export namespace IPGeolocation {
-  export import IPGeolocationUpdateResponse = IPGeolocationAPI.IPGeolocationUpdateResponse;
+  export import IPGeolocationEditResponse = IPGeolocationAPI.IPGeolocationEditResponse;
   export import IPGeolocationGetResponse = IPGeolocationAPI.IPGeolocationGetResponse;
-  export import IPGeolocationUpdateParams = IPGeolocationAPI.IPGeolocationUpdateParams;
+  export import IPGeolocationEditParams = IPGeolocationAPI.IPGeolocationEditParams;
 }

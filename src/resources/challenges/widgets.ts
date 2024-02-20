@@ -26,6 +26,23 @@ export class Widgets extends APIResource {
   }
 
   /**
+   * Update the configuration of a widget.
+   */
+  update(
+    accountIdentifier: string,
+    sitekey: string,
+    body: WidgetUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<WidgetUpdateResponse> {
+    return (
+      this._client.put(`/accounts/${accountIdentifier}/challenges/widgets/${sitekey}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: WidgetUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Lists all turnstile widgets of an account.
    */
   list(
@@ -85,23 +102,6 @@ export class Widgets extends APIResource {
   }
 
   /**
-   * Update the configuration of a widget.
-   */
-  replace(
-    accountIdentifier: string,
-    sitekey: string,
-    body: WidgetReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<WidgetReplaceResponse> {
-    return (
-      this._client.put(`/accounts/${accountIdentifier}/challenges/widgets/${sitekey}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: WidgetReplaceResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Generate a new secret key for this widget. If `invalidate_immediately` is set to
    * `false`, the previous secret remains valid for 2 hours.
    *
@@ -128,6 +128,67 @@ export class WidgetListResponsesV4PagePaginationArray extends V4PagePaginationAr
  * A Turnstile widget's detailed configuration
  */
 export interface WidgetCreateResponse {
+  /**
+   * If bot_fight_mode is set to `true`, Cloudflare issues computationally expensive
+   * challenges in response to malicious bots (ENT only).
+   */
+  bot_fight_mode: boolean;
+
+  /**
+   * If Turnstile is embedded on a Cloudflare site and the widget should grant
+   * challenge clearance, this setting can determine the clearance level to be set
+   */
+  clearance_level: 'no_clearance' | 'jschallenge' | 'managed' | 'interactive';
+
+  /**
+   * When the widget was created.
+   */
+  created_on: string;
+
+  domains: Array<string>;
+
+  /**
+   * Widget Mode
+   */
+  mode: 'non-interactive' | 'invisible' | 'managed';
+
+  /**
+   * When the widget was modified.
+   */
+  modified_on: string;
+
+  /**
+   * Human readable widget name. Not unique. Cloudflare suggests that you set this to
+   * a meaningful string to make it easier to identify your widget, and where it is
+   * used.
+   */
+  name: string;
+
+  /**
+   * Do not show any Cloudflare branding on the widget (ENT only).
+   */
+  offlabel: boolean;
+
+  /**
+   * Region where this widget can be used.
+   */
+  region: 'world';
+
+  /**
+   * Secret key for this widget.
+   */
+  secret: string;
+
+  /**
+   * Widget item identifier tag.
+   */
+  sitekey: string;
+}
+
+/**
+ * A Turnstile widget's detailed configuration
+ */
+export interface WidgetUpdateResponse {
   /**
    * If bot_fight_mode is set to `true`, Cloudflare issues computationally expensive
    * challenges in response to malicious bots (ENT only).
@@ -366,67 +427,6 @@ export interface WidgetGetResponse {
 /**
  * A Turnstile widget's detailed configuration
  */
-export interface WidgetReplaceResponse {
-  /**
-   * If bot_fight_mode is set to `true`, Cloudflare issues computationally expensive
-   * challenges in response to malicious bots (ENT only).
-   */
-  bot_fight_mode: boolean;
-
-  /**
-   * If Turnstile is embedded on a Cloudflare site and the widget should grant
-   * challenge clearance, this setting can determine the clearance level to be set
-   */
-  clearance_level: 'no_clearance' | 'jschallenge' | 'managed' | 'interactive';
-
-  /**
-   * When the widget was created.
-   */
-  created_on: string;
-
-  domains: Array<string>;
-
-  /**
-   * Widget Mode
-   */
-  mode: 'non-interactive' | 'invisible' | 'managed';
-
-  /**
-   * When the widget was modified.
-   */
-  modified_on: string;
-
-  /**
-   * Human readable widget name. Not unique. Cloudflare suggests that you set this to
-   * a meaningful string to make it easier to identify your widget, and where it is
-   * used.
-   */
-  name: string;
-
-  /**
-   * Do not show any Cloudflare branding on the widget (ENT only).
-   */
-  offlabel: boolean;
-
-  /**
-   * Region where this widget can be used.
-   */
-  region: 'world';
-
-  /**
-   * Secret key for this widget.
-   */
-  secret: string;
-
-  /**
-   * Widget item identifier tag.
-   */
-  sitekey: string;
-}
-
-/**
- * A Turnstile widget's detailed configuration
- */
 export interface WidgetRotateSecretResponse {
   /**
    * If bot_fight_mode is set to `true`, Cloudflare issues computationally expensive
@@ -547,19 +547,7 @@ export interface WidgetCreateParams {
   region?: 'world';
 }
 
-export interface WidgetListParams extends V4PagePaginationArrayParams {
-  /**
-   * Direction to order widgets.
-   */
-  direction?: 'asc' | 'desc';
-
-  /**
-   * Field to order widgets by.
-   */
-  order?: 'id' | 'sitekey' | 'name' | 'created_on' | 'modified_on';
-}
-
-export interface WidgetReplaceParams {
+export interface WidgetUpdateParams {
   domains: Array<string>;
 
   /**
@@ -592,6 +580,18 @@ export interface WidgetReplaceParams {
   offlabel?: boolean;
 }
 
+export interface WidgetListParams extends V4PagePaginationArrayParams {
+  /**
+   * Direction to order widgets.
+   */
+  direction?: 'asc' | 'desc';
+
+  /**
+   * Field to order widgets by.
+   */
+  order?: 'id' | 'sitekey' | 'name' | 'created_on' | 'modified_on';
+}
+
 export interface WidgetRotateSecretParams {
   /**
    * If `invalidate_immediately` is set to `false`, the previous secret will remain
@@ -603,14 +603,14 @@ export interface WidgetRotateSecretParams {
 
 export namespace Widgets {
   export import WidgetCreateResponse = WidgetsAPI.WidgetCreateResponse;
+  export import WidgetUpdateResponse = WidgetsAPI.WidgetUpdateResponse;
   export import WidgetListResponse = WidgetsAPI.WidgetListResponse;
   export import WidgetDeleteResponse = WidgetsAPI.WidgetDeleteResponse;
   export import WidgetGetResponse = WidgetsAPI.WidgetGetResponse;
-  export import WidgetReplaceResponse = WidgetsAPI.WidgetReplaceResponse;
   export import WidgetRotateSecretResponse = WidgetsAPI.WidgetRotateSecretResponse;
   export import WidgetListResponsesV4PagePaginationArray = WidgetsAPI.WidgetListResponsesV4PagePaginationArray;
   export import WidgetCreateParams = WidgetsAPI.WidgetCreateParams;
+  export import WidgetUpdateParams = WidgetsAPI.WidgetUpdateParams;
   export import WidgetListParams = WidgetsAPI.WidgetListParams;
-  export import WidgetReplaceParams = WidgetsAPI.WidgetReplaceParams;
   export import WidgetRotateSecretParams = WidgetsAPI.WidgetRotateSecretParams;
 }

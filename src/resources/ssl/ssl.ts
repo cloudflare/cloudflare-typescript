@@ -22,17 +22,17 @@ export namespace SSL {
   export import AnalyzeCreateResponse = AnalyzeAPI.AnalyzeCreateResponse;
   export import AnalyzeCreateParams = AnalyzeAPI.AnalyzeCreateParams;
   export import CertificatePacks = CertificatePacksAPI.CertificatePacks;
-  export import CertificatePackUpdateResponse = CertificatePacksAPI.CertificatePackUpdateResponse;
   export import CertificatePackListResponse = CertificatePacksAPI.CertificatePackListResponse;
   export import CertificatePackDeleteResponse = CertificatePacksAPI.CertificatePackDeleteResponse;
+  export import CertificatePackEditResponse = CertificatePacksAPI.CertificatePackEditResponse;
   export import CertificatePackGetResponse = CertificatePacksAPI.CertificatePackGetResponse;
   export import CertificatePackListParams = CertificatePacksAPI.CertificatePackListParams;
   export import Recommendations = RecommendationsAPI.Recommendations;
   export import RecommendationListResponse = RecommendationsAPI.RecommendationListResponse;
   export import Universal = UniversalAPI.Universal;
   export import Verification = VerificationAPI.Verification;
-  export import VerificationUpdateResponse = VerificationAPI.VerificationUpdateResponse;
   export import VerificationListResponse = VerificationAPI.VerificationListResponse;
-  export import VerificationUpdateParams = VerificationAPI.VerificationUpdateParams;
+  export import VerificationEditResponse = VerificationAPI.VerificationEditResponse;
   export import VerificationListParams = VerificationAPI.VerificationListParams;
+  export import VerificationEditParams = VerificationAPI.VerificationEditParams;
 }

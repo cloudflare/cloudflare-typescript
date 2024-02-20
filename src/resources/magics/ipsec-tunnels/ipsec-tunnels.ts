@@ -27,6 +27,25 @@ export class IpsecTunnels extends APIResource {
   }
 
   /**
+   * Updates a specific IPsec tunnel associated with an account. Use
+   * `?validate_only=true` as an optional query parameter to only run validation
+   * without persisting changes.
+   */
+  update(
+    accountIdentifier: string,
+    tunnelIdentifier: string,
+    body: IpsecTunnelUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IpsecTunnelUpdateResponse> {
+    return (
+      this._client.put(`/accounts/${accountIdentifier}/magic/ipsec_tunnels/${tunnelIdentifier}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: IpsecTunnelUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Lists IPsec tunnels associated with an account.
    */
   list(accountIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<IpsecTunnelListResponse> {
@@ -68,25 +87,6 @@ export class IpsecTunnels extends APIResource {
         `/accounts/${accountIdentifier}/magic/ipsec_tunnels/${tunnelIdentifier}`,
         options,
       ) as Core.APIPromise<{ result: IpsecTunnelGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Updates a specific IPsec tunnel associated with an account. Use
-   * `?validate_only=true` as an optional query parameter to only run validation
-   * without persisting changes.
-   */
-  replace(
-    accountIdentifier: string,
-    tunnelIdentifier: string,
-    body: IpsecTunnelReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<IpsecTunnelReplaceResponse> {
-    return (
-      this._client.put(`/accounts/${accountIdentifier}/magic/ipsec_tunnels/${tunnelIdentifier}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: IpsecTunnelReplaceResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -194,6 +194,12 @@ export namespace IpsecTunnelCreateResponse {
       type?: 'reply' | 'request';
     }
   }
+}
+
+export interface IpsecTunnelUpdateResponse {
+  modified?: boolean;
+
+  modified_ipsec_tunnel?: unknown;
 }
 
 export interface IpsecTunnelListResponse {
@@ -311,12 +317,6 @@ export interface IpsecTunnelGetResponse {
   ipsec_tunnel?: unknown;
 }
 
-export interface IpsecTunnelReplaceResponse {
-  modified?: boolean;
-
-  modified_ipsec_tunnel?: unknown;
-}
-
 export interface IpsecTunnelCreateParams {
   /**
    * The IP address assigned to the Cloudflare side of the IPsec tunnel.
@@ -357,7 +357,7 @@ export interface IpsecTunnelCreateParams {
   replay_protection?: boolean;
 }
 
-export interface IpsecTunnelReplaceParams {
+export interface IpsecTunnelUpdateParams {
   /**
    * The IP address assigned to the Cloudflare side of the IPsec tunnel.
    */
@@ -399,12 +399,12 @@ export interface IpsecTunnelReplaceParams {
 
 export namespace IpsecTunnels {
   export import IpsecTunnelCreateResponse = IpsecTunnelsAPI.IpsecTunnelCreateResponse;
+  export import IpsecTunnelUpdateResponse = IpsecTunnelsAPI.IpsecTunnelUpdateResponse;
   export import IpsecTunnelListResponse = IpsecTunnelsAPI.IpsecTunnelListResponse;
   export import IpsecTunnelDeleteResponse = IpsecTunnelsAPI.IpsecTunnelDeleteResponse;
   export import IpsecTunnelGetResponse = IpsecTunnelsAPI.IpsecTunnelGetResponse;
-  export import IpsecTunnelReplaceResponse = IpsecTunnelsAPI.IpsecTunnelReplaceResponse;
   export import IpsecTunnelCreateParams = IpsecTunnelsAPI.IpsecTunnelCreateParams;
-  export import IpsecTunnelReplaceParams = IpsecTunnelsAPI.IpsecTunnelReplaceParams;
+  export import IpsecTunnelUpdateParams = IpsecTunnelsAPI.IpsecTunnelUpdateParams;
   export import PskGenerates = PskGeneratesAPI.PskGenerates;
   export import PskGenerateCreateResponse = PskGeneratesAPI.PskGenerateCreateResponse;
 }

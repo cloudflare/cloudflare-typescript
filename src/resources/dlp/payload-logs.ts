@@ -6,6 +6,21 @@ import * as PayloadLogsAPI from 'cloudflare/resources/dlp/payload-logs';
 
 export class PayloadLogs extends APIResource {
   /**
+   * Updates the DLP payload log settings for this account.
+   */
+  update(
+    accountId: string,
+    body: PayloadLogUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PayloadLogUpdateResponse> {
+    return (
+      this._client.put(`/accounts/${accountId}/dlp/payload_log`, { body, ...options }) as Core.APIPromise<{
+        result: PayloadLogUpdateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Gets the current DLP payload log settings for this account.
    */
   get(accountId: string, options?: Core.RequestOptions): Core.APIPromise<PayloadLogGetResponse> {
@@ -15,32 +30,17 @@ export class PayloadLogs extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
 
-  /**
-   * Updates the DLP payload log settings for this account.
-   */
-  replace(
-    accountId: string,
-    body: PayloadLogReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PayloadLogReplaceResponse> {
-    return (
-      this._client.put(`/accounts/${accountId}/dlp/payload_log`, { body, ...options }) as Core.APIPromise<{
-        result: PayloadLogReplaceResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
+export interface PayloadLogUpdateResponse {
+  public_key: string | null;
 }
 
 export interface PayloadLogGetResponse {
   public_key: string | null;
 }
 
-export interface PayloadLogReplaceResponse {
-  public_key: string | null;
-}
-
-export interface PayloadLogReplaceParams {
+export interface PayloadLogUpdateParams {
   /**
    * The public key to use when encrypting extracted payloads, as a base64 string
    */
@@ -48,7 +48,7 @@ export interface PayloadLogReplaceParams {
 }
 
 export namespace PayloadLogs {
+  export import PayloadLogUpdateResponse = PayloadLogsAPI.PayloadLogUpdateResponse;
   export import PayloadLogGetResponse = PayloadLogsAPI.PayloadLogGetResponse;
-  export import PayloadLogReplaceResponse = PayloadLogsAPI.PayloadLogReplaceResponse;
-  export import PayloadLogReplaceParams = PayloadLogsAPI.PayloadLogReplaceParams;
+  export import PayloadLogUpdateParams = PayloadLogsAPI.PayloadLogUpdateParams;
 }

@@ -10,16 +10,16 @@ export class AlwaysUseHTTPS extends APIResource {
    * equivalent "https" URL. If you only want to redirect for a subset of requests,
    * consider creating an "Always use HTTPS" page rule.
    */
-  update(
+  edit(
     zoneId: string,
-    body: AlwaysUseHTTPSUpdateParams,
+    body: AlwaysUseHTTPSEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AlwaysUseHTTPSUpdateResponse> {
+  ): Core.APIPromise<AlwaysUseHTTPSEditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/settings/always_use_https`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: AlwaysUseHTTPSUpdateResponse }>
+      }) as Core.APIPromise<{ result: AlwaysUseHTTPSEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -42,7 +42,7 @@ export class AlwaysUseHTTPS extends APIResource {
  * equivalent "https" URL. If you only want to redirect for a subset of requests,
  * consider creating an "Always use HTTPS" page rule.
  */
-export interface AlwaysUseHTTPSUpdateResponse {
+export interface AlwaysUseHTTPSEditResponse {
   /**
    * ID of the zone setting.
    */
@@ -93,7 +93,7 @@ export interface AlwaysUseHTTPSGetResponse {
   modified_on?: string | null;
 }
 
-export interface AlwaysUseHTTPSUpdateParams {
+export interface AlwaysUseHTTPSEditParams {
   /**
    * Value of the zone setting.
    */
@@ -101,7 +101,7 @@ export interface AlwaysUseHTTPSUpdateParams {
 }
 
 export namespace AlwaysUseHTTPS {
-  export import AlwaysUseHTTPSUpdateResponse = AlwaysUseHTTPSAPI.AlwaysUseHTTPSUpdateResponse;
+  export import AlwaysUseHTTPSEditResponse = AlwaysUseHTTPSAPI.AlwaysUseHTTPSEditResponse;
   export import AlwaysUseHTTPSGetResponse = AlwaysUseHTTPSAPI.AlwaysUseHTTPSGetResponse;
-  export import AlwaysUseHTTPSUpdateParams = AlwaysUseHTTPSAPI.AlwaysUseHTTPSUpdateParams;
+  export import AlwaysUseHTTPSEditParams = AlwaysUseHTTPSAPI.AlwaysUseHTTPSEditParams;
 }

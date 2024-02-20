@@ -8,14 +8,14 @@ export class SmartRouting extends APIResource {
   /**
    * Updates enablement of Argo Smart Routing.
    */
-  update(
+  edit(
     zoneId: string,
-    body: SmartRoutingUpdateParams,
+    body: SmartRoutingEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SmartRoutingUpdateResponse> {
+  ): Core.APIPromise<SmartRoutingEditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/argo/smart_routing`, { body, ...options }) as Core.APIPromise<{
-        result: SmartRoutingUpdateResponse;
+        result: SmartRoutingEditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -32,11 +32,11 @@ export class SmartRouting extends APIResource {
   }
 }
 
-export type SmartRoutingUpdateResponse = unknown | string | null;
+export type SmartRoutingEditResponse = unknown | string | null;
 
 export type SmartRoutingGetResponse = unknown | string | null;
 
-export interface SmartRoutingUpdateParams {
+export interface SmartRoutingEditParams {
   /**
    * Enables Argo Smart Routing.
    */
@@ -44,7 +44,7 @@ export interface SmartRoutingUpdateParams {
 }
 
 export namespace SmartRouting {
-  export import SmartRoutingUpdateResponse = SmartRoutingAPI.SmartRoutingUpdateResponse;
+  export import SmartRoutingEditResponse = SmartRoutingAPI.SmartRoutingEditResponse;
   export import SmartRoutingGetResponse = SmartRoutingAPI.SmartRoutingGetResponse;
-  export import SmartRoutingUpdateParams = SmartRoutingAPI.SmartRoutingUpdateParams;
+  export import SmartRoutingEditParams = SmartRoutingAPI.SmartRoutingEditParams;
 }

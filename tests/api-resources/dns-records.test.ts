@@ -42,6 +42,39 @@ describe('resource dnsRecords', () => {
   });
 
   // skipped: tests are disabled for the time being
+  test.skip('update: only required params', async () => {
+    const responsePromise = cloudflare.dnsRecords.update(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      { content: '198.51.100.4', name: 'example.com', type: 'A' },
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('update: required and optional params', async () => {
+    const response = await cloudflare.dnsRecords.update(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      {
+        content: '198.51.100.4',
+        name: 'example.com',
+        type: 'A',
+        comment: 'Domain verification record',
+        proxied: false,
+        tags: ['owner:dns-team', 'owner:dns-team', 'owner:dns-team'],
+        ttl: 3600,
+      },
+    );
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('list', async () => {
     const responsePromise = cloudflare.dnsRecords.list('023e105f4ecef8ad9ca31a8372d0c353');
     const rawResponse = await responsePromise.asResponse();
@@ -181,39 +214,6 @@ describe('resource dnsRecords', () => {
       file: 'www.example.com. 300 IN  A 127.0.0.1',
       proxied: 'true',
     });
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('replace: only required params', async () => {
-    const responsePromise = cloudflare.dnsRecords.replace(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      { content: '198.51.100.4', name: 'example.com', type: 'A' },
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('replace: required and optional params', async () => {
-    const response = await cloudflare.dnsRecords.replace(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      {
-        content: '198.51.100.4',
-        name: 'example.com',
-        type: 'A',
-        comment: 'Domain verification record',
-        proxied: false,
-        tags: ['owner:dns-team', 'owner:dns-team', 'owner:dns-team'],
-        ttl: 3600,
-      },
-    );
   });
 
   // skipped: tests are disabled for the time being

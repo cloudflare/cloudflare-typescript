@@ -3,94 +3,94 @@
 export { Access } from './access';
 export {
   ApplicationCreateResponse,
+  ApplicationUpdateResponse,
   ApplicationListResponse,
   ApplicationDeleteResponse,
   ApplicationGetResponse,
-  ApplicationReplaceResponse,
   ApplicationRevokeTokensResponse,
   ApplicationCreateParams,
-  ApplicationReplaceParams,
+  ApplicationUpdateParams,
   Applications,
 } from './applications/index';
 export {
+  BookmarkUpdateResponse,
   BookmarkListResponse,
   BookmarkDeleteResponse,
   BookmarkGetResponse,
-  BookmarkReplaceResponse,
   Bookmarks,
 } from './bookmarks';
 export {
   CertificateCreateResponse,
+  CertificateUpdateResponse,
   CertificateListResponse,
   CertificateDeleteResponse,
   CertificateGetResponse,
-  CertificateReplaceResponse,
   CertificateCreateParams,
-  CertificateReplaceParams,
+  CertificateUpdateParams,
   Certificates,
 } from './certificates/index';
 export {
   CustomPageCreateResponse,
+  CustomPageUpdateResponse,
   CustomPageListResponse,
   CustomPageDeleteResponse,
   CustomPageGetResponse,
-  CustomPageReplaceResponse,
   CustomPageCreateParams,
-  CustomPageReplaceParams,
+  CustomPageUpdateParams,
   CustomPages,
 } from './custom-pages';
 export {
   GroupCreateResponse,
+  GroupUpdateResponse,
   GroupListResponse,
   GroupDeleteResponse,
   GroupGetResponse,
-  GroupReplaceResponse,
   GroupCreateParams,
-  GroupReplaceParams,
+  GroupUpdateParams,
   Groups,
 } from './groups';
 export {
   IdentityProviderCreateResponse,
+  IdentityProviderUpdateResponse,
   IdentityProviderListResponse,
   IdentityProviderDeleteResponse,
   IdentityProviderGetResponse,
-  IdentityProviderReplaceResponse,
   IdentityProviderCreateParams,
-  IdentityProviderReplaceParams,
+  IdentityProviderUpdateParams,
   IdentityProviders,
 } from './identity-providers';
-export { KeyListResponse, KeyReplaceResponse, KeyRotateResponse, KeyReplaceParams, Keys } from './keys';
+export { KeyUpdateResponse, KeyListResponse, KeyRotateResponse, KeyUpdateParams, Keys } from './keys';
 export { Logs } from './logs/index';
 export {
   OrganizationCreateResponse,
+  OrganizationUpdateResponse,
   OrganizationListResponse,
-  OrganizationReplaceResponse,
   OrganizationRevokeUsersResponse,
   OrganizationCreateParams,
-  OrganizationReplaceParams,
+  OrganizationUpdateParams,
   OrganizationRevokeUsersParams,
   Organizations,
 } from './organizations';
-export { SeatUpdateResponse, SeatUpdateParams, Seats } from './seats';
+export { SeatEditResponse, SeatEditParams, Seats } from './seats';
 export {
   ServiceTokenCreateResponse,
+  ServiceTokenUpdateResponse,
   ServiceTokenListResponse,
   ServiceTokenDeleteResponse,
   ServiceTokenRefreshResponse,
-  ServiceTokenReplaceResponse,
   ServiceTokenRotateResponse,
   ServiceTokenCreateParams,
-  ServiceTokenReplaceParams,
+  ServiceTokenUpdateParams,
   ServiceTokens,
 } from './service-tokens';
 export {
   TagCreateResponse,
+  TagUpdateResponse,
   TagListResponse,
   TagDeleteResponse,
   TagGetResponse,
-  TagReplaceResponse,
   TagCreateParams,
-  TagReplaceParams,
+  TagUpdateParams,
   Tags,
 } from './tags';
 export { UserListResponse, Users } from './users/index';

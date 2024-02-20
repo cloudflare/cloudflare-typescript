@@ -23,12 +23,12 @@ export namespace Logpush {
   export import EdgeCreateParams = EdgeAPI.EdgeCreateParams;
   export import Jobs = JobsAPI.Jobs;
   export import JobCreateResponse = JobsAPI.JobCreateResponse;
+  export import JobUpdateResponse = JobsAPI.JobUpdateResponse;
   export import JobListResponse = JobsAPI.JobListResponse;
   export import JobDeleteResponse = JobsAPI.JobDeleteResponse;
   export import JobGetResponse = JobsAPI.JobGetResponse;
-  export import JobReplaceResponse = JobsAPI.JobReplaceResponse;
   export import JobCreateParams = JobsAPI.JobCreateParams;
-  export import JobReplaceParams = JobsAPI.JobReplaceParams;
+  export import JobUpdateParams = JobsAPI.JobUpdateParams;
   export import Ownership = OwnershipAPI.Ownership;
   export import OwnershipCreateResponse = OwnershipAPI.OwnershipCreateResponse;
   export import OwnershipValidateResponse = OwnershipAPI.OwnershipValidateResponse;

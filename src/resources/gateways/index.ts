@@ -2,59 +2,59 @@
 
 export { AppTypeListResponse, AppTypes } from './app-types';
 export {
+  AuditSSHSettingUpdateResponse,
   AuditSSHSettingGetResponse,
-  AuditSSHSettingReplaceResponse,
-  AuditSSHSettingReplaceParams,
+  AuditSSHSettingUpdateParams,
   AuditSSHSettings,
 } from './audit-ssh-settings';
 export { CategoryListResponse, Categories } from './categories';
 export {
   ConfigurationUpdateResponse,
+  ConfigurationEditResponse,
   ConfigurationGetResponse,
-  ConfigurationReplaceResponse,
   ConfigurationUpdateParams,
-  ConfigurationReplaceParams,
+  ConfigurationEditParams,
   Configurations,
 } from './configurations';
 export { GatewayCreateResponse, GatewayListResponse, Gateways } from './gateways';
 export {
   ListCreateResponse,
+  ListUpdateResponse,
   ListListResponse,
   ListDeleteResponse,
   ListGetResponse,
-  ListReplaceResponse,
   ListCreateParams,
-  ListReplaceParams,
+  ListUpdateParams,
   Lists,
 } from './lists/index';
 export {
   LocationCreateResponse,
+  LocationUpdateResponse,
   LocationListResponse,
   LocationDeleteResponse,
   LocationGetResponse,
-  LocationReplaceResponse,
   LocationCreateParams,
-  LocationReplaceParams,
+  LocationUpdateParams,
   Locations,
 } from './locations';
-export { LoggingGetResponse, LoggingReplaceResponse, LoggingReplaceParams, Loggings } from './loggings';
+export { LoggingUpdateResponse, LoggingGetResponse, LoggingUpdateParams, Loggings } from './loggings';
 export {
   ProxyEndpointCreateResponse,
-  ProxyEndpointUpdateResponse,
   ProxyEndpointListResponse,
   ProxyEndpointDeleteResponse,
+  ProxyEndpointEditResponse,
   ProxyEndpointGetResponse,
   ProxyEndpointCreateParams,
-  ProxyEndpointUpdateParams,
+  ProxyEndpointEditParams,
   ProxyEndpoints,
 } from './proxy-endpoints';
 export {
   RuleCreateResponse,
+  RuleUpdateResponse,
   RuleListResponse,
   RuleDeleteResponse,
   RuleGetResponse,
-  RuleReplaceResponse,
   RuleCreateParams,
-  RuleReplaceParams,
+  RuleUpdateParams,
   Rules,
 } from './rules';

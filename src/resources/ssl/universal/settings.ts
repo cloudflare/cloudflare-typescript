@@ -8,14 +8,14 @@ export class Settings extends APIResource {
   /**
    * Patch Universal SSL Settings for a Zone.
    */
-  update(
+  edit(
     zoneId: string,
-    body: SettingUpdateParams,
+    body: SettingEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SettingUpdateResponse> {
+  ): Core.APIPromise<SettingEditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/ssl/universal/settings`, { body, ...options }) as Core.APIPromise<{
-        result: SettingUpdateResponse;
+        result: SettingEditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -32,7 +32,7 @@ export class Settings extends APIResource {
   }
 }
 
-export interface SettingUpdateResponse {
+export interface SettingEditResponse {
   /**
    * Disabling Universal SSL removes any currently active Universal SSL certificates
    * for your zone from the edge and prevents any future Universal SSL certificates
@@ -94,7 +94,7 @@ export interface SettingGetResponse {
   enabled?: boolean;
 }
 
-export interface SettingUpdateParams {
+export interface SettingEditParams {
   /**
    * Disabling Universal SSL removes any currently active Universal SSL certificates
    * for your zone from the edge and prevents any future Universal SSL certificates
@@ -126,7 +126,7 @@ export interface SettingUpdateParams {
 }
 
 export namespace Settings {
-  export import SettingUpdateResponse = SettingsAPI.SettingUpdateResponse;
+  export import SettingEditResponse = SettingsAPI.SettingEditResponse;
   export import SettingGetResponse = SettingsAPI.SettingGetResponse;
-  export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;
+  export import SettingEditParams = SettingsAPI.SettingEditParams;
 }

@@ -6,26 +6,26 @@ import * as InvitesAPI from 'cloudflare/resources/users/invites';
 
 export class Invites extends APIResource {
   /**
-   * Responds to an invitation.
-   */
-  update(
-    inviteId: string,
-    body: InviteUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<InviteUpdateResponse> {
-    return (
-      this._client.patch(`/user/invites/${inviteId}`, { body, ...options }) as Core.APIPromise<{
-        result: InviteUpdateResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Lists all invitations associated with my user.
    */
   list(options?: Core.RequestOptions): Core.APIPromise<InviteListResponse | null> {
     return (
       this._client.get('/user/invites', options) as Core.APIPromise<{ result: InviteListResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Responds to an invitation.
+   */
+  edit(
+    inviteId: string,
+    body: InviteEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<InviteEditResponse> {
+    return (
+      this._client.patch(`/user/invites/${inviteId}`, { body, ...options }) as Core.APIPromise<{
+        result: InviteEditResponse;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -38,8 +38,6 @@ export class Invites extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
-
-export type InviteUpdateResponse = unknown | string | null;
 
 export type InviteListResponse = Array<InviteListResponse.InviteListResponseItem>;
 
@@ -121,9 +119,11 @@ export namespace InviteListResponse {
   }
 }
 
+export type InviteEditResponse = unknown | string | null;
+
 export type InviteGetResponse = unknown | string | null;
 
-export interface InviteUpdateParams {
+export interface InviteEditParams {
   /**
    * Status of your response to the invitation (rejected or accepted).
    */
@@ -131,8 +131,8 @@ export interface InviteUpdateParams {
 }
 
 export namespace Invites {
-  export import InviteUpdateResponse = InvitesAPI.InviteUpdateResponse;
   export import InviteListResponse = InvitesAPI.InviteListResponse;
+  export import InviteEditResponse = InvitesAPI.InviteEditResponse;
   export import InviteGetResponse = InvitesAPI.InviteGetResponse;
-  export import InviteUpdateParams = InvitesAPI.InviteUpdateParams;
+  export import InviteEditParams = InvitesAPI.InviteEditParams;
 }

@@ -13,6 +13,50 @@ const cloudflare = new Cloudflare({
 
 describe('resource contentLists', () => {
   // skipped: tests are disabled for the time being
+  test.skip('update: only required params', async () => {
+    const responsePromise = cloudflare.web3.hostnames.ipfsUniversalPaths.contentLists.update(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      { action: 'block', entries: [{}, {}, {}] },
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('update: required and optional params', async () => {
+    const response = await cloudflare.web3.hostnames.ipfsUniversalPaths.contentLists.update(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      {
+        action: 'block',
+        entries: [
+          {
+            content: 'QmPZ9gcCEpqKTo6aq61g2nXGUhM4iCL3ewB6LDXZCtioEB',
+            description: 'this is my content list entry',
+            type: 'cid',
+          },
+          {
+            content: 'QmPZ9gcCEpqKTo6aq61g2nXGUhM4iCL3ewB6LDXZCtioEB',
+            description: 'this is my content list entry',
+            type: 'cid',
+          },
+          {
+            content: 'QmPZ9gcCEpqKTo6aq61g2nXGUhM4iCL3ewB6LDXZCtioEB',
+            description: 'this is my content list entry',
+            type: 'cid',
+          },
+        ],
+      },
+    );
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('list', async () => {
     const responsePromise = cloudflare.web3.hostnames.ipfsUniversalPaths.contentLists.list(
       '023e105f4ecef8ad9ca31a8372d0c353',
@@ -37,49 +81,5 @@ describe('resource contentLists', () => {
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('replace: only required params', async () => {
-    const responsePromise = cloudflare.web3.hostnames.ipfsUniversalPaths.contentLists.replace(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      { action: 'block', entries: [{}, {}, {}] },
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('replace: required and optional params', async () => {
-    const response = await cloudflare.web3.hostnames.ipfsUniversalPaths.contentLists.replace(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      {
-        action: 'block',
-        entries: [
-          {
-            content: 'QmPZ9gcCEpqKTo6aq61g2nXGUhM4iCL3ewB6LDXZCtioEB',
-            description: 'this is my content list entry',
-            type: 'cid',
-          },
-          {
-            content: 'QmPZ9gcCEpqKTo6aq61g2nXGUhM4iCL3ewB6LDXZCtioEB',
-            description: 'this is my content list entry',
-            type: 'cid',
-          },
-          {
-            content: 'QmPZ9gcCEpqKTo6aq61g2nXGUhM4iCL3ewB6LDXZCtioEB',
-            description: 'this is my content list entry',
-            type: 'cid',
-          },
-        ],
-      },
-    );
   });
 });

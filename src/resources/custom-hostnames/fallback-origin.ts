@@ -6,6 +6,22 @@ import * as FallbackOriginAPI from 'cloudflare/resources/custom-hostnames/fallba
 
 export class FallbackOrigin extends APIResource {
   /**
+   * Update Fallback Origin for Custom Hostnames
+   */
+  update(
+    zoneId: string,
+    body: FallbackOriginUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<FallbackOriginUpdateResponse> {
+    return (
+      this._client.put(`/zones/${zoneId}/custom_hostnames/fallback_origin`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: FallbackOriginUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Delete Fallback Origin for Custom Hostnames
    */
   delete(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<FallbackOriginDeleteResponse> {
@@ -26,31 +42,15 @@ export class FallbackOrigin extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
-
-  /**
-   * Update Fallback Origin for Custom Hostnames
-   */
-  replace(
-    zoneId: string,
-    body: FallbackOriginReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<FallbackOriginReplaceResponse> {
-    return (
-      this._client.put(`/zones/${zoneId}/custom_hostnames/fallback_origin`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: FallbackOriginReplaceResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
+
+export type FallbackOriginUpdateResponse = unknown | string;
 
 export type FallbackOriginDeleteResponse = unknown | string;
 
 export type FallbackOriginGetResponse = unknown | string;
 
-export type FallbackOriginReplaceResponse = unknown | string;
-
-export interface FallbackOriginReplaceParams {
+export interface FallbackOriginUpdateParams {
   /**
    * Your origin hostname that requests to your custom hostnames will be sent to.
    */
@@ -58,8 +58,8 @@ export interface FallbackOriginReplaceParams {
 }
 
 export namespace FallbackOrigin {
+  export import FallbackOriginUpdateResponse = FallbackOriginAPI.FallbackOriginUpdateResponse;
   export import FallbackOriginDeleteResponse = FallbackOriginAPI.FallbackOriginDeleteResponse;
   export import FallbackOriginGetResponse = FallbackOriginAPI.FallbackOriginGetResponse;
-  export import FallbackOriginReplaceResponse = FallbackOriginAPI.FallbackOriginReplaceResponse;
-  export import FallbackOriginReplaceParams = FallbackOriginAPI.FallbackOriginReplaceParams;
+  export import FallbackOriginUpdateParams = FallbackOriginAPI.FallbackOriginUpdateParams;
 }

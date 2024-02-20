@@ -8,16 +8,16 @@ export class MinTLSVersion extends APIResource {
   /**
    * Changes Minimum TLS Version setting.
    */
-  update(
+  edit(
     zoneId: string,
-    body: MinTLSVersionUpdateParams,
+    body: MinTLSVersionEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MinTLSVersionUpdateResponse> {
+  ): Core.APIPromise<MinTLSVersionEditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/settings/min_tls_version`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: MinTLSVersionUpdateResponse }>
+      }) as Core.APIPromise<{ result: MinTLSVersionEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -38,7 +38,7 @@ export class MinTLSVersion extends APIResource {
  * specified. For example, if TLS 1.1 is selected, TLS 1.0 connections will be
  * rejected, while 1.1, 1.2, and 1.3 (if enabled) will be permitted.
  */
-export interface MinTLSVersionUpdateResponse {
+export interface MinTLSVersionEditResponse {
   /**
    * ID of the zone setting.
    */
@@ -89,7 +89,7 @@ export interface MinTLSVersionGetResponse {
   modified_on?: string | null;
 }
 
-export interface MinTLSVersionUpdateParams {
+export interface MinTLSVersionEditParams {
   /**
    * Value of the zone setting.
    */
@@ -97,7 +97,7 @@ export interface MinTLSVersionUpdateParams {
 }
 
 export namespace MinTLSVersion {
-  export import MinTLSVersionUpdateResponse = MinTLSVersionAPI.MinTLSVersionUpdateResponse;
+  export import MinTLSVersionEditResponse = MinTLSVersionAPI.MinTLSVersionEditResponse;
   export import MinTLSVersionGetResponse = MinTLSVersionAPI.MinTLSVersionGetResponse;
-  export import MinTLSVersionUpdateParams = MinTLSVersionAPI.MinTLSVersionUpdateParams;
+  export import MinTLSVersionEditParams = MinTLSVersionAPI.MinTLSVersionEditParams;
 }

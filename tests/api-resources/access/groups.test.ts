@@ -55,6 +55,58 @@ describe('resource groups', () => {
   });
 
   // skipped: tests are disabled for the time being
+  test.skip('update: only required params', async () => {
+    const responsePromise = cloudflare.access.groups.update(
+      'string',
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      {
+        include: [
+          { email: { email: 'test@example.com' } },
+          { email: { email: 'test@example.com' } },
+          { email: { email: 'test@example.com' } },
+        ],
+        name: 'Allow devs',
+      },
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('update: required and optional params', async () => {
+    const response = await cloudflare.access.groups.update(
+      'string',
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      {
+        include: [
+          { email: { email: 'test@example.com' } },
+          { email: { email: 'test@example.com' } },
+          { email: { email: 'test@example.com' } },
+        ],
+        name: 'Allow devs',
+        exclude: [
+          { email: { email: 'test@example.com' } },
+          { email: { email: 'test@example.com' } },
+          { email: { email: 'test@example.com' } },
+        ],
+        is_default: true,
+        require: [
+          { email: { email: 'test@example.com' } },
+          { email: { email: 'test@example.com' } },
+          { email: { email: 'test@example.com' } },
+        ],
+      },
+    );
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('list', async () => {
     const responsePromise = cloudflare.access.groups.list('string', '023e105f4ecef8ad9ca31a8372d0c353');
     const rawResponse = await responsePromise.asResponse();
@@ -132,57 +184,5 @@ describe('resource groups', () => {
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('replace: only required params', async () => {
-    const responsePromise = cloudflare.access.groups.replace(
-      'string',
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      {
-        include: [
-          { email: { email: 'test@example.com' } },
-          { email: { email: 'test@example.com' } },
-          { email: { email: 'test@example.com' } },
-        ],
-        name: 'Allow devs',
-      },
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('replace: required and optional params', async () => {
-    const response = await cloudflare.access.groups.replace(
-      'string',
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      {
-        include: [
-          { email: { email: 'test@example.com' } },
-          { email: { email: 'test@example.com' } },
-          { email: { email: 'test@example.com' } },
-        ],
-        name: 'Allow devs',
-        exclude: [
-          { email: { email: 'test@example.com' } },
-          { email: { email: 'test@example.com' } },
-          { email: { email: 'test@example.com' } },
-        ],
-        is_default: true,
-        require: [
-          { email: { email: 'test@example.com' } },
-          { email: { email: 'test@example.com' } },
-          { email: { email: 'test@example.com' } },
-        ],
-      },
-    );
   });
 });

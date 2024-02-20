@@ -9,6 +9,23 @@ export class ContentLists extends APIResource {
   entries: EntriesAPI.Entries = new EntriesAPI.Entries(this._client);
 
   /**
+   * Update IPFS Universal Path Gateway Content List
+   */
+  update(
+    zoneIdentifier: string,
+    identifier: string,
+    body: ContentListUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ContentListUpdateResponse> {
+    return (
+      this._client.put(
+        `/zones/${zoneIdentifier}/web3/hostnames/${identifier}/ipfs_universal_path/content_list`,
+        { body, ...options },
+      ) as Core.APIPromise<{ result: ContentListUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * IPFS Universal Path Gateway Content List Details
    */
   list(
@@ -23,23 +40,13 @@ export class ContentLists extends APIResource {
       ) as Core.APIPromise<{ result: ContentListListResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
 
+export interface ContentListUpdateResponse {
   /**
-   * Update IPFS Universal Path Gateway Content List
+   * Behavior of the content list.
    */
-  replace(
-    zoneIdentifier: string,
-    identifier: string,
-    body: ContentListReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ContentListReplaceResponse> {
-    return (
-      this._client.put(
-        `/zones/${zoneIdentifier}/web3/hostnames/${identifier}/ipfs_universal_path/content_list`,
-        { body, ...options },
-      ) as Core.APIPromise<{ result: ContentListReplaceResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
+  action?: 'block';
 }
 
 export interface ContentListListResponse {
@@ -49,14 +56,7 @@ export interface ContentListListResponse {
   action?: 'block';
 }
 
-export interface ContentListReplaceResponse {
-  /**
-   * Behavior of the content list.
-   */
-  action?: 'block';
-}
-
-export interface ContentListReplaceParams {
+export interface ContentListUpdateParams {
   /**
    * Behavior of the content list.
    */
@@ -65,10 +65,10 @@ export interface ContentListReplaceParams {
   /**
    * Content list entries.
    */
-  entries: Array<ContentListReplaceParams.Entry>;
+  entries: Array<ContentListUpdateParams.Entry>;
 }
 
-export namespace ContentListReplaceParams {
+export namespace ContentListUpdateParams {
   /**
    * Content list entry to be blocked.
    */
@@ -91,15 +91,15 @@ export namespace ContentListReplaceParams {
 }
 
 export namespace ContentLists {
+  export import ContentListUpdateResponse = ContentListsAPI.ContentListUpdateResponse;
   export import ContentListListResponse = ContentListsAPI.ContentListListResponse;
-  export import ContentListReplaceResponse = ContentListsAPI.ContentListReplaceResponse;
-  export import ContentListReplaceParams = ContentListsAPI.ContentListReplaceParams;
+  export import ContentListUpdateParams = ContentListsAPI.ContentListUpdateParams;
   export import Entries = EntriesAPI.Entries;
   export import EntryCreateResponse = EntriesAPI.EntryCreateResponse;
+  export import EntryUpdateResponse = EntriesAPI.EntryUpdateResponse;
   export import EntryListResponse = EntriesAPI.EntryListResponse;
   export import EntryDeleteResponse = EntriesAPI.EntryDeleteResponse;
   export import EntryGetResponse = EntriesAPI.EntryGetResponse;
-  export import EntryReplaceResponse = EntriesAPI.EntryReplaceResponse;
   export import EntryCreateParams = EntriesAPI.EntryCreateParams;
-  export import EntryReplaceParams = EntriesAPI.EntryReplaceParams;
+  export import EntryUpdateParams = EntriesAPI.EntryUpdateParams;
 }

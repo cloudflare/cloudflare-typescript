@@ -3,11 +3,11 @@
 export { DetailGetResponse, Details } from './details';
 export {
   EventCreateResponse,
+  EventUpdateResponse,
   EventListResponse,
   EventDeleteResponse,
   EventGetResponse,
-  EventReplaceResponse,
   EventCreateParams,
-  EventReplaceParams,
+  EventUpdateParams,
   Events,
 } from './events';

@@ -26,24 +26,6 @@ export class Projects extends APIResource {
   }
 
   /**
-   * Set new attributes for an existing project. Modify environment variables. To
-   * delete an environment variable, set the key to null.
-   */
-  update(
-    accountId: string,
-    projectName: string,
-    body: ProjectUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ProjectUpdateResponse> {
-    return (
-      this._client.patch(`/accounts/${accountId}/pages/projects/${projectName}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: ProjectUpdateResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Fetch a list of all user projects.
    */
   list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<ProjectListResponse> {
@@ -59,6 +41,24 @@ export class Projects extends APIResource {
    */
   delete(accountId: string, projectName: string, options?: Core.RequestOptions): Core.APIPromise<unknown> {
     return this._client.delete(`/accounts/${accountId}/pages/projects/${projectName}`, options);
+  }
+
+  /**
+   * Set new attributes for an existing project. Modify environment variables. To
+   * delete an environment variable, set the key to null.
+   */
+  edit(
+    accountId: string,
+    projectName: string,
+    body: ProjectEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ProjectEditResponse> {
+    return (
+      this._client.patch(`/accounts/${accountId}/pages/projects/${projectName}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: ProjectEditResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -92,8 +92,6 @@ export class Projects extends APIResource {
 }
 
 export type ProjectCreateResponse = unknown | Array<unknown> | string;
-
-export type ProjectUpdateResponse = unknown | Array<unknown> | string;
 
 export type ProjectListResponse = Array<ProjectListResponse.ProjectListResponseItem>;
 
@@ -237,6 +235,8 @@ export namespace ProjectListResponse {
 }
 
 export type ProjectDeleteResponse = unknown;
+
+export type ProjectEditResponse = unknown | Array<unknown> | string;
 
 export interface ProjectGetResponse {
   /**
@@ -1828,17 +1828,17 @@ export namespace ProjectCreateParams {
   export interface LatestDeployment {}
 }
 
-export type ProjectUpdateParams = unknown;
+export type ProjectEditParams = unknown;
 
 export namespace Projects {
   export import ProjectCreateResponse = ProjectsAPI.ProjectCreateResponse;
-  export import ProjectUpdateResponse = ProjectsAPI.ProjectUpdateResponse;
   export import ProjectListResponse = ProjectsAPI.ProjectListResponse;
   export import ProjectDeleteResponse = ProjectsAPI.ProjectDeleteResponse;
+  export import ProjectEditResponse = ProjectsAPI.ProjectEditResponse;
   export import ProjectGetResponse = ProjectsAPI.ProjectGetResponse;
   export import ProjectPurgeBuildCacheResponse = ProjectsAPI.ProjectPurgeBuildCacheResponse;
   export import ProjectCreateParams = ProjectsAPI.ProjectCreateParams;
-  export import ProjectUpdateParams = ProjectsAPI.ProjectUpdateParams;
+  export import ProjectEditParams = ProjectsAPI.ProjectEditParams;
   export import Deployments = DeploymentsAPI.Deployments;
   export import DeploymentCreateResponse = DeploymentsAPI.DeploymentCreateResponse;
   export import DeploymentListResponse = DeploymentsAPI.DeploymentListResponse;
@@ -1849,9 +1849,9 @@ export namespace Projects {
   export import DeploymentCreateParams = DeploymentsAPI.DeploymentCreateParams;
   export import Domains = DomainsAPI.Domains;
   export import DomainCreateResponse = DomainsAPI.DomainCreateResponse;
-  export import DomainUpdateResponse = DomainsAPI.DomainUpdateResponse;
   export import DomainListResponse = DomainsAPI.DomainListResponse;
   export import DomainDeleteResponse = DomainsAPI.DomainDeleteResponse;
+  export import DomainEditResponse = DomainsAPI.DomainEditResponse;
   export import DomainGetResponse = DomainsAPI.DomainGetResponse;
   export import DomainCreateParams = DomainsAPI.DomainCreateParams;
 }

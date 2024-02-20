@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
+  AccountSettingUpdateResponse,
   AccountSettingGetResponse,
-  AccountSettingReplaceResponse,
-  AccountSettingReplaceParams,
+  AccountSettingUpdateParams,
   AccountSettings,
 } from './account-settings';
 export { Deployments } from './deployments/index';
@@ -13,56 +13,56 @@ export {
   DeploymentsByScript,
 } from './deployments-by-script';
 export {
+  DomainUpdateResponse,
   DomainListResponse,
   DomainGetResponse,
-  DomainReplaceResponse,
+  DomainUpdateParams,
   DomainListParams,
-  DomainReplaceParams,
   Domains,
 } from './domains';
 export { DurableObjects } from './durable-objects/index';
 export {
   FilterCreateResponse,
+  FilterUpdateResponse,
   FilterListResponse,
   FilterDeleteResponse,
-  FilterReplaceResponse,
   FilterCreateParams,
-  FilterReplaceParams,
+  FilterUpdateParams,
   Filters,
 } from './filters';
 export {
   QueueCreateResponse,
+  QueueUpdateResponse,
   QueueListResponse,
   QueueDeleteResponse,
   QueueGetResponse,
-  QueueReplaceResponse,
   QueueCreateParams,
-  QueueReplaceParams,
+  QueueUpdateParams,
   Queues,
 } from './queues/index';
 export {
   RouteCreateResponse,
+  RouteUpdateResponse,
   RouteListResponse,
   RouteDeleteResponse,
   RouteGetResponse,
-  RouteReplaceResponse,
   RouteCreateParams,
-  RouteReplaceParams,
+  RouteUpdateParams,
   Routes,
 } from './routes';
 export { Script } from './script';
 export {
+  ScriptUpdateResponse,
   ScriptListResponse,
-  ScriptReplaceResponse,
+  ScriptUpdateParams,
   ScriptDeleteParams,
-  ScriptReplaceParams,
   Scripts,
 } from './scripts/index';
 export { Services } from './services/index';
 export {
+  SubdomainUpdateResponse,
   SubdomainGetResponse,
-  SubdomainReplaceResponse,
-  SubdomainReplaceParams,
+  SubdomainUpdateParams,
   Subdomains,
 } from './subdomains';
 export { Workers } from './workers';

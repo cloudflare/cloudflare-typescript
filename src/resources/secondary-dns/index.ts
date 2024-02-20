@@ -2,54 +2,54 @@
 
 export {
   ACLCreateResponse,
+  ACLUpdateResponse,
   ACLListResponse,
   ACLDeleteResponse,
   ACLGetResponse,
-  ACLReplaceResponse,
   ACLCreateParams,
-  ACLReplaceParams,
+  ACLUpdateParams,
   ACLs,
 } from './acls';
 export { ForceAxfrCreateResponse, ForceAxfrs } from './force-axfrs';
 export {
   IncomingCreateResponse,
+  IncomingUpdateResponse,
   IncomingDeleteResponse,
   IncomingGetResponse,
-  IncomingReplaceResponse,
   IncomingCreateParams,
-  IncomingReplaceParams,
+  IncomingUpdateParams,
   Incoming,
 } from './incoming';
 export {
   OutgoingCreateResponse,
+  OutgoingUpdateResponse,
   OutgoingDeleteResponse,
   OutgoingDisableResponse,
   OutgoingEnableResponse,
   OutgoingForceNotifyResponse,
   OutgoingGetResponse,
-  OutgoingReplaceResponse,
   OutgoingCreateParams,
-  OutgoingReplaceParams,
+  OutgoingUpdateParams,
   Outgoing,
 } from './outgoing/index';
 export {
   PeerCreateResponse,
+  PeerUpdateResponse,
   PeerListResponse,
   PeerDeleteResponse,
   PeerGetResponse,
-  PeerReplaceResponse,
   PeerCreateParams,
-  PeerReplaceParams,
+  PeerUpdateParams,
   Peers,
 } from './peers';
 export { SecondaryDNS } from './secondary-dns';
 export {
   TsigCreateResponse,
+  TsigUpdateResponse,
   TsigListResponse,
   TsigDeleteResponse,
   TsigGetResponse,
-  TsigReplaceResponse,
   TsigCreateParams,
-  TsigReplaceParams,
+  TsigUpdateParams,
   Tsigs,
 } from './tsigs';

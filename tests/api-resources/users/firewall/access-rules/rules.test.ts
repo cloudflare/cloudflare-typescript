@@ -37,21 +37,6 @@ describe('resource rules', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('update', async () => {
-    const responsePromise = cloudflare.users.firewall.accessRules.rules.update(
-      '92f17202ed8bd63d69a66b86a49a8f6b',
-      {},
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
   test.skip('list', async () => {
     const responsePromise = cloudflare.users.firewall.accessRules.rules.list();
     const rawResponse = await responsePromise.asResponse();
@@ -99,6 +84,21 @@ describe('resource rules', () => {
   test.skip('delete', async () => {
     const responsePromise = cloudflare.users.firewall.accessRules.rules.delete(
       '92f17202ed8bd63d69a66b86a49a8f6b',
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('edit', async () => {
+    const responsePromise = cloudflare.users.firewall.accessRules.rules.edit(
+      '92f17202ed8bd63d69a66b86a49a8f6b',
+      {},
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);

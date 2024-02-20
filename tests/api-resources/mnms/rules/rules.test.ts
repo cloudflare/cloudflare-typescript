@@ -26,10 +26,7 @@ describe('resource rules', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('update', async () => {
-    const responsePromise = cloudflare.mnms.rules.update(
-      '6f91088a406011ed95aed352566e8d4c',
-      '2890e6fa406311ed9b5a23f70f6fb8cf',
-    );
+    const responsePromise = cloudflare.mnms.rules.update('6f91088a406011ed95aed352566e8d4c');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -75,6 +72,21 @@ describe('resource rules', () => {
   });
 
   // skipped: tests are disabled for the time being
+  test.skip('edit', async () => {
+    const responsePromise = cloudflare.mnms.rules.edit(
+      '6f91088a406011ed95aed352566e8d4c',
+      '2890e6fa406311ed9b5a23f70f6fb8cf',
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('get', async () => {
     const responsePromise = cloudflare.mnms.rules.get(
       '6f91088a406011ed95aed352566e8d4c',
@@ -97,17 +109,5 @@ describe('resource rules', () => {
         path: '/_stainless_unknown_path',
       }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('replace', async () => {
-    const responsePromise = cloudflare.mnms.rules.replace('6f91088a406011ed95aed352566e8d4c');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
   });
 });

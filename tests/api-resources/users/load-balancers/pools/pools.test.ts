@@ -80,21 +80,6 @@ describe('resource pools', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('update', async () => {
-    const responsePromise = cloudflare.users.loadBalancers.pools.update(
-      '17b5962d775c646f3f9725cbc7a53df4',
-      {},
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
   test.skip('list', async () => {
     const responsePromise = cloudflare.users.loadBalancers.pools.list();
     const rawResponse = await responsePromise.asResponse();
@@ -125,6 +110,18 @@ describe('resource pools', () => {
   // skipped: tests are disabled for the time being
   test.skip('delete', async () => {
     const responsePromise = cloudflare.users.loadBalancers.pools.delete('17b5962d775c646f3f9725cbc7a53df4');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('edit', async () => {
+    const responsePromise = cloudflare.users.loadBalancers.pools.edit('17b5962d775c646f3f9725cbc7a53df4', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

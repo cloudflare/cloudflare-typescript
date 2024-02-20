@@ -9,8 +9,8 @@ export class Settings extends APIResource {
 
 export namespace Settings {
   export import TLS = TLSAPI.TLS;
+  export import TLSUpdateResponse = TLSAPI.TLSUpdateResponse;
   export import TLSDeleteResponse = TLSAPI.TLSDeleteResponse;
   export import TLSGetResponse = TLSAPI.TLSGetResponse;
-  export import TLSReplaceResponse = TLSAPI.TLSReplaceResponse;
-  export import TLSReplaceParams = TLSAPI.TLSReplaceParams;
+  export import TLSUpdateParams = TLSAPI.TLSUpdateParams;
 }

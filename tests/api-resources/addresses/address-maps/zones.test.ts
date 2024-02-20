@@ -13,8 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource zones', () => {
   // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
-    const responsePromise = cloudflare.addresses.addressMaps.zones.delete(
+  test.skip('update', async () => {
+    const responsePromise = cloudflare.addresses.addressMaps.zones.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
@@ -29,8 +29,8 @@ describe('resource zones', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('replace', async () => {
-    const responsePromise = cloudflare.addresses.addressMaps.zones.replace(
+  test.skip('delete', async () => {
+    const responsePromise = cloudflare.addresses.addressMaps.zones.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',

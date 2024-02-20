@@ -2,20 +2,20 @@
 
 export {
   ConsumerCreateResponse,
+  ConsumerUpdateResponse,
   ConsumerListResponse,
   ConsumerDeleteResponse,
-  ConsumerReplaceResponse,
   ConsumerCreateParams,
-  ConsumerReplaceParams,
+  ConsumerUpdateParams,
   Consumers,
 } from './consumers';
 export {
   QueueCreateResponse,
+  QueueUpdateResponse,
   QueueListResponse,
   QueueDeleteResponse,
   QueueGetResponse,
-  QueueReplaceResponse,
   QueueCreateParams,
-  QueueReplaceParams,
+  QueueUpdateParams,
   Queues,
 } from './queues';

@@ -22,6 +22,23 @@ export class DEXTests extends APIResource {
   }
 
   /**
+   * Update a DEX test.
+   */
+  update(
+    identifier: unknown,
+    uuid: string,
+    body: DEXTestUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DEXTestUpdateResponse | null> {
+    return (
+      this._client.put(`/accounts/${identifier}/devices/dex_tests/${uuid}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: DEXTestUpdateResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Fetch all DEX tests.
    */
   list(identifier: unknown, options?: Core.RequestOptions): Core.APIPromise<DEXTestListResponse | null> {
@@ -62,23 +79,6 @@ export class DEXTests extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
-
-  /**
-   * Update a DEX test.
-   */
-  replace(
-    identifier: unknown,
-    uuid: string,
-    body: DEXTestReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DEXTestReplaceResponse | null> {
-    return (
-      this._client.put(`/accounts/${identifier}/devices/dex_tests/${uuid}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: DEXTestReplaceResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 
 export interface DEXTestCreateResponse {
@@ -110,6 +110,57 @@ export interface DEXTestCreateResponse {
 }
 
 export namespace DEXTestCreateResponse {
+  /**
+   * The configuration object which contains the details for the WARP client to
+   * conduct the test.
+   */
+  export interface Data {
+    /**
+     * The desired endpoint to test.
+     */
+    host?: string;
+
+    /**
+     * The type of test.
+     */
+    kind?: string;
+
+    /**
+     * The HTTP request method type.
+     */
+    method?: string;
+  }
+}
+
+export interface DEXTestUpdateResponse {
+  /**
+   * The configuration object which contains the details for the WARP client to
+   * conduct the test.
+   */
+  data: DEXTestUpdateResponse.Data;
+
+  /**
+   * Determines whether or not the test is active.
+   */
+  enabled: boolean;
+
+  /**
+   * How often the test will run.
+   */
+  interval: string;
+
+  /**
+   * The name of the DEX test. Must be unique.
+   */
+  name: string;
+
+  /**
+   * Additional details about the test.
+   */
+  description?: string;
+}
+
+export namespace DEXTestUpdateResponse {
   /**
    * The configuration object which contains the details for the WARP client to
    * conduct the test.
@@ -293,57 +344,6 @@ export namespace DEXTestGetResponse {
   }
 }
 
-export interface DEXTestReplaceResponse {
-  /**
-   * The configuration object which contains the details for the WARP client to
-   * conduct the test.
-   */
-  data: DEXTestReplaceResponse.Data;
-
-  /**
-   * Determines whether or not the test is active.
-   */
-  enabled: boolean;
-
-  /**
-   * How often the test will run.
-   */
-  interval: string;
-
-  /**
-   * The name of the DEX test. Must be unique.
-   */
-  name: string;
-
-  /**
-   * Additional details about the test.
-   */
-  description?: string;
-}
-
-export namespace DEXTestReplaceResponse {
-  /**
-   * The configuration object which contains the details for the WARP client to
-   * conduct the test.
-   */
-  export interface Data {
-    /**
-     * The desired endpoint to test.
-     */
-    host?: string;
-
-    /**
-     * The type of test.
-     */
-    kind?: string;
-
-    /**
-     * The HTTP request method type.
-     */
-    method?: string;
-  }
-}
-
 export interface DEXTestCreateParams {
   /**
    * The configuration object which contains the details for the WARP client to
@@ -395,12 +395,12 @@ export namespace DEXTestCreateParams {
   }
 }
 
-export interface DEXTestReplaceParams {
+export interface DEXTestUpdateParams {
   /**
    * The configuration object which contains the details for the WARP client to
    * conduct the test.
    */
-  data: DEXTestReplaceParams.Data;
+  data: DEXTestUpdateParams.Data;
 
   /**
    * Determines whether or not the test is active.
@@ -423,7 +423,7 @@ export interface DEXTestReplaceParams {
   description?: string;
 }
 
-export namespace DEXTestReplaceParams {
+export namespace DEXTestUpdateParams {
   /**
    * The configuration object which contains the details for the WARP client to
    * conduct the test.
@@ -448,10 +448,10 @@ export namespace DEXTestReplaceParams {
 
 export namespace DEXTests {
   export import DEXTestCreateResponse = DEXTestsAPI.DEXTestCreateResponse;
+  export import DEXTestUpdateResponse = DEXTestsAPI.DEXTestUpdateResponse;
   export import DEXTestListResponse = DEXTestsAPI.DEXTestListResponse;
   export import DEXTestDeleteResponse = DEXTestsAPI.DEXTestDeleteResponse;
   export import DEXTestGetResponse = DEXTestsAPI.DEXTestGetResponse;
-  export import DEXTestReplaceResponse = DEXTestsAPI.DEXTestReplaceResponse;
   export import DEXTestCreateParams = DEXTestsAPI.DEXTestCreateParams;
-  export import DEXTestReplaceParams = DEXTestsAPI.DEXTestReplaceParams;
+  export import DEXTestUpdateParams = DEXTestsAPI.DEXTestUpdateParams;
 }

@@ -23,6 +23,24 @@ export class GreTunnels extends APIResource {
   }
 
   /**
+   * Updates a specific GRE tunnel. Use `?validate_only=true` as an optional query
+   * parameter to only run validation without persisting changes.
+   */
+  update(
+    accountIdentifier: string,
+    tunnelIdentifier: string,
+    body: GreTunnelUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<GreTunnelUpdateResponse> {
+    return (
+      this._client.put(`/accounts/${accountIdentifier}/magic/gre_tunnels/${tunnelIdentifier}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: GreTunnelUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Lists GRE tunnels associated with an account.
    */
   list(accountIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<GreTunnelListResponse> {
@@ -63,24 +81,6 @@ export class GreTunnels extends APIResource {
         `/accounts/${accountIdentifier}/magic/gre_tunnels/${tunnelIdentifier}`,
         options,
       ) as Core.APIPromise<{ result: GreTunnelGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Updates a specific GRE tunnel. Use `?validate_only=true` as an optional query
-   * parameter to only run validation without persisting changes.
-   */
-  replace(
-    accountIdentifier: string,
-    tunnelIdentifier: string,
-    body: GreTunnelReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<GreTunnelReplaceResponse> {
-    return (
-      this._client.put(`/accounts/${accountIdentifier}/magic/gre_tunnels/${tunnelIdentifier}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: GreTunnelReplaceResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -181,6 +181,12 @@ export namespace GreTunnelCreateResponse {
       type?: 'reply' | 'request';
     }
   }
+}
+
+export interface GreTunnelUpdateResponse {
+  modified?: boolean;
+
+  modified_gre_tunnel?: unknown;
 }
 
 export interface GreTunnelListResponse {
@@ -291,15 +297,9 @@ export interface GreTunnelGetResponse {
   gre_tunnel?: unknown;
 }
 
-export interface GreTunnelReplaceResponse {
-  modified?: boolean;
-
-  modified_gre_tunnel?: unknown;
-}
-
 export type GreTunnelCreateParams = unknown;
 
-export interface GreTunnelReplaceParams {
+export interface GreTunnelUpdateParams {
   /**
    * The IP address assigned to the Cloudflare side of the GRE tunnel.
    */
@@ -328,7 +328,7 @@ export interface GreTunnelReplaceParams {
    */
   description?: string;
 
-  health_check?: GreTunnelReplaceParams.HealthCheck;
+  health_check?: GreTunnelUpdateParams.HealthCheck;
 
   /**
    * Maximum Transmission Unit (MTU) in bytes for the GRE tunnel. The minimum value
@@ -342,7 +342,7 @@ export interface GreTunnelReplaceParams {
   ttl?: number;
 }
 
-export namespace GreTunnelReplaceParams {
+export namespace GreTunnelUpdateParams {
   export interface HealthCheck {
     /**
      * The direction of the flow of the healthcheck. Either unidirectional, where the
@@ -378,10 +378,10 @@ export namespace GreTunnelReplaceParams {
 
 export namespace GreTunnels {
   export import GreTunnelCreateResponse = GreTunnelsAPI.GreTunnelCreateResponse;
+  export import GreTunnelUpdateResponse = GreTunnelsAPI.GreTunnelUpdateResponse;
   export import GreTunnelListResponse = GreTunnelsAPI.GreTunnelListResponse;
   export import GreTunnelDeleteResponse = GreTunnelsAPI.GreTunnelDeleteResponse;
   export import GreTunnelGetResponse = GreTunnelsAPI.GreTunnelGetResponse;
-  export import GreTunnelReplaceResponse = GreTunnelsAPI.GreTunnelReplaceResponse;
   export import GreTunnelCreateParams = GreTunnelsAPI.GreTunnelCreateParams;
-  export import GreTunnelReplaceParams = GreTunnelsAPI.GreTunnelReplaceParams;
+  export import GreTunnelUpdateParams = GreTunnelsAPI.GreTunnelUpdateParams;
 }

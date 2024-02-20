@@ -39,6 +39,40 @@ describe('resource customPages', () => {
   });
 
   // skipped: tests are disabled for the time being
+  test.skip('update: only required params', async () => {
+    const responsePromise = cloudflare.access.customPages.update(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      {
+        custom_html: '<html><body><h1>Access Denied</h1></body></html>',
+        name: 'string',
+        type: 'identity_denied',
+      },
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('update: required and optional params', async () => {
+    const response = await cloudflare.access.customPages.update(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      {
+        custom_html: '<html><body><h1>Access Denied</h1></body></html>',
+        name: 'string',
+        type: 'identity_denied',
+        app_count: 0,
+      },
+    );
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('list', async () => {
     const responsePromise = cloudflare.access.customPages.list('023e105f4ecef8ad9ca31a8372d0c353');
     const rawResponse = await responsePromise.asResponse();
@@ -112,39 +146,5 @@ describe('resource customPages', () => {
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('replace: only required params', async () => {
-    const responsePromise = cloudflare.access.customPages.replace(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      {
-        custom_html: '<html><body><h1>Access Denied</h1></body></html>',
-        name: 'string',
-        type: 'identity_denied',
-      },
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('replace: required and optional params', async () => {
-    const response = await cloudflare.access.customPages.replace(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      {
-        custom_html: '<html><body><h1>Access Denied</h1></body></html>',
-        name: 'string',
-        type: 'identity_denied',
-        app_count: 0,
-      },
-    );
   });
 });

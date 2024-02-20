@@ -29,23 +29,6 @@ export class AddressMaps extends APIResource {
   }
 
   /**
-   * Modify properties of an address map owned by the account.
-   */
-  update(
-    accountId: string,
-    addressMapId: string,
-    body: AddressMapUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AddressMapUpdateResponse> {
-    return (
-      this._client.patch(`/accounts/${accountId}/addressing/address_maps/${addressMapId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: AddressMapUpdateResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * List all address maps owned by the account.
    */
   list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<AddressMapListResponse | null> {
@@ -70,6 +53,23 @@ export class AddressMaps extends APIResource {
         `/accounts/${accountId}/addressing/address_maps/${addressMapId}`,
         options,
       ) as Core.APIPromise<{ result: AddressMapDeleteResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Modify properties of an address map owned by the account.
+   */
+  edit(
+    accountId: string,
+    addressMapId: string,
+    body: AddressMapEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AddressMapEditResponse> {
+    return (
+      this._client.patch(`/accounts/${accountId}/addressing/address_maps/${addressMapId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: AddressMapEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -175,50 +175,6 @@ export namespace AddressMapCreateResponse {
   }
 }
 
-export interface AddressMapUpdateResponse {
-  /**
-   * Identifier
-   */
-  id?: string;
-
-  /**
-   * If set to false, then the Address Map cannot be deleted via API. This is true
-   * for Cloudflare-managed maps.
-   */
-  can_delete?: boolean;
-
-  /**
-   * If set to false, then the IPs on the Address Map cannot be modified via the API.
-   * This is true for Cloudflare-managed maps.
-   */
-  can_modify_ips?: boolean;
-
-  created_at?: string;
-
-  /**
-   * If you have legacy TLS clients which do not send the TLS server name indicator,
-   * then you can specify one default SNI on the map. If Cloudflare receives a TLS
-   * handshake from a client without an SNI, it will respond with the default SNI on
-   * those IPs. The default SNI can be any valid zone or subdomain owned by the
-   * account.
-   */
-  default_sni?: string | null;
-
-  /**
-   * An optional description field which may be used to describe the types of IPs or
-   * zones on the map.
-   */
-  description?: string | null;
-
-  /**
-   * Whether the Address Map is enabled or not. Cloudflare's DNS will not respond
-   * with IP addresses on an Address Map until the map is enabled.
-   */
-  enabled?: boolean | null;
-
-  modified_at?: string;
-}
-
 export type AddressMapListResponse = Array<AddressMapListResponse.AddressMapListResponseItem>;
 
 export namespace AddressMapListResponse {
@@ -268,6 +224,50 @@ export namespace AddressMapListResponse {
 }
 
 export type AddressMapDeleteResponse = unknown | Array<unknown> | string;
+
+export interface AddressMapEditResponse {
+  /**
+   * Identifier
+   */
+  id?: string;
+
+  /**
+   * If set to false, then the Address Map cannot be deleted via API. This is true
+   * for Cloudflare-managed maps.
+   */
+  can_delete?: boolean;
+
+  /**
+   * If set to false, then the IPs on the Address Map cannot be modified via the API.
+   * This is true for Cloudflare-managed maps.
+   */
+  can_modify_ips?: boolean;
+
+  created_at?: string;
+
+  /**
+   * If you have legacy TLS clients which do not send the TLS server name indicator,
+   * then you can specify one default SNI on the map. If Cloudflare receives a TLS
+   * handshake from a client without an SNI, it will respond with the default SNI on
+   * those IPs. The default SNI can be any valid zone or subdomain owned by the
+   * account.
+   */
+  default_sni?: string | null;
+
+  /**
+   * An optional description field which may be used to describe the types of IPs or
+   * zones on the map.
+   */
+  description?: string | null;
+
+  /**
+   * Whether the Address Map is enabled or not. Cloudflare's DNS will not respond
+   * with IP addresses on an Address Map until the map is enabled.
+   */
+  enabled?: boolean | null;
+
+  modified_at?: string;
+}
 
 export interface AddressMapGetResponse {
   /**
@@ -368,7 +368,7 @@ export interface AddressMapCreateParams {
   enabled?: boolean | null;
 }
 
-export interface AddressMapUpdateParams {
+export interface AddressMapEditParams {
   /**
    * If you have legacy TLS clients which do not send the TLS server name indicator,
    * then you can specify one default SNI on the map. If Cloudflare receives a TLS
@@ -393,19 +393,19 @@ export interface AddressMapUpdateParams {
 
 export namespace AddressMaps {
   export import AddressMapCreateResponse = AddressMapsAPI.AddressMapCreateResponse;
-  export import AddressMapUpdateResponse = AddressMapsAPI.AddressMapUpdateResponse;
   export import AddressMapListResponse = AddressMapsAPI.AddressMapListResponse;
   export import AddressMapDeleteResponse = AddressMapsAPI.AddressMapDeleteResponse;
+  export import AddressMapEditResponse = AddressMapsAPI.AddressMapEditResponse;
   export import AddressMapGetResponse = AddressMapsAPI.AddressMapGetResponse;
   export import AddressMapCreateParams = AddressMapsAPI.AddressMapCreateParams;
-  export import AddressMapUpdateParams = AddressMapsAPI.AddressMapUpdateParams;
+  export import AddressMapEditParams = AddressMapsAPI.AddressMapEditParams;
   export import Accounts = AccountsAPI.Accounts;
+  export import AccountUpdateResponse = AccountsAPI.AccountUpdateResponse;
   export import AccountDeleteResponse = AccountsAPI.AccountDeleteResponse;
-  export import AccountReplaceResponse = AccountsAPI.AccountReplaceResponse;
   export import IPs = IPsAPI.IPs;
+  export import IPUpdateResponse = IPsAPI.IPUpdateResponse;
   export import IPDeleteResponse = IPsAPI.IPDeleteResponse;
-  export import IPReplaceResponse = IPsAPI.IPReplaceResponse;
   export import Zones = ZonesAPI.Zones;
+  export import ZoneUpdateResponse = ZonesAPI.ZoneUpdateResponse;
   export import ZoneDeleteResponse = ZonesAPI.ZoneDeleteResponse;
-  export import ZoneReplaceResponse = ZonesAPI.ZoneReplaceResponse;
 }

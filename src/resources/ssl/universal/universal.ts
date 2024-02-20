@@ -9,7 +9,7 @@ export class Universal extends APIResource {
 
 export namespace Universal {
   export import Settings = SettingsAPI.Settings;
-  export import SettingUpdateResponse = SettingsAPI.SettingUpdateResponse;
+  export import SettingEditResponse = SettingsAPI.SettingEditResponse;
   export import SettingGetResponse = SettingsAPI.SettingGetResponse;
-  export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;
+  export import SettingEditParams = SettingsAPI.SettingEditParams;
 }

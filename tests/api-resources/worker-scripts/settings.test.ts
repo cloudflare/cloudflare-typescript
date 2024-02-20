@@ -13,8 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource settings', () => {
   // skipped: tests are disabled for the time being
-  test.skip('update', async () => {
-    const responsePromise = cloudflare.workerScripts.settings.update(
+  test.skip('edit', async () => {
+    const responsePromise = cloudflare.workerScripts.settings.edit(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'this-is_my_script-01',
       {},

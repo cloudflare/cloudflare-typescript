@@ -2,228 +2,223 @@
 
 export { AdvancedDDOSGetResponse, AdvancedDDOS } from './advanced-ddos';
 export {
-  AlwaysOnlineUpdateResponse,
+  AlwaysOnlineEditResponse,
   AlwaysOnlineGetResponse,
-  AlwaysOnlineUpdateParams,
+  AlwaysOnlineEditParams,
   AlwaysOnline,
 } from './always-online';
 export {
-  AlwaysUseHTTPSUpdateResponse,
+  AlwaysUseHTTPSEditResponse,
   AlwaysUseHTTPSGetResponse,
-  AlwaysUseHTTPSUpdateParams,
+  AlwaysUseHTTPSEditParams,
   AlwaysUseHTTPS,
 } from './always-use-https';
 export {
-  AutomaticHTTPSRewriteUpdateResponse,
+  AutomaticHTTPSRewriteEditResponse,
   AutomaticHTTPSRewriteGetResponse,
-  AutomaticHTTPSRewriteUpdateParams,
+  AutomaticHTTPSRewriteEditParams,
   AutomaticHTTPSRewrites,
 } from './automatic-https-rewrites';
 export {
-  AutomaticPlatformOptimizationUpdateResponse,
+  AutomaticPlatformOptimizationEditResponse,
   AutomaticPlatformOptimizationGetResponse,
-  AutomaticPlatformOptimizationUpdateParams,
+  AutomaticPlatformOptimizationEditParams,
   AutomaticPlatformOptimization,
 } from './automatic-platform-optimization';
-export { BrotliUpdateResponse, BrotliGetResponse, BrotliUpdateParams, Brotli } from './brotli';
+export { BrotliEditResponse, BrotliGetResponse, BrotliEditParams, Brotli } from './brotli';
 export {
-  BrowserCacheTTLUpdateResponse,
+  BrowserCacheTTLEditResponse,
   BrowserCacheTTLGetResponse,
-  BrowserCacheTTLUpdateParams,
+  BrowserCacheTTLEditParams,
   BrowserCacheTTL,
 } from './browser-cache-ttl';
 export {
-  BrowserCheckUpdateResponse,
+  BrowserCheckEditResponse,
   BrowserCheckGetResponse,
-  BrowserCheckUpdateParams,
+  BrowserCheckEditParams,
   BrowserCheck,
 } from './browser-check';
 export {
-  CacheLevelUpdateResponse,
+  CacheLevelEditResponse,
   CacheLevelGetResponse,
-  CacheLevelUpdateParams,
+  CacheLevelEditParams,
   CacheLevel,
 } from './cache-level';
 export {
-  ChallengeTTLUpdateResponse,
+  ChallengeTTLEditResponse,
   ChallengeTTLGetResponse,
-  ChallengeTTLUpdateParams,
+  ChallengeTTLEditParams,
   ChallengeTTL,
 } from './challenge-ttl';
-export { CipherUpdateResponse, CipherGetResponse, CipherUpdateParams, Ciphers } from './ciphers';
+export { CipherEditResponse, CipherGetResponse, CipherEditParams, Ciphers } from './ciphers';
 export {
-  DevelopmentModeUpdateResponse,
+  DevelopmentModeEditResponse,
   DevelopmentModeGetResponse,
-  DevelopmentModeUpdateParams,
+  DevelopmentModeEditParams,
   DevelopmentMode,
 } from './development-mode';
+export { EarlyHintEditResponse, EarlyHintGetResponse, EarlyHintEditParams, EarlyHints } from './early-hints';
 export {
-  EarlyHintUpdateResponse,
-  EarlyHintGetResponse,
-  EarlyHintUpdateParams,
-  EarlyHints,
-} from './early-hints';
-export {
-  EmailObfuscationUpdateResponse,
+  EmailObfuscationEditResponse,
   EmailObfuscationGetResponse,
-  EmailObfuscationUpdateParams,
+  EmailObfuscationEditParams,
   EmailObfuscation,
 } from './email-obfuscation';
 export {
-  FontSettingUpdateResponse,
+  FontSettingEditResponse,
   FontSettingGetResponse,
-  FontSettingUpdateParams,
+  FontSettingEditParams,
   FontSettings,
 } from './font-settings';
 export {
-  H2PrioritizationUpdateResponse,
+  H2PrioritizationEditResponse,
   H2PrioritizationGetResponse,
-  H2PrioritizationUpdateParams,
+  H2PrioritizationEditParams,
   H2Prioritization,
 } from './h2-prioritization';
-export { HTTP2UpdateResponse, HTTP2GetResponse, HTTP2UpdateParams, HTTP2 } from './http2';
-export { HTTP3UpdateResponse, HTTP3GetResponse, HTTP3UpdateParams, HTTP3 } from './http3';
+export { HTTP2EditResponse, HTTP2GetResponse, HTTP2EditParams, HTTP2 } from './http2';
+export { HTTP3EditResponse, HTTP3GetResponse, HTTP3EditParams, HTTP3 } from './http3';
 export {
-  HotlinkProtectionUpdateResponse,
+  HotlinkProtectionEditResponse,
   HotlinkProtectionGetResponse,
-  HotlinkProtectionUpdateParams,
+  HotlinkProtectionEditParams,
   HotlinkProtection,
 } from './hotlink-protection';
 export {
-  IPGeolocationUpdateResponse,
+  IPGeolocationEditResponse,
   IPGeolocationGetResponse,
-  IPGeolocationUpdateParams,
+  IPGeolocationEditParams,
   IPGeolocation,
 } from './ip-geolocation';
-export { IPV6UpdateResponse, IPV6GetResponse, IPV6UpdateParams, IPV6 } from './ipv6';
+export { IPV6EditResponse, IPV6GetResponse, IPV6EditParams, IPV6 } from './ipv6';
 export {
-  ImageResizingUpdateResponse,
+  ImageResizingEditResponse,
   ImageResizingGetResponse,
-  ImageResizingUpdateParams,
+  ImageResizingEditParams,
   ImageResizing,
 } from './image-resizing';
 export {
-  MinTLSVersionUpdateResponse,
+  MinTLSVersionEditResponse,
   MinTLSVersionGetResponse,
-  MinTLSVersionUpdateParams,
+  MinTLSVersionEditParams,
   MinTLSVersion,
 } from './min-tls-version';
-export { MinifyUpdateResponse, MinifyGetResponse, MinifyUpdateParams, Minify } from './minify';
-export { MirageUpdateResponse, MirageGetResponse, MirageUpdateParams, Mirage } from './mirage';
+export { MinifyEditResponse, MinifyGetResponse, MinifyEditParams, Minify } from './minify';
+export { MirageEditResponse, MirageGetResponse, MirageEditParams, Mirage } from './mirage';
 export {
-  MobileRedirectUpdateResponse,
+  MobileRedirectEditResponse,
   MobileRedirectGetResponse,
-  MobileRedirectUpdateParams,
+  MobileRedirectEditParams,
   MobileRedirect,
 } from './mobile-redirect';
-export { NELUpdateResponse, NELGetResponse, NELUpdateParams, NEL } from './nel';
+export { NELEditResponse, NELGetResponse, NELEditParams, NEL } from './nel';
 export {
-  OpportunisticEncryptionUpdateResponse,
+  OpportunisticEncryptionEditResponse,
   OpportunisticEncryptionGetResponse,
-  OpportunisticEncryptionUpdateParams,
+  OpportunisticEncryptionEditParams,
   OpportunisticEncryption,
 } from './opportunistic-encryption';
 export {
-  OpportunisticOnionUpdateResponse,
+  OpportunisticOnionEditResponse,
   OpportunisticOnionGetResponse,
-  OpportunisticOnionUpdateParams,
+  OpportunisticOnionEditParams,
   OpportunisticOnion,
 } from './opportunistic-onion';
 export {
-  OrangeToOrangeUpdateResponse,
+  OrangeToOrangeEditResponse,
   OrangeToOrangeGetResponse,
-  OrangeToOrangeUpdateParams,
+  OrangeToOrangeEditParams,
   OrangeToOrange,
 } from './orange-to-orange';
 export {
-  OriginErrorPagePassThruUpdateResponse,
+  OriginErrorPagePassThruEditResponse,
   OriginErrorPagePassThruGetResponse,
-  OriginErrorPagePassThruUpdateParams,
+  OriginErrorPagePassThruEditParams,
   OriginErrorPagePassThru,
 } from './origin-error-page-pass-thru';
 export {
-  OriginMaxHTTPVersionUpdateResponse,
+  OriginMaxHTTPVersionEditResponse,
   OriginMaxHTTPVersionGetResponse,
-  OriginMaxHTTPVersionUpdateParams,
+  OriginMaxHTTPVersionEditParams,
   OriginMaxHTTPVersion,
 } from './origin-max-http-version';
-export { PolishUpdateResponse, PolishGetResponse, PolishUpdateParams, Polish } from './polish';
+export { PolishEditResponse, PolishGetResponse, PolishEditParams, Polish } from './polish';
 export {
-  PrefetchPreloadUpdateResponse,
+  PrefetchPreloadEditResponse,
   PrefetchPreloadGetResponse,
-  PrefetchPreloadUpdateParams,
+  PrefetchPreloadEditParams,
   PrefetchPreload,
 } from './prefetch-preload';
 export {
-  ProxyReadTimeoutUpdateResponse,
+  ProxyReadTimeoutEditResponse,
   ProxyReadTimeoutGetResponse,
-  ProxyReadTimeoutUpdateParams,
+  ProxyReadTimeoutEditParams,
   ProxyReadTimeout,
 } from './proxy-read-timeout';
 export {
-  PseudoIPV4UpdateResponse,
+  PseudoIPV4EditResponse,
   PseudoIPV4GetResponse,
-  PseudoIPV4UpdateParams,
+  PseudoIPV4EditParams,
   PseudoIPV4,
 } from './pseudo-ipv4';
 export {
-  ResponseBufferingUpdateResponse,
+  ResponseBufferingEditResponse,
   ResponseBufferingGetResponse,
-  ResponseBufferingUpdateParams,
+  ResponseBufferingEditParams,
   ResponseBuffering,
 } from './response-buffering';
 export {
-  RocketLoaderUpdateResponse,
+  RocketLoaderEditResponse,
   RocketLoaderGetResponse,
-  RocketLoaderUpdateParams,
+  RocketLoaderEditParams,
   RocketLoader,
 } from './rocket-loader';
+export { SSLEditResponse, SSLGetResponse, SSLEditParams, SSL } from './ssl';
 export {
-  SSLRecommenderUpdateResponse,
+  SSLRecommenderEditResponse,
   SSLRecommenderGetResponse,
-  SSLRecommenderUpdateParams,
+  SSLRecommenderEditParams,
   SSLRecommender,
 } from './ssl-recommender';
-export { SSLUpdateResponse, SSLGetResponse, SSLUpdateParams, SSL } from './ssl';
 export {
-  SecurityHeaderUpdateResponse,
+  SecurityHeaderEditResponse,
   SecurityHeaderGetResponse,
-  SecurityHeaderUpdateParams,
+  SecurityHeaderEditParams,
   SecurityHeaders,
 } from './security-headers';
 export {
-  SecurityLevelUpdateResponse,
+  SecurityLevelEditResponse,
   SecurityLevelGetResponse,
-  SecurityLevelUpdateParams,
+  SecurityLevelEditParams,
   SecurityLevel,
 } from './security-level';
 export {
-  ServerSideExcludeUpdateResponse,
+  ServerSideExcludeEditResponse,
   ServerSideExcludeGetResponse,
-  ServerSideExcludeUpdateParams,
+  ServerSideExcludeEditParams,
   ServerSideExcludes,
 } from './server-side-excludes';
 export { SettingListResponse, SettingEditResponse, SettingEditParams, Settings } from './settings';
 export {
-  SortQueryStringForCacheUpdateResponse,
+  SortQueryStringForCacheEditResponse,
   SortQueryStringForCacheGetResponse,
-  SortQueryStringForCacheUpdateParams,
+  SortQueryStringForCacheEditParams,
   SortQueryStringForCache,
 } from './sort-query-string-for-cache';
-export { TLS1_3UpdateResponse, TLS1_3GetResponse, TLS1_3UpdateParams, TLS1_3 } from './tls-1-3';
+export { TLS1_3EditResponse, TLS1_3GetResponse, TLS1_3EditParams, TLS1_3 } from './tls-1-3';
 export {
-  TLSClientAuthUpdateResponse,
+  TLSClientAuthEditResponse,
   TLSClientAuthGetResponse,
-  TLSClientAuthUpdateParams,
+  TLSClientAuthEditParams,
   TLSClientAuth,
 } from './tls-client-auth';
 export {
-  TrueClientIPHeaderUpdateResponse,
+  TrueClientIPHeaderEditResponse,
   TrueClientIPHeaderGetResponse,
-  TrueClientIPHeaderUpdateParams,
+  TrueClientIPHeaderEditParams,
   TrueClientIPHeader,
 } from './true-client-ip-header';
-export { WAFUpdateResponse, WAFGetResponse, WAFUpdateParams, WAF } from './waf';
-export { WebpUpdateResponse, WebpGetResponse, WebpUpdateParams, Webp } from './webp';
-export { WebsocketUpdateResponse, WebsocketGetResponse, WebsocketUpdateParams, Websocket } from './websocket';
-export { ZeroRttUpdateResponse, ZeroRttGetResponse, ZeroRttUpdateParams, ZeroRtt } from './zero-rtt';
+export { WAFEditResponse, WAFGetResponse, WAFEditParams, WAF } from './waf';
+export { WebpEditResponse, WebpGetResponse, WebpEditParams, Webp } from './webp';
+export { WebsocketEditResponse, WebsocketGetResponse, WebsocketEditParams, Websocket } from './websocket';
+export { ZeroRttEditResponse, ZeroRttGetResponse, ZeroRttEditParams, ZeroRtt } from './zero-rtt';

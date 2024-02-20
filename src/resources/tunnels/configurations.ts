@@ -6,6 +6,23 @@ import * as ConfigurationsAPI from 'cloudflare/resources/tunnels/configurations'
 
 export class Configurations extends APIResource {
   /**
+   * Adds or updates the configuration for a remotely-managed tunnel.
+   */
+  update(
+    accountId: string,
+    tunnelId: string,
+    body: ConfigurationUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ConfigurationUpdateResponse> {
+    return (
+      this._client.put(`/accounts/${accountId}/cfd_tunnel/${tunnelId}/configurations`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: ConfigurationUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Gets the configuration for a remotely-managed tunnel
    */
   list(
@@ -20,37 +37,20 @@ export class Configurations extends APIResource {
       ) as Core.APIPromise<{ result: ConfigurationListResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
-
-  /**
-   * Adds or updates the configuration for a remotely-managed tunnel.
-   */
-  replace(
-    accountId: string,
-    tunnelId: string,
-    body: ConfigurationReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ConfigurationReplaceResponse> {
-    return (
-      this._client.put(`/accounts/${accountId}/cfd_tunnel/${tunnelId}/configurations`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: ConfigurationReplaceResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
+
+export type ConfigurationUpdateResponse = unknown | Array<unknown> | string;
 
 export type ConfigurationListResponse = unknown | Array<unknown> | string;
 
-export type ConfigurationReplaceResponse = unknown | Array<unknown> | string;
-
-export interface ConfigurationReplaceParams {
+export interface ConfigurationUpdateParams {
   /**
    * The tunnel configuration and ingress rules.
    */
-  config?: ConfigurationReplaceParams.Config;
+  config?: ConfigurationUpdateParams.Config;
 }
 
-export namespace ConfigurationReplaceParams {
+export namespace ConfigurationUpdateParams {
   /**
    * The tunnel configuration and ingress rules.
    */
@@ -327,7 +327,7 @@ export namespace ConfigurationReplaceParams {
 }
 
 export namespace Configurations {
+  export import ConfigurationUpdateResponse = ConfigurationsAPI.ConfigurationUpdateResponse;
   export import ConfigurationListResponse = ConfigurationsAPI.ConfigurationListResponse;
-  export import ConfigurationReplaceResponse = ConfigurationsAPI.ConfigurationReplaceResponse;
-  export import ConfigurationReplaceParams = ConfigurationsAPI.ConfigurationReplaceParams;
+  export import ConfigurationUpdateParams = ConfigurationsAPI.ConfigurationUpdateParams;
 }

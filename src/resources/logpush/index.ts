@@ -4,12 +4,12 @@ export { Datasets } from './datasets/index';
 export { EdgeCreateResponse, EdgeGetResponse, EdgeCreateParams, Edge } from './edge';
 export {
   JobCreateResponse,
+  JobUpdateResponse,
   JobListResponse,
   JobDeleteResponse,
   JobGetResponse,
-  JobReplaceResponse,
   JobCreateParams,
-  JobReplaceParams,
+  JobUpdateParams,
   Jobs,
 } from './jobs';
 export { Logpush } from './logpush';

@@ -6,6 +6,21 @@ import * as SubscriptionsAPI from 'cloudflare/resources/users/subscriptions';
 
 export class Subscriptions extends APIResource {
   /**
+   * Updates a user's subscriptions.
+   */
+  update(
+    identifier: string,
+    body: SubscriptionUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SubscriptionUpdateResponse> {
+    return (
+      this._client.put(`/user/subscriptions/${identifier}`, { body, ...options }) as Core.APIPromise<{
+        result: SubscriptionUpdateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Lists all of a user's subscriptions.
    */
   list(options?: Core.RequestOptions): Core.APIPromise<SubscriptionListResponse | null> {
@@ -22,22 +37,9 @@ export class Subscriptions extends APIResource {
   delete(identifier: string, options?: Core.RequestOptions): Core.APIPromise<SubscriptionDeleteResponse> {
     return this._client.delete(`/user/subscriptions/${identifier}`, options);
   }
-
-  /**
-   * Updates a user's subscriptions.
-   */
-  replace(
-    identifier: string,
-    body: SubscriptionReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SubscriptionReplaceResponse> {
-    return (
-      this._client.put(`/user/subscriptions/${identifier}`, { body, ...options }) as Core.APIPromise<{
-        result: SubscriptionReplaceResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
+
+export type SubscriptionUpdateResponse = unknown | string | null;
 
 export type SubscriptionListResponse = Array<SubscriptionListResponse.SubscriptionListResponseItem>;
 
@@ -194,15 +196,13 @@ export interface SubscriptionDeleteResponse {
   subscription_id?: string;
 }
 
-export type SubscriptionReplaceResponse = unknown | string | null;
-
-export interface SubscriptionReplaceParams {
-  app?: SubscriptionReplaceParams.App;
+export interface SubscriptionUpdateParams {
+  app?: SubscriptionUpdateParams.App;
 
   /**
    * The list of add-ons subscribed to.
    */
-  component_values?: Array<SubscriptionReplaceParams.ComponentValue>;
+  component_values?: Array<SubscriptionUpdateParams.ComponentValue>;
 
   /**
    * How often the subscription is renewed automatically.
@@ -212,15 +212,15 @@ export interface SubscriptionReplaceParams {
   /**
    * The rate plan applied to the subscription.
    */
-  rate_plan?: SubscriptionReplaceParams.RatePlan;
+  rate_plan?: SubscriptionUpdateParams.RatePlan;
 
   /**
    * A simple zone object. May have null properties if not a zone subscription.
    */
-  zone?: SubscriptionReplaceParams.Zone;
+  zone?: SubscriptionUpdateParams.Zone;
 }
 
-export namespace SubscriptionReplaceParams {
+export namespace SubscriptionUpdateParams {
   export interface App {
     /**
      * app install id.
@@ -300,8 +300,8 @@ export namespace SubscriptionReplaceParams {
 }
 
 export namespace Subscriptions {
+  export import SubscriptionUpdateResponse = SubscriptionsAPI.SubscriptionUpdateResponse;
   export import SubscriptionListResponse = SubscriptionsAPI.SubscriptionListResponse;
   export import SubscriptionDeleteResponse = SubscriptionsAPI.SubscriptionDeleteResponse;
-  export import SubscriptionReplaceResponse = SubscriptionsAPI.SubscriptionReplaceResponse;
-  export import SubscriptionReplaceParams = SubscriptionsAPI.SubscriptionReplaceParams;
+  export import SubscriptionUpdateParams = SubscriptionsAPI.SubscriptionUpdateParams;
 }

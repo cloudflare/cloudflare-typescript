@@ -2,12 +2,12 @@
 
 export {
   CertificateCreateResponse,
+  CertificateUpdateResponse,
   CertificateListResponse,
   CertificateDeleteResponse,
   CertificateGetResponse,
-  CertificateReplaceResponse,
   CertificateCreateParams,
-  CertificateReplaceParams,
+  CertificateUpdateParams,
   Certificates,
 } from './certificates';
-export { SettingListResponse, SettingReplaceResponse, SettingReplaceParams, Settings } from './settings';
+export { SettingUpdateResponse, SettingListResponse, SettingUpdateParams, Settings } from './settings';

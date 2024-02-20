@@ -21,14 +21,14 @@ export class Zaraz extends APIResource {
   /**
    * Updates Zaraz workflow for a zone.
    */
-  replace(
+  update(
     zoneId: string,
-    body: ZarazReplaceParams,
+    body: ZarazUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZarazReplaceResponse> {
+  ): Core.APIPromise<ZarazUpdateResponse> {
     return (
       this._client.put(`/zones/${zoneId}/settings/zaraz/workflow`, { body, ...options }) as Core.APIPromise<{
-        result: ZarazReplaceResponse;
+        result: ZarazUpdateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -37,26 +37,26 @@ export class Zaraz extends APIResource {
 /**
  * Zaraz workflow
  */
-export type ZarazReplaceResponse = 'realtime' | 'preview';
+export type ZarazUpdateResponse = 'realtime' | 'preview';
 
-export type ZarazReplaceParams = 'realtime' | 'preview';
+export type ZarazUpdateParams = 'realtime' | 'preview';
 
 export namespace Zaraz {
-  export import ZarazReplaceResponse = ZarazAPI.ZarazReplaceResponse;
-  export import ZarazReplaceParams = ZarazAPI.ZarazReplaceParams;
+  export import ZarazUpdateResponse = ZarazAPI.ZarazUpdateResponse;
+  export import ZarazUpdateParams = ZarazAPI.ZarazUpdateParams;
   export import Config = ConfigAPI.Config;
+  export import ConfigUpdateResponse = ConfigAPI.ConfigUpdateResponse;
   export import ConfigGetResponse = ConfigAPI.ConfigGetResponse;
-  export import ConfigReplaceResponse = ConfigAPI.ConfigReplaceResponse;
-  export import ConfigReplaceParams = ConfigAPI.ConfigReplaceParams;
+  export import ConfigUpdateParams = ConfigAPI.ConfigUpdateParams;
   export import Default = DefaultAPI.Default;
   export import DefaultGetResponse = DefaultAPI.DefaultGetResponse;
   export import Export = ExportAPI.Export;
   export import ExportGetResponse = ExportAPI.ExportGetResponse;
   export import History = HistoryAPI.History;
+  export import HistoryUpdateResponse = HistoryAPI.HistoryUpdateResponse;
   export import HistoryListResponse = HistoryAPI.HistoryListResponse;
-  export import HistoryReplaceResponse = HistoryAPI.HistoryReplaceResponse;
+  export import HistoryUpdateParams = HistoryAPI.HistoryUpdateParams;
   export import HistoryListParams = HistoryAPI.HistoryListParams;
-  export import HistoryReplaceParams = HistoryAPI.HistoryReplaceParams;
   export import Publish = PublishAPI.Publish;
   export import PublishCreateResponse = PublishAPI.PublishCreateResponse;
   export import PublishCreateParams = PublishAPI.PublishCreateParams;

@@ -7,6 +7,25 @@ import { multipartFormRequestOptions } from 'cloudflare/core';
 
 export class Captions extends APIResource {
   /**
+   * Uploads the caption or subtitle file to the endpoint for a specific BCP47
+   * language. One caption or subtitle file per language is allowed.
+   */
+  update(
+    accountId: string,
+    identifier: string,
+    language: string,
+    body: CaptionUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CaptionUpdateResponse> {
+    return (
+      this._client.put(
+        `/accounts/${accountId}/stream/${identifier}/captions/${language}`,
+        multipartFormRequestOptions({ body, ...options }),
+      ) as Core.APIPromise<{ result: CaptionUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Lists the available captions or subtitles for a specific video.
    */
   list(
@@ -37,26 +56,9 @@ export class Captions extends APIResource {
       ) as Core.APIPromise<{ result: CaptionDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
-
-  /**
-   * Uploads the caption or subtitle file to the endpoint for a specific BCP47
-   * language. One caption or subtitle file per language is allowed.
-   */
-  replace(
-    accountId: string,
-    identifier: string,
-    language: string,
-    body: CaptionReplaceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CaptionReplaceResponse> {
-    return (
-      this._client.put(
-        `/accounts/${accountId}/stream/${identifier}/captions/${language}`,
-        multipartFormRequestOptions({ body, ...options }),
-      ) as Core.APIPromise<{ result: CaptionReplaceResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
+
+export type CaptionUpdateResponse = unknown | string;
 
 export type CaptionListResponse = Array<CaptionListResponse.CaptionListResponseItem>;
 
@@ -76,9 +78,7 @@ export namespace CaptionListResponse {
 
 export type CaptionDeleteResponse = unknown | Array<unknown> | string;
 
-export type CaptionReplaceResponse = unknown | string;
-
-export interface CaptionReplaceParams {
+export interface CaptionUpdateParams {
   /**
    * The WebVTT file containing the caption or subtitle content.
    */
@@ -86,8 +86,8 @@ export interface CaptionReplaceParams {
 }
 
 export namespace Captions {
+  export import CaptionUpdateResponse = CaptionsAPI.CaptionUpdateResponse;
   export import CaptionListResponse = CaptionsAPI.CaptionListResponse;
   export import CaptionDeleteResponse = CaptionsAPI.CaptionDeleteResponse;
-  export import CaptionReplaceResponse = CaptionsAPI.CaptionReplaceResponse;
-  export import CaptionReplaceParams = CaptionsAPI.CaptionReplaceParams;
+  export import CaptionUpdateParams = CaptionsAPI.CaptionUpdateParams;
 }
