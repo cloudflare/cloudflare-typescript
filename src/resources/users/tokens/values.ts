@@ -8,14 +8,14 @@ export class Values extends APIResource {
   /**
    * Roll the token secret.
    */
-  userAPITokensRollToken(
+  replace(
     tokenId: unknown,
-    body: ValueUserAPITokensRollTokenParams,
+    body: ValueReplaceParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ValueUserAPITokensRollTokenResponse> {
+  ): Core.APIPromise<ValueReplaceResponse> {
     return (
       this._client.put(`/user/tokens/${tokenId}/value`, { body, ...options }) as Core.APIPromise<{
-        result: ValueUserAPITokensRollTokenResponse;
+        result: ValueReplaceResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -24,11 +24,11 @@ export class Values extends APIResource {
 /**
  * The token value.
  */
-export type ValueUserAPITokensRollTokenResponse = string;
+export type ValueReplaceResponse = string;
 
-export type ValueUserAPITokensRollTokenParams = unknown;
+export type ValueReplaceParams = unknown;
 
 export namespace Values {
-  export import ValueUserAPITokensRollTokenResponse = ValuesAPI.ValueUserAPITokensRollTokenResponse;
-  export import ValueUserAPITokensRollTokenParams = ValuesAPI.ValueUserAPITokensRollTokenParams;
+  export import ValueReplaceResponse = ValuesAPI.ValueReplaceResponse;
+  export import ValueReplaceParams = ValuesAPI.ValueReplaceParams;
 }

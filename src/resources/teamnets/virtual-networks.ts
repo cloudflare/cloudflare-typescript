@@ -7,6 +7,22 @@ import * as VirtualNetworksAPI from 'cloudflare/resources/teamnets/virtual-netwo
 
 export class VirtualNetworks extends APIResource {
   /**
+   * Adds a new virtual network to an account.
+   */
+  create(
+    accountId: string,
+    body: VirtualNetworkCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<VirtualNetworkCreateResponse> {
+    return (
+      this._client.post(`/accounts/${accountId}/teamnet/virtual_networks`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: VirtualNetworkCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Updates an existing virtual network.
    */
   update(
@@ -20,6 +36,31 @@ export class VirtualNetworks extends APIResource {
         body,
         ...options,
       }) as Core.APIPromise<{ result: VirtualNetworkUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Lists and filters virtual networks in an account.
+   */
+  list(
+    accountId: string,
+    query?: VirtualNetworkListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<VirtualNetworkListResponse | null>;
+  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<VirtualNetworkListResponse | null>;
+  list(
+    accountId: string,
+    query: VirtualNetworkListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<VirtualNetworkListResponse | null> {
+    if (isRequestOptions(query)) {
+      return this.list(accountId, {}, query);
+    }
+    return (
+      this._client.get(`/accounts/${accountId}/teamnet/virtual_networks`, {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: VirtualNetworkListResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -38,66 +79,16 @@ export class VirtualNetworks extends APIResource {
       ) as Core.APIPromise<{ result: VirtualNetworkDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
-
-  /**
-   * Adds a new virtual network to an account.
-   */
-  tunnelVirtualNetworkCreateAVirtualNetwork(
-    accountId: string,
-    body: VirtualNetworkTunnelVirtualNetworkCreateAVirtualNetworkParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<VirtualNetworkTunnelVirtualNetworkCreateAVirtualNetworkResponse> {
-    return (
-      this._client.post(`/accounts/${accountId}/teamnet/virtual_networks`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: VirtualNetworkTunnelVirtualNetworkCreateAVirtualNetworkResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Lists and filters virtual networks in an account.
-   */
-  tunnelVirtualNetworkListVirtualNetworks(
-    accountId: string,
-    query?: VirtualNetworkTunnelVirtualNetworkListVirtualNetworksParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<VirtualNetworkTunnelVirtualNetworkListVirtualNetworksResponse | null>;
-  tunnelVirtualNetworkListVirtualNetworks(
-    accountId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<VirtualNetworkTunnelVirtualNetworkListVirtualNetworksResponse | null>;
-  tunnelVirtualNetworkListVirtualNetworks(
-    accountId: string,
-    query: VirtualNetworkTunnelVirtualNetworkListVirtualNetworksParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<VirtualNetworkTunnelVirtualNetworkListVirtualNetworksResponse | null> {
-    if (isRequestOptions(query)) {
-      return this.tunnelVirtualNetworkListVirtualNetworks(accountId, {}, query);
-    }
-    return (
-      this._client.get(`/accounts/${accountId}/teamnet/virtual_networks`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: VirtualNetworkTunnelVirtualNetworkListVirtualNetworksResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
+
+export type VirtualNetworkCreateResponse = unknown | Array<unknown> | string;
 
 export type VirtualNetworkUpdateResponse = unknown | Array<unknown> | string;
 
-export type VirtualNetworkDeleteResponse = unknown | Array<unknown> | string;
+export type VirtualNetworkListResponse = Array<VirtualNetworkListResponse.VirtualNetworkListResponseItem>;
 
-export type VirtualNetworkTunnelVirtualNetworkCreateAVirtualNetworkResponse =
-  | unknown
-  | Array<unknown>
-  | string;
-
-export type VirtualNetworkTunnelVirtualNetworkListVirtualNetworksResponse =
-  Array<VirtualNetworkTunnelVirtualNetworkListVirtualNetworksResponse.VirtualNetworkTunnelVirtualNetworkListVirtualNetworksResponseItem>;
-
-export namespace VirtualNetworkTunnelVirtualNetworkListVirtualNetworksResponse {
-  export interface VirtualNetworkTunnelVirtualNetworkListVirtualNetworksResponseItem {
+export namespace VirtualNetworkListResponse {
+  export interface VirtualNetworkListResponseItem {
     /**
      * UUID of the virtual network.
      */
@@ -131,6 +122,25 @@ export namespace VirtualNetworkTunnelVirtualNetworkListVirtualNetworksResponse {
   }
 }
 
+export type VirtualNetworkDeleteResponse = unknown | Array<unknown> | string;
+
+export interface VirtualNetworkCreateParams {
+  /**
+   * A user-friendly name for the virtual network.
+   */
+  name: string;
+
+  /**
+   * Optional remark describing the virtual network.
+   */
+  comment?: string;
+
+  /**
+   * If `true`, this virtual network is the default for the account.
+   */
+  is_default?: boolean;
+}
+
 export interface VirtualNetworkUpdateParams {
   /**
    * Optional remark describing the virtual network.
@@ -148,24 +158,7 @@ export interface VirtualNetworkUpdateParams {
   name?: string;
 }
 
-export interface VirtualNetworkTunnelVirtualNetworkCreateAVirtualNetworkParams {
-  /**
-   * A user-friendly name for the virtual network.
-   */
-  name: string;
-
-  /**
-   * Optional remark describing the virtual network.
-   */
-  comment?: string;
-
-  /**
-   * If `true`, this virtual network is the default for the account.
-   */
-  is_default?: boolean;
-}
-
-export interface VirtualNetworkTunnelVirtualNetworkListVirtualNetworksParams {
+export interface VirtualNetworkListParams {
   /**
    * If `true`, only include the default virtual network. If `false`, exclude the
    * default virtual network. If empty, all virtual networks will be included.
@@ -190,11 +183,11 @@ export interface VirtualNetworkTunnelVirtualNetworkListVirtualNetworksParams {
 }
 
 export namespace VirtualNetworks {
+  export import VirtualNetworkCreateResponse = VirtualNetworksAPI.VirtualNetworkCreateResponse;
   export import VirtualNetworkUpdateResponse = VirtualNetworksAPI.VirtualNetworkUpdateResponse;
+  export import VirtualNetworkListResponse = VirtualNetworksAPI.VirtualNetworkListResponse;
   export import VirtualNetworkDeleteResponse = VirtualNetworksAPI.VirtualNetworkDeleteResponse;
-  export import VirtualNetworkTunnelVirtualNetworkCreateAVirtualNetworkResponse = VirtualNetworksAPI.VirtualNetworkTunnelVirtualNetworkCreateAVirtualNetworkResponse;
-  export import VirtualNetworkTunnelVirtualNetworkListVirtualNetworksResponse = VirtualNetworksAPI.VirtualNetworkTunnelVirtualNetworkListVirtualNetworksResponse;
+  export import VirtualNetworkCreateParams = VirtualNetworksAPI.VirtualNetworkCreateParams;
   export import VirtualNetworkUpdateParams = VirtualNetworksAPI.VirtualNetworkUpdateParams;
-  export import VirtualNetworkTunnelVirtualNetworkCreateAVirtualNetworkParams = VirtualNetworksAPI.VirtualNetworkTunnelVirtualNetworkCreateAVirtualNetworkParams;
-  export import VirtualNetworkTunnelVirtualNetworkListVirtualNetworksParams = VirtualNetworksAPI.VirtualNetworkTunnelVirtualNetworkListVirtualNetworksParams;
+  export import VirtualNetworkListParams = VirtualNetworksAPI.VirtualNetworkListParams;
 }

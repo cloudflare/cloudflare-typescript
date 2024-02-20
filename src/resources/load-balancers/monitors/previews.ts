@@ -9,22 +9,22 @@ export class Previews extends APIResource {
    * Preview pools using the specified monitor with provided monitor details. The
    * returned preview_id can be used in the preview endpoint to retrieve the results.
    */
-  accountLoadBalancerMonitorsPreviewMonitor(
+  create(
     accountId: string,
     monitorId: string,
-    body: PreviewAccountLoadBalancerMonitorsPreviewMonitorParams,
+    body: PreviewCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PreviewAccountLoadBalancerMonitorsPreviewMonitorResponse> {
+  ): Core.APIPromise<PreviewCreateResponse> {
     return (
       this._client.post(`/accounts/${accountId}/load_balancers/monitors/${monitorId}/preview`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: PreviewAccountLoadBalancerMonitorsPreviewMonitorResponse }>
+      }) as Core.APIPromise<{ result: PreviewCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface PreviewAccountLoadBalancerMonitorsPreviewMonitorResponse {
+export interface PreviewCreateResponse {
   /**
    * Monitored pool IDs mapped to their respective names.
    */
@@ -33,7 +33,7 @@ export interface PreviewAccountLoadBalancerMonitorsPreviewMonitorResponse {
   preview_id?: string;
 }
 
-export interface PreviewAccountLoadBalancerMonitorsPreviewMonitorParams {
+export interface PreviewCreateParams {
   /**
    * The expected HTTP response code or code range of the health check. This
    * parameter is only valid for HTTP and HTTPS monitors.
@@ -133,6 +133,6 @@ export interface PreviewAccountLoadBalancerMonitorsPreviewMonitorParams {
 }
 
 export namespace Previews {
-  export import PreviewAccountLoadBalancerMonitorsPreviewMonitorResponse = PreviewsAPI.PreviewAccountLoadBalancerMonitorsPreviewMonitorResponse;
-  export import PreviewAccountLoadBalancerMonitorsPreviewMonitorParams = PreviewsAPI.PreviewAccountLoadBalancerMonitorsPreviewMonitorParams;
+  export import PreviewCreateResponse = PreviewsAPI.PreviewCreateResponse;
+  export import PreviewCreateParams = PreviewsAPI.PreviewCreateParams;
 }

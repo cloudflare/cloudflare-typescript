@@ -11,19 +11,28 @@ export class Lists extends APIResource {
   items: ItemsAPI.Items = new ItemsAPI.Items(this._client);
 
   /**
-   * Updates the description of a list.
+   * Creates a new list of the specified type.
    */
-  update(
+  create(
     accountId: string,
-    listId: string,
-    body: ListUpdateParams,
+    body: ListCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ListUpdateResponse | null> {
+  ): Core.APIPromise<ListCreateResponse | null> {
     return (
-      this._client.put(`/accounts/${accountId}/rules/lists/${listId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: ListUpdateResponse | null }>
+      this._client.post(`/accounts/${accountId}/rules/lists`, { body, ...options }) as Core.APIPromise<{
+        result: ListCreateResponse | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Fetches all lists in the account.
+   */
+  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<ListListResponse | null> {
+    return (
+      this._client.get(`/accounts/${accountId}/rules/lists`, options) as Core.APIPromise<{
+        result: ListListResponse | null;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -58,52 +67,29 @@ export class Lists extends APIResource {
   }
 
   /**
-   * Creates a new list of the specified type.
+   * Updates the description of a list.
    */
-  listsCreateAList(
+  replace(
     accountId: string,
-    body: ListListsCreateAListParams,
+    listId: string,
+    body: ListReplaceParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ListListsCreateAListResponse | null> {
+  ): Core.APIPromise<ListReplaceResponse | null> {
     return (
-      this._client.post(`/accounts/${accountId}/rules/lists`, { body, ...options }) as Core.APIPromise<{
-        result: ListListsCreateAListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Fetches all lists in the account.
-   */
-  listsGetLists(
-    accountId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ListListsGetListsResponse | null> {
-    return (
-      this._client.get(`/accounts/${accountId}/rules/lists`, options) as Core.APIPromise<{
-        result: ListListsGetListsResponse | null;
-      }>
+      this._client.put(`/accounts/${accountId}/rules/lists/${listId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: ListReplaceResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type ListUpdateResponse = Array<unknown>;
+export type ListCreateResponse = Array<unknown>;
 
-export interface ListDeleteResponse {
-  /**
-   * The unique ID of the item in the List.
-   */
-  id?: string;
-}
+export type ListListResponse = Array<ListListResponse.ListListResponseItem>;
 
-export type ListGetResponse = Array<unknown>;
-
-export type ListListsCreateAListResponse = Array<unknown>;
-
-export type ListListsGetListsResponse = Array<ListListsGetListsResponse.ListListsGetListsResponseItem>;
-
-export namespace ListListsGetListsResponse {
-  export interface ListListsGetListsResponseItem {
+export namespace ListListResponse {
+  export interface ListListResponseItem {
     /**
      * The unique ID of the list.
      */
@@ -147,14 +133,18 @@ export namespace ListListsGetListsResponse {
   }
 }
 
-export interface ListUpdateParams {
+export interface ListDeleteResponse {
   /**
-   * An informative summary of the list.
+   * The unique ID of the item in the List.
    */
-  description?: string;
+  id?: string;
 }
 
-export interface ListListsCreateAListParams {
+export type ListGetResponse = Array<unknown>;
+
+export type ListReplaceResponse = Array<unknown>;
+
+export interface ListCreateParams {
   /**
    * The type of the list. Each type supports specific list items (IP addresses,
    * ASNs, hostnames or redirects).
@@ -172,24 +162,31 @@ export interface ListListsCreateAListParams {
   description?: string;
 }
 
+export interface ListReplaceParams {
+  /**
+   * An informative summary of the list.
+   */
+  description?: string;
+}
+
 export namespace Lists {
-  export import ListUpdateResponse = ListsAPI.ListUpdateResponse;
+  export import ListCreateResponse = ListsAPI.ListCreateResponse;
+  export import ListListResponse = ListsAPI.ListListResponse;
   export import ListDeleteResponse = ListsAPI.ListDeleteResponse;
   export import ListGetResponse = ListsAPI.ListGetResponse;
-  export import ListListsCreateAListResponse = ListsAPI.ListListsCreateAListResponse;
-  export import ListListsGetListsResponse = ListsAPI.ListListsGetListsResponse;
-  export import ListUpdateParams = ListsAPI.ListUpdateParams;
-  export import ListListsCreateAListParams = ListsAPI.ListListsCreateAListParams;
+  export import ListReplaceResponse = ListsAPI.ListReplaceResponse;
+  export import ListCreateParams = ListsAPI.ListCreateParams;
+  export import ListReplaceParams = ListsAPI.ListReplaceParams;
   export import BulkOperations = BulkOperationsAPI.BulkOperations;
   export import BulkOperationGetResponse = BulkOperationsAPI.BulkOperationGetResponse;
   export import Items = ItemsAPI.Items;
+  export import ItemCreateResponse = ItemsAPI.ItemCreateResponse;
+  export import ItemListResponse = ItemsAPI.ItemListResponse;
   export import ItemDeleteResponse = ItemsAPI.ItemDeleteResponse;
   export import ItemGetResponse = ItemsAPI.ItemGetResponse;
-  export import ItemListsCreateListItemsResponse = ItemsAPI.ItemListsCreateListItemsResponse;
-  export import ItemListsGetListItemsResponse = ItemsAPI.ItemListsGetListItemsResponse;
-  export import ItemListsUpdateAllListItemsResponse = ItemsAPI.ItemListsUpdateAllListItemsResponse;
+  export import ItemReplaceResponse = ItemsAPI.ItemReplaceResponse;
+  export import ItemCreateParams = ItemsAPI.ItemCreateParams;
+  export import ItemListParams = ItemsAPI.ItemListParams;
   export import ItemDeleteParams = ItemsAPI.ItemDeleteParams;
-  export import ItemListsCreateListItemsParams = ItemsAPI.ItemListsCreateListItemsParams;
-  export import ItemListsGetListItemsParams = ItemsAPI.ItemListsGetListItemsParams;
-  export import ItemListsUpdateAllListItemsParams = ItemsAPI.ItemListsUpdateAllListItemsParams;
+  export import ItemReplaceParams = ItemsAPI.ItemReplaceParams;
 }

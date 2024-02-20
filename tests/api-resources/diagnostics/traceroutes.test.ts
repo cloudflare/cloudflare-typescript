@@ -13,11 +13,10 @@ const cloudflare = new Cloudflare({
 
 describe('resource traceroutes', () => {
   // skipped: tests are disabled for the time being
-  test.skip('diagnosticsTraceroute: only required params', async () => {
-    const responsePromise = cloudflare.diagnostics.traceroutes.diagnosticsTraceroute(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      { targets: ['203.0.113.1', 'cloudflare.com'] },
-    );
+  test.skip('create: only required params', async () => {
+    const responsePromise = cloudflare.diagnostics.traceroutes.create('023e105f4ecef8ad9ca31a8372d0c353', {
+      targets: ['203.0.113.1', 'cloudflare.com'],
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -28,14 +27,11 @@ describe('resource traceroutes', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('diagnosticsTraceroute: required and optional params', async () => {
-    const response = await cloudflare.diagnostics.traceroutes.diagnosticsTraceroute(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      {
-        targets: ['203.0.113.1', 'cloudflare.com'],
-        colos: ['den', 'sin'],
-        options: { max_ttl: 15, packet_type: 'icmp', packets_per_ttl: 0, port: 0, wait_time: 1 },
-      },
-    );
+  test.skip('create: required and optional params', async () => {
+    const response = await cloudflare.diagnostics.traceroutes.create('023e105f4ecef8ad9ca31a8372d0c353', {
+      targets: ['203.0.113.1', 'cloudflare.com'],
+      colos: ['den', 'sin'],
+      options: { max_ttl: 15, packet_type: 'icmp', packets_per_ttl: 0, port: 0, wait_time: 1 },
+    });
   });
 });

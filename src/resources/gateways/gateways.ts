@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as GatewaysAPI from 'cloudflare/resources/gateways/gateways';
 import * as AppTypesAPI from 'cloudflare/resources/gateways/app-types';
+import * as AuditSSHSettingsAPI from 'cloudflare/resources/gateways/audit-ssh-settings';
 import * as CategoriesAPI from 'cloudflare/resources/gateways/categories';
 import * as ConfigurationsAPI from 'cloudflare/resources/gateways/configurations';
 import * as LocationsAPI from 'cloudflare/resources/gateways/locations';
@@ -13,6 +14,9 @@ import * as RulesAPI from 'cloudflare/resources/gateways/rules';
 import * as ListsAPI from 'cloudflare/resources/gateways/lists/lists';
 
 export class Gateways extends APIResource {
+  auditSSHSettings: AuditSSHSettingsAPI.AuditSSHSettings = new AuditSSHSettingsAPI.AuditSSHSettings(
+    this._client,
+  );
   categories: CategoriesAPI.Categories = new CategoriesAPI.Categories(this._client);
   appTypes: AppTypesAPI.AppTypes = new AppTypesAPI.AppTypes(this._client);
   configurations: ConfigurationsAPI.Configurations = new ConfigurationsAPI.Configurations(this._client);
@@ -25,13 +29,10 @@ export class Gateways extends APIResource {
   /**
    * Creates a Zero Trust account with an existing Cloudflare account.
    */
-  zeroTrustAccountsCreateZeroTrustAccount(
-    accountId: unknown,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<GatewayZeroTrustAccountsCreateZeroTrustAccountResponse> {
+  create(accountId: unknown, options?: Core.RequestOptions): Core.APIPromise<GatewayCreateResponse> {
     return (
       this._client.post(`/accounts/${accountId}/gateway`, options) as Core.APIPromise<{
-        result: GatewayZeroTrustAccountsCreateZeroTrustAccountResponse;
+        result: GatewayCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -39,19 +40,16 @@ export class Gateways extends APIResource {
   /**
    * Gets information about the current Zero Trust account.
    */
-  zeroTrustAccountsGetZeroTrustAccountInformation(
-    accountId: unknown,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<GatewayZeroTrustAccountsGetZeroTrustAccountInformationResponse> {
+  list(accountId: unknown, options?: Core.RequestOptions): Core.APIPromise<GatewayListResponse> {
     return (
       this._client.get(`/accounts/${accountId}/gateway`, options) as Core.APIPromise<{
-        result: GatewayZeroTrustAccountsGetZeroTrustAccountInformationResponse;
+        result: GatewayListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface GatewayZeroTrustAccountsCreateZeroTrustAccountResponse {
+export interface GatewayCreateResponse {
   /**
    * Cloudflare account ID.
    */
@@ -68,7 +66,7 @@ export interface GatewayZeroTrustAccountsCreateZeroTrustAccountResponse {
   provider_name?: string;
 }
 
-export interface GatewayZeroTrustAccountsGetZeroTrustAccountInformationResponse {
+export interface GatewayListResponse {
   /**
    * Cloudflare account ID.
    */
@@ -86,53 +84,56 @@ export interface GatewayZeroTrustAccountsGetZeroTrustAccountInformationResponse 
 }
 
 export namespace Gateways {
-  export import GatewayZeroTrustAccountsCreateZeroTrustAccountResponse = GatewaysAPI.GatewayZeroTrustAccountsCreateZeroTrustAccountResponse;
-  export import GatewayZeroTrustAccountsGetZeroTrustAccountInformationResponse = GatewaysAPI.GatewayZeroTrustAccountsGetZeroTrustAccountInformationResponse;
+  export import GatewayCreateResponse = GatewaysAPI.GatewayCreateResponse;
+  export import GatewayListResponse = GatewaysAPI.GatewayListResponse;
+  export import AuditSSHSettings = AuditSSHSettingsAPI.AuditSSHSettings;
+  export import AuditSSHSettingGetResponse = AuditSSHSettingsAPI.AuditSSHSettingGetResponse;
+  export import AuditSSHSettingReplaceResponse = AuditSSHSettingsAPI.AuditSSHSettingReplaceResponse;
+  export import AuditSSHSettingReplaceParams = AuditSSHSettingsAPI.AuditSSHSettingReplaceParams;
   export import Categories = CategoriesAPI.Categories;
-  export import CategoryZeroTrustGatewayCategoriesListCategoriesResponse = CategoriesAPI.CategoryZeroTrustGatewayCategoriesListCategoriesResponse;
+  export import CategoryListResponse = CategoriesAPI.CategoryListResponse;
   export import AppTypes = AppTypesAPI.AppTypes;
-  export import AppTypeZeroTrustGatewayApplicationAndApplicationTypeMappingsListApplicationAndApplicationTypeMappingsResponse = AppTypesAPI.AppTypeZeroTrustGatewayApplicationAndApplicationTypeMappingsListApplicationAndApplicationTypeMappingsResponse;
+  export import AppTypeListResponse = AppTypesAPI.AppTypeListResponse;
   export import Configurations = ConfigurationsAPI.Configurations;
-  export import ConfigurationZeroTrustAccountsGetZeroTrustAccountConfigurationResponse = ConfigurationsAPI.ConfigurationZeroTrustAccountsGetZeroTrustAccountConfigurationResponse;
-  export import ConfigurationZeroTrustAccountsPatchZeroTrustAccountConfigurationResponse = ConfigurationsAPI.ConfigurationZeroTrustAccountsPatchZeroTrustAccountConfigurationResponse;
-  export import ConfigurationZeroTrustAccountsUpdateZeroTrustAccountConfigurationResponse = ConfigurationsAPI.ConfigurationZeroTrustAccountsUpdateZeroTrustAccountConfigurationResponse;
-  export import ConfigurationZeroTrustAccountsPatchZeroTrustAccountConfigurationParams = ConfigurationsAPI.ConfigurationZeroTrustAccountsPatchZeroTrustAccountConfigurationParams;
-  export import ConfigurationZeroTrustAccountsUpdateZeroTrustAccountConfigurationParams = ConfigurationsAPI.ConfigurationZeroTrustAccountsUpdateZeroTrustAccountConfigurationParams;
+  export import ConfigurationUpdateResponse = ConfigurationsAPI.ConfigurationUpdateResponse;
+  export import ConfigurationGetResponse = ConfigurationsAPI.ConfigurationGetResponse;
+  export import ConfigurationReplaceResponse = ConfigurationsAPI.ConfigurationReplaceResponse;
+  export import ConfigurationUpdateParams = ConfigurationsAPI.ConfigurationUpdateParams;
+  export import ConfigurationReplaceParams = ConfigurationsAPI.ConfigurationReplaceParams;
   export import Lists = ListsAPI.Lists;
-  export import ListUpdateResponse = ListsAPI.ListUpdateResponse;
+  export import ListCreateResponse = ListsAPI.ListCreateResponse;
+  export import ListListResponse = ListsAPI.ListListResponse;
   export import ListDeleteResponse = ListsAPI.ListDeleteResponse;
   export import ListGetResponse = ListsAPI.ListGetResponse;
-  export import ListZeroTrustListsCreateZeroTrustListResponse = ListsAPI.ListZeroTrustListsCreateZeroTrustListResponse;
-  export import ListZeroTrustListsListZeroTrustListsResponse = ListsAPI.ListZeroTrustListsListZeroTrustListsResponse;
-  export import ListUpdateParams = ListsAPI.ListUpdateParams;
-  export import ListZeroTrustListsCreateZeroTrustListParams = ListsAPI.ListZeroTrustListsCreateZeroTrustListParams;
+  export import ListReplaceResponse = ListsAPI.ListReplaceResponse;
+  export import ListCreateParams = ListsAPI.ListCreateParams;
+  export import ListReplaceParams = ListsAPI.ListReplaceParams;
   export import Locations = LocationsAPI.Locations;
-  export import LocationUpdateResponse = LocationsAPI.LocationUpdateResponse;
+  export import LocationCreateResponse = LocationsAPI.LocationCreateResponse;
+  export import LocationListResponse = LocationsAPI.LocationListResponse;
   export import LocationDeleteResponse = LocationsAPI.LocationDeleteResponse;
   export import LocationGetResponse = LocationsAPI.LocationGetResponse;
-  export import LocationZeroTrustGatewayLocationsCreateZeroTrustGatewayLocationResponse = LocationsAPI.LocationZeroTrustGatewayLocationsCreateZeroTrustGatewayLocationResponse;
-  export import LocationZeroTrustGatewayLocationsListZeroTrustGatewayLocationsResponse = LocationsAPI.LocationZeroTrustGatewayLocationsListZeroTrustGatewayLocationsResponse;
-  export import LocationUpdateParams = LocationsAPI.LocationUpdateParams;
-  export import LocationZeroTrustGatewayLocationsCreateZeroTrustGatewayLocationParams = LocationsAPI.LocationZeroTrustGatewayLocationsCreateZeroTrustGatewayLocationParams;
+  export import LocationReplaceResponse = LocationsAPI.LocationReplaceResponse;
+  export import LocationCreateParams = LocationsAPI.LocationCreateParams;
+  export import LocationReplaceParams = LocationsAPI.LocationReplaceParams;
   export import Loggings = LoggingsAPI.Loggings;
-  export import LoggingZeroTrustAccountsGetLoggingSettingsForTheZeroTrustAccountResponse = LoggingsAPI.LoggingZeroTrustAccountsGetLoggingSettingsForTheZeroTrustAccountResponse;
-  export import LoggingZeroTrustAccountsUpdateLoggingSettingsForTheZeroTrustAccountResponse = LoggingsAPI.LoggingZeroTrustAccountsUpdateLoggingSettingsForTheZeroTrustAccountResponse;
-  export import LoggingZeroTrustAccountsUpdateLoggingSettingsForTheZeroTrustAccountParams = LoggingsAPI.LoggingZeroTrustAccountsUpdateLoggingSettingsForTheZeroTrustAccountParams;
+  export import LoggingGetResponse = LoggingsAPI.LoggingGetResponse;
+  export import LoggingReplaceResponse = LoggingsAPI.LoggingReplaceResponse;
+  export import LoggingReplaceParams = LoggingsAPI.LoggingReplaceParams;
   export import ProxyEndpoints = ProxyEndpointsAPI.ProxyEndpoints;
+  export import ProxyEndpointCreateResponse = ProxyEndpointsAPI.ProxyEndpointCreateResponse;
   export import ProxyEndpointUpdateResponse = ProxyEndpointsAPI.ProxyEndpointUpdateResponse;
   export import ProxyEndpointListResponse = ProxyEndpointsAPI.ProxyEndpointListResponse;
   export import ProxyEndpointDeleteResponse = ProxyEndpointsAPI.ProxyEndpointDeleteResponse;
   export import ProxyEndpointGetResponse = ProxyEndpointsAPI.ProxyEndpointGetResponse;
-  export import ProxyEndpointZeroTrustGatewayProxyEndpointsCreateProxyEndpointResponse = ProxyEndpointsAPI.ProxyEndpointZeroTrustGatewayProxyEndpointsCreateProxyEndpointResponse;
-  export import ProxyEndpointZeroTrustGatewayProxyEndpointsListProxyEndpointsResponse = ProxyEndpointsAPI.ProxyEndpointZeroTrustGatewayProxyEndpointsListProxyEndpointsResponse;
+  export import ProxyEndpointCreateParams = ProxyEndpointsAPI.ProxyEndpointCreateParams;
   export import ProxyEndpointUpdateParams = ProxyEndpointsAPI.ProxyEndpointUpdateParams;
-  export import ProxyEndpointZeroTrustGatewayProxyEndpointsCreateProxyEndpointParams = ProxyEndpointsAPI.ProxyEndpointZeroTrustGatewayProxyEndpointsCreateProxyEndpointParams;
   export import Rules = RulesAPI.Rules;
-  export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
+  export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
+  export import RuleListResponse = RulesAPI.RuleListResponse;
   export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
   export import RuleGetResponse = RulesAPI.RuleGetResponse;
-  export import RuleZeroTrustGatewayRulesCreateZeroTrustGatewayRuleResponse = RulesAPI.RuleZeroTrustGatewayRulesCreateZeroTrustGatewayRuleResponse;
-  export import RuleZeroTrustGatewayRulesListZeroTrustGatewayRulesResponse = RulesAPI.RuleZeroTrustGatewayRulesListZeroTrustGatewayRulesResponse;
-  export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
-  export import RuleZeroTrustGatewayRulesCreateZeroTrustGatewayRuleParams = RulesAPI.RuleZeroTrustGatewayRulesCreateZeroTrustGatewayRuleParams;
+  export import RuleReplaceResponse = RulesAPI.RuleReplaceResponse;
+  export import RuleCreateParams = RulesAPI.RuleCreateParams;
+  export import RuleReplaceParams = RulesAPI.RuleReplaceParams;
 }

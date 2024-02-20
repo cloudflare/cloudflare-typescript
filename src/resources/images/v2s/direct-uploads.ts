@@ -15,23 +15,21 @@ export class DirectUploads extends APIResource {
    * (accounts/:account_identifier/images/v1/:identifier), and check that the
    * `draft: true` property is not present.
    */
-  cloudflareImagesCreateAuthenticatedDirectUploadURLV2(
+  create(
     accountId: string,
-    body: DirectUploadCloudflareImagesCreateAuthenticatedDirectUploadURLV2Params,
+    body: DirectUploadCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DirectUploadCloudflareImagesCreateAuthenticatedDirectUploadURLV2Response> {
+  ): Core.APIPromise<DirectUploadCreateResponse> {
     return (
       this._client.post(
         `/accounts/${accountId}/images/v2/direct_upload`,
         multipartFormRequestOptions({ body, ...options }),
-      ) as Core.APIPromise<{
-        result: DirectUploadCloudflareImagesCreateAuthenticatedDirectUploadURLV2Response;
-      }>
+      ) as Core.APIPromise<{ result: DirectUploadCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface DirectUploadCloudflareImagesCreateAuthenticatedDirectUploadURLV2Response {
+export interface DirectUploadCreateResponse {
   /**
    * Image unique identifier.
    */
@@ -44,7 +42,7 @@ export interface DirectUploadCloudflareImagesCreateAuthenticatedDirectUploadURLV
   uploadURL?: string;
 }
 
-export interface DirectUploadCloudflareImagesCreateAuthenticatedDirectUploadURLV2Params {
+export interface DirectUploadCreateParams {
   /**
    * The date after which the upload will not be accepted. Minimum: Now + 2 minutes.
    * Maximum: Now + 6 hours.
@@ -64,6 +62,6 @@ export interface DirectUploadCloudflareImagesCreateAuthenticatedDirectUploadURLV
 }
 
 export namespace DirectUploads {
-  export import DirectUploadCloudflareImagesCreateAuthenticatedDirectUploadURLV2Response = DirectUploadsAPI.DirectUploadCloudflareImagesCreateAuthenticatedDirectUploadURLV2Response;
-  export import DirectUploadCloudflareImagesCreateAuthenticatedDirectUploadURLV2Params = DirectUploadsAPI.DirectUploadCloudflareImagesCreateAuthenticatedDirectUploadURLV2Params;
+  export import DirectUploadCreateResponse = DirectUploadsAPI.DirectUploadCreateResponse;
+  export import DirectUploadCreateParams = DirectUploadsAPI.DirectUploadCreateParams;
 }

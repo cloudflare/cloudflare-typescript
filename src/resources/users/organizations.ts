@@ -4,8 +4,32 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as OrganizationsAPI from 'cloudflare/resources/users/organizations';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class Organizations extends APIResource {
+  /**
+   * Lists organizations the user is associated with.
+   */
+  list(
+    query?: OrganizationListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<OrganizationListResponsesV4PagePaginationArray, OrganizationListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<OrganizationListResponsesV4PagePaginationArray, OrganizationListResponse>;
+  list(
+    query: OrganizationListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<OrganizationListResponsesV4PagePaginationArray, OrganizationListResponse> {
+    if (isRequestOptions(query)) {
+      return this.list({}, query);
+    }
+    return this._client.getAPIList('/user/organizations', OrganizationListResponsesV4PagePaginationArray, {
+      query,
+      ...options,
+    });
+  }
+
   /**
    * Removes association to an organization.
    */
@@ -23,30 +47,35 @@ export class Organizations extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+
+export class OrganizationListResponsesV4PagePaginationArray extends V4PagePaginationArray<OrganizationListResponse> {}
+
+export interface OrganizationListResponse {
+  /**
+   * Identifier
+   */
+  id?: string;
 
   /**
-   * Lists organizations the user is associated with.
+   * Organization name.
    */
-  userSOrganizationsListOrganizations(
-    query?: OrganizationUserSOrganizationsListOrganizationsParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OrganizationUserSOrganizationsListOrganizationsResponse | null>;
-  userSOrganizationsListOrganizations(
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OrganizationUserSOrganizationsListOrganizationsResponse | null>;
-  userSOrganizationsListOrganizations(
-    query: OrganizationUserSOrganizationsListOrganizationsParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OrganizationUserSOrganizationsListOrganizationsResponse | null> {
-    if (isRequestOptions(query)) {
-      return this.userSOrganizationsListOrganizations({}, query);
-    }
-    return (
-      this._client.get('/user/organizations', { query, ...options }) as Core.APIPromise<{
-        result: OrganizationUserSOrganizationsListOrganizationsResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
+  name?: string;
+
+  /**
+   * Access permissions for this User.
+   */
+  permissions?: Array<string>;
+
+  /**
+   * List of roles that a user has within an organization.
+   */
+  roles?: Array<string>;
+
+  /**
+   * Whether the user is a member of the organization or has an inivitation pending.
+   */
+  status?: 'member' | 'invited';
 }
 
 export interface OrganizationDeleteResponse {
@@ -58,39 +87,7 @@ export interface OrganizationDeleteResponse {
 
 export type OrganizationGetResponse = unknown | string | null;
 
-export type OrganizationUserSOrganizationsListOrganizationsResponse =
-  Array<OrganizationUserSOrganizationsListOrganizationsResponse.OrganizationUserSOrganizationsListOrganizationsResponseItem>;
-
-export namespace OrganizationUserSOrganizationsListOrganizationsResponse {
-  export interface OrganizationUserSOrganizationsListOrganizationsResponseItem {
-    /**
-     * Identifier
-     */
-    id?: string;
-
-    /**
-     * Organization name.
-     */
-    name?: string;
-
-    /**
-     * Access permissions for this User.
-     */
-    permissions?: Array<string>;
-
-    /**
-     * List of roles that a user has within an organization.
-     */
-    roles?: Array<string>;
-
-    /**
-     * Whether the user is a member of the organization or has an inivitation pending.
-     */
-    status?: 'member' | 'invited';
-  }
-}
-
-export interface OrganizationUserSOrganizationsListOrganizationsParams {
+export interface OrganizationListParams extends V4PagePaginationArrayParams {
   /**
    * Direction to order organizations.
    */
@@ -112,24 +109,15 @@ export interface OrganizationUserSOrganizationsListOrganizationsParams {
   order?: 'id' | 'name' | 'status';
 
   /**
-   * Page number of paginated results.
-   */
-  page?: number;
-
-  /**
-   * Number of organizations per page.
-   */
-  per_page?: number;
-
-  /**
    * Whether the user is a member of the organization or has an inivitation pending.
    */
   status?: 'member' | 'invited';
 }
 
 export namespace Organizations {
+  export import OrganizationListResponse = OrganizationsAPI.OrganizationListResponse;
   export import OrganizationDeleteResponse = OrganizationsAPI.OrganizationDeleteResponse;
   export import OrganizationGetResponse = OrganizationsAPI.OrganizationGetResponse;
-  export import OrganizationUserSOrganizationsListOrganizationsResponse = OrganizationsAPI.OrganizationUserSOrganizationsListOrganizationsResponse;
-  export import OrganizationUserSOrganizationsListOrganizationsParams = OrganizationsAPI.OrganizationUserSOrganizationsListOrganizationsParams;
+  export import OrganizationListResponsesV4PagePaginationArray = OrganizationsAPI.OrganizationListResponsesV4PagePaginationArray;
+  export import OrganizationListParams = OrganizationsAPI.OrganizationListParams;
 }

@@ -1,18 +1,19 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
-  RouteTunnelRouteListTunnelRoutesResponse,
-  RouteTunnelRouteListTunnelRoutesParams,
+  RouteListResponse,
+  RouteListParams,
+  RouteListResponsesV4PagePaginationArray,
   Routes,
 } from './routes/index';
 export { Teamnets } from './teamnets';
 export {
+  VirtualNetworkCreateResponse,
   VirtualNetworkUpdateResponse,
+  VirtualNetworkListResponse,
   VirtualNetworkDeleteResponse,
-  VirtualNetworkTunnelVirtualNetworkCreateAVirtualNetworkResponse,
-  VirtualNetworkTunnelVirtualNetworkListVirtualNetworksResponse,
+  VirtualNetworkCreateParams,
   VirtualNetworkUpdateParams,
-  VirtualNetworkTunnelVirtualNetworkCreateAVirtualNetworkParams,
-  VirtualNetworkTunnelVirtualNetworkListVirtualNetworksParams,
+  VirtualNetworkListParams,
   VirtualNetworks,
 } from './virtual-networks';

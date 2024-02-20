@@ -87,7 +87,7 @@ export namespace Users {
   export import ActiveSessionListResponse = ActiveSessionsAPI.ActiveSessionListResponse;
   export import ActiveSessionGetResponse = ActiveSessionsAPI.ActiveSessionGetResponse;
   export import LastSeenIdentity = LastSeenIdentityAPI.LastSeenIdentity;
-  export import LastSeenIdentityGetResponse = LastSeenIdentityAPI.LastSeenIdentityGetResponse;
+  export import LastSeenIdentityListResponse = LastSeenIdentityAPI.LastSeenIdentityListResponse;
   export import FailedLogins = FailedLoginsAPI.FailedLogins;
-  export import FailedLoginZeroTrustUsersGetFailedLoginsResponse = FailedLoginsAPI.FailedLoginZeroTrustUsersGetFailedLoginsResponse;
+  export import FailedLoginListResponse = FailedLoginsAPI.FailedLoginListResponse;
 }

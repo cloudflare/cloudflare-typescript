@@ -13,8 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource users', () => {
   // skipped: tests are disabled for the time being
-  test.skip('userEditUser', async () => {
-    const responsePromise = cloudflare.users.userEditUser({});
+  test.skip('update', async () => {
+    const responsePromise = cloudflare.users.update({});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -25,8 +25,8 @@ describe('resource users', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('userUserDetails', async () => {
-    const responsePromise = cloudflare.users.userUserDetails();
+  test.skip('list', async () => {
+    const responsePromise = cloudflare.users.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -37,9 +37,9 @@ describe('resource users', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('userUserDetails: request options instead of params are passed correctly', async () => {
+  test.skip('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(cloudflare.users.userUserDetails({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(cloudflare.users.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Cloudflare.NotFoundError,
     );
   });

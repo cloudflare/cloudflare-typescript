@@ -2,21 +2,17 @@
 
 export {
   IndexCreateResponse,
-  IndexUpdateResponse,
   IndexListResponse,
   IndexDeleteResponse,
-  IndexDeleteByIDsResponse,
   IndexGetResponse,
-  IndexGetByIDsResponse,
   IndexInsertResponse,
   IndexQueryResponse,
+  IndexReplaceResponse,
   IndexUpsertResponse,
   IndexCreateParams,
-  IndexUpdateParams,
-  IndexDeleteByIDsParams,
-  IndexGetByIDsParams,
   IndexInsertParams,
   IndexQueryParams,
+  IndexReplaceParams,
   IndexUpsertParams,
   Indexes,
 } from './indexes';

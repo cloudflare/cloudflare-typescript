@@ -1,14 +1,11 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
+  ConfigCreateResponse,
+  ConfigUpdateResponse,
+  ConfigListResponse,
   ConfigDeleteResponse,
-  ConfigMagicNetworkMonitoringConfigurationCreateAccountConfigurationResponse,
-  ConfigMagicNetworkMonitoringConfigurationListAccountConfigurationResponse,
-  ConfigMagicNetworkMonitoringConfigurationUpdateAccountConfigurationFieldsResponse,
-  ConfigMagicNetworkMonitoringConfigurationUpdateAnEntireAccountConfigurationResponse,
+  ConfigReplaceResponse,
   Configs,
 } from './configs';
-export {
-  FullMagicNetworkMonitoringConfigurationListRulesAndAccountConfigurationResponse,
-  Fulls,
-} from './fulls';
+export { FullListResponse, Fulls } from './fulls';

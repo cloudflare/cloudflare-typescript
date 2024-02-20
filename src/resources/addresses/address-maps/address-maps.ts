@@ -400,12 +400,12 @@ export namespace AddressMaps {
   export import AddressMapCreateParams = AddressMapsAPI.AddressMapCreateParams;
   export import AddressMapUpdateParams = AddressMapsAPI.AddressMapUpdateParams;
   export import Accounts = AccountsAPI.Accounts;
-  export import AccountUpdateResponse = AccountsAPI.AccountUpdateResponse;
   export import AccountDeleteResponse = AccountsAPI.AccountDeleteResponse;
+  export import AccountReplaceResponse = AccountsAPI.AccountReplaceResponse;
   export import IPs = IPsAPI.IPs;
-  export import IPUpdateResponse = IPsAPI.IPUpdateResponse;
   export import IPDeleteResponse = IPsAPI.IPDeleteResponse;
+  export import IPReplaceResponse = IPsAPI.IPReplaceResponse;
   export import Zones = ZonesAPI.Zones;
-  export import ZoneUpdateResponse = ZonesAPI.ZoneUpdateResponse;
   export import ZoneDeleteResponse = ZonesAPI.ZoneDeleteResponse;
+  export import ZoneReplaceResponse = ZonesAPI.ZoneReplaceResponse;
 }

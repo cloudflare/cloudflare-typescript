@@ -3,8 +3,4 @@
 export { Controls } from './controls/index';
 export { Logs } from './logs';
 export { RayidGetResponse, RayidGetParams, Rayids } from './rayids';
-export {
-  ReceivedReceivedGetLogsReceivedResponse,
-  ReceivedReceivedGetLogsReceivedParams,
-  Receiveds,
-} from './receiveds/index';
+export { ReceivedGetResponse, ReceivedGetParams, Received } from './received/index';

@@ -8,7 +8,7 @@ export class Downloads extends APIResource {
   /**
    * Download PCAP information into a file. Response is a binary PCAP file.
    */
-  list(
+  get(
     accountIdentifier: string,
     identifier: string,
     options?: Core.RequestOptions,

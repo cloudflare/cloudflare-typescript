@@ -11,7 +11,7 @@ export class Quality extends APIResource {
 
 export namespace Quality {
   export import Iqi = IqiAPI.Iqi;
-  export import IqiGetResponse = IqiAPI.IqiGetResponse;
-  export import IqiGetParams = IqiAPI.IqiGetParams;
+  export import IqiListResponse = IqiAPI.IqiListResponse;
+  export import IqiListParams = IqiAPI.IqiListParams;
   export import Speed = SpeedAPI.Speed;
 }

@@ -8,18 +8,16 @@ export class References extends APIResource {
   /**
    * Get the list of resources that reference the provided monitor.
    */
-  accountLoadBalancerMonitorsListMonitorReferences(
+  list(
     accountId: string,
     monitorId: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ReferenceAccountLoadBalancerMonitorsListMonitorReferencesResponse | null> {
+  ): Core.APIPromise<ReferenceListResponse | null> {
     return (
       this._client.get(
         `/accounts/${accountId}/load_balancers/monitors/${monitorId}/references`,
         options,
-      ) as Core.APIPromise<{
-        result: ReferenceAccountLoadBalancerMonitorsListMonitorReferencesResponse | null;
-      }>
+      ) as Core.APIPromise<{ result: ReferenceListResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -27,11 +25,10 @@ export class References extends APIResource {
 /**
  * List of resources that reference a given monitor.
  */
-export type ReferenceAccountLoadBalancerMonitorsListMonitorReferencesResponse =
-  Array<ReferenceAccountLoadBalancerMonitorsListMonitorReferencesResponse.ReferenceAccountLoadBalancerMonitorsListMonitorReferencesResponseItem>;
+export type ReferenceListResponse = Array<ReferenceListResponse.ReferenceListResponseItem>;
 
-export namespace ReferenceAccountLoadBalancerMonitorsListMonitorReferencesResponse {
-  export interface ReferenceAccountLoadBalancerMonitorsListMonitorReferencesResponseItem {
+export namespace ReferenceListResponse {
+  export interface ReferenceListResponseItem {
     reference_type?: '*' | 'referral' | 'referrer';
 
     resource_id?: string;
@@ -43,5 +40,5 @@ export namespace ReferenceAccountLoadBalancerMonitorsListMonitorReferencesRespon
 }
 
 export namespace References {
-  export import ReferenceAccountLoadBalancerMonitorsListMonitorReferencesResponse = ReferencesAPI.ReferenceAccountLoadBalancerMonitorsListMonitorReferencesResponse;
+  export import ReferenceListResponse = ReferencesAPI.ReferenceListResponse;
 }

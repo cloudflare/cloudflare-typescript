@@ -9,26 +9,6 @@ export class Hostnames extends APIResource {
   certificates: CertificatesAPI.Certificates = new CertificatesAPI.Certificates(this._client);
 
   /**
-   * Associate a hostname to a certificate and enable, disable or invalidate the
-   * association. If disabled, client certificate will not be sent to the hostname
-   * even if activated at the zone level. 100 maximum associations on a single
-   * certificate are allowed. Note: Use a null value for parameter _enabled_ to
-   * invalidate the association.
-   */
-  update(
-    zoneId: string,
-    body: HostnameUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<HostnameUpdateResponse | null> {
-    return (
-      this._client.put(`/zones/${zoneId}/origin_tls_client_auth/hostnames`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: HostnameUpdateResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Get the Hostname Status for Client Authentication
    */
   get(zoneId: string, hostname: string, options?: Core.RequestOptions): Core.APIPromise<HostnameGetResponse> {
@@ -39,43 +19,25 @@ export class Hostnames extends APIResource {
       ) as Core.APIPromise<{ result: HostnameGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
-}
 
-export type HostnameUpdateResponse = Array<HostnameUpdateResponse.HostnameUpdateResponseItem>;
-
-export namespace HostnameUpdateResponse {
-  export interface HostnameUpdateResponseItem {
-    /**
-     * Identifier
-     */
-    id?: string;
-
-    /**
-     * Identifier
-     */
-    cert_id?: string;
-
-    /**
-     * The hostname certificate.
-     */
-    certificate?: string;
-
-    /**
-     * Indicates whether hostname-level authenticated origin pulls is enabled. A null
-     * value voids the association.
-     */
-    enabled?: boolean | null;
-
-    /**
-     * The hostname on the origin for which the client certificate uploaded will be
-     * used.
-     */
-    hostname?: string;
-
-    /**
-     * The hostname certificate's private key.
-     */
-    private_key?: string;
+  /**
+   * Associate a hostname to a certificate and enable, disable or invalidate the
+   * association. If disabled, client certificate will not be sent to the hostname
+   * even if activated at the zone level. 100 maximum associations on a single
+   * certificate are allowed. Note: Use a null value for parameter _enabled_ to
+   * invalidate the association.
+   */
+  replace(
+    zoneId: string,
+    body: HostnameReplaceParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<HostnameReplaceResponse | null> {
+    return (
+      this._client.put(`/zones/${zoneId}/origin_tls_client_auth/hostnames`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: HostnameReplaceResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -167,11 +129,49 @@ export interface HostnameGetResponse {
   updated_at?: string;
 }
 
-export interface HostnameUpdateParams {
-  config: Array<HostnameUpdateParams.Config>;
+export type HostnameReplaceResponse = Array<HostnameReplaceResponse.HostnameReplaceResponseItem>;
+
+export namespace HostnameReplaceResponse {
+  export interface HostnameReplaceResponseItem {
+    /**
+     * Identifier
+     */
+    id?: string;
+
+    /**
+     * Identifier
+     */
+    cert_id?: string;
+
+    /**
+     * The hostname certificate.
+     */
+    certificate?: string;
+
+    /**
+     * Indicates whether hostname-level authenticated origin pulls is enabled. A null
+     * value voids the association.
+     */
+    enabled?: boolean | null;
+
+    /**
+     * The hostname on the origin for which the client certificate uploaded will be
+     * used.
+     */
+    hostname?: string;
+
+    /**
+     * The hostname certificate's private key.
+     */
+    private_key?: string;
+  }
 }
 
-export namespace HostnameUpdateParams {
+export interface HostnameReplaceParams {
+  config: Array<HostnameReplaceParams.Config>;
+}
+
+export namespace HostnameReplaceParams {
   export interface Config {
     /**
      * Certificate identifier tag.
@@ -193,9 +193,9 @@ export namespace HostnameUpdateParams {
 }
 
 export namespace Hostnames {
-  export import HostnameUpdateResponse = HostnamesAPI.HostnameUpdateResponse;
   export import HostnameGetResponse = HostnamesAPI.HostnameGetResponse;
-  export import HostnameUpdateParams = HostnamesAPI.HostnameUpdateParams;
+  export import HostnameReplaceResponse = HostnamesAPI.HostnameReplaceResponse;
+  export import HostnameReplaceParams = HostnamesAPI.HostnameReplaceParams;
   export import Certificates = CertificatesAPI.Certificates;
   export import CertificateCreateResponse = CertificatesAPI.CertificateCreateResponse;
   export import CertificateListResponse = CertificatesAPI.CertificateListResponse;

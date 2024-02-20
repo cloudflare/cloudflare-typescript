@@ -13,8 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource subscriptions', () => {
   // skipped: tests are disabled for the time being
-  test.skip('update', async () => {
-    const responsePromise = cloudflare.users.subscriptions.update('506e3185e9c882d175a2d0cb0093d9f2', {});
+  test.skip('list', async () => {
+    const responsePromise = cloudflare.users.subscriptions.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,6 +22,14 @@ describe('resource subscriptions', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(cloudflare.users.subscriptions.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+      Cloudflare.NotFoundError,
+    );
   });
 
   // skipped: tests are disabled for the time being
@@ -37,8 +45,8 @@ describe('resource subscriptions', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('userSubscriptionGetUserSubscriptions', async () => {
-    const responsePromise = cloudflare.users.subscriptions.userSubscriptionGetUserSubscriptions();
+  test.skip('replace', async () => {
+    const responsePromise = cloudflare.users.subscriptions.replace('506e3185e9c882d175a2d0cb0093d9f2', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -46,15 +54,5 @@ describe('resource subscriptions', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('userSubscriptionGetUserSubscriptions: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.users.subscriptions.userSubscriptionGetUserSubscriptions({
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 });

@@ -21,14 +21,14 @@ export namespace Addresses {
   export import AddressMapCreateParams = AddressMapsAPI.AddressMapCreateParams;
   export import AddressMapUpdateParams = AddressMapsAPI.AddressMapUpdateParams;
   export import LoaDocuments = LoaDocumentsAPI.LoaDocuments;
-  export import LoaDocumentIPAddressManagementPrefixesUploadLoaDocumentResponse = LoaDocumentsAPI.LoaDocumentIPAddressManagementPrefixesUploadLoaDocumentResponse;
-  export import LoaDocumentIPAddressManagementPrefixesUploadLoaDocumentParams = LoaDocumentsAPI.LoaDocumentIPAddressManagementPrefixesUploadLoaDocumentParams;
+  export import LoaDocumentCreateResponse = LoaDocumentsAPI.LoaDocumentCreateResponse;
+  export import LoaDocumentCreateParams = LoaDocumentsAPI.LoaDocumentCreateParams;
   export import Prefixes = PrefixesAPI.Prefixes;
+  export import PrefixCreateResponse = PrefixesAPI.PrefixCreateResponse;
   export import PrefixUpdateResponse = PrefixesAPI.PrefixUpdateResponse;
+  export import PrefixListResponse = PrefixesAPI.PrefixListResponse;
   export import PrefixDeleteResponse = PrefixesAPI.PrefixDeleteResponse;
   export import PrefixGetResponse = PrefixesAPI.PrefixGetResponse;
-  export import PrefixIPAddressManagementPrefixesAddPrefixResponse = PrefixesAPI.PrefixIPAddressManagementPrefixesAddPrefixResponse;
-  export import PrefixIPAddressManagementPrefixesListPrefixesResponse = PrefixesAPI.PrefixIPAddressManagementPrefixesListPrefixesResponse;
+  export import PrefixCreateParams = PrefixesAPI.PrefixCreateParams;
   export import PrefixUpdateParams = PrefixesAPI.PrefixUpdateParams;
-  export import PrefixIPAddressManagementPrefixesAddPrefixParams = PrefixesAPI.PrefixIPAddressManagementPrefixesAddPrefixParams;
 }

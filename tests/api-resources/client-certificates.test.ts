@@ -13,6 +13,29 @@ const cloudflare = new Cloudflare({
 
 describe('resource clientCertificates', () => {
   // skipped: tests are disabled for the time being
+  test.skip('create: only required params', async () => {
+    const responsePromise = cloudflare.clientCertificates.create('023e105f4ecef8ad9ca31a8372d0c353', {
+      csr: '-----BEGIN CERTIFICATE REQUEST-----\nMIICY....\n-----END CERTIFICATE REQUEST-----\n',
+      validity_days: 3650,
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('create: required and optional params', async () => {
+    const response = await cloudflare.clientCertificates.create('023e105f4ecef8ad9ca31a8372d0c353', {
+      csr: '-----BEGIN CERTIFICATE REQUEST-----\nMIICY....\n-----END CERTIFICATE REQUEST-----\n',
+      validity_days: 3650,
+    });
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('update', async () => {
     const responsePromise = cloudflare.clientCertificates.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
@@ -40,6 +63,40 @@ describe('resource clientCertificates', () => {
   });
 
   // skipped: tests are disabled for the time being
+  test.skip('list', async () => {
+    const responsePromise = cloudflare.clientCertificates.list('023e105f4ecef8ad9ca31a8372d0c353');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.clientCertificates.list('023e105f4ecef8ad9ca31a8372d0c353', {
+        path: '/_stainless_unknown_path',
+      }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.clientCertificates.list(
+        '023e105f4ecef8ad9ca31a8372d0c353',
+        { limit: 10, offset: 10, page: 1, per_page: 5, status: 'all' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('delete', async () => {
     const responsePromise = cloudflare.clientCertificates.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
@@ -61,72 +118,6 @@ describe('resource clientCertificates', () => {
       cloudflare.clientCertificates.delete(
         '023e105f4ecef8ad9ca31a8372d0c353',
         '023e105f4ecef8ad9ca31a8372d0c353',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('clientCertificateForAZoneCreateClientCertificate: only required params', async () => {
-    const responsePromise = cloudflare.clientCertificates.clientCertificateForAZoneCreateClientCertificate(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      {
-        csr: '-----BEGIN CERTIFICATE REQUEST-----\nMIICY....\n-----END CERTIFICATE REQUEST-----\n',
-        validity_days: 3650,
-      },
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('clientCertificateForAZoneCreateClientCertificate: required and optional params', async () => {
-    const response = await cloudflare.clientCertificates.clientCertificateForAZoneCreateClientCertificate(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      {
-        csr: '-----BEGIN CERTIFICATE REQUEST-----\nMIICY....\n-----END CERTIFICATE REQUEST-----\n',
-        validity_days: 3650,
-      },
-    );
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('clientCertificateForAZoneListClientCertificates', async () => {
-    const responsePromise = cloudflare.clientCertificates.clientCertificateForAZoneListClientCertificates(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('clientCertificateForAZoneListClientCertificates: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.clientCertificates.clientCertificateForAZoneListClientCertificates(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('clientCertificateForAZoneListClientCertificates: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.clientCertificates.clientCertificateForAZoneListClientCertificates(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        { limit: 10, offset: 10, page: 1, per_page: 5, status: 'all' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);

@@ -34,6 +34,26 @@ describe('resource invites', () => {
   });
 
   // skipped: tests are disabled for the time being
+  test.skip('list', async () => {
+    const responsePromise = cloudflare.users.invites.list();
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(cloudflare.users.invites.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+      Cloudflare.NotFoundError,
+    );
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('get', async () => {
     const responsePromise = cloudflare.users.invites.get('4f5f0c14a2a41d5063dd301b2f829f04');
     const rawResponse = await responsePromise.asResponse();
@@ -50,26 +70,6 @@ describe('resource invites', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.users.invites.get('4f5f0c14a2a41d5063dd301b2f829f04', { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('userSInvitesListInvitations', async () => {
-    const responsePromise = cloudflare.users.invites.userSInvitesListInvitations();
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('userSInvitesListInvitations: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.users.invites.userSInvitesListInvitations({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 });

@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as GroupsAPI from 'cloudflare/resources/firewalls/waf/packages/groups';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class Groups extends APIResource {
   /**
@@ -29,6 +30,39 @@ export class Groups extends APIResource {
   }
 
   /**
+   * Fetches the WAF rule groups in a WAF package.
+   *
+   * **Note:** Applies only to the
+   * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
+   */
+  list(
+    zoneId: string,
+    packageId: string,
+    query?: GroupListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<GroupListResponsesV4PagePaginationArray, GroupListResponse>;
+  list(
+    zoneId: string,
+    packageId: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<GroupListResponsesV4PagePaginationArray, GroupListResponse>;
+  list(
+    zoneId: string,
+    packageId: string,
+    query: GroupListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<GroupListResponsesV4PagePaginationArray, GroupListResponse> {
+    if (isRequestOptions(query)) {
+      return this.list(zoneId, packageId, {}, query);
+    }
+    return this._client.getAPIList(
+      `/zones/${zoneId}/firewall/waf/packages/${packageId}/groups`,
+      GroupListResponsesV4PagePaginationArray,
+      { query, ...options },
+    );
+  }
+
+  /**
    * Fetches the details of a WAF rule group.
    *
    * **Note:** Applies only to the
@@ -47,94 +81,57 @@ export class Groups extends APIResource {
       ) as Core.APIPromise<{ result: GroupGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
-
-  /**
-   * Fetches the WAF rule groups in a WAF package.
-   *
-   * **Note:** Applies only to the
-   * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
-   */
-  wafRuleGroupsListWAFRuleGroups(
-    zoneId: string,
-    packageId: string,
-    query?: GroupWAFRuleGroupsListWAFRuleGroupsParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<GroupWAFRuleGroupsListWAFRuleGroupsResponse | null>;
-  wafRuleGroupsListWAFRuleGroups(
-    zoneId: string,
-    packageId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<GroupWAFRuleGroupsListWAFRuleGroupsResponse | null>;
-  wafRuleGroupsListWAFRuleGroups(
-    zoneId: string,
-    packageId: string,
-    query: GroupWAFRuleGroupsListWAFRuleGroupsParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<GroupWAFRuleGroupsListWAFRuleGroupsResponse | null> {
-    if (isRequestOptions(query)) {
-      return this.wafRuleGroupsListWAFRuleGroups(zoneId, packageId, {}, query);
-    }
-    return (
-      this._client.get(`/zones/${zoneId}/firewall/waf/packages/${packageId}/groups`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: GroupWAFRuleGroupsListWAFRuleGroupsResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
+
+export class GroupListResponsesV4PagePaginationArray extends V4PagePaginationArray<GroupListResponse> {}
 
 export type GroupUpdateResponse = unknown | Array<unknown> | string;
 
-export type GroupGetResponse = unknown | Array<unknown> | string;
+export interface GroupListResponse {
+  /**
+   * The unique identifier of the rule group.
+   */
+  id: string;
 
-export type GroupWAFRuleGroupsListWAFRuleGroupsResponse =
-  Array<GroupWAFRuleGroupsListWAFRuleGroupsResponse.GroupWAFRuleGroupsListWAFRuleGroupsResponseItem>;
+  /**
+   * An informative summary of what the rule group does.
+   */
+  description: string | null;
 
-export namespace GroupWAFRuleGroupsListWAFRuleGroupsResponse {
-  export interface GroupWAFRuleGroupsListWAFRuleGroupsResponseItem {
-    /**
-     * The unique identifier of the rule group.
-     */
-    id: string;
+  /**
+   * The state of the rules contained in the rule group. When `on`, the rules in the
+   * group are configurable/usable.
+   */
+  mode: 'on' | 'off';
 
-    /**
-     * An informative summary of what the rule group does.
-     */
-    description: string | null;
+  /**
+   * The name of the rule group.
+   */
+  name: string;
 
-    /**
-     * The state of the rules contained in the rule group. When `on`, the rules in the
-     * group are configurable/usable.
-     */
-    mode: 'on' | 'off';
+  /**
+   * The number of rules in the current rule group.
+   */
+  rules_count: number;
 
-    /**
-     * The name of the rule group.
-     */
-    name: string;
+  /**
+   * The available states for the rule group.
+   */
+  allowed_modes?: Array<'on' | 'off'>;
 
-    /**
-     * The number of rules in the current rule group.
-     */
-    rules_count: number;
+  /**
+   * The number of rules within the group that have been modified from their default
+   * configuration.
+   */
+  modified_rules_count?: number;
 
-    /**
-     * The available states for the rule group.
-     */
-    allowed_modes?: Array<'on' | 'off'>;
-
-    /**
-     * The number of rules within the group that have been modified from their default
-     * configuration.
-     */
-    modified_rules_count?: number;
-
-    /**
-     * The unique identifier of a WAF package.
-     */
-    package_id?: string;
-  }
+  /**
+   * The unique identifier of a WAF package.
+   */
+  package_id?: string;
 }
+
+export type GroupGetResponse = unknown | Array<unknown> | string;
 
 export interface GroupUpdateParams {
   /**
@@ -144,7 +141,7 @@ export interface GroupUpdateParams {
   mode?: 'on' | 'off';
 }
 
-export interface GroupWAFRuleGroupsListWAFRuleGroupsParams {
+export interface GroupListParams extends V4PagePaginationArrayParams {
   /**
    * The direction used to sort returned rule groups.
    */
@@ -166,22 +163,13 @@ export interface GroupWAFRuleGroupsListWAFRuleGroupsParams {
    * The field used to sort returned rule groups.
    */
   order?: 'mode' | 'rules_count';
-
-  /**
-   * The page number of paginated results.
-   */
-  page?: number;
-
-  /**
-   * The number of rule groups per page.
-   */
-  per_page?: number;
 }
 
 export namespace Groups {
   export import GroupUpdateResponse = GroupsAPI.GroupUpdateResponse;
+  export import GroupListResponse = GroupsAPI.GroupListResponse;
   export import GroupGetResponse = GroupsAPI.GroupGetResponse;
-  export import GroupWAFRuleGroupsListWAFRuleGroupsResponse = GroupsAPI.GroupWAFRuleGroupsListWAFRuleGroupsResponse;
+  export import GroupListResponsesV4PagePaginationArray = GroupsAPI.GroupListResponsesV4PagePaginationArray;
   export import GroupUpdateParams = GroupsAPI.GroupUpdateParams;
-  export import GroupWAFRuleGroupsListWAFRuleGroupsParams = GroupsAPI.GroupWAFRuleGroupsListWAFRuleGroupsParams;
+  export import GroupListParams = GroupsAPI.GroupListParams;
 }

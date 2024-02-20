@@ -13,12 +13,11 @@ const cloudflare = new Cloudflare({
 
 describe('resource advertisements', () => {
   // skipped: tests are disabled for the time being
-  test.skip('magicNetworkMonitoringRulesUpdateAdvertisementForRule', async () => {
-    const responsePromise =
-      cloudflare.mnms.rules.advertisements.magicNetworkMonitoringRulesUpdateAdvertisementForRule(
-        '6f91088a406011ed95aed352566e8d4c',
-        '2890e6fa406311ed9b5a23f70f6fb8cf',
-      );
+  test.skip('update', async () => {
+    const responsePromise = cloudflare.mnms.rules.advertisements.update(
+      '6f91088a406011ed95aed352566e8d4c',
+      '2890e6fa406311ed9b5a23f70f6fb8cf',
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

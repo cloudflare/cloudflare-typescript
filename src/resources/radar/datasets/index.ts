@@ -7,8 +7,4 @@ export {
   DatasetGetParams,
   Datasets,
 } from './datasets';
-export {
-  DownloadRadarPostDatasetDownloadResponse,
-  DownloadRadarPostDatasetDownloadParams,
-  Downloads,
-} from './downloads';
+export { DownloadCreateResponse, DownloadCreateParams, Downloads } from './downloads';

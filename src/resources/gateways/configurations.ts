@@ -6,37 +6,32 @@ import * as ConfigurationsAPI from 'cloudflare/resources/gateways/configurations
 
 export class Configurations extends APIResource {
   /**
-   * Fetches the current Zero Trust account configuration.
-   */
-  zeroTrustAccountsGetZeroTrustAccountConfiguration(
-    accountId: unknown,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ConfigurationZeroTrustAccountsGetZeroTrustAccountConfigurationResponse> {
-    return (
-      this._client.get(`/accounts/${accountId}/gateway/configuration`, options) as Core.APIPromise<{
-        result: ConfigurationZeroTrustAccountsGetZeroTrustAccountConfigurationResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Patches the current Zero Trust account configuration. This endpoint can update a
    * single subcollection of settings such as `antivirus`, `tls_decrypt`,
    * `activity_log`, `block_page`, `browser_isolation`, `fips`, `body_scanning`, or
    * `custom_certificate`, without updating the entire configuration object. Returns
    * an error if any collection of settings is not properly configured.
    */
-  zeroTrustAccountsPatchZeroTrustAccountConfiguration(
+  update(
     accountId: unknown,
-    body: ConfigurationZeroTrustAccountsPatchZeroTrustAccountConfigurationParams,
+    body: ConfigurationUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ConfigurationZeroTrustAccountsPatchZeroTrustAccountConfigurationResponse> {
+  ): Core.APIPromise<ConfigurationUpdateResponse> {
     return (
       this._client.patch(`/accounts/${accountId}/gateway/configuration`, {
         body,
         ...options,
-      }) as Core.APIPromise<{
-        result: ConfigurationZeroTrustAccountsPatchZeroTrustAccountConfigurationResponse;
+      }) as Core.APIPromise<{ result: ConfigurationUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Fetches the current Zero Trust account configuration.
+   */
+  get(accountId: unknown, options?: Core.RequestOptions): Core.APIPromise<ConfigurationGetResponse> {
+    return (
+      this._client.get(`/accounts/${accountId}/gateway/configuration`, options) as Core.APIPromise<{
+        result: ConfigurationGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -44,18 +39,16 @@ export class Configurations extends APIResource {
   /**
    * Updates the current Zero Trust account configuration.
    */
-  zeroTrustAccountsUpdateZeroTrustAccountConfiguration(
+  replace(
     accountId: unknown,
-    body: ConfigurationZeroTrustAccountsUpdateZeroTrustAccountConfigurationParams,
+    body: ConfigurationReplaceParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ConfigurationZeroTrustAccountsUpdateZeroTrustAccountConfigurationResponse> {
+  ): Core.APIPromise<ConfigurationReplaceResponse> {
     return (
       this._client.put(`/accounts/${accountId}/gateway/configuration`, {
         body,
         ...options,
-      }) as Core.APIPromise<{
-        result: ConfigurationZeroTrustAccountsUpdateZeroTrustAccountConfigurationResponse;
-      }>
+      }) as Core.APIPromise<{ result: ConfigurationReplaceResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -63,18 +56,18 @@ export class Configurations extends APIResource {
 /**
  * account settings.
  */
-export interface ConfigurationZeroTrustAccountsGetZeroTrustAccountConfigurationResponse {
+export interface ConfigurationUpdateResponse {
   created_at?: string;
 
   /**
    * account settings.
    */
-  settings?: ConfigurationZeroTrustAccountsGetZeroTrustAccountConfigurationResponse.Settings;
+  settings?: ConfigurationUpdateResponse.Settings;
 
   updated_at?: string;
 }
 
-export namespace ConfigurationZeroTrustAccountsGetZeroTrustAccountConfigurationResponse {
+export namespace ConfigurationUpdateResponse {
   /**
    * account settings.
    */
@@ -334,18 +327,18 @@ export namespace ConfigurationZeroTrustAccountsGetZeroTrustAccountConfigurationR
 /**
  * account settings.
  */
-export interface ConfigurationZeroTrustAccountsPatchZeroTrustAccountConfigurationResponse {
+export interface ConfigurationGetResponse {
   created_at?: string;
 
   /**
    * account settings.
    */
-  settings?: ConfigurationZeroTrustAccountsPatchZeroTrustAccountConfigurationResponse.Settings;
+  settings?: ConfigurationGetResponse.Settings;
 
   updated_at?: string;
 }
 
-export namespace ConfigurationZeroTrustAccountsPatchZeroTrustAccountConfigurationResponse {
+export namespace ConfigurationGetResponse {
   /**
    * account settings.
    */
@@ -605,18 +598,18 @@ export namespace ConfigurationZeroTrustAccountsPatchZeroTrustAccountConfiguratio
 /**
  * account settings.
  */
-export interface ConfigurationZeroTrustAccountsUpdateZeroTrustAccountConfigurationResponse {
+export interface ConfigurationReplaceResponse {
   created_at?: string;
 
   /**
    * account settings.
    */
-  settings?: ConfigurationZeroTrustAccountsUpdateZeroTrustAccountConfigurationResponse.Settings;
+  settings?: ConfigurationReplaceResponse.Settings;
 
   updated_at?: string;
 }
 
-export namespace ConfigurationZeroTrustAccountsUpdateZeroTrustAccountConfigurationResponse {
+export namespace ConfigurationReplaceResponse {
   /**
    * account settings.
    */
@@ -873,14 +866,14 @@ export namespace ConfigurationZeroTrustAccountsUpdateZeroTrustAccountConfigurati
   }
 }
 
-export interface ConfigurationZeroTrustAccountsPatchZeroTrustAccountConfigurationParams {
+export interface ConfigurationUpdateParams {
   /**
    * account settings.
    */
-  settings?: ConfigurationZeroTrustAccountsPatchZeroTrustAccountConfigurationParams.Settings;
+  settings?: ConfigurationUpdateParams.Settings;
 }
 
-export namespace ConfigurationZeroTrustAccountsPatchZeroTrustAccountConfigurationParams {
+export namespace ConfigurationUpdateParams {
   /**
    * account settings.
    */
@@ -1130,14 +1123,14 @@ export namespace ConfigurationZeroTrustAccountsPatchZeroTrustAccountConfiguratio
   }
 }
 
-export interface ConfigurationZeroTrustAccountsUpdateZeroTrustAccountConfigurationParams {
+export interface ConfigurationReplaceParams {
   /**
    * account settings.
    */
-  settings?: ConfigurationZeroTrustAccountsUpdateZeroTrustAccountConfigurationParams.Settings;
+  settings?: ConfigurationReplaceParams.Settings;
 }
 
-export namespace ConfigurationZeroTrustAccountsUpdateZeroTrustAccountConfigurationParams {
+export namespace ConfigurationReplaceParams {
   /**
    * account settings.
    */
@@ -1388,9 +1381,9 @@ export namespace ConfigurationZeroTrustAccountsUpdateZeroTrustAccountConfigurati
 }
 
 export namespace Configurations {
-  export import ConfigurationZeroTrustAccountsGetZeroTrustAccountConfigurationResponse = ConfigurationsAPI.ConfigurationZeroTrustAccountsGetZeroTrustAccountConfigurationResponse;
-  export import ConfigurationZeroTrustAccountsPatchZeroTrustAccountConfigurationResponse = ConfigurationsAPI.ConfigurationZeroTrustAccountsPatchZeroTrustAccountConfigurationResponse;
-  export import ConfigurationZeroTrustAccountsUpdateZeroTrustAccountConfigurationResponse = ConfigurationsAPI.ConfigurationZeroTrustAccountsUpdateZeroTrustAccountConfigurationResponse;
-  export import ConfigurationZeroTrustAccountsPatchZeroTrustAccountConfigurationParams = ConfigurationsAPI.ConfigurationZeroTrustAccountsPatchZeroTrustAccountConfigurationParams;
-  export import ConfigurationZeroTrustAccountsUpdateZeroTrustAccountConfigurationParams = ConfigurationsAPI.ConfigurationZeroTrustAccountsUpdateZeroTrustAccountConfigurationParams;
+  export import ConfigurationUpdateResponse = ConfigurationsAPI.ConfigurationUpdateResponse;
+  export import ConfigurationGetResponse = ConfigurationsAPI.ConfigurationGetResponse;
+  export import ConfigurationReplaceResponse = ConfigurationsAPI.ConfigurationReplaceResponse;
+  export import ConfigurationUpdateParams = ConfigurationsAPI.ConfigurationUpdateParams;
+  export import ConfigurationReplaceParams = ConfigurationsAPI.ConfigurationReplaceParams;
 }

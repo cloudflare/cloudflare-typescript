@@ -1,36 +1,37 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
-  EventUpdateResponse,
+  EventCreateResponse,
+  EventListResponse,
   EventDeleteResponse,
   EventGetResponse,
-  EventWaitingRoomCreateEventResponse,
-  EventWaitingRoomListEventsResponse,
-  EventUpdateParams,
-  EventWaitingRoomCreateEventParams,
+  EventReplaceResponse,
+  EventCreateParams,
+  EventReplaceParams,
   Events,
 } from './events/index';
-export { PreviewCreateResponse, PreviewCreateParams, Previews } from './previews';
 export {
+  RuleCreateResponse,
   RuleUpdateResponse,
+  RuleListResponse,
   RuleDeleteResponse,
-  RuleWaitingRoomCreateWaitingRoomRuleResponse,
-  RuleWaitingRoomListWaitingRoomRulesResponse,
-  RuleWaitingRoomReplaceWaitingRoomRulesResponse,
+  RuleReplaceResponse,
+  RuleCreateParams,
   RuleUpdateParams,
-  RuleWaitingRoomCreateWaitingRoomRuleParams,
-  RuleWaitingRoomReplaceWaitingRoomRulesParams,
+  RuleReplaceParams,
   Rules,
 } from './rules';
-export { StatusWaitingRoomGetWaitingRoomStatusResponse, Statuses } from './statuses';
+export { StatusGetResponse, Statuses } from './statuses';
 export {
   WaitingRoomCreateResponse,
-  WaitingRoomUpdateResponse,
   WaitingRoomListResponse,
   WaitingRoomDeleteResponse,
   WaitingRoomGetResponse,
+  WaitingRoomPreviewResponse,
+  WaitingRoomReplaceResponse,
   WaitingRoomCreateParams,
-  WaitingRoomUpdateParams,
+  WaitingRoomPreviewParams,
+  WaitingRoomReplaceParams,
   WaitingRooms,
 } from './waiting-rooms';
 export {

@@ -13,16 +13,15 @@ const cloudflare = new Cloudflare({
 
 describe('resource consumers', () => {
   // skipped: tests are disabled for the time being
-  test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.workers.queues.consumers.update(
+  test.skip('create: only required params', async () => {
+    const responsePromise = cloudflare.workers.queues.consumers.create(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'example-queue',
-      'example-consumer',
       {
-        dead_letter_queue: 'updated-example-dlq',
+        dead_letter_queue: 'example-dlq',
         environment: 'production',
         script_name: 'example-consumer',
-        settings: { batch_size: 100 },
+        settings: { batch_size: 10, max_retries: 3, max_wait_time_ms: 5000 },
       },
     );
     const rawResponse = await responsePromise.asResponse();
@@ -35,16 +34,15 @@ describe('resource consumers', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.workers.queues.consumers.update(
+  test.skip('create: required and optional params', async () => {
+    const response = await cloudflare.workers.queues.consumers.create(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'example-queue',
-      'example-consumer',
       {
-        dead_letter_queue: 'updated-example-dlq',
+        dead_letter_queue: 'example-dlq',
         environment: 'production',
         script_name: 'example-consumer',
-        settings: { batch_size: 100 },
+        settings: { batch_size: 10, max_retries: 3, max_wait_time_ms: 5000 },
       },
     );
   });
@@ -91,15 +89,16 @@ describe('resource consumers', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('queueCreateQueueConsumer: only required params', async () => {
-    const responsePromise = cloudflare.workers.queues.consumers.queueCreateQueueConsumer(
+  test.skip('replace: only required params', async () => {
+    const responsePromise = cloudflare.workers.queues.consumers.replace(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'example-queue',
+      'example-consumer',
       {
-        dead_letter_queue: 'example-dlq',
+        dead_letter_queue: 'updated-example-dlq',
         environment: 'production',
         script_name: 'example-consumer',
-        settings: { batch_size: 10, max_retries: 3, max_wait_time_ms: 5000 },
+        settings: { batch_size: 100 },
       },
     );
     const rawResponse = await responsePromise.asResponse();
@@ -112,15 +111,16 @@ describe('resource consumers', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('queueCreateQueueConsumer: required and optional params', async () => {
-    const response = await cloudflare.workers.queues.consumers.queueCreateQueueConsumer(
+  test.skip('replace: required and optional params', async () => {
+    const response = await cloudflare.workers.queues.consumers.replace(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'example-queue',
+      'example-consumer',
       {
-        dead_letter_queue: 'example-dlq',
+        dead_letter_queue: 'updated-example-dlq',
         environment: 'production',
         script_name: 'example-consumer',
-        settings: { batch_size: 10, max_retries: 3, max_wait_time_ms: 5000 },
+        settings: { batch_size: 100 },
       },
     );
   });

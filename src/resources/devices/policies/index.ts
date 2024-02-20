@@ -1,42 +1,21 @@
 // File generated from our OpenAPI spec by Stainless.
 
+export { DefaultPolicyGetResponse, DefaultPolicy } from './default-policy';
+export { ExcludeListResponse, ExcludeReplaceResponse, ExcludeReplaceParams, Excludes } from './excludes';
 export {
-  ExcludeDevicesGetSplitTunnelExcludeListResponse,
-  ExcludeDevicesGetSplitTunnelExcludeListForADeviceSettingsPolicyResponse,
-  ExcludeDevicesSetSplitTunnelExcludeListResponse,
-  ExcludeDevicesSetSplitTunnelExcludeListForADeviceSettingsPolicyResponse,
-  ExcludeDevicesSetSplitTunnelExcludeListParams,
-  ExcludeDevicesSetSplitTunnelExcludeListForADeviceSettingsPolicyParams,
-  Excludes,
-} from './excludes';
-export {
-  FallbackDomainDevicesGetLocalDomainFallbackListResponse,
-  FallbackDomainDevicesGetLocalDomainFallbackListForADeviceSettingsPolicyResponse,
-  FallbackDomainDevicesSetLocalDomainFallbackListResponse,
-  FallbackDomainDevicesSetLocalDomainFallbackListForADeviceSettingsPolicyResponse,
-  FallbackDomainDevicesSetLocalDomainFallbackListParams,
-  FallbackDomainDevicesSetLocalDomainFallbackListForADeviceSettingsPolicyParams,
+  FallbackDomainListResponse,
+  FallbackDomainReplaceResponse,
+  FallbackDomainReplaceParams,
   FallbackDomains,
 } from './fallback-domains';
+export { IncludeListResponse, IncludeReplaceResponse, IncludeReplaceParams, Includes } from './includes';
 export {
-  IncludeDevicesGetSplitTunnelIncludeListResponse,
-  IncludeDevicesGetSplitTunnelIncludeListForADeviceSettingsPolicyResponse,
-  IncludeDevicesSetSplitTunnelIncludeListResponse,
-  IncludeDevicesSetSplitTunnelIncludeListForADeviceSettingsPolicyResponse,
-  IncludeDevicesSetSplitTunnelIncludeListParams,
-  IncludeDevicesSetSplitTunnelIncludeListForADeviceSettingsPolicyParams,
-  Includes,
-} from './includes';
-export {
+  PolicyCreateResponse,
   PolicyUpdateResponse,
+  PolicyListResponse,
   PolicyDeleteResponse,
-  PolicyDevicesCreateDeviceSettingsPolicyResponse,
-  PolicyDevicesGetDefaultDeviceSettingsPolicyResponse,
-  PolicyDevicesListDeviceSettingsPoliciesResponse,
-  PolicyDevicesUpdateDefaultDeviceSettingsPolicyResponse,
   PolicyGetResponse,
+  PolicyCreateParams,
   PolicyUpdateParams,
-  PolicyDevicesCreateDeviceSettingsPolicyParams,
-  PolicyDevicesUpdateDefaultDeviceSettingsPolicyParams,
   Policies,
 } from './policies';

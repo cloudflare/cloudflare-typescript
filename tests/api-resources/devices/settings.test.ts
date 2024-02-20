@@ -13,10 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource settings', () => {
   // skipped: tests are disabled for the time being
-  test.skip('zeroTrustAccountsGetDeviceSettingsForZeroTrustAccount', async () => {
-    const responsePromise = cloudflare.devices.settings.zeroTrustAccountsGetDeviceSettingsForZeroTrustAccount(
-      '699d98642c564d2e855e9661899b7252',
-    );
+  test.skip('list', async () => {
+    const responsePromise = cloudflare.devices.settings.list('699d98642c564d2e855e9661899b7252');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -27,23 +25,18 @@ describe('resource settings', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('zeroTrustAccountsGetDeviceSettingsForZeroTrustAccount: request options instead of params are passed correctly', async () => {
+  test.skip('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.devices.settings.zeroTrustAccountsGetDeviceSettingsForZeroTrustAccount(
-        '699d98642c564d2e855e9661899b7252',
-        { path: '/_stainless_unknown_path' },
-      ),
+      cloudflare.devices.settings.list('699d98642c564d2e855e9661899b7252', {
+        path: '/_stainless_unknown_path',
+      }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('zeroTrustAccountsUpdateDeviceSettingsForTheZeroTrustAccount', async () => {
-    const responsePromise =
-      cloudflare.devices.settings.zeroTrustAccountsUpdateDeviceSettingsForTheZeroTrustAccount(
-        '699d98642c564d2e855e9661899b7252',
-        {},
-      );
+  test.skip('replace', async () => {
+    const responsePromise = cloudflare.devices.settings.replace('699d98642c564d2e855e9661899b7252', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

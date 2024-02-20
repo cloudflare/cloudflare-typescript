@@ -1,20 +1,21 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
+  CustomHostnameCreateResponse,
   CustomHostnameUpdateResponse,
+  CustomHostnameListResponse,
   CustomHostnameDeleteResponse,
-  CustomHostnameCustomHostnameForAZoneCreateCustomHostnameResponse,
-  CustomHostnameCustomHostnameForAZoneListCustomHostnamesResponse,
   CustomHostnameGetResponse,
+  CustomHostnameCreateParams,
   CustomHostnameUpdateParams,
-  CustomHostnameCustomHostnameForAZoneCreateCustomHostnameParams,
-  CustomHostnameCustomHostnameForAZoneListCustomHostnamesParams,
+  CustomHostnameListParams,
+  CustomHostnameListResponsesV4PagePaginationArray,
   CustomHostnames,
 } from './custom-hostnames';
 export {
-  FallbackOriginUpdateResponse,
   FallbackOriginDeleteResponse,
   FallbackOriginGetResponse,
-  FallbackOriginUpdateParams,
-  FallbackOrigins,
-} from './fallback-origins';
+  FallbackOriginReplaceResponse,
+  FallbackOriginReplaceParams,
+  FallbackOrigin,
+} from './fallback-origin';

@@ -108,6 +108,6 @@ export namespace Datasets {
   export import DatasetListParams = DatasetsAPI.DatasetListParams;
   export import DatasetGetParams = DatasetsAPI.DatasetGetParams;
   export import Downloads = DownloadsAPI.Downloads;
-  export import DownloadRadarPostDatasetDownloadResponse = DownloadsAPI.DownloadRadarPostDatasetDownloadResponse;
-  export import DownloadRadarPostDatasetDownloadParams = DownloadsAPI.DownloadRadarPostDatasetDownloadParams;
+  export import DownloadCreateResponse = DownloadsAPI.DownloadCreateResponse;
+  export import DownloadCreateParams = DownloadsAPI.DownloadCreateParams;
 }

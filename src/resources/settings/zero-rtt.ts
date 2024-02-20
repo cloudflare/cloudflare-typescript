@@ -6,6 +6,21 @@ import * as ZeroRttAPI from 'cloudflare/resources/settings/zero-rtt';
 
 export class ZeroRtt extends APIResource {
   /**
+   * Changes the 0-RTT session resumption setting.
+   */
+  update(
+    zoneId: string,
+    body: ZeroRttUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ZeroRttUpdateResponse> {
+    return (
+      this._client.patch(`/zones/${zoneId}/settings/0rtt`, { body, ...options }) as Core.APIPromise<{
+        result: ZeroRttUpdateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Gets 0-RTT session resumption setting.
    */
   get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<ZeroRttGetResponse> {
@@ -15,21 +30,32 @@ export class ZeroRtt extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+
+/**
+ * 0-RTT session resumption enabled for this zone.
+ */
+export interface ZeroRttUpdateResponse {
+  /**
+   * ID of the zone setting.
+   */
+  id: '0rtt';
 
   /**
-   * Changes the 0-RTT session resumption setting.
+   * Current value of the zone setting.
    */
-  zoneSettingsChange0RttSessionResumptionSetting(
-    zoneId: string,
-    body: ZeroRttZoneSettingsChange0RttSessionResumptionSettingParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZeroRttZoneSettingsChange0RttSessionResumptionSettingResponse> {
-    return (
-      this._client.patch(`/zones/${zoneId}/settings/0rtt`, { body, ...options }) as Core.APIPromise<{
-        result: ZeroRttZoneSettingsChange0RttSessionResumptionSettingResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
+  value: 'on' | 'off';
+
+  /**
+   * Whether or not this setting can be modified for this zone (based on your
+   * Cloudflare plan level).
+   */
+  editable?: true | false;
+
+  /**
+   * last time this setting was modified.
+   */
+  modified_on?: string | null;
 }
 
 /**
@@ -58,33 +84,7 @@ export interface ZeroRttGetResponse {
   modified_on?: string | null;
 }
 
-/**
- * 0-RTT session resumption enabled for this zone.
- */
-export interface ZeroRttZoneSettingsChange0RttSessionResumptionSettingResponse {
-  /**
-   * ID of the zone setting.
-   */
-  id: '0rtt';
-
-  /**
-   * Current value of the zone setting.
-   */
-  value: 'on' | 'off';
-
-  /**
-   * Whether or not this setting can be modified for this zone (based on your
-   * Cloudflare plan level).
-   */
-  editable?: true | false;
-
-  /**
-   * last time this setting was modified.
-   */
-  modified_on?: string | null;
-}
-
-export interface ZeroRttZoneSettingsChange0RttSessionResumptionSettingParams {
+export interface ZeroRttUpdateParams {
   /**
    * Value of the 0-RTT setting.
    */
@@ -92,7 +92,7 @@ export interface ZeroRttZoneSettingsChange0RttSessionResumptionSettingParams {
 }
 
 export namespace ZeroRtt {
+  export import ZeroRttUpdateResponse = ZeroRttAPI.ZeroRttUpdateResponse;
   export import ZeroRttGetResponse = ZeroRttAPI.ZeroRttGetResponse;
-  export import ZeroRttZoneSettingsChange0RttSessionResumptionSettingResponse = ZeroRttAPI.ZeroRttZoneSettingsChange0RttSessionResumptionSettingResponse;
-  export import ZeroRttZoneSettingsChange0RttSessionResumptionSettingParams = ZeroRttAPI.ZeroRttZoneSettingsChange0RttSessionResumptionSettingParams;
+  export import ZeroRttUpdateParams = ZeroRttAPI.ZeroRttUpdateParams;
 }

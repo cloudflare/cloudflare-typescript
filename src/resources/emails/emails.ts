@@ -1,13 +1,13 @@
 // File generated from our OpenAPI spec by Stainless.
 
 import { APIResource } from 'cloudflare/resource';
-import * as RoutingsAPI from 'cloudflare/resources/emails/routings/routings';
+import * as RoutingAPI from 'cloudflare/resources/emails/routing/routing';
 
 export class Emails extends APIResource {
-  routings: RoutingsAPI.Routings = new RoutingsAPI.Routings(this._client);
+  routing: RoutingAPI.Routing = new RoutingAPI.Routing(this._client);
 }
 
 export namespace Emails {
-  export import Routings = RoutingsAPI.Routings;
-  export import RoutingEmailRoutingSettingsGetEmailRoutingSettingsResponse = RoutingsAPI.RoutingEmailRoutingSettingsGetEmailRoutingSettingsResponse;
+  export import Routing = RoutingAPI.Routing;
+  export import RoutingGetResponse = RoutingAPI.RoutingGetResponse;
 }

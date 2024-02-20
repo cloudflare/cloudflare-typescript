@@ -6,19 +6,29 @@ import * as TsigsAPI from 'cloudflare/resources/secondary-dns/tsigs';
 
 export class Tsigs extends APIResource {
   /**
-   * Modify TSIG.
+   * Create TSIG.
    */
-  update(
+  create(
     accountId: unknown,
-    tsigId: unknown,
-    body: TsigUpdateParams,
+    body: TsigCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TsigUpdateResponse> {
+  ): Core.APIPromise<TsigCreateResponse> {
     return (
-      this._client.put(`/accounts/${accountId}/secondary_dns/tsigs/${tsigId}`, {
+      this._client.post(`/accounts/${accountId}/secondary_dns/tsigs`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: TsigUpdateResponse }>
+      }) as Core.APIPromise<{ result: TsigCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * List TSIGs.
+   */
+  list(accountId: unknown, options?: Core.RequestOptions): Core.APIPromise<TsigListResponse | null> {
+    return (
+      this._client.get(`/accounts/${accountId}/secondary_dns/tsigs`, options) as Core.APIPromise<{
+        result: TsigListResponse | null;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -50,37 +60,24 @@ export class Tsigs extends APIResource {
   }
 
   /**
-   * Create TSIG.
+   * Modify TSIG.
    */
-  secondaryDNSTsigCreateTsig(
+  replace(
     accountId: unknown,
-    body: TsigSecondaryDNSTsigCreateTsigParams,
+    tsigId: unknown,
+    body: TsigReplaceParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TsigSecondaryDNSTsigCreateTsigResponse> {
+  ): Core.APIPromise<TsigReplaceResponse> {
     return (
-      this._client.post(`/accounts/${accountId}/secondary_dns/tsigs`, {
+      this._client.put(`/accounts/${accountId}/secondary_dns/tsigs/${tsigId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: TsigSecondaryDNSTsigCreateTsigResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * List TSIGs.
-   */
-  secondaryDNSTsigListTsiGs(
-    accountId: unknown,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TsigSecondaryDNSTsigListTsiGsResponse | null> {
-    return (
-      this._client.get(`/accounts/${accountId}/secondary_dns/tsigs`, options) as Core.APIPromise<{
-        result: TsigSecondaryDNSTsigListTsiGsResponse | null;
-      }>
+      }) as Core.APIPromise<{ result: TsigReplaceResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface TsigUpdateResponse {
+export interface TsigCreateResponse {
   id: unknown;
 
   /**
@@ -97,6 +94,29 @@ export interface TsigUpdateResponse {
    * TSIG secret.
    */
   secret: string;
+}
+
+export type TsigListResponse = Array<TsigListResponse.TsigListResponseItem>;
+
+export namespace TsigListResponse {
+  export interface TsigListResponseItem {
+    id: unknown;
+
+    /**
+     * TSIG algorithm.
+     */
+    algo: string;
+
+    /**
+     * TSIG key name.
+     */
+    name: string;
+
+    /**
+     * TSIG secret.
+     */
+    secret: string;
+  }
 }
 
 export interface TsigDeleteResponse {
@@ -122,7 +142,7 @@ export interface TsigGetResponse {
   secret: string;
 }
 
-export interface TsigSecondaryDNSTsigCreateTsigResponse {
+export interface TsigReplaceResponse {
   id: unknown;
 
   /**
@@ -141,31 +161,7 @@ export interface TsigSecondaryDNSTsigCreateTsigResponse {
   secret: string;
 }
 
-export type TsigSecondaryDNSTsigListTsiGsResponse =
-  Array<TsigSecondaryDNSTsigListTsiGsResponse.TsigSecondaryDNSTsigListTsiGsResponseItem>;
-
-export namespace TsigSecondaryDNSTsigListTsiGsResponse {
-  export interface TsigSecondaryDNSTsigListTsiGsResponseItem {
-    id: unknown;
-
-    /**
-     * TSIG algorithm.
-     */
-    algo: string;
-
-    /**
-     * TSIG key name.
-     */
-    name: string;
-
-    /**
-     * TSIG secret.
-     */
-    secret: string;
-  }
-}
-
-export interface TsigUpdateParams {
+export interface TsigCreateParams {
   /**
    * TSIG algorithm.
    */
@@ -182,7 +178,7 @@ export interface TsigUpdateParams {
   secret: string;
 }
 
-export interface TsigSecondaryDNSTsigCreateTsigParams {
+export interface TsigReplaceParams {
   /**
    * TSIG algorithm.
    */
@@ -200,11 +196,11 @@ export interface TsigSecondaryDNSTsigCreateTsigParams {
 }
 
 export namespace Tsigs {
-  export import TsigUpdateResponse = TsigsAPI.TsigUpdateResponse;
+  export import TsigCreateResponse = TsigsAPI.TsigCreateResponse;
+  export import TsigListResponse = TsigsAPI.TsigListResponse;
   export import TsigDeleteResponse = TsigsAPI.TsigDeleteResponse;
   export import TsigGetResponse = TsigsAPI.TsigGetResponse;
-  export import TsigSecondaryDNSTsigCreateTsigResponse = TsigsAPI.TsigSecondaryDNSTsigCreateTsigResponse;
-  export import TsigSecondaryDNSTsigListTsiGsResponse = TsigsAPI.TsigSecondaryDNSTsigListTsiGsResponse;
-  export import TsigUpdateParams = TsigsAPI.TsigUpdateParams;
-  export import TsigSecondaryDNSTsigCreateTsigParams = TsigsAPI.TsigSecondaryDNSTsigCreateTsigParams;
+  export import TsigReplaceResponse = TsigsAPI.TsigReplaceResponse;
+  export import TsigCreateParams = TsigsAPI.TsigCreateParams;
+  export import TsigReplaceParams = TsigsAPI.TsigReplaceParams;
 }

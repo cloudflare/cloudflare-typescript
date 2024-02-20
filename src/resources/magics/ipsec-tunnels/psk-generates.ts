@@ -12,23 +12,21 @@ export class PskGenerates extends APIResource {
    * persisted to Cloudflare's edge and cannot be retrieved later. Note the PSK in a
    * safe place.
    */
-  magicIPsecTunnelsGeneratePreSharedKeyPskForIPsecTunnels(
+  create(
     accountIdentifier: string,
     tunnelIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PskGenerateMagicIPsecTunnelsGeneratePreSharedKeyPskForIPsecTunnelsResponse> {
+  ): Core.APIPromise<PskGenerateCreateResponse> {
     return (
       this._client.post(
         `/accounts/${accountIdentifier}/magic/ipsec_tunnels/${tunnelIdentifier}/psk_generate`,
         options,
-      ) as Core.APIPromise<{
-        result: PskGenerateMagicIPsecTunnelsGeneratePreSharedKeyPskForIPsecTunnelsResponse;
-      }>
+      ) as Core.APIPromise<{ result: PskGenerateCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface PskGenerateMagicIPsecTunnelsGeneratePreSharedKeyPskForIPsecTunnelsResponse {
+export interface PskGenerateCreateResponse {
   /**
    * Identifier
    */
@@ -42,10 +40,10 @@ export interface PskGenerateMagicIPsecTunnelsGeneratePreSharedKeyPskForIPsecTunn
   /**
    * The PSK metadata that includes when the PSK was generated.
    */
-  psk_metadata?: PskGenerateMagicIPsecTunnelsGeneratePreSharedKeyPskForIPsecTunnelsResponse.PskMetadata;
+  psk_metadata?: PskGenerateCreateResponse.PskMetadata;
 }
 
-export namespace PskGenerateMagicIPsecTunnelsGeneratePreSharedKeyPskForIPsecTunnelsResponse {
+export namespace PskGenerateCreateResponse {
   /**
    * The PSK metadata that includes when the PSK was generated.
    */
@@ -58,5 +56,5 @@ export namespace PskGenerateMagicIPsecTunnelsGeneratePreSharedKeyPskForIPsecTunn
 }
 
 export namespace PskGenerates {
-  export import PskGenerateMagicIPsecTunnelsGeneratePreSharedKeyPskForIPsecTunnelsResponse = PskGeneratesAPI.PskGenerateMagicIPsecTunnelsGeneratePreSharedKeyPskForIPsecTunnelsResponse;
+  export import PskGenerateCreateResponse = PskGeneratesAPI.PskGenerateCreateResponse;
 }

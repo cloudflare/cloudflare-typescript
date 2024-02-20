@@ -8,32 +8,32 @@ export class Downloads extends APIResource {
   /**
    * Get a url to download a single dataset.
    */
-  radarPostDatasetDownload(
-    params: DownloadRadarPostDatasetDownloadParams,
+  create(
+    params: DownloadCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DownloadRadarPostDatasetDownloadResponse> {
+  ): Core.APIPromise<DownloadCreateResponse> {
     const { format, ...body } = params;
     return (
       this._client.post('/radar/datasets/download', {
         query: { format },
         body,
         ...options,
-      }) as Core.APIPromise<{ result: DownloadRadarPostDatasetDownloadResponse }>
+      }) as Core.APIPromise<{ result: DownloadCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface DownloadRadarPostDatasetDownloadResponse {
-  dataset: DownloadRadarPostDatasetDownloadResponse.Dataset;
+export interface DownloadCreateResponse {
+  dataset: DownloadCreateResponse.Dataset;
 }
 
-export namespace DownloadRadarPostDatasetDownloadResponse {
+export namespace DownloadCreateResponse {
   export interface Dataset {
     url: string;
   }
 }
 
-export interface DownloadRadarPostDatasetDownloadParams {
+export interface DownloadCreateParams {
   /**
    * Body param:
    */
@@ -46,6 +46,6 @@ export interface DownloadRadarPostDatasetDownloadParams {
 }
 
 export namespace Downloads {
-  export import DownloadRadarPostDatasetDownloadResponse = DownloadsAPI.DownloadRadarPostDatasetDownloadResponse;
-  export import DownloadRadarPostDatasetDownloadParams = DownloadsAPI.DownloadRadarPostDatasetDownloadParams;
+  export import DownloadCreateResponse = DownloadsAPI.DownloadCreateResponse;
+  export import DownloadCreateParams = DownloadsAPI.DownloadCreateParams;
 }

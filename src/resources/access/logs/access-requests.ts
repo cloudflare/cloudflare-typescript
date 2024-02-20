@@ -8,23 +8,19 @@ export class AccessRequests extends APIResource {
   /**
    * Gets a list of Access authentication audit logs for an account.
    */
-  accessAuthenticationLogsGetAccessAuthenticationLogs(
-    identifier: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessRequestAccessAuthenticationLogsGetAccessAuthenticationLogsResponse | null> {
+  list(identifier: string, options?: Core.RequestOptions): Core.APIPromise<AccessRequestListResponse | null> {
     return (
       this._client.get(`/accounts/${identifier}/access/logs/access_requests`, options) as Core.APIPromise<{
-        result: AccessRequestAccessAuthenticationLogsGetAccessAuthenticationLogsResponse | null;
+        result: AccessRequestListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type AccessRequestAccessAuthenticationLogsGetAccessAuthenticationLogsResponse =
-  Array<AccessRequestAccessAuthenticationLogsGetAccessAuthenticationLogsResponse.AccessRequestAccessAuthenticationLogsGetAccessAuthenticationLogsResponseItem>;
+export type AccessRequestListResponse = Array<AccessRequestListResponse.AccessRequestListResponseItem>;
 
-export namespace AccessRequestAccessAuthenticationLogsGetAccessAuthenticationLogsResponse {
-  export interface AccessRequestAccessAuthenticationLogsGetAccessAuthenticationLogsResponseItem {
+export namespace AccessRequestListResponse {
+  export interface AccessRequestListResponseItem {
     /**
      * The event that occurred, such as a login attempt.
      */
@@ -70,5 +66,5 @@ export namespace AccessRequestAccessAuthenticationLogsGetAccessAuthenticationLog
 }
 
 export namespace AccessRequests {
-  export import AccessRequestAccessAuthenticationLogsGetAccessAuthenticationLogsResponse = AccessRequestsAPI.AccessRequestAccessAuthenticationLogsGetAccessAuthenticationLogsResponse;
+  export import AccessRequestListResponse = AccessRequestsAPI.AccessRequestListResponse;
 }

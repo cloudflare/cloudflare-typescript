@@ -13,8 +13,8 @@ export class WorkerScripts extends APIResource {
 
 export namespace WorkerScripts {
   export import Content = ContentAPI.Content;
-  export import ContentUpdateResponse = ContentAPI.ContentUpdateResponse;
-  export import ContentUpdateParams = ContentAPI.ContentUpdateParams;
+  export import ContentReplaceResponse = ContentAPI.ContentReplaceResponse;
+  export import ContentReplaceParams = ContentAPI.ContentReplaceParams;
   export import ContentV2 = ContentV2API.ContentV2;
   export import Settings = SettingsAPI.Settings;
   export import SettingUpdateResponse = SettingsAPI.SettingUpdateResponse;

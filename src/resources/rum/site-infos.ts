@@ -23,23 +23,6 @@ export class SiteInfos extends APIResource {
   }
 
   /**
-   * Updates an existing Web Analytics site.
-   */
-  update(
-    accountId: string,
-    siteId: string,
-    body: SiteInfoUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SiteInfoUpdateResponse> {
-    return (
-      this._client.put(`/accounts/${accountId}/rum/site_info/${siteId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: SiteInfoUpdateResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Lists all Web Analytics sites of an account.
    */
   list(
@@ -95,6 +78,23 @@ export class SiteInfos extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Updates an existing Web Analytics site.
+   */
+  replace(
+    accountId: string,
+    siteId: string,
+    body: SiteInfoReplaceParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SiteInfoReplaceResponse> {
+    return (
+      this._client.put(`/accounts/${accountId}/rum/site_info/${siteId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: SiteInfoReplaceResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
 export class SiteInfoListResponsesV4PagePaginationArray extends V4PagePaginationArray<SiteInfoListResponse> {}
@@ -132,90 +132,6 @@ export interface SiteInfoCreateResponse {
 }
 
 export namespace SiteInfoCreateResponse {
-  export interface Rule {
-    /**
-     * The Web Analytics rule identifier.
-     */
-    id?: string;
-
-    created?: string;
-
-    /**
-     * The hostname the rule will be applied to.
-     */
-    host?: string;
-
-    /**
-     * Whether the rule includes or excludes traffic from being measured.
-     */
-    inclusive?: boolean;
-
-    /**
-     * Whether the rule is paused or not.
-     */
-    is_paused?: boolean;
-
-    /**
-     * The paths the rule will be applied to.
-     */
-    paths?: Array<string>;
-
-    priority?: number;
-  }
-
-  export interface Ruleset {
-    /**
-     * The Web Analytics ruleset identifier.
-     */
-    id?: string;
-
-    /**
-     * Whether the ruleset is enabled.
-     */
-    enabled?: boolean;
-
-    zone_name?: string;
-
-    /**
-     * The zone identifier.
-     */
-    zone_tag?: string;
-  }
-}
-
-export interface SiteInfoUpdateResponse {
-  /**
-   * If enabled, the JavaScript snippet is automatically injected for orange-clouded
-   * sites.
-   */
-  auto_install?: boolean;
-
-  created?: string;
-
-  /**
-   * A list of rules.
-   */
-  rules?: Array<SiteInfoUpdateResponse.Rule>;
-
-  ruleset?: SiteInfoUpdateResponse.Ruleset;
-
-  /**
-   * The Web Analytics site identifier.
-   */
-  site_tag?: string;
-
-  /**
-   * The Web Analytics site token.
-   */
-  site_token?: string;
-
-  /**
-   * Encoded JavaScript snippet.
-   */
-  snippet?: string;
-}
-
-export namespace SiteInfoUpdateResponse {
   export interface Rule {
     /**
      * The Web Analytics rule identifier.
@@ -442,25 +358,91 @@ export namespace SiteInfoGetResponse {
   }
 }
 
-export interface SiteInfoCreateParams {
+export interface SiteInfoReplaceResponse {
   /**
    * If enabled, the JavaScript snippet is automatically injected for orange-clouded
    * sites.
    */
   auto_install?: boolean;
 
-  /**
-   * The hostname to use for gray-clouded sites.
-   */
-  host?: string;
+  created?: string;
 
   /**
-   * The zone identifier.
+   * A list of rules.
    */
-  zone_tag?: string;
+  rules?: Array<SiteInfoReplaceResponse.Rule>;
+
+  ruleset?: SiteInfoReplaceResponse.Ruleset;
+
+  /**
+   * The Web Analytics site identifier.
+   */
+  site_tag?: string;
+
+  /**
+   * The Web Analytics site token.
+   */
+  site_token?: string;
+
+  /**
+   * Encoded JavaScript snippet.
+   */
+  snippet?: string;
 }
 
-export interface SiteInfoUpdateParams {
+export namespace SiteInfoReplaceResponse {
+  export interface Rule {
+    /**
+     * The Web Analytics rule identifier.
+     */
+    id?: string;
+
+    created?: string;
+
+    /**
+     * The hostname the rule will be applied to.
+     */
+    host?: string;
+
+    /**
+     * Whether the rule includes or excludes traffic from being measured.
+     */
+    inclusive?: boolean;
+
+    /**
+     * Whether the rule is paused or not.
+     */
+    is_paused?: boolean;
+
+    /**
+     * The paths the rule will be applied to.
+     */
+    paths?: Array<string>;
+
+    priority?: number;
+  }
+
+  export interface Ruleset {
+    /**
+     * The Web Analytics ruleset identifier.
+     */
+    id?: string;
+
+    /**
+     * Whether the ruleset is enabled.
+     */
+    enabled?: boolean;
+
+    zone_name?: string;
+
+    /**
+     * The zone identifier.
+     */
+    zone_tag?: string;
+  }
+}
+
+export interface SiteInfoCreateParams {
   /**
    * If enabled, the JavaScript snippet is automatically injected for orange-clouded
    * sites.
@@ -485,14 +467,32 @@ export interface SiteInfoListParams extends V4PagePaginationArrayParams {
   order_by?: 'host' | 'created';
 }
 
+export interface SiteInfoReplaceParams {
+  /**
+   * If enabled, the JavaScript snippet is automatically injected for orange-clouded
+   * sites.
+   */
+  auto_install?: boolean;
+
+  /**
+   * The hostname to use for gray-clouded sites.
+   */
+  host?: string;
+
+  /**
+   * The zone identifier.
+   */
+  zone_tag?: string;
+}
+
 export namespace SiteInfos {
   export import SiteInfoCreateResponse = SiteInfosAPI.SiteInfoCreateResponse;
-  export import SiteInfoUpdateResponse = SiteInfosAPI.SiteInfoUpdateResponse;
   export import SiteInfoListResponse = SiteInfosAPI.SiteInfoListResponse;
   export import SiteInfoDeleteResponse = SiteInfosAPI.SiteInfoDeleteResponse;
   export import SiteInfoGetResponse = SiteInfosAPI.SiteInfoGetResponse;
+  export import SiteInfoReplaceResponse = SiteInfosAPI.SiteInfoReplaceResponse;
   export import SiteInfoListResponsesV4PagePaginationArray = SiteInfosAPI.SiteInfoListResponsesV4PagePaginationArray;
   export import SiteInfoCreateParams = SiteInfosAPI.SiteInfoCreateParams;
-  export import SiteInfoUpdateParams = SiteInfosAPI.SiteInfoUpdateParams;
   export import SiteInfoListParams = SiteInfosAPI.SiteInfoListParams;
+  export import SiteInfoReplaceParams = SiteInfosAPI.SiteInfoReplaceParams;
 }

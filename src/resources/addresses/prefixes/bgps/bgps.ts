@@ -9,7 +9,7 @@ export class BGPs extends APIResource {
 
 export namespace BGPs {
   export import Statuses = StatusesAPI.Statuses;
-  export import StatusIPAddressManagementDynamicAdvertisementGetAdvertisementStatusResponse = StatusesAPI.StatusIPAddressManagementDynamicAdvertisementGetAdvertisementStatusResponse;
-  export import StatusIPAddressManagementDynamicAdvertisementUpdatePrefixDynamicAdvertisementStatusResponse = StatusesAPI.StatusIPAddressManagementDynamicAdvertisementUpdatePrefixDynamicAdvertisementStatusResponse;
-  export import StatusIPAddressManagementDynamicAdvertisementUpdatePrefixDynamicAdvertisementStatusParams = StatusesAPI.StatusIPAddressManagementDynamicAdvertisementUpdatePrefixDynamicAdvertisementStatusParams;
+  export import StatusUpdateResponse = StatusesAPI.StatusUpdateResponse;
+  export import StatusGetResponse = StatusesAPI.StatusGetResponse;
+  export import StatusUpdateParams = StatusesAPI.StatusUpdateParams;
 }

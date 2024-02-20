@@ -6,19 +6,28 @@ import * as FiltersAPI from 'cloudflare/resources/workers/filters';
 
 export class Filters extends APIResource {
   /**
-   * Update Filter
+   * Create Filter
    */
-  update(
+  create(
     zoneId: string,
-    filterId: string,
-    body: FilterUpdateParams,
+    body: FilterCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<FilterUpdateResponse> {
+  ): Core.APIPromise<FilterCreateResponse | null> {
     return (
-      this._client.put(`/zones/${zoneId}/workers/filters/${filterId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: FilterUpdateResponse }>
+      this._client.post(`/zones/${zoneId}/workers/filters`, { body, ...options }) as Core.APIPromise<{
+        result: FilterCreateResponse | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * List Filters
+   */
+  list(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<FilterListResponse> {
+    return (
+      this._client.get(`/zones/${zoneId}/workers/filters`, options) as Core.APIPromise<{
+        result: FilterListResponse;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -38,65 +47,34 @@ export class Filters extends APIResource {
   }
 
   /**
-   * Create Filter
+   * Update Filter
    */
-  workerFiltersDeprecatedCreateFilter(
+  replace(
     zoneId: string,
-    body: FilterWorkerFiltersDeprecatedCreateFilterParams,
+    filterId: string,
+    body: FilterReplaceParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<FilterWorkerFiltersDeprecatedCreateFilterResponse | null> {
+  ): Core.APIPromise<FilterReplaceResponse> {
     return (
-      this._client.post(`/zones/${zoneId}/workers/filters`, { body, ...options }) as Core.APIPromise<{
-        result: FilterWorkerFiltersDeprecatedCreateFilterResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * List Filters
-   */
-  workerFiltersDeprecatedListFilters(
-    zoneId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<FilterWorkerFiltersDeprecatedListFiltersResponse> {
-    return (
-      this._client.get(`/zones/${zoneId}/workers/filters`, options) as Core.APIPromise<{
-        result: FilterWorkerFiltersDeprecatedListFiltersResponse;
-      }>
+      this._client.put(`/zones/${zoneId}/workers/filters/${filterId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: FilterReplaceResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface FilterUpdateResponse {
-  /**
-   * Identifier
-   */
-  id: string;
-
-  enabled: boolean;
-
-  pattern: string;
-}
-
-export interface FilterDeleteResponse {
+export interface FilterCreateResponse {
   /**
    * Identifier
    */
   id: string;
 }
 
-export interface FilterWorkerFiltersDeprecatedCreateFilterResponse {
-  /**
-   * Identifier
-   */
-  id: string;
-}
+export type FilterListResponse = Array<FilterListResponse.FilterListResponseItem>;
 
-export type FilterWorkerFiltersDeprecatedListFiltersResponse =
-  Array<FilterWorkerFiltersDeprecatedListFiltersResponse.FilterWorkerFiltersDeprecatedListFiltersResponseItem>;
-
-export namespace FilterWorkerFiltersDeprecatedListFiltersResponse {
-  export interface FilterWorkerFiltersDeprecatedListFiltersResponseItem {
+export namespace FilterListResponse {
+  export interface FilterListResponseItem {
     /**
      * Identifier
      */
@@ -108,23 +86,41 @@ export namespace FilterWorkerFiltersDeprecatedListFiltersResponse {
   }
 }
 
-export interface FilterUpdateParams {
+export interface FilterDeleteResponse {
+  /**
+   * Identifier
+   */
+  id: string;
+}
+
+export interface FilterReplaceResponse {
+  /**
+   * Identifier
+   */
+  id: string;
+
   enabled: boolean;
 
   pattern: string;
 }
 
-export interface FilterWorkerFiltersDeprecatedCreateFilterParams {
+export interface FilterCreateParams {
+  enabled: boolean;
+
+  pattern: string;
+}
+
+export interface FilterReplaceParams {
   enabled: boolean;
 
   pattern: string;
 }
 
 export namespace Filters {
-  export import FilterUpdateResponse = FiltersAPI.FilterUpdateResponse;
+  export import FilterCreateResponse = FiltersAPI.FilterCreateResponse;
+  export import FilterListResponse = FiltersAPI.FilterListResponse;
   export import FilterDeleteResponse = FiltersAPI.FilterDeleteResponse;
-  export import FilterWorkerFiltersDeprecatedCreateFilterResponse = FiltersAPI.FilterWorkerFiltersDeprecatedCreateFilterResponse;
-  export import FilterWorkerFiltersDeprecatedListFiltersResponse = FiltersAPI.FilterWorkerFiltersDeprecatedListFiltersResponse;
-  export import FilterUpdateParams = FiltersAPI.FilterUpdateParams;
-  export import FilterWorkerFiltersDeprecatedCreateFilterParams = FiltersAPI.FilterWorkerFiltersDeprecatedCreateFilterParams;
+  export import FilterReplaceResponse = FiltersAPI.FilterReplaceResponse;
+  export import FilterCreateParams = FiltersAPI.FilterCreateParams;
+  export import FilterReplaceParams = FiltersAPI.FilterReplaceParams;
 }

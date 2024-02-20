@@ -1,21 +1,21 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
-  ConsumerUpdateResponse,
+  ConsumerCreateResponse,
   ConsumerListResponse,
   ConsumerDeleteResponse,
-  ConsumerQueueCreateQueueConsumerResponse,
-  ConsumerUpdateParams,
-  ConsumerQueueCreateQueueConsumerParams,
+  ConsumerReplaceResponse,
+  ConsumerCreateParams,
+  ConsumerReplaceParams,
   Consumers,
 } from './consumers';
 export {
-  QueueUpdateResponse,
+  QueueCreateResponse,
   QueueListResponse,
   QueueDeleteResponse,
   QueueGetResponse,
-  QueueQueueCreateQueueResponse,
-  QueueUpdateParams,
-  QueueQueueCreateQueueParams,
+  QueueReplaceResponse,
+  QueueCreateParams,
+  QueueReplaceParams,
   Queues,
 } from './queues';

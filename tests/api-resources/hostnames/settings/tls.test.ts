@@ -13,33 +13,6 @@ const cloudflare = new Cloudflare({
 
 describe('resource tls', () => {
   // skipped: tests are disabled for the time being
-  test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.hostnames.settings.tls.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'ciphers',
-      'app.example.com',
-      { value: ['ECDHE-RSA-AES128-GCM-SHA256', 'AES128-GCM-SHA256'] },
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.hostnames.settings.tls.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'ciphers',
-      'app.example.com',
-      { value: ['ECDHE-RSA-AES128-GCM-SHA256', 'AES128-GCM-SHA256'] },
-    );
-  });
-
-  // skipped: tests are disabled for the time being
   test.skip('delete', async () => {
     const responsePromise = cloudflare.hostnames.settings.tls.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
@@ -91,5 +64,32 @@ describe('resource tls', () => {
         path: '/_stainless_unknown_path',
       }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('replace: only required params', async () => {
+    const responsePromise = cloudflare.hostnames.settings.tls.replace(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      'ciphers',
+      'app.example.com',
+      { value: ['ECDHE-RSA-AES128-GCM-SHA256', 'AES128-GCM-SHA256'] },
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('replace: required and optional params', async () => {
+    const response = await cloudflare.hostnames.settings.tls.replace(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      'ciphers',
+      'app.example.com',
+      { value: ['ECDHE-RSA-AES128-GCM-SHA256', 'AES128-GCM-SHA256'] },
+    );
   });
 });

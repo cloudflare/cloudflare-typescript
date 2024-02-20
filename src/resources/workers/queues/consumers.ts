@@ -6,20 +6,19 @@ import * as ConsumersAPI from 'cloudflare/resources/workers/queues/consumers';
 
 export class Consumers extends APIResource {
   /**
-   * Updates the consumer for a queue, or creates one if it does not exist.
+   * Creates a new consumer for a queue.
    */
-  update(
+  create(
     accountId: string,
     name: string,
-    consumerName: string,
-    body: ConsumerUpdateParams,
+    body: ConsumerCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ConsumerUpdateResponse | null> {
+  ): Core.APIPromise<ConsumerCreateResponse | null> {
     return (
-      this._client.put(`/accounts/${accountId}/workers/queues/${name}/consumers/${consumerName}`, {
+      this._client.post(`/accounts/${accountId}/workers/queues/${name}/consumers`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ConsumerUpdateResponse | null }>
+      }) as Core.APIPromise<{ result: ConsumerCreateResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -57,27 +56,28 @@ export class Consumers extends APIResource {
   }
 
   /**
-   * Creates a new consumer for a queue.
+   * Updates the consumer for a queue, or creates one if it does not exist.
    */
-  queueCreateQueueConsumer(
+  replace(
     accountId: string,
     name: string,
-    body: ConsumerQueueCreateQueueConsumerParams,
+    consumerName: string,
+    body: ConsumerReplaceParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ConsumerQueueCreateQueueConsumerResponse | null> {
+  ): Core.APIPromise<ConsumerReplaceResponse | null> {
     return (
-      this._client.post(`/accounts/${accountId}/workers/queues/${name}/consumers`, {
+      this._client.put(`/accounts/${accountId}/workers/queues/${name}/consumers/${consumerName}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ConsumerQueueCreateQueueConsumerResponse | null }>
+      }) as Core.APIPromise<{ result: ConsumerReplaceResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface ConsumerUpdateResponse {
+export interface ConsumerCreateResponse {
   created_on?: unknown;
 
-  dead_letter_queue?: unknown;
+  dead_letter_queue?: string;
 
   environment?: unknown;
 
@@ -85,10 +85,10 @@ export interface ConsumerUpdateResponse {
 
   script_name?: unknown;
 
-  settings?: ConsumerUpdateResponse.Settings;
+  settings?: ConsumerCreateResponse.Settings;
 }
 
-export namespace ConsumerUpdateResponse {
+export namespace ConsumerCreateResponse {
   export interface Settings {
     batch_size?: number;
 
@@ -126,10 +126,10 @@ export namespace ConsumerListResponse {
 
 export type ConsumerDeleteResponse = unknown | Array<unknown> | string;
 
-export interface ConsumerQueueCreateQueueConsumerResponse {
+export interface ConsumerReplaceResponse {
   created_on?: unknown;
 
-  dead_letter_queue?: string;
+  dead_letter_queue?: unknown;
 
   environment?: unknown;
 
@@ -137,10 +137,10 @@ export interface ConsumerQueueCreateQueueConsumerResponse {
 
   script_name?: unknown;
 
-  settings?: ConsumerQueueCreateQueueConsumerResponse.Settings;
+  settings?: ConsumerReplaceResponse.Settings;
 }
 
-export namespace ConsumerQueueCreateQueueConsumerResponse {
+export namespace ConsumerReplaceResponse {
   export interface Settings {
     batch_size?: number;
 
@@ -150,15 +150,15 @@ export namespace ConsumerQueueCreateQueueConsumerResponse {
   }
 }
 
-export type ConsumerUpdateParams = unknown;
+export type ConsumerCreateParams = unknown;
 
-export type ConsumerQueueCreateQueueConsumerParams = unknown;
+export type ConsumerReplaceParams = unknown;
 
 export namespace Consumers {
-  export import ConsumerUpdateResponse = ConsumersAPI.ConsumerUpdateResponse;
+  export import ConsumerCreateResponse = ConsumersAPI.ConsumerCreateResponse;
   export import ConsumerListResponse = ConsumersAPI.ConsumerListResponse;
   export import ConsumerDeleteResponse = ConsumersAPI.ConsumerDeleteResponse;
-  export import ConsumerQueueCreateQueueConsumerResponse = ConsumersAPI.ConsumerQueueCreateQueueConsumerResponse;
-  export import ConsumerUpdateParams = ConsumersAPI.ConsumerUpdateParams;
-  export import ConsumerQueueCreateQueueConsumerParams = ConsumersAPI.ConsumerQueueCreateQueueConsumerParams;
+  export import ConsumerReplaceResponse = ConsumersAPI.ConsumerReplaceResponse;
+  export import ConsumerCreateParams = ConsumersAPI.ConsumerCreateParams;
+  export import ConsumerReplaceParams = ConsumersAPI.ConsumerReplaceParams;
 }

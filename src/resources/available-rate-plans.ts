@@ -8,23 +8,23 @@ export class AvailableRatePlans extends APIResource {
   /**
    * Lists all rate plans the zone can subscribe to.
    */
-  zoneRatePlanListAvailableRatePlans(
+  list(
     zoneIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AvailableRatePlanZoneRatePlanListAvailableRatePlansResponse | null> {
+  ): Core.APIPromise<AvailableRatePlanListResponse | null> {
     return (
       this._client.get(`/zones/${zoneIdentifier}/available_rate_plans`, options) as Core.APIPromise<{
-        result: AvailableRatePlanZoneRatePlanListAvailableRatePlansResponse | null;
+        result: AvailableRatePlanListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type AvailableRatePlanZoneRatePlanListAvailableRatePlansResponse =
-  Array<AvailableRatePlanZoneRatePlanListAvailableRatePlansResponse.AvailableRatePlanZoneRatePlanListAvailableRatePlansResponseItem>;
+export type AvailableRatePlanListResponse =
+  Array<AvailableRatePlanListResponse.AvailableRatePlanListResponseItem>;
 
-export namespace AvailableRatePlanZoneRatePlanListAvailableRatePlansResponse {
-  export interface AvailableRatePlanZoneRatePlanListAvailableRatePlansResponseItem {
+export namespace AvailableRatePlanListResponse {
+  export interface AvailableRatePlanListResponseItem {
     /**
      * Plan identifier tag.
      */
@@ -33,7 +33,7 @@ export namespace AvailableRatePlanZoneRatePlanListAvailableRatePlansResponse {
     /**
      * Array of available components values for the plan.
      */
-    components?: Array<AvailableRatePlanZoneRatePlanListAvailableRatePlansResponseItem.Component>;
+    components?: Array<AvailableRatePlanListResponseItem.Component>;
 
     /**
      * The monetary unit in which pricing information is displayed.
@@ -56,7 +56,7 @@ export namespace AvailableRatePlanZoneRatePlanListAvailableRatePlansResponse {
     name?: string;
   }
 
-  export namespace AvailableRatePlanZoneRatePlanListAvailableRatePlansResponseItem {
+  export namespace AvailableRatePlanListResponseItem {
     export interface Component {
       /**
        * The default amount allocated.
@@ -77,5 +77,5 @@ export namespace AvailableRatePlanZoneRatePlanListAvailableRatePlansResponse {
 }
 
 export namespace AvailableRatePlans {
-  export import AvailableRatePlanZoneRatePlanListAvailableRatePlansResponse = AvailableRatePlansAPI.AvailableRatePlanZoneRatePlanListAvailableRatePlansResponse;
+  export import AvailableRatePlanListResponse = AvailableRatePlansAPI.AvailableRatePlanListResponse;
 }

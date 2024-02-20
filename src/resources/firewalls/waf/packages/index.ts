@@ -2,10 +2,11 @@
 
 export {
   GroupUpdateResponse,
+  GroupListResponse,
   GroupGetResponse,
-  GroupWAFRuleGroupsListWAFRuleGroupsResponse,
   GroupUpdateParams,
-  GroupWAFRuleGroupsListWAFRuleGroupsParams,
+  GroupListParams,
+  GroupListResponsesV4PagePaginationArray,
   Groups,
 } from './groups';
 export {

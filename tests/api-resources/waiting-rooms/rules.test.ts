@@ -13,6 +13,36 @@ const cloudflare = new Cloudflare({
 
 describe('resource rules', () => {
   // skipped: tests are disabled for the time being
+  test.skip('create: only required params', async () => {
+    const responsePromise = cloudflare.waitingRooms.rules.create(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '699d98642c564d2e855e9661899b7252',
+      { action: 'bypass_waiting_room', expression: 'ip.src in {10.20.30.40}' },
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('create: required and optional params', async () => {
+    const response = await cloudflare.waitingRooms.rules.create(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '699d98642c564d2e855e9661899b7252',
+      {
+        action: 'bypass_waiting_room',
+        expression: 'ip.src in {10.20.30.40}',
+        description: 'allow all traffic from 10.20.30.40',
+        enabled: true,
+      },
+    );
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.waitingRooms.rules.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
@@ -46,6 +76,33 @@ describe('resource rules', () => {
   });
 
   // skipped: tests are disabled for the time being
+  test.skip('list', async () => {
+    const responsePromise = cloudflare.waitingRooms.rules.list(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '699d98642c564d2e855e9661899b7252',
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.waitingRooms.rules.list(
+        '023e105f4ecef8ad9ca31a8372d0c353',
+        '699d98642c564d2e855e9661899b7252',
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('delete', async () => {
     const responsePromise = cloudflare.waitingRooms.rules.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
@@ -62,65 +119,8 @@ describe('resource rules', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('waitingRoomCreateWaitingRoomRule: only required params', async () => {
-    const responsePromise = cloudflare.waitingRooms.rules.waitingRoomCreateWaitingRoomRule(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '699d98642c564d2e855e9661899b7252',
-      { action: 'bypass_waiting_room', expression: 'ip.src in {10.20.30.40}' },
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('waitingRoomCreateWaitingRoomRule: required and optional params', async () => {
-    const response = await cloudflare.waitingRooms.rules.waitingRoomCreateWaitingRoomRule(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '699d98642c564d2e855e9661899b7252',
-      {
-        action: 'bypass_waiting_room',
-        expression: 'ip.src in {10.20.30.40}',
-        description: 'allow all traffic from 10.20.30.40',
-        enabled: true,
-      },
-    );
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('waitingRoomListWaitingRoomRules', async () => {
-    const responsePromise = cloudflare.waitingRooms.rules.waitingRoomListWaitingRoomRules(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '699d98642c564d2e855e9661899b7252',
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('waitingRoomListWaitingRoomRules: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.waitingRooms.rules.waitingRoomListWaitingRoomRules(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        '699d98642c564d2e855e9661899b7252',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('waitingRoomReplaceWaitingRoomRules: only required params', async () => {
-    const responsePromise = cloudflare.waitingRooms.rules.waitingRoomReplaceWaitingRoomRules(
+  test.skip('replace: only required params', async () => {
+    const responsePromise = cloudflare.waitingRooms.rules.replace(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '699d98642c564d2e855e9661899b7252',
       [
@@ -139,8 +139,8 @@ describe('resource rules', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('waitingRoomReplaceWaitingRoomRules: required and optional params', async () => {
-    const response = await cloudflare.waitingRooms.rules.waitingRoomReplaceWaitingRoomRules(
+  test.skip('replace: required and optional params', async () => {
+    const response = await cloudflare.waitingRooms.rules.replace(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '699d98642c564d2e855e9661899b7252',
       [

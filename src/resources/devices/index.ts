@@ -1,59 +1,47 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
-  DEXTestUpdateResponse,
+  DEXTestCreateResponse,
+  DEXTestListResponse,
   DEXTestDeleteResponse,
-  DEXTestDeviceDEXTestCreateDeviceDEXTestResponse,
-  DEXTestDeviceDEXTestDetailsResponse,
   DEXTestGetResponse,
-  DEXTestUpdateParams,
-  DEXTestDeviceDEXTestCreateDeviceDEXTestParams,
+  DEXTestReplaceResponse,
+  DEXTestCreateParams,
+  DEXTestReplaceParams,
   DEXTests,
 } from './dex-tests';
 export { DeviceDevicesListDevicesResponse, DeviceGetResponse, Devices } from './devices';
 export {
-  NetworkUpdateResponse,
+  NetworkCreateResponse,
+  NetworkListResponse,
   NetworkDeleteResponse,
-  NetworkDeviceManagedNetworksCreateDeviceManagedNetworkResponse,
-  NetworkDeviceManagedNetworksListDeviceManagedNetworksResponse,
   NetworkGetResponse,
-  NetworkUpdateParams,
-  NetworkDeviceManagedNetworksCreateDeviceManagedNetworkParams,
+  NetworkReplaceResponse,
+  NetworkCreateParams,
+  NetworkReplaceParams,
   Networks,
 } from './networks';
-export { OverrideCodeDevicesListAdminOverrideCodeForDeviceResponse, OverrideCodes } from './override-codes';
+export { OverrideCodeListResponse, OverrideCodes } from './override-codes';
 export {
+  PolicyCreateResponse,
   PolicyUpdateResponse,
+  PolicyListResponse,
   PolicyDeleteResponse,
-  PolicyDevicesCreateDeviceSettingsPolicyResponse,
-  PolicyDevicesGetDefaultDeviceSettingsPolicyResponse,
-  PolicyDevicesListDeviceSettingsPoliciesResponse,
-  PolicyDevicesUpdateDefaultDeviceSettingsPolicyResponse,
   PolicyGetResponse,
+  PolicyCreateParams,
   PolicyUpdateParams,
-  PolicyDevicesCreateDeviceSettingsPolicyParams,
-  PolicyDevicesUpdateDefaultDeviceSettingsPolicyParams,
   Policies,
 } from './policies/index';
 export {
-  PostureUpdateResponse,
+  PostureCreateResponse,
+  PostureListResponse,
   PostureDeleteResponse,
-  PostureDevicePostureRulesCreateDevicePostureRuleResponse,
-  PostureDevicePostureRulesListDevicePostureRulesResponse,
   PostureGetResponse,
-  PostureUpdateParams,
-  PostureDevicePostureRulesCreateDevicePostureRuleParams,
+  PostureReplaceResponse,
+  PostureCreateParams,
+  PostureReplaceParams,
   Postures,
 } from './postures/index';
-export { RevokeDevicesRevokeDevicesResponse, RevokeDevicesRevokeDevicesParams, Revokes } from './revokes';
-export {
-  SettingZeroTrustAccountsGetDeviceSettingsForZeroTrustAccountResponse,
-  SettingZeroTrustAccountsUpdateDeviceSettingsForTheZeroTrustAccountResponse,
-  SettingZeroTrustAccountsUpdateDeviceSettingsForTheZeroTrustAccountParams,
-  Settings,
-} from './settings';
-export {
-  UnrevokeDevicesUnrevokeDevicesResponse,
-  UnrevokeDevicesUnrevokeDevicesParams,
-  Unrevokes,
-} from './unrevokes';
+export { RevokeCreateResponse, RevokeCreateParams, Revokes } from './revokes';
+export { SettingListResponse, SettingReplaceResponse, SettingReplaceParams, Settings } from './settings';
+export { UnrevokeCreateResponse, UnrevokeCreateParams, Unrevokes } from './unrevokes';

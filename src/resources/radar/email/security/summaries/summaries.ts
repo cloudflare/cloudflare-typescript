@@ -35,8 +35,8 @@ export namespace Summaries {
   export import MaliciousListResponse = MaliciousAPI.MaliciousListResponse;
   export import MaliciousListParams = MaliciousAPI.MaliciousListParams;
   export import Spams = SpamsAPI.Spams;
-  export import SpamGetResponse = SpamsAPI.SpamGetResponse;
-  export import SpamGetParams = SpamsAPI.SpamGetParams;
+  export import SpamListResponse = SpamsAPI.SpamListResponse;
+  export import SpamListParams = SpamsAPI.SpamListParams;
   export import SPFs = SPFsAPI.SPFs;
   export import SPFListResponse = SPFsAPI.SPFListResponse;
   export import SPFListParams = SPFsAPI.SPFListParams;

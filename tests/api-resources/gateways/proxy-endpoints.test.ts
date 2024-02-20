@@ -13,6 +13,30 @@ const cloudflare = new Cloudflare({
 
 describe('resource proxyEndpoints', () => {
   // skipped: tests are disabled for the time being
+  test.skip('create: only required params', async () => {
+    const responsePromise = cloudflare.gateways.proxyEndpoints.create('699d98642c564d2e855e9661899b7252', {
+      ips: ['192.0.2.1/32', '192.0.2.1/32', '192.0.2.1/32'],
+      name: 'Devops team',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('create: required and optional params', async () => {
+    const response = await cloudflare.gateways.proxyEndpoints.create('699d98642c564d2e855e9661899b7252', {
+      ips: ['192.0.2.1/32', '192.0.2.1/32', '192.0.2.1/32'],
+      name: 'Devops team',
+      subdomain: 'oli3n9zkz5.proxy.cloudflare-gateway.com',
+    });
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('update', async () => {
     const responsePromise = cloudflare.gateways.proxyEndpoints.update(
       '699d98642c564d2e855e9661899b7252',
@@ -30,10 +54,7 @@ describe('resource proxyEndpoints', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('list', async () => {
-    const responsePromise = cloudflare.gateways.proxyEndpoints.list(
-      '699d98642c564d2e855e9661899b7252',
-      'ed35569b41ce4d1facfe683550f54086',
-    );
+    const responsePromise = cloudflare.gateways.proxyEndpoints.list('699d98642c564d2e855e9661899b7252');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -47,11 +68,9 @@ describe('resource proxyEndpoints', () => {
   test.skip('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.gateways.proxyEndpoints.list(
-        '699d98642c564d2e855e9661899b7252',
-        'ed35569b41ce4d1facfe683550f54086',
-        { path: '/_stainless_unknown_path' },
-      ),
+      cloudflare.gateways.proxyEndpoints.list('699d98642c564d2e855e9661899b7252', {
+        path: '/_stainless_unknown_path',
+      }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
@@ -92,61 +111,6 @@ describe('resource proxyEndpoints', () => {
       cloudflare.gateways.proxyEndpoints.get(
         '699d98642c564d2e855e9661899b7252',
         'ed35569b41ce4d1facfe683550f54086',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('zeroTrustGatewayProxyEndpointsCreateProxyEndpoint: only required params', async () => {
-    const responsePromise =
-      cloudflare.gateways.proxyEndpoints.zeroTrustGatewayProxyEndpointsCreateProxyEndpoint(
-        '699d98642c564d2e855e9661899b7252',
-        { ips: ['192.0.2.1/32', '192.0.2.1/32', '192.0.2.1/32'], name: 'Devops team' },
-      );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('zeroTrustGatewayProxyEndpointsCreateProxyEndpoint: required and optional params', async () => {
-    const response =
-      await cloudflare.gateways.proxyEndpoints.zeroTrustGatewayProxyEndpointsCreateProxyEndpoint(
-        '699d98642c564d2e855e9661899b7252',
-        {
-          ips: ['192.0.2.1/32', '192.0.2.1/32', '192.0.2.1/32'],
-          name: 'Devops team',
-          subdomain: 'oli3n9zkz5.proxy.cloudflare-gateway.com',
-        },
-      );
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('zeroTrustGatewayProxyEndpointsListProxyEndpoints', async () => {
-    const responsePromise =
-      cloudflare.gateways.proxyEndpoints.zeroTrustGatewayProxyEndpointsListProxyEndpoints(
-        '699d98642c564d2e855e9661899b7252',
-      );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('zeroTrustGatewayProxyEndpointsListProxyEndpoints: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.gateways.proxyEndpoints.zeroTrustGatewayProxyEndpointsListProxyEndpoints(
-        '699d98642c564d2e855e9661899b7252',
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);

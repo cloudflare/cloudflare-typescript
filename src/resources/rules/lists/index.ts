@@ -2,24 +2,24 @@
 
 export { BulkOperationGetResponse, BulkOperations } from './bulk-operations';
 export {
+  ItemCreateResponse,
+  ItemListResponse,
   ItemDeleteResponse,
   ItemGetResponse,
-  ItemListsCreateListItemsResponse,
-  ItemListsGetListItemsResponse,
-  ItemListsUpdateAllListItemsResponse,
+  ItemReplaceResponse,
+  ItemCreateParams,
+  ItemListParams,
   ItemDeleteParams,
-  ItemListsCreateListItemsParams,
-  ItemListsGetListItemsParams,
-  ItemListsUpdateAllListItemsParams,
+  ItemReplaceParams,
   Items,
 } from './items';
 export {
-  ListUpdateResponse,
+  ListCreateResponse,
+  ListListResponse,
   ListDeleteResponse,
   ListGetResponse,
-  ListListsCreateAListResponse,
-  ListListsGetListsResponse,
-  ListUpdateParams,
-  ListListsCreateAListParams,
+  ListReplaceResponse,
+  ListCreateParams,
+  ListReplaceParams,
   Lists,
 } from './lists';

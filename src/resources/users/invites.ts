@@ -21,6 +21,15 @@ export class Invites extends APIResource {
   }
 
   /**
+   * Lists all invitations associated with my user.
+   */
+  list(options?: Core.RequestOptions): Core.APIPromise<InviteListResponse | null> {
+    return (
+      this._client.get('/user/invites', options) as Core.APIPromise<{ result: InviteListResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Gets the details of an invitation.
    */
   get(inviteId: string, options?: Core.RequestOptions): Core.APIPromise<InviteGetResponse> {
@@ -28,30 +37,14 @@ export class Invites extends APIResource {
       this._client.get(`/user/invites/${inviteId}`, options) as Core.APIPromise<{ result: InviteGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
-
-  /**
-   * Lists all invitations associated with my user.
-   */
-  userSInvitesListInvitations(
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<InviteUserSInvitesListInvitationsResponse | null> {
-    return (
-      this._client.get('/user/invites', options) as Core.APIPromise<{
-        result: InviteUserSInvitesListInvitationsResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 
 export type InviteUpdateResponse = unknown | string | null;
 
-export type InviteGetResponse = unknown | string | null;
+export type InviteListResponse = Array<InviteListResponse.InviteListResponseItem>;
 
-export type InviteUserSInvitesListInvitationsResponse =
-  Array<InviteUserSInvitesListInvitationsResponse.InviteUserSInvitesListInvitationsResponseItem>;
-
-export namespace InviteUserSInvitesListInvitationsResponse {
-  export interface InviteUserSInvitesListInvitationsResponseItem {
+export namespace InviteListResponse {
+  export interface InviteListResponseItem {
     /**
      * ID of the user to add to the organization.
      */
@@ -95,7 +88,7 @@ export namespace InviteUserSInvitesListInvitationsResponse {
     /**
      * Roles to be assigned to this user.
      */
-    roles?: Array<InviteUserSInvitesListInvitationsResponseItem.Role>;
+    roles?: Array<InviteListResponseItem.Role>;
 
     /**
      * Current status of the invitation.
@@ -103,7 +96,7 @@ export namespace InviteUserSInvitesListInvitationsResponse {
     status?: 'pending' | 'accepted' | 'rejected' | 'expired';
   }
 
-  export namespace InviteUserSInvitesListInvitationsResponseItem {
+  export namespace InviteListResponseItem {
     export interface Role {
       /**
        * Role identifier tag.
@@ -128,6 +121,8 @@ export namespace InviteUserSInvitesListInvitationsResponse {
   }
 }
 
+export type InviteGetResponse = unknown | string | null;
+
 export interface InviteUpdateParams {
   /**
    * Status of your response to the invitation (rejected or accepted).
@@ -137,7 +132,7 @@ export interface InviteUpdateParams {
 
 export namespace Invites {
   export import InviteUpdateResponse = InvitesAPI.InviteUpdateResponse;
+  export import InviteListResponse = InvitesAPI.InviteListResponse;
   export import InviteGetResponse = InvitesAPI.InviteGetResponse;
-  export import InviteUserSInvitesListInvitationsResponse = InvitesAPI.InviteUserSInvitesListInvitationsResponse;
   export import InviteUpdateParams = InvitesAPI.InviteUpdateParams;
 }

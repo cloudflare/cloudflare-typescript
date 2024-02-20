@@ -13,8 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource previews', () => {
   // skipped: tests are disabled for the time being
-  test.skip('loadBalancerPoolsPreviewPool: only required params', async () => {
-    const responsePromise = cloudflare.users.loadBalancers.pools.previews.loadBalancerPoolsPreviewPool(
+  test.skip('create: only required params', async () => {
+    const responsePromise = cloudflare.users.loadBalancers.pools.previews.create(
       '17b5962d775c646f3f9725cbc7a53df4',
       { expected_codes: '2xx' },
     );
@@ -28,8 +28,8 @@ describe('resource previews', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('loadBalancerPoolsPreviewPool: required and optional params', async () => {
-    const response = await cloudflare.users.loadBalancers.pools.previews.loadBalancerPoolsPreviewPool(
+  test.skip('create: required and optional params', async () => {
+    const response = await cloudflare.users.loadBalancers.pools.previews.create(
       '17b5962d775c646f3f9725cbc7a53df4',
       {
         expected_codes: '2xx',

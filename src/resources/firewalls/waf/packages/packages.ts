@@ -268,10 +268,11 @@ export namespace Packages {
   export import PackageListParams = PackagesAPI.PackageListParams;
   export import Groups = GroupsAPI.Groups;
   export import GroupUpdateResponse = GroupsAPI.GroupUpdateResponse;
+  export import GroupListResponse = GroupsAPI.GroupListResponse;
   export import GroupGetResponse = GroupsAPI.GroupGetResponse;
-  export import GroupWAFRuleGroupsListWAFRuleGroupsResponse = GroupsAPI.GroupWAFRuleGroupsListWAFRuleGroupsResponse;
+  export import GroupListResponsesV4PagePaginationArray = GroupsAPI.GroupListResponsesV4PagePaginationArray;
   export import GroupUpdateParams = GroupsAPI.GroupUpdateParams;
-  export import GroupWAFRuleGroupsListWAFRuleGroupsParams = GroupsAPI.GroupWAFRuleGroupsListWAFRuleGroupsParams;
+  export import GroupListParams = GroupsAPI.GroupListParams;
   export import Rules = RulesAPI.Rules;
   export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
   export import RuleGetResponse = RulesAPI.RuleGetResponse;

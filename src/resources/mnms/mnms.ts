@@ -11,16 +11,16 @@ export class Mnms extends APIResource {
 
 export namespace Mnms {
   export import Configs = ConfigsAPI.Configs;
+  export import ConfigCreateResponse = ConfigsAPI.ConfigCreateResponse;
+  export import ConfigUpdateResponse = ConfigsAPI.ConfigUpdateResponse;
+  export import ConfigListResponse = ConfigsAPI.ConfigListResponse;
   export import ConfigDeleteResponse = ConfigsAPI.ConfigDeleteResponse;
-  export import ConfigMagicNetworkMonitoringConfigurationCreateAccountConfigurationResponse = ConfigsAPI.ConfigMagicNetworkMonitoringConfigurationCreateAccountConfigurationResponse;
-  export import ConfigMagicNetworkMonitoringConfigurationListAccountConfigurationResponse = ConfigsAPI.ConfigMagicNetworkMonitoringConfigurationListAccountConfigurationResponse;
-  export import ConfigMagicNetworkMonitoringConfigurationUpdateAccountConfigurationFieldsResponse = ConfigsAPI.ConfigMagicNetworkMonitoringConfigurationUpdateAccountConfigurationFieldsResponse;
-  export import ConfigMagicNetworkMonitoringConfigurationUpdateAnEntireAccountConfigurationResponse = ConfigsAPI.ConfigMagicNetworkMonitoringConfigurationUpdateAnEntireAccountConfigurationResponse;
+  export import ConfigReplaceResponse = ConfigsAPI.ConfigReplaceResponse;
   export import Rules = RulesAPI.Rules;
+  export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
   export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
+  export import RuleListResponse = RulesAPI.RuleListResponse;
   export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
   export import RuleGetResponse = RulesAPI.RuleGetResponse;
-  export import RuleMagicNetworkMonitoringRulesCreateRulesResponse = RulesAPI.RuleMagicNetworkMonitoringRulesCreateRulesResponse;
-  export import RuleMagicNetworkMonitoringRulesListRulesResponse = RulesAPI.RuleMagicNetworkMonitoringRulesListRulesResponse;
-  export import RuleMagicNetworkMonitoringRulesUpdateRulesResponse = RulesAPI.RuleMagicNetworkMonitoringRulesUpdateRulesResponse;
+  export import RuleReplaceResponse = RulesAPI.RuleReplaceResponse;
 }

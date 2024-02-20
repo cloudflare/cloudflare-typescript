@@ -1,86 +1,58 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
+  AudioTrackCreateResponse,
   AudioTrackUpdateResponse,
   AudioTrackListResponse,
   AudioTrackDeleteResponse,
-  AudioTrackCopyResponse,
+  AudioTrackCreateParams,
   AudioTrackUpdateParams,
-  AudioTrackCopyParams,
   AudioTracks,
 } from './audio-tracks';
 export {
-  CaptionUpdateResponse,
+  CaptionListResponse,
   CaptionDeleteResponse,
-  CaptionStreamSubtitlesCaptionsListCaptionsOrSubtitlesResponse,
-  CaptionUpdateParams,
+  CaptionReplaceResponse,
+  CaptionReplaceParams,
   Captions,
 } from './captions';
-export {
-  ClipStreamVideoClippingClipVideosGivenAStartAndEndTimeResponse,
-  ClipStreamVideoClippingClipVideosGivenAStartAndEndTimeParams,
-  Clips,
-} from './clips';
-export {
-  CopyStreamVideosUploadVideosFromAURLResponse,
-  CopyStreamVideosUploadVideosFromAURLParams,
-  Copies,
-} from './copies';
-export {
-  DirectUploadStreamVideosUploadVideosViaDirectUploadURLsResponse,
-  DirectUploadStreamVideosUploadVideosViaDirectUploadURLsParams,
-  DirectUploads,
-} from './direct-uploads';
-export {
-  DownloadDeleteResponse,
-  DownloadStreamMP4DownloadsCreateDownloadsResponse,
-  DownloadStreamMP4DownloadsListDownloadsResponse,
-  Downloads,
-} from './downloads';
+export { ClipCreateResponse, ClipCreateParams, Clips } from './clips';
+export { CopyCreateResponse, CopyCreateParams, Copies } from './copies';
+export { DirectUploadCreateResponse, DirectUploadCreateParams, DirectUploads } from './direct-uploads';
+export { DownloadCreateResponse, DownloadListResponse, DownloadDeleteResponse, Downloads } from './downloads';
 export { EmbedListResponse, Embeds } from './embeds';
+export { KeyCreateResponse, KeyListResponse, KeyDeleteResponse, Keys } from './keys';
 export {
-  KeyDeleteResponse,
-  KeyStreamSigningKeysCreateSigningKeysResponse,
-  KeyStreamSigningKeysListSigningKeysResponse,
-  Keys,
-} from './keys';
-export {
-  LiveInputUpdateResponse,
+  LiveInputCreateResponse,
+  LiveInputListResponse,
   LiveInputGetResponse,
-  LiveInputStreamLiveInputsCreateALiveInputResponse,
-  LiveInputStreamLiveInputsListLiveInputsResponse,
-  LiveInputUpdateParams,
-  LiveInputStreamLiveInputsCreateALiveInputParams,
-  LiveInputStreamLiveInputsListLiveInputsParams,
+  LiveInputReplaceResponse,
+  LiveInputCreateParams,
+  LiveInputListParams,
+  LiveInputReplaceParams,
   LiveInputs,
 } from './live-inputs/index';
 export {
-  StreamUpdateResponse,
+  StreamListResponse,
   StreamGetResponse,
-  StreamStreamVideosListVideosResponse,
-  StreamUpdateParams,
-  StreamStreamVideosInitiateVideoUploadsUsingTusParams,
-  StreamStreamVideosListVideosParams,
+  StreamCreateParams,
+  StreamListParams,
   Stream,
 } from './stream';
-export {
-  TokenStreamVideosCreateSignedURLTokensForVideosResponse,
-  TokenStreamVideosCreateSignedURLTokensForVideosParams,
-  Tokens,
-} from './tokens';
+export { TokenCreateResponse, TokenCreateParams, Tokens } from './tokens';
 export { VideoStorageUsageResponse, VideoStorageUsageParams, Videos } from './videos';
 export {
+  WatermarkCreateResponse,
+  WatermarkListResponse,
   WatermarkDeleteResponse,
   WatermarkGetResponse,
-  WatermarkStreamWatermarkProfileCreateWatermarkProfilesViaBasicUploadResponse,
-  WatermarkStreamWatermarkProfileListWatermarkProfilesResponse,
-  WatermarkStreamWatermarkProfileCreateWatermarkProfilesViaBasicUploadParams,
+  WatermarkCreateParams,
   Watermarks,
 } from './watermarks';
 export {
   WebhookDeleteResponse,
-  WebhookStreamWebhookCreateWebhooksResponse,
-  WebhookStreamWebhookViewWebhooksResponse,
-  WebhookStreamWebhookCreateWebhooksParams,
+  WebhookGetResponse,
+  WebhookReplaceResponse,
+  WebhookReplaceParams,
   Webhooks,
 } from './webhooks';

@@ -13,10 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource excludes', () => {
   // skipped: tests are disabled for the time being
-  test.skip('devicesGetSplitTunnelExcludeList', async () => {
-    const responsePromise = cloudflare.devices.policies.excludes.devicesGetSplitTunnelExcludeList(
-      '699d98642c564d2e855e9661899b7252',
-    );
+  test.skip('list', async () => {
+    const responsePromise = cloudflare.devices.policies.excludes.list('699d98642c564d2e855e9661899b7252');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -27,23 +25,22 @@ describe('resource excludes', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('devicesGetSplitTunnelExcludeList: request options instead of params are passed correctly', async () => {
+  test.skip('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.devices.policies.excludes.devicesGetSplitTunnelExcludeList(
-        '699d98642c564d2e855e9661899b7252',
-        { path: '/_stainless_unknown_path' },
-      ),
+      cloudflare.devices.policies.excludes.list('699d98642c564d2e855e9661899b7252', {
+        path: '/_stainless_unknown_path',
+      }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('devicesGetSplitTunnelExcludeListForADeviceSettingsPolicy', async () => {
-    const responsePromise =
-      cloudflare.devices.policies.excludes.devicesGetSplitTunnelExcludeListForADeviceSettingsPolicy(
-        '699d98642c564d2e855e9661899b7252',
-        'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      );
+  test.skip('replace: only required params', async () => {
+    const responsePromise = cloudflare.devices.policies.excludes.replace('699d98642c564d2e855e9661899b7252', [
+      { address: '192.0.2.0/24', description: 'Exclude testing domains from the tunnel' },
+      { address: '192.0.2.0/24', description: 'Exclude testing domains from the tunnel' },
+      { address: '192.0.2.0/24', description: 'Exclude testing domains from the tunnel' },
+    ]);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -54,104 +51,23 @@ describe('resource excludes', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('devicesGetSplitTunnelExcludeListForADeviceSettingsPolicy: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.devices.policies.excludes.devicesGetSplitTunnelExcludeListForADeviceSettingsPolicy(
-        '699d98642c564d2e855e9661899b7252',
-        'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('devicesSetSplitTunnelExcludeList: only required params', async () => {
-    const responsePromise = cloudflare.devices.policies.excludes.devicesSetSplitTunnelExcludeList(
-      '699d98642c564d2e855e9661899b7252',
-      [
-        { address: '192.0.2.0/24', description: 'Exclude testing domains from the tunnel' },
-        { address: '192.0.2.0/24', description: 'Exclude testing domains from the tunnel' },
-        { address: '192.0.2.0/24', description: 'Exclude testing domains from the tunnel' },
-      ],
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('devicesSetSplitTunnelExcludeList: required and optional params', async () => {
-    const response = await cloudflare.devices.policies.excludes.devicesSetSplitTunnelExcludeList(
-      '699d98642c564d2e855e9661899b7252',
-      [
-        {
-          address: '192.0.2.0/24',
-          description: 'Exclude testing domains from the tunnel',
-          host: '*.example.com',
-        },
-        {
-          address: '192.0.2.0/24',
-          description: 'Exclude testing domains from the tunnel',
-          host: '*.example.com',
-        },
-        {
-          address: '192.0.2.0/24',
-          description: 'Exclude testing domains from the tunnel',
-          host: '*.example.com',
-        },
-      ],
-    );
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('devicesSetSplitTunnelExcludeListForADeviceSettingsPolicy: only required params', async () => {
-    const responsePromise =
-      cloudflare.devices.policies.excludes.devicesSetSplitTunnelExcludeListForADeviceSettingsPolicy(
-        '699d98642c564d2e855e9661899b7252',
-        'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-        [
-          { address: '192.0.2.0/24', description: 'Exclude testing domains from the tunnel' },
-          { address: '192.0.2.0/24', description: 'Exclude testing domains from the tunnel' },
-          { address: '192.0.2.0/24', description: 'Exclude testing domains from the tunnel' },
-        ],
-      );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('devicesSetSplitTunnelExcludeListForADeviceSettingsPolicy: required and optional params', async () => {
-    const response =
-      await cloudflare.devices.policies.excludes.devicesSetSplitTunnelExcludeListForADeviceSettingsPolicy(
-        '699d98642c564d2e855e9661899b7252',
-        'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-        [
-          {
-            address: '192.0.2.0/24',
-            description: 'Exclude testing domains from the tunnel',
-            host: '*.example.com',
-          },
-          {
-            address: '192.0.2.0/24',
-            description: 'Exclude testing domains from the tunnel',
-            host: '*.example.com',
-          },
-          {
-            address: '192.0.2.0/24',
-            description: 'Exclude testing domains from the tunnel',
-            host: '*.example.com',
-          },
-        ],
-      );
+  test.skip('replace: required and optional params', async () => {
+    const response = await cloudflare.devices.policies.excludes.replace('699d98642c564d2e855e9661899b7252', [
+      {
+        address: '192.0.2.0/24',
+        description: 'Exclude testing domains from the tunnel',
+        host: '*.example.com',
+      },
+      {
+        address: '192.0.2.0/24',
+        description: 'Exclude testing domains from the tunnel',
+        host: '*.example.com',
+      },
+      {
+        address: '192.0.2.0/24',
+        description: 'Exclude testing domains from the tunnel',
+        host: '*.example.com',
+      },
+    ]);
   });
 });

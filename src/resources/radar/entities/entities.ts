@@ -11,20 +11,20 @@ export class Entities extends APIResource {
   /**
    * Get IP address information.
    */
-  ips(query: EntityIPsParams, options?: Core.RequestOptions): Core.APIPromise<EntityIPsResponse> {
+  list(query: EntityListParams, options?: Core.RequestOptions): Core.APIPromise<EntityListResponse> {
     return (
       this._client.get('/radar/entities/ip', { query, ...options }) as Core.APIPromise<{
-        result: EntityIPsResponse;
+        result: EntityListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface EntityIPsResponse {
-  ip: EntityIPsResponse.IP;
+export interface EntityListResponse {
+  ip: EntityListResponse.IP;
 }
 
-export namespace EntityIPsResponse {
+export namespace EntityListResponse {
   export interface IP {
     asn: string;
 
@@ -44,7 +44,7 @@ export namespace EntityIPsResponse {
   }
 }
 
-export interface EntityIPsParams {
+export interface EntityListParams {
   /**
    * IP address.
    */
@@ -57,8 +57,8 @@ export interface EntityIPsParams {
 }
 
 export namespace Entities {
-  export import EntityIPsResponse = EntitiesAPI.EntityIPsResponse;
-  export import EntityIPsParams = EntitiesAPI.EntityIPsParams;
+  export import EntityListResponse = EntitiesAPI.EntityListResponse;
+  export import EntityListParams = EntitiesAPI.EntityListParams;
   export import Asns = AsnsAPI.Asns;
   export import AsnRelResponse = AsnsAPI.AsnRelResponse;
   export import AsnRelParams = AsnsAPI.AsnRelParams;

@@ -1,22 +1,21 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
+  IntegrationCreateResponse,
   IntegrationUpdateResponse,
   IntegrationDeleteResponse,
-  IntegrationDevicePostureIntegrationsCreateDevicePostureIntegrationResponse,
-  IntegrationDevicePostureIntegrationsListDevicePostureIntegrationsResponse,
   IntegrationGetResponse,
+  IntegrationCreateParams,
   IntegrationUpdateParams,
-  IntegrationDevicePostureIntegrationsCreateDevicePostureIntegrationParams,
   Integrations,
 } from './integrations';
 export {
-  PostureUpdateResponse,
+  PostureCreateResponse,
+  PostureListResponse,
   PostureDeleteResponse,
-  PostureDevicePostureRulesCreateDevicePostureRuleResponse,
-  PostureDevicePostureRulesListDevicePostureRulesResponse,
   PostureGetResponse,
-  PostureUpdateParams,
-  PostureDevicePostureRulesCreateDevicePostureRuleParams,
+  PostureReplaceResponse,
+  PostureCreateParams,
+  PostureReplaceParams,
   Postures,
 } from './postures';

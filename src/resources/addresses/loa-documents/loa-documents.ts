@@ -12,28 +12,28 @@ export class LoaDocuments extends APIResource {
   /**
    * Submit LOA document (pdf format) under the account.
    */
-  ipAddressManagementPrefixesUploadLoaDocument(
+  create(
     accountId: string,
-    body: LoaDocumentIPAddressManagementPrefixesUploadLoaDocumentParams,
+    body: LoaDocumentCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LoaDocumentIPAddressManagementPrefixesUploadLoaDocumentResponse> {
+  ): Core.APIPromise<LoaDocumentCreateResponse> {
     return (
       this._client.post(
         `/accounts/${accountId}/addressing/loa_documents`,
         multipartFormRequestOptions({ body, ...options }),
-      ) as Core.APIPromise<{ result: LoaDocumentIPAddressManagementPrefixesUploadLoaDocumentResponse }>
+      ) as Core.APIPromise<{ result: LoaDocumentCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface LoaDocumentIPAddressManagementPrefixesUploadLoaDocumentResponse {
+export interface LoaDocumentCreateResponse {
   /**
    * Name of LOA document.
    */
   filename?: string;
 }
 
-export interface LoaDocumentIPAddressManagementPrefixesUploadLoaDocumentParams {
+export interface LoaDocumentCreateParams {
   /**
    * LOA document to upload.
    */
@@ -41,8 +41,8 @@ export interface LoaDocumentIPAddressManagementPrefixesUploadLoaDocumentParams {
 }
 
 export namespace LoaDocuments {
-  export import LoaDocumentIPAddressManagementPrefixesUploadLoaDocumentResponse = LoaDocumentsAPI.LoaDocumentIPAddressManagementPrefixesUploadLoaDocumentResponse;
-  export import LoaDocumentIPAddressManagementPrefixesUploadLoaDocumentParams = LoaDocumentsAPI.LoaDocumentIPAddressManagementPrefixesUploadLoaDocumentParams;
+  export import LoaDocumentCreateResponse = LoaDocumentsAPI.LoaDocumentCreateResponse;
+  export import LoaDocumentCreateParams = LoaDocumentsAPI.LoaDocumentCreateParams;
   export import Downloads = DownloadsAPI.Downloads;
   export import DownloadListResponse = DownloadsAPI.DownloadListResponse;
 }

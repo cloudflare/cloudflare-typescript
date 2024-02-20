@@ -19,6 +19,4 @@ export namespace D1 {
   export import Database = DatabaseAPI.Database;
   export import DatabaseDeleteResponse = DatabaseAPI.DatabaseDeleteResponse;
   export import DatabaseGetResponse = DatabaseAPI.DatabaseGetResponse;
-  export import DatabaseQueryResponse = DatabaseAPI.DatabaseQueryResponse;
-  export import DatabaseQueryParams = DatabaseAPI.DatabaseQueryParams;
 }

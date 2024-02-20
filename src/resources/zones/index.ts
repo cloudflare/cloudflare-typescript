@@ -1,13 +1,13 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
-  HoldEnforceResponse,
+  HoldCreateResponse,
+  HoldDeleteResponse,
   HoldGetResponse,
-  HoldRemoveResponse,
-  HoldEnforceParams,
-  HoldRemoveParams,
-  Hold,
-} from './hold';
+  HoldCreateParams,
+  HoldDeleteParams,
+  Holds,
+} from './holds';
 export {
   ZoneCreateResponse,
   ZoneUpdateResponse,

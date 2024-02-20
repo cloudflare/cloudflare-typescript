@@ -13,8 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource tokens', () => {
   // skipped: tests are disabled for the time being
-  test.skip('streamVideosCreateSignedURLTokensForVideos', async () => {
-    const responsePromise = cloudflare.stream.tokens.streamVideosCreateSignedURLTokensForVideos(
+  test.skip('create', async () => {
+    const responsePromise = cloudflare.stream.tokens.create(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'ea95132c15732412d22c1476fa83f27a',
       {},

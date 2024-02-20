@@ -1,52 +1,55 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
-  ACLUpdateResponse,
+  ACLCreateResponse,
+  ACLListResponse,
   ACLDeleteResponse,
   ACLGetResponse,
-  ACLSecondaryDNSACLCreateACLResponse,
-  ACLSecondaryDNSACLListACLsResponse,
-  ACLUpdateParams,
-  ACLSecondaryDNSACLCreateACLParams,
+  ACLReplaceResponse,
+  ACLCreateParams,
+  ACLReplaceParams,
   ACLs,
 } from './acls';
-export { ForceAxfrSecondaryDNSSecondaryZoneForceAxfrResponse, ForceAxfrs } from './force-axfrs';
+export { ForceAxfrCreateResponse, ForceAxfrs } from './force-axfrs';
 export {
+  IncomingCreateResponse,
   IncomingDeleteResponse,
-  IncomingSecondaryDNSSecondaryZoneCreateSecondaryZoneConfigurationResponse,
-  IncomingSecondaryDNSSecondaryZoneSecondaryZoneConfigurationDetailsResponse,
-  IncomingSecondaryDNSSecondaryZoneUpdateSecondaryZoneConfigurationResponse,
-  IncomingSecondaryDNSSecondaryZoneCreateSecondaryZoneConfigurationParams,
-  IncomingSecondaryDNSSecondaryZoneUpdateSecondaryZoneConfigurationParams,
-  Incomings,
-} from './incomings';
+  IncomingGetResponse,
+  IncomingReplaceResponse,
+  IncomingCreateParams,
+  IncomingReplaceParams,
+  Incoming,
+} from './incoming';
 export {
+  OutgoingCreateResponse,
   OutgoingDeleteResponse,
-  OutgoingSecondaryDNSPrimaryZoneCreatePrimaryZoneConfigurationResponse,
-  OutgoingSecondaryDNSPrimaryZonePrimaryZoneConfigurationDetailsResponse,
-  OutgoingSecondaryDNSPrimaryZoneUpdatePrimaryZoneConfigurationResponse,
-  OutgoingSecondaryDNSPrimaryZoneCreatePrimaryZoneConfigurationParams,
-  OutgoingSecondaryDNSPrimaryZoneUpdatePrimaryZoneConfigurationParams,
-  Outgoings,
-} from './outgoings/index';
+  OutgoingDisableResponse,
+  OutgoingEnableResponse,
+  OutgoingForceNotifyResponse,
+  OutgoingGetResponse,
+  OutgoingReplaceResponse,
+  OutgoingCreateParams,
+  OutgoingReplaceParams,
+  Outgoing,
+} from './outgoing/index';
 export {
-  PeerUpdateResponse,
+  PeerCreateResponse,
+  PeerListResponse,
   PeerDeleteResponse,
   PeerGetResponse,
-  PeerSecondaryDNSPeerCreatePeerResponse,
-  PeerSecondaryDNSPeerListPeersResponse,
-  PeerUpdateParams,
-  PeerSecondaryDNSPeerCreatePeerParams,
+  PeerReplaceResponse,
+  PeerCreateParams,
+  PeerReplaceParams,
   Peers,
 } from './peers';
 export { SecondaryDNS } from './secondary-dns';
 export {
-  TsigUpdateResponse,
+  TsigCreateResponse,
+  TsigListResponse,
   TsigDeleteResponse,
   TsigGetResponse,
-  TsigSecondaryDNSTsigCreateTsigResponse,
-  TsigSecondaryDNSTsigListTsiGsResponse,
-  TsigUpdateParams,
-  TsigSecondaryDNSTsigCreateTsigParams,
+  TsigReplaceResponse,
+  TsigCreateParams,
+  TsigReplaceParams,
   Tsigs,
 } from './tsigs';

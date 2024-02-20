@@ -5,16 +5,18 @@ export {
   DeploymentListResponse,
   DeploymentDeleteResponse,
   DeploymentGetResponse,
+  DeploymentRetryResponse,
+  DeploymentRollbackResponse,
   DeploymentCreateParams,
   Deployments,
 } from './deployments/index';
 export {
+  DomainCreateResponse,
   DomainUpdateResponse,
+  DomainListResponse,
   DomainDeleteResponse,
   DomainGetResponse,
-  DomainPagesDomainsAddDomainResponse,
-  DomainPagesDomainsGetDomainsResponse,
-  DomainPagesDomainsAddDomainParams,
+  DomainCreateParams,
   Domains,
 } from './domains';
 export {

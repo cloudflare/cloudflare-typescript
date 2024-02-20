@@ -13,12 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource acls', () => {
   // skipped: tests are disabled for the time being
-  test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.secondaryDNS.acls.update(
-      '01a7362d577a6c3019a474fd6f485823',
-      '23ff594956f20c2a721606e94745a8aa',
-      { ip_range: '192.0.2.53/28', name: 'my-acl-1' },
-    );
+  test.skip('create: only required params', async () => {
+    const responsePromise = cloudflare.secondaryDNS.acls.create('01a7362d577a6c3019a474fd6f485823', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -29,12 +25,30 @@ describe('resource acls', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.secondaryDNS.acls.update(
-      '01a7362d577a6c3019a474fd6f485823',
-      '23ff594956f20c2a721606e94745a8aa',
-      { ip_range: '192.0.2.53/28', name: 'my-acl-1' },
-    );
+  test.skip('create: required and optional params', async () => {
+    const response = await cloudflare.secondaryDNS.acls.create('01a7362d577a6c3019a474fd6f485823', {});
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list', async () => {
+    const responsePromise = cloudflare.secondaryDNS.acls.list('01a7362d577a6c3019a474fd6f485823');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.secondaryDNS.acls.list('01a7362d577a6c3019a474fd6f485823', {
+        path: '/_stainless_unknown_path',
+      }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
@@ -80,10 +94,11 @@ describe('resource acls', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('secondaryDNSACLCreateACL: only required params', async () => {
-    const responsePromise = cloudflare.secondaryDNS.acls.secondaryDNSACLCreateACL(
+  test.skip('replace: only required params', async () => {
+    const responsePromise = cloudflare.secondaryDNS.acls.replace(
       '01a7362d577a6c3019a474fd6f485823',
-      {},
+      '23ff594956f20c2a721606e94745a8aa',
+      { ip_range: '192.0.2.53/28', name: 'my-acl-1' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -95,34 +110,11 @@ describe('resource acls', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('secondaryDNSACLCreateACL: required and optional params', async () => {
-    const response = await cloudflare.secondaryDNS.acls.secondaryDNSACLCreateACL(
+  test.skip('replace: required and optional params', async () => {
+    const response = await cloudflare.secondaryDNS.acls.replace(
       '01a7362d577a6c3019a474fd6f485823',
-      {},
+      '23ff594956f20c2a721606e94745a8aa',
+      { ip_range: '192.0.2.53/28', name: 'my-acl-1' },
     );
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('secondaryDNSACLListACLs', async () => {
-    const responsePromise = cloudflare.secondaryDNS.acls.secondaryDNSACLListACLs(
-      '01a7362d577a6c3019a474fd6f485823',
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('secondaryDNSACLListACLs: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.secondaryDNS.acls.secondaryDNSACLListACLs('01a7362d577a6c3019a474fd6f485823', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 });

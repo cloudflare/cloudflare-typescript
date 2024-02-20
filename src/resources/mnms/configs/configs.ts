@@ -9,6 +9,39 @@ export class Configs extends APIResource {
   fulls: FullsAPI.Fulls = new FullsAPI.Fulls(this._client);
 
   /**
+   * Create a new network monitoring configuration.
+   */
+  create(accountIdentifier: unknown, options?: Core.RequestOptions): Core.APIPromise<ConfigCreateResponse> {
+    return (
+      this._client.post(`/accounts/${accountIdentifier}/mnm/config`, options) as Core.APIPromise<{
+        result: ConfigCreateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Update fields in an existing network monitoring configuration.
+   */
+  update(accountIdentifier: unknown, options?: Core.RequestOptions): Core.APIPromise<ConfigUpdateResponse> {
+    return (
+      this._client.patch(`/accounts/${accountIdentifier}/mnm/config`, options) as Core.APIPromise<{
+        result: ConfigUpdateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Lists default sampling and router IPs for account.
+   */
+  list(accountIdentifier: unknown, options?: Core.RequestOptions): Core.APIPromise<ConfigListResponse> {
+    return (
+      this._client.get(`/accounts/${accountIdentifier}/mnm/config`, options) as Core.APIPromise<{
+        result: ConfigListResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Delete an existing network monitoring configuration.
    */
   delete(accountIdentifier: unknown, options?: Core.RequestOptions): Core.APIPromise<ConfigDeleteResponse> {
@@ -20,61 +53,61 @@ export class Configs extends APIResource {
   }
 
   /**
-   * Create a new network monitoring configuration.
-   */
-  magicNetworkMonitoringConfigurationCreateAccountConfiguration(
-    accountIdentifier: unknown,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ConfigMagicNetworkMonitoringConfigurationCreateAccountConfigurationResponse> {
-    return (
-      this._client.post(`/accounts/${accountIdentifier}/mnm/config`, options) as Core.APIPromise<{
-        result: ConfigMagicNetworkMonitoringConfigurationCreateAccountConfigurationResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Lists default sampling and router IPs for account.
-   */
-  magicNetworkMonitoringConfigurationListAccountConfiguration(
-    accountIdentifier: unknown,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ConfigMagicNetworkMonitoringConfigurationListAccountConfigurationResponse> {
-    return (
-      this._client.get(`/accounts/${accountIdentifier}/mnm/config`, options) as Core.APIPromise<{
-        result: ConfigMagicNetworkMonitoringConfigurationListAccountConfigurationResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Update fields in an existing network monitoring configuration.
-   */
-  magicNetworkMonitoringConfigurationUpdateAccountConfigurationFields(
-    accountIdentifier: unknown,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ConfigMagicNetworkMonitoringConfigurationUpdateAccountConfigurationFieldsResponse> {
-    return (
-      this._client.patch(`/accounts/${accountIdentifier}/mnm/config`, options) as Core.APIPromise<{
-        result: ConfigMagicNetworkMonitoringConfigurationUpdateAccountConfigurationFieldsResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Update an existing network monitoring configuration, requires the entire
    * configuration to be updated at once.
    */
-  magicNetworkMonitoringConfigurationUpdateAnEntireAccountConfiguration(
-    accountIdentifier: unknown,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ConfigMagicNetworkMonitoringConfigurationUpdateAnEntireAccountConfigurationResponse> {
+  replace(accountIdentifier: unknown, options?: Core.RequestOptions): Core.APIPromise<ConfigReplaceResponse> {
     return (
       this._client.put(`/accounts/${accountIdentifier}/mnm/config`, options) as Core.APIPromise<{
-        result: ConfigMagicNetworkMonitoringConfigurationUpdateAnEntireAccountConfigurationResponse;
+        result: ConfigReplaceResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+
+export interface ConfigCreateResponse {
+  /**
+   * Fallback sampling rate of flow messages being sent in packets per second. This
+   * should match the packet sampling rate configured on the router.
+   */
+  default_sampling: number;
+
+  /**
+   * The account name.
+   */
+  name: string;
+
+  router_ips: Array<string>;
+}
+
+export interface ConfigUpdateResponse {
+  /**
+   * Fallback sampling rate of flow messages being sent in packets per second. This
+   * should match the packet sampling rate configured on the router.
+   */
+  default_sampling: number;
+
+  /**
+   * The account name.
+   */
+  name: string;
+
+  router_ips: Array<string>;
+}
+
+export interface ConfigListResponse {
+  /**
+   * Fallback sampling rate of flow messages being sent in packets per second. This
+   * should match the packet sampling rate configured on the router.
+   */
+  default_sampling: number;
+
+  /**
+   * The account name.
+   */
+  name: string;
+
+  router_ips: Array<string>;
 }
 
 export interface ConfigDeleteResponse {
@@ -92,52 +125,7 @@ export interface ConfigDeleteResponse {
   router_ips: Array<string>;
 }
 
-export interface ConfigMagicNetworkMonitoringConfigurationCreateAccountConfigurationResponse {
-  /**
-   * Fallback sampling rate of flow messages being sent in packets per second. This
-   * should match the packet sampling rate configured on the router.
-   */
-  default_sampling: number;
-
-  /**
-   * The account name.
-   */
-  name: string;
-
-  router_ips: Array<string>;
-}
-
-export interface ConfigMagicNetworkMonitoringConfigurationListAccountConfigurationResponse {
-  /**
-   * Fallback sampling rate of flow messages being sent in packets per second. This
-   * should match the packet sampling rate configured on the router.
-   */
-  default_sampling: number;
-
-  /**
-   * The account name.
-   */
-  name: string;
-
-  router_ips: Array<string>;
-}
-
-export interface ConfigMagicNetworkMonitoringConfigurationUpdateAccountConfigurationFieldsResponse {
-  /**
-   * Fallback sampling rate of flow messages being sent in packets per second. This
-   * should match the packet sampling rate configured on the router.
-   */
-  default_sampling: number;
-
-  /**
-   * The account name.
-   */
-  name: string;
-
-  router_ips: Array<string>;
-}
-
-export interface ConfigMagicNetworkMonitoringConfigurationUpdateAnEntireAccountConfigurationResponse {
+export interface ConfigReplaceResponse {
   /**
    * Fallback sampling rate of flow messages being sent in packets per second. This
    * should match the packet sampling rate configured on the router.
@@ -153,11 +141,11 @@ export interface ConfigMagicNetworkMonitoringConfigurationUpdateAnEntireAccountC
 }
 
 export namespace Configs {
+  export import ConfigCreateResponse = ConfigsAPI.ConfigCreateResponse;
+  export import ConfigUpdateResponse = ConfigsAPI.ConfigUpdateResponse;
+  export import ConfigListResponse = ConfigsAPI.ConfigListResponse;
   export import ConfigDeleteResponse = ConfigsAPI.ConfigDeleteResponse;
-  export import ConfigMagicNetworkMonitoringConfigurationCreateAccountConfigurationResponse = ConfigsAPI.ConfigMagicNetworkMonitoringConfigurationCreateAccountConfigurationResponse;
-  export import ConfigMagicNetworkMonitoringConfigurationListAccountConfigurationResponse = ConfigsAPI.ConfigMagicNetworkMonitoringConfigurationListAccountConfigurationResponse;
-  export import ConfigMagicNetworkMonitoringConfigurationUpdateAccountConfigurationFieldsResponse = ConfigsAPI.ConfigMagicNetworkMonitoringConfigurationUpdateAccountConfigurationFieldsResponse;
-  export import ConfigMagicNetworkMonitoringConfigurationUpdateAnEntireAccountConfigurationResponse = ConfigsAPI.ConfigMagicNetworkMonitoringConfigurationUpdateAnEntireAccountConfigurationResponse;
+  export import ConfigReplaceResponse = ConfigsAPI.ConfigReplaceResponse;
   export import Fulls = FullsAPI.Fulls;
-  export import FullMagicNetworkMonitoringConfigurationListRulesAndAccountConfigurationResponse = FullsAPI.FullMagicNetworkMonitoringConfigurationListRulesAndAccountConfigurationResponse;
+  export import FullListResponse = FullsAPI.FullListResponse;
 }

@@ -13,8 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource downloads', () => {
   // skipped: tests are disabled for the time being
-  test.skip('radarPostDatasetDownload: only required params', async () => {
-    const responsePromise = cloudflare.radar.datasets.downloads.radarPostDatasetDownload({ datasetId: 3 });
+  test.skip('create: only required params', async () => {
+    const responsePromise = cloudflare.radar.datasets.downloads.create({ datasetId: 3 });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -25,10 +25,7 @@ describe('resource downloads', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('radarPostDatasetDownload: required and optional params', async () => {
-    const response = await cloudflare.radar.datasets.downloads.radarPostDatasetDownload({
-      datasetId: 3,
-      format: 'JSON',
-    });
+  test.skip('create: required and optional params', async () => {
+    const response = await cloudflare.radar.datasets.downloads.create({ datasetId: 3, format: 'JSON' });
   });
 });

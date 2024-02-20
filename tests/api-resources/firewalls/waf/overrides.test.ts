@@ -13,12 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource overrides', () => {
   // skipped: tests are disabled for the time being
-  test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.firewalls.waf.overrides.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'de677e5818985db1285d0e80225f06e5',
-      {},
-    );
+  test.skip('create: only required params', async () => {
+    const responsePromise = cloudflare.firewalls.waf.overrides.create('023e105f4ecef8ad9ca31a8372d0c353', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -29,12 +25,42 @@ describe('resource overrides', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.firewalls.waf.overrides.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'de677e5818985db1285d0e80225f06e5',
-      {},
-    );
+  test.skip('create: required and optional params', async () => {
+    const response = await cloudflare.firewalls.waf.overrides.create('023e105f4ecef8ad9ca31a8372d0c353', {});
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list', async () => {
+    const responsePromise = cloudflare.firewalls.waf.overrides.list('023e105f4ecef8ad9ca31a8372d0c353');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.firewalls.waf.overrides.list('023e105f4ecef8ad9ca31a8372d0c353', {
+        path: '/_stainless_unknown_path',
+      }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.firewalls.waf.overrides.list(
+        '023e105f4ecef8ad9ca31a8372d0c353',
+        { page: 1, per_page: 5 },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
@@ -80,9 +106,10 @@ describe('resource overrides', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('wafOverridesCreateAWAFOverride: only required params', async () => {
-    const responsePromise = cloudflare.firewalls.waf.overrides.wafOverridesCreateAWAFOverride(
+  test.skip('replace: only required params', async () => {
+    const responsePromise = cloudflare.firewalls.waf.overrides.replace(
       '023e105f4ecef8ad9ca31a8372d0c353',
+      'de677e5818985db1285d0e80225f06e5',
       {},
     );
     const rawResponse = await responsePromise.asResponse();
@@ -95,46 +122,11 @@ describe('resource overrides', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('wafOverridesCreateAWAFOverride: required and optional params', async () => {
-    const response = await cloudflare.firewalls.waf.overrides.wafOverridesCreateAWAFOverride(
+  test.skip('replace: required and optional params', async () => {
+    const response = await cloudflare.firewalls.waf.overrides.replace(
       '023e105f4ecef8ad9ca31a8372d0c353',
+      'de677e5818985db1285d0e80225f06e5',
       {},
     );
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('wafOverridesListWAFOverrides', async () => {
-    const responsePromise = cloudflare.firewalls.waf.overrides.wafOverridesListWAFOverrides(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('wafOverridesListWAFOverrides: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.firewalls.waf.overrides.wafOverridesListWAFOverrides('023e105f4ecef8ad9ca31a8372d0c353', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('wafOverridesListWAFOverrides: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.firewalls.waf.overrides.wafOverridesListWAFOverrides(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        { page: 1, per_page: 5 },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 });

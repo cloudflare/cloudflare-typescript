@@ -13,11 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource configurations', () => {
   // skipped: tests are disabled for the time being
-  test.skip('zeroTrustAccountsGetZeroTrustAccountConfiguration', async () => {
-    const responsePromise =
-      cloudflare.gateways.configurations.zeroTrustAccountsGetZeroTrustAccountConfiguration(
-        '699d98642c564d2e855e9661899b7252',
-      );
+  test.skip('update', async () => {
+    const responsePromise = cloudflare.gateways.configurations.update('699d98642c564d2e855e9661899b7252', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -28,39 +25,33 @@ describe('resource configurations', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('zeroTrustAccountsGetZeroTrustAccountConfiguration: request options instead of params are passed correctly', async () => {
+  test.skip('get', async () => {
+    const responsePromise = cloudflare.gateways.configurations.get('699d98642c564d2e855e9661899b7252');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.gateways.configurations.zeroTrustAccountsGetZeroTrustAccountConfiguration(
-        '699d98642c564d2e855e9661899b7252',
-        { path: '/_stainless_unknown_path' },
-      ),
+      cloudflare.gateways.configurations.get('699d98642c564d2e855e9661899b7252', {
+        path: '/_stainless_unknown_path',
+      }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('zeroTrustAccountsPatchZeroTrustAccountConfiguration', async () => {
-    const responsePromise =
-      cloudflare.gateways.configurations.zeroTrustAccountsPatchZeroTrustAccountConfiguration(
-        '699d98642c564d2e855e9661899b7252',
-        {},
-      );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('zeroTrustAccountsUpdateZeroTrustAccountConfiguration', async () => {
-    const responsePromise =
-      cloudflare.gateways.configurations.zeroTrustAccountsUpdateZeroTrustAccountConfiguration(
-        '699d98642c564d2e855e9661899b7252',
-        {},
-      );
+  test.skip('replace', async () => {
+    const responsePromise = cloudflare.gateways.configurations.replace(
+      '699d98642c564d2e855e9661899b7252',
+      {},
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

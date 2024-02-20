@@ -13,8 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource schedules', () => {
   // skipped: tests are disabled for the time being
-  test.skip('workerCronTriggerGetCronTriggers', async () => {
-    const responsePromise = cloudflare.workers.scripts.schedules.workerCronTriggerGetCronTriggers(
+  test.skip('list', async () => {
+    const responsePromise = cloudflare.workers.scripts.schedules.list(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'this-is_my_script-01',
     );
@@ -28,20 +28,18 @@ describe('resource schedules', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('workerCronTriggerGetCronTriggers: request options instead of params are passed correctly', async () => {
+  test.skip('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.workers.scripts.schedules.workerCronTriggerGetCronTriggers(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        'this-is_my_script-01',
-        { path: '/_stainless_unknown_path' },
-      ),
+      cloudflare.workers.scripts.schedules.list('023e105f4ecef8ad9ca31a8372d0c353', 'this-is_my_script-01', {
+        path: '/_stainless_unknown_path',
+      }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('workerCronTriggerUpdateCronTriggers: only required params', async () => {
-    const responsePromise = cloudflare.workers.scripts.schedules.workerCronTriggerUpdateCronTriggers(
+  test.skip('replace: only required params', async () => {
+    const responsePromise = cloudflare.workers.scripts.schedules.replace(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'this-is_my_script-01',
       "[{'cron': '*/30 * * * *'}]",
@@ -56,8 +54,8 @@ describe('resource schedules', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('workerCronTriggerUpdateCronTriggers: required and optional params', async () => {
-    const response = await cloudflare.workers.scripts.schedules.workerCronTriggerUpdateCronTriggers(
+  test.skip('replace: required and optional params', async () => {
+    const response = await cloudflare.workers.scripts.schedules.replace(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'this-is_my_script-01',
       "[{'cron': '*/30 * * * *'}]",

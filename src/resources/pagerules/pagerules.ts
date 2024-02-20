@@ -25,23 +25,6 @@ export class Pagerules extends APIResource {
   }
 
   /**
-   * Replaces the configuration of an existing Page Rule. The configuration of the
-   * updated Page Rule will exactly match the data passed in the API request.
-   */
-  update(
-    zoneId: string,
-    pageruleId: string,
-    body: PageruleUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PageruleUpdateResponse> {
-    return (
-      this._client.put(`/zones/${zoneId}/pagerules/${pageruleId}`, { body, ...options }) as Core.APIPromise<{
-        result: PageruleUpdateResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Fetches Page Rules in a zone.
    */
   list(
@@ -94,11 +77,26 @@ export class Pagerules extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Replaces the configuration of an existing Page Rule. The configuration of the
+   * updated Page Rule will exactly match the data passed in the API request.
+   */
+  replace(
+    zoneId: string,
+    pageruleId: string,
+    body: PageruleReplaceParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PageruleReplaceResponse> {
+    return (
+      this._client.put(`/zones/${zoneId}/pagerules/${pageruleId}`, { body, ...options }) as Core.APIPromise<{
+        result: PageruleReplaceResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
 export type PageruleCreateResponse = unknown | string;
-
-export type PageruleUpdateResponse = unknown | string;
 
 export type PageruleListResponse = Array<PageruleListResponse.PageruleListResponseItem>;
 
@@ -219,6 +217,8 @@ export interface PageruleDeleteResponse {
 
 export type PageruleGetResponse = unknown | string;
 
+export type PageruleReplaceResponse = unknown | string;
+
 export interface PageruleCreateParams {
   /**
    * The set of actions to perform if the targets of this rule match the request.
@@ -305,17 +305,40 @@ export namespace PageruleCreateParams {
   }
 }
 
-export interface PageruleUpdateParams {
+export interface PageruleListParams {
+  /**
+   * The direction used to sort returned Page Rules.
+   */
+  direction?: 'asc' | 'desc';
+
+  /**
+   * When set to `all`, all the search requirements must match. When set to `any`,
+   * only one of the search requirements has to match.
+   */
+  match?: 'any' | 'all';
+
+  /**
+   * The field used to sort returned Page Rules.
+   */
+  order?: 'status' | 'priority';
+
+  /**
+   * The status of the Page Rule.
+   */
+  status?: 'active' | 'disabled';
+}
+
+export interface PageruleReplaceParams {
   /**
    * The set of actions to perform if the targets of this rule match the request.
    * Actions can redirect to another URL or override settings, but not both.
    */
-  actions: Array<PageruleUpdateParams.Action>;
+  actions: Array<PageruleReplaceParams.Action>;
 
   /**
    * The rule targets to evaluate on each request.
    */
-  targets: Array<PageruleUpdateParams.Target>;
+  targets: Array<PageruleReplaceParams.Target>;
 
   /**
    * The priority of the rule, used to define which Page Rule is processed over
@@ -332,7 +355,7 @@ export interface PageruleUpdateParams {
   status?: 'active' | 'disabled';
 }
 
-export namespace PageruleUpdateParams {
+export namespace PageruleReplaceParams {
   export interface Action {
     /**
      * The type of route.
@@ -391,38 +414,15 @@ export namespace PageruleUpdateParams {
   }
 }
 
-export interface PageruleListParams {
-  /**
-   * The direction used to sort returned Page Rules.
-   */
-  direction?: 'asc' | 'desc';
-
-  /**
-   * When set to `all`, all the search requirements must match. When set to `any`,
-   * only one of the search requirements has to match.
-   */
-  match?: 'any' | 'all';
-
-  /**
-   * The field used to sort returned Page Rules.
-   */
-  order?: 'status' | 'priority';
-
-  /**
-   * The status of the Page Rule.
-   */
-  status?: 'active' | 'disabled';
-}
-
 export namespace Pagerules {
   export import PageruleCreateResponse = PagerulesAPI.PageruleCreateResponse;
-  export import PageruleUpdateResponse = PagerulesAPI.PageruleUpdateResponse;
   export import PageruleListResponse = PagerulesAPI.PageruleListResponse;
   export import PageruleDeleteResponse = PagerulesAPI.PageruleDeleteResponse;
   export import PageruleGetResponse = PagerulesAPI.PageruleGetResponse;
+  export import PageruleReplaceResponse = PagerulesAPI.PageruleReplaceResponse;
   export import PageruleCreateParams = PagerulesAPI.PageruleCreateParams;
-  export import PageruleUpdateParams = PagerulesAPI.PageruleUpdateParams;
   export import PageruleListParams = PagerulesAPI.PageruleListParams;
+  export import PageruleReplaceParams = PagerulesAPI.PageruleReplaceParams;
   export import Settings = SettingsAPI.Settings;
-  export import SettingAvailablePageRulesSettingsListAvailablePageRulesSettingsResponse = SettingsAPI.SettingAvailablePageRulesSettingsListAvailablePageRulesSettingsResponse;
+  export import SettingListResponse = SettingsAPI.SettingListResponse;
 }

@@ -13,12 +13,25 @@ const cloudflare = new Cloudflare({
 
 describe('resource rules', () => {
   // skipped: tests are disabled for the time being
+  test.skip('create: only required params', async () => {
+    const responsePromise = cloudflare.firewalls.rules.create('023e105f4ecef8ad9ca31a8372d0c353', {});
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('create: required and optional params', async () => {
+    const response = await cloudflare.firewalls.rules.create('023e105f4ecef8ad9ca31a8372d0c353', {});
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.firewalls.rules.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '372e67954025e0ba6aaa6d586b9e0b60',
-      {},
-    );
+    const responsePromise = cloudflare.firewalls.rules.update('023e105f4ecef8ad9ca31a8372d0c353', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -30,11 +43,41 @@ describe('resource rules', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.firewalls.rules.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '372e67954025e0ba6aaa6d586b9e0b60',
-      {},
-    );
+    const response = await cloudflare.firewalls.rules.update('023e105f4ecef8ad9ca31a8372d0c353', {});
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list', async () => {
+    const responsePromise = cloudflare.firewalls.rules.list('023e105f4ecef8ad9ca31a8372d0c353');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.firewalls.rules.list('023e105f4ecef8ad9ca31a8372d0c353', {
+        path: '/_stainless_unknown_path',
+      }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.firewalls.rules.list(
+        '023e105f4ecef8ad9ca31a8372d0c353',
+        { action: 'block', description: 'mir', page: 1, paused: false, per_page: 5 },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
@@ -51,111 +94,6 @@ describe('resource rules', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('firewallRulesCreateFirewallRules: only required params', async () => {
-    const responsePromise = cloudflare.firewalls.rules.firewallRulesCreateFirewallRules(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      {},
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('firewallRulesCreateFirewallRules: required and optional params', async () => {
-    const response = await cloudflare.firewalls.rules.firewallRulesCreateFirewallRules(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      {},
-    );
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('firewallRulesListFirewallRules', async () => {
-    const responsePromise = cloudflare.firewalls.rules.firewallRulesListFirewallRules(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('firewallRulesListFirewallRules: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.firewalls.rules.firewallRulesListFirewallRules('023e105f4ecef8ad9ca31a8372d0c353', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('firewallRulesListFirewallRules: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.firewalls.rules.firewallRulesListFirewallRules(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        { action: 'block', description: 'mir', page: 1, paused: false, per_page: 5 },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('firewallRulesUpdateFirewallRules: only required params', async () => {
-    const responsePromise = cloudflare.firewalls.rules.firewallRulesUpdateFirewallRules(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      {},
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('firewallRulesUpdateFirewallRules: required and optional params', async () => {
-    const response = await cloudflare.firewalls.rules.firewallRulesUpdateFirewallRules(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      {},
-    );
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('firewallRulesUpdatePriorityOfFirewallRules: only required params', async () => {
-    const responsePromise = cloudflare.firewalls.rules.firewallRulesUpdatePriorityOfFirewallRules(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      {},
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('firewallRulesUpdatePriorityOfFirewallRules: required and optional params', async () => {
-    const response = await cloudflare.firewalls.rules.firewallRulesUpdatePriorityOfFirewallRules(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      {},
-    );
   });
 
   // skipped: tests are disabled for the time being
@@ -181,5 +119,30 @@ describe('resource rules', () => {
         path: '/_stainless_unknown_path',
       }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('replace: only required params', async () => {
+    const responsePromise = cloudflare.firewalls.rules.replace(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '372e67954025e0ba6aaa6d586b9e0b60',
+      {},
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('replace: required and optional params', async () => {
+    const response = await cloudflare.firewalls.rules.replace(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '372e67954025e0ba6aaa6d586b9e0b60',
+      {},
+    );
   });
 });

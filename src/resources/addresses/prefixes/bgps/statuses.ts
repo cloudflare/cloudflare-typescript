@@ -6,44 +6,40 @@ import * as StatusesAPI from 'cloudflare/resources/addresses/prefixes/bgps/statu
 
 export class Statuses extends APIResource {
   /**
-   * List the current advertisement state for a prefix.
-   */
-  ipAddressManagementDynamicAdvertisementGetAdvertisementStatus(
-    accountId: string,
-    prefixId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<StatusIPAddressManagementDynamicAdvertisementGetAdvertisementStatusResponse> {
-    return (
-      this._client.get(
-        `/accounts/${accountId}/addressing/prefixes/${prefixId}/bgp/status`,
-        options,
-      ) as Core.APIPromise<{
-        result: StatusIPAddressManagementDynamicAdvertisementGetAdvertisementStatusResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Advertise or withdraw BGP route for a prefix.
    */
-  ipAddressManagementDynamicAdvertisementUpdatePrefixDynamicAdvertisementStatus(
+  update(
     accountId: string,
     prefixId: string,
-    body: StatusIPAddressManagementDynamicAdvertisementUpdatePrefixDynamicAdvertisementStatusParams,
+    body: StatusUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<StatusIPAddressManagementDynamicAdvertisementUpdatePrefixDynamicAdvertisementStatusResponse> {
+  ): Core.APIPromise<StatusUpdateResponse> {
     return (
       this._client.patch(`/accounts/${accountId}/addressing/prefixes/${prefixId}/bgp/status`, {
         body,
         ...options,
-      }) as Core.APIPromise<{
-        result: StatusIPAddressManagementDynamicAdvertisementUpdatePrefixDynamicAdvertisementStatusResponse;
-      }>
+      }) as Core.APIPromise<{ result: StatusUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * List the current advertisement state for a prefix.
+   */
+  get(
+    accountId: string,
+    prefixId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<StatusGetResponse> {
+    return (
+      this._client.get(
+        `/accounts/${accountId}/addressing/prefixes/${prefixId}/bgp/status`,
+        options,
+      ) as Core.APIPromise<{ result: StatusGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface StatusIPAddressManagementDynamicAdvertisementGetAdvertisementStatusResponse {
+export interface StatusUpdateResponse {
   /**
    * Enablement of prefix advertisement to the Internet.
    */
@@ -56,7 +52,7 @@ export interface StatusIPAddressManagementDynamicAdvertisementGetAdvertisementSt
   advertised_modified_at?: string | null;
 }
 
-export interface StatusIPAddressManagementDynamicAdvertisementUpdatePrefixDynamicAdvertisementStatusResponse {
+export interface StatusGetResponse {
   /**
    * Enablement of prefix advertisement to the Internet.
    */
@@ -69,7 +65,7 @@ export interface StatusIPAddressManagementDynamicAdvertisementUpdatePrefixDynami
   advertised_modified_at?: string | null;
 }
 
-export interface StatusIPAddressManagementDynamicAdvertisementUpdatePrefixDynamicAdvertisementStatusParams {
+export interface StatusUpdateParams {
   /**
    * Enablement of prefix advertisement to the Internet.
    */
@@ -77,7 +73,7 @@ export interface StatusIPAddressManagementDynamicAdvertisementUpdatePrefixDynami
 }
 
 export namespace Statuses {
-  export import StatusIPAddressManagementDynamicAdvertisementGetAdvertisementStatusResponse = StatusesAPI.StatusIPAddressManagementDynamicAdvertisementGetAdvertisementStatusResponse;
-  export import StatusIPAddressManagementDynamicAdvertisementUpdatePrefixDynamicAdvertisementStatusResponse = StatusesAPI.StatusIPAddressManagementDynamicAdvertisementUpdatePrefixDynamicAdvertisementStatusResponse;
-  export import StatusIPAddressManagementDynamicAdvertisementUpdatePrefixDynamicAdvertisementStatusParams = StatusesAPI.StatusIPAddressManagementDynamicAdvertisementUpdatePrefixDynamicAdvertisementStatusParams;
+  export import StatusUpdateResponse = StatusesAPI.StatusUpdateResponse;
+  export import StatusGetResponse = StatusesAPI.StatusGetResponse;
+  export import StatusUpdateParams = StatusesAPI.StatusUpdateParams;
 }

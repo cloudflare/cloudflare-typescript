@@ -8,24 +8,24 @@ export class Revokes extends APIResource {
   /**
    * Revokes a list of devices.
    */
-  devicesRevokeDevices(
+  create(
     identifier: unknown,
-    body: RevokeDevicesRevokeDevicesParams,
+    body: RevokeCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RevokeDevicesRevokeDevicesResponse | null> {
+  ): Core.APIPromise<RevokeCreateResponse | null> {
     return (
       this._client.post(`/accounts/${identifier}/devices/revoke`, { body, ...options }) as Core.APIPromise<{
-        result: RevokeDevicesRevokeDevicesResponse | null;
+        result: RevokeCreateResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type RevokeDevicesRevokeDevicesResponse = unknown | string;
+export type RevokeCreateResponse = unknown | string;
 
-export type RevokeDevicesRevokeDevicesParams = Array<string>;
+export type RevokeCreateParams = Array<string>;
 
 export namespace Revokes {
-  export import RevokeDevicesRevokeDevicesResponse = RevokesAPI.RevokeDevicesRevokeDevicesResponse;
-  export import RevokeDevicesRevokeDevicesParams = RevokesAPI.RevokeDevicesRevokeDevicesParams;
+  export import RevokeCreateResponse = RevokesAPI.RevokeCreateResponse;
+  export import RevokeCreateParams = RevokesAPI.RevokeCreateParams;
 }

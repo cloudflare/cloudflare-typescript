@@ -8,15 +8,30 @@ import { type Uploadable, multipartFormRequestOptions } from 'cloudflare/core';
 
 export class Content extends APIResource {
   /**
-   * Put script content from a worker with an environment
+   * Get script content from a worker with an environment
    */
-  update(
+  get(
     accountId: string,
     serviceName: string,
     environmentName: string,
-    params: ContentUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ContentUpdateResponse> {
+  ): Core.APIPromise<Response> {
+    return this._client.get(
+      `/accounts/${accountId}/workers/services/${serviceName}/environments/${environmentName}/content`,
+      { ...options, __binaryResponse: true },
+    );
+  }
+
+  /**
+   * Put script content from a worker with an environment
+   */
+  replace(
+    accountId: string,
+    serviceName: string,
+    environmentName: string,
+    params: ContentReplaceParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ContentReplaceResponse> {
     const {
       'CF-WORKER-BODY-PART': cfWorkerBodyPart,
       'CF-WORKER-MAIN-MODULE-PART': cfWorkerMainModulePart,
@@ -34,27 +49,12 @@ export class Content extends APIResource {
             ...options?.headers,
           },
         }),
-      ) as Core.APIPromise<{ result: ContentUpdateResponse }>
+      ) as Core.APIPromise<{ result: ContentReplaceResponse }>
     )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Get script content from a worker with an environment
-   */
-  get(
-    accountId: string,
-    serviceName: string,
-    environmentName: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Response> {
-    return this._client.get(
-      `/accounts/${accountId}/workers/services/${serviceName}/environments/${environmentName}/content`,
-      { ...options, __binaryResponse: true },
-    );
   }
 }
 
-export interface ContentUpdateResponse {
+export interface ContentReplaceResponse {
   /**
    * The id of the script in the Workers system. Usually the script name.
    */
@@ -93,7 +93,7 @@ export interface ContentUpdateResponse {
   /**
    * List of Workers that will consume logs from the attached Worker.
    */
-  tail_consumers?: Array<ContentUpdateResponse.TailConsumer>;
+  tail_consumers?: Array<ContentReplaceResponse.TailConsumer>;
 
   /**
    * Specifies the usage model for the Worker (e.g. 'bundled' or 'unbound').
@@ -101,7 +101,7 @@ export interface ContentUpdateResponse {
   usage_model?: string;
 }
 
-export namespace ContentUpdateResponse {
+export namespace ContentReplaceResponse {
   /**
    * A reference to a script that will consume logs from the attached Worker.
    */
@@ -123,7 +123,7 @@ export namespace ContentUpdateResponse {
   }
 }
 
-export interface ContentUpdateParams {
+export interface ContentReplaceParams {
   /**
    * Body param: A module comprising a Worker script, often a javascript file.
    * Multiple modules may be provided as separate named parts, but at least one
@@ -138,7 +138,7 @@ export interface ContentUpdateParams {
    * Body param: JSON encoded metadata about the uploaded parts and Worker
    * configuration.
    */
-  metadata?: ContentUpdateParams.Metadata;
+  metadata?: ContentReplaceParams.Metadata;
 
   /**
    * Header param: The multipart name of a script upload part containing script
@@ -153,7 +153,7 @@ export interface ContentUpdateParams {
   'CF-WORKER-MAIN-MODULE-PART'?: string;
 }
 
-export namespace ContentUpdateParams {
+export namespace ContentReplaceParams {
   /**
    * JSON encoded metadata about the uploaded parts and Worker configuration.
    */
@@ -174,6 +174,6 @@ export namespace ContentUpdateParams {
 }
 
 export namespace Content {
-  export import ContentUpdateResponse = ContentAPI.ContentUpdateResponse;
-  export import ContentUpdateParams = ContentAPI.ContentUpdateParams;
+  export import ContentReplaceResponse = ContentAPI.ContentReplaceResponse;
+  export import ContentReplaceParams = ContentAPI.ContentReplaceParams;
 }

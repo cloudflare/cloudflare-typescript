@@ -9,21 +9,21 @@ export class Previews extends APIResource {
    * Preview pool health using provided monitor details. The returned preview_id can
    * be used in the preview endpoint to retrieve the results.
    */
-  loadBalancerPoolsPreviewPool(
+  create(
     poolId: string,
-    body: PreviewLoadBalancerPoolsPreviewPoolParams,
+    body: PreviewCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PreviewLoadBalancerPoolsPreviewPoolResponse> {
+  ): Core.APIPromise<PreviewCreateResponse> {
     return (
       this._client.post(`/user/load_balancers/pools/${poolId}/preview`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: PreviewLoadBalancerPoolsPreviewPoolResponse }>
+      }) as Core.APIPromise<{ result: PreviewCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface PreviewLoadBalancerPoolsPreviewPoolResponse {
+export interface PreviewCreateResponse {
   /**
    * Monitored pool IDs mapped to their respective names.
    */
@@ -32,7 +32,7 @@ export interface PreviewLoadBalancerPoolsPreviewPoolResponse {
   preview_id?: string;
 }
 
-export interface PreviewLoadBalancerPoolsPreviewPoolParams {
+export interface PreviewCreateParams {
   /**
    * The expected HTTP response code or code range of the health check. This
    * parameter is only valid for HTTP and HTTPS monitors.
@@ -132,6 +132,6 @@ export interface PreviewLoadBalancerPoolsPreviewPoolParams {
 }
 
 export namespace Previews {
-  export import PreviewLoadBalancerPoolsPreviewPoolResponse = PreviewsAPI.PreviewLoadBalancerPoolsPreviewPoolResponse;
-  export import PreviewLoadBalancerPoolsPreviewPoolParams = PreviewsAPI.PreviewLoadBalancerPoolsPreviewPoolParams;
+  export import PreviewCreateResponse = PreviewsAPI.PreviewCreateResponse;
+  export import PreviewCreateParams = PreviewsAPI.PreviewCreateParams;
 }

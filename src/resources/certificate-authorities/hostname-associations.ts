@@ -9,55 +9,46 @@ export class HostnameAssociations extends APIResource {
   /**
    * List Hostname Associations
    */
-  clientCertificateForAZoneListHostnameAssociations(
+  list(
     zoneId: string,
-    query?: HostnameAssociationClientCertificateForAZoneListHostnameAssociationsParams,
+    query?: HostnameAssociationListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<HostnameAssociationClientCertificateForAZoneListHostnameAssociationsResponse>;
-  clientCertificateForAZoneListHostnameAssociations(
+  ): Core.APIPromise<HostnameAssociationListResponse>;
+  list(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<HostnameAssociationListResponse>;
+  list(
     zoneId: string,
+    query: HostnameAssociationListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<HostnameAssociationClientCertificateForAZoneListHostnameAssociationsResponse>;
-  clientCertificateForAZoneListHostnameAssociations(
-    zoneId: string,
-    query:
-      | HostnameAssociationClientCertificateForAZoneListHostnameAssociationsParams
-      | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<HostnameAssociationClientCertificateForAZoneListHostnameAssociationsResponse> {
+  ): Core.APIPromise<HostnameAssociationListResponse> {
     if (isRequestOptions(query)) {
-      return this.clientCertificateForAZoneListHostnameAssociations(zoneId, {}, query);
+      return this.list(zoneId, {}, query);
     }
     return (
       this._client.get(`/zones/${zoneId}/certificate_authorities/hostname_associations`, {
         query,
         ...options,
-      }) as Core.APIPromise<{
-        result: HostnameAssociationClientCertificateForAZoneListHostnameAssociationsResponse;
-      }>
+      }) as Core.APIPromise<{ result: HostnameAssociationListResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Replace Hostname Associations
    */
-  clientCertificateForAZonePutHostnameAssociations(
+  replace(
     zoneId: string,
-    body: HostnameAssociationClientCertificateForAZonePutHostnameAssociationsParams,
+    body: HostnameAssociationReplaceParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<HostnameAssociationClientCertificateForAZonePutHostnameAssociationsResponse> {
+  ): Core.APIPromise<HostnameAssociationReplaceResponse> {
     return (
       this._client.put(`/zones/${zoneId}/certificate_authorities/hostname_associations`, {
         body,
         ...options,
-      }) as Core.APIPromise<{
-        result: HostnameAssociationClientCertificateForAZonePutHostnameAssociationsResponse;
-      }>
+      }) as Core.APIPromise<{ result: HostnameAssociationReplaceResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface HostnameAssociationClientCertificateForAZoneListHostnameAssociationsResponse {
+export interface HostnameAssociationListResponse {
   hostnames?: Array<string>;
 
   /**
@@ -68,7 +59,7 @@ export interface HostnameAssociationClientCertificateForAZoneListHostnameAssocia
   mtls_certificate_id?: string;
 }
 
-export interface HostnameAssociationClientCertificateForAZonePutHostnameAssociationsResponse {
+export interface HostnameAssociationReplaceResponse {
   hostnames?: Array<string>;
 
   /**
@@ -79,7 +70,7 @@ export interface HostnameAssociationClientCertificateForAZonePutHostnameAssociat
   mtls_certificate_id?: string;
 }
 
-export interface HostnameAssociationClientCertificateForAZoneListHostnameAssociationsParams {
+export interface HostnameAssociationListParams {
   /**
    * The UUID to match against for a certificate that was uploaded to the mTLS
    * Certificate Management endpoint. If no mtls_certificate_id is given, the results
@@ -88,7 +79,7 @@ export interface HostnameAssociationClientCertificateForAZoneListHostnameAssocia
   mtls_certificate_id?: string;
 }
 
-export interface HostnameAssociationClientCertificateForAZonePutHostnameAssociationsParams {
+export interface HostnameAssociationReplaceParams {
   hostnames?: Array<string>;
 
   /**
@@ -100,8 +91,8 @@ export interface HostnameAssociationClientCertificateForAZonePutHostnameAssociat
 }
 
 export namespace HostnameAssociations {
-  export import HostnameAssociationClientCertificateForAZoneListHostnameAssociationsResponse = HostnameAssociationsAPI.HostnameAssociationClientCertificateForAZoneListHostnameAssociationsResponse;
-  export import HostnameAssociationClientCertificateForAZonePutHostnameAssociationsResponse = HostnameAssociationsAPI.HostnameAssociationClientCertificateForAZonePutHostnameAssociationsResponse;
-  export import HostnameAssociationClientCertificateForAZoneListHostnameAssociationsParams = HostnameAssociationsAPI.HostnameAssociationClientCertificateForAZoneListHostnameAssociationsParams;
-  export import HostnameAssociationClientCertificateForAZonePutHostnameAssociationsParams = HostnameAssociationsAPI.HostnameAssociationClientCertificateForAZonePutHostnameAssociationsParams;
+  export import HostnameAssociationListResponse = HostnameAssociationsAPI.HostnameAssociationListResponse;
+  export import HostnameAssociationReplaceResponse = HostnameAssociationsAPI.HostnameAssociationReplaceResponse;
+  export import HostnameAssociationListParams = HostnameAssociationsAPI.HostnameAssociationListParams;
+  export import HostnameAssociationReplaceParams = HostnameAssociationsAPI.HostnameAssociationReplaceParams;
 }

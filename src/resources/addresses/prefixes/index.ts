@@ -2,19 +2,19 @@
 
 export { BGPs } from './bgps/index';
 export {
+  DelegationCreateResponse,
+  DelegationListResponse,
   DelegationDeleteResponse,
-  DelegationIPAddressManagementPrefixDelegationCreatePrefixDelegationResponse,
-  DelegationIPAddressManagementPrefixDelegationListPrefixDelegationsResponse,
-  DelegationIPAddressManagementPrefixDelegationCreatePrefixDelegationParams,
+  DelegationCreateParams,
   Delegations,
 } from './delegations';
 export {
+  PrefixCreateResponse,
   PrefixUpdateResponse,
+  PrefixListResponse,
   PrefixDeleteResponse,
   PrefixGetResponse,
-  PrefixIPAddressManagementPrefixesAddPrefixResponse,
-  PrefixIPAddressManagementPrefixesListPrefixesResponse,
+  PrefixCreateParams,
   PrefixUpdateParams,
-  PrefixIPAddressManagementPrefixesAddPrefixParams,
   Prefixes,
 } from './prefixes';

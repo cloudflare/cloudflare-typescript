@@ -1,13 +1,13 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
-  CertificateUpdateResponse,
+  CertificateCreateResponse,
+  CertificateListResponse,
   CertificateDeleteResponse,
-  CertificateAccessMTLSAuthenticationAddAnMTLSCertificateResponse,
-  CertificateAccessMTLSAuthenticationListMTLSCertificatesResponse,
   CertificateGetResponse,
-  CertificateUpdateParams,
-  CertificateAccessMTLSAuthenticationAddAnMTLSCertificateParams,
+  CertificateReplaceResponse,
+  CertificateCreateParams,
+  CertificateReplaceParams,
   Certificates,
 } from './certificates';
-export { SettingUpdateResponse, SettingListResponse, SettingUpdateParams, Settings } from './settings';
+export { SettingListResponse, SettingReplaceResponse, SettingReplaceParams, Settings } from './settings';

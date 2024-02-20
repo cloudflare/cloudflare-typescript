@@ -2,15 +2,11 @@
 
 export { Downloads } from './downloads';
 export {
-  OwnershipMagicPcapCollectionAddBucketsForFullPacketCapturesResponse,
-  OwnershipMagicPcapCollectionListPcaPsBucketOwnershipResponse,
-  OwnershipMagicPcapCollectionAddBucketsForFullPacketCapturesParams,
+  OwnershipCreateResponse,
+  OwnershipGetResponse,
+  OwnershipValidateResponse,
+  OwnershipCreateParams,
+  OwnershipValidateParams,
   Ownerships,
-} from './ownerships/index';
-export {
-  PcapGetResponse,
-  PcapMagicPcapCollectionCreatePcapRequestResponse,
-  PcapMagicPcapCollectionListPacketCaptureRequestsResponse,
-  PcapMagicPcapCollectionCreatePcapRequestParams,
-  Pcaps,
-} from './pcaps';
+} from './ownerships';
+export { PcapCreateResponse, PcapListResponse, PcapGetResponse, PcapCreateParams, Pcaps } from './pcaps';

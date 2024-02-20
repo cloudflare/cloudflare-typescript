@@ -1,18 +1,13 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
-  IpsecTunnelUpdateResponse,
+  IpsecTunnelCreateResponse,
+  IpsecTunnelListResponse,
   IpsecTunnelDeleteResponse,
   IpsecTunnelGetResponse,
-  IpsecTunnelMagicIPsecTunnelsCreateIPsecTunnelsResponse,
-  IpsecTunnelMagicIPsecTunnelsListIPsecTunnelsResponse,
-  IpsecTunnelMagicIPsecTunnelsUpdateMultipleIPsecTunnelsResponse,
-  IpsecTunnelUpdateParams,
-  IpsecTunnelMagicIPsecTunnelsCreateIPsecTunnelsParams,
-  IpsecTunnelMagicIPsecTunnelsUpdateMultipleIPsecTunnelsParams,
+  IpsecTunnelReplaceResponse,
+  IpsecTunnelCreateParams,
+  IpsecTunnelReplaceParams,
   IpsecTunnels,
 } from './ipsec-tunnels';
-export {
-  PskGenerateMagicIPsecTunnelsGeneratePreSharedKeyPskForIPsecTunnelsResponse,
-  PskGenerates,
-} from './psk-generates';
+export { PskGenerateCreateResponse, PskGenerates } from './psk-generates';

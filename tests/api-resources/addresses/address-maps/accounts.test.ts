@@ -13,8 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource accounts', () => {
   // skipped: tests are disabled for the time being
-  test.skip('update', async () => {
-    const responsePromise = cloudflare.addresses.addressMaps.accounts.update(
+  test.skip('delete', async () => {
+    const responsePromise = cloudflare.addresses.addressMaps.accounts.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
     );
@@ -28,8 +28,8 @@ describe('resource accounts', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
-    const responsePromise = cloudflare.addresses.addressMaps.accounts.delete(
+  test.skip('replace', async () => {
+    const responsePromise = cloudflare.addresses.addressMaps.accounts.replace(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
     );

@@ -1,29 +1,23 @@
 // File generated from our OpenAPI spec by Stainless.
 
-export {
-  BulkDeleteResponse,
-  BulkWorkersKvNamespaceWriteMultipleKeyValuePairsResponse,
-  BulkDeleteParams,
-  BulkWorkersKvNamespaceWriteMultipleKeyValuePairsParams,
-  Bulks,
-} from './bulks';
+export { BulkDeleteResponse, BulkReplaceResponse, BulkDeleteParams, BulkReplaceParams, Bulk } from './bulk';
 export { KeyListResponse, KeyListParams, Keys } from './keys';
 export { MetadataGetResponse, Metadata } from './metadata';
 export {
-  NamespaceUpdateResponse,
+  NamespaceCreateResponse,
   NamespaceListResponse,
   NamespaceDeleteResponse,
-  NamespaceWorkersKvNamespaceCreateANamespaceResponse,
-  NamespaceUpdateParams,
+  NamespaceReplaceResponse,
+  NamespaceCreateParams,
   NamespaceListParams,
-  NamespaceWorkersKvNamespaceCreateANamespaceParams,
+  NamespaceReplaceParams,
   NamespaceListResponsesV4PagePaginationArray,
   Namespaces,
 } from './namespaces';
 export {
-  ValueUpdateResponse,
   ValueDeleteResponse,
   ValueGetResponse,
-  ValueUpdateParams,
+  ValueReplaceResponse,
+  ValueReplaceParams,
   Values,
 } from './values';

@@ -9,19 +9,28 @@ export class Lists extends APIResource {
   items: ItemsAPI.Items = new ItemsAPI.Items(this._client);
 
   /**
-   * Updates a configured Zero Trust list.
+   * Creates a new Zero Trust list.
    */
-  update(
+  create(
     accountId: unknown,
-    listId: string,
-    body: ListUpdateParams,
+    body: ListCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ListUpdateResponse> {
+  ): Core.APIPromise<ListCreateResponse> {
     return (
-      this._client.put(`/accounts/${accountId}/gateway/lists/${listId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: ListUpdateResponse }>
+      this._client.post(`/accounts/${accountId}/gateway/lists`, { body, ...options }) as Core.APIPromise<{
+        result: ListCreateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Fetches all Zero Trust lists for an account.
+   */
+  list(accountId: unknown, options?: Core.RequestOptions): Core.APIPromise<ListListResponse | null> {
+    return (
+      this._client.get(`/accounts/${accountId}/gateway/lists`, options) as Core.APIPromise<{
+        result: ListListResponse | null;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -52,45 +61,28 @@ export class Lists extends APIResource {
   }
 
   /**
-   * Creates a new Zero Trust list.
+   * Updates a configured Zero Trust list.
    */
-  zeroTrustListsCreateZeroTrustList(
+  replace(
     accountId: unknown,
-    body: ListZeroTrustListsCreateZeroTrustListParams,
+    listId: string,
+    body: ListReplaceParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ListZeroTrustListsCreateZeroTrustListResponse> {
+  ): Core.APIPromise<ListReplaceResponse> {
     return (
-      this._client.post(`/accounts/${accountId}/gateway/lists`, { body, ...options }) as Core.APIPromise<{
-        result: ListZeroTrustListsCreateZeroTrustListResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Fetches all Zero Trust lists for an account.
-   */
-  zeroTrustListsListZeroTrustLists(
-    accountId: unknown,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ListZeroTrustListsListZeroTrustListsResponse | null> {
-    return (
-      this._client.get(`/accounts/${accountId}/gateway/lists`, options) as Core.APIPromise<{
-        result: ListZeroTrustListsListZeroTrustListsResponse | null;
-      }>
+      this._client.put(`/accounts/${accountId}/gateway/lists/${listId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: ListReplaceResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface ListUpdateResponse {
+export interface ListCreateResponse {
   /**
    * API Resource UUID tag.
    */
   id?: string;
-
-  /**
-   * The number of items in the list.
-   */
-  count?: number;
 
   created_at?: string;
 
@@ -98,6 +90,11 @@ export interface ListUpdateResponse {
    * The description of the list.
    */
   description?: string;
+
+  /**
+   * The items in the list.
+   */
+  items?: Array<ListCreateResponse.Item>;
 
   /**
    * The name of the list.
@@ -110,6 +107,52 @@ export interface ListUpdateResponse {
   type?: 'SERIAL' | 'URL' | 'DOMAIN' | 'EMAIL' | 'IP';
 
   updated_at?: string;
+}
+
+export namespace ListCreateResponse {
+  export interface Item {
+    created_at?: string;
+
+    /**
+     * The value of the item in a list.
+     */
+    value?: string;
+  }
+}
+
+export type ListListResponse = Array<ListListResponse.ListListResponseItem>;
+
+export namespace ListListResponse {
+  export interface ListListResponseItem {
+    /**
+     * API Resource UUID tag.
+     */
+    id?: string;
+
+    /**
+     * The number of items in the list.
+     */
+    count?: number;
+
+    created_at?: string;
+
+    /**
+     * The description of the list.
+     */
+    description?: string;
+
+    /**
+     * The name of the list.
+     */
+    name?: string;
+
+    /**
+     * The type of list.
+     */
+    type?: 'SERIAL' | 'URL' | 'DOMAIN' | 'EMAIL' | 'IP';
+
+    updated_at?: string;
+  }
 }
 
 export type ListDeleteResponse = unknown | string;
@@ -145,11 +188,16 @@ export interface ListGetResponse {
   updated_at?: string;
 }
 
-export interface ListZeroTrustListsCreateZeroTrustListResponse {
+export interface ListReplaceResponse {
   /**
    * API Resource UUID tag.
    */
   id?: string;
+
+  /**
+   * The number of items in the list.
+   */
+  count?: number;
 
   created_at?: string;
 
@@ -157,11 +205,6 @@ export interface ListZeroTrustListsCreateZeroTrustListResponse {
    * The description of the list.
    */
   description?: string;
-
-  /**
-   * The items in the list.
-   */
-  items?: Array<ListZeroTrustListsCreateZeroTrustListResponse.Item>;
 
   /**
    * The name of the list.
@@ -176,66 +219,7 @@ export interface ListZeroTrustListsCreateZeroTrustListResponse {
   updated_at?: string;
 }
 
-export namespace ListZeroTrustListsCreateZeroTrustListResponse {
-  export interface Item {
-    created_at?: string;
-
-    /**
-     * The value of the item in a list.
-     */
-    value?: string;
-  }
-}
-
-export type ListZeroTrustListsListZeroTrustListsResponse =
-  Array<ListZeroTrustListsListZeroTrustListsResponse.ListZeroTrustListsListZeroTrustListsResponseItem>;
-
-export namespace ListZeroTrustListsListZeroTrustListsResponse {
-  export interface ListZeroTrustListsListZeroTrustListsResponseItem {
-    /**
-     * API Resource UUID tag.
-     */
-    id?: string;
-
-    /**
-     * The number of items in the list.
-     */
-    count?: number;
-
-    created_at?: string;
-
-    /**
-     * The description of the list.
-     */
-    description?: string;
-
-    /**
-     * The name of the list.
-     */
-    name?: string;
-
-    /**
-     * The type of list.
-     */
-    type?: 'SERIAL' | 'URL' | 'DOMAIN' | 'EMAIL' | 'IP';
-
-    updated_at?: string;
-  }
-}
-
-export interface ListUpdateParams {
-  /**
-   * The name of the list.
-   */
-  name: string;
-
-  /**
-   * The description of the list.
-   */
-  description?: string;
-}
-
-export interface ListZeroTrustListsCreateZeroTrustListParams {
+export interface ListCreateParams {
   /**
    * The name of the list.
    */
@@ -254,10 +238,10 @@ export interface ListZeroTrustListsCreateZeroTrustListParams {
   /**
    * The items in the list.
    */
-  items?: Array<ListZeroTrustListsCreateZeroTrustListParams.Item>;
+  items?: Array<ListCreateParams.Item>;
 }
 
-export namespace ListZeroTrustListsCreateZeroTrustListParams {
+export namespace ListCreateParams {
   export interface Item {
     /**
      * The value of the item in a list.
@@ -266,14 +250,26 @@ export namespace ListZeroTrustListsCreateZeroTrustListParams {
   }
 }
 
+export interface ListReplaceParams {
+  /**
+   * The name of the list.
+   */
+  name: string;
+
+  /**
+   * The description of the list.
+   */
+  description?: string;
+}
+
 export namespace Lists {
-  export import ListUpdateResponse = ListsAPI.ListUpdateResponse;
+  export import ListCreateResponse = ListsAPI.ListCreateResponse;
+  export import ListListResponse = ListsAPI.ListListResponse;
   export import ListDeleteResponse = ListsAPI.ListDeleteResponse;
   export import ListGetResponse = ListsAPI.ListGetResponse;
-  export import ListZeroTrustListsCreateZeroTrustListResponse = ListsAPI.ListZeroTrustListsCreateZeroTrustListResponse;
-  export import ListZeroTrustListsListZeroTrustListsResponse = ListsAPI.ListZeroTrustListsListZeroTrustListsResponse;
-  export import ListUpdateParams = ListsAPI.ListUpdateParams;
-  export import ListZeroTrustListsCreateZeroTrustListParams = ListsAPI.ListZeroTrustListsCreateZeroTrustListParams;
+  export import ListReplaceResponse = ListsAPI.ListReplaceResponse;
+  export import ListCreateParams = ListsAPI.ListCreateParams;
+  export import ListReplaceParams = ListsAPI.ListReplaceParams;
   export import Items = ItemsAPI.Items;
-  export import ItemZeroTrustListsZeroTrustListItemsResponse = ItemsAPI.ItemZeroTrustListsZeroTrustListItemsResponse;
+  export import ItemListResponse = ItemsAPI.ItemListResponse;
 }

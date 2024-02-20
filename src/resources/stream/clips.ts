@@ -8,20 +8,20 @@ export class Clips extends APIResource {
   /**
    * Clips a video based on the specified start and end times provided in seconds.
    */
-  streamVideoClippingClipVideosGivenAStartAndEndTime(
+  create(
     accountId: string,
-    body: ClipStreamVideoClippingClipVideosGivenAStartAndEndTimeParams,
+    body: ClipCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ClipStreamVideoClippingClipVideosGivenAStartAndEndTimeResponse> {
+  ): Core.APIPromise<ClipCreateResponse> {
     return (
       this._client.post(`/accounts/${accountId}/stream/clip`, { body, ...options }) as Core.APIPromise<{
-        result: ClipStreamVideoClippingClipVideosGivenAStartAndEndTimeResponse;
+        result: ClipCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface ClipStreamVideoClippingClipVideosGivenAStartAndEndTimeResponse {
+export interface ClipCreateResponse {
   /**
    * Lists the origins allowed to display the video. Enter allowed origin domains in
    * an array and use `*` for wildcard subdomains. Empty arrays allow the video to be
@@ -68,7 +68,7 @@ export interface ClipStreamVideoClippingClipVideosGivenAStartAndEndTimeResponse 
    */
   modified?: string;
 
-  playback?: ClipStreamVideoClippingClipVideosGivenAStartAndEndTimeResponse.Playback;
+  playback?: ClipCreateResponse.Playback;
 
   /**
    * The video's preview page URI. This field is omitted until encoding is complete.
@@ -99,10 +99,10 @@ export interface ClipStreamVideoClippingClipVideosGivenAStartAndEndTimeResponse 
    */
   thumbnailTimestampPct?: number;
 
-  watermark?: ClipStreamVideoClippingClipVideosGivenAStartAndEndTimeResponse.Watermark;
+  watermark?: ClipCreateResponse.Watermark;
 }
 
-export namespace ClipStreamVideoClippingClipVideosGivenAStartAndEndTimeResponse {
+export namespace ClipCreateResponse {
   export interface Playback {
     /**
      * DASH Media Presentation Description for the video.
@@ -123,7 +123,7 @@ export namespace ClipStreamVideoClippingClipVideosGivenAStartAndEndTimeResponse 
   }
 }
 
-export interface ClipStreamVideoClippingClipVideosGivenAStartAndEndTimeParams {
+export interface ClipCreateParams {
   /**
    * The unique video identifier (UID).
    */
@@ -173,10 +173,10 @@ export interface ClipStreamVideoClippingClipVideosGivenAStartAndEndTimeParams {
    */
   thumbnailTimestampPct?: number;
 
-  watermark?: ClipStreamVideoClippingClipVideosGivenAStartAndEndTimeParams.Watermark;
+  watermark?: ClipCreateParams.Watermark;
 }
 
-export namespace ClipStreamVideoClippingClipVideosGivenAStartAndEndTimeParams {
+export namespace ClipCreateParams {
   export interface Watermark {
     /**
      * The unique identifier for the watermark profile.
@@ -186,6 +186,6 @@ export namespace ClipStreamVideoClippingClipVideosGivenAStartAndEndTimeParams {
 }
 
 export namespace Clips {
-  export import ClipStreamVideoClippingClipVideosGivenAStartAndEndTimeResponse = ClipsAPI.ClipStreamVideoClippingClipVideosGivenAStartAndEndTimeResponse;
-  export import ClipStreamVideoClippingClipVideosGivenAStartAndEndTimeParams = ClipsAPI.ClipStreamVideoClippingClipVideosGivenAStartAndEndTimeParams;
+  export import ClipCreateResponse = ClipsAPI.ClipCreateResponse;
+  export import ClipCreateParams = ClipsAPI.ClipCreateParams;
 }

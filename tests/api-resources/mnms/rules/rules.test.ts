@@ -13,6 +13,18 @@ const cloudflare = new Cloudflare({
 
 describe('resource rules', () => {
   // skipped: tests are disabled for the time being
+  test.skip('create', async () => {
+    const responsePromise = cloudflare.mnms.rules.create('6f91088a406011ed95aed352566e8d4c');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('update', async () => {
     const responsePromise = cloudflare.mnms.rules.update(
       '6f91088a406011ed95aed352566e8d4c',
@@ -25,6 +37,26 @@ describe('resource rules', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list', async () => {
+    const responsePromise = cloudflare.mnms.rules.list('6f91088a406011ed95aed352566e8d4c');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.mnms.rules.list('6f91088a406011ed95aed352566e8d4c', { path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
@@ -68,48 +100,8 @@ describe('resource rules', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('magicNetworkMonitoringRulesCreateRules', async () => {
-    const responsePromise = cloudflare.mnms.rules.magicNetworkMonitoringRulesCreateRules(
-      '6f91088a406011ed95aed352566e8d4c',
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('magicNetworkMonitoringRulesListRules', async () => {
-    const responsePromise = cloudflare.mnms.rules.magicNetworkMonitoringRulesListRules(
-      '6f91088a406011ed95aed352566e8d4c',
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('magicNetworkMonitoringRulesListRules: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.mnms.rules.magicNetworkMonitoringRulesListRules('6f91088a406011ed95aed352566e8d4c', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('magicNetworkMonitoringRulesUpdateRules', async () => {
-    const responsePromise = cloudflare.mnms.rules.magicNetworkMonitoringRulesUpdateRules(
-      '6f91088a406011ed95aed352566e8d4c',
-    );
+  test.skip('replace', async () => {
+    const responsePromise = cloudflare.mnms.rules.replace('6f91088a406011ed95aed352566e8d4c');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

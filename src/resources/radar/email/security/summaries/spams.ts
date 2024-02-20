@@ -9,30 +9,30 @@ export class Spams extends APIResource {
   /**
    * Proportion of emails categorized as either spam or legitimate (non-spam).
    */
-  get(query?: SpamGetParams, options?: Core.RequestOptions): Core.APIPromise<SpamGetResponse>;
-  get(options?: Core.RequestOptions): Core.APIPromise<SpamGetResponse>;
-  get(
-    query: SpamGetParams | Core.RequestOptions = {},
+  list(query?: SpamListParams, options?: Core.RequestOptions): Core.APIPromise<SpamListResponse>;
+  list(options?: Core.RequestOptions): Core.APIPromise<SpamListResponse>;
+  list(
+    query: SpamListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SpamGetResponse> {
+  ): Core.APIPromise<SpamListResponse> {
     if (isRequestOptions(query)) {
-      return this.get({}, query);
+      return this.list({}, query);
     }
     return (
       this._client.get('/radar/email/security/summary/spam', { query, ...options }) as Core.APIPromise<{
-        result: SpamGetResponse;
+        result: SpamListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface SpamGetResponse {
-  meta: SpamGetResponse.Meta;
+export interface SpamListResponse {
+  meta: SpamListResponse.Meta;
 
-  summary_0: SpamGetResponse.Summary0;
+  summary_0: SpamListResponse.Summary0;
 }
 
-export namespace SpamGetResponse {
+export namespace SpamListResponse {
   export interface Meta {
     dateRange: Array<Meta.DateRange>;
 
@@ -88,7 +88,7 @@ export namespace SpamGetResponse {
   }
 }
 
-export interface SpamGetParams {
+export interface SpamListParams {
   /**
    * Filter for arc (Authenticated Received Chain).
    */
@@ -168,6 +168,6 @@ export interface SpamGetParams {
 }
 
 export namespace Spams {
-  export import SpamGetResponse = SpamsAPI.SpamGetResponse;
-  export import SpamGetParams = SpamsAPI.SpamGetParams;
+  export import SpamListResponse = SpamsAPI.SpamListResponse;
+  export import SpamListParams = SpamsAPI.SpamListParams;
 }

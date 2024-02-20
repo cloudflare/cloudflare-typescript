@@ -13,11 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource bookmarks', () => {
   // skipped: tests are disabled for the time being
-  test.skip('update', async () => {
-    const responsePromise = cloudflare.access.bookmarks.update(
-      '699d98642c564d2e855e9661899b7252',
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-    );
+  test.skip('list', async () => {
+    const responsePromise = cloudflare.access.bookmarks.list('699d98642c564d2e855e9661899b7252');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -25,6 +22,16 @@ describe('resource bookmarks', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.access.bookmarks.list('699d98642c564d2e855e9661899b7252', {
+        path: '/_stainless_unknown_path',
+      }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
@@ -40,32 +47,6 @@ describe('resource bookmarks', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('accessBookmarkApplicationsDeprecatedListBookmarkApplications', async () => {
-    const responsePromise =
-      cloudflare.access.bookmarks.accessBookmarkApplicationsDeprecatedListBookmarkApplications(
-        '699d98642c564d2e855e9661899b7252',
-      );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('accessBookmarkApplicationsDeprecatedListBookmarkApplications: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.access.bookmarks.accessBookmarkApplicationsDeprecatedListBookmarkApplications(
-        '699d98642c564d2e855e9661899b7252',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
@@ -93,5 +74,20 @@ describe('resource bookmarks', () => {
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('replace', async () => {
+    const responsePromise = cloudflare.access.bookmarks.replace(
+      '699d98642c564d2e855e9661899b7252',
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
   });
 });

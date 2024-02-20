@@ -13,8 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource roles', () => {
   // skipped: tests are disabled for the time being
-  test.skip('accountRolesListRoles', async () => {
-    const responsePromise = cloudflare.roles.accountRolesListRoles({});
+  test.skip('list', async () => {
+    const responsePromise = cloudflare.roles.list({});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -25,11 +25,11 @@ describe('resource roles', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('accountRolesListRoles: request options instead of params are passed correctly', async () => {
+  test.skip('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.roles.accountRolesListRoles({}, { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+    await expect(cloudflare.roles.list({}, { path: '/_stainless_unknown_path' })).rejects.toThrow(
+      Cloudflare.NotFoundError,
+    );
   });
 
   // skipped: tests are disabled for the time being

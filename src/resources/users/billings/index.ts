@@ -2,8 +2,9 @@
 
 export { Billings } from './billings';
 export {
-  HistoryUserBillingHistoryBillingHistoryDetailsResponse,
-  HistoryUserBillingHistoryBillingHistoryDetailsParams,
-  Histories,
-} from './histories';
-export { ProfileUserBillingProfileBillingProfileDetailsResponse, Profiles } from './profiles';
+  HistoryListResponse,
+  HistoryListParams,
+  HistoryListResponsesV4PagePaginationArray,
+  History,
+} from './history';
+export { ProfileListResponse, Profiles } from './profiles';

@@ -13,6 +13,23 @@ const cloudflare = new Cloudflare({
 
 describe('resource rules', () => {
   // skipped: tests are disabled for the time being
+  test.skip('create', async () => {
+    const responsePromise = cloudflare.rulesets.rules.create(
+      'string',
+      'abf9b32d38c5f572afde3336ec0ce302',
+      '2f2feab2026849078ba485f918791bdc',
+      {},
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.rulesets.rules.update(
       '2f2feab2026849078ba485f918791bdc',
@@ -82,22 +99,5 @@ describe('resource rules', () => {
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('accountRulesetsCreateAnAccountRulesetRule', async () => {
-    const responsePromise = cloudflare.rulesets.rules.accountRulesetsCreateAnAccountRulesetRule(
-      'string',
-      'abf9b32d38c5f572afde3336ec0ce302',
-      '2f2feab2026849078ba485f918791bdc',
-      {},
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
   });
 });

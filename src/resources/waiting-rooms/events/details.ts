@@ -9,22 +9,22 @@ export class Details extends APIResource {
    * Previews an event's configuration as if it was active. Inherited fields from the
    * waiting room will be displayed with their current values.
    */
-  waitingRoomPreviewActiveEventDetails(
+  get(
     zoneIdentifier: string,
     waitingRoomId: unknown,
     eventId: unknown,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DetailWaitingRoomPreviewActiveEventDetailsResponse> {
+  ): Core.APIPromise<DetailGetResponse> {
     return (
       this._client.get(
         `/zones/${zoneIdentifier}/waiting_rooms/${waitingRoomId}/events/${eventId}/details`,
         options,
-      ) as Core.APIPromise<{ result: DetailWaitingRoomPreviewActiveEventDetailsResponse }>
+      ) as Core.APIPromise<{ result: DetailGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface DetailWaitingRoomPreviewActiveEventDetailsResponse {
+export interface DetailGetResponse {
   id?: unknown;
 
   created_on?: string;
@@ -91,5 +91,5 @@ export interface DetailWaitingRoomPreviewActiveEventDetailsResponse {
 }
 
 export namespace Details {
-  export import DetailWaitingRoomPreviewActiveEventDetailsResponse = DetailsAPI.DetailWaitingRoomPreviewActiveEventDetailsResponse;
+  export import DetailGetResponse = DetailsAPI.DetailGetResponse;
 }

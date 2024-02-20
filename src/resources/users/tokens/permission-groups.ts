@@ -8,19 +8,17 @@ export class PermissionGroups extends APIResource {
   /**
    * Find all available permission groups.
    */
-  permissionGroupsListPermissionGroups(
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PermissionGroupPermissionGroupsListPermissionGroupsResponse | null> {
+  list(options?: Core.RequestOptions): Core.APIPromise<PermissionGroupListResponse | null> {
     return (
       this._client.get('/user/tokens/permission_groups', options) as Core.APIPromise<{
-        result: PermissionGroupPermissionGroupsListPermissionGroupsResponse | null;
+        result: PermissionGroupListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type PermissionGroupPermissionGroupsListPermissionGroupsResponse = Array<unknown>;
+export type PermissionGroupListResponse = Array<unknown>;
 
 export namespace PermissionGroups {
-  export import PermissionGroupPermissionGroupsListPermissionGroupsResponse = PermissionGroupsAPI.PermissionGroupPermissionGroupsListPermissionGroupsResponse;
+  export import PermissionGroupListResponse = PermissionGroupsAPI.PermissionGroupListResponse;
 }

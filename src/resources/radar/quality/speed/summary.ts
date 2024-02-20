@@ -10,30 +10,30 @@ export class Summary extends APIResource {
    * Get a summary of bandwidth, latency, jitter and packet loss, from the previous
    * 90 days of Cloudflare Speed Test data.
    */
-  get(query?: SummaryGetParams, options?: Core.RequestOptions): Core.APIPromise<SummaryGetResponse>;
-  get(options?: Core.RequestOptions): Core.APIPromise<SummaryGetResponse>;
-  get(
-    query: SummaryGetParams | Core.RequestOptions = {},
+  list(query?: SummaryListParams, options?: Core.RequestOptions): Core.APIPromise<SummaryListResponse>;
+  list(options?: Core.RequestOptions): Core.APIPromise<SummaryListResponse>;
+  list(
+    query: SummaryListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SummaryGetResponse> {
+  ): Core.APIPromise<SummaryListResponse> {
     if (isRequestOptions(query)) {
-      return this.get({}, query);
+      return this.list({}, query);
     }
     return (
       this._client.get('/radar/quality/speed/summary', { query, ...options }) as Core.APIPromise<{
-        result: SummaryGetResponse;
+        result: SummaryListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface SummaryGetResponse {
-  meta: SummaryGetResponse.Meta;
+export interface SummaryListResponse {
+  meta: SummaryListResponse.Meta;
 
-  summary_0: SummaryGetResponse.Summary0;
+  summary_0: SummaryListResponse.Summary0;
 }
 
-export namespace SummaryGetResponse {
+export namespace SummaryListResponse {
   export interface Meta {
     dateRange: Array<Meta.DateRange>;
 
@@ -99,7 +99,7 @@ export namespace SummaryGetResponse {
   }
 }
 
-export interface SummaryGetParams {
+export interface SummaryListParams {
   /**
    * Array of comma separated list of ASNs, start with `-` to exclude from results.
    * For example, `-174, 3356` excludes results from AS174, but includes results from
@@ -131,6 +131,6 @@ export interface SummaryGetParams {
 }
 
 export namespace Summary {
-  export import SummaryGetResponse = SummaryAPI.SummaryGetResponse;
-  export import SummaryGetParams = SummaryAPI.SummaryGetParams;
+  export import SummaryListResponse = SummaryAPI.SummaryListResponse;
+  export import SummaryListParams = SummaryAPI.SummaryListParams;
 }

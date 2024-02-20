@@ -17,30 +17,27 @@ export class Webhooks extends APIResource {
   }
 
   /**
-   * Creates a webhook notification.
+   * Retrieves a list of webhooks.
    */
-  streamWebhookCreateWebhooks(
-    accountId: string,
-    body: WebhookStreamWebhookCreateWebhooksParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<WebhookStreamWebhookCreateWebhooksResponse> {
+  get(accountId: string, options?: Core.RequestOptions): Core.APIPromise<WebhookGetResponse> {
     return (
-      this._client.put(`/accounts/${accountId}/stream/webhook`, { body, ...options }) as Core.APIPromise<{
-        result: WebhookStreamWebhookCreateWebhooksResponse;
+      this._client.get(`/accounts/${accountId}/stream/webhook`, options) as Core.APIPromise<{
+        result: WebhookGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
-   * Retrieves a list of webhooks.
+   * Creates a webhook notification.
    */
-  streamWebhookViewWebhooks(
+  replace(
     accountId: string,
+    body: WebhookReplaceParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WebhookStreamWebhookViewWebhooksResponse> {
+  ): Core.APIPromise<WebhookReplaceResponse> {
     return (
-      this._client.get(`/accounts/${accountId}/stream/webhook`, options) as Core.APIPromise<{
-        result: WebhookStreamWebhookViewWebhooksResponse;
+      this._client.put(`/accounts/${accountId}/stream/webhook`, { body, ...options }) as Core.APIPromise<{
+        result: WebhookReplaceResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -48,11 +45,11 @@ export class Webhooks extends APIResource {
 
 export type WebhookDeleteResponse = unknown | string;
 
-export type WebhookStreamWebhookCreateWebhooksResponse = unknown | string;
+export type WebhookGetResponse = unknown | string;
 
-export type WebhookStreamWebhookViewWebhooksResponse = unknown | string;
+export type WebhookReplaceResponse = unknown | string;
 
-export interface WebhookStreamWebhookCreateWebhooksParams {
+export interface WebhookReplaceParams {
   /**
    * The URL where webhooks will be sent.
    */
@@ -61,7 +58,7 @@ export interface WebhookStreamWebhookCreateWebhooksParams {
 
 export namespace Webhooks {
   export import WebhookDeleteResponse = WebhooksAPI.WebhookDeleteResponse;
-  export import WebhookStreamWebhookCreateWebhooksResponse = WebhooksAPI.WebhookStreamWebhookCreateWebhooksResponse;
-  export import WebhookStreamWebhookViewWebhooksResponse = WebhooksAPI.WebhookStreamWebhookViewWebhooksResponse;
-  export import WebhookStreamWebhookCreateWebhooksParams = WebhooksAPI.WebhookStreamWebhookCreateWebhooksParams;
+  export import WebhookGetResponse = WebhooksAPI.WebhookGetResponse;
+  export import WebhookReplaceResponse = WebhooksAPI.WebhookReplaceResponse;
+  export import WebhookReplaceParams = WebhooksAPI.WebhookReplaceParams;
 }

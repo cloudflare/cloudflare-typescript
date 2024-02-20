@@ -2,12 +2,12 @@
 
 export {
   ConfigCreateResponse,
-  ConfigUpdateResponse,
   ConfigListResponse,
   ConfigDeleteResponse,
   ConfigGetResponse,
+  ConfigReplaceResponse,
   ConfigCreateParams,
-  ConfigUpdateParams,
+  ConfigReplaceParams,
   Configs,
 } from './configs';
 export { Hyperdrive } from './hyperdrive';

@@ -8,13 +8,10 @@ export class Roles extends APIResource {
   /**
    * Get all available roles for an account.
    */
-  accountRolesListRoles(
-    accountId: unknown,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RoleAccountRolesListRolesResponse | null> {
+  list(accountId: unknown, options?: Core.RequestOptions): Core.APIPromise<RoleListResponse | null> {
     return (
       this._client.get(`/accounts/${accountId}/roles`, options) as Core.APIPromise<{
-        result: RoleAccountRolesListRolesResponse | null;
+        result: RoleListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -31,11 +28,10 @@ export class Roles extends APIResource {
   }
 }
 
-export type RoleAccountRolesListRolesResponse =
-  Array<RoleAccountRolesListRolesResponse.RoleAccountRolesListRolesResponseItem>;
+export type RoleListResponse = Array<RoleListResponse.RoleListResponseItem>;
 
-export namespace RoleAccountRolesListRolesResponse {
-  export interface RoleAccountRolesListRolesResponseItem {
+export namespace RoleListResponse {
+  export interface RoleListResponseItem {
     /**
      * Role identifier tag.
      */
@@ -61,6 +57,6 @@ export namespace RoleAccountRolesListRolesResponse {
 export type RoleGetResponse = unknown | string | null;
 
 export namespace Roles {
-  export import RoleAccountRolesListRolesResponse = RolesAPI.RoleAccountRolesListRolesResponse;
+  export import RoleListResponse = RolesAPI.RoleListResponse;
   export import RoleGetResponse = RolesAPI.RoleGetResponse;
 }

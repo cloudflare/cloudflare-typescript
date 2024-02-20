@@ -7,21 +7,17 @@ import { multipartFormRequestOptions } from 'cloudflare/core';
 
 export class Captions extends APIResource {
   /**
-   * Uploads the caption or subtitle file to the endpoint for a specific BCP47
-   * language. One caption or subtitle file per language is allowed.
+   * Lists the available captions or subtitles for a specific video.
    */
-  update(
+  list(
     accountId: string,
     identifier: string,
-    language: string,
-    body: CaptionUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CaptionUpdateResponse> {
+  ): Core.APIPromise<CaptionListResponse> {
     return (
-      this._client.put(
-        `/accounts/${accountId}/stream/${identifier}/captions/${language}`,
-        multipartFormRequestOptions({ body, ...options }),
-      ) as Core.APIPromise<{ result: CaptionUpdateResponse }>
+      this._client.get(`/accounts/${accountId}/stream/${identifier}/captions`, options) as Core.APIPromise<{
+        result: CaptionListResponse;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -43,30 +39,29 @@ export class Captions extends APIResource {
   }
 
   /**
-   * Lists the available captions or subtitles for a specific video.
+   * Uploads the caption or subtitle file to the endpoint for a specific BCP47
+   * language. One caption or subtitle file per language is allowed.
    */
-  streamSubtitlesCaptionsListCaptionsOrSubtitles(
+  replace(
     accountId: string,
     identifier: string,
+    language: string,
+    body: CaptionReplaceParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CaptionStreamSubtitlesCaptionsListCaptionsOrSubtitlesResponse> {
+  ): Core.APIPromise<CaptionReplaceResponse> {
     return (
-      this._client.get(`/accounts/${accountId}/stream/${identifier}/captions`, options) as Core.APIPromise<{
-        result: CaptionStreamSubtitlesCaptionsListCaptionsOrSubtitlesResponse;
-      }>
+      this._client.put(
+        `/accounts/${accountId}/stream/${identifier}/captions/${language}`,
+        multipartFormRequestOptions({ body, ...options }),
+      ) as Core.APIPromise<{ result: CaptionReplaceResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type CaptionUpdateResponse = unknown | string;
+export type CaptionListResponse = Array<CaptionListResponse.CaptionListResponseItem>;
 
-export type CaptionDeleteResponse = unknown | Array<unknown> | string;
-
-export type CaptionStreamSubtitlesCaptionsListCaptionsOrSubtitlesResponse =
-  Array<CaptionStreamSubtitlesCaptionsListCaptionsOrSubtitlesResponse.CaptionStreamSubtitlesCaptionsListCaptionsOrSubtitlesResponseItem>;
-
-export namespace CaptionStreamSubtitlesCaptionsListCaptionsOrSubtitlesResponse {
-  export interface CaptionStreamSubtitlesCaptionsListCaptionsOrSubtitlesResponseItem {
+export namespace CaptionListResponse {
+  export interface CaptionListResponseItem {
     /**
      * The language label displayed in the native language to users.
      */
@@ -79,7 +74,11 @@ export namespace CaptionStreamSubtitlesCaptionsListCaptionsOrSubtitlesResponse {
   }
 }
 
-export interface CaptionUpdateParams {
+export type CaptionDeleteResponse = unknown | Array<unknown> | string;
+
+export type CaptionReplaceResponse = unknown | string;
+
+export interface CaptionReplaceParams {
   /**
    * The WebVTT file containing the caption or subtitle content.
    */
@@ -87,8 +86,8 @@ export interface CaptionUpdateParams {
 }
 
 export namespace Captions {
-  export import CaptionUpdateResponse = CaptionsAPI.CaptionUpdateResponse;
+  export import CaptionListResponse = CaptionsAPI.CaptionListResponse;
   export import CaptionDeleteResponse = CaptionsAPI.CaptionDeleteResponse;
-  export import CaptionStreamSubtitlesCaptionsListCaptionsOrSubtitlesResponse = CaptionsAPI.CaptionStreamSubtitlesCaptionsListCaptionsOrSubtitlesResponse;
-  export import CaptionUpdateParams = CaptionsAPI.CaptionUpdateParams;
+  export import CaptionReplaceResponse = CaptionsAPI.CaptionReplaceResponse;
+  export import CaptionReplaceParams = CaptionsAPI.CaptionReplaceParams;
 }

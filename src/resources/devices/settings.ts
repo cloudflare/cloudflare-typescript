@@ -8,13 +8,10 @@ export class Settings extends APIResource {
   /**
    * Describes the current device settings for a Zero Trust account.
    */
-  zeroTrustAccountsGetDeviceSettingsForZeroTrustAccount(
-    identifier: unknown,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SettingZeroTrustAccountsGetDeviceSettingsForZeroTrustAccountResponse | null> {
+  list(identifier: unknown, options?: Core.RequestOptions): Core.APIPromise<SettingListResponse | null> {
     return (
       this._client.get(`/accounts/${identifier}/devices/settings`, options) as Core.APIPromise<{
-        result: SettingZeroTrustAccountsGetDeviceSettingsForZeroTrustAccountResponse | null;
+        result: SettingListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -22,20 +19,20 @@ export class Settings extends APIResource {
   /**
    * Updates the current device settings for a Zero Trust account.
    */
-  zeroTrustAccountsUpdateDeviceSettingsForTheZeroTrustAccount(
+  replace(
     identifier: unknown,
-    body: SettingZeroTrustAccountsUpdateDeviceSettingsForTheZeroTrustAccountParams,
+    body: SettingReplaceParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SettingZeroTrustAccountsUpdateDeviceSettingsForTheZeroTrustAccountResponse | null> {
+  ): Core.APIPromise<SettingReplaceResponse | null> {
     return (
       this._client.put(`/accounts/${identifier}/devices/settings`, { body, ...options }) as Core.APIPromise<{
-        result: SettingZeroTrustAccountsUpdateDeviceSettingsForTheZeroTrustAccountResponse | null;
+        result: SettingReplaceResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface SettingZeroTrustAccountsGetDeviceSettingsForZeroTrustAccountResponse {
+export interface SettingListResponse {
   /**
    * Enable gateway proxy filtering on TCP.
    */
@@ -57,7 +54,7 @@ export interface SettingZeroTrustAccountsGetDeviceSettingsForZeroTrustAccountRes
   use_zt_virtual_ip?: boolean;
 }
 
-export interface SettingZeroTrustAccountsUpdateDeviceSettingsForTheZeroTrustAccountResponse {
+export interface SettingReplaceResponse {
   /**
    * Enable gateway proxy filtering on TCP.
    */
@@ -79,7 +76,7 @@ export interface SettingZeroTrustAccountsUpdateDeviceSettingsForTheZeroTrustAcco
   use_zt_virtual_ip?: boolean;
 }
 
-export interface SettingZeroTrustAccountsUpdateDeviceSettingsForTheZeroTrustAccountParams {
+export interface SettingReplaceParams {
   /**
    * Enable gateway proxy filtering on TCP.
    */
@@ -102,7 +99,7 @@ export interface SettingZeroTrustAccountsUpdateDeviceSettingsForTheZeroTrustAcco
 }
 
 export namespace Settings {
-  export import SettingZeroTrustAccountsGetDeviceSettingsForZeroTrustAccountResponse = SettingsAPI.SettingZeroTrustAccountsGetDeviceSettingsForZeroTrustAccountResponse;
-  export import SettingZeroTrustAccountsUpdateDeviceSettingsForTheZeroTrustAccountResponse = SettingsAPI.SettingZeroTrustAccountsUpdateDeviceSettingsForTheZeroTrustAccountResponse;
-  export import SettingZeroTrustAccountsUpdateDeviceSettingsForTheZeroTrustAccountParams = SettingsAPI.SettingZeroTrustAccountsUpdateDeviceSettingsForTheZeroTrustAccountParams;
+  export import SettingListResponse = SettingsAPI.SettingListResponse;
+  export import SettingReplaceResponse = SettingsAPI.SettingReplaceResponse;
+  export import SettingReplaceParams = SettingsAPI.SettingReplaceParams;
 }

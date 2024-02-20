@@ -1,22 +1,16 @@
 // File generated from our OpenAPI spec by Stainless.
 
-export { HealthLoadBalancerPoolsPoolHealthDetailsResponse, Health } from './health';
+export { HealthListResponse, Health } from './health';
 export {
+  PoolCreateResponse,
   PoolUpdateResponse,
+  PoolListResponse,
   PoolDeleteResponse,
   PoolGetResponse,
-  PoolLoadBalancerPoolsCreatePoolResponse,
-  PoolLoadBalancerPoolsListPoolsResponse,
-  PoolLoadBalancerPoolsPatchPoolsResponse,
+  PoolCreateParams,
   PoolUpdateParams,
-  PoolLoadBalancerPoolsCreatePoolParams,
-  PoolLoadBalancerPoolsListPoolsParams,
-  PoolLoadBalancerPoolsPatchPoolsParams,
+  PoolListParams,
   Pools,
 } from './pools';
-export {
-  PreviewLoadBalancerPoolsPreviewPoolResponse,
-  PreviewLoadBalancerPoolsPreviewPoolParams,
-  Previews,
-} from './previews';
-export { ReferenceLoadBalancerPoolsListPoolReferencesResponse, References } from './references';
+export { PreviewCreateResponse, PreviewCreateParams, Previews } from './previews';
+export { ReferenceListResponse, References } from './references';

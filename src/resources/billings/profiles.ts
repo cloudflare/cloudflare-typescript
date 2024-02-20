@@ -8,20 +8,17 @@ export class Profiles extends APIResource {
   /**
    * Gets the current billing profile for the account.
    */
-  accountBillingProfileBillingProfileDetails(
-    accountIdentifier: unknown,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ProfileAccountBillingProfileBillingProfileDetailsResponse> {
+  get(accountIdentifier: unknown, options?: Core.RequestOptions): Core.APIPromise<ProfileGetResponse> {
     return (
       this._client.get(`/accounts/${accountIdentifier}/billing/profile`, options) as Core.APIPromise<{
-        result: ProfileAccountBillingProfileBillingProfileDetailsResponse;
+        result: ProfileGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type ProfileAccountBillingProfileBillingProfileDetailsResponse = unknown | string | null;
+export type ProfileGetResponse = unknown | string | null;
 
 export namespace Profiles {
-  export import ProfileAccountBillingProfileBillingProfileDetailsResponse = ProfilesAPI.ProfileAccountBillingProfileBillingProfileDetailsResponse;
+  export import ProfileGetResponse = ProfilesAPI.ProfileGetResponse;
 }

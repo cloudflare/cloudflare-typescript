@@ -1844,12 +1844,14 @@ export namespace Projects {
   export import DeploymentListResponse = DeploymentsAPI.DeploymentListResponse;
   export import DeploymentDeleteResponse = DeploymentsAPI.DeploymentDeleteResponse;
   export import DeploymentGetResponse = DeploymentsAPI.DeploymentGetResponse;
+  export import DeploymentRetryResponse = DeploymentsAPI.DeploymentRetryResponse;
+  export import DeploymentRollbackResponse = DeploymentsAPI.DeploymentRollbackResponse;
   export import DeploymentCreateParams = DeploymentsAPI.DeploymentCreateParams;
   export import Domains = DomainsAPI.Domains;
+  export import DomainCreateResponse = DomainsAPI.DomainCreateResponse;
   export import DomainUpdateResponse = DomainsAPI.DomainUpdateResponse;
+  export import DomainListResponse = DomainsAPI.DomainListResponse;
   export import DomainDeleteResponse = DomainsAPI.DomainDeleteResponse;
   export import DomainGetResponse = DomainsAPI.DomainGetResponse;
-  export import DomainPagesDomainsAddDomainResponse = DomainsAPI.DomainPagesDomainsAddDomainResponse;
-  export import DomainPagesDomainsGetDomainsResponse = DomainsAPI.DomainPagesDomainsGetDomainsResponse;
-  export import DomainPagesDomainsAddDomainParams = DomainsAPI.DomainPagesDomainsAddDomainParams;
+  export import DomainCreateParams = DomainsAPI.DomainCreateParams;
 }

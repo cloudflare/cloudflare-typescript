@@ -6,28 +6,46 @@ import { isRequestOptions } from 'cloudflare/core';
 import * as TokensAPI from 'cloudflare/resources/users/tokens/tokens';
 import * as PermissionGroupsAPI from 'cloudflare/resources/users/tokens/permission-groups';
 import * as ValuesAPI from 'cloudflare/resources/users/tokens/values';
-import * as VerifiesAPI from 'cloudflare/resources/users/tokens/verifies';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class Tokens extends APIResource {
   permissionGroups: PermissionGroupsAPI.PermissionGroups = new PermissionGroupsAPI.PermissionGroups(
     this._client,
   );
-  verifies: VerifiesAPI.Verifies = new VerifiesAPI.Verifies(this._client);
   values: ValuesAPI.Values = new ValuesAPI.Values(this._client);
 
   /**
-   * Update an existing token.
+   * Create a new access token.
    */
-  update(
-    tokenId: unknown,
-    body: TokenUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TokenUpdateResponse> {
+  create(body: TokenCreateParams, options?: Core.RequestOptions): Core.APIPromise<TokenCreateResponse> {
     return (
-      this._client.put(`/user/tokens/${tokenId}`, { body, ...options }) as Core.APIPromise<{
-        result: TokenUpdateResponse;
+      this._client.post('/user/tokens', { body, ...options }) as Core.APIPromise<{
+        result: TokenCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * List all access tokens you created.
+   */
+  list(
+    query?: TokenListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<TokenListResponsesV4PagePaginationArray, TokenListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<TokenListResponsesV4PagePaginationArray, TokenListResponse>;
+  list(
+    query: TokenListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<TokenListResponsesV4PagePaginationArray, TokenListResponse> {
+    if (isRequestOptions(query)) {
+      return this.list({}, query);
+    }
+    return this._client.getAPIList('/user/tokens', TokenListResponsesV4PagePaginationArray, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -51,45 +69,40 @@ export class Tokens extends APIResource {
   }
 
   /**
-   * Create a new access token.
+   * Update an existing token.
    */
-  userAPITokensCreateToken(
-    body: TokenUserAPITokensCreateTokenParams,
+  replace(
+    tokenId: unknown,
+    body: TokenReplaceParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TokenUserAPITokensCreateTokenResponse> {
+  ): Core.APIPromise<TokenReplaceResponse> {
     return (
-      this._client.post('/user/tokens', { body, ...options }) as Core.APIPromise<{
-        result: TokenUserAPITokensCreateTokenResponse;
+      this._client.put(`/user/tokens/${tokenId}`, { body, ...options }) as Core.APIPromise<{
+        result: TokenReplaceResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
-   * List all access tokens you created.
+   * Test whether a token works.
    */
-  userAPITokensListTokens(
-    query?: TokenUserAPITokensListTokensParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TokenUserAPITokensListTokensResponse | null>;
-  userAPITokensListTokens(
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TokenUserAPITokensListTokensResponse | null>;
-  userAPITokensListTokens(
-    query: TokenUserAPITokensListTokensParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TokenUserAPITokensListTokensResponse | null> {
-    if (isRequestOptions(query)) {
-      return this.userAPITokensListTokens({}, query);
-    }
+  verify(options?: Core.RequestOptions): Core.APIPromise<TokenVerifyResponse> {
     return (
-      this._client.get('/user/tokens', { query, ...options }) as Core.APIPromise<{
-        result: TokenUserAPITokensListTokensResponse | null;
-      }>
+      this._client.get('/user/tokens/verify', options) as Core.APIPromise<{ result: TokenVerifyResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type TokenUpdateResponse = unknown | string | null;
+export class TokenListResponsesV4PagePaginationArray extends V4PagePaginationArray<TokenListResponse> {}
+
+export interface TokenCreateResponse {
+  /**
+   * The token value.
+   */
+  value?: string;
+}
+
+export type TokenListResponse = unknown;
 
 export interface TokenDeleteResponse {
   /**
@@ -100,33 +113,19 @@ export interface TokenDeleteResponse {
 
 export type TokenGetResponse = unknown | string | null;
 
-export interface TokenUserAPITokensCreateTokenResponse {
-  /**
-   * The token value.
-   */
-  value?: string;
-}
+export type TokenReplaceResponse = unknown | string | null;
 
-export type TokenUserAPITokensListTokensResponse = Array<unknown>;
-
-export interface TokenUpdateParams {
+export interface TokenVerifyResponse {
   /**
-   * Token name.
+   * Token identifier tag.
    */
-  name: string;
-
-  /**
-   * List of access policies assigned to the token.
-   */
-  policies: Array<TokenUpdateParams.Policy>;
+  id: string;
 
   /**
    * Status of the token.
    */
   status: 'active' | 'disabled' | 'expired';
 
-  condition?: TokenUpdateParams.Condition;
-
   /**
    * The expiration time on or after which the JWT MUST NOT be accepted for
    * processing.
@@ -139,58 +138,7 @@ export interface TokenUpdateParams {
   not_before?: string;
 }
 
-export namespace TokenUpdateParams {
-  export interface Policy {
-    /**
-     * Allow or deny operations against the resources.
-     */
-    effect: 'allow' | 'deny';
-
-    /**
-     * A set of permission groups that are specified to the policy.
-     */
-    permission_groups: Array<Policy.PermissionGroup>;
-
-    /**
-     * A list of resource names that the policy applies to.
-     */
-    resources: unknown;
-  }
-
-  export namespace Policy {
-    /**
-     * A named group of permissions that map to a group of operations against
-     * resources.
-     */
-    export interface PermissionGroup {}
-  }
-
-  export interface Condition {
-    /**
-     * Client IP restrictions.
-     */
-    request_ip?: Condition.RequestIP;
-  }
-
-  export namespace Condition {
-    /**
-     * Client IP restrictions.
-     */
-    export interface RequestIP {
-      /**
-       * List of IPv4/IPv6 CIDR addresses.
-       */
-      in?: Array<string>;
-
-      /**
-       * List of IPv4/IPv6 CIDR addresses.
-       */
-      not_in?: Array<string>;
-    }
-  }
-}
-
-export interface TokenUserAPITokensCreateTokenParams {
+export interface TokenCreateParams {
   /**
    * Token name.
    */
@@ -199,9 +147,9 @@ export interface TokenUserAPITokensCreateTokenParams {
   /**
    * List of access policies assigned to the token.
    */
-  policies: Array<TokenUserAPITokensCreateTokenParams.Policy>;
+  policies: Array<TokenCreateParams.Policy>;
 
-  condition?: TokenUserAPITokensCreateTokenParams.Condition;
+  condition?: TokenCreateParams.Condition;
 
   /**
    * The expiration time on or after which the JWT MUST NOT be accepted for
@@ -215,7 +163,7 @@ export interface TokenUserAPITokensCreateTokenParams {
   not_before?: string;
 }
 
-export namespace TokenUserAPITokensCreateTokenParams {
+export namespace TokenCreateParams {
   export interface Policy {
     /**
      * Allow or deny operations against the resources.
@@ -266,37 +214,108 @@ export namespace TokenUserAPITokensCreateTokenParams {
   }
 }
 
-export interface TokenUserAPITokensListTokensParams {
+export interface TokenListParams extends V4PagePaginationArrayParams {
   /**
    * Direction to order results.
    */
   direction?: 'asc' | 'desc';
+}
+
+export interface TokenReplaceParams {
+  /**
+   * Token name.
+   */
+  name: string;
 
   /**
-   * Page number of paginated results.
+   * List of access policies assigned to the token.
    */
-  page?: number;
+  policies: Array<TokenReplaceParams.Policy>;
 
   /**
-   * Maximum number of results per page.
+   * Status of the token.
    */
-  per_page?: number;
+  status: 'active' | 'disabled' | 'expired';
+
+  condition?: TokenReplaceParams.Condition;
+
+  /**
+   * The expiration time on or after which the JWT MUST NOT be accepted for
+   * processing.
+   */
+  expires_on?: string;
+
+  /**
+   * The time before which the token MUST NOT be accepted for processing.
+   */
+  not_before?: string;
+}
+
+export namespace TokenReplaceParams {
+  export interface Policy {
+    /**
+     * Allow or deny operations against the resources.
+     */
+    effect: 'allow' | 'deny';
+
+    /**
+     * A set of permission groups that are specified to the policy.
+     */
+    permission_groups: Array<Policy.PermissionGroup>;
+
+    /**
+     * A list of resource names that the policy applies to.
+     */
+    resources: unknown;
+  }
+
+  export namespace Policy {
+    /**
+     * A named group of permissions that map to a group of operations against
+     * resources.
+     */
+    export interface PermissionGroup {}
+  }
+
+  export interface Condition {
+    /**
+     * Client IP restrictions.
+     */
+    request_ip?: Condition.RequestIP;
+  }
+
+  export namespace Condition {
+    /**
+     * Client IP restrictions.
+     */
+    export interface RequestIP {
+      /**
+       * List of IPv4/IPv6 CIDR addresses.
+       */
+      in?: Array<string>;
+
+      /**
+       * List of IPv4/IPv6 CIDR addresses.
+       */
+      not_in?: Array<string>;
+    }
+  }
 }
 
 export namespace Tokens {
-  export import TokenUpdateResponse = TokensAPI.TokenUpdateResponse;
+  export import TokenCreateResponse = TokensAPI.TokenCreateResponse;
+  export import TokenListResponse = TokensAPI.TokenListResponse;
   export import TokenDeleteResponse = TokensAPI.TokenDeleteResponse;
   export import TokenGetResponse = TokensAPI.TokenGetResponse;
-  export import TokenUserAPITokensCreateTokenResponse = TokensAPI.TokenUserAPITokensCreateTokenResponse;
-  export import TokenUserAPITokensListTokensResponse = TokensAPI.TokenUserAPITokensListTokensResponse;
-  export import TokenUpdateParams = TokensAPI.TokenUpdateParams;
-  export import TokenUserAPITokensCreateTokenParams = TokensAPI.TokenUserAPITokensCreateTokenParams;
-  export import TokenUserAPITokensListTokensParams = TokensAPI.TokenUserAPITokensListTokensParams;
+  export import TokenReplaceResponse = TokensAPI.TokenReplaceResponse;
+  export import TokenVerifyResponse = TokensAPI.TokenVerifyResponse;
+  export import TokenListResponsesV4PagePaginationArray = TokensAPI.TokenListResponsesV4PagePaginationArray;
+  export import TokenCreateParams = TokensAPI.TokenCreateParams;
+  export import TokenListParams = TokensAPI.TokenListParams;
+  export import TokenReplaceParams = TokensAPI.TokenReplaceParams;
   export import PermissionGroups = PermissionGroupsAPI.PermissionGroups;
-  export import PermissionGroupPermissionGroupsListPermissionGroupsResponse = PermissionGroupsAPI.PermissionGroupPermissionGroupsListPermissionGroupsResponse;
-  export import Verifies = VerifiesAPI.Verifies;
-  export import VerifyUserAPITokensVerifyTokenResponse = VerifiesAPI.VerifyUserAPITokensVerifyTokenResponse;
+  export import PermissionGroupListResponse = PermissionGroupsAPI.PermissionGroupListResponse;
   export import Values = ValuesAPI.Values;
-  export import ValueUserAPITokensRollTokenResponse = ValuesAPI.ValueUserAPITokensRollTokenResponse;
-  export import ValueUserAPITokensRollTokenParams = ValuesAPI.ValueUserAPITokensRollTokenParams;
+  export import ValueReplaceResponse = ValuesAPI.ValueReplaceResponse;
+  export import ValueReplaceParams = ValuesAPI.ValueReplaceParams;
 }

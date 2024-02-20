@@ -13,11 +13,10 @@ const cloudflare = new Cloudflare({
 
 describe('resource events', () => {
   // skipped: tests are disabled for the time being
-  test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.waitingRooms.events.update(
+  test.skip('create: only required params', async () => {
+    const responsePromise = cloudflare.waitingRooms.events.create(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '699d98642c564d2e855e9661899b7252',
-      '25756b2dfe6e378a06b033b670413757',
       {
         event_end_time: '2021-09-28T17:00:00.000Z',
         event_start_time: '2021-09-28T15:30:00.000Z',
@@ -34,11 +33,10 @@ describe('resource events', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.waitingRooms.events.update(
+  test.skip('create: required and optional params', async () => {
+    const response = await cloudflare.waitingRooms.events.create(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '699d98642c564d2e855e9661899b7252',
-      '25756b2dfe6e378a06b033b670413757',
       {
         event_end_time: '2021-09-28T17:00:00.000Z',
         event_start_time: '2021-09-28T15:30:00.000Z',
@@ -56,6 +54,33 @@ describe('resource events', () => {
         total_active_users: 200,
       },
     );
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list', async () => {
+    const responsePromise = cloudflare.waitingRooms.events.list(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '699d98642c564d2e855e9661899b7252',
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.waitingRooms.events.list(
+        '023e105f4ecef8ad9ca31a8372d0c353',
+        '699d98642c564d2e855e9661899b7252',
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
@@ -104,10 +129,11 @@ describe('resource events', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('waitingRoomCreateEvent: only required params', async () => {
-    const responsePromise = cloudflare.waitingRooms.events.waitingRoomCreateEvent(
+  test.skip('replace: only required params', async () => {
+    const responsePromise = cloudflare.waitingRooms.events.replace(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '699d98642c564d2e855e9661899b7252',
+      '25756b2dfe6e378a06b033b670413757',
       {
         event_end_time: '2021-09-28T17:00:00.000Z',
         event_start_time: '2021-09-28T15:30:00.000Z',
@@ -124,10 +150,11 @@ describe('resource events', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('waitingRoomCreateEvent: required and optional params', async () => {
-    const response = await cloudflare.waitingRooms.events.waitingRoomCreateEvent(
+  test.skip('replace: required and optional params', async () => {
+    const response = await cloudflare.waitingRooms.events.replace(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '699d98642c564d2e855e9661899b7252',
+      '25756b2dfe6e378a06b033b670413757',
       {
         event_end_time: '2021-09-28T17:00:00.000Z',
         event_start_time: '2021-09-28T15:30:00.000Z',
@@ -145,32 +172,5 @@ describe('resource events', () => {
         total_active_users: 200,
       },
     );
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('waitingRoomListEvents', async () => {
-    const responsePromise = cloudflare.waitingRooms.events.waitingRoomListEvents(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '699d98642c564d2e855e9661899b7252',
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('waitingRoomListEvents: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.waitingRooms.events.waitingRoomListEvents(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        '699d98642c564d2e855e9661899b7252',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 });

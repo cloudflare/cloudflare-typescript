@@ -9,6 +9,6 @@ export class LoadBalancingAnalytics extends APIResource {
 
 export namespace LoadBalancingAnalytics {
   export import Events = EventsAPI.Events;
-  export import EventLoadBalancerHealthcheckEventsListHealthcheckEventsResponse = EventsAPI.EventLoadBalancerHealthcheckEventsListHealthcheckEventsResponse;
-  export import EventLoadBalancerHealthcheckEventsListHealthcheckEventsParams = EventsAPI.EventLoadBalancerHealthcheckEventsListHealthcheckEventsParams;
+  export import EventListResponse = EventsAPI.EventListResponse;
+  export import EventListParams = EventsAPI.EventListParams;
 }

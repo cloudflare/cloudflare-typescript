@@ -9,13 +9,10 @@ export class Settings extends APIResource {
    * Returns a list of settings (and their details) that Page Rules can apply to
    * matching requests.
    */
-  availablePageRulesSettingsListAvailablePageRulesSettings(
-    zoneId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SettingAvailablePageRulesSettingsListAvailablePageRulesSettingsResponse> {
+  list(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<SettingListResponse> {
     return (
       this._client.get(`/zones/${zoneId}/pagerules/settings`, options) as Core.APIPromise<{
-        result: SettingAvailablePageRulesSettingsListAvailablePageRulesSettingsResponse;
+        result: SettingListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -24,8 +21,8 @@ export class Settings extends APIResource {
 /**
  * Settings available for the zone.
  */
-export type SettingAvailablePageRulesSettingsListAvailablePageRulesSettingsResponse = Array<unknown>;
+export type SettingListResponse = Array<unknown>;
 
 export namespace Settings {
-  export import SettingAvailablePageRulesSettingsListAvailablePageRulesSettingsResponse = SettingsAPI.SettingAvailablePageRulesSettingsListAvailablePageRulesSettingsResponse;
+  export import SettingListResponse = SettingsAPI.SettingListResponse;
 }

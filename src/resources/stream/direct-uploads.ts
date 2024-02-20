@@ -8,23 +8,23 @@ export class DirectUploads extends APIResource {
   /**
    * Creates a direct upload that allows video uploads without an API key.
    */
-  streamVideosUploadVideosViaDirectUploadURLs(
+  create(
     accountId: string,
-    params: DirectUploadStreamVideosUploadVideosViaDirectUploadURLsParams,
+    params: DirectUploadCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DirectUploadStreamVideosUploadVideosViaDirectUploadURLsResponse> {
+  ): Core.APIPromise<DirectUploadCreateResponse> {
     const { 'Upload-Creator': uploadCreator, ...body } = params;
     return (
       this._client.post(`/accounts/${accountId}/stream/direct_upload`, {
         body,
         ...options,
         headers: { 'Upload-Creator': uploadCreator || '', ...options?.headers },
-      }) as Core.APIPromise<{ result: DirectUploadStreamVideosUploadVideosViaDirectUploadURLsResponse }>
+      }) as Core.APIPromise<{ result: DirectUploadCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface DirectUploadStreamVideosUploadVideosViaDirectUploadURLsResponse {
+export interface DirectUploadCreateResponse {
   /**
    * Indicates the date and time at which the video will be deleted. Omit the field
    * to indicate no change, or include with a `null` value to remove an existing
@@ -43,10 +43,10 @@ export interface DirectUploadStreamVideosUploadVideosViaDirectUploadURLsResponse
    */
   uploadURL?: string;
 
-  watermark?: DirectUploadStreamVideosUploadVideosViaDirectUploadURLsResponse.Watermark;
+  watermark?: DirectUploadCreateResponse.Watermark;
 }
 
-export namespace DirectUploadStreamVideosUploadVideosViaDirectUploadURLsResponse {
+export namespace DirectUploadCreateResponse {
   export interface Watermark {
     /**
      * The date and a time a watermark profile was created.
@@ -115,7 +115,7 @@ export namespace DirectUploadStreamVideosUploadVideosViaDirectUploadURLsResponse
   }
 }
 
-export interface DirectUploadStreamVideosUploadVideosViaDirectUploadURLsParams {
+export interface DirectUploadCreateParams {
   /**
    * Body param: The maximum duration in seconds for a video upload. Can be set for a
    * video that is not yet uploaded to limit its duration. Uploads that exceed the
@@ -174,7 +174,7 @@ export interface DirectUploadStreamVideosUploadVideosViaDirectUploadURLsParams {
   /**
    * Body param:
    */
-  watermark?: DirectUploadStreamVideosUploadVideosViaDirectUploadURLsParams.Watermark;
+  watermark?: DirectUploadCreateParams.Watermark;
 
   /**
    * Header param: A user-defined identifier for the media creator.
@@ -182,7 +182,7 @@ export interface DirectUploadStreamVideosUploadVideosViaDirectUploadURLsParams {
   'Upload-Creator'?: string;
 }
 
-export namespace DirectUploadStreamVideosUploadVideosViaDirectUploadURLsParams {
+export namespace DirectUploadCreateParams {
   export interface Watermark {
     /**
      * The unique identifier for the watermark profile.
@@ -192,6 +192,6 @@ export namespace DirectUploadStreamVideosUploadVideosViaDirectUploadURLsParams {
 }
 
 export namespace DirectUploads {
-  export import DirectUploadStreamVideosUploadVideosViaDirectUploadURLsResponse = DirectUploadsAPI.DirectUploadStreamVideosUploadVideosViaDirectUploadURLsResponse;
-  export import DirectUploadStreamVideosUploadVideosViaDirectUploadURLsParams = DirectUploadsAPI.DirectUploadStreamVideosUploadVideosViaDirectUploadURLsParams;
+  export import DirectUploadCreateResponse = DirectUploadsAPI.DirectUploadCreateResponse;
+  export import DirectUploadCreateParams = DirectUploadsAPI.DirectUploadCreateParams;
 }

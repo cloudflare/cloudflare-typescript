@@ -2,90 +2,95 @@
 
 export { Access } from './access';
 export {
-  AppCreateResponse,
-  AppUpdateResponse,
-  AppListResponse,
-  AppDeleteResponse,
-  AppGetResponse,
-  AppCreateParams,
-  AppUpdateParams,
-  Apps,
-} from './apps/index';
+  ApplicationCreateResponse,
+  ApplicationListResponse,
+  ApplicationDeleteResponse,
+  ApplicationGetResponse,
+  ApplicationReplaceResponse,
+  ApplicationRevokeTokensResponse,
+  ApplicationCreateParams,
+  ApplicationReplaceParams,
+  Applications,
+} from './applications/index';
 export {
-  BookmarkUpdateResponse,
+  BookmarkListResponse,
   BookmarkDeleteResponse,
-  BookmarkAccessBookmarkApplicationsDeprecatedListBookmarkApplicationsResponse,
   BookmarkGetResponse,
+  BookmarkReplaceResponse,
   Bookmarks,
 } from './bookmarks';
 export {
-  CertificateUpdateResponse,
+  CertificateCreateResponse,
+  CertificateListResponse,
   CertificateDeleteResponse,
-  CertificateAccessMTLSAuthenticationAddAnMTLSCertificateResponse,
-  CertificateAccessMTLSAuthenticationListMTLSCertificatesResponse,
   CertificateGetResponse,
-  CertificateUpdateParams,
-  CertificateAccessMTLSAuthenticationAddAnMTLSCertificateParams,
+  CertificateReplaceResponse,
+  CertificateCreateParams,
+  CertificateReplaceParams,
   Certificates,
 } from './certificates/index';
 export {
   CustomPageCreateResponse,
-  CustomPageUpdateResponse,
   CustomPageListResponse,
   CustomPageDeleteResponse,
   CustomPageGetResponse,
+  CustomPageReplaceResponse,
   CustomPageCreateParams,
-  CustomPageUpdateParams,
+  CustomPageReplaceParams,
   CustomPages,
 } from './custom-pages';
 export {
-  GroupUpdateResponse,
+  GroupCreateResponse,
+  GroupListResponse,
   GroupDeleteResponse,
-  GroupAccessGroupsCreateAnAccessGroupResponse,
-  GroupAccessGroupsListAccessGroupsResponse,
   GroupGetResponse,
-  GroupUpdateParams,
-  GroupAccessGroupsCreateAnAccessGroupParams,
+  GroupReplaceResponse,
+  GroupCreateParams,
+  GroupReplaceParams,
   Groups,
 } from './groups';
 export {
-  IdentityProviderUpdateResponse,
+  IdentityProviderCreateResponse,
+  IdentityProviderListResponse,
   IdentityProviderDeleteResponse,
-  IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderResponse,
-  IdentityProviderAccessIdentityProvidersListAccessIdentityProvidersResponse,
   IdentityProviderGetResponse,
-  IdentityProviderUpdateParams,
-  IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams,
+  IdentityProviderReplaceResponse,
+  IdentityProviderCreateParams,
+  IdentityProviderReplaceParams,
   IdentityProviders,
 } from './identity-providers';
-export {
-  KeyAccessKeyConfigurationGetTheAccessKeyConfigurationResponse,
-  KeyAccessKeyConfigurationUpdateTheAccessKeyConfigurationResponse,
-  KeyAccessKeyConfigurationUpdateTheAccessKeyConfigurationParams,
-  Keys,
-} from './keys/index';
+export { KeyListResponse, KeyReplaceResponse, KeyRotateResponse, KeyReplaceParams, Keys } from './keys';
 export { Logs } from './logs/index';
 export {
-  OrganizationZeroTrustOrganizationCreateYourZeroTrustOrganizationResponse,
-  OrganizationZeroTrustOrganizationGetYourZeroTrustOrganizationResponse,
-  OrganizationZeroTrustOrganizationUpdateYourZeroTrustOrganizationResponse,
-  OrganizationZeroTrustOrganizationCreateYourZeroTrustOrganizationParams,
-  OrganizationZeroTrustOrganizationUpdateYourZeroTrustOrganizationParams,
+  OrganizationCreateResponse,
+  OrganizationListResponse,
+  OrganizationReplaceResponse,
+  OrganizationRevokeUsersResponse,
+  OrganizationCreateParams,
+  OrganizationReplaceParams,
+  OrganizationRevokeUsersParams,
   Organizations,
-} from './organizations/index';
+} from './organizations';
+export { SeatUpdateResponse, SeatUpdateParams, Seats } from './seats';
 export {
-  SeatZeroTrustSeatsUpdateAUserSeatResponse,
-  SeatZeroTrustSeatsUpdateAUserSeatParams,
-  Seats,
-} from './seats';
-export {
-  ServiceTokenUpdateResponse,
+  ServiceTokenCreateResponse,
+  ServiceTokenListResponse,
   ServiceTokenDeleteResponse,
-  ServiceTokenAccessServiceTokensCreateAServiceTokenResponse,
-  ServiceTokenAccessServiceTokensListServiceTokensResponse,
-  ServiceTokenUpdateParams,
-  ServiceTokenAccessServiceTokensCreateAServiceTokenParams,
+  ServiceTokenRefreshResponse,
+  ServiceTokenReplaceResponse,
+  ServiceTokenRotateResponse,
+  ServiceTokenCreateParams,
+  ServiceTokenReplaceParams,
   ServiceTokens,
-} from './service-tokens/index';
-export { TagListResponse, Tags } from './tags';
+} from './service-tokens';
+export {
+  TagCreateResponse,
+  TagListResponse,
+  TagDeleteResponse,
+  TagGetResponse,
+  TagReplaceResponse,
+  TagCreateParams,
+  TagReplaceParams,
+  Tags,
+} from './tags';
 export { UserListResponse, Users } from './users/index';

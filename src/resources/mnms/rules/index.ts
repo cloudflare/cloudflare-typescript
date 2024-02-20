@@ -1,15 +1,12 @@
 // File generated from our OpenAPI spec by Stainless.
 
+export { AdvertisementUpdateResponse, Advertisements } from './advertisements';
 export {
-  AdvertisementMagicNetworkMonitoringRulesUpdateAdvertisementForRuleResponse,
-  Advertisements,
-} from './advertisements';
-export {
+  RuleCreateResponse,
   RuleUpdateResponse,
+  RuleListResponse,
   RuleDeleteResponse,
   RuleGetResponse,
-  RuleMagicNetworkMonitoringRulesCreateRulesResponse,
-  RuleMagicNetworkMonitoringRulesListRulesResponse,
-  RuleMagicNetworkMonitoringRulesUpdateRulesResponse,
+  RuleReplaceResponse,
   Rules,
 } from './rules';

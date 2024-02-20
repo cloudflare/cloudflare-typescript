@@ -8,23 +8,20 @@ export class Stats extends APIResource {
   /**
    * Fetch usage statistics details for Cloudflare Images.
    */
-  cloudflareImagesImagesUsageStatistics(
-    accountId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<StatCloudflareImagesImagesUsageStatisticsResponse> {
+  get(accountId: string, options?: Core.RequestOptions): Core.APIPromise<StatGetResponse> {
     return (
       this._client.get(`/accounts/${accountId}/images/v1/stats`, options) as Core.APIPromise<{
-        result: StatCloudflareImagesImagesUsageStatisticsResponse;
+        result: StatGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface StatCloudflareImagesImagesUsageStatisticsResponse {
-  count?: StatCloudflareImagesImagesUsageStatisticsResponse.Count;
+export interface StatGetResponse {
+  count?: StatGetResponse.Count;
 }
 
-export namespace StatCloudflareImagesImagesUsageStatisticsResponse {
+export namespace StatGetResponse {
   export interface Count {
     /**
      * Cloudflare Images allowed usage.
@@ -39,5 +36,5 @@ export namespace StatCloudflareImagesImagesUsageStatisticsResponse {
 }
 
 export namespace Stats {
-  export import StatCloudflareImagesImagesUsageStatisticsResponse = StatsAPI.StatCloudflareImagesImagesUsageStatisticsResponse;
+  export import StatGetResponse = StatsAPI.StatGetResponse;
 }

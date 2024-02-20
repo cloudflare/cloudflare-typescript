@@ -13,15 +13,12 @@ const cloudflare = new Cloudflare({
 
 describe('resource seats', () => {
   // skipped: tests are disabled for the time being
-  test.skip('zeroTrustSeatsUpdateAUserSeat: only required params', async () => {
-    const responsePromise = cloudflare.access.seats.zeroTrustSeatsUpdateAUserSeat(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      [
-        { access_seat: false, gateway_seat: false },
-        { access_seat: false, gateway_seat: false },
-        { access_seat: false, gateway_seat: false },
-      ],
-    );
+  test.skip('update: only required params', async () => {
+    const responsePromise = cloudflare.access.seats.update('023e105f4ecef8ad9ca31a8372d0c353', [
+      { access_seat: false, gateway_seat: false },
+      { access_seat: false, gateway_seat: false },
+      { access_seat: false, gateway_seat: false },
+    ]);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -32,14 +29,11 @@ describe('resource seats', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('zeroTrustSeatsUpdateAUserSeat: required and optional params', async () => {
-    const response = await cloudflare.access.seats.zeroTrustSeatsUpdateAUserSeat(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      [
-        { access_seat: false, gateway_seat: false },
-        { access_seat: false, gateway_seat: false },
-        { access_seat: false, gateway_seat: false },
-      ],
-    );
+  test.skip('update: required and optional params', async () => {
+    const response = await cloudflare.access.seats.update('023e105f4ecef8ad9ca31a8372d0c353', [
+      { access_seat: false, gateway_seat: false },
+      { access_seat: false, gateway_seat: false },
+      { access_seat: false, gateway_seat: false },
+    ]);
   });
 });

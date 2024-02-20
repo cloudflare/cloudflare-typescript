@@ -8,30 +8,36 @@ export class Pagerduty extends APIResource {
   /**
    * Creates a new token for integrating with PagerDuty.
    */
-  createToken(
-    accountId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PagerdutyCreateTokenResponse> {
+  create(accountId: string, options?: Core.RequestOptions): Core.APIPromise<PagerdutyCreateResponse> {
     return (
       this._client.post(
         `/accounts/${accountId}/alerting/v3/destinations/pagerduty/connect`,
         options,
-      ) as Core.APIPromise<{ result: PagerdutyCreateTokenResponse }>
+      ) as Core.APIPromise<{ result: PagerdutyCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Deletes all the PagerDuty Services connected to the account.
    */
-  deleteAll(
-    accountId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PagerdutyDeleteAllResponse | null> {
+  delete(accountId: string, options?: Core.RequestOptions): Core.APIPromise<PagerdutyDeleteResponse | null> {
     return (
       this._client.delete(
         `/accounts/${accountId}/alerting/v3/destinations/pagerduty`,
         options,
-      ) as Core.APIPromise<{ result: PagerdutyDeleteAllResponse | null }>
+      ) as Core.APIPromise<{ result: PagerdutyDeleteResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Get a list of all configured PagerDuty services.
+   */
+  get(accountId: string, options?: Core.RequestOptions): Core.APIPromise<PagerdutyGetResponse | null> {
+    return (
+      this._client.get(
+        `/accounts/${accountId}/alerting/v3/destinations/pagerduty`,
+        options,
+      ) as Core.APIPromise<{ result: PagerdutyGetResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -52,14 +58,30 @@ export class Pagerduty extends APIResource {
   }
 }
 
-export interface PagerdutyCreateTokenResponse {
+export interface PagerdutyCreateResponse {
   /**
    * UUID
    */
   id?: string;
 }
 
-export type PagerdutyDeleteAllResponse = unknown | Array<unknown> | string;
+export type PagerdutyDeleteResponse = unknown | Array<unknown> | string;
+
+export type PagerdutyGetResponse = Array<PagerdutyGetResponse.PagerdutyGetResponseItem>;
+
+export namespace PagerdutyGetResponse {
+  export interface PagerdutyGetResponseItem {
+    /**
+     * UUID
+     */
+    id?: string;
+
+    /**
+     * The name of the pagerduty service.
+     */
+    name?: string;
+  }
+}
 
 export interface PagerdutyLinkResponse {
   /**
@@ -69,7 +91,8 @@ export interface PagerdutyLinkResponse {
 }
 
 export namespace Pagerduty {
-  export import PagerdutyCreateTokenResponse = PagerdutyAPI.PagerdutyCreateTokenResponse;
-  export import PagerdutyDeleteAllResponse = PagerdutyAPI.PagerdutyDeleteAllResponse;
+  export import PagerdutyCreateResponse = PagerdutyAPI.PagerdutyCreateResponse;
+  export import PagerdutyDeleteResponse = PagerdutyAPI.PagerdutyDeleteResponse;
+  export import PagerdutyGetResponse = PagerdutyAPI.PagerdutyGetResponse;
   export import PagerdutyLinkResponse = PagerdutyAPI.PagerdutyLinkResponse;
 }

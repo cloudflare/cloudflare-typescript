@@ -13,11 +13,10 @@ const cloudflare = new Cloudflare({
 
 describe('resource copies', () => {
   // skipped: tests are disabled for the time being
-  test.skip('streamVideosUploadVideosFromAURL: only required params', async () => {
-    const responsePromise = cloudflare.stream.copies.streamVideosUploadVideosFromAURL(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      { url: 'https://example.com/myvideo.mp4' },
-    );
+  test.skip('create: only required params', async () => {
+    const responsePromise = cloudflare.stream.copies.create('023e105f4ecef8ad9ca31a8372d0c353', {
+      url: 'https://example.com/myvideo.mp4',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -28,22 +27,19 @@ describe('resource copies', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('streamVideosUploadVideosFromAURL: required and optional params', async () => {
-    const response = await cloudflare.stream.copies.streamVideosUploadVideosFromAURL(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      {
-        url: 'https://example.com/myvideo.mp4',
-        allowedOrigins: ['example.com'],
-        creator: 'creator-id_abcde12345',
-        meta: { name: 'video12345.mp4' },
-        requireSignedURLs: true,
-        scheduledDeletion: '2014-01-02T02:20:00Z',
-        thumbnailTimestampPct: 0.529241,
-        watermark: { uid: 'ea95132c15732412d22c1476fa83f27a' },
-        'Upload-Creator': 'creator-id_abcde12345',
-        'Upload-Metadata':
-          'name aGVsbG8gd29ybGQ=, requiresignedurls, allowedorigins ZXhhbXBsZS5jb20sdGVzdC5jb20=',
-      },
-    );
+  test.skip('create: required and optional params', async () => {
+    const response = await cloudflare.stream.copies.create('023e105f4ecef8ad9ca31a8372d0c353', {
+      url: 'https://example.com/myvideo.mp4',
+      allowedOrigins: ['example.com'],
+      creator: 'creator-id_abcde12345',
+      meta: { name: 'video12345.mp4' },
+      requireSignedURLs: true,
+      scheduledDeletion: '2014-01-02T02:20:00Z',
+      thumbnailTimestampPct: 0.529241,
+      watermark: { uid: 'ea95132c15732412d22c1476fa83f27a' },
+      'Upload-Creator': 'creator-id_abcde12345',
+      'Upload-Metadata':
+        'name aGVsbG8gd29ybGQ=, requiresignedurls, allowedorigins ZXhhbXBsZS5jb20sdGVzdC5jb20=',
+    });
   });
 });

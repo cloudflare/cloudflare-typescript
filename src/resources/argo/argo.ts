@@ -15,7 +15,7 @@ export namespace Argo {
   export import SmartRoutingGetResponse = SmartRoutingAPI.SmartRoutingGetResponse;
   export import SmartRoutingUpdateParams = SmartRoutingAPI.SmartRoutingUpdateParams;
   export import TieredCaching = TieredCachingAPI.TieredCaching;
-  export import TieredCachingTieredCachingGetTieredCachingSettingResponse = TieredCachingAPI.TieredCachingTieredCachingGetTieredCachingSettingResponse;
-  export import TieredCachingTieredCachingPatchTieredCachingSettingResponse = TieredCachingAPI.TieredCachingTieredCachingPatchTieredCachingSettingResponse;
-  export import TieredCachingTieredCachingPatchTieredCachingSettingParams = TieredCachingAPI.TieredCachingTieredCachingPatchTieredCachingSettingParams;
+  export import TieredCachingUpdateResponse = TieredCachingAPI.TieredCachingUpdateResponse;
+  export import TieredCachingGetResponse = TieredCachingAPI.TieredCachingGetResponse;
+  export import TieredCachingUpdateParams = TieredCachingAPI.TieredCachingUpdateParams;
 }

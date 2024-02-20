@@ -6,6 +6,24 @@ import * as RulesAPI from 'cloudflare/resources/waiting-rooms/rules';
 
 export class Rules extends APIResource {
   /**
+   * Only available for the Waiting Room Advanced subscription. Creates a rule for a
+   * waiting room.
+   */
+  create(
+    zoneIdentifier: string,
+    waitingRoomId: unknown,
+    body: RuleCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RuleCreateResponse | null> {
+    return (
+      this._client.post(`/zones/${zoneIdentifier}/waiting_rooms/${waitingRoomId}/rules`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: RuleCreateResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Patches a rule for a waiting room.
    */
   update(
@@ -20,6 +38,22 @@ export class Rules extends APIResource {
         body,
         ...options,
       }) as Core.APIPromise<{ result: RuleUpdateResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Lists rules for a waiting room.
+   */
+  list(
+    zoneIdentifier: string,
+    waitingRoomId: unknown,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RuleListResponse | null> {
+    return (
+      this._client.get(
+        `/zones/${zoneIdentifier}/waiting_rooms/${waitingRoomId}/rules`,
+        options,
+      ) as Core.APIPromise<{ result: RuleListResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -41,55 +75,59 @@ export class Rules extends APIResource {
   }
 
   /**
-   * Only available for the Waiting Room Advanced subscription. Creates a rule for a
-   * waiting room.
-   */
-  waitingRoomCreateWaitingRoomRule(
-    zoneIdentifier: string,
-    waitingRoomId: unknown,
-    body: RuleWaitingRoomCreateWaitingRoomRuleParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleWaitingRoomCreateWaitingRoomRuleResponse | null> {
-    return (
-      this._client.post(`/zones/${zoneIdentifier}/waiting_rooms/${waitingRoomId}/rules`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: RuleWaitingRoomCreateWaitingRoomRuleResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Lists rules for a waiting room.
-   */
-  waitingRoomListWaitingRoomRules(
-    zoneIdentifier: string,
-    waitingRoomId: unknown,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleWaitingRoomListWaitingRoomRulesResponse | null> {
-    return (
-      this._client.get(
-        `/zones/${zoneIdentifier}/waiting_rooms/${waitingRoomId}/rules`,
-        options,
-      ) as Core.APIPromise<{ result: RuleWaitingRoomListWaitingRoomRulesResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Only available for the Waiting Room Advanced subscription. Replaces all rules
    * for a waiting room.
    */
-  waitingRoomReplaceWaitingRoomRules(
+  replace(
     zoneIdentifier: string,
     waitingRoomId: unknown,
-    body: RuleWaitingRoomReplaceWaitingRoomRulesParams,
+    body: RuleReplaceParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleWaitingRoomReplaceWaitingRoomRulesResponse | null> {
+  ): Core.APIPromise<RuleReplaceResponse | null> {
     return (
       this._client.put(`/zones/${zoneIdentifier}/waiting_rooms/${waitingRoomId}/rules`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: RuleWaitingRoomReplaceWaitingRoomRulesResponse | null }>
+      }) as Core.APIPromise<{ result: RuleReplaceResponse | null }>
     )._thenUnwrap((obj) => obj.result);
+  }
+}
+
+export type RuleCreateResponse = Array<RuleCreateResponse.RuleCreateResponseItem>;
+
+export namespace RuleCreateResponse {
+  export interface RuleCreateResponseItem {
+    /**
+     * The ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * The action to take when the expression matches.
+     */
+    action?: 'bypass_waiting_room';
+
+    /**
+     * The description of the rule.
+     */
+    description?: string;
+
+    /**
+     * When set to true, the rule is enabled.
+     */
+    enabled?: boolean;
+
+    /**
+     * Criteria defining when there is a match for the current rule.
+     */
+    expression?: string;
+
+    last_updated?: string;
+
+    /**
+     * The version of the rule.
+     */
+    version?: string;
   }
 }
 
@@ -97,6 +135,44 @@ export type RuleUpdateResponse = Array<RuleUpdateResponse.RuleUpdateResponseItem
 
 export namespace RuleUpdateResponse {
   export interface RuleUpdateResponseItem {
+    /**
+     * The ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * The action to take when the expression matches.
+     */
+    action?: 'bypass_waiting_room';
+
+    /**
+     * The description of the rule.
+     */
+    description?: string;
+
+    /**
+     * When set to true, the rule is enabled.
+     */
+    enabled?: boolean;
+
+    /**
+     * Criteria defining when there is a match for the current rule.
+     */
+    expression?: string;
+
+    last_updated?: string;
+
+    /**
+     * The version of the rule.
+     */
+    version?: string;
+  }
+}
+
+export type RuleListResponse = Array<RuleListResponse.RuleListResponseItem>;
+
+export namespace RuleListResponse {
+  export interface RuleListResponseItem {
     /**
      * The ID of the rule.
      */
@@ -169,11 +245,10 @@ export namespace RuleDeleteResponse {
   }
 }
 
-export type RuleWaitingRoomCreateWaitingRoomRuleResponse =
-  Array<RuleWaitingRoomCreateWaitingRoomRuleResponse.RuleWaitingRoomCreateWaitingRoomRuleResponseItem>;
+export type RuleReplaceResponse = Array<RuleReplaceResponse.RuleReplaceResponseItem>;
 
-export namespace RuleWaitingRoomCreateWaitingRoomRuleResponse {
-  export interface RuleWaitingRoomCreateWaitingRoomRuleResponseItem {
+export namespace RuleReplaceResponse {
+  export interface RuleReplaceResponseItem {
     /**
      * The ID of the rule.
      */
@@ -208,82 +283,26 @@ export namespace RuleWaitingRoomCreateWaitingRoomRuleResponse {
   }
 }
 
-export type RuleWaitingRoomListWaitingRoomRulesResponse =
-  Array<RuleWaitingRoomListWaitingRoomRulesResponse.RuleWaitingRoomListWaitingRoomRulesResponseItem>;
+export interface RuleCreateParams {
+  /**
+   * The action to take when the expression matches.
+   */
+  action: 'bypass_waiting_room';
 
-export namespace RuleWaitingRoomListWaitingRoomRulesResponse {
-  export interface RuleWaitingRoomListWaitingRoomRulesResponseItem {
-    /**
-     * The ID of the rule.
-     */
-    id?: string;
+  /**
+   * Criteria defining when there is a match for the current rule.
+   */
+  expression: string;
 
-    /**
-     * The action to take when the expression matches.
-     */
-    action?: 'bypass_waiting_room';
+  /**
+   * The description of the rule.
+   */
+  description?: string;
 
-    /**
-     * The description of the rule.
-     */
-    description?: string;
-
-    /**
-     * When set to true, the rule is enabled.
-     */
-    enabled?: boolean;
-
-    /**
-     * Criteria defining when there is a match for the current rule.
-     */
-    expression?: string;
-
-    last_updated?: string;
-
-    /**
-     * The version of the rule.
-     */
-    version?: string;
-  }
-}
-
-export type RuleWaitingRoomReplaceWaitingRoomRulesResponse =
-  Array<RuleWaitingRoomReplaceWaitingRoomRulesResponse.RuleWaitingRoomReplaceWaitingRoomRulesResponseItem>;
-
-export namespace RuleWaitingRoomReplaceWaitingRoomRulesResponse {
-  export interface RuleWaitingRoomReplaceWaitingRoomRulesResponseItem {
-    /**
-     * The ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to take when the expression matches.
-     */
-    action?: 'bypass_waiting_room';
-
-    /**
-     * The description of the rule.
-     */
-    description?: string;
-
-    /**
-     * When set to true, the rule is enabled.
-     */
-    enabled?: boolean;
-
-    /**
-     * Criteria defining when there is a match for the current rule.
-     */
-    expression?: string;
-
-    last_updated?: string;
-
-    /**
-     * The version of the rule.
-     */
-    version?: string;
-  }
+  /**
+   * When set to true, the rule is enabled.
+   */
+  enabled?: boolean;
 }
 
 export interface RuleUpdateParams {
@@ -341,32 +360,9 @@ export namespace RuleUpdateParams {
   }
 }
 
-export interface RuleWaitingRoomCreateWaitingRoomRuleParams {
-  /**
-   * The action to take when the expression matches.
-   */
-  action: 'bypass_waiting_room';
+export type RuleReplaceParams = Array<RuleReplaceParams.Body>;
 
-  /**
-   * Criteria defining when there is a match for the current rule.
-   */
-  expression: string;
-
-  /**
-   * The description of the rule.
-   */
-  description?: string;
-
-  /**
-   * When set to true, the rule is enabled.
-   */
-  enabled?: boolean;
-}
-
-export type RuleWaitingRoomReplaceWaitingRoomRulesParams =
-  Array<RuleWaitingRoomReplaceWaitingRoomRulesParams.Body>;
-
-export namespace RuleWaitingRoomReplaceWaitingRoomRulesParams {
+export namespace RuleReplaceParams {
   export interface Body {
     /**
      * The action to take when the expression matches.
@@ -391,12 +387,12 @@ export namespace RuleWaitingRoomReplaceWaitingRoomRulesParams {
 }
 
 export namespace Rules {
+  export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
   export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
+  export import RuleListResponse = RulesAPI.RuleListResponse;
   export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
-  export import RuleWaitingRoomCreateWaitingRoomRuleResponse = RulesAPI.RuleWaitingRoomCreateWaitingRoomRuleResponse;
-  export import RuleWaitingRoomListWaitingRoomRulesResponse = RulesAPI.RuleWaitingRoomListWaitingRoomRulesResponse;
-  export import RuleWaitingRoomReplaceWaitingRoomRulesResponse = RulesAPI.RuleWaitingRoomReplaceWaitingRoomRulesResponse;
+  export import RuleReplaceResponse = RulesAPI.RuleReplaceResponse;
+  export import RuleCreateParams = RulesAPI.RuleCreateParams;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
-  export import RuleWaitingRoomCreateWaitingRoomRuleParams = RulesAPI.RuleWaitingRoomCreateWaitingRoomRuleParams;
-  export import RuleWaitingRoomReplaceWaitingRoomRulesParams = RulesAPI.RuleWaitingRoomReplaceWaitingRoomRulesParams;
+  export import RuleReplaceParams = RulesAPI.RuleReplaceParams;
 }

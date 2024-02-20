@@ -13,8 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource entities', () => {
   // skipped: tests are disabled for the time being
-  test.skip('ips: only required params', async () => {
-    const responsePromise = cloudflare.radar.entities.ips({ ip: '8.8.8.8' });
+  test.skip('list: only required params', async () => {
+    const responsePromise = cloudflare.radar.entities.list({ ip: '8.8.8.8' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -25,7 +25,7 @@ describe('resource entities', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('ips: required and optional params', async () => {
-    const response = await cloudflare.radar.entities.ips({ ip: '8.8.8.8', format: 'JSON' });
+  test.skip('list: required and optional params', async () => {
+    const response = await cloudflare.radar.entities.list({ ip: '8.8.8.8', format: 'JSON' });
   });
 });

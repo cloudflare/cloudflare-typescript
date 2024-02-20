@@ -21,16 +21,14 @@ export namespace LoadBalancers {
   export import MonitorCreateParams = MonitorsAPI.MonitorCreateParams;
   export import MonitorUpdateParams = MonitorsAPI.MonitorUpdateParams;
   export import Pools = PoolsAPI.Pools;
+  export import PoolCreateResponse = PoolsAPI.PoolCreateResponse;
   export import PoolUpdateResponse = PoolsAPI.PoolUpdateResponse;
+  export import PoolListResponse = PoolsAPI.PoolListResponse;
   export import PoolDeleteResponse = PoolsAPI.PoolDeleteResponse;
   export import PoolGetResponse = PoolsAPI.PoolGetResponse;
-  export import PoolLoadBalancerPoolsCreatePoolResponse = PoolsAPI.PoolLoadBalancerPoolsCreatePoolResponse;
-  export import PoolLoadBalancerPoolsListPoolsResponse = PoolsAPI.PoolLoadBalancerPoolsListPoolsResponse;
-  export import PoolLoadBalancerPoolsPatchPoolsResponse = PoolsAPI.PoolLoadBalancerPoolsPatchPoolsResponse;
+  export import PoolCreateParams = PoolsAPI.PoolCreateParams;
   export import PoolUpdateParams = PoolsAPI.PoolUpdateParams;
-  export import PoolLoadBalancerPoolsCreatePoolParams = PoolsAPI.PoolLoadBalancerPoolsCreatePoolParams;
-  export import PoolLoadBalancerPoolsListPoolsParams = PoolsAPI.PoolLoadBalancerPoolsListPoolsParams;
-  export import PoolLoadBalancerPoolsPatchPoolsParams = PoolsAPI.PoolLoadBalancerPoolsPatchPoolsParams;
+  export import PoolListParams = PoolsAPI.PoolListParams;
   export import Previews = PreviewsAPI.Previews;
   export import PreviewGetResponse = PreviewsAPI.PreviewGetResponse;
 }

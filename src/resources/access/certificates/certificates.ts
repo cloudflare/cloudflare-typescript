@@ -9,20 +9,35 @@ export class Certificates extends APIResource {
   settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
 
   /**
-   * Updates a configured mTLS certificate.
+   * Adds a new mTLS root certificate to Access.
    */
-  update(
+  create(
     accountOrZone: string,
     accountOrZoneId: string,
-    uuid: string,
-    body: CertificateUpdateParams,
+    body: CertificateCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CertificateUpdateResponse> {
+  ): Core.APIPromise<CertificateCreateResponse> {
     return (
-      this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/certificates/${uuid}`, {
+      this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/certificates`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: CertificateUpdateResponse }>
+      }) as Core.APIPromise<{ result: CertificateCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Lists all mTLS root certificates.
+   */
+  list(
+    accountOrZone: string,
+    accountOrZoneId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CertificateListResponse | null> {
+    return (
+      this._client.get(
+        `/${accountOrZone}/${accountOrZoneId}/access/certificates`,
+        options,
+      ) as Core.APIPromise<{ result: CertificateListResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -44,39 +59,6 @@ export class Certificates extends APIResource {
   }
 
   /**
-   * Adds a new mTLS root certificate to Access.
-   */
-  accessMTLSAuthenticationAddAnMTLSCertificate(
-    accountOrZone: string,
-    accountOrZoneId: string,
-    body: CertificateAccessMTLSAuthenticationAddAnMTLSCertificateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CertificateAccessMTLSAuthenticationAddAnMTLSCertificateResponse> {
-    return (
-      this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/certificates`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: CertificateAccessMTLSAuthenticationAddAnMTLSCertificateResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Lists all mTLS root certificates.
-   */
-  accessMTLSAuthenticationListMTLSCertificates(
-    accountOrZone: string,
-    accountOrZoneId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CertificateAccessMTLSAuthenticationListMTLSCertificatesResponse | null> {
-    return (
-      this._client.get(
-        `/${accountOrZone}/${accountOrZoneId}/access/certificates`,
-        options,
-      ) as Core.APIPromise<{ result: CertificateAccessMTLSAuthenticationListMTLSCertificatesResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Fetches a single mTLS certificate.
    */
   get(
@@ -92,9 +74,27 @@ export class Certificates extends APIResource {
       ) as Core.APIPromise<{ result: CertificateGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Updates a configured mTLS certificate.
+   */
+  replace(
+    accountOrZone: string,
+    accountOrZoneId: string,
+    uuid: string,
+    body: CertificateReplaceParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CertificateReplaceResponse> {
+    return (
+      this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/certificates/${uuid}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: CertificateReplaceResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
-export interface CertificateUpdateResponse {
+export interface CertificateCreateResponse {
   /**
    * The ID of the application that will use this certificate.
    */
@@ -122,46 +122,10 @@ export interface CertificateUpdateResponse {
   updated_at?: string;
 }
 
-export interface CertificateDeleteResponse {
-  /**
-   * UUID
-   */
-  id?: string;
-}
+export type CertificateListResponse = Array<CertificateListResponse.CertificateListResponseItem>;
 
-export interface CertificateAccessMTLSAuthenticationAddAnMTLSCertificateResponse {
-  /**
-   * The ID of the application that will use this certificate.
-   */
-  id?: unknown;
-
-  /**
-   * The hostnames of the applications that will use this certificate.
-   */
-  associated_hostnames?: Array<string>;
-
-  created_at?: string;
-
-  expires_on?: string;
-
-  /**
-   * The MD5 fingerprint of the certificate.
-   */
-  fingerprint?: string;
-
-  /**
-   * The name of the certificate.
-   */
-  name?: string;
-
-  updated_at?: string;
-}
-
-export type CertificateAccessMTLSAuthenticationListMTLSCertificatesResponse =
-  Array<CertificateAccessMTLSAuthenticationListMTLSCertificatesResponse.CertificateAccessMtlsAuthenticationListMtlsCertificatesResponseItem>;
-
-export namespace CertificateAccessMTLSAuthenticationListMTLSCertificatesResponse {
-  export interface CertificateAccessMtlsAuthenticationListMtlsCertificatesResponseItem {
+export namespace CertificateListResponse {
+  export interface CertificateListResponseItem {
     /**
      * The ID of the application that will use this certificate.
      */
@@ -188,6 +152,13 @@ export namespace CertificateAccessMTLSAuthenticationListMTLSCertificatesResponse
 
     updated_at?: string;
   }
+}
+
+export interface CertificateDeleteResponse {
+  /**
+   * UUID
+   */
+  id?: string;
 }
 
 export interface CertificateGetResponse {
@@ -218,19 +189,35 @@ export interface CertificateGetResponse {
   updated_at?: string;
 }
 
-export interface CertificateUpdateParams {
+export interface CertificateReplaceResponse {
+  /**
+   * The ID of the application that will use this certificate.
+   */
+  id?: unknown;
+
   /**
    * The hostnames of the applications that will use this certificate.
    */
-  associated_hostnames: Array<string>;
+  associated_hostnames?: Array<string>;
+
+  created_at?: string;
+
+  expires_on?: string;
+
+  /**
+   * The MD5 fingerprint of the certificate.
+   */
+  fingerprint?: string;
 
   /**
    * The name of the certificate.
    */
   name?: string;
+
+  updated_at?: string;
 }
 
-export interface CertificateAccessMTLSAuthenticationAddAnMTLSCertificateParams {
+export interface CertificateCreateParams {
   /**
    * The certificate content.
    */
@@ -247,16 +234,28 @@ export interface CertificateAccessMTLSAuthenticationAddAnMTLSCertificateParams {
   associated_hostnames?: Array<string>;
 }
 
+export interface CertificateReplaceParams {
+  /**
+   * The hostnames of the applications that will use this certificate.
+   */
+  associated_hostnames: Array<string>;
+
+  /**
+   * The name of the certificate.
+   */
+  name?: string;
+}
+
 export namespace Certificates {
-  export import CertificateUpdateResponse = CertificatesAPI.CertificateUpdateResponse;
+  export import CertificateCreateResponse = CertificatesAPI.CertificateCreateResponse;
+  export import CertificateListResponse = CertificatesAPI.CertificateListResponse;
   export import CertificateDeleteResponse = CertificatesAPI.CertificateDeleteResponse;
-  export import CertificateAccessMTLSAuthenticationAddAnMTLSCertificateResponse = CertificatesAPI.CertificateAccessMTLSAuthenticationAddAnMTLSCertificateResponse;
-  export import CertificateAccessMTLSAuthenticationListMTLSCertificatesResponse = CertificatesAPI.CertificateAccessMTLSAuthenticationListMTLSCertificatesResponse;
   export import CertificateGetResponse = CertificatesAPI.CertificateGetResponse;
-  export import CertificateUpdateParams = CertificatesAPI.CertificateUpdateParams;
-  export import CertificateAccessMTLSAuthenticationAddAnMTLSCertificateParams = CertificatesAPI.CertificateAccessMTLSAuthenticationAddAnMTLSCertificateParams;
+  export import CertificateReplaceResponse = CertificatesAPI.CertificateReplaceResponse;
+  export import CertificateCreateParams = CertificatesAPI.CertificateCreateParams;
+  export import CertificateReplaceParams = CertificatesAPI.CertificateReplaceParams;
   export import Settings = SettingsAPI.Settings;
-  export import SettingUpdateResponse = SettingsAPI.SettingUpdateResponse;
   export import SettingListResponse = SettingsAPI.SettingListResponse;
-  export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;
+  export import SettingReplaceResponse = SettingsAPI.SettingReplaceResponse;
+  export import SettingReplaceParams = SettingsAPI.SettingReplaceParams;
 }

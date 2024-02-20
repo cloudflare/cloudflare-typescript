@@ -8,21 +8,6 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudfl
 
 export class Accounts extends APIResource {
   /**
-   * Update an existing account.
-   */
-  update(
-    accountId: unknown,
-    body: AccountUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AccountUpdateResponse> {
-    return (
-      this._client.put(`/accounts/${accountId}`, { body, ...options }) as Core.APIPromise<{
-        result: AccountUpdateResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * List all accounts you have ownership or verified access to.
    */
   list(
@@ -53,17 +38,39 @@ export class Accounts extends APIResource {
       this._client.get(`/accounts/${accountId}`, options) as Core.APIPromise<{ result: AccountGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Update an existing account.
+   */
+  replace(
+    accountId: unknown,
+    body: AccountReplaceParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AccountReplaceResponse> {
+    return (
+      this._client.put(`/accounts/${accountId}`, { body, ...options }) as Core.APIPromise<{
+        result: AccountReplaceResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
 export class AccountListResponsesV4PagePaginationArray extends V4PagePaginationArray<AccountListResponse> {}
-
-export type AccountUpdateResponse = unknown | string | null;
 
 export type AccountListResponse = unknown;
 
 export type AccountGetResponse = unknown | string | null;
 
-export interface AccountUpdateParams {
+export type AccountReplaceResponse = unknown | string | null;
+
+export interface AccountListParams extends V4PagePaginationArrayParams {
+  /**
+   * Direction to order results.
+   */
+  direction?: 'asc' | 'desc';
+}
+
+export interface AccountReplaceParams {
   /**
    * Account name
    */
@@ -72,10 +79,10 @@ export interface AccountUpdateParams {
   /**
    * Account settings
    */
-  settings?: AccountUpdateParams.Settings;
+  settings?: AccountReplaceParams.Settings;
 }
 
-export namespace AccountUpdateParams {
+export namespace AccountReplaceParams {
   /**
    * Account settings
    */
@@ -110,18 +117,11 @@ export namespace AccountUpdateParams {
   }
 }
 
-export interface AccountListParams extends V4PagePaginationArrayParams {
-  /**
-   * Direction to order results.
-   */
-  direction?: 'asc' | 'desc';
-}
-
 export namespace Accounts {
-  export import AccountUpdateResponse = AccountsAPI.AccountUpdateResponse;
   export import AccountListResponse = AccountsAPI.AccountListResponse;
   export import AccountGetResponse = AccountsAPI.AccountGetResponse;
+  export import AccountReplaceResponse = AccountsAPI.AccountReplaceResponse;
   export import AccountListResponsesV4PagePaginationArray = AccountsAPI.AccountListResponsesV4PagePaginationArray;
-  export import AccountUpdateParams = AccountsAPI.AccountUpdateParams;
   export import AccountListParams = AccountsAPI.AccountListParams;
+  export import AccountReplaceParams = AccountsAPI.AccountReplaceParams;
 }

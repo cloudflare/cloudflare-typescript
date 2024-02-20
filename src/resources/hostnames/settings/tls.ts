@@ -6,24 +6,6 @@ import * as TLSAPI from 'cloudflare/resources/hostnames/settings/tls';
 
 export class TLS extends APIResource {
   /**
-   * Update the tls setting value for the hostname.
-   */
-  update(
-    zoneId: string,
-    settingId: 'ciphers' | 'min_tls_version' | 'http2',
-    hostname: string,
-    body: TLSUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TLSUpdateResponse> {
-    return (
-      this._client.put(`/zones/${zoneId}/hostnames/settings/${settingId}/${hostname}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: TLSUpdateResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Delete the tls setting value for the hostname.
    */
   delete(
@@ -54,33 +36,24 @@ export class TLS extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
-}
-
-export interface TLSUpdateResponse {
-  /**
-   * This is the time the tls setting was originally created for this hostname.
-   */
-  created_at?: string;
 
   /**
-   * The hostname for which the tls settings are set.
+   * Update the tls setting value for the hostname.
    */
-  hostname?: string;
-
-  /**
-   * Deployment status for the given tls setting.
-   */
-  status?: string;
-
-  /**
-   * This is the time the tls setting was updated.
-   */
-  updated_at?: string;
-
-  /**
-   * The tls setting value.
-   */
-  value?: number | string | Array<string>;
+  replace(
+    zoneId: string,
+    settingId: 'ciphers' | 'min_tls_version' | 'http2',
+    hostname: string,
+    body: TLSReplaceParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TLSReplaceResponse> {
+    return (
+      this._client.put(`/zones/${zoneId}/hostnames/settings/${settingId}/${hostname}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: TLSReplaceResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
 export interface TLSDeleteResponse {
@@ -135,7 +108,34 @@ export namespace TLSGetResponse {
   }
 }
 
-export interface TLSUpdateParams {
+export interface TLSReplaceResponse {
+  /**
+   * This is the time the tls setting was originally created for this hostname.
+   */
+  created_at?: string;
+
+  /**
+   * The hostname for which the tls settings are set.
+   */
+  hostname?: string;
+
+  /**
+   * Deployment status for the given tls setting.
+   */
+  status?: string;
+
+  /**
+   * This is the time the tls setting was updated.
+   */
+  updated_at?: string;
+
+  /**
+   * The tls setting value.
+   */
+  value?: number | string | Array<string>;
+}
+
+export interface TLSReplaceParams {
   /**
    * The tls setting value.
    */
@@ -143,8 +143,8 @@ export interface TLSUpdateParams {
 }
 
 export namespace TLS {
-  export import TLSUpdateResponse = TLSAPI.TLSUpdateResponse;
   export import TLSDeleteResponse = TLSAPI.TLSDeleteResponse;
   export import TLSGetResponse = TLSAPI.TLSGetResponse;
-  export import TLSUpdateParams = TLSAPI.TLSUpdateParams;
+  export import TLSReplaceResponse = TLSAPI.TLSReplaceResponse;
+  export import TLSReplaceParams = TLSAPI.TLSReplaceParams;
 }

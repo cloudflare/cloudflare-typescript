@@ -14,33 +14,33 @@ export class ConnectionTampering extends APIResource {
   /**
    * Distribution of connection tampering types over a given time period.
    */
-  summary(
-    query?: ConnectionTamperingSummaryParams,
+  list(
+    query?: ConnectionTamperingListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ConnectionTamperingSummaryResponse>;
-  summary(options?: Core.RequestOptions): Core.APIPromise<ConnectionTamperingSummaryResponse>;
-  summary(
-    query: ConnectionTamperingSummaryParams | Core.RequestOptions = {},
+  ): Core.APIPromise<ConnectionTamperingListResponse>;
+  list(options?: Core.RequestOptions): Core.APIPromise<ConnectionTamperingListResponse>;
+  list(
+    query: ConnectionTamperingListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ConnectionTamperingSummaryResponse> {
+  ): Core.APIPromise<ConnectionTamperingListResponse> {
     if (isRequestOptions(query)) {
-      return this.summary({}, query);
+      return this.list({}, query);
     }
     return (
       this._client.get('/radar/connection_tampering/summary', { query, ...options }) as Core.APIPromise<{
-        result: ConnectionTamperingSummaryResponse;
+        result: ConnectionTamperingListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface ConnectionTamperingSummaryResponse {
-  meta: ConnectionTamperingSummaryResponse.Meta;
+export interface ConnectionTamperingListResponse {
+  meta: ConnectionTamperingListResponse.Meta;
 
-  summary_0: ConnectionTamperingSummaryResponse.Summary0;
+  summary_0: ConnectionTamperingListResponse.Summary0;
 }
 
-export namespace ConnectionTamperingSummaryResponse {
+export namespace ConnectionTamperingListResponse {
   export interface Meta {
     dateRange: Array<Meta.DateRange>;
 
@@ -118,7 +118,7 @@ export namespace ConnectionTamperingSummaryResponse {
   }
 }
 
-export interface ConnectionTamperingSummaryParams {
+export interface ConnectionTamperingListParams {
   /**
    * Array of comma separated list of ASNs, start with `-` to exclude from results.
    * For example, `-174, 3356` excludes results from AS174, but includes results from
@@ -178,8 +178,8 @@ export interface ConnectionTamperingSummaryParams {
 }
 
 export namespace ConnectionTampering {
-  export import ConnectionTamperingSummaryResponse = ConnectionTamperingAPI.ConnectionTamperingSummaryResponse;
-  export import ConnectionTamperingSummaryParams = ConnectionTamperingAPI.ConnectionTamperingSummaryParams;
+  export import ConnectionTamperingListResponse = ConnectionTamperingAPI.ConnectionTamperingListResponse;
+  export import ConnectionTamperingListParams = ConnectionTamperingAPI.ConnectionTamperingListParams;
   export import TimeseriesGroups = TimeseriesGroupsAPI.TimeseriesGroups;
   export import TimeseriesGroupListResponse = TimeseriesGroupsAPI.TimeseriesGroupListResponse;
   export import TimeseriesGroupListParams = TimeseriesGroupsAPI.TimeseriesGroupListParams;

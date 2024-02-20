@@ -5,9 +5,9 @@ export {
   DeploymentListResponse,
   DeploymentDeleteResponse,
   DeploymentGetResponse,
+  DeploymentRetryResponse,
+  DeploymentRollbackResponse,
   DeploymentCreateParams,
   Deployments,
 } from './deployments';
-export { Histories } from './histories/index';
-export { RetryPagesDeploymentRetryDeploymentResponse, Retries } from './retries';
-export { RollbackPagesDeploymentRollbackDeploymentResponse, Rollbacks } from './rollbacks';
+export { History } from './history/index';

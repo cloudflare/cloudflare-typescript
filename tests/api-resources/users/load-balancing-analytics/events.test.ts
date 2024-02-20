@@ -13,9 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource events', () => {
   // skipped: tests are disabled for the time being
-  test.skip('loadBalancerHealthcheckEventsListHealthcheckEvents', async () => {
-    const responsePromise =
-      cloudflare.users.loadBalancingAnalytics.events.loadBalancerHealthcheckEventsListHealthcheckEvents();
+  test.skip('list', async () => {
+    const responsePromise = cloudflare.users.loadBalancingAnalytics.events.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -26,20 +25,18 @@ describe('resource events', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('loadBalancerHealthcheckEventsListHealthcheckEvents: request options instead of params are passed correctly', async () => {
+  test.skip('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.users.loadBalancingAnalytics.events.loadBalancerHealthcheckEventsListHealthcheckEvents({
-        path: '/_stainless_unknown_path',
-      }),
+      cloudflare.users.loadBalancingAnalytics.events.list({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('loadBalancerHealthcheckEventsListHealthcheckEvents: request options and params are passed correctly', async () => {
+  test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.users.loadBalancingAnalytics.events.loadBalancerHealthcheckEventsListHealthcheckEvents(
+      cloudflare.users.loadBalancingAnalytics.events.list(
         {
           origin_healthy: true,
           origin_name: 'primary-dc-1',

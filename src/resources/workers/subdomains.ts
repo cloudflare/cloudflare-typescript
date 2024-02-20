@@ -6,47 +6,44 @@ import * as SubdomainsAPI from 'cloudflare/resources/workers/subdomains';
 
 export class Subdomains extends APIResource {
   /**
-   * Creates a Workers subdomain for an account.
+   * Returns a Workers subdomain for an account.
    */
-  workerSubdomainCreateSubdomain(
-    accountId: string,
-    body: SubdomainWorkerSubdomainCreateSubdomainParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SubdomainWorkerSubdomainCreateSubdomainResponse> {
+  get(accountId: string, options?: Core.RequestOptions): Core.APIPromise<SubdomainGetResponse> {
     return (
-      this._client.put(`/accounts/${accountId}/workers/subdomain`, { body, ...options }) as Core.APIPromise<{
-        result: SubdomainWorkerSubdomainCreateSubdomainResponse;
+      this._client.get(`/accounts/${accountId}/workers/subdomain`, options) as Core.APIPromise<{
+        result: SubdomainGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
-   * Returns a Workers subdomain for an account.
+   * Creates a Workers subdomain for an account.
    */
-  workerSubdomainGetSubdomain(
+  replace(
     accountId: string,
+    body: SubdomainReplaceParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SubdomainWorkerSubdomainGetSubdomainResponse> {
+  ): Core.APIPromise<SubdomainReplaceResponse> {
     return (
-      this._client.get(`/accounts/${accountId}/workers/subdomain`, options) as Core.APIPromise<{
-        result: SubdomainWorkerSubdomainGetSubdomainResponse;
+      this._client.put(`/accounts/${accountId}/workers/subdomain`, { body, ...options }) as Core.APIPromise<{
+        result: SubdomainReplaceResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface SubdomainWorkerSubdomainCreateSubdomainResponse {
+export interface SubdomainGetResponse {
   name?: unknown;
 }
 
-export interface SubdomainWorkerSubdomainGetSubdomainResponse {
+export interface SubdomainReplaceResponse {
   name?: unknown;
 }
 
-export type SubdomainWorkerSubdomainCreateSubdomainParams = unknown;
+export type SubdomainReplaceParams = unknown;
 
 export namespace Subdomains {
-  export import SubdomainWorkerSubdomainCreateSubdomainResponse = SubdomainsAPI.SubdomainWorkerSubdomainCreateSubdomainResponse;
-  export import SubdomainWorkerSubdomainGetSubdomainResponse = SubdomainsAPI.SubdomainWorkerSubdomainGetSubdomainResponse;
-  export import SubdomainWorkerSubdomainCreateSubdomainParams = SubdomainsAPI.SubdomainWorkerSubdomainCreateSubdomainParams;
+  export import SubdomainGetResponse = SubdomainsAPI.SubdomainGetResponse;
+  export import SubdomainReplaceResponse = SubdomainsAPI.SubdomainReplaceResponse;
+  export import SubdomainReplaceParams = SubdomainsAPI.SubdomainReplaceParams;
 }
