@@ -67,12 +67,12 @@ export interface CachePurgeResponse {
 }
 
 export type CachePurgeParams =
-  | CachePurgeParams.Dba3P8WwFlex
-  | CachePurgeParams.Dba3P8WwEverything
-  | CachePurgeParams.Dba3P8WwFiles;
+  | CachePurgeParams.Qepy7bYeFlex
+  | CachePurgeParams.Qepy7bYeEverything
+  | CachePurgeParams.Qepy7bYeFiles;
 
 export namespace CachePurgeParams {
-  export interface Dba3P8WwFlex {
+  export interface Qepy7bYeFlex {
     hosts?: Array<string>;
 
     prefixes?: Array<string>;
@@ -80,16 +80,16 @@ export namespace CachePurgeParams {
     tags?: Array<string>;
   }
 
-  export interface Dba3P8WwEverything {
+  export interface Qepy7bYeEverything {
     purge_everything?: boolean;
   }
 
-  export interface Dba3P8WwFiles {
-    files?: Array<string | CachePurgeParams.Dba3P8WwFiles.Dba3P8WwURLAndHeaders>;
+  export interface Qepy7bYeFiles {
+    files?: Array<string | CachePurgeParams.Qepy7bYeFiles.Qepy7bYeURLAndHeaders>;
   }
 
-  export namespace Dba3P8WwFiles {
-    export interface Dba3P8WwURLAndHeaders {
+  export namespace Qepy7bYeFiles {
+    export interface Qepy7bYeURLAndHeaders {
       headers?: unknown;
 
       url?: string;

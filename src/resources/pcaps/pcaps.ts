@@ -53,11 +53,11 @@ export class Pcaps extends APIResource {
 }
 
 export type PcapCreateResponse =
-  | PcapCreateResponse.Ty58MTbiPcapsResponseSimple
-  | PcapCreateResponse.Ty58MTbiPcapsResponseFull;
+  | PcapCreateResponse.PgpenC68PcapsResponseSimple
+  | PcapCreateResponse.PgpenC68PcapsResponseFull;
 
 export namespace PcapCreateResponse {
-  export interface Ty58MTbiPcapsResponseSimple {
+  export interface PgpenC68PcapsResponseSimple {
     /**
      * The ID for the packet capture.
      */
@@ -66,7 +66,7 @@ export namespace PcapCreateResponse {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: Ty58MTbiPcapsResponseSimple.FilterV1;
+    filter_v1?: PgpenC68PcapsResponseSimple.FilterV1;
 
     /**
      * The status of the packet capture request.
@@ -103,7 +103,7 @@ export namespace PcapCreateResponse {
     type?: 'simple' | 'full';
   }
 
-  export namespace Ty58MTbiPcapsResponseSimple {
+  export namespace PgpenC68PcapsResponseSimple {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
@@ -135,7 +135,7 @@ export namespace PcapCreateResponse {
     }
   }
 
-  export interface Ty58MTbiPcapsResponseFull {
+  export interface PgpenC68PcapsResponseFull {
     /**
      * The ID for the packet capture.
      */
@@ -168,7 +168,7 @@ export namespace PcapCreateResponse {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: Ty58MTbiPcapsResponseFull.FilterV1;
+    filter_v1?: PgpenC68PcapsResponseFull.FilterV1;
 
     /**
      * The status of the packet capture request.
@@ -205,7 +205,7 @@ export namespace PcapCreateResponse {
     type?: 'simple' | 'full';
   }
 
-  export namespace Ty58MTbiPcapsResponseFull {
+  export namespace PgpenC68PcapsResponseFull {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
@@ -239,11 +239,11 @@ export namespace PcapCreateResponse {
 }
 
 export type PcapListResponse = Array<
-  PcapListResponse.Ty58MTbiPcapsResponseSimple | PcapListResponse.Ty58MTbiPcapsResponseFull
+  PcapListResponse.PgpenC68PcapsResponseSimple | PcapListResponse.PgpenC68PcapsResponseFull
 >;
 
 export namespace PcapListResponse {
-  export interface Ty58MTbiPcapsResponseSimple {
+  export interface PgpenC68PcapsResponseSimple {
     /**
      * The ID for the packet capture.
      */
@@ -252,7 +252,7 @@ export namespace PcapListResponse {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: Ty58MTbiPcapsResponseSimple.FilterV1;
+    filter_v1?: PgpenC68PcapsResponseSimple.FilterV1;
 
     /**
      * The status of the packet capture request.
@@ -289,7 +289,7 @@ export namespace PcapListResponse {
     type?: 'simple' | 'full';
   }
 
-  export namespace Ty58MTbiPcapsResponseSimple {
+  export namespace PgpenC68PcapsResponseSimple {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
@@ -321,7 +321,7 @@ export namespace PcapListResponse {
     }
   }
 
-  export interface Ty58MTbiPcapsResponseFull {
+  export interface PgpenC68PcapsResponseFull {
     /**
      * The ID for the packet capture.
      */
@@ -354,7 +354,7 @@ export namespace PcapListResponse {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: Ty58MTbiPcapsResponseFull.FilterV1;
+    filter_v1?: PgpenC68PcapsResponseFull.FilterV1;
 
     /**
      * The status of the packet capture request.
@@ -391,7 +391,7 @@ export namespace PcapListResponse {
     type?: 'simple' | 'full';
   }
 
-  export namespace Ty58MTbiPcapsResponseFull {
+  export namespace PgpenC68PcapsResponseFull {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
@@ -425,11 +425,11 @@ export namespace PcapListResponse {
 }
 
 export type PcapGetResponse =
-  | PcapGetResponse.Ty58MTbiPcapsResponseSimple
-  | PcapGetResponse.Ty58MTbiPcapsResponseFull;
+  | PcapGetResponse.PgpenC68PcapsResponseSimple
+  | PcapGetResponse.PgpenC68PcapsResponseFull;
 
 export namespace PcapGetResponse {
-  export interface Ty58MTbiPcapsResponseSimple {
+  export interface PgpenC68PcapsResponseSimple {
     /**
      * The ID for the packet capture.
      */
@@ -438,7 +438,7 @@ export namespace PcapGetResponse {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: Ty58MTbiPcapsResponseSimple.FilterV1;
+    filter_v1?: PgpenC68PcapsResponseSimple.FilterV1;
 
     /**
      * The status of the packet capture request.
@@ -475,7 +475,7 @@ export namespace PcapGetResponse {
     type?: 'simple' | 'full';
   }
 
-  export namespace Ty58MTbiPcapsResponseSimple {
+  export namespace PgpenC68PcapsResponseSimple {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
@@ -507,7 +507,7 @@ export namespace PcapGetResponse {
     }
   }
 
-  export interface Ty58MTbiPcapsResponseFull {
+  export interface PgpenC68PcapsResponseFull {
     /**
      * The ID for the packet capture.
      */
@@ -540,7 +540,7 @@ export namespace PcapGetResponse {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: Ty58MTbiPcapsResponseFull.FilterV1;
+    filter_v1?: PgpenC68PcapsResponseFull.FilterV1;
 
     /**
      * The status of the packet capture request.
@@ -577,7 +577,7 @@ export namespace PcapGetResponse {
     type?: 'simple' | 'full';
   }
 
-  export namespace Ty58MTbiPcapsResponseFull {
+  export namespace PgpenC68PcapsResponseFull {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
@@ -611,11 +611,11 @@ export namespace PcapGetResponse {
 }
 
 export type PcapCreateParams =
-  | PcapCreateParams.Ty58MTbiPcapsRequestSimple
-  | PcapCreateParams.Ty58MTbiPcapsRequestFull;
+  | PcapCreateParams.PgpenC68PcapsRequestSimple
+  | PcapCreateParams.PgpenC68PcapsRequestFull;
 
 export namespace PcapCreateParams {
-  export interface Ty58MTbiPcapsRequestSimple {
+  export interface PgpenC68PcapsRequestSimple {
     /**
      * The limit of packets contained in a packet capture.
      */
@@ -640,10 +640,10 @@ export namespace PcapCreateParams {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: PcapCreateParams.Ty58MTbiPcapsRequestSimple.FilterV1;
+    filter_v1?: PcapCreateParams.PgpenC68PcapsRequestSimple.FilterV1;
   }
 
-  export namespace Ty58MTbiPcapsRequestSimple {
+  export namespace PgpenC68PcapsRequestSimple {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
@@ -675,7 +675,7 @@ export namespace PcapCreateParams {
     }
   }
 
-  export interface Ty58MTbiPcapsRequestFull {
+  export interface PgpenC68PcapsRequestFull {
     /**
      * The name of the data center used for the packet capture. This can be a specific
      * colo (ord02) or a multi-colo name (ORD). This field only applies to `full`
@@ -713,7 +713,7 @@ export namespace PcapCreateParams {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: PcapCreateParams.Ty58MTbiPcapsRequestFull.FilterV1;
+    filter_v1?: PcapCreateParams.PgpenC68PcapsRequestFull.FilterV1;
 
     /**
      * The limit of packets contained in a packet capture.
@@ -721,7 +721,7 @@ export namespace PcapCreateParams {
     packet_limit?: number;
   }
 
-  export namespace Ty58MTbiPcapsRequestFull {
+  export namespace PgpenC68PcapsRequestFull {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
