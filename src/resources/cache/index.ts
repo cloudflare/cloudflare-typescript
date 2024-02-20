@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless.
 
-export { CachePurgeResponse, CachePurgeParams, Cache } from './cache';
+export { Cache } from './cache';
 export {
   CacheReserveUpdateResponse,
   CacheReserveListResponse,
