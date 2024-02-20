@@ -67,12 +67,12 @@ export interface CachePurgeResponse {
 }
 
 export type CachePurgeParams =
-  | CachePurgeParams.ABb3jQf9Flex
-  | CachePurgeParams.ABb3jQf9Everything
-  | CachePurgeParams.ABb3jQf9Files;
+  | CachePurgeParams._5Xc1SjOjFlex
+  | CachePurgeParams._5Xc1SjOjEverything
+  | CachePurgeParams._5Xc1SjOjFiles;
 
 export namespace CachePurgeParams {
-  export interface ABb3jQf9Flex {
+  export interface _5Xc1SjOjFlex {
     hosts?: Array<string>;
 
     prefixes?: Array<string>;
@@ -80,16 +80,16 @@ export namespace CachePurgeParams {
     tags?: Array<string>;
   }
 
-  export interface ABb3jQf9Everything {
+  export interface _5Xc1SjOjEverything {
     purge_everything?: boolean;
   }
 
-  export interface ABb3jQf9Files {
-    files?: Array<string | CachePurgeParams.ABb3jQf9Files.ABb3jQf9URLAndHeaders>;
+  export interface _5Xc1SjOjFiles {
+    files?: Array<string | CachePurgeParams._5Xc1SjOjFiles._5Xc1SjOjURLAndHeaders>;
   }
 
-  export namespace ABb3jQf9Files {
-    export interface ABb3jQf9URLAndHeaders {
+  export namespace _5Xc1SjOjFiles {
+    export interface _5Xc1SjOjURLAndHeaders {
       headers?: unknown;
 
       url?: string;
