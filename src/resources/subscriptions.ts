@@ -6,19 +6,31 @@ import * as SubscriptionsAPI from 'cloudflare/resources/subscriptions';
 
 export class Subscriptions extends APIResource {
   /**
-   * Updates an account subscription.
+   * Create a zone subscription, either plan or add-ons.
    */
-  update(
-    accountIdentifier: string,
-    subscriptionIdentifier: string,
-    body: SubscriptionUpdateParams,
+  create(
+    identifier: string,
+    body: SubscriptionCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SubscriptionUpdateResponse> {
+  ): Core.APIPromise<SubscriptionCreateResponse> {
     return (
-      this._client.put(`/accounts/${accountIdentifier}/subscriptions/${subscriptionIdentifier}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: SubscriptionUpdateResponse }>
+      this._client.post(`/zones/${identifier}/subscription`, { body, ...options }) as Core.APIPromise<{
+        result: SubscriptionCreateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Lists all of an account's subscriptions.
+   */
+  list(
+    accountIdentifier: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SubscriptionListResponse | null> {
+    return (
+      this._client.get(`/accounts/${accountIdentifier}/subscriptions`, options) as Core.APIPromise<{
+        result: SubscriptionListResponse | null;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -39,107 +51,51 @@ export class Subscriptions extends APIResource {
   }
 
   /**
-   * Creates an account subscription.
-   */
-  accountSubscriptionsCreateSubscription(
-    accountIdentifier: string,
-    body: SubscriptionAccountSubscriptionsCreateSubscriptionParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SubscriptionAccountSubscriptionsCreateSubscriptionResponse> {
-    return (
-      this._client.post(`/accounts/${accountIdentifier}/subscriptions`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: SubscriptionAccountSubscriptionsCreateSubscriptionResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Lists all of an account's subscriptions.
-   */
-  accountSubscriptionsListSubscriptions(
-    accountIdentifier: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SubscriptionAccountSubscriptionsListSubscriptionsResponse | null> {
-    return (
-      this._client.get(`/accounts/${accountIdentifier}/subscriptions`, options) as Core.APIPromise<{
-        result: SubscriptionAccountSubscriptionsListSubscriptionsResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Create a zone subscription, either plan or add-ons.
-   */
-  zoneSubscriptionCreateZoneSubscription(
-    identifier: string,
-    body: SubscriptionZoneSubscriptionCreateZoneSubscriptionParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SubscriptionZoneSubscriptionCreateZoneSubscriptionResponse> {
-    return (
-      this._client.post(`/zones/${identifier}/subscription`, { body, ...options }) as Core.APIPromise<{
-        result: SubscriptionZoneSubscriptionCreateZoneSubscriptionResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Updates zone subscriptions, either plan or add-ons.
-   */
-  zoneSubscriptionUpdateZoneSubscription(
-    identifier: string,
-    body: SubscriptionZoneSubscriptionUpdateZoneSubscriptionParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SubscriptionZoneSubscriptionUpdateZoneSubscriptionResponse> {
-    return (
-      this._client.put(`/zones/${identifier}/subscription`, { body, ...options }) as Core.APIPromise<{
-        result: SubscriptionZoneSubscriptionUpdateZoneSubscriptionResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Lists zone subscription details.
    */
-  zoneSubscriptionZoneSubscriptionDetails(
-    identifier: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SubscriptionZoneSubscriptionZoneSubscriptionDetailsResponse> {
+  get(identifier: string, options?: Core.RequestOptions): Core.APIPromise<SubscriptionGetResponse> {
     return (
       this._client.get(`/zones/${identifier}/subscription`, options) as Core.APIPromise<{
-        result: SubscriptionZoneSubscriptionZoneSubscriptionDetailsResponse;
+        result: SubscriptionGetResponse;
       }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Updates an account subscription.
+   */
+  replace(
+    accountIdentifier: string,
+    subscriptionIdentifier: string,
+    body: SubscriptionReplaceParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SubscriptionReplaceResponse> {
+    return (
+      this._client.put(`/accounts/${accountIdentifier}/subscriptions/${subscriptionIdentifier}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: SubscriptionReplaceResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type SubscriptionUpdateResponse = unknown | string | null;
+export type SubscriptionCreateResponse = unknown | string | null;
 
-export interface SubscriptionDeleteResponse {
-  /**
-   * Subscription identifier tag.
-   */
-  subscription_id?: string;
-}
+export type SubscriptionListResponse = Array<SubscriptionListResponse.SubscriptionListResponseItem>;
 
-export type SubscriptionAccountSubscriptionsCreateSubscriptionResponse = unknown | string | null;
-
-export type SubscriptionAccountSubscriptionsListSubscriptionsResponse =
-  Array<SubscriptionAccountSubscriptionsListSubscriptionsResponse.SubscriptionAccountSubscriptionsListSubscriptionsResponseItem>;
-
-export namespace SubscriptionAccountSubscriptionsListSubscriptionsResponse {
-  export interface SubscriptionAccountSubscriptionsListSubscriptionsResponseItem {
+export namespace SubscriptionListResponse {
+  export interface SubscriptionListResponseItem {
     /**
      * Subscription identifier tag.
      */
     id?: string;
 
-    app?: SubscriptionAccountSubscriptionsListSubscriptionsResponseItem.App;
+    app?: SubscriptionListResponseItem.App;
 
     /**
      * The list of add-ons subscribed to.
      */
-    component_values?: Array<SubscriptionAccountSubscriptionsListSubscriptionsResponseItem.ComponentValue>;
+    component_values?: Array<SubscriptionListResponseItem.ComponentValue>;
 
     /**
      * The monetary unit in which pricing information is displayed.
@@ -170,7 +126,7 @@ export namespace SubscriptionAccountSubscriptionsListSubscriptionsResponse {
     /**
      * The rate plan applied to the subscription.
      */
-    rate_plan?: SubscriptionAccountSubscriptionsListSubscriptionsResponseItem.RatePlan;
+    rate_plan?: SubscriptionListResponseItem.RatePlan;
 
     /**
      * The state that the subscription is in.
@@ -180,10 +136,10 @@ export namespace SubscriptionAccountSubscriptionsListSubscriptionsResponse {
     /**
      * A simple zone object. May have null properties if not a zone subscription.
      */
-    zone?: SubscriptionAccountSubscriptionsListSubscriptionsResponseItem.Zone;
+    zone?: SubscriptionListResponseItem.Zone;
   }
 
-  export namespace SubscriptionAccountSubscriptionsListSubscriptionsResponseItem {
+  export namespace SubscriptionListResponseItem {
     export interface App {
       /**
        * app install id.
@@ -273,19 +229,24 @@ export namespace SubscriptionAccountSubscriptionsListSubscriptionsResponse {
   }
 }
 
-export type SubscriptionZoneSubscriptionCreateZoneSubscriptionResponse = unknown | string | null;
+export interface SubscriptionDeleteResponse {
+  /**
+   * Subscription identifier tag.
+   */
+  subscription_id?: string;
+}
 
-export type SubscriptionZoneSubscriptionUpdateZoneSubscriptionResponse = unknown | string | null;
+export type SubscriptionGetResponse = unknown | string | null;
 
-export type SubscriptionZoneSubscriptionZoneSubscriptionDetailsResponse = unknown | string | null;
+export type SubscriptionReplaceResponse = unknown | string | null;
 
-export interface SubscriptionUpdateParams {
-  app?: SubscriptionUpdateParams.App;
+export interface SubscriptionCreateParams {
+  app?: SubscriptionCreateParams.App;
 
   /**
    * The list of add-ons subscribed to.
    */
-  component_values?: Array<SubscriptionUpdateParams.ComponentValue>;
+  component_values?: Array<SubscriptionCreateParams.ComponentValue>;
 
   /**
    * How often the subscription is renewed automatically.
@@ -295,15 +256,15 @@ export interface SubscriptionUpdateParams {
   /**
    * The rate plan applied to the subscription.
    */
-  rate_plan?: SubscriptionUpdateParams.RatePlan;
+  rate_plan?: SubscriptionCreateParams.RatePlan;
 
   /**
    * A simple zone object. May have null properties if not a zone subscription.
    */
-  zone?: SubscriptionUpdateParams.Zone;
+  zone?: SubscriptionCreateParams.Zone;
 }
 
-export namespace SubscriptionUpdateParams {
+export namespace SubscriptionCreateParams {
   export interface App {
     /**
      * app install id.
@@ -382,13 +343,13 @@ export namespace SubscriptionUpdateParams {
   export interface Zone {}
 }
 
-export interface SubscriptionAccountSubscriptionsCreateSubscriptionParams {
-  app?: SubscriptionAccountSubscriptionsCreateSubscriptionParams.App;
+export interface SubscriptionReplaceParams {
+  app?: SubscriptionReplaceParams.App;
 
   /**
    * The list of add-ons subscribed to.
    */
-  component_values?: Array<SubscriptionAccountSubscriptionsCreateSubscriptionParams.ComponentValue>;
+  component_values?: Array<SubscriptionReplaceParams.ComponentValue>;
 
   /**
    * How often the subscription is renewed automatically.
@@ -398,221 +359,15 @@ export interface SubscriptionAccountSubscriptionsCreateSubscriptionParams {
   /**
    * The rate plan applied to the subscription.
    */
-  rate_plan?: SubscriptionAccountSubscriptionsCreateSubscriptionParams.RatePlan;
+  rate_plan?: SubscriptionReplaceParams.RatePlan;
 
   /**
    * A simple zone object. May have null properties if not a zone subscription.
    */
-  zone?: SubscriptionAccountSubscriptionsCreateSubscriptionParams.Zone;
+  zone?: SubscriptionReplaceParams.Zone;
 }
 
-export namespace SubscriptionAccountSubscriptionsCreateSubscriptionParams {
-  export interface App {
-    /**
-     * app install id.
-     */
-    install_id?: string;
-  }
-
-  /**
-   * A component value for a subscription.
-   */
-  export interface ComponentValue {
-    /**
-     * The default amount assigned.
-     */
-    default?: number;
-
-    /**
-     * The name of the component value.
-     */
-    name?: string;
-
-    /**
-     * The unit price for the component value.
-     */
-    price?: number;
-
-    /**
-     * The amount of the component value assigned.
-     */
-    value?: number;
-  }
-
-  /**
-   * The rate plan applied to the subscription.
-   */
-  export interface RatePlan {
-    /**
-     * The ID of the rate plan.
-     */
-    id?: unknown;
-
-    /**
-     * The currency applied to the rate plan subscription.
-     */
-    currency?: string;
-
-    /**
-     * Whether this rate plan is managed externally from Cloudflare.
-     */
-    externally_managed?: boolean;
-
-    /**
-     * Whether a rate plan is enterprise-based (or newly adopted term contract).
-     */
-    is_contract?: boolean;
-
-    /**
-     * The full name of the rate plan.
-     */
-    public_name?: string;
-
-    /**
-     * The scope that this rate plan applies to.
-     */
-    scope?: string;
-
-    /**
-     * The list of sets this rate plan applies to.
-     */
-    sets?: Array<string>;
-  }
-
-  /**
-   * A simple zone object. May have null properties if not a zone subscription.
-   */
-  export interface Zone {}
-}
-
-export interface SubscriptionZoneSubscriptionCreateZoneSubscriptionParams {
-  app?: SubscriptionZoneSubscriptionCreateZoneSubscriptionParams.App;
-
-  /**
-   * The list of add-ons subscribed to.
-   */
-  component_values?: Array<SubscriptionZoneSubscriptionCreateZoneSubscriptionParams.ComponentValue>;
-
-  /**
-   * How often the subscription is renewed automatically.
-   */
-  frequency?: 'weekly' | 'monthly' | 'quarterly' | 'yearly';
-
-  /**
-   * The rate plan applied to the subscription.
-   */
-  rate_plan?: SubscriptionZoneSubscriptionCreateZoneSubscriptionParams.RatePlan;
-
-  /**
-   * A simple zone object. May have null properties if not a zone subscription.
-   */
-  zone?: SubscriptionZoneSubscriptionCreateZoneSubscriptionParams.Zone;
-}
-
-export namespace SubscriptionZoneSubscriptionCreateZoneSubscriptionParams {
-  export interface App {
-    /**
-     * app install id.
-     */
-    install_id?: string;
-  }
-
-  /**
-   * A component value for a subscription.
-   */
-  export interface ComponentValue {
-    /**
-     * The default amount assigned.
-     */
-    default?: number;
-
-    /**
-     * The name of the component value.
-     */
-    name?: string;
-
-    /**
-     * The unit price for the component value.
-     */
-    price?: number;
-
-    /**
-     * The amount of the component value assigned.
-     */
-    value?: number;
-  }
-
-  /**
-   * The rate plan applied to the subscription.
-   */
-  export interface RatePlan {
-    /**
-     * The ID of the rate plan.
-     */
-    id?: unknown;
-
-    /**
-     * The currency applied to the rate plan subscription.
-     */
-    currency?: string;
-
-    /**
-     * Whether this rate plan is managed externally from Cloudflare.
-     */
-    externally_managed?: boolean;
-
-    /**
-     * Whether a rate plan is enterprise-based (or newly adopted term contract).
-     */
-    is_contract?: boolean;
-
-    /**
-     * The full name of the rate plan.
-     */
-    public_name?: string;
-
-    /**
-     * The scope that this rate plan applies to.
-     */
-    scope?: string;
-
-    /**
-     * The list of sets this rate plan applies to.
-     */
-    sets?: Array<string>;
-  }
-
-  /**
-   * A simple zone object. May have null properties if not a zone subscription.
-   */
-  export interface Zone {}
-}
-
-export interface SubscriptionZoneSubscriptionUpdateZoneSubscriptionParams {
-  app?: SubscriptionZoneSubscriptionUpdateZoneSubscriptionParams.App;
-
-  /**
-   * The list of add-ons subscribed to.
-   */
-  component_values?: Array<SubscriptionZoneSubscriptionUpdateZoneSubscriptionParams.ComponentValue>;
-
-  /**
-   * How often the subscription is renewed automatically.
-   */
-  frequency?: 'weekly' | 'monthly' | 'quarterly' | 'yearly';
-
-  /**
-   * The rate plan applied to the subscription.
-   */
-  rate_plan?: SubscriptionZoneSubscriptionUpdateZoneSubscriptionParams.RatePlan;
-
-  /**
-   * A simple zone object. May have null properties if not a zone subscription.
-   */
-  zone?: SubscriptionZoneSubscriptionUpdateZoneSubscriptionParams.Zone;
-}
-
-export namespace SubscriptionZoneSubscriptionUpdateZoneSubscriptionParams {
+export namespace SubscriptionReplaceParams {
   export interface App {
     /**
      * app install id.
@@ -692,15 +447,11 @@ export namespace SubscriptionZoneSubscriptionUpdateZoneSubscriptionParams {
 }
 
 export namespace Subscriptions {
-  export import SubscriptionUpdateResponse = SubscriptionsAPI.SubscriptionUpdateResponse;
+  export import SubscriptionCreateResponse = SubscriptionsAPI.SubscriptionCreateResponse;
+  export import SubscriptionListResponse = SubscriptionsAPI.SubscriptionListResponse;
   export import SubscriptionDeleteResponse = SubscriptionsAPI.SubscriptionDeleteResponse;
-  export import SubscriptionAccountSubscriptionsCreateSubscriptionResponse = SubscriptionsAPI.SubscriptionAccountSubscriptionsCreateSubscriptionResponse;
-  export import SubscriptionAccountSubscriptionsListSubscriptionsResponse = SubscriptionsAPI.SubscriptionAccountSubscriptionsListSubscriptionsResponse;
-  export import SubscriptionZoneSubscriptionCreateZoneSubscriptionResponse = SubscriptionsAPI.SubscriptionZoneSubscriptionCreateZoneSubscriptionResponse;
-  export import SubscriptionZoneSubscriptionUpdateZoneSubscriptionResponse = SubscriptionsAPI.SubscriptionZoneSubscriptionUpdateZoneSubscriptionResponse;
-  export import SubscriptionZoneSubscriptionZoneSubscriptionDetailsResponse = SubscriptionsAPI.SubscriptionZoneSubscriptionZoneSubscriptionDetailsResponse;
-  export import SubscriptionUpdateParams = SubscriptionsAPI.SubscriptionUpdateParams;
-  export import SubscriptionAccountSubscriptionsCreateSubscriptionParams = SubscriptionsAPI.SubscriptionAccountSubscriptionsCreateSubscriptionParams;
-  export import SubscriptionZoneSubscriptionCreateZoneSubscriptionParams = SubscriptionsAPI.SubscriptionZoneSubscriptionCreateZoneSubscriptionParams;
-  export import SubscriptionZoneSubscriptionUpdateZoneSubscriptionParams = SubscriptionsAPI.SubscriptionZoneSubscriptionUpdateZoneSubscriptionParams;
+  export import SubscriptionGetResponse = SubscriptionsAPI.SubscriptionGetResponse;
+  export import SubscriptionReplaceResponse = SubscriptionsAPI.SubscriptionReplaceResponse;
+  export import SubscriptionCreateParams = SubscriptionsAPI.SubscriptionCreateParams;
+  export import SubscriptionReplaceParams = SubscriptionsAPI.SubscriptionReplaceParams;
 }

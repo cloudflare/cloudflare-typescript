@@ -13,12 +13,10 @@ const cloudflare = new Cloudflare({
 
 describe('resource namespaces', () => {
   // skipped: tests are disabled for the time being
-  test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.storage.kv.namespaces.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '0f2ac74b498b48028cb68387c421e279',
-      { title: 'My Own Namespace' },
-    );
+  test.skip('create: only required params', async () => {
+    const responsePromise = cloudflare.storage.kv.namespaces.create('023e105f4ecef8ad9ca31a8372d0c353', {
+      title: 'My Own Namespace',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -29,12 +27,10 @@ describe('resource namespaces', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.storage.kv.namespaces.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '0f2ac74b498b48028cb68387c421e279',
-      { title: 'My Own Namespace' },
-    );
+  test.skip('create: required and optional params', async () => {
+    const response = await cloudflare.storage.kv.namespaces.create('023e105f4ecef8ad9ca31a8372d0c353', {
+      title: 'My Own Namespace',
+    });
   });
 
   // skipped: tests are disabled for the time being
@@ -87,9 +83,10 @@ describe('resource namespaces', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('workersKvNamespaceCreateANamespace: only required params', async () => {
-    const responsePromise = cloudflare.storage.kv.namespaces.workersKvNamespaceCreateANamespace(
+  test.skip('replace: only required params', async () => {
+    const responsePromise = cloudflare.storage.kv.namespaces.replace(
       '023e105f4ecef8ad9ca31a8372d0c353',
+      '0f2ac74b498b48028cb68387c421e279',
       { title: 'My Own Namespace' },
     );
     const rawResponse = await responsePromise.asResponse();
@@ -102,9 +99,10 @@ describe('resource namespaces', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('workersKvNamespaceCreateANamespace: required and optional params', async () => {
-    const response = await cloudflare.storage.kv.namespaces.workersKvNamespaceCreateANamespace(
+  test.skip('replace: required and optional params', async () => {
+    const response = await cloudflare.storage.kv.namespaces.replace(
       '023e105f4ecef8ad9ca31a8372d0c353',
+      '0f2ac74b498b48028cb68387c421e279',
       { title: 'My Own Namespace' },
     );
   });

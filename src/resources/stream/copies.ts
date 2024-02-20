@@ -8,11 +8,11 @@ export class Copies extends APIResource {
   /**
    * Uploads a video to Stream from a provided URL.
    */
-  streamVideosUploadVideosFromAURL(
+  create(
     accountId: string,
-    params: CopyStreamVideosUploadVideosFromAURLParams,
+    params: CopyCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CopyStreamVideosUploadVideosFromAURLResponse> {
+  ): Core.APIPromise<CopyCreateResponse> {
     const { 'Upload-Creator': uploadCreator, 'Upload-Metadata': uploadMetadata, ...body } = params;
     return (
       this._client.post(`/accounts/${accountId}/stream/copy`, {
@@ -23,12 +23,12 @@ export class Copies extends APIResource {
           'Upload-Metadata': uploadMetadata || '',
           ...options?.headers,
         },
-      }) as Core.APIPromise<{ result: CopyStreamVideosUploadVideosFromAURLResponse }>
+      }) as Core.APIPromise<{ result: CopyCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface CopyStreamVideosUploadVideosFromAURLResponse {
+export interface CopyCreateResponse {
   /**
    * Lists the origins allowed to display the video. Enter allowed origin domains in
    * an array and use `*` for wildcard subdomains. Empty arrays allow the video to be
@@ -53,7 +53,7 @@ export interface CopyStreamVideosUploadVideosFromAURLResponse {
    */
   duration?: number;
 
-  input?: CopyStreamVideosUploadVideosFromAURLResponse.Input;
+  input?: CopyCreateResponse.Input;
 
   /**
    * The live input ID used to upload a video with Stream Live.
@@ -79,7 +79,7 @@ export interface CopyStreamVideosUploadVideosFromAURLResponse {
    */
   modified?: string;
 
-  playback?: CopyStreamVideosUploadVideosFromAURLResponse.Playback;
+  playback?: CopyCreateResponse.Playback;
 
   /**
    * The video's preview page URI. This field is omitted until encoding is complete.
@@ -123,7 +123,7 @@ export interface CopyStreamVideosUploadVideosFromAURLResponse {
    * approximate percent of completion. If the `state` is `error`, `errorReasonCode`
    * and `errorReasonText` provide additional details.
    */
-  status?: CopyStreamVideosUploadVideosFromAURLResponse.Status;
+  status?: CopyCreateResponse.Status;
 
   /**
    * The media item's thumbnail URI. This field is omitted until encoding is
@@ -155,10 +155,10 @@ export interface CopyStreamVideosUploadVideosFromAURLResponse {
    */
   uploadExpiry?: string;
 
-  watermark?: CopyStreamVideosUploadVideosFromAURLResponse.Watermark;
+  watermark?: CopyCreateResponse.Watermark;
 }
 
-export namespace CopyStreamVideosUploadVideosFromAURLResponse {
+export namespace CopyCreateResponse {
   export interface Input {
     /**
      * The video height in pixels. A value of `-1` means the height is unknown. The
@@ -285,7 +285,7 @@ export namespace CopyStreamVideosUploadVideosFromAURLResponse {
   }
 }
 
-export interface CopyStreamVideosUploadVideosFromAURLParams {
+export interface CopyCreateParams {
   /**
    * Body param: A video's URL. The server must be publicly routable and support
    * `HTTP HEAD` requests and `HTTP GET` range requests. The server should respond to
@@ -339,7 +339,7 @@ export interface CopyStreamVideosUploadVideosFromAURLParams {
   /**
    * Body param:
    */
-  watermark?: CopyStreamVideosUploadVideosFromAURLParams.Watermark;
+  watermark?: CopyCreateParams.Watermark;
 
   /**
    * Header param: A user-defined identifier for the media creator.
@@ -355,7 +355,7 @@ export interface CopyStreamVideosUploadVideosFromAURLParams {
   'Upload-Metadata'?: string;
 }
 
-export namespace CopyStreamVideosUploadVideosFromAURLParams {
+export namespace CopyCreateParams {
   export interface Watermark {
     /**
      * The unique identifier for the watermark profile.
@@ -365,6 +365,6 @@ export namespace CopyStreamVideosUploadVideosFromAURLParams {
 }
 
 export namespace Copies {
-  export import CopyStreamVideosUploadVideosFromAURLResponse = CopiesAPI.CopyStreamVideosUploadVideosFromAURLResponse;
-  export import CopyStreamVideosUploadVideosFromAURLParams = CopiesAPI.CopyStreamVideosUploadVideosFromAURLParams;
+  export import CopyCreateResponse = CopiesAPI.CopyCreateResponse;
+  export import CopyCreateParams = CopiesAPI.CopyCreateParams;
 }

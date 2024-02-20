@@ -8,26 +8,23 @@ export class URLNormalizations extends APIResource {
   /**
    * Fetches the current URL normalization settings.
    */
-  urlNormalizationGetURLNormalizationSettings(
-    zoneId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<URLNormalizationURLNormalizationGetURLNormalizationSettingsResponse> {
+  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<URLNormalizationGetResponse> {
     return this._client.get(`/zones/${zoneId}/url_normalization`, options);
   }
 
   /**
    * Updates the URL normalization settings.
    */
-  urlNormalizationUpdateURLNormalizationSettings(
+  replace(
     zoneId: string,
-    body: URLNormalizationURLNormalizationUpdateURLNormalizationSettingsParams,
+    body: URLNormalizationReplaceParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<URLNormalizationURLNormalizationUpdateURLNormalizationSettingsResponse> {
+  ): Core.APIPromise<URLNormalizationReplaceResponse> {
     return this._client.put(`/zones/${zoneId}/url_normalization`, { body, ...options });
   }
 }
 
-export interface URLNormalizationURLNormalizationGetURLNormalizationSettingsResponse {
+export interface URLNormalizationGetResponse {
   /**
    * The scope of the URL normalization.
    */
@@ -39,7 +36,7 @@ export interface URLNormalizationURLNormalizationGetURLNormalizationSettingsResp
   type?: string;
 }
 
-export interface URLNormalizationURLNormalizationUpdateURLNormalizationSettingsResponse {
+export interface URLNormalizationReplaceResponse {
   /**
    * The scope of the URL normalization.
    */
@@ -51,7 +48,7 @@ export interface URLNormalizationURLNormalizationUpdateURLNormalizationSettingsR
   type?: string;
 }
 
-export interface URLNormalizationURLNormalizationUpdateURLNormalizationSettingsParams {
+export interface URLNormalizationReplaceParams {
   /**
    * The scope of the URL normalization.
    */
@@ -64,7 +61,7 @@ export interface URLNormalizationURLNormalizationUpdateURLNormalizationSettingsP
 }
 
 export namespace URLNormalizations {
-  export import URLNormalizationURLNormalizationGetURLNormalizationSettingsResponse = URLNormalizationsAPI.URLNormalizationURLNormalizationGetURLNormalizationSettingsResponse;
-  export import URLNormalizationURLNormalizationUpdateURLNormalizationSettingsResponse = URLNormalizationsAPI.URLNormalizationURLNormalizationUpdateURLNormalizationSettingsResponse;
-  export import URLNormalizationURLNormalizationUpdateURLNormalizationSettingsParams = URLNormalizationsAPI.URLNormalizationURLNormalizationUpdateURLNormalizationSettingsParams;
+  export import URLNormalizationGetResponse = URLNormalizationsAPI.URLNormalizationGetResponse;
+  export import URLNormalizationReplaceResponse = URLNormalizationsAPI.URLNormalizationReplaceResponse;
+  export import URLNormalizationReplaceParams = URLNormalizationsAPI.URLNormalizationReplaceParams;
 }

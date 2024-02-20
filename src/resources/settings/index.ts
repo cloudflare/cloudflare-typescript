@@ -61,14 +61,20 @@ export {
   EarlyHintUpdateResponse,
   EarlyHintGetResponse,
   EarlyHintUpdateParams,
-  EarlyHint,
-} from './early-hint';
+  EarlyHints,
+} from './early-hints';
 export {
   EmailObfuscationUpdateResponse,
   EmailObfuscationGetResponse,
   EmailObfuscationUpdateParams,
   EmailObfuscation,
 } from './email-obfuscation';
+export {
+  FontSettingUpdateResponse,
+  FontSettingGetResponse,
+  FontSettingUpdateParams,
+  FontSettings,
+} from './font-settings';
 export {
   H2PrioritizationUpdateResponse,
   H2PrioritizationGetResponse,
@@ -220,9 +226,4 @@ export {
 export { WAFUpdateResponse, WAFGetResponse, WAFUpdateParams, WAF } from './waf';
 export { WebpUpdateResponse, WebpGetResponse, WebpUpdateParams, Webp } from './webp';
 export { WebsocketUpdateResponse, WebsocketGetResponse, WebsocketUpdateParams, Websocket } from './websocket';
-export {
-  ZeroRttGetResponse,
-  ZeroRttZoneSettingsChange0RttSessionResumptionSettingResponse,
-  ZeroRttZoneSettingsChange0RttSessionResumptionSettingParams,
-  ZeroRtt,
-} from './zero-rtt';
+export { ZeroRttUpdateResponse, ZeroRttGetResponse, ZeroRttUpdateParams, ZeroRtt } from './zero-rtt';

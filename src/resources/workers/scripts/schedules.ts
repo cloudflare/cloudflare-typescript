@@ -8,42 +8,42 @@ export class Schedules extends APIResource {
   /**
    * Fetches Cron Triggers for a Worker.
    */
-  workerCronTriggerGetCronTriggers(
+  list(
     accountId: string,
     scriptName: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ScheduleWorkerCronTriggerGetCronTriggersResponse> {
+  ): Core.APIPromise<ScheduleListResponse> {
     return (
       this._client.get(
         `/accounts/${accountId}/workers/scripts/${scriptName}/schedules`,
         options,
-      ) as Core.APIPromise<{ result: ScheduleWorkerCronTriggerGetCronTriggersResponse }>
+      ) as Core.APIPromise<{ result: ScheduleListResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Updates Cron Triggers for a Worker.
    */
-  workerCronTriggerUpdateCronTriggers(
+  replace(
     accountId: string,
     scriptName: string,
-    body: ScheduleWorkerCronTriggerUpdateCronTriggersParams,
+    body: ScheduleReplaceParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ScheduleWorkerCronTriggerUpdateCronTriggersResponse> {
+  ): Core.APIPromise<ScheduleReplaceResponse> {
     return (
       this._client.put(`/accounts/${accountId}/workers/scripts/${scriptName}/schedules`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ScheduleWorkerCronTriggerUpdateCronTriggersResponse }>
+      }) as Core.APIPromise<{ result: ScheduleReplaceResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface ScheduleWorkerCronTriggerGetCronTriggersResponse {
-  schedules?: Array<ScheduleWorkerCronTriggerGetCronTriggersResponse.Schedule>;
+export interface ScheduleListResponse {
+  schedules?: Array<ScheduleListResponse.Schedule>;
 }
 
-export namespace ScheduleWorkerCronTriggerGetCronTriggersResponse {
+export namespace ScheduleListResponse {
   export interface Schedule {
     created_on?: unknown;
 
@@ -53,11 +53,11 @@ export namespace ScheduleWorkerCronTriggerGetCronTriggersResponse {
   }
 }
 
-export interface ScheduleWorkerCronTriggerUpdateCronTriggersResponse {
-  schedules?: Array<ScheduleWorkerCronTriggerUpdateCronTriggersResponse.Schedule>;
+export interface ScheduleReplaceResponse {
+  schedules?: Array<ScheduleReplaceResponse.Schedule>;
 }
 
-export namespace ScheduleWorkerCronTriggerUpdateCronTriggersResponse {
+export namespace ScheduleReplaceResponse {
   export interface Schedule {
     created_on?: unknown;
 
@@ -67,10 +67,10 @@ export namespace ScheduleWorkerCronTriggerUpdateCronTriggersResponse {
   }
 }
 
-export type ScheduleWorkerCronTriggerUpdateCronTriggersParams = unknown;
+export type ScheduleReplaceParams = unknown;
 
 export namespace Schedules {
-  export import ScheduleWorkerCronTriggerGetCronTriggersResponse = SchedulesAPI.ScheduleWorkerCronTriggerGetCronTriggersResponse;
-  export import ScheduleWorkerCronTriggerUpdateCronTriggersResponse = SchedulesAPI.ScheduleWorkerCronTriggerUpdateCronTriggersResponse;
-  export import ScheduleWorkerCronTriggerUpdateCronTriggersParams = SchedulesAPI.ScheduleWorkerCronTriggerUpdateCronTriggersParams;
+  export import ScheduleListResponse = SchedulesAPI.ScheduleListResponse;
+  export import ScheduleReplaceResponse = SchedulesAPI.ScheduleReplaceResponse;
+  export import ScheduleReplaceParams = SchedulesAPI.ScheduleReplaceParams;
 }

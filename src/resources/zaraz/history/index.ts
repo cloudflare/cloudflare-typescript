@@ -2,9 +2,9 @@
 
 export { ConfigGetResponse, ConfigGetParams, Configs } from './configs';
 export {
-  HistoryUpdateResponse,
   HistoryListResponse,
-  HistoryUpdateParams,
+  HistoryReplaceResponse,
   HistoryListParams,
+  HistoryReplaceParams,
   History,
 } from './history';

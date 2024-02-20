@@ -9,33 +9,27 @@ export class Events extends APIResource {
   /**
    * List origin health changes.
    */
-  loadBalancerHealthcheckEventsListHealthcheckEvents(
-    query?: EventLoadBalancerHealthcheckEventsListHealthcheckEventsParams,
+  list(query?: EventListParams, options?: Core.RequestOptions): Core.APIPromise<EventListResponse | null>;
+  list(options?: Core.RequestOptions): Core.APIPromise<EventListResponse | null>;
+  list(
+    query: EventListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<EventLoadBalancerHealthcheckEventsListHealthcheckEventsResponse | null>;
-  loadBalancerHealthcheckEventsListHealthcheckEvents(
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<EventLoadBalancerHealthcheckEventsListHealthcheckEventsResponse | null>;
-  loadBalancerHealthcheckEventsListHealthcheckEvents(
-    query: EventLoadBalancerHealthcheckEventsListHealthcheckEventsParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<EventLoadBalancerHealthcheckEventsListHealthcheckEventsResponse | null> {
+  ): Core.APIPromise<EventListResponse | null> {
     if (isRequestOptions(query)) {
-      return this.loadBalancerHealthcheckEventsListHealthcheckEvents({}, query);
+      return this.list({}, query);
     }
     return (
       this._client.get('/user/load_balancing_analytics/events', { query, ...options }) as Core.APIPromise<{
-        result: EventLoadBalancerHealthcheckEventsListHealthcheckEventsResponse | null;
+        result: EventListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type EventLoadBalancerHealthcheckEventsListHealthcheckEventsResponse =
-  Array<EventLoadBalancerHealthcheckEventsListHealthcheckEventsResponse.EventLoadBalancerHealthcheckEventsListHealthcheckEventsResponseItem>;
+export type EventListResponse = Array<EventListResponse.EventListResponseItem>;
 
-export namespace EventLoadBalancerHealthcheckEventsListHealthcheckEventsResponse {
-  export interface EventLoadBalancerHealthcheckEventsListHealthcheckEventsResponseItem {
+export namespace EventListResponse {
+  export interface EventListResponseItem {
     id?: number;
 
     origins?: Array<unknown>;
@@ -46,7 +40,7 @@ export namespace EventLoadBalancerHealthcheckEventsListHealthcheckEventsResponse
   }
 }
 
-export interface EventLoadBalancerHealthcheckEventsListHealthcheckEventsParams {
+export interface EventListParams {
   /**
    * If true, filter events where the origin status is healthy. If false, filter
    * events where the origin status is unhealthy.
@@ -83,6 +77,6 @@ export interface EventLoadBalancerHealthcheckEventsListHealthcheckEventsParams {
 }
 
 export namespace Events {
-  export import EventLoadBalancerHealthcheckEventsListHealthcheckEventsResponse = EventsAPI.EventLoadBalancerHealthcheckEventsListHealthcheckEventsResponse;
-  export import EventLoadBalancerHealthcheckEventsListHealthcheckEventsParams = EventsAPI.EventLoadBalancerHealthcheckEventsListHealthcheckEventsParams;
+  export import EventListResponse = EventsAPI.EventListResponse;
+  export import EventListParams = EventsAPI.EventListParams;
 }

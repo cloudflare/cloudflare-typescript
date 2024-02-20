@@ -9,24 +9,23 @@ export class Seats extends APIResource {
    * Removes a user from a Zero Trust seat when both `access_seat` and `gateway_seat`
    * are set to false.
    */
-  zeroTrustSeatsUpdateAUserSeat(
+  update(
     identifier: string,
-    body: SeatZeroTrustSeatsUpdateAUserSeatParams,
+    body: SeatUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SeatZeroTrustSeatsUpdateAUserSeatResponse | null> {
+  ): Core.APIPromise<SeatUpdateResponse | null> {
     return (
       this._client.patch(`/accounts/${identifier}/access/seats`, { body, ...options }) as Core.APIPromise<{
-        result: SeatZeroTrustSeatsUpdateAUserSeatResponse | null;
+        result: SeatUpdateResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type SeatZeroTrustSeatsUpdateAUserSeatResponse =
-  Array<SeatZeroTrustSeatsUpdateAUserSeatResponse.SeatZeroTrustSeatsUpdateAUserSeatResponseItem>;
+export type SeatUpdateResponse = Array<SeatUpdateResponse.SeatUpdateResponseItem>;
 
-export namespace SeatZeroTrustSeatsUpdateAUserSeatResponse {
-  export interface SeatZeroTrustSeatsUpdateAUserSeatResponseItem {
+export namespace SeatUpdateResponse {
+  export interface SeatUpdateResponseItem {
     /**
      * True if the seat is part of Access.
      */
@@ -48,9 +47,9 @@ export namespace SeatZeroTrustSeatsUpdateAUserSeatResponse {
   }
 }
 
-export type SeatZeroTrustSeatsUpdateAUserSeatParams = Array<SeatZeroTrustSeatsUpdateAUserSeatParams.Body>;
+export type SeatUpdateParams = Array<SeatUpdateParams.Body>;
 
-export namespace SeatZeroTrustSeatsUpdateAUserSeatParams {
+export namespace SeatUpdateParams {
   export interface Body {
     /**
      * True if the seat is part of Access.
@@ -65,6 +64,6 @@ export namespace SeatZeroTrustSeatsUpdateAUserSeatParams {
 }
 
 export namespace Seats {
-  export import SeatZeroTrustSeatsUpdateAUserSeatResponse = SeatsAPI.SeatZeroTrustSeatsUpdateAUserSeatResponse;
-  export import SeatZeroTrustSeatsUpdateAUserSeatParams = SeatsAPI.SeatZeroTrustSeatsUpdateAUserSeatParams;
+  export import SeatUpdateResponse = SeatsAPI.SeatUpdateResponse;
+  export import SeatUpdateParams = SeatsAPI.SeatUpdateParams;
 }

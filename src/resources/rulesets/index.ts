@@ -2,24 +2,20 @@
 
 export { PhaseGetResponse, Phases } from './phases';
 export {
+  RuleCreateResponse,
   RuleUpdateResponse,
   RuleDeleteResponse,
-  RuleAccountRulesetsCreateAnAccountRulesetRuleResponse,
+  RuleCreateParams,
   RuleUpdateParams,
-  RuleAccountRulesetsCreateAnAccountRulesetRuleParams,
   Rules,
 } from './rules';
 export {
   RulesetCreateResponse,
-  RulesetUpdateResponse,
   RulesetListResponse,
   RulesetGetResponse,
+  RulesetReplaceResponse,
   RulesetCreateParams,
-  RulesetUpdateParams,
+  RulesetReplaceParams,
   Rulesets,
 } from './rulesets';
-export {
-  VersionAccountRulesetsListAnAccountRulesetSVersionsResponse,
-  VersionGetResponse,
-  Versions,
-} from './versions/index';
+export { VersionListResponse, VersionGetResponse, Versions } from './versions/index';

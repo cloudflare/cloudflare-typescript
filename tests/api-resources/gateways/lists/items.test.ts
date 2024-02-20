@@ -13,8 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource items', () => {
   // skipped: tests are disabled for the time being
-  test.skip('zeroTrustListsZeroTrustListItems', async () => {
-    const responsePromise = cloudflare.gateways.lists.items.zeroTrustListsZeroTrustListItems(
+  test.skip('list', async () => {
+    const responsePromise = cloudflare.gateways.lists.items.list(
       '699d98642c564d2e855e9661899b7252',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
     );
@@ -28,10 +28,10 @@ describe('resource items', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('zeroTrustListsZeroTrustListItems: request options instead of params are passed correctly', async () => {
+  test.skip('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.gateways.lists.items.zeroTrustListsZeroTrustListItems(
+      cloudflare.gateways.lists.items.list(
         '699d98642c564d2e855e9661899b7252',
         'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
         { path: '/_stainless_unknown_path' },

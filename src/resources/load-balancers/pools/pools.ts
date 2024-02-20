@@ -1782,9 +1782,9 @@ export namespace Pools {
   export import PoolUpdateParams = PoolsAPI.PoolUpdateParams;
   export import PoolListParams = PoolsAPI.PoolListParams;
   export import Health = HealthAPI.Health;
+  export import HealthCreateResponse = HealthAPI.HealthCreateResponse;
   export import HealthGetResponse = HealthAPI.HealthGetResponse;
-  export import HealthPreviewResponse = HealthAPI.HealthPreviewResponse;
-  export import HealthPreviewParams = HealthAPI.HealthPreviewParams;
+  export import HealthCreateParams = HealthAPI.HealthCreateParams;
   export import References = ReferencesAPI.References;
   export import ReferenceListResponse = ReferencesAPI.ReferenceListResponse;
 }

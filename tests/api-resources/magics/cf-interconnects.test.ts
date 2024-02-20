@@ -13,12 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource cfInterconnects', () => {
   // skipped: tests are disabled for the time being
-  test.skip('update', async () => {
-    const responsePromise = cloudflare.magics.cfInterconnects.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      {},
-    );
+  test.skip('list', async () => {
+    const responsePromise = cloudflare.magics.cfInterconnects.list('023e105f4ecef8ad9ca31a8372d0c353');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -26,6 +22,16 @@ describe('resource cfInterconnects', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.magics.cfInterconnects.list('023e105f4ecef8ad9ca31a8372d0c353', {
+        path: '/_stainless_unknown_path',
+      }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
@@ -56,33 +62,9 @@ describe('resource cfInterconnects', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('magicInterconnectsListInterconnects', async () => {
-    const responsePromise = cloudflare.magics.cfInterconnects.magicInterconnectsListInterconnects(
+  test.skip('replace', async () => {
+    const responsePromise = cloudflare.magics.cfInterconnects.replace(
       '023e105f4ecef8ad9ca31a8372d0c353',
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('magicInterconnectsListInterconnects: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.magics.cfInterconnects.magicInterconnectsListInterconnects(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('magicInterconnectsUpdateMultipleInterconnects: only required params', async () => {
-    const responsePromise = cloudflare.magics.cfInterconnects.magicInterconnectsUpdateMultipleInterconnects(
       '023e105f4ecef8ad9ca31a8372d0c353',
       {},
     );
@@ -93,13 +75,5 @@ describe('resource cfInterconnects', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('magicInterconnectsUpdateMultipleInterconnects: required and optional params', async () => {
-    const response = await cloudflare.magics.cfInterconnects.magicInterconnectsUpdateMultipleInterconnects(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      {},
-    );
   });
 });

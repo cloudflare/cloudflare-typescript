@@ -13,12 +13,11 @@ const cloudflare = new Cloudflare({
 
 describe('resource references', () => {
   // skipped: tests are disabled for the time being
-  test.skip('accountLoadBalancerMonitorsListMonitorReferences', async () => {
-    const responsePromise =
-      cloudflare.loadBalancers.monitors.references.accountLoadBalancerMonitorsListMonitorReferences(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        'f1aba936b94213e5b8dca0c0dbf1f9cc',
-      );
+  test.skip('list', async () => {
+    const responsePromise = cloudflare.loadBalancers.monitors.references.list(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      'f1aba936b94213e5b8dca0c0dbf1f9cc',
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -29,10 +28,10 @@ describe('resource references', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('accountLoadBalancerMonitorsListMonitorReferences: request options instead of params are passed correctly', async () => {
+  test.skip('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.loadBalancers.monitors.references.accountLoadBalancerMonitorsListMonitorReferences(
+      cloudflare.loadBalancers.monitors.references.list(
         '023e105f4ecef8ad9ca31a8372d0c353',
         'f1aba936b94213e5b8dca0c0dbf1f9cc',
         { path: '/_stainless_unknown_path' },

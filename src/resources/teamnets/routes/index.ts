@@ -2,14 +2,15 @@
 
 export { IPGetResponse, IPGetParams, IPs } from './ips';
 export {
-  NetworkUpdateResponse,
+  NetworkCreateResponse,
   NetworkDeleteResponse,
-  NetworkUpdateParams,
+  NetworkCreateParams,
   NetworkDeleteParams,
   Networks,
 } from './networks';
 export {
-  RouteTunnelRouteListTunnelRoutesResponse,
-  RouteTunnelRouteListTunnelRoutesParams,
+  RouteListResponse,
+  RouteListParams,
+  RouteListResponsesV4PagePaginationArray,
   Routes,
 } from './routes';

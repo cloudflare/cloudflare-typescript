@@ -46,47 +46,6 @@ describe('resource pagerules', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.pagerules.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      {
-        actions: [{}],
-        targets: [{ constraint: { operator: 'matches', value: '*example.com/images/*' }, target: 'url' }],
-      },
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.pagerules.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      {
-        actions: [
-          {
-            name: 'forward_url',
-            value: {
-              type: 'temporary',
-              url: 'http://www.example.com/somewhere/$1/astring/$2/anotherstring/$3',
-            },
-          },
-        ],
-        targets: [{ constraint: { operator: 'matches', value: '*example.com/images/*' }, target: 'url' }],
-        priority: 0,
-        status: 'active',
-      },
-    );
-  });
-
-  // skipped: tests are disabled for the time being
   test.skip('list', async () => {
     const responsePromise = cloudflare.pagerules.list('023e105f4ecef8ad9ca31a8372d0c353');
     const rawResponse = await responsePromise.asResponse();
@@ -156,5 +115,46 @@ describe('resource pagerules', () => {
         path: '/_stainless_unknown_path',
       }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('replace: only required params', async () => {
+    const responsePromise = cloudflare.pagerules.replace(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      {
+        actions: [{}],
+        targets: [{ constraint: { operator: 'matches', value: '*example.com/images/*' }, target: 'url' }],
+      },
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('replace: required and optional params', async () => {
+    const response = await cloudflare.pagerules.replace(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      {
+        actions: [
+          {
+            name: 'forward_url',
+            value: {
+              type: 'temporary',
+              url: 'http://www.example.com/somewhere/$1/astring/$2/anotherstring/$3',
+            },
+          },
+        ],
+        targets: [{ constraint: { operator: 'matches', value: '*example.com/images/*' }, target: 'url' }],
+        priority: 0,
+        status: 'active',
+      },
+    );
   });
 });

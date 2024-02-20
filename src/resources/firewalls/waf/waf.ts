@@ -11,14 +11,15 @@ export class WAF extends APIResource {
 
 export namespace WAF {
   export import Overrides = OverridesAPI.Overrides;
-  export import OverrideUpdateResponse = OverridesAPI.OverrideUpdateResponse;
+  export import OverrideCreateResponse = OverridesAPI.OverrideCreateResponse;
+  export import OverrideListResponse = OverridesAPI.OverrideListResponse;
   export import OverrideDeleteResponse = OverridesAPI.OverrideDeleteResponse;
   export import OverrideGetResponse = OverridesAPI.OverrideGetResponse;
-  export import OverrideWAFOverridesCreateAWAFOverrideResponse = OverridesAPI.OverrideWAFOverridesCreateAWAFOverrideResponse;
-  export import OverrideWAFOverridesListWAFOverridesResponse = OverridesAPI.OverrideWAFOverridesListWAFOverridesResponse;
-  export import OverrideUpdateParams = OverridesAPI.OverrideUpdateParams;
-  export import OverrideWAFOverridesCreateAWAFOverrideParams = OverridesAPI.OverrideWAFOverridesCreateAWAFOverrideParams;
-  export import OverrideWAFOverridesListWAFOverridesParams = OverridesAPI.OverrideWAFOverridesListWAFOverridesParams;
+  export import OverrideReplaceResponse = OverridesAPI.OverrideReplaceResponse;
+  export import OverrideListResponsesV4PagePaginationArray = OverridesAPI.OverrideListResponsesV4PagePaginationArray;
+  export import OverrideCreateParams = OverridesAPI.OverrideCreateParams;
+  export import OverrideListParams = OverridesAPI.OverrideListParams;
+  export import OverrideReplaceParams = OverridesAPI.OverrideReplaceParams;
   export import Packages = PackagesAPI.Packages;
   export import PackageListResponse = PackagesAPI.PackageListResponse;
   export import PackageGetResponse = PackagesAPI.PackageGetResponse;

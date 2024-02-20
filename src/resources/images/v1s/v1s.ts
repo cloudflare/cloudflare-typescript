@@ -9,12 +9,31 @@ import * as KeysAPI from 'cloudflare/resources/images/v1s/keys';
 import * as StatsAPI from 'cloudflare/resources/images/v1s/stats';
 import * as VariantsAPI from 'cloudflare/resources/images/v1s/variants';
 import { multipartFormRequestOptions } from 'cloudflare/core';
+import { V4PagePagination, type V4PagePaginationParams } from 'cloudflare/pagination';
 
 export class V1s extends APIResource {
   keys: KeysAPI.Keys = new KeysAPI.Keys(this._client);
   stats: StatsAPI.Stats = new StatsAPI.Stats(this._client);
   variants: VariantsAPI.Variants = new VariantsAPI.Variants(this._client);
   blobs: BlobsAPI.Blobs = new BlobsAPI.Blobs(this._client);
+
+  /**
+   * Upload an image with up to 10 Megabytes using a single HTTP POST
+   * (multipart/form-data) request. An image can be uploaded by sending an image file
+   * or passing an accessible to an API url.
+   */
+  create(
+    accountId: string,
+    body: V1CreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<V1CreateResponse> {
+    return (
+      this._client.post(
+        `/accounts/${accountId}/images/v1`,
+        multipartFormRequestOptions({ body, ...options }),
+      ) as Core.APIPromise<{ result: V1CreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 
   /**
    * Update image access control. On access control change, all copies of the image
@@ -35,6 +54,33 @@ export class V1s extends APIResource {
   }
 
   /**
+   * List up to 100 images with one request. Use the optional parameters below to get
+   * a specific range of images.
+   */
+  list(
+    accountId: string,
+    query?: V1ListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<V1ListResponsesV4PagePagination, V1ListResponse>;
+  list(
+    accountId: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<V1ListResponsesV4PagePagination, V1ListResponse>;
+  list(
+    accountId: string,
+    query: V1ListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<V1ListResponsesV4PagePagination, V1ListResponse> {
+    if (isRequestOptions(query)) {
+      return this.list(accountId, {}, query);
+    }
+    return this._client.getAPIList(`/accounts/${accountId}/images/v1`, V1ListResponsesV4PagePagination, {
+      query,
+      ...options,
+    });
+  }
+
+  /**
    * Delete an image on Cloudflare Images. On success, all copies of the image are
    * deleted and purged from cache.
    */
@@ -51,52 +97,6 @@ export class V1s extends APIResource {
   }
 
   /**
-   * List up to 100 images with one request. Use the optional parameters below to get
-   * a specific range of images.
-   */
-  cloudflareImagesListImages(
-    accountId: string,
-    query?: V1CloudflareImagesListImagesParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<V1CloudflareImagesListImagesResponse>;
-  cloudflareImagesListImages(
-    accountId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<V1CloudflareImagesListImagesResponse>;
-  cloudflareImagesListImages(
-    accountId: string,
-    query: V1CloudflareImagesListImagesParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<V1CloudflareImagesListImagesResponse> {
-    if (isRequestOptions(query)) {
-      return this.cloudflareImagesListImages(accountId, {}, query);
-    }
-    return (
-      this._client.get(`/accounts/${accountId}/images/v1`, { query, ...options }) as Core.APIPromise<{
-        result: V1CloudflareImagesListImagesResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Upload an image with up to 10 Megabytes using a single HTTP POST
-   * (multipart/form-data) request. An image can be uploaded by sending an image file
-   * or passing an accessible to an API url.
-   */
-  cloudflareImagesUploadAnImageViaURL(
-    accountId: string,
-    body: V1CloudflareImagesUploadAnImageViaURLParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<V1CloudflareImagesUploadAnImageViaURLResponse> {
-    return (
-      this._client.post(
-        `/accounts/${accountId}/images/v1`,
-        multipartFormRequestOptions({ body, ...options }),
-      ) as Core.APIPromise<{ result: V1CloudflareImagesUploadAnImageViaURLResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Fetch details for a single image.
    */
   get(accountId: string, imageId: string, options?: Core.RequestOptions): Core.APIPromise<V1GetResponse> {
@@ -106,6 +106,42 @@ export class V1s extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+
+export class V1ListResponsesV4PagePagination extends V4PagePagination<V1ListResponse> {}
+
+export interface V1CreateResponse {
+  /**
+   * Image unique identifier.
+   */
+  id?: string;
+
+  /**
+   * Image file name.
+   */
+  filename?: string;
+
+  /**
+   * User modifiable key-value store. Can be used for keeping references to another
+   * system of record for managing images. Metadata must not exceed 1024 bytes.
+   */
+  meta?: unknown;
+
+  /**
+   * Indicates whether the image can be a accessed only using it's UID. If set to
+   * true, a signed token needs to be generated with a signing key to view the image.
+   */
+  requireSignedURLs?: boolean;
+
+  /**
+   * When the media item was uploaded.
+   */
+  uploaded?: string;
+
+  /**
+   * Object specifying available variants for an image.
+   */
+  variants?: Array<string | string | string>;
 }
 
 export interface V1UpdateResponse {
@@ -142,81 +178,74 @@ export interface V1UpdateResponse {
   variants?: Array<string | string | string>;
 }
 
-export type V1DeleteResponse = unknown | string;
+export interface V1ListResponse {
+  errors: Array<V1ListResponse.Error>;
 
-export interface V1CloudflareImagesListImagesResponse {
-  images?: Array<V1CloudflareImagesListImagesResponse.Image>;
+  messages: Array<V1ListResponse.Message>;
+
+  result: V1ListResponse.Result;
+
+  /**
+   * Whether the API call was successful
+   */
+  success: true;
 }
 
-export namespace V1CloudflareImagesListImagesResponse {
-  export interface Image {
-    /**
-     * Image unique identifier.
-     */
-    id?: string;
+export namespace V1ListResponse {
+  export interface Error {
+    code: number;
 
-    /**
-     * Image file name.
-     */
-    filename?: string;
+    message: string;
+  }
 
-    /**
-     * User modifiable key-value store. Can be used for keeping references to another
-     * system of record for managing images. Metadata must not exceed 1024 bytes.
-     */
-    meta?: unknown;
+  export interface Message {
+    code: number;
 
-    /**
-     * Indicates whether the image can be a accessed only using it's UID. If set to
-     * true, a signed token needs to be generated with a signing key to view the image.
-     */
-    requireSignedURLs?: boolean;
+    message: string;
+  }
 
-    /**
-     * When the media item was uploaded.
-     */
-    uploaded?: string;
+  export interface Result {
+    images?: Array<Result.Image>;
+  }
 
-    /**
-     * Object specifying available variants for an image.
-     */
-    variants?: Array<string | string | string>;
+  export namespace Result {
+    export interface Image {
+      /**
+       * Image unique identifier.
+       */
+      id?: string;
+
+      /**
+       * Image file name.
+       */
+      filename?: string;
+
+      /**
+       * User modifiable key-value store. Can be used for keeping references to another
+       * system of record for managing images. Metadata must not exceed 1024 bytes.
+       */
+      meta?: unknown;
+
+      /**
+       * Indicates whether the image can be a accessed only using it's UID. If set to
+       * true, a signed token needs to be generated with a signing key to view the image.
+       */
+      requireSignedURLs?: boolean;
+
+      /**
+       * When the media item was uploaded.
+       */
+      uploaded?: string;
+
+      /**
+       * Object specifying available variants for an image.
+       */
+      variants?: Array<string | string | string>;
+    }
   }
 }
 
-export interface V1CloudflareImagesUploadAnImageViaURLResponse {
-  /**
-   * Image unique identifier.
-   */
-  id?: string;
-
-  /**
-   * Image file name.
-   */
-  filename?: string;
-
-  /**
-   * User modifiable key-value store. Can be used for keeping references to another
-   * system of record for managing images. Metadata must not exceed 1024 bytes.
-   */
-  meta?: unknown;
-
-  /**
-   * Indicates whether the image can be a accessed only using it's UID. If set to
-   * true, a signed token needs to be generated with a signing key to view the image.
-   */
-  requireSignedURLs?: boolean;
-
-  /**
-   * When the media item was uploaded.
-   */
-  uploaded?: string;
-
-  /**
-   * Object specifying available variants for an image.
-   */
-  variants?: Array<string | string | string>;
-}
+export type V1DeleteResponse = unknown | string;
 
 export interface V1GetResponse {
   /**
@@ -252,38 +281,9 @@ export interface V1GetResponse {
   variants?: Array<string | string | string>;
 }
 
-export interface V1UpdateParams {
-  /**
-   * User modifiable key-value store. Can be used for keeping references to another
-   * system of record for managing images. No change if not specified.
-   */
-  metadata?: unknown;
+export type V1CreateParams = V1CreateParams.ImagesImageUploadViaFile | V1CreateParams.ImagesImageUploadViaURL;
 
-  /**
-   * Indicates whether the image can be accessed using only its UID. If set to
-   * `true`, a signed token needs to be generated with a signing key to view the
-   * image. Returns a new UID on a change. No change if not specified.
-   */
-  requireSignedURLs?: boolean;
-}
-
-export interface V1CloudflareImagesListImagesParams {
-  /**
-   * Page number of paginated results.
-   */
-  page?: number;
-
-  /**
-   * Number of items per page.
-   */
-  per_page?: number;
-}
-
-export type V1CloudflareImagesUploadAnImageViaURLParams =
-  | V1CloudflareImagesUploadAnImageViaURLParams.ImagesImageUploadViaFile
-  | V1CloudflareImagesUploadAnImageViaURLParams.ImagesImageUploadViaURL;
-
-export namespace V1CloudflareImagesUploadAnImageViaURLParams {
+export namespace V1CreateParams {
   export interface ImagesImageUploadViaFile {
     /**
      * An image binary data.
@@ -299,26 +299,44 @@ export namespace V1CloudflareImagesUploadAnImageViaURLParams {
   }
 }
 
+export interface V1UpdateParams {
+  /**
+   * User modifiable key-value store. Can be used for keeping references to another
+   * system of record for managing images. No change if not specified.
+   */
+  metadata?: unknown;
+
+  /**
+   * Indicates whether the image can be accessed using only its UID. If set to
+   * `true`, a signed token needs to be generated with a signing key to view the
+   * image. Returns a new UID on a change. No change if not specified.
+   */
+  requireSignedURLs?: boolean;
+}
+
+export interface V1ListParams extends V4PagePaginationParams {}
+
 export namespace V1s {
+  export import V1CreateResponse = V1sAPI.V1CreateResponse;
   export import V1UpdateResponse = V1sAPI.V1UpdateResponse;
+  export import V1ListResponse = V1sAPI.V1ListResponse;
   export import V1DeleteResponse = V1sAPI.V1DeleteResponse;
-  export import V1CloudflareImagesListImagesResponse = V1sAPI.V1CloudflareImagesListImagesResponse;
-  export import V1CloudflareImagesUploadAnImageViaURLResponse = V1sAPI.V1CloudflareImagesUploadAnImageViaURLResponse;
   export import V1GetResponse = V1sAPI.V1GetResponse;
+  export import V1ListResponsesV4PagePagination = V1sAPI.V1ListResponsesV4PagePagination;
+  export import V1CreateParams = V1sAPI.V1CreateParams;
   export import V1UpdateParams = V1sAPI.V1UpdateParams;
-  export import V1CloudflareImagesListImagesParams = V1sAPI.V1CloudflareImagesListImagesParams;
-  export import V1CloudflareImagesUploadAnImageViaURLParams = V1sAPI.V1CloudflareImagesUploadAnImageViaURLParams;
+  export import V1ListParams = V1sAPI.V1ListParams;
   export import Keys = KeysAPI.Keys;
-  export import KeyCloudflareImagesKeysListSigningKeysResponse = KeysAPI.KeyCloudflareImagesKeysListSigningKeysResponse;
+  export import KeyListResponse = KeysAPI.KeyListResponse;
   export import Stats = StatsAPI.Stats;
-  export import StatCloudflareImagesImagesUsageStatisticsResponse = StatsAPI.StatCloudflareImagesImagesUsageStatisticsResponse;
+  export import StatGetResponse = StatsAPI.StatGetResponse;
   export import Variants = VariantsAPI.Variants;
+  export import VariantCreateResponse = VariantsAPI.VariantCreateResponse;
   export import VariantUpdateResponse = VariantsAPI.VariantUpdateResponse;
+  export import VariantListResponse = VariantsAPI.VariantListResponse;
   export import VariantDeleteResponse = VariantsAPI.VariantDeleteResponse;
-  export import VariantCloudflareImagesVariantsCreateAVariantResponse = VariantsAPI.VariantCloudflareImagesVariantsCreateAVariantResponse;
-  export import VariantCloudflareImagesVariantsListVariantsResponse = VariantsAPI.VariantCloudflareImagesVariantsListVariantsResponse;
   export import VariantGetResponse = VariantsAPI.VariantGetResponse;
+  export import VariantCreateParams = VariantsAPI.VariantCreateParams;
   export import VariantUpdateParams = VariantsAPI.VariantUpdateParams;
-  export import VariantCloudflareImagesVariantsCreateAVariantParams = VariantsAPI.VariantCloudflareImagesVariantsCreateAVariantParams;
   export import Blobs = BlobsAPI.Blobs;
 }

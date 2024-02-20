@@ -13,12 +13,12 @@ const cloudflare = new Cloudflare({
 
 describe('resource statuses', () => {
   // skipped: tests are disabled for the time being
-  test.skip('ipAddressManagementDynamicAdvertisementGetAdvertisementStatus', async () => {
-    const responsePromise =
-      cloudflare.addresses.prefixes.bgps.statuses.ipAddressManagementDynamicAdvertisementGetAdvertisementStatus(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        '023e105f4ecef8ad9ca31a8372d0c353',
-      );
+  test.skip('update: only required params', async () => {
+    const responsePromise = cloudflare.addresses.prefixes.bgps.statuses.update(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      { advertised: true },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -29,41 +29,38 @@ describe('resource statuses', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('ipAddressManagementDynamicAdvertisementGetAdvertisementStatus: request options instead of params are passed correctly', async () => {
+  test.skip('update: required and optional params', async () => {
+    const response = await cloudflare.addresses.prefixes.bgps.statuses.update(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      { advertised: true },
+    );
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get', async () => {
+    const responsePromise = cloudflare.addresses.prefixes.bgps.statuses.get(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '023e105f4ecef8ad9ca31a8372d0c353',
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.addresses.prefixes.bgps.statuses.ipAddressManagementDynamicAdvertisementGetAdvertisementStatus(
+      cloudflare.addresses.prefixes.bgps.statuses.get(
         '023e105f4ecef8ad9ca31a8372d0c353',
         '023e105f4ecef8ad9ca31a8372d0c353',
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('ipAddressManagementDynamicAdvertisementUpdatePrefixDynamicAdvertisementStatus: only required params', async () => {
-    const responsePromise =
-      cloudflare.addresses.prefixes.bgps.statuses.ipAddressManagementDynamicAdvertisementUpdatePrefixDynamicAdvertisementStatus(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        { advertised: true },
-      );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('ipAddressManagementDynamicAdvertisementUpdatePrefixDynamicAdvertisementStatus: required and optional params', async () => {
-    const response =
-      await cloudflare.addresses.prefixes.bgps.statuses.ipAddressManagementDynamicAdvertisementUpdatePrefixDynamicAdvertisementStatus(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        { advertised: true },
-      );
   });
 });

@@ -13,12 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource uaRules', () => {
   // skipped: tests are disabled for the time being
-  test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.firewalls.uaRules.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '372e67954025e0ba6aaa6d586b9e0b59',
-      {},
-    );
+  test.skip('create: only required params', async () => {
+    const responsePromise = cloudflare.firewalls.uaRules.create('023e105f4ecef8ad9ca31a8372d0c353', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -29,12 +25,42 @@ describe('resource uaRules', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.firewalls.uaRules.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '372e67954025e0ba6aaa6d586b9e0b59',
-      {},
-    );
+  test.skip('create: required and optional params', async () => {
+    const response = await cloudflare.firewalls.uaRules.create('023e105f4ecef8ad9ca31a8372d0c353', {});
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list', async () => {
+    const responsePromise = cloudflare.firewalls.uaRules.list('023e105f4ecef8ad9ca31a8372d0c353');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.firewalls.uaRules.list('023e105f4ecef8ad9ca31a8372d0c353', {
+        path: '/_stainless_unknown_path',
+      }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.firewalls.uaRules.list(
+        '023e105f4ecef8ad9ca31a8372d0c353',
+        { description: 'abusive', description_search: 'abusive', page: 1, per_page: 1, ua_search: 'Safari' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
@@ -80,9 +106,10 @@ describe('resource uaRules', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('userAgentBlockingRulesCreateAUserAgentBlockingRule: only required params', async () => {
-    const responsePromise = cloudflare.firewalls.uaRules.userAgentBlockingRulesCreateAUserAgentBlockingRule(
+  test.skip('replace: only required params', async () => {
+    const responsePromise = cloudflare.firewalls.uaRules.replace(
       '023e105f4ecef8ad9ca31a8372d0c353',
+      '372e67954025e0ba6aaa6d586b9e0b59',
       {},
     );
     const rawResponse = await responsePromise.asResponse();
@@ -95,47 +122,11 @@ describe('resource uaRules', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('userAgentBlockingRulesCreateAUserAgentBlockingRule: required and optional params', async () => {
-    const response = await cloudflare.firewalls.uaRules.userAgentBlockingRulesCreateAUserAgentBlockingRule(
+  test.skip('replace: required and optional params', async () => {
+    const response = await cloudflare.firewalls.uaRules.replace(
       '023e105f4ecef8ad9ca31a8372d0c353',
+      '372e67954025e0ba6aaa6d586b9e0b59',
       {},
     );
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('userAgentBlockingRulesListUserAgentBlockingRules', async () => {
-    const responsePromise = cloudflare.firewalls.uaRules.userAgentBlockingRulesListUserAgentBlockingRules(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('userAgentBlockingRulesListUserAgentBlockingRules: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.firewalls.uaRules.userAgentBlockingRulesListUserAgentBlockingRules(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('userAgentBlockingRulesListUserAgentBlockingRules: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.firewalls.uaRules.userAgentBlockingRulesListUserAgentBlockingRules(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        { description: 'abusive', description_search: 'abusive', page: 1, per_page: 1, ua_search: 'Safari' },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 });

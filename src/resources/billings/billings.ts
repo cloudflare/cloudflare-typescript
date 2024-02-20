@@ -9,5 +9,5 @@ export class Billings extends APIResource {
 
 export namespace Billings {
   export import Profiles = ProfilesAPI.Profiles;
-  export import ProfileAccountBillingProfileBillingProfileDetailsResponse = ProfilesAPI.ProfileAccountBillingProfileBillingProfileDetailsResponse;
+  export import ProfileGetResponse = ProfilesAPI.ProfileGetResponse;
 }

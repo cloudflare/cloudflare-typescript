@@ -6,40 +6,37 @@ import * as TieredCachingAPI from 'cloudflare/resources/argo/tiered-caching';
 
 export class TieredCaching extends APIResource {
   /**
-   * Get Tiered Caching setting
+   * Updates enablement of Tiered Caching
    */
-  tieredCachingGetTieredCachingSetting(
+  update(
     zoneId: string,
+    body: TieredCachingUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TieredCachingTieredCachingGetTieredCachingSettingResponse> {
+  ): Core.APIPromise<TieredCachingUpdateResponse> {
     return (
-      this._client.get(`/zones/${zoneId}/argo/tiered_caching`, options) as Core.APIPromise<{
-        result: TieredCachingTieredCachingGetTieredCachingSettingResponse;
+      this._client.patch(`/zones/${zoneId}/argo/tiered_caching`, { body, ...options }) as Core.APIPromise<{
+        result: TieredCachingUpdateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
-   * Updates enablement of Tiered Caching
+   * Get Tiered Caching setting
    */
-  tieredCachingPatchTieredCachingSetting(
-    zoneId: string,
-    body: TieredCachingTieredCachingPatchTieredCachingSettingParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TieredCachingTieredCachingPatchTieredCachingSettingResponse> {
+  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<TieredCachingGetResponse> {
     return (
-      this._client.patch(`/zones/${zoneId}/argo/tiered_caching`, { body, ...options }) as Core.APIPromise<{
-        result: TieredCachingTieredCachingPatchTieredCachingSettingResponse;
+      this._client.get(`/zones/${zoneId}/argo/tiered_caching`, options) as Core.APIPromise<{
+        result: TieredCachingGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type TieredCachingTieredCachingGetTieredCachingSettingResponse = unknown | string | null;
+export type TieredCachingUpdateResponse = unknown | string | null;
 
-export type TieredCachingTieredCachingPatchTieredCachingSettingResponse = unknown | string | null;
+export type TieredCachingGetResponse = unknown | string | null;
 
-export interface TieredCachingTieredCachingPatchTieredCachingSettingParams {
+export interface TieredCachingUpdateParams {
   /**
    * Enables Tiered Caching.
    */
@@ -47,7 +44,7 @@ export interface TieredCachingTieredCachingPatchTieredCachingSettingParams {
 }
 
 export namespace TieredCaching {
-  export import TieredCachingTieredCachingGetTieredCachingSettingResponse = TieredCachingAPI.TieredCachingTieredCachingGetTieredCachingSettingResponse;
-  export import TieredCachingTieredCachingPatchTieredCachingSettingResponse = TieredCachingAPI.TieredCachingTieredCachingPatchTieredCachingSettingResponse;
-  export import TieredCachingTieredCachingPatchTieredCachingSettingParams = TieredCachingAPI.TieredCachingTieredCachingPatchTieredCachingSettingParams;
+  export import TieredCachingUpdateResponse = TieredCachingAPI.TieredCachingUpdateResponse;
+  export import TieredCachingGetResponse = TieredCachingAPI.TieredCachingGetResponse;
+  export import TieredCachingUpdateParams = TieredCachingAPI.TieredCachingUpdateParams;
 }

@@ -8,13 +8,10 @@ export class Loggings extends APIResource {
   /**
    * Fetches the current logging settings for Zero Trust account.
    */
-  zeroTrustAccountsGetLoggingSettingsForTheZeroTrustAccount(
-    accountId: unknown,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<LoggingZeroTrustAccountsGetLoggingSettingsForTheZeroTrustAccountResponse> {
+  get(accountId: unknown, options?: Core.RequestOptions): Core.APIPromise<LoggingGetResponse> {
     return (
       this._client.get(`/accounts/${accountId}/gateway/logging`, options) as Core.APIPromise<{
-        result: LoggingZeroTrustAccountsGetLoggingSettingsForTheZeroTrustAccountResponse;
+        result: LoggingGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -22,20 +19,20 @@ export class Loggings extends APIResource {
   /**
    * Updates logging settings for the current Zero Trust account.
    */
-  zeroTrustAccountsUpdateLoggingSettingsForTheZeroTrustAccount(
+  replace(
     accountId: unknown,
-    body: LoggingZeroTrustAccountsUpdateLoggingSettingsForTheZeroTrustAccountParams,
+    body: LoggingReplaceParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LoggingZeroTrustAccountsUpdateLoggingSettingsForTheZeroTrustAccountResponse> {
+  ): Core.APIPromise<LoggingReplaceResponse> {
     return (
       this._client.put(`/accounts/${accountId}/gateway/logging`, { body, ...options }) as Core.APIPromise<{
-        result: LoggingZeroTrustAccountsUpdateLoggingSettingsForTheZeroTrustAccountResponse;
+        result: LoggingReplaceResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface LoggingZeroTrustAccountsGetLoggingSettingsForTheZeroTrustAccountResponse {
+export interface LoggingGetResponse {
   /**
    * Redact personally identifiable information from activity logging (PII fields
    * are: source IP, user email, user ID, device ID, URL, referrer, user agent).
@@ -45,10 +42,10 @@ export interface LoggingZeroTrustAccountsGetLoggingSettingsForTheZeroTrustAccoun
   /**
    * Logging settings by rule type.
    */
-  settings_by_rule_type?: LoggingZeroTrustAccountsGetLoggingSettingsForTheZeroTrustAccountResponse.SettingsByRuleType;
+  settings_by_rule_type?: LoggingGetResponse.SettingsByRuleType;
 }
 
-export namespace LoggingZeroTrustAccountsGetLoggingSettingsForTheZeroTrustAccountResponse {
+export namespace LoggingGetResponse {
   /**
    * Logging settings by rule type.
    */
@@ -70,7 +67,7 @@ export namespace LoggingZeroTrustAccountsGetLoggingSettingsForTheZeroTrustAccoun
   }
 }
 
-export interface LoggingZeroTrustAccountsUpdateLoggingSettingsForTheZeroTrustAccountResponse {
+export interface LoggingReplaceResponse {
   /**
    * Redact personally identifiable information from activity logging (PII fields
    * are: source IP, user email, user ID, device ID, URL, referrer, user agent).
@@ -80,10 +77,10 @@ export interface LoggingZeroTrustAccountsUpdateLoggingSettingsForTheZeroTrustAcc
   /**
    * Logging settings by rule type.
    */
-  settings_by_rule_type?: LoggingZeroTrustAccountsUpdateLoggingSettingsForTheZeroTrustAccountResponse.SettingsByRuleType;
+  settings_by_rule_type?: LoggingReplaceResponse.SettingsByRuleType;
 }
 
-export namespace LoggingZeroTrustAccountsUpdateLoggingSettingsForTheZeroTrustAccountResponse {
+export namespace LoggingReplaceResponse {
   /**
    * Logging settings by rule type.
    */
@@ -105,7 +102,7 @@ export namespace LoggingZeroTrustAccountsUpdateLoggingSettingsForTheZeroTrustAcc
   }
 }
 
-export interface LoggingZeroTrustAccountsUpdateLoggingSettingsForTheZeroTrustAccountParams {
+export interface LoggingReplaceParams {
   /**
    * Redact personally identifiable information from activity logging (PII fields
    * are: source IP, user email, user ID, device ID, URL, referrer, user agent).
@@ -115,10 +112,10 @@ export interface LoggingZeroTrustAccountsUpdateLoggingSettingsForTheZeroTrustAcc
   /**
    * Logging settings by rule type.
    */
-  settings_by_rule_type?: LoggingZeroTrustAccountsUpdateLoggingSettingsForTheZeroTrustAccountParams.SettingsByRuleType;
+  settings_by_rule_type?: LoggingReplaceParams.SettingsByRuleType;
 }
 
-export namespace LoggingZeroTrustAccountsUpdateLoggingSettingsForTheZeroTrustAccountParams {
+export namespace LoggingReplaceParams {
   /**
    * Logging settings by rule type.
    */
@@ -141,7 +138,7 @@ export namespace LoggingZeroTrustAccountsUpdateLoggingSettingsForTheZeroTrustAcc
 }
 
 export namespace Loggings {
-  export import LoggingZeroTrustAccountsGetLoggingSettingsForTheZeroTrustAccountResponse = LoggingsAPI.LoggingZeroTrustAccountsGetLoggingSettingsForTheZeroTrustAccountResponse;
-  export import LoggingZeroTrustAccountsUpdateLoggingSettingsForTheZeroTrustAccountResponse = LoggingsAPI.LoggingZeroTrustAccountsUpdateLoggingSettingsForTheZeroTrustAccountResponse;
-  export import LoggingZeroTrustAccountsUpdateLoggingSettingsForTheZeroTrustAccountParams = LoggingsAPI.LoggingZeroTrustAccountsUpdateLoggingSettingsForTheZeroTrustAccountParams;
+  export import LoggingGetResponse = LoggingsAPI.LoggingGetResponse;
+  export import LoggingReplaceResponse = LoggingsAPI.LoggingReplaceResponse;
+  export import LoggingReplaceParams = LoggingsAPI.LoggingReplaceParams;
 }

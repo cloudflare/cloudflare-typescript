@@ -99,4 +99,36 @@ describe('resource deployments', () => {
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
+
+  // skipped: tests are disabled for the time being
+  test.skip('retry', async () => {
+    const responsePromise = cloudflare.pages.projects.deployments.retry(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      'this-is-my-project-01',
+      '023e105f4ecef8ad9ca31a8372d0c353',
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('rollback', async () => {
+    const responsePromise = cloudflare.pages.projects.deployments.rollback(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      'this-is-my-project-01',
+      '023e105f4ecef8ad9ca31a8372d0c353',
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
 });

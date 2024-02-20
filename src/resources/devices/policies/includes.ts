@@ -8,29 +8,10 @@ export class Includes extends APIResource {
   /**
    * Fetches the list of routes included in the WARP client's tunnel.
    */
-  devicesGetSplitTunnelIncludeList(
-    identifier: unknown,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<IncludeDevicesGetSplitTunnelIncludeListResponse | null> {
+  list(identifier: unknown, options?: Core.RequestOptions): Core.APIPromise<IncludeListResponse | null> {
     return (
       this._client.get(`/accounts/${identifier}/devices/policy/include`, options) as Core.APIPromise<{
-        result: IncludeDevicesGetSplitTunnelIncludeListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Fetches the list of routes included in the WARP client's tunnel for a specific
-   * device settings profile.
-   */
-  devicesGetSplitTunnelIncludeListForADeviceSettingsPolicy(
-    identifier: unknown,
-    uuid: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<IncludeDevicesGetSplitTunnelIncludeListForADeviceSettingsPolicyResponse | null> {
-    return (
-      this._client.get(`/accounts/${identifier}/devices/policy/${uuid}/include`, options) as Core.APIPromise<{
-        result: IncludeDevicesGetSplitTunnelIncludeListForADeviceSettingsPolicyResponse | null;
+        result: IncludeListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -38,45 +19,24 @@ export class Includes extends APIResource {
   /**
    * Sets the list of routes included in the WARP client's tunnel.
    */
-  devicesSetSplitTunnelIncludeList(
+  replace(
     identifier: unknown,
-    body: IncludeDevicesSetSplitTunnelIncludeListParams,
+    body: IncludeReplaceParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<IncludeDevicesSetSplitTunnelIncludeListResponse | null> {
+  ): Core.APIPromise<IncludeReplaceResponse | null> {
     return (
       this._client.put(`/accounts/${identifier}/devices/policy/include`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: IncludeDevicesSetSplitTunnelIncludeListResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Sets the list of routes included in the WARP client's tunnel for a specific
-   * device settings profile.
-   */
-  devicesSetSplitTunnelIncludeListForADeviceSettingsPolicy(
-    identifier: unknown,
-    uuid: string,
-    body: IncludeDevicesSetSplitTunnelIncludeListForADeviceSettingsPolicyParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<IncludeDevicesSetSplitTunnelIncludeListForADeviceSettingsPolicyResponse | null> {
-    return (
-      this._client.put(`/accounts/${identifier}/devices/policy/${uuid}/include`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{
-        result: IncludeDevicesSetSplitTunnelIncludeListForADeviceSettingsPolicyResponse | null;
-      }>
+      }) as Core.APIPromise<{ result: IncludeReplaceResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type IncludeDevicesGetSplitTunnelIncludeListResponse =
-  Array<IncludeDevicesGetSplitTunnelIncludeListResponse.IncludeDevicesGetSplitTunnelIncludeListResponseItem>;
+export type IncludeListResponse = Array<IncludeListResponse.IncludeListResponseItem>;
 
-export namespace IncludeDevicesGetSplitTunnelIncludeListResponse {
-  export interface IncludeDevicesGetSplitTunnelIncludeListResponseItem {
+export namespace IncludeListResponse {
+  export interface IncludeListResponseItem {
     /**
      * The address in CIDR format to include in the tunnel. If address is present, host
      * must not be present.
@@ -96,11 +56,10 @@ export namespace IncludeDevicesGetSplitTunnelIncludeListResponse {
   }
 }
 
-export type IncludeDevicesGetSplitTunnelIncludeListForADeviceSettingsPolicyResponse =
-  Array<IncludeDevicesGetSplitTunnelIncludeListForADeviceSettingsPolicyResponse.IncludeDevicesGetSplitTunnelIncludeListForADeviceSettingsPolicyResponseItem>;
+export type IncludeReplaceResponse = Array<IncludeReplaceResponse.IncludeReplaceResponseItem>;
 
-export namespace IncludeDevicesGetSplitTunnelIncludeListForADeviceSettingsPolicyResponse {
-  export interface IncludeDevicesGetSplitTunnelIncludeListForADeviceSettingsPolicyResponseItem {
+export namespace IncludeReplaceResponse {
+  export interface IncludeReplaceResponseItem {
     /**
      * The address in CIDR format to include in the tunnel. If address is present, host
      * must not be present.
@@ -120,82 +79,9 @@ export namespace IncludeDevicesGetSplitTunnelIncludeListForADeviceSettingsPolicy
   }
 }
 
-export type IncludeDevicesSetSplitTunnelIncludeListResponse =
-  Array<IncludeDevicesSetSplitTunnelIncludeListResponse.IncludeDevicesSetSplitTunnelIncludeListResponseItem>;
+export type IncludeReplaceParams = Array<IncludeReplaceParams.Body>;
 
-export namespace IncludeDevicesSetSplitTunnelIncludeListResponse {
-  export interface IncludeDevicesSetSplitTunnelIncludeListResponseItem {
-    /**
-     * The address in CIDR format to include in the tunnel. If address is present, host
-     * must not be present.
-     */
-    address: string;
-
-    /**
-     * A description of the split tunnel item, displayed in the client UI.
-     */
-    description: string;
-
-    /**
-     * The domain name to include in the tunnel. If host is present, address must not
-     * be present.
-     */
-    host?: string;
-  }
-}
-
-export type IncludeDevicesSetSplitTunnelIncludeListForADeviceSettingsPolicyResponse =
-  Array<IncludeDevicesSetSplitTunnelIncludeListForADeviceSettingsPolicyResponse.IncludeDevicesSetSplitTunnelIncludeListForADeviceSettingsPolicyResponseItem>;
-
-export namespace IncludeDevicesSetSplitTunnelIncludeListForADeviceSettingsPolicyResponse {
-  export interface IncludeDevicesSetSplitTunnelIncludeListForADeviceSettingsPolicyResponseItem {
-    /**
-     * The address in CIDR format to include in the tunnel. If address is present, host
-     * must not be present.
-     */
-    address: string;
-
-    /**
-     * A description of the split tunnel item, displayed in the client UI.
-     */
-    description: string;
-
-    /**
-     * The domain name to include in the tunnel. If host is present, address must not
-     * be present.
-     */
-    host?: string;
-  }
-}
-
-export type IncludeDevicesSetSplitTunnelIncludeListParams =
-  Array<IncludeDevicesSetSplitTunnelIncludeListParams.Body>;
-
-export namespace IncludeDevicesSetSplitTunnelIncludeListParams {
-  export interface Body {
-    /**
-     * The address in CIDR format to include in the tunnel. If address is present, host
-     * must not be present.
-     */
-    address: string;
-
-    /**
-     * A description of the split tunnel item, displayed in the client UI.
-     */
-    description: string;
-
-    /**
-     * The domain name to include in the tunnel. If host is present, address must not
-     * be present.
-     */
-    host?: string;
-  }
-}
-
-export type IncludeDevicesSetSplitTunnelIncludeListForADeviceSettingsPolicyParams =
-  Array<IncludeDevicesSetSplitTunnelIncludeListForADeviceSettingsPolicyParams.Body>;
-
-export namespace IncludeDevicesSetSplitTunnelIncludeListForADeviceSettingsPolicyParams {
+export namespace IncludeReplaceParams {
   export interface Body {
     /**
      * The address in CIDR format to include in the tunnel. If address is present, host
@@ -217,10 +103,7 @@ export namespace IncludeDevicesSetSplitTunnelIncludeListForADeviceSettingsPolicy
 }
 
 export namespace Includes {
-  export import IncludeDevicesGetSplitTunnelIncludeListResponse = IncludesAPI.IncludeDevicesGetSplitTunnelIncludeListResponse;
-  export import IncludeDevicesGetSplitTunnelIncludeListForADeviceSettingsPolicyResponse = IncludesAPI.IncludeDevicesGetSplitTunnelIncludeListForADeviceSettingsPolicyResponse;
-  export import IncludeDevicesSetSplitTunnelIncludeListResponse = IncludesAPI.IncludeDevicesSetSplitTunnelIncludeListResponse;
-  export import IncludeDevicesSetSplitTunnelIncludeListForADeviceSettingsPolicyResponse = IncludesAPI.IncludeDevicesSetSplitTunnelIncludeListForADeviceSettingsPolicyResponse;
-  export import IncludeDevicesSetSplitTunnelIncludeListParams = IncludesAPI.IncludeDevicesSetSplitTunnelIncludeListParams;
-  export import IncludeDevicesSetSplitTunnelIncludeListForADeviceSettingsPolicyParams = IncludesAPI.IncludeDevicesSetSplitTunnelIncludeListForADeviceSettingsPolicyParams;
+  export import IncludeListResponse = IncludesAPI.IncludeListResponse;
+  export import IncludeReplaceResponse = IncludesAPI.IncludeReplaceResponse;
+  export import IncludeReplaceParams = IncludesAPI.IncludeReplaceParams;
 }

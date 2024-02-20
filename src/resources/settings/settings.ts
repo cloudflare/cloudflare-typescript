@@ -15,8 +15,9 @@ import * as CacheLevelAPI from 'cloudflare/resources/settings/cache-level';
 import * as ChallengeTTLAPI from 'cloudflare/resources/settings/challenge-ttl';
 import * as CiphersAPI from 'cloudflare/resources/settings/ciphers';
 import * as DevelopmentModeAPI from 'cloudflare/resources/settings/development-mode';
-import * as EarlyHintAPI from 'cloudflare/resources/settings/early-hint';
+import * as EarlyHintsAPI from 'cloudflare/resources/settings/early-hints';
 import * as EmailObfuscationAPI from 'cloudflare/resources/settings/email-obfuscation';
+import * as FontSettingsAPI from 'cloudflare/resources/settings/font-settings';
 import * as H2PrioritizationAPI from 'cloudflare/resources/settings/h2-prioritization';
 import * as HotlinkProtectionAPI from 'cloudflare/resources/settings/hotlink-protection';
 import * as HTTP2API from 'cloudflare/resources/settings/http2';
@@ -70,7 +71,7 @@ export class Settings extends APIResource {
   challengeTTL: ChallengeTTLAPI.ChallengeTTL = new ChallengeTTLAPI.ChallengeTTL(this._client);
   ciphers: CiphersAPI.Ciphers = new CiphersAPI.Ciphers(this._client);
   developmentMode: DevelopmentModeAPI.DevelopmentMode = new DevelopmentModeAPI.DevelopmentMode(this._client);
-  earlyHint: EarlyHintAPI.EarlyHint = new EarlyHintAPI.EarlyHint(this._client);
+  earlyHints: EarlyHintsAPI.EarlyHints = new EarlyHintsAPI.EarlyHints(this._client);
   emailObfuscation: EmailObfuscationAPI.EmailObfuscation = new EmailObfuscationAPI.EmailObfuscation(
     this._client,
   );
@@ -127,6 +128,7 @@ export class Settings extends APIResource {
   waf: WAFAPI.WAF = new WAFAPI.WAF(this._client);
   webp: WebpAPI.Webp = new WebpAPI.Webp(this._client);
   websocket: WebsocketAPI.Websocket = new WebsocketAPI.Websocket(this._client);
+  fontSettings: FontSettingsAPI.FontSettings = new FontSettingsAPI.FontSettings(this._client);
 
   /**
    * Available settings for your user in relation to a zone.
@@ -4951,9 +4953,9 @@ export namespace Settings {
   export import SettingEditResponse = SettingsAPI.SettingEditResponse;
   export import SettingEditParams = SettingsAPI.SettingEditParams;
   export import ZeroRtt = ZeroRttAPI.ZeroRtt;
+  export import ZeroRttUpdateResponse = ZeroRttAPI.ZeroRttUpdateResponse;
   export import ZeroRttGetResponse = ZeroRttAPI.ZeroRttGetResponse;
-  export import ZeroRttZoneSettingsChange0RttSessionResumptionSettingResponse = ZeroRttAPI.ZeroRttZoneSettingsChange0RttSessionResumptionSettingResponse;
-  export import ZeroRttZoneSettingsChange0RttSessionResumptionSettingParams = ZeroRttAPI.ZeroRttZoneSettingsChange0RttSessionResumptionSettingParams;
+  export import ZeroRttUpdateParams = ZeroRttAPI.ZeroRttUpdateParams;
   export import AdvancedDDOS = AdvancedDDOSAPI.AdvancedDDOS;
   export import AdvancedDDOSGetResponse = AdvancedDDOSAPI.AdvancedDDOSGetResponse;
   export import AlwaysOnline = AlwaysOnlineAPI.AlwaysOnline;
@@ -5000,10 +5002,10 @@ export namespace Settings {
   export import DevelopmentModeUpdateResponse = DevelopmentModeAPI.DevelopmentModeUpdateResponse;
   export import DevelopmentModeGetResponse = DevelopmentModeAPI.DevelopmentModeGetResponse;
   export import DevelopmentModeUpdateParams = DevelopmentModeAPI.DevelopmentModeUpdateParams;
-  export import EarlyHint = EarlyHintAPI.EarlyHint;
-  export import EarlyHintUpdateResponse = EarlyHintAPI.EarlyHintUpdateResponse;
-  export import EarlyHintGetResponse = EarlyHintAPI.EarlyHintGetResponse;
-  export import EarlyHintUpdateParams = EarlyHintAPI.EarlyHintUpdateParams;
+  export import EarlyHints = EarlyHintsAPI.EarlyHints;
+  export import EarlyHintUpdateResponse = EarlyHintsAPI.EarlyHintUpdateResponse;
+  export import EarlyHintGetResponse = EarlyHintsAPI.EarlyHintGetResponse;
+  export import EarlyHintUpdateParams = EarlyHintsAPI.EarlyHintUpdateParams;
   export import EmailObfuscation = EmailObfuscationAPI.EmailObfuscation;
   export import EmailObfuscationUpdateResponse = EmailObfuscationAPI.EmailObfuscationUpdateResponse;
   export import EmailObfuscationGetResponse = EmailObfuscationAPI.EmailObfuscationGetResponse;
@@ -5148,4 +5150,8 @@ export namespace Settings {
   export import WebsocketUpdateResponse = WebsocketAPI.WebsocketUpdateResponse;
   export import WebsocketGetResponse = WebsocketAPI.WebsocketGetResponse;
   export import WebsocketUpdateParams = WebsocketAPI.WebsocketUpdateParams;
+  export import FontSettings = FontSettingsAPI.FontSettings;
+  export import FontSettingUpdateResponse = FontSettingsAPI.FontSettingUpdateResponse;
+  export import FontSettingGetResponse = FontSettingsAPI.FontSettingGetResponse;
+  export import FontSettingUpdateParams = FontSettingsAPI.FontSettingUpdateParams;
 }

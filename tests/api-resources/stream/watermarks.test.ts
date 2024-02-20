@@ -13,6 +13,54 @@ const cloudflare = new Cloudflare({
 
 describe('resource watermarks', () => {
   // skipped: tests are disabled for the time being
+  test.skip('create: only required params', async () => {
+    const responsePromise = cloudflare.stream.watermarks.create('023e105f4ecef8ad9ca31a8372d0c353', {
+      file: '@/Users/rchen/Downloads/watermark.png',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('create: required and optional params', async () => {
+    const response = await cloudflare.stream.watermarks.create('023e105f4ecef8ad9ca31a8372d0c353', {
+      file: '@/Users/rchen/Downloads/watermark.png',
+      name: 'Marketing Videos',
+      opacity: 0.75,
+      padding: 0.1,
+      position: 'center',
+      scale: 0.1,
+    });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list', async () => {
+    const responsePromise = cloudflare.stream.watermarks.list('023e105f4ecef8ad9ca31a8372d0c353');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.stream.watermarks.list('023e105f4ecef8ad9ca31a8372d0c353', {
+        path: '/_stainless_unknown_path',
+      }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('delete', async () => {
     const responsePromise = cloudflare.stream.watermarks.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
@@ -49,63 +97,6 @@ describe('resource watermarks', () => {
       cloudflare.stream.watermarks.get(
         '023e105f4ecef8ad9ca31a8372d0c353',
         'ea95132c15732412d22c1476fa83f27a',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('streamWatermarkProfileCreateWatermarkProfilesViaBasicUpload: only required params', async () => {
-    const responsePromise =
-      cloudflare.stream.watermarks.streamWatermarkProfileCreateWatermarkProfilesViaBasicUpload(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        { file: '@/Users/rchen/Downloads/watermark.png' },
-      );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('streamWatermarkProfileCreateWatermarkProfilesViaBasicUpload: required and optional params', async () => {
-    const response =
-      await cloudflare.stream.watermarks.streamWatermarkProfileCreateWatermarkProfilesViaBasicUpload(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        {
-          file: '@/Users/rchen/Downloads/watermark.png',
-          name: 'Marketing Videos',
-          opacity: 0.75,
-          padding: 0.1,
-          position: 'center',
-          scale: 0.1,
-        },
-      );
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('streamWatermarkProfileListWatermarkProfiles', async () => {
-    const responsePromise = cloudflare.stream.watermarks.streamWatermarkProfileListWatermarkProfiles(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('streamWatermarkProfileListWatermarkProfiles: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.stream.watermarks.streamWatermarkProfileListWatermarkProfiles(
-        '023e105f4ecef8ad9ca31a8372d0c353',
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);

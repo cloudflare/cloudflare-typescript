@@ -8,21 +8,6 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudfl
 
 export class Memberships extends APIResource {
   /**
-   * Accept or reject this account invitation.
-   */
-  update(
-    membershipId: string,
-    body: MembershipUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<MembershipUpdateResponse> {
-    return (
-      this._client.put(`/memberships/${membershipId}`, { body, ...options }) as Core.APIPromise<{
-        result: MembershipUpdateResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * List memberships of accounts the user can access.
    */
   list(
@@ -66,11 +51,24 @@ export class Memberships extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Accept or reject this account invitation.
+   */
+  replace(
+    membershipId: string,
+    body: MembershipReplaceParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MembershipReplaceResponse> {
+    return (
+      this._client.put(`/memberships/${membershipId}`, { body, ...options }) as Core.APIPromise<{
+        result: MembershipReplaceResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
 export class MembershipListResponsesV4PagePaginationArray extends V4PagePaginationArray<MembershipListResponse> {}
-
-export type MembershipUpdateResponse = unknown | string | null;
 
 export interface MembershipListResponse {
   /**
@@ -278,12 +276,7 @@ export interface MembershipDeleteResponse {
 
 export type MembershipGetResponse = unknown | string | null;
 
-export interface MembershipUpdateParams {
-  /**
-   * Whether to accept or reject this account invitation.
-   */
-  status: 'accepted' | 'rejected';
-}
+export type MembershipReplaceResponse = unknown | string | null;
 
 export interface MembershipListParams extends V4PagePaginationArrayParams {
   account?: MembershipListParams.Account;
@@ -318,12 +311,19 @@ export namespace MembershipListParams {
   }
 }
 
+export interface MembershipReplaceParams {
+  /**
+   * Whether to accept or reject this account invitation.
+   */
+  status: 'accepted' | 'rejected';
+}
+
 export namespace Memberships {
-  export import MembershipUpdateResponse = MembershipsAPI.MembershipUpdateResponse;
   export import MembershipListResponse = MembershipsAPI.MembershipListResponse;
   export import MembershipDeleteResponse = MembershipsAPI.MembershipDeleteResponse;
   export import MembershipGetResponse = MembershipsAPI.MembershipGetResponse;
+  export import MembershipReplaceResponse = MembershipsAPI.MembershipReplaceResponse;
   export import MembershipListResponsesV4PagePaginationArray = MembershipsAPI.MembershipListResponsesV4PagePaginationArray;
-  export import MembershipUpdateParams = MembershipsAPI.MembershipUpdateParams;
   export import MembershipListParams = MembershipsAPI.MembershipListParams;
+  export import MembershipReplaceParams = MembershipsAPI.MembershipReplaceParams;
 }

@@ -7,6 +7,34 @@ import { multipartFormRequestOptions } from 'cloudflare/core';
 
 export class Watermarks extends APIResource {
   /**
+   * Creates watermark profiles using a single `HTTP POST multipart/form-data`
+   * request.
+   */
+  create(
+    accountId: string,
+    body: WatermarkCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<WatermarkCreateResponse> {
+    return (
+      this._client.post(
+        `/accounts/${accountId}/stream/watermarks`,
+        multipartFormRequestOptions({ body, ...options }),
+      ) as Core.APIPromise<{ result: WatermarkCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Lists all watermark profiles for an account.
+   */
+  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<WatermarkListResponse> {
+    return (
+      this._client.get(`/accounts/${accountId}/stream/watermarks`, options) as Core.APIPromise<{
+        result: WatermarkListResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Deletes a watermark profile.
    */
   delete(
@@ -36,52 +64,14 @@ export class Watermarks extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
-
-  /**
-   * Creates watermark profiles using a single `HTTP POST multipart/form-data`
-   * request.
-   */
-  streamWatermarkProfileCreateWatermarkProfilesViaBasicUpload(
-    accountId: string,
-    body: WatermarkStreamWatermarkProfileCreateWatermarkProfilesViaBasicUploadParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<WatermarkStreamWatermarkProfileCreateWatermarkProfilesViaBasicUploadResponse> {
-    return (
-      this._client.post(
-        `/accounts/${accountId}/stream/watermarks`,
-        multipartFormRequestOptions({ body, ...options }),
-      ) as Core.APIPromise<{
-        result: WatermarkStreamWatermarkProfileCreateWatermarkProfilesViaBasicUploadResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Lists all watermark profiles for an account.
-   */
-  streamWatermarkProfileListWatermarkProfiles(
-    accountId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<WatermarkStreamWatermarkProfileListWatermarkProfilesResponse> {
-    return (
-      this._client.get(`/accounts/${accountId}/stream/watermarks`, options) as Core.APIPromise<{
-        result: WatermarkStreamWatermarkProfileListWatermarkProfilesResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 
-export type WatermarkDeleteResponse = unknown | string;
+export type WatermarkCreateResponse = unknown | string;
 
-export type WatermarkGetResponse = unknown | string;
+export type WatermarkListResponse = Array<WatermarkListResponse.WatermarkListResponseItem>;
 
-export type WatermarkStreamWatermarkProfileCreateWatermarkProfilesViaBasicUploadResponse = unknown | string;
-
-export type WatermarkStreamWatermarkProfileListWatermarkProfilesResponse =
-  Array<WatermarkStreamWatermarkProfileListWatermarkProfilesResponse.WatermarkStreamWatermarkProfileListWatermarkProfilesResponseItem>;
-
-export namespace WatermarkStreamWatermarkProfileListWatermarkProfilesResponse {
-  export interface WatermarkStreamWatermarkProfileListWatermarkProfilesResponseItem {
+export namespace WatermarkListResponse {
+  export interface WatermarkListResponseItem {
     /**
      * The date and a time a watermark profile was created.
      */
@@ -149,7 +139,11 @@ export namespace WatermarkStreamWatermarkProfileListWatermarkProfilesResponse {
   }
 }
 
-export interface WatermarkStreamWatermarkProfileCreateWatermarkProfilesViaBasicUploadParams {
+export type WatermarkDeleteResponse = unknown | string;
+
+export type WatermarkGetResponse = unknown | string;
+
+export interface WatermarkCreateParams {
   /**
    * The image file to upload.
    */
@@ -191,9 +185,9 @@ export interface WatermarkStreamWatermarkProfileCreateWatermarkProfilesViaBasicU
 }
 
 export namespace Watermarks {
+  export import WatermarkCreateResponse = WatermarksAPI.WatermarkCreateResponse;
+  export import WatermarkListResponse = WatermarksAPI.WatermarkListResponse;
   export import WatermarkDeleteResponse = WatermarksAPI.WatermarkDeleteResponse;
   export import WatermarkGetResponse = WatermarksAPI.WatermarkGetResponse;
-  export import WatermarkStreamWatermarkProfileCreateWatermarkProfilesViaBasicUploadResponse = WatermarksAPI.WatermarkStreamWatermarkProfileCreateWatermarkProfilesViaBasicUploadResponse;
-  export import WatermarkStreamWatermarkProfileListWatermarkProfilesResponse = WatermarksAPI.WatermarkStreamWatermarkProfileListWatermarkProfilesResponse;
-  export import WatermarkStreamWatermarkProfileCreateWatermarkProfilesViaBasicUploadParams = WatermarksAPI.WatermarkStreamWatermarkProfileCreateWatermarkProfilesViaBasicUploadParams;
+  export import WatermarkCreateParams = WatermarksAPI.WatermarkCreateParams;
 }

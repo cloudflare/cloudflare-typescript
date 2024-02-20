@@ -13,10 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource gateways', () => {
   // skipped: tests are disabled for the time being
-  test.skip('zeroTrustAccountsCreateZeroTrustAccount', async () => {
-    const responsePromise = cloudflare.gateways.zeroTrustAccountsCreateZeroTrustAccount(
-      '699d98642c564d2e855e9661899b7252',
-    );
+  test.skip('create', async () => {
+    const responsePromise = cloudflare.gateways.create('699d98642c564d2e855e9661899b7252');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -27,20 +25,16 @@ describe('resource gateways', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('zeroTrustAccountsCreateZeroTrustAccount: request options instead of params are passed correctly', async () => {
+  test.skip('create: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.gateways.zeroTrustAccountsCreateZeroTrustAccount('699d98642c564d2e855e9661899b7252', {
-        path: '/_stainless_unknown_path',
-      }),
+      cloudflare.gateways.create('699d98642c564d2e855e9661899b7252', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('zeroTrustAccountsGetZeroTrustAccountInformation', async () => {
-    const responsePromise = cloudflare.gateways.zeroTrustAccountsGetZeroTrustAccountInformation(
-      '699d98642c564d2e855e9661899b7252',
-    );
+  test.skip('list', async () => {
+    const responsePromise = cloudflare.gateways.list('699d98642c564d2e855e9661899b7252');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -51,13 +45,10 @@ describe('resource gateways', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('zeroTrustAccountsGetZeroTrustAccountInformation: request options instead of params are passed correctly', async () => {
+  test.skip('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.gateways.zeroTrustAccountsGetZeroTrustAccountInformation(
-        '699d98642c564d2e855e9661899b7252',
-        { path: '/_stainless_unknown_path' },
-      ),
+      cloudflare.gateways.list('699d98642c564d2e855e9661899b7252', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 });

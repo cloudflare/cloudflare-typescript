@@ -13,8 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource zaraz', () => {
   // skipped: tests are disabled for the time being
-  test.skip('workflowUpdate: only required params', async () => {
-    const responsePromise = cloudflare.zaraz.workflowUpdate('023e105f4ecef8ad9ca31a8372d0c353', 'realtime');
+  test.skip('replace: only required params', async () => {
+    const responsePromise = cloudflare.zaraz.replace('023e105f4ecef8ad9ca31a8372d0c353', 'realtime');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -25,7 +25,7 @@ describe('resource zaraz', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('workflowUpdate: required and optional params', async () => {
-    const response = await cloudflare.zaraz.workflowUpdate('023e105f4ecef8ad9ca31a8372d0c353', 'realtime');
+  test.skip('replace: required and optional params', async () => {
+    const response = await cloudflare.zaraz.replace('023e105f4ecef8ad9ca31a8372d0c353', 'realtime');
   });
 });

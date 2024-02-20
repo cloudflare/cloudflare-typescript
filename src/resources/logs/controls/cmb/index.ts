@@ -2,9 +2,9 @@
 
 export { Cmb } from './cmb';
 export {
+  ConfigCreateResponse,
   ConfigDeleteResponse,
-  ConfigGetAccountsAccountIdentifierLogsControlCmbConfigResponse,
-  ConfigPutAccountsAccountIdentifierLogsControlCmbConfigResponse,
-  ConfigPutAccountsAccountIdentifierLogsControlCmbConfigParams,
-  Configs,
-} from './configs';
+  ConfigGetResponse,
+  ConfigCreateParams,
+  Config,
+} from './config';

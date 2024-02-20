@@ -13,10 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource forceAxfrs', () => {
   // skipped: tests are disabled for the time being
-  test.skip('secondaryDNSSecondaryZoneForceAxfr', async () => {
-    const responsePromise = cloudflare.secondaryDNS.forceAxfrs.secondaryDNSSecondaryZoneForceAxfr(
-      '269d8f4853475ca241c4e730be286b20',
-    );
+  test.skip('create', async () => {
+    const responsePromise = cloudflare.secondaryDNS.forceAxfrs.create('269d8f4853475ca241c4e730be286b20');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

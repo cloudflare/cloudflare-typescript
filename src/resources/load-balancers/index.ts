@@ -32,10 +32,5 @@ export {
   Pools,
 } from './pools/index';
 export { PreviewGetResponse, Previews } from './previews';
-export {
-  RegionGetResponse,
-  RegionLoadBalancerRegionsListRegionsResponse,
-  RegionLoadBalancerRegionsListRegionsParams,
-  Regions,
-} from './regions';
+export { RegionListResponse, RegionGetResponse, RegionListParams, Regions } from './regions';
 export { SearchListResponse, SearchListParams, Searches } from './searches';

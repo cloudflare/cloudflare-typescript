@@ -9,21 +9,21 @@ export class Previews extends APIResource {
    * Preview pools using the specified monitor with provided monitor details. The
    * returned preview_id can be used in the preview endpoint to retrieve the results.
    */
-  loadBalancerMonitorsPreviewMonitor(
+  create(
     monitorId: string,
-    body: PreviewLoadBalancerMonitorsPreviewMonitorParams,
+    body: PreviewCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PreviewLoadBalancerMonitorsPreviewMonitorResponse> {
+  ): Core.APIPromise<PreviewCreateResponse> {
     return (
       this._client.post(`/user/load_balancers/monitors/${monitorId}/preview`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: PreviewLoadBalancerMonitorsPreviewMonitorResponse }>
+      }) as Core.APIPromise<{ result: PreviewCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface PreviewLoadBalancerMonitorsPreviewMonitorResponse {
+export interface PreviewCreateResponse {
   /**
    * Monitored pool IDs mapped to their respective names.
    */
@@ -32,7 +32,7 @@ export interface PreviewLoadBalancerMonitorsPreviewMonitorResponse {
   preview_id?: string;
 }
 
-export interface PreviewLoadBalancerMonitorsPreviewMonitorParams {
+export interface PreviewCreateParams {
   /**
    * The expected HTTP response code or code range of the health check. This
    * parameter is only valid for HTTP and HTTPS monitors.
@@ -132,6 +132,6 @@ export interface PreviewLoadBalancerMonitorsPreviewMonitorParams {
 }
 
 export namespace Previews {
-  export import PreviewLoadBalancerMonitorsPreviewMonitorResponse = PreviewsAPI.PreviewLoadBalancerMonitorsPreviewMonitorResponse;
-  export import PreviewLoadBalancerMonitorsPreviewMonitorParams = PreviewsAPI.PreviewLoadBalancerMonitorsPreviewMonitorParams;
+  export import PreviewCreateResponse = PreviewsAPI.PreviewCreateResponse;
+  export import PreviewCreateParams = PreviewsAPI.PreviewCreateParams;
 }

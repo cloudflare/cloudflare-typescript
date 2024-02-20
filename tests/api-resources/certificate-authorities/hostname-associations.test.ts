@@ -13,11 +13,10 @@ const cloudflare = new Cloudflare({
 
 describe('resource hostnameAssociations', () => {
   // skipped: tests are disabled for the time being
-  test.skip('clientCertificateForAZoneListHostnameAssociations', async () => {
-    const responsePromise =
-      cloudflare.certificateAuthorities.hostnameAssociations.clientCertificateForAZoneListHostnameAssociations(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-      );
+  test.skip('list', async () => {
+    const responsePromise = cloudflare.certificateAuthorities.hostnameAssociations.list(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -28,21 +27,20 @@ describe('resource hostnameAssociations', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('clientCertificateForAZoneListHostnameAssociations: request options instead of params are passed correctly', async () => {
+  test.skip('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.certificateAuthorities.hostnameAssociations.clientCertificateForAZoneListHostnameAssociations(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        { path: '/_stainless_unknown_path' },
-      ),
+      cloudflare.certificateAuthorities.hostnameAssociations.list('023e105f4ecef8ad9ca31a8372d0c353', {
+        path: '/_stainless_unknown_path',
+      }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('clientCertificateForAZoneListHostnameAssociations: request options and params are passed correctly', async () => {
+  test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.certificateAuthorities.hostnameAssociations.clientCertificateForAZoneListHostnameAssociations(
+      cloudflare.certificateAuthorities.hostnameAssociations.list(
         '023e105f4ecef8ad9ca31a8372d0c353',
         { mtls_certificate_id: 'b2134436-2555-4acf-be5b-26c48136575e' },
         { path: '/_stainless_unknown_path' },
@@ -51,12 +49,11 @@ describe('resource hostnameAssociations', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('clientCertificateForAZonePutHostnameAssociations', async () => {
-    const responsePromise =
-      cloudflare.certificateAuthorities.hostnameAssociations.clientCertificateForAZonePutHostnameAssociations(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        {},
-      );
+  test.skip('replace', async () => {
+    const responsePromise = cloudflare.certificateAuthorities.hostnameAssociations.replace(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      {},
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

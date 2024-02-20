@@ -8,26 +8,25 @@ export class Traceroutes extends APIResource {
   /**
    * Run traceroutes from Cloudflare colos.
    */
-  diagnosticsTraceroute(
+  create(
     accountId: string,
-    body: TracerouteDiagnosticsTracerouteParams,
+    body: TracerouteCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TracerouteDiagnosticsTracerouteResponse | null> {
+  ): Core.APIPromise<TracerouteCreateResponse | null> {
     return (
       this._client.post(`/accounts/${accountId}/diagnostics/traceroute`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: TracerouteDiagnosticsTracerouteResponse | null }>
+      }) as Core.APIPromise<{ result: TracerouteCreateResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type TracerouteDiagnosticsTracerouteResponse =
-  Array<TracerouteDiagnosticsTracerouteResponse.TracerouteDiagnosticsTracerouteResponseItem>;
+export type TracerouteCreateResponse = Array<TracerouteCreateResponse.TracerouteCreateResponseItem>;
 
-export namespace TracerouteDiagnosticsTracerouteResponse {
-  export interface TracerouteDiagnosticsTracerouteResponseItem {
-    colos?: Array<TracerouteDiagnosticsTracerouteResponseItem.Colo>;
+export namespace TracerouteCreateResponse {
+  export interface TracerouteCreateResponseItem {
+    colos?: Array<TracerouteCreateResponseItem.Colo>;
 
     /**
      * The target hostname, IPv6, or IPv6 address.
@@ -35,7 +34,7 @@ export namespace TracerouteDiagnosticsTracerouteResponse {
     target?: string;
   }
 
-  export namespace TracerouteDiagnosticsTracerouteResponseItem {
+  export namespace TracerouteCreateResponseItem {
     export interface Colo {
       colo?: Colo.Colo;
 
@@ -151,7 +150,7 @@ export namespace TracerouteDiagnosticsTracerouteResponse {
   }
 }
 
-export interface TracerouteDiagnosticsTracerouteParams {
+export interface TracerouteCreateParams {
   targets: Array<string>;
 
   /**
@@ -160,10 +159,10 @@ export interface TracerouteDiagnosticsTracerouteParams {
    */
   colos?: Array<string>;
 
-  options?: TracerouteDiagnosticsTracerouteParams.Options;
+  options?: TracerouteCreateParams.Options;
 }
 
-export namespace TracerouteDiagnosticsTracerouteParams {
+export namespace TracerouteCreateParams {
   export interface Options {
     /**
      * Max TTL.
@@ -195,6 +194,6 @@ export namespace TracerouteDiagnosticsTracerouteParams {
 }
 
 export namespace Traceroutes {
-  export import TracerouteDiagnosticsTracerouteResponse = TraceroutesAPI.TracerouteDiagnosticsTracerouteResponse;
-  export import TracerouteDiagnosticsTracerouteParams = TraceroutesAPI.TracerouteDiagnosticsTracerouteParams;
+  export import TracerouteCreateResponse = TraceroutesAPI.TracerouteCreateResponse;
+  export import TracerouteCreateParams = TraceroutesAPI.TracerouteCreateParams;
 }

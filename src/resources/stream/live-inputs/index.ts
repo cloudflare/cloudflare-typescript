@@ -1,20 +1,20 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
-  LiveInputUpdateResponse,
+  LiveInputCreateResponse,
+  LiveInputListResponse,
   LiveInputGetResponse,
-  LiveInputStreamLiveInputsCreateALiveInputResponse,
-  LiveInputStreamLiveInputsListLiveInputsResponse,
-  LiveInputUpdateParams,
-  LiveInputStreamLiveInputsCreateALiveInputParams,
-  LiveInputStreamLiveInputsListLiveInputsParams,
+  LiveInputReplaceResponse,
+  LiveInputCreateParams,
+  LiveInputListParams,
+  LiveInputReplaceParams,
   LiveInputs,
 } from './live-inputs';
 export {
-  OutputUpdateResponse,
-  OutputStreamLiveInputsCreateANewOutputConnectedToALiveInputResponse,
-  OutputStreamLiveInputsListAllOutputsAssociatedWithASpecifiedLiveInputResponse,
-  OutputUpdateParams,
-  OutputStreamLiveInputsCreateANewOutputConnectedToALiveInputParams,
+  OutputCreateResponse,
+  OutputListResponse,
+  OutputReplaceResponse,
+  OutputCreateParams,
+  OutputReplaceParams,
   Outputs,
 } from './outputs';

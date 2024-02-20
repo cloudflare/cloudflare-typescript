@@ -6,19 +6,29 @@ import * as ACLsAPI from 'cloudflare/resources/secondary-dns/acls';
 
 export class ACLs extends APIResource {
   /**
-   * Modify ACL.
+   * Create ACL.
    */
-  update(
+  create(
     accountId: unknown,
-    aclId: unknown,
-    body: ACLUpdateParams,
+    body: ACLCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ACLUpdateResponse> {
+  ): Core.APIPromise<ACLCreateResponse> {
     return (
-      this._client.put(`/accounts/${accountId}/secondary_dns/acls/${aclId}`, {
+      this._client.post(`/accounts/${accountId}/secondary_dns/acls`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ACLUpdateResponse }>
+      }) as Core.APIPromise<{ result: ACLCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * List ACLs.
+   */
+  list(accountId: unknown, options?: Core.RequestOptions): Core.APIPromise<ACLListResponse | null> {
+    return (
+      this._client.get(`/accounts/${accountId}/secondary_dns/acls`, options) as Core.APIPromise<{
+        result: ACLListResponse | null;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -49,37 +59,24 @@ export class ACLs extends APIResource {
   }
 
   /**
-   * Create ACL.
+   * Modify ACL.
    */
-  secondaryDNSACLCreateACL(
+  replace(
     accountId: unknown,
-    body: ACLSecondaryDNSACLCreateACLParams,
+    aclId: unknown,
+    body: ACLReplaceParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ACLSecondaryDNSACLCreateACLResponse> {
+  ): Core.APIPromise<ACLReplaceResponse> {
     return (
-      this._client.post(`/accounts/${accountId}/secondary_dns/acls`, {
+      this._client.put(`/accounts/${accountId}/secondary_dns/acls/${aclId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ACLSecondaryDNSACLCreateACLResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * List ACLs.
-   */
-  secondaryDNSACLListACLs(
-    accountId: unknown,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ACLSecondaryDNSACLListACLsResponse | null> {
-    return (
-      this._client.get(`/accounts/${accountId}/secondary_dns/acls`, options) as Core.APIPromise<{
-        result: ACLSecondaryDNSACLListACLsResponse | null;
-      }>
+      }) as Core.APIPromise<{ result: ACLReplaceResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface ACLUpdateResponse {
+export interface ACLCreateResponse {
   id: unknown;
 
   /**
@@ -95,6 +92,28 @@ export interface ACLUpdateResponse {
    * The name of the acl.
    */
   name: string;
+}
+
+export type ACLListResponse = Array<ACLListResponse.ACLListResponseItem>;
+
+export namespace ACLListResponse {
+  export interface ACLListResponseItem {
+    id: unknown;
+
+    /**
+     * Allowed IPv4/IPv6 address range of primary or secondary nameservers. This will
+     * be applied for the entire account. The IP range is used to allow additional
+     * NOTIFY IPs for secondary zones and IPs Cloudflare allows AXFR/IXFR requests from
+     * for primary zones. CIDRs are limited to a maximum of /24 for IPv4 and /64 for
+     * IPv6 respectively.
+     */
+    ip_range: string;
+
+    /**
+     * The name of the acl.
+     */
+    name: string;
+  }
 }
 
 export interface ACLDeleteResponse {
@@ -119,7 +138,7 @@ export interface ACLGetResponse {
   name: string;
 }
 
-export interface ACLSecondaryDNSACLCreateACLResponse {
+export interface ACLReplaceResponse {
   id: unknown;
 
   /**
@@ -137,30 +156,9 @@ export interface ACLSecondaryDNSACLCreateACLResponse {
   name: string;
 }
 
-export type ACLSecondaryDNSACLListACLsResponse =
-  Array<ACLSecondaryDNSACLListACLsResponse.ACLSecondaryDnsaclListACLsResponseItem>;
+export type ACLCreateParams = unknown;
 
-export namespace ACLSecondaryDNSACLListACLsResponse {
-  export interface ACLSecondaryDnsaclListACLsResponseItem {
-    id: unknown;
-
-    /**
-     * Allowed IPv4/IPv6 address range of primary or secondary nameservers. This will
-     * be applied for the entire account. The IP range is used to allow additional
-     * NOTIFY IPs for secondary zones and IPs Cloudflare allows AXFR/IXFR requests from
-     * for primary zones. CIDRs are limited to a maximum of /24 for IPv4 and /64 for
-     * IPv6 respectively.
-     */
-    ip_range: string;
-
-    /**
-     * The name of the acl.
-     */
-    name: string;
-  }
-}
-
-export interface ACLUpdateParams {
+export interface ACLReplaceParams {
   /**
    * Allowed IPv4/IPv6 address range of primary or secondary nameservers. This will
    * be applied for the entire account. The IP range is used to allow additional
@@ -176,14 +174,12 @@ export interface ACLUpdateParams {
   name: string;
 }
 
-export type ACLSecondaryDNSACLCreateACLParams = unknown;
-
 export namespace ACLs {
-  export import ACLUpdateResponse = ACLsAPI.ACLUpdateResponse;
+  export import ACLCreateResponse = ACLsAPI.ACLCreateResponse;
+  export import ACLListResponse = ACLsAPI.ACLListResponse;
   export import ACLDeleteResponse = ACLsAPI.ACLDeleteResponse;
   export import ACLGetResponse = ACLsAPI.ACLGetResponse;
-  export import ACLSecondaryDNSACLCreateACLResponse = ACLsAPI.ACLSecondaryDNSACLCreateACLResponse;
-  export import ACLSecondaryDNSACLListACLsResponse = ACLsAPI.ACLSecondaryDNSACLListACLsResponse;
-  export import ACLUpdateParams = ACLsAPI.ACLUpdateParams;
-  export import ACLSecondaryDNSACLCreateACLParams = ACLsAPI.ACLSecondaryDNSACLCreateACLParams;
+  export import ACLReplaceResponse = ACLsAPI.ACLReplaceResponse;
+  export import ACLCreateParams = ACLsAPI.ACLCreateParams;
+  export import ACLReplaceParams = ACLsAPI.ACLReplaceParams;
 }

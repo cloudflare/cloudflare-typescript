@@ -6,6 +6,39 @@ import * as DelegationsAPI from 'cloudflare/resources/addresses/prefixes/delegat
 
 export class Delegations extends APIResource {
   /**
+   * Create a new account delegation for a given IP prefix.
+   */
+  create(
+    accountId: string,
+    prefixId: string,
+    body: DelegationCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DelegationCreateResponse> {
+    return (
+      this._client.post(`/accounts/${accountId}/addressing/prefixes/${prefixId}/delegations`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: DelegationCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * List all delegations for a given account IP prefix.
+   */
+  list(
+    accountId: string,
+    prefixId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DelegationListResponse | null> {
+    return (
+      this._client.get(
+        `/accounts/${accountId}/addressing/prefixes/${prefixId}/delegations`,
+        options,
+      ) as Core.APIPromise<{ result: DelegationListResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Delete an account delegation for a given IP prefix.
    */
   delete(
@@ -21,53 +54,9 @@ export class Delegations extends APIResource {
       ) as Core.APIPromise<{ result: DelegationDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
-
-  /**
-   * Create a new account delegation for a given IP prefix.
-   */
-  ipAddressManagementPrefixDelegationCreatePrefixDelegation(
-    accountId: string,
-    prefixId: string,
-    body: DelegationIPAddressManagementPrefixDelegationCreatePrefixDelegationParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DelegationIPAddressManagementPrefixDelegationCreatePrefixDelegationResponse> {
-    return (
-      this._client.post(`/accounts/${accountId}/addressing/prefixes/${prefixId}/delegations`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{
-        result: DelegationIPAddressManagementPrefixDelegationCreatePrefixDelegationResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * List all delegations for a given account IP prefix.
-   */
-  ipAddressManagementPrefixDelegationListPrefixDelegations(
-    accountId: string,
-    prefixId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DelegationIPAddressManagementPrefixDelegationListPrefixDelegationsResponse | null> {
-    return (
-      this._client.get(
-        `/accounts/${accountId}/addressing/prefixes/${prefixId}/delegations`,
-        options,
-      ) as Core.APIPromise<{
-        result: DelegationIPAddressManagementPrefixDelegationListPrefixDelegationsResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 
-export interface DelegationDeleteResponse {
-  /**
-   * Delegation identifier tag.
-   */
-  id?: string;
-}
-
-export interface DelegationIPAddressManagementPrefixDelegationCreatePrefixDelegationResponse {
+export interface DelegationCreateResponse {
   /**
    * Delegation identifier tag.
    */
@@ -93,11 +82,10 @@ export interface DelegationIPAddressManagementPrefixDelegationCreatePrefixDelega
   parent_prefix_id?: string;
 }
 
-export type DelegationIPAddressManagementPrefixDelegationListPrefixDelegationsResponse =
-  Array<DelegationIPAddressManagementPrefixDelegationListPrefixDelegationsResponse.DelegationIPAddressManagementPrefixDelegationListPrefixDelegationsResponseItem>;
+export type DelegationListResponse = Array<DelegationListResponse.DelegationListResponseItem>;
 
-export namespace DelegationIPAddressManagementPrefixDelegationListPrefixDelegationsResponse {
-  export interface DelegationIPAddressManagementPrefixDelegationListPrefixDelegationsResponseItem {
+export namespace DelegationListResponse {
+  export interface DelegationListResponseItem {
     /**
      * Delegation identifier tag.
      */
@@ -124,7 +112,14 @@ export namespace DelegationIPAddressManagementPrefixDelegationListPrefixDelegati
   }
 }
 
-export interface DelegationIPAddressManagementPrefixDelegationCreatePrefixDelegationParams {
+export interface DelegationDeleteResponse {
+  /**
+   * Delegation identifier tag.
+   */
+  id?: string;
+}
+
+export interface DelegationCreateParams {
   /**
    * IP Prefix in Classless Inter-Domain Routing format.
    */
@@ -137,8 +132,8 @@ export interface DelegationIPAddressManagementPrefixDelegationCreatePrefixDelega
 }
 
 export namespace Delegations {
+  export import DelegationCreateResponse = DelegationsAPI.DelegationCreateResponse;
+  export import DelegationListResponse = DelegationsAPI.DelegationListResponse;
   export import DelegationDeleteResponse = DelegationsAPI.DelegationDeleteResponse;
-  export import DelegationIPAddressManagementPrefixDelegationCreatePrefixDelegationResponse = DelegationsAPI.DelegationIPAddressManagementPrefixDelegationCreatePrefixDelegationResponse;
-  export import DelegationIPAddressManagementPrefixDelegationListPrefixDelegationsResponse = DelegationsAPI.DelegationIPAddressManagementPrefixDelegationListPrefixDelegationsResponse;
-  export import DelegationIPAddressManagementPrefixDelegationCreatePrefixDelegationParams = DelegationsAPI.DelegationIPAddressManagementPrefixDelegationCreatePrefixDelegationParams;
+  export import DelegationCreateParams = DelegationsAPI.DelegationCreateParams;
 }

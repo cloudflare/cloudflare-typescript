@@ -4,11 +4,11 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as CustomCertificatesAPI from 'cloudflare/resources/custom-certificates/custom-certificates';
-import * as PrioritizesAPI from 'cloudflare/resources/custom-certificates/prioritizes';
+import * as PrioritizeAPI from 'cloudflare/resources/custom-certificates/prioritize';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class CustomCertificates extends APIResource {
-  prioritizes: PrioritizesAPI.Prioritizes = new PrioritizesAPI.Prioritizes(this._client);
+  prioritize: PrioritizeAPI.Prioritize = new PrioritizeAPI.Prioritize(this._client);
 
   /**
    * Upload a new SSL certificate for a zone.
@@ -434,7 +434,7 @@ export namespace CustomCertificates {
   export import CustomCertificateCreateParams = CustomCertificatesAPI.CustomCertificateCreateParams;
   export import CustomCertificateUpdateParams = CustomCertificatesAPI.CustomCertificateUpdateParams;
   export import CustomCertificateListParams = CustomCertificatesAPI.CustomCertificateListParams;
-  export import Prioritizes = PrioritizesAPI.Prioritizes;
-  export import PrioritizeCustomSSLForAZoneRePrioritizeSSLCertificatesResponse = PrioritizesAPI.PrioritizeCustomSSLForAZoneRePrioritizeSSLCertificatesResponse;
-  export import PrioritizeCustomSSLForAZoneRePrioritizeSSLCertificatesParams = PrioritizesAPI.PrioritizeCustomSSLForAZoneRePrioritizeSSLCertificatesParams;
+  export import Prioritize = PrioritizeAPI.Prioritize;
+  export import PrioritizeReplaceResponse = PrioritizeAPI.PrioritizeReplaceResponse;
+  export import PrioritizeReplaceParams = PrioritizeAPI.PrioritizeReplaceParams;
 }

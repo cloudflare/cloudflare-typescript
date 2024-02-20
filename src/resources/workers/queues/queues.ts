@@ -9,19 +9,17 @@ export class Queues extends APIResource {
   consumers: ConsumersAPI.Consumers = new ConsumersAPI.Consumers(this._client);
 
   /**
-   * Updates a queue.
+   * Creates a new queue.
    */
-  update(
+  create(
     accountId: string,
-    name: string,
-    body: QueueUpdateParams,
+    body: QueueCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<QueueUpdateResponse | null> {
+  ): Core.APIPromise<QueueCreateResponse | null> {
     return (
-      this._client.put(`/accounts/${accountId}/workers/queues/${name}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: QueueUpdateResponse | null }>
+      this._client.post(`/accounts/${accountId}/workers/queues`, { body, ...options }) as Core.APIPromise<{
+        result: QueueCreateResponse | null;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -67,22 +65,24 @@ export class Queues extends APIResource {
   }
 
   /**
-   * Creates a new queue.
+   * Updates a queue.
    */
-  queueCreateQueue(
+  replace(
     accountId: string,
-    body: QueueQueueCreateQueueParams,
+    name: string,
+    body: QueueReplaceParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<QueueQueueCreateQueueResponse | null> {
+  ): Core.APIPromise<QueueReplaceResponse | null> {
     return (
-      this._client.post(`/accounts/${accountId}/workers/queues`, { body, ...options }) as Core.APIPromise<{
-        result: QueueQueueCreateQueueResponse | null;
-      }>
+      this._client.put(`/accounts/${accountId}/workers/queues/${name}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: QueueReplaceResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface QueueUpdateResponse {
+export interface QueueCreateResponse {
   created_on?: unknown;
 
   modified_on?: unknown;
@@ -134,7 +134,7 @@ export interface QueueGetResponse {
   queue_name?: string;
 }
 
-export interface QueueQueueCreateQueueResponse {
+export interface QueueReplaceResponse {
   created_on?: unknown;
 
   modified_on?: unknown;
@@ -144,23 +144,23 @@ export interface QueueQueueCreateQueueResponse {
   queue_name?: string;
 }
 
-export type QueueUpdateParams = unknown;
+export type QueueCreateParams = unknown;
 
-export type QueueQueueCreateQueueParams = unknown;
+export type QueueReplaceParams = unknown;
 
 export namespace Queues {
-  export import QueueUpdateResponse = QueuesAPI.QueueUpdateResponse;
+  export import QueueCreateResponse = QueuesAPI.QueueCreateResponse;
   export import QueueListResponse = QueuesAPI.QueueListResponse;
   export import QueueDeleteResponse = QueuesAPI.QueueDeleteResponse;
   export import QueueGetResponse = QueuesAPI.QueueGetResponse;
-  export import QueueQueueCreateQueueResponse = QueuesAPI.QueueQueueCreateQueueResponse;
-  export import QueueUpdateParams = QueuesAPI.QueueUpdateParams;
-  export import QueueQueueCreateQueueParams = QueuesAPI.QueueQueueCreateQueueParams;
+  export import QueueReplaceResponse = QueuesAPI.QueueReplaceResponse;
+  export import QueueCreateParams = QueuesAPI.QueueCreateParams;
+  export import QueueReplaceParams = QueuesAPI.QueueReplaceParams;
   export import Consumers = ConsumersAPI.Consumers;
-  export import ConsumerUpdateResponse = ConsumersAPI.ConsumerUpdateResponse;
+  export import ConsumerCreateResponse = ConsumersAPI.ConsumerCreateResponse;
   export import ConsumerListResponse = ConsumersAPI.ConsumerListResponse;
   export import ConsumerDeleteResponse = ConsumersAPI.ConsumerDeleteResponse;
-  export import ConsumerQueueCreateQueueConsumerResponse = ConsumersAPI.ConsumerQueueCreateQueueConsumerResponse;
-  export import ConsumerUpdateParams = ConsumersAPI.ConsumerUpdateParams;
-  export import ConsumerQueueCreateQueueConsumerParams = ConsumersAPI.ConsumerQueueCreateQueueConsumerParams;
+  export import ConsumerReplaceResponse = ConsumersAPI.ConsumerReplaceResponse;
+  export import ConsumerCreateParams = ConsumersAPI.ConsumerCreateParams;
+  export import ConsumerReplaceParams = ConsumersAPI.ConsumerReplaceParams;
 }

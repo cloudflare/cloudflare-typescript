@@ -13,11 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource subdomains', () => {
   // skipped: tests are disabled for the time being
-  test.skip('workerSubdomainCreateSubdomain: only required params', async () => {
-    const responsePromise = cloudflare.workers.subdomains.workerSubdomainCreateSubdomain(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      "{'subdomain': 'example-subdomain'}",
-    );
+  test.skip('get', async () => {
+    const responsePromise = cloudflare.workers.subdomains.get('023e105f4ecef8ad9ca31a8372d0c353');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -28,34 +25,35 @@ describe('resource subdomains', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('workerSubdomainCreateSubdomain: required and optional params', async () => {
-    const response = await cloudflare.workers.subdomains.workerSubdomainCreateSubdomain(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      "{'subdomain': 'example-subdomain'}",
-    );
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('workerSubdomainGetSubdomain', async () => {
-    const responsePromise = cloudflare.workers.subdomains.workerSubdomainGetSubdomain(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('workerSubdomainGetSubdomain: request options instead of params are passed correctly', async () => {
+  test.skip('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.workers.subdomains.workerSubdomainGetSubdomain('023e105f4ecef8ad9ca31a8372d0c353', {
+      cloudflare.workers.subdomains.get('023e105f4ecef8ad9ca31a8372d0c353', {
         path: '/_stainless_unknown_path',
       }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('replace: only required params', async () => {
+    const responsePromise = cloudflare.workers.subdomains.replace(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      "{'subdomain': 'example-subdomain'}",
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('replace: required and optional params', async () => {
+    const response = await cloudflare.workers.subdomains.replace(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      "{'subdomain': 'example-subdomain'}",
+    );
   });
 });

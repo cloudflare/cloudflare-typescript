@@ -5,8 +5,8 @@ export { As112 } from './as112/index';
 export { Attacks } from './attacks/index';
 export { BGP } from './bgp/index';
 export {
-  ConnectionTamperingSummaryResponse,
-  ConnectionTamperingSummaryParams,
+  ConnectionTamperingListResponse,
+  ConnectionTamperingListParams,
   ConnectionTampering,
 } from './connection-tampering/index';
 export { DNS } from './dns/index';
@@ -19,26 +19,8 @@ export {
 } from './datasets/index';
 export { Email } from './email/index';
 export { Emails } from './emails/index';
-export { EntityIPsResponse, EntityIPsParams, Entities } from './entities/index';
-export {
-  HTTPBotClassesResponse,
-  HTTPBrowserFamiliesResponse,
-  HTTPBrowsersResponse,
-  HTTPDeviceTypesResponse,
-  HTTPHTTPProtocolsResponse,
-  HTTPHTTPVersionsResponse,
-  HTTPIPVersionsResponse,
-  HTTPOssResponse,
-  HTTPBotClassesParams,
-  HTTPBrowserFamiliesParams,
-  HTTPBrowsersParams,
-  HTTPDeviceTypesParams,
-  HTTPHTTPProtocolsParams,
-  HTTPHTTPVersionsParams,
-  HTTPIPVersionsParams,
-  HTTPOssParams,
-  HTTP,
-} from './http/index';
+export { EntityListResponse, EntityListParams, Entities } from './entities/index';
+export { HTTP } from './http/index';
 export { Netflows } from './netflows/index';
 export { Quality } from './quality/index';
 export { Radar } from './radar';

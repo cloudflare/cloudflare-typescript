@@ -11,18 +11,14 @@ export {
   AddressMaps,
 } from './address-maps/index';
 export { Addresses } from './addresses';
+export { LoaDocumentCreateResponse, LoaDocumentCreateParams, LoaDocuments } from './loa-documents/index';
 export {
-  LoaDocumentIPAddressManagementPrefixesUploadLoaDocumentResponse,
-  LoaDocumentIPAddressManagementPrefixesUploadLoaDocumentParams,
-  LoaDocuments,
-} from './loa-documents/index';
-export {
+  PrefixCreateResponse,
   PrefixUpdateResponse,
+  PrefixListResponse,
   PrefixDeleteResponse,
   PrefixGetResponse,
-  PrefixIPAddressManagementPrefixesAddPrefixResponse,
-  PrefixIPAddressManagementPrefixesListPrefixesResponse,
+  PrefixCreateParams,
   PrefixUpdateParams,
-  PrefixIPAddressManagementPrefixesAddPrefixParams,
   Prefixes,
 } from './prefixes/index';

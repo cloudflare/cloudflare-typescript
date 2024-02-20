@@ -6,6 +6,23 @@ import * as DatabaseAPI from 'cloudflare/resources/d1/database';
 
 export class Database extends APIResource {
   /**
+   * Returns the query result.
+   */
+  create(
+    accountIdentifier: string,
+    databaseIdentifier: string,
+    body: DatabaseCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DatabaseCreateResponse> {
+    return (
+      this._client.post(`/accounts/${accountIdentifier}/d1/database/${databaseIdentifier}/query`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: DatabaseCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Deletes the specified D1 database.
    */
   delete(
@@ -36,22 +53,35 @@ export class Database extends APIResource {
       ) as Core.APIPromise<{ result: DatabaseGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
 
-  /**
-   * Returns the query result.
-   */
-  query(
-    accountIdentifier: string,
-    databaseIdentifier: string,
-    body: DatabaseQueryParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DatabaseQueryResponse> {
-    return (
-      this._client.post(`/accounts/${accountIdentifier}/d1/database/${databaseIdentifier}/query`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: DatabaseQueryResponse }>
-    )._thenUnwrap((obj) => obj.result);
+export type DatabaseCreateResponse = Array<DatabaseCreateResponse.DatabaseCreateResponseItem>;
+
+export namespace DatabaseCreateResponse {
+  export interface DatabaseCreateResponseItem {
+    meta?: DatabaseCreateResponseItem.Meta;
+
+    results?: Array<unknown>;
+
+    success?: boolean;
+  }
+
+  export namespace DatabaseCreateResponseItem {
+    export interface Meta {
+      changed_db?: boolean;
+
+      changes?: number;
+
+      duration?: number;
+
+      last_row_id?: number;
+
+      rows_read?: number;
+
+      rows_written?: number;
+
+      size_after?: number;
+    }
   }
 }
 
@@ -77,45 +107,15 @@ export interface DatabaseGetResponse {
   version?: string;
 }
 
-export type DatabaseQueryResponse = Array<DatabaseQueryResponse.DatabaseQueryResponseItem>;
-
-export namespace DatabaseQueryResponse {
-  export interface DatabaseQueryResponseItem {
-    meta?: DatabaseQueryResponseItem.Meta;
-
-    results?: Array<unknown>;
-
-    success?: boolean;
-  }
-
-  export namespace DatabaseQueryResponseItem {
-    export interface Meta {
-      changed_db?: boolean;
-
-      changes?: number;
-
-      duration?: number;
-
-      last_row_id?: number;
-
-      rows_read?: number;
-
-      rows_written?: number;
-
-      size_after?: number;
-    }
-  }
-}
-
-export interface DatabaseQueryParams {
+export interface DatabaseCreateParams {
   sql: string;
 
   params?: Array<string>;
 }
 
 export namespace Database {
+  export import DatabaseCreateResponse = DatabaseAPI.DatabaseCreateResponse;
   export import DatabaseDeleteResponse = DatabaseAPI.DatabaseDeleteResponse;
   export import DatabaseGetResponse = DatabaseAPI.DatabaseGetResponse;
-  export import DatabaseQueryResponse = DatabaseAPI.DatabaseQueryResponse;
-  export import DatabaseQueryParams = DatabaseAPI.DatabaseQueryParams;
+  export import DatabaseCreateParams = DatabaseAPI.DatabaseCreateParams;
 }

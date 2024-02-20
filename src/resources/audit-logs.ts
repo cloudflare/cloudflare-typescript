@@ -4,184 +4,146 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as AuditLogsAPI from 'cloudflare/resources/audit-logs';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class AuditLogs extends APIResource {
   /**
    * Gets a list of audit logs for an account. Can be filtered by who made the
    * change, on which zone, and the timeframe of the change.
    */
-  auditLogsGetAccountAuditLogs(
+  list(
     accountIdentifier: string,
-    query?: AuditLogAuditLogsGetAccountAuditLogsParams,
+    query?: AuditLogListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AuditLogAuditLogsGetAccountAuditLogsResponse>;
-  auditLogsGetAccountAuditLogs(
+  ): Core.PagePromise<AuditLogListResponsesV4PagePaginationArray, AuditLogListResponse>;
+  list(
     accountIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AuditLogAuditLogsGetAccountAuditLogsResponse>;
-  auditLogsGetAccountAuditLogs(
+  ): Core.PagePromise<AuditLogListResponsesV4PagePaginationArray, AuditLogListResponse>;
+  list(
     accountIdentifier: string,
-    query: AuditLogAuditLogsGetAccountAuditLogsParams | Core.RequestOptions = {},
+    query: AuditLogListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AuditLogAuditLogsGetAccountAuditLogsResponse> {
+  ): Core.PagePromise<AuditLogListResponsesV4PagePaginationArray, AuditLogListResponse> {
     if (isRequestOptions(query)) {
-      return this.auditLogsGetAccountAuditLogs(accountIdentifier, {}, query);
+      return this.list(accountIdentifier, {}, query);
     }
-    return this._client.get(`/accounts/${accountIdentifier}/audit_logs`, { query, ...options });
+    return this._client.getAPIList(
+      `/accounts/${accountIdentifier}/audit_logs`,
+      AuditLogListResponsesV4PagePaginationArray,
+      { query, ...options },
+    );
   }
 }
 
-export type AuditLogAuditLogsGetAccountAuditLogsResponse =
-  | AuditLogAuditLogsGetAccountAuditLogsResponse.UnionMember0
-  | AuditLogAuditLogsGetAccountAuditLogsResponse.VHtGuEw1APIResponseCommon;
+export class AuditLogListResponsesV4PagePaginationArray extends V4PagePaginationArray<AuditLogListResponse> {}
 
-export namespace AuditLogAuditLogsGetAccountAuditLogsResponse {
-  export interface UnionMember0 {
-    errors?: unknown | null;
+export interface AuditLogListResponse {
+  /**
+   * A string that uniquely identifies the audit log.
+   */
+  id?: string;
 
-    messages?: Array<unknown>;
+  action?: AuditLogListResponse.Action;
 
-    result?: Array<UnionMember0.Result>;
+  actor?: AuditLogListResponse.Actor;
 
-    success?: boolean;
-  }
+  /**
+   * The source of the event.
+   */
+  interface?: string;
 
-  export namespace UnionMember0 {
-    export interface Result {
-      /**
-       * A string that uniquely identifies the audit log.
-       */
-      id?: string;
+  /**
+   * An object which can lend more context to the action being logged. This is a
+   * flexible value and varies between different actions.
+   */
+  metadata?: unknown;
 
-      action?: Result.Action;
+  /**
+   * The new value of the resource that was modified.
+   */
+  newValue?: string;
 
-      actor?: Result.Actor;
+  /**
+   * The value of the resource before it was modified.
+   */
+  oldValue?: string;
 
-      /**
-       * The source of the event.
-       */
-      interface?: string;
+  owner?: AuditLogListResponse.Owner;
 
-      /**
-       * An object which can lend more context to the action being logged. This is a
-       * flexible value and varies between different actions.
-       */
-      metadata?: unknown;
+  resource?: AuditLogListResponse.Resource;
 
-      /**
-       * The new value of the resource that was modified.
-       */
-      newValue?: string;
+  /**
+   * A UTC RFC3339 timestamp that specifies when the action being logged occured.
+   */
+  when?: string;
+}
 
-      /**
-       * The value of the resource before it was modified.
-       */
-      oldValue?: string;
-
-      owner?: Result.Owner;
-
-      resource?: Result.Resource;
-
-      /**
-       * A UTC RFC3339 timestamp that specifies when the action being logged occured.
-       */
-      when?: string;
-    }
-
-    export namespace Result {
-      export interface Action {
-        /**
-         * A boolean that indicates if the action attempted was successful.
-         */
-        result?: boolean;
-
-        /**
-         * A short string that describes the action that was performed.
-         */
-        type?: string;
-      }
-
-      export interface Actor {
-        /**
-         * The ID of the actor that performed the action. If a user performed the action,
-         * this will be their User ID.
-         */
-        id?: string;
-
-        /**
-         * The email of the user that performed the action.
-         */
-        email?: string;
-
-        /**
-         * The IP address of the request that performed the action.
-         */
-        ip?: string;
-
-        /**
-         * The type of actor, whether a User, Cloudflare Admin, or an Automated System.
-         */
-        type?: 'user' | 'admin' | 'Cloudflare';
-      }
-
-      export interface Owner {
-        /**
-         * Identifier
-         */
-        id?: string;
-      }
-
-      export interface Resource {
-        /**
-         * An identifier for the resource that was affected by the action.
-         */
-        id?: string;
-
-        /**
-         * A short string that describes the resource that was affected by the action.
-         */
-        type?: string;
-      }
-    }
-  }
-
-  export interface VHtGuEw1APIResponseCommon {
-    errors: Array<VHtGuEw1APIResponseCommon.Error>;
-
-    messages: Array<VHtGuEw1APIResponseCommon.Message>;
-
-    result: unknown | Array<unknown> | string;
+export namespace AuditLogListResponse {
+  export interface Action {
+    /**
+     * A boolean that indicates if the action attempted was successful.
+     */
+    result?: boolean;
 
     /**
-     * Whether the API call was successful
+     * A short string that describes the action that was performed.
      */
-    success: true;
+    type?: string;
   }
 
-  export namespace VHtGuEw1APIResponseCommon {
-    export interface Error {
-      code: number;
+  export interface Actor {
+    /**
+     * The ID of the actor that performed the action. If a user performed the action,
+     * this will be their User ID.
+     */
+    id?: string;
 
-      message: string;
-    }
+    /**
+     * The email of the user that performed the action.
+     */
+    email?: string;
 
-    export interface Message {
-      code: number;
+    /**
+     * The IP address of the request that performed the action.
+     */
+    ip?: string;
 
-      message: string;
-    }
+    /**
+     * The type of actor, whether a User, Cloudflare Admin, or an Automated System.
+     */
+    type?: 'user' | 'admin' | 'Cloudflare';
+  }
+
+  export interface Owner {
+    /**
+     * Identifier
+     */
+    id?: string;
+  }
+
+  export interface Resource {
+    /**
+     * An identifier for the resource that was affected by the action.
+     */
+    id?: string;
+
+    /**
+     * A short string that describes the resource that was affected by the action.
+     */
+    type?: string;
   }
 }
 
-export interface AuditLogAuditLogsGetAccountAuditLogsParams {
+export interface AuditLogListParams extends V4PagePaginationArrayParams {
   /**
    * Finds a specific log by its ID.
    */
   id?: string;
 
-  action?: AuditLogAuditLogsGetAccountAuditLogsParams.Action;
+  action?: AuditLogListParams.Action;
 
-  actor?: AuditLogAuditLogsGetAccountAuditLogsParams.Actor;
+  actor?: AuditLogListParams.Actor;
 
   /**
    * Limits the returned results to logs older than the specified date. This can be a
@@ -205,25 +167,15 @@ export interface AuditLogAuditLogsGetAccountAuditLogsParams {
   hide_user_logs?: boolean;
 
   /**
-   * Defines which page of results to return.
-   */
-  page?: number;
-
-  /**
-   * Sets the number of results to return per page.
-   */
-  per_page?: number;
-
-  /**
    * Limits the returned results to logs newer than the specified date. This can be a
    * date string `2019-04-30` or an absolute timestamp that conforms to RFC3339.
    */
   since?: string;
 
-  zone?: AuditLogAuditLogsGetAccountAuditLogsParams.Zone;
+  zone?: AuditLogListParams.Zone;
 }
 
-export namespace AuditLogAuditLogsGetAccountAuditLogsParams {
+export namespace AuditLogListParams {
   export interface Action {
     /**
      * Filters by the action type.
@@ -253,6 +205,7 @@ export namespace AuditLogAuditLogsGetAccountAuditLogsParams {
 }
 
 export namespace AuditLogs {
-  export import AuditLogAuditLogsGetAccountAuditLogsResponse = AuditLogsAPI.AuditLogAuditLogsGetAccountAuditLogsResponse;
-  export import AuditLogAuditLogsGetAccountAuditLogsParams = AuditLogsAPI.AuditLogAuditLogsGetAccountAuditLogsParams;
+  export import AuditLogListResponse = AuditLogsAPI.AuditLogListResponse;
+  export import AuditLogListResponsesV4PagePaginationArray = AuditLogsAPI.AuditLogListResponsesV4PagePaginationArray;
+  export import AuditLogListParams = AuditLogsAPI.AuditLogListParams;
 }

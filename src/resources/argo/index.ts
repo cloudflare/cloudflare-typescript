@@ -8,8 +8,8 @@ export {
   SmartRouting,
 } from './smart-routing';
 export {
-  TieredCachingTieredCachingGetTieredCachingSettingResponse,
-  TieredCachingTieredCachingPatchTieredCachingSettingResponse,
-  TieredCachingTieredCachingPatchTieredCachingSettingParams,
+  TieredCachingUpdateResponse,
+  TieredCachingGetResponse,
+  TieredCachingUpdateParams,
   TieredCaching,
 } from './tiered-caching';

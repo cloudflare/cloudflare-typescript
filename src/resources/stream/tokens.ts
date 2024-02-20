@@ -9,29 +9,29 @@ export class Tokens extends APIResource {
    * Creates a signed URL token for a video. If a body is not provided in the
    * request, a token is created with default values.
    */
-  streamVideosCreateSignedURLTokensForVideos(
+  create(
     accountId: string,
     identifier: string,
-    body: TokenStreamVideosCreateSignedURLTokensForVideosParams,
+    body: TokenCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TokenStreamVideosCreateSignedURLTokensForVideosResponse> {
+  ): Core.APIPromise<TokenCreateResponse> {
     return (
       this._client.post(`/accounts/${accountId}/stream/${identifier}/token`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: TokenStreamVideosCreateSignedURLTokensForVideosResponse }>
+      }) as Core.APIPromise<{ result: TokenCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface TokenStreamVideosCreateSignedURLTokensForVideosResponse {
+export interface TokenCreateResponse {
   /**
    * The signed token used with the signed URLs feature.
    */
   token?: string;
 }
 
-export interface TokenStreamVideosCreateSignedURLTokensForVideosParams {
+export interface TokenCreateParams {
   /**
    * The optional ID of a Stream signing key. If present, the `pem` field is also
    * required.
@@ -44,7 +44,7 @@ export interface TokenStreamVideosCreateSignedURLTokensForVideosParams {
    * from first to last. If a rule matches, the associated action is applied and no
    * further rules are evaluated.
    */
-  accessRules?: Array<TokenStreamVideosCreateSignedURLTokensForVideosParams.AccessRule>;
+  accessRules?: Array<TokenCreateParams.AccessRule>;
 
   /**
    * The optional boolean value that enables using signed tokens to access MP4
@@ -72,7 +72,7 @@ export interface TokenStreamVideosCreateSignedURLTokensForVideosParams {
   pem?: string;
 }
 
-export namespace TokenStreamVideosCreateSignedURLTokensForVideosParams {
+export namespace TokenCreateParams {
   /**
    * Defines rules for fine-grained control over content than signed URL tokens
    * alone. Access rules primarily make tokens conditionally valid based on user
@@ -107,6 +107,6 @@ export namespace TokenStreamVideosCreateSignedURLTokensForVideosParams {
 }
 
 export namespace Tokens {
-  export import TokenStreamVideosCreateSignedURLTokensForVideosResponse = TokensAPI.TokenStreamVideosCreateSignedURLTokensForVideosResponse;
-  export import TokenStreamVideosCreateSignedURLTokensForVideosParams = TokensAPI.TokenStreamVideosCreateSignedURLTokensForVideosParams;
+  export import TokenCreateResponse = TokensAPI.TokenCreateResponse;
+  export import TokenCreateParams = TokensAPI.TokenCreateParams;
 }

@@ -12,8 +12,4 @@ export {
   CustomCertificateListResponsesV4PagePaginationArray,
   CustomCertificates,
 } from './custom-certificates';
-export {
-  PrioritizeCustomSSLForAZoneRePrioritizeSSLCertificatesResponse,
-  PrioritizeCustomSSLForAZoneRePrioritizeSSLCertificatesParams,
-  Prioritizes,
-} from './prioritizes';
+export { PrioritizeReplaceResponse, PrioritizeReplaceParams, Prioritize } from './prioritize';

@@ -7,6 +7,30 @@ import * as DomainsAPI from 'cloudflare/resources/workers/domains';
 
 export class Domains extends APIResource {
   /**
+   * Lists all Worker Domains for an account.
+   */
+  list(
+    accountId: unknown,
+    query?: DomainListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DomainListResponse>;
+  list(accountId: unknown, options?: Core.RequestOptions): Core.APIPromise<DomainListResponse>;
+  list(
+    accountId: unknown,
+    query: DomainListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DomainListResponse> {
+    if (isRequestOptions(query)) {
+      return this.list(accountId, {}, query);
+    }
+    return (
+      this._client.get(`/accounts/${accountId}/workers/domains`, { query, ...options }) as Core.APIPromise<{
+        result: DomainListResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Detaches a Worker from a zone and hostname.
    */
   delete(accountId: unknown, domainId: unknown, options?: Core.RequestOptions): Core.APIPromise<void> {
@@ -34,43 +58,52 @@ export class Domains extends APIResource {
   /**
    * Attaches a Worker to a zone and hostname.
    */
-  workerDomainAttachToDomain(
+  replace(
     accountId: unknown,
-    body: DomainWorkerDomainAttachToDomainParams,
+    body: DomainReplaceParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DomainWorkerDomainAttachToDomainResponse> {
+  ): Core.APIPromise<DomainReplaceResponse> {
     return (
       this._client.put(`/accounts/${accountId}/workers/domains`, { body, ...options }) as Core.APIPromise<{
-        result: DomainWorkerDomainAttachToDomainResponse;
+        result: DomainReplaceResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
 
-  /**
-   * Lists all Worker Domains for an account.
-   */
-  workerDomainListDomains(
-    accountId: unknown,
-    query?: DomainWorkerDomainListDomainsParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DomainWorkerDomainListDomainsResponse>;
-  workerDomainListDomains(
-    accountId: unknown,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DomainWorkerDomainListDomainsResponse>;
-  workerDomainListDomains(
-    accountId: unknown,
-    query: DomainWorkerDomainListDomainsParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DomainWorkerDomainListDomainsResponse> {
-    if (isRequestOptions(query)) {
-      return this.workerDomainListDomains(accountId, {}, query);
-    }
-    return (
-      this._client.get(`/accounts/${accountId}/workers/domains`, { query, ...options }) as Core.APIPromise<{
-        result: DomainWorkerDomainListDomainsResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+export type DomainListResponse = Array<DomainListResponse.DomainListResponseItem>;
+
+export namespace DomainListResponse {
+  export interface DomainListResponseItem {
+    /**
+     * Identifer of the Worker Domain.
+     */
+    id?: unknown;
+
+    /**
+     * Worker environment associated with the zone and hostname.
+     */
+    environment?: string;
+
+    /**
+     * Hostname of the Worker Domain.
+     */
+    hostname?: string;
+
+    /**
+     * Worker service associated with the zone and hostname.
+     */
+    service?: string;
+
+    /**
+     * Identifier of the zone.
+     */
+    zone_id?: unknown;
+
+    /**
+     * Name of the zone.
+     */
+    zone_name?: string;
   }
 }
 
@@ -106,7 +139,7 @@ export interface DomainGetResponse {
   zone_name?: string;
 }
 
-export interface DomainWorkerDomainAttachToDomainResponse {
+export interface DomainReplaceResponse {
   /**
    * Identifer of the Worker Domain.
    */
@@ -138,66 +171,7 @@ export interface DomainWorkerDomainAttachToDomainResponse {
   zone_name?: string;
 }
 
-export type DomainWorkerDomainListDomainsResponse =
-  Array<DomainWorkerDomainListDomainsResponse.DomainWorkerDomainListDomainsResponseItem>;
-
-export namespace DomainWorkerDomainListDomainsResponse {
-  export interface DomainWorkerDomainListDomainsResponseItem {
-    /**
-     * Identifer of the Worker Domain.
-     */
-    id?: unknown;
-
-    /**
-     * Worker environment associated with the zone and hostname.
-     */
-    environment?: string;
-
-    /**
-     * Hostname of the Worker Domain.
-     */
-    hostname?: string;
-
-    /**
-     * Worker service associated with the zone and hostname.
-     */
-    service?: string;
-
-    /**
-     * Identifier of the zone.
-     */
-    zone_id?: unknown;
-
-    /**
-     * Name of the zone.
-     */
-    zone_name?: string;
-  }
-}
-
-export interface DomainWorkerDomainAttachToDomainParams {
-  /**
-   * Worker environment associated with the zone and hostname.
-   */
-  environment: string;
-
-  /**
-   * Hostname of the Worker Domain.
-   */
-  hostname: string;
-
-  /**
-   * Worker service associated with the zone and hostname.
-   */
-  service: string;
-
-  /**
-   * Identifier of the zone.
-   */
-  zone_id: unknown;
-}
-
-export interface DomainWorkerDomainListDomainsParams {
+export interface DomainListParams {
   /**
    * Worker environment associated with the zone and hostname.
    */
@@ -224,10 +198,32 @@ export interface DomainWorkerDomainListDomainsParams {
   zone_name?: string;
 }
 
+export interface DomainReplaceParams {
+  /**
+   * Worker environment associated with the zone and hostname.
+   */
+  environment: string;
+
+  /**
+   * Hostname of the Worker Domain.
+   */
+  hostname: string;
+
+  /**
+   * Worker service associated with the zone and hostname.
+   */
+  service: string;
+
+  /**
+   * Identifier of the zone.
+   */
+  zone_id: unknown;
+}
+
 export namespace Domains {
+  export import DomainListResponse = DomainsAPI.DomainListResponse;
   export import DomainGetResponse = DomainsAPI.DomainGetResponse;
-  export import DomainWorkerDomainAttachToDomainResponse = DomainsAPI.DomainWorkerDomainAttachToDomainResponse;
-  export import DomainWorkerDomainListDomainsResponse = DomainsAPI.DomainWorkerDomainListDomainsResponse;
-  export import DomainWorkerDomainAttachToDomainParams = DomainsAPI.DomainWorkerDomainAttachToDomainParams;
-  export import DomainWorkerDomainListDomainsParams = DomainsAPI.DomainWorkerDomainListDomainsParams;
+  export import DomainReplaceResponse = DomainsAPI.DomainReplaceResponse;
+  export import DomainListParams = DomainsAPI.DomainListParams;
+  export import DomainReplaceParams = DomainsAPI.DomainReplaceParams;
 }

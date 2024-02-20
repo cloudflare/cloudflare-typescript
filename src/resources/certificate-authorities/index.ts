@@ -2,9 +2,9 @@
 
 export { CertificateAuthorities } from './certificate-authorities';
 export {
-  HostnameAssociationClientCertificateForAZoneListHostnameAssociationsResponse,
-  HostnameAssociationClientCertificateForAZonePutHostnameAssociationsResponse,
-  HostnameAssociationClientCertificateForAZoneListHostnameAssociationsParams,
-  HostnameAssociationClientCertificateForAZonePutHostnameAssociationsParams,
+  HostnameAssociationListResponse,
+  HostnameAssociationReplaceResponse,
+  HostnameAssociationListParams,
+  HostnameAssociationReplaceParams,
   HostnameAssociations,
 } from './hostname-associations';

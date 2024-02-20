@@ -13,6 +13,50 @@ const cloudflare = new Cloudflare({
 
 describe('resource configs', () => {
   // skipped: tests are disabled for the time being
+  test.skip('create', async () => {
+    const responsePromise = cloudflare.mnms.configs.create('6f91088a406011ed95aed352566e8d4c');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('update', async () => {
+    const responsePromise = cloudflare.mnms.configs.update('6f91088a406011ed95aed352566e8d4c');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list', async () => {
+    const responsePromise = cloudflare.mnms.configs.list('6f91088a406011ed95aed352566e8d4c');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.mnms.configs.list('6f91088a406011ed95aed352566e8d4c', { path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('delete', async () => {
     const responsePromise = cloudflare.mnms.configs.delete('6f91088a406011ed95aed352566e8d4c');
     const rawResponse = await responsePromise.asResponse();
@@ -25,67 +69,8 @@ describe('resource configs', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('magicNetworkMonitoringConfigurationCreateAccountConfiguration', async () => {
-    const responsePromise =
-      cloudflare.mnms.configs.magicNetworkMonitoringConfigurationCreateAccountConfiguration(
-        '6f91088a406011ed95aed352566e8d4c',
-      );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('magicNetworkMonitoringConfigurationListAccountConfiguration', async () => {
-    const responsePromise =
-      cloudflare.mnms.configs.magicNetworkMonitoringConfigurationListAccountConfiguration(
-        '6f91088a406011ed95aed352566e8d4c',
-      );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('magicNetworkMonitoringConfigurationListAccountConfiguration: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.mnms.configs.magicNetworkMonitoringConfigurationListAccountConfiguration(
-        '6f91088a406011ed95aed352566e8d4c',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('magicNetworkMonitoringConfigurationUpdateAccountConfigurationFields', async () => {
-    const responsePromise =
-      cloudflare.mnms.configs.magicNetworkMonitoringConfigurationUpdateAccountConfigurationFields(
-        '6f91088a406011ed95aed352566e8d4c',
-      );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('magicNetworkMonitoringConfigurationUpdateAnEntireAccountConfiguration', async () => {
-    const responsePromise =
-      cloudflare.mnms.configs.magicNetworkMonitoringConfigurationUpdateAnEntireAccountConfiguration(
-        '6f91088a406011ed95aed352566e8d4c',
-      );
+  test.skip('replace', async () => {
+    const responsePromise = cloudflare.mnms.configs.replace('6f91088a406011ed95aed352566e8d4c');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

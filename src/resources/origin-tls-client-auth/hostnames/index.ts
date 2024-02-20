@@ -8,4 +8,4 @@ export {
   CertificateCreateParams,
   Certificates,
 } from './certificates';
-export { HostnameUpdateResponse, HostnameGetResponse, HostnameUpdateParams, Hostnames } from './hostnames';
+export { HostnameGetResponse, HostnameReplaceResponse, HostnameReplaceParams, Hostnames } from './hostnames';

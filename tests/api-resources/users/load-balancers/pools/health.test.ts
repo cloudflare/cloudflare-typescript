@@ -13,8 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource health', () => {
   // skipped: tests are disabled for the time being
-  test.skip('loadBalancerPoolsPoolHealthDetails', async () => {
-    const responsePromise = cloudflare.users.loadBalancers.pools.health.loadBalancerPoolsPoolHealthDetails(
+  test.skip('list', async () => {
+    const responsePromise = cloudflare.users.loadBalancers.pools.health.list(
       '17b5962d775c646f3f9725cbc7a53df4',
     );
     const rawResponse = await responsePromise.asResponse();
@@ -27,13 +27,12 @@ describe('resource health', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('loadBalancerPoolsPoolHealthDetails: request options instead of params are passed correctly', async () => {
+  test.skip('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.users.loadBalancers.pools.health.loadBalancerPoolsPoolHealthDetails(
-        '17b5962d775c646f3f9725cbc7a53df4',
-        { path: '/_stainless_unknown_path' },
-      ),
+      cloudflare.users.loadBalancers.pools.health.list('17b5962d775c646f3f9725cbc7a53df4', {
+        path: '/_stainless_unknown_path',
+      }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 });

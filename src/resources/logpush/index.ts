@@ -1,21 +1,29 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export { Datasets } from './datasets/index';
-export { EdgeUpdateResponse, EdgeGetResponse, EdgeUpdateParams, Edges } from './edges';
+export { EdgeCreateResponse, EdgeGetResponse, EdgeCreateParams, Edge } from './edge';
 export {
   JobCreateResponse,
-  JobUpdateResponse,
   JobListResponse,
   JobDeleteResponse,
   JobGetResponse,
+  JobReplaceResponse,
   JobCreateParams,
-  JobUpdateParams,
+  JobReplaceParams,
   Jobs,
 } from './jobs';
 export { Logpush } from './logpush';
 export {
-  OwnershipPostAccountsAccountIdentifierLogpushOwnershipResponse,
-  OwnershipPostAccountsAccountIdentifierLogpushOwnershipParams,
-  Ownerships,
-} from './ownerships/index';
-export { Validates } from './validates/index';
+  OwnershipCreateResponse,
+  OwnershipValidateResponse,
+  OwnershipCreateParams,
+  OwnershipValidateParams,
+  Ownership,
+} from './ownership';
+export {
+  ValidateDestinationResponse,
+  ValidateOriginResponse,
+  ValidateDestinationParams,
+  ValidateOriginParams,
+  Validate,
+} from './validate';

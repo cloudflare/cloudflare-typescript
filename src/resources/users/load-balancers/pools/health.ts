@@ -8,13 +8,10 @@ export class Health extends APIResource {
   /**
    * Fetch the latest pool health status for a single pool.
    */
-  loadBalancerPoolsPoolHealthDetails(
-    poolId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<HealthLoadBalancerPoolsPoolHealthDetailsResponse> {
+  list(poolId: string, options?: Core.RequestOptions): Core.APIPromise<HealthListResponse> {
     return (
       this._client.get(`/user/load_balancers/pools/${poolId}/health`, options) as Core.APIPromise<{
-        result: HealthLoadBalancerPoolsPoolHealthDetailsResponse;
+        result: HealthListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -24,8 +21,8 @@ export class Health extends APIResource {
  * A list of regions from which to run health checks. Null means every Cloudflare
  * data center.
  */
-export type HealthLoadBalancerPoolsPoolHealthDetailsResponse = unknown | string | null;
+export type HealthListResponse = unknown | string | null;
 
 export namespace Health {
-  export import HealthLoadBalancerPoolsPoolHealthDetailsResponse = HealthAPI.HealthLoadBalancerPoolsPoolHealthDetailsResponse;
+  export import HealthListResponse = HealthAPI.HealthListResponse;
 }

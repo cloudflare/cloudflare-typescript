@@ -13,6 +13,29 @@ const cloudflare = new Cloudflare({
 
 describe('resource flags', () => {
   // skipped: tests are disabled for the time being
+  test.skip('create: only required params', async () => {
+    const responsePromise = cloudflare.logs.controls.retentions.flags.create(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      { flag: true },
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('create: required and optional params', async () => {
+    const response = await cloudflare.logs.controls.retentions.flags.create(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      { flag: true },
+    );
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('logsReceivedGetLogRetentionFlag', async () => {
     const responsePromise = cloudflare.logs.controls.retentions.flags.logsReceivedGetLogRetentionFlag(
       '023e105f4ecef8ad9ca31a8372d0c353',
@@ -35,28 +58,5 @@ describe('resource flags', () => {
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('logsReceivedUpdateLogRetentionFlag: only required params', async () => {
-    const responsePromise = cloudflare.logs.controls.retentions.flags.logsReceivedUpdateLogRetentionFlag(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      { flag: true },
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('logsReceivedUpdateLogRetentionFlag: required and optional params', async () => {
-    const response = await cloudflare.logs.controls.retentions.flags.logsReceivedUpdateLogRetentionFlag(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      { flag: true },
-    );
   });
 });

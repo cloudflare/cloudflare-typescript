@@ -6,20 +6,35 @@ import * as IdentityProvidersAPI from 'cloudflare/resources/access/identity-prov
 
 export class IdentityProviders extends APIResource {
   /**
-   * Updates a configured identity provider.
+   * Adds a new identity provider to Access.
    */
-  update(
+  create(
     accountOrZone: string,
     accountOrZoneId: string,
-    uuid: string,
-    body: IdentityProviderUpdateParams,
+    body: IdentityProviderCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<IdentityProviderUpdateResponse> {
+  ): Core.APIPromise<IdentityProviderCreateResponse> {
     return (
-      this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/identity_providers/${uuid}`, {
+      this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/identity_providers`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: IdentityProviderUpdateResponse }>
+      }) as Core.APIPromise<{ result: IdentityProviderCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Lists all configured identity providers.
+   */
+  list(
+    accountOrZone: string,
+    accountOrZoneId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IdentityProviderListResponse | null> {
+    return (
+      this._client.get(
+        `/${accountOrZone}/${accountOrZoneId}/access/identity_providers`,
+        options,
+      ) as Core.APIPromise<{ result: IdentityProviderListResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -41,43 +56,6 @@ export class IdentityProviders extends APIResource {
   }
 
   /**
-   * Adds a new identity provider to Access.
-   */
-  accessIdentityProvidersAddAnAccessIdentityProvider(
-    accountOrZone: string,
-    accountOrZoneId: string,
-    body: IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderResponse> {
-    return (
-      this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/identity_providers`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{
-        result: IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Lists all configured identity providers.
-   */
-  accessIdentityProvidersListAccessIdentityProviders(
-    accountOrZone: string,
-    accountOrZoneId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<IdentityProviderAccessIdentityProvidersListAccessIdentityProvidersResponse | null> {
-    return (
-      this._client.get(
-        `/${accountOrZone}/${accountOrZoneId}/access/identity_providers`,
-        options,
-      ) as Core.APIPromise<{
-        result: IdentityProviderAccessIdentityProvidersListAccessIdentityProvidersResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Fetches a configured identity provider.
    */
   get(
@@ -93,25 +71,43 @@ export class IdentityProviders extends APIResource {
       ) as Core.APIPromise<{ result: IdentityProviderGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Updates a configured identity provider.
+   */
+  replace(
+    accountOrZone: string,
+    accountOrZoneId: string,
+    uuid: string,
+    body: IdentityProviderReplaceParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IdentityProviderReplaceResponse> {
+    return (
+      this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/identity_providers/${uuid}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: IdentityProviderReplaceResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
-export type IdentityProviderUpdateResponse =
-  | IdentityProviderUpdateResponse.AccessAzureAd
-  | IdentityProviderUpdateResponse.AccessCentrify
-  | IdentityProviderUpdateResponse.AccessFacebook
-  | IdentityProviderUpdateResponse.AccessGitHub
-  | IdentityProviderUpdateResponse.AccessGoogle
-  | IdentityProviderUpdateResponse.AccessGoogleApps
-  | IdentityProviderUpdateResponse.AccessLinkedin
-  | IdentityProviderUpdateResponse.AccessOidc
-  | IdentityProviderUpdateResponse.AccessOkta
-  | IdentityProviderUpdateResponse.AccessOnelogin
-  | IdentityProviderUpdateResponse.AccessPingone
-  | IdentityProviderUpdateResponse.AccessSaml
-  | IdentityProviderUpdateResponse.AccessYandex
-  | IdentityProviderUpdateResponse.AccessOnetimepin;
+export type IdentityProviderCreateResponse =
+  | IdentityProviderCreateResponse.AccessAzureAd
+  | IdentityProviderCreateResponse.AccessCentrify
+  | IdentityProviderCreateResponse.AccessFacebook
+  | IdentityProviderCreateResponse.AccessGitHub
+  | IdentityProviderCreateResponse.AccessGoogle
+  | IdentityProviderCreateResponse.AccessGoogleApps
+  | IdentityProviderCreateResponse.AccessLinkedin
+  | IdentityProviderCreateResponse.AccessOidc
+  | IdentityProviderCreateResponse.AccessOkta
+  | IdentityProviderCreateResponse.AccessOnelogin
+  | IdentityProviderCreateResponse.AccessPingone
+  | IdentityProviderCreateResponse.AccessSaml
+  | IdentityProviderCreateResponse.AccessYandex
+  | IdentityProviderCreateResponse.AccessOnetimepin;
 
-export namespace IdentityProviderUpdateResponse {
+export namespace IdentityProviderCreateResponse {
   export interface AccessAzureAd {
     /**
      * The configuration parameters for the identity provider. To view the required
@@ -1690,6 +1686,1555 @@ export namespace IdentityProviderUpdateResponse {
   }
 
   export namespace AccessOnetimepin {
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    export interface ScimConfig {
+      /**
+       * A flag to enable or disable SCIM for the identity provider.
+       */
+      enabled?: boolean;
+
+      /**
+       * A flag to revoke a user's session in Access and force a reauthentication on the
+       * user's Gateway session when they have been added or removed from a group in the
+       * Identity Provider.
+       */
+      group_member_deprovision?: boolean;
+
+      /**
+       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
+       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
+       * enabled.
+       */
+      seat_deprovision?: boolean;
+
+      /**
+       * A read-only token generated when the SCIM integration is enabled for the first
+       * time. It is redacted on subsequent requests. If you lose this you will need to
+       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+       */
+      secret?: string;
+
+      /**
+       * A flag to enable revoking a user's session in Access and Gateway when they have
+       * been deprovisioned in the Identity Provider.
+       */
+      user_deprovision?: boolean;
+    }
+  }
+}
+
+export type IdentityProviderListResponse = Array<
+  | IdentityProviderListResponse.AccessAzureAd
+  | IdentityProviderListResponse.AccessCentrify
+  | IdentityProviderListResponse.AccessFacebook
+  | IdentityProviderListResponse.AccessGitHub
+  | IdentityProviderListResponse.AccessGoogle
+  | IdentityProviderListResponse.AccessGoogleApps
+  | IdentityProviderListResponse.AccessLinkedin
+  | IdentityProviderListResponse.AccessOidc
+  | IdentityProviderListResponse.AccessOkta
+  | IdentityProviderListResponse.AccessOnelogin
+  | IdentityProviderListResponse.AccessPingone
+  | IdentityProviderListResponse.AccessSaml
+  | IdentityProviderListResponse.AccessYandex
+>;
+
+export namespace IdentityProviderListResponse {
+  export interface AccessAzureAd {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    config: AccessAzureAd.Config;
+
+    /**
+     * The name of the identity provider, shown to users on the login page.
+     */
+    name: string;
+
+    /**
+     * The type of identity provider. To determine the value for a specific provider,
+     * refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    type:
+      | 'onetimepin'
+      | 'azureAD'
+      | 'saml'
+      | 'centrify'
+      | 'facebook'
+      | 'github'
+      | 'google-apps'
+      | 'google'
+      | 'linkedin'
+      | 'oidc'
+      | 'okta'
+      | 'onelogin'
+      | 'pingone'
+      | 'yandex';
+
+    /**
+     * UUID
+     */
+    id?: string;
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    scim_config?: AccessAzureAd.ScimConfig;
+  }
+
+  export namespace AccessAzureAd {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    export interface Config {
+      /**
+       * Custom claims
+       */
+      claims?: Array<string>;
+
+      /**
+       * Your OAuth Client ID
+       */
+      client_id?: string;
+
+      /**
+       * Your OAuth Client Secret
+       */
+      client_secret?: string;
+
+      /**
+       * Should Cloudflare try to load authentication contexts from your account
+       */
+      conditional_access_enabled?: boolean;
+
+      /**
+       * Your Azure directory uuid
+       */
+      directory_id?: string;
+
+      /**
+       * The claim name for email in the id_token response.
+       */
+      email_claim_name?: string;
+
+      /**
+       * Should Cloudflare try to load groups from your account
+       */
+      support_groups?: boolean;
+    }
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    export interface ScimConfig {
+      /**
+       * A flag to enable or disable SCIM for the identity provider.
+       */
+      enabled?: boolean;
+
+      /**
+       * A flag to revoke a user's session in Access and force a reauthentication on the
+       * user's Gateway session when they have been added or removed from a group in the
+       * Identity Provider.
+       */
+      group_member_deprovision?: boolean;
+
+      /**
+       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
+       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
+       * enabled.
+       */
+      seat_deprovision?: boolean;
+
+      /**
+       * A read-only token generated when the SCIM integration is enabled for the first
+       * time. It is redacted on subsequent requests. If you lose this you will need to
+       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+       */
+      secret?: string;
+
+      /**
+       * A flag to enable revoking a user's session in Access and Gateway when they have
+       * been deprovisioned in the Identity Provider.
+       */
+      user_deprovision?: boolean;
+    }
+  }
+
+  export interface AccessCentrify {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    config: AccessCentrify.Config;
+
+    /**
+     * The name of the identity provider, shown to users on the login page.
+     */
+    name: string;
+
+    /**
+     * The type of identity provider. To determine the value for a specific provider,
+     * refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    type:
+      | 'onetimepin'
+      | 'azureAD'
+      | 'saml'
+      | 'centrify'
+      | 'facebook'
+      | 'github'
+      | 'google-apps'
+      | 'google'
+      | 'linkedin'
+      | 'oidc'
+      | 'okta'
+      | 'onelogin'
+      | 'pingone'
+      | 'yandex';
+
+    /**
+     * UUID
+     */
+    id?: string;
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    scim_config?: AccessCentrify.ScimConfig;
+  }
+
+  export namespace AccessCentrify {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    export interface Config {
+      /**
+       * Your centrify account url
+       */
+      centrify_account?: string;
+
+      /**
+       * Your centrify app id
+       */
+      centrify_app_id?: string;
+
+      /**
+       * Custom claims
+       */
+      claims?: Array<string>;
+
+      /**
+       * Your OAuth Client ID
+       */
+      client_id?: string;
+
+      /**
+       * Your OAuth Client Secret
+       */
+      client_secret?: string;
+
+      /**
+       * The claim name for email in the id_token response.
+       */
+      email_claim_name?: string;
+    }
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    export interface ScimConfig {
+      /**
+       * A flag to enable or disable SCIM for the identity provider.
+       */
+      enabled?: boolean;
+
+      /**
+       * A flag to revoke a user's session in Access and force a reauthentication on the
+       * user's Gateway session when they have been added or removed from a group in the
+       * Identity Provider.
+       */
+      group_member_deprovision?: boolean;
+
+      /**
+       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
+       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
+       * enabled.
+       */
+      seat_deprovision?: boolean;
+
+      /**
+       * A read-only token generated when the SCIM integration is enabled for the first
+       * time. It is redacted on subsequent requests. If you lose this you will need to
+       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+       */
+      secret?: string;
+
+      /**
+       * A flag to enable revoking a user's session in Access and Gateway when they have
+       * been deprovisioned in the Identity Provider.
+       */
+      user_deprovision?: boolean;
+    }
+  }
+
+  export interface AccessFacebook {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    config: AccessFacebook.Config;
+
+    /**
+     * The name of the identity provider, shown to users on the login page.
+     */
+    name: string;
+
+    /**
+     * The type of identity provider. To determine the value for a specific provider,
+     * refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    type:
+      | 'onetimepin'
+      | 'azureAD'
+      | 'saml'
+      | 'centrify'
+      | 'facebook'
+      | 'github'
+      | 'google-apps'
+      | 'google'
+      | 'linkedin'
+      | 'oidc'
+      | 'okta'
+      | 'onelogin'
+      | 'pingone'
+      | 'yandex';
+
+    /**
+     * UUID
+     */
+    id?: string;
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    scim_config?: AccessFacebook.ScimConfig;
+  }
+
+  export namespace AccessFacebook {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    export interface Config {
+      /**
+       * Your OAuth Client ID
+       */
+      client_id?: string;
+
+      /**
+       * Your OAuth Client Secret
+       */
+      client_secret?: string;
+    }
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    export interface ScimConfig {
+      /**
+       * A flag to enable or disable SCIM for the identity provider.
+       */
+      enabled?: boolean;
+
+      /**
+       * A flag to revoke a user's session in Access and force a reauthentication on the
+       * user's Gateway session when they have been added or removed from a group in the
+       * Identity Provider.
+       */
+      group_member_deprovision?: boolean;
+
+      /**
+       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
+       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
+       * enabled.
+       */
+      seat_deprovision?: boolean;
+
+      /**
+       * A read-only token generated when the SCIM integration is enabled for the first
+       * time. It is redacted on subsequent requests. If you lose this you will need to
+       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+       */
+      secret?: string;
+
+      /**
+       * A flag to enable revoking a user's session in Access and Gateway when they have
+       * been deprovisioned in the Identity Provider.
+       */
+      user_deprovision?: boolean;
+    }
+  }
+
+  export interface AccessGitHub {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    config: AccessGitHub.Config;
+
+    /**
+     * The name of the identity provider, shown to users on the login page.
+     */
+    name: string;
+
+    /**
+     * The type of identity provider. To determine the value for a specific provider,
+     * refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    type:
+      | 'onetimepin'
+      | 'azureAD'
+      | 'saml'
+      | 'centrify'
+      | 'facebook'
+      | 'github'
+      | 'google-apps'
+      | 'google'
+      | 'linkedin'
+      | 'oidc'
+      | 'okta'
+      | 'onelogin'
+      | 'pingone'
+      | 'yandex';
+
+    /**
+     * UUID
+     */
+    id?: string;
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    scim_config?: AccessGitHub.ScimConfig;
+  }
+
+  export namespace AccessGitHub {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    export interface Config {
+      /**
+       * Your OAuth Client ID
+       */
+      client_id?: string;
+
+      /**
+       * Your OAuth Client Secret
+       */
+      client_secret?: string;
+    }
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    export interface ScimConfig {
+      /**
+       * A flag to enable or disable SCIM for the identity provider.
+       */
+      enabled?: boolean;
+
+      /**
+       * A flag to revoke a user's session in Access and force a reauthentication on the
+       * user's Gateway session when they have been added or removed from a group in the
+       * Identity Provider.
+       */
+      group_member_deprovision?: boolean;
+
+      /**
+       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
+       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
+       * enabled.
+       */
+      seat_deprovision?: boolean;
+
+      /**
+       * A read-only token generated when the SCIM integration is enabled for the first
+       * time. It is redacted on subsequent requests. If you lose this you will need to
+       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+       */
+      secret?: string;
+
+      /**
+       * A flag to enable revoking a user's session in Access and Gateway when they have
+       * been deprovisioned in the Identity Provider.
+       */
+      user_deprovision?: boolean;
+    }
+  }
+
+  export interface AccessGoogle {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    config: AccessGoogle.Config;
+
+    /**
+     * The name of the identity provider, shown to users on the login page.
+     */
+    name: string;
+
+    /**
+     * The type of identity provider. To determine the value for a specific provider,
+     * refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    type:
+      | 'onetimepin'
+      | 'azureAD'
+      | 'saml'
+      | 'centrify'
+      | 'facebook'
+      | 'github'
+      | 'google-apps'
+      | 'google'
+      | 'linkedin'
+      | 'oidc'
+      | 'okta'
+      | 'onelogin'
+      | 'pingone'
+      | 'yandex';
+
+    /**
+     * UUID
+     */
+    id?: string;
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    scim_config?: AccessGoogle.ScimConfig;
+  }
+
+  export namespace AccessGoogle {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    export interface Config {
+      /**
+       * Custom claims
+       */
+      claims?: Array<string>;
+
+      /**
+       * Your OAuth Client ID
+       */
+      client_id?: string;
+
+      /**
+       * Your OAuth Client Secret
+       */
+      client_secret?: string;
+
+      /**
+       * The claim name for email in the id_token response.
+       */
+      email_claim_name?: string;
+    }
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    export interface ScimConfig {
+      /**
+       * A flag to enable or disable SCIM for the identity provider.
+       */
+      enabled?: boolean;
+
+      /**
+       * A flag to revoke a user's session in Access and force a reauthentication on the
+       * user's Gateway session when they have been added or removed from a group in the
+       * Identity Provider.
+       */
+      group_member_deprovision?: boolean;
+
+      /**
+       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
+       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
+       * enabled.
+       */
+      seat_deprovision?: boolean;
+
+      /**
+       * A read-only token generated when the SCIM integration is enabled for the first
+       * time. It is redacted on subsequent requests. If you lose this you will need to
+       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+       */
+      secret?: string;
+
+      /**
+       * A flag to enable revoking a user's session in Access and Gateway when they have
+       * been deprovisioned in the Identity Provider.
+       */
+      user_deprovision?: boolean;
+    }
+  }
+
+  export interface AccessGoogleApps {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    config: AccessGoogleApps.Config;
+
+    /**
+     * The name of the identity provider, shown to users on the login page.
+     */
+    name: string;
+
+    /**
+     * The type of identity provider. To determine the value for a specific provider,
+     * refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    type:
+      | 'onetimepin'
+      | 'azureAD'
+      | 'saml'
+      | 'centrify'
+      | 'facebook'
+      | 'github'
+      | 'google-apps'
+      | 'google'
+      | 'linkedin'
+      | 'oidc'
+      | 'okta'
+      | 'onelogin'
+      | 'pingone'
+      | 'yandex';
+
+    /**
+     * UUID
+     */
+    id?: string;
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    scim_config?: AccessGoogleApps.ScimConfig;
+  }
+
+  export namespace AccessGoogleApps {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    export interface Config {
+      /**
+       * Your companies TLD
+       */
+      apps_domain?: string;
+
+      /**
+       * Custom claims
+       */
+      claims?: Array<string>;
+
+      /**
+       * Your OAuth Client ID
+       */
+      client_id?: string;
+
+      /**
+       * Your OAuth Client Secret
+       */
+      client_secret?: string;
+
+      /**
+       * The claim name for email in the id_token response.
+       */
+      email_claim_name?: string;
+    }
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    export interface ScimConfig {
+      /**
+       * A flag to enable or disable SCIM for the identity provider.
+       */
+      enabled?: boolean;
+
+      /**
+       * A flag to revoke a user's session in Access and force a reauthentication on the
+       * user's Gateway session when they have been added or removed from a group in the
+       * Identity Provider.
+       */
+      group_member_deprovision?: boolean;
+
+      /**
+       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
+       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
+       * enabled.
+       */
+      seat_deprovision?: boolean;
+
+      /**
+       * A read-only token generated when the SCIM integration is enabled for the first
+       * time. It is redacted on subsequent requests. If you lose this you will need to
+       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+       */
+      secret?: string;
+
+      /**
+       * A flag to enable revoking a user's session in Access and Gateway when they have
+       * been deprovisioned in the Identity Provider.
+       */
+      user_deprovision?: boolean;
+    }
+  }
+
+  export interface AccessLinkedin {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    config: AccessLinkedin.Config;
+
+    /**
+     * The name of the identity provider, shown to users on the login page.
+     */
+    name: string;
+
+    /**
+     * The type of identity provider. To determine the value for a specific provider,
+     * refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    type:
+      | 'onetimepin'
+      | 'azureAD'
+      | 'saml'
+      | 'centrify'
+      | 'facebook'
+      | 'github'
+      | 'google-apps'
+      | 'google'
+      | 'linkedin'
+      | 'oidc'
+      | 'okta'
+      | 'onelogin'
+      | 'pingone'
+      | 'yandex';
+
+    /**
+     * UUID
+     */
+    id?: string;
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    scim_config?: AccessLinkedin.ScimConfig;
+  }
+
+  export namespace AccessLinkedin {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    export interface Config {
+      /**
+       * Your OAuth Client ID
+       */
+      client_id?: string;
+
+      /**
+       * Your OAuth Client Secret
+       */
+      client_secret?: string;
+    }
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    export interface ScimConfig {
+      /**
+       * A flag to enable or disable SCIM for the identity provider.
+       */
+      enabled?: boolean;
+
+      /**
+       * A flag to revoke a user's session in Access and force a reauthentication on the
+       * user's Gateway session when they have been added or removed from a group in the
+       * Identity Provider.
+       */
+      group_member_deprovision?: boolean;
+
+      /**
+       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
+       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
+       * enabled.
+       */
+      seat_deprovision?: boolean;
+
+      /**
+       * A read-only token generated when the SCIM integration is enabled for the first
+       * time. It is redacted on subsequent requests. If you lose this you will need to
+       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+       */
+      secret?: string;
+
+      /**
+       * A flag to enable revoking a user's session in Access and Gateway when they have
+       * been deprovisioned in the Identity Provider.
+       */
+      user_deprovision?: boolean;
+    }
+  }
+
+  export interface AccessOidc {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    config: AccessOidc.Config;
+
+    /**
+     * The name of the identity provider, shown to users on the login page.
+     */
+    name: string;
+
+    /**
+     * The type of identity provider. To determine the value for a specific provider,
+     * refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    type:
+      | 'onetimepin'
+      | 'azureAD'
+      | 'saml'
+      | 'centrify'
+      | 'facebook'
+      | 'github'
+      | 'google-apps'
+      | 'google'
+      | 'linkedin'
+      | 'oidc'
+      | 'okta'
+      | 'onelogin'
+      | 'pingone'
+      | 'yandex';
+
+    /**
+     * UUID
+     */
+    id?: string;
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    scim_config?: AccessOidc.ScimConfig;
+  }
+
+  export namespace AccessOidc {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    export interface Config {
+      /**
+       * The authorization_endpoint URL of your IdP
+       */
+      auth_url?: string;
+
+      /**
+       * The jwks_uri endpoint of your IdP to allow the IdP keys to sign the tokens
+       */
+      certs_url?: string;
+
+      /**
+       * Custom claims
+       */
+      claims?: Array<string>;
+
+      /**
+       * Your OAuth Client ID
+       */
+      client_id?: string;
+
+      /**
+       * Your OAuth Client Secret
+       */
+      client_secret?: string;
+
+      /**
+       * The claim name for email in the id_token response.
+       */
+      email_claim_name?: string;
+
+      /**
+       * OAuth scopes
+       */
+      scopes?: Array<string>;
+
+      /**
+       * The token_endpoint URL of your IdP
+       */
+      token_url?: string;
+    }
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    export interface ScimConfig {
+      /**
+       * A flag to enable or disable SCIM for the identity provider.
+       */
+      enabled?: boolean;
+
+      /**
+       * A flag to revoke a user's session in Access and force a reauthentication on the
+       * user's Gateway session when they have been added or removed from a group in the
+       * Identity Provider.
+       */
+      group_member_deprovision?: boolean;
+
+      /**
+       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
+       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
+       * enabled.
+       */
+      seat_deprovision?: boolean;
+
+      /**
+       * A read-only token generated when the SCIM integration is enabled for the first
+       * time. It is redacted on subsequent requests. If you lose this you will need to
+       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+       */
+      secret?: string;
+
+      /**
+       * A flag to enable revoking a user's session in Access and Gateway when they have
+       * been deprovisioned in the Identity Provider.
+       */
+      user_deprovision?: boolean;
+    }
+  }
+
+  export interface AccessOkta {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    config: AccessOkta.Config;
+
+    /**
+     * The name of the identity provider, shown to users on the login page.
+     */
+    name: string;
+
+    /**
+     * The type of identity provider. To determine the value for a specific provider,
+     * refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    type:
+      | 'onetimepin'
+      | 'azureAD'
+      | 'saml'
+      | 'centrify'
+      | 'facebook'
+      | 'github'
+      | 'google-apps'
+      | 'google'
+      | 'linkedin'
+      | 'oidc'
+      | 'okta'
+      | 'onelogin'
+      | 'pingone'
+      | 'yandex';
+
+    /**
+     * UUID
+     */
+    id?: string;
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    scim_config?: AccessOkta.ScimConfig;
+  }
+
+  export namespace AccessOkta {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    export interface Config {
+      /**
+       * Your okta authorization server id
+       */
+      authorization_server_id?: string;
+
+      /**
+       * Custom claims
+       */
+      claims?: Array<string>;
+
+      /**
+       * Your OAuth Client ID
+       */
+      client_id?: string;
+
+      /**
+       * Your OAuth Client Secret
+       */
+      client_secret?: string;
+
+      /**
+       * The claim name for email in the id_token response.
+       */
+      email_claim_name?: string;
+
+      /**
+       * Your okta account url
+       */
+      okta_account?: string;
+    }
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    export interface ScimConfig {
+      /**
+       * A flag to enable or disable SCIM for the identity provider.
+       */
+      enabled?: boolean;
+
+      /**
+       * A flag to revoke a user's session in Access and force a reauthentication on the
+       * user's Gateway session when they have been added or removed from a group in the
+       * Identity Provider.
+       */
+      group_member_deprovision?: boolean;
+
+      /**
+       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
+       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
+       * enabled.
+       */
+      seat_deprovision?: boolean;
+
+      /**
+       * A read-only token generated when the SCIM integration is enabled for the first
+       * time. It is redacted on subsequent requests. If you lose this you will need to
+       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+       */
+      secret?: string;
+
+      /**
+       * A flag to enable revoking a user's session in Access and Gateway when they have
+       * been deprovisioned in the Identity Provider.
+       */
+      user_deprovision?: boolean;
+    }
+  }
+
+  export interface AccessOnelogin {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    config: AccessOnelogin.Config;
+
+    /**
+     * The name of the identity provider, shown to users on the login page.
+     */
+    name: string;
+
+    /**
+     * The type of identity provider. To determine the value for a specific provider,
+     * refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    type:
+      | 'onetimepin'
+      | 'azureAD'
+      | 'saml'
+      | 'centrify'
+      | 'facebook'
+      | 'github'
+      | 'google-apps'
+      | 'google'
+      | 'linkedin'
+      | 'oidc'
+      | 'okta'
+      | 'onelogin'
+      | 'pingone'
+      | 'yandex';
+
+    /**
+     * UUID
+     */
+    id?: string;
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    scim_config?: AccessOnelogin.ScimConfig;
+  }
+
+  export namespace AccessOnelogin {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    export interface Config {
+      /**
+       * Custom claims
+       */
+      claims?: Array<string>;
+
+      /**
+       * Your OAuth Client ID
+       */
+      client_id?: string;
+
+      /**
+       * Your OAuth Client Secret
+       */
+      client_secret?: string;
+
+      /**
+       * The claim name for email in the id_token response.
+       */
+      email_claim_name?: string;
+
+      /**
+       * Your OneLogin account url
+       */
+      onelogin_account?: string;
+    }
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    export interface ScimConfig {
+      /**
+       * A flag to enable or disable SCIM for the identity provider.
+       */
+      enabled?: boolean;
+
+      /**
+       * A flag to revoke a user's session in Access and force a reauthentication on the
+       * user's Gateway session when they have been added or removed from a group in the
+       * Identity Provider.
+       */
+      group_member_deprovision?: boolean;
+
+      /**
+       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
+       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
+       * enabled.
+       */
+      seat_deprovision?: boolean;
+
+      /**
+       * A read-only token generated when the SCIM integration is enabled for the first
+       * time. It is redacted on subsequent requests. If you lose this you will need to
+       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+       */
+      secret?: string;
+
+      /**
+       * A flag to enable revoking a user's session in Access and Gateway when they have
+       * been deprovisioned in the Identity Provider.
+       */
+      user_deprovision?: boolean;
+    }
+  }
+
+  export interface AccessPingone {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    config: AccessPingone.Config;
+
+    /**
+     * The name of the identity provider, shown to users on the login page.
+     */
+    name: string;
+
+    /**
+     * The type of identity provider. To determine the value for a specific provider,
+     * refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    type:
+      | 'onetimepin'
+      | 'azureAD'
+      | 'saml'
+      | 'centrify'
+      | 'facebook'
+      | 'github'
+      | 'google-apps'
+      | 'google'
+      | 'linkedin'
+      | 'oidc'
+      | 'okta'
+      | 'onelogin'
+      | 'pingone'
+      | 'yandex';
+
+    /**
+     * UUID
+     */
+    id?: string;
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    scim_config?: AccessPingone.ScimConfig;
+  }
+
+  export namespace AccessPingone {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    export interface Config {
+      /**
+       * Custom claims
+       */
+      claims?: Array<string>;
+
+      /**
+       * Your OAuth Client ID
+       */
+      client_id?: string;
+
+      /**
+       * Your OAuth Client Secret
+       */
+      client_secret?: string;
+
+      /**
+       * The claim name for email in the id_token response.
+       */
+      email_claim_name?: string;
+
+      /**
+       * Your PingOne environment identifier
+       */
+      ping_env_id?: string;
+    }
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    export interface ScimConfig {
+      /**
+       * A flag to enable or disable SCIM for the identity provider.
+       */
+      enabled?: boolean;
+
+      /**
+       * A flag to revoke a user's session in Access and force a reauthentication on the
+       * user's Gateway session when they have been added or removed from a group in the
+       * Identity Provider.
+       */
+      group_member_deprovision?: boolean;
+
+      /**
+       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
+       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
+       * enabled.
+       */
+      seat_deprovision?: boolean;
+
+      /**
+       * A read-only token generated when the SCIM integration is enabled for the first
+       * time. It is redacted on subsequent requests. If you lose this you will need to
+       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+       */
+      secret?: string;
+
+      /**
+       * A flag to enable revoking a user's session in Access and Gateway when they have
+       * been deprovisioned in the Identity Provider.
+       */
+      user_deprovision?: boolean;
+    }
+  }
+
+  export interface AccessSaml {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    config: AccessSaml.Config;
+
+    /**
+     * The name of the identity provider, shown to users on the login page.
+     */
+    name: string;
+
+    /**
+     * The type of identity provider. To determine the value for a specific provider,
+     * refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    type:
+      | 'onetimepin'
+      | 'azureAD'
+      | 'saml'
+      | 'centrify'
+      | 'facebook'
+      | 'github'
+      | 'google-apps'
+      | 'google'
+      | 'linkedin'
+      | 'oidc'
+      | 'okta'
+      | 'onelogin'
+      | 'pingone'
+      | 'yandex';
+
+    /**
+     * UUID
+     */
+    id?: string;
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    scim_config?: AccessSaml.ScimConfig;
+  }
+
+  export namespace AccessSaml {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    export interface Config {
+      /**
+       * A list of SAML attribute names that will be added to your signed JWT token and
+       * can be used in SAML policy rules.
+       */
+      attributes?: Array<string>;
+
+      /**
+       * The attribute name for email in the SAML response.
+       */
+      email_attribute_name?: string;
+
+      /**
+       * Add a list of attribute names that will be returned in the response header from
+       * the Access callback.
+       */
+      header_attributes?: Array<Config.HeaderAttribute>;
+
+      /**
+       * X509 certificate to verify the signature in the SAML authentication response
+       */
+      idp_public_certs?: Array<string>;
+
+      /**
+       * IdP Entity ID or Issuer URL
+       */
+      issuer_url?: string;
+
+      /**
+       * Sign the SAML authentication request with Access credentials. To verify the
+       * signature, use the public key from the Access certs endpoints.
+       */
+      sign_request?: boolean;
+
+      /**
+       * URL to send the SAML authentication requests to
+       */
+      sso_target_url?: string;
+    }
+
+    export namespace Config {
+      export interface HeaderAttribute {
+        /**
+         * attribute name from the IDP
+         */
+        attribute_name?: string;
+
+        /**
+         * header that will be added on the request to the origin
+         */
+        header_name?: string;
+      }
+    }
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    export interface ScimConfig {
+      /**
+       * A flag to enable or disable SCIM for the identity provider.
+       */
+      enabled?: boolean;
+
+      /**
+       * A flag to revoke a user's session in Access and force a reauthentication on the
+       * user's Gateway session when they have been added or removed from a group in the
+       * Identity Provider.
+       */
+      group_member_deprovision?: boolean;
+
+      /**
+       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
+       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
+       * enabled.
+       */
+      seat_deprovision?: boolean;
+
+      /**
+       * A read-only token generated when the SCIM integration is enabled for the first
+       * time. It is redacted on subsequent requests. If you lose this you will need to
+       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+       */
+      secret?: string;
+
+      /**
+       * A flag to enable revoking a user's session in Access and Gateway when they have
+       * been deprovisioned in the Identity Provider.
+       */
+      user_deprovision?: boolean;
+    }
+  }
+
+  export interface AccessYandex {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    config: AccessYandex.Config;
+
+    /**
+     * The name of the identity provider, shown to users on the login page.
+     */
+    name: string;
+
+    /**
+     * The type of identity provider. To determine the value for a specific provider,
+     * refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    type:
+      | 'onetimepin'
+      | 'azureAD'
+      | 'saml'
+      | 'centrify'
+      | 'facebook'
+      | 'github'
+      | 'google-apps'
+      | 'google'
+      | 'linkedin'
+      | 'oidc'
+      | 'okta'
+      | 'onelogin'
+      | 'pingone'
+      | 'yandex';
+
+    /**
+     * UUID
+     */
+    id?: string;
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    scim_config?: AccessYandex.ScimConfig;
+  }
+
+  export namespace AccessYandex {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    export interface Config {
+      /**
+       * Your OAuth Client ID
+       */
+      client_id?: string;
+
+      /**
+       * Your OAuth Client Secret
+       */
+      client_secret?: string;
+    }
+
     /**
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
@@ -1735,3190 +3280,6 @@ export interface IdentityProviderDeleteResponse {
    * UUID
    */
   id?: string;
-}
-
-export type IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderResponse =
-  | IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderResponse.AccessAzureAd
-  | IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderResponse.AccessCentrify
-  | IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderResponse.AccessFacebook
-  | IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderResponse.AccessGitHub
-  | IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderResponse.AccessGoogle
-  | IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderResponse.AccessGoogleApps
-  | IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderResponse.AccessLinkedin
-  | IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderResponse.AccessOidc
-  | IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderResponse.AccessOkta
-  | IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderResponse.AccessOnelogin
-  | IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderResponse.AccessPingone
-  | IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderResponse.AccessSaml
-  | IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderResponse.AccessYandex
-  | IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderResponse.AccessOnetimepin;
-
-export namespace IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderResponse {
-  export interface AccessAzureAd {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    config: AccessAzureAd.Config;
-
-    /**
-     * The name of the identity provider, shown to users on the login page.
-     */
-    name: string;
-
-    /**
-     * The type of identity provider. To determine the value for a specific provider,
-     * refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
-
-    /**
-     * UUID
-     */
-    id?: string;
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    scim_config?: AccessAzureAd.ScimConfig;
-  }
-
-  export namespace AccessAzureAd {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    export interface Config {
-      /**
-       * Custom claims
-       */
-      claims?: Array<string>;
-
-      /**
-       * Your OAuth Client ID
-       */
-      client_id?: string;
-
-      /**
-       * Your OAuth Client Secret
-       */
-      client_secret?: string;
-
-      /**
-       * Should Cloudflare try to load authentication contexts from your account
-       */
-      conditional_access_enabled?: boolean;
-
-      /**
-       * Your Azure directory uuid
-       */
-      directory_id?: string;
-
-      /**
-       * The claim name for email in the id_token response.
-       */
-      email_claim_name?: string;
-
-      /**
-       * Should Cloudflare try to load groups from your account
-       */
-      support_groups?: boolean;
-    }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
-  }
-
-  export interface AccessCentrify {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    config: AccessCentrify.Config;
-
-    /**
-     * The name of the identity provider, shown to users on the login page.
-     */
-    name: string;
-
-    /**
-     * The type of identity provider. To determine the value for a specific provider,
-     * refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
-
-    /**
-     * UUID
-     */
-    id?: string;
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    scim_config?: AccessCentrify.ScimConfig;
-  }
-
-  export namespace AccessCentrify {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    export interface Config {
-      /**
-       * Your centrify account url
-       */
-      centrify_account?: string;
-
-      /**
-       * Your centrify app id
-       */
-      centrify_app_id?: string;
-
-      /**
-       * Custom claims
-       */
-      claims?: Array<string>;
-
-      /**
-       * Your OAuth Client ID
-       */
-      client_id?: string;
-
-      /**
-       * Your OAuth Client Secret
-       */
-      client_secret?: string;
-
-      /**
-       * The claim name for email in the id_token response.
-       */
-      email_claim_name?: string;
-    }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
-  }
-
-  export interface AccessFacebook {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    config: AccessFacebook.Config;
-
-    /**
-     * The name of the identity provider, shown to users on the login page.
-     */
-    name: string;
-
-    /**
-     * The type of identity provider. To determine the value for a specific provider,
-     * refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
-
-    /**
-     * UUID
-     */
-    id?: string;
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    scim_config?: AccessFacebook.ScimConfig;
-  }
-
-  export namespace AccessFacebook {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    export interface Config {
-      /**
-       * Your OAuth Client ID
-       */
-      client_id?: string;
-
-      /**
-       * Your OAuth Client Secret
-       */
-      client_secret?: string;
-    }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
-  }
-
-  export interface AccessGitHub {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    config: AccessGitHub.Config;
-
-    /**
-     * The name of the identity provider, shown to users on the login page.
-     */
-    name: string;
-
-    /**
-     * The type of identity provider. To determine the value for a specific provider,
-     * refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
-
-    /**
-     * UUID
-     */
-    id?: string;
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    scim_config?: AccessGitHub.ScimConfig;
-  }
-
-  export namespace AccessGitHub {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    export interface Config {
-      /**
-       * Your OAuth Client ID
-       */
-      client_id?: string;
-
-      /**
-       * Your OAuth Client Secret
-       */
-      client_secret?: string;
-    }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
-  }
-
-  export interface AccessGoogle {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    config: AccessGoogle.Config;
-
-    /**
-     * The name of the identity provider, shown to users on the login page.
-     */
-    name: string;
-
-    /**
-     * The type of identity provider. To determine the value for a specific provider,
-     * refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
-
-    /**
-     * UUID
-     */
-    id?: string;
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    scim_config?: AccessGoogle.ScimConfig;
-  }
-
-  export namespace AccessGoogle {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    export interface Config {
-      /**
-       * Custom claims
-       */
-      claims?: Array<string>;
-
-      /**
-       * Your OAuth Client ID
-       */
-      client_id?: string;
-
-      /**
-       * Your OAuth Client Secret
-       */
-      client_secret?: string;
-
-      /**
-       * The claim name for email in the id_token response.
-       */
-      email_claim_name?: string;
-    }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
-  }
-
-  export interface AccessGoogleApps {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    config: AccessGoogleApps.Config;
-
-    /**
-     * The name of the identity provider, shown to users on the login page.
-     */
-    name: string;
-
-    /**
-     * The type of identity provider. To determine the value for a specific provider,
-     * refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
-
-    /**
-     * UUID
-     */
-    id?: string;
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    scim_config?: AccessGoogleApps.ScimConfig;
-  }
-
-  export namespace AccessGoogleApps {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    export interface Config {
-      /**
-       * Your companies TLD
-       */
-      apps_domain?: string;
-
-      /**
-       * Custom claims
-       */
-      claims?: Array<string>;
-
-      /**
-       * Your OAuth Client ID
-       */
-      client_id?: string;
-
-      /**
-       * Your OAuth Client Secret
-       */
-      client_secret?: string;
-
-      /**
-       * The claim name for email in the id_token response.
-       */
-      email_claim_name?: string;
-    }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
-  }
-
-  export interface AccessLinkedin {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    config: AccessLinkedin.Config;
-
-    /**
-     * The name of the identity provider, shown to users on the login page.
-     */
-    name: string;
-
-    /**
-     * The type of identity provider. To determine the value for a specific provider,
-     * refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
-
-    /**
-     * UUID
-     */
-    id?: string;
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    scim_config?: AccessLinkedin.ScimConfig;
-  }
-
-  export namespace AccessLinkedin {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    export interface Config {
-      /**
-       * Your OAuth Client ID
-       */
-      client_id?: string;
-
-      /**
-       * Your OAuth Client Secret
-       */
-      client_secret?: string;
-    }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
-  }
-
-  export interface AccessOidc {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    config: AccessOidc.Config;
-
-    /**
-     * The name of the identity provider, shown to users on the login page.
-     */
-    name: string;
-
-    /**
-     * The type of identity provider. To determine the value for a specific provider,
-     * refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
-
-    /**
-     * UUID
-     */
-    id?: string;
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    scim_config?: AccessOidc.ScimConfig;
-  }
-
-  export namespace AccessOidc {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    export interface Config {
-      /**
-       * The authorization_endpoint URL of your IdP
-       */
-      auth_url?: string;
-
-      /**
-       * The jwks_uri endpoint of your IdP to allow the IdP keys to sign the tokens
-       */
-      certs_url?: string;
-
-      /**
-       * Custom claims
-       */
-      claims?: Array<string>;
-
-      /**
-       * Your OAuth Client ID
-       */
-      client_id?: string;
-
-      /**
-       * Your OAuth Client Secret
-       */
-      client_secret?: string;
-
-      /**
-       * The claim name for email in the id_token response.
-       */
-      email_claim_name?: string;
-
-      /**
-       * OAuth scopes
-       */
-      scopes?: Array<string>;
-
-      /**
-       * The token_endpoint URL of your IdP
-       */
-      token_url?: string;
-    }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
-  }
-
-  export interface AccessOkta {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    config: AccessOkta.Config;
-
-    /**
-     * The name of the identity provider, shown to users on the login page.
-     */
-    name: string;
-
-    /**
-     * The type of identity provider. To determine the value for a specific provider,
-     * refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
-
-    /**
-     * UUID
-     */
-    id?: string;
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    scim_config?: AccessOkta.ScimConfig;
-  }
-
-  export namespace AccessOkta {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    export interface Config {
-      /**
-       * Your okta authorization server id
-       */
-      authorization_server_id?: string;
-
-      /**
-       * Custom claims
-       */
-      claims?: Array<string>;
-
-      /**
-       * Your OAuth Client ID
-       */
-      client_id?: string;
-
-      /**
-       * Your OAuth Client Secret
-       */
-      client_secret?: string;
-
-      /**
-       * The claim name for email in the id_token response.
-       */
-      email_claim_name?: string;
-
-      /**
-       * Your okta account url
-       */
-      okta_account?: string;
-    }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
-  }
-
-  export interface AccessOnelogin {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    config: AccessOnelogin.Config;
-
-    /**
-     * The name of the identity provider, shown to users on the login page.
-     */
-    name: string;
-
-    /**
-     * The type of identity provider. To determine the value for a specific provider,
-     * refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
-
-    /**
-     * UUID
-     */
-    id?: string;
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    scim_config?: AccessOnelogin.ScimConfig;
-  }
-
-  export namespace AccessOnelogin {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    export interface Config {
-      /**
-       * Custom claims
-       */
-      claims?: Array<string>;
-
-      /**
-       * Your OAuth Client ID
-       */
-      client_id?: string;
-
-      /**
-       * Your OAuth Client Secret
-       */
-      client_secret?: string;
-
-      /**
-       * The claim name for email in the id_token response.
-       */
-      email_claim_name?: string;
-
-      /**
-       * Your OneLogin account url
-       */
-      onelogin_account?: string;
-    }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
-  }
-
-  export interface AccessPingone {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    config: AccessPingone.Config;
-
-    /**
-     * The name of the identity provider, shown to users on the login page.
-     */
-    name: string;
-
-    /**
-     * The type of identity provider. To determine the value for a specific provider,
-     * refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
-
-    /**
-     * UUID
-     */
-    id?: string;
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    scim_config?: AccessPingone.ScimConfig;
-  }
-
-  export namespace AccessPingone {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    export interface Config {
-      /**
-       * Custom claims
-       */
-      claims?: Array<string>;
-
-      /**
-       * Your OAuth Client ID
-       */
-      client_id?: string;
-
-      /**
-       * Your OAuth Client Secret
-       */
-      client_secret?: string;
-
-      /**
-       * The claim name for email in the id_token response.
-       */
-      email_claim_name?: string;
-
-      /**
-       * Your PingOne environment identifier
-       */
-      ping_env_id?: string;
-    }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
-  }
-
-  export interface AccessSaml {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    config: AccessSaml.Config;
-
-    /**
-     * The name of the identity provider, shown to users on the login page.
-     */
-    name: string;
-
-    /**
-     * The type of identity provider. To determine the value for a specific provider,
-     * refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
-
-    /**
-     * UUID
-     */
-    id?: string;
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    scim_config?: AccessSaml.ScimConfig;
-  }
-
-  export namespace AccessSaml {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    export interface Config {
-      /**
-       * A list of SAML attribute names that will be added to your signed JWT token and
-       * can be used in SAML policy rules.
-       */
-      attributes?: Array<string>;
-
-      /**
-       * The attribute name for email in the SAML response.
-       */
-      email_attribute_name?: string;
-
-      /**
-       * Add a list of attribute names that will be returned in the response header from
-       * the Access callback.
-       */
-      header_attributes?: Array<Config.HeaderAttribute>;
-
-      /**
-       * X509 certificate to verify the signature in the SAML authentication response
-       */
-      idp_public_certs?: Array<string>;
-
-      /**
-       * IdP Entity ID or Issuer URL
-       */
-      issuer_url?: string;
-
-      /**
-       * Sign the SAML authentication request with Access credentials. To verify the
-       * signature, use the public key from the Access certs endpoints.
-       */
-      sign_request?: boolean;
-
-      /**
-       * URL to send the SAML authentication requests to
-       */
-      sso_target_url?: string;
-    }
-
-    export namespace Config {
-      export interface HeaderAttribute {
-        /**
-         * attribute name from the IDP
-         */
-        attribute_name?: string;
-
-        /**
-         * header that will be added on the request to the origin
-         */
-        header_name?: string;
-      }
-    }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
-  }
-
-  export interface AccessYandex {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    config: AccessYandex.Config;
-
-    /**
-     * The name of the identity provider, shown to users on the login page.
-     */
-    name: string;
-
-    /**
-     * The type of identity provider. To determine the value for a specific provider,
-     * refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
-
-    /**
-     * UUID
-     */
-    id?: string;
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    scim_config?: AccessYandex.ScimConfig;
-  }
-
-  export namespace AccessYandex {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    export interface Config {
-      /**
-       * Your OAuth Client ID
-       */
-      client_id?: string;
-
-      /**
-       * Your OAuth Client Secret
-       */
-      client_secret?: string;
-    }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
-  }
-
-  export interface AccessOnetimepin {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    config: unknown;
-
-    /**
-     * The name of the identity provider, shown to users on the login page.
-     */
-    name: string;
-
-    /**
-     * The type of identity provider. To determine the value for a specific provider,
-     * refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
-
-    /**
-     * UUID
-     */
-    id?: string;
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    scim_config?: AccessOnetimepin.ScimConfig;
-  }
-
-  export namespace AccessOnetimepin {
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
-  }
-}
-
-export type IdentityProviderAccessIdentityProvidersListAccessIdentityProvidersResponse = Array<
-  | IdentityProviderAccessIdentityProvidersListAccessIdentityProvidersResponse.AccessAzureAd
-  | IdentityProviderAccessIdentityProvidersListAccessIdentityProvidersResponse.AccessCentrify
-  | IdentityProviderAccessIdentityProvidersListAccessIdentityProvidersResponse.AccessFacebook
-  | IdentityProviderAccessIdentityProvidersListAccessIdentityProvidersResponse.AccessGitHub
-  | IdentityProviderAccessIdentityProvidersListAccessIdentityProvidersResponse.AccessGoogle
-  | IdentityProviderAccessIdentityProvidersListAccessIdentityProvidersResponse.AccessGoogleApps
-  | IdentityProviderAccessIdentityProvidersListAccessIdentityProvidersResponse.AccessLinkedin
-  | IdentityProviderAccessIdentityProvidersListAccessIdentityProvidersResponse.AccessOidc
-  | IdentityProviderAccessIdentityProvidersListAccessIdentityProvidersResponse.AccessOkta
-  | IdentityProviderAccessIdentityProvidersListAccessIdentityProvidersResponse.AccessOnelogin
-  | IdentityProviderAccessIdentityProvidersListAccessIdentityProvidersResponse.AccessPingone
-  | IdentityProviderAccessIdentityProvidersListAccessIdentityProvidersResponse.AccessSaml
-  | IdentityProviderAccessIdentityProvidersListAccessIdentityProvidersResponse.AccessYandex
->;
-
-export namespace IdentityProviderAccessIdentityProvidersListAccessIdentityProvidersResponse {
-  export interface AccessAzureAd {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    config: AccessAzureAd.Config;
-
-    /**
-     * The name of the identity provider, shown to users on the login page.
-     */
-    name: string;
-
-    /**
-     * The type of identity provider. To determine the value for a specific provider,
-     * refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
-
-    /**
-     * UUID
-     */
-    id?: string;
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    scim_config?: AccessAzureAd.ScimConfig;
-  }
-
-  export namespace AccessAzureAd {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    export interface Config {
-      /**
-       * Custom claims
-       */
-      claims?: Array<string>;
-
-      /**
-       * Your OAuth Client ID
-       */
-      client_id?: string;
-
-      /**
-       * Your OAuth Client Secret
-       */
-      client_secret?: string;
-
-      /**
-       * Should Cloudflare try to load authentication contexts from your account
-       */
-      conditional_access_enabled?: boolean;
-
-      /**
-       * Your Azure directory uuid
-       */
-      directory_id?: string;
-
-      /**
-       * The claim name for email in the id_token response.
-       */
-      email_claim_name?: string;
-
-      /**
-       * Should Cloudflare try to load groups from your account
-       */
-      support_groups?: boolean;
-    }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
-  }
-
-  export interface AccessCentrify {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    config: AccessCentrify.Config;
-
-    /**
-     * The name of the identity provider, shown to users on the login page.
-     */
-    name: string;
-
-    /**
-     * The type of identity provider. To determine the value for a specific provider,
-     * refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
-
-    /**
-     * UUID
-     */
-    id?: string;
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    scim_config?: AccessCentrify.ScimConfig;
-  }
-
-  export namespace AccessCentrify {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    export interface Config {
-      /**
-       * Your centrify account url
-       */
-      centrify_account?: string;
-
-      /**
-       * Your centrify app id
-       */
-      centrify_app_id?: string;
-
-      /**
-       * Custom claims
-       */
-      claims?: Array<string>;
-
-      /**
-       * Your OAuth Client ID
-       */
-      client_id?: string;
-
-      /**
-       * Your OAuth Client Secret
-       */
-      client_secret?: string;
-
-      /**
-       * The claim name for email in the id_token response.
-       */
-      email_claim_name?: string;
-    }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
-  }
-
-  export interface AccessFacebook {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    config: AccessFacebook.Config;
-
-    /**
-     * The name of the identity provider, shown to users on the login page.
-     */
-    name: string;
-
-    /**
-     * The type of identity provider. To determine the value for a specific provider,
-     * refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
-
-    /**
-     * UUID
-     */
-    id?: string;
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    scim_config?: AccessFacebook.ScimConfig;
-  }
-
-  export namespace AccessFacebook {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    export interface Config {
-      /**
-       * Your OAuth Client ID
-       */
-      client_id?: string;
-
-      /**
-       * Your OAuth Client Secret
-       */
-      client_secret?: string;
-    }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
-  }
-
-  export interface AccessGitHub {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    config: AccessGitHub.Config;
-
-    /**
-     * The name of the identity provider, shown to users on the login page.
-     */
-    name: string;
-
-    /**
-     * The type of identity provider. To determine the value for a specific provider,
-     * refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
-
-    /**
-     * UUID
-     */
-    id?: string;
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    scim_config?: AccessGitHub.ScimConfig;
-  }
-
-  export namespace AccessGitHub {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    export interface Config {
-      /**
-       * Your OAuth Client ID
-       */
-      client_id?: string;
-
-      /**
-       * Your OAuth Client Secret
-       */
-      client_secret?: string;
-    }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
-  }
-
-  export interface AccessGoogle {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    config: AccessGoogle.Config;
-
-    /**
-     * The name of the identity provider, shown to users on the login page.
-     */
-    name: string;
-
-    /**
-     * The type of identity provider. To determine the value for a specific provider,
-     * refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
-
-    /**
-     * UUID
-     */
-    id?: string;
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    scim_config?: AccessGoogle.ScimConfig;
-  }
-
-  export namespace AccessGoogle {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    export interface Config {
-      /**
-       * Custom claims
-       */
-      claims?: Array<string>;
-
-      /**
-       * Your OAuth Client ID
-       */
-      client_id?: string;
-
-      /**
-       * Your OAuth Client Secret
-       */
-      client_secret?: string;
-
-      /**
-       * The claim name for email in the id_token response.
-       */
-      email_claim_name?: string;
-    }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
-  }
-
-  export interface AccessGoogleApps {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    config: AccessGoogleApps.Config;
-
-    /**
-     * The name of the identity provider, shown to users on the login page.
-     */
-    name: string;
-
-    /**
-     * The type of identity provider. To determine the value for a specific provider,
-     * refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
-
-    /**
-     * UUID
-     */
-    id?: string;
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    scim_config?: AccessGoogleApps.ScimConfig;
-  }
-
-  export namespace AccessGoogleApps {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    export interface Config {
-      /**
-       * Your companies TLD
-       */
-      apps_domain?: string;
-
-      /**
-       * Custom claims
-       */
-      claims?: Array<string>;
-
-      /**
-       * Your OAuth Client ID
-       */
-      client_id?: string;
-
-      /**
-       * Your OAuth Client Secret
-       */
-      client_secret?: string;
-
-      /**
-       * The claim name for email in the id_token response.
-       */
-      email_claim_name?: string;
-    }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
-  }
-
-  export interface AccessLinkedin {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    config: AccessLinkedin.Config;
-
-    /**
-     * The name of the identity provider, shown to users on the login page.
-     */
-    name: string;
-
-    /**
-     * The type of identity provider. To determine the value for a specific provider,
-     * refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
-
-    /**
-     * UUID
-     */
-    id?: string;
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    scim_config?: AccessLinkedin.ScimConfig;
-  }
-
-  export namespace AccessLinkedin {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    export interface Config {
-      /**
-       * Your OAuth Client ID
-       */
-      client_id?: string;
-
-      /**
-       * Your OAuth Client Secret
-       */
-      client_secret?: string;
-    }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
-  }
-
-  export interface AccessOidc {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    config: AccessOidc.Config;
-
-    /**
-     * The name of the identity provider, shown to users on the login page.
-     */
-    name: string;
-
-    /**
-     * The type of identity provider. To determine the value for a specific provider,
-     * refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
-
-    /**
-     * UUID
-     */
-    id?: string;
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    scim_config?: AccessOidc.ScimConfig;
-  }
-
-  export namespace AccessOidc {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    export interface Config {
-      /**
-       * The authorization_endpoint URL of your IdP
-       */
-      auth_url?: string;
-
-      /**
-       * The jwks_uri endpoint of your IdP to allow the IdP keys to sign the tokens
-       */
-      certs_url?: string;
-
-      /**
-       * Custom claims
-       */
-      claims?: Array<string>;
-
-      /**
-       * Your OAuth Client ID
-       */
-      client_id?: string;
-
-      /**
-       * Your OAuth Client Secret
-       */
-      client_secret?: string;
-
-      /**
-       * The claim name for email in the id_token response.
-       */
-      email_claim_name?: string;
-
-      /**
-       * OAuth scopes
-       */
-      scopes?: Array<string>;
-
-      /**
-       * The token_endpoint URL of your IdP
-       */
-      token_url?: string;
-    }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
-  }
-
-  export interface AccessOkta {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    config: AccessOkta.Config;
-
-    /**
-     * The name of the identity provider, shown to users on the login page.
-     */
-    name: string;
-
-    /**
-     * The type of identity provider. To determine the value for a specific provider,
-     * refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
-
-    /**
-     * UUID
-     */
-    id?: string;
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    scim_config?: AccessOkta.ScimConfig;
-  }
-
-  export namespace AccessOkta {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    export interface Config {
-      /**
-       * Your okta authorization server id
-       */
-      authorization_server_id?: string;
-
-      /**
-       * Custom claims
-       */
-      claims?: Array<string>;
-
-      /**
-       * Your OAuth Client ID
-       */
-      client_id?: string;
-
-      /**
-       * Your OAuth Client Secret
-       */
-      client_secret?: string;
-
-      /**
-       * The claim name for email in the id_token response.
-       */
-      email_claim_name?: string;
-
-      /**
-       * Your okta account url
-       */
-      okta_account?: string;
-    }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
-  }
-
-  export interface AccessOnelogin {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    config: AccessOnelogin.Config;
-
-    /**
-     * The name of the identity provider, shown to users on the login page.
-     */
-    name: string;
-
-    /**
-     * The type of identity provider. To determine the value for a specific provider,
-     * refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
-
-    /**
-     * UUID
-     */
-    id?: string;
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    scim_config?: AccessOnelogin.ScimConfig;
-  }
-
-  export namespace AccessOnelogin {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    export interface Config {
-      /**
-       * Custom claims
-       */
-      claims?: Array<string>;
-
-      /**
-       * Your OAuth Client ID
-       */
-      client_id?: string;
-
-      /**
-       * Your OAuth Client Secret
-       */
-      client_secret?: string;
-
-      /**
-       * The claim name for email in the id_token response.
-       */
-      email_claim_name?: string;
-
-      /**
-       * Your OneLogin account url
-       */
-      onelogin_account?: string;
-    }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
-  }
-
-  export interface AccessPingone {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    config: AccessPingone.Config;
-
-    /**
-     * The name of the identity provider, shown to users on the login page.
-     */
-    name: string;
-
-    /**
-     * The type of identity provider. To determine the value for a specific provider,
-     * refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
-
-    /**
-     * UUID
-     */
-    id?: string;
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    scim_config?: AccessPingone.ScimConfig;
-  }
-
-  export namespace AccessPingone {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    export interface Config {
-      /**
-       * Custom claims
-       */
-      claims?: Array<string>;
-
-      /**
-       * Your OAuth Client ID
-       */
-      client_id?: string;
-
-      /**
-       * Your OAuth Client Secret
-       */
-      client_secret?: string;
-
-      /**
-       * The claim name for email in the id_token response.
-       */
-      email_claim_name?: string;
-
-      /**
-       * Your PingOne environment identifier
-       */
-      ping_env_id?: string;
-    }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
-  }
-
-  export interface AccessSaml {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    config: AccessSaml.Config;
-
-    /**
-     * The name of the identity provider, shown to users on the login page.
-     */
-    name: string;
-
-    /**
-     * The type of identity provider. To determine the value for a specific provider,
-     * refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
-
-    /**
-     * UUID
-     */
-    id?: string;
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    scim_config?: AccessSaml.ScimConfig;
-  }
-
-  export namespace AccessSaml {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    export interface Config {
-      /**
-       * A list of SAML attribute names that will be added to your signed JWT token and
-       * can be used in SAML policy rules.
-       */
-      attributes?: Array<string>;
-
-      /**
-       * The attribute name for email in the SAML response.
-       */
-      email_attribute_name?: string;
-
-      /**
-       * Add a list of attribute names that will be returned in the response header from
-       * the Access callback.
-       */
-      header_attributes?: Array<Config.HeaderAttribute>;
-
-      /**
-       * X509 certificate to verify the signature in the SAML authentication response
-       */
-      idp_public_certs?: Array<string>;
-
-      /**
-       * IdP Entity ID or Issuer URL
-       */
-      issuer_url?: string;
-
-      /**
-       * Sign the SAML authentication request with Access credentials. To verify the
-       * signature, use the public key from the Access certs endpoints.
-       */
-      sign_request?: boolean;
-
-      /**
-       * URL to send the SAML authentication requests to
-       */
-      sso_target_url?: string;
-    }
-
-    export namespace Config {
-      export interface HeaderAttribute {
-        /**
-         * attribute name from the IDP
-         */
-        attribute_name?: string;
-
-        /**
-         * header that will be added on the request to the origin
-         */
-        header_name?: string;
-      }
-    }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
-  }
-
-  export interface AccessYandex {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    config: AccessYandex.Config;
-
-    /**
-     * The name of the identity provider, shown to users on the login page.
-     */
-    name: string;
-
-    /**
-     * The type of identity provider. To determine the value for a specific provider,
-     * refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
-
-    /**
-     * UUID
-     */
-    id?: string;
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    scim_config?: AccessYandex.ScimConfig;
-  }
-
-  export namespace AccessYandex {
-    /**
-     * The configuration parameters for the identity provider. To view the required
-     * parameters for a specific provider, refer to our
-     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
-     */
-    export interface Config {
-      /**
-       * Your OAuth Client ID
-       */
-      client_id?: string;
-
-      /**
-       * Your OAuth Client Secret
-       */
-      client_secret?: string;
-    }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
-  }
 }
 
 export type IdentityProviderGetResponse =
@@ -6556,30 +4917,30 @@ export namespace IdentityProviderGetResponse {
   }
 }
 
-export type IdentityProviderUpdateParams =
-  | IdentityProviderUpdateParams.AccessAzureAd
-  | IdentityProviderUpdateParams.AccessCentrify
-  | IdentityProviderUpdateParams.AccessFacebook
-  | IdentityProviderUpdateParams.AccessGitHub
-  | IdentityProviderUpdateParams.AccessGoogle
-  | IdentityProviderUpdateParams.AccessGoogleApps
-  | IdentityProviderUpdateParams.AccessLinkedin
-  | IdentityProviderUpdateParams.AccessOidc
-  | IdentityProviderUpdateParams.AccessOkta
-  | IdentityProviderUpdateParams.AccessOnelogin
-  | IdentityProviderUpdateParams.AccessPingone
-  | IdentityProviderUpdateParams.AccessSaml
-  | IdentityProviderUpdateParams.AccessYandex
-  | IdentityProviderUpdateParams.AccessOnetimepin;
+export type IdentityProviderReplaceResponse =
+  | IdentityProviderReplaceResponse.AccessAzureAd
+  | IdentityProviderReplaceResponse.AccessCentrify
+  | IdentityProviderReplaceResponse.AccessFacebook
+  | IdentityProviderReplaceResponse.AccessGitHub
+  | IdentityProviderReplaceResponse.AccessGoogle
+  | IdentityProviderReplaceResponse.AccessGoogleApps
+  | IdentityProviderReplaceResponse.AccessLinkedin
+  | IdentityProviderReplaceResponse.AccessOidc
+  | IdentityProviderReplaceResponse.AccessOkta
+  | IdentityProviderReplaceResponse.AccessOnelogin
+  | IdentityProviderReplaceResponse.AccessPingone
+  | IdentityProviderReplaceResponse.AccessSaml
+  | IdentityProviderReplaceResponse.AccessYandex
+  | IdentityProviderReplaceResponse.AccessOnetimepin;
 
-export namespace IdentityProviderUpdateParams {
+export namespace IdentityProviderReplaceResponse {
   export interface AccessAzureAd {
     /**
      * The configuration parameters for the identity provider. To view the required
      * parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderUpdateParams.AccessAzureAd.Config;
+    config: AccessAzureAd.Config;
 
     /**
      * The name of the identity provider, shown to users on the login page.
@@ -6608,10 +4969,15 @@ export namespace IdentityProviderUpdateParams {
       | 'yandex';
 
     /**
+     * UUID
+     */
+    id?: string;
+
+    /**
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderUpdateParams.AccessAzureAd.ScimConfig;
+    scim_config?: AccessAzureAd.ScimConfig;
   }
 
   export namespace AccessAzureAd {
@@ -6702,7 +5068,7 @@ export namespace IdentityProviderUpdateParams {
      * parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderUpdateParams.AccessCentrify.Config;
+    config: AccessCentrify.Config;
 
     /**
      * The name of the identity provider, shown to users on the login page.
@@ -6731,10 +5097,15 @@ export namespace IdentityProviderUpdateParams {
       | 'yandex';
 
     /**
+     * UUID
+     */
+    id?: string;
+
+    /**
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderUpdateParams.AccessCentrify.ScimConfig;
+    scim_config?: AccessCentrify.ScimConfig;
   }
 
   export namespace AccessCentrify {
@@ -6820,7 +5191,7 @@ export namespace IdentityProviderUpdateParams {
      * parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderUpdateParams.AccessFacebook.Config;
+    config: AccessFacebook.Config;
 
     /**
      * The name of the identity provider, shown to users on the login page.
@@ -6849,10 +5220,15 @@ export namespace IdentityProviderUpdateParams {
       | 'yandex';
 
     /**
+     * UUID
+     */
+    id?: string;
+
+    /**
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderUpdateParams.AccessFacebook.ScimConfig;
+    scim_config?: AccessFacebook.ScimConfig;
   }
 
   export namespace AccessFacebook {
@@ -6918,7 +5294,7 @@ export namespace IdentityProviderUpdateParams {
      * parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderUpdateParams.AccessGitHub.Config;
+    config: AccessGitHub.Config;
 
     /**
      * The name of the identity provider, shown to users on the login page.
@@ -6947,10 +5323,15 @@ export namespace IdentityProviderUpdateParams {
       | 'yandex';
 
     /**
+     * UUID
+     */
+    id?: string;
+
+    /**
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderUpdateParams.AccessGitHub.ScimConfig;
+    scim_config?: AccessGitHub.ScimConfig;
   }
 
   export namespace AccessGitHub {
@@ -7016,7 +5397,7 @@ export namespace IdentityProviderUpdateParams {
      * parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderUpdateParams.AccessGoogle.Config;
+    config: AccessGoogle.Config;
 
     /**
      * The name of the identity provider, shown to users on the login page.
@@ -7045,10 +5426,15 @@ export namespace IdentityProviderUpdateParams {
       | 'yandex';
 
     /**
+     * UUID
+     */
+    id?: string;
+
+    /**
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderUpdateParams.AccessGoogle.ScimConfig;
+    scim_config?: AccessGoogle.ScimConfig;
   }
 
   export namespace AccessGoogle {
@@ -7124,7 +5510,7 @@ export namespace IdentityProviderUpdateParams {
      * parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderUpdateParams.AccessGoogleApps.Config;
+    config: AccessGoogleApps.Config;
 
     /**
      * The name of the identity provider, shown to users on the login page.
@@ -7153,10 +5539,15 @@ export namespace IdentityProviderUpdateParams {
       | 'yandex';
 
     /**
+     * UUID
+     */
+    id?: string;
+
+    /**
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderUpdateParams.AccessGoogleApps.ScimConfig;
+    scim_config?: AccessGoogleApps.ScimConfig;
   }
 
   export namespace AccessGoogleApps {
@@ -7237,7 +5628,7 @@ export namespace IdentityProviderUpdateParams {
      * parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderUpdateParams.AccessLinkedin.Config;
+    config: AccessLinkedin.Config;
 
     /**
      * The name of the identity provider, shown to users on the login page.
@@ -7266,10 +5657,15 @@ export namespace IdentityProviderUpdateParams {
       | 'yandex';
 
     /**
+     * UUID
+     */
+    id?: string;
+
+    /**
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderUpdateParams.AccessLinkedin.ScimConfig;
+    scim_config?: AccessLinkedin.ScimConfig;
   }
 
   export namespace AccessLinkedin {
@@ -7335,7 +5731,7 @@ export namespace IdentityProviderUpdateParams {
      * parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderUpdateParams.AccessOidc.Config;
+    config: AccessOidc.Config;
 
     /**
      * The name of the identity provider, shown to users on the login page.
@@ -7364,10 +5760,15 @@ export namespace IdentityProviderUpdateParams {
       | 'yandex';
 
     /**
+     * UUID
+     */
+    id?: string;
+
+    /**
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderUpdateParams.AccessOidc.ScimConfig;
+    scim_config?: AccessOidc.ScimConfig;
   }
 
   export namespace AccessOidc {
@@ -7463,7 +5864,7 @@ export namespace IdentityProviderUpdateParams {
      * parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderUpdateParams.AccessOkta.Config;
+    config: AccessOkta.Config;
 
     /**
      * The name of the identity provider, shown to users on the login page.
@@ -7492,10 +5893,15 @@ export namespace IdentityProviderUpdateParams {
       | 'yandex';
 
     /**
+     * UUID
+     */
+    id?: string;
+
+    /**
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderUpdateParams.AccessOkta.ScimConfig;
+    scim_config?: AccessOkta.ScimConfig;
   }
 
   export namespace AccessOkta {
@@ -7581,7 +5987,7 @@ export namespace IdentityProviderUpdateParams {
      * parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderUpdateParams.AccessOnelogin.Config;
+    config: AccessOnelogin.Config;
 
     /**
      * The name of the identity provider, shown to users on the login page.
@@ -7610,10 +6016,15 @@ export namespace IdentityProviderUpdateParams {
       | 'yandex';
 
     /**
+     * UUID
+     */
+    id?: string;
+
+    /**
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderUpdateParams.AccessOnelogin.ScimConfig;
+    scim_config?: AccessOnelogin.ScimConfig;
   }
 
   export namespace AccessOnelogin {
@@ -7694,7 +6105,7 @@ export namespace IdentityProviderUpdateParams {
      * parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderUpdateParams.AccessPingone.Config;
+    config: AccessPingone.Config;
 
     /**
      * The name of the identity provider, shown to users on the login page.
@@ -7723,10 +6134,15 @@ export namespace IdentityProviderUpdateParams {
       | 'yandex';
 
     /**
+     * UUID
+     */
+    id?: string;
+
+    /**
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderUpdateParams.AccessPingone.ScimConfig;
+    scim_config?: AccessPingone.ScimConfig;
   }
 
   export namespace AccessPingone {
@@ -7807,7 +6223,7 @@ export namespace IdentityProviderUpdateParams {
      * parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderUpdateParams.AccessSaml.Config;
+    config: AccessSaml.Config;
 
     /**
      * The name of the identity provider, shown to users on the login page.
@@ -7836,10 +6252,15 @@ export namespace IdentityProviderUpdateParams {
       | 'yandex';
 
     /**
+     * UUID
+     */
+    id?: string;
+
+    /**
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderUpdateParams.AccessSaml.ScimConfig;
+    scim_config?: AccessSaml.ScimConfig;
   }
 
   export namespace AccessSaml {
@@ -7947,7 +6368,7 @@ export namespace IdentityProviderUpdateParams {
      * parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderUpdateParams.AccessYandex.Config;
+    config: AccessYandex.Config;
 
     /**
      * The name of the identity provider, shown to users on the login page.
@@ -7976,10 +6397,15 @@ export namespace IdentityProviderUpdateParams {
       | 'yandex';
 
     /**
+     * UUID
+     */
+    id?: string;
+
+    /**
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderUpdateParams.AccessYandex.ScimConfig;
+    scim_config?: AccessYandex.ScimConfig;
   }
 
   export namespace AccessYandex {
@@ -8074,10 +6500,15 @@ export namespace IdentityProviderUpdateParams {
       | 'yandex';
 
     /**
+     * UUID
+     */
+    id?: string;
+
+    /**
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderUpdateParams.AccessOnetimepin.ScimConfig;
+    scim_config?: AccessOnetimepin.ScimConfig;
   }
 
   export namespace AccessOnetimepin {
@@ -8121,30 +6552,30 @@ export namespace IdentityProviderUpdateParams {
   }
 }
 
-export type IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams =
-  | IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams.AccessAzureAd
-  | IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams.AccessCentrify
-  | IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams.AccessFacebook
-  | IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams.AccessGitHub
-  | IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams.AccessGoogle
-  | IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams.AccessGoogleApps
-  | IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams.AccessLinkedin
-  | IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams.AccessOidc
-  | IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams.AccessOkta
-  | IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams.AccessOnelogin
-  | IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams.AccessPingone
-  | IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams.AccessSaml
-  | IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams.AccessYandex
-  | IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams.AccessOnetimepin;
+export type IdentityProviderCreateParams =
+  | IdentityProviderCreateParams.AccessAzureAd
+  | IdentityProviderCreateParams.AccessCentrify
+  | IdentityProviderCreateParams.AccessFacebook
+  | IdentityProviderCreateParams.AccessGitHub
+  | IdentityProviderCreateParams.AccessGoogle
+  | IdentityProviderCreateParams.AccessGoogleApps
+  | IdentityProviderCreateParams.AccessLinkedin
+  | IdentityProviderCreateParams.AccessOidc
+  | IdentityProviderCreateParams.AccessOkta
+  | IdentityProviderCreateParams.AccessOnelogin
+  | IdentityProviderCreateParams.AccessPingone
+  | IdentityProviderCreateParams.AccessSaml
+  | IdentityProviderCreateParams.AccessYandex
+  | IdentityProviderCreateParams.AccessOnetimepin;
 
-export namespace IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams {
+export namespace IdentityProviderCreateParams {
   export interface AccessAzureAd {
     /**
      * The configuration parameters for the identity provider. To view the required
      * parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams.AccessAzureAd.Config;
+    config: IdentityProviderCreateParams.AccessAzureAd.Config;
 
     /**
      * The name of the identity provider, shown to users on the login page.
@@ -8176,7 +6607,7 @@ export namespace IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProvi
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams.AccessAzureAd.ScimConfig;
+    scim_config?: IdentityProviderCreateParams.AccessAzureAd.ScimConfig;
   }
 
   export namespace AccessAzureAd {
@@ -8267,7 +6698,7 @@ export namespace IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProvi
      * parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams.AccessCentrify.Config;
+    config: IdentityProviderCreateParams.AccessCentrify.Config;
 
     /**
      * The name of the identity provider, shown to users on the login page.
@@ -8299,7 +6730,7 @@ export namespace IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProvi
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams.AccessCentrify.ScimConfig;
+    scim_config?: IdentityProviderCreateParams.AccessCentrify.ScimConfig;
   }
 
   export namespace AccessCentrify {
@@ -8385,7 +6816,7 @@ export namespace IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProvi
      * parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams.AccessFacebook.Config;
+    config: IdentityProviderCreateParams.AccessFacebook.Config;
 
     /**
      * The name of the identity provider, shown to users on the login page.
@@ -8417,7 +6848,7 @@ export namespace IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProvi
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams.AccessFacebook.ScimConfig;
+    scim_config?: IdentityProviderCreateParams.AccessFacebook.ScimConfig;
   }
 
   export namespace AccessFacebook {
@@ -8483,7 +6914,7 @@ export namespace IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProvi
      * parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams.AccessGitHub.Config;
+    config: IdentityProviderCreateParams.AccessGitHub.Config;
 
     /**
      * The name of the identity provider, shown to users on the login page.
@@ -8515,7 +6946,7 @@ export namespace IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProvi
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams.AccessGitHub.ScimConfig;
+    scim_config?: IdentityProviderCreateParams.AccessGitHub.ScimConfig;
   }
 
   export namespace AccessGitHub {
@@ -8581,7 +7012,7 @@ export namespace IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProvi
      * parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams.AccessGoogle.Config;
+    config: IdentityProviderCreateParams.AccessGoogle.Config;
 
     /**
      * The name of the identity provider, shown to users on the login page.
@@ -8613,7 +7044,7 @@ export namespace IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProvi
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams.AccessGoogle.ScimConfig;
+    scim_config?: IdentityProviderCreateParams.AccessGoogle.ScimConfig;
   }
 
   export namespace AccessGoogle {
@@ -8689,7 +7120,7 @@ export namespace IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProvi
      * parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams.AccessGoogleApps.Config;
+    config: IdentityProviderCreateParams.AccessGoogleApps.Config;
 
     /**
      * The name of the identity provider, shown to users on the login page.
@@ -8721,7 +7152,7 @@ export namespace IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProvi
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams.AccessGoogleApps.ScimConfig;
+    scim_config?: IdentityProviderCreateParams.AccessGoogleApps.ScimConfig;
   }
 
   export namespace AccessGoogleApps {
@@ -8802,7 +7233,7 @@ export namespace IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProvi
      * parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams.AccessLinkedin.Config;
+    config: IdentityProviderCreateParams.AccessLinkedin.Config;
 
     /**
      * The name of the identity provider, shown to users on the login page.
@@ -8834,7 +7265,7 @@ export namespace IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProvi
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams.AccessLinkedin.ScimConfig;
+    scim_config?: IdentityProviderCreateParams.AccessLinkedin.ScimConfig;
   }
 
   export namespace AccessLinkedin {
@@ -8900,7 +7331,7 @@ export namespace IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProvi
      * parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams.AccessOidc.Config;
+    config: IdentityProviderCreateParams.AccessOidc.Config;
 
     /**
      * The name of the identity provider, shown to users on the login page.
@@ -8932,7 +7363,7 @@ export namespace IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProvi
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams.AccessOidc.ScimConfig;
+    scim_config?: IdentityProviderCreateParams.AccessOidc.ScimConfig;
   }
 
   export namespace AccessOidc {
@@ -9028,7 +7459,7 @@ export namespace IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProvi
      * parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams.AccessOkta.Config;
+    config: IdentityProviderCreateParams.AccessOkta.Config;
 
     /**
      * The name of the identity provider, shown to users on the login page.
@@ -9060,7 +7491,7 @@ export namespace IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProvi
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams.AccessOkta.ScimConfig;
+    scim_config?: IdentityProviderCreateParams.AccessOkta.ScimConfig;
   }
 
   export namespace AccessOkta {
@@ -9146,7 +7577,7 @@ export namespace IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProvi
      * parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams.AccessOnelogin.Config;
+    config: IdentityProviderCreateParams.AccessOnelogin.Config;
 
     /**
      * The name of the identity provider, shown to users on the login page.
@@ -9178,7 +7609,7 @@ export namespace IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProvi
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams.AccessOnelogin.ScimConfig;
+    scim_config?: IdentityProviderCreateParams.AccessOnelogin.ScimConfig;
   }
 
   export namespace AccessOnelogin {
@@ -9259,7 +7690,7 @@ export namespace IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProvi
      * parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams.AccessPingone.Config;
+    config: IdentityProviderCreateParams.AccessPingone.Config;
 
     /**
      * The name of the identity provider, shown to users on the login page.
@@ -9291,7 +7722,7 @@ export namespace IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProvi
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams.AccessPingone.ScimConfig;
+    scim_config?: IdentityProviderCreateParams.AccessPingone.ScimConfig;
   }
 
   export namespace AccessPingone {
@@ -9372,7 +7803,7 @@ export namespace IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProvi
      * parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams.AccessSaml.Config;
+    config: IdentityProviderCreateParams.AccessSaml.Config;
 
     /**
      * The name of the identity provider, shown to users on the login page.
@@ -9404,7 +7835,7 @@ export namespace IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProvi
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams.AccessSaml.ScimConfig;
+    scim_config?: IdentityProviderCreateParams.AccessSaml.ScimConfig;
   }
 
   export namespace AccessSaml {
@@ -9512,7 +7943,7 @@ export namespace IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProvi
      * parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams.AccessYandex.Config;
+    config: IdentityProviderCreateParams.AccessYandex.Config;
 
     /**
      * The name of the identity provider, shown to users on the login page.
@@ -9544,7 +7975,7 @@ export namespace IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProvi
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams.AccessYandex.ScimConfig;
+    scim_config?: IdentityProviderCreateParams.AccessYandex.ScimConfig;
   }
 
   export namespace AccessYandex {
@@ -9642,7 +8073,1572 @@ export namespace IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProvi
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams.AccessOnetimepin.ScimConfig;
+    scim_config?: IdentityProviderCreateParams.AccessOnetimepin.ScimConfig;
+  }
+
+  export namespace AccessOnetimepin {
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    export interface ScimConfig {
+      /**
+       * A flag to enable or disable SCIM for the identity provider.
+       */
+      enabled?: boolean;
+
+      /**
+       * A flag to revoke a user's session in Access and force a reauthentication on the
+       * user's Gateway session when they have been added or removed from a group in the
+       * Identity Provider.
+       */
+      group_member_deprovision?: boolean;
+
+      /**
+       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
+       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
+       * enabled.
+       */
+      seat_deprovision?: boolean;
+
+      /**
+       * A read-only token generated when the SCIM integration is enabled for the first
+       * time. It is redacted on subsequent requests. If you lose this you will need to
+       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+       */
+      secret?: string;
+
+      /**
+       * A flag to enable revoking a user's session in Access and Gateway when they have
+       * been deprovisioned in the Identity Provider.
+       */
+      user_deprovision?: boolean;
+    }
+  }
+}
+
+export type IdentityProviderReplaceParams =
+  | IdentityProviderReplaceParams.AccessAzureAd
+  | IdentityProviderReplaceParams.AccessCentrify
+  | IdentityProviderReplaceParams.AccessFacebook
+  | IdentityProviderReplaceParams.AccessGitHub
+  | IdentityProviderReplaceParams.AccessGoogle
+  | IdentityProviderReplaceParams.AccessGoogleApps
+  | IdentityProviderReplaceParams.AccessLinkedin
+  | IdentityProviderReplaceParams.AccessOidc
+  | IdentityProviderReplaceParams.AccessOkta
+  | IdentityProviderReplaceParams.AccessOnelogin
+  | IdentityProviderReplaceParams.AccessPingone
+  | IdentityProviderReplaceParams.AccessSaml
+  | IdentityProviderReplaceParams.AccessYandex
+  | IdentityProviderReplaceParams.AccessOnetimepin;
+
+export namespace IdentityProviderReplaceParams {
+  export interface AccessAzureAd {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    config: IdentityProviderReplaceParams.AccessAzureAd.Config;
+
+    /**
+     * The name of the identity provider, shown to users on the login page.
+     */
+    name: string;
+
+    /**
+     * The type of identity provider. To determine the value for a specific provider,
+     * refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    type:
+      | 'onetimepin'
+      | 'azureAD'
+      | 'saml'
+      | 'centrify'
+      | 'facebook'
+      | 'github'
+      | 'google-apps'
+      | 'google'
+      | 'linkedin'
+      | 'oidc'
+      | 'okta'
+      | 'onelogin'
+      | 'pingone'
+      | 'yandex';
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    scim_config?: IdentityProviderReplaceParams.AccessAzureAd.ScimConfig;
+  }
+
+  export namespace AccessAzureAd {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    export interface Config {
+      /**
+       * Custom claims
+       */
+      claims?: Array<string>;
+
+      /**
+       * Your OAuth Client ID
+       */
+      client_id?: string;
+
+      /**
+       * Your OAuth Client Secret
+       */
+      client_secret?: string;
+
+      /**
+       * Should Cloudflare try to load authentication contexts from your account
+       */
+      conditional_access_enabled?: boolean;
+
+      /**
+       * Your Azure directory uuid
+       */
+      directory_id?: string;
+
+      /**
+       * The claim name for email in the id_token response.
+       */
+      email_claim_name?: string;
+
+      /**
+       * Should Cloudflare try to load groups from your account
+       */
+      support_groups?: boolean;
+    }
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    export interface ScimConfig {
+      /**
+       * A flag to enable or disable SCIM for the identity provider.
+       */
+      enabled?: boolean;
+
+      /**
+       * A flag to revoke a user's session in Access and force a reauthentication on the
+       * user's Gateway session when they have been added or removed from a group in the
+       * Identity Provider.
+       */
+      group_member_deprovision?: boolean;
+
+      /**
+       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
+       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
+       * enabled.
+       */
+      seat_deprovision?: boolean;
+
+      /**
+       * A read-only token generated when the SCIM integration is enabled for the first
+       * time. It is redacted on subsequent requests. If you lose this you will need to
+       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+       */
+      secret?: string;
+
+      /**
+       * A flag to enable revoking a user's session in Access and Gateway when they have
+       * been deprovisioned in the Identity Provider.
+       */
+      user_deprovision?: boolean;
+    }
+  }
+
+  export interface AccessCentrify {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    config: IdentityProviderReplaceParams.AccessCentrify.Config;
+
+    /**
+     * The name of the identity provider, shown to users on the login page.
+     */
+    name: string;
+
+    /**
+     * The type of identity provider. To determine the value for a specific provider,
+     * refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    type:
+      | 'onetimepin'
+      | 'azureAD'
+      | 'saml'
+      | 'centrify'
+      | 'facebook'
+      | 'github'
+      | 'google-apps'
+      | 'google'
+      | 'linkedin'
+      | 'oidc'
+      | 'okta'
+      | 'onelogin'
+      | 'pingone'
+      | 'yandex';
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    scim_config?: IdentityProviderReplaceParams.AccessCentrify.ScimConfig;
+  }
+
+  export namespace AccessCentrify {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    export interface Config {
+      /**
+       * Your centrify account url
+       */
+      centrify_account?: string;
+
+      /**
+       * Your centrify app id
+       */
+      centrify_app_id?: string;
+
+      /**
+       * Custom claims
+       */
+      claims?: Array<string>;
+
+      /**
+       * Your OAuth Client ID
+       */
+      client_id?: string;
+
+      /**
+       * Your OAuth Client Secret
+       */
+      client_secret?: string;
+
+      /**
+       * The claim name for email in the id_token response.
+       */
+      email_claim_name?: string;
+    }
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    export interface ScimConfig {
+      /**
+       * A flag to enable or disable SCIM for the identity provider.
+       */
+      enabled?: boolean;
+
+      /**
+       * A flag to revoke a user's session in Access and force a reauthentication on the
+       * user's Gateway session when they have been added or removed from a group in the
+       * Identity Provider.
+       */
+      group_member_deprovision?: boolean;
+
+      /**
+       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
+       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
+       * enabled.
+       */
+      seat_deprovision?: boolean;
+
+      /**
+       * A read-only token generated when the SCIM integration is enabled for the first
+       * time. It is redacted on subsequent requests. If you lose this you will need to
+       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+       */
+      secret?: string;
+
+      /**
+       * A flag to enable revoking a user's session in Access and Gateway when they have
+       * been deprovisioned in the Identity Provider.
+       */
+      user_deprovision?: boolean;
+    }
+  }
+
+  export interface AccessFacebook {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    config: IdentityProviderReplaceParams.AccessFacebook.Config;
+
+    /**
+     * The name of the identity provider, shown to users on the login page.
+     */
+    name: string;
+
+    /**
+     * The type of identity provider. To determine the value for a specific provider,
+     * refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    type:
+      | 'onetimepin'
+      | 'azureAD'
+      | 'saml'
+      | 'centrify'
+      | 'facebook'
+      | 'github'
+      | 'google-apps'
+      | 'google'
+      | 'linkedin'
+      | 'oidc'
+      | 'okta'
+      | 'onelogin'
+      | 'pingone'
+      | 'yandex';
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    scim_config?: IdentityProviderReplaceParams.AccessFacebook.ScimConfig;
+  }
+
+  export namespace AccessFacebook {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    export interface Config {
+      /**
+       * Your OAuth Client ID
+       */
+      client_id?: string;
+
+      /**
+       * Your OAuth Client Secret
+       */
+      client_secret?: string;
+    }
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    export interface ScimConfig {
+      /**
+       * A flag to enable or disable SCIM for the identity provider.
+       */
+      enabled?: boolean;
+
+      /**
+       * A flag to revoke a user's session in Access and force a reauthentication on the
+       * user's Gateway session when they have been added or removed from a group in the
+       * Identity Provider.
+       */
+      group_member_deprovision?: boolean;
+
+      /**
+       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
+       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
+       * enabled.
+       */
+      seat_deprovision?: boolean;
+
+      /**
+       * A read-only token generated when the SCIM integration is enabled for the first
+       * time. It is redacted on subsequent requests. If you lose this you will need to
+       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+       */
+      secret?: string;
+
+      /**
+       * A flag to enable revoking a user's session in Access and Gateway when they have
+       * been deprovisioned in the Identity Provider.
+       */
+      user_deprovision?: boolean;
+    }
+  }
+
+  export interface AccessGitHub {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    config: IdentityProviderReplaceParams.AccessGitHub.Config;
+
+    /**
+     * The name of the identity provider, shown to users on the login page.
+     */
+    name: string;
+
+    /**
+     * The type of identity provider. To determine the value for a specific provider,
+     * refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    type:
+      | 'onetimepin'
+      | 'azureAD'
+      | 'saml'
+      | 'centrify'
+      | 'facebook'
+      | 'github'
+      | 'google-apps'
+      | 'google'
+      | 'linkedin'
+      | 'oidc'
+      | 'okta'
+      | 'onelogin'
+      | 'pingone'
+      | 'yandex';
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    scim_config?: IdentityProviderReplaceParams.AccessGitHub.ScimConfig;
+  }
+
+  export namespace AccessGitHub {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    export interface Config {
+      /**
+       * Your OAuth Client ID
+       */
+      client_id?: string;
+
+      /**
+       * Your OAuth Client Secret
+       */
+      client_secret?: string;
+    }
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    export interface ScimConfig {
+      /**
+       * A flag to enable or disable SCIM for the identity provider.
+       */
+      enabled?: boolean;
+
+      /**
+       * A flag to revoke a user's session in Access and force a reauthentication on the
+       * user's Gateway session when they have been added or removed from a group in the
+       * Identity Provider.
+       */
+      group_member_deprovision?: boolean;
+
+      /**
+       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
+       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
+       * enabled.
+       */
+      seat_deprovision?: boolean;
+
+      /**
+       * A read-only token generated when the SCIM integration is enabled for the first
+       * time. It is redacted on subsequent requests. If you lose this you will need to
+       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+       */
+      secret?: string;
+
+      /**
+       * A flag to enable revoking a user's session in Access and Gateway when they have
+       * been deprovisioned in the Identity Provider.
+       */
+      user_deprovision?: boolean;
+    }
+  }
+
+  export interface AccessGoogle {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    config: IdentityProviderReplaceParams.AccessGoogle.Config;
+
+    /**
+     * The name of the identity provider, shown to users on the login page.
+     */
+    name: string;
+
+    /**
+     * The type of identity provider. To determine the value for a specific provider,
+     * refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    type:
+      | 'onetimepin'
+      | 'azureAD'
+      | 'saml'
+      | 'centrify'
+      | 'facebook'
+      | 'github'
+      | 'google-apps'
+      | 'google'
+      | 'linkedin'
+      | 'oidc'
+      | 'okta'
+      | 'onelogin'
+      | 'pingone'
+      | 'yandex';
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    scim_config?: IdentityProviderReplaceParams.AccessGoogle.ScimConfig;
+  }
+
+  export namespace AccessGoogle {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    export interface Config {
+      /**
+       * Custom claims
+       */
+      claims?: Array<string>;
+
+      /**
+       * Your OAuth Client ID
+       */
+      client_id?: string;
+
+      /**
+       * Your OAuth Client Secret
+       */
+      client_secret?: string;
+
+      /**
+       * The claim name for email in the id_token response.
+       */
+      email_claim_name?: string;
+    }
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    export interface ScimConfig {
+      /**
+       * A flag to enable or disable SCIM for the identity provider.
+       */
+      enabled?: boolean;
+
+      /**
+       * A flag to revoke a user's session in Access and force a reauthentication on the
+       * user's Gateway session when they have been added or removed from a group in the
+       * Identity Provider.
+       */
+      group_member_deprovision?: boolean;
+
+      /**
+       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
+       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
+       * enabled.
+       */
+      seat_deprovision?: boolean;
+
+      /**
+       * A read-only token generated when the SCIM integration is enabled for the first
+       * time. It is redacted on subsequent requests. If you lose this you will need to
+       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+       */
+      secret?: string;
+
+      /**
+       * A flag to enable revoking a user's session in Access and Gateway when they have
+       * been deprovisioned in the Identity Provider.
+       */
+      user_deprovision?: boolean;
+    }
+  }
+
+  export interface AccessGoogleApps {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    config: IdentityProviderReplaceParams.AccessGoogleApps.Config;
+
+    /**
+     * The name of the identity provider, shown to users on the login page.
+     */
+    name: string;
+
+    /**
+     * The type of identity provider. To determine the value for a specific provider,
+     * refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    type:
+      | 'onetimepin'
+      | 'azureAD'
+      | 'saml'
+      | 'centrify'
+      | 'facebook'
+      | 'github'
+      | 'google-apps'
+      | 'google'
+      | 'linkedin'
+      | 'oidc'
+      | 'okta'
+      | 'onelogin'
+      | 'pingone'
+      | 'yandex';
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    scim_config?: IdentityProviderReplaceParams.AccessGoogleApps.ScimConfig;
+  }
+
+  export namespace AccessGoogleApps {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    export interface Config {
+      /**
+       * Your companies TLD
+       */
+      apps_domain?: string;
+
+      /**
+       * Custom claims
+       */
+      claims?: Array<string>;
+
+      /**
+       * Your OAuth Client ID
+       */
+      client_id?: string;
+
+      /**
+       * Your OAuth Client Secret
+       */
+      client_secret?: string;
+
+      /**
+       * The claim name for email in the id_token response.
+       */
+      email_claim_name?: string;
+    }
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    export interface ScimConfig {
+      /**
+       * A flag to enable or disable SCIM for the identity provider.
+       */
+      enabled?: boolean;
+
+      /**
+       * A flag to revoke a user's session in Access and force a reauthentication on the
+       * user's Gateway session when they have been added or removed from a group in the
+       * Identity Provider.
+       */
+      group_member_deprovision?: boolean;
+
+      /**
+       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
+       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
+       * enabled.
+       */
+      seat_deprovision?: boolean;
+
+      /**
+       * A read-only token generated when the SCIM integration is enabled for the first
+       * time. It is redacted on subsequent requests. If you lose this you will need to
+       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+       */
+      secret?: string;
+
+      /**
+       * A flag to enable revoking a user's session in Access and Gateway when they have
+       * been deprovisioned in the Identity Provider.
+       */
+      user_deprovision?: boolean;
+    }
+  }
+
+  export interface AccessLinkedin {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    config: IdentityProviderReplaceParams.AccessLinkedin.Config;
+
+    /**
+     * The name of the identity provider, shown to users on the login page.
+     */
+    name: string;
+
+    /**
+     * The type of identity provider. To determine the value for a specific provider,
+     * refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    type:
+      | 'onetimepin'
+      | 'azureAD'
+      | 'saml'
+      | 'centrify'
+      | 'facebook'
+      | 'github'
+      | 'google-apps'
+      | 'google'
+      | 'linkedin'
+      | 'oidc'
+      | 'okta'
+      | 'onelogin'
+      | 'pingone'
+      | 'yandex';
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    scim_config?: IdentityProviderReplaceParams.AccessLinkedin.ScimConfig;
+  }
+
+  export namespace AccessLinkedin {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    export interface Config {
+      /**
+       * Your OAuth Client ID
+       */
+      client_id?: string;
+
+      /**
+       * Your OAuth Client Secret
+       */
+      client_secret?: string;
+    }
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    export interface ScimConfig {
+      /**
+       * A flag to enable or disable SCIM for the identity provider.
+       */
+      enabled?: boolean;
+
+      /**
+       * A flag to revoke a user's session in Access and force a reauthentication on the
+       * user's Gateway session when they have been added or removed from a group in the
+       * Identity Provider.
+       */
+      group_member_deprovision?: boolean;
+
+      /**
+       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
+       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
+       * enabled.
+       */
+      seat_deprovision?: boolean;
+
+      /**
+       * A read-only token generated when the SCIM integration is enabled for the first
+       * time. It is redacted on subsequent requests. If you lose this you will need to
+       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+       */
+      secret?: string;
+
+      /**
+       * A flag to enable revoking a user's session in Access and Gateway when they have
+       * been deprovisioned in the Identity Provider.
+       */
+      user_deprovision?: boolean;
+    }
+  }
+
+  export interface AccessOidc {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    config: IdentityProviderReplaceParams.AccessOidc.Config;
+
+    /**
+     * The name of the identity provider, shown to users on the login page.
+     */
+    name: string;
+
+    /**
+     * The type of identity provider. To determine the value for a specific provider,
+     * refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    type:
+      | 'onetimepin'
+      | 'azureAD'
+      | 'saml'
+      | 'centrify'
+      | 'facebook'
+      | 'github'
+      | 'google-apps'
+      | 'google'
+      | 'linkedin'
+      | 'oidc'
+      | 'okta'
+      | 'onelogin'
+      | 'pingone'
+      | 'yandex';
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    scim_config?: IdentityProviderReplaceParams.AccessOidc.ScimConfig;
+  }
+
+  export namespace AccessOidc {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    export interface Config {
+      /**
+       * The authorization_endpoint URL of your IdP
+       */
+      auth_url?: string;
+
+      /**
+       * The jwks_uri endpoint of your IdP to allow the IdP keys to sign the tokens
+       */
+      certs_url?: string;
+
+      /**
+       * Custom claims
+       */
+      claims?: Array<string>;
+
+      /**
+       * Your OAuth Client ID
+       */
+      client_id?: string;
+
+      /**
+       * Your OAuth Client Secret
+       */
+      client_secret?: string;
+
+      /**
+       * The claim name for email in the id_token response.
+       */
+      email_claim_name?: string;
+
+      /**
+       * OAuth scopes
+       */
+      scopes?: Array<string>;
+
+      /**
+       * The token_endpoint URL of your IdP
+       */
+      token_url?: string;
+    }
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    export interface ScimConfig {
+      /**
+       * A flag to enable or disable SCIM for the identity provider.
+       */
+      enabled?: boolean;
+
+      /**
+       * A flag to revoke a user's session in Access and force a reauthentication on the
+       * user's Gateway session when they have been added or removed from a group in the
+       * Identity Provider.
+       */
+      group_member_deprovision?: boolean;
+
+      /**
+       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
+       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
+       * enabled.
+       */
+      seat_deprovision?: boolean;
+
+      /**
+       * A read-only token generated when the SCIM integration is enabled for the first
+       * time. It is redacted on subsequent requests. If you lose this you will need to
+       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+       */
+      secret?: string;
+
+      /**
+       * A flag to enable revoking a user's session in Access and Gateway when they have
+       * been deprovisioned in the Identity Provider.
+       */
+      user_deprovision?: boolean;
+    }
+  }
+
+  export interface AccessOkta {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    config: IdentityProviderReplaceParams.AccessOkta.Config;
+
+    /**
+     * The name of the identity provider, shown to users on the login page.
+     */
+    name: string;
+
+    /**
+     * The type of identity provider. To determine the value for a specific provider,
+     * refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    type:
+      | 'onetimepin'
+      | 'azureAD'
+      | 'saml'
+      | 'centrify'
+      | 'facebook'
+      | 'github'
+      | 'google-apps'
+      | 'google'
+      | 'linkedin'
+      | 'oidc'
+      | 'okta'
+      | 'onelogin'
+      | 'pingone'
+      | 'yandex';
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    scim_config?: IdentityProviderReplaceParams.AccessOkta.ScimConfig;
+  }
+
+  export namespace AccessOkta {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    export interface Config {
+      /**
+       * Your okta authorization server id
+       */
+      authorization_server_id?: string;
+
+      /**
+       * Custom claims
+       */
+      claims?: Array<string>;
+
+      /**
+       * Your OAuth Client ID
+       */
+      client_id?: string;
+
+      /**
+       * Your OAuth Client Secret
+       */
+      client_secret?: string;
+
+      /**
+       * The claim name for email in the id_token response.
+       */
+      email_claim_name?: string;
+
+      /**
+       * Your okta account url
+       */
+      okta_account?: string;
+    }
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    export interface ScimConfig {
+      /**
+       * A flag to enable or disable SCIM for the identity provider.
+       */
+      enabled?: boolean;
+
+      /**
+       * A flag to revoke a user's session in Access and force a reauthentication on the
+       * user's Gateway session when they have been added or removed from a group in the
+       * Identity Provider.
+       */
+      group_member_deprovision?: boolean;
+
+      /**
+       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
+       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
+       * enabled.
+       */
+      seat_deprovision?: boolean;
+
+      /**
+       * A read-only token generated when the SCIM integration is enabled for the first
+       * time. It is redacted on subsequent requests. If you lose this you will need to
+       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+       */
+      secret?: string;
+
+      /**
+       * A flag to enable revoking a user's session in Access and Gateway when they have
+       * been deprovisioned in the Identity Provider.
+       */
+      user_deprovision?: boolean;
+    }
+  }
+
+  export interface AccessOnelogin {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    config: IdentityProviderReplaceParams.AccessOnelogin.Config;
+
+    /**
+     * The name of the identity provider, shown to users on the login page.
+     */
+    name: string;
+
+    /**
+     * The type of identity provider. To determine the value for a specific provider,
+     * refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    type:
+      | 'onetimepin'
+      | 'azureAD'
+      | 'saml'
+      | 'centrify'
+      | 'facebook'
+      | 'github'
+      | 'google-apps'
+      | 'google'
+      | 'linkedin'
+      | 'oidc'
+      | 'okta'
+      | 'onelogin'
+      | 'pingone'
+      | 'yandex';
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    scim_config?: IdentityProviderReplaceParams.AccessOnelogin.ScimConfig;
+  }
+
+  export namespace AccessOnelogin {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    export interface Config {
+      /**
+       * Custom claims
+       */
+      claims?: Array<string>;
+
+      /**
+       * Your OAuth Client ID
+       */
+      client_id?: string;
+
+      /**
+       * Your OAuth Client Secret
+       */
+      client_secret?: string;
+
+      /**
+       * The claim name for email in the id_token response.
+       */
+      email_claim_name?: string;
+
+      /**
+       * Your OneLogin account url
+       */
+      onelogin_account?: string;
+    }
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    export interface ScimConfig {
+      /**
+       * A flag to enable or disable SCIM for the identity provider.
+       */
+      enabled?: boolean;
+
+      /**
+       * A flag to revoke a user's session in Access and force a reauthentication on the
+       * user's Gateway session when they have been added or removed from a group in the
+       * Identity Provider.
+       */
+      group_member_deprovision?: boolean;
+
+      /**
+       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
+       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
+       * enabled.
+       */
+      seat_deprovision?: boolean;
+
+      /**
+       * A read-only token generated when the SCIM integration is enabled for the first
+       * time. It is redacted on subsequent requests. If you lose this you will need to
+       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+       */
+      secret?: string;
+
+      /**
+       * A flag to enable revoking a user's session in Access and Gateway when they have
+       * been deprovisioned in the Identity Provider.
+       */
+      user_deprovision?: boolean;
+    }
+  }
+
+  export interface AccessPingone {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    config: IdentityProviderReplaceParams.AccessPingone.Config;
+
+    /**
+     * The name of the identity provider, shown to users on the login page.
+     */
+    name: string;
+
+    /**
+     * The type of identity provider. To determine the value for a specific provider,
+     * refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    type:
+      | 'onetimepin'
+      | 'azureAD'
+      | 'saml'
+      | 'centrify'
+      | 'facebook'
+      | 'github'
+      | 'google-apps'
+      | 'google'
+      | 'linkedin'
+      | 'oidc'
+      | 'okta'
+      | 'onelogin'
+      | 'pingone'
+      | 'yandex';
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    scim_config?: IdentityProviderReplaceParams.AccessPingone.ScimConfig;
+  }
+
+  export namespace AccessPingone {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    export interface Config {
+      /**
+       * Custom claims
+       */
+      claims?: Array<string>;
+
+      /**
+       * Your OAuth Client ID
+       */
+      client_id?: string;
+
+      /**
+       * Your OAuth Client Secret
+       */
+      client_secret?: string;
+
+      /**
+       * The claim name for email in the id_token response.
+       */
+      email_claim_name?: string;
+
+      /**
+       * Your PingOne environment identifier
+       */
+      ping_env_id?: string;
+    }
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    export interface ScimConfig {
+      /**
+       * A flag to enable or disable SCIM for the identity provider.
+       */
+      enabled?: boolean;
+
+      /**
+       * A flag to revoke a user's session in Access and force a reauthentication on the
+       * user's Gateway session when they have been added or removed from a group in the
+       * Identity Provider.
+       */
+      group_member_deprovision?: boolean;
+
+      /**
+       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
+       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
+       * enabled.
+       */
+      seat_deprovision?: boolean;
+
+      /**
+       * A read-only token generated when the SCIM integration is enabled for the first
+       * time. It is redacted on subsequent requests. If you lose this you will need to
+       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+       */
+      secret?: string;
+
+      /**
+       * A flag to enable revoking a user's session in Access and Gateway when they have
+       * been deprovisioned in the Identity Provider.
+       */
+      user_deprovision?: boolean;
+    }
+  }
+
+  export interface AccessSaml {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    config: IdentityProviderReplaceParams.AccessSaml.Config;
+
+    /**
+     * The name of the identity provider, shown to users on the login page.
+     */
+    name: string;
+
+    /**
+     * The type of identity provider. To determine the value for a specific provider,
+     * refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    type:
+      | 'onetimepin'
+      | 'azureAD'
+      | 'saml'
+      | 'centrify'
+      | 'facebook'
+      | 'github'
+      | 'google-apps'
+      | 'google'
+      | 'linkedin'
+      | 'oidc'
+      | 'okta'
+      | 'onelogin'
+      | 'pingone'
+      | 'yandex';
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    scim_config?: IdentityProviderReplaceParams.AccessSaml.ScimConfig;
+  }
+
+  export namespace AccessSaml {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    export interface Config {
+      /**
+       * A list of SAML attribute names that will be added to your signed JWT token and
+       * can be used in SAML policy rules.
+       */
+      attributes?: Array<string>;
+
+      /**
+       * The attribute name for email in the SAML response.
+       */
+      email_attribute_name?: string;
+
+      /**
+       * Add a list of attribute names that will be returned in the response header from
+       * the Access callback.
+       */
+      header_attributes?: Array<Config.HeaderAttribute>;
+
+      /**
+       * X509 certificate to verify the signature in the SAML authentication response
+       */
+      idp_public_certs?: Array<string>;
+
+      /**
+       * IdP Entity ID or Issuer URL
+       */
+      issuer_url?: string;
+
+      /**
+       * Sign the SAML authentication request with Access credentials. To verify the
+       * signature, use the public key from the Access certs endpoints.
+       */
+      sign_request?: boolean;
+
+      /**
+       * URL to send the SAML authentication requests to
+       */
+      sso_target_url?: string;
+    }
+
+    export namespace Config {
+      export interface HeaderAttribute {
+        /**
+         * attribute name from the IDP
+         */
+        attribute_name?: string;
+
+        /**
+         * header that will be added on the request to the origin
+         */
+        header_name?: string;
+      }
+    }
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    export interface ScimConfig {
+      /**
+       * A flag to enable or disable SCIM for the identity provider.
+       */
+      enabled?: boolean;
+
+      /**
+       * A flag to revoke a user's session in Access and force a reauthentication on the
+       * user's Gateway session when they have been added or removed from a group in the
+       * Identity Provider.
+       */
+      group_member_deprovision?: boolean;
+
+      /**
+       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
+       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
+       * enabled.
+       */
+      seat_deprovision?: boolean;
+
+      /**
+       * A read-only token generated when the SCIM integration is enabled for the first
+       * time. It is redacted on subsequent requests. If you lose this you will need to
+       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+       */
+      secret?: string;
+
+      /**
+       * A flag to enable revoking a user's session in Access and Gateway when they have
+       * been deprovisioned in the Identity Provider.
+       */
+      user_deprovision?: boolean;
+    }
+  }
+
+  export interface AccessYandex {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    config: IdentityProviderReplaceParams.AccessYandex.Config;
+
+    /**
+     * The name of the identity provider, shown to users on the login page.
+     */
+    name: string;
+
+    /**
+     * The type of identity provider. To determine the value for a specific provider,
+     * refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    type:
+      | 'onetimepin'
+      | 'azureAD'
+      | 'saml'
+      | 'centrify'
+      | 'facebook'
+      | 'github'
+      | 'google-apps'
+      | 'google'
+      | 'linkedin'
+      | 'oidc'
+      | 'okta'
+      | 'onelogin'
+      | 'pingone'
+      | 'yandex';
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    scim_config?: IdentityProviderReplaceParams.AccessYandex.ScimConfig;
+  }
+
+  export namespace AccessYandex {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    export interface Config {
+      /**
+       * Your OAuth Client ID
+       */
+      client_id?: string;
+
+      /**
+       * Your OAuth Client Secret
+       */
+      client_secret?: string;
+    }
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    export interface ScimConfig {
+      /**
+       * A flag to enable or disable SCIM for the identity provider.
+       */
+      enabled?: boolean;
+
+      /**
+       * A flag to revoke a user's session in Access and force a reauthentication on the
+       * user's Gateway session when they have been added or removed from a group in the
+       * Identity Provider.
+       */
+      group_member_deprovision?: boolean;
+
+      /**
+       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
+       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
+       * enabled.
+       */
+      seat_deprovision?: boolean;
+
+      /**
+       * A read-only token generated when the SCIM integration is enabled for the first
+       * time. It is redacted on subsequent requests. If you lose this you will need to
+       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+       */
+      secret?: string;
+
+      /**
+       * A flag to enable revoking a user's session in Access and Gateway when they have
+       * been deprovisioned in the Identity Provider.
+       */
+      user_deprovision?: boolean;
+    }
+  }
+
+  export interface AccessOnetimepin {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    config: unknown;
+
+    /**
+     * The name of the identity provider, shown to users on the login page.
+     */
+    name: string;
+
+    /**
+     * The type of identity provider. To determine the value for a specific provider,
+     * refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    type:
+      | 'onetimepin'
+      | 'azureAD'
+      | 'saml'
+      | 'centrify'
+      | 'facebook'
+      | 'github'
+      | 'google-apps'
+      | 'google'
+      | 'linkedin'
+      | 'oidc'
+      | 'okta'
+      | 'onelogin'
+      | 'pingone'
+      | 'yandex';
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    scim_config?: IdentityProviderReplaceParams.AccessOnetimepin.ScimConfig;
   }
 
   export namespace AccessOnetimepin {
@@ -9687,11 +9683,11 @@ export namespace IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProvi
 }
 
 export namespace IdentityProviders {
-  export import IdentityProviderUpdateResponse = IdentityProvidersAPI.IdentityProviderUpdateResponse;
+  export import IdentityProviderCreateResponse = IdentityProvidersAPI.IdentityProviderCreateResponse;
+  export import IdentityProviderListResponse = IdentityProvidersAPI.IdentityProviderListResponse;
   export import IdentityProviderDeleteResponse = IdentityProvidersAPI.IdentityProviderDeleteResponse;
-  export import IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderResponse = IdentityProvidersAPI.IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderResponse;
-  export import IdentityProviderAccessIdentityProvidersListAccessIdentityProvidersResponse = IdentityProvidersAPI.IdentityProviderAccessIdentityProvidersListAccessIdentityProvidersResponse;
   export import IdentityProviderGetResponse = IdentityProvidersAPI.IdentityProviderGetResponse;
-  export import IdentityProviderUpdateParams = IdentityProvidersAPI.IdentityProviderUpdateParams;
-  export import IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams = IdentityProvidersAPI.IdentityProviderAccessIdentityProvidersAddAnAccessIdentityProviderParams;
+  export import IdentityProviderReplaceResponse = IdentityProvidersAPI.IdentityProviderReplaceResponse;
+  export import IdentityProviderCreateParams = IdentityProvidersAPI.IdentityProviderCreateParams;
+  export import IdentityProviderReplaceParams = IdentityProvidersAPI.IdentityProviderReplaceParams;
 }

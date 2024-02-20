@@ -10,19 +10,45 @@ export class LiveInputs extends APIResource {
   outputs: OutputsAPI.Outputs = new OutputsAPI.Outputs(this._client);
 
   /**
-   * Updates a specified live input.
+   * Creates a live input, and returns credentials that you or your users can use to
+   * stream live video to Cloudflare Stream.
    */
-  update(
+  create(
     accountId: string,
-    liveInputIdentifier: string,
-    body: LiveInputUpdateParams,
+    body: LiveInputCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LiveInputUpdateResponse> {
+  ): Core.APIPromise<LiveInputCreateResponse> {
     return (
-      this._client.put(`/accounts/${accountId}/stream/live_inputs/${liveInputIdentifier}`, {
+      this._client.post(`/accounts/${accountId}/stream/live_inputs`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: LiveInputUpdateResponse }>
+      }) as Core.APIPromise<{ result: LiveInputCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Lists the live inputs created for an account. To get the credentials needed to
+   * stream to a specific live input, request a single live input.
+   */
+  list(
+    accountId: string,
+    query?: LiveInputListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LiveInputListResponse>;
+  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<LiveInputListResponse>;
+  list(
+    accountId: string,
+    query: LiveInputListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LiveInputListResponse> {
+    if (isRequestOptions(query)) {
+      return this.list(accountId, {}, query);
+    }
+    return (
+      this._client.get(`/accounts/${accountId}/stream/live_inputs`, {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: LiveInputListResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -58,48 +84,19 @@ export class LiveInputs extends APIResource {
   }
 
   /**
-   * Creates a live input, and returns credentials that you or your users can use to
-   * stream live video to Cloudflare Stream.
+   * Updates a specified live input.
    */
-  streamLiveInputsCreateALiveInput(
+  replace(
     accountId: string,
-    body: LiveInputStreamLiveInputsCreateALiveInputParams,
+    liveInputIdentifier: string,
+    body: LiveInputReplaceParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LiveInputStreamLiveInputsCreateALiveInputResponse> {
+  ): Core.APIPromise<LiveInputReplaceResponse> {
     return (
-      this._client.post(`/accounts/${accountId}/stream/live_inputs`, {
+      this._client.put(`/accounts/${accountId}/stream/live_inputs/${liveInputIdentifier}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: LiveInputStreamLiveInputsCreateALiveInputResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Lists the live inputs created for an account. To get the credentials needed to
-   * stream to a specific live input, request a single live input.
-   */
-  streamLiveInputsListLiveInputs(
-    accountId: string,
-    query?: LiveInputStreamLiveInputsListLiveInputsParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<LiveInputStreamLiveInputsListLiveInputsResponse>;
-  streamLiveInputsListLiveInputs(
-    accountId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<LiveInputStreamLiveInputsListLiveInputsResponse>;
-  streamLiveInputsListLiveInputs(
-    accountId: string,
-    query: LiveInputStreamLiveInputsListLiveInputsParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<LiveInputStreamLiveInputsListLiveInputsResponse> {
-    if (isRequestOptions(query)) {
-      return this.streamLiveInputsListLiveInputs(accountId, {}, query);
-    }
-    return (
-      this._client.get(`/accounts/${accountId}/stream/live_inputs`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: LiveInputStreamLiveInputsListLiveInputsResponse }>
+      }) as Core.APIPromise<{ result: LiveInputReplaceResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -107,7 +104,7 @@ export class LiveInputs extends APIResource {
 /**
  * Details about a live input.
  */
-export interface LiveInputUpdateResponse {
+export interface LiveInputCreateResponse {
   /**
    * The date and time the live input was created.
    */
@@ -138,27 +135,27 @@ export interface LiveInputUpdateResponse {
    * most cases, the video will initially be viewable as a live video and transition
    * to on-demand after a condition is satisfied.
    */
-  recording?: LiveInputUpdateResponse.Recording;
+  recording?: LiveInputCreateResponse.Recording;
 
   /**
    * Details for streaming to an live input using RTMPS.
    */
-  rtmps?: LiveInputUpdateResponse.Rtmps;
+  rtmps?: LiveInputCreateResponse.Rtmps;
 
   /**
    * Details for playback from an live input using RTMPS.
    */
-  rtmpsPlayback?: LiveInputUpdateResponse.RtmpsPlayback;
+  rtmpsPlayback?: LiveInputCreateResponse.RtmpsPlayback;
 
   /**
    * Details for streaming to a live input using SRT.
    */
-  srt?: LiveInputUpdateResponse.Srt;
+  srt?: LiveInputCreateResponse.Srt;
 
   /**
    * Details for playback from an live input using SRT.
    */
-  srtPlayback?: LiveInputUpdateResponse.SrtPlayback;
+  srtPlayback?: LiveInputCreateResponse.SrtPlayback;
 
   /**
    * The connection status of a live input.
@@ -182,15 +179,15 @@ export interface LiveInputUpdateResponse {
   /**
    * Details for streaming to a live input using WebRTC.
    */
-  webRTC?: LiveInputUpdateResponse.WebRtc;
+  webRTC?: LiveInputCreateResponse.WebRtc;
 
   /**
    * Details for playback from a live input using WebRTC.
    */
-  webRTCPlayback?: LiveInputUpdateResponse.WebRtcPlayback;
+  webRTCPlayback?: LiveInputCreateResponse.WebRtcPlayback;
 }
 
-export namespace LiveInputUpdateResponse {
+export namespace LiveInputCreateResponse {
   /**
    * Records the input to a Cloudflare Stream video. Behavior depends on the mode. In
    * most cases, the video will initially be viewable as a live video and transition
@@ -314,6 +311,54 @@ export namespace LiveInputUpdateResponse {
      * The URL used to play live video over WebRTC.
      */
     url?: string;
+  }
+}
+
+export interface LiveInputListResponse {
+  liveInputs?: Array<LiveInputListResponse.LiveInput>;
+
+  /**
+   * The total number of remaining live inputs based on cursor position.
+   */
+  range?: number;
+
+  /**
+   * The total number of live inputs that match the provided filters.
+   */
+  total?: number;
+}
+
+export namespace LiveInputListResponse {
+  export interface LiveInput {
+    /**
+     * The date and time the live input was created.
+     */
+    created?: string;
+
+    /**
+     * Indicates the number of days after which the live inputs recordings will be
+     * deleted. When a stream completes and the recording is ready, the value is used
+     * to calculate a scheduled deletion date for that recording. Omit the field to
+     * indicate no change, or include with a `null` value to remove an existing
+     * scheduled deletion.
+     */
+    deleteRecordingAfterDays?: number;
+
+    /**
+     * A user modifiable key-value store used to reference other systems of record for
+     * managing live inputs.
+     */
+    meta?: unknown;
+
+    /**
+     * The date and time the live input was last modified.
+     */
+    modified?: string;
+
+    /**
+     * A unique identifier for a live input.
+     */
+    uid?: string;
   }
 }
 
@@ -533,7 +578,7 @@ export namespace LiveInputGetResponse {
 /**
  * Details about a live input.
  */
-export interface LiveInputStreamLiveInputsCreateALiveInputResponse {
+export interface LiveInputReplaceResponse {
   /**
    * The date and time the live input was created.
    */
@@ -564,27 +609,27 @@ export interface LiveInputStreamLiveInputsCreateALiveInputResponse {
    * most cases, the video will initially be viewable as a live video and transition
    * to on-demand after a condition is satisfied.
    */
-  recording?: LiveInputStreamLiveInputsCreateALiveInputResponse.Recording;
+  recording?: LiveInputReplaceResponse.Recording;
 
   /**
    * Details for streaming to an live input using RTMPS.
    */
-  rtmps?: LiveInputStreamLiveInputsCreateALiveInputResponse.Rtmps;
+  rtmps?: LiveInputReplaceResponse.Rtmps;
 
   /**
    * Details for playback from an live input using RTMPS.
    */
-  rtmpsPlayback?: LiveInputStreamLiveInputsCreateALiveInputResponse.RtmpsPlayback;
+  rtmpsPlayback?: LiveInputReplaceResponse.RtmpsPlayback;
 
   /**
    * Details for streaming to a live input using SRT.
    */
-  srt?: LiveInputStreamLiveInputsCreateALiveInputResponse.Srt;
+  srt?: LiveInputReplaceResponse.Srt;
 
   /**
    * Details for playback from an live input using SRT.
    */
-  srtPlayback?: LiveInputStreamLiveInputsCreateALiveInputResponse.SrtPlayback;
+  srtPlayback?: LiveInputReplaceResponse.SrtPlayback;
 
   /**
    * The connection status of a live input.
@@ -608,15 +653,15 @@ export interface LiveInputStreamLiveInputsCreateALiveInputResponse {
   /**
    * Details for streaming to a live input using WebRTC.
    */
-  webRTC?: LiveInputStreamLiveInputsCreateALiveInputResponse.WebRtc;
+  webRTC?: LiveInputReplaceResponse.WebRtc;
 
   /**
    * Details for playback from a live input using WebRTC.
    */
-  webRTCPlayback?: LiveInputStreamLiveInputsCreateALiveInputResponse.WebRtcPlayback;
+  webRTCPlayback?: LiveInputReplaceResponse.WebRtcPlayback;
 }
 
-export namespace LiveInputStreamLiveInputsCreateALiveInputResponse {
+export namespace LiveInputReplaceResponse {
   /**
    * Records the input to a Cloudflare Stream video. Behavior depends on the mode. In
    * most cases, the video will initially be viewable as a live video and transition
@@ -743,55 +788,7 @@ export namespace LiveInputStreamLiveInputsCreateALiveInputResponse {
   }
 }
 
-export interface LiveInputStreamLiveInputsListLiveInputsResponse {
-  liveInputs?: Array<LiveInputStreamLiveInputsListLiveInputsResponse.LiveInput>;
-
-  /**
-   * The total number of remaining live inputs based on cursor position.
-   */
-  range?: number;
-
-  /**
-   * The total number of live inputs that match the provided filters.
-   */
-  total?: number;
-}
-
-export namespace LiveInputStreamLiveInputsListLiveInputsResponse {
-  export interface LiveInput {
-    /**
-     * The date and time the live input was created.
-     */
-    created?: string;
-
-    /**
-     * Indicates the number of days after which the live inputs recordings will be
-     * deleted. When a stream completes and the recording is ready, the value is used
-     * to calculate a scheduled deletion date for that recording. Omit the field to
-     * indicate no change, or include with a `null` value to remove an existing
-     * scheduled deletion.
-     */
-    deleteRecordingAfterDays?: number;
-
-    /**
-     * A user modifiable key-value store used to reference other systems of record for
-     * managing live inputs.
-     */
-    meta?: unknown;
-
-    /**
-     * The date and time the live input was last modified.
-     */
-    modified?: string;
-
-    /**
-     * A unique identifier for a live input.
-     */
-    uid?: string;
-  }
-}
-
-export interface LiveInputUpdateParams {
+export interface LiveInputCreateParams {
   /**
    * Sets the creator ID asssociated with this live input.
    */
@@ -817,10 +814,10 @@ export interface LiveInputUpdateParams {
    * most cases, the video will initially be viewable as a live video and transition
    * to on-demand after a condition is satisfied.
    */
-  recording?: LiveInputUpdateParams.Recording;
+  recording?: LiveInputCreateParams.Recording;
 }
 
-export namespace LiveInputUpdateParams {
+export namespace LiveInputCreateParams {
   /**
    * Records the input to a Cloudflare Stream video. Behavior depends on the mode. In
    * most cases, the video will initially be viewable as a live video and transition
@@ -857,73 +854,7 @@ export namespace LiveInputUpdateParams {
   }
 }
 
-export interface LiveInputStreamLiveInputsCreateALiveInputParams {
-  /**
-   * Sets the creator ID asssociated with this live input.
-   */
-  defaultCreator?: string;
-
-  /**
-   * Indicates the number of days after which the live inputs recordings will be
-   * deleted. When a stream completes and the recording is ready, the value is used
-   * to calculate a scheduled deletion date for that recording. Omit the field to
-   * indicate no change, or include with a `null` value to remove an existing
-   * scheduled deletion.
-   */
-  deleteRecordingAfterDays?: number;
-
-  /**
-   * A user modifiable key-value store used to reference other systems of record for
-   * managing live inputs.
-   */
-  meta?: unknown;
-
-  /**
-   * Records the input to a Cloudflare Stream video. Behavior depends on the mode. In
-   * most cases, the video will initially be viewable as a live video and transition
-   * to on-demand after a condition is satisfied.
-   */
-  recording?: LiveInputStreamLiveInputsCreateALiveInputParams.Recording;
-}
-
-export namespace LiveInputStreamLiveInputsCreateALiveInputParams {
-  /**
-   * Records the input to a Cloudflare Stream video. Behavior depends on the mode. In
-   * most cases, the video will initially be viewable as a live video and transition
-   * to on-demand after a condition is satisfied.
-   */
-  export interface Recording {
-    /**
-     * Lists the origins allowed to display videos created with this input. Enter
-     * allowed origin domains in an array and use `*` for wildcard subdomains. An empty
-     * array allows videos to be viewed on any origin.
-     */
-    allowedOrigins?: Array<string>;
-
-    /**
-     * Specifies the recording behavior for the live input. Set this value to `off` to
-     * prevent a recording. Set the value to `automatic` to begin a recording and
-     * transition to on-demand after Stream Live stops receiving input.
-     */
-    mode?: 'off' | 'automatic';
-
-    /**
-     * Indicates if a video using the live input has the `requireSignedURLs` property
-     * set. Also enforces access controls on any video recording of the livestream with
-     * the live input.
-     */
-    requireSignedURLs?: boolean;
-
-    /**
-     * Determines the amount of time a live input configured in `automatic` mode should
-     * wait before a recording transitions from live to on-demand. `0` is recommended
-     * for most use cases and indicates the platform default should be used.
-     */
-    timeoutSeconds?: number;
-  }
-}
-
-export interface LiveInputStreamLiveInputsListLiveInputsParams {
+export interface LiveInputListParams {
   /**
    * Includes the total number of videos associated with the submitted query
    * parameters.
@@ -931,18 +862,84 @@ export interface LiveInputStreamLiveInputsListLiveInputsParams {
   include_counts?: boolean;
 }
 
+export interface LiveInputReplaceParams {
+  /**
+   * Sets the creator ID asssociated with this live input.
+   */
+  defaultCreator?: string;
+
+  /**
+   * Indicates the number of days after which the live inputs recordings will be
+   * deleted. When a stream completes and the recording is ready, the value is used
+   * to calculate a scheduled deletion date for that recording. Omit the field to
+   * indicate no change, or include with a `null` value to remove an existing
+   * scheduled deletion.
+   */
+  deleteRecordingAfterDays?: number;
+
+  /**
+   * A user modifiable key-value store used to reference other systems of record for
+   * managing live inputs.
+   */
+  meta?: unknown;
+
+  /**
+   * Records the input to a Cloudflare Stream video. Behavior depends on the mode. In
+   * most cases, the video will initially be viewable as a live video and transition
+   * to on-demand after a condition is satisfied.
+   */
+  recording?: LiveInputReplaceParams.Recording;
+}
+
+export namespace LiveInputReplaceParams {
+  /**
+   * Records the input to a Cloudflare Stream video. Behavior depends on the mode. In
+   * most cases, the video will initially be viewable as a live video and transition
+   * to on-demand after a condition is satisfied.
+   */
+  export interface Recording {
+    /**
+     * Lists the origins allowed to display videos created with this input. Enter
+     * allowed origin domains in an array and use `*` for wildcard subdomains. An empty
+     * array allows videos to be viewed on any origin.
+     */
+    allowedOrigins?: Array<string>;
+
+    /**
+     * Specifies the recording behavior for the live input. Set this value to `off` to
+     * prevent a recording. Set the value to `automatic` to begin a recording and
+     * transition to on-demand after Stream Live stops receiving input.
+     */
+    mode?: 'off' | 'automatic';
+
+    /**
+     * Indicates if a video using the live input has the `requireSignedURLs` property
+     * set. Also enforces access controls on any video recording of the livestream with
+     * the live input.
+     */
+    requireSignedURLs?: boolean;
+
+    /**
+     * Determines the amount of time a live input configured in `automatic` mode should
+     * wait before a recording transitions from live to on-demand. `0` is recommended
+     * for most use cases and indicates the platform default should be used.
+     */
+    timeoutSeconds?: number;
+  }
+}
+
 export namespace LiveInputs {
-  export import LiveInputUpdateResponse = LiveInputsAPI.LiveInputUpdateResponse;
+  export import LiveInputCreateResponse = LiveInputsAPI.LiveInputCreateResponse;
+  export import LiveInputListResponse = LiveInputsAPI.LiveInputListResponse;
   export import LiveInputGetResponse = LiveInputsAPI.LiveInputGetResponse;
-  export import LiveInputStreamLiveInputsCreateALiveInputResponse = LiveInputsAPI.LiveInputStreamLiveInputsCreateALiveInputResponse;
-  export import LiveInputStreamLiveInputsListLiveInputsResponse = LiveInputsAPI.LiveInputStreamLiveInputsListLiveInputsResponse;
-  export import LiveInputUpdateParams = LiveInputsAPI.LiveInputUpdateParams;
-  export import LiveInputStreamLiveInputsCreateALiveInputParams = LiveInputsAPI.LiveInputStreamLiveInputsCreateALiveInputParams;
-  export import LiveInputStreamLiveInputsListLiveInputsParams = LiveInputsAPI.LiveInputStreamLiveInputsListLiveInputsParams;
+  export import LiveInputReplaceResponse = LiveInputsAPI.LiveInputReplaceResponse;
+  export import LiveInputCreateParams = LiveInputsAPI.LiveInputCreateParams;
+  export import LiveInputListParams = LiveInputsAPI.LiveInputListParams;
+  export import LiveInputReplaceParams = LiveInputsAPI.LiveInputReplaceParams;
   export import Outputs = OutputsAPI.Outputs;
-  export import OutputUpdateResponse = OutputsAPI.OutputUpdateResponse;
-  export import OutputStreamLiveInputsCreateANewOutputConnectedToALiveInputResponse = OutputsAPI.OutputStreamLiveInputsCreateANewOutputConnectedToALiveInputResponse;
-  export import OutputStreamLiveInputsListAllOutputsAssociatedWithASpecifiedLiveInputResponse = OutputsAPI.OutputStreamLiveInputsListAllOutputsAssociatedWithASpecifiedLiveInputResponse;
-  export import OutputUpdateParams = OutputsAPI.OutputUpdateParams;
-  export import OutputStreamLiveInputsCreateANewOutputConnectedToALiveInputParams = OutputsAPI.OutputStreamLiveInputsCreateANewOutputConnectedToALiveInputParams;
+  export import OutputCreateResponse = OutputsAPI.OutputCreateResponse;
+  export import OutputListResponse = OutputsAPI.OutputListResponse;
+  export import OutputReplaceResponse = OutputsAPI.OutputReplaceResponse;
+  export import OutputCreateParams = OutputsAPI.OutputCreateParams;
+  export import OutputReplaceParams = OutputsAPI.OutputReplaceParams;
 }

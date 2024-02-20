@@ -25,21 +25,21 @@ export class Statuses extends APIResource {
    * 5. `max_estimated_time_minutes`: Integer of the maximum estimated time currently
    *    presented to the users.
    */
-  waitingRoomGetWaitingRoomStatus(
+  get(
     zoneIdentifier: string,
     waitingRoomId: unknown,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<StatusWaitingRoomGetWaitingRoomStatusResponse> {
+  ): Core.APIPromise<StatusGetResponse> {
     return (
       this._client.get(
         `/zones/${zoneIdentifier}/waiting_rooms/${waitingRoomId}/status`,
         options,
-      ) as Core.APIPromise<{ result: StatusWaitingRoomGetWaitingRoomStatusResponse }>
+      ) as Core.APIPromise<{ result: StatusGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface StatusWaitingRoomGetWaitingRoomStatusResponse {
+export interface StatusGetResponse {
   estimated_queued_users?: number;
 
   estimated_total_active_users?: number;
@@ -52,5 +52,5 @@ export interface StatusWaitingRoomGetWaitingRoomStatusResponse {
 }
 
 export namespace Statuses {
-  export import StatusWaitingRoomGetWaitingRoomStatusResponse = StatusesAPI.StatusWaitingRoomGetWaitingRoomStatusResponse;
+  export import StatusGetResponse = StatusesAPI.StatusGetResponse;
 }

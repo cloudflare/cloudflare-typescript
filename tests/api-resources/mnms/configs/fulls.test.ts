@@ -13,11 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource fulls', () => {
   // skipped: tests are disabled for the time being
-  test.skip('magicNetworkMonitoringConfigurationListRulesAndAccountConfiguration', async () => {
-    const responsePromise =
-      cloudflare.mnms.configs.fulls.magicNetworkMonitoringConfigurationListRulesAndAccountConfiguration(
-        '6f91088a406011ed95aed352566e8d4c',
-      );
+  test.skip('list', async () => {
+    const responsePromise = cloudflare.mnms.configs.fulls.list('6f91088a406011ed95aed352566e8d4c');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -28,13 +25,12 @@ describe('resource fulls', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('magicNetworkMonitoringConfigurationListRulesAndAccountConfiguration: request options instead of params are passed correctly', async () => {
+  test.skip('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.mnms.configs.fulls.magicNetworkMonitoringConfigurationListRulesAndAccountConfiguration(
-        '6f91088a406011ed95aed352566e8d4c',
-        { path: '/_stainless_unknown_path' },
-      ),
+      cloudflare.mnms.configs.fulls.list('6f91088a406011ed95aed352566e8d4c', {
+        path: '/_stainless_unknown_path',
+      }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 });

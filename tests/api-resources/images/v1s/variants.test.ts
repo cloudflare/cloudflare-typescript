@@ -13,6 +13,30 @@ const cloudflare = new Cloudflare({
 
 describe('resource variants', () => {
   // skipped: tests are disabled for the time being
+  test.skip('create: only required params', async () => {
+    const responsePromise = cloudflare.images.v1s.variants.create('023e105f4ecef8ad9ca31a8372d0c353', {
+      id: 'hero',
+      options: { fit: 'scale-down', height: 768, metadata: 'none', width: 1366 },
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('create: required and optional params', async () => {
+    const response = await cloudflare.images.v1s.variants.create('023e105f4ecef8ad9ca31a8372d0c353', {
+      id: 'hero',
+      options: { fit: 'scale-down', height: 768, metadata: 'none', width: 1366 },
+      neverRequireSignedURLs: true,
+    });
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.images.v1s.variants.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
@@ -37,6 +61,28 @@ describe('resource variants', () => {
   });
 
   // skipped: tests are disabled for the time being
+  test.skip('list', async () => {
+    const responsePromise = cloudflare.images.v1s.variants.list('023e105f4ecef8ad9ca31a8372d0c353');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.images.v1s.variants.list('023e105f4ecef8ad9ca31a8372d0c353', {
+        path: '/_stainless_unknown_path',
+      }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('delete', async () => {
     const responsePromise = cloudflare.images.v1s.variants.delete('023e105f4ecef8ad9ca31a8372d0c353', 'hero');
     const rawResponse = await responsePromise.asResponse();
@@ -46,58 +92,6 @@ describe('resource variants', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('cloudflareImagesVariantsCreateAVariant: only required params', async () => {
-    const responsePromise = cloudflare.images.v1s.variants.cloudflareImagesVariantsCreateAVariant(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      { id: 'hero', options: { fit: 'scale-down', height: 768, metadata: 'none', width: 1366 } },
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('cloudflareImagesVariantsCreateAVariant: required and optional params', async () => {
-    const response = await cloudflare.images.v1s.variants.cloudflareImagesVariantsCreateAVariant(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      {
-        id: 'hero',
-        options: { fit: 'scale-down', height: 768, metadata: 'none', width: 1366 },
-        neverRequireSignedURLs: true,
-      },
-    );
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('cloudflareImagesVariantsListVariants', async () => {
-    const responsePromise = cloudflare.images.v1s.variants.cloudflareImagesVariantsListVariants(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('cloudflareImagesVariantsListVariants: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.images.v1s.variants.cloudflareImagesVariantsListVariants(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being

@@ -7,6 +7,31 @@ import * as RegionsAPI from 'cloudflare/resources/load-balancers/regions';
 
 export class Regions extends APIResource {
   /**
+   * List all region mappings.
+   */
+  list(
+    accountId: string,
+    query?: RegionListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RegionListResponse>;
+  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<RegionListResponse>;
+  list(
+    accountId: string,
+    query: RegionListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RegionListResponse> {
+    if (isRequestOptions(query)) {
+      return this.list(accountId, {}, query);
+    }
+    return (
+      this._client.get(`/accounts/${accountId}/load_balancers/regions`, {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: RegionListResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Get a single region mapping.
    */
   get(
@@ -34,44 +59,16 @@ export class Regions extends APIResource {
       ) as Core.APIPromise<{ result: RegionGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
-
-  /**
-   * List all region mappings.
-   */
-  loadBalancerRegionsListRegions(
-    accountId: string,
-    query?: RegionLoadBalancerRegionsListRegionsParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RegionLoadBalancerRegionsListRegionsResponse>;
-  loadBalancerRegionsListRegions(
-    accountId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RegionLoadBalancerRegionsListRegionsResponse>;
-  loadBalancerRegionsListRegions(
-    accountId: string,
-    query: RegionLoadBalancerRegionsListRegionsParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RegionLoadBalancerRegionsListRegionsResponse> {
-    if (isRequestOptions(query)) {
-      return this.loadBalancerRegionsListRegions(accountId, {}, query);
-    }
-    return (
-      this._client.get(`/accounts/${accountId}/load_balancers/regions`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: RegionLoadBalancerRegionsListRegionsResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
+
+export type RegionListResponse = unknown | string | null;
 
 /**
  * A list of countries and subdivisions mapped to a region.
  */
 export type RegionGetResponse = unknown | string | null;
 
-export type RegionLoadBalancerRegionsListRegionsResponse = unknown | string | null;
-
-export interface RegionLoadBalancerRegionsListRegionsParams {
+export interface RegionListParams {
   /**
    * Two-letter alpha-2 country code followed in ISO 3166-1.
    */
@@ -89,7 +86,7 @@ export interface RegionLoadBalancerRegionsListRegionsParams {
 }
 
 export namespace Regions {
+  export import RegionListResponse = RegionsAPI.RegionListResponse;
   export import RegionGetResponse = RegionsAPI.RegionGetResponse;
-  export import RegionLoadBalancerRegionsListRegionsResponse = RegionsAPI.RegionLoadBalancerRegionsListRegionsResponse;
-  export import RegionLoadBalancerRegionsListRegionsParams = RegionsAPI.RegionLoadBalancerRegionsListRegionsParams;
+  export import RegionListParams = RegionsAPI.RegionListParams;
 }

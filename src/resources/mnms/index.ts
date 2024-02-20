@@ -1,20 +1,20 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
+  ConfigCreateResponse,
+  ConfigUpdateResponse,
+  ConfigListResponse,
   ConfigDeleteResponse,
-  ConfigMagicNetworkMonitoringConfigurationCreateAccountConfigurationResponse,
-  ConfigMagicNetworkMonitoringConfigurationListAccountConfigurationResponse,
-  ConfigMagicNetworkMonitoringConfigurationUpdateAccountConfigurationFieldsResponse,
-  ConfigMagicNetworkMonitoringConfigurationUpdateAnEntireAccountConfigurationResponse,
+  ConfigReplaceResponse,
   Configs,
 } from './configs/index';
 export { Mnms } from './mnms';
 export {
+  RuleCreateResponse,
   RuleUpdateResponse,
+  RuleListResponse,
   RuleDeleteResponse,
   RuleGetResponse,
-  RuleMagicNetworkMonitoringRulesCreateRulesResponse,
-  RuleMagicNetworkMonitoringRulesListRulesResponse,
-  RuleMagicNetworkMonitoringRulesUpdateRulesResponse,
+  RuleReplaceResponse,
   Rules,
 } from './rules/index';

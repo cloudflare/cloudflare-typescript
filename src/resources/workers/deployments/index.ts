@@ -1,4 +1,4 @@
 // File generated from our OpenAPI spec by Stainless.
 
-export { ByScriptWorkerDeploymentsListDeploymentsResponse, ByScripts } from './by-scripts/index';
+export { ByScriptListResponse, ByScriptGetResponse, ByScripts } from './by-scripts';
 export { Deployments } from './deployments';

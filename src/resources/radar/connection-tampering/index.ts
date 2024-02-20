@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
-  ConnectionTamperingSummaryResponse,
-  ConnectionTamperingSummaryParams,
+  ConnectionTamperingListResponse,
+  ConnectionTamperingListParams,
   ConnectionTampering,
 } from './connection-tampering';
 export {

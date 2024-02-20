@@ -8,24 +8,24 @@ export class Unrevokes extends APIResource {
   /**
    * Unrevokes a list of devices.
    */
-  devicesUnrevokeDevices(
+  create(
     identifier: unknown,
-    body: UnrevokeDevicesUnrevokeDevicesParams,
+    body: UnrevokeCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<UnrevokeDevicesUnrevokeDevicesResponse | null> {
+  ): Core.APIPromise<UnrevokeCreateResponse | null> {
     return (
       this._client.post(`/accounts/${identifier}/devices/unrevoke`, { body, ...options }) as Core.APIPromise<{
-        result: UnrevokeDevicesUnrevokeDevicesResponse | null;
+        result: UnrevokeCreateResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type UnrevokeDevicesUnrevokeDevicesResponse = unknown | string;
+export type UnrevokeCreateResponse = unknown | string;
 
-export type UnrevokeDevicesUnrevokeDevicesParams = Array<string>;
+export type UnrevokeCreateParams = Array<string>;
 
 export namespace Unrevokes {
-  export import UnrevokeDevicesUnrevokeDevicesResponse = UnrevokesAPI.UnrevokeDevicesUnrevokeDevicesResponse;
-  export import UnrevokeDevicesUnrevokeDevicesParams = UnrevokesAPI.UnrevokeDevicesUnrevokeDevicesParams;
+  export import UnrevokeCreateResponse = UnrevokesAPI.UnrevokeCreateResponse;
+  export import UnrevokeCreateParams = UnrevokesAPI.UnrevokeCreateParams;
 }

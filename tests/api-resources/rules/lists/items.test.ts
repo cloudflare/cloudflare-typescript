@@ -13,53 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource items', () => {
   // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
-    const responsePromise = cloudflare.rules.lists.items.delete(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '2c0fc9fa937b11eaa1b71c4d701ab86e',
-      {},
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
-    const responsePromise = cloudflare.rules.lists.items.get(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '2c0fc9fa937b11eaa1b71c4d701ab86e',
-      '34b12448945f11eaa1b71c4d701ab86e',
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.rules.lists.items.get(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        '2c0fc9fa937b11eaa1b71c4d701ab86e',
-        '34b12448945f11eaa1b71c4d701ab86e',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('listsCreateListItems: only required params', async () => {
-    const responsePromise = cloudflare.rules.lists.items.listsCreateListItems(
+  test.skip('create: only required params', async () => {
+    const responsePromise = cloudflare.rules.lists.items.create(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '2c0fc9fa937b11eaa1b71c4d701ab86e',
       [{}, {}, {}],
@@ -74,8 +29,8 @@ describe('resource items', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('listsCreateListItems: required and optional params', async () => {
-    const response = await cloudflare.rules.lists.items.listsCreateListItems(
+  test.skip('create: required and optional params', async () => {
+    const response = await cloudflare.rules.lists.items.create(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '2c0fc9fa937b11eaa1b71c4d701ab86e',
       [
@@ -129,8 +84,8 @@ describe('resource items', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('listsGetListItems', async () => {
-    const responsePromise = cloudflare.rules.lists.items.listsGetListItems(
+  test.skip('list', async () => {
+    const responsePromise = cloudflare.rules.lists.items.list(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '2c0fc9fa937b11eaa1b71c4d701ab86e',
     );
@@ -144,10 +99,10 @@ describe('resource items', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('listsGetListItems: request options instead of params are passed correctly', async () => {
+  test.skip('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.rules.lists.items.listsGetListItems(
+      cloudflare.rules.lists.items.list(
         '023e105f4ecef8ad9ca31a8372d0c353',
         '2c0fc9fa937b11eaa1b71c4d701ab86e',
         { path: '/_stainless_unknown_path' },
@@ -156,10 +111,10 @@ describe('resource items', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('listsGetListItems: request options and params are passed correctly', async () => {
+  test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.rules.lists.items.listsGetListItems(
+      cloudflare.rules.lists.items.list(
         '023e105f4ecef8ad9ca31a8372d0c353',
         '2c0fc9fa937b11eaa1b71c4d701ab86e',
         { cursor: 'zzz', per_page: 1, search: '1.1.1.' },
@@ -169,8 +124,53 @@ describe('resource items', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('listsUpdateAllListItems: only required params', async () => {
-    const responsePromise = cloudflare.rules.lists.items.listsUpdateAllListItems(
+  test.skip('delete', async () => {
+    const responsePromise = cloudflare.rules.lists.items.delete(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '2c0fc9fa937b11eaa1b71c4d701ab86e',
+      {},
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get', async () => {
+    const responsePromise = cloudflare.rules.lists.items.get(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '2c0fc9fa937b11eaa1b71c4d701ab86e',
+      '34b12448945f11eaa1b71c4d701ab86e',
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.rules.lists.items.get(
+        '023e105f4ecef8ad9ca31a8372d0c353',
+        '2c0fc9fa937b11eaa1b71c4d701ab86e',
+        '34b12448945f11eaa1b71c4d701ab86e',
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('replace: only required params', async () => {
+    const responsePromise = cloudflare.rules.lists.items.replace(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '2c0fc9fa937b11eaa1b71c4d701ab86e',
       [{}, {}, {}],
@@ -185,8 +185,8 @@ describe('resource items', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('listsUpdateAllListItems: required and optional params', async () => {
-    const response = await cloudflare.rules.lists.items.listsUpdateAllListItems(
+  test.skip('replace: required and optional params', async () => {
+    const response = await cloudflare.rules.lists.items.replace(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '2c0fc9fa937b11eaa1b71c4d701ab86e',
       [

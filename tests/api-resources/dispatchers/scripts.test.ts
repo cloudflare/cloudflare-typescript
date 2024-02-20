@@ -13,23 +13,6 @@ const cloudflare = new Cloudflare({
 
 describe('resource scripts', () => {
   // skipped: tests are disabled for the time being
-  test.skip('update', async () => {
-    const responsePromise = cloudflare.dispatchers.scripts.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'my-dispatch-namespace',
-      'this-is_my_script-01',
-      {},
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
   test.skip('delete', async () => {
     const responsePromise = cloudflare.dispatchers.scripts.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
@@ -73,5 +56,22 @@ describe('resource scripts', () => {
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('replace', async () => {
+    const responsePromise = cloudflare.dispatchers.scripts.replace(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      'my-dispatch-namespace',
+      'this-is_my_script-01',
+      {},
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
   });
 });

@@ -13,11 +13,10 @@ const cloudflare = new Cloudflare({
 
 describe('resource directUploads', () => {
   // skipped: tests are disabled for the time being
-  test.skip('streamVideosUploadVideosViaDirectUploadURLs: only required params', async () => {
-    const responsePromise = cloudflare.stream.directUploads.streamVideosUploadVideosViaDirectUploadURLs(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      { maxDurationSeconds: 1 },
-    );
+  test.skip('create: only required params', async () => {
+    const responsePromise = cloudflare.stream.directUploads.create('023e105f4ecef8ad9ca31a8372d0c353', {
+      maxDurationSeconds: 1,
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -28,21 +27,18 @@ describe('resource directUploads', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('streamVideosUploadVideosViaDirectUploadURLs: required and optional params', async () => {
-    const response = await cloudflare.stream.directUploads.streamVideosUploadVideosViaDirectUploadURLs(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      {
-        maxDurationSeconds: 1,
-        allowedOrigins: ['example.com'],
-        creator: 'creator-id_abcde12345',
-        expiry: '2021-01-02T02:20:00Z',
-        meta: { name: 'video12345.mp4' },
-        requireSignedURLs: true,
-        scheduledDeletion: '2014-01-02T02:20:00Z',
-        thumbnailTimestampPct: 0.529241,
-        watermark: { uid: 'ea95132c15732412d22c1476fa83f27a' },
-        'Upload-Creator': 'creator-id_abcde12345',
-      },
-    );
+  test.skip('create: required and optional params', async () => {
+    const response = await cloudflare.stream.directUploads.create('023e105f4ecef8ad9ca31a8372d0c353', {
+      maxDurationSeconds: 1,
+      allowedOrigins: ['example.com'],
+      creator: 'creator-id_abcde12345',
+      expiry: '2021-01-02T02:20:00Z',
+      meta: { name: 'video12345.mp4' },
+      requireSignedURLs: true,
+      scheduledDeletion: '2014-01-02T02:20:00Z',
+      thumbnailTimestampPct: 0.529241,
+      watermark: { uid: 'ea95132c15732412d22c1476fa83f27a' },
+      'Upload-Creator': 'creator-id_abcde12345',
+    });
   });
 });

@@ -11,14 +11,15 @@ export class Teamnets extends APIResource {
 
 export namespace Teamnets {
   export import Routes = RoutesAPI.Routes;
-  export import RouteTunnelRouteListTunnelRoutesResponse = RoutesAPI.RouteTunnelRouteListTunnelRoutesResponse;
-  export import RouteTunnelRouteListTunnelRoutesParams = RoutesAPI.RouteTunnelRouteListTunnelRoutesParams;
+  export import RouteListResponse = RoutesAPI.RouteListResponse;
+  export import RouteListResponsesV4PagePaginationArray = RoutesAPI.RouteListResponsesV4PagePaginationArray;
+  export import RouteListParams = RoutesAPI.RouteListParams;
   export import VirtualNetworks = VirtualNetworksAPI.VirtualNetworks;
+  export import VirtualNetworkCreateResponse = VirtualNetworksAPI.VirtualNetworkCreateResponse;
   export import VirtualNetworkUpdateResponse = VirtualNetworksAPI.VirtualNetworkUpdateResponse;
+  export import VirtualNetworkListResponse = VirtualNetworksAPI.VirtualNetworkListResponse;
   export import VirtualNetworkDeleteResponse = VirtualNetworksAPI.VirtualNetworkDeleteResponse;
-  export import VirtualNetworkTunnelVirtualNetworkCreateAVirtualNetworkResponse = VirtualNetworksAPI.VirtualNetworkTunnelVirtualNetworkCreateAVirtualNetworkResponse;
-  export import VirtualNetworkTunnelVirtualNetworkListVirtualNetworksResponse = VirtualNetworksAPI.VirtualNetworkTunnelVirtualNetworkListVirtualNetworksResponse;
+  export import VirtualNetworkCreateParams = VirtualNetworksAPI.VirtualNetworkCreateParams;
   export import VirtualNetworkUpdateParams = VirtualNetworksAPI.VirtualNetworkUpdateParams;
-  export import VirtualNetworkTunnelVirtualNetworkCreateAVirtualNetworkParams = VirtualNetworksAPI.VirtualNetworkTunnelVirtualNetworkCreateAVirtualNetworkParams;
-  export import VirtualNetworkTunnelVirtualNetworkListVirtualNetworksParams = VirtualNetworksAPI.VirtualNetworkTunnelVirtualNetworkListVirtualNetworksParams;
+  export import VirtualNetworkListParams = VirtualNetworksAPI.VirtualNetworkListParams;
 }

@@ -12,16 +12,14 @@ export {
   Monitors,
 } from './monitors/index';
 export {
+  PoolCreateResponse,
   PoolUpdateResponse,
+  PoolListResponse,
   PoolDeleteResponse,
   PoolGetResponse,
-  PoolLoadBalancerPoolsCreatePoolResponse,
-  PoolLoadBalancerPoolsListPoolsResponse,
-  PoolLoadBalancerPoolsPatchPoolsResponse,
+  PoolCreateParams,
   PoolUpdateParams,
-  PoolLoadBalancerPoolsCreatePoolParams,
-  PoolLoadBalancerPoolsListPoolsParams,
-  PoolLoadBalancerPoolsPatchPoolsParams,
+  PoolListParams,
   Pools,
 } from './pools/index';
 export { PreviewGetResponse, Previews } from './previews';

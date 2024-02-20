@@ -8,21 +8,21 @@ export class LastSeenIdentity extends APIResource {
   /**
    * Get last seen identity for a single user.
    */
-  get(
+  list(
     identifier: string,
     id: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LastSeenIdentityGetResponse> {
+  ): Core.APIPromise<LastSeenIdentityListResponse> {
     return (
       this._client.get(
         `/accounts/${identifier}/access/users/${id}/last_seen_identity`,
         options,
-      ) as Core.APIPromise<{ result: LastSeenIdentityGetResponse }>
+      ) as Core.APIPromise<{ result: LastSeenIdentityListResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface LastSeenIdentityGetResponse {
+export interface LastSeenIdentityListResponse {
   account_id?: string;
 
   auth_status?: string;
@@ -31,17 +31,17 @@ export interface LastSeenIdentityGetResponse {
 
   device_id?: string;
 
-  device_sessions?: Record<string, LastSeenIdentityGetResponse.DeviceSessions>;
+  device_sessions?: Record<string, LastSeenIdentityListResponse.DeviceSessions>;
 
-  devicePosture?: Record<string, LastSeenIdentityGetResponse.DevicePosture>;
+  devicePosture?: Record<string, LastSeenIdentityListResponse.DevicePosture>;
 
   email?: string;
 
-  geo?: LastSeenIdentityGetResponse.Geo;
+  geo?: LastSeenIdentityListResponse.Geo;
 
   iat?: number;
 
-  idp?: LastSeenIdentityGetResponse.Idp;
+  idp?: LastSeenIdentityListResponse.Idp;
 
   ip?: string;
 
@@ -49,7 +49,7 @@ export interface LastSeenIdentityGetResponse {
 
   is_warp?: boolean;
 
-  mtls_auth?: LastSeenIdentityGetResponse.MtlsAuth;
+  mtls_auth?: LastSeenIdentityListResponse.MtlsAuth;
 
   service_token_id?: string;
 
@@ -60,7 +60,7 @@ export interface LastSeenIdentityGetResponse {
   version?: number;
 }
 
-export namespace LastSeenIdentityGetResponse {
+export namespace LastSeenIdentityListResponse {
   export interface DeviceSessions {
     last_authenticated?: number;
   }
@@ -117,5 +117,5 @@ export namespace LastSeenIdentityGetResponse {
 }
 
 export namespace LastSeenIdentity {
-  export import LastSeenIdentityGetResponse = LastSeenIdentityAPI.LastSeenIdentityGetResponse;
+  export import LastSeenIdentityListResponse = LastSeenIdentityAPI.LastSeenIdentityListResponse;
 }

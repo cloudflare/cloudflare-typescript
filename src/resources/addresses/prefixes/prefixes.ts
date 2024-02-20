@@ -11,6 +11,22 @@ export class Prefixes extends APIResource {
   delegations: DelegationsAPI.Delegations = new DelegationsAPI.Delegations(this._client);
 
   /**
+   * Add a new prefix under the account.
+   */
+  create(
+    accountId: string,
+    body: PrefixCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PrefixCreateResponse> {
+    return (
+      this._client.post(`/accounts/${accountId}/addressing/prefixes`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: PrefixCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Modify the description for a prefix owned by the account.
    */
   update(
@@ -24,6 +40,17 @@ export class Prefixes extends APIResource {
         body,
         ...options,
       }) as Core.APIPromise<{ result: PrefixUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * List all prefixes owned by the account.
+   */
+  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<PrefixListResponse | null> {
+    return (
+      this._client.get(`/accounts/${accountId}/addressing/prefixes`, options) as Core.APIPromise<{
+        result: PrefixListResponse | null;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -57,36 +84,71 @@ export class Prefixes extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+
+export interface PrefixCreateResponse {
+  /**
+   * Identifier
+   */
+  id?: string;
 
   /**
-   * Add a new prefix under the account.
+   * Identifier
    */
-  ipAddressManagementPrefixesAddPrefix(
-    accountId: string,
-    body: PrefixIPAddressManagementPrefixesAddPrefixParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PrefixIPAddressManagementPrefixesAddPrefixResponse> {
-    return (
-      this._client.post(`/accounts/${accountId}/addressing/prefixes`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: PrefixIPAddressManagementPrefixesAddPrefixResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
+  account_id?: string;
 
   /**
-   * List all prefixes owned by the account.
+   * Prefix advertisement status to the Internet. This field is only not 'null' if on
+   * demand is enabled.
    */
-  ipAddressManagementPrefixesListPrefixes(
-    accountId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PrefixIPAddressManagementPrefixesListPrefixesResponse | null> {
-    return (
-      this._client.get(`/accounts/${accountId}/addressing/prefixes`, options) as Core.APIPromise<{
-        result: PrefixIPAddressManagementPrefixesListPrefixesResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
+  advertised?: boolean | null;
+
+  /**
+   * Last time the advertisement status was changed. This field is only not 'null' if
+   * on demand is enabled.
+   */
+  advertised_modified_at?: string | null;
+
+  /**
+   * Approval state of the prefix (P = pending, V = active).
+   */
+  approved?: string;
+
+  /**
+   * Autonomous System Number (ASN) the prefix will be advertised under.
+   */
+  asn?: number | null;
+
+  /**
+   * IP Prefix in Classless Inter-Domain Routing format.
+   */
+  cidr?: string;
+
+  created_at?: string;
+
+  /**
+   * Description of the prefix.
+   */
+  description?: string;
+
+  /**
+   * Identifier for the uploaded LOA document.
+   */
+  loa_document_id?: string | null;
+
+  modified_at?: string;
+
+  /**
+   * Whether advertisement of the prefix to the Internet may be dynamically enabled
+   * or disabled.
+   */
+  on_demand_enabled?: boolean;
+
+  /**
+   * Whether advertisement status of the prefix is locked, meaning it cannot be
+   * changed.
+   */
+  on_demand_locked?: boolean;
 }
 
 export interface PrefixUpdateResponse {
@@ -152,6 +214,75 @@ export interface PrefixUpdateResponse {
    * changed.
    */
   on_demand_locked?: boolean;
+}
+
+export type PrefixListResponse = Array<PrefixListResponse.PrefixListResponseItem>;
+
+export namespace PrefixListResponse {
+  export interface PrefixListResponseItem {
+    /**
+     * Identifier
+     */
+    id?: string;
+
+    /**
+     * Identifier
+     */
+    account_id?: string;
+
+    /**
+     * Prefix advertisement status to the Internet. This field is only not 'null' if on
+     * demand is enabled.
+     */
+    advertised?: boolean | null;
+
+    /**
+     * Last time the advertisement status was changed. This field is only not 'null' if
+     * on demand is enabled.
+     */
+    advertised_modified_at?: string | null;
+
+    /**
+     * Approval state of the prefix (P = pending, V = active).
+     */
+    approved?: string;
+
+    /**
+     * Autonomous System Number (ASN) the prefix will be advertised under.
+     */
+    asn?: number | null;
+
+    /**
+     * IP Prefix in Classless Inter-Domain Routing format.
+     */
+    cidr?: string;
+
+    created_at?: string;
+
+    /**
+     * Description of the prefix.
+     */
+    description?: string;
+
+    /**
+     * Identifier for the uploaded LOA document.
+     */
+    loa_document_id?: string | null;
+
+    modified_at?: string;
+
+    /**
+     * Whether advertisement of the prefix to the Internet may be dynamically enabled
+     * or disabled.
+     */
+    on_demand_enabled?: boolean;
+
+    /**
+     * Whether advertisement status of the prefix is locked, meaning it cannot be
+     * changed.
+     */
+    on_demand_locked?: boolean;
+  }
 }
 
 export type PrefixDeleteResponse = unknown | Array<unknown> | string;
@@ -221,149 +352,7 @@ export interface PrefixGetResponse {
   on_demand_locked?: boolean;
 }
 
-export interface PrefixIPAddressManagementPrefixesAddPrefixResponse {
-  /**
-   * Identifier
-   */
-  id?: string;
-
-  /**
-   * Identifier
-   */
-  account_id?: string;
-
-  /**
-   * Prefix advertisement status to the Internet. This field is only not 'null' if on
-   * demand is enabled.
-   */
-  advertised?: boolean | null;
-
-  /**
-   * Last time the advertisement status was changed. This field is only not 'null' if
-   * on demand is enabled.
-   */
-  advertised_modified_at?: string | null;
-
-  /**
-   * Approval state of the prefix (P = pending, V = active).
-   */
-  approved?: string;
-
-  /**
-   * Autonomous System Number (ASN) the prefix will be advertised under.
-   */
-  asn?: number | null;
-
-  /**
-   * IP Prefix in Classless Inter-Domain Routing format.
-   */
-  cidr?: string;
-
-  created_at?: string;
-
-  /**
-   * Description of the prefix.
-   */
-  description?: string;
-
-  /**
-   * Identifier for the uploaded LOA document.
-   */
-  loa_document_id?: string | null;
-
-  modified_at?: string;
-
-  /**
-   * Whether advertisement of the prefix to the Internet may be dynamically enabled
-   * or disabled.
-   */
-  on_demand_enabled?: boolean;
-
-  /**
-   * Whether advertisement status of the prefix is locked, meaning it cannot be
-   * changed.
-   */
-  on_demand_locked?: boolean;
-}
-
-export type PrefixIPAddressManagementPrefixesListPrefixesResponse =
-  Array<PrefixIPAddressManagementPrefixesListPrefixesResponse.PrefixIPAddressManagementPrefixesListPrefixesResponseItem>;
-
-export namespace PrefixIPAddressManagementPrefixesListPrefixesResponse {
-  export interface PrefixIPAddressManagementPrefixesListPrefixesResponseItem {
-    /**
-     * Identifier
-     */
-    id?: string;
-
-    /**
-     * Identifier
-     */
-    account_id?: string;
-
-    /**
-     * Prefix advertisement status to the Internet. This field is only not 'null' if on
-     * demand is enabled.
-     */
-    advertised?: boolean | null;
-
-    /**
-     * Last time the advertisement status was changed. This field is only not 'null' if
-     * on demand is enabled.
-     */
-    advertised_modified_at?: string | null;
-
-    /**
-     * Approval state of the prefix (P = pending, V = active).
-     */
-    approved?: string;
-
-    /**
-     * Autonomous System Number (ASN) the prefix will be advertised under.
-     */
-    asn?: number | null;
-
-    /**
-     * IP Prefix in Classless Inter-Domain Routing format.
-     */
-    cidr?: string;
-
-    created_at?: string;
-
-    /**
-     * Description of the prefix.
-     */
-    description?: string;
-
-    /**
-     * Identifier for the uploaded LOA document.
-     */
-    loa_document_id?: string | null;
-
-    modified_at?: string;
-
-    /**
-     * Whether advertisement of the prefix to the Internet may be dynamically enabled
-     * or disabled.
-     */
-    on_demand_enabled?: boolean;
-
-    /**
-     * Whether advertisement status of the prefix is locked, meaning it cannot be
-     * changed.
-     */
-    on_demand_locked?: boolean;
-  }
-}
-
-export interface PrefixUpdateParams {
-  /**
-   * Description of the prefix.
-   */
-  description: string;
-}
-
-export interface PrefixIPAddressManagementPrefixesAddPrefixParams {
+export interface PrefixCreateParams {
   /**
    * Autonomous System Number (ASN) the prefix will be advertised under.
    */
@@ -380,18 +369,25 @@ export interface PrefixIPAddressManagementPrefixesAddPrefixParams {
   loa_document_id: string | null;
 }
 
+export interface PrefixUpdateParams {
+  /**
+   * Description of the prefix.
+   */
+  description: string;
+}
+
 export namespace Prefixes {
+  export import PrefixCreateResponse = PrefixesAPI.PrefixCreateResponse;
   export import PrefixUpdateResponse = PrefixesAPI.PrefixUpdateResponse;
+  export import PrefixListResponse = PrefixesAPI.PrefixListResponse;
   export import PrefixDeleteResponse = PrefixesAPI.PrefixDeleteResponse;
   export import PrefixGetResponse = PrefixesAPI.PrefixGetResponse;
-  export import PrefixIPAddressManagementPrefixesAddPrefixResponse = PrefixesAPI.PrefixIPAddressManagementPrefixesAddPrefixResponse;
-  export import PrefixIPAddressManagementPrefixesListPrefixesResponse = PrefixesAPI.PrefixIPAddressManagementPrefixesListPrefixesResponse;
+  export import PrefixCreateParams = PrefixesAPI.PrefixCreateParams;
   export import PrefixUpdateParams = PrefixesAPI.PrefixUpdateParams;
-  export import PrefixIPAddressManagementPrefixesAddPrefixParams = PrefixesAPI.PrefixIPAddressManagementPrefixesAddPrefixParams;
   export import BGPs = BGPsAPI.BGPs;
   export import Delegations = DelegationsAPI.Delegations;
+  export import DelegationCreateResponse = DelegationsAPI.DelegationCreateResponse;
+  export import DelegationListResponse = DelegationsAPI.DelegationListResponse;
   export import DelegationDeleteResponse = DelegationsAPI.DelegationDeleteResponse;
-  export import DelegationIPAddressManagementPrefixDelegationCreatePrefixDelegationResponse = DelegationsAPI.DelegationIPAddressManagementPrefixDelegationCreatePrefixDelegationResponse;
-  export import DelegationIPAddressManagementPrefixDelegationListPrefixDelegationsResponse = DelegationsAPI.DelegationIPAddressManagementPrefixDelegationListPrefixDelegationsResponse;
-  export import DelegationIPAddressManagementPrefixDelegationCreatePrefixDelegationParams = DelegationsAPI.DelegationIPAddressManagementPrefixDelegationCreatePrefixDelegationParams;
+  export import DelegationCreateParams = DelegationsAPI.DelegationCreateParams;
 }

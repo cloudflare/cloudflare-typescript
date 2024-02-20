@@ -8,19 +8,16 @@ export class Fulls extends APIResource {
   /**
    * Lists default sampling, router IPs, and rules for account.
    */
-  magicNetworkMonitoringConfigurationListRulesAndAccountConfiguration(
-    accountIdentifier: unknown,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<FullMagicNetworkMonitoringConfigurationListRulesAndAccountConfigurationResponse> {
+  list(accountIdentifier: unknown, options?: Core.RequestOptions): Core.APIPromise<FullListResponse> {
     return (
       this._client.get(`/accounts/${accountIdentifier}/mnm/config/full`, options) as Core.APIPromise<{
-        result: FullMagicNetworkMonitoringConfigurationListRulesAndAccountConfigurationResponse;
+        result: FullListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface FullMagicNetworkMonitoringConfigurationListRulesAndAccountConfigurationResponse {
+export interface FullListResponse {
   /**
    * Fallback sampling rate of flow messages being sent in packets per second. This
    * should match the packet sampling rate configured on the router.
@@ -36,5 +33,5 @@ export interface FullMagicNetworkMonitoringConfigurationListRulesAndAccountConfi
 }
 
 export namespace Fulls {
-  export import FullMagicNetworkMonitoringConfigurationListRulesAndAccountConfigurationResponse = FullsAPI.FullMagicNetworkMonitoringConfigurationListRulesAndAccountConfigurationResponse;
+  export import FullListResponse = FullsAPI.FullListResponse;
 }

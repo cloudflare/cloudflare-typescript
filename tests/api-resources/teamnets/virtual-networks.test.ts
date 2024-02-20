@@ -13,6 +13,29 @@ const cloudflare = new Cloudflare({
 
 describe('resource virtualNetworks', () => {
   // skipped: tests are disabled for the time being
+  test.skip('create: only required params', async () => {
+    const responsePromise = cloudflare.teamnets.virtualNetworks.create('699d98642c564d2e855e9661899b7252', {
+      name: 'us-east-1-vpc',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('create: required and optional params', async () => {
+    const response = await cloudflare.teamnets.virtualNetworks.create('699d98642c564d2e855e9661899b7252', {
+      name: 'us-east-1-vpc',
+      comment: 'Staging VPC for data science',
+      is_default: true,
+    });
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('update', async () => {
     const responsePromise = cloudflare.teamnets.virtualNetworks.update(
       '699d98642c564d2e855e9661899b7252',
@@ -29,6 +52,40 @@ describe('resource virtualNetworks', () => {
   });
 
   // skipped: tests are disabled for the time being
+  test.skip('list', async () => {
+    const responsePromise = cloudflare.teamnets.virtualNetworks.list('699d98642c564d2e855e9661899b7252');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.teamnets.virtualNetworks.list('699d98642c564d2e855e9661899b7252', {
+        path: '/_stainless_unknown_path',
+      }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.teamnets.virtualNetworks.list(
+        '699d98642c564d2e855e9661899b7252',
+        { is_default: {}, is_deleted: {}, name: 'us-east-1-vpc', vnet_name: 'us-east-1-vpc' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('delete', async () => {
     const responsePromise = cloudflare.teamnets.virtualNetworks.delete(
       '699d98642c564d2e855e9661899b7252',
@@ -41,65 +98,5 @@ describe('resource virtualNetworks', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('tunnelVirtualNetworkCreateAVirtualNetwork: only required params', async () => {
-    const responsePromise = cloudflare.teamnets.virtualNetworks.tunnelVirtualNetworkCreateAVirtualNetwork(
-      '699d98642c564d2e855e9661899b7252',
-      { name: 'us-east-1-vpc' },
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('tunnelVirtualNetworkCreateAVirtualNetwork: required and optional params', async () => {
-    const response = await cloudflare.teamnets.virtualNetworks.tunnelVirtualNetworkCreateAVirtualNetwork(
-      '699d98642c564d2e855e9661899b7252',
-      { name: 'us-east-1-vpc', comment: 'Staging VPC for data science', is_default: true },
-    );
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('tunnelVirtualNetworkListVirtualNetworks', async () => {
-    const responsePromise = cloudflare.teamnets.virtualNetworks.tunnelVirtualNetworkListVirtualNetworks(
-      '699d98642c564d2e855e9661899b7252',
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('tunnelVirtualNetworkListVirtualNetworks: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.teamnets.virtualNetworks.tunnelVirtualNetworkListVirtualNetworks(
-        '699d98642c564d2e855e9661899b7252',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('tunnelVirtualNetworkListVirtualNetworks: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.teamnets.virtualNetworks.tunnelVirtualNetworkListVirtualNetworks(
-        '699d98642c564d2e855e9661899b7252',
-        { is_default: {}, is_deleted: {}, name: 'us-east-1-vpc', vnet_name: 'us-east-1-vpc' },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 });

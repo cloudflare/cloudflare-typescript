@@ -2,23 +2,23 @@
 
 export {
   RuleCreateResponse,
-  RuleUpdateResponse,
   RuleListResponse,
   RuleDeleteResponse,
+  RuleReplaceResponse,
   RuleCreateParams,
-  RuleUpdateParams,
+  RuleReplaceParams,
   Rules,
 } from './rules';
 export { Rum } from './rum';
 export {
   SiteInfoCreateResponse,
-  SiteInfoUpdateResponse,
   SiteInfoListResponse,
   SiteInfoDeleteResponse,
   SiteInfoGetResponse,
+  SiteInfoReplaceResponse,
   SiteInfoCreateParams,
-  SiteInfoUpdateParams,
   SiteInfoListParams,
+  SiteInfoReplaceParams,
   SiteInfoListResponsesV4PagePaginationArray,
   SiteInfos,
 } from './site-infos';

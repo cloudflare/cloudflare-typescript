@@ -13,8 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource details', () => {
   // skipped: tests are disabled for the time being
-  test.skip('waitingRoomPreviewActiveEventDetails', async () => {
-    const responsePromise = cloudflare.waitingRooms.events.details.waitingRoomPreviewActiveEventDetails(
+  test.skip('get', async () => {
+    const responsePromise = cloudflare.waitingRooms.events.details.get(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '699d98642c564d2e855e9661899b7252',
       '25756b2dfe6e378a06b033b670413757',
@@ -29,10 +29,10 @@ describe('resource details', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('waitingRoomPreviewActiveEventDetails: request options instead of params are passed correctly', async () => {
+  test.skip('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.waitingRooms.events.details.waitingRoomPreviewActiveEventDetails(
+      cloudflare.waitingRooms.events.details.get(
         '023e105f4ecef8ad9ca31a8372d0c353',
         '699d98642c564d2e855e9661899b7252',
         '25756b2dfe6e378a06b033b670413757',

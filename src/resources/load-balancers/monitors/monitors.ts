@@ -722,8 +722,8 @@ export namespace Monitors {
   export import MonitorCreateParams = MonitorsAPI.MonitorCreateParams;
   export import MonitorUpdateParams = MonitorsAPI.MonitorUpdateParams;
   export import Previews = PreviewsAPI.Previews;
-  export import PreviewAccountLoadBalancerMonitorsPreviewMonitorResponse = PreviewsAPI.PreviewAccountLoadBalancerMonitorsPreviewMonitorResponse;
-  export import PreviewAccountLoadBalancerMonitorsPreviewMonitorParams = PreviewsAPI.PreviewAccountLoadBalancerMonitorsPreviewMonitorParams;
+  export import PreviewCreateResponse = PreviewsAPI.PreviewCreateResponse;
+  export import PreviewCreateParams = PreviewsAPI.PreviewCreateParams;
   export import References = ReferencesAPI.References;
-  export import ReferenceAccountLoadBalancerMonitorsListMonitorReferencesResponse = ReferencesAPI.ReferenceAccountLoadBalancerMonitorsListMonitorReferencesResponse;
+  export import ReferenceListResponse = ReferencesAPI.ReferenceListResponse;
 }

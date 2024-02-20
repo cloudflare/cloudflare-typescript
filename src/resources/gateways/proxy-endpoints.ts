@@ -6,6 +6,22 @@ import * as ProxyEndpointsAPI from 'cloudflare/resources/gateways/proxy-endpoint
 
 export class ProxyEndpoints extends APIResource {
   /**
+   * Creates a new Zero Trust Gateway proxy endpoint.
+   */
+  create(
+    accountId: unknown,
+    body: ProxyEndpointCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ProxyEndpointCreateResponse> {
+    return (
+      this._client.post(`/accounts/${accountId}/gateway/proxy_endpoints`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: ProxyEndpointCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Updates a configured Zero Trust Gateway proxy endpoint.
    */
   update(
@@ -23,18 +39,13 @@ export class ProxyEndpoints extends APIResource {
   }
 
   /**
-   * Fetches all Zero Trust Gateway proxy endpoints for an account.
+   * Fetches a single Zero Trust Gateway proxy endpoint.
    */
-  list(
-    accountId: unknown,
-    proxyEndpointId: unknown,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ProxyEndpointListResponse> {
+  list(accountId: unknown, options?: Core.RequestOptions): Core.APIPromise<ProxyEndpointListResponse | null> {
     return (
-      this._client.get(
-        `/accounts/${accountId}/gateway/proxy_endpoints/${proxyEndpointId}`,
-        options,
-      ) as Core.APIPromise<{ result: ProxyEndpointListResponse }>
+      this._client.get(`/accounts/${accountId}/gateway/proxy_endpoints`, options) as Core.APIPromise<{
+        result: ProxyEndpointListResponse | null;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -69,38 +80,29 @@ export class ProxyEndpoints extends APIResource {
       ) as Core.APIPromise<{ result: ProxyEndpointGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+
+export interface ProxyEndpointCreateResponse {
+  id?: unknown;
+
+  created_at?: string;
 
   /**
-   * Creates a new Zero Trust Gateway proxy endpoint.
+   * A list of CIDRs to restrict ingress connections.
    */
-  zeroTrustGatewayProxyEndpointsCreateProxyEndpoint(
-    accountId: unknown,
-    body: ProxyEndpointZeroTrustGatewayProxyEndpointsCreateProxyEndpointParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ProxyEndpointZeroTrustGatewayProxyEndpointsCreateProxyEndpointResponse> {
-    return (
-      this._client.post(`/accounts/${accountId}/gateway/proxy_endpoints`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{
-        result: ProxyEndpointZeroTrustGatewayProxyEndpointsCreateProxyEndpointResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
+  ips?: Array<string>;
 
   /**
-   * Fetches a single Zero Trust Gateway proxy endpoint.
+   * The name of the proxy endpoint.
    */
-  zeroTrustGatewayProxyEndpointsListProxyEndpoints(
-    accountId: unknown,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ProxyEndpointZeroTrustGatewayProxyEndpointsListProxyEndpointsResponse | null> {
-    return (
-      this._client.get(`/accounts/${accountId}/gateway/proxy_endpoints`, options) as Core.APIPromise<{
-        result: ProxyEndpointZeroTrustGatewayProxyEndpointsListProxyEndpointsResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
+  name?: string;
+
+  /**
+   * The subdomain to be used as the destination in the proxy client.
+   */
+  subdomain?: string;
+
+  updated_at?: string;
 }
 
 export interface ProxyEndpointUpdateResponse {
@@ -126,27 +128,31 @@ export interface ProxyEndpointUpdateResponse {
   updated_at?: string;
 }
 
-export interface ProxyEndpointListResponse {
-  id?: unknown;
+export type ProxyEndpointListResponse = Array<ProxyEndpointListResponse.ProxyEndpointListResponseItem>;
 
-  created_at?: string;
+export namespace ProxyEndpointListResponse {
+  export interface ProxyEndpointListResponseItem {
+    id?: unknown;
 
-  /**
-   * A list of CIDRs to restrict ingress connections.
-   */
-  ips?: Array<string>;
+    created_at?: string;
 
-  /**
-   * The name of the proxy endpoint.
-   */
-  name?: string;
+    /**
+     * A list of CIDRs to restrict ingress connections.
+     */
+    ips?: Array<string>;
 
-  /**
-   * The subdomain to be used as the destination in the proxy client.
-   */
-  subdomain?: string;
+    /**
+     * The name of the proxy endpoint.
+     */
+    name?: string;
 
-  updated_at?: string;
+    /**
+     * The subdomain to be used as the destination in the proxy client.
+     */
+    subdomain?: string;
+
+    updated_at?: string;
+  }
 }
 
 export type ProxyEndpointDeleteResponse = unknown | string;
@@ -174,55 +180,21 @@ export interface ProxyEndpointGetResponse {
   updated_at?: string;
 }
 
-export interface ProxyEndpointZeroTrustGatewayProxyEndpointsCreateProxyEndpointResponse {
-  id?: unknown;
-
-  created_at?: string;
-
+export interface ProxyEndpointCreateParams {
   /**
    * A list of CIDRs to restrict ingress connections.
    */
-  ips?: Array<string>;
+  ips: Array<string>;
 
   /**
    * The name of the proxy endpoint.
    */
-  name?: string;
+  name: string;
 
   /**
    * The subdomain to be used as the destination in the proxy client.
    */
   subdomain?: string;
-
-  updated_at?: string;
-}
-
-export type ProxyEndpointZeroTrustGatewayProxyEndpointsListProxyEndpointsResponse =
-  Array<ProxyEndpointZeroTrustGatewayProxyEndpointsListProxyEndpointsResponse.ProxyEndpointZeroTrustGatewayProxyEndpointsListProxyEndpointsResponseItem>;
-
-export namespace ProxyEndpointZeroTrustGatewayProxyEndpointsListProxyEndpointsResponse {
-  export interface ProxyEndpointZeroTrustGatewayProxyEndpointsListProxyEndpointsResponseItem {
-    id?: unknown;
-
-    created_at?: string;
-
-    /**
-     * A list of CIDRs to restrict ingress connections.
-     */
-    ips?: Array<string>;
-
-    /**
-     * The name of the proxy endpoint.
-     */
-    name?: string;
-
-    /**
-     * The subdomain to be used as the destination in the proxy client.
-     */
-    subdomain?: string;
-
-    updated_at?: string;
-  }
 }
 
 export interface ProxyEndpointUpdateParams {
@@ -242,30 +214,12 @@ export interface ProxyEndpointUpdateParams {
   subdomain?: string;
 }
 
-export interface ProxyEndpointZeroTrustGatewayProxyEndpointsCreateProxyEndpointParams {
-  /**
-   * A list of CIDRs to restrict ingress connections.
-   */
-  ips: Array<string>;
-
-  /**
-   * The name of the proxy endpoint.
-   */
-  name: string;
-
-  /**
-   * The subdomain to be used as the destination in the proxy client.
-   */
-  subdomain?: string;
-}
-
 export namespace ProxyEndpoints {
+  export import ProxyEndpointCreateResponse = ProxyEndpointsAPI.ProxyEndpointCreateResponse;
   export import ProxyEndpointUpdateResponse = ProxyEndpointsAPI.ProxyEndpointUpdateResponse;
   export import ProxyEndpointListResponse = ProxyEndpointsAPI.ProxyEndpointListResponse;
   export import ProxyEndpointDeleteResponse = ProxyEndpointsAPI.ProxyEndpointDeleteResponse;
   export import ProxyEndpointGetResponse = ProxyEndpointsAPI.ProxyEndpointGetResponse;
-  export import ProxyEndpointZeroTrustGatewayProxyEndpointsCreateProxyEndpointResponse = ProxyEndpointsAPI.ProxyEndpointZeroTrustGatewayProxyEndpointsCreateProxyEndpointResponse;
-  export import ProxyEndpointZeroTrustGatewayProxyEndpointsListProxyEndpointsResponse = ProxyEndpointsAPI.ProxyEndpointZeroTrustGatewayProxyEndpointsListProxyEndpointsResponse;
+  export import ProxyEndpointCreateParams = ProxyEndpointsAPI.ProxyEndpointCreateParams;
   export import ProxyEndpointUpdateParams = ProxyEndpointsAPI.ProxyEndpointUpdateParams;
-  export import ProxyEndpointZeroTrustGatewayProxyEndpointsCreateProxyEndpointParams = ProxyEndpointsAPI.ProxyEndpointZeroTrustGatewayProxyEndpointsCreateProxyEndpointParams;
 }

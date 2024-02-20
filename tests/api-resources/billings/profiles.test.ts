@@ -13,8 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource profiles', () => {
   // skipped: tests are disabled for the time being
-  test.skip('accountBillingProfileBillingProfileDetails', async () => {
-    const responsePromise = cloudflare.billings.profiles.accountBillingProfileBillingProfileDetails({});
+  test.skip('get', async () => {
+    const responsePromise = cloudflare.billings.profiles.get({});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -25,13 +25,10 @@ describe('resource profiles', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('accountBillingProfileBillingProfileDetails: request options instead of params are passed correctly', async () => {
+  test.skip('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.billings.profiles.accountBillingProfileBillingProfileDetails(
-        {},
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+    await expect(cloudflare.billings.profiles.get({}, { path: '/_stainless_unknown_path' })).rejects.toThrow(
+      Cloudflare.NotFoundError,
+    );
   });
 });

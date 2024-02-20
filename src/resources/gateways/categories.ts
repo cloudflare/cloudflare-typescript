@@ -8,23 +8,19 @@ export class Categories extends APIResource {
   /**
    * Fetches a list of all categories.
    */
-  zeroTrustGatewayCategoriesListCategories(
-    accountId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CategoryZeroTrustGatewayCategoriesListCategoriesResponse | null> {
+  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<CategoryListResponse | null> {
     return (
       this._client.get(`/accounts/${accountId}/gateway/categories`, options) as Core.APIPromise<{
-        result: CategoryZeroTrustGatewayCategoriesListCategoriesResponse | null;
+        result: CategoryListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type CategoryZeroTrustGatewayCategoriesListCategoriesResponse =
-  Array<CategoryZeroTrustGatewayCategoriesListCategoriesResponse.CategoryZeroTrustGatewayCategoriesListCategoriesResponseItem>;
+export type CategoryListResponse = Array<CategoryListResponse.CategoryListResponseItem>;
 
-export namespace CategoryZeroTrustGatewayCategoriesListCategoriesResponse {
-  export interface CategoryZeroTrustGatewayCategoriesListCategoriesResponseItem {
+export namespace CategoryListResponse {
+  export interface CategoryListResponseItem {
     /**
      * The identifier for this category. There is only one category per ID.
      */
@@ -56,10 +52,10 @@ export namespace CategoryZeroTrustGatewayCategoriesListCategoriesResponse {
     /**
      * All subcategories for this category.
      */
-    subcategories?: Array<CategoryZeroTrustGatewayCategoriesListCategoriesResponseItem.Subcategory>;
+    subcategories?: Array<CategoryListResponseItem.Subcategory>;
   }
 
-  export namespace CategoryZeroTrustGatewayCategoriesListCategoriesResponseItem {
+  export namespace CategoryListResponseItem {
     export interface Subcategory {
       /**
        * The identifier for this category. There is only one category per ID.
@@ -93,5 +89,5 @@ export namespace CategoryZeroTrustGatewayCategoriesListCategoriesResponse {
 }
 
 export namespace Categories {
-  export import CategoryZeroTrustGatewayCategoriesListCategoriesResponse = CategoriesAPI.CategoryZeroTrustGatewayCategoriesListCategoriesResponse;
+  export import CategoryListResponse = CategoriesAPI.CategoryListResponse;
 }

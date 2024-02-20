@@ -13,12 +13,10 @@ const cloudflare = new Cloudflare({
 
 describe('resource queues', () => {
   // skipped: tests are disabled for the time being
-  test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.workers.queues.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'example-queue',
-      { queue_name: 'renamed-example-queue' },
-    );
+  test.skip('create: only required params', async () => {
+    const responsePromise = cloudflare.workers.queues.create('023e105f4ecef8ad9ca31a8372d0c353', {
+      queue_name: 'example-queue',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -29,12 +27,10 @@ describe('resource queues', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.workers.queues.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'example-queue',
-      { queue_name: 'renamed-example-queue' },
-    );
+  test.skip('create: required and optional params', async () => {
+    const response = await cloudflare.workers.queues.create('023e105f4ecef8ad9ca31a8372d0c353', {
+      queue_name: 'example-queue',
+    });
   });
 
   // skipped: tests are disabled for the time being
@@ -100,10 +96,12 @@ describe('resource queues', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('queueCreateQueue: only required params', async () => {
-    const responsePromise = cloudflare.workers.queues.queueCreateQueue('023e105f4ecef8ad9ca31a8372d0c353', {
-      queue_name: 'example-queue',
-    });
+  test.skip('replace: only required params', async () => {
+    const responsePromise = cloudflare.workers.queues.replace(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      'example-queue',
+      { queue_name: 'renamed-example-queue' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -114,9 +112,11 @@ describe('resource queues', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('queueCreateQueue: required and optional params', async () => {
-    const response = await cloudflare.workers.queues.queueCreateQueue('023e105f4ecef8ad9ca31a8372d0c353', {
-      queue_name: 'example-queue',
-    });
+  test.skip('replace: required and optional params', async () => {
+    const response = await cloudflare.workers.queues.replace(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      'example-queue',
+      { queue_name: 'renamed-example-queue' },
+    );
   });
 });

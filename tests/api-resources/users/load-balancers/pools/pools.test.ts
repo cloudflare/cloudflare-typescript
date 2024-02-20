@@ -13,57 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource pools', () => {
   // skipped: tests are disabled for the time being
-  test.skip('update', async () => {
-    const responsePromise = cloudflare.users.loadBalancers.pools.update(
-      '17b5962d775c646f3f9725cbc7a53df4',
-      {},
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
-    const responsePromise = cloudflare.users.loadBalancers.pools.delete('17b5962d775c646f3f9725cbc7a53df4');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
-    const responsePromise = cloudflare.users.loadBalancers.pools.get('17b5962d775c646f3f9725cbc7a53df4');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.users.loadBalancers.pools.get('17b5962d775c646f3f9725cbc7a53df4', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('loadBalancerPoolsCreatePool: only required params', async () => {
-    const responsePromise = cloudflare.users.loadBalancers.pools.loadBalancerPoolsCreatePool({
+  test.skip('create: only required params', async () => {
+    const responsePromise = cloudflare.users.loadBalancers.pools.create({
       name: 'primary-dc-1',
       origins: [{}, {}, {}],
     });
@@ -77,8 +28,8 @@ describe('resource pools', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('loadBalancerPoolsCreatePool: required and optional params', async () => {
-    const response = await cloudflare.users.loadBalancers.pools.loadBalancerPoolsCreatePool({
+  test.skip('create: required and optional params', async () => {
+    const response = await cloudflare.users.loadBalancers.pools.create({
       name: 'primary-dc-1',
       origins: [
         {
@@ -129,8 +80,11 @@ describe('resource pools', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('loadBalancerPoolsListPools', async () => {
-    const responsePromise = cloudflare.users.loadBalancers.pools.loadBalancerPoolsListPools();
+  test.skip('update', async () => {
+    const responsePromise = cloudflare.users.loadBalancers.pools.update(
+      '17b5962d775c646f3f9725cbc7a53df4',
+      {},
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -141,27 +95,8 @@ describe('resource pools', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('loadBalancerPoolsListPools: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.users.loadBalancers.pools.loadBalancerPoolsListPools({ path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('loadBalancerPoolsListPools: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.users.loadBalancers.pools.loadBalancerPoolsListPools(
-        { monitor: {} },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('loadBalancerPoolsPatchPools', async () => {
-    const responsePromise = cloudflare.users.loadBalancers.pools.loadBalancerPoolsPatchPools({});
+  test.skip('list', async () => {
+    const responsePromise = cloudflare.users.loadBalancers.pools.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -169,5 +104,55 @@ describe('resource pools', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.users.loadBalancers.pools.list({ path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.users.loadBalancers.pools.list({ monitor: {} }, { path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('delete', async () => {
+    const responsePromise = cloudflare.users.loadBalancers.pools.delete('17b5962d775c646f3f9725cbc7a53df4');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get', async () => {
+    const responsePromise = cloudflare.users.loadBalancers.pools.get('17b5962d775c646f3f9725cbc7a53df4');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.users.loadBalancers.pools.get('17b5962d775c646f3f9725cbc7a53df4', {
+        path: '/_stainless_unknown_path',
+      }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 });

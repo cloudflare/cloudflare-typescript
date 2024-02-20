@@ -4303,9 +4303,9 @@ export namespace LoadBalancers {
   export import Previews = PreviewsAPI.Previews;
   export import PreviewGetResponse = PreviewsAPI.PreviewGetResponse;
   export import Regions = RegionsAPI.Regions;
+  export import RegionListResponse = RegionsAPI.RegionListResponse;
   export import RegionGetResponse = RegionsAPI.RegionGetResponse;
-  export import RegionLoadBalancerRegionsListRegionsResponse = RegionsAPI.RegionLoadBalancerRegionsListRegionsResponse;
-  export import RegionLoadBalancerRegionsListRegionsParams = RegionsAPI.RegionLoadBalancerRegionsListRegionsParams;
+  export import RegionListParams = RegionsAPI.RegionListParams;
   export import Searches = SearchesAPI.Searches;
   export import SearchListResponse = SearchesAPI.SearchListResponse;
   export import SearchListParams = SearchesAPI.SearchListParams;

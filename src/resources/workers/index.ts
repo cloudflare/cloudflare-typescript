@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
-  AccountSettingWorkerAccountSettingsCreateWorkerAccountSettingsResponse,
-  AccountSettingWorkerAccountSettingsFetchWorkerAccountSettingsResponse,
-  AccountSettingWorkerAccountSettingsCreateWorkerAccountSettingsParams,
+  AccountSettingGetResponse,
+  AccountSettingReplaceResponse,
+  AccountSettingReplaceParams,
   AccountSettings,
 } from './account-settings';
 export { Deployments } from './deployments/index';
@@ -13,58 +13,56 @@ export {
   DeploymentsByScript,
 } from './deployments-by-script';
 export {
+  DomainListResponse,
   DomainGetResponse,
-  DomainWorkerDomainAttachToDomainResponse,
-  DomainWorkerDomainListDomainsResponse,
-  DomainWorkerDomainAttachToDomainParams,
-  DomainWorkerDomainListDomainsParams,
+  DomainReplaceResponse,
+  DomainListParams,
+  DomainReplaceParams,
   Domains,
 } from './domains';
 export { DurableObjects } from './durable-objects/index';
 export {
-  FilterUpdateResponse,
+  FilterCreateResponse,
+  FilterListResponse,
   FilterDeleteResponse,
-  FilterWorkerFiltersDeprecatedCreateFilterResponse,
-  FilterWorkerFiltersDeprecatedListFiltersResponse,
-  FilterUpdateParams,
-  FilterWorkerFiltersDeprecatedCreateFilterParams,
+  FilterReplaceResponse,
+  FilterCreateParams,
+  FilterReplaceParams,
   Filters,
 } from './filters';
 export {
-  QueueUpdateResponse,
+  QueueCreateResponse,
   QueueListResponse,
   QueueDeleteResponse,
   QueueGetResponse,
-  QueueQueueCreateQueueResponse,
-  QueueUpdateParams,
-  QueueQueueCreateQueueParams,
+  QueueReplaceResponse,
+  QueueCreateParams,
+  QueueReplaceParams,
   Queues,
 } from './queues/index';
 export {
-  RouteUpdateResponse,
+  RouteCreateResponse,
+  RouteListResponse,
   RouteDeleteResponse,
   RouteGetResponse,
-  RouteWorkerRoutesCreateRouteResponse,
-  RouteWorkerRoutesListRoutesResponse,
-  RouteUpdateParams,
-  RouteWorkerRoutesCreateRouteParams,
+  RouteReplaceResponse,
+  RouteCreateParams,
+  RouteReplaceParams,
   Routes,
 } from './routes';
 export { Script } from './script';
 export {
-  ScriptCreateResponse,
-  ScriptUpdateResponse,
   ScriptListResponse,
-  ScriptCreateParams,
-  ScriptUpdateParams,
+  ScriptReplaceResponse,
   ScriptDeleteParams,
+  ScriptReplaceParams,
   Scripts,
 } from './scripts/index';
 export { Services } from './services/index';
 export {
-  SubdomainWorkerSubdomainCreateSubdomainResponse,
-  SubdomainWorkerSubdomainGetSubdomainResponse,
-  SubdomainWorkerSubdomainCreateSubdomainParams,
+  SubdomainGetResponse,
+  SubdomainReplaceResponse,
+  SubdomainReplaceParams,
   Subdomains,
 } from './subdomains';
 export { Workers } from './workers';

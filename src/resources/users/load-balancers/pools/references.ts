@@ -8,13 +8,10 @@ export class References extends APIResource {
   /**
    * Get the list of resources that reference the provided pool.
    */
-  loadBalancerPoolsListPoolReferences(
-    poolId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ReferenceLoadBalancerPoolsListPoolReferencesResponse | null> {
+  list(poolId: string, options?: Core.RequestOptions): Core.APIPromise<ReferenceListResponse | null> {
     return (
       this._client.get(`/user/load_balancers/pools/${poolId}/references`, options) as Core.APIPromise<{
-        result: ReferenceLoadBalancerPoolsListPoolReferencesResponse | null;
+        result: ReferenceListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -23,11 +20,10 @@ export class References extends APIResource {
 /**
  * List of resources that reference a given pool.
  */
-export type ReferenceLoadBalancerPoolsListPoolReferencesResponse =
-  Array<ReferenceLoadBalancerPoolsListPoolReferencesResponse.ReferenceLoadBalancerPoolsListPoolReferencesResponseItem>;
+export type ReferenceListResponse = Array<ReferenceListResponse.ReferenceListResponseItem>;
 
-export namespace ReferenceLoadBalancerPoolsListPoolReferencesResponse {
-  export interface ReferenceLoadBalancerPoolsListPoolReferencesResponseItem {
+export namespace ReferenceListResponse {
+  export interface ReferenceListResponseItem {
     reference_type?: '*' | 'referral' | 'referrer';
 
     resource_id?: string;
@@ -39,5 +35,5 @@ export namespace ReferenceLoadBalancerPoolsListPoolReferencesResponse {
 }
 
 export namespace References {
-  export import ReferenceLoadBalancerPoolsListPoolReferencesResponse = ReferencesAPI.ReferenceLoadBalancerPoolsListPoolReferencesResponse;
+  export import ReferenceListResponse = ReferencesAPI.ReferenceListResponse;
 }

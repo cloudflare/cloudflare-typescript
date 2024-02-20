@@ -10,9 +10,5 @@ export {
   MonitorUpdateParams,
   Monitors,
 } from './monitors';
-export {
-  PreviewAccountLoadBalancerMonitorsPreviewMonitorResponse,
-  PreviewAccountLoadBalancerMonitorsPreviewMonitorParams,
-  Previews,
-} from './previews';
-export { ReferenceAccountLoadBalancerMonitorsListMonitorReferencesResponse, References } from './references';
+export { PreviewCreateResponse, PreviewCreateParams, Previews } from './previews';
+export { ReferenceListResponse, References } from './references';

@@ -6,20 +6,34 @@ import * as GroupsAPI from 'cloudflare/resources/access/groups';
 
 export class Groups extends APIResource {
   /**
-   * Updates a configured Access group.
+   * Creates a new Access group.
    */
-  update(
+  create(
     accountOrZone: string,
     accountOrZoneId: string,
-    uuid: string,
-    body: GroupUpdateParams,
+    body: GroupCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<GroupUpdateResponse> {
+  ): Core.APIPromise<GroupCreateResponse> {
     return (
-      this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/groups/${uuid}`, {
+      this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/groups`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: GroupUpdateResponse }>
+      }) as Core.APIPromise<{ result: GroupCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Lists all Access groups.
+   */
+  list(
+    accountOrZone: string,
+    accountOrZoneId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<GroupListResponse | null> {
+    return (
+      this._client.get(`/${accountOrZone}/${accountOrZoneId}/access/groups`, options) as Core.APIPromise<{
+        result: GroupListResponse | null;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -41,38 +55,6 @@ export class Groups extends APIResource {
   }
 
   /**
-   * Creates a new Access group.
-   */
-  accessGroupsCreateAnAccessGroup(
-    accountOrZone: string,
-    accountOrZoneId: string,
-    body: GroupAccessGroupsCreateAnAccessGroupParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<GroupAccessGroupsCreateAnAccessGroupResponse> {
-    return (
-      this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/groups`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: GroupAccessGroupsCreateAnAccessGroupResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Lists all Access groups.
-   */
-  accessGroupsListAccessGroups(
-    accountOrZone: string,
-    accountOrZoneId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<GroupAccessGroupsListAccessGroupsResponse | null> {
-    return (
-      this._client.get(`/${accountOrZone}/${accountOrZoneId}/access/groups`, options) as Core.APIPromise<{
-        result: GroupAccessGroupsListAccessGroupsResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Fetches a single Access group.
    */
   get(
@@ -88,9 +70,27 @@ export class Groups extends APIResource {
       ) as Core.APIPromise<{ result: GroupGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Updates a configured Access group.
+   */
+  replace(
+    accountOrZone: string,
+    accountOrZoneId: string,
+    uuid: string,
+    body: GroupReplaceParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<GroupReplaceResponse> {
+    return (
+      this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/groups/${uuid}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: GroupReplaceResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
-export interface GroupUpdateResponse {
+export interface GroupCreateResponse {
   /**
    * UUID
    */
@@ -103,25 +103,25 @@ export interface GroupUpdateResponse {
    * meet any of the Exclude rules.
    */
   exclude?: Array<
-    | GroupUpdateResponse.AccessEmailRule
-    | GroupUpdateResponse.AccessEmailListRule
-    | GroupUpdateResponse.AccessDomainRule
-    | GroupUpdateResponse.AccessEveryoneRule
-    | GroupUpdateResponse.AccessIPRule
-    | GroupUpdateResponse.AccessIPListRule
-    | GroupUpdateResponse.AccessCertificateRule
-    | GroupUpdateResponse.AccessAccessGroupRule
-    | GroupUpdateResponse.AccessAzureGroupRule
-    | GroupUpdateResponse.AccessGitHubOrganizationRule
-    | GroupUpdateResponse.AccessGsuiteGroupRule
-    | GroupUpdateResponse.AccessOktaGroupRule
-    | GroupUpdateResponse.AccessSamlGroupRule
-    | GroupUpdateResponse.AccessServiceTokenRule
-    | GroupUpdateResponse.AccessAnyValidServiceTokenRule
-    | GroupUpdateResponse.AccessExternalEvaluationRule
-    | GroupUpdateResponse.AccessCountryRule
-    | GroupUpdateResponse.AccessAuthenticationMethodRule
-    | GroupUpdateResponse.AccessDevicePostureRule
+    | GroupCreateResponse.AccessEmailRule
+    | GroupCreateResponse.AccessEmailListRule
+    | GroupCreateResponse.AccessDomainRule
+    | GroupCreateResponse.AccessEveryoneRule
+    | GroupCreateResponse.AccessIPRule
+    | GroupCreateResponse.AccessIPListRule
+    | GroupCreateResponse.AccessCertificateRule
+    | GroupCreateResponse.AccessAccessGroupRule
+    | GroupCreateResponse.AccessAzureGroupRule
+    | GroupCreateResponse.AccessGitHubOrganizationRule
+    | GroupCreateResponse.AccessGsuiteGroupRule
+    | GroupCreateResponse.AccessOktaGroupRule
+    | GroupCreateResponse.AccessSamlGroupRule
+    | GroupCreateResponse.AccessServiceTokenRule
+    | GroupCreateResponse.AccessAnyValidServiceTokenRule
+    | GroupCreateResponse.AccessExternalEvaluationRule
+    | GroupCreateResponse.AccessCountryRule
+    | GroupCreateResponse.AccessAuthenticationMethodRule
+    | GroupCreateResponse.AccessDevicePostureRule
   >;
 
   /**
@@ -129,25 +129,25 @@ export interface GroupUpdateResponse {
    * the Include rules.
    */
   include?: Array<
-    | GroupUpdateResponse.AccessEmailRule
-    | GroupUpdateResponse.AccessEmailListRule
-    | GroupUpdateResponse.AccessDomainRule
-    | GroupUpdateResponse.AccessEveryoneRule
-    | GroupUpdateResponse.AccessIPRule
-    | GroupUpdateResponse.AccessIPListRule
-    | GroupUpdateResponse.AccessCertificateRule
-    | GroupUpdateResponse.AccessAccessGroupRule
-    | GroupUpdateResponse.AccessAzureGroupRule
-    | GroupUpdateResponse.AccessGitHubOrganizationRule
-    | GroupUpdateResponse.AccessGsuiteGroupRule
-    | GroupUpdateResponse.AccessOktaGroupRule
-    | GroupUpdateResponse.AccessSamlGroupRule
-    | GroupUpdateResponse.AccessServiceTokenRule
-    | GroupUpdateResponse.AccessAnyValidServiceTokenRule
-    | GroupUpdateResponse.AccessExternalEvaluationRule
-    | GroupUpdateResponse.AccessCountryRule
-    | GroupUpdateResponse.AccessAuthenticationMethodRule
-    | GroupUpdateResponse.AccessDevicePostureRule
+    | GroupCreateResponse.AccessEmailRule
+    | GroupCreateResponse.AccessEmailListRule
+    | GroupCreateResponse.AccessDomainRule
+    | GroupCreateResponse.AccessEveryoneRule
+    | GroupCreateResponse.AccessIPRule
+    | GroupCreateResponse.AccessIPListRule
+    | GroupCreateResponse.AccessCertificateRule
+    | GroupCreateResponse.AccessAccessGroupRule
+    | GroupCreateResponse.AccessAzureGroupRule
+    | GroupCreateResponse.AccessGitHubOrganizationRule
+    | GroupCreateResponse.AccessGsuiteGroupRule
+    | GroupCreateResponse.AccessOktaGroupRule
+    | GroupCreateResponse.AccessSamlGroupRule
+    | GroupCreateResponse.AccessServiceTokenRule
+    | GroupCreateResponse.AccessAnyValidServiceTokenRule
+    | GroupCreateResponse.AccessExternalEvaluationRule
+    | GroupCreateResponse.AccessCountryRule
+    | GroupCreateResponse.AccessAuthenticationMethodRule
+    | GroupCreateResponse.AccessDevicePostureRule
   >;
 
   /**
@@ -155,25 +155,25 @@ export interface GroupUpdateResponse {
    * meet all of the Require rules.
    */
   is_default?: Array<
-    | GroupUpdateResponse.AccessEmailRule
-    | GroupUpdateResponse.AccessEmailListRule
-    | GroupUpdateResponse.AccessDomainRule
-    | GroupUpdateResponse.AccessEveryoneRule
-    | GroupUpdateResponse.AccessIPRule
-    | GroupUpdateResponse.AccessIPListRule
-    | GroupUpdateResponse.AccessCertificateRule
-    | GroupUpdateResponse.AccessAccessGroupRule
-    | GroupUpdateResponse.AccessAzureGroupRule
-    | GroupUpdateResponse.AccessGitHubOrganizationRule
-    | GroupUpdateResponse.AccessGsuiteGroupRule
-    | GroupUpdateResponse.AccessOktaGroupRule
-    | GroupUpdateResponse.AccessSamlGroupRule
-    | GroupUpdateResponse.AccessServiceTokenRule
-    | GroupUpdateResponse.AccessAnyValidServiceTokenRule
-    | GroupUpdateResponse.AccessExternalEvaluationRule
-    | GroupUpdateResponse.AccessCountryRule
-    | GroupUpdateResponse.AccessAuthenticationMethodRule
-    | GroupUpdateResponse.AccessDevicePostureRule
+    | GroupCreateResponse.AccessEmailRule
+    | GroupCreateResponse.AccessEmailListRule
+    | GroupCreateResponse.AccessDomainRule
+    | GroupCreateResponse.AccessEveryoneRule
+    | GroupCreateResponse.AccessIPRule
+    | GroupCreateResponse.AccessIPListRule
+    | GroupCreateResponse.AccessCertificateRule
+    | GroupCreateResponse.AccessAccessGroupRule
+    | GroupCreateResponse.AccessAzureGroupRule
+    | GroupCreateResponse.AccessGitHubOrganizationRule
+    | GroupCreateResponse.AccessGsuiteGroupRule
+    | GroupCreateResponse.AccessOktaGroupRule
+    | GroupCreateResponse.AccessSamlGroupRule
+    | GroupCreateResponse.AccessServiceTokenRule
+    | GroupCreateResponse.AccessAnyValidServiceTokenRule
+    | GroupCreateResponse.AccessExternalEvaluationRule
+    | GroupCreateResponse.AccessCountryRule
+    | GroupCreateResponse.AccessAuthenticationMethodRule
+    | GroupCreateResponse.AccessDevicePostureRule
   >;
 
   /**
@@ -186,31 +186,31 @@ export interface GroupUpdateResponse {
    * meet all of the Require rules.
    */
   require?: Array<
-    | GroupUpdateResponse.AccessEmailRule
-    | GroupUpdateResponse.AccessEmailListRule
-    | GroupUpdateResponse.AccessDomainRule
-    | GroupUpdateResponse.AccessEveryoneRule
-    | GroupUpdateResponse.AccessIPRule
-    | GroupUpdateResponse.AccessIPListRule
-    | GroupUpdateResponse.AccessCertificateRule
-    | GroupUpdateResponse.AccessAccessGroupRule
-    | GroupUpdateResponse.AccessAzureGroupRule
-    | GroupUpdateResponse.AccessGitHubOrganizationRule
-    | GroupUpdateResponse.AccessGsuiteGroupRule
-    | GroupUpdateResponse.AccessOktaGroupRule
-    | GroupUpdateResponse.AccessSamlGroupRule
-    | GroupUpdateResponse.AccessServiceTokenRule
-    | GroupUpdateResponse.AccessAnyValidServiceTokenRule
-    | GroupUpdateResponse.AccessExternalEvaluationRule
-    | GroupUpdateResponse.AccessCountryRule
-    | GroupUpdateResponse.AccessAuthenticationMethodRule
-    | GroupUpdateResponse.AccessDevicePostureRule
+    | GroupCreateResponse.AccessEmailRule
+    | GroupCreateResponse.AccessEmailListRule
+    | GroupCreateResponse.AccessDomainRule
+    | GroupCreateResponse.AccessEveryoneRule
+    | GroupCreateResponse.AccessIPRule
+    | GroupCreateResponse.AccessIPListRule
+    | GroupCreateResponse.AccessCertificateRule
+    | GroupCreateResponse.AccessAccessGroupRule
+    | GroupCreateResponse.AccessAzureGroupRule
+    | GroupCreateResponse.AccessGitHubOrganizationRule
+    | GroupCreateResponse.AccessGsuiteGroupRule
+    | GroupCreateResponse.AccessOktaGroupRule
+    | GroupCreateResponse.AccessSamlGroupRule
+    | GroupCreateResponse.AccessServiceTokenRule
+    | GroupCreateResponse.AccessAnyValidServiceTokenRule
+    | GroupCreateResponse.AccessExternalEvaluationRule
+    | GroupCreateResponse.AccessCountryRule
+    | GroupCreateResponse.AccessAuthenticationMethodRule
+    | GroupCreateResponse.AccessDevicePostureRule
   >;
 
   updated_at?: string;
 }
 
-export namespace GroupUpdateResponse {
+export namespace GroupCreateResponse {
   /**
    * Matches a specific email.
    */
@@ -1472,1400 +1472,10 @@ export namespace GroupUpdateResponse {
   }
 }
 
-export interface GroupDeleteResponse {
-  /**
-   * UUID
-   */
-  id?: string;
-}
+export type GroupListResponse = Array<GroupListResponse.GroupListResponseItem>;
 
-export interface GroupAccessGroupsCreateAnAccessGroupResponse {
-  /**
-   * UUID
-   */
-  id?: string;
-
-  created_at?: string;
-
-  /**
-   * Rules evaluated with a NOT logical operator. To match a policy, a user cannot
-   * meet any of the Exclude rules.
-   */
-  exclude?: Array<
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessEmailRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessEmailListRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessDomainRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessEveryoneRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessIPRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessIPListRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessCertificateRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessAccessGroupRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessAzureGroupRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessGitHubOrganizationRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessGsuiteGroupRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessOktaGroupRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessSamlGroupRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessServiceTokenRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessAnyValidServiceTokenRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessExternalEvaluationRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessCountryRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessAuthenticationMethodRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessDevicePostureRule
-  >;
-
-  /**
-   * Rules evaluated with an OR logical operator. A user needs to meet only one of
-   * the Include rules.
-   */
-  include?: Array<
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessEmailRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessEmailListRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessDomainRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessEveryoneRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessIPRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessIPListRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessCertificateRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessAccessGroupRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessAzureGroupRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessGitHubOrganizationRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessGsuiteGroupRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessOktaGroupRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessSamlGroupRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessServiceTokenRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessAnyValidServiceTokenRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessExternalEvaluationRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessCountryRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessAuthenticationMethodRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessDevicePostureRule
-  >;
-
-  /**
-   * Rules evaluated with an AND logical operator. To match a policy, a user must
-   * meet all of the Require rules.
-   */
-  is_default?: Array<
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessEmailRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessEmailListRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessDomainRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessEveryoneRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessIPRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessIPListRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessCertificateRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessAccessGroupRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessAzureGroupRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessGitHubOrganizationRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessGsuiteGroupRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessOktaGroupRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessSamlGroupRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessServiceTokenRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessAnyValidServiceTokenRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessExternalEvaluationRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessCountryRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessAuthenticationMethodRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessDevicePostureRule
-  >;
-
-  /**
-   * The name of the Access group.
-   */
-  name?: string;
-
-  /**
-   * Rules evaluated with an AND logical operator. To match a policy, a user must
-   * meet all of the Require rules.
-   */
-  require?: Array<
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessEmailRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessEmailListRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessDomainRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessEveryoneRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessIPRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessIPListRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessCertificateRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessAccessGroupRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessAzureGroupRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessGitHubOrganizationRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessGsuiteGroupRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessOktaGroupRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessSamlGroupRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessServiceTokenRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessAnyValidServiceTokenRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessExternalEvaluationRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessCountryRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessAuthenticationMethodRule
-    | GroupAccessGroupsCreateAnAccessGroupResponse.AccessDevicePostureRule
-  >;
-
-  updated_at?: string;
-}
-
-export namespace GroupAccessGroupsCreateAnAccessGroupResponse {
-  /**
-   * Matches a specific email.
-   */
-  export interface AccessEmailRule {
-    email: AccessEmailRule.Email;
-  }
-
-  export namespace AccessEmailRule {
-    export interface Email {
-      /**
-       * The email of the user.
-       */
-      email: string;
-    }
-  }
-
-  /**
-   * Matches an email address from a list.
-   */
-  export interface AccessEmailListRule {
-    email_list: AccessEmailListRule.EmailList;
-  }
-
-  export namespace AccessEmailListRule {
-    export interface EmailList {
-      /**
-       * The ID of a previously created email list.
-       */
-      id: string;
-    }
-  }
-
-  /**
-   * Match an entire email domain.
-   */
-  export interface AccessDomainRule {
-    email_domain: AccessDomainRule.EmailDomain;
-  }
-
-  export namespace AccessDomainRule {
-    export interface EmailDomain {
-      /**
-       * The email domain to match.
-       */
-      domain: string;
-    }
-  }
-
-  /**
-   * Matches everyone.
-   */
-  export interface AccessEveryoneRule {
-    /**
-     * An empty object which matches on all users.
-     */
-    everyone: unknown;
-  }
-
-  /**
-   * Matches an IP address block.
-   */
-  export interface AccessIPRule {
-    ip: AccessIPRule.IP;
-  }
-
-  export namespace AccessIPRule {
-    export interface IP {
-      /**
-       * An IPv4 or IPv6 CIDR block.
-       */
-      ip: string;
-    }
-  }
-
-  /**
-   * Matches an IP address from a list.
-   */
-  export interface AccessIPListRule {
-    ip_list: AccessIPListRule.IPList;
-  }
-
-  export namespace AccessIPListRule {
-    export interface IPList {
-      /**
-       * The ID of a previously created IP list.
-       */
-      id: string;
-    }
-  }
-
-  /**
-   * Matches any valid client certificate.
-   */
-  export interface AccessCertificateRule {
-    certificate: unknown;
-  }
-
-  /**
-   * Matches an Access group.
-   */
-  export interface AccessAccessGroupRule {
-    group: AccessAccessGroupRule.Group;
-  }
-
-  export namespace AccessAccessGroupRule {
-    export interface Group {
-      /**
-       * The ID of a previously created Access group.
-       */
-      id: string;
-    }
-  }
-
-  /**
-   * Matches an Azure group. Requires an Azure identity provider.
-   */
-  export interface AccessAzureGroupRule {
-    azureAD: AccessAzureGroupRule.AzureAd;
-  }
-
-  export namespace AccessAzureGroupRule {
-    export interface AzureAd {
-      /**
-       * The ID of an Azure group.
-       */
-      id: string;
-
-      /**
-       * The ID of your Azure identity provider.
-       */
-      connection_id: string;
-    }
-  }
-
-  /**
-   * Matches a Github organization. Requires a Github identity provider.
-   */
-  export interface AccessGitHubOrganizationRule {
-    'github-organization': AccessGitHubOrganizationRule.GitHubOrganization;
-  }
-
-  export namespace AccessGitHubOrganizationRule {
-    export interface GitHubOrganization {
-      /**
-       * The ID of your Github identity provider.
-       */
-      connection_id: string;
-
-      /**
-       * The name of the organization.
-       */
-      name: string;
-    }
-  }
-
-  /**
-   * Matches a group in Google Workspace. Requires a Google Workspace identity
-   * provider.
-   */
-  export interface AccessGsuiteGroupRule {
-    gsuite: AccessGsuiteGroupRule.Gsuite;
-  }
-
-  export namespace AccessGsuiteGroupRule {
-    export interface Gsuite {
-      /**
-       * The ID of your Google Workspace identity provider.
-       */
-      connection_id: string;
-
-      /**
-       * The email of the Google Workspace group.
-       */
-      email: string;
-    }
-  }
-
-  /**
-   * Matches an Okta group. Requires an Okta identity provider.
-   */
-  export interface AccessOktaGroupRule {
-    okta: AccessOktaGroupRule.Okta;
-  }
-
-  export namespace AccessOktaGroupRule {
-    export interface Okta {
-      /**
-       * The ID of your Okta identity provider.
-       */
-      connection_id: string;
-
-      /**
-       * The email of the Okta group.
-       */
-      email: string;
-    }
-  }
-
-  /**
-   * Matches a SAML group. Requires a SAML identity provider.
-   */
-  export interface AccessSamlGroupRule {
-    saml: AccessSamlGroupRule.Saml;
-  }
-
-  export namespace AccessSamlGroupRule {
-    export interface Saml {
-      /**
-       * The name of the SAML attribute.
-       */
-      attribute_name: string;
-
-      /**
-       * The SAML attribute value to look for.
-       */
-      attribute_value: string;
-    }
-  }
-
-  /**
-   * Matches a specific Access Service Token
-   */
-  export interface AccessServiceTokenRule {
-    service_token: AccessServiceTokenRule.ServiceToken;
-  }
-
-  export namespace AccessServiceTokenRule {
-    export interface ServiceToken {
-      /**
-       * The ID of a Service Token.
-       */
-      token_id: string;
-    }
-  }
-
-  /**
-   * Matches any valid Access Service Token
-   */
-  export interface AccessAnyValidServiceTokenRule {
-    /**
-     * An empty object which matches on all service tokens.
-     */
-    any_valid_service_token: unknown;
-  }
-
-  /**
-   * Create Allow or Block policies which evaluate the user based on custom criteria.
-   */
-  export interface AccessExternalEvaluationRule {
-    external_evaluation: AccessExternalEvaluationRule.ExternalEvaluation;
-  }
-
-  export namespace AccessExternalEvaluationRule {
-    export interface ExternalEvaluation {
-      /**
-       * The API endpoint containing your business logic.
-       */
-      evaluate_url: string;
-
-      /**
-       * The API endpoint containing the key that Access uses to verify that the response
-       * came from your API.
-       */
-      keys_url: string;
-    }
-  }
-
-  /**
-   * Matches a specific country
-   */
-  export interface AccessCountryRule {
-    geo: AccessCountryRule.Geo;
-  }
-
-  export namespace AccessCountryRule {
-    export interface Geo {
-      /**
-       * The country code that should be matched.
-       */
-      country_code: string;
-    }
-  }
-
-  /**
-   * Enforce different MFA options
-   */
-  export interface AccessAuthenticationMethodRule {
-    auth_method: AccessAuthenticationMethodRule.AuthMethod;
-  }
-
-  export namespace AccessAuthenticationMethodRule {
-    export interface AuthMethod {
-      /**
-       * The type of authentication method https://datatracker.ietf.org/doc/html/rfc8176.
-       */
-      auth_method: string;
-    }
-  }
-
-  /**
-   * Enforces a device posture rule has run successfully
-   */
-  export interface AccessDevicePostureRule {
-    device_posture: AccessDevicePostureRule.DevicePosture;
-  }
-
-  export namespace AccessDevicePostureRule {
-    export interface DevicePosture {
-      /**
-       * The ID of a device posture integration.
-       */
-      integration_uid: string;
-    }
-  }
-
-  /**
-   * Matches a specific email.
-   */
-  export interface AccessEmailRule {
-    email: AccessEmailRule.Email;
-  }
-
-  export namespace AccessEmailRule {
-    export interface Email {
-      /**
-       * The email of the user.
-       */
-      email: string;
-    }
-  }
-
-  /**
-   * Matches an email address from a list.
-   */
-  export interface AccessEmailListRule {
-    email_list: AccessEmailListRule.EmailList;
-  }
-
-  export namespace AccessEmailListRule {
-    export interface EmailList {
-      /**
-       * The ID of a previously created email list.
-       */
-      id: string;
-    }
-  }
-
-  /**
-   * Match an entire email domain.
-   */
-  export interface AccessDomainRule {
-    email_domain: AccessDomainRule.EmailDomain;
-  }
-
-  export namespace AccessDomainRule {
-    export interface EmailDomain {
-      /**
-       * The email domain to match.
-       */
-      domain: string;
-    }
-  }
-
-  /**
-   * Matches everyone.
-   */
-  export interface AccessEveryoneRule {
-    /**
-     * An empty object which matches on all users.
-     */
-    everyone: unknown;
-  }
-
-  /**
-   * Matches an IP address block.
-   */
-  export interface AccessIPRule {
-    ip: AccessIPRule.IP;
-  }
-
-  export namespace AccessIPRule {
-    export interface IP {
-      /**
-       * An IPv4 or IPv6 CIDR block.
-       */
-      ip: string;
-    }
-  }
-
-  /**
-   * Matches an IP address from a list.
-   */
-  export interface AccessIPListRule {
-    ip_list: AccessIPListRule.IPList;
-  }
-
-  export namespace AccessIPListRule {
-    export interface IPList {
-      /**
-       * The ID of a previously created IP list.
-       */
-      id: string;
-    }
-  }
-
-  /**
-   * Matches any valid client certificate.
-   */
-  export interface AccessCertificateRule {
-    certificate: unknown;
-  }
-
-  /**
-   * Matches an Access group.
-   */
-  export interface AccessAccessGroupRule {
-    group: AccessAccessGroupRule.Group;
-  }
-
-  export namespace AccessAccessGroupRule {
-    export interface Group {
-      /**
-       * The ID of a previously created Access group.
-       */
-      id: string;
-    }
-  }
-
-  /**
-   * Matches an Azure group. Requires an Azure identity provider.
-   */
-  export interface AccessAzureGroupRule {
-    azureAD: AccessAzureGroupRule.AzureAd;
-  }
-
-  export namespace AccessAzureGroupRule {
-    export interface AzureAd {
-      /**
-       * The ID of an Azure group.
-       */
-      id: string;
-
-      /**
-       * The ID of your Azure identity provider.
-       */
-      connection_id: string;
-    }
-  }
-
-  /**
-   * Matches a Github organization. Requires a Github identity provider.
-   */
-  export interface AccessGitHubOrganizationRule {
-    'github-organization': AccessGitHubOrganizationRule.GitHubOrganization;
-  }
-
-  export namespace AccessGitHubOrganizationRule {
-    export interface GitHubOrganization {
-      /**
-       * The ID of your Github identity provider.
-       */
-      connection_id: string;
-
-      /**
-       * The name of the organization.
-       */
-      name: string;
-    }
-  }
-
-  /**
-   * Matches a group in Google Workspace. Requires a Google Workspace identity
-   * provider.
-   */
-  export interface AccessGsuiteGroupRule {
-    gsuite: AccessGsuiteGroupRule.Gsuite;
-  }
-
-  export namespace AccessGsuiteGroupRule {
-    export interface Gsuite {
-      /**
-       * The ID of your Google Workspace identity provider.
-       */
-      connection_id: string;
-
-      /**
-       * The email of the Google Workspace group.
-       */
-      email: string;
-    }
-  }
-
-  /**
-   * Matches an Okta group. Requires an Okta identity provider.
-   */
-  export interface AccessOktaGroupRule {
-    okta: AccessOktaGroupRule.Okta;
-  }
-
-  export namespace AccessOktaGroupRule {
-    export interface Okta {
-      /**
-       * The ID of your Okta identity provider.
-       */
-      connection_id: string;
-
-      /**
-       * The email of the Okta group.
-       */
-      email: string;
-    }
-  }
-
-  /**
-   * Matches a SAML group. Requires a SAML identity provider.
-   */
-  export interface AccessSamlGroupRule {
-    saml: AccessSamlGroupRule.Saml;
-  }
-
-  export namespace AccessSamlGroupRule {
-    export interface Saml {
-      /**
-       * The name of the SAML attribute.
-       */
-      attribute_name: string;
-
-      /**
-       * The SAML attribute value to look for.
-       */
-      attribute_value: string;
-    }
-  }
-
-  /**
-   * Matches a specific Access Service Token
-   */
-  export interface AccessServiceTokenRule {
-    service_token: AccessServiceTokenRule.ServiceToken;
-  }
-
-  export namespace AccessServiceTokenRule {
-    export interface ServiceToken {
-      /**
-       * The ID of a Service Token.
-       */
-      token_id: string;
-    }
-  }
-
-  /**
-   * Matches any valid Access Service Token
-   */
-  export interface AccessAnyValidServiceTokenRule {
-    /**
-     * An empty object which matches on all service tokens.
-     */
-    any_valid_service_token: unknown;
-  }
-
-  /**
-   * Create Allow or Block policies which evaluate the user based on custom criteria.
-   */
-  export interface AccessExternalEvaluationRule {
-    external_evaluation: AccessExternalEvaluationRule.ExternalEvaluation;
-  }
-
-  export namespace AccessExternalEvaluationRule {
-    export interface ExternalEvaluation {
-      /**
-       * The API endpoint containing your business logic.
-       */
-      evaluate_url: string;
-
-      /**
-       * The API endpoint containing the key that Access uses to verify that the response
-       * came from your API.
-       */
-      keys_url: string;
-    }
-  }
-
-  /**
-   * Matches a specific country
-   */
-  export interface AccessCountryRule {
-    geo: AccessCountryRule.Geo;
-  }
-
-  export namespace AccessCountryRule {
-    export interface Geo {
-      /**
-       * The country code that should be matched.
-       */
-      country_code: string;
-    }
-  }
-
-  /**
-   * Enforce different MFA options
-   */
-  export interface AccessAuthenticationMethodRule {
-    auth_method: AccessAuthenticationMethodRule.AuthMethod;
-  }
-
-  export namespace AccessAuthenticationMethodRule {
-    export interface AuthMethod {
-      /**
-       * The type of authentication method https://datatracker.ietf.org/doc/html/rfc8176.
-       */
-      auth_method: string;
-    }
-  }
-
-  /**
-   * Enforces a device posture rule has run successfully
-   */
-  export interface AccessDevicePostureRule {
-    device_posture: AccessDevicePostureRule.DevicePosture;
-  }
-
-  export namespace AccessDevicePostureRule {
-    export interface DevicePosture {
-      /**
-       * The ID of a device posture integration.
-       */
-      integration_uid: string;
-    }
-  }
-
-  /**
-   * Matches a specific email.
-   */
-  export interface AccessEmailRule {
-    email: AccessEmailRule.Email;
-  }
-
-  export namespace AccessEmailRule {
-    export interface Email {
-      /**
-       * The email of the user.
-       */
-      email: string;
-    }
-  }
-
-  /**
-   * Matches an email address from a list.
-   */
-  export interface AccessEmailListRule {
-    email_list: AccessEmailListRule.EmailList;
-  }
-
-  export namespace AccessEmailListRule {
-    export interface EmailList {
-      /**
-       * The ID of a previously created email list.
-       */
-      id: string;
-    }
-  }
-
-  /**
-   * Match an entire email domain.
-   */
-  export interface AccessDomainRule {
-    email_domain: AccessDomainRule.EmailDomain;
-  }
-
-  export namespace AccessDomainRule {
-    export interface EmailDomain {
-      /**
-       * The email domain to match.
-       */
-      domain: string;
-    }
-  }
-
-  /**
-   * Matches everyone.
-   */
-  export interface AccessEveryoneRule {
-    /**
-     * An empty object which matches on all users.
-     */
-    everyone: unknown;
-  }
-
-  /**
-   * Matches an IP address block.
-   */
-  export interface AccessIPRule {
-    ip: AccessIPRule.IP;
-  }
-
-  export namespace AccessIPRule {
-    export interface IP {
-      /**
-       * An IPv4 or IPv6 CIDR block.
-       */
-      ip: string;
-    }
-  }
-
-  /**
-   * Matches an IP address from a list.
-   */
-  export interface AccessIPListRule {
-    ip_list: AccessIPListRule.IPList;
-  }
-
-  export namespace AccessIPListRule {
-    export interface IPList {
-      /**
-       * The ID of a previously created IP list.
-       */
-      id: string;
-    }
-  }
-
-  /**
-   * Matches any valid client certificate.
-   */
-  export interface AccessCertificateRule {
-    certificate: unknown;
-  }
-
-  /**
-   * Matches an Access group.
-   */
-  export interface AccessAccessGroupRule {
-    group: AccessAccessGroupRule.Group;
-  }
-
-  export namespace AccessAccessGroupRule {
-    export interface Group {
-      /**
-       * The ID of a previously created Access group.
-       */
-      id: string;
-    }
-  }
-
-  /**
-   * Matches an Azure group. Requires an Azure identity provider.
-   */
-  export interface AccessAzureGroupRule {
-    azureAD: AccessAzureGroupRule.AzureAd;
-  }
-
-  export namespace AccessAzureGroupRule {
-    export interface AzureAd {
-      /**
-       * The ID of an Azure group.
-       */
-      id: string;
-
-      /**
-       * The ID of your Azure identity provider.
-       */
-      connection_id: string;
-    }
-  }
-
-  /**
-   * Matches a Github organization. Requires a Github identity provider.
-   */
-  export interface AccessGitHubOrganizationRule {
-    'github-organization': AccessGitHubOrganizationRule.GitHubOrganization;
-  }
-
-  export namespace AccessGitHubOrganizationRule {
-    export interface GitHubOrganization {
-      /**
-       * The ID of your Github identity provider.
-       */
-      connection_id: string;
-
-      /**
-       * The name of the organization.
-       */
-      name: string;
-    }
-  }
-
-  /**
-   * Matches a group in Google Workspace. Requires a Google Workspace identity
-   * provider.
-   */
-  export interface AccessGsuiteGroupRule {
-    gsuite: AccessGsuiteGroupRule.Gsuite;
-  }
-
-  export namespace AccessGsuiteGroupRule {
-    export interface Gsuite {
-      /**
-       * The ID of your Google Workspace identity provider.
-       */
-      connection_id: string;
-
-      /**
-       * The email of the Google Workspace group.
-       */
-      email: string;
-    }
-  }
-
-  /**
-   * Matches an Okta group. Requires an Okta identity provider.
-   */
-  export interface AccessOktaGroupRule {
-    okta: AccessOktaGroupRule.Okta;
-  }
-
-  export namespace AccessOktaGroupRule {
-    export interface Okta {
-      /**
-       * The ID of your Okta identity provider.
-       */
-      connection_id: string;
-
-      /**
-       * The email of the Okta group.
-       */
-      email: string;
-    }
-  }
-
-  /**
-   * Matches a SAML group. Requires a SAML identity provider.
-   */
-  export interface AccessSamlGroupRule {
-    saml: AccessSamlGroupRule.Saml;
-  }
-
-  export namespace AccessSamlGroupRule {
-    export interface Saml {
-      /**
-       * The name of the SAML attribute.
-       */
-      attribute_name: string;
-
-      /**
-       * The SAML attribute value to look for.
-       */
-      attribute_value: string;
-    }
-  }
-
-  /**
-   * Matches a specific Access Service Token
-   */
-  export interface AccessServiceTokenRule {
-    service_token: AccessServiceTokenRule.ServiceToken;
-  }
-
-  export namespace AccessServiceTokenRule {
-    export interface ServiceToken {
-      /**
-       * The ID of a Service Token.
-       */
-      token_id: string;
-    }
-  }
-
-  /**
-   * Matches any valid Access Service Token
-   */
-  export interface AccessAnyValidServiceTokenRule {
-    /**
-     * An empty object which matches on all service tokens.
-     */
-    any_valid_service_token: unknown;
-  }
-
-  /**
-   * Create Allow or Block policies which evaluate the user based on custom criteria.
-   */
-  export interface AccessExternalEvaluationRule {
-    external_evaluation: AccessExternalEvaluationRule.ExternalEvaluation;
-  }
-
-  export namespace AccessExternalEvaluationRule {
-    export interface ExternalEvaluation {
-      /**
-       * The API endpoint containing your business logic.
-       */
-      evaluate_url: string;
-
-      /**
-       * The API endpoint containing the key that Access uses to verify that the response
-       * came from your API.
-       */
-      keys_url: string;
-    }
-  }
-
-  /**
-   * Matches a specific country
-   */
-  export interface AccessCountryRule {
-    geo: AccessCountryRule.Geo;
-  }
-
-  export namespace AccessCountryRule {
-    export interface Geo {
-      /**
-       * The country code that should be matched.
-       */
-      country_code: string;
-    }
-  }
-
-  /**
-   * Enforce different MFA options
-   */
-  export interface AccessAuthenticationMethodRule {
-    auth_method: AccessAuthenticationMethodRule.AuthMethod;
-  }
-
-  export namespace AccessAuthenticationMethodRule {
-    export interface AuthMethod {
-      /**
-       * The type of authentication method https://datatracker.ietf.org/doc/html/rfc8176.
-       */
-      auth_method: string;
-    }
-  }
-
-  /**
-   * Enforces a device posture rule has run successfully
-   */
-  export interface AccessDevicePostureRule {
-    device_posture: AccessDevicePostureRule.DevicePosture;
-  }
-
-  export namespace AccessDevicePostureRule {
-    export interface DevicePosture {
-      /**
-       * The ID of a device posture integration.
-       */
-      integration_uid: string;
-    }
-  }
-
-  /**
-   * Matches a specific email.
-   */
-  export interface AccessEmailRule {
-    email: AccessEmailRule.Email;
-  }
-
-  export namespace AccessEmailRule {
-    export interface Email {
-      /**
-       * The email of the user.
-       */
-      email: string;
-    }
-  }
-
-  /**
-   * Matches an email address from a list.
-   */
-  export interface AccessEmailListRule {
-    email_list: AccessEmailListRule.EmailList;
-  }
-
-  export namespace AccessEmailListRule {
-    export interface EmailList {
-      /**
-       * The ID of a previously created email list.
-       */
-      id: string;
-    }
-  }
-
-  /**
-   * Match an entire email domain.
-   */
-  export interface AccessDomainRule {
-    email_domain: AccessDomainRule.EmailDomain;
-  }
-
-  export namespace AccessDomainRule {
-    export interface EmailDomain {
-      /**
-       * The email domain to match.
-       */
-      domain: string;
-    }
-  }
-
-  /**
-   * Matches everyone.
-   */
-  export interface AccessEveryoneRule {
-    /**
-     * An empty object which matches on all users.
-     */
-    everyone: unknown;
-  }
-
-  /**
-   * Matches an IP address block.
-   */
-  export interface AccessIPRule {
-    ip: AccessIPRule.IP;
-  }
-
-  export namespace AccessIPRule {
-    export interface IP {
-      /**
-       * An IPv4 or IPv6 CIDR block.
-       */
-      ip: string;
-    }
-  }
-
-  /**
-   * Matches an IP address from a list.
-   */
-  export interface AccessIPListRule {
-    ip_list: AccessIPListRule.IPList;
-  }
-
-  export namespace AccessIPListRule {
-    export interface IPList {
-      /**
-       * The ID of a previously created IP list.
-       */
-      id: string;
-    }
-  }
-
-  /**
-   * Matches any valid client certificate.
-   */
-  export interface AccessCertificateRule {
-    certificate: unknown;
-  }
-
-  /**
-   * Matches an Access group.
-   */
-  export interface AccessAccessGroupRule {
-    group: AccessAccessGroupRule.Group;
-  }
-
-  export namespace AccessAccessGroupRule {
-    export interface Group {
-      /**
-       * The ID of a previously created Access group.
-       */
-      id: string;
-    }
-  }
-
-  /**
-   * Matches an Azure group. Requires an Azure identity provider.
-   */
-  export interface AccessAzureGroupRule {
-    azureAD: AccessAzureGroupRule.AzureAd;
-  }
-
-  export namespace AccessAzureGroupRule {
-    export interface AzureAd {
-      /**
-       * The ID of an Azure group.
-       */
-      id: string;
-
-      /**
-       * The ID of your Azure identity provider.
-       */
-      connection_id: string;
-    }
-  }
-
-  /**
-   * Matches a Github organization. Requires a Github identity provider.
-   */
-  export interface AccessGitHubOrganizationRule {
-    'github-organization': AccessGitHubOrganizationRule.GitHubOrganization;
-  }
-
-  export namespace AccessGitHubOrganizationRule {
-    export interface GitHubOrganization {
-      /**
-       * The ID of your Github identity provider.
-       */
-      connection_id: string;
-
-      /**
-       * The name of the organization.
-       */
-      name: string;
-    }
-  }
-
-  /**
-   * Matches a group in Google Workspace. Requires a Google Workspace identity
-   * provider.
-   */
-  export interface AccessGsuiteGroupRule {
-    gsuite: AccessGsuiteGroupRule.Gsuite;
-  }
-
-  export namespace AccessGsuiteGroupRule {
-    export interface Gsuite {
-      /**
-       * The ID of your Google Workspace identity provider.
-       */
-      connection_id: string;
-
-      /**
-       * The email of the Google Workspace group.
-       */
-      email: string;
-    }
-  }
-
-  /**
-   * Matches an Okta group. Requires an Okta identity provider.
-   */
-  export interface AccessOktaGroupRule {
-    okta: AccessOktaGroupRule.Okta;
-  }
-
-  export namespace AccessOktaGroupRule {
-    export interface Okta {
-      /**
-       * The ID of your Okta identity provider.
-       */
-      connection_id: string;
-
-      /**
-       * The email of the Okta group.
-       */
-      email: string;
-    }
-  }
-
-  /**
-   * Matches a SAML group. Requires a SAML identity provider.
-   */
-  export interface AccessSamlGroupRule {
-    saml: AccessSamlGroupRule.Saml;
-  }
-
-  export namespace AccessSamlGroupRule {
-    export interface Saml {
-      /**
-       * The name of the SAML attribute.
-       */
-      attribute_name: string;
-
-      /**
-       * The SAML attribute value to look for.
-       */
-      attribute_value: string;
-    }
-  }
-
-  /**
-   * Matches a specific Access Service Token
-   */
-  export interface AccessServiceTokenRule {
-    service_token: AccessServiceTokenRule.ServiceToken;
-  }
-
-  export namespace AccessServiceTokenRule {
-    export interface ServiceToken {
-      /**
-       * The ID of a Service Token.
-       */
-      token_id: string;
-    }
-  }
-
-  /**
-   * Matches any valid Access Service Token
-   */
-  export interface AccessAnyValidServiceTokenRule {
-    /**
-     * An empty object which matches on all service tokens.
-     */
-    any_valid_service_token: unknown;
-  }
-
-  /**
-   * Create Allow or Block policies which evaluate the user based on custom criteria.
-   */
-  export interface AccessExternalEvaluationRule {
-    external_evaluation: AccessExternalEvaluationRule.ExternalEvaluation;
-  }
-
-  export namespace AccessExternalEvaluationRule {
-    export interface ExternalEvaluation {
-      /**
-       * The API endpoint containing your business logic.
-       */
-      evaluate_url: string;
-
-      /**
-       * The API endpoint containing the key that Access uses to verify that the response
-       * came from your API.
-       */
-      keys_url: string;
-    }
-  }
-
-  /**
-   * Matches a specific country
-   */
-  export interface AccessCountryRule {
-    geo: AccessCountryRule.Geo;
-  }
-
-  export namespace AccessCountryRule {
-    export interface Geo {
-      /**
-       * The country code that should be matched.
-       */
-      country_code: string;
-    }
-  }
-
-  /**
-   * Enforce different MFA options
-   */
-  export interface AccessAuthenticationMethodRule {
-    auth_method: AccessAuthenticationMethodRule.AuthMethod;
-  }
-
-  export namespace AccessAuthenticationMethodRule {
-    export interface AuthMethod {
-      /**
-       * The type of authentication method https://datatracker.ietf.org/doc/html/rfc8176.
-       */
-      auth_method: string;
-    }
-  }
-
-  /**
-   * Enforces a device posture rule has run successfully
-   */
-  export interface AccessDevicePostureRule {
-    device_posture: AccessDevicePostureRule.DevicePosture;
-  }
-
-  export namespace AccessDevicePostureRule {
-    export interface DevicePosture {
-      /**
-       * The ID of a device posture integration.
-       */
-      integration_uid: string;
-    }
-  }
-}
-
-export type GroupAccessGroupsListAccessGroupsResponse =
-  Array<GroupAccessGroupsListAccessGroupsResponse.GroupAccessGroupsListAccessGroupsResponseItem>;
-
-export namespace GroupAccessGroupsListAccessGroupsResponse {
-  export interface GroupAccessGroupsListAccessGroupsResponseItem {
+export namespace GroupListResponse {
+  export interface GroupListResponseItem {
     /**
      * UUID
      */
@@ -2878,25 +1488,25 @@ export namespace GroupAccessGroupsListAccessGroupsResponse {
      * meet any of the Exclude rules.
      */
     exclude?: Array<
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessEmailRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessEmailListRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessDomainRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessEveryoneRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessIPRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessIPListRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessCertificateRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessAccessGroupRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessAzureGroupRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessGitHubOrganizationRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessGsuiteGroupRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessOktaGroupRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessSamlGroupRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessServiceTokenRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessAnyValidServiceTokenRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessExternalEvaluationRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessCountryRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessAuthenticationMethodRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessDevicePostureRule
+      | GroupListResponseItem.AccessEmailRule
+      | GroupListResponseItem.AccessEmailListRule
+      | GroupListResponseItem.AccessDomainRule
+      | GroupListResponseItem.AccessEveryoneRule
+      | GroupListResponseItem.AccessIPRule
+      | GroupListResponseItem.AccessIPListRule
+      | GroupListResponseItem.AccessCertificateRule
+      | GroupListResponseItem.AccessAccessGroupRule
+      | GroupListResponseItem.AccessAzureGroupRule
+      | GroupListResponseItem.AccessGitHubOrganizationRule
+      | GroupListResponseItem.AccessGsuiteGroupRule
+      | GroupListResponseItem.AccessOktaGroupRule
+      | GroupListResponseItem.AccessSamlGroupRule
+      | GroupListResponseItem.AccessServiceTokenRule
+      | GroupListResponseItem.AccessAnyValidServiceTokenRule
+      | GroupListResponseItem.AccessExternalEvaluationRule
+      | GroupListResponseItem.AccessCountryRule
+      | GroupListResponseItem.AccessAuthenticationMethodRule
+      | GroupListResponseItem.AccessDevicePostureRule
     >;
 
     /**
@@ -2904,25 +1514,25 @@ export namespace GroupAccessGroupsListAccessGroupsResponse {
      * the Include rules.
      */
     include?: Array<
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessEmailRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessEmailListRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessDomainRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessEveryoneRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessIPRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessIPListRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessCertificateRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessAccessGroupRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessAzureGroupRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessGitHubOrganizationRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessGsuiteGroupRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessOktaGroupRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessSamlGroupRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessServiceTokenRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessAnyValidServiceTokenRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessExternalEvaluationRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessCountryRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessAuthenticationMethodRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessDevicePostureRule
+      | GroupListResponseItem.AccessEmailRule
+      | GroupListResponseItem.AccessEmailListRule
+      | GroupListResponseItem.AccessDomainRule
+      | GroupListResponseItem.AccessEveryoneRule
+      | GroupListResponseItem.AccessIPRule
+      | GroupListResponseItem.AccessIPListRule
+      | GroupListResponseItem.AccessCertificateRule
+      | GroupListResponseItem.AccessAccessGroupRule
+      | GroupListResponseItem.AccessAzureGroupRule
+      | GroupListResponseItem.AccessGitHubOrganizationRule
+      | GroupListResponseItem.AccessGsuiteGroupRule
+      | GroupListResponseItem.AccessOktaGroupRule
+      | GroupListResponseItem.AccessSamlGroupRule
+      | GroupListResponseItem.AccessServiceTokenRule
+      | GroupListResponseItem.AccessAnyValidServiceTokenRule
+      | GroupListResponseItem.AccessExternalEvaluationRule
+      | GroupListResponseItem.AccessCountryRule
+      | GroupListResponseItem.AccessAuthenticationMethodRule
+      | GroupListResponseItem.AccessDevicePostureRule
     >;
 
     /**
@@ -2930,25 +1540,25 @@ export namespace GroupAccessGroupsListAccessGroupsResponse {
      * meet all of the Require rules.
      */
     is_default?: Array<
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessEmailRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessEmailListRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessDomainRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessEveryoneRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessIPRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessIPListRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessCertificateRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessAccessGroupRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessAzureGroupRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessGitHubOrganizationRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessGsuiteGroupRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessOktaGroupRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessSamlGroupRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessServiceTokenRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessAnyValidServiceTokenRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessExternalEvaluationRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessCountryRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessAuthenticationMethodRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessDevicePostureRule
+      | GroupListResponseItem.AccessEmailRule
+      | GroupListResponseItem.AccessEmailListRule
+      | GroupListResponseItem.AccessDomainRule
+      | GroupListResponseItem.AccessEveryoneRule
+      | GroupListResponseItem.AccessIPRule
+      | GroupListResponseItem.AccessIPListRule
+      | GroupListResponseItem.AccessCertificateRule
+      | GroupListResponseItem.AccessAccessGroupRule
+      | GroupListResponseItem.AccessAzureGroupRule
+      | GroupListResponseItem.AccessGitHubOrganizationRule
+      | GroupListResponseItem.AccessGsuiteGroupRule
+      | GroupListResponseItem.AccessOktaGroupRule
+      | GroupListResponseItem.AccessSamlGroupRule
+      | GroupListResponseItem.AccessServiceTokenRule
+      | GroupListResponseItem.AccessAnyValidServiceTokenRule
+      | GroupListResponseItem.AccessExternalEvaluationRule
+      | GroupListResponseItem.AccessCountryRule
+      | GroupListResponseItem.AccessAuthenticationMethodRule
+      | GroupListResponseItem.AccessDevicePostureRule
     >;
 
     /**
@@ -2961,31 +1571,31 @@ export namespace GroupAccessGroupsListAccessGroupsResponse {
      * meet all of the Require rules.
      */
     require?: Array<
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessEmailRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessEmailListRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessDomainRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessEveryoneRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessIPRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessIPListRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessCertificateRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessAccessGroupRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessAzureGroupRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessGitHubOrganizationRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessGsuiteGroupRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessOktaGroupRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessSamlGroupRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessServiceTokenRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessAnyValidServiceTokenRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessExternalEvaluationRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessCountryRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessAuthenticationMethodRule
-      | GroupAccessGroupsListAccessGroupsResponseItem.AccessDevicePostureRule
+      | GroupListResponseItem.AccessEmailRule
+      | GroupListResponseItem.AccessEmailListRule
+      | GroupListResponseItem.AccessDomainRule
+      | GroupListResponseItem.AccessEveryoneRule
+      | GroupListResponseItem.AccessIPRule
+      | GroupListResponseItem.AccessIPListRule
+      | GroupListResponseItem.AccessCertificateRule
+      | GroupListResponseItem.AccessAccessGroupRule
+      | GroupListResponseItem.AccessAzureGroupRule
+      | GroupListResponseItem.AccessGitHubOrganizationRule
+      | GroupListResponseItem.AccessGsuiteGroupRule
+      | GroupListResponseItem.AccessOktaGroupRule
+      | GroupListResponseItem.AccessSamlGroupRule
+      | GroupListResponseItem.AccessServiceTokenRule
+      | GroupListResponseItem.AccessAnyValidServiceTokenRule
+      | GroupListResponseItem.AccessExternalEvaluationRule
+      | GroupListResponseItem.AccessCountryRule
+      | GroupListResponseItem.AccessAuthenticationMethodRule
+      | GroupListResponseItem.AccessDevicePostureRule
     >;
 
     updated_at?: string;
   }
 
-  export namespace GroupAccessGroupsListAccessGroupsResponseItem {
+  export namespace GroupListResponseItem {
     /**
      * Matches a specific email.
      */
@@ -4246,6 +2856,13 @@ export namespace GroupAccessGroupsListAccessGroupsResponse {
       }
     }
   }
+}
+
+export interface GroupDeleteResponse {
+  /**
+   * UUID
+   */
+  id?: string;
 }
 
 export interface GroupGetResponse {
@@ -5630,31 +4247,1413 @@ export namespace GroupGetResponse {
   }
 }
 
-export interface GroupUpdateParams {
+export interface GroupReplaceResponse {
+  /**
+   * UUID
+   */
+  id?: string;
+
+  created_at?: string;
+
+  /**
+   * Rules evaluated with a NOT logical operator. To match a policy, a user cannot
+   * meet any of the Exclude rules.
+   */
+  exclude?: Array<
+    | GroupReplaceResponse.AccessEmailRule
+    | GroupReplaceResponse.AccessEmailListRule
+    | GroupReplaceResponse.AccessDomainRule
+    | GroupReplaceResponse.AccessEveryoneRule
+    | GroupReplaceResponse.AccessIPRule
+    | GroupReplaceResponse.AccessIPListRule
+    | GroupReplaceResponse.AccessCertificateRule
+    | GroupReplaceResponse.AccessAccessGroupRule
+    | GroupReplaceResponse.AccessAzureGroupRule
+    | GroupReplaceResponse.AccessGitHubOrganizationRule
+    | GroupReplaceResponse.AccessGsuiteGroupRule
+    | GroupReplaceResponse.AccessOktaGroupRule
+    | GroupReplaceResponse.AccessSamlGroupRule
+    | GroupReplaceResponse.AccessServiceTokenRule
+    | GroupReplaceResponse.AccessAnyValidServiceTokenRule
+    | GroupReplaceResponse.AccessExternalEvaluationRule
+    | GroupReplaceResponse.AccessCountryRule
+    | GroupReplaceResponse.AccessAuthenticationMethodRule
+    | GroupReplaceResponse.AccessDevicePostureRule
+  >;
+
+  /**
+   * Rules evaluated with an OR logical operator. A user needs to meet only one of
+   * the Include rules.
+   */
+  include?: Array<
+    | GroupReplaceResponse.AccessEmailRule
+    | GroupReplaceResponse.AccessEmailListRule
+    | GroupReplaceResponse.AccessDomainRule
+    | GroupReplaceResponse.AccessEveryoneRule
+    | GroupReplaceResponse.AccessIPRule
+    | GroupReplaceResponse.AccessIPListRule
+    | GroupReplaceResponse.AccessCertificateRule
+    | GroupReplaceResponse.AccessAccessGroupRule
+    | GroupReplaceResponse.AccessAzureGroupRule
+    | GroupReplaceResponse.AccessGitHubOrganizationRule
+    | GroupReplaceResponse.AccessGsuiteGroupRule
+    | GroupReplaceResponse.AccessOktaGroupRule
+    | GroupReplaceResponse.AccessSamlGroupRule
+    | GroupReplaceResponse.AccessServiceTokenRule
+    | GroupReplaceResponse.AccessAnyValidServiceTokenRule
+    | GroupReplaceResponse.AccessExternalEvaluationRule
+    | GroupReplaceResponse.AccessCountryRule
+    | GroupReplaceResponse.AccessAuthenticationMethodRule
+    | GroupReplaceResponse.AccessDevicePostureRule
+  >;
+
+  /**
+   * Rules evaluated with an AND logical operator. To match a policy, a user must
+   * meet all of the Require rules.
+   */
+  is_default?: Array<
+    | GroupReplaceResponse.AccessEmailRule
+    | GroupReplaceResponse.AccessEmailListRule
+    | GroupReplaceResponse.AccessDomainRule
+    | GroupReplaceResponse.AccessEveryoneRule
+    | GroupReplaceResponse.AccessIPRule
+    | GroupReplaceResponse.AccessIPListRule
+    | GroupReplaceResponse.AccessCertificateRule
+    | GroupReplaceResponse.AccessAccessGroupRule
+    | GroupReplaceResponse.AccessAzureGroupRule
+    | GroupReplaceResponse.AccessGitHubOrganizationRule
+    | GroupReplaceResponse.AccessGsuiteGroupRule
+    | GroupReplaceResponse.AccessOktaGroupRule
+    | GroupReplaceResponse.AccessSamlGroupRule
+    | GroupReplaceResponse.AccessServiceTokenRule
+    | GroupReplaceResponse.AccessAnyValidServiceTokenRule
+    | GroupReplaceResponse.AccessExternalEvaluationRule
+    | GroupReplaceResponse.AccessCountryRule
+    | GroupReplaceResponse.AccessAuthenticationMethodRule
+    | GroupReplaceResponse.AccessDevicePostureRule
+  >;
+
+  /**
+   * The name of the Access group.
+   */
+  name?: string;
+
+  /**
+   * Rules evaluated with an AND logical operator. To match a policy, a user must
+   * meet all of the Require rules.
+   */
+  require?: Array<
+    | GroupReplaceResponse.AccessEmailRule
+    | GroupReplaceResponse.AccessEmailListRule
+    | GroupReplaceResponse.AccessDomainRule
+    | GroupReplaceResponse.AccessEveryoneRule
+    | GroupReplaceResponse.AccessIPRule
+    | GroupReplaceResponse.AccessIPListRule
+    | GroupReplaceResponse.AccessCertificateRule
+    | GroupReplaceResponse.AccessAccessGroupRule
+    | GroupReplaceResponse.AccessAzureGroupRule
+    | GroupReplaceResponse.AccessGitHubOrganizationRule
+    | GroupReplaceResponse.AccessGsuiteGroupRule
+    | GroupReplaceResponse.AccessOktaGroupRule
+    | GroupReplaceResponse.AccessSamlGroupRule
+    | GroupReplaceResponse.AccessServiceTokenRule
+    | GroupReplaceResponse.AccessAnyValidServiceTokenRule
+    | GroupReplaceResponse.AccessExternalEvaluationRule
+    | GroupReplaceResponse.AccessCountryRule
+    | GroupReplaceResponse.AccessAuthenticationMethodRule
+    | GroupReplaceResponse.AccessDevicePostureRule
+  >;
+
+  updated_at?: string;
+}
+
+export namespace GroupReplaceResponse {
+  /**
+   * Matches a specific email.
+   */
+  export interface AccessEmailRule {
+    email: AccessEmailRule.Email;
+  }
+
+  export namespace AccessEmailRule {
+    export interface Email {
+      /**
+       * The email of the user.
+       */
+      email: string;
+    }
+  }
+
+  /**
+   * Matches an email address from a list.
+   */
+  export interface AccessEmailListRule {
+    email_list: AccessEmailListRule.EmailList;
+  }
+
+  export namespace AccessEmailListRule {
+    export interface EmailList {
+      /**
+       * The ID of a previously created email list.
+       */
+      id: string;
+    }
+  }
+
+  /**
+   * Match an entire email domain.
+   */
+  export interface AccessDomainRule {
+    email_domain: AccessDomainRule.EmailDomain;
+  }
+
+  export namespace AccessDomainRule {
+    export interface EmailDomain {
+      /**
+       * The email domain to match.
+       */
+      domain: string;
+    }
+  }
+
+  /**
+   * Matches everyone.
+   */
+  export interface AccessEveryoneRule {
+    /**
+     * An empty object which matches on all users.
+     */
+    everyone: unknown;
+  }
+
+  /**
+   * Matches an IP address block.
+   */
+  export interface AccessIPRule {
+    ip: AccessIPRule.IP;
+  }
+
+  export namespace AccessIPRule {
+    export interface IP {
+      /**
+       * An IPv4 or IPv6 CIDR block.
+       */
+      ip: string;
+    }
+  }
+
+  /**
+   * Matches an IP address from a list.
+   */
+  export interface AccessIPListRule {
+    ip_list: AccessIPListRule.IPList;
+  }
+
+  export namespace AccessIPListRule {
+    export interface IPList {
+      /**
+       * The ID of a previously created IP list.
+       */
+      id: string;
+    }
+  }
+
+  /**
+   * Matches any valid client certificate.
+   */
+  export interface AccessCertificateRule {
+    certificate: unknown;
+  }
+
+  /**
+   * Matches an Access group.
+   */
+  export interface AccessAccessGroupRule {
+    group: AccessAccessGroupRule.Group;
+  }
+
+  export namespace AccessAccessGroupRule {
+    export interface Group {
+      /**
+       * The ID of a previously created Access group.
+       */
+      id: string;
+    }
+  }
+
+  /**
+   * Matches an Azure group. Requires an Azure identity provider.
+   */
+  export interface AccessAzureGroupRule {
+    azureAD: AccessAzureGroupRule.AzureAd;
+  }
+
+  export namespace AccessAzureGroupRule {
+    export interface AzureAd {
+      /**
+       * The ID of an Azure group.
+       */
+      id: string;
+
+      /**
+       * The ID of your Azure identity provider.
+       */
+      connection_id: string;
+    }
+  }
+
+  /**
+   * Matches a Github organization. Requires a Github identity provider.
+   */
+  export interface AccessGitHubOrganizationRule {
+    'github-organization': AccessGitHubOrganizationRule.GitHubOrganization;
+  }
+
+  export namespace AccessGitHubOrganizationRule {
+    export interface GitHubOrganization {
+      /**
+       * The ID of your Github identity provider.
+       */
+      connection_id: string;
+
+      /**
+       * The name of the organization.
+       */
+      name: string;
+    }
+  }
+
+  /**
+   * Matches a group in Google Workspace. Requires a Google Workspace identity
+   * provider.
+   */
+  export interface AccessGsuiteGroupRule {
+    gsuite: AccessGsuiteGroupRule.Gsuite;
+  }
+
+  export namespace AccessGsuiteGroupRule {
+    export interface Gsuite {
+      /**
+       * The ID of your Google Workspace identity provider.
+       */
+      connection_id: string;
+
+      /**
+       * The email of the Google Workspace group.
+       */
+      email: string;
+    }
+  }
+
+  /**
+   * Matches an Okta group. Requires an Okta identity provider.
+   */
+  export interface AccessOktaGroupRule {
+    okta: AccessOktaGroupRule.Okta;
+  }
+
+  export namespace AccessOktaGroupRule {
+    export interface Okta {
+      /**
+       * The ID of your Okta identity provider.
+       */
+      connection_id: string;
+
+      /**
+       * The email of the Okta group.
+       */
+      email: string;
+    }
+  }
+
+  /**
+   * Matches a SAML group. Requires a SAML identity provider.
+   */
+  export interface AccessSamlGroupRule {
+    saml: AccessSamlGroupRule.Saml;
+  }
+
+  export namespace AccessSamlGroupRule {
+    export interface Saml {
+      /**
+       * The name of the SAML attribute.
+       */
+      attribute_name: string;
+
+      /**
+       * The SAML attribute value to look for.
+       */
+      attribute_value: string;
+    }
+  }
+
+  /**
+   * Matches a specific Access Service Token
+   */
+  export interface AccessServiceTokenRule {
+    service_token: AccessServiceTokenRule.ServiceToken;
+  }
+
+  export namespace AccessServiceTokenRule {
+    export interface ServiceToken {
+      /**
+       * The ID of a Service Token.
+       */
+      token_id: string;
+    }
+  }
+
+  /**
+   * Matches any valid Access Service Token
+   */
+  export interface AccessAnyValidServiceTokenRule {
+    /**
+     * An empty object which matches on all service tokens.
+     */
+    any_valid_service_token: unknown;
+  }
+
+  /**
+   * Create Allow or Block policies which evaluate the user based on custom criteria.
+   */
+  export interface AccessExternalEvaluationRule {
+    external_evaluation: AccessExternalEvaluationRule.ExternalEvaluation;
+  }
+
+  export namespace AccessExternalEvaluationRule {
+    export interface ExternalEvaluation {
+      /**
+       * The API endpoint containing your business logic.
+       */
+      evaluate_url: string;
+
+      /**
+       * The API endpoint containing the key that Access uses to verify that the response
+       * came from your API.
+       */
+      keys_url: string;
+    }
+  }
+
+  /**
+   * Matches a specific country
+   */
+  export interface AccessCountryRule {
+    geo: AccessCountryRule.Geo;
+  }
+
+  export namespace AccessCountryRule {
+    export interface Geo {
+      /**
+       * The country code that should be matched.
+       */
+      country_code: string;
+    }
+  }
+
+  /**
+   * Enforce different MFA options
+   */
+  export interface AccessAuthenticationMethodRule {
+    auth_method: AccessAuthenticationMethodRule.AuthMethod;
+  }
+
+  export namespace AccessAuthenticationMethodRule {
+    export interface AuthMethod {
+      /**
+       * The type of authentication method https://datatracker.ietf.org/doc/html/rfc8176.
+       */
+      auth_method: string;
+    }
+  }
+
+  /**
+   * Enforces a device posture rule has run successfully
+   */
+  export interface AccessDevicePostureRule {
+    device_posture: AccessDevicePostureRule.DevicePosture;
+  }
+
+  export namespace AccessDevicePostureRule {
+    export interface DevicePosture {
+      /**
+       * The ID of a device posture integration.
+       */
+      integration_uid: string;
+    }
+  }
+
+  /**
+   * Matches a specific email.
+   */
+  export interface AccessEmailRule {
+    email: AccessEmailRule.Email;
+  }
+
+  export namespace AccessEmailRule {
+    export interface Email {
+      /**
+       * The email of the user.
+       */
+      email: string;
+    }
+  }
+
+  /**
+   * Matches an email address from a list.
+   */
+  export interface AccessEmailListRule {
+    email_list: AccessEmailListRule.EmailList;
+  }
+
+  export namespace AccessEmailListRule {
+    export interface EmailList {
+      /**
+       * The ID of a previously created email list.
+       */
+      id: string;
+    }
+  }
+
+  /**
+   * Match an entire email domain.
+   */
+  export interface AccessDomainRule {
+    email_domain: AccessDomainRule.EmailDomain;
+  }
+
+  export namespace AccessDomainRule {
+    export interface EmailDomain {
+      /**
+       * The email domain to match.
+       */
+      domain: string;
+    }
+  }
+
+  /**
+   * Matches everyone.
+   */
+  export interface AccessEveryoneRule {
+    /**
+     * An empty object which matches on all users.
+     */
+    everyone: unknown;
+  }
+
+  /**
+   * Matches an IP address block.
+   */
+  export interface AccessIPRule {
+    ip: AccessIPRule.IP;
+  }
+
+  export namespace AccessIPRule {
+    export interface IP {
+      /**
+       * An IPv4 or IPv6 CIDR block.
+       */
+      ip: string;
+    }
+  }
+
+  /**
+   * Matches an IP address from a list.
+   */
+  export interface AccessIPListRule {
+    ip_list: AccessIPListRule.IPList;
+  }
+
+  export namespace AccessIPListRule {
+    export interface IPList {
+      /**
+       * The ID of a previously created IP list.
+       */
+      id: string;
+    }
+  }
+
+  /**
+   * Matches any valid client certificate.
+   */
+  export interface AccessCertificateRule {
+    certificate: unknown;
+  }
+
+  /**
+   * Matches an Access group.
+   */
+  export interface AccessAccessGroupRule {
+    group: AccessAccessGroupRule.Group;
+  }
+
+  export namespace AccessAccessGroupRule {
+    export interface Group {
+      /**
+       * The ID of a previously created Access group.
+       */
+      id: string;
+    }
+  }
+
+  /**
+   * Matches an Azure group. Requires an Azure identity provider.
+   */
+  export interface AccessAzureGroupRule {
+    azureAD: AccessAzureGroupRule.AzureAd;
+  }
+
+  export namespace AccessAzureGroupRule {
+    export interface AzureAd {
+      /**
+       * The ID of an Azure group.
+       */
+      id: string;
+
+      /**
+       * The ID of your Azure identity provider.
+       */
+      connection_id: string;
+    }
+  }
+
+  /**
+   * Matches a Github organization. Requires a Github identity provider.
+   */
+  export interface AccessGitHubOrganizationRule {
+    'github-organization': AccessGitHubOrganizationRule.GitHubOrganization;
+  }
+
+  export namespace AccessGitHubOrganizationRule {
+    export interface GitHubOrganization {
+      /**
+       * The ID of your Github identity provider.
+       */
+      connection_id: string;
+
+      /**
+       * The name of the organization.
+       */
+      name: string;
+    }
+  }
+
+  /**
+   * Matches a group in Google Workspace. Requires a Google Workspace identity
+   * provider.
+   */
+  export interface AccessGsuiteGroupRule {
+    gsuite: AccessGsuiteGroupRule.Gsuite;
+  }
+
+  export namespace AccessGsuiteGroupRule {
+    export interface Gsuite {
+      /**
+       * The ID of your Google Workspace identity provider.
+       */
+      connection_id: string;
+
+      /**
+       * The email of the Google Workspace group.
+       */
+      email: string;
+    }
+  }
+
+  /**
+   * Matches an Okta group. Requires an Okta identity provider.
+   */
+  export interface AccessOktaGroupRule {
+    okta: AccessOktaGroupRule.Okta;
+  }
+
+  export namespace AccessOktaGroupRule {
+    export interface Okta {
+      /**
+       * The ID of your Okta identity provider.
+       */
+      connection_id: string;
+
+      /**
+       * The email of the Okta group.
+       */
+      email: string;
+    }
+  }
+
+  /**
+   * Matches a SAML group. Requires a SAML identity provider.
+   */
+  export interface AccessSamlGroupRule {
+    saml: AccessSamlGroupRule.Saml;
+  }
+
+  export namespace AccessSamlGroupRule {
+    export interface Saml {
+      /**
+       * The name of the SAML attribute.
+       */
+      attribute_name: string;
+
+      /**
+       * The SAML attribute value to look for.
+       */
+      attribute_value: string;
+    }
+  }
+
+  /**
+   * Matches a specific Access Service Token
+   */
+  export interface AccessServiceTokenRule {
+    service_token: AccessServiceTokenRule.ServiceToken;
+  }
+
+  export namespace AccessServiceTokenRule {
+    export interface ServiceToken {
+      /**
+       * The ID of a Service Token.
+       */
+      token_id: string;
+    }
+  }
+
+  /**
+   * Matches any valid Access Service Token
+   */
+  export interface AccessAnyValidServiceTokenRule {
+    /**
+     * An empty object which matches on all service tokens.
+     */
+    any_valid_service_token: unknown;
+  }
+
+  /**
+   * Create Allow or Block policies which evaluate the user based on custom criteria.
+   */
+  export interface AccessExternalEvaluationRule {
+    external_evaluation: AccessExternalEvaluationRule.ExternalEvaluation;
+  }
+
+  export namespace AccessExternalEvaluationRule {
+    export interface ExternalEvaluation {
+      /**
+       * The API endpoint containing your business logic.
+       */
+      evaluate_url: string;
+
+      /**
+       * The API endpoint containing the key that Access uses to verify that the response
+       * came from your API.
+       */
+      keys_url: string;
+    }
+  }
+
+  /**
+   * Matches a specific country
+   */
+  export interface AccessCountryRule {
+    geo: AccessCountryRule.Geo;
+  }
+
+  export namespace AccessCountryRule {
+    export interface Geo {
+      /**
+       * The country code that should be matched.
+       */
+      country_code: string;
+    }
+  }
+
+  /**
+   * Enforce different MFA options
+   */
+  export interface AccessAuthenticationMethodRule {
+    auth_method: AccessAuthenticationMethodRule.AuthMethod;
+  }
+
+  export namespace AccessAuthenticationMethodRule {
+    export interface AuthMethod {
+      /**
+       * The type of authentication method https://datatracker.ietf.org/doc/html/rfc8176.
+       */
+      auth_method: string;
+    }
+  }
+
+  /**
+   * Enforces a device posture rule has run successfully
+   */
+  export interface AccessDevicePostureRule {
+    device_posture: AccessDevicePostureRule.DevicePosture;
+  }
+
+  export namespace AccessDevicePostureRule {
+    export interface DevicePosture {
+      /**
+       * The ID of a device posture integration.
+       */
+      integration_uid: string;
+    }
+  }
+
+  /**
+   * Matches a specific email.
+   */
+  export interface AccessEmailRule {
+    email: AccessEmailRule.Email;
+  }
+
+  export namespace AccessEmailRule {
+    export interface Email {
+      /**
+       * The email of the user.
+       */
+      email: string;
+    }
+  }
+
+  /**
+   * Matches an email address from a list.
+   */
+  export interface AccessEmailListRule {
+    email_list: AccessEmailListRule.EmailList;
+  }
+
+  export namespace AccessEmailListRule {
+    export interface EmailList {
+      /**
+       * The ID of a previously created email list.
+       */
+      id: string;
+    }
+  }
+
+  /**
+   * Match an entire email domain.
+   */
+  export interface AccessDomainRule {
+    email_domain: AccessDomainRule.EmailDomain;
+  }
+
+  export namespace AccessDomainRule {
+    export interface EmailDomain {
+      /**
+       * The email domain to match.
+       */
+      domain: string;
+    }
+  }
+
+  /**
+   * Matches everyone.
+   */
+  export interface AccessEveryoneRule {
+    /**
+     * An empty object which matches on all users.
+     */
+    everyone: unknown;
+  }
+
+  /**
+   * Matches an IP address block.
+   */
+  export interface AccessIPRule {
+    ip: AccessIPRule.IP;
+  }
+
+  export namespace AccessIPRule {
+    export interface IP {
+      /**
+       * An IPv4 or IPv6 CIDR block.
+       */
+      ip: string;
+    }
+  }
+
+  /**
+   * Matches an IP address from a list.
+   */
+  export interface AccessIPListRule {
+    ip_list: AccessIPListRule.IPList;
+  }
+
+  export namespace AccessIPListRule {
+    export interface IPList {
+      /**
+       * The ID of a previously created IP list.
+       */
+      id: string;
+    }
+  }
+
+  /**
+   * Matches any valid client certificate.
+   */
+  export interface AccessCertificateRule {
+    certificate: unknown;
+  }
+
+  /**
+   * Matches an Access group.
+   */
+  export interface AccessAccessGroupRule {
+    group: AccessAccessGroupRule.Group;
+  }
+
+  export namespace AccessAccessGroupRule {
+    export interface Group {
+      /**
+       * The ID of a previously created Access group.
+       */
+      id: string;
+    }
+  }
+
+  /**
+   * Matches an Azure group. Requires an Azure identity provider.
+   */
+  export interface AccessAzureGroupRule {
+    azureAD: AccessAzureGroupRule.AzureAd;
+  }
+
+  export namespace AccessAzureGroupRule {
+    export interface AzureAd {
+      /**
+       * The ID of an Azure group.
+       */
+      id: string;
+
+      /**
+       * The ID of your Azure identity provider.
+       */
+      connection_id: string;
+    }
+  }
+
+  /**
+   * Matches a Github organization. Requires a Github identity provider.
+   */
+  export interface AccessGitHubOrganizationRule {
+    'github-organization': AccessGitHubOrganizationRule.GitHubOrganization;
+  }
+
+  export namespace AccessGitHubOrganizationRule {
+    export interface GitHubOrganization {
+      /**
+       * The ID of your Github identity provider.
+       */
+      connection_id: string;
+
+      /**
+       * The name of the organization.
+       */
+      name: string;
+    }
+  }
+
+  /**
+   * Matches a group in Google Workspace. Requires a Google Workspace identity
+   * provider.
+   */
+  export interface AccessGsuiteGroupRule {
+    gsuite: AccessGsuiteGroupRule.Gsuite;
+  }
+
+  export namespace AccessGsuiteGroupRule {
+    export interface Gsuite {
+      /**
+       * The ID of your Google Workspace identity provider.
+       */
+      connection_id: string;
+
+      /**
+       * The email of the Google Workspace group.
+       */
+      email: string;
+    }
+  }
+
+  /**
+   * Matches an Okta group. Requires an Okta identity provider.
+   */
+  export interface AccessOktaGroupRule {
+    okta: AccessOktaGroupRule.Okta;
+  }
+
+  export namespace AccessOktaGroupRule {
+    export interface Okta {
+      /**
+       * The ID of your Okta identity provider.
+       */
+      connection_id: string;
+
+      /**
+       * The email of the Okta group.
+       */
+      email: string;
+    }
+  }
+
+  /**
+   * Matches a SAML group. Requires a SAML identity provider.
+   */
+  export interface AccessSamlGroupRule {
+    saml: AccessSamlGroupRule.Saml;
+  }
+
+  export namespace AccessSamlGroupRule {
+    export interface Saml {
+      /**
+       * The name of the SAML attribute.
+       */
+      attribute_name: string;
+
+      /**
+       * The SAML attribute value to look for.
+       */
+      attribute_value: string;
+    }
+  }
+
+  /**
+   * Matches a specific Access Service Token
+   */
+  export interface AccessServiceTokenRule {
+    service_token: AccessServiceTokenRule.ServiceToken;
+  }
+
+  export namespace AccessServiceTokenRule {
+    export interface ServiceToken {
+      /**
+       * The ID of a Service Token.
+       */
+      token_id: string;
+    }
+  }
+
+  /**
+   * Matches any valid Access Service Token
+   */
+  export interface AccessAnyValidServiceTokenRule {
+    /**
+     * An empty object which matches on all service tokens.
+     */
+    any_valid_service_token: unknown;
+  }
+
+  /**
+   * Create Allow or Block policies which evaluate the user based on custom criteria.
+   */
+  export interface AccessExternalEvaluationRule {
+    external_evaluation: AccessExternalEvaluationRule.ExternalEvaluation;
+  }
+
+  export namespace AccessExternalEvaluationRule {
+    export interface ExternalEvaluation {
+      /**
+       * The API endpoint containing your business logic.
+       */
+      evaluate_url: string;
+
+      /**
+       * The API endpoint containing the key that Access uses to verify that the response
+       * came from your API.
+       */
+      keys_url: string;
+    }
+  }
+
+  /**
+   * Matches a specific country
+   */
+  export interface AccessCountryRule {
+    geo: AccessCountryRule.Geo;
+  }
+
+  export namespace AccessCountryRule {
+    export interface Geo {
+      /**
+       * The country code that should be matched.
+       */
+      country_code: string;
+    }
+  }
+
+  /**
+   * Enforce different MFA options
+   */
+  export interface AccessAuthenticationMethodRule {
+    auth_method: AccessAuthenticationMethodRule.AuthMethod;
+  }
+
+  export namespace AccessAuthenticationMethodRule {
+    export interface AuthMethod {
+      /**
+       * The type of authentication method https://datatracker.ietf.org/doc/html/rfc8176.
+       */
+      auth_method: string;
+    }
+  }
+
+  /**
+   * Enforces a device posture rule has run successfully
+   */
+  export interface AccessDevicePostureRule {
+    device_posture: AccessDevicePostureRule.DevicePosture;
+  }
+
+  export namespace AccessDevicePostureRule {
+    export interface DevicePosture {
+      /**
+       * The ID of a device posture integration.
+       */
+      integration_uid: string;
+    }
+  }
+
+  /**
+   * Matches a specific email.
+   */
+  export interface AccessEmailRule {
+    email: AccessEmailRule.Email;
+  }
+
+  export namespace AccessEmailRule {
+    export interface Email {
+      /**
+       * The email of the user.
+       */
+      email: string;
+    }
+  }
+
+  /**
+   * Matches an email address from a list.
+   */
+  export interface AccessEmailListRule {
+    email_list: AccessEmailListRule.EmailList;
+  }
+
+  export namespace AccessEmailListRule {
+    export interface EmailList {
+      /**
+       * The ID of a previously created email list.
+       */
+      id: string;
+    }
+  }
+
+  /**
+   * Match an entire email domain.
+   */
+  export interface AccessDomainRule {
+    email_domain: AccessDomainRule.EmailDomain;
+  }
+
+  export namespace AccessDomainRule {
+    export interface EmailDomain {
+      /**
+       * The email domain to match.
+       */
+      domain: string;
+    }
+  }
+
+  /**
+   * Matches everyone.
+   */
+  export interface AccessEveryoneRule {
+    /**
+     * An empty object which matches on all users.
+     */
+    everyone: unknown;
+  }
+
+  /**
+   * Matches an IP address block.
+   */
+  export interface AccessIPRule {
+    ip: AccessIPRule.IP;
+  }
+
+  export namespace AccessIPRule {
+    export interface IP {
+      /**
+       * An IPv4 or IPv6 CIDR block.
+       */
+      ip: string;
+    }
+  }
+
+  /**
+   * Matches an IP address from a list.
+   */
+  export interface AccessIPListRule {
+    ip_list: AccessIPListRule.IPList;
+  }
+
+  export namespace AccessIPListRule {
+    export interface IPList {
+      /**
+       * The ID of a previously created IP list.
+       */
+      id: string;
+    }
+  }
+
+  /**
+   * Matches any valid client certificate.
+   */
+  export interface AccessCertificateRule {
+    certificate: unknown;
+  }
+
+  /**
+   * Matches an Access group.
+   */
+  export interface AccessAccessGroupRule {
+    group: AccessAccessGroupRule.Group;
+  }
+
+  export namespace AccessAccessGroupRule {
+    export interface Group {
+      /**
+       * The ID of a previously created Access group.
+       */
+      id: string;
+    }
+  }
+
+  /**
+   * Matches an Azure group. Requires an Azure identity provider.
+   */
+  export interface AccessAzureGroupRule {
+    azureAD: AccessAzureGroupRule.AzureAd;
+  }
+
+  export namespace AccessAzureGroupRule {
+    export interface AzureAd {
+      /**
+       * The ID of an Azure group.
+       */
+      id: string;
+
+      /**
+       * The ID of your Azure identity provider.
+       */
+      connection_id: string;
+    }
+  }
+
+  /**
+   * Matches a Github organization. Requires a Github identity provider.
+   */
+  export interface AccessGitHubOrganizationRule {
+    'github-organization': AccessGitHubOrganizationRule.GitHubOrganization;
+  }
+
+  export namespace AccessGitHubOrganizationRule {
+    export interface GitHubOrganization {
+      /**
+       * The ID of your Github identity provider.
+       */
+      connection_id: string;
+
+      /**
+       * The name of the organization.
+       */
+      name: string;
+    }
+  }
+
+  /**
+   * Matches a group in Google Workspace. Requires a Google Workspace identity
+   * provider.
+   */
+  export interface AccessGsuiteGroupRule {
+    gsuite: AccessGsuiteGroupRule.Gsuite;
+  }
+
+  export namespace AccessGsuiteGroupRule {
+    export interface Gsuite {
+      /**
+       * The ID of your Google Workspace identity provider.
+       */
+      connection_id: string;
+
+      /**
+       * The email of the Google Workspace group.
+       */
+      email: string;
+    }
+  }
+
+  /**
+   * Matches an Okta group. Requires an Okta identity provider.
+   */
+  export interface AccessOktaGroupRule {
+    okta: AccessOktaGroupRule.Okta;
+  }
+
+  export namespace AccessOktaGroupRule {
+    export interface Okta {
+      /**
+       * The ID of your Okta identity provider.
+       */
+      connection_id: string;
+
+      /**
+       * The email of the Okta group.
+       */
+      email: string;
+    }
+  }
+
+  /**
+   * Matches a SAML group. Requires a SAML identity provider.
+   */
+  export interface AccessSamlGroupRule {
+    saml: AccessSamlGroupRule.Saml;
+  }
+
+  export namespace AccessSamlGroupRule {
+    export interface Saml {
+      /**
+       * The name of the SAML attribute.
+       */
+      attribute_name: string;
+
+      /**
+       * The SAML attribute value to look for.
+       */
+      attribute_value: string;
+    }
+  }
+
+  /**
+   * Matches a specific Access Service Token
+   */
+  export interface AccessServiceTokenRule {
+    service_token: AccessServiceTokenRule.ServiceToken;
+  }
+
+  export namespace AccessServiceTokenRule {
+    export interface ServiceToken {
+      /**
+       * The ID of a Service Token.
+       */
+      token_id: string;
+    }
+  }
+
+  /**
+   * Matches any valid Access Service Token
+   */
+  export interface AccessAnyValidServiceTokenRule {
+    /**
+     * An empty object which matches on all service tokens.
+     */
+    any_valid_service_token: unknown;
+  }
+
+  /**
+   * Create Allow or Block policies which evaluate the user based on custom criteria.
+   */
+  export interface AccessExternalEvaluationRule {
+    external_evaluation: AccessExternalEvaluationRule.ExternalEvaluation;
+  }
+
+  export namespace AccessExternalEvaluationRule {
+    export interface ExternalEvaluation {
+      /**
+       * The API endpoint containing your business logic.
+       */
+      evaluate_url: string;
+
+      /**
+       * The API endpoint containing the key that Access uses to verify that the response
+       * came from your API.
+       */
+      keys_url: string;
+    }
+  }
+
+  /**
+   * Matches a specific country
+   */
+  export interface AccessCountryRule {
+    geo: AccessCountryRule.Geo;
+  }
+
+  export namespace AccessCountryRule {
+    export interface Geo {
+      /**
+       * The country code that should be matched.
+       */
+      country_code: string;
+    }
+  }
+
+  /**
+   * Enforce different MFA options
+   */
+  export interface AccessAuthenticationMethodRule {
+    auth_method: AccessAuthenticationMethodRule.AuthMethod;
+  }
+
+  export namespace AccessAuthenticationMethodRule {
+    export interface AuthMethod {
+      /**
+       * The type of authentication method https://datatracker.ietf.org/doc/html/rfc8176.
+       */
+      auth_method: string;
+    }
+  }
+
+  /**
+   * Enforces a device posture rule has run successfully
+   */
+  export interface AccessDevicePostureRule {
+    device_posture: AccessDevicePostureRule.DevicePosture;
+  }
+
+  export namespace AccessDevicePostureRule {
+    export interface DevicePosture {
+      /**
+       * The ID of a device posture integration.
+       */
+      integration_uid: string;
+    }
+  }
+}
+
+export interface GroupCreateParams {
   /**
    * Rules evaluated with an OR logical operator. A user needs to meet only one of
    * the Include rules.
    */
   include: Array<
-    | GroupUpdateParams.AccessEmailRule
-    | GroupUpdateParams.AccessEmailListRule
-    | GroupUpdateParams.AccessDomainRule
-    | GroupUpdateParams.AccessEveryoneRule
-    | GroupUpdateParams.AccessIPRule
-    | GroupUpdateParams.AccessIPListRule
-    | GroupUpdateParams.AccessCertificateRule
-    | GroupUpdateParams.AccessAccessGroupRule
-    | GroupUpdateParams.AccessAzureGroupRule
-    | GroupUpdateParams.AccessGitHubOrganizationRule
-    | GroupUpdateParams.AccessGsuiteGroupRule
-    | GroupUpdateParams.AccessOktaGroupRule
-    | GroupUpdateParams.AccessSamlGroupRule
-    | GroupUpdateParams.AccessServiceTokenRule
-    | GroupUpdateParams.AccessAnyValidServiceTokenRule
-    | GroupUpdateParams.AccessExternalEvaluationRule
-    | GroupUpdateParams.AccessCountryRule
-    | GroupUpdateParams.AccessAuthenticationMethodRule
-    | GroupUpdateParams.AccessDevicePostureRule
+    | GroupCreateParams.AccessEmailRule
+    | GroupCreateParams.AccessEmailListRule
+    | GroupCreateParams.AccessDomainRule
+    | GroupCreateParams.AccessEveryoneRule
+    | GroupCreateParams.AccessIPRule
+    | GroupCreateParams.AccessIPListRule
+    | GroupCreateParams.AccessCertificateRule
+    | GroupCreateParams.AccessAccessGroupRule
+    | GroupCreateParams.AccessAzureGroupRule
+    | GroupCreateParams.AccessGitHubOrganizationRule
+    | GroupCreateParams.AccessGsuiteGroupRule
+    | GroupCreateParams.AccessOktaGroupRule
+    | GroupCreateParams.AccessSamlGroupRule
+    | GroupCreateParams.AccessServiceTokenRule
+    | GroupCreateParams.AccessAnyValidServiceTokenRule
+    | GroupCreateParams.AccessExternalEvaluationRule
+    | GroupCreateParams.AccessCountryRule
+    | GroupCreateParams.AccessAuthenticationMethodRule
+    | GroupCreateParams.AccessDevicePostureRule
   >;
 
   /**
@@ -5667,25 +5666,25 @@ export interface GroupUpdateParams {
    * meet any of the Exclude rules.
    */
   exclude?: Array<
-    | GroupUpdateParams.AccessEmailRule
-    | GroupUpdateParams.AccessEmailListRule
-    | GroupUpdateParams.AccessDomainRule
-    | GroupUpdateParams.AccessEveryoneRule
-    | GroupUpdateParams.AccessIPRule
-    | GroupUpdateParams.AccessIPListRule
-    | GroupUpdateParams.AccessCertificateRule
-    | GroupUpdateParams.AccessAccessGroupRule
-    | GroupUpdateParams.AccessAzureGroupRule
-    | GroupUpdateParams.AccessGitHubOrganizationRule
-    | GroupUpdateParams.AccessGsuiteGroupRule
-    | GroupUpdateParams.AccessOktaGroupRule
-    | GroupUpdateParams.AccessSamlGroupRule
-    | GroupUpdateParams.AccessServiceTokenRule
-    | GroupUpdateParams.AccessAnyValidServiceTokenRule
-    | GroupUpdateParams.AccessExternalEvaluationRule
-    | GroupUpdateParams.AccessCountryRule
-    | GroupUpdateParams.AccessAuthenticationMethodRule
-    | GroupUpdateParams.AccessDevicePostureRule
+    | GroupCreateParams.AccessEmailRule
+    | GroupCreateParams.AccessEmailListRule
+    | GroupCreateParams.AccessDomainRule
+    | GroupCreateParams.AccessEveryoneRule
+    | GroupCreateParams.AccessIPRule
+    | GroupCreateParams.AccessIPListRule
+    | GroupCreateParams.AccessCertificateRule
+    | GroupCreateParams.AccessAccessGroupRule
+    | GroupCreateParams.AccessAzureGroupRule
+    | GroupCreateParams.AccessGitHubOrganizationRule
+    | GroupCreateParams.AccessGsuiteGroupRule
+    | GroupCreateParams.AccessOktaGroupRule
+    | GroupCreateParams.AccessSamlGroupRule
+    | GroupCreateParams.AccessServiceTokenRule
+    | GroupCreateParams.AccessAnyValidServiceTokenRule
+    | GroupCreateParams.AccessExternalEvaluationRule
+    | GroupCreateParams.AccessCountryRule
+    | GroupCreateParams.AccessAuthenticationMethodRule
+    | GroupCreateParams.AccessDevicePostureRule
   >;
 
   /**
@@ -5698,29 +5697,29 @@ export interface GroupUpdateParams {
    * meet all of the Require rules.
    */
   require?: Array<
-    | GroupUpdateParams.AccessEmailRule
-    | GroupUpdateParams.AccessEmailListRule
-    | GroupUpdateParams.AccessDomainRule
-    | GroupUpdateParams.AccessEveryoneRule
-    | GroupUpdateParams.AccessIPRule
-    | GroupUpdateParams.AccessIPListRule
-    | GroupUpdateParams.AccessCertificateRule
-    | GroupUpdateParams.AccessAccessGroupRule
-    | GroupUpdateParams.AccessAzureGroupRule
-    | GroupUpdateParams.AccessGitHubOrganizationRule
-    | GroupUpdateParams.AccessGsuiteGroupRule
-    | GroupUpdateParams.AccessOktaGroupRule
-    | GroupUpdateParams.AccessSamlGroupRule
-    | GroupUpdateParams.AccessServiceTokenRule
-    | GroupUpdateParams.AccessAnyValidServiceTokenRule
-    | GroupUpdateParams.AccessExternalEvaluationRule
-    | GroupUpdateParams.AccessCountryRule
-    | GroupUpdateParams.AccessAuthenticationMethodRule
-    | GroupUpdateParams.AccessDevicePostureRule
+    | GroupCreateParams.AccessEmailRule
+    | GroupCreateParams.AccessEmailListRule
+    | GroupCreateParams.AccessDomainRule
+    | GroupCreateParams.AccessEveryoneRule
+    | GroupCreateParams.AccessIPRule
+    | GroupCreateParams.AccessIPListRule
+    | GroupCreateParams.AccessCertificateRule
+    | GroupCreateParams.AccessAccessGroupRule
+    | GroupCreateParams.AccessAzureGroupRule
+    | GroupCreateParams.AccessGitHubOrganizationRule
+    | GroupCreateParams.AccessGsuiteGroupRule
+    | GroupCreateParams.AccessOktaGroupRule
+    | GroupCreateParams.AccessSamlGroupRule
+    | GroupCreateParams.AccessServiceTokenRule
+    | GroupCreateParams.AccessAnyValidServiceTokenRule
+    | GroupCreateParams.AccessExternalEvaluationRule
+    | GroupCreateParams.AccessCountryRule
+    | GroupCreateParams.AccessAuthenticationMethodRule
+    | GroupCreateParams.AccessDevicePostureRule
   >;
 }
 
-export namespace GroupUpdateParams {
+export namespace GroupCreateParams {
   /**
    * Matches a specific email.
    */
@@ -6667,31 +6666,31 @@ export namespace GroupUpdateParams {
   }
 }
 
-export interface GroupAccessGroupsCreateAnAccessGroupParams {
+export interface GroupReplaceParams {
   /**
    * Rules evaluated with an OR logical operator. A user needs to meet only one of
    * the Include rules.
    */
   include: Array<
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessEmailRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessEmailListRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessDomainRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessEveryoneRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessIPRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessIPListRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessCertificateRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessAccessGroupRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessAzureGroupRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessGitHubOrganizationRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessGsuiteGroupRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessOktaGroupRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessSamlGroupRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessServiceTokenRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessAnyValidServiceTokenRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessExternalEvaluationRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessCountryRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessAuthenticationMethodRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessDevicePostureRule
+    | GroupReplaceParams.AccessEmailRule
+    | GroupReplaceParams.AccessEmailListRule
+    | GroupReplaceParams.AccessDomainRule
+    | GroupReplaceParams.AccessEveryoneRule
+    | GroupReplaceParams.AccessIPRule
+    | GroupReplaceParams.AccessIPListRule
+    | GroupReplaceParams.AccessCertificateRule
+    | GroupReplaceParams.AccessAccessGroupRule
+    | GroupReplaceParams.AccessAzureGroupRule
+    | GroupReplaceParams.AccessGitHubOrganizationRule
+    | GroupReplaceParams.AccessGsuiteGroupRule
+    | GroupReplaceParams.AccessOktaGroupRule
+    | GroupReplaceParams.AccessSamlGroupRule
+    | GroupReplaceParams.AccessServiceTokenRule
+    | GroupReplaceParams.AccessAnyValidServiceTokenRule
+    | GroupReplaceParams.AccessExternalEvaluationRule
+    | GroupReplaceParams.AccessCountryRule
+    | GroupReplaceParams.AccessAuthenticationMethodRule
+    | GroupReplaceParams.AccessDevicePostureRule
   >;
 
   /**
@@ -6704,25 +6703,25 @@ export interface GroupAccessGroupsCreateAnAccessGroupParams {
    * meet any of the Exclude rules.
    */
   exclude?: Array<
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessEmailRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessEmailListRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessDomainRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessEveryoneRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessIPRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessIPListRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessCertificateRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessAccessGroupRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessAzureGroupRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessGitHubOrganizationRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessGsuiteGroupRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessOktaGroupRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessSamlGroupRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessServiceTokenRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessAnyValidServiceTokenRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessExternalEvaluationRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessCountryRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessAuthenticationMethodRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessDevicePostureRule
+    | GroupReplaceParams.AccessEmailRule
+    | GroupReplaceParams.AccessEmailListRule
+    | GroupReplaceParams.AccessDomainRule
+    | GroupReplaceParams.AccessEveryoneRule
+    | GroupReplaceParams.AccessIPRule
+    | GroupReplaceParams.AccessIPListRule
+    | GroupReplaceParams.AccessCertificateRule
+    | GroupReplaceParams.AccessAccessGroupRule
+    | GroupReplaceParams.AccessAzureGroupRule
+    | GroupReplaceParams.AccessGitHubOrganizationRule
+    | GroupReplaceParams.AccessGsuiteGroupRule
+    | GroupReplaceParams.AccessOktaGroupRule
+    | GroupReplaceParams.AccessSamlGroupRule
+    | GroupReplaceParams.AccessServiceTokenRule
+    | GroupReplaceParams.AccessAnyValidServiceTokenRule
+    | GroupReplaceParams.AccessExternalEvaluationRule
+    | GroupReplaceParams.AccessCountryRule
+    | GroupReplaceParams.AccessAuthenticationMethodRule
+    | GroupReplaceParams.AccessDevicePostureRule
   >;
 
   /**
@@ -6735,29 +6734,29 @@ export interface GroupAccessGroupsCreateAnAccessGroupParams {
    * meet all of the Require rules.
    */
   require?: Array<
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessEmailRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessEmailListRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessDomainRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessEveryoneRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessIPRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessIPListRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessCertificateRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessAccessGroupRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessAzureGroupRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessGitHubOrganizationRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessGsuiteGroupRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessOktaGroupRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessSamlGroupRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessServiceTokenRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessAnyValidServiceTokenRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessExternalEvaluationRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessCountryRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessAuthenticationMethodRule
-    | GroupAccessGroupsCreateAnAccessGroupParams.AccessDevicePostureRule
+    | GroupReplaceParams.AccessEmailRule
+    | GroupReplaceParams.AccessEmailListRule
+    | GroupReplaceParams.AccessDomainRule
+    | GroupReplaceParams.AccessEveryoneRule
+    | GroupReplaceParams.AccessIPRule
+    | GroupReplaceParams.AccessIPListRule
+    | GroupReplaceParams.AccessCertificateRule
+    | GroupReplaceParams.AccessAccessGroupRule
+    | GroupReplaceParams.AccessAzureGroupRule
+    | GroupReplaceParams.AccessGitHubOrganizationRule
+    | GroupReplaceParams.AccessGsuiteGroupRule
+    | GroupReplaceParams.AccessOktaGroupRule
+    | GroupReplaceParams.AccessSamlGroupRule
+    | GroupReplaceParams.AccessServiceTokenRule
+    | GroupReplaceParams.AccessAnyValidServiceTokenRule
+    | GroupReplaceParams.AccessExternalEvaluationRule
+    | GroupReplaceParams.AccessCountryRule
+    | GroupReplaceParams.AccessAuthenticationMethodRule
+    | GroupReplaceParams.AccessDevicePostureRule
   >;
 }
 
-export namespace GroupAccessGroupsCreateAnAccessGroupParams {
+export namespace GroupReplaceParams {
   /**
    * Matches a specific email.
    */
@@ -7705,11 +7704,11 @@ export namespace GroupAccessGroupsCreateAnAccessGroupParams {
 }
 
 export namespace Groups {
-  export import GroupUpdateResponse = GroupsAPI.GroupUpdateResponse;
+  export import GroupCreateResponse = GroupsAPI.GroupCreateResponse;
+  export import GroupListResponse = GroupsAPI.GroupListResponse;
   export import GroupDeleteResponse = GroupsAPI.GroupDeleteResponse;
-  export import GroupAccessGroupsCreateAnAccessGroupResponse = GroupsAPI.GroupAccessGroupsCreateAnAccessGroupResponse;
-  export import GroupAccessGroupsListAccessGroupsResponse = GroupsAPI.GroupAccessGroupsListAccessGroupsResponse;
   export import GroupGetResponse = GroupsAPI.GroupGetResponse;
-  export import GroupUpdateParams = GroupsAPI.GroupUpdateParams;
-  export import GroupAccessGroupsCreateAnAccessGroupParams = GroupsAPI.GroupAccessGroupsCreateAnAccessGroupParams;
+  export import GroupReplaceResponse = GroupsAPI.GroupReplaceResponse;
+  export import GroupCreateParams = GroupsAPI.GroupCreateParams;
+  export import GroupReplaceParams = GroupsAPI.GroupReplaceParams;
 }

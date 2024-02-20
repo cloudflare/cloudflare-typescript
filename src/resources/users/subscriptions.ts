@@ -6,16 +6,12 @@ import * as SubscriptionsAPI from 'cloudflare/resources/users/subscriptions';
 
 export class Subscriptions extends APIResource {
   /**
-   * Updates a user's subscriptions.
+   * Lists all of a user's subscriptions.
    */
-  update(
-    identifier: string,
-    body: SubscriptionUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SubscriptionUpdateResponse> {
+  list(options?: Core.RequestOptions): Core.APIPromise<SubscriptionListResponse | null> {
     return (
-      this._client.put(`/user/subscriptions/${identifier}`, { body, ...options }) as Core.APIPromise<{
-        result: SubscriptionUpdateResponse;
+      this._client.get('/user/subscriptions', options) as Core.APIPromise<{
+        result: SubscriptionListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -28,44 +24,36 @@ export class Subscriptions extends APIResource {
   }
 
   /**
-   * Lists all of a user's subscriptions.
+   * Updates a user's subscriptions.
    */
-  userSubscriptionGetUserSubscriptions(
+  replace(
+    identifier: string,
+    body: SubscriptionReplaceParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SubscriptionUserSubscriptionGetUserSubscriptionsResponse | null> {
+  ): Core.APIPromise<SubscriptionReplaceResponse> {
     return (
-      this._client.get('/user/subscriptions', options) as Core.APIPromise<{
-        result: SubscriptionUserSubscriptionGetUserSubscriptionsResponse | null;
+      this._client.put(`/user/subscriptions/${identifier}`, { body, ...options }) as Core.APIPromise<{
+        result: SubscriptionReplaceResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type SubscriptionUpdateResponse = unknown | string | null;
+export type SubscriptionListResponse = Array<SubscriptionListResponse.SubscriptionListResponseItem>;
 
-export interface SubscriptionDeleteResponse {
-  /**
-   * Subscription identifier tag.
-   */
-  subscription_id?: string;
-}
-
-export type SubscriptionUserSubscriptionGetUserSubscriptionsResponse =
-  Array<SubscriptionUserSubscriptionGetUserSubscriptionsResponse.SubscriptionUserSubscriptionGetUserSubscriptionsResponseItem>;
-
-export namespace SubscriptionUserSubscriptionGetUserSubscriptionsResponse {
-  export interface SubscriptionUserSubscriptionGetUserSubscriptionsResponseItem {
+export namespace SubscriptionListResponse {
+  export interface SubscriptionListResponseItem {
     /**
      * Subscription identifier tag.
      */
     id?: string;
 
-    app?: SubscriptionUserSubscriptionGetUserSubscriptionsResponseItem.App;
+    app?: SubscriptionListResponseItem.App;
 
     /**
      * The list of add-ons subscribed to.
      */
-    component_values?: Array<SubscriptionUserSubscriptionGetUserSubscriptionsResponseItem.ComponentValue>;
+    component_values?: Array<SubscriptionListResponseItem.ComponentValue>;
 
     /**
      * The monetary unit in which pricing information is displayed.
@@ -96,7 +84,7 @@ export namespace SubscriptionUserSubscriptionGetUserSubscriptionsResponse {
     /**
      * The rate plan applied to the subscription.
      */
-    rate_plan?: SubscriptionUserSubscriptionGetUserSubscriptionsResponseItem.RatePlan;
+    rate_plan?: SubscriptionListResponseItem.RatePlan;
 
     /**
      * The state that the subscription is in.
@@ -106,10 +94,10 @@ export namespace SubscriptionUserSubscriptionGetUserSubscriptionsResponse {
     /**
      * A simple zone object. May have null properties if not a zone subscription.
      */
-    zone?: SubscriptionUserSubscriptionGetUserSubscriptionsResponseItem.Zone;
+    zone?: SubscriptionListResponseItem.Zone;
   }
 
-  export namespace SubscriptionUserSubscriptionGetUserSubscriptionsResponseItem {
+  export namespace SubscriptionListResponseItem {
     export interface App {
       /**
        * app install id.
@@ -199,13 +187,22 @@ export namespace SubscriptionUserSubscriptionGetUserSubscriptionsResponse {
   }
 }
 
-export interface SubscriptionUpdateParams {
-  app?: SubscriptionUpdateParams.App;
+export interface SubscriptionDeleteResponse {
+  /**
+   * Subscription identifier tag.
+   */
+  subscription_id?: string;
+}
+
+export type SubscriptionReplaceResponse = unknown | string | null;
+
+export interface SubscriptionReplaceParams {
+  app?: SubscriptionReplaceParams.App;
 
   /**
    * The list of add-ons subscribed to.
    */
-  component_values?: Array<SubscriptionUpdateParams.ComponentValue>;
+  component_values?: Array<SubscriptionReplaceParams.ComponentValue>;
 
   /**
    * How often the subscription is renewed automatically.
@@ -215,15 +212,15 @@ export interface SubscriptionUpdateParams {
   /**
    * The rate plan applied to the subscription.
    */
-  rate_plan?: SubscriptionUpdateParams.RatePlan;
+  rate_plan?: SubscriptionReplaceParams.RatePlan;
 
   /**
    * A simple zone object. May have null properties if not a zone subscription.
    */
-  zone?: SubscriptionUpdateParams.Zone;
+  zone?: SubscriptionReplaceParams.Zone;
 }
 
-export namespace SubscriptionUpdateParams {
+export namespace SubscriptionReplaceParams {
   export interface App {
     /**
      * app install id.
@@ -303,8 +300,8 @@ export namespace SubscriptionUpdateParams {
 }
 
 export namespace Subscriptions {
-  export import SubscriptionUpdateResponse = SubscriptionsAPI.SubscriptionUpdateResponse;
+  export import SubscriptionListResponse = SubscriptionsAPI.SubscriptionListResponse;
   export import SubscriptionDeleteResponse = SubscriptionsAPI.SubscriptionDeleteResponse;
-  export import SubscriptionUserSubscriptionGetUserSubscriptionsResponse = SubscriptionsAPI.SubscriptionUserSubscriptionGetUserSubscriptionsResponse;
-  export import SubscriptionUpdateParams = SubscriptionsAPI.SubscriptionUpdateParams;
+  export import SubscriptionReplaceResponse = SubscriptionsAPI.SubscriptionReplaceResponse;
+  export import SubscriptionReplaceParams = SubscriptionsAPI.SubscriptionReplaceParams;
 }

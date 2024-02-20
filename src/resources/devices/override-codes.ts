@@ -9,24 +9,24 @@ export class OverrideCodes extends APIResource {
    * Fetches a one-time use admin override code for a device. This relies on the
    * **Admin Override** setting being enabled in your device configuration.
    */
-  devicesListAdminOverrideCodeForDevice(
+  list(
     identifier: unknown,
     uuid: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<OverrideCodeDevicesListAdminOverrideCodeForDeviceResponse | null> {
+  ): Core.APIPromise<OverrideCodeListResponse | null> {
     return (
       this._client.get(`/accounts/${identifier}/devices/${uuid}/override_codes`, options) as Core.APIPromise<{
-        result: OverrideCodeDevicesListAdminOverrideCodeForDeviceResponse | null;
+        result: OverrideCodeListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface OverrideCodeDevicesListAdminOverrideCodeForDeviceResponse {
-  disable_for_time?: OverrideCodeDevicesListAdminOverrideCodeForDeviceResponse.DisableForTime;
+export interface OverrideCodeListResponse {
+  disable_for_time?: OverrideCodeListResponse.DisableForTime;
 }
 
-export namespace OverrideCodeDevicesListAdminOverrideCodeForDeviceResponse {
+export namespace OverrideCodeListResponse {
   export interface DisableForTime {
     /**
      * Override code that is valid for 1 hour.
@@ -56,5 +56,5 @@ export namespace OverrideCodeDevicesListAdminOverrideCodeForDeviceResponse {
 }
 
 export namespace OverrideCodes {
-  export import OverrideCodeDevicesListAdminOverrideCodeForDeviceResponse = OverrideCodesAPI.OverrideCodeDevicesListAdminOverrideCodeForDeviceResponse;
+  export import OverrideCodeListResponse = OverrideCodesAPI.OverrideCodeListResponse;
 }

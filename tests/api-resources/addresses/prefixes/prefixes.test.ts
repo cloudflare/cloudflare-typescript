@@ -13,6 +13,31 @@ const cloudflare = new Cloudflare({
 
 describe('resource prefixes', () => {
   // skipped: tests are disabled for the time being
+  test.skip('create: only required params', async () => {
+    const responsePromise = cloudflare.addresses.prefixes.create('023e105f4ecef8ad9ca31a8372d0c353', {
+      asn: 209242,
+      cidr: '192.0.2.0/24',
+      loa_document_id: 'd933b1530bc56c9953cf8ce166da8004',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('create: required and optional params', async () => {
+    const response = await cloudflare.addresses.prefixes.create('023e105f4ecef8ad9ca31a8372d0c353', {
+      asn: 209242,
+      cidr: '192.0.2.0/24',
+      loa_document_id: 'd933b1530bc56c9953cf8ce166da8004',
+    });
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.addresses.prefixes.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
@@ -35,6 +60,28 @@ describe('resource prefixes', () => {
       '023e105f4ecef8ad9ca31a8372d0c353',
       { description: 'Internal test prefix' },
     );
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list', async () => {
+    const responsePromise = cloudflare.addresses.prefixes.list('023e105f4ecef8ad9ca31a8372d0c353');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.addresses.prefixes.list('023e105f4ecef8ad9ca31a8372d0c353', {
+        path: '/_stainless_unknown_path',
+      }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
@@ -73,54 +120,6 @@ describe('resource prefixes', () => {
     await expect(
       cloudflare.addresses.prefixes.get(
         '023e105f4ecef8ad9ca31a8372d0c353',
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('ipAddressManagementPrefixesAddPrefix: only required params', async () => {
-    const responsePromise = cloudflare.addresses.prefixes.ipAddressManagementPrefixesAddPrefix(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      { asn: 209242, cidr: '192.0.2.0/24', loa_document_id: 'd933b1530bc56c9953cf8ce166da8004' },
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('ipAddressManagementPrefixesAddPrefix: required and optional params', async () => {
-    const response = await cloudflare.addresses.prefixes.ipAddressManagementPrefixesAddPrefix(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      { asn: 209242, cidr: '192.0.2.0/24', loa_document_id: 'd933b1530bc56c9953cf8ce166da8004' },
-    );
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('ipAddressManagementPrefixesListPrefixes', async () => {
-    const responsePromise = cloudflare.addresses.prefixes.ipAddressManagementPrefixesListPrefixes(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('ipAddressManagementPrefixesListPrefixes: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.addresses.prefixes.ipAddressManagementPrefixesListPrefixes(
         '023e105f4ecef8ad9ca31a8372d0c353',
         { path: '/_stainless_unknown_path' },
       ),

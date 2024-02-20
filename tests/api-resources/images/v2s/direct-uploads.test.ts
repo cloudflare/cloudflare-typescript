@@ -13,12 +13,11 @@ const cloudflare = new Cloudflare({
 
 describe('resource directUploads', () => {
   // skipped: tests are disabled for the time being
-  test.skip('cloudflareImagesCreateAuthenticatedDirectUploadURLV2', async () => {
-    const responsePromise =
-      cloudflare.images.v2s.directUploads.cloudflareImagesCreateAuthenticatedDirectUploadURLV2(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        {},
-      );
+  test.skip('create', async () => {
+    const responsePromise = cloudflare.images.v2s.directUploads.create(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      {},
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

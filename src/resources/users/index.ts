@@ -7,44 +7,42 @@ export {
   AuditLogs,
 } from './audit-logs';
 export { Billings } from './billings/index';
-export { Firewalls } from './firewalls/index';
+export { Firewall } from './firewall/index';
 export {
   InviteUpdateResponse,
+  InviteListResponse,
   InviteGetResponse,
-  InviteUserSInvitesListInvitationsResponse,
   InviteUpdateParams,
   Invites,
 } from './invites';
 export { LoadBalancers } from './load-balancers/index';
 export { LoadBalancingAnalytics } from './load-balancing-analytics/index';
 export {
+  OrganizationListResponse,
   OrganizationDeleteResponse,
   OrganizationGetResponse,
-  OrganizationUserSOrganizationsListOrganizationsResponse,
-  OrganizationUserSOrganizationsListOrganizationsParams,
+  OrganizationListParams,
+  OrganizationListResponsesV4PagePaginationArray,
   Organizations,
 } from './organizations';
 export {
-  SubscriptionUpdateResponse,
+  SubscriptionListResponse,
   SubscriptionDeleteResponse,
-  SubscriptionUserSubscriptionGetUserSubscriptionsResponse,
-  SubscriptionUpdateParams,
+  SubscriptionReplaceResponse,
+  SubscriptionReplaceParams,
   Subscriptions,
 } from './subscriptions';
 export {
-  TokenUpdateResponse,
+  TokenCreateResponse,
+  TokenListResponse,
   TokenDeleteResponse,
   TokenGetResponse,
-  TokenUserAPITokensCreateTokenResponse,
-  TokenUserAPITokensListTokensResponse,
-  TokenUpdateParams,
-  TokenUserAPITokensCreateTokenParams,
-  TokenUserAPITokensListTokensParams,
+  TokenReplaceResponse,
+  TokenVerifyResponse,
+  TokenCreateParams,
+  TokenListParams,
+  TokenReplaceParams,
+  TokenListResponsesV4PagePaginationArray,
   Tokens,
 } from './tokens/index';
-export {
-  UserUserEditUserResponse,
-  UserUserUserDetailsResponse,
-  UserUserEditUserParams,
-  Users,
-} from './users';
+export { UserUpdateResponse, UserListResponse, UserUpdateParams, Users } from './users';

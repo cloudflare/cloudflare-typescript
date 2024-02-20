@@ -9,13 +9,10 @@ export class Settings extends APIResource {
    * Get whether zone-level authenticated origin pulls is enabled or not. It is false
    * by default.
    */
-  zoneLevelAuthenticatedOriginPullsGetEnablementSettingForZone(
-    zoneId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SettingZoneLevelAuthenticatedOriginPullsGetEnablementSettingForZoneResponse> {
+  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<SettingGetResponse> {
     return (
       this._client.get(`/zones/${zoneId}/origin_tls_client_auth/settings`, options) as Core.APIPromise<{
-        result: SettingZoneLevelAuthenticatedOriginPullsGetEnablementSettingForZoneResponse;
+        result: SettingGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -25,35 +22,35 @@ export class Settings extends APIResource {
    * true either before/after the certificate is uploaded to see the certificate in
    * use.
    */
-  zoneLevelAuthenticatedOriginPullsSetEnablementForZone(
+  replace(
     zoneId: string,
-    body: SettingZoneLevelAuthenticatedOriginPullsSetEnablementForZoneParams,
+    body: SettingReplaceParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SettingZoneLevelAuthenticatedOriginPullsSetEnablementForZoneResponse> {
+  ): Core.APIPromise<SettingReplaceResponse> {
     return (
       this._client.put(`/zones/${zoneId}/origin_tls_client_auth/settings`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: SettingZoneLevelAuthenticatedOriginPullsSetEnablementForZoneResponse }>
+      }) as Core.APIPromise<{ result: SettingReplaceResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface SettingZoneLevelAuthenticatedOriginPullsGetEnablementSettingForZoneResponse {
+export interface SettingGetResponse {
   /**
    * Indicates whether zone-level authenticated origin pulls is enabled.
    */
   enabled?: boolean;
 }
 
-export interface SettingZoneLevelAuthenticatedOriginPullsSetEnablementForZoneResponse {
+export interface SettingReplaceResponse {
   /**
    * Indicates whether zone-level authenticated origin pulls is enabled.
    */
   enabled?: boolean;
 }
 
-export interface SettingZoneLevelAuthenticatedOriginPullsSetEnablementForZoneParams {
+export interface SettingReplaceParams {
   /**
    * Indicates whether zone-level authenticated origin pulls is enabled.
    */
@@ -61,7 +58,7 @@ export interface SettingZoneLevelAuthenticatedOriginPullsSetEnablementForZonePar
 }
 
 export namespace Settings {
-  export import SettingZoneLevelAuthenticatedOriginPullsGetEnablementSettingForZoneResponse = SettingsAPI.SettingZoneLevelAuthenticatedOriginPullsGetEnablementSettingForZoneResponse;
-  export import SettingZoneLevelAuthenticatedOriginPullsSetEnablementForZoneResponse = SettingsAPI.SettingZoneLevelAuthenticatedOriginPullsSetEnablementForZoneResponse;
-  export import SettingZoneLevelAuthenticatedOriginPullsSetEnablementForZoneParams = SettingsAPI.SettingZoneLevelAuthenticatedOriginPullsSetEnablementForZoneParams;
+  export import SettingGetResponse = SettingsAPI.SettingGetResponse;
+  export import SettingReplaceResponse = SettingsAPI.SettingReplaceResponse;
+  export import SettingReplaceParams = SettingsAPI.SettingReplaceParams;
 }

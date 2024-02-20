@@ -9,7 +9,7 @@ export class Retentions extends APIResource {
 
 export namespace Retentions {
   export import Flags = FlagsAPI.Flags;
+  export import FlagCreateResponse = FlagsAPI.FlagCreateResponse;
   export import FlagLogsReceivedGetLogRetentionFlagResponse = FlagsAPI.FlagLogsReceivedGetLogRetentionFlagResponse;
-  export import FlagLogsReceivedUpdateLogRetentionFlagResponse = FlagsAPI.FlagLogsReceivedUpdateLogRetentionFlagResponse;
-  export import FlagLogsReceivedUpdateLogRetentionFlagParams = FlagsAPI.FlagLogsReceivedUpdateLogRetentionFlagParams;
+  export import FlagCreateParams = FlagsAPI.FlagCreateParams;
 }

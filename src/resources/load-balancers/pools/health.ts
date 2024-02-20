@@ -6,6 +6,24 @@ import * as HealthAPI from 'cloudflare/resources/load-balancers/pools/health';
 
 export class Health extends APIResource {
   /**
+   * Preview pool health using provided monitor details. The returned preview_id can
+   * be used in the preview endpoint to retrieve the results.
+   */
+  create(
+    accountId: string,
+    poolId: string,
+    body: HealthCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<HealthCreateResponse> {
+    return (
+      this._client.post(`/accounts/${accountId}/load_balancers/pools/${poolId}/preview`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: HealthCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Fetch the latest pool health status for a single pool.
    */
   get(accountId: string, poolId: string, options?: Core.RequestOptions): Core.APIPromise<HealthGetResponse> {
@@ -16,33 +34,9 @@ export class Health extends APIResource {
       ) as Core.APIPromise<{ result: HealthGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
-
-  /**
-   * Preview pool health using provided monitor details. The returned preview_id can
-   * be used in the preview endpoint to retrieve the results.
-   */
-  preview(
-    accountId: string,
-    poolId: string,
-    body: HealthPreviewParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<HealthPreviewResponse> {
-    return (
-      this._client.post(`/accounts/${accountId}/load_balancers/pools/${poolId}/preview`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: HealthPreviewResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 
-/**
- * A list of regions from which to run health checks. Null means every Cloudflare
- * data center.
- */
-export type HealthGetResponse = unknown | string | null;
-
-export interface HealthPreviewResponse {
+export interface HealthCreateResponse {
   /**
    * Monitored pool IDs mapped to their respective names.
    */
@@ -51,7 +45,13 @@ export interface HealthPreviewResponse {
   preview_id?: string;
 }
 
-export interface HealthPreviewParams {
+/**
+ * A list of regions from which to run health checks. Null means every Cloudflare
+ * data center.
+ */
+export type HealthGetResponse = unknown | string | null;
+
+export interface HealthCreateParams {
   /**
    * The expected HTTP response code or code range of the health check. This
    * parameter is only valid for HTTP and HTTPS monitors.
@@ -151,7 +151,7 @@ export interface HealthPreviewParams {
 }
 
 export namespace Health {
+  export import HealthCreateResponse = HealthAPI.HealthCreateResponse;
   export import HealthGetResponse = HealthAPI.HealthGetResponse;
-  export import HealthPreviewResponse = HealthAPI.HealthPreviewResponse;
-  export import HealthPreviewParams = HealthAPI.HealthPreviewParams;
+  export import HealthCreateParams = HealthAPI.HealthCreateParams;
 }

@@ -1,67 +1,60 @@
 // File generated from our OpenAPI spec by Stainless.
 
+export { AppTypeListResponse, AppTypes } from './app-types';
 export {
-  AppTypeZeroTrustGatewayApplicationAndApplicationTypeMappingsListApplicationAndApplicationTypeMappingsResponse,
-  AppTypes,
-} from './app-types';
-export { CategoryZeroTrustGatewayCategoriesListCategoriesResponse, Categories } from './categories';
+  AuditSSHSettingGetResponse,
+  AuditSSHSettingReplaceResponse,
+  AuditSSHSettingReplaceParams,
+  AuditSSHSettings,
+} from './audit-ssh-settings';
+export { CategoryListResponse, Categories } from './categories';
 export {
-  ConfigurationZeroTrustAccountsGetZeroTrustAccountConfigurationResponse,
-  ConfigurationZeroTrustAccountsPatchZeroTrustAccountConfigurationResponse,
-  ConfigurationZeroTrustAccountsUpdateZeroTrustAccountConfigurationResponse,
-  ConfigurationZeroTrustAccountsPatchZeroTrustAccountConfigurationParams,
-  ConfigurationZeroTrustAccountsUpdateZeroTrustAccountConfigurationParams,
+  ConfigurationUpdateResponse,
+  ConfigurationGetResponse,
+  ConfigurationReplaceResponse,
+  ConfigurationUpdateParams,
+  ConfigurationReplaceParams,
   Configurations,
 } from './configurations';
+export { GatewayCreateResponse, GatewayListResponse, Gateways } from './gateways';
 export {
-  GatewayZeroTrustAccountsCreateZeroTrustAccountResponse,
-  GatewayZeroTrustAccountsGetZeroTrustAccountInformationResponse,
-  Gateways,
-} from './gateways';
-export {
-  ListUpdateResponse,
+  ListCreateResponse,
+  ListListResponse,
   ListDeleteResponse,
   ListGetResponse,
-  ListZeroTrustListsCreateZeroTrustListResponse,
-  ListZeroTrustListsListZeroTrustListsResponse,
-  ListUpdateParams,
-  ListZeroTrustListsCreateZeroTrustListParams,
+  ListReplaceResponse,
+  ListCreateParams,
+  ListReplaceParams,
   Lists,
 } from './lists/index';
 export {
-  LocationUpdateResponse,
+  LocationCreateResponse,
+  LocationListResponse,
   LocationDeleteResponse,
   LocationGetResponse,
-  LocationZeroTrustGatewayLocationsCreateZeroTrustGatewayLocationResponse,
-  LocationZeroTrustGatewayLocationsListZeroTrustGatewayLocationsResponse,
-  LocationUpdateParams,
-  LocationZeroTrustGatewayLocationsCreateZeroTrustGatewayLocationParams,
+  LocationReplaceResponse,
+  LocationCreateParams,
+  LocationReplaceParams,
   Locations,
 } from './locations';
+export { LoggingGetResponse, LoggingReplaceResponse, LoggingReplaceParams, Loggings } from './loggings';
 export {
-  LoggingZeroTrustAccountsGetLoggingSettingsForTheZeroTrustAccountResponse,
-  LoggingZeroTrustAccountsUpdateLoggingSettingsForTheZeroTrustAccountResponse,
-  LoggingZeroTrustAccountsUpdateLoggingSettingsForTheZeroTrustAccountParams,
-  Loggings,
-} from './loggings';
-export {
+  ProxyEndpointCreateResponse,
   ProxyEndpointUpdateResponse,
   ProxyEndpointListResponse,
   ProxyEndpointDeleteResponse,
   ProxyEndpointGetResponse,
-  ProxyEndpointZeroTrustGatewayProxyEndpointsCreateProxyEndpointResponse,
-  ProxyEndpointZeroTrustGatewayProxyEndpointsListProxyEndpointsResponse,
+  ProxyEndpointCreateParams,
   ProxyEndpointUpdateParams,
-  ProxyEndpointZeroTrustGatewayProxyEndpointsCreateProxyEndpointParams,
   ProxyEndpoints,
 } from './proxy-endpoints';
 export {
-  RuleUpdateResponse,
+  RuleCreateResponse,
+  RuleListResponse,
   RuleDeleteResponse,
   RuleGetResponse,
-  RuleZeroTrustGatewayRulesCreateZeroTrustGatewayRuleResponse,
-  RuleZeroTrustGatewayRulesListZeroTrustGatewayRulesResponse,
-  RuleUpdateParams,
-  RuleZeroTrustGatewayRulesCreateZeroTrustGatewayRuleParams,
+  RuleReplaceResponse,
+  RuleCreateParams,
+  RuleReplaceParams,
   Rules,
 } from './rules';

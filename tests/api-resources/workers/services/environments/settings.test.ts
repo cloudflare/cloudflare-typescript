@@ -13,37 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource settings', () => {
   // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
-    const responsePromise = cloudflare.workers.services.environments.settings.get(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'my-worker',
-      'production',
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.workers.services.environments.settings.get(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        'my-worker',
-        'production',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('modify: only required params', async () => {
-    const responsePromise = cloudflare.workers.services.environments.settings.modify(
+  test.skip('update: only required params', async () => {
+    const responsePromise = cloudflare.workers.services.environments.settings.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'my-worker',
       'production',
@@ -72,8 +43,8 @@ describe('resource settings', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('modify: required and optional params', async () => {
-    const response = await cloudflare.workers.services.environments.settings.modify(
+  test.skip('update: required and optional params', async () => {
+    const response = await cloudflare.workers.services.environments.settings.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'my-worker',
       'production',
@@ -125,5 +96,34 @@ describe('resource settings', () => {
         success: true,
       },
     );
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get', async () => {
+    const responsePromise = cloudflare.workers.services.environments.settings.get(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      'my-worker',
+      'production',
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.workers.services.environments.settings.get(
+        '023e105f4ecef8ad9ca31a8372d0c353',
+        'my-worker',
+        'production',
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 });

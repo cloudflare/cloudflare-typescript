@@ -13,11 +13,10 @@ const cloudflare = new Cloudflare({
 
 describe('resource loaDocuments', () => {
   // skipped: tests are disabled for the time being
-  test.skip('ipAddressManagementPrefixesUploadLoaDocument: only required params', async () => {
-    const responsePromise = cloudflare.addresses.loaDocuments.ipAddressManagementPrefixesUploadLoaDocument(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      { loa_document: '@document.pdf' },
-    );
+  test.skip('create: only required params', async () => {
+    const responsePromise = cloudflare.addresses.loaDocuments.create('023e105f4ecef8ad9ca31a8372d0c353', {
+      loa_document: '@document.pdf',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -28,10 +27,9 @@ describe('resource loaDocuments', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('ipAddressManagementPrefixesUploadLoaDocument: required and optional params', async () => {
-    const response = await cloudflare.addresses.loaDocuments.ipAddressManagementPrefixesUploadLoaDocument(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      { loa_document: '@document.pdf' },
-    );
+  test.skip('create: required and optional params', async () => {
+    const response = await cloudflare.addresses.loaDocuments.create('023e105f4ecef8ad9ca31a8372d0c353', {
+      loa_document: '@document.pdf',
+    });
   });
 });

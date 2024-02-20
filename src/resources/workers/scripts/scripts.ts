@@ -6,48 +6,15 @@ import { type Response } from 'cloudflare/_shims/index';
 import * as ScriptsAPI from 'cloudflare/resources/workers/scripts/scripts';
 import * as BindingsAPI from 'cloudflare/resources/workers/scripts/bindings';
 import * as SchedulesAPI from 'cloudflare/resources/workers/scripts/schedules';
-import * as TailsAPI from 'cloudflare/resources/workers/scripts/tails';
-import * as UsageModelsAPI from 'cloudflare/resources/workers/scripts/usage-models';
+import * as TailAPI from 'cloudflare/resources/workers/scripts/tail';
+import * as UsageModelAPI from 'cloudflare/resources/workers/scripts/usage-model';
 import { type Uploadable, maybeMultipartFormRequestOptions } from 'cloudflare/core';
 
 export class Scripts extends APIResource {
   bindings: BindingsAPI.Bindings = new BindingsAPI.Bindings(this._client);
   schedules: SchedulesAPI.Schedules = new SchedulesAPI.Schedules(this._client);
-  tails: TailsAPI.Tails = new TailsAPI.Tails(this._client);
-  usageModels: UsageModelsAPI.UsageModels = new UsageModelsAPI.UsageModels(this._client);
-
-  /**
-   * Upload a worker, or a new version of a worker.
-   */
-  create(
-    zoneId: string,
-    body: ScriptCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ScriptCreateResponse> {
-    return (
-      this._client.put(`/zones/${zoneId}/workers/script`, options) as Core.APIPromise<{
-        result: ScriptCreateResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Upload a worker module.
-   */
-  update(
-    accountId: string,
-    scriptName: string,
-    params: ScriptUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ScriptUpdateResponse> {
-    const { rollback_to, ...body } = params;
-    return (
-      this._client.put(
-        `/accounts/${accountId}/workers/scripts/${scriptName}`,
-        maybeMultipartFormRequestOptions({ query: { rollback_to }, body, ...options }),
-      ) as Core.APIPromise<{ result: ScriptUpdateResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
+  tail: TailAPI.Tail = new TailAPI.Tail(this._client);
+  usageModel: UsageModelAPI.UsageModel = new UsageModelAPI.UsageModel(this._client);
 
   /**
    * Fetch a list of uploaded workers.
@@ -87,76 +54,23 @@ export class Scripts extends APIResource {
       __binaryResponse: true,
     });
   }
-}
-
-export type ScriptCreateResponse = unknown | string;
-
-export interface ScriptUpdateResponse {
-  /**
-   * The id of the script in the Workers system. Usually the script name.
-   */
-  id?: string;
 
   /**
-   * When the script was created.
+   * Upload a worker module.
    */
-  created_on?: string;
-
-  /**
-   * Hashed script content, can be used in a If-None-Match header when updating.
-   */
-  etag?: string;
-
-  /**
-   * Whether Logpush is turned on for the Worker.
-   */
-  logpush?: boolean;
-
-  /**
-   * When the script was last modified.
-   */
-  modified_on?: string;
-
-  /**
-   * Deprecated. Deployment metadata for internal usage.
-   */
-  pipeline_hash?: string;
-
-  /**
-   * Specifies the placement mode for the Worker (e.g. 'smart').
-   */
-  placement_mode?: string;
-
-  /**
-   * List of Workers that will consume logs from the attached Worker.
-   */
-  tail_consumers?: Array<ScriptUpdateResponse.TailConsumer>;
-
-  /**
-   * Specifies the usage model for the Worker (e.g. 'bundled' or 'unbound').
-   */
-  usage_model?: string;
-}
-
-export namespace ScriptUpdateResponse {
-  /**
-   * A reference to a script that will consume logs from the attached Worker.
-   */
-  export interface TailConsumer {
-    /**
-     * Name of Worker that is to be the consumer.
-     */
-    service: string;
-
-    /**
-     * Optional environment if the Worker utilizes one.
-     */
-    environment?: string;
-
-    /**
-     * Optional dispatch namespace the script belongs to.
-     */
-    namespace?: string;
+  replace(
+    accountId: string,
+    scriptName: string,
+    params: ScriptReplaceParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ScriptReplaceResponse> {
+    const { rollback_to, ...body } = params;
+    return (
+      this._client.put(
+        `/accounts/${accountId}/workers/scripts/${scriptName}`,
+        maybeMultipartFormRequestOptions({ query: { rollback_to }, body, ...options }),
+      ) as Core.APIPromise<{ result: ScriptReplaceResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -233,11 +147,87 @@ export namespace ScriptListResponse {
   }
 }
 
-export interface ScriptCreateParams {}
+export interface ScriptReplaceResponse {
+  /**
+   * The id of the script in the Workers system. Usually the script name.
+   */
+  id?: string;
 
-export type ScriptUpdateParams = ScriptUpdateParams.Variant0 | ScriptUpdateParams.Variant1;
+  /**
+   * When the script was created.
+   */
+  created_on?: string;
 
-export namespace ScriptUpdateParams {
+  /**
+   * Hashed script content, can be used in a If-None-Match header when updating.
+   */
+  etag?: string;
+
+  /**
+   * Whether Logpush is turned on for the Worker.
+   */
+  logpush?: boolean;
+
+  /**
+   * When the script was last modified.
+   */
+  modified_on?: string;
+
+  /**
+   * Deprecated. Deployment metadata for internal usage.
+   */
+  pipeline_hash?: string;
+
+  /**
+   * Specifies the placement mode for the Worker (e.g. 'smart').
+   */
+  placement_mode?: string;
+
+  /**
+   * List of Workers that will consume logs from the attached Worker.
+   */
+  tail_consumers?: Array<ScriptReplaceResponse.TailConsumer>;
+
+  /**
+   * Specifies the usage model for the Worker (e.g. 'bundled' or 'unbound').
+   */
+  usage_model?: string;
+}
+
+export namespace ScriptReplaceResponse {
+  /**
+   * A reference to a script that will consume logs from the attached Worker.
+   */
+  export interface TailConsumer {
+    /**
+     * Name of Worker that is to be the consumer.
+     */
+    service: string;
+
+    /**
+     * Optional environment if the Worker utilizes one.
+     */
+    environment?: string;
+
+    /**
+     * Optional dispatch namespace the script belongs to.
+     */
+    namespace?: string;
+  }
+}
+
+export interface ScriptDeleteParams {
+  /**
+   * If set to true, delete will not be stopped by associated service binding,
+   * durable object, or other binding. Any of these associated bindings/durable
+   * objects will be deleted along with the script.
+   */
+  force?: boolean;
+}
+
+export type ScriptReplaceParams = ScriptReplaceParams.Variant0 | ScriptReplaceParams.Variant1;
+
+export namespace ScriptReplaceParams {
   export interface Variant0 {
     /**
      * Query param: Rollback to provided deployment based on deployment ID. Request
@@ -258,7 +248,7 @@ export namespace ScriptUpdateParams {
      * Body param: JSON encoded metadata about the uploaded parts and Worker
      * configuration.
      */
-    metadata?: ScriptUpdateParams.Variant0.Metadata;
+    metadata?: ScriptReplaceParams.Variant0.Metadata;
   }
 
   export namespace Variant0 {
@@ -495,34 +485,23 @@ export namespace ScriptUpdateParams {
   }
 }
 
-export interface ScriptDeleteParams {
-  /**
-   * If set to true, delete will not be stopped by associated service binding,
-   * durable object, or other binding. Any of these associated bindings/durable
-   * objects will be deleted along with the script.
-   */
-  force?: boolean;
-}
-
 export namespace Scripts {
-  export import ScriptCreateResponse = ScriptsAPI.ScriptCreateResponse;
-  export import ScriptUpdateResponse = ScriptsAPI.ScriptUpdateResponse;
   export import ScriptListResponse = ScriptsAPI.ScriptListResponse;
-  export import ScriptCreateParams = ScriptsAPI.ScriptCreateParams;
-  export import ScriptUpdateParams = ScriptsAPI.ScriptUpdateParams;
+  export import ScriptReplaceResponse = ScriptsAPI.ScriptReplaceResponse;
   export import ScriptDeleteParams = ScriptsAPI.ScriptDeleteParams;
+  export import ScriptReplaceParams = ScriptsAPI.ScriptReplaceParams;
   export import Bindings = BindingsAPI.Bindings;
   export import BindingListResponse = BindingsAPI.BindingListResponse;
   export import Schedules = SchedulesAPI.Schedules;
-  export import ScheduleWorkerCronTriggerGetCronTriggersResponse = SchedulesAPI.ScheduleWorkerCronTriggerGetCronTriggersResponse;
-  export import ScheduleWorkerCronTriggerUpdateCronTriggersResponse = SchedulesAPI.ScheduleWorkerCronTriggerUpdateCronTriggersResponse;
-  export import ScheduleWorkerCronTriggerUpdateCronTriggersParams = SchedulesAPI.ScheduleWorkerCronTriggerUpdateCronTriggersParams;
-  export import Tails = TailsAPI.Tails;
-  export import TailDeleteResponse = TailsAPI.TailDeleteResponse;
-  export import TailWorkerTailLogsListTailsResponse = TailsAPI.TailWorkerTailLogsListTailsResponse;
-  export import TailWorkerTailLogsStartTailResponse = TailsAPI.TailWorkerTailLogsStartTailResponse;
-  export import UsageModels = UsageModelsAPI.UsageModels;
-  export import UsageModelWorkerScriptFetchUsageModelResponse = UsageModelsAPI.UsageModelWorkerScriptFetchUsageModelResponse;
-  export import UsageModelWorkerScriptUpdateUsageModelResponse = UsageModelsAPI.UsageModelWorkerScriptUpdateUsageModelResponse;
-  export import UsageModelWorkerScriptUpdateUsageModelParams = UsageModelsAPI.UsageModelWorkerScriptUpdateUsageModelParams;
+  export import ScheduleListResponse = SchedulesAPI.ScheduleListResponse;
+  export import ScheduleReplaceResponse = SchedulesAPI.ScheduleReplaceResponse;
+  export import ScheduleReplaceParams = SchedulesAPI.ScheduleReplaceParams;
+  export import Tail = TailAPI.Tail;
+  export import TailCreateResponse = TailAPI.TailCreateResponse;
+  export import TailListResponse = TailAPI.TailListResponse;
+  export import TailDeleteResponse = TailAPI.TailDeleteResponse;
+  export import UsageModel = UsageModelAPI.UsageModel;
+  export import UsageModelGetResponse = UsageModelAPI.UsageModelGetResponse;
+  export import UsageModelReplaceResponse = UsageModelAPI.UsageModelReplaceResponse;
+  export import UsageModelReplaceParams = UsageModelAPI.UsageModelReplaceParams;
 }

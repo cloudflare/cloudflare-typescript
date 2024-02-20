@@ -6,21 +6,63 @@ import * as ManagedHeadersAPI from 'cloudflare/resources/managed-headers';
 
 export class ManagedHeaders extends APIResource {
   /**
+   * Updates the status of one or more Managed Transforms.
+   */
+  update(
+    zoneId: string,
+    body: ManagedHeaderUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ManagedHeaderUpdateResponse> {
+    return this._client.patch(`/zones/${zoneId}/managed_headers`, { body, ...options });
+  }
+
+  /**
    * Fetches a list of all Managed Transforms.
    */
   list(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<ManagedHeaderListResponse> {
     return this._client.get(`/zones/${zoneId}/managed_headers`, options);
   }
+}
 
-  /**
-   * Updates the status of one or more Managed Transforms.
-   */
-  managedTransformsUpdateStatusOfManagedTransforms(
-    zoneId: string,
-    body: ManagedHeaderManagedTransformsUpdateStatusOfManagedTransformsParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ManagedHeaderManagedTransformsUpdateStatusOfManagedTransformsResponse> {
-    return this._client.patch(`/zones/${zoneId}/managed_headers`, { body, ...options });
+export interface ManagedHeaderUpdateResponse {
+  managed_request_headers?: Array<ManagedHeaderUpdateResponse.ManagedRequestHeader>;
+
+  managed_response_headers?: Array<ManagedHeaderUpdateResponse.ManagedResponseHeader>;
+}
+
+export namespace ManagedHeaderUpdateResponse {
+  export interface ManagedRequestHeader {
+    /**
+     * Human-readable identifier of the Managed Transform.
+     */
+    id?: string;
+
+    /**
+     * When true, the Managed Transform is available in the current Cloudflare plan.
+     */
+    available?: boolean;
+
+    /**
+     * When true, the Managed Transform is enabled.
+     */
+    enabled?: boolean;
+  }
+
+  export interface ManagedResponseHeader {
+    /**
+     * Human-readable identifier of the Managed Transform.
+     */
+    id?: string;
+
+    /**
+     * When true, the Managed Transform is available in the current Cloudflare plan.
+     */
+    available?: boolean;
+
+    /**
+     * When true, the Managed Transform is enabled.
+     */
+    enabled?: boolean;
   }
 }
 
@@ -56,55 +98,13 @@ export namespace ManagedHeaderListResponse {
   }
 }
 
-export interface ManagedHeaderManagedTransformsUpdateStatusOfManagedTransformsResponse {
-  managed_request_headers?: Array<ManagedHeaderManagedTransformsUpdateStatusOfManagedTransformsResponse.ManagedRequestHeader>;
+export interface ManagedHeaderUpdateParams {
+  managed_request_headers: Array<ManagedHeaderUpdateParams.ManagedRequestHeader>;
 
-  managed_response_headers?: Array<ManagedHeaderManagedTransformsUpdateStatusOfManagedTransformsResponse.ManagedResponseHeader>;
+  managed_response_headers: Array<ManagedHeaderUpdateParams.ManagedResponseHeader>;
 }
 
-export namespace ManagedHeaderManagedTransformsUpdateStatusOfManagedTransformsResponse {
-  export interface ManagedRequestHeader {
-    /**
-     * Human-readable identifier of the Managed Transform.
-     */
-    id?: string;
-
-    /**
-     * When true, the Managed Transform is available in the current Cloudflare plan.
-     */
-    available?: boolean;
-
-    /**
-     * When true, the Managed Transform is enabled.
-     */
-    enabled?: boolean;
-  }
-
-  export interface ManagedResponseHeader {
-    /**
-     * Human-readable identifier of the Managed Transform.
-     */
-    id?: string;
-
-    /**
-     * When true, the Managed Transform is available in the current Cloudflare plan.
-     */
-    available?: boolean;
-
-    /**
-     * When true, the Managed Transform is enabled.
-     */
-    enabled?: boolean;
-  }
-}
-
-export interface ManagedHeaderManagedTransformsUpdateStatusOfManagedTransformsParams {
-  managed_request_headers: Array<ManagedHeaderManagedTransformsUpdateStatusOfManagedTransformsParams.ManagedRequestHeader>;
-
-  managed_response_headers: Array<ManagedHeaderManagedTransformsUpdateStatusOfManagedTransformsParams.ManagedResponseHeader>;
-}
-
-export namespace ManagedHeaderManagedTransformsUpdateStatusOfManagedTransformsParams {
+export namespace ManagedHeaderUpdateParams {
   export interface ManagedRequestHeader {
     /**
      * Human-readable identifier of the Managed Transform.
@@ -131,7 +131,7 @@ export namespace ManagedHeaderManagedTransformsUpdateStatusOfManagedTransformsPa
 }
 
 export namespace ManagedHeaders {
+  export import ManagedHeaderUpdateResponse = ManagedHeadersAPI.ManagedHeaderUpdateResponse;
   export import ManagedHeaderListResponse = ManagedHeadersAPI.ManagedHeaderListResponse;
-  export import ManagedHeaderManagedTransformsUpdateStatusOfManagedTransformsResponse = ManagedHeadersAPI.ManagedHeaderManagedTransformsUpdateStatusOfManagedTransformsResponse;
-  export import ManagedHeaderManagedTransformsUpdateStatusOfManagedTransformsParams = ManagedHeadersAPI.ManagedHeaderManagedTransformsUpdateStatusOfManagedTransformsParams;
+  export import ManagedHeaderUpdateParams = ManagedHeadersAPI.ManagedHeaderUpdateParams;
 }

@@ -9,6 +9,23 @@ export class Versions extends APIResource {
   byTags: ByTagsAPI.ByTags = new ByTagsAPI.ByTags(this._client);
 
   /**
+   * Fetches the versions of an account or zone ruleset.
+   */
+  list(
+    accountOrZone: string,
+    accountOrZoneId: string,
+    rulesetId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<VersionListResponse> {
+    return (
+      this._client.get(
+        `/${accountOrZone}/${accountOrZoneId}/rulesets/${rulesetId}/versions`,
+        options,
+      ) as Core.APIPromise<{ result: VersionListResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Deletes an existing version of an account or zone ruleset.
    */
   delete(
@@ -22,23 +39,6 @@ export class Versions extends APIResource {
       `/${accountOrZone}/${accountOrZoneId}/rulesets/${rulesetId}/versions/${rulesetVersion}`,
       { ...options, headers: { Accept: '*/*', ...options?.headers } },
     );
-  }
-
-  /**
-   * Fetches the versions of an account or zone ruleset.
-   */
-  accountRulesetsListAnAccountRulesetSVersions(
-    accountOrZone: string,
-    accountOrZoneId: string,
-    rulesetId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<VersionAccountRulesetsListAnAccountRulesetSVersionsResponse> {
-    return (
-      this._client.get(
-        `/${accountOrZone}/${accountOrZoneId}/rulesets/${rulesetId}/versions`,
-        options,
-      ) as Core.APIPromise<{ result: VersionAccountRulesetsListAnAccountRulesetSVersionsResponse }>
-    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -63,14 +63,13 @@ export class Versions extends APIResource {
 /**
  * A result.
  */
-export type VersionAccountRulesetsListAnAccountRulesetSVersionsResponse =
-  Array<VersionAccountRulesetsListAnAccountRulesetSVersionsResponse.VersionAccountRulesetsListAnAccountRulesetSVersionsResponseItem>;
+export type VersionListResponse = Array<VersionListResponse.VersionListResponseItem>;
 
-export namespace VersionAccountRulesetsListAnAccountRulesetSVersionsResponse {
+export namespace VersionListResponse {
   /**
    * A ruleset object.
    */
-  export interface VersionAccountRulesetsListAnAccountRulesetSVersionsResponseItem {
+  export interface VersionListResponseItem {
     /**
      * The kind of the ruleset.
      */
@@ -696,7 +695,7 @@ export namespace VersionGetResponse {
 }
 
 export namespace Versions {
-  export import VersionAccountRulesetsListAnAccountRulesetSVersionsResponse = VersionsAPI.VersionAccountRulesetsListAnAccountRulesetSVersionsResponse;
+  export import VersionListResponse = VersionsAPI.VersionListResponse;
   export import VersionGetResponse = VersionsAPI.VersionGetResponse;
   export import ByTags = ByTagsAPI.ByTags;
   export import ByTagGetResponse = ByTagsAPI.ByTagGetResponse;

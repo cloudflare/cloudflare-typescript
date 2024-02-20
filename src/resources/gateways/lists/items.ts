@@ -8,25 +8,23 @@ export class Items extends APIResource {
   /**
    * Fetches all items in a single Zero Trust list.
    */
-  zeroTrustListsZeroTrustListItems(
+  list(
     accountId: unknown,
     listId: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ItemZeroTrustListsZeroTrustListItemsResponse | null> {
+  ): Core.APIPromise<ItemListResponse | null> {
     return (
       this._client.get(`/accounts/${accountId}/gateway/lists/${listId}/items`, options) as Core.APIPromise<{
-        result: ItemZeroTrustListsZeroTrustListItemsResponse | null;
+        result: ItemListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type ItemZeroTrustListsZeroTrustListItemsResponse = Array<
-  Array<ItemZeroTrustListsZeroTrustListItemsResponse.ItemZeroTrustListsZeroTrustListItemsResponseItem>
->;
+export type ItemListResponse = Array<Array<ItemListResponse.ItemListResponseItem>>;
 
-export namespace ItemZeroTrustListsZeroTrustListItemsResponse {
-  export interface ItemZeroTrustListsZeroTrustListItemsResponseItem {
+export namespace ItemListResponse {
+  export interface ItemListResponseItem {
     created_at?: string;
 
     /**
@@ -37,5 +35,5 @@ export namespace ItemZeroTrustListsZeroTrustListItemsResponse {
 }
 
 export namespace Items {
-  export import ItemZeroTrustListsZeroTrustListItemsResponse = ItemsAPI.ItemZeroTrustListsZeroTrustListItemsResponse;
+  export import ItemListResponse = ItemsAPI.ItemListResponse;
 }

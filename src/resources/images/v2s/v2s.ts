@@ -177,6 +177,6 @@ export namespace V2s {
   export import V2ListResponse = V2sAPI.V2ListResponse;
   export import V2ListParams = V2sAPI.V2ListParams;
   export import DirectUploads = DirectUploadsAPI.DirectUploads;
-  export import DirectUploadCloudflareImagesCreateAuthenticatedDirectUploadURLV2Response = DirectUploadsAPI.DirectUploadCloudflareImagesCreateAuthenticatedDirectUploadURLV2Response;
-  export import DirectUploadCloudflareImagesCreateAuthenticatedDirectUploadURLV2Params = DirectUploadsAPI.DirectUploadCloudflareImagesCreateAuthenticatedDirectUploadURLV2Params;
+  export import DirectUploadCreateResponse = DirectUploadsAPI.DirectUploadCreateResponse;
+  export import DirectUploadCreateParams = DirectUploadsAPI.DirectUploadCreateParams;
 }

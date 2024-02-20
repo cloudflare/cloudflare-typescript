@@ -8,25 +8,20 @@ export class AppTypes extends APIResource {
   /**
    * Fetches all application and application type mappings.
    */
-  zeroTrustGatewayApplicationAndApplicationTypeMappingsListApplicationAndApplicationTypeMappings(
-    accountId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AppTypeZeroTrustGatewayApplicationAndApplicationTypeMappingsListApplicationAndApplicationTypeMappingsResponse | null> {
+  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<AppTypeListResponse | null> {
     return (
       this._client.get(`/accounts/${accountId}/gateway/app_types`, options) as Core.APIPromise<{
-        result: AppTypeZeroTrustGatewayApplicationAndApplicationTypeMappingsListApplicationAndApplicationTypeMappingsResponse | null;
+        result: AppTypeListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type AppTypeZeroTrustGatewayApplicationAndApplicationTypeMappingsListApplicationAndApplicationTypeMappingsResponse =
-  Array<
-    | AppTypeZeroTrustGatewayApplicationAndApplicationTypeMappingsListApplicationAndApplicationTypeMappingsResponse.ZeroTrustGatewayApplication
-    | AppTypeZeroTrustGatewayApplicationAndApplicationTypeMappingsListApplicationAndApplicationTypeMappingsResponse.ZeroTrustGatewayApplicationType
-  >;
+export type AppTypeListResponse = Array<
+  AppTypeListResponse.ZeroTrustGatewayApplication | AppTypeListResponse.ZeroTrustGatewayApplicationType
+>;
 
-export namespace AppTypeZeroTrustGatewayApplicationAndApplicationTypeMappingsListApplicationAndApplicationTypeMappingsResponse {
+export namespace AppTypeListResponse {
   export interface ZeroTrustGatewayApplication {
     /**
      * The identifier for this application. There is only one application per ID.
@@ -69,5 +64,5 @@ export namespace AppTypeZeroTrustGatewayApplicationAndApplicationTypeMappingsLis
 }
 
 export namespace AppTypes {
-  export import AppTypeZeroTrustGatewayApplicationAndApplicationTypeMappingsListApplicationAndApplicationTypeMappingsResponse = AppTypesAPI.AppTypeZeroTrustGatewayApplicationAndApplicationTypeMappingsListApplicationAndApplicationTypeMappingsResponse;
+  export import AppTypeListResponse = AppTypesAPI.AppTypeListResponse;
 }

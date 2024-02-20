@@ -13,12 +13,12 @@ const cloudflare = new Cloudflare({
 
 describe('resource networks', () => {
   // skipped: tests are disabled for the time being
-  test.skip('update', async () => {
-    const responsePromise = cloudflare.devices.networks.update(
-      '699d98642c564d2e855e9661899b7252',
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      {},
-    );
+  test.skip('create: only required params', async () => {
+    const responsePromise = cloudflare.devices.networks.create('699d98642c564d2e855e9661899b7252', {
+      config: { tls_sockaddr: 'foo.bar:1234' },
+      name: 'managed-network-1',
+      type: 'tls',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -26,6 +26,40 @@ describe('resource networks', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('create: required and optional params', async () => {
+    const response = await cloudflare.devices.networks.create('699d98642c564d2e855e9661899b7252', {
+      config: {
+        sha256: 'b5bb9d8014a0f9b1d61e21e796d78dccdf1352f23cd32812f4850b878ae4944c',
+        tls_sockaddr: 'foo.bar:1234',
+      },
+      name: 'managed-network-1',
+      type: 'tls',
+    });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list', async () => {
+    const responsePromise = cloudflare.devices.networks.list('699d98642c564d2e855e9661899b7252');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.devices.networks.list('699d98642c564d2e855e9661899b7252', {
+        path: '/_stainless_unknown_path',
+      }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
@@ -41,61 +75,6 @@ describe('resource networks', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('deviceManagedNetworksCreateDeviceManagedNetwork: only required params', async () => {
-    const responsePromise = cloudflare.devices.networks.deviceManagedNetworksCreateDeviceManagedNetwork(
-      '699d98642c564d2e855e9661899b7252',
-      { config: { tls_sockaddr: 'foo.bar:1234' }, name: 'managed-network-1', type: 'tls' },
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('deviceManagedNetworksCreateDeviceManagedNetwork: required and optional params', async () => {
-    const response = await cloudflare.devices.networks.deviceManagedNetworksCreateDeviceManagedNetwork(
-      '699d98642c564d2e855e9661899b7252',
-      {
-        config: {
-          sha256: 'b5bb9d8014a0f9b1d61e21e796d78dccdf1352f23cd32812f4850b878ae4944c',
-          tls_sockaddr: 'foo.bar:1234',
-        },
-        name: 'managed-network-1',
-        type: 'tls',
-      },
-    );
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('deviceManagedNetworksListDeviceManagedNetworks', async () => {
-    const responsePromise = cloudflare.devices.networks.deviceManagedNetworksListDeviceManagedNetworks(
-      '699d98642c564d2e855e9661899b7252',
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('deviceManagedNetworksListDeviceManagedNetworks: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.devices.networks.deviceManagedNetworksListDeviceManagedNetworks(
-        '699d98642c564d2e855e9661899b7252',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
@@ -123,5 +102,21 @@ describe('resource networks', () => {
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('replace', async () => {
+    const responsePromise = cloudflare.devices.networks.replace(
+      '699d98642c564d2e855e9661899b7252',
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      {},
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
   });
 });

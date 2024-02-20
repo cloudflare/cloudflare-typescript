@@ -3,15 +3,11 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as DeploymentsAPI from 'cloudflare/resources/pages/projects/deployments/deployments';
-import * as RetriesAPI from 'cloudflare/resources/pages/projects/deployments/retries';
-import * as RollbacksAPI from 'cloudflare/resources/pages/projects/deployments/rollbacks';
-import * as HistoriesAPI from 'cloudflare/resources/pages/projects/deployments/histories/histories';
+import * as HistoryAPI from 'cloudflare/resources/pages/projects/deployments/history/history';
 import { multipartFormRequestOptions } from 'cloudflare/core';
 
 export class Deployments extends APIResource {
-  histories: HistoriesAPI.Histories = new HistoriesAPI.Histories(this._client);
-  retries: RetriesAPI.Retries = new RetriesAPI.Retries(this._client);
-  rollbacks: RollbacksAPI.Rollbacks = new RollbacksAPI.Rollbacks(this._client);
+  history: HistoryAPI.History = new HistoryAPI.History(this._client);
 
   /**
    * Start a new deployment from production. The repository and account must have
@@ -76,6 +72,41 @@ export class Deployments extends APIResource {
         `/accounts/${accountId}/pages/projects/${projectName}/deployments/${deploymentId}`,
         options,
       ) as Core.APIPromise<{ result: DeploymentGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Retry a previous deployment.
+   */
+  retry(
+    accountId: string,
+    projectName: string,
+    deploymentId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DeploymentRetryResponse> {
+    return (
+      this._client.post(
+        `/accounts/${accountId}/pages/projects/${projectName}/deployments/${deploymentId}/retry`,
+        options,
+      ) as Core.APIPromise<{ result: DeploymentRetryResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Rollback the production deployment to a previous deployment. You can only
+   * rollback to succesful builds on production.
+   */
+  rollback(
+    accountId: string,
+    projectName: string,
+    deploymentId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DeploymentRollbackResponse> {
+    return (
+      this._client.post(
+        `/accounts/${accountId}/pages/projects/${projectName}/deployments/${deploymentId}/rollback`,
+        options,
+      ) as Core.APIPromise<{ result: DeploymentRollbackResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -497,6 +528,280 @@ export namespace DeploymentGetResponse {
   }
 }
 
+export interface DeploymentRetryResponse {
+  /**
+   * Id of the deployment.
+   */
+  id?: string;
+
+  /**
+   * A list of alias URLs pointing to this deployment.
+   */
+  aliases?: Array<unknown> | null;
+
+  build_config?: unknown;
+
+  /**
+   * When the deployment was created.
+   */
+  created_on?: string;
+
+  /**
+   * Info about what caused the deployment.
+   */
+  deployment_trigger?: DeploymentRetryResponse.DeploymentTrigger;
+
+  /**
+   * A dict of env variables to build this deploy.
+   */
+  env_vars?: unknown;
+
+  /**
+   * Type of deploy.
+   */
+  environment?: string;
+
+  /**
+   * If the deployment has been skipped.
+   */
+  is_skipped?: boolean;
+
+  latest_stage?: unknown;
+
+  /**
+   * When the deployment was last modified.
+   */
+  modified_on?: string;
+
+  /**
+   * Id of the project.
+   */
+  project_id?: string;
+
+  /**
+   * Name of the project.
+   */
+  project_name?: string;
+
+  /**
+   * Short Id (8 character) of the deployment.
+   */
+  short_id?: string;
+
+  source?: unknown;
+
+  /**
+   * List of past stages.
+   */
+  stages?: Array<DeploymentRetryResponse.Stage>;
+
+  /**
+   * The live URL to view this deployment.
+   */
+  url?: string;
+}
+
+export namespace DeploymentRetryResponse {
+  /**
+   * Info about what caused the deployment.
+   */
+  export interface DeploymentTrigger {
+    /**
+     * Additional info about the trigger.
+     */
+    metadata?: DeploymentTrigger.Metadata;
+
+    /**
+     * What caused the deployment.
+     */
+    type?: string;
+  }
+
+  export namespace DeploymentTrigger {
+    /**
+     * Additional info about the trigger.
+     */
+    export interface Metadata {
+      /**
+       * Where the trigger happened.
+       */
+      branch?: string;
+
+      /**
+       * Hash of the deployment trigger commit.
+       */
+      commit_hash?: string;
+
+      /**
+       * Message of the deployment trigger commit.
+       */
+      commit_message?: string;
+    }
+  }
+
+  /**
+   * The status of the deployment.
+   */
+  export interface Stage {
+    /**
+     * When the stage ended.
+     */
+    ended_on?: string | null;
+
+    /**
+     * The current build stage.
+     */
+    name?: string;
+
+    /**
+     * When the stage started.
+     */
+    started_on?: string | null;
+
+    /**
+     * State of the current stage.
+     */
+    status?: string;
+  }
+}
+
+export interface DeploymentRollbackResponse {
+  /**
+   * Id of the deployment.
+   */
+  id?: string;
+
+  /**
+   * A list of alias URLs pointing to this deployment.
+   */
+  aliases?: Array<unknown> | null;
+
+  build_config?: unknown;
+
+  /**
+   * When the deployment was created.
+   */
+  created_on?: string;
+
+  /**
+   * Info about what caused the deployment.
+   */
+  deployment_trigger?: DeploymentRollbackResponse.DeploymentTrigger;
+
+  /**
+   * A dict of env variables to build this deploy.
+   */
+  env_vars?: unknown;
+
+  /**
+   * Type of deploy.
+   */
+  environment?: string;
+
+  /**
+   * If the deployment has been skipped.
+   */
+  is_skipped?: boolean;
+
+  latest_stage?: unknown;
+
+  /**
+   * When the deployment was last modified.
+   */
+  modified_on?: string;
+
+  /**
+   * Id of the project.
+   */
+  project_id?: string;
+
+  /**
+   * Name of the project.
+   */
+  project_name?: string;
+
+  /**
+   * Short Id (8 character) of the deployment.
+   */
+  short_id?: string;
+
+  source?: unknown;
+
+  /**
+   * List of past stages.
+   */
+  stages?: Array<DeploymentRollbackResponse.Stage>;
+
+  /**
+   * The live URL to view this deployment.
+   */
+  url?: string;
+}
+
+export namespace DeploymentRollbackResponse {
+  /**
+   * Info about what caused the deployment.
+   */
+  export interface DeploymentTrigger {
+    /**
+     * Additional info about the trigger.
+     */
+    metadata?: DeploymentTrigger.Metadata;
+
+    /**
+     * What caused the deployment.
+     */
+    type?: string;
+  }
+
+  export namespace DeploymentTrigger {
+    /**
+     * Additional info about the trigger.
+     */
+    export interface Metadata {
+      /**
+       * Where the trigger happened.
+       */
+      branch?: string;
+
+      /**
+       * Hash of the deployment trigger commit.
+       */
+      commit_hash?: string;
+
+      /**
+       * Message of the deployment trigger commit.
+       */
+      commit_message?: string;
+    }
+  }
+
+  /**
+   * The status of the deployment.
+   */
+  export interface Stage {
+    /**
+     * When the stage ended.
+     */
+    ended_on?: string | null;
+
+    /**
+     * The current build stage.
+     */
+    name?: string;
+
+    /**
+     * When the stage started.
+     */
+    started_on?: string | null;
+
+    /**
+     * State of the current stage.
+     */
+    status?: string;
+  }
+}
+
 export interface DeploymentCreateParams {
   /**
    * The branch to build the new deployment from. The `HEAD` of the branch will be
@@ -510,10 +815,8 @@ export namespace Deployments {
   export import DeploymentListResponse = DeploymentsAPI.DeploymentListResponse;
   export import DeploymentDeleteResponse = DeploymentsAPI.DeploymentDeleteResponse;
   export import DeploymentGetResponse = DeploymentsAPI.DeploymentGetResponse;
+  export import DeploymentRetryResponse = DeploymentsAPI.DeploymentRetryResponse;
+  export import DeploymentRollbackResponse = DeploymentsAPI.DeploymentRollbackResponse;
   export import DeploymentCreateParams = DeploymentsAPI.DeploymentCreateParams;
-  export import Histories = HistoriesAPI.Histories;
-  export import Retries = RetriesAPI.Retries;
-  export import RetryPagesDeploymentRetryDeploymentResponse = RetriesAPI.RetryPagesDeploymentRetryDeploymentResponse;
-  export import Rollbacks = RollbacksAPI.Rollbacks;
-  export import RollbackPagesDeploymentRollbackDeploymentResponse = RollbacksAPI.RollbackPagesDeploymentRollbackDeploymentResponse;
+  export import History = HistoryAPI.History;
 }

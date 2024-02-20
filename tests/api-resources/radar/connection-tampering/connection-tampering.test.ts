@@ -13,8 +13,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource connectionTampering', () => {
   // skipped: tests are disabled for the time being
-  test.skip('summary', async () => {
-    const responsePromise = cloudflare.radar.connectionTampering.summary();
+  test.skip('list', async () => {
+    const responsePromise = cloudflare.radar.connectionTampering.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -25,18 +25,18 @@ describe('resource connectionTampering', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('summary: request options instead of params are passed correctly', async () => {
+  test.skip('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.connectionTampering.summary({ path: '/_stainless_unknown_path' }),
+      cloudflare.radar.connectionTampering.list({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('summary: request options and params are passed correctly', async () => {
+  test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.connectionTampering.summary(
+      cloudflare.radar.connectionTampering.list(
         {
           asn: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
