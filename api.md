@@ -802,14 +802,6 @@ Methods:
 
 # Cache
 
-Types:
-
-- <code><a href="./src/resources/cache/cache.ts">CachePurgeResponse</a></code>
-
-Methods:
-
-- <code title="post /zones/{identifier}/purge_cache">client.cache.<a href="./src/resources/cache/cache.ts">purge</a>(identifier, { ...params }) -> CachePurgeResponse | null</code>
-
 ## CacheReserves
 
 Types:

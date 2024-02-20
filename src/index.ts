@@ -415,8 +415,6 @@ export namespace Cloudflare {
   export import DNSAnalytics = API.DNSAnalytics;
 
   export import Cache = API.Cache;
-  export import CachePurgeResponse = API.CachePurgeResponse;
-  export import CachePurgeParams = API.CachePurgeParams;
 
   export import SSL = API.SSL;
 
