@@ -53,11 +53,11 @@ export class Pcaps extends APIResource {
 }
 
 export type PcapCreateResponse =
-  | PcapCreateResponse._5cvYhiwuPcapsResponseSimple
-  | PcapCreateResponse._5cvYhiwuPcapsResponseFull;
+  | PcapCreateResponse.M2NEk72FPcapsResponseSimple
+  | PcapCreateResponse.M2NEk72FPcapsResponseFull;
 
 export namespace PcapCreateResponse {
-  export interface _5cvYhiwuPcapsResponseSimple {
+  export interface M2NEk72FPcapsResponseSimple {
     /**
      * The ID for the packet capture.
      */
@@ -66,7 +66,7 @@ export namespace PcapCreateResponse {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: _5cvYhiwuPcapsResponseSimple.FilterV1;
+    filter_v1?: M2NEk72FPcapsResponseSimple.FilterV1;
 
     /**
      * The status of the packet capture request.
@@ -103,7 +103,7 @@ export namespace PcapCreateResponse {
     type?: 'simple' | 'full';
   }
 
-  export namespace _5cvYhiwuPcapsResponseSimple {
+  export namespace M2NEk72FPcapsResponseSimple {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
@@ -135,7 +135,7 @@ export namespace PcapCreateResponse {
     }
   }
 
-  export interface _5cvYhiwuPcapsResponseFull {
+  export interface M2NEk72FPcapsResponseFull {
     /**
      * The ID for the packet capture.
      */
@@ -168,7 +168,7 @@ export namespace PcapCreateResponse {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: _5cvYhiwuPcapsResponseFull.FilterV1;
+    filter_v1?: M2NEk72FPcapsResponseFull.FilterV1;
 
     /**
      * The status of the packet capture request.
@@ -205,7 +205,7 @@ export namespace PcapCreateResponse {
     type?: 'simple' | 'full';
   }
 
-  export namespace _5cvYhiwuPcapsResponseFull {
+  export namespace M2NEk72FPcapsResponseFull {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
@@ -239,11 +239,11 @@ export namespace PcapCreateResponse {
 }
 
 export type PcapListResponse = Array<
-  PcapListResponse._5cvYhiwuPcapsResponseSimple | PcapListResponse._5cvYhiwuPcapsResponseFull
+  PcapListResponse.M2NEk72FPcapsResponseSimple | PcapListResponse.M2NEk72FPcapsResponseFull
 >;
 
 export namespace PcapListResponse {
-  export interface _5cvYhiwuPcapsResponseSimple {
+  export interface M2NEk72FPcapsResponseSimple {
     /**
      * The ID for the packet capture.
      */
@@ -252,7 +252,7 @@ export namespace PcapListResponse {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: _5cvYhiwuPcapsResponseSimple.FilterV1;
+    filter_v1?: M2NEk72FPcapsResponseSimple.FilterV1;
 
     /**
      * The status of the packet capture request.
@@ -289,7 +289,7 @@ export namespace PcapListResponse {
     type?: 'simple' | 'full';
   }
 
-  export namespace _5cvYhiwuPcapsResponseSimple {
+  export namespace M2NEk72FPcapsResponseSimple {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
@@ -321,7 +321,7 @@ export namespace PcapListResponse {
     }
   }
 
-  export interface _5cvYhiwuPcapsResponseFull {
+  export interface M2NEk72FPcapsResponseFull {
     /**
      * The ID for the packet capture.
      */
@@ -354,7 +354,7 @@ export namespace PcapListResponse {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: _5cvYhiwuPcapsResponseFull.FilterV1;
+    filter_v1?: M2NEk72FPcapsResponseFull.FilterV1;
 
     /**
      * The status of the packet capture request.
@@ -391,7 +391,7 @@ export namespace PcapListResponse {
     type?: 'simple' | 'full';
   }
 
-  export namespace _5cvYhiwuPcapsResponseFull {
+  export namespace M2NEk72FPcapsResponseFull {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
@@ -425,11 +425,11 @@ export namespace PcapListResponse {
 }
 
 export type PcapGetResponse =
-  | PcapGetResponse._5cvYhiwuPcapsResponseSimple
-  | PcapGetResponse._5cvYhiwuPcapsResponseFull;
+  | PcapGetResponse.M2NEk72FPcapsResponseSimple
+  | PcapGetResponse.M2NEk72FPcapsResponseFull;
 
 export namespace PcapGetResponse {
-  export interface _5cvYhiwuPcapsResponseSimple {
+  export interface M2NEk72FPcapsResponseSimple {
     /**
      * The ID for the packet capture.
      */
@@ -438,7 +438,7 @@ export namespace PcapGetResponse {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: _5cvYhiwuPcapsResponseSimple.FilterV1;
+    filter_v1?: M2NEk72FPcapsResponseSimple.FilterV1;
 
     /**
      * The status of the packet capture request.
@@ -475,7 +475,7 @@ export namespace PcapGetResponse {
     type?: 'simple' | 'full';
   }
 
-  export namespace _5cvYhiwuPcapsResponseSimple {
+  export namespace M2NEk72FPcapsResponseSimple {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
@@ -507,7 +507,7 @@ export namespace PcapGetResponse {
     }
   }
 
-  export interface _5cvYhiwuPcapsResponseFull {
+  export interface M2NEk72FPcapsResponseFull {
     /**
      * The ID for the packet capture.
      */
@@ -540,7 +540,7 @@ export namespace PcapGetResponse {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: _5cvYhiwuPcapsResponseFull.FilterV1;
+    filter_v1?: M2NEk72FPcapsResponseFull.FilterV1;
 
     /**
      * The status of the packet capture request.
@@ -577,7 +577,7 @@ export namespace PcapGetResponse {
     type?: 'simple' | 'full';
   }
 
-  export namespace _5cvYhiwuPcapsResponseFull {
+  export namespace M2NEk72FPcapsResponseFull {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
@@ -611,11 +611,11 @@ export namespace PcapGetResponse {
 }
 
 export type PcapCreateParams =
-  | PcapCreateParams._5cvYhiwuPcapsRequestSimple
-  | PcapCreateParams._5cvYhiwuPcapsRequestFull;
+  | PcapCreateParams.M2NEk72FPcapsRequestSimple
+  | PcapCreateParams.M2NEk72FPcapsRequestFull;
 
 export namespace PcapCreateParams {
-  export interface _5cvYhiwuPcapsRequestSimple {
+  export interface M2NEk72FPcapsRequestSimple {
     /**
      * The limit of packets contained in a packet capture.
      */
@@ -640,10 +640,10 @@ export namespace PcapCreateParams {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: PcapCreateParams._5cvYhiwuPcapsRequestSimple.FilterV1;
+    filter_v1?: PcapCreateParams.M2NEk72FPcapsRequestSimple.FilterV1;
   }
 
-  export namespace _5cvYhiwuPcapsRequestSimple {
+  export namespace M2NEk72FPcapsRequestSimple {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
@@ -675,7 +675,7 @@ export namespace PcapCreateParams {
     }
   }
 
-  export interface _5cvYhiwuPcapsRequestFull {
+  export interface M2NEk72FPcapsRequestFull {
     /**
      * The name of the data center used for the packet capture. This can be a specific
      * colo (ord02) or a multi-colo name (ORD). This field only applies to `full`
@@ -713,7 +713,7 @@ export namespace PcapCreateParams {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: PcapCreateParams._5cvYhiwuPcapsRequestFull.FilterV1;
+    filter_v1?: PcapCreateParams.M2NEk72FPcapsRequestFull.FilterV1;
 
     /**
      * The limit of packets contained in a packet capture.
@@ -721,7 +721,7 @@ export namespace PcapCreateParams {
     packet_limit?: number;
   }
 
-  export namespace _5cvYhiwuPcapsRequestFull {
+  export namespace M2NEk72FPcapsRequestFull {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
