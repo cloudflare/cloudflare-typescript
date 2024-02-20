@@ -3971,7 +3971,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/request-tracers/traces.ts">Bz6um997Trace</a></code>
 - <code><a href="./src/resources/request-tracers/traces.ts">TraceCreateResponse</a></code>
 
 Methods:
