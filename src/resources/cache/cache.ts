@@ -67,12 +67,12 @@ export interface CachePurgeResponse {
 }
 
 export type CachePurgeParams =
-  | CachePurgeParams.IHiNlFOkFlex
-  | CachePurgeParams.IHiNlFOkEverything
-  | CachePurgeParams.IHiNlFOkFiles;
+  | CachePurgeParams.I2n6weu1Flex
+  | CachePurgeParams.I2n6weu1Everything
+  | CachePurgeParams.I2n6weu1Files;
 
 export namespace CachePurgeParams {
-  export interface IHiNlFOkFlex {
+  export interface I2n6weu1Flex {
     hosts?: Array<string>;
 
     prefixes?: Array<string>;
@@ -80,16 +80,16 @@ export namespace CachePurgeParams {
     tags?: Array<string>;
   }
 
-  export interface IHiNlFOkEverything {
+  export interface I2n6weu1Everything {
     purge_everything?: boolean;
   }
 
-  export interface IHiNlFOkFiles {
-    files?: Array<string | CachePurgeParams.IHiNlFOkFiles.IHiNlFOkURLAndHeaders>;
+  export interface I2n6weu1Files {
+    files?: Array<string | CachePurgeParams.I2n6weu1Files.I2n6weu1URLAndHeaders>;
   }
 
-  export namespace IHiNlFOkFiles {
-    export interface IHiNlFOkURLAndHeaders {
+  export namespace I2n6weu1Files {
+    export interface I2n6weu1URLAndHeaders {
       headers?: unknown;
 
       url?: string;
