@@ -53,11 +53,11 @@ export class Pcaps extends APIResource {
 }
 
 export type PcapCreateResponse =
-  | PcapCreateResponse.UholmugaPcapsResponseSimple
-  | PcapCreateResponse.UholmugaPcapsResponseFull;
+  | PcapCreateResponse.KQpxrDmsPcapsResponseSimple
+  | PcapCreateResponse.KQpxrDmsPcapsResponseFull;
 
 export namespace PcapCreateResponse {
-  export interface UholmugaPcapsResponseSimple {
+  export interface KQpxrDmsPcapsResponseSimple {
     /**
      * The ID for the packet capture.
      */
@@ -66,7 +66,7 @@ export namespace PcapCreateResponse {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: UholmugaPcapsResponseSimple.FilterV1;
+    filter_v1?: KQpxrDmsPcapsResponseSimple.FilterV1;
 
     /**
      * The status of the packet capture request.
@@ -103,7 +103,7 @@ export namespace PcapCreateResponse {
     type?: 'simple' | 'full';
   }
 
-  export namespace UholmugaPcapsResponseSimple {
+  export namespace KQpxrDmsPcapsResponseSimple {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
@@ -135,7 +135,7 @@ export namespace PcapCreateResponse {
     }
   }
 
-  export interface UholmugaPcapsResponseFull {
+  export interface KQpxrDmsPcapsResponseFull {
     /**
      * The ID for the packet capture.
      */
@@ -168,7 +168,7 @@ export namespace PcapCreateResponse {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: UholmugaPcapsResponseFull.FilterV1;
+    filter_v1?: KQpxrDmsPcapsResponseFull.FilterV1;
 
     /**
      * The status of the packet capture request.
@@ -205,7 +205,7 @@ export namespace PcapCreateResponse {
     type?: 'simple' | 'full';
   }
 
-  export namespace UholmugaPcapsResponseFull {
+  export namespace KQpxrDmsPcapsResponseFull {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
@@ -239,11 +239,11 @@ export namespace PcapCreateResponse {
 }
 
 export type PcapListResponse = Array<
-  PcapListResponse.UholmugaPcapsResponseSimple | PcapListResponse.UholmugaPcapsResponseFull
+  PcapListResponse.KQpxrDmsPcapsResponseSimple | PcapListResponse.KQpxrDmsPcapsResponseFull
 >;
 
 export namespace PcapListResponse {
-  export interface UholmugaPcapsResponseSimple {
+  export interface KQpxrDmsPcapsResponseSimple {
     /**
      * The ID for the packet capture.
      */
@@ -252,7 +252,7 @@ export namespace PcapListResponse {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: UholmugaPcapsResponseSimple.FilterV1;
+    filter_v1?: KQpxrDmsPcapsResponseSimple.FilterV1;
 
     /**
      * The status of the packet capture request.
@@ -289,7 +289,7 @@ export namespace PcapListResponse {
     type?: 'simple' | 'full';
   }
 
-  export namespace UholmugaPcapsResponseSimple {
+  export namespace KQpxrDmsPcapsResponseSimple {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
@@ -321,7 +321,7 @@ export namespace PcapListResponse {
     }
   }
 
-  export interface UholmugaPcapsResponseFull {
+  export interface KQpxrDmsPcapsResponseFull {
     /**
      * The ID for the packet capture.
      */
@@ -354,7 +354,7 @@ export namespace PcapListResponse {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: UholmugaPcapsResponseFull.FilterV1;
+    filter_v1?: KQpxrDmsPcapsResponseFull.FilterV1;
 
     /**
      * The status of the packet capture request.
@@ -391,7 +391,7 @@ export namespace PcapListResponse {
     type?: 'simple' | 'full';
   }
 
-  export namespace UholmugaPcapsResponseFull {
+  export namespace KQpxrDmsPcapsResponseFull {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
@@ -425,11 +425,11 @@ export namespace PcapListResponse {
 }
 
 export type PcapGetResponse =
-  | PcapGetResponse.UholmugaPcapsResponseSimple
-  | PcapGetResponse.UholmugaPcapsResponseFull;
+  | PcapGetResponse.KQpxrDmsPcapsResponseSimple
+  | PcapGetResponse.KQpxrDmsPcapsResponseFull;
 
 export namespace PcapGetResponse {
-  export interface UholmugaPcapsResponseSimple {
+  export interface KQpxrDmsPcapsResponseSimple {
     /**
      * The ID for the packet capture.
      */
@@ -438,7 +438,7 @@ export namespace PcapGetResponse {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: UholmugaPcapsResponseSimple.FilterV1;
+    filter_v1?: KQpxrDmsPcapsResponseSimple.FilterV1;
 
     /**
      * The status of the packet capture request.
@@ -475,7 +475,7 @@ export namespace PcapGetResponse {
     type?: 'simple' | 'full';
   }
 
-  export namespace UholmugaPcapsResponseSimple {
+  export namespace KQpxrDmsPcapsResponseSimple {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
@@ -507,7 +507,7 @@ export namespace PcapGetResponse {
     }
   }
 
-  export interface UholmugaPcapsResponseFull {
+  export interface KQpxrDmsPcapsResponseFull {
     /**
      * The ID for the packet capture.
      */
@@ -540,7 +540,7 @@ export namespace PcapGetResponse {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: UholmugaPcapsResponseFull.FilterV1;
+    filter_v1?: KQpxrDmsPcapsResponseFull.FilterV1;
 
     /**
      * The status of the packet capture request.
@@ -577,7 +577,7 @@ export namespace PcapGetResponse {
     type?: 'simple' | 'full';
   }
 
-  export namespace UholmugaPcapsResponseFull {
+  export namespace KQpxrDmsPcapsResponseFull {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
@@ -611,11 +611,11 @@ export namespace PcapGetResponse {
 }
 
 export type PcapCreateParams =
-  | PcapCreateParams.UholmugaPcapsRequestSimple
-  | PcapCreateParams.UholmugaPcapsRequestFull;
+  | PcapCreateParams.KQpxrDmsPcapsRequestSimple
+  | PcapCreateParams.KQpxrDmsPcapsRequestFull;
 
 export namespace PcapCreateParams {
-  export interface UholmugaPcapsRequestSimple {
+  export interface KQpxrDmsPcapsRequestSimple {
     /**
      * The limit of packets contained in a packet capture.
      */
@@ -640,10 +640,10 @@ export namespace PcapCreateParams {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: PcapCreateParams.UholmugaPcapsRequestSimple.FilterV1;
+    filter_v1?: PcapCreateParams.KQpxrDmsPcapsRequestSimple.FilterV1;
   }
 
-  export namespace UholmugaPcapsRequestSimple {
+  export namespace KQpxrDmsPcapsRequestSimple {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
@@ -675,7 +675,7 @@ export namespace PcapCreateParams {
     }
   }
 
-  export interface UholmugaPcapsRequestFull {
+  export interface KQpxrDmsPcapsRequestFull {
     /**
      * The name of the data center used for the packet capture. This can be a specific
      * colo (ord02) or a multi-colo name (ORD). This field only applies to `full`
@@ -713,7 +713,7 @@ export namespace PcapCreateParams {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: PcapCreateParams.UholmugaPcapsRequestFull.FilterV1;
+    filter_v1?: PcapCreateParams.KQpxrDmsPcapsRequestFull.FilterV1;
 
     /**
      * The limit of packets contained in a packet capture.
@@ -721,7 +721,7 @@ export namespace PcapCreateParams {
     packet_limit?: number;
   }
 
-  export namespace UholmugaPcapsRequestFull {
+  export namespace KQpxrDmsPcapsRequestFull {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
