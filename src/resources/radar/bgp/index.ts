@@ -12,4 +12,4 @@ export {
   RouteStatsParams,
   Routes,
 } from './routes';
-export { Tops } from './tops/index';
+export { TopPrefixesResponse, TopPrefixesParams, Top } from './top/index';

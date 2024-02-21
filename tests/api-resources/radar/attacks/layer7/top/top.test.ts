@@ -39,17 +39,17 @@ describe('resource top', () => {
     await expect(
       cloudflare.radar.attacks.layer7.top.attacks(
         {
+          asn: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['1d', '2d', '7d'],
           dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           format: 'JSON',
-          ipVersion: ['IPv4', 'IPv6'],
           limit: 5,
           limitDirection: 'ORIGIN',
           limitPerLocation: 10,
           location: ['string', 'string', 'string'],
+          magnitude: 'MITIGATED_REQUESTS',
           name: ['string', 'string', 'string'],
-          protocol: ['UDP', 'TCP', 'ICMP'],
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -82,15 +82,14 @@ describe('resource top', () => {
     await expect(
       cloudflare.radar.attacks.layer7.top.industry(
         {
+          asn: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['1d', '2d', '7d'],
           dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           format: 'JSON',
-          ipVersion: ['IPv4', 'IPv6'],
           limit: 5,
           location: ['string', 'string', 'string'],
           name: ['string', 'string', 'string'],
-          protocol: ['UDP', 'TCP', 'ICMP'],
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -123,15 +122,14 @@ describe('resource top', () => {
     await expect(
       cloudflare.radar.attacks.layer7.top.vertical(
         {
+          asn: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['1d', '2d', '7d'],
           dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           format: 'JSON',
-          ipVersion: ['IPv4', 'IPv6'],
           limit: 5,
           location: ['string', 'string', 'string'],
           name: ['string', 'string', 'string'],
-          protocol: ['UDP', 'TCP', 'ICMP'],
         },
         { path: '/_stainless_unknown_path' },
       ),

@@ -14,88 +14,6 @@ const cloudflare = new Cloudflare({
 
 describe('resource summary', () => {
   // skipped: tests are disabled for the time being
-  test.skip('bitrate', async () => {
-    const responsePromise = cloudflare.radar.attacks.layer7.summary.bitrate();
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('bitrate: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.radar.attacks.layer7.summary.bitrate({ path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('bitrate: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.radar.attacks.layer7.summary.bitrate(
-        {
-          dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          dateRange: ['1d', '2d', '7d'],
-          dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          direction: 'ORIGIN',
-          format: 'JSON',
-          ipVersion: ['IPv4', 'IPv6'],
-          location: ['string', 'string', 'string'],
-          name: ['string', 'string', 'string'],
-          protocol: ['UDP', 'TCP', 'ICMP'],
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('duration', async () => {
-    const responsePromise = cloudflare.radar.attacks.layer7.summary.duration();
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('duration: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.radar.attacks.layer7.summary.duration({ path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('duration: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.radar.attacks.layer7.summary.duration(
-        {
-          dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          dateRange: ['1d', '2d', '7d'],
-          dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          direction: 'ORIGIN',
-          format: 'JSON',
-          ipVersion: ['IPv4', 'IPv6'],
-          location: ['string', 'string', 'string'],
-          name: ['string', 'string', 'string'],
-          protocol: ['UDP', 'TCP', 'ICMP'],
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
   test.skip('get', async () => {
     const responsePromise = cloudflare.radar.attacks.layer7.summary.get();
     const rawResponse = await responsePromise.asResponse();
@@ -135,6 +53,90 @@ describe('resource summary', () => {
   });
 
   // skipped: tests are disabled for the time being
+  test.skip('httpMethod', async () => {
+    const responsePromise = cloudflare.radar.attacks.layer7.summary.httpMethod();
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('httpMethod: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.radar.attacks.layer7.summary.httpMethod({ path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('httpMethod: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.radar.attacks.layer7.summary.httpMethod(
+        {
+          asn: ['string', 'string', 'string'],
+          dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
+          dateRange: ['1d', '2d', '7d'],
+          dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
+          format: 'JSON',
+          httpVersion: ['HTTPv1', 'HTTPv2', 'HTTPv3'],
+          ipVersion: ['IPv4', 'IPv6'],
+          location: ['string', 'string', 'string'],
+          mitigationProduct: ['DDOS', 'WAF', 'BOT_MANAGEMENT'],
+          name: ['string', 'string', 'string'],
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('httpVersion', async () => {
+    const responsePromise = cloudflare.radar.attacks.layer7.summary.httpVersion();
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('httpVersion: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.radar.attacks.layer7.summary.httpVersion({ path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('httpVersion: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.radar.attacks.layer7.summary.httpVersion(
+        {
+          asn: ['string', 'string', 'string'],
+          dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
+          dateRange: ['1d', '2d', '7d'],
+          dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
+          format: 'JSON',
+          httpMethod: ['GET', 'POST', 'DELETE'],
+          ipVersion: ['IPv4', 'IPv6'],
+          location: ['string', 'string', 'string'],
+          mitigationProduct: ['DDOS', 'WAF', 'BOT_MANAGEMENT'],
+          name: ['string', 'string', 'string'],
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('ipVersion', async () => {
     const responsePromise = cloudflare.radar.attacks.layer7.summary.ipVersion();
     const rawResponse = await responsePromise.asResponse();
@@ -160,14 +162,16 @@ describe('resource summary', () => {
     await expect(
       cloudflare.radar.attacks.layer7.summary.ipVersion(
         {
+          asn: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['1d', '2d', '7d'],
           dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          direction: 'ORIGIN',
           format: 'JSON',
+          httpMethod: ['GET', 'POST', 'DELETE'],
+          httpVersion: ['HTTPv1', 'HTTPv2', 'HTTPv3'],
           location: ['string', 'string', 'string'],
+          mitigationProduct: ['DDOS', 'WAF', 'BOT_MANAGEMENT'],
           name: ['string', 'string', 'string'],
-          protocol: ['UDP', 'TCP', 'ICMP'],
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -175,8 +179,8 @@ describe('resource summary', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('protocol', async () => {
-    const responsePromise = cloudflare.radar.attacks.layer7.summary.protocol();
+  test.skip('managedRules', async () => {
+    const responsePromise = cloudflare.radar.attacks.layer7.summary.managedRules();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -187,26 +191,29 @@ describe('resource summary', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('protocol: request options instead of params are passed correctly', async () => {
+  test.skip('managedRules: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.attacks.layer7.summary.protocol({ path: '/_stainless_unknown_path' }),
+      cloudflare.radar.attacks.layer7.summary.managedRules({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('protocol: request options and params are passed correctly', async () => {
+  test.skip('managedRules: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.attacks.layer7.summary.protocol(
+      cloudflare.radar.attacks.layer7.summary.managedRules(
         {
+          asn: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['1d', '2d', '7d'],
           dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          direction: 'ORIGIN',
           format: 'JSON',
+          httpMethod: ['GET', 'POST', 'DELETE'],
+          httpVersion: ['HTTPv1', 'HTTPv2', 'HTTPv3'],
           ipVersion: ['IPv4', 'IPv6'],
           location: ['string', 'string', 'string'],
+          mitigationProduct: ['DDOS', 'WAF', 'BOT_MANAGEMENT'],
           name: ['string', 'string', 'string'],
         },
         { path: '/_stainless_unknown_path' },
@@ -215,8 +222,8 @@ describe('resource summary', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('vector', async () => {
-    const responsePromise = cloudflare.radar.attacks.layer7.summary.vector();
+  test.skip('mitigationProduct', async () => {
+    const responsePromise = cloudflare.radar.attacks.layer7.summary.mitigationProduct();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -227,28 +234,29 @@ describe('resource summary', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('vector: request options instead of params are passed correctly', async () => {
+  test.skip('mitigationProduct: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.attacks.layer7.summary.vector({ path: '/_stainless_unknown_path' }),
+      cloudflare.radar.attacks.layer7.summary.mitigationProduct({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('vector: request options and params are passed correctly', async () => {
+  test.skip('mitigationProduct: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.attacks.layer7.summary.vector(
+      cloudflare.radar.attacks.layer7.summary.mitigationProduct(
         {
+          asn: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['1d', '2d', '7d'],
           dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          direction: 'ORIGIN',
           format: 'JSON',
+          httpMethod: ['GET', 'POST', 'DELETE'],
+          httpVersion: ['HTTPv1', 'HTTPv2', 'HTTPv3'],
           ipVersion: ['IPv4', 'IPv6'],
           location: ['string', 'string', 'string'],
           name: ['string', 'string', 'string'],
-          protocol: ['UDP', 'TCP', 'ICMP'],
         },
         { path: '/_stainless_unknown_path' },
       ),

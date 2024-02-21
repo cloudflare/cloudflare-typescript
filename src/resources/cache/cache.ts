@@ -108,7 +108,9 @@ export namespace Cache {
   export import CachePurgeParams = CacheAPI.CachePurgeParams;
   export import CacheReserve = CacheReserveAPI.CacheReserve;
   export import CacheReserveListResponse = CacheReserveAPI.CacheReserveListResponse;
+  export import CacheReserveClearResponse = CacheReserveAPI.CacheReserveClearResponse;
   export import CacheReserveEditResponse = CacheReserveAPI.CacheReserveEditResponse;
+  export import CacheReserveStatusResponse = CacheReserveAPI.CacheReserveStatusResponse;
   export import CacheReserveEditParams = CacheReserveAPI.CacheReserveEditParams;
   export import TieredCacheSmartTopology = TieredCacheSmartTopologyAPI.TieredCacheSmartTopology;
   export import TieredCacheSmartTopologyDeleteResponse = TieredCacheSmartTopologyAPI.TieredCacheSmartTopologyDeleteResponse;

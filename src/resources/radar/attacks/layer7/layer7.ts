@@ -16,7 +16,8 @@ export class Layer7 extends APIResource {
   top: TopAPI.Top = new TopAPI.Top(this._client);
 
   /**
-   * Get attacks change over time by bytes.
+   * Get a timeseries of Layer 7 attacks. Values represent HTTP requests and are
+   * normalized using min-max by default.
    */
   timeseries(
     query?: Layer7TimeseriesParams,
@@ -31,7 +32,7 @@ export class Layer7 extends APIResource {
       return this.timeseries({}, query);
     }
     return (
-      this._client.get('/radar/attacks/layer3/timeseries', { query, ...options }) as Core.APIPromise<{
+      this._client.get('/radar/attacks/layer7/timeseries', { query, ...options }) as Core.APIPromise<{
         result: Layer7TimeseriesResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -39,12 +40,60 @@ export class Layer7 extends APIResource {
 }
 
 export interface Layer7TimeseriesResponse {
-  meta: unknown;
+  meta: Layer7TimeseriesResponse.Meta;
 
   serie_0: Layer7TimeseriesResponse.Serie0;
 }
 
 export namespace Layer7TimeseriesResponse {
+  export interface Meta {
+    aggInterval: string;
+
+    dateRange: Array<Meta.DateRange>;
+
+    lastUpdated: string;
+
+    confidenceInfo?: Meta.ConfidenceInfo;
+  }
+
+  export namespace Meta {
+    export interface DateRange {
+      /**
+       * Adjusted end of date range.
+       */
+      endTime: string;
+
+      /**
+       * Adjusted start of date range.
+       */
+      startTime: string;
+    }
+
+    export interface ConfidenceInfo {
+      annotations?: Array<ConfidenceInfo.Annotation>;
+
+      level?: number;
+    }
+
+    export namespace ConfidenceInfo {
+      export interface Annotation {
+        dataSource: string;
+
+        description: string;
+
+        eventType: string;
+
+        isInstantaneous: unknown;
+
+        endTime?: string;
+
+        linkedUrl?: string;
+
+        startTime?: string;
+      }
+    }
+  }
+
   export interface Serie0 {
     timestamps: Array<string>;
 
@@ -66,6 +115,19 @@ export interface Layer7TimeseriesParams {
    * AS3356.
    */
   asn?: Array<string>;
+
+  /**
+   * Array of L7 attack types.
+   */
+  attack?: Array<
+    | 'DDOS'
+    | 'WAF'
+    | 'BOT_MANAGEMENT'
+    | 'ACCESS_RULES'
+    | 'IP_REPUTATION'
+    | 'API_SHIELD'
+    | 'DATA_LOSS_PREVENTION'
+  >;
 
   /**
    * End of the date range (inclusive).
@@ -101,20 +163,9 @@ export interface Layer7TimeseriesParams {
   dateStart?: Array<string>;
 
   /**
-   * Together with the `location` parameter, will apply the filter to origin or
-   * target location.
-   */
-  direction?: 'ORIGIN' | 'TARGET';
-
-  /**
    * Format results are returned in.
    */
   format?: 'JSON' | 'CSV';
-
-  /**
-   * Filter for ip version.
-   */
-  ipVersion?: Array<'IPv4' | 'IPv6'>;
 
   /**
    * Array of comma separated list of locations (alpha-2 country codes). Start with
@@ -122,11 +173,6 @@ export interface Layer7TimeseriesParams {
    * but includes results from PT.
    */
   location?: Array<string>;
-
-  /**
-   * Measurement units, eg. bytes.
-   */
-  metric?: 'BYTES' | 'BYTES_OLD';
 
   /**
    * Array of names that will be used to name the series in responses.
@@ -138,45 +184,40 @@ export interface Layer7TimeseriesParams {
    * [Normalization methods](https://developers.cloudflare.com/radar/concepts/normalization/).
    */
   normalization?: 'PERCENTAGE_CHANGE' | 'MIN0_MAX';
-
-  /**
-   * Array of L3/4 attack types.
-   */
-  protocol?: Array<'UDP' | 'TCP' | 'ICMP' | 'GRE'>;
 }
 
 export namespace Layer7 {
   export import Layer7TimeseriesResponse = Layer7API.Layer7TimeseriesResponse;
   export import Layer7TimeseriesParams = Layer7API.Layer7TimeseriesParams;
   export import Summary = SummaryAPI.Summary;
-  export import SummaryBitrateResponse = SummaryAPI.SummaryBitrateResponse;
-  export import SummaryDurationResponse = SummaryAPI.SummaryDurationResponse;
   export import SummaryGetResponse = SummaryAPI.SummaryGetResponse;
+  export import SummaryHTTPMethodResponse = SummaryAPI.SummaryHTTPMethodResponse;
+  export import SummaryHTTPVersionResponse = SummaryAPI.SummaryHTTPVersionResponse;
   export import SummaryIPVersionResponse = SummaryAPI.SummaryIPVersionResponse;
-  export import SummaryProtocolResponse = SummaryAPI.SummaryProtocolResponse;
-  export import SummaryVectorResponse = SummaryAPI.SummaryVectorResponse;
-  export import SummaryBitrateParams = SummaryAPI.SummaryBitrateParams;
-  export import SummaryDurationParams = SummaryAPI.SummaryDurationParams;
+  export import SummaryManagedRulesResponse = SummaryAPI.SummaryManagedRulesResponse;
+  export import SummaryMitigationProductResponse = SummaryAPI.SummaryMitigationProductResponse;
   export import SummaryGetParams = SummaryAPI.SummaryGetParams;
+  export import SummaryHTTPMethodParams = SummaryAPI.SummaryHTTPMethodParams;
+  export import SummaryHTTPVersionParams = SummaryAPI.SummaryHTTPVersionParams;
   export import SummaryIPVersionParams = SummaryAPI.SummaryIPVersionParams;
-  export import SummaryProtocolParams = SummaryAPI.SummaryProtocolParams;
-  export import SummaryVectorParams = SummaryAPI.SummaryVectorParams;
+  export import SummaryManagedRulesParams = SummaryAPI.SummaryManagedRulesParams;
+  export import SummaryMitigationProductParams = SummaryAPI.SummaryMitigationProductParams;
   export import TimeseriesGroups = TimeseriesGroupsAPI.TimeseriesGroups;
-  export import TimeseriesGroupBitrateResponse = TimeseriesGroupsAPI.TimeseriesGroupBitrateResponse;
-  export import TimeseriesGroupDurationResponse = TimeseriesGroupsAPI.TimeseriesGroupDurationResponse;
   export import TimeseriesGroupGetResponse = TimeseriesGroupsAPI.TimeseriesGroupGetResponse;
+  export import TimeseriesGroupHTTPMethodResponse = TimeseriesGroupsAPI.TimeseriesGroupHTTPMethodResponse;
+  export import TimeseriesGroupHTTPVersionResponse = TimeseriesGroupsAPI.TimeseriesGroupHTTPVersionResponse;
   export import TimeseriesGroupIndustryResponse = TimeseriesGroupsAPI.TimeseriesGroupIndustryResponse;
   export import TimeseriesGroupIPVersionResponse = TimeseriesGroupsAPI.TimeseriesGroupIPVersionResponse;
-  export import TimeseriesGroupProtocolResponse = TimeseriesGroupsAPI.TimeseriesGroupProtocolResponse;
-  export import TimeseriesGroupVectorResponse = TimeseriesGroupsAPI.TimeseriesGroupVectorResponse;
+  export import TimeseriesGroupManagedRulesResponse = TimeseriesGroupsAPI.TimeseriesGroupManagedRulesResponse;
+  export import TimeseriesGroupMitigationProductResponse = TimeseriesGroupsAPI.TimeseriesGroupMitigationProductResponse;
   export import TimeseriesGroupVerticalResponse = TimeseriesGroupsAPI.TimeseriesGroupVerticalResponse;
-  export import TimeseriesGroupBitrateParams = TimeseriesGroupsAPI.TimeseriesGroupBitrateParams;
-  export import TimeseriesGroupDurationParams = TimeseriesGroupsAPI.TimeseriesGroupDurationParams;
   export import TimeseriesGroupGetParams = TimeseriesGroupsAPI.TimeseriesGroupGetParams;
+  export import TimeseriesGroupHTTPMethodParams = TimeseriesGroupsAPI.TimeseriesGroupHTTPMethodParams;
+  export import TimeseriesGroupHTTPVersionParams = TimeseriesGroupsAPI.TimeseriesGroupHTTPVersionParams;
   export import TimeseriesGroupIndustryParams = TimeseriesGroupsAPI.TimeseriesGroupIndustryParams;
   export import TimeseriesGroupIPVersionParams = TimeseriesGroupsAPI.TimeseriesGroupIPVersionParams;
-  export import TimeseriesGroupProtocolParams = TimeseriesGroupsAPI.TimeseriesGroupProtocolParams;
-  export import TimeseriesGroupVectorParams = TimeseriesGroupsAPI.TimeseriesGroupVectorParams;
+  export import TimeseriesGroupManagedRulesParams = TimeseriesGroupsAPI.TimeseriesGroupManagedRulesParams;
+  export import TimeseriesGroupMitigationProductParams = TimeseriesGroupsAPI.TimeseriesGroupMitigationProductParams;
   export import TimeseriesGroupVerticalParams = TimeseriesGroupsAPI.TimeseriesGroupVerticalParams;
   export import Top = TopAPI.Top;
   export import TopAttacksResponse = TopAPI.TopAttacksResponse;

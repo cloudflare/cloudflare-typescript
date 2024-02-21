@@ -4,16 +4,19 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as TopAPI from 'cloudflare/resources/radar/attacks/layer7/top/top';
+import * as AsesAPI from 'cloudflare/resources/radar/attacks/layer7/top/ases';
 import * as LocationsAPI from 'cloudflare/resources/radar/attacks/layer7/top/locations';
 
 export class Top extends APIResource {
   locations: LocationsAPI.Locations = new LocationsAPI.Locations(this._client);
+  ases: AsesAPI.Ases = new AsesAPI.Ases(this._client);
 
   /**
    * Get the top attacks from origin to target location. Values are a percentage out
-   * of the total layer 3 attacks (with billing country). You can optionally limit
-   * the number of attacks per origin/target location (useful if all the top attacks
-   * are from or to the same location).
+   * of the total layer 7 attacks (with billing country). The attack magnitude can be
+   * defined by the number of mitigated requests or by the number of zones affected.
+   * You can optionally limit the number of attacks per origin/target location
+   * (useful if all the top attacks are from or to the same location).
    */
   attacks(query?: TopAttacksParams, options?: Core.RequestOptions): Core.APIPromise<TopAttacksResponse>;
   attacks(options?: Core.RequestOptions): Core.APIPromise<TopAttacksResponse>;
@@ -25,7 +28,7 @@ export class Top extends APIResource {
       return this.attacks({}, query);
     }
     return (
-      this._client.get('/radar/attacks/layer3/top/attacks', { query, ...options }) as Core.APIPromise<{
+      this._client.get('/radar/attacks/layer7/top/attacks', { query, ...options }) as Core.APIPromise<{
         result: TopAttacksResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -44,7 +47,7 @@ export class Top extends APIResource {
       return this.industry({}, query);
     }
     return (
-      this._client.get('/radar/attacks/layer3/top/industry', { query, ...options }) as Core.APIPromise<{
+      this._client.get('/radar/attacks/layer7/top/industry', { query, ...options }) as Core.APIPromise<{
         result: TopIndustryResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -63,7 +66,7 @@ export class Top extends APIResource {
       return this.vertical({}, query);
     }
     return (
-      this._client.get('/radar/attacks/layer3/top/vertical', { query, ...options }) as Core.APIPromise<{
+      this._client.get('/radar/attacks/layer7/top/vertical', { query, ...options }) as Core.APIPromise<{
         result: TopVerticalResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -127,6 +130,10 @@ export namespace TopAttacksResponse {
     originCountryAlpha2: string;
 
     originCountryName: string;
+
+    targetCountryAlpha2: string;
+
+    targetCountryName: string;
 
     value: string;
   }
@@ -254,6 +261,13 @@ export namespace TopVerticalResponse {
 
 export interface TopAttacksParams {
   /**
+   * Array of comma separated list of ASNs, start with `-` to exclude from results.
+   * For example, `-174, 3356` excludes results from AS174, but includes results from
+   * AS3356.
+   */
+  asn?: Array<string>;
+
+  /**
    * End of the date range (inclusive).
    */
   dateEnd?: Array<string>;
@@ -290,11 +304,6 @@ export interface TopAttacksParams {
    * Format results are returned in.
    */
   format?: 'JSON' | 'CSV';
-
-  /**
-   * Filter for ip version.
-   */
-  ipVersion?: Array<'IPv4' | 'IPv6'>;
 
   /**
    * Limit the number of objects in the response.
@@ -322,18 +331,26 @@ export interface TopAttacksParams {
   location?: Array<string>;
 
   /**
+   * Attack magnitude can be defined by total requests mitigated or by total zones
+   * attacked.
+   */
+  magnitude?: 'AFFECTED_ZONES' | 'MITIGATED_REQUESTS';
+
+  /**
    * Array of names that will be used to name the series in responses.
    */
   name?: Array<string>;
-
-  /**
-   * Array of L3/4 attack types.
-   */
-  protocol?: Array<'UDP' | 'TCP' | 'ICMP' | 'GRE'>;
 }
 
 export interface TopIndustryParams {
   /**
+   * Array of comma separated list of ASNs, start with `-` to exclude from results.
+   * For example, `-174, 3356` excludes results from AS174, but includes results from
+   * AS3356.
+   */
+  asn?: Array<string>;
+
+  /**
    * End of the date range (inclusive).
    */
   dateEnd?: Array<string>;
@@ -372,11 +389,6 @@ export interface TopIndustryParams {
   format?: 'JSON' | 'CSV';
 
   /**
-   * Filter for ip version.
-   */
-  ipVersion?: Array<'IPv4' | 'IPv6'>;
-
-  /**
    * Limit the number of objects in the response.
    */
   limit?: number;
@@ -392,15 +404,17 @@ export interface TopIndustryParams {
    * Array of names that will be used to name the series in responses.
    */
   name?: Array<string>;
-
-  /**
-   * Array of L3/4 attack types.
-   */
-  protocol?: Array<'UDP' | 'TCP' | 'ICMP' | 'GRE'>;
 }
 
 export interface TopVerticalParams {
   /**
+   * Array of comma separated list of ASNs, start with `-` to exclude from results.
+   * For example, `-174, 3356` excludes results from AS174, but includes results from
+   * AS3356.
+   */
+  asn?: Array<string>;
+
+  /**
    * End of the date range (inclusive).
    */
   dateEnd?: Array<string>;
@@ -439,11 +453,6 @@ export interface TopVerticalParams {
   format?: 'JSON' | 'CSV';
 
   /**
-   * Filter for ip version.
-   */
-  ipVersion?: Array<'IPv4' | 'IPv6'>;
-
-  /**
    * Limit the number of objects in the response.
    */
   limit?: number;
@@ -459,11 +468,6 @@ export interface TopVerticalParams {
    * Array of names that will be used to name the series in responses.
    */
   name?: Array<string>;
-
-  /**
-   * Array of L3/4 attack types.
-   */
-  protocol?: Array<'UDP' | 'TCP' | 'ICMP' | 'GRE'>;
 }
 
 export namespace Top {
@@ -478,4 +482,7 @@ export namespace Top {
   export import LocationTargetResponse = LocationsAPI.LocationTargetResponse;
   export import LocationOriginParams = LocationsAPI.LocationOriginParams;
   export import LocationTargetParams = LocationsAPI.LocationTargetParams;
+  export import Ases = AsesAPI.Ases;
+  export import AseOriginResponse = AsesAPI.AseOriginResponse;
+  export import AseOriginParams = AsesAPI.AseOriginParams;
 }

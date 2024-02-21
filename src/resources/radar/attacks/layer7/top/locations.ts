@@ -7,7 +7,9 @@ import * as LocationsAPI from 'cloudflare/resources/radar/attacks/layer7/top/loc
 
 export class Locations extends APIResource {
   /**
-   * Get the origin locations of attacks.
+   * Get the top origin locations of and by layer 7 attacks. Values are a percentage
+   * out of the total layer 7 attacks. The origin location is determined by the
+   * client IP.
    */
   origin(
     query?: LocationOriginParams,
@@ -22,7 +24,7 @@ export class Locations extends APIResource {
       return this.origin({}, query);
     }
     return (
-      this._client.get('/radar/attacks/layer3/top/locations/origin', {
+      this._client.get('/radar/attacks/layer7/top/locations/origin', {
         query,
         ...options,
       }) as Core.APIPromise<{ result: LocationOriginResponse }>
@@ -30,7 +32,9 @@ export class Locations extends APIResource {
   }
 
   /**
-   * Get the target locations of attacks.
+   * Get the top target locations of and by layer 7 attacks. Values are a percentage
+   * out of the total layer 7 attacks. The target location is determined by the
+   * attacked zone's billing country, when available.
    */
   target(
     query?: LocationTargetParams,
@@ -45,7 +49,7 @@ export class Locations extends APIResource {
       return this.target({}, query);
     }
     return (
-      this._client.get('/radar/attacks/layer3/top/locations/target', {
+      this._client.get('/radar/attacks/layer7/top/locations/target', {
         query,
         ...options,
       }) as Core.APIPromise<{ result: LocationTargetResponse }>
@@ -183,6 +187,13 @@ export namespace LocationTargetResponse {
 
 export interface LocationOriginParams {
   /**
+   * Array of comma separated list of ASNs, start with `-` to exclude from results.
+   * For example, `-174, 3356` excludes results from AS174, but includes results from
+   * AS3356.
+   */
+  asn?: Array<string>;
+
+  /**
    * End of the date range (inclusive).
    */
   dateEnd?: Array<string>;
@@ -221,31 +232,14 @@ export interface LocationOriginParams {
   format?: 'JSON' | 'CSV';
 
   /**
-   * Filter for ip version.
-   */
-  ipVersion?: Array<'IPv4' | 'IPv6'>;
-
-  /**
    * Limit the number of objects in the response.
    */
   limit?: number;
 
   /**
-   * Array of comma separated list of locations (alpha-2 country codes). Start with
-   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
-   * but includes results from PT.
-   */
-  location?: Array<string>;
-
-  /**
    * Array of names that will be used to name the series in responses.
    */
   name?: Array<string>;
-
-  /**
-   * Array of L3/4 attack types.
-   */
-  protocol?: Array<'UDP' | 'TCP' | 'ICMP' | 'GRE'>;
 }
 
 export interface LocationTargetParams {
@@ -288,31 +282,14 @@ export interface LocationTargetParams {
   format?: 'JSON' | 'CSV';
 
   /**
-   * Filter for ip version.
-   */
-  ipVersion?: Array<'IPv4' | 'IPv6'>;
-
-  /**
    * Limit the number of objects in the response.
    */
   limit?: number;
 
   /**
-   * Array of comma separated list of locations (alpha-2 country codes). Start with
-   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
-   * but includes results from PT.
-   */
-  location?: Array<string>;
-
-  /**
    * Array of names that will be used to name the series in responses.
    */
   name?: Array<string>;
-
-  /**
-   * Array of L3/4 attack types.
-   */
-  protocol?: Array<'UDP' | 'TCP' | 'ICMP' | 'GRE'>;
 }
 
 export namespace Locations {
