@@ -3975,7 +3975,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/request-tracers/traces.ts">EJbHDUdxTrace</a></code>
 - <code><a href="./src/resources/request-tracers/traces.ts">TraceCreateResponse</a></code>
 
 Methods:
