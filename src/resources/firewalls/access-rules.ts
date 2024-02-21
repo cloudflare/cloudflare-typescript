@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as AccessRulesAPI from 'cloudflare/resources/firewalls/access-rules';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
@@ -15,13 +14,12 @@ export class AccessRules extends APIResource {
    * [IP Access rules for a zone](#ip-access-rules-for-a-zone) endpoints.
    */
   create(
-    accountOrZone: string,
-    accountOrZoneId: unknown,
-    body: AccessRuleCreateParams,
+    params: AccessRuleCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AccessRuleCreateResponse | null> {
+    const { account_id, zone_id, ...body } = params;
     return (
-      this._client.post(`/${accountOrZone}/${accountOrZoneId}/firewall/access_rules/rules`, {
+      this._client.post(`/${account_id}/${zone_id}/firewall/access_rules/rules`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: AccessRuleCreateResponse | null }>
@@ -34,27 +32,12 @@ export class AccessRules extends APIResource {
    * parameters.
    */
   list(
-    accountOrZone: string,
-    accountOrZoneId: unknown,
-    query?: AccessRuleListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<AccessRuleListResponsesV4PagePaginationArray, AccessRuleListResponse>;
-  list(
-    accountOrZone: string,
-    accountOrZoneId: unknown,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<AccessRuleListResponsesV4PagePaginationArray, AccessRuleListResponse>;
-  list(
-    accountOrZone: string,
-    accountOrZoneId: unknown,
-    query: AccessRuleListParams | Core.RequestOptions = {},
+    params: AccessRuleListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<AccessRuleListResponsesV4PagePaginationArray, AccessRuleListResponse> {
-    if (isRequestOptions(query)) {
-      return this.list(accountOrZone, accountOrZoneId, {}, query);
-    }
+    const { account_id, zone_id, ...query } = params;
     return this._client.getAPIList(
-      `/${accountOrZone}/${accountOrZoneId}/firewall/access_rules/rules`,
+      `/${account_id}/${zone_id}/firewall/access_rules/rules`,
       AccessRuleListResponsesV4PagePaginationArray,
       { query, ...options },
     );
@@ -66,14 +49,14 @@ export class AccessRules extends APIResource {
    * Note: This operation will affect all zones in the account or zone.
    */
   delete(
-    accountOrZone: string,
-    accountOrZoneId: unknown,
     identifier: unknown,
+    params: AccessRuleDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AccessRuleDeleteResponse | null> {
+    const { account_id, zone_id } = params;
     return (
       this._client.delete(
-        `/${accountOrZone}/${accountOrZoneId}/firewall/access_rules/rules/${identifier}`,
+        `/${account_id}/${zone_id}/firewall/access_rules/rules/${identifier}`,
         options,
       ) as Core.APIPromise<{ result: AccessRuleDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -102,14 +85,14 @@ export class AccessRules extends APIResource {
    * Fetches the details of an IP Access rule defined.
    */
   get(
-    accountOrZone: string,
-    accountOrZoneId: unknown,
     identifier: unknown,
+    params: AccessRuleGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AccessRuleGetResponse | null> {
+    const { account_id, zone_id } = params;
     return (
       this._client.get(
-        `/${accountOrZone}/${accountOrZoneId}/firewall/access_rules/rules/${identifier}`,
+        `/${account_id}/${zone_id}/firewall/access_rules/rules/${identifier}`,
         options,
       ) as Core.APIPromise<{ result: AccessRuleGetResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -135,7 +118,19 @@ export type AccessRuleGetResponse = unknown | string;
 
 export interface AccessRuleCreateParams {
   /**
-   * The rule configuration.
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id: unknown;
+
+  /**
+   * Body param: The rule configuration.
    */
   configuration:
     | AccessRuleCreateParams.LegacyJhsIPConfiguration
@@ -145,12 +140,13 @@ export interface AccessRuleCreateParams {
     | AccessRuleCreateParams.LegacyJhsCountryConfiguration;
 
   /**
-   * The action to apply to a matched request.
+   * Body param: The action to apply to a matched request.
    */
   mode: 'block' | 'challenge' | 'whitelist' | 'js_challenge' | 'managed_challenge';
 
   /**
-   * An informative summary of the rule, typically used as a reminder or explanation.
+   * Body param: An informative summary of the rule, typically used as a reminder or
+   * explanation.
    */
   notes?: string;
 }
@@ -227,16 +223,34 @@ export namespace AccessRuleCreateParams {
 
 export interface AccessRuleListParams extends V4PagePaginationArrayParams {
   /**
-   * The direction used to sort returned rules.
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id: unknown;
+
+  /**
+   * Query param: The direction used to sort returned rules.
    */
   direction?: 'asc' | 'desc';
 
+  /**
+   * Query param:
+   */
   'egs-pagination'?: AccessRuleListParams.EgsPagination;
 
+  /**
+   * Query param:
+   */
   filters?: AccessRuleListParams.Filters;
 
   /**
-   * The field used to sort returned rules.
+   * Query param: The field used to sort returned rules.
    */
   order?: 'configuration.target' | 'configuration.value' | 'mode';
 }
@@ -293,6 +307,18 @@ export namespace AccessRuleListParams {
      */
     notes?: string;
   }
+}
+
+export interface AccessRuleDeleteParams {
+  /**
+   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   */
+  zone_id: unknown;
 }
 
 export interface AccessRuleEditParams {
@@ -393,6 +419,18 @@ export namespace AccessRuleEditParams {
   }
 }
 
+export interface AccessRuleGetParams {
+  /**
+   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   */
+  zone_id: unknown;
+}
+
 export namespace AccessRules {
   export import AccessRuleCreateResponse = AccessRulesAPI.AccessRuleCreateResponse;
   export import AccessRuleListResponse = AccessRulesAPI.AccessRuleListResponse;
@@ -402,5 +440,7 @@ export namespace AccessRules {
   export import AccessRuleListResponsesV4PagePaginationArray = AccessRulesAPI.AccessRuleListResponsesV4PagePaginationArray;
   export import AccessRuleCreateParams = AccessRulesAPI.AccessRuleCreateParams;
   export import AccessRuleListParams = AccessRulesAPI.AccessRuleListParams;
+  export import AccessRuleDeleteParams = AccessRulesAPI.AccessRuleDeleteParams;
   export import AccessRuleEditParams = AccessRulesAPI.AccessRuleEditParams;
+  export import AccessRuleGetParams = AccessRulesAPI.AccessRuleGetParams;
 }

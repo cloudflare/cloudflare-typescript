@@ -8,17 +8,12 @@ export class Jobs extends APIResource {
   /**
    * Creates a new Logpush job for an account or zone.
    */
-  create(
-    accountOrZone: string,
-    accountOrZoneId: string,
-    body: JobCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<JobCreateResponse | null> {
+  create(params: JobCreateParams, options?: Core.RequestOptions): Core.APIPromise<JobCreateResponse | null> {
+    const { account_id, zone_id, ...body } = params;
     return (
-      this._client.post(`/${accountOrZone}/${accountOrZoneId}/logpush/jobs`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: JobCreateResponse | null }>
+      this._client.post(`/${account_id}/${zone_id}/logpush/jobs`, { body, ...options }) as Core.APIPromise<{
+        result: JobCreateResponse | null;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -26,14 +21,13 @@ export class Jobs extends APIResource {
    * Updates a Logpush job.
    */
   update(
-    accountOrZone: string,
-    accountOrZoneId: string,
     jobId: number,
-    body: JobUpdateParams,
+    params: JobUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<JobUpdateResponse | null> {
+    const { account_id, zone_id, ...body } = params;
     return (
-      this._client.put(`/${accountOrZone}/${accountOrZoneId}/logpush/jobs/${jobId}`, {
+      this._client.put(`/${account_id}/${zone_id}/logpush/jobs/${jobId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: JobUpdateResponse | null }>
@@ -43,13 +37,10 @@ export class Jobs extends APIResource {
   /**
    * Lists Logpush jobs for an account or zone.
    */
-  list(
-    accountOrZone: string,
-    accountOrZoneId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<JobListResponse> {
+  list(params: JobListParams, options?: Core.RequestOptions): Core.APIPromise<JobListResponse> {
+    const { account_id, zone_id } = params;
     return (
-      this._client.get(`/${accountOrZone}/${accountOrZoneId}/logpush/jobs`, options) as Core.APIPromise<{
+      this._client.get(`/${account_id}/${zone_id}/logpush/jobs`, options) as Core.APIPromise<{
         result: JobListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -59,16 +50,15 @@ export class Jobs extends APIResource {
    * Deletes a Logpush job.
    */
   delete(
-    accountOrZone: string,
-    accountOrZoneId: string,
     jobId: number,
+    params: JobDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<JobDeleteResponse | null> {
+    const { account_id, zone_id } = params;
     return (
-      this._client.delete(
-        `/${accountOrZone}/${accountOrZoneId}/logpush/jobs/${jobId}`,
-        options,
-      ) as Core.APIPromise<{ result: JobDeleteResponse | null }>
+      this._client.delete(`/${account_id}/${zone_id}/logpush/jobs/${jobId}`, options) as Core.APIPromise<{
+        result: JobDeleteResponse | null;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -76,16 +66,15 @@ export class Jobs extends APIResource {
    * Gets the details of a Logpush job.
    */
   get(
-    accountOrZone: string,
-    accountOrZoneId: string,
     jobId: number,
+    params: JobGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<JobGetResponse | null> {
+    const { account_id, zone_id } = params;
     return (
-      this._client.get(
-        `/${accountOrZone}/${accountOrZoneId}/logpush/jobs/${jobId}`,
-        options,
-      ) as Core.APIPromise<{ result: JobGetResponse | null }>
+      this._client.get(`/${account_id}/${zone_id}/logpush/jobs/${jobId}`, options) as Core.APIPromise<{
+        result: JobGetResponse | null;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -714,53 +703,66 @@ export namespace JobGetResponse {
 
 export interface JobCreateParams {
   /**
-   * Uniquely identifies a resource (such as an s3 bucket) where data will be pushed.
-   * Additional configuration parameters supported by the destination may be
-   * included.
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Uniquely identifies a resource (such as an s3 bucket) where data
+   * will be pushed. Additional configuration parameters supported by the destination
+   * may be included.
    */
   destination_conf: string;
 
   /**
-   * Name of the dataset.
+   * Body param: Name of the dataset.
    */
   dataset?: string | null;
 
   /**
-   * Flag that indicates if the job is enabled.
+   * Body param: Flag that indicates if the job is enabled.
    */
   enabled?: boolean;
 
   /**
-   * The frequency at which Cloudflare sends batches of logs to your destination.
-   * Setting frequency to high sends your logs in larger quantities of smaller files.
-   * Setting frequency to low sends logs in smaller quantities of larger files.
+   * Body param: The frequency at which Cloudflare sends batches of logs to your
+   * destination. Setting frequency to high sends your logs in larger quantities of
+   * smaller files. Setting frequency to low sends logs in smaller quantities of
+   * larger files.
    */
   frequency?: 'high' | 'low' | null;
 
   /**
-   * This field is deprecated. Use `output_options` instead. Configuration string. It
-   * specifies things like requested fields and timestamp formats. If migrating from
-   * the logpull api, copy the url (full url or just the query string) of your call
-   * here, and logpush will keep on making this call for you, setting start and end
-   * times appropriately.
+   * Body param: This field is deprecated. Use `output_options` instead.
+   * Configuration string. It specifies things like requested fields and timestamp
+   * formats. If migrating from the logpull api, copy the url (full url or just the
+   * query string) of your call here, and logpush will keep on making this call for
+   * you, setting start and end times appropriately.
    */
   logpull_options?: string | null;
 
   /**
-   * Optional human readable job name. Not unique. Cloudflare suggests that you set
-   * this to a meaningful string, like the domain name, to make it easier to identify
-   * your job.
+   * Body param: Optional human readable job name. Not unique. Cloudflare suggests
+   * that you set this to a meaningful string, like the domain name, to make it
+   * easier to identify your job.
    */
   name?: string | null;
 
   /**
-   * The structured replacement for `logpull_options`. When including this field, the
-   * `logpull_option` field will be ignored.
+   * Body param: The structured replacement for `logpull_options`. When including
+   * this field, the `logpull_option` field will be ignored.
    */
   output_options?: JobCreateParams.OutputOptions | null;
 
   /**
-   * Ownership challenge token to prove destination ownership.
+   * Body param: Ownership challenge token to prove destination ownership.
    */
   ownership_challenge?: string;
 }
@@ -845,41 +847,54 @@ export namespace JobCreateParams {
 
 export interface JobUpdateParams {
   /**
-   * Uniquely identifies a resource (such as an s3 bucket) where data will be pushed.
-   * Additional configuration parameters supported by the destination may be
-   * included.
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Uniquely identifies a resource (such as an s3 bucket) where data
+   * will be pushed. Additional configuration parameters supported by the destination
+   * may be included.
    */
   destination_conf?: string;
 
   /**
-   * Flag that indicates if the job is enabled.
+   * Body param: Flag that indicates if the job is enabled.
    */
   enabled?: boolean;
 
   /**
-   * The frequency at which Cloudflare sends batches of logs to your destination.
-   * Setting frequency to high sends your logs in larger quantities of smaller files.
-   * Setting frequency to low sends logs in smaller quantities of larger files.
+   * Body param: The frequency at which Cloudflare sends batches of logs to your
+   * destination. Setting frequency to high sends your logs in larger quantities of
+   * smaller files. Setting frequency to low sends logs in smaller quantities of
+   * larger files.
    */
   frequency?: 'high' | 'low' | null;
 
   /**
-   * This field is deprecated. Use `output_options` instead. Configuration string. It
-   * specifies things like requested fields and timestamp formats. If migrating from
-   * the logpull api, copy the url (full url or just the query string) of your call
-   * here, and logpush will keep on making this call for you, setting start and end
-   * times appropriately.
+   * Body param: This field is deprecated. Use `output_options` instead.
+   * Configuration string. It specifies things like requested fields and timestamp
+   * formats. If migrating from the logpull api, copy the url (full url or just the
+   * query string) of your call here, and logpush will keep on making this call for
+   * you, setting start and end times appropriately.
    */
   logpull_options?: string | null;
 
   /**
-   * The structured replacement for `logpull_options`. When including this field, the
-   * `logpull_option` field will be ignored.
+   * Body param: The structured replacement for `logpull_options`. When including
+   * this field, the `logpull_option` field will be ignored.
    */
   output_options?: JobUpdateParams.OutputOptions | null;
 
   /**
-   * Ownership challenge token to prove destination ownership.
+   * Body param: Ownership challenge token to prove destination ownership.
    */
   ownership_challenge?: string;
 }
@@ -962,6 +977,42 @@ export namespace JobUpdateParams {
   }
 }
 
+export interface JobListParams {
+  /**
+   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   */
+  zone_id: string;
+}
+
+export interface JobDeleteParams {
+  /**
+   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   */
+  zone_id: string;
+}
+
+export interface JobGetParams {
+  /**
+   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   */
+  zone_id: string;
+}
+
 export namespace Jobs {
   export import JobCreateResponse = JobsAPI.JobCreateResponse;
   export import JobUpdateResponse = JobsAPI.JobUpdateResponse;
@@ -970,4 +1021,7 @@ export namespace Jobs {
   export import JobGetResponse = JobsAPI.JobGetResponse;
   export import JobCreateParams = JobsAPI.JobCreateParams;
   export import JobUpdateParams = JobsAPI.JobUpdateParams;
+  export import JobListParams = JobsAPI.JobListParams;
+  export import JobDeleteParams = JobsAPI.JobDeleteParams;
+  export import JobGetParams = JobsAPI.JobGetParams;
 }

@@ -495,12 +495,12 @@ Types:
 
 Methods:
 
-- <code title="post /{account_or_zone}/{account_or_zone_id}/access/apps">client.access.applications.<a href="./src/resources/access/applications/applications.ts">create</a>(accountOrZone, accountOrZoneId, { ...params }) -> ApplicationCreateResponse</code>
-- <code title="put /{account_or_zone}/{account_or_zone_id}/access/apps/{app_id}">client.access.applications.<a href="./src/resources/access/applications/applications.ts">update</a>(accountOrZone, accountOrZoneId, appId, { ...params }) -> ApplicationUpdateResponse</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/access/apps">client.access.applications.<a href="./src/resources/access/applications/applications.ts">list</a>(accountOrZone, accountOrZoneId) -> ApplicationListResponse | null</code>
-- <code title="delete /{account_or_zone}/{account_or_zone_id}/access/apps/{app_id}">client.access.applications.<a href="./src/resources/access/applications/applications.ts">delete</a>(accountOrZone, accountOrZoneId, appId) -> ApplicationDeleteResponse</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/access/apps/{app_id}">client.access.applications.<a href="./src/resources/access/applications/applications.ts">get</a>(accountOrZone, accountOrZoneId, appId) -> ApplicationGetResponse</code>
-- <code title="post /{account_or_zone}/{account_or_zone_id}/access/apps/{app_id}/revoke_tokens">client.access.applications.<a href="./src/resources/access/applications/applications.ts">revokeTokens</a>(accountOrZone, accountOrZoneId, appId) -> ApplicationRevokeTokensResponse | null</code>
+- <code title="post /{account_or_zone}/{account_or_zone_id}/access/apps">client.access.applications.<a href="./src/resources/access/applications/applications.ts">create</a>({ ...params }) -> ApplicationCreateResponse</code>
+- <code title="put /{account_or_zone}/{account_or_zone_id}/access/apps/{app_id}">client.access.applications.<a href="./src/resources/access/applications/applications.ts">update</a>(appId, { ...params }) -> ApplicationUpdateResponse</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/access/apps">client.access.applications.<a href="./src/resources/access/applications/applications.ts">list</a>({ ...params }) -> ApplicationListResponse | null</code>
+- <code title="delete /{account_or_zone}/{account_or_zone_id}/access/apps/{app_id}">client.access.applications.<a href="./src/resources/access/applications/applications.ts">delete</a>(appId, { ...params }) -> ApplicationDeleteResponse</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/access/apps/{app_id}">client.access.applications.<a href="./src/resources/access/applications/applications.ts">get</a>(appId, { ...params }) -> ApplicationGetResponse</code>
+- <code title="post /{account_or_zone}/{account_or_zone_id}/access/apps/{app_id}/revoke_tokens">client.access.applications.<a href="./src/resources/access/applications/applications.ts">revokeTokens</a>(appId, { ...params }) -> ApplicationRevokeTokensResponse | null</code>
 
 ### Cas
 
@@ -513,10 +513,10 @@ Types:
 
 Methods:
 
-- <code title="post /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid}/ca">client.access.applications.cas.<a href="./src/resources/access/applications/cas.ts">create</a>(accountOrZone, accountOrZoneId, uuid) -> CaCreateResponse</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/access/apps/ca">client.access.applications.cas.<a href="./src/resources/access/applications/cas.ts">list</a>(accountOrZone, accountOrZoneId) -> CaListResponse | null</code>
-- <code title="delete /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid}/ca">client.access.applications.cas.<a href="./src/resources/access/applications/cas.ts">delete</a>(accountOrZone, accountOrZoneId, uuid) -> CaDeleteResponse</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid}/ca">client.access.applications.cas.<a href="./src/resources/access/applications/cas.ts">get</a>(accountOrZone, accountOrZoneId, uuid) -> CaGetResponse</code>
+- <code title="post /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid}/ca">client.access.applications.cas.<a href="./src/resources/access/applications/cas.ts">create</a>(uuid, { ...params }) -> CaCreateResponse</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/access/apps/ca">client.access.applications.cas.<a href="./src/resources/access/applications/cas.ts">list</a>({ ...params }) -> CaListResponse | null</code>
+- <code title="delete /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid}/ca">client.access.applications.cas.<a href="./src/resources/access/applications/cas.ts">delete</a>(uuid, { ...params }) -> CaDeleteResponse</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid}/ca">client.access.applications.cas.<a href="./src/resources/access/applications/cas.ts">get</a>(uuid, { ...params }) -> CaGetResponse</code>
 
 ### UserPolicyChecks
 
@@ -526,7 +526,7 @@ Types:
 
 Methods:
 
-- <code title="get /{account_or_zone}/{account_or_zone_id}/access/apps/{app_id}/user_policy_checks">client.access.applications.userPolicyChecks.<a href="./src/resources/access/applications/user-policy-checks.ts">list</a>(accountOrZone, accountOrZoneId, appId) -> UserPolicyCheckListResponse</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/access/apps/{app_id}/user_policy_checks">client.access.applications.userPolicyChecks.<a href="./src/resources/access/applications/user-policy-checks.ts">list</a>(appId, { ...params }) -> UserPolicyCheckListResponse</code>
 
 ### Policies
 
@@ -540,11 +540,11 @@ Types:
 
 Methods:
 
-- <code title="post /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid}/policies">client.access.applications.policies.<a href="./src/resources/access/applications/policies.ts">create</a>(accountOrZone, accountOrZoneId, uuid, { ...params }) -> PolicyCreateResponse</code>
-- <code title="put /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid1}/policies/{uuid}">client.access.applications.policies.<a href="./src/resources/access/applications/policies.ts">update</a>(accountOrZone, accountOrZoneId, uuid1, uuid, { ...params }) -> PolicyUpdateResponse</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid}/policies">client.access.applications.policies.<a href="./src/resources/access/applications/policies.ts">list</a>(accountOrZone, accountOrZoneId, uuid) -> PolicyListResponse | null</code>
-- <code title="delete /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid1}/policies/{uuid}">client.access.applications.policies.<a href="./src/resources/access/applications/policies.ts">delete</a>(accountOrZone, accountOrZoneId, uuid1, uuid) -> PolicyDeleteResponse</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid1}/policies/{uuid}">client.access.applications.policies.<a href="./src/resources/access/applications/policies.ts">get</a>(accountOrZone, accountOrZoneId, uuid1, uuid) -> PolicyGetResponse</code>
+- <code title="post /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid}/policies">client.access.applications.policies.<a href="./src/resources/access/applications/policies.ts">create</a>(uuid, { ...params }) -> PolicyCreateResponse</code>
+- <code title="put /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid1}/policies/{uuid}">client.access.applications.policies.<a href="./src/resources/access/applications/policies.ts">update</a>(uuid1, uuid, { ...params }) -> PolicyUpdateResponse</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid}/policies">client.access.applications.policies.<a href="./src/resources/access/applications/policies.ts">list</a>(uuid, { ...params }) -> PolicyListResponse | null</code>
+- <code title="delete /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid1}/policies/{uuid}">client.access.applications.policies.<a href="./src/resources/access/applications/policies.ts">delete</a>(uuid1, uuid, { ...params }) -> PolicyDeleteResponse</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid1}/policies/{uuid}">client.access.applications.policies.<a href="./src/resources/access/applications/policies.ts">get</a>(uuid1, uuid, { ...params }) -> PolicyGetResponse</code>
 
 ## Certificates
 
@@ -558,11 +558,11 @@ Types:
 
 Methods:
 
-- <code title="post /{account_or_zone}/{account_or_zone_id}/access/certificates">client.access.certificates.<a href="./src/resources/access/certificates/certificates.ts">create</a>(accountOrZone, accountOrZoneId, { ...params }) -> CertificateCreateResponse</code>
-- <code title="put /{account_or_zone}/{account_or_zone_id}/access/certificates/{uuid}">client.access.certificates.<a href="./src/resources/access/certificates/certificates.ts">update</a>(accountOrZone, accountOrZoneId, uuid, { ...params }) -> CertificateUpdateResponse</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/access/certificates">client.access.certificates.<a href="./src/resources/access/certificates/certificates.ts">list</a>(accountOrZone, accountOrZoneId) -> CertificateListResponse | null</code>
-- <code title="delete /{account_or_zone}/{account_or_zone_id}/access/certificates/{uuid}">client.access.certificates.<a href="./src/resources/access/certificates/certificates.ts">delete</a>(accountOrZone, accountOrZoneId, uuid) -> CertificateDeleteResponse</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/access/certificates/{uuid}">client.access.certificates.<a href="./src/resources/access/certificates/certificates.ts">get</a>(accountOrZone, accountOrZoneId, uuid) -> CertificateGetResponse</code>
+- <code title="post /{account_or_zone}/{account_or_zone_id}/access/certificates">client.access.certificates.<a href="./src/resources/access/certificates/certificates.ts">create</a>({ ...params }) -> CertificateCreateResponse</code>
+- <code title="put /{account_or_zone}/{account_or_zone_id}/access/certificates/{uuid}">client.access.certificates.<a href="./src/resources/access/certificates/certificates.ts">update</a>(uuid, { ...params }) -> CertificateUpdateResponse</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/access/certificates">client.access.certificates.<a href="./src/resources/access/certificates/certificates.ts">list</a>({ ...params }) -> CertificateListResponse | null</code>
+- <code title="delete /{account_or_zone}/{account_or_zone_id}/access/certificates/{uuid}">client.access.certificates.<a href="./src/resources/access/certificates/certificates.ts">delete</a>(uuid, { ...params }) -> CertificateDeleteResponse</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/access/certificates/{uuid}">client.access.certificates.<a href="./src/resources/access/certificates/certificates.ts">get</a>(uuid, { ...params }) -> CertificateGetResponse</code>
 
 ### Settings
 
@@ -573,8 +573,8 @@ Types:
 
 Methods:
 
-- <code title="put /{account_or_zone}/{account_or_zone_id}/access/certificates/settings">client.access.certificates.settings.<a href="./src/resources/access/certificates/settings.ts">update</a>(accountOrZone, accountOrZoneId, { ...params }) -> SettingUpdateResponse | null</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/access/certificates/settings">client.access.certificates.settings.<a href="./src/resources/access/certificates/settings.ts">list</a>(accountOrZone, accountOrZoneId) -> SettingListResponse | null</code>
+- <code title="put /{account_or_zone}/{account_or_zone_id}/access/certificates/settings">client.access.certificates.settings.<a href="./src/resources/access/certificates/settings.ts">update</a>({ ...params }) -> SettingUpdateResponse | null</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/access/certificates/settings">client.access.certificates.settings.<a href="./src/resources/access/certificates/settings.ts">list</a>({ ...params }) -> SettingListResponse | null</code>
 
 ## Groups
 
@@ -588,11 +588,11 @@ Types:
 
 Methods:
 
-- <code title="post /{account_or_zone}/{account_or_zone_id}/access/groups">client.access.groups.<a href="./src/resources/access/groups.ts">create</a>(accountOrZone, accountOrZoneId, { ...params }) -> GroupCreateResponse</code>
-- <code title="put /{account_or_zone}/{account_or_zone_id}/access/groups/{uuid}">client.access.groups.<a href="./src/resources/access/groups.ts">update</a>(accountOrZone, accountOrZoneId, uuid, { ...params }) -> GroupUpdateResponse</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/access/groups">client.access.groups.<a href="./src/resources/access/groups.ts">list</a>(accountOrZone, accountOrZoneId) -> GroupListResponse | null</code>
-- <code title="delete /{account_or_zone}/{account_or_zone_id}/access/groups/{uuid}">client.access.groups.<a href="./src/resources/access/groups.ts">delete</a>(accountOrZone, accountOrZoneId, uuid) -> GroupDeleteResponse</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/access/groups/{uuid}">client.access.groups.<a href="./src/resources/access/groups.ts">get</a>(accountOrZone, accountOrZoneId, uuid) -> GroupGetResponse</code>
+- <code title="post /{account_or_zone}/{account_or_zone_id}/access/groups">client.access.groups.<a href="./src/resources/access/groups.ts">create</a>({ ...params }) -> GroupCreateResponse</code>
+- <code title="put /{account_or_zone}/{account_or_zone_id}/access/groups/{uuid}">client.access.groups.<a href="./src/resources/access/groups.ts">update</a>(uuid, { ...params }) -> GroupUpdateResponse</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/access/groups">client.access.groups.<a href="./src/resources/access/groups.ts">list</a>({ ...params }) -> GroupListResponse | null</code>
+- <code title="delete /{account_or_zone}/{account_or_zone_id}/access/groups/{uuid}">client.access.groups.<a href="./src/resources/access/groups.ts">delete</a>(uuid, { ...params }) -> GroupDeleteResponse</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/access/groups/{uuid}">client.access.groups.<a href="./src/resources/access/groups.ts">get</a>(uuid, { ...params }) -> GroupGetResponse</code>
 
 ## IdentityProviders
 
@@ -606,11 +606,11 @@ Types:
 
 Methods:
 
-- <code title="post /{account_or_zone}/{account_or_zone_id}/access/identity_providers">client.access.identityProviders.<a href="./src/resources/access/identity-providers.ts">create</a>(accountOrZone, accountOrZoneId, { ...params }) -> IdentityProviderCreateResponse</code>
-- <code title="put /{account_or_zone}/{account_or_zone_id}/access/identity_providers/{uuid}">client.access.identityProviders.<a href="./src/resources/access/identity-providers.ts">update</a>(accountOrZone, accountOrZoneId, uuid, { ...params }) -> IdentityProviderUpdateResponse</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/access/identity_providers">client.access.identityProviders.<a href="./src/resources/access/identity-providers.ts">list</a>(accountOrZone, accountOrZoneId) -> IdentityProviderListResponse | null</code>
-- <code title="delete /{account_or_zone}/{account_or_zone_id}/access/identity_providers/{uuid}">client.access.identityProviders.<a href="./src/resources/access/identity-providers.ts">delete</a>(accountOrZone, accountOrZoneId, uuid) -> IdentityProviderDeleteResponse</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/access/identity_providers/{uuid}">client.access.identityProviders.<a href="./src/resources/access/identity-providers.ts">get</a>(accountOrZone, accountOrZoneId, uuid) -> IdentityProviderGetResponse</code>
+- <code title="post /{account_or_zone}/{account_or_zone_id}/access/identity_providers">client.access.identityProviders.<a href="./src/resources/access/identity-providers.ts">create</a>({ ...params }) -> IdentityProviderCreateResponse</code>
+- <code title="put /{account_or_zone}/{account_or_zone_id}/access/identity_providers/{uuid}">client.access.identityProviders.<a href="./src/resources/access/identity-providers.ts">update</a>(uuid, { ...params }) -> IdentityProviderUpdateResponse</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/access/identity_providers">client.access.identityProviders.<a href="./src/resources/access/identity-providers.ts">list</a>({ ...params }) -> IdentityProviderListResponse | null</code>
+- <code title="delete /{account_or_zone}/{account_or_zone_id}/access/identity_providers/{uuid}">client.access.identityProviders.<a href="./src/resources/access/identity-providers.ts">delete</a>(uuid, { ...params }) -> IdentityProviderDeleteResponse</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/access/identity_providers/{uuid}">client.access.identityProviders.<a href="./src/resources/access/identity-providers.ts">get</a>(uuid, { ...params }) -> IdentityProviderGetResponse</code>
 
 ## Organizations
 
@@ -623,10 +623,10 @@ Types:
 
 Methods:
 
-- <code title="post /{account_or_zone}/{account_or_zone_id}/access/organizations">client.access.organizations.<a href="./src/resources/access/organizations.ts">create</a>(accountOrZone, accountOrZoneId, { ...params }) -> OrganizationCreateResponse</code>
-- <code title="put /{account_or_zone}/{account_or_zone_id}/access/organizations">client.access.organizations.<a href="./src/resources/access/organizations.ts">update</a>(accountOrZone, accountOrZoneId, { ...params }) -> OrganizationUpdateResponse</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/access/organizations">client.access.organizations.<a href="./src/resources/access/organizations.ts">list</a>(accountOrZone, accountOrZoneId) -> OrganizationListResponse</code>
-- <code title="post /{account_or_zone}/{account_or_zone_id}/access/organizations/revoke_user">client.access.organizations.<a href="./src/resources/access/organizations.ts">revokeUsers</a>(accountOrZone, accountOrZoneId, { ...params }) -> OrganizationRevokeUsersResponse</code>
+- <code title="post /{account_or_zone}/{account_or_zone_id}/access/organizations">client.access.organizations.<a href="./src/resources/access/organizations.ts">create</a>({ ...params }) -> OrganizationCreateResponse</code>
+- <code title="put /{account_or_zone}/{account_or_zone_id}/access/organizations">client.access.organizations.<a href="./src/resources/access/organizations.ts">update</a>({ ...params }) -> OrganizationUpdateResponse</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/access/organizations">client.access.organizations.<a href="./src/resources/access/organizations.ts">list</a>({ ...params }) -> OrganizationListResponse</code>
+- <code title="post /{account_or_zone}/{account_or_zone_id}/access/organizations/revoke_user">client.access.organizations.<a href="./src/resources/access/organizations.ts">revokeUsers</a>({ ...params }) -> OrganizationRevokeUsersResponse</code>
 
 ## ServiceTokens
 
@@ -641,10 +641,10 @@ Types:
 
 Methods:
 
-- <code title="post /{account_or_zone}/{account_or_zone_id}/access/service_tokens">client.access.serviceTokens.<a href="./src/resources/access/service-tokens.ts">create</a>(accountOrZone, accountOrZoneId, { ...params }) -> ServiceTokenCreateResponse</code>
-- <code title="put /{account_or_zone}/{account_or_zone_id}/access/service_tokens/{uuid}">client.access.serviceTokens.<a href="./src/resources/access/service-tokens.ts">update</a>(accountOrZone, accountOrZoneId, uuid, { ...params }) -> ServiceTokenUpdateResponse</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/access/service_tokens">client.access.serviceTokens.<a href="./src/resources/access/service-tokens.ts">list</a>(accountOrZone, accountOrZoneId) -> ServiceTokenListResponse | null</code>
-- <code title="delete /{account_or_zone}/{account_or_zone_id}/access/service_tokens/{uuid}">client.access.serviceTokens.<a href="./src/resources/access/service-tokens.ts">delete</a>(accountOrZone, accountOrZoneId, uuid) -> ServiceTokenDeleteResponse</code>
+- <code title="post /{account_or_zone}/{account_or_zone_id}/access/service_tokens">client.access.serviceTokens.<a href="./src/resources/access/service-tokens.ts">create</a>({ ...params }) -> ServiceTokenCreateResponse</code>
+- <code title="put /{account_or_zone}/{account_or_zone_id}/access/service_tokens/{uuid}">client.access.serviceTokens.<a href="./src/resources/access/service-tokens.ts">update</a>(uuid, { ...params }) -> ServiceTokenUpdateResponse</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/access/service_tokens">client.access.serviceTokens.<a href="./src/resources/access/service-tokens.ts">list</a>({ ...params }) -> ServiceTokenListResponse | null</code>
+- <code title="delete /{account_or_zone}/{account_or_zone_id}/access/service_tokens/{uuid}">client.access.serviceTokens.<a href="./src/resources/access/service-tokens.ts">delete</a>(uuid, { ...params }) -> ServiceTokenDeleteResponse</code>
 - <code title="post /accounts/{identifier}/access/service_tokens/{uuid}/refresh">client.access.serviceTokens.<a href="./src/resources/access/service-tokens.ts">refresh</a>(identifier, uuid) -> ServiceTokenRefreshResponse</code>
 - <code title="post /accounts/{identifier}/access/service_tokens/{uuid}/rotate">client.access.serviceTokens.<a href="./src/resources/access/service-tokens.ts">rotate</a>(identifier, uuid) -> ServiceTokenRotateResponse</code>
 
@@ -810,17 +810,17 @@ Methods:
 
 - <code title="post /zones/{zone_id}/purge_cache">client.cache.<a href="./src/resources/cache/cache.ts">purge</a>(zoneId, { ...params }) -> CachePurgeResponse | null</code>
 
-## CacheReserves
+## CacheReserve
 
 Types:
 
-- <code><a href="./src/resources/cache/cache-reserves.ts">CacheReserveListResponse</a></code>
-- <code><a href="./src/resources/cache/cache-reserves.ts">CacheReserveEditResponse</a></code>
+- <code><a href="./src/resources/cache/cache-reserve.ts">CacheReserveListResponse</a></code>
+- <code><a href="./src/resources/cache/cache-reserve.ts">CacheReserveEditResponse</a></code>
 
 Methods:
 
-- <code title="get /zones/{zone_id}/cache/cache_reserve">client.cache.cacheReserves.<a href="./src/resources/cache/cache-reserves.ts">list</a>(zoneId) -> CacheReserveListResponse</code>
-- <code title="patch /zones/{zone_id}/cache/cache_reserve">client.cache.cacheReserves.<a href="./src/resources/cache/cache-reserves.ts">edit</a>(zoneId, { ...params }) -> CacheReserveEditResponse</code>
+- <code title="get /zones/{zone_id}/cache/cache_reserve">client.cache.cacheReserve.<a href="./src/resources/cache/cache-reserve.ts">list</a>(zoneId) -> CacheReserveListResponse</code>
+- <code title="patch /zones/{zone_id}/cache/cache_reserve">client.cache.cacheReserve.<a href="./src/resources/cache/cache-reserve.ts">edit</a>(zoneId, { ...params }) -> CacheReserveEditResponse</code>
 
 ## TieredCacheSmartTopology
 
@@ -1332,11 +1332,11 @@ Types:
 
 Methods:
 
-- <code title="post /{account_or_zone}/{account_or_zone_id}/firewall/access_rules/rules">client.firewalls.accessRules.<a href="./src/resources/firewalls/access-rules.ts">create</a>(accountOrZone, accountOrZoneId, { ...params }) -> AccessRuleCreateResponse | null</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/firewall/access_rules/rules">client.firewalls.accessRules.<a href="./src/resources/firewalls/access-rules.ts">list</a>(accountOrZone, accountOrZoneId, { ...params }) -> AccessRuleListResponsesV4PagePaginationArray</code>
-- <code title="delete /{account_or_zone}/{account_or_zone_id}/firewall/access_rules/rules/{identifier}">client.firewalls.accessRules.<a href="./src/resources/firewalls/access-rules.ts">delete</a>(accountOrZone, accountOrZoneId, identifier) -> AccessRuleDeleteResponse | null</code>
+- <code title="post /{account_or_zone}/{account_or_zone_id}/firewall/access_rules/rules">client.firewalls.accessRules.<a href="./src/resources/firewalls/access-rules.ts">create</a>({ ...params }) -> AccessRuleCreateResponse | null</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/firewall/access_rules/rules">client.firewalls.accessRules.<a href="./src/resources/firewalls/access-rules.ts">list</a>({ ...params }) -> AccessRuleListResponsesV4PagePaginationArray</code>
+- <code title="delete /{account_or_zone}/{account_or_zone_id}/firewall/access_rules/rules/{identifier}">client.firewalls.accessRules.<a href="./src/resources/firewalls/access-rules.ts">delete</a>(identifier, { ...params }) -> AccessRuleDeleteResponse | null</code>
 - <code title="patch /{account_or_zone}/{account_or_zone_id}/firewall/access_rules/rules/{identifier}">client.firewalls.accessRules.<a href="./src/resources/firewalls/access-rules.ts">edit</a>(identifier, { ...params }) -> AccessRuleEditResponse | null</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/firewall/access_rules/rules/{identifier}">client.firewalls.accessRules.<a href="./src/resources/firewalls/access-rules.ts">get</a>(accountOrZone, accountOrZoneId, identifier) -> AccessRuleGetResponse | null</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/firewall/access_rules/rules/{identifier}">client.firewalls.accessRules.<a href="./src/resources/firewalls/access-rules.ts">get</a>(identifier, { ...params }) -> AccessRuleGetResponse | null</code>
 
 ## UaRules
 
@@ -1478,7 +1478,7 @@ Types:
 
 Methods:
 
-- <code title="get /{account_or_zone}/{account_or_zone_id}/logpush/datasets/{dataset_id}/fields">client.logpush.datasets.fields.<a href="./src/resources/logpush/datasets/fields.ts">list</a>(accountOrZone, accountOrZoneId, datasetId) -> FieldListResponse</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/logpush/datasets/{dataset_id}/fields">client.logpush.datasets.fields.<a href="./src/resources/logpush/datasets/fields.ts">list</a>(datasetId, { ...params }) -> FieldListResponse</code>
 
 ### Jobs
 
@@ -1488,7 +1488,7 @@ Types:
 
 Methods:
 
-- <code title="get /{account_or_zone}/{account_or_zone_id}/logpush/datasets/{dataset_id}/jobs">client.logpush.datasets.jobs.<a href="./src/resources/logpush/datasets/jobs.ts">list</a>(accountOrZone, accountOrZoneId, datasetId) -> JobListResponse</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/logpush/datasets/{dataset_id}/jobs">client.logpush.datasets.jobs.<a href="./src/resources/logpush/datasets/jobs.ts">list</a>(datasetId, { ...params }) -> JobListResponse</code>
 
 ## Edge
 
@@ -1514,11 +1514,11 @@ Types:
 
 Methods:
 
-- <code title="post /{account_or_zone}/{account_or_zone_id}/logpush/jobs">client.logpush.jobs.<a href="./src/resources/logpush/jobs.ts">create</a>(accountOrZone, accountOrZoneId, { ...params }) -> JobCreateResponse | null</code>
-- <code title="put /{account_or_zone}/{account_or_zone_id}/logpush/jobs/{job_id}">client.logpush.jobs.<a href="./src/resources/logpush/jobs.ts">update</a>(accountOrZone, accountOrZoneId, jobId, { ...params }) -> JobUpdateResponse | null</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/logpush/jobs">client.logpush.jobs.<a href="./src/resources/logpush/jobs.ts">list</a>(accountOrZone, accountOrZoneId) -> JobListResponse</code>
-- <code title="delete /{account_or_zone}/{account_or_zone_id}/logpush/jobs/{job_id}">client.logpush.jobs.<a href="./src/resources/logpush/jobs.ts">delete</a>(accountOrZone, accountOrZoneId, jobId) -> JobDeleteResponse | null</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/logpush/jobs/{job_id}">client.logpush.jobs.<a href="./src/resources/logpush/jobs.ts">get</a>(accountOrZone, accountOrZoneId, jobId) -> JobGetResponse | null</code>
+- <code title="post /{account_or_zone}/{account_or_zone_id}/logpush/jobs">client.logpush.jobs.<a href="./src/resources/logpush/jobs.ts">create</a>({ ...params }) -> JobCreateResponse | null</code>
+- <code title="put /{account_or_zone}/{account_or_zone_id}/logpush/jobs/{job_id}">client.logpush.jobs.<a href="./src/resources/logpush/jobs.ts">update</a>(jobId, { ...params }) -> JobUpdateResponse | null</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/logpush/jobs">client.logpush.jobs.<a href="./src/resources/logpush/jobs.ts">list</a>({ ...params }) -> JobListResponse</code>
+- <code title="delete /{account_or_zone}/{account_or_zone_id}/logpush/jobs/{job_id}">client.logpush.jobs.<a href="./src/resources/logpush/jobs.ts">delete</a>(jobId, { ...params }) -> JobDeleteResponse | null</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/logpush/jobs/{job_id}">client.logpush.jobs.<a href="./src/resources/logpush/jobs.ts">get</a>(jobId, { ...params }) -> JobGetResponse | null</code>
 
 ## Ownership
 
@@ -1529,8 +1529,8 @@ Types:
 
 Methods:
 
-- <code title="post /{account_or_zone}/{account_or_zone_id}/logpush/ownership">client.logpush.ownership.<a href="./src/resources/logpush/ownership.ts">create</a>(accountOrZone, accountOrZoneId, { ...params }) -> OwnershipCreateResponse | null</code>
-- <code title="post /{account_or_zone}/{account_or_zone_id}/logpush/ownership/validate">client.logpush.ownership.<a href="./src/resources/logpush/ownership.ts">validate</a>(accountOrZone, accountOrZoneId, { ...params }) -> OwnershipValidateResponse | null</code>
+- <code title="post /{account_or_zone}/{account_or_zone_id}/logpush/ownership">client.logpush.ownership.<a href="./src/resources/logpush/ownership.ts">create</a>({ ...params }) -> OwnershipCreateResponse | null</code>
+- <code title="post /{account_or_zone}/{account_or_zone_id}/logpush/ownership/validate">client.logpush.ownership.<a href="./src/resources/logpush/ownership.ts">validate</a>({ ...params }) -> OwnershipValidateResponse | null</code>
 
 ## Validate
 
@@ -1541,8 +1541,8 @@ Types:
 
 Methods:
 
-- <code title="post /{account_or_zone}/{account_or_zone_id}/logpush/validate/destination/exists">client.logpush.validate.<a href="./src/resources/logpush/validate.ts">destination</a>(accountOrZone, accountOrZoneId, { ...params }) -> ValidateDestinationResponse | null</code>
-- <code title="post /{account_or_zone}/{account_or_zone_id}/logpush/validate/origin">client.logpush.validate.<a href="./src/resources/logpush/validate.ts">origin</a>(accountOrZone, accountOrZoneId, { ...params }) -> ValidateOriginResponse | null</code>
+- <code title="post /{account_or_zone}/{account_or_zone_id}/logpush/validate/destination/exists">client.logpush.validate.<a href="./src/resources/logpush/validate.ts">destination</a>({ ...params }) -> ValidateDestinationResponse | null</code>
+- <code title="post /{account_or_zone}/{account_or_zone_id}/logpush/validate/origin">client.logpush.validate.<a href="./src/resources/logpush/validate.ts">origin</a>({ ...params }) -> ValidateOriginResponse | null</code>
 
 # Logs
 
@@ -2925,11 +2925,11 @@ Types:
 
 Methods:
 
-- <code title="post /{account_or_zone}/{account_or_zone_id}/rulesets">client.rulesets.<a href="./src/resources/rulesets/rulesets.ts">create</a>(accountOrZone, accountOrZoneId, { ...params }) -> RulesetCreateResponse</code>
-- <code title="put /{account_or_zone}/{account_or_zone_id}/rulesets/{ruleset_id}">client.rulesets.<a href="./src/resources/rulesets/rulesets.ts">update</a>(accountOrZone, accountOrZoneId, rulesetId, { ...params }) -> RulesetUpdateResponse</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/rulesets">client.rulesets.<a href="./src/resources/rulesets/rulesets.ts">list</a>(accountOrZone, accountOrZoneId) -> RulesetListResponse</code>
-- <code title="delete /{account_or_zone}/{account_or_zone_id}/rulesets/{ruleset_id}">client.rulesets.<a href="./src/resources/rulesets/rulesets.ts">delete</a>(accountOrZone, accountOrZoneId, rulesetId) -> void</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/rulesets/{ruleset_id}">client.rulesets.<a href="./src/resources/rulesets/rulesets.ts">get</a>(accountOrZone, accountOrZoneId, rulesetId) -> RulesetGetResponse</code>
+- <code title="post /{account_or_zone}/{account_or_zone_id}/rulesets">client.rulesets.<a href="./src/resources/rulesets/rulesets.ts">create</a>({ ...params }) -> RulesetCreateResponse</code>
+- <code title="put /{account_or_zone}/{account_or_zone_id}/rulesets/{ruleset_id}">client.rulesets.<a href="./src/resources/rulesets/rulesets.ts">update</a>(rulesetId, { ...params }) -> RulesetUpdateResponse</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/rulesets">client.rulesets.<a href="./src/resources/rulesets/rulesets.ts">list</a>({ ...params }) -> RulesetListResponse</code>
+- <code title="delete /{account_or_zone}/{account_or_zone_id}/rulesets/{ruleset_id}">client.rulesets.<a href="./src/resources/rulesets/rulesets.ts">delete</a>(rulesetId, { ...params }) -> void</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/rulesets/{ruleset_id}">client.rulesets.<a href="./src/resources/rulesets/rulesets.ts">get</a>(rulesetId, { ...params }) -> RulesetGetResponse</code>
 
 ## Phases
 
@@ -2939,7 +2939,7 @@ Types:
 
 Methods:
 
-- <code title="get /{account_or_zone}/{account_or_zone_id}/rulesets/phases/{ruleset_phase}/entrypoint">client.rulesets.phases.<a href="./src/resources/rulesets/phases.ts">get</a>(accountOrZone, accountOrZoneId, rulesetPhase) -> PhaseGetResponse</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/rulesets/phases/{ruleset_phase}/entrypoint">client.rulesets.phases.<a href="./src/resources/rulesets/phases.ts">get</a>(rulesetPhase, { ...params }) -> PhaseGetResponse</code>
 
 ## Rules
 
@@ -2951,8 +2951,8 @@ Types:
 
 Methods:
 
-- <code title="post /{account_or_zone}/{account_or_zone_id}/rulesets/{ruleset_id}/rules">client.rulesets.rules.<a href="./src/resources/rulesets/rules.ts">create</a>(accountOrZone, accountOrZoneId, rulesetId, { ...params }) -> RuleCreateResponse</code>
-- <code title="delete /{account_or_zone}/{account_or_zone_id}/rulesets/{ruleset_id}/rules/{rule_id}">client.rulesets.rules.<a href="./src/resources/rulesets/rules.ts">delete</a>(accountOrZone, accountOrZoneId, rulesetId, ruleId) -> RuleDeleteResponse</code>
+- <code title="post /{account_or_zone}/{account_or_zone_id}/rulesets/{ruleset_id}/rules">client.rulesets.rules.<a href="./src/resources/rulesets/rules.ts">create</a>(rulesetId, { ...params }) -> RuleCreateResponse</code>
+- <code title="delete /{account_or_zone}/{account_or_zone_id}/rulesets/{ruleset_id}/rules/{rule_id}">client.rulesets.rules.<a href="./src/resources/rulesets/rules.ts">delete</a>(rulesetId, ruleId, { ...params }) -> RuleDeleteResponse</code>
 - <code title="patch /{account_or_zone}/{account_or_zone_id}/rulesets/{ruleset_id}/rules/{rule_id}">client.rulesets.rules.<a href="./src/resources/rulesets/rules.ts">edit</a>(rulesetId, ruleId, { ...params }) -> RuleEditResponse</code>
 
 ## Versions
@@ -2964,9 +2964,9 @@ Types:
 
 Methods:
 
-- <code title="get /{account_or_zone}/{account_or_zone_id}/rulesets/{ruleset_id}/versions">client.rulesets.versions.<a href="./src/resources/rulesets/versions/versions.ts">list</a>(accountOrZone, accountOrZoneId, rulesetId) -> VersionListResponse</code>
-- <code title="delete /{account_or_zone}/{account_or_zone_id}/rulesets/{ruleset_id}/versions/{ruleset_version}">client.rulesets.versions.<a href="./src/resources/rulesets/versions/versions.ts">delete</a>(accountOrZone, accountOrZoneId, rulesetId, rulesetVersion) -> void</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/rulesets/{ruleset_id}/versions/{ruleset_version}">client.rulesets.versions.<a href="./src/resources/rulesets/versions/versions.ts">get</a>(accountOrZone, accountOrZoneId, rulesetId, rulesetVersion) -> VersionGetResponse</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/rulesets/{ruleset_id}/versions">client.rulesets.versions.<a href="./src/resources/rulesets/versions/versions.ts">list</a>(rulesetId, { ...params }) -> VersionListResponse</code>
+- <code title="delete /{account_or_zone}/{account_or_zone_id}/rulesets/{ruleset_id}/versions/{ruleset_version}">client.rulesets.versions.<a href="./src/resources/rulesets/versions/versions.ts">delete</a>(rulesetId, rulesetVersion, { ...params }) -> void</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/rulesets/{ruleset_id}/versions/{ruleset_version}">client.rulesets.versions.<a href="./src/resources/rulesets/versions/versions.ts">get</a>(rulesetId, rulesetVersion, { ...params }) -> VersionGetResponse</code>
 
 ### ByTags
 
@@ -4937,6 +4937,20 @@ Methods:
 - <code title="delete /accounts/{account_id}/r2/buckets/{bucket_name}">client.r2.buckets.<a href="./src/resources/r2/buckets.ts">delete</a>(accountId, bucketName) -> BucketDeleteResponse</code>
 - <code title="get /accounts/{account_id}/r2/buckets/{bucket_name}">client.r2.buckets.<a href="./src/resources/r2/buckets.ts">get</a>(accountId, bucketName) -> BucketGetResponse</code>
 
+## Sippy
+
+Types:
+
+- <code><a href="./src/resources/r2/sippy.ts">SippyUpdateResponse</a></code>
+- <code><a href="./src/resources/r2/sippy.ts">SippyDeleteResponse</a></code>
+- <code><a href="./src/resources/r2/sippy.ts">SippyGetResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/r2/buckets/{bucket_name}/sippy">client.r2.sippy.<a href="./src/resources/r2/sippy.ts">update</a>(accountId, bucketName, { ...params }) -> SippyUpdateResponse</code>
+- <code title="delete /accounts/{account_id}/r2/buckets/{bucket_name}/sippy">client.r2.sippy.<a href="./src/resources/r2/sippy.ts">delete</a>(accountId, bucketName) -> SippyDeleteResponse</code>
+- <code title="get /accounts/{account_id}/r2/buckets/{bucket_name}/sippy">client.r2.sippy.<a href="./src/resources/r2/sippy.ts">get</a>(accountId, bucketName) -> SippyGetResponse</code>
+
 # Teamnet
 
 ## Routes
@@ -5253,45 +5267,31 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/radar/annotations/outages/outages.ts">OutageListResponse</a></code>
+- <code><a href="./src/resources/radar/annotations/outages.ts">OutageLocationsResponse</a></code>
 
 Methods:
 
-- <code title="get /radar/annotations/outages">client.radar.annotations.outages.<a href="./src/resources/radar/annotations/outages/outages.ts">list</a>({ ...params }) -> OutageListResponse</code>
-
-#### Locations
-
-Types:
-
-- <code><a href="./src/resources/radar/annotations/outages/locations.ts">LocationListResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/annotations/outages/locations">client.radar.annotations.outages.locations.<a href="./src/resources/radar/annotations/outages/locations.ts">list</a>({ ...params }) -> LocationListResponse</code>
+- <code title="get /radar/annotations/outages/locations">client.radar.annotations.outages.<a href="./src/resources/radar/annotations/outages.ts">locations</a>({ ...params }) -> OutageLocationsResponse</code>
 
 ## BGP
 
+Types:
+
+- <code><a href="./src/resources/radar/bgp/bgp.ts">BGPTimeseriesResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/bgp/timeseries">client.radar.bgp.<a href="./src/resources/radar/bgp/bgp.ts">timeseries</a>({ ...params }) -> BGPTimeseriesResponse</code>
+
 ### Leaks
 
-#### Events
-
 Types:
 
-- <code><a href="./src/resources/radar/bgp/leaks/events.ts">EventListResponse</a></code>
+- <code><a href="./src/resources/radar/bgp/leaks.ts">LeakEventsResponse</a></code>
 
 Methods:
 
-- <code title="get /radar/bgp/leaks/events">client.radar.bgp.leaks.events.<a href="./src/resources/radar/bgp/leaks/events.ts">list</a>({ ...params }) -> EventListResponsesV4PagePagination</code>
-
-### Timeseries
-
-Types:
-
-- <code><a href="./src/resources/radar/bgp/timeseries.ts">TimeseryListResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/bgp/timeseries">client.radar.bgp.timeseries.<a href="./src/resources/radar/bgp/timeseries.ts">list</a>({ ...params }) -> TimeseryListResponse</code>
+- <code title="get /radar/bgp/leaks/events">client.radar.bgp.leaks.<a href="./src/resources/radar/bgp/leaks.ts">events</a>({ ...params }) -> LeakEventsResponse</code>
 
 ### Tops
 
@@ -5299,579 +5299,669 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/radar/bgp/tops/ases/ases.ts">AseListResponse</a></code>
+- <code><a href="./src/resources/radar/bgp/tops/ases.ts">AsePrefixesResponse</a></code>
 
 Methods:
 
-- <code title="get /radar/bgp/top/ases">client.radar.bgp.tops.ases.<a href="./src/resources/radar/bgp/tops/ases/ases.ts">list</a>({ ...params }) -> AseListResponse</code>
-
-##### Prefixes
-
-Types:
-
-- <code><a href="./src/resources/radar/bgp/tops/ases/prefixes.ts">PrefixListResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/bgp/top/ases/prefixes">client.radar.bgp.tops.ases.prefixes.<a href="./src/resources/radar/bgp/tops/ases/prefixes.ts">list</a>({ ...params }) -> PrefixListResponse</code>
-
-#### Prefixes
-
-Types:
-
-- <code><a href="./src/resources/radar/bgp/tops/prefixes.ts">PrefixListResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/bgp/top/prefixes">client.radar.bgp.tops.prefixes.<a href="./src/resources/radar/bgp/tops/prefixes.ts">list</a>({ ...params }) -> PrefixListResponse</code>
+- <code title="get /radar/bgp/top/ases/prefixes">client.radar.bgp.tops.ases.<a href="./src/resources/radar/bgp/tops/ases.ts">prefixes</a>({ ...params }) -> AsePrefixesResponse</code>
 
 ### Hijacks
 
 Types:
 
-- <code><a href="./src/resources/radar/bgp/hijacks.ts">HijackListResponse</a></code>
+- <code><a href="./src/resources/radar/bgp/hijacks.ts">HijackEventsResponse</a></code>
 
 Methods:
 
-- <code title="get /radar/bgp/hijacks/events">client.radar.bgp.hijacks.<a href="./src/resources/radar/bgp/hijacks.ts">list</a>({ ...params }) -> HijackListResponsesV4PagePagination</code>
+- <code title="get /radar/bgp/hijacks/events">client.radar.bgp.hijacks.<a href="./src/resources/radar/bgp/hijacks.ts">events</a>({ ...params }) -> HijackEventsResponse</code>
 
 ### Routes
 
-#### Moas
-
 Types:
 
-- <code><a href="./src/resources/radar/bgp/routes/moas.ts">MoaListResponse</a></code>
+- <code><a href="./src/resources/radar/bgp/routes.ts">RouteMoasResponse</a></code>
+- <code><a href="./src/resources/radar/bgp/routes.ts">RoutePfx2asResponse</a></code>
+- <code><a href="./src/resources/radar/bgp/routes.ts">RouteStatsResponse</a></code>
 
 Methods:
 
-- <code title="get /radar/bgp/routes/moas">client.radar.bgp.routes.moas.<a href="./src/resources/radar/bgp/routes/moas.ts">list</a>({ ...params }) -> MoaListResponse</code>
-
-#### Pfx2as
-
-Types:
-
-- <code><a href="./src/resources/radar/bgp/routes/pfx2as.ts">Pfx2aListResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/bgp/routes/pfx2as">client.radar.bgp.routes.pfx2as.<a href="./src/resources/radar/bgp/routes/pfx2as.ts">list</a>({ ...params }) -> Pfx2aListResponse</code>
-
-#### Stats
-
-Types:
-
-- <code><a href="./src/resources/radar/bgp/routes/stats.ts">StatListResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/bgp/routes/stats">client.radar.bgp.routes.stats.<a href="./src/resources/radar/bgp/routes/stats.ts">list</a>({ ...params }) -> StatListResponse</code>
+- <code title="get /radar/bgp/routes/moas">client.radar.bgp.routes.<a href="./src/resources/radar/bgp/routes.ts">moas</a>({ ...params }) -> RouteMoasResponse</code>
+- <code title="get /radar/bgp/routes/pfx2as">client.radar.bgp.routes.<a href="./src/resources/radar/bgp/routes.ts">pfx2as</a>({ ...params }) -> RoutePfx2asResponse</code>
+- <code title="get /radar/bgp/routes/stats">client.radar.bgp.routes.<a href="./src/resources/radar/bgp/routes.ts">stats</a>({ ...params }) -> RouteStatsResponse</code>
 
 ## Datasets
 
 Types:
 
-- <code><a href="./src/resources/radar/datasets/datasets.ts">DatasetListResponse</a></code>
-- <code><a href="./src/resources/radar/datasets/datasets.ts">DatasetGetResponse</a></code>
+- <code><a href="./src/resources/radar/datasets.ts">DatasetListResponse</a></code>
+- <code><a href="./src/resources/radar/datasets.ts">DatasetDownloadResponse</a></code>
+- <code><a href="./src/resources/radar/datasets.ts">DatasetGetResponse</a></code>
 
 Methods:
 
-- <code title="get /radar/datasets">client.radar.datasets.<a href="./src/resources/radar/datasets/datasets.ts">list</a>({ ...params }) -> DatasetListResponse</code>
-- <code title="get /radar/datasets/{alias}">client.radar.datasets.<a href="./src/resources/radar/datasets/datasets.ts">get</a>(alias, { ...params }) -> string</code>
-
-### Downloads
-
-Types:
-
-- <code><a href="./src/resources/radar/datasets/downloads.ts">DownloadCreateResponse</a></code>
-
-Methods:
-
-- <code title="post /radar/datasets/download">client.radar.datasets.downloads.<a href="./src/resources/radar/datasets/downloads.ts">create</a>({ ...params }) -> DownloadCreateResponse</code>
+- <code title="get /radar/datasets">client.radar.datasets.<a href="./src/resources/radar/datasets.ts">list</a>({ ...params }) -> DatasetListResponse</code>
+- <code title="post /radar/datasets/download">client.radar.datasets.<a href="./src/resources/radar/datasets.ts">download</a>({ ...params }) -> DatasetDownloadResponse</code>
+- <code title="get /radar/datasets/{alias}">client.radar.datasets.<a href="./src/resources/radar/datasets.ts">get</a>(alias, { ...params }) -> string</code>
 
 ## DNS
 
-### Tops
-
-#### Ases
+### Top
 
 Types:
 
-- <code><a href="./src/resources/radar/dns/tops/ases.ts">AseListResponse</a></code>
+- <code><a href="./src/resources/radar/dns/top.ts">TopAsesResponse</a></code>
+- <code><a href="./src/resources/radar/dns/top.ts">TopLocationsResponse</a></code>
 
 Methods:
 
-- <code title="get /radar/dns/top/ases">client.radar.dns.tops.ases.<a href="./src/resources/radar/dns/tops/ases.ts">list</a>({ ...params }) -> AseListResponse</code>
-
-#### Locations
-
-Types:
-
-- <code><a href="./src/resources/radar/dns/tops/locations.ts">LocationListResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/dns/top/locations">client.radar.dns.tops.locations.<a href="./src/resources/radar/dns/tops/locations.ts">list</a>({ ...params }) -> LocationListResponse</code>
+- <code title="get /radar/dns/top/ases">client.radar.dns.top.<a href="./src/resources/radar/dns/top.ts">ases</a>({ ...params }) -> TopAsesResponse</code>
+- <code title="get /radar/dns/top/locations">client.radar.dns.top.<a href="./src/resources/radar/dns/top.ts">locations</a>({ ...params }) -> TopLocationsResponse</code>
 
 ## Netflows
 
-### Timeseries
-
 Types:
 
-- <code><a href="./src/resources/radar/netflows/timeseries.ts">TimeseryListResponse</a></code>
+- <code><a href="./src/resources/radar/netflows/netflows.ts">NetflowTimeseriesResponse</a></code>
 
 Methods:
 
-- <code title="get /radar/netflows/timeseries">client.radar.netflows.timeseries.<a href="./src/resources/radar/netflows/timeseries.ts">list</a>({ ...params }) -> TimeseryListResponse</code>
+- <code title="get /radar/netflows/timeseries">client.radar.netflows.<a href="./src/resources/radar/netflows/netflows.ts">timeseries</a>({ ...params }) -> NetflowTimeseriesResponse</code>
 
-### Tops
-
-#### Ases
+### Top
 
 Types:
 
-- <code><a href="./src/resources/radar/netflows/tops/ases.ts">AseListResponse</a></code>
+- <code><a href="./src/resources/radar/netflows/top.ts">TopAsesResponse</a></code>
+- <code><a href="./src/resources/radar/netflows/top.ts">TopLocationsResponse</a></code>
 
 Methods:
 
-- <code title="get /radar/netflows/top/ases">client.radar.netflows.tops.ases.<a href="./src/resources/radar/netflows/tops/ases.ts">list</a>({ ...params }) -> AseListResponse</code>
+- <code title="get /radar/netflows/top/ases">client.radar.netflows.top.<a href="./src/resources/radar/netflows/top.ts">ases</a>({ ...params }) -> TopAsesResponse</code>
+- <code title="get /radar/netflows/top/locations">client.radar.netflows.top.<a href="./src/resources/radar/netflows/top.ts">locations</a>({ ...params }) -> TopLocationsResponse</code>
 
-#### Locations
+## Search
 
 Types:
 
-- <code><a href="./src/resources/radar/netflows/tops/locations.ts">LocationListResponse</a></code>
+- <code><a href="./src/resources/radar/search.ts">SearchGlobalResponse</a></code>
 
 Methods:
 
-- <code title="get /radar/netflows/top/locations">client.radar.netflows.tops.locations.<a href="./src/resources/radar/netflows/tops/locations.ts">list</a>({ ...params }) -> LocationListResponse</code>
-
-## Searches
-
-### Globals
-
-Types:
-
-- <code><a href="./src/resources/radar/searches/globals.ts">GlobalListResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/search/global">client.radar.searches.globals.<a href="./src/resources/radar/searches/globals.ts">list</a>({ ...params }) -> GlobalListResponse</code>
+- <code title="get /radar/search/global">client.radar.search.<a href="./src/resources/radar/search.ts">global</a>({ ...params }) -> SearchGlobalResponse</code>
 
 ## VerifiedBots
 
-### Tops
-
-#### Bots
+### Top
 
 Types:
 
-- <code><a href="./src/resources/radar/verified-bots/tops/bots.ts">BotListResponse</a></code>
+- <code><a href="./src/resources/radar/verified-bots/top.ts">TopBotsResponse</a></code>
+- <code><a href="./src/resources/radar/verified-bots/top.ts">TopCategoriesResponse</a></code>
 
 Methods:
 
-- <code title="get /radar/verified_bots/top/bots">client.radar.verifiedBots.tops.bots.<a href="./src/resources/radar/verified-bots/tops/bots.ts">list</a>({ ...params }) -> BotListResponse</code>
-
-#### Categories
-
-Types:
-
-- <code><a href="./src/resources/radar/verified-bots/tops/categories.ts">CategoryListResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/verified_bots/top/categories">client.radar.verifiedBots.tops.categories.<a href="./src/resources/radar/verified-bots/tops/categories.ts">list</a>({ ...params }) -> CategoryListResponse</code>
+- <code title="get /radar/verified_bots/top/bots">client.radar.verifiedBots.top.<a href="./src/resources/radar/verified-bots/top.ts">bots</a>({ ...params }) -> TopBotsResponse</code>
+- <code title="get /radar/verified_bots/top/categories">client.radar.verifiedBots.top.<a href="./src/resources/radar/verified-bots/top.ts">categories</a>({ ...params }) -> TopCategoriesResponse</code>
 
 ## As112
 
+Types:
+
+- <code><a href="./src/resources/radar/as112/as112.ts">As112TimeseriesResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/as112/timeseries">client.radar.as112.<a href="./src/resources/radar/as112/as112.ts">timeseries</a>({ ...params }) -> As112TimeseriesResponse</code>
+
+### Summary
+
+Types:
+
+- <code><a href="./src/resources/radar/as112/summary.ts">SummaryDNSSECResponse</a></code>
+- <code><a href="./src/resources/radar/as112/summary.ts">SummaryEdnsResponse</a></code>
+- <code><a href="./src/resources/radar/as112/summary.ts">SummaryIPVersionResponse</a></code>
+- <code><a href="./src/resources/radar/as112/summary.ts">SummaryProtocolResponse</a></code>
+- <code><a href="./src/resources/radar/as112/summary.ts">SummaryQueryTypeResponse</a></code>
+- <code><a href="./src/resources/radar/as112/summary.ts">SummaryResponseCodesResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/as112/summary/dnssec">client.radar.as112.summary.<a href="./src/resources/radar/as112/summary.ts">dnssec</a>({ ...params }) -> SummaryDNSSECResponse</code>
+- <code title="get /radar/as112/summary/edns">client.radar.as112.summary.<a href="./src/resources/radar/as112/summary.ts">edns</a>({ ...params }) -> SummaryEdnsResponse</code>
+- <code title="get /radar/as112/summary/ip_version">client.radar.as112.summary.<a href="./src/resources/radar/as112/summary.ts">ipVersion</a>({ ...params }) -> SummaryIPVersionResponse</code>
+- <code title="get /radar/as112/summary/protocol">client.radar.as112.summary.<a href="./src/resources/radar/as112/summary.ts">protocol</a>({ ...params }) -> SummaryProtocolResponse</code>
+- <code title="get /radar/as112/summary/query_type">client.radar.as112.summary.<a href="./src/resources/radar/as112/summary.ts">queryType</a>({ ...params }) -> SummaryQueryTypeResponse</code>
+- <code title="get /radar/as112/summary/response_codes">client.radar.as112.summary.<a href="./src/resources/radar/as112/summary.ts">responseCodes</a>({ ...params }) -> SummaryResponseCodesResponse</code>
+
 ### TimeseriesGroups
 
-#### DNSSEC
-
 Types:
 
-- <code><a href="./src/resources/radar/as112/timeseries-groups/dnssec.ts">DNSSECListResponse</a></code>
+- <code><a href="./src/resources/radar/as112/timeseries-groups.ts">TimeseriesGroupDNSSECResponse</a></code>
+- <code><a href="./src/resources/radar/as112/timeseries-groups.ts">TimeseriesGroupEdnsResponse</a></code>
+- <code><a href="./src/resources/radar/as112/timeseries-groups.ts">TimeseriesGroupIPVersionResponse</a></code>
+- <code><a href="./src/resources/radar/as112/timeseries-groups.ts">TimeseriesGroupProtocolResponse</a></code>
+- <code><a href="./src/resources/radar/as112/timeseries-groups.ts">TimeseriesGroupQueryTypeResponse</a></code>
+- <code><a href="./src/resources/radar/as112/timeseries-groups.ts">TimeseriesGroupResponseCodesResponse</a></code>
 
 Methods:
 
-- <code title="get /radar/as112/timeseries_groups/dnssec">client.radar.as112.timeseriesGroups.dnssec.<a href="./src/resources/radar/as112/timeseries-groups/dnssec.ts">list</a>({ ...params }) -> DNSSECListResponse</code>
+- <code title="get /radar/as112/timeseries_groups/dnssec">client.radar.as112.timeseriesGroups.<a href="./src/resources/radar/as112/timeseries-groups.ts">dnssec</a>({ ...params }) -> TimeseriesGroupDNSSECResponse</code>
+- <code title="get /radar/as112/timeseries_groups/edns">client.radar.as112.timeseriesGroups.<a href="./src/resources/radar/as112/timeseries-groups.ts">edns</a>({ ...params }) -> TimeseriesGroupEdnsResponse</code>
+- <code title="get /radar/as112/timeseries_groups/ip_version">client.radar.as112.timeseriesGroups.<a href="./src/resources/radar/as112/timeseries-groups.ts">ipVersion</a>({ ...params }) -> TimeseriesGroupIPVersionResponse</code>
+- <code title="get /radar/as112/timeseries_groups/protocol">client.radar.as112.timeseriesGroups.<a href="./src/resources/radar/as112/timeseries-groups.ts">protocol</a>({ ...params }) -> TimeseriesGroupProtocolResponse</code>
+- <code title="get /radar/as112/timeseries_groups/query_type">client.radar.as112.timeseriesGroups.<a href="./src/resources/radar/as112/timeseries-groups.ts">queryType</a>({ ...params }) -> TimeseriesGroupQueryTypeResponse</code>
+- <code title="get /radar/as112/timeseries_groups/response_codes">client.radar.as112.timeseriesGroups.<a href="./src/resources/radar/as112/timeseries-groups.ts">responseCodes</a>({ ...params }) -> TimeseriesGroupResponseCodesResponse</code>
 
-#### Edns
-
-Types:
-
-- <code><a href="./src/resources/radar/as112/timeseries-groups/edns.ts">EdnListResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/as112/timeseries_groups/edns">client.radar.as112.timeseriesGroups.edns.<a href="./src/resources/radar/as112/timeseries-groups/edns.ts">list</a>({ ...params }) -> EdnListResponse</code>
-
-#### IPVersion
+### Top
 
 Types:
 
-- <code><a href="./src/resources/radar/as112/timeseries-groups/ip-version.ts">IPVersionListResponse</a></code>
+- <code><a href="./src/resources/radar/as112/top.ts">TopDNSSECResponse</a></code>
+- <code><a href="./src/resources/radar/as112/top.ts">TopEdnsResponse</a></code>
+- <code><a href="./src/resources/radar/as112/top.ts">TopIPVersionResponse</a></code>
+- <code><a href="./src/resources/radar/as112/top.ts">TopLocationsResponse</a></code>
 
 Methods:
 
-- <code title="get /radar/as112/timeseries_groups/ip_version">client.radar.as112.timeseriesGroups.ipVersion.<a href="./src/resources/radar/as112/timeseries-groups/ip-version.ts">list</a>({ ...params }) -> IPVersionListResponse</code>
+- <code title="get /radar/as112/top/locations/dnssec/{dnssec}">client.radar.as112.top.<a href="./src/resources/radar/as112/top.ts">dnssec</a>(dnssec, { ...params }) -> TopDNSSECResponse</code>
+- <code title="get /radar/as112/top/locations/edns/{edns}">client.radar.as112.top.<a href="./src/resources/radar/as112/top.ts">edns</a>(edns, { ...params }) -> TopEdnsResponse</code>
+- <code title="get /radar/as112/top/locations/ip_version/{ip_version}">client.radar.as112.top.<a href="./src/resources/radar/as112/top.ts">ipVersion</a>(ipVersion, { ...params }) -> TopIPVersionResponse</code>
+- <code title="get /radar/as112/top/locations">client.radar.as112.top.<a href="./src/resources/radar/as112/top.ts">locations</a>({ ...params }) -> TopLocationsResponse</code>
 
 ## ConnectionTampering
 
 Types:
 
-- <code><a href="./src/resources/radar/connection-tampering/connection-tampering.ts">ConnectionTamperingListResponse</a></code>
+- <code><a href="./src/resources/radar/connection-tampering.ts">ConnectionTamperingSummaryResponse</a></code>
+- <code><a href="./src/resources/radar/connection-tampering.ts">ConnectionTamperingTimeseriesGroupsResponse</a></code>
 
 Methods:
 
-- <code title="get /radar/connection_tampering/summary">client.radar.connectionTampering.<a href="./src/resources/radar/connection-tampering/connection-tampering.ts">list</a>({ ...params }) -> ConnectionTamperingListResponse</code>
-
-### TimeseriesGroups
-
-Types:
-
-- <code><a href="./src/resources/radar/connection-tampering/timeseries-groups.ts">TimeseriesGroupListResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/connection_tampering/timeseries_groups">client.radar.connectionTampering.timeseriesGroups.<a href="./src/resources/radar/connection-tampering/timeseries-groups.ts">list</a>({ ...params }) -> TimeseriesGroupListResponse</code>
+- <code title="get /radar/connection_tampering/summary">client.radar.connectionTampering.<a href="./src/resources/radar/connection-tampering.ts">summary</a>({ ...params }) -> ConnectionTamperingSummaryResponse</code>
+- <code title="get /radar/connection_tampering/timeseries_groups">client.radar.connectionTampering.<a href="./src/resources/radar/connection-tampering.ts">timeseriesGroups</a>({ ...params }) -> ConnectionTamperingTimeseriesGroupsResponse</code>
 
 ## Email
 
 ### Security
 
-#### Summaries
-
-##### Arcs
+#### Summary
 
 Types:
 
-- <code><a href="./src/resources/radar/email/security/summaries/arcs.ts">ArcListResponse</a></code>
+- <code><a href="./src/resources/radar/email/security/summary.ts">SummaryArcResponse</a></code>
+- <code><a href="./src/resources/radar/email/security/summary.ts">SummaryDKIMResponse</a></code>
+- <code><a href="./src/resources/radar/email/security/summary.ts">SummaryDmarcResponse</a></code>
+- <code><a href="./src/resources/radar/email/security/summary.ts">SummaryMaliciousResponse</a></code>
+- <code><a href="./src/resources/radar/email/security/summary.ts">SummarySpamResponse</a></code>
+- <code><a href="./src/resources/radar/email/security/summary.ts">SummarySPFResponse</a></code>
+- <code><a href="./src/resources/radar/email/security/summary.ts">SummaryThreatCategoryResponse</a></code>
 
 Methods:
 
-- <code title="get /radar/email/security/summary/arc">client.radar.email.security.summaries.arcs.<a href="./src/resources/radar/email/security/summaries/arcs.ts">list</a>({ ...params }) -> ArcListResponse</code>
-
-##### DKIMs
-
-Types:
-
-- <code><a href="./src/resources/radar/email/security/summaries/dkims.ts">DKIMListResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/email/security/summary/dkim">client.radar.email.security.summaries.dkims.<a href="./src/resources/radar/email/security/summaries/dkims.ts">list</a>({ ...params }) -> DKIMListResponse</code>
-
-##### Dmarcs
-
-Types:
-
-- <code><a href="./src/resources/radar/email/security/summaries/dmarcs.ts">DmarcListResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/email/security/summary/dmarc">client.radar.email.security.summaries.dmarcs.<a href="./src/resources/radar/email/security/summaries/dmarcs.ts">list</a>({ ...params }) -> DmarcListResponse</code>
-
-##### Malicious
-
-Types:
-
-- <code><a href="./src/resources/radar/email/security/summaries/malicious.ts">MaliciousListResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/email/security/summary/malicious">client.radar.email.security.summaries.malicious.<a href="./src/resources/radar/email/security/summaries/malicious.ts">list</a>({ ...params }) -> MaliciousListResponse</code>
-
-##### Spams
-
-Types:
-
-- <code><a href="./src/resources/radar/email/security/summaries/spams.ts">SpamListResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/email/security/summary/spam">client.radar.email.security.summaries.spams.<a href="./src/resources/radar/email/security/summaries/spams.ts">list</a>({ ...params }) -> SpamListResponse</code>
-
-##### SPFs
-
-Types:
-
-- <code><a href="./src/resources/radar/email/security/summaries/spfs.ts">SPFListResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/email/security/summary/spf">client.radar.email.security.summaries.spfs.<a href="./src/resources/radar/email/security/summaries/spfs.ts">list</a>({ ...params }) -> SPFListResponse</code>
-
-##### ThreatCategories
-
-Types:
-
-- <code><a href="./src/resources/radar/email/security/summaries/threat-categories.ts">ThreatCategoryListResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/email/security/summary/threat_category">client.radar.email.security.summaries.threatCategories.<a href="./src/resources/radar/email/security/summaries/threat-categories.ts">list</a>({ ...params }) -> ThreatCategoryListResponse</code>
+- <code title="get /radar/email/security/summary/arc">client.radar.email.security.summary.<a href="./src/resources/radar/email/security/summary.ts">arc</a>({ ...params }) -> SummaryArcResponse</code>
+- <code title="get /radar/email/security/summary/dkim">client.radar.email.security.summary.<a href="./src/resources/radar/email/security/summary.ts">dkim</a>({ ...params }) -> SummaryDKIMResponse</code>
+- <code title="get /radar/email/security/summary/dmarc">client.radar.email.security.summary.<a href="./src/resources/radar/email/security/summary.ts">dmarc</a>({ ...params }) -> SummaryDmarcResponse</code>
+- <code title="get /radar/email/security/summary/malicious">client.radar.email.security.summary.<a href="./src/resources/radar/email/security/summary.ts">malicious</a>({ ...params }) -> SummaryMaliciousResponse</code>
+- <code title="get /radar/email/security/summary/spam">client.radar.email.security.summary.<a href="./src/resources/radar/email/security/summary.ts">spam</a>({ ...params }) -> SummarySpamResponse</code>
+- <code title="get /radar/email/security/summary/spf">client.radar.email.security.summary.<a href="./src/resources/radar/email/security/summary.ts">spf</a>({ ...params }) -> SummarySPFResponse</code>
+- <code title="get /radar/email/security/summary/threat_category">client.radar.email.security.summary.<a href="./src/resources/radar/email/security/summary.ts">threatCategory</a>({ ...params }) -> SummaryThreatCategoryResponse</code>
 
 #### TimeseriesGroups
 
-##### Arcs
-
 Types:
 
-- <code><a href="./src/resources/radar/email/security/timeseries-groups/arcs.ts">ArcListResponse</a></code>
+- <code><a href="./src/resources/radar/email/security/timeseries-groups.ts">TimeseriesGroupArcResponse</a></code>
+- <code><a href="./src/resources/radar/email/security/timeseries-groups.ts">TimeseriesGroupDKIMResponse</a></code>
 
 Methods:
 
-- <code title="get /radar/email/security/timeseries_groups/arc">client.radar.email.security.timeseriesGroups.arcs.<a href="./src/resources/radar/email/security/timeseries-groups/arcs.ts">list</a>({ ...params }) -> ArcListResponse</code>
-
-##### DKIMs
-
-Types:
-
-- <code><a href="./src/resources/radar/email/security/timeseries-groups/dkims.ts">DKIMListResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/email/security/timeseries_groups/dkim">client.radar.email.security.timeseriesGroups.dkims.<a href="./src/resources/radar/email/security/timeseries-groups/dkims.ts">list</a>({ ...params }) -> DKIMListResponse</code>
+- <code title="get /radar/email/security/timeseries_groups/arc">client.radar.email.security.timeseriesGroups.<a href="./src/resources/radar/email/security/timeseries-groups.ts">arc</a>({ ...params }) -> TimeseriesGroupArcResponse</code>
+- <code title="get /radar/email/security/timeseries_groups/dkim">client.radar.email.security.timeseriesGroups.<a href="./src/resources/radar/email/security/timeseries-groups.ts">dkim</a>({ ...params }) -> TimeseriesGroupDKIMResponse</code>
 
 ## Attacks
 
 ### Layer3
 
+Types:
+
+- <code><a href="./src/resources/radar/attacks/layer3/layer3.ts">Layer3TimeseriesResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/attacks/layer3/timeseries">client.radar.attacks.layer3.<a href="./src/resources/radar/attacks/layer3/layer3.ts">timeseries</a>({ ...params }) -> Layer3TimeseriesResponse</code>
+
+#### Summary
+
+Types:
+
+- <code><a href="./src/resources/radar/attacks/layer3/summary.ts">SummaryBitrateResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer3/summary.ts">SummaryDurationResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer3/summary.ts">SummaryGetResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer3/summary.ts">SummaryIPVersionResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer3/summary.ts">SummaryProtocolResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer3/summary.ts">SummaryVectorResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/attacks/layer3/summary/bitrate">client.radar.attacks.layer3.summary.<a href="./src/resources/radar/attacks/layer3/summary.ts">bitrate</a>({ ...params }) -> SummaryBitrateResponse</code>
+- <code title="get /radar/attacks/layer3/summary/duration">client.radar.attacks.layer3.summary.<a href="./src/resources/radar/attacks/layer3/summary.ts">duration</a>({ ...params }) -> SummaryDurationResponse</code>
+- <code title="get /radar/attacks/layer3/summary">client.radar.attacks.layer3.summary.<a href="./src/resources/radar/attacks/layer3/summary.ts">get</a>({ ...params }) -> SummaryGetResponse</code>
+- <code title="get /radar/attacks/layer3/summary/ip_version">client.radar.attacks.layer3.summary.<a href="./src/resources/radar/attacks/layer3/summary.ts">ipVersion</a>({ ...params }) -> SummaryIPVersionResponse</code>
+- <code title="get /radar/attacks/layer3/summary/protocol">client.radar.attacks.layer3.summary.<a href="./src/resources/radar/attacks/layer3/summary.ts">protocol</a>({ ...params }) -> SummaryProtocolResponse</code>
+- <code title="get /radar/attacks/layer3/summary/vector">client.radar.attacks.layer3.summary.<a href="./src/resources/radar/attacks/layer3/summary.ts">vector</a>({ ...params }) -> SummaryVectorResponse</code>
+
 #### TimeseriesGroups
 
-##### Industry
-
 Types:
 
-- <code><a href="./src/resources/radar/attacks/layer3/timeseries-groups/industry.ts">IndustryListResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer3/timeseries-groups.ts">TimeseriesGroupBitrateResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer3/timeseries-groups.ts">TimeseriesGroupDurationResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer3/timeseries-groups.ts">TimeseriesGroupGetResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer3/timeseries-groups.ts">TimeseriesGroupIndustryResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer3/timeseries-groups.ts">TimeseriesGroupIPVersionResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer3/timeseries-groups.ts">TimeseriesGroupProtocolResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer3/timeseries-groups.ts">TimeseriesGroupVectorResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer3/timeseries-groups.ts">TimeseriesGroupVerticalResponse</a></code>
 
 Methods:
 
-- <code title="get /radar/attacks/layer3/timeseries_groups/industry">client.radar.attacks.layer3.timeseriesGroups.industry.<a href="./src/resources/radar/attacks/layer3/timeseries-groups/industry.ts">list</a>({ ...params }) -> IndustryListResponse</code>
-
-##### IPVersion
-
-Types:
-
-- <code><a href="./src/resources/radar/attacks/layer3/timeseries-groups/ip-version.ts">IPVersionListResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/attacks/layer3/timeseries_groups/ip_version">client.radar.attacks.layer3.timeseriesGroups.ipVersion.<a href="./src/resources/radar/attacks/layer3/timeseries-groups/ip-version.ts">list</a>({ ...params }) -> IPVersionListResponse</code>
-
-##### Protocol
-
-Types:
-
-- <code><a href="./src/resources/radar/attacks/layer3/timeseries-groups/protocol.ts">ProtocolListResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/attacks/layer3/timeseries_groups/protocol">client.radar.attacks.layer3.timeseriesGroups.protocol.<a href="./src/resources/radar/attacks/layer3/timeseries-groups/protocol.ts">list</a>({ ...params }) -> ProtocolListResponse</code>
-
-##### Vector
-
-Types:
-
-- <code><a href="./src/resources/radar/attacks/layer3/timeseries-groups/vector.ts">VectorListResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/attacks/layer3/timeseries_groups/vector">client.radar.attacks.layer3.timeseriesGroups.vector.<a href="./src/resources/radar/attacks/layer3/timeseries-groups/vector.ts">list</a>({ ...params }) -> VectorListResponse</code>
-
-##### Vertical
-
-Types:
-
-- <code><a href="./src/resources/radar/attacks/layer3/timeseries-groups/vertical.ts">VerticalListResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/attacks/layer3/timeseries_groups/vertical">client.radar.attacks.layer3.timeseriesGroups.vertical.<a href="./src/resources/radar/attacks/layer3/timeseries-groups/vertical.ts">list</a>({ ...params }) -> VerticalListResponse</code>
+- <code title="get /radar/attacks/layer3/timeseries_groups/bitrate">client.radar.attacks.layer3.timeseriesGroups.<a href="./src/resources/radar/attacks/layer3/timeseries-groups.ts">bitrate</a>({ ...params }) -> TimeseriesGroupBitrateResponse</code>
+- <code title="get /radar/attacks/layer3/timeseries_groups/duration">client.radar.attacks.layer3.timeseriesGroups.<a href="./src/resources/radar/attacks/layer3/timeseries-groups.ts">duration</a>({ ...params }) -> TimeseriesGroupDurationResponse</code>
+- <code title="get /radar/attacks/layer3/timeseries_groups">client.radar.attacks.layer3.timeseriesGroups.<a href="./src/resources/radar/attacks/layer3/timeseries-groups.ts">get</a>({ ...params }) -> TimeseriesGroupGetResponse</code>
+- <code title="get /radar/attacks/layer3/timeseries_groups/industry">client.radar.attacks.layer3.timeseriesGroups.<a href="./src/resources/radar/attacks/layer3/timeseries-groups.ts">industry</a>({ ...params }) -> TimeseriesGroupIndustryResponse</code>
+- <code title="get /radar/attacks/layer3/timeseries_groups/ip_version">client.radar.attacks.layer3.timeseriesGroups.<a href="./src/resources/radar/attacks/layer3/timeseries-groups.ts">ipVersion</a>({ ...params }) -> TimeseriesGroupIPVersionResponse</code>
+- <code title="get /radar/attacks/layer3/timeseries_groups/protocol">client.radar.attacks.layer3.timeseriesGroups.<a href="./src/resources/radar/attacks/layer3/timeseries-groups.ts">protocol</a>({ ...params }) -> TimeseriesGroupProtocolResponse</code>
+- <code title="get /radar/attacks/layer3/timeseries_groups/vector">client.radar.attacks.layer3.timeseriesGroups.<a href="./src/resources/radar/attacks/layer3/timeseries-groups.ts">vector</a>({ ...params }) -> TimeseriesGroupVectorResponse</code>
+- <code title="get /radar/attacks/layer3/timeseries_groups/vertical">client.radar.attacks.layer3.timeseriesGroups.<a href="./src/resources/radar/attacks/layer3/timeseries-groups.ts">vertical</a>({ ...params }) -> TimeseriesGroupVerticalResponse</code>
 
 #### Top
 
-##### Attacks
-
 Types:
 
-- <code><a href="./src/resources/radar/attacks/layer3/top/attacks.ts">AttackListResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer3/top/top.ts">TopAttacksResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer3/top/top.ts">TopIndustryResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer3/top/top.ts">TopVerticalResponse</a></code>
 
 Methods:
 
-- <code title="get /radar/attacks/layer3/top/attacks">client.radar.attacks.layer3.top.attacks.<a href="./src/resources/radar/attacks/layer3/top/attacks.ts">list</a>({ ...params }) -> AttackListResponse</code>
-
-##### Industry
-
-Types:
-
-- <code><a href="./src/resources/radar/attacks/layer3/top/industry.ts">IndustryListResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/attacks/layer3/top/industry">client.radar.attacks.layer3.top.industry.<a href="./src/resources/radar/attacks/layer3/top/industry.ts">list</a>({ ...params }) -> IndustryListResponse</code>
+- <code title="get /radar/attacks/layer3/top/attacks">client.radar.attacks.layer3.top.<a href="./src/resources/radar/attacks/layer3/top/top.ts">attacks</a>({ ...params }) -> TopAttacksResponse</code>
+- <code title="get /radar/attacks/layer3/top/industry">client.radar.attacks.layer3.top.<a href="./src/resources/radar/attacks/layer3/top/top.ts">industry</a>({ ...params }) -> TopIndustryResponse</code>
+- <code title="get /radar/attacks/layer3/top/vertical">client.radar.attacks.layer3.top.<a href="./src/resources/radar/attacks/layer3/top/top.ts">vertical</a>({ ...params }) -> TopVerticalResponse</code>
 
 ##### Locations
 
-###### Origin
-
 Types:
 
-- <code><a href="./src/resources/radar/attacks/layer3/top/locations/origin.ts">OriginListResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer3/top/locations.ts">LocationOriginResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer3/top/locations.ts">LocationTargetResponse</a></code>
 
 Methods:
 
-- <code title="get /radar/attacks/layer3/top/locations/origin">client.radar.attacks.layer3.top.locations.origin.<a href="./src/resources/radar/attacks/layer3/top/locations/origin.ts">list</a>({ ...params }) -> OriginListResponse</code>
+- <code title="get /radar/attacks/layer3/top/locations/origin">client.radar.attacks.layer3.top.locations.<a href="./src/resources/radar/attacks/layer3/top/locations.ts">origin</a>({ ...params }) -> LocationOriginResponse</code>
+- <code title="get /radar/attacks/layer3/top/locations/target">client.radar.attacks.layer3.top.locations.<a href="./src/resources/radar/attacks/layer3/top/locations.ts">target</a>({ ...params }) -> LocationTargetResponse</code>
 
-###### Target
-
-Types:
-
-- <code><a href="./src/resources/radar/attacks/layer3/top/locations/target.ts">TargetListResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/attacks/layer3/top/locations/target">client.radar.attacks.layer3.top.locations.target.<a href="./src/resources/radar/attacks/layer3/top/locations/target.ts">list</a>({ ...params }) -> TargetListResponse</code>
-
-##### Vertical
+### Layer7
 
 Types:
 
-- <code><a href="./src/resources/radar/attacks/layer3/top/vertical.ts">VerticalListResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer7/layer7.ts">Layer7TimeseriesResponse</a></code>
 
 Methods:
 
-- <code title="get /radar/attacks/layer3/top/vertical">client.radar.attacks.layer3.top.vertical.<a href="./src/resources/radar/attacks/layer3/top/vertical.ts">list</a>({ ...params }) -> VerticalListResponse</code>
+- <code title="get /radar/attacks/layer3/timeseries">client.radar.attacks.layer7.<a href="./src/resources/radar/attacks/layer7/layer7.ts">timeseries</a>({ ...params }) -> Layer7TimeseriesResponse</code>
+
+#### Summary
+
+Types:
+
+- <code><a href="./src/resources/radar/attacks/layer7/summary.ts">SummaryBitrateResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer7/summary.ts">SummaryDurationResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer7/summary.ts">SummaryGetResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer7/summary.ts">SummaryIPVersionResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer7/summary.ts">SummaryProtocolResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer7/summary.ts">SummaryVectorResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/attacks/layer3/summary/bitrate">client.radar.attacks.layer7.summary.<a href="./src/resources/radar/attacks/layer7/summary.ts">bitrate</a>({ ...params }) -> SummaryBitrateResponse</code>
+- <code title="get /radar/attacks/layer3/summary/duration">client.radar.attacks.layer7.summary.<a href="./src/resources/radar/attacks/layer7/summary.ts">duration</a>({ ...params }) -> SummaryDurationResponse</code>
+- <code title="get /radar/attacks/layer3/summary">client.radar.attacks.layer7.summary.<a href="./src/resources/radar/attacks/layer7/summary.ts">get</a>({ ...params }) -> SummaryGetResponse</code>
+- <code title="get /radar/attacks/layer3/summary/ip_version">client.radar.attacks.layer7.summary.<a href="./src/resources/radar/attacks/layer7/summary.ts">ipVersion</a>({ ...params }) -> SummaryIPVersionResponse</code>
+- <code title="get /radar/attacks/layer3/summary/protocol">client.radar.attacks.layer7.summary.<a href="./src/resources/radar/attacks/layer7/summary.ts">protocol</a>({ ...params }) -> SummaryProtocolResponse</code>
+- <code title="get /radar/attacks/layer3/summary/vector">client.radar.attacks.layer7.summary.<a href="./src/resources/radar/attacks/layer7/summary.ts">vector</a>({ ...params }) -> SummaryVectorResponse</code>
+
+#### TimeseriesGroups
+
+Types:
+
+- <code><a href="./src/resources/radar/attacks/layer7/timeseries-groups.ts">TimeseriesGroupBitrateResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer7/timeseries-groups.ts">TimeseriesGroupDurationResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer7/timeseries-groups.ts">TimeseriesGroupGetResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer7/timeseries-groups.ts">TimeseriesGroupIndustryResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer7/timeseries-groups.ts">TimeseriesGroupIPVersionResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer7/timeseries-groups.ts">TimeseriesGroupProtocolResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer7/timeseries-groups.ts">TimeseriesGroupVectorResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer7/timeseries-groups.ts">TimeseriesGroupVerticalResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/attacks/layer3/timeseries_groups/bitrate">client.radar.attacks.layer7.timeseriesGroups.<a href="./src/resources/radar/attacks/layer7/timeseries-groups.ts">bitrate</a>({ ...params }) -> TimeseriesGroupBitrateResponse</code>
+- <code title="get /radar/attacks/layer3/timeseries_groups/duration">client.radar.attacks.layer7.timeseriesGroups.<a href="./src/resources/radar/attacks/layer7/timeseries-groups.ts">duration</a>({ ...params }) -> TimeseriesGroupDurationResponse</code>
+- <code title="get /radar/attacks/layer3/timeseries_groups">client.radar.attacks.layer7.timeseriesGroups.<a href="./src/resources/radar/attacks/layer7/timeseries-groups.ts">get</a>({ ...params }) -> TimeseriesGroupGetResponse</code>
+- <code title="get /radar/attacks/layer3/timeseries_groups/industry">client.radar.attacks.layer7.timeseriesGroups.<a href="./src/resources/radar/attacks/layer7/timeseries-groups.ts">industry</a>({ ...params }) -> TimeseriesGroupIndustryResponse</code>
+- <code title="get /radar/attacks/layer3/timeseries_groups/ip_version">client.radar.attacks.layer7.timeseriesGroups.<a href="./src/resources/radar/attacks/layer7/timeseries-groups.ts">ipVersion</a>({ ...params }) -> TimeseriesGroupIPVersionResponse</code>
+- <code title="get /radar/attacks/layer3/timeseries_groups/protocol">client.radar.attacks.layer7.timeseriesGroups.<a href="./src/resources/radar/attacks/layer7/timeseries-groups.ts">protocol</a>({ ...params }) -> TimeseriesGroupProtocolResponse</code>
+- <code title="get /radar/attacks/layer3/timeseries_groups/vector">client.radar.attacks.layer7.timeseriesGroups.<a href="./src/resources/radar/attacks/layer7/timeseries-groups.ts">vector</a>({ ...params }) -> TimeseriesGroupVectorResponse</code>
+- <code title="get /radar/attacks/layer3/timeseries_groups/vertical">client.radar.attacks.layer7.timeseriesGroups.<a href="./src/resources/radar/attacks/layer7/timeseries-groups.ts">vertical</a>({ ...params }) -> TimeseriesGroupVerticalResponse</code>
+
+#### Top
+
+Types:
+
+- <code><a href="./src/resources/radar/attacks/layer7/top/top.ts">TopAttacksResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer7/top/top.ts">TopIndustryResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer7/top/top.ts">TopVerticalResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/attacks/layer3/top/attacks">client.radar.attacks.layer7.top.<a href="./src/resources/radar/attacks/layer7/top/top.ts">attacks</a>({ ...params }) -> TopAttacksResponse</code>
+- <code title="get /radar/attacks/layer3/top/industry">client.radar.attacks.layer7.top.<a href="./src/resources/radar/attacks/layer7/top/top.ts">industry</a>({ ...params }) -> TopIndustryResponse</code>
+- <code title="get /radar/attacks/layer3/top/vertical">client.radar.attacks.layer7.top.<a href="./src/resources/radar/attacks/layer7/top/top.ts">vertical</a>({ ...params }) -> TopVerticalResponse</code>
+
+##### Locations
+
+Types:
+
+- <code><a href="./src/resources/radar/attacks/layer7/top/locations.ts">LocationOriginResponse</a></code>
+- <code><a href="./src/resources/radar/attacks/layer7/top/locations.ts">LocationTargetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/attacks/layer3/top/locations/origin">client.radar.attacks.layer7.top.locations.<a href="./src/resources/radar/attacks/layer7/top/locations.ts">origin</a>({ ...params }) -> LocationOriginResponse</code>
+- <code title="get /radar/attacks/layer3/top/locations/target">client.radar.attacks.layer7.top.locations.<a href="./src/resources/radar/attacks/layer7/top/locations.ts">target</a>({ ...params }) -> LocationTargetResponse</code>
 
 ## Emails
 
 ### Security
 
-#### Dmarc
+#### TimeseriesGroups
 
 Types:
 
-- <code><a href="./src/resources/radar/emails/security/dmarc.ts">DmarcListResponse</a></code>
+- <code><a href="./src/resources/radar/emails/security/timeseries-groups.ts">TimeseriesGroupDmarcResponse</a></code>
+- <code><a href="./src/resources/radar/emails/security/timeseries-groups.ts">TimeseriesGroupMaliciousResponse</a></code>
+- <code><a href="./src/resources/radar/emails/security/timeseries-groups.ts">TimeseriesGroupSpamResponse</a></code>
+- <code><a href="./src/resources/radar/emails/security/timeseries-groups.ts">TimeseriesGroupSPFResponse</a></code>
+- <code><a href="./src/resources/radar/emails/security/timeseries-groups.ts">TimeseriesGroupThreatCategoryResponse</a></code>
 
 Methods:
 
-- <code title="get /radar/email/security/timeseries_groups/dmarc">client.radar.emails.security.dmarc.<a href="./src/resources/radar/emails/security/dmarc.ts">list</a>({ ...params }) -> DmarcListResponse</code>
-
-#### Malicious
-
-Types:
-
-- <code><a href="./src/resources/radar/emails/security/malicious.ts">MaliciousListResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/email/security/timeseries_groups/malicious">client.radar.emails.security.malicious.<a href="./src/resources/radar/emails/security/malicious.ts">list</a>({ ...params }) -> MaliciousListResponse</code>
-
-#### Spam
-
-Types:
-
-- <code><a href="./src/resources/radar/emails/security/spam.ts">SpamListResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/email/security/timeseries_groups/spam">client.radar.emails.security.spam.<a href="./src/resources/radar/emails/security/spam.ts">list</a>({ ...params }) -> SpamListResponse</code>
-
-#### SPF
-
-Types:
-
-- <code><a href="./src/resources/radar/emails/security/spf.ts">SPFListResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/email/security/timeseries_groups/spf">client.radar.emails.security.spf.<a href="./src/resources/radar/emails/security/spf.ts">list</a>({ ...params }) -> SPFListResponse</code>
-
-#### ThreatCategory
-
-Types:
-
-- <code><a href="./src/resources/radar/emails/security/threat-category.ts">ThreatCategoryListResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/email/security/timeseries_groups/threat_category">client.radar.emails.security.threatCategory.<a href="./src/resources/radar/emails/security/threat-category.ts">list</a>({ ...params }) -> ThreatCategoryListResponse</code>
-
-#### Top
-
-##### Ases
-
-Types:
-
-- <code><a href="./src/resources/radar/emails/security/top/ases/ases.ts">AseListResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/email/security/top/ases">client.radar.emails.security.top.ases.<a href="./src/resources/radar/emails/security/top/ases/ases.ts">list</a>({ ...params }) -> AseListResponse</code>
-
-###### Arc
-
-Types:
-
-- <code><a href="./src/resources/radar/emails/security/top/ases/arc.ts">ArcGetResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/email/security/top/ases/arc/{arc}">client.radar.emails.security.top.ases.arc.<a href="./src/resources/radar/emails/security/top/ases/arc.ts">get</a>(arc, { ...params }) -> ArcGetResponse</code>
-
-###### DKIM
-
-Types:
-
-- <code><a href="./src/resources/radar/emails/security/top/ases/dkim.ts">DKIMGetResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/email/security/top/ases/dkim/{dkim}">client.radar.emails.security.top.ases.dkim.<a href="./src/resources/radar/emails/security/top/ases/dkim.ts">get</a>(dkim, { ...params }) -> DKIMGetResponse</code>
-
-###### Dmarc
-
-Types:
-
-- <code><a href="./src/resources/radar/emails/security/top/ases/dmarc.ts">DmarcGetResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/email/security/top/ases/dmarc/{dmarc}">client.radar.emails.security.top.ases.dmarc.<a href="./src/resources/radar/emails/security/top/ases/dmarc.ts">get</a>(dmarc, { ...params }) -> DmarcGetResponse</code>
+- <code title="get /radar/email/security/timeseries_groups/dmarc">client.radar.emails.security.timeseriesGroups.<a href="./src/resources/radar/emails/security/timeseries-groups.ts">dmarc</a>({ ...params }) -> TimeseriesGroupDmarcResponse</code>
+- <code title="get /radar/email/security/timeseries_groups/malicious">client.radar.emails.security.timeseriesGroups.<a href="./src/resources/radar/emails/security/timeseries-groups.ts">malicious</a>({ ...params }) -> TimeseriesGroupMaliciousResponse</code>
+- <code title="get /radar/email/security/timeseries_groups/spam">client.radar.emails.security.timeseriesGroups.<a href="./src/resources/radar/emails/security/timeseries-groups.ts">spam</a>({ ...params }) -> TimeseriesGroupSpamResponse</code>
+- <code title="get /radar/email/security/timeseries_groups/spf">client.radar.emails.security.timeseriesGroups.<a href="./src/resources/radar/emails/security/timeseries-groups.ts">spf</a>({ ...params }) -> TimeseriesGroupSPFResponse</code>
+- <code title="get /radar/email/security/timeseries_groups/threat_category">client.radar.emails.security.timeseriesGroups.<a href="./src/resources/radar/emails/security/timeseries-groups.ts">threatCategory</a>({ ...params }) -> TimeseriesGroupThreatCategoryResponse</code>
 
 ## Entities
 
 Types:
 
-- <code><a href="./src/resources/radar/entities/entities.ts">EntityListResponse</a></code>
+- <code><a href="./src/resources/radar/entities/entities.ts">EntityGetResponse</a></code>
 
 Methods:
 
-- <code title="get /radar/entities/ip">client.radar.entities.<a href="./src/resources/radar/entities/entities.ts">list</a>({ ...params }) -> EntityListResponse</code>
+- <code title="get /radar/entities/ip">client.radar.entities.<a href="./src/resources/radar/entities/entities.ts">get</a>({ ...params }) -> EntityGetResponse</code>
 
 ### Asns
 
 Types:
 
+- <code><a href="./src/resources/radar/entities/asns.ts">AsnListResponse</a></code>
+- <code><a href="./src/resources/radar/entities/asns.ts">AsnGetResponse</a></code>
+- <code><a href="./src/resources/radar/entities/asns.ts">AsnIPResponse</a></code>
 - <code><a href="./src/resources/radar/entities/asns.ts">AsnRelResponse</a></code>
 
 Methods:
 
+- <code title="get /radar/entities/asns">client.radar.entities.asns.<a href="./src/resources/radar/entities/asns.ts">list</a>({ ...params }) -> AsnListResponse</code>
+- <code title="get /radar/entities/asns/{asn}">client.radar.entities.asns.<a href="./src/resources/radar/entities/asns.ts">get</a>(asn, { ...params }) -> AsnGetResponse</code>
+- <code title="get /radar/entities/asns/ip">client.radar.entities.asns.<a href="./src/resources/radar/entities/asns.ts">ip</a>({ ...params }) -> AsnIPResponse</code>
 - <code title="get /radar/entities/asns/{asn}/rel">client.radar.entities.asns.<a href="./src/resources/radar/entities/asns.ts">rel</a>(asn, { ...params }) -> AsnRelResponse</code>
 
-## HTTP
-
-### TLSVersion
+### Locations
 
 Types:
 
-- <code><a href="./src/resources/radar/http/tls-version.ts">TLSVersionListResponse</a></code>
+- <code><a href="./src/resources/radar/entities/locations.ts">LocationListResponse</a></code>
+- <code><a href="./src/resources/radar/entities/locations.ts">LocationGetResponse</a></code>
 
 Methods:
 
-- <code title="get /radar/http/timeseries_groups/tls_version">client.radar.http.tlsVersion.<a href="./src/resources/radar/http/tls-version.ts">list</a>({ ...params }) -> TLSVersionListResponse</code>
+- <code title="get /radar/entities/locations">client.radar.entities.locations.<a href="./src/resources/radar/entities/locations.ts">list</a>({ ...params }) -> LocationListResponse</code>
+- <code title="get /radar/entities/locations/{location}">client.radar.entities.locations.<a href="./src/resources/radar/entities/locations.ts">get</a>(location, { ...params }) -> LocationGetResponse</code>
+
+## HTTP
+
+### Top
+
+Types:
+
+- <code><a href="./src/resources/radar/http/top.ts">TopBrowserFamiliesResponse</a></code>
+- <code><a href="./src/resources/radar/http/top.ts">TopBrowsersResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/http/top/browser_families">client.radar.http.top.<a href="./src/resources/radar/http/top.ts">browserFamilies</a>({ ...params }) -> TopBrowserFamiliesResponse</code>
+- <code title="get /radar/http/top/browsers">client.radar.http.top.<a href="./src/resources/radar/http/top.ts">browsers</a>({ ...params }) -> TopBrowsersResponse</code>
+
+### Locations
+
+Types:
+
+- <code><a href="./src/resources/radar/http/locations/locations.ts">LocationGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/http/top/locations">client.radar.http.locations.<a href="./src/resources/radar/http/locations/locations.ts">get</a>({ ...params }) -> LocationGetResponse</code>
+
+#### BotClass
+
+Types:
+
+- <code><a href="./src/resources/radar/http/locations/bot-class.ts">BotClassGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/http/top/locations/bot_class/{bot_class}">client.radar.http.locations.botClass.<a href="./src/resources/radar/http/locations/bot-class.ts">get</a>(botClass, { ...params }) -> BotClassGetResponse</code>
+
+#### DeviceType
+
+Types:
+
+- <code><a href="./src/resources/radar/http/locations/device-type.ts">DeviceTypeGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/http/top/locations/device_type/{device_type}">client.radar.http.locations.deviceType.<a href="./src/resources/radar/http/locations/device-type.ts">get</a>(deviceType, { ...params }) -> DeviceTypeGetResponse</code>
+
+#### HTTPProtocol
+
+Types:
+
+- <code><a href="./src/resources/radar/http/locations/http-protocol.ts">HTTPProtocolGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/http/top/locations/http_protocol/{http_protocol}">client.radar.http.locations.httpProtocol.<a href="./src/resources/radar/http/locations/http-protocol.ts">get</a>(httpProtocol, { ...params }) -> HTTPProtocolGetResponse</code>
+
+#### HTTPMethod
+
+Types:
+
+- <code><a href="./src/resources/radar/http/locations/http-method.ts">HTTPMethodGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/http/top/locations/http_version/{http_version}">client.radar.http.locations.httpMethod.<a href="./src/resources/radar/http/locations/http-method.ts">get</a>(httpVersion, { ...params }) -> HTTPMethodGetResponse</code>
+
+#### IPVersion
+
+Types:
+
+- <code><a href="./src/resources/radar/http/locations/ip-version.ts">IPVersionGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/http/top/locations/ip_version/{ip_version}">client.radar.http.locations.ipVersion.<a href="./src/resources/radar/http/locations/ip-version.ts">get</a>(ipVersion, { ...params }) -> IPVersionGetResponse</code>
+
+#### Os
+
+Types:
+
+- <code><a href="./src/resources/radar/http/locations/os.ts">OGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/http/top/locations/os/{os}">client.radar.http.locations.os.<a href="./src/resources/radar/http/locations/os.ts">get</a>(os, { ...params }) -> OGetResponse</code>
+
+#### TLSVersion
+
+Types:
+
+- <code><a href="./src/resources/radar/http/locations/tls-version.ts">TLSVersionGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/http/top/locations/tls_version/{tls_version}">client.radar.http.locations.tlsVersion.<a href="./src/resources/radar/http/locations/tls-version.ts">get</a>(tlsVersion, { ...params }) -> TLSVersionGetResponse</code>
+
+### Ases
+
+Types:
+
+- <code><a href="./src/resources/radar/http/ases/ases.ts">AseGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/http/top/ases">client.radar.http.ases.<a href="./src/resources/radar/http/ases/ases.ts">get</a>({ ...params }) -> AseGetResponse</code>
+
+#### BotClass
+
+Types:
+
+- <code><a href="./src/resources/radar/http/ases/bot-class.ts">BotClassGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/http/top/ases/bot_class/{bot_class}">client.radar.http.ases.botClass.<a href="./src/resources/radar/http/ases/bot-class.ts">get</a>(botClass, { ...params }) -> BotClassGetResponse</code>
+
+#### DeviceType
+
+Types:
+
+- <code><a href="./src/resources/radar/http/ases/device-type.ts">DeviceTypeGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/http/top/ases/device_type/{device_type}">client.radar.http.ases.deviceType.<a href="./src/resources/radar/http/ases/device-type.ts">get</a>(deviceType, { ...params }) -> DeviceTypeGetResponse</code>
+
+#### HTTPProtocol
+
+Types:
+
+- <code><a href="./src/resources/radar/http/ases/http-protocol.ts">HTTPProtocolGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/http/top/ases/http_protocol/{http_protocol}">client.radar.http.ases.httpProtocol.<a href="./src/resources/radar/http/ases/http-protocol.ts">get</a>(httpProtocol, { ...params }) -> HTTPProtocolGetResponse</code>
+
+#### HTTPMethod
+
+Types:
+
+- <code><a href="./src/resources/radar/http/ases/http-method.ts">HTTPMethodGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/http/top/ases/http_version/{http_version}">client.radar.http.ases.httpMethod.<a href="./src/resources/radar/http/ases/http-method.ts">get</a>(httpVersion, { ...params }) -> HTTPMethodGetResponse</code>
+
+#### IPVersion
+
+Types:
+
+- <code><a href="./src/resources/radar/http/ases/ip-version.ts">IPVersionGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/http/top/ases/ip_version/{ip_version}">client.radar.http.ases.ipVersion.<a href="./src/resources/radar/http/ases/ip-version.ts">get</a>(ipVersion, { ...params }) -> IPVersionGetResponse</code>
+
+#### Os
+
+Types:
+
+- <code><a href="./src/resources/radar/http/ases/os.ts">OGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/http/top/ases/os/{os}">client.radar.http.ases.os.<a href="./src/resources/radar/http/ases/os.ts">get</a>(os, { ...params }) -> OGetResponse</code>
+
+#### TLSVersion
+
+Types:
+
+- <code><a href="./src/resources/radar/http/ases/tls-version.ts">TLSVersionGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/http/top/ases/tls_version/{tls_version}">client.radar.http.ases.tlsVersion.<a href="./src/resources/radar/http/ases/tls-version.ts">get</a>(tlsVersion, { ...params }) -> TLSVersionGetResponse</code>
+
+### Summary
+
+Types:
+
+- <code><a href="./src/resources/radar/http/summary.ts">SummaryBotClassResponse</a></code>
+- <code><a href="./src/resources/radar/http/summary.ts">SummaryDeviceTypeResponse</a></code>
+- <code><a href="./src/resources/radar/http/summary.ts">SummaryHTTPProtocolResponse</a></code>
+- <code><a href="./src/resources/radar/http/summary.ts">SummaryHTTPVersionResponse</a></code>
+- <code><a href="./src/resources/radar/http/summary.ts">SummaryIPVersionResponse</a></code>
+- <code><a href="./src/resources/radar/http/summary.ts">SummaryOsResponse</a></code>
+- <code><a href="./src/resources/radar/http/summary.ts">SummaryTLSVersionResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/http/summary/bot_class">client.radar.http.summary.<a href="./src/resources/radar/http/summary.ts">botClass</a>({ ...params }) -> SummaryBotClassResponse</code>
+- <code title="get /radar/http/summary/device_type">client.radar.http.summary.<a href="./src/resources/radar/http/summary.ts">deviceType</a>({ ...params }) -> SummaryDeviceTypeResponse</code>
+- <code title="get /radar/http/summary/http_protocol">client.radar.http.summary.<a href="./src/resources/radar/http/summary.ts">httpProtocol</a>({ ...params }) -> SummaryHTTPProtocolResponse</code>
+- <code title="get /radar/http/summary/http_version">client.radar.http.summary.<a href="./src/resources/radar/http/summary.ts">httpVersion</a>({ ...params }) -> SummaryHTTPVersionResponse</code>
+- <code title="get /radar/http/summary/ip_version">client.radar.http.summary.<a href="./src/resources/radar/http/summary.ts">ipVersion</a>({ ...params }) -> SummaryIPVersionResponse</code>
+- <code title="get /radar/http/summary/os">client.radar.http.summary.<a href="./src/resources/radar/http/summary.ts">os</a>({ ...params }) -> SummaryOsResponse</code>
+- <code title="get /radar/http/summary/tls_version">client.radar.http.summary.<a href="./src/resources/radar/http/summary.ts">tlsVersion</a>({ ...params }) -> SummaryTLSVersionResponse</code>
+
+### TimeseriesGroups
+
+Types:
+
+- <code><a href="./src/resources/radar/http/timeseries-groups.ts">TimeseriesGroupBotClassResponse</a></code>
+- <code><a href="./src/resources/radar/http/timeseries-groups.ts">TimeseriesGroupBrowserResponse</a></code>
+- <code><a href="./src/resources/radar/http/timeseries-groups.ts">TimeseriesGroupBrowserFamilyResponse</a></code>
+- <code><a href="./src/resources/radar/http/timeseries-groups.ts">TimeseriesGroupDeviceTypeResponse</a></code>
+- <code><a href="./src/resources/radar/http/timeseries-groups.ts">TimeseriesGroupHTTPProtocolResponse</a></code>
+- <code><a href="./src/resources/radar/http/timeseries-groups.ts">TimeseriesGroupHTTPVersionResponse</a></code>
+- <code><a href="./src/resources/radar/http/timeseries-groups.ts">TimeseriesGroupIPVersionResponse</a></code>
+- <code><a href="./src/resources/radar/http/timeseries-groups.ts">TimeseriesGroupOsResponse</a></code>
+- <code><a href="./src/resources/radar/http/timeseries-groups.ts">TimeseriesGroupTLSVersionResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/http/timeseries_groups/bot_class">client.radar.http.timeseriesGroups.<a href="./src/resources/radar/http/timeseries-groups.ts">botClass</a>({ ...params }) -> TimeseriesGroupBotClassResponse</code>
+- <code title="get /radar/http/timeseries_groups/browser">client.radar.http.timeseriesGroups.<a href="./src/resources/radar/http/timeseries-groups.ts">browser</a>({ ...params }) -> TimeseriesGroupBrowserResponse</code>
+- <code title="get /radar/http/timeseries_groups/browser_family">client.radar.http.timeseriesGroups.<a href="./src/resources/radar/http/timeseries-groups.ts">browserFamily</a>({ ...params }) -> TimeseriesGroupBrowserFamilyResponse</code>
+- <code title="get /radar/http/timeseries_groups/device_type">client.radar.http.timeseriesGroups.<a href="./src/resources/radar/http/timeseries-groups.ts">deviceType</a>({ ...params }) -> TimeseriesGroupDeviceTypeResponse</code>
+- <code title="get /radar/http/timeseries_groups/http_protocol">client.radar.http.timeseriesGroups.<a href="./src/resources/radar/http/timeseries-groups.ts">httpProtocol</a>({ ...params }) -> TimeseriesGroupHTTPProtocolResponse</code>
+- <code title="get /radar/http/timeseries_groups/http_version">client.radar.http.timeseriesGroups.<a href="./src/resources/radar/http/timeseries-groups.ts">httpVersion</a>({ ...params }) -> TimeseriesGroupHTTPVersionResponse</code>
+- <code title="get /radar/http/timeseries_groups/ip_version">client.radar.http.timeseriesGroups.<a href="./src/resources/radar/http/timeseries-groups.ts">ipVersion</a>({ ...params }) -> TimeseriesGroupIPVersionResponse</code>
+- <code title="get /radar/http/timeseries_groups/os">client.radar.http.timeseriesGroups.<a href="./src/resources/radar/http/timeseries-groups.ts">os</a>({ ...params }) -> TimeseriesGroupOsResponse</code>
+- <code title="get /radar/http/timeseries_groups/tls_version">client.radar.http.timeseriesGroups.<a href="./src/resources/radar/http/timeseries-groups.ts">tlsVersion</a>({ ...params }) -> TimeseriesGroupTLSVersionResponse</code>
 
 ## Quality
 
@@ -5879,97 +5969,77 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/radar/quality/iqi/iqi.ts">IqiListResponse</a></code>
+- <code><a href="./src/resources/radar/quality/iqi.ts">IqiSummaryResponse</a></code>
 
 Methods:
 
-- <code title="get /radar/quality/iqi/summary">client.radar.quality.iqi.<a href="./src/resources/radar/quality/iqi/iqi.ts">list</a>({ ...params }) -> IqiListResponse</code>
-
-#### TimeseriesGroups
-
-Types:
-
-- <code><a href="./src/resources/radar/quality/iqi/timeseries-groups.ts">TimeseriesGroupListResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/quality/iqi/timeseries_groups">client.radar.quality.iqi.timeseriesGroups.<a href="./src/resources/radar/quality/iqi/timeseries-groups.ts">list</a>({ ...params }) -> TimeseriesGroupListResponse</code>
+- <code title="get /radar/quality/iqi/summary">client.radar.quality.iqi.<a href="./src/resources/radar/quality/iqi.ts">summary</a>({ ...params }) -> IqiSummaryResponse</code>
 
 ### Speed
 
-#### Histogram
-
 Types:
 
-- <code><a href="./src/resources/radar/quality/speed/histogram.ts">HistogramListResponse</a></code>
+- <code><a href="./src/resources/radar/quality/speed/speed.ts">SpeedHistogramResponse</a></code>
+- <code><a href="./src/resources/radar/quality/speed/speed.ts">SpeedSummaryResponse</a></code>
 
 Methods:
 
-- <code title="get /radar/quality/speed/histogram">client.radar.quality.speed.histogram.<a href="./src/resources/radar/quality/speed/histogram.ts">list</a>({ ...params }) -> HistogramListResponse</code>
-
-#### Summary
-
-Types:
-
-- <code><a href="./src/resources/radar/quality/speed/summary.ts">SummaryListResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/quality/speed/summary">client.radar.quality.speed.summary.<a href="./src/resources/radar/quality/speed/summary.ts">list</a>({ ...params }) -> SummaryListResponse</code>
+- <code title="get /radar/quality/speed/histogram">client.radar.quality.speed.<a href="./src/resources/radar/quality/speed/speed.ts">histogram</a>({ ...params }) -> SpeedHistogramResponse</code>
+- <code title="get /radar/quality/speed/summary">client.radar.quality.speed.<a href="./src/resources/radar/quality/speed/speed.ts">summary</a>({ ...params }) -> SpeedSummaryResponse</code>
 
 #### Top
 
-##### Ases
-
 Types:
 
-- <code><a href="./src/resources/radar/quality/speed/top/ases.ts">AseListResponse</a></code>
+- <code><a href="./src/resources/radar/quality/speed/top.ts">TopAsesResponse</a></code>
+- <code><a href="./src/resources/radar/quality/speed/top.ts">TopLocationsResponse</a></code>
 
 Methods:
 
-- <code title="get /radar/quality/speed/top/ases">client.radar.quality.speed.top.ases.<a href="./src/resources/radar/quality/speed/top/ases.ts">list</a>({ ...params }) -> AseListResponse</code>
-
-##### Locations
-
-Types:
-
-- <code><a href="./src/resources/radar/quality/speed/top/locations.ts">LocationListResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/quality/speed/top/locations">client.radar.quality.speed.top.locations.<a href="./src/resources/radar/quality/speed/top/locations.ts">list</a>({ ...params }) -> LocationListResponse</code>
+- <code title="get /radar/quality/speed/top/ases">client.radar.quality.speed.top.<a href="./src/resources/radar/quality/speed/top.ts">ases</a>({ ...params }) -> TopAsesResponse</code>
+- <code title="get /radar/quality/speed/top/locations">client.radar.quality.speed.top.<a href="./src/resources/radar/quality/speed/top.ts">locations</a>({ ...params }) -> TopLocationsResponse</code>
 
 ## Ranking
 
-### TimeseriesGroups
-
 Types:
 
-- <code><a href="./src/resources/radar/ranking/timeseries-groups.ts">TimeseriesGroupListResponse</a></code>
+- <code><a href="./src/resources/radar/ranking/ranking.ts">RankingTimeseriesGroupsResponse</a></code>
 
 Methods:
 
-- <code title="get /radar/ranking/timeseries_groups">client.radar.ranking.timeseriesGroups.<a href="./src/resources/radar/ranking/timeseries-groups.ts">list</a>({ ...params }) -> TimeseriesGroupListResponse</code>
+- <code title="get /radar/ranking/timeseries_groups">client.radar.ranking.<a href="./src/resources/radar/ranking/ranking.ts">timeseriesGroups</a>({ ...params }) -> RankingTimeseriesGroupsResponse</code>
+
+### Ranking
+
+Types:
+
+- <code><a href="./src/resources/radar/ranking/ranking.ts">RankingGetResponse</a></code>
+- <code><a href="./src/resources/radar/ranking/ranking.ts">RankingTopResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/ranking/domain/{domain}">client.radar.ranking.ranking.<a href="./src/resources/radar/ranking/ranking.ts">get</a>(domain, { ...params }) -> RankingGetResponse</code>
+- <code title="get /radar/ranking/top">client.radar.ranking.ranking.<a href="./src/resources/radar/ranking/ranking.ts">top</a>({ ...params }) -> RankingTopResponse</code>
 
 ## TrafficAnomalies
 
 Types:
 
-- <code><a href="./src/resources/radar/traffic-anomalies/traffic-anomalies.ts">TrafficAnomalyListResponse</a></code>
+- <code><a href="./src/resources/radar/traffic-anomalies/traffic-anomalies.ts">TrafficAnomalyGetResponse</a></code>
 
 Methods:
 
-- <code title="get /radar/traffic_anomalies">client.radar.trafficAnomalies.<a href="./src/resources/radar/traffic-anomalies/traffic-anomalies.ts">list</a>({ ...params }) -> TrafficAnomalyListResponse</code>
+- <code title="get /radar/traffic_anomalies">client.radar.trafficAnomalies.<a href="./src/resources/radar/traffic-anomalies/traffic-anomalies.ts">get</a>({ ...params }) -> TrafficAnomalyGetResponse</code>
 
 ### Locations
 
 Types:
 
-- <code><a href="./src/resources/radar/traffic-anomalies/locations.ts">LocationListResponse</a></code>
+- <code><a href="./src/resources/radar/traffic-anomalies/locations.ts">LocationGetResponse</a></code>
 
 Methods:
 
-- <code title="get /radar/traffic_anomalies/locations">client.radar.trafficAnomalies.locations.<a href="./src/resources/radar/traffic-anomalies/locations.ts">list</a>({ ...params }) -> LocationListResponse</code>
+- <code title="get /radar/traffic_anomalies/locations">client.radar.trafficAnomalies.locations.<a href="./src/resources/radar/traffic-anomalies/locations.ts">get</a>({ ...params }) -> LocationGetResponse</code>
 
 # BotManagement
 
@@ -5982,18 +6052,6 @@ Methods:
 
 - <code title="put /zones/{zone_id}/bot_management">client.botManagement.<a href="./src/resources/bot-management.ts">update</a>(zoneId, { ...params }) -> BotManagementUpdateResponse</code>
 - <code title="get /zones/{zone_id}/bot_management">client.botManagement.<a href="./src/resources/bot-management.ts">get</a>(zoneId) -> BotManagementGetResponse</code>
-
-# CacheReserve
-
-Types:
-
-- <code><a href="./src/resources/cache-reserve.ts">CacheReserveCreateResponse</a></code>
-- <code><a href="./src/resources/cache-reserve.ts">CacheReserveGetResponse</a></code>
-
-Methods:
-
-- <code title="post /zones/{zone_id}/cache/cache_reserve_clear">client.cacheReserve.<a href="./src/resources/cache-reserve.ts">create</a>(zoneId) -> CacheReserveCreateResponse</code>
-- <code title="get /zones/{zone_id}/cache/cache_reserve_clear">client.cacheReserve.<a href="./src/resources/cache-reserve.ts">get</a>(zoneId) -> CacheReserveGetResponse</code>
 
 # OriginPostQuantumEncryption
 

@@ -1,4 +1,4 @@
 // File generated from our OpenAPI spec by Stainless.
 
-export { Tops } from './tops/index';
+export { TopBotsResponse, TopCategoriesResponse, TopBotsParams, TopCategoriesParams, Top } from './top';
 export { VerifiedBots } from './verified-bots';

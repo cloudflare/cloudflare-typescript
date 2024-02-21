@@ -3,13 +3,13 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as CacheAPI from 'cloudflare/resources/cache/cache';
-import * as CacheReservesAPI from 'cloudflare/resources/cache/cache-reserves';
+import * as CacheReserveAPI from 'cloudflare/resources/cache/cache-reserve';
 import * as RegionalTieredCacheAPI from 'cloudflare/resources/cache/regional-tiered-cache';
 import * as TieredCacheSmartTopologyAPI from 'cloudflare/resources/cache/tiered-cache-smart-topology';
 import * as VariantsAPI from 'cloudflare/resources/cache/variants';
 
 export class Cache extends APIResource {
-  cacheReserves: CacheReservesAPI.CacheReserves = new CacheReservesAPI.CacheReserves(this._client);
+  cacheReserve: CacheReserveAPI.CacheReserve = new CacheReserveAPI.CacheReserve(this._client);
   tieredCacheSmartTopology: TieredCacheSmartTopologyAPI.TieredCacheSmartTopology =
     new TieredCacheSmartTopologyAPI.TieredCacheSmartTopology(this._client);
   variants: VariantsAPI.Variants = new VariantsAPI.Variants(this._client);
@@ -67,17 +67,23 @@ export interface CachePurgeResponse {
 }
 
 export type CachePurgeParams =
-  | CachePurgeParams.CachePurgeFlex
+  | CachePurgeParams.CachePurgeTags
+  | CachePurgeParams.CachePurgeHosts
+  | CachePurgeParams.CachePurgePrefixes
   | CachePurgeParams.CachePurgeEverything
   | CachePurgeParams.CachePurgeFiles;
 
 export namespace CachePurgeParams {
-  export interface CachePurgeFlex {
-    hosts?: Array<string>;
-
-    prefixes?: Array<string>;
-
+  export interface CachePurgeTags {
     tags?: Array<string>;
+  }
+
+  export interface CachePurgeHosts {
+    hosts?: Array<string>;
+  }
+
+  export interface CachePurgePrefixes {
+    prefixes?: Array<string>;
   }
 
   export interface CachePurgeEverything {
@@ -85,7 +91,7 @@ export namespace CachePurgeParams {
   }
 
   export interface CachePurgeFiles {
-    files?: Array<string | CachePurgeParams.CachePurgeFiles.CachePurgeURLAndHeaders>;
+    files?: Array<string | CachePurgeFiles.CachePurgeURLAndHeaders>;
   }
 
   export namespace CachePurgeFiles {
@@ -100,10 +106,10 @@ export namespace CachePurgeParams {
 export namespace Cache {
   export import CachePurgeResponse = CacheAPI.CachePurgeResponse;
   export import CachePurgeParams = CacheAPI.CachePurgeParams;
-  export import CacheReserves = CacheReservesAPI.CacheReserves;
-  export import CacheReserveListResponse = CacheReservesAPI.CacheReserveListResponse;
-  export import CacheReserveEditResponse = CacheReservesAPI.CacheReserveEditResponse;
-  export import CacheReserveEditParams = CacheReservesAPI.CacheReserveEditParams;
+  export import CacheReserve = CacheReserveAPI.CacheReserve;
+  export import CacheReserveListResponse = CacheReserveAPI.CacheReserveListResponse;
+  export import CacheReserveEditResponse = CacheReserveAPI.CacheReserveEditResponse;
+  export import CacheReserveEditParams = CacheReserveAPI.CacheReserveEditParams;
   export import TieredCacheSmartTopology = TieredCacheSmartTopologyAPI.TieredCacheSmartTopology;
   export import TieredCacheSmartTopologyDeleteResponse = TieredCacheSmartTopologyAPI.TieredCacheSmartTopologyDeleteResponse;
   export import TieredCacheSmartTopologyEditResponse = TieredCacheSmartTopologyAPI.TieredCacheSmartTopologyEditResponse;

@@ -1,11 +1,12 @@
 // File generated from our OpenAPI spec by Stainless.
 
-export { PhaseGetResponse, Phases } from './phases';
+export { PhaseGetResponse, PhaseGetParams, Phases } from './phases';
 export {
   RuleCreateResponse,
   RuleDeleteResponse,
   RuleEditResponse,
   RuleCreateParams,
+  RuleDeleteParams,
   RuleEditParams,
   Rules,
 } from './rules';
@@ -16,6 +17,16 @@ export {
   RulesetGetResponse,
   RulesetCreateParams,
   RulesetUpdateParams,
+  RulesetListParams,
+  RulesetDeleteParams,
+  RulesetGetParams,
   Rulesets,
 } from './rulesets';
-export { VersionListResponse, VersionGetResponse, Versions } from './versions/index';
+export {
+  VersionListResponse,
+  VersionGetResponse,
+  VersionListParams,
+  VersionDeleteParams,
+  VersionGetParams,
+  Versions,
+} from './versions/index';

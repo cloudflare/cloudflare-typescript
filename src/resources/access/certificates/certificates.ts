@@ -12,13 +12,12 @@ export class Certificates extends APIResource {
    * Adds a new mTLS root certificate to Access.
    */
   create(
-    accountOrZone: string,
-    accountOrZoneId: string,
-    body: CertificateCreateParams,
+    params: CertificateCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CertificateCreateResponse> {
+    const { account_id, zone_id, ...body } = params;
     return (
-      this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/certificates`, {
+      this._client.post(`/${account_id}/${zone_id}/access/certificates`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: CertificateCreateResponse }>
@@ -29,14 +28,13 @@ export class Certificates extends APIResource {
    * Updates a configured mTLS certificate.
    */
   update(
-    accountOrZone: string,
-    accountOrZoneId: string,
     uuid: string,
-    body: CertificateUpdateParams,
+    params: CertificateUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CertificateUpdateResponse> {
+    const { account_id, zone_id, ...body } = params;
     return (
-      this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/certificates/${uuid}`, {
+      this._client.put(`/${account_id}/${zone_id}/access/certificates/${uuid}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: CertificateUpdateResponse }>
@@ -47,15 +45,14 @@ export class Certificates extends APIResource {
    * Lists all mTLS root certificates.
    */
   list(
-    accountOrZone: string,
-    accountOrZoneId: string,
+    params: CertificateListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CertificateListResponse | null> {
+    const { account_id, zone_id } = params;
     return (
-      this._client.get(
-        `/${accountOrZone}/${accountOrZoneId}/access/certificates`,
-        options,
-      ) as Core.APIPromise<{ result: CertificateListResponse | null }>
+      this._client.get(`/${account_id}/${zone_id}/access/certificates`, options) as Core.APIPromise<{
+        result: CertificateListResponse | null;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -63,14 +60,14 @@ export class Certificates extends APIResource {
    * Deletes an mTLS certificate.
    */
   delete(
-    accountOrZone: string,
-    accountOrZoneId: string,
     uuid: string,
+    params: CertificateDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CertificateDeleteResponse> {
+    const { account_id, zone_id } = params;
     return (
       this._client.delete(
-        `/${accountOrZone}/${accountOrZoneId}/access/certificates/${uuid}`,
+        `/${account_id}/${zone_id}/access/certificates/${uuid}`,
         options,
       ) as Core.APIPromise<{ result: CertificateDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -80,16 +77,15 @@ export class Certificates extends APIResource {
    * Fetches a single mTLS certificate.
    */
   get(
-    accountOrZone: string,
-    accountOrZoneId: string,
     uuid: string,
+    params: CertificateGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CertificateGetResponse> {
+    const { account_id, zone_id } = params;
     return (
-      this._client.get(
-        `/${accountOrZone}/${accountOrZoneId}/access/certificates/${uuid}`,
-        options,
-      ) as Core.APIPromise<{ result: CertificateGetResponse }>
+      this._client.get(`/${account_id}/${zone_id}/access/certificates/${uuid}`, options) as Core.APIPromise<{
+        result: CertificateGetResponse;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -219,31 +215,91 @@ export interface CertificateGetResponse {
 
 export interface CertificateCreateParams {
   /**
-   * The certificate content.
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id: string;
+
+  /**
+   * Body param: The certificate content.
    */
   certificate: string;
 
   /**
-   * The name of the certificate.
+   * Body param: The name of the certificate.
    */
   name: string;
 
   /**
-   * The hostnames of the applications that will use this certificate.
+   * Body param: The hostnames of the applications that will use this certificate.
    */
   associated_hostnames?: Array<string>;
 }
 
 export interface CertificateUpdateParams {
   /**
-   * The hostnames of the applications that will use this certificate.
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id: string;
+
+  /**
+   * Body param: The hostnames of the applications that will use this certificate.
    */
   associated_hostnames: Array<string>;
 
   /**
-   * The name of the certificate.
+   * Body param: The name of the certificate.
    */
   name?: string;
+}
+
+export interface CertificateListParams {
+  /**
+   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   */
+  zone_id: string;
+}
+
+export interface CertificateDeleteParams {
+  /**
+   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   */
+  zone_id: string;
+}
+
+export interface CertificateGetParams {
+  /**
+   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   */
+  zone_id: string;
 }
 
 export namespace Certificates {
@@ -254,8 +310,12 @@ export namespace Certificates {
   export import CertificateGetResponse = CertificatesAPI.CertificateGetResponse;
   export import CertificateCreateParams = CertificatesAPI.CertificateCreateParams;
   export import CertificateUpdateParams = CertificatesAPI.CertificateUpdateParams;
+  export import CertificateListParams = CertificatesAPI.CertificateListParams;
+  export import CertificateDeleteParams = CertificatesAPI.CertificateDeleteParams;
+  export import CertificateGetParams = CertificatesAPI.CertificateGetParams;
   export import Settings = SettingsAPI.Settings;
   export import SettingUpdateResponse = SettingsAPI.SettingUpdateResponse;
   export import SettingListResponse = SettingsAPI.SettingListResponse;
   export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;
+  export import SettingListParams = SettingsAPI.SettingListParams;
 }

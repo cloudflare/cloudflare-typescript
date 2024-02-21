@@ -1,0 +1,231 @@
+// File generated from our OpenAPI spec by Stainless.
+
+import * as Core from 'cloudflare/core';
+import { APIResource } from 'cloudflare/resource';
+import { isRequestOptions } from 'cloudflare/core';
+import * as LocationsAPI from 'cloudflare/resources/radar/http/locations/locations';
+import * as BotClassAPI from 'cloudflare/resources/radar/http/locations/bot-class';
+import * as DeviceTypeAPI from 'cloudflare/resources/radar/http/locations/device-type';
+import * as HTTPMethodAPI from 'cloudflare/resources/radar/http/locations/http-method';
+import * as HTTPProtocolAPI from 'cloudflare/resources/radar/http/locations/http-protocol';
+import * as IPVersionAPI from 'cloudflare/resources/radar/http/locations/ip-version';
+import * as OsAPI from 'cloudflare/resources/radar/http/locations/os';
+import * as TLSVersionAPI from 'cloudflare/resources/radar/http/locations/tls-version';
+
+export class Locations extends APIResource {
+  botClass: BotClassAPI.BotClass = new BotClassAPI.BotClass(this._client);
+  deviceType: DeviceTypeAPI.DeviceType = new DeviceTypeAPI.DeviceType(this._client);
+  httpProtocol: HTTPProtocolAPI.HTTPProtocol = new HTTPProtocolAPI.HTTPProtocol(this._client);
+  httpMethod: HTTPMethodAPI.HTTPMethod = new HTTPMethodAPI.HTTPMethod(this._client);
+  ipVersion: IPVersionAPI.IPVersion = new IPVersionAPI.IPVersion(this._client);
+  os: OsAPI.Os = new OsAPI.Os(this._client);
+  tlsVersion: TLSVersionAPI.TLSVersion = new TLSVersionAPI.TLSVersion(this._client);
+
+  /**
+   * Get the top locations by HTTP traffic. Values are a percentage out of the total
+   * traffic.
+   */
+  get(query?: LocationGetParams, options?: Core.RequestOptions): Core.APIPromise<LocationGetResponse>;
+  get(options?: Core.RequestOptions): Core.APIPromise<LocationGetResponse>;
+  get(
+    query: LocationGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LocationGetResponse> {
+    if (isRequestOptions(query)) {
+      return this.get({}, query);
+    }
+    return (
+      this._client.get('/radar/http/top/locations', { query, ...options }) as Core.APIPromise<{
+        result: LocationGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+}
+
+export interface LocationGetResponse {
+  meta: LocationGetResponse.Meta;
+
+  top_0: Array<LocationGetResponse.Top0>;
+}
+
+export namespace LocationGetResponse {
+  export interface Meta {
+    dateRange: Array<Meta.DateRange>;
+
+    lastUpdated: string;
+
+    confidenceInfo?: Meta.ConfidenceInfo;
+  }
+
+  export namespace Meta {
+    export interface DateRange {
+      /**
+       * Adjusted end of date range.
+       */
+      endTime: string;
+
+      /**
+       * Adjusted start of date range.
+       */
+      startTime: string;
+    }
+
+    export interface ConfidenceInfo {
+      annotations?: Array<ConfidenceInfo.Annotation>;
+
+      level?: number;
+    }
+
+    export namespace ConfidenceInfo {
+      export interface Annotation {
+        dataSource: string;
+
+        description: string;
+
+        eventType: string;
+
+        isInstantaneous: unknown;
+
+        endTime?: string;
+
+        linkedUrl?: string;
+
+        startTime?: string;
+      }
+    }
+  }
+
+  export interface Top0 {
+    clientCountryAlpha2: string;
+
+    clientCountryName: string;
+
+    value: string;
+  }
+}
+
+export interface LocationGetParams {
+  /**
+   * Array of comma separated list of ASNs, start with `-` to exclude from results.
+   * For example, `-174, 3356` excludes results from AS174, but includes results from
+   * AS3356.
+   */
+  asn?: Array<string>;
+
+  /**
+   * Filter for bot class. Refer to
+   * [Bot classes](https://developers.cloudflare.com/radar/concepts/bot-classes/).
+   */
+  botClass?: Array<'LIKELY_AUTOMATED' | 'LIKELY_HUMAN'>;
+
+  /**
+   * End of the date range (inclusive).
+   */
+  dateEnd?: Array<string>;
+
+  /**
+   * For example, use `7d` and `7dControl` to compare this week with the previous
+   * week. Use this parameter or set specific start and end dates (`dateStart` and
+   * `dateEnd` parameters).
+   */
+  dateRange?: Array<
+    | '1d'
+    | '2d'
+    | '7d'
+    | '14d'
+    | '28d'
+    | '12w'
+    | '24w'
+    | '52w'
+    | '1dControl'
+    | '2dControl'
+    | '7dControl'
+    | '14dControl'
+    | '28dControl'
+    | '12wControl'
+    | '24wControl'
+  >;
+
+  /**
+   * Array of datetimes to filter the start of a series.
+   */
+  dateStart?: Array<string>;
+
+  /**
+   * Filter for device type.
+   */
+  deviceType?: Array<'DESKTOP' | 'MOBILE' | 'OTHER'>;
+
+  /**
+   * Format results are returned in.
+   */
+  format?: 'JSON' | 'CSV';
+
+  /**
+   * Filter for http protocol.
+   */
+  httpProtocol?: Array<'HTTP' | 'HTTPS'>;
+
+  /**
+   * Filter for http version.
+   */
+  httpVersion?: Array<'HTTPv1' | 'HTTPv2' | 'HTTPv3'>;
+
+  /**
+   * Filter for ip version.
+   */
+  ipVersion?: Array<'IPv4' | 'IPv6'>;
+
+  /**
+   * Limit the number of objects in the response.
+   */
+  limit?: number;
+
+  /**
+   * Array of comma separated list of locations (alpha-2 country codes). Start with
+   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
+   * but includes results from PT.
+   */
+  location?: Array<string>;
+
+  /**
+   * Array of names that will be used to name the series in responses.
+   */
+  name?: Array<string>;
+
+  /**
+   * Filter for os name.
+   */
+  os?: Array<'WINDOWS' | 'MACOSX' | 'IOS' | 'ANDROID' | 'CHROMEOS' | 'LINUX' | 'SMART_TV'>;
+
+  /**
+   * Filter for tls version.
+   */
+  tlsVersion?: Array<'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3' | 'TLSvQUIC'>;
+}
+
+export namespace Locations {
+  export import LocationGetResponse = LocationsAPI.LocationGetResponse;
+  export import LocationGetParams = LocationsAPI.LocationGetParams;
+  export import BotClass = BotClassAPI.BotClass;
+  export import BotClassGetResponse = BotClassAPI.BotClassGetResponse;
+  export import BotClassGetParams = BotClassAPI.BotClassGetParams;
+  export import DeviceType = DeviceTypeAPI.DeviceType;
+  export import DeviceTypeGetResponse = DeviceTypeAPI.DeviceTypeGetResponse;
+  export import DeviceTypeGetParams = DeviceTypeAPI.DeviceTypeGetParams;
+  export import HTTPProtocol = HTTPProtocolAPI.HTTPProtocol;
+  export import HTTPProtocolGetResponse = HTTPProtocolAPI.HTTPProtocolGetResponse;
+  export import HTTPProtocolGetParams = HTTPProtocolAPI.HTTPProtocolGetParams;
+  export import HTTPMethod = HTTPMethodAPI.HTTPMethod;
+  export import HTTPMethodGetResponse = HTTPMethodAPI.HTTPMethodGetResponse;
+  export import HTTPMethodGetParams = HTTPMethodAPI.HTTPMethodGetParams;
+  export import IPVersion = IPVersionAPI.IPVersion;
+  export import IPVersionGetResponse = IPVersionAPI.IPVersionGetResponse;
+  export import IPVersionGetParams = IPVersionAPI.IPVersionGetParams;
+  export import Os = OsAPI.Os;
+  export import OGetResponse = OsAPI.OGetResponse;
+  export import OGetParams = OsAPI.OGetParams;
+  export import TLSVersion = TLSVersionAPI.TLSVersion;
+  export import TLSVersionGetResponse = TLSVersionAPI.TLSVersionGetResponse;
+  export import TLSVersionGetParams = TLSVersionAPI.TLSVersionGetParams;
+}

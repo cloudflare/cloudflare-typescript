@@ -9675,2301 +9675,531 @@ export interface DNSRecordScanResponse {
   total_records_parsed?: number;
 }
 
-export type DNSRecordCreateParams =
-  | DNSRecordCreateParams.DNSRecordsARecord
-  | DNSRecordCreateParams.DNSRecordsAaaaRecord
-  | DNSRecordCreateParams.DNSRecordsCaaRecord
-  | DNSRecordCreateParams.DNSRecordsCertRecord
-  | DNSRecordCreateParams.DNSRecordsCnameRecord
-  | DNSRecordCreateParams.DNSRecordsDnskeyRecord
-  | DNSRecordCreateParams.DNSRecordsDsRecord
-  | DNSRecordCreateParams.DNSRecordsHTTPSRecord
-  | DNSRecordCreateParams.DNSRecordsLocRecord
-  | DNSRecordCreateParams.DNSRecordsMxRecord
-  | DNSRecordCreateParams.DNSRecordsNaptrRecord
-  | DNSRecordCreateParams.DNSRecordsNsRecord
-  | DNSRecordCreateParams.DNSRecordsPtrRecord
-  | DNSRecordCreateParams.DNSRecordsSmimeaRecord
-  | DNSRecordCreateParams.DNSRecordsSrvRecord
-  | DNSRecordCreateParams.DNSRecordsSshfpRecord
-  | DNSRecordCreateParams.DNSRecordsSvcbRecord
-  | DNSRecordCreateParams.DNSRecordsTlsaRecord
-  | DNSRecordCreateParams.DNSRecordsTxtRecord
-  | DNSRecordCreateParams.DNSRecordsUriRecord;
+export interface DNSRecordCreateParams {
+  /**
+   * DNS record name (or @ for the zone apex) in Punycode.
+   */
+  name: string;
+
+  /**
+   * Record type.
+   */
+  type: 'URI';
+
+  /**
+   * Comments or notes about the DNS record. This field has no effect on DNS
+   * responses.
+   */
+  comment?: string;
+
+  data?: DNSRecordCreateParams.Data;
+
+  meta?: DNSRecordCreateParams.Meta;
+
+  /**
+   * Required for MX, SRV and URI records; unused by other record types. Records with
+   * lower priorities are preferred.
+   */
+  priority?: number;
+
+  /**
+   * Whether the record is receiving the performance and security benefits of
+   * Cloudflare.
+   */
+  proxied?: boolean;
+
+  /**
+   * Custom tags for the DNS record. This field has no effect on DNS responses.
+   */
+  tags?: Array<string>;
+
+  /**
+   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+   * Value must be between 60 and 86400, with the minimum reduced to 30 for
+   * Enterprise zones.
+   */
+  ttl?: number | 1;
+}
 
 export namespace DNSRecordCreateParams {
-  export interface DNSRecordsARecord {
+  export interface Data {
     /**
-     * A valid IPv4 address.
+     * algorithm.
      */
-    content: string;
+    algorithm?: number;
 
     /**
-     * DNS record name (or @ for the zone apex) in Punycode.
+     * Altitude of location in meters.
      */
-    name: string;
+    altitude?: number;
 
     /**
-     * Record type.
+     * certificate.
      */
-    type: 'A';
+    certificate?: string;
 
     /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
+     * The record content.
      */
-    comment?: string;
+    content?: string;
 
     /**
-     * Whether the record is receiving the performance and security benefits of
-     * Cloudflare.
+     * Digest.
      */
-    proxied?: boolean;
+    digest?: string;
 
     /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
+     * Digest Type.
      */
-    tags?: Array<string>;
+    digest_type?: number;
 
     /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
+     * fingerprint.
      */
-    ttl?: number | 1;
+    fingerprint?: string;
+
+    /**
+     * Flags.
+     */
+    flags?: string;
+
+    /**
+     * Key Tag.
+     */
+    key_tag?: number;
+
+    /**
+     * Degrees of latitude.
+     */
+    lat_degrees?: number;
+
+    /**
+     * Latitude direction.
+     */
+    lat_direction?: 'N' | 'S';
+
+    /**
+     * Minutes of latitude.
+     */
+    lat_minutes?: number;
+
+    /**
+     * Seconds of latitude.
+     */
+    lat_seconds?: number;
+
+    /**
+     * Degrees of longitude.
+     */
+    long_degrees?: number;
+
+    /**
+     * Longitude direction.
+     */
+    long_direction?: 'E' | 'W';
+
+    /**
+     * Minutes of longitude.
+     */
+    long_minutes?: number;
+
+    /**
+     * Seconds of longitude.
+     */
+    long_seconds?: number;
+
+    /**
+     * Matching Type.
+     */
+    matching_type?: number;
+
+    /**
+     * A valid hostname. Deprecated in favor of the regular 'name' outside the data
+     * map. This data map field represents the remainder of the full 'name' after the
+     * service and protocol.
+     */
+    name?: string;
+
+    /**
+     * Order.
+     */
+    order?: number;
+
+    /**
+     * The port of the service.
+     */
+    port?: number;
+
+    /**
+     * Horizontal precision of location.
+     */
+    precision_horz?: number;
+
+    /**
+     * Vertical precision of location.
+     */
+    precision_vert?: number;
+
+    /**
+     * Preference.
+     */
+    preference?: number;
+
+    /**
+     * priority.
+     */
+    priority?: number;
+
+    /**
+     * A valid protocol, prefixed with an underscore. Deprecated in favor of the
+     * regular 'name' outside the data map. This data map field normally represents the
+     * second label of that 'name'.
+     */
+    proto?: string;
+
+    /**
+     * Protocol.
+     */
+    protocol?: number;
+
+    /**
+     * Public Key.
+     */
+    public_key?: string;
+
+    /**
+     * Regex.
+     */
+    regex?: string;
+
+    /**
+     * Replacement.
+     */
+    replacement?: string;
+
+    /**
+     * Selector.
+     */
+    selector?: number;
+
+    /**
+     * A service type, prefixed with an underscore. Deprecated in favor of the regular
+     * 'name' outside the data map. This data map field normally represents the first
+     * label of that 'name'.
+     */
+    service?: string;
+
+    /**
+     * Size of location in meters.
+     */
+    size?: number;
+
+    /**
+     * Name of the property controlled by this record (e.g.: issue, issuewild, iodef).
+     */
+    tag?: string;
+
+    /**
+     * target.
+     */
+    target?: string;
+
+    /**
+     * type.
+     */
+    type?: number;
+
+    /**
+     * Usage.
+     */
+    usage?: number;
+
+    /**
+     * value.
+     */
+    value?: string;
+
+    /**
+     * The record weight.
+     */
+    weight?: number;
   }
 
-  export interface DNSRecordsAaaaRecord {
+  export interface Meta {
     /**
-     * A valid IPv6 address.
+     * Will exist if Cloudflare automatically added this DNS record during initial
+     * setup.
      */
-    content: string;
+    auto_added?: boolean;
 
     /**
-     * DNS record name (or @ for the zone apex) in Punycode.
+     * Where the record originated from.
      */
-    name: string;
-
-    /**
-     * Record type.
-     */
-    type: 'AAAA';
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * Whether the record is receiving the performance and security benefits of
-     * Cloudflare.
-     */
-    proxied?: boolean;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<string>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: number | 1;
-  }
-
-  export interface DNSRecordsCaaRecord {
-    /**
-     * Components of a CAA record.
-     */
-    data: DNSRecordCreateParams.DNSRecordsCaaRecord.Data;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Record type.
-     */
-    type: 'CAA';
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<string>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: number | 1;
-  }
-
-  export namespace DNSRecordsCaaRecord {
-    /**
-     * Components of a CAA record.
-     */
-    export interface Data {
-      /**
-       * Flags for the CAA record.
-       */
-      flags?: number;
-
-      /**
-       * Name of the property controlled by this record (e.g.: issue, issuewild, iodef).
-       */
-      tag?: string;
-
-      /**
-       * Value of the record. This field's semantics depend on the chosen tag.
-       */
-      value?: string;
-    }
-  }
-
-  export interface DNSRecordsCertRecord {
-    /**
-     * Components of a CERT record.
-     */
-    data: DNSRecordCreateParams.DNSRecordsCertRecord.Data;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Record type.
-     */
-    type: 'CERT';
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<string>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: number | 1;
-  }
-
-  export namespace DNSRecordsCertRecord {
-    /**
-     * Components of a CERT record.
-     */
-    export interface Data {
-      /**
-       * Algorithm.
-       */
-      algorithm?: number;
-
-      /**
-       * Certificate.
-       */
-      certificate?: string;
-
-      /**
-       * Key Tag.
-       */
-      key_tag?: number;
-
-      /**
-       * Type.
-       */
-      type?: number;
-    }
-  }
-
-  export interface DNSRecordsCnameRecord {
-    /**
-     * A valid hostname. Must not match the record's name.
-     */
-    content: unknown;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Record type.
-     */
-    type: 'CNAME';
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * Whether the record is receiving the performance and security benefits of
-     * Cloudflare.
-     */
-    proxied?: boolean;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<string>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: number | 1;
-  }
-
-  export interface DNSRecordsDnskeyRecord {
-    /**
-     * Components of a DNSKEY record.
-     */
-    data: DNSRecordCreateParams.DNSRecordsDnskeyRecord.Data;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Record type.
-     */
-    type: 'DNSKEY';
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<string>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: number | 1;
-  }
-
-  export namespace DNSRecordsDnskeyRecord {
-    /**
-     * Components of a DNSKEY record.
-     */
-    export interface Data {
-      /**
-       * Algorithm.
-       */
-      algorithm?: number;
-
-      /**
-       * Flags.
-       */
-      flags?: number;
-
-      /**
-       * Protocol.
-       */
-      protocol?: number;
-
-      /**
-       * Public Key.
-       */
-      public_key?: string;
-    }
-  }
-
-  export interface DNSRecordsDsRecord {
-    /**
-     * Components of a DS record.
-     */
-    data: DNSRecordCreateParams.DNSRecordsDsRecord.Data;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Record type.
-     */
-    type: 'DS';
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<string>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: number | 1;
-  }
-
-  export namespace DNSRecordsDsRecord {
-    /**
-     * Components of a DS record.
-     */
-    export interface Data {
-      /**
-       * Algorithm.
-       */
-      algorithm?: number;
-
-      /**
-       * Digest.
-       */
-      digest?: string;
-
-      /**
-       * Digest Type.
-       */
-      digest_type?: number;
-
-      /**
-       * Key Tag.
-       */
-      key_tag?: number;
-    }
-  }
-
-  export interface DNSRecordsHTTPSRecord {
-    /**
-     * Components of a HTTPS record.
-     */
-    data: DNSRecordCreateParams.DNSRecordsHTTPSRecord.Data;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Record type.
-     */
-    type: 'HTTPS';
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<string>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: number | 1;
-  }
-
-  export namespace DNSRecordsHTTPSRecord {
-    /**
-     * Components of a HTTPS record.
-     */
-    export interface Data {
-      /**
-       * priority.
-       */
-      priority?: number;
-
-      /**
-       * target.
-       */
-      target?: string;
-
-      /**
-       * value.
-       */
-      value?: string;
-    }
-  }
-
-  export interface DNSRecordsLocRecord {
-    /**
-     * Components of a LOC record.
-     */
-    data: DNSRecordCreateParams.DNSRecordsLocRecord.Data;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Record type.
-     */
-    type: 'LOC';
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<string>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: number | 1;
-  }
-
-  export namespace DNSRecordsLocRecord {
-    /**
-     * Components of a LOC record.
-     */
-    export interface Data {
-      /**
-       * Altitude of location in meters.
-       */
-      altitude?: number;
-
-      /**
-       * Degrees of latitude.
-       */
-      lat_degrees?: number;
-
-      /**
-       * Latitude direction.
-       */
-      lat_direction?: 'N' | 'S';
-
-      /**
-       * Minutes of latitude.
-       */
-      lat_minutes?: number;
-
-      /**
-       * Seconds of latitude.
-       */
-      lat_seconds?: number;
-
-      /**
-       * Degrees of longitude.
-       */
-      long_degrees?: number;
-
-      /**
-       * Longitude direction.
-       */
-      long_direction?: 'E' | 'W';
-
-      /**
-       * Minutes of longitude.
-       */
-      long_minutes?: number;
-
-      /**
-       * Seconds of longitude.
-       */
-      long_seconds?: number;
-
-      /**
-       * Horizontal precision of location.
-       */
-      precision_horz?: number;
-
-      /**
-       * Vertical precision of location.
-       */
-      precision_vert?: number;
-
-      /**
-       * Size of location in meters.
-       */
-      size?: number;
-    }
-  }
-
-  export interface DNSRecordsMxRecord {
-    /**
-     * A valid mail server hostname.
-     */
-    content: string;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Required for MX, SRV and URI records; unused by other record types. Records with
-     * lower priorities are preferred.
-     */
-    priority: number;
-
-    /**
-     * Record type.
-     */
-    type: 'MX';
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<string>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: number | 1;
-  }
-
-  export interface DNSRecordsNaptrRecord {
-    /**
-     * Components of a NAPTR record.
-     */
-    data: DNSRecordCreateParams.DNSRecordsNaptrRecord.Data;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Record type.
-     */
-    type: 'NAPTR';
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<string>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: number | 1;
-  }
-
-  export namespace DNSRecordsNaptrRecord {
-    /**
-     * Components of a NAPTR record.
-     */
-    export interface Data {
-      /**
-       * Flags.
-       */
-      flags?: string;
-
-      /**
-       * Order.
-       */
-      order?: number;
-
-      /**
-       * Preference.
-       */
-      preference?: number;
-
-      /**
-       * Regex.
-       */
-      regex?: string;
-
-      /**
-       * Replacement.
-       */
-      replacement?: string;
-
-      /**
-       * Service.
-       */
-      service?: string;
-    }
-  }
-
-  export interface DNSRecordsNsRecord {
-    /**
-     * A valid name server host name.
-     */
-    content: unknown;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Record type.
-     */
-    type: 'NS';
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<string>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: number | 1;
-  }
-
-  export interface DNSRecordsPtrRecord {
-    /**
-     * Domain name pointing to the address.
-     */
-    content: string;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Record type.
-     */
-    type: 'PTR';
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<string>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: number | 1;
-  }
-
-  export interface DNSRecordsSmimeaRecord {
-    /**
-     * Components of a SMIMEA record.
-     */
-    data: DNSRecordCreateParams.DNSRecordsSmimeaRecord.Data;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Record type.
-     */
-    type: 'SMIMEA';
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<string>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: number | 1;
-  }
-
-  export namespace DNSRecordsSmimeaRecord {
-    /**
-     * Components of a SMIMEA record.
-     */
-    export interface Data {
-      /**
-       * Certificate.
-       */
-      certificate?: string;
-
-      /**
-       * Matching Type.
-       */
-      matching_type?: number;
-
-      /**
-       * Selector.
-       */
-      selector?: number;
-
-      /**
-       * Usage.
-       */
-      usage?: number;
-    }
-  }
-
-  export interface DNSRecordsSrvRecord {
-    /**
-     * Components of a SRV record.
-     */
-    data: DNSRecordCreateParams.DNSRecordsSrvRecord.Data;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode. For SRV records, the first
-     * label is normally a service and the second a protocol name, each starting with
-     * an underscore.
-     */
-    name: string;
-
-    /**
-     * Record type.
-     */
-    type: 'SRV';
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<string>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: number | 1;
-  }
-
-  export namespace DNSRecordsSrvRecord {
-    /**
-     * Components of a SRV record.
-     */
-    export interface Data {
-      /**
-       * A valid hostname. Deprecated in favor of the regular 'name' outside the data
-       * map. This data map field represents the remainder of the full 'name' after the
-       * service and protocol.
-       */
-      name?: string;
-
-      /**
-       * The port of the service.
-       */
-      port?: number;
-
-      /**
-       * Required for MX, SRV and URI records; unused by other record types. Records with
-       * lower priorities are preferred.
-       */
-      priority?: number;
-
-      /**
-       * A valid protocol, prefixed with an underscore. Deprecated in favor of the
-       * regular 'name' outside the data map. This data map field normally represents the
-       * second label of that 'name'.
-       */
-      proto?: string;
-
-      /**
-       * A service type, prefixed with an underscore. Deprecated in favor of the regular
-       * 'name' outside the data map. This data map field normally represents the first
-       * label of that 'name'.
-       */
-      service?: string;
-
-      /**
-       * A valid hostname.
-       */
-      target?: string;
-
-      /**
-       * The record weight.
-       */
-      weight?: number;
-    }
-  }
-
-  export interface DNSRecordsSshfpRecord {
-    /**
-     * Components of a SSHFP record.
-     */
-    data: DNSRecordCreateParams.DNSRecordsSshfpRecord.Data;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Record type.
-     */
-    type: 'SSHFP';
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<string>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: number | 1;
-  }
-
-  export namespace DNSRecordsSshfpRecord {
-    /**
-     * Components of a SSHFP record.
-     */
-    export interface Data {
-      /**
-       * algorithm.
-       */
-      algorithm?: number;
-
-      /**
-       * fingerprint.
-       */
-      fingerprint?: string;
-
-      /**
-       * type.
-       */
-      type?: number;
-    }
-  }
-
-  export interface DNSRecordsSvcbRecord {
-    /**
-     * Components of a SVCB record.
-     */
-    data: DNSRecordCreateParams.DNSRecordsSvcbRecord.Data;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Record type.
-     */
-    type: 'SVCB';
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<string>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: number | 1;
-  }
-
-  export namespace DNSRecordsSvcbRecord {
-    /**
-     * Components of a SVCB record.
-     */
-    export interface Data {
-      /**
-       * priority.
-       */
-      priority?: number;
-
-      /**
-       * target.
-       */
-      target?: string;
-
-      /**
-       * value.
-       */
-      value?: string;
-    }
-  }
-
-  export interface DNSRecordsTlsaRecord {
-    /**
-     * Components of a TLSA record.
-     */
-    data: DNSRecordCreateParams.DNSRecordsTlsaRecord.Data;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Record type.
-     */
-    type: 'TLSA';
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<string>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: number | 1;
-  }
-
-  export namespace DNSRecordsTlsaRecord {
-    /**
-     * Components of a TLSA record.
-     */
-    export interface Data {
-      /**
-       * certificate.
-       */
-      certificate?: string;
-
-      /**
-       * Matching Type.
-       */
-      matching_type?: number;
-
-      /**
-       * Selector.
-       */
-      selector?: number;
-
-      /**
-       * Usage.
-       */
-      usage?: number;
-    }
-  }
-
-  export interface DNSRecordsTxtRecord {
-    /**
-     * Text content for the record.
-     */
-    content: string;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Record type.
-     */
-    type: 'TXT';
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<string>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: number | 1;
-  }
-
-  export interface DNSRecordsUriRecord {
-    /**
-     * Components of a URI record.
-     */
-    data: DNSRecordCreateParams.DNSRecordsUriRecord.Data;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Required for MX, SRV and URI records; unused by other record types. Records with
-     * lower priorities are preferred.
-     */
-    priority: number;
-
-    /**
-     * Record type.
-     */
-    type: 'URI';
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<string>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: number | 1;
-  }
-
-  export namespace DNSRecordsUriRecord {
-    /**
-     * Components of a URI record.
-     */
-    export interface Data {
-      /**
-       * The record content.
-       */
-      content?: string;
-
-      /**
-       * The record weight.
-       */
-      weight?: number;
-    }
+    source?: string;
   }
 }
 
-export type DNSRecordUpdateParams =
-  | DNSRecordUpdateParams.DNSRecordsARecord
-  | DNSRecordUpdateParams.DNSRecordsAaaaRecord
-  | DNSRecordUpdateParams.DNSRecordsCaaRecord
-  | DNSRecordUpdateParams.DNSRecordsCertRecord
-  | DNSRecordUpdateParams.DNSRecordsCnameRecord
-  | DNSRecordUpdateParams.DNSRecordsDnskeyRecord
-  | DNSRecordUpdateParams.DNSRecordsDsRecord
-  | DNSRecordUpdateParams.DNSRecordsHTTPSRecord
-  | DNSRecordUpdateParams.DNSRecordsLocRecord
-  | DNSRecordUpdateParams.DNSRecordsMxRecord
-  | DNSRecordUpdateParams.DNSRecordsNaptrRecord
-  | DNSRecordUpdateParams.DNSRecordsNsRecord
-  | DNSRecordUpdateParams.DNSRecordsPtrRecord
-  | DNSRecordUpdateParams.DNSRecordsSmimeaRecord
-  | DNSRecordUpdateParams.DNSRecordsSrvRecord
-  | DNSRecordUpdateParams.DNSRecordsSshfpRecord
-  | DNSRecordUpdateParams.DNSRecordsSvcbRecord
-  | DNSRecordUpdateParams.DNSRecordsTlsaRecord
-  | DNSRecordUpdateParams.DNSRecordsTxtRecord
-  | DNSRecordUpdateParams.DNSRecordsUriRecord;
+export interface DNSRecordUpdateParams {
+  /**
+   * DNS record name (or @ for the zone apex) in Punycode.
+   */
+  name: string;
+
+  /**
+   * Record type.
+   */
+  type: 'URI';
+
+  /**
+   * Comments or notes about the DNS record. This field has no effect on DNS
+   * responses.
+   */
+  comment?: string;
+
+  data?: DNSRecordUpdateParams.Data;
+
+  meta?: DNSRecordUpdateParams.Meta;
+
+  /**
+   * Required for MX, SRV and URI records; unused by other record types. Records with
+   * lower priorities are preferred.
+   */
+  priority?: number;
+
+  /**
+   * Whether the record is receiving the performance and security benefits of
+   * Cloudflare.
+   */
+  proxied?: boolean;
+
+  /**
+   * Custom tags for the DNS record. This field has no effect on DNS responses.
+   */
+  tags?: Array<string>;
+
+  /**
+   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+   * Value must be between 60 and 86400, with the minimum reduced to 30 for
+   * Enterprise zones.
+   */
+  ttl?: number | 1;
+}
 
 export namespace DNSRecordUpdateParams {
-  export interface DNSRecordsARecord {
+  export interface Data {
     /**
-     * A valid IPv4 address.
+     * algorithm.
      */
-    content: string;
+    algorithm?: number;
 
     /**
-     * DNS record name (or @ for the zone apex) in Punycode.
+     * Altitude of location in meters.
      */
-    name: string;
+    altitude?: number;
 
     /**
-     * Record type.
+     * certificate.
      */
-    type: 'A';
+    certificate?: string;
 
     /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
+     * The record content.
      */
-    comment?: string;
+    content?: string;
 
     /**
-     * Whether the record is receiving the performance and security benefits of
-     * Cloudflare.
+     * Digest.
      */
-    proxied?: boolean;
+    digest?: string;
 
     /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
+     * Digest Type.
      */
-    tags?: Array<string>;
+    digest_type?: number;
 
     /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
+     * fingerprint.
      */
-    ttl?: number | 1;
+    fingerprint?: string;
+
+    /**
+     * Flags.
+     */
+    flags?: string;
+
+    /**
+     * Key Tag.
+     */
+    key_tag?: number;
+
+    /**
+     * Degrees of latitude.
+     */
+    lat_degrees?: number;
+
+    /**
+     * Latitude direction.
+     */
+    lat_direction?: 'N' | 'S';
+
+    /**
+     * Minutes of latitude.
+     */
+    lat_minutes?: number;
+
+    /**
+     * Seconds of latitude.
+     */
+    lat_seconds?: number;
+
+    /**
+     * Degrees of longitude.
+     */
+    long_degrees?: number;
+
+    /**
+     * Longitude direction.
+     */
+    long_direction?: 'E' | 'W';
+
+    /**
+     * Minutes of longitude.
+     */
+    long_minutes?: number;
+
+    /**
+     * Seconds of longitude.
+     */
+    long_seconds?: number;
+
+    /**
+     * Matching Type.
+     */
+    matching_type?: number;
+
+    /**
+     * A valid hostname. Deprecated in favor of the regular 'name' outside the data
+     * map. This data map field represents the remainder of the full 'name' after the
+     * service and protocol.
+     */
+    name?: string;
+
+    /**
+     * Order.
+     */
+    order?: number;
+
+    /**
+     * The port of the service.
+     */
+    port?: number;
+
+    /**
+     * Horizontal precision of location.
+     */
+    precision_horz?: number;
+
+    /**
+     * Vertical precision of location.
+     */
+    precision_vert?: number;
+
+    /**
+     * Preference.
+     */
+    preference?: number;
+
+    /**
+     * priority.
+     */
+    priority?: number;
+
+    /**
+     * A valid protocol, prefixed with an underscore. Deprecated in favor of the
+     * regular 'name' outside the data map. This data map field normally represents the
+     * second label of that 'name'.
+     */
+    proto?: string;
+
+    /**
+     * Protocol.
+     */
+    protocol?: number;
+
+    /**
+     * Public Key.
+     */
+    public_key?: string;
+
+    /**
+     * Regex.
+     */
+    regex?: string;
+
+    /**
+     * Replacement.
+     */
+    replacement?: string;
+
+    /**
+     * Selector.
+     */
+    selector?: number;
+
+    /**
+     * A service type, prefixed with an underscore. Deprecated in favor of the regular
+     * 'name' outside the data map. This data map field normally represents the first
+     * label of that 'name'.
+     */
+    service?: string;
+
+    /**
+     * Size of location in meters.
+     */
+    size?: number;
+
+    /**
+     * Name of the property controlled by this record (e.g.: issue, issuewild, iodef).
+     */
+    tag?: string;
+
+    /**
+     * target.
+     */
+    target?: string;
+
+    /**
+     * type.
+     */
+    type?: number;
+
+    /**
+     * Usage.
+     */
+    usage?: number;
+
+    /**
+     * value.
+     */
+    value?: string;
+
+    /**
+     * The record weight.
+     */
+    weight?: number;
   }
 
-  export interface DNSRecordsAaaaRecord {
+  export interface Meta {
     /**
-     * A valid IPv6 address.
+     * Will exist if Cloudflare automatically added this DNS record during initial
+     * setup.
      */
-    content: string;
+    auto_added?: boolean;
 
     /**
-     * DNS record name (or @ for the zone apex) in Punycode.
+     * Where the record originated from.
      */
-    name: string;
-
-    /**
-     * Record type.
-     */
-    type: 'AAAA';
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * Whether the record is receiving the performance and security benefits of
-     * Cloudflare.
-     */
-    proxied?: boolean;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<string>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: number | 1;
-  }
-
-  export interface DNSRecordsCaaRecord {
-    /**
-     * Components of a CAA record.
-     */
-    data: DNSRecordUpdateParams.DNSRecordsCaaRecord.Data;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Record type.
-     */
-    type: 'CAA';
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<string>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: number | 1;
-  }
-
-  export namespace DNSRecordsCaaRecord {
-    /**
-     * Components of a CAA record.
-     */
-    export interface Data {
-      /**
-       * Flags for the CAA record.
-       */
-      flags?: number;
-
-      /**
-       * Name of the property controlled by this record (e.g.: issue, issuewild, iodef).
-       */
-      tag?: string;
-
-      /**
-       * Value of the record. This field's semantics depend on the chosen tag.
-       */
-      value?: string;
-    }
-  }
-
-  export interface DNSRecordsCertRecord {
-    /**
-     * Components of a CERT record.
-     */
-    data: DNSRecordUpdateParams.DNSRecordsCertRecord.Data;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Record type.
-     */
-    type: 'CERT';
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<string>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: number | 1;
-  }
-
-  export namespace DNSRecordsCertRecord {
-    /**
-     * Components of a CERT record.
-     */
-    export interface Data {
-      /**
-       * Algorithm.
-       */
-      algorithm?: number;
-
-      /**
-       * Certificate.
-       */
-      certificate?: string;
-
-      /**
-       * Key Tag.
-       */
-      key_tag?: number;
-
-      /**
-       * Type.
-       */
-      type?: number;
-    }
-  }
-
-  export interface DNSRecordsCnameRecord {
-    /**
-     * A valid hostname. Must not match the record's name.
-     */
-    content: unknown;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Record type.
-     */
-    type: 'CNAME';
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * Whether the record is receiving the performance and security benefits of
-     * Cloudflare.
-     */
-    proxied?: boolean;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<string>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: number | 1;
-  }
-
-  export interface DNSRecordsDnskeyRecord {
-    /**
-     * Components of a DNSKEY record.
-     */
-    data: DNSRecordUpdateParams.DNSRecordsDnskeyRecord.Data;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Record type.
-     */
-    type: 'DNSKEY';
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<string>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: number | 1;
-  }
-
-  export namespace DNSRecordsDnskeyRecord {
-    /**
-     * Components of a DNSKEY record.
-     */
-    export interface Data {
-      /**
-       * Algorithm.
-       */
-      algorithm?: number;
-
-      /**
-       * Flags.
-       */
-      flags?: number;
-
-      /**
-       * Protocol.
-       */
-      protocol?: number;
-
-      /**
-       * Public Key.
-       */
-      public_key?: string;
-    }
-  }
-
-  export interface DNSRecordsDsRecord {
-    /**
-     * Components of a DS record.
-     */
-    data: DNSRecordUpdateParams.DNSRecordsDsRecord.Data;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Record type.
-     */
-    type: 'DS';
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<string>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: number | 1;
-  }
-
-  export namespace DNSRecordsDsRecord {
-    /**
-     * Components of a DS record.
-     */
-    export interface Data {
-      /**
-       * Algorithm.
-       */
-      algorithm?: number;
-
-      /**
-       * Digest.
-       */
-      digest?: string;
-
-      /**
-       * Digest Type.
-       */
-      digest_type?: number;
-
-      /**
-       * Key Tag.
-       */
-      key_tag?: number;
-    }
-  }
-
-  export interface DNSRecordsHTTPSRecord {
-    /**
-     * Components of a HTTPS record.
-     */
-    data: DNSRecordUpdateParams.DNSRecordsHTTPSRecord.Data;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Record type.
-     */
-    type: 'HTTPS';
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<string>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: number | 1;
-  }
-
-  export namespace DNSRecordsHTTPSRecord {
-    /**
-     * Components of a HTTPS record.
-     */
-    export interface Data {
-      /**
-       * priority.
-       */
-      priority?: number;
-
-      /**
-       * target.
-       */
-      target?: string;
-
-      /**
-       * value.
-       */
-      value?: string;
-    }
-  }
-
-  export interface DNSRecordsLocRecord {
-    /**
-     * Components of a LOC record.
-     */
-    data: DNSRecordUpdateParams.DNSRecordsLocRecord.Data;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Record type.
-     */
-    type: 'LOC';
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<string>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: number | 1;
-  }
-
-  export namespace DNSRecordsLocRecord {
-    /**
-     * Components of a LOC record.
-     */
-    export interface Data {
-      /**
-       * Altitude of location in meters.
-       */
-      altitude?: number;
-
-      /**
-       * Degrees of latitude.
-       */
-      lat_degrees?: number;
-
-      /**
-       * Latitude direction.
-       */
-      lat_direction?: 'N' | 'S';
-
-      /**
-       * Minutes of latitude.
-       */
-      lat_minutes?: number;
-
-      /**
-       * Seconds of latitude.
-       */
-      lat_seconds?: number;
-
-      /**
-       * Degrees of longitude.
-       */
-      long_degrees?: number;
-
-      /**
-       * Longitude direction.
-       */
-      long_direction?: 'E' | 'W';
-
-      /**
-       * Minutes of longitude.
-       */
-      long_minutes?: number;
-
-      /**
-       * Seconds of longitude.
-       */
-      long_seconds?: number;
-
-      /**
-       * Horizontal precision of location.
-       */
-      precision_horz?: number;
-
-      /**
-       * Vertical precision of location.
-       */
-      precision_vert?: number;
-
-      /**
-       * Size of location in meters.
-       */
-      size?: number;
-    }
-  }
-
-  export interface DNSRecordsMxRecord {
-    /**
-     * A valid mail server hostname.
-     */
-    content: string;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Required for MX, SRV and URI records; unused by other record types. Records with
-     * lower priorities are preferred.
-     */
-    priority: number;
-
-    /**
-     * Record type.
-     */
-    type: 'MX';
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<string>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: number | 1;
-  }
-
-  export interface DNSRecordsNaptrRecord {
-    /**
-     * Components of a NAPTR record.
-     */
-    data: DNSRecordUpdateParams.DNSRecordsNaptrRecord.Data;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Record type.
-     */
-    type: 'NAPTR';
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<string>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: number | 1;
-  }
-
-  export namespace DNSRecordsNaptrRecord {
-    /**
-     * Components of a NAPTR record.
-     */
-    export interface Data {
-      /**
-       * Flags.
-       */
-      flags?: string;
-
-      /**
-       * Order.
-       */
-      order?: number;
-
-      /**
-       * Preference.
-       */
-      preference?: number;
-
-      /**
-       * Regex.
-       */
-      regex?: string;
-
-      /**
-       * Replacement.
-       */
-      replacement?: string;
-
-      /**
-       * Service.
-       */
-      service?: string;
-    }
-  }
-
-  export interface DNSRecordsNsRecord {
-    /**
-     * A valid name server host name.
-     */
-    content: unknown;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Record type.
-     */
-    type: 'NS';
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<string>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: number | 1;
-  }
-
-  export interface DNSRecordsPtrRecord {
-    /**
-     * Domain name pointing to the address.
-     */
-    content: string;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Record type.
-     */
-    type: 'PTR';
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<string>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: number | 1;
-  }
-
-  export interface DNSRecordsSmimeaRecord {
-    /**
-     * Components of a SMIMEA record.
-     */
-    data: DNSRecordUpdateParams.DNSRecordsSmimeaRecord.Data;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Record type.
-     */
-    type: 'SMIMEA';
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<string>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: number | 1;
-  }
-
-  export namespace DNSRecordsSmimeaRecord {
-    /**
-     * Components of a SMIMEA record.
-     */
-    export interface Data {
-      /**
-       * Certificate.
-       */
-      certificate?: string;
-
-      /**
-       * Matching Type.
-       */
-      matching_type?: number;
-
-      /**
-       * Selector.
-       */
-      selector?: number;
-
-      /**
-       * Usage.
-       */
-      usage?: number;
-    }
-  }
-
-  export interface DNSRecordsSrvRecord {
-    /**
-     * Components of a SRV record.
-     */
-    data: DNSRecordUpdateParams.DNSRecordsSrvRecord.Data;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode. For SRV records, the first
-     * label is normally a service and the second a protocol name, each starting with
-     * an underscore.
-     */
-    name: string;
-
-    /**
-     * Record type.
-     */
-    type: 'SRV';
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<string>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: number | 1;
-  }
-
-  export namespace DNSRecordsSrvRecord {
-    /**
-     * Components of a SRV record.
-     */
-    export interface Data {
-      /**
-       * A valid hostname. Deprecated in favor of the regular 'name' outside the data
-       * map. This data map field represents the remainder of the full 'name' after the
-       * service and protocol.
-       */
-      name?: string;
-
-      /**
-       * The port of the service.
-       */
-      port?: number;
-
-      /**
-       * Required for MX, SRV and URI records; unused by other record types. Records with
-       * lower priorities are preferred.
-       */
-      priority?: number;
-
-      /**
-       * A valid protocol, prefixed with an underscore. Deprecated in favor of the
-       * regular 'name' outside the data map. This data map field normally represents the
-       * second label of that 'name'.
-       */
-      proto?: string;
-
-      /**
-       * A service type, prefixed with an underscore. Deprecated in favor of the regular
-       * 'name' outside the data map. This data map field normally represents the first
-       * label of that 'name'.
-       */
-      service?: string;
-
-      /**
-       * A valid hostname.
-       */
-      target?: string;
-
-      /**
-       * The record weight.
-       */
-      weight?: number;
-    }
-  }
-
-  export interface DNSRecordsSshfpRecord {
-    /**
-     * Components of a SSHFP record.
-     */
-    data: DNSRecordUpdateParams.DNSRecordsSshfpRecord.Data;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Record type.
-     */
-    type: 'SSHFP';
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<string>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: number | 1;
-  }
-
-  export namespace DNSRecordsSshfpRecord {
-    /**
-     * Components of a SSHFP record.
-     */
-    export interface Data {
-      /**
-       * algorithm.
-       */
-      algorithm?: number;
-
-      /**
-       * fingerprint.
-       */
-      fingerprint?: string;
-
-      /**
-       * type.
-       */
-      type?: number;
-    }
-  }
-
-  export interface DNSRecordsSvcbRecord {
-    /**
-     * Components of a SVCB record.
-     */
-    data: DNSRecordUpdateParams.DNSRecordsSvcbRecord.Data;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Record type.
-     */
-    type: 'SVCB';
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<string>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: number | 1;
-  }
-
-  export namespace DNSRecordsSvcbRecord {
-    /**
-     * Components of a SVCB record.
-     */
-    export interface Data {
-      /**
-       * priority.
-       */
-      priority?: number;
-
-      /**
-       * target.
-       */
-      target?: string;
-
-      /**
-       * value.
-       */
-      value?: string;
-    }
-  }
-
-  export interface DNSRecordsTlsaRecord {
-    /**
-     * Components of a TLSA record.
-     */
-    data: DNSRecordUpdateParams.DNSRecordsTlsaRecord.Data;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Record type.
-     */
-    type: 'TLSA';
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<string>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: number | 1;
-  }
-
-  export namespace DNSRecordsTlsaRecord {
-    /**
-     * Components of a TLSA record.
-     */
-    export interface Data {
-      /**
-       * certificate.
-       */
-      certificate?: string;
-
-      /**
-       * Matching Type.
-       */
-      matching_type?: number;
-
-      /**
-       * Selector.
-       */
-      selector?: number;
-
-      /**
-       * Usage.
-       */
-      usage?: number;
-    }
-  }
-
-  export interface DNSRecordsTxtRecord {
-    /**
-     * Text content for the record.
-     */
-    content: string;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Record type.
-     */
-    type: 'TXT';
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<string>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: number | 1;
-  }
-
-  export interface DNSRecordsUriRecord {
-    /**
-     * Components of a URI record.
-     */
-    data: DNSRecordUpdateParams.DNSRecordsUriRecord.Data;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Required for MX, SRV and URI records; unused by other record types. Records with
-     * lower priorities are preferred.
-     */
-    priority: number;
-
-    /**
-     * Record type.
-     */
-    type: 'URI';
-
-    /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
-     */
-    comment?: string;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags?: Array<string>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl?: number | 1;
-  }
-
-  export namespace DNSRecordsUriRecord {
-    /**
-     * Components of a URI record.
-     */
-    export interface Data {
-      /**
-       * The record content.
-       */
-      content?: string;
-
-      /**
-       * The record weight.
-       */
-      weight?: number;
-    }
+    source?: string;
   }
 }
 

@@ -4,120 +4,93 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as HijacksAPI from 'cloudflare/resources/radar/bgp/hijacks';
-import { V4PagePagination, type V4PagePaginationParams } from 'cloudflare/pagination';
 
 export class Hijacks extends APIResource {
   /**
    * Get the BGP hijack events. (Beta)
    */
-  list(
-    query?: HijackListParams,
+  events(query?: HijackEventsParams, options?: Core.RequestOptions): Core.APIPromise<HijackEventsResponse>;
+  events(options?: Core.RequestOptions): Core.APIPromise<HijackEventsResponse>;
+  events(
+    query: HijackEventsParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<HijackListResponsesV4PagePagination, HijackListResponse>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<HijackListResponsesV4PagePagination, HijackListResponse>;
-  list(
-    query: HijackListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<HijackListResponsesV4PagePagination, HijackListResponse> {
+  ): Core.APIPromise<HijackEventsResponse> {
     if (isRequestOptions(query)) {
-      return this.list({}, query);
+      return this.events({}, query);
     }
-    return this._client.getAPIList('/radar/bgp/hijacks/events', HijackListResponsesV4PagePagination, {
-      query,
-      ...options,
-    });
+    return (
+      this._client.get('/radar/bgp/hijacks/events', { query, ...options }) as Core.APIPromise<{
+        result: HijackEventsResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class HijackListResponsesV4PagePagination extends V4PagePagination<HijackListResponse> {}
+export interface HijackEventsResponse {
+  asn_info: Array<HijackEventsResponse.AsnInfo>;
 
-export interface HijackListResponse {
-  result: HijackListResponse.Result;
+  events: Array<HijackEventsResponse.Event>;
 
-  result_info: HijackListResponse.ResultInfo;
-
-  success: boolean;
+  total_monitors: number;
 }
 
-export namespace HijackListResponse {
-  export interface Result {
-    asn_info: Array<Result.AsnInfo>;
+export namespace HijackEventsResponse {
+  export interface AsnInfo {
+    asn: number;
 
-    events: Array<Result.Event>;
+    country_code: string;
 
-    total_monitors: number;
+    org_name: string;
   }
 
-  export namespace Result {
-    export interface AsnInfo {
-      asn: number;
+  export interface Event {
+    id: number;
 
-      country_code: string;
+    confidence_score: number;
 
-      org_name: string;
-    }
+    duration: number;
 
-    export interface Event {
-      id: number;
+    event_type: number;
 
-      confidence_score: number;
+    hijack_msgs_count: number;
 
-      duration: number;
+    hijacker_asn: number;
 
-      event_type: number;
+    hijacker_country: string;
 
-      hijack_msgs_count: number;
+    is_stale: boolean;
 
-      hijacker_asn: number;
+    max_hijack_ts: string;
 
-      hijacker_country: string;
+    max_msg_ts: string;
 
-      is_stale: boolean;
+    min_hijack_ts: string;
 
-      max_hijack_ts: string;
+    on_going_count: number;
 
-      max_msg_ts: string;
+    peer_asns: Array<number>;
 
-      min_hijack_ts: string;
+    peer_ip_count: number;
 
-      on_going_count: number;
+    prefixes: Array<string>;
 
-      peer_asns: Array<number>;
+    tags: Array<Event.Tag>;
 
-      peer_ip_count: number;
+    victim_asns: Array<number>;
 
-      prefixes: Array<string>;
-
-      tags: Array<Event.Tag>;
-
-      victim_asns: Array<number>;
-
-      victim_countries: Array<string>;
-    }
-
-    export namespace Event {
-      export interface Tag {
-        name: string;
-
-        score: number;
-      }
-    }
+    victim_countries: Array<string>;
   }
 
-  export interface ResultInfo {
-    count: number;
+  export namespace Event {
+    export interface Tag {
+      name: string;
 
-    page: number;
-
-    per_page: number;
-
-    total_count: number;
+      score: number;
+    }
   }
 }
 
-export interface HijackListParams extends V4PagePaginationParams {
+export interface HijackEventsParams {
   /**
    * End of the date range (inclusive).
    */
@@ -185,6 +158,16 @@ export interface HijackListParams extends V4PagePaginationParams {
   minConfidence?: number;
 
   /**
+   * Current page number, starting from 1
+   */
+  page?: number;
+
+  /**
+   * Number of entries per page
+   */
+  per_page?: number;
+
+  /**
    * The prefix hijacked during a BGP hijack event
    */
   prefix?: string;
@@ -206,7 +189,6 @@ export interface HijackListParams extends V4PagePaginationParams {
 }
 
 export namespace Hijacks {
-  export import HijackListResponse = HijacksAPI.HijackListResponse;
-  export import HijackListResponsesV4PagePagination = HijacksAPI.HijackListResponsesV4PagePagination;
-  export import HijackListParams = HijacksAPI.HijackListParams;
+  export import HijackEventsResponse = HijacksAPI.HijackEventsResponse;
+  export import HijackEventsParams = HijacksAPI.HijackEventsParams;
 }

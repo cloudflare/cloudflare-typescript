@@ -9,14 +9,14 @@ export class UserPolicyChecks extends APIResource {
    * Tests if a specific user has permission to access an application.
    */
   list(
-    accountOrZone: string,
-    accountOrZoneId: string,
     appId: string | string,
+    params: UserPolicyCheckListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<UserPolicyCheckListResponse> {
+    const { account_id, zone_id } = params;
     return (
       this._client.get(
-        `/${accountOrZone}/${accountOrZoneId}/access/apps/${appId}/user_policy_checks`,
+        `/${account_id}/${zone_id}/access/apps/${appId}/user_policy_checks`,
         options,
       ) as Core.APIPromise<{ result: UserPolicyCheckListResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -81,6 +81,19 @@ export namespace UserPolicyCheckListResponse {
   }
 }
 
+export interface UserPolicyCheckListParams {
+  /**
+   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   */
+  zone_id: string;
+}
+
 export namespace UserPolicyChecks {
   export import UserPolicyCheckListResponse = UserPolicyChecksAPI.UserPolicyCheckListResponse;
+  export import UserPolicyCheckListParams = UserPolicyChecksAPI.UserPolicyCheckListParams;
 }

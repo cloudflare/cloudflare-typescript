@@ -9,13 +9,12 @@ export class Validate extends APIResource {
    * Checks if there is an existing job with a destination.
    */
   destination(
-    accountOrZone: string,
-    accountOrZoneId: string,
-    body: ValidateDestinationParams,
+    params: ValidateDestinationParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ValidateDestinationResponse | null> {
+    const { account_id, zone_id, ...body } = params;
     return (
-      this._client.post(`/${accountOrZone}/${accountOrZoneId}/logpush/validate/destination/exists`, {
+      this._client.post(`/${account_id}/${zone_id}/logpush/validate/destination/exists`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: ValidateDestinationResponse | null }>
@@ -26,13 +25,12 @@ export class Validate extends APIResource {
    * Validates logpull origin with logpull_options.
    */
   origin(
-    accountOrZone: string,
-    accountOrZoneId: string,
-    body: ValidateOriginParams,
+    params: ValidateOriginParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ValidateOriginResponse | null> {
+    const { account_id, zone_id, ...body } = params;
     return (
-      this._client.post(`/${accountOrZone}/${accountOrZoneId}/logpush/validate/origin`, {
+      this._client.post(`/${account_id}/${zone_id}/logpush/validate/origin`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: ValidateOriginResponse | null }>
@@ -52,20 +50,44 @@ export interface ValidateOriginResponse {
 
 export interface ValidateDestinationParams {
   /**
-   * Uniquely identifies a resource (such as an s3 bucket) where data will be pushed.
-   * Additional configuration parameters supported by the destination may be
-   * included.
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Uniquely identifies a resource (such as an s3 bucket) where data
+   * will be pushed. Additional configuration parameters supported by the destination
+   * may be included.
    */
   destination_conf: string;
 }
 
 export interface ValidateOriginParams {
   /**
-   * This field is deprecated. Use `output_options` instead. Configuration string. It
-   * specifies things like requested fields and timestamp formats. If migrating from
-   * the logpull api, copy the url (full url or just the query string) of your call
-   * here, and logpush will keep on making this call for you, setting start and end
-   * times appropriately.
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id: string;
+
+  /**
+   * Body param: This field is deprecated. Use `output_options` instead.
+   * Configuration string. It specifies things like requested fields and timestamp
+   * formats. If migrating from the logpull api, copy the url (full url or just the
+   * query string) of your call here, and logpush will keep on making this call for
+   * you, setting start and end times appropriately.
    */
   logpull_options: string | null;
 }

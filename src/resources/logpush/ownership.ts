@@ -9,13 +9,12 @@ export class Ownership extends APIResource {
    * Gets a new ownership challenge sent to your destination.
    */
   create(
-    accountOrZone: string,
-    accountOrZoneId: string,
-    body: OwnershipCreateParams,
+    params: OwnershipCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OwnershipCreateResponse | null> {
+    const { account_id, zone_id, ...body } = params;
     return (
-      this._client.post(`/${accountOrZone}/${accountOrZoneId}/logpush/ownership`, {
+      this._client.post(`/${account_id}/${zone_id}/logpush/ownership`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: OwnershipCreateResponse | null }>
@@ -26,13 +25,12 @@ export class Ownership extends APIResource {
    * Validates ownership challenge of the destination.
    */
   validate(
-    accountOrZone: string,
-    accountOrZoneId: string,
-    body: OwnershipValidateParams,
+    params: OwnershipValidateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OwnershipValidateResponse | null> {
+    const { account_id, zone_id, ...body } = params;
     return (
-      this._client.post(`/${accountOrZone}/${accountOrZoneId}/logpush/ownership/validate`, {
+      this._client.post(`/${account_id}/${zone_id}/logpush/ownership/validate`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: OwnershipValidateResponse | null }>
@@ -54,23 +52,47 @@ export interface OwnershipValidateResponse {
 
 export interface OwnershipCreateParams {
   /**
-   * Uniquely identifies a resource (such as an s3 bucket) where data will be pushed.
-   * Additional configuration parameters supported by the destination may be
-   * included.
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Uniquely identifies a resource (such as an s3 bucket) where data
+   * will be pushed. Additional configuration parameters supported by the destination
+   * may be included.
    */
   destination_conf: string;
 }
 
 export interface OwnershipValidateParams {
   /**
-   * Uniquely identifies a resource (such as an s3 bucket) where data will be pushed.
-   * Additional configuration parameters supported by the destination may be
-   * included.
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Uniquely identifies a resource (such as an s3 bucket) where data
+   * will be pushed. Additional configuration parameters supported by the destination
+   * may be included.
    */
   destination_conf: string;
 
   /**
-   * Ownership challenge token to prove destination ownership.
+   * Body param: Ownership challenge token to prove destination ownership.
    */
   ownership_challenge: string;
 }

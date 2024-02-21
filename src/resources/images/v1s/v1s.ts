@@ -281,22 +281,13 @@ export interface V1GetResponse {
   variants?: Array<string | string | string>;
 }
 
-export type V1CreateParams = V1CreateParams.ImagesImageUploadViaFile | V1CreateParams.ImagesImageUploadViaURL;
+export interface V1CreateParams {
+  metadata?: unknown;
 
-export namespace V1CreateParams {
-  export interface ImagesImageUploadViaFile {
-    /**
-     * An image binary data.
-     */
-    file: unknown;
-  }
-
-  export interface ImagesImageUploadViaURL {
-    /**
-     * A URL to fetch an image from origin.
-     */
-    url: string;
-  }
+  /**
+   * Indicates whether the image requires a signature token for the access.
+   */
+  requireSignedURLs?: boolean;
 }
 
 export interface V1ListParams extends V4PagePaginationParams {}

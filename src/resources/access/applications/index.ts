@@ -9,9 +9,23 @@ export {
   ApplicationRevokeTokensResponse,
   ApplicationCreateParams,
   ApplicationUpdateParams,
+  ApplicationListParams,
+  ApplicationDeleteParams,
+  ApplicationGetParams,
+  ApplicationRevokeTokensParams,
   Applications,
 } from './applications';
-export { CaCreateResponse, CaListResponse, CaDeleteResponse, CaGetResponse, Cas } from './cas';
+export {
+  CaCreateResponse,
+  CaListResponse,
+  CaDeleteResponse,
+  CaGetResponse,
+  CaCreateParams,
+  CaListParams,
+  CaDeleteParams,
+  CaGetParams,
+  Cas,
+} from './cas';
 export {
   PolicyCreateResponse,
   PolicyUpdateResponse,
@@ -20,6 +34,13 @@ export {
   PolicyGetResponse,
   PolicyCreateParams,
   PolicyUpdateParams,
+  PolicyListParams,
+  PolicyDeleteParams,
+  PolicyGetParams,
   Policies,
 } from './policies';
-export { UserPolicyCheckListResponse, UserPolicyChecks } from './user-policy-checks';
+export {
+  UserPolicyCheckListResponse,
+  UserPolicyCheckListParams,
+  UserPolicyChecks,
+} from './user-policy-checks';

@@ -11,28 +11,28 @@ export class Locations extends APIResource {
    * alerts are automatically detected by Radar and then manually verified by our
    * team. This endpoint returns the sum of alerts grouped by location.
    */
-  list(query?: LocationListParams, options?: Core.RequestOptions): Core.APIPromise<LocationListResponse>;
-  list(options?: Core.RequestOptions): Core.APIPromise<LocationListResponse>;
-  list(
-    query: LocationListParams | Core.RequestOptions = {},
+  get(query?: LocationGetParams, options?: Core.RequestOptions): Core.APIPromise<LocationGetResponse>;
+  get(options?: Core.RequestOptions): Core.APIPromise<LocationGetResponse>;
+  get(
+    query: LocationGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LocationListResponse> {
+  ): Core.APIPromise<LocationGetResponse> {
     if (isRequestOptions(query)) {
-      return this.list({}, query);
+      return this.get({}, query);
     }
     return (
       this._client.get('/radar/traffic_anomalies/locations', { query, ...options }) as Core.APIPromise<{
-        result: LocationListResponse;
+        result: LocationGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface LocationListResponse {
-  trafficAnomalies: Array<LocationListResponse.TrafficAnomaly>;
+export interface LocationGetResponse {
+  trafficAnomalies: Array<LocationGetResponse.TrafficAnomaly>;
 }
 
-export namespace LocationListResponse {
+export namespace LocationGetResponse {
   export interface TrafficAnomaly {
     clientCountryAlpha2: string;
 
@@ -42,7 +42,7 @@ export namespace LocationListResponse {
   }
 }
 
-export interface LocationListParams {
+export interface LocationGetParams {
   /**
    * End of the date range (inclusive).
    */
@@ -88,6 +88,6 @@ export interface LocationListParams {
 }
 
 export namespace Locations {
-  export import LocationListResponse = LocationsAPI.LocationListResponse;
-  export import LocationListParams = LocationsAPI.LocationListParams;
+  export import LocationGetResponse = LocationsAPI.LocationGetResponse;
+  export import LocationGetParams = LocationsAPI.LocationGetParams;
 }

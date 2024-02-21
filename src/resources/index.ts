@@ -46,7 +46,6 @@ export {
 } from './bot-management';
 export { BrandProtection } from './brand-protection/brand-protection';
 export { CachePurgeResponse, CachePurgeParams, Cache } from './cache/cache';
-export { CacheReserveCreateResponse, CacheReserveGetResponse, CacheReserve } from './cache-reserve';
 export {
   CallCreateResponse,
   CallUpdateResponse,
@@ -297,6 +296,9 @@ export {
   RulesetGetResponse,
   RulesetCreateParams,
   RulesetUpdateParams,
+  RulesetListParams,
+  RulesetDeleteParams,
+  RulesetGetParams,
   Rulesets,
 } from './rulesets/rulesets';
 export { Rum } from './rum/rum';

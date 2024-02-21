@@ -15,17 +15,12 @@ export class Rulesets extends APIResource {
   /**
    * Creates a ruleset.
    */
-  create(
-    accountOrZone: string,
-    accountOrZoneId: string,
-    body: RulesetCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RulesetCreateResponse> {
+  create(params: RulesetCreateParams, options?: Core.RequestOptions): Core.APIPromise<RulesetCreateResponse> {
+    const { account_id, zone_id, ...body } = params;
     return (
-      this._client.post(`/${accountOrZone}/${accountOrZoneId}/rulesets`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: RulesetCreateResponse }>
+      this._client.post(`/${account_id}/${zone_id}/rulesets`, { body, ...options }) as Core.APIPromise<{
+        result: RulesetCreateResponse;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -33,14 +28,13 @@ export class Rulesets extends APIResource {
    * Updates an account or zone ruleset, creating a new version.
    */
   update(
-    accountOrZone: string,
-    accountOrZoneId: string,
     rulesetId: string,
-    body: RulesetUpdateParams,
+    params: RulesetUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RulesetUpdateResponse> {
+    const { account_id, zone_id, ...body } = params;
     return (
-      this._client.put(`/${accountOrZone}/${accountOrZoneId}/rulesets/${rulesetId}`, {
+      this._client.put(`/${account_id}/${zone_id}/rulesets/${rulesetId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: RulesetUpdateResponse }>
@@ -50,13 +44,10 @@ export class Rulesets extends APIResource {
   /**
    * Fetches all rulesets.
    */
-  list(
-    accountOrZone: string,
-    accountOrZoneId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RulesetListResponse> {
+  list(params: RulesetListParams, options?: Core.RequestOptions): Core.APIPromise<RulesetListResponse> {
+    const { account_id, zone_id } = params;
     return (
-      this._client.get(`/${accountOrZone}/${accountOrZoneId}/rulesets`, options) as Core.APIPromise<{
+      this._client.get(`/${account_id}/${zone_id}/rulesets`, options) as Core.APIPromise<{
         result: RulesetListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -66,12 +57,12 @@ export class Rulesets extends APIResource {
    * Deletes all versions of an existing account or zone ruleset.
    */
   delete(
-    accountOrZone: string,
-    accountOrZoneId: string,
     rulesetId: string,
+    params: RulesetDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<void> {
-    return this._client.delete(`/${accountOrZone}/${accountOrZoneId}/rulesets/${rulesetId}`, {
+    const { account_id, zone_id } = params;
+    return this._client.delete(`/${account_id}/${zone_id}/rulesets/${rulesetId}`, {
       ...options,
       headers: { Accept: '*/*', ...options?.headers },
     });
@@ -81,16 +72,15 @@ export class Rulesets extends APIResource {
    * Fetches the latest version of an account or zone ruleset.
    */
   get(
-    accountOrZone: string,
-    accountOrZoneId: string,
     rulesetId: string,
+    params: RulesetGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RulesetGetResponse> {
+    const { account_id, zone_id } = params;
     return (
-      this._client.get(
-        `/${accountOrZone}/${accountOrZoneId}/rulesets/${rulesetId}`,
-        options,
-      ) as Core.APIPromise<{ result: RulesetGetResponse }>
+      this._client.get(`/${account_id}/${zone_id}/rulesets/${rulesetId}`, options) as Core.APIPromise<{
+        result: RulesetGetResponse;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -1859,17 +1849,29 @@ export namespace RulesetGetResponse {
 
 export interface RulesetCreateParams {
   /**
-   * The kind of the ruleset.
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id: string;
+
+  /**
+   * Body param: The kind of the ruleset.
    */
   kind: 'managed' | 'custom' | 'root' | 'zone';
 
   /**
-   * The human-readable name of the ruleset.
+   * Body param: The human-readable name of the ruleset.
    */
   name: string;
 
   /**
-   * The phase of the ruleset.
+   * Body param: The phase of the ruleset.
    */
   phase:
     | 'ddos_l4'
@@ -1897,7 +1899,7 @@ export interface RulesetCreateParams {
     | 'magic_transit_managed';
 
   /**
-   * The list of rules in the ruleset.
+   * Body param: The list of rules in the ruleset.
    */
   rules: Array<
     | RulesetCreateParams.RulesetsBlockRule
@@ -1907,7 +1909,7 @@ export interface RulesetCreateParams {
   >;
 
   /**
-   * An informative description of the ruleset.
+   * Body param: An informative description of the ruleset.
    */
   description?: string;
 }
@@ -2345,12 +2347,24 @@ export namespace RulesetCreateParams {
 
 export interface RulesetUpdateParams {
   /**
-   * The unique ID of the ruleset.
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id: string;
+
+  /**
+   * Body param: The unique ID of the ruleset.
    */
   id: string;
 
   /**
-   * The list of rules in the ruleset.
+   * Body param: The list of rules in the ruleset.
    */
   rules: Array<
     | RulesetUpdateParams.RulesetsBlockRule
@@ -2360,22 +2374,22 @@ export interface RulesetUpdateParams {
   >;
 
   /**
-   * An informative description of the ruleset.
+   * Body param: An informative description of the ruleset.
    */
   description?: string;
 
   /**
-   * The kind of the ruleset.
+   * Body param: The kind of the ruleset.
    */
   kind?: 'managed' | 'custom' | 'root' | 'zone';
 
   /**
-   * The human-readable name of the ruleset.
+   * Body param: The human-readable name of the ruleset.
    */
   name?: string;
 
   /**
-   * The phase of the ruleset.
+   * Body param: The phase of the ruleset.
    */
   phase?:
     | 'ddos_l4'
@@ -2834,6 +2848,42 @@ export namespace RulesetUpdateParams {
   }
 }
 
+export interface RulesetListParams {
+  /**
+   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   */
+  zone_id: string;
+}
+
+export interface RulesetDeleteParams {
+  /**
+   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   */
+  zone_id: string;
+}
+
+export interface RulesetGetParams {
+  /**
+   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   */
+  zone_id: string;
+}
+
 export namespace Rulesets {
   export import RulesetCreateResponse = RulesetsAPI.RulesetCreateResponse;
   export import RulesetUpdateResponse = RulesetsAPI.RulesetUpdateResponse;
@@ -2841,15 +2891,23 @@ export namespace Rulesets {
   export import RulesetGetResponse = RulesetsAPI.RulesetGetResponse;
   export import RulesetCreateParams = RulesetsAPI.RulesetCreateParams;
   export import RulesetUpdateParams = RulesetsAPI.RulesetUpdateParams;
+  export import RulesetListParams = RulesetsAPI.RulesetListParams;
+  export import RulesetDeleteParams = RulesetsAPI.RulesetDeleteParams;
+  export import RulesetGetParams = RulesetsAPI.RulesetGetParams;
   export import Phases = PhasesAPI.Phases;
   export import PhaseGetResponse = PhasesAPI.PhaseGetResponse;
+  export import PhaseGetParams = PhasesAPI.PhaseGetParams;
   export import Rules = RulesAPI.Rules;
   export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
   export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
   export import RuleEditResponse = RulesAPI.RuleEditResponse;
   export import RuleCreateParams = RulesAPI.RuleCreateParams;
+  export import RuleDeleteParams = RulesAPI.RuleDeleteParams;
   export import RuleEditParams = RulesAPI.RuleEditParams;
   export import Versions = VersionsAPI.Versions;
   export import VersionListResponse = VersionsAPI.VersionListResponse;
   export import VersionGetResponse = VersionsAPI.VersionGetResponse;
+  export import VersionListParams = VersionsAPI.VersionListParams;
+  export import VersionDeleteParams = VersionsAPI.VersionDeleteParams;
+  export import VersionGetParams = VersionsAPI.VersionGetParams;
 }
