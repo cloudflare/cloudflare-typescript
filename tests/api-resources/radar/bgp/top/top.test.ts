@@ -12,10 +12,10 @@ const cloudflare = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource ases', () => {
+describe('resource top', () => {
   // skipped: tests are disabled for the time being
   test.skip('prefixes', async () => {
-    const responsePromise = cloudflare.radar.bgp.tops.ases.prefixes();
+    const responsePromise = cloudflare.radar.bgp.top.prefixes();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -28,17 +28,26 @@ describe('resource ases', () => {
   // skipped: tests are disabled for the time being
   test.skip('prefixes: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.radar.bgp.tops.ases.prefixes({ path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+    await expect(cloudflare.radar.bgp.top.prefixes({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+      Cloudflare.NotFoundError,
+    );
   });
 
   // skipped: tests are disabled for the time being
   test.skip('prefixes: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.bgp.tops.ases.prefixes(
-        { country: 'NZ', format: 'JSON', limit: 10 },
+      cloudflare.radar.bgp.top.prefixes(
+        {
+          asn: ['string', 'string', 'string'],
+          dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
+          dateRange: ['1d', '2d', '7d'],
+          dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
+          format: 'JSON',
+          limit: 5,
+          name: ['string', 'string', 'string'],
+          updateType: ['ANNOUNCEMENT', 'WITHDRAWAL'],
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);

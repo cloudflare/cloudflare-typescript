@@ -3,7 +3,9 @@
 export { CachePurgeResponse, CachePurgeParams, Cache } from './cache';
 export {
   CacheReserveListResponse,
+  CacheReserveClearResponse,
   CacheReserveEditResponse,
+  CacheReserveStatusResponse,
   CacheReserveEditParams,
   CacheReserve,
 } from './cache-reserve';

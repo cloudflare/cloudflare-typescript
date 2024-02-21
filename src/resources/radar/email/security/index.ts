@@ -25,3 +25,4 @@ export {
   TimeseriesGroupDKIMParams,
   TimeseriesGroups,
 } from './timeseries-groups';
+export { Top } from './top/index';

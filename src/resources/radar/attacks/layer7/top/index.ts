@@ -1,5 +1,6 @@
 // File generated from our OpenAPI spec by Stainless.
 
+export { AseOriginResponse, AseOriginParams, Ases } from './ases';
 export {
   LocationOriginResponse,
   LocationTargetResponse,

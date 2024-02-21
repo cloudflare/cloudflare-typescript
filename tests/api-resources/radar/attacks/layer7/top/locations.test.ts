@@ -39,15 +39,13 @@ describe('resource locations', () => {
     await expect(
       cloudflare.radar.attacks.layer7.top.locations.origin(
         {
+          asn: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['1d', '2d', '7d'],
           dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           format: 'JSON',
-          ipVersion: ['IPv4', 'IPv6'],
           limit: 5,
-          location: ['string', 'string', 'string'],
           name: ['string', 'string', 'string'],
-          protocol: ['UDP', 'TCP', 'ICMP'],
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -84,11 +82,8 @@ describe('resource locations', () => {
           dateRange: ['1d', '2d', '7d'],
           dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           format: 'JSON',
-          ipVersion: ['IPv4', 'IPv6'],
           limit: 5,
-          location: ['string', 'string', 'string'],
           name: ['string', 'string', 'string'],
-          protocol: ['UDP', 'TCP', 'ICMP'],
         },
         { path: '/_stainless_unknown_path' },
       ),

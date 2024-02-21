@@ -1,6 +1,12 @@
 // File generated from our OpenAPI spec by Stainless.
 
-export { IqiSummaryResponse, IqiSummaryParams, Iqi } from './iqi';
+export {
+  IqiSummaryResponse,
+  IqiTimeseriesGroupsResponse,
+  IqiSummaryParams,
+  IqiTimeseriesGroupsParams,
+  Iqi,
+} from './iqi';
 export { Quality } from './quality';
 export {
   SpeedHistogramResponse,

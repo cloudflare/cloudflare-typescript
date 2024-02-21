@@ -7,11 +7,11 @@ import * as BGPAPI from 'cloudflare/resources/radar/bgp/bgp';
 import * as HijacksAPI from 'cloudflare/resources/radar/bgp/hijacks';
 import * as LeaksAPI from 'cloudflare/resources/radar/bgp/leaks';
 import * as RoutesAPI from 'cloudflare/resources/radar/bgp/routes';
-import * as TopsAPI from 'cloudflare/resources/radar/bgp/tops/tops';
+import * as TopAPI from 'cloudflare/resources/radar/bgp/top/top';
 
 export class BGP extends APIResource {
   leaks: LeaksAPI.Leaks = new LeaksAPI.Leaks(this._client);
-  tops: TopsAPI.Tops = new TopsAPI.Tops(this._client);
+  top: TopAPI.Top = new TopAPI.Top(this._client);
   hijacks: HijacksAPI.Hijacks = new HijacksAPI.Hijacks(this._client);
   routes: RoutesAPI.Routes = new RoutesAPI.Routes(this._client);
 
@@ -177,7 +177,9 @@ export namespace BGP {
   export import Leaks = LeaksAPI.Leaks;
   export import LeakEventsResponse = LeaksAPI.LeakEventsResponse;
   export import LeakEventsParams = LeaksAPI.LeakEventsParams;
-  export import Tops = TopsAPI.Tops;
+  export import Top = TopAPI.Top;
+  export import TopPrefixesResponse = TopAPI.TopPrefixesResponse;
+  export import TopPrefixesParams = TopAPI.TopPrefixesParams;
   export import Hijacks = HijacksAPI.Hijacks;
   export import HijackEventsResponse = HijacksAPI.HijackEventsResponse;
   export import HijackEventsParams = HijacksAPI.HijackEventsParams;

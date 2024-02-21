@@ -9,6 +9,8 @@ export class Annotations extends APIResource {
 
 export namespace Annotations {
   export import Outages = OutagesAPI.Outages;
+  export import OutageGetResponse = OutagesAPI.OutageGetResponse;
   export import OutageLocationsResponse = OutagesAPI.OutageLocationsResponse;
+  export import OutageGetParams = OutagesAPI.OutageGetParams;
   export import OutageLocationsParams = OutagesAPI.OutageLocationsParams;
 }

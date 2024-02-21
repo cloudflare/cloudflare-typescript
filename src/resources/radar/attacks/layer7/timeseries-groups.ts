@@ -7,54 +7,8 @@ import * as TimeseriesGroupsAPI from 'cloudflare/resources/radar/attacks/layer7/
 
 export class TimeseriesGroups extends APIResource {
   /**
-   * Percentage distribution of attacks by bitrate over time.
-   */
-  bitrate(
-    query?: TimeseriesGroupBitrateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupBitrateResponse>;
-  bitrate(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupBitrateResponse>;
-  bitrate(
-    query: TimeseriesGroupBitrateParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupBitrateResponse> {
-    if (isRequestOptions(query)) {
-      return this.bitrate({}, query);
-    }
-    return (
-      this._client.get('/radar/attacks/layer3/timeseries_groups/bitrate', {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: TimeseriesGroupBitrateResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Percentage distribution of attacks by duration over time.
-   */
-  duration(
-    query?: TimeseriesGroupDurationParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupDurationResponse>;
-  duration(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupDurationResponse>;
-  duration(
-    query: TimeseriesGroupDurationParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupDurationResponse> {
-    if (isRequestOptions(query)) {
-      return this.duration({}, query);
-    }
-    return (
-      this._client.get('/radar/attacks/layer3/timeseries_groups/duration', {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: TimeseriesGroupDurationResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Get a timeseries of the percentage distribution of network protocols in Layer
-   * 3/4 attacks.
+   * Get a time series of the percentual distribution of mitigation techniques, over
+   * time.
    */
   get(
     query?: TimeseriesGroupGetParams,
@@ -69,9 +23,55 @@ export class TimeseriesGroups extends APIResource {
       return this.get({}, query);
     }
     return (
-      this._client.get('/radar/attacks/layer3/timeseries_groups', { query, ...options }) as Core.APIPromise<{
+      this._client.get('/radar/attacks/layer7/timeseries_groups', { query, ...options }) as Core.APIPromise<{
         result: TimeseriesGroupGetResponse;
       }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Percentage distribution of attacks by http method used over time.
+   */
+  httpMethod(
+    query?: TimeseriesGroupHTTPMethodParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TimeseriesGroupHTTPMethodResponse>;
+  httpMethod(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupHTTPMethodResponse>;
+  httpMethod(
+    query: TimeseriesGroupHTTPMethodParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TimeseriesGroupHTTPMethodResponse> {
+    if (isRequestOptions(query)) {
+      return this.httpMethod({}, query);
+    }
+    return (
+      this._client.get('/radar/attacks/layer7/timeseries_groups/http_method', {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: TimeseriesGroupHTTPMethodResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Percentage distribution of attacks by http version used over time.
+   */
+  httpVersion(
+    query?: TimeseriesGroupHTTPVersionParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TimeseriesGroupHTTPVersionResponse>;
+  httpVersion(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupHTTPVersionResponse>;
+  httpVersion(
+    query: TimeseriesGroupHTTPVersionParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TimeseriesGroupHTTPVersionResponse> {
+    if (isRequestOptions(query)) {
+      return this.httpVersion({}, query);
+    }
+    return (
+      this._client.get('/radar/attacks/layer7/timeseries_groups/http_version', {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: TimeseriesGroupHTTPVersionResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -91,7 +91,7 @@ export class TimeseriesGroups extends APIResource {
       return this.industry({}, query);
     }
     return (
-      this._client.get('/radar/attacks/layer3/timeseries_groups/industry', {
+      this._client.get('/radar/attacks/layer7/timeseries_groups/industry', {
         query,
         ...options,
       }) as Core.APIPromise<{ result: TimeseriesGroupIndustryResponse }>
@@ -114,7 +114,7 @@ export class TimeseriesGroups extends APIResource {
       return this.ipVersion({}, query);
     }
     return (
-      this._client.get('/radar/attacks/layer3/timeseries_groups/ip_version', {
+      this._client.get('/radar/attacks/layer7/timeseries_groups/ip_version', {
         query,
         ...options,
       }) as Core.APIPromise<{ result: TimeseriesGroupIPVersionResponse }>
@@ -122,48 +122,48 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Percentage distribution of attacks by protocol used over time.
+   * Percentage distribution of attacks by managed rules used over time.
    */
-  protocol(
-    query?: TimeseriesGroupProtocolParams,
+  managedRules(
+    query?: TimeseriesGroupManagedRulesParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupProtocolResponse>;
-  protocol(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupProtocolResponse>;
-  protocol(
-    query: TimeseriesGroupProtocolParams | Core.RequestOptions = {},
+  ): Core.APIPromise<TimeseriesGroupManagedRulesResponse>;
+  managedRules(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupManagedRulesResponse>;
+  managedRules(
+    query: TimeseriesGroupManagedRulesParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupProtocolResponse> {
+  ): Core.APIPromise<TimeseriesGroupManagedRulesResponse> {
     if (isRequestOptions(query)) {
-      return this.protocol({}, query);
+      return this.managedRules({}, query);
     }
     return (
-      this._client.get('/radar/attacks/layer3/timeseries_groups/protocol', {
+      this._client.get('/radar/attacks/layer7/timeseries_groups/managed_rules', {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: TimeseriesGroupProtocolResponse }>
+      }) as Core.APIPromise<{ result: TimeseriesGroupManagedRulesResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
-   * Percentage distribution of attacks by vector used over time.
+   * Percentage distribution of attacks by mitigation product used over time.
    */
-  vector(
-    query?: TimeseriesGroupVectorParams,
+  mitigationProduct(
+    query?: TimeseriesGroupMitigationProductParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupVectorResponse>;
-  vector(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupVectorResponse>;
-  vector(
-    query: TimeseriesGroupVectorParams | Core.RequestOptions = {},
+  ): Core.APIPromise<TimeseriesGroupMitigationProductResponse>;
+  mitigationProduct(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupMitigationProductResponse>;
+  mitigationProduct(
+    query: TimeseriesGroupMitigationProductParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupVectorResponse> {
+  ): Core.APIPromise<TimeseriesGroupMitigationProductResponse> {
     if (isRequestOptions(query)) {
-      return this.vector({}, query);
+      return this.mitigationProduct({}, query);
     }
     return (
-      this._client.get('/radar/attacks/layer3/timeseries_groups/vector', {
+      this._client.get('/radar/attacks/layer7/timeseries_groups/mitigation_product', {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: TimeseriesGroupVectorResponse }>
+      }) as Core.APIPromise<{ result: TimeseriesGroupMitigationProductResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -183,57 +183,11 @@ export class TimeseriesGroups extends APIResource {
       return this.vertical({}, query);
     }
     return (
-      this._client.get('/radar/attacks/layer3/timeseries_groups/vertical', {
+      this._client.get('/radar/attacks/layer7/timeseries_groups/vertical', {
         query,
         ...options,
       }) as Core.APIPromise<{ result: TimeseriesGroupVerticalResponse }>
     )._thenUnwrap((obj) => obj.result);
-  }
-}
-
-export interface TimeseriesGroupBitrateResponse {
-  meta: unknown;
-
-  serie_0: TimeseriesGroupBitrateResponse.Serie0;
-}
-
-export namespace TimeseriesGroupBitrateResponse {
-  export interface Serie0 {
-    _1_GBPS_TO_10_GBPS: Array<string>;
-
-    _10_GBPS_TO_100_GBPS: Array<string>;
-
-    _500_MBPS_TO_1_GBPS: Array<string>;
-
-    OVER_100_GBPS: Array<string>;
-
-    timestamps: Array<string>;
-
-    UNDER_500_MBPS: Array<string>;
-  }
-}
-
-export interface TimeseriesGroupDurationResponse {
-  meta: unknown;
-
-  serie_0: TimeseriesGroupDurationResponse.Serie0;
-}
-
-export namespace TimeseriesGroupDurationResponse {
-  export interface Serie0 {
-    _1_HOUR_TO_3_HOURS: Array<string>;
-
-    _10_MINS_TO_20_MINS: Array<string>;
-
-    _20_MINS_TO_40_MINS: Array<string>;
-
-    _40_MINS_TO_1_HOUR: Array<string>;
-
-    OVER_3_HOURS: Array<string>;
-
-    timestamps: Array<string>;
-
-    UNDER_10_MINS: Array<string>;
   }
 }
 
@@ -293,15 +247,49 @@ export namespace TimeseriesGroupGetResponse {
   }
 
   export interface Serie0 {
-    gre: Array<string>;
+    ACCESS_RULES: Array<string>;
 
-    icmp: Array<string>;
+    API_SHIELD: Array<string>;
 
-    tcp: Array<string>;
+    BOT_MANAGEMENT: Array<string>;
+
+    DATA_LOSS_PREVENTION: Array<string>;
+
+    DDOS: Array<string>;
+
+    IP_REPUTATION: Array<string>;
 
     timestamps: Array<string>;
 
-    udp: Array<string>;
+    WAF: Array<string>;
+  }
+}
+
+export interface TimeseriesGroupHTTPMethodResponse {
+  meta: unknown;
+
+  serie_0: TimeseriesGroupHTTPMethodResponse.Serie0;
+}
+
+export namespace TimeseriesGroupHTTPMethodResponse {
+  export interface Serie0 {
+    GET: Array<string>;
+
+    timestamps: Array<string>;
+  }
+}
+
+export interface TimeseriesGroupHTTPVersionResponse {
+  meta: unknown;
+
+  serie_0: TimeseriesGroupHTTPVersionResponse.Serie0;
+}
+
+export namespace TimeseriesGroupHTTPVersionResponse {
+  export interface Serie0 {
+    'HTTP/1.x': Array<string>;
+
+    timestamps: Array<string>;
   }
 }
 
@@ -334,36 +322,31 @@ export namespace TimeseriesGroupIPVersionResponse {
   }
 }
 
-export interface TimeseriesGroupProtocolResponse {
+export interface TimeseriesGroupManagedRulesResponse {
   meta: unknown;
 
-  serie_0: TimeseriesGroupProtocolResponse.Serie0;
+  serie_0: TimeseriesGroupManagedRulesResponse.Serie0;
 }
 
-export namespace TimeseriesGroupProtocolResponse {
+export namespace TimeseriesGroupManagedRulesResponse {
   export interface Serie0 {
-    GRE: Array<string>;
-
-    ICMP: Array<string>;
-
-    TCP: Array<string>;
+    Bot: Array<string>;
 
     timestamps: Array<string>;
-
-    UDP: Array<string>;
   }
 }
 
-export interface TimeseriesGroupVectorResponse {
+export interface TimeseriesGroupMitigationProductResponse {
   meta: unknown;
 
-  serie_0: TimeseriesGroupVectorResponse.Serie0;
+  serie_0: TimeseriesGroupMitigationProductResponse.Serie0;
 }
 
-export namespace TimeseriesGroupVectorResponse {
+export namespace TimeseriesGroupMitigationProductResponse {
   export interface Serie0 {
+    DDOS: Array<string>;
+
     timestamps: Array<string>;
-    [k: string]: Array<string>;
   }
 }
 
@@ -378,168 +361,6 @@ export namespace TimeseriesGroupVerticalResponse {
     timestamps: Array<string>;
     [k: string]: Array<string>;
   }
-}
-
-export interface TimeseriesGroupBitrateParams {
-  /**
-   * Aggregation interval results should be returned in (for example, in 15 minutes
-   * or 1 hour intervals). Refer to
-   * [Aggregation intervals](https://developers.cloudflare.com/radar/concepts/aggregation-intervals/).
-   */
-  aggInterval?: '15m' | '1h' | '1d' | '1w';
-
-  /**
-   * End of the date range (inclusive).
-   */
-  dateEnd?: Array<string>;
-
-  /**
-   * For example, use `7d` and `7dControl` to compare this week with the previous
-   * week. Use this parameter or set specific start and end dates (`dateStart` and
-   * `dateEnd` parameters).
-   */
-  dateRange?: Array<
-    | '1d'
-    | '2d'
-    | '7d'
-    | '14d'
-    | '28d'
-    | '12w'
-    | '24w'
-    | '52w'
-    | '1dControl'
-    | '2dControl'
-    | '7dControl'
-    | '14dControl'
-    | '28dControl'
-    | '12wControl'
-    | '24wControl'
-  >;
-
-  /**
-   * Array of datetimes to filter the start of a series.
-   */
-  dateStart?: Array<string>;
-
-  /**
-   * Together with the `location` parameter, will apply the filter to origin or
-   * target location.
-   */
-  direction?: 'ORIGIN' | 'TARGET';
-
-  /**
-   * Format results are returned in.
-   */
-  format?: 'JSON' | 'CSV';
-
-  /**
-   * Filter for ip version.
-   */
-  ipVersion?: Array<'IPv4' | 'IPv6'>;
-
-  /**
-   * Array of comma separated list of locations (alpha-2 country codes). Start with
-   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
-   * but includes results from PT.
-   */
-  location?: Array<string>;
-
-  /**
-   * Array of names that will be used to name the series in responses.
-   */
-  name?: Array<string>;
-
-  /**
-   * Normalization method applied. Refer to
-   * [Normalization methods](https://developers.cloudflare.com/radar/concepts/normalization/).
-   */
-  normalization?: 'PERCENTAGE' | 'MIN0_MAX';
-
-  /**
-   * Array of L3/4 attack types.
-   */
-  protocol?: Array<'UDP' | 'TCP' | 'ICMP' | 'GRE'>;
-}
-
-export interface TimeseriesGroupDurationParams {
-  /**
-   * Aggregation interval results should be returned in (for example, in 15 minutes
-   * or 1 hour intervals). Refer to
-   * [Aggregation intervals](https://developers.cloudflare.com/radar/concepts/aggregation-intervals/).
-   */
-  aggInterval?: '15m' | '1h' | '1d' | '1w';
-
-  /**
-   * End of the date range (inclusive).
-   */
-  dateEnd?: Array<string>;
-
-  /**
-   * For example, use `7d` and `7dControl` to compare this week with the previous
-   * week. Use this parameter or set specific start and end dates (`dateStart` and
-   * `dateEnd` parameters).
-   */
-  dateRange?: Array<
-    | '1d'
-    | '2d'
-    | '7d'
-    | '14d'
-    | '28d'
-    | '12w'
-    | '24w'
-    | '52w'
-    | '1dControl'
-    | '2dControl'
-    | '7dControl'
-    | '14dControl'
-    | '28dControl'
-    | '12wControl'
-    | '24wControl'
-  >;
-
-  /**
-   * Array of datetimes to filter the start of a series.
-   */
-  dateStart?: Array<string>;
-
-  /**
-   * Together with the `location` parameter, will apply the filter to origin or
-   * target location.
-   */
-  direction?: 'ORIGIN' | 'TARGET';
-
-  /**
-   * Format results are returned in.
-   */
-  format?: 'JSON' | 'CSV';
-
-  /**
-   * Filter for ip version.
-   */
-  ipVersion?: Array<'IPv4' | 'IPv6'>;
-
-  /**
-   * Array of comma separated list of locations (alpha-2 country codes). Start with
-   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
-   * but includes results from PT.
-   */
-  location?: Array<string>;
-
-  /**
-   * Array of names that will be used to name the series in responses.
-   */
-  name?: Array<string>;
-
-  /**
-   * Normalization method applied. Refer to
-   * [Normalization methods](https://developers.cloudflare.com/radar/concepts/normalization/).
-   */
-  normalization?: 'PERCENTAGE' | 'MIN0_MAX';
-
-  /**
-   * Array of L3/4 attack types.
-   */
-  protocol?: Array<'UDP' | 'TCP' | 'ICMP' | 'GRE'>;
 }
 
 export interface TimeseriesGroupGetParams {
@@ -608,13 +429,20 @@ export interface TimeseriesGroupGetParams {
   name?: Array<string>;
 }
 
-export interface TimeseriesGroupIndustryParams {
+export interface TimeseriesGroupHTTPMethodParams {
   /**
    * Aggregation interval results should be returned in (for example, in 15 minutes
    * or 1 hour intervals). Refer to
    * [Aggregation intervals](https://developers.cloudflare.com/radar/concepts/aggregation-intervals/).
    */
   aggInterval?: '15m' | '1h' | '1d' | '1w';
+
+  /**
+   * Array of comma separated list of ASNs, start with `-` to exclude from results.
+   * For example, `-174, 3356` excludes results from AS174, but includes results from
+   * AS3356.
+   */
+  asn?: Array<string>;
 
   /**
    * End of the date range (inclusive).
@@ -650,15 +478,303 @@ export interface TimeseriesGroupIndustryParams {
   dateStart?: Array<string>;
 
   /**
-   * Together with the `location` parameter, will apply the filter to origin or
-   * target location.
+   * Format results are returned in.
    */
-  direction?: 'ORIGIN' | 'TARGET';
+  format?: 'JSON' | 'CSV';
+
+  /**
+   * Filter for http version.
+   */
+  httpVersion?: Array<'HTTPv1' | 'HTTPv2' | 'HTTPv3'>;
+
+  /**
+   * Filter for ip version.
+   */
+  ipVersion?: Array<'IPv4' | 'IPv6'>;
+
+  /**
+   * Array of comma separated list of locations (alpha-2 country codes). Start with
+   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
+   * but includes results from PT.
+   */
+  location?: Array<string>;
+
+  /**
+   * Array of L7 mitigation products.
+   */
+  mitigationProduct?: Array<
+    | 'DDOS'
+    | 'WAF'
+    | 'BOT_MANAGEMENT'
+    | 'ACCESS_RULES'
+    | 'IP_REPUTATION'
+    | 'API_SHIELD'
+    | 'DATA_LOSS_PREVENTION'
+  >;
+
+  /**
+   * Array of names that will be used to name the series in responses.
+   */
+  name?: Array<string>;
+
+  /**
+   * Normalization method applied. Refer to
+   * [Normalization methods](https://developers.cloudflare.com/radar/concepts/normalization/).
+   */
+  normalization?: 'PERCENTAGE' | 'MIN0_MAX';
+}
+
+export interface TimeseriesGroupHTTPVersionParams {
+  /**
+   * Aggregation interval results should be returned in (for example, in 15 minutes
+   * or 1 hour intervals). Refer to
+   * [Aggregation intervals](https://developers.cloudflare.com/radar/concepts/aggregation-intervals/).
+   */
+  aggInterval?: '15m' | '1h' | '1d' | '1w';
+
+  /**
+   * Array of comma separated list of ASNs, start with `-` to exclude from results.
+   * For example, `-174, 3356` excludes results from AS174, but includes results from
+   * AS3356.
+   */
+  asn?: Array<string>;
+
+  /**
+   * End of the date range (inclusive).
+   */
+  dateEnd?: Array<string>;
+
+  /**
+   * For example, use `7d` and `7dControl` to compare this week with the previous
+   * week. Use this parameter or set specific start and end dates (`dateStart` and
+   * `dateEnd` parameters).
+   */
+  dateRange?: Array<
+    | '1d'
+    | '2d'
+    | '7d'
+    | '14d'
+    | '28d'
+    | '12w'
+    | '24w'
+    | '52w'
+    | '1dControl'
+    | '2dControl'
+    | '7dControl'
+    | '14dControl'
+    | '28dControl'
+    | '12wControl'
+    | '24wControl'
+  >;
+
+  /**
+   * Array of datetimes to filter the start of a series.
+   */
+  dateStart?: Array<string>;
 
   /**
    * Format results are returned in.
    */
   format?: 'JSON' | 'CSV';
+
+  /**
+   * Filter for http method.
+   */
+  httpMethod?: Array<
+    | 'GET'
+    | 'POST'
+    | 'DELETE'
+    | 'PUT'
+    | 'HEAD'
+    | 'PURGE'
+    | 'OPTIONS'
+    | 'PROPFIND'
+    | 'MKCOL'
+    | 'PATCH'
+    | 'ACL'
+    | 'BCOPY'
+    | 'BDELETE'
+    | 'BMOVE'
+    | 'BPROPFIND'
+    | 'BPROPPATCH'
+    | 'CHECKIN'
+    | 'CHECKOUT'
+    | 'CONNECT'
+    | 'COPY'
+    | 'LABEL'
+    | 'LOCK'
+    | 'MERGE'
+    | 'MKACTIVITY'
+    | 'MKWORKSPACE'
+    | 'MOVE'
+    | 'NOTIFY'
+    | 'ORDERPATCH'
+    | 'POLL'
+    | 'PROPPATCH'
+    | 'REPORT'
+    | 'SEARCH'
+    | 'SUBSCRIBE'
+    | 'TRACE'
+    | 'UNCHECKOUT'
+    | 'UNLOCK'
+    | 'UNSUBSCRIBE'
+    | 'UPDATE'
+    | 'VERSIONCONTROL'
+    | 'BASELINECONTROL'
+    | 'XMSENUMATTS'
+    | 'RPC_OUT_DATA'
+    | 'RPC_IN_DATA'
+    | 'JSON'
+    | 'COOK'
+    | 'TRACK'
+  >;
+
+  /**
+   * Filter for ip version.
+   */
+  ipVersion?: Array<'IPv4' | 'IPv6'>;
+
+  /**
+   * Array of comma separated list of locations (alpha-2 country codes). Start with
+   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
+   * but includes results from PT.
+   */
+  location?: Array<string>;
+
+  /**
+   * Array of L7 mitigation products.
+   */
+  mitigationProduct?: Array<
+    | 'DDOS'
+    | 'WAF'
+    | 'BOT_MANAGEMENT'
+    | 'ACCESS_RULES'
+    | 'IP_REPUTATION'
+    | 'API_SHIELD'
+    | 'DATA_LOSS_PREVENTION'
+  >;
+
+  /**
+   * Array of names that will be used to name the series in responses.
+   */
+  name?: Array<string>;
+
+  /**
+   * Normalization method applied. Refer to
+   * [Normalization methods](https://developers.cloudflare.com/radar/concepts/normalization/).
+   */
+  normalization?: 'PERCENTAGE' | 'MIN0_MAX';
+}
+
+export interface TimeseriesGroupIndustryParams {
+  /**
+   * Aggregation interval results should be returned in (for example, in 15 minutes
+   * or 1 hour intervals). Refer to
+   * [Aggregation intervals](https://developers.cloudflare.com/radar/concepts/aggregation-intervals/).
+   */
+  aggInterval?: '15m' | '1h' | '1d' | '1w';
+
+  /**
+   * Array of comma separated list of ASNs, start with `-` to exclude from results.
+   * For example, `-174, 3356` excludes results from AS174, but includes results from
+   * AS3356.
+   */
+  asn?: Array<string>;
+
+  /**
+   * End of the date range (inclusive).
+   */
+  dateEnd?: Array<string>;
+
+  /**
+   * For example, use `7d` and `7dControl` to compare this week with the previous
+   * week. Use this parameter or set specific start and end dates (`dateStart` and
+   * `dateEnd` parameters).
+   */
+  dateRange?: Array<
+    | '1d'
+    | '2d'
+    | '7d'
+    | '14d'
+    | '28d'
+    | '12w'
+    | '24w'
+    | '52w'
+    | '1dControl'
+    | '2dControl'
+    | '7dControl'
+    | '14dControl'
+    | '28dControl'
+    | '12wControl'
+    | '24wControl'
+  >;
+
+  /**
+   * Array of datetimes to filter the start of a series.
+   */
+  dateStart?: Array<string>;
+
+  /**
+   * Format results are returned in.
+   */
+  format?: 'JSON' | 'CSV';
+
+  /**
+   * Filter for http method.
+   */
+  httpMethod?: Array<
+    | 'GET'
+    | 'POST'
+    | 'DELETE'
+    | 'PUT'
+    | 'HEAD'
+    | 'PURGE'
+    | 'OPTIONS'
+    | 'PROPFIND'
+    | 'MKCOL'
+    | 'PATCH'
+    | 'ACL'
+    | 'BCOPY'
+    | 'BDELETE'
+    | 'BMOVE'
+    | 'BPROPFIND'
+    | 'BPROPPATCH'
+    | 'CHECKIN'
+    | 'CHECKOUT'
+    | 'CONNECT'
+    | 'COPY'
+    | 'LABEL'
+    | 'LOCK'
+    | 'MERGE'
+    | 'MKACTIVITY'
+    | 'MKWORKSPACE'
+    | 'MOVE'
+    | 'NOTIFY'
+    | 'ORDERPATCH'
+    | 'POLL'
+    | 'PROPPATCH'
+    | 'REPORT'
+    | 'SEARCH'
+    | 'SUBSCRIBE'
+    | 'TRACE'
+    | 'UNCHECKOUT'
+    | 'UNLOCK'
+    | 'UNSUBSCRIBE'
+    | 'UPDATE'
+    | 'VERSIONCONTROL'
+    | 'BASELINECONTROL'
+    | 'XMSENUMATTS'
+    | 'RPC_OUT_DATA'
+    | 'RPC_IN_DATA'
+    | 'JSON'
+    | 'COOK'
+    | 'TRACK'
+  >;
+
+  /**
+   * Filter for http version.
+   */
+  httpVersion?: Array<'HTTPv1' | 'HTTPv2' | 'HTTPv3'>;
 
   /**
    * Filter for ip version.
@@ -677,6 +793,19 @@ export interface TimeseriesGroupIndustryParams {
    * but includes results from PT.
    */
   location?: Array<string>;
+
+  /**
+   * Array of L7 mitigation products.
+   */
+  mitigationProduct?: Array<
+    | 'DDOS'
+    | 'WAF'
+    | 'BOT_MANAGEMENT'
+    | 'ACCESS_RULES'
+    | 'IP_REPUTATION'
+    | 'API_SHIELD'
+    | 'DATA_LOSS_PREVENTION'
+  >;
 
   /**
    * Array of names that will be used to name the series in responses.
@@ -699,6 +828,13 @@ export interface TimeseriesGroupIPVersionParams {
   aggInterval?: '15m' | '1h' | '1d' | '1w';
 
   /**
+   * Array of comma separated list of ASNs, start with `-` to exclude from results.
+   * For example, `-174, 3356` excludes results from AS174, but includes results from
+   * AS3356.
+   */
+  asn?: Array<string>;
+
+  /**
    * End of the date range (inclusive).
    */
   dateEnd?: Array<string>;
@@ -732,15 +868,66 @@ export interface TimeseriesGroupIPVersionParams {
   dateStart?: Array<string>;
 
   /**
-   * Together with the `location` parameter, will apply the filter to origin or
-   * target location.
-   */
-  direction?: 'ORIGIN' | 'TARGET';
-
-  /**
    * Format results are returned in.
    */
   format?: 'JSON' | 'CSV';
+
+  /**
+   * Filter for http method.
+   */
+  httpMethod?: Array<
+    | 'GET'
+    | 'POST'
+    | 'DELETE'
+    | 'PUT'
+    | 'HEAD'
+    | 'PURGE'
+    | 'OPTIONS'
+    | 'PROPFIND'
+    | 'MKCOL'
+    | 'PATCH'
+    | 'ACL'
+    | 'BCOPY'
+    | 'BDELETE'
+    | 'BMOVE'
+    | 'BPROPFIND'
+    | 'BPROPPATCH'
+    | 'CHECKIN'
+    | 'CHECKOUT'
+    | 'CONNECT'
+    | 'COPY'
+    | 'LABEL'
+    | 'LOCK'
+    | 'MERGE'
+    | 'MKACTIVITY'
+    | 'MKWORKSPACE'
+    | 'MOVE'
+    | 'NOTIFY'
+    | 'ORDERPATCH'
+    | 'POLL'
+    | 'PROPPATCH'
+    | 'REPORT'
+    | 'SEARCH'
+    | 'SUBSCRIBE'
+    | 'TRACE'
+    | 'UNCHECKOUT'
+    | 'UNLOCK'
+    | 'UNSUBSCRIBE'
+    | 'UPDATE'
+    | 'VERSIONCONTROL'
+    | 'BASELINECONTROL'
+    | 'XMSENUMATTS'
+    | 'RPC_OUT_DATA'
+    | 'RPC_IN_DATA'
+    | 'JSON'
+    | 'COOK'
+    | 'TRACK'
+  >;
+
+  /**
+   * Filter for http version.
+   */
+  httpVersion?: Array<'HTTPv1' | 'HTTPv2' | 'HTTPv3'>;
 
   /**
    * Array of comma separated list of locations (alpha-2 country codes). Start with
@@ -748,6 +935,19 @@ export interface TimeseriesGroupIPVersionParams {
    * but includes results from PT.
    */
   location?: Array<string>;
+
+  /**
+   * Array of L7 mitigation products.
+   */
+  mitigationProduct?: Array<
+    | 'DDOS'
+    | 'WAF'
+    | 'BOT_MANAGEMENT'
+    | 'ACCESS_RULES'
+    | 'IP_REPUTATION'
+    | 'API_SHIELD'
+    | 'DATA_LOSS_PREVENTION'
+  >;
 
   /**
    * Array of names that will be used to name the series in responses.
@@ -759,20 +959,22 @@ export interface TimeseriesGroupIPVersionParams {
    * [Normalization methods](https://developers.cloudflare.com/radar/concepts/normalization/).
    */
   normalization?: 'PERCENTAGE' | 'MIN0_MAX';
-
-  /**
-   * Array of L3/4 attack types.
-   */
-  protocol?: Array<'UDP' | 'TCP' | 'ICMP' | 'GRE'>;
 }
 
-export interface TimeseriesGroupProtocolParams {
+export interface TimeseriesGroupManagedRulesParams {
   /**
    * Aggregation interval results should be returned in (for example, in 15 minutes
    * or 1 hour intervals). Refer to
    * [Aggregation intervals](https://developers.cloudflare.com/radar/concepts/aggregation-intervals/).
    */
   aggInterval?: '15m' | '1h' | '1d' | '1w';
+
+  /**
+   * Array of comma separated list of ASNs, start with `-` to exclude from results.
+   * For example, `-174, 3356` excludes results from AS174, but includes results from
+   * AS3356.
+   */
+  asn?: Array<string>;
 
   /**
    * End of the date range (inclusive).
@@ -808,15 +1010,213 @@ export interface TimeseriesGroupProtocolParams {
   dateStart?: Array<string>;
 
   /**
-   * Together with the `location` parameter, will apply the filter to origin or
-   * target location.
+   * Format results are returned in.
    */
-  direction?: 'ORIGIN' | 'TARGET';
+  format?: 'JSON' | 'CSV';
+
+  /**
+   * Filter for http method.
+   */
+  httpMethod?: Array<
+    | 'GET'
+    | 'POST'
+    | 'DELETE'
+    | 'PUT'
+    | 'HEAD'
+    | 'PURGE'
+    | 'OPTIONS'
+    | 'PROPFIND'
+    | 'MKCOL'
+    | 'PATCH'
+    | 'ACL'
+    | 'BCOPY'
+    | 'BDELETE'
+    | 'BMOVE'
+    | 'BPROPFIND'
+    | 'BPROPPATCH'
+    | 'CHECKIN'
+    | 'CHECKOUT'
+    | 'CONNECT'
+    | 'COPY'
+    | 'LABEL'
+    | 'LOCK'
+    | 'MERGE'
+    | 'MKACTIVITY'
+    | 'MKWORKSPACE'
+    | 'MOVE'
+    | 'NOTIFY'
+    | 'ORDERPATCH'
+    | 'POLL'
+    | 'PROPPATCH'
+    | 'REPORT'
+    | 'SEARCH'
+    | 'SUBSCRIBE'
+    | 'TRACE'
+    | 'UNCHECKOUT'
+    | 'UNLOCK'
+    | 'UNSUBSCRIBE'
+    | 'UPDATE'
+    | 'VERSIONCONTROL'
+    | 'BASELINECONTROL'
+    | 'XMSENUMATTS'
+    | 'RPC_OUT_DATA'
+    | 'RPC_IN_DATA'
+    | 'JSON'
+    | 'COOK'
+    | 'TRACK'
+  >;
+
+  /**
+   * Filter for http version.
+   */
+  httpVersion?: Array<'HTTPv1' | 'HTTPv2' | 'HTTPv3'>;
+
+  /**
+   * Filter for ip version.
+   */
+  ipVersion?: Array<'IPv4' | 'IPv6'>;
+
+  /**
+   * Array of comma separated list of locations (alpha-2 country codes). Start with
+   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
+   * but includes results from PT.
+   */
+  location?: Array<string>;
+
+  /**
+   * Array of L7 mitigation products.
+   */
+  mitigationProduct?: Array<
+    | 'DDOS'
+    | 'WAF'
+    | 'BOT_MANAGEMENT'
+    | 'ACCESS_RULES'
+    | 'IP_REPUTATION'
+    | 'API_SHIELD'
+    | 'DATA_LOSS_PREVENTION'
+  >;
+
+  /**
+   * Array of names that will be used to name the series in responses.
+   */
+  name?: Array<string>;
+
+  /**
+   * Normalization method applied. Refer to
+   * [Normalization methods](https://developers.cloudflare.com/radar/concepts/normalization/).
+   */
+  normalization?: 'PERCENTAGE' | 'MIN0_MAX';
+}
+
+export interface TimeseriesGroupMitigationProductParams {
+  /**
+   * Aggregation interval results should be returned in (for example, in 15 minutes
+   * or 1 hour intervals). Refer to
+   * [Aggregation intervals](https://developers.cloudflare.com/radar/concepts/aggregation-intervals/).
+   */
+  aggInterval?: '15m' | '1h' | '1d' | '1w';
+
+  /**
+   * Array of comma separated list of ASNs, start with `-` to exclude from results.
+   * For example, `-174, 3356` excludes results from AS174, but includes results from
+   * AS3356.
+   */
+  asn?: Array<string>;
+
+  /**
+   * End of the date range (inclusive).
+   */
+  dateEnd?: Array<string>;
+
+  /**
+   * For example, use `7d` and `7dControl` to compare this week with the previous
+   * week. Use this parameter or set specific start and end dates (`dateStart` and
+   * `dateEnd` parameters).
+   */
+  dateRange?: Array<
+    | '1d'
+    | '2d'
+    | '7d'
+    | '14d'
+    | '28d'
+    | '12w'
+    | '24w'
+    | '52w'
+    | '1dControl'
+    | '2dControl'
+    | '7dControl'
+    | '14dControl'
+    | '28dControl'
+    | '12wControl'
+    | '24wControl'
+  >;
+
+  /**
+   * Array of datetimes to filter the start of a series.
+   */
+  dateStart?: Array<string>;
 
   /**
    * Format results are returned in.
    */
   format?: 'JSON' | 'CSV';
+
+  /**
+   * Filter for http method.
+   */
+  httpMethod?: Array<
+    | 'GET'
+    | 'POST'
+    | 'DELETE'
+    | 'PUT'
+    | 'HEAD'
+    | 'PURGE'
+    | 'OPTIONS'
+    | 'PROPFIND'
+    | 'MKCOL'
+    | 'PATCH'
+    | 'ACL'
+    | 'BCOPY'
+    | 'BDELETE'
+    | 'BMOVE'
+    | 'BPROPFIND'
+    | 'BPROPPATCH'
+    | 'CHECKIN'
+    | 'CHECKOUT'
+    | 'CONNECT'
+    | 'COPY'
+    | 'LABEL'
+    | 'LOCK'
+    | 'MERGE'
+    | 'MKACTIVITY'
+    | 'MKWORKSPACE'
+    | 'MOVE'
+    | 'NOTIFY'
+    | 'ORDERPATCH'
+    | 'POLL'
+    | 'PROPPATCH'
+    | 'REPORT'
+    | 'SEARCH'
+    | 'SUBSCRIBE'
+    | 'TRACE'
+    | 'UNCHECKOUT'
+    | 'UNLOCK'
+    | 'UNSUBSCRIBE'
+    | 'UPDATE'
+    | 'VERSIONCONTROL'
+    | 'BASELINECONTROL'
+    | 'XMSENUMATTS'
+    | 'RPC_OUT_DATA'
+    | 'RPC_IN_DATA'
+    | 'JSON'
+    | 'COOK'
+    | 'TRACK'
+  >;
+
+  /**
+   * Filter for http version.
+   */
+  httpVersion?: Array<'HTTPv1' | 'HTTPv2' | 'HTTPv3'>;
 
   /**
    * Filter for ip version.
@@ -840,93 +1240,6 @@ export interface TimeseriesGroupProtocolParams {
    * [Normalization methods](https://developers.cloudflare.com/radar/concepts/normalization/).
    */
   normalization?: 'PERCENTAGE' | 'MIN0_MAX';
-}
-
-export interface TimeseriesGroupVectorParams {
-  /**
-   * Aggregation interval results should be returned in (for example, in 15 minutes
-   * or 1 hour intervals). Refer to
-   * [Aggregation intervals](https://developers.cloudflare.com/radar/concepts/aggregation-intervals/).
-   */
-  aggInterval?: '15m' | '1h' | '1d' | '1w';
-
-  /**
-   * End of the date range (inclusive).
-   */
-  dateEnd?: Array<string>;
-
-  /**
-   * For example, use `7d` and `7dControl` to compare this week with the previous
-   * week. Use this parameter or set specific start and end dates (`dateStart` and
-   * `dateEnd` parameters).
-   */
-  dateRange?: Array<
-    | '1d'
-    | '2d'
-    | '7d'
-    | '14d'
-    | '28d'
-    | '12w'
-    | '24w'
-    | '52w'
-    | '1dControl'
-    | '2dControl'
-    | '7dControl'
-    | '14dControl'
-    | '28dControl'
-    | '12wControl'
-    | '24wControl'
-  >;
-
-  /**
-   * Array of datetimes to filter the start of a series.
-   */
-  dateStart?: Array<string>;
-
-  /**
-   * Together with the `location` parameter, will apply the filter to origin or
-   * target location.
-   */
-  direction?: 'ORIGIN' | 'TARGET';
-
-  /**
-   * Format results are returned in.
-   */
-  format?: 'JSON' | 'CSV';
-
-  /**
-   * Filter for ip version.
-   */
-  ipVersion?: Array<'IPv4' | 'IPv6'>;
-
-  /**
-   * Limit the number of objects (eg browsers, verticals, etc) to the top items over
-   * the time range.
-   */
-  limitPerGroup?: number;
-
-  /**
-   * Array of comma separated list of locations (alpha-2 country codes). Start with
-   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
-   * but includes results from PT.
-   */
-  location?: Array<string>;
-
-  /**
-   * Array of names that will be used to name the series in responses.
-   */
-  name?: Array<string>;
-
-  /**
-   * Normalization method applied. Refer to
-   * [Normalization methods](https://developers.cloudflare.com/radar/concepts/normalization/).
-   */
-  normalization?: 'PERCENTAGE' | 'MIN0_MAX';
-
-  /**
-   * Array of L3/4 attack types.
-   */
-  protocol?: Array<'UDP' | 'TCP' | 'ICMP' | 'GRE'>;
 }
 
 export interface TimeseriesGroupVerticalParams {
@@ -938,6 +1251,13 @@ export interface TimeseriesGroupVerticalParams {
   aggInterval?: '15m' | '1h' | '1d' | '1w';
 
   /**
+   * Array of comma separated list of ASNs, start with `-` to exclude from results.
+   * For example, `-174, 3356` excludes results from AS174, but includes results from
+   * AS3356.
+   */
+  asn?: Array<string>;
+
+  /**
    * End of the date range (inclusive).
    */
   dateEnd?: Array<string>;
@@ -971,15 +1291,66 @@ export interface TimeseriesGroupVerticalParams {
   dateStart?: Array<string>;
 
   /**
-   * Together with the `location` parameter, will apply the filter to origin or
-   * target location.
-   */
-  direction?: 'ORIGIN' | 'TARGET';
-
-  /**
    * Format results are returned in.
    */
   format?: 'JSON' | 'CSV';
+
+  /**
+   * Filter for http method.
+   */
+  httpMethod?: Array<
+    | 'GET'
+    | 'POST'
+    | 'DELETE'
+    | 'PUT'
+    | 'HEAD'
+    | 'PURGE'
+    | 'OPTIONS'
+    | 'PROPFIND'
+    | 'MKCOL'
+    | 'PATCH'
+    | 'ACL'
+    | 'BCOPY'
+    | 'BDELETE'
+    | 'BMOVE'
+    | 'BPROPFIND'
+    | 'BPROPPATCH'
+    | 'CHECKIN'
+    | 'CHECKOUT'
+    | 'CONNECT'
+    | 'COPY'
+    | 'LABEL'
+    | 'LOCK'
+    | 'MERGE'
+    | 'MKACTIVITY'
+    | 'MKWORKSPACE'
+    | 'MOVE'
+    | 'NOTIFY'
+    | 'ORDERPATCH'
+    | 'POLL'
+    | 'PROPPATCH'
+    | 'REPORT'
+    | 'SEARCH'
+    | 'SUBSCRIBE'
+    | 'TRACE'
+    | 'UNCHECKOUT'
+    | 'UNLOCK'
+    | 'UNSUBSCRIBE'
+    | 'UPDATE'
+    | 'VERSIONCONTROL'
+    | 'BASELINECONTROL'
+    | 'XMSENUMATTS'
+    | 'RPC_OUT_DATA'
+    | 'RPC_IN_DATA'
+    | 'JSON'
+    | 'COOK'
+    | 'TRACK'
+  >;
+
+  /**
+   * Filter for http version.
+   */
+  httpVersion?: Array<'HTTPv1' | 'HTTPv2' | 'HTTPv3'>;
 
   /**
    * Filter for ip version.
@@ -998,6 +1369,19 @@ export interface TimeseriesGroupVerticalParams {
    * but includes results from PT.
    */
   location?: Array<string>;
+
+  /**
+   * Array of L7 mitigation products.
+   */
+  mitigationProduct?: Array<
+    | 'DDOS'
+    | 'WAF'
+    | 'BOT_MANAGEMENT'
+    | 'ACCESS_RULES'
+    | 'IP_REPUTATION'
+    | 'API_SHIELD'
+    | 'DATA_LOSS_PREVENTION'
+  >;
 
   /**
    * Array of names that will be used to name the series in responses.
@@ -1012,20 +1396,20 @@ export interface TimeseriesGroupVerticalParams {
 }
 
 export namespace TimeseriesGroups {
-  export import TimeseriesGroupBitrateResponse = TimeseriesGroupsAPI.TimeseriesGroupBitrateResponse;
-  export import TimeseriesGroupDurationResponse = TimeseriesGroupsAPI.TimeseriesGroupDurationResponse;
   export import TimeseriesGroupGetResponse = TimeseriesGroupsAPI.TimeseriesGroupGetResponse;
+  export import TimeseriesGroupHTTPMethodResponse = TimeseriesGroupsAPI.TimeseriesGroupHTTPMethodResponse;
+  export import TimeseriesGroupHTTPVersionResponse = TimeseriesGroupsAPI.TimeseriesGroupHTTPVersionResponse;
   export import TimeseriesGroupIndustryResponse = TimeseriesGroupsAPI.TimeseriesGroupIndustryResponse;
   export import TimeseriesGroupIPVersionResponse = TimeseriesGroupsAPI.TimeseriesGroupIPVersionResponse;
-  export import TimeseriesGroupProtocolResponse = TimeseriesGroupsAPI.TimeseriesGroupProtocolResponse;
-  export import TimeseriesGroupVectorResponse = TimeseriesGroupsAPI.TimeseriesGroupVectorResponse;
+  export import TimeseriesGroupManagedRulesResponse = TimeseriesGroupsAPI.TimeseriesGroupManagedRulesResponse;
+  export import TimeseriesGroupMitigationProductResponse = TimeseriesGroupsAPI.TimeseriesGroupMitigationProductResponse;
   export import TimeseriesGroupVerticalResponse = TimeseriesGroupsAPI.TimeseriesGroupVerticalResponse;
-  export import TimeseriesGroupBitrateParams = TimeseriesGroupsAPI.TimeseriesGroupBitrateParams;
-  export import TimeseriesGroupDurationParams = TimeseriesGroupsAPI.TimeseriesGroupDurationParams;
   export import TimeseriesGroupGetParams = TimeseriesGroupsAPI.TimeseriesGroupGetParams;
+  export import TimeseriesGroupHTTPMethodParams = TimeseriesGroupsAPI.TimeseriesGroupHTTPMethodParams;
+  export import TimeseriesGroupHTTPVersionParams = TimeseriesGroupsAPI.TimeseriesGroupHTTPVersionParams;
   export import TimeseriesGroupIndustryParams = TimeseriesGroupsAPI.TimeseriesGroupIndustryParams;
   export import TimeseriesGroupIPVersionParams = TimeseriesGroupsAPI.TimeseriesGroupIPVersionParams;
-  export import TimeseriesGroupProtocolParams = TimeseriesGroupsAPI.TimeseriesGroupProtocolParams;
-  export import TimeseriesGroupVectorParams = TimeseriesGroupsAPI.TimeseriesGroupVectorParams;
+  export import TimeseriesGroupManagedRulesParams = TimeseriesGroupsAPI.TimeseriesGroupManagedRulesParams;
+  export import TimeseriesGroupMitigationProductParams = TimeseriesGroupsAPI.TimeseriesGroupMitigationProductParams;
   export import TimeseriesGroupVerticalParams = TimeseriesGroupsAPI.TimeseriesGroupVerticalParams;
 }

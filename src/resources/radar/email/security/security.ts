@@ -3,8 +3,10 @@
 import { APIResource } from 'cloudflare/resource';
 import * as SummaryAPI from 'cloudflare/resources/radar/email/security/summary';
 import * as TimeseriesGroupsAPI from 'cloudflare/resources/radar/email/security/timeseries-groups';
+import * as TopAPI from 'cloudflare/resources/radar/email/security/top/top';
 
 export class Security extends APIResource {
+  top: TopAPI.Top = new TopAPI.Top(this._client);
   summary: SummaryAPI.Summary = new SummaryAPI.Summary(this._client);
   timeseriesGroups: TimeseriesGroupsAPI.TimeseriesGroups = new TimeseriesGroupsAPI.TimeseriesGroups(
     this._client,
@@ -12,6 +14,7 @@ export class Security extends APIResource {
 }
 
 export namespace Security {
+  export import Top = TopAPI.Top;
   export import Summary = SummaryAPI.Summary;
   export import SummaryArcResponse = SummaryAPI.SummaryArcResponse;
   export import SummaryDKIMResponse = SummaryAPI.SummaryDKIMResponse;
