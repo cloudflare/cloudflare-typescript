@@ -6175,22 +6175,22 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/radar/ranking/ranking.ts">RankingTimeseriesGroupsResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/ranking/timeseries_groups">client.radar.ranking.<a href="./src/resources/radar/ranking/ranking.ts">timeseriesGroups</a>({ ...params }) -> RankingTimeseriesGroupsResponse</code>
-
-### Ranking
-
-Types:
-
-- <code><a href="./src/resources/radar/ranking/ranking.ts">RankingGetResponse</a></code>
 - <code><a href="./src/resources/radar/ranking/ranking.ts">RankingTopResponse</a></code>
 
 Methods:
 
-- <code title="get /radar/ranking/domain/{domain}">client.radar.ranking.ranking.<a href="./src/resources/radar/ranking/ranking.ts">get</a>(domain, { ...params }) -> RankingGetResponse</code>
-- <code title="get /radar/ranking/top">client.radar.ranking.ranking.<a href="./src/resources/radar/ranking/ranking.ts">top</a>({ ...params }) -> RankingTopResponse</code>
+- <code title="get /radar/ranking/timeseries_groups">client.radar.ranking.<a href="./src/resources/radar/ranking/ranking.ts">timeseriesGroups</a>({ ...params }) -> RankingTimeseriesGroupsResponse</code>
+- <code title="get /radar/ranking/top">client.radar.ranking.<a href="./src/resources/radar/ranking/ranking.ts">top</a>({ ...params }) -> RankingTopResponse</code>
+
+### Domain
+
+Types:
+
+- <code><a href="./src/resources/radar/ranking/domain.ts">DomainGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/ranking/domain/{domain}">client.radar.ranking.domain.<a href="./src/resources/radar/ranking/domain.ts">get</a>(domain, { ...params }) -> DomainGetResponse</code>
 
 ## TrafficAnomalies
 

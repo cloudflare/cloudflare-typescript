@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless.
 
+export { DomainGetResponse, DomainGetParams, Domain } from './domain';
 export {
-  RankingGetResponse,
+  RankingTimeseriesGroupsResponse,
   RankingTopResponse,
-  RankingGetParams,
+  RankingTimeseriesGroupsParams,
   RankingTopParams,
   Ranking,
 } from './ranking';
-export { RankingTimeseriesGroupsResponse, RankingTimeseriesGroupsParams, Ranking } from './ranking';

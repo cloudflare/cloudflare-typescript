@@ -53,4 +53,42 @@ describe('resource ranking', () => {
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
+
+  // skipped: tests are disabled for the time being
+  test.skip('top', async () => {
+    const responsePromise = cloudflare.radar.ranking.top();
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('top: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(cloudflare.radar.ranking.top({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+      Cloudflare.NotFoundError,
+    );
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('top: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.radar.ranking.top(
+        {
+          date: ['string', 'string', 'string'],
+          format: 'JSON',
+          limit: 5,
+          location: ['string', 'string', 'string'],
+          name: ['string', 'string', 'string'],
+          rankingType: 'POPULAR',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
 });
