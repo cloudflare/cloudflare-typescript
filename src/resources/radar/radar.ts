@@ -80,7 +80,9 @@ export namespace Radar {
   export import Quality = QualityAPI.Quality;
   export import Ranking = RankingAPI.Ranking;
   export import RankingTimeseriesGroupsResponse = RankingAPI.RankingTimeseriesGroupsResponse;
+  export import RankingTopResponse = RankingAPI.RankingTopResponse;
   export import RankingTimeseriesGroupsParams = RankingAPI.RankingTimeseriesGroupsParams;
+  export import RankingTopParams = RankingAPI.RankingTopParams;
   export import TrafficAnomalies = TrafficAnomaliesAPI.TrafficAnomalies;
   export import TrafficAnomalyGetResponse = TrafficAnomaliesAPI.TrafficAnomalyGetResponse;
   export import TrafficAnomalyGetParams = TrafficAnomaliesAPI.TrafficAnomalyGetParams;

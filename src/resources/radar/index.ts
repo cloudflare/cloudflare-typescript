@@ -28,7 +28,13 @@ export { HTTP } from './http/index';
 export { NetflowTimeseriesResponse, NetflowTimeseriesParams, Netflows } from './netflows/index';
 export { Quality } from './quality/index';
 export { Radar } from './radar';
-export { RankingTimeseriesGroupsResponse, RankingTimeseriesGroupsParams, Ranking } from './ranking/index';
+export {
+  RankingTimeseriesGroupsResponse,
+  RankingTopResponse,
+  RankingTimeseriesGroupsParams,
+  RankingTopParams,
+  Ranking,
+} from './ranking/index';
 export { SearchGlobalResponse, SearchGlobalParams, Search } from './search';
 export {
   TrafficAnomalyGetResponse,
