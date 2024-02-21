@@ -53,11 +53,11 @@ export class Pcaps extends APIResource {
 }
 
 export type PcapCreateResponse =
-  | PcapCreateResponse._7Ks0f1TyPcapsResponseSimple
-  | PcapCreateResponse._7Ks0f1TyPcapsResponseFull;
+  | PcapCreateResponse._2PfkzezdPcapsResponseSimple
+  | PcapCreateResponse._2PfkzezdPcapsResponseFull;
 
 export namespace PcapCreateResponse {
-  export interface _7Ks0f1TyPcapsResponseSimple {
+  export interface _2PfkzezdPcapsResponseSimple {
     /**
      * The ID for the packet capture.
      */
@@ -66,7 +66,7 @@ export namespace PcapCreateResponse {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: _7Ks0f1TyPcapsResponseSimple.FilterV1;
+    filter_v1?: _2PfkzezdPcapsResponseSimple.FilterV1;
 
     /**
      * The status of the packet capture request.
@@ -103,7 +103,7 @@ export namespace PcapCreateResponse {
     type?: 'simple' | 'full';
   }
 
-  export namespace _7Ks0f1TyPcapsResponseSimple {
+  export namespace _2PfkzezdPcapsResponseSimple {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
@@ -135,7 +135,7 @@ export namespace PcapCreateResponse {
     }
   }
 
-  export interface _7Ks0f1TyPcapsResponseFull {
+  export interface _2PfkzezdPcapsResponseFull {
     /**
      * The ID for the packet capture.
      */
@@ -168,7 +168,7 @@ export namespace PcapCreateResponse {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: _7Ks0f1TyPcapsResponseFull.FilterV1;
+    filter_v1?: _2PfkzezdPcapsResponseFull.FilterV1;
 
     /**
      * The status of the packet capture request.
@@ -205,7 +205,7 @@ export namespace PcapCreateResponse {
     type?: 'simple' | 'full';
   }
 
-  export namespace _7Ks0f1TyPcapsResponseFull {
+  export namespace _2PfkzezdPcapsResponseFull {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
@@ -239,11 +239,11 @@ export namespace PcapCreateResponse {
 }
 
 export type PcapListResponse = Array<
-  PcapListResponse._7Ks0f1TyPcapsResponseSimple | PcapListResponse._7Ks0f1TyPcapsResponseFull
+  PcapListResponse._2PfkzezdPcapsResponseSimple | PcapListResponse._2PfkzezdPcapsResponseFull
 >;
 
 export namespace PcapListResponse {
-  export interface _7Ks0f1TyPcapsResponseSimple {
+  export interface _2PfkzezdPcapsResponseSimple {
     /**
      * The ID for the packet capture.
      */
@@ -252,7 +252,7 @@ export namespace PcapListResponse {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: _7Ks0f1TyPcapsResponseSimple.FilterV1;
+    filter_v1?: _2PfkzezdPcapsResponseSimple.FilterV1;
 
     /**
      * The status of the packet capture request.
@@ -289,7 +289,7 @@ export namespace PcapListResponse {
     type?: 'simple' | 'full';
   }
 
-  export namespace _7Ks0f1TyPcapsResponseSimple {
+  export namespace _2PfkzezdPcapsResponseSimple {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
@@ -321,7 +321,7 @@ export namespace PcapListResponse {
     }
   }
 
-  export interface _7Ks0f1TyPcapsResponseFull {
+  export interface _2PfkzezdPcapsResponseFull {
     /**
      * The ID for the packet capture.
      */
@@ -354,7 +354,7 @@ export namespace PcapListResponse {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: _7Ks0f1TyPcapsResponseFull.FilterV1;
+    filter_v1?: _2PfkzezdPcapsResponseFull.FilterV1;
 
     /**
      * The status of the packet capture request.
@@ -391,7 +391,7 @@ export namespace PcapListResponse {
     type?: 'simple' | 'full';
   }
 
-  export namespace _7Ks0f1TyPcapsResponseFull {
+  export namespace _2PfkzezdPcapsResponseFull {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
@@ -425,11 +425,11 @@ export namespace PcapListResponse {
 }
 
 export type PcapGetResponse =
-  | PcapGetResponse._7Ks0f1TyPcapsResponseSimple
-  | PcapGetResponse._7Ks0f1TyPcapsResponseFull;
+  | PcapGetResponse._2PfkzezdPcapsResponseSimple
+  | PcapGetResponse._2PfkzezdPcapsResponseFull;
 
 export namespace PcapGetResponse {
-  export interface _7Ks0f1TyPcapsResponseSimple {
+  export interface _2PfkzezdPcapsResponseSimple {
     /**
      * The ID for the packet capture.
      */
@@ -438,7 +438,7 @@ export namespace PcapGetResponse {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: _7Ks0f1TyPcapsResponseSimple.FilterV1;
+    filter_v1?: _2PfkzezdPcapsResponseSimple.FilterV1;
 
     /**
      * The status of the packet capture request.
@@ -475,7 +475,7 @@ export namespace PcapGetResponse {
     type?: 'simple' | 'full';
   }
 
-  export namespace _7Ks0f1TyPcapsResponseSimple {
+  export namespace _2PfkzezdPcapsResponseSimple {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
@@ -507,7 +507,7 @@ export namespace PcapGetResponse {
     }
   }
 
-  export interface _7Ks0f1TyPcapsResponseFull {
+  export interface _2PfkzezdPcapsResponseFull {
     /**
      * The ID for the packet capture.
      */
@@ -540,7 +540,7 @@ export namespace PcapGetResponse {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: _7Ks0f1TyPcapsResponseFull.FilterV1;
+    filter_v1?: _2PfkzezdPcapsResponseFull.FilterV1;
 
     /**
      * The status of the packet capture request.
@@ -577,7 +577,7 @@ export namespace PcapGetResponse {
     type?: 'simple' | 'full';
   }
 
-  export namespace _7Ks0f1TyPcapsResponseFull {
+  export namespace _2PfkzezdPcapsResponseFull {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
