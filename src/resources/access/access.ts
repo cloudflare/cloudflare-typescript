@@ -43,6 +43,10 @@ export namespace Access {
   export import ApplicationRevokeTokensResponse = ApplicationsAPI.ApplicationRevokeTokensResponse;
   export import ApplicationCreateParams = ApplicationsAPI.ApplicationCreateParams;
   export import ApplicationUpdateParams = ApplicationsAPI.ApplicationUpdateParams;
+  export import ApplicationListParams = ApplicationsAPI.ApplicationListParams;
+  export import ApplicationDeleteParams = ApplicationsAPI.ApplicationDeleteParams;
+  export import ApplicationGetParams = ApplicationsAPI.ApplicationGetParams;
+  export import ApplicationRevokeTokensParams = ApplicationsAPI.ApplicationRevokeTokensParams;
   export import Certificates = CertificatesAPI.Certificates;
   export import CertificateCreateResponse = CertificatesAPI.CertificateCreateResponse;
   export import CertificateUpdateResponse = CertificatesAPI.CertificateUpdateResponse;
@@ -51,6 +55,9 @@ export namespace Access {
   export import CertificateGetResponse = CertificatesAPI.CertificateGetResponse;
   export import CertificateCreateParams = CertificatesAPI.CertificateCreateParams;
   export import CertificateUpdateParams = CertificatesAPI.CertificateUpdateParams;
+  export import CertificateListParams = CertificatesAPI.CertificateListParams;
+  export import CertificateDeleteParams = CertificatesAPI.CertificateDeleteParams;
+  export import CertificateGetParams = CertificatesAPI.CertificateGetParams;
   export import Groups = GroupsAPI.Groups;
   export import GroupCreateResponse = GroupsAPI.GroupCreateResponse;
   export import GroupUpdateResponse = GroupsAPI.GroupUpdateResponse;
@@ -59,6 +66,9 @@ export namespace Access {
   export import GroupGetResponse = GroupsAPI.GroupGetResponse;
   export import GroupCreateParams = GroupsAPI.GroupCreateParams;
   export import GroupUpdateParams = GroupsAPI.GroupUpdateParams;
+  export import GroupListParams = GroupsAPI.GroupListParams;
+  export import GroupDeleteParams = GroupsAPI.GroupDeleteParams;
+  export import GroupGetParams = GroupsAPI.GroupGetParams;
   export import IdentityProviders = IdentityProvidersAPI.IdentityProviders;
   export import IdentityProviderCreateResponse = IdentityProvidersAPI.IdentityProviderCreateResponse;
   export import IdentityProviderUpdateResponse = IdentityProvidersAPI.IdentityProviderUpdateResponse;
@@ -67,6 +77,9 @@ export namespace Access {
   export import IdentityProviderGetResponse = IdentityProvidersAPI.IdentityProviderGetResponse;
   export import IdentityProviderCreateParams = IdentityProvidersAPI.IdentityProviderCreateParams;
   export import IdentityProviderUpdateParams = IdentityProvidersAPI.IdentityProviderUpdateParams;
+  export import IdentityProviderListParams = IdentityProvidersAPI.IdentityProviderListParams;
+  export import IdentityProviderDeleteParams = IdentityProvidersAPI.IdentityProviderDeleteParams;
+  export import IdentityProviderGetParams = IdentityProvidersAPI.IdentityProviderGetParams;
   export import Organizations = OrganizationsAPI.Organizations;
   export import OrganizationCreateResponse = OrganizationsAPI.OrganizationCreateResponse;
   export import OrganizationUpdateResponse = OrganizationsAPI.OrganizationUpdateResponse;
@@ -74,6 +87,7 @@ export namespace Access {
   export import OrganizationRevokeUsersResponse = OrganizationsAPI.OrganizationRevokeUsersResponse;
   export import OrganizationCreateParams = OrganizationsAPI.OrganizationCreateParams;
   export import OrganizationUpdateParams = OrganizationsAPI.OrganizationUpdateParams;
+  export import OrganizationListParams = OrganizationsAPI.OrganizationListParams;
   export import OrganizationRevokeUsersParams = OrganizationsAPI.OrganizationRevokeUsersParams;
   export import ServiceTokens = ServiceTokensAPI.ServiceTokens;
   export import ServiceTokenCreateResponse = ServiceTokensAPI.ServiceTokenCreateResponse;
@@ -84,6 +98,8 @@ export namespace Access {
   export import ServiceTokenRotateResponse = ServiceTokensAPI.ServiceTokenRotateResponse;
   export import ServiceTokenCreateParams = ServiceTokensAPI.ServiceTokenCreateParams;
   export import ServiceTokenUpdateParams = ServiceTokensAPI.ServiceTokenUpdateParams;
+  export import ServiceTokenListParams = ServiceTokensAPI.ServiceTokenListParams;
+  export import ServiceTokenDeleteParams = ServiceTokensAPI.ServiceTokenDeleteParams;
   export import Bookmarks = BookmarksAPI.Bookmarks;
   export import BookmarkUpdateResponse = BookmarksAPI.BookmarkUpdateResponse;
   export import BookmarkListResponse = BookmarksAPI.BookmarkListResponse;

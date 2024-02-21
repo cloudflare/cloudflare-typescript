@@ -10,3 +10,10 @@ export {
   Buckets,
 } from './buckets';
 export { R2 } from './r2';
+export {
+  SippyUpdateResponse,
+  SippyDeleteResponse,
+  SippyGetResponse,
+  SippyUpdateParams,
+  Sippy,
+} from './sippy';

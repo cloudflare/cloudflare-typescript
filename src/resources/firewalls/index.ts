@@ -8,7 +8,9 @@ export {
   AccessRuleGetResponse,
   AccessRuleCreateParams,
   AccessRuleListParams,
+  AccessRuleDeleteParams,
   AccessRuleEditParams,
+  AccessRuleGetParams,
   AccessRuleListResponsesV4PagePaginationArray,
   AccessRules,
 } from './access-rules';

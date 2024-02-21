@@ -9,14 +9,14 @@ export class Jobs extends APIResource {
    * Lists Logpush jobs for an account or zone for a dataset.
    */
   list(
-    accountOrZone: string,
-    accountOrZoneId: string,
     datasetId: string | null,
+    params: JobListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<JobListResponse> {
+    const { account_id, zone_id } = params;
     return (
       this._client.get(
-        `/${accountOrZone}/${accountOrZoneId}/logpush/datasets/${datasetId}/jobs`,
+        `/${account_id}/${zone_id}/logpush/datasets/${datasetId}/jobs`,
         options,
       ) as Core.APIPromise<{ result: JobListResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -181,6 +181,19 @@ export namespace JobListResponse {
   }
 }
 
+export interface JobListParams {
+  /**
+   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   */
+  zone_id: string;
+}
+
 export namespace Jobs {
   export import JobListResponse = JobsAPI.JobListResponse;
+  export import JobListParams = JobsAPI.JobListParams;
 }

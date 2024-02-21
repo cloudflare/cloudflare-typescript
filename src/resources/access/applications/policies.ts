@@ -9,14 +9,13 @@ export class Policies extends APIResource {
    * Create a new Access policy for an application.
    */
   create(
-    accountOrZone: string,
-    accountOrZoneId: string,
     uuid: string,
-    body: PolicyCreateParams,
+    params: PolicyCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PolicyCreateResponse> {
+    const { account_id, zone_id, ...body } = params;
     return (
-      this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/apps/${uuid}/policies`, {
+      this._client.post(`/${account_id}/${zone_id}/access/apps/${uuid}/policies`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: PolicyCreateResponse }>
@@ -27,15 +26,14 @@ export class Policies extends APIResource {
    * Update a configured Access policy.
    */
   update(
-    accountOrZone: string,
-    accountOrZoneId: string,
     uuid1: string,
     uuid: string,
-    body: PolicyUpdateParams,
+    params: PolicyUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PolicyUpdateResponse> {
+    const { account_id, zone_id, ...body } = params;
     return (
-      this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/apps/${uuid1}/policies/${uuid}`, {
+      this._client.put(`/${account_id}/${zone_id}/access/apps/${uuid1}/policies/${uuid}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: PolicyUpdateResponse }>
@@ -46,16 +44,15 @@ export class Policies extends APIResource {
    * Lists Access policies configured for an application.
    */
   list(
-    accountOrZone: string,
-    accountOrZoneId: string,
     uuid: string,
+    params: PolicyListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PolicyListResponse | null> {
+    const { account_id, zone_id } = params;
     return (
-      this._client.get(
-        `/${accountOrZone}/${accountOrZoneId}/access/apps/${uuid}/policies`,
-        options,
-      ) as Core.APIPromise<{ result: PolicyListResponse | null }>
+      this._client.get(`/${account_id}/${zone_id}/access/apps/${uuid}/policies`, options) as Core.APIPromise<{
+        result: PolicyListResponse | null;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -63,15 +60,15 @@ export class Policies extends APIResource {
    * Delete an Access policy.
    */
   delete(
-    accountOrZone: string,
-    accountOrZoneId: string,
     uuid1: string,
     uuid: string,
+    params: PolicyDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PolicyDeleteResponse> {
+    const { account_id, zone_id } = params;
     return (
       this._client.delete(
-        `/${accountOrZone}/${accountOrZoneId}/access/apps/${uuid1}/policies/${uuid}`,
+        `/${account_id}/${zone_id}/access/apps/${uuid1}/policies/${uuid}`,
         options,
       ) as Core.APIPromise<{ result: PolicyDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -81,15 +78,15 @@ export class Policies extends APIResource {
    * Fetches a single Access policy.
    */
   get(
-    accountOrZone: string,
-    accountOrZoneId: string,
     uuid1: string,
     uuid: string,
+    params: PolicyGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PolicyGetResponse> {
+    const { account_id, zone_id } = params;
     return (
       this._client.get(
-        `/${accountOrZone}/${accountOrZoneId}/access/apps/${uuid1}/policies/${uuid}`,
+        `/${account_id}/${zone_id}/access/apps/${uuid1}/policies/${uuid}`,
         options,
       ) as Core.APIPromise<{ result: PolicyGetResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -4533,13 +4530,25 @@ export namespace PolicyGetResponse {
 
 export interface PolicyCreateParams {
   /**
-   * The action Access will take if a user matches this policy.
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id: string;
+
+  /**
+   * Body param: The action Access will take if a user matches this policy.
    */
   decision: 'allow' | 'deny' | 'non_identity' | 'bypass';
 
   /**
-   * Rules evaluated with an OR logical operator. A user needs to meet only one of
-   * the Include rules.
+   * Body param: Rules evaluated with an OR logical operator. A user needs to meet
+   * only one of the Include rules.
    */
   include: Array<
     | PolicyCreateParams.AccessEmailRule
@@ -4564,24 +4573,24 @@ export interface PolicyCreateParams {
   >;
 
   /**
-   * The name of the Access policy.
+   * Body param: The name of the Access policy.
    */
   name: string;
 
   /**
-   * Administrators who can approve a temporary authentication request.
+   * Body param: Administrators who can approve a temporary authentication request.
    */
   approval_groups?: Array<PolicyCreateParams.ApprovalGroup>;
 
   /**
-   * Requires the user to request access from an administrator at the start of each
-   * session.
+   * Body param: Requires the user to request access from an administrator at the
+   * start of each session.
    */
   approval_required?: boolean;
 
   /**
-   * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
-   * meet any of the Exclude rules.
+   * Body param: Rules evaluated with a NOT logical operator. To match the policy, a
+   * user cannot meet any of the Exclude rules.
    */
   exclude?: Array<
     | PolicyCreateParams.AccessEmailRule
@@ -4606,30 +4615,33 @@ export interface PolicyCreateParams {
   >;
 
   /**
-   * Require this application to be served in an isolated browser for users matching
-   * this policy. 'Client Web Isolation' must be on for the account in order to use
-   * this feature.
+   * Body param: Require this application to be served in an isolated browser for
+   * users matching this policy. 'Client Web Isolation' must be on for the account in
+   * order to use this feature.
    */
   isolation_required?: boolean;
 
   /**
-   * The order of execution for this policy. Must be unique for each policy.
+   * Body param: The order of execution for this policy. Must be unique for each
+   * policy.
    */
   precedence?: number;
 
   /**
-   * A custom message that will appear on the purpose justification screen.
+   * Body param: A custom message that will appear on the purpose justification
+   * screen.
    */
   purpose_justification_prompt?: string;
 
   /**
-   * Require users to enter a justification when they log in to the application.
+   * Body param: Require users to enter a justification when they log in to the
+   * application.
    */
   purpose_justification_required?: boolean;
 
   /**
-   * Rules evaluated with an AND logical operator. To match the policy, a user must
-   * meet all of the Require rules.
+   * Body param: Rules evaluated with an AND logical operator. To match the policy, a
+   * user must meet all of the Require rules.
    */
   require?: Array<
     | PolicyCreateParams.AccessEmailRule
@@ -4654,9 +4666,9 @@ export interface PolicyCreateParams {
   >;
 
   /**
-   * The amount of time that tokens issued for the application will be valid. Must be
-   * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
-   * m, h.
+   * Body param: The amount of time that tokens issued for the application will be
+   * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
+   * (or µs), ms, s, m, h.
    */
   session_duration?: string;
 }
@@ -5630,13 +5642,25 @@ export namespace PolicyCreateParams {
 
 export interface PolicyUpdateParams {
   /**
-   * The action Access will take if a user matches this policy.
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id: string;
+
+  /**
+   * Body param: The action Access will take if a user matches this policy.
    */
   decision: 'allow' | 'deny' | 'non_identity' | 'bypass';
 
   /**
-   * Rules evaluated with an OR logical operator. A user needs to meet only one of
-   * the Include rules.
+   * Body param: Rules evaluated with an OR logical operator. A user needs to meet
+   * only one of the Include rules.
    */
   include: Array<
     | PolicyUpdateParams.AccessEmailRule
@@ -5661,24 +5685,24 @@ export interface PolicyUpdateParams {
   >;
 
   /**
-   * The name of the Access policy.
+   * Body param: The name of the Access policy.
    */
   name: string;
 
   /**
-   * Administrators who can approve a temporary authentication request.
+   * Body param: Administrators who can approve a temporary authentication request.
    */
   approval_groups?: Array<PolicyUpdateParams.ApprovalGroup>;
 
   /**
-   * Requires the user to request access from an administrator at the start of each
-   * session.
+   * Body param: Requires the user to request access from an administrator at the
+   * start of each session.
    */
   approval_required?: boolean;
 
   /**
-   * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
-   * meet any of the Exclude rules.
+   * Body param: Rules evaluated with a NOT logical operator. To match the policy, a
+   * user cannot meet any of the Exclude rules.
    */
   exclude?: Array<
     | PolicyUpdateParams.AccessEmailRule
@@ -5703,30 +5727,33 @@ export interface PolicyUpdateParams {
   >;
 
   /**
-   * Require this application to be served in an isolated browser for users matching
-   * this policy. 'Client Web Isolation' must be on for the account in order to use
-   * this feature.
+   * Body param: Require this application to be served in an isolated browser for
+   * users matching this policy. 'Client Web Isolation' must be on for the account in
+   * order to use this feature.
    */
   isolation_required?: boolean;
 
   /**
-   * The order of execution for this policy. Must be unique for each policy.
+   * Body param: The order of execution for this policy. Must be unique for each
+   * policy.
    */
   precedence?: number;
 
   /**
-   * A custom message that will appear on the purpose justification screen.
+   * Body param: A custom message that will appear on the purpose justification
+   * screen.
    */
   purpose_justification_prompt?: string;
 
   /**
-   * Require users to enter a justification when they log in to the application.
+   * Body param: Require users to enter a justification when they log in to the
+   * application.
    */
   purpose_justification_required?: boolean;
 
   /**
-   * Rules evaluated with an AND logical operator. To match the policy, a user must
-   * meet all of the Require rules.
+   * Body param: Rules evaluated with an AND logical operator. To match the policy, a
+   * user must meet all of the Require rules.
    */
   require?: Array<
     | PolicyUpdateParams.AccessEmailRule
@@ -5751,9 +5778,9 @@ export interface PolicyUpdateParams {
   >;
 
   /**
-   * The amount of time that tokens issued for the application will be valid. Must be
-   * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
-   * m, h.
+   * Body param: The amount of time that tokens issued for the application will be
+   * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
+   * (or µs), ms, s, m, h.
    */
   session_duration?: string;
 }
@@ -6725,6 +6752,42 @@ export namespace PolicyUpdateParams {
   }
 }
 
+export interface PolicyListParams {
+  /**
+   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   */
+  zone_id: string;
+}
+
+export interface PolicyDeleteParams {
+  /**
+   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   */
+  zone_id: string;
+}
+
+export interface PolicyGetParams {
+  /**
+   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   */
+  zone_id: string;
+}
+
 export namespace Policies {
   export import PolicyCreateResponse = PoliciesAPI.PolicyCreateResponse;
   export import PolicyUpdateResponse = PoliciesAPI.PolicyUpdateResponse;
@@ -6733,4 +6796,7 @@ export namespace Policies {
   export import PolicyGetResponse = PoliciesAPI.PolicyGetResponse;
   export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
   export import PolicyUpdateParams = PoliciesAPI.PolicyUpdateParams;
+  export import PolicyListParams = PoliciesAPI.PolicyListParams;
+  export import PolicyDeleteParams = PoliciesAPI.PolicyDeleteParams;
+  export import PolicyGetParams = PoliciesAPI.PolicyGetParams;
 }

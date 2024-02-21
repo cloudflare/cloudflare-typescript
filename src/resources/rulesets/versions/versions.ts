@@ -12,14 +12,14 @@ export class Versions extends APIResource {
    * Fetches the versions of an account or zone ruleset.
    */
   list(
-    accountOrZone: string,
-    accountOrZoneId: string,
     rulesetId: string,
+    params: VersionListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<VersionListResponse> {
+    const { account_id, zone_id } = params;
     return (
       this._client.get(
-        `/${accountOrZone}/${accountOrZoneId}/rulesets/${rulesetId}/versions`,
+        `/${account_id}/${zone_id}/rulesets/${rulesetId}/versions`,
         options,
       ) as Core.APIPromise<{ result: VersionListResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -29,31 +29,31 @@ export class Versions extends APIResource {
    * Deletes an existing version of an account or zone ruleset.
    */
   delete(
-    accountOrZone: string,
-    accountOrZoneId: string,
     rulesetId: string,
     rulesetVersion: string,
+    params: VersionDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<void> {
-    return this._client.delete(
-      `/${accountOrZone}/${accountOrZoneId}/rulesets/${rulesetId}/versions/${rulesetVersion}`,
-      { ...options, headers: { Accept: '*/*', ...options?.headers } },
-    );
+    const { account_id, zone_id } = params;
+    return this._client.delete(`/${account_id}/${zone_id}/rulesets/${rulesetId}/versions/${rulesetVersion}`, {
+      ...options,
+      headers: { Accept: '*/*', ...options?.headers },
+    });
   }
 
   /**
    * Fetches a specific version of an account or zone ruleset.
    */
   get(
-    accountOrZone: string,
-    accountOrZoneId: string,
     rulesetId: string,
     rulesetVersion: string,
+    params: VersionGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<VersionGetResponse> {
+    const { account_id, zone_id } = params;
     return (
       this._client.get(
-        `/${accountOrZone}/${accountOrZoneId}/rulesets/${rulesetId}/versions/${rulesetVersion}`,
+        `/${account_id}/${zone_id}/rulesets/${rulesetId}/versions/${rulesetVersion}`,
         options,
       ) as Core.APIPromise<{ result: VersionGetResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -694,9 +694,48 @@ export namespace VersionGetResponse {
   }
 }
 
+export interface VersionListParams {
+  /**
+   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   */
+  zone_id: string;
+}
+
+export interface VersionDeleteParams {
+  /**
+   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   */
+  zone_id: string;
+}
+
+export interface VersionGetParams {
+  /**
+   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   */
+  zone_id: string;
+}
+
 export namespace Versions {
   export import VersionListResponse = VersionsAPI.VersionListResponse;
   export import VersionGetResponse = VersionsAPI.VersionGetResponse;
+  export import VersionListParams = VersionsAPI.VersionListParams;
+  export import VersionDeleteParams = VersionsAPI.VersionDeleteParams;
+  export import VersionGetParams = VersionsAPI.VersionGetParams;
   export import ByTags = ByTagsAPI.ByTags;
   export import ByTagGetResponse = ByTagsAPI.ByTagGetResponse;
 }

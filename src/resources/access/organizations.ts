@@ -9,13 +9,12 @@ export class Organizations extends APIResource {
    * Sets up a Zero Trust organization for your account or zone.
    */
   create(
-    accountOrZone: string,
-    accountOrZoneId: string,
-    body: OrganizationCreateParams,
+    params: OrganizationCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OrganizationCreateResponse> {
+    const { account_id, zone_id, ...body } = params;
     return (
-      this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/organizations`, {
+      this._client.post(`/${account_id}/${zone_id}/access/organizations`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: OrganizationCreateResponse }>
@@ -26,13 +25,12 @@ export class Organizations extends APIResource {
    * Updates the configuration for your Zero Trust organization.
    */
   update(
-    accountOrZone: string,
-    accountOrZoneId: string,
-    body: OrganizationUpdateParams,
+    params: OrganizationUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OrganizationUpdateResponse> {
+    const { account_id, zone_id, ...body } = params;
     return (
-      this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/organizations`, {
+      this._client.put(`/${account_id}/${zone_id}/access/organizations`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: OrganizationUpdateResponse }>
@@ -43,15 +41,14 @@ export class Organizations extends APIResource {
    * Returns the configuration for your Zero Trust organization.
    */
   list(
-    accountOrZone: string,
-    accountOrZoneId: string,
+    params: OrganizationListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OrganizationListResponse> {
+    const { account_id, zone_id } = params;
     return (
-      this._client.get(
-        `/${accountOrZone}/${accountOrZoneId}/access/organizations`,
-        options,
-      ) as Core.APIPromise<{ result: OrganizationListResponse }>
+      this._client.get(`/${account_id}/${zone_id}/access/organizations`, options) as Core.APIPromise<{
+        result: OrganizationListResponse;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -59,13 +56,12 @@ export class Organizations extends APIResource {
    * Revokes a user's access across all applications.
    */
   revokeUsers(
-    accountOrZone: string,
-    accountOrZoneId: string,
-    body: OrganizationRevokeUsersParams,
+    params: OrganizationRevokeUsersParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OrganizationRevokeUsersResponse> {
+    const { account_id, zone_id, ...body } = params;
     return (
-      this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/organizations/revoke_user`, {
+      this._client.post(`/${account_id}/${zone_id}/access/organizations/revoke_user`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: OrganizationRevokeUsersResponse }>
@@ -395,58 +391,77 @@ export type OrganizationRevokeUsersResponse = true | false;
 
 export interface OrganizationCreateParams {
   /**
-   * The unique subdomain assigned to your Zero Trust organization.
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id: string;
+
+  /**
+   * Body param: The unique subdomain assigned to your Zero Trust organization.
    */
   auth_domain: string;
 
   /**
-   * The name of your Zero Trust organization.
+   * Body param: The name of your Zero Trust organization.
    */
   name: string;
 
   /**
-   * When set to true, users can authenticate via WARP for any application in your
-   * organization. Application settings will take precedence over this value.
+   * Body param: When set to true, users can authenticate via WARP for any
+   * application in your organization. Application settings will take precedence over
+   * this value.
    */
   allow_authenticate_via_warp?: boolean;
 
   /**
-   * When set to `true`, users skip the identity provider selection step during
-   * login.
+   * Body param: When set to `true`, users skip the identity provider selection step
+   * during login.
    */
   auto_redirect_to_identity?: boolean;
 
   /**
-   * Lock all settings as Read-Only in the Dashboard, regardless of user permission.
-   * Updates may only be made via the API or Terraform for this account when enabled.
+   * Body param: Lock all settings as Read-Only in the Dashboard, regardless of user
+   * permission. Updates may only be made via the API or Terraform for this account
+   * when enabled.
    */
   is_ui_read_only?: boolean;
 
+  /**
+   * Body param:
+   */
   login_design?: OrganizationCreateParams.LoginDesign;
 
   /**
-   * The amount of time that tokens issued for applications will be valid. Must be in
-   * the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m,
-   * h.
+   * Body param: The amount of time that tokens issued for applications will be
+   * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
+   * (or µs), ms, s, m, h.
    */
   session_duration?: string;
 
   /**
-   * A description of the reason why the UI read only field is being toggled.
+   * Body param: A description of the reason why the UI read only field is being
+   * toggled.
    */
   ui_read_only_toggle_reason?: string;
 
   /**
-   * The amount of time a user seat is inactive before it expires. When the user seat
-   * exceeds the set time of inactivity, the user is removed as an active seat and no
-   * longer counts against your Teams seat count. Must be in the format `300ms` or
-   * `2h45m`. Valid time units are: `ns`, `us` (or `µs`), `ms`, `s`, `m`, `h`.
+   * Body param: The amount of time a user seat is inactive before it expires. When
+   * the user seat exceeds the set time of inactivity, the user is removed as an
+   * active seat and no longer counts against your Teams seat count. Must be in the
+   * format `300ms` or `2h45m`. Valid time units are: `ns`, `us` (or `µs`), `ms`,
+   * `s`, `m`, `h`.
    */
   user_seat_expiration_inactive_time?: string;
 
   /**
-   * The amount of time that tokens issued for applications will be valid. Must be in
-   * the format `30m` or `2h45m`. Valid time units are: m, h.
+   * Body param: The amount of time that tokens issued for applications will be
+   * valid. Must be in the format `30m` or `2h45m`. Valid time units are: m, h.
    */
   warp_auth_session_duration?: string;
 }
@@ -482,60 +497,82 @@ export namespace OrganizationCreateParams {
 
 export interface OrganizationUpdateParams {
   /**
-   * When set to true, users can authenticate via WARP for any application in your
-   * organization. Application settings will take precedence over this value.
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id: string;
+
+  /**
+   * Body param: When set to true, users can authenticate via WARP for any
+   * application in your organization. Application settings will take precedence over
+   * this value.
    */
   allow_authenticate_via_warp?: boolean;
 
   /**
-   * The unique subdomain assigned to your Zero Trust organization.
+   * Body param: The unique subdomain assigned to your Zero Trust organization.
    */
   auth_domain?: string;
 
   /**
-   * When set to `true`, users skip the identity provider selection step during
-   * login.
+   * Body param: When set to `true`, users skip the identity provider selection step
+   * during login.
    */
   auto_redirect_to_identity?: boolean;
 
+  /**
+   * Body param:
+   */
   custom_pages?: OrganizationUpdateParams.CustomPages;
 
   /**
-   * Lock all settings as Read-Only in the Dashboard, regardless of user permission.
-   * Updates may only be made via the API or Terraform for this account when enabled.
+   * Body param: Lock all settings as Read-Only in the Dashboard, regardless of user
+   * permission. Updates may only be made via the API or Terraform for this account
+   * when enabled.
    */
   is_ui_read_only?: boolean;
 
+  /**
+   * Body param:
+   */
   login_design?: OrganizationUpdateParams.LoginDesign;
 
   /**
-   * The name of your Zero Trust organization.
+   * Body param: The name of your Zero Trust organization.
    */
   name?: string;
 
   /**
-   * The amount of time that tokens issued for applications will be valid. Must be in
-   * the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m,
-   * h.
+   * Body param: The amount of time that tokens issued for applications will be
+   * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
+   * (or µs), ms, s, m, h.
    */
   session_duration?: string;
 
   /**
-   * A description of the reason why the UI read only field is being toggled.
+   * Body param: A description of the reason why the UI read only field is being
+   * toggled.
    */
   ui_read_only_toggle_reason?: string;
 
   /**
-   * The amount of time a user seat is inactive before it expires. When the user seat
-   * exceeds the set time of inactivity, the user is removed as an active seat and no
-   * longer counts against your Teams seat count. Must be in the format `300ms` or
-   * `2h45m`. Valid time units are: `ns`, `us` (or `µs`), `ms`, `s`, `m`, `h`.
+   * Body param: The amount of time a user seat is inactive before it expires. When
+   * the user seat exceeds the set time of inactivity, the user is removed as an
+   * active seat and no longer counts against your Teams seat count. Must be in the
+   * format `300ms` or `2h45m`. Valid time units are: `ns`, `us` (or `µs`), `ms`,
+   * `s`, `m`, `h`.
    */
   user_seat_expiration_inactive_time?: string;
 
   /**
-   * The amount of time that tokens issued for applications will be valid. Must be in
-   * the format `30m` or `2h45m`. Valid time units are: m, h.
+   * Body param: The amount of time that tokens issued for applications will be
+   * valid. Must be in the format `30m` or `2h45m`. Valid time units are: m, h.
    */
   warp_auth_session_duration?: string;
 }
@@ -582,9 +619,33 @@ export namespace OrganizationUpdateParams {
   }
 }
 
+export interface OrganizationListParams {
+  /**
+   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   */
+  zone_id: string;
+}
+
 export interface OrganizationRevokeUsersParams {
   /**
-   * The email of the user to revoke.
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id: string;
+
+  /**
+   * Body param: The email of the user to revoke.
    */
   email: string;
 }
@@ -596,5 +657,6 @@ export namespace Organizations {
   export import OrganizationRevokeUsersResponse = OrganizationsAPI.OrganizationRevokeUsersResponse;
   export import OrganizationCreateParams = OrganizationsAPI.OrganizationCreateParams;
   export import OrganizationUpdateParams = OrganizationsAPI.OrganizationUpdateParams;
+  export import OrganizationListParams = OrganizationsAPI.OrganizationListParams;
   export import OrganizationRevokeUsersParams = OrganizationsAPI.OrganizationRevokeUsersParams;
 }

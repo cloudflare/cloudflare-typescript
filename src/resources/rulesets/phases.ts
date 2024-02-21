@@ -10,8 +10,6 @@ export class Phases extends APIResource {
    * given phase.
    */
   get(
-    accountOrZone: string,
-    accountOrZoneId: string,
     rulesetPhase:
       | 'ddos_l4'
       | 'ddos_l7'
@@ -36,11 +34,13 @@ export class Phases extends APIResource {
       | 'magic_transit'
       | 'magic_transit_ids_managed'
       | 'magic_transit_managed',
+    params: PhaseGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PhaseGetResponse> {
+    const { account_id, zone_id } = params;
     return (
       this._client.get(
-        `/${accountOrZone}/${accountOrZoneId}/rulesets/phases/${rulesetPhase}/entrypoint`,
+        `/${account_id}/${zone_id}/rulesets/phases/${rulesetPhase}/entrypoint`,
         options,
       ) as Core.APIPromise<{ result: PhaseGetResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -611,6 +611,19 @@ export namespace PhaseGetResponse {
   }
 }
 
+export interface PhaseGetParams {
+  /**
+   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   */
+  zone_id: string;
+}
+
 export namespace Phases {
   export import PhaseGetResponse = PhasesAPI.PhaseGetResponse;
+  export import PhaseGetParams = PhasesAPI.PhaseGetParams;
 }

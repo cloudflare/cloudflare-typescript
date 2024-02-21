@@ -10,14 +10,14 @@ export class Fields extends APIResource {
    * key-value pairs, where keys are field names, and values are descriptions.
    */
   list(
-    accountOrZone: string,
-    accountOrZoneId: string,
     datasetId: string | null,
+    params: FieldListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<FieldListResponse> {
+    const { account_id, zone_id } = params;
     return (
       this._client.get(
-        `/${accountOrZone}/${accountOrZoneId}/logpush/datasets/${datasetId}/fields`,
+        `/${account_id}/${zone_id}/logpush/datasets/${datasetId}/fields`,
         options,
       ) as Core.APIPromise<{ result: FieldListResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -26,6 +26,19 @@ export class Fields extends APIResource {
 
 export type FieldListResponse = unknown;
 
+export interface FieldListParams {
+  /**
+   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   */
+  zone_id: string;
+}
+
 export namespace Fields {
   export import FieldListResponse = FieldsAPI.FieldListResponse;
+  export import FieldListParams = FieldsAPI.FieldListParams;
 }

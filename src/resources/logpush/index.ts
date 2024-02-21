@@ -10,6 +10,9 @@ export {
   JobGetResponse,
   JobCreateParams,
   JobUpdateParams,
+  JobListParams,
+  JobDeleteParams,
+  JobGetParams,
   Jobs,
 } from './jobs';
 export { Logpush } from './logpush';

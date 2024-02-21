@@ -10,6 +10,10 @@ export {
   ApplicationRevokeTokensResponse,
   ApplicationCreateParams,
   ApplicationUpdateParams,
+  ApplicationListParams,
+  ApplicationDeleteParams,
+  ApplicationGetParams,
+  ApplicationRevokeTokensParams,
   Applications,
 } from './applications/index';
 export {
@@ -27,6 +31,9 @@ export {
   CertificateGetResponse,
   CertificateCreateParams,
   CertificateUpdateParams,
+  CertificateListParams,
+  CertificateDeleteParams,
+  CertificateGetParams,
   Certificates,
 } from './certificates/index';
 export {
@@ -47,6 +54,9 @@ export {
   GroupGetResponse,
   GroupCreateParams,
   GroupUpdateParams,
+  GroupListParams,
+  GroupDeleteParams,
+  GroupGetParams,
   Groups,
 } from './groups';
 export {
@@ -57,6 +67,9 @@ export {
   IdentityProviderGetResponse,
   IdentityProviderCreateParams,
   IdentityProviderUpdateParams,
+  IdentityProviderListParams,
+  IdentityProviderDeleteParams,
+  IdentityProviderGetParams,
   IdentityProviders,
 } from './identity-providers';
 export { KeyUpdateResponse, KeyListResponse, KeyRotateResponse, KeyUpdateParams, Keys } from './keys';
@@ -68,6 +81,7 @@ export {
   OrganizationRevokeUsersResponse,
   OrganizationCreateParams,
   OrganizationUpdateParams,
+  OrganizationListParams,
   OrganizationRevokeUsersParams,
   Organizations,
 } from './organizations';
@@ -81,6 +95,8 @@ export {
   ServiceTokenRotateResponse,
   ServiceTokenCreateParams,
   ServiceTokenUpdateParams,
+  ServiceTokenListParams,
+  ServiceTokenDeleteParams,
   ServiceTokens,
 } from './service-tokens';
 export {

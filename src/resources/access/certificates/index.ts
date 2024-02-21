@@ -8,6 +8,15 @@ export {
   CertificateGetResponse,
   CertificateCreateParams,
   CertificateUpdateParams,
+  CertificateListParams,
+  CertificateDeleteParams,
+  CertificateGetParams,
   Certificates,
 } from './certificates';
-export { SettingUpdateResponse, SettingListResponse, SettingUpdateParams, Settings } from './settings';
+export {
+  SettingUpdateResponse,
+  SettingListResponse,
+  SettingUpdateParams,
+  SettingListParams,
+  Settings,
+} from './settings';

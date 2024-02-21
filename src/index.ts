@@ -125,7 +125,7 @@ export class Cloudflare extends Core.APIClient {
     }
     if (apiEmail === undefined) {
       throw new Errors.CloudflareError(
-        "The CLOUDFLARE_EMAIL environment variable is missing or empty; either provide it, or instantiate the Cloudflare client with an apiEmail option, like new Cloudflare({ apiEmail: 'dev@cloudflare.com' }).",
+        "The CLOUDFLARE_EMAIL environment variable is missing or empty; either provide it, or instantiate the Cloudflare client with an apiEmail option, like new Cloudflare({ apiEmail: 'user@example.com' }).",
       );
     }
     if (apiToken === undefined) {
@@ -135,7 +135,7 @@ export class Cloudflare extends Core.APIClient {
     }
     if (userServiceKey === undefined) {
       throw new Errors.CloudflareError(
-        "The CLOUDFLARE_API_USER_SERVICE_KEY environment variable is missing or empty; either provide it, or instantiate the Cloudflare client with an userServiceKey option, like new Cloudflare({ userServiceKey: 'My User Service Key' }).",
+        "The CLOUDFLARE_API_USER_SERVICE_KEY environment variable is missing or empty; either provide it, or instantiate the Cloudflare client with an userServiceKey option, like new Cloudflare({ userServiceKey: 'v1.0-144c9defac04969c7bfad8ef-631a41d003a32d25fe878081ef365c49503f7fada600da935e2851a1c7326084b85cbf6429c4b859de8475731dc92a9c329631e6d59e6c73da7b198497172b4cefe071d90d0f5d2719' }).",
       );
     }
 
@@ -252,7 +252,6 @@ export class Cloudflare extends Core.APIClient {
   urlScanner: API.URLScanner = new API.URLScanner(this);
   radar: API.Radar = new API.Radar(this);
   botManagement: API.BotManagement = new API.BotManagement(this);
-  cacheReserve: API.CacheReserve = new API.CacheReserve(this);
   originPostQuantumEncryption: API.OriginPostQuantumEncryption = new API.OriginPostQuantumEncryption(this);
   firewall: API.Firewall = new API.Firewall(this);
   zaraz: API.Zaraz = new API.Zaraz(this);
@@ -610,6 +609,9 @@ export namespace Cloudflare {
   export import RulesetGetResponse = API.RulesetGetResponse;
   export import RulesetCreateParams = API.RulesetCreateParams;
   export import RulesetUpdateParams = API.RulesetUpdateParams;
+  export import RulesetListParams = API.RulesetListParams;
+  export import RulesetDeleteParams = API.RulesetDeleteParams;
+  export import RulesetGetParams = API.RulesetGetParams;
 
   export import URLNormalizations = API.URLNormalizations;
   export import URLNormalizationUpdateResponse = API.URLNormalizationUpdateResponse;
@@ -771,10 +773,6 @@ export namespace Cloudflare {
   export import BotManagementUpdateResponse = API.BotManagementUpdateResponse;
   export import BotManagementGetResponse = API.BotManagementGetResponse;
   export import BotManagementUpdateParams = API.BotManagementUpdateParams;
-
-  export import CacheReserve = API.CacheReserve;
-  export import CacheReserveCreateResponse = API.CacheReserveCreateResponse;
-  export import CacheReserveGetResponse = API.CacheReserveGetResponse;
 
   export import OriginPostQuantumEncryption = API.OriginPostQuantumEncryption;
   export import OriginPostQuantumEncryptionUpdateResponse = API.OriginPostQuantumEncryptionUpdateResponse;

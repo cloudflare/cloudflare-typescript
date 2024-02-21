@@ -10,14 +10,13 @@ export class Rules extends APIResource {
    * of the existing list of rules in the ruleset by default.
    */
   create(
-    accountOrZone: string,
-    accountOrZoneId: string,
     rulesetId: string,
-    body: RuleCreateParams,
+    params: RuleCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RuleCreateResponse> {
+    const { account_id, zone_id, ...body } = params;
     return (
-      this._client.post(`/${accountOrZone}/${accountOrZoneId}/rulesets/${rulesetId}/rules`, {
+      this._client.post(`/${account_id}/${zone_id}/rulesets/${rulesetId}/rules`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: RuleCreateResponse }>
@@ -28,15 +27,15 @@ export class Rules extends APIResource {
    * Deletes an existing rule from an account or zone ruleset.
    */
   delete(
-    accountOrZone: string,
-    accountOrZoneId: string,
     rulesetId: string,
     ruleId: string,
+    params: RuleDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RuleDeleteResponse> {
+    const { account_id, zone_id } = params;
     return (
       this._client.delete(
-        `/${accountOrZone}/${accountOrZoneId}/rulesets/${rulesetId}/rules/${ruleId}`,
+        `/${account_id}/${zone_id}/rulesets/${rulesetId}/rules/${ruleId}`,
         options,
       ) as Core.APIPromise<{ result: RuleDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -1753,897 +1752,114 @@ export namespace RuleEditResponse {
   }
 }
 
-export type RuleCreateParams =
-  | RuleCreateParams.RulesetsBlockRule
-  | RuleCreateParams.RulesetsExecuteRule
-  | RuleCreateParams.RulesetsLogRule
-  | RuleCreateParams.RulesetsSkipRule;
+export interface RuleCreateParams {
+  /**
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id: string;
+
+  /**
+   * Body param: An object configuring where the rule will be placed.
+   */
+  position?: RuleCreateParams.Position | RuleCreateParams.Position | RuleCreateParams.Position;
+}
 
 export namespace RuleCreateParams {
-  export interface RulesetsBlockRule {
+  /**
+   * An object configuring where the rule will be placed.
+   */
+  export interface Position {
     /**
-     * The unique ID of the rule.
+     * The ID of another rule to place the rule before. An empty value causes the rule
+     * to be placed at the top.
      */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'block';
-
-    /**
-     * The parameters configuring the rule's action.
-     */
-    action_parameters?: RuleCreateParams.RulesetsBlockRule.ActionParameters;
-
-    /**
-     * An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RuleCreateParams.RulesetsBlockRule.Logging;
-
-    /**
-     * The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
+    before?: string;
   }
 
-  export namespace RulesetsBlockRule {
+  /**
+   * An object configuring where the rule will be placed.
+   */
+  export interface Position {
     /**
-     * The parameters configuring the rule's action.
+     * The ID of another rule to place the rule after. An empty value causes the rule
+     * to be placed at the bottom.
      */
-    export interface ActionParameters {
-      /**
-       * The response to show when the block is applied.
-       */
-      response?: ActionParameters.Response;
-    }
-
-    export namespace ActionParameters {
-      /**
-       * The response to show when the block is applied.
-       */
-      export interface Response {
-        /**
-         * The content to return.
-         */
-        content: string;
-
-        /**
-         * The type of the content to return.
-         */
-        content_type: string;
-
-        /**
-         * The status code to return.
-         */
-        status_code: number;
-      }
-    }
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    export interface Logging {
-      /**
-       * Whether to generate a log when the rule matches.
-       */
-      enabled: boolean;
-    }
+    after?: string;
   }
 
-  export interface RulesetsExecuteRule {
+  /**
+   * An object configuring where the rule will be placed.
+   */
+  export interface Position {
     /**
-     * The unique ID of the rule.
+     * An index at which to place the rule, where index 1 is the first rule.
      */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'execute';
-
-    /**
-     * The parameters configuring the rule's action.
-     */
-    action_parameters?: RuleCreateParams.RulesetsExecuteRule.ActionParameters;
-
-    /**
-     * An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RuleCreateParams.RulesetsExecuteRule.Logging;
-
-    /**
-     * The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace RulesetsExecuteRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * The ID of the ruleset to execute.
-       */
-      id: string;
-
-      /**
-       * The configuration to use for matched data logging.
-       */
-      matched_data?: ActionParameters.MatchedData;
-
-      /**
-       * A set of overrides to apply to the target ruleset.
-       */
-      overrides?: ActionParameters.Overrides;
-    }
-
-    export namespace ActionParameters {
-      /**
-       * The configuration to use for matched data logging.
-       */
-      export interface MatchedData {
-        /**
-         * The public key to encrypt matched data logs with.
-         */
-        public_key: string;
-      }
-
-      /**
-       * A set of overrides to apply to the target ruleset.
-       */
-      export interface Overrides {
-        /**
-         * An action to override all rules with. This option has lower precedence than rule
-         * and category overrides.
-         */
-        action?: string;
-
-        /**
-         * A list of category-level overrides. This option has the second-highest
-         * precedence after rule-level overrides.
-         */
-        categories?: Array<Overrides.Category>;
-
-        /**
-         * Whether to enable execution of all rules. This option has lower precedence than
-         * rule and category overrides.
-         */
-        enabled?: boolean;
-
-        /**
-         * A list of rule-level overrides. This option has the highest precedence.
-         */
-        rules?: Array<Overrides.Rule>;
-
-        /**
-         * A sensitivity level to set for all rules. This option has lower precedence than
-         * rule and category overrides and is only applicable for DDoS phases.
-         */
-        sensitivity_level?: 'default' | 'medium' | 'low' | 'eoff';
-      }
-
-      export namespace Overrides {
-        /**
-         * A category-level override
-         */
-        export interface Category {
-          /**
-           * The name of the category to override.
-           */
-          category: string;
-
-          /**
-           * The action to override rules in the category with.
-           */
-          action?: string;
-
-          /**
-           * Whether to enable execution of rules in the category.
-           */
-          enabled?: boolean;
-
-          /**
-           * The sensitivity level to use for rules in the category.
-           */
-          sensitivity_level?: 'default' | 'medium' | 'low' | 'eoff';
-        }
-
-        /**
-         * A rule-level override
-         */
-        export interface Rule {
-          /**
-           * The ID of the rule to override.
-           */
-          id: string;
-
-          /**
-           * The action to override the rule with.
-           */
-          action?: string;
-
-          /**
-           * Whether to enable execution of the rule.
-           */
-          enabled?: boolean;
-
-          /**
-           * The score threshold to use for the rule.
-           */
-          score_threshold?: number;
-
-          /**
-           * The sensitivity level to use for the rule.
-           */
-          sensitivity_level?: 'default' | 'medium' | 'low' | 'eoff';
-        }
-      }
-    }
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    export interface Logging {
-      /**
-       * Whether to generate a log when the rule matches.
-       */
-      enabled: boolean;
-    }
-  }
-
-  export interface RulesetsLogRule {
-    /**
-     * The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'log';
-
-    /**
-     * The parameters configuring the rule's action.
-     */
-    action_parameters?: unknown;
-
-    /**
-     * An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RuleCreateParams.RulesetsLogRule.Logging;
-
-    /**
-     * The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace RulesetsLogRule {
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    export interface Logging {
-      /**
-       * Whether to generate a log when the rule matches.
-       */
-      enabled: boolean;
-    }
-  }
-
-  export interface RulesetsSkipRule {
-    /**
-     * The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'skip';
-
-    /**
-     * The parameters configuring the rule's action.
-     */
-    action_parameters?: RuleCreateParams.RulesetsSkipRule.ActionParameters;
-
-    /**
-     * An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RuleCreateParams.RulesetsSkipRule.Logging;
-
-    /**
-     * The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace RulesetsSkipRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * A list of phases to skip the execution of. This option is incompatible with the
-       * ruleset and rulesets options.
-       */
-      phases?: Array<
-        | 'ddos_l4'
-        | 'ddos_l7'
-        | 'http_config_settings'
-        | 'http_custom_errors'
-        | 'http_log_custom_fields'
-        | 'http_ratelimit'
-        | 'http_request_cache_settings'
-        | 'http_request_dynamic_redirect'
-        | 'http_request_firewall_custom'
-        | 'http_request_firewall_managed'
-        | 'http_request_late_transform'
-        | 'http_request_origin'
-        | 'http_request_redirect'
-        | 'http_request_sanitize'
-        | 'http_request_sbfm'
-        | 'http_request_select_configuration'
-        | 'http_request_transform'
-        | 'http_response_compression'
-        | 'http_response_firewall_managed'
-        | 'http_response_headers_transform'
-        | 'magic_transit'
-        | 'magic_transit_ids_managed'
-        | 'magic_transit_managed'
-      >;
-
-      /**
-       * A list of legacy security products to skip the execution of.
-       */
-      products?: Array<'bic' | 'hot' | 'rateLimit' | 'securityLevel' | 'uaBlock' | 'waf' | 'zoneLockdown'>;
-
-      /**
-       * A mapping of ruleset IDs to a list of rule IDs in that ruleset to skip the
-       * execution of. This option is incompatible with the ruleset option.
-       */
-      rules?: Record<string, Array<string>>;
-
-      /**
-       * A ruleset to skip the execution of. This option is incompatible with the
-       * rulesets, rules and phases options.
-       */
-      ruleset?: 'current';
-
-      /**
-       * A list of ruleset IDs to skip the execution of. This option is incompatible with
-       * the ruleset and phases options.
-       */
-      rulesets?: Array<string>;
-    }
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    export interface Logging {
-      /**
-       * Whether to generate a log when the rule matches.
-       */
-      enabled: boolean;
-    }
+    index?: number;
   }
 }
 
-export type RuleEditParams =
-  | RuleEditParams.RulesetsBlockRule
-  | RuleEditParams.RulesetsExecuteRule
-  | RuleEditParams.RulesetsLogRule
-  | RuleEditParams.RulesetsSkipRule;
+export interface RuleDeleteParams {
+  /**
+   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   */
+  zone_id: string;
+}
+
+export interface RuleEditParams {
+  /**
+   * Path param: The unique ID of the account.
+   */
+  account_id: string;
+
+  /**
+   * Body param: An object configuring where the rule will be placed.
+   */
+  position?: RuleEditParams.Position | RuleEditParams.Position | RuleEditParams.Position;
+}
 
 export namespace RuleEditParams {
-  export interface RulesetsBlockRule {
+  /**
+   * An object configuring where the rule will be placed.
+   */
+  export interface Position {
     /**
-     * Path param: The unique ID of the account.
+     * The ID of another rule to place the rule before. An empty value causes the rule
+     * to be placed at the top.
      */
-    account_id: string;
-
-    /**
-     * Body param: The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * Body param: The action to perform when the rule matches.
-     */
-    action?: 'block';
-
-    /**
-     * Body param: The parameters configuring the rule's action.
-     */
-    action_parameters?: RuleEditParams.RulesetsBlockRule.ActionParameters;
-
-    /**
-     * Body param: An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Body param: Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * Body param: The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * Body param: An object configuring the rule's logging behavior.
-     */
-    logging?: RuleEditParams.RulesetsBlockRule.Logging;
-
-    /**
-     * Body param: The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
+    before?: string;
   }
 
-  export namespace RulesetsBlockRule {
+  /**
+   * An object configuring where the rule will be placed.
+   */
+  export interface Position {
     /**
-     * The parameters configuring the rule's action.
+     * The ID of another rule to place the rule after. An empty value causes the rule
+     * to be placed at the bottom.
      */
-    export interface ActionParameters {
-      /**
-       * The response to show when the block is applied.
-       */
-      response?: ActionParameters.Response;
-    }
-
-    export namespace ActionParameters {
-      /**
-       * The response to show when the block is applied.
-       */
-      export interface Response {
-        /**
-         * The content to return.
-         */
-        content: string;
-
-        /**
-         * The type of the content to return.
-         */
-        content_type: string;
-
-        /**
-         * The status code to return.
-         */
-        status_code: number;
-      }
-    }
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    export interface Logging {
-      /**
-       * Whether to generate a log when the rule matches.
-       */
-      enabled: boolean;
-    }
+    after?: string;
   }
 
-  export interface RulesetsExecuteRule {
+  /**
+   * An object configuring where the rule will be placed.
+   */
+  export interface Position {
     /**
-     * Path param: The unique ID of the account.
+     * An index at which to place the rule, where index 1 is the first rule.
      */
-    account_id: string;
-
-    /**
-     * Body param: The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * Body param: The action to perform when the rule matches.
-     */
-    action?: 'execute';
-
-    /**
-     * Body param: The parameters configuring the rule's action.
-     */
-    action_parameters?: RuleEditParams.RulesetsExecuteRule.ActionParameters;
-
-    /**
-     * Body param: An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Body param: Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * Body param: The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * Body param: An object configuring the rule's logging behavior.
-     */
-    logging?: RuleEditParams.RulesetsExecuteRule.Logging;
-
-    /**
-     * Body param: The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace RulesetsExecuteRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * The ID of the ruleset to execute.
-       */
-      id: string;
-
-      /**
-       * The configuration to use for matched data logging.
-       */
-      matched_data?: ActionParameters.MatchedData;
-
-      /**
-       * A set of overrides to apply to the target ruleset.
-       */
-      overrides?: ActionParameters.Overrides;
-    }
-
-    export namespace ActionParameters {
-      /**
-       * The configuration to use for matched data logging.
-       */
-      export interface MatchedData {
-        /**
-         * The public key to encrypt matched data logs with.
-         */
-        public_key: string;
-      }
-
-      /**
-       * A set of overrides to apply to the target ruleset.
-       */
-      export interface Overrides {
-        /**
-         * An action to override all rules with. This option has lower precedence than rule
-         * and category overrides.
-         */
-        action?: string;
-
-        /**
-         * A list of category-level overrides. This option has the second-highest
-         * precedence after rule-level overrides.
-         */
-        categories?: Array<Overrides.Category>;
-
-        /**
-         * Whether to enable execution of all rules. This option has lower precedence than
-         * rule and category overrides.
-         */
-        enabled?: boolean;
-
-        /**
-         * A list of rule-level overrides. This option has the highest precedence.
-         */
-        rules?: Array<Overrides.Rule>;
-
-        /**
-         * A sensitivity level to set for all rules. This option has lower precedence than
-         * rule and category overrides and is only applicable for DDoS phases.
-         */
-        sensitivity_level?: 'default' | 'medium' | 'low' | 'eoff';
-      }
-
-      export namespace Overrides {
-        /**
-         * A category-level override
-         */
-        export interface Category {
-          /**
-           * The name of the category to override.
-           */
-          category: string;
-
-          /**
-           * The action to override rules in the category with.
-           */
-          action?: string;
-
-          /**
-           * Whether to enable execution of rules in the category.
-           */
-          enabled?: boolean;
-
-          /**
-           * The sensitivity level to use for rules in the category.
-           */
-          sensitivity_level?: 'default' | 'medium' | 'low' | 'eoff';
-        }
-
-        /**
-         * A rule-level override
-         */
-        export interface Rule {
-          /**
-           * The ID of the rule to override.
-           */
-          id: string;
-
-          /**
-           * The action to override the rule with.
-           */
-          action?: string;
-
-          /**
-           * Whether to enable execution of the rule.
-           */
-          enabled?: boolean;
-
-          /**
-           * The score threshold to use for the rule.
-           */
-          score_threshold?: number;
-
-          /**
-           * The sensitivity level to use for the rule.
-           */
-          sensitivity_level?: 'default' | 'medium' | 'low' | 'eoff';
-        }
-      }
-    }
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    export interface Logging {
-      /**
-       * Whether to generate a log when the rule matches.
-       */
-      enabled: boolean;
-    }
-  }
-
-  export interface RulesetsLogRule {
-    /**
-     * Path param: The unique ID of the account.
-     */
-    account_id: string;
-
-    /**
-     * Body param: The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * Body param: The action to perform when the rule matches.
-     */
-    action?: 'log';
-
-    /**
-     * Body param: The parameters configuring the rule's action.
-     */
-    action_parameters?: unknown;
-
-    /**
-     * Body param: An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Body param: Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * Body param: The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * Body param: An object configuring the rule's logging behavior.
-     */
-    logging?: RuleEditParams.RulesetsLogRule.Logging;
-
-    /**
-     * Body param: The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace RulesetsLogRule {
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    export interface Logging {
-      /**
-       * Whether to generate a log when the rule matches.
-       */
-      enabled: boolean;
-    }
-  }
-
-  export interface RulesetsSkipRule {
-    /**
-     * Path param: The unique ID of the account.
-     */
-    account_id: string;
-
-    /**
-     * Body param: The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * Body param: The action to perform when the rule matches.
-     */
-    action?: 'skip';
-
-    /**
-     * Body param: The parameters configuring the rule's action.
-     */
-    action_parameters?: RuleEditParams.RulesetsSkipRule.ActionParameters;
-
-    /**
-     * Body param: An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Body param: Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * Body param: The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * Body param: An object configuring the rule's logging behavior.
-     */
-    logging?: RuleEditParams.RulesetsSkipRule.Logging;
-
-    /**
-     * Body param: The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace RulesetsSkipRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * A list of phases to skip the execution of. This option is incompatible with the
-       * ruleset and rulesets options.
-       */
-      phases?: Array<
-        | 'ddos_l4'
-        | 'ddos_l7'
-        | 'http_config_settings'
-        | 'http_custom_errors'
-        | 'http_log_custom_fields'
-        | 'http_ratelimit'
-        | 'http_request_cache_settings'
-        | 'http_request_dynamic_redirect'
-        | 'http_request_firewall_custom'
-        | 'http_request_firewall_managed'
-        | 'http_request_late_transform'
-        | 'http_request_origin'
-        | 'http_request_redirect'
-        | 'http_request_sanitize'
-        | 'http_request_sbfm'
-        | 'http_request_select_configuration'
-        | 'http_request_transform'
-        | 'http_response_compression'
-        | 'http_response_firewall_managed'
-        | 'http_response_headers_transform'
-        | 'magic_transit'
-        | 'magic_transit_ids_managed'
-        | 'magic_transit_managed'
-      >;
-
-      /**
-       * A list of legacy security products to skip the execution of.
-       */
-      products?: Array<'bic' | 'hot' | 'rateLimit' | 'securityLevel' | 'uaBlock' | 'waf' | 'zoneLockdown'>;
-
-      /**
-       * A mapping of ruleset IDs to a list of rule IDs in that ruleset to skip the
-       * execution of. This option is incompatible with the ruleset option.
-       */
-      rules?: Record<string, Array<string>>;
-
-      /**
-       * A ruleset to skip the execution of. This option is incompatible with the
-       * rulesets, rules and phases options.
-       */
-      ruleset?: 'current';
-
-      /**
-       * A list of ruleset IDs to skip the execution of. This option is incompatible with
-       * the ruleset and phases options.
-       */
-      rulesets?: Array<string>;
-    }
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    export interface Logging {
-      /**
-       * Whether to generate a log when the rule matches.
-       */
-      enabled: boolean;
-    }
+    index?: number;
   }
 }
 
@@ -2652,5 +1868,6 @@ export namespace Rules {
   export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
   export import RuleEditResponse = RulesAPI.RuleEditResponse;
   export import RuleCreateParams = RulesAPI.RuleCreateParams;
+  export import RuleDeleteParams = RulesAPI.RuleDeleteParams;
   export import RuleEditParams = RulesAPI.RuleEditParams;
 }

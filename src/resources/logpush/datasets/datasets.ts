@@ -12,6 +12,8 @@ export class Datasets extends APIResource {
 export namespace Datasets {
   export import Fields = FieldsAPI.Fields;
   export import FieldListResponse = FieldsAPI.FieldListResponse;
+  export import FieldListParams = FieldsAPI.FieldListParams;
   export import Jobs = JobsAPI.Jobs;
   export import JobListResponse = JobsAPI.JobListResponse;
+  export import JobListParams = JobsAPI.JobListParams;
 }

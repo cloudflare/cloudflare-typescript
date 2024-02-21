@@ -9,13 +9,12 @@ export class Settings extends APIResource {
    * Updates an mTLS certificate's hostname settings.
    */
   update(
-    accountOrZone: string,
-    accountOrZoneId: string,
-    body: SettingUpdateParams,
+    params: SettingUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SettingUpdateResponse | null> {
+    const { account_id, zone_id, ...body } = params;
     return (
-      this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/certificates/settings`, {
+      this._client.put(`/${account_id}/${zone_id}/access/certificates/settings`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: SettingUpdateResponse | null }>
@@ -26,15 +25,14 @@ export class Settings extends APIResource {
    * List all mTLS hostname settings for this account or zone.
    */
   list(
-    accountOrZone: string,
-    accountOrZoneId: string,
+    params: SettingListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SettingListResponse | null> {
+    const { account_id, zone_id } = params;
     return (
-      this._client.get(
-        `/${accountOrZone}/${accountOrZoneId}/access/certificates/settings`,
-        options,
-      ) as Core.APIPromise<{ result: SettingListResponse | null }>
+      this._client.get(`/${account_id}/${zone_id}/access/certificates/settings`, options) as Core.APIPromise<{
+        result: SettingListResponse | null;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -88,6 +86,21 @@ export namespace SettingListResponse {
 }
 
 export interface SettingUpdateParams {
+  /**
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id: string;
+
+  /**
+   * Body param:
+   */
   settings: Array<SettingUpdateParams.Setting>;
 }
 
@@ -113,8 +126,21 @@ export namespace SettingUpdateParams {
   }
 }
 
+export interface SettingListParams {
+  /**
+   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   */
+  zone_id: string;
+}
+
 export namespace Settings {
   export import SettingUpdateResponse = SettingsAPI.SettingUpdateResponse;
   export import SettingListResponse = SettingsAPI.SettingListResponse;
   export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;
+  export import SettingListParams = SettingsAPI.SettingListParams;
 }

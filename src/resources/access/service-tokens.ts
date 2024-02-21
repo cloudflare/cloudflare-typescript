@@ -11,13 +11,12 @@ export class ServiceTokens extends APIResource {
    * Secret or create a new service token.
    */
   create(
-    accountOrZone: string,
-    accountOrZoneId: string,
-    body: ServiceTokenCreateParams,
+    params: ServiceTokenCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ServiceTokenCreateResponse> {
+    const { account_id, zone_id, ...body } = params;
     return (
-      this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/service_tokens`, {
+      this._client.post(`/${account_id}/${zone_id}/access/service_tokens`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: ServiceTokenCreateResponse }>
@@ -28,14 +27,13 @@ export class ServiceTokens extends APIResource {
    * Updates a configured service token.
    */
   update(
-    accountOrZone: string,
-    accountOrZoneId: string,
     uuid: string,
-    body: ServiceTokenUpdateParams,
+    params: ServiceTokenUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ServiceTokenUpdateResponse> {
+    const { account_id, zone_id, ...body } = params;
     return (
-      this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/service_tokens/${uuid}`, {
+      this._client.put(`/${account_id}/${zone_id}/access/service_tokens/${uuid}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: ServiceTokenUpdateResponse }>
@@ -46,15 +44,14 @@ export class ServiceTokens extends APIResource {
    * Lists all service tokens.
    */
   list(
-    accountOrZone: string,
-    accountOrZoneId: string,
+    params: ServiceTokenListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ServiceTokenListResponse | null> {
+    const { account_id, zone_id } = params;
     return (
-      this._client.get(
-        `/${accountOrZone}/${accountOrZoneId}/access/service_tokens`,
-        options,
-      ) as Core.APIPromise<{ result: ServiceTokenListResponse | null }>
+      this._client.get(`/${account_id}/${zone_id}/access/service_tokens`, options) as Core.APIPromise<{
+        result: ServiceTokenListResponse | null;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -62,14 +59,14 @@ export class ServiceTokens extends APIResource {
    * Deletes a service token.
    */
   delete(
-    accountOrZone: string,
-    accountOrZoneId: string,
     uuid: string,
+    params: ServiceTokenDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ServiceTokenDeleteResponse> {
+    const { account_id, zone_id } = params;
     return (
       this._client.delete(
-        `/${accountOrZone}/${accountOrZoneId}/access/service_tokens/${uuid}`,
+        `/${account_id}/${zone_id}/access/service_tokens/${uuid}`,
         options,
       ) as Core.APIPromise<{ result: ServiceTokenDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -300,30 +297,78 @@ export interface ServiceTokenRotateResponse {
 
 export interface ServiceTokenCreateParams {
   /**
-   * The name of the service token.
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id: string;
+
+  /**
+   * Body param: The name of the service token.
    */
   name: string;
 
   /**
-   * The duration for how long the service token will be valid. Must be in the format
-   * `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h. The
-   * default is 1 year in hours (8760h).
+   * Body param: The duration for how long the service token will be valid. Must be
+   * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+   * m, h. The default is 1 year in hours (8760h).
    */
   duration?: string;
 }
 
 export interface ServiceTokenUpdateParams {
   /**
-   * The duration for how long the service token will be valid. Must be in the format
-   * `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h. The
-   * default is 1 year in hours (8760h).
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id: string;
+
+  /**
+   * Body param: The duration for how long the service token will be valid. Must be
+   * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+   * m, h. The default is 1 year in hours (8760h).
    */
   duration?: string;
 
   /**
-   * The name of the service token.
+   * Body param: The name of the service token.
    */
   name?: string;
+}
+
+export interface ServiceTokenListParams {
+  /**
+   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   */
+  zone_id: string;
+}
+
+export interface ServiceTokenDeleteParams {
+  /**
+   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   */
+  zone_id: string;
 }
 
 export namespace ServiceTokens {
@@ -335,4 +380,6 @@ export namespace ServiceTokens {
   export import ServiceTokenRotateResponse = ServiceTokensAPI.ServiceTokenRotateResponse;
   export import ServiceTokenCreateParams = ServiceTokensAPI.ServiceTokenCreateParams;
   export import ServiceTokenUpdateParams = ServiceTokensAPI.ServiceTokenUpdateParams;
+  export import ServiceTokenListParams = ServiceTokensAPI.ServiceTokenListParams;
+  export import ServiceTokenDeleteParams = ServiceTokensAPI.ServiceTokenDeleteParams;
 }

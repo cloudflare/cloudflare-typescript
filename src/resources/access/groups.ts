@@ -8,17 +8,12 @@ export class Groups extends APIResource {
   /**
    * Creates a new Access group.
    */
-  create(
-    accountOrZone: string,
-    accountOrZoneId: string,
-    body: GroupCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<GroupCreateResponse> {
+  create(params: GroupCreateParams, options?: Core.RequestOptions): Core.APIPromise<GroupCreateResponse> {
+    const { account_id, zone_id, ...body } = params;
     return (
-      this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/groups`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: GroupCreateResponse }>
+      this._client.post(`/${account_id}/${zone_id}/access/groups`, { body, ...options }) as Core.APIPromise<{
+        result: GroupCreateResponse;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -26,14 +21,13 @@ export class Groups extends APIResource {
    * Updates a configured Access group.
    */
   update(
-    accountOrZone: string,
-    accountOrZoneId: string,
     uuid: string,
-    body: GroupUpdateParams,
+    params: GroupUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<GroupUpdateResponse> {
+    const { account_id, zone_id, ...body } = params;
     return (
-      this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/groups/${uuid}`, {
+      this._client.put(`/${account_id}/${zone_id}/access/groups/${uuid}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: GroupUpdateResponse }>
@@ -43,13 +37,10 @@ export class Groups extends APIResource {
   /**
    * Lists all Access groups.
    */
-  list(
-    accountOrZone: string,
-    accountOrZoneId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<GroupListResponse | null> {
+  list(params: GroupListParams, options?: Core.RequestOptions): Core.APIPromise<GroupListResponse | null> {
+    const { account_id, zone_id } = params;
     return (
-      this._client.get(`/${accountOrZone}/${accountOrZoneId}/access/groups`, options) as Core.APIPromise<{
+      this._client.get(`/${account_id}/${zone_id}/access/groups`, options) as Core.APIPromise<{
         result: GroupListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -59,16 +50,15 @@ export class Groups extends APIResource {
    * Deletes an Access group.
    */
   delete(
-    accountOrZone: string,
-    accountOrZoneId: string,
     uuid: string,
+    params: GroupDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<GroupDeleteResponse> {
+    const { account_id, zone_id } = params;
     return (
-      this._client.delete(
-        `/${accountOrZone}/${accountOrZoneId}/access/groups/${uuid}`,
-        options,
-      ) as Core.APIPromise<{ result: GroupDeleteResponse }>
+      this._client.delete(`/${account_id}/${zone_id}/access/groups/${uuid}`, options) as Core.APIPromise<{
+        result: GroupDeleteResponse;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -76,16 +66,15 @@ export class Groups extends APIResource {
    * Fetches a single Access group.
    */
   get(
-    accountOrZone: string,
-    accountOrZoneId: string,
     uuid: string,
+    params: GroupGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<GroupGetResponse> {
+    const { account_id, zone_id } = params;
     return (
-      this._client.get(
-        `/${accountOrZone}/${accountOrZoneId}/access/groups/${uuid}`,
-        options,
-      ) as Core.APIPromise<{ result: GroupGetResponse }>
+      this._client.get(`/${account_id}/${zone_id}/access/groups/${uuid}`, options) as Core.APIPromise<{
+        result: GroupGetResponse;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -5631,8 +5620,20 @@ export namespace GroupGetResponse {
 
 export interface GroupCreateParams {
   /**
-   * Rules evaluated with an OR logical operator. A user needs to meet only one of
-   * the Include rules.
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Rules evaluated with an OR logical operator. A user needs to meet
+   * only one of the Include rules.
    */
   include: Array<
     | GroupCreateParams.AccessEmailRule
@@ -5657,13 +5658,13 @@ export interface GroupCreateParams {
   >;
 
   /**
-   * The name of the Access group.
+   * Body param: The name of the Access group.
    */
   name: string;
 
   /**
-   * Rules evaluated with a NOT logical operator. To match a policy, a user cannot
-   * meet any of the Exclude rules.
+   * Body param: Rules evaluated with a NOT logical operator. To match a policy, a
+   * user cannot meet any of the Exclude rules.
    */
   exclude?: Array<
     | GroupCreateParams.AccessEmailRule
@@ -5688,13 +5689,13 @@ export interface GroupCreateParams {
   >;
 
   /**
-   * Whether this is the default group
+   * Body param: Whether this is the default group
    */
   is_default?: boolean;
 
   /**
-   * Rules evaluated with an AND logical operator. To match a policy, a user must
-   * meet all of the Require rules.
+   * Body param: Rules evaluated with an AND logical operator. To match a policy, a
+   * user must meet all of the Require rules.
    */
   require?: Array<
     | GroupCreateParams.AccessEmailRule
@@ -6668,8 +6669,20 @@ export namespace GroupCreateParams {
 
 export interface GroupUpdateParams {
   /**
-   * Rules evaluated with an OR logical operator. A user needs to meet only one of
-   * the Include rules.
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Rules evaluated with an OR logical operator. A user needs to meet
+   * only one of the Include rules.
    */
   include: Array<
     | GroupUpdateParams.AccessEmailRule
@@ -6694,13 +6707,13 @@ export interface GroupUpdateParams {
   >;
 
   /**
-   * The name of the Access group.
+   * Body param: The name of the Access group.
    */
   name: string;
 
   /**
-   * Rules evaluated with a NOT logical operator. To match a policy, a user cannot
-   * meet any of the Exclude rules.
+   * Body param: Rules evaluated with a NOT logical operator. To match a policy, a
+   * user cannot meet any of the Exclude rules.
    */
   exclude?: Array<
     | GroupUpdateParams.AccessEmailRule
@@ -6725,13 +6738,13 @@ export interface GroupUpdateParams {
   >;
 
   /**
-   * Whether this is the default group
+   * Body param: Whether this is the default group
    */
   is_default?: boolean;
 
   /**
-   * Rules evaluated with an AND logical operator. To match a policy, a user must
-   * meet all of the Require rules.
+   * Body param: Rules evaluated with an AND logical operator. To match a policy, a
+   * user must meet all of the Require rules.
    */
   require?: Array<
     | GroupUpdateParams.AccessEmailRule
@@ -7703,6 +7716,42 @@ export namespace GroupUpdateParams {
   }
 }
 
+export interface GroupListParams {
+  /**
+   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   */
+  zone_id: string;
+}
+
+export interface GroupDeleteParams {
+  /**
+   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   */
+  zone_id: string;
+}
+
+export interface GroupGetParams {
+  /**
+   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   */
+  zone_id: string;
+}
+
 export namespace Groups {
   export import GroupCreateResponse = GroupsAPI.GroupCreateResponse;
   export import GroupUpdateResponse = GroupsAPI.GroupUpdateResponse;
@@ -7711,4 +7760,7 @@ export namespace Groups {
   export import GroupGetResponse = GroupsAPI.GroupGetResponse;
   export import GroupCreateParams = GroupsAPI.GroupCreateParams;
   export import GroupUpdateParams = GroupsAPI.GroupUpdateParams;
+  export import GroupListParams = GroupsAPI.GroupListParams;
+  export import GroupDeleteParams = GroupsAPI.GroupDeleteParams;
+  export import GroupGetParams = GroupsAPI.GroupGetParams;
 }

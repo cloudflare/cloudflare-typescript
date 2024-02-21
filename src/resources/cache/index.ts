@@ -5,8 +5,8 @@ export {
   CacheReserveListResponse,
   CacheReserveEditResponse,
   CacheReserveEditParams,
-  CacheReserves,
-} from './cache-reserves';
+  CacheReserve,
+} from './cache-reserve';
 export {
   RegionalTieredCacheEditResponse,
   RegionalTieredCacheGetResponse,
