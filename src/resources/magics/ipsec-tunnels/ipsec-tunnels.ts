@@ -345,8 +345,6 @@ export interface IpsecTunnelCreateParams {
    */
   description?: string;
 
-  health_check?: IpsecTunnelCreateParams.HealthCheck;
-
   /**
    * A randomly generated or provided string for use in the IPsec tunnel.
    */
@@ -357,44 +355,6 @@ export interface IpsecTunnelCreateParams {
    * Cloudflare-to-customer direction.
    */
   replay_protection?: boolean;
-}
-
-export namespace IpsecTunnelCreateParams {
-  export interface HealthCheck {
-    /**
-     * The direction of the flow of the healthcheck. Either unidirectional, where the
-     * probe comes to you via the tunnel and the result comes back to Cloudflare via
-     * the open Internet, or bidirectional where both the probe and result come and go
-     * via the tunnel. Note in the case of bidirecitonal healthchecks, the target field
-     * in health_check is ignored as the interface_address is used to send traffic into
-     * the tunnel.
-     */
-    direction?: 'unidirectional' | 'bidirectional';
-
-    /**
-     * Determines whether to run healthchecks for a tunnel.
-     */
-    enabled?: boolean;
-
-    /**
-     * How frequent the health check is run. The default value is `mid`.
-     */
-    rate?: 'low' | 'mid' | 'high';
-
-    /**
-     * The destination address in a request type health check. After the healthcheck is
-     * decapsulated at the customer end of the tunnel, the ICMP echo will be forwarded
-     * to this address. This field defaults to `customer_gre_endpoint address`. This
-     * field is ignored for bidirectional healthchecks as the interface_address (not
-     * assigned to the Cloudflare side of the tunnel) is used as the target.
-     */
-    target?: string;
-
-    /**
-     * The type of healthcheck to run, reply or request. The default value is `reply`.
-     */
-    type?: 'reply' | 'request';
-  }
 }
 
 export interface IpsecTunnelUpdateParams {
@@ -425,8 +385,6 @@ export interface IpsecTunnelUpdateParams {
    */
   description?: string;
 
-  health_check?: IpsecTunnelUpdateParams.HealthCheck;
-
   /**
    * A randomly generated or provided string for use in the IPsec tunnel.
    */
@@ -437,44 +395,6 @@ export interface IpsecTunnelUpdateParams {
    * Cloudflare-to-customer direction.
    */
   replay_protection?: boolean;
-}
-
-export namespace IpsecTunnelUpdateParams {
-  export interface HealthCheck {
-    /**
-     * The direction of the flow of the healthcheck. Either unidirectional, where the
-     * probe comes to you via the tunnel and the result comes back to Cloudflare via
-     * the open Internet, or bidirectional where both the probe and result come and go
-     * via the tunnel. Note in the case of bidirecitonal healthchecks, the target field
-     * in health_check is ignored as the interface_address is used to send traffic into
-     * the tunnel.
-     */
-    direction?: 'unidirectional' | 'bidirectional';
-
-    /**
-     * Determines whether to run healthchecks for a tunnel.
-     */
-    enabled?: boolean;
-
-    /**
-     * How frequent the health check is run. The default value is `mid`.
-     */
-    rate?: 'low' | 'mid' | 'high';
-
-    /**
-     * The destination address in a request type health check. After the healthcheck is
-     * decapsulated at the customer end of the tunnel, the ICMP echo will be forwarded
-     * to this address. This field defaults to `customer_gre_endpoint address`. This
-     * field is ignored for bidirectional healthchecks as the interface_address (not
-     * assigned to the Cloudflare side of the tunnel) is used as the target.
-     */
-    target?: string;
-
-    /**
-     * The type of healthcheck to run, reply or request. The default value is `reply`.
-     */
-    type?: 'reply' | 'request';
-  }
 }
 
 export namespace IpsecTunnels {

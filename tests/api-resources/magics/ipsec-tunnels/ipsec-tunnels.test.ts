@@ -37,13 +37,6 @@ describe('resource ipsecTunnels', () => {
       name: 'IPsec_1',
       customer_endpoint: '203.0.113.1',
       description: 'Tunnel for ISP X',
-      health_check: {
-        direction: 'bidirectional',
-        enabled: true,
-        rate: 'low',
-        target: '203.0.113.1',
-        type: 'request',
-      },
       psk: 'O3bwKSjnaoCxDoUxjcq4Rk8ZKkezQUiy',
       replay_protection: false,
     });
@@ -76,13 +69,6 @@ describe('resource ipsecTunnels', () => {
         name: 'IPsec_1',
         customer_endpoint: '203.0.113.1',
         description: 'Tunnel for ISP X',
-        health_check: {
-          direction: 'bidirectional',
-          enabled: true,
-          rate: 'low',
-          target: '203.0.113.1',
-          type: 'request',
-        },
         psk: 'O3bwKSjnaoCxDoUxjcq4Rk8ZKkezQUiy',
         replay_protection: false,
       },
