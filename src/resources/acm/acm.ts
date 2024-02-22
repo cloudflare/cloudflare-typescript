@@ -3,11 +3,11 @@
 import { APIResource } from 'cloudflare/resource';
 import * as TotalTLSAPI from 'cloudflare/resources/acm/total-tls';
 
-export class Acm extends APIResource {
+export class ACM extends APIResource {
   totalTLS: TotalTLSAPI.TotalTLS = new TotalTLSAPI.TotalTLS(this._client);
 }
 
-export namespace Acm {
+export namespace ACM {
   export import TotalTLS = TotalTLSAPI.TotalTLS;
   export import TotalTLSCreateResponse = TotalTLSAPI.TotalTLSCreateResponse;
   export import TotalTLSGetResponse = TotalTLSAPI.TotalTLSGetResponse;

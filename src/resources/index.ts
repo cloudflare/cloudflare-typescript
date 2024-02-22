@@ -1,5 +1,6 @@
 // File generated from our OpenAPI spec by Stainless.
 
+export { ACM } from './acm/acm';
 export { AICreateResponse, AICreateParams, AI } from './ai';
 export { Access } from './access/access';
 export {
@@ -23,7 +24,6 @@ export {
   AccountListResponsesV4PagePaginationArray,
   Accounts,
 } from './accounts';
-export { Acm } from './acm/acm';
 export { ActivationCheckUpdateResponse, ActivationChecks } from './activation-checks';
 export { Addresses } from './addresses/addresses';
 export { Addressing } from './addressing/addressing';
