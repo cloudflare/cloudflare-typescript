@@ -9,12 +9,12 @@ export class Excludes extends APIResource {
    * Sets the list of routes excluded from the WARP client's tunnel.
    */
   update(
-    identifier: unknown,
+    accountId: unknown,
     body: ExcludeUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ExcludeUpdateResponse | null> {
     return (
-      this._client.put(`/accounts/${identifier}/devices/policy/exclude`, {
+      this._client.put(`/accounts/${accountId}/devices/policy/exclude`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: ExcludeUpdateResponse | null }>
@@ -24,9 +24,9 @@ export class Excludes extends APIResource {
   /**
    * Fetches the list of routes excluded from the WARP client's tunnel.
    */
-  list(identifier: unknown, options?: Core.RequestOptions): Core.APIPromise<ExcludeListResponse | null> {
+  list(accountId: unknown, options?: Core.RequestOptions): Core.APIPromise<ExcludeListResponse | null> {
     return (
-      this._client.get(`/accounts/${identifier}/devices/policy/exclude`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${accountId}/devices/policy/exclude`, options) as Core.APIPromise<{
         result: ExcludeListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);

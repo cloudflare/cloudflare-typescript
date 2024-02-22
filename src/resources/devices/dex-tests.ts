@@ -9,15 +9,14 @@ export class DEXTests extends APIResource {
    * Create a DEX test.
    */
   create(
-    identifier: unknown,
+    accountId: unknown,
     body: DEXTestCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DEXTestCreateResponse | null> {
     return (
-      this._client.post(`/accounts/${identifier}/devices/dex_tests`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: DEXTestCreateResponse | null }>
+      this._client.post(`/accounts/${accountId}/devices/dex_tests`, { body, ...options }) as Core.APIPromise<{
+        result: DEXTestCreateResponse | null;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -25,13 +24,13 @@ export class DEXTests extends APIResource {
    * Update a DEX test.
    */
   update(
-    identifier: unknown,
-    uuid: string,
+    accountId: unknown,
+    dexTestId: string,
     body: DEXTestUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DEXTestUpdateResponse | null> {
     return (
-      this._client.put(`/accounts/${identifier}/devices/dex_tests/${uuid}`, {
+      this._client.put(`/accounts/${accountId}/devices/dex_tests/${dexTestId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: DEXTestUpdateResponse | null }>
@@ -41,9 +40,9 @@ export class DEXTests extends APIResource {
   /**
    * Fetch all DEX tests.
    */
-  list(identifier: unknown, options?: Core.RequestOptions): Core.APIPromise<DEXTestListResponse | null> {
+  list(accountId: unknown, options?: Core.RequestOptions): Core.APIPromise<DEXTestListResponse | null> {
     return (
-      this._client.get(`/accounts/${identifier}/devices/dex_tests`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${accountId}/devices/dex_tests`, options) as Core.APIPromise<{
         result: DEXTestListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -54,14 +53,15 @@ export class DEXTests extends APIResource {
    * account.
    */
   delete(
-    identifier: unknown,
-    uuid: string,
+    accountId: unknown,
+    dexTestId: string,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DEXTestDeleteResponse | null> {
     return (
-      this._client.delete(`/accounts/${identifier}/devices/dex_tests/${uuid}`, options) as Core.APIPromise<{
-        result: DEXTestDeleteResponse | null;
-      }>
+      this._client.delete(
+        `/accounts/${accountId}/devices/dex_tests/${dexTestId}`,
+        options,
+      ) as Core.APIPromise<{ result: DEXTestDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -69,12 +69,12 @@ export class DEXTests extends APIResource {
    * Fetch a single DEX test.
    */
   get(
-    identifier: unknown,
-    uuid: string,
+    accountId: unknown,
+    dexTestId: string,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DEXTestGetResponse | null> {
     return (
-      this._client.get(`/accounts/${identifier}/devices/dex_tests/${uuid}`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${accountId}/devices/dex_tests/${dexTestId}`, options) as Core.APIPromise<{
         result: DEXTestGetResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);

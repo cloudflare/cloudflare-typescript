@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export { ACM } from './acm/acm';
-export { AICreateResponse, AICreateParams, AI } from './ai';
+export { AIRunResponse, AIRunParams, AI } from './ai';
 export { Access } from './access/access';
 export {
   AccountMemberCreateResponse,
@@ -37,7 +37,7 @@ export {
 } from './audit-logs';
 export { AvailablePlanListResponse, AvailablePlanGetResponse, AvailablePlans } from './available-plans';
 export { AvailableRatePlanListResponse, AvailableRatePlans } from './available-rate-plans';
-export { Billings } from './billings/billings';
+export { Billing } from './billing/billing';
 export {
   BotManagementUpdateResponse,
   BotManagementGetResponse,
@@ -113,35 +113,8 @@ export {
 export { D1 } from './d1/d1';
 export { DEX } from './dex/dex';
 export { DLP } from './dlp/dlp';
+export { DNS } from './dns/dns';
 export { DNSAnalytics } from './dns-analytics/dns-analytics';
-export {
-  DNSFirewallCreateResponse,
-  DNSFirewallListResponse,
-  DNSFirewallDeleteResponse,
-  DNSFirewallEditResponse,
-  DNSFirewallGetResponse,
-  DNSFirewallCreateParams,
-  DNSFirewallListParams,
-  DNSFirewallEditParams,
-  DNSFirewallListResponsesV4PagePaginationArray,
-  DNSFirewall,
-} from './dns-firewall/dns-firewall';
-export {
-  DNSRecordCreateResponse,
-  DNSRecordUpdateResponse,
-  DNSRecordListResponse,
-  DNSRecordDeleteResponse,
-  DNSRecordExportResponse,
-  DNSRecordGetResponse,
-  DNSRecordImportResponse,
-  DNSRecordScanResponse,
-  DNSRecordCreateParams,
-  DNSRecordUpdateParams,
-  DNSRecordListParams,
-  DNSRecordImportParams,
-  DNSRecordListResponsesV4PagePaginationArray,
-  DNSRecords,
-} from './dns-records';
 export {
   DNSSECDeleteResponse,
   DNSSECEditResponse,
@@ -366,7 +339,7 @@ export {
   URLNormalizations,
 } from './url-normalizations';
 export { URLScannerScanResponse, URLScannerScanParams, URLScanner } from './url-scanner/url-scanner';
-export { UserListResponse, UserEditResponse, UserEditParams, Users } from './users/users';
+export { UserListResponse, UserEditResponse, UserEditParams, User } from './user/user';
 export { Vectorize } from './vectorize/vectorize';
 export {
   WARPConnectorCreateResponse,

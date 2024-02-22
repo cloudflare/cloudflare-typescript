@@ -11,13 +11,13 @@ export class FallbackDomains extends APIResource {
    * specified device settings profile.
    */
   update(
-    identifier: unknown,
-    uuid: string,
+    accountId: unknown,
+    policyId: string,
     body: FallbackDomainUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<FallbackDomainUpdateResponse | null> {
     return (
-      this._client.put(`/accounts/${identifier}/devices/policy/${uuid}/fallback_domains`, {
+      this._client.put(`/accounts/${accountId}/devices/policy/${policyId}/fallback_domains`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: FallbackDomainUpdateResponse | null }>
@@ -30,13 +30,13 @@ export class FallbackDomains extends APIResource {
    * instead.
    */
   list(
-    identifier: unknown,
-    uuid: string,
+    accountId: unknown,
+    policyId: string,
     options?: Core.RequestOptions,
   ): Core.APIPromise<FallbackDomainListResponse | null> {
     return (
       this._client.get(
-        `/accounts/${identifier}/devices/policy/${uuid}/fallback_domains`,
+        `/accounts/${accountId}/devices/policy/${policyId}/fallback_domains`,
         options,
       ) as Core.APIPromise<{ result: FallbackDomainListResponse | null }>
     )._thenUnwrap((obj) => obj.result);

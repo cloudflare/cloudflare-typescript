@@ -66,6 +66,24 @@ export class Configs extends APIResource {
   }
 
   /**
+   * Patches and returns the specified Hyperdrive configuration. Updates to the
+   * origin and caching settings are applied with an all-or-nothing approach.
+   */
+  edit(
+    accountId: string,
+    hyperdriveId: string,
+    body: ConfigEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ConfigEditResponse | null> {
+    return (
+      this._client.patch(`/accounts/${accountId}/hyperdrive/configs/${hyperdriveId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: ConfigEditResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Returns the specified Hyperdrive configuration.
    */
   get(
@@ -109,6 +127,13 @@ export namespace ConfigListResponse {
 
 export type ConfigDeleteResponse = unknown | string;
 
+export interface ConfigEditResponse {
+  /**
+   * Identifier
+   */
+  id?: string;
+}
+
 export interface ConfigGetResponse {
   /**
    * Identifier
@@ -144,12 +169,28 @@ export namespace ConfigUpdateParams {
   }
 }
 
+export interface ConfigEditParams {
+  origin?: ConfigEditParams.Origin;
+}
+
+export namespace ConfigEditParams {
+  export interface Origin {
+    /**
+     * The password required to access your origin database. This value is write-only
+     * and never returned by the API.
+     */
+    password: string;
+  }
+}
+
 export namespace Configs {
   export import ConfigCreateResponse = ConfigsAPI.ConfigCreateResponse;
   export import ConfigUpdateResponse = ConfigsAPI.ConfigUpdateResponse;
   export import ConfigListResponse = ConfigsAPI.ConfigListResponse;
   export import ConfigDeleteResponse = ConfigsAPI.ConfigDeleteResponse;
+  export import ConfigEditResponse = ConfigsAPI.ConfigEditResponse;
   export import ConfigGetResponse = ConfigsAPI.ConfigGetResponse;
   export import ConfigCreateParams = ConfigsAPI.ConfigCreateParams;
   export import ConfigUpdateParams = ConfigsAPI.ConfigUpdateParams;
+  export import ConfigEditParams = ConfigsAPI.ConfigEditParams;
 }

@@ -13,7 +13,9 @@ export namespace Hyperdrive {
   export import ConfigUpdateResponse = ConfigsAPI.ConfigUpdateResponse;
   export import ConfigListResponse = ConfigsAPI.ConfigListResponse;
   export import ConfigDeleteResponse = ConfigsAPI.ConfigDeleteResponse;
+  export import ConfigEditResponse = ConfigsAPI.ConfigEditResponse;
   export import ConfigGetResponse = ConfigsAPI.ConfigGetResponse;
   export import ConfigCreateParams = ConfigsAPI.ConfigCreateParams;
   export import ConfigUpdateParams = ConfigsAPI.ConfigUpdateParams;
+  export import ConfigEditParams = ConfigsAPI.ConfigEditParams;
 }

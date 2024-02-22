@@ -8,9 +8,9 @@ export class DefaultPolicy extends APIResource {
   /**
    * Fetches the default device settings profile for an account.
    */
-  get(identifier: unknown, options?: Core.RequestOptions): Core.APIPromise<DefaultPolicyGetResponse | null> {
+  get(accountId: unknown, options?: Core.RequestOptions): Core.APIPromise<DefaultPolicyGetResponse | null> {
     return (
-      this._client.get(`/accounts/${identifier}/devices/policy`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${accountId}/devices/policy`, options) as Core.APIPromise<{
         result: DefaultPolicyGetResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
