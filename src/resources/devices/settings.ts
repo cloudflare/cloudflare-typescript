@@ -9,12 +9,12 @@ export class Settings extends APIResource {
    * Updates the current device settings for a Zero Trust account.
    */
   update(
-    identifier: unknown,
+    accountId: unknown,
     body: SettingUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SettingUpdateResponse | null> {
     return (
-      this._client.put(`/accounts/${identifier}/devices/settings`, { body, ...options }) as Core.APIPromise<{
+      this._client.put(`/accounts/${accountId}/devices/settings`, { body, ...options }) as Core.APIPromise<{
         result: SettingUpdateResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -23,9 +23,9 @@ export class Settings extends APIResource {
   /**
    * Describes the current device settings for a Zero Trust account.
    */
-  list(identifier: unknown, options?: Core.RequestOptions): Core.APIPromise<SettingListResponse | null> {
+  list(accountId: unknown, options?: Core.RequestOptions): Core.APIPromise<SettingListResponse | null> {
     return (
-      this._client.get(`/accounts/${identifier}/devices/settings`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${accountId}/devices/settings`, options) as Core.APIPromise<{
         result: SettingListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);

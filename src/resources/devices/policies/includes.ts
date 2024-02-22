@@ -9,12 +9,12 @@ export class Includes extends APIResource {
    * Sets the list of routes included in the WARP client's tunnel.
    */
   update(
-    identifier: unknown,
+    accountId: unknown,
     body: IncludeUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IncludeUpdateResponse | null> {
     return (
-      this._client.put(`/accounts/${identifier}/devices/policy/include`, {
+      this._client.put(`/accounts/${accountId}/devices/policy/include`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: IncludeUpdateResponse | null }>
@@ -24,9 +24,9 @@ export class Includes extends APIResource {
   /**
    * Fetches the list of routes included in the WARP client's tunnel.
    */
-  list(identifier: unknown, options?: Core.RequestOptions): Core.APIPromise<IncludeListResponse | null> {
+  list(accountId: unknown, options?: Core.RequestOptions): Core.APIPromise<IncludeListResponse | null> {
     return (
-      this._client.get(`/accounts/${identifier}/devices/policy/include`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${accountId}/devices/policy/include`, options) as Core.APIPromise<{
         result: IncludeListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);

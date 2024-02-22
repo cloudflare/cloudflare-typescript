@@ -3,13 +3,13 @@
 import { AbstractPage, Response, APIClient, FinalRequestOptions, PageInfo } from './core';
 
 export interface V4PagePaginationResponse<Item> {
-  result: V4PagePaginationResponse.Result;
+  result: V4PagePaginationResponse.Result<Item>;
 
   result_info: V4PagePaginationResponse.ResultInfo;
 }
 
 export namespace V4PagePaginationResponse {
-  export interface Result {
+  export interface Result<Item> {
     items?: Array<Item>;
   }
 
@@ -27,7 +27,7 @@ export interface V4PagePaginationParams {
 }
 
 export class V4PagePagination<Item> extends AbstractPage<Item> implements V4PagePaginationResponse<Item> {
-  result: V4PagePaginationResponse.Result;
+  result: V4PagePaginationResponse.Result<Item>;
 
   result_info: V4PagePaginationResponse.ResultInfo;
 

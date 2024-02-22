@@ -19,12 +19,12 @@ export class Policies extends APIResource {
    * criteria.
    */
   create(
-    identifier: unknown,
+    accountId: unknown,
     body: PolicyCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PolicyCreateResponse | null> {
     return (
-      this._client.post(`/accounts/${identifier}/devices/policy`, { body, ...options }) as Core.APIPromise<{
+      this._client.post(`/accounts/${accountId}/devices/policy`, { body, ...options }) as Core.APIPromise<{
         result: PolicyCreateResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -33,9 +33,9 @@ export class Policies extends APIResource {
   /**
    * Fetches a list of the device settings profiles for an account.
    */
-  list(identifier: unknown, options?: Core.RequestOptions): Core.APIPromise<PolicyListResponse | null> {
+  list(accountId: unknown, options?: Core.RequestOptions): Core.APIPromise<PolicyListResponse | null> {
     return (
-      this._client.get(`/accounts/${identifier}/devices/policies`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${accountId}/devices/policies`, options) as Core.APIPromise<{
         result: PolicyListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -46,12 +46,12 @@ export class Policies extends APIResource {
    * for an account.
    */
   delete(
-    identifier: unknown,
-    uuid: string,
+    accountId: unknown,
+    policyId: string,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PolicyDeleteResponse | null> {
     return (
-      this._client.delete(`/accounts/${identifier}/devices/policy/${uuid}`, options) as Core.APIPromise<{
+      this._client.delete(`/accounts/${accountId}/devices/policy/${policyId}`, options) as Core.APIPromise<{
         result: PolicyDeleteResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -61,13 +61,13 @@ export class Policies extends APIResource {
    * Updates a configured device settings profile.
    */
   edit(
-    identifier: unknown,
-    uuid: string,
+    accountId: unknown,
+    policyId: string,
     body: PolicyEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PolicyEditResponse | null> {
     return (
-      this._client.patch(`/accounts/${identifier}/devices/policy/${uuid}`, {
+      this._client.patch(`/accounts/${accountId}/devices/policy/${policyId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: PolicyEditResponse | null }>
@@ -78,12 +78,12 @@ export class Policies extends APIResource {
    * Fetches a device settings profile by ID.
    */
   get(
-    identifier: unknown,
-    uuid: string,
+    accountId: unknown,
+    policyId: string,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PolicyGetResponse | null> {
     return (
-      this._client.get(`/accounts/${identifier}/devices/policy/${uuid}`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${accountId}/devices/policy/${policyId}`, options) as Core.APIPromise<{
         result: PolicyGetResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);

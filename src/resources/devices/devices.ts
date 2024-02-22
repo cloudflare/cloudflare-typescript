@@ -26,11 +26,11 @@ export class Devices extends APIResource {
    * Fetches a list of enrolled devices.
    */
   devicesListDevices(
-    identifier: unknown,
+    accountId: unknown,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DeviceDevicesListDevicesResponse | null> {
     return (
-      this._client.get(`/accounts/${identifier}/devices`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${accountId}/devices`, options) as Core.APIPromise<{
         result: DeviceDevicesListDevicesResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -40,12 +40,12 @@ export class Devices extends APIResource {
    * Fetches details for a single device.
    */
   get(
-    identifier: unknown,
-    uuid: string,
+    accountId: unknown,
+    deviceId: string,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DeviceGetResponse | null> {
     return (
-      this._client.get(`/accounts/${identifier}/devices/${uuid}`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${accountId}/devices/${deviceId}`, options) as Core.APIPromise<{
         result: DeviceGetResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);

@@ -9,12 +9,12 @@ export class Networks extends APIResource {
    * Creates a new device managed network.
    */
   create(
-    identifier: unknown,
+    accountId: unknown,
     body: NetworkCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<NetworkCreateResponse | null> {
     return (
-      this._client.post(`/accounts/${identifier}/devices/networks`, { body, ...options }) as Core.APIPromise<{
+      this._client.post(`/accounts/${accountId}/devices/networks`, { body, ...options }) as Core.APIPromise<{
         result: NetworkCreateResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -24,13 +24,13 @@ export class Networks extends APIResource {
    * Updates a configured device managed network.
    */
   update(
-    identifier: unknown,
-    uuid: string,
+    accountId: unknown,
+    networkId: string,
     body: NetworkUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<NetworkUpdateResponse | null> {
     return (
-      this._client.put(`/accounts/${identifier}/devices/networks/${uuid}`, {
+      this._client.put(`/accounts/${accountId}/devices/networks/${networkId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: NetworkUpdateResponse | null }>
@@ -40,9 +40,9 @@ export class Networks extends APIResource {
   /**
    * Fetches a list of managed networks for an account.
    */
-  list(identifier: unknown, options?: Core.RequestOptions): Core.APIPromise<NetworkListResponse | null> {
+  list(accountId: unknown, options?: Core.RequestOptions): Core.APIPromise<NetworkListResponse | null> {
     return (
-      this._client.get(`/accounts/${identifier}/devices/networks`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${accountId}/devices/networks`, options) as Core.APIPromise<{
         result: NetworkListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -53,14 +53,15 @@ export class Networks extends APIResource {
    * managed networks for an account.
    */
   delete(
-    identifier: unknown,
-    uuid: string,
+    accountId: unknown,
+    networkId: string,
     options?: Core.RequestOptions,
   ): Core.APIPromise<NetworkDeleteResponse | null> {
     return (
-      this._client.delete(`/accounts/${identifier}/devices/networks/${uuid}`, options) as Core.APIPromise<{
-        result: NetworkDeleteResponse | null;
-      }>
+      this._client.delete(
+        `/accounts/${accountId}/devices/networks/${networkId}`,
+        options,
+      ) as Core.APIPromise<{ result: NetworkDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -68,12 +69,12 @@ export class Networks extends APIResource {
    * Fetches details for a single managed network.
    */
   get(
-    identifier: unknown,
-    uuid: string,
+    accountId: unknown,
+    networkId: string,
     options?: Core.RequestOptions,
   ): Core.APIPromise<NetworkGetResponse | null> {
     return (
-      this._client.get(`/accounts/${identifier}/devices/networks/${uuid}`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${accountId}/devices/networks/${networkId}`, options) as Core.APIPromise<{
         result: NetworkGetResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);

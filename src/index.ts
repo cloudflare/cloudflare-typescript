@@ -167,7 +167,7 @@ export class Cloudflare extends Core.APIClient {
   certificates: API.Certificates = new API.Certificates(this);
   ips: API.IPs = new API.IPs(this);
   memberships: API.Memberships = new API.Memberships(this);
-  users: API.Users = new API.Users(this);
+  user: API.User = new API.User(this);
   zones: API.Zones = new API.Zones(this);
   ai: API.AI = new API.AI(this);
   loadBalancers: API.LoadBalancers = new API.LoadBalancers(this);
@@ -185,7 +185,7 @@ export class Cloudflare extends Core.APIClient {
   customCertificates: API.CustomCertificates = new API.CustomCertificates(this);
   customHostnames: API.CustomHostnames = new API.CustomHostnames(this);
   customNameservers: API.CustomNameservers = new API.CustomNameservers(this);
-  dnsRecords: API.DNSRecords = new API.DNSRecords(this);
+  dns: API.DNS = new API.DNS(this);
   dnssec: API.DNSSEC = new API.DNSSEC(this);
   emails: API.Emails = new API.Emails(this);
   filters: API.Filters = new API.Filters(this);
@@ -210,12 +210,11 @@ export class Cloudflare extends Core.APIClient {
   spectrum: API.Spectrum = new API.Spectrum(this);
   addresses: API.Addresses = new API.Addresses(this);
   auditLogs: API.AuditLogs = new API.AuditLogs(this);
-  billings: API.Billings = new API.Billings(this);
+  billing: API.Billing = new API.Billing(this);
   brandProtection: API.BrandProtection = new API.BrandProtection(this);
   tunnels: API.Tunnels = new API.Tunnels(this);
   diagnostics: API.Diagnostics = new API.Diagnostics(this);
   dlp: API.DLP = new API.DLP(this);
-  dnsFirewall: API.DNSFirewall = new API.DNSFirewall(this);
   images: API.Images = new API.Images(this);
   intel: API.Intel = new API.Intel(this);
   magics: API.Magics = new API.Magics(this);
@@ -380,7 +379,7 @@ export namespace Cloudflare {
   export import MembershipUpdateParams = API.MembershipUpdateParams;
   export import MembershipListParams = API.MembershipListParams;
 
-  export import Users = API.Users;
+  export import User = API.User;
   export import UserListResponse = API.UserListResponse;
   export import UserEditResponse = API.UserEditResponse;
   export import UserEditParams = API.UserEditParams;
@@ -397,8 +396,8 @@ export namespace Cloudflare {
   export import ZoneEditParams = API.ZoneEditParams;
 
   export import AI = API.AI;
-  export import AICreateResponse = API.AICreateResponse;
-  export import AICreateParams = API.AICreateParams;
+  export import AIRunResponse = API.AIRunResponse;
+  export import AIRunParams = API.AIRunParams;
 
   export import LoadBalancers = API.LoadBalancers;
   export import LoadBalancerCreateResponse = API.LoadBalancerCreateResponse;
@@ -481,20 +480,7 @@ export namespace Cloudflare {
   export import CustomNameserverVerifyResponse = API.CustomNameserverVerifyResponse;
   export import CustomNameserverCreateParams = API.CustomNameserverCreateParams;
 
-  export import DNSRecords = API.DNSRecords;
-  export import DNSRecordCreateResponse = API.DNSRecordCreateResponse;
-  export import DNSRecordUpdateResponse = API.DNSRecordUpdateResponse;
-  export import DNSRecordListResponse = API.DNSRecordListResponse;
-  export import DNSRecordDeleteResponse = API.DNSRecordDeleteResponse;
-  export import DNSRecordExportResponse = API.DNSRecordExportResponse;
-  export import DNSRecordGetResponse = API.DNSRecordGetResponse;
-  export import DNSRecordImportResponse = API.DNSRecordImportResponse;
-  export import DNSRecordScanResponse = API.DNSRecordScanResponse;
-  export import DNSRecordListResponsesV4PagePaginationArray = API.DNSRecordListResponsesV4PagePaginationArray;
-  export import DNSRecordCreateParams = API.DNSRecordCreateParams;
-  export import DNSRecordUpdateParams = API.DNSRecordUpdateParams;
-  export import DNSRecordListParams = API.DNSRecordListParams;
-  export import DNSRecordImportParams = API.DNSRecordImportParams;
+  export import DNS = API.DNS;
 
   export import DNSSEC = API.DNSSEC;
   export import DNSSECDeleteResponse = API.DNSSECDeleteResponse;
@@ -627,7 +613,7 @@ export namespace Cloudflare {
   export import AuditLogListResponsesV4PagePaginationArray = API.AuditLogListResponsesV4PagePaginationArray;
   export import AuditLogListParams = API.AuditLogListParams;
 
-  export import Billings = API.Billings;
+  export import Billing = API.Billing;
 
   export import BrandProtection = API.BrandProtection;
 
@@ -646,17 +632,6 @@ export namespace Cloudflare {
   export import Diagnostics = API.Diagnostics;
 
   export import DLP = API.DLP;
-
-  export import DNSFirewall = API.DNSFirewall;
-  export import DNSFirewallCreateResponse = API.DNSFirewallCreateResponse;
-  export import DNSFirewallListResponse = API.DNSFirewallListResponse;
-  export import DNSFirewallDeleteResponse = API.DNSFirewallDeleteResponse;
-  export import DNSFirewallEditResponse = API.DNSFirewallEditResponse;
-  export import DNSFirewallGetResponse = API.DNSFirewallGetResponse;
-  export import DNSFirewallListResponsesV4PagePaginationArray = API.DNSFirewallListResponsesV4PagePaginationArray;
-  export import DNSFirewallCreateParams = API.DNSFirewallCreateParams;
-  export import DNSFirewallListParams = API.DNSFirewallListParams;
-  export import DNSFirewallEditParams = API.DNSFirewallEditParams;
 
   export import Images = API.Images;
 

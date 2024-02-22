@@ -46,6 +46,11 @@ export interface URLScannerScanResponse {
 export namespace URLScannerScanResponse {
   export interface Task {
     /**
+     * Alpha-2 country code
+     */
+    country: string;
+
+    /**
      * Whether scan was successful or not
      */
     success: boolean;
@@ -64,6 +69,11 @@ export namespace URLScannerScanResponse {
      * Scan id
      */
     uuid: string;
+
+    /**
+     * Visibility status.
+     */
+    visibility: string;
   }
 }
 
@@ -89,6 +99,11 @@ export interface URLScannerScanParams {
   hostname?: string;
 
   /**
+   * Filter scans by IP address (IPv4 or IPv6) of _any_ request made by the webpage.
+   */
+  ip?: string;
+
+  /**
    * Limit the number of objects in the response.
    */
   limit?: number;
@@ -102,6 +117,11 @@ export interface URLScannerScanParams {
    * Filter scans by main page hostname .
    */
   page_hostname?: string;
+
+  /**
+   * Filter scans by main page IP address (IPv4 or IPv6).
+   */
+  page_ip?: string;
 
   /**
    * Filter scans by exact match URL path (also supports suffix search).

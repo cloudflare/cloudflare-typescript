@@ -9,12 +9,12 @@ export class Revokes extends APIResource {
    * Revokes a list of devices.
    */
   create(
-    identifier: unknown,
+    accountId: unknown,
     body: RevokeCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RevokeCreateResponse | null> {
     return (
-      this._client.post(`/accounts/${identifier}/devices/revoke`, { body, ...options }) as Core.APIPromise<{
+      this._client.post(`/accounts/${accountId}/devices/revoke`, { body, ...options }) as Core.APIPromise<{
         result: RevokeCreateResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);

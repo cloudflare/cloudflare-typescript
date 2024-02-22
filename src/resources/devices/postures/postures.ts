@@ -12,12 +12,12 @@ export class Postures extends APIResource {
    * Creates a new device posture rule.
    */
   create(
-    identifier: unknown,
+    accountId: unknown,
     body: PostureCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PostureCreateResponse | null> {
     return (
-      this._client.post(`/accounts/${identifier}/devices/posture`, { body, ...options }) as Core.APIPromise<{
+      this._client.post(`/accounts/${accountId}/devices/posture`, { body, ...options }) as Core.APIPromise<{
         result: PostureCreateResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -27,13 +27,13 @@ export class Postures extends APIResource {
    * Updates a device posture rule.
    */
   update(
-    identifier: unknown,
-    uuid: string,
+    accountId: unknown,
+    ruleId: string,
     body: PostureUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PostureUpdateResponse | null> {
     return (
-      this._client.put(`/accounts/${identifier}/devices/posture/${uuid}`, {
+      this._client.put(`/accounts/${accountId}/devices/posture/${ruleId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: PostureUpdateResponse | null }>
@@ -43,9 +43,9 @@ export class Postures extends APIResource {
   /**
    * Fetches device posture rules for a Zero Trust account.
    */
-  list(identifier: unknown, options?: Core.RequestOptions): Core.APIPromise<PostureListResponse | null> {
+  list(accountId: unknown, options?: Core.RequestOptions): Core.APIPromise<PostureListResponse | null> {
     return (
-      this._client.get(`/accounts/${identifier}/devices/posture`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${accountId}/devices/posture`, options) as Core.APIPromise<{
         result: PostureListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -55,12 +55,12 @@ export class Postures extends APIResource {
    * Deletes a device posture rule.
    */
   delete(
-    identifier: unknown,
-    uuid: string,
+    accountId: unknown,
+    ruleId: string,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PostureDeleteResponse | null> {
     return (
-      this._client.delete(`/accounts/${identifier}/devices/posture/${uuid}`, options) as Core.APIPromise<{
+      this._client.delete(`/accounts/${accountId}/devices/posture/${ruleId}`, options) as Core.APIPromise<{
         result: PostureDeleteResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -70,12 +70,12 @@ export class Postures extends APIResource {
    * Fetches a single device posture rule.
    */
   get(
-    identifier: unknown,
-    uuid: string,
+    accountId: unknown,
+    ruleId: string,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PostureGetResponse | null> {
     return (
-      this._client.get(`/accounts/${identifier}/devices/posture/${uuid}`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${accountId}/devices/posture/${ruleId}`, options) as Core.APIPromise<{
         result: PostureGetResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -367,6 +367,11 @@ export namespace PostureCreateResponse {
     connection_id: string;
 
     /**
+     * For more details on last seen, please refer to the Crowdstrike documentation.
+     */
+    last_seen?: string;
+
+    /**
      * Operator
      */
     operator?: '<' | '<=' | '>' | '>=' | '==';
@@ -385,6 +390,11 @@ export namespace PostureCreateResponse {
      * SensorConfig
      */
     sensor_config?: string;
+
+    /**
+     * For more details on state, please refer to the Crowdstrike documentation.
+     */
+    state?: 'online' | 'offline' | 'unknown';
 
     /**
      * Version
@@ -780,6 +790,11 @@ export namespace PostureUpdateResponse {
     connection_id: string;
 
     /**
+     * For more details on last seen, please refer to the Crowdstrike documentation.
+     */
+    last_seen?: string;
+
+    /**
      * Operator
      */
     operator?: '<' | '<=' | '>' | '>=' | '==';
@@ -798,6 +813,11 @@ export namespace PostureUpdateResponse {
      * SensorConfig
      */
     sensor_config?: string;
+
+    /**
+     * For more details on state, please refer to the Crowdstrike documentation.
+     */
+    state?: 'online' | 'offline' | 'unknown';
 
     /**
      * Version
@@ -1196,6 +1216,11 @@ export namespace PostureListResponse {
       connection_id: string;
 
       /**
+       * For more details on last seen, please refer to the Crowdstrike documentation.
+       */
+      last_seen?: string;
+
+      /**
        * Operator
        */
       operator?: '<' | '<=' | '>' | '>=' | '==';
@@ -1214,6 +1239,11 @@ export namespace PostureListResponse {
        * SensorConfig
        */
       sensor_config?: string;
+
+      /**
+       * For more details on state, please refer to the Crowdstrike documentation.
+       */
+      state?: 'online' | 'offline' | 'unknown';
 
       /**
        * Version
@@ -1623,6 +1653,11 @@ export namespace PostureGetResponse {
     connection_id: string;
 
     /**
+     * For more details on last seen, please refer to the Crowdstrike documentation.
+     */
+    last_seen?: string;
+
+    /**
      * Operator
      */
     operator?: '<' | '<=' | '>' | '>=' | '==';
@@ -1641,6 +1676,11 @@ export namespace PostureGetResponse {
      * SensorConfig
      */
     sensor_config?: string;
+
+    /**
+     * For more details on state, please refer to the Crowdstrike documentation.
+     */
+    state?: 'online' | 'offline' | 'unknown';
 
     /**
      * Version
@@ -2031,6 +2071,11 @@ export namespace PostureCreateParams {
     connection_id: string;
 
     /**
+     * For more details on last seen, please refer to the Crowdstrike documentation.
+     */
+    last_seen?: string;
+
+    /**
      * Operator
      */
     operator?: '<' | '<=' | '>' | '>=' | '==';
@@ -2049,6 +2094,11 @@ export namespace PostureCreateParams {
      * SensorConfig
      */
     sensor_config?: string;
+
+    /**
+     * For more details on state, please refer to the Crowdstrike documentation.
+     */
+    state?: 'online' | 'offline' | 'unknown';
 
     /**
      * Version
@@ -2439,6 +2489,11 @@ export namespace PostureUpdateParams {
     connection_id: string;
 
     /**
+     * For more details on last seen, please refer to the Crowdstrike documentation.
+     */
+    last_seen?: string;
+
+    /**
      * Operator
      */
     operator?: '<' | '<=' | '>' | '>=' | '==';
@@ -2457,6 +2512,11 @@ export namespace PostureUpdateParams {
      * SensorConfig
      */
     sensor_config?: string;
+
+    /**
+     * For more details on state, please refer to the Crowdstrike documentation.
+     */
+    state?: 'online' | 'offline' | 'unknown';
 
     /**
      * Version

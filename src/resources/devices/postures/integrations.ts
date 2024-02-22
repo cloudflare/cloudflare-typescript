@@ -9,12 +9,12 @@ export class Integrations extends APIResource {
    * Create a new device posture integration.
    */
   create(
-    identifier: unknown,
+    accountId: unknown,
     body: IntegrationCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IntegrationCreateResponse | null> {
     return (
-      this._client.post(`/accounts/${identifier}/devices/posture/integration`, {
+      this._client.post(`/accounts/${accountId}/devices/posture/integration`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: IntegrationCreateResponse | null }>
@@ -25,13 +25,13 @@ export class Integrations extends APIResource {
    * Delete a configured device posture integration.
    */
   delete(
-    identifier: unknown,
-    uuid: string,
+    accountId: unknown,
+    integrationId: string,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IntegrationDeleteResponse | null> {
     return (
       this._client.delete(
-        `/accounts/${identifier}/devices/posture/integration/${uuid}`,
+        `/accounts/${accountId}/devices/posture/integration/${integrationId}`,
         options,
       ) as Core.APIPromise<{ result: IntegrationDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -41,13 +41,13 @@ export class Integrations extends APIResource {
    * Updates a configured device posture integration.
    */
   edit(
-    identifier: unknown,
-    uuid: string,
+    accountId: unknown,
+    integrationId: string,
     body: IntegrationEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IntegrationEditResponse | null> {
     return (
-      this._client.patch(`/accounts/${identifier}/devices/posture/integration/${uuid}`, {
+      this._client.patch(`/accounts/${accountId}/devices/posture/integration/${integrationId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: IntegrationEditResponse | null }>
@@ -58,13 +58,13 @@ export class Integrations extends APIResource {
    * Fetches details for a single device posture integration.
    */
   get(
-    identifier: unknown,
-    uuid: string,
+    accountId: unknown,
+    integrationId: string,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IntegrationGetResponse | null> {
     return (
       this._client.get(
-        `/accounts/${identifier}/devices/posture/integration/${uuid}`,
+        `/accounts/${accountId}/devices/posture/integration/${integrationId}`,
         options,
       ) as Core.APIPromise<{ result: IntegrationGetResponse | null }>
     )._thenUnwrap((obj) => obj.result);
