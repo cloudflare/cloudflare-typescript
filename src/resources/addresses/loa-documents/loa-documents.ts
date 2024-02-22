@@ -2,11 +2,11 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as LoaDocumentsAPI from 'cloudflare/resources/addresses/loa-documents/loa-documents';
+import * as LOADocumentsAPI from 'cloudflare/resources/addresses/loa-documents/loa-documents';
 import * as DownloadsAPI from 'cloudflare/resources/addresses/loa-documents/downloads';
 import { multipartFormRequestOptions } from 'cloudflare/core';
 
-export class LoaDocuments extends APIResource {
+export class LOADocuments extends APIResource {
   downloads: DownloadsAPI.Downloads = new DownloadsAPI.Downloads(this._client);
 
   /**
@@ -14,35 +14,35 @@ export class LoaDocuments extends APIResource {
    */
   create(
     accountId: string,
-    body: LoaDocumentCreateParams,
+    body: LOADocumentCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LoaDocumentCreateResponse> {
+  ): Core.APIPromise<LOADocumentCreateResponse> {
     return (
       this._client.post(
         `/accounts/${accountId}/addressing/loa_documents`,
         multipartFormRequestOptions({ body, ...options }),
-      ) as Core.APIPromise<{ result: LoaDocumentCreateResponse }>
+      ) as Core.APIPromise<{ result: LOADocumentCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface LoaDocumentCreateResponse {
+export interface LOADocumentCreateResponse {
   /**
    * Name of LOA document.
    */
   filename?: string;
 }
 
-export interface LoaDocumentCreateParams {
+export interface LOADocumentCreateParams {
   /**
    * LOA document to upload.
    */
   loa_document: string;
 }
 
-export namespace LoaDocuments {
-  export import LoaDocumentCreateResponse = LoaDocumentsAPI.LoaDocumentCreateResponse;
-  export import LoaDocumentCreateParams = LoaDocumentsAPI.LoaDocumentCreateParams;
+export namespace LOADocuments {
+  export import LOADocumentCreateResponse = LOADocumentsAPI.LOADocumentCreateResponse;
+  export import LOADocumentCreateParams = LOADocumentsAPI.LOADocumentCreateParams;
   export import Downloads = DownloadsAPI.Downloads;
   export import DownloadListResponse = DownloadsAPI.DownloadListResponse;
 }

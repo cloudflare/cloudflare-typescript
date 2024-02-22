@@ -27,13 +27,13 @@ export class Leaks extends APIResource {
 }
 
 export interface LeakEventsResponse {
-  asn_info: Array<LeakEventsResponse.AsnInfo>;
+  asn_info: Array<LeakEventsResponse.ASNInfo>;
 
   events: Array<LeakEventsResponse.Event>;
 }
 
 export namespace LeakEventsResponse {
-  export interface AsnInfo {
+  export interface ASNInfo {
     asn: number;
 
     country_code: string;

@@ -8,7 +8,7 @@ export {
   ConfigEditResponse,
   Configs,
 } from './configs/index';
-export { Mnms } from './mnms';
+export { MNMs } from './mnms';
 export {
   RuleCreateResponse,
   RuleUpdateResponse,

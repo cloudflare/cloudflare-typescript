@@ -68,7 +68,7 @@ export namespace ConfigurationUpdateParams {
     /**
      * Enable private network access from WARP users to private network routes
      */
-    'warp-routing'?: Config.WarpRouting;
+    'warp-routing'?: Config.WARPRouting;
   }
 
   export namespace Config {
@@ -320,7 +320,7 @@ export namespace ConfigurationUpdateParams {
     /**
      * Enable private network access from WARP users to private network routes
      */
-    export interface WarpRouting {
+    export interface WARPRouting {
       enabled?: boolean;
     }
   }

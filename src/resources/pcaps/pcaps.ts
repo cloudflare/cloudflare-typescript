@@ -2,11 +2,11 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as PcapsAPI from 'cloudflare/resources/pcaps/pcaps';
+import * as PCAPsAPI from 'cloudflare/resources/pcaps/pcaps';
 import * as DownloadsAPI from 'cloudflare/resources/pcaps/downloads';
 import * as OwnershipsAPI from 'cloudflare/resources/pcaps/ownerships';
 
-export class Pcaps extends APIResource {
+export class PCAPs extends APIResource {
   ownerships: OwnershipsAPI.Ownerships = new OwnershipsAPI.Ownerships(this._client);
   downloads: DownloadsAPI.Downloads = new DownloadsAPI.Downloads(this._client);
 
@@ -15,12 +15,12 @@ export class Pcaps extends APIResource {
    */
   create(
     accountIdentifier: string,
-    body: PcapCreateParams,
+    body: PCAPCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PcapCreateResponse> {
+  ): Core.APIPromise<PCAPCreateResponse> {
     return (
       this._client.post(`/accounts/${accountIdentifier}/pcaps`, { body, ...options }) as Core.APIPromise<{
-        result: PcapCreateResponse;
+        result: PCAPCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -28,10 +28,10 @@ export class Pcaps extends APIResource {
   /**
    * Lists all packet capture requests for an account.
    */
-  list(accountIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<PcapListResponse | null> {
+  list(accountIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<PCAPListResponse | null> {
     return (
       this._client.get(`/accounts/${accountIdentifier}/pcaps`, options) as Core.APIPromise<{
-        result: PcapListResponse | null;
+        result: PCAPListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -43,21 +43,21 @@ export class Pcaps extends APIResource {
     accountIdentifier: string,
     identifier: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PcapGetResponse> {
+  ): Core.APIPromise<PCAPGetResponse> {
     return (
       this._client.get(`/accounts/${accountIdentifier}/pcaps/${identifier}`, options) as Core.APIPromise<{
-        result: PcapGetResponse;
+        result: PCAPGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type PcapCreateResponse =
-  | PcapCreateResponse.AGiBwgNdPcapsResponseSimple
-  | PcapCreateResponse.AGiBwgNdPcapsResponseFull;
+export type PCAPCreateResponse =
+  | PCAPCreateResponse.AGiBwgNdPCAPsResponseSimple
+  | PCAPCreateResponse.AGiBwgNdPCAPsResponseFull;
 
-export namespace PcapCreateResponse {
-  export interface AGiBwgNdPcapsResponseSimple {
+export namespace PCAPCreateResponse {
+  export interface AGiBwgNdPCAPsResponseSimple {
     /**
      * The ID for the packet capture.
      */
@@ -66,7 +66,7 @@ export namespace PcapCreateResponse {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: AGiBwgNdPcapsResponseSimple.FilterV1;
+    filter_v1?: AGiBwgNdPCAPsResponseSimple.FilterV1;
 
     /**
      * The status of the packet capture request.
@@ -103,7 +103,7 @@ export namespace PcapCreateResponse {
     type?: 'simple' | 'full';
   }
 
-  export namespace AGiBwgNdPcapsResponseSimple {
+  export namespace AGiBwgNdPCAPsResponseSimple {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
@@ -135,7 +135,7 @@ export namespace PcapCreateResponse {
     }
   }
 
-  export interface AGiBwgNdPcapsResponseFull {
+  export interface AGiBwgNdPCAPsResponseFull {
     /**
      * The ID for the packet capture.
      */
@@ -168,7 +168,7 @@ export namespace PcapCreateResponse {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: AGiBwgNdPcapsResponseFull.FilterV1;
+    filter_v1?: AGiBwgNdPCAPsResponseFull.FilterV1;
 
     /**
      * The status of the packet capture request.
@@ -205,7 +205,7 @@ export namespace PcapCreateResponse {
     type?: 'simple' | 'full';
   }
 
-  export namespace AGiBwgNdPcapsResponseFull {
+  export namespace AGiBwgNdPCAPsResponseFull {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
@@ -238,12 +238,12 @@ export namespace PcapCreateResponse {
   }
 }
 
-export type PcapListResponse = Array<
-  PcapListResponse.AGiBwgNdPcapsResponseSimple | PcapListResponse.AGiBwgNdPcapsResponseFull
+export type PCAPListResponse = Array<
+  PCAPListResponse.AGiBwgNdPCAPsResponseSimple | PCAPListResponse.AGiBwgNdPCAPsResponseFull
 >;
 
-export namespace PcapListResponse {
-  export interface AGiBwgNdPcapsResponseSimple {
+export namespace PCAPListResponse {
+  export interface AGiBwgNdPCAPsResponseSimple {
     /**
      * The ID for the packet capture.
      */
@@ -252,7 +252,7 @@ export namespace PcapListResponse {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: AGiBwgNdPcapsResponseSimple.FilterV1;
+    filter_v1?: AGiBwgNdPCAPsResponseSimple.FilterV1;
 
     /**
      * The status of the packet capture request.
@@ -289,7 +289,7 @@ export namespace PcapListResponse {
     type?: 'simple' | 'full';
   }
 
-  export namespace AGiBwgNdPcapsResponseSimple {
+  export namespace AGiBwgNdPCAPsResponseSimple {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
@@ -321,193 +321,7 @@ export namespace PcapListResponse {
     }
   }
 
-  export interface AGiBwgNdPcapsResponseFull {
-    /**
-     * The ID for the packet capture.
-     */
-    id?: string;
-
-    /**
-     * The maximum number of bytes to capture. This field only applies to `full` packet
-     * captures.
-     */
-    byte_limit?: number;
-
-    /**
-     * The name of the data center used for the packet capture. This can be a specific
-     * colo (ord02) or a multi-colo name (ORD). This field only applies to `full`
-     * packet captures.
-     */
-    colo_name?: string;
-
-    /**
-     * The full URI for the bucket. This field only applies to `full` packet captures.
-     */
-    destination_conf?: string;
-
-    /**
-     * An error message that describes why the packet capture failed. This field only
-     * applies to `full` packet captures.
-     */
-    error_message?: string;
-
-    /**
-     * The packet capture filter. When this field is empty, all packets are captured.
-     */
-    filter_v1?: AGiBwgNdPcapsResponseFull.FilterV1;
-
-    /**
-     * The status of the packet capture request.
-     */
-    status?:
-      | 'unknown'
-      | 'success'
-      | 'pending'
-      | 'running'
-      | 'conversion_pending'
-      | 'conversion_running'
-      | 'complete'
-      | 'failed';
-
-    /**
-     * The RFC 3339 timestamp when the packet capture was created.
-     */
-    submitted?: string;
-
-    /**
-     * The system used to collect packet captures.
-     */
-    system?: 'magic-transit';
-
-    /**
-     * The packet capture duration in seconds.
-     */
-    time_limit?: number;
-
-    /**
-     * The type of packet capture. `Simple` captures sampled packets, and `full`
-     * captures entire payloads and non-sampled packets.
-     */
-    type?: 'simple' | 'full';
-  }
-
-  export namespace AGiBwgNdPcapsResponseFull {
-    /**
-     * The packet capture filter. When this field is empty, all packets are captured.
-     */
-    export interface FilterV1 {
-      /**
-       * The destination IP address of the packet.
-       */
-      destination_address?: string;
-
-      /**
-       * The destination port of the packet.
-       */
-      destination_port?: number;
-
-      /**
-       * The protocol number of the packet.
-       */
-      protocol?: number;
-
-      /**
-       * The source IP address of the packet.
-       */
-      source_address?: string;
-
-      /**
-       * The source port of the packet.
-       */
-      source_port?: number;
-    }
-  }
-}
-
-export type PcapGetResponse =
-  | PcapGetResponse.AGiBwgNdPcapsResponseSimple
-  | PcapGetResponse.AGiBwgNdPcapsResponseFull;
-
-export namespace PcapGetResponse {
-  export interface AGiBwgNdPcapsResponseSimple {
-    /**
-     * The ID for the packet capture.
-     */
-    id?: string;
-
-    /**
-     * The packet capture filter. When this field is empty, all packets are captured.
-     */
-    filter_v1?: AGiBwgNdPcapsResponseSimple.FilterV1;
-
-    /**
-     * The status of the packet capture request.
-     */
-    status?:
-      | 'unknown'
-      | 'success'
-      | 'pending'
-      | 'running'
-      | 'conversion_pending'
-      | 'conversion_running'
-      | 'complete'
-      | 'failed';
-
-    /**
-     * The RFC 3339 timestamp when the packet capture was created.
-     */
-    submitted?: string;
-
-    /**
-     * The system used to collect packet captures.
-     */
-    system?: 'magic-transit';
-
-    /**
-     * The packet capture duration in seconds.
-     */
-    time_limit?: number;
-
-    /**
-     * The type of packet capture. `Simple` captures sampled packets, and `full`
-     * captures entire payloads and non-sampled packets.
-     */
-    type?: 'simple' | 'full';
-  }
-
-  export namespace AGiBwgNdPcapsResponseSimple {
-    /**
-     * The packet capture filter. When this field is empty, all packets are captured.
-     */
-    export interface FilterV1 {
-      /**
-       * The destination IP address of the packet.
-       */
-      destination_address?: string;
-
-      /**
-       * The destination port of the packet.
-       */
-      destination_port?: number;
-
-      /**
-       * The protocol number of the packet.
-       */
-      protocol?: number;
-
-      /**
-       * The source IP address of the packet.
-       */
-      source_address?: string;
-
-      /**
-       * The source port of the packet.
-       */
-      source_port?: number;
-    }
-  }
-
-  export interface AGiBwgNdPcapsResponseFull {
+  export interface AGiBwgNdPCAPsResponseFull {
     /**
      * The ID for the packet capture.
      */
@@ -540,7 +354,7 @@ export namespace PcapGetResponse {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: AGiBwgNdPcapsResponseFull.FilterV1;
+    filter_v1?: AGiBwgNdPCAPsResponseFull.FilterV1;
 
     /**
      * The status of the packet capture request.
@@ -577,7 +391,7 @@ export namespace PcapGetResponse {
     type?: 'simple' | 'full';
   }
 
-  export namespace AGiBwgNdPcapsResponseFull {
+  export namespace AGiBwgNdPCAPsResponseFull {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
@@ -610,7 +424,193 @@ export namespace PcapGetResponse {
   }
 }
 
-export interface PcapCreateParams {
+export type PCAPGetResponse =
+  | PCAPGetResponse.AGiBwgNdPCAPsResponseSimple
+  | PCAPGetResponse.AGiBwgNdPCAPsResponseFull;
+
+export namespace PCAPGetResponse {
+  export interface AGiBwgNdPCAPsResponseSimple {
+    /**
+     * The ID for the packet capture.
+     */
+    id?: string;
+
+    /**
+     * The packet capture filter. When this field is empty, all packets are captured.
+     */
+    filter_v1?: AGiBwgNdPCAPsResponseSimple.FilterV1;
+
+    /**
+     * The status of the packet capture request.
+     */
+    status?:
+      | 'unknown'
+      | 'success'
+      | 'pending'
+      | 'running'
+      | 'conversion_pending'
+      | 'conversion_running'
+      | 'complete'
+      | 'failed';
+
+    /**
+     * The RFC 3339 timestamp when the packet capture was created.
+     */
+    submitted?: string;
+
+    /**
+     * The system used to collect packet captures.
+     */
+    system?: 'magic-transit';
+
+    /**
+     * The packet capture duration in seconds.
+     */
+    time_limit?: number;
+
+    /**
+     * The type of packet capture. `Simple` captures sampled packets, and `full`
+     * captures entire payloads and non-sampled packets.
+     */
+    type?: 'simple' | 'full';
+  }
+
+  export namespace AGiBwgNdPCAPsResponseSimple {
+    /**
+     * The packet capture filter. When this field is empty, all packets are captured.
+     */
+    export interface FilterV1 {
+      /**
+       * The destination IP address of the packet.
+       */
+      destination_address?: string;
+
+      /**
+       * The destination port of the packet.
+       */
+      destination_port?: number;
+
+      /**
+       * The protocol number of the packet.
+       */
+      protocol?: number;
+
+      /**
+       * The source IP address of the packet.
+       */
+      source_address?: string;
+
+      /**
+       * The source port of the packet.
+       */
+      source_port?: number;
+    }
+  }
+
+  export interface AGiBwgNdPCAPsResponseFull {
+    /**
+     * The ID for the packet capture.
+     */
+    id?: string;
+
+    /**
+     * The maximum number of bytes to capture. This field only applies to `full` packet
+     * captures.
+     */
+    byte_limit?: number;
+
+    /**
+     * The name of the data center used for the packet capture. This can be a specific
+     * colo (ord02) or a multi-colo name (ORD). This field only applies to `full`
+     * packet captures.
+     */
+    colo_name?: string;
+
+    /**
+     * The full URI for the bucket. This field only applies to `full` packet captures.
+     */
+    destination_conf?: string;
+
+    /**
+     * An error message that describes why the packet capture failed. This field only
+     * applies to `full` packet captures.
+     */
+    error_message?: string;
+
+    /**
+     * The packet capture filter. When this field is empty, all packets are captured.
+     */
+    filter_v1?: AGiBwgNdPCAPsResponseFull.FilterV1;
+
+    /**
+     * The status of the packet capture request.
+     */
+    status?:
+      | 'unknown'
+      | 'success'
+      | 'pending'
+      | 'running'
+      | 'conversion_pending'
+      | 'conversion_running'
+      | 'complete'
+      | 'failed';
+
+    /**
+     * The RFC 3339 timestamp when the packet capture was created.
+     */
+    submitted?: string;
+
+    /**
+     * The system used to collect packet captures.
+     */
+    system?: 'magic-transit';
+
+    /**
+     * The packet capture duration in seconds.
+     */
+    time_limit?: number;
+
+    /**
+     * The type of packet capture. `Simple` captures sampled packets, and `full`
+     * captures entire payloads and non-sampled packets.
+     */
+    type?: 'simple' | 'full';
+  }
+
+  export namespace AGiBwgNdPCAPsResponseFull {
+    /**
+     * The packet capture filter. When this field is empty, all packets are captured.
+     */
+    export interface FilterV1 {
+      /**
+       * The destination IP address of the packet.
+       */
+      destination_address?: string;
+
+      /**
+       * The destination port of the packet.
+       */
+      destination_port?: number;
+
+      /**
+       * The protocol number of the packet.
+       */
+      protocol?: number;
+
+      /**
+       * The source IP address of the packet.
+       */
+      source_address?: string;
+
+      /**
+       * The source port of the packet.
+       */
+      source_port?: number;
+    }
+  }
+}
+
+export interface PCAPCreateParams {
   /**
    * The system used to collect packet captures.
    */
@@ -645,7 +645,7 @@ export interface PcapCreateParams {
    */
   destination_conf?: string;
 
-  filter_v1?: PcapCreateParams.FilterV1;
+  filter_v1?: PCAPCreateParams.FilterV1;
 
   /**
    * The limit of packets contained in a packet capture.
@@ -653,7 +653,7 @@ export interface PcapCreateParams {
   packet_limit?: number;
 }
 
-export namespace PcapCreateParams {
+export namespace PCAPCreateParams {
   export interface FilterV1 {
     /**
      * The destination IP address of the packet.
@@ -682,11 +682,11 @@ export namespace PcapCreateParams {
   }
 }
 
-export namespace Pcaps {
-  export import PcapCreateResponse = PcapsAPI.PcapCreateResponse;
-  export import PcapListResponse = PcapsAPI.PcapListResponse;
-  export import PcapGetResponse = PcapsAPI.PcapGetResponse;
-  export import PcapCreateParams = PcapsAPI.PcapCreateParams;
+export namespace PCAPs {
+  export import PCAPCreateResponse = PCAPsAPI.PCAPCreateResponse;
+  export import PCAPListResponse = PCAPsAPI.PCAPListResponse;
+  export import PCAPGetResponse = PCAPsAPI.PCAPGetResponse;
+  export import PCAPCreateParams = PCAPsAPI.PCAPCreateParams;
   export import Ownerships = OwnershipsAPI.Ownerships;
   export import OwnershipCreateResponse = OwnershipsAPI.OwnershipCreateResponse;
   export import OwnershipGetResponse = OwnershipsAPI.OwnershipGetResponse;

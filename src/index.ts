@@ -220,10 +220,10 @@ export class Cloudflare extends Core.APIClient {
   intel: API.Intel = new API.Intel(this);
   magics: API.Magics = new API.Magics(this);
   accountMembers: API.AccountMembers = new API.AccountMembers(this);
-  mnms: API.Mnms = new API.Mnms(this);
-  mtlsCertificates: API.MtlsCertificates = new API.MtlsCertificates(this);
+  mnms: API.MNMs = new API.MNMs(this);
+  mtlsCertificates: API.MTLSCertificates = new API.MTLSCertificates(this);
   pages: API.Pages = new API.Pages(this);
-  pcaps: API.Pcaps = new API.Pcaps(this);
+  pcaps: API.PCAPs = new API.PCAPs(this);
   registrar: API.Registrar = new API.Registrar(this);
   requestTracers: API.RequestTracers = new API.RequestTracers(this);
   roles: API.Roles = new API.Roles(this);
@@ -238,7 +238,7 @@ export class Cloudflare extends Core.APIClient {
   dex: API.DEX = new API.DEX(this);
   r2: API.R2 = new API.R2(this);
   teamnet: API.Teamnet = new API.Teamnet(this);
-  warpConnector: API.WarpConnector = new API.WarpConnector(this);
+  warpConnector: API.WARPConnector = new API.WARPConnector(this);
   dispatchers: API.Dispatchers = new API.Dispatchers(this);
   workersForPlatforms: API.WorkersForPlatforms = new API.WorkersForPlatforms(this);
   workerDomains: API.WorkerDomains = new API.WorkerDomains(this);
@@ -247,7 +247,7 @@ export class Cloudflare extends Core.APIClient {
   addressing: API.Addressing = new API.Addressing(this);
   challenges: API.Challenges = new API.Challenges(this);
   hyperdrive: API.Hyperdrive = new API.Hyperdrive(this);
-  rum: API.Rum = new API.Rum(this);
+  rum: API.RUM = new API.RUM(this);
   vectorize: API.Vectorize = new API.Vectorize(this);
   urlScanner: API.URLScanner = new API.URLScanner(this);
   radar: API.Radar = new API.Radar(this);
@@ -675,22 +675,22 @@ export namespace Cloudflare {
   export import AccountMemberUpdateParams = API.AccountMemberUpdateParams;
   export import AccountMemberListParams = API.AccountMemberListParams;
 
-  export import Mnms = API.Mnms;
+  export import MNMs = API.MNMs;
 
-  export import MtlsCertificates = API.MtlsCertificates;
-  export import MtlsCertificateCreateResponse = API.MtlsCertificateCreateResponse;
-  export import MtlsCertificateListResponse = API.MtlsCertificateListResponse;
-  export import MtlsCertificateDeleteResponse = API.MtlsCertificateDeleteResponse;
-  export import MtlsCertificateGetResponse = API.MtlsCertificateGetResponse;
-  export import MtlsCertificateCreateParams = API.MtlsCertificateCreateParams;
+  export import MTLSCertificates = API.MTLSCertificates;
+  export import MTLSCertificateCreateResponse = API.MTLSCertificateCreateResponse;
+  export import MTLSCertificateListResponse = API.MTLSCertificateListResponse;
+  export import MTLSCertificateDeleteResponse = API.MTLSCertificateDeleteResponse;
+  export import MTLSCertificateGetResponse = API.MTLSCertificateGetResponse;
+  export import MTLSCertificateCreateParams = API.MTLSCertificateCreateParams;
 
   export import Pages = API.Pages;
 
-  export import Pcaps = API.Pcaps;
-  export import PcapCreateResponse = API.PcapCreateResponse;
-  export import PcapListResponse = API.PcapListResponse;
-  export import PcapGetResponse = API.PcapGetResponse;
-  export import PcapCreateParams = API.PcapCreateParams;
+  export import PCAPs = API.PCAPs;
+  export import PCAPCreateResponse = API.PCAPCreateResponse;
+  export import PCAPListResponse = API.PCAPListResponse;
+  export import PCAPGetResponse = API.PCAPGetResponse;
+  export import PCAPCreateParams = API.PCAPCreateParams;
 
   export import Registrar = API.Registrar;
 
@@ -730,17 +730,17 @@ export namespace Cloudflare {
 
   export import Teamnet = API.Teamnet;
 
-  export import WarpConnector = API.WarpConnector;
-  export import WarpConnectorCreateResponse = API.WarpConnectorCreateResponse;
-  export import WarpConnectorListResponse = API.WarpConnectorListResponse;
-  export import WarpConnectorDeleteResponse = API.WarpConnectorDeleteResponse;
-  export import WarpConnectorEditResponse = API.WarpConnectorEditResponse;
-  export import WarpConnectorGetResponse = API.WarpConnectorGetResponse;
-  export import WarpConnectorListResponsesV4PagePaginationArray = API.WarpConnectorListResponsesV4PagePaginationArray;
-  export import WarpConnectorCreateParams = API.WarpConnectorCreateParams;
-  export import WarpConnectorListParams = API.WarpConnectorListParams;
-  export import WarpConnectorDeleteParams = API.WarpConnectorDeleteParams;
-  export import WarpConnectorEditParams = API.WarpConnectorEditParams;
+  export import WARPConnector = API.WARPConnector;
+  export import WARPConnectorCreateResponse = API.WARPConnectorCreateResponse;
+  export import WARPConnectorListResponse = API.WARPConnectorListResponse;
+  export import WARPConnectorDeleteResponse = API.WARPConnectorDeleteResponse;
+  export import WARPConnectorEditResponse = API.WARPConnectorEditResponse;
+  export import WARPConnectorGetResponse = API.WARPConnectorGetResponse;
+  export import WARPConnectorListResponsesV4PagePaginationArray = API.WARPConnectorListResponsesV4PagePaginationArray;
+  export import WARPConnectorCreateParams = API.WARPConnectorCreateParams;
+  export import WARPConnectorListParams = API.WARPConnectorListParams;
+  export import WARPConnectorDeleteParams = API.WARPConnectorDeleteParams;
+  export import WARPConnectorEditParams = API.WARPConnectorEditParams;
 
   export import Dispatchers = API.Dispatchers;
 
@@ -759,7 +759,7 @@ export namespace Cloudflare {
 
   export import Hyperdrive = API.Hyperdrive;
 
-  export import Rum = API.Rum;
+  export import RUM = API.RUM;
 
   export import Vectorize = API.Vectorize;
 

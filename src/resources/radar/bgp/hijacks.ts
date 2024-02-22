@@ -27,7 +27,7 @@ export class Hijacks extends APIResource {
 }
 
 export interface HijackEventsResponse {
-  asn_info: Array<HijackEventsResponse.AsnInfo>;
+  asn_info: Array<HijackEventsResponse.ASNInfo>;
 
   events: Array<HijackEventsResponse.Event>;
 
@@ -35,7 +35,7 @@ export interface HijackEventsResponse {
 }
 
 export namespace HijackEventsResponse {
-  export interface AsnInfo {
+  export interface ASNInfo {
     asn: number;
 
     country_code: string;

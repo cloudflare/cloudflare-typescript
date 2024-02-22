@@ -4,12 +4,12 @@ import { APIResource } from 'cloudflare/resource';
 import * as RulesAPI from 'cloudflare/resources/rum/rules';
 import * as SiteInfosAPI from 'cloudflare/resources/rum/site-infos';
 
-export class Rum extends APIResource {
+export class RUM extends APIResource {
   siteInfos: SiteInfosAPI.SiteInfos = new SiteInfosAPI.SiteInfos(this._client);
   rules: RulesAPI.Rules = new RulesAPI.Rules(this._client);
 }
 
-export namespace Rum {
+export namespace RUM {
   export import SiteInfos = SiteInfosAPI.SiteInfos;
   export import SiteInfoCreateResponse = SiteInfosAPI.SiteInfoCreateResponse;
   export import SiteInfoUpdateResponse = SiteInfosAPI.SiteInfoUpdateResponse;

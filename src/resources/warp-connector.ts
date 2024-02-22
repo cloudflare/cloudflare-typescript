@@ -3,21 +3,21 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
-import * as WarpConnectorAPI from 'cloudflare/resources/warp-connector';
+import * as WARPConnectorAPI from 'cloudflare/resources/warp-connector';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
-export class WarpConnector extends APIResource {
+export class WARPConnector extends APIResource {
   /**
    * Creates a new Warp Connector Tunnel in an account.
    */
   create(
     accountId: string,
-    body: WarpConnectorCreateParams,
+    body: WARPConnectorCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WarpConnectorCreateResponse> {
+  ): Core.APIPromise<WARPConnectorCreateResponse> {
     return (
       this._client.post(`/accounts/${accountId}/warp_connector`, { body, ...options }) as Core.APIPromise<{
-        result: WarpConnectorCreateResponse;
+        result: WARPConnectorCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -27,24 +27,24 @@ export class WarpConnector extends APIResource {
    */
   list(
     accountId: string,
-    query?: WarpConnectorListParams,
+    query?: WARPConnectorListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<WarpConnectorListResponsesV4PagePaginationArray, WarpConnectorListResponse>;
+  ): Core.PagePromise<WARPConnectorListResponsesV4PagePaginationArray, WARPConnectorListResponse>;
   list(
     accountId: string,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<WarpConnectorListResponsesV4PagePaginationArray, WarpConnectorListResponse>;
+  ): Core.PagePromise<WARPConnectorListResponsesV4PagePaginationArray, WARPConnectorListResponse>;
   list(
     accountId: string,
-    query: WarpConnectorListParams | Core.RequestOptions = {},
+    query: WARPConnectorListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<WarpConnectorListResponsesV4PagePaginationArray, WarpConnectorListResponse> {
+  ): Core.PagePromise<WARPConnectorListResponsesV4PagePaginationArray, WARPConnectorListResponse> {
     if (isRequestOptions(query)) {
       return this.list(accountId, {}, query);
     }
     return this._client.getAPIList(
       `/accounts/${accountId}/warp_connector`,
-      WarpConnectorListResponsesV4PagePaginationArray,
+      WARPConnectorListResponsesV4PagePaginationArray,
       { query, ...options },
     );
   }
@@ -55,14 +55,14 @@ export class WarpConnector extends APIResource {
   delete(
     accountId: string,
     tunnelId: string,
-    body: WarpConnectorDeleteParams,
+    body: WARPConnectorDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WarpConnectorDeleteResponse> {
+  ): Core.APIPromise<WARPConnectorDeleteResponse> {
     return (
       this._client.delete(`/accounts/${accountId}/warp_connector/${tunnelId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: WarpConnectorDeleteResponse }>
+      }) as Core.APIPromise<{ result: WARPConnectorDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -72,14 +72,14 @@ export class WarpConnector extends APIResource {
   edit(
     accountId: string,
     tunnelId: string,
-    body: WarpConnectorEditParams,
+    body: WARPConnectorEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WarpConnectorEditResponse> {
+  ): Core.APIPromise<WARPConnectorEditResponse> {
     return (
       this._client.patch(`/accounts/${accountId}/warp_connector/${tunnelId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: WarpConnectorEditResponse }>
+      }) as Core.APIPromise<{ result: WARPConnectorEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -90,25 +90,25 @@ export class WarpConnector extends APIResource {
     accountId: string,
     tunnelId: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WarpConnectorGetResponse> {
+  ): Core.APIPromise<WARPConnectorGetResponse> {
     return (
       this._client.get(`/accounts/${accountId}/warp_connector/${tunnelId}`, options) as Core.APIPromise<{
-        result: WarpConnectorGetResponse;
+        result: WARPConnectorGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class WarpConnectorListResponsesV4PagePaginationArray extends V4PagePaginationArray<WarpConnectorListResponse> {}
+export class WARPConnectorListResponsesV4PagePaginationArray extends V4PagePaginationArray<WARPConnectorListResponse> {}
 
 /**
  * A Cloudflare Tunnel that connects your origin to Cloudflare's edge.
  */
-export type WarpConnectorCreateResponse =
-  | WarpConnectorCreateResponse.TunnelCfdTunnel
-  | WarpConnectorCreateResponse.TunnelWarpConnectorTunnel;
+export type WARPConnectorCreateResponse =
+  | WARPConnectorCreateResponse.TunnelCfdTunnel
+  | WARPConnectorCreateResponse.TunnelWARPConnectorTunnel;
 
-export namespace WarpConnectorCreateResponse {
+export namespace WARPConnectorCreateResponse {
   /**
    * A Cloudflare Tunnel that connects your origin to Cloudflare's edge.
    */
@@ -231,7 +231,7 @@ export namespace WarpConnectorCreateResponse {
   /**
    * A Warp Connector Tunnel that connects your origin to Cloudflare's edge.
    */
-  export interface TunnelWarpConnectorTunnel {
+  export interface TunnelWARPConnectorTunnel {
     /**
      * UUID of the tunnel.
      */
@@ -245,7 +245,7 @@ export namespace WarpConnectorCreateResponse {
     /**
      * The Cloudflare Tunnel connections between your origin and Cloudflare's edge.
      */
-    connections?: Array<TunnelWarpConnectorTunnel.Connection>;
+    connections?: Array<TunnelWARPConnectorTunnel.Connection>;
 
     /**
      * Timestamp of when the tunnel established at least one connection to Cloudflare's
@@ -294,7 +294,7 @@ export namespace WarpConnectorCreateResponse {
     tun_type?: 'cfd_tunnel' | 'warp_connector' | 'ip_sec' | 'gre' | 'cni';
   }
 
-  export namespace TunnelWarpConnectorTunnel {
+  export namespace TunnelWARPConnectorTunnel {
     export interface Connection {
       /**
        * UUID of the Cloudflare Tunnel connection.
@@ -345,11 +345,11 @@ export namespace WarpConnectorCreateResponse {
 /**
  * A Cloudflare Tunnel that connects your origin to Cloudflare's edge.
  */
-export type WarpConnectorListResponse =
-  | WarpConnectorListResponse.TunnelCfdTunnel
-  | WarpConnectorListResponse.TunnelWarpConnectorTunnel;
+export type WARPConnectorListResponse =
+  | WARPConnectorListResponse.TunnelCfdTunnel
+  | WARPConnectorListResponse.TunnelWARPConnectorTunnel;
 
-export namespace WarpConnectorListResponse {
+export namespace WARPConnectorListResponse {
   /**
    * A Cloudflare Tunnel that connects your origin to Cloudflare's edge.
    */
@@ -472,7 +472,7 @@ export namespace WarpConnectorListResponse {
   /**
    * A Warp Connector Tunnel that connects your origin to Cloudflare's edge.
    */
-  export interface TunnelWarpConnectorTunnel {
+  export interface TunnelWARPConnectorTunnel {
     /**
      * UUID of the tunnel.
      */
@@ -486,7 +486,7 @@ export namespace WarpConnectorListResponse {
     /**
      * The Cloudflare Tunnel connections between your origin and Cloudflare's edge.
      */
-    connections?: Array<TunnelWarpConnectorTunnel.Connection>;
+    connections?: Array<TunnelWARPConnectorTunnel.Connection>;
 
     /**
      * Timestamp of when the tunnel established at least one connection to Cloudflare's
@@ -535,7 +535,7 @@ export namespace WarpConnectorListResponse {
     tun_type?: 'cfd_tunnel' | 'warp_connector' | 'ip_sec' | 'gre' | 'cni';
   }
 
-  export namespace TunnelWarpConnectorTunnel {
+  export namespace TunnelWARPConnectorTunnel {
     export interface Connection {
       /**
        * UUID of the Cloudflare Tunnel connection.
@@ -586,11 +586,11 @@ export namespace WarpConnectorListResponse {
 /**
  * A Cloudflare Tunnel that connects your origin to Cloudflare's edge.
  */
-export type WarpConnectorDeleteResponse =
-  | WarpConnectorDeleteResponse.TunnelCfdTunnel
-  | WarpConnectorDeleteResponse.TunnelWarpConnectorTunnel;
+export type WARPConnectorDeleteResponse =
+  | WARPConnectorDeleteResponse.TunnelCfdTunnel
+  | WARPConnectorDeleteResponse.TunnelWARPConnectorTunnel;
 
-export namespace WarpConnectorDeleteResponse {
+export namespace WARPConnectorDeleteResponse {
   /**
    * A Cloudflare Tunnel that connects your origin to Cloudflare's edge.
    */
@@ -713,7 +713,7 @@ export namespace WarpConnectorDeleteResponse {
   /**
    * A Warp Connector Tunnel that connects your origin to Cloudflare's edge.
    */
-  export interface TunnelWarpConnectorTunnel {
+  export interface TunnelWARPConnectorTunnel {
     /**
      * UUID of the tunnel.
      */
@@ -727,7 +727,7 @@ export namespace WarpConnectorDeleteResponse {
     /**
      * The Cloudflare Tunnel connections between your origin and Cloudflare's edge.
      */
-    connections?: Array<TunnelWarpConnectorTunnel.Connection>;
+    connections?: Array<TunnelWARPConnectorTunnel.Connection>;
 
     /**
      * Timestamp of when the tunnel established at least one connection to Cloudflare's
@@ -776,7 +776,7 @@ export namespace WarpConnectorDeleteResponse {
     tun_type?: 'cfd_tunnel' | 'warp_connector' | 'ip_sec' | 'gre' | 'cni';
   }
 
-  export namespace TunnelWarpConnectorTunnel {
+  export namespace TunnelWARPConnectorTunnel {
     export interface Connection {
       /**
        * UUID of the Cloudflare Tunnel connection.
@@ -827,11 +827,11 @@ export namespace WarpConnectorDeleteResponse {
 /**
  * A Cloudflare Tunnel that connects your origin to Cloudflare's edge.
  */
-export type WarpConnectorEditResponse =
-  | WarpConnectorEditResponse.TunnelCfdTunnel
-  | WarpConnectorEditResponse.TunnelWarpConnectorTunnel;
+export type WARPConnectorEditResponse =
+  | WARPConnectorEditResponse.TunnelCfdTunnel
+  | WARPConnectorEditResponse.TunnelWARPConnectorTunnel;
 
-export namespace WarpConnectorEditResponse {
+export namespace WARPConnectorEditResponse {
   /**
    * A Cloudflare Tunnel that connects your origin to Cloudflare's edge.
    */
@@ -954,7 +954,7 @@ export namespace WarpConnectorEditResponse {
   /**
    * A Warp Connector Tunnel that connects your origin to Cloudflare's edge.
    */
-  export interface TunnelWarpConnectorTunnel {
+  export interface TunnelWARPConnectorTunnel {
     /**
      * UUID of the tunnel.
      */
@@ -968,7 +968,7 @@ export namespace WarpConnectorEditResponse {
     /**
      * The Cloudflare Tunnel connections between your origin and Cloudflare's edge.
      */
-    connections?: Array<TunnelWarpConnectorTunnel.Connection>;
+    connections?: Array<TunnelWARPConnectorTunnel.Connection>;
 
     /**
      * Timestamp of when the tunnel established at least one connection to Cloudflare's
@@ -1017,7 +1017,7 @@ export namespace WarpConnectorEditResponse {
     tun_type?: 'cfd_tunnel' | 'warp_connector' | 'ip_sec' | 'gre' | 'cni';
   }
 
-  export namespace TunnelWarpConnectorTunnel {
+  export namespace TunnelWARPConnectorTunnel {
     export interface Connection {
       /**
        * UUID of the Cloudflare Tunnel connection.
@@ -1068,11 +1068,11 @@ export namespace WarpConnectorEditResponse {
 /**
  * A Cloudflare Tunnel that connects your origin to Cloudflare's edge.
  */
-export type WarpConnectorGetResponse =
-  | WarpConnectorGetResponse.TunnelCfdTunnel
-  | WarpConnectorGetResponse.TunnelWarpConnectorTunnel;
+export type WARPConnectorGetResponse =
+  | WARPConnectorGetResponse.TunnelCfdTunnel
+  | WARPConnectorGetResponse.TunnelWARPConnectorTunnel;
 
-export namespace WarpConnectorGetResponse {
+export namespace WARPConnectorGetResponse {
   /**
    * A Cloudflare Tunnel that connects your origin to Cloudflare's edge.
    */
@@ -1195,7 +1195,7 @@ export namespace WarpConnectorGetResponse {
   /**
    * A Warp Connector Tunnel that connects your origin to Cloudflare's edge.
    */
-  export interface TunnelWarpConnectorTunnel {
+  export interface TunnelWARPConnectorTunnel {
     /**
      * UUID of the tunnel.
      */
@@ -1209,7 +1209,7 @@ export namespace WarpConnectorGetResponse {
     /**
      * The Cloudflare Tunnel connections between your origin and Cloudflare's edge.
      */
-    connections?: Array<TunnelWarpConnectorTunnel.Connection>;
+    connections?: Array<TunnelWARPConnectorTunnel.Connection>;
 
     /**
      * Timestamp of when the tunnel established at least one connection to Cloudflare's
@@ -1258,7 +1258,7 @@ export namespace WarpConnectorGetResponse {
     tun_type?: 'cfd_tunnel' | 'warp_connector' | 'ip_sec' | 'gre' | 'cni';
   }
 
-  export namespace TunnelWarpConnectorTunnel {
+  export namespace TunnelWARPConnectorTunnel {
     export interface Connection {
       /**
        * UUID of the Cloudflare Tunnel connection.
@@ -1306,14 +1306,14 @@ export namespace WarpConnectorGetResponse {
   }
 }
 
-export interface WarpConnectorCreateParams {
+export interface WARPConnectorCreateParams {
   /**
    * A user-friendly name for the tunnel.
    */
   name: string;
 }
 
-export interface WarpConnectorListParams extends V4PagePaginationArrayParams {
+export interface WARPConnectorListParams extends V4PagePaginationArrayParams {
   exclude_prefix?: string;
 
   /**
@@ -1340,9 +1340,9 @@ export interface WarpConnectorListParams extends V4PagePaginationArrayParams {
   was_inactive_at?: string;
 }
 
-export type WarpConnectorDeleteParams = unknown;
+export type WARPConnectorDeleteParams = unknown;
 
-export interface WarpConnectorEditParams {
+export interface WARPConnectorEditParams {
   /**
    * A user-friendly name for the tunnel.
    */
@@ -1355,15 +1355,15 @@ export interface WarpConnectorEditParams {
   tunnel_secret?: string;
 }
 
-export namespace WarpConnector {
-  export import WarpConnectorCreateResponse = WarpConnectorAPI.WarpConnectorCreateResponse;
-  export import WarpConnectorListResponse = WarpConnectorAPI.WarpConnectorListResponse;
-  export import WarpConnectorDeleteResponse = WarpConnectorAPI.WarpConnectorDeleteResponse;
-  export import WarpConnectorEditResponse = WarpConnectorAPI.WarpConnectorEditResponse;
-  export import WarpConnectorGetResponse = WarpConnectorAPI.WarpConnectorGetResponse;
-  export import WarpConnectorListResponsesV4PagePaginationArray = WarpConnectorAPI.WarpConnectorListResponsesV4PagePaginationArray;
-  export import WarpConnectorCreateParams = WarpConnectorAPI.WarpConnectorCreateParams;
-  export import WarpConnectorListParams = WarpConnectorAPI.WarpConnectorListParams;
-  export import WarpConnectorDeleteParams = WarpConnectorAPI.WarpConnectorDeleteParams;
-  export import WarpConnectorEditParams = WarpConnectorAPI.WarpConnectorEditParams;
+export namespace WARPConnector {
+  export import WARPConnectorCreateResponse = WARPConnectorAPI.WARPConnectorCreateResponse;
+  export import WARPConnectorListResponse = WARPConnectorAPI.WARPConnectorListResponse;
+  export import WARPConnectorDeleteResponse = WARPConnectorAPI.WARPConnectorDeleteResponse;
+  export import WARPConnectorEditResponse = WARPConnectorAPI.WARPConnectorEditResponse;
+  export import WARPConnectorGetResponse = WARPConnectorAPI.WARPConnectorGetResponse;
+  export import WARPConnectorListResponsesV4PagePaginationArray = WARPConnectorAPI.WARPConnectorListResponsesV4PagePaginationArray;
+  export import WARPConnectorCreateParams = WARPConnectorAPI.WARPConnectorCreateParams;
+  export import WARPConnectorListParams = WARPConnectorAPI.WARPConnectorListParams;
+  export import WARPConnectorDeleteParams = WARPConnectorAPI.WARPConnectorDeleteParams;
+  export import WARPConnectorEditParams = WARPConnectorAPI.WARPConnectorEditParams;
 }

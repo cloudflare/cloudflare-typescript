@@ -8,12 +8,12 @@ import * as IPsAPI from 'cloudflare/resources/intel/ips';
 import * as MiscategorizationsAPI from 'cloudflare/resources/intel/miscategorizations';
 import * as SinkholesAPI from 'cloudflare/resources/intel/sinkholes';
 import * as WhoisAPI from 'cloudflare/resources/intel/whois';
-import * as AsnAPI from 'cloudflare/resources/intel/asn/asn';
+import * as ASNAPI from 'cloudflare/resources/intel/asn/asn';
 import * as DomainsAPI from 'cloudflare/resources/intel/domains/domains';
 import * as IndicatorFeedsAPI from 'cloudflare/resources/intel/indicator-feeds/indicator-feeds';
 
 export class Intel extends APIResource {
-  asn: AsnAPI.Asn = new AsnAPI.Asn(this._client);
+  asn: ASNAPI.ASN = new ASNAPI.ASN(this._client);
   dns: DNSAPI.DNS = new DNSAPI.DNS(this._client);
   domains: DomainsAPI.Domains = new DomainsAPI.Domains(this._client);
   domainHistories: DomainHistoriesAPI.DomainHistories = new DomainHistoriesAPI.DomainHistories(this._client);
@@ -28,8 +28,8 @@ export class Intel extends APIResource {
 }
 
 export namespace Intel {
-  export import Asn = AsnAPI.Asn;
-  export import AsnGetResponse = AsnAPI.AsnGetResponse;
+  export import ASN = ASNAPI.ASN;
+  export import ASNGetResponse = ASNAPI.ASNGetResponse;
   export import DNS = DNSAPI.DNS;
   export import DNSGetResponse = DNSAPI.DNSGetResponse;
   export import DNSGetParams = DNSAPI.DNSGetParams;

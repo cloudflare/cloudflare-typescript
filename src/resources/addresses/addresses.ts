@@ -2,12 +2,12 @@
 
 import { APIResource } from 'cloudflare/resource';
 import * as AddressMapsAPI from 'cloudflare/resources/addresses/address-maps/address-maps';
-import * as LoaDocumentsAPI from 'cloudflare/resources/addresses/loa-documents/loa-documents';
+import * as LOADocumentsAPI from 'cloudflare/resources/addresses/loa-documents/loa-documents';
 import * as PrefixesAPI from 'cloudflare/resources/addresses/prefixes/prefixes';
 
 export class Addresses extends APIResource {
   addressMaps: AddressMapsAPI.AddressMaps = new AddressMapsAPI.AddressMaps(this._client);
-  loaDocuments: LoaDocumentsAPI.LoaDocuments = new LoaDocumentsAPI.LoaDocuments(this._client);
+  loaDocuments: LOADocumentsAPI.LOADocuments = new LOADocumentsAPI.LOADocuments(this._client);
   prefixes: PrefixesAPI.Prefixes = new PrefixesAPI.Prefixes(this._client);
 }
 
@@ -20,9 +20,9 @@ export namespace Addresses {
   export import AddressMapGetResponse = AddressMapsAPI.AddressMapGetResponse;
   export import AddressMapCreateParams = AddressMapsAPI.AddressMapCreateParams;
   export import AddressMapEditParams = AddressMapsAPI.AddressMapEditParams;
-  export import LoaDocuments = LoaDocumentsAPI.LoaDocuments;
-  export import LoaDocumentCreateResponse = LoaDocumentsAPI.LoaDocumentCreateResponse;
-  export import LoaDocumentCreateParams = LoaDocumentsAPI.LoaDocumentCreateParams;
+  export import LOADocuments = LOADocumentsAPI.LOADocuments;
+  export import LOADocumentCreateResponse = LOADocumentsAPI.LOADocumentCreateResponse;
+  export import LOADocumentCreateParams = LOADocumentsAPI.LOADocumentCreateParams;
   export import Prefixes = PrefixesAPI.Prefixes;
   export import PrefixCreateResponse = PrefixesAPI.PrefixCreateResponse;
   export import PrefixListResponse = PrefixesAPI.PrefixListResponse;

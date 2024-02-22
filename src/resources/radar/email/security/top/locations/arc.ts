@@ -3,23 +3,23 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
-import * as ArcAPI from 'cloudflare/resources/radar/email/security/top/locations/arc';
+import * as ARCAPI from 'cloudflare/resources/radar/email/security/top/locations/arc';
 
-export class Arc extends APIResource {
+export class ARC extends APIResource {
   /**
    * Get the locations, by emails ARC validation.
    */
   get(
     arc: 'PASS' | 'NONE' | 'FAIL',
-    query?: ArcGetParams,
+    query?: ARCGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ArcGetResponse>;
-  get(arc: 'PASS' | 'NONE' | 'FAIL', options?: Core.RequestOptions): Core.APIPromise<ArcGetResponse>;
+  ): Core.APIPromise<ARCGetResponse>;
+  get(arc: 'PASS' | 'NONE' | 'FAIL', options?: Core.RequestOptions): Core.APIPromise<ARCGetResponse>;
   get(
     arc: 'PASS' | 'NONE' | 'FAIL',
-    query: ArcGetParams | Core.RequestOptions = {},
+    query: ARCGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ArcGetResponse> {
+  ): Core.APIPromise<ARCGetResponse> {
     if (isRequestOptions(query)) {
       return this.get(arc, {}, query);
     }
@@ -27,18 +27,18 @@ export class Arc extends APIResource {
       this._client.get(`/radar/email/security/top/locations/arc/${arc}`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: ArcGetResponse }>
+      }) as Core.APIPromise<{ result: ARCGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface ArcGetResponse {
-  meta: ArcGetResponse.Meta;
+export interface ARCGetResponse {
+  meta: ARCGetResponse.Meta;
 
-  top_0: Array<ArcGetResponse.Top0>;
+  top_0: Array<ARCGetResponse.Top0>;
 }
 
-export namespace ArcGetResponse {
+export namespace ARCGetResponse {
   export interface Meta {
     dateRange: Array<Meta.DateRange>;
 
@@ -94,7 +94,7 @@ export namespace ArcGetResponse {
   }
 }
 
-export interface ArcGetParams {
+export interface ARCGetParams {
   /**
    * Array of comma separated list of ASNs, start with `-` to exclude from results.
    * For example, `-174, 3356` excludes results from AS174, but includes results from
@@ -173,7 +173,7 @@ export interface ArcGetParams {
   spf?: Array<'PASS' | 'NONE' | 'FAIL'>;
 }
 
-export namespace Arc {
-  export import ArcGetResponse = ArcAPI.ArcGetResponse;
-  export import ArcGetParams = ArcAPI.ArcGetParams;
+export namespace ARC {
+  export import ARCGetResponse = ARCAPI.ARCGetResponse;
+  export import ARCGetParams = ARCAPI.ARCGetParams;
 }

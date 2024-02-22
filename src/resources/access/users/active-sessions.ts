@@ -106,7 +106,7 @@ export interface ActiveSessionGetResponse {
 
   isActive?: boolean;
 
-  mtls_auth?: ActiveSessionGetResponse.MtlsAuth;
+  mtls_auth?: ActiveSessionGetResponse.MTLSAuth;
 
   service_token_id?: string;
 
@@ -160,7 +160,7 @@ export namespace ActiveSessionGetResponse {
     type?: string;
   }
 
-  export interface MtlsAuth {
+  export interface MTLSAuth {
     auth_status?: string;
 
     cert_issuer_dn?: string;

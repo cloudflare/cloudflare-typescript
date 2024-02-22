@@ -4,17 +4,17 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as LocationsAPI from 'cloudflare/resources/radar/email/security/top/locations/locations';
-import * as ArcAPI from 'cloudflare/resources/radar/email/security/top/locations/arc';
+import * as ARCAPI from 'cloudflare/resources/radar/email/security/top/locations/arc';
 import * as DKIMAPI from 'cloudflare/resources/radar/email/security/top/locations/dkim';
-import * as DmarcAPI from 'cloudflare/resources/radar/email/security/top/locations/dmarc';
+import * as DMARCAPI from 'cloudflare/resources/radar/email/security/top/locations/dmarc';
 import * as MaliciousAPI from 'cloudflare/resources/radar/email/security/top/locations/malicious';
 import * as SpamAPI from 'cloudflare/resources/radar/email/security/top/locations/spam';
 import * as SPFAPI from 'cloudflare/resources/radar/email/security/top/locations/spf';
 
 export class Locations extends APIResource {
-  arc: ArcAPI.Arc = new ArcAPI.Arc(this._client);
+  arc: ARCAPI.ARC = new ARCAPI.ARC(this._client);
   dkim: DKIMAPI.DKIM = new DKIMAPI.DKIM(this._client);
-  dmarc: DmarcAPI.Dmarc = new DmarcAPI.Dmarc(this._client);
+  dmarc: DMARCAPI.DMARC = new DMARCAPI.DMARC(this._client);
   malicious: MaliciousAPI.Malicious = new MaliciousAPI.Malicious(this._client);
   spam: SpamAPI.Spam = new SpamAPI.Spam(this._client);
   spf: SPFAPI.SPF = new SPFAPI.SPF(this._client);
@@ -189,15 +189,15 @@ export interface LocationGetParams {
 export namespace Locations {
   export import LocationGetResponse = LocationsAPI.LocationGetResponse;
   export import LocationGetParams = LocationsAPI.LocationGetParams;
-  export import Arc = ArcAPI.Arc;
-  export import ArcGetResponse = ArcAPI.ArcGetResponse;
-  export import ArcGetParams = ArcAPI.ArcGetParams;
+  export import ARC = ARCAPI.ARC;
+  export import ARCGetResponse = ARCAPI.ARCGetResponse;
+  export import ARCGetParams = ARCAPI.ARCGetParams;
   export import DKIM = DKIMAPI.DKIM;
   export import DKIMGetResponse = DKIMAPI.DKIMGetResponse;
   export import DKIMGetParams = DKIMAPI.DKIMGetParams;
-  export import Dmarc = DmarcAPI.Dmarc;
-  export import DmarcGetResponse = DmarcAPI.DmarcGetResponse;
-  export import DmarcGetParams = DmarcAPI.DmarcGetParams;
+  export import DMARC = DMARCAPI.DMARC;
+  export import DMARCGetResponse = DMARCAPI.DMARCGetResponse;
+  export import DMARCGetParams = DMARCAPI.DMARCGetParams;
   export import Malicious = MaliciousAPI.Malicious;
   export import MaliciousGetResponse = MaliciousAPI.MaliciousGetResponse;
   export import MaliciousGetParams = MaliciousAPI.MaliciousGetParams;

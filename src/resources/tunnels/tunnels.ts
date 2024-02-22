@@ -167,7 +167,7 @@ export namespace TunnelCreateResponse {
  */
 export type TunnelListResponse =
   | TunnelListResponse.TunnelCfdTunnel
-  | TunnelListResponse.TunnelWarpConnectorTunnel;
+  | TunnelListResponse.TunnelWARPConnectorTunnel;
 
 export namespace TunnelListResponse {
   /**
@@ -292,7 +292,7 @@ export namespace TunnelListResponse {
   /**
    * A Warp Connector Tunnel that connects your origin to Cloudflare's edge.
    */
-  export interface TunnelWarpConnectorTunnel {
+  export interface TunnelWARPConnectorTunnel {
     /**
      * UUID of the tunnel.
      */
@@ -306,7 +306,7 @@ export namespace TunnelListResponse {
     /**
      * The Cloudflare Tunnel connections between your origin and Cloudflare's edge.
      */
-    connections?: Array<TunnelWarpConnectorTunnel.Connection>;
+    connections?: Array<TunnelWARPConnectorTunnel.Connection>;
 
     /**
      * Timestamp of when the tunnel established at least one connection to Cloudflare's
@@ -355,7 +355,7 @@ export namespace TunnelListResponse {
     tun_type?: 'cfd_tunnel' | 'warp_connector' | 'ip_sec' | 'gre' | 'cni';
   }
 
-  export namespace TunnelWarpConnectorTunnel {
+  export namespace TunnelWARPConnectorTunnel {
     export interface Connection {
       /**
        * UUID of the Cloudflare Tunnel connection.
@@ -458,7 +458,7 @@ export namespace TunnelDeleteResponse {
  */
 export type TunnelEditResponse =
   | TunnelEditResponse.TunnelCfdTunnel
-  | TunnelEditResponse.TunnelWarpConnectorTunnel;
+  | TunnelEditResponse.TunnelWARPConnectorTunnel;
 
 export namespace TunnelEditResponse {
   /**
@@ -583,7 +583,7 @@ export namespace TunnelEditResponse {
   /**
    * A Warp Connector Tunnel that connects your origin to Cloudflare's edge.
    */
-  export interface TunnelWarpConnectorTunnel {
+  export interface TunnelWARPConnectorTunnel {
     /**
      * UUID of the tunnel.
      */
@@ -597,7 +597,7 @@ export namespace TunnelEditResponse {
     /**
      * The Cloudflare Tunnel connections between your origin and Cloudflare's edge.
      */
-    connections?: Array<TunnelWarpConnectorTunnel.Connection>;
+    connections?: Array<TunnelWARPConnectorTunnel.Connection>;
 
     /**
      * Timestamp of when the tunnel established at least one connection to Cloudflare's
@@ -646,7 +646,7 @@ export namespace TunnelEditResponse {
     tun_type?: 'cfd_tunnel' | 'warp_connector' | 'ip_sec' | 'gre' | 'cni';
   }
 
-  export namespace TunnelWarpConnectorTunnel {
+  export namespace TunnelWARPConnectorTunnel {
     export interface Connection {
       /**
        * UUID of the Cloudflare Tunnel connection.

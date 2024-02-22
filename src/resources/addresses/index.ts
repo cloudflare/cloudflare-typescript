@@ -11,7 +11,7 @@ export {
   AddressMaps,
 } from './address-maps/index';
 export { Addresses } from './addresses';
-export { LoaDocumentCreateResponse, LoaDocumentCreateParams, LoaDocuments } from './loa-documents/index';
+export { LOADocumentCreateResponse, LOADocumentCreateParams, LOADocuments } from './loa-documents/index';
 export {
   PrefixCreateResponse,
   PrefixListResponse,

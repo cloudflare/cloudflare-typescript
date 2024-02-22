@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless.
 
-export { AsnGetResponse, Asn } from './asn/index';
+export { ASNGetResponse, ASN } from './asn/index';
 export { DNSGetResponse, DNSGetParams, DNS } from './dns';
 export { DomainGetResponse, DomainGetParams, Domains } from './domains/index';
 export { DomainHistoryListResponse, DomainHistoryListParams, DomainHistories } from './domain-histories';

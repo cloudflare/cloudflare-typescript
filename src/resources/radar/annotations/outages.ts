@@ -58,7 +58,7 @@ export namespace OutageGetResponse {
 
     asns: Array<number>;
 
-    asnsDetails: Array<Annotation.AsnsDetail>;
+    asnsDetails: Array<Annotation.ASNsDetail>;
 
     dataSource: string;
 
@@ -82,15 +82,15 @@ export namespace OutageGetResponse {
   }
 
   export namespace Annotation {
-    export interface AsnsDetail {
+    export interface ASNsDetail {
       asn: string;
 
       name: string;
 
-      locations?: AsnsDetail.Locations;
+      locations?: ASNsDetail.Locations;
     }
 
-    export namespace AsnsDetail {
+    export namespace ASNsDetail {
       export interface Locations {
         code: string;
 

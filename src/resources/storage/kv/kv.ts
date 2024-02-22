@@ -3,11 +3,11 @@
 import { APIResource } from 'cloudflare/resource';
 import * as NamespacesAPI from 'cloudflare/resources/storage/kv/namespaces/namespaces';
 
-export class Kv extends APIResource {
+export class KV extends APIResource {
   namespaces: NamespacesAPI.Namespaces = new NamespacesAPI.Namespaces(this._client);
 }
 
-export namespace Kv {
+export namespace KV {
   export import Namespaces = NamespacesAPI.Namespaces;
   export import NamespaceCreateResponse = NamespacesAPI.NamespaceCreateResponse;
   export import NamespaceUpdateResponse = NamespacesAPI.NamespaceUpdateResponse;

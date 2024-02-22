@@ -1,5 +1,6 @@
 // File generated from our OpenAPI spec by Stainless.
 
+export { RUM } from './rum';
 export {
   RuleCreateResponse,
   RuleUpdateResponse,
@@ -9,7 +10,6 @@ export {
   RuleUpdateParams,
   Rules,
 } from './rules';
-export { Rum } from './rum';
 export {
   SiteInfoCreateResponse,
   SiteInfoUpdateResponse,

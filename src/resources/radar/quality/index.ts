@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
-  IqiSummaryResponse,
-  IqiTimeseriesGroupsResponse,
-  IqiSummaryParams,
-  IqiTimeseriesGroupsParams,
-  Iqi,
+  IQISummaryResponse,
+  IQITimeseriesGroupsResponse,
+  IQISummaryParams,
+  IQITimeseriesGroupsParams,
+  IQI,
 } from './iqi';
 export { Quality } from './quality';
 export {

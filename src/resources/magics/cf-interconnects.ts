@@ -90,7 +90,7 @@ export namespace CfInterconnectListResponse {
     /**
      * The configuration specific to GRE interconnects.
      */
-    gre?: Interconnect.Gre;
+    gre?: Interconnect.GRE;
 
     health_check?: Interconnect.HealthCheck;
 
@@ -122,7 +122,7 @@ export namespace CfInterconnectListResponse {
     /**
      * The configuration specific to GRE interconnects.
      */
-    export interface Gre {
+    export interface GRE {
       /**
        * The IP address assigned to the Cloudflare side of the GRE tunnel created as part
        * of the Interconnect.
@@ -169,7 +169,7 @@ export interface CfInterconnectUpdateParams {
   /**
    * The configuration specific to GRE interconnects.
    */
-  gre?: CfInterconnectUpdateParams.Gre;
+  gre?: CfInterconnectUpdateParams.GRE;
 
   health_check?: CfInterconnectUpdateParams.HealthCheck;
 
@@ -191,7 +191,7 @@ export namespace CfInterconnectUpdateParams {
   /**
    * The configuration specific to GRE interconnects.
    */
-  export interface Gre {
+  export interface GRE {
     /**
      * The IP address assigned to the Cloudflare side of the GRE tunnel created as part
      * of the Interconnect.

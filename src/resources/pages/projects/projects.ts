@@ -517,7 +517,7 @@ export namespace ProjectGetResponse {
       /**
        * KV namespaces used for Pages Functions.
        */
-      kv_namespaces?: Preview.KvNamespaces;
+      kv_namespaces?: Preview.KVNamespaces;
 
       /**
        * Placement setting used for Pages Functions.
@@ -656,18 +656,18 @@ export namespace ProjectGetResponse {
       /**
        * KV namespaces used for Pages Functions.
        */
-      export interface KvNamespaces {
+      export interface KVNamespaces {
         /**
          * KV binding.
          */
-        KV_BINDING?: KvNamespaces.KvBinding;
+        KV_BINDING?: KVNamespaces.KVBinding;
       }
 
-      export namespace KvNamespaces {
+      export namespace KVNamespaces {
         /**
          * KV binding.
          */
-        export interface KvBinding {
+        export interface KVBinding {
           /**
            * ID of the KV namespace.
            */
@@ -799,7 +799,7 @@ export namespace ProjectGetResponse {
       /**
        * KV namespaces used for Pages Functions.
        */
-      kv_namespaces?: Production.KvNamespaces;
+      kv_namespaces?: Production.KVNamespaces;
 
       /**
        * Placement setting used for Pages Functions.
@@ -938,18 +938,18 @@ export namespace ProjectGetResponse {
       /**
        * KV namespaces used for Pages Functions.
        */
-      export interface KvNamespaces {
+      export interface KVNamespaces {
         /**
          * KV binding.
          */
-        KV_BINDING?: KvNamespaces.KvBinding;
+        KV_BINDING?: KVNamespaces.KVBinding;
       }
 
-      export namespace KvNamespaces {
+      export namespace KVNamespaces {
         /**
          * KV binding.
          */
-        export interface KvBinding {
+        export interface KVBinding {
           /**
            * ID of the KV namespace.
            */
@@ -1302,7 +1302,7 @@ export namespace ProjectCreateParams {
       /**
        * KV namespaces used for Pages Functions.
        */
-      kv_namespaces?: Preview.KvNamespaces;
+      kv_namespaces?: Preview.KVNamespaces;
 
       /**
        * Placement setting used for Pages Functions.
@@ -1441,18 +1441,18 @@ export namespace ProjectCreateParams {
       /**
        * KV namespaces used for Pages Functions.
        */
-      export interface KvNamespaces {
+      export interface KVNamespaces {
         /**
          * KV binding.
          */
-        KV_BINDING?: KvNamespaces.KvBinding;
+        KV_BINDING?: KVNamespaces.KVBinding;
       }
 
-      export namespace KvNamespaces {
+      export namespace KVNamespaces {
         /**
          * KV binding.
          */
-        export interface KvBinding {
+        export interface KVBinding {
           /**
            * ID of the KV namespace.
            */
@@ -1584,7 +1584,7 @@ export namespace ProjectCreateParams {
       /**
        * KV namespaces used for Pages Functions.
        */
-      kv_namespaces?: Production.KvNamespaces;
+      kv_namespaces?: Production.KVNamespaces;
 
       /**
        * Placement setting used for Pages Functions.
@@ -1723,18 +1723,18 @@ export namespace ProjectCreateParams {
       /**
        * KV namespaces used for Pages Functions.
        */
-      export interface KvNamespaces {
+      export interface KVNamespaces {
         /**
          * KV binding.
          */
-        KV_BINDING?: KvNamespaces.KvBinding;
+        KV_BINDING?: KVNamespaces.KVBinding;
       }
 
-      export namespace KvNamespaces {
+      export namespace KVNamespaces {
         /**
          * KV binding.
          */
-        export interface KvBinding {
+        export interface KVBinding {
           /**
            * ID of the KV namespace.
            */

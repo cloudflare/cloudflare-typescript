@@ -87,13 +87,13 @@ export namespace AseGetResponse {
 }
 
 export interface AsePrefixesResponse {
-  asns: Array<AsePrefixesResponse.Asn>;
+  asns: Array<AsePrefixesResponse.ASN>;
 
   meta: AsePrefixesResponse.Meta;
 }
 
 export namespace AsePrefixesResponse {
-  export interface Asn {
+  export interface ASN {
     asn: number;
 
     country: string;

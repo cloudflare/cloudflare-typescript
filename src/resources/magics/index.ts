@@ -8,24 +8,24 @@ export {
   CfInterconnects,
 } from './cf-interconnects';
 export {
-  GreTunnelCreateResponse,
-  GreTunnelUpdateResponse,
-  GreTunnelListResponse,
-  GreTunnelDeleteResponse,
-  GreTunnelGetResponse,
-  GreTunnelCreateParams,
-  GreTunnelUpdateParams,
-  GreTunnels,
+  GRETunnelCreateResponse,
+  GRETunnelUpdateResponse,
+  GRETunnelListResponse,
+  GRETunnelDeleteResponse,
+  GRETunnelGetResponse,
+  GRETunnelCreateParams,
+  GRETunnelUpdateParams,
+  GRETunnels,
 } from './gre-tunnels';
 export {
-  IpsecTunnelCreateResponse,
-  IpsecTunnelUpdateResponse,
-  IpsecTunnelListResponse,
-  IpsecTunnelDeleteResponse,
-  IpsecTunnelGetResponse,
-  IpsecTunnelCreateParams,
-  IpsecTunnelUpdateParams,
-  IpsecTunnels,
+  IPSECTunnelCreateResponse,
+  IPSECTunnelUpdateResponse,
+  IPSECTunnelListResponse,
+  IPSECTunnelDeleteResponse,
+  IPSECTunnelGetResponse,
+  IPSECTunnelCreateParams,
+  IPSECTunnelUpdateParams,
+  IPSECTunnels,
 } from './ipsec-tunnels/index';
 export { Magics } from './magics';
 export {
