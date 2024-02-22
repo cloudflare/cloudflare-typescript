@@ -44,12 +44,12 @@ export {
 } from './peers';
 export { SecondaryDNS } from './secondary-dns';
 export {
-  TsigCreateResponse,
-  TsigUpdateResponse,
-  TsigListResponse,
-  TsigDeleteResponse,
-  TsigGetResponse,
-  TsigCreateParams,
-  TsigUpdateParams,
-  Tsigs,
+  TSIGCreateResponse,
+  TSIGUpdateResponse,
+  TSIGListResponse,
+  TSIGDeleteResponse,
+  TSIGGetResponse,
+  TSIGCreateParams,
+  TSIGUpdateParams,
+  TSIGs,
 } from './tsigs';

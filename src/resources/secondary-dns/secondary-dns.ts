@@ -5,7 +5,7 @@ import * as ACLsAPI from 'cloudflare/resources/secondary-dns/acls';
 import * as ForceAxfrsAPI from 'cloudflare/resources/secondary-dns/force-axfrs';
 import * as IncomingAPI from 'cloudflare/resources/secondary-dns/incoming';
 import * as PeersAPI from 'cloudflare/resources/secondary-dns/peers';
-import * as TsigsAPI from 'cloudflare/resources/secondary-dns/tsigs';
+import * as TSIGsAPI from 'cloudflare/resources/secondary-dns/tsigs';
 import * as OutgoingAPI from 'cloudflare/resources/secondary-dns/outgoing/outgoing';
 
 export class SecondaryDNS extends APIResource {
@@ -14,7 +14,7 @@ export class SecondaryDNS extends APIResource {
   outgoing: OutgoingAPI.Outgoing = new OutgoingAPI.Outgoing(this._client);
   acls: ACLsAPI.ACLs = new ACLsAPI.ACLs(this._client);
   peers: PeersAPI.Peers = new PeersAPI.Peers(this._client);
-  tsigs: TsigsAPI.Tsigs = new TsigsAPI.Tsigs(this._client);
+  tsigs: TSIGsAPI.TSIGs = new TSIGsAPI.TSIGs(this._client);
 }
 
 export namespace SecondaryDNS {
@@ -53,12 +53,12 @@ export namespace SecondaryDNS {
   export import PeerGetResponse = PeersAPI.PeerGetResponse;
   export import PeerCreateParams = PeersAPI.PeerCreateParams;
   export import PeerUpdateParams = PeersAPI.PeerUpdateParams;
-  export import Tsigs = TsigsAPI.Tsigs;
-  export import TsigCreateResponse = TsigsAPI.TsigCreateResponse;
-  export import TsigUpdateResponse = TsigsAPI.TsigUpdateResponse;
-  export import TsigListResponse = TsigsAPI.TsigListResponse;
-  export import TsigDeleteResponse = TsigsAPI.TsigDeleteResponse;
-  export import TsigGetResponse = TsigsAPI.TsigGetResponse;
-  export import TsigCreateParams = TsigsAPI.TsigCreateParams;
-  export import TsigUpdateParams = TsigsAPI.TsigUpdateParams;
+  export import TSIGs = TSIGsAPI.TSIGs;
+  export import TSIGCreateResponse = TSIGsAPI.TSIGCreateResponse;
+  export import TSIGUpdateResponse = TSIGsAPI.TSIGUpdateResponse;
+  export import TSIGListResponse = TSIGsAPI.TSIGListResponse;
+  export import TSIGDeleteResponse = TSIGsAPI.TSIGDeleteResponse;
+  export import TSIGGetResponse = TSIGsAPI.TSIGGetResponse;
+  export import TSIGCreateParams = TSIGsAPI.TSIGCreateParams;
+  export import TSIGUpdateParams = TSIGsAPI.TSIGUpdateParams;
 }

@@ -53,10 +53,10 @@ import * as TrueClientIPHeaderAPI from 'cloudflare/resources/settings/true-clien
 import * as WAFAPI from 'cloudflare/resources/settings/waf';
 import * as WebpAPI from 'cloudflare/resources/settings/webp';
 import * as WebsocketAPI from 'cloudflare/resources/settings/websocket';
-import * as ZeroRttAPI from 'cloudflare/resources/settings/zero-rtt';
+import * as ZeroRTTAPI from 'cloudflare/resources/settings/zero-rtt';
 
 export class Settings extends APIResource {
-  zeroRtt: ZeroRttAPI.ZeroRtt = new ZeroRttAPI.ZeroRtt(this._client);
+  zeroRTT: ZeroRTTAPI.ZeroRTT = new ZeroRTTAPI.ZeroRTT(this._client);
   advancedDDOS: AdvancedDDOSAPI.AdvancedDDOS = new AdvancedDDOSAPI.AdvancedDDOS(this._client);
   alwaysOnline: AlwaysOnlineAPI.AlwaysOnline = new AlwaysOnlineAPI.AlwaysOnline(this._client);
   alwaysUseHTTPS: AlwaysUseHTTPSAPI.AlwaysUseHTTPS = new AlwaysUseHTTPSAPI.AlwaysUseHTTPS(this._client);
@@ -4952,10 +4952,10 @@ export namespace Settings {
   export import SettingListResponse = SettingsAPI.SettingListResponse;
   export import SettingEditResponse = SettingsAPI.SettingEditResponse;
   export import SettingEditParams = SettingsAPI.SettingEditParams;
-  export import ZeroRtt = ZeroRttAPI.ZeroRtt;
-  export import ZeroRttEditResponse = ZeroRttAPI.ZeroRttEditResponse;
-  export import ZeroRttGetResponse = ZeroRttAPI.ZeroRttGetResponse;
-  export import ZeroRttEditParams = ZeroRttAPI.ZeroRttEditParams;
+  export import ZeroRTT = ZeroRTTAPI.ZeroRTT;
+  export import ZeroRTTEditResponse = ZeroRTTAPI.ZeroRTTEditResponse;
+  export import ZeroRTTGetResponse = ZeroRTTAPI.ZeroRTTGetResponse;
+  export import ZeroRTTEditParams = ZeroRTTAPI.ZeroRTTEditParams;
   export import AdvancedDDOS = AdvancedDDOSAPI.AdvancedDDOS;
   export import AdvancedDDOSGetResponse = AdvancedDDOSAPI.AdvancedDDOSGetResponse;
   export import AlwaysOnline = AlwaysOnlineAPI.AlwaysOnline;

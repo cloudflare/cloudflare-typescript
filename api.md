@@ -502,21 +502,21 @@ Methods:
 - <code title="get /{account_or_zone}/{account_or_zone_id}/access/apps/{app_id}">client.access.applications.<a href="./src/resources/access/applications/applications.ts">get</a>(appId, { ...params }) -> ApplicationGetResponse</code>
 - <code title="post /{account_or_zone}/{account_or_zone_id}/access/apps/{app_id}/revoke_tokens">client.access.applications.<a href="./src/resources/access/applications/applications.ts">revokeTokens</a>(appId, { ...params }) -> ApplicationRevokeTokensResponse | null</code>
 
-### Cas
+### CAs
 
 Types:
 
-- <code><a href="./src/resources/access/applications/cas.ts">CaCreateResponse</a></code>
-- <code><a href="./src/resources/access/applications/cas.ts">CaListResponse</a></code>
-- <code><a href="./src/resources/access/applications/cas.ts">CaDeleteResponse</a></code>
-- <code><a href="./src/resources/access/applications/cas.ts">CaGetResponse</a></code>
+- <code><a href="./src/resources/access/applications/cas.ts">CACreateResponse</a></code>
+- <code><a href="./src/resources/access/applications/cas.ts">CAListResponse</a></code>
+- <code><a href="./src/resources/access/applications/cas.ts">CADeleteResponse</a></code>
+- <code><a href="./src/resources/access/applications/cas.ts">CAGetResponse</a></code>
 
 Methods:
 
-- <code title="post /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid}/ca">client.access.applications.cas.<a href="./src/resources/access/applications/cas.ts">create</a>(uuid, { ...params }) -> CaCreateResponse</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/access/apps/ca">client.access.applications.cas.<a href="./src/resources/access/applications/cas.ts">list</a>({ ...params }) -> CaListResponse | null</code>
-- <code title="delete /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid}/ca">client.access.applications.cas.<a href="./src/resources/access/applications/cas.ts">delete</a>(uuid, { ...params }) -> CaDeleteResponse</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid}/ca">client.access.applications.cas.<a href="./src/resources/access/applications/cas.ts">get</a>(uuid, { ...params }) -> CaGetResponse</code>
+- <code title="post /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid}/ca">client.access.applications.cas.<a href="./src/resources/access/applications/cas.ts">create</a>(uuid, { ...params }) -> CACreateResponse</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/access/apps/ca">client.access.applications.cas.<a href="./src/resources/access/applications/cas.ts">list</a>({ ...params }) -> CAListResponse | null</code>
+- <code title="delete /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid}/ca">client.access.applications.cas.<a href="./src/resources/access/applications/cas.ts">delete</a>(uuid, { ...params }) -> CADeleteResponse</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid}/ca">client.access.applications.cas.<a href="./src/resources/access/applications/cas.ts">get</a>(uuid, { ...params }) -> CAGetResponse</code>
 
 ### UserPolicyChecks
 
@@ -1342,23 +1342,23 @@ Methods:
 - <code title="patch /{account_or_zone}/{account_or_zone_id}/firewall/access_rules/rules/{identifier}">client.firewalls.accessRules.<a href="./src/resources/firewalls/access-rules.ts">edit</a>(identifier, { ...params }) -> AccessRuleEditResponse | null</code>
 - <code title="get /{account_or_zone}/{account_or_zone_id}/firewall/access_rules/rules/{identifier}">client.firewalls.accessRules.<a href="./src/resources/firewalls/access-rules.ts">get</a>(identifier, { ...params }) -> AccessRuleGetResponse | null</code>
 
-## UaRules
+## UARules
 
 Types:
 
-- <code><a href="./src/resources/firewalls/ua-rules.ts">UaRuleCreateResponse</a></code>
-- <code><a href="./src/resources/firewalls/ua-rules.ts">UaRuleUpdateResponse</a></code>
-- <code><a href="./src/resources/firewalls/ua-rules.ts">UaRuleListResponse</a></code>
-- <code><a href="./src/resources/firewalls/ua-rules.ts">UaRuleDeleteResponse</a></code>
-- <code><a href="./src/resources/firewalls/ua-rules.ts">UaRuleGetResponse</a></code>
+- <code><a href="./src/resources/firewalls/ua-rules.ts">UARuleCreateResponse</a></code>
+- <code><a href="./src/resources/firewalls/ua-rules.ts">UARuleUpdateResponse</a></code>
+- <code><a href="./src/resources/firewalls/ua-rules.ts">UARuleListResponse</a></code>
+- <code><a href="./src/resources/firewalls/ua-rules.ts">UARuleDeleteResponse</a></code>
+- <code><a href="./src/resources/firewalls/ua-rules.ts">UARuleGetResponse</a></code>
 
 Methods:
 
-- <code title="post /zones/{zone_identifier}/firewall/ua_rules">client.firewalls.uaRules.<a href="./src/resources/firewalls/ua-rules.ts">create</a>(zoneIdentifier, { ...params }) -> UaRuleCreateResponse | null</code>
-- <code title="put /zones/{zone_identifier}/firewall/ua_rules/{id}">client.firewalls.uaRules.<a href="./src/resources/firewalls/ua-rules.ts">update</a>(zoneIdentifier, id, { ...params }) -> UaRuleUpdateResponse | null</code>
-- <code title="get /zones/{zone_identifier}/firewall/ua_rules">client.firewalls.uaRules.<a href="./src/resources/firewalls/ua-rules.ts">list</a>(zoneIdentifier, { ...params }) -> UaRuleListResponsesV4PagePaginationArray</code>
-- <code title="delete /zones/{zone_identifier}/firewall/ua_rules/{id}">client.firewalls.uaRules.<a href="./src/resources/firewalls/ua-rules.ts">delete</a>(zoneIdentifier, id) -> UaRuleDeleteResponse | null</code>
-- <code title="get /zones/{zone_identifier}/firewall/ua_rules/{id}">client.firewalls.uaRules.<a href="./src/resources/firewalls/ua-rules.ts">get</a>(zoneIdentifier, id) -> UaRuleGetResponse | null</code>
+- <code title="post /zones/{zone_identifier}/firewall/ua_rules">client.firewalls.uaRules.<a href="./src/resources/firewalls/ua-rules.ts">create</a>(zoneIdentifier, { ...params }) -> UARuleCreateResponse | null</code>
+- <code title="put /zones/{zone_identifier}/firewall/ua_rules/{id}">client.firewalls.uaRules.<a href="./src/resources/firewalls/ua-rules.ts">update</a>(zoneIdentifier, id, { ...params }) -> UARuleUpdateResponse | null</code>
+- <code title="get /zones/{zone_identifier}/firewall/ua_rules">client.firewalls.uaRules.<a href="./src/resources/firewalls/ua-rules.ts">list</a>(zoneIdentifier, { ...params }) -> UARuleListResponsesV4PagePaginationArray</code>
+- <code title="delete /zones/{zone_identifier}/firewall/ua_rules/{id}">client.firewalls.uaRules.<a href="./src/resources/firewalls/ua-rules.ts">delete</a>(zoneIdentifier, id) -> UARuleDeleteResponse | null</code>
+- <code title="get /zones/{zone_identifier}/firewall/ua_rules/{id}">client.firewalls.uaRules.<a href="./src/resources/firewalls/ua-rules.ts">get</a>(zoneIdentifier, id) -> UARuleGetResponse | null</code>
 
 ## WAF
 
@@ -1810,23 +1810,23 @@ Methods:
 - <code title="delete /accounts/{account_id}/secondary_dns/peers/{peer_id}">client.secondaryDNS.peers.<a href="./src/resources/secondary-dns/peers.ts">delete</a>(accountId, peerId) -> PeerDeleteResponse</code>
 - <code title="get /accounts/{account_id}/secondary_dns/peers/{peer_id}">client.secondaryDNS.peers.<a href="./src/resources/secondary-dns/peers.ts">get</a>(accountId, peerId) -> PeerGetResponse</code>
 
-## Tsigs
+## TSIGs
 
 Types:
 
-- <code><a href="./src/resources/secondary-dns/tsigs.ts">TsigCreateResponse</a></code>
-- <code><a href="./src/resources/secondary-dns/tsigs.ts">TsigUpdateResponse</a></code>
-- <code><a href="./src/resources/secondary-dns/tsigs.ts">TsigListResponse</a></code>
-- <code><a href="./src/resources/secondary-dns/tsigs.ts">TsigDeleteResponse</a></code>
-- <code><a href="./src/resources/secondary-dns/tsigs.ts">TsigGetResponse</a></code>
+- <code><a href="./src/resources/secondary-dns/tsigs.ts">TSIGCreateResponse</a></code>
+- <code><a href="./src/resources/secondary-dns/tsigs.ts">TSIGUpdateResponse</a></code>
+- <code><a href="./src/resources/secondary-dns/tsigs.ts">TSIGListResponse</a></code>
+- <code><a href="./src/resources/secondary-dns/tsigs.ts">TSIGDeleteResponse</a></code>
+- <code><a href="./src/resources/secondary-dns/tsigs.ts">TSIGGetResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/secondary_dns/tsigs">client.secondaryDNS.tsigs.<a href="./src/resources/secondary-dns/tsigs.ts">create</a>(accountId, { ...params }) -> TsigCreateResponse</code>
-- <code title="put /accounts/{account_id}/secondary_dns/tsigs/{tsig_id}">client.secondaryDNS.tsigs.<a href="./src/resources/secondary-dns/tsigs.ts">update</a>(accountId, tsigId, { ...params }) -> TsigUpdateResponse</code>
-- <code title="get /accounts/{account_id}/secondary_dns/tsigs">client.secondaryDNS.tsigs.<a href="./src/resources/secondary-dns/tsigs.ts">list</a>(accountId) -> TsigListResponse | null</code>
-- <code title="delete /accounts/{account_id}/secondary_dns/tsigs/{tsig_id}">client.secondaryDNS.tsigs.<a href="./src/resources/secondary-dns/tsigs.ts">delete</a>(accountId, tsigId) -> TsigDeleteResponse</code>
-- <code title="get /accounts/{account_id}/secondary_dns/tsigs/{tsig_id}">client.secondaryDNS.tsigs.<a href="./src/resources/secondary-dns/tsigs.ts">get</a>(accountId, tsigId) -> TsigGetResponse</code>
+- <code title="post /accounts/{account_id}/secondary_dns/tsigs">client.secondaryDNS.tsigs.<a href="./src/resources/secondary-dns/tsigs.ts">create</a>(accountId, { ...params }) -> TSIGCreateResponse</code>
+- <code title="put /accounts/{account_id}/secondary_dns/tsigs/{tsig_id}">client.secondaryDNS.tsigs.<a href="./src/resources/secondary-dns/tsigs.ts">update</a>(accountId, tsigId, { ...params }) -> TSIGUpdateResponse</code>
+- <code title="get /accounts/{account_id}/secondary_dns/tsigs">client.secondaryDNS.tsigs.<a href="./src/resources/secondary-dns/tsigs.ts">list</a>(accountId) -> TSIGListResponse | null</code>
+- <code title="delete /accounts/{account_id}/secondary_dns/tsigs/{tsig_id}">client.secondaryDNS.tsigs.<a href="./src/resources/secondary-dns/tsigs.ts">delete</a>(accountId, tsigId) -> TSIGDeleteResponse</code>
+- <code title="get /accounts/{account_id}/secondary_dns/tsigs/{tsig_id}">client.secondaryDNS.tsigs.<a href="./src/resources/secondary-dns/tsigs.ts">get</a>(accountId, tsigId) -> TSIGGetResponse</code>
 
 # Settings
 
@@ -1840,17 +1840,17 @@ Methods:
 - <code title="get /zones/{zone_id}/settings">client.settings.<a href="./src/resources/settings/settings.ts">list</a>(zoneId) -> SettingListResponse</code>
 - <code title="patch /zones/{zone_id}/settings">client.settings.<a href="./src/resources/settings/settings.ts">edit</a>(zoneId, { ...params }) -> SettingEditResponse</code>
 
-## ZeroRtt
+## ZeroRTT
 
 Types:
 
-- <code><a href="./src/resources/settings/zero-rtt.ts">ZeroRttEditResponse</a></code>
-- <code><a href="./src/resources/settings/zero-rtt.ts">ZeroRttGetResponse</a></code>
+- <code><a href="./src/resources/settings/zero-rtt.ts">ZeroRTTEditResponse</a></code>
+- <code><a href="./src/resources/settings/zero-rtt.ts">ZeroRTTGetResponse</a></code>
 
 Methods:
 
-- <code title="patch /zones/{zone_id}/settings/0rtt">client.settings.zeroRtt.<a href="./src/resources/settings/zero-rtt.ts">edit</a>(zoneId, { ...params }) -> ZeroRttEditResponse</code>
-- <code title="get /zones/{zone_id}/settings/0rtt">client.settings.zeroRtt.<a href="./src/resources/settings/zero-rtt.ts">get</a>(zoneId) -> ZeroRttGetResponse</code>
+- <code title="patch /zones/{zone_id}/settings/0rtt">client.settings.zeroRTT.<a href="./src/resources/settings/zero-rtt.ts">edit</a>(zoneId, { ...params }) -> ZeroRTTEditResponse</code>
+- <code title="get /zones/{zone_id}/settings/0rtt">client.settings.zeroRTT.<a href="./src/resources/settings/zero-rtt.ts">get</a>(zoneId) -> ZeroRTTGetResponse</code>
 
 ## AdvancedDDOS
 

@@ -3,23 +3,23 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
-import * as UaRulesAPI from 'cloudflare/resources/firewalls/ua-rules';
+import * as UARulesAPI from 'cloudflare/resources/firewalls/ua-rules';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
-export class UaRules extends APIResource {
+export class UARules extends APIResource {
   /**
    * Creates a new User Agent Blocking rule in a zone.
    */
   create(
     zoneIdentifier: string,
-    body: UaRuleCreateParams,
+    body: UARuleCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<UaRuleCreateResponse | null> {
+  ): Core.APIPromise<UARuleCreateResponse | null> {
     return (
       this._client.post(`/zones/${zoneIdentifier}/firewall/ua_rules`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: UaRuleCreateResponse | null }>
+      }) as Core.APIPromise<{ result: UARuleCreateResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -29,14 +29,14 @@ export class UaRules extends APIResource {
   update(
     zoneIdentifier: string,
     id: string,
-    body: UaRuleUpdateParams,
+    body: UARuleUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<UaRuleUpdateResponse | null> {
+  ): Core.APIPromise<UARuleUpdateResponse | null> {
     return (
       this._client.put(`/zones/${zoneIdentifier}/firewall/ua_rules/${id}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: UaRuleUpdateResponse | null }>
+      }) as Core.APIPromise<{ result: UARuleUpdateResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -46,24 +46,24 @@ export class UaRules extends APIResource {
    */
   list(
     zoneIdentifier: string,
-    query?: UaRuleListParams,
+    query?: UARuleListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<UaRuleListResponsesV4PagePaginationArray, UaRuleListResponse>;
+  ): Core.PagePromise<UARuleListResponsesV4PagePaginationArray, UARuleListResponse>;
   list(
     zoneIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<UaRuleListResponsesV4PagePaginationArray, UaRuleListResponse>;
+  ): Core.PagePromise<UARuleListResponsesV4PagePaginationArray, UARuleListResponse>;
   list(
     zoneIdentifier: string,
-    query: UaRuleListParams | Core.RequestOptions = {},
+    query: UARuleListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<UaRuleListResponsesV4PagePaginationArray, UaRuleListResponse> {
+  ): Core.PagePromise<UARuleListResponsesV4PagePaginationArray, UARuleListResponse> {
     if (isRequestOptions(query)) {
       return this.list(zoneIdentifier, {}, query);
     }
     return this._client.getAPIList(
       `/zones/${zoneIdentifier}/firewall/ua_rules`,
-      UaRuleListResponsesV4PagePaginationArray,
+      UARuleListResponsesV4PagePaginationArray,
       { query, ...options },
     );
   }
@@ -75,10 +75,10 @@ export class UaRules extends APIResource {
     zoneIdentifier: string,
     id: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<UaRuleDeleteResponse | null> {
+  ): Core.APIPromise<UARuleDeleteResponse | null> {
     return (
       this._client.delete(`/zones/${zoneIdentifier}/firewall/ua_rules/${id}`, options) as Core.APIPromise<{
-        result: UaRuleDeleteResponse | null;
+        result: UARuleDeleteResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -90,22 +90,22 @@ export class UaRules extends APIResource {
     zoneIdentifier: string,
     id: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<UaRuleGetResponse | null> {
+  ): Core.APIPromise<UARuleGetResponse | null> {
     return (
       this._client.get(`/zones/${zoneIdentifier}/firewall/ua_rules/${id}`, options) as Core.APIPromise<{
-        result: UaRuleGetResponse | null;
+        result: UARuleGetResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class UaRuleListResponsesV4PagePaginationArray extends V4PagePaginationArray<UaRuleListResponse> {}
+export class UARuleListResponsesV4PagePaginationArray extends V4PagePaginationArray<UARuleListResponse> {}
 
-export type UaRuleCreateResponse = unknown | string;
+export type UARuleCreateResponse = unknown | string;
 
-export type UaRuleUpdateResponse = unknown | string;
+export type UARuleUpdateResponse = unknown | string;
 
-export interface UaRuleListResponse {
+export interface UARuleListResponse {
   /**
    * The unique identifier of the User Agent Blocking rule.
    */
@@ -114,7 +114,7 @@ export interface UaRuleListResponse {
   /**
    * The configuration object for the current rule.
    */
-  configuration?: UaRuleListResponse.Configuration;
+  configuration?: UARuleListResponse.Configuration;
 
   /**
    * An informative summary of the rule.
@@ -132,7 +132,7 @@ export interface UaRuleListResponse {
   paused?: boolean;
 }
 
-export namespace UaRuleListResponse {
+export namespace UARuleListResponse {
   /**
    * The configuration object for the current rule.
    */
@@ -151,20 +151,20 @@ export namespace UaRuleListResponse {
   }
 }
 
-export interface UaRuleDeleteResponse {
+export interface UARuleDeleteResponse {
   /**
    * The unique identifier of the User Agent Blocking rule.
    */
   id?: string;
 }
 
-export type UaRuleGetResponse = unknown | string;
+export type UARuleGetResponse = unknown | string;
 
-export type UaRuleCreateParams = unknown;
+export type UARuleCreateParams = unknown;
 
-export type UaRuleUpdateParams = unknown;
+export type UARuleUpdateParams = unknown;
 
-export interface UaRuleListParams extends V4PagePaginationArrayParams {
+export interface UARuleListParams extends V4PagePaginationArrayParams {
   /**
    * A string to search for in the description of existing rules.
    */
@@ -181,14 +181,14 @@ export interface UaRuleListParams extends V4PagePaginationArrayParams {
   ua_search?: string;
 }
 
-export namespace UaRules {
-  export import UaRuleCreateResponse = UaRulesAPI.UaRuleCreateResponse;
-  export import UaRuleUpdateResponse = UaRulesAPI.UaRuleUpdateResponse;
-  export import UaRuleListResponse = UaRulesAPI.UaRuleListResponse;
-  export import UaRuleDeleteResponse = UaRulesAPI.UaRuleDeleteResponse;
-  export import UaRuleGetResponse = UaRulesAPI.UaRuleGetResponse;
-  export import UaRuleListResponsesV4PagePaginationArray = UaRulesAPI.UaRuleListResponsesV4PagePaginationArray;
-  export import UaRuleCreateParams = UaRulesAPI.UaRuleCreateParams;
-  export import UaRuleUpdateParams = UaRulesAPI.UaRuleUpdateParams;
-  export import UaRuleListParams = UaRulesAPI.UaRuleListParams;
+export namespace UARules {
+  export import UARuleCreateResponse = UARulesAPI.UARuleCreateResponse;
+  export import UARuleUpdateResponse = UARulesAPI.UARuleUpdateResponse;
+  export import UARuleListResponse = UARulesAPI.UARuleListResponse;
+  export import UARuleDeleteResponse = UARulesAPI.UARuleDeleteResponse;
+  export import UARuleGetResponse = UARulesAPI.UARuleGetResponse;
+  export import UARuleListResponsesV4PagePaginationArray = UARulesAPI.UARuleListResponsesV4PagePaginationArray;
+  export import UARuleCreateParams = UARulesAPI.UARuleCreateParams;
+  export import UARuleUpdateParams = UARulesAPI.UARuleUpdateParams;
+  export import UARuleListParams = UARulesAPI.UARuleListParams;
 }

@@ -221,4 +221,4 @@ export {
 export { WAFEditResponse, WAFGetResponse, WAFEditParams, WAF } from './waf';
 export { WebpEditResponse, WebpGetResponse, WebpEditParams, Webp } from './webp';
 export { WebsocketEditResponse, WebsocketGetResponse, WebsocketEditParams, Websocket } from './websocket';
-export { ZeroRttEditResponse, ZeroRttGetResponse, ZeroRttEditParams, ZeroRtt } from './zero-rtt';
+export { ZeroRTTEditResponse, ZeroRTTGetResponse, ZeroRTTEditParams, ZeroRTT } from './zero-rtt';

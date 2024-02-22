@@ -16,15 +16,15 @@ export {
   Applications,
 } from './applications';
 export {
-  CaCreateResponse,
-  CaListResponse,
-  CaDeleteResponse,
-  CaGetResponse,
-  CaCreateParams,
-  CaListParams,
-  CaDeleteParams,
-  CaGetParams,
-  Cas,
+  CACreateResponse,
+  CAListResponse,
+  CADeleteResponse,
+  CAGetResponse,
+  CACreateParams,
+  CAListParams,
+  CADeleteParams,
+  CAGetParams,
+  CAs,
 } from './cas';
 export {
   PolicyCreateResponse,

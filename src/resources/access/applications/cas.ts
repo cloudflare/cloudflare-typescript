@@ -2,21 +2,21 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as CasAPI from 'cloudflare/resources/access/applications/cas';
+import * as CAsAPI from 'cloudflare/resources/access/applications/cas';
 
-export class Cas extends APIResource {
+export class CAs extends APIResource {
   /**
    * Generates a new short-lived certificate CA and public key.
    */
   create(
     uuid: string,
-    params: CaCreateParams,
+    params: CACreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CaCreateResponse> {
+  ): Core.APIPromise<CACreateResponse> {
     const { account_id, zone_id } = params;
     return (
       this._client.post(`/${account_id}/${zone_id}/access/apps/${uuid}/ca`, options) as Core.APIPromise<{
-        result: CaCreateResponse;
+        result: CACreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -24,11 +24,11 @@ export class Cas extends APIResource {
   /**
    * Lists short-lived certificate CAs and their public keys.
    */
-  list(params: CaListParams, options?: Core.RequestOptions): Core.APIPromise<CaListResponse | null> {
+  list(params: CAListParams, options?: Core.RequestOptions): Core.APIPromise<CAListResponse | null> {
     const { account_id, zone_id } = params;
     return (
       this._client.get(`/${account_id}/${zone_id}/access/apps/ca`, options) as Core.APIPromise<{
-        result: CaListResponse | null;
+        result: CAListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -38,13 +38,13 @@ export class Cas extends APIResource {
    */
   delete(
     uuid: string,
-    params: CaDeleteParams,
+    params: CADeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CaDeleteResponse> {
+  ): Core.APIPromise<CADeleteResponse> {
     const { account_id, zone_id } = params;
     return (
       this._client.delete(`/${account_id}/${zone_id}/access/apps/${uuid}/ca`, options) as Core.APIPromise<{
-        result: CaDeleteResponse;
+        result: CADeleteResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -52,22 +52,22 @@ export class Cas extends APIResource {
   /**
    * Fetches a short-lived certificate CA and its public key.
    */
-  get(uuid: string, params: CaGetParams, options?: Core.RequestOptions): Core.APIPromise<CaGetResponse> {
+  get(uuid: string, params: CAGetParams, options?: Core.RequestOptions): Core.APIPromise<CAGetResponse> {
     const { account_id, zone_id } = params;
     return (
       this._client.get(`/${account_id}/${zone_id}/access/apps/${uuid}/ca`, options) as Core.APIPromise<{
-        result: CaGetResponse;
+        result: CAGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type CaCreateResponse = unknown | string;
+export type CACreateResponse = unknown | string;
 
-export type CaListResponse = Array<CaListResponse.CaListResponseItem>;
+export type CAListResponse = Array<CAListResponse.CAListResponseItem>;
 
-export namespace CaListResponse {
-  export interface CaListResponseItem {
+export namespace CAListResponse {
+  export interface CAListResponseItem {
     /**
      * The ID of the CA.
      */
@@ -86,16 +86,16 @@ export namespace CaListResponse {
   }
 }
 
-export interface CaDeleteResponse {
+export interface CADeleteResponse {
   /**
    * The ID of the CA.
    */
   id?: string;
 }
 
-export type CaGetResponse = unknown | string;
+export type CAGetResponse = unknown | string;
 
-export interface CaCreateParams {
+export interface CACreateParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
    */
@@ -107,7 +107,7 @@ export interface CaCreateParams {
   zone_id: string;
 }
 
-export interface CaListParams {
+export interface CAListParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
    */
@@ -119,7 +119,7 @@ export interface CaListParams {
   zone_id: string;
 }
 
-export interface CaDeleteParams {
+export interface CADeleteParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
    */
@@ -131,7 +131,7 @@ export interface CaDeleteParams {
   zone_id: string;
 }
 
-export interface CaGetParams {
+export interface CAGetParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
    */
@@ -143,13 +143,13 @@ export interface CaGetParams {
   zone_id: string;
 }
 
-export namespace Cas {
-  export import CaCreateResponse = CasAPI.CaCreateResponse;
-  export import CaListResponse = CasAPI.CaListResponse;
-  export import CaDeleteResponse = CasAPI.CaDeleteResponse;
-  export import CaGetResponse = CasAPI.CaGetResponse;
-  export import CaCreateParams = CasAPI.CaCreateParams;
-  export import CaListParams = CasAPI.CaListParams;
-  export import CaDeleteParams = CasAPI.CaDeleteParams;
-  export import CaGetParams = CasAPI.CaGetParams;
+export namespace CAs {
+  export import CACreateResponse = CAsAPI.CACreateResponse;
+  export import CAListResponse = CAsAPI.CAListResponse;
+  export import CADeleteResponse = CAsAPI.CADeleteResponse;
+  export import CAGetResponse = CAsAPI.CAGetResponse;
+  export import CACreateParams = CAsAPI.CACreateParams;
+  export import CAListParams = CAsAPI.CAListParams;
+  export import CADeleteParams = CAsAPI.CADeleteParams;
+  export import CAGetParams = CAsAPI.CAGetParams;
 }

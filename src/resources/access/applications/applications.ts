@@ -3,12 +3,12 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ApplicationsAPI from 'cloudflare/resources/access/applications/applications';
-import * as CasAPI from 'cloudflare/resources/access/applications/cas';
+import * as CAsAPI from 'cloudflare/resources/access/applications/cas';
 import * as PoliciesAPI from 'cloudflare/resources/access/applications/policies';
 import * as UserPolicyChecksAPI from 'cloudflare/resources/access/applications/user-policy-checks';
 
 export class Applications extends APIResource {
-  cas: CasAPI.Cas = new CasAPI.Cas(this._client);
+  cas: CAsAPI.CAs = new CAsAPI.CAs(this._client);
   userPolicyChecks: UserPolicyChecksAPI.UserPolicyChecks = new UserPolicyChecksAPI.UserPolicyChecks(
     this._client,
   );
@@ -4712,15 +4712,15 @@ export namespace Applications {
   export import ApplicationDeleteParams = ApplicationsAPI.ApplicationDeleteParams;
   export import ApplicationGetParams = ApplicationsAPI.ApplicationGetParams;
   export import ApplicationRevokeTokensParams = ApplicationsAPI.ApplicationRevokeTokensParams;
-  export import Cas = CasAPI.Cas;
-  export import CaCreateResponse = CasAPI.CaCreateResponse;
-  export import CaListResponse = CasAPI.CaListResponse;
-  export import CaDeleteResponse = CasAPI.CaDeleteResponse;
-  export import CaGetResponse = CasAPI.CaGetResponse;
-  export import CaCreateParams = CasAPI.CaCreateParams;
-  export import CaListParams = CasAPI.CaListParams;
-  export import CaDeleteParams = CasAPI.CaDeleteParams;
-  export import CaGetParams = CasAPI.CaGetParams;
+  export import CAs = CAsAPI.CAs;
+  export import CACreateResponse = CAsAPI.CACreateResponse;
+  export import CAListResponse = CAsAPI.CAListResponse;
+  export import CADeleteResponse = CAsAPI.CADeleteResponse;
+  export import CAGetResponse = CAsAPI.CAGetResponse;
+  export import CACreateParams = CAsAPI.CACreateParams;
+  export import CAListParams = CAsAPI.CAListParams;
+  export import CADeleteParams = CAsAPI.CADeleteParams;
+  export import CAGetParams = CAsAPI.CAGetParams;
   export import UserPolicyChecks = UserPolicyChecksAPI.UserPolicyChecks;
   export import UserPolicyCheckListResponse = UserPolicyChecksAPI.UserPolicyCheckListResponse;
   export import UserPolicyCheckListParams = UserPolicyChecksAPI.UserPolicyCheckListParams;
