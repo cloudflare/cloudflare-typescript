@@ -106,7 +106,7 @@ export interface PostureCreateResponse {
     | PostureCreateResponse.TeamsDevicesFileInputRequest
     | PostureCreateResponse.TeamsDevicesUniqueClientIDInputRequest
     | PostureCreateResponse.TeamsDevicesDomainJoinedInputRequest
-    | PostureCreateResponse.TeamsDevicesOsVersionInputRequest
+    | PostureCreateResponse.TeamsDevicesOSVersionInputRequest
     | PostureCreateResponse.TeamsDevicesFirewallInputRequest
     | PostureCreateResponse.TeamsDevicesSentineloneInputRequest
     | PostureCreateResponse.TeamsDevicesCarbonblackInputRequest
@@ -213,7 +213,7 @@ export namespace PostureCreateResponse {
     domain?: string;
   }
 
-  export interface TeamsDevicesOsVersionInputRequest {
+  export interface TeamsDevicesOSVersionInputRequest {
     /**
      * Operating System
      */
@@ -519,7 +519,7 @@ export interface PostureUpdateResponse {
     | PostureUpdateResponse.TeamsDevicesFileInputRequest
     | PostureUpdateResponse.TeamsDevicesUniqueClientIDInputRequest
     | PostureUpdateResponse.TeamsDevicesDomainJoinedInputRequest
-    | PostureUpdateResponse.TeamsDevicesOsVersionInputRequest
+    | PostureUpdateResponse.TeamsDevicesOSVersionInputRequest
     | PostureUpdateResponse.TeamsDevicesFirewallInputRequest
     | PostureUpdateResponse.TeamsDevicesSentineloneInputRequest
     | PostureUpdateResponse.TeamsDevicesCarbonblackInputRequest
@@ -626,7 +626,7 @@ export namespace PostureUpdateResponse {
     domain?: string;
   }
 
-  export interface TeamsDevicesOsVersionInputRequest {
+  export interface TeamsDevicesOSVersionInputRequest {
     /**
      * Operating System
      */
@@ -935,7 +935,7 @@ export namespace PostureListResponse {
       | PostureListResponseItem.TeamsDevicesFileInputRequest
       | PostureListResponseItem.TeamsDevicesUniqueClientIDInputRequest
       | PostureListResponseItem.TeamsDevicesDomainJoinedInputRequest
-      | PostureListResponseItem.TeamsDevicesOsVersionInputRequest
+      | PostureListResponseItem.TeamsDevicesOSVersionInputRequest
       | PostureListResponseItem.TeamsDevicesFirewallInputRequest
       | PostureListResponseItem.TeamsDevicesSentineloneInputRequest
       | PostureListResponseItem.TeamsDevicesCarbonblackInputRequest
@@ -1042,7 +1042,7 @@ export namespace PostureListResponse {
       domain?: string;
     }
 
-    export interface TeamsDevicesOsVersionInputRequest {
+    export interface TeamsDevicesOSVersionInputRequest {
       /**
        * Operating System
        */
@@ -1362,7 +1362,7 @@ export interface PostureGetResponse {
     | PostureGetResponse.TeamsDevicesFileInputRequest
     | PostureGetResponse.TeamsDevicesUniqueClientIDInputRequest
     | PostureGetResponse.TeamsDevicesDomainJoinedInputRequest
-    | PostureGetResponse.TeamsDevicesOsVersionInputRequest
+    | PostureGetResponse.TeamsDevicesOSVersionInputRequest
     | PostureGetResponse.TeamsDevicesFirewallInputRequest
     | PostureGetResponse.TeamsDevicesSentineloneInputRequest
     | PostureGetResponse.TeamsDevicesCarbonblackInputRequest
@@ -1469,7 +1469,7 @@ export namespace PostureGetResponse {
     domain?: string;
   }
 
-  export interface TeamsDevicesOsVersionInputRequest {
+  export interface TeamsDevicesOSVersionInputRequest {
     /**
      * Operating System
      */
@@ -1799,7 +1799,7 @@ export interface PostureCreateParams {
     | PostureCreateParams.TeamsDevicesFileInputRequest
     | PostureCreateParams.TeamsDevicesUniqueClientIDInputRequest
     | PostureCreateParams.TeamsDevicesDomainJoinedInputRequest
-    | PostureCreateParams.TeamsDevicesOsVersionInputRequest
+    | PostureCreateParams.TeamsDevicesOSVersionInputRequest
     | PostureCreateParams.TeamsDevicesFirewallInputRequest
     | PostureCreateParams.TeamsDevicesSentineloneInputRequest
     | PostureCreateParams.TeamsDevicesCarbonblackInputRequest
@@ -1877,7 +1877,7 @@ export namespace PostureCreateParams {
     domain?: string;
   }
 
-  export interface TeamsDevicesOsVersionInputRequest {
+  export interface TeamsDevicesOSVersionInputRequest {
     /**
      * Operating System
      */
@@ -2207,7 +2207,7 @@ export interface PostureUpdateParams {
     | PostureUpdateParams.TeamsDevicesFileInputRequest
     | PostureUpdateParams.TeamsDevicesUniqueClientIDInputRequest
     | PostureUpdateParams.TeamsDevicesDomainJoinedInputRequest
-    | PostureUpdateParams.TeamsDevicesOsVersionInputRequest
+    | PostureUpdateParams.TeamsDevicesOSVersionInputRequest
     | PostureUpdateParams.TeamsDevicesFirewallInputRequest
     | PostureUpdateParams.TeamsDevicesSentineloneInputRequest
     | PostureUpdateParams.TeamsDevicesCarbonblackInputRequest
@@ -2285,7 +2285,7 @@ export namespace PostureUpdateParams {
     domain?: string;
   }
 
-  export interface TeamsDevicesOsVersionInputRequest {
+  export interface TeamsDevicesOSVersionInputRequest {
     /**
      * Operating System
      */

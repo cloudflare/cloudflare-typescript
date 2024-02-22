@@ -49,7 +49,7 @@ export interface LastSeenIdentityListResponse {
 
   is_warp?: boolean;
 
-  mtls_auth?: LastSeenIdentityListResponse.MtlsAuth;
+  mtls_auth?: LastSeenIdentityListResponse.MTLSAuth;
 
   service_token_id?: string;
 
@@ -103,7 +103,7 @@ export namespace LastSeenIdentityListResponse {
     type?: string;
   }
 
-  export interface MtlsAuth {
+  export interface MTLSAuth {
     auth_status?: string;
 
     cert_issuer_dn?: string;

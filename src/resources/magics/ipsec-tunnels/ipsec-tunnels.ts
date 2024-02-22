@@ -2,11 +2,11 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as IpsecTunnelsAPI from 'cloudflare/resources/magics/ipsec-tunnels/ipsec-tunnels';
-import * as PskGeneratesAPI from 'cloudflare/resources/magics/ipsec-tunnels/psk-generates';
+import * as IPSECTunnelsAPI from 'cloudflare/resources/magics/ipsec-tunnels/ipsec-tunnels';
+import * as PSKGeneratesAPI from 'cloudflare/resources/magics/ipsec-tunnels/psk-generates';
 
-export class IpsecTunnels extends APIResource {
-  pskGenerates: PskGeneratesAPI.PskGenerates = new PskGeneratesAPI.PskGenerates(this._client);
+export class IPSECTunnels extends APIResource {
+  pskGenerates: PSKGeneratesAPI.PSKGenerates = new PSKGeneratesAPI.PSKGenerates(this._client);
 
   /**
    * Creates new IPsec tunnels associated with an account. Use `?validate_only=true`
@@ -15,14 +15,14 @@ export class IpsecTunnels extends APIResource {
    */
   create(
     accountIdentifier: string,
-    body: IpsecTunnelCreateParams,
+    body: IPSECTunnelCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<IpsecTunnelCreateResponse> {
+  ): Core.APIPromise<IPSECTunnelCreateResponse> {
     return (
       this._client.post(`/accounts/${accountIdentifier}/magic/ipsec_tunnels`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: IpsecTunnelCreateResponse }>
+      }) as Core.APIPromise<{ result: IPSECTunnelCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -34,24 +34,24 @@ export class IpsecTunnels extends APIResource {
   update(
     accountIdentifier: string,
     tunnelIdentifier: string,
-    body: IpsecTunnelUpdateParams,
+    body: IPSECTunnelUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<IpsecTunnelUpdateResponse> {
+  ): Core.APIPromise<IPSECTunnelUpdateResponse> {
     return (
       this._client.put(`/accounts/${accountIdentifier}/magic/ipsec_tunnels/${tunnelIdentifier}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: IpsecTunnelUpdateResponse }>
+      }) as Core.APIPromise<{ result: IPSECTunnelUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Lists IPsec tunnels associated with an account.
    */
-  list(accountIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<IpsecTunnelListResponse> {
+  list(accountIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<IPSECTunnelListResponse> {
     return (
       this._client.get(`/accounts/${accountIdentifier}/magic/ipsec_tunnels`, options) as Core.APIPromise<{
-        result: IpsecTunnelListResponse;
+        result: IPSECTunnelListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -65,12 +65,12 @@ export class IpsecTunnels extends APIResource {
     accountIdentifier: string,
     tunnelIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<IpsecTunnelDeleteResponse> {
+  ): Core.APIPromise<IPSECTunnelDeleteResponse> {
     return (
       this._client.delete(
         `/accounts/${accountIdentifier}/magic/ipsec_tunnels/${tunnelIdentifier}`,
         options,
-      ) as Core.APIPromise<{ result: IpsecTunnelDeleteResponse }>
+      ) as Core.APIPromise<{ result: IPSECTunnelDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -81,22 +81,22 @@ export class IpsecTunnels extends APIResource {
     accountIdentifier: string,
     tunnelIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<IpsecTunnelGetResponse> {
+  ): Core.APIPromise<IPSECTunnelGetResponse> {
     return (
       this._client.get(
         `/accounts/${accountIdentifier}/magic/ipsec_tunnels/${tunnelIdentifier}`,
         options,
-      ) as Core.APIPromise<{ result: IpsecTunnelGetResponse }>
+      ) as Core.APIPromise<{ result: IPSECTunnelGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface IpsecTunnelCreateResponse {
-  ipsec_tunnels?: Array<IpsecTunnelCreateResponse.IpsecTunnel>;
+export interface IPSECTunnelCreateResponse {
+  ipsec_tunnels?: Array<IPSECTunnelCreateResponse.IPSECTunnel>;
 }
 
-export namespace IpsecTunnelCreateResponse {
-  export interface IpsecTunnel {
+export namespace IPSECTunnelCreateResponse {
+  export interface IPSECTunnel {
     /**
      * The IP address assigned to the Cloudflare side of the IPsec tunnel.
      */
@@ -148,7 +148,7 @@ export namespace IpsecTunnelCreateResponse {
     /**
      * The PSK metadata that includes when the PSK was generated.
      */
-    psk_metadata?: IpsecTunnel.PskMetadata;
+    psk_metadata?: IPSECTunnel.PSKMetadata;
 
     /**
      * If `true`, then IPsec replay protection will be supported in the
@@ -156,14 +156,14 @@ export namespace IpsecTunnelCreateResponse {
      */
     replay_protection?: boolean;
 
-    tunnel_health_check?: IpsecTunnel.TunnelHealthCheck;
+    tunnel_health_check?: IPSECTunnel.TunnelHealthCheck;
   }
 
-  export namespace IpsecTunnel {
+  export namespace IPSECTunnel {
     /**
      * The PSK metadata that includes when the PSK was generated.
      */
-    export interface PskMetadata {
+    export interface PSKMetadata {
       /**
        * The date and time the tunnel was last modified.
        */
@@ -196,18 +196,18 @@ export namespace IpsecTunnelCreateResponse {
   }
 }
 
-export interface IpsecTunnelUpdateResponse {
+export interface IPSECTunnelUpdateResponse {
   modified?: boolean;
 
   modified_ipsec_tunnel?: unknown;
 }
 
-export interface IpsecTunnelListResponse {
-  ipsec_tunnels?: Array<IpsecTunnelListResponse.IpsecTunnel>;
+export interface IPSECTunnelListResponse {
+  ipsec_tunnels?: Array<IPSECTunnelListResponse.IPSECTunnel>;
 }
 
-export namespace IpsecTunnelListResponse {
-  export interface IpsecTunnel {
+export namespace IPSECTunnelListResponse {
+  export interface IPSECTunnel {
     /**
      * The IP address assigned to the Cloudflare side of the IPsec tunnel.
      */
@@ -259,7 +259,7 @@ export namespace IpsecTunnelListResponse {
     /**
      * The PSK metadata that includes when the PSK was generated.
      */
-    psk_metadata?: IpsecTunnel.PskMetadata;
+    psk_metadata?: IPSECTunnel.PSKMetadata;
 
     /**
      * If `true`, then IPsec replay protection will be supported in the
@@ -267,14 +267,14 @@ export namespace IpsecTunnelListResponse {
      */
     replay_protection?: boolean;
 
-    tunnel_health_check?: IpsecTunnel.TunnelHealthCheck;
+    tunnel_health_check?: IPSECTunnel.TunnelHealthCheck;
   }
 
-  export namespace IpsecTunnel {
+  export namespace IPSECTunnel {
     /**
      * The PSK metadata that includes when the PSK was generated.
      */
-    export interface PskMetadata {
+    export interface PSKMetadata {
       /**
        * The date and time the tunnel was last modified.
        */
@@ -307,17 +307,17 @@ export namespace IpsecTunnelListResponse {
   }
 }
 
-export interface IpsecTunnelDeleteResponse {
+export interface IPSECTunnelDeleteResponse {
   deleted?: boolean;
 
   deleted_ipsec_tunnel?: unknown;
 }
 
-export interface IpsecTunnelGetResponse {
+export interface IPSECTunnelGetResponse {
   ipsec_tunnel?: unknown;
 }
 
-export interface IpsecTunnelCreateParams {
+export interface IPSECTunnelCreateParams {
   /**
    * The IP address assigned to the Cloudflare side of the IPsec tunnel.
    */
@@ -345,7 +345,7 @@ export interface IpsecTunnelCreateParams {
    */
   description?: string;
 
-  health_check?: IpsecTunnelCreateParams.HealthCheck;
+  health_check?: IPSECTunnelCreateParams.HealthCheck;
 
   /**
    * A randomly generated or provided string for use in the IPsec tunnel.
@@ -359,7 +359,7 @@ export interface IpsecTunnelCreateParams {
   replay_protection?: boolean;
 }
 
-export namespace IpsecTunnelCreateParams {
+export namespace IPSECTunnelCreateParams {
   export interface HealthCheck {
     /**
      * The direction of the flow of the healthcheck. Either unidirectional, where the
@@ -397,7 +397,7 @@ export namespace IpsecTunnelCreateParams {
   }
 }
 
-export interface IpsecTunnelUpdateParams {
+export interface IPSECTunnelUpdateParams {
   /**
    * The IP address assigned to the Cloudflare side of the IPsec tunnel.
    */
@@ -425,7 +425,7 @@ export interface IpsecTunnelUpdateParams {
    */
   description?: string;
 
-  health_check?: IpsecTunnelUpdateParams.HealthCheck;
+  health_check?: IPSECTunnelUpdateParams.HealthCheck;
 
   /**
    * A randomly generated or provided string for use in the IPsec tunnel.
@@ -439,7 +439,7 @@ export interface IpsecTunnelUpdateParams {
   replay_protection?: boolean;
 }
 
-export namespace IpsecTunnelUpdateParams {
+export namespace IPSECTunnelUpdateParams {
   export interface HealthCheck {
     /**
      * The direction of the flow of the healthcheck. Either unidirectional, where the
@@ -477,14 +477,14 @@ export namespace IpsecTunnelUpdateParams {
   }
 }
 
-export namespace IpsecTunnels {
-  export import IpsecTunnelCreateResponse = IpsecTunnelsAPI.IpsecTunnelCreateResponse;
-  export import IpsecTunnelUpdateResponse = IpsecTunnelsAPI.IpsecTunnelUpdateResponse;
-  export import IpsecTunnelListResponse = IpsecTunnelsAPI.IpsecTunnelListResponse;
-  export import IpsecTunnelDeleteResponse = IpsecTunnelsAPI.IpsecTunnelDeleteResponse;
-  export import IpsecTunnelGetResponse = IpsecTunnelsAPI.IpsecTunnelGetResponse;
-  export import IpsecTunnelCreateParams = IpsecTunnelsAPI.IpsecTunnelCreateParams;
-  export import IpsecTunnelUpdateParams = IpsecTunnelsAPI.IpsecTunnelUpdateParams;
-  export import PskGenerates = PskGeneratesAPI.PskGenerates;
-  export import PskGenerateCreateResponse = PskGeneratesAPI.PskGenerateCreateResponse;
+export namespace IPSECTunnels {
+  export import IPSECTunnelCreateResponse = IPSECTunnelsAPI.IPSECTunnelCreateResponse;
+  export import IPSECTunnelUpdateResponse = IPSECTunnelsAPI.IPSECTunnelUpdateResponse;
+  export import IPSECTunnelListResponse = IPSECTunnelsAPI.IPSECTunnelListResponse;
+  export import IPSECTunnelDeleteResponse = IPSECTunnelsAPI.IPSECTunnelDeleteResponse;
+  export import IPSECTunnelGetResponse = IPSECTunnelsAPI.IPSECTunnelGetResponse;
+  export import IPSECTunnelCreateParams = IPSECTunnelsAPI.IPSECTunnelCreateParams;
+  export import IPSECTunnelUpdateParams = IPSECTunnelsAPI.IPSECTunnelUpdateParams;
+  export import PSKGenerates = PSKGeneratesAPI.PSKGenerates;
+  export import PSKGenerateCreateResponse = PSKGeneratesAPI.PSKGenerateCreateResponse;
 }

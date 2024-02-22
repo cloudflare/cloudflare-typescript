@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless.
 
-export { Kv } from './kv';
+export { KV } from './kv';
 export {
   NamespaceCreateResponse,
   NamespaceUpdateResponse,

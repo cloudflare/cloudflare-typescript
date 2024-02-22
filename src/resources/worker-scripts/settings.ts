@@ -45,14 +45,14 @@ export interface SettingEditResponse {
    * List of bindings attached to this Worker
    */
   bindings?: Array<
-    | SettingEditResponse.WorkersKvNamespaceBinding
+    | SettingEditResponse.WorkersKVNamespaceBinding
     | SettingEditResponse.WorkersServiceBinding
     | SettingEditResponse.WorkersDoBinding
     | SettingEditResponse.WorkersR2Binding
     | SettingEditResponse.WorkersQueueBinding
     | SettingEditResponse.WorkersD1Binding
     | SettingEditResponse.WorkersDispatchNamespaceBinding
-    | SettingEditResponse.WorkersMtlsCertBinding
+    | SettingEditResponse.WorkersMTLSCertBinding
   >;
 
   /**
@@ -94,7 +94,7 @@ export interface SettingEditResponse {
 }
 
 export namespace SettingEditResponse {
-  export interface WorkersKvNamespaceBinding {
+  export interface WorkersKVNamespaceBinding {
     /**
      * A JavaScript variable name for the binding.
      */
@@ -278,7 +278,7 @@ export namespace SettingEditResponse {
     }
   }
 
-  export interface WorkersMtlsCertBinding {
+  export interface WorkersMTLSCertBinding {
     /**
      * A JavaScript variable name for the binding.
      */
@@ -442,14 +442,14 @@ export interface SettingGetResponse {
    * List of bindings attached to this Worker
    */
   bindings?: Array<
-    | SettingGetResponse.WorkersKvNamespaceBinding
+    | SettingGetResponse.WorkersKVNamespaceBinding
     | SettingGetResponse.WorkersServiceBinding
     | SettingGetResponse.WorkersDoBinding
     | SettingGetResponse.WorkersR2Binding
     | SettingGetResponse.WorkersQueueBinding
     | SettingGetResponse.WorkersD1Binding
     | SettingGetResponse.WorkersDispatchNamespaceBinding
-    | SettingGetResponse.WorkersMtlsCertBinding
+    | SettingGetResponse.WorkersMTLSCertBinding
   >;
 
   /**
@@ -491,7 +491,7 @@ export interface SettingGetResponse {
 }
 
 export namespace SettingGetResponse {
-  export interface WorkersKvNamespaceBinding {
+  export interface WorkersKVNamespaceBinding {
     /**
      * A JavaScript variable name for the binding.
      */
@@ -675,7 +675,7 @@ export namespace SettingGetResponse {
     }
   }
 
-  export interface WorkersMtlsCertBinding {
+  export interface WorkersMTLSCertBinding {
     /**
      * A JavaScript variable name for the binding.
      */
@@ -870,14 +870,14 @@ export namespace SettingEditParams {
        * List of bindings attached to this Worker
        */
       bindings?: Array<
-        | Result.WorkersKvNamespaceBinding
+        | Result.WorkersKVNamespaceBinding
         | Result.WorkersServiceBinding
         | Result.WorkersDoBinding
         | Result.WorkersR2Binding
         | Result.WorkersQueueBinding
         | Result.WorkersD1Binding
         | Result.WorkersDispatchNamespaceBinding
-        | Result.WorkersMtlsCertBinding
+        | Result.WorkersMTLSCertBinding
       >;
 
       /**
@@ -919,7 +919,7 @@ export namespace SettingEditParams {
     }
 
     export namespace Result {
-      export interface WorkersKvNamespaceBinding {
+      export interface WorkersKVNamespaceBinding {
         /**
          * The class of resource that the binding provides.
          */
@@ -1058,7 +1058,7 @@ export namespace SettingEditParams {
         }
       }
 
-      export interface WorkersMtlsCertBinding {
+      export interface WorkersMTLSCertBinding {
         /**
          * The class of resource that the binding provides.
          */

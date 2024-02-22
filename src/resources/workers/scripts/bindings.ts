@@ -18,11 +18,11 @@ export class Bindings extends APIResource {
 }
 
 export type BindingListResponse = Array<
-  BindingListResponse.WorkersKvNamespaceBinding | BindingListResponse.WorkersWasmModuleBinding
+  BindingListResponse.WorkersKVNamespaceBinding | BindingListResponse.WorkersWasmModuleBinding
 >;
 
 export namespace BindingListResponse {
-  export interface WorkersKvNamespaceBinding {
+  export interface WorkersKVNamespaceBinding {
     /**
      * A JavaScript variable name for the binding.
      */

@@ -97,7 +97,7 @@ export interface RuleCreateResponse {
     | RuleCreateResponse.LegacyJhsIPConfiguration
     | RuleCreateResponse.LegacyJhsIPV6Configuration
     | RuleCreateResponse.LegacyJhsCidrConfiguration
-    | RuleCreateResponse.LegacyJhsAsnConfiguration
+    | RuleCreateResponse.LegacyJhsASNConfiguration
     | RuleCreateResponse.LegacyJhsCountryConfiguration;
 
   /**
@@ -163,7 +163,7 @@ export namespace RuleCreateResponse {
     value?: string;
   }
 
-  export interface LegacyJhsAsnConfiguration {
+  export interface LegacyJhsASNConfiguration {
     /**
      * The configuration target. You must set the target to `asn` when specifying an
      * Autonomous System Number (ASN) in the rule.
@@ -209,7 +209,7 @@ export interface RuleListResponse {
     | RuleListResponse.LegacyJhsIPConfiguration
     | RuleListResponse.LegacyJhsIPV6Configuration
     | RuleListResponse.LegacyJhsCidrConfiguration
-    | RuleListResponse.LegacyJhsAsnConfiguration
+    | RuleListResponse.LegacyJhsASNConfiguration
     | RuleListResponse.LegacyJhsCountryConfiguration;
 
   /**
@@ -275,7 +275,7 @@ export namespace RuleListResponse {
     value?: string;
   }
 
-  export interface LegacyJhsAsnConfiguration {
+  export interface LegacyJhsASNConfiguration {
     /**
      * The configuration target. You must set the target to `asn` when specifying an
      * Autonomous System Number (ASN) in the rule.
@@ -328,7 +328,7 @@ export interface RuleEditResponse {
     | RuleEditResponse.LegacyJhsIPConfiguration
     | RuleEditResponse.LegacyJhsIPV6Configuration
     | RuleEditResponse.LegacyJhsCidrConfiguration
-    | RuleEditResponse.LegacyJhsAsnConfiguration
+    | RuleEditResponse.LegacyJhsASNConfiguration
     | RuleEditResponse.LegacyJhsCountryConfiguration;
 
   /**
@@ -394,7 +394,7 @@ export namespace RuleEditResponse {
     value?: string;
   }
 
-  export interface LegacyJhsAsnConfiguration {
+  export interface LegacyJhsASNConfiguration {
     /**
      * The configuration target. You must set the target to `asn` when specifying an
      * Autonomous System Number (ASN) in the rule.
@@ -430,7 +430,7 @@ export interface RuleCreateParams {
     | RuleCreateParams.LegacyJhsIPConfiguration
     | RuleCreateParams.LegacyJhsIPV6Configuration
     | RuleCreateParams.LegacyJhsCidrConfiguration
-    | RuleCreateParams.LegacyJhsAsnConfiguration
+    | RuleCreateParams.LegacyJhsASNConfiguration
     | RuleCreateParams.LegacyJhsCountryConfiguration;
 
   /**
@@ -486,7 +486,7 @@ export namespace RuleCreateParams {
     value?: string;
   }
 
-  export interface LegacyJhsAsnConfiguration {
+  export interface LegacyJhsASNConfiguration {
     /**
      * The configuration target. You must set the target to `asn` when specifying an
      * Autonomous System Number (ASN) in the rule.

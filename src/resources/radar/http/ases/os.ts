@@ -3,45 +3,45 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
-import * as OsAPI from 'cloudflare/resources/radar/http/ases/os';
+import * as OSAPI from 'cloudflare/resources/radar/http/ases/os';
 
-export class Os extends APIResource {
+export class OS extends APIResource {
   /**
    * Get the top autonomous systems, by HTTP traffic, of the requested operating
    * systems. Values are a percentage out of the total traffic.
    */
   get(
     os: 'WINDOWS' | 'MACOSX' | 'IOS' | 'ANDROID' | 'CHROMEOS' | 'LINUX' | 'SMART_TV',
-    query?: OGetParams,
+    query?: OSGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<OGetResponse>;
+  ): Core.APIPromise<OSGetResponse>;
   get(
     os: 'WINDOWS' | 'MACOSX' | 'IOS' | 'ANDROID' | 'CHROMEOS' | 'LINUX' | 'SMART_TV',
     options?: Core.RequestOptions,
-  ): Core.APIPromise<OGetResponse>;
+  ): Core.APIPromise<OSGetResponse>;
   get(
     os: 'WINDOWS' | 'MACOSX' | 'IOS' | 'ANDROID' | 'CHROMEOS' | 'LINUX' | 'SMART_TV',
-    query: OGetParams | Core.RequestOptions = {},
+    query: OSGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<OGetResponse> {
+  ): Core.APIPromise<OSGetResponse> {
     if (isRequestOptions(query)) {
       return this.get(os, {}, query);
     }
     return (
       this._client.get(`/radar/http/top/ases/os/${os}`, { query, ...options }) as Core.APIPromise<{
-        result: OGetResponse;
+        result: OSGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface OGetResponse {
-  meta: OGetResponse.Meta;
+export interface OSGetResponse {
+  meta: OSGetResponse.Meta;
 
-  top_0: Array<OGetResponse.Top0>;
+  top_0: Array<OSGetResponse.Top0>;
 }
 
-export namespace OGetResponse {
+export namespace OSGetResponse {
   export interface Meta {
     dateRange: Array<Meta.DateRange>;
 
@@ -97,7 +97,7 @@ export namespace OGetResponse {
   }
 }
 
-export interface OGetParams {
+export interface OSGetParams {
   /**
    * Array of comma separated list of ASNs, start with `-` to exclude from results.
    * For example, `-174, 3356` excludes results from AS174, but includes results from
@@ -192,7 +192,7 @@ export interface OGetParams {
   tlsVersion?: Array<'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3' | 'TLSvQUIC'>;
 }
 
-export namespace Os {
-  export import OGetResponse = OsAPI.OGetResponse;
-  export import OGetParams = OsAPI.OGetParams;
+export namespace OS {
+  export import OSGetResponse = OSAPI.OSGetResponse;
+  export import OSGetParams = OSAPI.OSGetParams;
 }

@@ -119,7 +119,7 @@ export namespace ScanGetResponse {
     /**
      * Dictionary of Autonomous System Numbers where ASN's are the keys
      */
-    asns?: Scan.Asns;
+    asns?: Scan.ASNs;
 
     domains?: Scan.Domains;
 
@@ -521,18 +521,18 @@ export namespace ScanGetResponse {
     /**
      * Dictionary of Autonomous System Numbers where ASN's are the keys
      */
-    export interface Asns {
+    export interface ASNs {
       /**
        * ASN's contacted
        */
-      asn?: Asns.Asn;
+      asn?: ASNs.ASN;
     }
 
-    export namespace Asns {
+    export namespace ASNs {
       /**
        * ASN's contacted
        */
-      export interface Asn {
+      export interface ASN {
         asn: string;
 
         description: string;

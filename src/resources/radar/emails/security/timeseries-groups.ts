@@ -10,14 +10,14 @@ export class TimeseriesGroups extends APIResource {
    * Percentage distribution of emails classified per DMARC validation over time.
    */
   dmarc(
-    query?: TimeseriesGroupDmarcParams,
+    query?: TimeseriesGroupDMARCParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupDmarcResponse>;
-  dmarc(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupDmarcResponse>;
+  ): Core.APIPromise<TimeseriesGroupDMARCResponse>;
+  dmarc(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupDMARCResponse>;
   dmarc(
-    query: TimeseriesGroupDmarcParams | Core.RequestOptions = {},
+    query: TimeseriesGroupDMARCParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupDmarcResponse> {
+  ): Core.APIPromise<TimeseriesGroupDMARCResponse> {
     if (isRequestOptions(query)) {
       return this.dmarc({}, query);
     }
@@ -25,7 +25,7 @@ export class TimeseriesGroups extends APIResource {
       this._client.get('/radar/email/security/timeseries_groups/dmarc', {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: TimeseriesGroupDmarcResponse }>
+      }) as Core.APIPromise<{ result: TimeseriesGroupDMARCResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -122,13 +122,13 @@ export class TimeseriesGroups extends APIResource {
   }
 }
 
-export interface TimeseriesGroupDmarcResponse {
+export interface TimeseriesGroupDMARCResponse {
   meta: unknown;
 
-  serie_0: TimeseriesGroupDmarcResponse.Serie0;
+  serie_0: TimeseriesGroupDMARCResponse.Serie0;
 }
 
-export namespace TimeseriesGroupDmarcResponse {
+export namespace TimeseriesGroupDMARCResponse {
   export interface Serie0 {
     FAIL: Array<string>;
 
@@ -200,7 +200,7 @@ export namespace TimeseriesGroupThreatCategoryResponse {
   }
 }
 
-export interface TimeseriesGroupDmarcParams {
+export interface TimeseriesGroupDMARCParams {
   /**
    * Aggregation interval results should be returned in (for example, in 15 minutes
    * or 1 hour intervals). Refer to
@@ -621,12 +621,12 @@ export interface TimeseriesGroupThreatCategoryParams {
 }
 
 export namespace TimeseriesGroups {
-  export import TimeseriesGroupDmarcResponse = TimeseriesGroupsAPI.TimeseriesGroupDmarcResponse;
+  export import TimeseriesGroupDMARCResponse = TimeseriesGroupsAPI.TimeseriesGroupDMARCResponse;
   export import TimeseriesGroupMaliciousResponse = TimeseriesGroupsAPI.TimeseriesGroupMaliciousResponse;
   export import TimeseriesGroupSpamResponse = TimeseriesGroupsAPI.TimeseriesGroupSpamResponse;
   export import TimeseriesGroupSPFResponse = TimeseriesGroupsAPI.TimeseriesGroupSPFResponse;
   export import TimeseriesGroupThreatCategoryResponse = TimeseriesGroupsAPI.TimeseriesGroupThreatCategoryResponse;
-  export import TimeseriesGroupDmarcParams = TimeseriesGroupsAPI.TimeseriesGroupDmarcParams;
+  export import TimeseriesGroupDMARCParams = TimeseriesGroupsAPI.TimeseriesGroupDMARCParams;
   export import TimeseriesGroupMaliciousParams = TimeseriesGroupsAPI.TimeseriesGroupMaliciousParams;
   export import TimeseriesGroupSpamParams = TimeseriesGroupsAPI.TimeseriesGroupSpamParams;
   export import TimeseriesGroupSPFParams = TimeseriesGroupsAPI.TimeseriesGroupSPFParams;

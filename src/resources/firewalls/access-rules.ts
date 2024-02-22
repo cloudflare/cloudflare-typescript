@@ -136,7 +136,7 @@ export interface AccessRuleCreateParams {
     | AccessRuleCreateParams.LegacyJhsIPConfiguration
     | AccessRuleCreateParams.LegacyJhsIPV6Configuration
     | AccessRuleCreateParams.LegacyJhsCidrConfiguration
-    | AccessRuleCreateParams.LegacyJhsAsnConfiguration
+    | AccessRuleCreateParams.LegacyJhsASNConfiguration
     | AccessRuleCreateParams.LegacyJhsCountryConfiguration;
 
   /**
@@ -193,7 +193,7 @@ export namespace AccessRuleCreateParams {
     value?: string;
   }
 
-  export interface LegacyJhsAsnConfiguration {
+  export interface LegacyJhsASNConfiguration {
     /**
      * The configuration target. You must set the target to `asn` when specifying an
      * Autonomous System Number (ASN) in the rule.
@@ -334,7 +334,7 @@ export interface AccessRuleEditParams {
     | AccessRuleEditParams.LegacyJhsIPConfiguration
     | AccessRuleEditParams.LegacyJhsIPV6Configuration
     | AccessRuleEditParams.LegacyJhsCidrConfiguration
-    | AccessRuleEditParams.LegacyJhsAsnConfiguration
+    | AccessRuleEditParams.LegacyJhsASNConfiguration
     | AccessRuleEditParams.LegacyJhsCountryConfiguration;
 
   /**
@@ -391,7 +391,7 @@ export namespace AccessRuleEditParams {
     value?: string;
   }
 
-  export interface LegacyJhsAsnConfiguration {
+  export interface LegacyJhsASNConfiguration {
     /**
      * The configuration target. You must set the target to `asn` when specifying an
      * Autonomous System Number (ASN) in the rule.

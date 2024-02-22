@@ -2,17 +2,17 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as IqiAPI from 'cloudflare/resources/radar/quality/iqi';
+import * as IQIAPI from 'cloudflare/resources/radar/quality/iqi';
 
-export class Iqi extends APIResource {
+export class IQI extends APIResource {
   /**
    * Get a summary (percentiles) of bandwidth, latency or DNS response time from the
    * Radar Internet Quality Index (IQI).
    */
-  summary(query: IqiSummaryParams, options?: Core.RequestOptions): Core.APIPromise<IqiSummaryResponse> {
+  summary(query: IQISummaryParams, options?: Core.RequestOptions): Core.APIPromise<IQISummaryResponse> {
     return (
       this._client.get('/radar/quality/iqi/summary', { query, ...options }) as Core.APIPromise<{
-        result: IqiSummaryResponse;
+        result: IQISummaryResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -22,24 +22,24 @@ export class Iqi extends APIResource {
    * the Radar Internet Quality Index (IQI).
    */
   timeseriesGroups(
-    query: IqiTimeseriesGroupsParams,
+    query: IQITimeseriesGroupsParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<IqiTimeseriesGroupsResponse> {
+  ): Core.APIPromise<IQITimeseriesGroupsResponse> {
     return (
       this._client.get('/radar/quality/iqi/timeseries_groups', { query, ...options }) as Core.APIPromise<{
-        result: IqiTimeseriesGroupsResponse;
+        result: IQITimeseriesGroupsResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface IqiSummaryResponse {
-  meta: IqiSummaryResponse.Meta;
+export interface IQISummaryResponse {
+  meta: IQISummaryResponse.Meta;
 
-  summary_0: IqiSummaryResponse.Summary0;
+  summary_0: IQISummaryResponse.Summary0;
 }
 
-export namespace IqiSummaryResponse {
+export namespace IQISummaryResponse {
   export interface Meta {
     dateRange: Array<Meta.DateRange>;
 
@@ -97,13 +97,13 @@ export namespace IqiSummaryResponse {
   }
 }
 
-export interface IqiTimeseriesGroupsResponse {
+export interface IQITimeseriesGroupsResponse {
   meta: unknown;
 
-  serie_0: IqiTimeseriesGroupsResponse.Serie0;
+  serie_0: IQITimeseriesGroupsResponse.Serie0;
 }
 
-export namespace IqiTimeseriesGroupsResponse {
+export namespace IQITimeseriesGroupsResponse {
   export interface Serie0 {
     p25: Array<string>;
 
@@ -115,7 +115,7 @@ export namespace IqiTimeseriesGroupsResponse {
   }
 }
 
-export interface IqiSummaryParams {
+export interface IQISummaryParams {
   /**
    * Which metric to return: bandwidth, latency or DNS response time.
    */
@@ -186,7 +186,7 @@ export interface IqiSummaryParams {
   name?: Array<string>;
 }
 
-export interface IqiTimeseriesGroupsParams {
+export interface IQITimeseriesGroupsParams {
   /**
    * Which metric to return: bandwidth, latency or DNS response time.
    */
@@ -269,9 +269,9 @@ export interface IqiTimeseriesGroupsParams {
   name?: Array<string>;
 }
 
-export namespace Iqi {
-  export import IqiSummaryResponse = IqiAPI.IqiSummaryResponse;
-  export import IqiTimeseriesGroupsResponse = IqiAPI.IqiTimeseriesGroupsResponse;
-  export import IqiSummaryParams = IqiAPI.IqiSummaryParams;
-  export import IqiTimeseriesGroupsParams = IqiAPI.IqiTimeseriesGroupsParams;
+export namespace IQI {
+  export import IQISummaryResponse = IQIAPI.IQISummaryResponse;
+  export import IQITimeseriesGroupsResponse = IQIAPI.IQITimeseriesGroupsResponse;
+  export import IQISummaryParams = IQIAPI.IQISummaryParams;
+  export import IQITimeseriesGroupsParams = IQIAPI.IQITimeseriesGroupsParams;
 }

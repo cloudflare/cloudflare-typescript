@@ -16,23 +16,23 @@ export class Security extends APIResource {
 export namespace Security {
   export import Top = TopAPI.Top;
   export import Summary = SummaryAPI.Summary;
-  export import SummaryArcResponse = SummaryAPI.SummaryArcResponse;
+  export import SummaryARCResponse = SummaryAPI.SummaryARCResponse;
   export import SummaryDKIMResponse = SummaryAPI.SummaryDKIMResponse;
-  export import SummaryDmarcResponse = SummaryAPI.SummaryDmarcResponse;
+  export import SummaryDMARCResponse = SummaryAPI.SummaryDMARCResponse;
   export import SummaryMaliciousResponse = SummaryAPI.SummaryMaliciousResponse;
   export import SummarySpamResponse = SummaryAPI.SummarySpamResponse;
   export import SummarySPFResponse = SummaryAPI.SummarySPFResponse;
   export import SummaryThreatCategoryResponse = SummaryAPI.SummaryThreatCategoryResponse;
-  export import SummaryArcParams = SummaryAPI.SummaryArcParams;
+  export import SummaryARCParams = SummaryAPI.SummaryARCParams;
   export import SummaryDKIMParams = SummaryAPI.SummaryDKIMParams;
-  export import SummaryDmarcParams = SummaryAPI.SummaryDmarcParams;
+  export import SummaryDMARCParams = SummaryAPI.SummaryDMARCParams;
   export import SummaryMaliciousParams = SummaryAPI.SummaryMaliciousParams;
   export import SummarySpamParams = SummaryAPI.SummarySpamParams;
   export import SummarySPFParams = SummaryAPI.SummarySPFParams;
   export import SummaryThreatCategoryParams = SummaryAPI.SummaryThreatCategoryParams;
   export import TimeseriesGroups = TimeseriesGroupsAPI.TimeseriesGroups;
-  export import TimeseriesGroupArcResponse = TimeseriesGroupsAPI.TimeseriesGroupArcResponse;
+  export import TimeseriesGroupARCResponse = TimeseriesGroupsAPI.TimeseriesGroupARCResponse;
   export import TimeseriesGroupDKIMResponse = TimeseriesGroupsAPI.TimeseriesGroupDKIMResponse;
-  export import TimeseriesGroupArcParams = TimeseriesGroupsAPI.TimeseriesGroupArcParams;
+  export import TimeseriesGroupARCParams = TimeseriesGroupsAPI.TimeseriesGroupARCParams;
   export import TimeseriesGroupDKIMParams = TimeseriesGroupsAPI.TimeseriesGroupDKIMParams;
 }

@@ -6,4 +6,4 @@ export {
   ContentListUpdateParams,
   ContentLists,
 } from './content-lists/index';
-export { IpfsUniversalPaths } from './ipfs-universal-paths';
+export { IPFSUniversalPaths } from './ipfs-universal-paths';

@@ -1,20 +1,20 @@
 // File generated from our OpenAPI spec by Stainless.
 
 import { APIResource } from 'cloudflare/resource';
-import * as IqiAPI from 'cloudflare/resources/radar/quality/iqi';
+import * as IQIAPI from 'cloudflare/resources/radar/quality/iqi';
 import * as SpeedAPI from 'cloudflare/resources/radar/quality/speed/speed';
 
 export class Quality extends APIResource {
-  iqi: IqiAPI.Iqi = new IqiAPI.Iqi(this._client);
+  iqi: IQIAPI.IQI = new IQIAPI.IQI(this._client);
   speed: SpeedAPI.Speed = new SpeedAPI.Speed(this._client);
 }
 
 export namespace Quality {
-  export import Iqi = IqiAPI.Iqi;
-  export import IqiSummaryResponse = IqiAPI.IqiSummaryResponse;
-  export import IqiTimeseriesGroupsResponse = IqiAPI.IqiTimeseriesGroupsResponse;
-  export import IqiSummaryParams = IqiAPI.IqiSummaryParams;
-  export import IqiTimeseriesGroupsParams = IqiAPI.IqiTimeseriesGroupsParams;
+  export import IQI = IQIAPI.IQI;
+  export import IQISummaryResponse = IQIAPI.IQISummaryResponse;
+  export import IQITimeseriesGroupsResponse = IQIAPI.IQITimeseriesGroupsResponse;
+  export import IQISummaryParams = IQIAPI.IQISummaryParams;
+  export import IQITimeseriesGroupsParams = IQIAPI.IQITimeseriesGroupsParams;
   export import Speed = SpeedAPI.Speed;
   export import SpeedHistogramResponse = SpeedAPI.SpeedHistogramResponse;
   export import SpeedSummaryResponse = SpeedAPI.SpeedSummaryResponse;

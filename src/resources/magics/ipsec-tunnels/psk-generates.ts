@@ -2,9 +2,9 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as PskGeneratesAPI from 'cloudflare/resources/magics/ipsec-tunnels/psk-generates';
+import * as PSKGeneratesAPI from 'cloudflare/resources/magics/ipsec-tunnels/psk-generates';
 
-export class PskGenerates extends APIResource {
+export class PSKGenerates extends APIResource {
   /**
    * Generates a Pre Shared Key for a specific IPsec tunnel used in the IKE session.
    * Use `?validate_only=true` as an optional query parameter to only run validation
@@ -16,17 +16,17 @@ export class PskGenerates extends APIResource {
     accountIdentifier: string,
     tunnelIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PskGenerateCreateResponse> {
+  ): Core.APIPromise<PSKGenerateCreateResponse> {
     return (
       this._client.post(
         `/accounts/${accountIdentifier}/magic/ipsec_tunnels/${tunnelIdentifier}/psk_generate`,
         options,
-      ) as Core.APIPromise<{ result: PskGenerateCreateResponse }>
+      ) as Core.APIPromise<{ result: PSKGenerateCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface PskGenerateCreateResponse {
+export interface PSKGenerateCreateResponse {
   /**
    * Identifier
    */
@@ -40,14 +40,14 @@ export interface PskGenerateCreateResponse {
   /**
    * The PSK metadata that includes when the PSK was generated.
    */
-  psk_metadata?: PskGenerateCreateResponse.PskMetadata;
+  psk_metadata?: PSKGenerateCreateResponse.PSKMetadata;
 }
 
-export namespace PskGenerateCreateResponse {
+export namespace PSKGenerateCreateResponse {
   /**
    * The PSK metadata that includes when the PSK was generated.
    */
-  export interface PskMetadata {
+  export interface PSKMetadata {
     /**
      * The date and time the tunnel was last modified.
      */
@@ -55,6 +55,6 @@ export namespace PskGenerateCreateResponse {
   }
 }
 
-export namespace PskGenerates {
-  export import PskGenerateCreateResponse = PskGeneratesAPI.PskGenerateCreateResponse;
+export namespace PSKGenerates {
+  export import PSKGenerateCreateResponse = PSKGeneratesAPI.PSKGenerateCreateResponse;
 }

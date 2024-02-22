@@ -2,29 +2,29 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as UuidAPI from 'cloudflare/resources/dcv-delegation/uuid';
+import * as UUIDAPI from 'cloudflare/resources/dcv-delegation/uuid';
 
-export class Uuid extends APIResource {
+export class UUID extends APIResource {
   /**
    * Retrieve the account and zone specific unique identifier used as part of the
    * CNAME target for DCV Delegation.
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<UuidGetResponse> {
+  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<UUIDGetResponse> {
     return (
       this._client.get(`/zones/${zoneId}/dcv_delegation/uuid`, options) as Core.APIPromise<{
-        result: UuidGetResponse;
+        result: UUIDGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface UuidGetResponse {
+export interface UUIDGetResponse {
   /**
    * The DCV Delegation unique identifier.
    */
   uuid?: string;
 }
 
-export namespace Uuid {
-  export import UuidGetResponse = UuidAPI.UuidGetResponse;
+export namespace UUID {
+  export import UUIDGetResponse = UUIDAPI.UUIDGetResponse;
 }

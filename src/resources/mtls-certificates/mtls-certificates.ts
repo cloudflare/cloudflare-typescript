@@ -2,10 +2,10 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as MtlsCertificatesAPI from 'cloudflare/resources/mtls-certificates/mtls-certificates';
+import * as MTLSCertificatesAPI from 'cloudflare/resources/mtls-certificates/mtls-certificates';
 import * as AssociationsAPI from 'cloudflare/resources/mtls-certificates/associations';
 
-export class MtlsCertificates extends APIResource {
+export class MTLSCertificates extends APIResource {
   associations: AssociationsAPI.Associations = new AssociationsAPI.Associations(this._client);
 
   /**
@@ -13,12 +13,12 @@ export class MtlsCertificates extends APIResource {
    */
   create(
     accountId: string,
-    body: MtlsCertificateCreateParams,
+    body: MTLSCertificateCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MtlsCertificateCreateResponse> {
+  ): Core.APIPromise<MTLSCertificateCreateResponse> {
     return (
       this._client.post(`/accounts/${accountId}/mtls_certificates`, { body, ...options }) as Core.APIPromise<{
-        result: MtlsCertificateCreateResponse;
+        result: MTLSCertificateCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -29,10 +29,10 @@ export class MtlsCertificates extends APIResource {
   list(
     accountId: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MtlsCertificateListResponse | null> {
+  ): Core.APIPromise<MTLSCertificateListResponse | null> {
     return (
       this._client.get(`/accounts/${accountId}/mtls_certificates`, options) as Core.APIPromise<{
-        result: MtlsCertificateListResponse | null;
+        result: MTLSCertificateListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -45,12 +45,12 @@ export class MtlsCertificates extends APIResource {
     accountId: string,
     mtlsCertificateId: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MtlsCertificateDeleteResponse> {
+  ): Core.APIPromise<MTLSCertificateDeleteResponse> {
     return (
       this._client.delete(
         `/accounts/${accountId}/mtls_certificates/${mtlsCertificateId}`,
         options,
-      ) as Core.APIPromise<{ result: MtlsCertificateDeleteResponse }>
+      ) as Core.APIPromise<{ result: MTLSCertificateDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -61,17 +61,17 @@ export class MtlsCertificates extends APIResource {
     accountId: string,
     mtlsCertificateId: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MtlsCertificateGetResponse> {
+  ): Core.APIPromise<MTLSCertificateGetResponse> {
     return (
       this._client.get(
         `/accounts/${accountId}/mtls_certificates/${mtlsCertificateId}`,
         options,
-      ) as Core.APIPromise<{ result: MtlsCertificateGetResponse }>
+      ) as Core.APIPromise<{ result: MTLSCertificateGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface MtlsCertificateCreateResponse {
+export interface MTLSCertificateCreateResponse {
   /**
    * Identifier
    */
@@ -123,10 +123,10 @@ export interface MtlsCertificateCreateResponse {
   uploaded_on?: string;
 }
 
-export type MtlsCertificateListResponse = Array<MtlsCertificateListResponse.MtlsCertificateListResponseItem>;
+export type MTLSCertificateListResponse = Array<MTLSCertificateListResponse.MTLSCertificateListResponseItem>;
 
-export namespace MtlsCertificateListResponse {
-  export interface MtlsCertificateListResponseItem {
+export namespace MTLSCertificateListResponse {
+  export interface MTLSCertificateListResponseItem {
     /**
      * Identifier
      */
@@ -174,7 +174,7 @@ export namespace MtlsCertificateListResponse {
   }
 }
 
-export interface MtlsCertificateDeleteResponse {
+export interface MTLSCertificateDeleteResponse {
   /**
    * Identifier
    */
@@ -221,7 +221,7 @@ export interface MtlsCertificateDeleteResponse {
   uploaded_on?: string;
 }
 
-export interface MtlsCertificateGetResponse {
+export interface MTLSCertificateGetResponse {
   /**
    * Identifier
    */
@@ -268,7 +268,7 @@ export interface MtlsCertificateGetResponse {
   uploaded_on?: string;
 }
 
-export interface MtlsCertificateCreateParams {
+export interface MTLSCertificateCreateParams {
   /**
    * Indicates whether the certificate is a CA or leaf certificate.
    */
@@ -290,12 +290,12 @@ export interface MtlsCertificateCreateParams {
   private_key?: string;
 }
 
-export namespace MtlsCertificates {
-  export import MtlsCertificateCreateResponse = MtlsCertificatesAPI.MtlsCertificateCreateResponse;
-  export import MtlsCertificateListResponse = MtlsCertificatesAPI.MtlsCertificateListResponse;
-  export import MtlsCertificateDeleteResponse = MtlsCertificatesAPI.MtlsCertificateDeleteResponse;
-  export import MtlsCertificateGetResponse = MtlsCertificatesAPI.MtlsCertificateGetResponse;
-  export import MtlsCertificateCreateParams = MtlsCertificatesAPI.MtlsCertificateCreateParams;
+export namespace MTLSCertificates {
+  export import MTLSCertificateCreateResponse = MTLSCertificatesAPI.MTLSCertificateCreateResponse;
+  export import MTLSCertificateListResponse = MTLSCertificatesAPI.MTLSCertificateListResponse;
+  export import MTLSCertificateDeleteResponse = MTLSCertificatesAPI.MTLSCertificateDeleteResponse;
+  export import MTLSCertificateGetResponse = MTLSCertificatesAPI.MTLSCertificateGetResponse;
+  export import MTLSCertificateCreateParams = MTLSCertificatesAPI.MTLSCertificateCreateParams;
   export import Associations = AssociationsAPI.Associations;
   export import AssociationListResponse = AssociationsAPI.AssociationListResponse;
 }

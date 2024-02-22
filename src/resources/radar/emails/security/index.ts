@@ -2,12 +2,12 @@
 
 export { Security } from './security';
 export {
-  TimeseriesGroupDmarcResponse,
+  TimeseriesGroupDMARCResponse,
   TimeseriesGroupMaliciousResponse,
   TimeseriesGroupSpamResponse,
   TimeseriesGroupSPFResponse,
   TimeseriesGroupThreatCategoryResponse,
-  TimeseriesGroupDmarcParams,
+  TimeseriesGroupDMARCParams,
   TimeseriesGroupMaliciousParams,
   TimeseriesGroupSpamParams,
   TimeseriesGroupSPFParams,

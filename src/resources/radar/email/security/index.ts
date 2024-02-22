@@ -2,16 +2,16 @@
 
 export { Security } from './security';
 export {
-  SummaryArcResponse,
+  SummaryARCResponse,
   SummaryDKIMResponse,
-  SummaryDmarcResponse,
+  SummaryDMARCResponse,
   SummaryMaliciousResponse,
   SummarySpamResponse,
   SummarySPFResponse,
   SummaryThreatCategoryResponse,
-  SummaryArcParams,
+  SummaryARCParams,
   SummaryDKIMParams,
-  SummaryDmarcParams,
+  SummaryDMARCParams,
   SummaryMaliciousParams,
   SummarySpamParams,
   SummarySPFParams,
@@ -19,9 +19,9 @@ export {
   Summary,
 } from './summary';
 export {
-  TimeseriesGroupArcResponse,
+  TimeseriesGroupARCResponse,
   TimeseriesGroupDKIMResponse,
-  TimeseriesGroupArcParams,
+  TimeseriesGroupARCParams,
   TimeseriesGroupDKIMParams,
   TimeseriesGroups,
 } from './timeseries-groups';

@@ -3,23 +3,23 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
-import * as DmarcAPI from 'cloudflare/resources/radar/email/security/top/locations/dmarc';
+import * as DMARCAPI from 'cloudflare/resources/radar/email/security/top/locations/dmarc';
 
-export class Dmarc extends APIResource {
+export class DMARC extends APIResource {
   /**
    * Get the locations by email DMARC validation.
    */
   get(
     dmarc: 'PASS' | 'NONE' | 'FAIL',
-    query?: DmarcGetParams,
+    query?: DMARCGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DmarcGetResponse>;
-  get(dmarc: 'PASS' | 'NONE' | 'FAIL', options?: Core.RequestOptions): Core.APIPromise<DmarcGetResponse>;
+  ): Core.APIPromise<DMARCGetResponse>;
+  get(dmarc: 'PASS' | 'NONE' | 'FAIL', options?: Core.RequestOptions): Core.APIPromise<DMARCGetResponse>;
   get(
     dmarc: 'PASS' | 'NONE' | 'FAIL',
-    query: DmarcGetParams | Core.RequestOptions = {},
+    query: DMARCGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DmarcGetResponse> {
+  ): Core.APIPromise<DMARCGetResponse> {
     if (isRequestOptions(query)) {
       return this.get(dmarc, {}, query);
     }
@@ -27,18 +27,18 @@ export class Dmarc extends APIResource {
       this._client.get(`/radar/email/security/top/locations/dmarc/${dmarc}`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: DmarcGetResponse }>
+      }) as Core.APIPromise<{ result: DMARCGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface DmarcGetResponse {
-  meta: DmarcGetResponse.Meta;
+export interface DMARCGetResponse {
+  meta: DMARCGetResponse.Meta;
 
-  top_0: Array<DmarcGetResponse.Top0>;
+  top_0: Array<DMARCGetResponse.Top0>;
 }
 
-export namespace DmarcGetResponse {
+export namespace DMARCGetResponse {
   export interface Meta {
     dateRange: Array<Meta.DateRange>;
 
@@ -94,7 +94,7 @@ export namespace DmarcGetResponse {
   }
 }
 
-export interface DmarcGetParams {
+export interface DMARCGetParams {
   /**
    * Filter for arc (Authenticated Received Chain).
    */
@@ -173,7 +173,7 @@ export interface DmarcGetParams {
   spf?: Array<'PASS' | 'NONE' | 'FAIL'>;
 }
 
-export namespace Dmarc {
-  export import DmarcGetResponse = DmarcAPI.DmarcGetResponse;
-  export import DmarcGetParams = DmarcAPI.DmarcGetParams;
+export namespace DMARC {
+  export import DMARCGetResponse = DMARCAPI.DMARCGetResponse;
+  export import DMARCGetParams = DMARCAPI.DMARCGetParams;
 }

@@ -6,5 +6,5 @@ export { DeviceTypeGetResponse, DeviceTypeGetParams, DeviceType } from './device
 export { HTTPMethodGetResponse, HTTPMethodGetParams, HTTPMethod } from './http-method';
 export { HTTPProtocolGetResponse, HTTPProtocolGetParams, HTTPProtocol } from './http-protocol';
 export { IPVersionGetResponse, IPVersionGetParams, IPVersion } from './ip-version';
-export { OGetResponse, OGetParams, Os } from './os';
+export { OSGetResponse, OSGetParams, OS } from './os';
 export { TLSVersionGetResponse, TLSVersionGetParams, TLSVersion } from './tls-version';

@@ -10,4 +10,4 @@ export {
   HostnameEditParams,
   Hostnames,
 } from './hostnames';
-export { IpfsUniversalPaths } from './ipfs-universal-paths/index';
+export { IPFSUniversalPaths } from './ipfs-universal-paths/index';

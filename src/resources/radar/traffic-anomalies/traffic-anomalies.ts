@@ -48,7 +48,7 @@ export namespace TrafficAnomalyGetResponse {
 
     uuid: string;
 
-    asnDetails?: TrafficAnomaly.AsnDetails;
+    asnDetails?: TrafficAnomaly.ASNDetails;
 
     endDate?: string;
 
@@ -58,15 +58,15 @@ export namespace TrafficAnomalyGetResponse {
   }
 
   export namespace TrafficAnomaly {
-    export interface AsnDetails {
+    export interface ASNDetails {
       asn: string;
 
       name: string;
 
-      locations?: AsnDetails.Locations;
+      locations?: ASNDetails.Locations;
     }
 
-    export namespace AsnDetails {
+    export namespace ASNDetails {
       export interface Locations {
         code: string;
 

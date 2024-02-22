@@ -10,14 +10,14 @@ export class TimeseriesGroups extends APIResource {
    * Percentage distribution of emails classified per Arc validation over time.
    */
   arc(
-    query?: TimeseriesGroupArcParams,
+    query?: TimeseriesGroupARCParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupArcResponse>;
-  arc(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupArcResponse>;
+  ): Core.APIPromise<TimeseriesGroupARCResponse>;
+  arc(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupARCResponse>;
   arc(
-    query: TimeseriesGroupArcParams | Core.RequestOptions = {},
+    query: TimeseriesGroupARCParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupArcResponse> {
+  ): Core.APIPromise<TimeseriesGroupARCResponse> {
     if (isRequestOptions(query)) {
       return this.arc({}, query);
     }
@@ -25,7 +25,7 @@ export class TimeseriesGroups extends APIResource {
       this._client.get('/radar/email/security/timeseries_groups/arc', {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: TimeseriesGroupArcResponse }>
+      }) as Core.APIPromise<{ result: TimeseriesGroupARCResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -53,13 +53,13 @@ export class TimeseriesGroups extends APIResource {
   }
 }
 
-export interface TimeseriesGroupArcResponse {
+export interface TimeseriesGroupARCResponse {
   meta: unknown;
 
-  serie_0: TimeseriesGroupArcResponse.Serie0;
+  serie_0: TimeseriesGroupARCResponse.Serie0;
 }
 
-export namespace TimeseriesGroupArcResponse {
+export namespace TimeseriesGroupARCResponse {
   export interface Serie0 {
     FAIL: Array<string>;
 
@@ -85,7 +85,7 @@ export namespace TimeseriesGroupDKIMResponse {
   }
 }
 
-export interface TimeseriesGroupArcParams {
+export interface TimeseriesGroupARCParams {
   /**
    * Aggregation interval results should be returned in (for example, in 15 minutes
    * or 1 hour intervals). Refer to
@@ -248,8 +248,8 @@ export interface TimeseriesGroupDKIMParams {
 }
 
 export namespace TimeseriesGroups {
-  export import TimeseriesGroupArcResponse = TimeseriesGroupsAPI.TimeseriesGroupArcResponse;
+  export import TimeseriesGroupARCResponse = TimeseriesGroupsAPI.TimeseriesGroupARCResponse;
   export import TimeseriesGroupDKIMResponse = TimeseriesGroupsAPI.TimeseriesGroupDKIMResponse;
-  export import TimeseriesGroupArcParams = TimeseriesGroupsAPI.TimeseriesGroupArcParams;
+  export import TimeseriesGroupARCParams = TimeseriesGroupsAPI.TimeseriesGroupARCParams;
   export import TimeseriesGroupDKIMParams = TimeseriesGroupsAPI.TimeseriesGroupDKIMParams;
 }

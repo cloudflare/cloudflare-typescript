@@ -3,10 +3,10 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as HostnamesAPI from 'cloudflare/resources/web3/hostnames/hostnames';
-import * as IpfsUniversalPathsAPI from 'cloudflare/resources/web3/hostnames/ipfs-universal-paths/ipfs-universal-paths';
+import * as IPFSUniversalPathsAPI from 'cloudflare/resources/web3/hostnames/ipfs-universal-paths/ipfs-universal-paths';
 
 export class Hostnames extends APIResource {
-  ipfsUniversalPaths: IpfsUniversalPathsAPI.IpfsUniversalPaths = new IpfsUniversalPathsAPI.IpfsUniversalPaths(
+  ipfsUniversalPaths: IPFSUniversalPathsAPI.IPFSUniversalPaths = new IPFSUniversalPathsAPI.IPFSUniversalPaths(
     this._client,
   );
 
@@ -277,5 +277,5 @@ export namespace Hostnames {
   export import HostnameGetResponse = HostnamesAPI.HostnameGetResponse;
   export import HostnameCreateParams = HostnamesAPI.HostnameCreateParams;
   export import HostnameEditParams = HostnamesAPI.HostnameEditParams;
-  export import IpfsUniversalPaths = IpfsUniversalPathsAPI.IpfsUniversalPaths;
+  export import IPFSUniversalPaths = IPFSUniversalPathsAPI.IPFSUniversalPaths;
 }

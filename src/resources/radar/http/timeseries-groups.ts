@@ -176,20 +176,20 @@ export class TimeseriesGroups extends APIResource {
    * systems.
    */
   os(
-    query?: TimeseriesGroupOsParams,
+    query?: TimeseriesGroupOSParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupOsResponse>;
-  os(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupOsResponse>;
+  ): Core.APIPromise<TimeseriesGroupOSResponse>;
+  os(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupOSResponse>;
   os(
-    query: TimeseriesGroupOsParams | Core.RequestOptions = {},
+    query: TimeseriesGroupOSParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupOsResponse> {
+  ): Core.APIPromise<TimeseriesGroupOSResponse> {
     if (isRequestOptions(query)) {
       return this.os({}, query);
     }
     return (
       this._client.get('/radar/http/timeseries_groups/os', { query, ...options }) as Core.APIPromise<{
-        result: TimeseriesGroupOsResponse;
+        result: TimeseriesGroupOSResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -329,13 +329,13 @@ export namespace TimeseriesGroupIPVersionResponse {
   }
 }
 
-export interface TimeseriesGroupOsResponse {
+export interface TimeseriesGroupOSResponse {
   meta: unknown;
 
-  serie_0: TimeseriesGroupOsResponse.Serie0;
+  serie_0: TimeseriesGroupOSResponse.Serie0;
 }
 
-export namespace TimeseriesGroupOsResponse {
+export namespace TimeseriesGroupOSResponse {
   export interface Serie0 {
     timestamps: Array<string>;
     [k: string]: Array<string>;
@@ -1058,7 +1058,7 @@ export interface TimeseriesGroupIPVersionParams {
   tlsVersion?: Array<'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3' | 'TLSvQUIC'>;
 }
 
-export interface TimeseriesGroupOsParams {
+export interface TimeseriesGroupOSParams {
   /**
    * Aggregation interval results should be returned in (for example, in 15 minutes
    * or 1 hour intervals). Refer to
@@ -1260,7 +1260,7 @@ export namespace TimeseriesGroups {
   export import TimeseriesGroupHTTPProtocolResponse = TimeseriesGroupsAPI.TimeseriesGroupHTTPProtocolResponse;
   export import TimeseriesGroupHTTPVersionResponse = TimeseriesGroupsAPI.TimeseriesGroupHTTPVersionResponse;
   export import TimeseriesGroupIPVersionResponse = TimeseriesGroupsAPI.TimeseriesGroupIPVersionResponse;
-  export import TimeseriesGroupOsResponse = TimeseriesGroupsAPI.TimeseriesGroupOsResponse;
+  export import TimeseriesGroupOSResponse = TimeseriesGroupsAPI.TimeseriesGroupOSResponse;
   export import TimeseriesGroupTLSVersionResponse = TimeseriesGroupsAPI.TimeseriesGroupTLSVersionResponse;
   export import TimeseriesGroupBotClassParams = TimeseriesGroupsAPI.TimeseriesGroupBotClassParams;
   export import TimeseriesGroupBrowserParams = TimeseriesGroupsAPI.TimeseriesGroupBrowserParams;
@@ -1269,6 +1269,6 @@ export namespace TimeseriesGroups {
   export import TimeseriesGroupHTTPProtocolParams = TimeseriesGroupsAPI.TimeseriesGroupHTTPProtocolParams;
   export import TimeseriesGroupHTTPVersionParams = TimeseriesGroupsAPI.TimeseriesGroupHTTPVersionParams;
   export import TimeseriesGroupIPVersionParams = TimeseriesGroupsAPI.TimeseriesGroupIPVersionParams;
-  export import TimeseriesGroupOsParams = TimeseriesGroupsAPI.TimeseriesGroupOsParams;
+  export import TimeseriesGroupOSParams = TimeseriesGroupsAPI.TimeseriesGroupOSParams;
   export import TimeseriesGroupTLSVersionParams = TimeseriesGroupsAPI.TimeseriesGroupTLSVersionParams;
 }

@@ -9,7 +9,7 @@ import * as DeviceTypeAPI from 'cloudflare/resources/radar/http/ases/device-type
 import * as HTTPMethodAPI from 'cloudflare/resources/radar/http/ases/http-method';
 import * as HTTPProtocolAPI from 'cloudflare/resources/radar/http/ases/http-protocol';
 import * as IPVersionAPI from 'cloudflare/resources/radar/http/ases/ip-version';
-import * as OsAPI from 'cloudflare/resources/radar/http/ases/os';
+import * as OSAPI from 'cloudflare/resources/radar/http/ases/os';
 import * as TLSVersionAPI from 'cloudflare/resources/radar/http/ases/tls-version';
 
 export class Ases extends APIResource {
@@ -18,7 +18,7 @@ export class Ases extends APIResource {
   httpProtocol: HTTPProtocolAPI.HTTPProtocol = new HTTPProtocolAPI.HTTPProtocol(this._client);
   httpMethod: HTTPMethodAPI.HTTPMethod = new HTTPMethodAPI.HTTPMethod(this._client);
   ipVersion: IPVersionAPI.IPVersion = new IPVersionAPI.IPVersion(this._client);
-  os: OsAPI.Os = new OsAPI.Os(this._client);
+  os: OSAPI.OS = new OSAPI.OS(this._client);
   tlsVersion: TLSVersionAPI.TLSVersion = new TLSVersionAPI.TLSVersion(this._client);
 
   /**
@@ -222,9 +222,9 @@ export namespace Ases {
   export import IPVersion = IPVersionAPI.IPVersion;
   export import IPVersionGetResponse = IPVersionAPI.IPVersionGetResponse;
   export import IPVersionGetParams = IPVersionAPI.IPVersionGetParams;
-  export import Os = OsAPI.Os;
-  export import OGetResponse = OsAPI.OGetResponse;
-  export import OGetParams = OsAPI.OGetParams;
+  export import OS = OSAPI.OS;
+  export import OSGetResponse = OSAPI.OSGetResponse;
+  export import OSGetParams = OSAPI.OSGetParams;
   export import TLSVersion = TLSVersionAPI.TLSVersion;
   export import TLSVersionGetResponse = TLSVersionAPI.TLSVersionGetResponse;
   export import TLSVersionGetParams = TLSVersionAPI.TLSVersionGetParams;

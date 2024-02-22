@@ -3,24 +3,24 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
-import * as AsnsAPI from 'cloudflare/resources/radar/entities/asns';
+import * as ASNsAPI from 'cloudflare/resources/radar/entities/asns';
 
-export class Asns extends APIResource {
+export class ASNs extends APIResource {
   /**
    * Gets a list of autonomous systems (AS).
    */
-  list(query?: AsnListParams, options?: Core.RequestOptions): Core.APIPromise<AsnListResponse>;
-  list(options?: Core.RequestOptions): Core.APIPromise<AsnListResponse>;
+  list(query?: ASNListParams, options?: Core.RequestOptions): Core.APIPromise<ASNListResponse>;
+  list(options?: Core.RequestOptions): Core.APIPromise<ASNListResponse>;
   list(
-    query: AsnListParams | Core.RequestOptions = {},
+    query: ASNListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AsnListResponse> {
+  ): Core.APIPromise<ASNListResponse> {
     if (isRequestOptions(query)) {
       return this.list({}, query);
     }
     return (
       this._client.get('/radar/entities/asns', { query, ...options }) as Core.APIPromise<{
-        result: AsnListResponse;
+        result: ASNListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -31,19 +31,19 @@ export class Asns extends APIResource {
    * because Cloudflare has a small amount of traffic from/to this AS). Population
    * estimates come from APNIC (refer to https://labs.apnic.net/?p=526).
    */
-  get(asn: number, query?: AsnGetParams, options?: Core.RequestOptions): Core.APIPromise<AsnGetResponse>;
-  get(asn: number, options?: Core.RequestOptions): Core.APIPromise<AsnGetResponse>;
+  get(asn: number, query?: ASNGetParams, options?: Core.RequestOptions): Core.APIPromise<ASNGetResponse>;
+  get(asn: number, options?: Core.RequestOptions): Core.APIPromise<ASNGetResponse>;
   get(
     asn: number,
-    query: AsnGetParams | Core.RequestOptions = {},
+    query: ASNGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AsnGetResponse> {
+  ): Core.APIPromise<ASNGetResponse> {
     if (isRequestOptions(query)) {
       return this.get(asn, {}, query);
     }
     return (
       this._client.get(`/radar/entities/asns/${asn}`, { query, ...options }) as Core.APIPromise<{
-        result: AsnGetResponse;
+        result: ASNGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -52,10 +52,10 @@ export class Asns extends APIResource {
    * Get the requested autonomous system information based on IP address. Population
    * estimates come from APNIC (refer to https://labs.apnic.net/?p=526).
    */
-  ip(query: AsnIPParams, options?: Core.RequestOptions): Core.APIPromise<AsnIPResponse> {
+  ip(query: ASNIPParams, options?: Core.RequestOptions): Core.APIPromise<ASNIPResponse> {
     return (
       this._client.get('/radar/entities/asns/ip', { query, ...options }) as Core.APIPromise<{
-        result: AsnIPResponse;
+        result: ASNIPResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -63,30 +63,30 @@ export class Asns extends APIResource {
   /**
    * Get AS-level relationship for given networks.
    */
-  rel(asn: number, query?: AsnRelParams, options?: Core.RequestOptions): Core.APIPromise<AsnRelResponse>;
-  rel(asn: number, options?: Core.RequestOptions): Core.APIPromise<AsnRelResponse>;
+  rel(asn: number, query?: ASNRelParams, options?: Core.RequestOptions): Core.APIPromise<ASNRelResponse>;
+  rel(asn: number, options?: Core.RequestOptions): Core.APIPromise<ASNRelResponse>;
   rel(
     asn: number,
-    query: AsnRelParams | Core.RequestOptions = {},
+    query: ASNRelParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AsnRelResponse> {
+  ): Core.APIPromise<ASNRelResponse> {
     if (isRequestOptions(query)) {
       return this.rel(asn, {}, query);
     }
     return (
       this._client.get(`/radar/entities/asns/${asn}/rel`, { query, ...options }) as Core.APIPromise<{
-        result: AsnRelResponse;
+        result: ASNRelResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface AsnListResponse {
-  asns: Array<AsnListResponse.Asn>;
+export interface ASNListResponse {
+  asns: Array<ASNListResponse.ASN>;
 }
 
-export namespace AsnListResponse {
-  export interface Asn {
+export namespace ASNListResponse {
+  export interface ASN {
     asn: number;
 
     country: string;
@@ -108,12 +108,12 @@ export namespace AsnListResponse {
   }
 }
 
-export interface AsnGetResponse {
-  asn: AsnGetResponse.Asn;
+export interface ASNGetResponse {
+  asn: ASNGetResponse.ASN;
 }
 
-export namespace AsnGetResponse {
-  export interface Asn {
+export namespace ASNGetResponse {
+  export interface ASN {
     asn: number;
 
     confidenceLevel: number;
@@ -122,13 +122,13 @@ export namespace AsnGetResponse {
 
     countryName: string;
 
-    estimatedUsers: Asn.EstimatedUsers;
+    estimatedUsers: ASN.EstimatedUsers;
 
     name: string;
 
     orgName: string;
 
-    related: Array<Asn.Related>;
+    related: Array<ASN.Related>;
 
     /**
      * Regional Internet Registry
@@ -145,7 +145,7 @@ export namespace AsnGetResponse {
     nameLong?: string;
   }
 
-  export namespace Asn {
+  export namespace ASN {
     export interface EstimatedUsers {
       locations: Array<EstimatedUsers.Location>;
 
@@ -183,25 +183,25 @@ export namespace AsnGetResponse {
   }
 }
 
-export interface AsnIPResponse {
-  asn: AsnIPResponse.Asn;
+export interface ASNIPResponse {
+  asn: ASNIPResponse.ASN;
 }
 
-export namespace AsnIPResponse {
-  export interface Asn {
+export namespace ASNIPResponse {
+  export interface ASN {
     asn: number;
 
     country: string;
 
     countryName: string;
 
-    estimatedUsers: Asn.EstimatedUsers;
+    estimatedUsers: ASN.EstimatedUsers;
 
     name: string;
 
     orgName: string;
 
-    related: Array<Asn.Related>;
+    related: Array<ASN.Related>;
 
     /**
      * Regional Internet Registry
@@ -218,7 +218,7 @@ export namespace AsnIPResponse {
     nameLong?: string;
   }
 
-  export namespace Asn {
+  export namespace ASN {
     export interface EstimatedUsers {
       locations: Array<EstimatedUsers.Location>;
 
@@ -256,13 +256,13 @@ export namespace AsnIPResponse {
   }
 }
 
-export interface AsnRelResponse {
-  meta: AsnRelResponse.Meta;
+export interface ASNRelResponse {
+  meta: ASNRelResponse.Meta;
 
-  rels: Array<AsnRelResponse.Rel>;
+  rels: Array<ASNRelResponse.Rel>;
 }
 
-export namespace AsnRelResponse {
+export namespace ASNRelResponse {
   export interface Meta {
     data_time: string;
 
@@ -288,7 +288,7 @@ export namespace AsnRelResponse {
   }
 }
 
-export interface AsnListParams {
+export interface ASNListParams {
   /**
    * Comma separated list of ASNs.
    */
@@ -320,14 +320,14 @@ export interface AsnListParams {
   orderBy?: 'ASN' | 'POPULATION';
 }
 
-export interface AsnGetParams {
+export interface ASNGetParams {
   /**
    * Format results are returned in.
    */
   format?: 'JSON' | 'CSV';
 }
 
-export interface AsnIPParams {
+export interface ASNIPParams {
   /**
    * IP address.
    */
@@ -339,7 +339,7 @@ export interface AsnIPParams {
   format?: 'JSON' | 'CSV';
 }
 
-export interface AsnRelParams {
+export interface ASNRelParams {
   /**
    * Get the AS relationship of ASN2 with respect to the given ASN
    */
@@ -351,13 +351,13 @@ export interface AsnRelParams {
   format?: 'JSON' | 'CSV';
 }
 
-export namespace Asns {
-  export import AsnListResponse = AsnsAPI.AsnListResponse;
-  export import AsnGetResponse = AsnsAPI.AsnGetResponse;
-  export import AsnIPResponse = AsnsAPI.AsnIPResponse;
-  export import AsnRelResponse = AsnsAPI.AsnRelResponse;
-  export import AsnListParams = AsnsAPI.AsnListParams;
-  export import AsnGetParams = AsnsAPI.AsnGetParams;
-  export import AsnIPParams = AsnsAPI.AsnIPParams;
-  export import AsnRelParams = AsnsAPI.AsnRelParams;
+export namespace ASNs {
+  export import ASNListResponse = ASNsAPI.ASNListResponse;
+  export import ASNGetResponse = ASNsAPI.ASNGetResponse;
+  export import ASNIPResponse = ASNsAPI.ASNIPResponse;
+  export import ASNRelResponse = ASNsAPI.ASNRelResponse;
+  export import ASNListParams = ASNsAPI.ASNListParams;
+  export import ASNGetParams = ASNsAPI.ASNGetParams;
+  export import ASNIPParams = ASNsAPI.ASNIPParams;
+  export import ASNRelParams = ASNsAPI.ASNRelParams;
 }

@@ -9,18 +9,18 @@ export class Summary extends APIResource {
   /**
    * Percentage distribution of emails classified per ARC validation.
    */
-  arc(query?: SummaryArcParams, options?: Core.RequestOptions): Core.APIPromise<SummaryArcResponse>;
-  arc(options?: Core.RequestOptions): Core.APIPromise<SummaryArcResponse>;
+  arc(query?: SummaryARCParams, options?: Core.RequestOptions): Core.APIPromise<SummaryARCResponse>;
+  arc(options?: Core.RequestOptions): Core.APIPromise<SummaryARCResponse>;
   arc(
-    query: SummaryArcParams | Core.RequestOptions = {},
+    query: SummaryARCParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SummaryArcResponse> {
+  ): Core.APIPromise<SummaryARCResponse> {
     if (isRequestOptions(query)) {
       return this.arc({}, query);
     }
     return (
       this._client.get('/radar/email/security/summary/arc', { query, ...options }) as Core.APIPromise<{
-        result: SummaryArcResponse;
+        result: SummaryARCResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -47,18 +47,18 @@ export class Summary extends APIResource {
   /**
    * Percentage distribution of emails classified per DMARC validation.
    */
-  dmarc(query?: SummaryDmarcParams, options?: Core.RequestOptions): Core.APIPromise<SummaryDmarcResponse>;
-  dmarc(options?: Core.RequestOptions): Core.APIPromise<SummaryDmarcResponse>;
+  dmarc(query?: SummaryDMARCParams, options?: Core.RequestOptions): Core.APIPromise<SummaryDMARCResponse>;
+  dmarc(options?: Core.RequestOptions): Core.APIPromise<SummaryDMARCResponse>;
   dmarc(
-    query: SummaryDmarcParams | Core.RequestOptions = {},
+    query: SummaryDMARCParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SummaryDmarcResponse> {
+  ): Core.APIPromise<SummaryDMARCResponse> {
     if (isRequestOptions(query)) {
       return this.dmarc({}, query);
     }
     return (
       this._client.get('/radar/email/security/summary/dmarc', { query, ...options }) as Core.APIPromise<{
-        result: SummaryDmarcResponse;
+        result: SummaryDMARCResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -147,13 +147,13 @@ export class Summary extends APIResource {
   }
 }
 
-export interface SummaryArcResponse {
-  meta: SummaryArcResponse.Meta;
+export interface SummaryARCResponse {
+  meta: SummaryARCResponse.Meta;
 
-  summary_0: SummaryArcResponse.Summary0;
+  summary_0: SummaryARCResponse.Summary0;
 }
 
-export namespace SummaryArcResponse {
+export namespace SummaryARCResponse {
   export interface Meta {
     dateRange: Array<Meta.DateRange>;
 
@@ -275,13 +275,13 @@ export namespace SummaryDKIMResponse {
   }
 }
 
-export interface SummaryDmarcResponse {
-  meta: SummaryDmarcResponse.Meta;
+export interface SummaryDMARCResponse {
+  meta: SummaryDMARCResponse.Meta;
 
-  summary_0: SummaryDmarcResponse.Summary0;
+  summary_0: SummaryDMARCResponse.Summary0;
 }
 
-export namespace SummaryDmarcResponse {
+export namespace SummaryDMARCResponse {
   export interface Meta {
     dateRange: Array<Meta.DateRange>;
 
@@ -593,7 +593,7 @@ export namespace SummaryThreatCategoryResponse {
   }
 }
 
-export interface SummaryArcParams {
+export interface SummaryARCParams {
   /**
    * Array of comma separated list of ASNs, start with `-` to exclude from results.
    * For example, `-174, 3356` excludes results from AS174, but includes results from
@@ -741,7 +741,7 @@ export interface SummaryDKIMParams {
   spf?: Array<'PASS' | 'NONE' | 'FAIL'>;
 }
 
-export interface SummaryDmarcParams {
+export interface SummaryDMARCParams {
   /**
    * Filter for arc (Authenticated Received Chain).
    */
@@ -1127,16 +1127,16 @@ export interface SummaryThreatCategoryParams {
 }
 
 export namespace Summary {
-  export import SummaryArcResponse = SummaryAPI.SummaryArcResponse;
+  export import SummaryARCResponse = SummaryAPI.SummaryARCResponse;
   export import SummaryDKIMResponse = SummaryAPI.SummaryDKIMResponse;
-  export import SummaryDmarcResponse = SummaryAPI.SummaryDmarcResponse;
+  export import SummaryDMARCResponse = SummaryAPI.SummaryDMARCResponse;
   export import SummaryMaliciousResponse = SummaryAPI.SummaryMaliciousResponse;
   export import SummarySpamResponse = SummaryAPI.SummarySpamResponse;
   export import SummarySPFResponse = SummaryAPI.SummarySPFResponse;
   export import SummaryThreatCategoryResponse = SummaryAPI.SummaryThreatCategoryResponse;
-  export import SummaryArcParams = SummaryAPI.SummaryArcParams;
+  export import SummaryARCParams = SummaryAPI.SummaryARCParams;
   export import SummaryDKIMParams = SummaryAPI.SummaryDKIMParams;
-  export import SummaryDmarcParams = SummaryAPI.SummaryDmarcParams;
+  export import SummaryDMARCParams = SummaryAPI.SummaryDMARCParams;
   export import SummaryMaliciousParams = SummaryAPI.SummaryMaliciousParams;
   export import SummarySpamParams = SummaryAPI.SummarySpamParams;
   export import SummarySPFParams = SummaryAPI.SummarySPFParams;
