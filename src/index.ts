@@ -176,7 +176,7 @@ export class Cloudflare extends Core.APIClient {
   cache: API.Cache = new API.Cache(this);
   ssl: API.SSL = new API.SSL(this);
   subscriptions: API.Subscriptions = new API.Subscriptions(this);
-  acm: API.Acm = new API.Acm(this);
+  acm: API.ACM = new API.ACM(this);
   argo: API.Argo = new API.Argo(this);
   availablePlans: API.AvailablePlans = new API.AvailablePlans(this);
   availableRatePlans: API.AvailableRatePlans = new API.AvailableRatePlans(this);
@@ -428,7 +428,7 @@ export namespace Cloudflare {
   export import SubscriptionCreateParams = API.SubscriptionCreateParams;
   export import SubscriptionUpdateParams = API.SubscriptionUpdateParams;
 
-  export import Acm = API.Acm;
+  export import ACM = API.ACM;
 
   export import Argo = API.Argo;
 
