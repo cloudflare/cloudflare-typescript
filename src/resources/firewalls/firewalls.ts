@@ -4,14 +4,14 @@ import { APIResource } from 'cloudflare/resource';
 import * as AccessRulesAPI from 'cloudflare/resources/firewalls/access-rules';
 import * as LockdownsAPI from 'cloudflare/resources/firewalls/lockdowns';
 import * as RulesAPI from 'cloudflare/resources/firewalls/rules';
-import * as UaRulesAPI from 'cloudflare/resources/firewalls/ua-rules';
+import * as UARulesAPI from 'cloudflare/resources/firewalls/ua-rules';
 import * as WAFAPI from 'cloudflare/resources/firewalls/waf/waf';
 
 export class Firewalls extends APIResource {
   lockdowns: LockdownsAPI.Lockdowns = new LockdownsAPI.Lockdowns(this._client);
   rules: RulesAPI.Rules = new RulesAPI.Rules(this._client);
   accessRules: AccessRulesAPI.AccessRules = new AccessRulesAPI.AccessRules(this._client);
-  uaRules: UaRulesAPI.UaRules = new UaRulesAPI.UaRules(this._client);
+  uaRules: UARulesAPI.UARules = new UARulesAPI.UARules(this._client);
   waf: WAFAPI.WAF = new WAFAPI.WAF(this._client);
 }
 
@@ -51,15 +51,15 @@ export namespace Firewalls {
   export import AccessRuleDeleteParams = AccessRulesAPI.AccessRuleDeleteParams;
   export import AccessRuleEditParams = AccessRulesAPI.AccessRuleEditParams;
   export import AccessRuleGetParams = AccessRulesAPI.AccessRuleGetParams;
-  export import UaRules = UaRulesAPI.UaRules;
-  export import UaRuleCreateResponse = UaRulesAPI.UaRuleCreateResponse;
-  export import UaRuleUpdateResponse = UaRulesAPI.UaRuleUpdateResponse;
-  export import UaRuleListResponse = UaRulesAPI.UaRuleListResponse;
-  export import UaRuleDeleteResponse = UaRulesAPI.UaRuleDeleteResponse;
-  export import UaRuleGetResponse = UaRulesAPI.UaRuleGetResponse;
-  export import UaRuleListResponsesV4PagePaginationArray = UaRulesAPI.UaRuleListResponsesV4PagePaginationArray;
-  export import UaRuleCreateParams = UaRulesAPI.UaRuleCreateParams;
-  export import UaRuleUpdateParams = UaRulesAPI.UaRuleUpdateParams;
-  export import UaRuleListParams = UaRulesAPI.UaRuleListParams;
+  export import UARules = UARulesAPI.UARules;
+  export import UARuleCreateResponse = UARulesAPI.UARuleCreateResponse;
+  export import UARuleUpdateResponse = UARulesAPI.UARuleUpdateResponse;
+  export import UARuleListResponse = UARulesAPI.UARuleListResponse;
+  export import UARuleDeleteResponse = UARulesAPI.UARuleDeleteResponse;
+  export import UARuleGetResponse = UARulesAPI.UARuleGetResponse;
+  export import UARuleListResponsesV4PagePaginationArray = UARulesAPI.UARuleListResponsesV4PagePaginationArray;
+  export import UARuleCreateParams = UARulesAPI.UARuleCreateParams;
+  export import UARuleUpdateParams = UARulesAPI.UARuleUpdateParams;
+  export import UARuleListParams = UARulesAPI.UARuleListParams;
   export import WAF = WAFAPI.WAF;
 }

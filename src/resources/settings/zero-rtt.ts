@@ -2,20 +2,20 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as ZeroRttAPI from 'cloudflare/resources/settings/zero-rtt';
+import * as ZeroRTTAPI from 'cloudflare/resources/settings/zero-rtt';
 
-export class ZeroRtt extends APIResource {
+export class ZeroRTT extends APIResource {
   /**
    * Changes the 0-RTT session resumption setting.
    */
   edit(
     zoneId: string,
-    body: ZeroRttEditParams,
+    body: ZeroRTTEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZeroRttEditResponse> {
+  ): Core.APIPromise<ZeroRTTEditResponse> {
     return (
       this._client.patch(`/zones/${zoneId}/settings/0rtt`, { body, ...options }) as Core.APIPromise<{
-        result: ZeroRttEditResponse;
+        result: ZeroRTTEditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -23,10 +23,10 @@ export class ZeroRtt extends APIResource {
   /**
    * Gets 0-RTT session resumption setting.
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<ZeroRttGetResponse> {
+  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<ZeroRTTGetResponse> {
     return (
       this._client.get(`/zones/${zoneId}/settings/0rtt`, options) as Core.APIPromise<{
-        result: ZeroRttGetResponse;
+        result: ZeroRTTGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -35,7 +35,7 @@ export class ZeroRtt extends APIResource {
 /**
  * 0-RTT session resumption enabled for this zone.
  */
-export interface ZeroRttEditResponse {
+export interface ZeroRTTEditResponse {
   /**
    * ID of the zone setting.
    */
@@ -61,7 +61,7 @@ export interface ZeroRttEditResponse {
 /**
  * 0-RTT session resumption enabled for this zone.
  */
-export interface ZeroRttGetResponse {
+export interface ZeroRTTGetResponse {
   /**
    * ID of the zone setting.
    */
@@ -84,15 +84,15 @@ export interface ZeroRttGetResponse {
   modified_on?: string | null;
 }
 
-export interface ZeroRttEditParams {
+export interface ZeroRTTEditParams {
   /**
    * Value of the 0-RTT setting.
    */
   value: 'on' | 'off';
 }
 
-export namespace ZeroRtt {
-  export import ZeroRttEditResponse = ZeroRttAPI.ZeroRttEditResponse;
-  export import ZeroRttGetResponse = ZeroRttAPI.ZeroRttGetResponse;
-  export import ZeroRttEditParams = ZeroRttAPI.ZeroRttEditParams;
+export namespace ZeroRTT {
+  export import ZeroRTTEditResponse = ZeroRTTAPI.ZeroRTTEditResponse;
+  export import ZeroRTTGetResponse = ZeroRTTAPI.ZeroRTTGetResponse;
+  export import ZeroRTTEditParams = ZeroRTTAPI.ZeroRTTEditParams;
 }

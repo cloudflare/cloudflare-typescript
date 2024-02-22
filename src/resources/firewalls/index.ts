@@ -43,15 +43,15 @@ export {
   Rules,
 } from './rules';
 export {
-  UaRuleCreateResponse,
-  UaRuleUpdateResponse,
-  UaRuleListResponse,
-  UaRuleDeleteResponse,
-  UaRuleGetResponse,
-  UaRuleCreateParams,
-  UaRuleUpdateParams,
-  UaRuleListParams,
-  UaRuleListResponsesV4PagePaginationArray,
-  UaRules,
+  UARuleCreateResponse,
+  UARuleUpdateResponse,
+  UARuleListResponse,
+  UARuleDeleteResponse,
+  UARuleGetResponse,
+  UARuleCreateParams,
+  UARuleUpdateParams,
+  UARuleListParams,
+  UARuleListResponsesV4PagePaginationArray,
+  UARules,
 } from './ua-rules';
 export { WAF } from './waf/index';

@@ -2,22 +2,22 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as TsigsAPI from 'cloudflare/resources/secondary-dns/tsigs';
+import * as TSIGsAPI from 'cloudflare/resources/secondary-dns/tsigs';
 
-export class Tsigs extends APIResource {
+export class TSIGs extends APIResource {
   /**
    * Create TSIG.
    */
   create(
     accountId: unknown,
-    body: TsigCreateParams,
+    body: TSIGCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TsigCreateResponse> {
+  ): Core.APIPromise<TSIGCreateResponse> {
     return (
       this._client.post(`/accounts/${accountId}/secondary_dns/tsigs`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: TsigCreateResponse }>
+      }) as Core.APIPromise<{ result: TSIGCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -27,24 +27,24 @@ export class Tsigs extends APIResource {
   update(
     accountId: unknown,
     tsigId: unknown,
-    body: TsigUpdateParams,
+    body: TSIGUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TsigUpdateResponse> {
+  ): Core.APIPromise<TSIGUpdateResponse> {
     return (
       this._client.put(`/accounts/${accountId}/secondary_dns/tsigs/${tsigId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: TsigUpdateResponse }>
+      }) as Core.APIPromise<{ result: TSIGUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List TSIGs.
    */
-  list(accountId: unknown, options?: Core.RequestOptions): Core.APIPromise<TsigListResponse | null> {
+  list(accountId: unknown, options?: Core.RequestOptions): Core.APIPromise<TSIGListResponse | null> {
     return (
       this._client.get(`/accounts/${accountId}/secondary_dns/tsigs`, options) as Core.APIPromise<{
-        result: TsigListResponse | null;
+        result: TSIGListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -56,28 +56,28 @@ export class Tsigs extends APIResource {
     accountId: unknown,
     tsigId: unknown,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TsigDeleteResponse> {
+  ): Core.APIPromise<TSIGDeleteResponse> {
     return (
       this._client.delete(
         `/accounts/${accountId}/secondary_dns/tsigs/${tsigId}`,
         options,
-      ) as Core.APIPromise<{ result: TsigDeleteResponse }>
+      ) as Core.APIPromise<{ result: TSIGDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get TSIG.
    */
-  get(accountId: unknown, tsigId: unknown, options?: Core.RequestOptions): Core.APIPromise<TsigGetResponse> {
+  get(accountId: unknown, tsigId: unknown, options?: Core.RequestOptions): Core.APIPromise<TSIGGetResponse> {
     return (
       this._client.get(`/accounts/${accountId}/secondary_dns/tsigs/${tsigId}`, options) as Core.APIPromise<{
-        result: TsigGetResponse;
+        result: TSIGGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface TsigCreateResponse {
+export interface TSIGCreateResponse {
   id: unknown;
 
   /**
@@ -96,7 +96,7 @@ export interface TsigCreateResponse {
   secret: string;
 }
 
-export interface TsigUpdateResponse {
+export interface TSIGUpdateResponse {
   id: unknown;
 
   /**
@@ -115,10 +115,10 @@ export interface TsigUpdateResponse {
   secret: string;
 }
 
-export type TsigListResponse = Array<TsigListResponse.TsigListResponseItem>;
+export type TSIGListResponse = Array<TSIGListResponse.TSIGListResponseItem>;
 
-export namespace TsigListResponse {
-  export interface TsigListResponseItem {
+export namespace TSIGListResponse {
+  export interface TSIGListResponseItem {
     id: unknown;
 
     /**
@@ -138,11 +138,11 @@ export namespace TsigListResponse {
   }
 }
 
-export interface TsigDeleteResponse {
+export interface TSIGDeleteResponse {
   id?: unknown;
 }
 
-export interface TsigGetResponse {
+export interface TSIGGetResponse {
   id: unknown;
 
   /**
@@ -161,7 +161,7 @@ export interface TsigGetResponse {
   secret: string;
 }
 
-export interface TsigCreateParams {
+export interface TSIGCreateParams {
   /**
    * TSIG algorithm.
    */
@@ -178,7 +178,7 @@ export interface TsigCreateParams {
   secret: string;
 }
 
-export interface TsigUpdateParams {
+export interface TSIGUpdateParams {
   /**
    * TSIG algorithm.
    */
@@ -195,12 +195,12 @@ export interface TsigUpdateParams {
   secret: string;
 }
 
-export namespace Tsigs {
-  export import TsigCreateResponse = TsigsAPI.TsigCreateResponse;
-  export import TsigUpdateResponse = TsigsAPI.TsigUpdateResponse;
-  export import TsigListResponse = TsigsAPI.TsigListResponse;
-  export import TsigDeleteResponse = TsigsAPI.TsigDeleteResponse;
-  export import TsigGetResponse = TsigsAPI.TsigGetResponse;
-  export import TsigCreateParams = TsigsAPI.TsigCreateParams;
-  export import TsigUpdateParams = TsigsAPI.TsigUpdateParams;
+export namespace TSIGs {
+  export import TSIGCreateResponse = TSIGsAPI.TSIGCreateResponse;
+  export import TSIGUpdateResponse = TSIGsAPI.TSIGUpdateResponse;
+  export import TSIGListResponse = TSIGsAPI.TSIGListResponse;
+  export import TSIGDeleteResponse = TSIGsAPI.TSIGDeleteResponse;
+  export import TSIGGetResponse = TSIGsAPI.TSIGGetResponse;
+  export import TSIGCreateParams = TSIGsAPI.TSIGCreateParams;
+  export import TSIGUpdateParams = TSIGsAPI.TSIGUpdateParams;
 }

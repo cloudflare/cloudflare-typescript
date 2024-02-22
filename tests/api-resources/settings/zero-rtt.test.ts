@@ -12,10 +12,10 @@ const cloudflare = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource zeroRtt', () => {
+describe('resource zeroRTT', () => {
   // skipped: tests are disabled for the time being
   test.skip('edit: only required params', async () => {
-    const responsePromise = cloudflare.settings.zeroRtt.edit('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = cloudflare.settings.zeroRTT.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       value: 'on',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -29,14 +29,14 @@ describe('resource zeroRtt', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('edit: required and optional params', async () => {
-    const response = await cloudflare.settings.zeroRtt.edit('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await cloudflare.settings.zeroRTT.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       value: 'on',
     });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('get', async () => {
-    const responsePromise = cloudflare.settings.zeroRtt.get('023e105f4ecef8ad9ca31a8372d0c353');
+    const responsePromise = cloudflare.settings.zeroRTT.get('023e105f4ecef8ad9ca31a8372d0c353');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -50,7 +50,7 @@ describe('resource zeroRtt', () => {
   test.skip('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.settings.zeroRtt.get('023e105f4ecef8ad9ca31a8372d0c353', {
+      cloudflare.settings.zeroRTT.get('023e105f4ecef8ad9ca31a8372d0c353', {
         path: '/_stainless_unknown_path',
       }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
