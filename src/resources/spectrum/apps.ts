@@ -120,7 +120,7 @@ export interface AppCreateResponse {
   /**
    * The anycast edge IP configuration for the hostname of this application.
    */
-  edge_ips?: AppCreateResponse.UnionMember0 | AppCreateResponse.UnionMember1;
+  edge_ips?: AppCreateResponse.UnionMember0 | AppCreateResponse.SpectrumEdgeIPVariable;
 
   /**
    * Enables IP Access Rules for this application. Notes: Only available for TCP
@@ -206,7 +206,7 @@ export namespace AppCreateResponse {
     type?: 'dynamic';
   }
 
-  export interface UnionMember1 {
+  export interface SpectrumEdgeIPVariable {
     /**
      * The array of customer owned IPs we broadcast via anycast for this hostname and
      * application.
@@ -268,7 +268,7 @@ export interface AppUpdateResponse {
   /**
    * The anycast edge IP configuration for the hostname of this application.
    */
-  edge_ips?: AppUpdateResponse.UnionMember0 | AppUpdateResponse.UnionMember1;
+  edge_ips?: AppUpdateResponse.UnionMember0 | AppUpdateResponse.SpectrumEdgeIPVariable;
 
   /**
    * Enables IP Access Rules for this application. Notes: Only available for TCP
@@ -354,7 +354,7 @@ export namespace AppUpdateResponse {
     type?: 'dynamic';
   }
 
-  export interface UnionMember1 {
+  export interface SpectrumEdgeIPVariable {
     /**
      * The array of customer owned IPs we broadcast via anycast for this hostname and
      * application.
@@ -437,7 +437,7 @@ export interface AppCreateParams {
   /**
    * The anycast edge IP configuration for the hostname of this application.
    */
-  edge_ips?: AppCreateParams.UnionMember0 | AppCreateParams.UnionMember1;
+  edge_ips?: AppCreateParams.UnionMember0 | AppCreateParams.SpectrumEdgeIPVariable;
 
   /**
    * Enables IP Access Rules for this application. Notes: Only available for TCP
@@ -519,7 +519,7 @@ export namespace AppCreateParams {
     type?: 'dynamic';
   }
 
-  export interface UnionMember1 {
+  export interface SpectrumEdgeIPVariable {
     /**
      * The array of customer owned IPs we broadcast via anycast for this hostname and
      * application.
@@ -570,7 +570,7 @@ export interface AppUpdateParams {
   /**
    * The anycast edge IP configuration for the hostname of this application.
    */
-  edge_ips?: AppUpdateParams.UnionMember0 | AppUpdateParams.UnionMember1;
+  edge_ips?: AppUpdateParams.UnionMember0 | AppUpdateParams.SpectrumEdgeIPVariable;
 
   /**
    * Enables IP Access Rules for this application. Notes: Only available for TCP
@@ -652,7 +652,7 @@ export namespace AppUpdateParams {
     type?: 'dynamic';
   }
 
-  export interface UnionMember1 {
+  export interface SpectrumEdgeIPVariable {
     /**
      * The array of customer owned IPs we broadcast via anycast for this hostname and
      * application.
