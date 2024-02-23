@@ -302,16 +302,6 @@ Methods:
 - <code title="delete /zones/{zone_id}/hold">client.zones.holds.<a href="./src/resources/zones/holds.ts">delete</a>(zoneId, { ...params }) -> HoldDeleteResponse</code>
 - <code title="get /zones/{zone_id}/hold">client.zones.holds.<a href="./src/resources/zones/holds.ts">get</a>(zoneId) -> HoldGetResponse</code>
 
-# AI
-
-Types:
-
-- <code><a href="./src/resources/ai.ts">AIRunResponse</a></code>
-
-Methods:
-
-- <code title="post /accounts/{account_id}/ai/run/{model_name}">client.ai.<a href="./src/resources/ai.ts">run</a>(accountId, modelName, { ...params }) -> AIRunResponse</code>
-
 # LoadBalancers
 
 Types:
@@ -2594,6 +2584,16 @@ Methods:
 - <code title="get /zones/{zone_identifier}/web3/hostnames/{identifier}/ipfs_universal_path/content_list/entries/{content_list_entry_identifier}">client.web3.hostnames.ipfsUniversalPaths.contentLists.entries.<a href="./src/resources/web3/hostnames/ipfs-universal-paths/content-lists/entries.ts">get</a>(zoneIdentifier, identifier, contentListEntryIdentifier) -> EntryGetResponse</code>
 
 # Workers
+
+## AI
+
+Types:
+
+- <code><a href="./src/resources/workers/ai.ts">AIRunResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/ai/run/{model_name}">client.workers.ai.<a href="./src/resources/workers/ai.ts">run</a>(accountId, modelName, { ...params }) -> AIRunResponse</code>
 
 ## Scripts
 
