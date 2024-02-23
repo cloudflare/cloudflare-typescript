@@ -59,7 +59,7 @@ export interface ConfigUpdateResponse {
    */
   tools: Record<
     string,
-    ConfigUpdateResponse.ZarazManagedComponent | ConfigUpdateResponse.ZarazCustomManagedComponent
+    ConfigUpdateResponse.ZarazManagedComponent | ConfigUpdateResponse.ZarazWorkerVariable
   >;
 
   /**
@@ -279,7 +279,7 @@ export namespace ConfigUpdateResponse {
     }
   }
 
-  export interface ZarazCustomManagedComponent {
+  export interface ZarazWorkerVariable {
     /**
      * List of blocking trigger IDs
      */
@@ -320,12 +320,12 @@ export namespace ConfigUpdateResponse {
     /**
      * Cloudflare worker that acts as a managed component
      */
-    worker: ZarazCustomManagedComponent.Worker;
+    worker: ZarazWorkerVariable.Worker;
 
     /**
      * Actions configured on a tool. Either this or neoEvents field is required.
      */
-    actions?: Record<string, ZarazCustomManagedComponent.Actions>;
+    actions?: Record<string, ZarazWorkerVariable.Actions>;
 
     /**
      * Default consent purpose ID
@@ -336,10 +336,10 @@ export namespace ConfigUpdateResponse {
      * DEPRECATED - List of actions configured on a tool. Either this or actions field
      * is required. If both are present, actions field will take precedence.
      */
-    neoEvents?: Array<ZarazCustomManagedComponent.NeoEvent>;
+    neoEvents?: Array<ZarazWorkerVariable.NeoEvent>;
   }
 
-  export namespace ZarazCustomManagedComponent {
+  export namespace ZarazWorkerVariable {
     /**
      * Cloudflare worker that acts as a managed component
      */
@@ -793,10 +793,7 @@ export interface ConfigGetResponse {
    * Tools set up under Zaraz configuration, where key is the alpha-numeric tool ID
    * and value is the tool configuration object.
    */
-  tools: Record<
-    string,
-    ConfigGetResponse.ZarazManagedComponent | ConfigGetResponse.ZarazCustomManagedComponent
-  >;
+  tools: Record<string, ConfigGetResponse.ZarazManagedComponent | ConfigGetResponse.ZarazWorkerVariable>;
 
   /**
    * Triggers set up under Zaraz configuration, where key is the trigger
@@ -1015,7 +1012,7 @@ export namespace ConfigGetResponse {
     }
   }
 
-  export interface ZarazCustomManagedComponent {
+  export interface ZarazWorkerVariable {
     /**
      * List of blocking trigger IDs
      */
@@ -1056,12 +1053,12 @@ export namespace ConfigGetResponse {
     /**
      * Cloudflare worker that acts as a managed component
      */
-    worker: ZarazCustomManagedComponent.Worker;
+    worker: ZarazWorkerVariable.Worker;
 
     /**
      * Actions configured on a tool. Either this or neoEvents field is required.
      */
-    actions?: Record<string, ZarazCustomManagedComponent.Actions>;
+    actions?: Record<string, ZarazWorkerVariable.Actions>;
 
     /**
      * Default consent purpose ID
@@ -1072,10 +1069,10 @@ export namespace ConfigGetResponse {
      * DEPRECATED - List of actions configured on a tool. Either this or actions field
      * is required. If both are present, actions field will take precedence.
      */
-    neoEvents?: Array<ZarazCustomManagedComponent.NeoEvent>;
+    neoEvents?: Array<ZarazWorkerVariable.NeoEvent>;
   }
 
-  export namespace ZarazCustomManagedComponent {
+  export namespace ZarazWorkerVariable {
     /**
      * Cloudflare worker that acts as a managed component
      */
@@ -1530,7 +1527,7 @@ export interface ConfigUpdateParams {
     string,
     | ConfigUpdateParams.ZarazLegacyTool
     | ConfigUpdateParams.ZarazManagedComponent
-    | ConfigUpdateParams.ZarazCustomManagedComponent
+    | ConfigUpdateParams.ZarazWorkerVariable
   >;
 
   /**
@@ -1808,7 +1805,7 @@ export namespace ConfigUpdateParams {
     }
   }
 
-  export interface ZarazCustomManagedComponent {
+  export interface ZarazWorkerVariable {
     /**
      * List of blocking trigger IDs
      */
@@ -1849,12 +1846,12 @@ export namespace ConfigUpdateParams {
     /**
      * Cloudflare worker that acts as a managed component
      */
-    worker: ZarazCustomManagedComponent.Worker;
+    worker: ZarazWorkerVariable.Worker;
 
     /**
      * Actions configured on a tool. Either this or neoEvents field is required.
      */
-    actions?: Record<string, ZarazCustomManagedComponent.Actions>;
+    actions?: Record<string, ZarazWorkerVariable.Actions>;
 
     /**
      * Default consent purpose ID
@@ -1865,10 +1862,10 @@ export namespace ConfigUpdateParams {
      * DEPRECATED - List of actions configured on a tool. Either this or actions field
      * is required. If both are present, actions field will take precedence.
      */
-    neoEvents?: Array<ZarazCustomManagedComponent.NeoEvent>;
+    neoEvents?: Array<ZarazWorkerVariable.NeoEvent>;
   }
 
-  export namespace ZarazCustomManagedComponent {
+  export namespace ZarazWorkerVariable {
     /**
      * Cloudflare worker that acts as a managed component
      */
