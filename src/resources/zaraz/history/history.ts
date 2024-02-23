@@ -74,7 +74,7 @@ export interface HistoryUpdateResponse {
    */
   tools: Record<
     string,
-    HistoryUpdateResponse.ZarazManagedComponent | HistoryUpdateResponse.ZarazCustomManagedComponent
+    HistoryUpdateResponse.ZarazManagedComponent | HistoryUpdateResponse.ZarazWorkerVariable
   >;
 
   /**
@@ -294,7 +294,7 @@ export namespace HistoryUpdateResponse {
     }
   }
 
-  export interface ZarazCustomManagedComponent {
+  export interface ZarazWorkerVariable {
     /**
      * List of blocking trigger IDs
      */
@@ -335,12 +335,12 @@ export namespace HistoryUpdateResponse {
     /**
      * Cloudflare worker that acts as a managed component
      */
-    worker: ZarazCustomManagedComponent.Worker;
+    worker: ZarazWorkerVariable.Worker;
 
     /**
      * Actions configured on a tool. Either this or neoEvents field is required.
      */
-    actions?: Record<string, ZarazCustomManagedComponent.Actions>;
+    actions?: Record<string, ZarazWorkerVariable.Actions>;
 
     /**
      * Default consent purpose ID
@@ -351,10 +351,10 @@ export namespace HistoryUpdateResponse {
      * DEPRECATED - List of actions configured on a tool. Either this or actions field
      * is required. If both are present, actions field will take precedence.
      */
-    neoEvents?: Array<ZarazCustomManagedComponent.NeoEvent>;
+    neoEvents?: Array<ZarazWorkerVariable.NeoEvent>;
   }
 
-  export namespace ZarazCustomManagedComponent {
+  export namespace ZarazWorkerVariable {
     /**
      * Cloudflare worker that acts as a managed component
      */
