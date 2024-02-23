@@ -169,7 +169,6 @@ export class Cloudflare extends Core.APIClient {
   memberships: API.Memberships = new API.Memberships(this);
   user: API.User = new API.User(this);
   zones: API.Zones = new API.Zones(this);
-  ai: API.AI = new API.AI(this);
   loadBalancers: API.LoadBalancers = new API.LoadBalancers(this);
   access: API.Access = new API.Access(this);
   dnsAnalytics: API.DNSAnalytics = new API.DNSAnalytics(this);
@@ -392,10 +391,6 @@ export namespace Cloudflare {
   export import ZoneCreateParams = API.ZoneCreateParams;
   export import ZoneListParams = API.ZoneListParams;
   export import ZoneEditParams = API.ZoneEditParams;
-
-  export import AI = API.AI;
-  export import AIRunResponse = API.AIRunResponse;
-  export import AIRunParams = API.AIRunParams;
 
   export import LoadBalancers = API.LoadBalancers;
   export import LoadBalancerCreateResponse = API.LoadBalancerCreateResponse;

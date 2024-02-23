@@ -15,7 +15,7 @@ const cloudflare = new Cloudflare({
 describe('resource ai', () => {
   // skipped: tests are disabled for the time being
   test.skip('run: only required params', async () => {
-    const responsePromise = cloudflare.ai.run('023e105f4ecef8ad9ca31a8372d0c353', 'string', {});
+    const responsePromise = cloudflare.workers.ai.run('023e105f4ecef8ad9ca31a8372d0c353', 'string', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -27,6 +27,6 @@ describe('resource ai', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('run: required and optional params', async () => {
-    const response = await cloudflare.ai.run('023e105f4ecef8ad9ca31a8372d0c353', 'string', {});
+    const response = await cloudflare.workers.ai.run('023e105f4ecef8ad9ca31a8372d0c353', 'string', {});
   });
 });

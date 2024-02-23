@@ -2,7 +2,7 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as AIAPI from 'cloudflare/resources/ai';
+import * as AIAPI from 'cloudflare/resources/workers/ai';
 
 export class AI extends APIResource {
   /**

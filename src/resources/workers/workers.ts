@@ -2,6 +2,7 @@
 
 import { APIResource } from 'cloudflare/resource';
 import * as AccountSettingsAPI from 'cloudflare/resources/workers/account-settings';
+import * as AIAPI from 'cloudflare/resources/workers/ai';
 import * as DeploymentsByScriptAPI from 'cloudflare/resources/workers/deployments-by-script';
 import * as DomainsAPI from 'cloudflare/resources/workers/domains';
 import * as FiltersAPI from 'cloudflare/resources/workers/filters';
@@ -15,6 +16,7 @@ import * as ScriptsAPI from 'cloudflare/resources/workers/scripts/scripts';
 import * as ServicesAPI from 'cloudflare/resources/workers/services/services';
 
 export class Workers extends APIResource {
+  ai: AIAPI.AI = new AIAPI.AI(this._client);
   scripts: ScriptsAPI.Scripts = new ScriptsAPI.Scripts(this._client);
   filters: FiltersAPI.Filters = new FiltersAPI.Filters(this._client);
   routes: RoutesAPI.Routes = new RoutesAPI.Routes(this._client);
@@ -31,6 +33,9 @@ export class Workers extends APIResource {
 }
 
 export namespace Workers {
+  export import AI = AIAPI.AI;
+  export import AIRunResponse = AIAPI.AIRunResponse;
+  export import AIRunParams = AIAPI.AIRunParams;
   export import Scripts = ScriptsAPI.Scripts;
   export import ScriptUpdateResponse = ScriptsAPI.ScriptUpdateResponse;
   export import ScriptListResponse = ScriptsAPI.ScriptListResponse;
