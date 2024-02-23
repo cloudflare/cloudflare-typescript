@@ -371,7 +371,6 @@ export { WorkerDomainGetResponse, WorkerDomains } from './worker-domains';
 export { WorkerScripts } from './worker-scripts/worker-scripts';
 export { Workers } from './workers/workers';
 export { WorkersForPlatforms } from './workers-for-platforms/workers-for-platforms';
-export { ZarazUpdateResponse, ZarazUpdateParams, Zaraz } from './zaraz/zaraz';
 export { Zerotrust } from './zerotrust/zerotrust';
 export {
   ZoneCreateResponse,

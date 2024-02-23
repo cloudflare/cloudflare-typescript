@@ -253,7 +253,6 @@ export class Cloudflare extends Core.APIClient {
   botManagement: API.BotManagement = new API.BotManagement(this);
   originPostQuantumEncryption: API.OriginPostQuantumEncryption = new API.OriginPostQuantumEncryption(this);
   firewall: API.Firewall = new API.Firewall(this);
-  zaraz: API.Zaraz = new API.Zaraz(this);
   speed: API.Speed = new API.Speed(this);
   dcvDelegation: API.DcvDelegation = new API.DcvDelegation(this);
   hostnames: API.Hostnames = new API.Hostnames(this);
@@ -755,10 +754,6 @@ export namespace Cloudflare {
   export import OriginPostQuantumEncryptionUpdateParams = API.OriginPostQuantumEncryptionUpdateParams;
 
   export import Firewall = API.Firewall;
-
-  export import Zaraz = API.Zaraz;
-  export import ZarazUpdateResponse = API.ZarazUpdateResponse;
-  export import ZarazUpdateParams = API.ZarazUpdateParams;
 
   export import Speed = API.Speed;
   export import SpeedCreateResponse = API.SpeedCreateResponse;
