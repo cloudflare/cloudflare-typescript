@@ -8,9 +8,10 @@ export class IPLists extends APIResource {
   /**
    * Get IP Lists
    */
-  get(accountId: string, options?: Core.RequestOptions): Core.APIPromise<IPListGetResponse | null> {
+  get(params: IPListGetParams, options?: Core.RequestOptions): Core.APIPromise<IPListGetResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/intel/ip-list`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/intel/ip-list`, options) as Core.APIPromise<{
         result: IPListGetResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -29,6 +30,14 @@ export namespace IPListGetResponse {
   }
 }
 
+export interface IPListGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export namespace IPLists {
   export import IPListGetResponse = IPListsAPI.IPListGetResponse;
+  export import IPListGetParams = IPListsAPI.IPListGetParams;
 }

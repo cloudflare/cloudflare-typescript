@@ -14,12 +14,12 @@ export class OriginPostQuantumEncryption extends APIResource {
    * means that PQ algorithms are not advertised
    */
   update(
-    zoneId: string,
-    body: OriginPostQuantumEncryptionUpdateParams,
+    params: OriginPostQuantumEncryptionUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OriginPostQuantumEncryptionUpdateResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.put(`/zones/${zoneId}/cache/origin_post_quantum_encryption`, {
+      this._client.put(`/zones/${zone_id}/cache/origin_post_quantum_encryption`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: OriginPostQuantumEncryptionUpdateResponse }>
@@ -35,11 +35,12 @@ export class OriginPostQuantumEncryption extends APIResource {
    * means that PQ algorithms are not advertised
    */
   get(
-    zoneId: string,
+    params: OriginPostQuantumEncryptionGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OriginPostQuantumEncryptionGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/cache/origin_post_quantum_encryption`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/cache/origin_post_quantum_encryption`, options) as Core.APIPromise<{
         result: OriginPostQuantumEncryptionGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -52,13 +53,26 @@ export type OriginPostQuantumEncryptionGetResponse = unknown | string | null;
 
 export interface OriginPostQuantumEncryptionUpdateParams {
   /**
-   * Value of the Origin Post Quantum Encryption Setting.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Value of the Origin Post Quantum Encryption Setting.
    */
   value: 'preferred' | 'supported' | 'off';
+}
+
+export interface OriginPostQuantumEncryptionGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }
 
 export namespace OriginPostQuantumEncryption {
   export import OriginPostQuantumEncryptionUpdateResponse = OriginPostQuantumEncryptionAPI.OriginPostQuantumEncryptionUpdateResponse;
   export import OriginPostQuantumEncryptionGetResponse = OriginPostQuantumEncryptionAPI.OriginPostQuantumEncryptionGetResponse;
   export import OriginPostQuantumEncryptionUpdateParams = OriginPostQuantumEncryptionAPI.OriginPostQuantumEncryptionUpdateParams;
+  export import OriginPostQuantumEncryptionGetParams = OriginPostQuantumEncryptionAPI.OriginPostQuantumEncryptionGetParams;
 }

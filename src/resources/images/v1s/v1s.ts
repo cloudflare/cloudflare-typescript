@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as V1sAPI from 'cloudflare/resources/images/v1s/v1s';
 import * as BlobsAPI from 'cloudflare/resources/images/v1s/blobs';
 import * as KeysAPI from 'cloudflare/resources/images/v1s/keys';
@@ -22,14 +21,11 @@ export class V1s extends APIResource {
    * (multipart/form-data) request. An image can be uploaded by sending an image file
    * or passing an accessible to an API url.
    */
-  create(
-    accountId: string,
-    body: V1CreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<V1CreateResponse> {
+  create(params: V1CreateParams, options?: Core.RequestOptions): Core.APIPromise<V1CreateResponse> {
+    const { account_id, ...body } = params;
     return (
       this._client.post(
-        `/accounts/${accountId}/images/v1`,
+        `/accounts/${account_id}/images/v1`,
         multipartFormRequestOptions({ body, ...options }),
       ) as Core.APIPromise<{ result: V1CreateResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -40,23 +36,11 @@ export class V1s extends APIResource {
    * a specific range of images.
    */
   list(
-    accountId: string,
-    query?: V1ListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<V1ListResponsesV4PagePagination, V1ListResponse>;
-  list(
-    accountId: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<V1ListResponsesV4PagePagination, V1ListResponse>;
-  list(
-    accountId: string,
-    query: V1ListParams | Core.RequestOptions = {},
+    params: V1ListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<V1ListResponsesV4PagePagination, V1ListResponse> {
-    if (isRequestOptions(query)) {
-      return this.list(accountId, {}, query);
-    }
-    return this._client.getAPIList(`/accounts/${accountId}/images/v1`, V1ListResponsesV4PagePagination, {
+    const { account_id, ...query } = params;
+    return this._client.getAPIList(`/accounts/${account_id}/images/v1`, V1ListResponsesV4PagePagination, {
       query,
       ...options,
     });
@@ -67,12 +51,13 @@ export class V1s extends APIResource {
    * deleted and purged from cache.
    */
   delete(
-    accountId: string,
     imageId: string,
+    params: V1DeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<V1DeleteResponse> {
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${accountId}/images/v1/${imageId}`, options) as Core.APIPromise<{
+      this._client.delete(`/accounts/${account_id}/images/v1/${imageId}`, options) as Core.APIPromise<{
         result: V1DeleteResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -83,13 +68,13 @@ export class V1s extends APIResource {
    * are purged from cache.
    */
   edit(
-    accountId: string,
     imageId: string,
-    body: V1EditParams,
+    params: V1EditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<V1EditResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.patch(`/accounts/${accountId}/images/v1/${imageId}`, {
+      this._client.patch(`/accounts/${account_id}/images/v1/${imageId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: V1EditResponse }>
@@ -99,9 +84,10 @@ export class V1s extends APIResource {
   /**
    * Fetch details for a single image.
    */
-  get(accountId: string, imageId: string, options?: Core.RequestOptions): Core.APIPromise<V1GetResponse> {
+  get(imageId: string, params: V1GetParams, options?: Core.RequestOptions): Core.APIPromise<V1GetResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/images/v1/${imageId}`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/images/v1/${imageId}`, options) as Core.APIPromise<{
         result: V1GetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -282,29 +268,62 @@ export interface V1GetResponse {
 }
 
 export interface V1CreateParams {
+  /**
+   * Path param: Account identifier tag.
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
   metadata?: unknown;
 
   /**
-   * Indicates whether the image requires a signature token for the access.
+   * Body param: Indicates whether the image requires a signature token for the
+   * access.
    */
   requireSignedURLs?: boolean;
 }
 
-export interface V1ListParams extends V4PagePaginationParams {}
+export interface V1ListParams extends V4PagePaginationParams {
+  /**
+   * Path param: Account identifier tag.
+   */
+  account_id: string;
+}
+
+export interface V1DeleteParams {
+  /**
+   * Account identifier tag.
+   */
+  account_id: string;
+}
 
 export interface V1EditParams {
   /**
-   * User modifiable key-value store. Can be used for keeping references to another
-   * system of record for managing images. No change if not specified.
+   * Path param: Account identifier tag.
+   */
+  account_id: string;
+
+  /**
+   * Body param: User modifiable key-value store. Can be used for keeping references
+   * to another system of record for managing images. No change if not specified.
    */
   metadata?: unknown;
 
   /**
-   * Indicates whether the image can be accessed using only its UID. If set to
-   * `true`, a signed token needs to be generated with a signing key to view the
-   * image. Returns a new UID on a change. No change if not specified.
+   * Body param: Indicates whether the image can be accessed using only its UID. If
+   * set to `true`, a signed token needs to be generated with a signing key to view
+   * the image. Returns a new UID on a change. No change if not specified.
    */
   requireSignedURLs?: boolean;
+}
+
+export interface V1GetParams {
+  /**
+   * Account identifier tag.
+   */
+  account_id: string;
 }
 
 export namespace V1s {
@@ -316,11 +335,15 @@ export namespace V1s {
   export import V1ListResponsesV4PagePagination = V1sAPI.V1ListResponsesV4PagePagination;
   export import V1CreateParams = V1sAPI.V1CreateParams;
   export import V1ListParams = V1sAPI.V1ListParams;
+  export import V1DeleteParams = V1sAPI.V1DeleteParams;
   export import V1EditParams = V1sAPI.V1EditParams;
+  export import V1GetParams = V1sAPI.V1GetParams;
   export import Keys = KeysAPI.Keys;
   export import KeyListResponse = KeysAPI.KeyListResponse;
+  export import KeyListParams = KeysAPI.KeyListParams;
   export import Stats = StatsAPI.Stats;
   export import StatGetResponse = StatsAPI.StatGetResponse;
+  export import StatGetParams = StatsAPI.StatGetParams;
   export import Variants = VariantsAPI.Variants;
   export import VariantCreateResponse = VariantsAPI.VariantCreateResponse;
   export import VariantListResponse = VariantsAPI.VariantListResponse;
@@ -328,6 +351,10 @@ export namespace V1s {
   export import VariantEditResponse = VariantsAPI.VariantEditResponse;
   export import VariantGetResponse = VariantsAPI.VariantGetResponse;
   export import VariantCreateParams = VariantsAPI.VariantCreateParams;
+  export import VariantListParams = VariantsAPI.VariantListParams;
+  export import VariantDeleteParams = VariantsAPI.VariantDeleteParams;
   export import VariantEditParams = VariantsAPI.VariantEditParams;
+  export import VariantGetParams = VariantsAPI.VariantGetParams;
   export import Blobs = BlobsAPI.Blobs;
+  export import BlobGetParams = BlobsAPI.BlobGetParams;
 }

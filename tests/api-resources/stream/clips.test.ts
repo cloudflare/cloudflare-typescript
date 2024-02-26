@@ -15,7 +15,8 @@ const cloudflare = new Cloudflare({
 describe('resource clips', () => {
   // skipped: tests are disabled for the time being
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.stream.clips.create('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = cloudflare.stream.clips.create({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       clippedFromVideoUID: '023e105f4ecef8ad9ca31a8372d0c353',
       endTimeSeconds: 0,
       startTimeSeconds: 0,
@@ -31,7 +32,8 @@ describe('resource clips', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.stream.clips.create('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await cloudflare.stream.clips.create({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       clippedFromVideoUID: '023e105f4ecef8ad9ca31a8372d0c353',
       endTimeSeconds: 0,
       startTimeSeconds: 0,

@@ -15,7 +15,8 @@ const cloudflare = new Cloudflare({
 describe('resource directUploads', () => {
   // skipped: tests are disabled for the time being
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.stream.directUploads.create('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = cloudflare.stream.directUploads.create({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       maxDurationSeconds: 1,
     });
     const rawResponse = await responsePromise.asResponse();
@@ -29,7 +30,8 @@ describe('resource directUploads', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.stream.directUploads.create('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await cloudflare.stream.directUploads.create({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       maxDurationSeconds: 1,
       allowedOrigins: ['example.com'],
       creator: 'creator-id_abcde12345',

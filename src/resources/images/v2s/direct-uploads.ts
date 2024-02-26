@@ -16,13 +16,13 @@ export class DirectUploads extends APIResource {
    * `draft: true` property is not present.
    */
   create(
-    accountId: string,
-    body: DirectUploadCreateParams,
+    params: DirectUploadCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DirectUploadCreateResponse> {
+    const { account_id, ...body } = params;
     return (
       this._client.post(
-        `/accounts/${accountId}/images/v2/direct_upload`,
+        `/accounts/${account_id}/images/v2/direct_upload`,
         multipartFormRequestOptions({ body, ...options }),
       ) as Core.APIPromise<{ result: DirectUploadCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -44,19 +44,25 @@ export interface DirectUploadCreateResponse {
 
 export interface DirectUploadCreateParams {
   /**
-   * The date after which the upload will not be accepted. Minimum: Now + 2 minutes.
-   * Maximum: Now + 6 hours.
+   * Path param: Account identifier tag.
+   */
+  account_id: string;
+
+  /**
+   * Body param: The date after which the upload will not be accepted. Minimum: Now +
+   * 2 minutes. Maximum: Now + 6 hours.
    */
   expiry?: string;
 
   /**
-   * User modifiable key-value store. Can be used for keeping references to another
-   * system of record, for managing images.
+   * Body param: User modifiable key-value store. Can be used for keeping references
+   * to another system of record, for managing images.
    */
   metadata?: unknown;
 
   /**
-   * Indicates whether the image requires a signature token to be accessed.
+   * Body param: Indicates whether the image requires a signature token to be
+   * accessed.
    */
   requireSignedURLs?: boolean;
 }

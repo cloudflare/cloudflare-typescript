@@ -18,12 +18,12 @@ export class OriginTLSClientAuth extends APIResource {
    * to see the uploaded certificate in use.
    */
   create(
-    zoneId: string,
-    body: OriginTLSClientAuthCreateParams,
+    params: OriginTLSClientAuthCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OriginTLSClientAuthCreateResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.post(`/zones/${zoneId}/origin_tls_client_auth`, { body, ...options }) as Core.APIPromise<{
+      this._client.post(`/zones/${zone_id}/origin_tls_client_auth`, { body, ...options }) as Core.APIPromise<{
         result: OriginTLSClientAuthCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -33,11 +33,12 @@ export class OriginTLSClientAuth extends APIResource {
    * List Certificates
    */
   list(
-    zoneId: string,
+    params: OriginTLSClientAuthListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OriginTLSClientAuthListResponse | null> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/origin_tls_client_auth`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/origin_tls_client_auth`, options) as Core.APIPromise<{
         result: OriginTLSClientAuthListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -47,13 +48,14 @@ export class OriginTLSClientAuth extends APIResource {
    * Delete Certificate
    */
   delete(
-    zoneId: string,
     certificateId: string,
+    params: OriginTLSClientAuthDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OriginTLSClientAuthDeleteResponse> {
+    const { zone_id } = params;
     return (
       this._client.delete(
-        `/zones/${zoneId}/origin_tls_client_auth/${certificateId}`,
+        `/zones/${zone_id}/origin_tls_client_auth/${certificateId}`,
         options,
       ) as Core.APIPromise<{ result: OriginTLSClientAuthDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -63,13 +65,14 @@ export class OriginTLSClientAuth extends APIResource {
    * Get Certificate Details
    */
   get(
-    zoneId: string,
     certificateId: string,
+    params: OriginTLSClientAuthGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OriginTLSClientAuthGetResponse> {
+    const { zone_id } = params;
     return (
       this._client.get(
-        `/zones/${zoneId}/origin_tls_client_auth/${certificateId}`,
+        `/zones/${zone_id}/origin_tls_client_auth/${certificateId}`,
         options,
       ) as Core.APIPromise<{ result: OriginTLSClientAuthGetResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -111,14 +114,40 @@ export type OriginTLSClientAuthGetResponse = unknown | string;
 
 export interface OriginTLSClientAuthCreateParams {
   /**
-   * The zone's leaf certificate.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: The zone's leaf certificate.
    */
   certificate: string;
 
   /**
-   * The zone's private key.
+   * Body param: The zone's private key.
    */
   private_key: string;
+}
+
+export interface OriginTLSClientAuthListParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+export interface OriginTLSClientAuthDeleteParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+export interface OriginTLSClientAuthGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }
 
 export namespace OriginTLSClientAuth {
@@ -127,12 +156,17 @@ export namespace OriginTLSClientAuth {
   export import OriginTLSClientAuthDeleteResponse = OriginTLSClientAuthAPI.OriginTLSClientAuthDeleteResponse;
   export import OriginTLSClientAuthGetResponse = OriginTLSClientAuthAPI.OriginTLSClientAuthGetResponse;
   export import OriginTLSClientAuthCreateParams = OriginTLSClientAuthAPI.OriginTLSClientAuthCreateParams;
+  export import OriginTLSClientAuthListParams = OriginTLSClientAuthAPI.OriginTLSClientAuthListParams;
+  export import OriginTLSClientAuthDeleteParams = OriginTLSClientAuthAPI.OriginTLSClientAuthDeleteParams;
+  export import OriginTLSClientAuthGetParams = OriginTLSClientAuthAPI.OriginTLSClientAuthGetParams;
   export import Hostnames = HostnamesAPI.Hostnames;
   export import HostnameUpdateResponse = HostnamesAPI.HostnameUpdateResponse;
   export import HostnameGetResponse = HostnamesAPI.HostnameGetResponse;
   export import HostnameUpdateParams = HostnamesAPI.HostnameUpdateParams;
+  export import HostnameGetParams = HostnamesAPI.HostnameGetParams;
   export import Settings = SettingsAPI.Settings;
   export import SettingUpdateResponse = SettingsAPI.SettingUpdateResponse;
   export import SettingGetResponse = SettingsAPI.SettingGetResponse;
   export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;
+  export import SettingGetParams = SettingsAPI.SettingGetParams;
 }

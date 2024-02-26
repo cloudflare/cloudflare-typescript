@@ -14,11 +14,11 @@ const cloudflare = new Cloudflare({
 
 describe('resource ips', () => {
   // skipped: tests are disabled for the time being
-  test.skip('update', async () => {
+  test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.addresses.addressMaps.ips.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
-      '023e105f4ecef8ad9ca31a8372d0c353',
       '192.0.2.1',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -30,11 +30,20 @@ describe('resource ips', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
-    const responsePromise = cloudflare.addresses.addressMaps.ips.delete(
-      '023e105f4ecef8ad9ca31a8372d0c353',
+  test.skip('update: required and optional params', async () => {
+    const response = await cloudflare.addresses.addressMaps.ips.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '192.0.2.1',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('delete: only required params', async () => {
+    const responsePromise = cloudflare.addresses.addressMaps.ips.delete(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '192.0.2.1',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -43,5 +52,14 @@ describe('resource ips', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('delete: required and optional params', async () => {
+    const response = await cloudflare.addresses.addressMaps.ips.delete(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '192.0.2.1',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
   });
 });

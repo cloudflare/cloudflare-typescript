@@ -14,12 +14,10 @@ const cloudflare = new Cloudflare({
 
 describe('resource configurations', () => {
   // skipped: tests are disabled for the time being
-  test.skip('update', async () => {
-    const responsePromise = cloudflare.tunnels.configurations.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
-      {},
-    );
+  test.skip('update: only required params', async () => {
+    const responsePromise = cloudflare.tunnels.configurations.update('f70ff985-a4ef-4643-bbbc-4a0ed4fc8415', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -30,11 +28,101 @@ describe('resource configurations', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
-    const responsePromise = cloudflare.tunnels.configurations.list(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
-    );
+  test.skip('update: required and optional params', async () => {
+    const response = await cloudflare.tunnels.configurations.update('f70ff985-a4ef-4643-bbbc-4a0ed4fc8415', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      config: {
+        ingress: [
+          {
+            hostname: 'tunnel.example.com',
+            originRequest: {
+              access: { audTag: ['string', 'string', 'string'], required: true, teamName: 'string' },
+              caPool: 'string',
+              connectTimeout: 0,
+              disableChunkedEncoding: true,
+              http2Origin: true,
+              httpHostHeader: 'string',
+              keepAliveConnections: 0,
+              keepAliveTimeout: 0,
+              noHappyEyeballs: true,
+              noTLSVerify: true,
+              originServerName: 'string',
+              proxyType: 'string',
+              tcpKeepAlive: 0,
+              tlsTimeout: 0,
+            },
+            path: 'subpath',
+            service: 'https://localhost:8001',
+          },
+          {
+            hostname: 'tunnel.example.com',
+            originRequest: {
+              access: { audTag: ['string', 'string', 'string'], required: true, teamName: 'string' },
+              caPool: 'string',
+              connectTimeout: 0,
+              disableChunkedEncoding: true,
+              http2Origin: true,
+              httpHostHeader: 'string',
+              keepAliveConnections: 0,
+              keepAliveTimeout: 0,
+              noHappyEyeballs: true,
+              noTLSVerify: true,
+              originServerName: 'string',
+              proxyType: 'string',
+              tcpKeepAlive: 0,
+              tlsTimeout: 0,
+            },
+            path: 'subpath',
+            service: 'https://localhost:8001',
+          },
+          {
+            hostname: 'tunnel.example.com',
+            originRequest: {
+              access: { audTag: ['string', 'string', 'string'], required: true, teamName: 'string' },
+              caPool: 'string',
+              connectTimeout: 0,
+              disableChunkedEncoding: true,
+              http2Origin: true,
+              httpHostHeader: 'string',
+              keepAliveConnections: 0,
+              keepAliveTimeout: 0,
+              noHappyEyeballs: true,
+              noTLSVerify: true,
+              originServerName: 'string',
+              proxyType: 'string',
+              tcpKeepAlive: 0,
+              tlsTimeout: 0,
+            },
+            path: 'subpath',
+            service: 'https://localhost:8001',
+          },
+        ],
+        originRequest: {
+          access: { audTag: ['string', 'string', 'string'], required: true, teamName: 'string' },
+          caPool: 'string',
+          connectTimeout: 0,
+          disableChunkedEncoding: true,
+          http2Origin: true,
+          httpHostHeader: 'string',
+          keepAliveConnections: 0,
+          keepAliveTimeout: 0,
+          noHappyEyeballs: true,
+          noTLSVerify: true,
+          originServerName: 'string',
+          proxyType: 'string',
+          tcpKeepAlive: 0,
+          tlsTimeout: 0,
+        },
+        'warp-routing': { enabled: true },
+      },
+    });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list: only required params', async () => {
+    const responsePromise = cloudflare.tunnels.configurations.list('f70ff985-a4ef-4643-bbbc-4a0ed4fc8415', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -45,14 +133,9 @@ describe('resource configurations', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.tunnels.configurations.list(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('list: required and optional params', async () => {
+    const response = await cloudflare.tunnels.configurations.list('f70ff985-a4ef-4643-bbbc-4a0ed4fc8415', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 });

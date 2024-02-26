@@ -15,7 +15,8 @@ const cloudflare = new Cloudflare({
 describe('resource locations', () => {
   // skipped: tests are disabled for the time being
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.gateways.locations.create('699d98642c564d2e855e9661899b7252', {
+    const responsePromise = cloudflare.gateways.locations.create({
+      account_id: '699d98642c564d2e855e9661899b7252',
       name: 'Austin Office Location',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -29,7 +30,8 @@ describe('resource locations', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.gateways.locations.create('699d98642c564d2e855e9661899b7252', {
+    const response = await cloudflare.gateways.locations.create({
+      account_id: '699d98642c564d2e855e9661899b7252',
       name: 'Austin Office Location',
       client_default: false,
       ecs_support: false,
@@ -39,11 +41,10 @@ describe('resource locations', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.gateways.locations.update(
-      '699d98642c564d2e855e9661899b7252',
-      'ed35569b41ce4d1facfe683550f54086',
-      { name: 'Austin Office Location' },
-    );
+    const responsePromise = cloudflare.gateways.locations.update('ed35569b41ce4d1facfe683550f54086', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+      name: 'Austin Office Location',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -55,21 +56,20 @@ describe('resource locations', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.gateways.locations.update(
-      '699d98642c564d2e855e9661899b7252',
-      'ed35569b41ce4d1facfe683550f54086',
-      {
-        name: 'Austin Office Location',
-        client_default: false,
-        ecs_support: false,
-        networks: [{ network: '192.0.2.1/32' }, { network: '192.0.2.1/32' }, { network: '192.0.2.1/32' }],
-      },
-    );
+    const response = await cloudflare.gateways.locations.update('ed35569b41ce4d1facfe683550f54086', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+      name: 'Austin Office Location',
+      client_default: false,
+      ecs_support: false,
+      networks: [{ network: '192.0.2.1/32' }, { network: '192.0.2.1/32' }, { network: '192.0.2.1/32' }],
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
-    const responsePromise = cloudflare.gateways.locations.list('699d98642c564d2e855e9661899b7252');
+  test.skip('list: only required params', async () => {
+    const responsePromise = cloudflare.gateways.locations.list({
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -80,21 +80,17 @@ describe('resource locations', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.gateways.locations.list('699d98642c564d2e855e9661899b7252', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('list: required and optional params', async () => {
+    const response = await cloudflare.gateways.locations.list({
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
-    const responsePromise = cloudflare.gateways.locations.delete(
-      '699d98642c564d2e855e9661899b7252',
-      'ed35569b41ce4d1facfe683550f54086',
-    );
+  test.skip('delete: only required params', async () => {
+    const responsePromise = cloudflare.gateways.locations.delete('ed35569b41ce4d1facfe683550f54086', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -105,11 +101,17 @@ describe('resource locations', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
-    const responsePromise = cloudflare.gateways.locations.get(
-      '699d98642c564d2e855e9661899b7252',
-      'ed35569b41ce4d1facfe683550f54086',
-    );
+  test.skip('delete: required and optional params', async () => {
+    const response = await cloudflare.gateways.locations.delete('ed35569b41ce4d1facfe683550f54086', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get: only required params', async () => {
+    const responsePromise = cloudflare.gateways.locations.get('ed35569b41ce4d1facfe683550f54086', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -120,14 +122,9 @@ describe('resource locations', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.gateways.locations.get(
-        '699d98642c564d2e855e9661899b7252',
-        'ed35569b41ce4d1facfe683550f54086',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.gateways.locations.get('ed35569b41ce4d1facfe683550f54086', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
   });
 });

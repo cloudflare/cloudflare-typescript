@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as CustomHostnamesAPI from 'cloudflare/resources/custom-hostnames/custom-hostnames';
 import * as FallbackOriginAPI from 'cloudflare/resources/custom-hostnames/fallback-origin';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
@@ -20,12 +19,12 @@ export class CustomHostnames extends APIResource {
    * method must be used once it is (to complete validation).
    */
   create(
-    zoneId: string,
-    body: CustomHostnameCreateParams,
+    params: CustomHostnameCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomHostnameCreateResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.post(`/zones/${zoneId}/custom_hostnames`, { body, ...options }) as Core.APIPromise<{
+      this._client.post(`/zones/${zone_id}/custom_hostnames`, { body, ...options }) as Core.APIPromise<{
         result: CustomHostnameCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -35,24 +34,12 @@ export class CustomHostnames extends APIResource {
    * List, search, sort, and filter all of your custom hostnames.
    */
   list(
-    zoneId: string,
-    query?: CustomHostnameListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<CustomHostnameListResponsesV4PagePaginationArray, CustomHostnameListResponse>;
-  list(
-    zoneId: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<CustomHostnameListResponsesV4PagePaginationArray, CustomHostnameListResponse>;
-  list(
-    zoneId: string,
-    query: CustomHostnameListParams | Core.RequestOptions = {},
+    params: CustomHostnameListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<CustomHostnameListResponsesV4PagePaginationArray, CustomHostnameListResponse> {
-    if (isRequestOptions(query)) {
-      return this.list(zoneId, {}, query);
-    }
+    const { zone_id, ...query } = params;
     return this._client.getAPIList(
-      `/zones/${zoneId}/custom_hostnames`,
+      `/zones/${zone_id}/custom_hostnames`,
       CustomHostnameListResponsesV4PagePaginationArray,
       { query, ...options },
     );
@@ -62,11 +49,12 @@ export class CustomHostnames extends APIResource {
    * Delete Custom Hostname (and any issued SSL certificates)
    */
   delete(
-    zoneId: string,
     customHostnameId: string,
+    params: CustomHostnameDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomHostnameDeleteResponse> {
-    return this._client.delete(`/zones/${zoneId}/custom_hostnames/${customHostnameId}`, options);
+    const { zone_id } = params;
+    return this._client.delete(`/zones/${zone_id}/custom_hostnames/${customHostnameId}`, options);
   }
 
   /**
@@ -76,13 +64,13 @@ export class CustomHostnames extends APIResource {
    * 'http' to 'email'.
    */
   edit(
-    zoneId: string,
     customHostnameId: string,
-    body: CustomHostnameEditParams,
+    params: CustomHostnameEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomHostnameEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/custom_hostnames/${customHostnameId}`, {
+      this._client.patch(`/zones/${zone_id}/custom_hostnames/${customHostnameId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: CustomHostnameEditResponse }>
@@ -93,12 +81,13 @@ export class CustomHostnames extends APIResource {
    * Custom Hostname Details
    */
   get(
-    zoneId: string,
     customHostnameId: string,
+    params: CustomHostnameGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomHostnameGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/custom_hostnames/${customHostnameId}`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/custom_hostnames/${customHostnameId}`, options) as Core.APIPromise<{
         result: CustomHostnameGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -980,17 +969,22 @@ export namespace CustomHostnameGetResponse {
 
 export interface CustomHostnameCreateParams {
   /**
-   * The custom hostname that will point to your hostname via CNAME.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: The custom hostname that will point to your hostname via CNAME.
    */
   hostname: string;
 
   /**
-   * SSL properties used when creating the custom hostname.
+   * Body param: SSL properties used when creating the custom hostname.
    */
   ssl: CustomHostnameCreateParams.SSL;
 
   /**
-   * These are per-hostname (customer) settings.
+   * Body param: These are per-hostname (customer) settings.
    */
   custom_metadata?: CustomHostnameCreateParams.CustomMetadata;
 }
@@ -1091,49 +1085,66 @@ export namespace CustomHostnameCreateParams {
 
 export interface CustomHostnameListParams extends V4PagePaginationArrayParams {
   /**
-   * Hostname ID to match against. This ID was generated and returned during the
-   * initial custom_hostname creation. This parameter cannot be used with the
-   * 'hostname' parameter.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Query param: Hostname ID to match against. This ID was generated and returned
+   * during the initial custom_hostname creation. This parameter cannot be used with
+   * the 'hostname' parameter.
    */
   id?: string;
 
   /**
-   * Direction to order hostnames.
+   * Query param: Direction to order hostnames.
    */
   direction?: 'asc' | 'desc';
 
   /**
-   * Fully qualified domain name to match against. This parameter cannot be used with
-   * the 'id' parameter.
+   * Query param: Fully qualified domain name to match against. This parameter cannot
+   * be used with the 'id' parameter.
    */
   hostname?: string;
 
   /**
-   * Field to order hostnames by.
+   * Query param: Field to order hostnames by.
    */
   order?: 'ssl' | 'ssl_status';
 
   /**
-   * Whether to filter hostnames based on if they have SSL enabled.
+   * Query param: Whether to filter hostnames based on if they have SSL enabled.
    */
   ssl?: 0 | 1;
 }
 
+export interface CustomHostnameDeleteParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
 export interface CustomHostnameEditParams {
   /**
-   * These are per-hostname (customer) settings.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: These are per-hostname (customer) settings.
    */
   custom_metadata?: CustomHostnameEditParams.CustomMetadata;
 
   /**
-   * a valid hostname that’s been added to your DNS zone as an A, AAAA, or CNAME
-   * record.
+   * Body param: a valid hostname that’s been added to your DNS zone as an A, AAAA,
+   * or CNAME record.
    */
   custom_origin_server?: string;
 
   /**
-   * A hostname that will be sent to your custom origin server as SNI for TLS
-   * handshake. This can be a valid subdomain of the zone or custom origin server
+   * Body param: A hostname that will be sent to your custom origin server as SNI for
+   * TLS handshake. This can be a valid subdomain of the zone or custom origin server
    * name or the string ':request_host_header:' which will cause the host header in
    * the request to be used as SNI. Not configurable with default/fallback origin
    * server.
@@ -1141,7 +1152,7 @@ export interface CustomHostnameEditParams {
   custom_origin_sni?: string;
 
   /**
-   * SSL properties used when creating the custom hostname.
+   * Body param: SSL properties used when creating the custom hostname.
    */
   ssl?: CustomHostnameEditParams.SSL;
 }
@@ -1240,6 +1251,13 @@ export namespace CustomHostnameEditParams {
   }
 }
 
+export interface CustomHostnameGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
 export namespace CustomHostnames {
   export import CustomHostnameCreateResponse = CustomHostnamesAPI.CustomHostnameCreateResponse;
   export import CustomHostnameListResponse = CustomHostnamesAPI.CustomHostnameListResponse;
@@ -1249,10 +1267,14 @@ export namespace CustomHostnames {
   export import CustomHostnameListResponsesV4PagePaginationArray = CustomHostnamesAPI.CustomHostnameListResponsesV4PagePaginationArray;
   export import CustomHostnameCreateParams = CustomHostnamesAPI.CustomHostnameCreateParams;
   export import CustomHostnameListParams = CustomHostnamesAPI.CustomHostnameListParams;
+  export import CustomHostnameDeleteParams = CustomHostnamesAPI.CustomHostnameDeleteParams;
   export import CustomHostnameEditParams = CustomHostnamesAPI.CustomHostnameEditParams;
+  export import CustomHostnameGetParams = CustomHostnamesAPI.CustomHostnameGetParams;
   export import FallbackOrigin = FallbackOriginAPI.FallbackOrigin;
   export import FallbackOriginUpdateResponse = FallbackOriginAPI.FallbackOriginUpdateResponse;
   export import FallbackOriginDeleteResponse = FallbackOriginAPI.FallbackOriginDeleteResponse;
   export import FallbackOriginGetResponse = FallbackOriginAPI.FallbackOriginGetResponse;
   export import FallbackOriginUpdateParams = FallbackOriginAPI.FallbackOriginUpdateParams;
+  export import FallbackOriginDeleteParams = FallbackOriginAPI.FallbackOriginDeleteParams;
+  export import FallbackOriginGetParams = FallbackOriginAPI.FallbackOriginGetParams;
 }

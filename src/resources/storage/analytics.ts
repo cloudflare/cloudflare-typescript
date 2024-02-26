@@ -2,31 +2,19 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as AnalyticsAPI from 'cloudflare/resources/storage/analytics';
 
 export class Analytics extends APIResource {
   /**
    * Retrieves Workers KV request metrics for the given account.
    */
-  list(
-    accountId: string,
-    query?: AnalyticsListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AnalyticsListResponse>;
-  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<AnalyticsListResponse>;
-  list(
-    accountId: string,
-    query: AnalyticsListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AnalyticsListResponse> {
-    if (isRequestOptions(query)) {
-      return this.list(accountId, {}, query);
-    }
+  list(params: AnalyticsListParams, options?: Core.RequestOptions): Core.APIPromise<AnalyticsListResponse> {
+    const { account_id, ...query } = params;
     return (
-      this._client.get(`/accounts/${accountId}/storage/analytics`, { query, ...options }) as Core.APIPromise<{
-        result: AnalyticsListResponse;
-      }>
+      this._client.get(`/accounts/${account_id}/storage/analytics`, {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: AnalyticsListResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -34,21 +22,12 @@ export class Analytics extends APIResource {
    * Retrieves Workers KV stored data metrics for the given account.
    */
   stored(
-    accountId: string,
-    query?: AnalyticsStoredParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AnalyticsStoredResponse>;
-  stored(accountId: string, options?: Core.RequestOptions): Core.APIPromise<AnalyticsStoredResponse>;
-  stored(
-    accountId: string,
-    query: AnalyticsStoredParams | Core.RequestOptions = {},
+    params: AnalyticsStoredParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AnalyticsStoredResponse> {
-    if (isRequestOptions(query)) {
-      return this.stored(accountId, {}, query);
-    }
+    const { account_id, ...query } = params;
     return (
-      this._client.get(`/accounts/${accountId}/storage/analytics/stored`, {
+      this._client.get(`/accounts/${account_id}/storage/analytics/stored`, {
         query,
         ...options,
       }) as Core.APIPromise<{ result: AnalyticsStoredResponse }>
@@ -262,7 +241,12 @@ export namespace AnalyticsStoredResponse {
 
 export interface AnalyticsListParams {
   /**
-   * For specifying result metrics.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Query param: For specifying result metrics.
    */
   query?: AnalyticsListParams.Query;
 }
@@ -326,7 +310,12 @@ export namespace AnalyticsListParams {
 
 export interface AnalyticsStoredParams {
   /**
-   * For specifying result metrics.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Query param: For specifying result metrics.
    */
   query?: AnalyticsStoredParams.Query;
 }

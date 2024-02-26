@@ -17,7 +17,7 @@ describe('resource jobs', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.logpush.jobs.create({
       account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'string',
       destination_conf: 's3://mybucket/logs?region=us-west-2',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -33,7 +33,7 @@ describe('resource jobs', () => {
   test.skip('create: required and optional params', async () => {
     const response = await cloudflare.logpush.jobs.create({
       account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'string',
       destination_conf: 's3://mybucket/logs?region=us-west-2',
       dataset: 'http_requests',
       enabled: false,
@@ -60,10 +60,7 @@ describe('resource jobs', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.logpush.jobs.update(1, {
-      account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = cloudflare.logpush.jobs.update(1, { account_id: 'string', zone_id: 'string' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -77,7 +74,7 @@ describe('resource jobs', () => {
   test.skip('update: required and optional params', async () => {
     const response = await cloudflare.logpush.jobs.update(1, {
       account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'string',
       destination_conf: 's3://mybucket/logs?region=us-west-2',
       enabled: false,
       frequency: 'high',
@@ -102,10 +99,7 @@ describe('resource jobs', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('list: only required params', async () => {
-    const responsePromise = cloudflare.logpush.jobs.list({
-      account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = cloudflare.logpush.jobs.list({ account_id: 'string', zone_id: 'string' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -117,18 +111,12 @@ describe('resource jobs', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('list: required and optional params', async () => {
-    const response = await cloudflare.logpush.jobs.list({
-      account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const response = await cloudflare.logpush.jobs.list({ account_id: 'string', zone_id: 'string' });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('delete: only required params', async () => {
-    const responsePromise = cloudflare.logpush.jobs.delete(1, {
-      account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = cloudflare.logpush.jobs.delete(1, { account_id: 'string', zone_id: 'string' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -140,18 +128,12 @@ describe('resource jobs', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('delete: required and optional params', async () => {
-    const response = await cloudflare.logpush.jobs.delete(1, {
-      account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const response = await cloudflare.logpush.jobs.delete(1, { account_id: 'string', zone_id: 'string' });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('get: only required params', async () => {
-    const responsePromise = cloudflare.logpush.jobs.get(1, {
-      account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = cloudflare.logpush.jobs.get(1, { account_id: 'string', zone_id: 'string' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -163,9 +145,6 @@ describe('resource jobs', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('get: required and optional params', async () => {
-    const response = await cloudflare.logpush.jobs.get(1, {
-      account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const response = await cloudflare.logpush.jobs.get(1, { account_id: 'string', zone_id: 'string' });
   });
 });

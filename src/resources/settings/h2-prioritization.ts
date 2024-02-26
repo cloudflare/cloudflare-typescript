@@ -9,12 +9,12 @@ export class H2Prioritization extends APIResource {
    * Gets HTTP/2 Edge Prioritization setting.
    */
   edit(
-    zoneId: string,
-    body: H2PrioritizationEditParams,
+    params: H2PrioritizationEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<H2PrioritizationEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/settings/h2_prioritization`, {
+      this._client.patch(`/zones/${zone_id}/settings/h2_prioritization`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: H2PrioritizationEditResponse }>
@@ -24,9 +24,13 @@ export class H2Prioritization extends APIResource {
   /**
    * Gets HTTP/2 Edge Prioritization setting.
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<H2PrioritizationGetResponse> {
+  get(
+    params: H2PrioritizationGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<H2PrioritizationGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/settings/h2_prioritization`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/settings/h2_prioritization`, options) as Core.APIPromise<{
         result: H2PrioritizationGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -91,9 +95,14 @@ export interface H2PrioritizationGetResponse {
 
 export interface H2PrioritizationEditParams {
   /**
-   * HTTP/2 Edge Prioritization optimises the delivery of resources served through
-   * HTTP/2 to improve page load performance. It also supports fine control of
-   * content delivery when used in conjunction with Workers.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: HTTP/2 Edge Prioritization optimises the delivery of resources
+   * served through HTTP/2 to improve page load performance. It also supports fine
+   * control of content delivery when used in conjunction with Workers.
    */
   value: H2PrioritizationEditParams.Value;
 }
@@ -117,8 +126,16 @@ export namespace H2PrioritizationEditParams {
   }
 }
 
+export interface H2PrioritizationGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
 export namespace H2Prioritization {
   export import H2PrioritizationEditResponse = H2PrioritizationAPI.H2PrioritizationEditResponse;
   export import H2PrioritizationGetResponse = H2PrioritizationAPI.H2PrioritizationGetResponse;
   export import H2PrioritizationEditParams = H2PrioritizationAPI.H2PrioritizationEditParams;
+  export import H2PrioritizationGetParams = H2PrioritizationAPI.H2PrioritizationGetParams;
 }

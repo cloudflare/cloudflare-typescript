@@ -13,12 +13,12 @@ export class CustomNameservers extends APIResource {
    * use_account_custom_ns_by_default to true.
    */
   update(
-    zoneId: string,
-    body: CustomNameserverUpdateParams,
+    params: CustomNameserverUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomNameserverUpdateResponse | null> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.put(`/zones/${zoneId}/custom_ns`, { body, ...options }) as Core.APIPromise<{
+      this._client.put(`/zones/${zone_id}/custom_ns`, { body, ...options }) as Core.APIPromise<{
         result: CustomNameserverUpdateResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -27,9 +27,13 @@ export class CustomNameservers extends APIResource {
   /**
    * Get metadata for account-level custom nameservers on a zone.
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<CustomNameserverGetResponse | null> {
+  get(
+    params: CustomNameserverGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CustomNameserverGetResponse | null> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/custom_ns`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/custom_ns`, options) as Core.APIPromise<{
         result: CustomNameserverGetResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -42,18 +46,31 @@ export type CustomNameserverGetResponse = unknown | Array<unknown> | string;
 
 export interface CustomNameserverUpdateParams {
   /**
-   * Whether zone uses account-level custom nameservers.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Whether zone uses account-level custom nameservers.
    */
   enabled?: boolean;
 
   /**
-   * The number of the name server set to assign to the zone.
+   * Body param: The number of the name server set to assign to the zone.
    */
   ns_set?: number;
+}
+
+export interface CustomNameserverGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }
 
 export namespace CustomNameservers {
   export import CustomNameserverUpdateResponse = CustomNameserversAPI.CustomNameserverUpdateResponse;
   export import CustomNameserverGetResponse = CustomNameserversAPI.CustomNameserverGetResponse;
   export import CustomNameserverUpdateParams = CustomNameserversAPI.CustomNameserverUpdateParams;
+  export import CustomNameserverGetParams = CustomNameserversAPI.CustomNameserverGetParams;
 }

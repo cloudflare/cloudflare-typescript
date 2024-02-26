@@ -15,7 +15,7 @@ const cloudflare = new Cloudflare({
 describe('resource cache', () => {
   // skipped: tests are disabled for the time being
   test.skip('purge: only required params', async () => {
-    const responsePromise = cloudflare.cache.purge('string', {});
+    const responsePromise = cloudflare.cache.purge({ zone_id: 'string' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -27,6 +27,17 @@ describe('resource cache', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('purge: required and optional params', async () => {
-    const response = await cloudflare.cache.purge('string', { tags: ['some-tag', 'another-tag'] });
+    const response = await cloudflare.cache.purge({
+      zone_id: 'string',
+      files: [
+        'http://www.example.com/css/styles.css',
+        'http://www.example.com/css/styles.css',
+        'http://www.example.com/css/styles.css',
+      ],
+      hosts: ['www.example.com', 'images.example.com'],
+      prefixes: ['www.example.com/foo', 'images.example.com/bar/baz'],
+      purge_everything: true,
+      tags: ['some-tag', 'another-tag'],
+    });
   });
 });

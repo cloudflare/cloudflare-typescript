@@ -7,6 +7,9 @@ export {
   CertificatePackEditResponse,
   CertificatePackGetResponse,
   CertificatePackListParams,
+  CertificatePackDeleteParams,
+  CertificatePackEditParams,
+  CertificatePackGetParams,
   CertificatePacks,
 } from './certificate-packs/index';
 export { RecommendationListResponse, Recommendations } from './recommendations';

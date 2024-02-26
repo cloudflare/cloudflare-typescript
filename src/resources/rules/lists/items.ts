@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as ItemsAPI from 'cloudflare/resources/rules/lists/items';
 
 export class Items extends APIResource {
@@ -14,14 +13,14 @@ export class Items extends APIResource {
    * endpoint with the returned `operation_id`.
    */
   create(
-    accountId: string,
     listId: string,
-    body: ItemCreateParams,
+    params: ItemCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ItemCreateResponse | null> {
+    const { account_id, body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/rules/lists/${listId}/items`, {
-        body,
+      this._client.post(`/accounts/${account_id}/rules/lists/${listId}/items`, {
+        body: body,
         ...options,
       }) as Core.APIPromise<{ result: ItemCreateResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -36,14 +35,14 @@ export class Items extends APIResource {
    * endpoint with the returned `operation_id`.
    */
   update(
-    accountId: string,
     listId: string,
-    body: ItemUpdateParams,
+    params: ItemUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ItemUpdateResponse | null> {
+    const { account_id, body } = params;
     return (
-      this._client.put(`/accounts/${accountId}/rules/lists/${listId}/items`, {
-        body,
+      this._client.put(`/accounts/${account_id}/rules/lists/${listId}/items`, {
+        body: body,
         ...options,
       }) as Core.APIPromise<{ result: ItemUpdateResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -53,27 +52,13 @@ export class Items extends APIResource {
    * Fetches all the items in the list.
    */
   list(
-    accountId: string,
     listId: string,
-    query?: ItemListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ItemListResponse | null>;
-  list(
-    accountId: string,
-    listId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ItemListResponse | null>;
-  list(
-    accountId: string,
-    listId: string,
-    query: ItemListParams | Core.RequestOptions = {},
+    params: ItemListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ItemListResponse | null> {
-    if (isRequestOptions(query)) {
-      return this.list(accountId, listId, {}, query);
-    }
+    const { account_id, ...query } = params;
     return (
-      this._client.get(`/accounts/${accountId}/rules/lists/${listId}/items`, {
+      this._client.get(`/accounts/${account_id}/rules/lists/${listId}/items`, {
         query,
         ...options,
       }) as Core.APIPromise<{ result: ItemListResponse | null }>
@@ -88,13 +73,13 @@ export class Items extends APIResource {
    * endpoint with the returned `operation_id`.
    */
   delete(
-    accountId: string,
     listId: string,
-    body: ItemDeleteParams,
+    params: ItemDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ItemDeleteResponse | null> {
+    const { account_id, ...body } = params;
     return (
-      this._client.delete(`/accounts/${accountId}/rules/lists/${listId}/items`, {
+      this._client.delete(`/accounts/${account_id}/rules/lists/${listId}/items`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: ItemDeleteResponse | null }>
@@ -181,7 +166,17 @@ export namespace ItemGetResponse {
   }
 }
 
-export type ItemCreateParams = Array<ItemCreateParams.Body>;
+export interface ItemCreateParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: Array<ItemCreateParams.Body>;
+}
 
 export namespace ItemCreateParams {
   export interface Body {
@@ -243,7 +238,17 @@ export namespace ItemCreateParams {
   }
 }
 
-export type ItemUpdateParams = Array<ItemUpdateParams.Body>;
+export interface ItemUpdateParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: Array<ItemUpdateParams.Body>;
+}
 
 export namespace ItemUpdateParams {
   export interface Body {
@@ -307,28 +312,41 @@ export namespace ItemUpdateParams {
 
 export interface ItemListParams {
   /**
-   * The pagination cursor. An opaque string token indicating the position from which
-   * to continue when requesting the next/previous set of records. Cursor values are
-   * provided under `result_info.cursors` in the response. You should make no
-   * assumptions about a cursor's content or length.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Query param: The pagination cursor. An opaque string token indicating the
+   * position from which to continue when requesting the next/previous set of
+   * records. Cursor values are provided under `result_info.cursors` in the response.
+   * You should make no assumptions about a cursor's content or length.
    */
   cursor?: string;
 
   /**
-   * Amount of results to include in each paginated response. A non-negative 32 bit
-   * integer.
+   * Query param: Amount of results to include in each paginated response. A
+   * non-negative 32 bit integer.
    */
   per_page?: number;
 
   /**
-   * A search query to filter returned items. Its meaning depends on the list type:
-   * IP addresses must start with the provided string, hostnames and bulk redirects
-   * must contain the string, and ASNs must match the string exactly.
+   * Query param: A search query to filter returned items. Its meaning depends on the
+   * list type: IP addresses must start with the provided string, hostnames and bulk
+   * redirects must contain the string, and ASNs must match the string exactly.
    */
   search?: string;
 }
 
 export interface ItemDeleteParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
   items?: Array<ItemDeleteParams.Item>;
 }
 

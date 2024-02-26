@@ -14,12 +14,10 @@ const cloudflare = new Cloudflare({
 
 describe('resource deployments', () => {
   // skipped: tests are disabled for the time being
-  test.skip('create', async () => {
-    const responsePromise = cloudflare.pages.projects.deployments.create(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'this-is-my-project-01',
-      {},
-    );
+  test.skip('create: only required params', async () => {
+    const responsePromise = cloudflare.pages.projects.deployments.create('this-is-my-project-01', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -30,11 +28,18 @@ describe('resource deployments', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
-    const responsePromise = cloudflare.pages.projects.deployments.list(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'this-is-my-project-01',
-    );
+  test.skip('create: required and optional params', async () => {
+    const response = await cloudflare.pages.projects.deployments.create('this-is-my-project-01', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      branch: 'staging',
+    });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list: only required params', async () => {
+    const responsePromise = cloudflare.pages.projects.deployments.list('this-is-my-project-01', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -45,23 +50,18 @@ describe('resource deployments', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.pages.projects.deployments.list(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        'this-is-my-project-01',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('list: required and optional params', async () => {
+    const response = await cloudflare.pages.projects.deployments.list('this-is-my-project-01', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
+  test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.pages.projects.deployments.delete(
-      '023e105f4ecef8ad9ca31a8372d0c353',
       'this-is-my-project-01',
       '023e105f4ecef8ad9ca31a8372d0c353',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -73,11 +73,20 @@ describe('resource deployments', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
+  test.skip('delete: required and optional params', async () => {
+    const response = await cloudflare.pages.projects.deployments.delete(
+      'this-is-my-project-01',
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get: only required params', async () => {
     const responsePromise = cloudflare.pages.projects.deployments.get(
-      '023e105f4ecef8ad9ca31a8372d0c353',
       'this-is-my-project-01',
       '023e105f4ecef8ad9ca31a8372d0c353',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -89,24 +98,20 @@ describe('resource deployments', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.pages.projects.deployments.get(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        'this-is-my-project-01',
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.pages.projects.deployments.get(
+      'this-is-my-project-01',
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('retry', async () => {
+  test.skip('retry: only required params', async () => {
     const responsePromise = cloudflare.pages.projects.deployments.retry(
-      '023e105f4ecef8ad9ca31a8372d0c353',
       'this-is-my-project-01',
       '023e105f4ecef8ad9ca31a8372d0c353',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -118,11 +123,20 @@ describe('resource deployments', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('rollback', async () => {
-    const responsePromise = cloudflare.pages.projects.deployments.rollback(
-      '023e105f4ecef8ad9ca31a8372d0c353',
+  test.skip('retry: required and optional params', async () => {
+    const response = await cloudflare.pages.projects.deployments.retry(
       'this-is-my-project-01',
       '023e105f4ecef8ad9ca31a8372d0c353',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('rollback: only required params', async () => {
+    const responsePromise = cloudflare.pages.projects.deployments.rollback(
+      'this-is-my-project-01',
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -131,5 +145,14 @@ describe('resource deployments', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('rollback: required and optional params', async () => {
+    const response = await cloudflare.pages.projects.deployments.rollback(
+      'this-is-my-project-01',
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
   });
 });

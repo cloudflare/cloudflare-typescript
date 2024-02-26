@@ -9,13 +9,13 @@ export class Domains extends APIResource {
    * Update individual domain.
    */
   update(
-    accountId: string,
     domainName: string,
-    body: DomainUpdateParams,
+    params: DomainUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DomainUpdateResponse | null> {
+    const { account_id, ...body } = params;
     return (
-      this._client.put(`/accounts/${accountId}/registrar/domains/${domainName}`, {
+      this._client.put(`/accounts/${account_id}/registrar/domains/${domainName}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: DomainUpdateResponse | null }>
@@ -25,9 +25,10 @@ export class Domains extends APIResource {
   /**
    * List domains handled by Registrar.
    */
-  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<DomainListResponse | null> {
+  list(params: DomainListParams, options?: Core.RequestOptions): Core.APIPromise<DomainListResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/registrar/domains`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/registrar/domains`, options) as Core.APIPromise<{
         result: DomainListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -37,14 +38,16 @@ export class Domains extends APIResource {
    * Show individual domain.
    */
   get(
-    accountId: string,
     domainName: string,
+    params: DomainGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DomainGetResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/registrar/domains/${domainName}`, options) as Core.APIPromise<{
-        result: DomainGetResponse | null;
-      }>
+      this._client.get(
+        `/accounts/${account_id}/registrar/domains/${domainName}`,
+        options,
+      ) as Core.APIPromise<{ result: DomainGetResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -232,20 +235,39 @@ export type DomainGetResponse = unknown | Array<unknown> | string;
 
 export interface DomainUpdateParams {
   /**
-   * Auto-renew controls whether subscription is automatically renewed upon domain
-   * expiration.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: Auto-renew controls whether subscription is automatically renewed
+   * upon domain expiration.
    */
   auto_renew?: boolean;
 
   /**
-   * Shows whether a registrar lock is in place for a domain.
+   * Body param: Shows whether a registrar lock is in place for a domain.
    */
   locked?: boolean;
 
   /**
-   * Privacy option controls redacting WHOIS information.
+   * Body param: Privacy option controls redacting WHOIS information.
    */
   privacy?: boolean;
+}
+
+export interface DomainListParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface DomainGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
 }
 
 export namespace Domains {
@@ -253,4 +275,6 @@ export namespace Domains {
   export import DomainListResponse = DomainsAPI.DomainListResponse;
   export import DomainGetResponse = DomainsAPI.DomainGetResponse;
   export import DomainUpdateParams = DomainsAPI.DomainUpdateParams;
+  export import DomainListParams = DomainsAPI.DomainListParams;
+  export import DomainGetParams = DomainsAPI.DomainGetParams;
 }

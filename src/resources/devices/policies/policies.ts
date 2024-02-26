@@ -19,12 +19,12 @@ export class Policies extends APIResource {
    * criteria.
    */
   create(
-    accountId: unknown,
-    body: PolicyCreateParams,
+    params: PolicyCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PolicyCreateResponse | null> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/devices/policy`, { body, ...options }) as Core.APIPromise<{
+      this._client.post(`/accounts/${account_id}/devices/policy`, { body, ...options }) as Core.APIPromise<{
         result: PolicyCreateResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -33,9 +33,10 @@ export class Policies extends APIResource {
   /**
    * Fetches a list of the device settings profiles for an account.
    */
-  list(accountId: unknown, options?: Core.RequestOptions): Core.APIPromise<PolicyListResponse | null> {
+  list(params: PolicyListParams, options?: Core.RequestOptions): Core.APIPromise<PolicyListResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/devices/policies`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/devices/policies`, options) as Core.APIPromise<{
         result: PolicyListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -46,12 +47,13 @@ export class Policies extends APIResource {
    * for an account.
    */
   delete(
-    accountId: unknown,
     policyId: string,
+    params: PolicyDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PolicyDeleteResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${accountId}/devices/policy/${policyId}`, options) as Core.APIPromise<{
+      this._client.delete(`/accounts/${account_id}/devices/policy/${policyId}`, options) as Core.APIPromise<{
         result: PolicyDeleteResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -61,13 +63,13 @@ export class Policies extends APIResource {
    * Updates a configured device settings profile.
    */
   edit(
-    accountId: unknown,
     policyId: string,
-    body: PolicyEditParams,
+    params: PolicyEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PolicyEditResponse | null> {
+    const { account_id, ...body } = params;
     return (
-      this._client.patch(`/accounts/${accountId}/devices/policy/${policyId}`, {
+      this._client.patch(`/accounts/${account_id}/devices/policy/${policyId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: PolicyEditResponse | null }>
@@ -78,12 +80,13 @@ export class Policies extends APIResource {
    * Fetches a device settings profile by ID.
    */
   get(
-    accountId: unknown,
     policyId: string,
+    params: PolicyGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PolicyGetResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/devices/policy/${policyId}`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/devices/policy/${policyId}`, options) as Core.APIPromise<{
         result: PolicyGetResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -464,92 +467,102 @@ export type PolicyGetResponse = Array<unknown>;
 
 export interface PolicyCreateParams {
   /**
-   * The wirefilter expression to match devices.
+   * Path param:
+   */
+  account_id: unknown;
+
+  /**
+   * Body param: The wirefilter expression to match devices.
    */
   match: string;
 
   /**
-   * The name of the device settings profile.
+   * Body param: The name of the device settings profile.
    */
   name: string;
 
   /**
-   * The precedence of the policy. Lower values indicate higher precedence. Policies
-   * will be evaluated in ascending order of this field.
+   * Body param: The precedence of the policy. Lower values indicate higher
+   * precedence. Policies will be evaluated in ascending order of this field.
    */
   precedence: number;
 
   /**
-   * Whether to allow the user to switch WARP between modes.
+   * Body param: Whether to allow the user to switch WARP between modes.
    */
   allow_mode_switch?: boolean;
 
   /**
-   * Whether to receive update notifications when a new version of the client is
-   * available.
+   * Body param: Whether to receive update notifications when a new version of the
+   * client is available.
    */
   allow_updates?: boolean;
 
   /**
-   * Whether to allow devices to leave the organization.
+   * Body param: Whether to allow devices to leave the organization.
    */
   allowed_to_leave?: boolean;
 
   /**
-   * The amount of time in minutes to reconnect after having been disabled.
+   * Body param: The amount of time in minutes to reconnect after having been
+   * disabled.
    */
   auto_connect?: number;
 
   /**
-   * Turn on the captive portal after the specified amount of time.
+   * Body param: Turn on the captive portal after the specified amount of time.
    */
   captive_portal?: number;
 
   /**
-   * A description of the policy.
+   * Body param: A description of the policy.
    */
   description?: string;
 
   /**
-   * If the `dns_server` field of a fallback domain is not present, the client will
-   * fall back to a best guess of the default/system DNS resolvers unless this policy
-   * option is set to `true`.
+   * Body param: If the `dns_server` field of a fallback domain is not present, the
+   * client will fall back to a best guess of the default/system DNS resolvers unless
+   * this policy option is set to `true`.
    */
   disable_auto_fallback?: boolean;
 
   /**
-   * Whether the policy will be applied to matching devices.
+   * Body param: Whether the policy will be applied to matching devices.
    */
   enabled?: boolean;
 
   /**
-   * Whether to add Microsoft IPs to Split Tunnel exclusions.
+   * Body param: Whether to add Microsoft IPs to Split Tunnel exclusions.
    */
   exclude_office_ips?: boolean;
 
   /**
-   * The amount of time in minutes a user is allowed access to their LAN. A value of
-   * 0 will allow LAN access until the next WARP reconnection, such as a reboot or a
-   * laptop waking from sleep. Note that this field is omitted from the response if
-   * null or unset.
+   * Body param: The amount of time in minutes a user is allowed access to their LAN.
+   * A value of 0 will allow LAN access until the next WARP reconnection, such as a
+   * reboot or a laptop waking from sleep. Note that this field is omitted from the
+   * response if null or unset.
    */
   lan_allow_minutes?: number;
 
   /**
-   * The size of the subnet for the local access network. Note that this field is
-   * omitted from the response if null or unset.
+   * Body param: The size of the subnet for the local access network. Note that this
+   * field is omitted from the response if null or unset.
    */
   lan_allow_subnet_size?: number;
 
+  /**
+   * Body param:
+   */
   service_mode_v2?: PolicyCreateParams.ServiceModeV2;
 
   /**
-   * The URL to launch when the Send Feedback button is clicked.
+   * Body param: The URL to launch when the Send Feedback button is clicked.
    */
   support_url?: string;
 
   /**
-   * Whether to allow the user to turn off the WARP switch and disconnect the client.
+   * Body param: Whether to allow the user to turn off the WARP switch and disconnect
+   * the client.
    */
   switch_locked?: boolean;
 }
@@ -568,80 +581,98 @@ export namespace PolicyCreateParams {
   }
 }
 
+export interface PolicyListParams {
+  account_id: unknown;
+}
+
+export interface PolicyDeleteParams {
+  account_id: unknown;
+}
+
 export interface PolicyEditParams {
   /**
-   * Whether to allow the user to switch WARP between modes.
+   * Path param:
+   */
+  account_id: unknown;
+
+  /**
+   * Body param: Whether to allow the user to switch WARP between modes.
    */
   allow_mode_switch?: boolean;
 
   /**
-   * Whether to receive update notifications when a new version of the client is
-   * available.
+   * Body param: Whether to receive update notifications when a new version of the
+   * client is available.
    */
   allow_updates?: boolean;
 
   /**
-   * Whether to allow devices to leave the organization.
+   * Body param: Whether to allow devices to leave the organization.
    */
   allowed_to_leave?: boolean;
 
   /**
-   * The amount of time in minutes to reconnect after having been disabled.
+   * Body param: The amount of time in minutes to reconnect after having been
+   * disabled.
    */
   auto_connect?: number;
 
   /**
-   * Turn on the captive portal after the specified amount of time.
+   * Body param: Turn on the captive portal after the specified amount of time.
    */
   captive_portal?: number;
 
   /**
-   * A description of the policy.
+   * Body param: A description of the policy.
    */
   description?: string;
 
   /**
-   * If the `dns_server` field of a fallback domain is not present, the client will
-   * fall back to a best guess of the default/system DNS resolvers unless this policy
-   * option is set to `true`.
+   * Body param: If the `dns_server` field of a fallback domain is not present, the
+   * client will fall back to a best guess of the default/system DNS resolvers unless
+   * this policy option is set to `true`.
    */
   disable_auto_fallback?: boolean;
 
   /**
-   * Whether the policy will be applied to matching devices.
+   * Body param: Whether the policy will be applied to matching devices.
    */
   enabled?: boolean;
 
   /**
-   * Whether to add Microsoft IPs to Split Tunnel exclusions.
+   * Body param: Whether to add Microsoft IPs to Split Tunnel exclusions.
    */
   exclude_office_ips?: boolean;
 
   /**
-   * The wirefilter expression to match devices.
+   * Body param: The wirefilter expression to match devices.
    */
   match?: string;
 
   /**
-   * The name of the device settings profile.
+   * Body param: The name of the device settings profile.
    */
   name?: string;
 
   /**
-   * The precedence of the policy. Lower values indicate higher precedence. Policies
-   * will be evaluated in ascending order of this field.
+   * Body param: The precedence of the policy. Lower values indicate higher
+   * precedence. Policies will be evaluated in ascending order of this field.
    */
   precedence?: number;
 
+  /**
+   * Body param:
+   */
   service_mode_v2?: PolicyEditParams.ServiceModeV2;
 
   /**
-   * The URL to launch when the Send Feedback button is clicked.
+   * Body param: The URL to launch when the Send Feedback button is clicked.
    */
   support_url?: string;
 
   /**
-   * Whether to allow the user to turn off the WARP switch and disconnect the client.
+   * Body param: Whether to allow the user to turn off the WARP switch and disconnect
+   * the client.
    */
   switch_locked?: boolean;
 }
@@ -660,6 +691,10 @@ export namespace PolicyEditParams {
   }
 }
 
+export interface PolicyGetParams {
+  account_id: unknown;
+}
+
 export namespace Policies {
   export import PolicyCreateResponse = PoliciesAPI.PolicyCreateResponse;
   export import PolicyListResponse = PoliciesAPI.PolicyListResponse;
@@ -667,22 +702,32 @@ export namespace Policies {
   export import PolicyEditResponse = PoliciesAPI.PolicyEditResponse;
   export import PolicyGetResponse = PoliciesAPI.PolicyGetResponse;
   export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
+  export import PolicyListParams = PoliciesAPI.PolicyListParams;
+  export import PolicyDeleteParams = PoliciesAPI.PolicyDeleteParams;
   export import PolicyEditParams = PoliciesAPI.PolicyEditParams;
+  export import PolicyGetParams = PoliciesAPI.PolicyGetParams;
   export import DefaultPolicy = DefaultPolicyAPI.DefaultPolicy;
   export import DefaultPolicyGetResponse = DefaultPolicyAPI.DefaultPolicyGetResponse;
+  export import DefaultPolicyGetParams = DefaultPolicyAPI.DefaultPolicyGetParams;
   export import Excludes = ExcludesAPI.Excludes;
   export import ExcludeUpdateResponse = ExcludesAPI.ExcludeUpdateResponse;
   export import ExcludeListResponse = ExcludesAPI.ExcludeListResponse;
   export import ExcludeGetResponse = ExcludesAPI.ExcludeGetResponse;
   export import ExcludeUpdateParams = ExcludesAPI.ExcludeUpdateParams;
+  export import ExcludeListParams = ExcludesAPI.ExcludeListParams;
+  export import ExcludeGetParams = ExcludesAPI.ExcludeGetParams;
   export import FallbackDomains = FallbackDomainsAPI.FallbackDomains;
   export import FallbackDomainUpdateResponse = FallbackDomainsAPI.FallbackDomainUpdateResponse;
   export import FallbackDomainListResponse = FallbackDomainsAPI.FallbackDomainListResponse;
   export import FallbackDomainGetResponse = FallbackDomainsAPI.FallbackDomainGetResponse;
   export import FallbackDomainUpdateParams = FallbackDomainsAPI.FallbackDomainUpdateParams;
+  export import FallbackDomainListParams = FallbackDomainsAPI.FallbackDomainListParams;
+  export import FallbackDomainGetParams = FallbackDomainsAPI.FallbackDomainGetParams;
   export import Includes = IncludesAPI.Includes;
   export import IncludeUpdateResponse = IncludesAPI.IncludeUpdateResponse;
   export import IncludeListResponse = IncludesAPI.IncludeListResponse;
   export import IncludeGetResponse = IncludesAPI.IncludeGetResponse;
   export import IncludeUpdateParams = IncludesAPI.IncludeUpdateParams;
+  export import IncludeListParams = IncludesAPI.IncludeListParams;
+  export import IncludeGetParams = IncludesAPI.IncludeGetParams;
 }

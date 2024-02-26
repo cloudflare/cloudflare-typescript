@@ -9,12 +9,12 @@ export class Configurations extends APIResource {
    * Updates the current Zero Trust account configuration.
    */
   update(
-    accountId: unknown,
-    body: ConfigurationUpdateParams,
+    params: ConfigurationUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConfigurationUpdateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.put(`/accounts/${accountId}/gateway/configuration`, {
+      this._client.put(`/accounts/${account_id}/gateway/configuration`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: ConfigurationUpdateResponse }>
@@ -29,12 +29,12 @@ export class Configurations extends APIResource {
    * an error if any collection of settings is not properly configured.
    */
   edit(
-    accountId: unknown,
-    body: ConfigurationEditParams,
+    params: ConfigurationEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConfigurationEditResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.patch(`/accounts/${accountId}/gateway/configuration`, {
+      this._client.patch(`/accounts/${account_id}/gateway/configuration`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: ConfigurationEditResponse }>
@@ -44,9 +44,13 @@ export class Configurations extends APIResource {
   /**
    * Fetches the current Zero Trust account configuration.
    */
-  get(accountId: unknown, options?: Core.RequestOptions): Core.APIPromise<ConfigurationGetResponse> {
+  get(
+    params: ConfigurationGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ConfigurationGetResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/gateway/configuration`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/gateway/configuration`, options) as Core.APIPromise<{
         result: ConfigurationGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -868,7 +872,12 @@ export namespace ConfigurationGetResponse {
 
 export interface ConfigurationUpdateParams {
   /**
-   * account settings.
+   * Path param:
+   */
+  account_id: unknown;
+
+  /**
+   * Body param: account settings.
    */
   settings?: ConfigurationUpdateParams.Settings;
 }
@@ -1125,7 +1134,12 @@ export namespace ConfigurationUpdateParams {
 
 export interface ConfigurationEditParams {
   /**
-   * account settings.
+   * Path param:
+   */
+  account_id: unknown;
+
+  /**
+   * Body param: account settings.
    */
   settings?: ConfigurationEditParams.Settings;
 }
@@ -1380,10 +1394,15 @@ export namespace ConfigurationEditParams {
   }
 }
 
+export interface ConfigurationGetParams {
+  account_id: unknown;
+}
+
 export namespace Configurations {
   export import ConfigurationUpdateResponse = ConfigurationsAPI.ConfigurationUpdateResponse;
   export import ConfigurationEditResponse = ConfigurationsAPI.ConfigurationEditResponse;
   export import ConfigurationGetResponse = ConfigurationsAPI.ConfigurationGetResponse;
   export import ConfigurationUpdateParams = ConfigurationsAPI.ConfigurationUpdateParams;
   export import ConfigurationEditParams = ConfigurationsAPI.ConfigurationEditParams;
+  export import ConfigurationGetParams = ConfigurationsAPI.ConfigurationGetParams;
 }

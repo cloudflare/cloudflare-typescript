@@ -14,8 +14,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource tests', () => {
   // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
-    const responsePromise = cloudflare.dex.tests.list('01a7362d577a6c3019a474fd6f485823');
+  test.skip('list: only required params', async () => {
+    const responsePromise = cloudflare.dex.tests.list({ account_id: '01a7362d577a6c3019a474fd6f485823' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -26,28 +26,14 @@ describe('resource tests', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.dex.tests.list('01a7362d577a6c3019a474fd6f485823', { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('list: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.dex.tests.list(
-        '01a7362d577a6c3019a474fd6f485823',
-        {
-          colo: 'string',
-          deviceId: ['string', 'string', 'string'],
-          page: 1,
-          per_page: 1,
-          testName: 'string',
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('list: required and optional params', async () => {
+    const response = await cloudflare.dex.tests.list({
+      account_id: '01a7362d577a6c3019a474fd6f485823',
+      colo: 'string',
+      deviceId: ['string', 'string', 'string'],
+      page: 1,
+      per_page: 1,
+      testName: 'string',
+    });
   });
 });

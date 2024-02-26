@@ -7,6 +7,7 @@ export {
   NetworkEditResponse,
   NetworkCreateParams,
   NetworkDeleteParams,
+  NetworkEditParams,
   Networks,
 } from './networks';
 export {

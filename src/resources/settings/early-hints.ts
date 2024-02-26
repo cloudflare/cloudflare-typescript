@@ -11,13 +11,10 @@ export class EarlyHints extends APIResource {
    * [Early Hints](https://developers.cloudflare.com/cache/about/early-hints) for
    * more information.
    */
-  edit(
-    zoneId: string,
-    body: EarlyHintEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<EarlyHintEditResponse> {
+  edit(params: EarlyHintEditParams, options?: Core.RequestOptions): Core.APIPromise<EarlyHintEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/settings/early_hints`, { body, ...options }) as Core.APIPromise<{
+      this._client.patch(`/zones/${zone_id}/settings/early_hints`, { body, ...options }) as Core.APIPromise<{
         result: EarlyHintEditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -29,9 +26,10 @@ export class EarlyHints extends APIResource {
    * [Early Hints](https://developers.cloudflare.com/cache/about/early-hints) for
    * more information.
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<EarlyHintGetResponse> {
+  get(params: EarlyHintGetParams, options?: Core.RequestOptions): Core.APIPromise<EarlyHintGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/settings/early_hints`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/settings/early_hints`, options) as Core.APIPromise<{
         result: EarlyHintGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -98,13 +96,26 @@ export interface EarlyHintGetResponse {
 
 export interface EarlyHintEditParams {
   /**
-   * Value of the zone setting.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Value of the zone setting.
    */
   value: 'on' | 'off';
+}
+
+export interface EarlyHintGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }
 
 export namespace EarlyHints {
   export import EarlyHintEditResponse = EarlyHintsAPI.EarlyHintEditResponse;
   export import EarlyHintGetResponse = EarlyHintsAPI.EarlyHintGetResponse;
   export import EarlyHintEditParams = EarlyHintsAPI.EarlyHintEditParams;
+  export import EarlyHintGetParams = EarlyHintsAPI.EarlyHintGetParams;
 }

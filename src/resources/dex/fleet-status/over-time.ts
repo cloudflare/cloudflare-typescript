@@ -8,8 +8,9 @@ export class OverTime extends APIResource {
   /**
    * List details for devices using WARP, up to 7 days
    */
-  list(accountId: string, query: OverTimeListParams, options?: Core.RequestOptions): Core.APIPromise<void> {
-    return this._client.get(`/accounts/${accountId}/dex/fleet-status/over-time`, {
+  list(params: OverTimeListParams, options?: Core.RequestOptions): Core.APIPromise<void> {
+    const { account_id, ...query } = params;
+    return this._client.get(`/accounts/${account_id}/dex/fleet-status/over-time`, {
       query,
       ...options,
       headers: { Accept: '*/*', ...options?.headers },
@@ -19,22 +20,27 @@ export class OverTime extends APIResource {
 
 export interface OverTimeListParams {
   /**
-   * Timestamp in ISO format
+   * Path param:
+   */
+  account_id: string;
+
+  /**
+   * Query param: Timestamp in ISO format
    */
   time_end: string;
 
   /**
-   * Timestamp in ISO format
+   * Query param: Timestamp in ISO format
    */
   time_start: string;
 
   /**
-   * Cloudflare colo
+   * Query param: Cloudflare colo
    */
   colo?: string;
 
   /**
-   * Device-specific ID, given as UUID v4
+   * Query param: Device-specific ID, given as UUID v4
    */
   device_id?: string;
 }

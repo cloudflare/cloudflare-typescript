@@ -10,13 +10,14 @@ export class OverrideCodes extends APIResource {
    * **Admin Override** setting being enabled in your device configuration.
    */
   list(
-    accountId: unknown,
     deviceId: string,
+    params: OverrideCodeListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OverrideCodeListResponse | null> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountId}/devices/${deviceId}/override_codes`,
+        `/accounts/${account_id}/devices/${deviceId}/override_codes`,
         options,
       ) as Core.APIPromise<{ result: OverrideCodeListResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -56,6 +57,11 @@ export namespace OverrideCodeListResponse {
   }
 }
 
+export interface OverrideCodeListParams {
+  account_id: unknown;
+}
+
 export namespace OverrideCodes {
   export import OverrideCodeListResponse = OverrideCodesAPI.OverrideCodeListResponse;
+  export import OverrideCodeListParams = OverrideCodesAPI.OverrideCodeListParams;
 }

@@ -16,12 +16,12 @@ export class Hostnames extends APIResource {
    * invalidate the association.
    */
   update(
-    zoneId: string,
-    body: HostnameUpdateParams,
+    params: HostnameUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<HostnameUpdateResponse | null> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.put(`/zones/${zoneId}/origin_tls_client_auth/hostnames`, {
+      this._client.put(`/zones/${zone_id}/origin_tls_client_auth/hostnames`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: HostnameUpdateResponse | null }>
@@ -31,10 +31,15 @@ export class Hostnames extends APIResource {
   /**
    * Get the Hostname Status for Client Authentication
    */
-  get(zoneId: string, hostname: string, options?: Core.RequestOptions): Core.APIPromise<HostnameGetResponse> {
+  get(
+    hostname: string,
+    params: HostnameGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<HostnameGetResponse> {
+    const { zone_id } = params;
     return (
       this._client.get(
-        `/zones/${zoneId}/origin_tls_client_auth/hostnames/${hostname}`,
+        `/zones/${zone_id}/origin_tls_client_auth/hostnames/${hostname}`,
         options,
       ) as Core.APIPromise<{ result: HostnameGetResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -168,6 +173,14 @@ export interface HostnameGetResponse {
 }
 
 export interface HostnameUpdateParams {
+  /**
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param:
+   */
   config: Array<HostnameUpdateParams.Config>;
 }
 
@@ -192,14 +205,25 @@ export namespace HostnameUpdateParams {
   }
 }
 
+export interface HostnameGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
 export namespace Hostnames {
   export import HostnameUpdateResponse = HostnamesAPI.HostnameUpdateResponse;
   export import HostnameGetResponse = HostnamesAPI.HostnameGetResponse;
   export import HostnameUpdateParams = HostnamesAPI.HostnameUpdateParams;
+  export import HostnameGetParams = HostnamesAPI.HostnameGetParams;
   export import Certificates = CertificatesAPI.Certificates;
   export import CertificateCreateResponse = CertificatesAPI.CertificateCreateResponse;
   export import CertificateListResponse = CertificatesAPI.CertificateListResponse;
   export import CertificateDeleteResponse = CertificatesAPI.CertificateDeleteResponse;
   export import CertificateGetResponse = CertificatesAPI.CertificateGetResponse;
   export import CertificateCreateParams = CertificatesAPI.CertificateCreateParams;
+  export import CertificateListParams = CertificatesAPI.CertificateListParams;
+  export import CertificateDeleteParams = CertificatesAPI.CertificateDeleteParams;
+  export import CertificateGetParams = CertificatesAPI.CertificateGetParams;
 }

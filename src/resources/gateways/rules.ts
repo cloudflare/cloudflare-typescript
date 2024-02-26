@@ -8,13 +8,10 @@ export class Rules extends APIResource {
   /**
    * Creates a new Zero Trust Gateway rule.
    */
-  create(
-    accountId: unknown,
-    body: RuleCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleCreateResponse> {
+  create(params: RuleCreateParams, options?: Core.RequestOptions): Core.APIPromise<RuleCreateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/gateway/rules`, { body, ...options }) as Core.APIPromise<{
+      this._client.post(`/accounts/${account_id}/gateway/rules`, { body, ...options }) as Core.APIPromise<{
         result: RuleCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -24,13 +21,13 @@ export class Rules extends APIResource {
    * Updates a configured Zero Trust Gateway rule.
    */
   update(
-    accountId: unknown,
     ruleId: string,
-    body: RuleUpdateParams,
+    params: RuleUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RuleUpdateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.put(`/accounts/${accountId}/gateway/rules/${ruleId}`, {
+      this._client.put(`/accounts/${account_id}/gateway/rules/${ruleId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: RuleUpdateResponse }>
@@ -40,9 +37,10 @@ export class Rules extends APIResource {
   /**
    * Fetches the Zero Trust Gateway rules for an account.
    */
-  list(accountId: unknown, options?: Core.RequestOptions): Core.APIPromise<RuleListResponse | null> {
+  list(params: RuleListParams, options?: Core.RequestOptions): Core.APIPromise<RuleListResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/gateway/rules`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/gateway/rules`, options) as Core.APIPromise<{
         result: RuleListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -52,12 +50,13 @@ export class Rules extends APIResource {
    * Deletes a Zero Trust Gateway rule.
    */
   delete(
-    accountId: unknown,
     ruleId: string,
+    params: RuleDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RuleDeleteResponse> {
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${accountId}/gateway/rules/${ruleId}`, options) as Core.APIPromise<{
+      this._client.delete(`/accounts/${account_id}/gateway/rules/${ruleId}`, options) as Core.APIPromise<{
         result: RuleDeleteResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -66,9 +65,14 @@ export class Rules extends APIResource {
   /**
    * Fetches a single Zero Trust Gateway rule.
    */
-  get(accountId: unknown, ruleId: string, options?: Core.RequestOptions): Core.APIPromise<RuleGetResponse> {
+  get(
+    ruleId: string,
+    params: RuleGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RuleGetResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/gateway/rules/${ruleId}`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/gateway/rules/${ruleId}`, options) as Core.APIPromise<{
         result: RuleGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -1975,8 +1979,13 @@ export namespace RuleGetResponse {
 
 export interface RuleCreateParams {
   /**
-   * The action to preform when the associated traffic, identity, and device posture
-   * expressions are either absent or evaluate to `true`.
+   * Path param:
+   */
+  account_id: unknown;
+
+  /**
+   * Body param: The action to preform when the associated traffic, identity, and
+   * device posture expressions are either absent or evaluate to `true`.
    */
   action:
     | 'on'
@@ -1995,56 +2004,56 @@ export interface RuleCreateParams {
     | 'audit_ssh';
 
   /**
-   * The name of the rule.
+   * Body param: The name of the rule.
    */
   name: string;
 
   /**
-   * The description of the rule.
+   * Body param: The description of the rule.
    */
   description?: string;
 
   /**
-   * The wirefilter expression used for device posture check matching.
+   * Body param: The wirefilter expression used for device posture check matching.
    */
   device_posture?: string;
 
   /**
-   * True if the rule is enabled.
+   * Body param: True if the rule is enabled.
    */
   enabled?: boolean;
 
   /**
-   * The protocol or layer to evaluate the traffic, identity, and device posture
-   * expressions.
+   * Body param: The protocol or layer to evaluate the traffic, identity, and device
+   * posture expressions.
    */
   filters?: Array<'http' | 'dns' | 'l4' | 'egress'>;
 
   /**
-   * The wirefilter expression used for identity matching.
+   * Body param: The wirefilter expression used for identity matching.
    */
   identity?: string;
 
   /**
-   * Precedence sets the order of your rules. Lower values indicate higher
-   * precedence. At each processing phase, applicable rules are evaluated in
+   * Body param: Precedence sets the order of your rules. Lower values indicate
+   * higher precedence. At each processing phase, applicable rules are evaluated in
    * ascending order of this value.
    */
   precedence?: number;
 
   /**
-   * Additional settings that modify the rule's action.
+   * Body param: Additional settings that modify the rule's action.
    */
   rule_settings?: RuleCreateParams.RuleSettings;
 
   /**
-   * The schedule for activating DNS policies. This does not apply to HTTP or network
-   * policies.
+   * Body param: The schedule for activating DNS policies. This does not apply to
+   * HTTP or network policies.
    */
   schedule?: RuleCreateParams.Schedule;
 
   /**
-   * The wirefilter expression used for traffic matching.
+   * Body param: The wirefilter expression used for traffic matching.
    */
   traffic?: string;
 }
@@ -2434,8 +2443,13 @@ export namespace RuleCreateParams {
 
 export interface RuleUpdateParams {
   /**
-   * The action to preform when the associated traffic, identity, and device posture
-   * expressions are either absent or evaluate to `true`.
+   * Path param:
+   */
+  account_id: unknown;
+
+  /**
+   * Body param: The action to preform when the associated traffic, identity, and
+   * device posture expressions are either absent or evaluate to `true`.
    */
   action:
     | 'on'
@@ -2454,56 +2468,56 @@ export interface RuleUpdateParams {
     | 'audit_ssh';
 
   /**
-   * The name of the rule.
+   * Body param: The name of the rule.
    */
   name: string;
 
   /**
-   * The description of the rule.
+   * Body param: The description of the rule.
    */
   description?: string;
 
   /**
-   * The wirefilter expression used for device posture check matching.
+   * Body param: The wirefilter expression used for device posture check matching.
    */
   device_posture?: string;
 
   /**
-   * True if the rule is enabled.
+   * Body param: True if the rule is enabled.
    */
   enabled?: boolean;
 
   /**
-   * The protocol or layer to evaluate the traffic, identity, and device posture
-   * expressions.
+   * Body param: The protocol or layer to evaluate the traffic, identity, and device
+   * posture expressions.
    */
   filters?: Array<'http' | 'dns' | 'l4' | 'egress'>;
 
   /**
-   * The wirefilter expression used for identity matching.
+   * Body param: The wirefilter expression used for identity matching.
    */
   identity?: string;
 
   /**
-   * Precedence sets the order of your rules. Lower values indicate higher
-   * precedence. At each processing phase, applicable rules are evaluated in
+   * Body param: Precedence sets the order of your rules. Lower values indicate
+   * higher precedence. At each processing phase, applicable rules are evaluated in
    * ascending order of this value.
    */
   precedence?: number;
 
   /**
-   * Additional settings that modify the rule's action.
+   * Body param: Additional settings that modify the rule's action.
    */
   rule_settings?: RuleUpdateParams.RuleSettings;
 
   /**
-   * The schedule for activating DNS policies. This does not apply to HTTP or network
-   * policies.
+   * Body param: The schedule for activating DNS policies. This does not apply to
+   * HTTP or network policies.
    */
   schedule?: RuleUpdateParams.Schedule;
 
   /**
-   * The wirefilter expression used for traffic matching.
+   * Body param: The wirefilter expression used for traffic matching.
    */
   traffic?: string;
 }
@@ -2891,6 +2905,18 @@ export namespace RuleUpdateParams {
   }
 }
 
+export interface RuleListParams {
+  account_id: unknown;
+}
+
+export interface RuleDeleteParams {
+  account_id: unknown;
+}
+
+export interface RuleGetParams {
+  account_id: unknown;
+}
+
 export namespace Rules {
   export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
   export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
@@ -2899,4 +2925,7 @@ export namespace Rules {
   export import RuleGetResponse = RulesAPI.RuleGetResponse;
   export import RuleCreateParams = RulesAPI.RuleCreateParams;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
+  export import RuleListParams = RulesAPI.RuleListParams;
+  export import RuleDeleteParams = RulesAPI.RuleDeleteParams;
+  export import RuleGetParams = RulesAPI.RuleGetParams;
 }

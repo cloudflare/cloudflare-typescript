@@ -8,13 +8,10 @@ export class Ciphers extends APIResource {
   /**
    * Changes ciphers setting.
    */
-  edit(
-    zoneId: string,
-    body: CipherEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CipherEditResponse> {
+  edit(params: CipherEditParams, options?: Core.RequestOptions): Core.APIPromise<CipherEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/settings/ciphers`, { body, ...options }) as Core.APIPromise<{
+      this._client.patch(`/zones/${zone_id}/settings/ciphers`, { body, ...options }) as Core.APIPromise<{
         result: CipherEditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -23,9 +20,10 @@ export class Ciphers extends APIResource {
   /**
    * Gets ciphers setting.
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<CipherGetResponse> {
+  get(params: CipherGetParams, options?: Core.RequestOptions): Core.APIPromise<CipherGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/settings/ciphers`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/settings/ciphers`, options) as Core.APIPromise<{
         result: CipherGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -88,13 +86,26 @@ export interface CipherGetResponse {
 
 export interface CipherEditParams {
   /**
-   * Value of the zone setting.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Value of the zone setting.
    */
   value: Array<string>;
+}
+
+export interface CipherGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }
 
 export namespace Ciphers {
   export import CipherEditResponse = CiphersAPI.CipherEditResponse;
   export import CipherGetResponse = CiphersAPI.CipherGetResponse;
   export import CipherEditParams = CiphersAPI.CipherEditParams;
+  export import CipherGetParams = CiphersAPI.CipherGetParams;
 }

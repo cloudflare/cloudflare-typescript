@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as DomainHistoriesAPI from 'cloudflare/resources/intel/domain-histories';
 
 export class DomainHistories extends APIResource {
@@ -10,21 +9,12 @@ export class DomainHistories extends APIResource {
    * Get Domain History
    */
   list(
-    accountId: string,
-    query?: DomainHistoryListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DomainHistoryListResponse | null>;
-  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<DomainHistoryListResponse | null>;
-  list(
-    accountId: string,
-    query: DomainHistoryListParams | Core.RequestOptions = {},
+    params: DomainHistoryListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DomainHistoryListResponse | null> {
-    if (isRequestOptions(query)) {
-      return this.list(accountId, {}, query);
-    }
+    const { account_id, ...query } = params;
     return (
-      this._client.get(`/accounts/${accountId}/intel/domain-history`, {
+      this._client.get(`/accounts/${account_id}/intel/domain-history`, {
         query,
         ...options,
       }) as Core.APIPromise<{ result: DomainHistoryListResponse | null }>
@@ -53,6 +43,14 @@ export namespace DomainHistoryListResponse {
 }
 
 export interface DomainHistoryListParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Query param:
+   */
   domain?: unknown;
 }
 

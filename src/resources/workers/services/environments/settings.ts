@@ -9,15 +9,15 @@ export class Settings extends APIResource {
    * Patch script metadata, such as bindings
    */
   edit(
-    accountId: string,
     serviceName: string,
     environmentName: string,
-    body: SettingEditParams,
+    params: SettingEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SettingEditResponse> {
+    const { account_id, ...body } = params;
     return (
       this._client.patch(
-        `/accounts/${accountId}/workers/services/${serviceName}/environments/${environmentName}/settings`,
+        `/accounts/${account_id}/workers/services/${serviceName}/environments/${environmentName}/settings`,
         { body, ...options },
       ) as Core.APIPromise<{ result: SettingEditResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -27,14 +27,15 @@ export class Settings extends APIResource {
    * Get script settings from a worker with an environment
    */
   get(
-    accountId: string,
     serviceName: string,
     environmentName: string,
+    params: SettingGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SettingGetResponse> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountId}/workers/services/${serviceName}/environments/${environmentName}/settings`,
+        `/accounts/${account_id}/workers/services/${serviceName}/environments/${environmentName}/settings`,
         options,
       ) as Core.APIPromise<{ result: SettingGetResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -836,14 +837,28 @@ export namespace SettingGetResponse {
 }
 
 export interface SettingEditParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
   errors: Array<SettingEditParams.Error>;
 
+  /**
+   * Body param:
+   */
   messages: Array<SettingEditParams.Message>;
 
+  /**
+   * Body param:
+   */
   result: SettingEditParams.Result;
 
   /**
-   * Whether the API call was successful
+   * Body param: Whether the API call was successful
    */
   success: true;
 }
@@ -1209,8 +1224,16 @@ export namespace SettingEditParams {
   }
 }
 
+export interface SettingGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export namespace Settings {
   export import SettingEditResponse = SettingsAPI.SettingEditResponse;
   export import SettingGetResponse = SettingsAPI.SettingGetResponse;
   export import SettingEditParams = SettingsAPI.SettingEditParams;
+  export import SettingGetParams = SettingsAPI.SettingGetParams;
 }

@@ -6,5 +6,6 @@ export {
   ScriptGetResponse,
   ScriptUpdateParams,
   ScriptDeleteParams,
+  ScriptGetParams,
   Scripts,
 } from './scripts';

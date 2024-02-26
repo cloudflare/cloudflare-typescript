@@ -8,6 +8,8 @@ export {
   LiveInputCreateParams,
   LiveInputUpdateParams,
   LiveInputListParams,
+  LiveInputDeleteParams,
+  LiveInputGetParams,
   LiveInputs,
 } from './live-inputs';
 export {
@@ -16,5 +18,7 @@ export {
   OutputListResponse,
   OutputCreateParams,
   OutputUpdateParams,
+  OutputListParams,
+  OutputDeleteParams,
   Outputs,
 } from './outputs';

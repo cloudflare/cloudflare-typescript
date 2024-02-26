@@ -8,14 +8,15 @@ export class Copies extends APIResource {
   /**
    * Uploads a video to Stream from a provided URL.
    */
-  create(
-    accountId: string,
-    params: CopyCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CopyCreateResponse> {
-    const { 'Upload-Creator': uploadCreator, 'Upload-Metadata': uploadMetadata, ...body } = params;
+  create(params: CopyCreateParams, options?: Core.RequestOptions): Core.APIPromise<CopyCreateResponse> {
+    const {
+      account_id,
+      'Upload-Creator': uploadCreator,
+      'Upload-Metadata': uploadMetadata,
+      ...body
+    } = params;
     return (
-      this._client.post(`/accounts/${accountId}/stream/copy`, {
+      this._client.post(`/accounts/${account_id}/stream/copy`, {
         body,
         ...options,
         headers: {
@@ -286,6 +287,11 @@ export namespace CopyCreateResponse {
 }
 
 export interface CopyCreateParams {
+  /**
+   * Path param: The account identifier tag.
+   */
+  account_id: string;
+
   /**
    * Body param: A video's URL. The server must be publicly routable and support
    * `HTTP HEAD` requests and `HTTP GET` range requests. The server should respond to

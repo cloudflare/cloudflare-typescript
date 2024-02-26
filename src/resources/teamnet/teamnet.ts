@@ -13,5 +13,6 @@ export namespace Teamnet {
   export import RouteDeleteResponse = RoutesAPI.RouteDeleteResponse;
   export import RouteEditResponse = RoutesAPI.RouteEditResponse;
   export import RouteCreateParams = RoutesAPI.RouteCreateParams;
+  export import RouteDeleteParams = RoutesAPI.RouteDeleteParams;
   export import RouteEditParams = RoutesAPI.RouteEditParams;
 }

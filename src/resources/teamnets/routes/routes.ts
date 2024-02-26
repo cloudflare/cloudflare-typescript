@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as RoutesAPI from 'cloudflare/resources/teamnets/routes/routes';
 import * as IPsAPI from 'cloudflare/resources/teamnets/routes/ips';
 import * as NetworksAPI from 'cloudflare/resources/teamnets/routes/networks';
@@ -16,24 +15,12 @@ export class Routes extends APIResource {
    * Lists and filters private network routes in an account.
    */
   list(
-    accountId: string,
-    query?: RouteListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<RouteListResponsesV4PagePaginationArray, RouteListResponse>;
-  list(
-    accountId: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<RouteListResponsesV4PagePaginationArray, RouteListResponse>;
-  list(
-    accountId: string,
-    query: RouteListParams | Core.RequestOptions = {},
+    params: RouteListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<RouteListResponsesV4PagePaginationArray, RouteListResponse> {
-    if (isRequestOptions(query)) {
-      return this.list(accountId, {}, query);
-    }
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
-      `/accounts/${accountId}/teamnet/routes`,
+      `/accounts/${account_id}/teamnet/routes`,
       RouteListResponsesV4PagePaginationArray,
       { query, ...options },
     );
@@ -99,46 +86,51 @@ export interface RouteListResponse {
 
 export interface RouteListParams extends V4PagePaginationArrayParams {
   /**
-   * Optional remark describing the route.
+   * Path param: Cloudflare account ID
+   */
+  account_id: string;
+
+  /**
+   * Query param: Optional remark describing the route.
    */
   comment?: string;
 
   /**
-   * If provided, include only routes that were created (and not deleted) before this
-   * time.
+   * Query param: If provided, include only routes that were created (and not
+   * deleted) before this time.
    */
   existed_at?: unknown;
 
   /**
-   * If `true`, only include deleted routes. If `false`, exclude deleted routes. If
-   * empty, all routes will be included.
+   * Query param: If `true`, only include deleted routes. If `false`, exclude deleted
+   * routes. If empty, all routes will be included.
    */
   is_deleted?: unknown;
 
   /**
-   * If set, only list routes that are contained within this IP range.
+   * Query param: If set, only list routes that are contained within this IP range.
    */
   network_subset?: unknown;
 
   /**
-   * If set, only list routes that contain this IP range.
+   * Query param: If set, only list routes that contain this IP range.
    */
   network_superset?: unknown;
 
   /**
-   * The types of tunnels to filter separated by a comma.
+   * Query param: The types of tunnels to filter separated by a comma.
    */
   tun_types?: string;
 
   /**
-   * UUID of the Cloudflare Tunnel serving the route.
+   * Query param: UUID of the Cloudflare Tunnel serving the route.
    */
   tunnel_id?: unknown;
 
   /**
-   * UUID of the Tunnel Virtual Network this route belongs to. If no virtual networks
-   * are configured, the route is assigned to the default virtual network of the
-   * account.
+   * Query param: UUID of the Tunnel Virtual Network this route belongs to. If no
+   * virtual networks are configured, the route is assigned to the default virtual
+   * network of the account.
    */
   virtual_network_id?: unknown;
 }
@@ -156,4 +148,5 @@ export namespace Routes {
   export import NetworkEditResponse = NetworksAPI.NetworkEditResponse;
   export import NetworkCreateParams = NetworksAPI.NetworkCreateParams;
   export import NetworkDeleteParams = NetworksAPI.NetworkDeleteParams;
+  export import NetworkEditParams = NetworksAPI.NetworkEditParams;
 }

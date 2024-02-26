@@ -7,6 +7,8 @@ export {
   ConsumerDeleteResponse,
   ConsumerCreateParams,
   ConsumerUpdateParams,
+  ConsumerListParams,
+  ConsumerDeleteParams,
   Consumers,
 } from './consumers';
 export {
@@ -17,5 +19,8 @@ export {
   QueueGetResponse,
   QueueCreateParams,
   QueueUpdateParams,
+  QueueListParams,
+  QueueDeleteParams,
+  QueueGetParams,
   Queues,
 } from './queues';

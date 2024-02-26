@@ -15,12 +15,10 @@ const cloudflare = new Cloudflare({
 describe('resource captions', () => {
   // skipped: tests are disabled for the time being
   test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.stream.captions.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'ea95132c15732412d22c1476fa83f27a',
-      'tr',
-      { file: '@/Users/kyle/Desktop/tr.vtt' },
-    );
+    const responsePromise = cloudflare.stream.captions.update('ea95132c15732412d22c1476fa83f27a', 'tr', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      file: '@/Users/kyle/Desktop/tr.vtt',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -32,20 +30,17 @@ describe('resource captions', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.stream.captions.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'ea95132c15732412d22c1476fa83f27a',
-      'tr',
-      { file: '@/Users/kyle/Desktop/tr.vtt' },
-    );
+    const response = await cloudflare.stream.captions.update('ea95132c15732412d22c1476fa83f27a', 'tr', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      file: '@/Users/kyle/Desktop/tr.vtt',
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
-    const responsePromise = cloudflare.stream.captions.list(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'ea95132c15732412d22c1476fa83f27a',
-    );
+  test.skip('list: only required params', async () => {
+    const responsePromise = cloudflare.stream.captions.list('ea95132c15732412d22c1476fa83f27a', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -56,24 +51,17 @@ describe('resource captions', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.stream.captions.list(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        'ea95132c15732412d22c1476fa83f27a',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('list: required and optional params', async () => {
+    const response = await cloudflare.stream.captions.list('ea95132c15732412d22c1476fa83f27a', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
-    const responsePromise = cloudflare.stream.captions.delete(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'ea95132c15732412d22c1476fa83f27a',
-      'tr',
-    );
+  test.skip('delete: only required params', async () => {
+    const responsePromise = cloudflare.stream.captions.delete('ea95132c15732412d22c1476fa83f27a', 'tr', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -81,5 +69,12 @@ describe('resource captions', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('delete: required and optional params', async () => {
+    const response = await cloudflare.stream.captions.delete('ea95132c15732412d22c1476fa83f27a', 'tr', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 });

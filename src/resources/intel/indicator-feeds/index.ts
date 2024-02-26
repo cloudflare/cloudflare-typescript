@@ -8,6 +8,9 @@ export {
   IndicatorFeedGetResponse,
   IndicatorFeedCreateParams,
   IndicatorFeedUpdateParams,
+  IndicatorFeedListParams,
+  IndicatorFeedDataParams,
+  IndicatorFeedGetParams,
   IndicatorFeeds,
 } from './indicator-feeds';
 export {
@@ -15,6 +18,7 @@ export {
   PermissionListResponse,
   PermissionDeleteResponse,
   PermissionCreateParams,
+  PermissionListParams,
   PermissionDeleteParams,
   Permissions,
 } from './permissions';

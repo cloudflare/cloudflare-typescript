@@ -14,11 +14,16 @@ export namespace Prefixes {
   export import BGPPrefixListResponse = BGPPrefixesAPI.BGPPrefixListResponse;
   export import BGPPrefixEditResponse = BGPPrefixesAPI.BGPPrefixEditResponse;
   export import BGPPrefixGetResponse = BGPPrefixesAPI.BGPPrefixGetResponse;
+  export import BGPPrefixListParams = BGPPrefixesAPI.BGPPrefixListParams;
   export import BGPPrefixEditParams = BGPPrefixesAPI.BGPPrefixEditParams;
+  export import BGPPrefixGetParams = BGPPrefixesAPI.BGPPrefixGetParams;
   export import Bindings = BindingsAPI.Bindings;
   export import BindingCreateResponse = BindingsAPI.BindingCreateResponse;
   export import BindingListResponse = BindingsAPI.BindingListResponse;
   export import BindingDeleteResponse = BindingsAPI.BindingDeleteResponse;
   export import BindingGetResponse = BindingsAPI.BindingGetResponse;
   export import BindingCreateParams = BindingsAPI.BindingCreateParams;
+  export import BindingListParams = BindingsAPI.BindingListParams;
+  export import BindingDeleteParams = BindingsAPI.BindingDeleteParams;
+  export import BindingGetParams = BindingsAPI.BindingGetParams;
 }

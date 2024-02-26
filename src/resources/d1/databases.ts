@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as DatabasesAPI from 'cloudflare/resources/d1/databases';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
@@ -11,12 +10,12 @@ export class Databases extends APIResource {
    * Returns the created D1 database.
    */
   create(
-    accountId: string,
-    body: DatabaseCreateParams,
+    params: DatabaseCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DatabaseCreateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/d1/database`, { body, ...options }) as Core.APIPromise<{
+      this._client.post(`/accounts/${account_id}/d1/database`, { body, ...options }) as Core.APIPromise<{
         result: DatabaseCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -26,24 +25,12 @@ export class Databases extends APIResource {
    * Returns a list of D1 databases.
    */
   list(
-    accountId: string,
-    query?: DatabaseListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<DatabaseListResponsesV4PagePaginationArray, DatabaseListResponse>;
-  list(
-    accountId: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<DatabaseListResponsesV4PagePaginationArray, DatabaseListResponse>;
-  list(
-    accountId: string,
-    query: DatabaseListParams | Core.RequestOptions = {},
+    params: DatabaseListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<DatabaseListResponsesV4PagePaginationArray, DatabaseListResponse> {
-    if (isRequestOptions(query)) {
-      return this.list(accountId, {}, query);
-    }
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
-      `/accounts/${accountId}/d1/database`,
+      `/accounts/${account_id}/d1/database`,
       DatabaseListResponsesV4PagePaginationArray,
       { query, ...options },
     );
@@ -79,12 +66,25 @@ export interface DatabaseListResponse {
 }
 
 export interface DatabaseCreateParams {
+  /**
+   * Path param: Account identifier tag.
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
   name: string;
 }
 
 export interface DatabaseListParams extends V4PagePaginationArrayParams {
   /**
-   * a database name to search for.
+   * Path param: Account identifier tag.
+   */
+  account_id: string;
+
+  /**
+   * Query param: a database name to search for.
    */
   name?: string;
 }

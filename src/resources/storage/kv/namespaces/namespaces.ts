@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as NamespacesAPI from 'cloudflare/resources/storage/kv/namespaces/namespaces';
 import * as BulkAPI from 'cloudflare/resources/storage/kv/namespaces/bulk';
 import * as KeysAPI from 'cloudflare/resources/storage/kv/namespaces/keys';
@@ -22,12 +21,12 @@ export class Namespaces extends APIResource {
    * to be replaced.
    */
   create(
-    accountId: string,
-    body: NamespaceCreateParams,
+    params: NamespaceCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<NamespaceCreateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/storage/kv/namespaces`, {
+      this._client.post(`/accounts/${account_id}/storage/kv/namespaces`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: NamespaceCreateResponse }>
@@ -38,13 +37,13 @@ export class Namespaces extends APIResource {
    * Modifies a namespace's title.
    */
   update(
-    accountId: string,
     namespaceId: string,
-    body: NamespaceUpdateParams,
+    params: NamespaceUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<NamespaceUpdateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.put(`/accounts/${accountId}/storage/kv/namespaces/${namespaceId}`, {
+      this._client.put(`/accounts/${account_id}/storage/kv/namespaces/${namespaceId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: NamespaceUpdateResponse }>
@@ -55,24 +54,12 @@ export class Namespaces extends APIResource {
    * Returns the namespaces owned by an account.
    */
   list(
-    accountId: string,
-    query?: NamespaceListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<NamespaceListResponsesV4PagePaginationArray, NamespaceListResponse>;
-  list(
-    accountId: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<NamespaceListResponsesV4PagePaginationArray, NamespaceListResponse>;
-  list(
-    accountId: string,
-    query: NamespaceListParams | Core.RequestOptions = {},
+    params: NamespaceListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<NamespaceListResponsesV4PagePaginationArray, NamespaceListResponse> {
-    if (isRequestOptions(query)) {
-      return this.list(accountId, {}, query);
-    }
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
-      `/accounts/${accountId}/storage/kv/namespaces`,
+      `/accounts/${account_id}/storage/kv/namespaces`,
       NamespaceListResponsesV4PagePaginationArray,
       { query, ...options },
     );
@@ -82,13 +69,14 @@ export class Namespaces extends APIResource {
    * Deletes the namespace corresponding to the given ID.
    */
   delete(
-    accountId: string,
     namespaceId: string,
+    params: NamespaceDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<NamespaceDeleteResponse> {
+    const { account_id } = params;
     return (
       this._client.delete(
-        `/accounts/${accountId}/storage/kv/namespaces/${namespaceId}`,
+        `/accounts/${account_id}/storage/kv/namespaces/${namespaceId}`,
         options,
       ) as Core.APIPromise<{ result: NamespaceDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -139,28 +127,50 @@ export type NamespaceDeleteResponse = unknown | string;
 
 export interface NamespaceCreateParams {
   /**
-   * A human-readable string name for a Namespace.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: A human-readable string name for a Namespace.
    */
   title: string;
 }
 
 export interface NamespaceUpdateParams {
   /**
-   * A human-readable string name for a Namespace.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: A human-readable string name for a Namespace.
    */
   title: string;
 }
 
 export interface NamespaceListParams extends V4PagePaginationArrayParams {
   /**
-   * Direction to order namespaces.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Query param: Direction to order namespaces.
    */
   direction?: 'asc' | 'desc';
 
   /**
-   * Field to order results by.
+   * Query param: Field to order results by.
    */
   order?: 'id' | 'title';
+}
+
+export interface NamespaceDeleteParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
 }
 
 export namespace Namespaces {
@@ -172,6 +182,7 @@ export namespace Namespaces {
   export import NamespaceCreateParams = NamespacesAPI.NamespaceCreateParams;
   export import NamespaceUpdateParams = NamespacesAPI.NamespaceUpdateParams;
   export import NamespaceListParams = NamespacesAPI.NamespaceListParams;
+  export import NamespaceDeleteParams = NamespacesAPI.NamespaceDeleteParams;
   export import Bulk = BulkAPI.Bulk;
   export import BulkUpdateResponse = BulkAPI.BulkUpdateResponse;
   export import BulkDeleteResponse = BulkAPI.BulkDeleteResponse;
@@ -182,9 +193,12 @@ export namespace Namespaces {
   export import KeyListParams = KeysAPI.KeyListParams;
   export import Metadata = MetadataAPI.Metadata;
   export import MetadataGetResponse = MetadataAPI.MetadataGetResponse;
+  export import MetadataGetParams = MetadataAPI.MetadataGetParams;
   export import Values = ValuesAPI.Values;
   export import ValueUpdateResponse = ValuesAPI.ValueUpdateResponse;
   export import ValueDeleteResponse = ValuesAPI.ValueDeleteResponse;
   export import ValueGetResponse = ValuesAPI.ValueGetResponse;
   export import ValueUpdateParams = ValuesAPI.ValueUpdateParams;
+  export import ValueDeleteParams = ValuesAPI.ValueDeleteParams;
+  export import ValueGetParams = ValuesAPI.ValueGetParams;
 }

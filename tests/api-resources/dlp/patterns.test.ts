@@ -15,7 +15,8 @@ const cloudflare = new Cloudflare({
 describe('resource patterns', () => {
   // skipped: tests are disabled for the time being
   test.skip('validate: only required params', async () => {
-    const responsePromise = cloudflare.dlp.patterns.validate('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = cloudflare.dlp.patterns.validate({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       regex: '^4[0-9]{6,}$',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -29,7 +30,8 @@ describe('resource patterns', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('validate: required and optional params', async () => {
-    const response = await cloudflare.dlp.patterns.validate('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await cloudflare.dlp.patterns.validate({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       regex: '^4[0-9]{6,}$',
     });
   });

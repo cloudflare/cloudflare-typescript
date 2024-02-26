@@ -10,12 +10,12 @@ export class OrangeToOrange extends APIResource {
    * on Cloudflare.
    */
   edit(
-    zoneId: string,
-    body: OrangeToOrangeEditParams,
+    params: OrangeToOrangeEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OrangeToOrangeEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/settings/orange_to_orange`, {
+      this._client.patch(`/zones/${zone_id}/settings/orange_to_orange`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: OrangeToOrangeEditResponse }>
@@ -26,9 +26,13 @@ export class OrangeToOrange extends APIResource {
    * Orange to Orange (O2O) allows zones on Cloudflare to CNAME to other zones also
    * on Cloudflare.
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<OrangeToOrangeGetResponse> {
+  get(
+    params: OrangeToOrangeGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<OrangeToOrangeGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/settings/orange_to_orange`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/settings/orange_to_orange`, options) as Core.APIPromise<{
         result: OrangeToOrangeGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -91,8 +95,13 @@ export interface OrangeToOrangeGetResponse {
 
 export interface OrangeToOrangeEditParams {
   /**
-   * Orange to Orange (O2O) allows zones on Cloudflare to CNAME to other zones also
-   * on Cloudflare.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Orange to Orange (O2O) allows zones on Cloudflare to CNAME to other
+   * zones also on Cloudflare.
    */
   value: OrangeToOrangeEditParams.Value;
 }
@@ -115,8 +124,16 @@ export namespace OrangeToOrangeEditParams {
   }
 }
 
+export interface OrangeToOrangeGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
 export namespace OrangeToOrange {
   export import OrangeToOrangeEditResponse = OrangeToOrangeAPI.OrangeToOrangeEditResponse;
   export import OrangeToOrangeGetResponse = OrangeToOrangeAPI.OrangeToOrangeGetResponse;
   export import OrangeToOrangeEditParams = OrangeToOrangeAPI.OrangeToOrangeEditParams;
+  export import OrangeToOrangeGetParams = OrangeToOrangeAPI.OrangeToOrangeGetParams;
 }

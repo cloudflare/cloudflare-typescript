@@ -15,19 +15,17 @@ const cloudflare = new Cloudflare({
 describe('resource automaticPlatformOptimization', () => {
   // skipped: tests are disabled for the time being
   test.skip('edit: only required params', async () => {
-    const responsePromise = cloudflare.settings.automaticPlatformOptimization.edit(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      {
-        value: {
-          cache_by_device_type: false,
-          cf: true,
-          enabled: true,
-          hostnames: ['www.example.com', 'example.com', 'shop.example.com'],
-          wordpress: true,
-          wp_plugin: true,
-        },
+    const responsePromise = cloudflare.settings.automaticPlatformOptimization.edit({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      value: {
+        cache_by_device_type: false,
+        cf: true,
+        enabled: true,
+        hostnames: ['www.example.com', 'example.com', 'shop.example.com'],
+        wordpress: true,
+        wp_plugin: true,
       },
-    );
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -39,26 +37,24 @@ describe('resource automaticPlatformOptimization', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('edit: required and optional params', async () => {
-    const response = await cloudflare.settings.automaticPlatformOptimization.edit(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      {
-        value: {
-          cache_by_device_type: false,
-          cf: true,
-          enabled: true,
-          hostnames: ['www.example.com', 'example.com', 'shop.example.com'],
-          wordpress: true,
-          wp_plugin: true,
-        },
+    const response = await cloudflare.settings.automaticPlatformOptimization.edit({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      value: {
+        cache_by_device_type: false,
+        cf: true,
+        enabled: true,
+        hostnames: ['www.example.com', 'example.com', 'shop.example.com'],
+        wordpress: true,
+        wp_plugin: true,
       },
-    );
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
-    const responsePromise = cloudflare.settings.automaticPlatformOptimization.get(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-    );
+  test.skip('get: only required params', async () => {
+    const responsePromise = cloudflare.settings.automaticPlatformOptimization.get({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -69,12 +65,9 @@ describe('resource automaticPlatformOptimization', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.settings.automaticPlatformOptimization.get('023e105f4ecef8ad9ca31a8372d0c353', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.settings.automaticPlatformOptimization.get({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 });

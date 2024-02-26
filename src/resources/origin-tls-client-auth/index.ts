@@ -4,6 +4,7 @@ export {
   HostnameUpdateResponse,
   HostnameGetResponse,
   HostnameUpdateParams,
+  HostnameGetParams,
   Hostnames,
 } from './hostnames/index';
 export {
@@ -12,6 +13,15 @@ export {
   OriginTLSClientAuthDeleteResponse,
   OriginTLSClientAuthGetResponse,
   OriginTLSClientAuthCreateParams,
+  OriginTLSClientAuthListParams,
+  OriginTLSClientAuthDeleteParams,
+  OriginTLSClientAuthGetParams,
   OriginTLSClientAuth,
 } from './origin-tls-client-auth';
-export { SettingUpdateResponse, SettingGetResponse, SettingUpdateParams, Settings } from './settings';
+export {
+  SettingUpdateResponse,
+  SettingGetResponse,
+  SettingUpdateParams,
+  SettingGetParams,
+  Settings,
+} from './settings';

@@ -13,4 +13,5 @@ export namespace Addressing {
   export import Prefixes = PrefixesAPI.Prefixes;
   export import Services = ServicesAPI.Services;
   export import ServiceListResponse = ServicesAPI.ServiceListResponse;
+  export import ServiceListParams = ServicesAPI.ServiceListParams;
 }

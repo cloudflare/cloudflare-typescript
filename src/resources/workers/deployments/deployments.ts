@@ -11,4 +11,6 @@ export namespace Deployments {
   export import ByScripts = ByScriptsAPI.ByScripts;
   export import ByScriptListResponse = ByScriptsAPI.ByScriptListResponse;
   export import ByScriptGetResponse = ByScriptsAPI.ByScriptGetResponse;
+  export import ByScriptListParams = ByScriptsAPI.ByScriptListParams;
+  export import ByScriptGetParams = ByScriptsAPI.ByScriptGetParams;
 }

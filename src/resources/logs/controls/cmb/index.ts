@@ -6,5 +6,7 @@ export {
   ConfigDeleteResponse,
   ConfigGetResponse,
   ConfigCreateParams,
+  ConfigDeleteParams,
+  ConfigGetParams,
   Config,
 } from './config';

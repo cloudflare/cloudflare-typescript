@@ -10,12 +10,12 @@ export class Certificates extends APIResource {
    * hostname certificates per zone are allowed.
    */
   create(
-    zoneId: string,
-    body: CertificateCreateParams,
+    params: CertificateCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CertificateCreateResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.post(`/zones/${zoneId}/origin_tls_client_auth/hostnames/certificates`, {
+      this._client.post(`/zones/${zone_id}/origin_tls_client_auth/hostnames/certificates`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: CertificateCreateResponse }>
@@ -25,10 +25,14 @@ export class Certificates extends APIResource {
   /**
    * List Certificates
    */
-  list(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<CertificateListResponse | null> {
+  list(
+    params: CertificateListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CertificateListResponse | null> {
+    const { zone_id } = params;
     return (
       this._client.get(
-        `/zones/${zoneId}/origin_tls_client_auth/hostnames/certificates`,
+        `/zones/${zone_id}/origin_tls_client_auth/hostnames/certificates`,
         options,
       ) as Core.APIPromise<{ result: CertificateListResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -38,13 +42,14 @@ export class Certificates extends APIResource {
    * Delete Hostname Client Certificate
    */
   delete(
-    zoneId: string,
     certificateId: string,
+    params: CertificateDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CertificateDeleteResponse> {
+    const { zone_id } = params;
     return (
       this._client.delete(
-        `/zones/${zoneId}/origin_tls_client_auth/hostnames/certificates/${certificateId}`,
+        `/zones/${zone_id}/origin_tls_client_auth/hostnames/certificates/${certificateId}`,
         options,
       ) as Core.APIPromise<{ result: CertificateDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -54,13 +59,14 @@ export class Certificates extends APIResource {
    * Get the certificate by ID to be used for client authentication on a hostname.
    */
   get(
-    zoneId: string,
     certificateId: string,
+    params: CertificateGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CertificateGetResponse> {
+    const { zone_id } = params;
     return (
       this._client.get(
-        `/zones/${zoneId}/origin_tls_client_auth/hostnames/certificates/${certificateId}`,
+        `/zones/${zone_id}/origin_tls_client_auth/hostnames/certificates/${certificateId}`,
         options,
       ) as Core.APIPromise<{ result: CertificateGetResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -254,14 +260,40 @@ export interface CertificateGetResponse {
 
 export interface CertificateCreateParams {
   /**
-   * The hostname certificate.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: The hostname certificate.
    */
   certificate: string;
 
   /**
-   * The hostname certificate's private key.
+   * Body param: The hostname certificate's private key.
    */
   private_key: string;
+}
+
+export interface CertificateListParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+export interface CertificateDeleteParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+export interface CertificateGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }
 
 export namespace Certificates {
@@ -270,4 +302,7 @@ export namespace Certificates {
   export import CertificateDeleteResponse = CertificatesAPI.CertificateDeleteResponse;
   export import CertificateGetResponse = CertificatesAPI.CertificateGetResponse;
   export import CertificateCreateParams = CertificatesAPI.CertificateCreateParams;
+  export import CertificateListParams = CertificatesAPI.CertificateListParams;
+  export import CertificateDeleteParams = CertificatesAPI.CertificateDeleteParams;
+  export import CertificateGetParams = CertificatesAPI.CertificateGetParams;
 }

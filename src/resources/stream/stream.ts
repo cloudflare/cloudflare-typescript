@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as StreamAPI from 'cloudflare/resources/stream/stream';
 import * as AudioTracksAPI from 'cloudflare/resources/stream/audio-tracks';
 import * as CaptionsAPI from 'cloudflare/resources/stream/captions';
@@ -39,18 +38,15 @@ export class Stream extends APIResource {
    * where the content should be uploaded. Refer to https://tus.io for protocol
    * details.
    */
-  create(
-    accountId: string,
-    params: StreamCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<void> {
+  create(params: StreamCreateParams, options?: Core.RequestOptions): Core.APIPromise<void> {
     const {
+      account_id,
       'Tus-Resumable': tusResumable,
       'Upload-Length': uploadLength,
       'Upload-Creator': uploadCreator,
       'Upload-Metadata': uploadMetadata,
     } = params;
-    return this._client.post(`/accounts/${accountId}/stream`, {
+    return this._client.post(`/accounts/${account_id}/stream`, {
       ...options,
       headers: {
         Accept: '*/*',
@@ -67,22 +63,10 @@ export class Stream extends APIResource {
    * Lists up to 1000 videos from a single request. For a specific range, refer to
    * the optional parameters.
    */
-  list(
-    accountId: string,
-    query?: StreamListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<StreamListResponse>;
-  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<StreamListResponse>;
-  list(
-    accountId: string,
-    query: StreamListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<StreamListResponse> {
-    if (isRequestOptions(query)) {
-      return this.list(accountId, {}, query);
-    }
+  list(params: StreamListParams, options?: Core.RequestOptions): Core.APIPromise<StreamListResponse> {
+    const { account_id, ...query } = params;
     return (
-      this._client.get(`/accounts/${accountId}/stream`, { query, ...options }) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/stream`, { query, ...options }) as Core.APIPromise<{
         result: StreamListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -91,8 +75,13 @@ export class Stream extends APIResource {
   /**
    * Deletes a video and its copies from Cloudflare Stream.
    */
-  delete(accountId: string, identifier: string, options?: Core.RequestOptions): Core.APIPromise<void> {
-    return this._client.delete(`/accounts/${accountId}/stream/${identifier}`, {
+  delete(
+    identifier: string,
+    params: StreamDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<void> {
+    const { account_id } = params;
+    return this._client.delete(`/accounts/${account_id}/stream/${identifier}`, {
       ...options,
       headers: { Accept: '*/*', ...options?.headers },
     });
@@ -102,12 +91,13 @@ export class Stream extends APIResource {
    * Fetches details for a single video.
    */
   get(
-    accountId: string,
     identifier: string,
+    params: StreamGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<StreamGetResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/stream/${identifier}`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/stream/${identifier}`, options) as Core.APIPromise<{
         result: StreamGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -634,72 +624,98 @@ export namespace StreamGetResponse {
 
 export interface StreamCreateParams {
   /**
-   * Specifies the TUS protocol version. This value must be included in every upload
-   * request. Notes: The only supported version of TUS protocol is 1.0.0.
+   * Path param: The account identifier tag.
+   */
+  account_id: string;
+
+  /**
+   * Header param: Specifies the TUS protocol version. This value must be included in
+   * every upload request. Notes: The only supported version of TUS protocol is
+   * 1.0.0.
    */
   'Tus-Resumable': '1.0.0';
 
   /**
-   * Indicates the size of the entire upload in bytes. The value must be a
-   * non-negative integer.
+   * Header param: Indicates the size of the entire upload in bytes. The value must
+   * be a non-negative integer.
    */
   'Upload-Length': number;
 
   /**
-   * A user-defined identifier for the media creator.
+   * Header param: A user-defined identifier for the media creator.
    */
   'Upload-Creator'?: string;
 
   /**
-   * Comma-separated key-value pairs following the TUS protocol specification. Values
-   * are Base-64 encoded. Supported keys: `name`, `requiresignedurls`,
-   * `allowedorigins`, `thumbnailtimestamppct`, `watermark`, `scheduleddeletion`.
+   * Header param: Comma-separated key-value pairs following the TUS protocol
+   * specification. Values are Base-64 encoded. Supported keys: `name`,
+   * `requiresignedurls`, `allowedorigins`, `thumbnailtimestamppct`, `watermark`,
+   * `scheduleddeletion`.
    */
   'Upload-Metadata'?: string;
 }
 
 export interface StreamListParams {
   /**
-   * Lists videos in ascending order of creation.
+   * Path param: The account identifier tag.
+   */
+  account_id: string;
+
+  /**
+   * Query param: Lists videos in ascending order of creation.
    */
   asc?: boolean;
 
   /**
-   * A user-defined identifier for the media creator.
+   * Query param: A user-defined identifier for the media creator.
    */
   creator?: string;
 
   /**
-   * Lists videos created before the specified date.
+   * Query param: Lists videos created before the specified date.
    */
   end?: string;
 
   /**
-   * Includes the total number of videos associated with the submitted query
-   * parameters.
+   * Query param: Includes the total number of videos associated with the submitted
+   * query parameters.
    */
   include_counts?: boolean;
 
   /**
-   * Searches over the `name` key in the `meta` field. This field can be set with or
-   * after the upload request.
+   * Query param: Searches over the `name` key in the `meta` field. This field can be
+   * set with or after the upload request.
    */
   search?: string;
 
   /**
-   * Lists videos created after the specified date.
+   * Query param: Lists videos created after the specified date.
    */
   start?: string;
 
   /**
-   * Specifies the processing status for all quality levels for a video.
+   * Query param: Specifies the processing status for all quality levels for a video.
    */
   status?: 'pendingupload' | 'downloading' | 'queued' | 'inprogress' | 'ready' | 'error';
 
   /**
-   * Specifies whether the video is `vod` or `live`.
+   * Query param: Specifies whether the video is `vod` or `live`.
    */
   type?: string;
+}
+
+export interface StreamDeleteParams {
+  /**
+   * The account identifier tag.
+   */
+  account_id: string;
+}
+
+export interface StreamGetParams {
+  /**
+   * The account identifier tag.
+   */
+  account_id: string;
 }
 
 export namespace Stream {
@@ -707,12 +723,16 @@ export namespace Stream {
   export import StreamGetResponse = StreamAPI.StreamGetResponse;
   export import StreamCreateParams = StreamAPI.StreamCreateParams;
   export import StreamListParams = StreamAPI.StreamListParams;
+  export import StreamDeleteParams = StreamAPI.StreamDeleteParams;
+  export import StreamGetParams = StreamAPI.StreamGetParams;
   export import AudioTracks = AudioTracksAPI.AudioTracks;
   export import AudioTrackCreateResponse = AudioTracksAPI.AudioTrackCreateResponse;
   export import AudioTrackListResponse = AudioTracksAPI.AudioTrackListResponse;
   export import AudioTrackDeleteResponse = AudioTracksAPI.AudioTrackDeleteResponse;
   export import AudioTrackEditResponse = AudioTracksAPI.AudioTrackEditResponse;
   export import AudioTrackCreateParams = AudioTracksAPI.AudioTrackCreateParams;
+  export import AudioTrackListParams = AudioTracksAPI.AudioTrackListParams;
+  export import AudioTrackDeleteParams = AudioTracksAPI.AudioTrackDeleteParams;
   export import AudioTrackEditParams = AudioTracksAPI.AudioTrackEditParams;
   export import Videos = VideosAPI.Videos;
   export import VideoStorageUsageResponse = VideosAPI.VideoStorageUsageResponse;
@@ -730,6 +750,9 @@ export namespace Stream {
   export import KeyCreateResponse = KeysAPI.KeyCreateResponse;
   export import KeyListResponse = KeysAPI.KeyListResponse;
   export import KeyDeleteResponse = KeysAPI.KeyDeleteResponse;
+  export import KeyCreateParams = KeysAPI.KeyCreateParams;
+  export import KeyListParams = KeysAPI.KeyListParams;
+  export import KeyDeleteParams = KeysAPI.KeyDeleteParams;
   export import LiveInputs = LiveInputsAPI.LiveInputs;
   export import LiveInputCreateResponse = LiveInputsAPI.LiveInputCreateResponse;
   export import LiveInputUpdateResponse = LiveInputsAPI.LiveInputUpdateResponse;
@@ -738,28 +761,41 @@ export namespace Stream {
   export import LiveInputCreateParams = LiveInputsAPI.LiveInputCreateParams;
   export import LiveInputUpdateParams = LiveInputsAPI.LiveInputUpdateParams;
   export import LiveInputListParams = LiveInputsAPI.LiveInputListParams;
+  export import LiveInputDeleteParams = LiveInputsAPI.LiveInputDeleteParams;
+  export import LiveInputGetParams = LiveInputsAPI.LiveInputGetParams;
   export import Watermarks = WatermarksAPI.Watermarks;
   export import WatermarkCreateResponse = WatermarksAPI.WatermarkCreateResponse;
   export import WatermarkListResponse = WatermarksAPI.WatermarkListResponse;
   export import WatermarkDeleteResponse = WatermarksAPI.WatermarkDeleteResponse;
   export import WatermarkGetResponse = WatermarksAPI.WatermarkGetResponse;
   export import WatermarkCreateParams = WatermarksAPI.WatermarkCreateParams;
+  export import WatermarkListParams = WatermarksAPI.WatermarkListParams;
+  export import WatermarkDeleteParams = WatermarksAPI.WatermarkDeleteParams;
+  export import WatermarkGetParams = WatermarksAPI.WatermarkGetParams;
   export import Webhooks = WebhooksAPI.Webhooks;
   export import WebhookUpdateResponse = WebhooksAPI.WebhookUpdateResponse;
   export import WebhookDeleteResponse = WebhooksAPI.WebhookDeleteResponse;
   export import WebhookGetResponse = WebhooksAPI.WebhookGetResponse;
   export import WebhookUpdateParams = WebhooksAPI.WebhookUpdateParams;
+  export import WebhookDeleteParams = WebhooksAPI.WebhookDeleteParams;
+  export import WebhookGetParams = WebhooksAPI.WebhookGetParams;
   export import Captions = CaptionsAPI.Captions;
   export import CaptionUpdateResponse = CaptionsAPI.CaptionUpdateResponse;
   export import CaptionListResponse = CaptionsAPI.CaptionListResponse;
   export import CaptionDeleteResponse = CaptionsAPI.CaptionDeleteResponse;
   export import CaptionUpdateParams = CaptionsAPI.CaptionUpdateParams;
+  export import CaptionListParams = CaptionsAPI.CaptionListParams;
+  export import CaptionDeleteParams = CaptionsAPI.CaptionDeleteParams;
   export import Downloads = DownloadsAPI.Downloads;
   export import DownloadCreateResponse = DownloadsAPI.DownloadCreateResponse;
   export import DownloadListResponse = DownloadsAPI.DownloadListResponse;
   export import DownloadDeleteResponse = DownloadsAPI.DownloadDeleteResponse;
+  export import DownloadCreateParams = DownloadsAPI.DownloadCreateParams;
+  export import DownloadListParams = DownloadsAPI.DownloadListParams;
+  export import DownloadDeleteParams = DownloadsAPI.DownloadDeleteParams;
   export import Embeds = EmbedsAPI.Embeds;
   export import EmbedListResponse = EmbedsAPI.EmbedListResponse;
+  export import EmbedListParams = EmbedsAPI.EmbedListParams;
   export import Tokens = TokensAPI.Tokens;
   export import TokenCreateResponse = TokensAPI.TokenCreateResponse;
   export import TokenCreateParams = TokensAPI.TokenCreateParams;

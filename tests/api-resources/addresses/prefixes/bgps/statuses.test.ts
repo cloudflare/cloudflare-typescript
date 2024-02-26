@@ -17,8 +17,7 @@ describe('resource statuses', () => {
   test.skip('edit: only required params', async () => {
     const responsePromise = cloudflare.addresses.prefixes.bgps.statuses.edit(
       '023e105f4ecef8ad9ca31a8372d0c353',
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      { advertised: true },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', advertised: true },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -33,16 +32,15 @@ describe('resource statuses', () => {
   test.skip('edit: required and optional params', async () => {
     const response = await cloudflare.addresses.prefixes.bgps.statuses.edit(
       '023e105f4ecef8ad9ca31a8372d0c353',
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      { advertised: true },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', advertised: true },
     );
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
+  test.skip('get: only required params', async () => {
     const responsePromise = cloudflare.addresses.prefixes.bgps.statuses.get(
       '023e105f4ecef8ad9ca31a8372d0c353',
-      '023e105f4ecef8ad9ca31a8372d0c353',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -54,14 +52,10 @@ describe('resource statuses', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.addresses.prefixes.bgps.statuses.get(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.addresses.prefixes.bgps.statuses.get(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
   });
 });

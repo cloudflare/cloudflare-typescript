@@ -11,15 +11,15 @@ export class Captions extends APIResource {
    * language. One caption or subtitle file per language is allowed.
    */
   update(
-    accountId: string,
     identifier: string,
     language: string,
-    body: CaptionUpdateParams,
+    params: CaptionUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CaptionUpdateResponse> {
+    const { account_id, ...body } = params;
     return (
       this._client.put(
-        `/accounts/${accountId}/stream/${identifier}/captions/${language}`,
+        `/accounts/${account_id}/stream/${identifier}/captions/${language}`,
         multipartFormRequestOptions({ body, ...options }),
       ) as Core.APIPromise<{ result: CaptionUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -29,12 +29,13 @@ export class Captions extends APIResource {
    * Lists the available captions or subtitles for a specific video.
    */
   list(
-    accountId: string,
     identifier: string,
+    params: CaptionListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CaptionListResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/stream/${identifier}/captions`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/stream/${identifier}/captions`, options) as Core.APIPromise<{
         result: CaptionListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -44,14 +45,15 @@ export class Captions extends APIResource {
    * Removes the captions or subtitles from a video.
    */
   delete(
-    accountId: string,
     identifier: string,
     language: string,
+    params: CaptionDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CaptionDeleteResponse> {
+    const { account_id } = params;
     return (
       this._client.delete(
-        `/accounts/${accountId}/stream/${identifier}/captions/${language}`,
+        `/accounts/${account_id}/stream/${identifier}/captions/${language}`,
         options,
       ) as Core.APIPromise<{ result: CaptionDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -80,9 +82,28 @@ export type CaptionDeleteResponse = unknown | Array<unknown> | string;
 
 export interface CaptionUpdateParams {
   /**
-   * The WebVTT file containing the caption or subtitle content.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: The WebVTT file containing the caption or subtitle content.
    */
   file: string;
+}
+
+export interface CaptionListParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface CaptionDeleteParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
 }
 
 export namespace Captions {
@@ -90,4 +111,6 @@ export namespace Captions {
   export import CaptionListResponse = CaptionsAPI.CaptionListResponse;
   export import CaptionDeleteResponse = CaptionsAPI.CaptionDeleteResponse;
   export import CaptionUpdateParams = CaptionsAPI.CaptionUpdateParams;
+  export import CaptionListParams = CaptionsAPI.CaptionListParams;
+  export import CaptionDeleteParams = CaptionsAPI.CaptionDeleteParams;
 }

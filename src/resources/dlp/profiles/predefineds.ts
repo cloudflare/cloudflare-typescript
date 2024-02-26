@@ -9,12 +9,12 @@ export class Predefineds extends APIResource {
    * Updates a DLP predefined profile. Only supports enabling/disabling entries.
    */
   update(
-    accountId: string,
     profileId: string,
-    body: PredefinedUpdateParams,
+    params: PredefinedUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PredefinedUpdateResponse> {
-    return this._client.put(`/accounts/${accountId}/dlp/profiles/predefined/${profileId}`, {
+    const { account_id, ...body } = params;
+    return this._client.put(`/accounts/${account_id}/dlp/profiles/predefined/${profileId}`, {
       body,
       ...options,
     });
@@ -24,13 +24,14 @@ export class Predefineds extends APIResource {
    * Fetches a predefined DLP profile.
    */
   get(
-    accountId: string,
     profileId: string,
+    params: PredefinedGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PredefinedGetResponse> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountId}/dlp/profiles/predefined/${profileId}`,
+        `/accounts/${account_id}/dlp/profiles/predefined/${profileId}`,
         options,
       ) as Core.APIPromise<{ result: PredefinedGetResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -147,12 +148,18 @@ export namespace PredefinedGetResponse {
 
 export interface PredefinedUpdateParams {
   /**
-   * Related DLP policies will trigger when the match count exceeds the number set.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: Related DLP policies will trigger when the match count exceeds the
+   * number set.
    */
   allowed_match_count?: number;
 
   /**
-   * The entries for this profile.
+   * Body param: The entries for this profile.
    */
   entries?: Array<PredefinedUpdateParams.Entry>;
 }
@@ -166,8 +173,16 @@ export namespace PredefinedUpdateParams {
   }
 }
 
+export interface PredefinedGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export namespace Predefineds {
   export import PredefinedUpdateResponse = PredefinedsAPI.PredefinedUpdateResponse;
   export import PredefinedGetResponse = PredefinedsAPI.PredefinedGetResponse;
   export import PredefinedUpdateParams = PredefinedsAPI.PredefinedUpdateParams;
+  export import PredefinedGetParams = PredefinedsAPI.PredefinedGetParams;
 }

@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as AccountMembersAPI from 'cloudflare/resources/account-members';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
@@ -11,12 +10,12 @@ export class AccountMembers extends APIResource {
    * Add a user to the list of members for this account.
    */
   create(
-    accountId: unknown,
-    body: AccountMemberCreateParams,
+    params: AccountMemberCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AccountMemberCreateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/members`, { body, ...options }) as Core.APIPromise<{
+      this._client.post(`/accounts/${account_id}/members`, { body, ...options }) as Core.APIPromise<{
         result: AccountMemberCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -26,13 +25,13 @@ export class AccountMembers extends APIResource {
    * Modify an account member.
    */
   update(
-    accountId: unknown,
     memberId: string,
-    body: AccountMemberUpdateParams,
+    params: AccountMemberUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AccountMemberUpdateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.put(`/accounts/${accountId}/members/${memberId}`, {
+      this._client.put(`/accounts/${account_id}/members/${memberId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: AccountMemberUpdateResponse }>
@@ -43,24 +42,12 @@ export class AccountMembers extends APIResource {
    * List all members of an account.
    */
   list(
-    accountId: unknown,
-    query?: AccountMemberListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<AccountMemberListResponsesV4PagePaginationArray, AccountMemberListResponse>;
-  list(
-    accountId: unknown,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<AccountMemberListResponsesV4PagePaginationArray, AccountMemberListResponse>;
-  list(
-    accountId: unknown,
-    query: AccountMemberListParams | Core.RequestOptions = {},
+    params: AccountMemberListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<AccountMemberListResponsesV4PagePaginationArray, AccountMemberListResponse> {
-    if (isRequestOptions(query)) {
-      return this.list(accountId, {}, query);
-    }
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
-      `/accounts/${accountId}/members`,
+      `/accounts/${account_id}/members`,
       AccountMemberListResponsesV4PagePaginationArray,
       { query, ...options },
     );
@@ -70,12 +57,13 @@ export class AccountMembers extends APIResource {
    * Remove a member from an account.
    */
   delete(
-    accountId: unknown,
     memberId: string,
+    params: AccountMemberDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AccountMemberDeleteResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${accountId}/members/${memberId}`, options) as Core.APIPromise<{
+      this._client.delete(`/accounts/${account_id}/members/${memberId}`, options) as Core.APIPromise<{
         result: AccountMemberDeleteResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -85,12 +73,13 @@ export class AccountMembers extends APIResource {
    * Get information about a specific member of an account.
    */
   get(
-    accountId: unknown,
     memberId: string,
+    params: AccountMemberGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AccountMemberGetResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/members/${memberId}`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/members/${memberId}`, options) as Core.APIPromise<{
         result: AccountMemberGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -665,21 +654,34 @@ export namespace AccountMemberGetResponse {
 
 export interface AccountMemberCreateParams {
   /**
-   * The contact email address of the user.
+   * Path param:
+   */
+  account_id: unknown;
+
+  /**
+   * Body param: The contact email address of the user.
    */
   email: string;
 
   /**
-   * Array of roles associated with this member.
+   * Body param: Array of roles associated with this member.
    */
   roles: Array<string>;
 
+  /**
+   * Body param:
+   */
   status?: 'accepted' | 'pending';
 }
 
 export interface AccountMemberUpdateParams {
   /**
-   * Roles assigned to this member.
+   * Path param:
+   */
+  account_id: unknown;
+
+  /**
+   * Body param: Roles assigned to this member.
    */
   roles: Array<AccountMemberUpdateParams.Role>;
 }
@@ -695,19 +697,32 @@ export namespace AccountMemberUpdateParams {
 
 export interface AccountMemberListParams extends V4PagePaginationArrayParams {
   /**
-   * Direction to order results.
+   * Path param:
+   */
+  account_id: unknown;
+
+  /**
+   * Query param: Direction to order results.
    */
   direction?: 'asc' | 'desc';
 
   /**
-   * Field to order results by.
+   * Query param: Field to order results by.
    */
   order?: 'user.first_name' | 'user.last_name' | 'user.email' | 'status';
 
   /**
-   * A member's status in the account.
+   * Query param: A member's status in the account.
    */
   status?: 'accepted' | 'pending' | 'rejected';
+}
+
+export interface AccountMemberDeleteParams {
+  account_id: unknown;
+}
+
+export interface AccountMemberGetParams {
+  account_id: unknown;
 }
 
 export namespace AccountMembers {
@@ -720,4 +735,6 @@ export namespace AccountMembers {
   export import AccountMemberCreateParams = AccountMembersAPI.AccountMemberCreateParams;
   export import AccountMemberUpdateParams = AccountMembersAPI.AccountMemberUpdateParams;
   export import AccountMemberListParams = AccountMembersAPI.AccountMemberListParams;
+  export import AccountMemberDeleteParams = AccountMembersAPI.AccountMemberDeleteParams;
+  export import AccountMemberGetParams = AccountMembersAPI.AccountMemberGetParams;
 }

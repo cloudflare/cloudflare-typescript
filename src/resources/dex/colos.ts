@@ -10,13 +10,10 @@ export class Colos extends APIResource {
    * period, sorted by usage starting from the most used colo. Colos without traffic
    * are also returned and sorted alphabetically.
    */
-  list(
-    accountId: string,
-    query: ColoListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ColoListResponse | null> {
+  list(params: ColoListParams, options?: Core.RequestOptions): Core.APIPromise<ColoListResponse | null> {
+    const { account_id, ...query } = params;
     return (
-      this._client.get(`/accounts/${accountId}/dex/colos`, { query, ...options }) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/dex/colos`, { query, ...options }) as Core.APIPromise<{
         result: ColoListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -30,18 +27,23 @@ export type ColoListResponse = Array<unknown>;
 
 export interface ColoListParams {
   /**
-   * End time for connection period in RFC3339 (ISO 8601) format.
+   * Path param: unique identifier linked to an account in the API request path.
+   */
+  account_id: string;
+
+  /**
+   * Query param: End time for connection period in RFC3339 (ISO 8601) format.
    */
   timeEnd: string;
 
   /**
-   * Start time for connection period in RFC3339 (ISO 8601) format.
+   * Query param: Start time for connection period in RFC3339 (ISO 8601) format.
    */
   timeStart: string;
 
   /**
-   * Type of usage that colos should be sorted by. If unspecified, returns all
-   * Cloudflare colos sorted alphabetically.
+   * Query param: Type of usage that colos should be sorted by. If unspecified,
+   * returns all Cloudflare colos sorted alphabetically.
    */
   sortBy?: 'fleet-status-usage' | 'application-tests-usage';
 }

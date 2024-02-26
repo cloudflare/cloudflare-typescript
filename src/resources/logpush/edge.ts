@@ -9,12 +9,12 @@ export class Edge extends APIResource {
    * Creates a new Instant Logs job for a zone.
    */
   create(
-    zoneId: string,
-    body: EdgeCreateParams,
+    params: EdgeCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<EdgeCreateResponse | null> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.post(`/zones/${zoneId}/logpush/edge`, { body, ...options }) as Core.APIPromise<{
+      this._client.post(`/zones/${zone_id}/logpush/edge`, { body, ...options }) as Core.APIPromise<{
         result: EdgeCreateResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -23,9 +23,10 @@ export class Edge extends APIResource {
   /**
    * Lists Instant Logs jobs for a zone.
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<EdgeGetResponse> {
+  get(params: EdgeGetParams, options?: Core.RequestOptions): Core.APIPromise<EdgeGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/logpush/edge`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/logpush/edge`, options) as Core.APIPromise<{
         result: EdgeGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -94,24 +95,37 @@ export namespace EdgeGetResponse {
 
 export interface EdgeCreateParams {
   /**
-   * Comma-separated list of fields.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Comma-separated list of fields.
    */
   fields?: string;
 
   /**
-   * Filters to drill down into specific events.
+   * Body param: Filters to drill down into specific events.
    */
   filter?: string;
 
   /**
-   * The sample parameter is the sample rate of the records set by the client:
-   * "sample": 1 is 100% of records "sample": 10 is 10% and so on.
+   * Body param: The sample parameter is the sample rate of the records set by the
+   * client: "sample": 1 is 100% of records "sample": 10 is 10% and so on.
    */
   sample?: number;
+}
+
+export interface EdgeGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }
 
 export namespace Edge {
   export import EdgeCreateResponse = EdgeAPI.EdgeCreateResponse;
   export import EdgeGetResponse = EdgeAPI.EdgeGetResponse;
   export import EdgeCreateParams = EdgeAPI.EdgeCreateParams;
+  export import EdgeGetParams = EdgeAPI.EdgeGetParams;
 }

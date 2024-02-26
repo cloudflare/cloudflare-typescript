@@ -10,13 +10,13 @@ export class TracerouteTests extends APIResource {
    * given time period between 1 hour and 7 days.
    */
   get(
-    accountId: string,
     testId: string,
-    query: TracerouteTestGetParams,
+    params: TracerouteTestGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TracerouteTestGetResponse> {
+    const { account_id, ...query } = params;
     return (
-      this._client.get(`/accounts/${accountId}/dex/traceroute-tests/${testId}`, {
+      this._client.get(`/accounts/${account_id}/dex/traceroute-tests/${testId}`, {
         query,
         ...options,
       }) as Core.APIPromise<{ result: TracerouteTestGetResponse }>
@@ -27,13 +27,13 @@ export class TracerouteTests extends APIResource {
    * Get a breakdown of metrics by hop for individual traceroute test runs
    */
   networkPath(
-    accountId: string,
     testId: string,
-    query: TracerouteTestNetworkPathParams,
+    params: TracerouteTestNetworkPathParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TracerouteTestNetworkPathResponse> {
+    const { account_id, ...query } = params;
     return (
-      this._client.get(`/accounts/${accountId}/dex/traceroute-tests/${testId}/network-path`, {
+      this._client.get(`/accounts/${account_id}/dex/traceroute-tests/${testId}/network-path`, {
         query,
         ...options,
       }) as Core.APIPromise<{ result: TracerouteTestNetworkPathResponse }>
@@ -45,13 +45,13 @@ export class TracerouteTests extends APIResource {
    * 7 days.
    */
   percentiles(
-    accountId: string,
     testId: string,
-    query: TracerouteTestPercentilesParams,
+    params: TracerouteTestPercentilesParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TracerouteTestPercentilesResponse> {
+    const { account_id, ...query } = params;
     return (
-      this._client.get(`/accounts/${accountId}/dex/traceroute-tests/${testId}/percentiles`, {
+      this._client.get(`/accounts/${account_id}/dex/traceroute-tests/${testId}/percentiles`, {
         query,
         ...options,
       }) as Core.APIPromise<{ result: TracerouteTestPercentilesResponse }>
@@ -494,75 +494,90 @@ export namespace TracerouteTestPercentilesResponse {
 
 export interface TracerouteTestGetParams {
   /**
-   * Time interval for aggregate time slots.
+   * Path param: Unique identifier linked to an account
+   */
+  account_id: string;
+
+  /**
+   * Query param: Time interval for aggregate time slots.
    */
   interval: 'minute' | 'hour';
 
   /**
-   * End time for aggregate metrics in ISO ms
+   * Query param: End time for aggregate metrics in ISO ms
    */
   timeEnd: string;
 
   /**
-   * Start time for aggregate metrics in ISO ms
+   * Query param: Start time for aggregate metrics in ISO ms
    */
   timeStart: string;
 
   /**
-   * Optionally filter result stats to a Cloudflare colo. Cannot be used in
-   * combination with deviceId param.
+   * Query param: Optionally filter result stats to a Cloudflare colo. Cannot be used
+   * in combination with deviceId param.
    */
   colo?: string;
 
   /**
-   * Optionally filter result stats to a specific device(s). Cannot be used in
-   * combination with colo param.
+   * Query param: Optionally filter result stats to a specific device(s). Cannot be
+   * used in combination with colo param.
    */
   deviceId?: Array<string>;
 }
 
 export interface TracerouteTestNetworkPathParams {
   /**
-   * Device to filter tracroute result runs to
+   * Path param: unique identifier linked to an account
+   */
+  account_id: string;
+
+  /**
+   * Query param: Device to filter tracroute result runs to
    */
   deviceId: string;
 
   /**
-   * Time interval for aggregate time slots.
+   * Query param: Time interval for aggregate time slots.
    */
   interval: 'minute' | 'hour';
 
   /**
-   * End time for aggregate metrics in ISO ms
+   * Query param: End time for aggregate metrics in ISO ms
    */
   timeEnd: string;
 
   /**
-   * Start time for aggregate metrics in ISO ms
+   * Query param: Start time for aggregate metrics in ISO ms
    */
   timeStart: string;
 }
 
 export interface TracerouteTestPercentilesParams {
   /**
-   * End time for aggregate metrics in ISO format
+   * Path param: unique identifier linked to an account in the API request path.
+   */
+  account_id: string;
+
+  /**
+   * Query param: End time for aggregate metrics in ISO format
    */
   timeEnd: string;
 
   /**
-   * Start time for aggregate metrics in ISO format
+   * Query param: Start time for aggregate metrics in ISO format
    */
   timeStart: string;
 
   /**
-   * Optionally filter result stats to a Cloudflare colo. Cannot be used in
-   * combination with deviceId param.
+   * Query param: Optionally filter result stats to a Cloudflare colo. Cannot be used
+   * in combination with deviceId param.
    */
   colo?: string;
 
   /**
-   * Optionally filter result stats to a specific device(s). Cannot be used in
-   * combination with colo param.
+   * Query param: Optionally filter result stats to a specific device(s). Cannot be
+   * used in combination with colo param.
    */
   deviceId?: Array<string>;
 }

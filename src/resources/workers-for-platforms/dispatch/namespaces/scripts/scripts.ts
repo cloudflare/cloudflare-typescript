@@ -13,8 +13,10 @@ export namespace Scripts {
   export import Content = ContentAPI.Content;
   export import ContentUpdateResponse = ContentAPI.ContentUpdateResponse;
   export import ContentUpdateParams = ContentAPI.ContentUpdateParams;
+  export import ContentGetParams = ContentAPI.ContentGetParams;
   export import Settings = SettingsAPI.Settings;
   export import SettingEditResponse = SettingsAPI.SettingEditResponse;
   export import SettingGetResponse = SettingsAPI.SettingGetResponse;
   export import SettingEditParams = SettingsAPI.SettingEditParams;
+  export import SettingGetParams = SettingsAPI.SettingGetParams;
 }

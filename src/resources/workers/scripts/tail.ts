@@ -9,13 +9,14 @@ export class Tail extends APIResource {
    * Starts a tail that receives logs and exception from a Worker.
    */
   create(
-    accountId: string,
     scriptName: string,
+    params: TailCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TailCreateResponse> {
+    const { account_id } = params;
     return (
       this._client.post(
-        `/accounts/${accountId}/workers/scripts/${scriptName}/tails`,
+        `/accounts/${account_id}/workers/scripts/${scriptName}/tails`,
         options,
       ) as Core.APIPromise<{ result: TailCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -25,13 +26,14 @@ export class Tail extends APIResource {
    * Get list of tails currently deployed on a Worker.
    */
   list(
-    accountId: string,
     scriptName: string,
+    params: TailListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TailListResponse> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountId}/workers/scripts/${scriptName}/tails`,
+        `/accounts/${account_id}/workers/scripts/${scriptName}/tails`,
         options,
       ) as Core.APIPromise<{ result: TailListResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -41,14 +43,15 @@ export class Tail extends APIResource {
    * Deletes a tail from a Worker.
    */
   delete(
-    accountId: string,
     scriptName: string,
     id: string,
+    params: TailDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TailDeleteResponse> {
+    const { account_id } = params;
     return (
       this._client.delete(
-        `/accounts/${accountId}/workers/scripts/${scriptName}/tails/${id}`,
+        `/accounts/${account_id}/workers/scripts/${scriptName}/tails/${id}`,
         options,
       ) as Core.APIPromise<{ result: TailDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -73,8 +76,32 @@ export interface TailListResponse {
 
 export type TailDeleteResponse = unknown | Array<unknown> | string;
 
+export interface TailCreateParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface TailListParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface TailDeleteParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export namespace Tail {
   export import TailCreateResponse = TailAPI.TailCreateResponse;
   export import TailListResponse = TailAPI.TailListResponse;
   export import TailDeleteResponse = TailAPI.TailDeleteResponse;
+  export import TailCreateParams = TailAPI.TailCreateParams;
+  export import TailListParams = TailAPI.TailListParams;
+  export import TailDeleteParams = TailAPI.TailDeleteParams;
 }

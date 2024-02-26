@@ -9,13 +9,13 @@ export class AudioTracks extends APIResource {
    * Adds an additional audio track to a video using the provided audio track URL.
    */
   create(
-    accountId: string,
     identifier: string,
-    body: AudioTrackCreateParams,
+    params: AudioTrackCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AudioTrackCreateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/stream/${identifier}/audio/copy`, {
+      this._client.post(`/accounts/${account_id}/stream/${identifier}/audio/copy`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: AudioTrackCreateResponse }>
@@ -27,12 +27,13 @@ export class AudioTracks extends APIResource {
    * information for audio attached to the video upload.
    */
   list(
-    accountId: string,
     identifier: string,
+    params: AudioTrackListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AudioTrackListResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/stream/${identifier}/audio`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/stream/${identifier}/audio`, options) as Core.APIPromise<{
         result: AudioTrackListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -43,14 +44,15 @@ export class AudioTracks extends APIResource {
    * not allowed. You must assign another audio track as default prior to deletion.
    */
   delete(
-    accountId: string,
     identifier: string,
     audioIdentifier: string,
+    params: AudioTrackDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AudioTrackDeleteResponse> {
+    const { account_id } = params;
     return (
       this._client.delete(
-        `/accounts/${accountId}/stream/${identifier}/audio/${audioIdentifier}`,
+        `/accounts/${account_id}/stream/${identifier}/audio/${audioIdentifier}`,
         options,
       ) as Core.APIPromise<{ result: AudioTrackDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -62,14 +64,14 @@ export class AudioTracks extends APIResource {
    * `false`.
    */
   edit(
-    accountId: string,
     identifier: string,
     audioIdentifier: string,
-    body: AudioTrackEditParams,
+    params: AudioTrackEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AudioTrackEditResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.patch(`/accounts/${accountId}/stream/${identifier}/audio/${audioIdentifier}`, {
+      this._client.patch(`/accounts/${account_id}/stream/${identifier}/audio/${audioIdentifier}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: AudioTrackEditResponse }>
@@ -154,28 +156,54 @@ export interface AudioTrackEditResponse {
 
 export interface AudioTrackCreateParams {
   /**
-   * A string to uniquely identify the track amongst other audio track labels for the
-   * specified video.
+   * Path param: The account identifier tag.
+   */
+  account_id: string;
+
+  /**
+   * Body param: A string to uniquely identify the track amongst other audio track
+   * labels for the specified video.
    */
   label: string;
 
   /**
-   * An audio track URL. The server must be publicly routable and support `HTTP HEAD`
-   * requests and `HTTP GET` range requests. The server should respond to `HTTP HEAD`
-   * requests with a `content-range` header that includes the size of the file.
+   * Body param: An audio track URL. The server must be publicly routable and support
+   * `HTTP HEAD` requests and `HTTP GET` range requests. The server should respond to
+   * `HTTP HEAD` requests with a `content-range` header that includes the size of the
+   * file.
    */
   url?: string;
 }
 
+export interface AudioTrackListParams {
+  /**
+   * The account identifier tag.
+   */
+  account_id: string;
+}
+
+export interface AudioTrackDeleteParams {
+  /**
+   * The account identifier tag.
+   */
+  account_id: string;
+}
+
 export interface AudioTrackEditParams {
   /**
-   * Denotes whether the audio track will be played by default in a player.
+   * Path param: The account identifier tag.
+   */
+  account_id: string;
+
+  /**
+   * Body param: Denotes whether the audio track will be played by default in a
+   * player.
    */
   default?: boolean;
 
   /**
-   * A string to uniquely identify the track amongst other audio track labels for the
-   * specified video.
+   * Body param: A string to uniquely identify the track amongst other audio track
+   * labels for the specified video.
    */
   label?: string;
 }
@@ -186,5 +214,7 @@ export namespace AudioTracks {
   export import AudioTrackDeleteResponse = AudioTracksAPI.AudioTrackDeleteResponse;
   export import AudioTrackEditResponse = AudioTracksAPI.AudioTrackEditResponse;
   export import AudioTrackCreateParams = AudioTracksAPI.AudioTrackCreateParams;
+  export import AudioTrackListParams = AudioTracksAPI.AudioTrackListParams;
+  export import AudioTrackDeleteParams = AudioTracksAPI.AudioTrackDeleteParams;
   export import AudioTrackEditParams = AudioTracksAPI.AudioTrackEditParams;
 }

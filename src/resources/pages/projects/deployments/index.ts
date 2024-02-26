@@ -8,6 +8,11 @@ export {
   DeploymentRetryResponse,
   DeploymentRollbackResponse,
   DeploymentCreateParams,
+  DeploymentListParams,
+  DeploymentDeleteParams,
+  DeploymentGetParams,
+  DeploymentRetryParams,
+  DeploymentRollbackParams,
   Deployments,
 } from './deployments';
 export { History } from './history/index';

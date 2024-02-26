@@ -14,11 +14,10 @@ const cloudflare = new Cloudflare({
 
 describe('resource permissions', () => {
   // skipped: tests are disabled for the time being
-  test.skip('create', async () => {
-    const responsePromise = cloudflare.intel.indicatorFeeds.permissions.create(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      {},
-    );
+  test.skip('create: only required params', async () => {
+    const responsePromise = cloudflare.intel.indicatorFeeds.permissions.create({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -29,10 +28,19 @@ describe('resource permissions', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
-    const responsePromise = cloudflare.intel.indicatorFeeds.permissions.list(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-    );
+  test.skip('create: required and optional params', async () => {
+    const response = await cloudflare.intel.indicatorFeeds.permissions.create({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      account_tag: '823f45f16fd2f7e21e1e054aga4d2859',
+      feed_id: 1,
+    });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list: only required params', async () => {
+    const responsePromise = cloudflare.intel.indicatorFeeds.permissions.list({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -43,21 +51,17 @@ describe('resource permissions', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.intel.indicatorFeeds.permissions.list('023e105f4ecef8ad9ca31a8372d0c353', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('list: required and optional params', async () => {
+    const response = await cloudflare.intel.indicatorFeeds.permissions.list({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
-    const responsePromise = cloudflare.intel.indicatorFeeds.permissions.delete(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      {},
-    );
+  test.skip('delete: only required params', async () => {
+    const responsePromise = cloudflare.intel.indicatorFeeds.permissions.delete({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -65,5 +69,14 @@ describe('resource permissions', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('delete: required and optional params', async () => {
+    const response = await cloudflare.intel.indicatorFeeds.permissions.delete({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      account_tag: '823f45f16fd2f7e21e1e054aga4d2859',
+      feed_id: 1,
+    });
   });
 });

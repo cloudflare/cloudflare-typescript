@@ -9,13 +9,10 @@ export class Brotli extends APIResource {
    * When the client requesting an asset supports the Brotli compression algorithm,
    * Cloudflare will serve a Brotli compressed version of the asset.
    */
-  edit(
-    zoneId: string,
-    body: BrotliEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<BrotliEditResponse> {
+  edit(params: BrotliEditParams, options?: Core.RequestOptions): Core.APIPromise<BrotliEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/settings/brotli`, { body, ...options }) as Core.APIPromise<{
+      this._client.patch(`/zones/${zone_id}/settings/brotli`, { body, ...options }) as Core.APIPromise<{
         result: BrotliEditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -25,9 +22,10 @@ export class Brotli extends APIResource {
    * When the client requesting an asset supports the Brotli compression algorithm,
    * Cloudflare will serve a Brotli compressed version of the asset.
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<BrotliGetResponse> {
+  get(params: BrotliGetParams, options?: Core.RequestOptions): Core.APIPromise<BrotliGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/settings/brotli`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/settings/brotli`, options) as Core.APIPromise<{
         result: BrotliGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -90,13 +88,26 @@ export interface BrotliGetResponse {
 
 export interface BrotliEditParams {
   /**
-   * Value of the zone setting.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Value of the zone setting.
    */
   value: 'off' | 'on';
+}
+
+export interface BrotliGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }
 
 export namespace Brotli {
   export import BrotliEditResponse = BrotliAPI.BrotliEditResponse;
   export import BrotliGetResponse = BrotliAPI.BrotliGetResponse;
   export import BrotliEditParams = BrotliAPI.BrotliEditParams;
+  export import BrotliGetParams = BrotliAPI.BrotliGetParams;
 }

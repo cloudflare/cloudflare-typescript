@@ -9,9 +9,10 @@ export class Settings extends APIResource {
    * Returns a list of settings (and their details) that Page Rules can apply to
    * matching requests.
    */
-  list(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<SettingListResponse> {
+  list(params: SettingListParams, options?: Core.RequestOptions): Core.APIPromise<SettingListResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/pagerules/settings`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/pagerules/settings`, options) as Core.APIPromise<{
         result: SettingListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -23,6 +24,14 @@ export class Settings extends APIResource {
  */
 export type SettingListResponse = Array<unknown>;
 
+export interface SettingListParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
 export namespace Settings {
   export import SettingListResponse = SettingsAPI.SettingListResponse;
+  export import SettingListParams = SettingsAPI.SettingListParams;
 }

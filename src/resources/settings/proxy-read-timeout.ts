@@ -9,12 +9,12 @@ export class ProxyReadTimeout extends APIResource {
    * Maximum time between two read operations from origin.
    */
   edit(
-    zoneId: string,
-    body: ProxyReadTimeoutEditParams,
+    params: ProxyReadTimeoutEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ProxyReadTimeoutEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/settings/proxy_read_timeout`, {
+      this._client.patch(`/zones/${zone_id}/settings/proxy_read_timeout`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: ProxyReadTimeoutEditResponse }>
@@ -24,9 +24,13 @@ export class ProxyReadTimeout extends APIResource {
   /**
    * Maximum time between two read operations from origin.
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<ProxyReadTimeoutGetResponse> {
+  get(
+    params: ProxyReadTimeoutGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ProxyReadTimeoutGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/settings/proxy_read_timeout`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/settings/proxy_read_timeout`, options) as Core.APIPromise<{
         result: ProxyReadTimeoutGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -87,7 +91,12 @@ export interface ProxyReadTimeoutGetResponse {
 
 export interface ProxyReadTimeoutEditParams {
   /**
-   * Maximum time between two read operations from origin.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Maximum time between two read operations from origin.
    */
   value: ProxyReadTimeoutEditParams.Value;
 }
@@ -109,8 +118,16 @@ export namespace ProxyReadTimeoutEditParams {
   }
 }
 
+export interface ProxyReadTimeoutGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
 export namespace ProxyReadTimeout {
   export import ProxyReadTimeoutEditResponse = ProxyReadTimeoutAPI.ProxyReadTimeoutEditResponse;
   export import ProxyReadTimeoutGetResponse = ProxyReadTimeoutAPI.ProxyReadTimeoutGetResponse;
   export import ProxyReadTimeoutEditParams = ProxyReadTimeoutAPI.ProxyReadTimeoutEditParams;
+  export import ProxyReadTimeoutGetParams = ProxyReadTimeoutAPI.ProxyReadTimeoutGetParams;
 }

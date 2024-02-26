@@ -12,12 +12,12 @@ export class BrowserCacheTTL extends APIResource {
    * (https://support.cloudflare.com/hc/en-us/articles/200168276).
    */
   edit(
-    zoneId: string,
-    body: BrowserCacheTTLEditParams,
+    params: BrowserCacheTTLEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BrowserCacheTTLEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/settings/browser_cache_ttl`, {
+      this._client.patch(`/zones/${zone_id}/settings/browser_cache_ttl`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: BrowserCacheTTLEditResponse }>
@@ -30,9 +30,13 @@ export class BrowserCacheTTL extends APIResource {
    * specified by your server.
    * (https://support.cloudflare.com/hc/en-us/articles/200168276).
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<BrowserCacheTTLGetResponse> {
+  get(
+    params: BrowserCacheTTLGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<BrowserCacheTTLGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/settings/browser_cache_ttl`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/settings/browser_cache_ttl`, options) as Core.APIPromise<{
         result: BrowserCacheTTLGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -155,8 +159,13 @@ export interface BrowserCacheTTLGetResponse {
 
 export interface BrowserCacheTTLEditParams {
   /**
-   * Value of the zone setting. Notes: Setting a TTL of 0 is equivalent to selecting
-   * `Respect Existing Headers`
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Value of the zone setting. Notes: Setting a TTL of 0 is equivalent
+   * to selecting `Respect Existing Headers`
    */
   value:
     | 0
@@ -189,8 +198,16 @@ export interface BrowserCacheTTLEditParams {
     | 31536000;
 }
 
+export interface BrowserCacheTTLGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
 export namespace BrowserCacheTTL {
   export import BrowserCacheTTLEditResponse = BrowserCacheTTLAPI.BrowserCacheTTLEditResponse;
   export import BrowserCacheTTLGetResponse = BrowserCacheTTLAPI.BrowserCacheTTLGetResponse;
   export import BrowserCacheTTLEditParams = BrowserCacheTTLAPI.BrowserCacheTTLEditParams;
+  export import BrowserCacheTTLGetParams = BrowserCacheTTLAPI.BrowserCacheTTLGetParams;
 }

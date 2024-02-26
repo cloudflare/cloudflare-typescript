@@ -9,14 +9,15 @@ export class Connectors extends APIResource {
    * Fetches connector and connection details for a Cloudflare Tunnel.
    */
   get(
-    accountId: string,
     tunnelId: string,
     connectorId: string,
+    params: ConnectorGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConnectorGetResponse> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountId}/cfd_tunnel/${tunnelId}/connectors/${connectorId}`,
+        `/accounts/${account_id}/cfd_tunnel/${tunnelId}/connectors/${connectorId}`,
         options,
       ) as Core.APIPromise<{ result: ConnectorGetResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -112,6 +113,14 @@ export namespace ConnectorGetResponse {
   }
 }
 
+export interface ConnectorGetParams {
+  /**
+   * Cloudflare account ID
+   */
+  account_id: string;
+}
+
 export namespace Connectors {
   export import ConnectorGetResponse = ConnectorsAPI.ConnectorGetResponse;
+  export import ConnectorGetParams = ConnectorsAPI.ConnectorGetParams;
 }

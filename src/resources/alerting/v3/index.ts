@@ -15,6 +15,9 @@ export {
   PolicyGetResponse,
   PolicyCreateParams,
   PolicyUpdateParams,
+  PolicyListParams,
+  PolicyDeleteParams,
+  PolicyGetParams,
   Policies,
 } from './policies';
-export { V3ListResponse, V3 } from './v3';
+export { V3ListResponse, V3ListParams, V3 } from './v3';

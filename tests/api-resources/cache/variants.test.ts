@@ -14,8 +14,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource variants', () => {
   // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
-    const responsePromise = cloudflare.cache.variants.list('023e105f4ecef8ad9ca31a8372d0c353');
+  test.skip('list: only required params', async () => {
+    const responsePromise = cloudflare.cache.variants.list({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -26,18 +26,13 @@ describe('resource variants', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.cache.variants.list('023e105f4ecef8ad9ca31a8372d0c353', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('list: required and optional params', async () => {
+    const response = await cloudflare.cache.variants.list({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
-    const responsePromise = cloudflare.cache.variants.delete('023e105f4ecef8ad9ca31a8372d0c353');
+  test.skip('delete: only required params', async () => {
+    const responsePromise = cloudflare.cache.variants.delete({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -45,11 +40,19 @@ describe('resource variants', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('delete: required and optional params', async () => {
+    const response = await cloudflare.cache.variants.delete({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('edit: only required params', async () => {
-    const responsePromise = cloudflare.cache.variants.edit('023e105f4ecef8ad9ca31a8372d0c353', { value: {} });
+    const responsePromise = cloudflare.cache.variants.edit({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      value: {},
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -61,7 +64,8 @@ describe('resource variants', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('edit: required and optional params', async () => {
-    const response = await cloudflare.cache.variants.edit('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await cloudflare.cache.variants.edit({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       value: {
         avif: ['image/webp', 'image/jpeg'],
         bmp: ['image/webp', 'image/jpeg'],

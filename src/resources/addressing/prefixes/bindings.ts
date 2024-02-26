@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as BindingsAPI from 'cloudflare/resources/addressing/prefixes/bindings';
 
 export class Bindings extends APIResource {
@@ -13,27 +12,13 @@ export class Bindings extends APIResource {
    * allows creating service bindings for the Cloudflare CDN or Cloudflare Spectrum.
    */
   create(
-    accountId: string,
     prefixId: string,
-    body?: BindingCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<BindingCreateResponse>;
-  create(
-    accountId: string,
-    prefixId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<BindingCreateResponse>;
-  create(
-    accountId: string,
-    prefixId: string,
-    body: BindingCreateParams | Core.RequestOptions = {},
+    params: BindingCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BindingCreateResponse> {
-    if (isRequestOptions(body)) {
-      return this.create(accountId, prefixId, {}, body);
-    }
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/addressing/prefixes/${prefixId}/bindings`, {
+      this._client.post(`/accounts/${account_id}/addressing/prefixes/${prefixId}/bindings`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: BindingCreateResponse }>
@@ -49,13 +34,14 @@ export class Bindings extends APIResource {
    * IPs in the prefix to Cloudflare Magic Transit.
    */
   list(
-    accountId: string,
     prefixId: string,
+    params: BindingListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BindingListResponse> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountId}/addressing/prefixes/${prefixId}/bindings`,
+        `/accounts/${account_id}/addressing/prefixes/${prefixId}/bindings`,
         options,
       ) as Core.APIPromise<{ result: BindingListResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -65,14 +51,15 @@ export class Bindings extends APIResource {
    * Delete a Service Binding
    */
   delete(
-    accountId: string,
     prefixId: string,
     bindingId: string,
+    params: BindingDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BindingDeleteResponse> {
+    const { account_id } = params;
     return (
       this._client.delete(
-        `/accounts/${accountId}/addressing/prefixes/${prefixId}/bindings/${bindingId}`,
+        `/accounts/${account_id}/addressing/prefixes/${prefixId}/bindings/${bindingId}`,
         options,
       ) as Core.APIPromise<{ result: BindingDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -82,14 +69,15 @@ export class Bindings extends APIResource {
    * Fetch a single Service Binding
    */
   get(
-    accountId: string,
     prefixId: string,
     bindingId: string,
+    params: BindingGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BindingGetResponse> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountId}/addressing/prefixes/${prefixId}/bindings/${bindingId}`,
+        `/accounts/${account_id}/addressing/prefixes/${prefixId}/bindings/${bindingId}`,
         options,
       ) as Core.APIPromise<{ result: BindingGetResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -224,14 +212,40 @@ export namespace BindingGetResponse {
 
 export interface BindingCreateParams {
   /**
-   * IP Prefix in Classless Inter-Domain Routing format.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: IP Prefix in Classless Inter-Domain Routing format.
    */
   cidr?: string;
 
   /**
-   * Identifier
+   * Body param: Identifier
    */
   service_id?: string;
+}
+
+export interface BindingListParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface BindingDeleteParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface BindingGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
 }
 
 export namespace Bindings {
@@ -240,4 +254,7 @@ export namespace Bindings {
   export import BindingDeleteResponse = BindingsAPI.BindingDeleteResponse;
   export import BindingGetResponse = BindingsAPI.BindingGetResponse;
   export import BindingCreateParams = BindingsAPI.BindingCreateParams;
+  export import BindingListParams = BindingsAPI.BindingListParams;
+  export import BindingDeleteParams = BindingsAPI.BindingDeleteParams;
+  export import BindingGetParams = BindingsAPI.BindingGetParams;
 }

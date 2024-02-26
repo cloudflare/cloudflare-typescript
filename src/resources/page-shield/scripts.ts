@@ -2,29 +2,16 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as ScriptsAPI from 'cloudflare/resources/page-shield/scripts';
 
 export class Scripts extends APIResource {
   /**
    * Lists all scripts detected by Page Shield.
    */
-  list(
-    zoneId: string,
-    query?: ScriptListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ScriptListResponse | null>;
-  list(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<ScriptListResponse | null>;
-  list(
-    zoneId: string,
-    query: ScriptListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ScriptListResponse | null> {
-    if (isRequestOptions(query)) {
-      return this.list(zoneId, {}, query);
-    }
+  list(params: ScriptListParams, options?: Core.RequestOptions): Core.APIPromise<ScriptListResponse | null> {
+    const { zone_id, ...query } = params;
     return (
-      this._client.get(`/zones/${zoneId}/page_shield/scripts`, { query, ...options }) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/page_shield/scripts`, { query, ...options }) as Core.APIPromise<{
         result: ScriptListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -33,8 +20,13 @@ export class Scripts extends APIResource {
   /**
    * Fetches a script detected by Page Shield by script ID.
    */
-  get(zoneId: string, scriptId: string, options?: Core.RequestOptions): Core.APIPromise<ScriptGetResponse> {
-    return this._client.get(`/zones/${zoneId}/page_shield/scripts/${scriptId}`, options);
+  get(
+    scriptId: string,
+    params: ScriptGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ScriptGetResponse> {
+    const { zone_id } = params;
+    return this._client.get(`/zones/${zone_id}/page_shield/scripts/${scriptId}`, options);
   }
 }
 
@@ -124,39 +116,44 @@ export namespace ScriptGetResponse {
 
 export interface ScriptListParams {
   /**
-   * The direction used to sort returned scripts.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Query param: The direction used to sort returned scripts.
    */
   direction?: 'asc' | 'desc';
 
   /**
-   * When true, excludes scripts seen in a `/cdn-cgi` path from the returned scripts.
-   * The default value is true.
+   * Query param: When true, excludes scripts seen in a `/cdn-cgi` path from the
+   * returned scripts. The default value is true.
    */
   exclude_cdn_cgi?: boolean;
 
   /**
-   * When true, excludes duplicate scripts. We consider a script duplicate of another
-   * if their javascript content matches and they share the same url host and zone
-   * hostname. In such case, we return the most recent script for the URL host and
-   * zone hostname combination.
+   * Query param: When true, excludes duplicate scripts. We consider a script
+   * duplicate of another if their javascript content matches and they share the same
+   * url host and zone hostname. In such case, we return the most recent script for
+   * the URL host and zone hostname combination.
    */
   exclude_duplicates?: boolean;
 
   /**
-   * Excludes scripts whose URL contains one of the URL-encoded URLs separated by
-   * commas.
+   * Query param: Excludes scripts whose URL contains one of the URL-encoded URLs
+   * separated by commas.
    */
   exclude_urls?: string;
 
   /**
-   * Export the list of scripts as a file. Cannot be used with per_page or page
-   * options.
+   * Query param: Export the list of scripts as a file. Cannot be used with per_page
+   * or page options.
    */
   export?: 'csv';
 
   /**
-   * Includes scripts that match one or more URL-encoded hostnames separated by
-   * commas.
+   * Query param: Includes scripts that match one or more URL-encoded hostnames
+   * separated by commas.
    *
    * Wildcards are supported at the start and end of each hostname to support starts
    * with, ends with and contains. If no wildcards are used, results will be filtered
@@ -165,12 +162,12 @@ export interface ScriptListParams {
   hosts?: string;
 
   /**
-   * The field used to sort returned scripts.
+   * Query param: The field used to sort returned scripts.
    */
   order_by?: 'first_seen_at' | 'last_seen_at';
 
   /**
-   * The current page number of the paginated results.
+   * Query param: The current page number of the paginated results.
    *
    * We additionally support a special value "all". When "all" is used, the API will
    * return all the scripts with the applied filters in a single page. Additionally,
@@ -181,8 +178,8 @@ export interface ScriptListParams {
   page?: string;
 
   /**
-   * Includes scripts that match one or more page URLs (separated by commas) where
-   * they were last seen
+   * Query param: Includes scripts that match one or more page URLs (separated by
+   * commas) where they were last seen
    *
    * Wildcards are supported at the start and end of each page URL to support starts
    * with, ends with and contains. If no wildcards are used, results will be filtered
@@ -191,31 +188,39 @@ export interface ScriptListParams {
   page_url?: string;
 
   /**
-   * The number of results per page.
+   * Query param: The number of results per page.
    */
   per_page?: number;
 
   /**
-   * When true, malicious scripts appear first in the returned scripts.
+   * Query param: When true, malicious scripts appear first in the returned scripts.
    */
   prioritize_malicious?: boolean;
 
   /**
-   * Filters the returned scripts using a comma-separated list of scripts statuses.
-   * Accepted values: `active`, `infrequent`, and `inactive`. The default value is
-   * `active`.
+   * Query param: Filters the returned scripts using a comma-separated list of
+   * scripts statuses. Accepted values: `active`, `infrequent`, and `inactive`. The
+   * default value is `active`.
    */
   status?: string;
 
   /**
-   * Includes scripts whose URL contain one or more URL-encoded URLs separated by
-   * commas.
+   * Query param: Includes scripts whose URL contain one or more URL-encoded URLs
+   * separated by commas.
    */
   urls?: string;
+}
+
+export interface ScriptGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }
 
 export namespace Scripts {
   export import ScriptListResponse = ScriptsAPI.ScriptListResponse;
   export import ScriptGetResponse = ScriptsAPI.ScriptGetResponse;
   export import ScriptListParams = ScriptsAPI.ScriptListParams;
+  export import ScriptGetParams = ScriptsAPI.ScriptGetParams;
 }

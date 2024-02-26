@@ -13,13 +13,13 @@ export class HTTPTests extends APIResource {
    * time period between 1 hour and 7 days.
    */
   get(
-    accountId: string,
     testId: string,
-    query: HTTPTestGetParams,
+    params: HTTPTestGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<HTTPTestGetResponse> {
+    const { account_id, ...query } = params;
     return (
-      this._client.get(`/accounts/${accountId}/dex/http-tests/${testId}`, {
+      this._client.get(`/accounts/${account_id}/dex/http-tests/${testId}`, {
         query,
         ...options,
       }) as Core.APIPromise<{ result: HTTPTestGetResponse }>
@@ -281,29 +281,34 @@ export namespace HTTPTestGetResponse {
 
 export interface HTTPTestGetParams {
   /**
-   * Time interval for aggregate time slots.
+   * Path param: unique identifier linked to an account in the API request path.
+   */
+  account_id: string;
+
+  /**
+   * Query param: Time interval for aggregate time slots.
    */
   interval: 'minute' | 'hour';
 
   /**
-   * End time for aggregate metrics in ISO ms
+   * Query param: End time for aggregate metrics in ISO ms
    */
   timeEnd: string;
 
   /**
-   * Start time for aggregate metrics in ISO ms
+   * Query param: Start time for aggregate metrics in ISO ms
    */
   timeStart: string;
 
   /**
-   * Optionally filter result stats to a Cloudflare colo. Cannot be used in
-   * combination with deviceId param.
+   * Query param: Optionally filter result stats to a Cloudflare colo. Cannot be used
+   * in combination with deviceId param.
    */
   colo?: string;
 
   /**
-   * Optionally filter result stats to a specific device(s). Cannot be used in
-   * combination with colo param.
+   * Query param: Optionally filter result stats to a specific device(s). Cannot be
+   * used in combination with colo param.
    */
   deviceId?: Array<string>;
 }

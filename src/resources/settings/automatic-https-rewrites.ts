@@ -9,12 +9,12 @@ export class AutomaticHTTPSRewrites extends APIResource {
    * Enable the Automatic HTTPS Rewrites feature for this zone.
    */
   edit(
-    zoneId: string,
-    body: AutomaticHTTPSRewriteEditParams,
+    params: AutomaticHTTPSRewriteEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AutomaticHTTPSRewriteEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/settings/automatic_https_rewrites`, {
+      this._client.patch(`/zones/${zone_id}/settings/automatic_https_rewrites`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: AutomaticHTTPSRewriteEditResponse }>
@@ -24,9 +24,13 @@ export class AutomaticHTTPSRewrites extends APIResource {
   /**
    * Enable the Automatic HTTPS Rewrites feature for this zone.
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<AutomaticHTTPSRewriteGetResponse> {
+  get(
+    params: AutomaticHTTPSRewriteGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AutomaticHTTPSRewriteGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/settings/automatic_https_rewrites`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/settings/automatic_https_rewrites`, options) as Core.APIPromise<{
         result: AutomaticHTTPSRewriteGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -87,14 +91,27 @@ export interface AutomaticHTTPSRewriteGetResponse {
 
 export interface AutomaticHTTPSRewriteEditParams {
   /**
-   * Value of the zone setting. Notes: Default value depends on the zone's plan
-   * level.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Value of the zone setting. Notes: Default value depends on the
+   * zone's plan level.
    */
   value: 'on' | 'off';
+}
+
+export interface AutomaticHTTPSRewriteGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }
 
 export namespace AutomaticHTTPSRewrites {
   export import AutomaticHTTPSRewriteEditResponse = AutomaticHTTPSRewritesAPI.AutomaticHTTPSRewriteEditResponse;
   export import AutomaticHTTPSRewriteGetResponse = AutomaticHTTPSRewritesAPI.AutomaticHTTPSRewriteGetResponse;
   export import AutomaticHTTPSRewriteEditParams = AutomaticHTTPSRewritesAPI.AutomaticHTTPSRewriteEditParams;
+  export import AutomaticHTTPSRewriteGetParams = AutomaticHTTPSRewritesAPI.AutomaticHTTPSRewriteGetParams;
 }

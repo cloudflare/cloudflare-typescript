@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as FirewallAPI from 'cloudflare/resources/dns/firewall/firewall';
 import * as AnalyticsAPI from 'cloudflare/resources/dns/firewall/analytics/analytics';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
@@ -14,12 +13,12 @@ export class Firewall extends APIResource {
    * Create a configured DNS Firewall Cluster.
    */
   create(
-    accountId: string,
-    body: FirewallCreateParams,
+    params: FirewallCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<FirewallCreateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/dns_firewall`, { body, ...options }) as Core.APIPromise<{
+      this._client.post(`/accounts/${account_id}/dns_firewall`, { body, ...options }) as Core.APIPromise<{
         result: FirewallCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -29,24 +28,12 @@ export class Firewall extends APIResource {
    * List configured DNS Firewall clusters for an account.
    */
   list(
-    accountId: string,
-    query?: FirewallListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<FirewallListResponsesV4PagePaginationArray, FirewallListResponse>;
-  list(
-    accountId: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<FirewallListResponsesV4PagePaginationArray, FirewallListResponse>;
-  list(
-    accountId: string,
-    query: FirewallListParams | Core.RequestOptions = {},
+    params: FirewallListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<FirewallListResponsesV4PagePaginationArray, FirewallListResponse> {
-    if (isRequestOptions(query)) {
-      return this.list(accountId, {}, query);
-    }
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
-      `/accounts/${accountId}/dns_firewall`,
+      `/accounts/${account_id}/dns_firewall`,
       FirewallListResponsesV4PagePaginationArray,
       { query, ...options },
     );
@@ -56,13 +43,14 @@ export class Firewall extends APIResource {
    * Delete a configured DNS Firewall Cluster.
    */
   delete(
-    accountId: string,
     dnsFirewallId: string,
+    params: FirewallDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<FirewallDeleteResponse> {
+    const { account_id } = params;
     return (
       this._client.delete(
-        `/accounts/${accountId}/dns_firewall/${dnsFirewallId}`,
+        `/accounts/${account_id}/dns_firewall/${dnsFirewallId}`,
         options,
       ) as Core.APIPromise<{ result: FirewallDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -72,13 +60,13 @@ export class Firewall extends APIResource {
    * Modify a DNS Firewall Cluster configuration.
    */
   edit(
-    accountId: string,
     dnsFirewallId: string,
-    body: FirewallEditParams,
+    params: FirewallEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<FirewallEditResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.patch(`/accounts/${accountId}/dns_firewall/${dnsFirewallId}`, {
+      this._client.patch(`/accounts/${account_id}/dns_firewall/${dnsFirewallId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: FirewallEditResponse }>
@@ -89,12 +77,13 @@ export class Firewall extends APIResource {
    * Show a single configured DNS Firewall cluster for an account.
    */
   get(
-    accountId: string,
     dnsFirewallId: string,
+    params: FirewallGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<FirewallGetResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/dns_firewall/${dnsFirewallId}`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/dns_firewall/${dnsFirewallId}`, options) as Core.APIPromise<{
         result: FirewallGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -476,56 +465,65 @@ export namespace FirewallGetResponse {
 
 export interface FirewallCreateParams {
   /**
-   * DNS Firewall Cluster Name.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: DNS Firewall Cluster Name.
    */
   name: string;
 
+  /**
+   * Body param:
+   */
   upstream_ips: Array<string | string>;
 
   /**
-   * Attack mitigation settings.
+   * Body param: Attack mitigation settings.
    */
   attack_mitigation?: FirewallCreateParams.AttackMitigation | null;
 
   /**
-   * Deprecate the response to ANY requests.
+   * Body param: Deprecate the response to ANY requests.
    */
   deprecate_any_requests?: boolean;
 
   /**
-   * Forward client IP (resolver) subnet if no EDNS Client Subnet is sent.
+   * Body param: Forward client IP (resolver) subnet if no EDNS Client Subnet is
+   * sent.
    */
   ecs_fallback?: boolean;
 
   /**
-   * Maximum DNS Cache TTL.
+   * Body param: Maximum DNS Cache TTL.
    */
   maximum_cache_ttl?: number;
 
   /**
-   * Minimum DNS Cache TTL.
+   * Body param: Minimum DNS Cache TTL.
    */
   minimum_cache_ttl?: number;
 
   /**
-   * Negative DNS Cache TTL.
+   * Body param: Negative DNS Cache TTL.
    */
   negative_cache_ttl?: number | null;
 
   /**
-   * Deprecated alias for "upstream_ips".
+   * Body param: Deprecated alias for "upstream_ips".
    */
   origin_ips?: unknown;
 
   /**
-   * Ratelimit in queries per second per datacenter (applies to DNS queries sent to
-   * the upstream nameservers configured on the cluster).
+   * Body param: Ratelimit in queries per second per datacenter (applies to DNS
+   * queries sent to the upstream nameservers configured on the cluster).
    */
   ratelimit?: number | null;
 
   /**
-   * Number of retries for fetching DNS responses from upstream nameservers (not
-   * counting the initial attempt).
+   * Body param: Number of retries for fetching DNS responses from upstream
+   * nameservers (not counting the initial attempt).
    */
   retries?: number;
 }
@@ -553,62 +551,86 @@ export namespace FirewallCreateParams {
   }
 }
 
-export interface FirewallListParams extends V4PagePaginationArrayParams {}
+export interface FirewallListParams extends V4PagePaginationArrayParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+}
+
+export interface FirewallDeleteParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
 
 export interface FirewallEditParams {
   /**
-   * Deprecate the response to ANY requests.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: Deprecate the response to ANY requests.
    */
   deprecate_any_requests: boolean;
 
+  /**
+   * Body param:
+   */
   dns_firewall_ips: Array<string | string>;
 
   /**
-   * Forward client IP (resolver) subnet if no EDNS Client Subnet is sent.
+   * Body param: Forward client IP (resolver) subnet if no EDNS Client Subnet is
+   * sent.
    */
   ecs_fallback: boolean;
 
   /**
-   * Maximum DNS Cache TTL.
+   * Body param: Maximum DNS Cache TTL.
    */
   maximum_cache_ttl: number;
 
   /**
-   * Minimum DNS Cache TTL.
+   * Body param: Minimum DNS Cache TTL.
    */
   minimum_cache_ttl: number;
 
   /**
-   * DNS Firewall Cluster Name.
+   * Body param: DNS Firewall Cluster Name.
    */
   name: string;
 
+  /**
+   * Body param:
+   */
   upstream_ips: Array<string | string>;
 
   /**
-   * Attack mitigation settings.
+   * Body param: Attack mitigation settings.
    */
   attack_mitigation?: FirewallEditParams.AttackMitigation | null;
 
   /**
-   * Negative DNS Cache TTL.
+   * Body param: Negative DNS Cache TTL.
    */
   negative_cache_ttl?: number | null;
 
   /**
-   * Deprecated alias for "upstream_ips".
+   * Body param: Deprecated alias for "upstream_ips".
    */
   origin_ips?: unknown;
 
   /**
-   * Ratelimit in queries per second per datacenter (applies to DNS queries sent to
-   * the upstream nameservers configured on the cluster).
+   * Body param: Ratelimit in queries per second per datacenter (applies to DNS
+   * queries sent to the upstream nameservers configured on the cluster).
    */
   ratelimit?: number | null;
 
   /**
-   * Number of retries for fetching DNS responses from upstream nameservers (not
-   * counting the initial attempt).
+   * Body param: Number of retries for fetching DNS responses from upstream
+   * nameservers (not counting the initial attempt).
    */
   retries?: number;
 }
@@ -636,6 +658,13 @@ export namespace FirewallEditParams {
   }
 }
 
+export interface FirewallGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export namespace Firewall {
   export import FirewallCreateResponse = FirewallAPI.FirewallCreateResponse;
   export import FirewallListResponse = FirewallAPI.FirewallListResponse;
@@ -645,6 +674,8 @@ export namespace Firewall {
   export import FirewallListResponsesV4PagePaginationArray = FirewallAPI.FirewallListResponsesV4PagePaginationArray;
   export import FirewallCreateParams = FirewallAPI.FirewallCreateParams;
   export import FirewallListParams = FirewallAPI.FirewallListParams;
+  export import FirewallDeleteParams = FirewallAPI.FirewallDeleteParams;
   export import FirewallEditParams = FirewallAPI.FirewallEditParams;
+  export import FirewallGetParams = FirewallAPI.FirewallGetParams;
   export import Analytics = AnalyticsAPI.Analytics;
 }

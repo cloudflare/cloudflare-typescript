@@ -9,12 +9,12 @@ export class OpportunisticEncryption extends APIResource {
    * Changes Opportunistic Encryption setting.
    */
   edit(
-    zoneId: string,
-    body: OpportunisticEncryptionEditParams,
+    params: OpportunisticEncryptionEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OpportunisticEncryptionEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/settings/opportunistic_encryption`, {
+      this._client.patch(`/zones/${zone_id}/settings/opportunistic_encryption`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: OpportunisticEncryptionEditResponse }>
@@ -24,9 +24,13 @@ export class OpportunisticEncryption extends APIResource {
   /**
    * Gets Opportunistic Encryption setting.
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<OpportunisticEncryptionGetResponse> {
+  get(
+    params: OpportunisticEncryptionGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<OpportunisticEncryptionGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/settings/opportunistic_encryption`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/settings/opportunistic_encryption`, options) as Core.APIPromise<{
         result: OpportunisticEncryptionGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -87,14 +91,27 @@ export interface OpportunisticEncryptionGetResponse {
 
 export interface OpportunisticEncryptionEditParams {
   /**
-   * Value of the zone setting. Notes: Default value depends on the zone's plan
-   * level.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Value of the zone setting. Notes: Default value depends on the
+   * zone's plan level.
    */
   value: 'on' | 'off';
+}
+
+export interface OpportunisticEncryptionGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }
 
 export namespace OpportunisticEncryption {
   export import OpportunisticEncryptionEditResponse = OpportunisticEncryptionAPI.OpportunisticEncryptionEditResponse;
   export import OpportunisticEncryptionGetResponse = OpportunisticEncryptionAPI.OpportunisticEncryptionGetResponse;
   export import OpportunisticEncryptionEditParams = OpportunisticEncryptionAPI.OpportunisticEncryptionEditParams;
+  export import OpportunisticEncryptionGetParams = OpportunisticEncryptionAPI.OpportunisticEncryptionGetParams;
 }

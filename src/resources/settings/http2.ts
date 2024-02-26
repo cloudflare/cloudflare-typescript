@@ -8,13 +8,10 @@ export class HTTP2 extends APIResource {
   /**
    * Value of the HTTP2 setting.
    */
-  edit(
-    zoneId: string,
-    body: HTTP2EditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<HTTP2EditResponse> {
+  edit(params: HTTP2EditParams, options?: Core.RequestOptions): Core.APIPromise<HTTP2EditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/settings/http2`, { body, ...options }) as Core.APIPromise<{
+      this._client.patch(`/zones/${zone_id}/settings/http2`, { body, ...options }) as Core.APIPromise<{
         result: HTTP2EditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -23,9 +20,10 @@ export class HTTP2 extends APIResource {
   /**
    * Value of the HTTP2 setting.
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<HTTP2GetResponse> {
+  get(params: HTTP2GetParams, options?: Core.RequestOptions): Core.APIPromise<HTTP2GetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/settings/http2`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/settings/http2`, options) as Core.APIPromise<{
         result: HTTP2GetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -86,13 +84,26 @@ export interface HTTP2GetResponse {
 
 export interface HTTP2EditParams {
   /**
-   * Value of the HTTP2 setting.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Value of the HTTP2 setting.
    */
   value: 'on' | 'off';
+}
+
+export interface HTTP2GetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }
 
 export namespace HTTP2 {
   export import HTTP2EditResponse = HTTP2API.HTTP2EditResponse;
   export import HTTP2GetResponse = HTTP2API.HTTP2GetResponse;
   export import HTTP2EditParams = HTTP2API.HTTP2EditParams;
+  export import HTTP2GetParams = HTTP2API.HTTP2GetParams;
 }

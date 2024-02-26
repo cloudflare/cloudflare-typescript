@@ -9,13 +9,14 @@ export class Connections extends APIResource {
    * Fetches connection details for a Cloudflare Tunnel.
    */
   list(
-    accountId: string,
     tunnelId: string,
+    params: ConnectionListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConnectionListResponse | null> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountId}/cfd_tunnel/${tunnelId}/connections`,
+        `/accounts/${account_id}/cfd_tunnel/${tunnelId}/connections`,
         options,
       ) as Core.APIPromise<{ result: ConnectionListResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -26,14 +27,14 @@ export class Connections extends APIResource {
    * recommend running this command after shutting down a tunnel.
    */
   delete(
-    accountId: string,
     tunnelId: string,
-    body: ConnectionDeleteParams,
+    params: ConnectionDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConnectionDeleteResponse> {
+    const { account_id, body } = params;
     return (
-      this._client.delete(`/accounts/${accountId}/tunnels/${tunnelId}/connections`, {
-        body,
+      this._client.delete(`/accounts/${account_id}/tunnels/${tunnelId}/connections`, {
+        body: body,
         ...options,
       }) as Core.APIPromise<{ result: ConnectionDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -135,10 +136,28 @@ export namespace ConnectionListResponse {
 
 export type ConnectionDeleteResponse = unknown | Array<unknown> | string;
 
-export type ConnectionDeleteParams = unknown;
+export interface ConnectionListParams {
+  /**
+   * Cloudflare account ID
+   */
+  account_id: string;
+}
+
+export interface ConnectionDeleteParams {
+  /**
+   * Path param: Cloudflare account ID
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
+}
 
 export namespace Connections {
   export import ConnectionListResponse = ConnectionsAPI.ConnectionListResponse;
   export import ConnectionDeleteResponse = ConnectionsAPI.ConnectionDeleteResponse;
+  export import ConnectionListParams = ConnectionsAPI.ConnectionListParams;
   export import ConnectionDeleteParams = ConnectionsAPI.ConnectionDeleteParams;
 }

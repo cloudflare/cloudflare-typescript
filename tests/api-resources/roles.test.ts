@@ -14,8 +14,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource roles', () => {
   // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
-    const responsePromise = cloudflare.roles.list({});
+  test.skip('list: only required params', async () => {
+    const responsePromise = cloudflare.roles.list({ account_id: {} });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -26,16 +26,13 @@ describe('resource roles', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(cloudflare.roles.list({}, { path: '/_stainless_unknown_path' })).rejects.toThrow(
-      Cloudflare.NotFoundError,
-    );
+  test.skip('list: required and optional params', async () => {
+    const response = await cloudflare.roles.list({ account_id: {} });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
-    const responsePromise = cloudflare.roles.get({}, {});
+  test.skip('get: only required params', async () => {
+    const responsePromise = cloudflare.roles.get({}, { account_id: {} });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -46,10 +43,7 @@ describe('resource roles', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(cloudflare.roles.get({}, {}, { path: '/_stainless_unknown_path' })).rejects.toThrow(
-      Cloudflare.NotFoundError,
-    );
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.roles.get({}, { account_id: {} });
   });
 });

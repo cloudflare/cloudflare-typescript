@@ -9,14 +9,14 @@ export class Consumers extends APIResource {
    * Creates a new consumer for a queue.
    */
   create(
-    accountId: string,
     name: string,
-    body: ConsumerCreateParams,
+    params: ConsumerCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConsumerCreateResponse | null> {
+    const { account_id, body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/workers/queues/${name}/consumers`, {
-        body,
+      this._client.post(`/accounts/${account_id}/workers/queues/${name}/consumers`, {
+        body: body,
         ...options,
       }) as Core.APIPromise<{ result: ConsumerCreateResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -26,15 +26,15 @@ export class Consumers extends APIResource {
    * Updates the consumer for a queue, or creates one if it does not exist.
    */
   update(
-    accountId: string,
     name: string,
     consumerName: string,
-    body: ConsumerUpdateParams,
+    params: ConsumerUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConsumerUpdateResponse | null> {
+    const { account_id, body } = params;
     return (
-      this._client.put(`/accounts/${accountId}/workers/queues/${name}/consumers/${consumerName}`, {
-        body,
+      this._client.put(`/accounts/${account_id}/workers/queues/${name}/consumers/${consumerName}`, {
+        body: body,
         ...options,
       }) as Core.APIPromise<{ result: ConsumerUpdateResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -44,13 +44,14 @@ export class Consumers extends APIResource {
    * Returns the consumers for a queue.
    */
   list(
-    accountId: string,
     name: string,
+    params: ConsumerListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConsumerListResponse | null> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountId}/workers/queues/${name}/consumers`,
+        `/accounts/${account_id}/workers/queues/${name}/consumers`,
         options,
       ) as Core.APIPromise<{ result: ConsumerListResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -60,14 +61,15 @@ export class Consumers extends APIResource {
    * Deletes the consumer for a queue.
    */
   delete(
-    accountId: string,
     name: string,
     consumerName: string,
+    params: ConsumerDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConsumerDeleteResponse | null> {
+    const { account_id } = params;
     return (
       this._client.delete(
-        `/accounts/${accountId}/workers/queues/${name}/consumers/${consumerName}`,
+        `/accounts/${account_id}/workers/queues/${name}/consumers/${consumerName}`,
         options,
       ) as Core.APIPromise<{ result: ConsumerDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -150,9 +152,43 @@ export namespace ConsumerListResponse {
 
 export type ConsumerDeleteResponse = unknown | Array<unknown> | string;
 
-export type ConsumerCreateParams = unknown;
+export interface ConsumerCreateParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
 
-export type ConsumerUpdateParams = unknown;
+  /**
+   * Body param:
+   */
+  body: unknown;
+}
+
+export interface ConsumerUpdateParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
+}
+
+export interface ConsumerListParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface ConsumerDeleteParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
 
 export namespace Consumers {
   export import ConsumerCreateResponse = ConsumersAPI.ConsumerCreateResponse;
@@ -161,4 +197,6 @@ export namespace Consumers {
   export import ConsumerDeleteResponse = ConsumersAPI.ConsumerDeleteResponse;
   export import ConsumerCreateParams = ConsumersAPI.ConsumerCreateParams;
   export import ConsumerUpdateParams = ConsumersAPI.ConsumerUpdateParams;
+  export import ConsumerListParams = ConsumersAPI.ConsumerListParams;
+  export import ConsumerDeleteParams = ConsumersAPI.ConsumerDeleteParams;
 }

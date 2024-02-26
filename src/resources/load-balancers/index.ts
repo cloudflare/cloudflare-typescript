@@ -9,7 +9,10 @@ export {
   LoadBalancerGetResponse,
   LoadBalancerCreateParams,
   LoadBalancerUpdateParams,
+  LoadBalancerListParams,
+  LoadBalancerDeleteParams,
   LoadBalancerEditParams,
+  LoadBalancerGetParams,
   LoadBalancers,
 } from './load-balancers';
 export {
@@ -21,7 +24,10 @@ export {
   MonitorGetResponse,
   MonitorCreateParams,
   MonitorUpdateParams,
+  MonitorListParams,
+  MonitorDeleteParams,
   MonitorEditParams,
+  MonitorGetParams,
   Monitors,
 } from './monitors/index';
 export {
@@ -34,9 +40,11 @@ export {
   PoolCreateParams,
   PoolUpdateParams,
   PoolListParams,
+  PoolDeleteParams,
   PoolEditParams,
+  PoolGetParams,
   Pools,
 } from './pools/index';
-export { PreviewGetResponse, Previews } from './previews';
-export { RegionListResponse, RegionGetResponse, RegionListParams, Regions } from './regions';
+export { PreviewGetResponse, PreviewGetParams, Previews } from './previews';
+export { RegionListResponse, RegionGetResponse, RegionListParams, RegionGetParams, Regions } from './regions';
 export { SearchListResponse, SearchListParams, Searches } from './searches';

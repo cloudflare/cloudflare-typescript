@@ -9,13 +9,12 @@ export class DirectUploads extends APIResource {
    * Creates a direct upload that allows video uploads without an API key.
    */
   create(
-    accountId: string,
     params: DirectUploadCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DirectUploadCreateResponse> {
-    const { 'Upload-Creator': uploadCreator, ...body } = params;
+    const { account_id, 'Upload-Creator': uploadCreator, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/stream/direct_upload`, {
+      this._client.post(`/accounts/${account_id}/stream/direct_upload`, {
         body,
         ...options,
         headers: { 'Upload-Creator': uploadCreator || '', ...options?.headers },
@@ -116,6 +115,11 @@ export namespace DirectUploadCreateResponse {
 }
 
 export interface DirectUploadCreateParams {
+  /**
+   * Path param: The account identifier tag.
+   */
+  account_id: string;
+
   /**
    * Body param: The maximum duration in seconds for a video upload. Can be set for a
    * video that is not yet uploaded to limit its duration. Uploads that exceed the

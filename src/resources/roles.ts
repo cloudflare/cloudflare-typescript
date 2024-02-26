@@ -8,9 +8,10 @@ export class Roles extends APIResource {
   /**
    * Get all available roles for an account.
    */
-  list(accountId: unknown, options?: Core.RequestOptions): Core.APIPromise<RoleListResponse | null> {
+  list(params: RoleListParams, options?: Core.RequestOptions): Core.APIPromise<RoleListResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/roles`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/roles`, options) as Core.APIPromise<{
         result: RoleListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -19,9 +20,14 @@ export class Roles extends APIResource {
   /**
    * Get information about a specific role for an account.
    */
-  get(accountId: unknown, roleId: unknown, options?: Core.RequestOptions): Core.APIPromise<RoleGetResponse> {
+  get(
+    roleId: unknown,
+    params: RoleGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RoleGetResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/roles/${roleId}`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/roles/${roleId}`, options) as Core.APIPromise<{
         result: RoleGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -56,7 +62,17 @@ export namespace RoleListResponse {
 
 export type RoleGetResponse = unknown | string | null;
 
+export interface RoleListParams {
+  account_id: unknown;
+}
+
+export interface RoleGetParams {
+  account_id: unknown;
+}
+
 export namespace Roles {
   export import RoleListResponse = RolesAPI.RoleListResponse;
   export import RoleGetResponse = RolesAPI.RoleGetResponse;
+  export import RoleListParams = RolesAPI.RoleListParams;
+  export import RoleGetParams = RolesAPI.RoleGetParams;
 }

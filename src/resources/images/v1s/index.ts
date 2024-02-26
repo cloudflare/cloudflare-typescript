@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless.
 
-export { Blobs } from './blobs';
-export { KeyListResponse, Keys } from './keys';
-export { StatGetResponse, Stats } from './stats';
+export { BlobGetParams, Blobs } from './blobs';
+export { KeyListResponse, KeyListParams, Keys } from './keys';
+export { StatGetResponse, StatGetParams, Stats } from './stats';
 export {
   V1CreateResponse,
   V1ListResponse,
@@ -11,7 +11,9 @@ export {
   V1GetResponse,
   V1CreateParams,
   V1ListParams,
+  V1DeleteParams,
   V1EditParams,
+  V1GetParams,
   V1ListResponsesV4PagePagination,
   V1s,
 } from './v1s';
@@ -22,6 +24,9 @@ export {
   VariantEditResponse,
   VariantGetResponse,
   VariantCreateParams,
+  VariantListParams,
+  VariantDeleteParams,
   VariantEditParams,
+  VariantGetParams,
   Variants,
 } from './variants';

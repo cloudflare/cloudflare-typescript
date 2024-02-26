@@ -17,4 +17,5 @@ export namespace KV {
   export import NamespaceCreateParams = NamespacesAPI.NamespaceCreateParams;
   export import NamespaceUpdateParams = NamespacesAPI.NamespaceUpdateParams;
   export import NamespaceListParams = NamespacesAPI.NamespaceListParams;
+  export import NamespaceDeleteParams = NamespacesAPI.NamespaceDeleteParams;
 }

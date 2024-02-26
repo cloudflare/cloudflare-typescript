@@ -9,12 +9,12 @@ export class Ownerships extends APIResource {
    * Adds an AWS or GCP bucket to use with full packet captures.
    */
   create(
-    accountId: string,
-    body: OwnershipCreateParams,
+    params: OwnershipCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OwnershipCreateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/pcaps/ownership`, { body, ...options }) as Core.APIPromise<{
+      this._client.post(`/accounts/${account_id}/pcaps/ownership`, { body, ...options }) as Core.APIPromise<{
         result: OwnershipCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -23,8 +23,13 @@ export class Ownerships extends APIResource {
   /**
    * Deletes buckets added to the packet captures API.
    */
-  delete(accountId: string, ownershipId: string, options?: Core.RequestOptions): Core.APIPromise<void> {
-    return this._client.delete(`/accounts/${accountId}/pcaps/ownership/${ownershipId}`, {
+  delete(
+    ownershipId: string,
+    params: OwnershipDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<void> {
+    const { account_id } = params;
+    return this._client.delete(`/accounts/${account_id}/pcaps/ownership/${ownershipId}`, {
       ...options,
       headers: { Accept: '*/*', ...options?.headers },
     });
@@ -33,9 +38,13 @@ export class Ownerships extends APIResource {
   /**
    * List all buckets configured for use with PCAPs API.
    */
-  get(accountId: string, options?: Core.RequestOptions): Core.APIPromise<OwnershipGetResponse | null> {
+  get(
+    params: OwnershipGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<OwnershipGetResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/pcaps/ownership`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/pcaps/ownership`, options) as Core.APIPromise<{
         result: OwnershipGetResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -45,12 +54,12 @@ export class Ownerships extends APIResource {
    * Validates buckets added to the packet captures API.
    */
   validate(
-    accountId: string,
-    body: OwnershipValidateParams,
+    params: OwnershipValidateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OwnershipValidateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/pcaps/ownership/validate`, {
+      this._client.post(`/accounts/${account_id}/pcaps/ownership/validate`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: OwnershipValidateResponse }>
@@ -160,19 +169,45 @@ export interface OwnershipValidateResponse {
 
 export interface OwnershipCreateParams {
   /**
-   * The full URI for the bucket. This field only applies to `full` packet captures.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: The full URI for the bucket. This field only applies to `full`
+   * packet captures.
    */
   destination_conf: string;
 }
 
+export interface OwnershipDeleteParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface OwnershipGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export interface OwnershipValidateParams {
   /**
-   * The full URI for the bucket. This field only applies to `full` packet captures.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: The full URI for the bucket. This field only applies to `full`
+   * packet captures.
    */
   destination_conf: string;
 
   /**
-   * The ownership challenge filename stored in the bucket.
+   * Body param: The ownership challenge filename stored in the bucket.
    */
   ownership_challenge: string;
 }
@@ -182,5 +217,7 @@ export namespace Ownerships {
   export import OwnershipGetResponse = OwnershipsAPI.OwnershipGetResponse;
   export import OwnershipValidateResponse = OwnershipsAPI.OwnershipValidateResponse;
   export import OwnershipCreateParams = OwnershipsAPI.OwnershipCreateParams;
+  export import OwnershipDeleteParams = OwnershipsAPI.OwnershipDeleteParams;
+  export import OwnershipGetParams = OwnershipsAPI.OwnershipGetParams;
   export import OwnershipValidateParams = OwnershipsAPI.OwnershipValidateParams;
 }

@@ -11,13 +11,13 @@ export class Outputs extends APIResource {
    * input — one live input can have many outputs.
    */
   create(
-    accountId: string,
     liveInputIdentifier: string,
-    body: OutputCreateParams,
+    params: OutputCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OutputCreateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/stream/live_inputs/${liveInputIdentifier}/outputs`, {
+      this._client.post(`/accounts/${account_id}/stream/live_inputs/${liveInputIdentifier}/outputs`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: OutputCreateResponse }>
@@ -28,15 +28,15 @@ export class Outputs extends APIResource {
    * Updates the state of an output.
    */
   update(
-    accountId: string,
     liveInputIdentifier: string,
     outputIdentifier: string,
-    body: OutputUpdateParams,
+    params: OutputUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OutputUpdateResponse> {
+    const { account_id, ...body } = params;
     return (
       this._client.put(
-        `/accounts/${accountId}/stream/live_inputs/${liveInputIdentifier}/outputs/${outputIdentifier}`,
+        `/accounts/${account_id}/stream/live_inputs/${liveInputIdentifier}/outputs/${outputIdentifier}`,
         { body, ...options },
       ) as Core.APIPromise<{ result: OutputUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -46,13 +46,14 @@ export class Outputs extends APIResource {
    * Retrieves all outputs associated with a specified live input.
    */
   list(
-    accountId: string,
     liveInputIdentifier: string,
+    params: OutputListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OutputListResponse> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountId}/stream/live_inputs/${liveInputIdentifier}/outputs`,
+        `/accounts/${account_id}/stream/live_inputs/${liveInputIdentifier}/outputs`,
         options,
       ) as Core.APIPromise<{ result: OutputListResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -62,13 +63,14 @@ export class Outputs extends APIResource {
    * Deletes an output and removes it from the associated live input.
    */
   delete(
-    accountId: string,
     liveInputIdentifier: string,
     outputIdentifier: string,
+    params: OutputDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<void> {
+    const { account_id } = params;
     return this._client.delete(
-      `/accounts/${accountId}/stream/live_inputs/${liveInputIdentifier}/outputs/${outputIdentifier}`,
+      `/accounts/${account_id}/stream/live_inputs/${liveInputIdentifier}/outputs/${outputIdentifier}`,
       { ...options, headers: { Accept: '*/*', ...options?.headers } },
     );
   }
@@ -158,34 +160,58 @@ export namespace OutputListResponse {
 
 export interface OutputCreateParams {
   /**
-   * The streamKey used to authenticate against an output's target.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: The streamKey used to authenticate against an output's target.
    */
   streamKey: string;
 
   /**
-   * The URL an output uses to restream.
+   * Body param: The URL an output uses to restream.
    */
   url: string;
 
   /**
-   * When enabled, live video streamed to the associated live input will be sent to
-   * the output URL. When disabled, live video will not be sent to the output URL,
-   * even when streaming to the associated live input. Use this to control precisely
-   * when you start and stop simulcasting to specific destinations like YouTube and
-   * Twitch.
+   * Body param: When enabled, live video streamed to the associated live input will
+   * be sent to the output URL. When disabled, live video will not be sent to the
+   * output URL, even when streaming to the associated live input. Use this to
+   * control precisely when you start and stop simulcasting to specific destinations
+   * like YouTube and Twitch.
    */
   enabled?: boolean;
 }
 
 export interface OutputUpdateParams {
   /**
-   * When enabled, live video streamed to the associated live input will be sent to
-   * the output URL. When disabled, live video will not be sent to the output URL,
-   * even when streaming to the associated live input. Use this to control precisely
-   * when you start and stop simulcasting to specific destinations like YouTube and
-   * Twitch.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: When enabled, live video streamed to the associated live input will
+   * be sent to the output URL. When disabled, live video will not be sent to the
+   * output URL, even when streaming to the associated live input. Use this to
+   * control precisely when you start and stop simulcasting to specific destinations
+   * like YouTube and Twitch.
    */
   enabled: boolean;
+}
+
+export interface OutputListParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface OutputDeleteParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
 }
 
 export namespace Outputs {
@@ -194,4 +220,6 @@ export namespace Outputs {
   export import OutputListResponse = OutputsAPI.OutputListResponse;
   export import OutputCreateParams = OutputsAPI.OutputCreateParams;
   export import OutputUpdateParams = OutputsAPI.OutputUpdateParams;
+  export import OutputListParams = OutputsAPI.OutputListParams;
+  export import OutputDeleteParams = OutputsAPI.OutputDeleteParams;
 }

@@ -8,8 +8,13 @@ export class Subnets extends APIResource {
   /**
    * Get ASN Subnets
    */
-  list(accountId: string, asn: number, options?: Core.RequestOptions): Core.APIPromise<SubnetListResponse> {
-    return this._client.get(`/accounts/${accountId}/intel/asn/${asn}/subnets`, options);
+  list(
+    asn: number,
+    params: SubnetListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SubnetListResponse> {
+    const { account_id } = params;
+    return this._client.get(`/accounts/${account_id}/intel/asn/${asn}/subnets`, options);
   }
 }
 
@@ -36,6 +41,14 @@ export interface SubnetListResponse {
   subnets?: Array<string>;
 }
 
+export interface SubnetListParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export namespace Subnets {
   export import SubnetListResponse = SubnetsAPI.SubnetListResponse;
+  export import SubnetListParams = SubnetsAPI.SubnetListParams;
 }

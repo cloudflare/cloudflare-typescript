@@ -8,24 +8,23 @@ export class Settings extends APIResource {
   /**
    * Patch Universal SSL Settings for a Zone.
    */
-  edit(
-    zoneId: string,
-    body: SettingEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SettingEditResponse> {
+  edit(params: SettingEditParams, options?: Core.RequestOptions): Core.APIPromise<SettingEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/ssl/universal/settings`, { body, ...options }) as Core.APIPromise<{
-        result: SettingEditResponse;
-      }>
+      this._client.patch(`/zones/${zone_id}/ssl/universal/settings`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: SettingEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get Universal SSL Settings for a Zone.
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<SettingGetResponse> {
+  get(params: SettingGetParams, options?: Core.RequestOptions): Core.APIPromise<SettingGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/ssl/universal/settings`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/ssl/universal/settings`, options) as Core.APIPromise<{
         result: SettingGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -96,11 +95,16 @@ export interface SettingGetResponse {
 
 export interface SettingEditParams {
   /**
-   * Disabling Universal SSL removes any currently active Universal SSL certificates
-   * for your zone from the edge and prevents any future Universal SSL certificates
-   * from being ordered. If there are no advanced certificates or custom certificates
-   * uploaded for the domain, visitors will be unable to access the domain over
-   * HTTPS.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Disabling Universal SSL removes any currently active Universal SSL
+   * certificates for your zone from the edge and prevents any future Universal SSL
+   * certificates from being ordered. If there are no advanced certificates or custom
+   * certificates uploaded for the domain, visitors will be unable to access the
+   * domain over HTTPS.
    *
    * By disabling Universal SSL, you understand that the following Cloudflare
    * settings and preferences will result in visitors being unable to visit your
@@ -125,8 +129,16 @@ export interface SettingEditParams {
   enabled?: boolean;
 }
 
+export interface SettingGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
 export namespace Settings {
   export import SettingEditResponse = SettingsAPI.SettingEditResponse;
   export import SettingGetResponse = SettingsAPI.SettingGetResponse;
   export import SettingEditParams = SettingsAPI.SettingEditParams;
+  export import SettingGetParams = SettingsAPI.SettingGetParams;
 }

@@ -10,12 +10,12 @@ export class TrueClientIPHeader extends APIResource {
    * headers we send to the origin. This is limited to Enterprise Zones.
    */
   edit(
-    zoneId: string,
-    body: TrueClientIPHeaderEditParams,
+    params: TrueClientIPHeaderEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TrueClientIPHeaderEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/settings/true_client_ip_header`, {
+      this._client.patch(`/zones/${zone_id}/settings/true_client_ip_header`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: TrueClientIPHeaderEditResponse }>
@@ -26,9 +26,13 @@ export class TrueClientIPHeader extends APIResource {
    * Allows customer to continue to use True Client IP (Akamai feature) in the
    * headers we send to the origin. This is limited to Enterprise Zones.
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<TrueClientIPHeaderGetResponse> {
+  get(
+    params: TrueClientIPHeaderGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TrueClientIPHeaderGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/settings/true_client_ip_header`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/settings/true_client_ip_header`, options) as Core.APIPromise<{
         result: TrueClientIPHeaderGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -91,13 +95,26 @@ export interface TrueClientIPHeaderGetResponse {
 
 export interface TrueClientIPHeaderEditParams {
   /**
-   * Value of the zone setting.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Value of the zone setting.
    */
   value: 'on' | 'off';
+}
+
+export interface TrueClientIPHeaderGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }
 
 export namespace TrueClientIPHeader {
   export import TrueClientIPHeaderEditResponse = TrueClientIPHeaderAPI.TrueClientIPHeaderEditResponse;
   export import TrueClientIPHeaderGetResponse = TrueClientIPHeaderAPI.TrueClientIPHeaderGetResponse;
   export import TrueClientIPHeaderEditParams = TrueClientIPHeaderAPI.TrueClientIPHeaderEditParams;
+  export import TrueClientIPHeaderGetParams = TrueClientIPHeaderAPI.TrueClientIPHeaderGetParams;
 }

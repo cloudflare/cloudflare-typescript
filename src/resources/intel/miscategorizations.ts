@@ -9,12 +9,12 @@ export class Miscategorizations extends APIResource {
    * Create Miscategorization
    */
   create(
-    accountId: string,
-    body: MiscategorizationCreateParams,
+    params: MiscategorizationCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MiscategorizationCreateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/intel/miscategorization`, {
+      this._client.post(`/accounts/${account_id}/intel/miscategorization`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: MiscategorizationCreateResponse }>
@@ -26,35 +26,43 @@ export type MiscategorizationCreateResponse = unknown | string;
 
 export interface MiscategorizationCreateParams {
   /**
-   * Content category IDs to add.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: Content category IDs to add.
    */
   content_adds?: unknown;
 
   /**
-   * Content category IDs to remove.
+   * Body param: Content category IDs to remove.
    */
   content_removes?: unknown;
 
+  /**
+   * Body param:
+   */
   indicator_type?: 'domain' | 'ipv4' | 'ipv6' | 'url';
 
   /**
-   * Provide only if indicator_type is `ipv4` or `ipv6`.
+   * Body param: Provide only if indicator_type is `ipv4` or `ipv6`.
    */
   ip?: unknown;
 
   /**
-   * Security category IDs to add.
+   * Body param: Security category IDs to add.
    */
   security_adds?: unknown;
 
   /**
-   * Security category IDs to remove.
+   * Body param: Security category IDs to remove.
    */
   security_removes?: unknown;
 
   /**
-   * Provide only if indicator_type is `domain` or `url`. Example if indicator_type
-   * is `domain`: `example.com`. Example if indicator_type is `url`:
+   * Body param: Provide only if indicator_type is `domain` or `url`. Example if
+   * indicator_type is `domain`: `example.com`. Example if indicator_type is `url`:
    * `https://example.com/news/`.
    */
   url?: string;

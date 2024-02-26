@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as NetworksAPI from 'cloudflare/resources/teamnets/routes/networks';
 
 export class Networks extends APIResource {
@@ -11,13 +10,13 @@ export class Networks extends APIResource {
    * `ip_network_encoded` must be written in URL-encoded format.
    */
   create(
-    accountId: string,
     ipNetworkEncoded: string,
-    body: NetworkCreateParams,
+    params: NetworkCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<NetworkCreateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/teamnet/routes/network/${ipNetworkEncoded}`, {
+      this._client.post(`/accounts/${account_id}/teamnet/routes/network/${ipNetworkEncoded}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: NetworkCreateResponse }>
@@ -34,28 +33,13 @@ export class Networks extends APIResource {
    * based on the vnet and tun_type.
    */
   delete(
-    accountId: string,
     ipNetworkEncoded: string,
-    params?: NetworkDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<NetworkDeleteResponse>;
-  delete(
-    accountId: string,
-    ipNetworkEncoded: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<NetworkDeleteResponse>;
-  delete(
-    accountId: string,
-    ipNetworkEncoded: string,
-    params: NetworkDeleteParams | Core.RequestOptions = {},
+    params: NetworkDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<NetworkDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(accountId, ipNetworkEncoded, {}, params);
-    }
-    const { tun_type } = params;
+    const { account_id, tun_type } = params;
     return (
-      this._client.delete(`/accounts/${accountId}/teamnet/routes/network/${ipNetworkEncoded}`, {
+      this._client.delete(`/accounts/${account_id}/teamnet/routes/network/${ipNetworkEncoded}`, {
         query: { tun_type },
         ...options,
       }) as Core.APIPromise<{ result: NetworkDeleteResponse }>
@@ -67,13 +51,14 @@ export class Networks extends APIResource {
    * `ip_network_encoded` must be written in URL-encoded format.
    */
   edit(
-    accountId: string,
     ipNetworkEncoded: string,
+    params: NetworkEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<NetworkEditResponse> {
+    const { account_id } = params;
     return (
       this._client.patch(
-        `/accounts/${accountId}/teamnet/routes/network/${ipNetworkEncoded}`,
+        `/accounts/${account_id}/teamnet/routes/network/${ipNetworkEncoded}`,
         options,
       ) as Core.APIPromise<{ result: NetworkEditResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -202,23 +187,40 @@ export interface NetworkEditResponse {
 
 export interface NetworkCreateParams {
   /**
-   * Optional remark describing the route.
+   * Path param: Cloudflare account ID
+   */
+  account_id: string;
+
+  /**
+   * Body param: Optional remark describing the route.
    */
   comment?: string;
 
   /**
-   * UUID of the Tunnel Virtual Network this route belongs to. If no virtual networks
-   * are configured, the route is assigned to the default virtual network of the
-   * account.
+   * Body param: UUID of the Tunnel Virtual Network this route belongs to. If no
+   * virtual networks are configured, the route is assigned to the default virtual
+   * network of the account.
    */
   virtual_network_id?: unknown;
 }
 
 export interface NetworkDeleteParams {
   /**
-   * The type of tunnel.
+   * Path param: Cloudflare account ID
+   */
+  account_id: string;
+
+  /**
+   * Query param: The type of tunnel.
    */
   tun_type?: 'cfd_tunnel' | 'warp_connector' | 'ip_sec' | 'gre' | 'cni';
+}
+
+export interface NetworkEditParams {
+  /**
+   * Cloudflare account ID
+   */
+  account_id: string;
 }
 
 export namespace Networks {
@@ -227,4 +229,5 @@ export namespace Networks {
   export import NetworkEditResponse = NetworksAPI.NetworkEditResponse;
   export import NetworkCreateParams = NetworksAPI.NetworkCreateParams;
   export import NetworkDeleteParams = NetworksAPI.NetworkDeleteParams;
+  export import NetworkEditParams = NetworksAPI.NetworkEditParams;
 }

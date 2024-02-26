@@ -5,6 +5,8 @@ export {
   DomainListResponse,
   DomainGetResponse,
   DomainUpdateParams,
+  DomainListParams,
+  DomainGetParams,
   Domains,
 } from './domains';
 export { Registrar } from './registrar';

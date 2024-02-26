@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless.
 
-export { ItemListResponse, Items } from './items';
+export { ItemListResponse, ItemListParams, Items } from './items';
 export {
   ListCreateResponse,
   ListUpdateResponse,
@@ -10,6 +10,9 @@ export {
   ListGetResponse,
   ListCreateParams,
   ListUpdateParams,
+  ListListParams,
+  ListDeleteParams,
   ListEditParams,
+  ListGetParams,
   Lists,
 } from './lists';

@@ -15,10 +15,10 @@ const cloudflare = new Cloudflare({
 describe('resource hostnames', () => {
   // skipped: tests are disabled for the time being
   test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.originTLSClientAuth.hostnames.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      { config: [{}, {}, {}] },
-    );
+    const responsePromise = cloudflare.originTLSClientAuth.hostnames.update({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      config: [{}, {}, {}],
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -30,24 +30,21 @@ describe('resource hostnames', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.originTLSClientAuth.hostnames.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      {
-        config: [
-          { cert_id: '2458ce5a-0c35-4c7f-82c7-8e9487d3ff60', enabled: true, hostname: 'app.example.com' },
-          { cert_id: '2458ce5a-0c35-4c7f-82c7-8e9487d3ff60', enabled: true, hostname: 'app.example.com' },
-          { cert_id: '2458ce5a-0c35-4c7f-82c7-8e9487d3ff60', enabled: true, hostname: 'app.example.com' },
-        ],
-      },
-    );
+    const response = await cloudflare.originTLSClientAuth.hostnames.update({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      config: [
+        { cert_id: '2458ce5a-0c35-4c7f-82c7-8e9487d3ff60', enabled: true, hostname: 'app.example.com' },
+        { cert_id: '2458ce5a-0c35-4c7f-82c7-8e9487d3ff60', enabled: true, hostname: 'app.example.com' },
+        { cert_id: '2458ce5a-0c35-4c7f-82c7-8e9487d3ff60', enabled: true, hostname: 'app.example.com' },
+      ],
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
-    const responsePromise = cloudflare.originTLSClientAuth.hostnames.get(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'app.example.com',
-    );
+  test.skip('get: only required params', async () => {
+    const responsePromise = cloudflare.originTLSClientAuth.hostnames.get('app.example.com', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -58,12 +55,9 @@ describe('resource hostnames', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.originTLSClientAuth.hostnames.get('023e105f4ecef8ad9ca31a8372d0c353', 'app.example.com', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.originTLSClientAuth.hostnames.get('app.example.com', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 });

@@ -17,7 +17,7 @@ describe('resource identityProviders', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.access.identityProviders.create({
       account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'string',
       config: {},
       name: 'Widget Corps IDP',
       type: 'onetimepin',
@@ -35,7 +35,7 @@ describe('resource identityProviders', () => {
   test.skip('create: required and optional params', async () => {
     const response = await cloudflare.access.identityProviders.create({
       account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'string',
       config: {
         client_id: '<your client id>',
         client_secret: '<your client secret>',
@@ -83,13 +83,7 @@ describe('resource identityProviders', () => {
   test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.access.identityProviders.update(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      {
-        account_id: 'string',
-        zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-        config: {},
-        name: 'Widget Corps IDP',
-        type: 'onetimepin',
-      },
+      { account_id: 'string', zone_id: 'string', config: {}, name: 'Widget Corps IDP', type: 'onetimepin' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -106,7 +100,7 @@ describe('resource identityProviders', () => {
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       {
         account_id: 'string',
-        zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        zone_id: 'string',
         config: {
           client_id: '<your client id>',
           client_secret: '<your client secret>',
@@ -155,7 +149,7 @@ describe('resource identityProviders', () => {
   test.skip('list: only required params', async () => {
     const responsePromise = cloudflare.access.identityProviders.list({
       account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'string',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -170,7 +164,7 @@ describe('resource identityProviders', () => {
   test.skip('list: required and optional params', async () => {
     const response = await cloudflare.access.identityProviders.list({
       account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'string',
     });
   });
 
@@ -178,7 +172,7 @@ describe('resource identityProviders', () => {
   test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.access.identityProviders.delete(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { account_id: 'string', zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      { account_id: 'string', zone_id: 'string' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -193,7 +187,7 @@ describe('resource identityProviders', () => {
   test.skip('delete: required and optional params', async () => {
     const response = await cloudflare.access.identityProviders.delete(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { account_id: 'string', zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      { account_id: 'string', zone_id: 'string' },
     );
   });
 
@@ -201,7 +195,7 @@ describe('resource identityProviders', () => {
   test.skip('get: only required params', async () => {
     const responsePromise = cloudflare.access.identityProviders.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'string',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -216,7 +210,7 @@ describe('resource identityProviders', () => {
   test.skip('get: required and optional params', async () => {
     const response = await cloudflare.access.identityProviders.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'string',
     });
   });
 });

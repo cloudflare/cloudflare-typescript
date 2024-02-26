@@ -8,9 +8,13 @@ export class AppTypes extends APIResource {
   /**
    * Fetches all application and application type mappings.
    */
-  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<AppTypeListResponse | null> {
+  list(
+    params: AppTypeListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AppTypeListResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/gateway/app_types`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/gateway/app_types`, options) as Core.APIPromise<{
         result: AppTypeListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -63,6 +67,14 @@ export namespace AppTypeListResponse {
   }
 }
 
+export interface AppTypeListParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export namespace AppTypes {
   export import AppTypeListResponse = AppTypesAPI.AppTypeListResponse;
+  export import AppTypeListParams = AppTypesAPI.AppTypeListParams;
 }

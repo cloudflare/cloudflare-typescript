@@ -9,21 +9,32 @@ export class Unrevokes extends APIResource {
    * Unrevokes a list of devices.
    */
   create(
-    accountId: unknown,
-    body: UnrevokeCreateParams,
+    params: UnrevokeCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<UnrevokeCreateResponse | null> {
+    const { account_id, body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/devices/unrevoke`, { body, ...options }) as Core.APIPromise<{
-        result: UnrevokeCreateResponse | null;
-      }>
+      this._client.post(`/accounts/${account_id}/devices/unrevoke`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: UnrevokeCreateResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
 export type UnrevokeCreateResponse = unknown | string;
 
-export type UnrevokeCreateParams = Array<string>;
+export interface UnrevokeCreateParams {
+  /**
+   * Path param:
+   */
+  account_id: unknown;
+
+  /**
+   * Body param: A list of device ids to unrevoke.
+   */
+  body: Array<string>;
+}
 
 export namespace Unrevokes {
   export import UnrevokeCreateResponse = UnrevokesAPI.UnrevokeCreateResponse;

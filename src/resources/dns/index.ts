@@ -9,7 +9,9 @@ export {
   FirewallGetResponse,
   FirewallCreateParams,
   FirewallListParams,
+  FirewallDeleteParams,
   FirewallEditParams,
+  FirewallGetParams,
   FirewallListResponsesV4PagePaginationArray,
   Firewall,
 } from './firewall/index';
@@ -26,8 +28,12 @@ export {
   RecordCreateParams,
   RecordUpdateParams,
   RecordListParams,
+  RecordDeleteParams,
   RecordEditParams,
+  RecordExportParams,
+  RecordGetParams,
   RecordImportParams,
+  RecordScanParams,
   RecordListResponsesV4PagePaginationArray,
   Records,
 } from './records';

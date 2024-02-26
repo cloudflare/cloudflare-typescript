@@ -4,12 +4,14 @@ export {
   ConnectionListResponse,
   ConnectionGetResponse,
   ConnectionListParams,
+  ConnectionGetParams,
   Connections,
 } from './connections';
 export {
   PageShieldUpdateResponse,
   PageShieldListResponse,
   PageShieldUpdateParams,
+  PageShieldListParams,
   PageShield,
 } from './page-shield';
 export {
@@ -19,6 +21,9 @@ export {
   PolicyGetResponse,
   PolicyCreateParams,
   PolicyUpdateParams,
+  PolicyListParams,
+  PolicyDeleteParams,
+  PolicyGetParams,
   Policies,
 } from './policies';
-export { ScriptListResponse, ScriptGetResponse, ScriptListParams, Scripts } from './scripts';
+export { ScriptListResponse, ScriptGetResponse, ScriptListParams, ScriptGetParams, Scripts } from './scripts';

@@ -20,15 +20,14 @@ export class Scripts extends APIResource {
    * Upload a worker module.
    */
   update(
-    accountId: string,
     scriptName: string,
     params: ScriptUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ScriptUpdateResponse> {
-    const { rollback_to, ...body } = params;
+    const { account_id, rollback_to, ...body } = params;
     return (
       this._client.put(
-        `/accounts/${accountId}/workers/scripts/${scriptName}`,
+        `/accounts/${account_id}/workers/scripts/${scriptName}`,
         maybeMultipartFormRequestOptions({ query: { rollback_to }, body, ...options }),
       ) as Core.APIPromise<{ result: ScriptUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -37,9 +36,10 @@ export class Scripts extends APIResource {
   /**
    * Fetch a list of uploaded workers.
    */
-  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<ScriptListResponse> {
+  list(params: ScriptListParams, options?: Core.RequestOptions): Core.APIPromise<ScriptListResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/workers/scripts`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/workers/scripts`, options) as Core.APIPromise<{
         result: ScriptListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -49,13 +49,12 @@ export class Scripts extends APIResource {
    * Delete your worker. This call has no response body on a successful delete.
    */
   delete(
-    accountId: string,
     scriptName: string,
     params: ScriptDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<void> {
-    const { force } = params;
-    return this._client.delete(`/accounts/${accountId}/workers/scripts/${scriptName}`, {
+    const { account_id, force } = params;
+    return this._client.delete(`/accounts/${account_id}/workers/scripts/${scriptName}`, {
       query: { force },
       ...options,
       headers: { Accept: '*/*', ...options?.headers },
@@ -66,8 +65,9 @@ export class Scripts extends APIResource {
    * Fetch raw script content for your worker. Note this is the original script
    * content, not JSON encoded.
    */
-  get(accountId: string, scriptName: string, options?: Core.RequestOptions): Core.APIPromise<Response> {
-    return this._client.get(`/accounts/${accountId}/workers/scripts/${scriptName}`, {
+  get(scriptName: string, params: ScriptGetParams, options?: Core.RequestOptions): Core.APIPromise<Response> {
+    const { account_id } = params;
+    return this._client.get(`/accounts/${account_id}/workers/scripts/${scriptName}`, {
       ...options,
       __binaryResponse: true,
     });
@@ -217,6 +217,11 @@ export namespace ScriptListResponse {
 }
 
 export interface ScriptUpdateParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
   /**
    * Query param: Rollback to provided deployment based on deployment ID. Request
    * body will only parse a "message" part. You can learn more about deployments
@@ -463,32 +468,59 @@ export namespace ScriptUpdateParams {
   }
 }
 
+export interface ScriptListParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export interface ScriptDeleteParams {
   /**
-   * If set to true, delete will not be stopped by associated service binding,
-   * durable object, or other binding. Any of these associated bindings/durable
-   * objects will be deleted along with the script.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Query param: If set to true, delete will not be stopped by associated service
+   * binding, durable object, or other binding. Any of these associated
+   * bindings/durable objects will be deleted along with the script.
    */
   force?: boolean;
+}
+
+export interface ScriptGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
 }
 
 export namespace Scripts {
   export import ScriptUpdateResponse = ScriptsAPI.ScriptUpdateResponse;
   export import ScriptListResponse = ScriptsAPI.ScriptListResponse;
   export import ScriptUpdateParams = ScriptsAPI.ScriptUpdateParams;
+  export import ScriptListParams = ScriptsAPI.ScriptListParams;
   export import ScriptDeleteParams = ScriptsAPI.ScriptDeleteParams;
+  export import ScriptGetParams = ScriptsAPI.ScriptGetParams;
   export import Bindings = BindingsAPI.Bindings;
   export import BindingListResponse = BindingsAPI.BindingListResponse;
+  export import BindingListParams = BindingsAPI.BindingListParams;
   export import Schedules = SchedulesAPI.Schedules;
   export import ScheduleUpdateResponse = SchedulesAPI.ScheduleUpdateResponse;
   export import ScheduleListResponse = SchedulesAPI.ScheduleListResponse;
   export import ScheduleUpdateParams = SchedulesAPI.ScheduleUpdateParams;
+  export import ScheduleListParams = SchedulesAPI.ScheduleListParams;
   export import Tail = TailAPI.Tail;
   export import TailCreateResponse = TailAPI.TailCreateResponse;
   export import TailListResponse = TailAPI.TailListResponse;
   export import TailDeleteResponse = TailAPI.TailDeleteResponse;
+  export import TailCreateParams = TailAPI.TailCreateParams;
+  export import TailListParams = TailAPI.TailListParams;
+  export import TailDeleteParams = TailAPI.TailDeleteParams;
   export import UsageModel = UsageModelAPI.UsageModel;
   export import UsageModelUpdateResponse = UsageModelAPI.UsageModelUpdateResponse;
   export import UsageModelGetResponse = UsageModelAPI.UsageModelGetResponse;
   export import UsageModelUpdateParams = UsageModelAPI.UsageModelUpdateParams;
+  export import UsageModelGetParams = UsageModelAPI.UsageModelGetParams;
 }

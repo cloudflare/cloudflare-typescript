@@ -9,13 +9,13 @@ export class Statuses extends APIResource {
    * Advertise or withdraw BGP route for a prefix.
    */
   edit(
-    accountId: string,
     prefixId: string,
-    body: StatusEditParams,
+    params: StatusEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<StatusEditResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.patch(`/accounts/${accountId}/addressing/prefixes/${prefixId}/bgp/status`, {
+      this._client.patch(`/accounts/${account_id}/addressing/prefixes/${prefixId}/bgp/status`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: StatusEditResponse }>
@@ -26,13 +26,14 @@ export class Statuses extends APIResource {
    * List the current advertisement state for a prefix.
    */
   get(
-    accountId: string,
     prefixId: string,
+    params: StatusGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<StatusGetResponse> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountId}/addressing/prefixes/${prefixId}/bgp/status`,
+        `/accounts/${account_id}/addressing/prefixes/${prefixId}/bgp/status`,
         options,
       ) as Core.APIPromise<{ result: StatusGetResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -67,13 +68,26 @@ export interface StatusGetResponse {
 
 export interface StatusEditParams {
   /**
-   * Enablement of prefix advertisement to the Internet.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: Enablement of prefix advertisement to the Internet.
    */
   advertised: boolean;
+}
+
+export interface StatusGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
 }
 
 export namespace Statuses {
   export import StatusEditResponse = StatusesAPI.StatusEditResponse;
   export import StatusGetResponse = StatusesAPI.StatusGetResponse;
   export import StatusEditParams = StatusesAPI.StatusEditParams;
+  export import StatusGetParams = StatusesAPI.StatusGetParams;
 }

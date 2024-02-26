@@ -11,12 +11,12 @@ export class AutomaticPlatformOptimization extends APIResource {
    * fonts.
    */
   edit(
-    zoneId: string,
-    body: AutomaticPlatformOptimizationEditParams,
+    params: AutomaticPlatformOptimizationEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AutomaticPlatformOptimizationEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/settings/automatic_platform_optimization`, {
+      this._client.patch(`/zones/${zone_id}/settings/automatic_platform_optimization`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: AutomaticPlatformOptimizationEditResponse }>
@@ -29,12 +29,13 @@ export class AutomaticPlatformOptimization extends APIResource {
    * fonts.
    */
   get(
-    zoneId: string,
+    params: AutomaticPlatformOptimizationGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AutomaticPlatformOptimizationGetResponse> {
+    const { zone_id } = params;
     return (
       this._client.get(
-        `/zones/${zoneId}/settings/automatic_platform_optimization`,
+        `/zones/${zone_id}/settings/automatic_platform_optimization`,
         options,
       ) as Core.APIPromise<{ result: AutomaticPlatformOptimizationGetResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -116,6 +117,14 @@ export interface AutomaticPlatformOptimizationGetResponse {
 }
 
 export interface AutomaticPlatformOptimizationEditParams {
+  /**
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param:
+   */
   value: AutomaticPlatformOptimizationEditParams.Value;
 }
 
@@ -158,8 +167,16 @@ export namespace AutomaticPlatformOptimizationEditParams {
   }
 }
 
+export interface AutomaticPlatformOptimizationGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
 export namespace AutomaticPlatformOptimization {
   export import AutomaticPlatformOptimizationEditResponse = AutomaticPlatformOptimizationAPI.AutomaticPlatformOptimizationEditResponse;
   export import AutomaticPlatformOptimizationGetResponse = AutomaticPlatformOptimizationAPI.AutomaticPlatformOptimizationGetResponse;
   export import AutomaticPlatformOptimizationEditParams = AutomaticPlatformOptimizationAPI.AutomaticPlatformOptimizationEditParams;
+  export import AutomaticPlatformOptimizationGetParams = AutomaticPlatformOptimizationAPI.AutomaticPlatformOptimizationGetParams;
 }

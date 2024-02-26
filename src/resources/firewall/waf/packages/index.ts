@@ -6,8 +6,9 @@ export {
   GroupGetResponse,
   GroupListParams,
   GroupEditParams,
+  GroupGetParams,
   GroupListResponsesV4PagePaginationArray,
   Groups,
 } from './groups';
 export { Packages } from './packages';
-export { RuleEditResponse, RuleGetResponse, RuleEditParams, Rules } from './rules';
+export { RuleEditResponse, RuleGetResponse, RuleEditParams, RuleGetParams, Rules } from './rules';

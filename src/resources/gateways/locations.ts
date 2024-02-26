@@ -9,14 +9,15 @@ export class Locations extends APIResource {
    * Creates a new Zero Trust Gateway location.
    */
   create(
-    accountId: unknown,
-    body: LocationCreateParams,
+    params: LocationCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<LocationCreateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/gateway/locations`, { body, ...options }) as Core.APIPromise<{
-        result: LocationCreateResponse;
-      }>
+      this._client.post(`/accounts/${account_id}/gateway/locations`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: LocationCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -24,13 +25,13 @@ export class Locations extends APIResource {
    * Updates a configured Zero Trust Gateway location.
    */
   update(
-    accountId: unknown,
     locationId: unknown,
-    body: LocationUpdateParams,
+    params: LocationUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<LocationUpdateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.put(`/accounts/${accountId}/gateway/locations/${locationId}`, {
+      this._client.put(`/accounts/${account_id}/gateway/locations/${locationId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: LocationUpdateResponse }>
@@ -40,9 +41,13 @@ export class Locations extends APIResource {
   /**
    * Fetches Zero Trust Gateway locations for an account.
    */
-  list(accountId: unknown, options?: Core.RequestOptions): Core.APIPromise<LocationListResponse | null> {
+  list(
+    params: LocationListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LocationListResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/gateway/locations`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/gateway/locations`, options) as Core.APIPromise<{
         result: LocationListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -52,13 +57,14 @@ export class Locations extends APIResource {
    * Deletes a configured Zero Trust Gateway location.
    */
   delete(
-    accountId: unknown,
     locationId: unknown,
+    params: LocationDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<LocationDeleteResponse> {
+    const { account_id } = params;
     return (
       this._client.delete(
-        `/accounts/${accountId}/gateway/locations/${locationId}`,
+        `/accounts/${account_id}/gateway/locations/${locationId}`,
         options,
       ) as Core.APIPromise<{ result: LocationDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -68,14 +74,16 @@ export class Locations extends APIResource {
    * Fetches a single Zero Trust Gateway location.
    */
   get(
-    accountId: unknown,
     locationId: unknown,
+    params: LocationGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<LocationGetResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/gateway/locations/${locationId}`, options) as Core.APIPromise<{
-        result: LocationGetResponse;
-      }>
+      this._client.get(
+        `/accounts/${account_id}/gateway/locations/${locationId}`,
+        options,
+      ) as Core.APIPromise<{ result: LocationGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -288,22 +296,28 @@ export namespace LocationGetResponse {
 
 export interface LocationCreateParams {
   /**
-   * The name of the location.
+   * Path param:
+   */
+  account_id: unknown;
+
+  /**
+   * Body param: The name of the location.
    */
   name: string;
 
   /**
-   * True if the location is the default location.
+   * Body param: True if the location is the default location.
    */
   client_default?: boolean;
 
   /**
-   * True if the location needs to resolve EDNS queries.
+   * Body param: True if the location needs to resolve EDNS queries.
    */
   ecs_support?: boolean;
 
   /**
-   * A list of network ranges that requests from this location would originate from.
+   * Body param: A list of network ranges that requests from this location would
+   * originate from.
    */
   networks?: Array<LocationCreateParams.Network>;
 }
@@ -319,22 +333,28 @@ export namespace LocationCreateParams {
 
 export interface LocationUpdateParams {
   /**
-   * The name of the location.
+   * Path param:
+   */
+  account_id: unknown;
+
+  /**
+   * Body param: The name of the location.
    */
   name: string;
 
   /**
-   * True if the location is the default location.
+   * Body param: True if the location is the default location.
    */
   client_default?: boolean;
 
   /**
-   * True if the location needs to resolve EDNS queries.
+   * Body param: True if the location needs to resolve EDNS queries.
    */
   ecs_support?: boolean;
 
   /**
-   * A list of network ranges that requests from this location would originate from.
+   * Body param: A list of network ranges that requests from this location would
+   * originate from.
    */
   networks?: Array<LocationUpdateParams.Network>;
 }
@@ -348,6 +368,18 @@ export namespace LocationUpdateParams {
   }
 }
 
+export interface LocationListParams {
+  account_id: unknown;
+}
+
+export interface LocationDeleteParams {
+  account_id: unknown;
+}
+
+export interface LocationGetParams {
+  account_id: unknown;
+}
+
 export namespace Locations {
   export import LocationCreateResponse = LocationsAPI.LocationCreateResponse;
   export import LocationUpdateResponse = LocationsAPI.LocationUpdateResponse;
@@ -356,4 +388,7 @@ export namespace Locations {
   export import LocationGetResponse = LocationsAPI.LocationGetResponse;
   export import LocationCreateParams = LocationsAPI.LocationCreateParams;
   export import LocationUpdateParams = LocationsAPI.LocationUpdateParams;
+  export import LocationListParams = LocationsAPI.LocationListParams;
+  export import LocationDeleteParams = LocationsAPI.LocationDeleteParams;
+  export import LocationGetParams = LocationsAPI.LocationGetParams;
 }

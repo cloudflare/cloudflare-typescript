@@ -17,7 +17,7 @@ describe('resource rulesets', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.rulesets.create({
       account_id: 'string',
-      zone_id: 'abf9b32d38c5f572afde3336ec0ce302',
+      zone_id: 'string',
       kind: 'root',
       name: 'My ruleset',
       phase: 'http_request_firewall_custom',
@@ -36,7 +36,7 @@ describe('resource rulesets', () => {
   test.skip('create: required and optional params', async () => {
     const response = await cloudflare.rulesets.create({
       account_id: 'string',
-      zone_id: 'abf9b32d38c5f572afde3336ec0ce302',
+      zone_id: 'string',
       kind: 'root',
       name: 'My ruleset',
       phase: 'http_request_firewall_custom',
@@ -98,7 +98,7 @@ describe('resource rulesets', () => {
   test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.rulesets.update('2f2feab2026849078ba485f918791bdc', {
       account_id: 'string',
-      zone_id: 'abf9b32d38c5f572afde3336ec0ce302',
+      zone_id: 'string',
       id: '2f2feab2026849078ba485f918791bdc',
       rules: [{}, {}, {}],
     });
@@ -115,7 +115,7 @@ describe('resource rulesets', () => {
   test.skip('update: required and optional params', async () => {
     const response = await cloudflare.rulesets.update('2f2feab2026849078ba485f918791bdc', {
       account_id: 'string',
-      zone_id: 'abf9b32d38c5f572afde3336ec0ce302',
+      zone_id: 'string',
       id: '2f2feab2026849078ba485f918791bdc',
       rules: [
         {
@@ -176,10 +176,7 @@ describe('resource rulesets', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('list: only required params', async () => {
-    const responsePromise = cloudflare.rulesets.list({
-      account_id: 'string',
-      zone_id: 'abf9b32d38c5f572afde3336ec0ce302',
-    });
+    const responsePromise = cloudflare.rulesets.list({ account_id: 'string', zone_id: 'string' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -191,17 +188,14 @@ describe('resource rulesets', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('list: required and optional params', async () => {
-    const response = await cloudflare.rulesets.list({
-      account_id: 'string',
-      zone_id: 'abf9b32d38c5f572afde3336ec0ce302',
-    });
+    const response = await cloudflare.rulesets.list({ account_id: 'string', zone_id: 'string' });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.rulesets.delete('2f2feab2026849078ba485f918791bdc', {
       account_id: 'string',
-      zone_id: 'abf9b32d38c5f572afde3336ec0ce302',
+      zone_id: 'string',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -216,7 +210,7 @@ describe('resource rulesets', () => {
   test.skip('delete: required and optional params', async () => {
     const response = await cloudflare.rulesets.delete('2f2feab2026849078ba485f918791bdc', {
       account_id: 'string',
-      zone_id: 'abf9b32d38c5f572afde3336ec0ce302',
+      zone_id: 'string',
     });
   });
 
@@ -224,7 +218,7 @@ describe('resource rulesets', () => {
   test.skip('get: only required params', async () => {
     const responsePromise = cloudflare.rulesets.get('2f2feab2026849078ba485f918791bdc', {
       account_id: 'string',
-      zone_id: 'abf9b32d38c5f572afde3336ec0ce302',
+      zone_id: 'string',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -239,7 +233,7 @@ describe('resource rulesets', () => {
   test.skip('get: required and optional params', async () => {
     const response = await cloudflare.rulesets.get('2f2feab2026849078ba485f918791bdc', {
       account_id: 'string',
-      zone_id: 'abf9b32d38c5f572afde3336ec0ce302',
+      zone_id: 'string',
     });
   });
 });

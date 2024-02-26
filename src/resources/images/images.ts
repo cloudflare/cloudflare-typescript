@@ -19,7 +19,9 @@ export namespace Images {
   export import V1ListResponsesV4PagePagination = V1sAPI.V1ListResponsesV4PagePagination;
   export import V1CreateParams = V1sAPI.V1CreateParams;
   export import V1ListParams = V1sAPI.V1ListParams;
+  export import V1DeleteParams = V1sAPI.V1DeleteParams;
   export import V1EditParams = V1sAPI.V1EditParams;
+  export import V1GetParams = V1sAPI.V1GetParams;
   export import V2s = V2sAPI.V2s;
   export import V2ListResponse = V2sAPI.V2ListResponse;
   export import V2ListParams = V2sAPI.V2ListParams;

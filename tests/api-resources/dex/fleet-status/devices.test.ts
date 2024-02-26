@@ -15,7 +15,8 @@ const cloudflare = new Cloudflare({
 describe('resource devices', () => {
   // skipped: tests are disabled for the time being
   test.skip('list: only required params', async () => {
-    const responsePromise = cloudflare.dex.fleetStatus.devices.list('01a7362d577a6c3019a474fd6f485823', {
+    const responsePromise = cloudflare.dex.fleetStatus.devices.list({
+      account_id: '01a7362d577a6c3019a474fd6f485823',
       page: 1,
       per_page: 10,
       time_end: '2023-10-11T00:00:00Z',
@@ -32,7 +33,8 @@ describe('resource devices', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('list: required and optional params', async () => {
-    const response = await cloudflare.dex.fleetStatus.devices.list('01a7362d577a6c3019a474fd6f485823', {
+    const response = await cloudflare.dex.fleetStatus.devices.list({
+      account_id: '01a7362d577a6c3019a474fd6f485823',
       page: 1,
       per_page: 10,
       time_end: '2023-10-11T00:00:00Z',

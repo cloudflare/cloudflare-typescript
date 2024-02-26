@@ -11,12 +11,12 @@ export class Prioritize extends APIResource {
    * overlapping 'legacy_custom' certificates.
    */
   update(
-    zoneId: string,
-    body: PrioritizeUpdateParams,
+    params: PrioritizeUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PrioritizeUpdateResponse | null> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.put(`/zones/${zoneId}/custom_certificates/prioritize`, {
+      this._client.put(`/zones/${zone_id}/custom_certificates/prioritize`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: PrioritizeUpdateResponse | null }>
@@ -202,7 +202,12 @@ export namespace PrioritizeUpdateResponse {
 
 export interface PrioritizeUpdateParams {
   /**
-   * Array of ordered certificates.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Array of ordered certificates.
    */
   certificates: Array<PrioritizeUpdateParams.Certificate>;
 }

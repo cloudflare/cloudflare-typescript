@@ -2,4 +2,4 @@
 
 export { Addressing } from './addressing';
 export { Prefixes } from './prefixes/index';
-export { ServiceListResponse, Services } from './services';
+export { ServiceListResponse, ServiceListParams, Services } from './services';

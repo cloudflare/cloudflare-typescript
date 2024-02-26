@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as RecordsAPI from 'cloudflare/resources/dns/records';
 import { multipartFormRequestOptions } from 'cloudflare/core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
@@ -18,13 +17,10 @@ export class Records extends APIResource {
    * - Domain names are always represented in Punycode, even if Unicode characters
    *   were used when creating the record.
    */
-  create(
-    zoneId: string,
-    body: RecordCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RecordCreateResponse> {
+  create(params: RecordCreateParams, options?: Core.RequestOptions): Core.APIPromise<RecordCreateResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.post(`/zones/${zoneId}/dns_records`, { body, ...options }) as Core.APIPromise<{
+      this._client.post(`/zones/${zone_id}/dns_records`, { body, ...options }) as Core.APIPromise<{
         result: RecordCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -39,13 +35,13 @@ export class Records extends APIResource {
    *   were used when creating the record.
    */
   update(
-    zoneId: string,
     dnsRecordId: string,
-    body: RecordUpdateParams,
+    params: RecordUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RecordUpdateResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.put(`/zones/${zoneId}/dns_records/${dnsRecordId}`, {
+      this._client.put(`/zones/${zone_id}/dns_records/${dnsRecordId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: RecordUpdateResponse }>
@@ -56,38 +52,28 @@ export class Records extends APIResource {
    * List, search, sort, and filter a zones' DNS records.
    */
   list(
-    zoneId: string,
-    query?: RecordListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<RecordListResponsesV4PagePaginationArray, RecordListResponse>;
-  list(
-    zoneId: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<RecordListResponsesV4PagePaginationArray, RecordListResponse>;
-  list(
-    zoneId: string,
-    query: RecordListParams | Core.RequestOptions = {},
+    params: RecordListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<RecordListResponsesV4PagePaginationArray, RecordListResponse> {
-    if (isRequestOptions(query)) {
-      return this.list(zoneId, {}, query);
-    }
-    return this._client.getAPIList(`/zones/${zoneId}/dns_records`, RecordListResponsesV4PagePaginationArray, {
-      query,
-      ...options,
-    });
+    const { zone_id, ...query } = params;
+    return this._client.getAPIList(
+      `/zones/${zone_id}/dns_records`,
+      RecordListResponsesV4PagePaginationArray,
+      { query, ...options },
+    );
   }
 
   /**
    * Delete DNS Record
    */
   delete(
-    zoneId: string,
     dnsRecordId: string,
+    params: RecordDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RecordDeleteResponse> {
+    const { zone_id } = params;
     return (
-      this._client.delete(`/zones/${zoneId}/dns_records/${dnsRecordId}`, options) as Core.APIPromise<{
+      this._client.delete(`/zones/${zone_id}/dns_records/${dnsRecordId}`, options) as Core.APIPromise<{
         result: RecordDeleteResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -102,13 +88,13 @@ export class Records extends APIResource {
    *   were used when creating the record.
    */
   edit(
-    zoneId: string,
     dnsRecordId: string,
-    body: RecordEditParams,
+    params: RecordEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RecordEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/dns_records/${dnsRecordId}`, {
+      this._client.patch(`/zones/${zone_id}/dns_records/${dnsRecordId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: RecordEditResponse }>
@@ -124,8 +110,9 @@ export class Records extends APIResource {
    * [the documentation](https://developers.cloudflare.com/dns/manage-dns-records/how-to/import-and-export/ "Import and export records")
    * for more information.
    */
-  export(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<string> {
-    return this._client.get(`/zones/${zoneId}/dns_records/export`, {
+  export(params: RecordExportParams, options?: Core.RequestOptions): Core.APIPromise<string> {
+    const { zone_id } = params;
+    return this._client.get(`/zones/${zone_id}/dns_records/export`, {
       ...options,
       headers: { Accept: 'text/plain', ...options?.headers },
     });
@@ -135,12 +122,13 @@ export class Records extends APIResource {
    * DNS Record Details
    */
   get(
-    zoneId: string,
     dnsRecordId: string,
+    params: RecordGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RecordGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/dns_records/${dnsRecordId}`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/dns_records/${dnsRecordId}`, options) as Core.APIPromise<{
         result: RecordGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -156,14 +144,11 @@ export class Records extends APIResource {
    * [the documentation](https://developers.cloudflare.com/dns/manage-dns-records/how-to/import-and-export/ "Import and export records")
    * for more information.
    */
-  import(
-    zoneId: string,
-    body: RecordImportParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RecordImportResponse> {
+  import(params: RecordImportParams, options?: Core.RequestOptions): Core.APIPromise<RecordImportResponse> {
+    const { zone_id, ...body } = params;
     return (
       this._client.post(
-        `/zones/${zoneId}/dns_records/import`,
+        `/zones/${zone_id}/dns_records/import`,
         multipartFormRequestOptions({ body, ...options }),
       ) as Core.APIPromise<{ result: RecordImportResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -173,9 +158,10 @@ export class Records extends APIResource {
    * Scan for common DNS records on your domain and automatically add them to your
    * zone. Useful if you haven't updated your nameservers yet.
    */
-  scan(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<RecordScanResponse> {
+  scan(params: RecordScanParams, options?: Core.RequestOptions): Core.APIPromise<RecordScanResponse> {
+    const { zone_id } = params;
     return (
-      this._client.post(`/zones/${zoneId}/dns_records/scan`, options) as Core.APIPromise<{
+      this._client.post(`/zones/${zone_id}/dns_records/scan`, options) as Core.APIPromise<{
         result: RecordScanResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -12067,46 +12053,58 @@ export interface RecordScanResponse {
 
 export interface RecordCreateParams {
   /**
-   * DNS record name (or @ for the zone apex) in Punycode.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: DNS record name (or @ for the zone apex) in Punycode.
    */
   name: string;
 
   /**
-   * Record type.
+   * Body param: Record type.
    */
   type: 'URI';
 
   /**
-   * Comments or notes about the DNS record. This field has no effect on DNS
-   * responses.
+   * Body param: Comments or notes about the DNS record. This field has no effect on
+   * DNS responses.
    */
   comment?: string;
 
+  /**
+   * Body param:
+   */
   data?: RecordCreateParams.Data;
 
+  /**
+   * Body param:
+   */
   meta?: RecordCreateParams.Meta;
 
   /**
-   * Required for MX, SRV and URI records; unused by other record types. Records with
-   * lower priorities are preferred.
+   * Body param: Required for MX, SRV and URI records; unused by other record types.
+   * Records with lower priorities are preferred.
    */
   priority?: number;
 
   /**
-   * Whether the record is receiving the performance and security benefits of
-   * Cloudflare.
+   * Body param: Whether the record is receiving the performance and security
+   * benefits of Cloudflare.
    */
   proxied?: boolean;
 
   /**
-   * Custom tags for the DNS record. This field has no effect on DNS responses.
+   * Body param: Custom tags for the DNS record. This field has no effect on DNS
+   * responses.
    */
   tags?: Array<string>;
 
   /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
+   * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+   * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+   * for Enterprise zones.
    */
   ttl?: number | 1;
 }
@@ -12331,46 +12329,58 @@ export namespace RecordCreateParams {
 
 export interface RecordUpdateParams {
   /**
-   * DNS record name (or @ for the zone apex) in Punycode.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: DNS record name (or @ for the zone apex) in Punycode.
    */
   name: string;
 
   /**
-   * Record type.
+   * Body param: Record type.
    */
   type: 'URI';
 
   /**
-   * Comments or notes about the DNS record. This field has no effect on DNS
-   * responses.
+   * Body param: Comments or notes about the DNS record. This field has no effect on
+   * DNS responses.
    */
   comment?: string;
 
+  /**
+   * Body param:
+   */
   data?: RecordUpdateParams.Data;
 
+  /**
+   * Body param:
+   */
   meta?: RecordUpdateParams.Meta;
 
   /**
-   * Required for MX, SRV and URI records; unused by other record types. Records with
-   * lower priorities are preferred.
+   * Body param: Required for MX, SRV and URI records; unused by other record types.
+   * Records with lower priorities are preferred.
    */
   priority?: number;
 
   /**
-   * Whether the record is receiving the performance and security benefits of
-   * Cloudflare.
+   * Body param: Whether the record is receiving the performance and security
+   * benefits of Cloudflare.
    */
   proxied?: boolean;
 
   /**
-   * Custom tags for the DNS record. This field has no effect on DNS responses.
+   * Body param: Custom tags for the DNS record. This field has no effect on DNS
+   * responses.
    */
   tags?: Array<string>;
 
   /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
+   * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+   * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+   * for Enterprise zones.
    */
   ttl?: number | 1;
 }
@@ -12594,63 +12604,75 @@ export namespace RecordUpdateParams {
 }
 
 export interface RecordListParams extends V4PagePaginationArrayParams {
+  /**
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Query param:
+   */
   comment?: RecordListParams.Comment;
 
   /**
-   * DNS record content.
+   * Query param: DNS record content.
    */
   content?: string;
 
   /**
-   * Direction to order DNS records in.
+   * Query param: Direction to order DNS records in.
    */
   direction?: 'asc' | 'desc';
 
   /**
-   * Whether to match all search requirements or at least one (any). If set to `all`,
-   * acts like a logical AND between filters. If set to `any`, acts like a logical OR
-   * instead. Note that the interaction between tag filters is controlled by the
-   * `tag-match` parameter instead.
+   * Query param: Whether to match all search requirements or at least one (any). If
+   * set to `all`, acts like a logical AND between filters. If set to `any`, acts
+   * like a logical OR instead. Note that the interaction between tag filters is
+   * controlled by the `tag-match` parameter instead.
    */
   match?: 'any' | 'all';
 
   /**
-   * DNS record name (or @ for the zone apex) in Punycode.
+   * Query param: DNS record name (or @ for the zone apex) in Punycode.
    */
   name?: string;
 
   /**
-   * Field to order DNS records by.
+   * Query param: Field to order DNS records by.
    */
   order?: 'type' | 'name' | 'content' | 'ttl' | 'proxied';
 
   /**
-   * Whether the record is receiving the performance and security benefits of
-   * Cloudflare.
+   * Query param: Whether the record is receiving the performance and security
+   * benefits of Cloudflare.
    */
   proxied?: boolean;
 
   /**
-   * Allows searching in multiple properties of a DNS record simultaneously. This
-   * parameter is intended for human users, not automation. Its exact behavior is
-   * intentionally left unspecified and is subject to change in the future. This
-   * parameter works independently of the `match` setting. For automated searches,
-   * please use the other available parameters.
+   * Query param: Allows searching in multiple properties of a DNS record
+   * simultaneously. This parameter is intended for human users, not automation. Its
+   * exact behavior is intentionally left unspecified and is subject to change in the
+   * future. This parameter works independently of the `match` setting. For automated
+   * searches, please use the other available parameters.
    */
   search?: string;
 
+  /**
+   * Query param:
+   */
   tag?: RecordListParams.Tag;
 
   /**
-   * Whether to match all tag search requirements or at least one (any). If set to
-   * `all`, acts like a logical AND between tag filters. If set to `any`, acts like a
-   * logical OR instead. Note that the regular `match` parameter is still used to
-   * combine the resulting condition with other filters that aren't related to tags.
+   * Query param: Whether to match all tag search requirements or at least one (any).
+   * If set to `all`, acts like a logical AND between tag filters. If set to `any`,
+   * acts like a logical OR instead. Note that the regular `match` parameter is still
+   * used to combine the resulting condition with other filters that aren't related
+   * to tags.
    */
   tag_match?: 'any' | 'all';
 
   /**
-   * Record type.
+   * Query param: Record type.
    */
   type?:
     | 'A'
@@ -12751,48 +12773,67 @@ export namespace RecordListParams {
   }
 }
 
+export interface RecordDeleteParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
 export interface RecordEditParams {
   /**
-   * DNS record name (or @ for the zone apex) in Punycode.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: DNS record name (or @ for the zone apex) in Punycode.
    */
   name: string;
 
   /**
-   * Record type.
+   * Body param: Record type.
    */
   type: 'URI';
 
   /**
-   * Comments or notes about the DNS record. This field has no effect on DNS
-   * responses.
+   * Body param: Comments or notes about the DNS record. This field has no effect on
+   * DNS responses.
    */
   comment?: string;
 
+  /**
+   * Body param:
+   */
   data?: RecordEditParams.Data;
 
+  /**
+   * Body param:
+   */
   meta?: RecordEditParams.Meta;
 
   /**
-   * Required for MX, SRV and URI records; unused by other record types. Records with
-   * lower priorities are preferred.
+   * Body param: Required for MX, SRV and URI records; unused by other record types.
+   * Records with lower priorities are preferred.
    */
   priority?: number;
 
   /**
-   * Whether the record is receiving the performance and security benefits of
-   * Cloudflare.
+   * Body param: Whether the record is receiving the performance and security
+   * benefits of Cloudflare.
    */
   proxied?: boolean;
 
   /**
-   * Custom tags for the DNS record. This field has no effect on DNS responses.
+   * Body param: Custom tags for the DNS record. This field has no effect on DNS
+   * responses.
    */
   tags?: Array<string>;
 
   /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
+   * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+   * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+   * for Enterprise zones.
    */
   ttl?: number | 1;
 }
@@ -13015,9 +13056,28 @@ export namespace RecordEditParams {
   }
 }
 
+export interface RecordExportParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+export interface RecordGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
 export interface RecordImportParams {
   /**
-   * BIND config to import.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: BIND config to import.
    *
    * **Tip:** When using cURL, a file can be uploaded using
    * `--form 'file=@bind_config.txt'`.
@@ -13025,12 +13085,19 @@ export interface RecordImportParams {
   file: string;
 
   /**
-   * Whether or not proxiable records should receive the performance and security
-   * benefits of Cloudflare.
+   * Body param: Whether or not proxiable records should receive the performance and
+   * security benefits of Cloudflare.
    *
    * The value should be either `true` or `false`.
    */
   proxied?: string;
+}
+
+export interface RecordScanParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }
 
 export namespace Records {
@@ -13047,6 +13114,10 @@ export namespace Records {
   export import RecordCreateParams = RecordsAPI.RecordCreateParams;
   export import RecordUpdateParams = RecordsAPI.RecordUpdateParams;
   export import RecordListParams = RecordsAPI.RecordListParams;
+  export import RecordDeleteParams = RecordsAPI.RecordDeleteParams;
   export import RecordEditParams = RecordsAPI.RecordEditParams;
+  export import RecordExportParams = RecordsAPI.RecordExportParams;
+  export import RecordGetParams = RecordsAPI.RecordGetParams;
   export import RecordImportParams = RecordsAPI.RecordImportParams;
+  export import RecordScanParams = RecordsAPI.RecordScanParams;
 }

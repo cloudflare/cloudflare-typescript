@@ -8,10 +8,14 @@ export class Pagerduty extends APIResource {
   /**
    * Creates a new token for integrating with PagerDuty.
    */
-  create(accountId: string, options?: Core.RequestOptions): Core.APIPromise<PagerdutyCreateResponse> {
+  create(
+    params: PagerdutyCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PagerdutyCreateResponse> {
+    const { account_id } = params;
     return (
       this._client.post(
-        `/accounts/${accountId}/alerting/v3/destinations/pagerduty/connect`,
+        `/accounts/${account_id}/alerting/v3/destinations/pagerduty/connect`,
         options,
       ) as Core.APIPromise<{ result: PagerdutyCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -20,10 +24,14 @@ export class Pagerduty extends APIResource {
   /**
    * Deletes all the PagerDuty Services connected to the account.
    */
-  delete(accountId: string, options?: Core.RequestOptions): Core.APIPromise<PagerdutyDeleteResponse | null> {
+  delete(
+    params: PagerdutyDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PagerdutyDeleteResponse | null> {
+    const { account_id } = params;
     return (
       this._client.delete(
-        `/accounts/${accountId}/alerting/v3/destinations/pagerduty`,
+        `/accounts/${account_id}/alerting/v3/destinations/pagerduty`,
         options,
       ) as Core.APIPromise<{ result: PagerdutyDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -32,10 +40,14 @@ export class Pagerduty extends APIResource {
   /**
    * Get a list of all configured PagerDuty services.
    */
-  get(accountId: string, options?: Core.RequestOptions): Core.APIPromise<PagerdutyGetResponse | null> {
+  get(
+    params: PagerdutyGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PagerdutyGetResponse | null> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountId}/alerting/v3/destinations/pagerduty`,
+        `/accounts/${account_id}/alerting/v3/destinations/pagerduty`,
         options,
       ) as Core.APIPromise<{ result: PagerdutyGetResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -45,13 +57,14 @@ export class Pagerduty extends APIResource {
    * Links PagerDuty with the account using the integration token.
    */
   link(
-    accountId: string,
     tokenId: string,
+    params: PagerdutyLinkParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PagerdutyLinkResponse> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountId}/alerting/v3/destinations/pagerduty/connect/${tokenId}`,
+        `/accounts/${account_id}/alerting/v3/destinations/pagerduty/connect/${tokenId}`,
         options,
       ) as Core.APIPromise<{ result: PagerdutyLinkResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -90,9 +103,41 @@ export interface PagerdutyLinkResponse {
   id?: string;
 }
 
+export interface PagerdutyCreateParams {
+  /**
+   * The account id
+   */
+  account_id: string;
+}
+
+export interface PagerdutyDeleteParams {
+  /**
+   * The account id
+   */
+  account_id: string;
+}
+
+export interface PagerdutyGetParams {
+  /**
+   * The account id
+   */
+  account_id: string;
+}
+
+export interface PagerdutyLinkParams {
+  /**
+   * The account id
+   */
+  account_id: string;
+}
+
 export namespace Pagerduty {
   export import PagerdutyCreateResponse = PagerdutyAPI.PagerdutyCreateResponse;
   export import PagerdutyDeleteResponse = PagerdutyAPI.PagerdutyDeleteResponse;
   export import PagerdutyGetResponse = PagerdutyAPI.PagerdutyGetResponse;
   export import PagerdutyLinkResponse = PagerdutyAPI.PagerdutyLinkResponse;
+  export import PagerdutyCreateParams = PagerdutyAPI.PagerdutyCreateParams;
+  export import PagerdutyDeleteParams = PagerdutyAPI.PagerdutyDeleteParams;
+  export import PagerdutyGetParams = PagerdutyAPI.PagerdutyGetParams;
+  export import PagerdutyLinkParams = PagerdutyAPI.PagerdutyLinkParams;
 }

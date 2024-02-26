@@ -9,12 +9,12 @@ export class Incoming extends APIResource {
    * Create secondary zone configuration for incoming zone transfers.
    */
   create(
-    zoneId: unknown,
-    body: IncomingCreateParams,
+    params: IncomingCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IncomingCreateResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.post(`/zones/${zoneId}/secondary_dns/incoming`, { body, ...options }) as Core.APIPromise<{
+      this._client.post(`/zones/${zone_id}/secondary_dns/incoming`, { body, ...options }) as Core.APIPromise<{
         result: IncomingCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -24,12 +24,12 @@ export class Incoming extends APIResource {
    * Update secondary zone configuration for incoming zone transfers.
    */
   update(
-    zoneId: unknown,
-    body: IncomingUpdateParams,
+    params: IncomingUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IncomingUpdateResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.put(`/zones/${zoneId}/secondary_dns/incoming`, { body, ...options }) as Core.APIPromise<{
+      this._client.put(`/zones/${zone_id}/secondary_dns/incoming`, { body, ...options }) as Core.APIPromise<{
         result: IncomingUpdateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -38,9 +38,13 @@ export class Incoming extends APIResource {
   /**
    * Delete secondary zone configuration for incoming zone transfers.
    */
-  delete(zoneId: unknown, options?: Core.RequestOptions): Core.APIPromise<IncomingDeleteResponse> {
+  delete(
+    params: IncomingDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IncomingDeleteResponse> {
+    const { zone_id } = params;
     return (
-      this._client.delete(`/zones/${zoneId}/secondary_dns/incoming`, options) as Core.APIPromise<{
+      this._client.delete(`/zones/${zone_id}/secondary_dns/incoming`, options) as Core.APIPromise<{
         result: IncomingDeleteResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -49,9 +53,10 @@ export class Incoming extends APIResource {
   /**
    * Get secondary zone configuration for incoming zone transfers.
    */
-  get(zoneId: unknown, options?: Core.RequestOptions): Core.APIPromise<IncomingGetResponse> {
+  get(params: IncomingGetParams, options?: Core.RequestOptions): Core.APIPromise<IncomingGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/secondary_dns/incoming`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/secondary_dns/incoming`, options) as Core.APIPromise<{
         result: IncomingGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -184,38 +189,56 @@ export interface IncomingGetResponse {
 
 export interface IncomingCreateParams {
   /**
-   * How often should a secondary zone auto refresh regardless of DNS NOTIFY. Not
-   * applicable for primary zones.
+   * Path param:
+   */
+  zone_id: unknown;
+
+  /**
+   * Body param: How often should a secondary zone auto refresh regardless of DNS
+   * NOTIFY. Not applicable for primary zones.
    */
   auto_refresh_seconds: number;
 
   /**
-   * Zone name.
+   * Body param: Zone name.
    */
   name: string;
 
   /**
-   * A list of peer tags.
+   * Body param: A list of peer tags.
    */
   peers: Array<unknown>;
 }
 
 export interface IncomingUpdateParams {
   /**
-   * How often should a secondary zone auto refresh regardless of DNS NOTIFY. Not
-   * applicable for primary zones.
+   * Path param:
+   */
+  zone_id: unknown;
+
+  /**
+   * Body param: How often should a secondary zone auto refresh regardless of DNS
+   * NOTIFY. Not applicable for primary zones.
    */
   auto_refresh_seconds: number;
 
   /**
-   * Zone name.
+   * Body param: Zone name.
    */
   name: string;
 
   /**
-   * A list of peer tags.
+   * Body param: A list of peer tags.
    */
   peers: Array<unknown>;
+}
+
+export interface IncomingDeleteParams {
+  zone_id: unknown;
+}
+
+export interface IncomingGetParams {
+  zone_id: unknown;
 }
 
 export namespace Incoming {
@@ -225,4 +248,6 @@ export namespace Incoming {
   export import IncomingGetResponse = IncomingAPI.IncomingGetResponse;
   export import IncomingCreateParams = IncomingAPI.IncomingCreateParams;
   export import IncomingUpdateParams = IncomingAPI.IncomingUpdateParams;
+  export import IncomingDeleteParams = IncomingAPI.IncomingDeleteParams;
+  export import IncomingGetParams = IncomingAPI.IncomingGetParams;
 }

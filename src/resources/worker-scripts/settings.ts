@@ -10,14 +10,14 @@ export class Settings extends APIResource {
    * Patch script metadata or config, such as bindings or usage model
    */
   edit(
-    accountId: string,
     scriptName: string,
-    body: SettingEditParams,
+    params: SettingEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SettingEditResponse> {
+    const { account_id, ...body } = params;
     return (
       this._client.patch(
-        `/accounts/${accountId}/workers/scripts/${scriptName}/settings`,
+        `/accounts/${account_id}/workers/scripts/${scriptName}/settings`,
         multipartFormRequestOptions({ body, ...options }),
       ) as Core.APIPromise<{ result: SettingEditResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -27,13 +27,14 @@ export class Settings extends APIResource {
    * Get script metadata and config, such as bindings or usage model
    */
   get(
-    accountId: string,
     scriptName: string,
+    params: SettingGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SettingGetResponse> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountId}/workers/scripts/${scriptName}/settings`,
+        `/accounts/${account_id}/workers/scripts/${scriptName}/settings`,
         options,
       ) as Core.APIPromise<{ result: SettingGetResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -835,6 +836,14 @@ export namespace SettingGetResponse {
 }
 
 export interface SettingEditParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
   settings?: SettingEditParams.Settings;
 }
 
@@ -1214,8 +1223,16 @@ export namespace SettingEditParams {
   }
 }
 
+export interface SettingGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export namespace Settings {
   export import SettingEditResponse = SettingsAPI.SettingEditResponse;
   export import SettingGetResponse = SettingsAPI.SettingGetResponse;
   export import SettingEditParams = SettingsAPI.SettingEditParams;
+  export import SettingGetParams = SettingsAPI.SettingGetParams;
 }

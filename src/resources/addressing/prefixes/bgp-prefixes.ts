@@ -12,13 +12,14 @@ export class BGPPrefixes extends APIResource {
    * Prefixes.
    */
   list(
-    accountId: string,
     prefixId: string,
+    params: BGPPrefixListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BGPPrefixListResponse | null> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountId}/addressing/prefixes/${prefixId}/bgp/prefixes`,
+        `/accounts/${account_id}/addressing/prefixes/${prefixId}/bgp/prefixes`,
         options,
       ) as Core.APIPromise<{ result: BGPPrefixListResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -29,15 +30,15 @@ export class BGPPrefixes extends APIResource {
    * status (advertised or withdrawn).
    */
   edit(
-    accountId: string,
     prefixId: string,
     bgpPrefixId: string,
-    body: BGPPrefixEditParams,
+    params: BGPPrefixEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BGPPrefixEditResponse> {
+    const { account_id, ...body } = params;
     return (
       this._client.patch(
-        `/accounts/${accountId}/addressing/prefixes/${prefixId}/bgp/prefixes/${bgpPrefixId}`,
+        `/accounts/${account_id}/addressing/prefixes/${prefixId}/bgp/prefixes/${bgpPrefixId}`,
         { body, ...options },
       ) as Core.APIPromise<{ result: BGPPrefixEditResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -47,14 +48,15 @@ export class BGPPrefixes extends APIResource {
    * Retrieve a single BGP Prefix according to its identifier
    */
   get(
-    accountId: string,
     prefixId: string,
     bgpPrefixId: string,
+    params: BGPPrefixGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BGPPrefixGetResponse> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountId}/addressing/prefixes/${prefixId}/bgp/prefixes/${bgpPrefixId}`,
+        `/accounts/${account_id}/addressing/prefixes/${prefixId}/bgp/prefixes/${bgpPrefixId}`,
         options,
       ) as Core.APIPromise<{ result: BGPPrefixGetResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -266,7 +268,22 @@ export namespace BGPPrefixGetResponse {
   }
 }
 
+export interface BGPPrefixListParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export interface BGPPrefixEditParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
   on_demand?: BGPPrefixEditParams.OnDemand;
 }
 
@@ -276,9 +293,18 @@ export namespace BGPPrefixEditParams {
   }
 }
 
+export interface BGPPrefixGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export namespace BGPPrefixes {
   export import BGPPrefixListResponse = BGPPrefixesAPI.BGPPrefixListResponse;
   export import BGPPrefixEditResponse = BGPPrefixesAPI.BGPPrefixEditResponse;
   export import BGPPrefixGetResponse = BGPPrefixesAPI.BGPPrefixGetResponse;
+  export import BGPPrefixListParams = BGPPrefixesAPI.BGPPrefixListParams;
   export import BGPPrefixEditParams = BGPPrefixesAPI.BGPPrefixEditParams;
+  export import BGPPrefixGetParams = BGPPrefixesAPI.BGPPrefixGetParams;
 }

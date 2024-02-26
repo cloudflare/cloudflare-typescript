@@ -2,7 +2,7 @@
 
 export { BulkUpdateResponse, BulkDeleteResponse, BulkUpdateParams, BulkDeleteParams, Bulk } from './bulk';
 export { KeyListResponse, KeyListParams, Keys } from './keys';
-export { MetadataGetResponse, Metadata } from './metadata';
+export { MetadataGetResponse, MetadataGetParams, Metadata } from './metadata';
 export {
   NamespaceCreateResponse,
   NamespaceUpdateResponse,
@@ -11,6 +11,7 @@ export {
   NamespaceCreateParams,
   NamespaceUpdateParams,
   NamespaceListParams,
+  NamespaceDeleteParams,
   NamespaceListResponsesV4PagePaginationArray,
   Namespaces,
 } from './namespaces';
@@ -19,5 +20,7 @@ export {
   ValueDeleteResponse,
   ValueGetResponse,
   ValueUpdateParams,
+  ValueDeleteParams,
+  ValueGetParams,
   Values,
 } from './values';

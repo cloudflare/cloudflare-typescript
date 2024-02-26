@@ -9,12 +9,12 @@ export class Customs extends APIResource {
    * Creates a set of DLP custom profiles.
    */
   create(
-    accountId: string,
-    body: CustomCreateParams,
+    params: CustomCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomCreateResponse | null> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/dlp/profiles/custom`, {
+      this._client.post(`/accounts/${account_id}/dlp/profiles/custom`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: CustomCreateResponse | null }>
@@ -25,25 +25,26 @@ export class Customs extends APIResource {
    * Updates a DLP custom profile.
    */
   update(
-    accountId: string,
     profileId: string,
-    body: CustomUpdateParams,
+    params: CustomUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomUpdateResponse> {
-    return this._client.put(`/accounts/${accountId}/dlp/profiles/custom/${profileId}`, { body, ...options });
+    const { account_id, ...body } = params;
+    return this._client.put(`/accounts/${account_id}/dlp/profiles/custom/${profileId}`, { body, ...options });
   }
 
   /**
    * Deletes a DLP custom profile.
    */
   delete(
-    accountId: string,
     profileId: string,
+    params: CustomDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomDeleteResponse> {
+    const { account_id } = params;
     return (
       this._client.delete(
-        `/accounts/${accountId}/dlp/profiles/custom/${profileId}`,
+        `/accounts/${account_id}/dlp/profiles/custom/${profileId}`,
         options,
       ) as Core.APIPromise<{ result: CustomDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -53,13 +54,14 @@ export class Customs extends APIResource {
    * Fetches a custom DLP profile.
    */
   get(
-    accountId: string,
     profileId: string,
+    params: CustomGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomGetResponse> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountId}/dlp/profiles/custom/${profileId}`,
+        `/accounts/${account_id}/dlp/profiles/custom/${profileId}`,
         options,
       ) as Core.APIPromise<{ result: CustomGetResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -343,6 +345,14 @@ export namespace CustomGetResponse {
 }
 
 export interface CustomCreateParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
   profiles: Array<CustomCreateParams.Profile>;
 }
 
@@ -412,30 +422,36 @@ export namespace CustomCreateParams {
 
 export interface CustomUpdateParams {
   /**
-   * Related DLP policies will trigger when the match count exceeds the number set.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: Related DLP policies will trigger when the match count exceeds the
+   * number set.
    */
   allowed_match_count?: number;
 
   /**
-   * The description of the profile.
+   * Body param: The description of the profile.
    */
   description?: string;
 
   /**
-   * The custom entries for this profile. Array elements with IDs are modifying the
-   * existing entry with that ID. Elements without ID will create new entries. Any
-   * entry not in the list will be deleted.
+   * Body param: The custom entries for this profile. Array elements with IDs are
+   * modifying the existing entry with that ID. Elements without ID will create new
+   * entries. Any entry not in the list will be deleted.
    */
   entries?: Array<CustomUpdateParams.Entry>;
 
   /**
-   * The name of the profile.
+   * Body param: The name of the profile.
    */
   name?: string;
 
   /**
-   * Entries from other profiles (e.g. pre-defined Cloudflare profiles, or your
-   * Microsoft Information Protection profiles).
+   * Body param: Entries from other profiles (e.g. pre-defined Cloudflare profiles,
+   * or your Microsoft Information Protection profiles).
    */
   shared_entries?: Array<
     CustomUpdateParams.DLPSharedEntryUpdatePredefined | CustomUpdateParams.DLPSharedEntryUpdateIntegration
@@ -507,6 +523,20 @@ export namespace CustomUpdateParams {
   }
 }
 
+export interface CustomDeleteParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface CustomGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export namespace Customs {
   export import CustomCreateResponse = CustomsAPI.CustomCreateResponse;
   export import CustomUpdateResponse = CustomsAPI.CustomUpdateResponse;
@@ -514,4 +544,6 @@ export namespace Customs {
   export import CustomGetResponse = CustomsAPI.CustomGetResponse;
   export import CustomCreateParams = CustomsAPI.CustomCreateParams;
   export import CustomUpdateParams = CustomsAPI.CustomUpdateParams;
+  export import CustomDeleteParams = CustomsAPI.CustomDeleteParams;
+  export import CustomGetParams = CustomsAPI.CustomGetParams;
 }

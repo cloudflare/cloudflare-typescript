@@ -15,7 +15,8 @@ const cloudflare = new Cloudflare({
 describe('resource ipv6', () => {
   // skipped: tests are disabled for the time being
   test.skip('edit: only required params', async () => {
-    const responsePromise = cloudflare.settings.ipv6.edit('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = cloudflare.settings.ipv6.edit({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       value: 'off',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -29,14 +30,15 @@ describe('resource ipv6', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('edit: required and optional params', async () => {
-    const response = await cloudflare.settings.ipv6.edit('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await cloudflare.settings.ipv6.edit({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       value: 'off',
     });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
-    const responsePromise = cloudflare.settings.ipv6.get('023e105f4ecef8ad9ca31a8372d0c353');
+  test.skip('get: only required params', async () => {
+    const responsePromise = cloudflare.settings.ipv6.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -47,10 +49,7 @@ describe('resource ipv6', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.settings.ipv6.get('023e105f4ecef8ad9ca31a8372d0c353', { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.settings.ipv6.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 });

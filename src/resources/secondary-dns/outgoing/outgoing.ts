@@ -12,12 +12,12 @@ export class Outgoing extends APIResource {
    * Create primary zone configuration for outgoing zone transfers.
    */
   create(
-    zoneId: unknown,
-    body: OutgoingCreateParams,
+    params: OutgoingCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OutgoingCreateResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.post(`/zones/${zoneId}/secondary_dns/outgoing`, { body, ...options }) as Core.APIPromise<{
+      this._client.post(`/zones/${zone_id}/secondary_dns/outgoing`, { body, ...options }) as Core.APIPromise<{
         result: OutgoingCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -27,12 +27,12 @@ export class Outgoing extends APIResource {
    * Update primary zone configuration for outgoing zone transfers.
    */
   update(
-    zoneId: unknown,
-    body: OutgoingUpdateParams,
+    params: OutgoingUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OutgoingUpdateResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.put(`/zones/${zoneId}/secondary_dns/outgoing`, { body, ...options }) as Core.APIPromise<{
+      this._client.put(`/zones/${zone_id}/secondary_dns/outgoing`, { body, ...options }) as Core.APIPromise<{
         result: OutgoingUpdateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -41,9 +41,13 @@ export class Outgoing extends APIResource {
   /**
    * Delete primary zone configuration for outgoing zone transfers.
    */
-  delete(zoneId: unknown, options?: Core.RequestOptions): Core.APIPromise<OutgoingDeleteResponse> {
+  delete(
+    params: OutgoingDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<OutgoingDeleteResponse> {
+    const { zone_id } = params;
     return (
-      this._client.delete(`/zones/${zoneId}/secondary_dns/outgoing`, options) as Core.APIPromise<{
+      this._client.delete(`/zones/${zone_id}/secondary_dns/outgoing`, options) as Core.APIPromise<{
         result: OutgoingDeleteResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -53,9 +57,13 @@ export class Outgoing extends APIResource {
    * Disable outgoing zone transfers for primary zone and clears IXFR backlog of
    * primary zone.
    */
-  disable(zoneId: unknown, options?: Core.RequestOptions): Core.APIPromise<OutgoingDisableResponse> {
+  disable(
+    params: OutgoingDisableParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<OutgoingDisableResponse> {
+    const { zone_id } = params;
     return (
-      this._client.post(`/zones/${zoneId}/secondary_dns/outgoing/disable`, options) as Core.APIPromise<{
+      this._client.post(`/zones/${zone_id}/secondary_dns/outgoing/disable`, options) as Core.APIPromise<{
         result: OutgoingDisableResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -64,9 +72,13 @@ export class Outgoing extends APIResource {
   /**
    * Enable outgoing zone transfers for primary zone.
    */
-  enable(zoneId: unknown, options?: Core.RequestOptions): Core.APIPromise<OutgoingEnableResponse> {
+  enable(
+    params: OutgoingEnableParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<OutgoingEnableResponse> {
+    const { zone_id } = params;
     return (
-      this._client.post(`/zones/${zoneId}/secondary_dns/outgoing/enable`, options) as Core.APIPromise<{
+      this._client.post(`/zones/${zone_id}/secondary_dns/outgoing/enable`, options) as Core.APIPromise<{
         result: OutgoingEnableResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -75,9 +87,13 @@ export class Outgoing extends APIResource {
   /**
    * Notifies the secondary nameserver(s) and clears IXFR backlog of primary zone.
    */
-  forceNotify(zoneId: unknown, options?: Core.RequestOptions): Core.APIPromise<OutgoingForceNotifyResponse> {
+  forceNotify(
+    params: OutgoingForceNotifyParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<OutgoingForceNotifyResponse> {
+    const { zone_id } = params;
     return (
-      this._client.post(`/zones/${zoneId}/secondary_dns/outgoing/force_notify`, options) as Core.APIPromise<{
+      this._client.post(`/zones/${zone_id}/secondary_dns/outgoing/force_notify`, options) as Core.APIPromise<{
         result: OutgoingForceNotifyResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -86,9 +102,10 @@ export class Outgoing extends APIResource {
   /**
    * Get primary zone configuration for outgoing zone transfers.
    */
-  get(zoneId: unknown, options?: Core.RequestOptions): Core.APIPromise<OutgoingGetResponse> {
+  get(params: OutgoingGetParams, options?: Core.RequestOptions): Core.APIPromise<OutgoingGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/secondary_dns/outgoing`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/secondary_dns/outgoing`, options) as Core.APIPromise<{
         result: OutgoingGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -219,26 +236,56 @@ export interface OutgoingGetResponse {
 
 export interface OutgoingCreateParams {
   /**
-   * Zone name.
+   * Path param:
+   */
+  zone_id: unknown;
+
+  /**
+   * Body param: Zone name.
    */
   name: string;
 
   /**
-   * A list of peer tags.
+   * Body param: A list of peer tags.
    */
   peers: Array<unknown>;
 }
 
 export interface OutgoingUpdateParams {
   /**
-   * Zone name.
+   * Path param:
+   */
+  zone_id: unknown;
+
+  /**
+   * Body param: Zone name.
    */
   name: string;
 
   /**
-   * A list of peer tags.
+   * Body param: A list of peer tags.
    */
   peers: Array<unknown>;
+}
+
+export interface OutgoingDeleteParams {
+  zone_id: unknown;
+}
+
+export interface OutgoingDisableParams {
+  zone_id: unknown;
+}
+
+export interface OutgoingEnableParams {
+  zone_id: unknown;
+}
+
+export interface OutgoingForceNotifyParams {
+  zone_id: unknown;
+}
+
+export interface OutgoingGetParams {
+  zone_id: unknown;
 }
 
 export namespace Outgoing {
@@ -251,6 +298,12 @@ export namespace Outgoing {
   export import OutgoingGetResponse = OutgoingAPI.OutgoingGetResponse;
   export import OutgoingCreateParams = OutgoingAPI.OutgoingCreateParams;
   export import OutgoingUpdateParams = OutgoingAPI.OutgoingUpdateParams;
+  export import OutgoingDeleteParams = OutgoingAPI.OutgoingDeleteParams;
+  export import OutgoingDisableParams = OutgoingAPI.OutgoingDisableParams;
+  export import OutgoingEnableParams = OutgoingAPI.OutgoingEnableParams;
+  export import OutgoingForceNotifyParams = OutgoingAPI.OutgoingForceNotifyParams;
+  export import OutgoingGetParams = OutgoingAPI.OutgoingGetParams;
   export import Status = StatusAPI.Status;
   export import StatusGetResponse = StatusAPI.StatusGetResponse;
+  export import StatusGetParams = StatusAPI.StatusGetParams;
 }

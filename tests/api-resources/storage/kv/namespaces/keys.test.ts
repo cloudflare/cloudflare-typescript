@@ -14,11 +14,10 @@ const cloudflare = new Cloudflare({
 
 describe('resource keys', () => {
   // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
-    const responsePromise = cloudflare.storage.kv.namespaces.keys.list(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '0f2ac74b498b48028cb68387c421e279',
-    );
+  test.skip('list: only required params', async () => {
+    const responsePromise = cloudflare.storage.kv.namespaces.keys.list('0f2ac74b498b48028cb68387c421e279', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -29,32 +28,13 @@ describe('resource keys', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.storage.kv.namespaces.keys.list(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        '0f2ac74b498b48028cb68387c421e279',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('list: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.storage.kv.namespaces.keys.list(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        '0f2ac74b498b48028cb68387c421e279',
-        {
-          cursor:
-            '6Ck1la0VxJ0djhidm1MdX2FyDGxLKVeeHZZmORS_8XeSuhz9SjIJRaSa2lnsF01tQOHrfTGAP3R5X1Kv5iVUuMbNKhWNAXHOl6ePB0TUL8nw',
-          limit: 10,
-          prefix: 'My-Prefix',
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('list: required and optional params', async () => {
+    const response = await cloudflare.storage.kv.namespaces.keys.list('0f2ac74b498b48028cb68387c421e279', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      cursor:
+        '6Ck1la0VxJ0djhidm1MdX2FyDGxLKVeeHZZmORS_8XeSuhz9SjIJRaSa2lnsF01tQOHrfTGAP3R5X1Kv5iVUuMbNKhWNAXHOl6ePB0TUL8nw',
+      limit: 10,
+      prefix: 'My-Prefix',
+    });
   });
 });

@@ -8,13 +8,10 @@ export class ZeroRTT extends APIResource {
   /**
    * Changes the 0-RTT session resumption setting.
    */
-  edit(
-    zoneId: string,
-    body: ZeroRTTEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZeroRTTEditResponse> {
+  edit(params: ZeroRTTEditParams, options?: Core.RequestOptions): Core.APIPromise<ZeroRTTEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/settings/0rtt`, { body, ...options }) as Core.APIPromise<{
+      this._client.patch(`/zones/${zone_id}/settings/0rtt`, { body, ...options }) as Core.APIPromise<{
         result: ZeroRTTEditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -23,9 +20,10 @@ export class ZeroRTT extends APIResource {
   /**
    * Gets 0-RTT session resumption setting.
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<ZeroRTTGetResponse> {
+  get(params: ZeroRTTGetParams, options?: Core.RequestOptions): Core.APIPromise<ZeroRTTGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/settings/0rtt`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/settings/0rtt`, options) as Core.APIPromise<{
         result: ZeroRTTGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -86,13 +84,26 @@ export interface ZeroRTTGetResponse {
 
 export interface ZeroRTTEditParams {
   /**
-   * Value of the 0-RTT setting.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Value of the 0-RTT setting.
    */
   value: 'on' | 'off';
+}
+
+export interface ZeroRTTGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }
 
 export namespace ZeroRTT {
   export import ZeroRTTEditResponse = ZeroRTTAPI.ZeroRTTEditResponse;
   export import ZeroRTTGetResponse = ZeroRTTAPI.ZeroRTTGetResponse;
   export import ZeroRTTEditParams = ZeroRTTAPI.ZeroRTTEditParams;
+  export import ZeroRTTGetParams = ZeroRTTAPI.ZeroRTTGetParams;
 }

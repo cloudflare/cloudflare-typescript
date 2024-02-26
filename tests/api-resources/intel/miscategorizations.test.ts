@@ -14,11 +14,10 @@ const cloudflare = new Cloudflare({
 
 describe('resource miscategorizations', () => {
   // skipped: tests are disabled for the time being
-  test.skip('create', async () => {
-    const responsePromise = cloudflare.intel.miscategorizations.create(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      {},
-    );
+  test.skip('create: only required params', async () => {
+    const responsePromise = cloudflare.intel.miscategorizations.create({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -26,5 +25,19 @@ describe('resource miscategorizations', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('create: required and optional params', async () => {
+    const response = await cloudflare.intel.miscategorizations.create({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      content_adds: [82],
+      content_removes: [155],
+      indicator_type: 'domain',
+      ip: {},
+      security_adds: [117, 131],
+      security_removes: [83],
+      url: 'string',
+    });
   });
 });

@@ -17,7 +17,7 @@ describe('resource rules', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.rulesets.rules.create('2f2feab2026849078ba485f918791bdc', {
       account_id: 'string',
-      zone_id: 'abf9b32d38c5f572afde3336ec0ce302',
+      zone_id: 'string',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -32,7 +32,7 @@ describe('resource rules', () => {
   test.skip('create: required and optional params', async () => {
     const response = await cloudflare.rulesets.rules.create('2f2feab2026849078ba485f918791bdc', {
       account_id: 'string',
-      zone_id: 'abf9b32d38c5f572afde3336ec0ce302',
+      zone_id: 'string',
       position: { before: 'da5e8e506c8e7877fe06cdf4c41add54' },
     });
   });
@@ -42,7 +42,7 @@ describe('resource rules', () => {
     const responsePromise = cloudflare.rulesets.rules.delete(
       '2f2feab2026849078ba485f918791bdc',
       '3a03d665bac047339bb530ecb439a90d',
-      { account_id: 'string', zone_id: 'abf9b32d38c5f572afde3336ec0ce302' },
+      { account_id: 'string', zone_id: 'string' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -58,7 +58,7 @@ describe('resource rules', () => {
     const response = await cloudflare.rulesets.rules.delete(
       '2f2feab2026849078ba485f918791bdc',
       '3a03d665bac047339bb530ecb439a90d',
-      { account_id: 'string', zone_id: 'abf9b32d38c5f572afde3336ec0ce302' },
+      { account_id: 'string', zone_id: 'string' },
     );
   });
 

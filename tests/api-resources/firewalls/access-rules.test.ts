@@ -17,7 +17,7 @@ describe('resource accessRules', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.firewalls.accessRules.create({
       account_id: 'string',
-      zone_id: {},
+      zone_id: 'string',
       configuration: {},
       mode: 'challenge',
     });
@@ -34,7 +34,7 @@ describe('resource accessRules', () => {
   test.skip('create: required and optional params', async () => {
     const response = await cloudflare.firewalls.accessRules.create({
       account_id: 'string',
-      zone_id: {},
+      zone_id: 'string',
       configuration: { target: 'ip', value: '198.51.100.4' },
       mode: 'challenge',
       notes: 'This rule is enabled because of an event that occurred on date X.',
@@ -43,7 +43,10 @@ describe('resource accessRules', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('list: only required params', async () => {
-    const responsePromise = cloudflare.firewalls.accessRules.list({ account_id: 'string', zone_id: {} });
+    const responsePromise = cloudflare.firewalls.accessRules.list({
+      account_id: 'string',
+      zone_id: 'string',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -57,7 +60,7 @@ describe('resource accessRules', () => {
   test.skip('list: required and optional params', async () => {
     const response = await cloudflare.firewalls.accessRules.list({
       account_id: 'string',
-      zone_id: {},
+      zone_id: 'string',
       direction: 'desc',
       'egs-pagination': { json: { page: 1, per_page: 1 } },
       filters: {
@@ -77,7 +80,7 @@ describe('resource accessRules', () => {
   test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.firewalls.accessRules.delete(
       {},
-      { account_id: 'string', zone_id: {} },
+      { account_id: 'string', zone_id: 'string' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -90,7 +93,10 @@ describe('resource accessRules', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('delete: required and optional params', async () => {
-    const response = await cloudflare.firewalls.accessRules.delete({}, { account_id: 'string', zone_id: {} });
+    const response = await cloudflare.firewalls.accessRules.delete(
+      {},
+      { account_id: 'string', zone_id: 'string' },
+    );
   });
 
   // skipped: tests are disabled for the time being
@@ -123,7 +129,10 @@ describe('resource accessRules', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('get: only required params', async () => {
-    const responsePromise = cloudflare.firewalls.accessRules.get({}, { account_id: 'string', zone_id: {} });
+    const responsePromise = cloudflare.firewalls.accessRules.get(
+      {},
+      { account_id: 'string', zone_id: 'string' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -135,6 +144,9 @@ describe('resource accessRules', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('get: required and optional params', async () => {
-    const response = await cloudflare.firewalls.accessRules.get({}, { account_id: 'string', zone_id: {} });
+    const response = await cloudflare.firewalls.accessRules.get(
+      {},
+      { account_id: 'string', zone_id: 'string' },
+    );
   });
 });

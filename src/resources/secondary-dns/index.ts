@@ -8,9 +8,12 @@ export {
   ACLGetResponse,
   ACLCreateParams,
   ACLUpdateParams,
+  ACLListParams,
+  ACLDeleteParams,
+  ACLGetParams,
   ACLs,
 } from './acls';
-export { ForceAxfrCreateResponse, ForceAxfrs } from './force-axfrs';
+export { ForceAxfrCreateResponse, ForceAxfrCreateParams, ForceAxfrs } from './force-axfrs';
 export {
   IncomingCreateResponse,
   IncomingUpdateResponse,
@@ -18,6 +21,8 @@ export {
   IncomingGetResponse,
   IncomingCreateParams,
   IncomingUpdateParams,
+  IncomingDeleteParams,
+  IncomingGetParams,
   Incoming,
 } from './incoming';
 export {
@@ -30,6 +35,11 @@ export {
   OutgoingGetResponse,
   OutgoingCreateParams,
   OutgoingUpdateParams,
+  OutgoingDeleteParams,
+  OutgoingDisableParams,
+  OutgoingEnableParams,
+  OutgoingForceNotifyParams,
+  OutgoingGetParams,
   Outgoing,
 } from './outgoing/index';
 export {
@@ -40,6 +50,9 @@ export {
   PeerGetResponse,
   PeerCreateParams,
   PeerUpdateParams,
+  PeerListParams,
+  PeerDeleteParams,
+  PeerGetParams,
   Peers,
 } from './peers';
 export { SecondaryDNS } from './secondary-dns';
@@ -51,5 +64,8 @@ export {
   TSIGGetResponse,
   TSIGCreateParams,
   TSIGUpdateParams,
+  TSIGListParams,
+  TSIGDeleteParams,
+  TSIGGetParams,
   TSIGs,
 } from './tsigs';

@@ -2,29 +2,16 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as IPsAPI from 'cloudflare/resources/intel/ips';
 
 export class IPs extends APIResource {
   /**
    * Get IP Overview
    */
-  get(
-    accountId: string,
-    query?: IPGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<IPGetResponse | null>;
-  get(accountId: string, options?: Core.RequestOptions): Core.APIPromise<IPGetResponse | null>;
-  get(
-    accountId: string,
-    query: IPGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<IPGetResponse | null> {
-    if (isRequestOptions(query)) {
-      return this.get(accountId, {}, query);
-    }
+  get(params: IPGetParams, options?: Core.RequestOptions): Core.APIPromise<IPGetResponse | null> {
+    const { account_id, ...query } = params;
     return (
-      this._client.get(`/accounts/${accountId}/intel/ip`, { query, ...options }) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/intel/ip`, { query, ...options }) as Core.APIPromise<{
         result: IPGetResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -69,8 +56,19 @@ export namespace IPGetResponse {
 }
 
 export interface IPGetParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Query param:
+   */
   ipv4?: string;
 
+  /**
+   * Query param:
+   */
   ipv6?: string;
 }
 

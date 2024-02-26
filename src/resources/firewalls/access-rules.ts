@@ -127,7 +127,7 @@ export interface AccessRuleCreateParams {
    * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
    * Account ID.
    */
-  zone_id: unknown;
+  zone_id: string;
 
   /**
    * Body param: The rule configuration.
@@ -232,7 +232,7 @@ export interface AccessRuleListParams extends V4PagePaginationArrayParams {
    * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
    * Account ID.
    */
-  zone_id: unknown;
+  zone_id: string;
 
   /**
    * Query param: The direction used to sort returned rules.
@@ -318,7 +318,7 @@ export interface AccessRuleDeleteParams {
   /**
    * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
    */
-  zone_id: unknown;
+  zone_id: string;
 }
 
 export interface AccessRuleEditParams {
@@ -428,7 +428,7 @@ export interface AccessRuleGetParams {
   /**
    * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
    */
-  zone_id: unknown;
+  zone_id: string;
 }
 
 export namespace AccessRules {

@@ -19,7 +19,10 @@ export namespace Addresses {
   export import AddressMapEditResponse = AddressMapsAPI.AddressMapEditResponse;
   export import AddressMapGetResponse = AddressMapsAPI.AddressMapGetResponse;
   export import AddressMapCreateParams = AddressMapsAPI.AddressMapCreateParams;
+  export import AddressMapListParams = AddressMapsAPI.AddressMapListParams;
+  export import AddressMapDeleteParams = AddressMapsAPI.AddressMapDeleteParams;
   export import AddressMapEditParams = AddressMapsAPI.AddressMapEditParams;
+  export import AddressMapGetParams = AddressMapsAPI.AddressMapGetParams;
   export import LOADocuments = LOADocumentsAPI.LOADocuments;
   export import LOADocumentCreateResponse = LOADocumentsAPI.LOADocumentCreateResponse;
   export import LOADocumentCreateParams = LOADocumentsAPI.LOADocumentCreateParams;
@@ -30,5 +33,8 @@ export namespace Addresses {
   export import PrefixEditResponse = PrefixesAPI.PrefixEditResponse;
   export import PrefixGetResponse = PrefixesAPI.PrefixGetResponse;
   export import PrefixCreateParams = PrefixesAPI.PrefixCreateParams;
+  export import PrefixListParams = PrefixesAPI.PrefixListParams;
+  export import PrefixDeleteParams = PrefixesAPI.PrefixDeleteParams;
   export import PrefixEditParams = PrefixesAPI.PrefixEditParams;
+  export import PrefixGetParams = PrefixesAPI.PrefixGetParams;
 }

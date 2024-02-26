@@ -21,5 +21,6 @@ export namespace Teamnets {
   export import VirtualNetworkEditResponse = VirtualNetworksAPI.VirtualNetworkEditResponse;
   export import VirtualNetworkCreateParams = VirtualNetworksAPI.VirtualNetworkCreateParams;
   export import VirtualNetworkListParams = VirtualNetworksAPI.VirtualNetworkListParams;
+  export import VirtualNetworkDeleteParams = VirtualNetworksAPI.VirtualNetworkDeleteParams;
   export import VirtualNetworkEditParams = VirtualNetworksAPI.VirtualNetworkEditParams;
 }

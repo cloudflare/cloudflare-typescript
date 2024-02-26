@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as ConnectionsAPI from 'cloudflare/resources/page-shield/connections';
 
 export class Connections extends APIResource {
@@ -10,23 +9,15 @@ export class Connections extends APIResource {
    * Lists all connections detected by Page Shield.
    */
   list(
-    zoneId: string,
-    query?: ConnectionListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ConnectionListResponse | null>;
-  list(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<ConnectionListResponse | null>;
-  list(
-    zoneId: string,
-    query: ConnectionListParams | Core.RequestOptions = {},
+    params: ConnectionListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConnectionListResponse | null> {
-    if (isRequestOptions(query)) {
-      return this.list(zoneId, {}, query);
-    }
+    const { zone_id, ...query } = params;
     return (
-      this._client.get(`/zones/${zoneId}/page_shield/connections`, { query, ...options }) as Core.APIPromise<{
-        result: ConnectionListResponse | null;
-      }>
+      this._client.get(`/zones/${zone_id}/page_shield/connections`, {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: ConnectionListResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -34,11 +25,12 @@ export class Connections extends APIResource {
    * Fetches a connection detected by Page Shield by connection ID.
    */
   get(
-    zoneId: string,
     connectionId: string,
+    params: ConnectionGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConnectionGetResponse> {
-    return this._client.get(`/zones/${zoneId}/page_shield/connections/${connectionId}`, options);
+    const { zone_id } = params;
+    return this._client.get(`/zones/${zone_id}/page_shield/connections/${connectionId}`, options);
   }
 }
 
@@ -92,31 +84,36 @@ export interface ConnectionGetResponse {
 
 export interface ConnectionListParams {
   /**
-   * The direction used to sort returned connections.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Query param: The direction used to sort returned connections.
    */
   direction?: 'asc' | 'desc';
 
   /**
-   * When true, excludes connections seen in a `/cdn-cgi` path from the returned
-   * connections. The default value is true.
+   * Query param: When true, excludes connections seen in a `/cdn-cgi` path from the
+   * returned connections. The default value is true.
    */
   exclude_cdn_cgi?: boolean;
 
   /**
-   * Excludes connections whose URL contains one of the URL-encoded URLs separated by
-   * commas.
+   * Query param: Excludes connections whose URL contains one of the URL-encoded URLs
+   * separated by commas.
    */
   exclude_urls?: string;
 
   /**
-   * Export the list of connections as a file. Cannot be used with per_page or page
-   * options.
+   * Query param: Export the list of connections as a file. Cannot be used with
+   * per_page or page options.
    */
   export?: 'csv';
 
   /**
-   * Includes connections that match one or more URL-encoded hostnames separated by
-   * commas.
+   * Query param: Includes connections that match one or more URL-encoded hostnames
+   * separated by commas.
    *
    * Wildcards are supported at the start and end of each hostname to support starts
    * with, ends with and contains. If no wildcards are used, results will be filtered
@@ -125,12 +122,12 @@ export interface ConnectionListParams {
   hosts?: string;
 
   /**
-   * The field used to sort returned connections.
+   * Query param: The field used to sort returned connections.
    */
   order_by?: 'first_seen_at' | 'last_seen_at';
 
   /**
-   * The current page number of the paginated results.
+   * Query param: The current page number of the paginated results.
    *
    * We additionally support a special value "all". When "all" is used, the API will
    * return all the connections with the applied filters in a single page.
@@ -141,8 +138,8 @@ export interface ConnectionListParams {
   page?: string;
 
   /**
-   * Includes connections that match one or more page URLs (separated by commas)
-   * where they were last seen
+   * Query param: Includes connections that match one or more page URLs (separated by
+   * commas) where they were last seen
    *
    * Wildcards are supported at the start and end of each page URL to support starts
    * with, ends with and contains. If no wildcards are used, results will be filtered
@@ -151,31 +148,40 @@ export interface ConnectionListParams {
   page_url?: string;
 
   /**
-   * The number of results per page.
+   * Query param: The number of results per page.
    */
   per_page?: number;
 
   /**
-   * When true, malicious connections appear first in the returned connections.
+   * Query param: When true, malicious connections appear first in the returned
+   * connections.
    */
   prioritize_malicious?: boolean;
 
   /**
-   * Filters the returned connections using a comma-separated list of connection
-   * statuses. Accepted values: `active`, `infrequent`, and `inactive`. The default
-   * value is `active`.
+   * Query param: Filters the returned connections using a comma-separated list of
+   * connection statuses. Accepted values: `active`, `infrequent`, and `inactive`.
+   * The default value is `active`.
    */
   status?: string;
 
   /**
-   * Includes connections whose URL contain one or more URL-encoded URLs separated by
-   * commas.
+   * Query param: Includes connections whose URL contain one or more URL-encoded URLs
+   * separated by commas.
    */
   urls?: string;
+}
+
+export interface ConnectionGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }
 
 export namespace Connections {
   export import ConnectionListResponse = ConnectionsAPI.ConnectionListResponse;
   export import ConnectionGetResponse = ConnectionsAPI.ConnectionGetResponse;
   export import ConnectionListParams = ConnectionsAPI.ConnectionListParams;
+  export import ConnectionGetParams = ConnectionsAPI.ConnectionGetParams;
 }

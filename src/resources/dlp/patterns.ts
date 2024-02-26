@@ -12,12 +12,12 @@ export class Patterns extends APIResource {
    * maximum number of characters that can be matched.
    */
   validate(
-    accountId: string,
-    body: PatternValidateParams,
+    params: PatternValidateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PatternValidateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/dlp/patterns/validate`, {
+      this._client.post(`/accounts/${account_id}/dlp/patterns/validate`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: PatternValidateResponse }>
@@ -31,7 +31,12 @@ export interface PatternValidateResponse {
 
 export interface PatternValidateParams {
   /**
-   * The regex pattern.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: The regex pattern.
    */
   regex: string;
 }

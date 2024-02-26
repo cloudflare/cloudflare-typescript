@@ -17,8 +17,11 @@ describe('resource delegations', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.addresses.prefixes.delegations.create(
       '023e105f4ecef8ad9ca31a8372d0c353',
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      { cidr: '192.0.2.0/24', delegated_account_id: 'b1946ac92492d2347c6235b4d2611184' },
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        cidr: '192.0.2.0/24',
+        delegated_account_id: 'b1946ac92492d2347c6235b4d2611184',
+      },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -33,16 +36,19 @@ describe('resource delegations', () => {
   test.skip('create: required and optional params', async () => {
     const response = await cloudflare.addresses.prefixes.delegations.create(
       '023e105f4ecef8ad9ca31a8372d0c353',
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      { cidr: '192.0.2.0/24', delegated_account_id: 'b1946ac92492d2347c6235b4d2611184' },
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        cidr: '192.0.2.0/24',
+        delegated_account_id: 'b1946ac92492d2347c6235b4d2611184',
+      },
     );
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
+  test.skip('list: only required params', async () => {
     const responsePromise = cloudflare.addresses.prefixes.delegations.list(
       '023e105f4ecef8ad9ca31a8372d0c353',
-      '023e105f4ecef8ad9ca31a8372d0c353',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -54,23 +60,19 @@ describe('resource delegations', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.addresses.prefixes.delegations.list(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('list: required and optional params', async () => {
+    const response = await cloudflare.addresses.prefixes.delegations.list(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
+  test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.addresses.prefixes.delegations.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
-      '023e105f4ecef8ad9ca31a8372d0c353',
       'd933b1530bc56c9953cf8ce166da8004',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -79,5 +81,14 @@ describe('resource delegations', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('delete: required and optional params', async () => {
+    const response = await cloudflare.addresses.prefixes.delegations.delete(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      'd933b1530bc56c9953cf8ce166da8004',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
   });
 });

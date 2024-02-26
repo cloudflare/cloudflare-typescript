@@ -7,6 +7,15 @@ export {
   DatasetGetResponse,
   DatasetCreateParams,
   DatasetUpdateParams,
+  DatasetListParams,
+  DatasetDeleteParams,
+  DatasetGetParams,
   Datasets,
 } from './datasets';
-export { UploadCreateResponse, UploadEditResponse, UploadEditParams, Upload } from './upload';
+export {
+  UploadCreateResponse,
+  UploadEditResponse,
+  UploadCreateParams,
+  UploadEditParams,
+  Upload,
+} from './upload';

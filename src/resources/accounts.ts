@@ -10,13 +10,10 @@ export class Accounts extends APIResource {
   /**
    * Update an existing account.
    */
-  update(
-    accountId: unknown,
-    body: AccountUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AccountUpdateResponse> {
+  update(params: AccountUpdateParams, options?: Core.RequestOptions): Core.APIPromise<AccountUpdateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.put(`/accounts/${accountId}`, { body, ...options }) as Core.APIPromise<{
+      this._client.put(`/accounts/${account_id}`, { body, ...options }) as Core.APIPromise<{
         result: AccountUpdateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -48,9 +45,10 @@ export class Accounts extends APIResource {
   /**
    * Get information about a specific account that you are a member of.
    */
-  get(accountId: unknown, options?: Core.RequestOptions): Core.APIPromise<AccountGetResponse> {
+  get(params: AccountGetParams, options?: Core.RequestOptions): Core.APIPromise<AccountGetResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}`, options) as Core.APIPromise<{ result: AccountGetResponse }>
+      this._client.get(`/accounts/${account_id}`, options) as Core.APIPromise<{ result: AccountGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -65,12 +63,17 @@ export type AccountGetResponse = unknown | string | null;
 
 export interface AccountUpdateParams {
   /**
-   * Account name
+   * Path param:
+   */
+  account_id: unknown;
+
+  /**
+   * Body param: Account name
    */
   name: string;
 
   /**
-   * Account settings
+   * Body param: Account settings
    */
   settings?: AccountUpdateParams.Settings;
 }
@@ -117,6 +120,10 @@ export interface AccountListParams extends V4PagePaginationArrayParams {
   direction?: 'asc' | 'desc';
 }
 
+export interface AccountGetParams {
+  account_id: unknown;
+}
+
 export namespace Accounts {
   export import AccountUpdateResponse = AccountsAPI.AccountUpdateResponse;
   export import AccountListResponse = AccountsAPI.AccountListResponse;
@@ -124,4 +131,5 @@ export namespace Accounts {
   export import AccountListResponsesV4PagePaginationArray = AccountsAPI.AccountListResponsesV4PagePaginationArray;
   export import AccountUpdateParams = AccountsAPI.AccountUpdateParams;
   export import AccountListParams = AccountsAPI.AccountListParams;
+  export import AccountGetParams = AccountsAPI.AccountGetParams;
 }

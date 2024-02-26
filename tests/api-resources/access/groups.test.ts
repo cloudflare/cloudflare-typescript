@@ -17,7 +17,7 @@ describe('resource groups', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.access.groups.create({
       account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'string',
       include: [
         { email: { email: 'test@example.com' } },
         { email: { email: 'test@example.com' } },
@@ -38,7 +38,7 @@ describe('resource groups', () => {
   test.skip('create: required and optional params', async () => {
     const response = await cloudflare.access.groups.create({
       account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'string',
       include: [
         { email: { email: 'test@example.com' } },
         { email: { email: 'test@example.com' } },
@@ -63,7 +63,7 @@ describe('resource groups', () => {
   test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.access.groups.update('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'string',
       include: [
         { email: { email: 'test@example.com' } },
         { email: { email: 'test@example.com' } },
@@ -84,7 +84,7 @@ describe('resource groups', () => {
   test.skip('update: required and optional params', async () => {
     const response = await cloudflare.access.groups.update('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'string',
       include: [
         { email: { email: 'test@example.com' } },
         { email: { email: 'test@example.com' } },
@@ -107,10 +107,7 @@ describe('resource groups', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('list: only required params', async () => {
-    const responsePromise = cloudflare.access.groups.list({
-      account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = cloudflare.access.groups.list({ account_id: 'string', zone_id: 'string' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -122,17 +119,14 @@ describe('resource groups', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('list: required and optional params', async () => {
-    const response = await cloudflare.access.groups.list({
-      account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const response = await cloudflare.access.groups.list({ account_id: 'string', zone_id: 'string' });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.access.groups.delete('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'string',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -147,7 +141,7 @@ describe('resource groups', () => {
   test.skip('delete: required and optional params', async () => {
     const response = await cloudflare.access.groups.delete('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'string',
     });
   });
 
@@ -155,7 +149,7 @@ describe('resource groups', () => {
   test.skip('get: only required params', async () => {
     const responsePromise = cloudflare.access.groups.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'string',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -170,7 +164,7 @@ describe('resource groups', () => {
   test.skip('get: required and optional params', async () => {
     const response = await cloudflare.access.groups.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'string',
     });
   });
 });

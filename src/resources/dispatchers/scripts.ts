@@ -10,15 +10,15 @@ export class Scripts extends APIResource {
    * Upload a worker module to a Workers for Platforms namespace.
    */
   update(
-    accountId: string,
     dispatchNamespace: string,
     scriptName: string,
-    body: ScriptUpdateParams,
+    params: ScriptUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ScriptUpdateResponse> {
+    const { account_id, ...body } = params;
     return (
       this._client.put(
-        `/accounts/${accountId}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}`,
+        `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}`,
         maybeMultipartFormRequestOptions({ body, ...options }),
       ) as Core.APIPromise<{ result: ScriptUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -29,15 +29,14 @@ export class Scripts extends APIResource {
    * response body on a successful delete.
    */
   delete(
-    accountId: string,
     dispatchNamespace: string,
     scriptName: string,
     params: ScriptDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<void> {
-    const { force } = params;
+    const { account_id, force } = params;
     return this._client.delete(
-      `/accounts/${accountId}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}`,
+      `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}`,
       { query: { force }, ...options, headers: { Accept: '*/*', ...options?.headers } },
     );
   }
@@ -46,14 +45,15 @@ export class Scripts extends APIResource {
    * Fetch information about a script uploaded to a Workers for Platforms namespace.
    */
   get(
-    accountId: string,
     dispatchNamespace: string,
     scriptName: string,
+    params: ScriptGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ScriptGetResponse> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountId}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}`,
+        `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}`,
         options,
       ) as Core.APIPromise<{ result: ScriptGetResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -224,20 +224,27 @@ export namespace ScriptGetResponse {
 
 export interface ScriptUpdateParams {
   /**
-   * A module comprising a Worker script, often a javascript file. Multiple modules
-   * may be provided as separate named parts, but at least one module must be present
-   * and referenced in the metadata as `main_module` or `body_part` by part name.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: A module comprising a Worker script, often a javascript file.
+   * Multiple modules may be provided as separate named parts, but at least one
+   * module must be present and referenced in the metadata as `main_module` or
+   * `body_part` by part name.
    */
   '<any part name>'?: Array<Uploadable>;
 
   /**
-   * Rollback message to be associated with this deployment. Only parsed when query
-   * param `"rollback_to"` is present.
+   * Body param: Rollback message to be associated with this deployment. Only parsed
+   * when query param `"rollback_to"` is present.
    */
   message?: string;
 
   /**
-   * JSON encoded metadata about the uploaded parts and Worker configuration.
+   * Body param: JSON encoded metadata about the uploaded parts and Worker
+   * configuration.
    */
   metadata?: ScriptUpdateParams.Metadata;
 }
@@ -462,11 +469,23 @@ export namespace ScriptUpdateParams {
 
 export interface ScriptDeleteParams {
   /**
-   * If set to true, delete will not be stopped by associated service binding,
-   * durable object, or other binding. Any of these associated bindings/durable
-   * objects will be deleted along with the script.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Query param: If set to true, delete will not be stopped by associated service
+   * binding, durable object, or other binding. Any of these associated
+   * bindings/durable objects will be deleted along with the script.
    */
   force?: boolean;
+}
+
+export interface ScriptGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
 }
 
 export namespace Scripts {
@@ -474,4 +493,5 @@ export namespace Scripts {
   export import ScriptGetResponse = ScriptsAPI.ScriptGetResponse;
   export import ScriptUpdateParams = ScriptsAPI.ScriptUpdateParams;
   export import ScriptDeleteParams = ScriptsAPI.ScriptDeleteParams;
+  export import ScriptGetParams = ScriptsAPI.ScriptGetParams;
 }

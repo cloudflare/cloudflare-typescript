@@ -9,13 +9,14 @@ export class References extends APIResource {
    * Get the list of resources that reference the provided monitor.
    */
   list(
-    accountId: string,
     monitorId: string,
+    params: ReferenceListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ReferenceListResponse | null> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountId}/load_balancers/monitors/${monitorId}/references`,
+        `/accounts/${account_id}/load_balancers/monitors/${monitorId}/references`,
         options,
       ) as Core.APIPromise<{ result: ReferenceListResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -39,6 +40,14 @@ export namespace ReferenceListResponse {
   }
 }
 
+export interface ReferenceListParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export namespace References {
   export import ReferenceListResponse = ReferencesAPI.ReferenceListResponse;
+  export import ReferenceListParams = ReferencesAPI.ReferenceListParams;
 }

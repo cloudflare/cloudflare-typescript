@@ -11,13 +11,10 @@ export class Lists extends APIResource {
   /**
    * Creates a new Zero Trust list.
    */
-  create(
-    accountId: unknown,
-    body: ListCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ListCreateResponse> {
+  create(params: ListCreateParams, options?: Core.RequestOptions): Core.APIPromise<ListCreateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/gateway/lists`, { body, ...options }) as Core.APIPromise<{
+      this._client.post(`/accounts/${account_id}/gateway/lists`, { body, ...options }) as Core.APIPromise<{
         result: ListCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -27,13 +24,13 @@ export class Lists extends APIResource {
    * Updates a configured Zero Trust list.
    */
   update(
-    accountId: unknown,
     listId: string,
-    body: ListUpdateParams,
+    params: ListUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ListUpdateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.put(`/accounts/${accountId}/gateway/lists/${listId}`, {
+      this._client.put(`/accounts/${account_id}/gateway/lists/${listId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: ListUpdateResponse }>
@@ -43,9 +40,10 @@ export class Lists extends APIResource {
   /**
    * Fetches all Zero Trust lists for an account.
    */
-  list(accountId: unknown, options?: Core.RequestOptions): Core.APIPromise<ListListResponse | null> {
+  list(params: ListListParams, options?: Core.RequestOptions): Core.APIPromise<ListListResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/gateway/lists`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/gateway/lists`, options) as Core.APIPromise<{
         result: ListListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -55,12 +53,13 @@ export class Lists extends APIResource {
    * Deletes a Zero Trust list.
    */
   delete(
-    accountId: unknown,
     listId: string,
+    params: ListDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ListDeleteResponse> {
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${accountId}/gateway/lists/${listId}`, options) as Core.APIPromise<{
+      this._client.delete(`/accounts/${account_id}/gateway/lists/${listId}`, options) as Core.APIPromise<{
         result: ListDeleteResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -70,13 +69,13 @@ export class Lists extends APIResource {
    * Appends or removes an item from a configured Zero Trust list.
    */
   edit(
-    accountId: unknown,
     listId: string,
-    body: ListEditParams,
+    params: ListEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ListEditResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.patch(`/accounts/${accountId}/gateway/lists/${listId}`, {
+      this._client.patch(`/accounts/${account_id}/gateway/lists/${listId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: ListEditResponse }>
@@ -86,9 +85,14 @@ export class Lists extends APIResource {
   /**
    * Fetches a single Zero Trust list.
    */
-  get(accountId: unknown, listId: string, options?: Core.RequestOptions): Core.APIPromise<ListGetResponse> {
+  get(
+    listId: string,
+    params: ListGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ListGetResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/gateway/lists/${listId}`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/gateway/lists/${listId}`, options) as Core.APIPromise<{
         result: ListGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -269,22 +273,27 @@ export interface ListGetResponse {
 
 export interface ListCreateParams {
   /**
-   * The name of the list.
+   * Path param:
+   */
+  account_id: unknown;
+
+  /**
+   * Body param: The name of the list.
    */
   name: string;
 
   /**
-   * The type of list.
+   * Body param: The type of list.
    */
   type: 'SERIAL' | 'URL' | 'DOMAIN' | 'EMAIL' | 'IP';
 
   /**
-   * The description of the list.
+   * Body param: The description of the list.
    */
   description?: string;
 
   /**
-   * The items in the list.
+   * Body param: The items in the list.
    */
   items?: Array<ListCreateParams.Item>;
 }
@@ -300,24 +309,42 @@ export namespace ListCreateParams {
 
 export interface ListUpdateParams {
   /**
-   * The name of the list.
+   * Path param:
+   */
+  account_id: unknown;
+
+  /**
+   * Body param: The name of the list.
    */
   name: string;
 
   /**
-   * The description of the list.
+   * Body param: The description of the list.
    */
   description?: string;
 }
 
+export interface ListListParams {
+  account_id: unknown;
+}
+
+export interface ListDeleteParams {
+  account_id: unknown;
+}
+
 export interface ListEditParams {
   /**
-   * The items in the list.
+   * Path param:
+   */
+  account_id: unknown;
+
+  /**
+   * Body param: The items in the list.
    */
   append?: Array<ListEditParams.Append>;
 
   /**
-   * A list of the item values you want to remove.
+   * Body param: A list of the item values you want to remove.
    */
   remove?: Array<string>;
 }
@@ -331,6 +358,10 @@ export namespace ListEditParams {
   }
 }
 
+export interface ListGetParams {
+  account_id: unknown;
+}
+
 export namespace Lists {
   export import ListCreateResponse = ListsAPI.ListCreateResponse;
   export import ListUpdateResponse = ListsAPI.ListUpdateResponse;
@@ -340,7 +371,11 @@ export namespace Lists {
   export import ListGetResponse = ListsAPI.ListGetResponse;
   export import ListCreateParams = ListsAPI.ListCreateParams;
   export import ListUpdateParams = ListsAPI.ListUpdateParams;
+  export import ListListParams = ListsAPI.ListListParams;
+  export import ListDeleteParams = ListsAPI.ListDeleteParams;
   export import ListEditParams = ListsAPI.ListEditParams;
+  export import ListGetParams = ListsAPI.ListGetParams;
   export import Items = ItemsAPI.Items;
   export import ItemListResponse = ItemsAPI.ItemListResponse;
+  export import ItemListParams = ItemsAPI.ItemListParams;
 }

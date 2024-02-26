@@ -12,4 +12,5 @@ export namespace ACM {
   export import TotalTLSCreateResponse = TotalTLSAPI.TotalTLSCreateResponse;
   export import TotalTLSGetResponse = TotalTLSAPI.TotalTLSGetResponse;
   export import TotalTLSCreateParams = TotalTLSAPI.TotalTLSCreateParams;
+  export import TotalTLSGetParams = TotalTLSAPI.TotalTLSGetParams;
 }

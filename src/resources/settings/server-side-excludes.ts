@@ -19,12 +19,12 @@ export class ServerSideExcludes extends APIResource {
    * (https://support.cloudflare.com/hc/en-us/articles/200170036).
    */
   edit(
-    zoneId: string,
-    body: ServerSideExcludeEditParams,
+    params: ServerSideExcludeEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ServerSideExcludeEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/settings/server_side_exclude`, {
+      this._client.patch(`/zones/${zone_id}/settings/server_side_exclude`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: ServerSideExcludeEditResponse }>
@@ -44,9 +44,13 @@ export class ServerSideExcludes extends APIResource {
    * resource moves through our network to the visitor's computer.
    * (https://support.cloudflare.com/hc/en-us/articles/200170036).
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<ServerSideExcludeGetResponse> {
+  get(
+    params: ServerSideExcludeGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ServerSideExcludeGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/settings/server_side_exclude`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/settings/server_side_exclude`, options) as Core.APIPromise<{
         result: ServerSideExcludeGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -127,13 +131,26 @@ export interface ServerSideExcludeGetResponse {
 
 export interface ServerSideExcludeEditParams {
   /**
-   * Value of the zone setting.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Value of the zone setting.
    */
   value: 'on' | 'off';
+}
+
+export interface ServerSideExcludeGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }
 
 export namespace ServerSideExcludes {
   export import ServerSideExcludeEditResponse = ServerSideExcludesAPI.ServerSideExcludeEditResponse;
   export import ServerSideExcludeGetResponse = ServerSideExcludesAPI.ServerSideExcludeGetResponse;
   export import ServerSideExcludeEditParams = ServerSideExcludesAPI.ServerSideExcludeEditParams;
+  export import ServerSideExcludeGetParams = ServerSideExcludesAPI.ServerSideExcludeGetParams;
 }

@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as ScheduleAPI from 'cloudflare/resources/speed/schedule';
 
 export class Schedule extends APIResource {
@@ -10,24 +9,13 @@ export class Schedule extends APIResource {
    * Creates a scheduled test for a page.
    */
   create(
-    zoneId: string,
     url: string,
-    params?: ScheduleCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ScheduleCreateResponse>;
-  create(zoneId: string, url: string, options?: Core.RequestOptions): Core.APIPromise<ScheduleCreateResponse>;
-  create(
-    zoneId: string,
-    url: string,
-    params: ScheduleCreateParams | Core.RequestOptions = {},
+    params: ScheduleCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ScheduleCreateResponse> {
-    if (isRequestOptions(params)) {
-      return this.create(zoneId, url, {}, params);
-    }
-    const { region } = params;
+    const { zone_id, region } = params;
     return (
-      this._client.post(`/zones/${zoneId}/speed_api/schedule/${url}`, {
+      this._client.post(`/zones/${zone_id}/speed_api/schedule/${url}`, {
         query: { region },
         ...options,
       }) as Core.APIPromise<{ result: ScheduleCreateResponse }>
@@ -320,7 +308,12 @@ export namespace ScheduleCreateResponse {
 
 export interface ScheduleCreateParams {
   /**
-   * A test region.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Query param: A test region.
    */
   region?:
     | 'asia-east1'

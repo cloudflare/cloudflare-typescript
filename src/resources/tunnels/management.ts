@@ -10,13 +10,13 @@ export class Management extends APIResource {
    * Logs) of a tunnel.
    */
   create(
-    accountId: string,
     tunnelId: string,
-    body: ManagementCreateParams,
+    params: ManagementCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ManagementCreateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/cfd_tunnel/${tunnelId}/management`, {
+      this._client.post(`/accounts/${account_id}/cfd_tunnel/${tunnelId}/management`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: ManagementCreateResponse }>
@@ -27,6 +27,14 @@ export class Management extends APIResource {
 export type ManagementCreateResponse = unknown | Array<unknown> | string;
 
 export interface ManagementCreateParams {
+  /**
+   * Path param: Cloudflare account ID
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
   resources: Array<'logs'>;
 }
 

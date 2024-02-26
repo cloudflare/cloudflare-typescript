@@ -8,14 +8,11 @@ export class Peers extends APIResource {
   /**
    * Create Peer.
    */
-  create(
-    accountId: unknown,
-    body: PeerCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PeerCreateResponse> {
+  create(params: PeerCreateParams, options?: Core.RequestOptions): Core.APIPromise<PeerCreateResponse> {
+    const { account_id, body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/secondary_dns/peers`, {
-        body,
+      this._client.post(`/accounts/${account_id}/secondary_dns/peers`, {
+        body: body,
         ...options,
       }) as Core.APIPromise<{ result: PeerCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -25,13 +22,13 @@ export class Peers extends APIResource {
    * Modify Peer.
    */
   update(
-    accountId: unknown,
     peerId: unknown,
-    body: PeerUpdateParams,
+    params: PeerUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PeerUpdateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.put(`/accounts/${accountId}/secondary_dns/peers/${peerId}`, {
+      this._client.put(`/accounts/${account_id}/secondary_dns/peers/${peerId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: PeerUpdateResponse }>
@@ -41,9 +38,10 @@ export class Peers extends APIResource {
   /**
    * List Peers.
    */
-  list(accountId: unknown, options?: Core.RequestOptions): Core.APIPromise<PeerListResponse | null> {
+  list(params: PeerListParams, options?: Core.RequestOptions): Core.APIPromise<PeerListResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/secondary_dns/peers`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/secondary_dns/peers`, options) as Core.APIPromise<{
         result: PeerListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -53,13 +51,14 @@ export class Peers extends APIResource {
    * Delete Peer.
    */
   delete(
-    accountId: unknown,
     peerId: unknown,
+    params: PeerDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PeerDeleteResponse> {
+    const { account_id } = params;
     return (
       this._client.delete(
-        `/accounts/${accountId}/secondary_dns/peers/${peerId}`,
+        `/accounts/${account_id}/secondary_dns/peers/${peerId}`,
         options,
       ) as Core.APIPromise<{ result: PeerDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -68,9 +67,14 @@ export class Peers extends APIResource {
   /**
    * Get Peer.
    */
-  get(accountId: unknown, peerId: unknown, options?: Core.RequestOptions): Core.APIPromise<PeerGetResponse> {
+  get(
+    peerId: unknown,
+    params: PeerGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PeerGetResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/secondary_dns/peers/${peerId}`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/secondary_dns/peers/${peerId}`, options) as Core.APIPromise<{
         result: PeerGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -225,39 +229,66 @@ export interface PeerGetResponse {
   tsig_id?: string;
 }
 
-export type PeerCreateParams = unknown;
+export interface PeerCreateParams {
+  /**
+   * Path param:
+   */
+  account_id: unknown;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
+}
 
 export interface PeerUpdateParams {
   /**
-   * The name of the peer.
+   * Path param:
+   */
+  account_id: unknown;
+
+  /**
+   * Body param: The name of the peer.
    */
   name: string;
 
   /**
-   * IPv4/IPv6 address of primary or secondary nameserver, depending on what zone
-   * this peer is linked to. For primary zones this IP defines the IP of the
-   * secondary nameserver Cloudflare will NOTIFY upon zone changes. For secondary
+   * Body param: IPv4/IPv6 address of primary or secondary nameserver, depending on
+   * what zone this peer is linked to. For primary zones this IP defines the IP of
+   * the secondary nameserver Cloudflare will NOTIFY upon zone changes. For secondary
    * zones this IP defines the IP of the primary nameserver Cloudflare will send
    * AXFR/IXFR requests to.
    */
   ip?: string;
 
   /**
-   * Enable IXFR transfer protocol, default is AXFR. Only applicable to secondary
-   * zones.
+   * Body param: Enable IXFR transfer protocol, default is AXFR. Only applicable to
+   * secondary zones.
    */
   ixfr_enable?: boolean;
 
   /**
-   * DNS port of primary or secondary nameserver, depending on what zone this peer is
-   * linked to.
+   * Body param: DNS port of primary or secondary nameserver, depending on what zone
+   * this peer is linked to.
    */
   port?: number;
 
   /**
-   * TSIG authentication will be used for zone transfer if configured.
+   * Body param: TSIG authentication will be used for zone transfer if configured.
    */
   tsig_id?: string;
+}
+
+export interface PeerListParams {
+  account_id: unknown;
+}
+
+export interface PeerDeleteParams {
+  account_id: unknown;
+}
+
+export interface PeerGetParams {
+  account_id: unknown;
 }
 
 export namespace Peers {
@@ -268,4 +299,7 @@ export namespace Peers {
   export import PeerGetResponse = PeersAPI.PeerGetResponse;
   export import PeerCreateParams = PeersAPI.PeerCreateParams;
   export import PeerUpdateParams = PeersAPI.PeerUpdateParams;
+  export import PeerListParams = PeersAPI.PeerListParams;
+  export import PeerDeleteParams = PeersAPI.PeerDeleteParams;
+  export import PeerGetParams = PeersAPI.PeerGetParams;
 }

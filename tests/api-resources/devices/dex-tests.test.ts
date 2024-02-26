@@ -15,7 +15,8 @@ const cloudflare = new Cloudflare({
 describe('resource dexTests', () => {
   // skipped: tests are disabled for the time being
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.devices.dexTests.create('699d98642c564d2e855e9661899b7252', {
+    const responsePromise = cloudflare.devices.dexTests.create({
+      account_id: '699d98642c564d2e855e9661899b7252',
       data: {},
       enabled: true,
       interval: '30m',
@@ -32,7 +33,8 @@ describe('resource dexTests', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.devices.dexTests.create('699d98642c564d2e855e9661899b7252', {
+    const response = await cloudflare.devices.dexTests.create({
+      account_id: '699d98642c564d2e855e9661899b7252',
       data: { host: 'https://dash.cloudflare.com', kind: 'http', method: 'GET' },
       enabled: true,
       interval: '30m',
@@ -43,11 +45,13 @@ describe('resource dexTests', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.devices.dexTests.update(
-      '699d98642c564d2e855e9661899b7252',
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { data: {}, enabled: true, interval: '30m', name: 'HTTP dash health check' },
-    );
+    const responsePromise = cloudflare.devices.dexTests.update('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+      data: {},
+      enabled: true,
+      interval: '30m',
+      name: 'HTTP dash health check',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -59,22 +63,21 @@ describe('resource dexTests', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.devices.dexTests.update(
-      '699d98642c564d2e855e9661899b7252',
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      {
-        data: { host: 'https://dash.cloudflare.com', kind: 'http', method: 'GET' },
-        enabled: true,
-        interval: '30m',
-        name: 'HTTP dash health check',
-        description: 'Checks the dash endpoint every 30 minutes',
-      },
-    );
+    const response = await cloudflare.devices.dexTests.update('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+      data: { host: 'https://dash.cloudflare.com', kind: 'http', method: 'GET' },
+      enabled: true,
+      interval: '30m',
+      name: 'HTTP dash health check',
+      description: 'Checks the dash endpoint every 30 minutes',
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
-    const responsePromise = cloudflare.devices.dexTests.list('699d98642c564d2e855e9661899b7252');
+  test.skip('list: only required params', async () => {
+    const responsePromise = cloudflare.devices.dexTests.list({
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -85,21 +88,17 @@ describe('resource dexTests', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.devices.dexTests.list('699d98642c564d2e855e9661899b7252', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('list: required and optional params', async () => {
+    const response = await cloudflare.devices.dexTests.list({
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
-    const responsePromise = cloudflare.devices.dexTests.delete(
-      '699d98642c564d2e855e9661899b7252',
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-    );
+  test.skip('delete: only required params', async () => {
+    const responsePromise = cloudflare.devices.dexTests.delete('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -110,23 +109,17 @@ describe('resource dexTests', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.devices.dexTests.delete(
-        '699d98642c564d2e855e9661899b7252',
-        'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('delete: required and optional params', async () => {
+    const response = await cloudflare.devices.dexTests.delete('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
-    const responsePromise = cloudflare.devices.dexTests.get(
-      '699d98642c564d2e855e9661899b7252',
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-    );
+  test.skip('get: only required params', async () => {
+    const responsePromise = cloudflare.devices.dexTests.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -137,14 +130,9 @@ describe('resource dexTests', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.devices.dexTests.get(
-        '699d98642c564d2e855e9661899b7252',
-        'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.devices.dexTests.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
   });
 });

@@ -14,12 +14,12 @@ export class DevelopmentMode extends APIResource {
    * hours and then automatically toggle off.
    */
   edit(
-    zoneId: string,
-    body: DevelopmentModeEditParams,
+    params: DevelopmentModeEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DevelopmentModeEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/settings/development_mode`, {
+      this._client.patch(`/zones/${zone_id}/settings/development_mode`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: DevelopmentModeEditResponse }>
@@ -34,9 +34,13 @@ export class DevelopmentMode extends APIResource {
    * see those changes right away. Once entered, development mode will last for 3
    * hours and then automatically toggle off.
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<DevelopmentModeGetResponse> {
+  get(
+    params: DevelopmentModeGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DevelopmentModeGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/settings/development_mode`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/settings/development_mode`, options) as Core.APIPromise<{
         result: DevelopmentModeGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -121,13 +125,26 @@ export interface DevelopmentModeGetResponse {
 
 export interface DevelopmentModeEditParams {
   /**
-   * Value of the zone setting.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Value of the zone setting.
    */
   value: 'on' | 'off';
+}
+
+export interface DevelopmentModeGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }
 
 export namespace DevelopmentMode {
   export import DevelopmentModeEditResponse = DevelopmentModeAPI.DevelopmentModeEditResponse;
   export import DevelopmentModeGetResponse = DevelopmentModeAPI.DevelopmentModeGetResponse;
   export import DevelopmentModeEditParams = DevelopmentModeAPI.DevelopmentModeEditParams;
+  export import DevelopmentModeGetParams = DevelopmentModeAPI.DevelopmentModeGetParams;
 }

@@ -20,12 +20,12 @@ export class LoadBalancers extends APIResource {
    * Create a new load balancer.
    */
   create(
-    zoneId: string,
-    body: LoadBalancerCreateParams,
+    params: LoadBalancerCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<LoadBalancerCreateResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.post(`/zones/${zoneId}/load_balancers`, { body, ...options }) as Core.APIPromise<{
+      this._client.post(`/zones/${zone_id}/load_balancers`, { body, ...options }) as Core.APIPromise<{
         result: LoadBalancerCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -35,13 +35,13 @@ export class LoadBalancers extends APIResource {
    * Update a configured load balancer.
    */
   update(
-    zoneId: string,
     loadBalancerId: string,
-    body: LoadBalancerUpdateParams,
+    params: LoadBalancerUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<LoadBalancerUpdateResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.put(`/zones/${zoneId}/load_balancers/${loadBalancerId}`, {
+      this._client.put(`/zones/${zone_id}/load_balancers/${loadBalancerId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: LoadBalancerUpdateResponse }>
@@ -51,9 +51,13 @@ export class LoadBalancers extends APIResource {
   /**
    * List configured load balancers.
    */
-  list(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<LoadBalancerListResponse | null> {
+  list(
+    params: LoadBalancerListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LoadBalancerListResponse | null> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/load_balancers`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/load_balancers`, options) as Core.APIPromise<{
         result: LoadBalancerListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -63,12 +67,13 @@ export class LoadBalancers extends APIResource {
    * Delete a configured load balancer.
    */
   delete(
-    zoneId: string,
     loadBalancerId: string,
+    params: LoadBalancerDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<LoadBalancerDeleteResponse> {
+    const { zone_id } = params;
     return (
-      this._client.delete(`/zones/${zoneId}/load_balancers/${loadBalancerId}`, options) as Core.APIPromise<{
+      this._client.delete(`/zones/${zone_id}/load_balancers/${loadBalancerId}`, options) as Core.APIPromise<{
         result: LoadBalancerDeleteResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -78,13 +83,13 @@ export class LoadBalancers extends APIResource {
    * Apply changes to an existing load balancer, overwriting the supplied properties.
    */
   edit(
-    zoneId: string,
     loadBalancerId: string,
-    body: LoadBalancerEditParams,
+    params: LoadBalancerEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<LoadBalancerEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/load_balancers/${loadBalancerId}`, {
+      this._client.patch(`/zones/${zone_id}/load_balancers/${loadBalancerId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: LoadBalancerEditResponse }>
@@ -95,12 +100,13 @@ export class LoadBalancers extends APIResource {
    * Fetch a single configured load balancer.
    */
   get(
-    zoneId: string,
     loadBalancerId: string,
+    params: LoadBalancerGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<LoadBalancerGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/load_balancers/${loadBalancerId}`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/load_balancers/${loadBalancerId}`, options) as Core.APIPromise<{
         result: LoadBalancerGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -3612,27 +3618,33 @@ export namespace LoadBalancerGetResponse {
 
 export interface LoadBalancerCreateParams {
   /**
-   * A list of pool IDs ordered by their failover priority. Pools defined here are
-   * used by default, or when region_pools are not configured for a given region.
+   * Path param:
+   */
+  zone_id: string;
+
+  /**
+   * Body param: A list of pool IDs ordered by their failover priority. Pools defined
+   * here are used by default, or when region_pools are not configured for a given
+   * region.
    */
   default_pools: Array<string>;
 
   /**
-   * The pool ID to use when all other pools are detected as unhealthy.
+   * Body param: The pool ID to use when all other pools are detected as unhealthy.
    */
   fallback_pool: unknown;
 
   /**
-   * The DNS hostname to associate with your Load Balancer. If this hostname already
-   * exists as a DNS record in Cloudflare's DNS, the Load Balancer will take
-   * precedence and the DNS record will not be used.
+   * Body param: The DNS hostname to associate with your Load Balancer. If this
+   * hostname already exists as a DNS record in Cloudflare's DNS, the Load Balancer
+   * will take precedence and the DNS record will not be used.
    */
   name: string;
 
   /**
-   * Controls features that modify the routing of requests to pools and origins in
-   * response to dynamic conditions, such as during the interval between active
-   * health monitoring requests. For example, zero-downtime failover occurs
+   * Body param: Controls features that modify the routing of requests to pools and
+   * origins in response to dynamic conditions, such as during the interval between
+   * active health monitoring requests. For example, zero-downtime failover occurs
    * immediately when an origin becomes unavailable due to HTTP 521, 522, or 523
    * response codes. If there is another healthy origin in the same pool, the request
    * is retried once against this alternate origin.
@@ -3640,39 +3652,40 @@ export interface LoadBalancerCreateParams {
   adaptive_routing?: LoadBalancerCreateParams.AdaptiveRouting;
 
   /**
-   * A mapping of country codes to a list of pool IDs (ordered by their failover
-   * priority) for the given country. Any country not explicitly defined will fall
-   * back to using the corresponding region_pool mapping if it exists else to
-   * default_pools.
+   * Body param: A mapping of country codes to a list of pool IDs (ordered by their
+   * failover priority) for the given country. Any country not explicitly defined
+   * will fall back to using the corresponding region_pool mapping if it exists else
+   * to default_pools.
    */
   country_pools?: unknown;
 
   /**
-   * Object description.
+   * Body param: Object description.
    */
   description?: string;
 
   /**
-   * Controls location-based steering for non-proxied requests. See `steering_policy`
-   * to learn how steering is affected.
+   * Body param: Controls location-based steering for non-proxied requests. See
+   * `steering_policy` to learn how steering is affected.
    */
   location_strategy?: LoadBalancerCreateParams.LocationStrategy;
 
   /**
-   * (Enterprise only): A mapping of Cloudflare PoP identifiers to a list of pool IDs
-   * (ordered by their failover priority) for the PoP (datacenter). Any PoPs not
-   * explicitly defined will fall back to using the corresponding country_pool, then
-   * region_pool mapping if it exists else to default_pools.
+   * Body param: (Enterprise only): A mapping of Cloudflare PoP identifiers to a list
+   * of pool IDs (ordered by their failover priority) for the PoP (datacenter). Any
+   * PoPs not explicitly defined will fall back to using the corresponding
+   * country_pool, then region_pool mapping if it exists else to default_pools.
    */
   pop_pools?: unknown;
 
   /**
-   * Whether the hostname should be gray clouded (false) or orange clouded (true).
+   * Body param: Whether the hostname should be gray clouded (false) or orange
+   * clouded (true).
    */
   proxied?: boolean;
 
   /**
-   * Configures pool weights.
+   * Body param: Configures pool weights.
    *
    * - `steering_policy="random"`: A random pool is selected with probability
    *   proportional to pool weights.
@@ -3684,21 +3697,21 @@ export interface LoadBalancerCreateParams {
   random_steering?: LoadBalancerCreateParams.RandomSteering;
 
   /**
-   * A mapping of region codes to a list of pool IDs (ordered by their failover
-   * priority) for the given region. Any regions not explicitly defined will fall
-   * back to using default_pools.
+   * Body param: A mapping of region codes to a list of pool IDs (ordered by their
+   * failover priority) for the given region. Any regions not explicitly defined will
+   * fall back to using default_pools.
    */
   region_pools?: unknown;
 
   /**
-   * BETA Field Not General Access: A list of rules for this load balancer to
-   * execute.
+   * Body param: BETA Field Not General Access: A list of rules for this load
+   * balancer to execute.
    */
   rules?: Array<LoadBalancerCreateParams.Rule>;
 
   /**
-   * Specifies the type of session affinity the load balancer should use unless
-   * specified as `"none"` or "" (default). The supported types are:
+   * Body param: Specifies the type of session affinity the load balancer should use
+   * unless specified as `"none"` or "" (default). The supported types are:
    *
    * - `"cookie"`: On the first request to a proxied load balancer, a cookie is
    *   generated, encoding information of which origin the request will be forwarded
@@ -3724,14 +3737,15 @@ export interface LoadBalancerCreateParams {
   session_affinity?: 'none' | 'cookie' | 'ip_cookie' | 'header' | '""';
 
   /**
-   * Configures attributes for session affinity.
+   * Body param: Configures attributes for session affinity.
    */
   session_affinity_attributes?: LoadBalancerCreateParams.SessionAffinityAttributes;
 
   /**
-   * Time, in seconds, until a client's session expires after being created. Once the
-   * expiry time has been reached, subsequent requests may get sent to a different
-   * origin server. The accepted ranges per `session_affinity` policy are:
+   * Body param: Time, in seconds, until a client's session expires after being
+   * created. Once the expiry time has been reached, subsequent requests may get sent
+   * to a different origin server. The accepted ranges per `session_affinity` policy
+   * are:
    *
    * - `"cookie"` / `"ip_cookie"`: The current default of 23 hours will be used
    *   unless explicitly set. The accepted range of values is between [1800, 604800].
@@ -3743,7 +3757,7 @@ export interface LoadBalancerCreateParams {
   session_affinity_ttl?: number;
 
   /**
-   * Steering Policy for this load balancer.
+   * Body param: Steering Policy for this load balancer.
    *
    * - `"off"`: Use `default_pools`.
    * - `"geo"`: Use `region_pools`/`country_pools`/`pop_pools`. For non-proxied
@@ -3777,8 +3791,9 @@ export interface LoadBalancerCreateParams {
     | '""';
 
   /**
-   * Time to live (TTL) of the DNS entry for the IP address returned by this load
-   * balancer. This only applies to gray-clouded (unproxied) load balancers.
+   * Body param: Time to live (TTL) of the DNS entry for the IP address returned by
+   * this load balancer. This only applies to gray-clouded (unproxied) load
+   * balancers.
    */
   ttl?: number;
 }
@@ -4300,27 +4315,33 @@ export namespace LoadBalancerCreateParams {
 
 export interface LoadBalancerUpdateParams {
   /**
-   * A list of pool IDs ordered by their failover priority. Pools defined here are
-   * used by default, or when region_pools are not configured for a given region.
+   * Path param:
+   */
+  zone_id: string;
+
+  /**
+   * Body param: A list of pool IDs ordered by their failover priority. Pools defined
+   * here are used by default, or when region_pools are not configured for a given
+   * region.
    */
   default_pools: Array<string>;
 
   /**
-   * The pool ID to use when all other pools are detected as unhealthy.
+   * Body param: The pool ID to use when all other pools are detected as unhealthy.
    */
   fallback_pool: unknown;
 
   /**
-   * The DNS hostname to associate with your Load Balancer. If this hostname already
-   * exists as a DNS record in Cloudflare's DNS, the Load Balancer will take
-   * precedence and the DNS record will not be used.
+   * Body param: The DNS hostname to associate with your Load Balancer. If this
+   * hostname already exists as a DNS record in Cloudflare's DNS, the Load Balancer
+   * will take precedence and the DNS record will not be used.
    */
   name: string;
 
   /**
-   * Controls features that modify the routing of requests to pools and origins in
-   * response to dynamic conditions, such as during the interval between active
-   * health monitoring requests. For example, zero-downtime failover occurs
+   * Body param: Controls features that modify the routing of requests to pools and
+   * origins in response to dynamic conditions, such as during the interval between
+   * active health monitoring requests. For example, zero-downtime failover occurs
    * immediately when an origin becomes unavailable due to HTTP 521, 522, or 523
    * response codes. If there is another healthy origin in the same pool, the request
    * is retried once against this alternate origin.
@@ -4328,44 +4349,45 @@ export interface LoadBalancerUpdateParams {
   adaptive_routing?: LoadBalancerUpdateParams.AdaptiveRouting;
 
   /**
-   * A mapping of country codes to a list of pool IDs (ordered by their failover
-   * priority) for the given country. Any country not explicitly defined will fall
-   * back to using the corresponding region_pool mapping if it exists else to
-   * default_pools.
+   * Body param: A mapping of country codes to a list of pool IDs (ordered by their
+   * failover priority) for the given country. Any country not explicitly defined
+   * will fall back to using the corresponding region_pool mapping if it exists else
+   * to default_pools.
    */
   country_pools?: unknown;
 
   /**
-   * Object description.
+   * Body param: Object description.
    */
   description?: string;
 
   /**
-   * Whether to enable (the default) this load balancer.
+   * Body param: Whether to enable (the default) this load balancer.
    */
   enabled?: boolean;
 
   /**
-   * Controls location-based steering for non-proxied requests. See `steering_policy`
-   * to learn how steering is affected.
+   * Body param: Controls location-based steering for non-proxied requests. See
+   * `steering_policy` to learn how steering is affected.
    */
   location_strategy?: LoadBalancerUpdateParams.LocationStrategy;
 
   /**
-   * (Enterprise only): A mapping of Cloudflare PoP identifiers to a list of pool IDs
-   * (ordered by their failover priority) for the PoP (datacenter). Any PoPs not
-   * explicitly defined will fall back to using the corresponding country_pool, then
-   * region_pool mapping if it exists else to default_pools.
+   * Body param: (Enterprise only): A mapping of Cloudflare PoP identifiers to a list
+   * of pool IDs (ordered by their failover priority) for the PoP (datacenter). Any
+   * PoPs not explicitly defined will fall back to using the corresponding
+   * country_pool, then region_pool mapping if it exists else to default_pools.
    */
   pop_pools?: unknown;
 
   /**
-   * Whether the hostname should be gray clouded (false) or orange clouded (true).
+   * Body param: Whether the hostname should be gray clouded (false) or orange
+   * clouded (true).
    */
   proxied?: boolean;
 
   /**
-   * Configures pool weights.
+   * Body param: Configures pool weights.
    *
    * - `steering_policy="random"`: A random pool is selected with probability
    *   proportional to pool weights.
@@ -4377,21 +4399,21 @@ export interface LoadBalancerUpdateParams {
   random_steering?: LoadBalancerUpdateParams.RandomSteering;
 
   /**
-   * A mapping of region codes to a list of pool IDs (ordered by their failover
-   * priority) for the given region. Any regions not explicitly defined will fall
-   * back to using default_pools.
+   * Body param: A mapping of region codes to a list of pool IDs (ordered by their
+   * failover priority) for the given region. Any regions not explicitly defined will
+   * fall back to using default_pools.
    */
   region_pools?: unknown;
 
   /**
-   * BETA Field Not General Access: A list of rules for this load balancer to
-   * execute.
+   * Body param: BETA Field Not General Access: A list of rules for this load
+   * balancer to execute.
    */
   rules?: Array<LoadBalancerUpdateParams.Rule>;
 
   /**
-   * Specifies the type of session affinity the load balancer should use unless
-   * specified as `"none"` or "" (default). The supported types are:
+   * Body param: Specifies the type of session affinity the load balancer should use
+   * unless specified as `"none"` or "" (default). The supported types are:
    *
    * - `"cookie"`: On the first request to a proxied load balancer, a cookie is
    *   generated, encoding information of which origin the request will be forwarded
@@ -4417,14 +4439,15 @@ export interface LoadBalancerUpdateParams {
   session_affinity?: 'none' | 'cookie' | 'ip_cookie' | 'header' | '""';
 
   /**
-   * Configures attributes for session affinity.
+   * Body param: Configures attributes for session affinity.
    */
   session_affinity_attributes?: LoadBalancerUpdateParams.SessionAffinityAttributes;
 
   /**
-   * Time, in seconds, until a client's session expires after being created. Once the
-   * expiry time has been reached, subsequent requests may get sent to a different
-   * origin server. The accepted ranges per `session_affinity` policy are:
+   * Body param: Time, in seconds, until a client's session expires after being
+   * created. Once the expiry time has been reached, subsequent requests may get sent
+   * to a different origin server. The accepted ranges per `session_affinity` policy
+   * are:
    *
    * - `"cookie"` / `"ip_cookie"`: The current default of 23 hours will be used
    *   unless explicitly set. The accepted range of values is between [1800, 604800].
@@ -4436,7 +4459,7 @@ export interface LoadBalancerUpdateParams {
   session_affinity_ttl?: number;
 
   /**
-   * Steering Policy for this load balancer.
+   * Body param: Steering Policy for this load balancer.
    *
    * - `"off"`: Use `default_pools`.
    * - `"geo"`: Use `region_pools`/`country_pools`/`pop_pools`. For non-proxied
@@ -4470,8 +4493,9 @@ export interface LoadBalancerUpdateParams {
     | '""';
 
   /**
-   * Time to live (TTL) of the DNS entry for the IP address returned by this load
-   * balancer. This only applies to gray-clouded (unproxied) load balancers.
+   * Body param: Time to live (TTL) of the DNS entry for the IP address returned by
+   * this load balancer. This only applies to gray-clouded (unproxied) load
+   * balancers.
    */
   ttl?: number;
 }
@@ -4991,11 +5015,24 @@ export namespace LoadBalancerUpdateParams {
   }
 }
 
+export interface LoadBalancerListParams {
+  zone_id: string;
+}
+
+export interface LoadBalancerDeleteParams {
+  zone_id: string;
+}
+
 export interface LoadBalancerEditParams {
   /**
-   * Controls features that modify the routing of requests to pools and origins in
-   * response to dynamic conditions, such as during the interval between active
-   * health monitoring requests. For example, zero-downtime failover occurs
+   * Path param:
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Controls features that modify the routing of requests to pools and
+   * origins in response to dynamic conditions, such as during the interval between
+   * active health monitoring requests. For example, zero-downtime failover occurs
    * immediately when an origin becomes unavailable due to HTTP 521, 522, or 523
    * response codes. If there is another healthy origin in the same pool, the request
    * is retried once against this alternate origin.
@@ -5003,62 +5040,64 @@ export interface LoadBalancerEditParams {
   adaptive_routing?: LoadBalancerEditParams.AdaptiveRouting;
 
   /**
-   * A mapping of country codes to a list of pool IDs (ordered by their failover
-   * priority) for the given country. Any country not explicitly defined will fall
-   * back to using the corresponding region_pool mapping if it exists else to
-   * default_pools.
+   * Body param: A mapping of country codes to a list of pool IDs (ordered by their
+   * failover priority) for the given country. Any country not explicitly defined
+   * will fall back to using the corresponding region_pool mapping if it exists else
+   * to default_pools.
    */
   country_pools?: unknown;
 
   /**
-   * A list of pool IDs ordered by their failover priority. Pools defined here are
-   * used by default, or when region_pools are not configured for a given region.
+   * Body param: A list of pool IDs ordered by their failover priority. Pools defined
+   * here are used by default, or when region_pools are not configured for a given
+   * region.
    */
   default_pools?: Array<string>;
 
   /**
-   * Object description.
+   * Body param: Object description.
    */
   description?: string;
 
   /**
-   * Whether to enable (the default) this load balancer.
+   * Body param: Whether to enable (the default) this load balancer.
    */
   enabled?: boolean;
 
   /**
-   * The pool ID to use when all other pools are detected as unhealthy.
+   * Body param: The pool ID to use when all other pools are detected as unhealthy.
    */
   fallback_pool?: unknown;
 
   /**
-   * Controls location-based steering for non-proxied requests. See `steering_policy`
-   * to learn how steering is affected.
+   * Body param: Controls location-based steering for non-proxied requests. See
+   * `steering_policy` to learn how steering is affected.
    */
   location_strategy?: LoadBalancerEditParams.LocationStrategy;
 
   /**
-   * The DNS hostname to associate with your Load Balancer. If this hostname already
-   * exists as a DNS record in Cloudflare's DNS, the Load Balancer will take
-   * precedence and the DNS record will not be used.
+   * Body param: The DNS hostname to associate with your Load Balancer. If this
+   * hostname already exists as a DNS record in Cloudflare's DNS, the Load Balancer
+   * will take precedence and the DNS record will not be used.
    */
   name?: string;
 
   /**
-   * (Enterprise only): A mapping of Cloudflare PoP identifiers to a list of pool IDs
-   * (ordered by their failover priority) for the PoP (datacenter). Any PoPs not
-   * explicitly defined will fall back to using the corresponding country_pool, then
-   * region_pool mapping if it exists else to default_pools.
+   * Body param: (Enterprise only): A mapping of Cloudflare PoP identifiers to a list
+   * of pool IDs (ordered by their failover priority) for the PoP (datacenter). Any
+   * PoPs not explicitly defined will fall back to using the corresponding
+   * country_pool, then region_pool mapping if it exists else to default_pools.
    */
   pop_pools?: unknown;
 
   /**
-   * Whether the hostname should be gray clouded (false) or orange clouded (true).
+   * Body param: Whether the hostname should be gray clouded (false) or orange
+   * clouded (true).
    */
   proxied?: boolean;
 
   /**
-   * Configures pool weights.
+   * Body param: Configures pool weights.
    *
    * - `steering_policy="random"`: A random pool is selected with probability
    *   proportional to pool weights.
@@ -5070,21 +5109,21 @@ export interface LoadBalancerEditParams {
   random_steering?: LoadBalancerEditParams.RandomSteering;
 
   /**
-   * A mapping of region codes to a list of pool IDs (ordered by their failover
-   * priority) for the given region. Any regions not explicitly defined will fall
-   * back to using default_pools.
+   * Body param: A mapping of region codes to a list of pool IDs (ordered by their
+   * failover priority) for the given region. Any regions not explicitly defined will
+   * fall back to using default_pools.
    */
   region_pools?: unknown;
 
   /**
-   * BETA Field Not General Access: A list of rules for this load balancer to
-   * execute.
+   * Body param: BETA Field Not General Access: A list of rules for this load
+   * balancer to execute.
    */
   rules?: Array<LoadBalancerEditParams.Rule>;
 
   /**
-   * Specifies the type of session affinity the load balancer should use unless
-   * specified as `"none"` or "" (default). The supported types are:
+   * Body param: Specifies the type of session affinity the load balancer should use
+   * unless specified as `"none"` or "" (default). The supported types are:
    *
    * - `"cookie"`: On the first request to a proxied load balancer, a cookie is
    *   generated, encoding information of which origin the request will be forwarded
@@ -5110,14 +5149,15 @@ export interface LoadBalancerEditParams {
   session_affinity?: 'none' | 'cookie' | 'ip_cookie' | 'header' | '""';
 
   /**
-   * Configures attributes for session affinity.
+   * Body param: Configures attributes for session affinity.
    */
   session_affinity_attributes?: LoadBalancerEditParams.SessionAffinityAttributes;
 
   /**
-   * Time, in seconds, until a client's session expires after being created. Once the
-   * expiry time has been reached, subsequent requests may get sent to a different
-   * origin server. The accepted ranges per `session_affinity` policy are:
+   * Body param: Time, in seconds, until a client's session expires after being
+   * created. Once the expiry time has been reached, subsequent requests may get sent
+   * to a different origin server. The accepted ranges per `session_affinity` policy
+   * are:
    *
    * - `"cookie"` / `"ip_cookie"`: The current default of 23 hours will be used
    *   unless explicitly set. The accepted range of values is between [1800, 604800].
@@ -5129,7 +5169,7 @@ export interface LoadBalancerEditParams {
   session_affinity_ttl?: number;
 
   /**
-   * Steering Policy for this load balancer.
+   * Body param: Steering Policy for this load balancer.
    *
    * - `"off"`: Use `default_pools`.
    * - `"geo"`: Use `region_pools`/`country_pools`/`pop_pools`. For non-proxied
@@ -5163,8 +5203,9 @@ export interface LoadBalancerEditParams {
     | '""';
 
   /**
-   * Time to live (TTL) of the DNS entry for the IP address returned by this load
-   * balancer. This only applies to gray-clouded (unproxied) load balancers.
+   * Body param: Time to live (TTL) of the DNS entry for the IP address returned by
+   * this load balancer. This only applies to gray-clouded (unproxied) load
+   * balancers.
    */
   ttl?: number;
 }
@@ -5684,6 +5725,10 @@ export namespace LoadBalancerEditParams {
   }
 }
 
+export interface LoadBalancerGetParams {
+  zone_id: string;
+}
+
 export namespace LoadBalancers {
   export import LoadBalancerCreateResponse = LoadBalancersAPI.LoadBalancerCreateResponse;
   export import LoadBalancerUpdateResponse = LoadBalancersAPI.LoadBalancerUpdateResponse;
@@ -5693,7 +5738,10 @@ export namespace LoadBalancers {
   export import LoadBalancerGetResponse = LoadBalancersAPI.LoadBalancerGetResponse;
   export import LoadBalancerCreateParams = LoadBalancersAPI.LoadBalancerCreateParams;
   export import LoadBalancerUpdateParams = LoadBalancersAPI.LoadBalancerUpdateParams;
+  export import LoadBalancerListParams = LoadBalancersAPI.LoadBalancerListParams;
+  export import LoadBalancerDeleteParams = LoadBalancersAPI.LoadBalancerDeleteParams;
   export import LoadBalancerEditParams = LoadBalancersAPI.LoadBalancerEditParams;
+  export import LoadBalancerGetParams = LoadBalancersAPI.LoadBalancerGetParams;
   export import Monitors = MonitorsAPI.Monitors;
   export import MonitorCreateResponse = MonitorsAPI.MonitorCreateResponse;
   export import MonitorUpdateResponse = MonitorsAPI.MonitorUpdateResponse;
@@ -5703,7 +5751,10 @@ export namespace LoadBalancers {
   export import MonitorGetResponse = MonitorsAPI.MonitorGetResponse;
   export import MonitorCreateParams = MonitorsAPI.MonitorCreateParams;
   export import MonitorUpdateParams = MonitorsAPI.MonitorUpdateParams;
+  export import MonitorListParams = MonitorsAPI.MonitorListParams;
+  export import MonitorDeleteParams = MonitorsAPI.MonitorDeleteParams;
   export import MonitorEditParams = MonitorsAPI.MonitorEditParams;
+  export import MonitorGetParams = MonitorsAPI.MonitorGetParams;
   export import Pools = PoolsAPI.Pools;
   export import PoolCreateResponse = PoolsAPI.PoolCreateResponse;
   export import PoolUpdateResponse = PoolsAPI.PoolUpdateResponse;
@@ -5714,13 +5765,17 @@ export namespace LoadBalancers {
   export import PoolCreateParams = PoolsAPI.PoolCreateParams;
   export import PoolUpdateParams = PoolsAPI.PoolUpdateParams;
   export import PoolListParams = PoolsAPI.PoolListParams;
+  export import PoolDeleteParams = PoolsAPI.PoolDeleteParams;
   export import PoolEditParams = PoolsAPI.PoolEditParams;
+  export import PoolGetParams = PoolsAPI.PoolGetParams;
   export import Previews = PreviewsAPI.Previews;
   export import PreviewGetResponse = PreviewsAPI.PreviewGetResponse;
+  export import PreviewGetParams = PreviewsAPI.PreviewGetParams;
   export import Regions = RegionsAPI.Regions;
   export import RegionListResponse = RegionsAPI.RegionListResponse;
   export import RegionGetResponse = RegionsAPI.RegionGetResponse;
   export import RegionListParams = RegionsAPI.RegionListParams;
+  export import RegionGetParams = RegionsAPI.RegionGetParams;
   export import Searches = SearchesAPI.Searches;
   export import SearchListResponse = SearchesAPI.SearchListResponse;
   export import SearchListParams = SearchesAPI.SearchListParams;

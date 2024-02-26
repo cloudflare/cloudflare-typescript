@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as PoolsAPI from 'cloudflare/resources/load-balancers/pools/pools';
 import * as HealthAPI from 'cloudflare/resources/load-balancers/pools/health';
 import * as ReferencesAPI from 'cloudflare/resources/load-balancers/pools/references';
@@ -14,13 +13,10 @@ export class Pools extends APIResource {
   /**
    * Create a new pool.
    */
-  create(
-    accountId: string,
-    body: PoolCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PoolCreateResponse> {
+  create(params: PoolCreateParams, options?: Core.RequestOptions): Core.APIPromise<PoolCreateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/load_balancers/pools`, {
+      this._client.post(`/accounts/${account_id}/load_balancers/pools`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: PoolCreateResponse }>
@@ -31,13 +27,13 @@ export class Pools extends APIResource {
    * Modify a configured pool.
    */
   update(
-    accountId: string,
     poolId: string,
-    body: PoolUpdateParams,
+    params: PoolUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PoolUpdateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.put(`/accounts/${accountId}/load_balancers/pools/${poolId}`, {
+      this._client.put(`/accounts/${account_id}/load_balancers/pools/${poolId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: PoolUpdateResponse }>
@@ -47,22 +43,10 @@ export class Pools extends APIResource {
   /**
    * List configured pools.
    */
-  list(
-    accountId: string,
-    query?: PoolListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PoolListResponse | null>;
-  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<PoolListResponse | null>;
-  list(
-    accountId: string,
-    query: PoolListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PoolListResponse | null> {
-    if (isRequestOptions(query)) {
-      return this.list(accountId, {}, query);
-    }
+  list(params: PoolListParams, options?: Core.RequestOptions): Core.APIPromise<PoolListResponse | null> {
+    const { account_id, ...query } = params;
     return (
-      this._client.get(`/accounts/${accountId}/load_balancers/pools`, {
+      this._client.get(`/accounts/${account_id}/load_balancers/pools`, {
         query,
         ...options,
       }) as Core.APIPromise<{ result: PoolListResponse | null }>
@@ -73,13 +57,14 @@ export class Pools extends APIResource {
    * Delete a configured pool.
    */
   delete(
-    accountId: string,
     poolId: string,
+    params: PoolDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PoolDeleteResponse> {
+    const { account_id } = params;
     return (
       this._client.delete(
-        `/accounts/${accountId}/load_balancers/pools/${poolId}`,
+        `/accounts/${account_id}/load_balancers/pools/${poolId}`,
         options,
       ) as Core.APIPromise<{ result: PoolDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -89,13 +74,13 @@ export class Pools extends APIResource {
    * Apply changes to an existing pool, overwriting the supplied properties.
    */
   edit(
-    accountId: string,
     poolId: string,
-    body: PoolEditParams,
+    params: PoolEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PoolEditResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.patch(`/accounts/${accountId}/load_balancers/pools/${poolId}`, {
+      this._client.patch(`/accounts/${account_id}/load_balancers/pools/${poolId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: PoolEditResponse }>
@@ -105,9 +90,14 @@ export class Pools extends APIResource {
   /**
    * Fetch a single configured pool.
    */
-  get(accountId: string, poolId: string, options?: Core.RequestOptions): Core.APIPromise<PoolGetResponse> {
+  get(
+    poolId: string,
+    params: PoolGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PoolGetResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/load_balancers/pools/${poolId}`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/load_balancers/pools/${poolId}`, options) as Core.APIPromise<{
         result: PoolGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -1554,62 +1544,68 @@ export namespace PoolGetResponse {
 
 export interface PoolCreateParams {
   /**
-   * A short name (tag) for the pool. Only alphanumeric characters, hyphens, and
-   * underscores are allowed.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: A short name (tag) for the pool. Only alphanumeric characters,
+   * hyphens, and underscores are allowed.
    */
   name: string;
 
   /**
-   * The list of origins within this pool. Traffic directed at this pool is balanced
-   * across all currently healthy origins, provided the pool itself is healthy.
+   * Body param: The list of origins within this pool. Traffic directed at this pool
+   * is balanced across all currently healthy origins, provided the pool itself is
+   * healthy.
    */
   origins: Array<PoolCreateParams.Origin>;
 
   /**
-   * A human-readable description of the pool.
+   * Body param: A human-readable description of the pool.
    */
   description?: string;
 
   /**
-   * Whether to enable (the default) or disable this pool. Disabled pools will not
-   * receive traffic and are excluded from health checks. Disabling a pool will cause
-   * any load balancers using it to failover to the next pool (if any).
+   * Body param: Whether to enable (the default) or disable this pool. Disabled pools
+   * will not receive traffic and are excluded from health checks. Disabling a pool
+   * will cause any load balancers using it to failover to the next pool (if any).
    */
   enabled?: boolean;
 
   /**
-   * The latitude of the data center containing the origins used in this pool in
-   * decimal degrees. If this is set, longitude must also be set.
+   * Body param: The latitude of the data center containing the origins used in this
+   * pool in decimal degrees. If this is set, longitude must also be set.
    */
   latitude?: number;
 
   /**
-   * Configures load shedding policies and percentages for the pool.
+   * Body param: Configures load shedding policies and percentages for the pool.
    */
   load_shedding?: PoolCreateParams.LoadShedding;
 
   /**
-   * The longitude of the data center containing the origins used in this pool in
-   * decimal degrees. If this is set, latitude must also be set.
+   * Body param: The longitude of the data center containing the origins used in this
+   * pool in decimal degrees. If this is set, latitude must also be set.
    */
   longitude?: number;
 
   /**
-   * The minimum number of origins that must be healthy for this pool to serve
-   * traffic. If the number of healthy origins falls below this number, the pool will
-   * be marked unhealthy and will failover to the next available pool.
+   * Body param: The minimum number of origins that must be healthy for this pool to
+   * serve traffic. If the number of healthy origins falls below this number, the
+   * pool will be marked unhealthy and will failover to the next available pool.
    */
   minimum_origins?: number;
 
   /**
-   * The ID of the Monitor to use for checking the health of origins within this
-   * pool.
+   * Body param: The ID of the Monitor to use for checking the health of origins
+   * within this pool.
    */
   monitor?: unknown;
 
   /**
-   * This field is now deprecated. It has been moved to Cloudflare's Centralized
-   * Notification service
+   * Body param: This field is now deprecated. It has been moved to Cloudflare's
+   * Centralized Notification service
    * https://developers.cloudflare.com/fundamentals/notifications/. The email address
    * to send health status notifications to. This can be an individual mailbox or a
    * mailing list. Multiple emails can be supplied as a comma delimited list.
@@ -1617,14 +1613,14 @@ export interface PoolCreateParams {
   notification_email?: string;
 
   /**
-   * Filter pool and origin health notifications by resource type or health status.
-   * Use null to reset.
+   * Body param: Filter pool and origin health notifications by resource type or
+   * health status. Use null to reset.
    */
   notification_filter?: PoolCreateParams.NotificationFilter | null;
 
   /**
-   * Configures origin steering for the pool. Controls how origins are selected for
-   * new sessions and traffic without session affinity.
+   * Body param: Configures origin steering for the pool. Controls how origins are
+   * selected for new sessions and traffic without session affinity.
    */
   origin_steering?: PoolCreateParams.OriginSteering;
 }
@@ -1801,20 +1797,26 @@ export namespace PoolCreateParams {
 
 export interface PoolUpdateParams {
   /**
-   * A short name (tag) for the pool. Only alphanumeric characters, hyphens, and
-   * underscores are allowed.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: A short name (tag) for the pool. Only alphanumeric characters,
+   * hyphens, and underscores are allowed.
    */
   name: string;
 
   /**
-   * The list of origins within this pool. Traffic directed at this pool is balanced
-   * across all currently healthy origins, provided the pool itself is healthy.
+   * Body param: The list of origins within this pool. Traffic directed at this pool
+   * is balanced across all currently healthy origins, provided the pool itself is
+   * healthy.
    */
   origins: Array<PoolUpdateParams.Origin>;
 
   /**
-   * A list of regions from which to run health checks. Null means every Cloudflare
-   * data center.
+   * Body param: A list of regions from which to run health checks. Null means every
+   * Cloudflare data center.
    */
   check_regions?: Array<
     | 'WNAM'
@@ -1834,50 +1836,50 @@ export interface PoolUpdateParams {
   > | null;
 
   /**
-   * A human-readable description of the pool.
+   * Body param: A human-readable description of the pool.
    */
   description?: string;
 
   /**
-   * Whether to enable (the default) or disable this pool. Disabled pools will not
-   * receive traffic and are excluded from health checks. Disabling a pool will cause
-   * any load balancers using it to failover to the next pool (if any).
+   * Body param: Whether to enable (the default) or disable this pool. Disabled pools
+   * will not receive traffic and are excluded from health checks. Disabling a pool
+   * will cause any load balancers using it to failover to the next pool (if any).
    */
   enabled?: boolean;
 
   /**
-   * The latitude of the data center containing the origins used in this pool in
-   * decimal degrees. If this is set, longitude must also be set.
+   * Body param: The latitude of the data center containing the origins used in this
+   * pool in decimal degrees. If this is set, longitude must also be set.
    */
   latitude?: number;
 
   /**
-   * Configures load shedding policies and percentages for the pool.
+   * Body param: Configures load shedding policies and percentages for the pool.
    */
   load_shedding?: PoolUpdateParams.LoadShedding;
 
   /**
-   * The longitude of the data center containing the origins used in this pool in
-   * decimal degrees. If this is set, latitude must also be set.
+   * Body param: The longitude of the data center containing the origins used in this
+   * pool in decimal degrees. If this is set, latitude must also be set.
    */
   longitude?: number;
 
   /**
-   * The minimum number of origins that must be healthy for this pool to serve
-   * traffic. If the number of healthy origins falls below this number, the pool will
-   * be marked unhealthy and will failover to the next available pool.
+   * Body param: The minimum number of origins that must be healthy for this pool to
+   * serve traffic. If the number of healthy origins falls below this number, the
+   * pool will be marked unhealthy and will failover to the next available pool.
    */
   minimum_origins?: number;
 
   /**
-   * The ID of the Monitor to use for checking the health of origins within this
-   * pool.
+   * Body param: The ID of the Monitor to use for checking the health of origins
+   * within this pool.
    */
   monitor?: unknown;
 
   /**
-   * This field is now deprecated. It has been moved to Cloudflare's Centralized
-   * Notification service
+   * Body param: This field is now deprecated. It has been moved to Cloudflare's
+   * Centralized Notification service
    * https://developers.cloudflare.com/fundamentals/notifications/. The email address
    * to send health status notifications to. This can be an individual mailbox or a
    * mailing list. Multiple emails can be supplied as a comma delimited list.
@@ -1885,14 +1887,14 @@ export interface PoolUpdateParams {
   notification_email?: string;
 
   /**
-   * Filter pool and origin health notifications by resource type or health status.
-   * Use null to reset.
+   * Body param: Filter pool and origin health notifications by resource type or
+   * health status. Use null to reset.
    */
   notification_filter?: PoolUpdateParams.NotificationFilter | null;
 
   /**
-   * Configures origin steering for the pool. Controls how origins are selected for
-   * new sessions and traffic without session affinity.
+   * Body param: Configures origin steering for the pool. Controls how origins are
+   * selected for new sessions and traffic without session affinity.
    */
   origin_steering?: PoolUpdateParams.OriginSteering;
 }
@@ -2069,16 +2071,33 @@ export namespace PoolUpdateParams {
 
 export interface PoolListParams {
   /**
-   * The ID of the Monitor to use for checking the health of origins within this
-   * pool.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Query param: The ID of the Monitor to use for checking the health of origins
+   * within this pool.
    */
   monitor?: unknown;
 }
 
+export interface PoolDeleteParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export interface PoolEditParams {
   /**
-   * A list of regions from which to run health checks. Null means every Cloudflare
-   * data center.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: A list of regions from which to run health checks. Null means every
+   * Cloudflare data center.
    */
   check_regions?: Array<
     | 'WNAM'
@@ -2098,56 +2117,56 @@ export interface PoolEditParams {
   > | null;
 
   /**
-   * A human-readable description of the pool.
+   * Body param: A human-readable description of the pool.
    */
   description?: string;
 
   /**
-   * Whether to enable (the default) or disable this pool. Disabled pools will not
-   * receive traffic and are excluded from health checks. Disabling a pool will cause
-   * any load balancers using it to failover to the next pool (if any).
+   * Body param: Whether to enable (the default) or disable this pool. Disabled pools
+   * will not receive traffic and are excluded from health checks. Disabling a pool
+   * will cause any load balancers using it to failover to the next pool (if any).
    */
   enabled?: boolean;
 
   /**
-   * The latitude of the data center containing the origins used in this pool in
-   * decimal degrees. If this is set, longitude must also be set.
+   * Body param: The latitude of the data center containing the origins used in this
+   * pool in decimal degrees. If this is set, longitude must also be set.
    */
   latitude?: number;
 
   /**
-   * Configures load shedding policies and percentages for the pool.
+   * Body param: Configures load shedding policies and percentages for the pool.
    */
   load_shedding?: PoolEditParams.LoadShedding;
 
   /**
-   * The longitude of the data center containing the origins used in this pool in
-   * decimal degrees. If this is set, latitude must also be set.
+   * Body param: The longitude of the data center containing the origins used in this
+   * pool in decimal degrees. If this is set, latitude must also be set.
    */
   longitude?: number;
 
   /**
-   * The minimum number of origins that must be healthy for this pool to serve
-   * traffic. If the number of healthy origins falls below this number, the pool will
-   * be marked unhealthy and will failover to the next available pool.
+   * Body param: The minimum number of origins that must be healthy for this pool to
+   * serve traffic. If the number of healthy origins falls below this number, the
+   * pool will be marked unhealthy and will failover to the next available pool.
    */
   minimum_origins?: number;
 
   /**
-   * The ID of the Monitor to use for checking the health of origins within this
-   * pool.
+   * Body param: The ID of the Monitor to use for checking the health of origins
+   * within this pool.
    */
   monitor?: unknown;
 
   /**
-   * A short name (tag) for the pool. Only alphanumeric characters, hyphens, and
-   * underscores are allowed.
+   * Body param: A short name (tag) for the pool. Only alphanumeric characters,
+   * hyphens, and underscores are allowed.
    */
   name?: string;
 
   /**
-   * This field is now deprecated. It has been moved to Cloudflare's Centralized
-   * Notification service
+   * Body param: This field is now deprecated. It has been moved to Cloudflare's
+   * Centralized Notification service
    * https://developers.cloudflare.com/fundamentals/notifications/. The email address
    * to send health status notifications to. This can be an individual mailbox or a
    * mailing list. Multiple emails can be supplied as a comma delimited list.
@@ -2155,20 +2174,21 @@ export interface PoolEditParams {
   notification_email?: string;
 
   /**
-   * Filter pool and origin health notifications by resource type or health status.
-   * Use null to reset.
+   * Body param: Filter pool and origin health notifications by resource type or
+   * health status. Use null to reset.
    */
   notification_filter?: PoolEditParams.NotificationFilter | null;
 
   /**
-   * Configures origin steering for the pool. Controls how origins are selected for
-   * new sessions and traffic without session affinity.
+   * Body param: Configures origin steering for the pool. Controls how origins are
+   * selected for new sessions and traffic without session affinity.
    */
   origin_steering?: PoolEditParams.OriginSteering;
 
   /**
-   * The list of origins within this pool. Traffic directed at this pool is balanced
-   * across all currently healthy origins, provided the pool itself is healthy.
+   * Body param: The list of origins within this pool. Traffic directed at this pool
+   * is balanced across all currently healthy origins, provided the pool itself is
+   * healthy.
    */
   origins?: Array<PoolEditParams.Origin>;
 }
@@ -2343,6 +2363,13 @@ export namespace PoolEditParams {
   }
 }
 
+export interface PoolGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export namespace Pools {
   export import PoolCreateResponse = PoolsAPI.PoolCreateResponse;
   export import PoolUpdateResponse = PoolsAPI.PoolUpdateResponse;
@@ -2353,11 +2380,15 @@ export namespace Pools {
   export import PoolCreateParams = PoolsAPI.PoolCreateParams;
   export import PoolUpdateParams = PoolsAPI.PoolUpdateParams;
   export import PoolListParams = PoolsAPI.PoolListParams;
+  export import PoolDeleteParams = PoolsAPI.PoolDeleteParams;
   export import PoolEditParams = PoolsAPI.PoolEditParams;
+  export import PoolGetParams = PoolsAPI.PoolGetParams;
   export import Health = HealthAPI.Health;
   export import HealthCreateResponse = HealthAPI.HealthCreateResponse;
   export import HealthGetResponse = HealthAPI.HealthGetResponse;
   export import HealthCreateParams = HealthAPI.HealthCreateParams;
+  export import HealthGetParams = HealthAPI.HealthGetParams;
   export import References = ReferencesAPI.References;
   export import ReferenceListResponse = ReferencesAPI.ReferenceListResponse;
+  export import ReferenceListParams = ReferencesAPI.ReferenceListParams;
 }

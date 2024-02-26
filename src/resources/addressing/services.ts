@@ -11,9 +11,10 @@ export class Services extends APIResource {
    * IP addresses. This endpoint can be used as a reference of available services on
    * the Cloudflare network, and their service IDs.
    */
-  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<ServiceListResponse> {
+  list(params: ServiceListParams, options?: Core.RequestOptions): Core.APIPromise<ServiceListResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/addressing/services`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/addressing/services`, options) as Core.APIPromise<{
         result: ServiceListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -36,6 +37,14 @@ export namespace ServiceListResponse {
   }
 }
 
+export interface ServiceListParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export namespace Services {
   export import ServiceListResponse = ServicesAPI.ServiceListResponse;
+  export import ServiceListParams = ServicesAPI.ServiceListParams;
 }

@@ -11,12 +11,12 @@ export class RegionalTieredCache extends APIResource {
    * topologies.
    */
   edit(
-    zoneId: string,
-    body: RegionalTieredCacheEditParams,
+    params: RegionalTieredCacheEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RegionalTieredCacheEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/cache/regional_tiered_cache`, {
+      this._client.patch(`/zones/${zone_id}/cache/regional_tiered_cache`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: RegionalTieredCacheEditResponse }>
@@ -28,9 +28,13 @@ export class RegionalTieredCache extends APIResource {
    * upper tier. This can help improve performance for smart and custom tiered cache
    * topologies.
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<RegionalTieredCacheGetResponse> {
+  get(
+    params: RegionalTieredCacheGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RegionalTieredCacheGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/cache/regional_tiered_cache`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/cache/regional_tiered_cache`, options) as Core.APIPromise<{
         result: RegionalTieredCacheGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -125,13 +129,26 @@ export namespace RegionalTieredCacheGetResponse {
 
 export interface RegionalTieredCacheEditParams {
   /**
-   * Value of the Regional Tiered Cache zone setting.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Value of the Regional Tiered Cache zone setting.
    */
   value: 'on' | 'off';
+}
+
+export interface RegionalTieredCacheGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }
 
 export namespace RegionalTieredCache {
   export import RegionalTieredCacheEditResponse = RegionalTieredCacheAPI.RegionalTieredCacheEditResponse;
   export import RegionalTieredCacheGetResponse = RegionalTieredCacheAPI.RegionalTieredCacheGetResponse;
   export import RegionalTieredCacheEditParams = RegionalTieredCacheAPI.RegionalTieredCacheEditParams;
+  export import RegionalTieredCacheGetParams = RegionalTieredCacheAPI.RegionalTieredCacheGetParams;
 }

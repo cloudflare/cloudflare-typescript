@@ -10,6 +10,11 @@ export {
   OutgoingGetResponse,
   OutgoingCreateParams,
   OutgoingUpdateParams,
+  OutgoingDeleteParams,
+  OutgoingDisableParams,
+  OutgoingEnableParams,
+  OutgoingForceNotifyParams,
+  OutgoingGetParams,
   Outgoing,
 } from './outgoing';
-export { StatusGetResponse, Status } from './status';
+export { StatusGetResponse, StatusGetParams, Status } from './status';

@@ -17,9 +17,10 @@ export class WAF extends APIResource {
    * reaches your origin web server.
    * (https://support.cloudflare.com/hc/en-us/articles/200172016).
    */
-  edit(zoneId: string, body: WAFEditParams, options?: Core.RequestOptions): Core.APIPromise<WAFEditResponse> {
+  edit(params: WAFEditParams, options?: Core.RequestOptions): Core.APIPromise<WAFEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/settings/waf`, { body, ...options }) as Core.APIPromise<{
+      this._client.patch(`/zones/${zone_id}/settings/waf`, { body, ...options }) as Core.APIPromise<{
         result: WAFEditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -37,9 +38,10 @@ export class WAF extends APIResource {
    * reaches your origin web server.
    * (https://support.cloudflare.com/hc/en-us/articles/200172016).
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<WAFGetResponse> {
+  get(params: WAFGetParams, options?: Core.RequestOptions): Core.APIPromise<WAFGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/settings/waf`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/settings/waf`, options) as Core.APIPromise<{
         result: WAFGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -118,13 +120,26 @@ export interface WAFGetResponse {
 
 export interface WAFEditParams {
   /**
-   * Value of the zone setting.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Value of the zone setting.
    */
   value: 'on' | 'off';
+}
+
+export interface WAFGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }
 
 export namespace WAF {
   export import WAFEditResponse = WAFAPI.WAFEditResponse;
   export import WAFGetResponse = WAFAPI.WAFGetResponse;
   export import WAFEditParams = WAFAPI.WAFEditParams;
+  export import WAFGetParams = WAFAPI.WAFGetParams;
 }

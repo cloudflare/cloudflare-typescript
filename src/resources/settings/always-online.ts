@@ -13,14 +13,15 @@ export class AlwaysOnline extends APIResource {
    * more information.
    */
   edit(
-    zoneId: string,
-    body: AlwaysOnlineEditParams,
+    params: AlwaysOnlineEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AlwaysOnlineEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/settings/always_online`, { body, ...options }) as Core.APIPromise<{
-        result: AlwaysOnlineEditResponse;
-      }>
+      this._client.patch(`/zones/${zone_id}/settings/always_online`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: AlwaysOnlineEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -31,9 +32,13 @@ export class AlwaysOnline extends APIResource {
    * [Always Online](https://developers.cloudflare.com/cache/about/always-online) for
    * more information.
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<AlwaysOnlineGetResponse> {
+  get(
+    params: AlwaysOnlineGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AlwaysOnlineGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/settings/always_online`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/settings/always_online`, options) as Core.APIPromise<{
         result: AlwaysOnlineGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -102,13 +107,26 @@ export interface AlwaysOnlineGetResponse {
 
 export interface AlwaysOnlineEditParams {
   /**
-   * Value of the zone setting.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Value of the zone setting.
    */
   value: 'on' | 'off';
+}
+
+export interface AlwaysOnlineGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }
 
 export namespace AlwaysOnline {
   export import AlwaysOnlineEditResponse = AlwaysOnlineAPI.AlwaysOnlineEditResponse;
   export import AlwaysOnlineGetResponse = AlwaysOnlineAPI.AlwaysOnlineGetResponse;
   export import AlwaysOnlineEditParams = AlwaysOnlineAPI.AlwaysOnlineEditParams;
+  export import AlwaysOnlineGetParams = AlwaysOnlineAPI.AlwaysOnlineGetParams;
 }

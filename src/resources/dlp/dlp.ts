@@ -21,6 +21,9 @@ export namespace DLP {
   export import DatasetGetResponse = DatasetsAPI.DatasetGetResponse;
   export import DatasetCreateParams = DatasetsAPI.DatasetCreateParams;
   export import DatasetUpdateParams = DatasetsAPI.DatasetUpdateParams;
+  export import DatasetListParams = DatasetsAPI.DatasetListParams;
+  export import DatasetDeleteParams = DatasetsAPI.DatasetDeleteParams;
+  export import DatasetGetParams = DatasetsAPI.DatasetGetParams;
   export import Patterns = PatternsAPI.Patterns;
   export import PatternValidateResponse = PatternsAPI.PatternValidateResponse;
   export import PatternValidateParams = PatternsAPI.PatternValidateParams;
@@ -28,7 +31,10 @@ export namespace DLP {
   export import PayloadLogUpdateResponse = PayloadLogsAPI.PayloadLogUpdateResponse;
   export import PayloadLogGetResponse = PayloadLogsAPI.PayloadLogGetResponse;
   export import PayloadLogUpdateParams = PayloadLogsAPI.PayloadLogUpdateParams;
+  export import PayloadLogGetParams = PayloadLogsAPI.PayloadLogGetParams;
   export import Profiles = ProfilesAPI.Profiles;
   export import ProfileListResponse = ProfilesAPI.ProfileListResponse;
   export import ProfileGetResponse = ProfilesAPI.ProfileGetResponse;
+  export import ProfileListParams = ProfilesAPI.ProfileListParams;
+  export import ProfileGetParams = ProfilesAPI.ProfileGetParams;
 }

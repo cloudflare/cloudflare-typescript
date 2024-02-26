@@ -15,7 +15,7 @@ const cloudflare = new Cloudflare({
 describe('resource accounts', () => {
   // skipped: tests are disabled for the time being
   test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.accounts.update({}, { name: 'Demo Account' });
+    const responsePromise = cloudflare.accounts.update({ account_id: {}, name: 'Demo Account' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -27,17 +27,15 @@ describe('resource accounts', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.accounts.update(
-      {},
-      {
-        name: 'Demo Account',
-        settings: {
-          default_nameservers: 'cloudflare.standard',
-          enforce_twofactor: true,
-          use_account_custom_ns_by_default: true,
-        },
+    const response = await cloudflare.accounts.update({
+      account_id: {},
+      name: 'Demo Account',
+      settings: {
+        default_nameservers: 'cloudflare.standard',
+        enforce_twofactor: true,
+        use_account_custom_ns_by_default: true,
       },
-    );
+    });
   });
 
   // skipped: tests are disabled for the time being
@@ -72,8 +70,8 @@ describe('resource accounts', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
-    const responsePromise = cloudflare.accounts.get({});
+  test.skip('get: only required params', async () => {
+    const responsePromise = cloudflare.accounts.get({ account_id: {} });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -84,10 +82,7 @@ describe('resource accounts', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(cloudflare.accounts.get({}, { path: '/_stainless_unknown_path' })).rejects.toThrow(
-      Cloudflare.NotFoundError,
-    );
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.accounts.get({ account_id: {} });
   });
 });

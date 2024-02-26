@@ -9,13 +9,14 @@ export class Upload extends APIResource {
    * Prepare to upload a new version of a dataset.
    */
   create(
-    accountId: string,
     datasetId: string,
+    params: UploadCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<UploadCreateResponse> {
+    const { account_id } = params;
     return (
       this._client.post(
-        `/accounts/${accountId}/dlp/datasets/${datasetId}/upload`,
+        `/accounts/${account_id}/dlp/datasets/${datasetId}/upload`,
         options,
       ) as Core.APIPromise<{ result: UploadCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -25,15 +26,15 @@ export class Upload extends APIResource {
    * Upload a new version of a dataset.
    */
   edit(
-    accountId: string,
     datasetId: string,
     version: number,
-    body: UploadEditParams,
+    params: UploadEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<UploadEditResponse> {
+    const { account_id } = params;
     return (
       this._client.post(
-        `/accounts/${accountId}/dlp/datasets/${datasetId}/upload/${version}`,
+        `/accounts/${account_id}/dlp/datasets/${datasetId}/upload/${version}`,
         options,
       ) as Core.APIPromise<{ result: UploadEditResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -78,10 +79,17 @@ export namespace UploadEditResponse {
   }
 }
 
-export interface UploadEditParams {}
+export interface UploadCreateParams {
+  account_id: string;
+}
+
+export interface UploadEditParams {
+  account_id: string;
+}
 
 export namespace Upload {
   export import UploadCreateResponse = UploadAPI.UploadCreateResponse;
   export import UploadEditResponse = UploadAPI.UploadEditResponse;
+  export import UploadCreateParams = UploadAPI.UploadCreateParams;
   export import UploadEditParams = UploadAPI.UploadEditParams;
 }

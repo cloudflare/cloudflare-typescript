@@ -9,13 +9,10 @@ export class Calls extends APIResource {
    * Creates a new Cloudflare calls app. An app is an unique enviroment where each
    * Session can access all Tracks within the app.
    */
-  create(
-    accountId: string,
-    body: CallCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CallCreateResponse> {
+  create(params: CallCreateParams, options?: Core.RequestOptions): Core.APIPromise<CallCreateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/calls/apps`, { body, ...options }) as Core.APIPromise<{
+      this._client.post(`/accounts/${account_id}/calls/apps`, { body, ...options }) as Core.APIPromise<{
         result: CallCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -25,13 +22,13 @@ export class Calls extends APIResource {
    * Edit details for a single app.
    */
   update(
-    accountId: string,
     appId: string,
-    body: CallUpdateParams,
+    params: CallUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CallUpdateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.put(`/accounts/${accountId}/calls/apps/${appId}`, {
+      this._client.put(`/accounts/${account_id}/calls/apps/${appId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: CallUpdateResponse }>
@@ -41,9 +38,10 @@ export class Calls extends APIResource {
   /**
    * Lists all apps in the Cloudflare account
    */
-  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<CallListResponse> {
+  list(params: CallListParams, options?: Core.RequestOptions): Core.APIPromise<CallListResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/calls/apps`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/calls/apps`, options) as Core.APIPromise<{
         result: CallListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -53,12 +51,13 @@ export class Calls extends APIResource {
    * Deletes an app from Cloudflare Calls
    */
   delete(
-    accountId: string,
     appId: string,
+    params: CallDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CallDeleteResponse> {
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${accountId}/calls/apps/${appId}`, options) as Core.APIPromise<{
+      this._client.delete(`/accounts/${account_id}/calls/apps/${appId}`, options) as Core.APIPromise<{
         result: CallDeleteResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -67,9 +66,10 @@ export class Calls extends APIResource {
   /**
    * Fetches details for a single Calls app.
    */
-  get(accountId: string, appId: string, options?: Core.RequestOptions): Core.APIPromise<CallGetResponse> {
+  get(appId: string, params: CallGetParams, options?: Core.RequestOptions): Core.APIPromise<CallGetResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/calls/apps/${appId}`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/calls/apps/${appId}`, options) as Core.APIPromise<{
         result: CallGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -197,16 +197,47 @@ export interface CallGetResponse {
 
 export interface CallCreateParams {
   /**
-   * A short description of Calls app, not shown to end users.
+   * Path param: The account identifier tag.
+   */
+  account_id: string;
+
+  /**
+   * Body param: A short description of Calls app, not shown to end users.
    */
   name?: string;
 }
 
 export interface CallUpdateParams {
   /**
-   * A short description of Calls app, not shown to end users.
+   * Path param: The account identifier tag.
+   */
+  account_id: string;
+
+  /**
+   * Body param: A short description of Calls app, not shown to end users.
    */
   name?: string;
+}
+
+export interface CallListParams {
+  /**
+   * The account identifier tag.
+   */
+  account_id: string;
+}
+
+export interface CallDeleteParams {
+  /**
+   * The account identifier tag.
+   */
+  account_id: string;
+}
+
+export interface CallGetParams {
+  /**
+   * The account identifier tag.
+   */
+  account_id: string;
 }
 
 export namespace Calls {
@@ -217,4 +248,7 @@ export namespace Calls {
   export import CallGetResponse = CallsAPI.CallGetResponse;
   export import CallCreateParams = CallsAPI.CallCreateParams;
   export import CallUpdateParams = CallsAPI.CallUpdateParams;
+  export import CallListParams = CallsAPI.CallListParams;
+  export import CallDeleteParams = CallsAPI.CallDeleteParams;
+  export import CallGetParams = CallsAPI.CallGetParams;
 }

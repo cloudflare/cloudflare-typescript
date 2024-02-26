@@ -15,7 +15,8 @@ const cloudflare = new Cloudflare({
 describe('resource postures', () => {
   // skipped: tests are disabled for the time being
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.devices.postures.create('699d98642c564d2e855e9661899b7252', {
+    const responsePromise = cloudflare.devices.postures.create({
+      account_id: '699d98642c564d2e855e9661899b7252',
       name: 'Admin Serial Numbers',
       type: 'file',
     });
@@ -30,7 +31,8 @@ describe('resource postures', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.devices.postures.create('699d98642c564d2e855e9661899b7252', {
+    const response = await cloudflare.devices.postures.create({
+      account_id: '699d98642c564d2e855e9661899b7252',
       name: 'Admin Serial Numbers',
       type: 'file',
       description: 'The rule for admin serial numbers',
@@ -49,11 +51,11 @@ describe('resource postures', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.devices.postures.update(
-      '699d98642c564d2e855e9661899b7252',
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { name: 'Admin Serial Numbers', type: 'file' },
-    );
+    const responsePromise = cloudflare.devices.postures.update('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+      name: 'Admin Serial Numbers',
+      type: 'file',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -65,30 +67,29 @@ describe('resource postures', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.devices.postures.update(
-      '699d98642c564d2e855e9661899b7252',
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      {
-        name: 'Admin Serial Numbers',
-        type: 'file',
-        description: 'The rule for admin serial numbers',
-        expiration: '1h',
-        input: {
-          exists: true,
-          operating_system: 'linux',
-          path: '/bin/cat',
-          sha256: 'https://api.us-2.crowdstrike.com',
-          thumbprint: '0aabab210bdb998e9cf45da2c9ce352977ab531c681b74cf1e487be1bbe9fe6e',
-        },
-        match: [{ platform: 'windows' }, { platform: 'windows' }, { platform: 'windows' }],
-        schedule: '1h',
+    const response = await cloudflare.devices.postures.update('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+      name: 'Admin Serial Numbers',
+      type: 'file',
+      description: 'The rule for admin serial numbers',
+      expiration: '1h',
+      input: {
+        exists: true,
+        operating_system: 'linux',
+        path: '/bin/cat',
+        sha256: 'https://api.us-2.crowdstrike.com',
+        thumbprint: '0aabab210bdb998e9cf45da2c9ce352977ab531c681b74cf1e487be1bbe9fe6e',
       },
-    );
+      match: [{ platform: 'windows' }, { platform: 'windows' }, { platform: 'windows' }],
+      schedule: '1h',
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
-    const responsePromise = cloudflare.devices.postures.list('699d98642c564d2e855e9661899b7252');
+  test.skip('list: only required params', async () => {
+    const responsePromise = cloudflare.devices.postures.list({
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -99,21 +100,17 @@ describe('resource postures', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.devices.postures.list('699d98642c564d2e855e9661899b7252', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('list: required and optional params', async () => {
+    const response = await cloudflare.devices.postures.list({
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
-    const responsePromise = cloudflare.devices.postures.delete(
-      '699d98642c564d2e855e9661899b7252',
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-    );
+  test.skip('delete: only required params', async () => {
+    const responsePromise = cloudflare.devices.postures.delete('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -124,11 +121,17 @@ describe('resource postures', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
-    const responsePromise = cloudflare.devices.postures.get(
-      '699d98642c564d2e855e9661899b7252',
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-    );
+  test.skip('delete: required and optional params', async () => {
+    const response = await cloudflare.devices.postures.delete('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get: only required params', async () => {
+    const responsePromise = cloudflare.devices.postures.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -139,14 +142,9 @@ describe('resource postures', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.devices.postures.get(
-        '699d98642c564d2e855e9661899b7252',
-        'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.devices.postures.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
   });
 });

@@ -13,9 +13,13 @@ export class Profiles extends APIResource {
   /**
    * Lists all DLP profiles in an account.
    */
-  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<ProfileListResponse | null> {
+  list(
+    params: ProfileListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ProfileListResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/dlp/profiles`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/dlp/profiles`, options) as Core.APIPromise<{
         result: ProfileListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -25,12 +29,13 @@ export class Profiles extends APIResource {
    * Fetches a DLP profile by ID. Supports both predefined and custom profiles
    */
   get(
-    accountId: string,
     profileId: string,
+    params: ProfileGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ProfileGetResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/dlp/profiles/${profileId}`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/dlp/profiles/${profileId}`, options) as Core.APIPromise<{
         result: ProfileGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -464,9 +469,25 @@ export namespace ProfileGetResponse {
   }
 }
 
+export interface ProfileListParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface ProfileGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export namespace Profiles {
   export import ProfileListResponse = ProfilesAPI.ProfileListResponse;
   export import ProfileGetResponse = ProfilesAPI.ProfileGetResponse;
+  export import ProfileListParams = ProfilesAPI.ProfileListParams;
+  export import ProfileGetParams = ProfilesAPI.ProfileGetParams;
   export import Customs = CustomsAPI.Customs;
   export import CustomCreateResponse = CustomsAPI.CustomCreateResponse;
   export import CustomUpdateResponse = CustomsAPI.CustomUpdateResponse;
@@ -474,8 +495,11 @@ export namespace Profiles {
   export import CustomGetResponse = CustomsAPI.CustomGetResponse;
   export import CustomCreateParams = CustomsAPI.CustomCreateParams;
   export import CustomUpdateParams = CustomsAPI.CustomUpdateParams;
+  export import CustomDeleteParams = CustomsAPI.CustomDeleteParams;
+  export import CustomGetParams = CustomsAPI.CustomGetParams;
   export import Predefineds = PredefinedsAPI.Predefineds;
   export import PredefinedUpdateResponse = PredefinedsAPI.PredefinedUpdateResponse;
   export import PredefinedGetResponse = PredefinedsAPI.PredefinedGetResponse;
   export import PredefinedUpdateParams = PredefinedsAPI.PredefinedUpdateParams;
+  export import PredefinedGetParams = PredefinedsAPI.PredefinedGetParams;
 }

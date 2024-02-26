@@ -15,7 +15,8 @@ const cloudflare = new Cloudflare({
 describe('resource loaDocuments', () => {
   // skipped: tests are disabled for the time being
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.addresses.loaDocuments.create('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = cloudflare.addresses.loaDocuments.create({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       loa_document: '@document.pdf',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -29,7 +30,8 @@ describe('resource loaDocuments', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.addresses.loaDocuments.create('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await cloudflare.addresses.loaDocuments.create({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       loa_document: '@document.pdf',
     });
   });

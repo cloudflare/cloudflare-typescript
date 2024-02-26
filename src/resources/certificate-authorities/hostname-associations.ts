@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as HostnameAssociationsAPI from 'cloudflare/resources/certificate-authorities/hostname-associations';
 
 export class HostnameAssociations extends APIResource {
@@ -10,12 +9,12 @@ export class HostnameAssociations extends APIResource {
    * Replace Hostname Associations
    */
   update(
-    zoneId: string,
-    body: HostnameAssociationUpdateParams,
+    params: HostnameAssociationUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<HostnameAssociationUpdateResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.put(`/zones/${zoneId}/certificate_authorities/hostname_associations`, {
+      this._client.put(`/zones/${zone_id}/certificate_authorities/hostname_associations`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: HostnameAssociationUpdateResponse }>
@@ -26,21 +25,12 @@ export class HostnameAssociations extends APIResource {
    * List Hostname Associations
    */
   list(
-    zoneId: string,
-    query?: HostnameAssociationListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<HostnameAssociationListResponse>;
-  list(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<HostnameAssociationListResponse>;
-  list(
-    zoneId: string,
-    query: HostnameAssociationListParams | Core.RequestOptions = {},
+    params: HostnameAssociationListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<HostnameAssociationListResponse> {
-    if (isRequestOptions(query)) {
-      return this.list(zoneId, {}, query);
-    }
+    const { zone_id, ...query } = params;
     return (
-      this._client.get(`/zones/${zoneId}/certificate_authorities/hostname_associations`, {
+      this._client.get(`/zones/${zone_id}/certificate_authorities/hostname_associations`, {
         query,
         ...options,
       }) as Core.APIPromise<{ result: HostnameAssociationListResponse }>
@@ -71,21 +61,35 @@ export interface HostnameAssociationListResponse {
 }
 
 export interface HostnameAssociationUpdateParams {
+  /**
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param:
+   */
   hostnames?: Array<string>;
 
   /**
-   * The UUID for a certificate that was uploaded to the mTLS Certificate Management
-   * endpoint. If no mtls_certificate_id is given, the hostnames will be associated
-   * to your active Cloudflare Managed CA.
+   * Body param: The UUID for a certificate that was uploaded to the mTLS Certificate
+   * Management endpoint. If no mtls_certificate_id is given, the hostnames will be
+   * associated to your active Cloudflare Managed CA.
    */
   mtls_certificate_id?: string;
 }
 
 export interface HostnameAssociationListParams {
   /**
-   * The UUID to match against for a certificate that was uploaded to the mTLS
-   * Certificate Management endpoint. If no mtls_certificate_id is given, the results
-   * will be the hostnames associated to your active Cloudflare Managed CA.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Query param: The UUID to match against for a certificate that was uploaded to
+   * the mTLS Certificate Management endpoint. If no mtls_certificate_id is given,
+   * the results will be the hostnames associated to your active Cloudflare Managed
+   * CA.
    */
   mtls_certificate_id?: string;
 }

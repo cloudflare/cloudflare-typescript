@@ -46,13 +46,10 @@ export class Cache extends APIResource {
    * prefixes in one API call. This rate limit can be raised for customers who need
    * to purge at higher volume.
    */
-  purge(
-    zoneId: string,
-    body: CachePurgeParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CachePurgeResponse | null> {
+  purge(params: CachePurgeParams, options?: Core.RequestOptions): Core.APIPromise<CachePurgeResponse | null> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.post(`/zones/${zoneId}/purge_cache`, { body, ...options }) as Core.APIPromise<{
+      this._client.post(`/zones/${zone_id}/purge_cache`, { body, ...options }) as Core.APIPromise<{
         result: CachePurgeResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -66,40 +63,43 @@ export interface CachePurgeResponse {
   id: string;
 }
 
-export type CachePurgeParams =
-  | CachePurgeParams.CachePurgeTags
-  | CachePurgeParams.CachePurgeHosts
-  | CachePurgeParams.CachePurgePrefixes
-  | CachePurgeParams.CachePurgeEverything
-  | CachePurgeParams.CachePurgeFiles;
+export interface CachePurgeParams {
+  /**
+   * Path param:
+   */
+  zone_id: string;
+
+  /**
+   * Body param:
+   */
+  files?: Array<string | CachePurgeParams.CachePurgeURLAndHeaders>;
+
+  /**
+   * Body param:
+   */
+  hosts?: Array<string>;
+
+  /**
+   * Body param:
+   */
+  prefixes?: Array<string>;
+
+  /**
+   * Body param:
+   */
+  purge_everything?: boolean;
+
+  /**
+   * Body param:
+   */
+  tags?: Array<string>;
+}
 
 export namespace CachePurgeParams {
-  export interface CachePurgeTags {
-    tags?: Array<string>;
-  }
+  export interface CachePurgeURLAndHeaders {
+    headers?: unknown;
 
-  export interface CachePurgeHosts {
-    hosts?: Array<string>;
-  }
-
-  export interface CachePurgePrefixes {
-    prefixes?: Array<string>;
-  }
-
-  export interface CachePurgeEverything {
-    purge_everything?: boolean;
-  }
-
-  export interface CachePurgeFiles {
-    files?: Array<string | CachePurgeFiles.CachePurgeURLAndHeaders>;
-  }
-
-  export namespace CachePurgeFiles {
-    export interface CachePurgeURLAndHeaders {
-      headers?: unknown;
-
-      url?: string;
-    }
+    url?: string;
   }
 }
 
@@ -111,19 +111,27 @@ export namespace Cache {
   export import CacheReserveClearResponse = CacheReserveAPI.CacheReserveClearResponse;
   export import CacheReserveEditResponse = CacheReserveAPI.CacheReserveEditResponse;
   export import CacheReserveStatusResponse = CacheReserveAPI.CacheReserveStatusResponse;
+  export import CacheReserveListParams = CacheReserveAPI.CacheReserveListParams;
+  export import CacheReserveClearParams = CacheReserveAPI.CacheReserveClearParams;
   export import CacheReserveEditParams = CacheReserveAPI.CacheReserveEditParams;
+  export import CacheReserveStatusParams = CacheReserveAPI.CacheReserveStatusParams;
   export import TieredCacheSmartTopology = TieredCacheSmartTopologyAPI.TieredCacheSmartTopology;
   export import TieredCacheSmartTopologyDeleteResponse = TieredCacheSmartTopologyAPI.TieredCacheSmartTopologyDeleteResponse;
   export import TieredCacheSmartTopologyEditResponse = TieredCacheSmartTopologyAPI.TieredCacheSmartTopologyEditResponse;
   export import TieredCacheSmartTopologyGetResponse = TieredCacheSmartTopologyAPI.TieredCacheSmartTopologyGetResponse;
+  export import TieredCacheSmartTopologyDeleteParams = TieredCacheSmartTopologyAPI.TieredCacheSmartTopologyDeleteParams;
   export import TieredCacheSmartTopologyEditParams = TieredCacheSmartTopologyAPI.TieredCacheSmartTopologyEditParams;
+  export import TieredCacheSmartTopologyGetParams = TieredCacheSmartTopologyAPI.TieredCacheSmartTopologyGetParams;
   export import Variants = VariantsAPI.Variants;
   export import VariantListResponse = VariantsAPI.VariantListResponse;
   export import VariantDeleteResponse = VariantsAPI.VariantDeleteResponse;
   export import VariantEditResponse = VariantsAPI.VariantEditResponse;
+  export import VariantListParams = VariantsAPI.VariantListParams;
+  export import VariantDeleteParams = VariantsAPI.VariantDeleteParams;
   export import VariantEditParams = VariantsAPI.VariantEditParams;
   export import RegionalTieredCache = RegionalTieredCacheAPI.RegionalTieredCache;
   export import RegionalTieredCacheEditResponse = RegionalTieredCacheAPI.RegionalTieredCacheEditResponse;
   export import RegionalTieredCacheGetResponse = RegionalTieredCacheAPI.RegionalTieredCacheGetResponse;
   export import RegionalTieredCacheEditParams = RegionalTieredCacheAPI.RegionalTieredCacheEditParams;
+  export import RegionalTieredCacheGetParams = RegionalTieredCacheAPI.RegionalTieredCacheGetParams;
 }

@@ -15,11 +15,14 @@ const cloudflare = new Cloudflare({
 describe('resource excludes', () => {
   // skipped: tests are disabled for the time being
   test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.devices.policies.excludes.update('699d98642c564d2e855e9661899b7252', [
-      { address: '192.0.2.0/24', description: 'Exclude testing domains from the tunnel' },
-      { address: '192.0.2.0/24', description: 'Exclude testing domains from the tunnel' },
-      { address: '192.0.2.0/24', description: 'Exclude testing domains from the tunnel' },
-    ]);
+    const responsePromise = cloudflare.devices.policies.excludes.update({
+      account_id: '699d98642c564d2e855e9661899b7252',
+      body: [
+        { address: '192.0.2.0/24', description: 'Exclude testing domains from the tunnel' },
+        { address: '192.0.2.0/24', description: 'Exclude testing domains from the tunnel' },
+        { address: '192.0.2.0/24', description: 'Exclude testing domains from the tunnel' },
+      ],
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -31,28 +34,33 @@ describe('resource excludes', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.devices.policies.excludes.update('699d98642c564d2e855e9661899b7252', [
-      {
-        address: '192.0.2.0/24',
-        description: 'Exclude testing domains from the tunnel',
-        host: '*.example.com',
-      },
-      {
-        address: '192.0.2.0/24',
-        description: 'Exclude testing domains from the tunnel',
-        host: '*.example.com',
-      },
-      {
-        address: '192.0.2.0/24',
-        description: 'Exclude testing domains from the tunnel',
-        host: '*.example.com',
-      },
-    ]);
+    const response = await cloudflare.devices.policies.excludes.update({
+      account_id: '699d98642c564d2e855e9661899b7252',
+      body: [
+        {
+          address: '192.0.2.0/24',
+          description: 'Exclude testing domains from the tunnel',
+          host: '*.example.com',
+        },
+        {
+          address: '192.0.2.0/24',
+          description: 'Exclude testing domains from the tunnel',
+          host: '*.example.com',
+        },
+        {
+          address: '192.0.2.0/24',
+          description: 'Exclude testing domains from the tunnel',
+          host: '*.example.com',
+        },
+      ],
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
-    const responsePromise = cloudflare.devices.policies.excludes.list('699d98642c564d2e855e9661899b7252');
+  test.skip('list: only required params', async () => {
+    const responsePromise = cloudflare.devices.policies.excludes.list({
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -63,21 +71,17 @@ describe('resource excludes', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.devices.policies.excludes.list('699d98642c564d2e855e9661899b7252', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('list: required and optional params', async () => {
+    const response = await cloudflare.devices.policies.excludes.list({
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
-    const responsePromise = cloudflare.devices.policies.excludes.get(
-      '699d98642c564d2e855e9661899b7252',
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-    );
+  test.skip('get: only required params', async () => {
+    const responsePromise = cloudflare.devices.policies.excludes.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -88,14 +92,9 @@ describe('resource excludes', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.devices.policies.excludes.get(
-        '699d98642c564d2e855e9661899b7252',
-        'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.devices.policies.excludes.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
   });
 });

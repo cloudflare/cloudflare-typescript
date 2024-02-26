@@ -8,6 +8,9 @@ export {
   DatasetGetResponse,
   DatasetCreateParams,
   DatasetUpdateParams,
+  DatasetListParams,
+  DatasetDeleteParams,
+  DatasetGetParams,
   Datasets,
 } from './datasets/index';
 export { PatternValidateResponse, PatternValidateParams, Patterns } from './patterns';
@@ -15,6 +18,13 @@ export {
   PayloadLogUpdateResponse,
   PayloadLogGetResponse,
   PayloadLogUpdateParams,
+  PayloadLogGetParams,
   PayloadLogs,
 } from './payload-logs';
-export { ProfileListResponse, ProfileGetResponse, Profiles } from './profiles/index';
+export {
+  ProfileListResponse,
+  ProfileGetResponse,
+  ProfileListParams,
+  ProfileGetParams,
+  Profiles,
+} from './profiles/index';

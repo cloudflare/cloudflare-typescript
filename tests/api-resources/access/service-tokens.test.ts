@@ -17,7 +17,7 @@ describe('resource serviceTokens', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.access.serviceTokens.create({
       account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'string',
       name: 'CI/CD token',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -33,7 +33,7 @@ describe('resource serviceTokens', () => {
   test.skip('create: required and optional params', async () => {
     const response = await cloudflare.access.serviceTokens.create({
       account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'string',
       name: 'CI/CD token',
       duration: '60m',
     });
@@ -43,7 +43,7 @@ describe('resource serviceTokens', () => {
   test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.access.serviceTokens.update('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'string',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -58,7 +58,7 @@ describe('resource serviceTokens', () => {
   test.skip('update: required and optional params', async () => {
     const response = await cloudflare.access.serviceTokens.update('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'string',
       duration: '60m',
       name: 'CI/CD token',
     });
@@ -66,10 +66,7 @@ describe('resource serviceTokens', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('list: only required params', async () => {
-    const responsePromise = cloudflare.access.serviceTokens.list({
-      account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = cloudflare.access.serviceTokens.list({ account_id: 'string', zone_id: 'string' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -81,17 +78,14 @@ describe('resource serviceTokens', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('list: required and optional params', async () => {
-    const response = await cloudflare.access.serviceTokens.list({
-      account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const response = await cloudflare.access.serviceTokens.list({ account_id: 'string', zone_id: 'string' });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.access.serviceTokens.delete('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'string',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -106,7 +100,7 @@ describe('resource serviceTokens', () => {
   test.skip('delete: required and optional params', async () => {
     const response = await cloudflare.access.serviceTokens.delete('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'string',
     });
   });
 

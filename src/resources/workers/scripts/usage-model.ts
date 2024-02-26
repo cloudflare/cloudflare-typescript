@@ -10,14 +10,14 @@ export class UsageModel extends APIResource {
    * subscription.
    */
   update(
-    accountId: string,
     scriptName: string,
-    body: UsageModelUpdateParams,
+    params: UsageModelUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<UsageModelUpdateResponse> {
+    const { account_id, body } = params;
     return (
-      this._client.put(`/accounts/${accountId}/workers/scripts/${scriptName}/usage-model`, {
-        body,
+      this._client.put(`/accounts/${account_id}/workers/scripts/${scriptName}/usage-model`, {
+        body: body,
         ...options,
       }) as Core.APIPromise<{ result: UsageModelUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -27,13 +27,14 @@ export class UsageModel extends APIResource {
    * Fetches the Usage Model for a given Worker.
    */
   get(
-    accountId: string,
     scriptName: string,
+    params: UsageModelGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<UsageModelGetResponse> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountId}/workers/scripts/${scriptName}/usage-model`,
+        `/accounts/${account_id}/workers/scripts/${scriptName}/usage-model`,
         options,
       ) as Core.APIPromise<{ result: UsageModelGetResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -48,10 +49,28 @@ export interface UsageModelGetResponse {
   usage_model?: unknown;
 }
 
-export type UsageModelUpdateParams = unknown;
+export interface UsageModelUpdateParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
+}
+
+export interface UsageModelGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
 
 export namespace UsageModel {
   export import UsageModelUpdateResponse = UsageModelAPI.UsageModelUpdateResponse;
   export import UsageModelGetResponse = UsageModelAPI.UsageModelGetResponse;
   export import UsageModelUpdateParams = UsageModelAPI.UsageModelUpdateParams;
+  export import UsageModelGetParams = UsageModelAPI.UsageModelGetParams;
 }

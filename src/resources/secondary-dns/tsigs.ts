@@ -8,13 +8,10 @@ export class TSIGs extends APIResource {
   /**
    * Create TSIG.
    */
-  create(
-    accountId: unknown,
-    body: TSIGCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TSIGCreateResponse> {
+  create(params: TSIGCreateParams, options?: Core.RequestOptions): Core.APIPromise<TSIGCreateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/secondary_dns/tsigs`, {
+      this._client.post(`/accounts/${account_id}/secondary_dns/tsigs`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: TSIGCreateResponse }>
@@ -25,13 +22,13 @@ export class TSIGs extends APIResource {
    * Modify TSIG.
    */
   update(
-    accountId: unknown,
     tsigId: unknown,
-    body: TSIGUpdateParams,
+    params: TSIGUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TSIGUpdateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.put(`/accounts/${accountId}/secondary_dns/tsigs/${tsigId}`, {
+      this._client.put(`/accounts/${account_id}/secondary_dns/tsigs/${tsigId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: TSIGUpdateResponse }>
@@ -41,9 +38,10 @@ export class TSIGs extends APIResource {
   /**
    * List TSIGs.
    */
-  list(accountId: unknown, options?: Core.RequestOptions): Core.APIPromise<TSIGListResponse | null> {
+  list(params: TSIGListParams, options?: Core.RequestOptions): Core.APIPromise<TSIGListResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/secondary_dns/tsigs`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/secondary_dns/tsigs`, options) as Core.APIPromise<{
         result: TSIGListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -53,13 +51,14 @@ export class TSIGs extends APIResource {
    * Delete TSIG.
    */
   delete(
-    accountId: unknown,
     tsigId: unknown,
+    params: TSIGDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TSIGDeleteResponse> {
+    const { account_id } = params;
     return (
       this._client.delete(
-        `/accounts/${accountId}/secondary_dns/tsigs/${tsigId}`,
+        `/accounts/${account_id}/secondary_dns/tsigs/${tsigId}`,
         options,
       ) as Core.APIPromise<{ result: TSIGDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -68,9 +67,14 @@ export class TSIGs extends APIResource {
   /**
    * Get TSIG.
    */
-  get(accountId: unknown, tsigId: unknown, options?: Core.RequestOptions): Core.APIPromise<TSIGGetResponse> {
+  get(
+    tsigId: unknown,
+    params: TSIGGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TSIGGetResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/secondary_dns/tsigs/${tsigId}`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/secondary_dns/tsigs/${tsigId}`, options) as Core.APIPromise<{
         result: TSIGGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -163,36 +167,58 @@ export interface TSIGGetResponse {
 
 export interface TSIGCreateParams {
   /**
-   * TSIG algorithm.
+   * Path param:
+   */
+  account_id: unknown;
+
+  /**
+   * Body param: TSIG algorithm.
    */
   algo: string;
 
   /**
-   * TSIG key name.
+   * Body param: TSIG key name.
    */
   name: string;
 
   /**
-   * TSIG secret.
+   * Body param: TSIG secret.
    */
   secret: string;
 }
 
 export interface TSIGUpdateParams {
   /**
-   * TSIG algorithm.
+   * Path param:
+   */
+  account_id: unknown;
+
+  /**
+   * Body param: TSIG algorithm.
    */
   algo: string;
 
   /**
-   * TSIG key name.
+   * Body param: TSIG key name.
    */
   name: string;
 
   /**
-   * TSIG secret.
+   * Body param: TSIG secret.
    */
   secret: string;
+}
+
+export interface TSIGListParams {
+  account_id: unknown;
+}
+
+export interface TSIGDeleteParams {
+  account_id: unknown;
+}
+
+export interface TSIGGetParams {
+  account_id: unknown;
 }
 
 export namespace TSIGs {
@@ -203,4 +229,7 @@ export namespace TSIGs {
   export import TSIGGetResponse = TSIGsAPI.TSIGGetResponse;
   export import TSIGCreateParams = TSIGsAPI.TSIGCreateParams;
   export import TSIGUpdateParams = TSIGsAPI.TSIGUpdateParams;
+  export import TSIGListParams = TSIGsAPI.TSIGListParams;
+  export import TSIGDeleteParams = TSIGsAPI.TSIGDeleteParams;
+  export import TSIGGetParams = TSIGsAPI.TSIGGetParams;
 }

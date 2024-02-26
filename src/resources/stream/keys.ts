@@ -10,9 +10,10 @@ export class Keys extends APIResource {
    * once after creation. Keys are created, used, and deleted independently of
    * videos, and every key can sign any video.
    */
-  create(accountId: string, options?: Core.RequestOptions): Core.APIPromise<KeyCreateResponse> {
+  create(params: KeyCreateParams, options?: Core.RequestOptions): Core.APIPromise<KeyCreateResponse> {
+    const { account_id } = params;
     return (
-      this._client.post(`/accounts/${accountId}/stream/keys`, options) as Core.APIPromise<{
+      this._client.post(`/accounts/${account_id}/stream/keys`, options) as Core.APIPromise<{
         result: KeyCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -21,9 +22,10 @@ export class Keys extends APIResource {
   /**
    * Lists the video ID and creation date and time when a signing key was created.
    */
-  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<KeyListResponse> {
+  list(params: KeyListParams, options?: Core.RequestOptions): Core.APIPromise<KeyListResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/stream/keys`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/stream/keys`, options) as Core.APIPromise<{
         result: KeyListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -33,12 +35,13 @@ export class Keys extends APIResource {
    * Deletes signing keys and revokes all signed URLs generated with the key.
    */
   delete(
-    accountId: string,
     identifier: string,
+    params: KeyDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<KeyDeleteResponse> {
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${accountId}/stream/keys/${identifier}`, options) as Core.APIPromise<{
+      this._client.delete(`/accounts/${account_id}/stream/keys/${identifier}`, options) as Core.APIPromise<{
         result: KeyDeleteResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -85,8 +88,32 @@ export namespace KeyListResponse {
 
 export type KeyDeleteResponse = unknown | string;
 
+export interface KeyCreateParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface KeyListParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface KeyDeleteParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export namespace Keys {
   export import KeyCreateResponse = KeysAPI.KeyCreateResponse;
   export import KeyListResponse = KeysAPI.KeyListResponse;
   export import KeyDeleteResponse = KeysAPI.KeyDeleteResponse;
+  export import KeyCreateParams = KeysAPI.KeyCreateParams;
+  export import KeyListParams = KeysAPI.KeyListParams;
+  export import KeyDeleteParams = KeysAPI.KeyDeleteParams;
 }

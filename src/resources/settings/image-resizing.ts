@@ -12,12 +12,12 @@ export class ImageResizing extends APIResource {
    * more information.
    */
   edit(
-    zoneId: string,
-    body: ImageResizingEditParams,
+    params: ImageResizingEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ImageResizingEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/settings/image_resizing`, {
+      this._client.patch(`/zones/${zone_id}/settings/image_resizing`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: ImageResizingEditResponse }>
@@ -30,9 +30,13 @@ export class ImageResizing extends APIResource {
    * [Image Resizing documentation](https://developers.cloudflare.com/images/) for
    * more information.
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<ImageResizingGetResponse> {
+  get(
+    params: ImageResizingGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ImageResizingGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/settings/image_resizing`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/settings/image_resizing`, options) as Core.APIPromise<{
         result: ImageResizingGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -99,8 +103,13 @@ export interface ImageResizingGetResponse {
 
 export interface ImageResizingEditParams {
   /**
-   * Image Resizing provides on-demand resizing, conversion and optimisation for
-   * images served through Cloudflare's network. Refer to the
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Image Resizing provides on-demand resizing, conversion and
+   * optimisation for images served through Cloudflare's network. Refer to the
    * [Image Resizing documentation](https://developers.cloudflare.com/images/) for
    * more information.
    */
@@ -127,8 +136,16 @@ export namespace ImageResizingEditParams {
   }
 }
 
+export interface ImageResizingGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
 export namespace ImageResizing {
   export import ImageResizingEditResponse = ImageResizingAPI.ImageResizingEditResponse;
   export import ImageResizingGetResponse = ImageResizingAPI.ImageResizingGetResponse;
   export import ImageResizingEditParams = ImageResizingAPI.ImageResizingEditParams;
+  export import ImageResizingGetParams = ImageResizingAPI.ImageResizingGetParams;
 }

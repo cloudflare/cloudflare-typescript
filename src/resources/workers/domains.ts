@@ -2,20 +2,16 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as DomainsAPI from 'cloudflare/resources/workers/domains';
 
 export class Domains extends APIResource {
   /**
    * Attaches a Worker to a zone and hostname.
    */
-  update(
-    accountId: unknown,
-    body: DomainUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DomainUpdateResponse> {
+  update(params: DomainUpdateParams, options?: Core.RequestOptions): Core.APIPromise<DomainUpdateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.put(`/accounts/${accountId}/workers/domains`, { body, ...options }) as Core.APIPromise<{
+      this._client.put(`/accounts/${account_id}/workers/domains`, { body, ...options }) as Core.APIPromise<{
         result: DomainUpdateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -24,22 +20,10 @@ export class Domains extends APIResource {
   /**
    * Lists all Worker Domains for an account.
    */
-  list(
-    accountId: unknown,
-    query?: DomainListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DomainListResponse>;
-  list(accountId: unknown, options?: Core.RequestOptions): Core.APIPromise<DomainListResponse>;
-  list(
-    accountId: unknown,
-    query: DomainListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DomainListResponse> {
-    if (isRequestOptions(query)) {
-      return this.list(accountId, {}, query);
-    }
+  list(params: DomainListParams, options?: Core.RequestOptions): Core.APIPromise<DomainListResponse> {
+    const { account_id, ...query } = params;
     return (
-      this._client.get(`/accounts/${accountId}/workers/domains`, { query, ...options }) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/workers/domains`, { query, ...options }) as Core.APIPromise<{
         result: DomainListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -48,8 +32,13 @@ export class Domains extends APIResource {
   /**
    * Detaches a Worker from a zone and hostname.
    */
-  delete(accountId: unknown, domainId: unknown, options?: Core.RequestOptions): Core.APIPromise<void> {
-    return this._client.delete(`/accounts/${accountId}/workers/domains/${domainId}`, {
+  delete(
+    domainId: unknown,
+    params: DomainDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<void> {
+    const { account_id } = params;
+    return this._client.delete(`/accounts/${account_id}/workers/domains/${domainId}`, {
       ...options,
       headers: { Accept: '*/*', ...options?.headers },
     });
@@ -59,12 +48,13 @@ export class Domains extends APIResource {
    * Gets a Worker domain.
    */
   get(
-    accountId: unknown,
     domainId: unknown,
+    params: DomainGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DomainGetResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/workers/domains/${domainId}`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/workers/domains/${domainId}`, options) as Core.APIPromise<{
         result: DomainGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -173,51 +163,69 @@ export interface DomainGetResponse {
 
 export interface DomainUpdateParams {
   /**
-   * Worker environment associated with the zone and hostname.
+   * Path param:
+   */
+  account_id: unknown;
+
+  /**
+   * Body param: Worker environment associated with the zone and hostname.
    */
   environment: string;
 
   /**
-   * Hostname of the Worker Domain.
+   * Body param: Hostname of the Worker Domain.
    */
   hostname: string;
 
   /**
-   * Worker service associated with the zone and hostname.
+   * Body param: Worker service associated with the zone and hostname.
    */
   service: string;
 
   /**
-   * Identifier of the zone.
+   * Body param: Identifier of the zone.
    */
   zone_id: unknown;
 }
 
 export interface DomainListParams {
   /**
-   * Worker environment associated with the zone and hostname.
+   * Path param:
+   */
+  account_id: unknown;
+
+  /**
+   * Query param: Worker environment associated with the zone and hostname.
    */
   environment?: string;
 
   /**
-   * Hostname of the Worker Domain.
+   * Query param: Hostname of the Worker Domain.
    */
   hostname?: string;
 
   /**
-   * Worker service associated with the zone and hostname.
+   * Query param: Worker service associated with the zone and hostname.
    */
   service?: string;
 
   /**
-   * Identifier of the zone.
+   * Query param: Identifier of the zone.
    */
   zone_id?: unknown;
 
   /**
-   * Name of the zone.
+   * Query param: Name of the zone.
    */
   zone_name?: string;
+}
+
+export interface DomainDeleteParams {
+  account_id: unknown;
+}
+
+export interface DomainGetParams {
+  account_id: unknown;
 }
 
 export namespace Domains {
@@ -226,4 +234,6 @@ export namespace Domains {
   export import DomainGetResponse = DomainsAPI.DomainGetResponse;
   export import DomainUpdateParams = DomainsAPI.DomainUpdateParams;
   export import DomainListParams = DomainsAPI.DomainListParams;
+  export import DomainDeleteParams = DomainsAPI.DomainDeleteParams;
+  export import DomainGetParams = DomainsAPI.DomainGetParams;
 }

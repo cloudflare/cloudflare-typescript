@@ -10,12 +10,12 @@ export class PrefetchPreload extends APIResource {
    * This is limited to Enterprise Zones.
    */
   edit(
-    zoneId: string,
-    body: PrefetchPreloadEditParams,
+    params: PrefetchPreloadEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PrefetchPreloadEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/settings/prefetch_preload`, {
+      this._client.patch(`/zones/${zone_id}/settings/prefetch_preload`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: PrefetchPreloadEditResponse }>
@@ -26,9 +26,13 @@ export class PrefetchPreload extends APIResource {
    * Cloudflare will prefetch any URLs that are included in the response headers.
    * This is limited to Enterprise Zones.
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<PrefetchPreloadGetResponse> {
+  get(
+    params: PrefetchPreloadGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PrefetchPreloadGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/settings/prefetch_preload`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/settings/prefetch_preload`, options) as Core.APIPromise<{
         result: PrefetchPreloadGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -91,13 +95,26 @@ export interface PrefetchPreloadGetResponse {
 
 export interface PrefetchPreloadEditParams {
   /**
-   * Value of the zone setting.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Value of the zone setting.
    */
   value: 'on' | 'off';
+}
+
+export interface PrefetchPreloadGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }
 
 export namespace PrefetchPreload {
   export import PrefetchPreloadEditResponse = PrefetchPreloadAPI.PrefetchPreloadEditResponse;
   export import PrefetchPreloadGetResponse = PrefetchPreloadAPI.PrefetchPreloadGetResponse;
   export import PrefetchPreloadEditParams = PrefetchPreloadAPI.PrefetchPreloadEditParams;
+  export import PrefetchPreloadGetParams = PrefetchPreloadAPI.PrefetchPreloadGetParams;
 }

@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as HistoriesAPI from 'cloudflare/resources/alerting/v3/histories';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
@@ -13,24 +12,12 @@ export class Histories extends APIResource {
    * = 30, biz = 30, ent = 90).
    */
   list(
-    accountId: string,
-    query?: HistoryListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<HistoryListResponsesV4PagePaginationArray, HistoryListResponse>;
-  list(
-    accountId: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<HistoryListResponsesV4PagePaginationArray, HistoryListResponse>;
-  list(
-    accountId: string,
-    query: HistoryListParams | Core.RequestOptions = {},
+    params: HistoryListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<HistoryListResponsesV4PagePaginationArray, HistoryListResponse> {
-    if (isRequestOptions(query)) {
-      return this.list(accountId, {}, query);
-    }
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
-      `/accounts/${accountId}/alerting/v3/history`,
+      `/accounts/${account_id}/alerting/v3/history`,
       HistoryListResponsesV4PagePaginationArray,
       { query, ...options },
     );
@@ -89,14 +76,19 @@ export interface HistoryListResponse {
 
 export interface HistoryListParams extends V4PagePaginationArrayParams {
   /**
-   * Limit the returned results to history records older than the specified date.
-   * This must be a timestamp that conforms to RFC3339.
+   * Path param: The account id
+   */
+  account_id: string;
+
+  /**
+   * Query param: Limit the returned results to history records older than the
+   * specified date. This must be a timestamp that conforms to RFC3339.
    */
   before?: string;
 
   /**
-   * Limit the returned results to history records newer than the specified date.
-   * This must be a timestamp that conforms to RFC3339.
+   * Query param: Limit the returned results to history records newer than the
+   * specified date. This must be a timestamp that conforms to RFC3339.
    */
   since?: string;
 }

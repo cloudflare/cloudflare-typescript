@@ -16,12 +16,12 @@ export class PageShield extends APIResource {
    * Updates Page Shield settings.
    */
   update(
-    zoneId: string,
-    body: PageShieldUpdateParams,
+    params: PageShieldUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PageShieldUpdateResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.put(`/zones/${zoneId}/page_shield`, { body, ...options }) as Core.APIPromise<{
+      this._client.put(`/zones/${zone_id}/page_shield`, { body, ...options }) as Core.APIPromise<{
         result: PageShieldUpdateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -30,9 +30,10 @@ export class PageShield extends APIResource {
   /**
    * Fetches the Page Shield settings.
    */
-  list(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<PageShieldListResponse> {
+  list(params: PageShieldListParams, options?: Core.RequestOptions): Core.APIPromise<PageShieldListResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/page_shield`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/page_shield`, options) as Core.APIPromise<{
         result: PageShieldListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -87,26 +88,40 @@ export interface PageShieldListResponse {
 
 export interface PageShieldUpdateParams {
   /**
-   * When true, indicates that Page Shield is enabled.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: When true, indicates that Page Shield is enabled.
    */
   enabled?: boolean;
 
   /**
-   * When true, CSP reports will be sent to
+   * Body param: When true, CSP reports will be sent to
    * https://csp-reporting.cloudflare.com/cdn-cgi/script_monitor/report
    */
   use_cloudflare_reporting_endpoint?: boolean;
 
   /**
-   * When true, the paths associated with connections URLs will also be analyzed.
+   * Body param: When true, the paths associated with connections URLs will also be
+   * analyzed.
    */
   use_connection_url_path?: boolean;
+}
+
+export interface PageShieldListParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }
 
 export namespace PageShield {
   export import PageShieldUpdateResponse = PageShieldAPI.PageShieldUpdateResponse;
   export import PageShieldListResponse = PageShieldAPI.PageShieldListResponse;
   export import PageShieldUpdateParams = PageShieldAPI.PageShieldUpdateParams;
+  export import PageShieldListParams = PageShieldAPI.PageShieldListParams;
   export import Policies = PoliciesAPI.Policies;
   export import PolicyCreateResponse = PoliciesAPI.PolicyCreateResponse;
   export import PolicyUpdateResponse = PoliciesAPI.PolicyUpdateResponse;
@@ -114,12 +129,17 @@ export namespace PageShield {
   export import PolicyGetResponse = PoliciesAPI.PolicyGetResponse;
   export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
   export import PolicyUpdateParams = PoliciesAPI.PolicyUpdateParams;
+  export import PolicyListParams = PoliciesAPI.PolicyListParams;
+  export import PolicyDeleteParams = PoliciesAPI.PolicyDeleteParams;
+  export import PolicyGetParams = PoliciesAPI.PolicyGetParams;
   export import Connections = ConnectionsAPI.Connections;
   export import ConnectionListResponse = ConnectionsAPI.ConnectionListResponse;
   export import ConnectionGetResponse = ConnectionsAPI.ConnectionGetResponse;
   export import ConnectionListParams = ConnectionsAPI.ConnectionListParams;
+  export import ConnectionGetParams = ConnectionsAPI.ConnectionGetParams;
   export import Scripts = ScriptsAPI.Scripts;
   export import ScriptListResponse = ScriptsAPI.ScriptListResponse;
   export import ScriptGetResponse = ScriptsAPI.ScriptGetResponse;
   export import ScriptListParams = ScriptsAPI.ScriptListParams;
+  export import ScriptGetParams = ScriptsAPI.ScriptGetParams;
 }

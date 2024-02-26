@@ -6,6 +6,15 @@ export {
   CertificateDeleteResponse,
   CertificateGetResponse,
   CertificateCreateParams,
+  CertificateListParams,
+  CertificateDeleteParams,
+  CertificateGetParams,
   Certificates,
 } from './certificates';
-export { HostnameUpdateResponse, HostnameGetResponse, HostnameUpdateParams, Hostnames } from './hostnames';
+export {
+  HostnameUpdateResponse,
+  HostnameGetResponse,
+  HostnameUpdateParams,
+  HostnameGetParams,
+  Hostnames,
+} from './hostnames';

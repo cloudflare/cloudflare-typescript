@@ -9,14 +9,14 @@ export class Domains extends APIResource {
    * Add a new domain for the Pages project.
    */
   create(
-    accountId: string,
     projectName: string,
-    body: DomainCreateParams,
+    params: DomainCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DomainCreateResponse | null> {
+    const { account_id, body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/pages/projects/${projectName}/domains`, {
-        body,
+      this._client.post(`/accounts/${account_id}/pages/projects/${projectName}/domains`, {
+        body: body,
         ...options,
       }) as Core.APIPromise<{ result: DomainCreateResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -26,13 +26,14 @@ export class Domains extends APIResource {
    * Fetch a list of all domains associated with a Pages project.
    */
   list(
-    accountId: string,
     projectName: string,
+    params: DomainListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DomainListResponse> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountId}/pages/projects/${projectName}/domains`,
+        `/accounts/${account_id}/pages/projects/${projectName}/domains`,
         options,
       ) as Core.APIPromise<{ result: DomainListResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -42,13 +43,14 @@ export class Domains extends APIResource {
    * Delete a Pages project's domain.
    */
   delete(
-    accountId: string,
     projectName: string,
     domainName: string,
+    params: DomainDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<unknown> {
+    const { account_id } = params;
     return this._client.delete(
-      `/accounts/${accountId}/pages/projects/${projectName}/domains/${domainName}`,
+      `/accounts/${account_id}/pages/projects/${projectName}/domains/${domainName}`,
       options,
     );
   }
@@ -57,14 +59,15 @@ export class Domains extends APIResource {
    * Retry the validation status of a single domain.
    */
   edit(
-    accountId: string,
     projectName: string,
     domainName: string,
+    params: DomainEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DomainEditResponse | null> {
+    const { account_id } = params;
     return (
       this._client.patch(
-        `/accounts/${accountId}/pages/projects/${projectName}/domains/${domainName}`,
+        `/accounts/${account_id}/pages/projects/${projectName}/domains/${domainName}`,
         options,
       ) as Core.APIPromise<{ result: DomainEditResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -74,14 +77,15 @@ export class Domains extends APIResource {
    * Fetch a single domain.
    */
   get(
-    accountId: string,
     projectName: string,
     domainName: string,
+    params: DomainGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DomainGetResponse | null> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountId}/pages/projects/${projectName}/domains/${domainName}`,
+        `/accounts/${account_id}/pages/projects/${projectName}/domains/${domainName}`,
         options,
       ) as Core.APIPromise<{ result: DomainGetResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -98,7 +102,45 @@ export type DomainEditResponse = unknown | Array<unknown> | string;
 
 export type DomainGetResponse = unknown | Array<unknown> | string;
 
-export type DomainCreateParams = unknown;
+export interface DomainCreateParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
+}
+
+export interface DomainListParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface DomainDeleteParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface DomainEditParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface DomainGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
 
 export namespace Domains {
   export import DomainCreateResponse = DomainsAPI.DomainCreateResponse;
@@ -107,4 +149,8 @@ export namespace Domains {
   export import DomainEditResponse = DomainsAPI.DomainEditResponse;
   export import DomainGetResponse = DomainsAPI.DomainGetResponse;
   export import DomainCreateParams = DomainsAPI.DomainCreateParams;
+  export import DomainListParams = DomainsAPI.DomainListParams;
+  export import DomainDeleteParams = DomainsAPI.DomainDeleteParams;
+  export import DomainEditParams = DomainsAPI.DomainEditParams;
+  export import DomainGetParams = DomainsAPI.DomainGetParams;
 }

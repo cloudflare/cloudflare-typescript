@@ -15,7 +15,8 @@ const cloudflare = new Cloudflare({
 describe('resource totalTLS', () => {
   // skipped: tests are disabled for the time being
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.acm.totalTLS.create('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = cloudflare.acm.totalTLS.create({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       enabled: true,
     });
     const rawResponse = await responsePromise.asResponse();
@@ -29,15 +30,16 @@ describe('resource totalTLS', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.acm.totalTLS.create('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await cloudflare.acm.totalTLS.create({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       enabled: true,
       certificate_authority: 'google',
     });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
-    const responsePromise = cloudflare.acm.totalTLS.get('023e105f4ecef8ad9ca31a8372d0c353');
+  test.skip('get: only required params', async () => {
+    const responsePromise = cloudflare.acm.totalTLS.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -48,10 +50,7 @@ describe('resource totalTLS', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.acm.totalTLS.get('023e105f4ecef8ad9ca31a8372d0c353', { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.acm.totalTLS.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 });

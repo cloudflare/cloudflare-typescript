@@ -17,7 +17,7 @@ describe('resource settings', () => {
   test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.access.certificates.settings.update({
       account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'string',
       settings: [
         { china_network: false, client_certificate_forwarding: true, hostname: 'admin.example.com' },
         { china_network: false, client_certificate_forwarding: true, hostname: 'admin.example.com' },
@@ -37,7 +37,7 @@ describe('resource settings', () => {
   test.skip('update: required and optional params', async () => {
     const response = await cloudflare.access.certificates.settings.update({
       account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'string',
       settings: [
         { china_network: false, client_certificate_forwarding: true, hostname: 'admin.example.com' },
         { china_network: false, client_certificate_forwarding: true, hostname: 'admin.example.com' },
@@ -50,7 +50,7 @@ describe('resource settings', () => {
   test.skip('list: only required params', async () => {
     const responsePromise = cloudflare.access.certificates.settings.list({
       account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'string',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -65,7 +65,7 @@ describe('resource settings', () => {
   test.skip('list: required and optional params', async () => {
     const response = await cloudflare.access.certificates.settings.list({
       account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'string',
     });
   });
 });

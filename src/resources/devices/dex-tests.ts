@@ -9,14 +9,15 @@ export class DEXTests extends APIResource {
    * Create a DEX test.
    */
   create(
-    accountId: unknown,
-    body: DEXTestCreateParams,
+    params: DEXTestCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DEXTestCreateResponse | null> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/devices/dex_tests`, { body, ...options }) as Core.APIPromise<{
-        result: DEXTestCreateResponse | null;
-      }>
+      this._client.post(`/accounts/${account_id}/devices/dex_tests`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: DEXTestCreateResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -24,13 +25,13 @@ export class DEXTests extends APIResource {
    * Update a DEX test.
    */
   update(
-    accountId: unknown,
     dexTestId: string,
-    body: DEXTestUpdateParams,
+    params: DEXTestUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DEXTestUpdateResponse | null> {
+    const { account_id, ...body } = params;
     return (
-      this._client.put(`/accounts/${accountId}/devices/dex_tests/${dexTestId}`, {
+      this._client.put(`/accounts/${account_id}/devices/dex_tests/${dexTestId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: DEXTestUpdateResponse | null }>
@@ -40,9 +41,13 @@ export class DEXTests extends APIResource {
   /**
    * Fetch all DEX tests.
    */
-  list(accountId: unknown, options?: Core.RequestOptions): Core.APIPromise<DEXTestListResponse | null> {
+  list(
+    params: DEXTestListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DEXTestListResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/devices/dex_tests`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/devices/dex_tests`, options) as Core.APIPromise<{
         result: DEXTestListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -53,13 +58,14 @@ export class DEXTests extends APIResource {
    * account.
    */
   delete(
-    accountId: unknown,
     dexTestId: string,
+    params: DEXTestDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DEXTestDeleteResponse | null> {
+    const { account_id } = params;
     return (
       this._client.delete(
-        `/accounts/${accountId}/devices/dex_tests/${dexTestId}`,
+        `/accounts/${account_id}/devices/dex_tests/${dexTestId}`,
         options,
       ) as Core.APIPromise<{ result: DEXTestDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -69,12 +75,13 @@ export class DEXTests extends APIResource {
    * Fetch a single DEX test.
    */
   get(
-    accountId: unknown,
     dexTestId: string,
+    params: DEXTestGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DEXTestGetResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/devices/dex_tests/${dexTestId}`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/devices/dex_tests/${dexTestId}`, options) as Core.APIPromise<{
         result: DEXTestGetResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -346,28 +353,33 @@ export namespace DEXTestGetResponse {
 
 export interface DEXTestCreateParams {
   /**
-   * The configuration object which contains the details for the WARP client to
-   * conduct the test.
+   * Path param:
+   */
+  account_id: unknown;
+
+  /**
+   * Body param: The configuration object which contains the details for the WARP
+   * client to conduct the test.
    */
   data: DEXTestCreateParams.Data;
 
   /**
-   * Determines whether or not the test is active.
+   * Body param: Determines whether or not the test is active.
    */
   enabled: boolean;
 
   /**
-   * How often the test will run.
+   * Body param: How often the test will run.
    */
   interval: string;
 
   /**
-   * The name of the DEX test. Must be unique.
+   * Body param: The name of the DEX test. Must be unique.
    */
   name: string;
 
   /**
-   * Additional details about the test.
+   * Body param: Additional details about the test.
    */
   description?: string;
 }
@@ -397,28 +409,33 @@ export namespace DEXTestCreateParams {
 
 export interface DEXTestUpdateParams {
   /**
-   * The configuration object which contains the details for the WARP client to
-   * conduct the test.
+   * Path param:
+   */
+  account_id: unknown;
+
+  /**
+   * Body param: The configuration object which contains the details for the WARP
+   * client to conduct the test.
    */
   data: DEXTestUpdateParams.Data;
 
   /**
-   * Determines whether or not the test is active.
+   * Body param: Determines whether or not the test is active.
    */
   enabled: boolean;
 
   /**
-   * How often the test will run.
+   * Body param: How often the test will run.
    */
   interval: string;
 
   /**
-   * The name of the DEX test. Must be unique.
+   * Body param: The name of the DEX test. Must be unique.
    */
   name: string;
 
   /**
-   * Additional details about the test.
+   * Body param: Additional details about the test.
    */
   description?: string;
 }
@@ -446,6 +463,18 @@ export namespace DEXTestUpdateParams {
   }
 }
 
+export interface DEXTestListParams {
+  account_id: unknown;
+}
+
+export interface DEXTestDeleteParams {
+  account_id: unknown;
+}
+
+export interface DEXTestGetParams {
+  account_id: unknown;
+}
+
 export namespace DEXTests {
   export import DEXTestCreateResponse = DEXTestsAPI.DEXTestCreateResponse;
   export import DEXTestUpdateResponse = DEXTestsAPI.DEXTestUpdateResponse;
@@ -454,4 +483,7 @@ export namespace DEXTests {
   export import DEXTestGetResponse = DEXTestsAPI.DEXTestGetResponse;
   export import DEXTestCreateParams = DEXTestsAPI.DEXTestCreateParams;
   export import DEXTestUpdateParams = DEXTestsAPI.DEXTestUpdateParams;
+  export import DEXTestListParams = DEXTestsAPI.DEXTestListParams;
+  export import DEXTestDeleteParams = DEXTestsAPI.DEXTestDeleteParams;
+  export import DEXTestGetParams = DEXTestsAPI.DEXTestGetParams;
 }

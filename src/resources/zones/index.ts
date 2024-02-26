@@ -4,6 +4,7 @@ export {
   CustomNameserverUpdateResponse,
   CustomNameserverGetResponse,
   CustomNameserverUpdateParams,
+  CustomNameserverGetParams,
   CustomNameservers,
 } from './custom-nameservers';
 export {
@@ -12,6 +13,7 @@ export {
   HoldGetResponse,
   HoldCreateParams,
   HoldDeleteParams,
+  HoldGetParams,
   Holds,
 } from './holds';
 export {
@@ -22,7 +24,9 @@ export {
   ZoneGetResponse,
   ZoneCreateParams,
   ZoneListParams,
+  ZoneDeleteParams,
   ZoneEditParams,
+  ZoneGetParams,
   ZoneListResponsesV4PagePaginationArray,
   Zones,
 } from './zones';

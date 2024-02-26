@@ -21,5 +21,8 @@ export {
   ListGetResponse,
   ListCreateParams,
   ListUpdateParams,
+  ListListParams,
+  ListDeleteParams,
+  ListGetParams,
   Lists,
 } from './lists';

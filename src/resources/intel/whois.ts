@@ -2,29 +2,16 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as WhoisAPI from 'cloudflare/resources/intel/whois';
 
 export class Whois extends APIResource {
   /**
    * Get WHOIS Record
    */
-  get(
-    accountId: string,
-    query?: WhoisGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<WhoisGetResponse>;
-  get(accountId: string, options?: Core.RequestOptions): Core.APIPromise<WhoisGetResponse>;
-  get(
-    accountId: string,
-    query: WhoisGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<WhoisGetResponse> {
-    if (isRequestOptions(query)) {
-      return this.get(accountId, {}, query);
-    }
+  get(params: WhoisGetParams, options?: Core.RequestOptions): Core.APIPromise<WhoisGetResponse> {
+    const { account_id, ...query } = params;
     return (
-      this._client.get(`/accounts/${accountId}/intel/whois`, { query, ...options }) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/intel/whois`, { query, ...options }) as Core.APIPromise<{
         result: WhoisGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -52,6 +39,14 @@ export interface WhoisGetResponse {
 }
 
 export interface WhoisGetParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Query param:
+   */
   domain?: string;
 }
 

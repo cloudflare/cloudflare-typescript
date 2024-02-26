@@ -8,6 +8,11 @@ export {
   DeploymentRetryResponse,
   DeploymentRollbackResponse,
   DeploymentCreateParams,
+  DeploymentListParams,
+  DeploymentDeleteParams,
+  DeploymentGetParams,
+  DeploymentRetryParams,
+  DeploymentRollbackParams,
   Deployments,
 } from './deployments/index';
 export {
@@ -17,6 +22,10 @@ export {
   DomainEditResponse,
   DomainGetResponse,
   DomainCreateParams,
+  DomainListParams,
+  DomainDeleteParams,
+  DomainEditParams,
+  DomainGetParams,
   Domains,
 } from './domains';
 export {
@@ -27,6 +36,10 @@ export {
   ProjectGetResponse,
   ProjectPurgeBuildCacheResponse,
   ProjectCreateParams,
+  ProjectListParams,
+  ProjectDeleteParams,
   ProjectEditParams,
+  ProjectGetParams,
+  ProjectPurgeBuildCacheParams,
   Projects,
 } from './projects';

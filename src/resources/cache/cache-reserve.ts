@@ -13,9 +13,13 @@ export class CacheReserve extends APIResource {
    * [developer docs](https://developers.cloudflare.com/cache/about/cache-reserve)
    * for more information.
    */
-  list(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<CacheReserveListResponse> {
+  list(
+    params: CacheReserveListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CacheReserveListResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/cache/cache_reserve`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/cache/cache_reserve`, options) as Core.APIPromise<{
         result: CacheReserveListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -27,9 +31,13 @@ export class CacheReserve extends APIResource {
    * You cannot re-enable Cache Reserve while this process is ongoing. Keep in mind
    * that you cannot undo or cancel this operation.
    */
-  clear(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<CacheReserveClearResponse> {
+  clear(
+    params: CacheReserveClearParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CacheReserveClearResponse> {
+    const { zone_id } = params;
     return (
-      this._client.post(`/zones/${zoneId}/cache/cache_reserve_clear`, options) as Core.APIPromise<{
+      this._client.post(`/zones/${zone_id}/cache/cache_reserve_clear`, options) as Core.APIPromise<{
         result: CacheReserveClearResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -44,12 +52,12 @@ export class CacheReserve extends APIResource {
    * for more information.
    */
   edit(
-    zoneId: string,
-    body: CacheReserveEditParams,
+    params: CacheReserveEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CacheReserveEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/cache/cache_reserve`, { body, ...options }) as Core.APIPromise<{
+      this._client.patch(`/zones/${zone_id}/cache/cache_reserve`, { body, ...options }) as Core.APIPromise<{
         result: CacheReserveEditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -61,9 +69,13 @@ export class CacheReserve extends APIResource {
    * You cannot re-enable Cache Reserve while this process is ongoing. Keep in mind
    * that you cannot undo or cancel this operation.
    */
-  status(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<CacheReserveStatusResponse> {
+  status(
+    params: CacheReserveStatusParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CacheReserveStatusResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/cache/cache_reserve_clear`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/cache/cache_reserve_clear`, options) as Core.APIPromise<{
         result: CacheReserveStatusResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -186,11 +198,37 @@ export interface CacheReserveStatusResponse {
   end_ts?: string;
 }
 
+export interface CacheReserveListParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+export interface CacheReserveClearParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
 export interface CacheReserveEditParams {
   /**
-   * Value of the Cache Reserve zone setting.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Value of the Cache Reserve zone setting.
    */
   value: 'on' | 'off';
+}
+
+export interface CacheReserveStatusParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }
 
 export namespace CacheReserve {
@@ -198,5 +236,8 @@ export namespace CacheReserve {
   export import CacheReserveClearResponse = CacheReserveAPI.CacheReserveClearResponse;
   export import CacheReserveEditResponse = CacheReserveAPI.CacheReserveEditResponse;
   export import CacheReserveStatusResponse = CacheReserveAPI.CacheReserveStatusResponse;
+  export import CacheReserveListParams = CacheReserveAPI.CacheReserveListParams;
+  export import CacheReserveClearParams = CacheReserveAPI.CacheReserveClearParams;
   export import CacheReserveEditParams = CacheReserveAPI.CacheReserveEditParams;
+  export import CacheReserveStatusParams = CacheReserveAPI.CacheReserveStatusParams;
 }

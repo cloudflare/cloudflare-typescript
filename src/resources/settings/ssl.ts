@@ -23,9 +23,10 @@ export class SSL extends APIResource {
    * expiration date in the future, and respond for the request domain name
    * (hostname). (https://support.cloudflare.com/hc/en-us/articles/200170416).
    */
-  edit(zoneId: string, body: SSLEditParams, options?: Core.RequestOptions): Core.APIPromise<SSLEditResponse> {
+  edit(params: SSLEditParams, options?: Core.RequestOptions): Core.APIPromise<SSLEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/settings/ssl`, { body, ...options }) as Core.APIPromise<{
+      this._client.patch(`/zones/${zone_id}/settings/ssl`, { body, ...options }) as Core.APIPromise<{
         result: SSLEditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -49,9 +50,10 @@ export class SSL extends APIResource {
    * expiration date in the future, and respond for the request domain name
    * (hostname). (https://support.cloudflare.com/hc/en-us/articles/200170416).
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<SSLGetResponse> {
+  get(params: SSLGetParams, options?: Core.RequestOptions): Core.APIPromise<SSLGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/settings/ssl`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/settings/ssl`, options) as Core.APIPromise<{
         result: SSLGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -142,13 +144,26 @@ export interface SSLGetResponse {
 
 export interface SSLEditParams {
   /**
-   * Value of the zone setting. Notes: Depends on the zone's plan level
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Value of the zone setting. Notes: Depends on the zone's plan level
    */
   value: 'off' | 'flexible' | 'full' | 'strict';
+}
+
+export interface SSLGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }
 
 export namespace SSL {
   export import SSLEditResponse = SSLAPI.SSLEditResponse;
   export import SSLGetResponse = SSLAPI.SSLGetResponse;
   export import SSLEditParams = SSLAPI.SSLEditParams;
+  export import SSLGetParams = SSLAPI.SSLGetParams;
 }

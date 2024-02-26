@@ -7,12 +7,21 @@ export {
   CustomGetResponse,
   CustomCreateParams,
   CustomUpdateParams,
+  CustomDeleteParams,
+  CustomGetParams,
   Customs,
 } from './customs';
 export {
   PredefinedUpdateResponse,
   PredefinedGetResponse,
   PredefinedUpdateParams,
+  PredefinedGetParams,
   Predefineds,
 } from './predefineds';
-export { ProfileListResponse, ProfileGetResponse, Profiles } from './profiles';
+export {
+  ProfileListResponse,
+  ProfileGetResponse,
+  ProfileListParams,
+  ProfileGetParams,
+  Profiles,
+} from './profiles';

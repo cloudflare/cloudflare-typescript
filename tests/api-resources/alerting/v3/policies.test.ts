@@ -15,7 +15,8 @@ const cloudflare = new Cloudflare({
 describe('resource policies', () => {
   // skipped: tests are disabled for the time being
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.alerting.v3.policies.create('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = cloudflare.alerting.v3.policies.create({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       alert_type: 'universal_ssl_event_type',
       enabled: true,
       mechanisms: { email: [{}], pagerduty: [{}], webhooks: [{}] },
@@ -32,7 +33,8 @@ describe('resource policies', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.alerting.v3.policies.create('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await cloudflare.alerting.v3.policies.create({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       alert_type: 'universal_ssl_event_type',
       enabled: true,
       mechanisms: {
@@ -88,12 +90,10 @@ describe('resource policies', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('update', async () => {
-    const responsePromise = cloudflare.alerting.v3.policies.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '0da2b59e-f118-439d-8097-bdfb215203c9',
-      {},
-    );
+  test.skip('update: only required params', async () => {
+    const responsePromise = cloudflare.alerting.v3.policies.update('0da2b59e-f118-439d-8097-bdfb215203c9', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -104,8 +104,68 @@ describe('resource policies', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
-    const responsePromise = cloudflare.alerting.v3.policies.list('023e105f4ecef8ad9ca31a8372d0c353');
+  test.skip('update: required and optional params', async () => {
+    const response = await cloudflare.alerting.v3.policies.update('0da2b59e-f118-439d-8097-bdfb215203c9', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      alert_type: 'universal_ssl_event_type',
+      description: 'Something describing the policy.',
+      enabled: true,
+      filters: {
+        actions: ['string', 'string', 'string'],
+        affected_asns: ['string', 'string', 'string'],
+        affected_components: ['string', 'string', 'string'],
+        affected_locations: ['string', 'string', 'string'],
+        airport_code: ['string', 'string', 'string'],
+        alert_trigger_preferences: ['string', 'string', 'string'],
+        alert_trigger_preferences_value: ['99.0', '98.0', '97.0'],
+        enabled: ['string', 'string', 'string'],
+        environment: ['string', 'string', 'string'],
+        event: ['string', 'string', 'string'],
+        event_source: ['string', 'string', 'string'],
+        event_type: ['string', 'string', 'string'],
+        group_by: ['string', 'string', 'string'],
+        health_check_id: ['string', 'string', 'string'],
+        incident_impact: ['INCIDENT_IMPACT_NONE', 'INCIDENT_IMPACT_MINOR', 'INCIDENT_IMPACT_MAJOR'],
+        input_id: ['string', 'string', 'string'],
+        limit: ['string', 'string', 'string'],
+        logo_tag: ['string', 'string', 'string'],
+        megabits_per_second: ['string', 'string', 'string'],
+        new_health: ['string', 'string', 'string'],
+        new_status: ['string', 'string', 'string'],
+        packets_per_second: ['string', 'string', 'string'],
+        pool_id: ['string', 'string', 'string'],
+        product: ['string', 'string', 'string'],
+        project_id: ['string', 'string', 'string'],
+        protocol: ['string', 'string', 'string'],
+        query_tag: ['string', 'string', 'string'],
+        requests_per_second: ['string', 'string', 'string'],
+        selectors: ['string', 'string', 'string'],
+        services: ['string', 'string', 'string'],
+        slo: ['99.9'],
+        status: ['string', 'string', 'string'],
+        target_hostname: ['string', 'string', 'string'],
+        target_ip: ['string', 'string', 'string'],
+        target_zone_name: ['string', 'string', 'string'],
+        traffic_exclusions: ['security_events'],
+        tunnel_id: ['string', 'string', 'string'],
+        tunnel_name: ['string', 'string', 'string'],
+        where: ['string', 'string', 'string'],
+        zones: ['string', 'string', 'string'],
+      },
+      mechanisms: {
+        email: [{ id: 'test@example.com' }],
+        pagerduty: [{ id: 'e8133a15-00a4-4d69-aec1-32f70c51f6e5' }],
+        webhooks: [{ id: '14cc1190-5d2b-4b98-a696-c424cb2ad05f' }],
+      },
+      name: 'SSL Notification Event Policy',
+    });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list: only required params', async () => {
+    const responsePromise = cloudflare.alerting.v3.policies.list({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -116,21 +176,17 @@ describe('resource policies', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.alerting.v3.policies.list('023e105f4ecef8ad9ca31a8372d0c353', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('list: required and optional params', async () => {
+    const response = await cloudflare.alerting.v3.policies.list({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
-    const responsePromise = cloudflare.alerting.v3.policies.delete(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '0da2b59e-f118-439d-8097-bdfb215203c9',
-    );
+  test.skip('delete: only required params', async () => {
+    const responsePromise = cloudflare.alerting.v3.policies.delete('0da2b59e-f118-439d-8097-bdfb215203c9', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -141,23 +197,17 @@ describe('resource policies', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.alerting.v3.policies.delete(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        '0da2b59e-f118-439d-8097-bdfb215203c9',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('delete: required and optional params', async () => {
+    const response = await cloudflare.alerting.v3.policies.delete('0da2b59e-f118-439d-8097-bdfb215203c9', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
-    const responsePromise = cloudflare.alerting.v3.policies.get(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '0da2b59e-f118-439d-8097-bdfb215203c9',
-    );
+  test.skip('get: only required params', async () => {
+    const responsePromise = cloudflare.alerting.v3.policies.get('0da2b59e-f118-439d-8097-bdfb215203c9', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -168,14 +218,9 @@ describe('resource policies', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.alerting.v3.policies.get(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        '0da2b59e-f118-439d-8097-bdfb215203c9',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.alerting.v3.policies.get('0da2b59e-f118-439d-8097-bdfb215203c9', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 });
