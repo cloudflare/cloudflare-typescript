@@ -219,6 +219,13 @@ export {
   OriginTLSClientAuth,
 } from './origin-tls-client-auth/origin-tls-client-auth';
 export {
+  PCAPCreateResponse,
+  PCAPListResponse,
+  PCAPGetResponse,
+  PCAPCreateParams,
+  PCAPs,
+} from './pcaps/pcaps';
+export {
   PageShieldUpdateResponse,
   PageShieldListResponse,
   PageShieldUpdateParams,

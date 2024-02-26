@@ -3880,6 +3880,41 @@ Methods:
 - <code title="patch /accounts/{account_id}/pages/projects/{project_name}/domains/{domain_name}">client.pages.projects.domains.<a href="./src/resources/pages/projects/domains.ts">edit</a>(accountId, projectName, domainName) -> DomainEditResponse | null</code>
 - <code title="get /accounts/{account_id}/pages/projects/{project_name}/domains/{domain_name}">client.pages.projects.domains.<a href="./src/resources/pages/projects/domains.ts">get</a>(accountId, projectName, domainName) -> DomainGetResponse | null</code>
 
+# PCAPs
+
+Types:
+
+- <code><a href="./src/resources/pcaps/pcaps.ts">PCAPCreateResponse</a></code>
+- <code><a href="./src/resources/pcaps/pcaps.ts">PCAPListResponse</a></code>
+- <code><a href="./src/resources/pcaps/pcaps.ts">PCAPGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/pcaps">client.pcaps.<a href="./src/resources/pcaps/pcaps.ts">create</a>(accountId, { ...params }) -> PCAPCreateResponse</code>
+- <code title="get /accounts/{account_id}/pcaps">client.pcaps.<a href="./src/resources/pcaps/pcaps.ts">list</a>(accountId) -> PCAPListResponse | null</code>
+- <code title="get /accounts/{account_id}/pcaps/{pcap_id}">client.pcaps.<a href="./src/resources/pcaps/pcaps.ts">get</a>(accountId, pcapId) -> PCAPGetResponse</code>
+
+## Ownerships
+
+Types:
+
+- <code><a href="./src/resources/pcaps/ownerships.ts">OwnershipCreateResponse</a></code>
+- <code><a href="./src/resources/pcaps/ownerships.ts">OwnershipGetResponse</a></code>
+- <code><a href="./src/resources/pcaps/ownerships.ts">OwnershipValidateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/pcaps/ownership">client.pcaps.ownerships.<a href="./src/resources/pcaps/ownerships.ts">create</a>(accountId, { ...params }) -> OwnershipCreateResponse</code>
+- <code title="delete /accounts/{account_id}/pcaps/ownership/{ownership_id}">client.pcaps.ownerships.<a href="./src/resources/pcaps/ownerships.ts">delete</a>(accountId, ownershipId) -> void</code>
+- <code title="get /accounts/{account_id}/pcaps/ownership">client.pcaps.ownerships.<a href="./src/resources/pcaps/ownerships.ts">get</a>(accountId) -> OwnershipGetResponse | null</code>
+- <code title="post /accounts/{account_id}/pcaps/ownership/validate">client.pcaps.ownerships.<a href="./src/resources/pcaps/ownerships.ts">validate</a>(accountId, { ...params }) -> OwnershipValidateResponse</code>
+
+## Downloads
+
+Methods:
+
+- <code title="get /accounts/{account_id}/pcaps/{pcap_id}/download">client.pcaps.downloads.<a href="./src/resources/pcaps/downloads.ts">get</a>(accountId, pcapId) -> Response</code>
+
 # Registrar
 
 ## Domains
@@ -3902,6 +3937,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/request-tracers/traces.ts">WyxwHh0jTrace</a></code>
 - <code><a href="./src/resources/request-tracers/traces.ts">TraceCreateResponse</a></code>
 
 Methods:
