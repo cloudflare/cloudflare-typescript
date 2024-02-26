@@ -29,7 +29,9 @@ export {
   SubscriptionUpdateResponse,
   SubscriptionListResponse,
   SubscriptionDeleteResponse,
+  SubscriptionEditResponse,
   SubscriptionUpdateParams,
+  SubscriptionEditParams,
   Subscriptions,
 } from './subscriptions';
 export {

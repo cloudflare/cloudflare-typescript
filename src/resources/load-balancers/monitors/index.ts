@@ -2,11 +2,13 @@
 
 export {
   MonitorCreateResponse,
+  MonitorUpdateResponse,
   MonitorListResponse,
   MonitorDeleteResponse,
   MonitorEditResponse,
   MonitorGetResponse,
   MonitorCreateParams,
+  MonitorUpdateParams,
   MonitorEditParams,
   Monitors,
 } from './monitors';

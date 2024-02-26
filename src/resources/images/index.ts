@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export { Images } from './images';
-export { ImagesImagesListResponseV2, V2ListResponse, V2ListParams, V2s } from './v2s/index';
 export {
   V1CreateResponse,
   V1ListResponse,
@@ -14,3 +13,4 @@ export {
   V1ListResponsesV4PagePagination,
   V1s,
 } from './v1s/index';
+export { V2ListResponse, V2ListParams, V2s } from './v2s/index';

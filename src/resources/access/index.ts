@@ -17,6 +17,7 @@ export {
   Applications,
 } from './applications/index';
 export {
+  BookmarkCreateResponse,
   BookmarkUpdateResponse,
   BookmarkListResponse,
   BookmarkDeleteResponse,

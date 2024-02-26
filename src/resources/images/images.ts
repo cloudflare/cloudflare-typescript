@@ -21,7 +21,6 @@ export namespace Images {
   export import V1ListParams = V1sAPI.V1ListParams;
   export import V1EditParams = V1sAPI.V1EditParams;
   export import V2s = V2sAPI.V2s;
-  export import ImagesImagesListResponseV2 = V2sAPI.ImagesImagesListResponseV2;
   export import V2ListResponse = V2sAPI.V2ListResponse;
   export import V2ListParams = V2sAPI.V2ListParams;
 }

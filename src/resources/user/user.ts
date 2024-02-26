@@ -102,7 +102,9 @@ export namespace User {
   export import SubscriptionUpdateResponse = SubscriptionsAPI.SubscriptionUpdateResponse;
   export import SubscriptionListResponse = SubscriptionsAPI.SubscriptionListResponse;
   export import SubscriptionDeleteResponse = SubscriptionsAPI.SubscriptionDeleteResponse;
+  export import SubscriptionEditResponse = SubscriptionsAPI.SubscriptionEditResponse;
   export import SubscriptionUpdateParams = SubscriptionsAPI.SubscriptionUpdateParams;
+  export import SubscriptionEditParams = SubscriptionsAPI.SubscriptionEditParams;
   export import Tokens = TokensAPI.Tokens;
   export import TokenCreateResponse = TokensAPI.TokenCreateResponse;
   export import TokenUpdateResponse = TokensAPI.TokenUpdateResponse;

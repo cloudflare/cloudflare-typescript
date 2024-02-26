@@ -31,10 +31,12 @@ export { Magics } from './magics';
 export {
   RouteCreateResponse,
   RouteUpdateResponse,
+  RouteListResponse,
   RouteDeleteResponse,
+  RouteEmptyResponse,
   RouteGetResponse,
-  RouteMagicStaticRoutesListRoutesResponse,
   RouteCreateParams,
   RouteUpdateParams,
+  RouteEmptyParams,
   Routes,
 } from './routes';

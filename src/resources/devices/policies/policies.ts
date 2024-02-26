@@ -673,13 +673,16 @@ export namespace Policies {
   export import Excludes = ExcludesAPI.Excludes;
   export import ExcludeUpdateResponse = ExcludesAPI.ExcludeUpdateResponse;
   export import ExcludeListResponse = ExcludesAPI.ExcludeListResponse;
+  export import ExcludeGetResponse = ExcludesAPI.ExcludeGetResponse;
   export import ExcludeUpdateParams = ExcludesAPI.ExcludeUpdateParams;
   export import FallbackDomains = FallbackDomainsAPI.FallbackDomains;
   export import FallbackDomainUpdateResponse = FallbackDomainsAPI.FallbackDomainUpdateResponse;
   export import FallbackDomainListResponse = FallbackDomainsAPI.FallbackDomainListResponse;
+  export import FallbackDomainGetResponse = FallbackDomainsAPI.FallbackDomainGetResponse;
   export import FallbackDomainUpdateParams = FallbackDomainsAPI.FallbackDomainUpdateParams;
   export import Includes = IncludesAPI.Includes;
   export import IncludeUpdateResponse = IncludesAPI.IncludeUpdateResponse;
   export import IncludeListResponse = IncludesAPI.IncludeListResponse;
+  export import IncludeGetResponse = IncludesAPI.IncludeGetResponse;
   export import IncludeUpdateParams = IncludesAPI.IncludeUpdateParams;
 }

@@ -41,6 +41,17 @@ export class Routes extends APIResource {
   }
 
   /**
+   * List all Magic static routes.
+   */
+  list(accountIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<RouteListResponse> {
+    return (
+      this._client.get(`/accounts/${accountIdentifier}/magic/routes`, options) as Core.APIPromise<{
+        result: RouteListResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Disable and remove a specific Magic static route.
    */
   delete(
@@ -57,6 +68,22 @@ export class Routes extends APIResource {
   }
 
   /**
+   * Delete multiple Magic static routes.
+   */
+  empty(
+    accountIdentifier: string,
+    body: RouteEmptyParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RouteEmptyResponse> {
+    return (
+      this._client.delete(`/accounts/${accountIdentifier}/magic/routes`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: RouteEmptyResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Get a specific Magic static route.
    */
   get(
@@ -69,20 +96,6 @@ export class Routes extends APIResource {
         `/accounts/${accountIdentifier}/magic/routes/${routeIdentifier}`,
         options,
       ) as Core.APIPromise<{ result: RouteGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * List all Magic static routes.
-   */
-  magicStaticRoutesListRoutes(
-    accountIdentifier: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RouteMagicStaticRoutesListRoutesResponse> {
-    return (
-      this._client.get(`/accounts/${accountIdentifier}/magic/routes`, options) as Core.APIPromise<{
-        result: RouteMagicStaticRoutesListRoutesResponse;
-      }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -163,21 +176,11 @@ export interface RouteUpdateResponse {
   modified_route?: unknown;
 }
 
-export interface RouteDeleteResponse {
-  deleted?: boolean;
-
-  deleted_route?: unknown;
+export interface RouteListResponse {
+  routes?: Array<RouteListResponse.Route>;
 }
 
-export interface RouteGetResponse {
-  route?: unknown;
-}
-
-export interface RouteMagicStaticRoutesListRoutesResponse {
-  routes?: Array<RouteMagicStaticRoutesListRoutesResponse.Route>;
-}
-
-export namespace RouteMagicStaticRoutesListRoutesResponse {
+export namespace RouteListResponse {
   export interface Route {
     /**
      * The next-hop IP Address for the static route.
@@ -243,6 +246,22 @@ export namespace RouteMagicStaticRoutesListRoutesResponse {
   }
 }
 
+export interface RouteDeleteResponse {
+  deleted?: boolean;
+
+  deleted_route?: unknown;
+}
+
+export interface RouteEmptyResponse {
+  deleted?: boolean;
+
+  deleted_routes?: unknown;
+}
+
+export interface RouteGetResponse {
+  route?: unknown;
+}
+
 export type RouteCreateParams = unknown;
 
 export interface RouteUpdateParams {
@@ -294,12 +313,22 @@ export namespace RouteUpdateParams {
   }
 }
 
+export interface RouteEmptyParams {
+  routes: Array<RouteEmptyParams.Route>;
+}
+
+export namespace RouteEmptyParams {
+  export interface Route {}
+}
+
 export namespace Routes {
   export import RouteCreateResponse = RoutesAPI.RouteCreateResponse;
   export import RouteUpdateResponse = RoutesAPI.RouteUpdateResponse;
+  export import RouteListResponse = RoutesAPI.RouteListResponse;
   export import RouteDeleteResponse = RoutesAPI.RouteDeleteResponse;
+  export import RouteEmptyResponse = RoutesAPI.RouteEmptyResponse;
   export import RouteGetResponse = RoutesAPI.RouteGetResponse;
-  export import RouteMagicStaticRoutesListRoutesResponse = RoutesAPI.RouteMagicStaticRoutesListRoutesResponse;
   export import RouteCreateParams = RoutesAPI.RouteCreateParams;
   export import RouteUpdateParams = RoutesAPI.RouteUpdateParams;
+  export import RouteEmptyParams = RoutesAPI.RouteEmptyParams;
 }

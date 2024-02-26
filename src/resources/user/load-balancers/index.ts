@@ -3,6 +3,7 @@
 export { LoadBalancers } from './load-balancers';
 export {
   MonitorCreateResponse,
+  MonitorUpdateResponse,
   MonitorListResponse,
   MonitorDeleteResponse,
   MonitorEditResponse,
@@ -10,12 +11,14 @@ export {
   MonitorPreviewResponse,
   MonitorReferencesResponse,
   MonitorCreateParams,
+  MonitorUpdateParams,
   MonitorEditParams,
   MonitorPreviewParams,
   Monitors,
 } from './monitors';
 export {
   PoolCreateResponse,
+  PoolUpdateResponse,
   PoolListResponse,
   PoolDeleteResponse,
   PoolEditResponse,
@@ -24,6 +27,7 @@ export {
   PoolPreviewResponse,
   PoolReferencesResponse,
   PoolCreateParams,
+  PoolUpdateParams,
   PoolListParams,
   PoolEditParams,
   PoolPreviewParams,

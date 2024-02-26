@@ -4,6 +4,7 @@ export { IPGetResponse, IPGetParams, IPs } from './ips';
 export {
   NetworkCreateResponse,
   NetworkDeleteResponse,
+  NetworkEditResponse,
   NetworkCreateParams,
   NetworkDeleteParams,
   Networks,

@@ -14,6 +14,7 @@ export class LoadBalancers extends APIResource {
 export namespace LoadBalancers {
   export import Monitors = MonitorsAPI.Monitors;
   export import MonitorCreateResponse = MonitorsAPI.MonitorCreateResponse;
+  export import MonitorUpdateResponse = MonitorsAPI.MonitorUpdateResponse;
   export import MonitorListResponse = MonitorsAPI.MonitorListResponse;
   export import MonitorDeleteResponse = MonitorsAPI.MonitorDeleteResponse;
   export import MonitorEditResponse = MonitorsAPI.MonitorEditResponse;
@@ -21,10 +22,12 @@ export namespace LoadBalancers {
   export import MonitorPreviewResponse = MonitorsAPI.MonitorPreviewResponse;
   export import MonitorReferencesResponse = MonitorsAPI.MonitorReferencesResponse;
   export import MonitorCreateParams = MonitorsAPI.MonitorCreateParams;
+  export import MonitorUpdateParams = MonitorsAPI.MonitorUpdateParams;
   export import MonitorEditParams = MonitorsAPI.MonitorEditParams;
   export import MonitorPreviewParams = MonitorsAPI.MonitorPreviewParams;
   export import Pools = PoolsAPI.Pools;
   export import PoolCreateResponse = PoolsAPI.PoolCreateResponse;
+  export import PoolUpdateResponse = PoolsAPI.PoolUpdateResponse;
   export import PoolListResponse = PoolsAPI.PoolListResponse;
   export import PoolDeleteResponse = PoolsAPI.PoolDeleteResponse;
   export import PoolEditResponse = PoolsAPI.PoolEditResponse;
@@ -33,6 +36,7 @@ export namespace LoadBalancers {
   export import PoolPreviewResponse = PoolsAPI.PoolPreviewResponse;
   export import PoolReferencesResponse = PoolsAPI.PoolReferencesResponse;
   export import PoolCreateParams = PoolsAPI.PoolCreateParams;
+  export import PoolUpdateParams = PoolsAPI.PoolUpdateParams;
   export import PoolListParams = PoolsAPI.PoolListParams;
   export import PoolEditParams = PoolsAPI.PoolEditParams;
   export import PoolPreviewParams = PoolsAPI.PoolPreviewParams;

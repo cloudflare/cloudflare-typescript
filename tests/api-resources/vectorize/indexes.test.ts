@@ -110,6 +110,22 @@ describe('resource indexes', () => {
   });
 
   // skipped: tests are disabled for the time being
+  test.skip('deleteByIds', async () => {
+    const responsePromise = cloudflare.vectorize.indexes.deleteByIds(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      'example-index',
+      {},
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('get', async () => {
     const responsePromise = cloudflare.vectorize.indexes.get(
       '023e105f4ecef8ad9ca31a8372d0c353',
@@ -132,6 +148,22 @@ describe('resource indexes', () => {
         path: '/_stainless_unknown_path',
       }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('getByIds', async () => {
+    const responsePromise = cloudflare.vectorize.indexes.getByIds(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      'example-index',
+      {},
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
   });
 
   // skipped: tests are disabled for the time being

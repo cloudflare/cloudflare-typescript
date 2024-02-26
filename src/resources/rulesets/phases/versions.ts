@@ -2,12 +2,51 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as PhasesAPI from 'cloudflare/resources/rulesets/phases';
+import * as VersionsAPI from 'cloudflare/resources/rulesets/phases/versions';
 
-export class Phases extends APIResource {
+export class Versions extends APIResource {
   /**
-   * Fetches the latest version of the account or zone entry point ruleset for a
-   * given phase.
+   * Fetches the versions of an account or zone entry point ruleset.
+   */
+  list(
+    rulesetPhase:
+      | 'ddos_l4'
+      | 'ddos_l7'
+      | 'http_config_settings'
+      | 'http_custom_errors'
+      | 'http_log_custom_fields'
+      | 'http_ratelimit'
+      | 'http_request_cache_settings'
+      | 'http_request_dynamic_redirect'
+      | 'http_request_firewall_custom'
+      | 'http_request_firewall_managed'
+      | 'http_request_late_transform'
+      | 'http_request_origin'
+      | 'http_request_redirect'
+      | 'http_request_sanitize'
+      | 'http_request_sbfm'
+      | 'http_request_select_configuration'
+      | 'http_request_transform'
+      | 'http_response_compression'
+      | 'http_response_firewall_managed'
+      | 'http_response_headers_transform'
+      | 'magic_transit'
+      | 'magic_transit_ids_managed'
+      | 'magic_transit_managed',
+    params: VersionListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<VersionListResponse> {
+    const { account_id, zone_id } = params;
+    return (
+      this._client.get(
+        `/${account_id}/${zone_id}/rulesets/phases/${rulesetPhase}/entrypoint/versions`,
+        options,
+      ) as Core.APIPromise<{ result: VersionListResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Fetches a specific version of an account or zone entry point ruleset.
    */
   get(
     rulesetPhase:
@@ -34,15 +73,16 @@ export class Phases extends APIResource {
       | 'magic_transit'
       | 'magic_transit_ids_managed'
       | 'magic_transit_managed',
-    params: PhaseGetParams,
+    rulesetVersion: string,
+    params: VersionGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PhaseGetResponse> {
+  ): Core.APIPromise<VersionGetResponse> {
     const { account_id, zone_id } = params;
     return (
       this._client.get(
-        `/${account_id}/${zone_id}/rulesets/phases/${rulesetPhase}/entrypoint`,
+        `/${account_id}/${zone_id}/rulesets/phases/${rulesetPhase}/entrypoint/versions/${rulesetVersion}`,
         options,
-      ) as Core.APIPromise<{ result: PhaseGetResponse }>
+      ) as Core.APIPromise<{ result: VersionGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -50,7 +90,77 @@ export class Phases extends APIResource {
 /**
  * A result.
  */
-export interface PhaseGetResponse {
+export type VersionListResponse = Array<VersionListResponse.VersionListResponseItem>;
+
+export namespace VersionListResponse {
+  /**
+   * A ruleset object.
+   */
+  export interface VersionListResponseItem {
+    /**
+     * The kind of the ruleset.
+     */
+    kind: 'managed' | 'custom' | 'root' | 'zone';
+
+    /**
+     * The human-readable name of the ruleset.
+     */
+    name: string;
+
+    /**
+     * The phase of the ruleset.
+     */
+    phase:
+      | 'ddos_l4'
+      | 'ddos_l7'
+      | 'http_config_settings'
+      | 'http_custom_errors'
+      | 'http_log_custom_fields'
+      | 'http_ratelimit'
+      | 'http_request_cache_settings'
+      | 'http_request_dynamic_redirect'
+      | 'http_request_firewall_custom'
+      | 'http_request_firewall_managed'
+      | 'http_request_late_transform'
+      | 'http_request_origin'
+      | 'http_request_redirect'
+      | 'http_request_sanitize'
+      | 'http_request_sbfm'
+      | 'http_request_select_configuration'
+      | 'http_request_transform'
+      | 'http_response_compression'
+      | 'http_response_firewall_managed'
+      | 'http_response_headers_transform'
+      | 'magic_transit'
+      | 'magic_transit_ids_managed'
+      | 'magic_transit_managed';
+
+    /**
+     * The unique ID of the ruleset.
+     */
+    id?: string;
+
+    /**
+     * An informative description of the ruleset.
+     */
+    description?: string;
+
+    /**
+     * The timestamp of when the ruleset was last modified.
+     */
+    last_updated?: string;
+
+    /**
+     * The version of the ruleset.
+     */
+    version?: string;
+  }
+}
+
+/**
+ * A result.
+ */
+export interface VersionGetResponse {
   /**
    * The unique ID of the ruleset.
    */
@@ -103,10 +213,10 @@ export interface PhaseGetResponse {
    * The list of rules in the ruleset.
    */
   rules: Array<
-    | PhaseGetResponse.RulesetsBlockRule
-    | PhaseGetResponse.RulesetsExecuteRule
-    | PhaseGetResponse.RulesetsLogRule
-    | PhaseGetResponse.RulesetsSkipRule
+    | VersionGetResponse.RulesetsBlockRule
+    | VersionGetResponse.RulesetsExecuteRule
+    | VersionGetResponse.RulesetsLogRule
+    | VersionGetResponse.RulesetsSkipRule
   >;
 
   /**
@@ -120,7 +230,7 @@ export interface PhaseGetResponse {
   description?: string;
 }
 
-export namespace PhaseGetResponse {
+export namespace VersionGetResponse {
   export interface RulesetsBlockRule {
     /**
      * The timestamp of when the rule was last modified.
@@ -611,7 +721,7 @@ export namespace PhaseGetResponse {
   }
 }
 
-export interface PhaseGetParams {
+export interface VersionListParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
    */
@@ -623,7 +733,21 @@ export interface PhaseGetParams {
   zone_id: string;
 }
 
-export namespace Phases {
-  export import PhaseGetResponse = PhasesAPI.PhaseGetResponse;
-  export import PhaseGetParams = PhasesAPI.PhaseGetParams;
+export interface VersionGetParams {
+  /**
+   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   */
+  account_id: string;
+
+  /**
+   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   */
+  zone_id: string;
+}
+
+export namespace Versions {
+  export import VersionListResponse = VersionsAPI.VersionListResponse;
+  export import VersionGetResponse = VersionsAPI.VersionGetResponse;
+  export import VersionListParams = VersionsAPI.VersionListParams;
+  export import VersionGetParams = VersionsAPI.VersionGetParams;
 }

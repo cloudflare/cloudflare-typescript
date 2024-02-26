@@ -257,6 +257,7 @@ export class Cloudflare extends Core.APIClient {
   hostnames: API.Hostnames = new API.Hostnames(this);
   snippets: API.Snippets = new API.Snippets(this);
   calls: API.Calls = new API.Calls(this);
+  cloudforceOne: API.CloudforceOne = new API.CloudforceOne(this);
 
   protected override defaultQuery(): Core.DefaultQuery | undefined {
     return this._options.defaultQuery;
@@ -395,11 +396,13 @@ export namespace Cloudflare {
 
   export import LoadBalancers = API.LoadBalancers;
   export import LoadBalancerCreateResponse = API.LoadBalancerCreateResponse;
+  export import LoadBalancerUpdateResponse = API.LoadBalancerUpdateResponse;
   export import LoadBalancerListResponse = API.LoadBalancerListResponse;
   export import LoadBalancerDeleteResponse = API.LoadBalancerDeleteResponse;
   export import LoadBalancerEditResponse = API.LoadBalancerEditResponse;
   export import LoadBalancerGetResponse = API.LoadBalancerGetResponse;
   export import LoadBalancerCreateParams = API.LoadBalancerCreateParams;
+  export import LoadBalancerUpdateParams = API.LoadBalancerUpdateParams;
   export import LoadBalancerEditParams = API.LoadBalancerEditParams;
 
   export import Access = API.Access;
@@ -502,9 +505,11 @@ export namespace Cloudflare {
   export import HealthcheckUpdateResponse = API.HealthcheckUpdateResponse;
   export import HealthcheckListResponse = API.HealthcheckListResponse;
   export import HealthcheckDeleteResponse = API.HealthcheckDeleteResponse;
+  export import HealthcheckEditResponse = API.HealthcheckEditResponse;
   export import HealthcheckGetResponse = API.HealthcheckGetResponse;
   export import HealthcheckCreateParams = API.HealthcheckCreateParams;
   export import HealthcheckUpdateParams = API.HealthcheckUpdateParams;
+  export import HealthcheckEditParams = API.HealthcheckEditParams;
 
   export import KeylessCertificates = API.KeylessCertificates;
   export import KeylessCertificateCreateResponse = API.KeylessCertificateCreateResponse;
@@ -531,10 +536,12 @@ export namespace Cloudflare {
   export import PageruleUpdateResponse = API.PageruleUpdateResponse;
   export import PageruleListResponse = API.PageruleListResponse;
   export import PageruleDeleteResponse = API.PageruleDeleteResponse;
+  export import PageruleEditResponse = API.PageruleEditResponse;
   export import PageruleGetResponse = API.PageruleGetResponse;
   export import PageruleCreateParams = API.PageruleCreateParams;
   export import PageruleUpdateParams = API.PageruleUpdateParams;
   export import PageruleListParams = API.PageruleListParams;
+  export import PageruleEditParams = API.PageruleEditParams;
 
   export import RateLimits = API.RateLimits;
   export import RateLimitCreateResponse = API.RateLimitCreateResponse;
@@ -559,10 +566,12 @@ export namespace Cloudflare {
   export import WaitingRoomUpdateResponse = API.WaitingRoomUpdateResponse;
   export import WaitingRoomListResponse = API.WaitingRoomListResponse;
   export import WaitingRoomDeleteResponse = API.WaitingRoomDeleteResponse;
+  export import WaitingRoomEditResponse = API.WaitingRoomEditResponse;
   export import WaitingRoomGetResponse = API.WaitingRoomGetResponse;
   export import WaitingRoomPreviewResponse = API.WaitingRoomPreviewResponse;
   export import WaitingRoomCreateParams = API.WaitingRoomCreateParams;
   export import WaitingRoomUpdateParams = API.WaitingRoomUpdateParams;
+  export import WaitingRoomEditParams = API.WaitingRoomEditParams;
   export import WaitingRoomPreviewParams = API.WaitingRoomPreviewParams;
 
   export import Web3 = API.Web3;
@@ -705,6 +714,7 @@ export namespace Cloudflare {
   export import WARPConnectorDeleteResponse = API.WARPConnectorDeleteResponse;
   export import WARPConnectorEditResponse = API.WARPConnectorEditResponse;
   export import WARPConnectorGetResponse = API.WARPConnectorGetResponse;
+  export import WARPConnectorTokenResponse = API.WARPConnectorTokenResponse;
   export import WARPConnectorListResponsesV4PagePaginationArray = API.WARPConnectorListResponsesV4PagePaginationArray;
   export import WARPConnectorCreateParams = API.WARPConnectorCreateParams;
   export import WARPConnectorListParams = API.WARPConnectorListParams;
@@ -751,12 +761,9 @@ export namespace Cloudflare {
   export import Firewall = API.Firewall;
 
   export import Speed = API.Speed;
-  export import SpeedCreateResponse = API.SpeedCreateResponse;
   export import SpeedDeleteResponse = API.SpeedDeleteResponse;
   export import SpeedScheduleGetResponse = API.SpeedScheduleGetResponse;
-  export import SpeedTestsGetResponse = API.SpeedTestsGetResponse;
   export import SpeedTrendsListResponse = API.SpeedTrendsListResponse;
-  export import SpeedCreateParams = API.SpeedCreateParams;
   export import SpeedDeleteParams = API.SpeedDeleteParams;
   export import SpeedScheduleGetParams = API.SpeedScheduleGetParams;
   export import SpeedTrendsListParams = API.SpeedTrendsListParams;
@@ -780,6 +787,8 @@ export namespace Cloudflare {
   export import CallGetResponse = API.CallGetResponse;
   export import CallCreateParams = API.CallCreateParams;
   export import CallUpdateParams = API.CallUpdateParams;
+
+  export import CloudforceOne = API.CloudforceOne;
 }
 
 export default Cloudflare;

@@ -105,9 +105,11 @@ export namespace Gateways {
   export import ListUpdateResponse = ListsAPI.ListUpdateResponse;
   export import ListListResponse = ListsAPI.ListListResponse;
   export import ListDeleteResponse = ListsAPI.ListDeleteResponse;
+  export import ListEditResponse = ListsAPI.ListEditResponse;
   export import ListGetResponse = ListsAPI.ListGetResponse;
   export import ListCreateParams = ListsAPI.ListCreateParams;
   export import ListUpdateParams = ListsAPI.ListUpdateParams;
+  export import ListEditParams = ListsAPI.ListEditParams;
   export import Locations = LocationsAPI.Locations;
   export import LocationCreateResponse = LocationsAPI.LocationCreateResponse;
   export import LocationUpdateResponse = LocationsAPI.LocationUpdateResponse;

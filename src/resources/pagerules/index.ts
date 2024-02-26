@@ -5,10 +5,12 @@ export {
   PageruleUpdateResponse,
   PageruleListResponse,
   PageruleDeleteResponse,
+  PageruleEditResponse,
   PageruleGetResponse,
   PageruleCreateParams,
   PageruleUpdateParams,
   PageruleListParams,
+  PageruleEditParams,
   Pagerules,
 } from './pagerules';
 export { SettingListResponse, Settings } from './settings';

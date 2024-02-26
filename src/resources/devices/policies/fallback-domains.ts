@@ -25,20 +25,35 @@ export class FallbackDomains extends APIResource {
   }
 
   /**
+   * Fetches a list of domains to bypass Gateway DNS resolution. These domains will
+   * use the specified local DNS resolver instead.
+   */
+  list(
+    accountId: unknown,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<FallbackDomainListResponse | null> {
+    return (
+      this._client.get(`/accounts/${accountId}/devices/policy/fallback_domains`, options) as Core.APIPromise<{
+        result: FallbackDomainListResponse | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Fetches the list of domains to bypass Gateway DNS resolution from a specified
    * device settings profile. These domains will use the specified local DNS resolver
    * instead.
    */
-  list(
+  get(
     accountId: unknown,
     policyId: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<FallbackDomainListResponse | null> {
+  ): Core.APIPromise<FallbackDomainGetResponse | null> {
     return (
       this._client.get(
         `/accounts/${accountId}/devices/policy/${policyId}/fallback_domains`,
         options,
-      ) as Core.APIPromise<{ result: FallbackDomainListResponse | null }>
+      ) as Core.APIPromise<{ result: FallbackDomainGetResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -86,6 +101,27 @@ export namespace FallbackDomainListResponse {
   }
 }
 
+export type FallbackDomainGetResponse = Array<FallbackDomainGetResponse.FallbackDomainGetResponseItem>;
+
+export namespace FallbackDomainGetResponse {
+  export interface FallbackDomainGetResponseItem {
+    /**
+     * The domain suffix to match when resolving locally.
+     */
+    suffix: string;
+
+    /**
+     * A description of the fallback domain, displayed in the client UI.
+     */
+    description?: string;
+
+    /**
+     * A list of IP addresses to handle domain resolution.
+     */
+    dns_server?: Array<unknown>;
+  }
+}
+
 export type FallbackDomainUpdateParams = Array<FallbackDomainUpdateParams.Body>;
 
 export namespace FallbackDomainUpdateParams {
@@ -110,5 +146,6 @@ export namespace FallbackDomainUpdateParams {
 export namespace FallbackDomains {
   export import FallbackDomainUpdateResponse = FallbackDomainsAPI.FallbackDomainUpdateResponse;
   export import FallbackDomainListResponse = FallbackDomainsAPI.FallbackDomainListResponse;
+  export import FallbackDomainGetResponse = FallbackDomainsAPI.FallbackDomainGetResponse;
   export import FallbackDomainUpdateParams = FallbackDomainsAPI.FallbackDomainUpdateParams;
 }

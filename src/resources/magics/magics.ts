@@ -38,9 +38,11 @@ export namespace Magics {
   export import Routes = RoutesAPI.Routes;
   export import RouteCreateResponse = RoutesAPI.RouteCreateResponse;
   export import RouteUpdateResponse = RoutesAPI.RouteUpdateResponse;
+  export import RouteListResponse = RoutesAPI.RouteListResponse;
   export import RouteDeleteResponse = RoutesAPI.RouteDeleteResponse;
+  export import RouteEmptyResponse = RoutesAPI.RouteEmptyResponse;
   export import RouteGetResponse = RoutesAPI.RouteGetResponse;
-  export import RouteMagicStaticRoutesListRoutesResponse = RoutesAPI.RouteMagicStaticRoutesListRoutesResponse;
   export import RouteCreateParams = RoutesAPI.RouteCreateParams;
   export import RouteUpdateParams = RoutesAPI.RouteUpdateParams;
+  export import RouteEmptyParams = RoutesAPI.RouteEmptyParams;
 }
