@@ -3995,7 +3995,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/request-tracers/traces.ts">WyxwHh0jTrace</a></code>
 - <code><a href="./src/resources/request-tracers/traces.ts">TraceCreateResponse</a></code>
 
 Methods:
