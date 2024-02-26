@@ -156,11 +156,6 @@ export interface HTTPProtocolGetParams {
   format?: 'JSON' | 'CSV';
 
   /**
-   * Filter for http protocol.
-   */
-  httpProtocol?: Array<'HTTP' | 'HTTPS'>;
-
-  /**
    * Filter for ip version.
    */
   ipVersion?: Array<'IPv4' | 'IPv6'>;

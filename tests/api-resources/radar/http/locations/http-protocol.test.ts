@@ -47,7 +47,6 @@ describe('resource httpProtocol', () => {
           dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           deviceType: ['DESKTOP', 'MOBILE', 'OTHER'],
           format: 'JSON',
-          httpProtocol: ['HTTP', 'HTTPS'],
           ipVersion: ['IPv4', 'IPv6'],
           limit: 5,
           location: ['string', 'string', 'string'],
