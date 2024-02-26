@@ -5,9 +5,11 @@ export {
   EventUpdateResponse,
   EventListResponse,
   EventDeleteResponse,
+  EventEditResponse,
   EventGetResponse,
   EventCreateParams,
   EventUpdateParams,
+  EventEditParams,
   Events,
 } from './events/index';
 export {
@@ -21,23 +23,26 @@ export {
   RuleEditParams,
   Rules,
 } from './rules';
+export {
+  SettingUpdateResponse,
+  SettingEditResponse,
+  SettingGetResponse,
+  SettingUpdateParams,
+  SettingEditParams,
+  Settings,
+} from './settings';
 export { StatusGetResponse, Statuses } from './statuses';
 export {
   WaitingRoomCreateResponse,
   WaitingRoomUpdateResponse,
   WaitingRoomListResponse,
   WaitingRoomDeleteResponse,
+  WaitingRoomEditResponse,
   WaitingRoomGetResponse,
   WaitingRoomPreviewResponse,
   WaitingRoomCreateParams,
   WaitingRoomUpdateParams,
+  WaitingRoomEditParams,
   WaitingRoomPreviewParams,
   WaitingRooms,
 } from './waiting-rooms';
-export {
-  WaitingroomZoneSettingsResponse,
-  SettingEditResponse,
-  SettingGetResponse,
-  SettingEditParams,
-  Settings,
-} from './settings';

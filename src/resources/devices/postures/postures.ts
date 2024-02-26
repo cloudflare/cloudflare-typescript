@@ -2637,6 +2637,7 @@ export namespace Postures {
   export import PostureUpdateParams = PosturesAPI.PostureUpdateParams;
   export import Integrations = IntegrationsAPI.Integrations;
   export import IntegrationCreateResponse = IntegrationsAPI.IntegrationCreateResponse;
+  export import IntegrationListResponse = IntegrationsAPI.IntegrationListResponse;
   export import IntegrationDeleteResponse = IntegrationsAPI.IntegrationDeleteResponse;
   export import IntegrationEditResponse = IntegrationsAPI.IntegrationEditResponse;
   export import IntegrationGetResponse = IntegrationsAPI.IntegrationGetResponse;

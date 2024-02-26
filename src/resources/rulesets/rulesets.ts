@@ -3,8 +3,8 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as RulesetsAPI from 'cloudflare/resources/rulesets/rulesets';
-import * as PhasesAPI from 'cloudflare/resources/rulesets/phases';
 import * as RulesAPI from 'cloudflare/resources/rulesets/rules';
+import * as PhasesAPI from 'cloudflare/resources/rulesets/phases/phases';
 import * as VersionsAPI from 'cloudflare/resources/rulesets/versions/versions';
 
 export class Rulesets extends APIResource {
@@ -2895,7 +2895,9 @@ export namespace Rulesets {
   export import RulesetDeleteParams = RulesetsAPI.RulesetDeleteParams;
   export import RulesetGetParams = RulesetsAPI.RulesetGetParams;
   export import Phases = PhasesAPI.Phases;
+  export import PhaseUpdateResponse = PhasesAPI.PhaseUpdateResponse;
   export import PhaseGetResponse = PhasesAPI.PhaseGetResponse;
+  export import PhaseUpdateParams = PhasesAPI.PhaseUpdateParams;
   export import PhaseGetParams = PhasesAPI.PhaseGetParams;
   export import Rules = RulesAPI.Rules;
   export import RuleCreateResponse = RulesAPI.RuleCreateResponse;

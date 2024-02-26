@@ -2,6 +2,7 @@
 
 export {
   IntegrationCreateResponse,
+  IntegrationListResponse,
   IntegrationDeleteResponse,
   IntegrationEditResponse,
   IntegrationGetResponse,

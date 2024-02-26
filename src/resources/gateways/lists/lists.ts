@@ -67,6 +67,23 @@ export class Lists extends APIResource {
   }
 
   /**
+   * Appends or removes an item from a configured Zero Trust list.
+   */
+  edit(
+    accountId: unknown,
+    listId: string,
+    body: ListEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ListEditResponse> {
+    return (
+      this._client.patch(`/accounts/${accountId}/gateway/lists/${listId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: ListEditResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Fetches a single Zero Trust list.
    */
   get(accountId: unknown, listId: string, options?: Core.RequestOptions): Core.APIPromise<ListGetResponse> {
@@ -188,6 +205,37 @@ export namespace ListListResponse {
 
 export type ListDeleteResponse = unknown | string;
 
+export interface ListEditResponse {
+  /**
+   * API Resource UUID tag.
+   */
+  id?: string;
+
+  /**
+   * The number of items in the list.
+   */
+  count?: number;
+
+  created_at?: string;
+
+  /**
+   * The description of the list.
+   */
+  description?: string;
+
+  /**
+   * The name of the list.
+   */
+  name?: string;
+
+  /**
+   * The type of list.
+   */
+  type?: 'SERIAL' | 'URL' | 'DOMAIN' | 'EMAIL' | 'IP';
+
+  updated_at?: string;
+}
+
 export interface ListGetResponse {
   /**
    * API Resource UUID tag.
@@ -262,14 +310,37 @@ export interface ListUpdateParams {
   description?: string;
 }
 
+export interface ListEditParams {
+  /**
+   * The items in the list.
+   */
+  append?: Array<ListEditParams.Append>;
+
+  /**
+   * A list of the item values you want to remove.
+   */
+  remove?: Array<string>;
+}
+
+export namespace ListEditParams {
+  export interface Append {
+    /**
+     * The value of the item in a list.
+     */
+    value?: string;
+  }
+}
+
 export namespace Lists {
   export import ListCreateResponse = ListsAPI.ListCreateResponse;
   export import ListUpdateResponse = ListsAPI.ListUpdateResponse;
   export import ListListResponse = ListsAPI.ListListResponse;
   export import ListDeleteResponse = ListsAPI.ListDeleteResponse;
+  export import ListEditResponse = ListsAPI.ListEditResponse;
   export import ListGetResponse = ListsAPI.ListGetResponse;
   export import ListCreateParams = ListsAPI.ListCreateParams;
   export import ListUpdateParams = ListsAPI.ListUpdateParams;
+  export import ListEditParams = ListsAPI.ListEditParams;
   export import Items = ItemsAPI.Items;
   export import ItemListResponse = ItemsAPI.ItemListResponse;
 }

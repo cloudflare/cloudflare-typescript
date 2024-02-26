@@ -76,6 +76,7 @@ export {
   ClientCertificateListResponsesV4PagePaginationArray,
   ClientCertificates,
 } from './client-certificates';
+export { CloudforceOne } from './cloudforce-one/cloudforce-one';
 export {
   CustomCertificateCreateResponse,
   CustomCertificateListResponse,
@@ -146,9 +147,11 @@ export {
   HealthcheckUpdateResponse,
   HealthcheckListResponse,
   HealthcheckDeleteResponse,
+  HealthcheckEditResponse,
   HealthcheckGetResponse,
   HealthcheckCreateParams,
   HealthcheckUpdateParams,
+  HealthcheckEditParams,
   Healthchecks,
 } from './healthchecks/healthchecks';
 export { Hostnames } from './hostnames/hostnames';
@@ -168,11 +171,13 @@ export {
 } from './keyless-certificates';
 export {
   LoadBalancerCreateResponse,
+  LoadBalancerUpdateResponse,
   LoadBalancerListResponse,
   LoadBalancerDeleteResponse,
   LoadBalancerEditResponse,
   LoadBalancerGetResponse,
   LoadBalancerCreateParams,
+  LoadBalancerUpdateParams,
   LoadBalancerEditParams,
   LoadBalancers,
 } from './load-balancers/load-balancers';
@@ -236,10 +241,12 @@ export {
   PageruleUpdateResponse,
   PageruleListResponse,
   PageruleDeleteResponse,
+  PageruleEditResponse,
   PageruleGetResponse,
   PageruleCreateParams,
   PageruleUpdateParams,
   PageruleListParams,
+  PageruleEditParams,
   Pagerules,
 } from './pagerules/pagerules';
 export { Pages } from './pages/pages';
@@ -287,12 +294,9 @@ export {
 } from './snippets/snippets';
 export { Spectrum } from './spectrum/spectrum';
 export {
-  SpeedCreateResponse,
   SpeedDeleteResponse,
   SpeedScheduleGetResponse,
-  SpeedTestsGetResponse,
   SpeedTrendsListResponse,
-  SpeedCreateParams,
   SpeedDeleteParams,
   SpeedScheduleGetParams,
   SpeedTrendsListParams,
@@ -346,6 +350,7 @@ export {
   WARPConnectorDeleteResponse,
   WARPConnectorEditResponse,
   WARPConnectorGetResponse,
+  WARPConnectorTokenResponse,
   WARPConnectorCreateParams,
   WARPConnectorListParams,
   WARPConnectorDeleteParams,
@@ -358,10 +363,12 @@ export {
   WaitingRoomUpdateResponse,
   WaitingRoomListResponse,
   WaitingRoomDeleteResponse,
+  WaitingRoomEditResponse,
   WaitingRoomGetResponse,
   WaitingRoomPreviewResponse,
   WaitingRoomCreateParams,
   WaitingRoomUpdateParams,
+  WaitingRoomEditParams,
   WaitingRoomPreviewParams,
   WaitingRooms,
 } from './waiting-rooms/waiting-rooms';

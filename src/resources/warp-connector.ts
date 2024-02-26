@@ -97,6 +97,23 @@ export class WARPConnector extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Gets the token used to associate warp device with a specific Warp Connector
+   * tunnel.
+   */
+  token(
+    accountId: string,
+    tunnelId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<WARPConnectorTokenResponse> {
+    return (
+      this._client.get(
+        `/accounts/${accountId}/warp_connector/${tunnelId}/token`,
+        options,
+      ) as Core.APIPromise<{ result: WARPConnectorTokenResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
 export class WARPConnectorListResponsesV4PagePaginationArray extends V4PagePaginationArray<WARPConnectorListResponse> {}
@@ -1306,6 +1323,8 @@ export namespace WARPConnectorGetResponse {
   }
 }
 
+export type WARPConnectorTokenResponse = unknown | Array<unknown> | string;
+
 export interface WARPConnectorCreateParams {
   /**
    * A user-friendly name for the tunnel.
@@ -1361,6 +1380,7 @@ export namespace WARPConnector {
   export import WARPConnectorDeleteResponse = WARPConnectorAPI.WARPConnectorDeleteResponse;
   export import WARPConnectorEditResponse = WARPConnectorAPI.WARPConnectorEditResponse;
   export import WARPConnectorGetResponse = WARPConnectorAPI.WARPConnectorGetResponse;
+  export import WARPConnectorTokenResponse = WARPConnectorAPI.WARPConnectorTokenResponse;
   export import WARPConnectorListResponsesV4PagePaginationArray = WARPConnectorAPI.WARPConnectorListResponsesV4PagePaginationArray;
   export import WARPConnectorCreateParams = WARPConnectorAPI.WARPConnectorCreateParams;
   export import WARPConnectorListParams = WARPConnectorAPI.WARPConnectorListParams;

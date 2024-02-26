@@ -85,17 +85,19 @@ export class Rules extends APIResource {
   }
 
   /**
-   * Updates the priority of existing firewall rules.
+   * Updates the priority of an existing firewall rule.
    */
   edit(
     zoneIdentifier: string,
+    id: string,
     body: RuleEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RuleEditResponse | null> {
     return (
-      this._client.patch(`/zones/${zoneIdentifier}/firewall/rules`, { body, ...options }) as Core.APIPromise<{
-        result: RuleEditResponse | null;
-      }>
+      this._client.patch(`/zones/${zoneIdentifier}/firewall/rules/${id}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: RuleEditResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 

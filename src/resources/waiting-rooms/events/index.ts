@@ -6,8 +6,10 @@ export {
   EventUpdateResponse,
   EventListResponse,
   EventDeleteResponse,
+  EventEditResponse,
   EventGetResponse,
   EventCreateParams,
   EventUpdateParams,
+  EventEditParams,
   Events,
 } from './events';

@@ -5,9 +5,11 @@ export {
   HealthcheckUpdateResponse,
   HealthcheckListResponse,
   HealthcheckDeleteResponse,
+  HealthcheckEditResponse,
   HealthcheckGetResponse,
   HealthcheckCreateParams,
   HealthcheckUpdateParams,
+  HealthcheckEditParams,
   Healthchecks,
 } from './healthchecks';
 export {

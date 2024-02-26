@@ -36,79 +36,6 @@ export class V2s extends APIResource {
   }
 }
 
-export interface ImagesImagesListResponseV2 {
-  errors: Array<ImagesImagesListResponseV2.Error>;
-
-  messages: Array<ImagesImagesListResponseV2.Message>;
-
-  result: ImagesImagesListResponseV2.Result;
-
-  /**
-   * Whether the API call was successful
-   */
-  success: true;
-}
-
-export namespace ImagesImagesListResponseV2 {
-  export interface Error {
-    code: number;
-
-    message: string;
-  }
-
-  export interface Message {
-    code: number;
-
-    message: string;
-  }
-
-  export interface Result {
-    /**
-     * Continuation token to fetch next page. Passed as a query param when requesting
-     * List V2 api endpoint.
-     */
-    continuation_token?: string | null;
-
-    images?: Array<Result.Image>;
-  }
-
-  export namespace Result {
-    export interface Image {
-      /**
-       * Image unique identifier.
-       */
-      id?: string;
-
-      /**
-       * Image file name.
-       */
-      filename?: string;
-
-      /**
-       * User modifiable key-value store. Can be used for keeping references to another
-       * system of record for managing images. Metadata must not exceed 1024 bytes.
-       */
-      meta?: unknown;
-
-      /**
-       * Indicates whether the image can be a accessed only using it's UID. If set to
-       * true, a signed token needs to be generated with a signing key to view the image.
-       */
-      requireSignedURLs?: boolean;
-
-      /**
-       * When the media item was uploaded.
-       */
-      uploaded?: string;
-
-      /**
-       * Object specifying available variants for an image.
-       */
-      variants?: Array<string | string | string>;
-    }
-  }
-}
-
 export interface V2ListResponse {
   /**
    * Continuation token to fetch next page. Passed as a query param when requesting
@@ -173,7 +100,6 @@ export interface V2ListParams {
 }
 
 export namespace V2s {
-  export import ImagesImagesListResponseV2 = V2sAPI.ImagesImagesListResponseV2;
   export import V2ListResponse = V2sAPI.V2ListResponse;
   export import V2ListParams = V2sAPI.V2ListParams;
   export import DirectUploads = DirectUploadsAPI.DirectUploads;

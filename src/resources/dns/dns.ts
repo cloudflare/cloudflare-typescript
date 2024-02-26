@@ -15,6 +15,7 @@ export namespace DNS {
   export import RecordUpdateResponse = RecordsAPI.RecordUpdateResponse;
   export import RecordListResponse = RecordsAPI.RecordListResponse;
   export import RecordDeleteResponse = RecordsAPI.RecordDeleteResponse;
+  export import RecordEditResponse = RecordsAPI.RecordEditResponse;
   export import RecordExportResponse = RecordsAPI.RecordExportResponse;
   export import RecordGetResponse = RecordsAPI.RecordGetResponse;
   export import RecordImportResponse = RecordsAPI.RecordImportResponse;
@@ -23,6 +24,7 @@ export namespace DNS {
   export import RecordCreateParams = RecordsAPI.RecordCreateParams;
   export import RecordUpdateParams = RecordsAPI.RecordUpdateParams;
   export import RecordListParams = RecordsAPI.RecordListParams;
+  export import RecordEditParams = RecordsAPI.RecordEditParams;
   export import RecordImportParams = RecordsAPI.RecordImportParams;
   export import Firewall = FirewallAPI.Firewall;
   export import FirewallCreateResponse = FirewallAPI.FirewallCreateResponse;

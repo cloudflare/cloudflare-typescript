@@ -1,6 +1,12 @@
 // File generated from our OpenAPI spec by Stainless.
 
-export { PhaseGetResponse, PhaseGetParams, Phases } from './phases';
+export {
+  PhaseUpdateResponse,
+  PhaseGetResponse,
+  PhaseUpdateParams,
+  PhaseGetParams,
+  Phases,
+} from './phases/index';
 export {
   RuleCreateResponse,
   RuleDeleteResponse,

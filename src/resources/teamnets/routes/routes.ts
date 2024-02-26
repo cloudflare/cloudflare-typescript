@@ -153,6 +153,7 @@ export namespace Routes {
   export import Networks = NetworksAPI.Networks;
   export import NetworkCreateResponse = NetworksAPI.NetworkCreateResponse;
   export import NetworkDeleteResponse = NetworksAPI.NetworkDeleteResponse;
+  export import NetworkEditResponse = NetworksAPI.NetworkEditResponse;
   export import NetworkCreateParams = NetworksAPI.NetworkCreateParams;
   export import NetworkDeleteParams = NetworksAPI.NetworkDeleteParams;
 }

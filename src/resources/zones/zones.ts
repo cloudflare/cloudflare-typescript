@@ -4,10 +4,14 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as ZonesAPI from 'cloudflare/resources/zones/zones';
+import * as CustomNameserversAPI from 'cloudflare/resources/zones/custom-nameservers';
 import * as HoldsAPI from 'cloudflare/resources/zones/holds';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class Zones extends APIResource {
+  customNameservers: CustomNameserversAPI.CustomNameservers = new CustomNameserversAPI.CustomNameservers(
+    this._client,
+  );
   holds: HoldsAPI.Holds = new HoldsAPI.Holds(this._client);
 
   /**
@@ -798,6 +802,10 @@ export namespace Zones {
   export import ZoneCreateParams = ZonesAPI.ZoneCreateParams;
   export import ZoneListParams = ZonesAPI.ZoneListParams;
   export import ZoneEditParams = ZonesAPI.ZoneEditParams;
+  export import CustomNameservers = CustomNameserversAPI.CustomNameservers;
+  export import CustomNameserverUpdateResponse = CustomNameserversAPI.CustomNameserverUpdateResponse;
+  export import CustomNameserverGetResponse = CustomNameserversAPI.CustomNameserverGetResponse;
+  export import CustomNameserverUpdateParams = CustomNameserversAPI.CustomNameserverUpdateParams;
   export import Holds = HoldsAPI.Holds;
   export import HoldCreateResponse = HoldsAPI.HoldCreateResponse;
   export import HoldDeleteResponse = HoldsAPI.HoldDeleteResponse;

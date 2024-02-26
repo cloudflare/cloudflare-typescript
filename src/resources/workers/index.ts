@@ -51,7 +51,6 @@ export {
   RouteUpdateParams,
   Routes,
 } from './routes';
-export { Script } from './script';
 export {
   ScriptUpdateResponse,
   ScriptListResponse,
@@ -59,6 +58,7 @@ export {
   ScriptDeleteParams,
   Scripts,
 } from './scripts/index';
+export { ScriptUpdateResponse, ScriptUpdateParams, Script } from './script';
 export { Services } from './services/index';
 export {
   SubdomainUpdateResponse,

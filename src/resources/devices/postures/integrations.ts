@@ -22,6 +22,17 @@ export class Integrations extends APIResource {
   }
 
   /**
+   * Fetches the list of device posture integrations for an account.
+   */
+  list(accountId: unknown, options?: Core.RequestOptions): Core.APIPromise<IntegrationListResponse | null> {
+    return (
+      this._client.get(`/accounts/${accountId}/devices/posture/integration`, options) as Core.APIPromise<{
+        result: IntegrationListResponse | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Delete a configured device posture integration.
    */
   delete(
@@ -118,6 +129,67 @@ export namespace IntegrationCreateResponse {
      * The Workspace One client ID provided in the Workspace One Admin Dashboard.
      */
     client_id: string;
+  }
+}
+
+export type IntegrationListResponse = Array<IntegrationListResponse.IntegrationListResponseItem>;
+
+export namespace IntegrationListResponse {
+  export interface IntegrationListResponseItem {
+    /**
+     * API UUID.
+     */
+    id?: string;
+
+    /**
+     * The configuration object containing third-party integration information.
+     */
+    config?: IntegrationListResponseItem.Config;
+
+    /**
+     * The interval between each posture check with the third-party API. Use `m` for
+     * minutes (e.g. `5m`) and `h` for hours (e.g. `12h`).
+     */
+    interval?: string;
+
+    /**
+     * The name of the device posture integration.
+     */
+    name?: string;
+
+    /**
+     * The type of device posture integration.
+     */
+    type?:
+      | 'workspace_one'
+      | 'crowdstrike_s2s'
+      | 'uptycs'
+      | 'intune'
+      | 'kolide'
+      | 'tanium'
+      | 'sentinelone_s2s';
+  }
+
+  export namespace IntegrationListResponseItem {
+    /**
+     * The configuration object containing third-party integration information.
+     */
+    export interface Config {
+      /**
+       * The Workspace One API URL provided in the Workspace One Admin Dashboard.
+       */
+      api_url: string;
+
+      /**
+       * The Workspace One Authorization URL depending on your region.
+       */
+      auth_url: string;
+
+      /**
+       * The Workspace One client ID provided in the Workspace One Admin Dashboard.
+       */
+      client_id: string;
+    }
   }
 }
 
@@ -551,6 +623,7 @@ export namespace IntegrationEditParams {
 
 export namespace Integrations {
   export import IntegrationCreateResponse = IntegrationsAPI.IntegrationCreateResponse;
+  export import IntegrationListResponse = IntegrationsAPI.IntegrationListResponse;
   export import IntegrationDeleteResponse = IntegrationsAPI.IntegrationDeleteResponse;
   export import IntegrationEditResponse = IntegrationsAPI.IntegrationEditResponse;
   export import IntegrationGetResponse = IntegrationsAPI.IntegrationGetResponse;

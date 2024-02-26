@@ -6,6 +6,21 @@ import * as BookmarksAPI from 'cloudflare/resources/access/bookmarks';
 
 export class Bookmarks extends APIResource {
   /**
+   * Create a new Bookmark application.
+   */
+  create(
+    identifier: unknown,
+    uuid: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<BookmarkCreateResponse> {
+    return (
+      this._client.post(`/accounts/${identifier}/access/bookmarks/${uuid}`, options) as Core.APIPromise<{
+        result: BookmarkCreateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Updates a configured Bookmark application.
    */
   update(
@@ -60,6 +75,37 @@ export class Bookmarks extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+
+export interface BookmarkCreateResponse {
+  /**
+   * The unique identifier for the Bookmark application.
+   */
+  id?: unknown;
+
+  /**
+   * Displays the application in the App Launcher.
+   */
+  app_launcher_visible?: boolean;
+
+  created_at?: string;
+
+  /**
+   * The domain of the Bookmark application.
+   */
+  domain?: string;
+
+  /**
+   * The image URL for the logo shown in the App Launcher dashboard.
+   */
+  logo_url?: string;
+
+  /**
+   * The name of the Bookmark application.
+   */
+  name?: string;
+
+  updated_at?: string;
 }
 
 export interface BookmarkUpdateResponse {
@@ -167,6 +213,7 @@ export interface BookmarkGetResponse {
 }
 
 export namespace Bookmarks {
+  export import BookmarkCreateResponse = BookmarksAPI.BookmarkCreateResponse;
   export import BookmarkUpdateResponse = BookmarksAPI.BookmarkUpdateResponse;
   export import BookmarkListResponse = BookmarksAPI.BookmarkListResponse;
   export import BookmarkDeleteResponse = BookmarksAPI.BookmarkDeleteResponse;

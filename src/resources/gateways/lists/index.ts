@@ -6,8 +6,10 @@ export {
   ListUpdateResponse,
   ListListResponse,
   ListDeleteResponse,
+  ListEditResponse,
   ListGetResponse,
   ListCreateParams,
   ListUpdateParams,
+  ListEditParams,
   Lists,
 } from './lists';
