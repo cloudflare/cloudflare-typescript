@@ -10,7 +10,9 @@ export {
   PageruleCreateParams,
   PageruleUpdateParams,
   PageruleListParams,
+  PageruleDeleteParams,
   PageruleEditParams,
+  PageruleGetParams,
   Pagerules,
 } from './pagerules';
-export { SettingListResponse, Settings } from './settings';
+export { SettingListResponse, SettingListParams, Settings } from './settings';

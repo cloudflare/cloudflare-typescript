@@ -10,12 +10,12 @@ export class Devices extends APIResource {
    * List details for devices using WARP
    */
   list(
-    accountId: string,
-    query: DeviceListParams,
+    params: DeviceListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<DeviceListResponsesV4PagePaginationArray, DeviceListResponse> {
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
-      `/accounts/${accountId}/dex/fleet-status/devices`,
+      `/accounts/${account_id}/dex/fleet-status/devices`,
       DeviceListResponsesV4PagePaginationArray,
       { query, ...options },
     );
@@ -63,47 +63,52 @@ export interface DeviceListResponse {
 
 export interface DeviceListParams extends V4PagePaginationArrayParams {
   /**
-   * Timestamp in ISO format
+   * Path param:
+   */
+  account_id: string;
+
+  /**
+   * Query param: Timestamp in ISO format
    */
   time_end: string;
 
   /**
-   * Timestamp in ISO format
+   * Query param: Timestamp in ISO format
    */
   time_start: string;
 
   /**
-   * Cloudflare colo
+   * Query param: Cloudflare colo
    */
   colo?: string;
 
   /**
-   * Device-specific ID, given as UUID v4
+   * Query param: Device-specific ID, given as UUID v4
    */
   device_id?: string;
 
   /**
-   * The mode under which the WARP client is run
+   * Query param: The mode under which the WARP client is run
    */
   mode?: string;
 
   /**
-   * Operating system
+   * Query param: Operating system
    */
   platform?: string;
 
   /**
-   * Dimension to sort results by
+   * Query param: Dimension to sort results by
    */
   sort_by?: 'colo' | 'device_id' | 'mode' | 'platform' | 'status' | 'timestamp' | 'version';
 
   /**
-   * Network status
+   * Query param: Network status
    */
   status?: string;
 
   /**
-   * WARP client version
+   * Query param: WARP client version
    */
   version?: string;
 }

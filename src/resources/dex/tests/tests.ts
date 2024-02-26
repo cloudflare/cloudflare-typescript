@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as TestsAPI from 'cloudflare/resources/dex/tests/tests';
 import * as UniqueDevicesAPI from 'cloudflare/resources/dex/tests/unique-devices';
 import { V4PagePagination, type V4PagePaginationParams } from 'cloudflare/pagination';
@@ -14,23 +13,11 @@ export class Tests extends APIResource {
    * List DEX tests
    */
   list(
-    accountId: string,
-    query?: TestListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<TestListResponsesV4PagePagination, TestListResponse>;
-  list(
-    accountId: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<TestListResponsesV4PagePagination, TestListResponse>;
-  list(
-    accountId: string,
-    query: TestListParams | Core.RequestOptions = {},
+    params: TestListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<TestListResponsesV4PagePagination, TestListResponse> {
-    if (isRequestOptions(query)) {
-      return this.list(accountId, {}, query);
-    }
-    return this._client.getAPIList(`/accounts/${accountId}/dex/tests`, TestListResponsesV4PagePagination, {
+    const { account_id, ...query } = params;
+    return this._client.getAPIList(`/accounts/${account_id}/dex/tests`, TestListResponsesV4PagePagination, {
       query,
       ...options,
     });
@@ -390,19 +377,24 @@ export namespace TestListResponse {
 
 export interface TestListParams extends V4PagePaginationParams {
   /**
-   * Optionally filter result stats to a Cloudflare colo. Cannot be used in
-   * combination with deviceId param.
+   * Path param: unique identifier linked to an account in the API request path.
+   */
+  account_id: string;
+
+  /**
+   * Query param: Optionally filter result stats to a Cloudflare colo. Cannot be used
+   * in combination with deviceId param.
    */
   colo?: string;
 
   /**
-   * Optionally filter result stats to a specific device(s). Cannot be used in
-   * combination with colo param.
+   * Query param: Optionally filter result stats to a specific device(s). Cannot be
+   * used in combination with colo param.
    */
   deviceId?: Array<string>;
 
   /**
-   * Optionally filter results by test name
+   * Query param: Optionally filter results by test name
    */
   testName?: string;
 }

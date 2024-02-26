@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as PagerulesAPI from 'cloudflare/resources/pagerules/pagerules';
 import * as SettingsAPI from 'cloudflare/resources/pagerules/settings';
 
@@ -13,12 +12,12 @@ export class Pagerules extends APIResource {
    * Creates a new Page Rule.
    */
   create(
-    zoneId: string,
-    body: PageruleCreateParams,
+    params: PageruleCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PageruleCreateResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.post(`/zones/${zoneId}/pagerules`, { body, ...options }) as Core.APIPromise<{
+      this._client.post(`/zones/${zone_id}/pagerules`, { body, ...options }) as Core.APIPromise<{
         result: PageruleCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -29,13 +28,13 @@ export class Pagerules extends APIResource {
    * updated Page Rule will exactly match the data passed in the API request.
    */
   update(
-    zoneId: string,
     pageruleId: string,
-    body: PageruleUpdateParams,
+    params: PageruleUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PageruleUpdateResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.put(`/zones/${zoneId}/pagerules/${pageruleId}`, { body, ...options }) as Core.APIPromise<{
+      this._client.put(`/zones/${zone_id}/pagerules/${pageruleId}`, { body, ...options }) as Core.APIPromise<{
         result: PageruleUpdateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -44,22 +43,10 @@ export class Pagerules extends APIResource {
   /**
    * Fetches Page Rules in a zone.
    */
-  list(
-    zoneId: string,
-    query?: PageruleListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PageruleListResponse>;
-  list(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<PageruleListResponse>;
-  list(
-    zoneId: string,
-    query: PageruleListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PageruleListResponse> {
-    if (isRequestOptions(query)) {
-      return this.list(zoneId, {}, query);
-    }
+  list(params: PageruleListParams, options?: Core.RequestOptions): Core.APIPromise<PageruleListResponse> {
+    const { zone_id, ...query } = params;
     return (
-      this._client.get(`/zones/${zoneId}/pagerules`, { query, ...options }) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/pagerules`, { query, ...options }) as Core.APIPromise<{
         result: PageruleListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -69,12 +56,13 @@ export class Pagerules extends APIResource {
    * Deletes an existing Page Rule.
    */
   delete(
-    zoneId: string,
     pageruleId: string,
+    params: PageruleDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PageruleDeleteResponse | null> {
+    const { zone_id } = params;
     return (
-      this._client.delete(`/zones/${zoneId}/pagerules/${pageruleId}`, options) as Core.APIPromise<{
+      this._client.delete(`/zones/${zone_id}/pagerules/${pageruleId}`, options) as Core.APIPromise<{
         result: PageruleDeleteResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -84,13 +72,13 @@ export class Pagerules extends APIResource {
    * Updates one or more fields of an existing Page Rule.
    */
   edit(
-    zoneId: string,
     pageruleId: string,
-    body: PageruleEditParams,
+    params: PageruleEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PageruleEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/pagerules/${pageruleId}`, {
+      this._client.patch(`/zones/${zone_id}/pagerules/${pageruleId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: PageruleEditResponse }>
@@ -101,12 +89,13 @@ export class Pagerules extends APIResource {
    * Fetches the details of a Page Rule.
    */
   get(
-    zoneId: string,
     pageruleId: string,
+    params: PageruleGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PageruleGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/pagerules/${pageruleId}`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/pagerules/${pageruleId}`, options) as Core.APIPromise<{
         result: PageruleGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -240,27 +229,32 @@ export type PageruleGetResponse = unknown | string;
 
 export interface PageruleCreateParams {
   /**
-   * The set of actions to perform if the targets of this rule match the request.
-   * Actions can redirect to another URL or override settings, but not both.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: The set of actions to perform if the targets of this rule match the
+   * request. Actions can redirect to another URL or override settings, but not both.
    */
   actions: Array<PageruleCreateParams.Action>;
 
   /**
-   * The rule targets to evaluate on each request.
+   * Body param: The rule targets to evaluate on each request.
    */
   targets: Array<PageruleCreateParams.Target>;
 
   /**
-   * The priority of the rule, used to define which Page Rule is processed over
-   * another. A higher number indicates a higher priority. For example, if you have a
-   * catch-all Page Rule (rule A: `/images/*`) but want a more specific Page Rule to
-   * take precedence (rule B: `/images/special/*`), specify a higher priority for
-   * rule B so it overrides rule A.
+   * Body param: The priority of the rule, used to define which Page Rule is
+   * processed over another. A higher number indicates a higher priority. For
+   * example, if you have a catch-all Page Rule (rule A: `/images/*`) but want a more
+   * specific Page Rule to take precedence (rule B: `/images/special/*`), specify a
+   * higher priority for rule B so it overrides rule A.
    */
   priority?: number;
 
   /**
-   * The status of the Page Rule.
+   * Body param: The status of the Page Rule.
    */
   status?: 'active' | 'disabled';
 }
@@ -326,27 +320,32 @@ export namespace PageruleCreateParams {
 
 export interface PageruleUpdateParams {
   /**
-   * The set of actions to perform if the targets of this rule match the request.
-   * Actions can redirect to another URL or override settings, but not both.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: The set of actions to perform if the targets of this rule match the
+   * request. Actions can redirect to another URL or override settings, but not both.
    */
   actions: Array<PageruleUpdateParams.Action>;
 
   /**
-   * The rule targets to evaluate on each request.
+   * Body param: The rule targets to evaluate on each request.
    */
   targets: Array<PageruleUpdateParams.Target>;
 
   /**
-   * The priority of the rule, used to define which Page Rule is processed over
-   * another. A higher number indicates a higher priority. For example, if you have a
-   * catch-all Page Rule (rule A: `/images/*`) but want a more specific Page Rule to
-   * take precedence (rule B: `/images/special/*`), specify a higher priority for
-   * rule B so it overrides rule A.
+   * Body param: The priority of the rule, used to define which Page Rule is
+   * processed over another. A higher number indicates a higher priority. For
+   * example, if you have a catch-all Page Rule (rule A: `/images/*`) but want a more
+   * specific Page Rule to take precedence (rule B: `/images/special/*`), specify a
+   * higher priority for rule B so it overrides rule A.
    */
   priority?: number;
 
   /**
-   * The status of the Page Rule.
+   * Body param: The status of the Page Rule.
    */
   status?: 'active' | 'disabled';
 }
@@ -412,50 +411,67 @@ export namespace PageruleUpdateParams {
 
 export interface PageruleListParams {
   /**
-   * The direction used to sort returned Page Rules.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Query param: The direction used to sort returned Page Rules.
    */
   direction?: 'asc' | 'desc';
 
   /**
-   * When set to `all`, all the search requirements must match. When set to `any`,
-   * only one of the search requirements has to match.
+   * Query param: When set to `all`, all the search requirements must match. When set
+   * to `any`, only one of the search requirements has to match.
    */
   match?: 'any' | 'all';
 
   /**
-   * The field used to sort returned Page Rules.
+   * Query param: The field used to sort returned Page Rules.
    */
   order?: 'status' | 'priority';
 
   /**
-   * The status of the Page Rule.
+   * Query param: The status of the Page Rule.
    */
   status?: 'active' | 'disabled';
 }
 
+export interface PageruleDeleteParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
 export interface PageruleEditParams {
   /**
-   * The set of actions to perform if the targets of this rule match the request.
-   * Actions can redirect to another URL or override settings, but not both.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: The set of actions to perform if the targets of this rule match the
+   * request. Actions can redirect to another URL or override settings, but not both.
    */
   actions?: Array<PageruleEditParams.Action>;
 
   /**
-   * The priority of the rule, used to define which Page Rule is processed over
-   * another. A higher number indicates a higher priority. For example, if you have a
-   * catch-all Page Rule (rule A: `/images/*`) but want a more specific Page Rule to
-   * take precedence (rule B: `/images/special/*`), specify a higher priority for
-   * rule B so it overrides rule A.
+   * Body param: The priority of the rule, used to define which Page Rule is
+   * processed over another. A higher number indicates a higher priority. For
+   * example, if you have a catch-all Page Rule (rule A: `/images/*`) but want a more
+   * specific Page Rule to take precedence (rule B: `/images/special/*`), specify a
+   * higher priority for rule B so it overrides rule A.
    */
   priority?: number;
 
   /**
-   * The status of the Page Rule.
+   * Body param: The status of the Page Rule.
    */
   status?: 'active' | 'disabled';
 
   /**
-   * The rule targets to evaluate on each request.
+   * Body param: The rule targets to evaluate on each request.
    */
   targets?: Array<PageruleEditParams.Target>;
 }
@@ -519,6 +535,13 @@ export namespace PageruleEditParams {
   }
 }
 
+export interface PageruleGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
 export namespace Pagerules {
   export import PageruleCreateResponse = PagerulesAPI.PageruleCreateResponse;
   export import PageruleUpdateResponse = PagerulesAPI.PageruleUpdateResponse;
@@ -529,7 +552,10 @@ export namespace Pagerules {
   export import PageruleCreateParams = PagerulesAPI.PageruleCreateParams;
   export import PageruleUpdateParams = PagerulesAPI.PageruleUpdateParams;
   export import PageruleListParams = PagerulesAPI.PageruleListParams;
+  export import PageruleDeleteParams = PagerulesAPI.PageruleDeleteParams;
   export import PageruleEditParams = PagerulesAPI.PageruleEditParams;
+  export import PageruleGetParams = PagerulesAPI.PageruleGetParams;
   export import Settings = SettingsAPI.Settings;
   export import SettingListResponse = SettingsAPI.SettingListResponse;
+  export import SettingListParams = SettingsAPI.SettingListParams;
 }

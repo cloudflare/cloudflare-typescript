@@ -4,17 +4,19 @@ export {
   ConfigurationUpdateResponse,
   ConfigurationListResponse,
   ConfigurationUpdateParams,
+  ConfigurationListParams,
   Configurations,
 } from './configurations';
 export {
   ConnectionListResponse,
   ConnectionDeleteResponse,
+  ConnectionListParams,
   ConnectionDeleteParams,
   Connections,
 } from './connections';
-export { ConnectorGetResponse, Connectors } from './connectors';
+export { ConnectorGetResponse, ConnectorGetParams, Connectors } from './connectors';
 export { ManagementCreateResponse, ManagementCreateParams, Management } from './management';
-export { TokenGetResponse, Tokens } from './tokens';
+export { TokenGetResponse, TokenGetParams, Tokens } from './tokens';
 export {
   TunnelCreateResponse,
   TunnelListResponse,
@@ -25,6 +27,7 @@ export {
   TunnelListParams,
   TunnelDeleteParams,
   TunnelEditParams,
+  TunnelGetParams,
   TunnelListResponsesV4PagePaginationArray,
   Tunnels,
 } from './tunnels';

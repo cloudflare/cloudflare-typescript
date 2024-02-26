@@ -9,13 +9,13 @@ export class Excludes extends APIResource {
    * Sets the list of routes excluded from the WARP client's tunnel.
    */
   update(
-    accountId: unknown,
-    body: ExcludeUpdateParams,
+    params: ExcludeUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ExcludeUpdateResponse | null> {
+    const { account_id, body } = params;
     return (
-      this._client.put(`/accounts/${accountId}/devices/policy/exclude`, {
-        body,
+      this._client.put(`/accounts/${account_id}/devices/policy/exclude`, {
+        body: body,
         ...options,
       }) as Core.APIPromise<{ result: ExcludeUpdateResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -24,9 +24,13 @@ export class Excludes extends APIResource {
   /**
    * Fetches the list of routes excluded from the WARP client's tunnel.
    */
-  list(accountId: unknown, options?: Core.RequestOptions): Core.APIPromise<ExcludeListResponse | null> {
+  list(
+    params: ExcludeListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ExcludeListResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/devices/policy/exclude`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/devices/policy/exclude`, options) as Core.APIPromise<{
         result: ExcludeListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -37,13 +41,14 @@ export class Excludes extends APIResource {
    * device settings profile.
    */
   get(
-    accountId: unknown,
     policyId: string,
+    params: ExcludeGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ExcludeGetResponse | null> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountId}/devices/policy/${policyId}/exclude`,
+        `/accounts/${account_id}/devices/policy/${policyId}/exclude`,
         options,
       ) as Core.APIPromise<{ result: ExcludeGetResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -119,7 +124,17 @@ export namespace ExcludeGetResponse {
   }
 }
 
-export type ExcludeUpdateParams = Array<ExcludeUpdateParams.Body>;
+export interface ExcludeUpdateParams {
+  /**
+   * Path param:
+   */
+  account_id: unknown;
+
+  /**
+   * Body param:
+   */
+  body: Array<ExcludeUpdateParams.Body>;
+}
 
 export namespace ExcludeUpdateParams {
   export interface Body {
@@ -142,9 +157,19 @@ export namespace ExcludeUpdateParams {
   }
 }
 
+export interface ExcludeListParams {
+  account_id: unknown;
+}
+
+export interface ExcludeGetParams {
+  account_id: unknown;
+}
+
 export namespace Excludes {
   export import ExcludeUpdateResponse = ExcludesAPI.ExcludeUpdateResponse;
   export import ExcludeListResponse = ExcludesAPI.ExcludeListResponse;
   export import ExcludeGetResponse = ExcludesAPI.ExcludeGetResponse;
   export import ExcludeUpdateParams = ExcludesAPI.ExcludeUpdateParams;
+  export import ExcludeListParams = ExcludesAPI.ExcludeListParams;
+  export import ExcludeGetParams = ExcludesAPI.ExcludeGetParams;
 }

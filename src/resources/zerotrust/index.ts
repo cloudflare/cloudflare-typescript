@@ -4,6 +4,7 @@ export {
   ConnectivitySettingEditResponse,
   ConnectivitySettingGetResponse,
   ConnectivitySettingEditParams,
+  ConnectivitySettingGetParams,
   ConnectivitySettings,
 } from './connectivity-settings';
 export { Zerotrust } from './zerotrust';

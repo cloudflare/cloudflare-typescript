@@ -11,6 +11,8 @@ export {
   AccountMemberCreateParams,
   AccountMemberUpdateParams,
   AccountMemberListParams,
+  AccountMemberDeleteParams,
+  AccountMemberGetParams,
   AccountMemberListResponsesV4PagePaginationArray,
   AccountMembers,
 } from './account-members';
@@ -20,10 +22,15 @@ export {
   AccountGetResponse,
   AccountUpdateParams,
   AccountListParams,
+  AccountGetParams,
   AccountListResponsesV4PagePaginationArray,
   Accounts,
 } from './accounts';
-export { ActivationCheckUpdateResponse, ActivationChecks } from './activation-checks';
+export {
+  ActivationCheckUpdateResponse,
+  ActivationCheckUpdateParams,
+  ActivationChecks,
+} from './activation-checks';
 export { Addresses } from './addresses/addresses';
 export { Addressing } from './addressing/addressing';
 export { Alerting } from './alerting/alerting';
@@ -41,6 +48,7 @@ export {
   BotManagementUpdateResponse,
   BotManagementGetResponse,
   BotManagementUpdateParams,
+  BotManagementGetParams,
   BotManagement,
 } from './bot-management';
 export { BrandProtection } from './brand-protection/brand-protection';
@@ -53,6 +61,9 @@ export {
   CallGetResponse,
   CallCreateParams,
   CallUpdateParams,
+  CallListParams,
+  CallDeleteParams,
+  CallGetParams,
   Calls,
 } from './calls';
 export { CertificateAuthorities } from './certificate-authorities/certificate-authorities';
@@ -73,6 +84,9 @@ export {
   ClientCertificateGetResponse,
   ClientCertificateCreateParams,
   ClientCertificateListParams,
+  ClientCertificateDeleteParams,
+  ClientCertificateEditParams,
+  ClientCertificateGetParams,
   ClientCertificateListResponsesV4PagePaginationArray,
   ClientCertificates,
 } from './client-certificates';
@@ -85,7 +99,9 @@ export {
   CustomCertificateGetResponse,
   CustomCertificateCreateParams,
   CustomCertificateListParams,
+  CustomCertificateDeleteParams,
   CustomCertificateEditParams,
+  CustomCertificateGetParams,
   CustomCertificateListResponsesV4PagePaginationArray,
   CustomCertificates,
 } from './custom-certificates/custom-certificates';
@@ -97,7 +113,9 @@ export {
   CustomHostnameGetResponse,
   CustomHostnameCreateParams,
   CustomHostnameListParams,
+  CustomHostnameDeleteParams,
   CustomHostnameEditParams,
+  CustomHostnameGetParams,
   CustomHostnameListResponsesV4PagePaginationArray,
   CustomHostnames,
 } from './custom-hostnames/custom-hostnames';
@@ -108,6 +126,10 @@ export {
   CustomNameserverAvailabiltyResponse,
   CustomNameserverVerifyResponse,
   CustomNameserverCreateParams,
+  CustomNameserverListParams,
+  CustomNameserverDeleteParams,
+  CustomNameserverAvailabiltyParams,
+  CustomNameserverVerifyParams,
   CustomNameservers,
 } from './custom-nameservers';
 export { D1 } from './d1/d1';
@@ -119,11 +141,19 @@ export {
   DNSSECDeleteResponse,
   DNSSECEditResponse,
   DNSSECGetResponse,
+  DNSSECDeleteParams,
   DNSSECEditParams,
+  DNSSECGetParams,
   DNSSEC,
 } from './dnssec';
 export { DcvDelegation } from './dcv-delegation/dcv-delegation';
-export { DeviceDevicesListDevicesResponse, DeviceGetResponse, Devices } from './devices/devices';
+export {
+  DeviceDevicesListDevicesResponse,
+  DeviceGetResponse,
+  DeviceDevicesListDevicesParams,
+  DeviceGetParams,
+  Devices,
+} from './devices/devices';
 export { Diagnostics } from './diagnostics/diagnostics';
 export { Dispatchers } from './dispatchers/dispatchers';
 export { Emails } from './emails/emails';
@@ -141,7 +171,13 @@ export {
 } from './filters';
 export { Firewall } from './firewall/firewall';
 export { Firewalls } from './firewalls/firewalls';
-export { GatewayCreateResponse, GatewayListResponse, Gateways } from './gateways/gateways';
+export {
+  GatewayCreateResponse,
+  GatewayListResponse,
+  GatewayCreateParams,
+  GatewayListParams,
+  Gateways,
+} from './gateways/gateways';
 export {
   HealthcheckCreateResponse,
   HealthcheckUpdateResponse,
@@ -166,7 +202,10 @@ export {
   KeylessCertificateEditResponse,
   KeylessCertificateGetResponse,
   KeylessCertificateCreateParams,
+  KeylessCertificateListParams,
+  KeylessCertificateDeleteParams,
   KeylessCertificateEditParams,
+  KeylessCertificateGetParams,
   KeylessCertificates,
 } from './keyless-certificates';
 export {
@@ -178,7 +217,10 @@ export {
   LoadBalancerGetResponse,
   LoadBalancerCreateParams,
   LoadBalancerUpdateParams,
+  LoadBalancerListParams,
+  LoadBalancerDeleteParams,
   LoadBalancerEditParams,
+  LoadBalancerGetParams,
   LoadBalancers,
 } from './load-balancers/load-balancers';
 export { Logpush } from './logpush/logpush';
@@ -190,12 +232,16 @@ export {
   MTLSCertificateDeleteResponse,
   MTLSCertificateGetResponse,
   MTLSCertificateCreateParams,
+  MTLSCertificateListParams,
+  MTLSCertificateDeleteParams,
+  MTLSCertificateGetParams,
   MTLSCertificates,
 } from './mtls-certificates/mtls-certificates';
 export { Magics } from './magics/magics';
 export {
   ManagedHeaderListResponse,
   ManagedHeaderEditResponse,
+  ManagedHeaderListParams,
   ManagedHeaderEditParams,
   ManagedHeaders,
 } from './managed-headers';
@@ -213,6 +259,7 @@ export {
   OriginPostQuantumEncryptionUpdateResponse,
   OriginPostQuantumEncryptionGetResponse,
   OriginPostQuantumEncryptionUpdateParams,
+  OriginPostQuantumEncryptionGetParams,
   OriginPostQuantumEncryption,
 } from './origin-post-quantum-encryption';
 export {
@@ -221,6 +268,9 @@ export {
   OriginTLSClientAuthDeleteResponse,
   OriginTLSClientAuthGetResponse,
   OriginTLSClientAuthCreateParams,
+  OriginTLSClientAuthListParams,
+  OriginTLSClientAuthDeleteParams,
+  OriginTLSClientAuthGetParams,
   OriginTLSClientAuth,
 } from './origin-tls-client-auth/origin-tls-client-auth';
 export {
@@ -228,12 +278,15 @@ export {
   PCAPListResponse,
   PCAPGetResponse,
   PCAPCreateParams,
+  PCAPListParams,
+  PCAPGetParams,
   PCAPs,
 } from './pcaps/pcaps';
 export {
   PageShieldUpdateResponse,
   PageShieldListResponse,
   PageShieldUpdateParams,
+  PageShieldListParams,
   PageShield,
 } from './page-shield/page-shield';
 export {
@@ -246,7 +299,9 @@ export {
   PageruleCreateParams,
   PageruleUpdateParams,
   PageruleListParams,
+  PageruleDeleteParams,
   PageruleEditParams,
+  PageruleGetParams,
   Pagerules,
 } from './pagerules/pagerules';
 export { Pages } from './pages/pages';
@@ -267,7 +322,7 @@ export {
 } from './rate-limits';
 export { Registrar } from './registrar/registrar';
 export { RequestTracers } from './request-tracers/request-tracers';
-export { RoleListResponse, RoleGetResponse, Roles } from './roles';
+export { RoleListResponse, RoleGetResponse, RoleListParams, RoleGetParams, Roles } from './roles';
 export { Rules } from './rules/rules';
 export {
   RulesetCreateResponse,
@@ -283,7 +338,13 @@ export {
 } from './rulesets/rulesets';
 export { SSL } from './ssl/ssl';
 export { SecondaryDNS } from './secondary-dns/secondary-dns';
-export { SettingListResponse, SettingEditResponse, SettingEditParams, Settings } from './settings/settings';
+export {
+  SettingListResponse,
+  SettingEditResponse,
+  SettingListParams,
+  SettingEditParams,
+  Settings,
+} from './settings/settings';
 export {
   SnippetUpdateResponse,
   SnippetListResponse,
@@ -308,6 +369,8 @@ export {
   StreamGetResponse,
   StreamCreateParams,
   StreamListParams,
+  StreamDeleteParams,
+  StreamGetParams,
   Stream,
 } from './stream/stream';
 export {
@@ -332,6 +395,7 @@ export {
   TunnelListParams,
   TunnelDeleteParams,
   TunnelEditParams,
+  TunnelGetParams,
   TunnelListResponsesV4PagePaginationArray,
   Tunnels,
 } from './tunnels/tunnels';
@@ -339,6 +403,7 @@ export {
   URLNormalizationUpdateResponse,
   URLNormalizationGetResponse,
   URLNormalizationUpdateParams,
+  URLNormalizationGetParams,
   URLNormalizations,
 } from './url-normalizations';
 export { URLScannerScanResponse, URLScannerScanParams, URLScanner } from './url-scanner/url-scanner';
@@ -355,6 +420,8 @@ export {
   WARPConnectorListParams,
   WARPConnectorDeleteParams,
   WARPConnectorEditParams,
+  WARPConnectorGetParams,
+  WARPConnectorTokenParams,
   WARPConnectorListResponsesV4PagePaginationArray,
   WARPConnector,
 } from './warp-connector';
@@ -373,7 +440,12 @@ export {
   WaitingRooms,
 } from './waiting-rooms/waiting-rooms';
 export { Web3 } from './web3/web3';
-export { WorkerDomainGetResponse, WorkerDomains } from './worker-domains';
+export {
+  WorkerDomainGetResponse,
+  WorkerDomainDeleteParams,
+  WorkerDomainGetParams,
+  WorkerDomains,
+} from './worker-domains';
 export { WorkerScripts } from './worker-scripts/worker-scripts';
 export { Workers } from './workers/workers';
 export { WorkersForPlatforms } from './workers-for-platforms/workers-for-platforms';
@@ -386,7 +458,9 @@ export {
   ZoneGetResponse,
   ZoneCreateParams,
   ZoneListParams,
+  ZoneDeleteParams,
   ZoneEditParams,
+  ZoneGetParams,
   ZoneListResponsesV4PagePaginationArray,
   Zones,
 } from './zones/zones';

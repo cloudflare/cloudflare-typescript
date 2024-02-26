@@ -12,14 +12,15 @@ export class MTLSCertificates extends APIResource {
    * Upload a certificate that you want to use with mTLS-enabled Cloudflare services.
    */
   create(
-    accountId: string,
-    body: MTLSCertificateCreateParams,
+    params: MTLSCertificateCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MTLSCertificateCreateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/mtls_certificates`, { body, ...options }) as Core.APIPromise<{
-        result: MTLSCertificateCreateResponse;
-      }>
+      this._client.post(`/accounts/${account_id}/mtls_certificates`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: MTLSCertificateCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -27,11 +28,12 @@ export class MTLSCertificates extends APIResource {
    * Lists all mTLS certificates.
    */
   list(
-    accountId: string,
+    params: MTLSCertificateListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MTLSCertificateListResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/mtls_certificates`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/mtls_certificates`, options) as Core.APIPromise<{
         result: MTLSCertificateListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -42,13 +44,14 @@ export class MTLSCertificates extends APIResource {
    * Cloudflare services.
    */
   delete(
-    accountId: string,
     mtlsCertificateId: string,
+    params: MTLSCertificateDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MTLSCertificateDeleteResponse> {
+    const { account_id } = params;
     return (
       this._client.delete(
-        `/accounts/${accountId}/mtls_certificates/${mtlsCertificateId}`,
+        `/accounts/${account_id}/mtls_certificates/${mtlsCertificateId}`,
         options,
       ) as Core.APIPromise<{ result: MTLSCertificateDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -58,13 +61,14 @@ export class MTLSCertificates extends APIResource {
    * Fetches a single mTLS certificate.
    */
   get(
-    accountId: string,
     mtlsCertificateId: string,
+    params: MTLSCertificateGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MTLSCertificateGetResponse> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountId}/mtls_certificates/${mtlsCertificateId}`,
+        `/accounts/${account_id}/mtls_certificates/${mtlsCertificateId}`,
         options,
       ) as Core.APIPromise<{ result: MTLSCertificateGetResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -270,24 +274,51 @@ export interface MTLSCertificateGetResponse {
 
 export interface MTLSCertificateCreateParams {
   /**
-   * Indicates whether the certificate is a CA or leaf certificate.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: Indicates whether the certificate is a CA or leaf certificate.
    */
   ca: boolean;
 
   /**
-   * The uploaded root CA certificate.
+   * Body param: The uploaded root CA certificate.
    */
   certificates: string;
 
   /**
-   * Optional unique name for the certificate. Only used for human readability.
+   * Body param: Optional unique name for the certificate. Only used for human
+   * readability.
    */
   name?: string;
 
   /**
-   * The private key for the certificate
+   * Body param: The private key for the certificate
    */
   private_key?: string;
+}
+
+export interface MTLSCertificateListParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface MTLSCertificateDeleteParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface MTLSCertificateGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
 }
 
 export namespace MTLSCertificates {
@@ -296,6 +327,10 @@ export namespace MTLSCertificates {
   export import MTLSCertificateDeleteResponse = MTLSCertificatesAPI.MTLSCertificateDeleteResponse;
   export import MTLSCertificateGetResponse = MTLSCertificatesAPI.MTLSCertificateGetResponse;
   export import MTLSCertificateCreateParams = MTLSCertificatesAPI.MTLSCertificateCreateParams;
+  export import MTLSCertificateListParams = MTLSCertificatesAPI.MTLSCertificateListParams;
+  export import MTLSCertificateDeleteParams = MTLSCertificatesAPI.MTLSCertificateDeleteParams;
+  export import MTLSCertificateGetParams = MTLSCertificatesAPI.MTLSCertificateGetParams;
   export import Associations = AssociationsAPI.Associations;
   export import AssociationListResponse = AssociationsAPI.AssociationListResponse;
+  export import AssociationListParams = AssociationsAPI.AssociationListParams;
 }

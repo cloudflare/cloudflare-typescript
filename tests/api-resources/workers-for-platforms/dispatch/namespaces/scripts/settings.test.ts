@@ -16,10 +16,10 @@ describe('resource settings', () => {
   // skipped: tests are disabled for the time being
   test.skip('edit: only required params', async () => {
     const responsePromise = cloudflare.workersForPlatforms.dispatch.namespaces.scripts.settings.edit(
-      '023e105f4ecef8ad9ca31a8372d0c353',
       'my-dispatch-namespace',
       'this-is_my_script-01',
       {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
         errors: [
           { code: 1000, message: 'string' },
           { code: 1000, message: 'string' },
@@ -46,10 +46,10 @@ describe('resource settings', () => {
   // skipped: tests are disabled for the time being
   test.skip('edit: required and optional params', async () => {
     const response = await cloudflare.workersForPlatforms.dispatch.namespaces.scripts.settings.edit(
-      '023e105f4ecef8ad9ca31a8372d0c353',
       'my-dispatch-namespace',
       'this-is_my_script-01',
       {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
         errors: [
           { code: 1000, message: 'string' },
           { code: 1000, message: 'string' },
@@ -100,11 +100,11 @@ describe('resource settings', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
+  test.skip('get: only required params', async () => {
     const responsePromise = cloudflare.workersForPlatforms.dispatch.namespaces.scripts.settings.get(
-      '023e105f4ecef8ad9ca31a8372d0c353',
       'my-dispatch-namespace',
       'this-is_my_script-01',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -116,15 +116,11 @@ describe('resource settings', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.workersForPlatforms.dispatch.namespaces.scripts.settings.get(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        'my-dispatch-namespace',
-        'this-is_my_script-01',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.workersForPlatforms.dispatch.namespaces.scripts.settings.get(
+      'my-dispatch-namespace',
+      'this-is_my_script-01',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
   });
 });

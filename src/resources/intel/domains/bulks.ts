@@ -2,31 +2,19 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as BulksAPI from 'cloudflare/resources/intel/domains/bulks';
 
 export class Bulks extends APIResource {
   /**
    * Get Multiple Domain Details
    */
-  get(
-    accountId: string,
-    query?: BulkGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<BulkGetResponse | null>;
-  get(accountId: string, options?: Core.RequestOptions): Core.APIPromise<BulkGetResponse | null>;
-  get(
-    accountId: string,
-    query: BulkGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<BulkGetResponse | null> {
-    if (isRequestOptions(query)) {
-      return this.get(accountId, {}, query);
-    }
+  get(params: BulkGetParams, options?: Core.RequestOptions): Core.APIPromise<BulkGetResponse | null> {
+    const { account_id, ...query } = params;
     return (
-      this._client.get(`/accounts/${accountId}/intel/domain/bulk`, { query, ...options }) as Core.APIPromise<{
-        result: BulkGetResponse | null;
-      }>
+      this._client.get(`/accounts/${account_id}/intel/domain/bulk`, {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: BulkGetResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -117,7 +105,13 @@ export namespace BulkGetResponse {
 
 export interface BulkGetParams {
   /**
-   * Accepts multiple values, i.e. `?domain=cloudflare.com&domain=example.com`.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Query param: Accepts multiple values, i.e.
+   * `?domain=cloudflare.com&domain=example.com`.
    */
   domain?: unknown;
 }

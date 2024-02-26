@@ -9,12 +9,12 @@ export class SecurityHeaders extends APIResource {
    * Cloudflare security header for a zone.
    */
   edit(
-    zoneId: string,
-    body: SecurityHeaderEditParams,
+    params: SecurityHeaderEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SecurityHeaderEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/settings/security_header`, {
+      this._client.patch(`/zones/${zone_id}/settings/security_header`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: SecurityHeaderEditResponse }>
@@ -24,9 +24,13 @@ export class SecurityHeaders extends APIResource {
   /**
    * Cloudflare security header for a zone.
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<SecurityHeaderGetResponse> {
+  get(
+    params: SecurityHeaderGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SecurityHeaderGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/settings/security_header`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/settings/security_header`, options) as Core.APIPromise<{
         result: SecurityHeaderGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -164,6 +168,14 @@ export namespace SecurityHeaderGetResponse {
 }
 
 export interface SecurityHeaderEditParams {
+  /**
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param:
+   */
   value: SecurityHeaderEditParams.Value;
 }
 
@@ -203,8 +215,16 @@ export namespace SecurityHeaderEditParams {
   }
 }
 
+export interface SecurityHeaderGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
 export namespace SecurityHeaders {
   export import SecurityHeaderEditResponse = SecurityHeadersAPI.SecurityHeaderEditResponse;
   export import SecurityHeaderGetResponse = SecurityHeadersAPI.SecurityHeaderGetResponse;
   export import SecurityHeaderEditParams = SecurityHeadersAPI.SecurityHeaderEditParams;
+  export import SecurityHeaderGetParams = SecurityHeadersAPI.SecurityHeaderGetParams;
 }

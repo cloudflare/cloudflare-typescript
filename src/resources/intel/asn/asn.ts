@@ -11,9 +11,10 @@ export class ASN extends APIResource {
   /**
    * Get ASN Overview
    */
-  get(accountId: string, asn: number, options?: Core.RequestOptions): Core.APIPromise<ASNGetResponse> {
+  get(asn: number, params: ASNGetParams, options?: Core.RequestOptions): Core.APIPromise<ASNGetResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/intel/asn/${asn}`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/intel/asn/${asn}`, options) as Core.APIPromise<{
         result: ASNGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -22,8 +23,17 @@ export class ASN extends APIResource {
 
 export type ASNGetResponse = number;
 
+export interface ASNGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export namespace ASN {
   export import ASNGetResponse = ASNAPI.ASNGetResponse;
+  export import ASNGetParams = ASNAPI.ASNGetParams;
   export import Subnets = SubnetsAPI.Subnets;
   export import SubnetListResponse = SubnetsAPI.SubnetListResponse;
+  export import SubnetListParams = SubnetsAPI.SubnetListParams;
 }

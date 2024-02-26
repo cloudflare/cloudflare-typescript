@@ -14,12 +14,10 @@ const cloudflare = new Cloudflare({
 
 describe('resource networks', () => {
   // skipped: tests are disabled for the time being
-  test.skip('create', async () => {
-    const responsePromise = cloudflare.teamnets.routes.networks.create(
-      '699d98642c564d2e855e9661899b7252',
-      '172.16.0.0%2F16',
-      {},
-    );
+  test.skip('create: only required params', async () => {
+    const responsePromise = cloudflare.teamnets.routes.networks.create('172.16.0.0%2F16', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -30,11 +28,19 @@ describe('resource networks', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
-    const responsePromise = cloudflare.teamnets.routes.networks.delete(
-      '699d98642c564d2e855e9661899b7252',
-      '172.16.0.0%2F16',
-    );
+  test.skip('create: required and optional params', async () => {
+    const response = await cloudflare.teamnets.routes.networks.create('172.16.0.0%2F16', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+      comment: 'Example comment for this route.',
+      virtual_network_id: {},
+    });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('delete: only required params', async () => {
+    const responsePromise = cloudflare.teamnets.routes.networks.delete('172.16.0.0%2F16', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -45,34 +51,18 @@ describe('resource networks', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.teamnets.routes.networks.delete('699d98642c564d2e855e9661899b7252', '172.16.0.0%2F16', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('delete: required and optional params', async () => {
+    const response = await cloudflare.teamnets.routes.networks.delete('172.16.0.0%2F16', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+      tun_type: 'cfd_tunnel',
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.teamnets.routes.networks.delete(
-        '699d98642c564d2e855e9661899b7252',
-        '172.16.0.0%2F16',
-        { tun_type: 'cfd_tunnel' },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('edit', async () => {
-    const responsePromise = cloudflare.teamnets.routes.networks.edit(
-      '699d98642c564d2e855e9661899b7252',
-      '172.16.0.0%2F16',
-    );
+  test.skip('edit: only required params', async () => {
+    const responsePromise = cloudflare.teamnets.routes.networks.edit('172.16.0.0%2F16', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -83,12 +73,9 @@ describe('resource networks', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('edit: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.teamnets.routes.networks.edit('699d98642c564d2e855e9661899b7252', '172.16.0.0%2F16', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('edit: required and optional params', async () => {
+    const response = await cloudflare.teamnets.routes.networks.edit('172.16.0.0%2F16', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
   });
 });

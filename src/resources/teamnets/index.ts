@@ -14,6 +14,7 @@ export {
   VirtualNetworkEditResponse,
   VirtualNetworkCreateParams,
   VirtualNetworkListParams,
+  VirtualNetworkDeleteParams,
   VirtualNetworkEditParams,
   VirtualNetworks,
 } from './virtual-networks';

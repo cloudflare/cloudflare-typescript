@@ -12,12 +12,12 @@ export class ResponseBuffering extends APIResource {
    * and is not buffered by Cloudflare. This is limited to Enterprise Zones.
    */
   edit(
-    zoneId: string,
-    body: ResponseBufferingEditParams,
+    params: ResponseBufferingEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ResponseBufferingEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/settings/response_buffering`, {
+      this._client.patch(`/zones/${zone_id}/settings/response_buffering`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: ResponseBufferingEditResponse }>
@@ -30,9 +30,13 @@ export class ResponseBuffering extends APIResource {
    * it to be delivered in chunks. By default, the proxied server streams directly
    * and is not buffered by Cloudflare. This is limited to Enterprise Zones.
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<ResponseBufferingGetResponse> {
+  get(
+    params: ResponseBufferingGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ResponseBufferingGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/settings/response_buffering`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/settings/response_buffering`, options) as Core.APIPromise<{
         result: ResponseBufferingGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -99,13 +103,26 @@ export interface ResponseBufferingGetResponse {
 
 export interface ResponseBufferingEditParams {
   /**
-   * Value of the zone setting.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Value of the zone setting.
    */
   value: 'on' | 'off';
+}
+
+export interface ResponseBufferingGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }
 
 export namespace ResponseBuffering {
   export import ResponseBufferingEditResponse = ResponseBufferingAPI.ResponseBufferingEditResponse;
   export import ResponseBufferingGetResponse = ResponseBufferingAPI.ResponseBufferingGetResponse;
   export import ResponseBufferingEditParams = ResponseBufferingAPI.ResponseBufferingEditParams;
+  export import ResponseBufferingGetParams = ResponseBufferingAPI.ResponseBufferingGetParams;
 }

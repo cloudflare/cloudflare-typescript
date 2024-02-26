@@ -7,7 +7,10 @@ export {
   AddressMapEditResponse,
   AddressMapGetResponse,
   AddressMapCreateParams,
+  AddressMapListParams,
+  AddressMapDeleteParams,
   AddressMapEditParams,
+  AddressMapGetParams,
   AddressMaps,
 } from './address-maps/index';
 export { Addresses } from './addresses';
@@ -19,6 +22,9 @@ export {
   PrefixEditResponse,
   PrefixGetResponse,
   PrefixCreateParams,
+  PrefixListParams,
+  PrefixDeleteParams,
   PrefixEditParams,
+  PrefixGetParams,
   Prefixes,
 } from './prefixes/index';

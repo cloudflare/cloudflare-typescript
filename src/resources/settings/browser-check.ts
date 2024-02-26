@@ -13,14 +13,15 @@ export class BrowserCheck extends APIResource {
    * (https://support.cloudflare.com/hc/en-us/articles/200170086).
    */
   edit(
-    zoneId: string,
-    body: BrowserCheckEditParams,
+    params: BrowserCheckEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BrowserCheckEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/settings/browser_check`, { body, ...options }) as Core.APIPromise<{
-        result: BrowserCheckEditResponse;
-      }>
+      this._client.patch(`/zones/${zone_id}/settings/browser_check`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: BrowserCheckEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -31,9 +32,13 @@ export class BrowserCheck extends APIResource {
    * agent (also commonly used by abuse bots, crawlers or visitors).
    * (https://support.cloudflare.com/hc/en-us/articles/200170086).
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<BrowserCheckGetResponse> {
+  get(
+    params: BrowserCheckGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<BrowserCheckGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/settings/browser_check`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/settings/browser_check`, options) as Core.APIPromise<{
         result: BrowserCheckGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -102,13 +107,26 @@ export interface BrowserCheckGetResponse {
 
 export interface BrowserCheckEditParams {
   /**
-   * Value of the zone setting.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Value of the zone setting.
    */
   value: 'on' | 'off';
+}
+
+export interface BrowserCheckGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }
 
 export namespace BrowserCheck {
   export import BrowserCheckEditResponse = BrowserCheckAPI.BrowserCheckEditResponse;
   export import BrowserCheckGetResponse = BrowserCheckAPI.BrowserCheckGetResponse;
   export import BrowserCheckEditParams = BrowserCheckAPI.BrowserCheckEditParams;
+  export import BrowserCheckGetParams = BrowserCheckAPI.BrowserCheckGetParams;
 }

@@ -9,13 +9,10 @@ export class Script extends APIResource {
   /**
    * Upload a worker, or a new version of a worker.
    */
-  update(
-    zoneId: string,
-    body: ScriptUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ScriptUpdateResponse> {
+  update(params: ScriptUpdateParams, options?: Core.RequestOptions): Core.APIPromise<ScriptUpdateResponse> {
+    const { zone_id } = params;
     return (
-      this._client.put(`/zones/${zoneId}/workers/script`, options) as Core.APIPromise<{
+      this._client.put(`/zones/${zone_id}/workers/script`, options) as Core.APIPromise<{
         result: ScriptUpdateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -24,8 +21,9 @@ export class Script extends APIResource {
   /**
    * Delete your Worker. This call has no response body on a successful delete.
    */
-  delete(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<void> {
-    return this._client.delete(`/zones/${zoneId}/workers/script`, {
+  delete(params: ScriptDeleteParams, options?: Core.RequestOptions): Core.APIPromise<void> {
+    const { zone_id } = params;
+    return this._client.delete(`/zones/${zone_id}/workers/script`, {
       ...options,
       headers: { Accept: '*/*', ...options?.headers },
     });
@@ -35,16 +33,38 @@ export class Script extends APIResource {
    * Fetch raw script content for your worker. Note this is the original script
    * content, not JSON encoded.
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<Response> {
-    return this._client.get(`/zones/${zoneId}/workers/script`, { ...options, __binaryResponse: true });
+  get(params: ScriptGetParams, options?: Core.RequestOptions): Core.APIPromise<Response> {
+    const { zone_id } = params;
+    return this._client.get(`/zones/${zone_id}/workers/script`, { ...options, __binaryResponse: true });
   }
 }
 
 export type ScriptUpdateResponse = unknown | string;
 
-export interface ScriptUpdateParams {}
+export interface ScriptUpdateParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+export interface ScriptDeleteParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+export interface ScriptGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
 
 export namespace Script {
   export import ScriptUpdateResponse = ScriptAPI.ScriptUpdateResponse;
   export import ScriptUpdateParams = ScriptAPI.ScriptUpdateParams;
+  export import ScriptDeleteParams = ScriptAPI.ScriptDeleteParams;
+  export import ScriptGetParams = ScriptAPI.ScriptGetParams;
 }

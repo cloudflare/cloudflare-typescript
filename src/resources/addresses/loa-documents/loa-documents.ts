@@ -13,13 +13,13 @@ export class LOADocuments extends APIResource {
    * Submit LOA document (pdf format) under the account.
    */
   create(
-    accountId: string,
-    body: LOADocumentCreateParams,
+    params: LOADocumentCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<LOADocumentCreateResponse> {
+    const { account_id, ...body } = params;
     return (
       this._client.post(
-        `/accounts/${accountId}/addressing/loa_documents`,
+        `/accounts/${account_id}/addressing/loa_documents`,
         multipartFormRequestOptions({ body, ...options }),
       ) as Core.APIPromise<{ result: LOADocumentCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -35,7 +35,12 @@ export interface LOADocumentCreateResponse {
 
 export interface LOADocumentCreateParams {
   /**
-   * LOA document to upload.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: LOA document to upload.
    */
   loa_document: string;
 }
@@ -45,4 +50,5 @@ export namespace LOADocuments {
   export import LOADocumentCreateParams = LOADocumentsAPI.LOADocumentCreateParams;
   export import Downloads = DownloadsAPI.Downloads;
   export import DownloadListResponse = DownloadsAPI.DownloadListResponse;
+  export import DownloadListParams = DownloadsAPI.DownloadListParams;
 }

@@ -14,8 +14,10 @@ const cloudflare = new Cloudflare({
 
 describe('resource devices', () => {
   // skipped: tests are disabled for the time being
-  test.skip('devicesListDevices', async () => {
-    const responsePromise = cloudflare.devices.devicesListDevices('699d98642c564d2e855e9661899b7252');
+  test.skip('devicesListDevices: only required params', async () => {
+    const responsePromise = cloudflare.devices.devicesListDevices({
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -26,21 +28,17 @@ describe('resource devices', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('devicesListDevices: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.devices.devicesListDevices('699d98642c564d2e855e9661899b7252', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('devicesListDevices: required and optional params', async () => {
+    const response = await cloudflare.devices.devicesListDevices({
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
-    const responsePromise = cloudflare.devices.get(
-      '699d98642c564d2e855e9661899b7252',
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-    );
+  test.skip('get: only required params', async () => {
+    const responsePromise = cloudflare.devices.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -51,12 +49,9 @@ describe('resource devices', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.devices.get('699d98642c564d2e855e9661899b7252', 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.devices.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
   });
 });

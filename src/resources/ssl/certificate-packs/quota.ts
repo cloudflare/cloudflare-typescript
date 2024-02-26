@@ -8,9 +8,10 @@ export class Quota extends APIResource {
   /**
    * For a given zone, list certificate pack quotas.
    */
-  list(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<QuotaListResponse> {
+  list(params: QuotaListParams, options?: Core.RequestOptions): Core.APIPromise<QuotaListResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/ssl/certificate_packs/quota`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/ssl/certificate_packs/quota`, options) as Core.APIPromise<{
         result: QuotaListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -35,6 +36,14 @@ export namespace QuotaListResponse {
   }
 }
 
+export interface QuotaListParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
 export namespace Quota {
   export import QuotaListResponse = QuotaAPI.QuotaListResponse;
+  export import QuotaListParams = QuotaAPI.QuotaListParams;
 }

@@ -15,16 +15,15 @@ const cloudflare = new Cloudflare({
 describe('resource consumers', () => {
   // skipped: tests are disabled for the time being
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.workers.queues.consumers.create(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'example-queue',
-      {
+    const responsePromise = cloudflare.workers.queues.consumers.create('example-queue', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: {
         dead_letter_queue: 'example-dlq',
         environment: 'production',
         script_name: 'example-consumer',
         settings: { batch_size: 10, max_retries: 3, max_wait_time_ms: 5000 },
       },
-    );
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -36,31 +35,28 @@ describe('resource consumers', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.workers.queues.consumers.create(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'example-queue',
-      {
+    const response = await cloudflare.workers.queues.consumers.create('example-queue', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: {
         dead_letter_queue: 'example-dlq',
         environment: 'production',
         script_name: 'example-consumer',
         settings: { batch_size: 10, max_retries: 3, max_wait_time_ms: 5000 },
       },
-    );
+    });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.workers.queues.consumers.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'example-queue',
-      'example-consumer',
-      {
+    const responsePromise = cloudflare.workers.queues.consumers.update('example-queue', 'example-consumer', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: {
         dead_letter_queue: 'updated-example-dlq',
         environment: 'production',
         script_name: 'example-consumer',
         settings: { batch_size: 100 },
       },
-    );
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -72,25 +68,22 @@ describe('resource consumers', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.workers.queues.consumers.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'example-queue',
-      'example-consumer',
-      {
+    const response = await cloudflare.workers.queues.consumers.update('example-queue', 'example-consumer', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: {
         dead_letter_queue: 'updated-example-dlq',
         environment: 'production',
         script_name: 'example-consumer',
         settings: { batch_size: 100 },
       },
-    );
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
-    const responsePromise = cloudflare.workers.queues.consumers.list(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'example-queue',
-    );
+  test.skip('list: only required params', async () => {
+    const responsePromise = cloudflare.workers.queues.consumers.list('example-queue', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -101,22 +94,17 @@ describe('resource consumers', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.workers.queues.consumers.list('023e105f4ecef8ad9ca31a8372d0c353', 'example-queue', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('list: required and optional params', async () => {
+    const response = await cloudflare.workers.queues.consumers.list('example-queue', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
-    const responsePromise = cloudflare.workers.queues.consumers.delete(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'example-queue',
-      'example-consumer',
-    );
+  test.skip('delete: only required params', async () => {
+    const responsePromise = cloudflare.workers.queues.consumers.delete('example-queue', 'example-consumer', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -124,5 +112,12 @@ describe('resource consumers', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('delete: required and optional params', async () => {
+    const response = await cloudflare.workers.queues.consumers.delete('example-queue', 'example-consumer', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 });

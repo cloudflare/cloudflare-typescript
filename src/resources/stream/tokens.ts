@@ -10,13 +10,13 @@ export class Tokens extends APIResource {
    * request, a token is created with default values.
    */
   create(
-    accountId: string,
     identifier: string,
-    body: TokenCreateParams,
+    params: TokenCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TokenCreateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/stream/${identifier}/token`, {
+      this._client.post(`/accounts/${account_id}/stream/${identifier}/token`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: TokenCreateResponse }>
@@ -33,41 +33,47 @@ export interface TokenCreateResponse {
 
 export interface TokenCreateParams {
   /**
-   * The optional ID of a Stream signing key. If present, the `pem` field is also
-   * required.
+   * Path param: The account identifier tag.
+   */
+  account_id: string;
+
+  /**
+   * Body param: The optional ID of a Stream signing key. If present, the `pem` field
+   * is also required.
    */
   id?: string;
 
   /**
-   * The optional list of access rule constraints on the token. Access can be blocked
-   * or allowed based on an IP, IP range, or by country. Access rules are evaluated
-   * from first to last. If a rule matches, the associated action is applied and no
-   * further rules are evaluated.
+   * Body param: The optional list of access rule constraints on the token. Access
+   * can be blocked or allowed based on an IP, IP range, or by country. Access rules
+   * are evaluated from first to last. If a rule matches, the associated action is
+   * applied and no further rules are evaluated.
    */
   accessRules?: Array<TokenCreateParams.AccessRule>;
 
   /**
-   * The optional boolean value that enables using signed tokens to access MP4
-   * download links for a video.
+   * Body param: The optional boolean value that enables using signed tokens to
+   * access MP4 download links for a video.
    */
   downloadable?: boolean;
 
   /**
-   * The optional unix epoch timestamp that specficies the time after a token is not
-   * accepted. The maximum time specification is 24 hours from issuing time. If this
-   * field is not set, the default is one hour after issuing.
+   * Body param: The optional unix epoch timestamp that specficies the time after a
+   * token is not accepted. The maximum time specification is 24 hours from issuing
+   * time. If this field is not set, the default is one hour after issuing.
    */
   exp?: number;
 
   /**
-   * The optional unix epoch timestamp that specifies the time before a the token is
-   * not accepted. If this field is not set, the default is one hour before issuing.
+   * Body param: The optional unix epoch timestamp that specifies the time before a
+   * the token is not accepted. If this field is not set, the default is one hour
+   * before issuing.
    */
   nbf?: number;
 
   /**
-   * The optional base64 encoded private key in PEM format associated with a Stream
-   * signing key. If present, the `id` field is also required.
+   * Body param: The optional base64 encoded private key in PEM format associated
+   * with a Stream signing key. If present, the `id` field is also required.
    */
   pem?: string;
 }

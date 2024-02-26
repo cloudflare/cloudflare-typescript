@@ -15,7 +15,8 @@ const cloudflare = new Cloudflare({
 describe('resource customs', () => {
   // skipped: tests are disabled for the time being
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.dlp.profiles.customs.create('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = cloudflare.dlp.profiles.customs.create({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       profiles: [{}, {}, {}],
     });
     const rawResponse = await responsePromise.asResponse();
@@ -29,7 +30,8 @@ describe('resource customs', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.dlp.profiles.customs.create('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await cloudflare.dlp.profiles.customs.create({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       profiles: [
         {
           allowed_match_count: 5,
@@ -102,12 +104,10 @@ describe('resource customs', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('update', async () => {
-    const responsePromise = cloudflare.dlp.profiles.customs.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '384e129d-25bd-403c-8019-bc19eb7a8a5f',
-      {},
-    );
+  test.skip('update: only required params', async () => {
+    const responsePromise = cloudflare.dlp.profiles.customs.update('384e129d-25bd-403c-8019-bc19eb7a8a5f', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -118,11 +118,41 @@ describe('resource customs', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
-    const responsePromise = cloudflare.dlp.profiles.customs.delete(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '384e129d-25bd-403c-8019-bc19eb7a8a5f',
-    );
+  test.skip('update: required and optional params', async () => {
+    const response = await cloudflare.dlp.profiles.customs.update('384e129d-25bd-403c-8019-bc19eb7a8a5f', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      allowed_match_count: 5,
+      description: 'A standard CVV card number',
+      entries: [
+        {
+          enabled: true,
+          name: 'Credit card (Visa)',
+          pattern: { regex: '^4[0-9]{6,14}$', validation: 'luhn' },
+          profile_id: {},
+        },
+        {
+          enabled: true,
+          name: 'Credit card (Visa)',
+          pattern: { regex: '^4[0-9]{6,14}$', validation: 'luhn' },
+          profile_id: {},
+        },
+        {
+          enabled: true,
+          name: 'Credit card (Visa)',
+          pattern: { regex: '^4[0-9]{6,14}$', validation: 'luhn' },
+          profile_id: {},
+        },
+      ],
+      name: 'Generic CVV Card Number',
+      shared_entries: [{ enabled: true }, { enabled: true }, { enabled: true }],
+    });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('delete: only required params', async () => {
+    const responsePromise = cloudflare.dlp.profiles.customs.delete('384e129d-25bd-403c-8019-bc19eb7a8a5f', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -133,11 +163,17 @@ describe('resource customs', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
-    const responsePromise = cloudflare.dlp.profiles.customs.get(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '384e129d-25bd-403c-8019-bc19eb7a8a5f',
-    );
+  test.skip('delete: required and optional params', async () => {
+    const response = await cloudflare.dlp.profiles.customs.delete('384e129d-25bd-403c-8019-bc19eb7a8a5f', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get: only required params', async () => {
+    const responsePromise = cloudflare.dlp.profiles.customs.get('384e129d-25bd-403c-8019-bc19eb7a8a5f', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -148,14 +184,9 @@ describe('resource customs', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.dlp.profiles.customs.get(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        '384e129d-25bd-403c-8019-bc19eb7a8a5f',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.dlp.profiles.customs.get('384e129d-25bd-403c-8019-bc19eb7a8a5f', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 });

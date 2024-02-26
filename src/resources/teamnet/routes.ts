@@ -8,13 +8,10 @@ export class Routes extends APIResource {
   /**
    * Routes a private network through a Cloudflare Tunnel.
    */
-  create(
-    accountId: string,
-    body: RouteCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RouteCreateResponse> {
+  create(params: RouteCreateParams, options?: Core.RequestOptions): Core.APIPromise<RouteCreateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/teamnet/routes`, { body, ...options }) as Core.APIPromise<{
+      this._client.post(`/accounts/${account_id}/teamnet/routes`, { body, ...options }) as Core.APIPromise<{
         result: RouteCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -24,12 +21,13 @@ export class Routes extends APIResource {
    * Deletes a private network route from an account.
    */
   delete(
-    accountId: string,
     routeId: string,
+    params: RouteDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RouteDeleteResponse> {
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${accountId}/teamnet/routes/${routeId}`, options) as Core.APIPromise<{
+      this._client.delete(`/accounts/${account_id}/teamnet/routes/${routeId}`, options) as Core.APIPromise<{
         result: RouteDeleteResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -40,13 +38,13 @@ export class Routes extends APIResource {
    * meant to be updated should be provided in the body of the request.
    */
   edit(
-    accountId: string,
     routeId: string,
-    body: RouteEditParams,
+    params: RouteEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RouteEditResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.patch(`/accounts/${accountId}/teamnet/routes/${routeId}`, {
+      this._client.patch(`/accounts/${account_id}/teamnet/routes/${routeId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: RouteEditResponse }>
@@ -176,48 +174,67 @@ export interface RouteEditResponse {
 
 export interface RouteCreateParams {
   /**
-   * The private IPv4 or IPv6 range connected by the route, in CIDR notation.
+   * Path param: Cloudflare account ID
+   */
+  account_id: string;
+
+  /**
+   * Body param: The private IPv4 or IPv6 range connected by the route, in CIDR
+   * notation.
    */
   ip_network: string;
 
   /**
-   * Optional remark describing the route.
+   * Body param: Optional remark describing the route.
    */
   comment?: string;
 
   /**
-   * UUID of the Tunnel Virtual Network this route belongs to. If no virtual networks
-   * are configured, the route is assigned to the default virtual network of the
-   * account.
+   * Body param: UUID of the Tunnel Virtual Network this route belongs to. If no
+   * virtual networks are configured, the route is assigned to the default virtual
+   * network of the account.
    */
   virtual_network_id?: unknown;
 }
 
+export interface RouteDeleteParams {
+  /**
+   * Cloudflare account ID
+   */
+  account_id: string;
+}
+
 export interface RouteEditParams {
   /**
-   * Optional remark describing the route.
+   * Path param: Cloudflare account ID
+   */
+  account_id: string;
+
+  /**
+   * Body param: Optional remark describing the route.
    */
   comment?: string;
 
   /**
-   * The private IPv4 or IPv6 range connected by the route, in CIDR notation.
+   * Body param: The private IPv4 or IPv6 range connected by the route, in CIDR
+   * notation.
    */
   network?: string;
 
   /**
-   * The type of tunnel.
+   * Body param: The type of tunnel.
    */
   tun_type?: 'cfd_tunnel' | 'warp_connector' | 'ip_sec' | 'gre' | 'cni';
 
   /**
-   * UUID of the Cloudflare Tunnel serving the route.
+   * Body param: UUID of the Cloudflare Tunnel serving the route.
    */
   tunnel_id?: unknown;
 
   /**
-   * UUID of the Tunnel Virtual Network this route belongs to. If no virtual networks
-   * are configured, the route is assigned to the default virtual network of the
-   * account.
+   * Body param: UUID of the Tunnel Virtual Network this route belongs to. If no
+   * virtual networks are configured, the route is assigned to the default virtual
+   * network of the account.
    */
   virtual_network_id?: unknown;
 }
@@ -227,5 +244,6 @@ export namespace Routes {
   export import RouteDeleteResponse = RoutesAPI.RouteDeleteResponse;
   export import RouteEditResponse = RoutesAPI.RouteEditResponse;
   export import RouteCreateParams = RoutesAPI.RouteCreateParams;
+  export import RouteDeleteParams = RoutesAPI.RouteDeleteParams;
   export import RouteEditParams = RoutesAPI.RouteEditParams;
 }

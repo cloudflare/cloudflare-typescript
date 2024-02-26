@@ -15,7 +15,8 @@ const cloudflare = new Cloudflare({
 describe('resource customNameservers', () => {
   // skipped: tests are disabled for the time being
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.customNameservers.create('372e67954025e0ba6aaa6d586b9e0b59', {
+    const responsePromise = cloudflare.customNameservers.create({
+      account_id: '372e67954025e0ba6aaa6d586b9e0b59',
       ns_name: 'ns1.example.com',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -29,15 +30,18 @@ describe('resource customNameservers', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.customNameservers.create('372e67954025e0ba6aaa6d586b9e0b59', {
+    const response = await cloudflare.customNameservers.create({
+      account_id: '372e67954025e0ba6aaa6d586b9e0b59',
       ns_name: 'ns1.example.com',
       ns_set: 1,
     });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
-    const responsePromise = cloudflare.customNameservers.list('372e67954025e0ba6aaa6d586b9e0b59');
+  test.skip('list: only required params', async () => {
+    const responsePromise = cloudflare.customNameservers.list({
+      account_id: '372e67954025e0ba6aaa6d586b9e0b59',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -48,21 +52,17 @@ describe('resource customNameservers', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.customNameservers.list('372e67954025e0ba6aaa6d586b9e0b59', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('list: required and optional params', async () => {
+    const response = await cloudflare.customNameservers.list({
+      account_id: '372e67954025e0ba6aaa6d586b9e0b59',
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
-    const responsePromise = cloudflare.customNameservers.delete(
-      '372e67954025e0ba6aaa6d586b9e0b59',
-      'ns1.example.com',
-    );
+  test.skip('delete: only required params', async () => {
+    const responsePromise = cloudflare.customNameservers.delete('ns1.example.com', {
+      account_id: '372e67954025e0ba6aaa6d586b9e0b59',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -73,8 +73,17 @@ describe('resource customNameservers', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('availabilty', async () => {
-    const responsePromise = cloudflare.customNameservers.availabilty('372e67954025e0ba6aaa6d586b9e0b59');
+  test.skip('delete: required and optional params', async () => {
+    const response = await cloudflare.customNameservers.delete('ns1.example.com', {
+      account_id: '372e67954025e0ba6aaa6d586b9e0b59',
+    });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('availabilty: only required params', async () => {
+    const responsePromise = cloudflare.customNameservers.availabilty({
+      account_id: '372e67954025e0ba6aaa6d586b9e0b59',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -85,18 +94,17 @@ describe('resource customNameservers', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('availabilty: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.customNameservers.availabilty('372e67954025e0ba6aaa6d586b9e0b59', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('availabilty: required and optional params', async () => {
+    const response = await cloudflare.customNameservers.availabilty({
+      account_id: '372e67954025e0ba6aaa6d586b9e0b59',
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('verify', async () => {
-    const responsePromise = cloudflare.customNameservers.verify('372e67954025e0ba6aaa6d586b9e0b59');
+  test.skip('verify: only required params', async () => {
+    const responsePromise = cloudflare.customNameservers.verify({
+      account_id: '372e67954025e0ba6aaa6d586b9e0b59',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -104,5 +112,12 @@ describe('resource customNameservers', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('verify: required and optional params', async () => {
+    const response = await cloudflare.customNameservers.verify({
+      account_id: '372e67954025e0ba6aaa6d586b9e0b59',
+    });
   });
 });

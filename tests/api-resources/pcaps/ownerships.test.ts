@@ -15,7 +15,8 @@ const cloudflare = new Cloudflare({
 describe('resource ownerships', () => {
   // skipped: tests are disabled for the time being
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.pcaps.ownerships.create('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = cloudflare.pcaps.ownerships.create({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       destination_conf: 's3://pcaps-bucket?region=us-east-1',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -29,17 +30,17 @@ describe('resource ownerships', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.pcaps.ownerships.create('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await cloudflare.pcaps.ownerships.create({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       destination_conf: 's3://pcaps-bucket?region=us-east-1',
     });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
-    const responsePromise = cloudflare.pcaps.ownerships.delete(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '023e105f4ecef8ad9ca31a8372d0c353',
-    );
+  test.skip('delete: only required params', async () => {
+    const responsePromise = cloudflare.pcaps.ownerships.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -50,20 +51,17 @@ describe('resource ownerships', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.pcaps.ownerships.delete(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('delete: required and optional params', async () => {
+    const response = await cloudflare.pcaps.ownerships.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
-    const responsePromise = cloudflare.pcaps.ownerships.get('023e105f4ecef8ad9ca31a8372d0c353');
+  test.skip('get: only required params', async () => {
+    const responsePromise = cloudflare.pcaps.ownerships.get({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -74,18 +72,16 @@ describe('resource ownerships', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.pcaps.ownerships.get('023e105f4ecef8ad9ca31a8372d0c353', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.pcaps.ownerships.get({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('validate: only required params', async () => {
-    const responsePromise = cloudflare.pcaps.ownerships.validate('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = cloudflare.pcaps.ownerships.validate({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       destination_conf: 's3://pcaps-bucket?region=us-east-1',
       ownership_challenge: 'ownership-challenge-9883874ecac311ec8475433579a6bf5f.txt',
     });
@@ -100,7 +96,8 @@ describe('resource ownerships', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('validate: required and optional params', async () => {
-    const response = await cloudflare.pcaps.ownerships.validate('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await cloudflare.pcaps.ownerships.validate({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       destination_conf: 's3://pcaps-bucket?region=us-east-1',
       ownership_challenge: 'ownership-challenge-9883874ecac311ec8475433579a6bf5f.txt',
     });

@@ -10,19 +10,19 @@ export class Content extends APIResource {
    * Put script content without touching config or metadata
    */
   update(
-    accountId: string,
     scriptName: string,
     params: ContentUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ContentUpdateResponse> {
     const {
+      account_id,
       'CF-WORKER-BODY-PART': cfWorkerBodyPart,
       'CF-WORKER-MAIN-MODULE-PART': cfWorkerMainModulePart,
       ...body
     } = params;
     return (
       this._client.put(
-        `/accounts/${accountId}/workers/scripts/${scriptName}/content`,
+        `/accounts/${account_id}/workers/scripts/${scriptName}/content`,
         multipartFormRequestOptions({
           body,
           ...options,
@@ -107,6 +107,11 @@ export namespace ContentUpdateResponse {
 }
 
 export interface ContentUpdateParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
   /**
    * Body param: A module comprising a Worker script, often a javascript file.
    * Multiple modules may be provided as separate named parts, but at least one

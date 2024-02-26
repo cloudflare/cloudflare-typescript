@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as CertificatePacksAPI from 'cloudflare/resources/ssl/certificate-packs/certificate-packs';
 import * as OrderAPI from 'cloudflare/resources/ssl/certificate-packs/order';
 import * as QuotaAPI from 'cloudflare/resources/ssl/certificate-packs/quota';
@@ -15,21 +14,12 @@ export class CertificatePacks extends APIResource {
    * For a given zone, list all active certificate packs.
    */
   list(
-    zoneId: string,
-    query?: CertificatePackListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CertificatePackListResponse | null>;
-  list(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<CertificatePackListResponse | null>;
-  list(
-    zoneId: string,
-    query: CertificatePackListParams | Core.RequestOptions = {},
+    params: CertificatePackListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CertificatePackListResponse | null> {
-    if (isRequestOptions(query)) {
-      return this.list(zoneId, {}, query);
-    }
+    const { zone_id, ...query } = params;
     return (
-      this._client.get(`/zones/${zoneId}/ssl/certificate_packs`, { query, ...options }) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/ssl/certificate_packs`, { query, ...options }) as Core.APIPromise<{
         result: CertificatePackListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -39,13 +29,14 @@ export class CertificatePacks extends APIResource {
    * For a given zone, delete an advanced certificate pack.
    */
   delete(
-    zoneId: string,
     certificatePackId: string,
+    params: CertificatePackDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CertificatePackDeleteResponse> {
+    const { zone_id } = params;
     return (
       this._client.delete(
-        `/zones/${zoneId}/ssl/certificate_packs/${certificatePackId}`,
+        `/zones/${zone_id}/ssl/certificate_packs/${certificatePackId}`,
         options,
       ) as Core.APIPromise<{ result: CertificatePackDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -57,13 +48,14 @@ export class CertificatePacks extends APIResource {
    * status.
    */
   edit(
-    zoneId: string,
     certificatePackId: string,
+    params: CertificatePackEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CertificatePackEditResponse> {
+    const { zone_id } = params;
     return (
       this._client.patch(
-        `/zones/${zoneId}/ssl/certificate_packs/${certificatePackId}`,
+        `/zones/${zone_id}/ssl/certificate_packs/${certificatePackId}`,
         options,
       ) as Core.APIPromise<{ result: CertificatePackEditResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -73,13 +65,14 @@ export class CertificatePacks extends APIResource {
    * For a given zone, get a certificate pack.
    */
   get(
-    zoneId: string,
     certificatePackId: string,
+    params: CertificatePackGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CertificatePackGetResponse> {
+    const { zone_id } = params;
     return (
       this._client.get(
-        `/zones/${zoneId}/ssl/certificate_packs/${certificatePackId}`,
+        `/zones/${zone_id}/ssl/certificate_packs/${certificatePackId}`,
         options,
       ) as Core.APIPromise<{ result: CertificatePackGetResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -166,9 +159,35 @@ export type CertificatePackGetResponse = unknown | string;
 
 export interface CertificatePackListParams {
   /**
-   * Include Certificate Packs of all statuses, not just active ones.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Query param: Include Certificate Packs of all statuses, not just active ones.
    */
   status?: 'all';
+}
+
+export interface CertificatePackDeleteParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+export interface CertificatePackEditParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+export interface CertificatePackGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }
 
 export namespace CertificatePacks {
@@ -177,9 +196,13 @@ export namespace CertificatePacks {
   export import CertificatePackEditResponse = CertificatePacksAPI.CertificatePackEditResponse;
   export import CertificatePackGetResponse = CertificatePacksAPI.CertificatePackGetResponse;
   export import CertificatePackListParams = CertificatePacksAPI.CertificatePackListParams;
+  export import CertificatePackDeleteParams = CertificatePacksAPI.CertificatePackDeleteParams;
+  export import CertificatePackEditParams = CertificatePacksAPI.CertificatePackEditParams;
+  export import CertificatePackGetParams = CertificatePacksAPI.CertificatePackGetParams;
   export import Order = OrderAPI.Order;
   export import OrderCreateResponse = OrderAPI.OrderCreateResponse;
   export import OrderCreateParams = OrderAPI.OrderCreateParams;
   export import Quota = QuotaAPI.Quota;
   export import QuotaListResponse = QuotaAPI.QuotaListResponse;
+  export import QuotaListParams = QuotaAPI.QuotaListParams;
 }

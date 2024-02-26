@@ -11,14 +11,14 @@ export class FallbackDomains extends APIResource {
    * specified device settings profile.
    */
   update(
-    accountId: unknown,
     policyId: string,
-    body: FallbackDomainUpdateParams,
+    params: FallbackDomainUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<FallbackDomainUpdateResponse | null> {
+    const { account_id, body } = params;
     return (
-      this._client.put(`/accounts/${accountId}/devices/policy/${policyId}/fallback_domains`, {
-        body,
+      this._client.put(`/accounts/${account_id}/devices/policy/${policyId}/fallback_domains`, {
+        body: body,
         ...options,
       }) as Core.APIPromise<{ result: FallbackDomainUpdateResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -29,13 +29,15 @@ export class FallbackDomains extends APIResource {
    * use the specified local DNS resolver instead.
    */
   list(
-    accountId: unknown,
+    params: FallbackDomainListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<FallbackDomainListResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/devices/policy/fallback_domains`, options) as Core.APIPromise<{
-        result: FallbackDomainListResponse | null;
-      }>
+      this._client.get(
+        `/accounts/${account_id}/devices/policy/fallback_domains`,
+        options,
+      ) as Core.APIPromise<{ result: FallbackDomainListResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -45,13 +47,14 @@ export class FallbackDomains extends APIResource {
    * instead.
    */
   get(
-    accountId: unknown,
     policyId: string,
+    params: FallbackDomainGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<FallbackDomainGetResponse | null> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountId}/devices/policy/${policyId}/fallback_domains`,
+        `/accounts/${account_id}/devices/policy/${policyId}/fallback_domains`,
         options,
       ) as Core.APIPromise<{ result: FallbackDomainGetResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -122,7 +125,17 @@ export namespace FallbackDomainGetResponse {
   }
 }
 
-export type FallbackDomainUpdateParams = Array<FallbackDomainUpdateParams.Body>;
+export interface FallbackDomainUpdateParams {
+  /**
+   * Path param:
+   */
+  account_id: unknown;
+
+  /**
+   * Body param:
+   */
+  body: Array<FallbackDomainUpdateParams.Body>;
+}
 
 export namespace FallbackDomainUpdateParams {
   export interface Body {
@@ -143,9 +156,19 @@ export namespace FallbackDomainUpdateParams {
   }
 }
 
+export interface FallbackDomainListParams {
+  account_id: unknown;
+}
+
+export interface FallbackDomainGetParams {
+  account_id: unknown;
+}
+
 export namespace FallbackDomains {
   export import FallbackDomainUpdateResponse = FallbackDomainsAPI.FallbackDomainUpdateResponse;
   export import FallbackDomainListResponse = FallbackDomainsAPI.FallbackDomainListResponse;
   export import FallbackDomainGetResponse = FallbackDomainsAPI.FallbackDomainGetResponse;
   export import FallbackDomainUpdateParams = FallbackDomainsAPI.FallbackDomainUpdateParams;
+  export import FallbackDomainListParams = FallbackDomainsAPI.FallbackDomainListParams;
+  export import FallbackDomainGetParams = FallbackDomainsAPI.FallbackDomainGetParams;
 }

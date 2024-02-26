@@ -16,4 +16,7 @@ export namespace Rules {
   export import ListGetResponse = ListsAPI.ListGetResponse;
   export import ListCreateParams = ListsAPI.ListCreateParams;
   export import ListUpdateParams = ListsAPI.ListUpdateParams;
+  export import ListListParams = ListsAPI.ListListParams;
+  export import ListDeleteParams = ListsAPI.ListDeleteParams;
+  export import ListGetParams = ListsAPI.ListGetParams;
 }

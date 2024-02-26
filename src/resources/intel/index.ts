@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless.
 
-export { ASNGetResponse, ASN } from './asn/index';
+export { ASNGetResponse, ASNGetParams, ASN } from './asn/index';
 export { DNSGetResponse, DNSGetParams, DNS } from './dns';
 export { DomainGetResponse, DomainGetParams, Domains } from './domains/index';
 export { DomainHistoryListResponse, DomainHistoryListParams, DomainHistories } from './domain-histories';
 export { IPGetResponse, IPGetParams, IPs } from './ips';
-export { IPListGetResponse, IPLists } from './ip-lists';
+export { IPListGetResponse, IPListGetParams, IPLists } from './ip-lists';
 export {
   IndicatorFeedCreateResponse,
   IndicatorFeedUpdateResponse,
@@ -14,6 +14,9 @@ export {
   IndicatorFeedGetResponse,
   IndicatorFeedCreateParams,
   IndicatorFeedUpdateParams,
+  IndicatorFeedListParams,
+  IndicatorFeedDataParams,
+  IndicatorFeedGetParams,
   IndicatorFeeds,
 } from './indicator-feeds/index';
 export { Intel } from './intel';
@@ -22,5 +25,5 @@ export {
   MiscategorizationCreateParams,
   Miscategorizations,
 } from './miscategorizations';
-export { SinkholeListResponse, Sinkholes } from './sinkholes';
+export { SinkholeListResponse, SinkholeListParams, Sinkholes } from './sinkholes';
 export { WhoisGetResponse, WhoisGetParams, Whois } from './whois';

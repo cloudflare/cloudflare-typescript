@@ -15,7 +15,7 @@ const cloudflare = new Cloudflare({
 describe('resource datasets', () => {
   // skipped: tests are disabled for the time being
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.dlp.datasets.create('string', { name: 'string' });
+    const responsePromise = cloudflare.dlp.datasets.create({ account_id: 'string', name: 'string' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -27,7 +27,8 @@ describe('resource datasets', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.dlp.datasets.create('string', {
+    const response = await cloudflare.dlp.datasets.create({
+      account_id: 'string',
       name: 'string',
       description: 'string',
       secret: true,
@@ -35,12 +36,10 @@ describe('resource datasets', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('update', async () => {
-    const responsePromise = cloudflare.dlp.datasets.update(
-      'string',
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      {},
-    );
+  test.skip('update: only required params', async () => {
+    const responsePromise = cloudflare.dlp.datasets.update('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+      account_id: 'string',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -51,8 +50,17 @@ describe('resource datasets', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
-    const responsePromise = cloudflare.dlp.datasets.list('string');
+  test.skip('update: required and optional params', async () => {
+    const response = await cloudflare.dlp.datasets.update('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+      account_id: 'string',
+      description: 'string',
+      name: 'string',
+    });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list: only required params', async () => {
+    const responsePromise = cloudflare.dlp.datasets.list({ account_id: 'string' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -63,16 +71,15 @@ describe('resource datasets', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.dlp.datasets.list('string', { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('list: required and optional params', async () => {
+    const response = await cloudflare.dlp.datasets.list({ account_id: 'string' });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
-    const responsePromise = cloudflare.dlp.datasets.delete('string', '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');
+  test.skip('delete: only required params', async () => {
+    const responsePromise = cloudflare.dlp.datasets.delete('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+      account_id: 'string',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -83,18 +90,17 @@ describe('resource datasets', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.dlp.datasets.delete('string', '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('delete: required and optional params', async () => {
+    const response = await cloudflare.dlp.datasets.delete('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+      account_id: 'string',
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
-    const responsePromise = cloudflare.dlp.datasets.get('string', '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');
+  test.skip('get: only required params', async () => {
+    const responsePromise = cloudflare.dlp.datasets.get('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+      account_id: 'string',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -105,12 +111,9 @@ describe('resource datasets', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.dlp.datasets.get('string', '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.dlp.datasets.get('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+      account_id: 'string',
+    });
   });
 });

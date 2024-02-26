@@ -8,13 +8,10 @@ export class Order extends APIResource {
   /**
    * For a given zone, order an advanced certificate pack.
    */
-  create(
-    zoneId: string,
-    body: OrderCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OrderCreateResponse> {
+  create(params: OrderCreateParams, options?: Core.RequestOptions): Core.APIPromise<OrderCreateResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.post(`/zones/${zoneId}/ssl/certificate_packs/order`, {
+      this._client.post(`/zones/${zone_id}/ssl/certificate_packs/order`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: OrderCreateResponse }>
@@ -91,36 +88,42 @@ export interface OrderCreateResponse {
 
 export interface OrderCreateParams {
   /**
-   * Certificate Authority selected for the order. For information on any certificate
-   * authority specific details or restrictions
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Certificate Authority selected for the order. For information on any
+   * certificate authority specific details or restrictions
    * [see this page for more details.](https://developers.cloudflare.com/ssl/reference/certificate-authorities)
    */
   certificate_authority: 'google' | 'lets_encrypt';
 
   /**
-   * Comma separated list of valid host names for the certificate packs. Must contain
-   * the zone apex, may not contain more than 50 hosts, and may not be empty.
+   * Body param: Comma separated list of valid host names for the certificate packs.
+   * Must contain the zone apex, may not contain more than 50 hosts, and may not be
+   * empty.
    */
   hosts: Array<string>;
 
   /**
-   * Type of certificate pack.
+   * Body param: Type of certificate pack.
    */
   type: 'advanced';
 
   /**
-   * Validation Method selected for the order.
+   * Body param: Validation Method selected for the order.
    */
   validation_method: 'txt' | 'http' | 'email';
 
   /**
-   * Validity Days selected for the order.
+   * Body param: Validity Days selected for the order.
    */
   validity_days: 14 | 30 | 90 | 365;
 
   /**
-   * Whether or not to add Cloudflare Branding for the order. This will add
-   * sni.cloudflaressl.com as the Common Name if set true.
+   * Body param: Whether or not to add Cloudflare Branding for the order. This will
+   * add sni.cloudflaressl.com as the Common Name if set true.
    */
   cloudflare_branding?: boolean;
 }

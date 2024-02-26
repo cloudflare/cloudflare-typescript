@@ -14,10 +14,10 @@ const cloudflare = new Cloudflare({
 
 describe('resource references', () => {
   // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
+  test.skip('list: only required params', async () => {
     const responsePromise = cloudflare.loadBalancers.monitors.references.list(
-      '023e105f4ecef8ad9ca31a8372d0c353',
       'f1aba936b94213e5b8dca0c0dbf1f9cc',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,14 +29,10 @@ describe('resource references', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.loadBalancers.monitors.references.list(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        'f1aba936b94213e5b8dca0c0dbf1f9cc',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('list: required and optional params', async () => {
+    const response = await cloudflare.loadBalancers.monitors.references.list(
+      'f1aba936b94213e5b8dca0c0dbf1f9cc',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
   });
 });

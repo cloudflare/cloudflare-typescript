@@ -16,12 +16,12 @@ export class AddressMaps extends APIResource {
    * Create a new address map under the account.
    */
   create(
-    accountId: string,
-    body: AddressMapCreateParams,
+    params: AddressMapCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AddressMapCreateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/addressing/address_maps`, {
+      this._client.post(`/accounts/${account_id}/addressing/address_maps`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: AddressMapCreateResponse }>
@@ -31,9 +31,13 @@ export class AddressMaps extends APIResource {
   /**
    * List all address maps owned by the account.
    */
-  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<AddressMapListResponse | null> {
+  list(
+    params: AddressMapListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AddressMapListResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/addressing/address_maps`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/addressing/address_maps`, options) as Core.APIPromise<{
         result: AddressMapListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -44,13 +48,14 @@ export class AddressMaps extends APIResource {
    * disabled before it can be deleted.
    */
   delete(
-    accountId: string,
     addressMapId: string,
+    params: AddressMapDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AddressMapDeleteResponse | null> {
+    const { account_id } = params;
     return (
       this._client.delete(
-        `/accounts/${accountId}/addressing/address_maps/${addressMapId}`,
+        `/accounts/${account_id}/addressing/address_maps/${addressMapId}`,
         options,
       ) as Core.APIPromise<{ result: AddressMapDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -60,13 +65,13 @@ export class AddressMaps extends APIResource {
    * Modify properties of an address map owned by the account.
    */
   edit(
-    accountId: string,
     addressMapId: string,
-    body: AddressMapEditParams,
+    params: AddressMapEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AddressMapEditResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.patch(`/accounts/${accountId}/addressing/address_maps/${addressMapId}`, {
+      this._client.patch(`/accounts/${account_id}/addressing/address_maps/${addressMapId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: AddressMapEditResponse }>
@@ -77,13 +82,14 @@ export class AddressMaps extends APIResource {
    * Show a particular address map owned by the account.
    */
   get(
-    accountId: string,
     addressMapId: string,
+    params: AddressMapGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AddressMapGetResponse> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountId}/addressing/address_maps/${addressMapId}`,
+        `/accounts/${account_id}/addressing/address_maps/${addressMapId}`,
         options,
       ) as Core.APIPromise<{ result: AddressMapGetResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -356,39 +362,70 @@ export namespace AddressMapGetResponse {
 
 export interface AddressMapCreateParams {
   /**
-   * An optional description field which may be used to describe the types of IPs or
-   * zones on the map.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: An optional description field which may be used to describe the
+   * types of IPs or zones on the map.
    */
   description?: string | null;
 
   /**
-   * Whether the Address Map is enabled or not. Cloudflare's DNS will not respond
-   * with IP addresses on an Address Map until the map is enabled.
+   * Body param: Whether the Address Map is enabled or not. Cloudflare's DNS will not
+   * respond with IP addresses on an Address Map until the map is enabled.
    */
   enabled?: boolean | null;
 }
 
+export interface AddressMapListParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface AddressMapDeleteParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export interface AddressMapEditParams {
   /**
-   * If you have legacy TLS clients which do not send the TLS server name indicator,
-   * then you can specify one default SNI on the map. If Cloudflare receives a TLS
-   * handshake from a client without an SNI, it will respond with the default SNI on
-   * those IPs. The default SNI can be any valid zone or subdomain owned by the
-   * account.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: If you have legacy TLS clients which do not send the TLS server name
+   * indicator, then you can specify one default SNI on the map. If Cloudflare
+   * receives a TLS handshake from a client without an SNI, it will respond with the
+   * default SNI on those IPs. The default SNI can be any valid zone or subdomain
+   * owned by the account.
    */
   default_sni?: string | null;
 
   /**
-   * An optional description field which may be used to describe the types of IPs or
-   * zones on the map.
+   * Body param: An optional description field which may be used to describe the
+   * types of IPs or zones on the map.
    */
   description?: string | null;
 
   /**
-   * Whether the Address Map is enabled or not. Cloudflare's DNS will not respond
-   * with IP addresses on an Address Map until the map is enabled.
+   * Body param: Whether the Address Map is enabled or not. Cloudflare's DNS will not
+   * respond with IP addresses on an Address Map until the map is enabled.
    */
   enabled?: boolean | null;
+}
+
+export interface AddressMapGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
 }
 
 export namespace AddressMaps {
@@ -398,14 +435,23 @@ export namespace AddressMaps {
   export import AddressMapEditResponse = AddressMapsAPI.AddressMapEditResponse;
   export import AddressMapGetResponse = AddressMapsAPI.AddressMapGetResponse;
   export import AddressMapCreateParams = AddressMapsAPI.AddressMapCreateParams;
+  export import AddressMapListParams = AddressMapsAPI.AddressMapListParams;
+  export import AddressMapDeleteParams = AddressMapsAPI.AddressMapDeleteParams;
   export import AddressMapEditParams = AddressMapsAPI.AddressMapEditParams;
+  export import AddressMapGetParams = AddressMapsAPI.AddressMapGetParams;
   export import Accounts = AccountsAPI.Accounts;
   export import AccountUpdateResponse = AccountsAPI.AccountUpdateResponse;
   export import AccountDeleteResponse = AccountsAPI.AccountDeleteResponse;
+  export import AccountUpdateParams = AccountsAPI.AccountUpdateParams;
+  export import AccountDeleteParams = AccountsAPI.AccountDeleteParams;
   export import IPs = IPsAPI.IPs;
   export import IPUpdateResponse = IPsAPI.IPUpdateResponse;
   export import IPDeleteResponse = IPsAPI.IPDeleteResponse;
+  export import IPUpdateParams = IPsAPI.IPUpdateParams;
+  export import IPDeleteParams = IPsAPI.IPDeleteParams;
   export import Zones = ZonesAPI.Zones;
   export import ZoneUpdateResponse = ZonesAPI.ZoneUpdateResponse;
   export import ZoneDeleteResponse = ZonesAPI.ZoneDeleteResponse;
+  export import ZoneUpdateParams = ZonesAPI.ZoneUpdateParams;
+  export import ZoneDeleteParams = ZonesAPI.ZoneDeleteParams;
 }

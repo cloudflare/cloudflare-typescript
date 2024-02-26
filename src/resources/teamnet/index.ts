@@ -5,6 +5,7 @@ export {
   RouteDeleteResponse,
   RouteEditResponse,
   RouteCreateParams,
+  RouteDeleteParams,
   RouteEditParams,
   Routes,
 } from './routes';

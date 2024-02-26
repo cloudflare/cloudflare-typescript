@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as VerificationAPI from 'cloudflare/resources/ssl/verification';
 
 export class Verification extends APIResource {
@@ -10,21 +9,12 @@ export class Verification extends APIResource {
    * Get SSL Verification Info for a Zone.
    */
   list(
-    zoneId: string,
-    query?: VerificationListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<VerificationListResponse>;
-  list(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<VerificationListResponse>;
-  list(
-    zoneId: string,
-    query: VerificationListParams | Core.RequestOptions = {},
+    params: VerificationListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<VerificationListResponse> {
-    if (isRequestOptions(query)) {
-      return this.list(zoneId, {}, query);
-    }
+    const { zone_id, ...query } = params;
     return (
-      this._client.get(`/zones/${zoneId}/ssl/verification`, { query, ...options }) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/ssl/verification`, { query, ...options }) as Core.APIPromise<{
         result: VerificationListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -37,13 +27,13 @@ export class Verification extends APIResource {
    * using that method.
    */
   edit(
-    zoneId: string,
     certificatePackId: string,
-    body: VerificationEditParams,
+    params: VerificationEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<VerificationEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/ssl/verification/${certificatePackId}`, {
+      this._client.patch(`/zones/${zone_id}/ssl/verification/${certificatePackId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: VerificationEditResponse }>
@@ -136,14 +126,24 @@ export interface VerificationEditResponse {
 
 export interface VerificationListParams {
   /**
-   * Immediately retry SSL Verification.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Query param: Immediately retry SSL Verification.
    */
   retry?: true;
 }
 
 export interface VerificationEditParams {
   /**
-   * Desired validation method.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Desired validation method.
    */
   validation_method: 'http' | 'cname' | 'txt' | 'email';
 }

@@ -9,13 +9,14 @@ export class Previews extends APIResource {
    * Get the result of a previous preview operation using the provided preview_id.
    */
   get(
-    accountId: string,
     previewId: unknown,
+    params: PreviewGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PreviewGetResponse> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountId}/load_balancers/preview/${previewId}`,
+        `/accounts/${account_id}/load_balancers/preview/${previewId}`,
         options,
       ) as Core.APIPromise<{ result: PreviewGetResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -50,6 +51,14 @@ export namespace PreviewGetResponse {
   }
 }
 
+export interface PreviewGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export namespace Previews {
   export import PreviewGetResponse = PreviewsAPI.PreviewGetResponse;
+  export import PreviewGetParams = PreviewsAPI.PreviewGetParams;
 }

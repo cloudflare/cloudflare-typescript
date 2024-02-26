@@ -8,9 +8,10 @@ export class Sinkholes extends APIResource {
   /**
    * List sinkholes owned by this account
    */
-  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<SinkholeListResponse> {
+  list(params: SinkholeListParams, options?: Core.RequestOptions): Core.APIPromise<SinkholeListResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/intel/sinkholes`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/intel/sinkholes`, options) as Core.APIPromise<{
         result: SinkholeListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -58,6 +59,14 @@ export namespace SinkholeListResponse {
   }
 }
 
+export interface SinkholeListParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export namespace Sinkholes {
   export import SinkholeListResponse = SinkholesAPI.SinkholeListResponse;
+  export import SinkholeListParams = SinkholesAPI.SinkholeListParams;
 }

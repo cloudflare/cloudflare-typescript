@@ -15,11 +15,12 @@ const cloudflare = new Cloudflare({
 describe('resource tracerouteTests', () => {
   // skipped: tests are disabled for the time being
   test.skip('get: only required params', async () => {
-    const responsePromise = cloudflare.dex.tracerouteTests.get(
-      '01a7362d577a6c3019a474fd6f485823',
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { interval: 'minute', timeEnd: 'string', timeStart: 'string' },
-    );
+    const responsePromise = cloudflare.dex.tracerouteTests.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+      account_id: '01a7362d577a6c3019a474fd6f485823',
+      interval: 'minute',
+      timeEnd: 'string',
+      timeStart: 'string',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -31,25 +32,27 @@ describe('resource tracerouteTests', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('get: required and optional params', async () => {
-    const response = await cloudflare.dex.tracerouteTests.get(
-      '01a7362d577a6c3019a474fd6f485823',
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      {
-        interval: 'minute',
-        timeEnd: 'string',
-        timeStart: 'string',
-        colo: 'string',
-        deviceId: ['string', 'string', 'string'],
-      },
-    );
+    const response = await cloudflare.dex.tracerouteTests.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+      account_id: '01a7362d577a6c3019a474fd6f485823',
+      interval: 'minute',
+      timeEnd: 'string',
+      timeStart: 'string',
+      colo: 'string',
+      deviceId: ['string', 'string', 'string'],
+    });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('networkPath: only required params', async () => {
     const responsePromise = cloudflare.dex.tracerouteTests.networkPath(
-      '01a7362d577a6c3019a474fd6f485823',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { deviceId: 'string', interval: 'minute', timeEnd: 'string', timeStart: 'string' },
+      {
+        account_id: '01a7362d577a6c3019a474fd6f485823',
+        deviceId: 'string',
+        interval: 'minute',
+        timeEnd: 'string',
+        timeStart: 'string',
+      },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -63,18 +66,26 @@ describe('resource tracerouteTests', () => {
   // skipped: tests are disabled for the time being
   test.skip('networkPath: required and optional params', async () => {
     const response = await cloudflare.dex.tracerouteTests.networkPath(
-      '01a7362d577a6c3019a474fd6f485823',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { deviceId: 'string', interval: 'minute', timeEnd: 'string', timeStart: 'string' },
+      {
+        account_id: '01a7362d577a6c3019a474fd6f485823',
+        deviceId: 'string',
+        interval: 'minute',
+        timeEnd: 'string',
+        timeStart: 'string',
+      },
     );
   });
 
   // skipped: tests are disabled for the time being
   test.skip('percentiles: only required params', async () => {
     const responsePromise = cloudflare.dex.tracerouteTests.percentiles(
-      '01a7362d577a6c3019a474fd6f485823',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { timeEnd: '2023-09-20T17:00:00Z', timeStart: '2023-09-20T17:00:00Z' },
+      {
+        account_id: '01a7362d577a6c3019a474fd6f485823',
+        timeEnd: '2023-09-20T17:00:00Z',
+        timeStart: '2023-09-20T17:00:00Z',
+      },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -88,9 +99,9 @@ describe('resource tracerouteTests', () => {
   // skipped: tests are disabled for the time being
   test.skip('percentiles: required and optional params', async () => {
     const response = await cloudflare.dex.tracerouteTests.percentiles(
-      '01a7362d577a6c3019a474fd6f485823',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       {
+        account_id: '01a7362d577a6c3019a474fd6f485823',
         timeEnd: '2023-09-20T17:00:00Z',
         timeStart: '2023-09-20T17:00:00Z',
         colo: 'string',

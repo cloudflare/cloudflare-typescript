@@ -15,7 +15,8 @@ const cloudflare = new Cloudflare({
 describe('resource policies', () => {
   // skipped: tests are disabled for the time being
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.devices.policies.create('699d98642c564d2e855e9661899b7252', {
+    const responsePromise = cloudflare.devices.policies.create({
+      account_id: '699d98642c564d2e855e9661899b7252',
       match: 'user.identity == "test@cloudflare.com"',
       name: 'Allow Developers',
       precedence: 100,
@@ -31,7 +32,8 @@ describe('resource policies', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.devices.policies.create('699d98642c564d2e855e9661899b7252', {
+    const response = await cloudflare.devices.policies.create({
+      account_id: '699d98642c564d2e855e9661899b7252',
       match: 'user.identity == "test@cloudflare.com"',
       name: 'Allow Developers',
       precedence: 100,
@@ -53,8 +55,10 @@ describe('resource policies', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
-    const responsePromise = cloudflare.devices.policies.list('699d98642c564d2e855e9661899b7252');
+  test.skip('list: only required params', async () => {
+    const responsePromise = cloudflare.devices.policies.list({
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -65,21 +69,17 @@ describe('resource policies', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.devices.policies.list('699d98642c564d2e855e9661899b7252', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('list: required and optional params', async () => {
+    const response = await cloudflare.devices.policies.list({
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
-    const responsePromise = cloudflare.devices.policies.delete(
-      '699d98642c564d2e855e9661899b7252',
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-    );
+  test.skip('delete: only required params', async () => {
+    const responsePromise = cloudflare.devices.policies.delete('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -90,12 +90,17 @@ describe('resource policies', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('edit', async () => {
-    const responsePromise = cloudflare.devices.policies.edit(
-      '699d98642c564d2e855e9661899b7252',
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      {},
-    );
+  test.skip('delete: required and optional params', async () => {
+    const response = await cloudflare.devices.policies.delete('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('edit: only required params', async () => {
+    const responsePromise = cloudflare.devices.policies.edit('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -106,11 +111,32 @@ describe('resource policies', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
-    const responsePromise = cloudflare.devices.policies.get(
-      '699d98642c564d2e855e9661899b7252',
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-    );
+  test.skip('edit: required and optional params', async () => {
+    const response = await cloudflare.devices.policies.edit('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+      allow_mode_switch: true,
+      allow_updates: true,
+      allowed_to_leave: true,
+      auto_connect: 0,
+      captive_portal: 180,
+      description: 'Policy for test teams.',
+      disable_auto_fallback: true,
+      enabled: true,
+      exclude_office_ips: true,
+      match: 'user.identity == "test@cloudflare.com"',
+      name: 'Allow Developers',
+      precedence: 100,
+      service_mode_v2: { mode: 'proxy', port: 3000 },
+      support_url: 'https://1.1.1.1/help',
+      switch_locked: true,
+    });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get: only required params', async () => {
+    const responsePromise = cloudflare.devices.policies.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -121,14 +147,9 @@ describe('resource policies', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.devices.policies.get(
-        '699d98642c564d2e855e9661899b7252',
-        'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.devices.policies.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
   });
 });

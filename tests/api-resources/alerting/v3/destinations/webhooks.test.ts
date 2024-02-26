@@ -15,10 +15,11 @@ const cloudflare = new Cloudflare({
 describe('resource webhooks', () => {
   // skipped: tests are disabled for the time being
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.alerting.v3.destinations.webhooks.create(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      { name: 'Slack Webhook', url: 'https://hooks.slack.com/services/Ds3fdBFbV/456464Gdd' },
-    );
+    const responsePromise = cloudflare.alerting.v3.destinations.webhooks.create({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      name: 'Slack Webhook',
+      url: 'https://hooks.slack.com/services/Ds3fdBFbV/456464Gdd',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -30,22 +31,23 @@ describe('resource webhooks', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.alerting.v3.destinations.webhooks.create(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      {
-        name: 'Slack Webhook',
-        url: 'https://hooks.slack.com/services/Ds3fdBFbV/456464Gdd',
-        secret: 'string',
-      },
-    );
+    const response = await cloudflare.alerting.v3.destinations.webhooks.create({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      name: 'Slack Webhook',
+      url: 'https://hooks.slack.com/services/Ds3fdBFbV/456464Gdd',
+      secret: 'string',
+    });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.alerting.v3.destinations.webhooks.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
       'b115d5ec-15c6-41ee-8b76-92c449b5227b',
-      { name: 'Slack Webhook', url: 'https://hooks.slack.com/services/Ds3fdBFbV/456464Gdd' },
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        name: 'Slack Webhook',
+        url: 'https://hooks.slack.com/services/Ds3fdBFbV/456464Gdd',
+      },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -59,9 +61,9 @@ describe('resource webhooks', () => {
   // skipped: tests are disabled for the time being
   test.skip('update: required and optional params', async () => {
     const response = await cloudflare.alerting.v3.destinations.webhooks.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
       'b115d5ec-15c6-41ee-8b76-92c449b5227b',
       {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
         name: 'Slack Webhook',
         url: 'https://hooks.slack.com/services/Ds3fdBFbV/456464Gdd',
         secret: 'string',
@@ -70,10 +72,10 @@ describe('resource webhooks', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
-    const responsePromise = cloudflare.alerting.v3.destinations.webhooks.list(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-    );
+  test.skip('list: only required params', async () => {
+    const responsePromise = cloudflare.alerting.v3.destinations.webhooks.list({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -84,20 +86,17 @@ describe('resource webhooks', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.alerting.v3.destinations.webhooks.list('023e105f4ecef8ad9ca31a8372d0c353', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('list: required and optional params', async () => {
+    const response = await cloudflare.alerting.v3.destinations.webhooks.list({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
+  test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.alerting.v3.destinations.webhooks.delete(
-      '023e105f4ecef8ad9ca31a8372d0c353',
       'b115d5ec-15c6-41ee-8b76-92c449b5227b',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -109,22 +108,18 @@ describe('resource webhooks', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.alerting.v3.destinations.webhooks.delete(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        'b115d5ec-15c6-41ee-8b76-92c449b5227b',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('delete: required and optional params', async () => {
+    const response = await cloudflare.alerting.v3.destinations.webhooks.delete(
+      'b115d5ec-15c6-41ee-8b76-92c449b5227b',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
+  test.skip('get: only required params', async () => {
     const responsePromise = cloudflare.alerting.v3.destinations.webhooks.get(
-      '023e105f4ecef8ad9ca31a8372d0c353',
       'b115d5ec-15c6-41ee-8b76-92c449b5227b',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -136,14 +131,10 @@ describe('resource webhooks', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.alerting.v3.destinations.webhooks.get(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        'b115d5ec-15c6-41ee-8b76-92c449b5227b',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.alerting.v3.destinations.webhooks.get(
+      'b115d5ec-15c6-41ee-8b76-92c449b5227b',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
   });
 });

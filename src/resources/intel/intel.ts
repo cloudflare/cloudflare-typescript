@@ -30,6 +30,7 @@ export class Intel extends APIResource {
 export namespace Intel {
   export import ASN = ASNAPI.ASN;
   export import ASNGetResponse = ASNAPI.ASNGetResponse;
+  export import ASNGetParams = ASNAPI.ASNGetParams;
   export import DNS = DNSAPI.DNS;
   export import DNSGetResponse = DNSAPI.DNSGetResponse;
   export import DNSGetParams = DNSAPI.DNSGetParams;
@@ -44,6 +45,7 @@ export namespace Intel {
   export import IPGetParams = IPsAPI.IPGetParams;
   export import IPLists = IPListsAPI.IPLists;
   export import IPListGetResponse = IPListsAPI.IPListGetResponse;
+  export import IPListGetParams = IPListsAPI.IPListGetParams;
   export import Miscategorizations = MiscategorizationsAPI.Miscategorizations;
   export import MiscategorizationCreateResponse = MiscategorizationsAPI.MiscategorizationCreateResponse;
   export import MiscategorizationCreateParams = MiscategorizationsAPI.MiscategorizationCreateParams;
@@ -58,6 +60,10 @@ export namespace Intel {
   export import IndicatorFeedGetResponse = IndicatorFeedsAPI.IndicatorFeedGetResponse;
   export import IndicatorFeedCreateParams = IndicatorFeedsAPI.IndicatorFeedCreateParams;
   export import IndicatorFeedUpdateParams = IndicatorFeedsAPI.IndicatorFeedUpdateParams;
+  export import IndicatorFeedListParams = IndicatorFeedsAPI.IndicatorFeedListParams;
+  export import IndicatorFeedDataParams = IndicatorFeedsAPI.IndicatorFeedDataParams;
+  export import IndicatorFeedGetParams = IndicatorFeedsAPI.IndicatorFeedGetParams;
   export import Sinkholes = SinkholesAPI.Sinkholes;
   export import SinkholeListResponse = SinkholesAPI.SinkholeListResponse;
+  export import SinkholeListParams = SinkholesAPI.SinkholeListParams;
 }

@@ -8,9 +8,13 @@ export class Categories extends APIResource {
   /**
    * Fetches a list of all categories.
    */
-  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<CategoryListResponse | null> {
+  list(
+    params: CategoryListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CategoryListResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/gateway/categories`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/gateway/categories`, options) as Core.APIPromise<{
         result: CategoryListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -88,6 +92,14 @@ export namespace CategoryListResponse {
   }
 }
 
+export interface CategoryListParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export namespace Categories {
   export import CategoryListResponse = CategoriesAPI.CategoryListResponse;
+  export import CategoryListParams = CategoriesAPI.CategoryListParams;
 }

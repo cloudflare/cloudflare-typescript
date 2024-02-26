@@ -13,12 +13,12 @@ export class IndicatorFeeds extends APIResource {
    * Create new indicator feed
    */
   create(
-    accountId: string,
-    body: IndicatorFeedCreateParams,
+    params: IndicatorFeedCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IndicatorFeedCreateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/intel/indicator-feeds`, {
+      this._client.post(`/accounts/${account_id}/intel/indicator-feeds`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: IndicatorFeedCreateResponse }>
@@ -29,14 +29,14 @@ export class IndicatorFeeds extends APIResource {
    * Update indicator feed data
    */
   update(
-    accountId: string,
     feedId: number,
-    body: IndicatorFeedUpdateParams,
+    params: IndicatorFeedUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IndicatorFeedUpdateResponse> {
+    const { account_id, ...body } = params;
     return (
       this._client.put(
-        `/accounts/${accountId}/intel/indicator-feeds/${feedId}/snapshot`,
+        `/accounts/${account_id}/intel/indicator-feeds/${feedId}/snapshot`,
         multipartFormRequestOptions({ body, ...options }),
       ) as Core.APIPromise<{ result: IndicatorFeedUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -45,9 +45,13 @@ export class IndicatorFeeds extends APIResource {
   /**
    * Get indicator feeds owned by this account
    */
-  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<IndicatorFeedListResponse> {
+  list(
+    params: IndicatorFeedListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IndicatorFeedListResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/intel/indicator-feeds`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/intel/indicator-feeds`, options) as Core.APIPromise<{
         result: IndicatorFeedListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -56,8 +60,13 @@ export class IndicatorFeeds extends APIResource {
   /**
    * Get indicator feed data
    */
-  data(accountId: string, feedId: number, options?: Core.RequestOptions): Core.APIPromise<string> {
-    return this._client.get(`/accounts/${accountId}/intel/indicator-feeds/${feedId}/data`, {
+  data(
+    feedId: number,
+    params: IndicatorFeedDataParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<string> {
+    const { account_id } = params;
+    return this._client.get(`/accounts/${account_id}/intel/indicator-feeds/${feedId}/data`, {
       ...options,
       headers: { Accept: 'text/csv', ...options?.headers },
     });
@@ -67,14 +76,16 @@ export class IndicatorFeeds extends APIResource {
    * Get indicator feed metadata
    */
   get(
-    accountId: string,
     feedId: number,
+    params: IndicatorFeedGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IndicatorFeedGetResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/intel/indicator-feeds/${feedId}`, options) as Core.APIPromise<{
-        result: IndicatorFeedGetResponse;
-      }>
+      this._client.get(
+        `/accounts/${account_id}/intel/indicator-feeds/${feedId}`,
+        options,
+      ) as Core.APIPromise<{ result: IndicatorFeedGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -190,21 +201,52 @@ export interface IndicatorFeedGetResponse {
 
 export interface IndicatorFeedCreateParams {
   /**
-   * The description of the example test
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: The description of the example test
    */
   description?: string;
 
   /**
-   * The name of the indicator feed
+   * Body param: The name of the indicator feed
    */
   name?: string;
 }
 
 export interface IndicatorFeedUpdateParams {
   /**
-   * The file to upload
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: The file to upload
    */
   source?: string;
+}
+
+export interface IndicatorFeedListParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface IndicatorFeedDataParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface IndicatorFeedGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
 }
 
 export namespace IndicatorFeeds {
@@ -215,10 +257,14 @@ export namespace IndicatorFeeds {
   export import IndicatorFeedGetResponse = IndicatorFeedsAPI.IndicatorFeedGetResponse;
   export import IndicatorFeedCreateParams = IndicatorFeedsAPI.IndicatorFeedCreateParams;
   export import IndicatorFeedUpdateParams = IndicatorFeedsAPI.IndicatorFeedUpdateParams;
+  export import IndicatorFeedListParams = IndicatorFeedsAPI.IndicatorFeedListParams;
+  export import IndicatorFeedDataParams = IndicatorFeedsAPI.IndicatorFeedDataParams;
+  export import IndicatorFeedGetParams = IndicatorFeedsAPI.IndicatorFeedGetParams;
   export import Permissions = PermissionsAPI.Permissions;
   export import PermissionCreateResponse = PermissionsAPI.PermissionCreateResponse;
   export import PermissionListResponse = PermissionsAPI.PermissionListResponse;
   export import PermissionDeleteResponse = PermissionsAPI.PermissionDeleteResponse;
   export import PermissionCreateParams = PermissionsAPI.PermissionCreateParams;
+  export import PermissionListParams = PermissionsAPI.PermissionListParams;
   export import PermissionDeleteParams = PermissionsAPI.PermissionDeleteParams;
 }

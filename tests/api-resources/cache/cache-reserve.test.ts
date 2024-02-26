@@ -14,8 +14,10 @@ const cloudflare = new Cloudflare({
 
 describe('resource cacheReserve', () => {
   // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
-    const responsePromise = cloudflare.cache.cacheReserve.list('023e105f4ecef8ad9ca31a8372d0c353');
+  test.skip('list: only required params', async () => {
+    const responsePromise = cloudflare.cache.cacheReserve.list({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -26,18 +28,17 @@ describe('resource cacheReserve', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.cache.cacheReserve.list('023e105f4ecef8ad9ca31a8372d0c353', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('list: required and optional params', async () => {
+    const response = await cloudflare.cache.cacheReserve.list({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('clear', async () => {
-    const responsePromise = cloudflare.cache.cacheReserve.clear('023e105f4ecef8ad9ca31a8372d0c353');
+  test.skip('clear: only required params', async () => {
+    const responsePromise = cloudflare.cache.cacheReserve.clear({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -45,11 +46,19 @@ describe('resource cacheReserve', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('clear: required and optional params', async () => {
+    const response = await cloudflare.cache.cacheReserve.clear({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('edit: only required params', async () => {
-    const responsePromise = cloudflare.cache.cacheReserve.edit('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = cloudflare.cache.cacheReserve.edit({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       value: 'on',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -63,14 +72,17 @@ describe('resource cacheReserve', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('edit: required and optional params', async () => {
-    const response = await cloudflare.cache.cacheReserve.edit('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await cloudflare.cache.cacheReserve.edit({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       value: 'on',
     });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('status', async () => {
-    const responsePromise = cloudflare.cache.cacheReserve.status('023e105f4ecef8ad9ca31a8372d0c353');
+  test.skip('status: only required params', async () => {
+    const responsePromise = cloudflare.cache.cacheReserve.status({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -81,12 +93,9 @@ describe('resource cacheReserve', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('status: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.cache.cacheReserve.status('023e105f4ecef8ad9ca31a8372d0c353', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('status: required and optional params', async () => {
+    const response = await cloudflare.cache.cacheReserve.status({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 });

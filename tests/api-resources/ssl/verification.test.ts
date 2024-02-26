@@ -14,8 +14,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource verification', () => {
   // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
-    const responsePromise = cloudflare.ssl.verification.list('023e105f4ecef8ad9ca31a8372d0c353');
+  test.skip('list: only required params', async () => {
+    const responsePromise = cloudflare.ssl.verification.list({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -26,34 +26,19 @@ describe('resource verification', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.ssl.verification.list('023e105f4ecef8ad9ca31a8372d0c353', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('list: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.ssl.verification.list(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        { retry: true },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('list: required and optional params', async () => {
+    const response = await cloudflare.ssl.verification.list({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      retry: true,
+    });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('edit: only required params', async () => {
-    const responsePromise = cloudflare.ssl.verification.edit(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'a77f8bd7-3b47-46b4-a6f1-75cf98109948',
-      { validation_method: 'txt' },
-    );
+    const responsePromise = cloudflare.ssl.verification.edit('a77f8bd7-3b47-46b4-a6f1-75cf98109948', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      validation_method: 'txt',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -65,10 +50,9 @@ describe('resource verification', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('edit: required and optional params', async () => {
-    const response = await cloudflare.ssl.verification.edit(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'a77f8bd7-3b47-46b4-a6f1-75cf98109948',
-      { validation_method: 'txt' },
-    );
+    const response = await cloudflare.ssl.verification.edit('a77f8bd7-3b47-46b4-a6f1-75cf98109948', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      validation_method: 'txt',
+    });
   });
 });

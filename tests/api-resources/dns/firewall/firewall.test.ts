@@ -15,7 +15,8 @@ const cloudflare = new Cloudflare({
 describe('resource firewall', () => {
   // skipped: tests are disabled for the time being
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.dns.firewall.create('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = cloudflare.dns.firewall.create({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'My Awesome DNS Firewall cluster',
       upstream_ips: ['192.0.2.1', '198.51.100.1', '2001:DB8:100::CF'],
     });
@@ -30,7 +31,8 @@ describe('resource firewall', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.dns.firewall.create('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await cloudflare.dns.firewall.create({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'My Awesome DNS Firewall cluster',
       upstream_ips: ['192.0.2.1', '198.51.100.1', '2001:DB8:100::CF'],
       attack_mitigation: {
@@ -50,8 +52,8 @@ describe('resource firewall', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
-    const responsePromise = cloudflare.dns.firewall.list('023e105f4ecef8ad9ca31a8372d0c353');
+  test.skip('list: only required params', async () => {
+    const responsePromise = cloudflare.dns.firewall.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -62,31 +64,19 @@ describe('resource firewall', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.dns.firewall.list('023e105f4ecef8ad9ca31a8372d0c353', { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('list: required and optional params', async () => {
+    const response = await cloudflare.dns.firewall.list({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      page: 1,
+      per_page: 1,
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.dns.firewall.list(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        { page: 1, per_page: 1 },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
-    const responsePromise = cloudflare.dns.firewall.delete(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '023e105f4ecef8ad9ca31a8372d0c353',
-    );
+  test.skip('delete: only required params', async () => {
+    const responsePromise = cloudflare.dns.firewall.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -94,23 +84,27 @@ describe('resource firewall', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('delete: required and optional params', async () => {
+    const response = await cloudflare.dns.firewall.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('edit: only required params', async () => {
-    const responsePromise = cloudflare.dns.firewall.edit(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      {
-        deprecate_any_requests: true,
-        dns_firewall_ips: ['203.0.113.1', '203.0.113.254', '2001:DB8:AB::CF', '2001:DB8:CD::CF'],
-        ecs_fallback: false,
-        maximum_cache_ttl: 900,
-        minimum_cache_ttl: 60,
-        name: 'My Awesome DNS Firewall cluster',
-        upstream_ips: ['192.0.2.1', '198.51.100.1', '2001:DB8:100::CF'],
-      },
-    );
+    const responsePromise = cloudflare.dns.firewall.edit('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      deprecate_any_requests: true,
+      dns_firewall_ips: ['203.0.113.1', '203.0.113.254', '2001:DB8:AB::CF', '2001:DB8:CD::CF'],
+      ecs_fallback: false,
+      maximum_cache_ttl: 900,
+      minimum_cache_ttl: 60,
+      name: 'My Awesome DNS Firewall cluster',
+      upstream_ips: ['192.0.2.1', '198.51.100.1', '2001:DB8:100::CF'],
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -122,36 +116,32 @@ describe('resource firewall', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('edit: required and optional params', async () => {
-    const response = await cloudflare.dns.firewall.edit(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      {
-        deprecate_any_requests: true,
-        dns_firewall_ips: ['203.0.113.1', '203.0.113.254', '2001:DB8:AB::CF', '2001:DB8:CD::CF'],
-        ecs_fallback: false,
-        maximum_cache_ttl: 900,
-        minimum_cache_ttl: 60,
-        name: 'My Awesome DNS Firewall cluster',
-        upstream_ips: ['192.0.2.1', '198.51.100.1', '2001:DB8:100::CF'],
-        attack_mitigation: {
-          enabled: true,
-          only_when_origin_unhealthy: {},
-          only_when_upstream_unhealthy: false,
-        },
-        negative_cache_ttl: 900,
-        origin_ips: {},
-        ratelimit: 600,
-        retries: 2,
+    const response = await cloudflare.dns.firewall.edit('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      deprecate_any_requests: true,
+      dns_firewall_ips: ['203.0.113.1', '203.0.113.254', '2001:DB8:AB::CF', '2001:DB8:CD::CF'],
+      ecs_fallback: false,
+      maximum_cache_ttl: 900,
+      minimum_cache_ttl: 60,
+      name: 'My Awesome DNS Firewall cluster',
+      upstream_ips: ['192.0.2.1', '198.51.100.1', '2001:DB8:100::CF'],
+      attack_mitigation: {
+        enabled: true,
+        only_when_origin_unhealthy: {},
+        only_when_upstream_unhealthy: false,
       },
-    );
+      negative_cache_ttl: 900,
+      origin_ips: {},
+      ratelimit: 600,
+      retries: 2,
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
-    const responsePromise = cloudflare.dns.firewall.get(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '023e105f4ecef8ad9ca31a8372d0c353',
-    );
+  test.skip('get: only required params', async () => {
+    const responsePromise = cloudflare.dns.firewall.get('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -162,12 +152,9 @@ describe('resource firewall', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.dns.firewall.get('023e105f4ecef8ad9ca31a8372d0c353', '023e105f4ecef8ad9ca31a8372d0c353', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.dns.firewall.get('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 });

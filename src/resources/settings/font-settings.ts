@@ -11,12 +11,12 @@ export class FontSettings extends APIResource {
    * Refer to the Cloudflare Fonts documentation for more information.
    */
   edit(
-    zoneId: string,
-    body: FontSettingEditParams,
+    params: FontSettingEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<FontSettingEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/settings/fonts`, { body, ...options }) as Core.APIPromise<{
+      this._client.patch(`/zones/${zone_id}/settings/fonts`, { body, ...options }) as Core.APIPromise<{
         result: FontSettingEditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -27,9 +27,10 @@ export class FontSettings extends APIResource {
    * Hosted fonts from your own domain, boost performance, and enhance user privacy.
    * Refer to the Cloudflare Fonts documentation for more information.
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<FontSettingGetResponse> {
+  get(params: FontSettingGetParams, options?: Core.RequestOptions): Core.APIPromise<FontSettingGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/settings/fonts`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/settings/fonts`, options) as Core.APIPromise<{
         result: FontSettingGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -94,13 +95,26 @@ export interface FontSettingGetResponse {
 
 export interface FontSettingEditParams {
   /**
-   * Whether the feature is enabled or disabled.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Whether the feature is enabled or disabled.
    */
   value: 'on' | 'off';
+}
+
+export interface FontSettingGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }
 
 export namespace FontSettings {
   export import FontSettingEditResponse = FontSettingsAPI.FontSettingEditResponse;
   export import FontSettingGetResponse = FontSettingsAPI.FontSettingGetResponse;
   export import FontSettingEditParams = FontSettingsAPI.FontSettingEditParams;
+  export import FontSettingGetParams = FontSettingsAPI.FontSettingGetParams;
 }

@@ -10,12 +10,12 @@ export class TLSClientAuth extends APIResource {
    * client certificate (Enterprise Only).
    */
   edit(
-    zoneId: string,
-    body: TLSClientAuthEditParams,
+    params: TLSClientAuthEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TLSClientAuthEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/settings/tls_client_auth`, {
+      this._client.patch(`/zones/${zone_id}/settings/tls_client_auth`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: TLSClientAuthEditResponse }>
@@ -26,9 +26,13 @@ export class TLSClientAuth extends APIResource {
    * TLS Client Auth requires Cloudflare to connect to your origin server using a
    * client certificate (Enterprise Only).
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<TLSClientAuthGetResponse> {
+  get(
+    params: TLSClientAuthGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TLSClientAuthGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/settings/tls_client_auth`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/settings/tls_client_auth`, options) as Core.APIPromise<{
         result: TLSClientAuthGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -91,13 +95,26 @@ export interface TLSClientAuthGetResponse {
 
 export interface TLSClientAuthEditParams {
   /**
-   * value of the zone setting.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: value of the zone setting.
    */
   value: 'on' | 'off';
+}
+
+export interface TLSClientAuthGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }
 
 export namespace TLSClientAuth {
   export import TLSClientAuthEditResponse = TLSClientAuthAPI.TLSClientAuthEditResponse;
   export import TLSClientAuthGetResponse = TLSClientAuthAPI.TLSClientAuthGetResponse;
   export import TLSClientAuthEditParams = TLSClientAuthAPI.TLSClientAuthEditParams;
+  export import TLSClientAuthGetParams = TLSClientAuthAPI.TLSClientAuthGetParams;
 }

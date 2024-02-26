@@ -9,6 +9,10 @@ export {
   ProjectGetResponse,
   ProjectPurgeBuildCacheResponse,
   ProjectCreateParams,
+  ProjectListParams,
+  ProjectDeleteParams,
   ProjectEditParams,
+  ProjectGetParams,
+  ProjectPurgeBuildCacheParams,
   Projects,
 } from './projects/index';

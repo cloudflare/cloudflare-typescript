@@ -8,9 +8,10 @@ export class Pages extends APIResource {
   /**
    * Lists all webpages which have been tested.
    */
-  list(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<PageListResponse> {
+  list(params: PageListParams, options?: Core.RequestOptions): Core.APIPromise<PageListResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/speed_api/pages`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/speed_api/pages`, options) as Core.APIPromise<{
         result: PageListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -306,6 +307,14 @@ export namespace PageListResponse {
   }
 }
 
+export interface PageListParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
 export namespace Pages {
   export import PageListResponse = PagesAPI.PageListResponse;
+  export import PageListParams = PagesAPI.PageListParams;
 }

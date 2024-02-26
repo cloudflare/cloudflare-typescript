@@ -8,7 +8,9 @@ export {
   CustomHostnameGetResponse,
   CustomHostnameCreateParams,
   CustomHostnameListParams,
+  CustomHostnameDeleteParams,
   CustomHostnameEditParams,
+  CustomHostnameGetParams,
   CustomHostnameListResponsesV4PagePaginationArray,
   CustomHostnames,
 } from './custom-hostnames';
@@ -17,5 +19,7 @@ export {
   FallbackOriginDeleteResponse,
   FallbackOriginGetResponse,
   FallbackOriginUpdateParams,
+  FallbackOriginDeleteParams,
+  FallbackOriginGetParams,
   FallbackOrigin,
 } from './fallback-origin';

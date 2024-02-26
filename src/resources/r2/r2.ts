@@ -17,9 +17,13 @@ export namespace R2 {
   export import BucketGetResponse = BucketsAPI.BucketGetResponse;
   export import BucketCreateParams = BucketsAPI.BucketCreateParams;
   export import BucketListParams = BucketsAPI.BucketListParams;
+  export import BucketDeleteParams = BucketsAPI.BucketDeleteParams;
+  export import BucketGetParams = BucketsAPI.BucketGetParams;
   export import Sippy = SippyAPI.Sippy;
   export import SippyUpdateResponse = SippyAPI.SippyUpdateResponse;
   export import SippyDeleteResponse = SippyAPI.SippyDeleteResponse;
   export import SippyGetResponse = SippyAPI.SippyGetResponse;
   export import SippyUpdateParams = SippyAPI.SippyUpdateParams;
+  export import SippyDeleteParams = SippyAPI.SippyDeleteParams;
+  export import SippyGetParams = SippyAPI.SippyGetParams;
 }

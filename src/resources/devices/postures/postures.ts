@@ -12,12 +12,12 @@ export class Postures extends APIResource {
    * Creates a new device posture rule.
    */
   create(
-    accountId: unknown,
-    body: PostureCreateParams,
+    params: PostureCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PostureCreateResponse | null> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/devices/posture`, { body, ...options }) as Core.APIPromise<{
+      this._client.post(`/accounts/${account_id}/devices/posture`, { body, ...options }) as Core.APIPromise<{
         result: PostureCreateResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -27,13 +27,13 @@ export class Postures extends APIResource {
    * Updates a device posture rule.
    */
   update(
-    accountId: unknown,
     ruleId: string,
-    body: PostureUpdateParams,
+    params: PostureUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PostureUpdateResponse | null> {
+    const { account_id, ...body } = params;
     return (
-      this._client.put(`/accounts/${accountId}/devices/posture/${ruleId}`, {
+      this._client.put(`/accounts/${account_id}/devices/posture/${ruleId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: PostureUpdateResponse | null }>
@@ -43,9 +43,13 @@ export class Postures extends APIResource {
   /**
    * Fetches device posture rules for a Zero Trust account.
    */
-  list(accountId: unknown, options?: Core.RequestOptions): Core.APIPromise<PostureListResponse | null> {
+  list(
+    params: PostureListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PostureListResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/devices/posture`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/devices/posture`, options) as Core.APIPromise<{
         result: PostureListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -55,12 +59,13 @@ export class Postures extends APIResource {
    * Deletes a device posture rule.
    */
   delete(
-    accountId: unknown,
     ruleId: string,
+    params: PostureDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PostureDeleteResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${accountId}/devices/posture/${ruleId}`, options) as Core.APIPromise<{
+      this._client.delete(`/accounts/${account_id}/devices/posture/${ruleId}`, options) as Core.APIPromise<{
         result: PostureDeleteResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -70,12 +75,13 @@ export class Postures extends APIResource {
    * Fetches a single device posture rule.
    */
   get(
-    accountId: unknown,
     ruleId: string,
+    params: PostureGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PostureGetResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/devices/posture/${ruleId}`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/devices/posture/${ruleId}`, options) as Core.APIPromise<{
         result: PostureGetResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -1793,12 +1799,17 @@ export namespace PostureGetResponse {
 
 export interface PostureCreateParams {
   /**
-   * The name of the device posture rule.
+   * Path param:
+   */
+  account_id: unknown;
+
+  /**
+   * Body param: The name of the device posture rule.
    */
   name: string;
 
   /**
-   * The type of device posture rule.
+   * Body param: The type of device posture rule.
    */
   type:
     | 'file'
@@ -1822,18 +1833,18 @@ export interface PostureCreateParams {
     | 'sentinelone_s2s';
 
   /**
-   * The description of the device posture rule.
+   * Body param: The description of the device posture rule.
    */
   description?: string;
 
   /**
-   * Sets the expiration time for a posture check result. If empty, the result
-   * remains valid until it is overwritten by new data from the WARP client.
+   * Body param: Sets the expiration time for a posture check result. If empty, the
+   * result remains valid until it is overwritten by new data from the WARP client.
    */
   expiration?: string;
 
   /**
-   * The value to be checked against.
+   * Body param: The value to be checked against.
    */
   input?:
     | PostureCreateParams.TeamsDevicesFileInputRequest
@@ -1854,13 +1865,13 @@ export interface PostureCreateParams {
     | PostureCreateParams.TeamsDevicesSentineloneS2sInputRequest;
 
   /**
-   * The conditions that the client must match to run the rule.
+   * Body param: The conditions that the client must match to run the rule.
    */
   match?: Array<PostureCreateParams.Match>;
 
   /**
-   * Polling frequency for the WARP client posture check. Default: `5m` (poll every
-   * five minutes). Minimum: `1m`.
+   * Body param: Polling frequency for the WARP client posture check. Default: `5m`
+   * (poll every five minutes). Minimum: `1m`.
    */
   schedule?: string;
 }
@@ -2211,12 +2222,17 @@ export namespace PostureCreateParams {
 
 export interface PostureUpdateParams {
   /**
-   * The name of the device posture rule.
+   * Path param:
+   */
+  account_id: unknown;
+
+  /**
+   * Body param: The name of the device posture rule.
    */
   name: string;
 
   /**
-   * The type of device posture rule.
+   * Body param: The type of device posture rule.
    */
   type:
     | 'file'
@@ -2240,18 +2256,18 @@ export interface PostureUpdateParams {
     | 'sentinelone_s2s';
 
   /**
-   * The description of the device posture rule.
+   * Body param: The description of the device posture rule.
    */
   description?: string;
 
   /**
-   * Sets the expiration time for a posture check result. If empty, the result
-   * remains valid until it is overwritten by new data from the WARP client.
+   * Body param: Sets the expiration time for a posture check result. If empty, the
+   * result remains valid until it is overwritten by new data from the WARP client.
    */
   expiration?: string;
 
   /**
-   * The value to be checked against.
+   * Body param: The value to be checked against.
    */
   input?:
     | PostureUpdateParams.TeamsDevicesFileInputRequest
@@ -2272,13 +2288,13 @@ export interface PostureUpdateParams {
     | PostureUpdateParams.TeamsDevicesSentineloneS2sInputRequest;
 
   /**
-   * The conditions that the client must match to run the rule.
+   * Body param: The conditions that the client must match to run the rule.
    */
   match?: Array<PostureUpdateParams.Match>;
 
   /**
-   * Polling frequency for the WARP client posture check. Default: `5m` (poll every
-   * five minutes). Minimum: `1m`.
+   * Body param: Polling frequency for the WARP client posture check. Default: `5m`
+   * (poll every five minutes). Minimum: `1m`.
    */
   schedule?: string;
 }
@@ -2627,6 +2643,18 @@ export namespace PostureUpdateParams {
   }
 }
 
+export interface PostureListParams {
+  account_id: unknown;
+}
+
+export interface PostureDeleteParams {
+  account_id: unknown;
+}
+
+export interface PostureGetParams {
+  account_id: unknown;
+}
+
 export namespace Postures {
   export import PostureCreateResponse = PosturesAPI.PostureCreateResponse;
   export import PostureUpdateResponse = PosturesAPI.PostureUpdateResponse;
@@ -2635,6 +2663,9 @@ export namespace Postures {
   export import PostureGetResponse = PosturesAPI.PostureGetResponse;
   export import PostureCreateParams = PosturesAPI.PostureCreateParams;
   export import PostureUpdateParams = PosturesAPI.PostureUpdateParams;
+  export import PostureListParams = PosturesAPI.PostureListParams;
+  export import PostureDeleteParams = PosturesAPI.PostureDeleteParams;
+  export import PostureGetParams = PosturesAPI.PostureGetParams;
   export import Integrations = IntegrationsAPI.Integrations;
   export import IntegrationCreateResponse = IntegrationsAPI.IntegrationCreateResponse;
   export import IntegrationListResponse = IntegrationsAPI.IntegrationListResponse;
@@ -2642,5 +2673,8 @@ export namespace Postures {
   export import IntegrationEditResponse = IntegrationsAPI.IntegrationEditResponse;
   export import IntegrationGetResponse = IntegrationsAPI.IntegrationGetResponse;
   export import IntegrationCreateParams = IntegrationsAPI.IntegrationCreateParams;
+  export import IntegrationListParams = IntegrationsAPI.IntegrationListParams;
+  export import IntegrationDeleteParams = IntegrationsAPI.IntegrationDeleteParams;
   export import IntegrationEditParams = IntegrationsAPI.IntegrationEditParams;
+  export import IntegrationGetParams = IntegrationsAPI.IntegrationGetParams;
 }

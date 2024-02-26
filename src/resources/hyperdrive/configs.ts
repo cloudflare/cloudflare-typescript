@@ -9,12 +9,12 @@ export class Configs extends APIResource {
    * Creates and returns a new Hyperdrive configuration.
    */
   create(
-    accountId: string,
-    body: ConfigCreateParams,
+    params: ConfigCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConfigCreateResponse | null> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/hyperdrive/configs`, {
+      this._client.post(`/accounts/${account_id}/hyperdrive/configs`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: ConfigCreateResponse | null }>
@@ -25,13 +25,13 @@ export class Configs extends APIResource {
    * Updates and returns the specified Hyperdrive configuration.
    */
   update(
-    accountId: string,
     hyperdriveId: string,
-    body: ConfigUpdateParams,
+    params: ConfigUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConfigUpdateResponse | null> {
+    const { account_id, ...body } = params;
     return (
-      this._client.put(`/accounts/${accountId}/hyperdrive/configs/${hyperdriveId}`, {
+      this._client.put(`/accounts/${account_id}/hyperdrive/configs/${hyperdriveId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: ConfigUpdateResponse | null }>
@@ -41,9 +41,10 @@ export class Configs extends APIResource {
   /**
    * Returns a list of Hyperdrives
    */
-  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<ConfigListResponse> {
+  list(params: ConfigListParams, options?: Core.RequestOptions): Core.APIPromise<ConfigListResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/hyperdrive/configs`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/hyperdrive/configs`, options) as Core.APIPromise<{
         result: ConfigListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -53,13 +54,14 @@ export class Configs extends APIResource {
    * Deletes the specified Hyperdrive.
    */
   delete(
-    accountId: string,
     hyperdriveId: string,
+    params: ConfigDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConfigDeleteResponse | null> {
+    const { account_id } = params;
     return (
       this._client.delete(
-        `/accounts/${accountId}/hyperdrive/configs/${hyperdriveId}`,
+        `/accounts/${account_id}/hyperdrive/configs/${hyperdriveId}`,
         options,
       ) as Core.APIPromise<{ result: ConfigDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -70,13 +72,13 @@ export class Configs extends APIResource {
    * origin and caching settings are applied with an all-or-nothing approach.
    */
   edit(
-    accountId: string,
     hyperdriveId: string,
-    body: ConfigEditParams,
+    params: ConfigEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConfigEditResponse | null> {
+    const { account_id, ...body } = params;
     return (
-      this._client.patch(`/accounts/${accountId}/hyperdrive/configs/${hyperdriveId}`, {
+      this._client.patch(`/accounts/${account_id}/hyperdrive/configs/${hyperdriveId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: ConfigEditResponse | null }>
@@ -87,13 +89,14 @@ export class Configs extends APIResource {
    * Returns the specified Hyperdrive configuration.
    */
   get(
-    accountId: string,
     hyperdriveId: string,
+    params: ConfigGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConfigGetResponse | null> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountId}/hyperdrive/configs/${hyperdriveId}`,
+        `/accounts/${account_id}/hyperdrive/configs/${hyperdriveId}`,
         options,
       ) as Core.APIPromise<{ result: ConfigGetResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -142,6 +145,14 @@ export interface ConfigGetResponse {
 }
 
 export interface ConfigCreateParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
   origin: ConfigCreateParams.Origin;
 }
 
@@ -156,6 +167,14 @@ export namespace ConfigCreateParams {
 }
 
 export interface ConfigUpdateParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
   origin: ConfigUpdateParams.Origin;
 }
 
@@ -169,7 +188,29 @@ export namespace ConfigUpdateParams {
   }
 }
 
+export interface ConfigListParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface ConfigDeleteParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export interface ConfigEditParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
   origin?: ConfigEditParams.Origin;
 }
 
@@ -183,6 +224,13 @@ export namespace ConfigEditParams {
   }
 }
 
+export interface ConfigGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export namespace Configs {
   export import ConfigCreateResponse = ConfigsAPI.ConfigCreateResponse;
   export import ConfigUpdateResponse = ConfigsAPI.ConfigUpdateResponse;
@@ -192,5 +240,8 @@ export namespace Configs {
   export import ConfigGetResponse = ConfigsAPI.ConfigGetResponse;
   export import ConfigCreateParams = ConfigsAPI.ConfigCreateParams;
   export import ConfigUpdateParams = ConfigsAPI.ConfigUpdateParams;
+  export import ConfigListParams = ConfigsAPI.ConfigListParams;
+  export import ConfigDeleteParams = ConfigsAPI.ConfigDeleteParams;
   export import ConfigEditParams = ConfigsAPI.ConfigEditParams;
+  export import ConfigGetParams = ConfigsAPI.ConfigGetParams;
 }

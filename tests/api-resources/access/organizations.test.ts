@@ -17,7 +17,7 @@ describe('resource organizations', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.access.organizations.create({
       account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'string',
       auth_domain: 'test.cloudflareaccess.com',
       name: 'Widget Corps Internal Applications',
     });
@@ -34,7 +34,7 @@ describe('resource organizations', () => {
   test.skip('create: required and optional params', async () => {
     const response = await cloudflare.access.organizations.create({
       account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'string',
       auth_domain: 'test.cloudflareaccess.com',
       name: 'Widget Corps Internal Applications',
       allow_authenticate_via_warp: true,
@@ -58,7 +58,7 @@ describe('resource organizations', () => {
   test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.access.organizations.update({
       account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'string',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -73,7 +73,7 @@ describe('resource organizations', () => {
   test.skip('update: required and optional params', async () => {
     const response = await cloudflare.access.organizations.update({
       account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'string',
       allow_authenticate_via_warp: true,
       auth_domain: 'test.cloudflareaccess.com',
       auto_redirect_to_identity: true,
@@ -99,10 +99,7 @@ describe('resource organizations', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('list: only required params', async () => {
-    const responsePromise = cloudflare.access.organizations.list({
-      account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = cloudflare.access.organizations.list({ account_id: 'string', zone_id: 'string' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -114,17 +111,14 @@ describe('resource organizations', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('list: required and optional params', async () => {
-    const response = await cloudflare.access.organizations.list({
-      account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const response = await cloudflare.access.organizations.list({ account_id: 'string', zone_id: 'string' });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('revokeUsers: only required params', async () => {
     const responsePromise = cloudflare.access.organizations.revokeUsers({
       account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'string',
       email: 'test@example.com',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -140,7 +134,7 @@ describe('resource organizations', () => {
   test.skip('revokeUsers: required and optional params', async () => {
     const response = await cloudflare.access.organizations.revokeUsers({
       account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'string',
       email: 'test@example.com',
     });
   });

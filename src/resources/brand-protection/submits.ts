@@ -8,13 +8,10 @@ export class Submits extends APIResource {
   /**
    * Submit suspicious URL for scanning
    */
-  create(
-    accountId: string,
-    body: SubmitCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SubmitCreateResponse> {
+  create(params: SubmitCreateParams, options?: Core.RequestOptions): Core.APIPromise<SubmitCreateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/brand-protection/submit`, {
+      this._client.post(`/accounts/${account_id}/brand-protection/submit`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: SubmitCreateResponse }>
@@ -75,7 +72,12 @@ export namespace SubmitCreateResponse {
 
 export interface SubmitCreateParams {
   /**
-   * URL(s) to filter submissions results by
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: URL(s) to filter submissions results by
    */
   url?: string;
 }

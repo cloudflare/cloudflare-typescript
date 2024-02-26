@@ -15,7 +15,8 @@ const cloudflare = new Cloudflare({
 describe('resource proxyEndpoints', () => {
   // skipped: tests are disabled for the time being
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.gateways.proxyEndpoints.create('699d98642c564d2e855e9661899b7252', {
+    const responsePromise = cloudflare.gateways.proxyEndpoints.create({
+      account_id: '699d98642c564d2e855e9661899b7252',
       ips: ['192.0.2.1/32', '192.0.2.1/32', '192.0.2.1/32'],
       name: 'Devops team',
     });
@@ -30,7 +31,8 @@ describe('resource proxyEndpoints', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.gateways.proxyEndpoints.create('699d98642c564d2e855e9661899b7252', {
+    const response = await cloudflare.gateways.proxyEndpoints.create({
+      account_id: '699d98642c564d2e855e9661899b7252',
       ips: ['192.0.2.1/32', '192.0.2.1/32', '192.0.2.1/32'],
       name: 'Devops team',
       subdomain: 'oli3n9zkz5.proxy.cloudflare-gateway.com',
@@ -38,8 +40,10 @@ describe('resource proxyEndpoints', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
-    const responsePromise = cloudflare.gateways.proxyEndpoints.list('699d98642c564d2e855e9661899b7252');
+  test.skip('list: only required params', async () => {
+    const responsePromise = cloudflare.gateways.proxyEndpoints.list({
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -50,21 +54,17 @@ describe('resource proxyEndpoints', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.gateways.proxyEndpoints.list('699d98642c564d2e855e9661899b7252', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('list: required and optional params', async () => {
+    const response = await cloudflare.gateways.proxyEndpoints.list({
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
-    const responsePromise = cloudflare.gateways.proxyEndpoints.delete(
-      '699d98642c564d2e855e9661899b7252',
-      'ed35569b41ce4d1facfe683550f54086',
-    );
+  test.skip('delete: only required params', async () => {
+    const responsePromise = cloudflare.gateways.proxyEndpoints.delete('ed35569b41ce4d1facfe683550f54086', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -75,12 +75,17 @@ describe('resource proxyEndpoints', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('edit', async () => {
-    const responsePromise = cloudflare.gateways.proxyEndpoints.edit(
-      '699d98642c564d2e855e9661899b7252',
-      'ed35569b41ce4d1facfe683550f54086',
-      {},
-    );
+  test.skip('delete: required and optional params', async () => {
+    const response = await cloudflare.gateways.proxyEndpoints.delete('ed35569b41ce4d1facfe683550f54086', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('edit: only required params', async () => {
+    const responsePromise = cloudflare.gateways.proxyEndpoints.edit('ed35569b41ce4d1facfe683550f54086', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -91,11 +96,20 @@ describe('resource proxyEndpoints', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
-    const responsePromise = cloudflare.gateways.proxyEndpoints.get(
-      '699d98642c564d2e855e9661899b7252',
-      'ed35569b41ce4d1facfe683550f54086',
-    );
+  test.skip('edit: required and optional params', async () => {
+    const response = await cloudflare.gateways.proxyEndpoints.edit('ed35569b41ce4d1facfe683550f54086', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+      ips: ['192.0.2.1/32', '192.0.2.1/32', '192.0.2.1/32'],
+      name: 'Devops team',
+      subdomain: 'oli3n9zkz5.proxy.cloudflare-gateway.com',
+    });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get: only required params', async () => {
+    const responsePromise = cloudflare.gateways.proxyEndpoints.get('ed35569b41ce4d1facfe683550f54086', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -106,14 +120,9 @@ describe('resource proxyEndpoints', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.gateways.proxyEndpoints.get(
-        '699d98642c564d2e855e9661899b7252',
-        'ed35569b41ce4d1facfe683550f54086',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.gateways.proxyEndpoints.get('ed35569b41ce4d1facfe683550f54086', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
   });
 });

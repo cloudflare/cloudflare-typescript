@@ -14,12 +14,12 @@ export class OriginMaxHTTPVersion extends APIResource {
    * where it is "1"
    */
   edit(
-    zoneId: string,
-    body: OriginMaxHTTPVersionEditParams,
+    params: OriginMaxHTTPVersionEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OriginMaxHTTPVersionEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/settings/origin_max_http_version`, {
+      this._client.patch(`/zones/${zone_id}/settings/origin_max_http_version`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: OriginMaxHTTPVersionEditResponse }>
@@ -34,9 +34,13 @@ export class OriginMaxHTTPVersion extends APIResource {
    * for more information.). The default value is "2" for all plan types except ENT
    * where it is "1"
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<OriginMaxHTTPVersionGetResponse> {
+  get(
+    params: OriginMaxHTTPVersionGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<OriginMaxHTTPVersionGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/settings/origin_max_http_version`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/settings/origin_max_http_version`, options) as Core.APIPromise<{
         result: OriginMaxHTTPVersionGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -95,13 +99,26 @@ export interface OriginMaxHTTPVersionGetResponse {
 
 export interface OriginMaxHTTPVersionEditParams {
   /**
-   * Value of the Origin Max HTTP Version Setting.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Value of the Origin Max HTTP Version Setting.
    */
   value: '2' | '1';
+}
+
+export interface OriginMaxHTTPVersionGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }
 
 export namespace OriginMaxHTTPVersion {
   export import OriginMaxHTTPVersionEditResponse = OriginMaxHTTPVersionAPI.OriginMaxHTTPVersionEditResponse;
   export import OriginMaxHTTPVersionGetResponse = OriginMaxHTTPVersionAPI.OriginMaxHTTPVersionGetResponse;
   export import OriginMaxHTTPVersionEditParams = OriginMaxHTTPVersionAPI.OriginMaxHTTPVersionEditParams;
+  export import OriginMaxHTTPVersionGetParams = OriginMaxHTTPVersionAPI.OriginMaxHTTPVersionGetParams;
 }

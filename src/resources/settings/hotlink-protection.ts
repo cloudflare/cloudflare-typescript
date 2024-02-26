@@ -15,12 +15,12 @@ export class HotlinkProtection extends APIResource {
    * (https://support.cloudflare.com/hc/en-us/articles/200170026).
    */
   edit(
-    zoneId: string,
-    body: HotlinkProtectionEditParams,
+    params: HotlinkProtectionEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<HotlinkProtectionEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/settings/hotlink_protection`, {
+      this._client.patch(`/zones/${zone_id}/settings/hotlink_protection`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: HotlinkProtectionEditResponse }>
@@ -36,9 +36,13 @@ export class HotlinkProtection extends APIResource {
    * on their own pages.
    * (https://support.cloudflare.com/hc/en-us/articles/200170026).
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<HotlinkProtectionGetResponse> {
+  get(
+    params: HotlinkProtectionGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<HotlinkProtectionGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/settings/hotlink_protection`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/settings/hotlink_protection`, options) as Core.APIPromise<{
         result: HotlinkProtectionGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -111,13 +115,26 @@ export interface HotlinkProtectionGetResponse {
 
 export interface HotlinkProtectionEditParams {
   /**
-   * Value of the zone setting.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Value of the zone setting.
    */
   value: 'on' | 'off';
+}
+
+export interface HotlinkProtectionGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }
 
 export namespace HotlinkProtection {
   export import HotlinkProtectionEditResponse = HotlinkProtectionAPI.HotlinkProtectionEditResponse;
   export import HotlinkProtectionGetResponse = HotlinkProtectionAPI.HotlinkProtectionGetResponse;
   export import HotlinkProtectionEditParams = HotlinkProtectionAPI.HotlinkProtectionEditParams;
+  export import HotlinkProtectionGetParams = HotlinkProtectionAPI.HotlinkProtectionGetParams;
 }

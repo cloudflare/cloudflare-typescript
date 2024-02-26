@@ -11,13 +11,10 @@ export class Mirage extends APIResource {
    * [blog post](http://blog.cloudflare.com/mirage2-solving-mobile-speed) for more
    * information.
    */
-  edit(
-    zoneId: string,
-    body: MirageEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<MirageEditResponse> {
+  edit(params: MirageEditParams, options?: Core.RequestOptions): Core.APIPromise<MirageEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/settings/mirage`, { body, ...options }) as Core.APIPromise<{
+      this._client.patch(`/zones/${zone_id}/settings/mirage`, { body, ...options }) as Core.APIPromise<{
         result: MirageEditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -29,9 +26,10 @@ export class Mirage extends APIResource {
    * [blog post](http://blog.cloudflare.com/mirage2-solving-mobile-speed) for more
    * information.
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<MirageGetResponse> {
+  get(params: MirageGetParams, options?: Core.RequestOptions): Core.APIPromise<MirageGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/settings/mirage`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/settings/mirage`, options) as Core.APIPromise<{
         result: MirageGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -98,13 +96,26 @@ export interface MirageGetResponse {
 
 export interface MirageEditParams {
   /**
-   * Value of the zone setting.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Value of the zone setting.
    */
   value: 'on' | 'off';
+}
+
+export interface MirageGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }
 
 export namespace Mirage {
   export import MirageEditResponse = MirageAPI.MirageEditResponse;
   export import MirageGetResponse = MirageAPI.MirageGetResponse;
   export import MirageEditParams = MirageAPI.MirageEditParams;
+  export import MirageGetParams = MirageAPI.MirageGetParams;
 }

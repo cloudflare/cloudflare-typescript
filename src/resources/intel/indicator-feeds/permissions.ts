@@ -9,12 +9,12 @@ export class Permissions extends APIResource {
    * Grant permission to indicator feed
    */
   create(
-    accountId: string,
-    body: PermissionCreateParams,
+    params: PermissionCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PermissionCreateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.put(`/accounts/${accountId}/intel/indicator-feeds/permissions/add`, {
+      this._client.put(`/accounts/${account_id}/intel/indicator-feeds/permissions/add`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: PermissionCreateResponse }>
@@ -24,10 +24,11 @@ export class Permissions extends APIResource {
   /**
    * List indicator feed permissions
    */
-  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<PermissionListResponse> {
+  list(params: PermissionListParams, options?: Core.RequestOptions): Core.APIPromise<PermissionListResponse> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountId}/intel/indicator-feeds/permissions/view`,
+        `/accounts/${account_id}/intel/indicator-feeds/permissions/view`,
         options,
       ) as Core.APIPromise<{ result: PermissionListResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -37,12 +38,12 @@ export class Permissions extends APIResource {
    * Revoke permission to indicator feed
    */
   delete(
-    accountId: string,
-    body: PermissionDeleteParams,
+    params: PermissionDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PermissionDeleteResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.put(`/accounts/${accountId}/intel/indicator-feeds/permissions/remove`, {
+      this._client.put(`/accounts/${account_id}/intel/indicator-feeds/permissions/remove`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: PermissionDeleteResponse }>
@@ -87,24 +88,41 @@ export interface PermissionDeleteResponse {
 
 export interface PermissionCreateParams {
   /**
-   * The Cloudflare account tag of the account to change permissions on
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: The Cloudflare account tag of the account to change permissions on
    */
   account_tag?: string;
 
   /**
-   * The ID of the feed to add/remove permissions on
+   * Body param: The ID of the feed to add/remove permissions on
    */
   feed_id?: number;
 }
 
+export interface PermissionListParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export interface PermissionDeleteParams {
   /**
-   * The Cloudflare account tag of the account to change permissions on
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: The Cloudflare account tag of the account to change permissions on
    */
   account_tag?: string;
 
   /**
-   * The ID of the feed to add/remove permissions on
+   * Body param: The ID of the feed to add/remove permissions on
    */
   feed_id?: number;
 }
@@ -114,5 +132,6 @@ export namespace Permissions {
   export import PermissionListResponse = PermissionsAPI.PermissionListResponse;
   export import PermissionDeleteResponse = PermissionsAPI.PermissionDeleteResponse;
   export import PermissionCreateParams = PermissionsAPI.PermissionCreateParams;
+  export import PermissionListParams = PermissionsAPI.PermissionListParams;
   export import PermissionDeleteParams = PermissionsAPI.PermissionDeleteParams;
 }

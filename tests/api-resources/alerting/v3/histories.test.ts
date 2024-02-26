@@ -14,8 +14,10 @@ const cloudflare = new Cloudflare({
 
 describe('resource histories', () => {
   // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
-    const responsePromise = cloudflare.alerting.v3.histories.list('023e105f4ecef8ad9ca31a8372d0c353');
+  test.skip('list: only required params', async () => {
+    const responsePromise = cloudflare.alerting.v3.histories.list({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -26,24 +28,13 @@ describe('resource histories', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.alerting.v3.histories.list('023e105f4ecef8ad9ca31a8372d0c353', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('list: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.alerting.v3.histories.list(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        { before: '2022-05-20T20:29:58.679897Z', page: 1, per_page: 5, since: '2022-05-19T20:29:58.679897Z' },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('list: required and optional params', async () => {
+    const response = await cloudflare.alerting.v3.histories.list({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      before: '2022-05-20T20:29:58.679897Z',
+      page: 1,
+      per_page: 5,
+      since: '2022-05-19T20:29:58.679897Z',
+    });
   });
 });

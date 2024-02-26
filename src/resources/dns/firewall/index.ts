@@ -9,7 +9,9 @@ export {
   FirewallGetResponse,
   FirewallCreateParams,
   FirewallListParams,
+  FirewallDeleteParams,
   FirewallEditParams,
+  FirewallGetParams,
   FirewallListResponsesV4PagePaginationArray,
   Firewall,
 } from './firewall';

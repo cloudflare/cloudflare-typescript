@@ -6,6 +6,7 @@ export {
   GroupGetResponse,
   GroupListParams,
   GroupEditParams,
+  GroupGetParams,
   GroupListResponsesV4PagePaginationArray,
   Groups,
 } from './groups';
@@ -21,6 +22,7 @@ export {
   RuleGetResponse,
   RuleWAFRulesListWAFRulesResponse,
   RuleEditParams,
+  RuleGetParams,
   RuleWAFRulesListWAFRulesParams,
   Rules,
 } from './rules';

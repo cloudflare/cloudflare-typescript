@@ -9,13 +9,14 @@ export class Accounts extends APIResource {
    * Add an account as a member of a particular address map.
    */
   update(
-    accountId: string,
     addressMapId: string,
+    params: AccountUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AccountUpdateResponse | null> {
+    const { account_id } = params;
     return (
       this._client.put(
-        `/accounts/${accountId}/addressing/address_maps/${addressMapId}/accounts/:account_id`,
+        `/accounts/${account_id}/addressing/address_maps/${addressMapId}/accounts/:account_id`,
         options,
       ) as Core.APIPromise<{ result: AccountUpdateResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -25,13 +26,14 @@ export class Accounts extends APIResource {
    * Remove an account as a member of a particular address map.
    */
   delete(
-    accountId: string,
     addressMapId: string,
+    params: AccountDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AccountDeleteResponse | null> {
+    const { account_id } = params;
     return (
       this._client.delete(
-        `/accounts/${accountId}/addressing/address_maps/${addressMapId}/accounts/:account_id`,
+        `/accounts/${account_id}/addressing/address_maps/${addressMapId}/accounts/:account_id`,
         options,
       ) as Core.APIPromise<{ result: AccountDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -42,7 +44,23 @@ export type AccountUpdateResponse = unknown | Array<unknown> | string;
 
 export type AccountDeleteResponse = unknown | Array<unknown> | string;
 
+export interface AccountUpdateParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface AccountDeleteParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export namespace Accounts {
   export import AccountUpdateResponse = AccountsAPI.AccountUpdateResponse;
   export import AccountDeleteResponse = AccountsAPI.AccountDeleteResponse;
+  export import AccountUpdateParams = AccountsAPI.AccountUpdateParams;
+  export import AccountDeleteParams = AccountsAPI.AccountDeleteParams;
 }

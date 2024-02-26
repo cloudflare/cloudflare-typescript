@@ -11,12 +11,12 @@ export class AlwaysUseHTTPS extends APIResource {
    * consider creating an "Always use HTTPS" page rule.
    */
   edit(
-    zoneId: string,
-    body: AlwaysUseHTTPSEditParams,
+    params: AlwaysUseHTTPSEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AlwaysUseHTTPSEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/settings/always_use_https`, {
+      this._client.patch(`/zones/${zone_id}/settings/always_use_https`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: AlwaysUseHTTPSEditResponse }>
@@ -28,9 +28,13 @@ export class AlwaysUseHTTPS extends APIResource {
    * equivalent "https" URL. If you only want to redirect for a subset of requests,
    * consider creating an "Always use HTTPS" page rule.
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<AlwaysUseHTTPSGetResponse> {
+  get(
+    params: AlwaysUseHTTPSGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AlwaysUseHTTPSGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/settings/always_use_https`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/settings/always_use_https`, options) as Core.APIPromise<{
         result: AlwaysUseHTTPSGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -95,13 +99,26 @@ export interface AlwaysUseHTTPSGetResponse {
 
 export interface AlwaysUseHTTPSEditParams {
   /**
-   * Value of the zone setting.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Value of the zone setting.
    */
   value: 'on' | 'off';
+}
+
+export interface AlwaysUseHTTPSGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }
 
 export namespace AlwaysUseHTTPS {
   export import AlwaysUseHTTPSEditResponse = AlwaysUseHTTPSAPI.AlwaysUseHTTPSEditResponse;
   export import AlwaysUseHTTPSGetResponse = AlwaysUseHTTPSAPI.AlwaysUseHTTPSGetResponse;
   export import AlwaysUseHTTPSEditParams = AlwaysUseHTTPSAPI.AlwaysUseHTTPSEditParams;
+  export import AlwaysUseHTTPSGetParams = AlwaysUseHTTPSAPI.AlwaysUseHTTPSGetParams;
 }

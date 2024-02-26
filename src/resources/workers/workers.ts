@@ -40,7 +40,9 @@ export namespace Workers {
   export import ScriptUpdateResponse = ScriptsAPI.ScriptUpdateResponse;
   export import ScriptListResponse = ScriptsAPI.ScriptListResponse;
   export import ScriptUpdateParams = ScriptsAPI.ScriptUpdateParams;
+  export import ScriptListParams = ScriptsAPI.ScriptListParams;
   export import ScriptDeleteParams = ScriptsAPI.ScriptDeleteParams;
+  export import ScriptGetParams = ScriptsAPI.ScriptGetParams;
   export import Filters = FiltersAPI.Filters;
   export import FilterCreateResponse = FiltersAPI.FilterCreateResponse;
   export import FilterUpdateResponse = FiltersAPI.FilterUpdateResponse;
@@ -48,6 +50,8 @@ export namespace Workers {
   export import FilterDeleteResponse = FiltersAPI.FilterDeleteResponse;
   export import FilterCreateParams = FiltersAPI.FilterCreateParams;
   export import FilterUpdateParams = FiltersAPI.FilterUpdateParams;
+  export import FilterListParams = FiltersAPI.FilterListParams;
+  export import FilterDeleteParams = FiltersAPI.FilterDeleteParams;
   export import Routes = RoutesAPI.Routes;
   export import RouteCreateResponse = RoutesAPI.RouteCreateResponse;
   export import RouteUpdateResponse = RoutesAPI.RouteUpdateResponse;
@@ -56,10 +60,14 @@ export namespace Workers {
   export import RouteGetResponse = RoutesAPI.RouteGetResponse;
   export import RouteCreateParams = RoutesAPI.RouteCreateParams;
   export import RouteUpdateParams = RoutesAPI.RouteUpdateParams;
+  export import RouteListParams = RoutesAPI.RouteListParams;
+  export import RouteDeleteParams = RoutesAPI.RouteDeleteParams;
+  export import RouteGetParams = RoutesAPI.RouteGetParams;
   export import AccountSettings = AccountSettingsAPI.AccountSettings;
   export import AccountSettingUpdateResponse = AccountSettingsAPI.AccountSettingUpdateResponse;
   export import AccountSettingGetResponse = AccountSettingsAPI.AccountSettingGetResponse;
   export import AccountSettingUpdateParams = AccountSettingsAPI.AccountSettingUpdateParams;
+  export import AccountSettingGetParams = AccountSettingsAPI.AccountSettingGetParams;
   export import Deployments = DeploymentsAPI.Deployments;
   export import Domains = DomainsAPI.Domains;
   export import DomainUpdateResponse = DomainsAPI.DomainUpdateResponse;
@@ -67,6 +75,8 @@ export namespace Workers {
   export import DomainGetResponse = DomainsAPI.DomainGetResponse;
   export import DomainUpdateParams = DomainsAPI.DomainUpdateParams;
   export import DomainListParams = DomainsAPI.DomainListParams;
+  export import DomainDeleteParams = DomainsAPI.DomainDeleteParams;
+  export import DomainGetParams = DomainsAPI.DomainGetParams;
   export import DurableObjects = DurableObjectsAPI.DurableObjects;
   export import Queues = QueuesAPI.Queues;
   export import QueueCreateResponse = QueuesAPI.QueueCreateResponse;
@@ -76,13 +86,19 @@ export namespace Workers {
   export import QueueGetResponse = QueuesAPI.QueueGetResponse;
   export import QueueCreateParams = QueuesAPI.QueueCreateParams;
   export import QueueUpdateParams = QueuesAPI.QueueUpdateParams;
+  export import QueueListParams = QueuesAPI.QueueListParams;
+  export import QueueDeleteParams = QueuesAPI.QueueDeleteParams;
+  export import QueueGetParams = QueuesAPI.QueueGetParams;
   export import Subdomains = SubdomainsAPI.Subdomains;
   export import SubdomainUpdateResponse = SubdomainsAPI.SubdomainUpdateResponse;
   export import SubdomainGetResponse = SubdomainsAPI.SubdomainGetResponse;
   export import SubdomainUpdateParams = SubdomainsAPI.SubdomainUpdateParams;
+  export import SubdomainGetParams = SubdomainsAPI.SubdomainGetParams;
   export import DeploymentsByScript = DeploymentsByScriptAPI.DeploymentsByScript;
   export import DeploymentsByScriptListResponse = DeploymentsByScriptAPI.DeploymentsByScriptListResponse;
   export import DeploymentsByScriptDetailResponse = DeploymentsByScriptAPI.DeploymentsByScriptDetailResponse;
+  export import DeploymentsByScriptListParams = DeploymentsByScriptAPI.DeploymentsByScriptListParams;
+  export import DeploymentsByScriptDetailParams = DeploymentsByScriptAPI.DeploymentsByScriptDetailParams;
   export import Services = ServicesAPI.Services;
   export import Script = ScriptAPI.Script;
 }

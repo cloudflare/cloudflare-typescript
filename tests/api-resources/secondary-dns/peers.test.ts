@@ -15,7 +15,10 @@ const cloudflare = new Cloudflare({
 describe('resource peers', () => {
   // skipped: tests are disabled for the time being
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.secondaryDNS.peers.create('01a7362d577a6c3019a474fd6f485823', {});
+    const responsePromise = cloudflare.secondaryDNS.peers.create({
+      account_id: '01a7362d577a6c3019a474fd6f485823',
+      body: {},
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -27,16 +30,18 @@ describe('resource peers', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.secondaryDNS.peers.create('01a7362d577a6c3019a474fd6f485823', {});
+    const response = await cloudflare.secondaryDNS.peers.create({
+      account_id: '01a7362d577a6c3019a474fd6f485823',
+      body: {},
+    });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.secondaryDNS.peers.update(
-      '01a7362d577a6c3019a474fd6f485823',
-      '23ff594956f20c2a721606e94745a8aa',
-      { name: 'my-peer-1' },
-    );
+    const responsePromise = cloudflare.secondaryDNS.peers.update('23ff594956f20c2a721606e94745a8aa', {
+      account_id: '01a7362d577a6c3019a474fd6f485823',
+      name: 'my-peer-1',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -48,22 +53,21 @@ describe('resource peers', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.secondaryDNS.peers.update(
-      '01a7362d577a6c3019a474fd6f485823',
-      '23ff594956f20c2a721606e94745a8aa',
-      {
-        name: 'my-peer-1',
-        ip: '192.0.2.53',
-        ixfr_enable: false,
-        port: 53,
-        tsig_id: '69cd1e104af3e6ed3cb344f263fd0d5a',
-      },
-    );
+    const response = await cloudflare.secondaryDNS.peers.update('23ff594956f20c2a721606e94745a8aa', {
+      account_id: '01a7362d577a6c3019a474fd6f485823',
+      name: 'my-peer-1',
+      ip: '192.0.2.53',
+      ixfr_enable: false,
+      port: 53,
+      tsig_id: '69cd1e104af3e6ed3cb344f263fd0d5a',
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
-    const responsePromise = cloudflare.secondaryDNS.peers.list('01a7362d577a6c3019a474fd6f485823');
+  test.skip('list: only required params', async () => {
+    const responsePromise = cloudflare.secondaryDNS.peers.list({
+      account_id: '01a7362d577a6c3019a474fd6f485823',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -74,21 +78,17 @@ describe('resource peers', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.secondaryDNS.peers.list('01a7362d577a6c3019a474fd6f485823', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('list: required and optional params', async () => {
+    const response = await cloudflare.secondaryDNS.peers.list({
+      account_id: '01a7362d577a6c3019a474fd6f485823',
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
-    const responsePromise = cloudflare.secondaryDNS.peers.delete(
-      '01a7362d577a6c3019a474fd6f485823',
-      '23ff594956f20c2a721606e94745a8aa',
-    );
+  test.skip('delete: only required params', async () => {
+    const responsePromise = cloudflare.secondaryDNS.peers.delete('23ff594956f20c2a721606e94745a8aa', {
+      account_id: '01a7362d577a6c3019a474fd6f485823',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -99,11 +99,17 @@ describe('resource peers', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
-    const responsePromise = cloudflare.secondaryDNS.peers.get(
-      '01a7362d577a6c3019a474fd6f485823',
-      '23ff594956f20c2a721606e94745a8aa',
-    );
+  test.skip('delete: required and optional params', async () => {
+    const response = await cloudflare.secondaryDNS.peers.delete('23ff594956f20c2a721606e94745a8aa', {
+      account_id: '01a7362d577a6c3019a474fd6f485823',
+    });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get: only required params', async () => {
+    const responsePromise = cloudflare.secondaryDNS.peers.get('23ff594956f20c2a721606e94745a8aa', {
+      account_id: '01a7362d577a6c3019a474fd6f485823',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -114,14 +120,9 @@ describe('resource peers', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.secondaryDNS.peers.get(
-        '01a7362d577a6c3019a474fd6f485823',
-        '23ff594956f20c2a721606e94745a8aa',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.secondaryDNS.peers.get('23ff594956f20c2a721606e94745a8aa', {
+      account_id: '01a7362d577a6c3019a474fd6f485823',
+    });
   });
 });

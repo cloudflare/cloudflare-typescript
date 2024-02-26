@@ -11,12 +11,12 @@ export class IPGeolocation extends APIResource {
    * (https://support.cloudflare.com/hc/en-us/articles/200168236).
    */
   edit(
-    zoneId: string,
-    body: IPGeolocationEditParams,
+    params: IPGeolocationEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IPGeolocationEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/settings/ip_geolocation`, {
+      this._client.patch(`/zones/${zone_id}/settings/ip_geolocation`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: IPGeolocationEditResponse }>
@@ -28,9 +28,13 @@ export class IPGeolocation extends APIResource {
    * pass the country code to you.
    * (https://support.cloudflare.com/hc/en-us/articles/200168236).
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<IPGeolocationGetResponse> {
+  get(
+    params: IPGeolocationGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IPGeolocationGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/settings/ip_geolocation`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/settings/ip_geolocation`, options) as Core.APIPromise<{
         result: IPGeolocationGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -95,13 +99,26 @@ export interface IPGeolocationGetResponse {
 
 export interface IPGeolocationEditParams {
   /**
-   * Value of the zone setting.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Value of the zone setting.
    */
   value: 'on' | 'off';
+}
+
+export interface IPGeolocationGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }
 
 export namespace IPGeolocation {
   export import IPGeolocationEditResponse = IPGeolocationAPI.IPGeolocationEditResponse;
   export import IPGeolocationGetResponse = IPGeolocationAPI.IPGeolocationGetResponse;
   export import IPGeolocationEditParams = IPGeolocationAPI.IPGeolocationEditParams;
+  export import IPGeolocationGetParams = IPGeolocationAPI.IPGeolocationGetParams;
 }

@@ -14,8 +14,10 @@ const cloudflare = new Cloudflare({
 
 describe('resource speed', () => {
   // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
-    const responsePromise = cloudflare.speed.delete('023e105f4ecef8ad9ca31a8372d0c353', 'example.com');
+  test.skip('delete: only required params', async () => {
+    const responsePromise = cloudflare.speed.delete('example.com', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -26,31 +28,18 @@ describe('resource speed', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.speed.delete('023e105f4ecef8ad9ca31a8372d0c353', 'example.com', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('delete: required and optional params', async () => {
+    const response = await cloudflare.speed.delete('example.com', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      region: 'us-central1',
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.speed.delete(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        'example.com',
-        { region: 'us-central1' },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('scheduleGet', async () => {
-    const responsePromise = cloudflare.speed.scheduleGet('023e105f4ecef8ad9ca31a8372d0c353', 'example.com');
+  test.skip('scheduleGet: only required params', async () => {
+    const responsePromise = cloudflare.speed.scheduleGet('example.com', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -61,31 +50,17 @@ describe('resource speed', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('scheduleGet: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.speed.scheduleGet('023e105f4ecef8ad9ca31a8372d0c353', 'example.com', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('scheduleGet: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.speed.scheduleGet(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        'example.com',
-        { region: 'us-central1' },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('scheduleGet: required and optional params', async () => {
+    const response = await cloudflare.speed.scheduleGet('example.com', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      region: 'us-central1',
+    });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('trendsList: only required params', async () => {
-    const responsePromise = cloudflare.speed.trendsList('023e105f4ecef8ad9ca31a8372d0c353', 'example.com', {
+    const responsePromise = cloudflare.speed.trendsList('example.com', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       deviceType: 'DESKTOP',
       metrics: 'performanceScore,ttfb,fcp,si,lcp,tti,tbt,cls',
       region: 'us-central1',
@@ -102,7 +77,8 @@ describe('resource speed', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('trendsList: required and optional params', async () => {
-    const response = await cloudflare.speed.trendsList('023e105f4ecef8ad9ca31a8372d0c353', 'example.com', {
+    const response = await cloudflare.speed.trendsList('example.com', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       deviceType: 'DESKTOP',
       metrics: 'performanceScore,ttfb,fcp,si,lcp,tti,tbt,cls',
       region: 'us-central1',

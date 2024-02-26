@@ -2,31 +2,16 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as IPsAPI from 'cloudflare/resources/teamnets/routes/ips';
 
 export class IPs extends APIResource {
   /**
    * Fetches routes that contain the given IP address.
    */
-  get(
-    accountId: string,
-    ip: string,
-    query?: IPGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<IPGetResponse>;
-  get(accountId: string, ip: string, options?: Core.RequestOptions): Core.APIPromise<IPGetResponse>;
-  get(
-    accountId: string,
-    ip: string,
-    query: IPGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<IPGetResponse> {
-    if (isRequestOptions(query)) {
-      return this.get(accountId, ip, {}, query);
-    }
+  get(ip: string, params: IPGetParams, options?: Core.RequestOptions): Core.APIPromise<IPGetResponse> {
+    const { account_id, ...query } = params;
     return (
-      this._client.get(`/accounts/${accountId}/teamnet/routes/ip/${ip}`, {
+      this._client.get(`/accounts/${account_id}/teamnet/routes/ip/${ip}`, {
         query,
         ...options,
       }) as Core.APIPromise<{ result: IPGetResponse }>
@@ -91,9 +76,14 @@ export interface IPGetResponse {
 
 export interface IPGetParams {
   /**
-   * UUID of the Tunnel Virtual Network this route belongs to. If no virtual networks
-   * are configured, the route is assigned to the default virtual network of the
-   * account.
+   * Path param: Cloudflare account ID
+   */
+  account_id: string;
+
+  /**
+   * Query param: UUID of the Tunnel Virtual Network this route belongs to. If no
+   * virtual networks are configured, the route is assigned to the default virtual
+   * network of the account.
    */
   virtual_network_id?: unknown;
 }

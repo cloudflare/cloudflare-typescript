@@ -10,12 +10,12 @@ export class EmailObfuscation extends APIResource {
    * humans. (https://support.cloudflare.com/hc/en-us/articles/200170016).
    */
   edit(
-    zoneId: string,
-    body: EmailObfuscationEditParams,
+    params: EmailObfuscationEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<EmailObfuscationEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/settings/email_obfuscation`, {
+      this._client.patch(`/zones/${zone_id}/settings/email_obfuscation`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: EmailObfuscationEditResponse }>
@@ -26,9 +26,13 @@ export class EmailObfuscation extends APIResource {
    * Encrypt email adresses on your web page from bots, while keeping them visible to
    * humans. (https://support.cloudflare.com/hc/en-us/articles/200170016).
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<EmailObfuscationGetResponse> {
+  get(
+    params: EmailObfuscationGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<EmailObfuscationGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/settings/email_obfuscation`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/settings/email_obfuscation`, options) as Core.APIPromise<{
         result: EmailObfuscationGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -91,13 +95,26 @@ export interface EmailObfuscationGetResponse {
 
 export interface EmailObfuscationEditParams {
   /**
-   * Value of the zone setting.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Value of the zone setting.
    */
   value: 'on' | 'off';
+}
+
+export interface EmailObfuscationGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }
 
 export namespace EmailObfuscation {
   export import EmailObfuscationEditResponse = EmailObfuscationAPI.EmailObfuscationEditResponse;
   export import EmailObfuscationGetResponse = EmailObfuscationAPI.EmailObfuscationGetResponse;
   export import EmailObfuscationEditParams = EmailObfuscationAPI.EmailObfuscationEditParams;
+  export import EmailObfuscationGetParams = EmailObfuscationAPI.EmailObfuscationGetParams;
 }

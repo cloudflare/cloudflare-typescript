@@ -14,8 +14,10 @@ const cloudflare = new Cloudflare({
 
 describe('resource submits', () => {
   // skipped: tests are disabled for the time being
-  test.skip('create', async () => {
-    const responsePromise = cloudflare.brandProtection.submits.create('023e105f4ecef8ad9ca31a8372d0c353', {});
+  test.skip('create: only required params', async () => {
+    const responsePromise = cloudflare.brandProtection.submits.create({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,5 +25,13 @@ describe('resource submits', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('create: required and optional params', async () => {
+    const response = await cloudflare.brandProtection.submits.create({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      url: 'https://www.cloudflare.com',
+    });
   });
 });

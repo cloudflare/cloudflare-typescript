@@ -16,5 +16,9 @@ export namespace Pages {
   export import ProjectGetResponse = ProjectsAPI.ProjectGetResponse;
   export import ProjectPurgeBuildCacheResponse = ProjectsAPI.ProjectPurgeBuildCacheResponse;
   export import ProjectCreateParams = ProjectsAPI.ProjectCreateParams;
+  export import ProjectListParams = ProjectsAPI.ProjectListParams;
+  export import ProjectDeleteParams = ProjectsAPI.ProjectDeleteParams;
   export import ProjectEditParams = ProjectsAPI.ProjectEditParams;
+  export import ProjectGetParams = ProjectsAPI.ProjectGetParams;
+  export import ProjectPurgeBuildCacheParams = ProjectsAPI.ProjectPurgeBuildCacheParams;
 }

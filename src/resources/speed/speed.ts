@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as SpeedAPI from 'cloudflare/resources/speed/speed';
 import * as AvailabilitiesAPI from 'cloudflare/resources/speed/availabilities';
 import * as PagesAPI from 'cloudflare/resources/speed/pages';
@@ -19,24 +18,13 @@ export class Speed extends APIResource {
    * Deletes a scheduled test for a page.
    */
   delete(
-    zoneId: string,
     url: string,
-    params?: SpeedDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SpeedDeleteResponse>;
-  delete(zoneId: string, url: string, options?: Core.RequestOptions): Core.APIPromise<SpeedDeleteResponse>;
-  delete(
-    zoneId: string,
-    url: string,
-    params: SpeedDeleteParams | Core.RequestOptions = {},
+    params: SpeedDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SpeedDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(zoneId, url, {}, params);
-    }
-    const { region } = params;
+    const { zone_id, region } = params;
     return (
-      this._client.delete(`/zones/${zoneId}/speed_api/schedule/${url}`, {
+      this._client.delete(`/zones/${zone_id}/speed_api/schedule/${url}`, {
         query: { region },
         ...options,
       }) as Core.APIPromise<{ result: SpeedDeleteResponse }>
@@ -47,27 +35,13 @@ export class Speed extends APIResource {
    * Retrieves the test schedule for a page in a specific region.
    */
   scheduleGet(
-    zoneId: string,
     url: string,
-    query?: SpeedScheduleGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SpeedScheduleGetResponse>;
-  scheduleGet(
-    zoneId: string,
-    url: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SpeedScheduleGetResponse>;
-  scheduleGet(
-    zoneId: string,
-    url: string,
-    query: SpeedScheduleGetParams | Core.RequestOptions = {},
+    params: SpeedScheduleGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SpeedScheduleGetResponse> {
-    if (isRequestOptions(query)) {
-      return this.scheduleGet(zoneId, url, {}, query);
-    }
+    const { zone_id, ...query } = params;
     return (
-      this._client.get(`/zones/${zoneId}/speed_api/schedule/${url}`, {
+      this._client.get(`/zones/${zone_id}/speed_api/schedule/${url}`, {
         query,
         ...options,
       }) as Core.APIPromise<{ result: SpeedScheduleGetResponse }>
@@ -78,13 +52,13 @@ export class Speed extends APIResource {
    * Lists the core web vital metrics trend over time for a specific page.
    */
   trendsList(
-    zoneId: string,
     url: string,
-    query: SpeedTrendsListParams,
+    params: SpeedTrendsListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SpeedTrendsListResponse> {
+    const { zone_id, ...query } = params;
     return (
-      this._client.get(`/zones/${zoneId}/speed_api/pages/${url}/trend`, {
+      this._client.get(`/zones/${zone_id}/speed_api/pages/${url}/trend`, {
         query,
         ...options,
       }) as Core.APIPromise<{ result: SpeedTrendsListResponse }>
@@ -184,7 +158,12 @@ export interface SpeedTrendsListResponse {
 
 export interface SpeedDeleteParams {
   /**
-   * A test region.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Query param: A test region.
    */
   region?:
     | 'asia-east1'
@@ -212,7 +191,12 @@ export interface SpeedDeleteParams {
 
 export interface SpeedScheduleGetParams {
   /**
-   * A test region.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Query param: A test region.
    */
   region?:
     | 'asia-east1'
@@ -240,17 +224,22 @@ export interface SpeedScheduleGetParams {
 
 export interface SpeedTrendsListParams {
   /**
-   * The type of device.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Query param: The type of device.
    */
   deviceType: 'DESKTOP' | 'MOBILE';
 
   /**
-   * A comma-separated list of metrics to include in the results.
+   * Query param: A comma-separated list of metrics to include in the results.
    */
   metrics: string;
 
   /**
-   * A test region.
+   * Query param: A test region.
    */
   region:
     | 'asia-east1'
@@ -276,7 +265,7 @@ export interface SpeedTrendsListParams {
     | 'us-west1';
 
   /**
-   * The timezone of the start and end timestamps.
+   * Query param: The timezone of the start and end timestamps.
    */
   tz: string;
 }
@@ -296,11 +285,14 @@ export namespace Speed {
   export import TestCreateParams = TestsAPI.TestCreateParams;
   export import TestListParams = TestsAPI.TestListParams;
   export import TestDeleteParams = TestsAPI.TestDeleteParams;
+  export import TestGetParams = TestsAPI.TestGetParams;
   export import Schedule = ScheduleAPI.Schedule;
   export import ScheduleCreateResponse = ScheduleAPI.ScheduleCreateResponse;
   export import ScheduleCreateParams = ScheduleAPI.ScheduleCreateParams;
   export import Availabilities = AvailabilitiesAPI.Availabilities;
   export import AvailabilityListResponse = AvailabilitiesAPI.AvailabilityListResponse;
+  export import AvailabilityListParams = AvailabilitiesAPI.AvailabilityListParams;
   export import Pages = PagesAPI.Pages;
   export import PageListResponse = PagesAPI.PageListResponse;
+  export import PageListParams = PagesAPI.PageListParams;
 }

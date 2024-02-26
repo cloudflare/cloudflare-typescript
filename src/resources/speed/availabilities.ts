@@ -8,9 +8,13 @@ export class Availabilities extends APIResource {
   /**
    * Retrieves quota for all plans, as well as the current zone quota.
    */
-  list(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<AvailabilityListResponse> {
+  list(
+    params: AvailabilityListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AvailabilityListResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/speed_api/availabilities`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/speed_api/availabilities`, options) as Core.APIPromise<{
         result: AvailabilityListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -87,6 +91,14 @@ export namespace AvailabilityListResponse {
   }
 }
 
+export interface AvailabilityListParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
 export namespace Availabilities {
   export import AvailabilityListResponse = AvailabilitiesAPI.AvailabilityListResponse;
+  export import AvailabilityListParams = AvailabilitiesAPI.AvailabilityListParams;
 }

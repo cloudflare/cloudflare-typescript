@@ -8,13 +8,10 @@ export class Clips extends APIResource {
   /**
    * Clips a video based on the specified start and end times provided in seconds.
    */
-  create(
-    accountId: string,
-    body: ClipCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ClipCreateResponse> {
+  create(params: ClipCreateParams, options?: Core.RequestOptions): Core.APIPromise<ClipCreateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/stream/clip`, { body, ...options }) as Core.APIPromise<{
+      this._client.post(`/accounts/${account_id}/stream/clip`, { body, ...options }) as Core.APIPromise<{
         result: ClipCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -125,54 +122,64 @@ export namespace ClipCreateResponse {
 
 export interface ClipCreateParams {
   /**
-   * The unique video identifier (UID).
+   * Path param: The account identifier tag.
+   */
+  account_id: string;
+
+  /**
+   * Body param: The unique video identifier (UID).
    */
   clippedFromVideoUID: string;
 
   /**
-   * Specifies the end time for the video clip in seconds.
+   * Body param: Specifies the end time for the video clip in seconds.
    */
   endTimeSeconds: number;
 
   /**
-   * Specifies the start time for the video clip in seconds.
+   * Body param: Specifies the start time for the video clip in seconds.
    */
   startTimeSeconds: number;
 
   /**
-   * Lists the origins allowed to display the video. Enter allowed origin domains in
-   * an array and use `*` for wildcard subdomains. Empty arrays allow the video to be
-   * viewed on any origin.
+   * Body param: Lists the origins allowed to display the video. Enter allowed origin
+   * domains in an array and use `*` for wildcard subdomains. Empty arrays allow the
+   * video to be viewed on any origin.
    */
   allowedOrigins?: Array<string>;
 
   /**
-   * A user-defined identifier for the media creator.
+   * Body param: A user-defined identifier for the media creator.
    */
   creator?: string;
 
   /**
-   * The maximum duration in seconds for a video upload. Can be set for a video that
-   * is not yet uploaded to limit its duration. Uploads that exceed the specified
-   * duration will fail during processing. A value of `-1` means the value is
-   * unknown.
+   * Body param: The maximum duration in seconds for a video upload. Can be set for a
+   * video that is not yet uploaded to limit its duration. Uploads that exceed the
+   * specified duration will fail during processing. A value of `-1` means the value
+   * is unknown.
    */
   maxDurationSeconds?: number;
 
   /**
-   * Indicates whether the video can be a accessed using the UID. When set to `true`,
-   * a signed token must be generated with a signing key to view the video.
+   * Body param: Indicates whether the video can be a accessed using the UID. When
+   * set to `true`, a signed token must be generated with a signing key to view the
+   * video.
    */
   requireSignedURLs?: boolean;
 
   /**
-   * The timestamp for a thumbnail image calculated as a percentage value of the
-   * video's duration. To convert from a second-wise timestamp to a percentage,
-   * divide the desired timestamp by the total duration of the video. If this value
-   * is not set, the default thumbnail image is taken from 0s of the video.
+   * Body param: The timestamp for a thumbnail image calculated as a percentage value
+   * of the video's duration. To convert from a second-wise timestamp to a
+   * percentage, divide the desired timestamp by the total duration of the video. If
+   * this value is not set, the default thumbnail image is taken from 0s of the
+   * video.
    */
   thumbnailTimestampPct?: number;
 
+  /**
+   * Body param:
+   */
   watermark?: ClipCreateParams.Watermark;
 }
 

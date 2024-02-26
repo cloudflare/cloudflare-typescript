@@ -9,13 +9,13 @@ export class Rules extends APIResource {
    * Creates a new rule in a Web Analytics ruleset.
    */
   create(
-    accountId: string,
     rulesetId: string,
-    body: RuleCreateParams,
+    params: RuleCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RuleCreateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/rum/v2/${rulesetId}/rule`, {
+      this._client.post(`/accounts/${account_id}/rum/v2/${rulesetId}/rule`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: RuleCreateResponse }>
@@ -26,14 +26,14 @@ export class Rules extends APIResource {
    * Updates a rule in a Web Analytics ruleset.
    */
   update(
-    accountId: string,
     rulesetId: string,
     ruleId: string,
-    body: RuleUpdateParams,
+    params: RuleUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RuleUpdateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.put(`/accounts/${accountId}/rum/v2/${rulesetId}/rule/${ruleId}`, {
+      this._client.put(`/accounts/${account_id}/rum/v2/${rulesetId}/rule/${ruleId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: RuleUpdateResponse }>
@@ -44,12 +44,13 @@ export class Rules extends APIResource {
    * Lists all the rules in a Web Analytics ruleset.
    */
   list(
-    accountId: string,
     rulesetId: string,
+    params: RuleListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RuleListResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/rum/v2/${rulesetId}/rules`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/rum/v2/${rulesetId}/rules`, options) as Core.APIPromise<{
         result: RuleListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -59,14 +60,15 @@ export class Rules extends APIResource {
    * Deletes an existing rule from a Web Analytics ruleset.
    */
   delete(
-    accountId: string,
     rulesetId: string,
     ruleId: string,
+    params: RuleDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RuleDeleteResponse> {
+    const { account_id } = params;
     return (
       this._client.delete(
-        `/accounts/${accountId}/rum/v2/${rulesetId}/rule/${ruleId}`,
+        `/accounts/${account_id}/rum/v2/${rulesetId}/rule/${ruleId}`,
         options,
       ) as Core.APIPromise<{ result: RuleDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -204,35 +206,71 @@ export interface RuleDeleteResponse {
 }
 
 export interface RuleCreateParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
   host?: string;
 
   /**
-   * Whether the rule includes or excludes traffic from being measured.
+   * Body param: Whether the rule includes or excludes traffic from being measured.
    */
   inclusive?: boolean;
 
   /**
-   * Whether the rule is paused or not.
+   * Body param: Whether the rule is paused or not.
    */
   is_paused?: boolean;
 
+  /**
+   * Body param:
+   */
   paths?: Array<string>;
 }
 
 export interface RuleUpdateParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
   host?: string;
 
   /**
-   * Whether the rule includes or excludes traffic from being measured.
+   * Body param: Whether the rule includes or excludes traffic from being measured.
    */
   inclusive?: boolean;
 
   /**
-   * Whether the rule is paused or not.
+   * Body param: Whether the rule is paused or not.
    */
   is_paused?: boolean;
 
+  /**
+   * Body param:
+   */
   paths?: Array<string>;
+}
+
+export interface RuleListParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface RuleDeleteParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
 }
 
 export namespace Rules {
@@ -242,4 +280,6 @@ export namespace Rules {
   export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
   export import RuleCreateParams = RulesAPI.RuleCreateParams;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
+  export import RuleListParams = RulesAPI.RuleListParams;
+  export import RuleDeleteParams = RulesAPI.RuleDeleteParams;
 }

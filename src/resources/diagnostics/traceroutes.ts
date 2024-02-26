@@ -9,12 +9,12 @@ export class Traceroutes extends APIResource {
    * Run traceroutes from Cloudflare colos.
    */
   create(
-    accountId: string,
-    body: TracerouteCreateParams,
+    params: TracerouteCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TracerouteCreateResponse | null> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/diagnostics/traceroute`, {
+      this._client.post(`/accounts/${account_id}/diagnostics/traceroute`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: TracerouteCreateResponse | null }>
@@ -151,14 +151,25 @@ export namespace TracerouteCreateResponse {
 }
 
 export interface TracerouteCreateParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
   targets: Array<string>;
 
   /**
-   * If no source colo names specified, all colos will be used. China colos are
-   * unavailable for traceroutes.
+   * Body param: If no source colo names specified, all colos will be used. China
+   * colos are unavailable for traceroutes.
    */
   colos?: Array<string>;
 
+  /**
+   * Body param:
+   */
   options?: TracerouteCreateParams.Options;
 }
 

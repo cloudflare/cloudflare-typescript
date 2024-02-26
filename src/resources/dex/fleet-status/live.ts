@@ -8,13 +8,10 @@ export class Live extends APIResource {
   /**
    * List details for live (up to 60 minutes) devices using WARP
    */
-  list(
-    accountId: string,
-    query: LiveListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<LiveListResponse> {
+  list(params: LiveListParams, options?: Core.RequestOptions): Core.APIPromise<LiveListResponse> {
+    const { account_id, ...query } = params;
     return (
-      this._client.get(`/accounts/${accountId}/dex/fleet-status/live`, {
+      this._client.get(`/accounts/${account_id}/dex/fleet-status/live`, {
         query,
         ...options,
       }) as Core.APIPromise<{ result: LiveListResponse }>
@@ -94,7 +91,12 @@ export namespace LiveListResponse {
 
 export interface LiveListParams {
   /**
-   * Number of minutes before current time
+   * Path param:
+   */
+  account_id: string;
+
+  /**
+   * Query param: Number of minutes before current time
    */
   since_minutes: number;
 }

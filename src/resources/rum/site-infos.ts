@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as SiteInfosAPI from 'cloudflare/resources/rum/site-infos';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
@@ -11,12 +10,12 @@ export class SiteInfos extends APIResource {
    * Creates a new Web Analytics site.
    */
   create(
-    accountId: string,
-    body: SiteInfoCreateParams,
+    params: SiteInfoCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SiteInfoCreateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/rum/site_info`, { body, ...options }) as Core.APIPromise<{
+      this._client.post(`/accounts/${account_id}/rum/site_info`, { body, ...options }) as Core.APIPromise<{
         result: SiteInfoCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -26,13 +25,13 @@ export class SiteInfos extends APIResource {
    * Updates an existing Web Analytics site.
    */
   update(
-    accountId: string,
     siteId: string,
-    body: SiteInfoUpdateParams,
+    params: SiteInfoUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SiteInfoUpdateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.put(`/accounts/${accountId}/rum/site_info/${siteId}`, {
+      this._client.put(`/accounts/${account_id}/rum/site_info/${siteId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: SiteInfoUpdateResponse }>
@@ -43,24 +42,12 @@ export class SiteInfos extends APIResource {
    * Lists all Web Analytics sites of an account.
    */
   list(
-    accountId: string,
-    query?: SiteInfoListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<SiteInfoListResponsesV4PagePaginationArray, SiteInfoListResponse>;
-  list(
-    accountId: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<SiteInfoListResponsesV4PagePaginationArray, SiteInfoListResponse>;
-  list(
-    accountId: string,
-    query: SiteInfoListParams | Core.RequestOptions = {},
+    params: SiteInfoListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<SiteInfoListResponsesV4PagePaginationArray, SiteInfoListResponse> {
-    if (isRequestOptions(query)) {
-      return this.list(accountId, {}, query);
-    }
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
-      `/accounts/${accountId}/rum/site_info/list`,
+      `/accounts/${account_id}/rum/site_info/list`,
       SiteInfoListResponsesV4PagePaginationArray,
       { query, ...options },
     );
@@ -70,12 +57,13 @@ export class SiteInfos extends APIResource {
    * Deletes an existing Web Analytics site.
    */
   delete(
-    accountId: string,
     siteId: string,
+    params: SiteInfoDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SiteInfoDeleteResponse> {
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${accountId}/rum/site_info/${siteId}`, options) as Core.APIPromise<{
+      this._client.delete(`/accounts/${account_id}/rum/site_info/${siteId}`, options) as Core.APIPromise<{
         result: SiteInfoDeleteResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -85,12 +73,13 @@ export class SiteInfos extends APIResource {
    * Retrieves a Web Analytics site.
    */
   get(
-    accountId: string,
     siteId: string,
+    params: SiteInfoGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SiteInfoGetResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/rum/site_info/${siteId}`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/rum/site_info/${siteId}`, options) as Core.APIPromise<{
         result: SiteInfoGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -444,45 +433,74 @@ export namespace SiteInfoGetResponse {
 
 export interface SiteInfoCreateParams {
   /**
-   * If enabled, the JavaScript snippet is automatically injected for orange-clouded
-   * sites.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: If enabled, the JavaScript snippet is automatically injected for
+   * orange-clouded sites.
    */
   auto_install?: boolean;
 
   /**
-   * The hostname to use for gray-clouded sites.
+   * Body param: The hostname to use for gray-clouded sites.
    */
   host?: string;
 
   /**
-   * The zone identifier.
+   * Body param: The zone identifier.
    */
   zone_tag?: string;
 }
 
 export interface SiteInfoUpdateParams {
   /**
-   * If enabled, the JavaScript snippet is automatically injected for orange-clouded
-   * sites.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: If enabled, the JavaScript snippet is automatically injected for
+   * orange-clouded sites.
    */
   auto_install?: boolean;
 
   /**
-   * The hostname to use for gray-clouded sites.
+   * Body param: The hostname to use for gray-clouded sites.
    */
   host?: string;
 
   /**
-   * The zone identifier.
+   * Body param: The zone identifier.
    */
   zone_tag?: string;
 }
 
 export interface SiteInfoListParams extends V4PagePaginationArrayParams {
   /**
-   * The property used to sort the list of results.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Query param: The property used to sort the list of results.
    */
   order_by?: 'host' | 'created';
+}
+
+export interface SiteInfoDeleteParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface SiteInfoGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
 }
 
 export namespace SiteInfos {
@@ -495,4 +513,6 @@ export namespace SiteInfos {
   export import SiteInfoCreateParams = SiteInfosAPI.SiteInfoCreateParams;
   export import SiteInfoUpdateParams = SiteInfosAPI.SiteInfoUpdateParams;
   export import SiteInfoListParams = SiteInfosAPI.SiteInfoListParams;
+  export import SiteInfoDeleteParams = SiteInfosAPI.SiteInfoDeleteParams;
+  export import SiteInfoGetParams = SiteInfosAPI.SiteInfoGetParams;
 }

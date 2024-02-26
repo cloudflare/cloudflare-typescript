@@ -8,9 +8,10 @@ export class Keys extends APIResource {
   /**
    * Lists your signing keys. These can be found on your Cloudflare Images dashboard.
    */
-  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<KeyListResponse> {
+  list(params: KeyListParams, options?: Core.RequestOptions): Core.APIPromise<KeyListResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/images/v1/keys`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/images/v1/keys`, options) as Core.APIPromise<{
         result: KeyListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -35,6 +36,14 @@ export namespace KeyListResponse {
   }
 }
 
+export interface KeyListParams {
+  /**
+   * Account identifier tag.
+   */
+  account_id: string;
+}
+
 export namespace Keys {
   export import KeyListResponse = KeysAPI.KeyListResponse;
+  export import KeyListParams = KeysAPI.KeyListParams;
 }

@@ -14,11 +14,10 @@ const cloudflare = new Cloudflare({
 
 describe('resource workerDomains', () => {
   // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
-    const responsePromise = cloudflare.workerDomains.delete(
-      '9a7806061c88ada191ed06f989cc3dac',
-      'dbe10b4bc17c295377eabd600e1787fd',
-    );
+  test.skip('delete: only required params', async () => {
+    const responsePromise = cloudflare.workerDomains.delete('dbe10b4bc17c295377eabd600e1787fd', {
+      account_id: '9a7806061c88ada191ed06f989cc3dac',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -29,11 +28,17 @@ describe('resource workerDomains', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
-    const responsePromise = cloudflare.workerDomains.get(
-      '9a7806061c88ada191ed06f989cc3dac',
-      'dbe10b4bc17c295377eabd600e1787fd',
-    );
+  test.skip('delete: required and optional params', async () => {
+    const response = await cloudflare.workerDomains.delete('dbe10b4bc17c295377eabd600e1787fd', {
+      account_id: '9a7806061c88ada191ed06f989cc3dac',
+    });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get: only required params', async () => {
+    const responsePromise = cloudflare.workerDomains.get('dbe10b4bc17c295377eabd600e1787fd', {
+      account_id: '9a7806061c88ada191ed06f989cc3dac',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -44,12 +49,9 @@ describe('resource workerDomains', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.workerDomains.get('9a7806061c88ada191ed06f989cc3dac', 'dbe10b4bc17c295377eabd600e1787fd', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.workerDomains.get('dbe10b4bc17c295377eabd600e1787fd', {
+      account_id: '9a7806061c88ada191ed06f989cc3dac',
+    });
   });
 });

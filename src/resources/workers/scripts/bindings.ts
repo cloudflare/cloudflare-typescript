@@ -8,9 +8,10 @@ export class Bindings extends APIResource {
   /**
    * List the bindings for a Workers script.
    */
-  list(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<BindingListResponse> {
+  list(params: BindingListParams, options?: Core.RequestOptions): Core.APIPromise<BindingListResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/workers/script/bindings`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/workers/script/bindings`, options) as Core.APIPromise<{
         result: BindingListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -52,6 +53,14 @@ export namespace BindingListResponse {
   }
 }
 
+export interface BindingListParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
 export namespace Bindings {
   export import BindingListResponse = BindingsAPI.BindingListResponse;
+  export import BindingListParams = BindingsAPI.BindingListParams;
 }

@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as DomainsAPI from 'cloudflare/resources/intel/domains/domains';
 import * as BulksAPI from 'cloudflare/resources/intel/domains/bulks';
 
@@ -12,22 +11,10 @@ export class Domains extends APIResource {
   /**
    * Get Domain Details
    */
-  get(
-    accountId: string,
-    query?: DomainGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DomainGetResponse>;
-  get(accountId: string, options?: Core.RequestOptions): Core.APIPromise<DomainGetResponse>;
-  get(
-    accountId: string,
-    query: DomainGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DomainGetResponse> {
-    if (isRequestOptions(query)) {
-      return this.get(accountId, {}, query);
-    }
+  get(params: DomainGetParams, options?: Core.RequestOptions): Core.APIPromise<DomainGetResponse> {
+    const { account_id, ...query } = params;
     return (
-      this._client.get(`/accounts/${accountId}/intel/domain`, { query, ...options }) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/intel/domain`, { query, ...options }) as Core.APIPromise<{
         result: DomainGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -134,6 +121,14 @@ export namespace DomainGetResponse {
 }
 
 export interface DomainGetParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Query param:
+   */
   domain?: string;
 }
 

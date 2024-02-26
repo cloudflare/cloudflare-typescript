@@ -14,11 +14,10 @@ const cloudflare = new Cloudflare({
 
 describe('resource deploymentsByScript', () => {
   // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
-    const responsePromise = cloudflare.workers.deploymentsByScript.list(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '8ee82b3a2c0f42928b8f14dae4a97121',
-    );
+  test.skip('list: only required params', async () => {
+    const responsePromise = cloudflare.workers.deploymentsByScript.list('8ee82b3a2c0f42928b8f14dae4a97121', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -29,23 +28,18 @@ describe('resource deploymentsByScript', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.workers.deploymentsByScript.list(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        '8ee82b3a2c0f42928b8f14dae4a97121',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('list: required and optional params', async () => {
+    const response = await cloudflare.workers.deploymentsByScript.list('8ee82b3a2c0f42928b8f14dae4a97121', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('detail', async () => {
+  test.skip('detail: only required params', async () => {
     const responsePromise = cloudflare.workers.deploymentsByScript.detail(
-      '023e105f4ecef8ad9ca31a8372d0c353',
       '8ee82b3a2c0f42928b8f14dae4a97121',
       'bcf48806-b317-4351-9ee7-36e7d557d4de',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -57,15 +51,11 @@ describe('resource deploymentsByScript', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('detail: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.workers.deploymentsByScript.detail(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        '8ee82b3a2c0f42928b8f14dae4a97121',
-        'bcf48806-b317-4351-9ee7-36e7d557d4de',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('detail: required and optional params', async () => {
+    const response = await cloudflare.workers.deploymentsByScript.detail(
+      '8ee82b3a2c0f42928b8f14dae4a97121',
+      'bcf48806-b317-4351-9ee7-36e7d557d4de',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
   });
 });

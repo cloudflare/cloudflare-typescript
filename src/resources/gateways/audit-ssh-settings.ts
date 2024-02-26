@@ -9,12 +9,12 @@ export class AuditSSHSettings extends APIResource {
    * Updates Zero Trust Audit SSH settings.
    */
   update(
-    accountId: unknown,
-    body: AuditSSHSettingUpdateParams,
+    params: AuditSSHSettingUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AuditSSHSettingUpdateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.put(`/accounts/${accountId}/gateway/audit_ssh_settings`, {
+      this._client.put(`/accounts/${account_id}/gateway/audit_ssh_settings`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: AuditSSHSettingUpdateResponse }>
@@ -24,9 +24,13 @@ export class AuditSSHSettings extends APIResource {
   /**
    * Get all Zero Trust Audit SSH settings for an account.
    */
-  get(accountId: unknown, options?: Core.RequestOptions): Core.APIPromise<AuditSSHSettingGetResponse> {
+  get(
+    params: AuditSSHSettingGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AuditSSHSettingGetResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/gateway/audit_ssh_settings`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/gateway/audit_ssh_settings`, options) as Core.APIPromise<{
         result: AuditSSHSettingGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -67,18 +71,28 @@ export interface AuditSSHSettingGetResponse {
 
 export interface AuditSSHSettingUpdateParams {
   /**
-   * SSH encryption public key
+   * Path param:
+   */
+  account_id: unknown;
+
+  /**
+   * Body param: SSH encryption public key
    */
   public_key: string;
 
   /**
-   * Seed ID
+   * Body param: Seed ID
    */
   seed_id?: string;
+}
+
+export interface AuditSSHSettingGetParams {
+  account_id: unknown;
 }
 
 export namespace AuditSSHSettings {
   export import AuditSSHSettingUpdateResponse = AuditSSHSettingsAPI.AuditSSHSettingUpdateResponse;
   export import AuditSSHSettingGetResponse = AuditSSHSettingsAPI.AuditSSHSettingGetResponse;
   export import AuditSSHSettingUpdateParams = AuditSSHSettingsAPI.AuditSSHSettingUpdateParams;
+  export import AuditSSHSettingGetParams = AuditSSHSettingsAPI.AuditSSHSettingGetParams;
 }

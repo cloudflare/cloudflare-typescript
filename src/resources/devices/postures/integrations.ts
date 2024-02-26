@@ -9,12 +9,12 @@ export class Integrations extends APIResource {
    * Create a new device posture integration.
    */
   create(
-    accountId: unknown,
-    body: IntegrationCreateParams,
+    params: IntegrationCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IntegrationCreateResponse | null> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/devices/posture/integration`, {
+      this._client.post(`/accounts/${account_id}/devices/posture/integration`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: IntegrationCreateResponse | null }>
@@ -24,9 +24,13 @@ export class Integrations extends APIResource {
   /**
    * Fetches the list of device posture integrations for an account.
    */
-  list(accountId: unknown, options?: Core.RequestOptions): Core.APIPromise<IntegrationListResponse | null> {
+  list(
+    params: IntegrationListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IntegrationListResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/devices/posture/integration`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/devices/posture/integration`, options) as Core.APIPromise<{
         result: IntegrationListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -36,13 +40,14 @@ export class Integrations extends APIResource {
    * Delete a configured device posture integration.
    */
   delete(
-    accountId: unknown,
     integrationId: string,
+    params: IntegrationDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IntegrationDeleteResponse | null> {
+    const { account_id } = params;
     return (
       this._client.delete(
-        `/accounts/${accountId}/devices/posture/integration/${integrationId}`,
+        `/accounts/${account_id}/devices/posture/integration/${integrationId}`,
         options,
       ) as Core.APIPromise<{ result: IntegrationDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -52,13 +57,13 @@ export class Integrations extends APIResource {
    * Updates a configured device posture integration.
    */
   edit(
-    accountId: unknown,
     integrationId: string,
-    body: IntegrationEditParams,
+    params: IntegrationEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IntegrationEditResponse | null> {
+    const { account_id, ...body } = params;
     return (
-      this._client.patch(`/accounts/${accountId}/devices/posture/integration/${integrationId}`, {
+      this._client.patch(`/accounts/${account_id}/devices/posture/integration/${integrationId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: IntegrationEditResponse | null }>
@@ -69,13 +74,14 @@ export class Integrations extends APIResource {
    * Fetches details for a single device posture integration.
    */
   get(
-    accountId: unknown,
     integrationId: string,
+    params: IntegrationGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IntegrationGetResponse | null> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountId}/devices/posture/integration/${integrationId}`,
+        `/accounts/${account_id}/devices/posture/integration/${integrationId}`,
         options,
       ) as Core.APIPromise<{ result: IntegrationGetResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -297,7 +303,13 @@ export namespace IntegrationGetResponse {
 
 export interface IntegrationCreateParams {
   /**
-   * The configuration object containing third-party integration information.
+   * Path param:
+   */
+  account_id: unknown;
+
+  /**
+   * Body param: The configuration object containing third-party integration
+   * information.
    */
   config:
     | IntegrationCreateParams.TeamsDevicesWorkspaceOneConfigRequest
@@ -309,18 +321,18 @@ export interface IntegrationCreateParams {
     | IntegrationCreateParams.TeamsDevicesSentineloneS2sConfigRequest;
 
   /**
-   * The interval between each posture check with the third-party API. Use `m` for
-   * minutes (e.g. `5m`) and `h` for hours (e.g. `12h`).
+   * Body param: The interval between each posture check with the third-party API.
+   * Use `m` for minutes (e.g. `5m`) and `h` for hours (e.g. `12h`).
    */
   interval: string;
 
   /**
-   * The name of the device posture integration.
+   * Body param: The name of the device posture integration.
    */
   name: string;
 
   /**
-   * The type of device posture integration.
+   * Body param: The type of device posture integration.
    */
   type: 'workspace_one' | 'crowdstrike_s2s' | 'uptycs' | 'intune' | 'kolide' | 'tanium' | 'sentinelone_s2s';
 }
@@ -458,9 +470,23 @@ export namespace IntegrationCreateParams {
   }
 }
 
+export interface IntegrationListParams {
+  account_id: unknown;
+}
+
+export interface IntegrationDeleteParams {
+  account_id: unknown;
+}
+
 export interface IntegrationEditParams {
   /**
-   * The configuration object containing third-party integration information.
+   * Path param:
+   */
+  account_id: unknown;
+
+  /**
+   * Body param: The configuration object containing third-party integration
+   * information.
    */
   config?:
     | IntegrationEditParams.TeamsDevicesWorkspaceOneConfigRequest
@@ -472,18 +498,18 @@ export interface IntegrationEditParams {
     | IntegrationEditParams.TeamsDevicesSentineloneS2sConfigRequest;
 
   /**
-   * The interval between each posture check with the third-party API. Use `m` for
-   * minutes (e.g. `5m`) and `h` for hours (e.g. `12h`).
+   * Body param: The interval between each posture check with the third-party API.
+   * Use `m` for minutes (e.g. `5m`) and `h` for hours (e.g. `12h`).
    */
   interval?: string;
 
   /**
-   * The name of the device posture integration.
+   * Body param: The name of the device posture integration.
    */
   name?: string;
 
   /**
-   * The type of device posture integration.
+   * Body param: The type of device posture integration.
    */
   type?: 'workspace_one' | 'crowdstrike_s2s' | 'uptycs' | 'intune' | 'kolide' | 'tanium' | 'sentinelone_s2s';
 }
@@ -621,6 +647,10 @@ export namespace IntegrationEditParams {
   }
 }
 
+export interface IntegrationGetParams {
+  account_id: unknown;
+}
+
 export namespace Integrations {
   export import IntegrationCreateResponse = IntegrationsAPI.IntegrationCreateResponse;
   export import IntegrationListResponse = IntegrationsAPI.IntegrationListResponse;
@@ -628,5 +658,8 @@ export namespace Integrations {
   export import IntegrationEditResponse = IntegrationsAPI.IntegrationEditResponse;
   export import IntegrationGetResponse = IntegrationsAPI.IntegrationGetResponse;
   export import IntegrationCreateParams = IntegrationsAPI.IntegrationCreateParams;
+  export import IntegrationListParams = IntegrationsAPI.IntegrationListParams;
+  export import IntegrationDeleteParams = IntegrationsAPI.IntegrationDeleteParams;
   export import IntegrationEditParams = IntegrationsAPI.IntegrationEditParams;
+  export import IntegrationGetParams = IntegrationsAPI.IntegrationGetParams;
 }

@@ -13,4 +13,5 @@ export namespace Dispatchers {
   export import ScriptGetResponse = ScriptsAPI.ScriptGetResponse;
   export import ScriptUpdateParams = ScriptsAPI.ScriptUpdateParams;
   export import ScriptDeleteParams = ScriptsAPI.ScriptDeleteParams;
+  export import ScriptGetParams = ScriptsAPI.ScriptGetParams;
 }

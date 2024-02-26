@@ -15,11 +15,10 @@ const cloudflare = new Cloudflare({
 describe('resource audioTracks', () => {
   // skipped: tests are disabled for the time being
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.stream.audioTracks.create(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'ea95132c15732412d22c1476fa83f27a',
-      { label: 'director commentary' },
-    );
+    const responsePromise = cloudflare.stream.audioTracks.create('ea95132c15732412d22c1476fa83f27a', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      label: 'director commentary',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -31,19 +30,18 @@ describe('resource audioTracks', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.stream.audioTracks.create(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'ea95132c15732412d22c1476fa83f27a',
-      { label: 'director commentary', url: 'https://www.examplestorage.com/audio_file.mp3' },
-    );
+    const response = await cloudflare.stream.audioTracks.create('ea95132c15732412d22c1476fa83f27a', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      label: 'director commentary',
+      url: 'https://www.examplestorage.com/audio_file.mp3',
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
-    const responsePromise = cloudflare.stream.audioTracks.list(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'ea95132c15732412d22c1476fa83f27a',
-    );
+  test.skip('list: only required params', async () => {
+    const responsePromise = cloudflare.stream.audioTracks.list('ea95132c15732412d22c1476fa83f27a', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -54,23 +52,18 @@ describe('resource audioTracks', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.stream.audioTracks.list(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        'ea95132c15732412d22c1476fa83f27a',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('list: required and optional params', async () => {
+    const response = await cloudflare.stream.audioTracks.list('ea95132c15732412d22c1476fa83f27a', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
+  test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.stream.audioTracks.delete(
-      '023e105f4ecef8ad9ca31a8372d0c353',
       'ea95132c15732412d22c1476fa83f27a',
       'ea95132c15732412d22c1476fa83f27a',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -82,25 +75,20 @@ describe('resource audioTracks', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.stream.audioTracks.delete(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        'ea95132c15732412d22c1476fa83f27a',
-        'ea95132c15732412d22c1476fa83f27a',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('delete: required and optional params', async () => {
+    const response = await cloudflare.stream.audioTracks.delete(
+      'ea95132c15732412d22c1476fa83f27a',
+      'ea95132c15732412d22c1476fa83f27a',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('edit', async () => {
+  test.skip('edit: only required params', async () => {
     const responsePromise = cloudflare.stream.audioTracks.edit(
-      '023e105f4ecef8ad9ca31a8372d0c353',
       'ea95132c15732412d22c1476fa83f27a',
       'ea95132c15732412d22c1476fa83f27a',
-      {},
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -109,5 +97,14 @@ describe('resource audioTracks', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('edit: required and optional params', async () => {
+    const response = await cloudflare.stream.audioTracks.edit(
+      'ea95132c15732412d22c1476fa83f27a',
+      'ea95132c15732412d22c1476fa83f27a',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', default: true, label: 'director commentary' },
+    );
   });
 });

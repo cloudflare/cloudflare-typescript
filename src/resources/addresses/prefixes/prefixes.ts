@@ -13,13 +13,10 @@ export class Prefixes extends APIResource {
   /**
    * Add a new prefix under the account.
    */
-  create(
-    accountId: string,
-    body: PrefixCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PrefixCreateResponse> {
+  create(params: PrefixCreateParams, options?: Core.RequestOptions): Core.APIPromise<PrefixCreateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/addressing/prefixes`, {
+      this._client.post(`/accounts/${account_id}/addressing/prefixes`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: PrefixCreateResponse }>
@@ -29,9 +26,10 @@ export class Prefixes extends APIResource {
   /**
    * List all prefixes owned by the account.
    */
-  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<PrefixListResponse | null> {
+  list(params: PrefixListParams, options?: Core.RequestOptions): Core.APIPromise<PrefixListResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/addressing/prefixes`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/addressing/prefixes`, options) as Core.APIPromise<{
         result: PrefixListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -41,13 +39,14 @@ export class Prefixes extends APIResource {
    * Delete an unapproved prefix owned by the account.
    */
   delete(
-    accountId: string,
     prefixId: string,
+    params: PrefixDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PrefixDeleteResponse | null> {
+    const { account_id } = params;
     return (
       this._client.delete(
-        `/accounts/${accountId}/addressing/prefixes/${prefixId}`,
+        `/accounts/${account_id}/addressing/prefixes/${prefixId}`,
         options,
       ) as Core.APIPromise<{ result: PrefixDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -57,13 +56,13 @@ export class Prefixes extends APIResource {
    * Modify the description for a prefix owned by the account.
    */
   edit(
-    accountId: string,
     prefixId: string,
-    body: PrefixEditParams,
+    params: PrefixEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PrefixEditResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.patch(`/accounts/${accountId}/addressing/prefixes/${prefixId}`, {
+      this._client.patch(`/accounts/${account_id}/addressing/prefixes/${prefixId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: PrefixEditResponse }>
@@ -74,14 +73,16 @@ export class Prefixes extends APIResource {
    * List a particular prefix owned by the account.
    */
   get(
-    accountId: string,
     prefixId: string,
+    params: PrefixGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PrefixGetResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/addressing/prefixes/${prefixId}`, options) as Core.APIPromise<{
-        result: PrefixGetResponse;
-      }>
+      this._client.get(
+        `/accounts/${account_id}/addressing/prefixes/${prefixId}`,
+        options,
+      ) as Core.APIPromise<{ result: PrefixGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -354,26 +355,57 @@ export interface PrefixGetResponse {
 
 export interface PrefixCreateParams {
   /**
-   * Autonomous System Number (ASN) the prefix will be advertised under.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: Autonomous System Number (ASN) the prefix will be advertised under.
    */
   asn: number | null;
 
   /**
-   * IP Prefix in Classless Inter-Domain Routing format.
+   * Body param: IP Prefix in Classless Inter-Domain Routing format.
    */
   cidr: string;
 
   /**
-   * Identifier for the uploaded LOA document.
+   * Body param: Identifier for the uploaded LOA document.
    */
   loa_document_id: string | null;
 }
 
+export interface PrefixListParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface PrefixDeleteParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export interface PrefixEditParams {
   /**
-   * Description of the prefix.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: Description of the prefix.
    */
   description: string;
+}
+
+export interface PrefixGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
 }
 
 export namespace Prefixes {
@@ -383,11 +415,16 @@ export namespace Prefixes {
   export import PrefixEditResponse = PrefixesAPI.PrefixEditResponse;
   export import PrefixGetResponse = PrefixesAPI.PrefixGetResponse;
   export import PrefixCreateParams = PrefixesAPI.PrefixCreateParams;
+  export import PrefixListParams = PrefixesAPI.PrefixListParams;
+  export import PrefixDeleteParams = PrefixesAPI.PrefixDeleteParams;
   export import PrefixEditParams = PrefixesAPI.PrefixEditParams;
+  export import PrefixGetParams = PrefixesAPI.PrefixGetParams;
   export import BGPs = BGPsAPI.BGPs;
   export import Delegations = DelegationsAPI.Delegations;
   export import DelegationCreateResponse = DelegationsAPI.DelegationCreateResponse;
   export import DelegationListResponse = DelegationsAPI.DelegationListResponse;
   export import DelegationDeleteResponse = DelegationsAPI.DelegationDeleteResponse;
   export import DelegationCreateParams = DelegationsAPI.DelegationCreateParams;
+  export import DelegationListParams = DelegationsAPI.DelegationListParams;
+  export import DelegationDeleteParams = DelegationsAPI.DelegationDeleteParams;
 }

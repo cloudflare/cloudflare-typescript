@@ -11,14 +11,15 @@ export class Metadata extends APIResource {
    * name.
    */
   get(
-    accountId: string,
     namespaceId: string,
     keyName: string,
+    params: MetadataGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MetadataGetResponse> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountId}/storage/kv/namespaces/${namespaceId}/metadata/${keyName}`,
+        `/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/metadata/${keyName}`,
         options,
       ) as Core.APIPromise<{ result: MetadataGetResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -30,6 +31,14 @@ export class Metadata extends APIResource {
  */
 export type MetadataGetResponse = unknown;
 
+export interface MetadataGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export namespace Metadata {
   export import MetadataGetResponse = MetadataAPI.MetadataGetResponse;
+  export import MetadataGetParams = MetadataAPI.MetadataGetParams;
 }

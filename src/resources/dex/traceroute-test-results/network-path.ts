@@ -10,13 +10,14 @@ export class NetworkPath extends APIResource {
    * run
    */
   list(
-    accountId: string,
     testResultId: string,
+    params: NetworkPathListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<NetworkPathListResponse> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountId}/dex/traceroute-test-results/${testResultId}/network-path`,
+        `/accounts/${account_id}/dex/traceroute-test-results/${testResultId}/network-path`,
         options,
       ) as Core.APIPromise<{ result: NetworkPathListResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -87,6 +88,14 @@ export namespace NetworkPathListResponse {
   }
 }
 
+export interface NetworkPathListParams {
+  /**
+   * unique identifier linked to an account
+   */
+  account_id: string;
+}
+
 export namespace NetworkPath {
   export import NetworkPathListResponse = NetworkPathAPI.NetworkPathListResponse;
+  export import NetworkPathListParams = NetworkPathAPI.NetworkPathListParams;
 }

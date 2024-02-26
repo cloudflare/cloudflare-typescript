@@ -7,6 +7,8 @@ export {
   BucketGetResponse,
   BucketCreateParams,
   BucketListParams,
+  BucketDeleteParams,
+  BucketGetParams,
   Buckets,
 } from './buckets';
 export { R2 } from './r2';
@@ -15,5 +17,7 @@ export {
   SippyDeleteResponse,
   SippyGetResponse,
   SippyUpdateParams,
+  SippyDeleteParams,
+  SippyGetParams,
   Sippy,
 } from './sippy';

@@ -12,9 +12,10 @@ export class Variants extends APIResource {
    * does not serve the variant requested, the response will not be cached. This will
    * be indicated with BYPASS cache status in the response headers.
    */
-  list(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<VariantListResponse> {
+  list(params: VariantListParams, options?: Core.RequestOptions): Core.APIPromise<VariantListResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/cache/variants`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/cache/variants`, options) as Core.APIPromise<{
         result: VariantListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -27,9 +28,10 @@ export class Variants extends APIResource {
    * does not serve the variant requested, the response will not be cached. This will
    * be indicated with BYPASS cache status in the response headers.
    */
-  delete(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<VariantDeleteResponse> {
+  delete(params: VariantDeleteParams, options?: Core.RequestOptions): Core.APIPromise<VariantDeleteResponse> {
+    const { zone_id } = params;
     return (
-      this._client.delete(`/zones/${zoneId}/cache/variants`, options) as Core.APIPromise<{
+      this._client.delete(`/zones/${zone_id}/cache/variants`, options) as Core.APIPromise<{
         result: VariantDeleteResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -42,13 +44,10 @@ export class Variants extends APIResource {
    * does not serve the variant requested, the response will not be cached. This will
    * be indicated with BYPASS cache status in the response headers.
    */
-  edit(
-    zoneId: string,
-    body: VariantEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<VariantEditResponse> {
+  edit(params: VariantEditParams, options?: Core.RequestOptions): Core.APIPromise<VariantEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/cache/variants`, { body, ...options }) as Core.APIPromise<{
+      this._client.patch(`/zones/${zone_id}/cache/variants`, { body, ...options }) as Core.APIPromise<{
         result: VariantEditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -268,9 +267,28 @@ export namespace VariantEditResponse {
   }
 }
 
+export interface VariantListParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+export interface VariantDeleteParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
 export interface VariantEditParams {
   /**
-   * Value of the zone setting.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Value of the zone setting.
    */
   value: VariantEditParams.Value;
 }
@@ -352,5 +370,7 @@ export namespace Variants {
   export import VariantListResponse = VariantsAPI.VariantListResponse;
   export import VariantDeleteResponse = VariantsAPI.VariantDeleteResponse;
   export import VariantEditResponse = VariantsAPI.VariantEditResponse;
+  export import VariantListParams = VariantsAPI.VariantListParams;
+  export import VariantDeleteParams = VariantsAPI.VariantDeleteParams;
   export import VariantEditParams = VariantsAPI.VariantEditParams;
 }

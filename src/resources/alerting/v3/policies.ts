@@ -8,13 +8,10 @@ export class Policies extends APIResource {
   /**
    * Creates a new Notification policy.
    */
-  create(
-    accountId: string,
-    body: PolicyCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PolicyCreateResponse> {
+  create(params: PolicyCreateParams, options?: Core.RequestOptions): Core.APIPromise<PolicyCreateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/alerting/v3/policies`, {
+      this._client.post(`/accounts/${account_id}/alerting/v3/policies`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: PolicyCreateResponse }>
@@ -25,13 +22,13 @@ export class Policies extends APIResource {
    * Update a Notification policy.
    */
   update(
-    accountId: string,
     policyId: string,
-    body: PolicyUpdateParams,
+    params: PolicyUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PolicyUpdateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.put(`/accounts/${accountId}/alerting/v3/policies/${policyId}`, {
+      this._client.put(`/accounts/${account_id}/alerting/v3/policies/${policyId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: PolicyUpdateResponse }>
@@ -41,9 +38,10 @@ export class Policies extends APIResource {
   /**
    * Get a list of all Notification policies.
    */
-  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<PolicyListResponse | null> {
+  list(params: PolicyListParams, options?: Core.RequestOptions): Core.APIPromise<PolicyListResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/alerting/v3/policies`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/alerting/v3/policies`, options) as Core.APIPromise<{
         result: PolicyListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -53,13 +51,14 @@ export class Policies extends APIResource {
    * Delete a Notification policy.
    */
   delete(
-    accountId: string,
     policyId: string,
+    params: PolicyDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PolicyDeleteResponse | null> {
+    const { account_id } = params;
     return (
       this._client.delete(
-        `/accounts/${accountId}/alerting/v3/policies/${policyId}`,
+        `/accounts/${account_id}/alerting/v3/policies/${policyId}`,
         options,
       ) as Core.APIPromise<{ result: PolicyDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -69,13 +68,14 @@ export class Policies extends APIResource {
    * Get details for a single policy.
    */
   get(
-    accountId: string,
     policyId: string,
+    params: PolicyGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PolicyGetResponse> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountId}/alerting/v3/policies/${policyId}`,
+        `/accounts/${account_id}/alerting/v3/policies/${policyId}`,
         options,
       ) as Core.APIPromise<{ result: PolicyGetResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -743,8 +743,13 @@ export namespace PolicyGetResponse {
 
 export interface PolicyCreateParams {
   /**
-   * Refers to which event will trigger a Notification dispatch. You can use the
-   * endpoint to get available alert types which then will give you a list of
+   * Path param: The account id
+   */
+  account_id: string;
+
+  /**
+   * Body param: Refers to which event will trigger a Notification dispatch. You can
+   * use the endpoint to get available alert types which then will give you a list of
    * possible values.
    */
   alert_type:
@@ -804,30 +809,30 @@ export interface PolicyCreateParams {
     | 'zone_aop_custom_certificate_expiration_type';
 
   /**
-   * Whether or not the Notification policy is enabled.
+   * Body param: Whether or not the Notification policy is enabled.
    */
   enabled: boolean;
 
   /**
-   * List of IDs that will be used when dispatching a notification. IDs for email
-   * type will be the email address.
+   * Body param: List of IDs that will be used when dispatching a notification. IDs
+   * for email type will be the email address.
    */
   mechanisms: Record<string, Array<PolicyCreateParams.Mechanisms>>;
 
   /**
-   * Name of the policy.
+   * Body param: Name of the policy.
    */
   name: string;
 
   /**
-   * Optional description for the Notification policy.
+   * Body param: Optional description for the Notification policy.
    */
   description?: string;
 
   /**
-   * Optional filters that allow you to be alerted only on a subset of events for
-   * that alert type based on some criteria. This is only available for select alert
-   * types. See alert type documentation for more details.
+   * Body param: Optional filters that allow you to be alerted only on a subset of
+   * events for that alert type based on some criteria. This is only available for
+   * select alert types. See alert type documentation for more details.
    */
   filters?: PolicyCreateParams.Filters;
 }
@@ -1052,8 +1057,13 @@ export namespace PolicyCreateParams {
 
 export interface PolicyUpdateParams {
   /**
-   * Refers to which event will trigger a Notification dispatch. You can use the
-   * endpoint to get available alert types which then will give you a list of
+   * Path param: The account id
+   */
+  account_id: string;
+
+  /**
+   * Body param: Refers to which event will trigger a Notification dispatch. You can
+   * use the endpoint to get available alert types which then will give you a list of
    * possible values.
    */
   alert_type?:
@@ -1113,30 +1123,30 @@ export interface PolicyUpdateParams {
     | 'zone_aop_custom_certificate_expiration_type';
 
   /**
-   * Optional description for the Notification policy.
+   * Body param: Optional description for the Notification policy.
    */
   description?: string;
 
   /**
-   * Whether or not the Notification policy is enabled.
+   * Body param: Whether or not the Notification policy is enabled.
    */
   enabled?: boolean;
 
   /**
-   * Optional filters that allow you to be alerted only on a subset of events for
-   * that alert type based on some criteria. This is only available for select alert
-   * types. See alert type documentation for more details.
+   * Body param: Optional filters that allow you to be alerted only on a subset of
+   * events for that alert type based on some criteria. This is only available for
+   * select alert types. See alert type documentation for more details.
    */
   filters?: PolicyUpdateParams.Filters;
 
   /**
-   * List of IDs that will be used when dispatching a notification. IDs for email
-   * type will be the email address.
+   * Body param: List of IDs that will be used when dispatching a notification. IDs
+   * for email type will be the email address.
    */
   mechanisms?: Record<string, Array<PolicyUpdateParams.Mechanisms>>;
 
   /**
-   * Name of the policy.
+   * Body param: Name of the policy.
    */
   name?: string;
 }
@@ -1359,6 +1369,27 @@ export namespace PolicyUpdateParams {
   }
 }
 
+export interface PolicyListParams {
+  /**
+   * The account id
+   */
+  account_id: string;
+}
+
+export interface PolicyDeleteParams {
+  /**
+   * The account id
+   */
+  account_id: string;
+}
+
+export interface PolicyGetParams {
+  /**
+   * The account id
+   */
+  account_id: string;
+}
+
 export namespace Policies {
   export import PolicyCreateResponse = PoliciesAPI.PolicyCreateResponse;
   export import PolicyUpdateResponse = PoliciesAPI.PolicyUpdateResponse;
@@ -1367,4 +1398,7 @@ export namespace Policies {
   export import PolicyGetResponse = PoliciesAPI.PolicyGetResponse;
   export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
   export import PolicyUpdateParams = PoliciesAPI.PolicyUpdateParams;
+  export import PolicyListParams = PoliciesAPI.PolicyListParams;
+  export import PolicyDeleteParams = PoliciesAPI.PolicyDeleteParams;
+  export import PolicyGetParams = PoliciesAPI.PolicyGetParams;
 }

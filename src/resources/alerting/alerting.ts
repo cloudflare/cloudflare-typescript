@@ -10,4 +10,5 @@ export class Alerting extends APIResource {
 export namespace Alerting {
   export import V3 = V3API.V3;
   export import V3ListResponse = V3API.V3ListResponse;
+  export import V3ListParams = V3API.V3ListParams;
 }

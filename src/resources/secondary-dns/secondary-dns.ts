@@ -20,6 +20,7 @@ export class SecondaryDNS extends APIResource {
 export namespace SecondaryDNS {
   export import ForceAxfrs = ForceAxfrsAPI.ForceAxfrs;
   export import ForceAxfrCreateResponse = ForceAxfrsAPI.ForceAxfrCreateResponse;
+  export import ForceAxfrCreateParams = ForceAxfrsAPI.ForceAxfrCreateParams;
   export import Incoming = IncomingAPI.Incoming;
   export import IncomingCreateResponse = IncomingAPI.IncomingCreateResponse;
   export import IncomingUpdateResponse = IncomingAPI.IncomingUpdateResponse;
@@ -27,6 +28,8 @@ export namespace SecondaryDNS {
   export import IncomingGetResponse = IncomingAPI.IncomingGetResponse;
   export import IncomingCreateParams = IncomingAPI.IncomingCreateParams;
   export import IncomingUpdateParams = IncomingAPI.IncomingUpdateParams;
+  export import IncomingDeleteParams = IncomingAPI.IncomingDeleteParams;
+  export import IncomingGetParams = IncomingAPI.IncomingGetParams;
   export import Outgoing = OutgoingAPI.Outgoing;
   export import OutgoingCreateResponse = OutgoingAPI.OutgoingCreateResponse;
   export import OutgoingUpdateResponse = OutgoingAPI.OutgoingUpdateResponse;
@@ -37,6 +40,11 @@ export namespace SecondaryDNS {
   export import OutgoingGetResponse = OutgoingAPI.OutgoingGetResponse;
   export import OutgoingCreateParams = OutgoingAPI.OutgoingCreateParams;
   export import OutgoingUpdateParams = OutgoingAPI.OutgoingUpdateParams;
+  export import OutgoingDeleteParams = OutgoingAPI.OutgoingDeleteParams;
+  export import OutgoingDisableParams = OutgoingAPI.OutgoingDisableParams;
+  export import OutgoingEnableParams = OutgoingAPI.OutgoingEnableParams;
+  export import OutgoingForceNotifyParams = OutgoingAPI.OutgoingForceNotifyParams;
+  export import OutgoingGetParams = OutgoingAPI.OutgoingGetParams;
   export import ACLs = ACLsAPI.ACLs;
   export import ACLCreateResponse = ACLsAPI.ACLCreateResponse;
   export import ACLUpdateResponse = ACLsAPI.ACLUpdateResponse;
@@ -45,6 +53,9 @@ export namespace SecondaryDNS {
   export import ACLGetResponse = ACLsAPI.ACLGetResponse;
   export import ACLCreateParams = ACLsAPI.ACLCreateParams;
   export import ACLUpdateParams = ACLsAPI.ACLUpdateParams;
+  export import ACLListParams = ACLsAPI.ACLListParams;
+  export import ACLDeleteParams = ACLsAPI.ACLDeleteParams;
+  export import ACLGetParams = ACLsAPI.ACLGetParams;
   export import Peers = PeersAPI.Peers;
   export import PeerCreateResponse = PeersAPI.PeerCreateResponse;
   export import PeerUpdateResponse = PeersAPI.PeerUpdateResponse;
@@ -53,6 +64,9 @@ export namespace SecondaryDNS {
   export import PeerGetResponse = PeersAPI.PeerGetResponse;
   export import PeerCreateParams = PeersAPI.PeerCreateParams;
   export import PeerUpdateParams = PeersAPI.PeerUpdateParams;
+  export import PeerListParams = PeersAPI.PeerListParams;
+  export import PeerDeleteParams = PeersAPI.PeerDeleteParams;
+  export import PeerGetParams = PeersAPI.PeerGetParams;
   export import TSIGs = TSIGsAPI.TSIGs;
   export import TSIGCreateResponse = TSIGsAPI.TSIGCreateResponse;
   export import TSIGUpdateResponse = TSIGsAPI.TSIGUpdateResponse;
@@ -61,4 +75,7 @@ export namespace SecondaryDNS {
   export import TSIGGetResponse = TSIGsAPI.TSIGGetResponse;
   export import TSIGCreateParams = TSIGsAPI.TSIGCreateParams;
   export import TSIGUpdateParams = TSIGsAPI.TSIGUpdateParams;
+  export import TSIGListParams = TSIGsAPI.TSIGListParams;
+  export import TSIGDeleteParams = TSIGsAPI.TSIGDeleteParams;
+  export import TSIGGetParams = TSIGsAPI.TSIGGetParams;
 }

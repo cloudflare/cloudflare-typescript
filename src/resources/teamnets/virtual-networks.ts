@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as VirtualNetworksAPI from 'cloudflare/resources/teamnets/virtual-networks';
 
 export class VirtualNetworks extends APIResource {
@@ -10,12 +9,12 @@ export class VirtualNetworks extends APIResource {
    * Adds a new virtual network to an account.
    */
   create(
-    accountId: string,
-    body: VirtualNetworkCreateParams,
+    params: VirtualNetworkCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<VirtualNetworkCreateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/teamnet/virtual_networks`, {
+      this._client.post(`/accounts/${account_id}/teamnet/virtual_networks`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: VirtualNetworkCreateResponse }>
@@ -26,21 +25,12 @@ export class VirtualNetworks extends APIResource {
    * Lists and filters virtual networks in an account.
    */
   list(
-    accountId: string,
-    query?: VirtualNetworkListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<VirtualNetworkListResponse | null>;
-  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<VirtualNetworkListResponse | null>;
-  list(
-    accountId: string,
-    query: VirtualNetworkListParams | Core.RequestOptions = {},
+    params: VirtualNetworkListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<VirtualNetworkListResponse | null> {
-    if (isRequestOptions(query)) {
-      return this.list(accountId, {}, query);
-    }
+    const { account_id, ...query } = params;
     return (
-      this._client.get(`/accounts/${accountId}/teamnet/virtual_networks`, {
+      this._client.get(`/accounts/${account_id}/teamnet/virtual_networks`, {
         query,
         ...options,
       }) as Core.APIPromise<{ result: VirtualNetworkListResponse | null }>
@@ -51,13 +41,14 @@ export class VirtualNetworks extends APIResource {
    * Deletes an existing virtual network.
    */
   delete(
-    accountId: string,
     virtualNetworkId: string,
+    params: VirtualNetworkDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<VirtualNetworkDeleteResponse> {
+    const { account_id } = params;
     return (
       this._client.delete(
-        `/accounts/${accountId}/teamnet/virtual_networks/${virtualNetworkId}`,
+        `/accounts/${account_id}/teamnet/virtual_networks/${virtualNetworkId}`,
         options,
       ) as Core.APIPromise<{ result: VirtualNetworkDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -67,13 +58,13 @@ export class VirtualNetworks extends APIResource {
    * Updates an existing virtual network.
    */
   edit(
-    accountId: string,
     virtualNetworkId: string,
-    body: VirtualNetworkEditParams,
+    params: VirtualNetworkEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<VirtualNetworkEditResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.patch(`/accounts/${accountId}/teamnet/virtual_networks/${virtualNetworkId}`, {
+      this._client.patch(`/accounts/${account_id}/teamnet/virtual_networks/${virtualNetworkId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: VirtualNetworkEditResponse }>
@@ -126,58 +117,82 @@ export type VirtualNetworkEditResponse = unknown | Array<unknown> | string;
 
 export interface VirtualNetworkCreateParams {
   /**
-   * A user-friendly name for the virtual network.
+   * Path param: Cloudflare account ID
+   */
+  account_id: string;
+
+  /**
+   * Body param: A user-friendly name for the virtual network.
    */
   name: string;
 
   /**
-   * Optional remark describing the virtual network.
+   * Body param: Optional remark describing the virtual network.
    */
   comment?: string;
 
   /**
-   * If `true`, this virtual network is the default for the account.
+   * Body param: If `true`, this virtual network is the default for the account.
    */
   is_default?: boolean;
 }
 
 export interface VirtualNetworkListParams {
   /**
-   * If `true`, only include the default virtual network. If `false`, exclude the
-   * default virtual network. If empty, all virtual networks will be included.
+   * Path param: Cloudflare account ID
+   */
+  account_id: string;
+
+  /**
+   * Query param: If `true`, only include the default virtual network. If `false`,
+   * exclude the default virtual network. If empty, all virtual networks will be
+   * included.
    */
   is_default?: unknown;
 
   /**
-   * If `true`, only include deleted virtual networks. If `false`, exclude deleted
-   * virtual networks. If empty, all virtual networks will be included.
+   * Query param: If `true`, only include deleted virtual networks. If `false`,
+   * exclude deleted virtual networks. If empty, all virtual networks will be
+   * included.
    */
   is_deleted?: unknown;
 
   /**
-   * A user-friendly name for the virtual network.
+   * Query param: A user-friendly name for the virtual network.
    */
   name?: string;
 
   /**
-   * A user-friendly name for the virtual network.
+   * Query param: A user-friendly name for the virtual network.
    */
   vnet_name?: string;
 }
 
+export interface VirtualNetworkDeleteParams {
+  /**
+   * Cloudflare account ID
+   */
+  account_id: string;
+}
+
 export interface VirtualNetworkEditParams {
   /**
-   * Optional remark describing the virtual network.
+   * Path param: Cloudflare account ID
+   */
+  account_id: string;
+
+  /**
+   * Body param: Optional remark describing the virtual network.
    */
   comment?: string;
 
   /**
-   * If `true`, this virtual network is the default for the account.
+   * Body param: If `true`, this virtual network is the default for the account.
    */
   is_default_network?: boolean;
 
   /**
-   * A user-friendly name for the virtual network.
+   * Body param: A user-friendly name for the virtual network.
    */
   name?: string;
 }
@@ -189,5 +204,6 @@ export namespace VirtualNetworks {
   export import VirtualNetworkEditResponse = VirtualNetworksAPI.VirtualNetworkEditResponse;
   export import VirtualNetworkCreateParams = VirtualNetworksAPI.VirtualNetworkCreateParams;
   export import VirtualNetworkListParams = VirtualNetworksAPI.VirtualNetworkListParams;
+  export import VirtualNetworkDeleteParams = VirtualNetworksAPI.VirtualNetworkDeleteParams;
   export import VirtualNetworkEditParams = VirtualNetworksAPI.VirtualNetworkEditParams;
 }

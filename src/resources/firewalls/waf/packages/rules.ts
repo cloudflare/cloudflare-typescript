@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as RulesAPI from 'cloudflare/resources/firewalls/waf/packages/rules';
 
 export class Rules extends APIResource {
@@ -13,14 +12,14 @@ export class Rules extends APIResource {
    * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
    */
   edit(
-    zoneId: string,
     packageId: string,
     ruleId: string,
-    body: RuleEditParams,
+    params: RuleEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RuleEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/firewall/waf/packages/${packageId}/rules/${ruleId}`, {
+      this._client.patch(`/zones/${zone_id}/firewall/waf/packages/${packageId}/rules/${ruleId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: RuleEditResponse }>
@@ -34,14 +33,15 @@ export class Rules extends APIResource {
    * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
    */
   get(
-    zoneId: string,
     packageId: string,
     ruleId: string,
+    params: RuleGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RuleGetResponse> {
+    const { zone_id } = params;
     return (
       this._client.get(
-        `/zones/${zoneId}/firewall/waf/packages/${packageId}/rules/${ruleId}`,
+        `/zones/${zone_id}/firewall/waf/packages/${packageId}/rules/${ruleId}`,
         options,
       ) as Core.APIPromise<{ result: RuleGetResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -54,27 +54,13 @@ export class Rules extends APIResource {
    * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
    */
   wafRulesListWAFRules(
-    zoneId: string,
     packageId: string,
-    query?: RuleWAFRulesListWAFRulesParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleWAFRulesListWAFRulesResponse | null>;
-  wafRulesListWAFRules(
-    zoneId: string,
-    packageId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleWAFRulesListWAFRulesResponse | null>;
-  wafRulesListWAFRules(
-    zoneId: string,
-    packageId: string,
-    query: RuleWAFRulesListWAFRulesParams | Core.RequestOptions = {},
+    params: RuleWAFRulesListWAFRulesParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RuleWAFRulesListWAFRulesResponse | null> {
-    if (isRequestOptions(query)) {
-      return this.wafRulesListWAFRules(zoneId, packageId, {}, query);
-    }
+    const { zone_id, ...query } = params;
     return (
-      this._client.get(`/zones/${zoneId}/firewall/waf/packages/${packageId}/rules`, {
+      this._client.get(`/zones/${zone_id}/firewall/waf/packages/${packageId}/rules`, {
         query,
         ...options,
       }) as Core.APIPromise<{ result: RuleWAFRulesListWAFRulesResponse | null }>
@@ -483,41 +469,58 @@ export namespace RuleWAFRulesListWAFRulesResponse {
 
 export interface RuleEditParams {
   /**
-   * The mode/action of the rule when triggered. You must use a value from the
-   * `allowed_modes` array of the current rule.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: The mode/action of the rule when triggered. You must use a value
+   * from the `allowed_modes` array of the current rule.
    */
   mode?: 'default' | 'disable' | 'simulate' | 'block' | 'challenge' | 'on' | 'off';
 }
 
+export interface RuleGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
 export interface RuleWAFRulesListWAFRulesParams {
   /**
-   * The direction used to sort returned rules.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Query param: The direction used to sort returned rules.
    */
   direction?: 'asc' | 'desc';
 
   /**
-   * When set to `all`, all the search requirements must match. When set to `any`,
-   * only one of the search requirements has to match.
+   * Query param: When set to `all`, all the search requirements must match. When set
+   * to `any`, only one of the search requirements has to match.
    */
   match?: 'any' | 'all';
 
   /**
-   * The action/mode a rule has been overridden to perform.
+   * Query param: The action/mode a rule has been overridden to perform.
    */
   mode?: 'DIS' | 'CHL' | 'BLK' | 'SIM';
 
   /**
-   * The field used to sort returned rules.
+   * Query param: The field used to sort returned rules.
    */
   order?: 'priority' | 'group_id' | 'description';
 
   /**
-   * The page number of paginated results.
+   * Query param: The page number of paginated results.
    */
   page?: number;
 
   /**
-   * The number of rules per page.
+   * Query param: The number of rules per page.
    */
   per_page?: number;
 }
@@ -527,5 +530,6 @@ export namespace Rules {
   export import RuleGetResponse = RulesAPI.RuleGetResponse;
   export import RuleWAFRulesListWAFRulesResponse = RulesAPI.RuleWAFRulesListWAFRulesResponse;
   export import RuleEditParams = RulesAPI.RuleEditParams;
+  export import RuleGetParams = RulesAPI.RuleGetParams;
   export import RuleWAFRulesListWAFRulesParams = RulesAPI.RuleWAFRulesListWAFRulesParams;
 }

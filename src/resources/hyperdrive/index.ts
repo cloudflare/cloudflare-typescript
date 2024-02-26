@@ -9,7 +9,10 @@ export {
   ConfigGetResponse,
   ConfigCreateParams,
   ConfigUpdateParams,
+  ConfigListParams,
+  ConfigDeleteParams,
   ConfigEditParams,
+  ConfigGetParams,
   Configs,
 } from './configs';
 export { Hyperdrive } from './hyperdrive';

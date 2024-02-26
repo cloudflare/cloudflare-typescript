@@ -13,14 +13,15 @@ export class ChallengeTTL extends APIResource {
    * (https://support.cloudflare.com/hc/en-us/articles/200170136).
    */
   edit(
-    zoneId: string,
-    body: ChallengeTTLEditParams,
+    params: ChallengeTTLEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ChallengeTTLEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/settings/challenge_ttl`, { body, ...options }) as Core.APIPromise<{
-        result: ChallengeTTLEditResponse;
-      }>
+      this._client.patch(`/zones/${zone_id}/settings/challenge_ttl`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: ChallengeTTLEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -31,9 +32,13 @@ export class ChallengeTTL extends APIResource {
    * setting and will attempt to honor any setting above 45 minutes.
    * (https://support.cloudflare.com/hc/en-us/articles/200170136).
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<ChallengeTTLGetResponse> {
+  get(
+    params: ChallengeTTLGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ChallengeTTLGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/settings/challenge_ttl`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/settings/challenge_ttl`, options) as Core.APIPromise<{
         result: ChallengeTTLGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -130,7 +135,12 @@ export interface ChallengeTTLGetResponse {
 
 export interface ChallengeTTLEditParams {
   /**
-   * Value of the zone setting.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Value of the zone setting.
    */
   value:
     | 300
@@ -149,8 +159,16 @@ export interface ChallengeTTLEditParams {
     | 31536000;
 }
 
+export interface ChallengeTTLGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
 export namespace ChallengeTTL {
   export import ChallengeTTLEditResponse = ChallengeTTLAPI.ChallengeTTLEditResponse;
   export import ChallengeTTLGetResponse = ChallengeTTLAPI.ChallengeTTLGetResponse;
   export import ChallengeTTLEditParams = ChallengeTTLAPI.ChallengeTTLEditParams;
+  export import ChallengeTTLGetParams = ChallengeTTLAPI.ChallengeTTLGetParams;
 }

@@ -13,13 +13,10 @@ export class Projects extends APIResource {
   /**
    * Create a new project.
    */
-  create(
-    accountId: string,
-    body: ProjectCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ProjectCreateResponse> {
+  create(params: ProjectCreateParams, options?: Core.RequestOptions): Core.APIPromise<ProjectCreateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/pages/projects`, { body, ...options }) as Core.APIPromise<{
+      this._client.post(`/accounts/${account_id}/pages/projects`, { body, ...options }) as Core.APIPromise<{
         result: ProjectCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -28,9 +25,10 @@ export class Projects extends APIResource {
   /**
    * Fetch a list of all user projects.
    */
-  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<ProjectListResponse> {
+  list(params: ProjectListParams, options?: Core.RequestOptions): Core.APIPromise<ProjectListResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/pages/projects`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/pages/projects`, options) as Core.APIPromise<{
         result: ProjectListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -39,8 +37,13 @@ export class Projects extends APIResource {
   /**
    * Delete a project by name.
    */
-  delete(accountId: string, projectName: string, options?: Core.RequestOptions): Core.APIPromise<unknown> {
-    return this._client.delete(`/accounts/${accountId}/pages/projects/${projectName}`, options);
+  delete(
+    projectName: string,
+    params: ProjectDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<unknown> {
+    const { account_id } = params;
+    return this._client.delete(`/accounts/${account_id}/pages/projects/${projectName}`, options);
   }
 
   /**
@@ -48,14 +51,14 @@ export class Projects extends APIResource {
    * delete an environment variable, set the key to null.
    */
   edit(
-    accountId: string,
     projectName: string,
-    body: ProjectEditParams,
+    params: ProjectEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ProjectEditResponse> {
+    const { account_id, body } = params;
     return (
-      this._client.patch(`/accounts/${accountId}/pages/projects/${projectName}`, {
-        body,
+      this._client.patch(`/accounts/${account_id}/pages/projects/${projectName}`, {
+        body: body,
         ...options,
       }) as Core.APIPromise<{ result: ProjectEditResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -65,12 +68,13 @@ export class Projects extends APIResource {
    * Fetch a project by name.
    */
   get(
-    accountId: string,
     projectName: string,
+    params: ProjectGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ProjectGetResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/pages/projects/${projectName}`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/pages/projects/${projectName}`, options) as Core.APIPromise<{
         result: ProjectGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -80,12 +84,13 @@ export class Projects extends APIResource {
    * Purge all cached build artifacts for a Pages project
    */
   purgeBuildCache(
-    accountId: string,
     projectName: string,
+    params: ProjectPurgeBuildCacheParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<unknown> {
+    const { account_id } = params;
     return this._client.post(
-      `/accounts/${accountId}/pages/projects/${projectName}/purge_build_cache`,
+      `/accounts/${account_id}/pages/projects/${projectName}/purge_build_cache`,
       options,
     );
   }
@@ -1182,26 +1187,38 @@ export type ProjectPurgeBuildCacheResponse = unknown;
 
 export interface ProjectCreateParams {
   /**
-   * Configs for the project build process.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: Configs for the project build process.
    */
   build_config?: ProjectCreateParams.BuildConfig;
 
+  /**
+   * Body param:
+   */
   canonical_deployment?: ProjectCreateParams.CanonicalDeployment;
 
   /**
-   * Configs for deployments in a project.
+   * Body param: Configs for deployments in a project.
    */
   deployment_configs?: ProjectCreateParams.DeploymentConfigs;
 
+  /**
+   * Body param:
+   */
   latest_deployment?: ProjectCreateParams.LatestDeployment;
 
   /**
-   * Name of the project.
+   * Body param: Name of the project.
    */
   name?: string;
 
   /**
-   * Production branch of the project. Used to identify production deployments.
+   * Body param: Production branch of the project. Used to identify production
+   * deployments.
    */
   production_branch?: string;
 }
@@ -1828,7 +1845,45 @@ export namespace ProjectCreateParams {
   export interface LatestDeployment {}
 }
 
-export type ProjectEditParams = unknown;
+export interface ProjectListParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface ProjectDeleteParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface ProjectEditParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
+}
+
+export interface ProjectGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface ProjectPurgeBuildCacheParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
 
 export namespace Projects {
   export import ProjectCreateResponse = ProjectsAPI.ProjectCreateResponse;
@@ -1838,7 +1893,11 @@ export namespace Projects {
   export import ProjectGetResponse = ProjectsAPI.ProjectGetResponse;
   export import ProjectPurgeBuildCacheResponse = ProjectsAPI.ProjectPurgeBuildCacheResponse;
   export import ProjectCreateParams = ProjectsAPI.ProjectCreateParams;
+  export import ProjectListParams = ProjectsAPI.ProjectListParams;
+  export import ProjectDeleteParams = ProjectsAPI.ProjectDeleteParams;
   export import ProjectEditParams = ProjectsAPI.ProjectEditParams;
+  export import ProjectGetParams = ProjectsAPI.ProjectGetParams;
+  export import ProjectPurgeBuildCacheParams = ProjectsAPI.ProjectPurgeBuildCacheParams;
   export import Deployments = DeploymentsAPI.Deployments;
   export import DeploymentCreateResponse = DeploymentsAPI.DeploymentCreateResponse;
   export import DeploymentListResponse = DeploymentsAPI.DeploymentListResponse;
@@ -1847,6 +1906,11 @@ export namespace Projects {
   export import DeploymentRetryResponse = DeploymentsAPI.DeploymentRetryResponse;
   export import DeploymentRollbackResponse = DeploymentsAPI.DeploymentRollbackResponse;
   export import DeploymentCreateParams = DeploymentsAPI.DeploymentCreateParams;
+  export import DeploymentListParams = DeploymentsAPI.DeploymentListParams;
+  export import DeploymentDeleteParams = DeploymentsAPI.DeploymentDeleteParams;
+  export import DeploymentGetParams = DeploymentsAPI.DeploymentGetParams;
+  export import DeploymentRetryParams = DeploymentsAPI.DeploymentRetryParams;
+  export import DeploymentRollbackParams = DeploymentsAPI.DeploymentRollbackParams;
   export import Domains = DomainsAPI.Domains;
   export import DomainCreateResponse = DomainsAPI.DomainCreateResponse;
   export import DomainListResponse = DomainsAPI.DomainListResponse;
@@ -1854,4 +1918,8 @@ export namespace Projects {
   export import DomainEditResponse = DomainsAPI.DomainEditResponse;
   export import DomainGetResponse = DomainsAPI.DomainGetResponse;
   export import DomainCreateParams = DomainsAPI.DomainCreateParams;
+  export import DomainListParams = DomainsAPI.DomainListParams;
+  export import DomainDeleteParams = DomainsAPI.DomainDeleteParams;
+  export import DomainEditParams = DomainsAPI.DomainEditParams;
+  export import DomainGetParams = DomainsAPI.DomainGetParams;
 }

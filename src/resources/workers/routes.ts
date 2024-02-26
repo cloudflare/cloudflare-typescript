@@ -8,13 +8,10 @@ export class Routes extends APIResource {
   /**
    * Creates a route that maps a URL pattern to a Worker.
    */
-  create(
-    zoneId: string,
-    body: RouteCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RouteCreateResponse> {
+  create(params: RouteCreateParams, options?: Core.RequestOptions): Core.APIPromise<RouteCreateResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.post(`/zones/${zoneId}/workers/routes`, { body, ...options }) as Core.APIPromise<{
+      this._client.post(`/zones/${zone_id}/workers/routes`, { body, ...options }) as Core.APIPromise<{
         result: RouteCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -24,13 +21,13 @@ export class Routes extends APIResource {
    * Updates the URL pattern or Worker associated with a route.
    */
   update(
-    zoneId: string,
     routeId: string,
-    body: RouteUpdateParams,
+    params: RouteUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RouteUpdateResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.put(`/zones/${zoneId}/workers/routes/${routeId}`, {
+      this._client.put(`/zones/${zone_id}/workers/routes/${routeId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: RouteUpdateResponse }>
@@ -40,9 +37,10 @@ export class Routes extends APIResource {
   /**
    * Returns routes for a zone.
    */
-  list(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<RouteListResponse> {
+  list(params: RouteListParams, options?: Core.RequestOptions): Core.APIPromise<RouteListResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/workers/routes`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/workers/routes`, options) as Core.APIPromise<{
         result: RouteListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -52,12 +50,13 @@ export class Routes extends APIResource {
    * Deletes a route.
    */
   delete(
-    zoneId: string,
     routeId: string,
+    params: RouteDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RouteDeleteResponse> {
+    const { zone_id } = params;
     return (
-      this._client.delete(`/zones/${zoneId}/workers/routes/${routeId}`, options) as Core.APIPromise<{
+      this._client.delete(`/zones/${zone_id}/workers/routes/${routeId}`, options) as Core.APIPromise<{
         result: RouteDeleteResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -66,9 +65,14 @@ export class Routes extends APIResource {
   /**
    * Returns information about a route, including URL pattern and Worker.
    */
-  get(zoneId: string, routeId: string, options?: Core.RequestOptions): Core.APIPromise<RouteGetResponse> {
+  get(
+    routeId: string,
+    params: RouteGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RouteGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/workers/routes/${routeId}`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/workers/routes/${routeId}`, options) as Core.APIPromise<{
         result: RouteGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -126,21 +130,58 @@ export interface RouteGetResponse {
 }
 
 export interface RouteCreateParams {
+  /**
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param:
+   */
   pattern: string;
 
   /**
-   * Name of the script, used in URLs and route configuration.
+   * Body param: Name of the script, used in URLs and route configuration.
    */
   script?: string;
 }
 
 export interface RouteUpdateParams {
+  /**
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param:
+   */
   pattern: string;
 
   /**
-   * Name of the script, used in URLs and route configuration.
+   * Body param: Name of the script, used in URLs and route configuration.
    */
   script?: string;
+}
+
+export interface RouteListParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+export interface RouteDeleteParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+export interface RouteGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }
 
 export namespace Routes {
@@ -151,4 +192,7 @@ export namespace Routes {
   export import RouteGetResponse = RoutesAPI.RouteGetResponse;
   export import RouteCreateParams = RoutesAPI.RouteCreateParams;
   export import RouteUpdateParams = RoutesAPI.RouteUpdateParams;
+  export import RouteListParams = RoutesAPI.RouteListParams;
+  export import RouteDeleteParams = RoutesAPI.RouteDeleteParams;
+  export import RouteGetParams = RoutesAPI.RouteGetParams;
 }

@@ -18,12 +18,12 @@ export class BotManagement extends APIResource {
    * information on the different plans
    */
   update(
-    zoneId: string,
-    body: BotManagementUpdateParams,
+    params: BotManagementUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BotManagementUpdateResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.put(`/zones/${zoneId}/bot_management`, { body, ...options }) as Core.APIPromise<{
+      this._client.put(`/zones/${zone_id}/bot_management`, { body, ...options }) as Core.APIPromise<{
         result: BotManagementUpdateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -32,9 +32,13 @@ export class BotManagement extends APIResource {
   /**
    * Retrieve a zone's Bot Management Config
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<BotManagementGetResponse> {
+  get(
+    params: BotManagementGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<BotManagementGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/bot_management`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/bot_management`, options) as Core.APIPromise<{
         result: BotManagementGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -305,59 +309,76 @@ export namespace BotManagementGetResponse {
 
 export interface BotManagementUpdateParams {
   /**
-   * Automatically update to the newest bot detection models created by Cloudflare as
-   * they are released.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Automatically update to the newest bot detection models created by
+   * Cloudflare as they are released.
    * [Learn more.](https://developers.cloudflare.com/bots/reference/machine-learning-models#model-versions-and-release-notes)
    */
   auto_update_model?: boolean;
 
   /**
-   * Use lightweight, invisible JavaScript detections to improve Bot Management.
+   * Body param: Use lightweight, invisible JavaScript detections to improve Bot
+   * Management.
    * [Learn more about JavaScript Detections](https://developers.cloudflare.com/bots/reference/javascript-detections/).
    */
   enable_js?: boolean;
 
   /**
-   * Whether to enable Bot Fight Mode.
+   * Body param: Whether to enable Bot Fight Mode.
    */
   fight_mode?: boolean;
 
   /**
-   * Whether to optimize Super Bot Fight Mode protections for Wordpress.
+   * Body param: Whether to optimize Super Bot Fight Mode protections for Wordpress.
    */
   optimize_wordpress?: boolean;
 
   /**
-   * Super Bot Fight Mode (SBFM) action to take on definitely automated requests.
+   * Body param: Super Bot Fight Mode (SBFM) action to take on definitely automated
+   * requests.
    */
   sbfm_definitely_automated?: 'allow' | 'block' | 'managed_challenge';
 
   /**
-   * Super Bot Fight Mode (SBFM) action to take on likely automated requests.
+   * Body param: Super Bot Fight Mode (SBFM) action to take on likely automated
+   * requests.
    */
   sbfm_likely_automated?: 'allow' | 'block' | 'managed_challenge';
 
   /**
-   * Super Bot Fight Mode (SBFM) to enable static resource protection. Enable if
-   * static resources on your application need bot protection. Note: Static resource
-   * protection can also result in legitimate traffic being blocked.
+   * Body param: Super Bot Fight Mode (SBFM) to enable static resource protection.
+   * Enable if static resources on your application need bot protection. Note: Static
+   * resource protection can also result in legitimate traffic being blocked.
    */
   sbfm_static_resource_protection?: boolean;
 
   /**
-   * Super Bot Fight Mode (SBFM) action to take on verified bots requests.
+   * Body param: Super Bot Fight Mode (SBFM) action to take on verified bots
+   * requests.
    */
   sbfm_verified_bots?: 'allow' | 'block';
 
   /**
-   * Whether to disable tracking the highest bot score for a session in the Bot
-   * Management cookie.
+   * Body param: Whether to disable tracking the highest bot score for a session in
+   * the Bot Management cookie.
    */
   suppress_session_score?: boolean;
+}
+
+export interface BotManagementGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }
 
 export namespace BotManagement {
   export import BotManagementUpdateResponse = BotManagementAPI.BotManagementUpdateResponse;
   export import BotManagementGetResponse = BotManagementAPI.BotManagementGetResponse;
   export import BotManagementUpdateParams = BotManagementAPI.BotManagementUpdateParams;
+  export import BotManagementGetParams = BotManagementAPI.BotManagementGetParams;
 }

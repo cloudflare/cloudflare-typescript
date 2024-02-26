@@ -15,9 +15,10 @@ export class V3 extends APIResource {
   /**
    * Gets a list of all alert types for which an account is eligible.
    */
-  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<V3ListResponse | null> {
+  list(params: V3ListParams, options?: Core.RequestOptions): Core.APIPromise<V3ListResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/alerting/v3/available_alerts`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/alerting/v3/available_alerts`, options) as Core.APIPromise<{
         result: V3ListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -26,8 +27,16 @@ export class V3 extends APIResource {
 
 export type V3ListResponse = unknown | Array<unknown> | string;
 
+export interface V3ListParams {
+  /**
+   * The account id
+   */
+  account_id: string;
+}
+
 export namespace V3 {
   export import V3ListResponse = V3API.V3ListResponse;
+  export import V3ListParams = V3API.V3ListParams;
   export import Destinations = DestinationsAPI.Destinations;
   export import Histories = HistoriesAPI.Histories;
   export import HistoryListResponse = HistoriesAPI.HistoryListResponse;
@@ -41,4 +50,7 @@ export namespace V3 {
   export import PolicyGetResponse = PoliciesAPI.PolicyGetResponse;
   export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
   export import PolicyUpdateParams = PoliciesAPI.PolicyUpdateParams;
+  export import PolicyListParams = PoliciesAPI.PolicyListParams;
+  export import PolicyDeleteParams = PoliciesAPI.PolicyDeleteParams;
+  export import PolicyGetParams = PoliciesAPI.PolicyGetParams;
 }

@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as VideosAPI from 'cloudflare/resources/stream/videos';
 
 export class Videos extends APIResource {
@@ -10,21 +9,12 @@ export class Videos extends APIResource {
    * Returns information about an account's storage use.
    */
   storageUsage(
-    accountId: string,
-    query?: VideoStorageUsageParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<VideoStorageUsageResponse>;
-  storageUsage(accountId: string, options?: Core.RequestOptions): Core.APIPromise<VideoStorageUsageResponse>;
-  storageUsage(
-    accountId: string,
-    query: VideoStorageUsageParams | Core.RequestOptions = {},
+    params: VideoStorageUsageParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<VideoStorageUsageResponse> {
-    if (isRequestOptions(query)) {
-      return this.storageUsage(accountId, {}, query);
-    }
+    const { account_id, ...query } = params;
     return (
-      this._client.get(`/accounts/${accountId}/stream/storage-usage`, {
+      this._client.get(`/accounts/${account_id}/stream/storage-usage`, {
         query,
         ...options,
       }) as Core.APIPromise<{ result: VideoStorageUsageResponse }>
@@ -56,7 +46,12 @@ export interface VideoStorageUsageResponse {
 
 export interface VideoStorageUsageParams {
   /**
-   * A user-defined identifier for the media creator.
+   * Path param: The account identifier tag.
+   */
+  account_id: string;
+
+  /**
+   * Query param: A user-defined identifier for the media creator.
    */
   creator?: string;
 }

@@ -12,4 +12,5 @@ export namespace BGPs {
   export import StatusEditResponse = StatusesAPI.StatusEditResponse;
   export import StatusGetResponse = StatusesAPI.StatusGetResponse;
   export import StatusEditParams = StatusesAPI.StatusEditParams;
+  export import StatusGetParams = StatusesAPI.StatusGetParams;
 }

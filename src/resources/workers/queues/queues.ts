@@ -12,14 +12,15 @@ export class Queues extends APIResource {
    * Creates a new queue.
    */
   create(
-    accountId: string,
-    body: QueueCreateParams,
+    params: QueueCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<QueueCreateResponse | null> {
+    const { account_id, body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/workers/queues`, { body, ...options }) as Core.APIPromise<{
-        result: QueueCreateResponse | null;
-      }>
+      this._client.post(`/accounts/${account_id}/workers/queues`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: QueueCreateResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -27,14 +28,14 @@ export class Queues extends APIResource {
    * Updates a queue.
    */
   update(
-    accountId: string,
     name: string,
-    body: QueueUpdateParams,
+    params: QueueUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<QueueUpdateResponse | null> {
+    const { account_id, body } = params;
     return (
-      this._client.put(`/accounts/${accountId}/workers/queues/${name}`, {
-        body,
+      this._client.put(`/accounts/${account_id}/workers/queues/${name}`, {
+        body: body,
         ...options,
       }) as Core.APIPromise<{ result: QueueUpdateResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -43,9 +44,10 @@ export class Queues extends APIResource {
   /**
    * Returns the queues owned by an account.
    */
-  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<QueueListResponse | null> {
+  list(params: QueueListParams, options?: Core.RequestOptions): Core.APIPromise<QueueListResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/workers/queues`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/workers/queues`, options) as Core.APIPromise<{
         result: QueueListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -55,12 +57,13 @@ export class Queues extends APIResource {
    * Deletes a queue.
    */
   delete(
-    accountId: string,
     name: string,
+    params: QueueDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<QueueDeleteResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${accountId}/workers/queues/${name}`, options) as Core.APIPromise<{
+      this._client.delete(`/accounts/${account_id}/workers/queues/${name}`, options) as Core.APIPromise<{
         result: QueueDeleteResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -70,12 +73,13 @@ export class Queues extends APIResource {
    * Get information about a specific queue.
    */
   get(
-    accountId: string,
     name: string,
+    params: QueueGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<QueueGetResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/workers/queues/${name}`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/workers/queues/${name}`, options) as Core.APIPromise<{
         result: QueueGetResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -144,9 +148,50 @@ export interface QueueGetResponse {
   queue_name?: string;
 }
 
-export type QueueCreateParams = unknown;
+export interface QueueCreateParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
 
-export type QueueUpdateParams = unknown;
+  /**
+   * Body param:
+   */
+  body: unknown;
+}
+
+export interface QueueUpdateParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
+}
+
+export interface QueueListParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface QueueDeleteParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface QueueGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
 
 export namespace Queues {
   export import QueueCreateResponse = QueuesAPI.QueueCreateResponse;
@@ -156,6 +201,9 @@ export namespace Queues {
   export import QueueGetResponse = QueuesAPI.QueueGetResponse;
   export import QueueCreateParams = QueuesAPI.QueueCreateParams;
   export import QueueUpdateParams = QueuesAPI.QueueUpdateParams;
+  export import QueueListParams = QueuesAPI.QueueListParams;
+  export import QueueDeleteParams = QueuesAPI.QueueDeleteParams;
+  export import QueueGetParams = QueuesAPI.QueueGetParams;
   export import Consumers = ConsumersAPI.Consumers;
   export import ConsumerCreateResponse = ConsumersAPI.ConsumerCreateResponse;
   export import ConsumerUpdateResponse = ConsumersAPI.ConsumerUpdateResponse;
@@ -163,4 +211,6 @@ export namespace Queues {
   export import ConsumerDeleteResponse = ConsumersAPI.ConsumerDeleteResponse;
   export import ConsumerCreateParams = ConsumersAPI.ConsumerCreateParams;
   export import ConsumerUpdateParams = ConsumersAPI.ConsumerUpdateParams;
+  export import ConsumerListParams = ConsumersAPI.ConsumerListParams;
+  export import ConsumerDeleteParams = ConsumersAPI.ConsumerDeleteParams;
 }

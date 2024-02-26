@@ -10,9 +10,10 @@ export class NEL extends APIResource {
    * Refer to our [blog post](http://blog.cloudflare.com/nel-solving-mobile-speed)
    * for more information.
    */
-  edit(zoneId: string, body: NELEditParams, options?: Core.RequestOptions): Core.APIPromise<NELEditResponse> {
+  edit(params: NELEditParams, options?: Core.RequestOptions): Core.APIPromise<NELEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/settings/nel`, { body, ...options }) as Core.APIPromise<{
+      this._client.patch(`/zones/${zone_id}/settings/nel`, { body, ...options }) as Core.APIPromise<{
         result: NELEditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -21,9 +22,10 @@ export class NEL extends APIResource {
   /**
    * Enable Network Error Logging reporting on your zone. (Beta)
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<NELGetResponse> {
+  get(params: NELGetParams, options?: Core.RequestOptions): Core.APIPromise<NELGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/settings/nel`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/settings/nel`, options) as Core.APIPromise<{
         result: NELGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -102,7 +104,12 @@ export namespace NELGetResponse {
 
 export interface NELEditParams {
   /**
-   * Enable Network Error Logging reporting on your zone. (Beta)
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Enable Network Error Logging reporting on your zone. (Beta)
    */
   value: NELEditParams.Value;
 }
@@ -133,8 +140,16 @@ export namespace NELEditParams {
   }
 }
 
+export interface NELGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
 export namespace NEL {
   export import NELEditResponse = NELAPI.NELEditResponse;
   export import NELGetResponse = NELAPI.NELGetResponse;
   export import NELEditParams = NELAPI.NELEditParams;
+  export import NELGetParams = NELAPI.NELGetParams;
 }

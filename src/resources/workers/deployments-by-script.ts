@@ -9,13 +9,14 @@ export class DeploymentsByScript extends APIResource {
    * List Deployments
    */
   list(
-    accountId: string,
     scriptId: string,
+    params: DeploymentsByScriptListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DeploymentsByScriptListResponse> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountId}/workers/deployments/by-script/${scriptId}`,
+        `/accounts/${account_id}/workers/deployments/by-script/${scriptId}`,
         options,
       ) as Core.APIPromise<{ result: DeploymentsByScriptListResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -25,14 +26,15 @@ export class DeploymentsByScript extends APIResource {
    * Get Deployment Detail
    */
   detail(
-    accountId: string,
     scriptId: string,
     deploymentId: string,
+    params: DeploymentsByScriptDetailParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DeploymentsByScriptDetailResponse> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountId}/workers/deployments/by-script/${scriptId}/detail/${deploymentId}`,
+        `/accounts/${account_id}/workers/deployments/by-script/${scriptId}/detail/${deploymentId}`,
         options,
       ) as Core.APIPromise<{ result: DeploymentsByScriptDetailResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -55,7 +57,23 @@ export interface DeploymentsByScriptDetailResponse {
   resources?: unknown;
 }
 
+export interface DeploymentsByScriptListParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface DeploymentsByScriptDetailParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export namespace DeploymentsByScript {
   export import DeploymentsByScriptListResponse = DeploymentsByScriptAPI.DeploymentsByScriptListResponse;
   export import DeploymentsByScriptDetailResponse = DeploymentsByScriptAPI.DeploymentsByScriptDetailResponse;
+  export import DeploymentsByScriptListParams = DeploymentsByScriptAPI.DeploymentsByScriptListParams;
+  export import DeploymentsByScriptDetailParams = DeploymentsByScriptAPI.DeploymentsByScriptDetailParams;
 }

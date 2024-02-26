@@ -14,8 +14,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource edge', () => {
   // skipped: tests are disabled for the time being
-  test.skip('create', async () => {
-    const responsePromise = cloudflare.logpush.edge.create('023e105f4ecef8ad9ca31a8372d0c353', {});
+  test.skip('create: only required params', async () => {
+    const responsePromise = cloudflare.logpush.edge.create({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -26,8 +26,19 @@ describe('resource edge', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
-    const responsePromise = cloudflare.logpush.edge.get('023e105f4ecef8ad9ca31a8372d0c353');
+  test.skip('create: required and optional params', async () => {
+    const response = await cloudflare.logpush.edge.create({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      fields:
+        'ClientIP,ClientRequestHost,ClientRequestMethod,ClientRequestURI,EdgeEndTimestamp,EdgeResponseBytes,EdgeResponseStatus,EdgeStartTimestamp,RayID',
+      filter: '{"where":{"and":[{"key":"ClientCountry","operator":"neq","value":"ca"}]}}',
+      sample: 1,
+    });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get: only required params', async () => {
+    const responsePromise = cloudflare.logpush.edge.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -38,10 +49,7 @@ describe('resource edge', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.logpush.edge.get('023e105f4ecef8ad9ca31a8372d0c353', { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.logpush.edge.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 });

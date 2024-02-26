@@ -8,32 +8,30 @@ export class Policies extends APIResource {
   /**
    * Create a Page Shield policy.
    */
-  create(
-    zoneId: string,
-    body: PolicyCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PolicyCreateResponse> {
-    return this._client.post(`/zones/${zoneId}/page_shield/policies`, { body, ...options });
+  create(params: PolicyCreateParams, options?: Core.RequestOptions): Core.APIPromise<PolicyCreateResponse> {
+    const { zone_id, ...body } = params;
+    return this._client.post(`/zones/${zone_id}/page_shield/policies`, { body, ...options });
   }
 
   /**
    * Update a Page Shield policy by ID.
    */
   update(
-    zoneId: string,
     policyId: string,
-    body: PolicyUpdateParams,
+    params: PolicyUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PolicyUpdateResponse> {
-    return this._client.put(`/zones/${zoneId}/page_shield/policies/${policyId}`, { body, ...options });
+    const { zone_id, ...body } = params;
+    return this._client.put(`/zones/${zone_id}/page_shield/policies/${policyId}`, { body, ...options });
   }
 
   /**
    * Lists all Page Shield policies.
    */
-  list(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<PolicyListResponse | null> {
+  list(params: PolicyListParams, options?: Core.RequestOptions): Core.APIPromise<PolicyListResponse | null> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/page_shield/policies`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/page_shield/policies`, options) as Core.APIPromise<{
         result: PolicyListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -42,8 +40,9 @@ export class Policies extends APIResource {
   /**
    * Delete a Page Shield policy by ID.
    */
-  delete(zoneId: string, policyId: string, options?: Core.RequestOptions): Core.APIPromise<void> {
-    return this._client.delete(`/zones/${zoneId}/page_shield/policies/${policyId}`, {
+  delete(policyId: string, params: PolicyDeleteParams, options?: Core.RequestOptions): Core.APIPromise<void> {
+    const { zone_id } = params;
+    return this._client.delete(`/zones/${zone_id}/page_shield/policies/${policyId}`, {
       ...options,
       headers: { Accept: '*/*', ...options?.headers },
     });
@@ -52,8 +51,13 @@ export class Policies extends APIResource {
   /**
    * Fetches a Page Shield policy by ID.
    */
-  get(zoneId: string, policyId: string, options?: Core.RequestOptions): Core.APIPromise<PolicyGetResponse> {
-    return this._client.get(`/zones/${zoneId}/page_shield/policies/${policyId}`, options);
+  get(
+    policyId: string,
+    params: PolicyGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PolicyGetResponse> {
+    const { zone_id } = params;
+    return this._client.get(`/zones/${zone_id}/page_shield/policies/${policyId}`, options);
   }
 }
 
@@ -195,58 +199,89 @@ export interface PolicyGetResponse {
 
 export interface PolicyCreateParams {
   /**
-   * The action to take if the expression matches
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: The action to take if the expression matches
    */
   action?: 'allow' | 'log';
 
   /**
-   * A description for the policy
+   * Body param: A description for the policy
    */
   description?: string;
 
   /**
-   * Whether the policy is enabled
+   * Body param: Whether the policy is enabled
    */
   enabled?: boolean;
 
   /**
-   * The expression which must match for the policy to be applied, using the
-   * Cloudflare Firewall rule expression syntax
+   * Body param: The expression which must match for the policy to be applied, using
+   * the Cloudflare Firewall rule expression syntax
    */
   expression?: string;
 
   /**
-   * The policy which will be applied
+   * Body param: The policy which will be applied
    */
   value?: string;
 }
 
 export interface PolicyUpdateParams {
   /**
-   * The action to take if the expression matches
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: The action to take if the expression matches
    */
   action?: 'allow' | 'log';
 
   /**
-   * A description for the policy
+   * Body param: A description for the policy
    */
   description?: string;
 
   /**
-   * Whether the policy is enabled
+   * Body param: Whether the policy is enabled
    */
   enabled?: boolean;
 
   /**
-   * The expression which must match for the policy to be applied, using the
-   * Cloudflare Firewall rule expression syntax
+   * Body param: The expression which must match for the policy to be applied, using
+   * the Cloudflare Firewall rule expression syntax
    */
   expression?: string;
 
   /**
-   * The policy which will be applied
+   * Body param: The policy which will be applied
    */
   value?: string;
+}
+
+export interface PolicyListParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+export interface PolicyDeleteParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+export interface PolicyGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }
 
 export namespace Policies {
@@ -256,4 +291,7 @@ export namespace Policies {
   export import PolicyGetResponse = PoliciesAPI.PolicyGetResponse;
   export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
   export import PolicyUpdateParams = PoliciesAPI.PolicyUpdateParams;
+  export import PolicyListParams = PoliciesAPI.PolicyListParams;
+  export import PolicyDeleteParams = PoliciesAPI.PolicyDeleteParams;
+  export import PolicyGetParams = PoliciesAPI.PolicyGetParams;
 }

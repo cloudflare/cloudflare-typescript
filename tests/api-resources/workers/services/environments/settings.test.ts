@@ -16,10 +16,10 @@ describe('resource settings', () => {
   // skipped: tests are disabled for the time being
   test.skip('edit: only required params', async () => {
     const responsePromise = cloudflare.workers.services.environments.settings.edit(
-      '023e105f4ecef8ad9ca31a8372d0c353',
       'my-worker',
       'production',
       {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
         errors: [
           { code: 1000, message: 'string' },
           { code: 1000, message: 'string' },
@@ -45,67 +45,61 @@ describe('resource settings', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('edit: required and optional params', async () => {
-    const response = await cloudflare.workers.services.environments.settings.edit(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'my-worker',
-      'production',
-      {
-        errors: [
-          { code: 1000, message: 'string' },
-          { code: 1000, message: 'string' },
-          { code: 1000, message: 'string' },
+    const response = await cloudflare.workers.services.environments.settings.edit('my-worker', 'production', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      errors: [
+        { code: 1000, message: 'string' },
+        { code: 1000, message: 'string' },
+        { code: 1000, message: 'string' },
+      ],
+      messages: [
+        { code: 1000, message: 'string' },
+        { code: 1000, message: 'string' },
+        { code: 1000, message: 'string' },
+      ],
+      result: {
+        bindings: [{ type: 'kv_namespace' }, { type: 'kv_namespace' }, { type: 'kv_namespace' }],
+        compatibility_date: '2022-04-05',
+        compatibility_flags: [
+          'formdata_parser_supports_files',
+          'formdata_parser_supports_files',
+          'formdata_parser_supports_files',
         ],
-        messages: [
-          { code: 1000, message: 'string' },
-          { code: 1000, message: 'string' },
-          { code: 1000, message: 'string' },
-        ],
-        result: {
-          bindings: [{ type: 'kv_namespace' }, { type: 'kv_namespace' }, { type: 'kv_namespace' }],
-          compatibility_date: '2022-04-05',
-          compatibility_flags: [
-            'formdata_parser_supports_files',
-            'formdata_parser_supports_files',
-            'formdata_parser_supports_files',
+        logpush: false,
+        migrations: {
+          new_tag: 'v2',
+          old_tag: 'v1',
+          deleted_classes: ['string', 'string', 'string'],
+          new_classes: ['string', 'string', 'string'],
+          renamed_classes: [
+            { from: 'string', to: 'string' },
+            { from: 'string', to: 'string' },
+            { from: 'string', to: 'string' },
           ],
-          logpush: false,
-          migrations: {
-            new_tag: 'v2',
-            old_tag: 'v1',
-            deleted_classes: ['string', 'string', 'string'],
-            new_classes: ['string', 'string', 'string'],
-            renamed_classes: [
-              { from: 'string', to: 'string' },
-              { from: 'string', to: 'string' },
-              { from: 'string', to: 'string' },
-            ],
-            transferred_classes: [
-              { from: 'string', from_script: 'string', to: 'string' },
-              { from: 'string', from_script: 'string', to: 'string' },
-              { from: 'string', from_script: 'string', to: 'string' },
-            ],
-          },
-          placement: { mode: 'smart' },
-          tags: ['my-tag', 'my-tag', 'my-tag'],
-          tail_consumers: [
-            { environment: 'production', namespace: 'my-namespace', service: 'my-log-consumer' },
-            { environment: 'production', namespace: 'my-namespace', service: 'my-log-consumer' },
-            { environment: 'production', namespace: 'my-namespace', service: 'my-log-consumer' },
+          transferred_classes: [
+            { from: 'string', from_script: 'string', to: 'string' },
+            { from: 'string', from_script: 'string', to: 'string' },
+            { from: 'string', from_script: 'string', to: 'string' },
           ],
-          usage_model: 'unbound',
         },
-        success: true,
+        placement: { mode: 'smart' },
+        tags: ['my-tag', 'my-tag', 'my-tag'],
+        tail_consumers: [
+          { environment: 'production', namespace: 'my-namespace', service: 'my-log-consumer' },
+          { environment: 'production', namespace: 'my-namespace', service: 'my-log-consumer' },
+          { environment: 'production', namespace: 'my-namespace', service: 'my-log-consumer' },
+        ],
+        usage_model: 'unbound',
       },
-    );
+      success: true,
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
-    const responsePromise = cloudflare.workers.services.environments.settings.get(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'my-worker',
-      'production',
-    );
+  test.skip('get: only required params', async () => {
+    const responsePromise = cloudflare.workers.services.environments.settings.get('my-worker', 'production', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -116,15 +110,9 @@ describe('resource settings', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.workers.services.environments.settings.get(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        'my-worker',
-        'production',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.workers.services.environments.settings.get('my-worker', 'production', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 });

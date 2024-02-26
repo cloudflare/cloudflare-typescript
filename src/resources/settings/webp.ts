@@ -10,13 +10,10 @@ export class Webp extends APIResource {
    * offers a performance advantage over the original image format, Cloudflare will
    * serve a WebP version of the original image.
    */
-  edit(
-    zoneId: string,
-    body: WebpEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<WebpEditResponse> {
+  edit(params: WebpEditParams, options?: Core.RequestOptions): Core.APIPromise<WebpEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/settings/webp`, { body, ...options }) as Core.APIPromise<{
+      this._client.patch(`/zones/${zone_id}/settings/webp`, { body, ...options }) as Core.APIPromise<{
         result: WebpEditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -27,9 +24,10 @@ export class Webp extends APIResource {
    * offers a performance advantage over the original image format, Cloudflare will
    * serve a WebP version of the original image.
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<WebpGetResponse> {
+  get(params: WebpGetParams, options?: Core.RequestOptions): Core.APIPromise<WebpGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/settings/webp`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/settings/webp`, options) as Core.APIPromise<{
         result: WebpGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -94,13 +92,26 @@ export interface WebpGetResponse {
 
 export interface WebpEditParams {
   /**
-   * Value of the zone setting.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Value of the zone setting.
    */
   value: 'off' | 'on';
+}
+
+export interface WebpGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }
 
 export namespace Webp {
   export import WebpEditResponse = WebpAPI.WebpEditResponse;
   export import WebpGetResponse = WebpAPI.WebpGetResponse;
   export import WebpEditParams = WebpAPI.WebpEditParams;
+  export import WebpGetParams = WebpAPI.WebpGetParams;
 }

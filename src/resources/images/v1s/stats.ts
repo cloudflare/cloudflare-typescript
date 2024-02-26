@@ -8,9 +8,10 @@ export class Stats extends APIResource {
   /**
    * Fetch usage statistics details for Cloudflare Images.
    */
-  get(accountId: string, options?: Core.RequestOptions): Core.APIPromise<StatGetResponse> {
+  get(params: StatGetParams, options?: Core.RequestOptions): Core.APIPromise<StatGetResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/images/v1/stats`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/images/v1/stats`, options) as Core.APIPromise<{
         result: StatGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -35,6 +36,14 @@ export namespace StatGetResponse {
   }
 }
 
+export interface StatGetParams {
+  /**
+   * Account identifier tag.
+   */
+  account_id: string;
+}
+
 export namespace Stats {
   export import StatGetResponse = StatsAPI.StatGetResponse;
+  export import StatGetParams = StatsAPI.StatGetParams;
 }

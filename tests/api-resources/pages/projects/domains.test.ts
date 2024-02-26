@@ -15,11 +15,10 @@ const cloudflare = new Cloudflare({
 describe('resource domains', () => {
   // skipped: tests are disabled for the time being
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.pages.projects.domains.create(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'this-is-my-project-01',
-      { name: 'example.com' },
-    );
+    const responsePromise = cloudflare.pages.projects.domains.create('this-is-my-project-01', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: { name: 'example.com' },
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -31,19 +30,17 @@ describe('resource domains', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.pages.projects.domains.create(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'this-is-my-project-01',
-      { name: 'example.com' },
-    );
+    const response = await cloudflare.pages.projects.domains.create('this-is-my-project-01', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: { name: 'example.com' },
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
-    const responsePromise = cloudflare.pages.projects.domains.list(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'this-is-my-project-01',
-    );
+  test.skip('list: only required params', async () => {
+    const responsePromise = cloudflare.pages.projects.domains.list('this-is-my-project-01', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -54,22 +51,17 @@ describe('resource domains', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.pages.projects.domains.list('023e105f4ecef8ad9ca31a8372d0c353', 'this-is-my-project-01', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('list: required and optional params', async () => {
+    const response = await cloudflare.pages.projects.domains.list('this-is-my-project-01', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
-    const responsePromise = cloudflare.pages.projects.domains.delete(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'this-is-my-project-01',
-      'string',
-    );
+  test.skip('delete: only required params', async () => {
+    const responsePromise = cloudflare.pages.projects.domains.delete('this-is-my-project-01', 'string', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -80,12 +72,17 @@ describe('resource domains', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('edit', async () => {
-    const responsePromise = cloudflare.pages.projects.domains.edit(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'this-is-my-project-01',
-      'string',
-    );
+  test.skip('delete: required and optional params', async () => {
+    const response = await cloudflare.pages.projects.domains.delete('this-is-my-project-01', 'string', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('edit: only required params', async () => {
+    const responsePromise = cloudflare.pages.projects.domains.edit('this-is-my-project-01', 'string', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -96,12 +93,17 @@ describe('resource domains', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
-    const responsePromise = cloudflare.pages.projects.domains.get(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'this-is-my-project-01',
-      'string',
-    );
+  test.skip('edit: required and optional params', async () => {
+    const response = await cloudflare.pages.projects.domains.edit('this-is-my-project-01', 'string', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get: only required params', async () => {
+    const responsePromise = cloudflare.pages.projects.domains.get('this-is-my-project-01', 'string', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -112,15 +114,9 @@ describe('resource domains', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.pages.projects.domains.get(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        'this-is-my-project-01',
-        'string',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.pages.projects.domains.get('this-is-my-project-01', 'string', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 });

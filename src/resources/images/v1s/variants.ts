@@ -8,13 +8,10 @@ export class Variants extends APIResource {
   /**
    * Specify variants that allow you to resize images for different use cases.
    */
-  create(
-    accountId: string,
-    body: VariantCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<VariantCreateResponse> {
+  create(params: VariantCreateParams, options?: Core.RequestOptions): Core.APIPromise<VariantCreateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/images/v1/variants`, {
+      this._client.post(`/accounts/${account_id}/images/v1/variants`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: VariantCreateResponse }>
@@ -24,9 +21,10 @@ export class Variants extends APIResource {
   /**
    * Lists existing variants.
    */
-  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<VariantListResponse> {
+  list(params: VariantListParams, options?: Core.RequestOptions): Core.APIPromise<VariantListResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/images/v1/variants`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/images/v1/variants`, options) as Core.APIPromise<{
         result: VariantListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -36,13 +34,14 @@ export class Variants extends APIResource {
    * Deleting a variant purges the cache for all images associated with the variant.
    */
   delete(
-    accountId: string,
     variantId: unknown,
+    params: VariantDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<VariantDeleteResponse> {
+    const { account_id } = params;
     return (
       this._client.delete(
-        `/accounts/${accountId}/images/v1/variants/${variantId}`,
+        `/accounts/${account_id}/images/v1/variants/${variantId}`,
         options,
       ) as Core.APIPromise<{ result: VariantDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -52,13 +51,13 @@ export class Variants extends APIResource {
    * Updating a variant purges the cache for all images associated with the variant.
    */
   edit(
-    accountId: string,
     variantId: unknown,
-    body: VariantEditParams,
+    params: VariantEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<VariantEditResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.patch(`/accounts/${accountId}/images/v1/variants/${variantId}`, {
+      this._client.patch(`/accounts/${account_id}/images/v1/variants/${variantId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: VariantEditResponse }>
@@ -69,14 +68,16 @@ export class Variants extends APIResource {
    * Fetch details for a single variant.
    */
   get(
-    accountId: string,
     variantId: unknown,
+    params: VariantGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<VariantGetResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/images/v1/variants/${variantId}`, options) as Core.APIPromise<{
-        result: VariantGetResponse;
-      }>
+      this._client.get(
+        `/accounts/${account_id}/images/v1/variants/${variantId}`,
+        options,
+      ) as Core.APIPromise<{ result: VariantGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -286,16 +287,24 @@ export namespace VariantGetResponse {
 }
 
 export interface VariantCreateParams {
+  /**
+   * Path param: Account identifier tag.
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
   id: unknown;
 
   /**
-   * Allows you to define image resizing sizes for different use cases.
+   * Body param: Allows you to define image resizing sizes for different use cases.
    */
   options: VariantCreateParams.Options;
 
   /**
-   * Indicates whether the variant can access an image without a signature,
-   * regardless of image access control.
+   * Body param: Indicates whether the variant can access an image without a
+   * signature, regardless of image access control.
    */
   neverRequireSignedURLs?: boolean;
 }
@@ -328,15 +337,34 @@ export namespace VariantCreateParams {
   }
 }
 
+export interface VariantListParams {
+  /**
+   * Account identifier tag.
+   */
+  account_id: string;
+}
+
+export interface VariantDeleteParams {
+  /**
+   * Account identifier tag.
+   */
+  account_id: string;
+}
+
 export interface VariantEditParams {
   /**
-   * Allows you to define image resizing sizes for different use cases.
+   * Path param: Account identifier tag.
+   */
+  account_id: string;
+
+  /**
+   * Body param: Allows you to define image resizing sizes for different use cases.
    */
   options: VariantEditParams.Options;
 
   /**
-   * Indicates whether the variant can access an image without a signature,
-   * regardless of image access control.
+   * Body param: Indicates whether the variant can access an image without a
+   * signature, regardless of image access control.
    */
   neverRequireSignedURLs?: boolean;
 }
@@ -369,6 +397,13 @@ export namespace VariantEditParams {
   }
 }
 
+export interface VariantGetParams {
+  /**
+   * Account identifier tag.
+   */
+  account_id: string;
+}
+
 export namespace Variants {
   export import VariantCreateResponse = VariantsAPI.VariantCreateResponse;
   export import VariantListResponse = VariantsAPI.VariantListResponse;
@@ -376,5 +411,8 @@ export namespace Variants {
   export import VariantEditResponse = VariantsAPI.VariantEditResponse;
   export import VariantGetResponse = VariantsAPI.VariantGetResponse;
   export import VariantCreateParams = VariantsAPI.VariantCreateParams;
+  export import VariantListParams = VariantsAPI.VariantListParams;
+  export import VariantDeleteParams = VariantsAPI.VariantDeleteParams;
   export import VariantEditParams = VariantsAPI.VariantEditParams;
+  export import VariantGetParams = VariantsAPI.VariantGetParams;
 }

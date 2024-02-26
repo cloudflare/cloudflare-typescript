@@ -8,13 +8,10 @@ export class Webhooks extends APIResource {
   /**
    * Creates a new webhook destination.
    */
-  create(
-    accountId: string,
-    body: WebhookCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<WebhookCreateResponse> {
+  create(params: WebhookCreateParams, options?: Core.RequestOptions): Core.APIPromise<WebhookCreateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/alerting/v3/destinations/webhooks`, {
+      this._client.post(`/accounts/${account_id}/alerting/v3/destinations/webhooks`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: WebhookCreateResponse }>
@@ -25,13 +22,13 @@ export class Webhooks extends APIResource {
    * Update a webhook destination.
    */
   update(
-    accountId: string,
     webhookId: string,
-    body: WebhookUpdateParams,
+    params: WebhookUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<WebhookUpdateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.put(`/accounts/${accountId}/alerting/v3/destinations/webhooks/${webhookId}`, {
+      this._client.put(`/accounts/${account_id}/alerting/v3/destinations/webhooks/${webhookId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: WebhookUpdateResponse }>
@@ -41,10 +38,14 @@ export class Webhooks extends APIResource {
   /**
    * Gets a list of all configured webhook destinations.
    */
-  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<WebhookListResponse | null> {
+  list(
+    params: WebhookListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<WebhookListResponse | null> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountId}/alerting/v3/destinations/webhooks`,
+        `/accounts/${account_id}/alerting/v3/destinations/webhooks`,
         options,
       ) as Core.APIPromise<{ result: WebhookListResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -54,13 +55,14 @@ export class Webhooks extends APIResource {
    * Delete a configured webhook destination.
    */
   delete(
-    accountId: string,
     webhookId: string,
+    params: WebhookDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<WebhookDeleteResponse | null> {
+    const { account_id } = params;
     return (
       this._client.delete(
-        `/accounts/${accountId}/alerting/v3/destinations/webhooks/${webhookId}`,
+        `/accounts/${account_id}/alerting/v3/destinations/webhooks/${webhookId}`,
         options,
       ) as Core.APIPromise<{ result: WebhookDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -70,13 +72,14 @@ export class Webhooks extends APIResource {
    * Get details for a single webhooks destination.
    */
   get(
-    accountId: string,
     webhookId: string,
+    params: WebhookGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<WebhookGetResponse> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountId}/alerting/v3/destinations/webhooks/${webhookId}`,
+        `/accounts/${account_id}/alerting/v3/destinations/webhooks/${webhookId}`,
         options,
       ) as Core.APIPromise<{ result: WebhookGetResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -199,19 +202,24 @@ export interface WebhookGetResponse {
 
 export interface WebhookCreateParams {
   /**
-   * The name of the webhook destination. This will be included in the request body
-   * when you receive a webhook notification.
+   * Path param: The account id
+   */
+  account_id: string;
+
+  /**
+   * Body param: The name of the webhook destination. This will be included in the
+   * request body when you receive a webhook notification.
    */
   name: string;
 
   /**
-   * The POST endpoint to call when dispatching a notification.
+   * Body param: The POST endpoint to call when dispatching a notification.
    */
   url: string;
 
   /**
-   * Optional secret that will be passed in the `cf-webhook-auth` header when
-   * dispatching generic webhook notifications or formatted for supported
+   * Body param: Optional secret that will be passed in the `cf-webhook-auth` header
+   * when dispatching generic webhook notifications or formatted for supported
    * destinations. Secrets are not returned in any API response body.
    */
   secret?: string;
@@ -219,22 +227,48 @@ export interface WebhookCreateParams {
 
 export interface WebhookUpdateParams {
   /**
-   * The name of the webhook destination. This will be included in the request body
-   * when you receive a webhook notification.
+   * Path param: The account id
+   */
+  account_id: string;
+
+  /**
+   * Body param: The name of the webhook destination. This will be included in the
+   * request body when you receive a webhook notification.
    */
   name: string;
 
   /**
-   * The POST endpoint to call when dispatching a notification.
+   * Body param: The POST endpoint to call when dispatching a notification.
    */
   url: string;
 
   /**
-   * Optional secret that will be passed in the `cf-webhook-auth` header when
-   * dispatching generic webhook notifications or formatted for supported
+   * Body param: Optional secret that will be passed in the `cf-webhook-auth` header
+   * when dispatching generic webhook notifications or formatted for supported
    * destinations. Secrets are not returned in any API response body.
    */
   secret?: string;
+}
+
+export interface WebhookListParams {
+  /**
+   * The account id
+   */
+  account_id: string;
+}
+
+export interface WebhookDeleteParams {
+  /**
+   * The account id
+   */
+  account_id: string;
+}
+
+export interface WebhookGetParams {
+  /**
+   * The account id
+   */
+  account_id: string;
 }
 
 export namespace Webhooks {
@@ -245,4 +279,7 @@ export namespace Webhooks {
   export import WebhookGetResponse = WebhooksAPI.WebhookGetResponse;
   export import WebhookCreateParams = WebhooksAPI.WebhookCreateParams;
   export import WebhookUpdateParams = WebhooksAPI.WebhookUpdateParams;
+  export import WebhookListParams = WebhooksAPI.WebhookListParams;
+  export import WebhookDeleteParams = WebhooksAPI.WebhookDeleteParams;
+  export import WebhookGetParams = WebhooksAPI.WebhookGetParams;
 }

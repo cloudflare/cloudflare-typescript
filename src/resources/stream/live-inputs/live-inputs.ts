@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as LiveInputsAPI from 'cloudflare/resources/stream/live-inputs/live-inputs';
 import * as OutputsAPI from 'cloudflare/resources/stream/live-inputs/outputs';
 
@@ -14,12 +13,12 @@ export class LiveInputs extends APIResource {
    * stream live video to Cloudflare Stream.
    */
   create(
-    accountId: string,
-    body: LiveInputCreateParams,
+    params: LiveInputCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<LiveInputCreateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/stream/live_inputs`, {
+      this._client.post(`/accounts/${account_id}/stream/live_inputs`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: LiveInputCreateResponse }>
@@ -30,13 +29,13 @@ export class LiveInputs extends APIResource {
    * Updates a specified live input.
    */
   update(
-    accountId: string,
     liveInputIdentifier: string,
-    body: LiveInputUpdateParams,
+    params: LiveInputUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<LiveInputUpdateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.put(`/accounts/${accountId}/stream/live_inputs/${liveInputIdentifier}`, {
+      this._client.put(`/accounts/${account_id}/stream/live_inputs/${liveInputIdentifier}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: LiveInputUpdateResponse }>
@@ -47,22 +46,10 @@ export class LiveInputs extends APIResource {
    * Lists the live inputs created for an account. To get the credentials needed to
    * stream to a specific live input, request a single live input.
    */
-  list(
-    accountId: string,
-    query?: LiveInputListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<LiveInputListResponse>;
-  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<LiveInputListResponse>;
-  list(
-    accountId: string,
-    query: LiveInputListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<LiveInputListResponse> {
-    if (isRequestOptions(query)) {
-      return this.list(accountId, {}, query);
-    }
+  list(params: LiveInputListParams, options?: Core.RequestOptions): Core.APIPromise<LiveInputListResponse> {
+    const { account_id, ...query } = params;
     return (
-      this._client.get(`/accounts/${accountId}/stream/live_inputs`, {
+      this._client.get(`/accounts/${account_id}/stream/live_inputs`, {
         query,
         ...options,
       }) as Core.APIPromise<{ result: LiveInputListResponse }>
@@ -74,11 +61,12 @@ export class LiveInputs extends APIResource {
    * inaccessible to any future API calls.
    */
   delete(
-    accountId: string,
     liveInputIdentifier: string,
+    params: LiveInputDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<void> {
-    return this._client.delete(`/accounts/${accountId}/stream/live_inputs/${liveInputIdentifier}`, {
+    const { account_id } = params;
+    return this._client.delete(`/accounts/${account_id}/stream/live_inputs/${liveInputIdentifier}`, {
       ...options,
       headers: { Accept: '*/*', ...options?.headers },
     });
@@ -88,13 +76,14 @@ export class LiveInputs extends APIResource {
    * Retrieves details of an existing live input.
    */
   get(
-    accountId: string,
     liveInputIdentifier: string,
+    params: LiveInputGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<LiveInputGetResponse> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountId}/stream/live_inputs/${liveInputIdentifier}`,
+        `/accounts/${account_id}/stream/live_inputs/${liveInputIdentifier}`,
         options,
       ) as Core.APIPromise<{ result: LiveInputGetResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -790,29 +779,34 @@ export namespace LiveInputGetResponse {
 
 export interface LiveInputCreateParams {
   /**
-   * Sets the creator ID asssociated with this live input.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: Sets the creator ID asssociated with this live input.
    */
   defaultCreator?: string;
 
   /**
-   * Indicates the number of days after which the live inputs recordings will be
-   * deleted. When a stream completes and the recording is ready, the value is used
-   * to calculate a scheduled deletion date for that recording. Omit the field to
-   * indicate no change, or include with a `null` value to remove an existing
-   * scheduled deletion.
+   * Body param: Indicates the number of days after which the live inputs recordings
+   * will be deleted. When a stream completes and the recording is ready, the value
+   * is used to calculate a scheduled deletion date for that recording. Omit the
+   * field to indicate no change, or include with a `null` value to remove an
+   * existing scheduled deletion.
    */
   deleteRecordingAfterDays?: number;
 
   /**
-   * A user modifiable key-value store used to reference other systems of record for
-   * managing live inputs.
+   * Body param: A user modifiable key-value store used to reference other systems of
+   * record for managing live inputs.
    */
   meta?: unknown;
 
   /**
-   * Records the input to a Cloudflare Stream video. Behavior depends on the mode. In
-   * most cases, the video will initially be viewable as a live video and transition
-   * to on-demand after a condition is satisfied.
+   * Body param: Records the input to a Cloudflare Stream video. Behavior depends on
+   * the mode. In most cases, the video will initially be viewable as a live video
+   * and transition to on-demand after a condition is satisfied.
    */
   recording?: LiveInputCreateParams.Recording;
 }
@@ -856,29 +850,34 @@ export namespace LiveInputCreateParams {
 
 export interface LiveInputUpdateParams {
   /**
-   * Sets the creator ID asssociated with this live input.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: Sets the creator ID asssociated with this live input.
    */
   defaultCreator?: string;
 
   /**
-   * Indicates the number of days after which the live inputs recordings will be
-   * deleted. When a stream completes and the recording is ready, the value is used
-   * to calculate a scheduled deletion date for that recording. Omit the field to
-   * indicate no change, or include with a `null` value to remove an existing
-   * scheduled deletion.
+   * Body param: Indicates the number of days after which the live inputs recordings
+   * will be deleted. When a stream completes and the recording is ready, the value
+   * is used to calculate a scheduled deletion date for that recording. Omit the
+   * field to indicate no change, or include with a `null` value to remove an
+   * existing scheduled deletion.
    */
   deleteRecordingAfterDays?: number;
 
   /**
-   * A user modifiable key-value store used to reference other systems of record for
-   * managing live inputs.
+   * Body param: A user modifiable key-value store used to reference other systems of
+   * record for managing live inputs.
    */
   meta?: unknown;
 
   /**
-   * Records the input to a Cloudflare Stream video. Behavior depends on the mode. In
-   * most cases, the video will initially be viewable as a live video and transition
-   * to on-demand after a condition is satisfied.
+   * Body param: Records the input to a Cloudflare Stream video. Behavior depends on
+   * the mode. In most cases, the video will initially be viewable as a live video
+   * and transition to on-demand after a condition is satisfied.
    */
   recording?: LiveInputUpdateParams.Recording;
 }
@@ -922,10 +921,29 @@ export namespace LiveInputUpdateParams {
 
 export interface LiveInputListParams {
   /**
-   * Includes the total number of videos associated with the submitted query
-   * parameters.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Query param: Includes the total number of videos associated with the submitted
+   * query parameters.
    */
   include_counts?: boolean;
+}
+
+export interface LiveInputDeleteParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface LiveInputGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
 }
 
 export namespace LiveInputs {
@@ -936,10 +954,14 @@ export namespace LiveInputs {
   export import LiveInputCreateParams = LiveInputsAPI.LiveInputCreateParams;
   export import LiveInputUpdateParams = LiveInputsAPI.LiveInputUpdateParams;
   export import LiveInputListParams = LiveInputsAPI.LiveInputListParams;
+  export import LiveInputDeleteParams = LiveInputsAPI.LiveInputDeleteParams;
+  export import LiveInputGetParams = LiveInputsAPI.LiveInputGetParams;
   export import Outputs = OutputsAPI.Outputs;
   export import OutputCreateResponse = OutputsAPI.OutputCreateResponse;
   export import OutputUpdateResponse = OutputsAPI.OutputUpdateResponse;
   export import OutputListResponse = OutputsAPI.OutputListResponse;
   export import OutputCreateParams = OutputsAPI.OutputCreateParams;
   export import OutputUpdateParams = OutputsAPI.OutputUpdateParams;
+  export import OutputListParams = OutputsAPI.OutputListParams;
+  export import OutputDeleteParams = OutputsAPI.OutputDeleteParams;
 }

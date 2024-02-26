@@ -13,4 +13,6 @@ export namespace Cmb {
   export import ConfigDeleteResponse = ConfigAPI.ConfigDeleteResponse;
   export import ConfigGetResponse = ConfigAPI.ConfigGetResponse;
   export import ConfigCreateParams = ConfigAPI.ConfigCreateParams;
+  export import ConfigDeleteParams = ConfigAPI.ConfigDeleteParams;
+  export import ConfigGetParams = ConfigAPI.ConfigGetParams;
 }

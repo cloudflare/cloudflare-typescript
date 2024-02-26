@@ -1,12 +1,22 @@
 // File generated from our OpenAPI spec by Stainless.
 
-export { Downloads } from './downloads';
+export { DownloadGetParams, Downloads } from './downloads';
 export {
   OwnershipCreateResponse,
   OwnershipGetResponse,
   OwnershipValidateResponse,
   OwnershipCreateParams,
+  OwnershipDeleteParams,
+  OwnershipGetParams,
   OwnershipValidateParams,
   Ownerships,
 } from './ownerships';
-export { PCAPCreateResponse, PCAPListResponse, PCAPGetResponse, PCAPCreateParams, PCAPs } from './pcaps';
+export {
+  PCAPCreateResponse,
+  PCAPListResponse,
+  PCAPGetResponse,
+  PCAPCreateParams,
+  PCAPListParams,
+  PCAPGetParams,
+  PCAPs,
+} from './pcaps';

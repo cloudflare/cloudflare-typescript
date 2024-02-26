@@ -9,12 +9,12 @@ export class Networks extends APIResource {
    * Creates a new device managed network.
    */
   create(
-    accountId: unknown,
-    body: NetworkCreateParams,
+    params: NetworkCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<NetworkCreateResponse | null> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/devices/networks`, { body, ...options }) as Core.APIPromise<{
+      this._client.post(`/accounts/${account_id}/devices/networks`, { body, ...options }) as Core.APIPromise<{
         result: NetworkCreateResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -24,13 +24,13 @@ export class Networks extends APIResource {
    * Updates a configured device managed network.
    */
   update(
-    accountId: unknown,
     networkId: string,
-    body: NetworkUpdateParams,
+    params: NetworkUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<NetworkUpdateResponse | null> {
+    const { account_id, ...body } = params;
     return (
-      this._client.put(`/accounts/${accountId}/devices/networks/${networkId}`, {
+      this._client.put(`/accounts/${account_id}/devices/networks/${networkId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: NetworkUpdateResponse | null }>
@@ -40,9 +40,13 @@ export class Networks extends APIResource {
   /**
    * Fetches a list of managed networks for an account.
    */
-  list(accountId: unknown, options?: Core.RequestOptions): Core.APIPromise<NetworkListResponse | null> {
+  list(
+    params: NetworkListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<NetworkListResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/devices/networks`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/devices/networks`, options) as Core.APIPromise<{
         result: NetworkListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -53,13 +57,14 @@ export class Networks extends APIResource {
    * managed networks for an account.
    */
   delete(
-    accountId: unknown,
     networkId: string,
+    params: NetworkDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<NetworkDeleteResponse | null> {
+    const { account_id } = params;
     return (
       this._client.delete(
-        `/accounts/${accountId}/devices/networks/${networkId}`,
+        `/accounts/${account_id}/devices/networks/${networkId}`,
         options,
       ) as Core.APIPromise<{ result: NetworkDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -69,12 +74,13 @@ export class Networks extends APIResource {
    * Fetches details for a single managed network.
    */
   get(
-    accountId: unknown,
     networkId: string,
+    params: NetworkGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<NetworkGetResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/devices/networks/${networkId}`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/devices/networks/${networkId}`, options) as Core.APIPromise<{
         result: NetworkGetResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -311,18 +317,23 @@ export namespace NetworkGetResponse {
 
 export interface NetworkCreateParams {
   /**
-   * The configuration object containing information for the WARP client to detect
-   * the managed network.
+   * Path param:
+   */
+  account_id: unknown;
+
+  /**
+   * Body param: The configuration object containing information for the WARP client
+   * to detect the managed network.
    */
   config: NetworkCreateParams.Config;
 
   /**
-   * The name of the device managed network. This name must be unique.
+   * Body param: The name of the device managed network. This name must be unique.
    */
   name: string;
 
   /**
-   * The type of device managed network.
+   * Body param: The type of device managed network.
    */
   type: 'tls';
 }
@@ -350,18 +361,23 @@ export namespace NetworkCreateParams {
 
 export interface NetworkUpdateParams {
   /**
-   * The configuration object containing information for the WARP client to detect
-   * the managed network.
+   * Path param:
+   */
+  account_id: unknown;
+
+  /**
+   * Body param: The configuration object containing information for the WARP client
+   * to detect the managed network.
    */
   config?: NetworkUpdateParams.Config;
 
   /**
-   * The name of the device managed network. This name must be unique.
+   * Body param: The name of the device managed network. This name must be unique.
    */
   name?: string;
 
   /**
-   * The type of device managed network.
+   * Body param: The type of device managed network.
    */
   type?: 'tls';
 }
@@ -387,6 +403,18 @@ export namespace NetworkUpdateParams {
   }
 }
 
+export interface NetworkListParams {
+  account_id: unknown;
+}
+
+export interface NetworkDeleteParams {
+  account_id: unknown;
+}
+
+export interface NetworkGetParams {
+  account_id: unknown;
+}
+
 export namespace Networks {
   export import NetworkCreateResponse = NetworksAPI.NetworkCreateResponse;
   export import NetworkUpdateResponse = NetworksAPI.NetworkUpdateResponse;
@@ -395,4 +423,7 @@ export namespace Networks {
   export import NetworkGetResponse = NetworksAPI.NetworkGetResponse;
   export import NetworkCreateParams = NetworksAPI.NetworkCreateParams;
   export import NetworkUpdateParams = NetworksAPI.NetworkUpdateParams;
+  export import NetworkListParams = NetworksAPI.NetworkListParams;
+  export import NetworkDeleteParams = NetworksAPI.NetworkDeleteParams;
+  export import NetworkGetParams = NetworksAPI.NetworkGetParams;
 }

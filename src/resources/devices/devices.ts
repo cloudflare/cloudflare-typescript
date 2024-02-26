@@ -26,11 +26,12 @@ export class Devices extends APIResource {
    * Fetches a list of enrolled devices.
    */
   devicesListDevices(
-    accountId: unknown,
+    params: DeviceDevicesListDevicesParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DeviceDevicesListDevicesResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/devices`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/devices`, options) as Core.APIPromise<{
         result: DeviceDevicesListDevicesResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -40,12 +41,13 @@ export class Devices extends APIResource {
    * Fetches details for a single device.
    */
   get(
-    accountId: unknown,
     deviceId: string,
+    params: DeviceGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DeviceGetResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/devices/${deviceId}`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/devices/${deviceId}`, options) as Core.APIPromise<{
         result: DeviceGetResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -174,9 +176,19 @@ export namespace DeviceDevicesListDevicesResponse {
 
 export type DeviceGetResponse = unknown | string;
 
+export interface DeviceDevicesListDevicesParams {
+  account_id: unknown;
+}
+
+export interface DeviceGetParams {
+  account_id: unknown;
+}
+
 export namespace Devices {
   export import DeviceDevicesListDevicesResponse = DevicesAPI.DeviceDevicesListDevicesResponse;
   export import DeviceGetResponse = DevicesAPI.DeviceGetResponse;
+  export import DeviceDevicesListDevicesParams = DevicesAPI.DeviceDevicesListDevicesParams;
+  export import DeviceGetParams = DevicesAPI.DeviceGetParams;
   export import DEXTests = DEXTestsAPI.DEXTests;
   export import DEXTestCreateResponse = DEXTestsAPI.DEXTestCreateResponse;
   export import DEXTestUpdateResponse = DEXTestsAPI.DEXTestUpdateResponse;
@@ -185,6 +197,9 @@ export namespace Devices {
   export import DEXTestGetResponse = DEXTestsAPI.DEXTestGetResponse;
   export import DEXTestCreateParams = DEXTestsAPI.DEXTestCreateParams;
   export import DEXTestUpdateParams = DEXTestsAPI.DEXTestUpdateParams;
+  export import DEXTestListParams = DEXTestsAPI.DEXTestListParams;
+  export import DEXTestDeleteParams = DEXTestsAPI.DEXTestDeleteParams;
+  export import DEXTestGetParams = DEXTestsAPI.DEXTestGetParams;
   export import Networks = NetworksAPI.Networks;
   export import NetworkCreateResponse = NetworksAPI.NetworkCreateResponse;
   export import NetworkUpdateResponse = NetworksAPI.NetworkUpdateResponse;
@@ -193,6 +208,9 @@ export namespace Devices {
   export import NetworkGetResponse = NetworksAPI.NetworkGetResponse;
   export import NetworkCreateParams = NetworksAPI.NetworkCreateParams;
   export import NetworkUpdateParams = NetworksAPI.NetworkUpdateParams;
+  export import NetworkListParams = NetworksAPI.NetworkListParams;
+  export import NetworkDeleteParams = NetworksAPI.NetworkDeleteParams;
+  export import NetworkGetParams = NetworksAPI.NetworkGetParams;
   export import Policies = PoliciesAPI.Policies;
   export import PolicyCreateResponse = PoliciesAPI.PolicyCreateResponse;
   export import PolicyListResponse = PoliciesAPI.PolicyListResponse;
@@ -200,7 +218,10 @@ export namespace Devices {
   export import PolicyEditResponse = PoliciesAPI.PolicyEditResponse;
   export import PolicyGetResponse = PoliciesAPI.PolicyGetResponse;
   export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
+  export import PolicyListParams = PoliciesAPI.PolicyListParams;
+  export import PolicyDeleteParams = PoliciesAPI.PolicyDeleteParams;
   export import PolicyEditParams = PoliciesAPI.PolicyEditParams;
+  export import PolicyGetParams = PoliciesAPI.PolicyGetParams;
   export import Postures = PosturesAPI.Postures;
   export import PostureCreateResponse = PosturesAPI.PostureCreateResponse;
   export import PostureUpdateResponse = PosturesAPI.PostureUpdateResponse;
@@ -209,6 +230,9 @@ export namespace Devices {
   export import PostureGetResponse = PosturesAPI.PostureGetResponse;
   export import PostureCreateParams = PosturesAPI.PostureCreateParams;
   export import PostureUpdateParams = PosturesAPI.PostureUpdateParams;
+  export import PostureListParams = PosturesAPI.PostureListParams;
+  export import PostureDeleteParams = PosturesAPI.PostureDeleteParams;
+  export import PostureGetParams = PosturesAPI.PostureGetParams;
   export import Revokes = RevokesAPI.Revokes;
   export import RevokeCreateResponse = RevokesAPI.RevokeCreateResponse;
   export import RevokeCreateParams = RevokesAPI.RevokeCreateParams;
@@ -216,9 +240,11 @@ export namespace Devices {
   export import SettingUpdateResponse = SettingsAPI.SettingUpdateResponse;
   export import SettingListResponse = SettingsAPI.SettingListResponse;
   export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;
+  export import SettingListParams = SettingsAPI.SettingListParams;
   export import Unrevokes = UnrevokesAPI.Unrevokes;
   export import UnrevokeCreateResponse = UnrevokesAPI.UnrevokeCreateResponse;
   export import UnrevokeCreateParams = UnrevokesAPI.UnrevokeCreateParams;
   export import OverrideCodes = OverrideCodesAPI.OverrideCodes;
   export import OverrideCodeListResponse = OverrideCodesAPI.OverrideCodeListResponse;
+  export import OverrideCodeListParams = OverrideCodesAPI.OverrideCodeListParams;
 }

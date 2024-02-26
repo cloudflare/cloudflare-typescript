@@ -7,7 +7,10 @@ export {
   IntegrationEditResponse,
   IntegrationGetResponse,
   IntegrationCreateParams,
+  IntegrationListParams,
+  IntegrationDeleteParams,
   IntegrationEditParams,
+  IntegrationGetParams,
   Integrations,
 } from './integrations';
 export {
@@ -18,5 +21,8 @@ export {
   PostureGetResponse,
   PostureCreateParams,
   PostureUpdateParams,
+  PostureListParams,
+  PostureDeleteParams,
+  PostureGetParams,
   Postures,
 } from './postures';

@@ -17,7 +17,7 @@ describe('resource certificates', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.access.certificates.create({
       account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'string',
       certificate:
         '-----BEGIN CERTIFICATE-----\nMIIGAjCCA+qgAwIBAgIJAI7kymlF7CWT...N4RI7KKB7nikiuUf8vhULKy5IX10\nDrUtmu/B\n-----END CERTIFICATE-----',
       name: 'Allow devs',
@@ -35,7 +35,7 @@ describe('resource certificates', () => {
   test.skip('create: required and optional params', async () => {
     const response = await cloudflare.access.certificates.create({
       account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'string',
       certificate:
         '-----BEGIN CERTIFICATE-----\nMIIGAjCCA+qgAwIBAgIJAI7kymlF7CWT...N4RI7KKB7nikiuUf8vhULKy5IX10\nDrUtmu/B\n-----END CERTIFICATE-----',
       name: 'Allow devs',
@@ -47,7 +47,7 @@ describe('resource certificates', () => {
   test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.access.certificates.update('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'string',
       associated_hostnames: ['admin.example.com', 'admin.example.com', 'admin.example.com'],
     });
     const rawResponse = await responsePromise.asResponse();
@@ -63,7 +63,7 @@ describe('resource certificates', () => {
   test.skip('update: required and optional params', async () => {
     const response = await cloudflare.access.certificates.update('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'string',
       associated_hostnames: ['admin.example.com', 'admin.example.com', 'admin.example.com'],
       name: 'Allow devs',
     });
@@ -71,10 +71,7 @@ describe('resource certificates', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('list: only required params', async () => {
-    const responsePromise = cloudflare.access.certificates.list({
-      account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = cloudflare.access.certificates.list({ account_id: 'string', zone_id: 'string' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -86,17 +83,14 @@ describe('resource certificates', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('list: required and optional params', async () => {
-    const response = await cloudflare.access.certificates.list({
-      account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const response = await cloudflare.access.certificates.list({ account_id: 'string', zone_id: 'string' });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.access.certificates.delete('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'string',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -111,7 +105,7 @@ describe('resource certificates', () => {
   test.skip('delete: required and optional params', async () => {
     const response = await cloudflare.access.certificates.delete('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'string',
     });
   });
 
@@ -119,7 +113,7 @@ describe('resource certificates', () => {
   test.skip('get: only required params', async () => {
     const responsePromise = cloudflare.access.certificates.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'string',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -134,7 +128,7 @@ describe('resource certificates', () => {
   test.skip('get: required and optional params', async () => {
     const response = await cloudflare.access.certificates.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: 'string',
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: 'string',
     });
   });
 });

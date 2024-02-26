@@ -14,11 +14,11 @@ const cloudflare = new Cloudflare({
 
 describe('resource metadata', () => {
   // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
+  test.skip('get: only required params', async () => {
     const responsePromise = cloudflare.storage.kv.namespaces.metadata.get(
-      '023e105f4ecef8ad9ca31a8372d0c353',
       '0f2ac74b498b48028cb68387c421e279',
       'My-Key',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -30,15 +30,11 @@ describe('resource metadata', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.storage.kv.namespaces.metadata.get(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        '0f2ac74b498b48028cb68387c421e279',
-        'My-Key',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.storage.kv.namespaces.metadata.get(
+      '0f2ac74b498b48028cb68387c421e279',
+      'My-Key',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
   });
 });

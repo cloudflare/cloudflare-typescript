@@ -14,14 +14,14 @@ export class Deployments extends APIResource {
    * already been authorized on the Cloudflare Pages dashboard.
    */
   create(
-    accountId: string,
     projectName: string,
-    body: DeploymentCreateParams,
+    params: DeploymentCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DeploymentCreateResponse> {
+    const { account_id, ...body } = params;
     return (
       this._client.post(
-        `/accounts/${accountId}/pages/projects/${projectName}/deployments`,
+        `/accounts/${account_id}/pages/projects/${projectName}/deployments`,
         multipartFormRequestOptions({ body, ...options }),
       ) as Core.APIPromise<{ result: DeploymentCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -31,13 +31,14 @@ export class Deployments extends APIResource {
    * Fetch a list of project deployments.
    */
   list(
-    accountId: string,
     projectName: string,
+    params: DeploymentListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DeploymentListResponse> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountId}/pages/projects/${projectName}/deployments`,
+        `/accounts/${account_id}/pages/projects/${projectName}/deployments`,
         options,
       ) as Core.APIPromise<{ result: DeploymentListResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -47,13 +48,14 @@ export class Deployments extends APIResource {
    * Delete a deployment.
    */
   delete(
-    accountId: string,
     projectName: string,
     deploymentId: string,
+    params: DeploymentDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<unknown> {
+    const { account_id } = params;
     return this._client.delete(
-      `/accounts/${accountId}/pages/projects/${projectName}/deployments/${deploymentId}`,
+      `/accounts/${account_id}/pages/projects/${projectName}/deployments/${deploymentId}`,
       options,
     );
   }
@@ -62,14 +64,15 @@ export class Deployments extends APIResource {
    * Fetch information about a deployment.
    */
   get(
-    accountId: string,
     projectName: string,
     deploymentId: string,
+    params: DeploymentGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DeploymentGetResponse> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountId}/pages/projects/${projectName}/deployments/${deploymentId}`,
+        `/accounts/${account_id}/pages/projects/${projectName}/deployments/${deploymentId}`,
         options,
       ) as Core.APIPromise<{ result: DeploymentGetResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -79,14 +82,15 @@ export class Deployments extends APIResource {
    * Retry a previous deployment.
    */
   retry(
-    accountId: string,
     projectName: string,
     deploymentId: string,
+    params: DeploymentRetryParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DeploymentRetryResponse> {
+    const { account_id } = params;
     return (
       this._client.post(
-        `/accounts/${accountId}/pages/projects/${projectName}/deployments/${deploymentId}/retry`,
+        `/accounts/${account_id}/pages/projects/${projectName}/deployments/${deploymentId}/retry`,
         options,
       ) as Core.APIPromise<{ result: DeploymentRetryResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -97,14 +101,15 @@ export class Deployments extends APIResource {
    * rollback to succesful builds on production.
    */
   rollback(
-    accountId: string,
     projectName: string,
     deploymentId: string,
+    params: DeploymentRollbackParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DeploymentRollbackResponse> {
+    const { account_id } = params;
     return (
       this._client.post(
-        `/accounts/${accountId}/pages/projects/${projectName}/deployments/${deploymentId}/rollback`,
+        `/accounts/${account_id}/pages/projects/${projectName}/deployments/${deploymentId}/rollback`,
         options,
       ) as Core.APIPromise<{ result: DeploymentRollbackResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -804,10 +809,50 @@ export namespace DeploymentRollbackResponse {
 
 export interface DeploymentCreateParams {
   /**
-   * The branch to build the new deployment from. The `HEAD` of the branch will be
-   * used. If omitted, the production branch will be used by default.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: The branch to build the new deployment from. The `HEAD` of the
+   * branch will be used. If omitted, the production branch will be used by default.
    */
   branch?: string;
+}
+
+export interface DeploymentListParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface DeploymentDeleteParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface DeploymentGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface DeploymentRetryParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface DeploymentRollbackParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
 }
 
 export namespace Deployments {
@@ -818,5 +863,10 @@ export namespace Deployments {
   export import DeploymentRetryResponse = DeploymentsAPI.DeploymentRetryResponse;
   export import DeploymentRollbackResponse = DeploymentsAPI.DeploymentRollbackResponse;
   export import DeploymentCreateParams = DeploymentsAPI.DeploymentCreateParams;
+  export import DeploymentListParams = DeploymentsAPI.DeploymentListParams;
+  export import DeploymentDeleteParams = DeploymentsAPI.DeploymentDeleteParams;
+  export import DeploymentGetParams = DeploymentsAPI.DeploymentGetParams;
+  export import DeploymentRetryParams = DeploymentsAPI.DeploymentRetryParams;
+  export import DeploymentRollbackParams = DeploymentsAPI.DeploymentRollbackParams;
   export import History = HistoryAPI.History;
 }

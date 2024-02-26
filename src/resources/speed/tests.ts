@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as TestsAPI from 'cloudflare/resources/speed/tests';
 
 export class Tests extends APIResource {
@@ -10,23 +9,13 @@ export class Tests extends APIResource {
    * Starts a test for a specific webpage, in a specific region.
    */
   create(
-    zoneId: string,
     url: string,
-    body?: TestCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TestCreateResponse>;
-  create(zoneId: string, url: string, options?: Core.RequestOptions): Core.APIPromise<TestCreateResponse>;
-  create(
-    zoneId: string,
-    url: string,
-    body: TestCreateParams | Core.RequestOptions = {},
+    params: TestCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TestCreateResponse> {
-    if (isRequestOptions(body)) {
-      return this.create(zoneId, url, {}, body);
-    }
+    const { zone_id, ...body } = params;
     return (
-      this._client.post(`/zones/${zoneId}/speed_api/pages/${url}/tests`, {
+      this._client.post(`/zones/${zone_id}/speed_api/pages/${url}/tests`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: TestCreateResponse }>
@@ -37,22 +26,12 @@ export class Tests extends APIResource {
    * Test history (list of tests) for a specific webpage.
    */
   list(
-    zoneId: string,
     url: string,
-    query?: TestListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TestListResponse>;
-  list(zoneId: string, url: string, options?: Core.RequestOptions): Core.APIPromise<TestListResponse>;
-  list(
-    zoneId: string,
-    url: string,
-    query: TestListParams | Core.RequestOptions = {},
+    params: TestListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TestListResponse> {
-    if (isRequestOptions(query)) {
-      return this.list(zoneId, url, {}, query);
-    }
-    return this._client.get(`/zones/${zoneId}/speed_api/pages/${url}/tests`, { query, ...options });
+    const { zone_id, ...query } = params;
+    return this._client.get(`/zones/${zone_id}/speed_api/pages/${url}/tests`, { query, ...options });
   }
 
   /**
@@ -60,24 +39,13 @@ export class Tests extends APIResource {
    * are still counted as part of the quota.
    */
   delete(
-    zoneId: string,
     url: string,
-    params?: TestDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TestDeleteResponse>;
-  delete(zoneId: string, url: string, options?: Core.RequestOptions): Core.APIPromise<TestDeleteResponse>;
-  delete(
-    zoneId: string,
-    url: string,
-    params: TestDeleteParams | Core.RequestOptions = {},
+    params: TestDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TestDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(zoneId, url, {}, params);
-    }
-    const { region } = params;
+    const { zone_id, region } = params;
     return (
-      this._client.delete(`/zones/${zoneId}/speed_api/pages/${url}/tests`, {
+      this._client.delete(`/zones/${zone_id}/speed_api/pages/${url}/tests`, {
         query: { region },
         ...options,
       }) as Core.APIPromise<{ result: TestDeleteResponse }>
@@ -88,14 +56,15 @@ export class Tests extends APIResource {
    * Retrieves the result of a specific test.
    */
   get(
-    zoneId: string,
     url: string,
     testId: string,
+    params: TestGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TestGetResponse> {
+    const { zone_id } = params;
     return (
       this._client.get(
-        `/zones/${zoneId}/speed_api/pages/${url}/tests/${testId}`,
+        `/zones/${zone_id}/speed_api/pages/${url}/tests/${testId}`,
         options,
       ) as Core.APIPromise<{ result: TestGetResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -610,7 +579,12 @@ export namespace TestGetResponse {
 
 export interface TestCreateParams {
   /**
-   * A test region.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: A test region.
    */
   region?:
     | 'asia-east1'
@@ -637,12 +611,23 @@ export interface TestCreateParams {
 }
 
 export interface TestListParams {
+  /**
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Query param:
+   */
   page?: number;
 
+  /**
+   * Query param:
+   */
   per_page?: number;
 
   /**
-   * A test region.
+   * Query param: A test region.
    */
   region?:
     | 'asia-east1'
@@ -670,7 +655,12 @@ export interface TestListParams {
 
 export interface TestDeleteParams {
   /**
-   * A test region.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Query param: A test region.
    */
   region?:
     | 'asia-east1'
@@ -696,6 +686,13 @@ export interface TestDeleteParams {
     | 'us-west1';
 }
 
+export interface TestGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
 export namespace Tests {
   export import TestCreateResponse = TestsAPI.TestCreateResponse;
   export import TestListResponse = TestsAPI.TestListResponse;
@@ -704,4 +701,5 @@ export namespace Tests {
   export import TestCreateParams = TestsAPI.TestCreateParams;
   export import TestListParams = TestsAPI.TestListParams;
   export import TestDeleteParams = TestsAPI.TestDeleteParams;
+  export import TestGetParams = TestsAPI.TestGetParams;
 }

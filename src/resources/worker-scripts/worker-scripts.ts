@@ -16,8 +16,10 @@ export namespace WorkerScripts {
   export import ContentUpdateResponse = ContentAPI.ContentUpdateResponse;
   export import ContentUpdateParams = ContentAPI.ContentUpdateParams;
   export import ContentV2 = ContentV2API.ContentV2;
+  export import ContentV2GetParams = ContentV2API.ContentV2GetParams;
   export import Settings = SettingsAPI.Settings;
   export import SettingEditResponse = SettingsAPI.SettingEditResponse;
   export import SettingGetResponse = SettingsAPI.SettingGetResponse;
   export import SettingEditParams = SettingsAPI.SettingEditParams;
+  export import SettingGetParams = SettingsAPI.SettingGetParams;
 }

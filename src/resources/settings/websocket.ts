@@ -10,13 +10,10 @@ export class Websocket extends APIResource {
    * to
    * [Using Cloudflare with WebSockets](https://support.cloudflare.com/hc/en-us/articles/200169466-Using-Cloudflare-with-WebSockets).
    */
-  edit(
-    zoneId: string,
-    body: WebsocketEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<WebsocketEditResponse> {
+  edit(params: WebsocketEditParams, options?: Core.RequestOptions): Core.APIPromise<WebsocketEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/settings/websockets`, { body, ...options }) as Core.APIPromise<{
+      this._client.patch(`/zones/${zone_id}/settings/websockets`, { body, ...options }) as Core.APIPromise<{
         result: WebsocketEditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -26,9 +23,10 @@ export class Websocket extends APIResource {
    * Gets Websockets setting. For more information about Websockets, please refer to
    * [Using Cloudflare with WebSockets](https://support.cloudflare.com/hc/en-us/articles/200169466-Using-Cloudflare-with-WebSockets).
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<WebsocketGetResponse> {
+  get(params: WebsocketGetParams, options?: Core.RequestOptions): Core.APIPromise<WebsocketGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/settings/websockets`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/settings/websockets`, options) as Core.APIPromise<{
         result: WebsocketGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -101,13 +99,26 @@ export interface WebsocketGetResponse {
 
 export interface WebsocketEditParams {
   /**
-   * Value of the zone setting.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Value of the zone setting.
    */
   value: 'off' | 'on';
+}
+
+export interface WebsocketGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }
 
 export namespace Websocket {
   export import WebsocketEditResponse = WebsocketAPI.WebsocketEditResponse;
   export import WebsocketGetResponse = WebsocketAPI.WebsocketGetResponse;
   export import WebsocketEditParams = WebsocketAPI.WebsocketEditParams;
+  export import WebsocketGetParams = WebsocketAPI.WebsocketGetParams;
 }

@@ -10,13 +10,13 @@ export class Percentiles extends APIResource {
    * days.
    */
   list(
-    accountId: string,
     testId: string,
-    query: PercentileListParams,
+    params: PercentileListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PercentileListResponse> {
+    const { account_id, ...query } = params;
     return (
-      this._client.get(`/accounts/${accountId}/dex/http-tests/${testId}/percentiles`, {
+      this._client.get(`/accounts/${account_id}/dex/http-tests/${testId}/percentiles`, {
         query,
         ...options,
       }) as Core.APIPromise<{ result: PercentileListResponse }>
@@ -102,24 +102,29 @@ export namespace PercentileListResponse {
 
 export interface PercentileListParams {
   /**
-   * End time for aggregate metrics in ISO format
+   * Path param: unique identifier linked to an account in the API request path.
+   */
+  account_id: string;
+
+  /**
+   * Query param: End time for aggregate metrics in ISO format
    */
   timeEnd: string;
 
   /**
-   * Start time for aggregate metrics in ISO format
+   * Query param: Start time for aggregate metrics in ISO format
    */
   timeStart: string;
 
   /**
-   * Optionally filter result stats to a Cloudflare colo. Cannot be used in
-   * combination with deviceId param.
+   * Query param: Optionally filter result stats to a Cloudflare colo. Cannot be used
+   * in combination with deviceId param.
    */
   colo?: string;
 
   /**
-   * Optionally filter result stats to a specific device(s). Cannot be used in
-   * combination with colo param.
+   * Query param: Optionally filter result stats to a specific device(s). Cannot be
+   * used in combination with colo param.
    */
   deviceId?: Array<string>;
 }

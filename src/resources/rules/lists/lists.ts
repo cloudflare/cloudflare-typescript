@@ -14,12 +14,12 @@ export class Lists extends APIResource {
    * Creates a new list of the specified type.
    */
   create(
-    accountId: string,
-    body: ListCreateParams,
+    params: ListCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ListCreateResponse | null> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/rules/lists`, { body, ...options }) as Core.APIPromise<{
+      this._client.post(`/accounts/${account_id}/rules/lists`, { body, ...options }) as Core.APIPromise<{
         result: ListCreateResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -29,13 +29,13 @@ export class Lists extends APIResource {
    * Updates the description of a list.
    */
   update(
-    accountId: string,
     listId: string,
-    body: ListUpdateParams,
+    params: ListUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ListUpdateResponse | null> {
+    const { account_id, ...body } = params;
     return (
-      this._client.put(`/accounts/${accountId}/rules/lists/${listId}`, {
+      this._client.put(`/accounts/${account_id}/rules/lists/${listId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: ListUpdateResponse | null }>
@@ -45,9 +45,10 @@ export class Lists extends APIResource {
   /**
    * Fetches all lists in the account.
    */
-  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<ListListResponse | null> {
+  list(params: ListListParams, options?: Core.RequestOptions): Core.APIPromise<ListListResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/rules/lists`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/rules/lists`, options) as Core.APIPromise<{
         result: ListListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -57,12 +58,13 @@ export class Lists extends APIResource {
    * Deletes a specific list and all its items.
    */
   delete(
-    accountId: string,
     listId: string,
+    params: ListDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ListDeleteResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${accountId}/rules/lists/${listId}`, options) as Core.APIPromise<{
+      this._client.delete(`/accounts/${account_id}/rules/lists/${listId}`, options) as Core.APIPromise<{
         result: ListDeleteResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -72,12 +74,13 @@ export class Lists extends APIResource {
    * Fetches the details of a list.
    */
   get(
-    accountId: string,
     listId: string,
+    params: ListGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ListGetResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/rules/lists/${listId}`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/rules/lists/${listId}`, options) as Core.APIPromise<{
         result: ListGetResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -146,27 +149,59 @@ export type ListGetResponse = Array<unknown>;
 
 export interface ListCreateParams {
   /**
-   * The type of the list. Each type supports specific list items (IP addresses,
-   * ASNs, hostnames or redirects).
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: The type of the list. Each type supports specific list items (IP
+   * addresses, ASNs, hostnames or redirects).
    */
   kind: 'ip' | 'redirect' | 'hostname' | 'asn';
 
   /**
-   * An informative name for the list. Use this name in filter and rule expressions.
+   * Body param: An informative name for the list. Use this name in filter and rule
+   * expressions.
    */
   name: string;
 
   /**
-   * An informative summary of the list.
+   * Body param: An informative summary of the list.
    */
   description?: string;
 }
 
 export interface ListUpdateParams {
   /**
-   * An informative summary of the list.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: An informative summary of the list.
    */
   description?: string;
+}
+
+export interface ListListParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface ListDeleteParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface ListGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
 }
 
 export namespace Lists {
@@ -177,6 +212,9 @@ export namespace Lists {
   export import ListGetResponse = ListsAPI.ListGetResponse;
   export import ListCreateParams = ListsAPI.ListCreateParams;
   export import ListUpdateParams = ListsAPI.ListUpdateParams;
+  export import ListListParams = ListsAPI.ListListParams;
+  export import ListDeleteParams = ListsAPI.ListDeleteParams;
+  export import ListGetParams = ListsAPI.ListGetParams;
   export import BulkOperations = BulkOperationsAPI.BulkOperations;
   export import BulkOperationGetResponse = BulkOperationsAPI.BulkOperationGetResponse;
   export import Items = ItemsAPI.Items;

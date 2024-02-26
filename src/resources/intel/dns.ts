@@ -2,29 +2,16 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as DNSAPI from 'cloudflare/resources/intel/dns';
 
 export class DNS extends APIResource {
   /**
    * Get Passive DNS by IP
    */
-  get(
-    accountId: string,
-    query?: DNSGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DNSGetResponse>;
-  get(accountId: string, options?: Core.RequestOptions): Core.APIPromise<DNSGetResponse>;
-  get(
-    accountId: string,
-    query: DNSGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DNSGetResponse> {
-    if (isRequestOptions(query)) {
-      return this.get(accountId, {}, query);
-    }
+  get(params: DNSGetParams, options?: Core.RequestOptions): Core.APIPromise<DNSGetResponse> {
+    const { account_id, ...query } = params;
     return (
-      this._client.get(`/accounts/${accountId}/intel/dns`, { query, ...options }) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/intel/dns`, { query, ...options }) as Core.APIPromise<{
         result: DNSGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -73,18 +60,29 @@ export namespace DNSGetResponse {
 }
 
 export interface DNSGetParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Query param:
+   */
   ipv4?: string;
 
   /**
-   * Requested page within paginated list of results.
+   * Query param: Requested page within paginated list of results.
    */
   page?: number;
 
   /**
-   * Maximum number of results requested.
+   * Query param: Maximum number of results requested.
    */
   per_page?: number;
 
+  /**
+   * Query param:
+   */
   start_end_params?: DNSGetParams.StartEndParams;
 }
 

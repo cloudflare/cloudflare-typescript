@@ -15,20 +15,18 @@ const cloudflare = new Cloudflare({
 describe('resource integrations', () => {
   // skipped: tests are disabled for the time being
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.devices.postures.integrations.create(
-      '699d98642c564d2e855e9661899b7252',
-      {
-        config: {
-          api_url: 'https://as123.awmdm.com/API',
-          auth_url: 'https://na.uemauth.vmwservices.com/connect/token',
-          client_id: 'example client id',
-          client_secret: 'example client secret',
-        },
-        interval: '10m',
-        name: 'My Workspace One Integration',
-        type: 'workspace_one',
+    const responsePromise = cloudflare.devices.postures.integrations.create({
+      account_id: '699d98642c564d2e855e9661899b7252',
+      config: {
+        api_url: 'https://as123.awmdm.com/API',
+        auth_url: 'https://na.uemauth.vmwservices.com/connect/token',
+        client_id: 'example client id',
+        client_secret: 'example client secret',
       },
-    );
+      interval: '10m',
+      name: 'My Workspace One Integration',
+      type: 'workspace_one',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -40,9 +38,85 @@ describe('resource integrations', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.devices.postures.integrations.create(
-      '699d98642c564d2e855e9661899b7252',
+    const response = await cloudflare.devices.postures.integrations.create({
+      account_id: '699d98642c564d2e855e9661899b7252',
+      config: {
+        api_url: 'https://as123.awmdm.com/API',
+        auth_url: 'https://na.uemauth.vmwservices.com/connect/token',
+        client_id: 'example client id',
+        client_secret: 'example client secret',
+      },
+      interval: '10m',
+      name: 'My Workspace One Integration',
+      type: 'workspace_one',
+    });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list: only required params', async () => {
+    const responsePromise = cloudflare.devices.postures.integrations.list({
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list: required and optional params', async () => {
+    const response = await cloudflare.devices.postures.integrations.list({
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('delete: only required params', async () => {
+    const responsePromise = cloudflare.devices.postures.integrations.delete(
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '699d98642c564d2e855e9661899b7252' },
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('delete: required and optional params', async () => {
+    const response = await cloudflare.devices.postures.integrations.delete(
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '699d98642c564d2e855e9661899b7252' },
+    );
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('edit: only required params', async () => {
+    const responsePromise = cloudflare.devices.postures.integrations.edit(
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '699d98642c564d2e855e9661899b7252' },
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('edit: required and optional params', async () => {
+    const response = await cloudflare.devices.postures.integrations.edit(
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       {
+        account_id: '699d98642c564d2e855e9661899b7252',
         config: {
           api_url: 'https://as123.awmdm.com/API',
           auth_url: 'https://na.uemauth.vmwservices.com/connect/token',
@@ -57,63 +131,10 @@ describe('resource integrations', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
-    const responsePromise = cloudflare.devices.postures.integrations.list('699d98642c564d2e855e9661899b7252');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.devices.postures.integrations.list('699d98642c564d2e855e9661899b7252', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
-    const responsePromise = cloudflare.devices.postures.integrations.delete(
-      '699d98642c564d2e855e9661899b7252',
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('edit', async () => {
-    const responsePromise = cloudflare.devices.postures.integrations.edit(
-      '699d98642c564d2e855e9661899b7252',
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      {},
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
+  test.skip('get: only required params', async () => {
     const responsePromise = cloudflare.devices.postures.integrations.get(
-      '699d98642c564d2e855e9661899b7252',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '699d98642c564d2e855e9661899b7252' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -125,14 +146,10 @@ describe('resource integrations', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.devices.postures.integrations.get(
-        '699d98642c564d2e855e9661899b7252',
-        'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.devices.postures.integrations.get(
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '699d98642c564d2e855e9661899b7252' },
+    );
   });
 });

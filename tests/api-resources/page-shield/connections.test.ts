@@ -14,8 +14,10 @@ const cloudflare = new Cloudflare({
 
 describe('resource connections', () => {
   // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
-    const responsePromise = cloudflare.pageShield.connections.list('023e105f4ecef8ad9ca31a8372d0c353');
+  test.skip('list: only required params', async () => {
+    const responsePromise = cloudflare.pageShield.connections.list({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -26,46 +28,29 @@ describe('resource connections', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.pageShield.connections.list('023e105f4ecef8ad9ca31a8372d0c353', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('list: required and optional params', async () => {
+    const response = await cloudflare.pageShield.connections.list({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      direction: 'asc',
+      exclude_cdn_cgi: true,
+      exclude_urls: 'blog.cloudflare.com,www.example',
+      export: 'csv',
+      hosts: 'blog.cloudflare.com,www.example*,*cloudflare.com',
+      order_by: 'first_seen_at',
+      page: 'string',
+      page_url: 'example.com/page,*/checkout,example.com/*,*checkout*',
+      per_page: 100,
+      prioritize_malicious: true,
+      status: 'active,inactive',
+      urls: 'blog.cloudflare.com,www.example',
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.pageShield.connections.list(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        {
-          direction: 'asc',
-          exclude_cdn_cgi: true,
-          exclude_urls: 'blog.cloudflare.com,www.example',
-          export: 'csv',
-          hosts: 'blog.cloudflare.com,www.example*,*cloudflare.com',
-          order_by: 'first_seen_at',
-          page: 'string',
-          page_url: 'example.com/page,*/checkout,example.com/*,*checkout*',
-          per_page: 100,
-          prioritize_malicious: true,
-          status: 'active,inactive',
-          urls: 'blog.cloudflare.com,www.example',
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
-    const responsePromise = cloudflare.pageShield.connections.get(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'c9ef84a6bf5e47138c75d95e2f933e8f',
-    );
+  test.skip('get: only required params', async () => {
+    const responsePromise = cloudflare.pageShield.connections.get('c9ef84a6bf5e47138c75d95e2f933e8f', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -76,14 +61,9 @@ describe('resource connections', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.pageShield.connections.get(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        'c9ef84a6bf5e47138c75d95e2f933e8f',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.pageShield.connections.get('c9ef84a6bf5e47138c75d95e2f933e8f', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 });

@@ -14,11 +14,10 @@ const cloudflare = new Cloudflare({
 
 describe('resource tail', () => {
   // skipped: tests are disabled for the time being
-  test.skip('create', async () => {
-    const responsePromise = cloudflare.workers.scripts.tail.create(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'this-is_my_script-01',
-    );
+  test.skip('create: only required params', async () => {
+    const responsePromise = cloudflare.workers.scripts.tail.create('this-is_my_script-01', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -29,11 +28,17 @@ describe('resource tail', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
-    const responsePromise = cloudflare.workers.scripts.tail.list(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'this-is_my_script-01',
-    );
+  test.skip('create: required and optional params', async () => {
+    const response = await cloudflare.workers.scripts.tail.create('this-is_my_script-01', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list: only required params', async () => {
+    const responsePromise = cloudflare.workers.scripts.tail.list('this-is_my_script-01', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -44,21 +49,18 @@ describe('resource tail', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.workers.scripts.tail.list('023e105f4ecef8ad9ca31a8372d0c353', 'this-is_my_script-01', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('list: required and optional params', async () => {
+    const response = await cloudflare.workers.scripts.tail.list('this-is_my_script-01', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
+  test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.workers.scripts.tail.delete(
-      '023e105f4ecef8ad9ca31a8372d0c353',
       'this-is_my_script-01',
       '03dc9f77817b488fb26c5861ec18f791',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -67,5 +69,14 @@ describe('resource tail', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('delete: required and optional params', async () => {
+    const response = await cloudflare.workers.scripts.tail.delete(
+      'this-is_my_script-01',
+      '03dc9f77817b488fb26c5861ec18f791',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
   });
 });

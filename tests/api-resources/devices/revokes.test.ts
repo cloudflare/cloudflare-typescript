@@ -15,11 +15,14 @@ const cloudflare = new Cloudflare({
 describe('resource revokes', () => {
   // skipped: tests are disabled for the time being
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.devices.revokes.create('699d98642c564d2e855e9661899b7252', [
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-    ]);
+    const responsePromise = cloudflare.devices.revokes.create({
+      account_id: '699d98642c564d2e855e9661899b7252',
+      body: [
+        'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+        'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+        'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      ],
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -31,10 +34,13 @@ describe('resource revokes', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.devices.revokes.create('699d98642c564d2e855e9661899b7252', [
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-    ]);
+    const response = await cloudflare.devices.revokes.create({
+      account_id: '699d98642c564d2e855e9661899b7252',
+      body: [
+        'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+        'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+        'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      ],
+    });
   });
 });

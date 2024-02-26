@@ -9,13 +9,13 @@ export class Sippy extends APIResource {
    * Sets configuration for Sippy for an existing R2 bucket.
    */
   update(
-    accountId: string,
     bucketName: string,
-    body: SippyUpdateParams,
+    params: SippyUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SippyUpdateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.put(`/accounts/${accountId}/r2/buckets/${bucketName}/sippy`, {
+      this._client.put(`/accounts/${account_id}/r2/buckets/${bucketName}/sippy`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: SippyUpdateResponse }>
@@ -26,13 +26,14 @@ export class Sippy extends APIResource {
    * Disables Sippy on this bucket
    */
   delete(
-    accountId: string,
     bucketName: string,
+    params: SippyDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SippyDeleteResponse> {
+    const { account_id } = params;
     return (
       this._client.delete(
-        `/accounts/${accountId}/r2/buckets/${bucketName}/sippy`,
+        `/accounts/${account_id}/r2/buckets/${bucketName}/sippy`,
         options,
       ) as Core.APIPromise<{ result: SippyDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -42,12 +43,13 @@ export class Sippy extends APIResource {
    * Gets configuration for Sippy for an existing R2 bucket.
    */
   get(
-    accountId: string,
     bucketName: string,
+    params: SippyGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SippyGetResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/r2/buckets/${bucketName}/sippy`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/r2/buckets/${bucketName}/sippy`, options) as Core.APIPromise<{
         result: SippyGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -169,8 +171,19 @@ export namespace SippyGetResponse {
 }
 
 export interface SippyUpdateParams {
+  /**
+   * Path param: Account ID
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
   destination?: SippyUpdateParams.Destination;
 
+  /**
+   * Body param:
+   */
   source?: SippyUpdateParams.Source;
 }
 
@@ -234,9 +247,25 @@ export namespace SippyUpdateParams {
   }
 }
 
+export interface SippyDeleteParams {
+  /**
+   * Account ID
+   */
+  account_id: string;
+}
+
+export interface SippyGetParams {
+  /**
+   * Account ID
+   */
+  account_id: string;
+}
+
 export namespace Sippy {
   export import SippyUpdateResponse = SippyAPI.SippyUpdateResponse;
   export import SippyDeleteResponse = SippyAPI.SippyDeleteResponse;
   export import SippyGetResponse = SippyAPI.SippyGetResponse;
   export import SippyUpdateParams = SippyAPI.SippyUpdateParams;
+  export import SippyDeleteParams = SippyAPI.SippyDeleteParams;
+  export import SippyGetParams = SippyAPI.SippyGetParams;
 }

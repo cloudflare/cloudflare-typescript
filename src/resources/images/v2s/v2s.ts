@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as V2sAPI from 'cloudflare/resources/images/v2s/v2s';
 import * as DirectUploadsAPI from 'cloudflare/resources/images/v2s/direct-uploads';
 
@@ -14,22 +13,10 @@ export class V2s extends APIResource {
    * get a specific range of images. Endpoint returns continuation_token if more
    * images are present.
    */
-  list(
-    accountId: string,
-    query?: V2ListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<V2ListResponse>;
-  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<V2ListResponse>;
-  list(
-    accountId: string,
-    query: V2ListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<V2ListResponse> {
-    if (isRequestOptions(query)) {
-      return this.list(accountId, {}, query);
-    }
+  list(params: V2ListParams, options?: Core.RequestOptions): Core.APIPromise<V2ListResponse> {
+    const { account_id, ...query } = params;
     return (
-      this._client.get(`/accounts/${accountId}/images/v2`, { query, ...options }) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/images/v2`, { query, ...options }) as Core.APIPromise<{
         result: V2ListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -84,17 +71,23 @@ export namespace V2ListResponse {
 
 export interface V2ListParams {
   /**
-   * Continuation token for a next page. List images V2 returns continuation_token
+   * Path param: Account identifier tag.
+   */
+  account_id: string;
+
+  /**
+   * Query param: Continuation token for a next page. List images V2 returns
+   * continuation_token
    */
   continuation_token?: string | null;
 
   /**
-   * Number of items per page.
+   * Query param: Number of items per page.
    */
   per_page?: number;
 
   /**
-   * Sorting order by upload time.
+   * Query param: Sorting order by upload time.
    */
   sort_order?: 'asc' | 'desc';
 }

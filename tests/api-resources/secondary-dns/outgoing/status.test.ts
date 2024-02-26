@@ -14,8 +14,10 @@ const cloudflare = new Cloudflare({
 
 describe('resource status', () => {
   // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
-    const responsePromise = cloudflare.secondaryDNS.outgoing.status.get('269d8f4853475ca241c4e730be286b20');
+  test.skip('get: only required params', async () => {
+    const responsePromise = cloudflare.secondaryDNS.outgoing.status.get({
+      zone_id: '269d8f4853475ca241c4e730be286b20',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -26,12 +28,9 @@ describe('resource status', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.secondaryDNS.outgoing.status.get('269d8f4853475ca241c4e730be286b20', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.secondaryDNS.outgoing.status.get({
+      zone_id: '269d8f4853475ca241c4e730be286b20',
+    });
   });
 });

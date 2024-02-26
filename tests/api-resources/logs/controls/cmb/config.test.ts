@@ -14,11 +14,10 @@ const cloudflare = new Cloudflare({
 
 describe('resource config', () => {
   // skipped: tests are disabled for the time being
-  test.skip('create', async () => {
-    const responsePromise = cloudflare.logs.controls.cmb.config.create(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      {},
-    );
+  test.skip('create: only required params', async () => {
+    const responsePromise = cloudflare.logs.controls.cmb.config.create({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -29,8 +28,18 @@ describe('resource config', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
-    const responsePromise = cloudflare.logs.controls.cmb.config.delete('023e105f4ecef8ad9ca31a8372d0c353');
+  test.skip('create: required and optional params', async () => {
+    const response = await cloudflare.logs.controls.cmb.config.create({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      regions: 'eu',
+    });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('delete: only required params', async () => {
+    const responsePromise = cloudflare.logs.controls.cmb.config.delete({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -41,8 +50,17 @@ describe('resource config', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
-    const responsePromise = cloudflare.logs.controls.cmb.config.get('023e105f4ecef8ad9ca31a8372d0c353');
+  test.skip('delete: required and optional params', async () => {
+    const response = await cloudflare.logs.controls.cmb.config.delete({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get: only required params', async () => {
+    const responsePromise = cloudflare.logs.controls.cmb.config.get({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -53,12 +71,9 @@ describe('resource config', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.logs.controls.cmb.config.get('023e105f4ecef8ad9ca31a8372d0c353', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.logs.controls.cmb.config.get({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 });

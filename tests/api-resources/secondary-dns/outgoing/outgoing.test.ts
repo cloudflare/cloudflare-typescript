@@ -15,7 +15,8 @@ const cloudflare = new Cloudflare({
 describe('resource outgoing', () => {
   // skipped: tests are disabled for the time being
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.secondaryDNS.outgoing.create('269d8f4853475ca241c4e730be286b20', {
+    const responsePromise = cloudflare.secondaryDNS.outgoing.create({
+      zone_id: '269d8f4853475ca241c4e730be286b20',
       name: 'www.example.com.',
       peers: ['23ff594956f20c2a721606e94745a8aa', '00920f38ce07c2e2f4df50b1f61d4194'],
     });
@@ -30,7 +31,8 @@ describe('resource outgoing', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.secondaryDNS.outgoing.create('269d8f4853475ca241c4e730be286b20', {
+    const response = await cloudflare.secondaryDNS.outgoing.create({
+      zone_id: '269d8f4853475ca241c4e730be286b20',
       name: 'www.example.com.',
       peers: ['23ff594956f20c2a721606e94745a8aa', '00920f38ce07c2e2f4df50b1f61d4194'],
     });
@@ -38,7 +40,8 @@ describe('resource outgoing', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.secondaryDNS.outgoing.update('269d8f4853475ca241c4e730be286b20', {
+    const responsePromise = cloudflare.secondaryDNS.outgoing.update({
+      zone_id: '269d8f4853475ca241c4e730be286b20',
       name: 'www.example.com.',
       peers: ['23ff594956f20c2a721606e94745a8aa', '00920f38ce07c2e2f4df50b1f61d4194'],
     });
@@ -53,15 +56,18 @@ describe('resource outgoing', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.secondaryDNS.outgoing.update('269d8f4853475ca241c4e730be286b20', {
+    const response = await cloudflare.secondaryDNS.outgoing.update({
+      zone_id: '269d8f4853475ca241c4e730be286b20',
       name: 'www.example.com.',
       peers: ['23ff594956f20c2a721606e94745a8aa', '00920f38ce07c2e2f4df50b1f61d4194'],
     });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
-    const responsePromise = cloudflare.secondaryDNS.outgoing.delete('269d8f4853475ca241c4e730be286b20');
+  test.skip('delete: only required params', async () => {
+    const responsePromise = cloudflare.secondaryDNS.outgoing.delete({
+      zone_id: '269d8f4853475ca241c4e730be286b20',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -72,8 +78,17 @@ describe('resource outgoing', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('disable', async () => {
-    const responsePromise = cloudflare.secondaryDNS.outgoing.disable('269d8f4853475ca241c4e730be286b20');
+  test.skip('delete: required and optional params', async () => {
+    const response = await cloudflare.secondaryDNS.outgoing.delete({
+      zone_id: '269d8f4853475ca241c4e730be286b20',
+    });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('disable: only required params', async () => {
+    const responsePromise = cloudflare.secondaryDNS.outgoing.disable({
+      zone_id: '269d8f4853475ca241c4e730be286b20',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -84,8 +99,17 @@ describe('resource outgoing', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('enable', async () => {
-    const responsePromise = cloudflare.secondaryDNS.outgoing.enable('269d8f4853475ca241c4e730be286b20');
+  test.skip('disable: required and optional params', async () => {
+    const response = await cloudflare.secondaryDNS.outgoing.disable({
+      zone_id: '269d8f4853475ca241c4e730be286b20',
+    });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('enable: only required params', async () => {
+    const responsePromise = cloudflare.secondaryDNS.outgoing.enable({
+      zone_id: '269d8f4853475ca241c4e730be286b20',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -96,8 +120,17 @@ describe('resource outgoing', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('forceNotify', async () => {
-    const responsePromise = cloudflare.secondaryDNS.outgoing.forceNotify('269d8f4853475ca241c4e730be286b20');
+  test.skip('enable: required and optional params', async () => {
+    const response = await cloudflare.secondaryDNS.outgoing.enable({
+      zone_id: '269d8f4853475ca241c4e730be286b20',
+    });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('forceNotify: only required params', async () => {
+    const responsePromise = cloudflare.secondaryDNS.outgoing.forceNotify({
+      zone_id: '269d8f4853475ca241c4e730be286b20',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -108,8 +141,17 @@ describe('resource outgoing', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
-    const responsePromise = cloudflare.secondaryDNS.outgoing.get('269d8f4853475ca241c4e730be286b20');
+  test.skip('forceNotify: required and optional params', async () => {
+    const response = await cloudflare.secondaryDNS.outgoing.forceNotify({
+      zone_id: '269d8f4853475ca241c4e730be286b20',
+    });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get: only required params', async () => {
+    const responsePromise = cloudflare.secondaryDNS.outgoing.get({
+      zone_id: '269d8f4853475ca241c4e730be286b20',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -120,12 +162,9 @@ describe('resource outgoing', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.secondaryDNS.outgoing.get('269d8f4853475ca241c4e730be286b20', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.secondaryDNS.outgoing.get({
+      zone_id: '269d8f4853475ca241c4e730be286b20',
+    });
   });
 });

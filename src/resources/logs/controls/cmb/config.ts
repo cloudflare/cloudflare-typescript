@@ -9,12 +9,12 @@ export class Config extends APIResource {
    * Updates CMB config.
    */
   create(
-    accountId: string,
-    body: ConfigCreateParams,
+    params: ConfigCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConfigCreateResponse | null> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/logs/control/cmb/config`, {
+      this._client.post(`/accounts/${account_id}/logs/control/cmb/config`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: ConfigCreateResponse | null }>
@@ -24,9 +24,13 @@ export class Config extends APIResource {
   /**
    * Deletes CMB config.
    */
-  delete(accountId: string, options?: Core.RequestOptions): Core.APIPromise<ConfigDeleteResponse | null> {
+  delete(
+    params: ConfigDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ConfigDeleteResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${accountId}/logs/control/cmb/config`, options) as Core.APIPromise<{
+      this._client.delete(`/accounts/${account_id}/logs/control/cmb/config`, options) as Core.APIPromise<{
         result: ConfigDeleteResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -35,9 +39,10 @@ export class Config extends APIResource {
   /**
    * Gets CMB config.
    */
-  get(accountId: string, options?: Core.RequestOptions): Core.APIPromise<ConfigGetResponse | null> {
+  get(params: ConfigGetParams, options?: Core.RequestOptions): Core.APIPromise<ConfigGetResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/logs/control/cmb/config`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/logs/control/cmb/config`, options) as Core.APIPromise<{
         result: ConfigGetResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -62,9 +67,28 @@ export interface ConfigGetResponse {
 
 export interface ConfigCreateParams {
   /**
-   * Comma-separated list of regions.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: Comma-separated list of regions.
    */
   regions?: string;
+}
+
+export interface ConfigDeleteParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface ConfigGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
 }
 
 export namespace Config {
@@ -72,4 +96,6 @@ export namespace Config {
   export import ConfigDeleteResponse = ConfigAPI.ConfigDeleteResponse;
   export import ConfigGetResponse = ConfigAPI.ConfigGetResponse;
   export import ConfigCreateParams = ConfigAPI.ConfigCreateParams;
+  export import ConfigDeleteParams = ConfigAPI.ConfigDeleteParams;
+  export import ConfigGetParams = ConfigAPI.ConfigGetParams;
 }

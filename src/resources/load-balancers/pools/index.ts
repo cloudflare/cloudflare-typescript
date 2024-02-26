@@ -1,6 +1,12 @@
 // File generated from our OpenAPI spec by Stainless.
 
-export { HealthCreateResponse, HealthGetResponse, HealthCreateParams, Health } from './health';
+export {
+  HealthCreateResponse,
+  HealthGetResponse,
+  HealthCreateParams,
+  HealthGetParams,
+  Health,
+} from './health';
 export {
   PoolCreateResponse,
   PoolUpdateResponse,
@@ -11,7 +17,9 @@ export {
   PoolCreateParams,
   PoolUpdateParams,
   PoolListParams,
+  PoolDeleteParams,
   PoolEditParams,
+  PoolGetParams,
   Pools,
 } from './pools';
-export { ReferenceListResponse, References } from './references';
+export { ReferenceListResponse, ReferenceListParams, References } from './references';

@@ -15,7 +15,8 @@ const cloudflare = new Cloudflare({
 describe('resource virtualNetworks', () => {
   // skipped: tests are disabled for the time being
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.teamnets.virtualNetworks.create('699d98642c564d2e855e9661899b7252', {
+    const responsePromise = cloudflare.teamnets.virtualNetworks.create({
+      account_id: '699d98642c564d2e855e9661899b7252',
       name: 'us-east-1-vpc',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -29,7 +30,8 @@ describe('resource virtualNetworks', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.teamnets.virtualNetworks.create('699d98642c564d2e855e9661899b7252', {
+    const response = await cloudflare.teamnets.virtualNetworks.create({
+      account_id: '699d98642c564d2e855e9661899b7252',
       name: 'us-east-1-vpc',
       comment: 'Staging VPC for data science',
       is_default: true,
@@ -37,8 +39,10 @@ describe('resource virtualNetworks', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
-    const responsePromise = cloudflare.teamnets.virtualNetworks.list('699d98642c564d2e855e9661899b7252');
+  test.skip('list: only required params', async () => {
+    const responsePromise = cloudflare.teamnets.virtualNetworks.list({
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -49,32 +53,21 @@ describe('resource virtualNetworks', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.teamnets.virtualNetworks.list('699d98642c564d2e855e9661899b7252', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('list: required and optional params', async () => {
+    const response = await cloudflare.teamnets.virtualNetworks.list({
+      account_id: '699d98642c564d2e855e9661899b7252',
+      is_default: {},
+      is_deleted: {},
+      name: 'us-east-1-vpc',
+      vnet_name: 'us-east-1-vpc',
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.teamnets.virtualNetworks.list(
-        '699d98642c564d2e855e9661899b7252',
-        { is_default: {}, is_deleted: {}, name: 'us-east-1-vpc', vnet_name: 'us-east-1-vpc' },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
+  test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.teamnets.virtualNetworks.delete(
-      '699d98642c564d2e855e9661899b7252',
       'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
+      { account_id: '699d98642c564d2e855e9661899b7252' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -86,12 +79,18 @@ describe('resource virtualNetworks', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('edit', async () => {
-    const responsePromise = cloudflare.teamnets.virtualNetworks.edit(
-      '699d98642c564d2e855e9661899b7252',
+  test.skip('delete: required and optional params', async () => {
+    const response = await cloudflare.teamnets.virtualNetworks.delete(
       'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
-      {},
+      { account_id: '699d98642c564d2e855e9661899b7252' },
     );
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('edit: only required params', async () => {
+    const responsePromise = cloudflare.teamnets.virtualNetworks.edit('f70ff985-a4ef-4643-bbbc-4a0ed4fc8415', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -99,5 +98,15 @@ describe('resource virtualNetworks', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('edit: required and optional params', async () => {
+    const response = await cloudflare.teamnets.virtualNetworks.edit('f70ff985-a4ef-4643-bbbc-4a0ed4fc8415', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+      comment: 'Staging VPC for data science',
+      is_default_network: true,
+      name: 'us-east-1-vpc',
+    });
   });
 });

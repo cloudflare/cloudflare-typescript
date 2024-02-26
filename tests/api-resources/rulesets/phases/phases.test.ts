@@ -17,7 +17,7 @@ describe('resource phases', () => {
   test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.rulesets.phases.update('http_request_firewall_custom', {
       account_id: 'string',
-      zone_id: 'abf9b32d38c5f572afde3336ec0ce302',
+      zone_id: 'string',
       id: '2f2feab2026849078ba485f918791bdc',
       rules: [{}, {}, {}],
     });
@@ -34,7 +34,7 @@ describe('resource phases', () => {
   test.skip('update: required and optional params', async () => {
     const response = await cloudflare.rulesets.phases.update('http_request_firewall_custom', {
       account_id: 'string',
-      zone_id: 'abf9b32d38c5f572afde3336ec0ce302',
+      zone_id: 'string',
       id: '2f2feab2026849078ba485f918791bdc',
       rules: [
         {
@@ -97,7 +97,7 @@ describe('resource phases', () => {
   test.skip('get: only required params', async () => {
     const responsePromise = cloudflare.rulesets.phases.get('http_request_firewall_custom', {
       account_id: 'string',
-      zone_id: 'abf9b32d38c5f572afde3336ec0ce302',
+      zone_id: 'string',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -112,7 +112,7 @@ describe('resource phases', () => {
   test.skip('get: required and optional params', async () => {
     const response = await cloudflare.rulesets.phases.get('http_request_firewall_custom', {
       account_id: 'string',
-      zone_id: 'abf9b32d38c5f572afde3336ec0ce302',
+      zone_id: 'string',
     });
   });
 });

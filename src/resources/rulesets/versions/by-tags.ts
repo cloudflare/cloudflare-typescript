@@ -9,15 +9,16 @@ export class ByTags extends APIResource {
    * Fetches the rules of a managed account ruleset version for a given tag.
    */
   get(
-    accountId: string,
     rulesetId: string,
     rulesetVersion: string,
     ruleTag: string,
+    params: ByTagGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ByTagGetResponse> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountId}/rulesets/${rulesetId}/versions/${rulesetVersion}/by_tag/${ruleTag}`,
+        `/accounts/${account_id}/rulesets/${rulesetId}/versions/${rulesetVersion}/by_tag/${ruleTag}`,
         options,
       ) as Core.APIPromise<{ result: ByTagGetResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -588,6 +589,14 @@ export namespace ByTagGetResponse {
   }
 }
 
+export interface ByTagGetParams {
+  /**
+   * The unique ID of the account.
+   */
+  account_id: string;
+}
+
 export namespace ByTags {
   export import ByTagGetResponse = ByTagsAPI.ByTagGetResponse;
+  export import ByTagGetParams = ByTagsAPI.ByTagGetParams;
 }

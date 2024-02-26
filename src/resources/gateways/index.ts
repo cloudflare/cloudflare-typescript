@@ -1,22 +1,30 @@
 // File generated from our OpenAPI spec by Stainless.
 
-export { AppTypeListResponse, AppTypes } from './app-types';
+export { AppTypeListResponse, AppTypeListParams, AppTypes } from './app-types';
 export {
   AuditSSHSettingUpdateResponse,
   AuditSSHSettingGetResponse,
   AuditSSHSettingUpdateParams,
+  AuditSSHSettingGetParams,
   AuditSSHSettings,
 } from './audit-ssh-settings';
-export { CategoryListResponse, Categories } from './categories';
+export { CategoryListResponse, CategoryListParams, Categories } from './categories';
 export {
   ConfigurationUpdateResponse,
   ConfigurationEditResponse,
   ConfigurationGetResponse,
   ConfigurationUpdateParams,
   ConfigurationEditParams,
+  ConfigurationGetParams,
   Configurations,
 } from './configurations';
-export { GatewayCreateResponse, GatewayListResponse, Gateways } from './gateways';
+export {
+  GatewayCreateResponse,
+  GatewayListResponse,
+  GatewayCreateParams,
+  GatewayListParams,
+  Gateways,
+} from './gateways';
 export {
   ListCreateResponse,
   ListUpdateResponse,
@@ -26,7 +34,10 @@ export {
   ListGetResponse,
   ListCreateParams,
   ListUpdateParams,
+  ListListParams,
+  ListDeleteParams,
   ListEditParams,
+  ListGetParams,
   Lists,
 } from './lists/index';
 export {
@@ -37,9 +48,18 @@ export {
   LocationGetResponse,
   LocationCreateParams,
   LocationUpdateParams,
+  LocationListParams,
+  LocationDeleteParams,
+  LocationGetParams,
   Locations,
 } from './locations';
-export { LoggingUpdateResponse, LoggingGetResponse, LoggingUpdateParams, Loggings } from './loggings';
+export {
+  LoggingUpdateResponse,
+  LoggingGetResponse,
+  LoggingUpdateParams,
+  LoggingGetParams,
+  Loggings,
+} from './loggings';
 export {
   ProxyEndpointCreateResponse,
   ProxyEndpointListResponse,
@@ -47,7 +67,10 @@ export {
   ProxyEndpointEditResponse,
   ProxyEndpointGetResponse,
   ProxyEndpointCreateParams,
+  ProxyEndpointListParams,
+  ProxyEndpointDeleteParams,
   ProxyEndpointEditParams,
+  ProxyEndpointGetParams,
   ProxyEndpoints,
 } from './proxy-endpoints';
 export {
@@ -58,5 +81,8 @@ export {
   RuleGetResponse,
   RuleCreateParams,
   RuleUpdateParams,
+  RuleListParams,
+  RuleDeleteParams,
+  RuleGetParams,
   Rules,
 } from './rules';

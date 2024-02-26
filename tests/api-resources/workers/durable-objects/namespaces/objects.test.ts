@@ -14,10 +14,10 @@ const cloudflare = new Cloudflare({
 
 describe('resource objects', () => {
   // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
+  test.skip('list: only required params', async () => {
     const responsePromise = cloudflare.workers.durableObjects.namespaces.objects.list(
-      '023e105f4ecef8ad9ca31a8372d0c353',
       '5fd1cafff895419c8bcc647fc64ab8f0',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,31 +29,15 @@ describe('resource objects', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.workers.durableObjects.namespaces.objects.list(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        '5fd1cafff895419c8bcc647fc64ab8f0',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('list: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.workers.durableObjects.namespaces.objects.list(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        '5fd1cafff895419c8bcc647fc64ab8f0',
-        {
-          cursor:
-            'AAAAANuhDN7SjacTnSVsDu3WW1Lvst6dxJGTjRY5BhxPXdf6L6uTcpd_NVtjhn11OUYRsVEykxoUwF-JQU4dn6QylZSKTOJuG0indrdn_MlHpMRtsxgXjs-RPdHYIVm3odE_uvEQ_dTQGFm8oikZMohns34DLBgrQpc',
-          limit: 10,
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('list: required and optional params', async () => {
+    const response = await cloudflare.workers.durableObjects.namespaces.objects.list(
+      '5fd1cafff895419c8bcc647fc64ab8f0',
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        cursor:
+          'AAAAANuhDN7SjacTnSVsDu3WW1Lvst6dxJGTjRY5BhxPXdf6L6uTcpd_NVtjhn11OUYRsVEykxoUwF-JQU4dn6QylZSKTOJuG0indrdn_MlHpMRtsxgXjs-RPdHYIVm3odE_uvEQ_dTQGFm8oikZMohns34DLBgrQpc',
+        limit: 10,
+      },
+    );
   });
 });

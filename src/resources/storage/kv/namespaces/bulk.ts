@@ -14,14 +14,14 @@ export class Bulk extends APIResource {
    * size must be 100 megabytes or less.
    */
   update(
-    accountId: string,
     namespaceId: string,
-    body: BulkUpdateParams,
+    params: BulkUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BulkUpdateResponse> {
+    const { account_id, body } = params;
     return (
-      this._client.put(`/accounts/${accountId}/storage/kv/namespaces/${namespaceId}/bulk`, {
-        body,
+      this._client.put(`/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/bulk`, {
+        body: body,
         ...options,
       }) as Core.APIPromise<{ result: BulkUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -32,14 +32,14 @@ export class Bulk extends APIResource {
    * 10,000 keys to be removed.
    */
   delete(
-    accountId: string,
     namespaceId: string,
-    body: BulkDeleteParams,
+    params: BulkDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BulkDeleteResponse> {
+    const { account_id, body } = params;
     return (
-      this._client.delete(`/accounts/${accountId}/storage/kv/namespaces/${namespaceId}/bulk`, {
-        body,
+      this._client.delete(`/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/bulk`, {
+        body: body,
         ...options,
       }) as Core.APIPromise<{ result: BulkDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -50,7 +50,17 @@ export type BulkUpdateResponse = unknown | string;
 
 export type BulkDeleteResponse = unknown | string;
 
-export type BulkUpdateParams = Array<BulkUpdateParams.Body>;
+export interface BulkUpdateParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: Array<BulkUpdateParams.Body>;
+}
 
 export namespace BulkUpdateParams {
   export interface Body {
@@ -91,7 +101,17 @@ export namespace BulkUpdateParams {
   }
 }
 
-export type BulkDeleteParams = Array<string>;
+export interface BulkDeleteParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: Array<string>;
+}
 
 export namespace Bulk {
   export import BulkUpdateResponse = BulkAPI.BulkUpdateResponse;

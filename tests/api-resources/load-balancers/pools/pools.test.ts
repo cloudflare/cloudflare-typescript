@@ -15,7 +15,8 @@ const cloudflare = new Cloudflare({
 describe('resource pools', () => {
   // skipped: tests are disabled for the time being
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.loadBalancers.pools.create('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = cloudflare.loadBalancers.pools.create({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'primary-dc-1',
       origins: [{}, {}, {}],
     });
@@ -30,7 +31,8 @@ describe('resource pools', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.loadBalancers.pools.create('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await cloudflare.loadBalancers.pools.create({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'primary-dc-1',
       origins: [
         {
@@ -81,11 +83,11 @@ describe('resource pools', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.loadBalancers.pools.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '17b5962d775c646f3f9725cbc7a53df4',
-      { name: 'primary-dc-1', origins: [{}, {}, {}] },
-    );
+    const responsePromise = cloudflare.loadBalancers.pools.update('17b5962d775c646f3f9725cbc7a53df4', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      name: 'primary-dc-1',
+      origins: [{}, {}, {}],
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -97,63 +99,62 @@ describe('resource pools', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.loadBalancers.pools.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '17b5962d775c646f3f9725cbc7a53df4',
-      {
-        name: 'primary-dc-1',
-        origins: [
-          {
-            address: '0.0.0.0',
-            enabled: true,
-            header: { Host: ['example.com', 'example.com', 'example.com'] },
-            name: 'app-server-1',
-            virtual_network_id: 'a5624d4e-044a-4ff0-b3e1-e2465353d4b4',
-            weight: 0.6,
-          },
-          {
-            address: '0.0.0.0',
-            enabled: true,
-            header: { Host: ['example.com', 'example.com', 'example.com'] },
-            name: 'app-server-1',
-            virtual_network_id: 'a5624d4e-044a-4ff0-b3e1-e2465353d4b4',
-            weight: 0.6,
-          },
-          {
-            address: '0.0.0.0',
-            enabled: true,
-            header: { Host: ['example.com', 'example.com', 'example.com'] },
-            name: 'app-server-1',
-            virtual_network_id: 'a5624d4e-044a-4ff0-b3e1-e2465353d4b4',
-            weight: 0.6,
-          },
-        ],
-        check_regions: ['WEU', 'ENAM'],
-        description: 'Primary data center - Provider XYZ',
-        enabled: false,
-        latitude: 0,
-        load_shedding: {
-          default_percent: 0,
-          default_policy: 'random',
-          session_percent: 0,
-          session_policy: 'hash',
+    const response = await cloudflare.loadBalancers.pools.update('17b5962d775c646f3f9725cbc7a53df4', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      name: 'primary-dc-1',
+      origins: [
+        {
+          address: '0.0.0.0',
+          enabled: true,
+          header: { Host: ['example.com', 'example.com', 'example.com'] },
+          name: 'app-server-1',
+          virtual_network_id: 'a5624d4e-044a-4ff0-b3e1-e2465353d4b4',
+          weight: 0.6,
         },
-        longitude: 0,
-        minimum_origins: 0,
-        monitor: {},
-        notification_email: 'someone@example.com,sometwo@example.com',
-        notification_filter: {
-          origin: { disable: true, healthy: true },
-          pool: { disable: true, healthy: false },
+        {
+          address: '0.0.0.0',
+          enabled: true,
+          header: { Host: ['example.com', 'example.com', 'example.com'] },
+          name: 'app-server-1',
+          virtual_network_id: 'a5624d4e-044a-4ff0-b3e1-e2465353d4b4',
+          weight: 0.6,
         },
-        origin_steering: { policy: 'random' },
+        {
+          address: '0.0.0.0',
+          enabled: true,
+          header: { Host: ['example.com', 'example.com', 'example.com'] },
+          name: 'app-server-1',
+          virtual_network_id: 'a5624d4e-044a-4ff0-b3e1-e2465353d4b4',
+          weight: 0.6,
+        },
+      ],
+      check_regions: ['WEU', 'ENAM'],
+      description: 'Primary data center - Provider XYZ',
+      enabled: false,
+      latitude: 0,
+      load_shedding: {
+        default_percent: 0,
+        default_policy: 'random',
+        session_percent: 0,
+        session_policy: 'hash',
       },
-    );
+      longitude: 0,
+      minimum_origins: 0,
+      monitor: {},
+      notification_email: 'someone@example.com,sometwo@example.com',
+      notification_filter: {
+        origin: { disable: true, healthy: true },
+        pool: { disable: true, healthy: false },
+      },
+      origin_steering: { policy: 'random' },
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
-    const responsePromise = cloudflare.loadBalancers.pools.list('023e105f4ecef8ad9ca31a8372d0c353');
+  test.skip('list: only required params', async () => {
+    const responsePromise = cloudflare.loadBalancers.pools.list({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -164,33 +165,18 @@ describe('resource pools', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.loadBalancers.pools.list('023e105f4ecef8ad9ca31a8372d0c353', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('list: required and optional params', async () => {
+    const response = await cloudflare.loadBalancers.pools.list({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      monitor: {},
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.loadBalancers.pools.list(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        { monitor: {} },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
-    const responsePromise = cloudflare.loadBalancers.pools.delete(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '17b5962d775c646f3f9725cbc7a53df4',
-    );
+  test.skip('delete: only required params', async () => {
+    const responsePromise = cloudflare.loadBalancers.pools.delete('17b5962d775c646f3f9725cbc7a53df4', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -201,12 +187,17 @@ describe('resource pools', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('edit', async () => {
-    const responsePromise = cloudflare.loadBalancers.pools.edit(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '17b5962d775c646f3f9725cbc7a53df4',
-      {},
-    );
+  test.skip('delete: required and optional params', async () => {
+    const response = await cloudflare.loadBalancers.pools.delete('17b5962d775c646f3f9725cbc7a53df4', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('edit: only required params', async () => {
+    const responsePromise = cloudflare.loadBalancers.pools.edit('17b5962d775c646f3f9725cbc7a53df4', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -217,11 +208,63 @@ describe('resource pools', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
-    const responsePromise = cloudflare.loadBalancers.pools.get(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '17b5962d775c646f3f9725cbc7a53df4',
-    );
+  test.skip('edit: required and optional params', async () => {
+    const response = await cloudflare.loadBalancers.pools.edit('17b5962d775c646f3f9725cbc7a53df4', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      check_regions: ['WEU', 'ENAM'],
+      description: 'Primary data center - Provider XYZ',
+      enabled: false,
+      latitude: 0,
+      load_shedding: {
+        default_percent: 0,
+        default_policy: 'random',
+        session_percent: 0,
+        session_policy: 'hash',
+      },
+      longitude: 0,
+      minimum_origins: 0,
+      monitor: {},
+      name: 'primary-dc-1',
+      notification_email: 'someone@example.com,sometwo@example.com',
+      notification_filter: {
+        origin: { disable: true, healthy: true },
+        pool: { disable: true, healthy: false },
+      },
+      origin_steering: { policy: 'random' },
+      origins: [
+        {
+          address: '0.0.0.0',
+          enabled: true,
+          header: { Host: ['example.com', 'example.com', 'example.com'] },
+          name: 'app-server-1',
+          virtual_network_id: 'a5624d4e-044a-4ff0-b3e1-e2465353d4b4',
+          weight: 0.6,
+        },
+        {
+          address: '0.0.0.0',
+          enabled: true,
+          header: { Host: ['example.com', 'example.com', 'example.com'] },
+          name: 'app-server-1',
+          virtual_network_id: 'a5624d4e-044a-4ff0-b3e1-e2465353d4b4',
+          weight: 0.6,
+        },
+        {
+          address: '0.0.0.0',
+          enabled: true,
+          header: { Host: ['example.com', 'example.com', 'example.com'] },
+          name: 'app-server-1',
+          virtual_network_id: 'a5624d4e-044a-4ff0-b3e1-e2465353d4b4',
+          weight: 0.6,
+        },
+      ],
+    });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get: only required params', async () => {
+    const responsePromise = cloudflare.loadBalancers.pools.get('17b5962d775c646f3f9725cbc7a53df4', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -232,14 +275,9 @@ describe('resource pools', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.loadBalancers.pools.get(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        '17b5962d775c646f3f9725cbc7a53df4',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.loadBalancers.pools.get('17b5962d775c646f3f9725cbc7a53df4', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 });

@@ -15,11 +15,11 @@ const cloudflare = new Cloudflare({
 describe('resource outputs', () => {
   // skipped: tests are disabled for the time being
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.stream.liveInputs.outputs.create(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '66be4bf738797e01e1fca35a7bdecdcd',
-      { streamKey: 'uzya-f19y-g2g9-a2ee-51j2', url: 'rtmp://a.rtmp.youtube.com/live2' },
-    );
+    const responsePromise = cloudflare.stream.liveInputs.outputs.create('66be4bf738797e01e1fca35a7bdecdcd', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      streamKey: 'uzya-f19y-g2g9-a2ee-51j2',
+      url: 'rtmp://a.rtmp.youtube.com/live2',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -31,20 +31,20 @@ describe('resource outputs', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.stream.liveInputs.outputs.create(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '66be4bf738797e01e1fca35a7bdecdcd',
-      { streamKey: 'uzya-f19y-g2g9-a2ee-51j2', url: 'rtmp://a.rtmp.youtube.com/live2', enabled: true },
-    );
+    const response = await cloudflare.stream.liveInputs.outputs.create('66be4bf738797e01e1fca35a7bdecdcd', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      streamKey: 'uzya-f19y-g2g9-a2ee-51j2',
+      url: 'rtmp://a.rtmp.youtube.com/live2',
+      enabled: true,
+    });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.stream.liveInputs.outputs.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
       '66be4bf738797e01e1fca35a7bdecdcd',
       'baea4d9c515887b80289d5c33cf01145',
-      { enabled: true },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', enabled: true },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -58,19 +58,17 @@ describe('resource outputs', () => {
   // skipped: tests are disabled for the time being
   test.skip('update: required and optional params', async () => {
     const response = await cloudflare.stream.liveInputs.outputs.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
       '66be4bf738797e01e1fca35a7bdecdcd',
       'baea4d9c515887b80289d5c33cf01145',
-      { enabled: true },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', enabled: true },
     );
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
-    const responsePromise = cloudflare.stream.liveInputs.outputs.list(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '66be4bf738797e01e1fca35a7bdecdcd',
-    );
+  test.skip('list: only required params', async () => {
+    const responsePromise = cloudflare.stream.liveInputs.outputs.list('66be4bf738797e01e1fca35a7bdecdcd', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -81,23 +79,18 @@ describe('resource outputs', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.stream.liveInputs.outputs.list(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        '66be4bf738797e01e1fca35a7bdecdcd',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('list: required and optional params', async () => {
+    const response = await cloudflare.stream.liveInputs.outputs.list('66be4bf738797e01e1fca35a7bdecdcd', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
+  test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.stream.liveInputs.outputs.delete(
-      '023e105f4ecef8ad9ca31a8372d0c353',
       '66be4bf738797e01e1fca35a7bdecdcd',
       'baea4d9c515887b80289d5c33cf01145',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -106,5 +99,14 @@ describe('resource outputs', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('delete: required and optional params', async () => {
+    const response = await cloudflare.stream.liveInputs.outputs.delete(
+      '66be4bf738797e01e1fca35a7bdecdcd',
+      'baea4d9c515887b80289d5c33cf01145',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
   });
 });

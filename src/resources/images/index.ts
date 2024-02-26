@@ -9,7 +9,9 @@ export {
   V1GetResponse,
   V1CreateParams,
   V1ListParams,
+  V1DeleteParams,
   V1EditParams,
+  V1GetParams,
   V1ListResponsesV4PagePagination,
   V1s,
 } from './v1s/index';

@@ -70,7 +70,7 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 async function main() {
-  const zone = await cloudflare.zones.get('023e105f4ecef8ad9ca31a8372d0c353').catch((err) => {
+  const zone = await cloudflare.zones.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' }).catch((err) => {
     if (err instanceof Cloudflare.APIError) {
       console.log(err.status); // 400
       console.log(err.name); // BadRequestError
@@ -113,7 +113,7 @@ const cloudflare = new Cloudflare({
 });
 
 // Or, configure per-request:
-await cloudflare.zones.get('023e105f4ecef8ad9ca31a8372d0c353', {
+await cloudflare.zones.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' }, {
   maxRetries: 5,
 });
 ```
@@ -130,7 +130,7 @@ const cloudflare = new Cloudflare({
 });
 
 // Override per-request:
-await cloudflare.zones.edit('023e105f4ecef8ad9ca31a8372d0c353', {
+await cloudflare.zones.edit({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -219,7 +219,7 @@ const cloudflare = new Cloudflare({
 });
 
 // Override per-request:
-await cloudflare.zones.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+await cloudflare.zones.delete({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' }, {
   baseURL: 'http://localhost:8080/test-api',
   httpAgent: new http.Agent({ keepAlive: false }),
 })

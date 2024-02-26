@@ -12,4 +12,5 @@ export namespace Universal {
   export import SettingEditResponse = SettingsAPI.SettingEditResponse;
   export import SettingGetResponse = SettingsAPI.SettingGetResponse;
   export import SettingEditParams = SettingsAPI.SettingEditParams;
+  export import SettingGetParams = SettingsAPI.SettingGetParams;
 }

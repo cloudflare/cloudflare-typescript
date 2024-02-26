@@ -15,7 +15,8 @@ const cloudflare = new Cloudflare({
 describe('resource payloadLogs', () => {
   // skipped: tests are disabled for the time being
   test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.dlp.payloadLogs.update('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = cloudflare.dlp.payloadLogs.update({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       public_key: 'EmpOvSXw8BfbrGCi0fhGiD/3yXk2SiV1Nzg2lru3oj0=',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -29,14 +30,17 @@ describe('resource payloadLogs', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.dlp.payloadLogs.update('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await cloudflare.dlp.payloadLogs.update({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       public_key: 'EmpOvSXw8BfbrGCi0fhGiD/3yXk2SiV1Nzg2lru3oj0=',
     });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
-    const responsePromise = cloudflare.dlp.payloadLogs.get('023e105f4ecef8ad9ca31a8372d0c353');
+  test.skip('get: only required params', async () => {
+    const responsePromise = cloudflare.dlp.payloadLogs.get({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -47,12 +51,7 @@ describe('resource payloadLogs', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.dlp.payloadLogs.get('023e105f4ecef8ad9ca31a8372d0c353', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.dlp.payloadLogs.get({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 });

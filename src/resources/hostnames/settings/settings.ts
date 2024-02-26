@@ -13,4 +13,6 @@ export namespace Settings {
   export import TLSDeleteResponse = TLSAPI.TLSDeleteResponse;
   export import TLSGetResponse = TLSAPI.TLSGetResponse;
   export import TLSUpdateParams = TLSAPI.TLSUpdateParams;
+  export import TLSDeleteParams = TLSAPI.TLSDeleteParams;
+  export import TLSGetParams = TLSAPI.TLSGetParams;
 }

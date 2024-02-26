@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless.
 
-import Cloudflare from 'cloudflare';
+import Cloudflare, { toFile } from 'cloudflare';
 import { Response } from 'node-fetch';
 
 const cloudflare = new Cloudflare({
@@ -14,12 +14,11 @@ const cloudflare = new Cloudflare({
 
 describe('resource content', () => {
   // skipped: tests are disabled for the time being
-  test.skip('update', async () => {
+  test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.workers.services.environments.content.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
       'my-worker',
       'production',
-      {},
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -31,15 +30,28 @@ describe('resource content', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.workers.services.environments.content.get(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        'my-worker',
-        'production',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('update: required and optional params', async () => {
+    const response = await cloudflare.workers.services.environments.content.update(
+      'my-worker',
+      'production',
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        '<any part name>': [
+          await toFile(Buffer.from('# my file contents'), 'README.md'),
+          await toFile(Buffer.from('# my file contents'), 'README.md'),
+          await toFile(Buffer.from('# my file contents'), 'README.md'),
+        ],
+        metadata: { body_part: 'worker.js', main_module: 'worker.js' },
+        'CF-WORKER-BODY-PART': 'string',
+        'CF-WORKER-MAIN-MODULE-PART': 'string',
+      },
+    );
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.workers.services.environments.content.get('my-worker', 'production', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 });

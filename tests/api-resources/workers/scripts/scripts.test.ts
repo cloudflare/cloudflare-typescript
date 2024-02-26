@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless.
 
-import Cloudflare from 'cloudflare';
+import Cloudflare, { toFile } from 'cloudflare';
 import { Response } from 'node-fetch';
 
 const cloudflare = new Cloudflare({
@@ -14,12 +14,10 @@ const cloudflare = new Cloudflare({
 
 describe('resource scripts', () => {
   // skipped: tests are disabled for the time being
-  test.skip('update', async () => {
-    const responsePromise = cloudflare.workers.scripts.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'this-is_my_script-01',
-      {},
-    );
+  test.skip('update: only required params', async () => {
+    const responsePromise = cloudflare.workers.scripts.update('this-is_my_script-01', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -30,8 +28,58 @@ describe('resource scripts', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
-    const responsePromise = cloudflare.workers.scripts.list('023e105f4ecef8ad9ca31a8372d0c353');
+  test.skip('update: required and optional params', async () => {
+    const response = await cloudflare.workers.scripts.update('this-is_my_script-01', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      rollback_to: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      '<any part name>': [
+        await toFile(Buffer.from('# my file contents'), 'README.md'),
+        await toFile(Buffer.from('# my file contents'), 'README.md'),
+        await toFile(Buffer.from('# my file contents'), 'README.md'),
+      ],
+      message: 'string',
+      metadata: {
+        bindings: [{}, {}, {}],
+        body_part: 'worker.js',
+        compatibility_date: '2023-07-25',
+        compatibility_flags: ['string', 'string', 'string'],
+        keep_bindings: ['string', 'string', 'string'],
+        logpush: false,
+        main_module: 'worker.js',
+        migrations: {
+          new_tag: 'v2',
+          old_tag: 'v1',
+          deleted_classes: ['string', 'string', 'string'],
+          new_classes: ['string', 'string', 'string'],
+          renamed_classes: [
+            { from: 'string', to: 'string' },
+            { from: 'string', to: 'string' },
+            { from: 'string', to: 'string' },
+          ],
+          transferred_classes: [
+            { from: 'string', from_script: 'string', to: 'string' },
+            { from: 'string', from_script: 'string', to: 'string' },
+            { from: 'string', from_script: 'string', to: 'string' },
+          ],
+        },
+        placement: { mode: 'smart' },
+        tags: ['string', 'string', 'string'],
+        tail_consumers: [
+          { environment: 'production', namespace: 'my-namespace', service: 'my-log-consumer' },
+          { environment: 'production', namespace: 'my-namespace', service: 'my-log-consumer' },
+          { environment: 'production', namespace: 'my-namespace', service: 'my-log-consumer' },
+        ],
+        usage_model: 'bundled',
+        version_tags: {},
+      },
+    });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list: only required params', async () => {
+    const responsePromise = cloudflare.workers.scripts.list({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -42,22 +90,17 @@ describe('resource scripts', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.workers.scripts.list('023e105f4ecef8ad9ca31a8372d0c353', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('list: required and optional params', async () => {
+    const response = await cloudflare.workers.scripts.list({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
-    const responsePromise = cloudflare.workers.scripts.delete(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'this-is_my_script-01',
-      {},
-    );
+  test.skip('delete: only required params', async () => {
+    const responsePromise = cloudflare.workers.scripts.delete('this-is_my_script-01', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -68,12 +111,17 @@ describe('resource scripts', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.workers.scripts.get('023e105f4ecef8ad9ca31a8372d0c353', 'this-is_my_script-01', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('delete: required and optional params', async () => {
+    const response = await cloudflare.workers.scripts.delete('this-is_my_script-01', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      force: true,
+    });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.workers.scripts.get('this-is_my_script-01', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 });

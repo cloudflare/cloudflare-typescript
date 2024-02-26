@@ -738,4 +738,5 @@ export namespace Versions {
   export import VersionGetParams = VersionsAPI.VersionGetParams;
   export import ByTags = ByTagsAPI.ByTags;
   export import ByTagGetResponse = ByTagsAPI.ByTagGetResponse;
+  export import ByTagGetParams = ByTagsAPI.ByTagGetParams;
 }

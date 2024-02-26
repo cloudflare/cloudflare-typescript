@@ -6,6 +6,8 @@ export {
   DelegationListResponse,
   DelegationDeleteResponse,
   DelegationCreateParams,
+  DelegationListParams,
+  DelegationDeleteParams,
   Delegations,
 } from './delegations';
 export {
@@ -15,6 +17,9 @@ export {
   PrefixEditResponse,
   PrefixGetResponse,
   PrefixCreateParams,
+  PrefixListParams,
+  PrefixDeleteParams,
   PrefixEditParams,
+  PrefixGetParams,
   Prefixes,
 } from './prefixes';

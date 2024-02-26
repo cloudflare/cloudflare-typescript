@@ -9,12 +9,12 @@ export class MinTLSVersion extends APIResource {
    * Changes Minimum TLS Version setting.
    */
   edit(
-    zoneId: string,
-    body: MinTLSVersionEditParams,
+    params: MinTLSVersionEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MinTLSVersionEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/settings/min_tls_version`, {
+      this._client.patch(`/zones/${zone_id}/settings/min_tls_version`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: MinTLSVersionEditResponse }>
@@ -24,9 +24,13 @@ export class MinTLSVersion extends APIResource {
   /**
    * Gets Minimum TLS Version setting.
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<MinTLSVersionGetResponse> {
+  get(
+    params: MinTLSVersionGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MinTLSVersionGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/settings/min_tls_version`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/settings/min_tls_version`, options) as Core.APIPromise<{
         result: MinTLSVersionGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -91,13 +95,26 @@ export interface MinTLSVersionGetResponse {
 
 export interface MinTLSVersionEditParams {
   /**
-   * Value of the zone setting.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Value of the zone setting.
    */
   value: '1.0' | '1.1' | '1.2' | '1.3';
+}
+
+export interface MinTLSVersionGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }
 
 export namespace MinTLSVersion {
   export import MinTLSVersionEditResponse = MinTLSVersionAPI.MinTLSVersionEditResponse;
   export import MinTLSVersionGetResponse = MinTLSVersionAPI.MinTLSVersionGetResponse;
   export import MinTLSVersionEditParams = MinTLSVersionAPI.MinTLSVersionEditParams;
+  export import MinTLSVersionGetParams = MinTLSVersionAPI.MinTLSVersionGetParams;
 }

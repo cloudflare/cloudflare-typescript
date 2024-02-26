@@ -12,12 +12,12 @@ export class SecurityLevel extends APIResource {
    * (https://support.cloudflare.com/hc/en-us/articles/200170056).
    */
   edit(
-    zoneId: string,
-    body: SecurityLevelEditParams,
+    params: SecurityLevelEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SecurityLevelEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/settings/security_level`, {
+      this._client.patch(`/zones/${zone_id}/settings/security_level`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: SecurityLevelEditResponse }>
@@ -30,9 +30,13 @@ export class SecurityLevel extends APIResource {
    * an individual security setting, the profile will become Custom.
    * (https://support.cloudflare.com/hc/en-us/articles/200170056).
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<SecurityLevelGetResponse> {
+  get(
+    params: SecurityLevelGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SecurityLevelGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/settings/security_level`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/settings/security_level`, options) as Core.APIPromise<{
         result: SecurityLevelGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -99,13 +103,26 @@ export interface SecurityLevelGetResponse {
 
 export interface SecurityLevelEditParams {
   /**
-   * Value of the zone setting.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Value of the zone setting.
    */
   value: 'off' | 'essentially_off' | 'low' | 'medium' | 'high' | 'under_attack';
+}
+
+export interface SecurityLevelGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }
 
 export namespace SecurityLevel {
   export import SecurityLevelEditResponse = SecurityLevelAPI.SecurityLevelEditResponse;
   export import SecurityLevelGetResponse = SecurityLevelAPI.SecurityLevelGetResponse;
   export import SecurityLevelEditParams = SecurityLevelAPI.SecurityLevelEditParams;
+  export import SecurityLevelGetParams = SecurityLevelAPI.SecurityLevelGetParams;
 }

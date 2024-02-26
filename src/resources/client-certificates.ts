@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as ClientCertificatesAPI from 'cloudflare/resources/client-certificates';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
@@ -11,12 +10,12 @@ export class ClientCertificates extends APIResource {
    * Create a new API Shield mTLS Client Certificate
    */
   create(
-    zoneId: string,
-    body: ClientCertificateCreateParams,
+    params: ClientCertificateCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ClientCertificateCreateResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.post(`/zones/${zoneId}/client_certificates`, { body, ...options }) as Core.APIPromise<{
+      this._client.post(`/zones/${zone_id}/client_certificates`, { body, ...options }) as Core.APIPromise<{
         result: ClientCertificateCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -27,24 +26,12 @@ export class ClientCertificates extends APIResource {
    * using Pagination
    */
   list(
-    zoneId: string,
-    query?: ClientCertificateListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<ClientCertificateListResponsesV4PagePaginationArray, ClientCertificateListResponse>;
-  list(
-    zoneId: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<ClientCertificateListResponsesV4PagePaginationArray, ClientCertificateListResponse>;
-  list(
-    zoneId: string,
-    query: ClientCertificateListParams | Core.RequestOptions = {},
+    params: ClientCertificateListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<ClientCertificateListResponsesV4PagePaginationArray, ClientCertificateListResponse> {
-    if (isRequestOptions(query)) {
-      return this.list(zoneId, {}, query);
-    }
+    const { zone_id, ...query } = params;
     return this._client.getAPIList(
-      `/zones/${zoneId}/client_certificates`,
+      `/zones/${zone_id}/client_certificates`,
       ClientCertificateListResponsesV4PagePaginationArray,
       { query, ...options },
     );
@@ -55,13 +42,14 @@ export class ClientCertificates extends APIResource {
    * processing to revoked status.
    */
   delete(
-    zoneId: string,
     clientCertificateId: string,
+    params: ClientCertificateDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ClientCertificateDeleteResponse> {
+    const { zone_id } = params;
     return (
       this._client.delete(
-        `/zones/${zoneId}/client_certificates/${clientCertificateId}`,
+        `/zones/${zone_id}/client_certificates/${clientCertificateId}`,
         options,
       ) as Core.APIPromise<{ result: ClientCertificateDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -72,13 +60,14 @@ export class ClientCertificates extends APIResource {
    * may reactivate it with this endpoint.
    */
   edit(
-    zoneId: string,
     clientCertificateId: string,
+    params: ClientCertificateEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ClientCertificateEditResponse> {
+    const { zone_id } = params;
     return (
       this._client.patch(
-        `/zones/${zoneId}/client_certificates/${clientCertificateId}`,
+        `/zones/${zone_id}/client_certificates/${clientCertificateId}`,
         options,
       ) as Core.APIPromise<{ result: ClientCertificateEditResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -88,13 +77,14 @@ export class ClientCertificates extends APIResource {
    * Get Details for a single mTLS API Shield Client Certificate
    */
   get(
-    zoneId: string,
     clientCertificateId: string,
+    params: ClientCertificateGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ClientCertificateGetResponse> {
+    const { zone_id } = params;
     return (
       this._client.get(
-        `/zones/${zoneId}/client_certificates/${clientCertificateId}`,
+        `/zones/${zone_id}/client_certificates/${clientCertificateId}`,
         options,
       ) as Core.APIPromise<{ result: ClientCertificateGetResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -625,31 +615,63 @@ export namespace ClientCertificateGetResponse {
 
 export interface ClientCertificateCreateParams {
   /**
-   * The Certificate Signing Request (CSR). Must be newline-encoded.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: The Certificate Signing Request (CSR). Must be newline-encoded.
    */
   csr: string;
 
   /**
-   * The number of days the Client Certificate will be valid after the issued_on date
+   * Body param: The number of days the Client Certificate will be valid after the
+   * issued_on date
    */
   validity_days: number;
 }
 
 export interface ClientCertificateListParams extends V4PagePaginationArrayParams {
   /**
-   * Limit to the number of records returned.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Query param: Limit to the number of records returned.
    */
   limit?: number;
 
   /**
-   * Offset the results
+   * Query param: Offset the results
    */
   offset?: number;
 
   /**
-   * Client Certitifcate Status to filter results by.
+   * Query param: Client Certitifcate Status to filter results by.
    */
   status?: 'all' | 'active' | 'pending_reactivation' | 'pending_revocation' | 'revoked';
+}
+
+export interface ClientCertificateDeleteParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+export interface ClientCertificateEditParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+export interface ClientCertificateGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }
 
 export namespace ClientCertificates {
@@ -661,4 +683,7 @@ export namespace ClientCertificates {
   export import ClientCertificateListResponsesV4PagePaginationArray = ClientCertificatesAPI.ClientCertificateListResponsesV4PagePaginationArray;
   export import ClientCertificateCreateParams = ClientCertificatesAPI.ClientCertificateCreateParams;
   export import ClientCertificateListParams = ClientCertificatesAPI.ClientCertificateListParams;
+  export import ClientCertificateDeleteParams = ClientCertificatesAPI.ClientCertificateDeleteParams;
+  export import ClientCertificateEditParams = ClientCertificatesAPI.ClientCertificateEditParams;
+  export import ClientCertificateGetParams = ClientCertificatesAPI.ClientCertificateGetParams;
 }

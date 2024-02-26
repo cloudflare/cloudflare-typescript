@@ -11,12 +11,12 @@ export class SSLRecommender extends APIResource {
    * origin servers support.
    */
   edit(
-    zoneId: string,
-    body: SSLRecommenderEditParams,
+    params: SSLRecommenderEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SSLRecommenderEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/settings/ssl_recommender`, {
+      this._client.patch(`/zones/${zone_id}/settings/ssl_recommender`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: SSLRecommenderEditResponse }>
@@ -28,9 +28,13 @@ export class SSLRecommender extends APIResource {
    * recommend (by sending periodic emails) the most secure SSL/TLS setting your
    * origin servers support.
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<SSLRecommenderGetResponse> {
+  get(
+    params: SSLRecommenderGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SSLRecommenderGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/settings/ssl_recommender`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/settings/ssl_recommender`, options) as Core.APIPromise<{
         result: SSLRecommenderGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -73,8 +77,13 @@ export interface SSLRecommenderGetResponse {
 
 export interface SSLRecommenderEditParams {
   /**
-   * Enrollment in the SSL/TLS Recommender service which tries to detect and
-   * recommend (by sending periodic emails) the most secure SSL/TLS setting your
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Enrollment in the SSL/TLS Recommender service which tries to detect
+   * and recommend (by sending periodic emails) the most secure SSL/TLS setting your
    * origin servers support.
    */
   value: SSLRecommenderEditParams.Value;
@@ -99,8 +108,16 @@ export namespace SSLRecommenderEditParams {
   }
 }
 
+export interface SSLRecommenderGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
 export namespace SSLRecommender {
   export import SSLRecommenderEditResponse = SSLRecommenderAPI.SSLRecommenderEditResponse;
   export import SSLRecommenderGetResponse = SSLRecommenderAPI.SSLRecommenderGetResponse;
   export import SSLRecommenderEditParams = SSLRecommenderAPI.SSLRecommenderEditParams;
+  export import SSLRecommenderGetParams = SSLRecommenderAPI.SSLRecommenderGetParams;
 }

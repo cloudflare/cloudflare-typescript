@@ -11,20 +11,20 @@ export class Content extends APIResource {
    * Put script content for a script uploaded to a Workers for Platforms namespace.
    */
   update(
-    accountId: string,
     dispatchNamespace: string,
     scriptName: string,
     params: ContentUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ContentUpdateResponse> {
     const {
+      account_id,
       'CF-WORKER-BODY-PART': cfWorkerBodyPart,
       'CF-WORKER-MAIN-MODULE-PART': cfWorkerMainModulePart,
       ...body
     } = params;
     return (
       this._client.put(
-        `/accounts/${accountId}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/content`,
+        `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/content`,
         multipartFormRequestOptions({
           body,
           ...options,
@@ -43,13 +43,14 @@ export class Content extends APIResource {
    * namespace.
    */
   get(
-    accountId: string,
     dispatchNamespace: string,
     scriptName: string,
+    params: ContentGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Response> {
+    const { account_id } = params;
     return this._client.get(
-      `/accounts/${accountId}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/content`,
+      `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/content`,
       { ...options, __binaryResponse: true },
     );
   }
@@ -126,6 +127,11 @@ export namespace ContentUpdateResponse {
 
 export interface ContentUpdateParams {
   /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
    * Body param: A module comprising a Worker script, often a javascript file.
    * Multiple modules may be provided as separate named parts, but at least one
    * module must be present. This should be referenced either in the metadata as
@@ -174,7 +180,15 @@ export namespace ContentUpdateParams {
   }
 }
 
+export interface ContentGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export namespace Content {
   export import ContentUpdateResponse = ContentAPI.ContentUpdateResponse;
   export import ContentUpdateParams = ContentAPI.ContentUpdateParams;
+  export import ContentGetParams = ContentAPI.ContentGetParams;
 }

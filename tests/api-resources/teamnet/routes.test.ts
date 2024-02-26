@@ -15,7 +15,8 @@ const cloudflare = new Cloudflare({
 describe('resource routes', () => {
   // skipped: tests are disabled for the time being
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.teamnet.routes.create('699d98642c564d2e855e9661899b7252', {
+    const responsePromise = cloudflare.teamnet.routes.create({
+      account_id: '699d98642c564d2e855e9661899b7252',
       ip_network: '172.16.0.0/16',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -29,7 +30,8 @@ describe('resource routes', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.teamnet.routes.create('699d98642c564d2e855e9661899b7252', {
+    const response = await cloudflare.teamnet.routes.create({
+      account_id: '699d98642c564d2e855e9661899b7252',
       ip_network: '172.16.0.0/16',
       comment: 'Example comment for this route.',
       virtual_network_id: {},
@@ -37,11 +39,10 @@ describe('resource routes', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
-    const responsePromise = cloudflare.teamnet.routes.delete(
-      '699d98642c564d2e855e9661899b7252',
-      'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
-    );
+  test.skip('delete: only required params', async () => {
+    const responsePromise = cloudflare.teamnet.routes.delete('f70ff985-a4ef-4643-bbbc-4a0ed4fc8415', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -52,24 +53,17 @@ describe('resource routes', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.teamnet.routes.delete(
-        '699d98642c564d2e855e9661899b7252',
-        'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('delete: required and optional params', async () => {
+    const response = await cloudflare.teamnet.routes.delete('f70ff985-a4ef-4643-bbbc-4a0ed4fc8415', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('edit', async () => {
-    const responsePromise = cloudflare.teamnet.routes.edit(
-      '699d98642c564d2e855e9661899b7252',
-      'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
-      {},
-    );
+  test.skip('edit: only required params', async () => {
+    const responsePromise = cloudflare.teamnet.routes.edit('f70ff985-a4ef-4643-bbbc-4a0ed4fc8415', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -77,5 +71,17 @@ describe('resource routes', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('edit: required and optional params', async () => {
+    const response = await cloudflare.teamnet.routes.edit('f70ff985-a4ef-4643-bbbc-4a0ed4fc8415', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+      comment: 'Example comment for this route.',
+      network: '172.16.0.0/16',
+      tun_type: 'cfd_tunnel',
+      tunnel_id: {},
+      virtual_network_id: {},
+    });
   });
 });

@@ -12,12 +12,12 @@ export class MobileRedirect extends APIResource {
    * for more information.
    */
   edit(
-    zoneId: string,
-    body: MobileRedirectEditParams,
+    params: MobileRedirectEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MobileRedirectEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/settings/mobile_redirect`, {
+      this._client.patch(`/zones/${zone_id}/settings/mobile_redirect`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: MobileRedirectEditResponse }>
@@ -30,9 +30,13 @@ export class MobileRedirect extends APIResource {
    * [Understanding Cloudflare Mobile Redirect](https://support.cloudflare.com/hc/articles/200168336)
    * for more information.
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<MobileRedirectGetResponse> {
+  get(
+    params: MobileRedirectGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MobileRedirectGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/settings/mobile_redirect`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/settings/mobile_redirect`, options) as Core.APIPromise<{
         result: MobileRedirectGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -147,7 +151,12 @@ export namespace MobileRedirectGetResponse {
 
 export interface MobileRedirectEditParams {
   /**
-   * Value of the zone setting.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Value of the zone setting.
    */
   value: MobileRedirectEditParams.Value;
 }
@@ -176,8 +185,16 @@ export namespace MobileRedirectEditParams {
   }
 }
 
+export interface MobileRedirectGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
 export namespace MobileRedirect {
   export import MobileRedirectEditResponse = MobileRedirectAPI.MobileRedirectEditResponse;
   export import MobileRedirectGetResponse = MobileRedirectAPI.MobileRedirectGetResponse;
   export import MobileRedirectEditParams = MobileRedirectAPI.MobileRedirectEditParams;
+  export import MobileRedirectGetParams = MobileRedirectAPI.MobileRedirectGetParams;
 }

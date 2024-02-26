@@ -4,7 +4,9 @@ export {
   BGPPrefixListResponse,
   BGPPrefixEditResponse,
   BGPPrefixGetResponse,
+  BGPPrefixListParams,
   BGPPrefixEditParams,
+  BGPPrefixGetParams,
   BGPPrefixes,
 } from './bgp-prefixes';
 export {
@@ -13,6 +15,9 @@ export {
   BindingDeleteResponse,
   BindingGetResponse,
   BindingCreateParams,
+  BindingListParams,
+  BindingDeleteParams,
+  BindingGetParams,
   Bindings,
 } from './bindings';
 export { Prefixes } from './prefixes';

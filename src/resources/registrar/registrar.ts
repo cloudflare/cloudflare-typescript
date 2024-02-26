@@ -13,4 +13,6 @@ export namespace Registrar {
   export import DomainListResponse = DomainsAPI.DomainListResponse;
   export import DomainGetResponse = DomainsAPI.DomainGetResponse;
   export import DomainUpdateParams = DomainsAPI.DomainUpdateParams;
+  export import DomainListParams = DomainsAPI.DomainListParams;
+  export import DomainGetParams = DomainsAPI.DomainGetParams;
 }

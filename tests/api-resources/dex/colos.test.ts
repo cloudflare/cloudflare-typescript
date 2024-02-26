@@ -15,7 +15,8 @@ const cloudflare = new Cloudflare({
 describe('resource colos', () => {
   // skipped: tests are disabled for the time being
   test.skip('list: only required params', async () => {
-    const responsePromise = cloudflare.dex.colos.list('01a7362d577a6c3019a474fd6f485823', {
+    const responsePromise = cloudflare.dex.colos.list({
+      account_id: '01a7362d577a6c3019a474fd6f485823',
       timeEnd: '2023-08-24T20:45:00Z',
       timeStart: '2023-08-20T20:45:00Z',
     });
@@ -30,7 +31,8 @@ describe('resource colos', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('list: required and optional params', async () => {
-    const response = await cloudflare.dex.colos.list('01a7362d577a6c3019a474fd6f485823', {
+    const response = await cloudflare.dex.colos.list({
+      account_id: '01a7362d577a6c3019a474fd6f485823',
       timeEnd: '2023-08-24T20:45:00Z',
       timeStart: '2023-08-20T20:45:00Z',
       sortBy: 'fleet-status-usage',

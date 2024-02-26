@@ -133,9 +133,10 @@ export class Settings extends APIResource {
   /**
    * Available settings for your user in relation to a zone.
    */
-  list(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<SettingListResponse> {
+  list(params: SettingListParams, options?: Core.RequestOptions): Core.APIPromise<SettingListResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/settings`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/settings`, options) as Core.APIPromise<{
         result: SettingListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -144,13 +145,10 @@ export class Settings extends APIResource {
   /**
    * Edit settings for a zone.
    */
-  edit(
-    zoneId: string,
-    body: SettingEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SettingEditResponse> {
+  edit(params: SettingEditParams, options?: Core.RequestOptions): Core.APIPromise<SettingEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/settings`, { body, ...options }) as Core.APIPromise<{
+      this._client.patch(`/zones/${zone_id}/settings`, { body, ...options }) as Core.APIPromise<{
         result: SettingEditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -3741,9 +3739,21 @@ export namespace SettingEditResponse {
   }
 }
 
+export interface SettingListParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
 export interface SettingEditParams {
   /**
-   * One or more zone setting objects. Must contain an ID and a value.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: One or more zone setting objects. Must contain an ID and a value.
    */
   items: Array<
     | SettingEditParams.Zones0rtt
@@ -4951,207 +4961,259 @@ export namespace SettingEditParams {
 export namespace Settings {
   export import SettingListResponse = SettingsAPI.SettingListResponse;
   export import SettingEditResponse = SettingsAPI.SettingEditResponse;
+  export import SettingListParams = SettingsAPI.SettingListParams;
   export import SettingEditParams = SettingsAPI.SettingEditParams;
   export import ZeroRTT = ZeroRTTAPI.ZeroRTT;
   export import ZeroRTTEditResponse = ZeroRTTAPI.ZeroRTTEditResponse;
   export import ZeroRTTGetResponse = ZeroRTTAPI.ZeroRTTGetResponse;
   export import ZeroRTTEditParams = ZeroRTTAPI.ZeroRTTEditParams;
+  export import ZeroRTTGetParams = ZeroRTTAPI.ZeroRTTGetParams;
   export import AdvancedDDOS = AdvancedDDOSAPI.AdvancedDDOS;
   export import AdvancedDDOSGetResponse = AdvancedDDOSAPI.AdvancedDDOSGetResponse;
+  export import AdvancedDDOSGetParams = AdvancedDDOSAPI.AdvancedDDOSGetParams;
   export import AlwaysOnline = AlwaysOnlineAPI.AlwaysOnline;
   export import AlwaysOnlineEditResponse = AlwaysOnlineAPI.AlwaysOnlineEditResponse;
   export import AlwaysOnlineGetResponse = AlwaysOnlineAPI.AlwaysOnlineGetResponse;
   export import AlwaysOnlineEditParams = AlwaysOnlineAPI.AlwaysOnlineEditParams;
+  export import AlwaysOnlineGetParams = AlwaysOnlineAPI.AlwaysOnlineGetParams;
   export import AlwaysUseHTTPS = AlwaysUseHTTPSAPI.AlwaysUseHTTPS;
   export import AlwaysUseHTTPSEditResponse = AlwaysUseHTTPSAPI.AlwaysUseHTTPSEditResponse;
   export import AlwaysUseHTTPSGetResponse = AlwaysUseHTTPSAPI.AlwaysUseHTTPSGetResponse;
   export import AlwaysUseHTTPSEditParams = AlwaysUseHTTPSAPI.AlwaysUseHTTPSEditParams;
+  export import AlwaysUseHTTPSGetParams = AlwaysUseHTTPSAPI.AlwaysUseHTTPSGetParams;
   export import AutomaticHTTPSRewrites = AutomaticHTTPSRewritesAPI.AutomaticHTTPSRewrites;
   export import AutomaticHTTPSRewriteEditResponse = AutomaticHTTPSRewritesAPI.AutomaticHTTPSRewriteEditResponse;
   export import AutomaticHTTPSRewriteGetResponse = AutomaticHTTPSRewritesAPI.AutomaticHTTPSRewriteGetResponse;
   export import AutomaticHTTPSRewriteEditParams = AutomaticHTTPSRewritesAPI.AutomaticHTTPSRewriteEditParams;
+  export import AutomaticHTTPSRewriteGetParams = AutomaticHTTPSRewritesAPI.AutomaticHTTPSRewriteGetParams;
   export import AutomaticPlatformOptimization = AutomaticPlatformOptimizationAPI.AutomaticPlatformOptimization;
   export import AutomaticPlatformOptimizationEditResponse = AutomaticPlatformOptimizationAPI.AutomaticPlatformOptimizationEditResponse;
   export import AutomaticPlatformOptimizationGetResponse = AutomaticPlatformOptimizationAPI.AutomaticPlatformOptimizationGetResponse;
   export import AutomaticPlatformOptimizationEditParams = AutomaticPlatformOptimizationAPI.AutomaticPlatformOptimizationEditParams;
+  export import AutomaticPlatformOptimizationGetParams = AutomaticPlatformOptimizationAPI.AutomaticPlatformOptimizationGetParams;
   export import Brotli = BrotliAPI.Brotli;
   export import BrotliEditResponse = BrotliAPI.BrotliEditResponse;
   export import BrotliGetResponse = BrotliAPI.BrotliGetResponse;
   export import BrotliEditParams = BrotliAPI.BrotliEditParams;
+  export import BrotliGetParams = BrotliAPI.BrotliGetParams;
   export import BrowserCacheTTL = BrowserCacheTTLAPI.BrowserCacheTTL;
   export import BrowserCacheTTLEditResponse = BrowserCacheTTLAPI.BrowserCacheTTLEditResponse;
   export import BrowserCacheTTLGetResponse = BrowserCacheTTLAPI.BrowserCacheTTLGetResponse;
   export import BrowserCacheTTLEditParams = BrowserCacheTTLAPI.BrowserCacheTTLEditParams;
+  export import BrowserCacheTTLGetParams = BrowserCacheTTLAPI.BrowserCacheTTLGetParams;
   export import BrowserCheck = BrowserCheckAPI.BrowserCheck;
   export import BrowserCheckEditResponse = BrowserCheckAPI.BrowserCheckEditResponse;
   export import BrowserCheckGetResponse = BrowserCheckAPI.BrowserCheckGetResponse;
   export import BrowserCheckEditParams = BrowserCheckAPI.BrowserCheckEditParams;
+  export import BrowserCheckGetParams = BrowserCheckAPI.BrowserCheckGetParams;
   export import CacheLevel = CacheLevelAPI.CacheLevel;
   export import CacheLevelEditResponse = CacheLevelAPI.CacheLevelEditResponse;
   export import CacheLevelGetResponse = CacheLevelAPI.CacheLevelGetResponse;
   export import CacheLevelEditParams = CacheLevelAPI.CacheLevelEditParams;
+  export import CacheLevelGetParams = CacheLevelAPI.CacheLevelGetParams;
   export import ChallengeTTL = ChallengeTTLAPI.ChallengeTTL;
   export import ChallengeTTLEditResponse = ChallengeTTLAPI.ChallengeTTLEditResponse;
   export import ChallengeTTLGetResponse = ChallengeTTLAPI.ChallengeTTLGetResponse;
   export import ChallengeTTLEditParams = ChallengeTTLAPI.ChallengeTTLEditParams;
+  export import ChallengeTTLGetParams = ChallengeTTLAPI.ChallengeTTLGetParams;
   export import Ciphers = CiphersAPI.Ciphers;
   export import CipherEditResponse = CiphersAPI.CipherEditResponse;
   export import CipherGetResponse = CiphersAPI.CipherGetResponse;
   export import CipherEditParams = CiphersAPI.CipherEditParams;
+  export import CipherGetParams = CiphersAPI.CipherGetParams;
   export import DevelopmentMode = DevelopmentModeAPI.DevelopmentMode;
   export import DevelopmentModeEditResponse = DevelopmentModeAPI.DevelopmentModeEditResponse;
   export import DevelopmentModeGetResponse = DevelopmentModeAPI.DevelopmentModeGetResponse;
   export import DevelopmentModeEditParams = DevelopmentModeAPI.DevelopmentModeEditParams;
+  export import DevelopmentModeGetParams = DevelopmentModeAPI.DevelopmentModeGetParams;
   export import EarlyHints = EarlyHintsAPI.EarlyHints;
   export import EarlyHintEditResponse = EarlyHintsAPI.EarlyHintEditResponse;
   export import EarlyHintGetResponse = EarlyHintsAPI.EarlyHintGetResponse;
   export import EarlyHintEditParams = EarlyHintsAPI.EarlyHintEditParams;
+  export import EarlyHintGetParams = EarlyHintsAPI.EarlyHintGetParams;
   export import EmailObfuscation = EmailObfuscationAPI.EmailObfuscation;
   export import EmailObfuscationEditResponse = EmailObfuscationAPI.EmailObfuscationEditResponse;
   export import EmailObfuscationGetResponse = EmailObfuscationAPI.EmailObfuscationGetResponse;
   export import EmailObfuscationEditParams = EmailObfuscationAPI.EmailObfuscationEditParams;
+  export import EmailObfuscationGetParams = EmailObfuscationAPI.EmailObfuscationGetParams;
   export import H2Prioritization = H2PrioritizationAPI.H2Prioritization;
   export import H2PrioritizationEditResponse = H2PrioritizationAPI.H2PrioritizationEditResponse;
   export import H2PrioritizationGetResponse = H2PrioritizationAPI.H2PrioritizationGetResponse;
   export import H2PrioritizationEditParams = H2PrioritizationAPI.H2PrioritizationEditParams;
+  export import H2PrioritizationGetParams = H2PrioritizationAPI.H2PrioritizationGetParams;
   export import HotlinkProtection = HotlinkProtectionAPI.HotlinkProtection;
   export import HotlinkProtectionEditResponse = HotlinkProtectionAPI.HotlinkProtectionEditResponse;
   export import HotlinkProtectionGetResponse = HotlinkProtectionAPI.HotlinkProtectionGetResponse;
   export import HotlinkProtectionEditParams = HotlinkProtectionAPI.HotlinkProtectionEditParams;
+  export import HotlinkProtectionGetParams = HotlinkProtectionAPI.HotlinkProtectionGetParams;
   export import HTTP2 = HTTP2API.HTTP2;
   export import HTTP2EditResponse = HTTP2API.HTTP2EditResponse;
   export import HTTP2GetResponse = HTTP2API.HTTP2GetResponse;
   export import HTTP2EditParams = HTTP2API.HTTP2EditParams;
+  export import HTTP2GetParams = HTTP2API.HTTP2GetParams;
   export import HTTP3 = HTTP3API.HTTP3;
   export import HTTP3EditResponse = HTTP3API.HTTP3EditResponse;
   export import HTTP3GetResponse = HTTP3API.HTTP3GetResponse;
   export import HTTP3EditParams = HTTP3API.HTTP3EditParams;
+  export import HTTP3GetParams = HTTP3API.HTTP3GetParams;
   export import ImageResizing = ImageResizingAPI.ImageResizing;
   export import ImageResizingEditResponse = ImageResizingAPI.ImageResizingEditResponse;
   export import ImageResizingGetResponse = ImageResizingAPI.ImageResizingGetResponse;
   export import ImageResizingEditParams = ImageResizingAPI.ImageResizingEditParams;
+  export import ImageResizingGetParams = ImageResizingAPI.ImageResizingGetParams;
   export import IPGeolocation = IPGeolocationAPI.IPGeolocation;
   export import IPGeolocationEditResponse = IPGeolocationAPI.IPGeolocationEditResponse;
   export import IPGeolocationGetResponse = IPGeolocationAPI.IPGeolocationGetResponse;
   export import IPGeolocationEditParams = IPGeolocationAPI.IPGeolocationEditParams;
+  export import IPGeolocationGetParams = IPGeolocationAPI.IPGeolocationGetParams;
   export import IPV6 = IPV6API.IPV6;
   export import IPV6EditResponse = IPV6API.IPV6EditResponse;
   export import IPV6GetResponse = IPV6API.IPV6GetResponse;
   export import IPV6EditParams = IPV6API.IPV6EditParams;
+  export import IPV6GetParams = IPV6API.IPV6GetParams;
   export import MinTLSVersion = MinTLSVersionAPI.MinTLSVersion;
   export import MinTLSVersionEditResponse = MinTLSVersionAPI.MinTLSVersionEditResponse;
   export import MinTLSVersionGetResponse = MinTLSVersionAPI.MinTLSVersionGetResponse;
   export import MinTLSVersionEditParams = MinTLSVersionAPI.MinTLSVersionEditParams;
+  export import MinTLSVersionGetParams = MinTLSVersionAPI.MinTLSVersionGetParams;
   export import Minify = MinifyAPI.Minify;
   export import MinifyEditResponse = MinifyAPI.MinifyEditResponse;
   export import MinifyGetResponse = MinifyAPI.MinifyGetResponse;
   export import MinifyEditParams = MinifyAPI.MinifyEditParams;
+  export import MinifyGetParams = MinifyAPI.MinifyGetParams;
   export import Mirage = MirageAPI.Mirage;
   export import MirageEditResponse = MirageAPI.MirageEditResponse;
   export import MirageGetResponse = MirageAPI.MirageGetResponse;
   export import MirageEditParams = MirageAPI.MirageEditParams;
+  export import MirageGetParams = MirageAPI.MirageGetParams;
   export import MobileRedirect = MobileRedirectAPI.MobileRedirect;
   export import MobileRedirectEditResponse = MobileRedirectAPI.MobileRedirectEditResponse;
   export import MobileRedirectGetResponse = MobileRedirectAPI.MobileRedirectGetResponse;
   export import MobileRedirectEditParams = MobileRedirectAPI.MobileRedirectEditParams;
+  export import MobileRedirectGetParams = MobileRedirectAPI.MobileRedirectGetParams;
   export import NEL = NELAPI.NEL;
   export import NELEditResponse = NELAPI.NELEditResponse;
   export import NELGetResponse = NELAPI.NELGetResponse;
   export import NELEditParams = NELAPI.NELEditParams;
+  export import NELGetParams = NELAPI.NELGetParams;
   export import OpportunisticEncryption = OpportunisticEncryptionAPI.OpportunisticEncryption;
   export import OpportunisticEncryptionEditResponse = OpportunisticEncryptionAPI.OpportunisticEncryptionEditResponse;
   export import OpportunisticEncryptionGetResponse = OpportunisticEncryptionAPI.OpportunisticEncryptionGetResponse;
   export import OpportunisticEncryptionEditParams = OpportunisticEncryptionAPI.OpportunisticEncryptionEditParams;
+  export import OpportunisticEncryptionGetParams = OpportunisticEncryptionAPI.OpportunisticEncryptionGetParams;
   export import OpportunisticOnion = OpportunisticOnionAPI.OpportunisticOnion;
   export import OpportunisticOnionEditResponse = OpportunisticOnionAPI.OpportunisticOnionEditResponse;
   export import OpportunisticOnionGetResponse = OpportunisticOnionAPI.OpportunisticOnionGetResponse;
   export import OpportunisticOnionEditParams = OpportunisticOnionAPI.OpportunisticOnionEditParams;
+  export import OpportunisticOnionGetParams = OpportunisticOnionAPI.OpportunisticOnionGetParams;
   export import OrangeToOrange = OrangeToOrangeAPI.OrangeToOrange;
   export import OrangeToOrangeEditResponse = OrangeToOrangeAPI.OrangeToOrangeEditResponse;
   export import OrangeToOrangeGetResponse = OrangeToOrangeAPI.OrangeToOrangeGetResponse;
   export import OrangeToOrangeEditParams = OrangeToOrangeAPI.OrangeToOrangeEditParams;
+  export import OrangeToOrangeGetParams = OrangeToOrangeAPI.OrangeToOrangeGetParams;
   export import OriginErrorPagePassThru = OriginErrorPagePassThruAPI.OriginErrorPagePassThru;
   export import OriginErrorPagePassThruEditResponse = OriginErrorPagePassThruAPI.OriginErrorPagePassThruEditResponse;
   export import OriginErrorPagePassThruGetResponse = OriginErrorPagePassThruAPI.OriginErrorPagePassThruGetResponse;
   export import OriginErrorPagePassThruEditParams = OriginErrorPagePassThruAPI.OriginErrorPagePassThruEditParams;
+  export import OriginErrorPagePassThruGetParams = OriginErrorPagePassThruAPI.OriginErrorPagePassThruGetParams;
   export import OriginMaxHTTPVersion = OriginMaxHTTPVersionAPI.OriginMaxHTTPVersion;
   export import OriginMaxHTTPVersionEditResponse = OriginMaxHTTPVersionAPI.OriginMaxHTTPVersionEditResponse;
   export import OriginMaxHTTPVersionGetResponse = OriginMaxHTTPVersionAPI.OriginMaxHTTPVersionGetResponse;
   export import OriginMaxHTTPVersionEditParams = OriginMaxHTTPVersionAPI.OriginMaxHTTPVersionEditParams;
+  export import OriginMaxHTTPVersionGetParams = OriginMaxHTTPVersionAPI.OriginMaxHTTPVersionGetParams;
   export import Polish = PolishAPI.Polish;
   export import PolishEditResponse = PolishAPI.PolishEditResponse;
   export import PolishGetResponse = PolishAPI.PolishGetResponse;
   export import PolishEditParams = PolishAPI.PolishEditParams;
+  export import PolishGetParams = PolishAPI.PolishGetParams;
   export import PrefetchPreload = PrefetchPreloadAPI.PrefetchPreload;
   export import PrefetchPreloadEditResponse = PrefetchPreloadAPI.PrefetchPreloadEditResponse;
   export import PrefetchPreloadGetResponse = PrefetchPreloadAPI.PrefetchPreloadGetResponse;
   export import PrefetchPreloadEditParams = PrefetchPreloadAPI.PrefetchPreloadEditParams;
+  export import PrefetchPreloadGetParams = PrefetchPreloadAPI.PrefetchPreloadGetParams;
   export import ProxyReadTimeout = ProxyReadTimeoutAPI.ProxyReadTimeout;
   export import ProxyReadTimeoutEditResponse = ProxyReadTimeoutAPI.ProxyReadTimeoutEditResponse;
   export import ProxyReadTimeoutGetResponse = ProxyReadTimeoutAPI.ProxyReadTimeoutGetResponse;
   export import ProxyReadTimeoutEditParams = ProxyReadTimeoutAPI.ProxyReadTimeoutEditParams;
+  export import ProxyReadTimeoutGetParams = ProxyReadTimeoutAPI.ProxyReadTimeoutGetParams;
   export import PseudoIPV4 = PseudoIPV4API.PseudoIPV4;
   export import PseudoIPV4EditResponse = PseudoIPV4API.PseudoIPV4EditResponse;
   export import PseudoIPV4GetResponse = PseudoIPV4API.PseudoIPV4GetResponse;
   export import PseudoIPV4EditParams = PseudoIPV4API.PseudoIPV4EditParams;
+  export import PseudoIPV4GetParams = PseudoIPV4API.PseudoIPV4GetParams;
   export import ResponseBuffering = ResponseBufferingAPI.ResponseBuffering;
   export import ResponseBufferingEditResponse = ResponseBufferingAPI.ResponseBufferingEditResponse;
   export import ResponseBufferingGetResponse = ResponseBufferingAPI.ResponseBufferingGetResponse;
   export import ResponseBufferingEditParams = ResponseBufferingAPI.ResponseBufferingEditParams;
+  export import ResponseBufferingGetParams = ResponseBufferingAPI.ResponseBufferingGetParams;
   export import RocketLoader = RocketLoaderAPI.RocketLoader;
   export import RocketLoaderEditResponse = RocketLoaderAPI.RocketLoaderEditResponse;
   export import RocketLoaderGetResponse = RocketLoaderAPI.RocketLoaderGetResponse;
   export import RocketLoaderEditParams = RocketLoaderAPI.RocketLoaderEditParams;
+  export import RocketLoaderGetParams = RocketLoaderAPI.RocketLoaderGetParams;
   export import SecurityHeaders = SecurityHeadersAPI.SecurityHeaders;
   export import SecurityHeaderEditResponse = SecurityHeadersAPI.SecurityHeaderEditResponse;
   export import SecurityHeaderGetResponse = SecurityHeadersAPI.SecurityHeaderGetResponse;
   export import SecurityHeaderEditParams = SecurityHeadersAPI.SecurityHeaderEditParams;
+  export import SecurityHeaderGetParams = SecurityHeadersAPI.SecurityHeaderGetParams;
   export import SecurityLevel = SecurityLevelAPI.SecurityLevel;
   export import SecurityLevelEditResponse = SecurityLevelAPI.SecurityLevelEditResponse;
   export import SecurityLevelGetResponse = SecurityLevelAPI.SecurityLevelGetResponse;
   export import SecurityLevelEditParams = SecurityLevelAPI.SecurityLevelEditParams;
+  export import SecurityLevelGetParams = SecurityLevelAPI.SecurityLevelGetParams;
   export import ServerSideExcludes = ServerSideExcludesAPI.ServerSideExcludes;
   export import ServerSideExcludeEditResponse = ServerSideExcludesAPI.ServerSideExcludeEditResponse;
   export import ServerSideExcludeGetResponse = ServerSideExcludesAPI.ServerSideExcludeGetResponse;
   export import ServerSideExcludeEditParams = ServerSideExcludesAPI.ServerSideExcludeEditParams;
+  export import ServerSideExcludeGetParams = ServerSideExcludesAPI.ServerSideExcludeGetParams;
   export import SortQueryStringForCache = SortQueryStringForCacheAPI.SortQueryStringForCache;
   export import SortQueryStringForCacheEditResponse = SortQueryStringForCacheAPI.SortQueryStringForCacheEditResponse;
   export import SortQueryStringForCacheGetResponse = SortQueryStringForCacheAPI.SortQueryStringForCacheGetResponse;
   export import SortQueryStringForCacheEditParams = SortQueryStringForCacheAPI.SortQueryStringForCacheEditParams;
+  export import SortQueryStringForCacheGetParams = SortQueryStringForCacheAPI.SortQueryStringForCacheGetParams;
   export import SSL = SSLAPI.SSL;
   export import SSLEditResponse = SSLAPI.SSLEditResponse;
   export import SSLGetResponse = SSLAPI.SSLGetResponse;
   export import SSLEditParams = SSLAPI.SSLEditParams;
+  export import SSLGetParams = SSLAPI.SSLGetParams;
   export import SSLRecommender = SSLRecommenderAPI.SSLRecommender;
   export import SSLRecommenderEditResponse = SSLRecommenderAPI.SSLRecommenderEditResponse;
   export import SSLRecommenderGetResponse = SSLRecommenderAPI.SSLRecommenderGetResponse;
   export import SSLRecommenderEditParams = SSLRecommenderAPI.SSLRecommenderEditParams;
+  export import SSLRecommenderGetParams = SSLRecommenderAPI.SSLRecommenderGetParams;
   export import TLS1_3 = TLS1_3API.TLS1_3;
   export import TLS1_3EditResponse = TLS1_3API.TLS1_3EditResponse;
   export import TLS1_3GetResponse = TLS1_3API.TLS1_3GetResponse;
   export import TLS1_3EditParams = TLS1_3API.TLS1_3EditParams;
+  export import TLS1_3GetParams = TLS1_3API.TLS1_3GetParams;
   export import TLSClientAuth = TLSClientAuthAPI.TLSClientAuth;
   export import TLSClientAuthEditResponse = TLSClientAuthAPI.TLSClientAuthEditResponse;
   export import TLSClientAuthGetResponse = TLSClientAuthAPI.TLSClientAuthGetResponse;
   export import TLSClientAuthEditParams = TLSClientAuthAPI.TLSClientAuthEditParams;
+  export import TLSClientAuthGetParams = TLSClientAuthAPI.TLSClientAuthGetParams;
   export import TrueClientIPHeader = TrueClientIPHeaderAPI.TrueClientIPHeader;
   export import TrueClientIPHeaderEditResponse = TrueClientIPHeaderAPI.TrueClientIPHeaderEditResponse;
   export import TrueClientIPHeaderGetResponse = TrueClientIPHeaderAPI.TrueClientIPHeaderGetResponse;
   export import TrueClientIPHeaderEditParams = TrueClientIPHeaderAPI.TrueClientIPHeaderEditParams;
+  export import TrueClientIPHeaderGetParams = TrueClientIPHeaderAPI.TrueClientIPHeaderGetParams;
   export import WAF = WAFAPI.WAF;
   export import WAFEditResponse = WAFAPI.WAFEditResponse;
   export import WAFGetResponse = WAFAPI.WAFGetResponse;
   export import WAFEditParams = WAFAPI.WAFEditParams;
+  export import WAFGetParams = WAFAPI.WAFGetParams;
   export import Webp = WebpAPI.Webp;
   export import WebpEditResponse = WebpAPI.WebpEditResponse;
   export import WebpGetResponse = WebpAPI.WebpGetResponse;
   export import WebpEditParams = WebpAPI.WebpEditParams;
+  export import WebpGetParams = WebpAPI.WebpGetParams;
   export import Websocket = WebsocketAPI.Websocket;
   export import WebsocketEditResponse = WebsocketAPI.WebsocketEditResponse;
   export import WebsocketGetResponse = WebsocketAPI.WebsocketGetResponse;
   export import WebsocketEditParams = WebsocketAPI.WebsocketEditParams;
+  export import WebsocketGetParams = WebsocketAPI.WebsocketGetParams;
   export import FontSettings = FontSettingsAPI.FontSettings;
   export import FontSettingEditResponse = FontSettingsAPI.FontSettingEditResponse;
   export import FontSettingGetResponse = FontSettingsAPI.FontSettingGetResponse;
   export import FontSettingEditParams = FontSettingsAPI.FontSettingEditParams;
+  export import FontSettingGetParams = FontSettingsAPI.FontSettingGetParams;
 }

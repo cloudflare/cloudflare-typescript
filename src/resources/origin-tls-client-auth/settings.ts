@@ -10,13 +10,10 @@ export class Settings extends APIResource {
    * true either before/after the certificate is uploaded to see the certificate in
    * use.
    */
-  update(
-    zoneId: string,
-    body: SettingUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SettingUpdateResponse> {
+  update(params: SettingUpdateParams, options?: Core.RequestOptions): Core.APIPromise<SettingUpdateResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.put(`/zones/${zoneId}/origin_tls_client_auth/settings`, {
+      this._client.put(`/zones/${zone_id}/origin_tls_client_auth/settings`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: SettingUpdateResponse }>
@@ -27,9 +24,10 @@ export class Settings extends APIResource {
    * Get whether zone-level authenticated origin pulls is enabled or not. It is false
    * by default.
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<SettingGetResponse> {
+  get(params: SettingGetParams, options?: Core.RequestOptions): Core.APIPromise<SettingGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/origin_tls_client_auth/settings`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/origin_tls_client_auth/settings`, options) as Core.APIPromise<{
         result: SettingGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -52,13 +50,26 @@ export interface SettingGetResponse {
 
 export interface SettingUpdateParams {
   /**
-   * Indicates whether zone-level authenticated origin pulls is enabled.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Indicates whether zone-level authenticated origin pulls is enabled.
    */
   enabled: boolean;
+}
+
+export interface SettingGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }
 
 export namespace Settings {
   export import SettingUpdateResponse = SettingsAPI.SettingUpdateResponse;
   export import SettingGetResponse = SettingsAPI.SettingGetResponse;
   export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;
+  export import SettingGetParams = SettingsAPI.SettingGetParams;
 }

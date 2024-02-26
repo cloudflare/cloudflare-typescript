@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as KeysAPI from 'cloudflare/resources/storage/kv/namespaces/keys';
 
 export class Keys extends APIResource {
@@ -10,27 +9,13 @@ export class Keys extends APIResource {
    * Lists a namespace's keys.
    */
   list(
-    accountId: string,
     namespaceId: string,
-    query?: KeyListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<KeyListResponse>;
-  list(
-    accountId: string,
-    namespaceId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<KeyListResponse>;
-  list(
-    accountId: string,
-    namespaceId: string,
-    query: KeyListParams | Core.RequestOptions = {},
+    params: KeyListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<KeyListResponse> {
-    if (isRequestOptions(query)) {
-      return this.list(accountId, namespaceId, {}, query);
-    }
+    const { account_id, ...query } = params;
     return (
-      this._client.get(`/accounts/${accountId}/storage/kv/namespaces/${namespaceId}/keys`, {
+      this._client.get(`/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/keys`, {
         query,
         ...options,
       }) as Core.APIPromise<{ result: KeyListResponse }>
@@ -67,22 +52,27 @@ export namespace KeyListResponse {
 
 export interface KeyListParams {
   /**
-   * Opaque token indicating the position from which to continue when requesting the
-   * next set of records if the amount of list results was limited by the limit
-   * parameter. A valid value for the cursor can be obtained from the `cursors`
-   * object in the `result_info` structure.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Query param: Opaque token indicating the position from which to continue when
+   * requesting the next set of records if the amount of list results was limited by
+   * the limit parameter. A valid value for the cursor can be obtained from the
+   * `cursors` object in the `result_info` structure.
    */
   cursor?: string;
 
   /**
-   * The number of keys to return. The cursor attribute may be used to iterate over
-   * the next batch of keys if there are more than the limit.
+   * Query param: The number of keys to return. The cursor attribute may be used to
+   * iterate over the next batch of keys if there are more than the limit.
    */
   limit?: number;
 
   /**
-   * A string prefix used to filter down which keys will be returned. Exact matches
-   * and any key names that begin with the prefix will be returned.
+   * Query param: A string prefix used to filter down which keys will be returned.
+   * Exact matches and any key names that begin with the prefix will be returned.
    */
   prefix?: string;
 }

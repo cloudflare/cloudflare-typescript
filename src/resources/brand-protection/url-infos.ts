@@ -2,29 +2,16 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as URLInfosAPI from 'cloudflare/resources/brand-protection/url-infos';
 
 export class URLInfos extends APIResource {
   /**
    * Get results for a URL scan
    */
-  get(
-    accountId: string,
-    query?: URLInfoGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<URLInfoGetResponse>;
-  get(accountId: string, options?: Core.RequestOptions): Core.APIPromise<URLInfoGetResponse>;
-  get(
-    accountId: string,
-    query: URLInfoGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<URLInfoGetResponse> {
-    if (isRequestOptions(query)) {
-      return this.get(accountId, {}, query);
-    }
+  get(params: URLInfoGetParams, options?: Core.RequestOptions): Core.APIPromise<URLInfoGetResponse> {
+    const { account_id, ...query } = params;
     return (
-      this._client.get(`/accounts/${accountId}/brand-protection/url-info`, {
+      this._client.get(`/accounts/${account_id}/brand-protection/url-info`, {
         query,
         ...options,
       }) as Core.APIPromise<{ result: URLInfoGetResponse }>
@@ -144,8 +131,19 @@ export namespace URLInfoGetResponse {
 }
 
 export interface URLInfoGetParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Query param:
+   */
   url?: string;
 
+  /**
+   * Query param:
+   */
   url_id_param?: URLInfoGetParams.URLIDParam;
 }
 

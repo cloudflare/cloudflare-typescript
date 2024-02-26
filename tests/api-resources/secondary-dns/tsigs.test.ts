@@ -15,7 +15,8 @@ const cloudflare = new Cloudflare({
 describe('resource tsigs', () => {
   // skipped: tests are disabled for the time being
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.secondaryDNS.tsigs.create('01a7362d577a6c3019a474fd6f485823', {
+    const responsePromise = cloudflare.secondaryDNS.tsigs.create({
+      account_id: '01a7362d577a6c3019a474fd6f485823',
       algo: 'hmac-sha512.',
       name: 'tsig.customer.cf.',
       secret:
@@ -32,7 +33,8 @@ describe('resource tsigs', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.secondaryDNS.tsigs.create('01a7362d577a6c3019a474fd6f485823', {
+    const response = await cloudflare.secondaryDNS.tsigs.create({
+      account_id: '01a7362d577a6c3019a474fd6f485823',
       algo: 'hmac-sha512.',
       name: 'tsig.customer.cf.',
       secret:
@@ -42,16 +44,13 @@ describe('resource tsigs', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.secondaryDNS.tsigs.update(
-      '01a7362d577a6c3019a474fd6f485823',
-      '69cd1e104af3e6ed3cb344f263fd0d5a',
-      {
-        algo: 'hmac-sha512.',
-        name: 'tsig.customer.cf.',
-        secret:
-          'caf79a7804b04337c9c66ccd7bef9190a1e1679b5dd03d8aa10f7ad45e1a9dab92b417896c15d4d007c7c14194538d2a5d0feffdecc5a7f0e1c570cfa700837c',
-      },
-    );
+    const responsePromise = cloudflare.secondaryDNS.tsigs.update('69cd1e104af3e6ed3cb344f263fd0d5a', {
+      account_id: '01a7362d577a6c3019a474fd6f485823',
+      algo: 'hmac-sha512.',
+      name: 'tsig.customer.cf.',
+      secret:
+        'caf79a7804b04337c9c66ccd7bef9190a1e1679b5dd03d8aa10f7ad45e1a9dab92b417896c15d4d007c7c14194538d2a5d0feffdecc5a7f0e1c570cfa700837c',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -63,21 +62,20 @@ describe('resource tsigs', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.secondaryDNS.tsigs.update(
-      '01a7362d577a6c3019a474fd6f485823',
-      '69cd1e104af3e6ed3cb344f263fd0d5a',
-      {
-        algo: 'hmac-sha512.',
-        name: 'tsig.customer.cf.',
-        secret:
-          'caf79a7804b04337c9c66ccd7bef9190a1e1679b5dd03d8aa10f7ad45e1a9dab92b417896c15d4d007c7c14194538d2a5d0feffdecc5a7f0e1c570cfa700837c',
-      },
-    );
+    const response = await cloudflare.secondaryDNS.tsigs.update('69cd1e104af3e6ed3cb344f263fd0d5a', {
+      account_id: '01a7362d577a6c3019a474fd6f485823',
+      algo: 'hmac-sha512.',
+      name: 'tsig.customer.cf.',
+      secret:
+        'caf79a7804b04337c9c66ccd7bef9190a1e1679b5dd03d8aa10f7ad45e1a9dab92b417896c15d4d007c7c14194538d2a5d0feffdecc5a7f0e1c570cfa700837c',
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
-    const responsePromise = cloudflare.secondaryDNS.tsigs.list('01a7362d577a6c3019a474fd6f485823');
+  test.skip('list: only required params', async () => {
+    const responsePromise = cloudflare.secondaryDNS.tsigs.list({
+      account_id: '01a7362d577a6c3019a474fd6f485823',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -88,21 +86,17 @@ describe('resource tsigs', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.secondaryDNS.tsigs.list('01a7362d577a6c3019a474fd6f485823', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('list: required and optional params', async () => {
+    const response = await cloudflare.secondaryDNS.tsigs.list({
+      account_id: '01a7362d577a6c3019a474fd6f485823',
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
-    const responsePromise = cloudflare.secondaryDNS.tsigs.delete(
-      '01a7362d577a6c3019a474fd6f485823',
-      '69cd1e104af3e6ed3cb344f263fd0d5a',
-    );
+  test.skip('delete: only required params', async () => {
+    const responsePromise = cloudflare.secondaryDNS.tsigs.delete('69cd1e104af3e6ed3cb344f263fd0d5a', {
+      account_id: '01a7362d577a6c3019a474fd6f485823',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -113,11 +107,17 @@ describe('resource tsigs', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
-    const responsePromise = cloudflare.secondaryDNS.tsigs.get(
-      '01a7362d577a6c3019a474fd6f485823',
-      '69cd1e104af3e6ed3cb344f263fd0d5a',
-    );
+  test.skip('delete: required and optional params', async () => {
+    const response = await cloudflare.secondaryDNS.tsigs.delete('69cd1e104af3e6ed3cb344f263fd0d5a', {
+      account_id: '01a7362d577a6c3019a474fd6f485823',
+    });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get: only required params', async () => {
+    const responsePromise = cloudflare.secondaryDNS.tsigs.get('69cd1e104af3e6ed3cb344f263fd0d5a', {
+      account_id: '01a7362d577a6c3019a474fd6f485823',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -128,14 +128,9 @@ describe('resource tsigs', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.secondaryDNS.tsigs.get(
-        '01a7362d577a6c3019a474fd6f485823',
-        '69cd1e104af3e6ed3cb344f263fd0d5a',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.secondaryDNS.tsigs.get('69cd1e104af3e6ed3cb344f263fd0d5a', {
+      account_id: '01a7362d577a6c3019a474fd6f485823',
+    });
   });
 });

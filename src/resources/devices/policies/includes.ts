@@ -9,13 +9,13 @@ export class Includes extends APIResource {
    * Sets the list of routes included in the WARP client's tunnel.
    */
   update(
-    accountId: unknown,
-    body: IncludeUpdateParams,
+    params: IncludeUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IncludeUpdateResponse | null> {
+    const { account_id, body } = params;
     return (
-      this._client.put(`/accounts/${accountId}/devices/policy/include`, {
-        body,
+      this._client.put(`/accounts/${account_id}/devices/policy/include`, {
+        body: body,
         ...options,
       }) as Core.APIPromise<{ result: IncludeUpdateResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -24,9 +24,13 @@ export class Includes extends APIResource {
   /**
    * Fetches the list of routes included in the WARP client's tunnel.
    */
-  list(accountId: unknown, options?: Core.RequestOptions): Core.APIPromise<IncludeListResponse | null> {
+  list(
+    params: IncludeListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IncludeListResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/devices/policy/include`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/devices/policy/include`, options) as Core.APIPromise<{
         result: IncludeListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -37,13 +41,14 @@ export class Includes extends APIResource {
    * device settings profile.
    */
   get(
-    accountId: unknown,
     policyId: string,
+    params: IncludeGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IncludeGetResponse | null> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountId}/devices/policy/${policyId}/include`,
+        `/accounts/${account_id}/devices/policy/${policyId}/include`,
         options,
       ) as Core.APIPromise<{ result: IncludeGetResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -119,7 +124,17 @@ export namespace IncludeGetResponse {
   }
 }
 
-export type IncludeUpdateParams = Array<IncludeUpdateParams.Body>;
+export interface IncludeUpdateParams {
+  /**
+   * Path param:
+   */
+  account_id: unknown;
+
+  /**
+   * Body param:
+   */
+  body: Array<IncludeUpdateParams.Body>;
+}
 
 export namespace IncludeUpdateParams {
   export interface Body {
@@ -142,9 +157,19 @@ export namespace IncludeUpdateParams {
   }
 }
 
+export interface IncludeListParams {
+  account_id: unknown;
+}
+
+export interface IncludeGetParams {
+  account_id: unknown;
+}
+
 export namespace Includes {
   export import IncludeUpdateResponse = IncludesAPI.IncludeUpdateResponse;
   export import IncludeListResponse = IncludesAPI.IncludeListResponse;
   export import IncludeGetResponse = IncludesAPI.IncludeGetResponse;
   export import IncludeUpdateParams = IncludesAPI.IncludeUpdateParams;
+  export import IncludeListParams = IncludesAPI.IncludeListParams;
+  export import IncludeGetParams = IncludesAPI.IncludeGetParams;
 }

@@ -6,7 +6,10 @@ export {
   CertificatePackEditResponse,
   CertificatePackGetResponse,
   CertificatePackListParams,
+  CertificatePackDeleteParams,
+  CertificatePackEditParams,
+  CertificatePackGetParams,
   CertificatePacks,
 } from './certificate-packs';
 export { OrderCreateResponse, OrderCreateParams, Order } from './order';
-export { QuotaListResponse, Quota } from './quota';
+export { QuotaListResponse, QuotaListParams, Quota } from './quota';

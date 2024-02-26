@@ -9,12 +9,12 @@ export class CustomNameservers extends APIResource {
    * Add Account Custom Nameserver
    */
   create(
-    accountId: string,
-    body: CustomNameserverCreateParams,
+    params: CustomNameserverCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomNameserverCreateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/custom_ns`, { body, ...options }) as Core.APIPromise<{
+      this._client.post(`/accounts/${account_id}/custom_ns`, { body, ...options }) as Core.APIPromise<{
         result: CustomNameserverCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -24,11 +24,12 @@ export class CustomNameservers extends APIResource {
    * List an account's custom nameservers.
    */
   list(
-    accountId: string,
+    params: CustomNameserverListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomNameserverListResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/custom_ns`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/custom_ns`, options) as Core.APIPromise<{
         result: CustomNameserverListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -38,12 +39,13 @@ export class CustomNameservers extends APIResource {
    * Delete Account Custom Nameserver
    */
   delete(
-    accountId: string,
     customNsId: string,
+    params: CustomNameserverDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomNameserverDeleteResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${accountId}/custom_ns/${customNsId}`, options) as Core.APIPromise<{
+      this._client.delete(`/accounts/${account_id}/custom_ns/${customNsId}`, options) as Core.APIPromise<{
         result: CustomNameserverDeleteResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -53,11 +55,12 @@ export class CustomNameservers extends APIResource {
    * Get Eligible Zones for Account Custom Nameservers
    */
   availabilty(
-    accountId: string,
+    params: CustomNameserverAvailabiltyParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomNameserverAvailabiltyResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/custom_ns/availability`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/custom_ns/availability`, options) as Core.APIPromise<{
         result: CustomNameserverAvailabiltyResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -67,11 +70,12 @@ export class CustomNameservers extends APIResource {
    * Verify Account Custom Nameserver Glue Records
    */
   verify(
-    accountId: string,
+    params: CustomNameserverVerifyParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomNameserverVerifyResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.post(`/accounts/${accountId}/custom_ns/verify`, options) as Core.APIPromise<{
+      this._client.post(`/accounts/${account_id}/custom_ns/verify`, options) as Core.APIPromise<{
         result: CustomNameserverVerifyResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -226,14 +230,47 @@ export namespace CustomNameserverVerifyResponse {
 
 export interface CustomNameserverCreateParams {
   /**
-   * The FQDN of the name server.
+   * Path param: Account identifier tag.
+   */
+  account_id: string;
+
+  /**
+   * Body param: The FQDN of the name server.
    */
   ns_name: string;
 
   /**
-   * The number of the set that this name server belongs to.
+   * Body param: The number of the set that this name server belongs to.
    */
   ns_set?: number;
+}
+
+export interface CustomNameserverListParams {
+  /**
+   * Account identifier tag.
+   */
+  account_id: string;
+}
+
+export interface CustomNameserverDeleteParams {
+  /**
+   * Account identifier tag.
+   */
+  account_id: string;
+}
+
+export interface CustomNameserverAvailabiltyParams {
+  /**
+   * Account identifier tag.
+   */
+  account_id: string;
+}
+
+export interface CustomNameserverVerifyParams {
+  /**
+   * Account identifier tag.
+   */
+  account_id: string;
 }
 
 export namespace CustomNameservers {
@@ -243,4 +280,8 @@ export namespace CustomNameservers {
   export import CustomNameserverAvailabiltyResponse = CustomNameserversAPI.CustomNameserverAvailabiltyResponse;
   export import CustomNameserverVerifyResponse = CustomNameserversAPI.CustomNameserverVerifyResponse;
   export import CustomNameserverCreateParams = CustomNameserversAPI.CustomNameserverCreateParams;
+  export import CustomNameserverListParams = CustomNameserversAPI.CustomNameserverListParams;
+  export import CustomNameserverDeleteParams = CustomNameserversAPI.CustomNameserverDeleteParams;
+  export import CustomNameserverAvailabiltyParams = CustomNameserversAPI.CustomNameserverAvailabiltyParams;
+  export import CustomNameserverVerifyParams = CustomNameserversAPI.CustomNameserverVerifyParams;
 }

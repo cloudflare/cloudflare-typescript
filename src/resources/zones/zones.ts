@@ -46,9 +46,13 @@ export class Zones extends APIResource {
   /**
    * Deletes an existing zone.
    */
-  delete(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<ZoneDeleteResponse | null> {
+  delete(
+    params: ZoneDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ZoneDeleteResponse | null> {
+    const { zone_id } = params;
     return (
-      this._client.delete(`/zones/${zoneId}`, options) as Core.APIPromise<{
+      this._client.delete(`/zones/${zone_id}`, options) as Core.APIPromise<{
         result: ZoneDeleteResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -57,13 +61,10 @@ export class Zones extends APIResource {
   /**
    * Edits a zone. Only one zone property can be changed at a time.
    */
-  edit(
-    zoneId: string,
-    body: ZoneEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneEditResponse> {
+  edit(params: ZoneEditParams, options?: Core.RequestOptions): Core.APIPromise<ZoneEditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}`, { body, ...options }) as Core.APIPromise<{
+      this._client.patch(`/zones/${zone_id}`, { body, ...options }) as Core.APIPromise<{
         result: ZoneEditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -72,9 +73,10 @@ export class Zones extends APIResource {
   /**
    * Zone Details
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<ZoneGetResponse> {
+  get(params: ZoneGetParams, options?: Core.RequestOptions): Core.APIPromise<ZoneGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}`, options) as Core.APIPromise<{ result: ZoneGetResponse }>
+      this._client.get(`/zones/${zone_id}`, options) as Core.APIPromise<{ result: ZoneGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -755,25 +757,37 @@ export namespace ZoneListParams {
   }
 }
 
+export interface ZoneDeleteParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
 export interface ZoneEditParams {
   /**
-   * (Deprecated) Please use the `/zones/{zone_id}/subscription` API to update a
-   * zone's plan. Changing this value will create/cancel associated subscriptions. To
-   * view available plans for this zone, see Zone Plans.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: (Deprecated) Please use the `/zones/{zone_id}/subscription` API to
+   * update a zone's plan. Changing this value will create/cancel associated
+   * subscriptions. To view available plans for this zone, see Zone Plans.
    */
   plan?: ZoneEditParams.Plan;
 
   /**
-   * A full zone implies that DNS is hosted with Cloudflare. A partial zone is
-   * typically a partner-hosted zone or a CNAME setup. This parameter is only
+   * Body param: A full zone implies that DNS is hosted with Cloudflare. A partial
+   * zone is typically a partner-hosted zone or a CNAME setup. This parameter is only
    * available to Enterprise customers or if it has been explicitly enabled on a
    * zone.
    */
   type?: 'full' | 'partial' | 'secondary';
 
   /**
-   * An array of domains used for custom name servers. This is only available for
-   * Business and Enterprise plans.
+   * Body param: An array of domains used for custom name servers. This is only
+   * available for Business and Enterprise plans.
    */
   vanity_name_servers?: Array<string>;
 }
@@ -792,6 +806,13 @@ export namespace ZoneEditParams {
   }
 }
 
+export interface ZoneGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
 export namespace Zones {
   export import ZoneCreateResponse = ZonesAPI.ZoneCreateResponse;
   export import ZoneListResponse = ZonesAPI.ZoneListResponse;
@@ -801,15 +822,19 @@ export namespace Zones {
   export import ZoneListResponsesV4PagePaginationArray = ZonesAPI.ZoneListResponsesV4PagePaginationArray;
   export import ZoneCreateParams = ZonesAPI.ZoneCreateParams;
   export import ZoneListParams = ZonesAPI.ZoneListParams;
+  export import ZoneDeleteParams = ZonesAPI.ZoneDeleteParams;
   export import ZoneEditParams = ZonesAPI.ZoneEditParams;
+  export import ZoneGetParams = ZonesAPI.ZoneGetParams;
   export import CustomNameservers = CustomNameserversAPI.CustomNameservers;
   export import CustomNameserverUpdateResponse = CustomNameserversAPI.CustomNameserverUpdateResponse;
   export import CustomNameserverGetResponse = CustomNameserversAPI.CustomNameserverGetResponse;
   export import CustomNameserverUpdateParams = CustomNameserversAPI.CustomNameserverUpdateParams;
+  export import CustomNameserverGetParams = CustomNameserversAPI.CustomNameserverGetParams;
   export import Holds = HoldsAPI.Holds;
   export import HoldCreateResponse = HoldsAPI.HoldCreateResponse;
   export import HoldDeleteResponse = HoldsAPI.HoldDeleteResponse;
   export import HoldGetResponse = HoldsAPI.HoldGetResponse;
   export import HoldCreateParams = HoldsAPI.HoldCreateParams;
   export import HoldDeleteParams = HoldsAPI.HoldDeleteParams;
+  export import HoldGetParams = HoldsAPI.HoldGetParams;
 }

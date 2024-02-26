@@ -9,13 +9,13 @@ export class Delegations extends APIResource {
    * Create a new account delegation for a given IP prefix.
    */
   create(
-    accountId: string,
     prefixId: string,
-    body: DelegationCreateParams,
+    params: DelegationCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DelegationCreateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/addressing/prefixes/${prefixId}/delegations`, {
+      this._client.post(`/accounts/${account_id}/addressing/prefixes/${prefixId}/delegations`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: DelegationCreateResponse }>
@@ -26,13 +26,14 @@ export class Delegations extends APIResource {
    * List all delegations for a given account IP prefix.
    */
   list(
-    accountId: string,
     prefixId: string,
+    params: DelegationListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DelegationListResponse | null> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountId}/addressing/prefixes/${prefixId}/delegations`,
+        `/accounts/${account_id}/addressing/prefixes/${prefixId}/delegations`,
         options,
       ) as Core.APIPromise<{ result: DelegationListResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -42,14 +43,15 @@ export class Delegations extends APIResource {
    * Delete an account delegation for a given IP prefix.
    */
   delete(
-    accountId: string,
     prefixId: string,
     delegationId: string,
+    params: DelegationDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DelegationDeleteResponse> {
+    const { account_id } = params;
     return (
       this._client.delete(
-        `/accounts/${accountId}/addressing/prefixes/${prefixId}/delegations/${delegationId}`,
+        `/accounts/${account_id}/addressing/prefixes/${prefixId}/delegations/${delegationId}`,
         options,
       ) as Core.APIPromise<{ result: DelegationDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -121,14 +123,34 @@ export interface DelegationDeleteResponse {
 
 export interface DelegationCreateParams {
   /**
-   * IP Prefix in Classless Inter-Domain Routing format.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: IP Prefix in Classless Inter-Domain Routing format.
    */
   cidr: string;
 
   /**
-   * Account identifier for the account to which prefix is being delegated.
+   * Body param: Account identifier for the account to which prefix is being
+   * delegated.
    */
   delegated_account_id: string;
+}
+
+export interface DelegationListParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface DelegationDeleteParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
 }
 
 export namespace Delegations {
@@ -136,4 +158,6 @@ export namespace Delegations {
   export import DelegationListResponse = DelegationsAPI.DelegationListResponse;
   export import DelegationDeleteResponse = DelegationsAPI.DelegationDeleteResponse;
   export import DelegationCreateParams = DelegationsAPI.DelegationCreateParams;
+  export import DelegationListParams = DelegationsAPI.DelegationListParams;
+  export import DelegationDeleteParams = DelegationsAPI.DelegationDeleteParams;
 }

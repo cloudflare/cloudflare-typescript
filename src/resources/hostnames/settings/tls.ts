@@ -9,14 +9,14 @@ export class TLS extends APIResource {
    * Update the tls setting value for the hostname.
    */
   update(
-    zoneId: string,
     settingId: 'ciphers' | 'min_tls_version' | 'http2',
     hostname: string,
-    body: TLSUpdateParams,
+    params: TLSUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TLSUpdateResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.put(`/zones/${zoneId}/hostnames/settings/${settingId}/${hostname}`, {
+      this._client.put(`/zones/${zone_id}/hostnames/settings/${settingId}/${hostname}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: TLSUpdateResponse }>
@@ -27,14 +27,15 @@ export class TLS extends APIResource {
    * Delete the tls setting value for the hostname.
    */
   delete(
-    zoneId: string,
     settingId: 'ciphers' | 'min_tls_version' | 'http2',
     hostname: string,
+    params: TLSDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TLSDeleteResponse> {
+    const { zone_id } = params;
     return (
       this._client.delete(
-        `/zones/${zoneId}/hostnames/settings/${settingId}/${hostname}`,
+        `/zones/${zone_id}/hostnames/settings/${settingId}/${hostname}`,
         options,
       ) as Core.APIPromise<{ result: TLSDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -44,12 +45,13 @@ export class TLS extends APIResource {
    * List the requested TLS setting for the hostnames under this zone.
    */
   get(
-    zoneId: string,
     settingId: 'ciphers' | 'min_tls_version' | 'http2',
+    params: TLSGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TLSGetResponse | null> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/hostnames/settings/${settingId}`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/hostnames/settings/${settingId}`, options) as Core.APIPromise<{
         result: TLSGetResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -137,9 +139,28 @@ export namespace TLSGetResponse {
 
 export interface TLSUpdateParams {
   /**
-   * The tls setting value.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: The tls setting value.
    */
   value: number | string | Array<string>;
+}
+
+export interface TLSDeleteParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+export interface TLSGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }
 
 export namespace TLS {
@@ -147,4 +168,6 @@ export namespace TLS {
   export import TLSDeleteResponse = TLSAPI.TLSDeleteResponse;
   export import TLSGetResponse = TLSAPI.TLSGetResponse;
   export import TLSUpdateParams = TLSAPI.TLSUpdateParams;
+  export import TLSDeleteParams = TLSAPI.TLSDeleteParams;
+  export import TLSGetParams = TLSAPI.TLSGetParams;
 }

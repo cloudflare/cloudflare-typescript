@@ -8,9 +8,18 @@ export {
   DEXTestGetResponse,
   DEXTestCreateParams,
   DEXTestUpdateParams,
+  DEXTestListParams,
+  DEXTestDeleteParams,
+  DEXTestGetParams,
   DEXTests,
 } from './dex-tests';
-export { DeviceDevicesListDevicesResponse, DeviceGetResponse, Devices } from './devices';
+export {
+  DeviceDevicesListDevicesResponse,
+  DeviceGetResponse,
+  DeviceDevicesListDevicesParams,
+  DeviceGetParams,
+  Devices,
+} from './devices';
 export {
   NetworkCreateResponse,
   NetworkUpdateResponse,
@@ -19,9 +28,12 @@ export {
   NetworkGetResponse,
   NetworkCreateParams,
   NetworkUpdateParams,
+  NetworkListParams,
+  NetworkDeleteParams,
+  NetworkGetParams,
   Networks,
 } from './networks';
-export { OverrideCodeListResponse, OverrideCodes } from './override-codes';
+export { OverrideCodeListResponse, OverrideCodeListParams, OverrideCodes } from './override-codes';
 export {
   PolicyCreateResponse,
   PolicyListResponse,
@@ -29,7 +41,10 @@ export {
   PolicyEditResponse,
   PolicyGetResponse,
   PolicyCreateParams,
+  PolicyListParams,
+  PolicyDeleteParams,
   PolicyEditParams,
+  PolicyGetParams,
   Policies,
 } from './policies/index';
 export {
@@ -40,8 +55,17 @@ export {
   PostureGetResponse,
   PostureCreateParams,
   PostureUpdateParams,
+  PostureListParams,
+  PostureDeleteParams,
+  PostureGetParams,
   Postures,
 } from './postures/index';
 export { RevokeCreateResponse, RevokeCreateParams, Revokes } from './revokes';
-export { SettingUpdateResponse, SettingListResponse, SettingUpdateParams, Settings } from './settings';
+export {
+  SettingUpdateResponse,
+  SettingListResponse,
+  SettingUpdateParams,
+  SettingListParams,
+  Settings,
+} from './settings';
 export { UnrevokeCreateResponse, UnrevokeCreateParams, Unrevokes } from './unrevokes';

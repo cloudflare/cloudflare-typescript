@@ -8,8 +8,13 @@ export class WorkerDomains extends APIResource {
   /**
    * Detaches a Worker from a zone and hostname.
    */
-  delete(accountId: unknown, domainId: unknown, options?: Core.RequestOptions): Core.APIPromise<void> {
-    return this._client.delete(`/accounts/${accountId}/workers/domains/${domainId}`, {
+  delete(
+    domainId: unknown,
+    params: WorkerDomainDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<void> {
+    const { account_id } = params;
+    return this._client.delete(`/accounts/${account_id}/workers/domains/${domainId}`, {
       ...options,
       headers: { Accept: '*/*', ...options?.headers },
     });
@@ -19,12 +24,13 @@ export class WorkerDomains extends APIResource {
    * Gets a Worker domain.
    */
   get(
-    accountId: unknown,
     domainId: unknown,
+    params: WorkerDomainGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<WorkerDomainGetResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountId}/workers/domains/${domainId}`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/workers/domains/${domainId}`, options) as Core.APIPromise<{
         result: WorkerDomainGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -63,6 +69,16 @@ export interface WorkerDomainGetResponse {
   zone_name?: string;
 }
 
+export interface WorkerDomainDeleteParams {
+  account_id: unknown;
+}
+
+export interface WorkerDomainGetParams {
+  account_id: unknown;
+}
+
 export namespace WorkerDomains {
   export import WorkerDomainGetResponse = WorkerDomainsAPI.WorkerDomainGetResponse;
+  export import WorkerDomainDeleteParams = WorkerDomainsAPI.WorkerDomainDeleteParams;
+  export import WorkerDomainGetParams = WorkerDomainsAPI.WorkerDomainGetParams;
 }

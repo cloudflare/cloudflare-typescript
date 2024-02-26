@@ -8,13 +8,10 @@ export class HTTP3 extends APIResource {
   /**
    * Value of the HTTP3 setting.
    */
-  edit(
-    zoneId: string,
-    body: HTTP3EditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<HTTP3EditResponse> {
+  edit(params: HTTP3EditParams, options?: Core.RequestOptions): Core.APIPromise<HTTP3EditResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneId}/settings/http3`, { body, ...options }) as Core.APIPromise<{
+      this._client.patch(`/zones/${zone_id}/settings/http3`, { body, ...options }) as Core.APIPromise<{
         result: HTTP3EditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -23,9 +20,10 @@ export class HTTP3 extends APIResource {
   /**
    * Value of the HTTP3 setting.
    */
-  get(zoneId: string, options?: Core.RequestOptions): Core.APIPromise<HTTP3GetResponse> {
+  get(params: HTTP3GetParams, options?: Core.RequestOptions): Core.APIPromise<HTTP3GetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneId}/settings/http3`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/settings/http3`, options) as Core.APIPromise<{
         result: HTTP3GetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -86,13 +84,26 @@ export interface HTTP3GetResponse {
 
 export interface HTTP3EditParams {
   /**
-   * Value of the HTTP3 setting.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Value of the HTTP3 setting.
    */
   value: 'on' | 'off';
+}
+
+export interface HTTP3GetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }
 
 export namespace HTTP3 {
   export import HTTP3EditResponse = HTTP3API.HTTP3EditResponse;
   export import HTTP3GetResponse = HTTP3API.HTTP3GetResponse;
   export import HTTP3EditParams = HTTP3API.HTTP3EditParams;
+  export import HTTP3GetParams = HTTP3API.HTTP3GetParams;
 }

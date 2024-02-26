@@ -14,11 +14,11 @@ const cloudflare = new Cloudflare({
 
 describe('resource logs', () => {
   // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
+  test.skip('list: only required params', async () => {
     const responsePromise = cloudflare.pages.projects.deployments.history.logs.list(
-      '023e105f4ecef8ad9ca31a8372d0c353',
       'this-is-my-project-01',
       '023e105f4ecef8ad9ca31a8372d0c353',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -30,15 +30,11 @@ describe('resource logs', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.pages.projects.deployments.history.logs.list(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        'this-is-my-project-01',
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('list: required and optional params', async () => {
+    const response = await cloudflare.pages.projects.deployments.history.logs.list(
+      'this-is-my-project-01',
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
   });
 });
