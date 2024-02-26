@@ -1768,14 +1768,14 @@ export interface RuleCreateParams {
   /**
    * Body param: An object configuring where the rule will be placed.
    */
-  position?: RuleCreateParams.Position | RuleCreateParams.Position | RuleCreateParams.Position;
+  position?: RuleCreateParams.Before | RuleCreateParams.After | RuleCreateParams.Index;
 }
 
 export namespace RuleCreateParams {
   /**
    * An object configuring where the rule will be placed.
    */
-  export interface Position {
+  export interface Before {
     /**
      * The ID of another rule to place the rule before. An empty value causes the rule
      * to be placed at the top.
@@ -1786,7 +1786,7 @@ export namespace RuleCreateParams {
   /**
    * An object configuring where the rule will be placed.
    */
-  export interface Position {
+  export interface After {
     /**
      * The ID of another rule to place the rule after. An empty value causes the rule
      * to be placed at the bottom.
@@ -1797,7 +1797,7 @@ export namespace RuleCreateParams {
   /**
    * An object configuring where the rule will be placed.
    */
-  export interface Position {
+  export interface Index {
     /**
      * An index at which to place the rule, where index 1 is the first rule.
      */
@@ -1826,14 +1826,14 @@ export interface RuleEditParams {
   /**
    * Body param: An object configuring where the rule will be placed.
    */
-  position?: RuleEditParams.Position | RuleEditParams.Position | RuleEditParams.Position;
+  position?: RuleEditParams.Before | RuleEditParams.After | RuleEditParams.Index;
 }
 
 export namespace RuleEditParams {
   /**
    * An object configuring where the rule will be placed.
    */
-  export interface Position {
+  export interface Before {
     /**
      * The ID of another rule to place the rule before. An empty value causes the rule
      * to be placed at the top.
@@ -1844,7 +1844,7 @@ export namespace RuleEditParams {
   /**
    * An object configuring where the rule will be placed.
    */
-  export interface Position {
+  export interface After {
     /**
      * The ID of another rule to place the rule after. An empty value causes the rule
      * to be placed at the bottom.
@@ -1855,7 +1855,7 @@ export namespace RuleEditParams {
   /**
    * An object configuring where the rule will be placed.
    */
-  export interface Position {
+  export interface Index {
     /**
      * An index at which to place the rule, where index 1 is the first rule.
      */
