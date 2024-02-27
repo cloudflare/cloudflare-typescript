@@ -41,6 +41,7 @@ describe('resource top', () => {
         'SUPPORTED',
         {
           asn: ['string', 'string', 'string'],
+          continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['1d', '2d', '7d'],
           dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
@@ -82,6 +83,7 @@ describe('resource top', () => {
         'SUPPORTED',
         {
           asn: ['string', 'string', 'string'],
+          continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['1d', '2d', '7d'],
           dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
@@ -123,6 +125,7 @@ describe('resource top', () => {
         'IPv4',
         {
           asn: ['string', 'string', 'string'],
+          continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['1d', '2d', '7d'],
           dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
@@ -163,6 +166,7 @@ describe('resource top', () => {
       cloudflare.radar.as112.top.locations(
         {
           asn: ['string', 'string', 'string'],
+          continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['1d', '2d', '7d'],
           dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],

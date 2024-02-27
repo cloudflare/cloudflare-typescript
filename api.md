@@ -5488,143 +5488,31 @@ Methods:
 
 ##### Ases
 
-Types:
-
-- <code><a href="./src/resources/radar/email/security/top/ases/ases.ts">AseGetResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/email/security/top/ases">client.radar.email.security.top.ases.<a href="./src/resources/radar/email/security/top/ases/ases.ts">get</a>({ ...params }) -> AseGetResponse</code>
-
 ###### ARC
-
-Types:
-
-- <code><a href="./src/resources/radar/email/security/top/ases/arc.ts">ARCGetResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/email/security/top/ases/arc/{arc}">client.radar.email.security.top.ases.arc.<a href="./src/resources/radar/email/security/top/ases/arc.ts">get</a>(arc, { ...params }) -> ARCGetResponse</code>
 
 ###### DKIM
 
-Types:
-
-- <code><a href="./src/resources/radar/email/security/top/ases/dkim.ts">DKIMGetResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/email/security/top/ases/dkim/{dkim}">client.radar.email.security.top.ases.dkim.<a href="./src/resources/radar/email/security/top/ases/dkim.ts">get</a>(dkim, { ...params }) -> DKIMGetResponse</code>
-
 ###### DMARC
-
-Types:
-
-- <code><a href="./src/resources/radar/email/security/top/ases/dmarc.ts">DMARCGetResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/email/security/top/ases/dmarc/{dmarc}">client.radar.email.security.top.ases.dmarc.<a href="./src/resources/radar/email/security/top/ases/dmarc.ts">get</a>(dmarc, { ...params }) -> DMARCGetResponse</code>
 
 ###### Malicious
 
-Types:
-
-- <code><a href="./src/resources/radar/email/security/top/ases/malicious.ts">MaliciousGetResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/email/security/top/ases/malicious/{malicious}">client.radar.email.security.top.ases.malicious.<a href="./src/resources/radar/email/security/top/ases/malicious.ts">get</a>(malicious, { ...params }) -> MaliciousGetResponse</code>
-
 ###### Spam
 
-Types:
-
-- <code><a href="./src/resources/radar/email/security/top/ases/spam.ts">SpamGetResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/email/security/top/ases/spam/{spam}">client.radar.email.security.top.ases.spam.<a href="./src/resources/radar/email/security/top/ases/spam.ts">get</a>(spam, { ...params }) -> SpamGetResponse</code>
-
 ###### SPF
-
-Types:
-
-- <code><a href="./src/resources/radar/email/security/top/ases/spf.ts">SPFGetResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/email/security/top/ases/spf/{spf}">client.radar.email.security.top.ases.spf.<a href="./src/resources/radar/email/security/top/ases/spf.ts">get</a>(spf, { ...params }) -> SPFGetResponse</code>
 
 ##### Locations
 
-Types:
-
-- <code><a href="./src/resources/radar/email/security/top/locations/locations.ts">LocationGetResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/email/security/top/locations">client.radar.email.security.top.locations.<a href="./src/resources/radar/email/security/top/locations/locations.ts">get</a>({ ...params }) -> LocationGetResponse</code>
-
 ###### ARC
-
-Types:
-
-- <code><a href="./src/resources/radar/email/security/top/locations/arc.ts">ARCGetResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/email/security/top/locations/arc/{arc}">client.radar.email.security.top.locations.arc.<a href="./src/resources/radar/email/security/top/locations/arc.ts">get</a>(arc, { ...params }) -> ARCGetResponse</code>
 
 ###### DKIM
 
-Types:
-
-- <code><a href="./src/resources/radar/email/security/top/locations/dkim.ts">DKIMGetResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/email/security/top/locations/dkim/{dkim}">client.radar.email.security.top.locations.dkim.<a href="./src/resources/radar/email/security/top/locations/dkim.ts">get</a>(dkim, { ...params }) -> DKIMGetResponse</code>
-
 ###### DMARC
-
-Types:
-
-- <code><a href="./src/resources/radar/email/security/top/locations/dmarc.ts">DMARCGetResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/email/security/top/locations/dmarc/{dmarc}">client.radar.email.security.top.locations.dmarc.<a href="./src/resources/radar/email/security/top/locations/dmarc.ts">get</a>(dmarc, { ...params }) -> DMARCGetResponse</code>
 
 ###### Malicious
 
-Types:
-
-- <code><a href="./src/resources/radar/email/security/top/locations/malicious.ts">MaliciousGetResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/email/security/top/locations/malicious/{malicious}">client.radar.email.security.top.locations.malicious.<a href="./src/resources/radar/email/security/top/locations/malicious.ts">get</a>(malicious, { ...params }) -> MaliciousGetResponse</code>
-
 ###### Spam
 
-Types:
-
-- <code><a href="./src/resources/radar/email/security/top/locations/spam.ts">SpamGetResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/email/security/top/locations/spam/{spam}">client.radar.email.security.top.locations.spam.<a href="./src/resources/radar/email/security/top/locations/spam.ts">get</a>(spam, { ...params }) -> SpamGetResponse</code>
-
 ###### SPF
-
-Types:
-
-- <code><a href="./src/resources/radar/email/security/top/locations/spf.ts">SPFGetResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/email/security/top/locations/spf/{spf}">client.radar.email.security.top.locations.spf.<a href="./src/resources/radar/email/security/top/locations/spf.ts">get</a>(spf, { ...params }) -> SPFGetResponse</code>
 
 #### Summary
 
