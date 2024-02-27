@@ -35,6 +35,7 @@ describe('resource customs', () => {
       profiles: [
         {
           allowed_match_count: 5,
+          context_awareness: { enabled: true, skip: { files: true } },
           description: 'A standard CVV card number',
           entries: [
             {
@@ -57,6 +58,7 @@ describe('resource customs', () => {
         },
         {
           allowed_match_count: 5,
+          context_awareness: { enabled: true, skip: { files: true } },
           description: 'A standard CVV card number',
           entries: [
             {
@@ -79,6 +81,7 @@ describe('resource customs', () => {
         },
         {
           allowed_match_count: 5,
+          context_awareness: { enabled: true, skip: { files: true } },
           description: 'A standard CVV card number',
           entries: [
             {
@@ -122,6 +125,7 @@ describe('resource customs', () => {
     const response = await cloudflare.dlp.profiles.customs.update('384e129d-25bd-403c-8019-bc19eb7a8a5f', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       allowed_match_count: 5,
+      context_awareness: { enabled: true, skip: { files: true } },
       description: 'A standard CVV card number',
       entries: [
         {
