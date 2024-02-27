@@ -4,11 +4,13 @@ import { APIResource } from 'cloudflare/resource';
 import * as MonitorsAPI from 'cloudflare/resources/user/load-balancers/monitors';
 import * as PoolsAPI from 'cloudflare/resources/user/load-balancers/pools';
 import * as PreviewAPI from 'cloudflare/resources/user/load-balancers/preview';
+import * as AnalyticsAPI from 'cloudflare/resources/user/load-balancers/analytics/analytics';
 
 export class LoadBalancers extends APIResource {
   monitors: MonitorsAPI.Monitors = new MonitorsAPI.Monitors(this._client);
   pools: PoolsAPI.Pools = new PoolsAPI.Pools(this._client);
   preview: PreviewAPI.Preview = new PreviewAPI.Preview(this._client);
+  analytics: AnalyticsAPI.Analytics = new AnalyticsAPI.Analytics(this._client);
 }
 
 export namespace LoadBalancers {
@@ -42,4 +44,5 @@ export namespace LoadBalancers {
   export import PoolPreviewParams = PoolsAPI.PoolPreviewParams;
   export import Preview = PreviewAPI.Preview;
   export import PreviewGetResponse = PreviewAPI.PreviewGetResponse;
+  export import Analytics = AnalyticsAPI.Analytics;
 }

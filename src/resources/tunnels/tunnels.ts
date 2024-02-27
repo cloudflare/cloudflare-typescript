@@ -7,13 +7,13 @@ import * as ConfigurationsAPI from 'cloudflare/resources/tunnels/configurations'
 import * as ConnectionsAPI from 'cloudflare/resources/tunnels/connections';
 import * as ConnectorsAPI from 'cloudflare/resources/tunnels/connectors';
 import * as ManagementAPI from 'cloudflare/resources/tunnels/management';
-import * as TokensAPI from 'cloudflare/resources/tunnels/tokens';
+import * as TokenAPI from 'cloudflare/resources/tunnels/token';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class Tunnels extends APIResource {
   configurations: ConfigurationsAPI.Configurations = new ConfigurationsAPI.Configurations(this._client);
   connections: ConnectionsAPI.Connections = new ConnectionsAPI.Connections(this._client);
-  tokens: TokensAPI.Tokens = new TokensAPI.Tokens(this._client);
+  token: TokenAPI.Token = new TokenAPI.Token(this._client);
   connectors: ConnectorsAPI.Connectors = new ConnectorsAPI.Connectors(this._client);
   management: ManagementAPI.Management = new ManagementAPI.Management(this._client);
 
@@ -855,9 +855,9 @@ export namespace Tunnels {
   export import ConnectionDeleteResponse = ConnectionsAPI.ConnectionDeleteResponse;
   export import ConnectionListParams = ConnectionsAPI.ConnectionListParams;
   export import ConnectionDeleteParams = ConnectionsAPI.ConnectionDeleteParams;
-  export import Tokens = TokensAPI.Tokens;
-  export import TokenGetResponse = TokensAPI.TokenGetResponse;
-  export import TokenGetParams = TokensAPI.TokenGetParams;
+  export import Token = TokenAPI.Token;
+  export import TokenGetResponse = TokenAPI.TokenGetResponse;
+  export import TokenGetParams = TokenAPI.TokenGetParams;
   export import Connectors = ConnectorsAPI.Connectors;
   export import ConnectorGetResponse = ConnectorsAPI.ConnectorGetResponse;
   export import ConnectorGetParams = ConnectorsAPI.ConnectorGetParams;

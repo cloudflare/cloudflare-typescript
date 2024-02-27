@@ -10,13 +10,6 @@ export {
 } from './account-settings';
 export { Deployments } from './deployments/index';
 export {
-  DeploymentsByScriptListResponse,
-  DeploymentsByScriptDetailResponse,
-  DeploymentsByScriptListParams,
-  DeploymentsByScriptDetailParams,
-  DeploymentsByScript,
-} from './deployments-by-script';
-export {
   DomainUpdateResponse,
   DomainListResponse,
   DomainGetResponse,
@@ -73,13 +66,6 @@ export {
   ScriptGetParams,
   Scripts,
 } from './scripts/index';
-export {
-  ScriptUpdateResponse,
-  ScriptUpdateParams,
-  ScriptDeleteParams,
-  ScriptGetParams,
-  Script,
-} from './script';
 export { Services } from './services/index';
 export {
   SubdomainUpdateResponse,

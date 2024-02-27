@@ -1,6 +1,11 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
+  ActivationCheckTriggerResponse,
+  ActivationCheckTriggerParams,
+  ActivationCheck,
+} from './activation-check';
+export {
   CustomNameserverUpdateResponse,
   CustomNameserverGetResponse,
   CustomNameserverUpdateParams,
@@ -16,6 +21,14 @@ export {
   HoldGetParams,
   Holds,
 } from './holds';
+export {
+  SettingListResponse,
+  SettingEditResponse,
+  SettingListParams,
+  SettingEditParams,
+  Settings,
+} from './settings/index';
+export { Workers } from './workers/index';
 export {
   ZoneCreateResponse,
   ZoneListResponse,

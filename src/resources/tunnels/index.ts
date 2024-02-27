@@ -16,7 +16,7 @@ export {
 } from './connections';
 export { ConnectorGetResponse, ConnectorGetParams, Connectors } from './connectors';
 export { ManagementCreateResponse, ManagementCreateParams, Management } from './management';
-export { TokenGetResponse, TokenGetParams, Tokens } from './tokens';
+export { TokenGetResponse, TokenGetParams, Token } from './token';
 export {
   TunnelCreateResponse,
   TunnelListResponse,

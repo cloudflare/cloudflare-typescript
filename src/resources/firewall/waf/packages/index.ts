@@ -10,5 +10,20 @@ export {
   GroupListResponsesV4PagePaginationArray,
   Groups,
 } from './groups';
-export { Packages } from './packages';
-export { RuleEditResponse, RuleGetResponse, RuleEditParams, RuleGetParams, Rules } from './rules';
+export {
+  PackageListResponse,
+  PackageGetResponse,
+  PackageListParams,
+  PackageListResponsesV4PagePaginationArray,
+  Packages,
+} from './packages';
+export {
+  RuleListResponse,
+  RuleEditResponse,
+  RuleGetResponse,
+  RuleListParams,
+  RuleEditParams,
+  RuleGetParams,
+  RuleListResponsesV4PagePaginationArray,
+  Rules,
+} from './rules';

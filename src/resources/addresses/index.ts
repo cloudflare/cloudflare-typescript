@@ -28,3 +28,4 @@ export {
   PrefixGetParams,
   Prefixes,
 } from './prefixes/index';
+export { ServiceListResponse, ServiceListParams, Services } from './services';

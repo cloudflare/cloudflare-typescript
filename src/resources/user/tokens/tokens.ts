@@ -5,14 +5,14 @@ import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as TokensAPI from 'cloudflare/resources/user/tokens/tokens';
 import * as PermissionGroupsAPI from 'cloudflare/resources/user/tokens/permission-groups';
-import * as ValuesAPI from 'cloudflare/resources/user/tokens/values';
+import * as ValueAPI from 'cloudflare/resources/user/tokens/value';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class Tokens extends APIResource {
   permissionGroups: PermissionGroupsAPI.PermissionGroups = new PermissionGroupsAPI.PermissionGroups(
     this._client,
   );
-  values: ValuesAPI.Values = new ValuesAPI.Values(this._client);
+  value: ValueAPI.Value = new ValueAPI.Value(this._client);
 
   /**
    * Create a new access token.
@@ -315,7 +315,7 @@ export namespace Tokens {
   export import TokenListParams = TokensAPI.TokenListParams;
   export import PermissionGroups = PermissionGroupsAPI.PermissionGroups;
   export import PermissionGroupListResponse = PermissionGroupsAPI.PermissionGroupListResponse;
-  export import Values = ValuesAPI.Values;
-  export import ValueUpdateResponse = ValuesAPI.ValueUpdateResponse;
-  export import ValueUpdateParams = ValuesAPI.ValueUpdateParams;
+  export import Value = ValueAPI.Value;
+  export import ValueUpdateResponse = ValueAPI.ValueUpdateResponse;
+  export import ValueUpdateParams = ValueAPI.ValueUpdateParams;
 }

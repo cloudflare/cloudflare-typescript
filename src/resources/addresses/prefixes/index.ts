@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless.
 
-export { BGPs } from './bgps/index';
+export { BGP } from './bgp/index';
 export {
   DelegationCreateResponse,
   DelegationListResponse,

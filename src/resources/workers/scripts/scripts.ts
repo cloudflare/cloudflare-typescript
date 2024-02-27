@@ -5,7 +5,10 @@ import { APIResource } from 'cloudflare/resource';
 import { type Response } from 'cloudflare/_shims/index';
 import * as ScriptsAPI from 'cloudflare/resources/workers/scripts/scripts';
 import * as BindingsAPI from 'cloudflare/resources/workers/scripts/bindings';
+import * as ContentAPI from 'cloudflare/resources/workers/scripts/content';
+import * as ContentV2API from 'cloudflare/resources/workers/scripts/content-v2';
 import * as SchedulesAPI from 'cloudflare/resources/workers/scripts/schedules';
+import * as SettingsAPI from 'cloudflare/resources/workers/scripts/settings';
 import * as TailAPI from 'cloudflare/resources/workers/scripts/tail';
 import * as UsageModelAPI from 'cloudflare/resources/workers/scripts/usage-model';
 import { type Uploadable, maybeMultipartFormRequestOptions } from 'cloudflare/core';
@@ -15,6 +18,9 @@ export class Scripts extends APIResource {
   schedules: SchedulesAPI.Schedules = new SchedulesAPI.Schedules(this._client);
   tail: TailAPI.Tail = new TailAPI.Tail(this._client);
   usageModel: UsageModelAPI.UsageModel = new UsageModelAPI.UsageModel(this._client);
+  content: ContentAPI.Content = new ContentAPI.Content(this._client);
+  contentV2: ContentV2API.ContentV2 = new ContentV2API.ContentV2(this._client);
+  settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
 
   /**
    * Upload a worker module.
@@ -523,4 +529,14 @@ export namespace Scripts {
   export import UsageModelGetResponse = UsageModelAPI.UsageModelGetResponse;
   export import UsageModelUpdateParams = UsageModelAPI.UsageModelUpdateParams;
   export import UsageModelGetParams = UsageModelAPI.UsageModelGetParams;
+  export import Content = ContentAPI.Content;
+  export import ContentUpdateResponse = ContentAPI.ContentUpdateResponse;
+  export import ContentUpdateParams = ContentAPI.ContentUpdateParams;
+  export import ContentV2 = ContentV2API.ContentV2;
+  export import ContentV2GetParams = ContentV2API.ContentV2GetParams;
+  export import Settings = SettingsAPI.Settings;
+  export import SettingEditResponse = SettingsAPI.SettingEditResponse;
+  export import SettingGetResponse = SettingsAPI.SettingGetResponse;
+  export import SettingEditParams = SettingsAPI.SettingEditParams;
+  export import SettingGetParams = SettingsAPI.SettingGetParams;
 }

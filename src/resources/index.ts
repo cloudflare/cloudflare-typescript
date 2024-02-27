@@ -3,20 +3,6 @@
 export { ACM } from './acm/acm';
 export { Access } from './access/access';
 export {
-  AccountMemberCreateResponse,
-  AccountMemberUpdateResponse,
-  AccountMemberListResponse,
-  AccountMemberDeleteResponse,
-  AccountMemberGetResponse,
-  AccountMemberCreateParams,
-  AccountMemberUpdateParams,
-  AccountMemberListParams,
-  AccountMemberDeleteParams,
-  AccountMemberGetParams,
-  AccountMemberListResponsesV4PagePaginationArray,
-  AccountMembers,
-} from './account-members';
-export {
   AccountUpdateResponse,
   AccountListResponse,
   AccountGetResponse,
@@ -25,14 +11,8 @@ export {
   AccountGetParams,
   AccountListResponsesV4PagePaginationArray,
   Accounts,
-} from './accounts';
-export {
-  ActivationCheckUpdateResponse,
-  ActivationCheckUpdateParams,
-  ActivationChecks,
-} from './activation-checks';
+} from './accounts/accounts';
 export { Addresses } from './addresses/addresses';
-export { Addressing } from './addressing/addressing';
 export { Alerting } from './alerting/alerting';
 export { Argo } from './argo/argo';
 export {
@@ -51,7 +31,13 @@ export {
   BotManagementGetParams,
   BotManagement,
 } from './bot-management';
-export { BrandProtection } from './brand-protection/brand-protection';
+export {
+  BrandProtectionSubmitResponse,
+  BrandProtectionURLInfoResponse,
+  BrandProtectionSubmitParams,
+  BrandProtectionURLInfoParams,
+  BrandProtection,
+} from './brand-protection';
 export { CachePurgeResponse, CachePurgeParams, Cache } from './cache/cache';
 export {
   CallCreateResponse,
@@ -136,7 +122,6 @@ export { D1 } from './d1/d1';
 export { DEX } from './dex/dex';
 export { DLP } from './dlp/dlp';
 export { DNS } from './dns/dns';
-export { DNSAnalytics } from './dns-analytics/dns-analytics';
 export {
   DNSSECDeleteResponse,
   DNSSECEditResponse,
@@ -170,7 +155,6 @@ export {
   Filters,
 } from './filters';
 export { Firewall } from './firewall/firewall';
-export { Firewalls } from './firewalls/firewalls';
 export {
   GatewayCreateResponse,
   GatewayListResponse,
@@ -195,6 +179,7 @@ export { Hyperdrive } from './hyperdrive/hyperdrive';
 export { IPListResponse, IPListParams, IPs } from './ips';
 export { Images } from './images/images';
 export { Intel } from './intel/intel';
+export { KV } from './kv/kv';
 export {
   KeylessCertificateCreateResponse,
   KeylessCertificateListResponse,
@@ -237,7 +222,7 @@ export {
   MTLSCertificateGetParams,
   MTLSCertificates,
 } from './mtls-certificates/mtls-certificates';
-export { Magics } from './magics/magics';
+export { MagicTransit } from './magic-transit/magic-transit';
 export {
   ManagedHeaderListResponse,
   ManagedHeaderEditResponse,
@@ -339,13 +324,6 @@ export {
 export { SSL } from './ssl/ssl';
 export { SecondaryDNS } from './secondary-dns/secondary-dns';
 export {
-  SettingListResponse,
-  SettingEditResponse,
-  SettingListParams,
-  SettingEditParams,
-  Settings,
-} from './settings/settings';
-export {
   SnippetUpdateResponse,
   SnippetListResponse,
   SnippetDeleteResponse,
@@ -384,7 +362,6 @@ export {
   Subscriptions,
 } from './subscriptions';
 export { Teamnet } from './teamnet/teamnet';
-export { Teamnets } from './teamnets/teamnets';
 export {
   TunnelCreateResponse,
   TunnelListResponse,
@@ -440,16 +417,9 @@ export {
   WaitingRooms,
 } from './waiting-rooms/waiting-rooms';
 export { Web3 } from './web3/web3';
-export {
-  WorkerDomainGetResponse,
-  WorkerDomainDeleteParams,
-  WorkerDomainGetParams,
-  WorkerDomains,
-} from './worker-domains';
-export { WorkerScripts } from './worker-scripts/worker-scripts';
 export { Workers } from './workers/workers';
 export { WorkersForPlatforms } from './workers-for-platforms/workers-for-platforms';
-export { Zerotrust } from './zerotrust/zerotrust';
+export { ZeroTrust } from './zero-trust/zero-trust';
 export {
   ZoneCreateResponse,
   ZoneListResponse,

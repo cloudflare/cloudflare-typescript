@@ -14,4 +14,4 @@ export {
   TokenListResponsesV4PagePaginationArray,
   Tokens,
 } from './tokens';
-export { ValueUpdateResponse, ValueUpdateParams, Values } from './values';
+export { ValueUpdateResponse, ValueUpdateParams, Value } from './value';
