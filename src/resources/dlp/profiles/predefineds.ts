@@ -50,6 +50,12 @@ export interface PredefinedUpdateResponse {
   allowed_match_count?: number;
 
   /**
+   * Scan the context of predefined entries to only return matches surrounded by
+   * keywords.
+   */
+  context_awareness?: PredefinedUpdateResponse.ContextAwareness;
+
+  /**
    * The entries for this profile.
    */
   entries?: Array<PredefinedUpdateResponse.Entry>;
@@ -66,6 +72,35 @@ export interface PredefinedUpdateResponse {
 }
 
 export namespace PredefinedUpdateResponse {
+  /**
+   * Scan the context of predefined entries to only return matches surrounded by
+   * keywords.
+   */
+  export interface ContextAwareness {
+    /**
+     * If true, scan the context of predefined entries to only return matches
+     * surrounded by keywords.
+     */
+    enabled: boolean;
+
+    /**
+     * Content types to exclude from context analysis and return all matches.
+     */
+    skip: ContextAwareness.Skip;
+  }
+
+  export namespace ContextAwareness {
+    /**
+     * Content types to exclude from context analysis and return all matches.
+     */
+    export interface Skip {
+      /**
+       * If the content type is a file, skip context analysis and return all matches.
+       */
+      files: boolean;
+    }
+  }
+
   /**
    * A predefined entry that matches a profile
    */
@@ -104,6 +139,12 @@ export interface PredefinedGetResponse {
   allowed_match_count?: number;
 
   /**
+   * Scan the context of predefined entries to only return matches surrounded by
+   * keywords.
+   */
+  context_awareness?: PredefinedGetResponse.ContextAwareness;
+
+  /**
    * The entries for this profile.
    */
   entries?: Array<PredefinedGetResponse.Entry>;
@@ -120,6 +161,35 @@ export interface PredefinedGetResponse {
 }
 
 export namespace PredefinedGetResponse {
+  /**
+   * Scan the context of predefined entries to only return matches surrounded by
+   * keywords.
+   */
+  export interface ContextAwareness {
+    /**
+     * If true, scan the context of predefined entries to only return matches
+     * surrounded by keywords.
+     */
+    enabled: boolean;
+
+    /**
+     * Content types to exclude from context analysis and return all matches.
+     */
+    skip: ContextAwareness.Skip;
+  }
+
+  export namespace ContextAwareness {
+    /**
+     * Content types to exclude from context analysis and return all matches.
+     */
+    export interface Skip {
+      /**
+       * If the content type is a file, skip context analysis and return all matches.
+       */
+      files: boolean;
+    }
+  }
+
   /**
    * A predefined entry that matches a profile
    */
@@ -159,12 +229,47 @@ export interface PredefinedUpdateParams {
   allowed_match_count?: number;
 
   /**
+   * Body param: Scan the context of predefined entries to only return matches
+   * surrounded by keywords.
+   */
+  context_awareness?: PredefinedUpdateParams.ContextAwareness;
+
+  /**
    * Body param: The entries for this profile.
    */
   entries?: Array<PredefinedUpdateParams.Entry>;
 }
 
 export namespace PredefinedUpdateParams {
+  /**
+   * Scan the context of predefined entries to only return matches surrounded by
+   * keywords.
+   */
+  export interface ContextAwareness {
+    /**
+     * If true, scan the context of predefined entries to only return matches
+     * surrounded by keywords.
+     */
+    enabled: boolean;
+
+    /**
+     * Content types to exclude from context analysis and return all matches.
+     */
+    skip: ContextAwareness.Skip;
+  }
+
+  export namespace ContextAwareness {
+    /**
+     * Content types to exclude from context analysis and return all matches.
+     */
+    export interface Skip {
+      /**
+       * If the content type is a file, skip context analysis and return all matches.
+       */
+      files: boolean;
+    }
+  }
+
   export interface Entry {
     /**
      * Whether the entry is enabled or not.
