@@ -11,5 +11,9 @@ export class Top extends APIResource {
 
 export namespace Top {
   export import Ases = AsesAPI.Ases;
+  export import AseGetResponse = AsesAPI.AseGetResponse;
+  export import AseGetParams = AsesAPI.AseGetParams;
   export import Locations = LocationsAPI.Locations;
+  export import LocationGetResponse = LocationsAPI.LocationGetResponse;
+  export import LocationGetParams = LocationsAPI.LocationGetParams;
 }

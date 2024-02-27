@@ -39,7 +39,6 @@ describe('resource summary', () => {
     await expect(
       cloudflare.radar.attacks.layer3.summary.bitrate(
         {
-          continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['1d', '2d', '7d'],
           dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
@@ -81,7 +80,6 @@ describe('resource summary', () => {
     await expect(
       cloudflare.radar.attacks.layer3.summary.duration(
         {
-          continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['1d', '2d', '7d'],
           dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
@@ -124,7 +122,6 @@ describe('resource summary', () => {
       cloudflare.radar.attacks.layer3.summary.get(
         {
           asn: ['string', 'string', 'string'],
-          continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['1d', '2d', '7d'],
           dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
@@ -163,7 +160,6 @@ describe('resource summary', () => {
     await expect(
       cloudflare.radar.attacks.layer3.summary.ipVersion(
         {
-          continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['1d', '2d', '7d'],
           dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
@@ -204,7 +200,6 @@ describe('resource summary', () => {
     await expect(
       cloudflare.radar.attacks.layer3.summary.protocol(
         {
-          continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['1d', '2d', '7d'],
           dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
@@ -245,7 +240,6 @@ describe('resource summary', () => {
     await expect(
       cloudflare.radar.attacks.layer3.summary.vector(
         {
-          continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['1d', '2d', '7d'],
           dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],

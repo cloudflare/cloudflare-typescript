@@ -41,7 +41,6 @@ describe('resource speed', () => {
         {
           asn: ['string', 'string', 'string'],
           bucketSize: 0,
-          continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           format: 'JSON',
           location: ['string', 'string', 'string'],
@@ -80,7 +79,6 @@ describe('resource speed', () => {
       cloudflare.radar.quality.speed.summary(
         {
           asn: ['string', 'string', 'string'],
-          continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           format: 'JSON',
           location: ['string', 'string', 'string'],
