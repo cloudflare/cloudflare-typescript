@@ -389,6 +389,13 @@ export interface TimeseriesGroupBitrateParams {
   aggInterval?: '15m' | '1h' | '1d' | '1w';
 
   /**
+   * Array of comma separated list of continents (alpha-2 continent codes). Start
+   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
+   * Europe, but includes results from North America.
+   */
+  continent?: Array<string>;
+
+  /**
    * End of the date range (inclusive).
    */
   dateEnd?: Array<string>;
@@ -468,6 +475,13 @@ export interface TimeseriesGroupDurationParams {
    * [Aggregation intervals](https://developers.cloudflare.com/radar/concepts/aggregation-intervals/).
    */
   aggInterval?: '15m' | '1h' | '1d' | '1w';
+
+  /**
+   * Array of comma separated list of continents (alpha-2 continent codes). Start
+   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
+   * Europe, but includes results from North America.
+   */
+  continent?: Array<string>;
 
   /**
    * End of the date range (inclusive).
@@ -558,6 +572,13 @@ export interface TimeseriesGroupGetParams {
   asn?: Array<string>;
 
   /**
+   * Array of comma separated list of continents (alpha-2 continent codes). Start
+   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
+   * Europe, but includes results from North America.
+   */
+  continent?: Array<string>;
+
+  /**
    * End of the date range (inclusive).
    */
   dateEnd?: Array<string>;
@@ -615,6 +636,13 @@ export interface TimeseriesGroupIndustryParams {
    * [Aggregation intervals](https://developers.cloudflare.com/radar/concepts/aggregation-intervals/).
    */
   aggInterval?: '15m' | '1h' | '1d' | '1w';
+
+  /**
+   * Array of comma separated list of continents (alpha-2 continent codes). Start
+   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
+   * Europe, but includes results from North America.
+   */
+  continent?: Array<string>;
 
   /**
    * End of the date range (inclusive).
@@ -699,6 +727,13 @@ export interface TimeseriesGroupIPVersionParams {
   aggInterval?: '15m' | '1h' | '1d' | '1w';
 
   /**
+   * Array of comma separated list of continents (alpha-2 continent codes). Start
+   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
+   * Europe, but includes results from North America.
+   */
+  continent?: Array<string>;
+
+  /**
    * End of the date range (inclusive).
    */
   dateEnd?: Array<string>;
@@ -775,6 +810,13 @@ export interface TimeseriesGroupProtocolParams {
   aggInterval?: '15m' | '1h' | '1d' | '1w';
 
   /**
+   * Array of comma separated list of continents (alpha-2 continent codes). Start
+   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
+   * Europe, but includes results from North America.
+   */
+  continent?: Array<string>;
+
+  /**
    * End of the date range (inclusive).
    */
   dateEnd?: Array<string>;
@@ -849,6 +891,13 @@ export interface TimeseriesGroupVectorParams {
    * [Aggregation intervals](https://developers.cloudflare.com/radar/concepts/aggregation-intervals/).
    */
   aggInterval?: '15m' | '1h' | '1d' | '1w';
+
+  /**
+   * Array of comma separated list of continents (alpha-2 continent codes). Start
+   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
+   * Europe, but includes results from North America.
+   */
+  continent?: Array<string>;
 
   /**
    * End of the date range (inclusive).
@@ -936,6 +985,13 @@ export interface TimeseriesGroupVerticalParams {
    * [Aggregation intervals](https://developers.cloudflare.com/radar/concepts/aggregation-intervals/).
    */
   aggInterval?: '15m' | '1h' | '1d' | '1w';
+
+  /**
+   * Array of comma separated list of continents (alpha-2 continent codes). Start
+   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
+   * Europe, but includes results from North America.
+   */
+  continent?: Array<string>;
 
   /**
    * End of the date range (inclusive).

@@ -380,6 +380,13 @@ export interface TimeseriesGroupBotClassParams {
   asn?: Array<string>;
 
   /**
+   * Array of comma separated list of continents (alpha-2 continent codes). Start
+   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
+   * Europe, but includes results from North America.
+   */
+  continent?: Array<string>;
+
+  /**
    * End of the date range (inclusive).
    */
   dateEnd?: Array<string>;
@@ -480,6 +487,13 @@ export interface TimeseriesGroupBrowserParams {
    * [Bot classes](https://developers.cloudflare.com/radar/concepts/bot-classes/).
    */
   botClass?: Array<'LIKELY_AUTOMATED' | 'LIKELY_HUMAN'>;
+
+  /**
+   * Array of comma separated list of continents (alpha-2 continent codes). Start
+   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
+   * Europe, but includes results from North America.
+   */
+  continent?: Array<string>;
 
   /**
    * End of the date range (inclusive).
@@ -590,6 +604,13 @@ export interface TimeseriesGroupBrowserFamilyParams {
   botClass?: Array<'LIKELY_AUTOMATED' | 'LIKELY_HUMAN'>;
 
   /**
+   * Array of comma separated list of continents (alpha-2 continent codes). Start
+   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
+   * Europe, but includes results from North America.
+   */
+  continent?: Array<string>;
+
+  /**
    * End of the date range (inclusive).
    */
   dateEnd?: Array<string>;
@@ -692,6 +713,13 @@ export interface TimeseriesGroupDeviceTypeParams {
   botClass?: Array<'LIKELY_AUTOMATED' | 'LIKELY_HUMAN'>;
 
   /**
+   * Array of comma separated list of continents (alpha-2 continent codes). Start
+   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
+   * Europe, but includes results from North America.
+   */
+  continent?: Array<string>;
+
+  /**
    * End of the date range (inclusive).
    */
   dateEnd?: Array<string>;
@@ -787,6 +815,13 @@ export interface TimeseriesGroupHTTPProtocolParams {
    * [Bot classes](https://developers.cloudflare.com/radar/concepts/bot-classes/).
    */
   botClass?: Array<'LIKELY_AUTOMATED' | 'LIKELY_HUMAN'>;
+
+  /**
+   * Array of comma separated list of continents (alpha-2 continent codes). Start
+   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
+   * Europe, but includes results from North America.
+   */
+  continent?: Array<string>;
 
   /**
    * End of the date range (inclusive).
@@ -886,6 +921,13 @@ export interface TimeseriesGroupHTTPVersionParams {
   botClass?: Array<'LIKELY_AUTOMATED' | 'LIKELY_HUMAN'>;
 
   /**
+   * Array of comma separated list of continents (alpha-2 continent codes). Start
+   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
+   * Europe, but includes results from North America.
+   */
+  continent?: Array<string>;
+
+  /**
    * End of the date range (inclusive).
    */
   dateEnd?: Array<string>;
@@ -981,6 +1023,13 @@ export interface TimeseriesGroupIPVersionParams {
    * [Bot classes](https://developers.cloudflare.com/radar/concepts/bot-classes/).
    */
   botClass?: Array<'LIKELY_AUTOMATED' | 'LIKELY_HUMAN'>;
+
+  /**
+   * Array of comma separated list of continents (alpha-2 continent codes). Start
+   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
+   * Europe, but includes results from North America.
+   */
+  continent?: Array<string>;
 
   /**
    * End of the date range (inclusive).
@@ -1080,6 +1129,13 @@ export interface TimeseriesGroupOSParams {
   botClass?: Array<'LIKELY_AUTOMATED' | 'LIKELY_HUMAN'>;
 
   /**
+   * Array of comma separated list of continents (alpha-2 continent codes). Start
+   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
+   * Europe, but includes results from North America.
+   */
+  continent?: Array<string>;
+
+  /**
    * End of the date range (inclusive).
    */
   dateEnd?: Array<string>;
@@ -1175,6 +1231,13 @@ export interface TimeseriesGroupTLSVersionParams {
    * [Bot classes](https://developers.cloudflare.com/radar/concepts/bot-classes/).
    */
   botClass?: Array<'LIKELY_AUTOMATED' | 'LIKELY_HUMAN'>;
+
+  /**
+   * Array of comma separated list of continents (alpha-2 continent codes). Start
+   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
+   * Europe, but includes results from North America.
+   */
+  continent?: Array<string>;
 
   /**
    * End of the date range (inclusive).

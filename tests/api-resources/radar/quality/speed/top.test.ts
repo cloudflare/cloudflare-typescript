@@ -40,6 +40,7 @@ describe('resource top', () => {
       cloudflare.radar.quality.speed.top.ases(
         {
           asn: ['string', 'string', 'string'],
+          continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           format: 'JSON',
           limit: 5,
@@ -80,6 +81,7 @@ describe('resource top', () => {
       cloudflare.radar.quality.speed.top.locations(
         {
           asn: ['string', 'string', 'string'],
+          continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           format: 'JSON',
           limit: 5,
