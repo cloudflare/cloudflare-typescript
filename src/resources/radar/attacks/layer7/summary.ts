@@ -529,6 +529,13 @@ export interface SummaryGetParams {
   asn?: Array<string>;
 
   /**
+   * Array of comma separated list of continents (alpha-2 continent codes). Start
+   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
+   * Europe, but includes results from North America.
+   */
+  continent?: Array<string>;
+
+  /**
    * End of the date range (inclusive).
    */
   dateEnd?: Array<string>;
@@ -586,6 +593,13 @@ export interface SummaryHTTPMethodParams {
    * AS3356.
    */
   asn?: Array<string>;
+
+  /**
+   * Array of comma separated list of continents (alpha-2 continent codes). Start
+   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
+   * Europe, but includes results from North America.
+   */
+  continent?: Array<string>;
 
   /**
    * End of the date range (inclusive).
@@ -668,6 +682,13 @@ export interface SummaryHTTPVersionParams {
    * AS3356.
    */
   asn?: Array<string>;
+
+  /**
+   * Array of comma separated list of continents (alpha-2 continent codes). Start
+   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
+   * Europe, but includes results from North America.
+   */
+  continent?: Array<string>;
 
   /**
    * End of the date range (inclusive).
@@ -799,6 +820,13 @@ export interface SummaryIPVersionParams {
   asn?: Array<string>;
 
   /**
+   * Array of comma separated list of continents (alpha-2 continent codes). Start
+   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
+   * Europe, but includes results from North America.
+   */
+  continent?: Array<string>;
+
+  /**
    * End of the date range (inclusive).
    */
   dateEnd?: Array<string>;
@@ -926,6 +954,13 @@ export interface SummaryManagedRulesParams {
    * AS3356.
    */
   asn?: Array<string>;
+
+  /**
+   * Array of comma separated list of continents (alpha-2 continent codes). Start
+   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
+   * Europe, but includes results from North America.
+   */
+  continent?: Array<string>;
 
   /**
    * End of the date range (inclusive).
@@ -1060,6 +1095,13 @@ export interface SummaryMitigationProductParams {
    * AS3356.
    */
   asn?: Array<string>;
+
+  /**
+   * Array of comma separated list of continents (alpha-2 continent codes). Start
+   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
+   * Europe, but includes results from North America.
+   */
+  continent?: Array<string>;
 
   /**
    * End of the date range (inclusive).

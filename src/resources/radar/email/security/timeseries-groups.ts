@@ -287,13 +287,6 @@ export interface TimeseriesGroupARCParams {
   aggInterval?: '15m' | '1h' | '1d' | '1w';
 
   /**
-   * Array of comma separated list of ASNs, start with `-` to exclude from results.
-   * For example, `-174, 3356` excludes results from AS174, but includes results from
-   * AS3356.
-   */
-  asn?: Array<string>;
-
-  /**
    * End of the date range (inclusive).
    */
   dateEnd?: Array<string>;
@@ -342,13 +335,6 @@ export interface TimeseriesGroupARCParams {
   format?: 'JSON' | 'CSV';
 
   /**
-   * Array of comma separated list of locations (alpha-2 country codes). Start with
-   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
-   * but includes results from PT.
-   */
-  location?: Array<string>;
-
-  /**
    * Array of names that will be used to name the series in responses.
    */
   name?: Array<string>;
@@ -357,6 +343,11 @@ export interface TimeseriesGroupARCParams {
    * Filter for spf.
    */
   spf?: Array<'PASS' | 'NONE' | 'FAIL'>;
+
+  /**
+   * Filter for tls version.
+   */
+  tlsVersion?: Array<'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3'>;
 }
 
 export interface TimeseriesGroupDKIMParams {
@@ -373,13 +364,6 @@ export interface TimeseriesGroupDKIMParams {
   arc?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
   /**
-   * Array of comma separated list of ASNs, start with `-` to exclude from results.
-   * For example, `-174, 3356` excludes results from AS174, but includes results from
-   * AS3356.
-   */
-  asn?: Array<string>;
-
-  /**
    * End of the date range (inclusive).
    */
   dateEnd?: Array<string>;
@@ -423,13 +407,6 @@ export interface TimeseriesGroupDKIMParams {
   format?: 'JSON' | 'CSV';
 
   /**
-   * Array of comma separated list of locations (alpha-2 country codes). Start with
-   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
-   * but includes results from PT.
-   */
-  location?: Array<string>;
-
-  /**
    * Array of names that will be used to name the series in responses.
    */
   name?: Array<string>;
@@ -438,6 +415,11 @@ export interface TimeseriesGroupDKIMParams {
    * Filter for spf.
    */
   spf?: Array<'PASS' | 'NONE' | 'FAIL'>;
+
+  /**
+   * Filter for tls version.
+   */
+  tlsVersion?: Array<'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3'>;
 }
 
 export interface TimeseriesGroupDMARCParams {
@@ -454,13 +436,6 @@ export interface TimeseriesGroupDMARCParams {
   arc?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
   /**
-   * Array of comma separated list of ASNs, start with `-` to exclude from results.
-   * For example, `-174, 3356` excludes results from AS174, but includes results from
-   * AS3356.
-   */
-  asn?: Array<string>;
-
-  /**
    * End of the date range (inclusive).
    */
   dateEnd?: Array<string>;
@@ -504,13 +479,6 @@ export interface TimeseriesGroupDMARCParams {
   format?: 'JSON' | 'CSV';
 
   /**
-   * Array of comma separated list of locations (alpha-2 country codes). Start with
-   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
-   * but includes results from PT.
-   */
-  location?: Array<string>;
-
-  /**
    * Array of names that will be used to name the series in responses.
    */
   name?: Array<string>;
@@ -519,6 +487,11 @@ export interface TimeseriesGroupDMARCParams {
    * Filter for spf.
    */
   spf?: Array<'PASS' | 'NONE' | 'FAIL'>;
+
+  /**
+   * Filter for tls version.
+   */
+  tlsVersion?: Array<'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3'>;
 }
 
 export interface TimeseriesGroupMaliciousParams {
@@ -535,13 +508,6 @@ export interface TimeseriesGroupMaliciousParams {
   arc?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
   /**
-   * Array of comma separated list of ASNs, start with `-` to exclude from results.
-   * For example, `-174, 3356` excludes results from AS174, but includes results from
-   * AS3356.
-   */
-  asn?: Array<string>;
-
-  /**
    * End of the date range (inclusive).
    */
   dateEnd?: Array<string>;
@@ -590,13 +556,6 @@ export interface TimeseriesGroupMaliciousParams {
   format?: 'JSON' | 'CSV';
 
   /**
-   * Array of comma separated list of locations (alpha-2 country codes). Start with
-   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
-   * but includes results from PT.
-   */
-  location?: Array<string>;
-
-  /**
    * Array of names that will be used to name the series in responses.
    */
   name?: Array<string>;
@@ -605,6 +564,11 @@ export interface TimeseriesGroupMaliciousParams {
    * Filter for spf.
    */
   spf?: Array<'PASS' | 'NONE' | 'FAIL'>;
+
+  /**
+   * Filter for tls version.
+   */
+  tlsVersion?: Array<'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3'>;
 }
 
 export interface TimeseriesGroupSpamParams {
@@ -621,13 +585,6 @@ export interface TimeseriesGroupSpamParams {
   arc?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
   /**
-   * Array of comma separated list of ASNs, start with `-` to exclude from results.
-   * For example, `-174, 3356` excludes results from AS174, but includes results from
-   * AS3356.
-   */
-  asn?: Array<string>;
-
-  /**
    * End of the date range (inclusive).
    */
   dateEnd?: Array<string>;
@@ -676,13 +633,6 @@ export interface TimeseriesGroupSpamParams {
   format?: 'JSON' | 'CSV';
 
   /**
-   * Array of comma separated list of locations (alpha-2 country codes). Start with
-   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
-   * but includes results from PT.
-   */
-  location?: Array<string>;
-
-  /**
    * Array of names that will be used to name the series in responses.
    */
   name?: Array<string>;
@@ -691,6 +641,11 @@ export interface TimeseriesGroupSpamParams {
    * Filter for spf.
    */
   spf?: Array<'PASS' | 'NONE' | 'FAIL'>;
+
+  /**
+   * Filter for tls version.
+   */
+  tlsVersion?: Array<'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3'>;
 }
 
 export interface TimeseriesGroupSPFParams {
@@ -707,13 +662,6 @@ export interface TimeseriesGroupSPFParams {
   arc?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
   /**
-   * Array of comma separated list of ASNs, start with `-` to exclude from results.
-   * For example, `-174, 3356` excludes results from AS174, but includes results from
-   * AS3356.
-   */
-  asn?: Array<string>;
-
-  /**
    * End of the date range (inclusive).
    */
   dateEnd?: Array<string>;
@@ -762,16 +710,14 @@ export interface TimeseriesGroupSPFParams {
   format?: 'JSON' | 'CSV';
 
   /**
-   * Array of comma separated list of locations (alpha-2 country codes). Start with
-   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
-   * but includes results from PT.
-   */
-  location?: Array<string>;
-
-  /**
    * Array of names that will be used to name the series in responses.
    */
   name?: Array<string>;
+
+  /**
+   * Filter for tls version.
+   */
+  tlsVersion?: Array<'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3'>;
 }
 
 export interface TimeseriesGroupThreatCategoryParams {
@@ -788,13 +734,6 @@ export interface TimeseriesGroupThreatCategoryParams {
   arc?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
   /**
-   * Array of comma separated list of ASNs, start with `-` to exclude from results.
-   * For example, `-174, 3356` excludes results from AS174, but includes results from
-   * AS3356.
-   */
-  asn?: Array<string>;
-
-  /**
    * End of the date range (inclusive).
    */
   dateEnd?: Array<string>;
@@ -843,13 +782,6 @@ export interface TimeseriesGroupThreatCategoryParams {
   format?: 'JSON' | 'CSV';
 
   /**
-   * Array of comma separated list of locations (alpha-2 country codes). Start with
-   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
-   * but includes results from PT.
-   */
-  location?: Array<string>;
-
-  /**
    * Array of names that will be used to name the series in responses.
    */
   name?: Array<string>;
@@ -858,6 +790,11 @@ export interface TimeseriesGroupThreatCategoryParams {
    * Filter for spf.
    */
   spf?: Array<'PASS' | 'NONE' | 'FAIL'>;
+
+  /**
+   * Filter for tls version.
+   */
+  tlsVersion?: Array<'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3'>;
 }
 
 export namespace TimeseriesGroups {

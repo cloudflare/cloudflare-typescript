@@ -40,6 +40,7 @@ describe('resource summary', () => {
       cloudflare.radar.http.summary.botClass(
         {
           asn: ['string', 'string', 'string'],
+          continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['1d', '2d', '7d'],
           dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
@@ -86,6 +87,7 @@ describe('resource summary', () => {
         {
           asn: ['string', 'string', 'string'],
           botClass: ['LIKELY_AUTOMATED', 'LIKELY_HUMAN'],
+          continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['1d', '2d', '7d'],
           dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
@@ -131,6 +133,7 @@ describe('resource summary', () => {
         {
           asn: ['string', 'string', 'string'],
           botClass: ['LIKELY_AUTOMATED', 'LIKELY_HUMAN'],
+          continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['1d', '2d', '7d'],
           dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
@@ -176,6 +179,7 @@ describe('resource summary', () => {
         {
           asn: ['string', 'string', 'string'],
           botClass: ['LIKELY_AUTOMATED', 'LIKELY_HUMAN'],
+          continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['1d', '2d', '7d'],
           dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
@@ -221,6 +225,7 @@ describe('resource summary', () => {
         {
           asn: ['string', 'string', 'string'],
           botClass: ['LIKELY_AUTOMATED', 'LIKELY_HUMAN'],
+          continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['1d', '2d', '7d'],
           dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
@@ -266,6 +271,7 @@ describe('resource summary', () => {
         {
           asn: ['string', 'string', 'string'],
           botClass: ['LIKELY_AUTOMATED', 'LIKELY_HUMAN'],
+          continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['1d', '2d', '7d'],
           dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
@@ -311,6 +317,7 @@ describe('resource summary', () => {
         {
           asn: ['string', 'string', 'string'],
           botClass: ['LIKELY_AUTOMATED', 'LIKELY_HUMAN'],
+          continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['1d', '2d', '7d'],
           dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
