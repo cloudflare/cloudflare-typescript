@@ -3,11 +3,9 @@
 import { APIResource } from 'cloudflare/resource';
 import * as AccountSettingsAPI from 'cloudflare/resources/workers/account-settings';
 import * as AIAPI from 'cloudflare/resources/workers/ai';
-import * as DeploymentsByScriptAPI from 'cloudflare/resources/workers/deployments-by-script';
 import * as DomainsAPI from 'cloudflare/resources/workers/domains';
 import * as FiltersAPI from 'cloudflare/resources/workers/filters';
 import * as RoutesAPI from 'cloudflare/resources/workers/routes';
-import * as ScriptAPI from 'cloudflare/resources/workers/script';
 import * as SubdomainsAPI from 'cloudflare/resources/workers/subdomains';
 import * as DeploymentsAPI from 'cloudflare/resources/workers/deployments/deployments';
 import * as DurableObjectsAPI from 'cloudflare/resources/workers/durable-objects/durable-objects';
@@ -26,10 +24,7 @@ export class Workers extends APIResource {
   durableObjects: DurableObjectsAPI.DurableObjects = new DurableObjectsAPI.DurableObjects(this._client);
   queues: QueuesAPI.Queues = new QueuesAPI.Queues(this._client);
   subdomains: SubdomainsAPI.Subdomains = new SubdomainsAPI.Subdomains(this._client);
-  deploymentsByScript: DeploymentsByScriptAPI.DeploymentsByScript =
-    new DeploymentsByScriptAPI.DeploymentsByScript(this._client);
   services: ServicesAPI.Services = new ServicesAPI.Services(this._client);
-  script: ScriptAPI.Script = new ScriptAPI.Script(this._client);
 }
 
 export namespace Workers {
@@ -94,11 +89,5 @@ export namespace Workers {
   export import SubdomainGetResponse = SubdomainsAPI.SubdomainGetResponse;
   export import SubdomainUpdateParams = SubdomainsAPI.SubdomainUpdateParams;
   export import SubdomainGetParams = SubdomainsAPI.SubdomainGetParams;
-  export import DeploymentsByScript = DeploymentsByScriptAPI.DeploymentsByScript;
-  export import DeploymentsByScriptListResponse = DeploymentsByScriptAPI.DeploymentsByScriptListResponse;
-  export import DeploymentsByScriptDetailResponse = DeploymentsByScriptAPI.DeploymentsByScriptDetailResponse;
-  export import DeploymentsByScriptListParams = DeploymentsByScriptAPI.DeploymentsByScriptListParams;
-  export import DeploymentsByScriptDetailParams = DeploymentsByScriptAPI.DeploymentsByScriptDetailParams;
   export import Services = ServicesAPI.Services;
-  export import Script = ScriptAPI.Script;
 }

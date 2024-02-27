@@ -22,7 +22,6 @@ export {
   Datasets,
 } from './datasets';
 export { Email } from './email/index';
-export { Emails } from './emails/index';
 export { EntityGetResponse, EntityGetParams, Entities } from './entities/index';
 export { HTTP } from './http/index';
 export { NetflowTimeseriesResponse, NetflowTimeseriesParams, Netflows } from './netflows/index';

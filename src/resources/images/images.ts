@@ -1,28 +1,28 @@
 // File generated from our OpenAPI spec by Stainless.
 
 import { APIResource } from 'cloudflare/resource';
-import * as V1sAPI from 'cloudflare/resources/images/v1s/v1s';
-import * as V2sAPI from 'cloudflare/resources/images/v2s/v2s';
+import * as V1API from 'cloudflare/resources/images/v1/v1';
+import * as V2API from 'cloudflare/resources/images/v2/v2';
 
 export class Images extends APIResource {
-  v1s: V1sAPI.V1s = new V1sAPI.V1s(this._client);
-  v2s: V2sAPI.V2s = new V2sAPI.V2s(this._client);
+  v1: V1API.V1 = new V1API.V1(this._client);
+  v2: V2API.V2 = new V2API.V2(this._client);
 }
 
 export namespace Images {
-  export import V1s = V1sAPI.V1s;
-  export import V1CreateResponse = V1sAPI.V1CreateResponse;
-  export import V1ListResponse = V1sAPI.V1ListResponse;
-  export import V1DeleteResponse = V1sAPI.V1DeleteResponse;
-  export import V1EditResponse = V1sAPI.V1EditResponse;
-  export import V1GetResponse = V1sAPI.V1GetResponse;
-  export import V1ListResponsesV4PagePagination = V1sAPI.V1ListResponsesV4PagePagination;
-  export import V1CreateParams = V1sAPI.V1CreateParams;
-  export import V1ListParams = V1sAPI.V1ListParams;
-  export import V1DeleteParams = V1sAPI.V1DeleteParams;
-  export import V1EditParams = V1sAPI.V1EditParams;
-  export import V1GetParams = V1sAPI.V1GetParams;
-  export import V2s = V2sAPI.V2s;
-  export import V2ListResponse = V2sAPI.V2ListResponse;
-  export import V2ListParams = V2sAPI.V2ListParams;
+  export import V1 = V1API.V1;
+  export import V1CreateResponse = V1API.V1CreateResponse;
+  export import V1ListResponse = V1API.V1ListResponse;
+  export import V1DeleteResponse = V1API.V1DeleteResponse;
+  export import V1EditResponse = V1API.V1EditResponse;
+  export import V1GetResponse = V1API.V1GetResponse;
+  export import V1ListResponsesV4PagePagination = V1API.V1ListResponsesV4PagePagination;
+  export import V1CreateParams = V1API.V1CreateParams;
+  export import V1ListParams = V1API.V1ListParams;
+  export import V1DeleteParams = V1API.V1DeleteParams;
+  export import V1EditParams = V1API.V1EditParams;
+  export import V1GetParams = V1API.V1GetParams;
+  export import V2 = V2API.V2;
+  export import V2ListResponse = V2API.V2ListResponse;
+  export import V2ListParams = V2API.V2ListParams;
 }

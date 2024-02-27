@@ -7,5 +7,4 @@ export {
   AnalyticsStoredParams,
   Analytics,
 } from './analytics';
-export { KV } from './kv/index';
 export { Storage } from './storage';

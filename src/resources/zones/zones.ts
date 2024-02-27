@@ -4,15 +4,21 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as ZonesAPI from 'cloudflare/resources/zones/zones';
+import * as ActivationCheckAPI from 'cloudflare/resources/zones/activation-check';
 import * as CustomNameserversAPI from 'cloudflare/resources/zones/custom-nameservers';
 import * as HoldsAPI from 'cloudflare/resources/zones/holds';
+import * as SettingsAPI from 'cloudflare/resources/zones/settings/settings';
+import * as WorkersAPI from 'cloudflare/resources/zones/workers/workers';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class Zones extends APIResource {
+  activationCheck: ActivationCheckAPI.ActivationCheck = new ActivationCheckAPI.ActivationCheck(this._client);
+  settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
   customNameservers: CustomNameserversAPI.CustomNameservers = new CustomNameserversAPI.CustomNameservers(
     this._client,
   );
   holds: HoldsAPI.Holds = new HoldsAPI.Holds(this._client);
+  workers: WorkersAPI.Workers = new WorkersAPI.Workers(this._client);
 
   /**
    * Create Zone
@@ -825,6 +831,14 @@ export namespace Zones {
   export import ZoneDeleteParams = ZonesAPI.ZoneDeleteParams;
   export import ZoneEditParams = ZonesAPI.ZoneEditParams;
   export import ZoneGetParams = ZonesAPI.ZoneGetParams;
+  export import ActivationCheck = ActivationCheckAPI.ActivationCheck;
+  export import ActivationCheckTriggerResponse = ActivationCheckAPI.ActivationCheckTriggerResponse;
+  export import ActivationCheckTriggerParams = ActivationCheckAPI.ActivationCheckTriggerParams;
+  export import Settings = SettingsAPI.Settings;
+  export import SettingListResponse = SettingsAPI.SettingListResponse;
+  export import SettingEditResponse = SettingsAPI.SettingEditResponse;
+  export import SettingListParams = SettingsAPI.SettingListParams;
+  export import SettingEditParams = SettingsAPI.SettingEditParams;
   export import CustomNameservers = CustomNameserversAPI.CustomNameservers;
   export import CustomNameserverUpdateResponse = CustomNameserversAPI.CustomNameserverUpdateResponse;
   export import CustomNameserverGetResponse = CustomNameserversAPI.CustomNameserverGetResponse;
@@ -837,4 +851,5 @@ export namespace Zones {
   export import HoldCreateParams = HoldsAPI.HoldCreateParams;
   export import HoldDeleteParams = HoldsAPI.HoldDeleteParams;
   export import HoldGetParams = HoldsAPI.HoldGetParams;
+  export import Workers = WorkersAPI.Workers;
 }

@@ -171,7 +171,6 @@ export class Cloudflare extends Core.APIClient {
   zones: API.Zones = new API.Zones(this);
   loadBalancers: API.LoadBalancers = new API.LoadBalancers(this);
   access: API.Access = new API.Access(this);
-  dnsAnalytics: API.DNSAnalytics = new API.DNSAnalytics(this);
   cache: API.Cache = new API.Cache(this);
   ssl: API.SSL = new API.SSL(this);
   subscriptions: API.Subscriptions = new API.Subscriptions(this);
@@ -188,7 +187,7 @@ export class Cloudflare extends Core.APIClient {
   dnssec: API.DNSSEC = new API.DNSSEC(this);
   emails: API.Emails = new API.Emails(this);
   filters: API.Filters = new API.Filters(this);
-  firewalls: API.Firewalls = new API.Firewalls(this);
+  firewall: API.Firewall = new API.Firewall(this);
   healthchecks: API.Healthchecks = new API.Healthchecks(this);
   keylessCertificates: API.KeylessCertificates = new API.KeylessCertificates(this);
   logpush: API.Logpush = new API.Logpush(this);
@@ -197,11 +196,10 @@ export class Cloudflare extends Core.APIClient {
   pagerules: API.Pagerules = new API.Pagerules(this);
   rateLimits: API.RateLimits = new API.RateLimits(this);
   secondaryDNS: API.SecondaryDNS = new API.SecondaryDNS(this);
-  settings: API.Settings = new API.Settings(this);
   waitingRooms: API.WaitingRooms = new API.WaitingRooms(this);
   web3: API.Web3 = new API.Web3(this);
   workers: API.Workers = new API.Workers(this);
-  activationChecks: API.ActivationChecks = new API.ActivationChecks(this);
+  kv: API.KV = new API.KV(this);
   managedHeaders: API.ManagedHeaders = new API.ManagedHeaders(this);
   pageShield: API.PageShield = new API.PageShield(this);
   rulesets: API.Rulesets = new API.Rulesets(this);
@@ -216,8 +214,7 @@ export class Cloudflare extends Core.APIClient {
   dlp: API.DLP = new API.DLP(this);
   images: API.Images = new API.Images(this);
   intel: API.Intel = new API.Intel(this);
-  magics: API.Magics = new API.Magics(this);
-  accountMembers: API.AccountMembers = new API.AccountMembers(this);
+  magicTransit: API.MagicTransit = new API.MagicTransit(this);
   mnms: API.MNMs = new API.MNMs(this);
   mtlsCertificates: API.MTLSCertificates = new API.MTLSCertificates(this);
   pages: API.Pages = new API.Pages(this);
@@ -228,7 +225,6 @@ export class Cloudflare extends Core.APIClient {
   rules: API.Rules = new API.Rules(this);
   storage: API.Storage = new API.Storage(this);
   stream: API.Stream = new API.Stream(this);
-  teamnets: API.Teamnets = new API.Teamnets(this);
   gateways: API.Gateways = new API.Gateways(this);
   alerting: API.Alerting = new API.Alerting(this);
   devices: API.Devices = new API.Devices(this);
@@ -239,10 +235,7 @@ export class Cloudflare extends Core.APIClient {
   warpConnector: API.WARPConnector = new API.WARPConnector(this);
   dispatchers: API.Dispatchers = new API.Dispatchers(this);
   workersForPlatforms: API.WorkersForPlatforms = new API.WorkersForPlatforms(this);
-  workerDomains: API.WorkerDomains = new API.WorkerDomains(this);
-  workerScripts: API.WorkerScripts = new API.WorkerScripts(this);
-  zerotrust: API.Zerotrust = new API.Zerotrust(this);
-  addressing: API.Addressing = new API.Addressing(this);
+  zeroTrust: API.ZeroTrust = new API.ZeroTrust(this);
   challenges: API.Challenges = new API.Challenges(this);
   hyperdrive: API.Hyperdrive = new API.Hyperdrive(this);
   rum: API.RUM = new API.RUM(this);
@@ -251,7 +244,6 @@ export class Cloudflare extends Core.APIClient {
   radar: API.Radar = new API.Radar(this);
   botManagement: API.BotManagement = new API.BotManagement(this);
   originPostQuantumEncryption: API.OriginPostQuantumEncryption = new API.OriginPostQuantumEncryption(this);
-  firewall: API.Firewall = new API.Firewall(this);
   speed: API.Speed = new API.Speed(this);
   dcvDelegation: API.DcvDelegation = new API.DcvDelegation(this);
   hostnames: API.Hostnames = new API.Hostnames(this);
@@ -413,8 +405,6 @@ export namespace Cloudflare {
 
   export import Access = API.Access;
 
-  export import DNSAnalytics = API.DNSAnalytics;
-
   export import Cache = API.Cache;
   export import CachePurgeResponse = API.CachePurgeResponse;
   export import CachePurgeParams = API.CachePurgeParams;
@@ -517,7 +507,7 @@ export namespace Cloudflare {
   export import FilterUpdateParams = API.FilterUpdateParams;
   export import FilterListParams = API.FilterListParams;
 
-  export import Firewalls = API.Firewalls;
+  export import Firewall = API.Firewall;
 
   export import Healthchecks = API.Healthchecks;
   export import HealthcheckCreateResponse = API.HealthcheckCreateResponse;
@@ -583,12 +573,6 @@ export namespace Cloudflare {
 
   export import SecondaryDNS = API.SecondaryDNS;
 
-  export import Settings = API.Settings;
-  export import SettingListResponse = API.SettingListResponse;
-  export import SettingEditResponse = API.SettingEditResponse;
-  export import SettingListParams = API.SettingListParams;
-  export import SettingEditParams = API.SettingEditParams;
-
   export import WaitingRooms = API.WaitingRooms;
   export import WaitingRoomCreateResponse = API.WaitingRoomCreateResponse;
   export import WaitingRoomUpdateResponse = API.WaitingRoomUpdateResponse;
@@ -606,9 +590,7 @@ export namespace Cloudflare {
 
   export import Workers = API.Workers;
 
-  export import ActivationChecks = API.ActivationChecks;
-  export import ActivationCheckUpdateResponse = API.ActivationCheckUpdateResponse;
-  export import ActivationCheckUpdateParams = API.ActivationCheckUpdateParams;
+  export import KV = API.KV;
 
   export import ManagedHeaders = API.ManagedHeaders;
   export import ManagedHeaderListResponse = API.ManagedHeaderListResponse;
@@ -651,6 +633,10 @@ export namespace Cloudflare {
   export import Billing = API.Billing;
 
   export import BrandProtection = API.BrandProtection;
+  export import BrandProtectionSubmitResponse = API.BrandProtectionSubmitResponse;
+  export import BrandProtectionURLInfoResponse = API.BrandProtectionURLInfoResponse;
+  export import BrandProtectionSubmitParams = API.BrandProtectionSubmitParams;
+  export import BrandProtectionURLInfoParams = API.BrandProtectionURLInfoParams;
 
   export import Tunnels = API.Tunnels;
   export import TunnelCreateResponse = API.TunnelCreateResponse;
@@ -673,20 +659,7 @@ export namespace Cloudflare {
 
   export import Intel = API.Intel;
 
-  export import Magics = API.Magics;
-
-  export import AccountMembers = API.AccountMembers;
-  export import AccountMemberCreateResponse = API.AccountMemberCreateResponse;
-  export import AccountMemberUpdateResponse = API.AccountMemberUpdateResponse;
-  export import AccountMemberListResponse = API.AccountMemberListResponse;
-  export import AccountMemberDeleteResponse = API.AccountMemberDeleteResponse;
-  export import AccountMemberGetResponse = API.AccountMemberGetResponse;
-  export import AccountMemberListResponsesV4PagePaginationArray = API.AccountMemberListResponsesV4PagePaginationArray;
-  export import AccountMemberCreateParams = API.AccountMemberCreateParams;
-  export import AccountMemberUpdateParams = API.AccountMemberUpdateParams;
-  export import AccountMemberListParams = API.AccountMemberListParams;
-  export import AccountMemberDeleteParams = API.AccountMemberDeleteParams;
-  export import AccountMemberGetParams = API.AccountMemberGetParams;
+  export import MagicTransit = API.MagicTransit;
 
   export import MNMs = API.MNMs;
 
@@ -732,8 +705,6 @@ export namespace Cloudflare {
   export import StreamDeleteParams = API.StreamDeleteParams;
   export import StreamGetParams = API.StreamGetParams;
 
-  export import Teamnets = API.Teamnets;
-
   export import Gateways = API.Gateways;
   export import GatewayCreateResponse = API.GatewayCreateResponse;
   export import GatewayListResponse = API.GatewayListResponse;
@@ -775,16 +746,7 @@ export namespace Cloudflare {
 
   export import WorkersForPlatforms = API.WorkersForPlatforms;
 
-  export import WorkerDomains = API.WorkerDomains;
-  export import WorkerDomainGetResponse = API.WorkerDomainGetResponse;
-  export import WorkerDomainDeleteParams = API.WorkerDomainDeleteParams;
-  export import WorkerDomainGetParams = API.WorkerDomainGetParams;
-
-  export import WorkerScripts = API.WorkerScripts;
-
-  export import Zerotrust = API.Zerotrust;
-
-  export import Addressing = API.Addressing;
+  export import ZeroTrust = API.ZeroTrust;
 
   export import Challenges = API.Challenges;
 
@@ -811,8 +773,6 @@ export namespace Cloudflare {
   export import OriginPostQuantumEncryptionGetResponse = API.OriginPostQuantumEncryptionGetResponse;
   export import OriginPostQuantumEncryptionUpdateParams = API.OriginPostQuantumEncryptionUpdateParams;
   export import OriginPostQuantumEncryptionGetParams = API.OriginPostQuantumEncryptionGetParams;
-
-  export import Firewall = API.Firewall;
 
   export import Speed = API.Speed;
   export import SpeedDeleteResponse = API.SpeedDeleteResponse;

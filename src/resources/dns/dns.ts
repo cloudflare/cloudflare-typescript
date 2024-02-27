@@ -2,10 +2,12 @@
 
 import { APIResource } from 'cloudflare/resource';
 import * as RecordsAPI from 'cloudflare/resources/dns/records';
+import * as AnalyticsAPI from 'cloudflare/resources/dns/analytics/analytics';
 import * as FirewallAPI from 'cloudflare/resources/dns/firewall/firewall';
 
 export class DNS extends APIResource {
   records: RecordsAPI.Records = new RecordsAPI.Records(this._client);
+  analytics: AnalyticsAPI.Analytics = new AnalyticsAPI.Analytics(this._client);
   firewall: FirewallAPI.Firewall = new FirewallAPI.Firewall(this._client);
 }
 
@@ -30,6 +32,7 @@ export namespace DNS {
   export import RecordGetParams = RecordsAPI.RecordGetParams;
   export import RecordImportParams = RecordsAPI.RecordImportParams;
   export import RecordScanParams = RecordsAPI.RecordScanParams;
+  export import Analytics = AnalyticsAPI.Analytics;
   export import Firewall = FirewallAPI.Firewall;
   export import FirewallCreateResponse = FirewallAPI.FirewallCreateResponse;
   export import FirewallListResponse = FirewallAPI.FirewallListResponse;

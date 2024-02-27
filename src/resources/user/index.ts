@@ -16,7 +16,6 @@ export {
   Invites,
 } from './invites';
 export { LoadBalancers } from './load-balancers/index';
-export { LoadBalancingAnalytics } from './load-balancing-analytics/index';
 export {
   OrganizationListResponse,
   OrganizationDeleteResponse,

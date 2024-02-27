@@ -21,8 +21,18 @@ export {
 export {
   TimeseriesGroupARCResponse,
   TimeseriesGroupDKIMResponse,
+  TimeseriesGroupDMARCResponse,
+  TimeseriesGroupMaliciousResponse,
+  TimeseriesGroupSpamResponse,
+  TimeseriesGroupSPFResponse,
+  TimeseriesGroupThreatCategoryResponse,
   TimeseriesGroupARCParams,
   TimeseriesGroupDKIMParams,
+  TimeseriesGroupDMARCParams,
+  TimeseriesGroupMaliciousParams,
+  TimeseriesGroupSpamParams,
+  TimeseriesGroupSPFParams,
+  TimeseriesGroupThreatCategoryParams,
   TimeseriesGroups,
 } from './timeseries-groups';
 export { Top } from './top/index';

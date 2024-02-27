@@ -4,10 +4,10 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as PrefixesAPI from 'cloudflare/resources/addresses/prefixes/prefixes';
 import * as DelegationsAPI from 'cloudflare/resources/addresses/prefixes/delegations';
-import * as BGPsAPI from 'cloudflare/resources/addresses/prefixes/bgps/bgps';
+import * as BGPAPI from 'cloudflare/resources/addresses/prefixes/bgp/bgp';
 
 export class Prefixes extends APIResource {
-  bgps: BGPsAPI.BGPs = new BGPsAPI.BGPs(this._client);
+  bgp: BGPAPI.BGP = new BGPAPI.BGP(this._client);
   delegations: DelegationsAPI.Delegations = new DelegationsAPI.Delegations(this._client);
 
   /**
@@ -419,7 +419,7 @@ export namespace Prefixes {
   export import PrefixDeleteParams = PrefixesAPI.PrefixDeleteParams;
   export import PrefixEditParams = PrefixesAPI.PrefixEditParams;
   export import PrefixGetParams = PrefixesAPI.PrefixGetParams;
-  export import BGPs = BGPsAPI.BGPs;
+  export import BGP = BGPAPI.BGP;
   export import Delegations = DelegationsAPI.Delegations;
   export import DelegationCreateResponse = DelegationsAPI.DelegationCreateResponse;
   export import DelegationListResponse = DelegationsAPI.DelegationListResponse;

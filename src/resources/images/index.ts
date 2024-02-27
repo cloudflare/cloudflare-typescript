@@ -13,6 +13,6 @@ export {
   V1EditParams,
   V1GetParams,
   V1ListResponsesV4PagePagination,
-  V1s,
-} from './v1s/index';
-export { V2ListResponse, V2ListParams, V2s } from './v2s/index';
+  V1,
+} from './v1/index';
+export { V2ListResponse, V2ListParams, V2 } from './v2/index';

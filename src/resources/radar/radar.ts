@@ -10,7 +10,6 @@ import * as AttacksAPI from 'cloudflare/resources/radar/attacks/attacks';
 import * as BGPAPI from 'cloudflare/resources/radar/bgp/bgp';
 import * as DNSAPI from 'cloudflare/resources/radar/dns/dns';
 import * as EmailAPI from 'cloudflare/resources/radar/email/email';
-import * as EmailsAPI from 'cloudflare/resources/radar/emails/emails';
 import * as EntitiesAPI from 'cloudflare/resources/radar/entities/entities';
 import * as HTTPAPI from 'cloudflare/resources/radar/http/http';
 import * as NetflowsAPI from 'cloudflare/resources/radar/netflows/netflows';
@@ -32,7 +31,6 @@ export class Radar extends APIResource {
     new ConnectionTamperingAPI.ConnectionTampering(this._client);
   email: EmailAPI.Email = new EmailAPI.Email(this._client);
   attacks: AttacksAPI.Attacks = new AttacksAPI.Attacks(this._client);
-  emails: EmailsAPI.Emails = new EmailsAPI.Emails(this._client);
   entities: EntitiesAPI.Entities = new EntitiesAPI.Entities(this._client);
   http: HTTPAPI.HTTP = new HTTPAPI.HTTP(this._client);
   quality: QualityAPI.Quality = new QualityAPI.Quality(this._client);
@@ -72,7 +70,6 @@ export namespace Radar {
   export import ConnectionTamperingTimeseriesGroupsParams = ConnectionTamperingAPI.ConnectionTamperingTimeseriesGroupsParams;
   export import Email = EmailAPI.Email;
   export import Attacks = AttacksAPI.Attacks;
-  export import Emails = EmailsAPI.Emails;
   export import Entities = EntitiesAPI.Entities;
   export import EntityGetResponse = EntitiesAPI.EntityGetResponse;
   export import EntityGetParams = EntitiesAPI.EntityGetParams;
