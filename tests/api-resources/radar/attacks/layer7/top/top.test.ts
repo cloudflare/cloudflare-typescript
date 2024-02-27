@@ -40,7 +40,6 @@ describe('resource top', () => {
       cloudflare.radar.attacks.layer7.top.attacks(
         {
           asn: ['string', 'string', 'string'],
-          continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['1d', '2d', '7d'],
           dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
@@ -84,7 +83,6 @@ describe('resource top', () => {
       cloudflare.radar.attacks.layer7.top.industry(
         {
           asn: ['string', 'string', 'string'],
-          continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['1d', '2d', '7d'],
           dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
@@ -125,7 +123,6 @@ describe('resource top', () => {
       cloudflare.radar.attacks.layer7.top.vertical(
         {
           asn: ['string', 'string', 'string'],
-          continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['1d', '2d', '7d'],
           dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],

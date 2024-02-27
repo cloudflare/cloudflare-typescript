@@ -40,7 +40,6 @@ describe('resource timeseriesGroups', () => {
       cloudflare.radar.attacks.layer3.timeseriesGroups.bitrate(
         {
           aggInterval: '1h',
-          continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['1d', '2d', '7d'],
           dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
@@ -84,7 +83,6 @@ describe('resource timeseriesGroups', () => {
       cloudflare.radar.attacks.layer3.timeseriesGroups.duration(
         {
           aggInterval: '1h',
-          continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['1d', '2d', '7d'],
           dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
@@ -129,7 +127,6 @@ describe('resource timeseriesGroups', () => {
         {
           aggInterval: '1h',
           asn: ['string', 'string', 'string'],
-          continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['1d', '2d', '7d'],
           dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
@@ -169,7 +166,6 @@ describe('resource timeseriesGroups', () => {
       cloudflare.radar.attacks.layer3.timeseriesGroups.industry(
         {
           aggInterval: '1h',
-          continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['1d', '2d', '7d'],
           dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
@@ -213,7 +209,6 @@ describe('resource timeseriesGroups', () => {
       cloudflare.radar.attacks.layer3.timeseriesGroups.ipVersion(
         {
           aggInterval: '1h',
-          continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['1d', '2d', '7d'],
           dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
@@ -256,7 +251,6 @@ describe('resource timeseriesGroups', () => {
       cloudflare.radar.attacks.layer3.timeseriesGroups.protocol(
         {
           aggInterval: '1h',
-          continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['1d', '2d', '7d'],
           dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
@@ -299,7 +293,6 @@ describe('resource timeseriesGroups', () => {
       cloudflare.radar.attacks.layer3.timeseriesGroups.vector(
         {
           aggInterval: '1h',
-          continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['1d', '2d', '7d'],
           dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
@@ -344,7 +337,6 @@ describe('resource timeseriesGroups', () => {
       cloudflare.radar.attacks.layer3.timeseriesGroups.vertical(
         {
           aggInterval: '1h',
-          continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['1d', '2d', '7d'],
           dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],

@@ -595,6 +595,13 @@ export namespace SummaryThreatCategoryResponse {
 
 export interface SummaryARCParams {
   /**
+   * Array of comma separated list of ASNs, start with `-` to exclude from results.
+   * For example, `-174, 3356` excludes results from AS174, but includes results from
+   * AS3356.
+   */
+  asn?: Array<string>;
+
+  /**
    * End of the date range (inclusive).
    */
   dateEnd?: Array<string>;
@@ -643,6 +650,13 @@ export interface SummaryARCParams {
   format?: 'JSON' | 'CSV';
 
   /**
+   * Array of comma separated list of locations (alpha-2 country codes). Start with
+   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
+   * but includes results from PT.
+   */
+  location?: Array<string>;
+
+  /**
    * Array of names that will be used to name the series in responses.
    */
   name?: Array<string>;
@@ -651,11 +665,6 @@ export interface SummaryARCParams {
    * Filter for spf.
    */
   spf?: Array<'PASS' | 'NONE' | 'FAIL'>;
-
-  /**
-   * Filter for tls version.
-   */
-  tlsVersion?: Array<'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3'>;
 }
 
 export interface SummaryDKIMParams {
@@ -665,6 +674,13 @@ export interface SummaryDKIMParams {
   arc?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
   /**
+   * Array of comma separated list of ASNs, start with `-` to exclude from results.
+   * For example, `-174, 3356` excludes results from AS174, but includes results from
+   * AS3356.
+   */
+  asn?: Array<string>;
+
+  /**
    * End of the date range (inclusive).
    */
   dateEnd?: Array<string>;
@@ -708,6 +724,13 @@ export interface SummaryDKIMParams {
   format?: 'JSON' | 'CSV';
 
   /**
+   * Array of comma separated list of locations (alpha-2 country codes). Start with
+   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
+   * but includes results from PT.
+   */
+  location?: Array<string>;
+
+  /**
    * Array of names that will be used to name the series in responses.
    */
   name?: Array<string>;
@@ -716,11 +739,6 @@ export interface SummaryDKIMParams {
    * Filter for spf.
    */
   spf?: Array<'PASS' | 'NONE' | 'FAIL'>;
-
-  /**
-   * Filter for tls version.
-   */
-  tlsVersion?: Array<'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3'>;
 }
 
 export interface SummaryDMARCParams {
@@ -730,6 +748,13 @@ export interface SummaryDMARCParams {
   arc?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
   /**
+   * Array of comma separated list of ASNs, start with `-` to exclude from results.
+   * For example, `-174, 3356` excludes results from AS174, but includes results from
+   * AS3356.
+   */
+  asn?: Array<string>;
+
+  /**
    * End of the date range (inclusive).
    */
   dateEnd?: Array<string>;
@@ -773,6 +798,13 @@ export interface SummaryDMARCParams {
   format?: 'JSON' | 'CSV';
 
   /**
+   * Array of comma separated list of locations (alpha-2 country codes). Start with
+   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
+   * but includes results from PT.
+   */
+  location?: Array<string>;
+
+  /**
    * Array of names that will be used to name the series in responses.
    */
   name?: Array<string>;
@@ -781,11 +813,6 @@ export interface SummaryDMARCParams {
    * Filter for spf.
    */
   spf?: Array<'PASS' | 'NONE' | 'FAIL'>;
-
-  /**
-   * Filter for tls version.
-   */
-  tlsVersion?: Array<'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3'>;
 }
 
 export interface SummaryMaliciousParams {
@@ -795,6 +822,13 @@ export interface SummaryMaliciousParams {
   arc?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
   /**
+   * Array of comma separated list of ASNs, start with `-` to exclude from results.
+   * For example, `-174, 3356` excludes results from AS174, but includes results from
+   * AS3356.
+   */
+  asn?: Array<string>;
+
+  /**
    * End of the date range (inclusive).
    */
   dateEnd?: Array<string>;
@@ -843,6 +877,13 @@ export interface SummaryMaliciousParams {
   format?: 'JSON' | 'CSV';
 
   /**
+   * Array of comma separated list of locations (alpha-2 country codes). Start with
+   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
+   * but includes results from PT.
+   */
+  location?: Array<string>;
+
+  /**
    * Array of names that will be used to name the series in responses.
    */
   name?: Array<string>;
@@ -851,11 +892,6 @@ export interface SummaryMaliciousParams {
    * Filter for spf.
    */
   spf?: Array<'PASS' | 'NONE' | 'FAIL'>;
-
-  /**
-   * Filter for tls version.
-   */
-  tlsVersion?: Array<'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3'>;
 }
 
 export interface SummarySpamParams {
@@ -865,6 +901,13 @@ export interface SummarySpamParams {
   arc?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
   /**
+   * Array of comma separated list of ASNs, start with `-` to exclude from results.
+   * For example, `-174, 3356` excludes results from AS174, but includes results from
+   * AS3356.
+   */
+  asn?: Array<string>;
+
+  /**
    * End of the date range (inclusive).
    */
   dateEnd?: Array<string>;
@@ -913,6 +956,13 @@ export interface SummarySpamParams {
   format?: 'JSON' | 'CSV';
 
   /**
+   * Array of comma separated list of locations (alpha-2 country codes). Start with
+   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
+   * but includes results from PT.
+   */
+  location?: Array<string>;
+
+  /**
    * Array of names that will be used to name the series in responses.
    */
   name?: Array<string>;
@@ -921,11 +971,6 @@ export interface SummarySpamParams {
    * Filter for spf.
    */
   spf?: Array<'PASS' | 'NONE' | 'FAIL'>;
-
-  /**
-   * Filter for tls version.
-   */
-  tlsVersion?: Array<'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3'>;
 }
 
 export interface SummarySPFParams {
@@ -935,6 +980,13 @@ export interface SummarySPFParams {
   arc?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
   /**
+   * Array of comma separated list of ASNs, start with `-` to exclude from results.
+   * For example, `-174, 3356` excludes results from AS174, but includes results from
+   * AS3356.
+   */
+  asn?: Array<string>;
+
+  /**
    * End of the date range (inclusive).
    */
   dateEnd?: Array<string>;
@@ -983,14 +1035,16 @@ export interface SummarySPFParams {
   format?: 'JSON' | 'CSV';
 
   /**
+   * Array of comma separated list of locations (alpha-2 country codes). Start with
+   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
+   * but includes results from PT.
+   */
+  location?: Array<string>;
+
+  /**
    * Array of names that will be used to name the series in responses.
    */
   name?: Array<string>;
-
-  /**
-   * Filter for tls version.
-   */
-  tlsVersion?: Array<'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3'>;
 }
 
 export interface SummaryThreatCategoryParams {
@@ -1000,6 +1054,13 @@ export interface SummaryThreatCategoryParams {
   arc?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
   /**
+   * Array of comma separated list of ASNs, start with `-` to exclude from results.
+   * For example, `-174, 3356` excludes results from AS174, but includes results from
+   * AS3356.
+   */
+  asn?: Array<string>;
+
+  /**
    * End of the date range (inclusive).
    */
   dateEnd?: Array<string>;
@@ -1046,6 +1107,13 @@ export interface SummaryThreatCategoryParams {
    * Format results are returned in.
    */
   format?: 'JSON' | 'CSV';
+
+  /**
+   * Array of comma separated list of locations (alpha-2 country codes). Start with
+   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
+   * but includes results from PT.
+   */
+  location?: Array<string>;
 
   /**
    * Array of names that will be used to name the series in responses.
@@ -1056,11 +1124,6 @@ export interface SummaryThreatCategoryParams {
    * Filter for spf.
    */
   spf?: Array<'PASS' | 'NONE' | 'FAIL'>;
-
-  /**
-   * Filter for tls version.
-   */
-  tlsVersion?: Array<'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3'>;
 }
 
 export namespace Summary {

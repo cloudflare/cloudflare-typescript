@@ -112,13 +112,6 @@ export interface OSGetParams {
   botClass?: Array<'LIKELY_AUTOMATED' | 'LIKELY_HUMAN'>;
 
   /**
-   * Array of comma separated list of continents (alpha-2 continent codes). Start
-   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
-   * Europe, but includes results from North America.
-   */
-  continent?: Array<string>;
-
-  /**
    * End of the date range (inclusive).
    */
   dateEnd?: Array<string>;
