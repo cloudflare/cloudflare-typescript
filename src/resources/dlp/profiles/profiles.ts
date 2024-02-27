@@ -61,6 +61,12 @@ export namespace ProfileListResponse {
     allowed_match_count?: number;
 
     /**
+     * Scan the context of predefined entries to only return matches surrounded by
+     * keywords.
+     */
+    context_awareness?: DLPPredefinedProfile.ContextAwareness;
+
+    /**
      * The entries for this profile.
      */
     entries?: Array<DLPPredefinedProfile.Entry>;
@@ -77,6 +83,35 @@ export namespace ProfileListResponse {
   }
 
   export namespace DLPPredefinedProfile {
+    /**
+     * Scan the context of predefined entries to only return matches surrounded by
+     * keywords.
+     */
+    export interface ContextAwareness {
+      /**
+       * If true, scan the context of predefined entries to only return matches
+       * surrounded by keywords.
+       */
+      enabled: boolean;
+
+      /**
+       * Content types to exclude from context analysis and return all matches.
+       */
+      skip: ContextAwareness.Skip;
+    }
+
+    export namespace ContextAwareness {
+      /**
+       * Content types to exclude from context analysis and return all matches.
+       */
+      export interface Skip {
+        /**
+         * If the content type is a file, skip context analysis and return all matches.
+         */
+        files: boolean;
+      }
+    }
+
     /**
      * A predefined entry that matches a profile
      */
@@ -114,6 +149,12 @@ export namespace ProfileListResponse {
      */
     allowed_match_count?: number;
 
+    /**
+     * Scan the context of predefined entries to only return matches surrounded by
+     * keywords.
+     */
+    context_awareness?: DLPCustomProfile.ContextAwareness;
+
     created_at?: string;
 
     /**
@@ -140,6 +181,35 @@ export namespace ProfileListResponse {
   }
 
   export namespace DLPCustomProfile {
+    /**
+     * Scan the context of predefined entries to only return matches surrounded by
+     * keywords.
+     */
+    export interface ContextAwareness {
+      /**
+       * If true, scan the context of predefined entries to only return matches
+       * surrounded by keywords.
+       */
+      enabled: boolean;
+
+      /**
+       * Content types to exclude from context analysis and return all matches.
+       */
+      skip: ContextAwareness.Skip;
+    }
+
+    export namespace ContextAwareness {
+      /**
+       * Content types to exclude from context analysis and return all matches.
+       */
+      export interface Skip {
+        /**
+         * If the content type is a file, skip context analysis and return all matches.
+         */
+        files: boolean;
+      }
+    }
+
     /**
      * A custom entry that matches a profile
      */
@@ -274,6 +344,12 @@ export namespace ProfileGetResponse {
     allowed_match_count?: number;
 
     /**
+     * Scan the context of predefined entries to only return matches surrounded by
+     * keywords.
+     */
+    context_awareness?: DLPPredefinedProfile.ContextAwareness;
+
+    /**
      * The entries for this profile.
      */
     entries?: Array<DLPPredefinedProfile.Entry>;
@@ -290,6 +366,35 @@ export namespace ProfileGetResponse {
   }
 
   export namespace DLPPredefinedProfile {
+    /**
+     * Scan the context of predefined entries to only return matches surrounded by
+     * keywords.
+     */
+    export interface ContextAwareness {
+      /**
+       * If true, scan the context of predefined entries to only return matches
+       * surrounded by keywords.
+       */
+      enabled: boolean;
+
+      /**
+       * Content types to exclude from context analysis and return all matches.
+       */
+      skip: ContextAwareness.Skip;
+    }
+
+    export namespace ContextAwareness {
+      /**
+       * Content types to exclude from context analysis and return all matches.
+       */
+      export interface Skip {
+        /**
+         * If the content type is a file, skip context analysis and return all matches.
+         */
+        files: boolean;
+      }
+    }
+
     /**
      * A predefined entry that matches a profile
      */
@@ -327,6 +432,12 @@ export namespace ProfileGetResponse {
      */
     allowed_match_count?: number;
 
+    /**
+     * Scan the context of predefined entries to only return matches surrounded by
+     * keywords.
+     */
+    context_awareness?: DLPCustomProfile.ContextAwareness;
+
     created_at?: string;
 
     /**
@@ -353,6 +464,35 @@ export namespace ProfileGetResponse {
   }
 
   export namespace DLPCustomProfile {
+    /**
+     * Scan the context of predefined entries to only return matches surrounded by
+     * keywords.
+     */
+    export interface ContextAwareness {
+      /**
+       * If true, scan the context of predefined entries to only return matches
+       * surrounded by keywords.
+       */
+      enabled: boolean;
+
+      /**
+       * Content types to exclude from context analysis and return all matches.
+       */
+      skip: ContextAwareness.Skip;
+    }
+
+    export namespace ContextAwareness {
+      /**
+       * Content types to exclude from context analysis and return all matches.
+       */
+      export interface Skip {
+        /**
+         * If the content type is a file, skip context analysis and return all matches.
+         */
+        files: boolean;
+      }
+    }
+
     /**
      * A custom entry that matches a profile
      */
