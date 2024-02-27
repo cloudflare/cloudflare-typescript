@@ -82,12 +82,6 @@ export namespace CustomCreateResponse {
      */
     allowed_match_count?: number;
 
-    /**
-     * Scan the context of predefined entries to only return matches surrounded by
-     * keywords.
-     */
-    context_awareness?: CustomCreateResponseItem.ContextAwareness;
-
     created_at?: string;
 
     /**
@@ -114,35 +108,6 @@ export namespace CustomCreateResponse {
   }
 
   export namespace CustomCreateResponseItem {
-    /**
-     * Scan the context of predefined entries to only return matches surrounded by
-     * keywords.
-     */
-    export interface ContextAwareness {
-      /**
-       * If true, scan the context of predefined entries to only return matches
-       * surrounded by keywords.
-       */
-      enabled: boolean;
-
-      /**
-       * Content types to exclude from context analysis and return all matches.
-       */
-      skip: ContextAwareness.Skip;
-    }
-
-    export namespace ContextAwareness {
-      /**
-       * Content types to exclude from context analysis and return all matches.
-       */
-      export interface Skip {
-        /**
-         * If the content type is a file, skip context analysis and return all matches.
-         */
-        files: boolean;
-      }
-    }
-
     /**
      * A custom entry that matches a profile
      */
@@ -208,12 +173,6 @@ export interface CustomUpdateResponse {
    */
   allowed_match_count?: number;
 
-  /**
-   * Scan the context of predefined entries to only return matches surrounded by
-   * keywords.
-   */
-  context_awareness?: CustomUpdateResponse.ContextAwareness;
-
   created_at?: string;
 
   /**
@@ -240,35 +199,6 @@ export interface CustomUpdateResponse {
 }
 
 export namespace CustomUpdateResponse {
-  /**
-   * Scan the context of predefined entries to only return matches surrounded by
-   * keywords.
-   */
-  export interface ContextAwareness {
-    /**
-     * If true, scan the context of predefined entries to only return matches
-     * surrounded by keywords.
-     */
-    enabled: boolean;
-
-    /**
-     * Content types to exclude from context analysis and return all matches.
-     */
-    skip: ContextAwareness.Skip;
-  }
-
-  export namespace ContextAwareness {
-    /**
-     * Content types to exclude from context analysis and return all matches.
-     */
-    export interface Skip {
-      /**
-       * If the content type is a file, skip context analysis and return all matches.
-       */
-      files: boolean;
-    }
-  }
-
   /**
    * A custom entry that matches a profile
    */
@@ -335,12 +265,6 @@ export interface CustomGetResponse {
    */
   allowed_match_count?: number;
 
-  /**
-   * Scan the context of predefined entries to only return matches surrounded by
-   * keywords.
-   */
-  context_awareness?: CustomGetResponse.ContextAwareness;
-
   created_at?: string;
 
   /**
@@ -367,35 +291,6 @@ export interface CustomGetResponse {
 }
 
 export namespace CustomGetResponse {
-  /**
-   * Scan the context of predefined entries to only return matches surrounded by
-   * keywords.
-   */
-  export interface ContextAwareness {
-    /**
-     * If true, scan the context of predefined entries to only return matches
-     * surrounded by keywords.
-     */
-    enabled: boolean;
-
-    /**
-     * Content types to exclude from context analysis and return all matches.
-     */
-    skip: ContextAwareness.Skip;
-  }
-
-  export namespace ContextAwareness {
-    /**
-     * Content types to exclude from context analysis and return all matches.
-     */
-    export interface Skip {
-      /**
-       * If the content type is a file, skip context analysis and return all matches.
-       */
-      files: boolean;
-    }
-  }
-
   /**
    * A custom entry that matches a profile
    */
@@ -469,12 +364,6 @@ export namespace CustomCreateParams {
     allowed_match_count?: number;
 
     /**
-     * Scan the context of predefined entries to only return matches surrounded by
-     * keywords.
-     */
-    context_awareness?: Profile.ContextAwareness;
-
-    /**
      * The description of the profile.
      */
     description?: string;
@@ -491,35 +380,6 @@ export namespace CustomCreateParams {
   }
 
   export namespace Profile {
-    /**
-     * Scan the context of predefined entries to only return matches surrounded by
-     * keywords.
-     */
-    export interface ContextAwareness {
-      /**
-       * If true, scan the context of predefined entries to only return matches
-       * surrounded by keywords.
-       */
-      enabled: boolean;
-
-      /**
-       * Content types to exclude from context analysis and return all matches.
-       */
-      skip: ContextAwareness.Skip;
-    }
-
-    export namespace ContextAwareness {
-      /**
-       * Content types to exclude from context analysis and return all matches.
-       */
-      export interface Skip {
-        /**
-         * If the content type is a file, skip context analysis and return all matches.
-         */
-        files: boolean;
-      }
-    }
-
     /**
      * A custom entry create payload
      */
@@ -573,12 +433,6 @@ export interface CustomUpdateParams {
   allowed_match_count?: number;
 
   /**
-   * Body param: Scan the context of predefined entries to only return matches
-   * surrounded by keywords.
-   */
-  context_awareness?: CustomUpdateParams.ContextAwareness;
-
-  /**
    * Body param: The description of the profile.
    */
   description?: string;
@@ -605,35 +459,6 @@ export interface CustomUpdateParams {
 }
 
 export namespace CustomUpdateParams {
-  /**
-   * Scan the context of predefined entries to only return matches surrounded by
-   * keywords.
-   */
-  export interface ContextAwareness {
-    /**
-     * If true, scan the context of predefined entries to only return matches
-     * surrounded by keywords.
-     */
-    enabled: boolean;
-
-    /**
-     * Content types to exclude from context analysis and return all matches.
-     */
-    skip: ContextAwareness.Skip;
-  }
-
-  export namespace ContextAwareness {
-    /**
-     * Content types to exclude from context analysis and return all matches.
-     */
-    export interface Skip {
-      /**
-       * If the content type is a file, skip context analysis and return all matches.
-       */
-      files: boolean;
-    }
-  }
-
   /**
    * A custom entry that matches a profile
    */

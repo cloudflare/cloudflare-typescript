@@ -35,7 +35,6 @@ describe('resource predefineds', () => {
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
         allowed_match_count: 5,
-        context_awareness: { enabled: true, skip: { files: true } },
         entries: [{ enabled: true }, { enabled: true }, { enabled: true }],
       },
     );
