@@ -4105,7 +4105,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/request-tracers/traces.ts">JjJoFrd1Trace</a></code>
 - <code><a href="./src/resources/request-tracers/traces.ts">TraceCreateResponse</a></code>
 
 Methods:
