@@ -4105,6 +4105,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/request-tracers/traces.ts">HhgJaXcvTrace</a></code>
 - <code><a href="./src/resources/request-tracers/traces.ts">TraceCreateResponse</a></code>
 
 Methods:
@@ -5097,6 +5098,16 @@ Methods:
 - <code title="patch /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/settings">client.workersForPlatforms.dispatch.namespaces.scripts.settings.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/settings.ts">edit</a>(dispatchNamespace, scriptName, { ...params }) -> SettingEditResponse</code>
 - <code title="get /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/settings">client.workersForPlatforms.dispatch.namespaces.scripts.settings.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/settings.ts">get</a>(dispatchNamespace, scriptName, { ...params }) -> SettingGetResponse</code>
 
+##### Bindings
+
+Types:
+
+- <code><a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/bindings.ts">BindingGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/bindings">client.workersForPlatforms.dispatch.namespaces.scripts.bindings.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/bindings.ts">get</a>(dispatchNamespace, scriptName, { ...params }) -> BindingGetResponse</code>
+
 # ZeroTrust
 
 ## ConnectivitySettings
@@ -5483,36 +5494,6 @@ Methods:
 ## Email
 
 ### Security
-
-#### Top
-
-##### Ases
-
-###### ARC
-
-###### DKIM
-
-###### DMARC
-
-###### Malicious
-
-###### Spam
-
-###### SPF
-
-##### Locations
-
-###### ARC
-
-###### DKIM
-
-###### DMARC
-
-###### Malicious
-
-###### Spam
-
-###### SPF
 
 #### Summary
 
