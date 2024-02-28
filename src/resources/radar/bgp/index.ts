@@ -7,9 +7,11 @@ export {
   RouteMoasResponse,
   RoutePfx2asResponse,
   RouteStatsResponse,
+  RouteTimeseriesResponse,
   RouteMoasParams,
   RoutePfx2asParams,
   RouteStatsParams,
+  RouteTimeseriesParams,
   Routes,
 } from './routes';
 export { TopPrefixesResponse, TopPrefixesParams, Top } from './top/index';

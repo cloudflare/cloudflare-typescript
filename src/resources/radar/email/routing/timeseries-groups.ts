@@ -3,7 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
-import * as TimeseriesGroupsAPI from 'cloudflare/resources/radar/email/security/timeseries-groups';
+import * as TimeseriesGroupsAPI from 'cloudflare/resources/radar/email/routing/timeseries-groups';
 
 export class TimeseriesGroups extends APIResource {
   /**
@@ -22,7 +22,7 @@ export class TimeseriesGroups extends APIResource {
       return this.arc({}, query);
     }
     return (
-      this._client.get('/radar/email/security/timeseries_groups/arc', {
+      this._client.get('/radar/email/routing/timeseries_groups/arc', {
         query,
         ...options,
       }) as Core.APIPromise<{ result: TimeseriesGroupARCResponse }>
@@ -45,7 +45,7 @@ export class TimeseriesGroups extends APIResource {
       return this.dkim({}, query);
     }
     return (
-      this._client.get('/radar/email/security/timeseries_groups/dkim', {
+      this._client.get('/radar/email/routing/timeseries_groups/dkim', {
         query,
         ...options,
       }) as Core.APIPromise<{ result: TimeseriesGroupDKIMResponse }>
@@ -68,7 +68,7 @@ export class TimeseriesGroups extends APIResource {
       return this.dmarc({}, query);
     }
     return (
-      this._client.get('/radar/email/security/timeseries_groups/dmarc', {
+      this._client.get('/radar/email/routing/timeseries_groups/dmarc', {
         query,
         ...options,
       }) as Core.APIPromise<{ result: TimeseriesGroupDMARCResponse }>
@@ -76,48 +76,48 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Percentage distribution of emails classified as MALICIOUS over time.
+   * Percentage distribution of emails by Encrypted over time.
    */
-  malicious(
-    query?: TimeseriesGroupMaliciousParams,
+  encrypted(
+    query?: TimeseriesGroupEncryptedParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupMaliciousResponse>;
-  malicious(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupMaliciousResponse>;
-  malicious(
-    query: TimeseriesGroupMaliciousParams | Core.RequestOptions = {},
+  ): Core.APIPromise<TimeseriesGroupEncryptedResponse>;
+  encrypted(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupEncryptedResponse>;
+  encrypted(
+    query: TimeseriesGroupEncryptedParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupMaliciousResponse> {
+  ): Core.APIPromise<TimeseriesGroupEncryptedResponse> {
     if (isRequestOptions(query)) {
-      return this.malicious({}, query);
+      return this.encrypted({}, query);
     }
     return (
-      this._client.get('/radar/email/security/timeseries_groups/malicious', {
+      this._client.get('/radar/email/routing/timeseries_groups/encrypted', {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: TimeseriesGroupMaliciousResponse }>
+      }) as Core.APIPromise<{ result: TimeseriesGroupEncryptedResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
-   * Percentage distribution of emails classified as SPAM over time.
+   * Percentage distribution of emails by Ip Version over time.
    */
-  spam(
-    query?: TimeseriesGroupSpamParams,
+  ipVersion(
+    query?: TimeseriesGroupIPVersionParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupSpamResponse>;
-  spam(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupSpamResponse>;
-  spam(
-    query: TimeseriesGroupSpamParams | Core.RequestOptions = {},
+  ): Core.APIPromise<TimeseriesGroupIPVersionResponse>;
+  ipVersion(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupIPVersionResponse>;
+  ipVersion(
+    query: TimeseriesGroupIPVersionParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupSpamResponse> {
+  ): Core.APIPromise<TimeseriesGroupIPVersionResponse> {
     if (isRequestOptions(query)) {
-      return this.spam({}, query);
+      return this.ipVersion({}, query);
     }
     return (
-      this._client.get('/radar/email/security/timeseries_groups/spam', {
+      this._client.get('/radar/email/routing/timeseries_groups/ip_version', {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: TimeseriesGroupSpamResponse }>
+      }) as Core.APIPromise<{ result: TimeseriesGroupIPVersionResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -137,79 +137,10 @@ export class TimeseriesGroups extends APIResource {
       return this.spf({}, query);
     }
     return (
-      this._client.get('/radar/email/security/timeseries_groups/spf', {
+      this._client.get('/radar/email/routing/timeseries_groups/spf', {
         query,
         ...options,
       }) as Core.APIPromise<{ result: TimeseriesGroupSPFResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Percentage distribution of emails classified as SPOOF over time.
-   */
-  spoof(
-    query?: TimeseriesGroupSpoofParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupSpoofResponse>;
-  spoof(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupSpoofResponse>;
-  spoof(
-    query: TimeseriesGroupSpoofParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupSpoofResponse> {
-    if (isRequestOptions(query)) {
-      return this.spoof({}, query);
-    }
-    return (
-      this._client.get('/radar/email/security/timeseries_groups/spoof', {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: TimeseriesGroupSpoofResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Percentage distribution of emails classified in Threat Categories over time.
-   */
-  threatCategory(
-    query?: TimeseriesGroupThreatCategoryParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupThreatCategoryResponse>;
-  threatCategory(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupThreatCategoryResponse>;
-  threatCategory(
-    query: TimeseriesGroupThreatCategoryParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupThreatCategoryResponse> {
-    if (isRequestOptions(query)) {
-      return this.threatCategory({}, query);
-    }
-    return (
-      this._client.get('/radar/email/security/timeseries_groups/threat_category', {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: TimeseriesGroupThreatCategoryResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Percentage distribution of emails classified per TLS Version over time.
-   */
-  tlsVersion(
-    query?: TimeseriesGroupTLSVersionParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupTLSVersionResponse>;
-  tlsVersion(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupTLSVersionResponse>;
-  tlsVersion(
-    query: TimeseriesGroupTLSVersionParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupTLSVersionResponse> {
-    if (isRequestOptions(query)) {
-      return this.tlsVersion({}, query);
-    }
-    return (
-      this._client.get('/radar/email/security/timeseries_groups/tls_version', {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: TimeseriesGroupTLSVersionResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -262,31 +193,31 @@ export namespace TimeseriesGroupDMARCResponse {
   }
 }
 
-export interface TimeseriesGroupMaliciousResponse {
+export interface TimeseriesGroupEncryptedResponse {
   meta: unknown;
 
-  serie_0: TimeseriesGroupMaliciousResponse.Serie0;
+  serie_0: TimeseriesGroupEncryptedResponse.Serie0;
 }
 
-export namespace TimeseriesGroupMaliciousResponse {
+export namespace TimeseriesGroupEncryptedResponse {
   export interface Serie0 {
-    MALICIOUS: Array<string>;
+    ENCRYPTED: Array<string>;
 
-    NOT_MALICIOUS: Array<string>;
+    NOT_ENCRYPTED: Array<string>;
   }
 }
 
-export interface TimeseriesGroupSpamResponse {
+export interface TimeseriesGroupIPVersionResponse {
   meta: unknown;
 
-  serie_0: TimeseriesGroupSpamResponse.Serie0;
+  serie_0: TimeseriesGroupIPVersionResponse.Serie0;
 }
 
-export namespace TimeseriesGroupSpamResponse {
+export namespace TimeseriesGroupIPVersionResponse {
   export interface Serie0 {
-    NOT_SPAM: Array<string>;
+    IPv4: Array<string>;
 
-    SPAM: Array<string>;
+    IPv6: Array<string>;
   }
 }
 
@@ -303,56 +234,6 @@ export namespace TimeseriesGroupSPFResponse {
     NONE: Array<string>;
 
     PASS: Array<string>;
-  }
-}
-
-export interface TimeseriesGroupSpoofResponse {
-  meta: unknown;
-
-  serie_0: TimeseriesGroupSpoofResponse.Serie0;
-}
-
-export namespace TimeseriesGroupSpoofResponse {
-  export interface Serie0 {
-    NOT_SPOOF: Array<string>;
-
-    SPOOF: Array<string>;
-  }
-}
-
-export interface TimeseriesGroupThreatCategoryResponse {
-  meta: unknown;
-
-  serie_0: TimeseriesGroupThreatCategoryResponse.Serie0;
-}
-
-export namespace TimeseriesGroupThreatCategoryResponse {
-  export interface Serie0 {
-    BrandImpersonation: Array<string>;
-
-    CredentialHarvester: Array<string>;
-
-    IdentityDeception: Array<string>;
-
-    Link: Array<string>;
-  }
-}
-
-export interface TimeseriesGroupTLSVersionResponse {
-  meta: unknown;
-
-  serie_0: TimeseriesGroupTLSVersionResponse.Serie0;
-}
-
-export namespace TimeseriesGroupTLSVersionResponse {
-  export interface Serie0 {
-    'TLS 1.0': Array<string>;
-
-    'TLS 1.1': Array<string>;
-
-    'TLS 1.2': Array<string>;
-
-    'TLS 1.3': Array<string>;
   }
 }
 
@@ -408,9 +289,19 @@ export interface TimeseriesGroupARCParams {
   dmarc?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
   /**
+   * Filter for encrypted emails.
+   */
+  encrypted?: Array<'ENCRYPTED' | 'NOT_ENCRYPTED'>;
+
+  /**
    * Format results are returned in.
    */
   format?: 'JSON' | 'CSV';
+
+  /**
+   * Filter for ip version.
+   */
+  ipVersion?: Array<'IPv4' | 'IPv6'>;
 
   /**
    * Array of names that will be used to name the series in responses.
@@ -421,11 +312,6 @@ export interface TimeseriesGroupARCParams {
    * Filter for spf.
    */
   spf?: Array<'PASS' | 'NONE' | 'FAIL'>;
-
-  /**
-   * Filter for tls version.
-   */
-  tlsVersion?: Array<'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3'>;
 }
 
 export interface TimeseriesGroupDKIMParams {
@@ -480,9 +366,19 @@ export interface TimeseriesGroupDKIMParams {
   dmarc?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
   /**
+   * Filter for encrypted emails.
+   */
+  encrypted?: Array<'ENCRYPTED' | 'NOT_ENCRYPTED'>;
+
+  /**
    * Format results are returned in.
    */
   format?: 'JSON' | 'CSV';
+
+  /**
+   * Filter for ip version.
+   */
+  ipVersion?: Array<'IPv4' | 'IPv6'>;
 
   /**
    * Array of names that will be used to name the series in responses.
@@ -493,11 +389,6 @@ export interface TimeseriesGroupDKIMParams {
    * Filter for spf.
    */
   spf?: Array<'PASS' | 'NONE' | 'FAIL'>;
-
-  /**
-   * Filter for tls version.
-   */
-  tlsVersion?: Array<'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3'>;
 }
 
 export interface TimeseriesGroupDMARCParams {
@@ -552,9 +443,19 @@ export interface TimeseriesGroupDMARCParams {
   dkim?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
   /**
+   * Filter for encrypted emails.
+   */
+  encrypted?: Array<'ENCRYPTED' | 'NOT_ENCRYPTED'>;
+
+  /**
    * Format results are returned in.
    */
   format?: 'JSON' | 'CSV';
+
+  /**
+   * Filter for ip version.
+   */
+  ipVersion?: Array<'IPv4' | 'IPv6'>;
 
   /**
    * Array of names that will be used to name the series in responses.
@@ -565,14 +466,9 @@ export interface TimeseriesGroupDMARCParams {
    * Filter for spf.
    */
   spf?: Array<'PASS' | 'NONE' | 'FAIL'>;
-
-  /**
-   * Filter for tls version.
-   */
-  tlsVersion?: Array<'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3'>;
 }
 
-export interface TimeseriesGroupMaliciousParams {
+export interface TimeseriesGroupEncryptedParams {
   /**
    * Aggregation interval results should be returned in (for example, in 15 minutes
    * or 1 hour intervals). Refer to
@@ -634,6 +530,11 @@ export interface TimeseriesGroupMaliciousParams {
   format?: 'JSON' | 'CSV';
 
   /**
+   * Filter for ip version.
+   */
+  ipVersion?: Array<'IPv4' | 'IPv6'>;
+
+  /**
    * Array of names that will be used to name the series in responses.
    */
   name?: Array<string>;
@@ -642,14 +543,9 @@ export interface TimeseriesGroupMaliciousParams {
    * Filter for spf.
    */
   spf?: Array<'PASS' | 'NONE' | 'FAIL'>;
-
-  /**
-   * Filter for tls version.
-   */
-  tlsVersion?: Array<'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3'>;
 }
 
-export interface TimeseriesGroupSpamParams {
+export interface TimeseriesGroupIPVersionParams {
   /**
    * Aggregation interval results should be returned in (for example, in 15 minutes
    * or 1 hour intervals). Refer to
@@ -706,6 +602,11 @@ export interface TimeseriesGroupSpamParams {
   dmarc?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
   /**
+   * Filter for encrypted emails.
+   */
+  encrypted?: Array<'ENCRYPTED' | 'NOT_ENCRYPTED'>;
+
+  /**
    * Format results are returned in.
    */
   format?: 'JSON' | 'CSV';
@@ -719,11 +620,6 @@ export interface TimeseriesGroupSpamParams {
    * Filter for spf.
    */
   spf?: Array<'PASS' | 'NONE' | 'FAIL'>;
-
-  /**
-   * Filter for tls version.
-   */
-  tlsVersion?: Array<'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3'>;
 }
 
 export interface TimeseriesGroupSPFParams {
@@ -783,76 +679,9 @@ export interface TimeseriesGroupSPFParams {
   dmarc?: Array<'PASS' | 'NONE' | 'FAIL'>;
 
   /**
-   * Format results are returned in.
+   * Filter for encrypted emails.
    */
-  format?: 'JSON' | 'CSV';
-
-  /**
-   * Array of names that will be used to name the series in responses.
-   */
-  name?: Array<string>;
-
-  /**
-   * Filter for tls version.
-   */
-  tlsVersion?: Array<'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3'>;
-}
-
-export interface TimeseriesGroupSpoofParams {
-  /**
-   * Aggregation interval results should be returned in (for example, in 15 minutes
-   * or 1 hour intervals). Refer to
-   * [Aggregation intervals](https://developers.cloudflare.com/radar/concepts/aggregation-intervals/).
-   */
-  aggInterval?: '15m' | '1h' | '1d' | '1w';
-
-  /**
-   * Filter for arc (Authenticated Received Chain).
-   */
-  arc?: Array<'PASS' | 'NONE' | 'FAIL'>;
-
-  /**
-   * End of the date range (inclusive).
-   */
-  dateEnd?: Array<string>;
-
-  /**
-   * For example, use `7d` and `7dControl` to compare this week with the previous
-   * week. Use this parameter or set specific start and end dates (`dateStart` and
-   * `dateEnd` parameters).
-   */
-  dateRange?: Array<
-    | '1d'
-    | '2d'
-    | '7d'
-    | '14d'
-    | '28d'
-    | '12w'
-    | '24w'
-    | '52w'
-    | '1dControl'
-    | '2dControl'
-    | '7dControl'
-    | '14dControl'
-    | '28dControl'
-    | '12wControl'
-    | '24wControl'
-  >;
-
-  /**
-   * Array of datetimes to filter the start of a series.
-   */
-  dateStart?: Array<string>;
-
-  /**
-   * Filter for dkim.
-   */
-  dkim?: Array<'PASS' | 'NONE' | 'FAIL'>;
-
-  /**
-   * Filter for dmarc.
-   */
-  dmarc?: Array<'PASS' | 'NONE' | 'FAIL'>;
+  encrypted?: Array<'ENCRYPTED' | 'NOT_ENCRYPTED'>;
 
   /**
    * Format results are returned in.
@@ -860,187 +689,27 @@ export interface TimeseriesGroupSpoofParams {
   format?: 'JSON' | 'CSV';
 
   /**
-   * Array of names that will be used to name the series in responses.
+   * Filter for ip version.
    */
-  name?: Array<string>;
-
-  /**
-   * Filter for spf.
-   */
-  spf?: Array<'PASS' | 'NONE' | 'FAIL'>;
-
-  /**
-   * Filter for tls version.
-   */
-  tlsVersion?: Array<'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3'>;
-}
-
-export interface TimeseriesGroupThreatCategoryParams {
-  /**
-   * Aggregation interval results should be returned in (for example, in 15 minutes
-   * or 1 hour intervals). Refer to
-   * [Aggregation intervals](https://developers.cloudflare.com/radar/concepts/aggregation-intervals/).
-   */
-  aggInterval?: '15m' | '1h' | '1d' | '1w';
-
-  /**
-   * Filter for arc (Authenticated Received Chain).
-   */
-  arc?: Array<'PASS' | 'NONE' | 'FAIL'>;
-
-  /**
-   * End of the date range (inclusive).
-   */
-  dateEnd?: Array<string>;
-
-  /**
-   * For example, use `7d` and `7dControl` to compare this week with the previous
-   * week. Use this parameter or set specific start and end dates (`dateStart` and
-   * `dateEnd` parameters).
-   */
-  dateRange?: Array<
-    | '1d'
-    | '2d'
-    | '7d'
-    | '14d'
-    | '28d'
-    | '12w'
-    | '24w'
-    | '52w'
-    | '1dControl'
-    | '2dControl'
-    | '7dControl'
-    | '14dControl'
-    | '28dControl'
-    | '12wControl'
-    | '24wControl'
-  >;
-
-  /**
-   * Array of datetimes to filter the start of a series.
-   */
-  dateStart?: Array<string>;
-
-  /**
-   * Filter for dkim.
-   */
-  dkim?: Array<'PASS' | 'NONE' | 'FAIL'>;
-
-  /**
-   * Filter for dmarc.
-   */
-  dmarc?: Array<'PASS' | 'NONE' | 'FAIL'>;
-
-  /**
-   * Format results are returned in.
-   */
-  format?: 'JSON' | 'CSV';
+  ipVersion?: Array<'IPv4' | 'IPv6'>;
 
   /**
    * Array of names that will be used to name the series in responses.
    */
   name?: Array<string>;
-
-  /**
-   * Filter for spf.
-   */
-  spf?: Array<'PASS' | 'NONE' | 'FAIL'>;
-
-  /**
-   * Filter for tls version.
-   */
-  tlsVersion?: Array<'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3'>;
-}
-
-export interface TimeseriesGroupTLSVersionParams {
-  /**
-   * Aggregation interval results should be returned in (for example, in 15 minutes
-   * or 1 hour intervals). Refer to
-   * [Aggregation intervals](https://developers.cloudflare.com/radar/concepts/aggregation-intervals/).
-   */
-  aggInterval?: '15m' | '1h' | '1d' | '1w';
-
-  /**
-   * Filter for arc (Authenticated Received Chain).
-   */
-  arc?: Array<'PASS' | 'NONE' | 'FAIL'>;
-
-  /**
-   * End of the date range (inclusive).
-   */
-  dateEnd?: Array<string>;
-
-  /**
-   * For example, use `7d` and `7dControl` to compare this week with the previous
-   * week. Use this parameter or set specific start and end dates (`dateStart` and
-   * `dateEnd` parameters).
-   */
-  dateRange?: Array<
-    | '1d'
-    | '2d'
-    | '7d'
-    | '14d'
-    | '28d'
-    | '12w'
-    | '24w'
-    | '52w'
-    | '1dControl'
-    | '2dControl'
-    | '7dControl'
-    | '14dControl'
-    | '28dControl'
-    | '12wControl'
-    | '24wControl'
-  >;
-
-  /**
-   * Array of datetimes to filter the start of a series.
-   */
-  dateStart?: Array<string>;
-
-  /**
-   * Filter for dkim.
-   */
-  dkim?: Array<'PASS' | 'NONE' | 'FAIL'>;
-
-  /**
-   * Filter for dmarc.
-   */
-  dmarc?: Array<'PASS' | 'NONE' | 'FAIL'>;
-
-  /**
-   * Format results are returned in.
-   */
-  format?: 'JSON' | 'CSV';
-
-  /**
-   * Array of names that will be used to name the series in responses.
-   */
-  name?: Array<string>;
-
-  /**
-   * Filter for spf.
-   */
-  spf?: Array<'PASS' | 'NONE' | 'FAIL'>;
 }
 
 export namespace TimeseriesGroups {
   export import TimeseriesGroupARCResponse = TimeseriesGroupsAPI.TimeseriesGroupARCResponse;
   export import TimeseriesGroupDKIMResponse = TimeseriesGroupsAPI.TimeseriesGroupDKIMResponse;
   export import TimeseriesGroupDMARCResponse = TimeseriesGroupsAPI.TimeseriesGroupDMARCResponse;
-  export import TimeseriesGroupMaliciousResponse = TimeseriesGroupsAPI.TimeseriesGroupMaliciousResponse;
-  export import TimeseriesGroupSpamResponse = TimeseriesGroupsAPI.TimeseriesGroupSpamResponse;
+  export import TimeseriesGroupEncryptedResponse = TimeseriesGroupsAPI.TimeseriesGroupEncryptedResponse;
+  export import TimeseriesGroupIPVersionResponse = TimeseriesGroupsAPI.TimeseriesGroupIPVersionResponse;
   export import TimeseriesGroupSPFResponse = TimeseriesGroupsAPI.TimeseriesGroupSPFResponse;
-  export import TimeseriesGroupSpoofResponse = TimeseriesGroupsAPI.TimeseriesGroupSpoofResponse;
-  export import TimeseriesGroupThreatCategoryResponse = TimeseriesGroupsAPI.TimeseriesGroupThreatCategoryResponse;
-  export import TimeseriesGroupTLSVersionResponse = TimeseriesGroupsAPI.TimeseriesGroupTLSVersionResponse;
   export import TimeseriesGroupARCParams = TimeseriesGroupsAPI.TimeseriesGroupARCParams;
   export import TimeseriesGroupDKIMParams = TimeseriesGroupsAPI.TimeseriesGroupDKIMParams;
   export import TimeseriesGroupDMARCParams = TimeseriesGroupsAPI.TimeseriesGroupDMARCParams;
-  export import TimeseriesGroupMaliciousParams = TimeseriesGroupsAPI.TimeseriesGroupMaliciousParams;
-  export import TimeseriesGroupSpamParams = TimeseriesGroupsAPI.TimeseriesGroupSpamParams;
+  export import TimeseriesGroupEncryptedParams = TimeseriesGroupsAPI.TimeseriesGroupEncryptedParams;
+  export import TimeseriesGroupIPVersionParams = TimeseriesGroupsAPI.TimeseriesGroupIPVersionParams;
   export import TimeseriesGroupSPFParams = TimeseriesGroupsAPI.TimeseriesGroupSPFParams;
-  export import TimeseriesGroupSpoofParams = TimeseriesGroupsAPI.TimeseriesGroupSpoofParams;
-  export import TimeseriesGroupThreatCategoryParams = TimeseriesGroupsAPI.TimeseriesGroupThreatCategoryParams;
-  export import TimeseriesGroupTLSVersionParams = TimeseriesGroupsAPI.TimeseriesGroupTLSVersionParams;
 }

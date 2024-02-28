@@ -262,6 +262,48 @@ describe('resource summary', () => {
   });
 
   // skipped: tests are disabled for the time being
+  test.skip('spoof', async () => {
+    const responsePromise = cloudflare.radar.email.security.summary.spoof();
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('spoof: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.radar.email.security.summary.spoof({ path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('spoof: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.radar.email.security.summary.spoof(
+        {
+          arc: ['PASS', 'NONE', 'FAIL'],
+          dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
+          dateRange: ['1d', '2d', '7d'],
+          dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
+          dkim: ['PASS', 'NONE', 'FAIL'],
+          dmarc: ['PASS', 'NONE', 'FAIL'],
+          format: 'JSON',
+          name: ['string', 'string', 'string'],
+          spf: ['PASS', 'NONE', 'FAIL'],
+          tlsVersion: ['TLSv1_0', 'TLSv1_1', 'TLSv1_2'],
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('threatCategory', async () => {
     const responsePromise = cloudflare.radar.email.security.summary.threatCategory();
     const rawResponse = await responsePromise.asResponse();
@@ -297,6 +339,47 @@ describe('resource summary', () => {
           name: ['string', 'string', 'string'],
           spf: ['PASS', 'NONE', 'FAIL'],
           tlsVersion: ['TLSv1_0', 'TLSv1_1', 'TLSv1_2'],
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('tlsVersion', async () => {
+    const responsePromise = cloudflare.radar.email.security.summary.tlsVersion();
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('tlsVersion: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.radar.email.security.summary.tlsVersion({ path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('tlsVersion: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.radar.email.security.summary.tlsVersion(
+        {
+          arc: ['PASS', 'NONE', 'FAIL'],
+          dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
+          dateRange: ['1d', '2d', '7d'],
+          dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
+          dkim: ['PASS', 'NONE', 'FAIL'],
+          dmarc: ['PASS', 'NONE', 'FAIL'],
+          format: 'JSON',
+          name: ['string', 'string', 'string'],
+          spf: ['PASS', 'NONE', 'FAIL'],
         },
         { path: '/_stainless_unknown_path' },
       ),

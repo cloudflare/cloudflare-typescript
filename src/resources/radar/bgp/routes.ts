@@ -62,6 +62,29 @@ export class Routes extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Gets time-series data for the announced IP space count, represented as the
+   * number of IPv4 /24s and IPv6 /48s, for a given ASN.
+   */
+  timeseries(
+    query?: RouteTimeseriesParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RouteTimeseriesResponse>;
+  timeseries(options?: Core.RequestOptions): Core.APIPromise<RouteTimeseriesResponse>;
+  timeseries(
+    query: RouteTimeseriesParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RouteTimeseriesResponse> {
+    if (isRequestOptions(query)) {
+      return this.timeseries({}, query);
+    }
+    return (
+      this._client.get('/radar/bgp/routes/timeseries', { query, ...options }) as Core.APIPromise<{
+        result: RouteTimeseriesResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
 export interface RouteMoasResponse {
@@ -176,6 +199,46 @@ export namespace RouteStatsResponse {
   }
 }
 
+export interface RouteTimeseriesResponse {
+  meta: RouteTimeseriesResponse.Meta;
+
+  serie_ipv4_24s: RouteTimeseriesResponse.SerieIPV4_24s;
+
+  serie_ipv6_48s: RouteTimeseriesResponse.SerieIPV6_48s;
+}
+
+export namespace RouteTimeseriesResponse {
+  export interface Meta {
+    dateRange: Array<Meta.DateRange>;
+  }
+
+  export namespace Meta {
+    export interface DateRange {
+      /**
+       * Adjusted end of date range.
+       */
+      endTime: string;
+
+      /**
+       * Adjusted start of date range.
+       */
+      startTime: string;
+    }
+  }
+
+  export interface SerieIPV4_24s {
+    timestamps: Array<string>;
+
+    values: Array<number>;
+  }
+
+  export interface SerieIPV6_48s {
+    timestamps: Array<string>;
+
+    values: Array<number>;
+  }
+}
+
 export interface RouteMoasParams {
   /**
    * Format results are returned in.
@@ -237,11 +300,56 @@ export interface RouteStatsParams {
   location?: string;
 }
 
+export interface RouteTimeseriesParams {
+  /**
+   * Single ASN as integer.
+   */
+  asn?: number;
+
+  /**
+   * End of the date range (inclusive).
+   */
+  dateEnd?: string;
+
+  /**
+   * Shorthand date ranges for the last X days - use when you don't need specific
+   * start and end dates.
+   */
+  dateRange?:
+    | '1d'
+    | '2d'
+    | '7d'
+    | '14d'
+    | '28d'
+    | '12w'
+    | '24w'
+    | '52w'
+    | '1dControl'
+    | '2dControl'
+    | '7dControl'
+    | '14dControl'
+    | '28dControl'
+    | '12wControl'
+    | '24wControl';
+
+  /**
+   * Start of the date range (inclusive).
+   */
+  dateStart?: string;
+
+  /**
+   * Format results are returned in.
+   */
+  format?: 'JSON' | 'CSV';
+}
+
 export namespace Routes {
   export import RouteMoasResponse = RoutesAPI.RouteMoasResponse;
   export import RoutePfx2asResponse = RoutesAPI.RoutePfx2asResponse;
   export import RouteStatsResponse = RoutesAPI.RouteStatsResponse;
+  export import RouteTimeseriesResponse = RoutesAPI.RouteTimeseriesResponse;
   export import RouteMoasParams = RoutesAPI.RouteMoasParams;
   export import RoutePfx2asParams = RoutesAPI.RoutePfx2asParams;
   export import RouteStatsParams = RoutesAPI.RouteStatsParams;
+  export import RouteTimeseriesParams = RoutesAPI.RouteTimeseriesParams;
 }
