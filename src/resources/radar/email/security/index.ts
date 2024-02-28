@@ -35,4 +35,3 @@ export {
   TimeseriesGroupThreatCategoryParams,
   TimeseriesGroups,
 } from './timeseries-groups';
-export { Top } from './top/index';
