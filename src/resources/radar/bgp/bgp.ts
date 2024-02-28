@@ -187,7 +187,9 @@ export namespace BGP {
   export import RouteMoasResponse = RoutesAPI.RouteMoasResponse;
   export import RoutePfx2asResponse = RoutesAPI.RoutePfx2asResponse;
   export import RouteStatsResponse = RoutesAPI.RouteStatsResponse;
+  export import RouteTimeseriesResponse = RoutesAPI.RouteTimeseriesResponse;
   export import RouteMoasParams = RoutesAPI.RouteMoasParams;
   export import RoutePfx2asParams = RoutesAPI.RoutePfx2asParams;
   export import RouteStatsParams = RoutesAPI.RouteStatsParams;
+  export import RouteTimeseriesParams = RoutesAPI.RouteTimeseriesParams;
 }
