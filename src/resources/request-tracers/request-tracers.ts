@@ -9,7 +9,6 @@ export class RequestTracers extends APIResource {
 
 export namespace RequestTracers {
   export import Traces = TracesAPI.Traces;
-  export import THy7ZvEaTrace = TracesAPI.THy7ZvEaTrace;
   export import TraceCreateResponse = TracesAPI.TraceCreateResponse;
   export import TraceCreateParams = TracesAPI.TraceCreateParams;
 }
