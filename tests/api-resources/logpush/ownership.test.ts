@@ -16,8 +16,6 @@ describe('resource ownership', () => {
   // skipped: tests are disabled for the time being
   test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.logpush.ownership.create({
-      account_id: 'string',
-      zone_id: 'string',
       destination_conf: 's3://mybucket/logs?region=us-west-2',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -32,17 +30,15 @@ describe('resource ownership', () => {
   // skipped: tests are disabled for the time being
   test.skip('create: required and optional params', async () => {
     const response = await cloudflare.logpush.ownership.create({
+      destination_conf: 's3://mybucket/logs?region=us-west-2',
       account_id: 'string',
       zone_id: 'string',
-      destination_conf: 's3://mybucket/logs?region=us-west-2',
     });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('validate: only required params', async () => {
     const responsePromise = cloudflare.logpush.ownership.validate({
-      account_id: 'string',
-      zone_id: 'string',
       destination_conf: 's3://mybucket/logs?region=us-west-2',
       ownership_challenge: '00000000000000000000',
     });
@@ -58,10 +54,10 @@ describe('resource ownership', () => {
   // skipped: tests are disabled for the time being
   test.skip('validate: required and optional params', async () => {
     const response = await cloudflare.logpush.ownership.validate({
-      account_id: 'string',
-      zone_id: 'string',
       destination_conf: 's3://mybucket/logs?region=us-west-2',
       ownership_challenge: '00000000000000000000',
+      account_id: 'string',
+      zone_id: 'string',
     });
   });
 });

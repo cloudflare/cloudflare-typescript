@@ -2,6 +2,8 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
+import { isRequestOptions } from 'cloudflare/core';
+import { CloudflareError } from 'cloudflare/error';
 import * as IdentityProvidersAPI from 'cloudflare/resources/access/identity-providers';
 
 export class IdentityProviders extends APIResource {
@@ -13,8 +15,24 @@ export class IdentityProviders extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<IdentityProviderCreateResponse> {
     const { account_id, zone_id, ...body } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.post(`/${account_id}/${zone_id}/access/identity_providers`, {
+      this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/identity_providers`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: IdentityProviderCreateResponse }>
@@ -30,8 +48,24 @@ export class IdentityProviders extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<IdentityProviderUpdateResponse> {
     const { account_id, zone_id, ...body } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.put(`/${account_id}/${zone_id}/access/identity_providers/${uuid}`, {
+      this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/identity_providers/${uuid}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: IdentityProviderUpdateResponse }>
@@ -42,14 +76,39 @@ export class IdentityProviders extends APIResource {
    * Lists all configured identity providers.
    */
   list(
-    params: IdentityProviderListParams,
+    params?: IdentityProviderListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IdentityProviderListResponse | null>;
+  list(options?: Core.RequestOptions): Core.APIPromise<IdentityProviderListResponse | null>;
+  list(
+    params: IdentityProviderListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<IdentityProviderListResponse | null> {
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
     const { account_id, zone_id } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.get(`/${account_id}/${zone_id}/access/identity_providers`, options) as Core.APIPromise<{
-        result: IdentityProviderListResponse | null;
-      }>
+      this._client.get(
+        `/${accountOrZone}/${accountOrZoneId}/access/identity_providers`,
+        options,
+      ) as Core.APIPromise<{ result: IdentityProviderListResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -58,13 +117,38 @@ export class IdentityProviders extends APIResource {
    */
   delete(
     uuid: string,
-    params: IdentityProviderDeleteParams,
+    params?: IdentityProviderDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IdentityProviderDeleteResponse>;
+  delete(uuid: string, options?: Core.RequestOptions): Core.APIPromise<IdentityProviderDeleteResponse>;
+  delete(
+    uuid: string,
+    params: IdentityProviderDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<IdentityProviderDeleteResponse> {
+    if (isRequestOptions(params)) {
+      return this.delete(uuid, {}, params);
+    }
     const { account_id, zone_id } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
       this._client.delete(
-        `/${account_id}/${zone_id}/access/identity_providers/${uuid}`,
+        `/${accountOrZone}/${accountOrZoneId}/access/identity_providers/${uuid}`,
         options,
       ) as Core.APIPromise<{ result: IdentityProviderDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -75,13 +159,38 @@ export class IdentityProviders extends APIResource {
    */
   get(
     uuid: string,
-    params: IdentityProviderGetParams,
+    params?: IdentityProviderGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IdentityProviderGetResponse>;
+  get(uuid: string, options?: Core.RequestOptions): Core.APIPromise<IdentityProviderGetResponse>;
+  get(
+    uuid: string,
+    params: IdentityProviderGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<IdentityProviderGetResponse> {
+    if (isRequestOptions(params)) {
+      return this.get(uuid, {}, params);
+    }
     const { account_id, zone_id } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
       this._client.get(
-        `/${account_id}/${zone_id}/access/identity_providers/${uuid}`,
+        `/${accountOrZone}/${accountOrZoneId}/access/identity_providers/${uuid}`,
         options,
       ) as Core.APIPromise<{ result: IdentityProviderGetResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -6551,18 +6660,6 @@ export namespace IdentityProviderGetResponse {
 
 export interface IdentityProviderCreateParams {
   /**
-   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-   * Zone ID.
-   */
-  account_id: string;
-
-  /**
-   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-   * Account ID.
-   */
-  zone_id: string;
-
-  /**
    * Body param:
    */
   config: IdentityProviderCreateParams.Config;
@@ -6592,6 +6689,18 @@ export interface IdentityProviderCreateParams {
     | 'onelogin'
     | 'pingone'
     | 'yandex';
+
+  /**
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id?: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id?: string;
 
   /**
    * Body param:
@@ -6781,18 +6890,6 @@ export namespace IdentityProviderCreateParams {
 
 export interface IdentityProviderUpdateParams {
   /**
-   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-   * Zone ID.
-   */
-  account_id: string;
-
-  /**
-   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-   * Account ID.
-   */
-  zone_id: string;
-
-  /**
    * Body param:
    */
   config: IdentityProviderUpdateParams.Config;
@@ -6822,6 +6919,18 @@ export interface IdentityProviderUpdateParams {
     | 'onelogin'
     | 'pingone'
     | 'yandex';
+
+  /**
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id?: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id?: string;
 
   /**
    * Body param:
@@ -7013,36 +7122,36 @@ export interface IdentityProviderListParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface IdentityProviderDeleteParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface IdentityProviderGetParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export namespace IdentityProviders {

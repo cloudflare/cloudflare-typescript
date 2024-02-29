@@ -14,10 +14,9 @@ const cloudflare = new Cloudflare({
 
 describe('resource userPolicyChecks', () => {
   // skipped: tests are disabled for the time being
-  test.skip('list: only required params', async () => {
+  test.skip('list', async () => {
     const responsePromise = cloudflare.access.applications.userPolicyChecks.list(
       '023e105f4ecef8ad9ca31a8372d0c353',
-      { account_id: 'string', zone_id: 'string' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,10 +28,24 @@ describe('resource userPolicyChecks', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: required and optional params', async () => {
-    const response = await cloudflare.access.applications.userPolicyChecks.list(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      { account_id: 'string', zone_id: 'string' },
-    );
+  test.skip('list: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.access.applications.userPolicyChecks.list('023e105f4ecef8ad9ca31a8372d0c353', {
+        path: '/_stainless_unknown_path',
+      }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.access.applications.userPolicyChecks.list(
+        '023e105f4ecef8ad9ca31a8372d0c353',
+        { account_id: 'string', zone_id: 'string' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 });

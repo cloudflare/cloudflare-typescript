@@ -2,6 +2,7 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
+import { CloudflareError } from 'cloudflare/error';
 import * as ValidateAPI from 'cloudflare/resources/logpush/validate';
 
 export class Validate extends APIResource {
@@ -13,8 +14,24 @@ export class Validate extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<ValidateDestinationResponse | null> {
     const { account_id, zone_id, ...body } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.post(`/${account_id}/${zone_id}/logpush/validate/destination/exists`, {
+      this._client.post(`/${accountOrZone}/${accountOrZoneId}/logpush/validate/destination/exists`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: ValidateDestinationResponse | null }>
@@ -29,8 +46,24 @@ export class Validate extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<ValidateOriginResponse | null> {
     const { account_id, zone_id, ...body } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.post(`/${account_id}/${zone_id}/logpush/validate/origin`, {
+      this._client.post(`/${accountOrZone}/${accountOrZoneId}/logpush/validate/origin`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: ValidateOriginResponse | null }>
@@ -50,38 +83,26 @@ export interface ValidateOriginResponse {
 
 export interface ValidateDestinationParams {
   /**
-   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-   * Zone ID.
-   */
-  account_id: string;
-
-  /**
-   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-   * Account ID.
-   */
-  zone_id: string;
-
-  /**
    * Body param: Uniquely identifies a resource (such as an s3 bucket) where data
    * will be pushed. Additional configuration parameters supported by the destination
    * may be included.
    */
   destination_conf: string;
-}
 
-export interface ValidateOriginParams {
   /**
    * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
    * Zone ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
    * Account ID.
    */
-  zone_id: string;
+  zone_id?: string;
+}
 
+export interface ValidateOriginParams {
   /**
    * Body param: This field is deprecated. Use `output_options` instead.
    * Configuration string. It specifies things like requested fields and timestamp
@@ -90,6 +111,18 @@ export interface ValidateOriginParams {
    * you, setting start and end times appropriately.
    */
   logpull_options: string | null;
+
+  /**
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id?: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id?: string;
 }
 
 export namespace Validate {

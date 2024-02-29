@@ -2,6 +2,8 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
+import { isRequestOptions } from 'cloudflare/core';
+import { CloudflareError } from 'cloudflare/error';
 import * as AccessRulesAPI from 'cloudflare/resources/firewall/access-rules';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
@@ -18,8 +20,24 @@ export class AccessRules extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<AccessRuleCreateResponse | null> {
     const { account_id, zone_id, ...body } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.post(`/${account_id}/${zone_id}/firewall/access_rules/rules`, {
+      this._client.post(`/${accountOrZone}/${accountOrZoneId}/firewall/access_rules/rules`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: AccessRuleCreateResponse | null }>
@@ -32,12 +50,38 @@ export class AccessRules extends APIResource {
    * parameters.
    */
   list(
-    params: AccessRuleListParams,
+    params?: AccessRuleListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<AccessRuleListResponsesV4PagePaginationArray, AccessRuleListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<AccessRuleListResponsesV4PagePaginationArray, AccessRuleListResponse>;
+  list(
+    params: AccessRuleListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<AccessRuleListResponsesV4PagePaginationArray, AccessRuleListResponse> {
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
     const { account_id, zone_id, ...query } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return this._client.getAPIList(
-      `/${account_id}/${zone_id}/firewall/access_rules/rules`,
+      `/${accountOrZone}/${accountOrZoneId}/firewall/access_rules/rules`,
       AccessRuleListResponsesV4PagePaginationArray,
       { query, ...options },
     );
@@ -54,9 +98,25 @@ export class AccessRules extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<AccessRuleDeleteResponse | null> {
     const { account_id, zone_id } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
       this._client.delete(
-        `/${account_id}/${zone_id}/firewall/access_rules/rules/${identifier}`,
+        `/${accountOrZone}/${accountOrZoneId}/firewall/access_rules/rules/${identifier}`,
         options,
       ) as Core.APIPromise<{ result: AccessRuleDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -73,8 +133,24 @@ export class AccessRules extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<AccessRuleEditResponse | null> {
     const { account_id, zone_id, ...body } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.patch(`/${account_id}/${zone_id}/firewall/access_rules/rules/${identifier}`, {
+      this._client.patch(`/${accountOrZone}/${accountOrZoneId}/firewall/access_rules/rules/${identifier}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: AccessRuleEditResponse | null }>
@@ -86,13 +162,38 @@ export class AccessRules extends APIResource {
    */
   get(
     identifier: unknown,
-    params: AccessRuleGetParams,
+    params?: AccessRuleGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AccessRuleGetResponse | null>;
+  get(identifier: unknown, options?: Core.RequestOptions): Core.APIPromise<AccessRuleGetResponse | null>;
+  get(
+    identifier: unknown,
+    params: AccessRuleGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<AccessRuleGetResponse | null> {
+    if (isRequestOptions(params)) {
+      return this.get(identifier, {}, params);
+    }
     const { account_id, zone_id } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
       this._client.get(
-        `/${account_id}/${zone_id}/firewall/access_rules/rules/${identifier}`,
+        `/${accountOrZone}/${accountOrZoneId}/firewall/access_rules/rules/${identifier}`,
         options,
       ) as Core.APIPromise<{ result: AccessRuleGetResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -118,18 +219,6 @@ export type AccessRuleGetResponse = unknown | string;
 
 export interface AccessRuleCreateParams {
   /**
-   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-   * Zone ID.
-   */
-  account_id: string;
-
-  /**
-   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-   * Account ID.
-   */
-  zone_id: string;
-
-  /**
    * Body param: The rule configuration.
    */
   configuration:
@@ -143,6 +232,18 @@ export interface AccessRuleCreateParams {
    * Body param: The action to apply to a matched request.
    */
   mode: 'block' | 'challenge' | 'whitelist' | 'js_challenge' | 'managed_challenge';
+
+  /**
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id?: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id?: string;
 
   /**
    * Body param: An informative summary of the rule, typically used as a reminder or
@@ -226,13 +327,13 @@ export interface AccessRuleListParams extends V4PagePaginationArrayParams {
    * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
    * Zone ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
    * Account ID.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: The direction used to sort returned rules.
@@ -313,27 +414,15 @@ export interface AccessRuleDeleteParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface AccessRuleEditParams {
-  /**
-   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-   * Zone ID.
-   */
-  account_id: string;
-
-  /**
-   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-   * Account ID.
-   */
-  zone_id: string;
-
   /**
    * Body param: The rule configuration.
    */
@@ -348,6 +437,18 @@ export interface AccessRuleEditParams {
    * Body param: The action to apply to a matched request.
    */
   mode: 'block' | 'challenge' | 'whitelist' | 'js_challenge' | 'managed_challenge';
+
+  /**
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id?: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id?: string;
 
   /**
    * Body param: An informative summary of the rule, typically used as a reminder or
@@ -430,12 +531,12 @@ export interface AccessRuleGetParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export namespace AccessRules {

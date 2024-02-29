@@ -2,6 +2,8 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
+import { isRequestOptions } from 'cloudflare/core';
+import { CloudflareError } from 'cloudflare/error';
 import * as ApplicationsAPI from 'cloudflare/resources/access/applications/applications';
 import * as CAsAPI from 'cloudflare/resources/access/applications/cas';
 import * as PoliciesAPI from 'cloudflare/resources/access/applications/policies';
@@ -22,10 +24,27 @@ export class Applications extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<ApplicationCreateResponse> {
     const { account_id, zone_id, ...body } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.post(`/${account_id}/${zone_id}/access/apps`, { body, ...options }) as Core.APIPromise<{
-        result: ApplicationCreateResponse;
-      }>
+      this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/apps`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: ApplicationCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -38,8 +57,24 @@ export class Applications extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<ApplicationUpdateResponse> {
     const { account_id, zone_id, ...body } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.put(`/${account_id}/${zone_id}/access/apps/${appId}`, {
+      this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/apps/${appId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: ApplicationUpdateResponse }>
@@ -50,12 +85,36 @@ export class Applications extends APIResource {
    * Lists all Access applications in an account or zone.
    */
   list(
-    params: ApplicationListParams,
+    params?: ApplicationListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ApplicationListResponse | null>;
+  list(options?: Core.RequestOptions): Core.APIPromise<ApplicationListResponse | null>;
+  list(
+    params: ApplicationListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ApplicationListResponse | null> {
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
     const { account_id, zone_id } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.get(`/${account_id}/${zone_id}/access/apps`, options) as Core.APIPromise<{
+      this._client.get(`/${accountOrZone}/${accountOrZoneId}/access/apps`, options) as Core.APIPromise<{
         result: ApplicationListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -66,14 +125,40 @@ export class Applications extends APIResource {
    */
   delete(
     appId: string | string,
-    params: ApplicationDeleteParams,
+    params?: ApplicationDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ApplicationDeleteResponse>;
+  delete(appId: string | string, options?: Core.RequestOptions): Core.APIPromise<ApplicationDeleteResponse>;
+  delete(
+    appId: string | string,
+    params: ApplicationDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ApplicationDeleteResponse> {
+    if (isRequestOptions(params)) {
+      return this.delete(appId, {}, params);
+    }
     const { account_id, zone_id } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.delete(`/${account_id}/${zone_id}/access/apps/${appId}`, options) as Core.APIPromise<{
-        result: ApplicationDeleteResponse;
-      }>
+      this._client.delete(
+        `/${accountOrZone}/${accountOrZoneId}/access/apps/${appId}`,
+        options,
+      ) as Core.APIPromise<{ result: ApplicationDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -82,14 +167,40 @@ export class Applications extends APIResource {
    */
   get(
     appId: string | string,
-    params: ApplicationGetParams,
+    params?: ApplicationGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ApplicationGetResponse>;
+  get(appId: string | string, options?: Core.RequestOptions): Core.APIPromise<ApplicationGetResponse>;
+  get(
+    appId: string | string,
+    params: ApplicationGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ApplicationGetResponse> {
+    if (isRequestOptions(params)) {
+      return this.get(appId, {}, params);
+    }
     const { account_id, zone_id } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.get(`/${account_id}/${zone_id}/access/apps/${appId}`, options) as Core.APIPromise<{
-        result: ApplicationGetResponse;
-      }>
+      this._client.get(
+        `/${accountOrZone}/${accountOrZoneId}/access/apps/${appId}`,
+        options,
+      ) as Core.APIPromise<{ result: ApplicationGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -98,13 +209,41 @@ export class Applications extends APIResource {
    */
   revokeTokens(
     appId: string | string,
-    params: ApplicationRevokeTokensParams,
+    params?: ApplicationRevokeTokensParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ApplicationRevokeTokensResponse | null>;
+  revokeTokens(
+    appId: string | string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ApplicationRevokeTokensResponse | null>;
+  revokeTokens(
+    appId: string | string,
+    params: ApplicationRevokeTokensParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ApplicationRevokeTokensResponse | null> {
+    if (isRequestOptions(params)) {
+      return this.revokeTokens(appId, {}, params);
+    }
     const { account_id, zone_id } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
       this._client.post(
-        `/${account_id}/${zone_id}/access/apps/${appId}/revoke_tokens`,
+        `/${accountOrZone}/${accountOrZoneId}/access/apps/${appId}/revoke_tokens`,
         options,
       ) as Core.APIPromise<{ result: ApplicationRevokeTokensResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -4006,13 +4145,13 @@ export interface ApplicationCreateParams {
    * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
    * Zone ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
    * Account ID.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: When set to true, users can authenticate to this application using
@@ -4331,13 +4470,13 @@ export interface ApplicationUpdateParams {
    * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
    * Zone ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
    * Account ID.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: When set to true, users can authenticate to this application using
@@ -4655,48 +4794,48 @@ export interface ApplicationListParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface ApplicationDeleteParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface ApplicationGetParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface ApplicationRevokeTokensParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export namespace Applications {

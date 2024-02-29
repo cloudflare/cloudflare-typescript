@@ -2,6 +2,8 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
+import { isRequestOptions } from 'cloudflare/core';
+import { CloudflareError } from 'cloudflare/error';
 import * as GroupsAPI from 'cloudflare/resources/access/groups';
 
 export class Groups extends APIResource {
@@ -10,10 +12,27 @@ export class Groups extends APIResource {
    */
   create(params: GroupCreateParams, options?: Core.RequestOptions): Core.APIPromise<GroupCreateResponse> {
     const { account_id, zone_id, ...body } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.post(`/${account_id}/${zone_id}/access/groups`, { body, ...options }) as Core.APIPromise<{
-        result: GroupCreateResponse;
-      }>
+      this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/groups`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: GroupCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -26,8 +45,24 @@ export class Groups extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<GroupUpdateResponse> {
     const { account_id, zone_id, ...body } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.put(`/${account_id}/${zone_id}/access/groups/${uuid}`, {
+      this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/groups/${uuid}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: GroupUpdateResponse }>
@@ -37,10 +72,34 @@ export class Groups extends APIResource {
   /**
    * Lists all Access groups.
    */
-  list(params: GroupListParams, options?: Core.RequestOptions): Core.APIPromise<GroupListResponse | null> {
+  list(params?: GroupListParams, options?: Core.RequestOptions): Core.APIPromise<GroupListResponse | null>;
+  list(options?: Core.RequestOptions): Core.APIPromise<GroupListResponse | null>;
+  list(
+    params: GroupListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<GroupListResponse | null> {
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
     const { account_id, zone_id } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.get(`/${account_id}/${zone_id}/access/groups`, options) as Core.APIPromise<{
+      this._client.get(`/${accountOrZone}/${accountOrZoneId}/access/groups`, options) as Core.APIPromise<{
         result: GroupListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -51,14 +110,40 @@ export class Groups extends APIResource {
    */
   delete(
     uuid: string,
-    params: GroupDeleteParams,
+    params?: GroupDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<GroupDeleteResponse>;
+  delete(uuid: string, options?: Core.RequestOptions): Core.APIPromise<GroupDeleteResponse>;
+  delete(
+    uuid: string,
+    params: GroupDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<GroupDeleteResponse> {
+    if (isRequestOptions(params)) {
+      return this.delete(uuid, {}, params);
+    }
     const { account_id, zone_id } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.delete(`/${account_id}/${zone_id}/access/groups/${uuid}`, options) as Core.APIPromise<{
-        result: GroupDeleteResponse;
-      }>
+      this._client.delete(
+        `/${accountOrZone}/${accountOrZoneId}/access/groups/${uuid}`,
+        options,
+      ) as Core.APIPromise<{ result: GroupDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -67,14 +152,40 @@ export class Groups extends APIResource {
    */
   get(
     uuid: string,
-    params: GroupGetParams,
+    params?: GroupGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<GroupGetResponse>;
+  get(uuid: string, options?: Core.RequestOptions): Core.APIPromise<GroupGetResponse>;
+  get(
+    uuid: string,
+    params: GroupGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<GroupGetResponse> {
+    if (isRequestOptions(params)) {
+      return this.get(uuid, {}, params);
+    }
     const { account_id, zone_id } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.get(`/${account_id}/${zone_id}/access/groups/${uuid}`, options) as Core.APIPromise<{
-        result: GroupGetResponse;
-      }>
+      this._client.get(
+        `/${accountOrZone}/${accountOrZoneId}/access/groups/${uuid}`,
+        options,
+      ) as Core.APIPromise<{ result: GroupGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -5620,18 +5731,6 @@ export namespace GroupGetResponse {
 
 export interface GroupCreateParams {
   /**
-   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-   * Zone ID.
-   */
-  account_id: string;
-
-  /**
-   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-   * Account ID.
-   */
-  zone_id: string;
-
-  /**
    * Body param: Rules evaluated with an OR logical operator. A user needs to meet
    * only one of the Include rules.
    */
@@ -5661,6 +5760,18 @@ export interface GroupCreateParams {
    * Body param: The name of the Access group.
    */
   name: string;
+
+  /**
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id?: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id?: string;
 
   /**
    * Body param: Rules evaluated with a NOT logical operator. To match a policy, a
@@ -6669,18 +6780,6 @@ export namespace GroupCreateParams {
 
 export interface GroupUpdateParams {
   /**
-   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-   * Zone ID.
-   */
-  account_id: string;
-
-  /**
-   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-   * Account ID.
-   */
-  zone_id: string;
-
-  /**
    * Body param: Rules evaluated with an OR logical operator. A user needs to meet
    * only one of the Include rules.
    */
@@ -6710,6 +6809,18 @@ export interface GroupUpdateParams {
    * Body param: The name of the Access group.
    */
   name: string;
+
+  /**
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id?: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id?: string;
 
   /**
    * Body param: Rules evaluated with a NOT logical operator. To match a policy, a
@@ -7720,36 +7831,36 @@ export interface GroupListParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface GroupDeleteParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface GroupGetParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export namespace Groups {

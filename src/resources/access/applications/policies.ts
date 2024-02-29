@@ -2,6 +2,8 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
+import { isRequestOptions } from 'cloudflare/core';
+import { CloudflareError } from 'cloudflare/error';
 import * as PoliciesAPI from 'cloudflare/resources/access/applications/policies';
 
 export class Policies extends APIResource {
@@ -14,8 +16,24 @@ export class Policies extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<PolicyCreateResponse> {
     const { account_id, zone_id, ...body } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.post(`/${account_id}/${zone_id}/access/apps/${uuid}/policies`, {
+      this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/apps/${uuid}/policies`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: PolicyCreateResponse }>
@@ -32,8 +50,24 @@ export class Policies extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<PolicyUpdateResponse> {
     const { account_id, zone_id, ...body } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.put(`/${account_id}/${zone_id}/access/apps/${uuid1}/policies/${uuid}`, {
+      this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/apps/${uuid1}/policies/${uuid}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: PolicyUpdateResponse }>
@@ -45,14 +79,40 @@ export class Policies extends APIResource {
    */
   list(
     uuid: string,
-    params: PolicyListParams,
+    params?: PolicyListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PolicyListResponse | null>;
+  list(uuid: string, options?: Core.RequestOptions): Core.APIPromise<PolicyListResponse | null>;
+  list(
+    uuid: string,
+    params: PolicyListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<PolicyListResponse | null> {
+    if (isRequestOptions(params)) {
+      return this.list(uuid, {}, params);
+    }
     const { account_id, zone_id } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.get(`/${account_id}/${zone_id}/access/apps/${uuid}/policies`, options) as Core.APIPromise<{
-        result: PolicyListResponse | null;
-      }>
+      this._client.get(
+        `/${accountOrZone}/${accountOrZoneId}/access/apps/${uuid}/policies`,
+        options,
+      ) as Core.APIPromise<{ result: PolicyListResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -62,13 +122,39 @@ export class Policies extends APIResource {
   delete(
     uuid1: string,
     uuid: string,
-    params: PolicyDeleteParams,
+    params?: PolicyDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PolicyDeleteResponse>;
+  delete(uuid1: string, uuid: string, options?: Core.RequestOptions): Core.APIPromise<PolicyDeleteResponse>;
+  delete(
+    uuid1: string,
+    uuid: string,
+    params: PolicyDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<PolicyDeleteResponse> {
+    if (isRequestOptions(params)) {
+      return this.delete(uuid1, uuid, {}, params);
+    }
     const { account_id, zone_id } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
       this._client.delete(
-        `/${account_id}/${zone_id}/access/apps/${uuid1}/policies/${uuid}`,
+        `/${accountOrZone}/${accountOrZoneId}/access/apps/${uuid1}/policies/${uuid}`,
         options,
       ) as Core.APIPromise<{ result: PolicyDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -80,13 +166,39 @@ export class Policies extends APIResource {
   get(
     uuid1: string,
     uuid: string,
-    params: PolicyGetParams,
+    params?: PolicyGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PolicyGetResponse>;
+  get(uuid1: string, uuid: string, options?: Core.RequestOptions): Core.APIPromise<PolicyGetResponse>;
+  get(
+    uuid1: string,
+    uuid: string,
+    params: PolicyGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<PolicyGetResponse> {
+    if (isRequestOptions(params)) {
+      return this.get(uuid1, uuid, {}, params);
+    }
     const { account_id, zone_id } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
       this._client.get(
-        `/${account_id}/${zone_id}/access/apps/${uuid1}/policies/${uuid}`,
+        `/${accountOrZone}/${accountOrZoneId}/access/apps/${uuid1}/policies/${uuid}`,
         options,
       ) as Core.APIPromise<{ result: PolicyGetResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -4530,18 +4642,6 @@ export namespace PolicyGetResponse {
 
 export interface PolicyCreateParams {
   /**
-   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-   * Zone ID.
-   */
-  account_id: string;
-
-  /**
-   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-   * Account ID.
-   */
-  zone_id: string;
-
-  /**
    * Body param: The action Access will take if a user matches this policy.
    */
   decision: 'allow' | 'deny' | 'non_identity' | 'bypass';
@@ -4576,6 +4676,18 @@ export interface PolicyCreateParams {
    * Body param: The name of the Access policy.
    */
   name: string;
+
+  /**
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id?: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id?: string;
 
   /**
    * Body param: Administrators who can approve a temporary authentication request.
@@ -5642,18 +5754,6 @@ export namespace PolicyCreateParams {
 
 export interface PolicyUpdateParams {
   /**
-   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-   * Zone ID.
-   */
-  account_id: string;
-
-  /**
-   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-   * Account ID.
-   */
-  zone_id: string;
-
-  /**
    * Body param: The action Access will take if a user matches this policy.
    */
   decision: 'allow' | 'deny' | 'non_identity' | 'bypass';
@@ -5688,6 +5788,18 @@ export interface PolicyUpdateParams {
    * Body param: The name of the Access policy.
    */
   name: string;
+
+  /**
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id?: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id?: string;
 
   /**
    * Body param: Administrators who can approve a temporary authentication request.
@@ -6756,36 +6868,36 @@ export interface PolicyListParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface PolicyDeleteParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface PolicyGetParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export namespace Policies {

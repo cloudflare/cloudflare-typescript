@@ -2,6 +2,8 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
+import { isRequestOptions } from 'cloudflare/core';
+import { CloudflareError } from 'cloudflare/error';
 import * as JobsAPI from 'cloudflare/resources/logpush/datasets/jobs';
 
 export class Jobs extends APIResource {
@@ -10,13 +12,38 @@ export class Jobs extends APIResource {
    */
   list(
     datasetId: string | null,
-    params: JobListParams,
+    params?: JobListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<JobListResponse>;
+  list(datasetId: string | null, options?: Core.RequestOptions): Core.APIPromise<JobListResponse>;
+  list(
+    datasetId: string | null,
+    params: JobListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<JobListResponse> {
+    if (isRequestOptions(params)) {
+      return this.list(datasetId, {}, params);
+    }
     const { account_id, zone_id } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
       this._client.get(
-        `/${account_id}/${zone_id}/logpush/datasets/${datasetId}/jobs`,
+        `/${accountOrZone}/${accountOrZoneId}/logpush/datasets/${datasetId}/jobs`,
         options,
       ) as Core.APIPromise<{ result: JobListResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -185,12 +212,12 @@ export interface JobListParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export namespace Jobs {

@@ -2,6 +2,8 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
+import { isRequestOptions } from 'cloudflare/core';
+import { CloudflareError } from 'cloudflare/error';
 import * as JobsAPI from 'cloudflare/resources/logpush/jobs';
 
 export class Jobs extends APIResource {
@@ -10,10 +12,27 @@ export class Jobs extends APIResource {
    */
   create(params: JobCreateParams, options?: Core.RequestOptions): Core.APIPromise<JobCreateResponse | null> {
     const { account_id, zone_id, ...body } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.post(`/${account_id}/${zone_id}/logpush/jobs`, { body, ...options }) as Core.APIPromise<{
-        result: JobCreateResponse | null;
-      }>
+      this._client.post(`/${accountOrZone}/${accountOrZoneId}/logpush/jobs`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: JobCreateResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -26,8 +45,24 @@ export class Jobs extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<JobUpdateResponse | null> {
     const { account_id, zone_id, ...body } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.put(`/${account_id}/${zone_id}/logpush/jobs/${jobId}`, {
+      this._client.put(`/${accountOrZone}/${accountOrZoneId}/logpush/jobs/${jobId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: JobUpdateResponse | null }>
@@ -37,10 +72,34 @@ export class Jobs extends APIResource {
   /**
    * Lists Logpush jobs for an account or zone.
    */
-  list(params: JobListParams, options?: Core.RequestOptions): Core.APIPromise<JobListResponse> {
+  list(params?: JobListParams, options?: Core.RequestOptions): Core.APIPromise<JobListResponse>;
+  list(options?: Core.RequestOptions): Core.APIPromise<JobListResponse>;
+  list(
+    params: JobListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<JobListResponse> {
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
     const { account_id, zone_id } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.get(`/${account_id}/${zone_id}/logpush/jobs`, options) as Core.APIPromise<{
+      this._client.get(`/${accountOrZone}/${accountOrZoneId}/logpush/jobs`, options) as Core.APIPromise<{
         result: JobListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -55,10 +114,27 @@ export class Jobs extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<JobDeleteResponse | null> {
     const { account_id, zone_id } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.delete(`/${account_id}/${zone_id}/logpush/jobs/${jobId}`, options) as Core.APIPromise<{
-        result: JobDeleteResponse | null;
-      }>
+      this._client.delete(
+        `/${accountOrZone}/${accountOrZoneId}/logpush/jobs/${jobId}`,
+        options,
+      ) as Core.APIPromise<{ result: JobDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -67,14 +143,40 @@ export class Jobs extends APIResource {
    */
   get(
     jobId: number,
-    params: JobGetParams,
+    params?: JobGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<JobGetResponse | null>;
+  get(jobId: number, options?: Core.RequestOptions): Core.APIPromise<JobGetResponse | null>;
+  get(
+    jobId: number,
+    params: JobGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<JobGetResponse | null> {
+    if (isRequestOptions(params)) {
+      return this.get(jobId, {}, params);
+    }
     const { account_id, zone_id } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.get(`/${account_id}/${zone_id}/logpush/jobs/${jobId}`, options) as Core.APIPromise<{
-        result: JobGetResponse | null;
-      }>
+      this._client.get(
+        `/${accountOrZone}/${accountOrZoneId}/logpush/jobs/${jobId}`,
+        options,
+      ) as Core.APIPromise<{ result: JobGetResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -703,23 +805,23 @@ export namespace JobGetResponse {
 
 export interface JobCreateParams {
   /**
-   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-   * Zone ID.
-   */
-  account_id: string;
-
-  /**
-   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-   * Account ID.
-   */
-  zone_id: string;
-
-  /**
    * Body param: Uniquely identifies a resource (such as an s3 bucket) where data
    * will be pushed. Additional configuration parameters supported by the destination
    * may be included.
    */
   destination_conf: string;
+
+  /**
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id?: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id?: string;
 
   /**
    * Body param: Name of the dataset.
@@ -850,13 +952,13 @@ export interface JobUpdateParams {
    * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
    * Zone ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
    * Account ID.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Uniquely identifies a resource (such as an s3 bucket) where data
@@ -981,36 +1083,36 @@ export interface JobListParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface JobDeleteParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface JobGetParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export namespace Jobs {

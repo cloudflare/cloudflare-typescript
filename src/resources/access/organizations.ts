@@ -2,6 +2,8 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
+import { isRequestOptions } from 'cloudflare/core';
+import { CloudflareError } from 'cloudflare/error';
 import * as OrganizationsAPI from 'cloudflare/resources/access/organizations';
 
 export class Organizations extends APIResource {
@@ -13,8 +15,24 @@ export class Organizations extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<OrganizationCreateResponse> {
     const { account_id, zone_id, ...body } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.post(`/${account_id}/${zone_id}/access/organizations`, {
+      this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/organizations`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: OrganizationCreateResponse }>
@@ -29,8 +47,24 @@ export class Organizations extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<OrganizationUpdateResponse> {
     const { account_id, zone_id, ...body } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.put(`/${account_id}/${zone_id}/access/organizations`, {
+      this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/organizations`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: OrganizationUpdateResponse }>
@@ -41,14 +75,39 @@ export class Organizations extends APIResource {
    * Returns the configuration for your Zero Trust organization.
    */
   list(
-    params: OrganizationListParams,
+    params?: OrganizationListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<OrganizationListResponse>;
+  list(options?: Core.RequestOptions): Core.APIPromise<OrganizationListResponse>;
+  list(
+    params: OrganizationListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<OrganizationListResponse> {
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
     const { account_id, zone_id } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.get(`/${account_id}/${zone_id}/access/organizations`, options) as Core.APIPromise<{
-        result: OrganizationListResponse;
-      }>
+      this._client.get(
+        `/${accountOrZone}/${accountOrZoneId}/access/organizations`,
+        options,
+      ) as Core.APIPromise<{ result: OrganizationListResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -60,8 +119,24 @@ export class Organizations extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<OrganizationRevokeUsersResponse> {
     const { account_id, zone_id, ...body } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.post(`/${account_id}/${zone_id}/access/organizations/revoke_user`, {
+      this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/organizations/revoke_user`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: OrganizationRevokeUsersResponse }>
@@ -391,18 +466,6 @@ export type OrganizationRevokeUsersResponse = true | false;
 
 export interface OrganizationCreateParams {
   /**
-   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-   * Zone ID.
-   */
-  account_id: string;
-
-  /**
-   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-   * Account ID.
-   */
-  zone_id: string;
-
-  /**
    * Body param: The unique subdomain assigned to your Zero Trust organization.
    */
   auth_domain: string;
@@ -411,6 +474,18 @@ export interface OrganizationCreateParams {
    * Body param: The name of your Zero Trust organization.
    */
   name: string;
+
+  /**
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id?: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id?: string;
 
   /**
    * Body param: When set to true, users can authenticate via WARP for any
@@ -500,13 +575,13 @@ export interface OrganizationUpdateParams {
    * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
    * Zone ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
    * Account ID.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: When set to true, users can authenticate via WARP for any
@@ -623,31 +698,31 @@ export interface OrganizationListParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface OrganizationRevokeUsersParams {
   /**
+   * Body param: The email of the user to revoke.
+   */
+  email: string;
+
+  /**
    * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
    * Zone ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
    * Account ID.
    */
-  zone_id: string;
-
-  /**
-   * Body param: The email of the user to revoke.
-   */
-  email: string;
+  zone_id?: string;
 }
 
 export namespace Organizations {
