@@ -100,7 +100,7 @@ describe('resource accessRules', () => {
   test.skip('edit: only required params', async () => {
     const responsePromise = cloudflare.firewall.accessRules.edit(
       {},
-      { account_identifier: {}, configuration: {}, mode: 'challenge' },
+      { account_id: 'string', zone_id: 'string', configuration: {}, mode: 'challenge' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -116,7 +116,8 @@ describe('resource accessRules', () => {
     const response = await cloudflare.firewall.accessRules.edit(
       {},
       {
-        account_identifier: {},
+        account_id: 'string',
+        zone_id: 'string',
         configuration: { target: 'ip', value: '198.51.100.4' },
         mode: 'challenge',
         notes: 'This rule is enabled because of an event that occurred on date X.',

@@ -72,9 +72,9 @@ export class AccessRules extends APIResource {
     params: AccessRuleEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AccessRuleEditResponse | null> {
-    const { account_identifier, ...body } = params;
+    const { account_id, zone_id, ...body } = params;
     return (
-      this._client.patch(`/${account_identifier}/${identifier}/firewall/access_rules/rules/:identifier`, {
+      this._client.patch(`/${account_id}/${zone_id}/firewall/access_rules/rules/${identifier}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: AccessRuleEditResponse | null }>
@@ -323,9 +323,16 @@ export interface AccessRuleDeleteParams {
 
 export interface AccessRuleEditParams {
   /**
-   * Path param:
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
    */
-  account_identifier: unknown;
+  account_id: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id: string;
 
   /**
    * Body param: The rule configuration.

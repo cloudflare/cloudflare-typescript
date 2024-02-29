@@ -50,9 +50,9 @@ export class Rules extends APIResource {
     params: RuleEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RuleEditResponse> {
-    const { account_id, ...body } = params;
+    const { account_id, zone_id, ...body } = params;
     return (
-      this._client.patch(`/${account_id}/${rulesetId}/rulesets/${ruleId}/rules/:rule_id`, {
+      this._client.patch(`/${account_id}/${zone_id}/rulesets/${rulesetId}/rules/${ruleId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: RuleEditResponse }>
@@ -1819,9 +1819,16 @@ export interface RuleDeleteParams {
 
 export interface RuleEditParams {
   /**
-   * Path param: The unique ID of the account.
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
    */
   account_id: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id: string;
 
   /**
    * Body param: An object configuring where the rule will be placed.
