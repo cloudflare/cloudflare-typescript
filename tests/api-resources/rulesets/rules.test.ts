@@ -67,7 +67,7 @@ describe('resource rules', () => {
     const responsePromise = cloudflare.rulesets.rules.edit(
       '2f2feab2026849078ba485f918791bdc',
       '3a03d665bac047339bb530ecb439a90d',
-      { account_id: 'abf9b32d38c5f572afde3336ec0ce302' },
+      { account_id: 'string', zone_id: 'string' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -83,10 +83,7 @@ describe('resource rules', () => {
     const response = await cloudflare.rulesets.rules.edit(
       '2f2feab2026849078ba485f918791bdc',
       '3a03d665bac047339bb530ecb439a90d',
-      {
-        account_id: 'abf9b32d38c5f572afde3336ec0ce302',
-        position: { before: 'da5e8e506c8e7877fe06cdf4c41add54' },
-      },
+      { account_id: 'string', zone_id: 'string', position: { before: 'da5e8e506c8e7877fe06cdf4c41add54' } },
     );
   });
 });
