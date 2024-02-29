@@ -2,6 +2,8 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
+import { isRequestOptions } from 'cloudflare/core';
+import { CloudflareError } from 'cloudflare/error';
 import * as FieldsAPI from 'cloudflare/resources/logpush/datasets/fields';
 
 export class Fields extends APIResource {
@@ -11,13 +13,38 @@ export class Fields extends APIResource {
    */
   list(
     datasetId: string | null,
-    params: FieldListParams,
+    params?: FieldListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<FieldListResponse>;
+  list(datasetId: string | null, options?: Core.RequestOptions): Core.APIPromise<FieldListResponse>;
+  list(
+    datasetId: string | null,
+    params: FieldListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<FieldListResponse> {
+    if (isRequestOptions(params)) {
+      return this.list(datasetId, {}, params);
+    }
     const { account_id, zone_id } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
       this._client.get(
-        `/${account_id}/${zone_id}/logpush/datasets/${datasetId}/fields`,
+        `/${accountOrZone}/${accountOrZoneId}/logpush/datasets/${datasetId}/fields`,
         options,
       ) as Core.APIPromise<{ result: FieldListResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -30,12 +57,12 @@ export interface FieldListParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export namespace Fields {

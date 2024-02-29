@@ -16,8 +16,6 @@ describe('resource settings', () => {
   // skipped: tests are disabled for the time being
   test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.access.certificates.settings.update({
-      account_id: 'string',
-      zone_id: 'string',
       settings: [
         { china_network: false, client_certificate_forwarding: true, hostname: 'admin.example.com' },
         { china_network: false, client_certificate_forwarding: true, hostname: 'admin.example.com' },
@@ -36,22 +34,19 @@ describe('resource settings', () => {
   // skipped: tests are disabled for the time being
   test.skip('update: required and optional params', async () => {
     const response = await cloudflare.access.certificates.settings.update({
-      account_id: 'string',
-      zone_id: 'string',
       settings: [
         { china_network: false, client_certificate_forwarding: true, hostname: 'admin.example.com' },
         { china_network: false, client_certificate_forwarding: true, hostname: 'admin.example.com' },
         { china_network: false, client_certificate_forwarding: true, hostname: 'admin.example.com' },
       ],
+      account_id: 'string',
+      zone_id: 'string',
     });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: only required params', async () => {
-    const responsePromise = cloudflare.access.certificates.settings.list({
-      account_id: 'string',
-      zone_id: 'string',
-    });
+  test.skip('list', async () => {
+    const responsePromise = cloudflare.access.certificates.settings.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -62,10 +57,21 @@ describe('resource settings', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: required and optional params', async () => {
-    const response = await cloudflare.access.certificates.settings.list({
-      account_id: 'string',
-      zone_id: 'string',
-    });
+  test.skip('list: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.access.certificates.settings.list({ path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.access.certificates.settings.list(
+        { account_id: 'string', zone_id: 'string' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 });

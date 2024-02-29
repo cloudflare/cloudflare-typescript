@@ -2,6 +2,8 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
+import { isRequestOptions } from 'cloudflare/core';
+import { CloudflareError } from 'cloudflare/error';
 import * as SettingsAPI from 'cloudflare/resources/access/certificates/settings';
 
 export class Settings extends APIResource {
@@ -13,8 +15,24 @@ export class Settings extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<SettingUpdateResponse | null> {
     const { account_id, zone_id, ...body } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.put(`/${account_id}/${zone_id}/access/certificates/settings`, {
+      this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/certificates/settings`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: SettingUpdateResponse | null }>
@@ -25,14 +43,39 @@ export class Settings extends APIResource {
    * List all mTLS hostname settings for this account or zone.
    */
   list(
-    params: SettingListParams,
+    params?: SettingListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SettingListResponse | null>;
+  list(options?: Core.RequestOptions): Core.APIPromise<SettingListResponse | null>;
+  list(
+    params: SettingListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<SettingListResponse | null> {
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
     const { account_id, zone_id } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.get(`/${account_id}/${zone_id}/access/certificates/settings`, options) as Core.APIPromise<{
-        result: SettingListResponse | null;
-      }>
+      this._client.get(
+        `/${accountOrZone}/${accountOrZoneId}/access/certificates/settings`,
+        options,
+      ) as Core.APIPromise<{ result: SettingListResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -87,21 +130,21 @@ export namespace SettingListResponse {
 
 export interface SettingUpdateParams {
   /**
+   * Body param:
+   */
+  settings: Array<SettingUpdateParams.Setting>;
+
+  /**
    * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
    * Zone ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
    * Account ID.
    */
-  zone_id: string;
-
-  /**
-   * Body param:
-   */
-  settings: Array<SettingUpdateParams.Setting>;
+  zone_id?: string;
 }
 
 export namespace SettingUpdateParams {
@@ -130,12 +173,12 @@ export interface SettingListParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export namespace Settings {

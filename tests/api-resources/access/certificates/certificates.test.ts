@@ -16,8 +16,6 @@ describe('resource certificates', () => {
   // skipped: tests are disabled for the time being
   test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.access.certificates.create({
-      account_id: 'string',
-      zone_id: 'string',
       certificate:
         '-----BEGIN CERTIFICATE-----\nMIIGAjCCA+qgAwIBAgIJAI7kymlF7CWT...N4RI7KKB7nikiuUf8vhULKy5IX10\nDrUtmu/B\n-----END CERTIFICATE-----',
       name: 'Allow devs',
@@ -34,11 +32,11 @@ describe('resource certificates', () => {
   // skipped: tests are disabled for the time being
   test.skip('create: required and optional params', async () => {
     const response = await cloudflare.access.certificates.create({
-      account_id: 'string',
-      zone_id: 'string',
       certificate:
         '-----BEGIN CERTIFICATE-----\nMIIGAjCCA+qgAwIBAgIJAI7kymlF7CWT...N4RI7KKB7nikiuUf8vhULKy5IX10\nDrUtmu/B\n-----END CERTIFICATE-----',
       name: 'Allow devs',
+      account_id: 'string',
+      zone_id: 'string',
       associated_hostnames: ['admin.example.com', 'admin.example.com', 'admin.example.com'],
     });
   });
@@ -46,8 +44,6 @@ describe('resource certificates', () => {
   // skipped: tests are disabled for the time being
   test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.access.certificates.update('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
-      account_id: 'string',
-      zone_id: 'string',
       associated_hostnames: ['admin.example.com', 'admin.example.com', 'admin.example.com'],
     });
     const rawResponse = await responsePromise.asResponse();
@@ -62,16 +58,16 @@ describe('resource certificates', () => {
   // skipped: tests are disabled for the time being
   test.skip('update: required and optional params', async () => {
     const response = await cloudflare.access.certificates.update('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+      associated_hostnames: ['admin.example.com', 'admin.example.com', 'admin.example.com'],
       account_id: 'string',
       zone_id: 'string',
-      associated_hostnames: ['admin.example.com', 'admin.example.com', 'admin.example.com'],
       name: 'Allow devs',
     });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: only required params', async () => {
-    const responsePromise = cloudflare.access.certificates.list({ account_id: 'string', zone_id: 'string' });
+  test.skip('list', async () => {
+    const responsePromise = cloudflare.access.certificates.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -82,16 +78,27 @@ describe('resource certificates', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: required and optional params', async () => {
-    const response = await cloudflare.access.certificates.list({ account_id: 'string', zone_id: 'string' });
+  test.skip('list: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(cloudflare.access.certificates.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+      Cloudflare.NotFoundError,
+    );
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete: only required params', async () => {
-    const responsePromise = cloudflare.access.certificates.delete('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
-      account_id: 'string',
-      zone_id: 'string',
-    });
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.access.certificates.list(
+        { account_id: 'string', zone_id: 'string' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('delete', async () => {
+    const responsePromise = cloudflare.access.certificates.delete('f174e90a-fafe-4643-bbbc-4a0ed4fc8415');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -102,19 +109,30 @@ describe('resource certificates', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete: required and optional params', async () => {
-    const response = await cloudflare.access.certificates.delete('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
-      account_id: 'string',
-      zone_id: 'string',
-    });
+  test.skip('delete: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.access.certificates.delete('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+        path: '/_stainless_unknown_path',
+      }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: only required params', async () => {
-    const responsePromise = cloudflare.access.certificates.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
-      account_id: 'string',
-      zone_id: 'string',
-    });
+  test.skip('delete: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.access.certificates.delete(
+        'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+        { account_id: 'string', zone_id: 'string' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get', async () => {
+    const responsePromise = cloudflare.access.certificates.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -125,10 +143,24 @@ describe('resource certificates', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: required and optional params', async () => {
-    const response = await cloudflare.access.certificates.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
-      account_id: 'string',
-      zone_id: 'string',
-    });
+  test.skip('get: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.access.certificates.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+        path: '/_stainless_unknown_path',
+      }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.access.certificates.get(
+        'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+        { account_id: 'string', zone_id: 'string' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 });

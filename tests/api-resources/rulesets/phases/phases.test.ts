@@ -16,8 +16,6 @@ describe('resource phases', () => {
   // skipped: tests are disabled for the time being
   test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.rulesets.phases.update('http_request_firewall_custom', {
-      account_id: 'string',
-      zone_id: 'string',
       id: '2f2feab2026849078ba485f918791bdc',
       rules: [{}, {}, {}],
     });
@@ -33,8 +31,6 @@ describe('resource phases', () => {
   // skipped: tests are disabled for the time being
   test.skip('update: required and optional params', async () => {
     const response = await cloudflare.rulesets.phases.update('http_request_firewall_custom', {
-      account_id: 'string',
-      zone_id: 'string',
       id: '2f2feab2026849078ba485f918791bdc',
       rules: [
         {
@@ -86,6 +82,8 @@ describe('resource phases', () => {
           ref: 'my_ref',
         },
       ],
+      account_id: 'string',
+      zone_id: 'string',
       description: 'My ruleset to execute managed rulesets',
       kind: 'root',
       name: 'My ruleset',
@@ -94,11 +92,8 @@ describe('resource phases', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: only required params', async () => {
-    const responsePromise = cloudflare.rulesets.phases.get('http_request_firewall_custom', {
-      account_id: 'string',
-      zone_id: 'string',
-    });
+  test.skip('get', async () => {
+    const responsePromise = cloudflare.rulesets.phases.get('http_request_firewall_custom');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -109,10 +104,22 @@ describe('resource phases', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: required and optional params', async () => {
-    const response = await cloudflare.rulesets.phases.get('http_request_firewall_custom', {
-      account_id: 'string',
-      zone_id: 'string',
-    });
+  test.skip('get: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.rulesets.phases.get('http_request_firewall_custom', { path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.rulesets.phases.get(
+        'http_request_firewall_custom',
+        { account_id: 'string', zone_id: 'string' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 });

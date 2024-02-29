@@ -2,6 +2,8 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
+import { isRequestOptions } from 'cloudflare/core';
+import { CloudflareError } from 'cloudflare/error';
 import * as RulesetsAPI from 'cloudflare/resources/rulesets/rulesets';
 import * as RulesAPI from 'cloudflare/resources/rulesets/rules';
 import * as PhasesAPI from 'cloudflare/resources/rulesets/phases/phases';
@@ -17,10 +19,27 @@ export class Rulesets extends APIResource {
    */
   create(params: RulesetCreateParams, options?: Core.RequestOptions): Core.APIPromise<RulesetCreateResponse> {
     const { account_id, zone_id, ...body } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.post(`/${account_id}/${zone_id}/rulesets`, { body, ...options }) as Core.APIPromise<{
-        result: RulesetCreateResponse;
-      }>
+      this._client.post(`/${accountOrZone}/${accountOrZoneId}/rulesets`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: RulesetCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -33,8 +52,24 @@ export class Rulesets extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<RulesetUpdateResponse> {
     const { account_id, zone_id, ...body } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.put(`/${account_id}/${zone_id}/rulesets/${rulesetId}`, {
+      this._client.put(`/${accountOrZone}/${accountOrZoneId}/rulesets/${rulesetId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: RulesetUpdateResponse }>
@@ -44,10 +79,34 @@ export class Rulesets extends APIResource {
   /**
    * Fetches all rulesets.
    */
-  list(params: RulesetListParams, options?: Core.RequestOptions): Core.APIPromise<RulesetListResponse> {
+  list(params?: RulesetListParams, options?: Core.RequestOptions): Core.APIPromise<RulesetListResponse>;
+  list(options?: Core.RequestOptions): Core.APIPromise<RulesetListResponse>;
+  list(
+    params: RulesetListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RulesetListResponse> {
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
     const { account_id, zone_id } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.get(`/${account_id}/${zone_id}/rulesets`, options) as Core.APIPromise<{
+      this._client.get(`/${accountOrZone}/${accountOrZoneId}/rulesets`, options) as Core.APIPromise<{
         result: RulesetListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -58,11 +117,36 @@ export class Rulesets extends APIResource {
    */
   delete(
     rulesetId: string,
-    params: RulesetDeleteParams,
+    params?: RulesetDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<void>;
+  delete(rulesetId: string, options?: Core.RequestOptions): Core.APIPromise<void>;
+  delete(
+    rulesetId: string,
+    params: RulesetDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<void> {
+    if (isRequestOptions(params)) {
+      return this.delete(rulesetId, {}, params);
+    }
     const { account_id, zone_id } = params;
-    return this._client.delete(`/${account_id}/${zone_id}/rulesets/${rulesetId}`, {
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
+    return this._client.delete(`/${accountOrZone}/${accountOrZoneId}/rulesets/${rulesetId}`, {
       ...options,
       headers: { Accept: '*/*', ...options?.headers },
     });
@@ -73,14 +157,40 @@ export class Rulesets extends APIResource {
    */
   get(
     rulesetId: string,
-    params: RulesetGetParams,
+    params?: RulesetGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RulesetGetResponse>;
+  get(rulesetId: string, options?: Core.RequestOptions): Core.APIPromise<RulesetGetResponse>;
+  get(
+    rulesetId: string,
+    params: RulesetGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<RulesetGetResponse> {
+    if (isRequestOptions(params)) {
+      return this.get(rulesetId, {}, params);
+    }
     const { account_id, zone_id } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.get(`/${account_id}/${zone_id}/rulesets/${rulesetId}`, options) as Core.APIPromise<{
-        result: RulesetGetResponse;
-      }>
+      this._client.get(
+        `/${accountOrZone}/${accountOrZoneId}/rulesets/${rulesetId}`,
+        options,
+      ) as Core.APIPromise<{ result: RulesetGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -1849,18 +1959,6 @@ export namespace RulesetGetResponse {
 
 export interface RulesetCreateParams {
   /**
-   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-   * Zone ID.
-   */
-  account_id: string;
-
-  /**
-   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-   * Account ID.
-   */
-  zone_id: string;
-
-  /**
    * Body param: The kind of the ruleset.
    */
   kind: 'managed' | 'custom' | 'root' | 'zone';
@@ -1907,6 +2005,18 @@ export interface RulesetCreateParams {
     | RulesetCreateParams.RulesetsLogRule
     | RulesetCreateParams.RulesetsSkipRule
   >;
+
+  /**
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id?: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id?: string;
 
   /**
    * Body param: An informative description of the ruleset.
@@ -2347,18 +2457,6 @@ export namespace RulesetCreateParams {
 
 export interface RulesetUpdateParams {
   /**
-   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-   * Zone ID.
-   */
-  account_id: string;
-
-  /**
-   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-   * Account ID.
-   */
-  zone_id: string;
-
-  /**
    * Body param: The unique ID of the ruleset.
    */
   id: string;
@@ -2372,6 +2470,18 @@ export interface RulesetUpdateParams {
     | RulesetUpdateParams.RulesetsLogRule
     | RulesetUpdateParams.RulesetsSkipRule
   >;
+
+  /**
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id?: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id?: string;
 
   /**
    * Body param: An informative description of the ruleset.
@@ -2852,36 +2962,36 @@ export interface RulesetListParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface RulesetDeleteParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface RulesetGetParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export namespace Rulesets {

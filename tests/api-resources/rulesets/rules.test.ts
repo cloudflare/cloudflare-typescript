@@ -14,11 +14,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource rules', () => {
   // skipped: tests are disabled for the time being
-  test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.rulesets.rules.create('2f2feab2026849078ba485f918791bdc', {
-      account_id: 'string',
-      zone_id: 'string',
-    });
+  test.skip('create', async () => {
+    const responsePromise = cloudflare.rulesets.rules.create('2f2feab2026849078ba485f918791bdc', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -29,20 +26,10 @@ describe('resource rules', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.rulesets.rules.create('2f2feab2026849078ba485f918791bdc', {
-      account_id: 'string',
-      zone_id: 'string',
-      position: { before: 'da5e8e506c8e7877fe06cdf4c41add54' },
-    });
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('delete: only required params', async () => {
+  test.skip('delete', async () => {
     const responsePromise = cloudflare.rulesets.rules.delete(
       '2f2feab2026849078ba485f918791bdc',
       '3a03d665bac047339bb530ecb439a90d',
-      { account_id: 'string', zone_id: 'string' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -54,20 +41,36 @@ describe('resource rules', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete: required and optional params', async () => {
-    const response = await cloudflare.rulesets.rules.delete(
-      '2f2feab2026849078ba485f918791bdc',
-      '3a03d665bac047339bb530ecb439a90d',
-      { account_id: 'string', zone_id: 'string' },
-    );
+  test.skip('delete: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.rulesets.rules.delete(
+        '2f2feab2026849078ba485f918791bdc',
+        '3a03d665bac047339bb530ecb439a90d',
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('edit: only required params', async () => {
+  test.skip('delete: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.rulesets.rules.delete(
+        '2f2feab2026849078ba485f918791bdc',
+        '3a03d665bac047339bb530ecb439a90d',
+        { account_id: 'string', zone_id: 'string' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('edit', async () => {
     const responsePromise = cloudflare.rulesets.rules.edit(
       '2f2feab2026849078ba485f918791bdc',
       '3a03d665bac047339bb530ecb439a90d',
-      { account_id: 'string', zone_id: 'string' },
+      {},
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -76,14 +79,5 @@ describe('resource rules', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('edit: required and optional params', async () => {
-    const response = await cloudflare.rulesets.rules.edit(
-      '2f2feab2026849078ba485f918791bdc',
-      '3a03d665bac047339bb530ecb439a90d',
-      { account_id: 'string', zone_id: 'string', position: { before: 'da5e8e506c8e7877fe06cdf4c41add54' } },
-    );
   });
 });

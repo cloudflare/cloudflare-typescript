@@ -2,6 +2,8 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
+import { isRequestOptions } from 'cloudflare/core';
+import { CloudflareError } from 'cloudflare/error';
 import * as VersionsAPI from 'cloudflare/resources/rulesets/versions/versions';
 import * as ByTagsAPI from 'cloudflare/resources/rulesets/versions/by-tags';
 
@@ -13,13 +15,38 @@ export class Versions extends APIResource {
    */
   list(
     rulesetId: string,
-    params: VersionListParams,
+    params?: VersionListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<VersionListResponse>;
+  list(rulesetId: string, options?: Core.RequestOptions): Core.APIPromise<VersionListResponse>;
+  list(
+    rulesetId: string,
+    params: VersionListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<VersionListResponse> {
+    if (isRequestOptions(params)) {
+      return this.list(rulesetId, {}, params);
+    }
     const { account_id, zone_id } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
       this._client.get(
-        `/${account_id}/${zone_id}/rulesets/${rulesetId}/versions`,
+        `/${accountOrZone}/${accountOrZoneId}/rulesets/${rulesetId}/versions`,
         options,
       ) as Core.APIPromise<{ result: VersionListResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -31,14 +58,40 @@ export class Versions extends APIResource {
   delete(
     rulesetId: string,
     rulesetVersion: string,
-    params: VersionDeleteParams,
+    params?: VersionDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<void>;
+  delete(rulesetId: string, rulesetVersion: string, options?: Core.RequestOptions): Core.APIPromise<void>;
+  delete(
+    rulesetId: string,
+    rulesetVersion: string,
+    params: VersionDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<void> {
+    if (isRequestOptions(params)) {
+      return this.delete(rulesetId, rulesetVersion, {}, params);
+    }
     const { account_id, zone_id } = params;
-    return this._client.delete(`/${account_id}/${zone_id}/rulesets/${rulesetId}/versions/${rulesetVersion}`, {
-      ...options,
-      headers: { Accept: '*/*', ...options?.headers },
-    });
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
+    return this._client.delete(
+      `/${accountOrZone}/${accountOrZoneId}/rulesets/${rulesetId}/versions/${rulesetVersion}`,
+      { ...options, headers: { Accept: '*/*', ...options?.headers } },
+    );
   }
 
   /**
@@ -47,13 +100,43 @@ export class Versions extends APIResource {
   get(
     rulesetId: string,
     rulesetVersion: string,
-    params: VersionGetParams,
+    params?: VersionGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<VersionGetResponse>;
+  get(
+    rulesetId: string,
+    rulesetVersion: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<VersionGetResponse>;
+  get(
+    rulesetId: string,
+    rulesetVersion: string,
+    params: VersionGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<VersionGetResponse> {
+    if (isRequestOptions(params)) {
+      return this.get(rulesetId, rulesetVersion, {}, params);
+    }
     const { account_id, zone_id } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
       this._client.get(
-        `/${account_id}/${zone_id}/rulesets/${rulesetId}/versions/${rulesetVersion}`,
+        `/${accountOrZone}/${accountOrZoneId}/rulesets/${rulesetId}/versions/${rulesetVersion}`,
         options,
       ) as Core.APIPromise<{ result: VersionGetResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -698,36 +781,36 @@ export interface VersionListParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface VersionDeleteParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface VersionGetParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export namespace Versions {

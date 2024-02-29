@@ -16,7 +16,7 @@ export class Accounts extends APIResource {
     const { account_id } = params;
     return (
       this._client.put(
-        `/accounts/${account_id}/addressing/address_maps/${addressMapId}/accounts/:account_id`,
+        `/accounts/${account_id}/addressing/address_maps/${addressMapId}/accounts/${account_id}`,
         options,
       ) as Core.APIPromise<{ result: AccountUpdateResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -33,7 +33,7 @@ export class Accounts extends APIResource {
     const { account_id } = params;
     return (
       this._client.delete(
-        `/accounts/${account_id}/addressing/address_maps/${addressMapId}/accounts/:account_id`,
+        `/accounts/${account_id}/addressing/address_maps/${addressMapId}/accounts/${account_id}`,
         options,
       ) as Core.APIPromise<{ result: AccountDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);

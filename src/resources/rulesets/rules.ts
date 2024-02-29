@@ -2,6 +2,8 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
+import { isRequestOptions } from 'cloudflare/core';
+import { CloudflareError } from 'cloudflare/error';
 import * as RulesAPI from 'cloudflare/resources/rulesets/rules';
 
 export class Rules extends APIResource {
@@ -15,8 +17,24 @@ export class Rules extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<RuleCreateResponse> {
     const { account_id, zone_id, ...body } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.post(`/${account_id}/${zone_id}/rulesets/${rulesetId}/rules`, {
+      this._client.post(`/${accountOrZone}/${accountOrZoneId}/rulesets/${rulesetId}/rules`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: RuleCreateResponse }>
@@ -29,13 +47,43 @@ export class Rules extends APIResource {
   delete(
     rulesetId: string,
     ruleId: string,
-    params: RuleDeleteParams,
+    params?: RuleDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RuleDeleteResponse>;
+  delete(
+    rulesetId: string,
+    ruleId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RuleDeleteResponse>;
+  delete(
+    rulesetId: string,
+    ruleId: string,
+    params: RuleDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<RuleDeleteResponse> {
+    if (isRequestOptions(params)) {
+      return this.delete(rulesetId, ruleId, {}, params);
+    }
     const { account_id, zone_id } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
       this._client.delete(
-        `/${account_id}/${zone_id}/rulesets/${rulesetId}/rules/${ruleId}`,
+        `/${accountOrZone}/${accountOrZoneId}/rulesets/${rulesetId}/rules/${ruleId}`,
         options,
       ) as Core.APIPromise<{ result: RuleDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -51,8 +99,24 @@ export class Rules extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<RuleEditResponse> {
     const { account_id, zone_id, ...body } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.patch(`/${account_id}/${zone_id}/rulesets/${rulesetId}/rules/${ruleId}`, {
+      this._client.patch(`/${accountOrZone}/${accountOrZoneId}/rulesets/${rulesetId}/rules/${ruleId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: RuleEditResponse }>
@@ -1757,13 +1821,13 @@ export interface RuleCreateParams {
    * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
    * Zone ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
    * Account ID.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: An object configuring where the rule will be placed.
@@ -1809,12 +1873,12 @@ export interface RuleDeleteParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface RuleEditParams {
@@ -1822,13 +1886,13 @@ export interface RuleEditParams {
    * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
    * Zone ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
    * Account ID.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: An object configuring where the rule will be placed.

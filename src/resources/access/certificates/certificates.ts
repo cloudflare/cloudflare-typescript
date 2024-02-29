@@ -2,6 +2,8 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
+import { isRequestOptions } from 'cloudflare/core';
+import { CloudflareError } from 'cloudflare/error';
 import * as CertificatesAPI from 'cloudflare/resources/access/certificates/certificates';
 import * as SettingsAPI from 'cloudflare/resources/access/certificates/settings';
 
@@ -16,8 +18,24 @@ export class Certificates extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<CertificateCreateResponse> {
     const { account_id, zone_id, ...body } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.post(`/${account_id}/${zone_id}/access/certificates`, {
+      this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/certificates`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: CertificateCreateResponse }>
@@ -33,8 +51,24 @@ export class Certificates extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<CertificateUpdateResponse> {
     const { account_id, zone_id, ...body } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.put(`/${account_id}/${zone_id}/access/certificates/${uuid}`, {
+      this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/certificates/${uuid}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: CertificateUpdateResponse }>
@@ -45,14 +79,39 @@ export class Certificates extends APIResource {
    * Lists all mTLS root certificates.
    */
   list(
-    params: CertificateListParams,
+    params?: CertificateListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CertificateListResponse | null>;
+  list(options?: Core.RequestOptions): Core.APIPromise<CertificateListResponse | null>;
+  list(
+    params: CertificateListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<CertificateListResponse | null> {
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
     const { account_id, zone_id } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.get(`/${account_id}/${zone_id}/access/certificates`, options) as Core.APIPromise<{
-        result: CertificateListResponse | null;
-      }>
+      this._client.get(
+        `/${accountOrZone}/${accountOrZoneId}/access/certificates`,
+        options,
+      ) as Core.APIPromise<{ result: CertificateListResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -61,13 +120,38 @@ export class Certificates extends APIResource {
    */
   delete(
     uuid: string,
-    params: CertificateDeleteParams,
+    params?: CertificateDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CertificateDeleteResponse>;
+  delete(uuid: string, options?: Core.RequestOptions): Core.APIPromise<CertificateDeleteResponse>;
+  delete(
+    uuid: string,
+    params: CertificateDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<CertificateDeleteResponse> {
+    if (isRequestOptions(params)) {
+      return this.delete(uuid, {}, params);
+    }
     const { account_id, zone_id } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
       this._client.delete(
-        `/${account_id}/${zone_id}/access/certificates/${uuid}`,
+        `/${accountOrZone}/${accountOrZoneId}/access/certificates/${uuid}`,
         options,
       ) as Core.APIPromise<{ result: CertificateDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -78,14 +162,40 @@ export class Certificates extends APIResource {
    */
   get(
     uuid: string,
-    params: CertificateGetParams,
+    params?: CertificateGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CertificateGetResponse>;
+  get(uuid: string, options?: Core.RequestOptions): Core.APIPromise<CertificateGetResponse>;
+  get(
+    uuid: string,
+    params: CertificateGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<CertificateGetResponse> {
+    if (isRequestOptions(params)) {
+      return this.get(uuid, {}, params);
+    }
     const { account_id, zone_id } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.get(`/${account_id}/${zone_id}/access/certificates/${uuid}`, options) as Core.APIPromise<{
-        result: CertificateGetResponse;
-      }>
+      this._client.get(
+        `/${accountOrZone}/${accountOrZoneId}/access/certificates/${uuid}`,
+        options,
+      ) as Core.APIPromise<{ result: CertificateGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -215,18 +325,6 @@ export interface CertificateGetResponse {
 
 export interface CertificateCreateParams {
   /**
-   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-   * Zone ID.
-   */
-  account_id: string;
-
-  /**
-   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-   * Account ID.
-   */
-  zone_id: string;
-
-  /**
    * Body param: The certificate content.
    */
   certificate: string;
@@ -237,6 +335,18 @@ export interface CertificateCreateParams {
   name: string;
 
   /**
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id?: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id?: string;
+
+  /**
    * Body param: The hostnames of the applications that will use this certificate.
    */
   associated_hostnames?: Array<string>;
@@ -244,21 +354,21 @@ export interface CertificateCreateParams {
 
 export interface CertificateUpdateParams {
   /**
+   * Body param: The hostnames of the applications that will use this certificate.
+   */
+  associated_hostnames: Array<string>;
+
+  /**
    * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
    * Zone ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
    * Account ID.
    */
-  zone_id: string;
-
-  /**
-   * Body param: The hostnames of the applications that will use this certificate.
-   */
-  associated_hostnames: Array<string>;
+  zone_id?: string;
 
   /**
    * Body param: The name of the certificate.
@@ -270,36 +380,36 @@ export interface CertificateListParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface CertificateDeleteParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface CertificateGetParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export namespace Certificates {

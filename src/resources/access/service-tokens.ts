@@ -2,6 +2,8 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
+import { isRequestOptions } from 'cloudflare/core';
+import { CloudflareError } from 'cloudflare/error';
 import * as ServiceTokensAPI from 'cloudflare/resources/access/service-tokens';
 
 export class ServiceTokens extends APIResource {
@@ -15,8 +17,24 @@ export class ServiceTokens extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<ServiceTokenCreateResponse> {
     const { account_id, zone_id, ...body } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.post(`/${account_id}/${zone_id}/access/service_tokens`, {
+      this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/service_tokens`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: ServiceTokenCreateResponse }>
@@ -32,8 +50,24 @@ export class ServiceTokens extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<ServiceTokenUpdateResponse> {
     const { account_id, zone_id, ...body } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.put(`/${account_id}/${zone_id}/access/service_tokens/${uuid}`, {
+      this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/service_tokens/${uuid}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: ServiceTokenUpdateResponse }>
@@ -44,14 +78,39 @@ export class ServiceTokens extends APIResource {
    * Lists all service tokens.
    */
   list(
-    params: ServiceTokenListParams,
+    params?: ServiceTokenListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ServiceTokenListResponse | null>;
+  list(options?: Core.RequestOptions): Core.APIPromise<ServiceTokenListResponse | null>;
+  list(
+    params: ServiceTokenListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ServiceTokenListResponse | null> {
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
     const { account_id, zone_id } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.get(`/${account_id}/${zone_id}/access/service_tokens`, options) as Core.APIPromise<{
-        result: ServiceTokenListResponse | null;
-      }>
+      this._client.get(
+        `/${accountOrZone}/${accountOrZoneId}/access/service_tokens`,
+        options,
+      ) as Core.APIPromise<{ result: ServiceTokenListResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -60,13 +119,38 @@ export class ServiceTokens extends APIResource {
    */
   delete(
     uuid: string,
-    params: ServiceTokenDeleteParams,
+    params?: ServiceTokenDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ServiceTokenDeleteResponse>;
+  delete(uuid: string, options?: Core.RequestOptions): Core.APIPromise<ServiceTokenDeleteResponse>;
+  delete(
+    uuid: string,
+    params: ServiceTokenDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ServiceTokenDeleteResponse> {
+    if (isRequestOptions(params)) {
+      return this.delete(uuid, {}, params);
+    }
     const { account_id, zone_id } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
       this._client.delete(
-        `/${account_id}/${zone_id}/access/service_tokens/${uuid}`,
+        `/${accountOrZone}/${accountOrZoneId}/access/service_tokens/${uuid}`,
         options,
       ) as Core.APIPromise<{ result: ServiceTokenDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -297,21 +381,21 @@ export interface ServiceTokenRotateResponse {
 
 export interface ServiceTokenCreateParams {
   /**
+   * Body param: The name of the service token.
+   */
+  name: string;
+
+  /**
    * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
    * Zone ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
    * Account ID.
    */
-  zone_id: string;
-
-  /**
-   * Body param: The name of the service token.
-   */
-  name: string;
+  zone_id?: string;
 
   /**
    * Body param: The duration for how long the service token will be valid. Must be
@@ -326,13 +410,13 @@ export interface ServiceTokenUpdateParams {
    * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
    * Zone ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
    * Account ID.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The duration for how long the service token will be valid. Must be
@@ -351,24 +435,24 @@ export interface ServiceTokenListParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface ServiceTokenDeleteParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export namespace ServiceTokens {
