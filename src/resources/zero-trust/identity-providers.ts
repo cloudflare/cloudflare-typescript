@@ -4,7 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import { CloudflareError } from 'cloudflare/error';
-import * as IdentityProvidersAPI from 'cloudflare/resources/zero-trust/access/identity-providers';
+import * as IdentityProvidersAPI from 'cloudflare/resources/zero-trust/identity-providers';
 
 export class IdentityProviders extends APIResource {
   /**

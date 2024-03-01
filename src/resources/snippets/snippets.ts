@@ -5,12 +5,12 @@ import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as SnippetsAPI from 'cloudflare/resources/snippets/snippets';
 import * as ContentAPI from 'cloudflare/resources/snippets/content';
-import * as SnippetRulesAPI from 'cloudflare/resources/snippets/snippet-rules';
+import * as RulesAPI from 'cloudflare/resources/snippets/rules';
 import { multipartFormRequestOptions } from 'cloudflare/core';
 
 export class Snippets extends APIResource {
   content: ContentAPI.Content = new ContentAPI.Content(this._client);
-  snippetRules: SnippetRulesAPI.SnippetRules = new SnippetRulesAPI.SnippetRules(this._client);
+  rules: RulesAPI.Rules = new RulesAPI.Rules(this._client);
 
   /**
    * Put Snippet
@@ -179,8 +179,8 @@ export namespace Snippets {
   export import SnippetGetResponse = SnippetsAPI.SnippetGetResponse;
   export import SnippetUpdateParams = SnippetsAPI.SnippetUpdateParams;
   export import Content = ContentAPI.Content;
-  export import SnippetRules = SnippetRulesAPI.SnippetRules;
-  export import SnippetRuleUpdateResponse = SnippetRulesAPI.SnippetRuleUpdateResponse;
-  export import SnippetRuleListResponse = SnippetRulesAPI.SnippetRuleListResponse;
-  export import SnippetRuleUpdateParams = SnippetRulesAPI.SnippetRuleUpdateParams;
+  export import Rules = RulesAPI.Rules;
+  export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
+  export import RuleListResponse = RulesAPI.RuleListResponse;
+  export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
 }

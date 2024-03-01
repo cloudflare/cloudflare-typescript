@@ -2,7 +2,7 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as SeatsAPI from 'cloudflare/resources/zero-trust/access/seats';
+import * as SeatsAPI from 'cloudflare/resources/zero-trust/seats';
 
 export class Seats extends APIResource {
   /**

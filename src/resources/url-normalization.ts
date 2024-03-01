@@ -2,9 +2,9 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as URLNormalizationsAPI from 'cloudflare/resources/url-normalizations';
+import * as URLNormalizationAPI from 'cloudflare/resources/url-normalization';
 
-export class URLNormalizations extends APIResource {
+export class URLNormalization extends APIResource {
   /**
    * Updates the URL normalization settings.
    */
@@ -76,9 +76,9 @@ export interface URLNormalizationGetParams {
   zone_id: string;
 }
 
-export namespace URLNormalizations {
-  export import URLNormalizationUpdateResponse = URLNormalizationsAPI.URLNormalizationUpdateResponse;
-  export import URLNormalizationGetResponse = URLNormalizationsAPI.URLNormalizationGetResponse;
-  export import URLNormalizationUpdateParams = URLNormalizationsAPI.URLNormalizationUpdateParams;
-  export import URLNormalizationGetParams = URLNormalizationsAPI.URLNormalizationGetParams;
+export namespace URLNormalization {
+  export import URLNormalizationUpdateResponse = URLNormalizationAPI.URLNormalizationUpdateResponse;
+  export import URLNormalizationGetResponse = URLNormalizationAPI.URLNormalizationGetResponse;
+  export import URLNormalizationUpdateParams = URLNormalizationAPI.URLNormalizationUpdateParams;
+  export import URLNormalizationGetParams = URLNormalizationAPI.URLNormalizationGetParams;
 }

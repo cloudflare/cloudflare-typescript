@@ -5,7 +5,7 @@ import * as ConnectionTamperingAPI from 'cloudflare/resources/radar/connection-t
 import * as DatasetsAPI from 'cloudflare/resources/radar/datasets';
 import * as SearchAPI from 'cloudflare/resources/radar/search';
 import * as AnnotationsAPI from 'cloudflare/resources/radar/annotations/annotations';
-import * as As112API from 'cloudflare/resources/radar/as112/as112';
+import * as AS112API from 'cloudflare/resources/radar/as112/as112';
 import * as AttacksAPI from 'cloudflare/resources/radar/attacks/attacks';
 import * as BGPAPI from 'cloudflare/resources/radar/bgp/bgp';
 import * as DNSAPI from 'cloudflare/resources/radar/dns/dns';
@@ -26,7 +26,7 @@ export class Radar extends APIResource {
   netflows: NetflowsAPI.Netflows = new NetflowsAPI.Netflows(this._client);
   search: SearchAPI.Search = new SearchAPI.Search(this._client);
   verifiedBots: VerifiedBotsAPI.VerifiedBots = new VerifiedBotsAPI.VerifiedBots(this._client);
-  as112: As112API.As112 = new As112API.As112(this._client);
+  as112: AS112API.AS112 = new AS112API.AS112(this._client);
   connectionTampering: ConnectionTamperingAPI.ConnectionTampering =
     new ConnectionTamperingAPI.ConnectionTampering(this._client);
   email: EmailAPI.Email = new EmailAPI.Email(this._client);
@@ -60,9 +60,9 @@ export namespace Radar {
   export import SearchGlobalResponse = SearchAPI.SearchGlobalResponse;
   export import SearchGlobalParams = SearchAPI.SearchGlobalParams;
   export import VerifiedBots = VerifiedBotsAPI.VerifiedBots;
-  export import As112 = As112API.As112;
-  export import As112TimeseriesResponse = As112API.As112TimeseriesResponse;
-  export import As112TimeseriesParams = As112API.As112TimeseriesParams;
+  export import AS112 = AS112API.AS112;
+  export import AS112TimeseriesResponse = AS112API.AS112TimeseriesResponse;
+  export import AS112TimeseriesParams = AS112API.AS112TimeseriesParams;
   export import ConnectionTampering = ConnectionTamperingAPI.ConnectionTampering;
   export import ConnectionTamperingSummaryResponse = ConnectionTamperingAPI.ConnectionTamperingSummaryResponse;
   export import ConnectionTamperingTimeseriesGroupsResponse = ConnectionTamperingAPI.ConnectionTamperingTimeseriesGroupsResponse;

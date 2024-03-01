@@ -8,12 +8,10 @@ import * as FiltersAPI from 'cloudflare/resources/workers/filters';
 import * as RoutesAPI from 'cloudflare/resources/workers/routes';
 import * as SubdomainsAPI from 'cloudflare/resources/workers/subdomains';
 import * as DeploymentsAPI from 'cloudflare/resources/workers/deployments/deployments';
-import * as DispatchAPI from 'cloudflare/resources/workers/dispatch/dispatch';
 import * as ScriptsAPI from 'cloudflare/resources/workers/scripts/scripts';
 import * as ServicesAPI from 'cloudflare/resources/workers/services/services';
 
 export class Workers extends APIResource {
-  dispatch: DispatchAPI.Dispatch = new DispatchAPI.Dispatch(this._client);
   ai: AIAPI.AI = new AIAPI.AI(this._client);
   scripts: ScriptsAPI.Scripts = new ScriptsAPI.Scripts(this._client);
   filters: FiltersAPI.Filters = new FiltersAPI.Filters(this._client);
@@ -26,7 +24,6 @@ export class Workers extends APIResource {
 }
 
 export namespace Workers {
-  export import Dispatch = DispatchAPI.Dispatch;
   export import AI = AIAPI.AI;
   export import AIRunResponse = AIAPI.AIRunResponse;
   export import AIRunParams = AIAPI.AIRunParams;

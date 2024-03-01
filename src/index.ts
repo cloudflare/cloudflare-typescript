@@ -204,7 +204,7 @@ export class Cloudflare extends Core.APIClient {
   managedHeaders: API.ManagedHeaders = new API.ManagedHeaders(this);
   pageShield: API.PageShield = new API.PageShield(this);
   rulesets: API.Rulesets = new API.Rulesets(this);
-  urlNormalizations: API.URLNormalizations = new API.URLNormalizations(this);
+  urlNormalization: API.URLNormalization = new API.URLNormalization(this);
   spectrum: API.Spectrum = new API.Spectrum(this);
   addressing: API.Addressing = new API.Addressing(this);
   auditLogs: API.AuditLogs = new API.AuditLogs(this);
@@ -220,7 +220,6 @@ export class Cloudflare extends Core.APIClient {
   pcaps: API.PCAPs = new API.PCAPs(this);
   registrar: API.Registrar = new API.Registrar(this);
   requestTracers: API.RequestTracers = new API.RequestTracers(this);
-  roles: API.Roles = new API.Roles(this);
   rules: API.Rules = new API.Rules(this);
   storage: API.Storage = new API.Storage(this);
   stream: API.Stream = new API.Stream(this);
@@ -240,7 +239,7 @@ export class Cloudflare extends Core.APIClient {
   botManagement: API.BotManagement = new API.BotManagement(this);
   originPostQuantumEncryption: API.OriginPostQuantumEncryption = new API.OriginPostQuantumEncryption(this);
   speed: API.Speed = new API.Speed(this);
-  dcvDelegation: API.DcvDelegation = new API.DcvDelegation(this);
+  dcvDelegation: API.DCVDelegation = new API.DCVDelegation(this);
   hostnames: API.Hostnames = new API.Hostnames(this);
   snippets: API.Snippets = new API.Snippets(this);
   calls: API.Calls = new API.Calls(this);
@@ -622,7 +621,7 @@ export namespace Cloudflare {
   export import RulesetDeleteParams = API.RulesetDeleteParams;
   export import RulesetGetParams = API.RulesetGetParams;
 
-  export import URLNormalizations = API.URLNormalizations;
+  export import URLNormalization = API.URLNormalization;
   export import URLNormalizationUpdateResponse = API.URLNormalizationUpdateResponse;
   export import URLNormalizationGetResponse = API.URLNormalizationGetResponse;
   export import URLNormalizationUpdateParams = API.URLNormalizationUpdateParams;
@@ -678,12 +677,6 @@ export namespace Cloudflare {
   export import Registrar = API.Registrar;
 
   export import RequestTracers = API.RequestTracers;
-
-  export import Roles = API.Roles;
-  export import RoleListResponse = API.RoleListResponse;
-  export import RoleGetResponse = API.RoleGetResponse;
-  export import RoleListParams = API.RoleListParams;
-  export import RoleGetParams = API.RoleGetParams;
 
   export import Rules = API.Rules;
 
@@ -762,7 +755,7 @@ export namespace Cloudflare {
   export import SpeedScheduleGetParams = API.SpeedScheduleGetParams;
   export import SpeedTrendsListParams = API.SpeedTrendsListParams;
 
-  export import DcvDelegation = API.DcvDelegation;
+  export import DCVDelegation = API.DCVDelegation;
 
   export import Hostnames = API.Hostnames;
 

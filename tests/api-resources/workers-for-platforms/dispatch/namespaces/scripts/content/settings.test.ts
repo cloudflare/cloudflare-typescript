@@ -15,7 +15,7 @@ const cloudflare = new Cloudflare({
 describe('resource settings', () => {
   // skipped: tests are disabled for the time being
   test.skip('edit: only required params', async () => {
-    const responsePromise = cloudflare.workersForPlatforms.dispatch.namespaces.scripts.settings.edit(
+    const responsePromise = cloudflare.workersForPlatforms.dispatch.namespaces.scripts.content.settings.edit(
       'my-dispatch-namespace',
       'this-is_my_script-01',
       {
@@ -45,7 +45,7 @@ describe('resource settings', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('edit: required and optional params', async () => {
-    const response = await cloudflare.workersForPlatforms.dispatch.namespaces.scripts.settings.edit(
+    const response = await cloudflare.workersForPlatforms.dispatch.namespaces.scripts.content.settings.edit(
       'my-dispatch-namespace',
       'this-is_my_script-01',
       {
@@ -101,7 +101,7 @@ describe('resource settings', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('get: only required params', async () => {
-    const responsePromise = cloudflare.workersForPlatforms.dispatch.namespaces.scripts.settings.get(
+    const responsePromise = cloudflare.workersForPlatforms.dispatch.namespaces.scripts.content.settings.get(
       'my-dispatch-namespace',
       'this-is_my_script-01',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
@@ -117,7 +117,7 @@ describe('resource settings', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('get: required and optional params', async () => {
-    const response = await cloudflare.workersForPlatforms.dispatch.namespaces.scripts.settings.get(
+    const response = await cloudflare.workersForPlatforms.dispatch.namespaces.scripts.content.settings.get(
       'my-dispatch-namespace',
       'this-is_my_script-01',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },

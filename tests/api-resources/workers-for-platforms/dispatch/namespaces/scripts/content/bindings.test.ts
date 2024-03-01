@@ -15,7 +15,7 @@ const cloudflare = new Cloudflare({
 describe('resource bindings', () => {
   // skipped: tests are disabled for the time being
   test.skip('get: only required params', async () => {
-    const responsePromise = cloudflare.workersForPlatforms.dispatch.namespaces.scripts.bindings.get(
+    const responsePromise = cloudflare.workersForPlatforms.dispatch.namespaces.scripts.content.bindings.get(
       'my-dispatch-namespace',
       'this-is_my_script-01',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
@@ -31,7 +31,7 @@ describe('resource bindings', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('get: required and optional params', async () => {
-    const response = await cloudflare.workersForPlatforms.dispatch.namespaces.scripts.bindings.get(
+    const response = await cloudflare.workersForPlatforms.dispatch.namespaces.scripts.content.bindings.get(
       'my-dispatch-namespace',
       'this-is_my_script-01',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },

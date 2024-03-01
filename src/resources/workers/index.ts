@@ -9,7 +9,6 @@ export {
   AccountSettings,
 } from './account-settings';
 export { Deployments } from './deployments/index';
-export { Dispatch } from './dispatch/index';
 export {
   DomainUpdateResponse,
   DomainListResponse,

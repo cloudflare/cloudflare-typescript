@@ -4,7 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import { CloudflareError } from 'cloudflare/error';
-import * as OrganizationsAPI from 'cloudflare/resources/zero-trust/access/organizations';
+import * as OrganizationsAPI from 'cloudflare/resources/zero-trust/organizations';
 
 export class Organizations extends APIResource {
   /**
