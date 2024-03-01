@@ -2,7 +2,7 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as RolesAPI from 'cloudflare/resources/roles';
+import * as RolesAPI from 'cloudflare/resources/accounts/roles';
 
 export class Roles extends APIResource {
   /**

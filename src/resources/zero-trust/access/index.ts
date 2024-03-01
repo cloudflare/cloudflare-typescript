@@ -60,33 +60,8 @@ export {
   GroupGetParams,
   Groups,
 } from './groups';
-export {
-  IdentityProviderCreateResponse,
-  IdentityProviderUpdateResponse,
-  IdentityProviderListResponse,
-  IdentityProviderDeleteResponse,
-  IdentityProviderGetResponse,
-  IdentityProviderCreateParams,
-  IdentityProviderUpdateParams,
-  IdentityProviderListParams,
-  IdentityProviderDeleteParams,
-  IdentityProviderGetParams,
-  IdentityProviders,
-} from './identity-providers';
 export { KeyUpdateResponse, KeyListResponse, KeyRotateResponse, KeyUpdateParams, Keys } from './keys';
 export { Logs } from './logs/index';
-export {
-  OrganizationCreateResponse,
-  OrganizationUpdateResponse,
-  OrganizationListResponse,
-  OrganizationRevokeUsersResponse,
-  OrganizationCreateParams,
-  OrganizationUpdateParams,
-  OrganizationListParams,
-  OrganizationRevokeUsersParams,
-  Organizations,
-} from './organizations';
-export { SeatEditResponse, SeatEditParams, Seats } from './seats';
 export {
   ServiceTokenCreateResponse,
   ServiceTokenUpdateResponse,

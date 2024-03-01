@@ -3,12 +3,12 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
-import * as As112API from 'cloudflare/resources/radar/as112/as112';
+import * as AS112API from 'cloudflare/resources/radar/as112/as112';
 import * as SummaryAPI from 'cloudflare/resources/radar/as112/summary';
 import * as TimeseriesGroupsAPI from 'cloudflare/resources/radar/as112/timeseries-groups';
 import * as TopAPI from 'cloudflare/resources/radar/as112/top';
 
-export class As112 extends APIResource {
+export class AS112 extends APIResource {
   summary: SummaryAPI.Summary = new SummaryAPI.Summary(this._client);
   timeseriesGroups: TimeseriesGroupsAPI.TimeseriesGroups = new TimeseriesGroupsAPI.TimeseriesGroups(
     this._client,
@@ -19,32 +19,32 @@ export class As112 extends APIResource {
    * Get AS112 queries change over time.
    */
   timeseries(
-    query?: As112TimeseriesParams,
+    query?: AS112TimeseriesParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<As112TimeseriesResponse>;
-  timeseries(options?: Core.RequestOptions): Core.APIPromise<As112TimeseriesResponse>;
+  ): Core.APIPromise<AS112TimeseriesResponse>;
+  timeseries(options?: Core.RequestOptions): Core.APIPromise<AS112TimeseriesResponse>;
   timeseries(
-    query: As112TimeseriesParams | Core.RequestOptions = {},
+    query: AS112TimeseriesParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<As112TimeseriesResponse> {
+  ): Core.APIPromise<AS112TimeseriesResponse> {
     if (isRequestOptions(query)) {
       return this.timeseries({}, query);
     }
     return (
       this._client.get('/radar/as112/timeseries', { query, ...options }) as Core.APIPromise<{
-        result: As112TimeseriesResponse;
+        result: AS112TimeseriesResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface As112TimeseriesResponse {
-  meta: As112TimeseriesResponse.Meta;
+export interface AS112TimeseriesResponse {
+  meta: AS112TimeseriesResponse.Meta;
 
-  serie_0: As112TimeseriesResponse.Serie0;
+  serie_0: AS112TimeseriesResponse.Serie0;
 }
 
-export namespace As112TimeseriesResponse {
+export namespace AS112TimeseriesResponse {
   export interface Meta {
     aggInterval: string;
 
@@ -100,7 +100,7 @@ export namespace As112TimeseriesResponse {
   }
 }
 
-export interface As112TimeseriesParams {
+export interface AS112TimeseriesParams {
   /**
    * Aggregation interval results should be returned in (for example, in 15 minutes
    * or 1 hour intervals). Refer to
@@ -173,9 +173,9 @@ export interface As112TimeseriesParams {
   name?: Array<string>;
 }
 
-export namespace As112 {
-  export import As112TimeseriesResponse = As112API.As112TimeseriesResponse;
-  export import As112TimeseriesParams = As112API.As112TimeseriesParams;
+export namespace AS112 {
+  export import AS112TimeseriesResponse = AS112API.AS112TimeseriesResponse;
+  export import AS112TimeseriesParams = AS112API.AS112TimeseriesParams;
   export import Summary = SummaryAPI.Summary;
   export import SummaryDNSSECResponse = SummaryAPI.SummaryDNSSECResponse;
   export import SummaryEdnsResponse = SummaryAPI.SummaryEdnsResponse;

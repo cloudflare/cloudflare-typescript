@@ -5,10 +5,12 @@ import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as AccountsAPI from 'cloudflare/resources/accounts/accounts';
 import * as MembersAPI from 'cloudflare/resources/accounts/members';
+import * as RolesAPI from 'cloudflare/resources/accounts/roles';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class Accounts extends APIResource {
   members: MembersAPI.Members = new MembersAPI.Members(this._client);
+  roles: RolesAPI.Roles = new RolesAPI.Roles(this._client);
 
   /**
    * Update an existing account.
@@ -147,4 +149,9 @@ export namespace Accounts {
   export import MemberListParams = MembersAPI.MemberListParams;
   export import MemberDeleteParams = MembersAPI.MemberDeleteParams;
   export import MemberGetParams = MembersAPI.MemberGetParams;
+  export import Roles = RolesAPI.Roles;
+  export import RoleListResponse = RolesAPI.RoleListResponse;
+  export import RoleGetResponse = RolesAPI.RoleGetResponse;
+  export import RoleListParams = RolesAPI.RoleListParams;
+  export import RoleGetParams = RolesAPI.RoleGetParams;
 }

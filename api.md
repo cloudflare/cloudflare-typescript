@@ -30,6 +30,18 @@ Methods:
 - <code title="delete /accounts/{account_id}/members/{member_id}">client.accounts.members.<a href="./src/resources/accounts/members.ts">delete</a>(memberId, { ...params }) -> MemberDeleteResponse | null</code>
 - <code title="get /accounts/{account_id}/members/{member_id}">client.accounts.members.<a href="./src/resources/accounts/members.ts">get</a>(memberId, { ...params }) -> MemberGetResponse</code>
 
+## Roles
+
+Types:
+
+- <code><a href="./src/resources/accounts/roles.ts">RoleListResponse</a></code>
+- <code><a href="./src/resources/accounts/roles.ts">RoleGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/roles">client.accounts.roles.<a href="./src/resources/accounts/roles.ts">list</a>({ ...params }) -> RoleListResponse | null</code>
+- <code title="get /accounts/{account_id}/roles/{role_id}">client.accounts.roles.<a href="./src/resources/accounts/roles.ts">get</a>(roleId, { ...params }) -> RoleGetResponse</code>
+
 # Certificates
 
 Types:
@@ -981,6 +993,20 @@ Methods:
 - <code title="put /zones/{zone_id}/workers/script">client.zones.workers.script.<a href="./src/resources/zones/workers/script.ts">update</a>({ ...params }) -> ScriptUpdateResponse</code>
 - <code title="delete /zones/{zone_id}/workers/script">client.zones.workers.script.<a href="./src/resources/zones/workers/script.ts">delete</a>({ ...params }) -> void</code>
 - <code title="get /zones/{zone_id}/workers/script">client.zones.workers.script.<a href="./src/resources/zones/workers/script.ts">get</a>({ ...params }) -> Response</code>
+
+## Subscriptions
+
+Types:
+
+- <code><a href="./src/resources/zones/subscriptions.ts">SubscriptionCreateResponse</a></code>
+- <code><a href="./src/resources/zones/subscriptions.ts">SubscriptionListResponse</a></code>
+- <code><a href="./src/resources/zones/subscriptions.ts">SubscriptionGetResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{identifier}/subscription">client.zones.subscriptions.<a href="./src/resources/zones/subscriptions.ts">create</a>(identifier, { ...params }) -> SubscriptionCreateResponse</code>
+- <code title="get /accounts/{account_identifier}/subscriptions">client.zones.subscriptions.<a href="./src/resources/zones/subscriptions.ts">list</a>(accountIdentifier) -> SubscriptionListResponse | null</code>
+- <code title="get /zones/{identifier}/subscription">client.zones.subscriptions.<a href="./src/resources/zones/subscriptions.ts">get</a>(identifier) -> SubscriptionGetResponse</code>
 
 # LoadBalancers
 
@@ -2362,23 +2388,6 @@ Methods:
 
 # Workers
 
-## Dispatch
-
-### Namespaces
-
-#### Scripts
-
-Types:
-
-- <code><a href="./src/resources/workers/dispatch/namespaces/scripts.ts">ScriptUpdateResponse</a></code>
-- <code><a href="./src/resources/workers/dispatch/namespaces/scripts.ts">ScriptGetResponse</a></code>
-
-Methods:
-
-- <code title="put /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}">client.workers.dispatch.namespaces.scripts.<a href="./src/resources/workers/dispatch/namespaces/scripts.ts">update</a>(dispatchNamespace, scriptName, { ...params }) -> ScriptUpdateResponse</code>
-- <code title="delete /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}">client.workers.dispatch.namespaces.scripts.<a href="./src/resources/workers/dispatch/namespaces/scripts.ts">delete</a>(dispatchNamespace, scriptName, { ...params }) -> void</code>
-- <code title="get /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}">client.workers.dispatch.namespaces.scripts.<a href="./src/resources/workers/dispatch/namespaces/scripts.ts">get</a>(dispatchNamespace, scriptName, { ...params }) -> ScriptGetResponse</code>
-
 ## AI
 
 Types:
@@ -2856,17 +2865,17 @@ Methods:
 
 - <code title="get /accounts/{account_id}/rulesets/{ruleset_id}/versions/{ruleset_version}/by_tag/{rule_tag}">client.rulesets.versions.byTags.<a href="./src/resources/rulesets/versions/by-tags.ts">get</a>(rulesetId, rulesetVersion, ruleTag, { ...params }) -> ByTagGetResponse</code>
 
-# URLNormalizations
+# URLNormalization
 
 Types:
 
-- <code><a href="./src/resources/url-normalizations.ts">URLNormalizationUpdateResponse</a></code>
-- <code><a href="./src/resources/url-normalizations.ts">URLNormalizationGetResponse</a></code>
+- <code><a href="./src/resources/url-normalization.ts">URLNormalizationUpdateResponse</a></code>
+- <code><a href="./src/resources/url-normalization.ts">URLNormalizationGetResponse</a></code>
 
 Methods:
 
-- <code title="put /zones/{zone_id}/url_normalization">client.urlNormalizations.<a href="./src/resources/url-normalizations.ts">update</a>({ ...params }) -> URLNormalizationUpdateResponse</code>
-- <code title="get /zones/{zone_id}/url_normalization">client.urlNormalizations.<a href="./src/resources/url-normalizations.ts">get</a>({ ...params }) -> URLNormalizationGetResponse</code>
+- <code title="put /zones/{zone_id}/url_normalization">client.urlNormalization.<a href="./src/resources/url-normalization.ts">update</a>({ ...params }) -> URLNormalizationUpdateResponse</code>
+- <code title="get /zones/{zone_id}/url_normalization">client.urlNormalization.<a href="./src/resources/url-normalization.ts">get</a>({ ...params }) -> URLNormalizationGetResponse</code>
 
 # Spectrum
 
@@ -3663,18 +3672,6 @@ Methods:
 
 - <code title="post /accounts/{account_identifier}/request-tracer/trace">client.requestTracers.traces.<a href="./src/resources/request-tracers/traces.ts">create</a>(accountIdentifier, { ...params }) -> TraceCreateResponse</code>
 
-# Roles
-
-Types:
-
-- <code><a href="./src/resources/roles.ts">RoleListResponse</a></code>
-- <code><a href="./src/resources/roles.ts">RoleGetResponse</a></code>
-
-Methods:
-
-- <code title="get /accounts/{account_id}/roles">client.roles.<a href="./src/resources/roles.ts">list</a>({ ...params }) -> RoleListResponse | null</code>
-- <code title="get /accounts/{account_id}/roles/{role_id}">client.roles.<a href="./src/resources/roles.ts">get</a>(roleId, { ...params }) -> RoleGetResponse</code>
-
 # Rules
 
 ## Lists
@@ -4293,40 +4290,97 @@ Methods:
 
 #### Scripts
 
+Types:
+
+- <code><a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/scripts.ts">ScriptUpdateResponse</a></code>
+- <code><a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/scripts.ts">ScriptGetResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}">client.workersForPlatforms.dispatch.namespaces.scripts.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/scripts.ts">update</a>(dispatchNamespace, scriptName, { ...params }) -> ScriptUpdateResponse</code>
+- <code title="delete /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}">client.workersForPlatforms.dispatch.namespaces.scripts.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/scripts.ts">delete</a>(dispatchNamespace, scriptName, { ...params }) -> void</code>
+- <code title="get /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}">client.workersForPlatforms.dispatch.namespaces.scripts.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/scripts.ts">get</a>(dispatchNamespace, scriptName, { ...params }) -> ScriptGetResponse</code>
+
 ##### Content
 
-Types:
-
-- <code><a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/content.ts">ContentUpdateResponse</a></code>
-
-Methods:
-
-- <code title="put /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/content">client.workersForPlatforms.dispatch.namespaces.scripts.content.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/content.ts">update</a>(dispatchNamespace, scriptName, { ...params }) -> ContentUpdateResponse</code>
-- <code title="get /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/content">client.workersForPlatforms.dispatch.namespaces.scripts.content.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/content.ts">get</a>(dispatchNamespace, scriptName, { ...params }) -> Response</code>
-
-##### Settings
+###### Scripts
 
 Types:
 
-- <code><a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/settings.ts">SettingEditResponse</a></code>
-- <code><a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/settings.ts">SettingGetResponse</a></code>
+- <code><a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/content/scripts.ts">ScriptUpdateResponse</a></code>
 
 Methods:
 
-- <code title="patch /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/settings">client.workersForPlatforms.dispatch.namespaces.scripts.settings.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/settings.ts">edit</a>(dispatchNamespace, scriptName, { ...params }) -> SettingEditResponse</code>
-- <code title="get /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/settings">client.workersForPlatforms.dispatch.namespaces.scripts.settings.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/settings.ts">get</a>(dispatchNamespace, scriptName, { ...params }) -> SettingGetResponse</code>
+- <code title="put /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/content">client.workersForPlatforms.dispatch.namespaces.scripts.content.scripts.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/content/scripts.ts">update</a>(dispatchNamespace, scriptName, { ...params }) -> ScriptUpdateResponse</code>
+- <code title="get /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/content">client.workersForPlatforms.dispatch.namespaces.scripts.content.scripts.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/content/scripts.ts">get</a>(dispatchNamespace, scriptName, { ...params }) -> Response</code>
 
-##### Bindings
+###### Settings
 
 Types:
 
-- <code><a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/bindings.ts">BindingGetResponse</a></code>
+- <code><a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/content/settings.ts">SettingEditResponse</a></code>
+- <code><a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/content/settings.ts">SettingGetResponse</a></code>
 
 Methods:
 
-- <code title="get /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/bindings">client.workersForPlatforms.dispatch.namespaces.scripts.bindings.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/bindings.ts">get</a>(dispatchNamespace, scriptName, { ...params }) -> BindingGetResponse</code>
+- <code title="patch /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/settings">client.workersForPlatforms.dispatch.namespaces.scripts.content.settings.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/content/settings.ts">edit</a>(dispatchNamespace, scriptName, { ...params }) -> SettingEditResponse</code>
+- <code title="get /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/settings">client.workersForPlatforms.dispatch.namespaces.scripts.content.settings.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/content/settings.ts">get</a>(dispatchNamespace, scriptName, { ...params }) -> SettingGetResponse</code>
+
+###### Bindings
+
+Types:
+
+- <code><a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/content/bindings.ts">BindingGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/bindings">client.workersForPlatforms.dispatch.namespaces.scripts.content.bindings.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/content/bindings.ts">get</a>(dispatchNamespace, scriptName, { ...params }) -> BindingGetResponse</code>
 
 # ZeroTrust
+
+## IdentityProviders
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/identity-providers.ts">IdentityProviderCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/identity-providers.ts">IdentityProviderUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/identity-providers.ts">IdentityProviderListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/identity-providers.ts">IdentityProviderDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/identity-providers.ts">IdentityProviderGetResponse</a></code>
+
+Methods:
+
+- <code title="post /{account_or_zone}/{account_or_zone_id}/access/identity_providers">client.zeroTrust.identityProviders.<a href="./src/resources/zero-trust/identity-providers.ts">create</a>({ ...params }) -> IdentityProviderCreateResponse</code>
+- <code title="put /{account_or_zone}/{account_or_zone_id}/access/identity_providers/{uuid}">client.zeroTrust.identityProviders.<a href="./src/resources/zero-trust/identity-providers.ts">update</a>(uuid, { ...params }) -> IdentityProviderUpdateResponse</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/access/identity_providers">client.zeroTrust.identityProviders.<a href="./src/resources/zero-trust/identity-providers.ts">list</a>({ ...params }) -> IdentityProviderListResponse | null</code>
+- <code title="delete /{account_or_zone}/{account_or_zone_id}/access/identity_providers/{uuid}">client.zeroTrust.identityProviders.<a href="./src/resources/zero-trust/identity-providers.ts">delete</a>(uuid, { ...params }) -> IdentityProviderDeleteResponse</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/access/identity_providers/{uuid}">client.zeroTrust.identityProviders.<a href="./src/resources/zero-trust/identity-providers.ts">get</a>(uuid, { ...params }) -> IdentityProviderGetResponse</code>
+
+## Organizations
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/organizations.ts">OrganizationCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/organizations.ts">OrganizationUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/organizations.ts">OrganizationListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/organizations.ts">OrganizationRevokeUsersResponse</a></code>
+
+Methods:
+
+- <code title="post /{account_or_zone}/{account_or_zone_id}/access/organizations">client.zeroTrust.organizations.<a href="./src/resources/zero-trust/organizations.ts">create</a>({ ...params }) -> OrganizationCreateResponse</code>
+- <code title="put /{account_or_zone}/{account_or_zone_id}/access/organizations">client.zeroTrust.organizations.<a href="./src/resources/zero-trust/organizations.ts">update</a>({ ...params }) -> OrganizationUpdateResponse</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/access/organizations">client.zeroTrust.organizations.<a href="./src/resources/zero-trust/organizations.ts">list</a>({ ...params }) -> OrganizationListResponse</code>
+- <code title="post /{account_or_zone}/{account_or_zone_id}/access/organizations/revoke_user">client.zeroTrust.organizations.<a href="./src/resources/zero-trust/organizations.ts">revokeUsers</a>({ ...params }) -> OrganizationRevokeUsersResponse</code>
+
+## Seats
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/seats.ts">SeatEditResponse</a></code>
+
+Methods:
+
+- <code title="patch /accounts/{identifier}/access/seats">client.zeroTrust.seats.<a href="./src/resources/zero-trust/seats.ts">edit</a>(identifier, [ ...body ]) -> SeatEditResponse | null</code>
 
 ## Access
 
@@ -4442,40 +4496,6 @@ Methods:
 - <code title="delete /{account_or_zone}/{account_or_zone_id}/access/groups/{uuid}">client.zeroTrust.access.groups.<a href="./src/resources/zero-trust/access/groups.ts">delete</a>(uuid, { ...params }) -> GroupDeleteResponse</code>
 - <code title="get /{account_or_zone}/{account_or_zone_id}/access/groups/{uuid}">client.zeroTrust.access.groups.<a href="./src/resources/zero-trust/access/groups.ts">get</a>(uuid, { ...params }) -> GroupGetResponse</code>
 
-### IdentityProviders
-
-Types:
-
-- <code><a href="./src/resources/zero-trust/access/identity-providers.ts">IdentityProviderCreateResponse</a></code>
-- <code><a href="./src/resources/zero-trust/access/identity-providers.ts">IdentityProviderUpdateResponse</a></code>
-- <code><a href="./src/resources/zero-trust/access/identity-providers.ts">IdentityProviderListResponse</a></code>
-- <code><a href="./src/resources/zero-trust/access/identity-providers.ts">IdentityProviderDeleteResponse</a></code>
-- <code><a href="./src/resources/zero-trust/access/identity-providers.ts">IdentityProviderGetResponse</a></code>
-
-Methods:
-
-- <code title="post /{account_or_zone}/{account_or_zone_id}/access/identity_providers">client.zeroTrust.access.identityProviders.<a href="./src/resources/zero-trust/access/identity-providers.ts">create</a>({ ...params }) -> IdentityProviderCreateResponse</code>
-- <code title="put /{account_or_zone}/{account_or_zone_id}/access/identity_providers/{uuid}">client.zeroTrust.access.identityProviders.<a href="./src/resources/zero-trust/access/identity-providers.ts">update</a>(uuid, { ...params }) -> IdentityProviderUpdateResponse</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/access/identity_providers">client.zeroTrust.access.identityProviders.<a href="./src/resources/zero-trust/access/identity-providers.ts">list</a>({ ...params }) -> IdentityProviderListResponse | null</code>
-- <code title="delete /{account_or_zone}/{account_or_zone_id}/access/identity_providers/{uuid}">client.zeroTrust.access.identityProviders.<a href="./src/resources/zero-trust/access/identity-providers.ts">delete</a>(uuid, { ...params }) -> IdentityProviderDeleteResponse</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/access/identity_providers/{uuid}">client.zeroTrust.access.identityProviders.<a href="./src/resources/zero-trust/access/identity-providers.ts">get</a>(uuid, { ...params }) -> IdentityProviderGetResponse</code>
-
-### Organizations
-
-Types:
-
-- <code><a href="./src/resources/zero-trust/access/organizations.ts">OrganizationCreateResponse</a></code>
-- <code><a href="./src/resources/zero-trust/access/organizations.ts">OrganizationUpdateResponse</a></code>
-- <code><a href="./src/resources/zero-trust/access/organizations.ts">OrganizationListResponse</a></code>
-- <code><a href="./src/resources/zero-trust/access/organizations.ts">OrganizationRevokeUsersResponse</a></code>
-
-Methods:
-
-- <code title="post /{account_or_zone}/{account_or_zone_id}/access/organizations">client.zeroTrust.access.organizations.<a href="./src/resources/zero-trust/access/organizations.ts">create</a>({ ...params }) -> OrganizationCreateResponse</code>
-- <code title="put /{account_or_zone}/{account_or_zone_id}/access/organizations">client.zeroTrust.access.organizations.<a href="./src/resources/zero-trust/access/organizations.ts">update</a>({ ...params }) -> OrganizationUpdateResponse</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/access/organizations">client.zeroTrust.access.organizations.<a href="./src/resources/zero-trust/access/organizations.ts">list</a>({ ...params }) -> OrganizationListResponse</code>
-- <code title="post /{account_or_zone}/{account_or_zone_id}/access/organizations/revoke_user">client.zeroTrust.access.organizations.<a href="./src/resources/zero-trust/access/organizations.ts">revokeUsers</a>({ ...params }) -> OrganizationRevokeUsersResponse</code>
-
 ### ServiceTokens
 
 Types:
@@ -4539,16 +4559,6 @@ Types:
 Methods:
 
 - <code title="get /accounts/{identifier}/access/logs/access_requests">client.zeroTrust.access.logs.accessRequests.<a href="./src/resources/zero-trust/access/logs/access-requests.ts">list</a>(identifier) -> AccessRequestListResponse | null</code>
-
-### Seats
-
-Types:
-
-- <code><a href="./src/resources/zero-trust/access/seats.ts">SeatEditResponse</a></code>
-
-Methods:
-
-- <code title="patch /accounts/{identifier}/access/seats">client.zeroTrust.access.seats.<a href="./src/resources/zero-trust/access/seats.ts">edit</a>(identifier, [ ...body ]) -> SeatEditResponse | null</code>
 
 ### Users
 
@@ -5416,15 +5426,15 @@ Methods:
 - <code title="get /radar/verified_bots/top/bots">client.radar.verifiedBots.top.<a href="./src/resources/radar/verified-bots/top.ts">bots</a>({ ...params }) -> TopBotsResponse</code>
 - <code title="get /radar/verified_bots/top/categories">client.radar.verifiedBots.top.<a href="./src/resources/radar/verified-bots/top.ts">categories</a>({ ...params }) -> TopCategoriesResponse</code>
 
-## As112
+## AS112
 
 Types:
 
-- <code><a href="./src/resources/radar/as112/as112.ts">As112TimeseriesResponse</a></code>
+- <code><a href="./src/resources/radar/as112/as112.ts">AS112TimeseriesResponse</a></code>
 
 Methods:
 
-- <code title="get /radar/as112/timeseries">client.radar.as112.<a href="./src/resources/radar/as112/as112.ts">timeseries</a>({ ...params }) -> As112TimeseriesResponse</code>
+- <code title="get /radar/as112/timeseries">client.radar.as112.<a href="./src/resources/radar/as112/as112.ts">timeseries</a>({ ...params }) -> AS112TimeseriesResponse</code>
 
 ### Summary
 
@@ -6230,7 +6240,7 @@ Methods:
 
 - <code title="get /zones/{zone_id}/speed_api/pages">client.speed.pages.<a href="./src/resources/speed/pages.ts">list</a>({ ...params }) -> PageListResponse</code>
 
-# DcvDelegation
+# DCVDelegation
 
 ## UUID
 
@@ -6282,17 +6292,17 @@ Methods:
 
 - <code title="get /zones/{zone_identifier}/snippets/{snippet_name}/content">client.snippets.content.<a href="./src/resources/snippets/content.ts">get</a>(zoneIdentifier, snippetName) -> Response</code>
 
-## SnippetRules
+## Rules
 
 Types:
 
-- <code><a href="./src/resources/snippets/snippet-rules.ts">SnippetRuleUpdateResponse</a></code>
-- <code><a href="./src/resources/snippets/snippet-rules.ts">SnippetRuleListResponse</a></code>
+- <code><a href="./src/resources/snippets/rules.ts">RuleUpdateResponse</a></code>
+- <code><a href="./src/resources/snippets/rules.ts">RuleListResponse</a></code>
 
 Methods:
 
-- <code title="put /zones/{zone_identifier}/snippets/snippet_rules">client.snippets.snippetRules.<a href="./src/resources/snippets/snippet-rules.ts">update</a>(zoneIdentifier, { ...params }) -> SnippetRuleUpdateResponse</code>
-- <code title="get /zones/{zone_identifier}/snippets/snippet_rules">client.snippets.snippetRules.<a href="./src/resources/snippets/snippet-rules.ts">list</a>(zoneIdentifier) -> SnippetRuleListResponse</code>
+- <code title="put /zones/{zone_identifier}/snippets/snippet_rules">client.snippets.rules.<a href="./src/resources/snippets/rules.ts">update</a>(zoneIdentifier, { ...params }) -> RuleUpdateResponse</code>
+- <code title="get /zones/{zone_identifier}/snippets/snippet_rules">client.snippets.rules.<a href="./src/resources/snippets/rules.ts">list</a>(zoneIdentifier) -> RuleListResponse</code>
 
 # Calls
 

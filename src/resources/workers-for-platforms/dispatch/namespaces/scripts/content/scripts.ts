@@ -3,19 +3,19 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { type Response } from 'cloudflare/_shims/index';
-import * as ContentAPI from 'cloudflare/resources/workers-for-platforms/dispatch/namespaces/scripts/content';
+import * as ScriptsAPI from 'cloudflare/resources/workers-for-platforms/dispatch/namespaces/scripts/content/scripts';
 import { type Uploadable, multipartFormRequestOptions } from 'cloudflare/core';
 
-export class Content extends APIResource {
+export class Scripts extends APIResource {
   /**
    * Put script content for a script uploaded to a Workers for Platforms namespace.
    */
   update(
     dispatchNamespace: string,
     scriptName: string,
-    params: ContentUpdateParams,
+    params: ScriptUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ContentUpdateResponse> {
+  ): Core.APIPromise<ScriptUpdateResponse> {
     const {
       account_id,
       'CF-WORKER-BODY-PART': cfWorkerBodyPart,
@@ -34,7 +34,7 @@ export class Content extends APIResource {
             ...options?.headers,
           },
         }),
-      ) as Core.APIPromise<{ result: ContentUpdateResponse }>
+      ) as Core.APIPromise<{ result: ScriptUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -45,7 +45,7 @@ export class Content extends APIResource {
   get(
     dispatchNamespace: string,
     scriptName: string,
-    params: ContentGetParams,
+    params: ScriptGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Response> {
     const { account_id } = params;
@@ -56,7 +56,7 @@ export class Content extends APIResource {
   }
 }
 
-export interface ContentUpdateResponse {
+export interface ScriptUpdateResponse {
   /**
    * The id of the script in the Workers system. Usually the script name.
    */
@@ -95,7 +95,7 @@ export interface ContentUpdateResponse {
   /**
    * List of Workers that will consume logs from the attached Worker.
    */
-  tail_consumers?: Array<ContentUpdateResponse.TailConsumer>;
+  tail_consumers?: Array<ScriptUpdateResponse.TailConsumer>;
 
   /**
    * Specifies the usage model for the Worker (e.g. 'bundled' or 'unbound').
@@ -103,7 +103,7 @@ export interface ContentUpdateResponse {
   usage_model?: string;
 }
 
-export namespace ContentUpdateResponse {
+export namespace ScriptUpdateResponse {
   /**
    * A reference to a script that will consume logs from the attached Worker.
    */
@@ -125,7 +125,7 @@ export namespace ContentUpdateResponse {
   }
 }
 
-export interface ContentUpdateParams {
+export interface ScriptUpdateParams {
   /**
    * Path param: Identifier
    */
@@ -145,7 +145,7 @@ export interface ContentUpdateParams {
    * Body param: JSON encoded metadata about the uploaded parts and Worker
    * configuration.
    */
-  metadata?: ContentUpdateParams.Metadata;
+  metadata?: ScriptUpdateParams.Metadata;
 
   /**
    * Header param: The multipart name of a script upload part containing script
@@ -160,7 +160,7 @@ export interface ContentUpdateParams {
   'CF-WORKER-MAIN-MODULE-PART'?: string;
 }
 
-export namespace ContentUpdateParams {
+export namespace ScriptUpdateParams {
   /**
    * JSON encoded metadata about the uploaded parts and Worker configuration.
    */
@@ -180,15 +180,15 @@ export namespace ContentUpdateParams {
   }
 }
 
-export interface ContentGetParams {
+export interface ScriptGetParams {
   /**
    * Identifier
    */
   account_id: string;
 }
 
-export namespace Content {
-  export import ContentUpdateResponse = ContentAPI.ContentUpdateResponse;
-  export import ContentUpdateParams = ContentAPI.ContentUpdateParams;
-  export import ContentGetParams = ContentAPI.ContentGetParams;
+export namespace Scripts {
+  export import ScriptUpdateResponse = ScriptsAPI.ScriptUpdateResponse;
+  export import ScriptUpdateParams = ScriptsAPI.ScriptUpdateParams;
+  export import ScriptGetParams = ScriptsAPI.ScriptGetParams;
 }

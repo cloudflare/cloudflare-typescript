@@ -118,6 +118,7 @@ export {
   CustomNameservers,
 } from './custom-nameservers';
 export { D1 } from './d1/d1';
+export { DCVDelegation } from './dcv-delegation/dcv-delegation';
 export { DNS } from './dns/dns';
 export {
   DNSSECDeleteResponse,
@@ -128,7 +129,6 @@ export {
   DNSSECGetParams,
   DNSSEC,
 } from './dnssec';
-export { DcvDelegation } from './dcv-delegation/dcv-delegation';
 export {
   DeviceDevicesListDevicesResponse,
   DeviceGetResponse,
@@ -310,7 +310,6 @@ export {
 } from './rate-limits';
 export { Registrar } from './registrar/registrar';
 export { RequestTracers } from './request-tracers/request-tracers';
-export { RoleListResponse, RoleGetResponse, RoleListParams, RoleGetParams, Roles } from './roles';
 export { Rules } from './rules/rules';
 export {
   RulesetCreateResponse,
@@ -369,8 +368,8 @@ export {
   URLNormalizationGetResponse,
   URLNormalizationUpdateParams,
   URLNormalizationGetParams,
-  URLNormalizations,
-} from './url-normalizations';
+  URLNormalization,
+} from './url-normalization';
 export { URLScannerScanResponse, URLScannerScanParams, URLScanner } from './url-scanner/url-scanner';
 export { UserListResponse, UserEditResponse, UserEditParams, User } from './user/user';
 export { Vectorize } from './vectorize/vectorize';

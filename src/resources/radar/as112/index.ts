@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless.
 
-export { As112TimeseriesResponse, As112TimeseriesParams, As112 } from './as112';
+export { AS112TimeseriesResponse, AS112TimeseriesParams, AS112 } from './as112';
 export {
   SummaryDNSSECResponse,
   SummaryEdnsResponse,

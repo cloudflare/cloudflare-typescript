@@ -15,7 +15,7 @@ const cloudflare = new Cloudflare({
 describe('resource identityProviders', () => {
   // skipped: tests are disabled for the time being
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.identityProviders.create({
+    const responsePromise = cloudflare.zeroTrust.identityProviders.create({
       config: {},
       name: 'Widget Corps IDP',
       type: 'onetimepin',
@@ -31,7 +31,7 @@ describe('resource identityProviders', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.access.identityProviders.create({
+    const response = await cloudflare.zeroTrust.identityProviders.create({
       config: {
         client_id: '<your client id>',
         client_secret: '<your client secret>',
@@ -79,7 +79,7 @@ describe('resource identityProviders', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.identityProviders.update(
+    const responsePromise = cloudflare.zeroTrust.identityProviders.update(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { config: {}, name: 'Widget Corps IDP', type: 'onetimepin' },
     );
@@ -94,7 +94,7 @@ describe('resource identityProviders', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.access.identityProviders.update(
+    const response = await cloudflare.zeroTrust.identityProviders.update(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       {
         config: {
@@ -145,7 +145,7 @@ describe('resource identityProviders', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('list', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.identityProviders.list();
+    const responsePromise = cloudflare.zeroTrust.identityProviders.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -159,7 +159,7 @@ describe('resource identityProviders', () => {
   test.skip('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.zeroTrust.access.identityProviders.list({ path: '/_stainless_unknown_path' }),
+      cloudflare.zeroTrust.identityProviders.list({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
@@ -167,7 +167,7 @@ describe('resource identityProviders', () => {
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.zeroTrust.access.identityProviders.list(
+      cloudflare.zeroTrust.identityProviders.list(
         { account_id: 'string', zone_id: 'string' },
         { path: '/_stainless_unknown_path' },
       ),
@@ -176,7 +176,7 @@ describe('resource identityProviders', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('delete', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.identityProviders.delete(
+    const responsePromise = cloudflare.zeroTrust.identityProviders.delete(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
     );
     const rawResponse = await responsePromise.asResponse();
@@ -192,7 +192,7 @@ describe('resource identityProviders', () => {
   test.skip('delete: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.zeroTrust.access.identityProviders.delete('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+      cloudflare.zeroTrust.identityProviders.delete('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
         path: '/_stainless_unknown_path',
       }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
@@ -202,7 +202,7 @@ describe('resource identityProviders', () => {
   test.skip('delete: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.zeroTrust.access.identityProviders.delete(
+      cloudflare.zeroTrust.identityProviders.delete(
         'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
         { account_id: 'string', zone_id: 'string' },
         { path: '/_stainless_unknown_path' },
@@ -212,7 +212,7 @@ describe('resource identityProviders', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('get', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.identityProviders.get(
+    const responsePromise = cloudflare.zeroTrust.identityProviders.get(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
     );
     const rawResponse = await responsePromise.asResponse();
@@ -228,7 +228,7 @@ describe('resource identityProviders', () => {
   test.skip('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.zeroTrust.access.identityProviders.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+      cloudflare.zeroTrust.identityProviders.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
         path: '/_stainless_unknown_path',
       }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
@@ -238,7 +238,7 @@ describe('resource identityProviders', () => {
   test.skip('get: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.zeroTrust.access.identityProviders.get(
+      cloudflare.zeroTrust.identityProviders.get(
         'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
         { account_id: 'string', zone_id: 'string' },
         { path: '/_stainless_unknown_path' },

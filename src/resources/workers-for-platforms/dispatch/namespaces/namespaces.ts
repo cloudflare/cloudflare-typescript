@@ -9,4 +9,9 @@ export class Namespaces extends APIResource {
 
 export namespace Namespaces {
   export import Scripts = ScriptsAPI.Scripts;
+  export import ScriptUpdateResponse = ScriptsAPI.ScriptUpdateResponse;
+  export import ScriptGetResponse = ScriptsAPI.ScriptGetResponse;
+  export import ScriptUpdateParams = ScriptsAPI.ScriptUpdateParams;
+  export import ScriptDeleteParams = ScriptsAPI.ScriptDeleteParams;
+  export import ScriptGetParams = ScriptsAPI.ScriptGetParams;
 }
