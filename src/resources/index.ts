@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export { ACM } from './acm/acm';
-export { Access } from './access/access';
 export {
   AccountUpdateResponse,
   AccountListResponse,
@@ -12,7 +11,7 @@ export {
   AccountListResponsesV4PagePaginationArray,
   Accounts,
 } from './accounts/accounts';
-export { Addresses } from './addresses/addresses';
+export { Addressing } from './addressing/addressing';
 export { Alerting } from './alerting/alerting';
 export { Argo } from './argo/argo';
 export {
@@ -119,8 +118,6 @@ export {
   CustomNameservers,
 } from './custom-nameservers';
 export { D1 } from './d1/d1';
-export { DEX } from './dex/dex';
-export { DLP } from './dlp/dlp';
 export { DNS } from './dns/dns';
 export {
   DNSSECDeleteResponse,
@@ -140,7 +137,7 @@ export {
   Devices,
 } from './devices/devices';
 export { Diagnostics } from './diagnostics/diagnostics';
-export { Dispatchers } from './dispatchers/dispatchers';
+export { DurableObjects } from './durable-objects/durable-objects';
 export { Emails } from './emails/emails';
 export {
   FilterCreateResponse,
@@ -155,13 +152,6 @@ export {
   Filters,
 } from './filters';
 export { Firewall } from './firewall/firewall';
-export {
-  GatewayCreateResponse,
-  GatewayListResponse,
-  GatewayCreateParams,
-  GatewayListParams,
-  Gateways,
-} from './gateways/gateways';
 export {
   HealthcheckCreateResponse,
   HealthcheckUpdateResponse,
@@ -210,7 +200,6 @@ export {
 } from './load-balancers/load-balancers';
 export { Logpush } from './logpush/logpush';
 export { Logs } from './logs/logs';
-export { MNMs } from './mnms/mnms';
 export {
   MTLSCertificateCreateResponse,
   MTLSCertificateListResponse,
@@ -222,6 +211,7 @@ export {
   MTLSCertificateGetParams,
   MTLSCertificates,
 } from './mtls-certificates/mtls-certificates';
+export { MagicNetworkMonitoring } from './magic-network-monitoring/magic-network-monitoring';
 export { MagicTransit } from './magic-transit/magic-transit';
 export {
   ManagedHeaderListResponse,
@@ -290,6 +280,19 @@ export {
   Pagerules,
 } from './pagerules/pagerules';
 export { Pages } from './pages/pages';
+export {
+  QueueCreateResponse,
+  QueueUpdateResponse,
+  QueueListResponse,
+  QueueDeleteResponse,
+  QueueGetResponse,
+  QueueCreateParams,
+  QueueUpdateParams,
+  QueueListParams,
+  QueueDeleteParams,
+  QueueGetParams,
+  Queues,
+} from './queues/queues';
 export { R2 } from './r2/r2';
 export { RUM } from './rum/rum';
 export { Radar } from './radar/radar';
@@ -361,21 +364,6 @@ export {
   SubscriptionUpdateParams,
   Subscriptions,
 } from './subscriptions';
-export { Teamnet } from './teamnet/teamnet';
-export {
-  TunnelCreateResponse,
-  TunnelListResponse,
-  TunnelDeleteResponse,
-  TunnelEditResponse,
-  TunnelGetResponse,
-  TunnelCreateParams,
-  TunnelListParams,
-  TunnelDeleteParams,
-  TunnelEditParams,
-  TunnelGetParams,
-  TunnelListResponsesV4PagePaginationArray,
-  Tunnels,
-} from './tunnels/tunnels';
 export {
   URLNormalizationUpdateResponse,
   URLNormalizationGetResponse,

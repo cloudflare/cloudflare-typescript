@@ -8,12 +8,12 @@ import * as FiltersAPI from 'cloudflare/resources/workers/filters';
 import * as RoutesAPI from 'cloudflare/resources/workers/routes';
 import * as SubdomainsAPI from 'cloudflare/resources/workers/subdomains';
 import * as DeploymentsAPI from 'cloudflare/resources/workers/deployments/deployments';
-import * as DurableObjectsAPI from 'cloudflare/resources/workers/durable-objects/durable-objects';
-import * as QueuesAPI from 'cloudflare/resources/workers/queues/queues';
+import * as DispatchAPI from 'cloudflare/resources/workers/dispatch/dispatch';
 import * as ScriptsAPI from 'cloudflare/resources/workers/scripts/scripts';
 import * as ServicesAPI from 'cloudflare/resources/workers/services/services';
 
 export class Workers extends APIResource {
+  dispatch: DispatchAPI.Dispatch = new DispatchAPI.Dispatch(this._client);
   ai: AIAPI.AI = new AIAPI.AI(this._client);
   scripts: ScriptsAPI.Scripts = new ScriptsAPI.Scripts(this._client);
   filters: FiltersAPI.Filters = new FiltersAPI.Filters(this._client);
@@ -21,13 +21,12 @@ export class Workers extends APIResource {
   accountSettings: AccountSettingsAPI.AccountSettings = new AccountSettingsAPI.AccountSettings(this._client);
   deployments: DeploymentsAPI.Deployments = new DeploymentsAPI.Deployments(this._client);
   domains: DomainsAPI.Domains = new DomainsAPI.Domains(this._client);
-  durableObjects: DurableObjectsAPI.DurableObjects = new DurableObjectsAPI.DurableObjects(this._client);
-  queues: QueuesAPI.Queues = new QueuesAPI.Queues(this._client);
   subdomains: SubdomainsAPI.Subdomains = new SubdomainsAPI.Subdomains(this._client);
   services: ServicesAPI.Services = new ServicesAPI.Services(this._client);
 }
 
 export namespace Workers {
+  export import Dispatch = DispatchAPI.Dispatch;
   export import AI = AIAPI.AI;
   export import AIRunResponse = AIAPI.AIRunResponse;
   export import AIRunParams = AIAPI.AIRunParams;
@@ -72,18 +71,6 @@ export namespace Workers {
   export import DomainListParams = DomainsAPI.DomainListParams;
   export import DomainDeleteParams = DomainsAPI.DomainDeleteParams;
   export import DomainGetParams = DomainsAPI.DomainGetParams;
-  export import DurableObjects = DurableObjectsAPI.DurableObjects;
-  export import Queues = QueuesAPI.Queues;
-  export import QueueCreateResponse = QueuesAPI.QueueCreateResponse;
-  export import QueueUpdateResponse = QueuesAPI.QueueUpdateResponse;
-  export import QueueListResponse = QueuesAPI.QueueListResponse;
-  export import QueueDeleteResponse = QueuesAPI.QueueDeleteResponse;
-  export import QueueGetResponse = QueuesAPI.QueueGetResponse;
-  export import QueueCreateParams = QueuesAPI.QueueCreateParams;
-  export import QueueUpdateParams = QueuesAPI.QueueUpdateParams;
-  export import QueueListParams = QueuesAPI.QueueListParams;
-  export import QueueDeleteParams = QueuesAPI.QueueDeleteParams;
-  export import QueueGetParams = QueuesAPI.QueueGetParams;
   export import Subdomains = SubdomainsAPI.Subdomains;
   export import SubdomainUpdateResponse = SubdomainsAPI.SubdomainUpdateResponse;
   export import SubdomainGetResponse = SubdomainsAPI.SubdomainGetResponse;
