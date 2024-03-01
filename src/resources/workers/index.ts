@@ -9,6 +9,7 @@ export {
   AccountSettings,
 } from './account-settings';
 export { Deployments } from './deployments/index';
+export { Dispatch } from './dispatch/index';
 export {
   DomainUpdateResponse,
   DomainListResponse,
@@ -19,7 +20,6 @@ export {
   DomainGetParams,
   Domains,
 } from './domains';
-export { DurableObjects } from './durable-objects/index';
 export {
   FilterCreateResponse,
   FilterUpdateResponse,
@@ -31,19 +31,6 @@ export {
   FilterDeleteParams,
   Filters,
 } from './filters';
-export {
-  QueueCreateResponse,
-  QueueUpdateResponse,
-  QueueListResponse,
-  QueueDeleteResponse,
-  QueueGetResponse,
-  QueueCreateParams,
-  QueueUpdateParams,
-  QueueListParams,
-  QueueDeleteParams,
-  QueueGetParams,
-  Queues,
-} from './queues/index';
 export {
   RouteCreateResponse,
   RouteUpdateResponse,

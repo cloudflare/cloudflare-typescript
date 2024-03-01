@@ -170,7 +170,6 @@ export class Cloudflare extends Core.APIClient {
   user: API.User = new API.User(this);
   zones: API.Zones = new API.Zones(this);
   loadBalancers: API.LoadBalancers = new API.LoadBalancers(this);
-  access: API.Access = new API.Access(this);
   cache: API.Cache = new API.Cache(this);
   ssl: API.SSL = new API.SSL(this);
   subscriptions: API.Subscriptions = new API.Subscriptions(this);
@@ -200,22 +199,22 @@ export class Cloudflare extends Core.APIClient {
   web3: API.Web3 = new API.Web3(this);
   workers: API.Workers = new API.Workers(this);
   kv: API.KV = new API.KV(this);
+  durableObjects: API.DurableObjects = new API.DurableObjects(this);
+  queues: API.Queues = new API.Queues(this);
   managedHeaders: API.ManagedHeaders = new API.ManagedHeaders(this);
   pageShield: API.PageShield = new API.PageShield(this);
   rulesets: API.Rulesets = new API.Rulesets(this);
   urlNormalizations: API.URLNormalizations = new API.URLNormalizations(this);
   spectrum: API.Spectrum = new API.Spectrum(this);
-  addresses: API.Addresses = new API.Addresses(this);
+  addressing: API.Addressing = new API.Addressing(this);
   auditLogs: API.AuditLogs = new API.AuditLogs(this);
   billing: API.Billing = new API.Billing(this);
   brandProtection: API.BrandProtection = new API.BrandProtection(this);
-  tunnels: API.Tunnels = new API.Tunnels(this);
   diagnostics: API.Diagnostics = new API.Diagnostics(this);
-  dlp: API.DLP = new API.DLP(this);
   images: API.Images = new API.Images(this);
   intel: API.Intel = new API.Intel(this);
   magicTransit: API.MagicTransit = new API.MagicTransit(this);
-  mnms: API.MNMs = new API.MNMs(this);
+  magicNetworkMonitoring: API.MagicNetworkMonitoring = new API.MagicNetworkMonitoring(this);
   mtlsCertificates: API.MTLSCertificates = new API.MTLSCertificates(this);
   pages: API.Pages = new API.Pages(this);
   pcaps: API.PCAPs = new API.PCAPs(this);
@@ -225,15 +224,11 @@ export class Cloudflare extends Core.APIClient {
   rules: API.Rules = new API.Rules(this);
   storage: API.Storage = new API.Storage(this);
   stream: API.Stream = new API.Stream(this);
-  gateways: API.Gateways = new API.Gateways(this);
   alerting: API.Alerting = new API.Alerting(this);
   devices: API.Devices = new API.Devices(this);
   d1: API.D1 = new API.D1(this);
-  dex: API.DEX = new API.DEX(this);
   r2: API.R2 = new API.R2(this);
-  teamnet: API.Teamnet = new API.Teamnet(this);
   warpConnector: API.WARPConnector = new API.WARPConnector(this);
-  dispatchers: API.Dispatchers = new API.Dispatchers(this);
   workersForPlatforms: API.WorkersForPlatforms = new API.WorkersForPlatforms(this);
   zeroTrust: API.ZeroTrust = new API.ZeroTrust(this);
   challenges: API.Challenges = new API.Challenges(this);
@@ -402,8 +397,6 @@ export namespace Cloudflare {
   export import LoadBalancerDeleteParams = API.LoadBalancerDeleteParams;
   export import LoadBalancerEditParams = API.LoadBalancerEditParams;
   export import LoadBalancerGetParams = API.LoadBalancerGetParams;
-
-  export import Access = API.Access;
 
   export import Cache = API.Cache;
   export import CachePurgeResponse = API.CachePurgeResponse;
@@ -592,6 +585,20 @@ export namespace Cloudflare {
 
   export import KV = API.KV;
 
+  export import DurableObjects = API.DurableObjects;
+
+  export import Queues = API.Queues;
+  export import QueueCreateResponse = API.QueueCreateResponse;
+  export import QueueUpdateResponse = API.QueueUpdateResponse;
+  export import QueueListResponse = API.QueueListResponse;
+  export import QueueDeleteResponse = API.QueueDeleteResponse;
+  export import QueueGetResponse = API.QueueGetResponse;
+  export import QueueCreateParams = API.QueueCreateParams;
+  export import QueueUpdateParams = API.QueueUpdateParams;
+  export import QueueListParams = API.QueueListParams;
+  export import QueueDeleteParams = API.QueueDeleteParams;
+  export import QueueGetParams = API.QueueGetParams;
+
   export import ManagedHeaders = API.ManagedHeaders;
   export import ManagedHeaderListResponse = API.ManagedHeaderListResponse;
   export import ManagedHeaderEditResponse = API.ManagedHeaderEditResponse;
@@ -623,7 +630,7 @@ export namespace Cloudflare {
 
   export import Spectrum = API.Spectrum;
 
-  export import Addresses = API.Addresses;
+  export import Addressing = API.Addressing;
 
   export import AuditLogs = API.AuditLogs;
   export import AuditLogListResponse = API.AuditLogListResponse;
@@ -638,22 +645,7 @@ export namespace Cloudflare {
   export import BrandProtectionSubmitParams = API.BrandProtectionSubmitParams;
   export import BrandProtectionURLInfoParams = API.BrandProtectionURLInfoParams;
 
-  export import Tunnels = API.Tunnels;
-  export import TunnelCreateResponse = API.TunnelCreateResponse;
-  export import TunnelListResponse = API.TunnelListResponse;
-  export import TunnelDeleteResponse = API.TunnelDeleteResponse;
-  export import TunnelEditResponse = API.TunnelEditResponse;
-  export import TunnelGetResponse = API.TunnelGetResponse;
-  export import TunnelListResponsesV4PagePaginationArray = API.TunnelListResponsesV4PagePaginationArray;
-  export import TunnelCreateParams = API.TunnelCreateParams;
-  export import TunnelListParams = API.TunnelListParams;
-  export import TunnelDeleteParams = API.TunnelDeleteParams;
-  export import TunnelEditParams = API.TunnelEditParams;
-  export import TunnelGetParams = API.TunnelGetParams;
-
   export import Diagnostics = API.Diagnostics;
-
-  export import DLP = API.DLP;
 
   export import Images = API.Images;
 
@@ -661,7 +653,7 @@ export namespace Cloudflare {
 
   export import MagicTransit = API.MagicTransit;
 
-  export import MNMs = API.MNMs;
+  export import MagicNetworkMonitoring = API.MagicNetworkMonitoring;
 
   export import MTLSCertificates = API.MTLSCertificates;
   export import MTLSCertificateCreateResponse = API.MTLSCertificateCreateResponse;
@@ -705,12 +697,6 @@ export namespace Cloudflare {
   export import StreamDeleteParams = API.StreamDeleteParams;
   export import StreamGetParams = API.StreamGetParams;
 
-  export import Gateways = API.Gateways;
-  export import GatewayCreateResponse = API.GatewayCreateResponse;
-  export import GatewayListResponse = API.GatewayListResponse;
-  export import GatewayCreateParams = API.GatewayCreateParams;
-  export import GatewayListParams = API.GatewayListParams;
-
   export import Alerting = API.Alerting;
 
   export import Devices = API.Devices;
@@ -721,11 +707,7 @@ export namespace Cloudflare {
 
   export import D1 = API.D1;
 
-  export import DEX = API.DEX;
-
   export import R2 = API.R2;
-
-  export import Teamnet = API.Teamnet;
 
   export import WARPConnector = API.WARPConnector;
   export import WARPConnectorCreateResponse = API.WARPConnectorCreateResponse;
@@ -741,8 +723,6 @@ export namespace Cloudflare {
   export import WARPConnectorEditParams = API.WARPConnectorEditParams;
   export import WARPConnectorGetParams = API.WARPConnectorGetParams;
   export import WARPConnectorTokenParams = API.WARPConnectorTokenParams;
-
-  export import Dispatchers = API.Dispatchers;
 
   export import WorkersForPlatforms = API.WorkersForPlatforms;
 
