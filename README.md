@@ -9,6 +9,7 @@ The REST API documentation can be found [on developers.cloudflare.com](https://d
 ## Installation
 
 ```sh
+# install from NPM
 npm install --save cloudflare
 # or
 yarn add cloudflare
