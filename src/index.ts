@@ -12,22 +12,22 @@ export interface ClientOptions {
   /**
    * Defaults to process.env['CLOUDFLARE_API_KEY'].
    */
-  apiKey?: string | undefined;
+  apiKey?: string | null | undefined;
 
   /**
    * Defaults to process.env['CLOUDFLARE_EMAIL'].
    */
-  apiEmail?: string | undefined;
+  apiEmail?: string | null | undefined;
 
   /**
    * Defaults to process.env['CLOUDFLARE_API_TOKEN'].
    */
-  apiToken?: string | undefined;
+  apiToken?: string | null | undefined;
 
   /**
    * Defaults to process.env['CLOUDFLARE_API_USER_SERVICE_KEY'].
    */
-  userServiceKey?: string | undefined;
+  userServiceKey?: string | null | undefined;
 
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
@@ -88,20 +88,20 @@ export interface ClientOptions {
 
 /** API Client for interfacing with the Cloudflare API. */
 export class Cloudflare extends Core.APIClient {
-  apiKey: string;
-  apiEmail: string;
-  apiToken: string;
-  userServiceKey: string;
+  apiKey: string | null;
+  apiEmail: string | null;
+  apiToken: string | null;
+  userServiceKey: string | null;
 
   private _options: ClientOptions;
 
   /**
    * API Client for interfacing with the Cloudflare API.
    *
-   * @param {string | undefined} [opts.apiKey=process.env['CLOUDFLARE_API_KEY'] ?? undefined]
-   * @param {string | undefined} [opts.apiEmail=process.env['CLOUDFLARE_EMAIL'] ?? undefined]
-   * @param {string | undefined} [opts.apiToken=process.env['CLOUDFLARE_API_TOKEN'] ?? undefined]
-   * @param {string | undefined} [opts.userServiceKey=process.env['CLOUDFLARE_API_USER_SERVICE_KEY'] ?? undefined]
+   * @param {string | null | undefined} [opts.apiKey=process.env['CLOUDFLARE_API_KEY'] ?? null]
+   * @param {string | null | undefined} [opts.apiEmail=process.env['CLOUDFLARE_EMAIL'] ?? null]
+   * @param {string | null | undefined} [opts.apiToken=process.env['CLOUDFLARE_API_TOKEN'] ?? null]
+   * @param {string | null | undefined} [opts.userServiceKey=process.env['CLOUDFLARE_API_USER_SERVICE_KEY'] ?? null]
    * @param {string} [opts.baseURL=process.env['CLOUDFLARE_BASE_URL'] ?? https://api.cloudflare.com/client/v4] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {number} [opts.httpAgent] - An HTTP agent used to manage HTTP(s) connections.
@@ -112,33 +112,12 @@ export class Cloudflare extends Core.APIClient {
    */
   constructor({
     baseURL = Core.readEnv('CLOUDFLARE_BASE_URL'),
-    apiKey = Core.readEnv('CLOUDFLARE_API_KEY'),
-    apiEmail = Core.readEnv('CLOUDFLARE_EMAIL'),
-    apiToken = Core.readEnv('CLOUDFLARE_API_TOKEN'),
-    userServiceKey = Core.readEnv('CLOUDFLARE_API_USER_SERVICE_KEY'),
+    apiKey = Core.readEnv('CLOUDFLARE_API_KEY') ?? null,
+    apiEmail = Core.readEnv('CLOUDFLARE_EMAIL') ?? null,
+    apiToken = Core.readEnv('CLOUDFLARE_API_TOKEN') ?? null,
+    userServiceKey = Core.readEnv('CLOUDFLARE_API_USER_SERVICE_KEY') ?? null,
     ...opts
   }: ClientOptions = {}) {
-    if (apiKey === undefined) {
-      throw new Errors.CloudflareError(
-        "The CLOUDFLARE_API_KEY environment variable is missing or empty; either provide it, or instantiate the Cloudflare client with an apiKey option, like new Cloudflare({ apiKey: '144c9defac04969c7bfad8efaa8ea194' }).",
-      );
-    }
-    if (apiEmail === undefined) {
-      throw new Errors.CloudflareError(
-        "The CLOUDFLARE_EMAIL environment variable is missing or empty; either provide it, or instantiate the Cloudflare client with an apiEmail option, like new Cloudflare({ apiEmail: 'user@example.com' }).",
-      );
-    }
-    if (apiToken === undefined) {
-      throw new Errors.CloudflareError(
-        "The CLOUDFLARE_API_TOKEN environment variable is missing or empty; either provide it, or instantiate the Cloudflare client with an apiToken option, like new Cloudflare({ apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY' }).",
-      );
-    }
-    if (userServiceKey === undefined) {
-      throw new Errors.CloudflareError(
-        "The CLOUDFLARE_API_USER_SERVICE_KEY environment variable is missing or empty; either provide it, or instantiate the Cloudflare client with an userServiceKey option, like new Cloudflare({ userServiceKey: 'v1.0-144c9defac04969c7bfad8ef-631a41d003a32d25fe878081ef365c49503f7fada600da935e2851a1c7326084b85cbf6429c4b859de8475731dc92a9c329631e6d59e6c73da7b198497172b4cefe071d90d0f5d2719' }).",
-      );
-    }
-
     const options: ClientOptions = {
       apiKey,
       apiEmail,
@@ -256,6 +235,40 @@ export class Cloudflare extends Core.APIClient {
     };
   }
 
+  protected override validateHeaders(headers: Core.Headers, customHeaders: Core.Headers) {
+    if (this.apiEmail && headers['x-auth-email']) {
+      return;
+    }
+    if (customHeaders['x-auth-email'] === null) {
+      return;
+    }
+
+    if (this.apiKey && headers['x-auth-key']) {
+      return;
+    }
+    if (customHeaders['x-auth-key'] === null) {
+      return;
+    }
+
+    if (this.apiToken && headers['authorization']) {
+      return;
+    }
+    if (customHeaders['authorization'] === null) {
+      return;
+    }
+
+    if (this.userServiceKey && headers['x-auth-user-service-key']) {
+      return;
+    }
+    if (customHeaders['x-auth-user-service-key'] === null) {
+      return;
+    }
+
+    throw new Error(
+      'Could not resolve authentication method. Expected one of apiEmail, apiKey, apiToken or userServiceKey to be set. Or for one of the "X-Auth-Email", "X-Auth-Key", "Authorization" or "X-Auth-User-Service-Key" headers to be explicitly omitted',
+    );
+  }
+
   protected override authHeaders(opts: Core.FinalRequestOptions): Core.Headers {
     const apiEmailAuth = this.apiEmailAuth(opts);
     const apiKeyAuth = this.apiKeyAuth(opts);
@@ -265,18 +278,30 @@ export class Cloudflare extends Core.APIClient {
   }
 
   protected apiEmailAuth(opts: Core.FinalRequestOptions): Core.Headers {
+    if (this.apiEmail == null) {
+      return {};
+    }
     return { 'X-Auth-Email': this.apiEmail };
   }
 
   protected apiKeyAuth(opts: Core.FinalRequestOptions): Core.Headers {
+    if (this.apiKey == null) {
+      return {};
+    }
     return { 'X-Auth-Key': this.apiKey };
   }
 
   protected apiTokenAuth(opts: Core.FinalRequestOptions): Core.Headers {
+    if (this.apiToken == null) {
+      return {};
+    }
     return { Authorization: `Bearer ${this.apiToken}` };
   }
 
   protected userServiceKeyAuth(opts: Core.FinalRequestOptions): Core.Headers {
+    if (this.userServiceKey == null) {
+      return {};
+    }
     return { 'X-Auth-User-Service-Key': this.userServiceKey };
   }
 
