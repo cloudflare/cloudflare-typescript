@@ -23,11 +23,6 @@ describe('instantiate client', () => {
     const client = new Cloudflare({
       baseURL: 'http://localhost:5000/',
       defaultHeaders: { 'X-My-Default-Header': '2' },
-      apiKey: '144c9defac04969c7bfad8efaa8ea194',
-      apiEmail: 'user@example.com',
-      apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY',
-      userServiceKey:
-        'v1.0-144c9defac04969c7bfad8ef-631a41d003a32d25fe878081ef365c49503f7fada600da935e2851a1c7326084b85cbf6429c4b859de8475731dc92a9c329631e6d59e6c73da7b198497172b4cefe071d90d0f5d2719',
     });
 
     test('they are used in the request', () => {
@@ -59,11 +54,6 @@ describe('instantiate client', () => {
       const client = new Cloudflare({
         baseURL: 'http://localhost:5000/',
         defaultQuery: { apiVersion: 'foo' },
-        apiKey: '144c9defac04969c7bfad8efaa8ea194',
-        apiEmail: 'user@example.com',
-        apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY',
-        userServiceKey:
-          'v1.0-144c9defac04969c7bfad8ef-631a41d003a32d25fe878081ef365c49503f7fada600da935e2851a1c7326084b85cbf6429c4b859de8475731dc92a9c329631e6d59e6c73da7b198497172b4cefe071d90d0f5d2719',
       });
       expect(client.buildURL('/foo', null)).toEqual('http://localhost:5000/foo?apiVersion=foo');
     });
@@ -72,25 +62,12 @@ describe('instantiate client', () => {
       const client = new Cloudflare({
         baseURL: 'http://localhost:5000/',
         defaultQuery: { apiVersion: 'foo', hello: 'world' },
-        apiKey: '144c9defac04969c7bfad8efaa8ea194',
-        apiEmail: 'user@example.com',
-        apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY',
-        userServiceKey:
-          'v1.0-144c9defac04969c7bfad8ef-631a41d003a32d25fe878081ef365c49503f7fada600da935e2851a1c7326084b85cbf6429c4b859de8475731dc92a9c329631e6d59e6c73da7b198497172b4cefe071d90d0f5d2719',
       });
       expect(client.buildURL('/foo', null)).toEqual('http://localhost:5000/foo?apiVersion=foo&hello=world');
     });
 
     test('overriding with `undefined`', () => {
-      const client = new Cloudflare({
-        baseURL: 'http://localhost:5000/',
-        defaultQuery: { hello: 'world' },
-        apiKey: '144c9defac04969c7bfad8efaa8ea194',
-        apiEmail: 'user@example.com',
-        apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY',
-        userServiceKey:
-          'v1.0-144c9defac04969c7bfad8ef-631a41d003a32d25fe878081ef365c49503f7fada600da935e2851a1c7326084b85cbf6429c4b859de8475731dc92a9c329631e6d59e6c73da7b198497172b4cefe071d90d0f5d2719',
-      });
+      const client = new Cloudflare({ baseURL: 'http://localhost:5000/', defaultQuery: { hello: 'world' } });
       expect(client.buildURL('/foo', { hello: undefined })).toEqual('http://localhost:5000/foo');
     });
   });
@@ -98,11 +75,6 @@ describe('instantiate client', () => {
   test('custom fetch', async () => {
     const client = new Cloudflare({
       baseURL: 'http://localhost:5000/',
-      apiKey: '144c9defac04969c7bfad8efaa8ea194',
-      apiEmail: 'user@example.com',
-      apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY',
-      userServiceKey:
-        'v1.0-144c9defac04969c7bfad8ef-631a41d003a32d25fe878081ef365c49503f7fada600da935e2851a1c7326084b85cbf6429c4b859de8475731dc92a9c329631e6d59e6c73da7b198497172b4cefe071d90d0f5d2719',
       fetch: (url) => {
         return Promise.resolve(
           new Response(JSON.stringify({ url, custom: true }), {
@@ -119,11 +91,6 @@ describe('instantiate client', () => {
   test('custom signal', async () => {
     const client = new Cloudflare({
       baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-      apiKey: '144c9defac04969c7bfad8efaa8ea194',
-      apiEmail: 'user@example.com',
-      apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY',
-      userServiceKey:
-        'v1.0-144c9defac04969c7bfad8ef-631a41d003a32d25fe878081ef365c49503f7fada600da935e2851a1c7326084b85cbf6429c4b859de8475731dc92a9c329631e6d59e6c73da7b198497172b4cefe071d90d0f5d2719',
       fetch: (...args) => {
         return new Promise((resolve, reject) =>
           setTimeout(
@@ -148,26 +115,12 @@ describe('instantiate client', () => {
 
   describe('baseUrl', () => {
     test('trailing slash', () => {
-      const client = new Cloudflare({
-        baseURL: 'http://localhost:5000/custom/path/',
-        apiKey: '144c9defac04969c7bfad8efaa8ea194',
-        apiEmail: 'user@example.com',
-        apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY',
-        userServiceKey:
-          'v1.0-144c9defac04969c7bfad8ef-631a41d003a32d25fe878081ef365c49503f7fada600da935e2851a1c7326084b85cbf6429c4b859de8475731dc92a9c329631e6d59e6c73da7b198497172b4cefe071d90d0f5d2719',
-      });
+      const client = new Cloudflare({ baseURL: 'http://localhost:5000/custom/path/' });
       expect(client.buildURL('/foo', null)).toEqual('http://localhost:5000/custom/path/foo');
     });
 
     test('no trailing slash', () => {
-      const client = new Cloudflare({
-        baseURL: 'http://localhost:5000/custom/path',
-        apiKey: '144c9defac04969c7bfad8efaa8ea194',
-        apiEmail: 'user@example.com',
-        apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY',
-        userServiceKey:
-          'v1.0-144c9defac04969c7bfad8ef-631a41d003a32d25fe878081ef365c49503f7fada600da935e2851a1c7326084b85cbf6429c4b859de8475731dc92a9c329631e6d59e6c73da7b198497172b4cefe071d90d0f5d2719',
-      });
+      const client = new Cloudflare({ baseURL: 'http://localhost:5000/custom/path' });
       expect(client.buildURL('/foo', null)).toEqual('http://localhost:5000/custom/path/foo');
     });
 
@@ -176,123 +129,41 @@ describe('instantiate client', () => {
     });
 
     test('explicit option', () => {
-      const client = new Cloudflare({
-        baseURL: 'https://example.com',
-        apiKey: '144c9defac04969c7bfad8efaa8ea194',
-        apiEmail: 'user@example.com',
-        apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY',
-        userServiceKey:
-          'v1.0-144c9defac04969c7bfad8ef-631a41d003a32d25fe878081ef365c49503f7fada600da935e2851a1c7326084b85cbf6429c4b859de8475731dc92a9c329631e6d59e6c73da7b198497172b4cefe071d90d0f5d2719',
-      });
+      const client = new Cloudflare({ baseURL: 'https://example.com' });
       expect(client.baseURL).toEqual('https://example.com');
     });
 
     test('env variable', () => {
       process.env['CLOUDFLARE_BASE_URL'] = 'https://example.com/from_env';
-      const client = new Cloudflare({
-        apiKey: '144c9defac04969c7bfad8efaa8ea194',
-        apiEmail: 'user@example.com',
-        apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY',
-        userServiceKey:
-          'v1.0-144c9defac04969c7bfad8ef-631a41d003a32d25fe878081ef365c49503f7fada600da935e2851a1c7326084b85cbf6429c4b859de8475731dc92a9c329631e6d59e6c73da7b198497172b4cefe071d90d0f5d2719',
-      });
+      const client = new Cloudflare({});
       expect(client.baseURL).toEqual('https://example.com/from_env');
     });
 
     test('empty env variable', () => {
       process.env['CLOUDFLARE_BASE_URL'] = ''; // empty
-      const client = new Cloudflare({
-        apiKey: '144c9defac04969c7bfad8efaa8ea194',
-        apiEmail: 'user@example.com',
-        apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY',
-        userServiceKey:
-          'v1.0-144c9defac04969c7bfad8ef-631a41d003a32d25fe878081ef365c49503f7fada600da935e2851a1c7326084b85cbf6429c4b859de8475731dc92a9c329631e6d59e6c73da7b198497172b4cefe071d90d0f5d2719',
-      });
+      const client = new Cloudflare({});
       expect(client.baseURL).toEqual('https://api.cloudflare.com/client/v4');
     });
 
     test('blank env variable', () => {
       process.env['CLOUDFLARE_BASE_URL'] = '  '; // blank
-      const client = new Cloudflare({
-        apiKey: '144c9defac04969c7bfad8efaa8ea194',
-        apiEmail: 'user@example.com',
-        apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY',
-        userServiceKey:
-          'v1.0-144c9defac04969c7bfad8ef-631a41d003a32d25fe878081ef365c49503f7fada600da935e2851a1c7326084b85cbf6429c4b859de8475731dc92a9c329631e6d59e6c73da7b198497172b4cefe071d90d0f5d2719',
-      });
+      const client = new Cloudflare({});
       expect(client.baseURL).toEqual('https://api.cloudflare.com/client/v4');
     });
   });
 
   test('maxRetries option is correctly set', () => {
-    const client = new Cloudflare({
-      maxRetries: 4,
-      apiKey: '144c9defac04969c7bfad8efaa8ea194',
-      apiEmail: 'user@example.com',
-      apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY',
-      userServiceKey:
-        'v1.0-144c9defac04969c7bfad8ef-631a41d003a32d25fe878081ef365c49503f7fada600da935e2851a1c7326084b85cbf6429c4b859de8475731dc92a9c329631e6d59e6c73da7b198497172b4cefe071d90d0f5d2719',
-    });
+    const client = new Cloudflare({ maxRetries: 4 });
     expect(client.maxRetries).toEqual(4);
 
     // default
-    const client2 = new Cloudflare({
-      apiKey: '144c9defac04969c7bfad8efaa8ea194',
-      apiEmail: 'user@example.com',
-      apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY',
-      userServiceKey:
-        'v1.0-144c9defac04969c7bfad8ef-631a41d003a32d25fe878081ef365c49503f7fada600da935e2851a1c7326084b85cbf6429c4b859de8475731dc92a9c329631e6d59e6c73da7b198497172b4cefe071d90d0f5d2719',
-    });
+    const client2 = new Cloudflare({});
     expect(client2.maxRetries).toEqual(2);
-  });
-
-  test('with environment variable arguments', () => {
-    // set options via env var
-    process.env['CLOUDFLARE_API_KEY'] = '144c9defac04969c7bfad8efaa8ea194';
-    process.env['CLOUDFLARE_EMAIL'] = 'user@example.com';
-    process.env['CLOUDFLARE_API_TOKEN'] = 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY';
-    process.env['CLOUDFLARE_API_USER_SERVICE_KEY'] =
-      'v1.0-144c9defac04969c7bfad8ef-631a41d003a32d25fe878081ef365c49503f7fada600da935e2851a1c7326084b85cbf6429c4b859de8475731dc92a9c329631e6d59e6c73da7b198497172b4cefe071d90d0f5d2719';
-    const client = new Cloudflare();
-    expect(client.apiKey).toBe('144c9defac04969c7bfad8efaa8ea194');
-    expect(client.apiEmail).toBe('user@example.com');
-    expect(client.apiToken).toBe('Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY');
-    expect(client.userServiceKey).toBe(
-      'v1.0-144c9defac04969c7bfad8ef-631a41d003a32d25fe878081ef365c49503f7fada600da935e2851a1c7326084b85cbf6429c4b859de8475731dc92a9c329631e6d59e6c73da7b198497172b4cefe071d90d0f5d2719',
-    );
-  });
-
-  test('with overriden environment variable arguments', () => {
-    // set options via env var
-    process.env['CLOUDFLARE_API_KEY'] = 'another 144c9defac04969c7bfad8efaa8ea194';
-    process.env['CLOUDFLARE_EMAIL'] = 'another user@example.com';
-    process.env['CLOUDFLARE_API_TOKEN'] = 'another Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY';
-    process.env['CLOUDFLARE_API_USER_SERVICE_KEY'] =
-      'another v1.0-144c9defac04969c7bfad8ef-631a41d003a32d25fe878081ef365c49503f7fada600da935e2851a1c7326084b85cbf6429c4b859de8475731dc92a9c329631e6d59e6c73da7b198497172b4cefe071d90d0f5d2719';
-    const client = new Cloudflare({
-      apiKey: '144c9defac04969c7bfad8efaa8ea194',
-      apiEmail: 'user@example.com',
-      apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY',
-      userServiceKey:
-        'v1.0-144c9defac04969c7bfad8ef-631a41d003a32d25fe878081ef365c49503f7fada600da935e2851a1c7326084b85cbf6429c4b859de8475731dc92a9c329631e6d59e6c73da7b198497172b4cefe071d90d0f5d2719',
-    });
-    expect(client.apiKey).toBe('144c9defac04969c7bfad8efaa8ea194');
-    expect(client.apiEmail).toBe('user@example.com');
-    expect(client.apiToken).toBe('Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY');
-    expect(client.userServiceKey).toBe(
-      'v1.0-144c9defac04969c7bfad8ef-631a41d003a32d25fe878081ef365c49503f7fada600da935e2851a1c7326084b85cbf6429c4b859de8475731dc92a9c329631e6d59e6c73da7b198497172b4cefe071d90d0f5d2719',
-    );
   });
 });
 
 describe('request building', () => {
-  const client = new Cloudflare({
-    apiKey: '144c9defac04969c7bfad8efaa8ea194',
-    apiEmail: 'user@example.com',
-    apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY',
-    userServiceKey:
-      'v1.0-144c9defac04969c7bfad8ef-631a41d003a32d25fe878081ef365c49503f7fada600da935e2851a1c7326084b85cbf6429c4b859de8475731dc92a9c329631e6d59e6c73da7b198497172b4cefe071d90d0f5d2719',
-  });
+  const client = new Cloudflare({});
 
   describe('Content-Length', () => {
     test('handles multi-byte characters', () => {
@@ -334,15 +205,7 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new Cloudflare({
-      apiKey: '144c9defac04969c7bfad8efaa8ea194',
-      apiEmail: 'user@example.com',
-      apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY',
-      userServiceKey:
-        'v1.0-144c9defac04969c7bfad8ef-631a41d003a32d25fe878081ef365c49503f7fada600da935e2851a1c7326084b85cbf6429c4b859de8475731dc92a9c329631e6d59e6c73da7b198497172b4cefe071d90d0f5d2719',
-      timeout: 10,
-      fetch: testFetch,
-    });
+    const client = new Cloudflare({ timeout: 10, fetch: testFetch });
 
     expect(await client.request({ path: '/foo', method: 'get' })).toEqual({ a: 1 });
     expect(count).toEqual(2);
@@ -369,14 +232,7 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new Cloudflare({
-      apiKey: '144c9defac04969c7bfad8efaa8ea194',
-      apiEmail: 'user@example.com',
-      apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY',
-      userServiceKey:
-        'v1.0-144c9defac04969c7bfad8ef-631a41d003a32d25fe878081ef365c49503f7fada600da935e2851a1c7326084b85cbf6429c4b859de8475731dc92a9c329631e6d59e6c73da7b198497172b4cefe071d90d0f5d2719',
-      fetch: testFetch,
-    });
+    const client = new Cloudflare({ fetch: testFetch });
 
     expect(await client.request({ path: '/foo', method: 'get' })).toEqual({ a: 1 });
     expect(count).toEqual(2);
@@ -403,14 +259,7 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new Cloudflare({
-      apiKey: '144c9defac04969c7bfad8efaa8ea194',
-      apiEmail: 'user@example.com',
-      apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY',
-      userServiceKey:
-        'v1.0-144c9defac04969c7bfad8ef-631a41d003a32d25fe878081ef365c49503f7fada600da935e2851a1c7326084b85cbf6429c4b859de8475731dc92a9c329631e6d59e6c73da7b198497172b4cefe071d90d0f5d2719',
-      fetch: testFetch,
-    });
+    const client = new Cloudflare({ fetch: testFetch });
 
     expect(await client.request({ path: '/foo', method: 'get' })).toEqual({ a: 1 });
     expect(count).toEqual(2);
