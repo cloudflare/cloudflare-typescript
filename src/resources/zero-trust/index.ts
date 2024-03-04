@@ -11,6 +11,13 @@ export {
 export { DEX } from './dex/index';
 export { DLP } from './dlp/index';
 export {
+  DeviceDevicesListDevicesResponse,
+  DeviceGetResponse,
+  DeviceDevicesListDevicesParams,
+  DeviceGetParams,
+  Devices,
+} from './devices/index';
+export {
   GatewayCreateResponse,
   GatewayListResponse,
   GatewayCreateParams,

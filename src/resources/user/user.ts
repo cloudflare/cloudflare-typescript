@@ -12,7 +12,7 @@ import * as FirewallAPI from 'cloudflare/resources/user/firewall/firewall';
 import * as LoadBalancersAPI from 'cloudflare/resources/user/load-balancers/load-balancers';
 import * as TokensAPI from 'cloudflare/resources/user/tokens/tokens';
 
-export class User extends APIResource {
+export class UserResource extends APIResource {
   auditLogs: AuditLogsAPI.AuditLogs = new AuditLogsAPI.AuditLogs(this._client);
   billing: BillingAPI.Billing = new BillingAPI.Billing(this._client);
   firewall: FirewallAPI.Firewall = new FirewallAPI.Firewall(this._client);
@@ -39,6 +39,73 @@ export class User extends APIResource {
       this._client.patch('/user', { body, ...options }) as Core.APIPromise<{ result: UserEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+
+export interface User {
+  /**
+   * Address.
+   */
+  address: string;
+
+  /**
+   * City.
+   */
+  city: string;
+
+  /**
+   * The country in which the user lives.
+   */
+  country: string | null;
+
+  /**
+   * User's first name
+   */
+  first_name: string | null;
+
+  /**
+   * User's last name
+   */
+  last_name: string | null;
+
+  /**
+   * Name of organization.
+   */
+  organization: string;
+
+  /**
+   * User's telephone number
+   */
+  phone: string | null;
+
+  /**
+   * State.
+   */
+  state: string;
+
+  /**
+   * The zipcode or postal code where the user lives.
+   */
+  zip: string | null;
+
+  /**
+   * Contact Identifier.
+   */
+  id?: string;
+
+  /**
+   * Optional address line for unit, floor, suite, etc.
+   */
+  address2?: string;
+
+  /**
+   * The contact email address of the user.
+   */
+  email?: string;
+
+  /**
+   * Contact fax number.
+   */
+  fax?: string;
 }
 
 export type UserListResponse = unknown | string | null;
@@ -72,7 +139,8 @@ export interface UserEditParams {
   zipcode?: string | null;
 }
 
-export namespace User {
+export namespace UserResource {
+  export import User = UserAPI.User;
   export import UserListResponse = UserAPI.UserListResponse;
   export import UserEditResponse = UserAPI.UserEditResponse;
   export import UserEditParams = UserAPI.UserEditParams;

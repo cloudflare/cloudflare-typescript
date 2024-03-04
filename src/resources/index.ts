@@ -2,6 +2,7 @@
 
 export { ACM } from './acm/acm';
 export {
+  Account,
   AccountUpdateResponse,
   AccountListResponse,
   AccountGetResponse,
@@ -52,14 +53,6 @@ export {
   Calls,
 } from './calls';
 export { CertificateAuthorities } from './certificate-authorities/certificate-authorities';
-export {
-  CertificateCreateResponse,
-  CertificateListResponse,
-  CertificateDeleteResponse,
-  CertificateGetResponse,
-  CertificateCreateParams,
-  Certificates,
-} from './certificates';
 export { Challenges } from './challenges/challenges';
 export {
   ClientCertificateCreateResponse,
@@ -129,16 +122,9 @@ export {
   DNSSECGetParams,
   DNSSEC,
 } from './dnssec';
-export {
-  DeviceDevicesListDevicesResponse,
-  DeviceGetResponse,
-  DeviceDevicesListDevicesParams,
-  DeviceGetParams,
-  Devices,
-} from './devices/devices';
 export { Diagnostics } from './diagnostics/diagnostics';
 export { DurableObjects } from './durable-objects/durable-objects';
-export { Emails } from './emails/emails';
+export { EmailRouting } from './email-routing/email-routing';
 export {
   FilterCreateResponse,
   FilterUpdateResponse,
@@ -166,7 +152,7 @@ export {
 } from './healthchecks/healthchecks';
 export { Hostnames } from './hostnames/hostnames';
 export { Hyperdrive } from './hyperdrive/hyperdrive';
-export { IPListResponse, IPListParams, IPs } from './ips';
+export { IPs, JdcloudIPs, IPListResponse, IPListParams } from './ips';
 export { Images } from './images/images';
 export { Intel } from './intel/intel';
 export { KV } from './kv/kv';
@@ -184,12 +170,9 @@ export {
   KeylessCertificates,
 } from './keyless-certificates';
 export {
-  LoadBalancerCreateResponse,
-  LoadBalancerUpdateResponse,
+  LoadBalancer,
   LoadBalancerListResponse,
   LoadBalancerDeleteResponse,
-  LoadBalancerEditResponse,
-  LoadBalancerGetResponse,
   LoadBalancerCreateParams,
   LoadBalancerUpdateParams,
   LoadBalancerListParams,
@@ -221,15 +204,24 @@ export {
   ManagedHeaders,
 } from './managed-headers';
 export {
+  Membership,
   MembershipUpdateResponse,
-  MembershipListResponse,
   MembershipDeleteResponse,
   MembershipGetResponse,
   MembershipUpdateParams,
   MembershipListParams,
-  MembershipListResponsesV4PagePaginationArray,
+  MembershipsV4PagePaginationArray,
   Memberships,
 } from './memberships';
+export {
+  OriginCACertificate,
+  CertificateCreateResponse,
+  CertificateListResponse,
+  CertificateDeleteResponse,
+  CertificateGetResponse,
+  CertificateCreateParams,
+  Certificates,
+} from './certificates';
 export {
   OriginPostQuantumEncryptionUpdateResponse,
   OriginPostQuantumEncryptionGetResponse,
@@ -371,7 +363,7 @@ export {
   URLNormalization,
 } from './url-normalization';
 export { URLScannerScanResponse, URLScannerScanParams, URLScanner } from './url-scanner/url-scanner';
-export { UserListResponse, UserEditResponse, UserEditParams, User } from './user/user';
+export { User, UserListResponse, UserEditResponse, UserEditParams, UserResource } from './user/user';
 export { Vectorize } from './vectorize/vectorize';
 export {
   WARPConnectorCreateResponse,

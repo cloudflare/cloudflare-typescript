@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
+  Account,
   AccountUpdateResponse,
   AccountListResponse,
   AccountGetResponse,
@@ -11,11 +12,10 @@ export {
   Accounts,
 } from './accounts';
 export {
-  MemberCreateResponse,
-  MemberUpdateResponse,
+  AccountMember,
+  AccountMemberWithID,
   MemberListResponse,
   MemberDeleteResponse,
-  MemberGetResponse,
   MemberCreateParams,
   MemberUpdateParams,
   MemberListParams,
@@ -24,4 +24,12 @@ export {
   MemberListResponsesV4PagePaginationArray,
   Members,
 } from './members';
-export { RoleListResponse, RoleGetResponse, RoleListParams, RoleGetParams, Roles } from './roles';
+export {
+  Role,
+  RoleWithID,
+  RoleListResponse,
+  RoleGetResponse,
+  RoleListParams,
+  RoleGetParams,
+  Roles,
+} from './roles';

@@ -167,7 +167,7 @@ export class Cloudflare extends Core.APIClient {
   certificates: API.Certificates = new API.Certificates(this);
   ips: API.IPs = new API.IPs(this);
   memberships: API.Memberships = new API.Memberships(this);
-  user: API.User = new API.User(this);
+  user: API.UserResource = new API.UserResource(this);
   zones: API.Zones = new API.Zones(this);
   loadBalancers: API.LoadBalancers = new API.LoadBalancers(this);
   cache: API.Cache = new API.Cache(this);
@@ -184,7 +184,7 @@ export class Cloudflare extends Core.APIClient {
   customNameservers: API.CustomNameservers = new API.CustomNameservers(this);
   dns: API.DNS = new API.DNS(this);
   dnssec: API.DNSSEC = new API.DNSSEC(this);
-  emails: API.Emails = new API.Emails(this);
+  emailRouting: API.EmailRouting = new API.EmailRouting(this);
   filters: API.Filters = new API.Filters(this);
   firewall: API.Firewall = new API.Firewall(this);
   healthchecks: API.Healthchecks = new API.Healthchecks(this);
@@ -224,7 +224,6 @@ export class Cloudflare extends Core.APIClient {
   storage: API.Storage = new API.Storage(this);
   stream: API.Stream = new API.Stream(this);
   alerting: API.Alerting = new API.Alerting(this);
-  devices: API.Devices = new API.Devices(this);
   d1: API.D1 = new API.D1(this);
   r2: API.R2 = new API.R2(this);
   warpConnector: API.WARPConnector = new API.WARPConnector(this);
@@ -337,6 +336,7 @@ export namespace Cloudflare {
   export import V4PagePaginationArrayResponse = Pagination.V4PagePaginationArrayResponse;
 
   export import Accounts = API.Accounts;
+  export import Account = API.Account;
   export import AccountUpdateResponse = API.AccountUpdateResponse;
   export import AccountListResponse = API.AccountListResponse;
   export import AccountGetResponse = API.AccountGetResponse;
@@ -346,6 +346,7 @@ export namespace Cloudflare {
   export import AccountGetParams = API.AccountGetParams;
 
   export import Certificates = API.Certificates;
+  export import OriginCACertificate = API.OriginCACertificate;
   export import CertificateCreateResponse = API.CertificateCreateResponse;
   export import CertificateListResponse = API.CertificateListResponse;
   export import CertificateDeleteResponse = API.CertificateDeleteResponse;
@@ -353,18 +354,20 @@ export namespace Cloudflare {
   export import CertificateCreateParams = API.CertificateCreateParams;
 
   export import IPs = API.IPs;
+  export import JdcloudIPs = API.JdcloudIPs;
   export import IPListResponse = API.IPListResponse;
   export import IPListParams = API.IPListParams;
 
   export import Memberships = API.Memberships;
+  export import Membership = API.Membership;
   export import MembershipUpdateResponse = API.MembershipUpdateResponse;
-  export import MembershipListResponse = API.MembershipListResponse;
   export import MembershipDeleteResponse = API.MembershipDeleteResponse;
   export import MembershipGetResponse = API.MembershipGetResponse;
-  export import MembershipListResponsesV4PagePaginationArray = API.MembershipListResponsesV4PagePaginationArray;
+  export import MembershipsV4PagePaginationArray = API.MembershipsV4PagePaginationArray;
   export import MembershipUpdateParams = API.MembershipUpdateParams;
   export import MembershipListParams = API.MembershipListParams;
 
+  export import UserResource = API.UserResource;
   export import User = API.User;
   export import UserListResponse = API.UserListResponse;
   export import UserEditResponse = API.UserEditResponse;
@@ -384,12 +387,9 @@ export namespace Cloudflare {
   export import ZoneGetParams = API.ZoneGetParams;
 
   export import LoadBalancers = API.LoadBalancers;
-  export import LoadBalancerCreateResponse = API.LoadBalancerCreateResponse;
-  export import LoadBalancerUpdateResponse = API.LoadBalancerUpdateResponse;
+  export import LoadBalancer = API.LoadBalancer;
   export import LoadBalancerListResponse = API.LoadBalancerListResponse;
   export import LoadBalancerDeleteResponse = API.LoadBalancerDeleteResponse;
-  export import LoadBalancerEditResponse = API.LoadBalancerEditResponse;
-  export import LoadBalancerGetResponse = API.LoadBalancerGetResponse;
   export import LoadBalancerCreateParams = API.LoadBalancerCreateParams;
   export import LoadBalancerUpdateParams = API.LoadBalancerUpdateParams;
   export import LoadBalancerListParams = API.LoadBalancerListParams;
@@ -486,7 +486,7 @@ export namespace Cloudflare {
   export import DNSSECEditParams = API.DNSSECEditParams;
   export import DNSSECGetParams = API.DNSSECGetParams;
 
-  export import Emails = API.Emails;
+  export import EmailRouting = API.EmailRouting;
 
   export import Filters = API.Filters;
   export import FilterCreateResponse = API.FilterCreateResponse;
@@ -691,12 +691,6 @@ export namespace Cloudflare {
   export import StreamGetParams = API.StreamGetParams;
 
   export import Alerting = API.Alerting;
-
-  export import Devices = API.Devices;
-  export import DeviceDevicesListDevicesResponse = API.DeviceDevicesListDevicesResponse;
-  export import DeviceGetResponse = API.DeviceGetResponse;
-  export import DeviceDevicesListDevicesParams = API.DeviceDevicesListDevicesParams;
-  export import DeviceGetParams = API.DeviceGetParams;
 
   export import D1 = API.D1;
 

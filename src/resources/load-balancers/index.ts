@@ -1,12 +1,9 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
-  LoadBalancerCreateResponse,
-  LoadBalancerUpdateResponse,
+  LoadBalancer,
   LoadBalancerListResponse,
   LoadBalancerDeleteResponse,
-  LoadBalancerEditResponse,
-  LoadBalancerGetResponse,
   LoadBalancerCreateParams,
   LoadBalancerUpdateParams,
   LoadBalancerListParams,

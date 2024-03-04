@@ -5,13 +5,14 @@ import { APIResource } from 'cloudflare/resource';
 import * as CacheAPI from 'cloudflare/resources/cache/cache';
 import * as CacheReserveAPI from 'cloudflare/resources/cache/cache-reserve';
 import * as RegionalTieredCacheAPI from 'cloudflare/resources/cache/regional-tiered-cache';
-import * as TieredCacheSmartTopologyAPI from 'cloudflare/resources/cache/tiered-cache-smart-topology';
+import * as SmartTieredCachedAPI from 'cloudflare/resources/cache/smart-tiered-cached';
 import * as VariantsAPI from 'cloudflare/resources/cache/variants';
 
 export class Cache extends APIResource {
   cacheReserve: CacheReserveAPI.CacheReserve = new CacheReserveAPI.CacheReserve(this._client);
-  tieredCacheSmartTopology: TieredCacheSmartTopologyAPI.TieredCacheSmartTopology =
-    new TieredCacheSmartTopologyAPI.TieredCacheSmartTopology(this._client);
+  smartTieredCached: SmartTieredCachedAPI.SmartTieredCached = new SmartTieredCachedAPI.SmartTieredCached(
+    this._client,
+  );
   variants: VariantsAPI.Variants = new VariantsAPI.Variants(this._client);
   regionalTieredCache: RegionalTieredCacheAPI.RegionalTieredCache =
     new RegionalTieredCacheAPI.RegionalTieredCache(this._client);
@@ -115,13 +116,13 @@ export namespace Cache {
   export import CacheReserveClearParams = CacheReserveAPI.CacheReserveClearParams;
   export import CacheReserveEditParams = CacheReserveAPI.CacheReserveEditParams;
   export import CacheReserveStatusParams = CacheReserveAPI.CacheReserveStatusParams;
-  export import TieredCacheSmartTopology = TieredCacheSmartTopologyAPI.TieredCacheSmartTopology;
-  export import TieredCacheSmartTopologyDeleteResponse = TieredCacheSmartTopologyAPI.TieredCacheSmartTopologyDeleteResponse;
-  export import TieredCacheSmartTopologyEditResponse = TieredCacheSmartTopologyAPI.TieredCacheSmartTopologyEditResponse;
-  export import TieredCacheSmartTopologyGetResponse = TieredCacheSmartTopologyAPI.TieredCacheSmartTopologyGetResponse;
-  export import TieredCacheSmartTopologyDeleteParams = TieredCacheSmartTopologyAPI.TieredCacheSmartTopologyDeleteParams;
-  export import TieredCacheSmartTopologyEditParams = TieredCacheSmartTopologyAPI.TieredCacheSmartTopologyEditParams;
-  export import TieredCacheSmartTopologyGetParams = TieredCacheSmartTopologyAPI.TieredCacheSmartTopologyGetParams;
+  export import SmartTieredCached = SmartTieredCachedAPI.SmartTieredCached;
+  export import SmartTieredCachedDeleteResponse = SmartTieredCachedAPI.SmartTieredCachedDeleteResponse;
+  export import SmartTieredCachedEditResponse = SmartTieredCachedAPI.SmartTieredCachedEditResponse;
+  export import SmartTieredCachedGetResponse = SmartTieredCachedAPI.SmartTieredCachedGetResponse;
+  export import SmartTieredCachedDeleteParams = SmartTieredCachedAPI.SmartTieredCachedDeleteParams;
+  export import SmartTieredCachedEditParams = SmartTieredCachedAPI.SmartTieredCachedEditParams;
+  export import SmartTieredCachedGetParams = SmartTieredCachedAPI.SmartTieredCachedGetParams;
   export import Variants = VariantsAPI.Variants;
   export import VariantListResponse = VariantsAPI.VariantListResponse;
   export import VariantDeleteResponse = VariantsAPI.VariantDeleteResponse;
