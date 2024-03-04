@@ -34,8 +34,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/accounts/roles.ts">Role</a></code>
-- <code><a href="./src/resources/accounts/roles.ts">RoleWithID</a></code>
 - <code><a href="./src/resources/accounts/roles.ts">RoleListResponse</a></code>
 - <code><a href="./src/resources/accounts/roles.ts">RoleGetResponse</a></code>
 

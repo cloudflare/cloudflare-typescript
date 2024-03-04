@@ -207,8 +207,6 @@ export namespace Accounts {
   export import MemberDeleteParams = MembersAPI.MemberDeleteParams;
   export import MemberGetParams = MembersAPI.MemberGetParams;
   export import Roles = RolesAPI.Roles;
-  export import Role = RolesAPI.Role;
-  export import RoleWithID = RolesAPI.RoleWithID;
   export import RoleListResponse = RolesAPI.RoleListResponse;
   export import RoleGetResponse = RolesAPI.RoleGetResponse;
   export import RoleListParams = RolesAPI.RoleListParams;

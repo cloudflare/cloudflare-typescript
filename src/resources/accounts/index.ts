@@ -24,12 +24,4 @@ export {
   MemberListResponsesV4PagePaginationArray,
   Members,
 } from './members';
-export {
-  Role,
-  RoleWithID,
-  RoleListResponse,
-  RoleGetResponse,
-  RoleListParams,
-  RoleGetParams,
-  Roles,
-} from './roles';
+export { RoleListResponse, RoleGetResponse, RoleListParams, RoleGetParams, Roles } from './roles';
