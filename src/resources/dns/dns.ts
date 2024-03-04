@@ -13,6 +13,7 @@ export class DNS extends APIResource {
 
 export namespace DNS {
   export import Records = RecordsAPI.Records;
+  export import DNSRecord = RecordsAPI.DNSRecord;
   export import RecordCreateResponse = RecordsAPI.RecordCreateResponse;
   export import RecordUpdateResponse = RecordsAPI.RecordUpdateResponse;
   export import RecordListResponse = RecordsAPI.RecordListResponse;

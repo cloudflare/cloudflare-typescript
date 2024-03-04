@@ -20,14 +20,14 @@ export {
   RegionalTieredCache,
 } from './regional-tiered-cache';
 export {
-  TieredCacheSmartTopologyDeleteResponse,
-  TieredCacheSmartTopologyEditResponse,
-  TieredCacheSmartTopologyGetResponse,
-  TieredCacheSmartTopologyDeleteParams,
-  TieredCacheSmartTopologyEditParams,
-  TieredCacheSmartTopologyGetParams,
-  TieredCacheSmartTopology,
-} from './tiered-cache-smart-topology';
+  SmartTieredCachedDeleteResponse,
+  SmartTieredCachedEditResponse,
+  SmartTieredCachedGetResponse,
+  SmartTieredCachedDeleteParams,
+  SmartTieredCachedEditParams,
+  SmartTieredCachedGetParams,
+  SmartTieredCached,
+} from './smart-tiered-cached';
 export {
   VariantListResponse,
   VariantDeleteResponse,

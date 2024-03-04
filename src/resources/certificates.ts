@@ -60,50 +60,48 @@ export class Certificates extends APIResource {
   }
 }
 
+export interface OriginCACertificate {
+  /**
+   * The Certificate Signing Request (CSR). Must be newline-encoded.
+   */
+  csr: string;
+
+  /**
+   * Array of hostnames or wildcard names (e.g., \*.example.com) bound to the
+   * certificate.
+   */
+  hostnames: Array<unknown>;
+
+  /**
+   * Signature type desired on certificate ("origin-rsa" (rsa), "origin-ecc" (ecdsa),
+   * or "keyless-certificate" (for Keyless SSL servers).
+   */
+  request_type: 'origin-rsa' | 'origin-ecc' | 'keyless-certificate';
+
+  /**
+   * The number of days for which the certificate should be valid.
+   */
+  requested_validity: 7 | 30 | 90 | 365 | 730 | 1095 | 5475;
+
+  /**
+   * Identifier
+   */
+  id?: string;
+
+  /**
+   * The Origin CA certificate. Will be newline-encoded.
+   */
+  certificate?: string;
+
+  /**
+   * When the certificate will expire.
+   */
+  expires_on?: string;
+}
+
 export type CertificateCreateResponse = unknown | string;
 
-export type CertificateListResponse = Array<CertificateListResponse.CertificateListResponseItem>;
-
-export namespace CertificateListResponse {
-  export interface CertificateListResponseItem {
-    /**
-     * The Certificate Signing Request (CSR). Must be newline-encoded.
-     */
-    csr: string;
-
-    /**
-     * Array of hostnames or wildcard names (e.g., \*.example.com) bound to the
-     * certificate.
-     */
-    hostnames: Array<unknown>;
-
-    /**
-     * Signature type desired on certificate ("origin-rsa" (rsa), "origin-ecc" (ecdsa),
-     * or "keyless-certificate" (for Keyless SSL servers).
-     */
-    request_type: 'origin-rsa' | 'origin-ecc' | 'keyless-certificate';
-
-    /**
-     * The number of days for which the certificate should be valid.
-     */
-    requested_validity: 7 | 30 | 90 | 365 | 730 | 1095 | 5475;
-
-    /**
-     * Identifier
-     */
-    id?: string;
-
-    /**
-     * The Origin CA certificate. Will be newline-encoded.
-     */
-    certificate?: string;
-
-    /**
-     * When the certificate will expire.
-     */
-    expires_on?: string;
-  }
-}
+export type CertificateListResponse = Array<OriginCACertificate>;
 
 export interface CertificateDeleteResponse {
   /**
@@ -139,6 +137,7 @@ export interface CertificateCreateParams {
 }
 
 export namespace Certificates {
+  export import OriginCACertificate = CertificatesAPI.OriginCACertificate;
   export import CertificateCreateResponse = CertificatesAPI.CertificateCreateResponse;
   export import CertificateListResponse = CertificatesAPI.CertificateListResponse;
   export import CertificateDeleteResponse = CertificatesAPI.CertificateDeleteResponse;

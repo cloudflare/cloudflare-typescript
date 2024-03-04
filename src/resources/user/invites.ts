@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as InvitesAPI from 'cloudflare/resources/user/invites';
+import * as RolesAPI from 'cloudflare/resources/accounts/roles';
 
 export class Invites extends APIResource {
   /**
@@ -86,36 +87,12 @@ export namespace InviteListResponse {
     /**
      * Roles to be assigned to this user.
      */
-    roles?: Array<InviteListResponseItem.Role>;
+    roles?: Array<RolesAPI.Role>;
 
     /**
      * Current status of the invitation.
      */
     status?: 'pending' | 'accepted' | 'rejected' | 'expired';
-  }
-
-  export namespace InviteListResponseItem {
-    export interface Role {
-      /**
-       * Role identifier tag.
-       */
-      id: string;
-
-      /**
-       * Description of role's permissions.
-       */
-      description: string;
-
-      /**
-       * Role Name.
-       */
-      name: string;
-
-      /**
-       * Access permissions for this User.
-       */
-      permissions: Array<string>;
-    }
   }
 }
 

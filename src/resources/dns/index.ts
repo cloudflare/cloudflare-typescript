@@ -3,20 +3,7 @@
 export { Analytics } from './analytics/index';
 export { DNS } from './dns';
 export {
-  FirewallCreateResponse,
-  FirewallListResponse,
-  FirewallDeleteResponse,
-  FirewallEditResponse,
-  FirewallGetResponse,
-  FirewallCreateParams,
-  FirewallListParams,
-  FirewallDeleteParams,
-  FirewallEditParams,
-  FirewallGetParams,
-  FirewallListResponsesV4PagePaginationArray,
-  Firewall,
-} from './firewall/index';
-export {
+  DNSRecord,
   RecordCreateResponse,
   RecordUpdateResponse,
   RecordListResponse,
@@ -38,3 +25,17 @@ export {
   RecordListResponsesV4PagePaginationArray,
   Records,
 } from './records';
+export {
+  FirewallCreateResponse,
+  FirewallListResponse,
+  FirewallDeleteResponse,
+  FirewallEditResponse,
+  FirewallGetResponse,
+  FirewallCreateParams,
+  FirewallListParams,
+  FirewallDeleteParams,
+  FirewallEditParams,
+  FirewallGetParams,
+  FirewallListResponsesV4PagePaginationArray,
+  Firewall,
+} from './firewall/index';

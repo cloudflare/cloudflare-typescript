@@ -34,31 +34,51 @@ export class Roles extends APIResource {
   }
 }
 
-export type RoleListResponse = Array<RoleListResponse.RoleListResponseItem>;
+export interface Role {
+  /**
+   * Role identifier tag.
+   */
+  id: string;
 
-export namespace RoleListResponse {
-  export interface RoleListResponseItem {
-    /**
-     * Role identifier tag.
-     */
-    id: string;
+  /**
+   * Description of role's permissions.
+   */
+  description: string;
 
-    /**
-     * Description of role's permissions.
-     */
-    description: string;
+  /**
+   * Role Name.
+   */
+  name: string;
 
-    /**
-     * Role Name.
-     */
-    name: string;
-
-    /**
-     * Access permissions for this User.
-     */
-    permissions: Array<string>;
-  }
+  /**
+   * Access permissions for this User.
+   */
+  permissions: Array<string>;
 }
+
+export interface RoleWithID {
+  /**
+   * Role identifier tag.
+   */
+  id: string;
+
+  /**
+   * Description of role's permissions.
+   */
+  description: string;
+
+  /**
+   * Role Name.
+   */
+  name: string;
+
+  /**
+   * Access permissions for this User.
+   */
+  permissions: Array<string>;
+}
+
+export type RoleListResponse = Array<Role>;
 
 export type RoleGetResponse = unknown | string | null;
 
@@ -71,6 +91,8 @@ export interface RoleGetParams {
 }
 
 export namespace Roles {
+  export import Role = RolesAPI.Role;
+  export import RoleWithID = RolesAPI.RoleWithID;
   export import RoleListResponse = RolesAPI.RoleListResponse;
   export import RoleGetResponse = RolesAPI.RoleGetResponse;
   export import RoleListParams = RolesAPI.RoleListParams;

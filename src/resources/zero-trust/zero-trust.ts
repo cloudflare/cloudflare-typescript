@@ -6,6 +6,7 @@ import * as IdentityProvidersAPI from 'cloudflare/resources/zero-trust/identity-
 import * as OrganizationsAPI from 'cloudflare/resources/zero-trust/organizations';
 import * as SeatsAPI from 'cloudflare/resources/zero-trust/seats';
 import * as AccessAPI from 'cloudflare/resources/zero-trust/access/access';
+import * as DevicesAPI from 'cloudflare/resources/zero-trust/devices/devices';
 import * as DEXAPI from 'cloudflare/resources/zero-trust/dex/dex';
 import * as DLPAPI from 'cloudflare/resources/zero-trust/dlp/dlp';
 import * as GatewayAPI from 'cloudflare/resources/zero-trust/gateway/gateway';
@@ -13,6 +14,7 @@ import * as NetworksAPI from 'cloudflare/resources/zero-trust/networks/networks'
 import * as TunnelsAPI from 'cloudflare/resources/zero-trust/tunnels/tunnels';
 
 export class ZeroTrust extends APIResource {
+  devices: DevicesAPI.Devices = new DevicesAPI.Devices(this._client);
   identityProviders: IdentityProvidersAPI.IdentityProviders = new IdentityProvidersAPI.IdentityProviders(
     this._client,
   );
@@ -29,6 +31,11 @@ export class ZeroTrust extends APIResource {
 }
 
 export namespace ZeroTrust {
+  export import Devices = DevicesAPI.Devices;
+  export import DeviceDevicesListDevicesResponse = DevicesAPI.DeviceDevicesListDevicesResponse;
+  export import DeviceGetResponse = DevicesAPI.DeviceGetResponse;
+  export import DeviceDevicesListDevicesParams = DevicesAPI.DeviceDevicesListDevicesParams;
+  export import DeviceGetParams = DevicesAPI.DeviceGetParams;
   export import IdentityProviders = IdentityProvidersAPI.IdentityProviders;
   export import IdentityProviderCreateResponse = IdentityProvidersAPI.IdentityProviderCreateResponse;
   export import IdentityProviderUpdateResponse = IdentityProvidersAPI.IdentityProviderUpdateResponse;

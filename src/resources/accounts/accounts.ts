@@ -60,6 +60,63 @@ export class Accounts extends APIResource {
 
 export class AccountListResponsesV4PagePaginationArray extends V4PagePaginationArray<AccountListResponse> {}
 
+export interface Account {
+  /**
+   * Identifier
+   */
+  id: string;
+
+  /**
+   * Account name
+   */
+  name: string;
+
+  /**
+   * Timestamp for the creation of the account
+   */
+  created_on?: string;
+
+  /**
+   * Account settings
+   */
+  settings?: Account.Settings;
+}
+
+export namespace Account {
+  /**
+   * Account settings
+   */
+  export interface Settings {
+    /**
+     * Specifies the default nameservers to be used for new zones added to this
+     * account.
+     *
+     * - `cloudflare.standard` for Cloudflare-branded nameservers
+     * - `custom.account` for account custom nameservers
+     * - `custom.tenant` for tenant custom nameservers
+     *
+     * See
+     * [Custom Nameservers](https://developers.cloudflare.com/dns/additional-options/custom-nameservers/)
+     * for more information.
+     */
+    default_nameservers?: 'cloudflare.standard' | 'custom.account' | 'custom.tenant';
+
+    /**
+     * Indicates whether membership in this account requires that Two-Factor
+     * Authentication is enabled
+     */
+    enforce_twofactor?: boolean;
+
+    /**
+     * Indicates whether new zones should use the account-level custom nameservers by
+     * default.
+     *
+     * Deprecated in favor of `default_nameservers`.
+     */
+    use_account_custom_ns_by_default?: boolean;
+  }
+}
+
 export type AccountUpdateResponse = unknown | string | null;
 
 export type AccountListResponse = unknown;
@@ -130,6 +187,7 @@ export interface AccountGetParams {
 }
 
 export namespace Accounts {
+  export import Account = AccountsAPI.Account;
   export import AccountUpdateResponse = AccountsAPI.AccountUpdateResponse;
   export import AccountListResponse = AccountsAPI.AccountListResponse;
   export import AccountGetResponse = AccountsAPI.AccountGetResponse;
@@ -138,11 +196,10 @@ export namespace Accounts {
   export import AccountListParams = AccountsAPI.AccountListParams;
   export import AccountGetParams = AccountsAPI.AccountGetParams;
   export import Members = MembersAPI.Members;
-  export import MemberCreateResponse = MembersAPI.MemberCreateResponse;
-  export import MemberUpdateResponse = MembersAPI.MemberUpdateResponse;
+  export import AccountMember = MembersAPI.AccountMember;
+  export import AccountMemberWithID = MembersAPI.AccountMemberWithID;
   export import MemberListResponse = MembersAPI.MemberListResponse;
   export import MemberDeleteResponse = MembersAPI.MemberDeleteResponse;
-  export import MemberGetResponse = MembersAPI.MemberGetResponse;
   export import MemberListResponsesV4PagePaginationArray = MembersAPI.MemberListResponsesV4PagePaginationArray;
   export import MemberCreateParams = MembersAPI.MemberCreateParams;
   export import MemberUpdateParams = MembersAPI.MemberUpdateParams;
@@ -150,6 +207,8 @@ export namespace Accounts {
   export import MemberDeleteParams = MembersAPI.MemberDeleteParams;
   export import MemberGetParams = MembersAPI.MemberGetParams;
   export import Roles = RolesAPI.Roles;
+  export import Role = RolesAPI.Role;
+  export import RoleWithID = RolesAPI.RoleWithID;
   export import RoleListResponse = RolesAPI.RoleListResponse;
   export import RoleGetResponse = RolesAPI.RoleGetResponse;
   export import RoleListParams = RolesAPI.RoleListParams;

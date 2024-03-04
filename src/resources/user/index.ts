@@ -46,4 +46,4 @@ export {
   TokenListResponsesV4PagePaginationArray,
   Tokens,
 } from './tokens/index';
-export { UserListResponse, UserEditResponse, UserEditParams, User } from './user';
+export { User, UserListResponse, UserEditResponse, UserEditParams, UserResource } from './user';

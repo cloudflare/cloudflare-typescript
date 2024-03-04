@@ -71,15 +71,17 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 async function main() {
-  const zone = await cloudflare.zones.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' }).catch((err) => {
-    if (err instanceof Cloudflare.APIError) {
-      console.log(err.status); // 400
-      console.log(err.name); // BadRequestError
-      console.log(err.headers); // {server: 'nginx', ...}
-    } else {
-      throw err;
-    }
-  });
+  const zone = await cloudflare.zones
+    .get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' })
+    .catch(async (err) => {
+      if (err instanceof Cloudflare.APIError) {
+        console.log(err.status); // 400
+        console.log(err.name); // BadRequestError
+        console.log(err.headers); // {server: 'nginx', ...}
+      } else {
+        throw err;
+      }
+    });
 }
 
 main();
