@@ -516,10 +516,8 @@ export namespace Requests {
   export import PriorityCreateResponse = PriorityAPI.PriorityCreateResponse;
   export import PriorityUpdateResponse = PriorityAPI.PriorityUpdateResponse;
   export import PriorityDeleteResponse = PriorityAPI.PriorityDeleteResponse;
-  export import PriorityDoSomethingUnknownResponse = PriorityAPI.PriorityDoSomethingUnknownResponse;
   export import PriorityGetResponse = PriorityAPI.PriorityGetResponse;
   export import PriorityQuotaResponse = PriorityAPI.PriorityQuotaResponse;
   export import PriorityCreateParams = PriorityAPI.PriorityCreateParams;
   export import PriorityUpdateParams = PriorityAPI.PriorityUpdateParams;
-  export import PriorityDoSomethingUnknownParams = PriorityAPI.PriorityDoSomethingUnknownParams;
 }
