@@ -25,14 +25,11 @@ export class Devices extends APIResource {
   /**
    * Fetches a list of enrolled devices.
    */
-  devicesListDevices(
-    params: DeviceDevicesListDevicesParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DeviceDevicesListDevicesResponse | null> {
+  list(params: DeviceListParams, options?: Core.RequestOptions): Core.APIPromise<DeviceListResponse | null> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/devices`, options) as Core.APIPromise<{
-        result: DeviceDevicesListDevicesResponse | null;
+        result: DeviceListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -54,11 +51,10 @@ export class Devices extends APIResource {
   }
 }
 
-export type DeviceDevicesListDevicesResponse =
-  Array<DeviceDevicesListDevicesResponse.DeviceDevicesListDevicesResponseItem>;
+export type DeviceListResponse = Array<DeviceListResponse.DeviceListResponseItem>;
 
-export namespace DeviceDevicesListDevicesResponse {
-  export interface DeviceDevicesListDevicesResponseItem {
+export namespace DeviceListResponse {
+  export interface DeviceListResponseItem {
     /**
      * Device ID.
      */
@@ -146,7 +142,7 @@ export namespace DeviceDevicesListDevicesResponse {
      */
     updated?: string;
 
-    user?: DeviceDevicesListDevicesResponseItem.User;
+    user?: DeviceListResponseItem.User;
 
     /**
      * The WARP client version.
@@ -154,7 +150,7 @@ export namespace DeviceDevicesListDevicesResponse {
     version?: string;
   }
 
-  export namespace DeviceDevicesListDevicesResponseItem {
+  export namespace DeviceListResponseItem {
     export interface User {
       /**
        * UUID
@@ -176,7 +172,7 @@ export namespace DeviceDevicesListDevicesResponse {
 
 export type DeviceGetResponse = unknown | string;
 
-export interface DeviceDevicesListDevicesParams {
+export interface DeviceListParams {
   account_id: unknown;
 }
 
@@ -185,9 +181,9 @@ export interface DeviceGetParams {
 }
 
 export namespace Devices {
-  export import DeviceDevicesListDevicesResponse = DevicesAPI.DeviceDevicesListDevicesResponse;
+  export import DeviceListResponse = DevicesAPI.DeviceListResponse;
   export import DeviceGetResponse = DevicesAPI.DeviceGetResponse;
-  export import DeviceDevicesListDevicesParams = DevicesAPI.DeviceDevicesListDevicesParams;
+  export import DeviceListParams = DevicesAPI.DeviceListParams;
   export import DeviceGetParams = DevicesAPI.DeviceGetParams;
   export import DEXTests = DEXTestsAPI.DEXTests;
   export import DEXTestCreateResponse = DEXTestsAPI.DEXTestCreateResponse;

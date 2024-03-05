@@ -32,9 +32,9 @@ export class ZeroTrust extends APIResource {
 
 export namespace ZeroTrust {
   export import Devices = DevicesAPI.Devices;
-  export import DeviceDevicesListDevicesResponse = DevicesAPI.DeviceDevicesListDevicesResponse;
+  export import DeviceListResponse = DevicesAPI.DeviceListResponse;
   export import DeviceGetResponse = DevicesAPI.DeviceGetResponse;
-  export import DeviceDevicesListDevicesParams = DevicesAPI.DeviceDevicesListDevicesParams;
+  export import DeviceListParams = DevicesAPI.DeviceListParams;
   export import DeviceGetParams = DevicesAPI.DeviceGetParams;
   export import IdentityProviders = IdentityProvidersAPI.IdentityProviders;
   export import IdentityProviderCreateResponse = IdentityProvidersAPI.IdentityProviderCreateResponse;
