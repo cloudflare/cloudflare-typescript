@@ -11,9 +11,9 @@ export {
 export { DEX } from './dex/index';
 export { DLP } from './dlp/index';
 export {
-  DeviceDevicesListDevicesResponse,
+  DeviceListResponse,
   DeviceGetResponse,
-  DeviceDevicesListDevicesParams,
+  DeviceListParams,
   DeviceGetParams,
   Devices,
 } from './devices/index';

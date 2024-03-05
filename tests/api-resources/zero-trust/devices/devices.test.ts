@@ -11,8 +11,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource devices', () => {
   // skipped: tests are disabled for the time being
-  test.skip('devicesListDevices: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.devices.devicesListDevices({
+  test.skip('list: only required params', async () => {
+    const responsePromise = cloudflare.zeroTrust.devices.list({
       account_id: '699d98642c564d2e855e9661899b7252',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -25,8 +25,8 @@ describe('resource devices', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('devicesListDevices: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.devices.devicesListDevices({
+  test.skip('list: required and optional params', async () => {
+    const response = await cloudflare.zeroTrust.devices.list({
       account_id: '699d98642c564d2e855e9661899b7252',
     });
   });

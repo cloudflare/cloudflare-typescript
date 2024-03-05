@@ -13,13 +13,7 @@ export {
   DEXTestGetParams,
   DEXTests,
 } from './dex-tests';
-export {
-  DeviceDevicesListDevicesResponse,
-  DeviceGetResponse,
-  DeviceDevicesListDevicesParams,
-  DeviceGetParams,
-  Devices,
-} from './devices';
+export { DeviceListResponse, DeviceGetResponse, DeviceListParams, DeviceGetParams, Devices } from './devices';
 export {
   NetworkCreateResponse,
   NetworkUpdateResponse,
