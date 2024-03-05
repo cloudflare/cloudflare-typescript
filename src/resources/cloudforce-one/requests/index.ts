@@ -14,12 +14,10 @@ export {
   PriorityCreateResponse,
   PriorityUpdateResponse,
   PriorityDeleteResponse,
-  PriorityDoSomethingUnknownResponse,
   PriorityGetResponse,
   PriorityQuotaResponse,
   PriorityCreateParams,
   PriorityUpdateParams,
-  PriorityDoSomethingUnknownParams,
   Priority,
 } from './priority';
 export {

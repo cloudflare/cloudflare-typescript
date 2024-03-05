@@ -55,22 +55,6 @@ export class Priority extends APIResource {
   }
 
   /**
-   * List Priority Intelligence Requirements
-   */
-  doSomethingUnknown(
-    accountIdentifier: string,
-    body: PriorityDoSomethingUnknownParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PriorityDoSomethingUnknownResponse> {
-    return (
-      this._client.post(`/accounts/${accountIdentifier}/cloudforce-one/requests/priority`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: PriorityDoSomethingUnknownResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Get a Priority Intelligence Requirement
    */
   get(
@@ -193,48 +177,6 @@ export interface PriorityUpdateResponse {
 
 export type PriorityDeleteResponse = unknown | Array<unknown> | string;
 
-export type PriorityDoSomethingUnknownResponse =
-  Array<PriorityDoSomethingUnknownResponse.PriorityDoSomethingUnknownResponseItem>;
-
-export namespace PriorityDoSomethingUnknownResponse {
-  export interface PriorityDoSomethingUnknownResponseItem {
-    /**
-     * UUID
-     */
-    id: string;
-
-    /**
-     * Priority creation time
-     */
-    created: string;
-
-    /**
-     * List of labels
-     */
-    labels: Array<string>;
-
-    /**
-     * Priority
-     */
-    priority: number;
-
-    /**
-     * Requirement
-     */
-    requirement: string;
-
-    /**
-     * The CISA defined Traffic Light Protocol (TLP)
-     */
-    tlp: 'clear' | 'amber' | 'amber-strict' | 'green' | 'red';
-
-    /**
-     * Priority last updated time
-     */
-    updated: string;
-  }
-}
-
 export interface PriorityGetResponse {
   /**
    * UUID
@@ -356,26 +298,12 @@ export interface PriorityUpdateParams {
   tlp: 'clear' | 'amber' | 'amber-strict' | 'green' | 'red';
 }
 
-export interface PriorityDoSomethingUnknownParams {
-  /**
-   * Page number of results
-   */
-  page: number;
-
-  /**
-   * Number of results per page
-   */
-  per_page: number;
-}
-
 export namespace Priority {
   export import PriorityCreateResponse = PriorityAPI.PriorityCreateResponse;
   export import PriorityUpdateResponse = PriorityAPI.PriorityUpdateResponse;
   export import PriorityDeleteResponse = PriorityAPI.PriorityDeleteResponse;
-  export import PriorityDoSomethingUnknownResponse = PriorityAPI.PriorityDoSomethingUnknownResponse;
   export import PriorityGetResponse = PriorityAPI.PriorityGetResponse;
   export import PriorityQuotaResponse = PriorityAPI.PriorityQuotaResponse;
   export import PriorityCreateParams = PriorityAPI.PriorityCreateParams;
   export import PriorityUpdateParams = PriorityAPI.PriorityUpdateParams;
-  export import PriorityDoSomethingUnknownParams = PriorityAPI.PriorityDoSomethingUnknownParams;
 }

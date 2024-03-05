@@ -6374,7 +6374,6 @@ Types:
 - <code><a href="./src/resources/cloudforce-one/requests/priority.ts">PriorityCreateResponse</a></code>
 - <code><a href="./src/resources/cloudforce-one/requests/priority.ts">PriorityUpdateResponse</a></code>
 - <code><a href="./src/resources/cloudforce-one/requests/priority.ts">PriorityDeleteResponse</a></code>
-- <code><a href="./src/resources/cloudforce-one/requests/priority.ts">PriorityDoSomethingUnknownResponse</a></code>
 - <code><a href="./src/resources/cloudforce-one/requests/priority.ts">PriorityGetResponse</a></code>
 - <code><a href="./src/resources/cloudforce-one/requests/priority.ts">PriorityQuotaResponse</a></code>
 
@@ -6383,6 +6382,5 @@ Methods:
 - <code title="post /accounts/{account_identifier}/cloudforce-one/requests/priority/new">client.cloudforceOne.requests.priority.<a href="./src/resources/cloudforce-one/requests/priority.ts">create</a>(accountIdentifier, { ...params }) -> PriorityCreateResponse</code>
 - <code title="put /accounts/{account_identifier}/cloudforce-one/requests/priority/{priority_identifer}">client.cloudforceOne.requests.priority.<a href="./src/resources/cloudforce-one/requests/priority.ts">update</a>(accountIdentifier, priorityIdentifer, { ...params }) -> PriorityUpdateResponse</code>
 - <code title="delete /accounts/{account_identifier}/cloudforce-one/requests/priority/{priority_identifer}">client.cloudforceOne.requests.priority.<a href="./src/resources/cloudforce-one/requests/priority.ts">delete</a>(accountIdentifier, priorityIdentifer) -> PriorityDeleteResponse</code>
-- <code title="post /accounts/{account_identifier}/cloudforce-one/requests/priority">client.cloudforceOne.requests.priority.<a href="./src/resources/cloudforce-one/requests/priority.ts">doSomethingUnknown</a>(accountIdentifier, { ...params }) -> PriorityDoSomethingUnknownResponse</code>
 - <code title="get /accounts/{account_identifier}/cloudforce-one/requests/priority/{priority_identifer}">client.cloudforceOne.requests.priority.<a href="./src/resources/cloudforce-one/requests/priority.ts">get</a>(accountIdentifier, priorityIdentifer) -> PriorityGetResponse</code>
 - <code title="get /accounts/{account_identifier}/cloudforce-one/requests/priority/quota">client.cloudforceOne.requests.priority.<a href="./src/resources/cloudforce-one/requests/priority.ts">quota</a>(accountIdentifier) -> PriorityQuotaResponse</code>
