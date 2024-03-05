@@ -25,9 +25,9 @@ export class Zones extends APIResource {
   /**
    * Create Zone
    */
-  create(body: ZoneCreateParams, options?: Core.RequestOptions): Core.APIPromise<ZoneCreateResponse> {
+  create(body: ZoneCreateParams, options?: Core.RequestOptions): Core.APIPromise<ZonesZone> {
     return (
-      this._client.post('/zones', { body, ...options }) as Core.APIPromise<{ result: ZoneCreateResponse }>
+      this._client.post('/zones', { body, ...options }) as Core.APIPromise<{ result: ZonesZone }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -37,18 +37,16 @@ export class Zones extends APIResource {
   list(
     query?: ZoneListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<ZoneListResponsesV4PagePaginationArray, ZoneListResponse>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<ZoneListResponsesV4PagePaginationArray, ZoneListResponse>;
+  ): Core.PagePromise<ZonesZonesV4PagePaginationArray, ZonesZone>;
+  list(options?: Core.RequestOptions): Core.PagePromise<ZonesZonesV4PagePaginationArray, ZonesZone>;
   list(
     query: ZoneListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<ZoneListResponsesV4PagePaginationArray, ZoneListResponse> {
+  ): Core.PagePromise<ZonesZonesV4PagePaginationArray, ZonesZone> {
     if (isRequestOptions(query)) {
       return this.list({}, query);
     }
-    return this._client.getAPIList('/zones', ZoneListResponsesV4PagePaginationArray, { query, ...options });
+    return this._client.getAPIList('/zones', ZonesZonesV4PagePaginationArray, { query, ...options });
   }
 
   /**
@@ -69,29 +67,27 @@ export class Zones extends APIResource {
   /**
    * Edits a zone. Only one zone property can be changed at a time.
    */
-  edit(params: ZoneEditParams, options?: Core.RequestOptions): Core.APIPromise<ZoneEditResponse> {
+  edit(params: ZoneEditParams, options?: Core.RequestOptions): Core.APIPromise<ZonesZone> {
     const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zone_id}`, { body, ...options }) as Core.APIPromise<{
-        result: ZoneEditResponse;
-      }>
+      this._client.patch(`/zones/${zone_id}`, { body, ...options }) as Core.APIPromise<{ result: ZonesZone }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Zone Details
    */
-  get(params: ZoneGetParams, options?: Core.RequestOptions): Core.APIPromise<ZoneGetResponse> {
+  get(params: ZoneGetParams, options?: Core.RequestOptions): Core.APIPromise<ZonesZone> {
     const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zone_id}`, options) as Core.APIPromise<{ result: ZoneGetResponse }>
+      this._client.get(`/zones/${zone_id}`, options) as Core.APIPromise<{ result: ZonesZone }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class ZoneListResponsesV4PagePaginationArray extends V4PagePaginationArray<ZoneListResponse> {}
+export class ZonesZonesV4PagePaginationArray extends V4PagePaginationArray<ZonesZone> {}
 
-export interface ZoneCreateResponse {
+export interface ZonesZone {
   /**
    * Identifier
    */
@@ -100,7 +96,7 @@ export interface ZoneCreateResponse {
   /**
    * The account the zone belongs to
    */
-  account: ZoneCreateResponse.Account;
+  account: ZonesZone.Account;
 
   /**
    * The last time proof of ownership was detected and the zone was made active
@@ -122,7 +118,7 @@ export interface ZoneCreateResponse {
   /**
    * Metadata about the zone
    */
-  meta: ZoneCreateResponse.Meta;
+  meta: ZonesZone.Meta;
 
   /**
    * When the zone was last modified
@@ -153,7 +149,7 @@ export interface ZoneCreateResponse {
   /**
    * The owner of the zone
    */
-  owner: ZoneCreateResponse.Owner;
+  owner: ZonesZone.Owner;
 
   /**
    * An array of domains used for custom name servers. This is only available for
@@ -162,152 +158,7 @@ export interface ZoneCreateResponse {
   vanity_name_servers?: Array<string>;
 }
 
-export namespace ZoneCreateResponse {
-  /**
-   * The account the zone belongs to
-   */
-  export interface Account {
-    /**
-     * Identifier
-     */
-    id?: string;
-
-    /**
-     * The name of the account
-     */
-    name?: string;
-  }
-
-  /**
-   * Metadata about the zone
-   */
-  export interface Meta {
-    /**
-     * The zone is only configured for CDN
-     */
-    cdn_only?: boolean;
-
-    /**
-     * Number of Custom Certificates the zone can have
-     */
-    custom_certificate_quota?: number;
-
-    /**
-     * The zone is only configured for DNS
-     */
-    dns_only?: boolean;
-
-    /**
-     * The zone is setup with Foundation DNS
-     */
-    foundation_dns?: boolean;
-
-    /**
-     * Number of Page Rules a zone can have
-     */
-    page_rule_quota?: number;
-
-    /**
-     * The zone has been flagged for phishing
-     */
-    phishing_detected?: boolean;
-
-    step?: number;
-  }
-
-  /**
-   * The owner of the zone
-   */
-  export interface Owner {
-    /**
-     * Identifier
-     */
-    id?: string;
-
-    /**
-     * Name of the owner
-     */
-    name?: string;
-
-    /**
-     * The type of owner
-     */
-    type?: string;
-  }
-}
-
-export interface ZoneListResponse {
-  /**
-   * Identifier
-   */
-  id: string;
-
-  /**
-   * The account the zone belongs to
-   */
-  account: ZoneListResponse.Account;
-
-  /**
-   * The last time proof of ownership was detected and the zone was made active
-   */
-  activated_on: string | null;
-
-  /**
-   * When the zone was created
-   */
-  created_on: string;
-
-  /**
-   * The interval (in seconds) from when development mode expires (positive integer)
-   * or last expired (negative integer) for the domain. If development mode has never
-   * been enabled, this value is 0.
-   */
-  development_mode: number;
-
-  /**
-   * Metadata about the zone
-   */
-  meta: ZoneListResponse.Meta;
-
-  /**
-   * When the zone was last modified
-   */
-  modified_on: string;
-
-  /**
-   * The domain name
-   */
-  name: string;
-
-  /**
-   * DNS host at the time of switching to Cloudflare
-   */
-  original_dnshost: string | null;
-
-  /**
-   * Original name servers before moving to Cloudflare Notes: Is this only available
-   * for full zones?
-   */
-  original_name_servers: Array<string> | null;
-
-  /**
-   * Registrar for the domain at the time of switching to Cloudflare
-   */
-  original_registrar: string | null;
-
-  /**
-   * The owner of the zone
-   */
-  owner: ZoneListResponse.Owner;
-
-  /**
-   * An array of domains used for custom name servers. This is only available for
-   * Business and Enterprise plans.
-   */
-  vanity_name_servers?: Array<string>;
-}
-
-export namespace ZoneListResponse {
+export namespace ZonesZone {
   /**
    * The account the zone belongs to
    */
@@ -386,296 +237,6 @@ export interface ZoneDeleteResponse {
    * Identifier
    */
   id: string;
-}
-
-export interface ZoneEditResponse {
-  /**
-   * Identifier
-   */
-  id: string;
-
-  /**
-   * The account the zone belongs to
-   */
-  account: ZoneEditResponse.Account;
-
-  /**
-   * The last time proof of ownership was detected and the zone was made active
-   */
-  activated_on: string | null;
-
-  /**
-   * When the zone was created
-   */
-  created_on: string;
-
-  /**
-   * The interval (in seconds) from when development mode expires (positive integer)
-   * or last expired (negative integer) for the domain. If development mode has never
-   * been enabled, this value is 0.
-   */
-  development_mode: number;
-
-  /**
-   * Metadata about the zone
-   */
-  meta: ZoneEditResponse.Meta;
-
-  /**
-   * When the zone was last modified
-   */
-  modified_on: string;
-
-  /**
-   * The domain name
-   */
-  name: string;
-
-  /**
-   * DNS host at the time of switching to Cloudflare
-   */
-  original_dnshost: string | null;
-
-  /**
-   * Original name servers before moving to Cloudflare Notes: Is this only available
-   * for full zones?
-   */
-  original_name_servers: Array<string> | null;
-
-  /**
-   * Registrar for the domain at the time of switching to Cloudflare
-   */
-  original_registrar: string | null;
-
-  /**
-   * The owner of the zone
-   */
-  owner: ZoneEditResponse.Owner;
-
-  /**
-   * An array of domains used for custom name servers. This is only available for
-   * Business and Enterprise plans.
-   */
-  vanity_name_servers?: Array<string>;
-}
-
-export namespace ZoneEditResponse {
-  /**
-   * The account the zone belongs to
-   */
-  export interface Account {
-    /**
-     * Identifier
-     */
-    id?: string;
-
-    /**
-     * The name of the account
-     */
-    name?: string;
-  }
-
-  /**
-   * Metadata about the zone
-   */
-  export interface Meta {
-    /**
-     * The zone is only configured for CDN
-     */
-    cdn_only?: boolean;
-
-    /**
-     * Number of Custom Certificates the zone can have
-     */
-    custom_certificate_quota?: number;
-
-    /**
-     * The zone is only configured for DNS
-     */
-    dns_only?: boolean;
-
-    /**
-     * The zone is setup with Foundation DNS
-     */
-    foundation_dns?: boolean;
-
-    /**
-     * Number of Page Rules a zone can have
-     */
-    page_rule_quota?: number;
-
-    /**
-     * The zone has been flagged for phishing
-     */
-    phishing_detected?: boolean;
-
-    step?: number;
-  }
-
-  /**
-   * The owner of the zone
-   */
-  export interface Owner {
-    /**
-     * Identifier
-     */
-    id?: string;
-
-    /**
-     * Name of the owner
-     */
-    name?: string;
-
-    /**
-     * The type of owner
-     */
-    type?: string;
-  }
-}
-
-export interface ZoneGetResponse {
-  /**
-   * Identifier
-   */
-  id: string;
-
-  /**
-   * The account the zone belongs to
-   */
-  account: ZoneGetResponse.Account;
-
-  /**
-   * The last time proof of ownership was detected and the zone was made active
-   */
-  activated_on: string | null;
-
-  /**
-   * When the zone was created
-   */
-  created_on: string;
-
-  /**
-   * The interval (in seconds) from when development mode expires (positive integer)
-   * or last expired (negative integer) for the domain. If development mode has never
-   * been enabled, this value is 0.
-   */
-  development_mode: number;
-
-  /**
-   * Metadata about the zone
-   */
-  meta: ZoneGetResponse.Meta;
-
-  /**
-   * When the zone was last modified
-   */
-  modified_on: string;
-
-  /**
-   * The domain name
-   */
-  name: string;
-
-  /**
-   * DNS host at the time of switching to Cloudflare
-   */
-  original_dnshost: string | null;
-
-  /**
-   * Original name servers before moving to Cloudflare Notes: Is this only available
-   * for full zones?
-   */
-  original_name_servers: Array<string> | null;
-
-  /**
-   * Registrar for the domain at the time of switching to Cloudflare
-   */
-  original_registrar: string | null;
-
-  /**
-   * The owner of the zone
-   */
-  owner: ZoneGetResponse.Owner;
-
-  /**
-   * An array of domains used for custom name servers. This is only available for
-   * Business and Enterprise plans.
-   */
-  vanity_name_servers?: Array<string>;
-}
-
-export namespace ZoneGetResponse {
-  /**
-   * The account the zone belongs to
-   */
-  export interface Account {
-    /**
-     * Identifier
-     */
-    id?: string;
-
-    /**
-     * The name of the account
-     */
-    name?: string;
-  }
-
-  /**
-   * Metadata about the zone
-   */
-  export interface Meta {
-    /**
-     * The zone is only configured for CDN
-     */
-    cdn_only?: boolean;
-
-    /**
-     * Number of Custom Certificates the zone can have
-     */
-    custom_certificate_quota?: number;
-
-    /**
-     * The zone is only configured for DNS
-     */
-    dns_only?: boolean;
-
-    /**
-     * The zone is setup with Foundation DNS
-     */
-    foundation_dns?: boolean;
-
-    /**
-     * Number of Page Rules a zone can have
-     */
-    page_rule_quota?: number;
-
-    /**
-     * The zone has been flagged for phishing
-     */
-    phishing_detected?: boolean;
-
-    step?: number;
-  }
-
-  /**
-   * The owner of the zone
-   */
-  export interface Owner {
-    /**
-     * Identifier
-     */
-    id?: string;
-
-    /**
-     * Name of the owner
-     */
-    name?: string;
-
-    /**
-     * The type of owner
-     */
-    type?: string;
-  }
 }
 
 export interface ZoneCreateParams {
@@ -822,12 +383,9 @@ export interface ZoneGetParams {
 }
 
 export namespace Zones {
-  export import ZoneCreateResponse = ZonesAPI.ZoneCreateResponse;
-  export import ZoneListResponse = ZonesAPI.ZoneListResponse;
+  export import ZonesZone = ZonesAPI.ZonesZone;
   export import ZoneDeleteResponse = ZonesAPI.ZoneDeleteResponse;
-  export import ZoneEditResponse = ZonesAPI.ZoneEditResponse;
-  export import ZoneGetResponse = ZonesAPI.ZoneGetResponse;
-  export import ZoneListResponsesV4PagePaginationArray = ZonesAPI.ZoneListResponsesV4PagePaginationArray;
+  export import ZonesZonesV4PagePaginationArray = ZonesAPI.ZonesZonesV4PagePaginationArray;
   export import ZoneCreateParams = ZonesAPI.ZoneCreateParams;
   export import ZoneListParams = ZonesAPI.ZoneListParams;
   export import ZoneDeleteParams = ZonesAPI.ZoneDeleteParams;

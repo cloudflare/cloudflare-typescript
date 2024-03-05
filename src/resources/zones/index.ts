@@ -37,16 +37,13 @@ export {
 } from './subscriptions';
 export { Workers } from './workers/index';
 export {
-  ZoneCreateResponse,
-  ZoneListResponse,
+  ZonesZone,
   ZoneDeleteResponse,
-  ZoneEditResponse,
-  ZoneGetResponse,
   ZoneCreateParams,
   ZoneListParams,
   ZoneDeleteParams,
   ZoneEditParams,
   ZoneGetParams,
-  ZoneListResponsesV4PagePaginationArray,
+  ZonesZonesV4PagePaginationArray,
   Zones,
 } from './zones';

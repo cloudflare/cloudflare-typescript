@@ -11,13 +11,13 @@ export class Config extends APIResource {
   create(
     params: ConfigCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ConfigCreateResponse | null> {
+  ): Core.APIPromise<LogcontrolCmbConfig | null> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/logs/control/cmb/config`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ConfigCreateResponse | null }>
+      }) as Core.APIPromise<{ result: LogcontrolCmbConfig | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -39,17 +39,17 @@ export class Config extends APIResource {
   /**
    * Gets CMB config.
    */
-  get(params: ConfigGetParams, options?: Core.RequestOptions): Core.APIPromise<ConfigGetResponse | null> {
+  get(params: ConfigGetParams, options?: Core.RequestOptions): Core.APIPromise<LogcontrolCmbConfig | null> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/logs/control/cmb/config`, options) as Core.APIPromise<{
-        result: ConfigGetResponse | null;
+        result: LogcontrolCmbConfig | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface ConfigCreateResponse {
+export interface LogcontrolCmbConfig {
   /**
    * Comma-separated list of regions.
    */
@@ -57,13 +57,6 @@ export interface ConfigCreateResponse {
 }
 
 export type ConfigDeleteResponse = unknown | Array<unknown> | string;
-
-export interface ConfigGetResponse {
-  /**
-   * Comma-separated list of regions.
-   */
-  regions?: string;
-}
 
 export interface ConfigCreateParams {
   /**
@@ -92,9 +85,8 @@ export interface ConfigGetParams {
 }
 
 export namespace Config {
-  export import ConfigCreateResponse = ConfigAPI.ConfigCreateResponse;
+  export import LogcontrolCmbConfig = ConfigAPI.LogcontrolCmbConfig;
   export import ConfigDeleteResponse = ConfigAPI.ConfigDeleteResponse;
-  export import ConfigGetResponse = ConfigAPI.ConfigGetResponse;
   export import ConfigCreateParams = ConfigAPI.ConfigCreateParams;
   export import ConfigDeleteParams = ConfigAPI.ConfigDeleteParams;
   export import ConfigGetParams = ConfigAPI.ConfigGetParams;

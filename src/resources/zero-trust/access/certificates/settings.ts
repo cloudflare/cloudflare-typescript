@@ -80,59 +80,35 @@ export class Settings extends APIResource {
   }
 }
 
-export type SettingUpdateResponse = Array<SettingUpdateResponse.SettingUpdateResponseItem>;
+export interface AccessSettings {
+  /**
+   * Request client certificates for this hostname in China. Can only be set to true
+   * if this zone is china network enabled.
+   */
+  china_network: boolean;
 
-export namespace SettingUpdateResponse {
-  export interface SettingUpdateResponseItem {
-    /**
-     * Request client certificates for this hostname in China. Can only be set to true
-     * if this zone is china network enabled.
-     */
-    china_network: boolean;
+  /**
+   * Client Certificate Forwarding is a feature that takes the client cert provided
+   * by the eyeball to the edge, and forwards it to the origin as a HTTP header to
+   * allow logging on the origin.
+   */
+  client_certificate_forwarding: boolean;
 
-    /**
-     * Client Certificate Forwarding is a feature that takes the client cert provided
-     * by the eyeball to the edge, and forwards it to the origin as a HTTP header to
-     * allow logging on the origin.
-     */
-    client_certificate_forwarding: boolean;
-
-    /**
-     * The hostname that these settings apply to.
-     */
-    hostname: string;
-  }
+  /**
+   * The hostname that these settings apply to.
+   */
+  hostname: string;
 }
 
-export type SettingListResponse = Array<SettingListResponse.SettingListResponseItem>;
+export type SettingUpdateResponse = Array<AccessSettings>;
 
-export namespace SettingListResponse {
-  export interface SettingListResponseItem {
-    /**
-     * Request client certificates for this hostname in China. Can only be set to true
-     * if this zone is china network enabled.
-     */
-    china_network: boolean;
-
-    /**
-     * Client Certificate Forwarding is a feature that takes the client cert provided
-     * by the eyeball to the edge, and forwards it to the origin as a HTTP header to
-     * allow logging on the origin.
-     */
-    client_certificate_forwarding: boolean;
-
-    /**
-     * The hostname that these settings apply to.
-     */
-    hostname: string;
-  }
-}
+export type SettingListResponse = Array<AccessSettings>;
 
 export interface SettingUpdateParams {
   /**
    * Body param:
    */
-  settings: Array<SettingUpdateParams.Setting>;
+  settings: Array<AccessSettings>;
 
   /**
    * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -145,28 +121,6 @@ export interface SettingUpdateParams {
    * Account ID.
    */
   zone_id?: string;
-}
-
-export namespace SettingUpdateParams {
-  export interface Setting {
-    /**
-     * Request client certificates for this hostname in China. Can only be set to true
-     * if this zone is china network enabled.
-     */
-    china_network: boolean;
-
-    /**
-     * Client Certificate Forwarding is a feature that takes the client cert provided
-     * by the eyeball to the edge, and forwards it to the origin as a HTTP header to
-     * allow logging on the origin.
-     */
-    client_certificate_forwarding: boolean;
-
-    /**
-     * The hostname that these settings apply to.
-     */
-    hostname: string;
-  }
 }
 
 export interface SettingListParams {
@@ -182,6 +136,7 @@ export interface SettingListParams {
 }
 
 export namespace Settings {
+  export import AccessSettings = SettingsAPI.AccessSettings;
   export import SettingUpdateResponse = SettingsAPI.SettingUpdateResponse;
   export import SettingListResponse = SettingsAPI.SettingListResponse;
   export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;

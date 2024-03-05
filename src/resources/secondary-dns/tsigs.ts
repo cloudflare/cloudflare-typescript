@@ -8,13 +8,13 @@ export class TSIGs extends APIResource {
   /**
    * Create TSIG.
    */
-  create(params: TSIGCreateParams, options?: Core.RequestOptions): Core.APIPromise<TSIGCreateResponse> {
+  create(params: TSIGCreateParams, options?: Core.RequestOptions): Core.APIPromise<SecondaryDNSTSIG> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/secondary_dns/tsigs`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: TSIGCreateResponse }>
+      }) as Core.APIPromise<{ result: SecondaryDNSTSIG }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -25,13 +25,13 @@ export class TSIGs extends APIResource {
     tsigId: unknown,
     params: TSIGUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TSIGUpdateResponse> {
+  ): Core.APIPromise<SecondaryDNSTSIG> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/secondary_dns/tsigs/${tsigId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: TSIGUpdateResponse }>
+      }) as Core.APIPromise<{ result: SecondaryDNSTSIG }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -71,17 +71,17 @@ export class TSIGs extends APIResource {
     tsigId: unknown,
     params: TSIGGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TSIGGetResponse> {
+  ): Core.APIPromise<SecondaryDNSTSIG> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/secondary_dns/tsigs/${tsigId}`, options) as Core.APIPromise<{
-        result: TSIGGetResponse;
+        result: SecondaryDNSTSIG;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface TSIGCreateResponse {
+export interface SecondaryDNSTSIG {
   id: unknown;
 
   /**
@@ -100,69 +100,10 @@ export interface TSIGCreateResponse {
   secret: string;
 }
 
-export interface TSIGUpdateResponse {
-  id: unknown;
-
-  /**
-   * TSIG algorithm.
-   */
-  algo: string;
-
-  /**
-   * TSIG key name.
-   */
-  name: string;
-
-  /**
-   * TSIG secret.
-   */
-  secret: string;
-}
-
-export type TSIGListResponse = Array<TSIGListResponse.TSIGListResponseItem>;
-
-export namespace TSIGListResponse {
-  export interface TSIGListResponseItem {
-    id: unknown;
-
-    /**
-     * TSIG algorithm.
-     */
-    algo: string;
-
-    /**
-     * TSIG key name.
-     */
-    name: string;
-
-    /**
-     * TSIG secret.
-     */
-    secret: string;
-  }
-}
+export type TSIGListResponse = Array<SecondaryDNSTSIG>;
 
 export interface TSIGDeleteResponse {
   id?: unknown;
-}
-
-export interface TSIGGetResponse {
-  id: unknown;
-
-  /**
-   * TSIG algorithm.
-   */
-  algo: string;
-
-  /**
-   * TSIG key name.
-   */
-  name: string;
-
-  /**
-   * TSIG secret.
-   */
-  secret: string;
 }
 
 export interface TSIGCreateParams {
@@ -222,11 +163,9 @@ export interface TSIGGetParams {
 }
 
 export namespace TSIGs {
-  export import TSIGCreateResponse = TSIGsAPI.TSIGCreateResponse;
-  export import TSIGUpdateResponse = TSIGsAPI.TSIGUpdateResponse;
+  export import SecondaryDNSTSIG = TSIGsAPI.SecondaryDNSTSIG;
   export import TSIGListResponse = TSIGsAPI.TSIGListResponse;
   export import TSIGDeleteResponse = TSIGsAPI.TSIGDeleteResponse;
-  export import TSIGGetResponse = TSIGsAPI.TSIGGetResponse;
   export import TSIGCreateParams = TSIGsAPI.TSIGCreateParams;
   export import TSIGUpdateParams = TSIGsAPI.TSIGUpdateParams;
   export import TSIGListParams = TSIGsAPI.TSIGListParams;

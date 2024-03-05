@@ -13,13 +13,13 @@ export class AutomaticPlatformOptimization extends APIResource {
   edit(
     params: AutomaticPlatformOptimizationEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AutomaticPlatformOptimizationEditResponse> {
+  ): Core.APIPromise<ZonesAutomaticPlatformOptimization> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/automatic_platform_optimization`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: AutomaticPlatformOptimizationEditResponse }>
+      }) as Core.APIPromise<{ result: ZonesAutomaticPlatformOptimization }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -31,55 +31,18 @@ export class AutomaticPlatformOptimization extends APIResource {
   get(
     params: AutomaticPlatformOptimizationGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AutomaticPlatformOptimizationGetResponse> {
+  ): Core.APIPromise<ZonesAutomaticPlatformOptimization> {
     const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/settings/automatic_platform_optimization`,
         options,
-      ) as Core.APIPromise<{ result: AutomaticPlatformOptimizationGetResponse }>
+      ) as Core.APIPromise<{ result: ZonesAutomaticPlatformOptimization }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface AutomaticPlatformOptimizationEditResponse {
-  /**
-   * Indicates whether or not
-   * [cache by device type](https://developers.cloudflare.com/automatic-platform-optimization/reference/cache-device-type/)
-   * is enabled.
-   */
-  cache_by_device_type: boolean;
-
-  /**
-   * Indicates whether or not Cloudflare proxy is enabled.
-   */
-  cf: boolean;
-
-  /**
-   * Indicates whether or not Automatic Platform Optimization is enabled.
-   */
-  enabled: boolean;
-
-  /**
-   * An array of hostnames where Automatic Platform Optimization for WordPress is
-   * activated.
-   */
-  hostnames: Array<string>;
-
-  /**
-   * Indicates whether or not site is powered by WordPress.
-   */
-  wordpress: boolean;
-
-  /**
-   * Indicates whether or not
-   * [Cloudflare for WordPress plugin](https://wordpress.org/plugins/cloudflare/) is
-   * installed.
-   */
-  wp_plugin: boolean;
-}
-
-export interface AutomaticPlatformOptimizationGetResponse {
+export interface ZonesAutomaticPlatformOptimization {
   /**
    * Indicates whether or not
    * [cache by device type](https://developers.cloudflare.com/automatic-platform-optimization/reference/cache-device-type/)
@@ -125,46 +88,7 @@ export interface AutomaticPlatformOptimizationEditParams {
   /**
    * Body param:
    */
-  value: AutomaticPlatformOptimizationEditParams.Value;
-}
-
-export namespace AutomaticPlatformOptimizationEditParams {
-  export interface Value {
-    /**
-     * Indicates whether or not
-     * [cache by device type](https://developers.cloudflare.com/automatic-platform-optimization/reference/cache-device-type/)
-     * is enabled.
-     */
-    cache_by_device_type: boolean;
-
-    /**
-     * Indicates whether or not Cloudflare proxy is enabled.
-     */
-    cf: boolean;
-
-    /**
-     * Indicates whether or not Automatic Platform Optimization is enabled.
-     */
-    enabled: boolean;
-
-    /**
-     * An array of hostnames where Automatic Platform Optimization for WordPress is
-     * activated.
-     */
-    hostnames: Array<string>;
-
-    /**
-     * Indicates whether or not site is powered by WordPress.
-     */
-    wordpress: boolean;
-
-    /**
-     * Indicates whether or not
-     * [Cloudflare for WordPress plugin](https://wordpress.org/plugins/cloudflare/) is
-     * installed.
-     */
-    wp_plugin: boolean;
-  }
+  value: ZonesAutomaticPlatformOptimization;
 }
 
 export interface AutomaticPlatformOptimizationGetParams {
@@ -175,8 +99,7 @@ export interface AutomaticPlatformOptimizationGetParams {
 }
 
 export namespace AutomaticPlatformOptimization {
-  export import AutomaticPlatformOptimizationEditResponse = AutomaticPlatformOptimizationAPI.AutomaticPlatformOptimizationEditResponse;
-  export import AutomaticPlatformOptimizationGetResponse = AutomaticPlatformOptimizationAPI.AutomaticPlatformOptimizationGetResponse;
+  export import ZonesAutomaticPlatformOptimization = AutomaticPlatformOptimizationAPI.ZonesAutomaticPlatformOptimization;
   export import AutomaticPlatformOptimizationEditParams = AutomaticPlatformOptimizationAPI.AutomaticPlatformOptimizationEditParams;
   export import AutomaticPlatformOptimizationGetParams = AutomaticPlatformOptimizationAPI.AutomaticPlatformOptimizationGetParams;
 }

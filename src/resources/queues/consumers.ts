@@ -12,13 +12,13 @@ export class Consumers extends APIResource {
     name: string,
     params: ConsumerCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ConsumerCreateResponse | null> {
+  ): Core.APIPromise<WorkersConsumerCreated | null> {
     const { account_id, body } = params;
     return (
       this._client.post(`/accounts/${account_id}/workers/queues/${name}/consumers`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: ConsumerCreateResponse | null }>
+      }) as Core.APIPromise<{ result: WorkersConsumerCreated | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -30,13 +30,13 @@ export class Consumers extends APIResource {
     consumerName: string,
     params: ConsumerUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ConsumerUpdateResponse | null> {
+  ): Core.APIPromise<WorkersConsumerUpdated | null> {
     const { account_id, body } = params;
     return (
       this._client.put(`/accounts/${account_id}/workers/queues/${name}/consumers/${consumerName}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: ConsumerUpdateResponse | null }>
+      }) as Core.APIPromise<{ result: WorkersConsumerUpdated | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -76,7 +76,29 @@ export class Consumers extends APIResource {
   }
 }
 
-export interface ConsumerCreateResponse {
+export interface WorkersConsumer {
+  created_on?: unknown;
+
+  environment?: unknown;
+
+  queue_name?: unknown;
+
+  service?: unknown;
+
+  settings?: WorkersConsumer.Settings;
+}
+
+export namespace WorkersConsumer {
+  export interface Settings {
+    batch_size?: number;
+
+    max_retries?: number;
+
+    max_wait_time_ms?: number;
+  }
+}
+
+export interface WorkersConsumerCreated {
   created_on?: unknown;
 
   dead_letter_queue?: string;
@@ -87,10 +109,10 @@ export interface ConsumerCreateResponse {
 
   script_name?: unknown;
 
-  settings?: ConsumerCreateResponse.Settings;
+  settings?: WorkersConsumerCreated.Settings;
 }
 
-export namespace ConsumerCreateResponse {
+export namespace WorkersConsumerCreated {
   export interface Settings {
     batch_size?: number;
 
@@ -100,7 +122,7 @@ export namespace ConsumerCreateResponse {
   }
 }
 
-export interface ConsumerUpdateResponse {
+export interface WorkersConsumerUpdated {
   created_on?: unknown;
 
   dead_letter_queue?: unknown;
@@ -111,10 +133,10 @@ export interface ConsumerUpdateResponse {
 
   script_name?: unknown;
 
-  settings?: ConsumerUpdateResponse.Settings;
+  settings?: WorkersConsumerUpdated.Settings;
 }
 
-export namespace ConsumerUpdateResponse {
+export namespace WorkersConsumerUpdated {
   export interface Settings {
     batch_size?: number;
 
@@ -126,31 +148,7 @@ export namespace ConsumerUpdateResponse {
 
 export type ConsumerDeleteResponse = unknown | Array<unknown> | string;
 
-export type ConsumerGetResponse = Array<ConsumerGetResponse.ConsumerGetResponseItem>;
-
-export namespace ConsumerGetResponse {
-  export interface ConsumerGetResponseItem {
-    created_on?: unknown;
-
-    environment?: unknown;
-
-    queue_name?: unknown;
-
-    service?: unknown;
-
-    settings?: ConsumerGetResponseItem.Settings;
-  }
-
-  export namespace ConsumerGetResponseItem {
-    export interface Settings {
-      batch_size?: number;
-
-      max_retries?: number;
-
-      max_wait_time_ms?: number;
-    }
-  }
-}
+export type ConsumerGetResponse = Array<WorkersConsumer>;
 
 export interface ConsumerCreateParams {
   /**
@@ -191,8 +189,9 @@ export interface ConsumerGetParams {
 }
 
 export namespace Consumers {
-  export import ConsumerCreateResponse = ConsumersAPI.ConsumerCreateResponse;
-  export import ConsumerUpdateResponse = ConsumersAPI.ConsumerUpdateResponse;
+  export import WorkersConsumer = ConsumersAPI.WorkersConsumer;
+  export import WorkersConsumerCreated = ConsumersAPI.WorkersConsumerCreated;
+  export import WorkersConsumerUpdated = ConsumersAPI.WorkersConsumerUpdated;
   export import ConsumerDeleteResponse = ConsumersAPI.ConsumerDeleteResponse;
   export import ConsumerGetResponse = ConsumersAPI.ConsumerGetResponse;
   export import ConsumerCreateParams = ConsumersAPI.ConsumerCreateParams;

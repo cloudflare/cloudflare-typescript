@@ -27,13 +27,13 @@ export class Lists extends APIResource {
     listId: string,
     params: ListUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ListUpdateResponse> {
+  ): Core.APIPromise<ZeroTrustGatewayLists> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/gateway/lists/${listId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ListUpdateResponse }>
+      }) as Core.APIPromise<{ result: ZeroTrustGatewayLists }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -72,13 +72,13 @@ export class Lists extends APIResource {
     listId: string,
     params: ListEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ListEditResponse> {
+  ): Core.APIPromise<ZeroTrustGatewayLists> {
     const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/gateway/lists/${listId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ListEditResponse }>
+      }) as Core.APIPromise<{ result: ZeroTrustGatewayLists }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -89,14 +89,45 @@ export class Lists extends APIResource {
     listId: string,
     params: ListGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ListGetResponse> {
+  ): Core.APIPromise<ZeroTrustGatewayLists> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/gateway/lists/${listId}`, options) as Core.APIPromise<{
-        result: ListGetResponse;
+        result: ZeroTrustGatewayLists;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+
+export interface ZeroTrustGatewayLists {
+  /**
+   * API Resource UUID tag.
+   */
+  id?: string;
+
+  /**
+   * The number of items in the list.
+   */
+  count?: number;
+
+  created_at?: string;
+
+  /**
+   * The description of the list.
+   */
+  description?: string;
+
+  /**
+   * The name of the list.
+   */
+  name?: string;
+
+  /**
+   * The type of list.
+   */
+  type?: 'SERIAL' | 'URL' | 'DOMAIN' | 'EMAIL' | 'IP';
+
+  updated_at?: string;
 }
 
 export interface ListCreateResponse {
@@ -141,135 +172,9 @@ export namespace ListCreateResponse {
   }
 }
 
-export interface ListUpdateResponse {
-  /**
-   * API Resource UUID tag.
-   */
-  id?: string;
-
-  /**
-   * The number of items in the list.
-   */
-  count?: number;
-
-  created_at?: string;
-
-  /**
-   * The description of the list.
-   */
-  description?: string;
-
-  /**
-   * The name of the list.
-   */
-  name?: string;
-
-  /**
-   * The type of list.
-   */
-  type?: 'SERIAL' | 'URL' | 'DOMAIN' | 'EMAIL' | 'IP';
-
-  updated_at?: string;
-}
-
-export type ListListResponse = Array<ListListResponse.ListListResponseItem>;
-
-export namespace ListListResponse {
-  export interface ListListResponseItem {
-    /**
-     * API Resource UUID tag.
-     */
-    id?: string;
-
-    /**
-     * The number of items in the list.
-     */
-    count?: number;
-
-    created_at?: string;
-
-    /**
-     * The description of the list.
-     */
-    description?: string;
-
-    /**
-     * The name of the list.
-     */
-    name?: string;
-
-    /**
-     * The type of list.
-     */
-    type?: 'SERIAL' | 'URL' | 'DOMAIN' | 'EMAIL' | 'IP';
-
-    updated_at?: string;
-  }
-}
+export type ListListResponse = Array<ZeroTrustGatewayLists>;
 
 export type ListDeleteResponse = unknown | string;
-
-export interface ListEditResponse {
-  /**
-   * API Resource UUID tag.
-   */
-  id?: string;
-
-  /**
-   * The number of items in the list.
-   */
-  count?: number;
-
-  created_at?: string;
-
-  /**
-   * The description of the list.
-   */
-  description?: string;
-
-  /**
-   * The name of the list.
-   */
-  name?: string;
-
-  /**
-   * The type of list.
-   */
-  type?: 'SERIAL' | 'URL' | 'DOMAIN' | 'EMAIL' | 'IP';
-
-  updated_at?: string;
-}
-
-export interface ListGetResponse {
-  /**
-   * API Resource UUID tag.
-   */
-  id?: string;
-
-  /**
-   * The number of items in the list.
-   */
-  count?: number;
-
-  created_at?: string;
-
-  /**
-   * The description of the list.
-   */
-  description?: string;
-
-  /**
-   * The name of the list.
-   */
-  name?: string;
-
-  /**
-   * The type of list.
-   */
-  type?: 'SERIAL' | 'URL' | 'DOMAIN' | 'EMAIL' | 'IP';
-
-  updated_at?: string;
-}
 
 export interface ListCreateParams {
   /**
@@ -363,12 +268,10 @@ export interface ListGetParams {
 }
 
 export namespace Lists {
+  export import ZeroTrustGatewayLists = ListsAPI.ZeroTrustGatewayLists;
   export import ListCreateResponse = ListsAPI.ListCreateResponse;
-  export import ListUpdateResponse = ListsAPI.ListUpdateResponse;
   export import ListListResponse = ListsAPI.ListListResponse;
   export import ListDeleteResponse = ListsAPI.ListDeleteResponse;
-  export import ListEditResponse = ListsAPI.ListEditResponse;
-  export import ListGetResponse = ListsAPI.ListGetResponse;
   export import ListCreateParams = ListsAPI.ListCreateParams;
   export import ListUpdateParams = ListsAPI.ListUpdateParams;
   export import ListListParams = ListsAPI.ListListParams;

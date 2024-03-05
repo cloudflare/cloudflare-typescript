@@ -102,119 +102,117 @@ export class Pagerules extends APIResource {
   }
 }
 
+export interface ZonesPageRule {
+  /**
+   * Identifier
+   */
+  id: string;
+
+  /**
+   * The set of actions to perform if the targets of this rule match the request.
+   * Actions can redirect to another URL or override settings, but not both.
+   */
+  actions: Array<ZonesPageRule.Action>;
+
+  /**
+   * The timestamp of when the Page Rule was created.
+   */
+  created_on: string;
+
+  /**
+   * The timestamp of when the Page Rule was last modified.
+   */
+  modified_on: string;
+
+  /**
+   * The priority of the rule, used to define which Page Rule is processed over
+   * another. A higher number indicates a higher priority. For example, if you have a
+   * catch-all Page Rule (rule A: `/images/*`) but want a more specific Page Rule to
+   * take precedence (rule B: `/images/special/*`), specify a higher priority for
+   * rule B so it overrides rule A.
+   */
+  priority: number;
+
+  /**
+   * The status of the Page Rule.
+   */
+  status: 'active' | 'disabled';
+
+  /**
+   * The rule targets to evaluate on each request.
+   */
+  targets: Array<ZonesPageRule.Target>;
+}
+
+export namespace ZonesPageRule {
+  export interface Action {
+    /**
+     * The timestamp of when the override was last modified.
+     */
+    modified_on?: string;
+
+    /**
+     * The type of route.
+     */
+    name?: 'forward_url';
+
+    value?: Action.Value;
+  }
+
+  export namespace Action {
+    export interface Value {
+      /**
+       * The response type for the URL redirect.
+       */
+      type?: 'temporary' | 'permanent';
+
+      /**
+       * The URL to redirect the request to. Notes: ${num} refers to the position of '\*'
+       * in the constraint value.
+       */
+      url?: string;
+    }
+  }
+
+  /**
+   * A request condition target.
+   */
+  export interface Target {
+    /**
+     * String constraint.
+     */
+    constraint: Target.Constraint;
+
+    /**
+     * A target based on the URL of the request.
+     */
+    target: 'url';
+  }
+
+  export namespace Target {
+    /**
+     * String constraint.
+     */
+    export interface Constraint {
+      /**
+       * The matches operator can use asterisks and pipes as wildcard and 'or' operators.
+       */
+      operator: 'matches' | 'contains' | 'equals' | 'not_equal' | 'not_contain';
+
+      /**
+       * The URL pattern to match against the current request. The pattern may contain up
+       * to four asterisks ('\*') as placeholders.
+       */
+      value: string;
+    }
+  }
+}
+
 export type PageruleCreateResponse = unknown | string;
 
 export type PageruleUpdateResponse = unknown | string;
 
-export type PageruleListResponse = Array<PageruleListResponse.PageruleListResponseItem>;
-
-export namespace PageruleListResponse {
-  export interface PageruleListResponseItem {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    /**
-     * The set of actions to perform if the targets of this rule match the request.
-     * Actions can redirect to another URL or override settings, but not both.
-     */
-    actions: Array<PageruleListResponseItem.Action>;
-
-    /**
-     * The timestamp of when the Page Rule was created.
-     */
-    created_on: string;
-
-    /**
-     * The timestamp of when the Page Rule was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * The priority of the rule, used to define which Page Rule is processed over
-     * another. A higher number indicates a higher priority. For example, if you have a
-     * catch-all Page Rule (rule A: `/images/*`) but want a more specific Page Rule to
-     * take precedence (rule B: `/images/special/*`), specify a higher priority for
-     * rule B so it overrides rule A.
-     */
-    priority: number;
-
-    /**
-     * The status of the Page Rule.
-     */
-    status: 'active' | 'disabled';
-
-    /**
-     * The rule targets to evaluate on each request.
-     */
-    targets: Array<PageruleListResponseItem.Target>;
-  }
-
-  export namespace PageruleListResponseItem {
-    export interface Action {
-      /**
-       * The timestamp of when the override was last modified.
-       */
-      modified_on?: string;
-
-      /**
-       * The type of route.
-       */
-      name?: 'forward_url';
-
-      value?: Action.Value;
-    }
-
-    export namespace Action {
-      export interface Value {
-        /**
-         * The response type for the URL redirect.
-         */
-        type?: 'temporary' | 'permanent';
-
-        /**
-         * The URL to redirect the request to. Notes: ${num} refers to the position of '\*'
-         * in the constraint value.
-         */
-        url?: string;
-      }
-    }
-
-    /**
-     * A request condition target.
-     */
-    export interface Target {
-      /**
-       * String constraint.
-       */
-      constraint: Target.Constraint;
-
-      /**
-       * A target based on the URL of the request.
-       */
-      target: 'url';
-    }
-
-    export namespace Target {
-      /**
-       * String constraint.
-       */
-      export interface Constraint {
-        /**
-         * The matches operator can use asterisks and pipes as wildcard and 'or' operators.
-         */
-        operator: 'matches' | 'contains' | 'equals' | 'not_equal' | 'not_contain';
-
-        /**
-         * The URL pattern to match against the current request. The pattern may contain up
-         * to four asterisks ('\*') as placeholders.
-         */
-        value: string;
-      }
-    }
-  }
-}
+export type PageruleListResponse = Array<ZonesPageRule>;
 
 export interface PageruleDeleteResponse {
   /**
@@ -543,6 +541,7 @@ export interface PageruleGetParams {
 }
 
 export namespace Pagerules {
+  export import ZonesPageRule = PagerulesAPI.ZonesPageRule;
   export import PageruleCreateResponse = PagerulesAPI.PageruleCreateResponse;
   export import PageruleUpdateResponse = PagerulesAPI.PageruleUpdateResponse;
   export import PageruleListResponse = PagerulesAPI.PageruleListResponse;
@@ -556,6 +555,6 @@ export namespace Pagerules {
   export import PageruleEditParams = PagerulesAPI.PageruleEditParams;
   export import PageruleGetParams = PagerulesAPI.PageruleGetParams;
   export import Settings = SettingsAPI.Settings;
-  export import SettingListResponse = SettingsAPI.SettingListResponse;
+  export import ZonesSettings = SettingsAPI.ZonesSettings;
   export import SettingListParams = SettingsAPI.SettingListParams;
 }

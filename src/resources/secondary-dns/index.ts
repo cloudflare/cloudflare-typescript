@@ -1,20 +1,6 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
-  ACLCreateResponse,
-  ACLUpdateResponse,
-  ACLListResponse,
-  ACLDeleteResponse,
-  ACLGetResponse,
-  ACLCreateParams,
-  ACLUpdateParams,
-  ACLListParams,
-  ACLDeleteParams,
-  ACLGetParams,
-  ACLs,
-} from './acls';
-export { ForceAxfrCreateResponse, ForceAxfrCreateParams, ForceAxfrs } from './force-axfrs';
-export {
   IncomingCreateResponse,
   IncomingUpdateResponse,
   IncomingDeleteResponse,
@@ -25,13 +11,25 @@ export {
   IncomingGetParams,
   Incoming,
 } from './incoming';
+export { SecondaryDNS } from './secondary-dns';
 export {
+  SecondaryDNSACL,
+  ACLListResponse,
+  ACLDeleteResponse,
+  ACLCreateParams,
+  ACLUpdateParams,
+  ACLListParams,
+  ACLDeleteParams,
+  ACLGetParams,
+  ACLs,
+} from './acls';
+export {
+  SecondaryDNSDisableTransferResult,
+  SecondaryDNSEnableTransferResult,
+  SecondaryDNSSchemasForceResult,
   OutgoingCreateResponse,
   OutgoingUpdateResponse,
   OutgoingDeleteResponse,
-  OutgoingDisableResponse,
-  OutgoingEnableResponse,
-  OutgoingForceNotifyResponse,
   OutgoingGetResponse,
   OutgoingCreateParams,
   OutgoingUpdateParams,
@@ -42,12 +40,11 @@ export {
   OutgoingGetParams,
   Outgoing,
 } from './outgoing/index';
+export { SecondaryDNSForceResult, ForceAxfrCreateParams, ForceAxfrs } from './force-axfrs';
 export {
-  PeerCreateResponse,
-  PeerUpdateResponse,
+  SecondaryDNSPeer,
   PeerListResponse,
   PeerDeleteResponse,
-  PeerGetResponse,
   PeerCreateParams,
   PeerUpdateParams,
   PeerListParams,
@@ -55,13 +52,10 @@ export {
   PeerGetParams,
   Peers,
 } from './peers';
-export { SecondaryDNS } from './secondary-dns';
 export {
-  TSIGCreateResponse,
-  TSIGUpdateResponse,
+  SecondaryDNSTSIG,
   TSIGListResponse,
   TSIGDeleteResponse,
-  TSIGGetResponse,
   TSIGCreateParams,
   TSIGUpdateParams,
   TSIGListParams,

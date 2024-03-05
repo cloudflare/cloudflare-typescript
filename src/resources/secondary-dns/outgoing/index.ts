@@ -1,12 +1,12 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
+  SecondaryDNSDisableTransferResult,
+  SecondaryDNSEnableTransferResult,
+  SecondaryDNSSchemasForceResult,
   OutgoingCreateResponse,
   OutgoingUpdateResponse,
   OutgoingDeleteResponse,
-  OutgoingDisableResponse,
-  OutgoingEnableResponse,
-  OutgoingForceNotifyResponse,
   OutgoingGetResponse,
   OutgoingCreateParams,
   OutgoingUpdateParams,
@@ -17,4 +17,4 @@ export {
   OutgoingGetParams,
   Outgoing,
 } from './outgoing';
-export { StatusGetResponse, StatusGetParams, Status } from './status';
+export { StatusGetParams, Status } from './status';

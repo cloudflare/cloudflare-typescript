@@ -3,7 +3,8 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
-import * as BytimesAPI from 'cloudflare/resources/dns/firewall/analytics/reports/bytimes';
+import * as ReportsBytimesAPI from 'cloudflare/resources/dns/firewall/analytics/reports/bytimes';
+import * as BytimesAPI from 'cloudflare/resources/dns/analytics/reports/bytimes';
 
 export class Bytimes extends APIResource {
   /**
@@ -18,18 +19,18 @@ export class Bytimes extends APIResource {
     identifier: string,
     query?: BytimeGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<BytimeGetResponse>;
+  ): Core.APIPromise<BytimesAPI.DNSDNSAnalyticsAPIReportBytime>;
   get(
     accountIdentifier: string,
     identifier: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<BytimeGetResponse>;
+  ): Core.APIPromise<BytimesAPI.DNSDNSAnalyticsAPIReportBytime>;
   get(
     accountIdentifier: string,
     identifier: string,
     query: BytimeGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<BytimeGetResponse> {
+  ): Core.APIPromise<BytimesAPI.DNSDNSAnalyticsAPIReportBytime> {
     if (isRequestOptions(query)) {
       return this.get(accountIdentifier, identifier, {}, query);
     }
@@ -37,121 +38,8 @@ export class Bytimes extends APIResource {
       this._client.get(
         `/accounts/${accountIdentifier}/dns_firewall/${identifier}/dns_analytics/report/bytime`,
         { query, ...options },
-      ) as Core.APIPromise<{ result: BytimeGetResponse }>
+      ) as Core.APIPromise<{ result: BytimesAPI.DNSDNSAnalyticsAPIReportBytime }>
     )._thenUnwrap((obj) => obj.result);
-  }
-}
-
-export interface BytimeGetResponse {
-  /**
-   * Array with one row per combination of dimension values.
-   */
-  data: Array<BytimeGetResponse.Data>;
-
-  /**
-   * Number of seconds between current time and last processed event, in another
-   * words how many seconds of data could be missing.
-   */
-  data_lag: number;
-
-  /**
-   * Maximum results for each metric (object mapping metric names to values).
-   * Currently always an empty object.
-   */
-  max: unknown;
-
-  /**
-   * Minimum results for each metric (object mapping metric names to values).
-   * Currently always an empty object.
-   */
-  min: unknown;
-
-  query: BytimeGetResponse.Query;
-
-  /**
-   * Total number of rows in the result.
-   */
-  rows: number;
-
-  /**
-   * Array of time intervals in the response data. Each interval is represented as an
-   * array containing two values: the start time, and the end time.
-   */
-  time_intervals: Array<Array<string>>;
-
-  /**
-   * Total results for metrics across all data (object mapping metric names to
-   * values).
-   */
-  totals: unknown;
-}
-
-export namespace BytimeGetResponse {
-  export interface Data {
-    /**
-     * Array of dimension values, representing the combination of dimension values
-     * corresponding to this row.
-     */
-    dimensions: Array<string>;
-
-    /**
-     * Array with one item per requested metric. Each item is an array of values,
-     * broken down by time interval.
-     */
-    metrics: Array<Array<unknown>>;
-  }
-
-  export interface Query {
-    /**
-     * Array of dimension names.
-     */
-    dimensions: Array<string>;
-
-    /**
-     * Limit number of returned metrics.
-     */
-    limit: number;
-
-    /**
-     * Array of metric names.
-     */
-    metrics: Array<string>;
-
-    /**
-     * Start date and time of requesting data period in ISO 8601 format.
-     */
-    since: string;
-
-    /**
-     * Unit of time to group data by.
-     */
-    time_delta:
-      | 'all'
-      | 'auto'
-      | 'year'
-      | 'quarter'
-      | 'month'
-      | 'week'
-      | 'day'
-      | 'hour'
-      | 'dekaminute'
-      | 'minute';
-
-    /**
-     * End date and time of requesting data period in ISO 8601 format.
-     */
-    until: string;
-
-    /**
-     * Segmentation filter in 'attribute operator value' format.
-     */
-    filters?: string;
-
-    /**
-     * Array of dimensions to sort by, where each dimension may be prefixed by -
-     * (descending) or + (ascending).
-     */
-    sort?: Array<string>;
   }
 }
 
@@ -209,6 +97,5 @@ export interface BytimeGetParams {
 }
 
 export namespace Bytimes {
-  export import BytimeGetResponse = BytimesAPI.BytimeGetResponse;
-  export import BytimeGetParams = BytimesAPI.BytimeGetParams;
+  export import BytimeGetParams = ReportsBytimesAPI.BytimeGetParams;
 }

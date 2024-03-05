@@ -14,14 +14,21 @@ export {
 export {
   AccountMember,
   AccountMemberWithID,
-  MemberListResponse,
+  IamComponentsSchemasMember,
   MemberDeleteResponse,
   MemberCreateParams,
   MemberUpdateParams,
   MemberListParams,
   MemberDeleteParams,
   MemberGetParams,
-  MemberListResponsesV4PagePaginationArray,
+  IamComponentsSchemasMembersV4PagePaginationArray,
   Members,
 } from './members';
-export { RoleListResponse, RoleGetResponse, RoleListParams, RoleGetParams, Roles } from './roles';
+export {
+  IamSchemasRole,
+  RoleListResponse,
+  RoleGetResponse,
+  RoleListParams,
+  RoleGetParams,
+  Roles,
+} from './roles';

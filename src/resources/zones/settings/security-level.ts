@@ -11,16 +11,13 @@ export class SecurityLevel extends APIResource {
    * an individual security setting, the profile will become Custom.
    * (https://support.cloudflare.com/hc/en-us/articles/200170056).
    */
-  edit(
-    params: SecurityLevelEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SecurityLevelEditResponse> {
+  edit(params: SecurityLevelEditParams, options?: Core.RequestOptions): Core.APIPromise<ZonesSecurityLevel> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/security_level`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: SecurityLevelEditResponse }>
+      }) as Core.APIPromise<{ result: ZonesSecurityLevel }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -30,14 +27,11 @@ export class SecurityLevel extends APIResource {
    * an individual security setting, the profile will become Custom.
    * (https://support.cloudflare.com/hc/en-us/articles/200170056).
    */
-  get(
-    params: SecurityLevelGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SecurityLevelGetResponse> {
+  get(params: SecurityLevelGetParams, options?: Core.RequestOptions): Core.APIPromise<ZonesSecurityLevel> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/security_level`, options) as Core.APIPromise<{
-        result: SecurityLevelGetResponse;
+        result: ZonesSecurityLevel;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -49,36 +43,7 @@ export class SecurityLevel extends APIResource {
  * an individual security setting, the profile will become Custom.
  * (https://support.cloudflare.com/hc/en-us/articles/200170056).
  */
-export interface SecurityLevelEditResponse {
-  /**
-   * ID of the zone setting.
-   */
-  id: 'security_level';
-
-  /**
-   * Current value of the zone setting.
-   */
-  value: 'off' | 'essentially_off' | 'low' | 'medium' | 'high' | 'under_attack';
-
-  /**
-   * Whether or not this setting can be modified for this zone (based on your
-   * Cloudflare plan level).
-   */
-  editable?: true | false;
-
-  /**
-   * last time this setting was modified.
-   */
-  modified_on?: string | null;
-}
-
-/**
- * Choose the appropriate security profile for your website, which will
- * automatically adjust each of the security settings. If you choose to customize
- * an individual security setting, the profile will become Custom.
- * (https://support.cloudflare.com/hc/en-us/articles/200170056).
- */
-export interface SecurityLevelGetResponse {
+export interface ZonesSecurityLevel {
   /**
    * ID of the zone setting.
    */
@@ -121,8 +86,7 @@ export interface SecurityLevelGetParams {
 }
 
 export namespace SecurityLevel {
-  export import SecurityLevelEditResponse = SecurityLevelAPI.SecurityLevelEditResponse;
-  export import SecurityLevelGetResponse = SecurityLevelAPI.SecurityLevelGetResponse;
+  export import ZonesSecurityLevel = SecurityLevelAPI.ZonesSecurityLevel;
   export import SecurityLevelEditParams = SecurityLevelAPI.SecurityLevelEditParams;
   export import SecurityLevelGetParams = SecurityLevelAPI.SecurityLevelGetParams;
 }

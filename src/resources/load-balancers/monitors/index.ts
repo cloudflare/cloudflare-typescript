@@ -1,12 +1,8 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
-  MonitorCreateResponse,
-  MonitorUpdateResponse,
   MonitorListResponse,
   MonitorDeleteResponse,
-  MonitorEditResponse,
-  MonitorGetResponse,
   MonitorCreateParams,
   MonitorUpdateParams,
   MonitorListParams,

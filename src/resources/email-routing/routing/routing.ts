@@ -28,6 +28,49 @@ export class Routing extends APIResource {
   }
 }
 
+export interface EmailSettings {
+  /**
+   * Email Routing settings identifier.
+   */
+  id?: string;
+
+  /**
+   * The date and time the settings have been created.
+   */
+  created?: string;
+
+  /**
+   * State of the zone settings for Email Routing.
+   */
+  enabled?: true | false;
+
+  /**
+   * The date and time the settings have been modified.
+   */
+  modified?: string;
+
+  /**
+   * Domain of your zone.
+   */
+  name?: string;
+
+  /**
+   * Flag to check if the user skipped the configuration wizard.
+   */
+  skip_wizard?: true | false;
+
+  /**
+   * Show the state of your account, and the type or configuration error.
+   */
+  status?: 'ready' | 'unconfigured' | 'misconfigured' | 'misconfigured/locked' | 'unlocked';
+
+  /**
+   * Email Routing settings tag. (Deprecated, replaced by Email Routing settings
+   * identifier)
+   */
+  tag?: string;
+}
+
 export interface RoutingGetResponse {
   /**
    * Email Routing settings identifier.
@@ -72,14 +115,17 @@ export interface RoutingGetResponse {
 }
 
 export namespace Routing {
+  export import EmailSettings = RoutingAPI.EmailSettings;
   export import RoutingGetResponse = RoutingAPI.RoutingGetResponse;
   export import Disables = DisablesAPI.Disables;
   export import DisableCreateResponse = DisablesAPI.DisableCreateResponse;
   export import DNS = DNSAPI.DNS;
+  export import EmailDNSRecord = DNSAPI.EmailDNSRecord;
   export import DNSGetResponse = DNSAPI.DNSGetResponse;
   export import Enables = EnablesAPI.Enables;
   export import EnableCreateResponse = EnablesAPI.EnableCreateResponse;
   export import Rules = RulesAPI.Rules;
+  export import EmailRules = RulesAPI.EmailRules;
   export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
   export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
   export import RuleListResponse = RulesAPI.RuleListResponse;
@@ -90,6 +136,7 @@ export namespace Routing {
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
   export import RuleListParams = RulesAPI.RuleListParams;
   export import Addresses = AddressesAPI.Addresses;
+  export import EmailAddresses = AddressesAPI.EmailAddresses;
   export import AddressCreateResponse = AddressesAPI.AddressCreateResponse;
   export import AddressListResponse = AddressesAPI.AddressListResponse;
   export import AddressDeleteResponse = AddressesAPI.AddressDeleteResponse;

@@ -8,24 +8,24 @@ export class Variants extends APIResource {
   /**
    * Specify variants that allow you to resize images for different use cases.
    */
-  create(params: VariantCreateParams, options?: Core.RequestOptions): Core.APIPromise<VariantCreateResponse> {
+  create(params: VariantCreateParams, options?: Core.RequestOptions): Core.APIPromise<ImageVariant> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/images/v1/variants`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: VariantCreateResponse }>
+      }) as Core.APIPromise<{ result: ImageVariant }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Lists existing variants.
    */
-  list(params: VariantListParams, options?: Core.RequestOptions): Core.APIPromise<VariantListResponse> {
+  list(params: VariantListParams, options?: Core.RequestOptions): Core.APIPromise<ImageVariants> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/images/v1/variants`, options) as Core.APIPromise<{
-        result: VariantListResponse;
+        result: ImageVariants;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -54,13 +54,13 @@ export class Variants extends APIResource {
     variantId: unknown,
     params: VariantEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<VariantEditResponse> {
+  ): Core.APIPromise<ImageVariant> {
     const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/images/v1/variants/${variantId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: VariantEditResponse }>
+      }) as Core.APIPromise<{ result: ImageVariant }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -71,22 +71,22 @@ export class Variants extends APIResource {
     variantId: unknown,
     params: VariantGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<VariantGetResponse> {
+  ): Core.APIPromise<ImageVariant> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/images/v1/variants/${variantId}`,
         options,
-      ) as Core.APIPromise<{ result: VariantGetResponse }>
+      ) as Core.APIPromise<{ result: ImageVariant }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface VariantCreateResponse {
-  variant?: VariantCreateResponse.Variant;
+export interface ImageVariant {
+  variant?: ImageVariant.Variant;
 }
 
-export namespace VariantCreateResponse {
+export namespace ImageVariant {
   export interface Variant {
     id: unknown;
 
@@ -131,11 +131,11 @@ export namespace VariantCreateResponse {
   }
 }
 
-export interface VariantListResponse {
-  variants?: VariantListResponse.Variants;
+export interface ImageVariants {
+  variants?: ImageVariants.Variants;
 }
 
-export namespace VariantListResponse {
+export namespace ImageVariants {
   export interface Variants {
     hero?: Variants.Hero;
   }
@@ -187,104 +187,6 @@ export namespace VariantListResponse {
 }
 
 export type VariantDeleteResponse = unknown | string;
-
-export interface VariantEditResponse {
-  variant?: VariantEditResponse.Variant;
-}
-
-export namespace VariantEditResponse {
-  export interface Variant {
-    id: unknown;
-
-    /**
-     * Allows you to define image resizing sizes for different use cases.
-     */
-    options: Variant.Options;
-
-    /**
-     * Indicates whether the variant can access an image without a signature,
-     * regardless of image access control.
-     */
-    neverRequireSignedURLs?: boolean;
-  }
-
-  export namespace Variant {
-    /**
-     * Allows you to define image resizing sizes for different use cases.
-     */
-    export interface Options {
-      /**
-       * The fit property describes how the width and height dimensions should be
-       * interpreted.
-       */
-      fit: 'scale-down' | 'contain' | 'cover' | 'crop' | 'pad';
-
-      /**
-       * Maximum height in image pixels.
-       */
-      height: number;
-
-      /**
-       * What EXIF data should be preserved in the output image.
-       */
-      metadata: 'keep' | 'copyright' | 'none';
-
-      /**
-       * Maximum width in image pixels.
-       */
-      width: number;
-    }
-  }
-}
-
-export interface VariantGetResponse {
-  variant?: VariantGetResponse.Variant;
-}
-
-export namespace VariantGetResponse {
-  export interface Variant {
-    id: unknown;
-
-    /**
-     * Allows you to define image resizing sizes for different use cases.
-     */
-    options: Variant.Options;
-
-    /**
-     * Indicates whether the variant can access an image without a signature,
-     * regardless of image access control.
-     */
-    neverRequireSignedURLs?: boolean;
-  }
-
-  export namespace Variant {
-    /**
-     * Allows you to define image resizing sizes for different use cases.
-     */
-    export interface Options {
-      /**
-       * The fit property describes how the width and height dimensions should be
-       * interpreted.
-       */
-      fit: 'scale-down' | 'contain' | 'cover' | 'crop' | 'pad';
-
-      /**
-       * Maximum height in image pixels.
-       */
-      height: number;
-
-      /**
-       * What EXIF data should be preserved in the output image.
-       */
-      metadata: 'keep' | 'copyright' | 'none';
-
-      /**
-       * Maximum width in image pixels.
-       */
-      width: number;
-    }
-  }
-}
 
 export interface VariantCreateParams {
   /**
@@ -405,11 +307,9 @@ export interface VariantGetParams {
 }
 
 export namespace Variants {
-  export import VariantCreateResponse = VariantsAPI.VariantCreateResponse;
-  export import VariantListResponse = VariantsAPI.VariantListResponse;
+  export import ImageVariant = VariantsAPI.ImageVariant;
+  export import ImageVariants = VariantsAPI.ImageVariants;
   export import VariantDeleteResponse = VariantsAPI.VariantDeleteResponse;
-  export import VariantEditResponse = VariantsAPI.VariantEditResponse;
-  export import VariantGetResponse = VariantsAPI.VariantGetResponse;
   export import VariantCreateParams = VariantsAPI.VariantCreateParams;
   export import VariantListParams = VariantsAPI.VariantListParams;
   export import VariantDeleteParams = VariantsAPI.VariantDeleteParams;

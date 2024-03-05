@@ -11,7 +11,6 @@ export class Environments extends APIResource {
 
 export namespace Environments {
   export import Content = ContentAPI.Content;
-  export import ContentUpdateResponse = ContentAPI.ContentUpdateResponse;
   export import ContentUpdateParams = ContentAPI.ContentUpdateParams;
   export import ContentGetParams = ContentAPI.ContentGetParams;
   export import Settings = SettingsAPI.Settings;

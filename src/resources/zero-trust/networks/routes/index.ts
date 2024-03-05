@@ -1,24 +1,14 @@
 // File generated from our OpenAPI spec by Stainless.
 
-export { IPGetResponse, IPGetParams, IPs } from './ips';
+export { IPGetParams, IPs } from './ips';
+export { NetworkCreateParams, NetworkDeleteParams, NetworkEditParams, Networks } from './networks';
 export {
-  NetworkCreateResponse,
-  NetworkDeleteResponse,
-  NetworkEditResponse,
-  NetworkCreateParams,
-  NetworkDeleteParams,
-  NetworkEditParams,
-  Networks,
-} from './networks';
-export {
-  RouteCreateResponse,
-  RouteListResponse,
-  RouteDeleteResponse,
-  RouteEditResponse,
+  TunnelRoute,
+  TunnelTeamnet,
   RouteCreateParams,
   RouteListParams,
   RouteDeleteParams,
   RouteEditParams,
-  RouteListResponsesV4PagePaginationArray,
+  TunnelTeamnetsV4PagePaginationArray,
   Routes,
 } from './routes';

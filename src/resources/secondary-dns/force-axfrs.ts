@@ -11,11 +11,11 @@ export class ForceAxfrs extends APIResource {
   create(
     params: ForceAxfrCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ForceAxfrCreateResponse> {
+  ): Core.APIPromise<SecondaryDNSForceResult> {
     const { zone_id } = params;
     return (
       this._client.post(`/zones/${zone_id}/secondary_dns/force_axfr`, options) as Core.APIPromise<{
-        result: ForceAxfrCreateResponse;
+        result: SecondaryDNSForceResult;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -24,13 +24,13 @@ export class ForceAxfrs extends APIResource {
 /**
  * When force_axfr query parameter is set to true, the response is a simple string
  */
-export type ForceAxfrCreateResponse = string;
+export type SecondaryDNSForceResult = string;
 
 export interface ForceAxfrCreateParams {
   zone_id: unknown;
 }
 
 export namespace ForceAxfrs {
-  export import ForceAxfrCreateResponse = ForceAxfrsAPI.ForceAxfrCreateResponse;
+  export import SecondaryDNSForceResult = ForceAxfrsAPI.SecondaryDNSForceResult;
   export import ForceAxfrCreateParams = ForceAxfrsAPI.ForceAxfrCreateParams;
 }

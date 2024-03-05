@@ -9,8 +9,8 @@ export class Storage extends APIResource {
 
 export namespace Storage {
   export import Analytics = AnalyticsAPI.Analytics;
-  export import AnalyticsListResponse = AnalyticsAPI.AnalyticsListResponse;
-  export import AnalyticsStoredResponse = AnalyticsAPI.AnalyticsStoredResponse;
+  export import WorkersKVComponentsSchemasResult = AnalyticsAPI.WorkersKVComponentsSchemasResult;
+  export import WorkersKVSchemasResult = AnalyticsAPI.WorkersKVSchemasResult;
   export import AnalyticsListParams = AnalyticsAPI.AnalyticsListParams;
   export import AnalyticsStoredParams = AnalyticsAPI.AnalyticsStoredParams;
 }

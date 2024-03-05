@@ -1,21 +1,12 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
-  HealthcheckCreateResponse,
-  HealthcheckUpdateResponse,
+  HealthchecksHealthchecks,
   HealthcheckListResponse,
   HealthcheckDeleteResponse,
-  HealthcheckEditResponse,
-  HealthcheckGetResponse,
   HealthcheckCreateParams,
   HealthcheckUpdateParams,
   HealthcheckEditParams,
   Healthchecks,
 } from './healthchecks';
-export {
-  PreviewCreateResponse,
-  PreviewDeleteResponse,
-  PreviewGetResponse,
-  PreviewCreateParams,
-  Previews,
-} from './previews';
+export { PreviewDeleteResponse, PreviewCreateParams, Previews } from './previews';

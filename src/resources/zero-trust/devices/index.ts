@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless.
 
+export { OverrideCodeListResponse, OverrideCodeListParams, OverrideCodes } from './override-codes';
+export { RevokeCreateResponse, RevokeCreateParams, Revokes } from './revokes';
 export {
-  DEXTestCreateResponse,
-  DEXTestUpdateResponse,
+  TeamsDevicesDeviceDEXTestSchemasHTTP,
   DEXTestListResponse,
   DEXTestDeleteResponse,
-  DEXTestGetResponse,
   DEXTestCreateParams,
   DEXTestUpdateParams,
   DEXTestListParams,
@@ -13,13 +13,10 @@ export {
   DEXTestGetParams,
   DEXTests,
 } from './dex-tests';
-export { DeviceListResponse, DeviceGetResponse, DeviceListParams, DeviceGetParams, Devices } from './devices';
 export {
-  NetworkCreateResponse,
-  NetworkUpdateResponse,
+  TeamsDevicesDeviceManagedNetworks,
   NetworkListResponse,
   NetworkDeleteResponse,
-  NetworkGetResponse,
   NetworkCreateParams,
   NetworkUpdateParams,
   NetworkListParams,
@@ -27,13 +24,21 @@ export {
   NetworkGetParams,
   Networks,
 } from './networks';
-export { OverrideCodeListResponse, OverrideCodeListParams, OverrideCodes } from './override-codes';
 export {
-  PolicyCreateResponse,
+  TeamsDevicesDevicePostureRules,
+  PostureListResponse,
+  PostureDeleteResponse,
+  PostureCreateParams,
+  PostureUpdateParams,
+  PostureListParams,
+  PostureDeleteParams,
+  PostureGetParams,
+  Postures,
+} from './postures/index';
+export {
+  TeamsDevicesDeviceSettingsPolicy,
   PolicyListResponse,
   PolicyDeleteResponse,
-  PolicyEditResponse,
-  PolicyGetResponse,
   PolicyCreateParams,
   PolicyListParams,
   PolicyDeleteParams,
@@ -42,22 +47,15 @@ export {
   Policies,
 } from './policies/index';
 export {
-  PostureCreateResponse,
-  PostureUpdateResponse,
-  PostureListResponse,
-  PostureDeleteResponse,
-  PostureGetResponse,
-  PostureCreateParams,
-  PostureUpdateParams,
-  PostureListParams,
-  PostureDeleteParams,
-  PostureGetParams,
-  Postures,
-} from './postures/index';
-export { RevokeCreateResponse, RevokeCreateParams, Revokes } from './revokes';
+  TeamsDevicesDevices,
+  DeviceListResponse,
+  DeviceGetResponse,
+  DeviceListParams,
+  DeviceGetParams,
+  Devices,
+} from './devices';
 export {
-  SettingUpdateResponse,
-  SettingListResponse,
+  TeamsDevicesZeroTrustAccountDeviceSettings,
   SettingUpdateParams,
   SettingListParams,
   Settings,

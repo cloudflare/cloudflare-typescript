@@ -13,22 +13,22 @@ export class NetworkPath extends APIResource {
     testResultId: string,
     params: NetworkPathListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<NetworkPathListResponse> {
+  ): Core.APIPromise<DigitalExperienceMonitoringTracerouteTestResultNetworkPath> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/dex/traceroute-test-results/${testResultId}/network-path`,
         options,
-      ) as Core.APIPromise<{ result: NetworkPathListResponse }>
+      ) as Core.APIPromise<{ result: DigitalExperienceMonitoringTracerouteTestResultNetworkPath }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface NetworkPathListResponse {
+export interface DigitalExperienceMonitoringTracerouteTestResultNetworkPath {
   /**
    * an array of the hops taken by the device to reach the end destination
    */
-  hops: Array<NetworkPathListResponse.Hop>;
+  hops: Array<DigitalExperienceMonitoringTracerouteTestResultNetworkPath.Hop>;
 
   /**
    * API Resource UUID tag.
@@ -56,7 +56,7 @@ export interface NetworkPathListResponse {
   testName?: string;
 }
 
-export namespace NetworkPathListResponse {
+export namespace DigitalExperienceMonitoringTracerouteTestResultNetworkPath {
   export interface Hop {
     ttl: number;
 
@@ -96,6 +96,6 @@ export interface NetworkPathListParams {
 }
 
 export namespace NetworkPath {
-  export import NetworkPathListResponse = NetworkPathAPI.NetworkPathListResponse;
+  export import DigitalExperienceMonitoringTracerouteTestResultNetworkPath = NetworkPathAPI.DigitalExperienceMonitoringTracerouteTestResultNetworkPath;
   export import NetworkPathListParams = NetworkPathAPI.NetworkPathListParams;
 }

@@ -11,13 +11,13 @@ export class Integrations extends APIResource {
   create(
     params: IntegrationCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<IntegrationCreateResponse | null> {
+  ): Core.APIPromise<TeamsDevicesDevicePostureIntegrations | null> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/devices/posture/integration`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: IntegrationCreateResponse | null }>
+      }) as Core.APIPromise<{ result: TeamsDevicesDevicePostureIntegrations | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -60,13 +60,13 @@ export class Integrations extends APIResource {
     integrationId: string,
     params: IntegrationEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<IntegrationEditResponse | null> {
+  ): Core.APIPromise<TeamsDevicesDevicePostureIntegrations | null> {
     const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/devices/posture/integration/${integrationId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: IntegrationEditResponse | null }>
+      }) as Core.APIPromise<{ result: TeamsDevicesDevicePostureIntegrations | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -77,18 +77,18 @@ export class Integrations extends APIResource {
     integrationId: string,
     params: IntegrationGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<IntegrationGetResponse | null> {
+  ): Core.APIPromise<TeamsDevicesDevicePostureIntegrations | null> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/devices/posture/integration/${integrationId}`,
         options,
-      ) as Core.APIPromise<{ result: IntegrationGetResponse | null }>
+      ) as Core.APIPromise<{ result: TeamsDevicesDevicePostureIntegrations | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface IntegrationCreateResponse {
+export interface TeamsDevicesDevicePostureIntegrations {
   /**
    * API UUID.
    */
@@ -97,7 +97,7 @@ export interface IntegrationCreateResponse {
   /**
    * The configuration object containing third-party integration information.
    */
-  config?: IntegrationCreateResponse.Config;
+  config?: TeamsDevicesDevicePostureIntegrations.Config;
 
   /**
    * The interval between each posture check with the third-party API. Use `m` for
@@ -116,7 +116,7 @@ export interface IntegrationCreateResponse {
   type?: 'workspace_one' | 'crowdstrike_s2s' | 'uptycs' | 'intune' | 'kolide' | 'tanium' | 'sentinelone_s2s';
 }
 
-export namespace IntegrationCreateResponse {
+export namespace TeamsDevicesDevicePostureIntegrations {
   /**
    * The configuration object containing third-party integration information.
    */
@@ -138,168 +138,9 @@ export namespace IntegrationCreateResponse {
   }
 }
 
-export type IntegrationListResponse = Array<IntegrationListResponse.IntegrationListResponseItem>;
-
-export namespace IntegrationListResponse {
-  export interface IntegrationListResponseItem {
-    /**
-     * API UUID.
-     */
-    id?: string;
-
-    /**
-     * The configuration object containing third-party integration information.
-     */
-    config?: IntegrationListResponseItem.Config;
-
-    /**
-     * The interval between each posture check with the third-party API. Use `m` for
-     * minutes (e.g. `5m`) and `h` for hours (e.g. `12h`).
-     */
-    interval?: string;
-
-    /**
-     * The name of the device posture integration.
-     */
-    name?: string;
-
-    /**
-     * The type of device posture integration.
-     */
-    type?:
-      | 'workspace_one'
-      | 'crowdstrike_s2s'
-      | 'uptycs'
-      | 'intune'
-      | 'kolide'
-      | 'tanium'
-      | 'sentinelone_s2s';
-  }
-
-  export namespace IntegrationListResponseItem {
-    /**
-     * The configuration object containing third-party integration information.
-     */
-    export interface Config {
-      /**
-       * The Workspace One API URL provided in the Workspace One Admin Dashboard.
-       */
-      api_url: string;
-
-      /**
-       * The Workspace One Authorization URL depending on your region.
-       */
-      auth_url: string;
-
-      /**
-       * The Workspace One client ID provided in the Workspace One Admin Dashboard.
-       */
-      client_id: string;
-    }
-  }
-}
+export type IntegrationListResponse = Array<TeamsDevicesDevicePostureIntegrations>;
 
 export type IntegrationDeleteResponse = unknown | string;
-
-export interface IntegrationEditResponse {
-  /**
-   * API UUID.
-   */
-  id?: string;
-
-  /**
-   * The configuration object containing third-party integration information.
-   */
-  config?: IntegrationEditResponse.Config;
-
-  /**
-   * The interval between each posture check with the third-party API. Use `m` for
-   * minutes (e.g. `5m`) and `h` for hours (e.g. `12h`).
-   */
-  interval?: string;
-
-  /**
-   * The name of the device posture integration.
-   */
-  name?: string;
-
-  /**
-   * The type of device posture integration.
-   */
-  type?: 'workspace_one' | 'crowdstrike_s2s' | 'uptycs' | 'intune' | 'kolide' | 'tanium' | 'sentinelone_s2s';
-}
-
-export namespace IntegrationEditResponse {
-  /**
-   * The configuration object containing third-party integration information.
-   */
-  export interface Config {
-    /**
-     * The Workspace One API URL provided in the Workspace One Admin Dashboard.
-     */
-    api_url: string;
-
-    /**
-     * The Workspace One Authorization URL depending on your region.
-     */
-    auth_url: string;
-
-    /**
-     * The Workspace One client ID provided in the Workspace One Admin Dashboard.
-     */
-    client_id: string;
-  }
-}
-
-export interface IntegrationGetResponse {
-  /**
-   * API UUID.
-   */
-  id?: string;
-
-  /**
-   * The configuration object containing third-party integration information.
-   */
-  config?: IntegrationGetResponse.Config;
-
-  /**
-   * The interval between each posture check with the third-party API. Use `m` for
-   * minutes (e.g. `5m`) and `h` for hours (e.g. `12h`).
-   */
-  interval?: string;
-
-  /**
-   * The name of the device posture integration.
-   */
-  name?: string;
-
-  /**
-   * The type of device posture integration.
-   */
-  type?: 'workspace_one' | 'crowdstrike_s2s' | 'uptycs' | 'intune' | 'kolide' | 'tanium' | 'sentinelone_s2s';
-}
-
-export namespace IntegrationGetResponse {
-  /**
-   * The configuration object containing third-party integration information.
-   */
-  export interface Config {
-    /**
-     * The Workspace One API URL provided in the Workspace One Admin Dashboard.
-     */
-    api_url: string;
-
-    /**
-     * The Workspace One Authorization URL depending on your region.
-     */
-    auth_url: string;
-
-    /**
-     * The Workspace One client ID provided in the Workspace One Admin Dashboard.
-     */
-    client_id: string;
-  }
-}
 
 export interface IntegrationCreateParams {
   /**
@@ -652,11 +493,9 @@ export interface IntegrationGetParams {
 }
 
 export namespace Integrations {
-  export import IntegrationCreateResponse = IntegrationsAPI.IntegrationCreateResponse;
+  export import TeamsDevicesDevicePostureIntegrations = IntegrationsAPI.TeamsDevicesDevicePostureIntegrations;
   export import IntegrationListResponse = IntegrationsAPI.IntegrationListResponse;
   export import IntegrationDeleteResponse = IntegrationsAPI.IntegrationDeleteResponse;
-  export import IntegrationEditResponse = IntegrationsAPI.IntegrationEditResponse;
-  export import IntegrationGetResponse = IntegrationsAPI.IntegrationGetResponse;
   export import IntegrationCreateParams = IntegrationsAPI.IntegrationCreateParams;
   export import IntegrationListParams = IntegrationsAPI.IntegrationListParams;
   export import IntegrationDeleteParams = IntegrationsAPI.IntegrationDeleteParams;

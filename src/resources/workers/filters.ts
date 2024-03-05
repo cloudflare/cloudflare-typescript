@@ -27,13 +27,13 @@ export class Filters extends APIResource {
     filterId: string,
     params: FilterUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<FilterUpdateResponse> {
+  ): Core.APIPromise<WorkersFilters> {
     const { zone_id, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/workers/filters/${filterId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: FilterUpdateResponse }>
+      }) as Core.APIPromise<{ result: WorkersFilters }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -66,14 +66,7 @@ export class Filters extends APIResource {
   }
 }
 
-export interface FilterCreateResponse {
-  /**
-   * Identifier
-   */
-  id: string;
-}
-
-export interface FilterUpdateResponse {
+export interface WorkersFilters {
   /**
    * Identifier
    */
@@ -84,20 +77,14 @@ export interface FilterUpdateResponse {
   pattern: string;
 }
 
-export type FilterListResponse = Array<FilterListResponse.FilterListResponseItem>;
-
-export namespace FilterListResponse {
-  export interface FilterListResponseItem {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    enabled: boolean;
-
-    pattern: string;
-  }
+export interface FilterCreateResponse {
+  /**
+   * Identifier
+   */
+  id: string;
 }
+
+export type FilterListResponse = Array<WorkersFilters>;
 
 export interface FilterDeleteResponse {
   /**
@@ -155,8 +142,8 @@ export interface FilterDeleteParams {
 }
 
 export namespace Filters {
+  export import WorkersFilters = FiltersAPI.WorkersFilters;
   export import FilterCreateResponse = FiltersAPI.FilterCreateResponse;
-  export import FilterUpdateResponse = FiltersAPI.FilterUpdateResponse;
   export import FilterListResponse = FiltersAPI.FilterListResponse;
   export import FilterDeleteResponse = FiltersAPI.FilterDeleteResponse;
   export import FilterCreateParams = FiltersAPI.FilterCreateParams;

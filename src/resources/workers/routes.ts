@@ -24,13 +24,13 @@ export class Routes extends APIResource {
     routeId: string,
     params: RouteUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RouteUpdateResponse> {
+  ): Core.APIPromise<WorkersRoutes> {
     const { zone_id, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/workers/routes/${routeId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: RouteUpdateResponse }>
+      }) as Core.APIPromise<{ result: WorkersRoutes }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -69,65 +69,35 @@ export class Routes extends APIResource {
     routeId: string,
     params: RouteGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RouteGetResponse> {
+  ): Core.APIPromise<WorkersRoutes> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/workers/routes/${routeId}`, options) as Core.APIPromise<{
-        result: RouteGetResponse;
+        result: WorkersRoutes;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
+export interface WorkersRoutes {
+  /**
+   * Identifier
+   */
+  id: string;
+
+  pattern: string;
+
+  /**
+   * Name of the script, used in URLs and route configuration.
+   */
+  script: string;
+}
+
 export type RouteCreateResponse = unknown | string;
 
-export interface RouteUpdateResponse {
-  /**
-   * Identifier
-   */
-  id: string;
-
-  pattern: string;
-
-  /**
-   * Name of the script, used in URLs and route configuration.
-   */
-  script: string;
-}
-
-export type RouteListResponse = Array<RouteListResponse.RouteListResponseItem>;
-
-export namespace RouteListResponse {
-  export interface RouteListResponseItem {
-    /**
-     * Identifier
-     */
-    id: string;
-
-    pattern: string;
-
-    /**
-     * Name of the script, used in URLs and route configuration.
-     */
-    script: string;
-  }
-}
+export type RouteListResponse = Array<WorkersRoutes>;
 
 export type RouteDeleteResponse = unknown | string;
-
-export interface RouteGetResponse {
-  /**
-   * Identifier
-   */
-  id: string;
-
-  pattern: string;
-
-  /**
-   * Name of the script, used in URLs and route configuration.
-   */
-  script: string;
-}
 
 export interface RouteCreateParams {
   /**
@@ -185,11 +155,10 @@ export interface RouteGetParams {
 }
 
 export namespace Routes {
+  export import WorkersRoutes = RoutesAPI.WorkersRoutes;
   export import RouteCreateResponse = RoutesAPI.RouteCreateResponse;
-  export import RouteUpdateResponse = RoutesAPI.RouteUpdateResponse;
   export import RouteListResponse = RoutesAPI.RouteListResponse;
   export import RouteDeleteResponse = RoutesAPI.RouteDeleteResponse;
-  export import RouteGetResponse = RoutesAPI.RouteGetResponse;
   export import RouteCreateParams = RoutesAPI.RouteCreateParams;
   export import RouteUpdateParams = RoutesAPI.RouteUpdateParams;
   export import RouteListParams = RoutesAPI.RouteListParams;

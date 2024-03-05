@@ -8,13 +8,13 @@ export class ACLs extends APIResource {
   /**
    * Create ACL.
    */
-  create(params: ACLCreateParams, options?: Core.RequestOptions): Core.APIPromise<ACLCreateResponse> {
+  create(params: ACLCreateParams, options?: Core.RequestOptions): Core.APIPromise<SecondaryDNSACL> {
     const { account_id, body } = params;
     return (
       this._client.post(`/accounts/${account_id}/secondary_dns/acls`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: ACLCreateResponse }>
+      }) as Core.APIPromise<{ result: SecondaryDNSACL }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -25,13 +25,13 @@ export class ACLs extends APIResource {
     aclId: unknown,
     params: ACLUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ACLUpdateResponse> {
+  ): Core.APIPromise<SecondaryDNSACL> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/secondary_dns/acls/${aclId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ACLUpdateResponse }>
+      }) as Core.APIPromise<{ result: SecondaryDNSACL }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -66,17 +66,17 @@ export class ACLs extends APIResource {
   /**
    * Get ACL.
    */
-  get(aclId: unknown, params: ACLGetParams, options?: Core.RequestOptions): Core.APIPromise<ACLGetResponse> {
+  get(aclId: unknown, params: ACLGetParams, options?: Core.RequestOptions): Core.APIPromise<SecondaryDNSACL> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/secondary_dns/acls/${aclId}`, options) as Core.APIPromise<{
-        result: ACLGetResponse;
+        result: SecondaryDNSACL;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface ACLCreateResponse {
+export interface SecondaryDNSACL {
   id: unknown;
 
   /**
@@ -94,66 +94,10 @@ export interface ACLCreateResponse {
   name: string;
 }
 
-export interface ACLUpdateResponse {
-  id: unknown;
-
-  /**
-   * Allowed IPv4/IPv6 address range of primary or secondary nameservers. This will
-   * be applied for the entire account. The IP range is used to allow additional
-   * NOTIFY IPs for secondary zones and IPs Cloudflare allows AXFR/IXFR requests from
-   * for primary zones. CIDRs are limited to a maximum of /24 for IPv4 and /64 for
-   * IPv6 respectively.
-   */
-  ip_range: string;
-
-  /**
-   * The name of the acl.
-   */
-  name: string;
-}
-
-export type ACLListResponse = Array<ACLListResponse.ACLListResponseItem>;
-
-export namespace ACLListResponse {
-  export interface ACLListResponseItem {
-    id: unknown;
-
-    /**
-     * Allowed IPv4/IPv6 address range of primary or secondary nameservers. This will
-     * be applied for the entire account. The IP range is used to allow additional
-     * NOTIFY IPs for secondary zones and IPs Cloudflare allows AXFR/IXFR requests from
-     * for primary zones. CIDRs are limited to a maximum of /24 for IPv4 and /64 for
-     * IPv6 respectively.
-     */
-    ip_range: string;
-
-    /**
-     * The name of the acl.
-     */
-    name: string;
-  }
-}
+export type ACLListResponse = Array<SecondaryDNSACL>;
 
 export interface ACLDeleteResponse {
   id?: unknown;
-}
-
-export interface ACLGetResponse {
-  id: unknown;
-
-  /**
-   * Allowed IPv4/IPv6 address range of primary or secondary nameservers. This will
-   * be applied for the entire account. The IP range is used to allow additional
-   * NOTIFY IPs for secondary zones and IPs Cloudflare allows AXFR/IXFR requests from
-   * for primary zones. CIDRs are limited to a maximum of /24 for IPv4 and /64 for
-   * IPv6 respectively.
-   */
-  ip_range: string;
-
-  /**
-   * The name of the acl.
-   */
-  name: string;
 }
 
 export interface ACLCreateParams {
@@ -202,11 +146,9 @@ export interface ACLGetParams {
 }
 
 export namespace ACLs {
-  export import ACLCreateResponse = ACLsAPI.ACLCreateResponse;
-  export import ACLUpdateResponse = ACLsAPI.ACLUpdateResponse;
+  export import SecondaryDNSACL = ACLsAPI.SecondaryDNSACL;
   export import ACLListResponse = ACLsAPI.ACLListResponse;
   export import ACLDeleteResponse = ACLsAPI.ACLDeleteResponse;
-  export import ACLGetResponse = ACLsAPI.ACLGetResponse;
   export import ACLCreateParams = ACLsAPI.ACLCreateParams;
   export import ACLUpdateParams = ACLsAPI.ACLUpdateParams;
   export import ACLListParams = ACLsAPI.ACLListParams;

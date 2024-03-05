@@ -9,5 +9,6 @@ export class EmailRouting extends APIResource {
 
 export namespace EmailRouting {
   export import Routing = RoutingAPI.Routing;
+  export import EmailSettings = RoutingAPI.EmailSettings;
   export import RoutingGetResponse = RoutingAPI.RoutingGetResponse;
 }

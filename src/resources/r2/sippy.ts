@@ -12,13 +12,13 @@ export class Sippy extends APIResource {
     bucketName: string,
     params: SippyUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SippyUpdateResponse> {
+  ): Core.APIPromise<R2Sippy> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/r2/buckets/${bucketName}/sippy`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: SippyUpdateResponse }>
+      }) as Core.APIPromise<{ result: R2Sippy }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -42,25 +42,21 @@ export class Sippy extends APIResource {
   /**
    * Gets configuration for Sippy for an existing R2 bucket.
    */
-  get(
-    bucketName: string,
-    params: SippyGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SippyGetResponse> {
+  get(bucketName: string, params: SippyGetParams, options?: Core.RequestOptions): Core.APIPromise<R2Sippy> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/r2/buckets/${bucketName}/sippy`, options) as Core.APIPromise<{
-        result: SippyGetResponse;
+        result: R2Sippy;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface SippyUpdateResponse {
+export interface R2Sippy {
   /**
    * Details about the configured destination bucket
    */
-  destination?: SippyUpdateResponse.Destination;
+  destination?: R2Sippy.Destination;
 
   /**
    * State of Sippy for this bucket
@@ -70,10 +66,10 @@ export interface SippyUpdateResponse {
   /**
    * Details about the configured source bucket
    */
-  source?: SippyUpdateResponse.Source;
+  source?: R2Sippy.Source;
 }
 
-export namespace SippyUpdateResponse {
+export namespace R2Sippy {
   /**
    * Details about the configured destination bucket
    */
@@ -113,61 +109,6 @@ export namespace SippyUpdateResponse {
 
 export interface SippyDeleteResponse {
   enabled?: false;
-}
-
-export interface SippyGetResponse {
-  /**
-   * Details about the configured destination bucket
-   */
-  destination?: SippyGetResponse.Destination;
-
-  /**
-   * State of Sippy for this bucket
-   */
-  enabled?: boolean;
-
-  /**
-   * Details about the configured source bucket
-   */
-  source?: SippyGetResponse.Source;
-}
-
-export namespace SippyGetResponse {
-  /**
-   * Details about the configured destination bucket
-   */
-  export interface Destination {
-    /**
-     * ID of the Cloudflare API token used when writing objects to this bucket
-     */
-    accessKeyId?: string;
-
-    account?: string;
-
-    /**
-     * Name of the bucket on the provider
-     */
-    bucket?: string;
-
-    provider?: 'r2';
-  }
-
-  /**
-   * Details about the configured source bucket
-   */
-  export interface Source {
-    /**
-     * Name of the bucket on the provider
-     */
-    bucket?: string;
-
-    provider?: 'aws' | 'gcs';
-
-    /**
-     * Region where the bucket resides (AWS only)
-     */
-    region?: string | null;
-  }
 }
 
 export interface SippyUpdateParams {
@@ -262,9 +203,8 @@ export interface SippyGetParams {
 }
 
 export namespace Sippy {
-  export import SippyUpdateResponse = SippyAPI.SippyUpdateResponse;
+  export import R2Sippy = SippyAPI.R2Sippy;
   export import SippyDeleteResponse = SippyAPI.SippyDeleteResponse;
-  export import SippyGetResponse = SippyAPI.SippyGetResponse;
   export import SippyUpdateParams = SippyAPI.SippyUpdateParams;
   export import SippyDeleteParams = SippyAPI.SippyDeleteParams;
   export import SippyGetParams = SippyAPI.SippyGetParams;

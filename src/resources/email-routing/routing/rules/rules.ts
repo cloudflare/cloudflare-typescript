@@ -107,6 +107,77 @@ export class Rules extends APIResource {
 
 export class RuleListResponsesV4PagePaginationArray extends V4PagePaginationArray<RuleListResponse> {}
 
+export interface EmailRules {
+  /**
+   * Routing rule identifier.
+   */
+  id?: string;
+
+  /**
+   * List actions patterns.
+   */
+  actions?: Array<EmailRules.Action>;
+
+  /**
+   * Routing rule status.
+   */
+  enabled?: true | false;
+
+  /**
+   * Matching patterns to forward to your actions.
+   */
+  matchers?: Array<EmailRules.Matcher>;
+
+  /**
+   * Routing rule name.
+   */
+  name?: string;
+
+  /**
+   * Priority of the routing rule.
+   */
+  priority?: number;
+
+  /**
+   * Routing rule tag. (Deprecated, replaced by routing rule identifier)
+   */
+  tag?: string;
+}
+
+export namespace EmailRules {
+  /**
+   * Actions pattern.
+   */
+  export interface Action {
+    /**
+     * Type of supported action.
+     */
+    type: 'drop' | 'forward' | 'worker';
+
+    value: Array<string>;
+  }
+
+  /**
+   * Matching pattern to forward your actions.
+   */
+  export interface Matcher {
+    /**
+     * Field for type matcher.
+     */
+    field: 'to';
+
+    /**
+     * Type of matcher.
+     */
+    type: 'literal';
+
+    /**
+     * Value for matcher.
+     */
+    value: string;
+  }
+}
+
 export interface RuleCreateResponse {
   /**
    * Routing rule identifier.
@@ -592,6 +663,7 @@ export interface RuleListParams extends V4PagePaginationArrayParams {
 }
 
 export namespace Rules {
+  export import EmailRules = RulesAPI.EmailRules;
   export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
   export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
   export import RuleListResponse = RulesAPI.RuleListResponse;
@@ -602,7 +674,6 @@ export namespace Rules {
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
   export import RuleListParams = RulesAPI.RuleListParams;
   export import CatchAlls = CatchAllsAPI.CatchAlls;
-  export import CatchAllUpdateResponse = CatchAllsAPI.CatchAllUpdateResponse;
-  export import CatchAllGetResponse = CatchAllsAPI.CatchAllGetResponse;
+  export import EmailCatchAllRule = CatchAllsAPI.EmailCatchAllRule;
   export import CatchAllUpdateParams = CatchAllsAPI.CatchAllUpdateParams;
 }

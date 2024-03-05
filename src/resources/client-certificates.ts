@@ -12,11 +12,11 @@ export class ClientCertificates extends APIResource {
   create(
     params: ClientCertificateCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ClientCertificateCreateResponse> {
+  ): Core.APIPromise<TLSCertificatesAndHostnamesClientCertificate> {
     const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/client_certificates`, { body, ...options }) as Core.APIPromise<{
-        result: ClientCertificateCreateResponse;
+        result: TLSCertificatesAndHostnamesClientCertificate;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -28,11 +28,14 @@ export class ClientCertificates extends APIResource {
   list(
     params: ClientCertificateListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<ClientCertificateListResponsesV4PagePaginationArray, ClientCertificateListResponse> {
+  ): Core.PagePromise<
+    TLSCertificatesAndHostnamesClientCertificatesV4PagePaginationArray,
+    TLSCertificatesAndHostnamesClientCertificate
+  > {
     const { zone_id, ...query } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/client_certificates`,
-      ClientCertificateListResponsesV4PagePaginationArray,
+      TLSCertificatesAndHostnamesClientCertificatesV4PagePaginationArray,
       { query, ...options },
     );
   }
@@ -45,13 +48,13 @@ export class ClientCertificates extends APIResource {
     clientCertificateId: string,
     params: ClientCertificateDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ClientCertificateDeleteResponse> {
+  ): Core.APIPromise<TLSCertificatesAndHostnamesClientCertificate> {
     const { zone_id } = params;
     return (
       this._client.delete(
         `/zones/${zone_id}/client_certificates/${clientCertificateId}`,
         options,
-      ) as Core.APIPromise<{ result: ClientCertificateDeleteResponse }>
+      ) as Core.APIPromise<{ result: TLSCertificatesAndHostnamesClientCertificate }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -63,13 +66,13 @@ export class ClientCertificates extends APIResource {
     clientCertificateId: string,
     params: ClientCertificateEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ClientCertificateEditResponse> {
+  ): Core.APIPromise<TLSCertificatesAndHostnamesClientCertificate> {
     const { zone_id } = params;
     return (
       this._client.patch(
         `/zones/${zone_id}/client_certificates/${clientCertificateId}`,
         options,
-      ) as Core.APIPromise<{ result: ClientCertificateEditResponse }>
+      ) as Core.APIPromise<{ result: TLSCertificatesAndHostnamesClientCertificate }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -80,20 +83,20 @@ export class ClientCertificates extends APIResource {
     clientCertificateId: string,
     params: ClientCertificateGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ClientCertificateGetResponse> {
+  ): Core.APIPromise<TLSCertificatesAndHostnamesClientCertificate> {
     const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/client_certificates/${clientCertificateId}`,
         options,
-      ) as Core.APIPromise<{ result: ClientCertificateGetResponse }>
+      ) as Core.APIPromise<{ result: TLSCertificatesAndHostnamesClientCertificate }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class ClientCertificateListResponsesV4PagePaginationArray extends V4PagePaginationArray<ClientCertificateListResponse> {}
+export class TLSCertificatesAndHostnamesClientCertificatesV4PagePaginationArray extends V4PagePaginationArray<TLSCertificatesAndHostnamesClientCertificate> {}
 
-export interface ClientCertificateCreateResponse {
+export interface TLSCertificatesAndHostnamesClientCertificate {
   /**
    * Identifier
    */
@@ -107,7 +110,7 @@ export interface ClientCertificateCreateResponse {
   /**
    * Certificate Authority used to issue the Client Certificate
    */
-  certificate_authority?: ClientCertificateCreateResponse.CertificateAuthority;
+  certificate_authority?: TLSCertificatesAndHostnamesClientCertificate.CertificateAuthority;
 
   /**
    * Common Name of the Client Certificate
@@ -186,423 +189,7 @@ export interface ClientCertificateCreateResponse {
   validity_days?: number;
 }
 
-export namespace ClientCertificateCreateResponse {
-  /**
-   * Certificate Authority used to issue the Client Certificate
-   */
-  export interface CertificateAuthority {
-    id?: string;
-
-    name?: string;
-  }
-}
-
-export interface ClientCertificateListResponse {
-  /**
-   * Identifier
-   */
-  id?: string;
-
-  /**
-   * The Client Certificate PEM
-   */
-  certificate?: string;
-
-  /**
-   * Certificate Authority used to issue the Client Certificate
-   */
-  certificate_authority?: ClientCertificateListResponse.CertificateAuthority;
-
-  /**
-   * Common Name of the Client Certificate
-   */
-  common_name?: string;
-
-  /**
-   * Country, provided by the CSR
-   */
-  country?: string;
-
-  /**
-   * The Certificate Signing Request (CSR). Must be newline-encoded.
-   */
-  csr?: string;
-
-  /**
-   * Date that the Client Certificate expires
-   */
-  expires_on?: string;
-
-  /**
-   * Unique identifier of the Client Certificate
-   */
-  fingerprint_sha256?: string;
-
-  /**
-   * Date that the Client Certificate was issued by the Certificate Authority
-   */
-  issued_on?: string;
-
-  /**
-   * Location, provided by the CSR
-   */
-  location?: string;
-
-  /**
-   * Organization, provided by the CSR
-   */
-  organization?: string;
-
-  /**
-   * Organizational Unit, provided by the CSR
-   */
-  organizational_unit?: string;
-
-  /**
-   * The serial number on the created Client Certificate.
-   */
-  serial_number?: string;
-
-  /**
-   * The type of hash used for the Client Certificate..
-   */
-  signature?: string;
-
-  /**
-   * Subject Key Identifier
-   */
-  ski?: string;
-
-  /**
-   * State, provided by the CSR
-   */
-  state?: string;
-
-  /**
-   * Client Certificates may be active or revoked, and the pending_reactivation or
-   * pending_revocation represent in-progress asynchronous transitions
-   */
-  status?: 'active' | 'pending_reactivation' | 'pending_revocation' | 'revoked';
-
-  /**
-   * The number of days the Client Certificate will be valid after the issued_on date
-   */
-  validity_days?: number;
-}
-
-export namespace ClientCertificateListResponse {
-  /**
-   * Certificate Authority used to issue the Client Certificate
-   */
-  export interface CertificateAuthority {
-    id?: string;
-
-    name?: string;
-  }
-}
-
-export interface ClientCertificateDeleteResponse {
-  /**
-   * Identifier
-   */
-  id?: string;
-
-  /**
-   * The Client Certificate PEM
-   */
-  certificate?: string;
-
-  /**
-   * Certificate Authority used to issue the Client Certificate
-   */
-  certificate_authority?: ClientCertificateDeleteResponse.CertificateAuthority;
-
-  /**
-   * Common Name of the Client Certificate
-   */
-  common_name?: string;
-
-  /**
-   * Country, provided by the CSR
-   */
-  country?: string;
-
-  /**
-   * The Certificate Signing Request (CSR). Must be newline-encoded.
-   */
-  csr?: string;
-
-  /**
-   * Date that the Client Certificate expires
-   */
-  expires_on?: string;
-
-  /**
-   * Unique identifier of the Client Certificate
-   */
-  fingerprint_sha256?: string;
-
-  /**
-   * Date that the Client Certificate was issued by the Certificate Authority
-   */
-  issued_on?: string;
-
-  /**
-   * Location, provided by the CSR
-   */
-  location?: string;
-
-  /**
-   * Organization, provided by the CSR
-   */
-  organization?: string;
-
-  /**
-   * Organizational Unit, provided by the CSR
-   */
-  organizational_unit?: string;
-
-  /**
-   * The serial number on the created Client Certificate.
-   */
-  serial_number?: string;
-
-  /**
-   * The type of hash used for the Client Certificate..
-   */
-  signature?: string;
-
-  /**
-   * Subject Key Identifier
-   */
-  ski?: string;
-
-  /**
-   * State, provided by the CSR
-   */
-  state?: string;
-
-  /**
-   * Client Certificates may be active or revoked, and the pending_reactivation or
-   * pending_revocation represent in-progress asynchronous transitions
-   */
-  status?: 'active' | 'pending_reactivation' | 'pending_revocation' | 'revoked';
-
-  /**
-   * The number of days the Client Certificate will be valid after the issued_on date
-   */
-  validity_days?: number;
-}
-
-export namespace ClientCertificateDeleteResponse {
-  /**
-   * Certificate Authority used to issue the Client Certificate
-   */
-  export interface CertificateAuthority {
-    id?: string;
-
-    name?: string;
-  }
-}
-
-export interface ClientCertificateEditResponse {
-  /**
-   * Identifier
-   */
-  id?: string;
-
-  /**
-   * The Client Certificate PEM
-   */
-  certificate?: string;
-
-  /**
-   * Certificate Authority used to issue the Client Certificate
-   */
-  certificate_authority?: ClientCertificateEditResponse.CertificateAuthority;
-
-  /**
-   * Common Name of the Client Certificate
-   */
-  common_name?: string;
-
-  /**
-   * Country, provided by the CSR
-   */
-  country?: string;
-
-  /**
-   * The Certificate Signing Request (CSR). Must be newline-encoded.
-   */
-  csr?: string;
-
-  /**
-   * Date that the Client Certificate expires
-   */
-  expires_on?: string;
-
-  /**
-   * Unique identifier of the Client Certificate
-   */
-  fingerprint_sha256?: string;
-
-  /**
-   * Date that the Client Certificate was issued by the Certificate Authority
-   */
-  issued_on?: string;
-
-  /**
-   * Location, provided by the CSR
-   */
-  location?: string;
-
-  /**
-   * Organization, provided by the CSR
-   */
-  organization?: string;
-
-  /**
-   * Organizational Unit, provided by the CSR
-   */
-  organizational_unit?: string;
-
-  /**
-   * The serial number on the created Client Certificate.
-   */
-  serial_number?: string;
-
-  /**
-   * The type of hash used for the Client Certificate..
-   */
-  signature?: string;
-
-  /**
-   * Subject Key Identifier
-   */
-  ski?: string;
-
-  /**
-   * State, provided by the CSR
-   */
-  state?: string;
-
-  /**
-   * Client Certificates may be active or revoked, and the pending_reactivation or
-   * pending_revocation represent in-progress asynchronous transitions
-   */
-  status?: 'active' | 'pending_reactivation' | 'pending_revocation' | 'revoked';
-
-  /**
-   * The number of days the Client Certificate will be valid after the issued_on date
-   */
-  validity_days?: number;
-}
-
-export namespace ClientCertificateEditResponse {
-  /**
-   * Certificate Authority used to issue the Client Certificate
-   */
-  export interface CertificateAuthority {
-    id?: string;
-
-    name?: string;
-  }
-}
-
-export interface ClientCertificateGetResponse {
-  /**
-   * Identifier
-   */
-  id?: string;
-
-  /**
-   * The Client Certificate PEM
-   */
-  certificate?: string;
-
-  /**
-   * Certificate Authority used to issue the Client Certificate
-   */
-  certificate_authority?: ClientCertificateGetResponse.CertificateAuthority;
-
-  /**
-   * Common Name of the Client Certificate
-   */
-  common_name?: string;
-
-  /**
-   * Country, provided by the CSR
-   */
-  country?: string;
-
-  /**
-   * The Certificate Signing Request (CSR). Must be newline-encoded.
-   */
-  csr?: string;
-
-  /**
-   * Date that the Client Certificate expires
-   */
-  expires_on?: string;
-
-  /**
-   * Unique identifier of the Client Certificate
-   */
-  fingerprint_sha256?: string;
-
-  /**
-   * Date that the Client Certificate was issued by the Certificate Authority
-   */
-  issued_on?: string;
-
-  /**
-   * Location, provided by the CSR
-   */
-  location?: string;
-
-  /**
-   * Organization, provided by the CSR
-   */
-  organization?: string;
-
-  /**
-   * Organizational Unit, provided by the CSR
-   */
-  organizational_unit?: string;
-
-  /**
-   * The serial number on the created Client Certificate.
-   */
-  serial_number?: string;
-
-  /**
-   * The type of hash used for the Client Certificate..
-   */
-  signature?: string;
-
-  /**
-   * Subject Key Identifier
-   */
-  ski?: string;
-
-  /**
-   * State, provided by the CSR
-   */
-  state?: string;
-
-  /**
-   * Client Certificates may be active or revoked, and the pending_reactivation or
-   * pending_revocation represent in-progress asynchronous transitions
-   */
-  status?: 'active' | 'pending_reactivation' | 'pending_revocation' | 'revoked';
-
-  /**
-   * The number of days the Client Certificate will be valid after the issued_on date
-   */
-  validity_days?: number;
-}
-
-export namespace ClientCertificateGetResponse {
+export namespace TLSCertificatesAndHostnamesClientCertificate {
   /**
    * Certificate Authority used to issue the Client Certificate
    */
@@ -675,12 +262,8 @@ export interface ClientCertificateGetParams {
 }
 
 export namespace ClientCertificates {
-  export import ClientCertificateCreateResponse = ClientCertificatesAPI.ClientCertificateCreateResponse;
-  export import ClientCertificateListResponse = ClientCertificatesAPI.ClientCertificateListResponse;
-  export import ClientCertificateDeleteResponse = ClientCertificatesAPI.ClientCertificateDeleteResponse;
-  export import ClientCertificateEditResponse = ClientCertificatesAPI.ClientCertificateEditResponse;
-  export import ClientCertificateGetResponse = ClientCertificatesAPI.ClientCertificateGetResponse;
-  export import ClientCertificateListResponsesV4PagePaginationArray = ClientCertificatesAPI.ClientCertificateListResponsesV4PagePaginationArray;
+  export import TLSCertificatesAndHostnamesClientCertificate = ClientCertificatesAPI.TLSCertificatesAndHostnamesClientCertificate;
+  export import TLSCertificatesAndHostnamesClientCertificatesV4PagePaginationArray = ClientCertificatesAPI.TLSCertificatesAndHostnamesClientCertificatesV4PagePaginationArray;
   export import ClientCertificateCreateParams = ClientCertificatesAPI.ClientCertificateCreateParams;
   export import ClientCertificateListParams = ClientCertificatesAPI.ClientCertificateListParams;
   export import ClientCertificateDeleteParams = ClientCertificatesAPI.ClientCertificateDeleteParams;

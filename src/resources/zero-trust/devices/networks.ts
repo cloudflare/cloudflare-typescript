@@ -11,11 +11,11 @@ export class Networks extends APIResource {
   create(
     params: NetworkCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<NetworkCreateResponse | null> {
+  ): Core.APIPromise<TeamsDevicesDeviceManagedNetworks | null> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/devices/networks`, { body, ...options }) as Core.APIPromise<{
-        result: NetworkCreateResponse | null;
+        result: TeamsDevicesDeviceManagedNetworks | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -27,13 +27,13 @@ export class Networks extends APIResource {
     networkId: string,
     params: NetworkUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<NetworkUpdateResponse | null> {
+  ): Core.APIPromise<TeamsDevicesDeviceManagedNetworks | null> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/devices/networks/${networkId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: NetworkUpdateResponse | null }>
+      }) as Core.APIPromise<{ result: TeamsDevicesDeviceManagedNetworks | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -77,22 +77,22 @@ export class Networks extends APIResource {
     networkId: string,
     params: NetworkGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<NetworkGetResponse | null> {
+  ): Core.APIPromise<TeamsDevicesDeviceManagedNetworks | null> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/devices/networks/${networkId}`, options) as Core.APIPromise<{
-        result: NetworkGetResponse | null;
+        result: TeamsDevicesDeviceManagedNetworks | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface NetworkCreateResponse {
+export interface TeamsDevicesDeviceManagedNetworks {
   /**
    * The configuration object containing information for the WARP client to detect
    * the managed network.
    */
-  config?: NetworkCreateResponse.Config;
+  config?: TeamsDevicesDeviceManagedNetworks.Config;
 
   /**
    * The name of the device managed network. This name must be unique.
@@ -110,7 +110,7 @@ export interface NetworkCreateResponse {
   type?: 'tls';
 }
 
-export namespace NetworkCreateResponse {
+export namespace TeamsDevicesDeviceManagedNetworks {
   /**
    * The configuration object containing information for the WARP client to detect
    * the managed network.
@@ -131,189 +131,9 @@ export namespace NetworkCreateResponse {
   }
 }
 
-export interface NetworkUpdateResponse {
-  /**
-   * The configuration object containing information for the WARP client to detect
-   * the managed network.
-   */
-  config?: NetworkUpdateResponse.Config;
+export type NetworkListResponse = Array<TeamsDevicesDeviceManagedNetworks>;
 
-  /**
-   * The name of the device managed network. This name must be unique.
-   */
-  name?: string;
-
-  /**
-   * API UUID.
-   */
-  network_id?: string;
-
-  /**
-   * The type of device managed network.
-   */
-  type?: 'tls';
-}
-
-export namespace NetworkUpdateResponse {
-  /**
-   * The configuration object containing information for the WARP client to detect
-   * the managed network.
-   */
-  export interface Config {
-    /**
-     * A network address of the form "host:port" that the WARP client will use to
-     * detect the presence of a TLS host.
-     */
-    tls_sockaddr: string;
-
-    /**
-     * The SHA-256 hash of the TLS certificate presented by the host found at
-     * tls_sockaddr. If absent, regular certificate verification (trusted roots, valid
-     * timestamp, etc) will be used to validate the certificate.
-     */
-    sha256?: string;
-  }
-}
-
-export type NetworkListResponse = Array<NetworkListResponse.NetworkListResponseItem>;
-
-export namespace NetworkListResponse {
-  export interface NetworkListResponseItem {
-    /**
-     * The configuration object containing information for the WARP client to detect
-     * the managed network.
-     */
-    config?: NetworkListResponseItem.Config;
-
-    /**
-     * The name of the device managed network. This name must be unique.
-     */
-    name?: string;
-
-    /**
-     * API UUID.
-     */
-    network_id?: string;
-
-    /**
-     * The type of device managed network.
-     */
-    type?: 'tls';
-  }
-
-  export namespace NetworkListResponseItem {
-    /**
-     * The configuration object containing information for the WARP client to detect
-     * the managed network.
-     */
-    export interface Config {
-      /**
-       * A network address of the form "host:port" that the WARP client will use to
-       * detect the presence of a TLS host.
-       */
-      tls_sockaddr: string;
-
-      /**
-       * The SHA-256 hash of the TLS certificate presented by the host found at
-       * tls_sockaddr. If absent, regular certificate verification (trusted roots, valid
-       * timestamp, etc) will be used to validate the certificate.
-       */
-      sha256?: string;
-    }
-  }
-}
-
-export type NetworkDeleteResponse = Array<NetworkDeleteResponse.NetworkDeleteResponseItem>;
-
-export namespace NetworkDeleteResponse {
-  export interface NetworkDeleteResponseItem {
-    /**
-     * The configuration object containing information for the WARP client to detect
-     * the managed network.
-     */
-    config?: NetworkDeleteResponseItem.Config;
-
-    /**
-     * The name of the device managed network. This name must be unique.
-     */
-    name?: string;
-
-    /**
-     * API UUID.
-     */
-    network_id?: string;
-
-    /**
-     * The type of device managed network.
-     */
-    type?: 'tls';
-  }
-
-  export namespace NetworkDeleteResponseItem {
-    /**
-     * The configuration object containing information for the WARP client to detect
-     * the managed network.
-     */
-    export interface Config {
-      /**
-       * A network address of the form "host:port" that the WARP client will use to
-       * detect the presence of a TLS host.
-       */
-      tls_sockaddr: string;
-
-      /**
-       * The SHA-256 hash of the TLS certificate presented by the host found at
-       * tls_sockaddr. If absent, regular certificate verification (trusted roots, valid
-       * timestamp, etc) will be used to validate the certificate.
-       */
-      sha256?: string;
-    }
-  }
-}
-
-export interface NetworkGetResponse {
-  /**
-   * The configuration object containing information for the WARP client to detect
-   * the managed network.
-   */
-  config?: NetworkGetResponse.Config;
-
-  /**
-   * The name of the device managed network. This name must be unique.
-   */
-  name?: string;
-
-  /**
-   * API UUID.
-   */
-  network_id?: string;
-
-  /**
-   * The type of device managed network.
-   */
-  type?: 'tls';
-}
-
-export namespace NetworkGetResponse {
-  /**
-   * The configuration object containing information for the WARP client to detect
-   * the managed network.
-   */
-  export interface Config {
-    /**
-     * A network address of the form "host:port" that the WARP client will use to
-     * detect the presence of a TLS host.
-     */
-    tls_sockaddr: string;
-
-    /**
-     * The SHA-256 hash of the TLS certificate presented by the host found at
-     * tls_sockaddr. If absent, regular certificate verification (trusted roots, valid
-     * timestamp, etc) will be used to validate the certificate.
-     */
-    sha256?: string;
-  }
-}
+export type NetworkDeleteResponse = Array<TeamsDevicesDeviceManagedNetworks>;
 
 export interface NetworkCreateParams {
   /**
@@ -416,11 +236,9 @@ export interface NetworkGetParams {
 }
 
 export namespace Networks {
-  export import NetworkCreateResponse = NetworksAPI.NetworkCreateResponse;
-  export import NetworkUpdateResponse = NetworksAPI.NetworkUpdateResponse;
+  export import TeamsDevicesDeviceManagedNetworks = NetworksAPI.TeamsDevicesDeviceManagedNetworks;
   export import NetworkListResponse = NetworksAPI.NetworkListResponse;
   export import NetworkDeleteResponse = NetworksAPI.NetworkDeleteResponse;
-  export import NetworkGetResponse = NetworksAPI.NetworkGetResponse;
   export import NetworkCreateParams = NetworksAPI.NetworkCreateParams;
   export import NetworkUpdateParams = NetworksAPI.NetworkUpdateParams;
   export import NetworkListParams = NetworksAPI.NetworkListParams;

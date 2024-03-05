@@ -20,12 +20,12 @@ export class Requests extends APIResource {
     accountIdentifier: string,
     body: RequestCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RequestCreateResponse> {
+  ): Core.APIPromise<CloudforceOneRequestItem> {
     return (
       this._client.post(`/accounts/${accountIdentifier}/cloudforce-one/requests/new`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: RequestCreateResponse }>
+      }) as Core.APIPromise<{ result: CloudforceOneRequestItem }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -39,12 +39,12 @@ export class Requests extends APIResource {
     requestIdentifier: string,
     body: RequestUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RequestUpdateResponse> {
+  ): Core.APIPromise<CloudforceOneRequestItem> {
     return (
       this._client.put(`/accounts/${accountIdentifier}/cloudforce-one/requests/${requestIdentifier}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: RequestUpdateResponse }>
+      }) as Core.APIPromise<{ result: CloudforceOneRequestItem }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -55,10 +55,10 @@ export class Requests extends APIResource {
     accountIdentifier: string,
     body: RequestListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<RequestListResponsesV4PagePaginationArray, RequestListResponse> {
+  ): Core.PagePromise<CloudforceOneRequestListItemsV4PagePaginationArray, CloudforceOneRequestListItem> {
     return this._client.getAPIList(
       `/accounts/${accountIdentifier}/cloudforce-one/requests`,
-      RequestListResponsesV4PagePaginationArray,
+      CloudforceOneRequestListItemsV4PagePaginationArray,
       { body, method: 'post', ...options },
     );
   }
@@ -85,12 +85,12 @@ export class Requests extends APIResource {
   constants(
     accountIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RequestConstantsResponse> {
+  ): Core.APIPromise<CloudforceOneRequestConstants> {
     return (
       this._client.get(
         `/accounts/${accountIdentifier}/cloudforce-one/requests/constants`,
         options,
-      ) as Core.APIPromise<{ result: RequestConstantsResponse }>
+      ) as Core.APIPromise<{ result: CloudforceOneRequestConstants }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -101,43 +101,76 @@ export class Requests extends APIResource {
     accountIdentifier: string,
     requestIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RequestGetResponse> {
+  ): Core.APIPromise<CloudforceOneRequestItem> {
     return (
       this._client.get(
         `/accounts/${accountIdentifier}/cloudforce-one/requests/${requestIdentifier}`,
         options,
-      ) as Core.APIPromise<{ result: RequestGetResponse }>
+      ) as Core.APIPromise<{ result: CloudforceOneRequestItem }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get Request Quota
    */
-  quota(accountIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<RequestQuotaResponse> {
+  quota(accountIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<CloudforceOneQuota> {
     return (
       this._client.get(
         `/accounts/${accountIdentifier}/cloudforce-one/requests/quota`,
         options,
-      ) as Core.APIPromise<{ result: RequestQuotaResponse }>
+      ) as Core.APIPromise<{ result: CloudforceOneQuota }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get Request Types
    */
-  types(accountIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<RequestTypesResponse> {
+  types(
+    accountIdentifier: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CloudforceOneRequestTypes> {
     return (
       this._client.get(
         `/accounts/${accountIdentifier}/cloudforce-one/requests/types`,
         options,
-      ) as Core.APIPromise<{ result: RequestTypesResponse }>
+      ) as Core.APIPromise<{ result: CloudforceOneRequestTypes }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class RequestListResponsesV4PagePaginationArray extends V4PagePaginationArray<RequestListResponse> {}
+export class CloudforceOneRequestListItemsV4PagePaginationArray extends V4PagePaginationArray<CloudforceOneRequestListItem> {}
 
-export interface RequestCreateResponse {
+export interface CloudforceOneQuota {
+  /**
+   * Anniversary date is when annual quota limit is refresh
+   */
+  anniversary_date?: string;
+
+  /**
+   * Quater anniversary date is when quota limit is refreshed each quarter
+   */
+  quarter_anniversary_date?: string;
+
+  /**
+   * Tokens for the quarter
+   */
+  quota?: number;
+
+  /**
+   * Tokens remaining for the quarter
+   */
+  remaining?: number;
+}
+
+export interface CloudforceOneRequestConstants {
+  priority?: Array<'routine' | 'high' | 'urgent'>;
+
+  status?: Array<'open' | 'accepted' | 'reported' | 'approved' | 'completed' | 'declined'>;
+
+  tlp?: Array<'clear' | 'amber' | 'amber-strict' | 'green' | 'red'>;
+}
+
+export interface CloudforceOneRequestItem {
   /**
    * UUID
    */
@@ -192,62 +225,7 @@ export interface RequestCreateResponse {
   tokens?: number;
 }
 
-export interface RequestUpdateResponse {
-  /**
-   * UUID
-   */
-  id: string;
-
-  /**
-   * Request content
-   */
-  content: string;
-
-  created: string;
-
-  priority: string;
-
-  /**
-   * Requested information from request
-   */
-  request: string;
-
-  /**
-   * Brief description of the request
-   */
-  summary: string;
-
-  /**
-   * The CISA defined Traffic Light Protocol (TLP)
-   */
-  tlp: 'clear' | 'amber' | 'amber-strict' | 'green' | 'red';
-
-  updated: string;
-
-  completed?: string;
-
-  /**
-   * Tokens for the request messages
-   */
-  message_tokens?: number;
-
-  /**
-   * Readable Request ID
-   */
-  readable_id?: string;
-
-  /**
-   * Request Status
-   */
-  status?: 'open' | 'accepted' | 'reported' | 'approved' | 'completed' | 'declined';
-
-  /**
-   * Tokens for the request
-   */
-  tokens?: number;
-}
-
-export interface RequestListResponse {
+export interface CloudforceOneRequestListItem {
   /**
    * UUID
    */
@@ -306,94 +284,9 @@ export interface RequestListResponse {
   tokens?: number;
 }
 
+export type CloudforceOneRequestTypes = Array<string>;
+
 export type RequestDeleteResponse = unknown | Array<unknown> | string;
-
-export interface RequestConstantsResponse {
-  priority?: Array<'routine' | 'high' | 'urgent'>;
-
-  status?: Array<'open' | 'accepted' | 'reported' | 'approved' | 'completed' | 'declined'>;
-
-  tlp?: Array<'clear' | 'amber' | 'amber-strict' | 'green' | 'red'>;
-}
-
-export interface RequestGetResponse {
-  /**
-   * UUID
-   */
-  id: string;
-
-  /**
-   * Request content
-   */
-  content: string;
-
-  created: string;
-
-  priority: string;
-
-  /**
-   * Requested information from request
-   */
-  request: string;
-
-  /**
-   * Brief description of the request
-   */
-  summary: string;
-
-  /**
-   * The CISA defined Traffic Light Protocol (TLP)
-   */
-  tlp: 'clear' | 'amber' | 'amber-strict' | 'green' | 'red';
-
-  updated: string;
-
-  completed?: string;
-
-  /**
-   * Tokens for the request messages
-   */
-  message_tokens?: number;
-
-  /**
-   * Readable Request ID
-   */
-  readable_id?: string;
-
-  /**
-   * Request Status
-   */
-  status?: 'open' | 'accepted' | 'reported' | 'approved' | 'completed' | 'declined';
-
-  /**
-   * Tokens for the request
-   */
-  tokens?: number;
-}
-
-export interface RequestQuotaResponse {
-  /**
-   * Anniversary date is when annual quota limit is refresh
-   */
-  anniversary_date?: string;
-
-  /**
-   * Quater anniversary date is when quota limit is refreshed each quarter
-   */
-  quarter_anniversary_date?: string;
-
-  /**
-   * Tokens for the quarter
-   */
-  quota?: number;
-
-  /**
-   * Tokens remaining for the quarter
-   */
-  remaining?: number;
-}
-
-export type RequestTypesResponse = Array<string>;
 
 export interface RequestCreateParams {
   /**
@@ -492,32 +385,26 @@ export interface RequestListParams extends V4PagePaginationArrayParams {
 }
 
 export namespace Requests {
-  export import RequestCreateResponse = RequestsAPI.RequestCreateResponse;
-  export import RequestUpdateResponse = RequestsAPI.RequestUpdateResponse;
-  export import RequestListResponse = RequestsAPI.RequestListResponse;
+  export import CloudforceOneQuota = RequestsAPI.CloudforceOneQuota;
+  export import CloudforceOneRequestConstants = RequestsAPI.CloudforceOneRequestConstants;
+  export import CloudforceOneRequestItem = RequestsAPI.CloudforceOneRequestItem;
+  export import CloudforceOneRequestListItem = RequestsAPI.CloudforceOneRequestListItem;
+  export import CloudforceOneRequestTypes = RequestsAPI.CloudforceOneRequestTypes;
   export import RequestDeleteResponse = RequestsAPI.RequestDeleteResponse;
-  export import RequestConstantsResponse = RequestsAPI.RequestConstantsResponse;
-  export import RequestGetResponse = RequestsAPI.RequestGetResponse;
-  export import RequestQuotaResponse = RequestsAPI.RequestQuotaResponse;
-  export import RequestTypesResponse = RequestsAPI.RequestTypesResponse;
-  export import RequestListResponsesV4PagePaginationArray = RequestsAPI.RequestListResponsesV4PagePaginationArray;
+  export import CloudforceOneRequestListItemsV4PagePaginationArray = RequestsAPI.CloudforceOneRequestListItemsV4PagePaginationArray;
   export import RequestCreateParams = RequestsAPI.RequestCreateParams;
   export import RequestUpdateParams = RequestsAPI.RequestUpdateParams;
   export import RequestListParams = RequestsAPI.RequestListParams;
   export import Message = MessageAPI.Message;
-  export import MessageCreateResponse = MessageAPI.MessageCreateResponse;
-  export import MessageUpdateResponse = MessageAPI.MessageUpdateResponse;
+  export import CloudforceOneRequestMessageItem = MessageAPI.CloudforceOneRequestMessageItem;
   export import MessageDeleteResponse = MessageAPI.MessageDeleteResponse;
   export import MessageGetResponse = MessageAPI.MessageGetResponse;
   export import MessageCreateParams = MessageAPI.MessageCreateParams;
   export import MessageUpdateParams = MessageAPI.MessageUpdateParams;
   export import MessageGetParams = MessageAPI.MessageGetParams;
   export import Priority = PriorityAPI.Priority;
-  export import PriorityCreateResponse = PriorityAPI.PriorityCreateResponse;
-  export import PriorityUpdateResponse = PriorityAPI.PriorityUpdateResponse;
+  export import CloudforceOnePriorityItem = PriorityAPI.CloudforceOnePriorityItem;
   export import PriorityDeleteResponse = PriorityAPI.PriorityDeleteResponse;
-  export import PriorityGetResponse = PriorityAPI.PriorityGetResponse;
-  export import PriorityQuotaResponse = PriorityAPI.PriorityQuotaResponse;
   export import PriorityCreateParams = PriorityAPI.PriorityCreateParams;
   export import PriorityUpdateParams = PriorityAPI.PriorityUpdateParams;
 }

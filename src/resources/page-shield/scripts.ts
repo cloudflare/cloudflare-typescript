@@ -30,37 +30,35 @@ export class Scripts extends APIResource {
   }
 }
 
-export type ScriptListResponse = Array<ScriptListResponse.ScriptListResponseItem>;
+export interface PageShieldScript {
+  id?: unknown;
 
-export namespace ScriptListResponse {
-  export interface ScriptListResponseItem {
-    id?: unknown;
+  added_at?: unknown;
 
-    added_at?: unknown;
+  domain_reported_malicious?: unknown;
 
-    domain_reported_malicious?: unknown;
+  fetched_at?: unknown;
 
-    fetched_at?: unknown;
+  first_page_url?: unknown;
 
-    first_page_url?: unknown;
+  first_seen_at?: unknown;
 
-    first_seen_at?: unknown;
+  hash?: unknown;
 
-    hash?: unknown;
+  host?: unknown;
 
-    host?: unknown;
+  js_integrity_score?: unknown;
 
-    js_integrity_score?: unknown;
+  last_seen_at?: unknown;
 
-    last_seen_at?: unknown;
+  page_urls?: unknown;
 
-    page_urls?: unknown;
+  url?: unknown;
 
-    url?: unknown;
-
-    url_contains_cdn_cgi_path?: unknown;
-  }
+  url_contains_cdn_cgi_path?: unknown;
 }
+
+export type ScriptListResponse = Array<PageShieldScript>;
 
 export interface ScriptGetResponse {
   id?: unknown;
@@ -219,6 +217,7 @@ export interface ScriptGetParams {
 }
 
 export namespace Scripts {
+  export import PageShieldScript = ScriptsAPI.PageShieldScript;
   export import ScriptListResponse = ScriptsAPI.ScriptListResponse;
   export import ScriptGetResponse = ScriptsAPI.ScriptGetResponse;
   export import ScriptListParams = ScriptsAPI.ScriptListParams;

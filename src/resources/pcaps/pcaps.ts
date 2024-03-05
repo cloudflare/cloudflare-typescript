@@ -712,9 +712,8 @@ export namespace PCAPs {
   export import PCAPListParams = PCAPsAPI.PCAPListParams;
   export import PCAPGetParams = PCAPsAPI.PCAPGetParams;
   export import Ownerships = OwnershipsAPI.Ownerships;
-  export import OwnershipCreateResponse = OwnershipsAPI.OwnershipCreateResponse;
+  export import MagicVisibilityPCAPsOwnership = OwnershipsAPI.MagicVisibilityPCAPsOwnership;
   export import OwnershipGetResponse = OwnershipsAPI.OwnershipGetResponse;
-  export import OwnershipValidateResponse = OwnershipsAPI.OwnershipValidateResponse;
   export import OwnershipCreateParams = OwnershipsAPI.OwnershipCreateParams;
   export import OwnershipDeleteParams = OwnershipsAPI.OwnershipDeleteParams;
   export import OwnershipGetParams = OwnershipsAPI.OwnershipGetParams;

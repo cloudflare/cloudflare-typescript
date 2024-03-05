@@ -18,10 +18,10 @@ export namespace Addressing {
   export import ServiceListResponse = ServicesAPI.ServiceListResponse;
   export import ServiceListParams = ServicesAPI.ServiceListParams;
   export import AddressMaps = AddressMapsAPI.AddressMaps;
+  export import AddressingAddressMaps = AddressMapsAPI.AddressingAddressMaps;
   export import AddressMapCreateResponse = AddressMapsAPI.AddressMapCreateResponse;
   export import AddressMapListResponse = AddressMapsAPI.AddressMapListResponse;
   export import AddressMapDeleteResponse = AddressMapsAPI.AddressMapDeleteResponse;
-  export import AddressMapEditResponse = AddressMapsAPI.AddressMapEditResponse;
   export import AddressMapGetResponse = AddressMapsAPI.AddressMapGetResponse;
   export import AddressMapCreateParams = AddressMapsAPI.AddressMapCreateParams;
   export import AddressMapListParams = AddressMapsAPI.AddressMapListParams;
@@ -32,11 +32,9 @@ export namespace Addressing {
   export import LOADocumentCreateResponse = LOADocumentsAPI.LOADocumentCreateResponse;
   export import LOADocumentCreateParams = LOADocumentsAPI.LOADocumentCreateParams;
   export import Prefixes = PrefixesAPI.Prefixes;
-  export import PrefixCreateResponse = PrefixesAPI.PrefixCreateResponse;
+  export import AddressingIpamPrefixes = PrefixesAPI.AddressingIpamPrefixes;
   export import PrefixListResponse = PrefixesAPI.PrefixListResponse;
   export import PrefixDeleteResponse = PrefixesAPI.PrefixDeleteResponse;
-  export import PrefixEditResponse = PrefixesAPI.PrefixEditResponse;
-  export import PrefixGetResponse = PrefixesAPI.PrefixGetResponse;
   export import PrefixCreateParams = PrefixesAPI.PrefixCreateParams;
   export import PrefixListParams = PrefixesAPI.PrefixListParams;
   export import PrefixDeleteParams = PrefixesAPI.PrefixDeleteParams;

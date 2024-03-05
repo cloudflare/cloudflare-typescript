@@ -2,11 +2,9 @@
 
 export { Access } from './access';
 export {
-  ApplicationCreateResponse,
-  ApplicationUpdateResponse,
+  AccessApps,
   ApplicationListResponse,
   ApplicationDeleteResponse,
-  ApplicationGetResponse,
   ApplicationRevokeTokensResponse,
   ApplicationCreateParams,
   ApplicationUpdateParams,
@@ -16,20 +14,11 @@ export {
   ApplicationRevokeTokensParams,
   Applications,
 } from './applications/index';
+export { AccessBookmarks, BookmarkListResponse, BookmarkDeleteResponse, Bookmarks } from './bookmarks';
 export {
-  BookmarkCreateResponse,
-  BookmarkUpdateResponse,
-  BookmarkListResponse,
-  BookmarkDeleteResponse,
-  BookmarkGetResponse,
-  Bookmarks,
-} from './bookmarks';
-export {
-  CertificateCreateResponse,
-  CertificateUpdateResponse,
+  AccessCertificates,
   CertificateListResponse,
   CertificateDeleteResponse,
-  CertificateGetResponse,
   CertificateCreateParams,
   CertificateUpdateParams,
   CertificateListParams,
@@ -38,21 +27,18 @@ export {
   Certificates,
 } from './certificates/index';
 export {
-  CustomPageCreateResponse,
-  CustomPageUpdateResponse,
+  AccessCustomPage,
+  AccessCustomPageWithoutHTML,
   CustomPageListResponse,
   CustomPageDeleteResponse,
-  CustomPageGetResponse,
   CustomPageCreateParams,
   CustomPageUpdateParams,
   CustomPages,
 } from './custom-pages';
 export {
-  GroupCreateResponse,
-  GroupUpdateResponse,
+  AccessGroups,
   GroupListResponse,
   GroupDeleteResponse,
-  GroupGetResponse,
   GroupCreateParams,
   GroupUpdateParams,
   GroupListParams,
@@ -60,14 +46,10 @@ export {
   GroupGetParams,
   Groups,
 } from './groups';
-export { KeyUpdateResponse, KeyListResponse, KeyRotateResponse, KeyUpdateParams, Keys } from './keys';
-export { Logs } from './logs/index';
 export {
+  AccessServiceTokens,
   ServiceTokenCreateResponse,
-  ServiceTokenUpdateResponse,
   ServiceTokenListResponse,
-  ServiceTokenDeleteResponse,
-  ServiceTokenRefreshResponse,
   ServiceTokenRotateResponse,
   ServiceTokenCreateParams,
   ServiceTokenUpdateParams,
@@ -76,13 +58,13 @@ export {
   ServiceTokens,
 } from './service-tokens';
 export {
-  TagCreateResponse,
-  TagUpdateResponse,
+  AccessTag,
   TagListResponse,
   TagDeleteResponse,
-  TagGetResponse,
   TagCreateParams,
   TagUpdateParams,
   Tags,
 } from './tags';
-export { UserListResponse, Users } from './users/index';
+export { AccessUsers, UserListResponse, Users } from './users/index';
+export { KeyUpdateResponse, KeyListResponse, KeyRotateResponse, KeyUpdateParams, Keys } from './keys';
+export { Logs } from './logs/index';

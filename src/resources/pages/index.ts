@@ -2,11 +2,12 @@
 
 export { Pages } from './pages';
 export {
+  PagesDeployments,
+  PagesProjects,
   ProjectCreateResponse,
   ProjectListResponse,
   ProjectDeleteResponse,
   ProjectEditResponse,
-  ProjectGetResponse,
   ProjectPurgeBuildCacheResponse,
   ProjectCreateParams,
   ProjectListParams,

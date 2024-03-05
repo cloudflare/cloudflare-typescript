@@ -1,20 +1,7 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export { BulkUpdateResponse, BulkDeleteResponse, BulkUpdateParams, BulkDeleteParams, Bulk } from './bulk';
-export { KeyListResponse, KeyListParams, Keys } from './keys';
 export { MetadataGetResponse, MetadataGetParams, Metadata } from './metadata';
-export {
-  NamespaceCreateResponse,
-  NamespaceUpdateResponse,
-  NamespaceListResponse,
-  NamespaceDeleteResponse,
-  NamespaceCreateParams,
-  NamespaceUpdateParams,
-  NamespaceListParams,
-  NamespaceDeleteParams,
-  NamespaceListResponsesV4PagePaginationArray,
-  Namespaces,
-} from './namespaces';
 export {
   ValueUpdateResponse,
   ValueDeleteResponse,
@@ -24,3 +11,15 @@ export {
   ValueGetParams,
   Values,
 } from './values';
+export { WorkersKVKey, KeyListResponse, KeyListParams, Keys } from './keys';
+export {
+  WorkersKVNamespace,
+  NamespaceUpdateResponse,
+  NamespaceDeleteResponse,
+  NamespaceCreateParams,
+  NamespaceUpdateParams,
+  NamespaceListParams,
+  NamespaceDeleteParams,
+  WorkersKVNamespacesV4PagePaginationArray,
+  Namespaces,
+} from './namespaces';

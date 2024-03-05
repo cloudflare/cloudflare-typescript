@@ -11,13 +11,13 @@ export class ProxyEndpoints extends APIResource {
   create(
     params: ProxyEndpointCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ProxyEndpointCreateResponse> {
+  ): Core.APIPromise<ZeroTrustGatewayProxyEndpoints> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/gateway/proxy_endpoints`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ProxyEndpointCreateResponse }>
+      }) as Core.APIPromise<{ result: ZeroTrustGatewayProxyEndpoints }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -60,13 +60,13 @@ export class ProxyEndpoints extends APIResource {
     proxyEndpointId: unknown,
     params: ProxyEndpointEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ProxyEndpointEditResponse> {
+  ): Core.APIPromise<ZeroTrustGatewayProxyEndpoints> {
     const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/gateway/proxy_endpoints/${proxyEndpointId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ProxyEndpointEditResponse }>
+      }) as Core.APIPromise<{ result: ZeroTrustGatewayProxyEndpoints }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -77,18 +77,18 @@ export class ProxyEndpoints extends APIResource {
     proxyEndpointId: unknown,
     params: ProxyEndpointGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ProxyEndpointGetResponse> {
+  ): Core.APIPromise<ZeroTrustGatewayProxyEndpoints> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/gateway/proxy_endpoints/${proxyEndpointId}`,
         options,
-      ) as Core.APIPromise<{ result: ProxyEndpointGetResponse }>
+      ) as Core.APIPromise<{ result: ZeroTrustGatewayProxyEndpoints }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface ProxyEndpointCreateResponse {
+export interface ZeroTrustGatewayProxyEndpoints {
   id?: unknown;
 
   created_at?: string;
@@ -111,80 +111,9 @@ export interface ProxyEndpointCreateResponse {
   updated_at?: string;
 }
 
-export type ProxyEndpointListResponse = Array<ProxyEndpointListResponse.ProxyEndpointListResponseItem>;
-
-export namespace ProxyEndpointListResponse {
-  export interface ProxyEndpointListResponseItem {
-    id?: unknown;
-
-    created_at?: string;
-
-    /**
-     * A list of CIDRs to restrict ingress connections.
-     */
-    ips?: Array<string>;
-
-    /**
-     * The name of the proxy endpoint.
-     */
-    name?: string;
-
-    /**
-     * The subdomain to be used as the destination in the proxy client.
-     */
-    subdomain?: string;
-
-    updated_at?: string;
-  }
-}
+export type ProxyEndpointListResponse = Array<ZeroTrustGatewayProxyEndpoints>;
 
 export type ProxyEndpointDeleteResponse = unknown | string;
-
-export interface ProxyEndpointEditResponse {
-  id?: unknown;
-
-  created_at?: string;
-
-  /**
-   * A list of CIDRs to restrict ingress connections.
-   */
-  ips?: Array<string>;
-
-  /**
-   * The name of the proxy endpoint.
-   */
-  name?: string;
-
-  /**
-   * The subdomain to be used as the destination in the proxy client.
-   */
-  subdomain?: string;
-
-  updated_at?: string;
-}
-
-export interface ProxyEndpointGetResponse {
-  id?: unknown;
-
-  created_at?: string;
-
-  /**
-   * A list of CIDRs to restrict ingress connections.
-   */
-  ips?: Array<string>;
-
-  /**
-   * The name of the proxy endpoint.
-   */
-  name?: string;
-
-  /**
-   * The subdomain to be used as the destination in the proxy client.
-   */
-  subdomain?: string;
-
-  updated_at?: string;
-}
 
 export interface ProxyEndpointCreateParams {
   /**
@@ -243,11 +172,9 @@ export interface ProxyEndpointGetParams {
 }
 
 export namespace ProxyEndpoints {
-  export import ProxyEndpointCreateResponse = ProxyEndpointsAPI.ProxyEndpointCreateResponse;
+  export import ZeroTrustGatewayProxyEndpoints = ProxyEndpointsAPI.ZeroTrustGatewayProxyEndpoints;
   export import ProxyEndpointListResponse = ProxyEndpointsAPI.ProxyEndpointListResponse;
   export import ProxyEndpointDeleteResponse = ProxyEndpointsAPI.ProxyEndpointDeleteResponse;
-  export import ProxyEndpointEditResponse = ProxyEndpointsAPI.ProxyEndpointEditResponse;
-  export import ProxyEndpointGetResponse = ProxyEndpointsAPI.ProxyEndpointGetResponse;
   export import ProxyEndpointCreateParams = ProxyEndpointsAPI.ProxyEndpointCreateParams;
   export import ProxyEndpointListParams = ProxyEndpointsAPI.ProxyEndpointListParams;
   export import ProxyEndpointDeleteParams = ProxyEndpointsAPI.ProxyEndpointDeleteParams;

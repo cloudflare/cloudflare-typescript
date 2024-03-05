@@ -11,13 +11,13 @@ export class ProxyReadTimeout extends APIResource {
   edit(
     params: ProxyReadTimeoutEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ProxyReadTimeoutEditResponse> {
+  ): Core.APIPromise<ZonesProxyReadTimeout> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/proxy_read_timeout`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ProxyReadTimeoutEditResponse }>
+      }) as Core.APIPromise<{ result: ZonesProxyReadTimeout }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -27,11 +27,11 @@ export class ProxyReadTimeout extends APIResource {
   get(
     params: ProxyReadTimeoutGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ProxyReadTimeoutGetResponse> {
+  ): Core.APIPromise<ZonesProxyReadTimeout> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/proxy_read_timeout`, options) as Core.APIPromise<{
-        result: ProxyReadTimeoutGetResponse;
+        result: ZonesProxyReadTimeout;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -40,33 +40,7 @@ export class ProxyReadTimeout extends APIResource {
 /**
  * Maximum time between two read operations from origin.
  */
-export interface ProxyReadTimeoutEditResponse {
-  /**
-   * ID of the zone setting.
-   */
-  id: 'proxy_read_timeout';
-
-  /**
-   * Current value of the zone setting.
-   */
-  value: number;
-
-  /**
-   * Whether or not this setting can be modified for this zone (based on your
-   * Cloudflare plan level).
-   */
-  editable?: true | false;
-
-  /**
-   * last time this setting was modified.
-   */
-  modified_on?: string | null;
-}
-
-/**
- * Maximum time between two read operations from origin.
- */
-export interface ProxyReadTimeoutGetResponse {
+export interface ZonesProxyReadTimeout {
   /**
    * ID of the zone setting.
    */
@@ -98,24 +72,7 @@ export interface ProxyReadTimeoutEditParams {
   /**
    * Body param: Maximum time between two read operations from origin.
    */
-  value: ProxyReadTimeoutEditParams.Value;
-}
-
-export namespace ProxyReadTimeoutEditParams {
-  /**
-   * Maximum time between two read operations from origin.
-   */
-  export interface Value {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'proxy_read_timeout';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: number;
-  }
+  value: ZonesProxyReadTimeout;
 }
 
 export interface ProxyReadTimeoutGetParams {
@@ -126,8 +83,7 @@ export interface ProxyReadTimeoutGetParams {
 }
 
 export namespace ProxyReadTimeout {
-  export import ProxyReadTimeoutEditResponse = ProxyReadTimeoutAPI.ProxyReadTimeoutEditResponse;
-  export import ProxyReadTimeoutGetResponse = ProxyReadTimeoutAPI.ProxyReadTimeoutGetResponse;
+  export import ZonesProxyReadTimeout = ProxyReadTimeoutAPI.ZonesProxyReadTimeout;
   export import ProxyReadTimeoutEditParams = ProxyReadTimeoutAPI.ProxyReadTimeoutEditParams;
   export import ProxyReadTimeoutGetParams = ProxyReadTimeoutAPI.ProxyReadTimeoutGetParams;
 }

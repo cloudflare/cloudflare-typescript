@@ -79,6 +79,28 @@ export class OriginTLSClientAuth extends APIResource {
   }
 }
 
+export interface TLSCertificatesAndHostnamesZoneAuthenticatedOriginPull {
+  /**
+   * Identifier
+   */
+  id?: string;
+
+  /**
+   * The zone's leaf certificate.
+   */
+  certificate?: string;
+
+  /**
+   * Indicates whether zone-level authenticated origin pulls is enabled.
+   */
+  enabled?: boolean;
+
+  /**
+   * The zone's private key.
+   */
+  private_key?: string;
+}
+
 export type OriginTLSClientAuthCreateResponse = unknown | string;
 
 export type OriginTLSClientAuthListResponse =
@@ -151,6 +173,7 @@ export interface OriginTLSClientAuthGetParams {
 }
 
 export namespace OriginTLSClientAuth {
+  export import TLSCertificatesAndHostnamesZoneAuthenticatedOriginPull = OriginTLSClientAuthAPI.TLSCertificatesAndHostnamesZoneAuthenticatedOriginPull;
   export import OriginTLSClientAuthCreateResponse = OriginTLSClientAuthAPI.OriginTLSClientAuthCreateResponse;
   export import OriginTLSClientAuthListResponse = OriginTLSClientAuthAPI.OriginTLSClientAuthListResponse;
   export import OriginTLSClientAuthDeleteResponse = OriginTLSClientAuthAPI.OriginTLSClientAuthDeleteResponse;
@@ -160,8 +183,9 @@ export namespace OriginTLSClientAuth {
   export import OriginTLSClientAuthDeleteParams = OriginTLSClientAuthAPI.OriginTLSClientAuthDeleteParams;
   export import OriginTLSClientAuthGetParams = OriginTLSClientAuthAPI.OriginTLSClientAuthGetParams;
   export import Hostnames = HostnamesAPI.Hostnames;
+  export import TLSCertificatesAndHostnamesHostnameAuthenticatedOriginPull = HostnamesAPI.TLSCertificatesAndHostnamesHostnameAuthenticatedOriginPull;
+  export import TLSCertificatesAndHostnamesHostnameCertidObject = HostnamesAPI.TLSCertificatesAndHostnamesHostnameCertidObject;
   export import HostnameUpdateResponse = HostnamesAPI.HostnameUpdateResponse;
-  export import HostnameGetResponse = HostnamesAPI.HostnameGetResponse;
   export import HostnameUpdateParams = HostnamesAPI.HostnameUpdateParams;
   export import HostnameGetParams = HostnamesAPI.HostnameGetParams;
   export import Settings = SettingsAPI.Settings;
