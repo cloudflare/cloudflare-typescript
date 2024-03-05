@@ -274,6 +274,23 @@ export class Cloudflare extends Core.APIClient {
     const apiKeyAuth = this.apiKeyAuth(opts);
     const apiTokenAuth = this.apiTokenAuth(opts);
     const userServiceKeyAuth = this.userServiceKeyAuth(opts);
+
+    if (
+      apiEmailAuth != null &&
+      !Core.isEmptyObj(apiEmailAuth) &&
+      apiKeyAuth != null &&
+      !Core.isEmptyObj(apiKeyAuth)
+    ) {
+      return { ...apiEmailAuth, ...apiKeyAuth };
+    }
+
+    if (apiTokenAuth != null && !Core.isEmptyObj(apiTokenAuth)) {
+      return apiTokenAuth;
+    }
+
+    if (userServiceKeyAuth != null && !Core.isEmptyObj(userServiceKeyAuth)) {
+      return userServiceKeyAuth;
+    }
     return {};
   }
 
