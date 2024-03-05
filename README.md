@@ -220,7 +220,7 @@ If you would like to disable or customize this behavior, for example to use the 
 <!-- prettier-ignore -->
 ```ts
 import http from 'http';
-import HttpsProxyAgent from 'https-proxy-agent';
+import { HttpsProxyAgent } from 'https-proxy-agent';
 
 // Configure the default for all requests:
 const cloudflare = new Cloudflare({
@@ -228,10 +228,12 @@ const cloudflare = new Cloudflare({
 });
 
 // Override per-request:
-await cloudflare.zones.delete({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' }, {
-  baseURL: 'http://localhost:8080/test-api',
-  httpAgent: new http.Agent({ keepAlive: false }),
-})
+await cloudflare.zones.delete(
+  { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+  {
+    httpAgent: new http.Agent({ keepAlive: false }),
+  },
+);
 ```
 
 ## Semantic Versioning
