@@ -230,7 +230,8 @@ export class Cloudflare extends Core.APIClient {
   protected override defaultHeaders(opts: Core.FinalRequestOptions): Core.Headers {
     return {
       ...super.defaultHeaders(opts),
-      'x-auth-email': this.apiEmail,
+      'X-Auth-Key': this.apiKey,
+      'X-Auth-Email': this.apiEmail,
       ...this._options.defaultHeaders,
     };
   }
