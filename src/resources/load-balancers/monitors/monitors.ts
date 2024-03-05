@@ -996,6 +996,6 @@ export namespace Monitors {
   export import PreviewCreateResponse = PreviewsAPI.PreviewCreateResponse;
   export import PreviewCreateParams = PreviewsAPI.PreviewCreateParams;
   export import References = ReferencesAPI.References;
-  export import ReferenceListResponse = ReferencesAPI.ReferenceListResponse;
-  export import ReferenceListParams = ReferencesAPI.ReferenceListParams;
+  export import ReferenceGetResponse = ReferencesAPI.ReferenceGetResponse;
+  export import ReferenceGetParams = ReferencesAPI.ReferenceGetParams;
 }

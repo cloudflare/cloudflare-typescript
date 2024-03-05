@@ -34,6 +34,6 @@ export namespace ASN {
   export import ASNGetResponse = ASNAPI.ASNGetResponse;
   export import ASNGetParams = ASNAPI.ASNGetParams;
   export import Subnets = SubnetsAPI.Subnets;
-  export import SubnetListResponse = SubnetsAPI.SubnetListResponse;
-  export import SubnetListParams = SubnetsAPI.SubnetListParams;
+  export import SubnetGetResponse = SubnetsAPI.SubnetGetResponse;
+  export import SubnetGetParams = SubnetsAPI.SubnetGetParams;
 }

@@ -3,9 +3,9 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
-import * as RayidsAPI from 'cloudflare/resources/logs/rayids';
+import * as RayidAPI from 'cloudflare/resources/logs/rayid';
 
-export class Rayids extends APIResource {
+export class Rayid extends APIResource {
   /**
    * The `/rayids` api route allows lookups by specific rayid. The rayids route will
    * return zero, one, or more records (ray ids are not unique).
@@ -62,7 +62,7 @@ export interface RayidGetParams {
   timestamps?: 'unix' | 'unixnano' | 'rfc3339';
 }
 
-export namespace Rayids {
-  export import RayidGetResponse = RayidsAPI.RayidGetResponse;
-  export import RayidGetParams = RayidsAPI.RayidGetParams;
+export namespace Rayid {
+  export import RayidGetResponse = RayidAPI.RayidGetResponse;
+  export import RayidGetParams = RayidAPI.RayidGetParams;
 }

@@ -8,9 +8,9 @@ export class Downloads extends APIResource {
   /**
    * Download specified LOA document under the account.
    */
-  list(
+  get(
     loaDocumentId: string | null,
-    params: DownloadListParams,
+    params: DownloadGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<unknown> {
     const { account_id } = params;
@@ -21,9 +21,9 @@ export class Downloads extends APIResource {
   }
 }
 
-export type DownloadListResponse = unknown;
+export type DownloadGetResponse = unknown;
 
-export interface DownloadListParams {
+export interface DownloadGetParams {
   /**
    * Identifier
    */
@@ -31,6 +31,6 @@ export interface DownloadListParams {
 }
 
 export namespace Downloads {
-  export import DownloadListResponse = DownloadsAPI.DownloadListResponse;
-  export import DownloadListParams = DownloadsAPI.DownloadListParams;
+  export import DownloadGetResponse = DownloadsAPI.DownloadGetResponse;
+  export import DownloadGetParams = DownloadsAPI.DownloadGetParams;
 }

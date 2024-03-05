@@ -2,7 +2,7 @@
 
 import { APIResource } from 'cloudflare/resource';
 import * as DNSAPI from 'cloudflare/resources/intel/dns';
-import * as DomainHistoriesAPI from 'cloudflare/resources/intel/domain-histories';
+import * as DomainHistoryAPI from 'cloudflare/resources/intel/domain-history';
 import * as IPListsAPI from 'cloudflare/resources/intel/ip-lists';
 import * as IPsAPI from 'cloudflare/resources/intel/ips';
 import * as MiscategorizationsAPI from 'cloudflare/resources/intel/miscategorizations';
@@ -16,7 +16,7 @@ export class Intel extends APIResource {
   asn: ASNAPI.ASN = new ASNAPI.ASN(this._client);
   dns: DNSAPI.DNS = new DNSAPI.DNS(this._client);
   domains: DomainsAPI.Domains = new DomainsAPI.Domains(this._client);
-  domainHistories: DomainHistoriesAPI.DomainHistories = new DomainHistoriesAPI.DomainHistories(this._client);
+  domainHistory: DomainHistoryAPI.DomainHistory = new DomainHistoryAPI.DomainHistory(this._client);
   ips: IPsAPI.IPs = new IPsAPI.IPs(this._client);
   ipLists: IPListsAPI.IPLists = new IPListsAPI.IPLists(this._client);
   miscategorizations: MiscategorizationsAPI.Miscategorizations = new MiscategorizationsAPI.Miscategorizations(
@@ -37,9 +37,9 @@ export namespace Intel {
   export import Domains = DomainsAPI.Domains;
   export import DomainGetResponse = DomainsAPI.DomainGetResponse;
   export import DomainGetParams = DomainsAPI.DomainGetParams;
-  export import DomainHistories = DomainHistoriesAPI.DomainHistories;
-  export import DomainHistoryListResponse = DomainHistoriesAPI.DomainHistoryListResponse;
-  export import DomainHistoryListParams = DomainHistoriesAPI.DomainHistoryListParams;
+  export import DomainHistory = DomainHistoryAPI.DomainHistory;
+  export import DomainHistoryGetResponse = DomainHistoryAPI.DomainHistoryGetResponse;
+  export import DomainHistoryGetParams = DomainHistoryAPI.DomainHistoryGetParams;
   export import IPs = IPsAPI.IPs;
   export import IPGetResponse = IPsAPI.IPGetResponse;
   export import IPGetParams = IPsAPI.IPGetParams;

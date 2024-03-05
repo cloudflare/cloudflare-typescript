@@ -77,27 +77,6 @@ describe('resource consumers', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: only required params', async () => {
-    const responsePromise = cloudflare.queues.consumers.list('example-queue', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('list: required and optional params', async () => {
-    const response = await cloudflare.queues.consumers.list('example-queue', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
-  });
-
-  // skipped: tests are disabled for the time being
   test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.queues.consumers.delete('example-queue', 'example-consumer', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -114,6 +93,27 @@ describe('resource consumers', () => {
   // skipped: tests are disabled for the time being
   test.skip('delete: required and optional params', async () => {
     const response = await cloudflare.queues.consumers.delete('example-queue', 'example-consumer', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get: only required params', async () => {
+    const responsePromise = cloudflare.queues.consumers.get('example-queue', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.queues.consumers.get('example-queue', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

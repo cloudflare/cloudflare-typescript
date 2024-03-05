@@ -13,9 +13,9 @@ export namespace MagicNetworkMonitoring {
   export import Configs = ConfigsAPI.Configs;
   export import ConfigCreateResponse = ConfigsAPI.ConfigCreateResponse;
   export import ConfigUpdateResponse = ConfigsAPI.ConfigUpdateResponse;
-  export import ConfigListResponse = ConfigsAPI.ConfigListResponse;
   export import ConfigDeleteResponse = ConfigsAPI.ConfigDeleteResponse;
   export import ConfigEditResponse = ConfigsAPI.ConfigEditResponse;
+  export import ConfigGetResponse = ConfigsAPI.ConfigGetResponse;
   export import Rules = RulesAPI.Rules;
   export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
   export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;

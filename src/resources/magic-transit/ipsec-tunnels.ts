@@ -2,12 +2,9 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as IPSECTunnelsAPI from 'cloudflare/resources/magic-transit/ipsec-tunnels/ipsec-tunnels';
-import * as PSKGeneratesAPI from 'cloudflare/resources/magic-transit/ipsec-tunnels/psk-generates';
+import * as IPSECTunnelsAPI from 'cloudflare/resources/magic-transit/ipsec-tunnels';
 
 export class IPSECTunnels extends APIResource {
-  pskGenerates: PSKGeneratesAPI.PSKGenerates = new PSKGeneratesAPI.PSKGenerates(this._client);
-
   /**
    * Creates new IPsec tunnels associated with an account. Use `?validate_only=true`
    * as an optional query parameter to only run validation without persisting
@@ -87,6 +84,26 @@ export class IPSECTunnels extends APIResource {
         `/accounts/${accountIdentifier}/magic/ipsec_tunnels/${tunnelIdentifier}`,
         options,
       ) as Core.APIPromise<{ result: IPSECTunnelGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Generates a Pre Shared Key for a specific IPsec tunnel used in the IKE session.
+   * Use `?validate_only=true` as an optional query parameter to only run validation
+   * without persisting changes. After a PSK is generated, the PSK is immediately
+   * persisted to Cloudflare's edge and cannot be retrieved later. Note the PSK in a
+   * safe place.
+   */
+  pskGenerate(
+    accountIdentifier: string,
+    tunnelIdentifier: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IPSECTunnelPSKGenerateResponse> {
+    return (
+      this._client.post(
+        `/accounts/${accountIdentifier}/magic/ipsec_tunnels/${tunnelIdentifier}/psk_generate`,
+        options,
+      ) as Core.APIPromise<{ result: IPSECTunnelPSKGenerateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -317,6 +334,35 @@ export interface IPSECTunnelGetResponse {
   ipsec_tunnel?: unknown;
 }
 
+export interface IPSECTunnelPSKGenerateResponse {
+  /**
+   * Identifier
+   */
+  ipsec_tunnel_id?: string;
+
+  /**
+   * A randomly generated or provided string for use in the IPsec tunnel.
+   */
+  psk?: string;
+
+  /**
+   * The PSK metadata that includes when the PSK was generated.
+   */
+  psk_metadata?: IPSECTunnelPSKGenerateResponse.PSKMetadata;
+}
+
+export namespace IPSECTunnelPSKGenerateResponse {
+  /**
+   * The PSK metadata that includes when the PSK was generated.
+   */
+  export interface PSKMetadata {
+    /**
+     * The date and time the tunnel was last modified.
+     */
+    last_generated_on?: string;
+  }
+}
+
 export interface IPSECTunnelCreateParams {
   /**
    * The IP address assigned to the Cloudflare side of the IPsec tunnel.
@@ -483,8 +529,7 @@ export namespace IPSECTunnels {
   export import IPSECTunnelListResponse = IPSECTunnelsAPI.IPSECTunnelListResponse;
   export import IPSECTunnelDeleteResponse = IPSECTunnelsAPI.IPSECTunnelDeleteResponse;
   export import IPSECTunnelGetResponse = IPSECTunnelsAPI.IPSECTunnelGetResponse;
+  export import IPSECTunnelPSKGenerateResponse = IPSECTunnelsAPI.IPSECTunnelPSKGenerateResponse;
   export import IPSECTunnelCreateParams = IPSECTunnelsAPI.IPSECTunnelCreateParams;
   export import IPSECTunnelUpdateParams = IPSECTunnelsAPI.IPSECTunnelUpdateParams;
-  export import PSKGenerates = PSKGeneratesAPI.PSKGenerates;
-  export import PSKGenerateCreateResponse = PSKGeneratesAPI.PSKGenerateCreateResponse;
 }

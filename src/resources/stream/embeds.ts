@@ -10,15 +10,15 @@ export class Embeds extends APIResource {
    * Cloudflare. On success, returns an HTML fragment for use on web pages to display
    * a video. On failure, returns a JSON response body.
    */
-  list(identifier: string, params: EmbedListParams, options?: Core.RequestOptions): Core.APIPromise<unknown> {
+  get(identifier: string, params: EmbedGetParams, options?: Core.RequestOptions): Core.APIPromise<unknown> {
     const { account_id } = params;
     return this._client.get(`/accounts/${account_id}/stream/${identifier}/embed`, options);
   }
 }
 
-export type EmbedListResponse = unknown;
+export type EmbedGetResponse = unknown;
 
-export interface EmbedListParams {
+export interface EmbedGetParams {
   /**
    * The account identifier tag.
    */
@@ -26,6 +26,6 @@ export interface EmbedListParams {
 }
 
 export namespace Embeds {
-  export import EmbedListResponse = EmbedsAPI.EmbedListResponse;
-  export import EmbedListParams = EmbedsAPI.EmbedListParams;
+  export import EmbedGetResponse = EmbedsAPI.EmbedGetResponse;
+  export import EmbedGetParams = EmbedsAPI.EmbedGetParams;
 }

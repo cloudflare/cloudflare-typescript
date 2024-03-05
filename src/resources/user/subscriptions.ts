@@ -21,17 +21,6 @@ export class Subscriptions extends APIResource {
   }
 
   /**
-   * Lists all of a user's subscriptions.
-   */
-  list(options?: Core.RequestOptions): Core.APIPromise<SubscriptionListResponse | null> {
-    return (
-      this._client.get('/user/subscriptions', options) as Core.APIPromise<{
-        result: SubscriptionListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Deletes a user's subscription.
    */
   delete(identifier: string, options?: Core.RequestOptions): Core.APIPromise<SubscriptionDeleteResponse> {
@@ -52,25 +41,45 @@ export class Subscriptions extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Lists all of a user's subscriptions.
+   */
+  get(options?: Core.RequestOptions): Core.APIPromise<SubscriptionGetResponse | null> {
+    return (
+      this._client.get('/user/subscriptions', options) as Core.APIPromise<{
+        result: SubscriptionGetResponse | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
 export type SubscriptionUpdateResponse = unknown | string | null;
 
-export type SubscriptionListResponse = Array<SubscriptionListResponse.SubscriptionListResponseItem>;
+export interface SubscriptionDeleteResponse {
+  /**
+   * Subscription identifier tag.
+   */
+  subscription_id?: string;
+}
 
-export namespace SubscriptionListResponse {
-  export interface SubscriptionListResponseItem {
+export type SubscriptionEditResponse = unknown | string | null;
+
+export type SubscriptionGetResponse = Array<SubscriptionGetResponse.SubscriptionGetResponseItem>;
+
+export namespace SubscriptionGetResponse {
+  export interface SubscriptionGetResponseItem {
     /**
      * Subscription identifier tag.
      */
     id?: string;
 
-    app?: SubscriptionListResponseItem.App;
+    app?: SubscriptionGetResponseItem.App;
 
     /**
      * The list of add-ons subscribed to.
      */
-    component_values?: Array<SubscriptionListResponseItem.ComponentValue>;
+    component_values?: Array<SubscriptionGetResponseItem.ComponentValue>;
 
     /**
      * The monetary unit in which pricing information is displayed.
@@ -101,7 +110,7 @@ export namespace SubscriptionListResponse {
     /**
      * The rate plan applied to the subscription.
      */
-    rate_plan?: SubscriptionListResponseItem.RatePlan;
+    rate_plan?: SubscriptionGetResponseItem.RatePlan;
 
     /**
      * The state that the subscription is in.
@@ -111,10 +120,10 @@ export namespace SubscriptionListResponse {
     /**
      * A simple zone object. May have null properties if not a zone subscription.
      */
-    zone?: SubscriptionListResponseItem.Zone;
+    zone?: SubscriptionGetResponseItem.Zone;
   }
 
-  export namespace SubscriptionListResponseItem {
+  export namespace SubscriptionGetResponseItem {
     export interface App {
       /**
        * app install id.
@@ -203,15 +212,6 @@ export namespace SubscriptionListResponse {
     }
   }
 }
-
-export interface SubscriptionDeleteResponse {
-  /**
-   * Subscription identifier tag.
-   */
-  subscription_id?: string;
-}
-
-export type SubscriptionEditResponse = unknown | string | null;
 
 export interface SubscriptionUpdateParams {
   app?: SubscriptionUpdateParams.App;
@@ -421,9 +421,9 @@ export namespace SubscriptionEditParams {
 
 export namespace Subscriptions {
   export import SubscriptionUpdateResponse = SubscriptionsAPI.SubscriptionUpdateResponse;
-  export import SubscriptionListResponse = SubscriptionsAPI.SubscriptionListResponse;
   export import SubscriptionDeleteResponse = SubscriptionsAPI.SubscriptionDeleteResponse;
   export import SubscriptionEditResponse = SubscriptionsAPI.SubscriptionEditResponse;
+  export import SubscriptionGetResponse = SubscriptionsAPI.SubscriptionGetResponse;
   export import SubscriptionUpdateParams = SubscriptionsAPI.SubscriptionUpdateParams;
   export import SubscriptionEditParams = SubscriptionsAPI.SubscriptionEditParams;
 }

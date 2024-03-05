@@ -25,17 +25,17 @@ export class Schedules extends APIResource {
   /**
    * Fetches Cron Triggers for a Worker.
    */
-  list(
+  get(
     scriptName: string,
-    params: ScheduleListParams,
+    params: ScheduleGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ScheduleListResponse> {
+  ): Core.APIPromise<ScheduleGetResponse> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/workers/scripts/${scriptName}/schedules`,
         options,
-      ) as Core.APIPromise<{ result: ScheduleListResponse }>
+      ) as Core.APIPromise<{ result: ScheduleGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -54,11 +54,11 @@ export namespace ScheduleUpdateResponse {
   }
 }
 
-export interface ScheduleListResponse {
-  schedules?: Array<ScheduleListResponse.Schedule>;
+export interface ScheduleGetResponse {
+  schedules?: Array<ScheduleGetResponse.Schedule>;
 }
 
-export namespace ScheduleListResponse {
+export namespace ScheduleGetResponse {
   export interface Schedule {
     created_on?: unknown;
 
@@ -80,7 +80,7 @@ export interface ScheduleUpdateParams {
   body: unknown;
 }
 
-export interface ScheduleListParams {
+export interface ScheduleGetParams {
   /**
    * Identifier
    */
@@ -89,7 +89,7 @@ export interface ScheduleListParams {
 
 export namespace Schedules {
   export import ScheduleUpdateResponse = SchedulesAPI.ScheduleUpdateResponse;
-  export import ScheduleListResponse = SchedulesAPI.ScheduleListResponse;
+  export import ScheduleGetResponse = SchedulesAPI.ScheduleGetResponse;
   export import ScheduleUpdateParams = SchedulesAPI.ScheduleUpdateParams;
-  export import ScheduleListParams = SchedulesAPI.ScheduleListParams;
+  export import ScheduleGetParams = SchedulesAPI.ScheduleGetParams;
 }

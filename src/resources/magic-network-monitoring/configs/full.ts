@@ -2,22 +2,22 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as FullsAPI from 'cloudflare/resources/magic-network-monitoring/configs/fulls';
+import * as FullAPI from 'cloudflare/resources/magic-network-monitoring/configs/full';
 
-export class Fulls extends APIResource {
+export class Full extends APIResource {
   /**
    * Lists default sampling, router IPs, and rules for account.
    */
-  list(accountIdentifier: unknown, options?: Core.RequestOptions): Core.APIPromise<FullListResponse> {
+  get(accountIdentifier: unknown, options?: Core.RequestOptions): Core.APIPromise<FullGetResponse> {
     return (
       this._client.get(`/accounts/${accountIdentifier}/mnm/config/full`, options) as Core.APIPromise<{
-        result: FullListResponse;
+        result: FullGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface FullListResponse {
+export interface FullGetResponse {
   /**
    * Fallback sampling rate of flow messages being sent in packets per second. This
    * should match the packet sampling rate configured on the router.
@@ -32,6 +32,6 @@ export interface FullListResponse {
   router_ips: Array<string>;
 }
 
-export namespace Fulls {
-  export import FullListResponse = FullsAPI.FullListResponse;
+export namespace Full {
+  export import FullGetResponse = FullAPI.FullGetResponse;
 }

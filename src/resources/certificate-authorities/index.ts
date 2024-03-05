@@ -3,8 +3,8 @@
 export { CertificateAuthorities } from './certificate-authorities';
 export {
   HostnameAssociationUpdateResponse,
-  HostnameAssociationListResponse,
+  HostnameAssociationGetResponse,
   HostnameAssociationUpdateParams,
-  HostnameAssociationListParams,
+  HostnameAssociationGetParams,
   HostnameAssociations,
 } from './hostname-associations';

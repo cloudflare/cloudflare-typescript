@@ -3,9 +3,9 @@
 export {
   ConfigCreateResponse,
   ConfigUpdateResponse,
-  ConfigListResponse,
   ConfigDeleteResponse,
   ConfigEditResponse,
+  ConfigGetResponse,
   Configs,
 } from './configs';
-export { FullListResponse, Fulls } from './fulls';
+export { FullGetResponse, Full } from './full';

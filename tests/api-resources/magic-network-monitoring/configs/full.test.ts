@@ -9,12 +9,11 @@ const cloudflare = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource rayids', () => {
+describe('resource full', () => {
   // skipped: tests are disabled for the time being
   test.skip('get', async () => {
-    const responsePromise = cloudflare.logs.rayids.get(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '41ddf1740f67442d',
+    const responsePromise = cloudflare.magicNetworkMonitoring.configs.full.get(
+      '6f91088a406011ed95aed352566e8d4c',
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,22 +28,9 @@ describe('resource rayids', () => {
   test.skip('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.logs.rayids.get('023e105f4ecef8ad9ca31a8372d0c353', '41ddf1740f67442d', {
+      cloudflare.magicNetworkMonitoring.configs.full.get('6f91088a406011ed95aed352566e8d4c', {
         path: '/_stainless_unknown_path',
       }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('get: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.logs.rayids.get(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        '41ddf1740f67442d',
-        { fields: 'ClientIP,RayID,EdgeStartTimestamp', timestamps: 'unixnano' },
-        { path: '/_stainless_unknown_path' },
-      ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 });

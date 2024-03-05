@@ -28,16 +28,16 @@ export class ContentLists extends APIResource {
   /**
    * IPFS Universal Path Gateway Content List Details
    */
-  list(
+  get(
     zoneIdentifier: string,
     identifier: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ContentListListResponse> {
+  ): Core.APIPromise<ContentListGetResponse> {
     return (
       this._client.get(
         `/zones/${zoneIdentifier}/web3/hostnames/${identifier}/ipfs_universal_path/content_list`,
         options,
-      ) as Core.APIPromise<{ result: ContentListListResponse }>
+      ) as Core.APIPromise<{ result: ContentListGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -49,7 +49,7 @@ export interface ContentListUpdateResponse {
   action?: 'block';
 }
 
-export interface ContentListListResponse {
+export interface ContentListGetResponse {
   /**
    * Behavior of the content list.
    */
@@ -92,7 +92,7 @@ export namespace ContentListUpdateParams {
 
 export namespace ContentLists {
   export import ContentListUpdateResponse = ContentListsAPI.ContentListUpdateResponse;
-  export import ContentListListResponse = ContentListsAPI.ContentListListResponse;
+  export import ContentListGetResponse = ContentListsAPI.ContentListGetResponse;
   export import ContentListUpdateParams = ContentListsAPI.ContentListUpdateParams;
   export import Entries = EntriesAPI.Entries;
   export import EntryCreateResponse = EntriesAPI.EntryCreateResponse;

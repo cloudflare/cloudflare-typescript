@@ -9,12 +9,12 @@ const cloudflare = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource byScripts', () => {
+describe('resource flag', () => {
   // skipped: tests are disabled for the time being
-  test.skip('list: only required params', async () => {
-    const responsePromise = cloudflare.workers.deployments.byScripts.list(
-      '8ee82b3a2c0f42928b8f14dae4a97121',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+  test.skip('create: only required params', async () => {
+    const responsePromise = cloudflare.logs.control.retention.flag.create(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      { flag: true },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -26,19 +26,15 @@ describe('resource byScripts', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: required and optional params', async () => {
-    const response = await cloudflare.workers.deployments.byScripts.list('8ee82b3a2c0f42928b8f14dae4a97121', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+  test.skip('create: required and optional params', async () => {
+    const response = await cloudflare.logs.control.retention.flag.create('023e105f4ecef8ad9ca31a8372d0c353', {
+      flag: true,
     });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: only required params', async () => {
-    const responsePromise = cloudflare.workers.deployments.byScripts.get(
-      '8ee82b3a2c0f42928b8f14dae4a97121',
-      'bcf48806-b317-4351-9ee7-36e7d557d4de',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-    );
+  test.skip('get', async () => {
+    const responsePromise = cloudflare.logs.control.retention.flag.get('023e105f4ecef8ad9ca31a8372d0c353');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -49,11 +45,12 @@ describe('resource byScripts', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: required and optional params', async () => {
-    const response = await cloudflare.workers.deployments.byScripts.get(
-      '8ee82b3a2c0f42928b8f14dae4a97121',
-      'bcf48806-b317-4351-9ee7-36e7d557d4de',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-    );
+  test.skip('get: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.logs.control.retention.flag.get('023e105f4ecef8ad9ca31a8372d0c353', {
+        path: '/_stainless_unknown_path',
+      }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 });

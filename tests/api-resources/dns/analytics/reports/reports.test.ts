@@ -11,8 +11,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource reports', () => {
   // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
-    const responsePromise = cloudflare.dns.analytics.reports.list('023e105f4ecef8ad9ca31a8372d0c353');
+  test.skip('get', async () => {
+    const responsePromise = cloudflare.dns.analytics.reports.get('023e105f4ecef8ad9ca31a8372d0c353');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,20 +23,20 @@ describe('resource reports', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
+  test.skip('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.dns.analytics.reports.list('023e105f4ecef8ad9ca31a8372d0c353', {
+      cloudflare.dns.analytics.reports.get('023e105f4ecef8ad9ca31a8372d0c353', {
         path: '/_stainless_unknown_path',
       }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options and params are passed correctly', async () => {
+  test.skip('get: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.dns.analytics.reports.list(
+      cloudflare.dns.analytics.reports.get(
         '023e105f4ecef8ad9ca31a8372d0c353',
         {
           dimensions: 'queryType',

@@ -3,8 +3,8 @@
 import { APIResource } from 'cloudflare/resource';
 import * as CfInterconnectsAPI from 'cloudflare/resources/magic-transit/cf-interconnects';
 import * as GRETunnelsAPI from 'cloudflare/resources/magic-transit/gre-tunnels';
+import * as IPSECTunnelsAPI from 'cloudflare/resources/magic-transit/ipsec-tunnels';
 import * as RoutesAPI from 'cloudflare/resources/magic-transit/routes';
-import * as IPSECTunnelsAPI from 'cloudflare/resources/magic-transit/ipsec-tunnels/ipsec-tunnels';
 
 export class MagicTransit extends APIResource {
   cfInterconnects: CfInterconnectsAPI.CfInterconnects = new CfInterconnectsAPI.CfInterconnects(this._client);
@@ -33,6 +33,7 @@ export namespace MagicTransit {
   export import IPSECTunnelListResponse = IPSECTunnelsAPI.IPSECTunnelListResponse;
   export import IPSECTunnelDeleteResponse = IPSECTunnelsAPI.IPSECTunnelDeleteResponse;
   export import IPSECTunnelGetResponse = IPSECTunnelsAPI.IPSECTunnelGetResponse;
+  export import IPSECTunnelPSKGenerateResponse = IPSECTunnelsAPI.IPSECTunnelPSKGenerateResponse;
   export import IPSECTunnelCreateParams = IPSECTunnelsAPI.IPSECTunnelCreateParams;
   export import IPSECTunnelUpdateParams = IPSECTunnelsAPI.IPSECTunnelUpdateParams;
   export import Routes = RoutesAPI.Routes;

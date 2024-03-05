@@ -3,12 +3,12 @@
 export {
   ConsumerCreateResponse,
   ConsumerUpdateResponse,
-  ConsumerListResponse,
   ConsumerDeleteResponse,
+  ConsumerGetResponse,
   ConsumerCreateParams,
   ConsumerUpdateParams,
-  ConsumerListParams,
   ConsumerDeleteParams,
+  ConsumerGetParams,
   Consumers,
 } from './consumers';
 export {

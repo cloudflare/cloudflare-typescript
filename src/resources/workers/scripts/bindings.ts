@@ -8,21 +8,21 @@ export class Bindings extends APIResource {
   /**
    * List the bindings for a Workers script.
    */
-  list(params: BindingListParams, options?: Core.RequestOptions): Core.APIPromise<BindingListResponse> {
+  get(params: BindingGetParams, options?: Core.RequestOptions): Core.APIPromise<BindingGetResponse> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/workers/script/bindings`, options) as Core.APIPromise<{
-        result: BindingListResponse;
+        result: BindingGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type BindingListResponse = Array<
-  BindingListResponse.WorkersKVNamespaceBinding | BindingListResponse.WorkersWasmModuleBinding
+export type BindingGetResponse = Array<
+  BindingGetResponse.WorkersKVNamespaceBinding | BindingGetResponse.WorkersWasmModuleBinding
 >;
 
-export namespace BindingListResponse {
+export namespace BindingGetResponse {
   export interface WorkersKVNamespaceBinding {
     /**
      * A JavaScript variable name for the binding.
@@ -53,7 +53,7 @@ export namespace BindingListResponse {
   }
 }
 
-export interface BindingListParams {
+export interface BindingGetParams {
   /**
    * Identifier
    */
@@ -61,6 +61,6 @@ export interface BindingListParams {
 }
 
 export namespace Bindings {
-  export import BindingListResponse = BindingsAPI.BindingListResponse;
-  export import BindingListParams = BindingsAPI.BindingListParams;
+  export import BindingGetResponse = BindingsAPI.BindingGetResponse;
+  export import BindingGetParams = BindingsAPI.BindingGetParams;
 }

@@ -837,10 +837,10 @@ export namespace Zones {
   export import ActivationCheckTriggerResponse = ActivationCheckAPI.ActivationCheckTriggerResponse;
   export import ActivationCheckTriggerParams = ActivationCheckAPI.ActivationCheckTriggerParams;
   export import Settings = SettingsAPI.Settings;
-  export import SettingListResponse = SettingsAPI.SettingListResponse;
   export import SettingEditResponse = SettingsAPI.SettingEditResponse;
-  export import SettingListParams = SettingsAPI.SettingListParams;
+  export import SettingGetResponse = SettingsAPI.SettingGetResponse;
   export import SettingEditParams = SettingsAPI.SettingEditParams;
+  export import SettingGetParams = SettingsAPI.SettingGetParams;
   export import CustomNameservers = CustomNameserversAPI.CustomNameservers;
   export import CustomNameserverUpdateResponse = CustomNameserversAPI.CustomNameserverUpdateResponse;
   export import CustomNameserverGetResponse = CustomNameserversAPI.CustomNameserverGetResponse;

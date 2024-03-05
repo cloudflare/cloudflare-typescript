@@ -6,23 +6,6 @@ import * as ConnectionsAPI from 'cloudflare/resources/zero-trust/tunnels/connect
 
 export class Connections extends APIResource {
   /**
-   * Fetches connection details for a Cloudflare Tunnel.
-   */
-  list(
-    tunnelId: string,
-    params: ConnectionListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ConnectionListResponse | null> {
-    const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/cfd_tunnel/${tunnelId}/connections`,
-        options,
-      ) as Core.APIPromise<{ result: ConnectionListResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Removes connections that are in a disconnected or pending reconnect state. We
    * recommend running this command after shutting down a tunnel.
    */
@@ -39,16 +22,35 @@ export class Connections extends APIResource {
       }) as Core.APIPromise<{ result: ConnectionDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Fetches connection details for a Cloudflare Tunnel.
+   */
+  get(
+    tunnelId: string,
+    params: ConnectionGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ConnectionGetResponse | null> {
+    const { account_id } = params;
+    return (
+      this._client.get(
+        `/accounts/${account_id}/cfd_tunnel/${tunnelId}/connections`,
+        options,
+      ) as Core.APIPromise<{ result: ConnectionGetResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
-export type ConnectionListResponse = Array<ConnectionListResponse.ConnectionListResponseItem>;
+export type ConnectionDeleteResponse = unknown | Array<unknown> | string;
 
-export namespace ConnectionListResponse {
+export type ConnectionGetResponse = Array<ConnectionGetResponse.ConnectionGetResponseItem>;
+
+export namespace ConnectionGetResponse {
   /**
    * A client (typically cloudflared) that maintains connections to a Cloudflare data
    * center.
    */
-  export interface ConnectionListResponseItem {
+  export interface ConnectionGetResponseItem {
     /**
      * UUID of the Cloudflare Tunnel connection.
      */
@@ -68,7 +70,7 @@ export namespace ConnectionListResponse {
     /**
      * The Cloudflare Tunnel connections between your origin and Cloudflare's edge.
      */
-    conns?: Array<ConnectionListResponseItem.Conn>;
+    conns?: Array<ConnectionGetResponseItem.Conn>;
 
     /**
      * Features enabled for the Cloudflare Tunnel.
@@ -86,7 +88,7 @@ export namespace ConnectionListResponse {
     version?: string;
   }
 
-  export namespace ConnectionListResponseItem {
+  export namespace ConnectionGetResponseItem {
     export interface Conn {
       /**
        * UUID of the Cloudflare Tunnel connection.
@@ -134,15 +136,6 @@ export namespace ConnectionListResponse {
   }
 }
 
-export type ConnectionDeleteResponse = unknown | Array<unknown> | string;
-
-export interface ConnectionListParams {
-  /**
-   * Cloudflare account ID
-   */
-  account_id: string;
-}
-
 export interface ConnectionDeleteParams {
   /**
    * Path param: Cloudflare account ID
@@ -155,9 +148,16 @@ export interface ConnectionDeleteParams {
   body: unknown;
 }
 
+export interface ConnectionGetParams {
+  /**
+   * Cloudflare account ID
+   */
+  account_id: string;
+}
+
 export namespace Connections {
-  export import ConnectionListResponse = ConnectionsAPI.ConnectionListResponse;
   export import ConnectionDeleteResponse = ConnectionsAPI.ConnectionDeleteResponse;
-  export import ConnectionListParams = ConnectionsAPI.ConnectionListParams;
+  export import ConnectionGetResponse = ConnectionsAPI.ConnectionGetResponse;
   export import ConnectionDeleteParams = ConnectionsAPI.ConnectionDeleteParams;
+  export import ConnectionGetParams = ConnectionsAPI.ConnectionGetParams;
 }

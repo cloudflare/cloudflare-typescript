@@ -6,26 +6,6 @@ import * as CacheReserveAPI from 'cloudflare/resources/cache/cache-reserve';
 
 export class CacheReserve extends APIResource {
   /**
-   * Increase cache lifetimes by automatically storing all cacheable files into
-   * Cloudflare's persistent object storage buckets. Requires Cache Reserve
-   * subscription. Note: using Tiered Cache with Cache Reserve is highly recommended
-   * to reduce Reserve operations costs. See the
-   * [developer docs](https://developers.cloudflare.com/cache/about/cache-reserve)
-   * for more information.
-   */
-  list(
-    params: CacheReserveListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CacheReserveListResponse> {
-    const { zone_id } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/cache/cache_reserve`, options) as Core.APIPromise<{
-        result: CacheReserveListResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * You can use Cache Reserve Clear to clear your Cache Reserve, but you must first
    * disable Cache Reserve. In most cases, this will be accomplished within 24 hours.
    * You cannot re-enable Cache Reserve while this process is ongoing. Keep in mind
@@ -64,6 +44,26 @@ export class CacheReserve extends APIResource {
   }
 
   /**
+   * Increase cache lifetimes by automatically storing all cacheable files into
+   * Cloudflare's persistent object storage buckets. Requires Cache Reserve
+   * subscription. Note: using Tiered Cache with Cache Reserve is highly recommended
+   * to reduce Reserve operations costs. See the
+   * [developer docs](https://developers.cloudflare.com/cache/about/cache-reserve)
+   * for more information.
+   */
+  get(
+    params: CacheReserveGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CacheReserveGetResponse> {
+    const { zone_id } = params;
+    return (
+      this._client.get(`/zones/${zone_id}/cache/cache_reserve`, options) as Core.APIPromise<{
+        result: CacheReserveGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * You can use Cache Reserve Clear to clear your Cache Reserve, but you must first
    * disable Cache Reserve. In most cases, this will be accomplished within 24 hours.
    * You cannot re-enable Cache Reserve while this process is ongoing. Keep in mind
@@ -80,31 +80,6 @@ export class CacheReserve extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
-}
-
-/**
- * Increase cache lifetimes by automatically storing all cacheable files into
- * Cloudflare's persistent object storage buckets. Requires Cache Reserve
- * subscription. Note: using Tiered Cache with Cache Reserve is highly recommended
- * to reduce Reserve operations costs. See the
- * [developer docs](https://developers.cloudflare.com/cache/about/cache-reserve)
- * for more information.
- */
-export interface CacheReserveListResponse {
-  /**
-   * ID of the zone setting.
-   */
-  id: 'cache_reserve';
-
-  /**
-   * last time this setting was modified.
-   */
-  modified_on: string | null;
-
-  /**
-   * Value of the Cache Reserve zone setting.
-   */
-  value: 'on' | 'off';
 }
 
 /**
@@ -166,6 +141,31 @@ export interface CacheReserveEditResponse {
 }
 
 /**
+ * Increase cache lifetimes by automatically storing all cacheable files into
+ * Cloudflare's persistent object storage buckets. Requires Cache Reserve
+ * subscription. Note: using Tiered Cache with Cache Reserve is highly recommended
+ * to reduce Reserve operations costs. See the
+ * [developer docs](https://developers.cloudflare.com/cache/about/cache-reserve)
+ * for more information.
+ */
+export interface CacheReserveGetResponse {
+  /**
+   * ID of the zone setting.
+   */
+  id: 'cache_reserve';
+
+  /**
+   * last time this setting was modified.
+   */
+  modified_on: string | null;
+
+  /**
+   * Value of the Cache Reserve zone setting.
+   */
+  value: 'on' | 'off';
+}
+
+/**
  * You can use Cache Reserve Clear to clear your Cache Reserve, but you must first
  * disable Cache Reserve. In most cases, this will be accomplished within 24 hours.
  * You cannot re-enable Cache Reserve while this process is ongoing. Keep in mind
@@ -198,13 +198,6 @@ export interface CacheReserveStatusResponse {
   end_ts?: string;
 }
 
-export interface CacheReserveListParams {
-  /**
-   * Identifier
-   */
-  zone_id: string;
-}
-
 export interface CacheReserveClearParams {
   /**
    * Identifier
@@ -224,6 +217,13 @@ export interface CacheReserveEditParams {
   value: 'on' | 'off';
 }
 
+export interface CacheReserveGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
 export interface CacheReserveStatusParams {
   /**
    * Identifier
@@ -232,12 +232,12 @@ export interface CacheReserveStatusParams {
 }
 
 export namespace CacheReserve {
-  export import CacheReserveListResponse = CacheReserveAPI.CacheReserveListResponse;
   export import CacheReserveClearResponse = CacheReserveAPI.CacheReserveClearResponse;
   export import CacheReserveEditResponse = CacheReserveAPI.CacheReserveEditResponse;
+  export import CacheReserveGetResponse = CacheReserveAPI.CacheReserveGetResponse;
   export import CacheReserveStatusResponse = CacheReserveAPI.CacheReserveStatusResponse;
-  export import CacheReserveListParams = CacheReserveAPI.CacheReserveListParams;
   export import CacheReserveClearParams = CacheReserveAPI.CacheReserveClearParams;
   export import CacheReserveEditParams = CacheReserveAPI.CacheReserveEditParams;
+  export import CacheReserveGetParams = CacheReserveAPI.CacheReserveGetParams;
   export import CacheReserveStatusParams = CacheReserveAPI.CacheReserveStatusParams;
 }

@@ -1,23 +1,23 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
-  AudioTrackCreateResponse,
-  AudioTrackListResponse,
   AudioTrackDeleteResponse,
+  AudioTrackCopyResponse,
   AudioTrackEditResponse,
-  AudioTrackCreateParams,
-  AudioTrackListParams,
+  AudioTrackGetResponse,
   AudioTrackDeleteParams,
+  AudioTrackCopyParams,
   AudioTrackEditParams,
+  AudioTrackGetParams,
   AudioTracks,
 } from './audio-tracks';
 export {
   CaptionUpdateResponse,
-  CaptionListResponse,
   CaptionDeleteResponse,
+  CaptionGetResponse,
   CaptionUpdateParams,
-  CaptionListParams,
   CaptionDeleteParams,
+  CaptionGetParams,
   Captions,
 } from './captions';
 export { ClipCreateResponse, ClipCreateParams, Clips } from './clips';
@@ -25,21 +25,21 @@ export { CopyCreateResponse, CopyCreateParams, Copies } from './copies';
 export { DirectUploadCreateResponse, DirectUploadCreateParams, DirectUploads } from './direct-uploads';
 export {
   DownloadCreateResponse,
-  DownloadListResponse,
   DownloadDeleteResponse,
+  DownloadGetResponse,
   DownloadCreateParams,
-  DownloadListParams,
   DownloadDeleteParams,
+  DownloadGetParams,
   Downloads,
 } from './downloads';
-export { EmbedListResponse, EmbedListParams, Embeds } from './embeds';
+export { EmbedGetResponse, EmbedGetParams, Embeds } from './embeds';
 export {
   KeyCreateResponse,
-  KeyListResponse,
   KeyDeleteResponse,
+  KeyGetResponse,
   KeyCreateParams,
-  KeyListParams,
   KeyDeleteParams,
+  KeyGetParams,
   Keys,
 } from './keys';
 export {

@@ -8,15 +8,15 @@ export class Profiles extends APIResource {
   /**
    * Accesses your billing profile object.
    */
-  list(options?: Core.RequestOptions): Core.APIPromise<ProfileListResponse> {
+  get(options?: Core.RequestOptions): Core.APIPromise<ProfileGetResponse> {
     return (
-      this._client.get('/user/billing/profile', options) as Core.APIPromise<{ result: ProfileListResponse }>
+      this._client.get('/user/billing/profile', options) as Core.APIPromise<{ result: ProfileGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type ProfileListResponse = unknown | string | null;
+export type ProfileGetResponse = unknown | string | null;
 
 export namespace Profiles {
-  export import ProfileListResponse = ProfilesAPI.ProfileListResponse;
+  export import ProfileGetResponse = ProfilesAPI.ProfileGetResponse;
 }

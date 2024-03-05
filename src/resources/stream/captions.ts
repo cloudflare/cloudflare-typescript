@@ -26,22 +26,6 @@ export class Captions extends APIResource {
   }
 
   /**
-   * Lists the available captions or subtitles for a specific video.
-   */
-  list(
-    identifier: string,
-    params: CaptionListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CaptionListResponse> {
-    const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/stream/${identifier}/captions`, options) as Core.APIPromise<{
-        result: CaptionListResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Removes the captions or subtitles from a video.
    */
   delete(
@@ -58,14 +42,32 @@ export class Captions extends APIResource {
       ) as Core.APIPromise<{ result: CaptionDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Lists the available captions or subtitles for a specific video.
+   */
+  get(
+    identifier: string,
+    params: CaptionGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CaptionGetResponse> {
+    const { account_id } = params;
+    return (
+      this._client.get(`/accounts/${account_id}/stream/${identifier}/captions`, options) as Core.APIPromise<{
+        result: CaptionGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
 export type CaptionUpdateResponse = unknown | string;
 
-export type CaptionListResponse = Array<CaptionListResponse.CaptionListResponseItem>;
+export type CaptionDeleteResponse = unknown | Array<unknown> | string;
 
-export namespace CaptionListResponse {
-  export interface CaptionListResponseItem {
+export type CaptionGetResponse = Array<CaptionGetResponse.CaptionGetResponseItem>;
+
+export namespace CaptionGetResponse {
+  export interface CaptionGetResponseItem {
     /**
      * The language label displayed in the native language to users.
      */
@@ -77,8 +79,6 @@ export namespace CaptionListResponse {
     language?: string;
   }
 }
-
-export type CaptionDeleteResponse = unknown | Array<unknown> | string;
 
 export interface CaptionUpdateParams {
   /**
@@ -92,14 +92,14 @@ export interface CaptionUpdateParams {
   file: string;
 }
 
-export interface CaptionListParams {
+export interface CaptionDeleteParams {
   /**
    * Identifier
    */
   account_id: string;
 }
 
-export interface CaptionDeleteParams {
+export interface CaptionGetParams {
   /**
    * Identifier
    */
@@ -108,9 +108,9 @@ export interface CaptionDeleteParams {
 
 export namespace Captions {
   export import CaptionUpdateResponse = CaptionsAPI.CaptionUpdateResponse;
-  export import CaptionListResponse = CaptionsAPI.CaptionListResponse;
   export import CaptionDeleteResponse = CaptionsAPI.CaptionDeleteResponse;
+  export import CaptionGetResponse = CaptionsAPI.CaptionGetResponse;
   export import CaptionUpdateParams = CaptionsAPI.CaptionUpdateParams;
-  export import CaptionListParams = CaptionsAPI.CaptionListParams;
   export import CaptionDeleteParams = CaptionsAPI.CaptionDeleteParams;
+  export import CaptionGetParams = CaptionsAPI.CaptionGetParams;
 }

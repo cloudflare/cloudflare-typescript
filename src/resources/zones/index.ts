@@ -22,10 +22,10 @@ export {
   Holds,
 } from './holds';
 export {
-  SettingListResponse,
   SettingEditResponse,
-  SettingListParams,
+  SettingGetResponse,
   SettingEditParams,
+  SettingGetParams,
   Settings,
 } from './settings/index';
 export {

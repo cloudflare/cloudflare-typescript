@@ -12,4 +12,4 @@ export {
   CertificatePacks,
 } from './certificate-packs';
 export { OrderCreateResponse, OrderCreateParams, Order } from './order';
-export { QuotaListResponse, QuotaListParams, Quota } from './quota';
+export { QuotaGetResponse, QuotaGetParams, Quota } from './quota';

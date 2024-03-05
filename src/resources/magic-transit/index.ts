@@ -23,10 +23,11 @@ export {
   IPSECTunnelListResponse,
   IPSECTunnelDeleteResponse,
   IPSECTunnelGetResponse,
+  IPSECTunnelPSKGenerateResponse,
   IPSECTunnelCreateParams,
   IPSECTunnelUpdateParams,
   IPSECTunnels,
-} from './ipsec-tunnels/index';
+} from './ipsec-tunnels';
 export { MagicTransit } from './magic-transit';
 export {
   RouteCreateResponse,

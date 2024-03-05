@@ -2,16 +2,16 @@
 
 export {
   ConfigurationUpdateResponse,
-  ConfigurationListResponse,
+  ConfigurationGetResponse,
   ConfigurationUpdateParams,
-  ConfigurationListParams,
+  ConfigurationGetParams,
   Configurations,
 } from './configurations';
 export {
-  ConnectionListResponse,
   ConnectionDeleteResponse,
-  ConnectionListParams,
+  ConnectionGetResponse,
   ConnectionDeleteParams,
+  ConnectionGetParams,
   Connections,
 } from './connections';
 export { ConnectorGetResponse, ConnectorGetParams, Connectors } from './connectors';

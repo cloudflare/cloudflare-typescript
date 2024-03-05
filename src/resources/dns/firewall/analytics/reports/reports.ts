@@ -16,40 +16,40 @@ export class Reports extends APIResource {
    * [Analytics API properties](https://developers.cloudflare.com/dns/reference/analytics-api-properties/)
    * for detailed information about the available query parameters.
    */
-  list(
+  get(
     accountIdentifier: string,
     identifier: string,
-    query?: ReportListParams,
+    query?: ReportGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ReportListResponse>;
-  list(
+  ): Core.APIPromise<ReportGetResponse>;
+  get(
     accountIdentifier: string,
     identifier: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ReportListResponse>;
-  list(
+  ): Core.APIPromise<ReportGetResponse>;
+  get(
     accountIdentifier: string,
     identifier: string,
-    query: ReportListParams | Core.RequestOptions = {},
+    query: ReportGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ReportListResponse> {
+  ): Core.APIPromise<ReportGetResponse> {
     if (isRequestOptions(query)) {
-      return this.list(accountIdentifier, identifier, {}, query);
+      return this.get(accountIdentifier, identifier, {}, query);
     }
     return (
       this._client.get(`/accounts/${accountIdentifier}/dns_firewall/${identifier}/dns_analytics/report`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: ReportListResponse }>
+      }) as Core.APIPromise<{ result: ReportGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface ReportListResponse {
+export interface ReportGetResponse {
   /**
    * Array with one row per combination of dimension values.
    */
-  data: Array<ReportListResponse.Data>;
+  data: Array<ReportGetResponse.Data>;
 
   /**
    * Number of seconds between current time and last processed event, in another
@@ -69,7 +69,7 @@ export interface ReportListResponse {
    */
   min: unknown;
 
-  query: ReportListResponse.Query;
+  query: ReportGetResponse.Query;
 
   /**
    * Total number of rows in the result.
@@ -83,7 +83,7 @@ export interface ReportListResponse {
   totals: unknown;
 }
 
-export namespace ReportListResponse {
+export namespace ReportGetResponse {
   export interface Data {
     /**
      * Array of dimension values, representing the combination of dimension values
@@ -136,7 +136,7 @@ export namespace ReportListResponse {
   }
 }
 
-export interface ReportListParams {
+export interface ReportGetParams {
   /**
    * A comma-separated list of dimensions to group results by.
    */
@@ -175,9 +175,9 @@ export interface ReportListParams {
 }
 
 export namespace Reports {
-  export import ReportListResponse = ReportsAPI.ReportListResponse;
-  export import ReportListParams = ReportsAPI.ReportListParams;
+  export import ReportGetResponse = ReportsAPI.ReportGetResponse;
+  export import ReportGetParams = ReportsAPI.ReportGetParams;
   export import Bytimes = BytimesAPI.Bytimes;
-  export import BytimeListResponse = BytimesAPI.BytimeListResponse;
-  export import BytimeListParams = BytimesAPI.BytimeListParams;
+  export import BytimeGetResponse = BytimesAPI.BytimeGetResponse;
+  export import BytimeGetParams = BytimesAPI.BytimeGetParams;
 }

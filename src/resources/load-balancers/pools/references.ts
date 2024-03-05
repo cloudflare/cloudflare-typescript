@@ -8,17 +8,17 @@ export class References extends APIResource {
   /**
    * Get the list of resources that reference the provided pool.
    */
-  list(
+  get(
     poolId: string,
-    params: ReferenceListParams,
+    params: ReferenceGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ReferenceListResponse | null> {
+  ): Core.APIPromise<ReferenceGetResponse | null> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/load_balancers/pools/${poolId}/references`,
         options,
-      ) as Core.APIPromise<{ result: ReferenceListResponse | null }>
+      ) as Core.APIPromise<{ result: ReferenceGetResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -26,10 +26,10 @@ export class References extends APIResource {
 /**
  * List of resources that reference a given pool.
  */
-export type ReferenceListResponse = Array<ReferenceListResponse.ReferenceListResponseItem>;
+export type ReferenceGetResponse = Array<ReferenceGetResponse.ReferenceGetResponseItem>;
 
-export namespace ReferenceListResponse {
-  export interface ReferenceListResponseItem {
+export namespace ReferenceGetResponse {
+  export interface ReferenceGetResponseItem {
     reference_type?: '*' | 'referral' | 'referrer';
 
     resource_id?: string;
@@ -40,7 +40,7 @@ export namespace ReferenceListResponse {
   }
 }
 
-export interface ReferenceListParams {
+export interface ReferenceGetParams {
   /**
    * Identifier
    */
@@ -48,6 +48,6 @@ export interface ReferenceListParams {
 }
 
 export namespace References {
-  export import ReferenceListResponse = ReferencesAPI.ReferenceListResponse;
-  export import ReferenceListParams = ReferencesAPI.ReferenceListParams;
+  export import ReferenceGetResponse = ReferencesAPI.ReferenceGetResponse;
+  export import ReferenceGetParams = ReferencesAPI.ReferenceGetParams;
 }

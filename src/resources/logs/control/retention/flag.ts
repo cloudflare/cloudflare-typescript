@@ -2,9 +2,9 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as FlagsAPI from 'cloudflare/resources/logs/controls/retentions/flags';
+import * as FlagAPI from 'cloudflare/resources/logs/control/retention/flag';
 
-export class Flags extends APIResource {
+export class Flag extends APIResource {
   /**
    * Updates log retention flag for Logpull API.
    */
@@ -24,13 +24,10 @@ export class Flags extends APIResource {
   /**
    * Gets log retention flag for Logpull API.
    */
-  logsReceivedGetLogRetentionFlag(
-    zoneIdentifier: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<FlagLogsReceivedGetLogRetentionFlagResponse> {
+  get(zoneIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<FlagGetResponse> {
     return (
       this._client.get(`/zones/${zoneIdentifier}/logs/control/retention/flag`, options) as Core.APIPromise<{
-        result: FlagLogsReceivedGetLogRetentionFlagResponse;
+        result: FlagGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -40,7 +37,7 @@ export interface FlagCreateResponse {
   flag?: boolean;
 }
 
-export interface FlagLogsReceivedGetLogRetentionFlagResponse {
+export interface FlagGetResponse {
   flag?: boolean;
 }
 
@@ -51,8 +48,8 @@ export interface FlagCreateParams {
   flag: boolean;
 }
 
-export namespace Flags {
-  export import FlagCreateResponse = FlagsAPI.FlagCreateResponse;
-  export import FlagLogsReceivedGetLogRetentionFlagResponse = FlagsAPI.FlagLogsReceivedGetLogRetentionFlagResponse;
-  export import FlagCreateParams = FlagsAPI.FlagCreateParams;
+export namespace Flag {
+  export import FlagCreateResponse = FlagAPI.FlagCreateResponse;
+  export import FlagGetResponse = FlagAPI.FlagGetResponse;
+  export import FlagCreateParams = FlagAPI.FlagCreateParams;
 }

@@ -9,10 +9,10 @@ const cloudflare = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource domainHistories', () => {
+describe('resource domainHistory', () => {
   // skipped: tests are disabled for the time being
-  test.skip('list: only required params', async () => {
-    const responsePromise = cloudflare.intel.domainHistories.list({
+  test.skip('get: only required params', async () => {
+    const responsePromise = cloudflare.intel.domainHistory.get({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -25,8 +25,8 @@ describe('resource domainHistories', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: required and optional params', async () => {
-    const response = await cloudflare.intel.domainHistories.list({
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.intel.domainHistory.get({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       domain: 'example.com',
     });

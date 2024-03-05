@@ -22,4 +22,4 @@ export {
   PoolGetParams,
   Pools,
 } from './pools';
-export { ReferenceListResponse, ReferenceListParams, References } from './references';
+export { ReferenceGetResponse, ReferenceGetParams, References } from './references';

@@ -8,23 +8,23 @@ export class AvailableRatePlans extends APIResource {
   /**
    * Lists all rate plans the zone can subscribe to.
    */
-  list(
+  get(
     zoneIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AvailableRatePlanListResponse | null> {
+  ): Core.APIPromise<AvailableRatePlanGetResponse | null> {
     return (
       this._client.get(`/zones/${zoneIdentifier}/available_rate_plans`, options) as Core.APIPromise<{
-        result: AvailableRatePlanListResponse | null;
+        result: AvailableRatePlanGetResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type AvailableRatePlanListResponse =
-  Array<AvailableRatePlanListResponse.AvailableRatePlanListResponseItem>;
+export type AvailableRatePlanGetResponse =
+  Array<AvailableRatePlanGetResponse.AvailableRatePlanGetResponseItem>;
 
-export namespace AvailableRatePlanListResponse {
-  export interface AvailableRatePlanListResponseItem {
+export namespace AvailableRatePlanGetResponse {
+  export interface AvailableRatePlanGetResponseItem {
     /**
      * Plan identifier tag.
      */
@@ -33,7 +33,7 @@ export namespace AvailableRatePlanListResponse {
     /**
      * Array of available components values for the plan.
      */
-    components?: Array<AvailableRatePlanListResponseItem.Component>;
+    components?: Array<AvailableRatePlanGetResponseItem.Component>;
 
     /**
      * The monetary unit in which pricing information is displayed.
@@ -56,7 +56,7 @@ export namespace AvailableRatePlanListResponse {
     name?: string;
   }
 
-  export namespace AvailableRatePlanListResponseItem {
+  export namespace AvailableRatePlanGetResponseItem {
     export interface Component {
       /**
        * The default amount allocated.
@@ -77,5 +77,5 @@ export namespace AvailableRatePlanListResponse {
 }
 
 export namespace AvailableRatePlans {
-  export import AvailableRatePlanListResponse = AvailableRatePlansAPI.AvailableRatePlanListResponse;
+  export import AvailableRatePlanGetResponse = AvailableRatePlansAPI.AvailableRatePlanGetResponse;
 }

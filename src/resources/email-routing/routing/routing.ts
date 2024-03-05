@@ -91,9 +91,10 @@ export namespace Routing {
   export import RuleListParams = RulesAPI.RuleListParams;
   export import Addresses = AddressesAPI.Addresses;
   export import AddressCreateResponse = AddressesAPI.AddressCreateResponse;
+  export import AddressListResponse = AddressesAPI.AddressListResponse;
   export import AddressDeleteResponse = AddressesAPI.AddressDeleteResponse;
-  export import AddressEmailRoutingDestinationAddressesListDestinationAddressesResponse = AddressesAPI.AddressEmailRoutingDestinationAddressesListDestinationAddressesResponse;
   export import AddressGetResponse = AddressesAPI.AddressGetResponse;
+  export import AddressListResponsesV4PagePaginationArray = AddressesAPI.AddressListResponsesV4PagePaginationArray;
   export import AddressCreateParams = AddressesAPI.AddressCreateParams;
-  export import AddressEmailRoutingDestinationAddressesListDestinationAddressesParams = AddressesAPI.AddressEmailRoutingDestinationAddressesListDestinationAddressesParams;
+  export import AddressListParams = AddressesAPI.AddressListParams;
 }

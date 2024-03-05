@@ -23,22 +23,6 @@ export class Downloads extends APIResource {
   }
 
   /**
-   * Lists the downloads created for a video.
-   */
-  list(
-    identifier: string,
-    params: DownloadListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DownloadListResponse> {
-    const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/stream/${identifier}/downloads`, options) as Core.APIPromise<{
-        result: DownloadListResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Delete the downloads for a video.
    */
   delete(
@@ -54,22 +38,31 @@ export class Downloads extends APIResource {
       ) as Core.APIPromise<{ result: DownloadDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Lists the downloads created for a video.
+   */
+  get(
+    identifier: string,
+    params: DownloadGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DownloadGetResponse> {
+    const { account_id } = params;
+    return (
+      this._client.get(`/accounts/${account_id}/stream/${identifier}/downloads`, options) as Core.APIPromise<{
+        result: DownloadGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
 export type DownloadCreateResponse = unknown | string;
 
-export type DownloadListResponse = unknown | string;
-
 export type DownloadDeleteResponse = unknown | string;
 
-export interface DownloadCreateParams {
-  /**
-   * Identifier
-   */
-  account_id: string;
-}
+export type DownloadGetResponse = unknown | string;
 
-export interface DownloadListParams {
+export interface DownloadCreateParams {
   /**
    * Identifier
    */
@@ -83,11 +76,18 @@ export interface DownloadDeleteParams {
   account_id: string;
 }
 
+export interface DownloadGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export namespace Downloads {
   export import DownloadCreateResponse = DownloadsAPI.DownloadCreateResponse;
-  export import DownloadListResponse = DownloadsAPI.DownloadListResponse;
   export import DownloadDeleteResponse = DownloadsAPI.DownloadDeleteResponse;
+  export import DownloadGetResponse = DownloadsAPI.DownloadGetResponse;
   export import DownloadCreateParams = DownloadsAPI.DownloadCreateParams;
-  export import DownloadListParams = DownloadsAPI.DownloadListParams;
   export import DownloadDeleteParams = DownloadsAPI.DownloadDeleteParams;
+  export import DownloadGetParams = DownloadsAPI.DownloadGetParams;
 }

@@ -236,10 +236,10 @@ export {
   ServerSideExcludes,
 } from './server-side-excludes';
 export {
-  SettingListResponse,
   SettingEditResponse,
-  SettingListParams,
+  SettingGetResponse,
   SettingEditParams,
+  SettingGetParams,
   Settings,
 } from './settings';
 export {

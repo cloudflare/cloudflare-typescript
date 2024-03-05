@@ -3,9 +3,9 @@
 export {
   ConfigCreateResponse,
   ConfigUpdateResponse,
-  ConfigListResponse,
   ConfigDeleteResponse,
   ConfigEditResponse,
+  ConfigGetResponse,
   Configs,
 } from './configs/index';
 export { MagicNetworkMonitoring } from './magic-network-monitoring';

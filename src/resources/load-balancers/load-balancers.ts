@@ -2973,6 +2973,6 @@ export namespace LoadBalancers {
   export import RegionListParams = RegionsAPI.RegionListParams;
   export import RegionGetParams = RegionsAPI.RegionGetParams;
   export import Searches = SearchesAPI.Searches;
-  export import SearchListResponse = SearchesAPI.SearchListResponse;
-  export import SearchListParams = SearchesAPI.SearchListParams;
+  export import SearchGetResponse = SearchesAPI.SearchGetResponse;
+  export import SearchGetParams = SearchesAPI.SearchGetParams;
 }

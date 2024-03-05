@@ -11,8 +11,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource subnets', () => {
   // skipped: tests are disabled for the time being
-  test.skip('list: only required params', async () => {
-    const responsePromise = cloudflare.intel.asn.subnets.list(0, {
+  test.skip('get: only required params', async () => {
+    const responsePromise = cloudflare.intel.asn.subnets.get(0, {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -25,8 +25,8 @@ describe('resource subnets', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: required and optional params', async () => {
-    const response = await cloudflare.intel.asn.subnets.list(0, {
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.intel.asn.subnets.get(0, {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

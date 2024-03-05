@@ -16,4 +16,4 @@ export {
   Monitors,
 } from './monitors';
 export { PreviewCreateResponse, PreviewCreateParams, Previews } from './previews';
-export { ReferenceListResponse, ReferenceListParams, References } from './references';
+export { ReferenceGetResponse, ReferenceGetParams, References } from './references';

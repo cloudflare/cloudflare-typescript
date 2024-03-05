@@ -6,21 +6,6 @@ import * as VerificationAPI from 'cloudflare/resources/ssl/verification';
 
 export class Verification extends APIResource {
   /**
-   * Get SSL Verification Info for a Zone.
-   */
-  list(
-    params: VerificationListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<VerificationListResponse> {
-    const { zone_id, ...query } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/ssl/verification`, { query, ...options }) as Core.APIPromise<{
-        result: VerificationListResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Edit SSL validation method for a certificate pack. A PATCH request will request
    * an immediate validation check on any certificate, and return the updated status.
    * If a validation method is provided, the validation will be immediately attempted
@@ -39,12 +24,39 @@ export class Verification extends APIResource {
       }) as Core.APIPromise<{ result: VerificationEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Get SSL Verification Info for a Zone.
+   */
+  get(
+    params: VerificationGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<VerificationGetResponse> {
+    const { zone_id, ...query } = params;
+    return (
+      this._client.get(`/zones/${zone_id}/ssl/verification`, { query, ...options }) as Core.APIPromise<{
+        result: VerificationGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
-export type VerificationListResponse = Array<VerificationListResponse.VerificationListResponseItem>;
+export interface VerificationEditResponse {
+  /**
+   * Result status.
+   */
+  status?: string;
 
-export namespace VerificationListResponse {
-  export interface VerificationListResponseItem {
+  /**
+   * Desired validation method.
+   */
+  validation_method?: 'http' | 'cname' | 'txt' | 'email';
+}
+
+export type VerificationGetResponse = Array<VerificationGetResponse.VerificationGetResponseItem>;
+
+export namespace VerificationGetResponse {
+  export interface VerificationGetResponseItem {
     /**
      * Current status of certificate.
      */
@@ -80,7 +92,7 @@ export namespace VerificationListResponse {
     /**
      * Certificate's required verification information.
      */
-    verification_info?: VerificationListResponseItem.VerificationInfo;
+    verification_info?: VerificationGetResponseItem.VerificationInfo;
 
     /**
      * Status of the required verification information, omitted if verification status
@@ -94,7 +106,7 @@ export namespace VerificationListResponse {
     verification_type?: 'cname' | 'meta tag';
   }
 
-  export namespace VerificationListResponseItem {
+  export namespace VerificationGetResponseItem {
     /**
      * Certificate's required verification information.
      */
@@ -112,30 +124,6 @@ export namespace VerificationListResponse {
   }
 }
 
-export interface VerificationEditResponse {
-  /**
-   * Result status.
-   */
-  status?: string;
-
-  /**
-   * Desired validation method.
-   */
-  validation_method?: 'http' | 'cname' | 'txt' | 'email';
-}
-
-export interface VerificationListParams {
-  /**
-   * Path param: Identifier
-   */
-  zone_id: string;
-
-  /**
-   * Query param: Immediately retry SSL Verification.
-   */
-  retry?: true;
-}
-
 export interface VerificationEditParams {
   /**
    * Path param: Identifier
@@ -148,9 +136,21 @@ export interface VerificationEditParams {
   validation_method: 'http' | 'cname' | 'txt' | 'email';
 }
 
+export interface VerificationGetParams {
+  /**
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Query param: Immediately retry SSL Verification.
+   */
+  retry?: true;
+}
+
 export namespace Verification {
-  export import VerificationListResponse = VerificationAPI.VerificationListResponse;
   export import VerificationEditResponse = VerificationAPI.VerificationEditResponse;
-  export import VerificationListParams = VerificationAPI.VerificationListParams;
+  export import VerificationGetResponse = VerificationAPI.VerificationGetResponse;
   export import VerificationEditParams = VerificationAPI.VerificationEditParams;
+  export import VerificationGetParams = VerificationAPI.VerificationGetParams;
 }

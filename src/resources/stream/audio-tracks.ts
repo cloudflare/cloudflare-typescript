@@ -6,40 +6,6 @@ import * as AudioTracksAPI from 'cloudflare/resources/stream/audio-tracks';
 
 export class AudioTracks extends APIResource {
   /**
-   * Adds an additional audio track to a video using the provided audio track URL.
-   */
-  create(
-    identifier: string,
-    params: AudioTrackCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AudioTrackCreateResponse> {
-    const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/stream/${identifier}/audio/copy`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: AudioTrackCreateResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Lists additional audio tracks on a video. Note this API will not return
-   * information for audio attached to the video upload.
-   */
-  list(
-    identifier: string,
-    params: AudioTrackListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AudioTrackListResponse> {
-    const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/stream/${identifier}/audio`, options) as Core.APIPromise<{
-        result: AudioTrackListResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Deletes additional audio tracks on a video. Deleting a default audio track is
    * not allowed. You must assign another audio track as default prior to deletion.
    */
@@ -55,6 +21,23 @@ export class AudioTracks extends APIResource {
         `/accounts/${account_id}/stream/${identifier}/audio/${audioIdentifier}`,
         options,
       ) as Core.APIPromise<{ result: AudioTrackDeleteResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Adds an additional audio track to a video using the provided audio track URL.
+   */
+  copy(
+    identifier: string,
+    params: AudioTrackCopyParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AudioTrackCopyResponse> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.post(`/accounts/${account_id}/stream/${identifier}/audio/copy`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: AudioTrackCopyResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -77,9 +60,28 @@ export class AudioTracks extends APIResource {
       }) as Core.APIPromise<{ result: AudioTrackEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Lists additional audio tracks on a video. Note this API will not return
+   * information for audio attached to the video upload.
+   */
+  get(
+    identifier: string,
+    params: AudioTrackGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AudioTrackGetResponse> {
+    const { account_id } = params;
+    return (
+      this._client.get(`/accounts/${account_id}/stream/${identifier}/audio`, options) as Core.APIPromise<{
+        result: AudioTrackGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
-export interface AudioTrackCreateResponse {
+export type AudioTrackDeleteResponse = unknown | string;
+
+export interface AudioTrackCopyResponse {
   /**
    * Denotes whether the audio track will be played by default in a player.
    */
@@ -101,35 +103,6 @@ export interface AudioTrackCreateResponse {
    */
   uid?: string;
 }
-
-export type AudioTrackListResponse = Array<AudioTrackListResponse.AudioTrackListResponseItem>;
-
-export namespace AudioTrackListResponse {
-  export interface AudioTrackListResponseItem {
-    /**
-     * Denotes whether the audio track will be played by default in a player.
-     */
-    default?: boolean;
-
-    /**
-     * A string to uniquely identify the track amongst other audio track labels for the
-     * specified video.
-     */
-    label?: string;
-
-    /**
-     * Specifies the processing status of the video.
-     */
-    status?: 'queued' | 'ready' | 'error';
-
-    /**
-     * A Cloudflare-generated unique identifier for a media item.
-     */
-    uid?: string;
-  }
-}
-
-export type AudioTrackDeleteResponse = unknown | string;
 
 export interface AudioTrackEditResponse {
   /**
@@ -154,7 +127,41 @@ export interface AudioTrackEditResponse {
   uid?: string;
 }
 
-export interface AudioTrackCreateParams {
+export type AudioTrackGetResponse = Array<AudioTrackGetResponse.AudioTrackGetResponseItem>;
+
+export namespace AudioTrackGetResponse {
+  export interface AudioTrackGetResponseItem {
+    /**
+     * Denotes whether the audio track will be played by default in a player.
+     */
+    default?: boolean;
+
+    /**
+     * A string to uniquely identify the track amongst other audio track labels for the
+     * specified video.
+     */
+    label?: string;
+
+    /**
+     * Specifies the processing status of the video.
+     */
+    status?: 'queued' | 'ready' | 'error';
+
+    /**
+     * A Cloudflare-generated unique identifier for a media item.
+     */
+    uid?: string;
+  }
+}
+
+export interface AudioTrackDeleteParams {
+  /**
+   * The account identifier tag.
+   */
+  account_id: string;
+}
+
+export interface AudioTrackCopyParams {
   /**
    * Path param: The account identifier tag.
    */
@@ -173,20 +180,6 @@ export interface AudioTrackCreateParams {
    * file.
    */
   url?: string;
-}
-
-export interface AudioTrackListParams {
-  /**
-   * The account identifier tag.
-   */
-  account_id: string;
-}
-
-export interface AudioTrackDeleteParams {
-  /**
-   * The account identifier tag.
-   */
-  account_id: string;
 }
 
 export interface AudioTrackEditParams {
@@ -208,13 +201,20 @@ export interface AudioTrackEditParams {
   label?: string;
 }
 
+export interface AudioTrackGetParams {
+  /**
+   * The account identifier tag.
+   */
+  account_id: string;
+}
+
 export namespace AudioTracks {
-  export import AudioTrackCreateResponse = AudioTracksAPI.AudioTrackCreateResponse;
-  export import AudioTrackListResponse = AudioTracksAPI.AudioTrackListResponse;
   export import AudioTrackDeleteResponse = AudioTracksAPI.AudioTrackDeleteResponse;
+  export import AudioTrackCopyResponse = AudioTracksAPI.AudioTrackCopyResponse;
   export import AudioTrackEditResponse = AudioTracksAPI.AudioTrackEditResponse;
-  export import AudioTrackCreateParams = AudioTracksAPI.AudioTrackCreateParams;
-  export import AudioTrackListParams = AudioTracksAPI.AudioTrackListParams;
+  export import AudioTrackGetResponse = AudioTracksAPI.AudioTrackGetResponse;
   export import AudioTrackDeleteParams = AudioTracksAPI.AudioTrackDeleteParams;
+  export import AudioTrackCopyParams = AudioTracksAPI.AudioTrackCopyParams;
   export import AudioTrackEditParams = AudioTracksAPI.AudioTrackEditParams;
+  export import AudioTrackGetParams = AudioTracksAPI.AudioTrackGetParams;
 }

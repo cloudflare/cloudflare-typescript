@@ -13,34 +13,34 @@ export class Bytimes extends APIResource {
    * [Analytics API properties](https://developers.cloudflare.com/dns/reference/analytics-api-properties/)
    * for detailed information about the available query parameters.
    */
-  list(
+  get(
     identifier: string,
-    query?: BytimeListParams,
+    query?: BytimeGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<BytimeListResponse>;
-  list(identifier: string, options?: Core.RequestOptions): Core.APIPromise<BytimeListResponse>;
-  list(
+  ): Core.APIPromise<BytimeGetResponse>;
+  get(identifier: string, options?: Core.RequestOptions): Core.APIPromise<BytimeGetResponse>;
+  get(
     identifier: string,
-    query: BytimeListParams | Core.RequestOptions = {},
+    query: BytimeGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<BytimeListResponse> {
+  ): Core.APIPromise<BytimeGetResponse> {
     if (isRequestOptions(query)) {
-      return this.list(identifier, {}, query);
+      return this.get(identifier, {}, query);
     }
     return (
       this._client.get(`/zones/${identifier}/dns_analytics/report/bytime`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: BytimeListResponse }>
+      }) as Core.APIPromise<{ result: BytimeGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface BytimeListResponse {
+export interface BytimeGetResponse {
   /**
    * Array with one row per combination of dimension values.
    */
-  data: Array<BytimeListResponse.Data>;
+  data: Array<BytimeGetResponse.Data>;
 
   /**
    * Number of seconds between current time and last processed event, in another
@@ -60,7 +60,7 @@ export interface BytimeListResponse {
    */
   min: unknown;
 
-  query: BytimeListResponse.Query;
+  query: BytimeGetResponse.Query;
 
   /**
    * Total number of rows in the result.
@@ -80,7 +80,7 @@ export interface BytimeListResponse {
   totals: unknown;
 }
 
-export namespace BytimeListResponse {
+export namespace BytimeGetResponse {
   export interface Data {
     /**
      * Array of dimension values, representing the combination of dimension values
@@ -149,7 +149,7 @@ export namespace BytimeListResponse {
   }
 }
 
-export interface BytimeListParams {
+export interface BytimeGetParams {
   /**
    * A comma-separated list of dimensions to group results by.
    */
@@ -203,6 +203,6 @@ export interface BytimeListParams {
 }
 
 export namespace Bytimes {
-  export import BytimeListResponse = BytimesAPI.BytimeListResponse;
-  export import BytimeListParams = BytimesAPI.BytimeListParams;
+  export import BytimeGetResponse = BytimesAPI.BytimeGetResponse;
+  export import BytimeGetParams = BytimesAPI.BytimeGetParams;
 }
