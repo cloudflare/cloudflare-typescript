@@ -44,4 +44,4 @@ export {
 } from './pools/index';
 export { PreviewGetResponse, PreviewGetParams, Previews } from './previews';
 export { RegionListResponse, RegionGetResponse, RegionListParams, RegionGetParams, Regions } from './regions';
-export { SearchListResponse, SearchListParams, Searches } from './searches';
+export { SearchGetResponse, SearchGetParams, Searches } from './searches';

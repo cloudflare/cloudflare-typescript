@@ -2,7 +2,7 @@
 
 export {
   ContentListUpdateResponse,
-  ContentListListResponse,
+  ContentListGetResponse,
   ContentListUpdateParams,
   ContentLists,
 } from './content-lists/index';

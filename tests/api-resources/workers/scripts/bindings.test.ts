@@ -11,8 +11,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource bindings', () => {
   // skipped: tests are disabled for the time being
-  test.skip('list: only required params', async () => {
-    const responsePromise = cloudflare.workers.scripts.bindings.list({
+  test.skip('get: only required params', async () => {
+    const responsePromise = cloudflare.workers.scripts.bindings.get({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -25,8 +25,8 @@ describe('resource bindings', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: required and optional params', async () => {
-    const response = await cloudflare.workers.scripts.bindings.list({
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.workers.scripts.bindings.get({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

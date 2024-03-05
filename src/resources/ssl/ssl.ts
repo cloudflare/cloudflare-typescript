@@ -31,11 +31,11 @@ export namespace SSL {
   export import CertificatePackEditParams = CertificatePacksAPI.CertificatePackEditParams;
   export import CertificatePackGetParams = CertificatePacksAPI.CertificatePackGetParams;
   export import Recommendations = RecommendationsAPI.Recommendations;
-  export import RecommendationListResponse = RecommendationsAPI.RecommendationListResponse;
+  export import RecommendationGetResponse = RecommendationsAPI.RecommendationGetResponse;
   export import Universal = UniversalAPI.Universal;
   export import Verification = VerificationAPI.Verification;
-  export import VerificationListResponse = VerificationAPI.VerificationListResponse;
   export import VerificationEditResponse = VerificationAPI.VerificationEditResponse;
-  export import VerificationListParams = VerificationAPI.VerificationListParams;
+  export import VerificationGetResponse = VerificationAPI.VerificationGetResponse;
   export import VerificationEditParams = VerificationAPI.VerificationEditParams;
+  export import VerificationGetParams = VerificationAPI.VerificationGetParams;
 }

@@ -49,6 +49,6 @@ export namespace LOADocuments {
   export import LOADocumentCreateResponse = LOADocumentsAPI.LOADocumentCreateResponse;
   export import LOADocumentCreateParams = LOADocumentsAPI.LOADocumentCreateParams;
   export import Downloads = DownloadsAPI.Downloads;
-  export import DownloadListResponse = DownloadsAPI.DownloadListResponse;
-  export import DownloadListParams = DownloadsAPI.DownloadListParams;
+  export import DownloadGetResponse = DownloadsAPI.DownloadGetResponse;
+  export import DownloadGetParams = DownloadsAPI.DownloadGetParams;
 }

@@ -26,9 +26,9 @@ export {
 } from './organizations';
 export {
   SubscriptionUpdateResponse,
-  SubscriptionListResponse,
   SubscriptionDeleteResponse,
   SubscriptionEditResponse,
+  SubscriptionGetResponse,
   SubscriptionUpdateParams,
   SubscriptionEditParams,
   Subscriptions,
@@ -46,4 +46,4 @@ export {
   TokenListResponsesV4PagePaginationArray,
   Tokens,
 } from './tokens/index';
-export { User, UserListResponse, UserEditResponse, UserEditParams, UserResource } from './user';
+export { User, UserEditResponse, UserGetResponse, UserEditParams, UserResource } from './user';

@@ -22,7 +22,7 @@ export {
   AuditLogs,
 } from './audit-logs';
 export { AvailablePlanListResponse, AvailablePlanGetResponse, AvailablePlans } from './available-plans';
-export { AvailableRatePlanListResponse, AvailableRatePlans } from './available-rate-plans';
+export { AvailableRatePlanGetResponse, AvailableRatePlans } from './available-rate-plans';
 export { Billing } from './billing/billing';
 export {
   BotManagementUpdateResponse,
@@ -99,14 +99,14 @@ export {
 } from './custom-hostnames/custom-hostnames';
 export {
   CustomNameserverCreateResponse,
-  CustomNameserverListResponse,
   CustomNameserverDeleteResponse,
   CustomNameserverAvailabiltyResponse,
+  CustomNameserverGetResponse,
   CustomNameserverVerifyResponse,
   CustomNameserverCreateParams,
-  CustomNameserverListParams,
   CustomNameserverDeleteParams,
   CustomNameserverAvailabiltyParams,
+  CustomNameserverGetParams,
   CustomNameserverVerifyParams,
   CustomNameservers,
 } from './custom-nameservers';
@@ -363,7 +363,7 @@ export {
   URLNormalization,
 } from './url-normalization';
 export { URLScannerScanResponse, URLScannerScanParams, URLScanner } from './url-scanner/url-scanner';
-export { User, UserListResponse, UserEditResponse, UserEditParams, UserResource } from './user/user';
+export { User, UserEditResponse, UserGetResponse, UserEditParams, UserResource } from './user/user';
 export { Vectorize } from './vectorize/vectorize';
 export {
   WARPConnectorCreateResponse,

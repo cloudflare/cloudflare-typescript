@@ -1,13 +1,13 @@
 // File generated from our OpenAPI spec by Stainless.
 
-export { BindingListResponse, BindingListParams, Bindings } from './bindings';
+export { BindingGetResponse, BindingGetParams, Bindings } from './bindings';
 export { ContentUpdateResponse, ContentUpdateParams, Content } from './content';
 export { ContentV2GetParams, ContentV2 } from './content-v2';
 export {
   ScheduleUpdateResponse,
-  ScheduleListResponse,
+  ScheduleGetResponse,
   ScheduleUpdateParams,
-  ScheduleListParams,
+  ScheduleGetParams,
   Schedules,
 } from './schedules';
 export {
@@ -28,11 +28,11 @@ export {
 } from './settings';
 export {
   TailCreateResponse,
-  TailListResponse,
   TailDeleteResponse,
+  TailGetResponse,
   TailCreateParams,
-  TailListParams,
   TailDeleteParams,
+  TailGetParams,
   Tail,
 } from './tail';
 export {

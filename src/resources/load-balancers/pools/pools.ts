@@ -2389,6 +2389,6 @@ export namespace Pools {
   export import HealthCreateParams = HealthAPI.HealthCreateParams;
   export import HealthGetParams = HealthAPI.HealthGetParams;
   export import References = ReferencesAPI.References;
-  export import ReferenceListResponse = ReferencesAPI.ReferenceListResponse;
-  export import ReferenceListParams = ReferencesAPI.ReferenceListParams;
+  export import ReferenceGetResponse = ReferencesAPI.ReferenceGetResponse;
+  export import ReferenceGetParams = ReferencesAPI.ReferenceGetParams;
 }

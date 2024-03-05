@@ -8,19 +8,19 @@ export class Recommendations extends APIResource {
   /**
    * Retrieve the SSL/TLS Recommender's recommendation for a zone.
    */
-  list(
+  get(
     zoneIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RecommendationListResponse | null> {
+  ): Core.APIPromise<RecommendationGetResponse | null> {
     return (
       this._client.get(`/zones/${zoneIdentifier}/ssl/recommendation`, options) as Core.APIPromise<{
-        result: RecommendationListResponse | null;
+        result: RecommendationGetResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface RecommendationListResponse {
+export interface RecommendationGetResponse {
   /**
    * Identifier of a recommedation result.
    */
@@ -32,5 +32,5 @@ export interface RecommendationListResponse {
 }
 
 export namespace Recommendations {
-  export import RecommendationListResponse = RecommendationsAPI.RecommendationListResponse;
+  export import RecommendationGetResponse = RecommendationsAPI.RecommendationGetResponse;
 }

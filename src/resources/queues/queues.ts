@@ -207,10 +207,10 @@ export namespace Queues {
   export import Consumers = ConsumersAPI.Consumers;
   export import ConsumerCreateResponse = ConsumersAPI.ConsumerCreateResponse;
   export import ConsumerUpdateResponse = ConsumersAPI.ConsumerUpdateResponse;
-  export import ConsumerListResponse = ConsumersAPI.ConsumerListResponse;
   export import ConsumerDeleteResponse = ConsumersAPI.ConsumerDeleteResponse;
+  export import ConsumerGetResponse = ConsumersAPI.ConsumerGetResponse;
   export import ConsumerCreateParams = ConsumersAPI.ConsumerCreateParams;
   export import ConsumerUpdateParams = ConsumersAPI.ConsumerUpdateParams;
-  export import ConsumerListParams = ConsumersAPI.ConsumerListParams;
   export import ConsumerDeleteParams = ConsumersAPI.ConsumerDeleteParams;
+  export import ConsumerGetParams = ConsumersAPI.ConsumerGetParams;
 }

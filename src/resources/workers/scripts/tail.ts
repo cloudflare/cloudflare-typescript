@@ -23,23 +23,6 @@ export class Tail extends APIResource {
   }
 
   /**
-   * Get list of tails currently deployed on a Worker.
-   */
-  list(
-    scriptName: string,
-    params: TailListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TailListResponse> {
-    const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/workers/scripts/${scriptName}/tails`,
-        options,
-      ) as Core.APIPromise<{ result: TailListResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Deletes a tail from a Worker.
    */
   delete(
@@ -56,6 +39,23 @@ export class Tail extends APIResource {
       ) as Core.APIPromise<{ result: TailDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Get list of tails currently deployed on a Worker.
+   */
+  get(
+    scriptName: string,
+    params: TailGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TailGetResponse> {
+    const { account_id } = params;
+    return (
+      this._client.get(
+        `/accounts/${account_id}/workers/scripts/${scriptName}/tails`,
+        options,
+      ) as Core.APIPromise<{ result: TailGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
 export interface TailCreateResponse {
@@ -66,7 +66,9 @@ export interface TailCreateResponse {
   url?: unknown;
 }
 
-export interface TailListResponse {
+export type TailDeleteResponse = unknown | Array<unknown> | string;
+
+export interface TailGetResponse {
   id?: unknown;
 
   expires_at?: unknown;
@@ -74,16 +76,7 @@ export interface TailListResponse {
   url?: unknown;
 }
 
-export type TailDeleteResponse = unknown | Array<unknown> | string;
-
 export interface TailCreateParams {
-  /**
-   * Identifier
-   */
-  account_id: string;
-}
-
-export interface TailListParams {
   /**
    * Identifier
    */
@@ -97,11 +90,18 @@ export interface TailDeleteParams {
   account_id: string;
 }
 
+export interface TailGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export namespace Tail {
   export import TailCreateResponse = TailAPI.TailCreateResponse;
-  export import TailListResponse = TailAPI.TailListResponse;
   export import TailDeleteResponse = TailAPI.TailDeleteResponse;
+  export import TailGetResponse = TailAPI.TailGetResponse;
   export import TailCreateParams = TailAPI.TailCreateParams;
-  export import TailListParams = TailAPI.TailListParams;
   export import TailDeleteParams = TailAPI.TailDeleteParams;
+  export import TailGetParams = TailAPI.TailGetParams;
 }

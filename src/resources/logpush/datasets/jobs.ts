@@ -10,19 +10,19 @@ export class Jobs extends APIResource {
   /**
    * Lists Logpush jobs for an account or zone for a dataset.
    */
-  list(
+  get(
     datasetId: string | null,
-    params?: JobListParams,
+    params?: JobGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<JobListResponse>;
-  list(datasetId: string | null, options?: Core.RequestOptions): Core.APIPromise<JobListResponse>;
-  list(
+  ): Core.APIPromise<JobGetResponse>;
+  get(datasetId: string | null, options?: Core.RequestOptions): Core.APIPromise<JobGetResponse>;
+  get(
     datasetId: string | null,
-    params: JobListParams | Core.RequestOptions = {},
+    params: JobGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<JobListResponse> {
+  ): Core.APIPromise<JobGetResponse> {
     if (isRequestOptions(params)) {
-      return this.list(datasetId, {}, params);
+      return this.get(datasetId, {}, params);
     }
     const { account_id, zone_id } = params;
     if (!account_id && !zone_id) {
@@ -45,15 +45,15 @@ export class Jobs extends APIResource {
       this._client.get(
         `/${accountOrZone}/${accountOrZoneId}/logpush/datasets/${datasetId}/jobs`,
         options,
-      ) as Core.APIPromise<{ result: JobListResponse }>
+      ) as Core.APIPromise<{ result: JobGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type JobListResponse = Array<JobListResponse.JobListResponseItem | null>;
+export type JobGetResponse = Array<JobGetResponse.JobGetResponseItem | null>;
 
-export namespace JobListResponse {
-  export interface JobListResponseItem {
+export namespace JobGetResponse {
+  export interface JobGetResponseItem {
     /**
      * Unique id of the job.
      */
@@ -126,10 +126,10 @@ export namespace JobListResponse {
      * The structured replacement for `logpull_options`. When including this field, the
      * `logpull_option` field will be ignored.
      */
-    output_options?: JobListResponseItem.OutputOptions | null;
+    output_options?: JobGetResponseItem.OutputOptions | null;
   }
 
-  export namespace JobListResponseItem {
+  export namespace JobGetResponseItem {
     /**
      * The structured replacement for `logpull_options`. When including this field, the
      * `logpull_option` field will be ignored.
@@ -208,7 +208,7 @@ export namespace JobListResponse {
   }
 }
 
-export interface JobListParams {
+export interface JobGetParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
    */
@@ -221,6 +221,6 @@ export interface JobListParams {
 }
 
 export namespace Jobs {
-  export import JobListResponse = JobsAPI.JobListResponse;
-  export import JobListParams = JobsAPI.JobListParams;
+  export import JobGetResponse = JobsAPI.JobGetResponse;
+  export import JobGetParams = JobsAPI.JobGetParams;
 }

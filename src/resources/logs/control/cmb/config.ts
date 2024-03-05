@@ -2,7 +2,7 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as ConfigAPI from 'cloudflare/resources/logs/controls/cmb/config';
+import * as ConfigAPI from 'cloudflare/resources/logs/control/cmb/config';
 
 export class Config extends APIResource {
   /**

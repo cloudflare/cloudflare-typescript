@@ -3,10 +3,10 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ConfigsAPI from 'cloudflare/resources/magic-network-monitoring/configs/configs';
-import * as FullsAPI from 'cloudflare/resources/magic-network-monitoring/configs/fulls';
+import * as FullAPI from 'cloudflare/resources/magic-network-monitoring/configs/full';
 
 export class Configs extends APIResource {
-  fulls: FullsAPI.Fulls = new FullsAPI.Fulls(this._client);
+  full: FullAPI.Full = new FullAPI.Full(this._client);
 
   /**
    * Create a new network monitoring configuration.
@@ -32,17 +32,6 @@ export class Configs extends APIResource {
   }
 
   /**
-   * Lists default sampling and router IPs for account.
-   */
-  list(accountIdentifier: unknown, options?: Core.RequestOptions): Core.APIPromise<ConfigListResponse> {
-    return (
-      this._client.get(`/accounts/${accountIdentifier}/mnm/config`, options) as Core.APIPromise<{
-        result: ConfigListResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Delete an existing network monitoring configuration.
    */
   delete(accountIdentifier: unknown, options?: Core.RequestOptions): Core.APIPromise<ConfigDeleteResponse> {
@@ -60,6 +49,17 @@ export class Configs extends APIResource {
     return (
       this._client.patch(`/accounts/${accountIdentifier}/mnm/config`, options) as Core.APIPromise<{
         result: ConfigEditResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Lists default sampling and router IPs for account.
+   */
+  get(accountIdentifier: unknown, options?: Core.RequestOptions): Core.APIPromise<ConfigGetResponse> {
+    return (
+      this._client.get(`/accounts/${accountIdentifier}/mnm/config`, options) as Core.APIPromise<{
+        result: ConfigGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -81,21 +81,6 @@ export interface ConfigCreateResponse {
 }
 
 export interface ConfigUpdateResponse {
-  /**
-   * Fallback sampling rate of flow messages being sent in packets per second. This
-   * should match the packet sampling rate configured on the router.
-   */
-  default_sampling: number;
-
-  /**
-   * The account name.
-   */
-  name: string;
-
-  router_ips: Array<string>;
-}
-
-export interface ConfigListResponse {
   /**
    * Fallback sampling rate of flow messages being sent in packets per second. This
    * should match the packet sampling rate configured on the router.
@@ -140,12 +125,27 @@ export interface ConfigEditResponse {
   router_ips: Array<string>;
 }
 
+export interface ConfigGetResponse {
+  /**
+   * Fallback sampling rate of flow messages being sent in packets per second. This
+   * should match the packet sampling rate configured on the router.
+   */
+  default_sampling: number;
+
+  /**
+   * The account name.
+   */
+  name: string;
+
+  router_ips: Array<string>;
+}
+
 export namespace Configs {
   export import ConfigCreateResponse = ConfigsAPI.ConfigCreateResponse;
   export import ConfigUpdateResponse = ConfigsAPI.ConfigUpdateResponse;
-  export import ConfigListResponse = ConfigsAPI.ConfigListResponse;
   export import ConfigDeleteResponse = ConfigsAPI.ConfigDeleteResponse;
   export import ConfigEditResponse = ConfigsAPI.ConfigEditResponse;
-  export import Fulls = FullsAPI.Fulls;
-  export import FullListResponse = FullsAPI.FullListResponse;
+  export import ConfigGetResponse = ConfigsAPI.ConfigGetResponse;
+  export import Full = FullAPI.Full;
+  export import FullGetResponse = FullAPI.FullGetResponse;
 }

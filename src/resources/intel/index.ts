@@ -3,7 +3,7 @@
 export { ASNGetResponse, ASNGetParams, ASN } from './asn/index';
 export { DNSGetResponse, DNSGetParams, DNS } from './dns';
 export { DomainGetResponse, DomainGetParams, Domains } from './domains/index';
-export { DomainHistoryListResponse, DomainHistoryListParams, DomainHistories } from './domain-histories';
+export { DomainHistoryGetResponse, DomainHistoryGetParams, DomainHistory } from './domain-history';
 export { IPGetResponse, IPGetParams, IPs } from './ips';
 export { IPListGetResponse, IPListGetParams, IPLists } from './ip-lists';
 export {

@@ -8,25 +8,25 @@ export class Associations extends APIResource {
   /**
    * Lists all active associations between the certificate and Cloudflare services.
    */
-  list(
+  get(
     mtlsCertificateId: string,
-    params: AssociationListParams,
+    params: AssociationGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AssociationListResponse | null> {
+  ): Core.APIPromise<AssociationGetResponse | null> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/mtls_certificates/${mtlsCertificateId}/associations`,
         options,
-      ) as Core.APIPromise<{ result: AssociationListResponse | null }>
+      ) as Core.APIPromise<{ result: AssociationGetResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type AssociationListResponse = Array<AssociationListResponse.AssociationListResponseItem>;
+export type AssociationGetResponse = Array<AssociationGetResponse.AssociationGetResponseItem>;
 
-export namespace AssociationListResponse {
-  export interface AssociationListResponseItem {
+export namespace AssociationGetResponse {
+  export interface AssociationGetResponseItem {
     /**
      * The service using the certificate.
      */
@@ -39,7 +39,7 @@ export namespace AssociationListResponse {
   }
 }
 
-export interface AssociationListParams {
+export interface AssociationGetParams {
   /**
    * Identifier
    */
@@ -47,6 +47,6 @@ export interface AssociationListParams {
 }
 
 export namespace Associations {
-  export import AssociationListResponse = AssociationsAPI.AssociationListResponse;
-  export import AssociationListParams = AssociationsAPI.AssociationListParams;
+  export import AssociationGetResponse = AssociationsAPI.AssociationGetResponse;
+  export import AssociationGetParams = AssociationsAPI.AssociationGetParams;
 }

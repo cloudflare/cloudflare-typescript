@@ -95,5 +95,5 @@ export namespace Received {
   export import ReceivedGetResponse = ReceivedAPI.ReceivedGetResponse;
   export import ReceivedGetParams = ReceivedAPI.ReceivedGetParams;
   export import Fields = FieldsAPI.Fields;
-  export import FieldListResponse = FieldsAPI.FieldListResponse;
+  export import FieldGetResponse = FieldsAPI.FieldGetResponse;
 }

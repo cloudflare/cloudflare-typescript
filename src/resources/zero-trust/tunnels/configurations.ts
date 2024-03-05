@@ -25,24 +25,24 @@ export class Configurations extends APIResource {
   /**
    * Gets the configuration for a remotely-managed tunnel
    */
-  list(
+  get(
     tunnelId: string,
-    params: ConfigurationListParams,
+    params: ConfigurationGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ConfigurationListResponse> {
+  ): Core.APIPromise<ConfigurationGetResponse> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/cfd_tunnel/${tunnelId}/configurations`,
         options,
-      ) as Core.APIPromise<{ result: ConfigurationListResponse }>
+      ) as Core.APIPromise<{ result: ConfigurationGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
 export type ConfigurationUpdateResponse = unknown | Array<unknown> | string;
 
-export type ConfigurationListResponse = unknown | Array<unknown> | string;
+export type ConfigurationGetResponse = unknown | Array<unknown> | string;
 
 export interface ConfigurationUpdateParams {
   /**
@@ -332,7 +332,7 @@ export namespace ConfigurationUpdateParams {
   }
 }
 
-export interface ConfigurationListParams {
+export interface ConfigurationGetParams {
   /**
    * Identifier
    */
@@ -341,7 +341,7 @@ export interface ConfigurationListParams {
 
 export namespace Configurations {
   export import ConfigurationUpdateResponse = ConfigurationsAPI.ConfigurationUpdateResponse;
-  export import ConfigurationListResponse = ConfigurationsAPI.ConfigurationListResponse;
+  export import ConfigurationGetResponse = ConfigurationsAPI.ConfigurationGetResponse;
   export import ConfigurationUpdateParams = ConfigurationsAPI.ConfigurationUpdateParams;
-  export import ConfigurationListParams = ConfigurationsAPI.ConfigurationListParams;
+  export import ConfigurationGetParams = ConfigurationsAPI.ConfigurationGetParams;
 }

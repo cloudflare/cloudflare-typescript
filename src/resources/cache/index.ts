@@ -2,13 +2,13 @@
 
 export { CachePurgeResponse, CachePurgeParams, Cache } from './cache';
 export {
-  CacheReserveListResponse,
   CacheReserveClearResponse,
   CacheReserveEditResponse,
+  CacheReserveGetResponse,
   CacheReserveStatusResponse,
-  CacheReserveListParams,
   CacheReserveClearParams,
   CacheReserveEditParams,
+  CacheReserveGetParams,
   CacheReserveStatusParams,
   CacheReserve,
 } from './cache-reserve';
@@ -29,11 +29,11 @@ export {
   SmartTieredCached,
 } from './smart-tiered-cached';
 export {
-  VariantListResponse,
   VariantDeleteResponse,
   VariantEditResponse,
-  VariantListParams,
+  VariantGetResponse,
   VariantDeleteParams,
   VariantEditParams,
+  VariantGetParams,
   Variants,
 } from './variants';

@@ -331,6 +331,6 @@ export namespace MTLSCertificates {
   export import MTLSCertificateDeleteParams = MTLSCertificatesAPI.MTLSCertificateDeleteParams;
   export import MTLSCertificateGetParams = MTLSCertificatesAPI.MTLSCertificateGetParams;
   export import Associations = AssociationsAPI.Associations;
-  export import AssociationListResponse = AssociationsAPI.AssociationListResponse;
-  export import AssociationListParams = AssociationsAPI.AssociationListParams;
+  export import AssociationGetResponse = AssociationsAPI.AssociationGetResponse;
+  export import AssociationGetParams = AssociationsAPI.AssociationGetParams;
 }

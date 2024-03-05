@@ -8,25 +8,25 @@ export class Logs extends APIResource {
   /**
    * Fetch deployment logs for a project.
    */
-  list(
+  get(
     projectName: string,
     deploymentId: string,
-    params: LogListParams,
+    params: LogGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LogListResponse> {
+  ): Core.APIPromise<LogGetResponse> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/pages/projects/${projectName}/deployments/${deploymentId}/history/logs`,
         options,
-      ) as Core.APIPromise<{ result: LogListResponse }>
+      ) as Core.APIPromise<{ result: LogGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type LogListResponse = unknown | Array<unknown> | string;
+export type LogGetResponse = unknown | Array<unknown> | string;
 
-export interface LogListParams {
+export interface LogGetParams {
   /**
    * Identifier
    */
@@ -34,6 +34,6 @@ export interface LogListParams {
 }
 
 export namespace Logs {
-  export import LogListResponse = LogsAPI.LogListResponse;
-  export import LogListParams = LogsAPI.LogListParams;
+  export import LogGetResponse = LogsAPI.LogGetResponse;
+  export import LogGetParams = LogsAPI.LogGetParams;
 }

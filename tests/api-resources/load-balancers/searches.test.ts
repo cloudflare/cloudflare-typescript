@@ -11,8 +11,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource searches', () => {
   // skipped: tests are disabled for the time being
-  test.skip('list: only required params', async () => {
-    const responsePromise = cloudflare.loadBalancers.searches.list({
+  test.skip('get: only required params', async () => {
+    const responsePromise = cloudflare.loadBalancers.searches.get({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -25,8 +25,8 @@ describe('resource searches', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: required and optional params', async () => {
-    const response = await cloudflare.loadBalancers.searches.list({
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.loadBalancers.searches.get({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       page: {},
       per_page: {},

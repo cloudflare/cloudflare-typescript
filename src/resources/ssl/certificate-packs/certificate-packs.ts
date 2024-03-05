@@ -203,6 +203,6 @@ export namespace CertificatePacks {
   export import OrderCreateResponse = OrderAPI.OrderCreateResponse;
   export import OrderCreateParams = OrderAPI.OrderCreateParams;
   export import Quota = QuotaAPI.Quota;
-  export import QuotaListResponse = QuotaAPI.QuotaListResponse;
-  export import QuotaListParams = QuotaAPI.QuotaListParams;
+  export import QuotaGetResponse = QuotaAPI.QuotaGetResponse;
+  export import QuotaGetParams = QuotaAPI.QuotaGetParams;
 }

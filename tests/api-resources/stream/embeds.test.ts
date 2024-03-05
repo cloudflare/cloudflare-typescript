@@ -11,8 +11,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource embeds', () => {
   // skipped: tests are disabled for the time being
-  test.skip('list: only required params', async () => {
-    const responsePromise = cloudflare.stream.embeds.list('ea95132c15732412d22c1476fa83f27a', {
+  test.skip('get: only required params', async () => {
+    const responsePromise = cloudflare.stream.embeds.get('ea95132c15732412d22c1476fa83f27a', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -25,8 +25,8 @@ describe('resource embeds', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: required and optional params', async () => {
-    const response = await cloudflare.stream.embeds.list('ea95132c15732412d22c1476fa83f27a', {
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.stream.embeds.get('ea95132c15732412d22c1476fa83f27a', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

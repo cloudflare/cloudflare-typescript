@@ -2,11 +2,12 @@
 
 export {
   AddressCreateResponse,
+  AddressListResponse,
   AddressDeleteResponse,
-  AddressEmailRoutingDestinationAddressesListDestinationAddressesResponse,
   AddressGetResponse,
   AddressCreateParams,
-  AddressEmailRoutingDestinationAddressesListDestinationAddressesParams,
+  AddressListParams,
+  AddressListResponsesV4PagePaginationArray,
   Addresses,
 } from './addresses';
 export { DNSGetResponse, DNS } from './dns';

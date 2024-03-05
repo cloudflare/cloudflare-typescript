@@ -411,8 +411,8 @@ export namespace Cloudflare {
 
   export import UserResource = API.UserResource;
   export import User = API.User;
-  export import UserListResponse = API.UserListResponse;
   export import UserEditResponse = API.UserEditResponse;
+  export import UserGetResponse = API.UserGetResponse;
   export import UserEditParams = API.UserEditParams;
 
   export import Zones = API.Zones;
@@ -463,7 +463,7 @@ export namespace Cloudflare {
   export import AvailablePlanGetResponse = API.AvailablePlanGetResponse;
 
   export import AvailableRatePlans = API.AvailableRatePlans;
-  export import AvailableRatePlanListResponse = API.AvailableRatePlanListResponse;
+  export import AvailableRatePlanGetResponse = API.AvailableRatePlanGetResponse;
 
   export import CertificateAuthorities = API.CertificateAuthorities;
 
@@ -508,14 +508,14 @@ export namespace Cloudflare {
 
   export import CustomNameservers = API.CustomNameservers;
   export import CustomNameserverCreateResponse = API.CustomNameserverCreateResponse;
-  export import CustomNameserverListResponse = API.CustomNameserverListResponse;
   export import CustomNameserverDeleteResponse = API.CustomNameserverDeleteResponse;
   export import CustomNameserverAvailabiltyResponse = API.CustomNameserverAvailabiltyResponse;
+  export import CustomNameserverGetResponse = API.CustomNameserverGetResponse;
   export import CustomNameserverVerifyResponse = API.CustomNameserverVerifyResponse;
   export import CustomNameserverCreateParams = API.CustomNameserverCreateParams;
-  export import CustomNameserverListParams = API.CustomNameserverListParams;
   export import CustomNameserverDeleteParams = API.CustomNameserverDeleteParams;
   export import CustomNameserverAvailabiltyParams = API.CustomNameserverAvailabiltyParams;
+  export import CustomNameserverGetParams = API.CustomNameserverGetParams;
   export import CustomNameserverVerifyParams = API.CustomNameserverVerifyParams;
 
   export import DNS = API.DNS;

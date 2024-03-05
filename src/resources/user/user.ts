@@ -23,21 +23,21 @@ export class UserResource extends APIResource {
   tokens: TokensAPI.Tokens = new TokensAPI.Tokens(this._client);
 
   /**
-   * User Details
-   */
-  list(options?: Core.RequestOptions): Core.APIPromise<UserListResponse> {
-    return (this._client.get('/user', options) as Core.APIPromise<{ result: UserListResponse }>)._thenUnwrap(
-      (obj) => obj.result,
-    );
-  }
-
-  /**
    * Edit part of your user details.
    */
   edit(body: UserEditParams, options?: Core.RequestOptions): Core.APIPromise<UserEditResponse> {
     return (
       this._client.patch('/user', { body, ...options }) as Core.APIPromise<{ result: UserEditResponse }>
     )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * User Details
+   */
+  get(options?: Core.RequestOptions): Core.APIPromise<UserGetResponse> {
+    return (this._client.get('/user', options) as Core.APIPromise<{ result: UserGetResponse }>)._thenUnwrap(
+      (obj) => obj.result,
+    );
   }
 }
 
@@ -108,9 +108,9 @@ export interface User {
   fax?: string;
 }
 
-export type UserListResponse = unknown | string | null;
-
 export type UserEditResponse = unknown | string | null;
+
+export type UserGetResponse = unknown | string | null;
 
 export interface UserEditParams {
   /**
@@ -141,8 +141,8 @@ export interface UserEditParams {
 
 export namespace UserResource {
   export import User = UserAPI.User;
-  export import UserListResponse = UserAPI.UserListResponse;
   export import UserEditResponse = UserAPI.UserEditResponse;
+  export import UserGetResponse = UserAPI.UserGetResponse;
   export import UserEditParams = UserAPI.UserEditParams;
   export import AuditLogs = AuditLogsAPI.AuditLogs;
   export import AuditLogListResponse = AuditLogsAPI.AuditLogListResponse;
@@ -164,9 +164,9 @@ export namespace UserResource {
   export import OrganizationListParams = OrganizationsAPI.OrganizationListParams;
   export import Subscriptions = SubscriptionsAPI.Subscriptions;
   export import SubscriptionUpdateResponse = SubscriptionsAPI.SubscriptionUpdateResponse;
-  export import SubscriptionListResponse = SubscriptionsAPI.SubscriptionListResponse;
   export import SubscriptionDeleteResponse = SubscriptionsAPI.SubscriptionDeleteResponse;
   export import SubscriptionEditResponse = SubscriptionsAPI.SubscriptionEditResponse;
+  export import SubscriptionGetResponse = SubscriptionsAPI.SubscriptionGetResponse;
   export import SubscriptionUpdateParams = SubscriptionsAPI.SubscriptionUpdateParams;
   export import SubscriptionEditParams = SubscriptionsAPI.SubscriptionEditParams;
   export import Tokens = TokensAPI.Tokens;

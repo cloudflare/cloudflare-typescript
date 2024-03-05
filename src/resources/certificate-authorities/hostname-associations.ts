@@ -24,16 +24,16 @@ export class HostnameAssociations extends APIResource {
   /**
    * List Hostname Associations
    */
-  list(
-    params: HostnameAssociationListParams,
+  get(
+    params: HostnameAssociationGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<HostnameAssociationListResponse> {
+  ): Core.APIPromise<HostnameAssociationGetResponse> {
     const { zone_id, ...query } = params;
     return (
       this._client.get(`/zones/${zone_id}/certificate_authorities/hostname_associations`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: HostnameAssociationListResponse }>
+      }) as Core.APIPromise<{ result: HostnameAssociationGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -49,7 +49,7 @@ export interface HostnameAssociationUpdateResponse {
   mtls_certificate_id?: string;
 }
 
-export interface HostnameAssociationListResponse {
+export interface HostnameAssociationGetResponse {
   hostnames?: Array<string>;
 
   /**
@@ -79,7 +79,7 @@ export interface HostnameAssociationUpdateParams {
   mtls_certificate_id?: string;
 }
 
-export interface HostnameAssociationListParams {
+export interface HostnameAssociationGetParams {
   /**
    * Path param: Identifier
    */
@@ -96,7 +96,7 @@ export interface HostnameAssociationListParams {
 
 export namespace HostnameAssociations {
   export import HostnameAssociationUpdateResponse = HostnameAssociationsAPI.HostnameAssociationUpdateResponse;
-  export import HostnameAssociationListResponse = HostnameAssociationsAPI.HostnameAssociationListResponse;
+  export import HostnameAssociationGetResponse = HostnameAssociationsAPI.HostnameAssociationGetResponse;
   export import HostnameAssociationUpdateParams = HostnameAssociationsAPI.HostnameAssociationUpdateParams;
-  export import HostnameAssociationListParams = HostnameAssociationsAPI.HostnameAssociationListParams;
+  export import HostnameAssociationGetParams = HostnameAssociationsAPI.HostnameAssociationGetParams;
 }

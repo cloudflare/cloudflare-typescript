@@ -9,15 +9,15 @@ export class Fields extends APIResource {
    * Lists all fields available. The response is json object with key-value pairs,
    * where keys are field names, and values are descriptions.
    */
-  list(zoneIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<FieldListResponse> {
+  get(zoneIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<FieldGetResponse> {
     return this._client.get(`/zones/${zoneIdentifier}/logs/received/fields`, options);
   }
 }
 
-export interface FieldListResponse {
+export interface FieldGetResponse {
   key?: string;
 }
 
 export namespace Fields {
-  export import FieldListResponse = FieldsAPI.FieldListResponse;
+  export import FieldGetResponse = FieldsAPI.FieldGetResponse;
 }

@@ -4,89 +4,95 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as HistoryAPI from 'cloudflare/resources/user/billing/history';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class History extends APIResource {
   /**
    * Accesses your billing history object.
    */
-  list(
-    query?: HistoryListParams,
+  get(query?: HistoryGetParams, options?: Core.RequestOptions): Core.APIPromise<HistoryGetResponse | null>;
+  get(options?: Core.RequestOptions): Core.APIPromise<HistoryGetResponse | null>;
+  get(
+    query: HistoryGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<HistoryListResponsesV4PagePaginationArray, HistoryListResponse>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<HistoryListResponsesV4PagePaginationArray, HistoryListResponse>;
-  list(
-    query: HistoryListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<HistoryListResponsesV4PagePaginationArray, HistoryListResponse> {
+  ): Core.APIPromise<HistoryGetResponse | null> {
     if (isRequestOptions(query)) {
-      return this.list({}, query);
+      return this.get({}, query);
     }
-    return this._client.getAPIList('/user/billing/history', HistoryListResponsesV4PagePaginationArray, {
-      query,
-      ...options,
-    });
+    return (
+      this._client.get('/user/billing/history', { query, ...options }) as Core.APIPromise<{
+        result: HistoryGetResponse | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class HistoryListResponsesV4PagePaginationArray extends V4PagePaginationArray<HistoryListResponse> {}
+export type HistoryGetResponse = Array<HistoryGetResponse.HistoryGetResponseItem>;
 
-export interface HistoryListResponse {
-  /**
-   * Billing item identifier tag.
-   */
-  id: string;
+export namespace HistoryGetResponse {
+  export interface HistoryGetResponseItem {
+    /**
+     * Billing item identifier tag.
+     */
+    id: string;
 
-  /**
-   * The billing item action.
-   */
-  action: string;
+    /**
+     * The billing item action.
+     */
+    action: string;
 
-  /**
-   * The amount associated with this billing item.
-   */
-  amount: number;
+    /**
+     * The amount associated with this billing item.
+     */
+    amount: number;
 
-  /**
-   * The monetary unit in which pricing information is displayed.
-   */
-  currency: string;
+    /**
+     * The monetary unit in which pricing information is displayed.
+     */
+    currency: string;
 
-  /**
-   * The billing item description.
-   */
-  description: string;
+    /**
+     * The billing item description.
+     */
+    description: string;
 
-  /**
-   * When the billing item was created.
-   */
-  occurred_at: string;
+    /**
+     * When the billing item was created.
+     */
+    occurred_at: string;
 
-  /**
-   * The billing item type.
-   */
-  type: string;
+    /**
+     * The billing item type.
+     */
+    type: string;
 
-  zone: HistoryListResponse.Zone;
-}
+    zone: HistoryGetResponseItem.Zone;
+  }
 
-export namespace HistoryListResponse {
-  export interface Zone {
-    name?: unknown;
+  export namespace HistoryGetResponseItem {
+    export interface Zone {
+      name?: unknown;
+    }
   }
 }
 
-export interface HistoryListParams extends V4PagePaginationArrayParams {
+export interface HistoryGetParams {
   /**
    * Field to order billing history by.
    */
   order?: 'type' | 'occured_at' | 'action';
+
+  /**
+   * Page number of paginated results.
+   */
+  page?: number;
+
+  /**
+   * Number of items per page.
+   */
+  per_page?: number;
 }
 
 export namespace History {
-  export import HistoryListResponse = HistoryAPI.HistoryListResponse;
-  export import HistoryListResponsesV4PagePaginationArray = HistoryAPI.HistoryListResponsesV4PagePaginationArray;
-  export import HistoryListParams = HistoryAPI.HistoryListParams;
+  export import HistoryGetResponse = HistoryAPI.HistoryGetResponse;
+  export import HistoryGetParams = HistoryAPI.HistoryGetParams;
 }

@@ -11,19 +11,19 @@ export class Fields extends APIResource {
    * Lists all fields available for a dataset. The response result is an object with
    * key-value pairs, where keys are field names, and values are descriptions.
    */
-  list(
+  get(
     datasetId: string | null,
-    params?: FieldListParams,
+    params?: FieldGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<FieldListResponse>;
-  list(datasetId: string | null, options?: Core.RequestOptions): Core.APIPromise<FieldListResponse>;
-  list(
+  ): Core.APIPromise<FieldGetResponse>;
+  get(datasetId: string | null, options?: Core.RequestOptions): Core.APIPromise<FieldGetResponse>;
+  get(
     datasetId: string | null,
-    params: FieldListParams | Core.RequestOptions = {},
+    params: FieldGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<FieldListResponse> {
+  ): Core.APIPromise<FieldGetResponse> {
     if (isRequestOptions(params)) {
-      return this.list(datasetId, {}, params);
+      return this.get(datasetId, {}, params);
     }
     const { account_id, zone_id } = params;
     if (!account_id && !zone_id) {
@@ -46,14 +46,14 @@ export class Fields extends APIResource {
       this._client.get(
         `/${accountOrZone}/${accountOrZoneId}/logpush/datasets/${datasetId}/fields`,
         options,
-      ) as Core.APIPromise<{ result: FieldListResponse }>
+      ) as Core.APIPromise<{ result: FieldGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type FieldListResponse = unknown;
+export type FieldGetResponse = unknown;
 
-export interface FieldListParams {
+export interface FieldGetParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
    */
@@ -66,6 +66,6 @@ export interface FieldListParams {
 }
 
 export namespace Fields {
-  export import FieldListResponse = FieldsAPI.FieldListResponse;
-  export import FieldListParams = FieldsAPI.FieldListParams;
+  export import FieldGetResponse = FieldsAPI.FieldGetResponse;
+  export import FieldGetParams = FieldsAPI.FieldGetParams;
 }

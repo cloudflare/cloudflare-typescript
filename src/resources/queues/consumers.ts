@@ -41,23 +41,6 @@ export class Consumers extends APIResource {
   }
 
   /**
-   * Returns the consumers for a queue.
-   */
-  list(
-    name: string,
-    params: ConsumerListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ConsumerListResponse | null> {
-    const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/workers/queues/${name}/consumers`,
-        options,
-      ) as Core.APIPromise<{ result: ConsumerListResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Deletes the consumer for a queue.
    */
   delete(
@@ -72,6 +55,23 @@ export class Consumers extends APIResource {
         `/accounts/${account_id}/workers/queues/${name}/consumers/${consumerName}`,
         options,
       ) as Core.APIPromise<{ result: ConsumerDeleteResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Returns the consumers for a queue.
+   */
+  get(
+    name: string,
+    params: ConsumerGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ConsumerGetResponse | null> {
+    const { account_id } = params;
+    return (
+      this._client.get(
+        `/accounts/${account_id}/workers/queues/${name}/consumers`,
+        options,
+      ) as Core.APIPromise<{ result: ConsumerGetResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -124,10 +124,12 @@ export namespace ConsumerUpdateResponse {
   }
 }
 
-export type ConsumerListResponse = Array<ConsumerListResponse.ConsumerListResponseItem>;
+export type ConsumerDeleteResponse = unknown | Array<unknown> | string;
 
-export namespace ConsumerListResponse {
-  export interface ConsumerListResponseItem {
+export type ConsumerGetResponse = Array<ConsumerGetResponse.ConsumerGetResponseItem>;
+
+export namespace ConsumerGetResponse {
+  export interface ConsumerGetResponseItem {
     created_on?: unknown;
 
     environment?: unknown;
@@ -136,10 +138,10 @@ export namespace ConsumerListResponse {
 
     service?: unknown;
 
-    settings?: ConsumerListResponseItem.Settings;
+    settings?: ConsumerGetResponseItem.Settings;
   }
 
-  export namespace ConsumerListResponseItem {
+  export namespace ConsumerGetResponseItem {
     export interface Settings {
       batch_size?: number;
 
@@ -149,8 +151,6 @@ export namespace ConsumerListResponse {
     }
   }
 }
-
-export type ConsumerDeleteResponse = unknown | Array<unknown> | string;
 
 export interface ConsumerCreateParams {
   /**
@@ -176,14 +176,14 @@ export interface ConsumerUpdateParams {
   body: unknown;
 }
 
-export interface ConsumerListParams {
+export interface ConsumerDeleteParams {
   /**
    * Identifier
    */
   account_id: string;
 }
 
-export interface ConsumerDeleteParams {
+export interface ConsumerGetParams {
   /**
    * Identifier
    */
@@ -193,10 +193,10 @@ export interface ConsumerDeleteParams {
 export namespace Consumers {
   export import ConsumerCreateResponse = ConsumersAPI.ConsumerCreateResponse;
   export import ConsumerUpdateResponse = ConsumersAPI.ConsumerUpdateResponse;
-  export import ConsumerListResponse = ConsumersAPI.ConsumerListResponse;
   export import ConsumerDeleteResponse = ConsumersAPI.ConsumerDeleteResponse;
+  export import ConsumerGetResponse = ConsumersAPI.ConsumerGetResponse;
   export import ConsumerCreateParams = ConsumersAPI.ConsumerCreateParams;
   export import ConsumerUpdateParams = ConsumersAPI.ConsumerUpdateParams;
-  export import ConsumerListParams = ConsumersAPI.ConsumerListParams;
   export import ConsumerDeleteParams = ConsumersAPI.ConsumerDeleteParams;
+  export import ConsumerGetParams = ConsumersAPI.ConsumerGetParams;
 }

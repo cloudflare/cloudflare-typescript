@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless.
 
 import { APIResource } from 'cloudflare/resource';
-import * as ConfigAPI from 'cloudflare/resources/logs/controls/cmb/config';
+import * as ConfigAPI from 'cloudflare/resources/logs/control/cmb/config';
 
 export class Cmb extends APIResource {
   config: ConfigAPI.Config = new ConfigAPI.Config(this._client);
