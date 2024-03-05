@@ -16,12 +16,12 @@ export class ContentLists extends APIResource {
     identifier: string,
     body: ContentListUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ContentListUpdateResponse> {
+  ): Core.APIPromise<DwebConfigContentListDetails> {
     return (
       this._client.put(
         `/zones/${zoneIdentifier}/web3/hostnames/${identifier}/ipfs_universal_path/content_list`,
         { body, ...options },
-      ) as Core.APIPromise<{ result: ContentListUpdateResponse }>
+      ) as Core.APIPromise<{ result: DwebConfigContentListDetails }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -32,24 +32,17 @@ export class ContentLists extends APIResource {
     zoneIdentifier: string,
     identifier: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ContentListGetResponse> {
+  ): Core.APIPromise<DwebConfigContentListDetails> {
     return (
       this._client.get(
         `/zones/${zoneIdentifier}/web3/hostnames/${identifier}/ipfs_universal_path/content_list`,
         options,
-      ) as Core.APIPromise<{ result: ContentListGetResponse }>
+      ) as Core.APIPromise<{ result: DwebConfigContentListDetails }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface ContentListUpdateResponse {
-  /**
-   * Behavior of the content list.
-   */
-  action?: 'block';
-}
-
-export interface ContentListGetResponse {
+export interface DwebConfigContentListDetails {
   /**
    * Behavior of the content list.
    */
@@ -65,41 +58,16 @@ export interface ContentListUpdateParams {
   /**
    * Content list entries.
    */
-  entries: Array<ContentListUpdateParams.Entry>;
-}
-
-export namespace ContentListUpdateParams {
-  /**
-   * Content list entry to be blocked.
-   */
-  export interface Entry {
-    /**
-     * CID or content path of content to block.
-     */
-    content?: string;
-
-    /**
-     * An optional description of the content list entry.
-     */
-    description?: string;
-
-    /**
-     * Type of content list entry to block.
-     */
-    type?: 'cid' | 'content_path';
-  }
+  entries: Array<EntriesAPI.DwebConfigContentListEntry>;
 }
 
 export namespace ContentLists {
-  export import ContentListUpdateResponse = ContentListsAPI.ContentListUpdateResponse;
-  export import ContentListGetResponse = ContentListsAPI.ContentListGetResponse;
+  export import DwebConfigContentListDetails = ContentListsAPI.DwebConfigContentListDetails;
   export import ContentListUpdateParams = ContentListsAPI.ContentListUpdateParams;
   export import Entries = EntriesAPI.Entries;
-  export import EntryCreateResponse = EntriesAPI.EntryCreateResponse;
-  export import EntryUpdateResponse = EntriesAPI.EntryUpdateResponse;
+  export import DwebConfigContentListEntry = EntriesAPI.DwebConfigContentListEntry;
   export import EntryListResponse = EntriesAPI.EntryListResponse;
   export import EntryDeleteResponse = EntriesAPI.EntryDeleteResponse;
-  export import EntryGetResponse = EntriesAPI.EntryGetResponse;
   export import EntryCreateParams = EntriesAPI.EntryCreateParams;
   export import EntryUpdateParams = EntriesAPI.EntryUpdateParams;
 }

@@ -11,25 +11,25 @@ export class Availabilities extends APIResource {
   list(
     params: AvailabilityListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AvailabilityListResponse> {
+  ): Core.APIPromise<ObservatoryAvailabilities> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/speed_api/availabilities`, options) as Core.APIPromise<{
-        result: AvailabilityListResponse;
+        result: ObservatoryAvailabilities;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface AvailabilityListResponse {
-  quota?: AvailabilityListResponse.Quota;
+export interface ObservatoryAvailabilities {
+  quota?: ObservatoryAvailabilities.Quota;
 
-  regions?: Array<AvailabilityListResponse.Region>;
+  regions?: Array<ObservatoryAvailabilities.Region>;
 
   regionsPerPlan?: unknown;
 }
 
-export namespace AvailabilityListResponse {
+export namespace ObservatoryAvailabilities {
   export interface Quota {
     /**
      * Cloudflare plan.
@@ -99,6 +99,6 @@ export interface AvailabilityListParams {
 }
 
 export namespace Availabilities {
-  export import AvailabilityListResponse = AvailabilitiesAPI.AvailabilityListResponse;
+  export import ObservatoryAvailabilities = AvailabilitiesAPI.ObservatoryAvailabilities;
   export import AvailabilityListParams = AvailabilitiesAPI.AvailabilityListParams;
 }

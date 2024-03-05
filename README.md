@@ -29,13 +29,13 @@ const cloudflare = new Cloudflare({
 });
 
 async function main() {
-  const zoneCreateResponse = await cloudflare.zones.create({
+  const zonesZone = await cloudflare.zones.create({
     account: { id: '023e105f4ecef8ad9ca31a8372d0c353' },
     name: 'example.com',
     type: 'full',
   });
 
-  console.log(zoneCreateResponse.id);
+  console.log(zonesZone.id);
 }
 
 main();
@@ -60,7 +60,7 @@ async function main() {
     name: 'example.com',
     type: 'full',
   };
-  const zoneCreateResponse: Cloudflare.ZoneCreateResponse = await cloudflare.zones.create(params);
+  const zonesZone: Cloudflare.ZonesZone = await cloudflare.zones.create(params);
 }
 
 main();
@@ -166,11 +166,11 @@ const response = await cloudflare.zones
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: zoneCreateResponse, response: raw } = await cloudflare.zones
+const { data: zonesZone, response: raw } = await cloudflare.zones
   .create({ account: { id: '023e105f4ecef8ad9ca31a8372d0c353' }, name: 'example.com', type: 'full' })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(zoneCreateResponse.id);
+console.log(zonesZone.id);
 ```
 
 ## Customizing the fetch client

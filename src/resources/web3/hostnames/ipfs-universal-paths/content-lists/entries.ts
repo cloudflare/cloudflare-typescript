@@ -13,12 +13,12 @@ export class Entries extends APIResource {
     identifier: string,
     body: EntryCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<EntryCreateResponse> {
+  ): Core.APIPromise<DwebConfigContentListEntry> {
     return (
       this._client.post(
         `/zones/${zoneIdentifier}/web3/hostnames/${identifier}/ipfs_universal_path/content_list/entries`,
         { body, ...options },
-      ) as Core.APIPromise<{ result: EntryCreateResponse }>
+      ) as Core.APIPromise<{ result: DwebConfigContentListEntry }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -31,12 +31,12 @@ export class Entries extends APIResource {
     contentListEntryIdentifier: string,
     body: EntryUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<EntryUpdateResponse> {
+  ): Core.APIPromise<DwebConfigContentListEntry> {
     return (
       this._client.put(
         `/zones/${zoneIdentifier}/web3/hostnames/${identifier}/ipfs_universal_path/content_list/entries/${contentListEntryIdentifier}`,
         { body, ...options },
-      ) as Core.APIPromise<{ result: EntryUpdateResponse }>
+      ) as Core.APIPromise<{ result: DwebConfigContentListEntry }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -81,12 +81,12 @@ export class Entries extends APIResource {
     identifier: string,
     contentListEntryIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<EntryGetResponse> {
+  ): Core.APIPromise<DwebConfigContentListEntry> {
     return (
       this._client.get(
         `/zones/${zoneIdentifier}/web3/hostnames/${identifier}/ipfs_universal_path/content_list/entries/${contentListEntryIdentifier}`,
         options,
-      ) as Core.APIPromise<{ result: EntryGetResponse }>
+      ) as Core.APIPromise<{ result: DwebConfigContentListEntry }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -94,36 +94,7 @@ export class Entries extends APIResource {
 /**
  * Content list entry to be blocked.
  */
-export interface EntryCreateResponse {
-  /**
-   * Identifier
-   */
-  id?: string;
-
-  /**
-   * CID or content path of content to block.
-   */
-  content?: string;
-
-  created_on?: string;
-
-  /**
-   * An optional description of the content list entry.
-   */
-  description?: string;
-
-  modified_on?: string;
-
-  /**
-   * Type of content list entry to block.
-   */
-  type?: 'cid' | 'content_path';
-}
-
-/**
- * Content list entry to be blocked.
- */
-export interface EntryUpdateResponse {
+export interface DwebConfigContentListEntry {
   /**
    * Identifier
    */
@@ -153,38 +124,7 @@ export interface EntryListResponse {
   /**
    * Content list entries.
    */
-  entries?: Array<EntryListResponse.Entry>;
-}
-
-export namespace EntryListResponse {
-  /**
-   * Content list entry to be blocked.
-   */
-  export interface Entry {
-    /**
-     * Identifier
-     */
-    id?: string;
-
-    /**
-     * CID or content path of content to block.
-     */
-    content?: string;
-
-    created_on?: string;
-
-    /**
-     * An optional description of the content list entry.
-     */
-    description?: string;
-
-    modified_on?: string;
-
-    /**
-     * Type of content list entry to block.
-     */
-    type?: 'cid' | 'content_path';
-  }
+  entries?: Array<DwebConfigContentListEntry>;
 }
 
 export interface EntryDeleteResponse {
@@ -192,35 +132,6 @@ export interface EntryDeleteResponse {
    * Identifier
    */
   id: string;
-}
-
-/**
- * Content list entry to be blocked.
- */
-export interface EntryGetResponse {
-  /**
-   * Identifier
-   */
-  id?: string;
-
-  /**
-   * CID or content path of content to block.
-   */
-  content?: string;
-
-  created_on?: string;
-
-  /**
-   * An optional description of the content list entry.
-   */
-  description?: string;
-
-  modified_on?: string;
-
-  /**
-   * Type of content list entry to block.
-   */
-  type?: 'cid' | 'content_path';
 }
 
 export interface EntryCreateParams {
@@ -258,11 +169,9 @@ export interface EntryUpdateParams {
 }
 
 export namespace Entries {
-  export import EntryCreateResponse = EntriesAPI.EntryCreateResponse;
-  export import EntryUpdateResponse = EntriesAPI.EntryUpdateResponse;
+  export import DwebConfigContentListEntry = EntriesAPI.DwebConfigContentListEntry;
   export import EntryListResponse = EntriesAPI.EntryListResponse;
   export import EntryDeleteResponse = EntriesAPI.EntryDeleteResponse;
-  export import EntryGetResponse = EntriesAPI.EntryGetResponse;
   export import EntryCreateParams = EntriesAPI.EntryCreateParams;
   export import EntryUpdateParams = EntriesAPI.EntryUpdateParams;
 }

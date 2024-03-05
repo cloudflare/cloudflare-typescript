@@ -28,7 +28,7 @@ export class Customs extends APIResource {
     profileId: string,
     params: CustomUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomUpdateResponse> {
+  ): Core.APIPromise<DLPCustomProfile> {
     const { account_id, ...body } = params;
     return this._client.put(`/accounts/${account_id}/dlp/profiles/custom/${profileId}`, { body, ...options });
   }
@@ -57,147 +57,18 @@ export class Customs extends APIResource {
     profileId: string,
     params: CustomGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomGetResponse> {
+  ): Core.APIPromise<DLPCustomProfile> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/dlp/profiles/custom/${profileId}`,
         options,
-      ) as Core.APIPromise<{ result: CustomGetResponse }>
+      ) as Core.APIPromise<{ result: DLPCustomProfile }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type CustomCreateResponse = Array<CustomCreateResponse.CustomCreateResponseItem>;
-
-export namespace CustomCreateResponse {
-  export interface CustomCreateResponseItem {
-    /**
-     * The ID for this profile
-     */
-    id?: string;
-
-    /**
-     * Related DLP policies will trigger when the match count exceeds the number set.
-     */
-    allowed_match_count?: number;
-
-    /**
-     * Scan the context of predefined entries to only return matches surrounded by
-     * keywords.
-     */
-    context_awareness?: CustomCreateResponseItem.ContextAwareness;
-
-    created_at?: string;
-
-    /**
-     * The description of the profile.
-     */
-    description?: string;
-
-    /**
-     * The entries for this profile.
-     */
-    entries?: Array<CustomCreateResponseItem.Entry>;
-
-    /**
-     * The name of the profile.
-     */
-    name?: string;
-
-    /**
-     * The type of the profile.
-     */
-    type?: 'custom';
-
-    updated_at?: string;
-  }
-
-  export namespace CustomCreateResponseItem {
-    /**
-     * Scan the context of predefined entries to only return matches surrounded by
-     * keywords.
-     */
-    export interface ContextAwareness {
-      /**
-       * If true, scan the context of predefined entries to only return matches
-       * surrounded by keywords.
-       */
-      enabled: boolean;
-
-      /**
-       * Content types to exclude from context analysis and return all matches.
-       */
-      skip: ContextAwareness.Skip;
-    }
-
-    export namespace ContextAwareness {
-      /**
-       * Content types to exclude from context analysis and return all matches.
-       */
-      export interface Skip {
-        /**
-         * If the content type is a file, skip context analysis and return all matches.
-         */
-        files: boolean;
-      }
-    }
-
-    /**
-     * A custom entry that matches a profile
-     */
-    export interface Entry {
-      /**
-       * The ID for this entry
-       */
-      id?: string;
-
-      created_at?: string;
-
-      /**
-       * Whether the entry is enabled or not.
-       */
-      enabled?: boolean;
-
-      /**
-       * The name of the entry.
-       */
-      name?: string;
-
-      /**
-       * A pattern that matches an entry
-       */
-      pattern?: Entry.Pattern;
-
-      /**
-       * ID of the parent profile
-       */
-      profile_id?: unknown;
-
-      updated_at?: string;
-    }
-
-    export namespace Entry {
-      /**
-       * A pattern that matches an entry
-       */
-      export interface Pattern {
-        /**
-         * The regex pattern.
-         */
-        regex: string;
-
-        /**
-         * Validation algorithm for the pattern. This algorithm will get run on potential
-         * matches, and if it returns false, the entry will not be matched.
-         */
-        validation?: 'luhn';
-      }
-    }
-  }
-}
-
-export interface CustomUpdateResponse {
+export interface DLPCustomProfile {
   /**
    * The ID for this profile
    */
@@ -212,7 +83,7 @@ export interface CustomUpdateResponse {
    * Scan the context of predefined entries to only return matches surrounded by
    * keywords.
    */
-  context_awareness?: CustomUpdateResponse.ContextAwareness;
+  context_awareness?: DLPCustomProfile.ContextAwareness;
 
   created_at?: string;
 
@@ -224,7 +95,7 @@ export interface CustomUpdateResponse {
   /**
    * The entries for this profile.
    */
-  entries?: Array<CustomUpdateResponse.Entry>;
+  entries?: Array<DLPCustomProfile.Entry>;
 
   /**
    * The name of the profile.
@@ -239,7 +110,7 @@ export interface CustomUpdateResponse {
   updated_at?: string;
 }
 
-export namespace CustomUpdateResponse {
+export namespace DLPCustomProfile {
   /**
    * Scan the context of predefined entries to only return matches surrounded by
    * keywords.
@@ -321,133 +192,10 @@ export namespace CustomUpdateResponse {
     }
   }
 }
+
+export type CustomCreateResponse = Array<DLPCustomProfile>;
 
 export type CustomDeleteResponse = unknown | string | null;
-
-export interface CustomGetResponse {
-  /**
-   * The ID for this profile
-   */
-  id?: string;
-
-  /**
-   * Related DLP policies will trigger when the match count exceeds the number set.
-   */
-  allowed_match_count?: number;
-
-  /**
-   * Scan the context of predefined entries to only return matches surrounded by
-   * keywords.
-   */
-  context_awareness?: CustomGetResponse.ContextAwareness;
-
-  created_at?: string;
-
-  /**
-   * The description of the profile.
-   */
-  description?: string;
-
-  /**
-   * The entries for this profile.
-   */
-  entries?: Array<CustomGetResponse.Entry>;
-
-  /**
-   * The name of the profile.
-   */
-  name?: string;
-
-  /**
-   * The type of the profile.
-   */
-  type?: 'custom';
-
-  updated_at?: string;
-}
-
-export namespace CustomGetResponse {
-  /**
-   * Scan the context of predefined entries to only return matches surrounded by
-   * keywords.
-   */
-  export interface ContextAwareness {
-    /**
-     * If true, scan the context of predefined entries to only return matches
-     * surrounded by keywords.
-     */
-    enabled: boolean;
-
-    /**
-     * Content types to exclude from context analysis and return all matches.
-     */
-    skip: ContextAwareness.Skip;
-  }
-
-  export namespace ContextAwareness {
-    /**
-     * Content types to exclude from context analysis and return all matches.
-     */
-    export interface Skip {
-      /**
-       * If the content type is a file, skip context analysis and return all matches.
-       */
-      files: boolean;
-    }
-  }
-
-  /**
-   * A custom entry that matches a profile
-   */
-  export interface Entry {
-    /**
-     * The ID for this entry
-     */
-    id?: string;
-
-    created_at?: string;
-
-    /**
-     * Whether the entry is enabled or not.
-     */
-    enabled?: boolean;
-
-    /**
-     * The name of the entry.
-     */
-    name?: string;
-
-    /**
-     * A pattern that matches an entry
-     */
-    pattern?: Entry.Pattern;
-
-    /**
-     * ID of the parent profile
-     */
-    profile_id?: unknown;
-
-    updated_at?: string;
-  }
-
-  export namespace Entry {
-    /**
-     * A pattern that matches an entry
-     */
-    export interface Pattern {
-      /**
-       * The regex pattern.
-       */
-      regex: string;
-
-      /**
-       * Validation algorithm for the pattern. This algorithm will get run on potential
-       * matches, and if it returns false, the entry will not be matched.
-       */
-      validation?: 'luhn';
-    }
-  }
-}
 
 export interface CustomCreateParams {
   /**
@@ -713,10 +461,9 @@ export interface CustomGetParams {
 }
 
 export namespace Customs {
+  export import DLPCustomProfile = CustomsAPI.DLPCustomProfile;
   export import CustomCreateResponse = CustomsAPI.CustomCreateResponse;
-  export import CustomUpdateResponse = CustomsAPI.CustomUpdateResponse;
   export import CustomDeleteResponse = CustomsAPI.CustomDeleteResponse;
-  export import CustomGetResponse = CustomsAPI.CustomGetResponse;
   export import CustomCreateParams = CustomsAPI.CustomCreateParams;
   export import CustomUpdateParams = CustomsAPI.CustomUpdateParams;
   export import CustomDeleteParams = CustomsAPI.CustomDeleteParams;

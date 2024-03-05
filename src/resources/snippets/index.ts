@@ -3,10 +3,9 @@
 export { Content } from './content';
 export { RuleUpdateResponse, RuleListResponse, RuleUpdateParams, Rules } from './rules';
 export {
-  SnippetUpdateResponse,
+  Snippet,
   SnippetListResponse,
   SnippetDeleteResponse,
-  SnippetGetResponse,
   SnippetUpdateParams,
   Snippets,
 } from './snippets';

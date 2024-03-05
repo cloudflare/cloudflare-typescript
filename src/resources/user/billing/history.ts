@@ -26,54 +26,52 @@ export class History extends APIResource {
   }
 }
 
-export type HistoryGetResponse = Array<HistoryGetResponse.HistoryGetResponseItem>;
+export interface BillSubsAPIBillingHistory {
+  /**
+   * Billing item identifier tag.
+   */
+  id: string;
 
-export namespace HistoryGetResponse {
-  export interface HistoryGetResponseItem {
-    /**
-     * Billing item identifier tag.
-     */
-    id: string;
+  /**
+   * The billing item action.
+   */
+  action: string;
 
-    /**
-     * The billing item action.
-     */
-    action: string;
+  /**
+   * The amount associated with this billing item.
+   */
+  amount: number;
 
-    /**
-     * The amount associated with this billing item.
-     */
-    amount: number;
+  /**
+   * The monetary unit in which pricing information is displayed.
+   */
+  currency: string;
 
-    /**
-     * The monetary unit in which pricing information is displayed.
-     */
-    currency: string;
+  /**
+   * The billing item description.
+   */
+  description: string;
 
-    /**
-     * The billing item description.
-     */
-    description: string;
+  /**
+   * When the billing item was created.
+   */
+  occurred_at: string;
 
-    /**
-     * When the billing item was created.
-     */
-    occurred_at: string;
+  /**
+   * The billing item type.
+   */
+  type: string;
 
-    /**
-     * The billing item type.
-     */
-    type: string;
+  zone: BillSubsAPIBillingHistory.Zone;
+}
 
-    zone: HistoryGetResponseItem.Zone;
-  }
-
-  export namespace HistoryGetResponseItem {
-    export interface Zone {
-      name?: unknown;
-    }
+export namespace BillSubsAPIBillingHistory {
+  export interface Zone {
+    name?: unknown;
   }
 }
+
+export type HistoryGetResponse = Array<BillSubsAPIBillingHistory>;
 
 export interface HistoryGetParams {
   /**
@@ -93,6 +91,7 @@ export interface HistoryGetParams {
 }
 
 export namespace History {
+  export import BillSubsAPIBillingHistory = HistoryAPI.BillSubsAPIBillingHistory;
   export import HistoryGetResponse = HistoryAPI.HistoryGetResponse;
   export import HistoryGetParams = HistoryAPI.HistoryGetParams;
 }

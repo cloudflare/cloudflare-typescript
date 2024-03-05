@@ -16,33 +16,19 @@ export {
 } from './access-rules';
 export { Firewall } from './firewall';
 export {
-  LockdownCreateResponse,
-  LockdownUpdateResponse,
-  LockdownListResponse,
-  LockdownDeleteResponse,
-  LockdownGetResponse,
-  LockdownCreateParams,
-  LockdownUpdateParams,
-  LockdownListParams,
-  LockdownListResponsesV4PagePaginationArray,
-  Lockdowns,
-} from './lockdowns';
-export {
+  LegacyJhsFilterRule,
   RuleCreateResponse,
-  RuleUpdateResponse,
-  RuleListResponse,
-  RuleDeleteResponse,
   RuleEditResponse,
-  RuleGetResponse,
   RuleCreateParams,
   RuleUpdateParams,
   RuleListParams,
   RuleDeleteParams,
   RuleEditParams,
-  RuleListResponsesV4PagePaginationArray,
+  LegacyJhsFilterRulesV4PagePaginationArray,
   Rules,
 } from './rules';
 export {
+  LegacyJhsUARules,
   UARuleCreateResponse,
   UARuleUpdateResponse,
   UARuleListResponse,
@@ -54,4 +40,13 @@ export {
   UARuleListResponsesV4PagePaginationArray,
   UARules,
 } from './ua-rules';
+export {
+  LegacyJhsZonelockdown,
+  LockdownDeleteResponse,
+  LockdownCreateParams,
+  LockdownUpdateParams,
+  LockdownListParams,
+  LegacyJhsZonelockdownsV4PagePaginationArray,
+  Lockdowns,
+} from './lockdowns';
 export { WAF } from './waf/index';

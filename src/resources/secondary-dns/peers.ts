@@ -8,13 +8,13 @@ export class Peers extends APIResource {
   /**
    * Create Peer.
    */
-  create(params: PeerCreateParams, options?: Core.RequestOptions): Core.APIPromise<PeerCreateResponse> {
+  create(params: PeerCreateParams, options?: Core.RequestOptions): Core.APIPromise<SecondaryDNSPeer> {
     const { account_id, body } = params;
     return (
       this._client.post(`/accounts/${account_id}/secondary_dns/peers`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: PeerCreateResponse }>
+      }) as Core.APIPromise<{ result: SecondaryDNSPeer }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -25,13 +25,13 @@ export class Peers extends APIResource {
     peerId: unknown,
     params: PeerUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PeerUpdateResponse> {
+  ): Core.APIPromise<SecondaryDNSPeer> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/secondary_dns/peers/${peerId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: PeerUpdateResponse }>
+      }) as Core.APIPromise<{ result: SecondaryDNSPeer }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -71,17 +71,17 @@ export class Peers extends APIResource {
     peerId: unknown,
     params: PeerGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PeerGetResponse> {
+  ): Core.APIPromise<SecondaryDNSPeer> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/secondary_dns/peers/${peerId}`, options) as Core.APIPromise<{
-        result: PeerGetResponse;
+        result: SecondaryDNSPeer;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface PeerCreateResponse {
+export interface SecondaryDNSPeer {
   id: unknown;
 
   /**
@@ -116,117 +116,10 @@ export interface PeerCreateResponse {
   tsig_id?: string;
 }
 
-export interface PeerUpdateResponse {
-  id: unknown;
-
-  /**
-   * The name of the peer.
-   */
-  name: string;
-
-  /**
-   * IPv4/IPv6 address of primary or secondary nameserver, depending on what zone
-   * this peer is linked to. For primary zones this IP defines the IP of the
-   * secondary nameserver Cloudflare will NOTIFY upon zone changes. For secondary
-   * zones this IP defines the IP of the primary nameserver Cloudflare will send
-   * AXFR/IXFR requests to.
-   */
-  ip?: string;
-
-  /**
-   * Enable IXFR transfer protocol, default is AXFR. Only applicable to secondary
-   * zones.
-   */
-  ixfr_enable?: boolean;
-
-  /**
-   * DNS port of primary or secondary nameserver, depending on what zone this peer is
-   * linked to.
-   */
-  port?: number;
-
-  /**
-   * TSIG authentication will be used for zone transfer if configured.
-   */
-  tsig_id?: string;
-}
-
-export type PeerListResponse = Array<PeerListResponse.PeerListResponseItem>;
-
-export namespace PeerListResponse {
-  export interface PeerListResponseItem {
-    id: unknown;
-
-    /**
-     * The name of the peer.
-     */
-    name: string;
-
-    /**
-     * IPv4/IPv6 address of primary or secondary nameserver, depending on what zone
-     * this peer is linked to. For primary zones this IP defines the IP of the
-     * secondary nameserver Cloudflare will NOTIFY upon zone changes. For secondary
-     * zones this IP defines the IP of the primary nameserver Cloudflare will send
-     * AXFR/IXFR requests to.
-     */
-    ip?: string;
-
-    /**
-     * Enable IXFR transfer protocol, default is AXFR. Only applicable to secondary
-     * zones.
-     */
-    ixfr_enable?: boolean;
-
-    /**
-     * DNS port of primary or secondary nameserver, depending on what zone this peer is
-     * linked to.
-     */
-    port?: number;
-
-    /**
-     * TSIG authentication will be used for zone transfer if configured.
-     */
-    tsig_id?: string;
-  }
-}
+export type PeerListResponse = Array<SecondaryDNSPeer>;
 
 export interface PeerDeleteResponse {
   id?: unknown;
-}
-
-export interface PeerGetResponse {
-  id: unknown;
-
-  /**
-   * The name of the peer.
-   */
-  name: string;
-
-  /**
-   * IPv4/IPv6 address of primary or secondary nameserver, depending on what zone
-   * this peer is linked to. For primary zones this IP defines the IP of the
-   * secondary nameserver Cloudflare will NOTIFY upon zone changes. For secondary
-   * zones this IP defines the IP of the primary nameserver Cloudflare will send
-   * AXFR/IXFR requests to.
-   */
-  ip?: string;
-
-  /**
-   * Enable IXFR transfer protocol, default is AXFR. Only applicable to secondary
-   * zones.
-   */
-  ixfr_enable?: boolean;
-
-  /**
-   * DNS port of primary or secondary nameserver, depending on what zone this peer is
-   * linked to.
-   */
-  port?: number;
-
-  /**
-   * TSIG authentication will be used for zone transfer if configured.
-   */
-  tsig_id?: string;
 }
 
 export interface PeerCreateParams {
@@ -292,11 +185,9 @@ export interface PeerGetParams {
 }
 
 export namespace Peers {
-  export import PeerCreateResponse = PeersAPI.PeerCreateResponse;
-  export import PeerUpdateResponse = PeersAPI.PeerUpdateResponse;
+  export import SecondaryDNSPeer = PeersAPI.SecondaryDNSPeer;
   export import PeerListResponse = PeersAPI.PeerListResponse;
   export import PeerDeleteResponse = PeersAPI.PeerDeleteResponse;
-  export import PeerGetResponse = PeersAPI.PeerGetResponse;
   export import PeerCreateParams = PeersAPI.PeerCreateParams;
   export import PeerUpdateParams = PeersAPI.PeerUpdateParams;
   export import PeerListParams = PeersAPI.PeerListParams;

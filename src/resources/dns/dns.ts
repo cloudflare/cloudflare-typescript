@@ -14,16 +14,12 @@ export class DNS extends APIResource {
 export namespace DNS {
   export import Records = RecordsAPI.Records;
   export import DNSRecord = RecordsAPI.DNSRecord;
-  export import RecordCreateResponse = RecordsAPI.RecordCreateResponse;
-  export import RecordUpdateResponse = RecordsAPI.RecordUpdateResponse;
-  export import RecordListResponse = RecordsAPI.RecordListResponse;
+  export import DNSRecordsDNSRecord = RecordsAPI.DNSRecordsDNSRecord;
   export import RecordDeleteResponse = RecordsAPI.RecordDeleteResponse;
-  export import RecordEditResponse = RecordsAPI.RecordEditResponse;
   export import RecordExportResponse = RecordsAPI.RecordExportResponse;
-  export import RecordGetResponse = RecordsAPI.RecordGetResponse;
   export import RecordImportResponse = RecordsAPI.RecordImportResponse;
   export import RecordScanResponse = RecordsAPI.RecordScanResponse;
-  export import RecordListResponsesV4PagePaginationArray = RecordsAPI.RecordListResponsesV4PagePaginationArray;
+  export import DNSRecordsDNSRecordsV4PagePaginationArray = RecordsAPI.DNSRecordsDNSRecordsV4PagePaginationArray;
   export import RecordCreateParams = RecordsAPI.RecordCreateParams;
   export import RecordUpdateParams = RecordsAPI.RecordUpdateParams;
   export import RecordListParams = RecordsAPI.RecordListParams;
@@ -35,12 +31,9 @@ export namespace DNS {
   export import RecordScanParams = RecordsAPI.RecordScanParams;
   export import Analytics = AnalyticsAPI.Analytics;
   export import Firewall = FirewallAPI.Firewall;
-  export import FirewallCreateResponse = FirewallAPI.FirewallCreateResponse;
-  export import FirewallListResponse = FirewallAPI.FirewallListResponse;
+  export import DNSFirewallDNSFirewall = FirewallAPI.DNSFirewallDNSFirewall;
   export import FirewallDeleteResponse = FirewallAPI.FirewallDeleteResponse;
-  export import FirewallEditResponse = FirewallAPI.FirewallEditResponse;
-  export import FirewallGetResponse = FirewallAPI.FirewallGetResponse;
-  export import FirewallListResponsesV4PagePaginationArray = FirewallAPI.FirewallListResponsesV4PagePaginationArray;
+  export import DNSFirewallDNSFirewallsV4PagePaginationArray = FirewallAPI.DNSFirewallDNSFirewallsV4PagePaginationArray;
   export import FirewallCreateParams = FirewallAPI.FirewallCreateParams;
   export import FirewallListParams = FirewallAPI.FirewallListParams;
   export import FirewallDeleteParams = FirewallAPI.FirewallDeleteParams;

@@ -8,10 +8,10 @@ export {
   Accounts,
 } from './accounts';
 export {
+  AddressingAddressMaps,
   AddressMapCreateResponse,
   AddressMapListResponse,
   AddressMapDeleteResponse,
-  AddressMapEditResponse,
   AddressMapGetResponse,
   AddressMapCreateParams,
   AddressMapListParams,

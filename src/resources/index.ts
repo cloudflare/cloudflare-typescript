@@ -21,8 +21,8 @@ export {
   AuditLogListResponsesV4PagePaginationArray,
   AuditLogs,
 } from './audit-logs';
-export { AvailablePlanListResponse, AvailablePlanGetResponse, AvailablePlans } from './available-plans';
-export { AvailableRatePlanGetResponse, AvailableRatePlans } from './available-rate-plans';
+export { BillSubsAPIAvailableRatePlan, AvailablePlanListResponse, AvailablePlans } from './available-plans';
+export { BillSubsRatePlan, AvailableRatePlanGetResponse, AvailableRatePlans } from './available-rate-plans';
 export { Billing } from './billing/billing';
 export {
   BotManagementUpdateResponse,
@@ -31,20 +31,11 @@ export {
   BotManagementGetParams,
   BotManagement,
 } from './bot-management';
-export {
-  BrandProtectionSubmitResponse,
-  BrandProtectionURLInfoResponse,
-  BrandProtectionSubmitParams,
-  BrandProtectionURLInfoParams,
-  BrandProtection,
-} from './brand-protection';
 export { CachePurgeResponse, CachePurgeParams, Cache } from './cache/cache';
 export {
-  CallCreateResponse,
-  CallUpdateResponse,
+  CallsApp,
+  CallsAppWithSecret,
   CallListResponse,
-  CallDeleteResponse,
-  CallGetResponse,
   CallCreateParams,
   CallUpdateParams,
   CallListParams,
@@ -54,51 +45,12 @@ export {
 } from './calls';
 export { CertificateAuthorities } from './certificate-authorities/certificate-authorities';
 export { Challenges } from './challenges/challenges';
-export {
-  ClientCertificateCreateResponse,
-  ClientCertificateListResponse,
-  ClientCertificateDeleteResponse,
-  ClientCertificateEditResponse,
-  ClientCertificateGetResponse,
-  ClientCertificateCreateParams,
-  ClientCertificateListParams,
-  ClientCertificateDeleteParams,
-  ClientCertificateEditParams,
-  ClientCertificateGetParams,
-  ClientCertificateListResponsesV4PagePaginationArray,
-  ClientCertificates,
-} from './client-certificates';
 export { CloudforceOne } from './cloudforce-one/cloudforce-one';
+export { D1 } from './d1/d1';
+export { DCVDelegation } from './dcv-delegation/dcv-delegation';
+export { DNS } from './dns/dns';
 export {
-  CustomCertificateCreateResponse,
-  CustomCertificateListResponse,
-  CustomCertificateDeleteResponse,
-  CustomCertificateEditResponse,
-  CustomCertificateGetResponse,
-  CustomCertificateCreateParams,
-  CustomCertificateListParams,
-  CustomCertificateDeleteParams,
-  CustomCertificateEditParams,
-  CustomCertificateGetParams,
-  CustomCertificateListResponsesV4PagePaginationArray,
-  CustomCertificates,
-} from './custom-certificates/custom-certificates';
-export {
-  CustomHostnameCreateResponse,
-  CustomHostnameListResponse,
-  CustomHostnameDeleteResponse,
-  CustomHostnameEditResponse,
-  CustomHostnameGetResponse,
-  CustomHostnameCreateParams,
-  CustomHostnameListParams,
-  CustomHostnameDeleteParams,
-  CustomHostnameEditParams,
-  CustomHostnameGetParams,
-  CustomHostnameListResponsesV4PagePaginationArray,
-  CustomHostnames,
-} from './custom-hostnames/custom-hostnames';
-export {
-  CustomNameserverCreateResponse,
+  DNSCustomNameserversCustomNs,
   CustomNameserverDeleteResponse,
   CustomNameserverAvailabiltyResponse,
   CustomNameserverGetResponse,
@@ -110,13 +62,9 @@ export {
   CustomNameserverVerifyParams,
   CustomNameservers,
 } from './custom-nameservers';
-export { D1 } from './d1/d1';
-export { DCVDelegation } from './dcv-delegation/dcv-delegation';
-export { DNS } from './dns/dns';
 export {
+  DNSSECDNSSEC,
   DNSSECDeleteResponse,
-  DNSSECEditResponse,
-  DNSSECGetResponse,
   DNSSECDeleteParams,
   DNSSECEditParams,
   DNSSECGetParams,
@@ -125,26 +73,11 @@ export {
 export { Diagnostics } from './diagnostics/diagnostics';
 export { DurableObjects } from './durable-objects/durable-objects';
 export { EmailRouting } from './email-routing/email-routing';
-export {
-  FilterCreateResponse,
-  FilterUpdateResponse,
-  FilterListResponse,
-  FilterDeleteResponse,
-  FilterGetResponse,
-  FilterCreateParams,
-  FilterUpdateParams,
-  FilterListParams,
-  FilterListResponsesV4PagePaginationArray,
-  Filters,
-} from './filters';
 export { Firewall } from './firewall/firewall';
 export {
-  HealthcheckCreateResponse,
-  HealthcheckUpdateResponse,
+  HealthchecksHealthchecks,
   HealthcheckListResponse,
   HealthcheckDeleteResponse,
-  HealthcheckEditResponse,
-  HealthcheckGetResponse,
   HealthcheckCreateParams,
   HealthcheckUpdateParams,
   HealthcheckEditParams,
@@ -155,20 +88,36 @@ export { Hyperdrive } from './hyperdrive/hyperdrive';
 export { IPs, JdcloudIPs, IPListResponse, IPListParams } from './ips';
 export { Images } from './images/images';
 export { Intel } from './intel/intel';
+export {
+  IntelPhishingURLInfo,
+  IntelPhishingURLSubmit,
+  BrandProtectionSubmitParams,
+  BrandProtectionURLInfoParams,
+  BrandProtection,
+} from './brand-protection';
 export { KV } from './kv/kv';
 export {
-  KeylessCertificateCreateResponse,
-  KeylessCertificateListResponse,
-  KeylessCertificateDeleteResponse,
-  KeylessCertificateEditResponse,
-  KeylessCertificateGetResponse,
-  KeylessCertificateCreateParams,
-  KeylessCertificateListParams,
-  KeylessCertificateDeleteParams,
-  KeylessCertificateEditParams,
-  KeylessCertificateGetParams,
-  KeylessCertificates,
-} from './keyless-certificates';
+  LegacyJhsFilter,
+  FilterCreateResponse,
+  FilterCreateParams,
+  FilterUpdateParams,
+  FilterListParams,
+  LegacyJhsFiltersV4PagePaginationArray,
+  Filters,
+} from './filters';
+export {
+  LegacyJhsRateLimits,
+  RateLimitCreateResponse,
+  RateLimitListResponse,
+  RateLimitDeleteResponse,
+  RateLimitEditResponse,
+  RateLimitGetResponse,
+  RateLimitCreateParams,
+  RateLimitListParams,
+  RateLimitEditParams,
+  RateLimitListResponsesV4PagePaginationArray,
+  RateLimits,
+} from './rate-limits';
 export {
   LoadBalancer,
   LoadBalancerListResponse,
@@ -183,17 +132,6 @@ export {
 } from './load-balancers/load-balancers';
 export { Logpush } from './logpush/logpush';
 export { Logs } from './logs/logs';
-export {
-  MTLSCertificateCreateResponse,
-  MTLSCertificateListResponse,
-  MTLSCertificateDeleteResponse,
-  MTLSCertificateGetResponse,
-  MTLSCertificateCreateParams,
-  MTLSCertificateListParams,
-  MTLSCertificateDeleteParams,
-  MTLSCertificateGetParams,
-  MTLSCertificates,
-} from './mtls-certificates/mtls-certificates';
 export { MagicNetworkMonitoring } from './magic-network-monitoring/magic-network-monitoring';
 export { MagicTransit } from './magic-transit/magic-transit';
 export {
@@ -214,6 +152,15 @@ export {
   Memberships,
 } from './memberships';
 export {
+  ObservatorySchedule,
+  ObservatoryTrend,
+  SpeedDeleteResponse,
+  SpeedDeleteParams,
+  SpeedScheduleGetParams,
+  SpeedTrendsListParams,
+  Speed,
+} from './speed/speed';
+export {
   OriginCACertificate,
   CertificateCreateResponse,
   CertificateListResponse,
@@ -230,17 +177,6 @@ export {
   OriginPostQuantumEncryption,
 } from './origin-post-quantum-encryption';
 export {
-  OriginTLSClientAuthCreateResponse,
-  OriginTLSClientAuthListResponse,
-  OriginTLSClientAuthDeleteResponse,
-  OriginTLSClientAuthGetResponse,
-  OriginTLSClientAuthCreateParams,
-  OriginTLSClientAuthListParams,
-  OriginTLSClientAuthDeleteParams,
-  OriginTLSClientAuthGetParams,
-  OriginTLSClientAuth,
-} from './origin-tls-client-auth/origin-tls-client-auth';
-export {
   PCAPCreateResponse,
   PCAPListResponse,
   PCAPGetResponse,
@@ -250,64 +186,22 @@ export {
   PCAPs,
 } from './pcaps/pcaps';
 export {
-  PageShieldUpdateResponse,
-  PageShieldListResponse,
+  PageShieldGetZoneSettings,
+  PageShieldUpdateZoneSettings,
   PageShieldUpdateParams,
   PageShieldListParams,
   PageShield,
 } from './page-shield/page-shield';
-export {
-  PageruleCreateResponse,
-  PageruleUpdateResponse,
-  PageruleListResponse,
-  PageruleDeleteResponse,
-  PageruleEditResponse,
-  PageruleGetResponse,
-  PageruleCreateParams,
-  PageruleUpdateParams,
-  PageruleListParams,
-  PageruleDeleteParams,
-  PageruleEditParams,
-  PageruleGetParams,
-  Pagerules,
-} from './pagerules/pagerules';
 export { Pages } from './pages/pages';
-export {
-  QueueCreateResponse,
-  QueueUpdateResponse,
-  QueueListResponse,
-  QueueDeleteResponse,
-  QueueGetResponse,
-  QueueCreateParams,
-  QueueUpdateParams,
-  QueueListParams,
-  QueueDeleteParams,
-  QueueGetParams,
-  Queues,
-} from './queues/queues';
 export { R2 } from './r2/r2';
 export { RUM } from './rum/rum';
 export { Radar } from './radar/radar';
-export {
-  RateLimitCreateResponse,
-  RateLimitListResponse,
-  RateLimitDeleteResponse,
-  RateLimitEditResponse,
-  RateLimitGetResponse,
-  RateLimitCreateParams,
-  RateLimitListParams,
-  RateLimitEditParams,
-  RateLimitListResponsesV4PagePaginationArray,
-  RateLimits,
-} from './rate-limits';
 export { Registrar } from './registrar/registrar';
 export { RequestTracers } from './request-tracers/request-tracers';
 export { Rules } from './rules/rules';
 export {
-  RulesetCreateResponse,
-  RulesetUpdateResponse,
-  RulesetListResponse,
-  RulesetGetResponse,
+  RulesetsRulesetResponse,
+  RulesetsRulesetsResponse,
   RulesetCreateParams,
   RulesetUpdateParams,
   RulesetListParams,
@@ -318,27 +212,17 @@ export {
 export { SSL } from './ssl/ssl';
 export { SecondaryDNS } from './secondary-dns/secondary-dns';
 export {
-  SnippetUpdateResponse,
+  Snippet,
   SnippetListResponse,
   SnippetDeleteResponse,
-  SnippetGetResponse,
   SnippetUpdateParams,
   Snippets,
 } from './snippets/snippets';
 export { Spectrum } from './spectrum/spectrum';
-export {
-  SpeedDeleteResponse,
-  SpeedScheduleGetResponse,
-  SpeedTrendsListResponse,
-  SpeedDeleteParams,
-  SpeedScheduleGetParams,
-  SpeedTrendsListParams,
-  Speed,
-} from './speed/speed';
 export { Storage } from './storage/storage';
 export {
+  StreamVideos,
   StreamListResponse,
-  StreamGetResponse,
   StreamCreateParams,
   StreamListParams,
   StreamDeleteParams,
@@ -355,6 +239,79 @@ export {
   SubscriptionUpdateParams,
   Subscriptions,
 } from './subscriptions';
+export {
+  TLSCertificatesAndHostnamesBase,
+  TLSCertificatesAndHostnamesKeylessCertificate,
+  KeylessCertificateListResponse,
+  KeylessCertificateDeleteResponse,
+  KeylessCertificateCreateParams,
+  KeylessCertificateListParams,
+  KeylessCertificateDeleteParams,
+  KeylessCertificateEditParams,
+  KeylessCertificateGetParams,
+  KeylessCertificates,
+} from './keyless-certificates';
+export {
+  TLSCertificatesAndHostnamesCertificateObjectPost,
+  TLSCertificatesAndHostnamesComponentsSchemasCertificateObject,
+  MTLSCertificateListResponse,
+  MTLSCertificateCreateParams,
+  MTLSCertificateListParams,
+  MTLSCertificateDeleteParams,
+  MTLSCertificateGetParams,
+  MTLSCertificates,
+} from './mtls-certificates/mtls-certificates';
+export {
+  TLSCertificatesAndHostnamesClientCertificate,
+  ClientCertificateCreateParams,
+  ClientCertificateListParams,
+  ClientCertificateDeleteParams,
+  ClientCertificateEditParams,
+  ClientCertificateGetParams,
+  TLSCertificatesAndHostnamesClientCertificatesV4PagePaginationArray,
+  ClientCertificates,
+} from './client-certificates';
+export {
+  TLSCertificatesAndHostnamesCustomCertificate,
+  CustomCertificateCreateResponse,
+  CustomCertificateDeleteResponse,
+  CustomCertificateEditResponse,
+  CustomCertificateGetResponse,
+  CustomCertificateCreateParams,
+  CustomCertificateListParams,
+  CustomCertificateDeleteParams,
+  CustomCertificateEditParams,
+  CustomCertificateGetParams,
+  TLSCertificatesAndHostnamesCustomCertificatesV4PagePaginationArray,
+  CustomCertificates,
+} from './custom-certificates/custom-certificates';
+export {
+  TLSCertificatesAndHostnamesCustomHostname,
+  CustomHostnameCreateResponse,
+  CustomHostnameListResponse,
+  CustomHostnameDeleteResponse,
+  CustomHostnameEditResponse,
+  CustomHostnameGetResponse,
+  CustomHostnameCreateParams,
+  CustomHostnameListParams,
+  CustomHostnameDeleteParams,
+  CustomHostnameEditParams,
+  CustomHostnameGetParams,
+  CustomHostnameListResponsesV4PagePaginationArray,
+  CustomHostnames,
+} from './custom-hostnames/custom-hostnames';
+export {
+  TLSCertificatesAndHostnamesZoneAuthenticatedOriginPull,
+  OriginTLSClientAuthCreateResponse,
+  OriginTLSClientAuthListResponse,
+  OriginTLSClientAuthDeleteResponse,
+  OriginTLSClientAuthGetResponse,
+  OriginTLSClientAuthCreateParams,
+  OriginTLSClientAuthListParams,
+  OriginTLSClientAuthDeleteParams,
+  OriginTLSClientAuthGetParams,
+  OriginTLSClientAuth,
+} from './origin-tls-client-auth/origin-tls-client-auth';
 export {
   URLNormalizationUpdateResponse,
   URLNormalizationGetResponse,
@@ -382,12 +339,9 @@ export {
   WARPConnector,
 } from './warp-connector';
 export {
-  WaitingRoomCreateResponse,
-  WaitingRoomUpdateResponse,
+  WaitingroomWaitingroom,
   WaitingRoomListResponse,
   WaitingRoomDeleteResponse,
-  WaitingRoomEditResponse,
-  WaitingRoomGetResponse,
   WaitingRoomPreviewResponse,
   WaitingRoomCreateParams,
   WaitingRoomUpdateParams,
@@ -398,18 +352,44 @@ export {
 export { Web3 } from './web3/web3';
 export { Workers } from './workers/workers';
 export { WorkersForPlatforms } from './workers-for-platforms/workers-for-platforms';
+export {
+  WorkersQueue,
+  WorkersQueueCreated,
+  WorkersQueueUpdated,
+  QueueListResponse,
+  QueueDeleteResponse,
+  QueueCreateParams,
+  QueueUpdateParams,
+  QueueListParams,
+  QueueDeleteParams,
+  QueueGetParams,
+  Queues,
+} from './queues/queues';
 export { ZeroTrust } from './zero-trust/zero-trust';
 export {
-  ZoneCreateResponse,
-  ZoneListResponse,
+  ZonesPageRule,
+  PageruleCreateResponse,
+  PageruleUpdateResponse,
+  PageruleListResponse,
+  PageruleDeleteResponse,
+  PageruleEditResponse,
+  PageruleGetResponse,
+  PageruleCreateParams,
+  PageruleUpdateParams,
+  PageruleListParams,
+  PageruleDeleteParams,
+  PageruleEditParams,
+  PageruleGetParams,
+  Pagerules,
+} from './pagerules/pagerules';
+export {
+  ZonesZone,
   ZoneDeleteResponse,
-  ZoneEditResponse,
-  ZoneGetResponse,
   ZoneCreateParams,
   ZoneListParams,
   ZoneDeleteParams,
   ZoneEditParams,
   ZoneGetParams,
-  ZoneListResponsesV4PagePaginationArray,
+  ZonesZonesV4PagePaginationArray,
   Zones,
 } from './zones/zones';

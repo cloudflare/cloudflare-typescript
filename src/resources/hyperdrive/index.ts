@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless.
 
+export { Hyperdrive } from './hyperdrive';
 export {
+  HyperdriveHyperdriveWithIdentifier,
   ConfigCreateResponse,
   ConfigUpdateResponse,
   ConfigListResponse,
@@ -15,4 +17,3 @@ export {
   ConfigGetParams,
   Configs,
 } from './configs';
-export { Hyperdrive } from './hyperdrive';

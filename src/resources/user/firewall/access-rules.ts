@@ -13,13 +13,10 @@ export class AccessRules extends APIResource {
    * Note: To create an IP Access rule that applies to a specific zone, refer to the
    * [IP Access rules for a zone](#ip-access-rules-for-a-zone) endpoints.
    */
-  create(
-    body: AccessRuleCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessRuleCreateResponse | null> {
+  create(body: AccessRuleCreateParams, options?: Core.RequestOptions): Core.APIPromise<LegacyJhsRule | null> {
     return (
       this._client.post('/user/firewall/access_rules/rules', { body, ...options }) as Core.APIPromise<{
-        result: AccessRuleCreateResponse | null;
+        result: LegacyJhsRule | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -31,22 +28,19 @@ export class AccessRules extends APIResource {
   list(
     query?: AccessRuleListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<AccessRuleListResponsesV4PagePaginationArray, AccessRuleListResponse>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<AccessRuleListResponsesV4PagePaginationArray, AccessRuleListResponse>;
+  ): Core.PagePromise<LegacyJhsRulesV4PagePaginationArray, LegacyJhsRule>;
+  list(options?: Core.RequestOptions): Core.PagePromise<LegacyJhsRulesV4PagePaginationArray, LegacyJhsRule>;
   list(
     query: AccessRuleListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<AccessRuleListResponsesV4PagePaginationArray, AccessRuleListResponse> {
+  ): Core.PagePromise<LegacyJhsRulesV4PagePaginationArray, LegacyJhsRule> {
     if (isRequestOptions(query)) {
       return this.list({}, query);
     }
-    return this._client.getAPIList(
-      '/user/firewall/access_rules/rules',
-      AccessRuleListResponsesV4PagePaginationArray,
-      { query, ...options },
-    );
+    return this._client.getAPIList('/user/firewall/access_rules/rules', LegacyJhsRulesV4PagePaginationArray, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -73,19 +67,19 @@ export class AccessRules extends APIResource {
     identifier: string,
     body: AccessRuleEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessRuleEditResponse | null> {
+  ): Core.APIPromise<LegacyJhsRule | null> {
     return (
       this._client.patch(`/user/firewall/access_rules/rules/${identifier}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: AccessRuleEditResponse | null }>
+      }) as Core.APIPromise<{ result: LegacyJhsRule | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class AccessRuleListResponsesV4PagePaginationArray extends V4PagePaginationArray<AccessRuleListResponse> {}
+export class LegacyJhsRulesV4PagePaginationArray extends V4PagePaginationArray<LegacyJhsRule> {}
 
-export interface AccessRuleCreateResponse {
+export interface LegacyJhsRule {
   /**
    * The unique identifier of the IP Access rule.
    */
@@ -100,11 +94,11 @@ export interface AccessRuleCreateResponse {
    * The rule configuration.
    */
   configuration:
-    | AccessRuleCreateResponse.LegacyJhsIPConfiguration
-    | AccessRuleCreateResponse.LegacyJhsIPV6Configuration
-    | AccessRuleCreateResponse.LegacyJhsCidrConfiguration
-    | AccessRuleCreateResponse.LegacyJhsASNConfiguration
-    | AccessRuleCreateResponse.LegacyJhsCountryConfiguration;
+    | LegacyJhsRule.LegacyJhsIPConfiguration
+    | LegacyJhsRule.LegacyJhsIPV6Configuration
+    | LegacyJhsRule.LegacyJhsCidrConfiguration
+    | LegacyJhsRule.LegacyJhsASNConfiguration
+    | LegacyJhsRule.LegacyJhsCountryConfiguration;
 
   /**
    * The action to apply to a matched request.
@@ -127,119 +121,7 @@ export interface AccessRuleCreateResponse {
   notes?: string;
 }
 
-export namespace AccessRuleCreateResponse {
-  export interface LegacyJhsIPConfiguration {
-    /**
-     * The configuration target. You must set the target to `ip` when specifying an IP
-     * address in the rule.
-     */
-    target?: 'ip';
-
-    /**
-     * The IP address to match. This address will be compared to the IP address of
-     * incoming requests.
-     */
-    value?: string;
-  }
-
-  export interface LegacyJhsIPV6Configuration {
-    /**
-     * The configuration target. You must set the target to `ip6` when specifying an
-     * IPv6 address in the rule.
-     */
-    target?: 'ip6';
-
-    /**
-     * The IPv6 address to match.
-     */
-    value?: string;
-  }
-
-  export interface LegacyJhsCidrConfiguration {
-    /**
-     * The configuration target. You must set the target to `ip_range` when specifying
-     * an IP address range in the rule.
-     */
-    target?: 'ip_range';
-
-    /**
-     * The IP address range to match. You can only use prefix lengths `/16` and `/24`
-     * for IPv4 ranges, and prefix lengths `/32`, `/48`, and `/64` for IPv6 ranges.
-     */
-    value?: string;
-  }
-
-  export interface LegacyJhsASNConfiguration {
-    /**
-     * The configuration target. You must set the target to `asn` when specifying an
-     * Autonomous System Number (ASN) in the rule.
-     */
-    target?: 'asn';
-
-    /**
-     * The AS number to match.
-     */
-    value?: string;
-  }
-
-  export interface LegacyJhsCountryConfiguration {
-    /**
-     * The configuration target. You must set the target to `country` when specifying a
-     * country code in the rule.
-     */
-    target?: 'country';
-
-    /**
-     * The two-letter ISO-3166-1 alpha-2 code to match. For more information, refer to
-     * [IP Access rules: Parameters](https://developers.cloudflare.com/waf/tools/ip-access-rules/parameters/#country).
-     */
-    value?: string;
-  }
-}
-
-export interface AccessRuleListResponse {
-  /**
-   * The unique identifier of the IP Access rule.
-   */
-  id: string;
-
-  /**
-   * The available actions that a rule can apply to a matched request.
-   */
-  allowed_modes: Array<'block' | 'challenge' | 'whitelist' | 'js_challenge' | 'managed_challenge'>;
-
-  /**
-   * The rule configuration.
-   */
-  configuration:
-    | AccessRuleListResponse.LegacyJhsIPConfiguration
-    | AccessRuleListResponse.LegacyJhsIPV6Configuration
-    | AccessRuleListResponse.LegacyJhsCidrConfiguration
-    | AccessRuleListResponse.LegacyJhsASNConfiguration
-    | AccessRuleListResponse.LegacyJhsCountryConfiguration;
-
-  /**
-   * The action to apply to a matched request.
-   */
-  mode: 'block' | 'challenge' | 'whitelist' | 'js_challenge' | 'managed_challenge';
-
-  /**
-   * The timestamp of when the rule was created.
-   */
-  created_on?: string;
-
-  /**
-   * The timestamp of when the rule was last modified.
-   */
-  modified_on?: string;
-
-  /**
-   * An informative summary of the rule, typically used as a reminder or explanation.
-   */
-  notes?: string;
-}
-
-export namespace AccessRuleListResponse {
+export namespace LegacyJhsRule {
   export interface LegacyJhsIPConfiguration {
     /**
      * The configuration target. You must set the target to `ip` when specifying an IP
@@ -314,118 +196,6 @@ export interface AccessRuleDeleteResponse {
    * The unique identifier of the IP Access rule.
    */
   id?: string;
-}
-
-export interface AccessRuleEditResponse {
-  /**
-   * The unique identifier of the IP Access rule.
-   */
-  id: string;
-
-  /**
-   * The available actions that a rule can apply to a matched request.
-   */
-  allowed_modes: Array<'block' | 'challenge' | 'whitelist' | 'js_challenge' | 'managed_challenge'>;
-
-  /**
-   * The rule configuration.
-   */
-  configuration:
-    | AccessRuleEditResponse.LegacyJhsIPConfiguration
-    | AccessRuleEditResponse.LegacyJhsIPV6Configuration
-    | AccessRuleEditResponse.LegacyJhsCidrConfiguration
-    | AccessRuleEditResponse.LegacyJhsASNConfiguration
-    | AccessRuleEditResponse.LegacyJhsCountryConfiguration;
-
-  /**
-   * The action to apply to a matched request.
-   */
-  mode: 'block' | 'challenge' | 'whitelist' | 'js_challenge' | 'managed_challenge';
-
-  /**
-   * The timestamp of when the rule was created.
-   */
-  created_on?: string;
-
-  /**
-   * The timestamp of when the rule was last modified.
-   */
-  modified_on?: string;
-
-  /**
-   * An informative summary of the rule, typically used as a reminder or explanation.
-   */
-  notes?: string;
-}
-
-export namespace AccessRuleEditResponse {
-  export interface LegacyJhsIPConfiguration {
-    /**
-     * The configuration target. You must set the target to `ip` when specifying an IP
-     * address in the rule.
-     */
-    target?: 'ip';
-
-    /**
-     * The IP address to match. This address will be compared to the IP address of
-     * incoming requests.
-     */
-    value?: string;
-  }
-
-  export interface LegacyJhsIPV6Configuration {
-    /**
-     * The configuration target. You must set the target to `ip6` when specifying an
-     * IPv6 address in the rule.
-     */
-    target?: 'ip6';
-
-    /**
-     * The IPv6 address to match.
-     */
-    value?: string;
-  }
-
-  export interface LegacyJhsCidrConfiguration {
-    /**
-     * The configuration target. You must set the target to `ip_range` when specifying
-     * an IP address range in the rule.
-     */
-    target?: 'ip_range';
-
-    /**
-     * The IP address range to match. You can only use prefix lengths `/16` and `/24`
-     * for IPv4 ranges, and prefix lengths `/32`, `/48`, and `/64` for IPv6 ranges.
-     */
-    value?: string;
-  }
-
-  export interface LegacyJhsASNConfiguration {
-    /**
-     * The configuration target. You must set the target to `asn` when specifying an
-     * Autonomous System Number (ASN) in the rule.
-     */
-    target?: 'asn';
-
-    /**
-     * The AS number to match.
-     */
-    value?: string;
-  }
-
-  export interface LegacyJhsCountryConfiguration {
-    /**
-     * The configuration target. You must set the target to `country` when specifying a
-     * country code in the rule.
-     */
-    target?: 'country';
-
-    /**
-     * The two-letter ISO-3166-1 alpha-2 code to match. For more information, refer to
-     * [IP Access rules: Parameters](https://developers.cloudflare.com/waf/tools/ip-access-rules/parameters/#country).
-     */
-    value?: string;
-  }
 }
 
 export interface AccessRuleCreateParams {
@@ -603,11 +373,9 @@ export interface AccessRuleEditParams {
 }
 
 export namespace AccessRules {
-  export import AccessRuleCreateResponse = AccessRulesAPI.AccessRuleCreateResponse;
-  export import AccessRuleListResponse = AccessRulesAPI.AccessRuleListResponse;
+  export import LegacyJhsRule = AccessRulesAPI.LegacyJhsRule;
   export import AccessRuleDeleteResponse = AccessRulesAPI.AccessRuleDeleteResponse;
-  export import AccessRuleEditResponse = AccessRulesAPI.AccessRuleEditResponse;
-  export import AccessRuleListResponsesV4PagePaginationArray = AccessRulesAPI.AccessRuleListResponsesV4PagePaginationArray;
+  export import LegacyJhsRulesV4PagePaginationArray = AccessRulesAPI.LegacyJhsRulesV4PagePaginationArray;
   export import AccessRuleCreateParams = AccessRulesAPI.AccessRuleCreateParams;
   export import AccessRuleListParams = AccessRulesAPI.AccessRuleListParams;
   export import AccessRuleEditParams = AccessRulesAPI.AccessRuleEditParams;

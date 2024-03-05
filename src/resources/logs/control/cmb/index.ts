@@ -2,9 +2,8 @@
 
 export { Cmb } from './cmb';
 export {
-  ConfigCreateResponse,
+  LogcontrolCmbConfig,
   ConfigDeleteResponse,
-  ConfigGetResponse,
   ConfigCreateParams,
   ConfigDeleteParams,
   ConfigGetParams,

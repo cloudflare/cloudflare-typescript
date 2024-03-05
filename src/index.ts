@@ -416,12 +416,9 @@ export namespace Cloudflare {
   export import UserEditParams = API.UserEditParams;
 
   export import Zones = API.Zones;
-  export import ZoneCreateResponse = API.ZoneCreateResponse;
-  export import ZoneListResponse = API.ZoneListResponse;
+  export import ZonesZone = API.ZonesZone;
   export import ZoneDeleteResponse = API.ZoneDeleteResponse;
-  export import ZoneEditResponse = API.ZoneEditResponse;
-  export import ZoneGetResponse = API.ZoneGetResponse;
-  export import ZoneListResponsesV4PagePaginationArray = API.ZoneListResponsesV4PagePaginationArray;
+  export import ZonesZonesV4PagePaginationArray = API.ZonesZonesV4PagePaginationArray;
   export import ZoneCreateParams = API.ZoneCreateParams;
   export import ZoneListParams = API.ZoneListParams;
   export import ZoneDeleteParams = API.ZoneDeleteParams;
@@ -459,21 +456,18 @@ export namespace Cloudflare {
   export import Argo = API.Argo;
 
   export import AvailablePlans = API.AvailablePlans;
+  export import BillSubsAPIAvailableRatePlan = API.BillSubsAPIAvailableRatePlan;
   export import AvailablePlanListResponse = API.AvailablePlanListResponse;
-  export import AvailablePlanGetResponse = API.AvailablePlanGetResponse;
 
   export import AvailableRatePlans = API.AvailableRatePlans;
+  export import BillSubsRatePlan = API.BillSubsRatePlan;
   export import AvailableRatePlanGetResponse = API.AvailableRatePlanGetResponse;
 
   export import CertificateAuthorities = API.CertificateAuthorities;
 
   export import ClientCertificates = API.ClientCertificates;
-  export import ClientCertificateCreateResponse = API.ClientCertificateCreateResponse;
-  export import ClientCertificateListResponse = API.ClientCertificateListResponse;
-  export import ClientCertificateDeleteResponse = API.ClientCertificateDeleteResponse;
-  export import ClientCertificateEditResponse = API.ClientCertificateEditResponse;
-  export import ClientCertificateGetResponse = API.ClientCertificateGetResponse;
-  export import ClientCertificateListResponsesV4PagePaginationArray = API.ClientCertificateListResponsesV4PagePaginationArray;
+  export import TLSCertificatesAndHostnamesClientCertificate = API.TLSCertificatesAndHostnamesClientCertificate;
+  export import TLSCertificatesAndHostnamesClientCertificatesV4PagePaginationArray = API.TLSCertificatesAndHostnamesClientCertificatesV4PagePaginationArray;
   export import ClientCertificateCreateParams = API.ClientCertificateCreateParams;
   export import ClientCertificateListParams = API.ClientCertificateListParams;
   export import ClientCertificateDeleteParams = API.ClientCertificateDeleteParams;
@@ -481,12 +475,12 @@ export namespace Cloudflare {
   export import ClientCertificateGetParams = API.ClientCertificateGetParams;
 
   export import CustomCertificates = API.CustomCertificates;
+  export import TLSCertificatesAndHostnamesCustomCertificate = API.TLSCertificatesAndHostnamesCustomCertificate;
   export import CustomCertificateCreateResponse = API.CustomCertificateCreateResponse;
-  export import CustomCertificateListResponse = API.CustomCertificateListResponse;
   export import CustomCertificateDeleteResponse = API.CustomCertificateDeleteResponse;
   export import CustomCertificateEditResponse = API.CustomCertificateEditResponse;
   export import CustomCertificateGetResponse = API.CustomCertificateGetResponse;
-  export import CustomCertificateListResponsesV4PagePaginationArray = API.CustomCertificateListResponsesV4PagePaginationArray;
+  export import TLSCertificatesAndHostnamesCustomCertificatesV4PagePaginationArray = API.TLSCertificatesAndHostnamesCustomCertificatesV4PagePaginationArray;
   export import CustomCertificateCreateParams = API.CustomCertificateCreateParams;
   export import CustomCertificateListParams = API.CustomCertificateListParams;
   export import CustomCertificateDeleteParams = API.CustomCertificateDeleteParams;
@@ -494,6 +488,7 @@ export namespace Cloudflare {
   export import CustomCertificateGetParams = API.CustomCertificateGetParams;
 
   export import CustomHostnames = API.CustomHostnames;
+  export import TLSCertificatesAndHostnamesCustomHostname = API.TLSCertificatesAndHostnamesCustomHostname;
   export import CustomHostnameCreateResponse = API.CustomHostnameCreateResponse;
   export import CustomHostnameListResponse = API.CustomHostnameListResponse;
   export import CustomHostnameDeleteResponse = API.CustomHostnameDeleteResponse;
@@ -507,7 +502,7 @@ export namespace Cloudflare {
   export import CustomHostnameGetParams = API.CustomHostnameGetParams;
 
   export import CustomNameservers = API.CustomNameservers;
-  export import CustomNameserverCreateResponse = API.CustomNameserverCreateResponse;
+  export import DNSCustomNameserversCustomNs = API.DNSCustomNameserversCustomNs;
   export import CustomNameserverDeleteResponse = API.CustomNameserverDeleteResponse;
   export import CustomNameserverAvailabiltyResponse = API.CustomNameserverAvailabiltyResponse;
   export import CustomNameserverGetResponse = API.CustomNameserverGetResponse;
@@ -521,9 +516,8 @@ export namespace Cloudflare {
   export import DNS = API.DNS;
 
   export import DNSSEC = API.DNSSEC;
+  export import DNSSECDNSSEC = API.DNSSECDNSSEC;
   export import DNSSECDeleteResponse = API.DNSSECDeleteResponse;
-  export import DNSSECEditResponse = API.DNSSECEditResponse;
-  export import DNSSECGetResponse = API.DNSSECGetResponse;
   export import DNSSECDeleteParams = API.DNSSECDeleteParams;
   export import DNSSECEditParams = API.DNSSECEditParams;
   export import DNSSECGetParams = API.DNSSECGetParams;
@@ -531,12 +525,9 @@ export namespace Cloudflare {
   export import EmailRouting = API.EmailRouting;
 
   export import Filters = API.Filters;
+  export import LegacyJhsFilter = API.LegacyJhsFilter;
   export import FilterCreateResponse = API.FilterCreateResponse;
-  export import FilterUpdateResponse = API.FilterUpdateResponse;
-  export import FilterListResponse = API.FilterListResponse;
-  export import FilterDeleteResponse = API.FilterDeleteResponse;
-  export import FilterGetResponse = API.FilterGetResponse;
-  export import FilterListResponsesV4PagePaginationArray = API.FilterListResponsesV4PagePaginationArray;
+  export import LegacyJhsFiltersV4PagePaginationArray = API.LegacyJhsFiltersV4PagePaginationArray;
   export import FilterCreateParams = API.FilterCreateParams;
   export import FilterUpdateParams = API.FilterUpdateParams;
   export import FilterListParams = API.FilterListParams;
@@ -544,22 +535,18 @@ export namespace Cloudflare {
   export import Firewall = API.Firewall;
 
   export import Healthchecks = API.Healthchecks;
-  export import HealthcheckCreateResponse = API.HealthcheckCreateResponse;
-  export import HealthcheckUpdateResponse = API.HealthcheckUpdateResponse;
+  export import HealthchecksHealthchecks = API.HealthchecksHealthchecks;
   export import HealthcheckListResponse = API.HealthcheckListResponse;
   export import HealthcheckDeleteResponse = API.HealthcheckDeleteResponse;
-  export import HealthcheckEditResponse = API.HealthcheckEditResponse;
-  export import HealthcheckGetResponse = API.HealthcheckGetResponse;
   export import HealthcheckCreateParams = API.HealthcheckCreateParams;
   export import HealthcheckUpdateParams = API.HealthcheckUpdateParams;
   export import HealthcheckEditParams = API.HealthcheckEditParams;
 
   export import KeylessCertificates = API.KeylessCertificates;
-  export import KeylessCertificateCreateResponse = API.KeylessCertificateCreateResponse;
+  export import TLSCertificatesAndHostnamesBase = API.TLSCertificatesAndHostnamesBase;
+  export import TLSCertificatesAndHostnamesKeylessCertificate = API.TLSCertificatesAndHostnamesKeylessCertificate;
   export import KeylessCertificateListResponse = API.KeylessCertificateListResponse;
   export import KeylessCertificateDeleteResponse = API.KeylessCertificateDeleteResponse;
-  export import KeylessCertificateEditResponse = API.KeylessCertificateEditResponse;
-  export import KeylessCertificateGetResponse = API.KeylessCertificateGetResponse;
   export import KeylessCertificateCreateParams = API.KeylessCertificateCreateParams;
   export import KeylessCertificateListParams = API.KeylessCertificateListParams;
   export import KeylessCertificateDeleteParams = API.KeylessCertificateDeleteParams;
@@ -571,6 +558,7 @@ export namespace Cloudflare {
   export import Logs = API.Logs;
 
   export import OriginTLSClientAuth = API.OriginTLSClientAuth;
+  export import TLSCertificatesAndHostnamesZoneAuthenticatedOriginPull = API.TLSCertificatesAndHostnamesZoneAuthenticatedOriginPull;
   export import OriginTLSClientAuthCreateResponse = API.OriginTLSClientAuthCreateResponse;
   export import OriginTLSClientAuthListResponse = API.OriginTLSClientAuthListResponse;
   export import OriginTLSClientAuthDeleteResponse = API.OriginTLSClientAuthDeleteResponse;
@@ -581,6 +569,7 @@ export namespace Cloudflare {
   export import OriginTLSClientAuthGetParams = API.OriginTLSClientAuthGetParams;
 
   export import Pagerules = API.Pagerules;
+  export import ZonesPageRule = API.ZonesPageRule;
   export import PageruleCreateResponse = API.PageruleCreateResponse;
   export import PageruleUpdateResponse = API.PageruleUpdateResponse;
   export import PageruleListResponse = API.PageruleListResponse;
@@ -595,6 +584,7 @@ export namespace Cloudflare {
   export import PageruleGetParams = API.PageruleGetParams;
 
   export import RateLimits = API.RateLimits;
+  export import LegacyJhsRateLimits = API.LegacyJhsRateLimits;
   export import RateLimitCreateResponse = API.RateLimitCreateResponse;
   export import RateLimitListResponse = API.RateLimitListResponse;
   export import RateLimitDeleteResponse = API.RateLimitDeleteResponse;
@@ -608,12 +598,9 @@ export namespace Cloudflare {
   export import SecondaryDNS = API.SecondaryDNS;
 
   export import WaitingRooms = API.WaitingRooms;
-  export import WaitingRoomCreateResponse = API.WaitingRoomCreateResponse;
-  export import WaitingRoomUpdateResponse = API.WaitingRoomUpdateResponse;
+  export import WaitingroomWaitingroom = API.WaitingroomWaitingroom;
   export import WaitingRoomListResponse = API.WaitingRoomListResponse;
   export import WaitingRoomDeleteResponse = API.WaitingRoomDeleteResponse;
-  export import WaitingRoomEditResponse = API.WaitingRoomEditResponse;
-  export import WaitingRoomGetResponse = API.WaitingRoomGetResponse;
   export import WaitingRoomPreviewResponse = API.WaitingRoomPreviewResponse;
   export import WaitingRoomCreateParams = API.WaitingRoomCreateParams;
   export import WaitingRoomUpdateParams = API.WaitingRoomUpdateParams;
@@ -629,11 +616,11 @@ export namespace Cloudflare {
   export import DurableObjects = API.DurableObjects;
 
   export import Queues = API.Queues;
-  export import QueueCreateResponse = API.QueueCreateResponse;
-  export import QueueUpdateResponse = API.QueueUpdateResponse;
+  export import WorkersQueue = API.WorkersQueue;
+  export import WorkersQueueCreated = API.WorkersQueueCreated;
+  export import WorkersQueueUpdated = API.WorkersQueueUpdated;
   export import QueueListResponse = API.QueueListResponse;
   export import QueueDeleteResponse = API.QueueDeleteResponse;
-  export import QueueGetResponse = API.QueueGetResponse;
   export import QueueCreateParams = API.QueueCreateParams;
   export import QueueUpdateParams = API.QueueUpdateParams;
   export import QueueListParams = API.QueueListParams;
@@ -647,16 +634,14 @@ export namespace Cloudflare {
   export import ManagedHeaderEditParams = API.ManagedHeaderEditParams;
 
   export import PageShield = API.PageShield;
-  export import PageShieldUpdateResponse = API.PageShieldUpdateResponse;
-  export import PageShieldListResponse = API.PageShieldListResponse;
+  export import PageShieldGetZoneSettings = API.PageShieldGetZoneSettings;
+  export import PageShieldUpdateZoneSettings = API.PageShieldUpdateZoneSettings;
   export import PageShieldUpdateParams = API.PageShieldUpdateParams;
   export import PageShieldListParams = API.PageShieldListParams;
 
   export import Rulesets = API.Rulesets;
-  export import RulesetCreateResponse = API.RulesetCreateResponse;
-  export import RulesetUpdateResponse = API.RulesetUpdateResponse;
-  export import RulesetListResponse = API.RulesetListResponse;
-  export import RulesetGetResponse = API.RulesetGetResponse;
+  export import RulesetsRulesetResponse = API.RulesetsRulesetResponse;
+  export import RulesetsRulesetsResponse = API.RulesetsRulesetsResponse;
   export import RulesetCreateParams = API.RulesetCreateParams;
   export import RulesetUpdateParams = API.RulesetUpdateParams;
   export import RulesetListParams = API.RulesetListParams;
@@ -681,8 +666,8 @@ export namespace Cloudflare {
   export import Billing = API.Billing;
 
   export import BrandProtection = API.BrandProtection;
-  export import BrandProtectionSubmitResponse = API.BrandProtectionSubmitResponse;
-  export import BrandProtectionURLInfoResponse = API.BrandProtectionURLInfoResponse;
+  export import IntelPhishingURLInfo = API.IntelPhishingURLInfo;
+  export import IntelPhishingURLSubmit = API.IntelPhishingURLSubmit;
   export import BrandProtectionSubmitParams = API.BrandProtectionSubmitParams;
   export import BrandProtectionURLInfoParams = API.BrandProtectionURLInfoParams;
 
@@ -697,10 +682,9 @@ export namespace Cloudflare {
   export import MagicNetworkMonitoring = API.MagicNetworkMonitoring;
 
   export import MTLSCertificates = API.MTLSCertificates;
-  export import MTLSCertificateCreateResponse = API.MTLSCertificateCreateResponse;
+  export import TLSCertificatesAndHostnamesCertificateObjectPost = API.TLSCertificatesAndHostnamesCertificateObjectPost;
+  export import TLSCertificatesAndHostnamesComponentsSchemasCertificateObject = API.TLSCertificatesAndHostnamesComponentsSchemasCertificateObject;
   export import MTLSCertificateListResponse = API.MTLSCertificateListResponse;
-  export import MTLSCertificateDeleteResponse = API.MTLSCertificateDeleteResponse;
-  export import MTLSCertificateGetResponse = API.MTLSCertificateGetResponse;
   export import MTLSCertificateCreateParams = API.MTLSCertificateCreateParams;
   export import MTLSCertificateListParams = API.MTLSCertificateListParams;
   export import MTLSCertificateDeleteParams = API.MTLSCertificateDeleteParams;
@@ -725,8 +709,8 @@ export namespace Cloudflare {
   export import Storage = API.Storage;
 
   export import Stream = API.Stream;
+  export import StreamVideos = API.StreamVideos;
   export import StreamListResponse = API.StreamListResponse;
-  export import StreamGetResponse = API.StreamGetResponse;
   export import StreamCreateParams = API.StreamCreateParams;
   export import StreamListParams = API.StreamListParams;
   export import StreamDeleteParams = API.StreamDeleteParams;
@@ -784,9 +768,9 @@ export namespace Cloudflare {
   export import OriginPostQuantumEncryptionGetParams = API.OriginPostQuantumEncryptionGetParams;
 
   export import Speed = API.Speed;
+  export import ObservatorySchedule = API.ObservatorySchedule;
+  export import ObservatoryTrend = API.ObservatoryTrend;
   export import SpeedDeleteResponse = API.SpeedDeleteResponse;
-  export import SpeedScheduleGetResponse = API.SpeedScheduleGetResponse;
-  export import SpeedTrendsListResponse = API.SpeedTrendsListResponse;
   export import SpeedDeleteParams = API.SpeedDeleteParams;
   export import SpeedScheduleGetParams = API.SpeedScheduleGetParams;
   export import SpeedTrendsListParams = API.SpeedTrendsListParams;
@@ -796,18 +780,15 @@ export namespace Cloudflare {
   export import Hostnames = API.Hostnames;
 
   export import Snippets = API.Snippets;
-  export import SnippetUpdateResponse = API.SnippetUpdateResponse;
+  export import Snippet = API.Snippet;
   export import SnippetListResponse = API.SnippetListResponse;
   export import SnippetDeleteResponse = API.SnippetDeleteResponse;
-  export import SnippetGetResponse = API.SnippetGetResponse;
   export import SnippetUpdateParams = API.SnippetUpdateParams;
 
   export import Calls = API.Calls;
-  export import CallCreateResponse = API.CallCreateResponse;
-  export import CallUpdateResponse = API.CallUpdateResponse;
+  export import CallsApp = API.CallsApp;
+  export import CallsAppWithSecret = API.CallsAppWithSecret;
   export import CallListResponse = API.CallListResponse;
-  export import CallDeleteResponse = API.CallDeleteResponse;
-  export import CallGetResponse = API.CallGetResponse;
   export import CallCreateParams = API.CallCreateParams;
   export import CallUpdateParams = API.CallUpdateParams;
   export import CallListParams = API.CallListParams;

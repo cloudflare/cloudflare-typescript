@@ -1,21 +1,19 @@
 // File generated from our OpenAPI spec by Stainless.
 
+export { R2 } from './r2';
 export {
-  BucketCreateResponse,
+  R2Bucket,
   BucketListResponse,
   BucketDeleteResponse,
-  BucketGetResponse,
   BucketCreateParams,
   BucketListParams,
   BucketDeleteParams,
   BucketGetParams,
   Buckets,
 } from './buckets';
-export { R2 } from './r2';
 export {
-  SippyUpdateResponse,
+  R2Sippy,
   SippyDeleteResponse,
-  SippyGetResponse,
   SippyUpdateParams,
   SippyDeleteParams,
   SippyGetParams,

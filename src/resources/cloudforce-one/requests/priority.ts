@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as PriorityAPI from 'cloudflare/resources/cloudforce-one/requests/priority';
+import * as RequestsAPI from 'cloudflare/resources/cloudforce-one/requests/requests';
 
 export class Priority extends APIResource {
   /**
@@ -12,12 +13,12 @@ export class Priority extends APIResource {
     accountIdentifier: string,
     body: PriorityCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PriorityCreateResponse> {
+  ): Core.APIPromise<CloudforceOnePriorityItem> {
     return (
       this._client.post(`/accounts/${accountIdentifier}/cloudforce-one/requests/priority/new`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: PriorityCreateResponse }>
+      }) as Core.APIPromise<{ result: CloudforceOnePriorityItem }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -29,12 +30,12 @@ export class Priority extends APIResource {
     priorityIdentifer: string,
     body: PriorityUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PriorityUpdateResponse> {
+  ): Core.APIPromise<RequestsAPI.CloudforceOneRequestItem> {
     return (
       this._client.put(
         `/accounts/${accountIdentifier}/cloudforce-one/requests/priority/${priorityIdentifer}`,
         { body, ...options },
-      ) as Core.APIPromise<{ result: PriorityUpdateResponse }>
+      ) as Core.APIPromise<{ result: RequestsAPI.CloudforceOneRequestItem }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -61,29 +62,32 @@ export class Priority extends APIResource {
     accountIdentifier: string,
     priorityIdentifer: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PriorityGetResponse> {
+  ): Core.APIPromise<RequestsAPI.CloudforceOneRequestItem> {
     return (
       this._client.get(
         `/accounts/${accountIdentifier}/cloudforce-one/requests/priority/${priorityIdentifer}`,
         options,
-      ) as Core.APIPromise<{ result: PriorityGetResponse }>
+      ) as Core.APIPromise<{ result: RequestsAPI.CloudforceOneRequestItem }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get Priority Intelligence Requirement Quota
    */
-  quota(accountIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<PriorityQuotaResponse> {
+  quota(
+    accountIdentifier: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RequestsAPI.CloudforceOneQuota> {
     return (
       this._client.get(
         `/accounts/${accountIdentifier}/cloudforce-one/requests/priority/quota`,
         options,
-      ) as Core.APIPromise<{ result: PriorityQuotaResponse }>
+      ) as Core.APIPromise<{ result: RequestsAPI.CloudforceOneQuota }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface PriorityCreateResponse {
+export interface CloudforceOnePriorityItem {
   /**
    * UUID
    */
@@ -120,139 +124,7 @@ export interface PriorityCreateResponse {
   updated: string;
 }
 
-export interface PriorityUpdateResponse {
-  /**
-   * UUID
-   */
-  id: string;
-
-  /**
-   * Request content
-   */
-  content: string;
-
-  created: string;
-
-  priority: string;
-
-  /**
-   * Requested information from request
-   */
-  request: string;
-
-  /**
-   * Brief description of the request
-   */
-  summary: string;
-
-  /**
-   * The CISA defined Traffic Light Protocol (TLP)
-   */
-  tlp: 'clear' | 'amber' | 'amber-strict' | 'green' | 'red';
-
-  updated: string;
-
-  completed?: string;
-
-  /**
-   * Tokens for the request messages
-   */
-  message_tokens?: number;
-
-  /**
-   * Readable Request ID
-   */
-  readable_id?: string;
-
-  /**
-   * Request Status
-   */
-  status?: 'open' | 'accepted' | 'reported' | 'approved' | 'completed' | 'declined';
-
-  /**
-   * Tokens for the request
-   */
-  tokens?: number;
-}
-
 export type PriorityDeleteResponse = unknown | Array<unknown> | string;
-
-export interface PriorityGetResponse {
-  /**
-   * UUID
-   */
-  id: string;
-
-  /**
-   * Request content
-   */
-  content: string;
-
-  created: string;
-
-  priority: string;
-
-  /**
-   * Requested information from request
-   */
-  request: string;
-
-  /**
-   * Brief description of the request
-   */
-  summary: string;
-
-  /**
-   * The CISA defined Traffic Light Protocol (TLP)
-   */
-  tlp: 'clear' | 'amber' | 'amber-strict' | 'green' | 'red';
-
-  updated: string;
-
-  completed?: string;
-
-  /**
-   * Tokens for the request messages
-   */
-  message_tokens?: number;
-
-  /**
-   * Readable Request ID
-   */
-  readable_id?: string;
-
-  /**
-   * Request Status
-   */
-  status?: 'open' | 'accepted' | 'reported' | 'approved' | 'completed' | 'declined';
-
-  /**
-   * Tokens for the request
-   */
-  tokens?: number;
-}
-
-export interface PriorityQuotaResponse {
-  /**
-   * Anniversary date is when annual quota limit is refresh
-   */
-  anniversary_date?: string;
-
-  /**
-   * Quater anniversary date is when quota limit is refreshed each quarter
-   */
-  quarter_anniversary_date?: string;
-
-  /**
-   * Tokens for the quarter
-   */
-  quota?: number;
-
-  /**
-   * Tokens remaining for the quarter
-   */
-  remaining?: number;
-}
 
 export interface PriorityCreateParams {
   /**
@@ -299,11 +171,8 @@ export interface PriorityUpdateParams {
 }
 
 export namespace Priority {
-  export import PriorityCreateResponse = PriorityAPI.PriorityCreateResponse;
-  export import PriorityUpdateResponse = PriorityAPI.PriorityUpdateResponse;
+  export import CloudforceOnePriorityItem = PriorityAPI.CloudforceOnePriorityItem;
   export import PriorityDeleteResponse = PriorityAPI.PriorityDeleteResponse;
-  export import PriorityGetResponse = PriorityAPI.PriorityGetResponse;
-  export import PriorityQuotaResponse = PriorityAPI.PriorityQuotaResponse;
   export import PriorityCreateParams = PriorityAPI.PriorityCreateParams;
   export import PriorityUpdateParams = PriorityAPI.PriorityUpdateParams;
 }

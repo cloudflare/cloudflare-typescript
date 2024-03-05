@@ -13,13 +13,13 @@ export class TracerouteTests extends APIResource {
     testId: string,
     params: TracerouteTestGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TracerouteTestGetResponse> {
+  ): Core.APIPromise<DigitalExperienceMonitoringTracerouteDetails> {
     const { account_id, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/dex/traceroute-tests/${testId}`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: TracerouteTestGetResponse }>
+      }) as Core.APIPromise<{ result: DigitalExperienceMonitoringTracerouteDetails }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -30,13 +30,13 @@ export class TracerouteTests extends APIResource {
     testId: string,
     params: TracerouteTestNetworkPathParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TracerouteTestNetworkPathResponse> {
+  ): Core.APIPromise<DigitalExperienceMonitoringTracerouteTestNetworkPath> {
     const { account_id, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/dex/traceroute-tests/${testId}/network-path`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: TracerouteTestNetworkPathResponse }>
+      }) as Core.APIPromise<{ result: DigitalExperienceMonitoringTracerouteTestNetworkPath }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -48,18 +48,18 @@ export class TracerouteTests extends APIResource {
     testId: string,
     params: TracerouteTestPercentilesParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TracerouteTestPercentilesResponse> {
+  ): Core.APIPromise<DigitalExperienceMonitoringTracerouteDetailsPercentiles> {
     const { account_id, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/dex/traceroute-tests/${testId}/percentiles`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: TracerouteTestPercentilesResponse }>
+      }) as Core.APIPromise<{ result: DigitalExperienceMonitoringTracerouteDetailsPercentiles }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface TracerouteTestGetResponse {
+export interface DigitalExperienceMonitoringTracerouteDetails {
   /**
    * The host of the Traceroute synthetic application test
    */
@@ -77,12 +77,12 @@ export interface TracerouteTestGetResponse {
    */
   name: string;
 
-  tracerouteStats?: TracerouteTestGetResponse.TracerouteStats | null;
+  tracerouteStats?: DigitalExperienceMonitoringTracerouteDetails.TracerouteStats | null;
 
-  tracerouteStatsByColo?: Array<TracerouteTestGetResponse.TracerouteStatsByColo>;
+  tracerouteStatsByColo?: Array<DigitalExperienceMonitoringTracerouteDetails.TracerouteStatsByColo>;
 }
 
-export namespace TracerouteTestGetResponse {
+export namespace DigitalExperienceMonitoringTracerouteDetails {
   export interface TracerouteStats {
     availabilityPct: TracerouteStats.AvailabilityPct;
 
@@ -336,95 +336,15 @@ export namespace TracerouteTestGetResponse {
   }
 }
 
-export interface TracerouteTestNetworkPathResponse {
-  /**
-   * API Resource UUID tag.
-   */
-  id: string;
+export interface DigitalExperienceMonitoringTracerouteDetailsPercentiles {
+  hopsCount?: DigitalExperienceMonitoringTracerouteDetailsPercentiles.HopsCount;
 
-  deviceName?: string;
+  packetLossPct?: DigitalExperienceMonitoringTracerouteDetailsPercentiles.PacketLossPct;
 
-  /**
-   * The interval at which the Traceroute synthetic application test is set to run.
-   */
-  interval?: string;
-
-  kind?: 'traceroute';
-
-  name?: string;
-
-  networkPath?: TracerouteTestNetworkPathResponse.NetworkPath | null;
-
-  /**
-   * The host of the Traceroute synthetic application test
-   */
-  url?: string;
+  roundTripTimeMs?: DigitalExperienceMonitoringTracerouteDetailsPercentiles.RoundTripTimeMs;
 }
 
-export namespace TracerouteTestNetworkPathResponse {
-  export interface NetworkPath {
-    slots: Array<NetworkPath.Slot>;
-
-    /**
-     * Specifies the sampling applied, if any, to the slots response. When sampled,
-     * results shown represent the first test run to the start of each sampling
-     * interval.
-     */
-    sampling?: NetworkPath.Sampling | null;
-  }
-
-  export namespace NetworkPath {
-    export interface Slot {
-      /**
-       * API Resource UUID tag.
-       */
-      id: string;
-
-      /**
-       * Round trip time in ms of the client to app mile
-       */
-      clientToAppRttMs: number | null;
-
-      /**
-       * Round trip time in ms of the client to Cloudflare egress mile
-       */
-      clientToCfEgressRttMs: number | null;
-
-      /**
-       * Round trip time in ms of the client to Cloudflare ingress mile
-       */
-      clientToCfIngressRttMs: number | null;
-
-      timestamp: string;
-
-      /**
-       * Round trip time in ms of the client to ISP mile
-       */
-      clientToIspRttMs?: number | null;
-    }
-
-    /**
-     * Specifies the sampling applied, if any, to the slots response. When sampled,
-     * results shown represent the first test run to the start of each sampling
-     * interval.
-     */
-    export interface Sampling {
-      unit: 'hours';
-
-      value: number;
-    }
-  }
-}
-
-export interface TracerouteTestPercentilesResponse {
-  hopsCount?: TracerouteTestPercentilesResponse.HopsCount;
-
-  packetLossPct?: TracerouteTestPercentilesResponse.PacketLossPct;
-
-  roundTripTimeMs?: TracerouteTestPercentilesResponse.RoundTripTimeMs;
-}
-
-export namespace TracerouteTestPercentilesResponse {
+export namespace DigitalExperienceMonitoringTracerouteDetailsPercentiles {
   export interface HopsCount {
     /**
      * p50 observed in the time period
@@ -489,6 +409,86 @@ export namespace TracerouteTestPercentilesResponse {
      * p99 observed in the time period
      */
     p99?: number | null;
+  }
+}
+
+export interface DigitalExperienceMonitoringTracerouteTestNetworkPath {
+  /**
+   * API Resource UUID tag.
+   */
+  id: string;
+
+  deviceName?: string;
+
+  /**
+   * The interval at which the Traceroute synthetic application test is set to run.
+   */
+  interval?: string;
+
+  kind?: 'traceroute';
+
+  name?: string;
+
+  networkPath?: DigitalExperienceMonitoringTracerouteTestNetworkPath.NetworkPath | null;
+
+  /**
+   * The host of the Traceroute synthetic application test
+   */
+  url?: string;
+}
+
+export namespace DigitalExperienceMonitoringTracerouteTestNetworkPath {
+  export interface NetworkPath {
+    slots: Array<NetworkPath.Slot>;
+
+    /**
+     * Specifies the sampling applied, if any, to the slots response. When sampled,
+     * results shown represent the first test run to the start of each sampling
+     * interval.
+     */
+    sampling?: NetworkPath.Sampling | null;
+  }
+
+  export namespace NetworkPath {
+    export interface Slot {
+      /**
+       * API Resource UUID tag.
+       */
+      id: string;
+
+      /**
+       * Round trip time in ms of the client to app mile
+       */
+      clientToAppRttMs: number | null;
+
+      /**
+       * Round trip time in ms of the client to Cloudflare egress mile
+       */
+      clientToCfEgressRttMs: number | null;
+
+      /**
+       * Round trip time in ms of the client to Cloudflare ingress mile
+       */
+      clientToCfIngressRttMs: number | null;
+
+      timestamp: string;
+
+      /**
+       * Round trip time in ms of the client to ISP mile
+       */
+      clientToIspRttMs?: number | null;
+    }
+
+    /**
+     * Specifies the sampling applied, if any, to the slots response. When sampled,
+     * results shown represent the first test run to the start of each sampling
+     * interval.
+     */
+    export interface Sampling {
+      unit: 'hours';
+
+      value: number;
+    }
   }
 }
 
@@ -583,9 +583,9 @@ export interface TracerouteTestPercentilesParams {
 }
 
 export namespace TracerouteTests {
-  export import TracerouteTestGetResponse = TracerouteTestsAPI.TracerouteTestGetResponse;
-  export import TracerouteTestNetworkPathResponse = TracerouteTestsAPI.TracerouteTestNetworkPathResponse;
-  export import TracerouteTestPercentilesResponse = TracerouteTestsAPI.TracerouteTestPercentilesResponse;
+  export import DigitalExperienceMonitoringTracerouteDetails = TracerouteTestsAPI.DigitalExperienceMonitoringTracerouteDetails;
+  export import DigitalExperienceMonitoringTracerouteDetailsPercentiles = TracerouteTestsAPI.DigitalExperienceMonitoringTracerouteDetailsPercentiles;
+  export import DigitalExperienceMonitoringTracerouteTestNetworkPath = TracerouteTestsAPI.DigitalExperienceMonitoringTracerouteTestNetworkPath;
   export import TracerouteTestGetParams = TracerouteTestsAPI.TracerouteTestGetParams;
   export import TracerouteTestNetworkPathParams = TracerouteTestsAPI.TracerouteTestNetworkPathParams;
   export import TracerouteTestPercentilesParams = TracerouteTestsAPI.TracerouteTestPercentilesParams;

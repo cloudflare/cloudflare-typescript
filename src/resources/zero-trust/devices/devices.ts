@@ -51,124 +51,122 @@ export class Devices extends APIResource {
   }
 }
 
-export type DeviceListResponse = Array<DeviceListResponse.DeviceListResponseItem>;
+export interface TeamsDevicesDevices {
+  /**
+   * Device ID.
+   */
+  id?: string;
 
-export namespace DeviceListResponse {
-  export interface DeviceListResponseItem {
+  /**
+   * When the device was created.
+   */
+  created?: string;
+
+  /**
+   * True if the device was deleted.
+   */
+  deleted?: boolean;
+
+  device_type?: 'windows' | 'mac' | 'linux' | 'android' | 'ios';
+
+  /**
+   * IPv4 or IPv6 address.
+   */
+  ip?: string;
+
+  /**
+   * The device's public key.
+   */
+  key?: string;
+
+  /**
+   * When the device last connected to Cloudflare services.
+   */
+  last_seen?: string;
+
+  /**
+   * The device mac address.
+   */
+  mac_address?: string;
+
+  /**
+   * The device manufacturer name.
+   */
+  manufacturer?: string;
+
+  /**
+   * The device model name.
+   */
+  model?: string;
+
+  /**
+   * The device name.
+   */
+  name?: string;
+
+  /**
+   * The Linux distro name.
+   */
+  os_distro_name?: string;
+
+  /**
+   * The Linux distro revision.
+   */
+  os_distro_revision?: string;
+
+  /**
+   * The operating system version.
+   */
+  os_version?: string;
+
+  /**
+   * The operating system version extra parameter.
+   */
+  os_version_extra?: string;
+
+  /**
+   * When the device was revoked.
+   */
+  revoked_at?: string;
+
+  /**
+   * The device serial number.
+   */
+  serial_number?: string;
+
+  /**
+   * When the device was updated.
+   */
+  updated?: string;
+
+  user?: TeamsDevicesDevices.User;
+
+  /**
+   * The WARP client version.
+   */
+  version?: string;
+}
+
+export namespace TeamsDevicesDevices {
+  export interface User {
     /**
-     * Device ID.
+     * UUID
      */
     id?: string;
 
     /**
-     * When the device was created.
+     * The contact email address of the user.
      */
-    created?: string;
+    email?: string;
 
     /**
-     * True if the device was deleted.
-     */
-    deleted?: boolean;
-
-    device_type?: 'windows' | 'mac' | 'linux' | 'android' | 'ios';
-
-    /**
-     * IPv4 or IPv6 address.
-     */
-    ip?: string;
-
-    /**
-     * The device's public key.
-     */
-    key?: string;
-
-    /**
-     * When the device last connected to Cloudflare services.
-     */
-    last_seen?: string;
-
-    /**
-     * The device mac address.
-     */
-    mac_address?: string;
-
-    /**
-     * The device manufacturer name.
-     */
-    manufacturer?: string;
-
-    /**
-     * The device model name.
-     */
-    model?: string;
-
-    /**
-     * The device name.
+     * The enrolled device user's name.
      */
     name?: string;
-
-    /**
-     * The Linux distro name.
-     */
-    os_distro_name?: string;
-
-    /**
-     * The Linux distro revision.
-     */
-    os_distro_revision?: string;
-
-    /**
-     * The operating system version.
-     */
-    os_version?: string;
-
-    /**
-     * The operating system version extra parameter.
-     */
-    os_version_extra?: string;
-
-    /**
-     * When the device was revoked.
-     */
-    revoked_at?: string;
-
-    /**
-     * The device serial number.
-     */
-    serial_number?: string;
-
-    /**
-     * When the device was updated.
-     */
-    updated?: string;
-
-    user?: DeviceListResponseItem.User;
-
-    /**
-     * The WARP client version.
-     */
-    version?: string;
-  }
-
-  export namespace DeviceListResponseItem {
-    export interface User {
-      /**
-       * UUID
-       */
-      id?: string;
-
-      /**
-       * The contact email address of the user.
-       */
-      email?: string;
-
-      /**
-       * The enrolled device user's name.
-       */
-      name?: string;
-    }
   }
 }
+
+export type DeviceListResponse = Array<TeamsDevicesDevices>;
 
 export type DeviceGetResponse = unknown | string;
 
@@ -181,49 +179,42 @@ export interface DeviceGetParams {
 }
 
 export namespace Devices {
+  export import TeamsDevicesDevices = DevicesAPI.TeamsDevicesDevices;
   export import DeviceListResponse = DevicesAPI.DeviceListResponse;
   export import DeviceGetResponse = DevicesAPI.DeviceGetResponse;
   export import DeviceListParams = DevicesAPI.DeviceListParams;
   export import DeviceGetParams = DevicesAPI.DeviceGetParams;
   export import DEXTests = DEXTestsAPI.DEXTests;
-  export import DEXTestCreateResponse = DEXTestsAPI.DEXTestCreateResponse;
-  export import DEXTestUpdateResponse = DEXTestsAPI.DEXTestUpdateResponse;
+  export import TeamsDevicesDeviceDEXTestSchemasHTTP = DEXTestsAPI.TeamsDevicesDeviceDEXTestSchemasHTTP;
   export import DEXTestListResponse = DEXTestsAPI.DEXTestListResponse;
   export import DEXTestDeleteResponse = DEXTestsAPI.DEXTestDeleteResponse;
-  export import DEXTestGetResponse = DEXTestsAPI.DEXTestGetResponse;
   export import DEXTestCreateParams = DEXTestsAPI.DEXTestCreateParams;
   export import DEXTestUpdateParams = DEXTestsAPI.DEXTestUpdateParams;
   export import DEXTestListParams = DEXTestsAPI.DEXTestListParams;
   export import DEXTestDeleteParams = DEXTestsAPI.DEXTestDeleteParams;
   export import DEXTestGetParams = DEXTestsAPI.DEXTestGetParams;
   export import Networks = NetworksAPI.Networks;
-  export import NetworkCreateResponse = NetworksAPI.NetworkCreateResponse;
-  export import NetworkUpdateResponse = NetworksAPI.NetworkUpdateResponse;
+  export import TeamsDevicesDeviceManagedNetworks = NetworksAPI.TeamsDevicesDeviceManagedNetworks;
   export import NetworkListResponse = NetworksAPI.NetworkListResponse;
   export import NetworkDeleteResponse = NetworksAPI.NetworkDeleteResponse;
-  export import NetworkGetResponse = NetworksAPI.NetworkGetResponse;
   export import NetworkCreateParams = NetworksAPI.NetworkCreateParams;
   export import NetworkUpdateParams = NetworksAPI.NetworkUpdateParams;
   export import NetworkListParams = NetworksAPI.NetworkListParams;
   export import NetworkDeleteParams = NetworksAPI.NetworkDeleteParams;
   export import NetworkGetParams = NetworksAPI.NetworkGetParams;
   export import Policies = PoliciesAPI.Policies;
-  export import PolicyCreateResponse = PoliciesAPI.PolicyCreateResponse;
+  export import TeamsDevicesDeviceSettingsPolicy = PoliciesAPI.TeamsDevicesDeviceSettingsPolicy;
   export import PolicyListResponse = PoliciesAPI.PolicyListResponse;
   export import PolicyDeleteResponse = PoliciesAPI.PolicyDeleteResponse;
-  export import PolicyEditResponse = PoliciesAPI.PolicyEditResponse;
-  export import PolicyGetResponse = PoliciesAPI.PolicyGetResponse;
   export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
   export import PolicyListParams = PoliciesAPI.PolicyListParams;
   export import PolicyDeleteParams = PoliciesAPI.PolicyDeleteParams;
   export import PolicyEditParams = PoliciesAPI.PolicyEditParams;
   export import PolicyGetParams = PoliciesAPI.PolicyGetParams;
   export import Postures = PosturesAPI.Postures;
-  export import PostureCreateResponse = PosturesAPI.PostureCreateResponse;
-  export import PostureUpdateResponse = PosturesAPI.PostureUpdateResponse;
+  export import TeamsDevicesDevicePostureRules = PosturesAPI.TeamsDevicesDevicePostureRules;
   export import PostureListResponse = PosturesAPI.PostureListResponse;
   export import PostureDeleteResponse = PosturesAPI.PostureDeleteResponse;
-  export import PostureGetResponse = PosturesAPI.PostureGetResponse;
   export import PostureCreateParams = PosturesAPI.PostureCreateParams;
   export import PostureUpdateParams = PosturesAPI.PostureUpdateParams;
   export import PostureListParams = PosturesAPI.PostureListParams;
@@ -233,8 +224,7 @@ export namespace Devices {
   export import RevokeCreateResponse = RevokesAPI.RevokeCreateResponse;
   export import RevokeCreateParams = RevokesAPI.RevokeCreateParams;
   export import Settings = SettingsAPI.Settings;
-  export import SettingUpdateResponse = SettingsAPI.SettingUpdateResponse;
-  export import SettingListResponse = SettingsAPI.SettingListResponse;
+  export import TeamsDevicesZeroTrustAccountDeviceSettings = SettingsAPI.TeamsDevicesZeroTrustAccountDeviceSettings;
   export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;
   export import SettingListParams = SettingsAPI.SettingListParams;
   export import Unrevokes = UnrevokesAPI.Unrevokes;

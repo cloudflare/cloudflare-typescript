@@ -12,12 +12,12 @@ export class Indexes extends APIResource {
     accountIdentifier: string,
     body: IndexCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<IndexCreateResponse | null> {
+  ): Core.APIPromise<VectorizeCreateIndex | null> {
     return (
       this._client.post(`/accounts/${accountIdentifier}/vectorize/indexes`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: IndexCreateResponse | null }>
+      }) as Core.APIPromise<{ result: VectorizeCreateIndex | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -29,12 +29,12 @@ export class Indexes extends APIResource {
     indexName: string,
     body: IndexUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<IndexUpdateResponse | null> {
+  ): Core.APIPromise<VectorizeCreateIndex | null> {
     return (
       this._client.put(`/accounts/${accountIdentifier}/vectorize/indexes/${indexName}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: IndexUpdateResponse | null }>
+      }) as Core.APIPromise<{ result: VectorizeCreateIndex | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -73,12 +73,12 @@ export class Indexes extends APIResource {
     indexName: string,
     body: IndexDeleteByIDsParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<IndexDeleteByIDsResponse | null> {
+  ): Core.APIPromise<VectorizeIndexDeleteVectorsByID | null> {
     return (
       this._client.post(`/accounts/${accountIdentifier}/vectorize/indexes/${indexName}/delete-by-ids`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: IndexDeleteByIDsResponse | null }>
+      }) as Core.APIPromise<{ result: VectorizeIndexDeleteVectorsByID | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -89,12 +89,12 @@ export class Indexes extends APIResource {
     accountIdentifier: string,
     indexName: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<IndexGetResponse | null> {
+  ): Core.APIPromise<VectorizeCreateIndex | null> {
     return (
       this._client.get(
         `/accounts/${accountIdentifier}/vectorize/indexes/${indexName}`,
         options,
-      ) as Core.APIPromise<{ result: IndexGetResponse | null }>
+      ) as Core.APIPromise<{ result: VectorizeCreateIndex | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -124,12 +124,12 @@ export class Indexes extends APIResource {
     indexName: string,
     body: IndexInsertParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<IndexInsertResponse | null> {
+  ): Core.APIPromise<VectorizeIndexInsert | null> {
     return (
       this._client.post(
         `/accounts/${accountIdentifier}/vectorize/indexes/${indexName}/insert`,
         options,
-      ) as Core.APIPromise<{ result: IndexInsertResponse | null }>
+      ) as Core.APIPromise<{ result: VectorizeIndexInsert | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -141,12 +141,12 @@ export class Indexes extends APIResource {
     indexName: string,
     body: IndexQueryParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<IndexQueryResponse | null> {
+  ): Core.APIPromise<VectorizeIndexQuery | null> {
     return (
       this._client.post(`/accounts/${accountIdentifier}/vectorize/indexes/${indexName}/query`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: IndexQueryResponse | null }>
+      }) as Core.APIPromise<{ result: VectorizeIndexQuery | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -159,18 +159,18 @@ export class Indexes extends APIResource {
     indexName: string,
     body: IndexUpsertParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<IndexUpsertResponse | null> {
+  ): Core.APIPromise<VectorizeIndexUpsert | null> {
     return (
       this._client.post(
         `/accounts/${accountIdentifier}/vectorize/indexes/${indexName}/upsert`,
         options,
-      ) as Core.APIPromise<{ result: IndexUpsertResponse | null }>
+      ) as Core.APIPromise<{ result: VectorizeIndexUpsert | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface IndexCreateResponse {
-  config?: IndexCreateResponse.Config;
+export interface VectorizeCreateIndex {
+  config?: VectorizeCreateIndex.Config;
 
   /**
    * Specifies the timestamp the resource was created as an ISO8601 string.
@@ -190,7 +190,7 @@ export interface IndexCreateResponse {
   name?: string;
 }
 
-export namespace IndexCreateResponse {
+export namespace VectorizeCreateIndex {
   export interface Config {
     /**
      * Specifies the number of dimensions for the index
@@ -204,83 +204,7 @@ export namespace IndexCreateResponse {
   }
 }
 
-export interface IndexUpdateResponse {
-  config?: IndexUpdateResponse.Config;
-
-  /**
-   * Specifies the timestamp the resource was created as an ISO8601 string.
-   */
-  created_on?: unknown;
-
-  /**
-   * Specifies the description of the index.
-   */
-  description?: string;
-
-  /**
-   * Specifies the timestamp the resource was modified as an ISO8601 string.
-   */
-  modified_on?: unknown;
-
-  name?: string;
-}
-
-export namespace IndexUpdateResponse {
-  export interface Config {
-    /**
-     * Specifies the number of dimensions for the index
-     */
-    dimensions: number;
-
-    /**
-     * Specifies the type of metric to use calculating distance.
-     */
-    metric: 'cosine' | 'euclidean' | 'dot-product';
-  }
-}
-
-export type IndexListResponse = Array<IndexListResponse.IndexListResponseItem>;
-
-export namespace IndexListResponse {
-  export interface IndexListResponseItem {
-    config?: IndexListResponseItem.Config;
-
-    /**
-     * Specifies the timestamp the resource was created as an ISO8601 string.
-     */
-    created_on?: unknown;
-
-    /**
-     * Specifies the description of the index.
-     */
-    description?: string;
-
-    /**
-     * Specifies the timestamp the resource was modified as an ISO8601 string.
-     */
-    modified_on?: unknown;
-
-    name?: string;
-  }
-
-  export namespace IndexListResponseItem {
-    export interface Config {
-      /**
-       * Specifies the number of dimensions for the index
-       */
-      dimensions: number;
-
-      /**
-       * Specifies the type of metric to use calculating distance.
-       */
-      metric: 'cosine' | 'euclidean' | 'dot-product';
-    }
-  }
-}
-
-export type IndexDeleteResponse = unknown | string;
-
-export interface IndexDeleteByIDsResponse {
+export interface VectorizeIndexDeleteVectorsByID {
   /**
    * The count of the vectors successfully deleted.
    */
@@ -293,47 +217,7 @@ export interface IndexDeleteByIDsResponse {
   ids?: Array<string>;
 }
 
-export interface IndexGetResponse {
-  config?: IndexGetResponse.Config;
-
-  /**
-   * Specifies the timestamp the resource was created as an ISO8601 string.
-   */
-  created_on?: unknown;
-
-  /**
-   * Specifies the description of the index.
-   */
-  description?: string;
-
-  /**
-   * Specifies the timestamp the resource was modified as an ISO8601 string.
-   */
-  modified_on?: unknown;
-
-  name?: string;
-}
-
-export namespace IndexGetResponse {
-  export interface Config {
-    /**
-     * Specifies the number of dimensions for the index
-     */
-    dimensions: number;
-
-    /**
-     * Specifies the type of metric to use calculating distance.
-     */
-    metric: 'cosine' | 'euclidean' | 'dot-product';
-  }
-}
-
-/**
- * Array of vectors with matching ids.
- */
-export type IndexGetByIDsResponse = unknown;
-
-export interface IndexInsertResponse {
+export interface VectorizeIndexInsert {
   /**
    * Specifies the count of the vectors successfully inserted.
    */
@@ -345,7 +229,7 @@ export interface IndexInsertResponse {
   ids?: Array<string>;
 }
 
-export interface IndexQueryResponse {
+export interface VectorizeIndexQuery {
   /**
    * Specifies the count of vectors returned by the search
    */
@@ -354,10 +238,10 @@ export interface IndexQueryResponse {
   /**
    * Array of vectors matched by the search
    */
-  matches?: Array<IndexQueryResponse.Match>;
+  matches?: Array<VectorizeIndexQuery.Match>;
 }
 
-export namespace IndexQueryResponse {
+export namespace VectorizeIndexQuery {
   export interface Match {
     /**
      * Identifier
@@ -375,7 +259,7 @@ export namespace IndexQueryResponse {
   }
 }
 
-export interface IndexUpsertResponse {
+export interface VectorizeIndexUpsert {
   /**
    * Specifies the count of the vectors successfully inserted.
    */
@@ -386,6 +270,15 @@ export interface IndexUpsertResponse {
    */
   ids?: Array<string>;
 }
+
+export type IndexListResponse = Array<VectorizeCreateIndex>;
+
+export type IndexDeleteResponse = unknown | string;
+
+/**
+ * Array of vectors with matching ids.
+ */
+export type IndexGetByIDsResponse = unknown;
 
 export interface IndexCreateParams {
   /**
@@ -477,16 +370,14 @@ export interface IndexQueryParams {
 export interface IndexUpsertParams {}
 
 export namespace Indexes {
-  export import IndexCreateResponse = IndexesAPI.IndexCreateResponse;
-  export import IndexUpdateResponse = IndexesAPI.IndexUpdateResponse;
+  export import VectorizeCreateIndex = IndexesAPI.VectorizeCreateIndex;
+  export import VectorizeIndexDeleteVectorsByID = IndexesAPI.VectorizeIndexDeleteVectorsByID;
+  export import VectorizeIndexInsert = IndexesAPI.VectorizeIndexInsert;
+  export import VectorizeIndexQuery = IndexesAPI.VectorizeIndexQuery;
+  export import VectorizeIndexUpsert = IndexesAPI.VectorizeIndexUpsert;
   export import IndexListResponse = IndexesAPI.IndexListResponse;
   export import IndexDeleteResponse = IndexesAPI.IndexDeleteResponse;
-  export import IndexDeleteByIDsResponse = IndexesAPI.IndexDeleteByIDsResponse;
-  export import IndexGetResponse = IndexesAPI.IndexGetResponse;
   export import IndexGetByIDsResponse = IndexesAPI.IndexGetByIDsResponse;
-  export import IndexInsertResponse = IndexesAPI.IndexInsertResponse;
-  export import IndexQueryResponse = IndexesAPI.IndexQueryResponse;
-  export import IndexUpsertResponse = IndexesAPI.IndexUpsertResponse;
   export import IndexCreateParams = IndexesAPI.IndexCreateParams;
   export import IndexUpdateParams = IndexesAPI.IndexUpdateParams;
   export import IndexDeleteByIDsParams = IndexesAPI.IndexDeleteByIDsParams;

@@ -38,13 +38,13 @@ export class Speed extends APIResource {
     url: string,
     params: SpeedScheduleGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SpeedScheduleGetResponse> {
+  ): Core.APIPromise<ObservatorySchedule> {
     const { zone_id, ...query } = params;
     return (
       this._client.get(`/zones/${zone_id}/speed_api/schedule/${url}`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: SpeedScheduleGetResponse }>
+      }) as Core.APIPromise<{ result: ObservatorySchedule }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -55,28 +55,21 @@ export class Speed extends APIResource {
     url: string,
     params: SpeedTrendsListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SpeedTrendsListResponse> {
+  ): Core.APIPromise<ObservatoryTrend> {
     const { zone_id, ...query } = params;
     return (
       this._client.get(`/zones/${zone_id}/speed_api/pages/${url}/trend`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: SpeedTrendsListResponse }>
+      }) as Core.APIPromise<{ result: ObservatoryTrend }>
     )._thenUnwrap((obj) => obj.result);
   }
-}
-
-export interface SpeedDeleteResponse {
-  /**
-   * Number of items affected.
-   */
-  count?: number;
 }
 
 /**
  * The test schedule.
  */
-export interface SpeedScheduleGetResponse {
+export interface ObservatorySchedule {
   /**
    * The frequency of the test.
    */
@@ -114,7 +107,7 @@ export interface SpeedScheduleGetResponse {
   url?: string;
 }
 
-export interface SpeedTrendsListResponse {
+export interface ObservatoryTrend {
   /**
    * Cumulative Layout Shift trend.
    */
@@ -154,6 +147,13 @@ export interface SpeedTrendsListResponse {
    * Time To Interactive trend.
    */
   tti?: Array<number | null>;
+}
+
+export interface SpeedDeleteResponse {
+  /**
+   * Number of items affected.
+   */
+  count?: number;
 }
 
 export interface SpeedDeleteParams {
@@ -271,17 +271,16 @@ export interface SpeedTrendsListParams {
 }
 
 export namespace Speed {
+  export import ObservatorySchedule = SpeedAPI.ObservatorySchedule;
+  export import ObservatoryTrend = SpeedAPI.ObservatoryTrend;
   export import SpeedDeleteResponse = SpeedAPI.SpeedDeleteResponse;
-  export import SpeedScheduleGetResponse = SpeedAPI.SpeedScheduleGetResponse;
-  export import SpeedTrendsListResponse = SpeedAPI.SpeedTrendsListResponse;
   export import SpeedDeleteParams = SpeedAPI.SpeedDeleteParams;
   export import SpeedScheduleGetParams = SpeedAPI.SpeedScheduleGetParams;
   export import SpeedTrendsListParams = SpeedAPI.SpeedTrendsListParams;
   export import Tests = TestsAPI.Tests;
-  export import TestCreateResponse = TestsAPI.TestCreateResponse;
+  export import ObservatoryPageTest = TestsAPI.ObservatoryPageTest;
   export import TestListResponse = TestsAPI.TestListResponse;
   export import TestDeleteResponse = TestsAPI.TestDeleteResponse;
-  export import TestGetResponse = TestsAPI.TestGetResponse;
   export import TestCreateParams = TestsAPI.TestCreateParams;
   export import TestListParams = TestsAPI.TestListParams;
   export import TestDeleteParams = TestsAPI.TestDeleteParams;
@@ -290,7 +289,7 @@ export namespace Speed {
   export import ScheduleCreateResponse = ScheduleAPI.ScheduleCreateResponse;
   export import ScheduleCreateParams = ScheduleAPI.ScheduleCreateParams;
   export import Availabilities = AvailabilitiesAPI.Availabilities;
-  export import AvailabilityListResponse = AvailabilitiesAPI.AvailabilityListResponse;
+  export import ObservatoryAvailabilities = AvailabilitiesAPI.ObservatoryAvailabilities;
   export import AvailabilityListParams = AvailabilitiesAPI.AvailabilityListParams;
   export import Pages = PagesAPI.Pages;
   export import PageListResponse = PagesAPI.PageListResponse;

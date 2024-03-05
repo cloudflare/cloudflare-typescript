@@ -1,16 +1,15 @@
 // File generated from our OpenAPI spec by Stainless.
 
+export { Vectorize } from './vectorize';
 export {
-  IndexCreateResponse,
-  IndexUpdateResponse,
+  VectorizeCreateIndex,
+  VectorizeIndexDeleteVectorsByID,
+  VectorizeIndexInsert,
+  VectorizeIndexQuery,
+  VectorizeIndexUpsert,
   IndexListResponse,
   IndexDeleteResponse,
-  IndexDeleteByIDsResponse,
-  IndexGetResponse,
   IndexGetByIDsResponse,
-  IndexInsertResponse,
-  IndexQueryResponse,
-  IndexUpsertResponse,
   IndexCreateParams,
   IndexUpdateParams,
   IndexDeleteByIDsParams,
@@ -20,4 +19,3 @@ export {
   IndexUpsertParams,
   Indexes,
 } from './indexes';
-export { Vectorize } from './vectorize';

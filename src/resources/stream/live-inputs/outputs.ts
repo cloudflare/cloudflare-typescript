@@ -14,13 +14,13 @@ export class Outputs extends APIResource {
     liveInputIdentifier: string,
     params: OutputCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<OutputCreateResponse> {
+  ): Core.APIPromise<StreamOutput> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/stream/live_inputs/${liveInputIdentifier}/outputs`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: OutputCreateResponse }>
+      }) as Core.APIPromise<{ result: StreamOutput }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -32,13 +32,13 @@ export class Outputs extends APIResource {
     outputIdentifier: string,
     params: OutputUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<OutputUpdateResponse> {
+  ): Core.APIPromise<StreamOutput> {
     const { account_id, ...body } = params;
     return (
       this._client.put(
         `/accounts/${account_id}/stream/live_inputs/${liveInputIdentifier}/outputs/${outputIdentifier}`,
         { body, ...options },
-      ) as Core.APIPromise<{ result: OutputUpdateResponse }>
+      ) as Core.APIPromise<{ result: StreamOutput }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -76,7 +76,7 @@ export class Outputs extends APIResource {
   }
 }
 
-export interface OutputCreateResponse {
+export interface StreamOutput {
   /**
    * When enabled, live video streamed to the associated live input will be sent to
    * the output URL. When disabled, live video will not be sent to the output URL,
@@ -102,61 +102,7 @@ export interface OutputCreateResponse {
   url?: string;
 }
 
-export interface OutputUpdateResponse {
-  /**
-   * When enabled, live video streamed to the associated live input will be sent to
-   * the output URL. When disabled, live video will not be sent to the output URL,
-   * even when streaming to the associated live input. Use this to control precisely
-   * when you start and stop simulcasting to specific destinations like YouTube and
-   * Twitch.
-   */
-  enabled?: boolean;
-
-  /**
-   * The streamKey used to authenticate against an output's target.
-   */
-  streamKey?: string;
-
-  /**
-   * A unique identifier for the output.
-   */
-  uid?: string;
-
-  /**
-   * The URL an output uses to restream.
-   */
-  url?: string;
-}
-
-export type OutputListResponse = Array<OutputListResponse.OutputListResponseItem>;
-
-export namespace OutputListResponse {
-  export interface OutputListResponseItem {
-    /**
-     * When enabled, live video streamed to the associated live input will be sent to
-     * the output URL. When disabled, live video will not be sent to the output URL,
-     * even when streaming to the associated live input. Use this to control precisely
-     * when you start and stop simulcasting to specific destinations like YouTube and
-     * Twitch.
-     */
-    enabled?: boolean;
-
-    /**
-     * The streamKey used to authenticate against an output's target.
-     */
-    streamKey?: string;
-
-    /**
-     * A unique identifier for the output.
-     */
-    uid?: string;
-
-    /**
-     * The URL an output uses to restream.
-     */
-    url?: string;
-  }
-}
+export type OutputListResponse = Array<StreamOutput>;
 
 export interface OutputCreateParams {
   /**
@@ -215,8 +161,7 @@ export interface OutputDeleteParams {
 }
 
 export namespace Outputs {
-  export import OutputCreateResponse = OutputsAPI.OutputCreateResponse;
-  export import OutputUpdateResponse = OutputsAPI.OutputUpdateResponse;
+  export import StreamOutput = OutputsAPI.StreamOutput;
   export import OutputListResponse = OutputsAPI.OutputListResponse;
   export import OutputCreateParams = OutputsAPI.OutputCreateParams;
   export import OutputUpdateParams = OutputsAPI.OutputUpdateParams;

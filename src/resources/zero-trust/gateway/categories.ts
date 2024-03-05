@@ -21,10 +21,43 @@ export class Categories extends APIResource {
   }
 }
 
-export type CategoryListResponse = Array<CategoryListResponse.CategoryListResponseItem>;
+export interface ZeroTrustGatewayCategories {
+  /**
+   * The identifier for this category. There is only one category per ID.
+   */
+  id?: number;
 
-export namespace CategoryListResponse {
-  export interface CategoryListResponseItem {
+  /**
+   * True if the category is in beta and subject to change.
+   */
+  beta?: boolean;
+
+  /**
+   * Which account types are allowed to create policies based on this category.
+   * `blocked` categories are blocked unconditionally for all accounts.
+   * `removalPending` categories can be removed from policies but not added.
+   * `noBlock` categories cannot be blocked.
+   */
+  class?: 'free' | 'premium' | 'blocked' | 'removalPending' | 'noBlock';
+
+  /**
+   * A short summary of domains in the category.
+   */
+  description?: string;
+
+  /**
+   * The name of the category.
+   */
+  name?: string;
+
+  /**
+   * All subcategories for this category.
+   */
+  subcategories?: Array<ZeroTrustGatewayCategories.Subcategory>;
+}
+
+export namespace ZeroTrustGatewayCategories {
+  export interface Subcategory {
     /**
      * The identifier for this category. There is only one category per ID.
      */
@@ -52,45 +85,10 @@ export namespace CategoryListResponse {
      * The name of the category.
      */
     name?: string;
-
-    /**
-     * All subcategories for this category.
-     */
-    subcategories?: Array<CategoryListResponseItem.Subcategory>;
-  }
-
-  export namespace CategoryListResponseItem {
-    export interface Subcategory {
-      /**
-       * The identifier for this category. There is only one category per ID.
-       */
-      id?: number;
-
-      /**
-       * True if the category is in beta and subject to change.
-       */
-      beta?: boolean;
-
-      /**
-       * Which account types are allowed to create policies based on this category.
-       * `blocked` categories are blocked unconditionally for all accounts.
-       * `removalPending` categories can be removed from policies but not added.
-       * `noBlock` categories cannot be blocked.
-       */
-      class?: 'free' | 'premium' | 'blocked' | 'removalPending' | 'noBlock';
-
-      /**
-       * A short summary of domains in the category.
-       */
-      description?: string;
-
-      /**
-       * The name of the category.
-       */
-      name?: string;
-    }
   }
 }
+
+export type CategoryListResponse = Array<ZeroTrustGatewayCategories>;
 
 export interface CategoryListParams {
   /**
@@ -100,6 +98,7 @@ export interface CategoryListParams {
 }
 
 export namespace Categories {
+  export import ZeroTrustGatewayCategories = CategoriesAPI.ZeroTrustGatewayCategories;
   export import CategoryListResponse = CategoriesAPI.CategoryListResponse;
   export import CategoryListParams = CategoriesAPI.CategoryListParams;
 }

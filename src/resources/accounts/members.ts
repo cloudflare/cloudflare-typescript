@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as MembersAPI from 'cloudflare/resources/accounts/members';
+import * as RolesAPI from 'cloudflare/resources/accounts/roles';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class Members extends APIResource {
@@ -41,11 +42,11 @@ export class Members extends APIResource {
   list(
     params: MemberListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<MemberListResponsesV4PagePaginationArray, MemberListResponse> {
+  ): Core.PagePromise<IamComponentsSchemasMembersV4PagePaginationArray, IamComponentsSchemasMember> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/members`,
-      MemberListResponsesV4PagePaginationArray,
+      IamComponentsSchemasMembersV4PagePaginationArray,
       { query, ...options },
     );
   }
@@ -83,7 +84,7 @@ export class Members extends APIResource {
   }
 }
 
-export class MemberListResponsesV4PagePaginationArray extends V4PagePaginationArray<MemberListResponse> {}
+export class IamComponentsSchemasMembersV4PagePaginationArray extends V4PagePaginationArray<IamComponentsSchemasMember> {}
 
 export interface AccountMember {
   /**
@@ -424,7 +425,7 @@ export namespace AccountMemberWithID {
   }
 }
 
-export interface MemberListResponse {
+export interface IamComponentsSchemasMember {
   /**
    * Identifier
    */
@@ -443,36 +444,12 @@ export interface MemberListResponse {
   /**
    * Roles assigned to this Member.
    */
-  roles: Array<MemberListResponse.Role>;
+  roles: Array<RolesAPI.IamSchemasRole>;
 
   /**
    * A member's status in the organization.
    */
   status: 'accepted' | 'invited';
-}
-
-export namespace MemberListResponse {
-  export interface Role {
-    /**
-     * Role identifier tag.
-     */
-    id: string;
-
-    /**
-     * Description of role's permissions.
-     */
-    description: string;
-
-    /**
-     * Role Name.
-     */
-    name: string;
-
-    /**
-     * Access permissions for this User.
-     */
-    permissions: Array<string>;
-  }
 }
 
 export interface MemberDeleteResponse {
@@ -558,9 +535,9 @@ export interface MemberGetParams {
 export namespace Members {
   export import AccountMember = MembersAPI.AccountMember;
   export import AccountMemberWithID = MembersAPI.AccountMemberWithID;
-  export import MemberListResponse = MembersAPI.MemberListResponse;
+  export import IamComponentsSchemasMember = MembersAPI.IamComponentsSchemasMember;
   export import MemberDeleteResponse = MembersAPI.MemberDeleteResponse;
-  export import MemberListResponsesV4PagePaginationArray = MembersAPI.MemberListResponsesV4PagePaginationArray;
+  export import IamComponentsSchemasMembersV4PagePaginationArray = MembersAPI.IamComponentsSchemasMembersV4PagePaginationArray;
   export import MemberCreateParams = MembersAPI.MemberCreateParams;
   export import MemberUpdateParams = MembersAPI.MemberUpdateParams;
   export import MemberListParams = MembersAPI.MemberListParams;

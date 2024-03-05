@@ -11,18 +11,16 @@ export class R2 extends APIResource {
 
 export namespace R2 {
   export import Buckets = BucketsAPI.Buckets;
-  export import BucketCreateResponse = BucketsAPI.BucketCreateResponse;
+  export import R2Bucket = BucketsAPI.R2Bucket;
   export import BucketListResponse = BucketsAPI.BucketListResponse;
   export import BucketDeleteResponse = BucketsAPI.BucketDeleteResponse;
-  export import BucketGetResponse = BucketsAPI.BucketGetResponse;
   export import BucketCreateParams = BucketsAPI.BucketCreateParams;
   export import BucketListParams = BucketsAPI.BucketListParams;
   export import BucketDeleteParams = BucketsAPI.BucketDeleteParams;
   export import BucketGetParams = BucketsAPI.BucketGetParams;
   export import Sippy = SippyAPI.Sippy;
-  export import SippyUpdateResponse = SippyAPI.SippyUpdateResponse;
+  export import R2Sippy = SippyAPI.R2Sippy;
   export import SippyDeleteResponse = SippyAPI.SippyDeleteResponse;
-  export import SippyGetResponse = SippyAPI.SippyGetResponse;
   export import SippyUpdateParams = SippyAPI.SippyUpdateParams;
   export import SippyDeleteParams = SippyAPI.SippyDeleteParams;
   export import SippyGetParams = SippyAPI.SippyGetParams;

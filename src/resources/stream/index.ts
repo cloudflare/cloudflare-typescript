@@ -1,27 +1,6 @@
 // File generated from our OpenAPI spec by Stainless.
 
-export {
-  AudioTrackDeleteResponse,
-  AudioTrackCopyResponse,
-  AudioTrackEditResponse,
-  AudioTrackGetResponse,
-  AudioTrackDeleteParams,
-  AudioTrackCopyParams,
-  AudioTrackEditParams,
-  AudioTrackGetParams,
-  AudioTracks,
-} from './audio-tracks';
-export {
-  CaptionUpdateResponse,
-  CaptionDeleteResponse,
-  CaptionGetResponse,
-  CaptionUpdateParams,
-  CaptionDeleteParams,
-  CaptionGetParams,
-  Captions,
-} from './captions';
-export { ClipCreateResponse, ClipCreateParams, Clips } from './clips';
-export { CopyCreateResponse, CopyCreateParams, Copies } from './copies';
+export { CopyCreateParams, Copies } from './copies';
 export { DirectUploadCreateResponse, DirectUploadCreateParams, DirectUploads } from './direct-uploads';
 export {
   DownloadCreateResponse,
@@ -34,7 +13,28 @@ export {
 } from './downloads';
 export { EmbedGetResponse, EmbedGetParams, Embeds } from './embeds';
 export {
-  KeyCreateResponse,
+  StreamAdditionalAudio,
+  AudioTrackDeleteResponse,
+  AudioTrackGetResponse,
+  AudioTrackDeleteParams,
+  AudioTrackCopyParams,
+  AudioTrackEditParams,
+  AudioTrackGetParams,
+  AudioTracks,
+} from './audio-tracks';
+export {
+  StreamCaptions,
+  CaptionUpdateResponse,
+  CaptionDeleteResponse,
+  CaptionGetResponse,
+  CaptionUpdateParams,
+  CaptionDeleteParams,
+  CaptionGetParams,
+  Captions,
+} from './captions';
+export { StreamClipping, ClipCreateParams, Clips } from './clips';
+export {
+  StreamKeys,
   KeyDeleteResponse,
   KeyGetResponse,
   KeyCreateParams,
@@ -43,10 +43,8 @@ export {
   Keys,
 } from './keys';
 export {
-  LiveInputCreateResponse,
-  LiveInputUpdateResponse,
+  StreamLiveInput,
   LiveInputListResponse,
-  LiveInputGetResponse,
   LiveInputCreateParams,
   LiveInputUpdateParams,
   LiveInputListParams,
@@ -55,17 +53,16 @@ export {
   LiveInputs,
 } from './live-inputs/index';
 export {
+  StreamVideos,
   StreamListResponse,
-  StreamGetResponse,
   StreamCreateParams,
   StreamListParams,
   StreamDeleteParams,
   StreamGetParams,
   Stream,
 } from './stream';
-export { TokenCreateResponse, TokenCreateParams, Tokens } from './tokens';
-export { VideoStorageUsageResponse, VideoStorageUsageParams, Videos } from './videos';
 export {
+  StreamWatermarks,
   WatermarkCreateResponse,
   WatermarkListResponse,
   WatermarkDeleteResponse,
@@ -76,6 +73,8 @@ export {
   WatermarkGetParams,
   Watermarks,
 } from './watermarks';
+export { TokenCreateResponse, TokenCreateParams, Tokens } from './tokens';
+export { VideoStorageUsageResponse, VideoStorageUsageParams, Videos } from './videos';
 export {
   WebhookUpdateResponse,
   WebhookDeleteResponse,

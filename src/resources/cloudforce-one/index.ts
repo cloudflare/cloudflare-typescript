@@ -2,17 +2,15 @@
 
 export { CloudforceOne } from './cloudforce-one';
 export {
-  RequestCreateResponse,
-  RequestUpdateResponse,
-  RequestListResponse,
+  CloudforceOneQuota,
+  CloudforceOneRequestConstants,
+  CloudforceOneRequestItem,
+  CloudforceOneRequestListItem,
+  CloudforceOneRequestTypes,
   RequestDeleteResponse,
-  RequestConstantsResponse,
-  RequestGetResponse,
-  RequestQuotaResponse,
-  RequestTypesResponse,
   RequestCreateParams,
   RequestUpdateParams,
   RequestListParams,
-  RequestListResponsesV4PagePaginationArray,
+  CloudforceOneRequestListItemsV4PagePaginationArray,
   Requests,
 } from './requests/index';

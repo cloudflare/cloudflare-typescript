@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as InvitesAPI from 'cloudflare/resources/user/invites';
+import * as RolesAPI from 'cloudflare/resources/accounts/roles';
 
 export class Invites extends APIResource {
   /**
@@ -37,6 +38,58 @@ export class Invites extends APIResource {
       this._client.get(`/user/invites/${inviteId}`, options) as Core.APIPromise<{ result: InviteGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+
+export interface IamSchemasInvite {
+  /**
+   * ID of the user to add to the organization.
+   */
+  invited_member_id: string | null;
+
+  /**
+   * ID of the organization the user will be added to.
+   */
+  organization_id: string;
+
+  /**
+   * Invite identifier tag.
+   */
+  id?: string;
+
+  /**
+   * When the invite is no longer active.
+   */
+  expires_on?: string;
+
+  /**
+   * The email address of the user who created the invite.
+   */
+  invited_by?: string;
+
+  /**
+   * Email address of the user to add to the organization.
+   */
+  invited_member_email?: string;
+
+  /**
+   * When the invite was sent.
+   */
+  invited_on?: string;
+
+  /**
+   * Organization name.
+   */
+  organization_name?: string;
+
+  /**
+   * Roles to be assigned to this user.
+   */
+  roles?: Array<RolesAPI.IamSchemasRole>;
+
+  /**
+   * Current status of the invitation.
+   */
+  status?: 'pending' | 'accepted' | 'rejected' | 'expired';
 }
 
 export type InviteListResponse = Array<InviteListResponse.InviteListResponseItem>;
@@ -86,36 +139,12 @@ export namespace InviteListResponse {
     /**
      * Roles to be assigned to this user.
      */
-    roles?: Array<InviteListResponseItem.Role>;
+    roles?: Array<RolesAPI.IamSchemasRole>;
 
     /**
      * Current status of the invitation.
      */
     status?: 'pending' | 'accepted' | 'rejected' | 'expired';
-  }
-
-  export namespace InviteListResponseItem {
-    export interface Role {
-      /**
-       * Role identifier tag.
-       */
-      id: string;
-
-      /**
-       * Description of role's permissions.
-       */
-      description: string;
-
-      /**
-       * Role Name.
-       */
-      name: string;
-
-      /**
-       * Access permissions for this User.
-       */
-      permissions: Array<string>;
-    }
   }
 }
 
@@ -131,6 +160,7 @@ export interface InviteEditParams {
 }
 
 export namespace Invites {
+  export import IamSchemasInvite = InvitesAPI.IamSchemasInvite;
   export import InviteListResponse = InvitesAPI.InviteListResponse;
   export import InviteEditResponse = InvitesAPI.InviteEditResponse;
   export import InviteGetResponse = InvitesAPI.InviteGetResponse;
