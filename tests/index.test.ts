@@ -23,6 +23,8 @@ describe('instantiate client', () => {
     const client = new Cloudflare({
       baseURL: 'http://localhost:5000/',
       defaultHeaders: { 'X-My-Default-Header': '2' },
+      apiKey: '144c9defac04969c7bfad8efaa8ea194',
+      apiEmail: 'user@example.com',
     });
 
     test('they are used in the request', () => {
@@ -54,6 +56,8 @@ describe('instantiate client', () => {
       const client = new Cloudflare({
         baseURL: 'http://localhost:5000/',
         defaultQuery: { apiVersion: 'foo' },
+        apiKey: '144c9defac04969c7bfad8efaa8ea194',
+        apiEmail: 'user@example.com',
       });
       expect(client.buildURL('/foo', null)).toEqual('http://localhost:5000/foo?apiVersion=foo');
     });
@@ -62,12 +66,19 @@ describe('instantiate client', () => {
       const client = new Cloudflare({
         baseURL: 'http://localhost:5000/',
         defaultQuery: { apiVersion: 'foo', hello: 'world' },
+        apiKey: '144c9defac04969c7bfad8efaa8ea194',
+        apiEmail: 'user@example.com',
       });
       expect(client.buildURL('/foo', null)).toEqual('http://localhost:5000/foo?apiVersion=foo&hello=world');
     });
 
     test('overriding with `undefined`', () => {
-      const client = new Cloudflare({ baseURL: 'http://localhost:5000/', defaultQuery: { hello: 'world' } });
+      const client = new Cloudflare({
+        baseURL: 'http://localhost:5000/',
+        defaultQuery: { hello: 'world' },
+        apiKey: '144c9defac04969c7bfad8efaa8ea194',
+        apiEmail: 'user@example.com',
+      });
       expect(client.buildURL('/foo', { hello: undefined })).toEqual('http://localhost:5000/foo');
     });
   });
@@ -75,6 +86,8 @@ describe('instantiate client', () => {
   test('custom fetch', async () => {
     const client = new Cloudflare({
       baseURL: 'http://localhost:5000/',
+      apiKey: '144c9defac04969c7bfad8efaa8ea194',
+      apiEmail: 'user@example.com',
       fetch: (url) => {
         return Promise.resolve(
           new Response(JSON.stringify({ url, custom: true }), {
@@ -91,6 +104,8 @@ describe('instantiate client', () => {
   test('custom signal', async () => {
     const client = new Cloudflare({
       baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+      apiKey: '144c9defac04969c7bfad8efaa8ea194',
+      apiEmail: 'user@example.com',
       fetch: (...args) => {
         return new Promise((resolve, reject) =>
           setTimeout(
@@ -115,12 +130,20 @@ describe('instantiate client', () => {
 
   describe('baseUrl', () => {
     test('trailing slash', () => {
-      const client = new Cloudflare({ baseURL: 'http://localhost:5000/custom/path/' });
+      const client = new Cloudflare({
+        baseURL: 'http://localhost:5000/custom/path/',
+        apiKey: '144c9defac04969c7bfad8efaa8ea194',
+        apiEmail: 'user@example.com',
+      });
       expect(client.buildURL('/foo', null)).toEqual('http://localhost:5000/custom/path/foo');
     });
 
     test('no trailing slash', () => {
-      const client = new Cloudflare({ baseURL: 'http://localhost:5000/custom/path' });
+      const client = new Cloudflare({
+        baseURL: 'http://localhost:5000/custom/path',
+        apiKey: '144c9defac04969c7bfad8efaa8ea194',
+        apiEmail: 'user@example.com',
+      });
       expect(client.buildURL('/foo', null)).toEqual('http://localhost:5000/custom/path/foo');
     });
 
@@ -129,41 +152,82 @@ describe('instantiate client', () => {
     });
 
     test('explicit option', () => {
-      const client = new Cloudflare({ baseURL: 'https://example.com' });
+      const client = new Cloudflare({
+        baseURL: 'https://example.com',
+        apiKey: '144c9defac04969c7bfad8efaa8ea194',
+        apiEmail: 'user@example.com',
+      });
       expect(client.baseURL).toEqual('https://example.com');
     });
 
     test('env variable', () => {
       process.env['CLOUDFLARE_BASE_URL'] = 'https://example.com/from_env';
-      const client = new Cloudflare({});
+      const client = new Cloudflare({
+        apiKey: '144c9defac04969c7bfad8efaa8ea194',
+        apiEmail: 'user@example.com',
+      });
       expect(client.baseURL).toEqual('https://example.com/from_env');
     });
 
     test('empty env variable', () => {
       process.env['CLOUDFLARE_BASE_URL'] = ''; // empty
-      const client = new Cloudflare({});
+      const client = new Cloudflare({
+        apiKey: '144c9defac04969c7bfad8efaa8ea194',
+        apiEmail: 'user@example.com',
+      });
       expect(client.baseURL).toEqual('https://api.cloudflare.com/client/v4');
     });
 
     test('blank env variable', () => {
       process.env['CLOUDFLARE_BASE_URL'] = '  '; // blank
-      const client = new Cloudflare({});
+      const client = new Cloudflare({
+        apiKey: '144c9defac04969c7bfad8efaa8ea194',
+        apiEmail: 'user@example.com',
+      });
       expect(client.baseURL).toEqual('https://api.cloudflare.com/client/v4');
     });
   });
 
   test('maxRetries option is correctly set', () => {
-    const client = new Cloudflare({ maxRetries: 4 });
+    const client = new Cloudflare({
+      maxRetries: 4,
+      apiKey: '144c9defac04969c7bfad8efaa8ea194',
+      apiEmail: 'user@example.com',
+    });
     expect(client.maxRetries).toEqual(4);
 
     // default
-    const client2 = new Cloudflare({});
+    const client2 = new Cloudflare({
+      apiKey: '144c9defac04969c7bfad8efaa8ea194',
+      apiEmail: 'user@example.com',
+    });
     expect(client2.maxRetries).toEqual(2);
+  });
+
+  test('with environment variable arguments', () => {
+    // set options via env var
+    process.env['CLOUDFLARE_API_KEY'] = '144c9defac04969c7bfad8efaa8ea194';
+    process.env['CLOUDFLARE_EMAIL'] = 'user@example.com';
+    const client = new Cloudflare();
+    expect(client.apiKey).toBe('144c9defac04969c7bfad8efaa8ea194');
+    expect(client.apiEmail).toBe('user@example.com');
+  });
+
+  test('with overriden environment variable arguments', () => {
+    // set options via env var
+    process.env['CLOUDFLARE_API_KEY'] = 'another 144c9defac04969c7bfad8efaa8ea194';
+    process.env['CLOUDFLARE_EMAIL'] = 'another user@example.com';
+    const client = new Cloudflare({
+      apiKey: '144c9defac04969c7bfad8efaa8ea194',
+      apiEmail: 'user@example.com',
+    });
+    expect(client.apiKey).toBe('144c9defac04969c7bfad8efaa8ea194');
+    expect(client.apiEmail).toBe('user@example.com');
   });
 });
 
 describe('request building', () => {
-  const client = new Cloudflare({});
+  const client = new Cloudflare({ apiKey: '144c9defac04969c7bfad8efaa8ea194', apiEmail: 'user@example.com' });
 
   describe('Content-Length', () => {
     test('handles multi-byte characters', () => {
@@ -205,7 +269,12 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new Cloudflare({ timeout: 10, fetch: testFetch });
+    const client = new Cloudflare({
+      apiKey: '144c9defac04969c7bfad8efaa8ea194',
+      apiEmail: 'user@example.com',
+      timeout: 10,
+      fetch: testFetch,
+    });
 
     expect(await client.request({ path: '/foo', method: 'get' })).toEqual({ a: 1 });
     expect(count).toEqual(2);
@@ -232,7 +301,11 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new Cloudflare({ fetch: testFetch });
+    const client = new Cloudflare({
+      apiKey: '144c9defac04969c7bfad8efaa8ea194',
+      apiEmail: 'user@example.com',
+      fetch: testFetch,
+    });
 
     expect(await client.request({ path: '/foo', method: 'get' })).toEqual({ a: 1 });
     expect(count).toEqual(2);
@@ -259,7 +332,11 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new Cloudflare({ fetch: testFetch });
+    const client = new Cloudflare({
+      apiKey: '144c9defac04969c7bfad8efaa8ea194',
+      apiEmail: 'user@example.com',
+      fetch: testFetch,
+    });
 
     expect(await client.request({ path: '/foo', method: 'get' })).toEqual({ a: 1 });
     expect(count).toEqual(2);
