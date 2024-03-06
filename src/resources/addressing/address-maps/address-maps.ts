@@ -68,13 +68,13 @@ export class AddressMaps extends APIResource {
     addressMapId: string,
     params: AddressMapEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AddressingAddressMaps> {
+  ): Core.APIPromise<AddressMapEditResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/addressing/address_maps/${addressMapId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: AddressingAddressMaps }>
+      }) as Core.APIPromise<{ result: AddressMapEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -94,50 +94,6 @@ export class AddressMaps extends APIResource {
       ) as Core.APIPromise<{ result: AddressMapGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
-}
-
-export interface AddressingAddressMaps {
-  /**
-   * Identifier
-   */
-  id?: string;
-
-  /**
-   * If set to false, then the Address Map cannot be deleted via API. This is true
-   * for Cloudflare-managed maps.
-   */
-  can_delete?: boolean;
-
-  /**
-   * If set to false, then the IPs on the Address Map cannot be modified via the API.
-   * This is true for Cloudflare-managed maps.
-   */
-  can_modify_ips?: boolean;
-
-  created_at?: string;
-
-  /**
-   * If you have legacy TLS clients which do not send the TLS server name indicator,
-   * then you can specify one default SNI on the map. If Cloudflare receives a TLS
-   * handshake from a client without an SNI, it will respond with the default SNI on
-   * those IPs. The default SNI can be any valid zone or subdomain owned by the
-   * account.
-   */
-  default_sni?: string | null;
-
-  /**
-   * An optional description field which may be used to describe the types of IPs or
-   * zones on the map.
-   */
-  description?: string | null;
-
-  /**
-   * Whether the Address Map is enabled or not. Cloudflare's DNS will not respond
-   * with IP addresses on an Address Map until the map is enabled.
-   */
-  enabled?: boolean | null;
-
-  modified_at?: string;
 }
 
 export interface AddressMapCreateResponse {
@@ -225,9 +181,99 @@ export namespace AddressMapCreateResponse {
   }
 }
 
-export type AddressMapListResponse = Array<AddressingAddressMaps>;
+export type AddressMapListResponse = Array<AddressMapListResponse.AddressMapListResponseItem>;
+
+export namespace AddressMapListResponse {
+  export interface AddressMapListResponseItem {
+    /**
+     * Identifier
+     */
+    id?: string;
+
+    /**
+     * If set to false, then the Address Map cannot be deleted via API. This is true
+     * for Cloudflare-managed maps.
+     */
+    can_delete?: boolean;
+
+    /**
+     * If set to false, then the IPs on the Address Map cannot be modified via the API.
+     * This is true for Cloudflare-managed maps.
+     */
+    can_modify_ips?: boolean;
+
+    created_at?: string;
+
+    /**
+     * If you have legacy TLS clients which do not send the TLS server name indicator,
+     * then you can specify one default SNI on the map. If Cloudflare receives a TLS
+     * handshake from a client without an SNI, it will respond with the default SNI on
+     * those IPs. The default SNI can be any valid zone or subdomain owned by the
+     * account.
+     */
+    default_sni?: string | null;
+
+    /**
+     * An optional description field which may be used to describe the types of IPs or
+     * zones on the map.
+     */
+    description?: string | null;
+
+    /**
+     * Whether the Address Map is enabled or not. Cloudflare's DNS will not respond
+     * with IP addresses on an Address Map until the map is enabled.
+     */
+    enabled?: boolean | null;
+
+    modified_at?: string;
+  }
+}
 
 export type AddressMapDeleteResponse = unknown | Array<unknown> | string;
+
+export interface AddressMapEditResponse {
+  /**
+   * Identifier
+   */
+  id?: string;
+
+  /**
+   * If set to false, then the Address Map cannot be deleted via API. This is true
+   * for Cloudflare-managed maps.
+   */
+  can_delete?: boolean;
+
+  /**
+   * If set to false, then the IPs on the Address Map cannot be modified via the API.
+   * This is true for Cloudflare-managed maps.
+   */
+  can_modify_ips?: boolean;
+
+  created_at?: string;
+
+  /**
+   * If you have legacy TLS clients which do not send the TLS server name indicator,
+   * then you can specify one default SNI on the map. If Cloudflare receives a TLS
+   * handshake from a client without an SNI, it will respond with the default SNI on
+   * those IPs. The default SNI can be any valid zone or subdomain owned by the
+   * account.
+   */
+  default_sni?: string | null;
+
+  /**
+   * An optional description field which may be used to describe the types of IPs or
+   * zones on the map.
+   */
+  description?: string | null;
+
+  /**
+   * Whether the Address Map is enabled or not. Cloudflare's DNS will not respond
+   * with IP addresses on an Address Map until the map is enabled.
+   */
+  enabled?: boolean | null;
+
+  modified_at?: string;
+}
 
 export interface AddressMapGetResponse {
   /**
@@ -383,10 +429,10 @@ export interface AddressMapGetParams {
 }
 
 export namespace AddressMaps {
-  export import AddressingAddressMaps = AddressMapsAPI.AddressingAddressMaps;
   export import AddressMapCreateResponse = AddressMapsAPI.AddressMapCreateResponse;
   export import AddressMapListResponse = AddressMapsAPI.AddressMapListResponse;
   export import AddressMapDeleteResponse = AddressMapsAPI.AddressMapDeleteResponse;
+  export import AddressMapEditResponse = AddressMapsAPI.AddressMapEditResponse;
   export import AddressMapGetResponse = AddressMapsAPI.AddressMapGetResponse;
   export import AddressMapCreateParams = AddressMapsAPI.AddressMapCreateParams;
   export import AddressMapListParams = AddressMapsAPI.AddressMapListParams;

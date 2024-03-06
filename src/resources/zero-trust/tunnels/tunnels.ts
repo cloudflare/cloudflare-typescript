@@ -20,11 +20,11 @@ export class Tunnels extends APIResource {
   /**
    * Creates a new Argo Tunnel in an account.
    */
-  create(params: TunnelCreateParams, options?: Core.RequestOptions): Core.APIPromise<TunnelArgoTunnel> {
+  create(params: TunnelCreateParams, options?: Core.RequestOptions): Core.APIPromise<TunnelCreateResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/tunnels`, { body, ...options }) as Core.APIPromise<{
-        result: TunnelArgoTunnel;
+        result: TunnelCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -51,13 +51,13 @@ export class Tunnels extends APIResource {
     tunnelId: string,
     params: TunnelDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TunnelArgoTunnel> {
+  ): Core.APIPromise<TunnelDeleteResponse> {
     const { account_id, body } = params;
     return (
       this._client.delete(`/accounts/${account_id}/tunnels/${tunnelId}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: TunnelArgoTunnel }>
+      }) as Core.APIPromise<{ result: TunnelDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -85,11 +85,11 @@ export class Tunnels extends APIResource {
     tunnelId: string,
     params: TunnelGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TunnelArgoTunnel> {
+  ): Core.APIPromise<TunnelGetResponse> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/tunnels/${tunnelId}`, options) as Core.APIPromise<{
-        result: TunnelArgoTunnel;
+        result: TunnelGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -97,7 +97,7 @@ export class Tunnels extends APIResource {
 
 export class TunnelListResponsesV4PagePaginationArray extends V4PagePaginationArray<TunnelListResponse> {}
 
-export interface TunnelArgoTunnel {
+export interface TunnelCreateResponse {
   /**
    * UUID of the tunnel.
    */
@@ -106,7 +106,7 @@ export interface TunnelArgoTunnel {
   /**
    * The tunnel connections between your origin and Cloudflare's edge.
    */
-  connections: Array<TunnelArgoTunnel.Connection>;
+  connections: Array<TunnelCreateResponse.Connection>;
 
   /**
    * Timestamp of when the tunnel was created.
@@ -125,7 +125,7 @@ export interface TunnelArgoTunnel {
   deleted_at?: string | null;
 }
 
-export namespace TunnelArgoTunnel {
+export namespace TunnelCreateResponse {
   export interface Connection {
     /**
      * The Cloudflare data center used for this connection.
@@ -388,6 +388,56 @@ export namespace TunnelListResponse {
   }
 }
 
+export interface TunnelDeleteResponse {
+  /**
+   * UUID of the tunnel.
+   */
+  id: string;
+
+  /**
+   * The tunnel connections between your origin and Cloudflare's edge.
+   */
+  connections: Array<TunnelDeleteResponse.Connection>;
+
+  /**
+   * Timestamp of when the tunnel was created.
+   */
+  created_at: string;
+
+  /**
+   * A user-friendly name for the tunnel.
+   */
+  name: string;
+
+  /**
+   * Timestamp of when the tunnel was deleted. If `null`, the tunnel has not been
+   * deleted.
+   */
+  deleted_at?: string | null;
+}
+
+export namespace TunnelDeleteResponse {
+  export interface Connection {
+    /**
+     * The Cloudflare data center used for this connection.
+     */
+    colo_name?: string;
+
+    /**
+     * Cloudflare continues to track connections for several minutes after they
+     * disconnect. This is an optimization to improve latency and reliability of
+     * reconnecting. If `true`, the connection has disconnected but is still being
+     * tracked. If `false`, the connection is actively serving traffic.
+     */
+    is_pending_reconnect?: boolean;
+
+    /**
+     * UUID of the Cloudflare Tunnel connection.
+     */
+    uuid?: string;
+  }
+}
+
 /**
  * A Cloudflare Tunnel that connects your origin to Cloudflare's edge.
  */
@@ -629,6 +679,56 @@ export namespace TunnelEditResponse {
   }
 }
 
+export interface TunnelGetResponse {
+  /**
+   * UUID of the tunnel.
+   */
+  id: string;
+
+  /**
+   * The tunnel connections between your origin and Cloudflare's edge.
+   */
+  connections: Array<TunnelGetResponse.Connection>;
+
+  /**
+   * Timestamp of when the tunnel was created.
+   */
+  created_at: string;
+
+  /**
+   * A user-friendly name for the tunnel.
+   */
+  name: string;
+
+  /**
+   * Timestamp of when the tunnel was deleted. If `null`, the tunnel has not been
+   * deleted.
+   */
+  deleted_at?: string | null;
+}
+
+export namespace TunnelGetResponse {
+  export interface Connection {
+    /**
+     * The Cloudflare data center used for this connection.
+     */
+    colo_name?: string;
+
+    /**
+     * Cloudflare continues to track connections for several minutes after they
+     * disconnect. This is an optimization to improve latency and reliability of
+     * reconnecting. If `true`, the connection has disconnected but is still being
+     * tracked. If `false`, the connection is actively serving traffic.
+     */
+    is_pending_reconnect?: boolean;
+
+    /**
+     * UUID of the Cloudflare Tunnel connection.
+     */
+    uuid?: string;
+  }
+}
+
 export interface TunnelCreateParams {
   /**
    * Path param: Cloudflare account ID
@@ -734,9 +834,11 @@ export interface TunnelGetParams {
 }
 
 export namespace Tunnels {
-  export import TunnelArgoTunnel = TunnelsAPI.TunnelArgoTunnel;
+  export import TunnelCreateResponse = TunnelsAPI.TunnelCreateResponse;
   export import TunnelListResponse = TunnelsAPI.TunnelListResponse;
+  export import TunnelDeleteResponse = TunnelsAPI.TunnelDeleteResponse;
   export import TunnelEditResponse = TunnelsAPI.TunnelEditResponse;
+  export import TunnelGetResponse = TunnelsAPI.TunnelGetResponse;
   export import TunnelListResponsesV4PagePaginationArray = TunnelsAPI.TunnelListResponsesV4PagePaginationArray;
   export import TunnelCreateParams = TunnelsAPI.TunnelCreateParams;
   export import TunnelListParams = TunnelsAPI.TunnelListParams;
@@ -749,7 +851,6 @@ export namespace Tunnels {
   export import ConfigurationUpdateParams = ConfigurationsAPI.ConfigurationUpdateParams;
   export import ConfigurationGetParams = ConfigurationsAPI.ConfigurationGetParams;
   export import Connections = ConnectionsAPI.Connections;
-  export import TunnelTunnelClient = ConnectionsAPI.TunnelTunnelClient;
   export import ConnectionDeleteResponse = ConnectionsAPI.ConnectionDeleteResponse;
   export import ConnectionGetResponse = ConnectionsAPI.ConnectionGetResponse;
   export import ConnectionDeleteParams = ConnectionsAPI.ConnectionDeleteParams;
@@ -758,6 +859,7 @@ export namespace Tunnels {
   export import TokenGetResponse = TokenAPI.TokenGetResponse;
   export import TokenGetParams = TokenAPI.TokenGetParams;
   export import Connectors = ConnectorsAPI.Connectors;
+  export import ConnectorGetResponse = ConnectorsAPI.ConnectorGetResponse;
   export import ConnectorGetParams = ConnectorsAPI.ConnectorGetParams;
   export import Management = ManagementAPI.Management;
   export import ManagementCreateResponse = ManagementAPI.ManagementCreateResponse;

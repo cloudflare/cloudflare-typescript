@@ -13,15 +13,6 @@ export {
   CacheReserve,
 } from './cache-reserve';
 export {
-  CacheVariants,
-  VariantEditResponse,
-  VariantGetResponse,
-  VariantDeleteParams,
-  VariantEditParams,
-  VariantGetParams,
-  Variants,
-} from './variants';
-export {
   RegionalTieredCacheEditResponse,
   RegionalTieredCacheGetResponse,
   RegionalTieredCacheEditParams,
@@ -37,3 +28,12 @@ export {
   SmartTieredCachedGetParams,
   SmartTieredCached,
 } from './smart-tiered-cached';
+export {
+  VariantDeleteResponse,
+  VariantEditResponse,
+  VariantGetResponse,
+  VariantDeleteParams,
+  VariantEditParams,
+  VariantGetParams,
+  Variants,
+} from './variants';

@@ -1,6 +1,16 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
+  GroupListResponse,
+  GroupEditResponse,
+  GroupGetResponse,
+  GroupListParams,
+  GroupEditParams,
+  GroupGetParams,
+  GroupListResponsesV4PagePaginationArray,
+  Groups,
+} from './groups';
+export {
   PackageListResponse,
   PackageGetResponse,
   PackageListParams,
@@ -8,22 +18,12 @@ export {
   Packages,
 } from './packages';
 export {
-  WAFManagedRulesRule,
+  RuleListResponse,
   RuleEditResponse,
   RuleGetResponse,
   RuleListParams,
   RuleEditParams,
   RuleGetParams,
-  WAFManagedRulesRulesV4PagePaginationArray,
+  RuleListResponsesV4PagePaginationArray,
   Rules,
 } from './rules';
-export {
-  WAFManagedRulesSchemasGroup,
-  GroupEditResponse,
-  GroupGetResponse,
-  GroupListParams,
-  GroupEditParams,
-  GroupGetParams,
-  WAFManagedRulesSchemasGroupsV4PagePaginationArray,
-  Groups,
-} from './groups';

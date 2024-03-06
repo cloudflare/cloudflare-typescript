@@ -1,8 +1,7 @@
 // File generated from our OpenAPI spec by Stainless.
 
-export { EmailCatchAllRule, CatchAllUpdateParams, CatchAlls } from './catch-alls';
+export { CatchAllUpdateResponse, CatchAllGetResponse, CatchAllUpdateParams, CatchAlls } from './catch-alls';
 export {
-  EmailRules,
   RuleCreateResponse,
   RuleUpdateResponse,
   RuleListResponse,

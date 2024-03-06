@@ -8,17 +8,17 @@ export class Whois extends APIResource {
   /**
    * Get WHOIS Record
    */
-  get(params: WhoisGetParams, options?: Core.RequestOptions): Core.APIPromise<IntelWhois> {
+  get(params: WhoisGetParams, options?: Core.RequestOptions): Core.APIPromise<WhoisGetResponse> {
     const { account_id, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/intel/whois`, { query, ...options }) as Core.APIPromise<{
-        result: IntelWhois;
+        result: WhoisGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface IntelWhois {
+export interface WhoisGetResponse {
   created_date?: string;
 
   domain?: string;
@@ -51,6 +51,6 @@ export interface WhoisGetParams {
 }
 
 export namespace Whois {
-  export import IntelWhois = WhoisAPI.IntelWhois;
+  export import WhoisGetResponse = WhoisAPI.WhoisGetResponse;
   export import WhoisGetParams = WhoisAPI.WhoisGetParams;
 }

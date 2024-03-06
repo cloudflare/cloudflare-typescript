@@ -11,13 +11,13 @@ export class AutomaticHTTPSRewrites extends APIResource {
   edit(
     params: AutomaticHTTPSRewriteEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZonesAutomaticHTTPSRewrites> {
+  ): Core.APIPromise<AutomaticHTTPSRewriteEditResponse> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/automatic_https_rewrites`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZonesAutomaticHTTPSRewrites }>
+      }) as Core.APIPromise<{ result: AutomaticHTTPSRewriteEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -27,11 +27,11 @@ export class AutomaticHTTPSRewrites extends APIResource {
   get(
     params: AutomaticHTTPSRewriteGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZonesAutomaticHTTPSRewrites> {
+  ): Core.APIPromise<AutomaticHTTPSRewriteGetResponse> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/automatic_https_rewrites`, options) as Core.APIPromise<{
-        result: ZonesAutomaticHTTPSRewrites;
+        result: AutomaticHTTPSRewriteGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -40,7 +40,33 @@ export class AutomaticHTTPSRewrites extends APIResource {
 /**
  * Enable the Automatic HTTPS Rewrites feature for this zone.
  */
-export interface ZonesAutomaticHTTPSRewrites {
+export interface AutomaticHTTPSRewriteEditResponse {
+  /**
+   * ID of the zone setting.
+   */
+  id: 'automatic_https_rewrites';
+
+  /**
+   * Current value of the zone setting.
+   */
+  value: 'on' | 'off';
+
+  /**
+   * Whether or not this setting can be modified for this zone (based on your
+   * Cloudflare plan level).
+   */
+  editable?: true | false;
+
+  /**
+   * last time this setting was modified.
+   */
+  modified_on?: string | null;
+}
+
+/**
+ * Enable the Automatic HTTPS Rewrites feature for this zone.
+ */
+export interface AutomaticHTTPSRewriteGetResponse {
   /**
    * ID of the zone setting.
    */
@@ -84,7 +110,8 @@ export interface AutomaticHTTPSRewriteGetParams {
 }
 
 export namespace AutomaticHTTPSRewrites {
-  export import ZonesAutomaticHTTPSRewrites = AutomaticHTTPSRewritesAPI.ZonesAutomaticHTTPSRewrites;
+  export import AutomaticHTTPSRewriteEditResponse = AutomaticHTTPSRewritesAPI.AutomaticHTTPSRewriteEditResponse;
+  export import AutomaticHTTPSRewriteGetResponse = AutomaticHTTPSRewritesAPI.AutomaticHTTPSRewriteGetResponse;
   export import AutomaticHTTPSRewriteEditParams = AutomaticHTTPSRewritesAPI.AutomaticHTTPSRewriteEditParams;
   export import AutomaticHTTPSRewriteGetParams = AutomaticHTTPSRewritesAPI.AutomaticHTTPSRewriteGetParams;
 }

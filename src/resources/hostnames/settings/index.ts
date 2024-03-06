@@ -2,8 +2,8 @@
 
 export { Settings } from './settings';
 export {
-  TLSCertificatesAndHostnamesSettingObject,
-  TLSCertificatesAndHostnamesSettingObjectDelete,
+  TLSUpdateResponse,
+  TLSDeleteResponse,
   TLSGetResponse,
   TLSUpdateParams,
   TLSDeleteParams,

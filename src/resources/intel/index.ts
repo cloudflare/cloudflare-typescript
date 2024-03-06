@@ -1,21 +1,17 @@
 // File generated from our OpenAPI spec by Stainless.
 
-export { Intel } from './intel';
-export { IntelASN, ASNGetParams, ASN } from './asn/index';
-export { IntelDomain, DomainGetParams, Domains } from './domains/index';
+export { ASNGetResponse, ASNGetParams, ASN } from './asn/index';
+export { DNSGetResponse, DNSGetParams, DNS } from './dns';
+export { DomainGetResponse, DomainGetParams, Domains } from './domains/index';
+export { DomainHistoryGetResponse, DomainHistoryGetParams, DomainHistory } from './domain-history';
+export { IPGetResponse, IPGetParams, IPs } from './ips';
+export { IPListGetResponse, IPListGetParams, IPLists } from './ip-lists';
 export {
-  IntelDomainHistory,
-  DomainHistoryGetResponse,
-  DomainHistoryGetParams,
-  DomainHistory,
-} from './domain-history';
-export { IntelIPList, IPListGetResponse, IPListGetParams, IPLists } from './ip-lists';
-export {
-  IntelIndicatorFeedItem,
-  IntelIndicatorFeedMetadata,
-  IntelUpdateFeed,
+  IndicatorFeedCreateResponse,
+  IndicatorFeedUpdateResponse,
   IndicatorFeedListResponse,
   IndicatorFeedDataResponse,
+  IndicatorFeedGetResponse,
   IndicatorFeedCreateParams,
   IndicatorFeedUpdateParams,
   IndicatorFeedListParams,
@@ -23,12 +19,11 @@ export {
   IndicatorFeedGetParams,
   IndicatorFeeds,
 } from './indicator-feeds/index';
-export { IntelPassiveDNSByIP, DNSGetParams, DNS } from './dns';
-export { IntelSchemasIP, IPGetResponse, IPGetParams, IPs } from './ips';
-export { IntelSinkholesSinkholeItem, SinkholeListResponse, SinkholeListParams, Sinkholes } from './sinkholes';
-export { IntelWhois, WhoisGetParams, Whois } from './whois';
+export { Intel } from './intel';
 export {
   MiscategorizationCreateResponse,
   MiscategorizationCreateParams,
   Miscategorizations,
 } from './miscategorizations';
+export { SinkholeListResponse, SinkholeListParams, Sinkholes } from './sinkholes';
+export { WhoisGetResponse, WhoisGetParams, Whois } from './whois';

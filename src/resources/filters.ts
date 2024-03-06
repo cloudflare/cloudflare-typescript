@@ -30,10 +30,10 @@ export class Filters extends APIResource {
     id: string,
     body: FilterUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LegacyJhsFilter | null> {
+  ): Core.APIPromise<FilterUpdateResponse | null> {
     return (
       this._client.put(`/zones/${zoneIdentifier}/filters/${id}`, { body, ...options }) as Core.APIPromise<{
-        result: LegacyJhsFilter | null;
+        result: FilterUpdateResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -46,22 +46,22 @@ export class Filters extends APIResource {
     zoneIdentifier: string,
     query?: FilterListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<LegacyJhsFiltersV4PagePaginationArray, LegacyJhsFilter>;
+  ): Core.PagePromise<FilterListResponsesV4PagePaginationArray, FilterListResponse>;
   list(
     zoneIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<LegacyJhsFiltersV4PagePaginationArray, LegacyJhsFilter>;
+  ): Core.PagePromise<FilterListResponsesV4PagePaginationArray, FilterListResponse>;
   list(
     zoneIdentifier: string,
     query: FilterListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<LegacyJhsFiltersV4PagePaginationArray, LegacyJhsFilter> {
+  ): Core.PagePromise<FilterListResponsesV4PagePaginationArray, FilterListResponse> {
     if (isRequestOptions(query)) {
       return this.list(zoneIdentifier, {}, query);
     }
     return this._client.getAPIList(
       `/zones/${zoneIdentifier}/filters`,
-      LegacyJhsFiltersV4PagePaginationArray,
+      FilterListResponsesV4PagePaginationArray,
       { query, ...options },
     );
   }
@@ -73,10 +73,10 @@ export class Filters extends APIResource {
     zoneIdentifier: string,
     id: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LegacyJhsFilter | null> {
+  ): Core.APIPromise<FilterDeleteResponse | null> {
     return (
       this._client.delete(`/zones/${zoneIdentifier}/filters/${id}`, options) as Core.APIPromise<{
-        result: LegacyJhsFilter | null;
+        result: FilterDeleteResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -88,22 +88,110 @@ export class Filters extends APIResource {
     zoneIdentifier: string,
     id: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LegacyJhsFilter | null> {
+  ): Core.APIPromise<FilterGetResponse | null> {
     return (
       this._client.get(`/zones/${zoneIdentifier}/filters/${id}`, options) as Core.APIPromise<{
-        result: LegacyJhsFilter | null;
+        result: FilterGetResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class LegacyJhsFiltersV4PagePaginationArray extends V4PagePaginationArray<LegacyJhsFilter> {}
+export class FilterListResponsesV4PagePaginationArray extends V4PagePaginationArray<FilterListResponse> {}
 
-export interface LegacyJhsFilter {
+export type FilterCreateResponse = Array<FilterCreateResponse.FilterCreateResponseItem>;
+
+export namespace FilterCreateResponse {
+  export interface FilterCreateResponseItem {
+    /**
+     * The unique identifier of the filter.
+     */
+    id: string;
+
+    /**
+     * The filter expression. For more information, refer to
+     * [Expressions](https://developers.cloudflare.com/ruleset-engine/rules-language/expressions/).
+     */
+    expression: string;
+
+    /**
+     * When true, indicates that the filter is currently paused.
+     */
+    paused: boolean;
+
+    /**
+     * An informative summary of the filter.
+     */
+    description?: string;
+
+    /**
+     * A short reference tag. Allows you to select related filters.
+     */
+    ref?: string;
+  }
+}
+
+export interface FilterUpdateResponse {
   /**
    * The unique identifier of the filter.
    */
-  id?: string;
+  id: string;
+
+  /**
+   * The filter expression. For more information, refer to
+   * [Expressions](https://developers.cloudflare.com/ruleset-engine/rules-language/expressions/).
+   */
+  expression: string;
+
+  /**
+   * When true, indicates that the filter is currently paused.
+   */
+  paused: boolean;
+
+  /**
+   * An informative summary of the filter.
+   */
+  description?: string;
+
+  /**
+   * A short reference tag. Allows you to select related filters.
+   */
+  ref?: string;
+}
+
+export interface FilterListResponse {
+  /**
+   * The unique identifier of the filter.
+   */
+  id: string;
+
+  /**
+   * The filter expression. For more information, refer to
+   * [Expressions](https://developers.cloudflare.com/ruleset-engine/rules-language/expressions/).
+   */
+  expression: string;
+
+  /**
+   * When true, indicates that the filter is currently paused.
+   */
+  paused: boolean;
+
+  /**
+   * An informative summary of the filter.
+   */
+  description?: string;
+
+  /**
+   * A short reference tag. Allows you to select related filters.
+   */
+  ref?: string;
+}
+
+export interface FilterDeleteResponse {
+  /**
+   * The unique identifier of the filter.
+   */
+  id: string;
 
   /**
    * An informative summary of the filter.
@@ -127,7 +215,33 @@ export interface LegacyJhsFilter {
   ref?: string;
 }
 
-export type FilterCreateResponse = Array<LegacyJhsFilter>;
+export interface FilterGetResponse {
+  /**
+   * The unique identifier of the filter.
+   */
+  id: string;
+
+  /**
+   * The filter expression. For more information, refer to
+   * [Expressions](https://developers.cloudflare.com/ruleset-engine/rules-language/expressions/).
+   */
+  expression: string;
+
+  /**
+   * When true, indicates that the filter is currently paused.
+   */
+  paused: boolean;
+
+  /**
+   * An informative summary of the filter.
+   */
+  description?: string;
+
+  /**
+   * A short reference tag. Allows you to select related filters.
+   */
+  ref?: string;
+}
 
 export type FilterCreateParams = unknown;
 
@@ -156,9 +270,12 @@ export interface FilterListParams extends V4PagePaginationArrayParams {
 }
 
 export namespace Filters {
-  export import LegacyJhsFilter = FiltersAPI.LegacyJhsFilter;
   export import FilterCreateResponse = FiltersAPI.FilterCreateResponse;
-  export import LegacyJhsFiltersV4PagePaginationArray = FiltersAPI.LegacyJhsFiltersV4PagePaginationArray;
+  export import FilterUpdateResponse = FiltersAPI.FilterUpdateResponse;
+  export import FilterListResponse = FiltersAPI.FilterListResponse;
+  export import FilterDeleteResponse = FiltersAPI.FilterDeleteResponse;
+  export import FilterGetResponse = FiltersAPI.FilterGetResponse;
+  export import FilterListResponsesV4PagePaginationArray = FiltersAPI.FilterListResponsesV4PagePaginationArray;
   export import FilterCreateParams = FiltersAPI.FilterCreateParams;
   export import FilterUpdateParams = FiltersAPI.FilterUpdateParams;
   export import FilterListParams = FiltersAPI.FilterListParams;

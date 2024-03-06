@@ -2,7 +2,8 @@
 
 export { Content } from './content/index';
 export {
-  WorkersNamespaceScript,
+  ScriptUpdateResponse,
+  ScriptGetResponse,
   ScriptUpdateParams,
   ScriptDeleteParams,
   ScriptGetParams,

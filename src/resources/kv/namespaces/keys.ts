@@ -23,30 +23,32 @@ export class Keys extends APIResource {
   }
 }
 
-/**
- * A name for a value. A value stored under a given key may be retrieved via the
- * same key.
- */
-export interface WorkersKVKey {
-  /**
-   * A key's name. The name may be at most 512 bytes. All printable, non-whitespace
-   * characters are valid. Use percent-encoding to define key names as part of a URL.
-   */
-  name: string;
+export type KeyListResponse = Array<KeyListResponse.KeyListResponseItem>;
 
+export namespace KeyListResponse {
   /**
-   * The time, measured in number of seconds since the UNIX epoch, at which the key
-   * will expire. This property is omitted for keys that will not expire.
+   * A name for a value. A value stored under a given key may be retrieved via the
+   * same key.
    */
-  expiration?: number;
+  export interface KeyListResponseItem {
+    /**
+     * A key's name. The name may be at most 512 bytes. All printable, non-whitespace
+     * characters are valid. Use percent-encoding to define key names as part of a URL.
+     */
+    name: string;
 
-  /**
-   * Arbitrary JSON that is associated with a key.
-   */
-  metadata?: unknown;
+    /**
+     * The time, measured in number of seconds since the UNIX epoch, at which the key
+     * will expire. This property is omitted for keys that will not expire.
+     */
+    expiration?: number;
+
+    /**
+     * Arbitrary JSON that is associated with a key.
+     */
+    metadata?: unknown;
+  }
 }
-
-export type KeyListResponse = Array<WorkersKVKey>;
 
 export interface KeyListParams {
   /**
@@ -76,7 +78,6 @@ export interface KeyListParams {
 }
 
 export namespace Keys {
-  export import WorkersKVKey = KeysAPI.WorkersKVKey;
   export import KeyListResponse = KeysAPI.KeyListResponse;
   export import KeyListParams = KeysAPI.KeyListParams;
 }

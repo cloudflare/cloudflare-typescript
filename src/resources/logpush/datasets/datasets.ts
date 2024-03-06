@@ -14,7 +14,6 @@ export namespace Datasets {
   export import FieldGetResponse = FieldsAPI.FieldGetResponse;
   export import FieldGetParams = FieldsAPI.FieldGetParams;
   export import Jobs = JobsAPI.Jobs;
-  export import LogpushLogpushJob = JobsAPI.LogpushLogpushJob;
   export import JobGetResponse = JobsAPI.JobGetResponse;
   export import JobGetParams = JobsAPI.JobGetParams;
 }

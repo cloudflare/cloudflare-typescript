@@ -101,52 +101,6 @@ export class UARules extends APIResource {
 
 export class UARuleListResponsesV4PagePaginationArray extends V4PagePaginationArray<UARuleListResponse> {}
 
-export interface LegacyJhsUARules {
-  /**
-   * The unique identifier of the User Agent Blocking rule.
-   */
-  id?: string;
-
-  /**
-   * The configuration object for the current rule.
-   */
-  configuration?: LegacyJhsUARules.Configuration;
-
-  /**
-   * An informative summary of the rule.
-   */
-  description?: string;
-
-  /**
-   * The action to apply to a matched request.
-   */
-  mode?: 'block' | 'challenge' | 'js_challenge' | 'managed_challenge';
-
-  /**
-   * When true, indicates that the rule is currently paused.
-   */
-  paused?: boolean;
-}
-
-export namespace LegacyJhsUARules {
-  /**
-   * The configuration object for the current rule.
-   */
-  export interface Configuration {
-    /**
-     * The configuration target for this rule. You must set the target to `ua` for User
-     * Agent Blocking rules.
-     */
-    target?: string;
-
-    /**
-     * The exact user agent string to match. This value will be compared to the
-     * received `User-Agent` HTTP header value.
-     */
-    value?: string;
-  }
-}
-
 export type UARuleCreateResponse = unknown | string;
 
 export type UARuleUpdateResponse = unknown | string;
@@ -228,7 +182,6 @@ export interface UARuleListParams extends V4PagePaginationArrayParams {
 }
 
 export namespace UARules {
-  export import LegacyJhsUARules = UARulesAPI.LegacyJhsUARules;
   export import UARuleCreateResponse = UARulesAPI.UARuleCreateResponse;
   export import UARuleUpdateResponse = UARulesAPI.UARuleUpdateResponse;
   export import UARuleListResponse = UARulesAPI.UARuleListResponse;

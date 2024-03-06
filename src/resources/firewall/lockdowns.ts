@@ -14,12 +14,12 @@ export class Lockdowns extends APIResource {
     zoneIdentifier: string,
     body: LockdownCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LegacyJhsZonelockdown | null> {
+  ): Core.APIPromise<LockdownCreateResponse | null> {
     return (
       this._client.post(`/zones/${zoneIdentifier}/firewall/lockdowns`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: LegacyJhsZonelockdown | null }>
+      }) as Core.APIPromise<{ result: LockdownCreateResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -31,12 +31,12 @@ export class Lockdowns extends APIResource {
     id: string,
     body: LockdownUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LegacyJhsZonelockdown | null> {
+  ): Core.APIPromise<LockdownUpdateResponse | null> {
     return (
       this._client.put(`/zones/${zoneIdentifier}/firewall/lockdowns/${id}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: LegacyJhsZonelockdown | null }>
+      }) as Core.APIPromise<{ result: LockdownUpdateResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -48,22 +48,22 @@ export class Lockdowns extends APIResource {
     zoneIdentifier: string,
     query?: LockdownListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<LegacyJhsZonelockdownsV4PagePaginationArray, LegacyJhsZonelockdown>;
+  ): Core.PagePromise<LockdownListResponsesV4PagePaginationArray, LockdownListResponse>;
   list(
     zoneIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<LegacyJhsZonelockdownsV4PagePaginationArray, LegacyJhsZonelockdown>;
+  ): Core.PagePromise<LockdownListResponsesV4PagePaginationArray, LockdownListResponse>;
   list(
     zoneIdentifier: string,
     query: LockdownListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<LegacyJhsZonelockdownsV4PagePaginationArray, LegacyJhsZonelockdown> {
+  ): Core.PagePromise<LockdownListResponsesV4PagePaginationArray, LockdownListResponse> {
     if (isRequestOptions(query)) {
       return this.list(zoneIdentifier, {}, query);
     }
     return this._client.getAPIList(
       `/zones/${zoneIdentifier}/firewall/lockdowns`,
-      LegacyJhsZonelockdownsV4PagePaginationArray,
+      LockdownListResponsesV4PagePaginationArray,
       { query, ...options },
     );
   }
@@ -90,18 +90,18 @@ export class Lockdowns extends APIResource {
     zoneIdentifier: string,
     id: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LegacyJhsZonelockdown | null> {
+  ): Core.APIPromise<LockdownGetResponse | null> {
     return (
       this._client.get(`/zones/${zoneIdentifier}/firewall/lockdowns/${id}`, options) as Core.APIPromise<{
-        result: LegacyJhsZonelockdown | null;
+        result: LockdownGetResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class LegacyJhsZonelockdownsV4PagePaginationArray extends V4PagePaginationArray<LegacyJhsZonelockdown> {}
+export class LockdownListResponsesV4PagePaginationArray extends V4PagePaginationArray<LockdownListResponse> {}
 
-export interface LegacyJhsZonelockdown {
+export interface LockdownCreateResponse {
   /**
    * The unique identifier of the Zone Lockdown rule.
    */
@@ -113,8 +113,8 @@ export interface LegacyJhsZonelockdown {
    * `ip_range` configurations.
    */
   configurations:
-    | LegacyJhsZonelockdown.LegacyJhsSchemasIPConfiguration
-    | LegacyJhsZonelockdown.LegacyJhsSchemasCidrConfiguration;
+    | LockdownCreateResponse.LegacyJhsSchemasIPConfiguration
+    | LockdownCreateResponse.LegacyJhsSchemasCidrConfiguration;
 
   /**
    * The timestamp of when the rule was created.
@@ -144,7 +144,151 @@ export interface LegacyJhsZonelockdown {
   urls: Array<string>;
 }
 
-export namespace LegacyJhsZonelockdown {
+export namespace LockdownCreateResponse {
+  export interface LegacyJhsSchemasIPConfiguration {
+    /**
+     * The configuration target. You must set the target to `ip` when specifying an IP
+     * address in the Zone Lockdown rule.
+     */
+    target?: 'ip';
+
+    /**
+     * The IP address to match. This address will be compared to the IP address of
+     * incoming requests.
+     */
+    value?: string;
+  }
+
+  export interface LegacyJhsSchemasCidrConfiguration {
+    /**
+     * The configuration target. You must set the target to `ip_range` when specifying
+     * an IP address range in the Zone Lockdown rule.
+     */
+    target?: 'ip_range';
+
+    /**
+     * The IP address range to match. You can only use prefix lengths `/16` and `/24`.
+     */
+    value?: string;
+  }
+}
+
+export interface LockdownUpdateResponse {
+  /**
+   * The unique identifier of the Zone Lockdown rule.
+   */
+  id: string;
+
+  /**
+   * A list of IP addresses or CIDR ranges that will be allowed to access the URLs
+   * specified in the Zone Lockdown rule. You can include any number of `ip` or
+   * `ip_range` configurations.
+   */
+  configurations:
+    | LockdownUpdateResponse.LegacyJhsSchemasIPConfiguration
+    | LockdownUpdateResponse.LegacyJhsSchemasCidrConfiguration;
+
+  /**
+   * The timestamp of when the rule was created.
+   */
+  created_on: string;
+
+  /**
+   * An informative summary of the rule.
+   */
+  description: string;
+
+  /**
+   * The timestamp of when the rule was last modified.
+   */
+  modified_on: string;
+
+  /**
+   * When true, indicates that the rule is currently paused.
+   */
+  paused: boolean;
+
+  /**
+   * The URLs to include in the rule definition. You can use wildcards. Each entered
+   * URL will be escaped before use, which means you can only use simple wildcard
+   * patterns.
+   */
+  urls: Array<string>;
+}
+
+export namespace LockdownUpdateResponse {
+  export interface LegacyJhsSchemasIPConfiguration {
+    /**
+     * The configuration target. You must set the target to `ip` when specifying an IP
+     * address in the Zone Lockdown rule.
+     */
+    target?: 'ip';
+
+    /**
+     * The IP address to match. This address will be compared to the IP address of
+     * incoming requests.
+     */
+    value?: string;
+  }
+
+  export interface LegacyJhsSchemasCidrConfiguration {
+    /**
+     * The configuration target. You must set the target to `ip_range` when specifying
+     * an IP address range in the Zone Lockdown rule.
+     */
+    target?: 'ip_range';
+
+    /**
+     * The IP address range to match. You can only use prefix lengths `/16` and `/24`.
+     */
+    value?: string;
+  }
+}
+
+export interface LockdownListResponse {
+  /**
+   * The unique identifier of the Zone Lockdown rule.
+   */
+  id: string;
+
+  /**
+   * A list of IP addresses or CIDR ranges that will be allowed to access the URLs
+   * specified in the Zone Lockdown rule. You can include any number of `ip` or
+   * `ip_range` configurations.
+   */
+  configurations:
+    | LockdownListResponse.LegacyJhsSchemasIPConfiguration
+    | LockdownListResponse.LegacyJhsSchemasCidrConfiguration;
+
+  /**
+   * The timestamp of when the rule was created.
+   */
+  created_on: string;
+
+  /**
+   * An informative summary of the rule.
+   */
+  description: string;
+
+  /**
+   * The timestamp of when the rule was last modified.
+   */
+  modified_on: string;
+
+  /**
+   * When true, indicates that the rule is currently paused.
+   */
+  paused: boolean;
+
+  /**
+   * The URLs to include in the rule definition. You can use wildcards. Each entered
+   * URL will be escaped before use, which means you can only use simple wildcard
+   * patterns.
+   */
+  urls: Array<string>;
+}
+
+export namespace LockdownListResponse {
   export interface LegacyJhsSchemasIPConfiguration {
     /**
      * The configuration target. You must set the target to `ip` when specifying an IP
@@ -178,6 +322,78 @@ export interface LockdownDeleteResponse {
    * The unique identifier of the Zone Lockdown rule.
    */
   id?: string;
+}
+
+export interface LockdownGetResponse {
+  /**
+   * The unique identifier of the Zone Lockdown rule.
+   */
+  id: string;
+
+  /**
+   * A list of IP addresses or CIDR ranges that will be allowed to access the URLs
+   * specified in the Zone Lockdown rule. You can include any number of `ip` or
+   * `ip_range` configurations.
+   */
+  configurations:
+    | LockdownGetResponse.LegacyJhsSchemasIPConfiguration
+    | LockdownGetResponse.LegacyJhsSchemasCidrConfiguration;
+
+  /**
+   * The timestamp of when the rule was created.
+   */
+  created_on: string;
+
+  /**
+   * An informative summary of the rule.
+   */
+  description: string;
+
+  /**
+   * The timestamp of when the rule was last modified.
+   */
+  modified_on: string;
+
+  /**
+   * When true, indicates that the rule is currently paused.
+   */
+  paused: boolean;
+
+  /**
+   * The URLs to include in the rule definition. You can use wildcards. Each entered
+   * URL will be escaped before use, which means you can only use simple wildcard
+   * patterns.
+   */
+  urls: Array<string>;
+}
+
+export namespace LockdownGetResponse {
+  export interface LegacyJhsSchemasIPConfiguration {
+    /**
+     * The configuration target. You must set the target to `ip` when specifying an IP
+     * address in the Zone Lockdown rule.
+     */
+    target?: 'ip';
+
+    /**
+     * The IP address to match. This address will be compared to the IP address of
+     * incoming requests.
+     */
+    value?: string;
+  }
+
+  export interface LegacyJhsSchemasCidrConfiguration {
+    /**
+     * The configuration target. You must set the target to `ip_range` when specifying
+     * an IP address range in the Zone Lockdown rule.
+     */
+    target?: 'ip_range';
+
+    /**
+     * The IP address range to match. You can only use prefix lengths `/16` and `/24`.
+     */
+    value?: string;
+  }
 }
 
 export type LockdownCreateParams = unknown;
@@ -224,9 +440,12 @@ export interface LockdownListParams extends V4PagePaginationArrayParams {
 }
 
 export namespace Lockdowns {
-  export import LegacyJhsZonelockdown = LockdownsAPI.LegacyJhsZonelockdown;
+  export import LockdownCreateResponse = LockdownsAPI.LockdownCreateResponse;
+  export import LockdownUpdateResponse = LockdownsAPI.LockdownUpdateResponse;
+  export import LockdownListResponse = LockdownsAPI.LockdownListResponse;
   export import LockdownDeleteResponse = LockdownsAPI.LockdownDeleteResponse;
-  export import LegacyJhsZonelockdownsV4PagePaginationArray = LockdownsAPI.LegacyJhsZonelockdownsV4PagePaginationArray;
+  export import LockdownGetResponse = LockdownsAPI.LockdownGetResponse;
+  export import LockdownListResponsesV4PagePaginationArray = LockdownsAPI.LockdownListResponsesV4PagePaginationArray;
   export import LockdownCreateParams = LockdownsAPI.LockdownCreateParams;
   export import LockdownUpdateParams = LockdownsAPI.LockdownUpdateParams;
   export import LockdownListParams = LockdownsAPI.LockdownListParams;

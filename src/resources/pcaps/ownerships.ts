@@ -11,11 +11,11 @@ export class Ownerships extends APIResource {
   create(
     params: OwnershipCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MagicVisibilityPCAPsOwnership> {
+  ): Core.APIPromise<OwnershipCreateResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/pcaps/ownership`, { body, ...options }) as Core.APIPromise<{
-        result: MagicVisibilityPCAPsOwnership;
+        result: OwnershipCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -56,18 +56,18 @@ export class Ownerships extends APIResource {
   validate(
     params: OwnershipValidateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MagicVisibilityPCAPsOwnership> {
+  ): Core.APIPromise<OwnershipValidateResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/pcaps/ownership/validate`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: MagicVisibilityPCAPsOwnership }>
+      }) as Core.APIPromise<{ result: OwnershipValidateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface MagicVisibilityPCAPsOwnership {
+export interface OwnershipCreateResponse {
   /**
    * The bucket ID associated with the packet captures API.
    */
@@ -99,7 +99,73 @@ export interface MagicVisibilityPCAPsOwnership {
   validated?: string;
 }
 
-export type OwnershipGetResponse = Array<MagicVisibilityPCAPsOwnership>;
+export type OwnershipGetResponse = Array<OwnershipGetResponse.OwnershipGetResponseItem>;
+
+export namespace OwnershipGetResponse {
+  export interface OwnershipGetResponseItem {
+    /**
+     * The bucket ID associated with the packet captures API.
+     */
+    id: string;
+
+    /**
+     * The full URI for the bucket. This field only applies to `full` packet captures.
+     */
+    destination_conf: string;
+
+    /**
+     * The ownership challenge filename stored in the bucket.
+     */
+    filename: string;
+
+    /**
+     * The status of the ownership challenge. Can be pending, success or failed.
+     */
+    status: 'pending' | 'success' | 'failed';
+
+    /**
+     * The RFC 3339 timestamp when the bucket was added to packet captures API.
+     */
+    submitted: string;
+
+    /**
+     * The RFC 3339 timestamp when the bucket was validated.
+     */
+    validated?: string;
+  }
+}
+
+export interface OwnershipValidateResponse {
+  /**
+   * The bucket ID associated with the packet captures API.
+   */
+  id: string;
+
+  /**
+   * The full URI for the bucket. This field only applies to `full` packet captures.
+   */
+  destination_conf: string;
+
+  /**
+   * The ownership challenge filename stored in the bucket.
+   */
+  filename: string;
+
+  /**
+   * The status of the ownership challenge. Can be pending, success or failed.
+   */
+  status: 'pending' | 'success' | 'failed';
+
+  /**
+   * The RFC 3339 timestamp when the bucket was added to packet captures API.
+   */
+  submitted: string;
+
+  /**
+   * The RFC 3339 timestamp when the bucket was validated.
+   */
+  validated?: string;
+}
 
 export interface OwnershipCreateParams {
   /**
@@ -147,8 +213,9 @@ export interface OwnershipValidateParams {
 }
 
 export namespace Ownerships {
-  export import MagicVisibilityPCAPsOwnership = OwnershipsAPI.MagicVisibilityPCAPsOwnership;
+  export import OwnershipCreateResponse = OwnershipsAPI.OwnershipCreateResponse;
   export import OwnershipGetResponse = OwnershipsAPI.OwnershipGetResponse;
+  export import OwnershipValidateResponse = OwnershipsAPI.OwnershipValidateResponse;
   export import OwnershipCreateParams = OwnershipsAPI.OwnershipCreateParams;
   export import OwnershipDeleteParams = OwnershipsAPI.OwnershipDeleteParams;
   export import OwnershipGetParams = OwnershipsAPI.OwnershipGetParams;

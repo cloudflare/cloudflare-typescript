@@ -11,11 +11,11 @@ export class Datasets extends APIResource {
   /**
    * Create a new dataset.
    */
-  create(params: DatasetCreateParams, options?: Core.RequestOptions): Core.APIPromise<DLPDatasetCreation> {
+  create(params: DatasetCreateParams, options?: Core.RequestOptions): Core.APIPromise<DatasetCreateResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/dlp/datasets`, { body, ...options }) as Core.APIPromise<{
-        result: DLPDatasetCreation;
+        result: DatasetCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -27,24 +27,24 @@ export class Datasets extends APIResource {
     datasetId: string,
     params: DatasetUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DLPDataset> {
+  ): Core.APIPromise<DatasetUpdateResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/dlp/datasets/${datasetId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: DLPDataset }>
+      }) as Core.APIPromise<{ result: DatasetUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetch all datasets with information about available versions.
    */
-  list(params: DatasetListParams, options?: Core.RequestOptions): Core.APIPromise<DLPDatasetArray> {
+  list(params: DatasetListParams, options?: Core.RequestOptions): Core.APIPromise<DatasetListResponse> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/dlp/datasets`, options) as Core.APIPromise<{
-        result: DLPDatasetArray;
+        result: DatasetListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -73,17 +73,66 @@ export class Datasets extends APIResource {
     datasetId: string,
     params: DatasetGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DLPDataset> {
+  ): Core.APIPromise<DatasetGetResponse> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/dlp/datasets/${datasetId}`, options) as Core.APIPromise<{
-        result: DLPDataset;
+        result: DatasetGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface DLPDataset {
+export interface DatasetCreateResponse {
+  dataset: DatasetCreateResponse.Dataset;
+
+  max_cells: number;
+
+  /**
+   * The version to use when uploading the dataset.
+   */
+  version: number;
+
+  /**
+   * The secret to use for Exact Data Match datasets. This is not present in Custom
+   * Wordlists.
+   */
+  secret?: string;
+}
+
+export namespace DatasetCreateResponse {
+  export interface Dataset {
+    id: string;
+
+    created_at: string;
+
+    name: string;
+
+    num_cells: number;
+
+    secret: boolean;
+
+    status: 'empty' | 'uploading' | 'failed' | 'complete';
+
+    updated_at: string;
+
+    uploads: Array<Dataset.Upload>;
+
+    description?: string | null;
+  }
+
+  export namespace Dataset {
+    export interface Upload {
+      num_cells: number;
+
+      status: 'empty' | 'uploading' | 'failed' | 'complete';
+
+      version: number;
+    }
+  }
+}
+
+export interface DatasetUpdateResponse {
   id: string;
 
   created_at: string;
@@ -98,12 +147,12 @@ export interface DLPDataset {
 
   updated_at: string;
 
-  uploads: Array<DLPDataset.Upload>;
+  uploads: Array<DatasetUpdateResponse.Upload>;
 
   description?: string | null;
 }
 
-export namespace DLPDataset {
+export namespace DatasetUpdateResponse {
   export interface Upload {
     num_cells: number;
 
@@ -113,23 +162,68 @@ export namespace DLPDataset {
   }
 }
 
-export type DLPDatasetArray = Array<DLPDataset>;
+export type DatasetListResponse = Array<DatasetListResponse.DatasetListResponseItem>;
 
-export interface DLPDatasetCreation {
-  dataset: DLPDataset;
+export namespace DatasetListResponse {
+  export interface DatasetListResponseItem {
+    id: string;
 
-  max_cells: number;
+    created_at: string;
 
-  /**
-   * The version to use when uploading the dataset.
-   */
-  version: number;
+    name: string;
 
-  /**
-   * The secret to use for Exact Data Match datasets. This is not present in Custom
-   * Wordlists.
-   */
-  secret?: string;
+    num_cells: number;
+
+    secret: boolean;
+
+    status: 'empty' | 'uploading' | 'failed' | 'complete';
+
+    updated_at: string;
+
+    uploads: Array<DatasetListResponseItem.Upload>;
+
+    description?: string | null;
+  }
+
+  export namespace DatasetListResponseItem {
+    export interface Upload {
+      num_cells: number;
+
+      status: 'empty' | 'uploading' | 'failed' | 'complete';
+
+      version: number;
+    }
+  }
+}
+
+export interface DatasetGetResponse {
+  id: string;
+
+  created_at: string;
+
+  name: string;
+
+  num_cells: number;
+
+  secret: boolean;
+
+  status: 'empty' | 'uploading' | 'failed' | 'complete';
+
+  updated_at: string;
+
+  uploads: Array<DatasetGetResponse.Upload>;
+
+  description?: string | null;
+}
+
+export namespace DatasetGetResponse {
+  export interface Upload {
+    num_cells: number;
+
+    status: 'empty' | 'uploading' | 'failed' | 'complete';
+
+    version: number;
+  }
 }
 
 export interface DatasetCreateParams {
@@ -187,16 +281,18 @@ export interface DatasetGetParams {
 }
 
 export namespace Datasets {
-  export import DLPDataset = DatasetsAPI.DLPDataset;
-  export import DLPDatasetArray = DatasetsAPI.DLPDatasetArray;
-  export import DLPDatasetCreation = DatasetsAPI.DLPDatasetCreation;
+  export import DatasetCreateResponse = DatasetsAPI.DatasetCreateResponse;
+  export import DatasetUpdateResponse = DatasetsAPI.DatasetUpdateResponse;
+  export import DatasetListResponse = DatasetsAPI.DatasetListResponse;
+  export import DatasetGetResponse = DatasetsAPI.DatasetGetResponse;
   export import DatasetCreateParams = DatasetsAPI.DatasetCreateParams;
   export import DatasetUpdateParams = DatasetsAPI.DatasetUpdateParams;
   export import DatasetListParams = DatasetsAPI.DatasetListParams;
   export import DatasetDeleteParams = DatasetsAPI.DatasetDeleteParams;
   export import DatasetGetParams = DatasetsAPI.DatasetGetParams;
   export import Upload = UploadAPI.Upload;
-  export import DLPDatasetNewVersion = UploadAPI.DLPDatasetNewVersion;
+  export import UploadCreateResponse = UploadAPI.UploadCreateResponse;
+  export import UploadEditResponse = UploadAPI.UploadEditResponse;
   export import UploadCreateParams = UploadAPI.UploadCreateParams;
   export import UploadEditParams = UploadAPI.UploadEditParams;
 }

@@ -1,15 +1,11 @@
 // File generated from our OpenAPI spec by Stainless.
 
+export { AssociationGetResponse, AssociationGetParams, Associations } from './associations';
 export {
-  TLSCertificatesAndHostnamesAssociationObject,
-  AssociationGetResponse,
-  AssociationGetParams,
-  Associations,
-} from './associations';
-export {
-  TLSCertificatesAndHostnamesCertificateObjectPost,
-  TLSCertificatesAndHostnamesComponentsSchemasCertificateObject,
+  MTLSCertificateCreateResponse,
   MTLSCertificateListResponse,
+  MTLSCertificateDeleteResponse,
+  MTLSCertificateGetResponse,
   MTLSCertificateCreateParams,
   MTLSCertificateListParams,
   MTLSCertificateDeleteParams,

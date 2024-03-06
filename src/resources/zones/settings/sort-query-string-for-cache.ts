@@ -13,13 +13,13 @@ export class SortQueryStringForCache extends APIResource {
   edit(
     params: SortQueryStringForCacheEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZonesSortQueryStringForCache> {
+  ): Core.APIPromise<SortQueryStringForCacheEditResponse> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/sort_query_string_for_cache`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZonesSortQueryStringForCache }>
+      }) as Core.APIPromise<{ result: SortQueryStringForCacheEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -31,11 +31,11 @@ export class SortQueryStringForCache extends APIResource {
   get(
     params: SortQueryStringForCacheGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZonesSortQueryStringForCache> {
+  ): Core.APIPromise<SortQueryStringForCacheGetResponse> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/sort_query_string_for_cache`, options) as Core.APIPromise<{
-        result: ZonesSortQueryStringForCache;
+        result: SortQueryStringForCacheGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -46,7 +46,35 @@ export class SortQueryStringForCache extends APIResource {
  * cache, regardless of the order of the query strings. This is limited to
  * Enterprise Zones.
  */
-export interface ZonesSortQueryStringForCache {
+export interface SortQueryStringForCacheEditResponse {
+  /**
+   * ID of the zone setting.
+   */
+  id: 'sort_query_string_for_cache';
+
+  /**
+   * Current value of the zone setting.
+   */
+  value: 'on' | 'off';
+
+  /**
+   * Whether or not this setting can be modified for this zone (based on your
+   * Cloudflare plan level).
+   */
+  editable?: true | false;
+
+  /**
+   * last time this setting was modified.
+   */
+  modified_on?: string | null;
+}
+
+/**
+ * Cloudflare will treat files with the same query strings as the same file in
+ * cache, regardless of the order of the query strings. This is limited to
+ * Enterprise Zones.
+ */
+export interface SortQueryStringForCacheGetResponse {
   /**
    * ID of the zone setting.
    */
@@ -89,7 +117,8 @@ export interface SortQueryStringForCacheGetParams {
 }
 
 export namespace SortQueryStringForCache {
-  export import ZonesSortQueryStringForCache = SortQueryStringForCacheAPI.ZonesSortQueryStringForCache;
+  export import SortQueryStringForCacheEditResponse = SortQueryStringForCacheAPI.SortQueryStringForCacheEditResponse;
+  export import SortQueryStringForCacheGetResponse = SortQueryStringForCacheAPI.SortQueryStringForCacheGetResponse;
   export import SortQueryStringForCacheEditParams = SortQueryStringForCacheAPI.SortQueryStringForCacheEditParams;
   export import SortQueryStringForCacheGetParams = SortQueryStringForCacheAPI.SortQueryStringForCacheGetParams;
 }

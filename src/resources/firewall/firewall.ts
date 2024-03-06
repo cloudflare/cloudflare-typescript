@@ -17,17 +17,23 @@ export class Firewall extends APIResource {
 
 export namespace Firewall {
   export import Lockdowns = LockdownsAPI.Lockdowns;
-  export import LegacyJhsZonelockdown = LockdownsAPI.LegacyJhsZonelockdown;
+  export import LockdownCreateResponse = LockdownsAPI.LockdownCreateResponse;
+  export import LockdownUpdateResponse = LockdownsAPI.LockdownUpdateResponse;
+  export import LockdownListResponse = LockdownsAPI.LockdownListResponse;
   export import LockdownDeleteResponse = LockdownsAPI.LockdownDeleteResponse;
-  export import LegacyJhsZonelockdownsV4PagePaginationArray = LockdownsAPI.LegacyJhsZonelockdownsV4PagePaginationArray;
+  export import LockdownGetResponse = LockdownsAPI.LockdownGetResponse;
+  export import LockdownListResponsesV4PagePaginationArray = LockdownsAPI.LockdownListResponsesV4PagePaginationArray;
   export import LockdownCreateParams = LockdownsAPI.LockdownCreateParams;
   export import LockdownUpdateParams = LockdownsAPI.LockdownUpdateParams;
   export import LockdownListParams = LockdownsAPI.LockdownListParams;
   export import Rules = RulesAPI.Rules;
-  export import LegacyJhsFilterRule = RulesAPI.LegacyJhsFilterRule;
   export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
+  export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
+  export import RuleListResponse = RulesAPI.RuleListResponse;
+  export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
   export import RuleEditResponse = RulesAPI.RuleEditResponse;
-  export import LegacyJhsFilterRulesV4PagePaginationArray = RulesAPI.LegacyJhsFilterRulesV4PagePaginationArray;
+  export import RuleGetResponse = RulesAPI.RuleGetResponse;
+  export import RuleListResponsesV4PagePaginationArray = RulesAPI.RuleListResponsesV4PagePaginationArray;
   export import RuleCreateParams = RulesAPI.RuleCreateParams;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
   export import RuleListParams = RulesAPI.RuleListParams;
@@ -46,7 +52,6 @@ export namespace Firewall {
   export import AccessRuleEditParams = AccessRulesAPI.AccessRuleEditParams;
   export import AccessRuleGetParams = AccessRulesAPI.AccessRuleGetParams;
   export import UARules = UARulesAPI.UARules;
-  export import LegacyJhsUARules = UARulesAPI.LegacyJhsUARules;
   export import UARuleCreateResponse = UARulesAPI.UARuleCreateResponse;
   export import UARuleUpdateResponse = UARulesAPI.UARuleUpdateResponse;
   export import UARuleListResponse = UARulesAPI.UARuleListResponse;

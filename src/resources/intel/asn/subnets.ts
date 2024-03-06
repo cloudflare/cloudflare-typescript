@@ -3,14 +3,13 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as SubnetsAPI from 'cloudflare/resources/intel/asn/subnets';
-import * as ASNAPI from 'cloudflare/resources/intel/asn/asn';
 
 export class Subnets extends APIResource {
   /**
    * Get ASN Subnets
    */
   get(
-    asn: ASNAPI.IntelASN,
+    asn: number,
     params: SubnetGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SubnetGetResponse> {
@@ -20,7 +19,7 @@ export class Subnets extends APIResource {
 }
 
 export interface SubnetGetResponse {
-  asn?: ASNAPI.IntelASN;
+  asn?: number;
 
   /**
    * Total results returned based on your search parameters.

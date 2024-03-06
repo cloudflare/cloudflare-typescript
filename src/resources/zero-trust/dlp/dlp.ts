@@ -15,9 +15,10 @@ export class DLP extends APIResource {
 
 export namespace DLP {
   export import Datasets = DatasetsAPI.Datasets;
-  export import DLPDataset = DatasetsAPI.DLPDataset;
-  export import DLPDatasetArray = DatasetsAPI.DLPDatasetArray;
-  export import DLPDatasetCreation = DatasetsAPI.DLPDatasetCreation;
+  export import DatasetCreateResponse = DatasetsAPI.DatasetCreateResponse;
+  export import DatasetUpdateResponse = DatasetsAPI.DatasetUpdateResponse;
+  export import DatasetListResponse = DatasetsAPI.DatasetListResponse;
+  export import DatasetGetResponse = DatasetsAPI.DatasetGetResponse;
   export import DatasetCreateParams = DatasetsAPI.DatasetCreateParams;
   export import DatasetUpdateParams = DatasetsAPI.DatasetUpdateParams;
   export import DatasetListParams = DatasetsAPI.DatasetListParams;
@@ -32,7 +33,6 @@ export namespace DLP {
   export import PayloadLogUpdateParams = PayloadLogsAPI.PayloadLogUpdateParams;
   export import PayloadLogGetParams = PayloadLogsAPI.PayloadLogGetParams;
   export import Profiles = ProfilesAPI.Profiles;
-  export import DLPProfiles = ProfilesAPI.DLPProfiles;
   export import ProfileListResponse = ProfilesAPI.ProfileListResponse;
   export import ProfileGetResponse = ProfilesAPI.ProfileGetResponse;
   export import ProfileListParams = ProfilesAPI.ProfileListParams;

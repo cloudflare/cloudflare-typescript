@@ -22,28 +22,30 @@ export class Seats extends APIResource {
   }
 }
 
-export interface AccessSeats {
-  /**
-   * True if the seat is part of Access.
-   */
-  access_seat?: boolean;
+export type SeatEditResponse = Array<SeatEditResponse.SeatEditResponseItem>;
 
-  created_at?: string;
+export namespace SeatEditResponse {
+  export interface SeatEditResponseItem {
+    /**
+     * True if the seat is part of Access.
+     */
+    access_seat?: boolean;
 
-  /**
-   * True if the seat is part of Gateway.
-   */
-  gateway_seat?: boolean;
+    created_at?: string;
 
-  /**
-   * Identifier
-   */
-  seat_uid?: string;
+    /**
+     * True if the seat is part of Gateway.
+     */
+    gateway_seat?: boolean;
 
-  updated_at?: string;
+    /**
+     * Identifier
+     */
+    seat_uid?: string;
+
+    updated_at?: string;
+  }
 }
-
-export type SeatEditResponse = Array<AccessSeats>;
 
 export type SeatEditParams = Array<SeatEditParams.Body>;
 
@@ -62,7 +64,6 @@ export namespace SeatEditParams {
 }
 
 export namespace Seats {
-  export import AccessSeats = SeatsAPI.AccessSeats;
   export import SeatEditResponse = SeatsAPI.SeatEditResponse;
   export import SeatEditParams = SeatsAPI.SeatEditParams;
 }

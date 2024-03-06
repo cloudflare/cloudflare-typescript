@@ -15,11 +15,11 @@ export class Firewall extends APIResource {
   create(
     params: FirewallCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DNSFirewallDNSFirewall> {
+  ): Core.APIPromise<FirewallCreateResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/dns_firewall`, { body, ...options }) as Core.APIPromise<{
-        result: DNSFirewallDNSFirewall;
+        result: FirewallCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -30,11 +30,11 @@ export class Firewall extends APIResource {
   list(
     params: FirewallListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<DNSFirewallDNSFirewallsV4PagePaginationArray, DNSFirewallDNSFirewall> {
+  ): Core.PagePromise<FirewallListResponsesV4PagePaginationArray, FirewallListResponse> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/dns_firewall`,
-      DNSFirewallDNSFirewallsV4PagePaginationArray,
+      FirewallListResponsesV4PagePaginationArray,
       { query, ...options },
     );
   }
@@ -63,13 +63,13 @@ export class Firewall extends APIResource {
     dnsFirewallId: string,
     params: FirewallEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DNSFirewallDNSFirewall> {
+  ): Core.APIPromise<FirewallEditResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/dns_firewall/${dnsFirewallId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: DNSFirewallDNSFirewall }>
+      }) as Core.APIPromise<{ result: FirewallEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -80,19 +80,19 @@ export class Firewall extends APIResource {
     dnsFirewallId: string,
     params: FirewallGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DNSFirewallDNSFirewall> {
+  ): Core.APIPromise<FirewallGetResponse> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/dns_firewall/${dnsFirewallId}`, options) as Core.APIPromise<{
-        result: DNSFirewallDNSFirewall;
+        result: FirewallGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class DNSFirewallDNSFirewallsV4PagePaginationArray extends V4PagePaginationArray<DNSFirewallDNSFirewall> {}
+export class FirewallListResponsesV4PagePaginationArray extends V4PagePaginationArray<FirewallListResponse> {}
 
-export interface DNSFirewallDNSFirewall {
+export interface FirewallCreateResponse {
   /**
    * Identifier
    */
@@ -135,7 +135,7 @@ export interface DNSFirewallDNSFirewall {
   /**
    * Attack mitigation settings.
    */
-  attack_mitigation?: DNSFirewallDNSFirewall.AttackMitigation | null;
+  attack_mitigation?: FirewallCreateResponse.AttackMitigation | null;
 
   /**
    * Negative DNS Cache TTL.
@@ -160,7 +160,98 @@ export interface DNSFirewallDNSFirewall {
   retries?: number;
 }
 
-export namespace DNSFirewallDNSFirewall {
+export namespace FirewallCreateResponse {
+  /**
+   * Attack mitigation settings.
+   */
+  export interface AttackMitigation {
+    /**
+     * When enabled, random-prefix attacks are automatically mitigated and the upstream
+     * DNS servers protected.
+     */
+    enabled?: boolean;
+
+    /**
+     * Deprecated alias for "only_when_upstream_unhealthy".
+     */
+    only_when_origin_unhealthy?: unknown;
+
+    /**
+     * Only mitigate attacks when upstream servers seem unhealthy.
+     */
+    only_when_upstream_unhealthy?: boolean;
+  }
+}
+
+export interface FirewallListResponse {
+  /**
+   * Identifier
+   */
+  id: string;
+
+  /**
+   * Deprecate the response to ANY requests.
+   */
+  deprecate_any_requests: boolean;
+
+  dns_firewall_ips: Array<string | string>;
+
+  /**
+   * Forward client IP (resolver) subnet if no EDNS Client Subnet is sent.
+   */
+  ecs_fallback: boolean;
+
+  /**
+   * Maximum DNS Cache TTL.
+   */
+  maximum_cache_ttl: number;
+
+  /**
+   * Minimum DNS Cache TTL.
+   */
+  minimum_cache_ttl: number;
+
+  /**
+   * Last modification of DNS Firewall cluster.
+   */
+  modified_on: string;
+
+  /**
+   * DNS Firewall Cluster Name.
+   */
+  name: string;
+
+  upstream_ips: Array<string | string>;
+
+  /**
+   * Attack mitigation settings.
+   */
+  attack_mitigation?: FirewallListResponse.AttackMitigation | null;
+
+  /**
+   * Negative DNS Cache TTL.
+   */
+  negative_cache_ttl?: number | null;
+
+  /**
+   * Deprecated alias for "upstream_ips".
+   */
+  origin_ips?: unknown;
+
+  /**
+   * Ratelimit in queries per second per datacenter (applies to DNS queries sent to
+   * the upstream nameservers configured on the cluster).
+   */
+  ratelimit?: number | null;
+
+  /**
+   * Number of retries for fetching DNS responses from upstream nameservers (not
+   * counting the initial attempt).
+   */
+  retries?: number;
+}
+
+export namespace FirewallListResponse {
   /**
    * Attack mitigation settings.
    */
@@ -188,6 +279,188 @@ export interface FirewallDeleteResponse {
    * Identifier
    */
   id?: string;
+}
+
+export interface FirewallEditResponse {
+  /**
+   * Identifier
+   */
+  id: string;
+
+  /**
+   * Deprecate the response to ANY requests.
+   */
+  deprecate_any_requests: boolean;
+
+  dns_firewall_ips: Array<string | string>;
+
+  /**
+   * Forward client IP (resolver) subnet if no EDNS Client Subnet is sent.
+   */
+  ecs_fallback: boolean;
+
+  /**
+   * Maximum DNS Cache TTL.
+   */
+  maximum_cache_ttl: number;
+
+  /**
+   * Minimum DNS Cache TTL.
+   */
+  minimum_cache_ttl: number;
+
+  /**
+   * Last modification of DNS Firewall cluster.
+   */
+  modified_on: string;
+
+  /**
+   * DNS Firewall Cluster Name.
+   */
+  name: string;
+
+  upstream_ips: Array<string | string>;
+
+  /**
+   * Attack mitigation settings.
+   */
+  attack_mitigation?: FirewallEditResponse.AttackMitigation | null;
+
+  /**
+   * Negative DNS Cache TTL.
+   */
+  negative_cache_ttl?: number | null;
+
+  /**
+   * Deprecated alias for "upstream_ips".
+   */
+  origin_ips?: unknown;
+
+  /**
+   * Ratelimit in queries per second per datacenter (applies to DNS queries sent to
+   * the upstream nameservers configured on the cluster).
+   */
+  ratelimit?: number | null;
+
+  /**
+   * Number of retries for fetching DNS responses from upstream nameservers (not
+   * counting the initial attempt).
+   */
+  retries?: number;
+}
+
+export namespace FirewallEditResponse {
+  /**
+   * Attack mitigation settings.
+   */
+  export interface AttackMitigation {
+    /**
+     * When enabled, random-prefix attacks are automatically mitigated and the upstream
+     * DNS servers protected.
+     */
+    enabled?: boolean;
+
+    /**
+     * Deprecated alias for "only_when_upstream_unhealthy".
+     */
+    only_when_origin_unhealthy?: unknown;
+
+    /**
+     * Only mitigate attacks when upstream servers seem unhealthy.
+     */
+    only_when_upstream_unhealthy?: boolean;
+  }
+}
+
+export interface FirewallGetResponse {
+  /**
+   * Identifier
+   */
+  id: string;
+
+  /**
+   * Deprecate the response to ANY requests.
+   */
+  deprecate_any_requests: boolean;
+
+  dns_firewall_ips: Array<string | string>;
+
+  /**
+   * Forward client IP (resolver) subnet if no EDNS Client Subnet is sent.
+   */
+  ecs_fallback: boolean;
+
+  /**
+   * Maximum DNS Cache TTL.
+   */
+  maximum_cache_ttl: number;
+
+  /**
+   * Minimum DNS Cache TTL.
+   */
+  minimum_cache_ttl: number;
+
+  /**
+   * Last modification of DNS Firewall cluster.
+   */
+  modified_on: string;
+
+  /**
+   * DNS Firewall Cluster Name.
+   */
+  name: string;
+
+  upstream_ips: Array<string | string>;
+
+  /**
+   * Attack mitigation settings.
+   */
+  attack_mitigation?: FirewallGetResponse.AttackMitigation | null;
+
+  /**
+   * Negative DNS Cache TTL.
+   */
+  negative_cache_ttl?: number | null;
+
+  /**
+   * Deprecated alias for "upstream_ips".
+   */
+  origin_ips?: unknown;
+
+  /**
+   * Ratelimit in queries per second per datacenter (applies to DNS queries sent to
+   * the upstream nameservers configured on the cluster).
+   */
+  ratelimit?: number | null;
+
+  /**
+   * Number of retries for fetching DNS responses from upstream nameservers (not
+   * counting the initial attempt).
+   */
+  retries?: number;
+}
+
+export namespace FirewallGetResponse {
+  /**
+   * Attack mitigation settings.
+   */
+  export interface AttackMitigation {
+    /**
+     * When enabled, random-prefix attacks are automatically mitigated and the upstream
+     * DNS servers protected.
+     */
+    enabled?: boolean;
+
+    /**
+     * Deprecated alias for "only_when_upstream_unhealthy".
+     */
+    only_when_origin_unhealthy?: unknown;
+
+    /**
+     * Only mitigate attacks when upstream servers seem unhealthy.
+     */
+    only_when_upstream_unhealthy?: boolean;
+  }
 }
 
 export interface FirewallCreateParams {
@@ -393,9 +666,12 @@ export interface FirewallGetParams {
 }
 
 export namespace Firewall {
-  export import DNSFirewallDNSFirewall = FirewallAPI.DNSFirewallDNSFirewall;
+  export import FirewallCreateResponse = FirewallAPI.FirewallCreateResponse;
+  export import FirewallListResponse = FirewallAPI.FirewallListResponse;
   export import FirewallDeleteResponse = FirewallAPI.FirewallDeleteResponse;
-  export import DNSFirewallDNSFirewallsV4PagePaginationArray = FirewallAPI.DNSFirewallDNSFirewallsV4PagePaginationArray;
+  export import FirewallEditResponse = FirewallAPI.FirewallEditResponse;
+  export import FirewallGetResponse = FirewallAPI.FirewallGetResponse;
+  export import FirewallListResponsesV4PagePaginationArray = FirewallAPI.FirewallListResponsesV4PagePaginationArray;
   export import FirewallCreateParams = FirewallAPI.FirewallCreateParams;
   export import FirewallListParams = FirewallAPI.FirewallListParams;
   export import FirewallDeleteParams = FirewallAPI.FirewallDeleteParams;

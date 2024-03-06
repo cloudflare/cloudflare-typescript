@@ -2,9 +2,10 @@
 
 export { DLP } from './dlp';
 export {
-  DLPDataset,
-  DLPDatasetArray,
-  DLPDatasetCreation,
+  DatasetCreateResponse,
+  DatasetUpdateResponse,
+  DatasetListResponse,
+  DatasetGetResponse,
   DatasetCreateParams,
   DatasetUpdateParams,
   DatasetListParams,
@@ -12,14 +13,6 @@ export {
   DatasetGetParams,
   Datasets,
 } from './datasets/index';
-export {
-  DLPProfiles,
-  ProfileListResponse,
-  ProfileGetResponse,
-  ProfileListParams,
-  ProfileGetParams,
-  Profiles,
-} from './profiles/index';
 export { PatternValidateResponse, PatternValidateParams, Patterns } from './patterns';
 export {
   PayloadLogUpdateResponse,
@@ -28,3 +21,10 @@ export {
   PayloadLogGetParams,
   PayloadLogs,
 } from './payload-logs';
+export {
+  ProfileListResponse,
+  ProfileGetResponse,
+  ProfileListParams,
+  ProfileGetParams,
+  Profiles,
+} from './profiles/index';

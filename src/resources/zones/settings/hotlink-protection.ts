@@ -17,13 +17,13 @@ export class HotlinkProtection extends APIResource {
   edit(
     params: HotlinkProtectionEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZonesHotlinkProtection> {
+  ): Core.APIPromise<HotlinkProtectionEditResponse> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/hotlink_protection`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZonesHotlinkProtection }>
+      }) as Core.APIPromise<{ result: HotlinkProtectionEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -39,11 +39,11 @@ export class HotlinkProtection extends APIResource {
   get(
     params: HotlinkProtectionGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZonesHotlinkProtection> {
+  ): Core.APIPromise<HotlinkProtectionGetResponse> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/hotlink_protection`, options) as Core.APIPromise<{
-        result: ZonesHotlinkProtection;
+        result: HotlinkProtectionGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -58,7 +58,39 @@ export class HotlinkProtection extends APIResource {
  * on their own pages.
  * (https://support.cloudflare.com/hc/en-us/articles/200170026).
  */
-export interface ZonesHotlinkProtection {
+export interface HotlinkProtectionEditResponse {
+  /**
+   * ID of the zone setting.
+   */
+  id: 'hotlink_protection';
+
+  /**
+   * Current value of the zone setting.
+   */
+  value: 'on' | 'off';
+
+  /**
+   * Whether or not this setting can be modified for this zone (based on your
+   * Cloudflare plan level).
+   */
+  editable?: true | false;
+
+  /**
+   * last time this setting was modified.
+   */
+  modified_on?: string | null;
+}
+
+/**
+ * When enabled, the Hotlink Protection option ensures that other sites cannot suck
+ * up your bandwidth by building pages that use images hosted on your site. Anytime
+ * a request for an image on your site hits Cloudflare, we check to ensure that
+ * it's not another site requesting them. People will still be able to download and
+ * view images from your page, but other sites won't be able to steal them for use
+ * on their own pages.
+ * (https://support.cloudflare.com/hc/en-us/articles/200170026).
+ */
+export interface HotlinkProtectionGetResponse {
   /**
    * ID of the zone setting.
    */
@@ -101,7 +133,8 @@ export interface HotlinkProtectionGetParams {
 }
 
 export namespace HotlinkProtection {
-  export import ZonesHotlinkProtection = HotlinkProtectionAPI.ZonesHotlinkProtection;
+  export import HotlinkProtectionEditResponse = HotlinkProtectionAPI.HotlinkProtectionEditResponse;
+  export import HotlinkProtectionGetResponse = HotlinkProtectionAPI.HotlinkProtectionGetResponse;
   export import HotlinkProtectionEditParams = HotlinkProtectionAPI.HotlinkProtectionEditParams;
   export import HotlinkProtectionGetParams = HotlinkProtectionAPI.HotlinkProtectionGetParams;
 }

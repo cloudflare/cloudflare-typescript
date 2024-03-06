@@ -8,11 +8,11 @@ export class TLS1_3 extends APIResource {
   /**
    * Changes TLS 1.3 setting.
    */
-  edit(params: TLS1_3EditParams, options?: Core.RequestOptions): Core.APIPromise<ZonesTLS1_3> {
+  edit(params: TLS1_3EditParams, options?: Core.RequestOptions): Core.APIPromise<TLS1_3EditResponse> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/tls_1_3`, { body, ...options }) as Core.APIPromise<{
-        result: ZonesTLS1_3;
+        result: TLS1_3EditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -20,11 +20,11 @@ export class TLS1_3 extends APIResource {
   /**
    * Gets TLS 1.3 setting enabled for a zone.
    */
-  get(params: TLS1_3GetParams, options?: Core.RequestOptions): Core.APIPromise<ZonesTLS1_3> {
+  get(params: TLS1_3GetParams, options?: Core.RequestOptions): Core.APIPromise<TLS1_3GetResponse> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/tls_1_3`, options) as Core.APIPromise<{
-        result: ZonesTLS1_3;
+        result: TLS1_3GetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -33,7 +33,33 @@ export class TLS1_3 extends APIResource {
 /**
  * Enables Crypto TLS 1.3 feature for a zone.
  */
-export interface ZonesTLS1_3 {
+export interface TLS1_3EditResponse {
+  /**
+   * ID of the zone setting.
+   */
+  id: 'tls_1_3';
+
+  /**
+   * Current value of the zone setting.
+   */
+  value: 'on' | 'off' | 'zrt';
+
+  /**
+   * Whether or not this setting can be modified for this zone (based on your
+   * Cloudflare plan level).
+   */
+  editable?: true | false;
+
+  /**
+   * last time this setting was modified.
+   */
+  modified_on?: string | null;
+}
+
+/**
+ * Enables Crypto TLS 1.3 feature for a zone.
+ */
+export interface TLS1_3GetResponse {
   /**
    * ID of the zone setting.
    */
@@ -77,7 +103,8 @@ export interface TLS1_3GetParams {
 }
 
 export namespace TLS1_3 {
-  export import ZonesTLS1_3 = TLS1_3API.ZonesTLS1_3;
+  export import TLS1_3EditResponse = TLS1_3API.TLS1_3EditResponse;
+  export import TLS1_3GetResponse = TLS1_3API.TLS1_3GetResponse;
   export import TLS1_3EditParams = TLS1_3API.TLS1_3EditParams;
   export import TLS1_3GetParams = TLS1_3API.TLS1_3GetParams;
 }

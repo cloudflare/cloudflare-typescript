@@ -12,13 +12,13 @@ export class Rules extends APIResource {
     rulesetId: string,
     params: RuleCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RUMRule> {
+  ): Core.APIPromise<RuleCreateResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/rum/v2/${rulesetId}/rule`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: RUMRule }>
+      }) as Core.APIPromise<{ result: RuleCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -30,13 +30,13 @@ export class Rules extends APIResource {
     ruleId: string,
     params: RuleUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RUMRule> {
+  ): Core.APIPromise<RuleUpdateResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/rum/v2/${rulesetId}/rule/${ruleId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: RUMRule }>
+      }) as Core.APIPromise<{ result: RuleUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -75,7 +75,38 @@ export class Rules extends APIResource {
   }
 }
 
-export interface RUMRule {
+export interface RuleCreateResponse {
+  /**
+   * The Web Analytics rule identifier.
+   */
+  id?: string;
+
+  created?: string;
+
+  /**
+   * The hostname the rule will be applied to.
+   */
+  host?: string;
+
+  /**
+   * Whether the rule includes or excludes traffic from being measured.
+   */
+  inclusive?: boolean;
+
+  /**
+   * Whether the rule is paused or not.
+   */
+  is_paused?: boolean;
+
+  /**
+   * The paths the rule will be applied to.
+   */
+  paths?: Array<string>;
+
+  priority?: number;
+}
+
+export interface RuleUpdateResponse {
   /**
    * The Web Analytics rule identifier.
    */
@@ -110,12 +141,43 @@ export interface RuleListResponse {
   /**
    * A list of rules.
    */
-  rules?: Array<RUMRule>;
+  rules?: Array<RuleListResponse.Rule>;
 
   ruleset?: RuleListResponse.Ruleset;
 }
 
 export namespace RuleListResponse {
+  export interface Rule {
+    /**
+     * The Web Analytics rule identifier.
+     */
+    id?: string;
+
+    created?: string;
+
+    /**
+     * The hostname the rule will be applied to.
+     */
+    host?: string;
+
+    /**
+     * Whether the rule includes or excludes traffic from being measured.
+     */
+    inclusive?: boolean;
+
+    /**
+     * Whether the rule is paused or not.
+     */
+    is_paused?: boolean;
+
+    /**
+     * The paths the rule will be applied to.
+     */
+    paths?: Array<string>;
+
+    priority?: number;
+  }
+
   export interface Ruleset {
     /**
      * The Web Analytics ruleset identifier.
@@ -212,7 +274,8 @@ export interface RuleDeleteParams {
 }
 
 export namespace Rules {
-  export import RUMRule = RulesAPI.RUMRule;
+  export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
+  export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
   export import RuleListResponse = RulesAPI.RuleListResponse;
   export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
   export import RuleCreateParams = RulesAPI.RuleCreateParams;

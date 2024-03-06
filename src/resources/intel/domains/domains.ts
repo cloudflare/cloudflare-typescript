@@ -11,26 +11,26 @@ export class Domains extends APIResource {
   /**
    * Get Domain Details
    */
-  get(params: DomainGetParams, options?: Core.RequestOptions): Core.APIPromise<IntelDomain> {
+  get(params: DomainGetParams, options?: Core.RequestOptions): Core.APIPromise<DomainGetResponse> {
     const { account_id, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/intel/domain`, { query, ...options }) as Core.APIPromise<{
-        result: IntelDomain;
+        result: DomainGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface IntelDomain {
+export interface DomainGetResponse {
   /**
    * Additional information related to the host name.
    */
-  additional_information?: IntelDomain.AdditionalInformation;
+  additional_information?: DomainGetResponse.AdditionalInformation;
 
   /**
    * Application that the hostname belongs to.
    */
-  application?: IntelDomain.Application;
+  application?: DomainGetResponse.Application;
 
   /**
    * Current content categories.
@@ -39,7 +39,7 @@ export interface IntelDomain {
 
   domain?: string;
 
-  inherited_content_categories?: Array<IntelDomain.InheritedContentCategory>;
+  inherited_content_categories?: Array<DomainGetResponse.InheritedContentCategory>;
 
   /**
    * Domain from which `inherited_content_categories` and `inherited_risk_types` are
@@ -47,7 +47,7 @@ export interface IntelDomain {
    */
   inherited_from?: string;
 
-  inherited_risk_types?: Array<IntelDomain.InheritedRiskType>;
+  inherited_risk_types?: Array<DomainGetResponse.InheritedRiskType>;
 
   /**
    * Global Cloudflare 100k ranking for the last 30 days, if available for the
@@ -59,7 +59,7 @@ export interface IntelDomain {
    * Specifies a list of references to one or more IP addresses or domain names that
    * the domain name currently resolves to.
    */
-  resolves_to_refs?: Array<IntelDomain.ResolvesToRef>;
+  resolves_to_refs?: Array<DomainGetResponse.ResolvesToRef>;
 
   /**
    * Hostname risk score, which is a value between 0 (lowest risk) to 1 (highest
@@ -70,7 +70,7 @@ export interface IntelDomain {
   risk_types?: unknown;
 }
 
-export namespace IntelDomain {
+export namespace DomainGetResponse {
   /**
    * Additional information related to the host name.
    */
@@ -133,7 +133,7 @@ export interface DomainGetParams {
 }
 
 export namespace Domains {
-  export import IntelDomain = DomainsAPI.IntelDomain;
+  export import DomainGetResponse = DomainsAPI.DomainGetResponse;
   export import DomainGetParams = DomainsAPI.DomainGetParams;
   export import Bulks = BulksAPI.Bulks;
   export import BulkGetResponse = BulksAPI.BulkGetResponse;

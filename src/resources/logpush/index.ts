@@ -1,9 +1,13 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export { Datasets } from './datasets/index';
+export { EdgeCreateResponse, EdgeGetResponse, EdgeCreateParams, EdgeGetParams, Edge } from './edge';
 export {
+  JobCreateResponse,
+  JobUpdateResponse,
   JobListResponse,
   JobDeleteResponse,
+  JobGetResponse,
   JobCreateParams,
   JobUpdateParams,
   JobListParams,
@@ -12,7 +16,6 @@ export {
   Jobs,
 } from './jobs';
 export { Logpush } from './logpush';
-export { LogpushInstantLogsJob, EdgeGetResponse, EdgeCreateParams, EdgeGetParams, Edge } from './edge';
 export {
   OwnershipCreateResponse,
   OwnershipValidateResponse,

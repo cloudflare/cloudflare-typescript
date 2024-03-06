@@ -55,30 +55,74 @@ export class Includes extends APIResource {
   }
 }
 
-export interface TeamsDevicesSplitTunnelInclude {
-  /**
-   * The address in CIDR format to include in the tunnel. If address is present, host
-   * must not be present.
-   */
-  address: string;
+export type IncludeUpdateResponse = Array<IncludeUpdateResponse.IncludeUpdateResponseItem>;
 
-  /**
-   * A description of the split tunnel item, displayed in the client UI.
-   */
-  description: string;
+export namespace IncludeUpdateResponse {
+  export interface IncludeUpdateResponseItem {
+    /**
+     * The address in CIDR format to include in the tunnel. If address is present, host
+     * must not be present.
+     */
+    address: string;
 
-  /**
-   * The domain name to include in the tunnel. If host is present, address must not
-   * be present.
-   */
-  host?: string;
+    /**
+     * A description of the split tunnel item, displayed in the client UI.
+     */
+    description: string;
+
+    /**
+     * The domain name to include in the tunnel. If host is present, address must not
+     * be present.
+     */
+    host?: string;
+  }
 }
 
-export type IncludeUpdateResponse = Array<TeamsDevicesSplitTunnelInclude>;
+export type IncludeListResponse = Array<IncludeListResponse.IncludeListResponseItem>;
 
-export type IncludeListResponse = Array<TeamsDevicesSplitTunnelInclude>;
+export namespace IncludeListResponse {
+  export interface IncludeListResponseItem {
+    /**
+     * The address in CIDR format to include in the tunnel. If address is present, host
+     * must not be present.
+     */
+    address: string;
 
-export type IncludeGetResponse = Array<TeamsDevicesSplitTunnelInclude>;
+    /**
+     * A description of the split tunnel item, displayed in the client UI.
+     */
+    description: string;
+
+    /**
+     * The domain name to include in the tunnel. If host is present, address must not
+     * be present.
+     */
+    host?: string;
+  }
+}
+
+export type IncludeGetResponse = Array<IncludeGetResponse.IncludeGetResponseItem>;
+
+export namespace IncludeGetResponse {
+  export interface IncludeGetResponseItem {
+    /**
+     * The address in CIDR format to include in the tunnel. If address is present, host
+     * must not be present.
+     */
+    address: string;
+
+    /**
+     * A description of the split tunnel item, displayed in the client UI.
+     */
+    description: string;
+
+    /**
+     * The domain name to include in the tunnel. If host is present, address must not
+     * be present.
+     */
+    host?: string;
+  }
+}
 
 export interface IncludeUpdateParams {
   /**
@@ -89,7 +133,28 @@ export interface IncludeUpdateParams {
   /**
    * Body param:
    */
-  body: Array<TeamsDevicesSplitTunnelInclude>;
+  body: Array<IncludeUpdateParams.Body>;
+}
+
+export namespace IncludeUpdateParams {
+  export interface Body {
+    /**
+     * The address in CIDR format to include in the tunnel. If address is present, host
+     * must not be present.
+     */
+    address: string;
+
+    /**
+     * A description of the split tunnel item, displayed in the client UI.
+     */
+    description: string;
+
+    /**
+     * The domain name to include in the tunnel. If host is present, address must not
+     * be present.
+     */
+    host?: string;
+  }
 }
 
 export interface IncludeListParams {
@@ -101,7 +166,6 @@ export interface IncludeGetParams {
 }
 
 export namespace Includes {
-  export import TeamsDevicesSplitTunnelInclude = IncludesAPI.TeamsDevicesSplitTunnelInclude;
   export import IncludeUpdateResponse = IncludesAPI.IncludeUpdateResponse;
   export import IncludeListResponse = IncludesAPI.IncludeListResponse;
   export import IncludeGetResponse = IncludesAPI.IncludeGetResponse;

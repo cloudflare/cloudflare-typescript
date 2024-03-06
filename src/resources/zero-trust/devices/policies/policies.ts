@@ -21,11 +21,11 @@ export class Policies extends APIResource {
   create(
     params: PolicyCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TeamsDevicesDeviceSettingsPolicy | null> {
+  ): Core.APIPromise<PolicyCreateResponse | null> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/devices/policy`, { body, ...options }) as Core.APIPromise<{
-        result: TeamsDevicesDeviceSettingsPolicy | null;
+        result: PolicyCreateResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -66,13 +66,13 @@ export class Policies extends APIResource {
     policyId: string,
     params: PolicyEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TeamsDevicesDeviceSettingsPolicy | null> {
+  ): Core.APIPromise<PolicyEditResponse | null> {
     const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/devices/policy/${policyId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: TeamsDevicesDeviceSettingsPolicy | null }>
+      }) as Core.APIPromise<{ result: PolicyEditResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -83,143 +83,387 @@ export class Policies extends APIResource {
     policyId: string,
     params: PolicyGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TeamsDevicesDeviceSettingsPolicy | null> {
+  ): Core.APIPromise<PolicyGetResponse | null> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/devices/policy/${policyId}`, options) as Core.APIPromise<{
-        result: TeamsDevicesDeviceSettingsPolicy | null;
+        result: PolicyGetResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface TeamsDevicesDeviceSettingsPolicy {
-  /**
-   * Whether to allow the user to switch WARP between modes.
-   */
-  allow_mode_switch?: boolean;
+export type PolicyCreateResponse = Array<unknown>;
 
-  /**
-   * Whether to receive update notifications when a new version of the client is
-   * available.
-   */
-  allow_updates?: boolean;
+export type PolicyListResponse = Array<PolicyListResponse.PolicyListResponseItem>;
 
-  /**
-   * Whether to allow devices to leave the organization.
-   */
-  allowed_to_leave?: boolean;
-
-  /**
-   * The amount of time in minutes to reconnect after having been disabled.
-   */
-  auto_connect?: number;
-
-  /**
-   * Turn on the captive portal after the specified amount of time.
-   */
-  captive_portal?: number;
-
-  /**
-   * Whether the policy is the default policy for an account.
-   */
-  default?: boolean;
-
-  /**
-   * A description of the policy.
-   */
-  description?: string;
-
-  /**
-   * If the `dns_server` field of a fallback domain is not present, the client will
-   * fall back to a best guess of the default/system DNS resolvers unless this policy
-   * option is set to `true`.
-   */
-  disable_auto_fallback?: boolean;
-
-  /**
-   * Whether the policy will be applied to matching devices.
-   */
-  enabled?: boolean;
-
-  exclude?: Array<ExcludesAPI.TeamsDevicesSplitTunnel>;
-
-  /**
-   * Whether to add Microsoft IPs to Split Tunnel exclusions.
-   */
-  exclude_office_ips?: boolean;
-
-  fallback_domains?: Array<FallbackDomainsAPI.TeamsDevicesFallbackDomain>;
-
-  gateway_unique_id?: string;
-
-  include?: Array<IncludesAPI.TeamsDevicesSplitTunnelInclude>;
-
-  /**
-   * The amount of time in minutes a user is allowed access to their LAN. A value of
-   * 0 will allow LAN access until the next WARP reconnection, such as a reboot or a
-   * laptop waking from sleep. Note that this field is omitted from the response if
-   * null or unset.
-   */
-  lan_allow_minutes?: number;
-
-  /**
-   * The size of the subnet for the local access network. Note that this field is
-   * omitted from the response if null or unset.
-   */
-  lan_allow_subnet_size?: number;
-
-  /**
-   * The wirefilter expression to match devices.
-   */
-  match?: string;
-
-  /**
-   * The name of the device settings profile.
-   */
-  name?: string;
-
-  /**
-   * Device ID.
-   */
-  policy_id?: string;
-
-  /**
-   * The precedence of the policy. Lower values indicate higher precedence. Policies
-   * will be evaluated in ascending order of this field.
-   */
-  precedence?: number;
-
-  service_mode_v2?: TeamsDevicesDeviceSettingsPolicy.ServiceModeV2;
-
-  /**
-   * The URL to launch when the Send Feedback button is clicked.
-   */
-  support_url?: string;
-
-  /**
-   * Whether to allow the user to turn off the WARP switch and disconnect the client.
-   */
-  switch_locked?: boolean;
-}
-
-export namespace TeamsDevicesDeviceSettingsPolicy {
-  export interface ServiceModeV2 {
+export namespace PolicyListResponse {
+  export interface PolicyListResponseItem {
     /**
-     * The mode to run the WARP client under.
+     * Whether to allow the user to switch WARP between modes.
      */
-    mode?: string;
+    allow_mode_switch?: boolean;
 
     /**
-     * The port number when used with proxy mode.
+     * Whether to receive update notifications when a new version of the client is
+     * available.
      */
-    port?: number;
+    allow_updates?: boolean;
+
+    /**
+     * Whether to allow devices to leave the organization.
+     */
+    allowed_to_leave?: boolean;
+
+    /**
+     * The amount of time in minutes to reconnect after having been disabled.
+     */
+    auto_connect?: number;
+
+    /**
+     * Turn on the captive portal after the specified amount of time.
+     */
+    captive_portal?: number;
+
+    /**
+     * Whether the policy is the default policy for an account.
+     */
+    default?: boolean;
+
+    /**
+     * A description of the policy.
+     */
+    description?: string;
+
+    /**
+     * If the `dns_server` field of a fallback domain is not present, the client will
+     * fall back to a best guess of the default/system DNS resolvers unless this policy
+     * option is set to `true`.
+     */
+    disable_auto_fallback?: boolean;
+
+    /**
+     * Whether the policy will be applied to matching devices.
+     */
+    enabled?: boolean;
+
+    exclude?: Array<PolicyListResponseItem.Exclude>;
+
+    /**
+     * Whether to add Microsoft IPs to Split Tunnel exclusions.
+     */
+    exclude_office_ips?: boolean;
+
+    fallback_domains?: Array<PolicyListResponseItem.FallbackDomain>;
+
+    gateway_unique_id?: string;
+
+    include?: Array<PolicyListResponseItem.Include>;
+
+    /**
+     * The amount of time in minutes a user is allowed access to their LAN. A value of
+     * 0 will allow LAN access until the next WARP reconnection, such as a reboot or a
+     * laptop waking from sleep. Note that this field is omitted from the response if
+     * null or unset.
+     */
+    lan_allow_minutes?: number;
+
+    /**
+     * The size of the subnet for the local access network. Note that this field is
+     * omitted from the response if null or unset.
+     */
+    lan_allow_subnet_size?: number;
+
+    /**
+     * The wirefilter expression to match devices.
+     */
+    match?: string;
+
+    /**
+     * The name of the device settings profile.
+     */
+    name?: string;
+
+    /**
+     * Device ID.
+     */
+    policy_id?: string;
+
+    /**
+     * The precedence of the policy. Lower values indicate higher precedence. Policies
+     * will be evaluated in ascending order of this field.
+     */
+    precedence?: number;
+
+    service_mode_v2?: PolicyListResponseItem.ServiceModeV2;
+
+    /**
+     * The URL to launch when the Send Feedback button is clicked.
+     */
+    support_url?: string;
+
+    /**
+     * Whether to allow the user to turn off the WARP switch and disconnect the client.
+     */
+    switch_locked?: boolean;
+  }
+
+  export namespace PolicyListResponseItem {
+    export interface Exclude {
+      /**
+       * The address in CIDR format to exclude from the tunnel. If `address` is present,
+       * `host` must not be present.
+       */
+      address: string;
+
+      /**
+       * A description of the Split Tunnel item, displayed in the client UI.
+       */
+      description: string;
+
+      /**
+       * The domain name to exclude from the tunnel. If `host` is present, `address` must
+       * not be present.
+       */
+      host?: string;
+    }
+
+    export interface FallbackDomain {
+      /**
+       * The domain suffix to match when resolving locally.
+       */
+      suffix: string;
+
+      /**
+       * A description of the fallback domain, displayed in the client UI.
+       */
+      description?: string;
+
+      /**
+       * A list of IP addresses to handle domain resolution.
+       */
+      dns_server?: Array<unknown>;
+    }
+
+    export interface Include {
+      /**
+       * The address in CIDR format to include in the tunnel. If address is present, host
+       * must not be present.
+       */
+      address: string;
+
+      /**
+       * A description of the split tunnel item, displayed in the client UI.
+       */
+      description: string;
+
+      /**
+       * The domain name to include in the tunnel. If host is present, address must not
+       * be present.
+       */
+      host?: string;
+    }
+
+    export interface ServiceModeV2 {
+      /**
+       * The mode to run the WARP client under.
+       */
+      mode?: string;
+
+      /**
+       * The port number when used with proxy mode.
+       */
+      port?: number;
+    }
   }
 }
 
-export type PolicyListResponse = Array<TeamsDevicesDeviceSettingsPolicy>;
+export type PolicyDeleteResponse = Array<PolicyDeleteResponse.PolicyDeleteResponseItem>;
 
-export type PolicyDeleteResponse = Array<TeamsDevicesDeviceSettingsPolicy>;
+export namespace PolicyDeleteResponse {
+  export interface PolicyDeleteResponseItem {
+    /**
+     * Whether to allow the user to switch WARP between modes.
+     */
+    allow_mode_switch?: boolean;
+
+    /**
+     * Whether to receive update notifications when a new version of the client is
+     * available.
+     */
+    allow_updates?: boolean;
+
+    /**
+     * Whether to allow devices to leave the organization.
+     */
+    allowed_to_leave?: boolean;
+
+    /**
+     * The amount of time in minutes to reconnect after having been disabled.
+     */
+    auto_connect?: number;
+
+    /**
+     * Turn on the captive portal after the specified amount of time.
+     */
+    captive_portal?: number;
+
+    /**
+     * Whether the policy is the default policy for an account.
+     */
+    default?: boolean;
+
+    /**
+     * A description of the policy.
+     */
+    description?: string;
+
+    /**
+     * If the `dns_server` field of a fallback domain is not present, the client will
+     * fall back to a best guess of the default/system DNS resolvers unless this policy
+     * option is set to `true`.
+     */
+    disable_auto_fallback?: boolean;
+
+    /**
+     * Whether the policy will be applied to matching devices.
+     */
+    enabled?: boolean;
+
+    exclude?: Array<PolicyDeleteResponseItem.Exclude>;
+
+    /**
+     * Whether to add Microsoft IPs to Split Tunnel exclusions.
+     */
+    exclude_office_ips?: boolean;
+
+    fallback_domains?: Array<PolicyDeleteResponseItem.FallbackDomain>;
+
+    gateway_unique_id?: string;
+
+    include?: Array<PolicyDeleteResponseItem.Include>;
+
+    /**
+     * The amount of time in minutes a user is allowed access to their LAN. A value of
+     * 0 will allow LAN access until the next WARP reconnection, such as a reboot or a
+     * laptop waking from sleep. Note that this field is omitted from the response if
+     * null or unset.
+     */
+    lan_allow_minutes?: number;
+
+    /**
+     * The size of the subnet for the local access network. Note that this field is
+     * omitted from the response if null or unset.
+     */
+    lan_allow_subnet_size?: number;
+
+    /**
+     * The wirefilter expression to match devices.
+     */
+    match?: string;
+
+    /**
+     * The name of the device settings profile.
+     */
+    name?: string;
+
+    /**
+     * Device ID.
+     */
+    policy_id?: string;
+
+    /**
+     * The precedence of the policy. Lower values indicate higher precedence. Policies
+     * will be evaluated in ascending order of this field.
+     */
+    precedence?: number;
+
+    service_mode_v2?: PolicyDeleteResponseItem.ServiceModeV2;
+
+    /**
+     * The URL to launch when the Send Feedback button is clicked.
+     */
+    support_url?: string;
+
+    /**
+     * Whether to allow the user to turn off the WARP switch and disconnect the client.
+     */
+    switch_locked?: boolean;
+  }
+
+  export namespace PolicyDeleteResponseItem {
+    export interface Exclude {
+      /**
+       * The address in CIDR format to exclude from the tunnel. If `address` is present,
+       * `host` must not be present.
+       */
+      address: string;
+
+      /**
+       * A description of the Split Tunnel item, displayed in the client UI.
+       */
+      description: string;
+
+      /**
+       * The domain name to exclude from the tunnel. If `host` is present, `address` must
+       * not be present.
+       */
+      host?: string;
+    }
+
+    export interface FallbackDomain {
+      /**
+       * The domain suffix to match when resolving locally.
+       */
+      suffix: string;
+
+      /**
+       * A description of the fallback domain, displayed in the client UI.
+       */
+      description?: string;
+
+      /**
+       * A list of IP addresses to handle domain resolution.
+       */
+      dns_server?: Array<unknown>;
+    }
+
+    export interface Include {
+      /**
+       * The address in CIDR format to include in the tunnel. If address is present, host
+       * must not be present.
+       */
+      address: string;
+
+      /**
+       * A description of the split tunnel item, displayed in the client UI.
+       */
+      description: string;
+
+      /**
+       * The domain name to include in the tunnel. If host is present, address must not
+       * be present.
+       */
+      host?: string;
+    }
+
+    export interface ServiceModeV2 {
+      /**
+       * The mode to run the WARP client under.
+       */
+      mode?: string;
+
+      /**
+       * The port number when used with proxy mode.
+       */
+      port?: number;
+    }
+  }
+}
+
+export type PolicyEditResponse = Array<unknown>;
+
+export type PolicyGetResponse = Array<unknown>;
 
 export interface PolicyCreateParams {
   /**
@@ -452,9 +696,11 @@ export interface PolicyGetParams {
 }
 
 export namespace Policies {
-  export import TeamsDevicesDeviceSettingsPolicy = PoliciesAPI.TeamsDevicesDeviceSettingsPolicy;
+  export import PolicyCreateResponse = PoliciesAPI.PolicyCreateResponse;
   export import PolicyListResponse = PoliciesAPI.PolicyListResponse;
   export import PolicyDeleteResponse = PoliciesAPI.PolicyDeleteResponse;
+  export import PolicyEditResponse = PoliciesAPI.PolicyEditResponse;
+  export import PolicyGetResponse = PoliciesAPI.PolicyGetResponse;
   export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
   export import PolicyListParams = PoliciesAPI.PolicyListParams;
   export import PolicyDeleteParams = PoliciesAPI.PolicyDeleteParams;
@@ -464,7 +710,6 @@ export namespace Policies {
   export import DefaultPolicyGetResponse = DefaultPolicyAPI.DefaultPolicyGetResponse;
   export import DefaultPolicyGetParams = DefaultPolicyAPI.DefaultPolicyGetParams;
   export import Excludes = ExcludesAPI.Excludes;
-  export import TeamsDevicesSplitTunnel = ExcludesAPI.TeamsDevicesSplitTunnel;
   export import ExcludeUpdateResponse = ExcludesAPI.ExcludeUpdateResponse;
   export import ExcludeListResponse = ExcludesAPI.ExcludeListResponse;
   export import ExcludeGetResponse = ExcludesAPI.ExcludeGetResponse;
@@ -472,7 +717,6 @@ export namespace Policies {
   export import ExcludeListParams = ExcludesAPI.ExcludeListParams;
   export import ExcludeGetParams = ExcludesAPI.ExcludeGetParams;
   export import FallbackDomains = FallbackDomainsAPI.FallbackDomains;
-  export import TeamsDevicesFallbackDomain = FallbackDomainsAPI.TeamsDevicesFallbackDomain;
   export import FallbackDomainUpdateResponse = FallbackDomainsAPI.FallbackDomainUpdateResponse;
   export import FallbackDomainListResponse = FallbackDomainsAPI.FallbackDomainListResponse;
   export import FallbackDomainGetResponse = FallbackDomainsAPI.FallbackDomainGetResponse;
@@ -480,7 +724,6 @@ export namespace Policies {
   export import FallbackDomainListParams = FallbackDomainsAPI.FallbackDomainListParams;
   export import FallbackDomainGetParams = FallbackDomainsAPI.FallbackDomainGetParams;
   export import Includes = IncludesAPI.Includes;
-  export import TeamsDevicesSplitTunnelInclude = IncludesAPI.TeamsDevicesSplitTunnelInclude;
   export import IncludeUpdateResponse = IncludesAPI.IncludeUpdateResponse;
   export import IncludeListResponse = IncludesAPI.IncludeListResponse;
   export import IncludeGetResponse = IncludesAPI.IncludeGetResponse;

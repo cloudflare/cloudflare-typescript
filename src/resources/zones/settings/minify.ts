@@ -10,11 +10,11 @@ export class Minify extends APIResource {
    * [Using Cloudflare Auto Minify](https://support.cloudflare.com/hc/en-us/articles/200168196)
    * for more information.
    */
-  edit(params: MinifyEditParams, options?: Core.RequestOptions): Core.APIPromise<ZonesMinify> {
+  edit(params: MinifyEditParams, options?: Core.RequestOptions): Core.APIPromise<MinifyEditResponse> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/minify`, { body, ...options }) as Core.APIPromise<{
-        result: ZonesMinify;
+        result: MinifyEditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -24,11 +24,11 @@ export class Minify extends APIResource {
    * [Using Cloudflare Auto Minify](https://support.cloudflare.com/hc/en-us/articles/200168196)
    * for more information.
    */
-  get(params: MinifyGetParams, options?: Core.RequestOptions): Core.APIPromise<ZonesMinify> {
+  get(params: MinifyGetParams, options?: Core.RequestOptions): Core.APIPromise<MinifyGetResponse> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/minify`, options) as Core.APIPromise<{
-        result: ZonesMinify;
+        result: MinifyGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -39,7 +39,7 @@ export class Minify extends APIResource {
  * [Using Cloudflare Auto Minify](https://support.cloudflare.com/hc/en-us/articles/200168196)
  * for more information.
  */
-export interface ZonesMinify {
+export interface MinifyEditResponse {
   /**
    * Zone setting identifier.
    */
@@ -48,7 +48,7 @@ export interface ZonesMinify {
   /**
    * Current value of the zone setting.
    */
-  value: ZonesMinify.Value;
+  value: MinifyEditResponse.Value;
 
   /**
    * Whether or not this setting can be modified for this zone (based on your
@@ -62,7 +62,57 @@ export interface ZonesMinify {
   modified_on?: string | null;
 }
 
-export namespace ZonesMinify {
+export namespace MinifyEditResponse {
+  /**
+   * Current value of the zone setting.
+   */
+  export interface Value {
+    /**
+     * Automatically minify all CSS files for your website.
+     */
+    css?: 'on' | 'off';
+
+    /**
+     * Automatically minify all HTML files for your website.
+     */
+    html?: 'on' | 'off';
+
+    /**
+     * Automatically minify all JavaScript files for your website.
+     */
+    js?: 'on' | 'off';
+  }
+}
+
+/**
+ * Automatically minify certain assets for your website. Refer to
+ * [Using Cloudflare Auto Minify](https://support.cloudflare.com/hc/en-us/articles/200168196)
+ * for more information.
+ */
+export interface MinifyGetResponse {
+  /**
+   * Zone setting identifier.
+   */
+  id: 'minify';
+
+  /**
+   * Current value of the zone setting.
+   */
+  value: MinifyGetResponse.Value;
+
+  /**
+   * Whether or not this setting can be modified for this zone (based on your
+   * Cloudflare plan level).
+   */
+  editable?: true | false;
+
+  /**
+   * last time this setting was modified.
+   */
+  modified_on?: string | null;
+}
+
+export namespace MinifyGetResponse {
   /**
    * Current value of the zone setting.
    */
@@ -126,7 +176,8 @@ export interface MinifyGetParams {
 }
 
 export namespace Minify {
-  export import ZonesMinify = MinifyAPI.ZonesMinify;
+  export import MinifyEditResponse = MinifyAPI.MinifyEditResponse;
+  export import MinifyGetResponse = MinifyAPI.MinifyGetResponse;
   export import MinifyEditParams = MinifyAPI.MinifyEditParams;
   export import MinifyGetParams = MinifyAPI.MinifyGetParams;
 }

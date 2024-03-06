@@ -1,9 +1,11 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
-  AccessCertificates,
+  CertificateCreateResponse,
+  CertificateUpdateResponse,
   CertificateListResponse,
   CertificateDeleteResponse,
+  CertificateGetResponse,
   CertificateCreateParams,
   CertificateUpdateParams,
   CertificateListParams,
@@ -12,7 +14,6 @@ export {
   Certificates,
 } from './certificates';
 export {
-  AccessSettings,
   SettingUpdateResponse,
   SettingListResponse,
   SettingUpdateParams,

@@ -12,13 +12,13 @@ export class OrangeToOrange extends APIResource {
   edit(
     params: OrangeToOrangeEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZonesOrangeToOrange> {
+  ): Core.APIPromise<OrangeToOrangeEditResponse> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/orange_to_orange`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZonesOrangeToOrange }>
+      }) as Core.APIPromise<{ result: OrangeToOrangeEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -26,11 +26,14 @@ export class OrangeToOrange extends APIResource {
    * Orange to Orange (O2O) allows zones on Cloudflare to CNAME to other zones also
    * on Cloudflare.
    */
-  get(params: OrangeToOrangeGetParams, options?: Core.RequestOptions): Core.APIPromise<ZonesOrangeToOrange> {
+  get(
+    params: OrangeToOrangeGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<OrangeToOrangeGetResponse> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/orange_to_orange`, options) as Core.APIPromise<{
-        result: ZonesOrangeToOrange;
+        result: OrangeToOrangeGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -40,7 +43,34 @@ export class OrangeToOrange extends APIResource {
  * Orange to Orange (O2O) allows zones on Cloudflare to CNAME to other zones also
  * on Cloudflare.
  */
-export interface ZonesOrangeToOrange {
+export interface OrangeToOrangeEditResponse {
+  /**
+   * ID of the zone setting.
+   */
+  id: 'orange_to_orange';
+
+  /**
+   * Current value of the zone setting.
+   */
+  value: 'on' | 'off';
+
+  /**
+   * Whether or not this setting can be modified for this zone (based on your
+   * Cloudflare plan level).
+   */
+  editable?: true | false;
+
+  /**
+   * last time this setting was modified.
+   */
+  modified_on?: string | null;
+}
+
+/**
+ * Orange to Orange (O2O) allows zones on Cloudflare to CNAME to other zones also
+ * on Cloudflare.
+ */
+export interface OrangeToOrangeGetResponse {
   /**
    * ID of the zone setting.
    */
@@ -73,7 +103,25 @@ export interface OrangeToOrangeEditParams {
    * Body param: Orange to Orange (O2O) allows zones on Cloudflare to CNAME to other
    * zones also on Cloudflare.
    */
-  value: ZonesOrangeToOrange;
+  value: OrangeToOrangeEditParams.Value;
+}
+
+export namespace OrangeToOrangeEditParams {
+  /**
+   * Orange to Orange (O2O) allows zones on Cloudflare to CNAME to other zones also
+   * on Cloudflare.
+   */
+  export interface Value {
+    /**
+     * ID of the zone setting.
+     */
+    id: 'orange_to_orange';
+
+    /**
+     * Current value of the zone setting.
+     */
+    value: 'on' | 'off';
+  }
 }
 
 export interface OrangeToOrangeGetParams {
@@ -84,7 +132,8 @@ export interface OrangeToOrangeGetParams {
 }
 
 export namespace OrangeToOrange {
-  export import ZonesOrangeToOrange = OrangeToOrangeAPI.ZonesOrangeToOrange;
+  export import OrangeToOrangeEditResponse = OrangeToOrangeAPI.OrangeToOrangeEditResponse;
+  export import OrangeToOrangeGetResponse = OrangeToOrangeAPI.OrangeToOrangeGetResponse;
   export import OrangeToOrangeEditParams = OrangeToOrangeAPI.OrangeToOrangeEditParams;
   export import OrangeToOrangeGetParams = OrangeToOrangeAPI.OrangeToOrangeGetParams;
 }

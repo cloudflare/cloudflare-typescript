@@ -1,9 +1,10 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
-  DLPDataset,
-  DLPDatasetArray,
-  DLPDatasetCreation,
+  DatasetCreateResponse,
+  DatasetUpdateResponse,
+  DatasetListResponse,
+  DatasetGetResponse,
   DatasetCreateParams,
   DatasetUpdateParams,
   DatasetListParams,
@@ -11,4 +12,10 @@ export {
   DatasetGetParams,
   Datasets,
 } from './datasets';
-export { DLPDatasetNewVersion, UploadCreateParams, UploadEditParams, Upload } from './upload';
+export {
+  UploadCreateResponse,
+  UploadEditResponse,
+  UploadCreateParams,
+  UploadEditParams,
+  Upload,
+} from './upload';

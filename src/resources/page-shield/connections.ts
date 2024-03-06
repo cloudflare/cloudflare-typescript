@@ -28,13 +28,39 @@ export class Connections extends APIResource {
     connectionId: string,
     params: ConnectionGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PageShieldConnection> {
+  ): Core.APIPromise<ConnectionGetResponse> {
     const { zone_id } = params;
     return this._client.get(`/zones/${zone_id}/page_shield/connections/${connectionId}`, options);
   }
 }
 
-export interface PageShieldConnection {
+export type ConnectionListResponse = Array<ConnectionListResponse.ConnectionListResponseItem>;
+
+export namespace ConnectionListResponse {
+  export interface ConnectionListResponseItem {
+    id?: unknown;
+
+    added_at?: unknown;
+
+    domain_reported_malicious?: unknown;
+
+    first_page_url?: unknown;
+
+    first_seen_at?: unknown;
+
+    host?: unknown;
+
+    last_seen_at?: unknown;
+
+    page_urls?: unknown;
+
+    url?: unknown;
+
+    url_contains_cdn_cgi_path?: unknown;
+  }
+}
+
+export interface ConnectionGetResponse {
   id?: unknown;
 
   added_at?: unknown;
@@ -55,8 +81,6 @@ export interface PageShieldConnection {
 
   url_contains_cdn_cgi_path?: unknown;
 }
-
-export type ConnectionListResponse = Array<PageShieldConnection>;
 
 export interface ConnectionListParams {
   /**
@@ -156,8 +180,8 @@ export interface ConnectionGetParams {
 }
 
 export namespace Connections {
-  export import PageShieldConnection = ConnectionsAPI.PageShieldConnection;
   export import ConnectionListResponse = ConnectionsAPI.ConnectionListResponse;
+  export import ConnectionGetResponse = ConnectionsAPI.ConnectionGetResponse;
   export import ConnectionListParams = ConnectionsAPI.ConnectionListParams;
   export import ConnectionGetParams = ConnectionsAPI.ConnectionGetParams;
 }

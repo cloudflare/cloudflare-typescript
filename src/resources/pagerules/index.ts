@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
-  ZonesPageRule,
   PageruleCreateResponse,
   PageruleUpdateResponse,
   PageruleListResponse,
@@ -16,4 +15,4 @@ export {
   PageruleGetParams,
   Pagerules,
 } from './pagerules';
-export { ZonesSettings, SettingListParams, Settings } from './settings';
+export { SettingListResponse, SettingListParams, Settings } from './settings';

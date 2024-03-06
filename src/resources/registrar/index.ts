@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless.
 
-export { Registrar } from './registrar';
 export {
-  RegistrarAPIDomains,
   DomainUpdateResponse,
   DomainListResponse,
   DomainGetResponse,
@@ -11,3 +9,4 @@ export {
   DomainGetParams,
   Domains,
 } from './domains';
+export { Registrar } from './registrar';

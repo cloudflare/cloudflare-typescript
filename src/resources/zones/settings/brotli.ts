@@ -9,11 +9,11 @@ export class Brotli extends APIResource {
    * When the client requesting an asset supports the Brotli compression algorithm,
    * Cloudflare will serve a Brotli compressed version of the asset.
    */
-  edit(params: BrotliEditParams, options?: Core.RequestOptions): Core.APIPromise<ZonesBrotli> {
+  edit(params: BrotliEditParams, options?: Core.RequestOptions): Core.APIPromise<BrotliEditResponse> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/brotli`, { body, ...options }) as Core.APIPromise<{
-        result: ZonesBrotli;
+        result: BrotliEditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -22,11 +22,11 @@ export class Brotli extends APIResource {
    * When the client requesting an asset supports the Brotli compression algorithm,
    * Cloudflare will serve a Brotli compressed version of the asset.
    */
-  get(params: BrotliGetParams, options?: Core.RequestOptions): Core.APIPromise<ZonesBrotli> {
+  get(params: BrotliGetParams, options?: Core.RequestOptions): Core.APIPromise<BrotliGetResponse> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/brotli`, options) as Core.APIPromise<{
-        result: ZonesBrotli;
+        result: BrotliGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -36,7 +36,34 @@ export class Brotli extends APIResource {
  * When the client requesting an asset supports the Brotli compression algorithm,
  * Cloudflare will serve a Brotli compressed version of the asset.
  */
-export interface ZonesBrotli {
+export interface BrotliEditResponse {
+  /**
+   * ID of the zone setting.
+   */
+  id: 'brotli';
+
+  /**
+   * Current value of the zone setting.
+   */
+  value: 'off' | 'on';
+
+  /**
+   * Whether or not this setting can be modified for this zone (based on your
+   * Cloudflare plan level).
+   */
+  editable?: true | false;
+
+  /**
+   * last time this setting was modified.
+   */
+  modified_on?: string | null;
+}
+
+/**
+ * When the client requesting an asset supports the Brotli compression algorithm,
+ * Cloudflare will serve a Brotli compressed version of the asset.
+ */
+export interface BrotliGetResponse {
   /**
    * ID of the zone setting.
    */
@@ -79,7 +106,8 @@ export interface BrotliGetParams {
 }
 
 export namespace Brotli {
-  export import ZonesBrotli = BrotliAPI.ZonesBrotli;
+  export import BrotliEditResponse = BrotliAPI.BrotliEditResponse;
+  export import BrotliGetResponse = BrotliAPI.BrotliGetResponse;
   export import BrotliEditParams = BrotliAPI.BrotliEditParams;
   export import BrotliGetParams = BrotliAPI.BrotliGetParams;
 }

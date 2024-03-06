@@ -11,9 +11,11 @@ export class Images extends APIResource {
 
 export namespace Images {
   export import V1 = V1API.V1;
-  export import ImagesImage = V1API.ImagesImage;
+  export import V1CreateResponse = V1API.V1CreateResponse;
   export import V1ListResponse = V1API.V1ListResponse;
   export import V1DeleteResponse = V1API.V1DeleteResponse;
+  export import V1EditResponse = V1API.V1EditResponse;
+  export import V1GetResponse = V1API.V1GetResponse;
   export import V1ListResponsesV4PagePagination = V1API.V1ListResponsesV4PagePagination;
   export import V1CreateParams = V1API.V1CreateParams;
   export import V1ListParams = V1API.V1ListParams;

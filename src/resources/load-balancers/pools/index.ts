@@ -8,8 +8,12 @@ export {
   Health,
 } from './health';
 export {
+  PoolCreateResponse,
+  PoolUpdateResponse,
   PoolListResponse,
   PoolDeleteResponse,
+  PoolEditResponse,
+  PoolGetResponse,
   PoolCreateParams,
   PoolUpdateParams,
   PoolListParams,

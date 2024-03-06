@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless.
 
-export { ContentUpdateParams, Content } from './content';
+export { BindingGetResponse, BindingGetParams, Bindings } from './bindings';
+export { ContentUpdateResponse, ContentUpdateParams, Content } from './content';
 export { ContentV2GetParams, ContentV2 } from './content-v2';
 export {
   ScheduleUpdateResponse,
@@ -9,6 +10,15 @@ export {
   ScheduleGetParams,
   Schedules,
 } from './schedules';
+export {
+  ScriptUpdateResponse,
+  ScriptListResponse,
+  ScriptUpdateParams,
+  ScriptListParams,
+  ScriptDeleteParams,
+  ScriptGetParams,
+  Scripts,
+} from './scripts';
 export {
   SettingEditResponse,
   SettingGetResponse,
@@ -32,13 +42,3 @@ export {
   UsageModelGetParams,
   UsageModel,
 } from './usage-model';
-export { WorkersSchemasBinding, BindingGetResponse, BindingGetParams, Bindings } from './bindings';
-export {
-  WorkersScript,
-  ScriptListResponse,
-  ScriptUpdateParams,
-  ScriptListParams,
-  ScriptDeleteParams,
-  ScriptGetParams,
-  Scripts,
-} from './scripts';

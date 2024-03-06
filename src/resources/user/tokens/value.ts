@@ -12,10 +12,10 @@ export class Value extends APIResource {
     tokenId: unknown,
     body: ValueUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<IamValue> {
+  ): Core.APIPromise<ValueUpdateResponse> {
     return (
       this._client.put(`/user/tokens/${tokenId}/value`, { body, ...options }) as Core.APIPromise<{
-        result: IamValue;
+        result: ValueUpdateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -24,11 +24,11 @@ export class Value extends APIResource {
 /**
  * The token value.
  */
-export type IamValue = string;
+export type ValueUpdateResponse = string;
 
 export type ValueUpdateParams = unknown;
 
 export namespace Value {
-  export import IamValue = ValueAPI.IamValue;
+  export import ValueUpdateResponse = ValueAPI.ValueUpdateResponse;
   export import ValueUpdateParams = ValueAPI.ValueUpdateParams;
 }

@@ -103,13 +103,6 @@ export class Configs extends APIResource {
   }
 }
 
-export interface HyperdriveHyperdriveWithIdentifier {
-  /**
-   * Identifier
-   */
-  id?: string;
-}
-
 export interface ConfigCreateResponse {
   /**
    * Identifier
@@ -239,7 +232,6 @@ export interface ConfigGetParams {
 }
 
 export namespace Configs {
-  export import HyperdriveHyperdriveWithIdentifier = ConfigsAPI.HyperdriveHyperdriveWithIdentifier;
   export import ConfigCreateResponse = ConfigsAPI.ConfigCreateResponse;
   export import ConfigUpdateResponse = ConfigsAPI.ConfigUpdateResponse;
   export import ConfigListResponse = ConfigsAPI.ConfigListResponse;

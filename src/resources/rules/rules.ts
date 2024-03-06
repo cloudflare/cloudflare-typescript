@@ -9,9 +9,11 @@ export class Rules extends APIResource {
 
 export namespace Rules {
   export import Lists = ListsAPI.Lists;
-  export import ListsList = ListsAPI.ListsList;
+  export import ListCreateResponse = ListsAPI.ListCreateResponse;
+  export import ListUpdateResponse = ListsAPI.ListUpdateResponse;
   export import ListListResponse = ListsAPI.ListListResponse;
   export import ListDeleteResponse = ListsAPI.ListDeleteResponse;
+  export import ListGetResponse = ListsAPI.ListGetResponse;
   export import ListCreateParams = ListsAPI.ListCreateParams;
   export import ListUpdateParams = ListsAPI.ListUpdateParams;
   export import ListListParams = ListsAPI.ListListParams;

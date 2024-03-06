@@ -2939,8 +2939,12 @@ export namespace LoadBalancers {
   export import LoadBalancerEditParams = LoadBalancersAPI.LoadBalancerEditParams;
   export import LoadBalancerGetParams = LoadBalancersAPI.LoadBalancerGetParams;
   export import Monitors = MonitorsAPI.Monitors;
+  export import MonitorCreateResponse = MonitorsAPI.MonitorCreateResponse;
+  export import MonitorUpdateResponse = MonitorsAPI.MonitorUpdateResponse;
   export import MonitorListResponse = MonitorsAPI.MonitorListResponse;
   export import MonitorDeleteResponse = MonitorsAPI.MonitorDeleteResponse;
+  export import MonitorEditResponse = MonitorsAPI.MonitorEditResponse;
+  export import MonitorGetResponse = MonitorsAPI.MonitorGetResponse;
   export import MonitorCreateParams = MonitorsAPI.MonitorCreateParams;
   export import MonitorUpdateParams = MonitorsAPI.MonitorUpdateParams;
   export import MonitorListParams = MonitorsAPI.MonitorListParams;
@@ -2948,8 +2952,12 @@ export namespace LoadBalancers {
   export import MonitorEditParams = MonitorsAPI.MonitorEditParams;
   export import MonitorGetParams = MonitorsAPI.MonitorGetParams;
   export import Pools = PoolsAPI.Pools;
+  export import PoolCreateResponse = PoolsAPI.PoolCreateResponse;
+  export import PoolUpdateResponse = PoolsAPI.PoolUpdateResponse;
   export import PoolListResponse = PoolsAPI.PoolListResponse;
   export import PoolDeleteResponse = PoolsAPI.PoolDeleteResponse;
+  export import PoolEditResponse = PoolsAPI.PoolEditResponse;
+  export import PoolGetResponse = PoolsAPI.PoolGetResponse;
   export import PoolCreateParams = PoolsAPI.PoolCreateParams;
   export import PoolUpdateParams = PoolsAPI.PoolUpdateParams;
   export import PoolListParams = PoolsAPI.PoolListParams;
@@ -2957,6 +2965,7 @@ export namespace LoadBalancers {
   export import PoolEditParams = PoolsAPI.PoolEditParams;
   export import PoolGetParams = PoolsAPI.PoolGetParams;
   export import Previews = PreviewsAPI.Previews;
+  export import PreviewGetResponse = PreviewsAPI.PreviewGetResponse;
   export import PreviewGetParams = PreviewsAPI.PreviewGetParams;
   export import Regions = RegionsAPI.Regions;
   export import RegionListResponse = RegionsAPI.RegionListResponse;

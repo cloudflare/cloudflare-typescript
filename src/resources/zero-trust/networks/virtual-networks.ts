@@ -72,42 +72,44 @@ export class VirtualNetworks extends APIResource {
   }
 }
 
-export interface TunnelVirtualNetwork {
-  /**
-   * UUID of the virtual network.
-   */
-  id: string;
-
-  /**
-   * Optional remark describing the virtual network.
-   */
-  comment: string;
-
-  /**
-   * Timestamp of when the virtual network was created.
-   */
-  created_at: unknown;
-
-  /**
-   * If `true`, this virtual network is the default for the account.
-   */
-  is_default_network: boolean;
-
-  /**
-   * A user-friendly name for the virtual network.
-   */
-  name: string;
-
-  /**
-   * Timestamp of when the virtual network was deleted. If `null`, the virtual
-   * network has not been deleted.
-   */
-  deleted_at?: unknown;
-}
-
 export type VirtualNetworkCreateResponse = unknown | Array<unknown> | string;
 
-export type VirtualNetworkListResponse = Array<TunnelVirtualNetwork>;
+export type VirtualNetworkListResponse = Array<VirtualNetworkListResponse.VirtualNetworkListResponseItem>;
+
+export namespace VirtualNetworkListResponse {
+  export interface VirtualNetworkListResponseItem {
+    /**
+     * UUID of the virtual network.
+     */
+    id: string;
+
+    /**
+     * Optional remark describing the virtual network.
+     */
+    comment: string;
+
+    /**
+     * Timestamp of when the virtual network was created.
+     */
+    created_at: unknown;
+
+    /**
+     * If `true`, this virtual network is the default for the account.
+     */
+    is_default_network: boolean;
+
+    /**
+     * A user-friendly name for the virtual network.
+     */
+    name: string;
+
+    /**
+     * Timestamp of when the virtual network was deleted. If `null`, the virtual
+     * network has not been deleted.
+     */
+    deleted_at?: unknown;
+  }
+}
 
 export type VirtualNetworkDeleteResponse = unknown | Array<unknown> | string;
 
@@ -196,7 +198,6 @@ export interface VirtualNetworkEditParams {
 }
 
 export namespace VirtualNetworks {
-  export import TunnelVirtualNetwork = VirtualNetworksAPI.TunnelVirtualNetwork;
   export import VirtualNetworkCreateResponse = VirtualNetworksAPI.VirtualNetworkCreateResponse;
   export import VirtualNetworkListResponse = VirtualNetworksAPI.VirtualNetworkListResponse;
   export import VirtualNetworkDeleteResponse = VirtualNetworksAPI.VirtualNetworkDeleteResponse;

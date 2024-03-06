@@ -3,8 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
-import * as ReportsReportsAPI from 'cloudflare/resources/dns/firewall/analytics/reports/reports';
-import * as ReportsAPI from 'cloudflare/resources/dns/analytics/reports/reports';
+import * as ReportsAPI from 'cloudflare/resources/dns/firewall/analytics/reports/reports';
 import * as BytimesAPI from 'cloudflare/resources/dns/firewall/analytics/reports/bytimes';
 
 export class Reports extends APIResource {
@@ -22,18 +21,18 @@ export class Reports extends APIResource {
     identifier: string,
     query?: ReportGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ReportsAPI.DNSDNSAnalyticsAPIReport>;
+  ): Core.APIPromise<ReportGetResponse>;
   get(
     accountIdentifier: string,
     identifier: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ReportsAPI.DNSDNSAnalyticsAPIReport>;
+  ): Core.APIPromise<ReportGetResponse>;
   get(
     accountIdentifier: string,
     identifier: string,
     query: ReportGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ReportsAPI.DNSDNSAnalyticsAPIReport> {
+  ): Core.APIPromise<ReportGetResponse> {
     if (isRequestOptions(query)) {
       return this.get(accountIdentifier, identifier, {}, query);
     }
@@ -41,8 +40,99 @@ export class Reports extends APIResource {
       this._client.get(`/accounts/${accountIdentifier}/dns_firewall/${identifier}/dns_analytics/report`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: ReportsAPI.DNSDNSAnalyticsAPIReport }>
+      }) as Core.APIPromise<{ result: ReportGetResponse }>
     )._thenUnwrap((obj) => obj.result);
+  }
+}
+
+export interface ReportGetResponse {
+  /**
+   * Array with one row per combination of dimension values.
+   */
+  data: Array<ReportGetResponse.Data>;
+
+  /**
+   * Number of seconds between current time and last processed event, in another
+   * words how many seconds of data could be missing.
+   */
+  data_lag: number;
+
+  /**
+   * Maximum results for each metric (object mapping metric names to values).
+   * Currently always an empty object.
+   */
+  max: unknown;
+
+  /**
+   * Minimum results for each metric (object mapping metric names to values).
+   * Currently always an empty object.
+   */
+  min: unknown;
+
+  query: ReportGetResponse.Query;
+
+  /**
+   * Total number of rows in the result.
+   */
+  rows: number;
+
+  /**
+   * Total results for metrics across all data (object mapping metric names to
+   * values).
+   */
+  totals: unknown;
+}
+
+export namespace ReportGetResponse {
+  export interface Data {
+    /**
+     * Array of dimension values, representing the combination of dimension values
+     * corresponding to this row.
+     */
+    dimensions: Array<string>;
+
+    /**
+     * Array with one item per requested metric. Each item is a single value.
+     */
+    metrics: Array<number>;
+  }
+
+  export interface Query {
+    /**
+     * Array of dimension names.
+     */
+    dimensions: Array<string>;
+
+    /**
+     * Limit number of returned metrics.
+     */
+    limit: number;
+
+    /**
+     * Array of metric names.
+     */
+    metrics: Array<string>;
+
+    /**
+     * Start date and time of requesting data period in ISO 8601 format.
+     */
+    since: string;
+
+    /**
+     * End date and time of requesting data period in ISO 8601 format.
+     */
+    until: string;
+
+    /**
+     * Segmentation filter in 'attribute operator value' format.
+     */
+    filters?: string;
+
+    /**
+     * Array of dimensions to sort by, where each dimension may be prefixed by -
+     * (descending) or + (ascending).
+     */
+    sort?: Array<string>;
   }
 }
 
@@ -85,7 +175,9 @@ export interface ReportGetParams {
 }
 
 export namespace Reports {
-  export import ReportGetParams = ReportsReportsAPI.ReportGetParams;
+  export import ReportGetResponse = ReportsAPI.ReportGetResponse;
+  export import ReportGetParams = ReportsAPI.ReportGetParams;
   export import Bytimes = BytimesAPI.Bytimes;
+  export import BytimeGetResponse = BytimesAPI.BytimeGetResponse;
   export import BytimeGetParams = BytimesAPI.BytimeGetParams;
 }

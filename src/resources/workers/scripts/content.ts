@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ContentAPI from 'cloudflare/resources/workers/scripts/content';
-import * as ScriptsAPI from 'cloudflare/resources/workers/scripts/scripts';
 import { type Uploadable, multipartFormRequestOptions } from 'cloudflare/core';
 
 export class Content extends APIResource {
@@ -14,7 +13,7 @@ export class Content extends APIResource {
     scriptName: string,
     params: ContentUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ScriptsAPI.WorkersScript> {
+  ): Core.APIPromise<ContentUpdateResponse> {
     const {
       account_id,
       'CF-WORKER-BODY-PART': cfWorkerBodyPart,
@@ -33,8 +32,77 @@ export class Content extends APIResource {
             ...options?.headers,
           },
         }),
-      ) as Core.APIPromise<{ result: ScriptsAPI.WorkersScript }>
+      ) as Core.APIPromise<{ result: ContentUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
+  }
+}
+
+export interface ContentUpdateResponse {
+  /**
+   * The id of the script in the Workers system. Usually the script name.
+   */
+  id?: string;
+
+  /**
+   * When the script was created.
+   */
+  created_on?: string;
+
+  /**
+   * Hashed script content, can be used in a If-None-Match header when updating.
+   */
+  etag?: string;
+
+  /**
+   * Whether Logpush is turned on for the Worker.
+   */
+  logpush?: boolean;
+
+  /**
+   * When the script was last modified.
+   */
+  modified_on?: string;
+
+  /**
+   * Deprecated. Deployment metadata for internal usage.
+   */
+  pipeline_hash?: string;
+
+  /**
+   * Specifies the placement mode for the Worker (e.g. 'smart').
+   */
+  placement_mode?: string;
+
+  /**
+   * List of Workers that will consume logs from the attached Worker.
+   */
+  tail_consumers?: Array<ContentUpdateResponse.TailConsumer>;
+
+  /**
+   * Specifies the usage model for the Worker (e.g. 'bundled' or 'unbound').
+   */
+  usage_model?: string;
+}
+
+export namespace ContentUpdateResponse {
+  /**
+   * A reference to a script that will consume logs from the attached Worker.
+   */
+  export interface TailConsumer {
+    /**
+     * Name of Worker that is to be the consumer.
+     */
+    service: string;
+
+    /**
+     * Optional environment if the Worker utilizes one.
+     */
+    environment?: string;
+
+    /**
+     * Optional dispatch namespace the script belongs to.
+     */
+    namespace?: string;
   }
 }
 
@@ -94,5 +162,6 @@ export namespace ContentUpdateParams {
 }
 
 export namespace Content {
+  export import ContentUpdateResponse = ContentAPI.ContentUpdateResponse;
   export import ContentUpdateParams = ContentAPI.ContentUpdateParams;
 }

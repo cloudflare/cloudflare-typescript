@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
-  IntelIndicatorFeedItem,
-  IntelIndicatorFeedMetadata,
-  IntelUpdateFeed,
+  IndicatorFeedCreateResponse,
+  IndicatorFeedUpdateResponse,
   IndicatorFeedListResponse,
   IndicatorFeedDataResponse,
+  IndicatorFeedGetResponse,
   IndicatorFeedCreateParams,
   IndicatorFeedUpdateParams,
   IndicatorFeedListParams,
@@ -14,9 +14,9 @@ export {
   IndicatorFeeds,
 } from './indicator-feeds';
 export {
-  IntelPermissionListItem,
-  IntelPermissionsUpdate,
+  PermissionCreateResponse,
   PermissionListResponse,
+  PermissionDeleteResponse,
   PermissionCreateParams,
   PermissionListParams,
   PermissionDeleteParams,
