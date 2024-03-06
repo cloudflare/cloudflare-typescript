@@ -1667,29 +1667,29 @@ export namespace DNSPTRRecord {
 }
 
 export type DNSRecord =
-  | DNSRecord.DNSRecordsARecord
-  | DNSRecord.DNSRecordsAAAARecord
-  | DNSRecord.DNSRecordsCAARecord
-  | DNSRecord.DNSRecordsCertRecord
-  | DNSRecord.DNSRecordsCNAMERecord
-  | DNSRecord.DNSRecordsDNSKEYRecord
-  | DNSRecord.DNSRecordsDSRecord
-  | DNSRecord.DNSRecordsHTTPSRecord
-  | DNSRecord.DNSRecordsLOCRecord
-  | DNSRecord.DNSRecordsMXRecord
-  | DNSRecord.DNSRecordsNAPTRRecord
-  | DNSRecord.DNSRecordsNSRecord
-  | DNSRecord.DNSRecordsPTRRecord
-  | DNSRecord.DNSRecordsSmimeaRecord
-  | DNSRecord.DNSRecordsSRVRecord
-  | DNSRecord.DNSRecordsSSHFPRecord
-  | DNSRecord.DNSRecordsSVCBRecord
-  | DNSRecord.DNSRecordsTLSARecord
-  | DNSRecord.DNSRecordsTXTRecord
-  | DNSRecord.DNSRecordsURIRecord;
+  | DNSRecord.A
+  | DNSRecord.AAAA
+  | DNSRecord.CAA
+  | DNSRecord.Cert
+  | DNSRecord.CNAME
+  | DNSRecord.DNSKEY
+  | DNSRecord.DS
+  | DNSRecord.HTTPS
+  | DNSRecord.LOC
+  | DNSRecord.MX
+  | DNSRecord.NAPTR
+  | DNSRecord.NS
+  | DNSRecord.PTR
+  | DNSRecord.Smimea
+  | DNSRecord.SRV
+  | DNSRecord.SSHFP
+  | DNSRecord.SVCB
+  | DNSRecord.TLSA
+  | DNSRecord.TXT
+  | DNSRecord.URI;
 
 export namespace DNSRecord {
-  export interface DNSRecordsARecord {
+  export interface A {
     /**
      * A valid IPv4 address.
      */
@@ -1730,7 +1730,7 @@ export namespace DNSRecord {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsARecord.Meta;
+    meta?: A.Meta;
 
     /**
      * When the record was last modified.
@@ -1771,7 +1771,7 @@ export namespace DNSRecord {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsARecord {
+  export namespace A {
     /**
      * Extra Cloudflare-specific information about the record.
      */
@@ -1789,7 +1789,7 @@ export namespace DNSRecord {
     }
   }
 
-  export interface DNSRecordsAAAARecord {
+  export interface AAAA {
     /**
      * A valid IPv6 address.
      */
@@ -1830,7 +1830,7 @@ export namespace DNSRecord {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsAAAARecord.Meta;
+    meta?: AAAA.Meta;
 
     /**
      * When the record was last modified.
@@ -1871,7 +1871,7 @@ export namespace DNSRecord {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsAAAARecord {
+  export namespace AAAA {
     /**
      * Extra Cloudflare-specific information about the record.
      */
@@ -1889,11 +1889,11 @@ export namespace DNSRecord {
     }
   }
 
-  export interface DNSRecordsCAARecord {
+  export interface CAA {
     /**
      * Components of a CAA record.
      */
-    data: DNSRecordsCAARecord.Data;
+    data: CAA.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -1935,7 +1935,7 @@ export namespace DNSRecord {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsCAARecord.Meta;
+    meta?: CAA.Meta;
 
     /**
      * When the record was last modified.
@@ -1970,7 +1970,7 @@ export namespace DNSRecord {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsCAARecord {
+  export namespace CAA {
     /**
      * Components of a CAA record.
      */
@@ -2008,11 +2008,11 @@ export namespace DNSRecord {
     }
   }
 
-  export interface DNSRecordsCertRecord {
+  export interface Cert {
     /**
      * Components of a CERT record.
      */
-    data: DNSRecordsCertRecord.Data;
+    data: Cert.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -2054,7 +2054,7 @@ export namespace DNSRecord {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsCertRecord.Meta;
+    meta?: Cert.Meta;
 
     /**
      * When the record was last modified.
@@ -2089,7 +2089,7 @@ export namespace DNSRecord {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsCertRecord {
+  export namespace Cert {
     /**
      * Components of a CERT record.
      */
@@ -2132,7 +2132,7 @@ export namespace DNSRecord {
     }
   }
 
-  export interface DNSRecordsCNAMERecord {
+  export interface CNAME {
     /**
      * A valid hostname. Must not match the record's name.
      */
@@ -2173,7 +2173,7 @@ export namespace DNSRecord {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsCNAMERecord.Meta;
+    meta?: CNAME.Meta;
 
     /**
      * When the record was last modified.
@@ -2214,7 +2214,7 @@ export namespace DNSRecord {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsCNAMERecord {
+  export namespace CNAME {
     /**
      * Extra Cloudflare-specific information about the record.
      */
@@ -2232,11 +2232,11 @@ export namespace DNSRecord {
     }
   }
 
-  export interface DNSRecordsDNSKEYRecord {
+  export interface DNSKEY {
     /**
      * Components of a DNSKEY record.
      */
-    data: DNSRecordsDNSKEYRecord.Data;
+    data: DNSKEY.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -2278,7 +2278,7 @@ export namespace DNSRecord {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsDNSKEYRecord.Meta;
+    meta?: DNSKEY.Meta;
 
     /**
      * When the record was last modified.
@@ -2313,7 +2313,7 @@ export namespace DNSRecord {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsDNSKEYRecord {
+  export namespace DNSKEY {
     /**
      * Components of a DNSKEY record.
      */
@@ -2356,11 +2356,11 @@ export namespace DNSRecord {
     }
   }
 
-  export interface DNSRecordsDSRecord {
+  export interface DS {
     /**
      * Components of a DS record.
      */
-    data: DNSRecordsDSRecord.Data;
+    data: DS.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -2402,7 +2402,7 @@ export namespace DNSRecord {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsDSRecord.Meta;
+    meta?: DS.Meta;
 
     /**
      * When the record was last modified.
@@ -2437,7 +2437,7 @@ export namespace DNSRecord {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsDSRecord {
+  export namespace DS {
     /**
      * Components of a DS record.
      */
@@ -2480,11 +2480,11 @@ export namespace DNSRecord {
     }
   }
 
-  export interface DNSRecordsHTTPSRecord {
+  export interface HTTPS {
     /**
      * Components of a HTTPS record.
      */
-    data: DNSRecordsHTTPSRecord.Data;
+    data: HTTPS.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -2526,7 +2526,7 @@ export namespace DNSRecord {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsHTTPSRecord.Meta;
+    meta?: HTTPS.Meta;
 
     /**
      * When the record was last modified.
@@ -2561,7 +2561,7 @@ export namespace DNSRecord {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsHTTPSRecord {
+  export namespace HTTPS {
     /**
      * Components of a HTTPS record.
      */
@@ -2599,11 +2599,11 @@ export namespace DNSRecord {
     }
   }
 
-  export interface DNSRecordsLOCRecord {
+  export interface LOC {
     /**
      * Components of a LOC record.
      */
-    data: DNSRecordsLOCRecord.Data;
+    data: LOC.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -2645,7 +2645,7 @@ export namespace DNSRecord {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsLOCRecord.Meta;
+    meta?: LOC.Meta;
 
     /**
      * When the record was last modified.
@@ -2680,7 +2680,7 @@ export namespace DNSRecord {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsLOCRecord {
+  export namespace LOC {
     /**
      * Components of a LOC record.
      */
@@ -2763,7 +2763,7 @@ export namespace DNSRecord {
     }
   }
 
-  export interface DNSRecordsMXRecord {
+  export interface MX {
     /**
      * A valid mail server hostname.
      */
@@ -2810,7 +2810,7 @@ export namespace DNSRecord {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsMXRecord.Meta;
+    meta?: MX.Meta;
 
     /**
      * When the record was last modified.
@@ -2845,7 +2845,7 @@ export namespace DNSRecord {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsMXRecord {
+  export namespace MX {
     /**
      * Extra Cloudflare-specific information about the record.
      */
@@ -2863,11 +2863,11 @@ export namespace DNSRecord {
     }
   }
 
-  export interface DNSRecordsNAPTRRecord {
+  export interface NAPTR {
     /**
      * Components of a NAPTR record.
      */
-    data: DNSRecordsNAPTRRecord.Data;
+    data: NAPTR.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -2909,7 +2909,7 @@ export namespace DNSRecord {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsNAPTRRecord.Meta;
+    meta?: NAPTR.Meta;
 
     /**
      * When the record was last modified.
@@ -2944,7 +2944,7 @@ export namespace DNSRecord {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsNAPTRRecord {
+  export namespace NAPTR {
     /**
      * Components of a NAPTR record.
      */
@@ -2997,7 +2997,7 @@ export namespace DNSRecord {
     }
   }
 
-  export interface DNSRecordsNSRecord {
+  export interface NS {
     /**
      * A valid name server host name.
      */
@@ -3038,7 +3038,7 @@ export namespace DNSRecord {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsNSRecord.Meta;
+    meta?: NS.Meta;
 
     /**
      * When the record was last modified.
@@ -3073,7 +3073,7 @@ export namespace DNSRecord {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsNSRecord {
+  export namespace NS {
     /**
      * Extra Cloudflare-specific information about the record.
      */
@@ -3091,7 +3091,7 @@ export namespace DNSRecord {
     }
   }
 
-  export interface DNSRecordsPTRRecord {
+  export interface PTR {
     /**
      * Domain name pointing to the address.
      */
@@ -3132,7 +3132,7 @@ export namespace DNSRecord {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsPTRRecord.Meta;
+    meta?: PTR.Meta;
 
     /**
      * When the record was last modified.
@@ -3167,7 +3167,7 @@ export namespace DNSRecord {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsPTRRecord {
+  export namespace PTR {
     /**
      * Extra Cloudflare-specific information about the record.
      */
@@ -3185,11 +3185,11 @@ export namespace DNSRecord {
     }
   }
 
-  export interface DNSRecordsSmimeaRecord {
+  export interface Smimea {
     /**
      * Components of a SMIMEA record.
      */
-    data: DNSRecordsSmimeaRecord.Data;
+    data: Smimea.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -3231,7 +3231,7 @@ export namespace DNSRecord {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsSmimeaRecord.Meta;
+    meta?: Smimea.Meta;
 
     /**
      * When the record was last modified.
@@ -3266,7 +3266,7 @@ export namespace DNSRecord {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsSmimeaRecord {
+  export namespace Smimea {
     /**
      * Components of a SMIMEA record.
      */
@@ -3309,11 +3309,11 @@ export namespace DNSRecord {
     }
   }
 
-  export interface DNSRecordsSRVRecord {
+  export interface SRV {
     /**
      * Components of a SRV record.
      */
-    data: DNSRecordsSRVRecord.Data;
+    data: SRV.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode. For SRV records, the first
@@ -3358,7 +3358,7 @@ export namespace DNSRecord {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsSRVRecord.Meta;
+    meta?: SRV.Meta;
 
     /**
      * When the record was last modified.
@@ -3393,7 +3393,7 @@ export namespace DNSRecord {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsSRVRecord {
+  export namespace SRV {
     /**
      * Components of a SRV record.
      */
@@ -3458,11 +3458,11 @@ export namespace DNSRecord {
     }
   }
 
-  export interface DNSRecordsSSHFPRecord {
+  export interface SSHFP {
     /**
      * Components of a SSHFP record.
      */
-    data: DNSRecordsSSHFPRecord.Data;
+    data: SSHFP.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -3504,7 +3504,7 @@ export namespace DNSRecord {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsSSHFPRecord.Meta;
+    meta?: SSHFP.Meta;
 
     /**
      * When the record was last modified.
@@ -3539,7 +3539,7 @@ export namespace DNSRecord {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsSSHFPRecord {
+  export namespace SSHFP {
     /**
      * Components of a SSHFP record.
      */
@@ -3577,11 +3577,11 @@ export namespace DNSRecord {
     }
   }
 
-  export interface DNSRecordsSVCBRecord {
+  export interface SVCB {
     /**
      * Components of a SVCB record.
      */
-    data: DNSRecordsSVCBRecord.Data;
+    data: SVCB.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -3623,7 +3623,7 @@ export namespace DNSRecord {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsSVCBRecord.Meta;
+    meta?: SVCB.Meta;
 
     /**
      * When the record was last modified.
@@ -3658,7 +3658,7 @@ export namespace DNSRecord {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsSVCBRecord {
+  export namespace SVCB {
     /**
      * Components of a SVCB record.
      */
@@ -3696,11 +3696,11 @@ export namespace DNSRecord {
     }
   }
 
-  export interface DNSRecordsTLSARecord {
+  export interface TLSA {
     /**
      * Components of a TLSA record.
      */
-    data: DNSRecordsTLSARecord.Data;
+    data: TLSA.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -3742,7 +3742,7 @@ export namespace DNSRecord {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsTLSARecord.Meta;
+    meta?: TLSA.Meta;
 
     /**
      * When the record was last modified.
@@ -3777,7 +3777,7 @@ export namespace DNSRecord {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsTLSARecord {
+  export namespace TLSA {
     /**
      * Components of a TLSA record.
      */
@@ -3820,7 +3820,7 @@ export namespace DNSRecord {
     }
   }
 
-  export interface DNSRecordsTXTRecord {
+  export interface TXT {
     /**
      * Text content for the record.
      */
@@ -3861,7 +3861,7 @@ export namespace DNSRecord {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsTXTRecord.Meta;
+    meta?: TXT.Meta;
 
     /**
      * When the record was last modified.
@@ -3896,7 +3896,7 @@ export namespace DNSRecord {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsTXTRecord {
+  export namespace TXT {
     /**
      * Extra Cloudflare-specific information about the record.
      */
@@ -3914,11 +3914,11 @@ export namespace DNSRecord {
     }
   }
 
-  export interface DNSRecordsURIRecord {
+  export interface URI {
     /**
      * Components of a URI record.
      */
-    data: DNSRecordsURIRecord.Data;
+    data: URI.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -3966,7 +3966,7 @@ export namespace DNSRecord {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsURIRecord.Meta;
+    meta?: URI.Meta;
 
     /**
      * When the record was last modified.
@@ -4001,7 +4001,7 @@ export namespace DNSRecord {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsURIRecord {
+  export namespace URI {
     /**
      * Components of a URI record.
      */
@@ -4885,29 +4885,29 @@ export namespace DNSURIRecord {
 }
 
 export type RecordCreateResponse =
-  | RecordCreateResponse.DNSRecordsARecord
-  | RecordCreateResponse.DNSRecordsAAAARecord
-  | RecordCreateResponse.DNSRecordsCAARecord
-  | RecordCreateResponse.DNSRecordsCertRecord
-  | RecordCreateResponse.DNSRecordsCNAMERecord
-  | RecordCreateResponse.DNSRecordsDNSKEYRecord
-  | RecordCreateResponse.DNSRecordsDSRecord
-  | RecordCreateResponse.DNSRecordsHTTPSRecord
-  | RecordCreateResponse.DNSRecordsLOCRecord
-  | RecordCreateResponse.DNSRecordsMXRecord
-  | RecordCreateResponse.DNSRecordsNAPTRRecord
-  | RecordCreateResponse.DNSRecordsNSRecord
-  | RecordCreateResponse.DNSRecordsPTRRecord
-  | RecordCreateResponse.DNSRecordsSmimeaRecord
-  | RecordCreateResponse.DNSRecordsSRVRecord
-  | RecordCreateResponse.DNSRecordsSSHFPRecord
-  | RecordCreateResponse.DNSRecordsSVCBRecord
-  | RecordCreateResponse.DNSRecordsTLSARecord
-  | RecordCreateResponse.DNSRecordsTXTRecord
-  | RecordCreateResponse.DNSRecordsURIRecord;
+  | RecordCreateResponse.A
+  | RecordCreateResponse.AAAA
+  | RecordCreateResponse.CAA
+  | RecordCreateResponse.Cert
+  | RecordCreateResponse.CNAME
+  | RecordCreateResponse.DNSKEY
+  | RecordCreateResponse.DS
+  | RecordCreateResponse.HTTPS
+  | RecordCreateResponse.LOC
+  | RecordCreateResponse.MX
+  | RecordCreateResponse.NAPTR
+  | RecordCreateResponse.NS
+  | RecordCreateResponse.PTR
+  | RecordCreateResponse.Smimea
+  | RecordCreateResponse.SRV
+  | RecordCreateResponse.SSHFP
+  | RecordCreateResponse.SVCB
+  | RecordCreateResponse.TLSA
+  | RecordCreateResponse.TXT
+  | RecordCreateResponse.URI;
 
 export namespace RecordCreateResponse {
-  export interface DNSRecordsARecord {
+  export interface A {
     /**
      * A valid IPv4 address.
      */
@@ -4948,7 +4948,7 @@ export namespace RecordCreateResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsARecord.Meta;
+    meta?: A.Meta;
 
     /**
      * When the record was last modified.
@@ -4989,7 +4989,7 @@ export namespace RecordCreateResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsARecord {
+  export namespace A {
     /**
      * Extra Cloudflare-specific information about the record.
      */
@@ -5007,7 +5007,7 @@ export namespace RecordCreateResponse {
     }
   }
 
-  export interface DNSRecordsAAAARecord {
+  export interface AAAA {
     /**
      * A valid IPv6 address.
      */
@@ -5048,7 +5048,7 @@ export namespace RecordCreateResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsAAAARecord.Meta;
+    meta?: AAAA.Meta;
 
     /**
      * When the record was last modified.
@@ -5089,7 +5089,7 @@ export namespace RecordCreateResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsAAAARecord {
+  export namespace AAAA {
     /**
      * Extra Cloudflare-specific information about the record.
      */
@@ -5107,11 +5107,11 @@ export namespace RecordCreateResponse {
     }
   }
 
-  export interface DNSRecordsCAARecord {
+  export interface CAA {
     /**
      * Components of a CAA record.
      */
-    data: DNSRecordsCAARecord.Data;
+    data: CAA.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -5153,7 +5153,7 @@ export namespace RecordCreateResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsCAARecord.Meta;
+    meta?: CAA.Meta;
 
     /**
      * When the record was last modified.
@@ -5188,7 +5188,7 @@ export namespace RecordCreateResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsCAARecord {
+  export namespace CAA {
     /**
      * Components of a CAA record.
      */
@@ -5226,11 +5226,11 @@ export namespace RecordCreateResponse {
     }
   }
 
-  export interface DNSRecordsCertRecord {
+  export interface Cert {
     /**
      * Components of a CERT record.
      */
-    data: DNSRecordsCertRecord.Data;
+    data: Cert.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -5272,7 +5272,7 @@ export namespace RecordCreateResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsCertRecord.Meta;
+    meta?: Cert.Meta;
 
     /**
      * When the record was last modified.
@@ -5307,7 +5307,7 @@ export namespace RecordCreateResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsCertRecord {
+  export namespace Cert {
     /**
      * Components of a CERT record.
      */
@@ -5350,7 +5350,7 @@ export namespace RecordCreateResponse {
     }
   }
 
-  export interface DNSRecordsCNAMERecord {
+  export interface CNAME {
     /**
      * A valid hostname. Must not match the record's name.
      */
@@ -5391,7 +5391,7 @@ export namespace RecordCreateResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsCNAMERecord.Meta;
+    meta?: CNAME.Meta;
 
     /**
      * When the record was last modified.
@@ -5432,7 +5432,7 @@ export namespace RecordCreateResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsCNAMERecord {
+  export namespace CNAME {
     /**
      * Extra Cloudflare-specific information about the record.
      */
@@ -5450,11 +5450,11 @@ export namespace RecordCreateResponse {
     }
   }
 
-  export interface DNSRecordsDNSKEYRecord {
+  export interface DNSKEY {
     /**
      * Components of a DNSKEY record.
      */
-    data: DNSRecordsDNSKEYRecord.Data;
+    data: DNSKEY.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -5496,7 +5496,7 @@ export namespace RecordCreateResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsDNSKEYRecord.Meta;
+    meta?: DNSKEY.Meta;
 
     /**
      * When the record was last modified.
@@ -5531,7 +5531,7 @@ export namespace RecordCreateResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsDNSKEYRecord {
+  export namespace DNSKEY {
     /**
      * Components of a DNSKEY record.
      */
@@ -5574,11 +5574,11 @@ export namespace RecordCreateResponse {
     }
   }
 
-  export interface DNSRecordsDSRecord {
+  export interface DS {
     /**
      * Components of a DS record.
      */
-    data: DNSRecordsDSRecord.Data;
+    data: DS.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -5620,7 +5620,7 @@ export namespace RecordCreateResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsDSRecord.Meta;
+    meta?: DS.Meta;
 
     /**
      * When the record was last modified.
@@ -5655,7 +5655,7 @@ export namespace RecordCreateResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsDSRecord {
+  export namespace DS {
     /**
      * Components of a DS record.
      */
@@ -5698,11 +5698,11 @@ export namespace RecordCreateResponse {
     }
   }
 
-  export interface DNSRecordsHTTPSRecord {
+  export interface HTTPS {
     /**
      * Components of a HTTPS record.
      */
-    data: DNSRecordsHTTPSRecord.Data;
+    data: HTTPS.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -5744,7 +5744,7 @@ export namespace RecordCreateResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsHTTPSRecord.Meta;
+    meta?: HTTPS.Meta;
 
     /**
      * When the record was last modified.
@@ -5779,7 +5779,7 @@ export namespace RecordCreateResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsHTTPSRecord {
+  export namespace HTTPS {
     /**
      * Components of a HTTPS record.
      */
@@ -5817,11 +5817,11 @@ export namespace RecordCreateResponse {
     }
   }
 
-  export interface DNSRecordsLOCRecord {
+  export interface LOC {
     /**
      * Components of a LOC record.
      */
-    data: DNSRecordsLOCRecord.Data;
+    data: LOC.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -5863,7 +5863,7 @@ export namespace RecordCreateResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsLOCRecord.Meta;
+    meta?: LOC.Meta;
 
     /**
      * When the record was last modified.
@@ -5898,7 +5898,7 @@ export namespace RecordCreateResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsLOCRecord {
+  export namespace LOC {
     /**
      * Components of a LOC record.
      */
@@ -5981,7 +5981,7 @@ export namespace RecordCreateResponse {
     }
   }
 
-  export interface DNSRecordsMXRecord {
+  export interface MX {
     /**
      * A valid mail server hostname.
      */
@@ -6028,7 +6028,7 @@ export namespace RecordCreateResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsMXRecord.Meta;
+    meta?: MX.Meta;
 
     /**
      * When the record was last modified.
@@ -6063,7 +6063,7 @@ export namespace RecordCreateResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsMXRecord {
+  export namespace MX {
     /**
      * Extra Cloudflare-specific information about the record.
      */
@@ -6081,11 +6081,11 @@ export namespace RecordCreateResponse {
     }
   }
 
-  export interface DNSRecordsNAPTRRecord {
+  export interface NAPTR {
     /**
      * Components of a NAPTR record.
      */
-    data: DNSRecordsNAPTRRecord.Data;
+    data: NAPTR.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -6127,7 +6127,7 @@ export namespace RecordCreateResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsNAPTRRecord.Meta;
+    meta?: NAPTR.Meta;
 
     /**
      * When the record was last modified.
@@ -6162,7 +6162,7 @@ export namespace RecordCreateResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsNAPTRRecord {
+  export namespace NAPTR {
     /**
      * Components of a NAPTR record.
      */
@@ -6215,7 +6215,7 @@ export namespace RecordCreateResponse {
     }
   }
 
-  export interface DNSRecordsNSRecord {
+  export interface NS {
     /**
      * A valid name server host name.
      */
@@ -6256,7 +6256,7 @@ export namespace RecordCreateResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsNSRecord.Meta;
+    meta?: NS.Meta;
 
     /**
      * When the record was last modified.
@@ -6291,7 +6291,7 @@ export namespace RecordCreateResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsNSRecord {
+  export namespace NS {
     /**
      * Extra Cloudflare-specific information about the record.
      */
@@ -6309,7 +6309,7 @@ export namespace RecordCreateResponse {
     }
   }
 
-  export interface DNSRecordsPTRRecord {
+  export interface PTR {
     /**
      * Domain name pointing to the address.
      */
@@ -6350,7 +6350,7 @@ export namespace RecordCreateResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsPTRRecord.Meta;
+    meta?: PTR.Meta;
 
     /**
      * When the record was last modified.
@@ -6385,7 +6385,7 @@ export namespace RecordCreateResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsPTRRecord {
+  export namespace PTR {
     /**
      * Extra Cloudflare-specific information about the record.
      */
@@ -6403,11 +6403,11 @@ export namespace RecordCreateResponse {
     }
   }
 
-  export interface DNSRecordsSmimeaRecord {
+  export interface Smimea {
     /**
      * Components of a SMIMEA record.
      */
-    data: DNSRecordsSmimeaRecord.Data;
+    data: Smimea.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -6449,7 +6449,7 @@ export namespace RecordCreateResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsSmimeaRecord.Meta;
+    meta?: Smimea.Meta;
 
     /**
      * When the record was last modified.
@@ -6484,7 +6484,7 @@ export namespace RecordCreateResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsSmimeaRecord {
+  export namespace Smimea {
     /**
      * Components of a SMIMEA record.
      */
@@ -6527,11 +6527,11 @@ export namespace RecordCreateResponse {
     }
   }
 
-  export interface DNSRecordsSRVRecord {
+  export interface SRV {
     /**
      * Components of a SRV record.
      */
-    data: DNSRecordsSRVRecord.Data;
+    data: SRV.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode. For SRV records, the first
@@ -6576,7 +6576,7 @@ export namespace RecordCreateResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsSRVRecord.Meta;
+    meta?: SRV.Meta;
 
     /**
      * When the record was last modified.
@@ -6611,7 +6611,7 @@ export namespace RecordCreateResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsSRVRecord {
+  export namespace SRV {
     /**
      * Components of a SRV record.
      */
@@ -6676,11 +6676,11 @@ export namespace RecordCreateResponse {
     }
   }
 
-  export interface DNSRecordsSSHFPRecord {
+  export interface SSHFP {
     /**
      * Components of a SSHFP record.
      */
-    data: DNSRecordsSSHFPRecord.Data;
+    data: SSHFP.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -6722,7 +6722,7 @@ export namespace RecordCreateResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsSSHFPRecord.Meta;
+    meta?: SSHFP.Meta;
 
     /**
      * When the record was last modified.
@@ -6757,7 +6757,7 @@ export namespace RecordCreateResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsSSHFPRecord {
+  export namespace SSHFP {
     /**
      * Components of a SSHFP record.
      */
@@ -6795,11 +6795,11 @@ export namespace RecordCreateResponse {
     }
   }
 
-  export interface DNSRecordsSVCBRecord {
+  export interface SVCB {
     /**
      * Components of a SVCB record.
      */
-    data: DNSRecordsSVCBRecord.Data;
+    data: SVCB.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -6841,7 +6841,7 @@ export namespace RecordCreateResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsSVCBRecord.Meta;
+    meta?: SVCB.Meta;
 
     /**
      * When the record was last modified.
@@ -6876,7 +6876,7 @@ export namespace RecordCreateResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsSVCBRecord {
+  export namespace SVCB {
     /**
      * Components of a SVCB record.
      */
@@ -6914,11 +6914,11 @@ export namespace RecordCreateResponse {
     }
   }
 
-  export interface DNSRecordsTLSARecord {
+  export interface TLSA {
     /**
      * Components of a TLSA record.
      */
-    data: DNSRecordsTLSARecord.Data;
+    data: TLSA.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -6960,7 +6960,7 @@ export namespace RecordCreateResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsTLSARecord.Meta;
+    meta?: TLSA.Meta;
 
     /**
      * When the record was last modified.
@@ -6995,7 +6995,7 @@ export namespace RecordCreateResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsTLSARecord {
+  export namespace TLSA {
     /**
      * Components of a TLSA record.
      */
@@ -7038,7 +7038,7 @@ export namespace RecordCreateResponse {
     }
   }
 
-  export interface DNSRecordsTXTRecord {
+  export interface TXT {
     /**
      * Text content for the record.
      */
@@ -7079,7 +7079,7 @@ export namespace RecordCreateResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsTXTRecord.Meta;
+    meta?: TXT.Meta;
 
     /**
      * When the record was last modified.
@@ -7114,7 +7114,7 @@ export namespace RecordCreateResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsTXTRecord {
+  export namespace TXT {
     /**
      * Extra Cloudflare-specific information about the record.
      */
@@ -7132,11 +7132,11 @@ export namespace RecordCreateResponse {
     }
   }
 
-  export interface DNSRecordsURIRecord {
+  export interface URI {
     /**
      * Components of a URI record.
      */
-    data: DNSRecordsURIRecord.Data;
+    data: URI.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -7184,7 +7184,7 @@ export namespace RecordCreateResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsURIRecord.Meta;
+    meta?: URI.Meta;
 
     /**
      * When the record was last modified.
@@ -7219,7 +7219,7 @@ export namespace RecordCreateResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsURIRecord {
+  export namespace URI {
     /**
      * Components of a URI record.
      */
@@ -7254,29 +7254,29 @@ export namespace RecordCreateResponse {
 }
 
 export type RecordUpdateResponse =
-  | RecordUpdateResponse.DNSRecordsARecord
-  | RecordUpdateResponse.DNSRecordsAAAARecord
-  | RecordUpdateResponse.DNSRecordsCAARecord
-  | RecordUpdateResponse.DNSRecordsCertRecord
-  | RecordUpdateResponse.DNSRecordsCNAMERecord
-  | RecordUpdateResponse.DNSRecordsDNSKEYRecord
-  | RecordUpdateResponse.DNSRecordsDSRecord
-  | RecordUpdateResponse.DNSRecordsHTTPSRecord
-  | RecordUpdateResponse.DNSRecordsLOCRecord
-  | RecordUpdateResponse.DNSRecordsMXRecord
-  | RecordUpdateResponse.DNSRecordsNAPTRRecord
-  | RecordUpdateResponse.DNSRecordsNSRecord
-  | RecordUpdateResponse.DNSRecordsPTRRecord
-  | RecordUpdateResponse.DNSRecordsSmimeaRecord
-  | RecordUpdateResponse.DNSRecordsSRVRecord
-  | RecordUpdateResponse.DNSRecordsSSHFPRecord
-  | RecordUpdateResponse.DNSRecordsSVCBRecord
-  | RecordUpdateResponse.DNSRecordsTLSARecord
-  | RecordUpdateResponse.DNSRecordsTXTRecord
-  | RecordUpdateResponse.DNSRecordsURIRecord;
+  | RecordUpdateResponse.A
+  | RecordUpdateResponse.AAAA
+  | RecordUpdateResponse.CAA
+  | RecordUpdateResponse.Cert
+  | RecordUpdateResponse.CNAME
+  | RecordUpdateResponse.DNSKEY
+  | RecordUpdateResponse.DS
+  | RecordUpdateResponse.HTTPS
+  | RecordUpdateResponse.LOC
+  | RecordUpdateResponse.MX
+  | RecordUpdateResponse.NAPTR
+  | RecordUpdateResponse.NS
+  | RecordUpdateResponse.PTR
+  | RecordUpdateResponse.Smimea
+  | RecordUpdateResponse.SRV
+  | RecordUpdateResponse.SSHFP
+  | RecordUpdateResponse.SVCB
+  | RecordUpdateResponse.TLSA
+  | RecordUpdateResponse.TXT
+  | RecordUpdateResponse.URI;
 
 export namespace RecordUpdateResponse {
-  export interface DNSRecordsARecord {
+  export interface A {
     /**
      * A valid IPv4 address.
      */
@@ -7317,7 +7317,7 @@ export namespace RecordUpdateResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsARecord.Meta;
+    meta?: A.Meta;
 
     /**
      * When the record was last modified.
@@ -7358,7 +7358,7 @@ export namespace RecordUpdateResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsARecord {
+  export namespace A {
     /**
      * Extra Cloudflare-specific information about the record.
      */
@@ -7376,7 +7376,7 @@ export namespace RecordUpdateResponse {
     }
   }
 
-  export interface DNSRecordsAAAARecord {
+  export interface AAAA {
     /**
      * A valid IPv6 address.
      */
@@ -7417,7 +7417,7 @@ export namespace RecordUpdateResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsAAAARecord.Meta;
+    meta?: AAAA.Meta;
 
     /**
      * When the record was last modified.
@@ -7458,7 +7458,7 @@ export namespace RecordUpdateResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsAAAARecord {
+  export namespace AAAA {
     /**
      * Extra Cloudflare-specific information about the record.
      */
@@ -7476,11 +7476,11 @@ export namespace RecordUpdateResponse {
     }
   }
 
-  export interface DNSRecordsCAARecord {
+  export interface CAA {
     /**
      * Components of a CAA record.
      */
-    data: DNSRecordsCAARecord.Data;
+    data: CAA.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -7522,7 +7522,7 @@ export namespace RecordUpdateResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsCAARecord.Meta;
+    meta?: CAA.Meta;
 
     /**
      * When the record was last modified.
@@ -7557,7 +7557,7 @@ export namespace RecordUpdateResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsCAARecord {
+  export namespace CAA {
     /**
      * Components of a CAA record.
      */
@@ -7595,11 +7595,11 @@ export namespace RecordUpdateResponse {
     }
   }
 
-  export interface DNSRecordsCertRecord {
+  export interface Cert {
     /**
      * Components of a CERT record.
      */
-    data: DNSRecordsCertRecord.Data;
+    data: Cert.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -7641,7 +7641,7 @@ export namespace RecordUpdateResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsCertRecord.Meta;
+    meta?: Cert.Meta;
 
     /**
      * When the record was last modified.
@@ -7676,7 +7676,7 @@ export namespace RecordUpdateResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsCertRecord {
+  export namespace Cert {
     /**
      * Components of a CERT record.
      */
@@ -7719,7 +7719,7 @@ export namespace RecordUpdateResponse {
     }
   }
 
-  export interface DNSRecordsCNAMERecord {
+  export interface CNAME {
     /**
      * A valid hostname. Must not match the record's name.
      */
@@ -7760,7 +7760,7 @@ export namespace RecordUpdateResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsCNAMERecord.Meta;
+    meta?: CNAME.Meta;
 
     /**
      * When the record was last modified.
@@ -7801,7 +7801,7 @@ export namespace RecordUpdateResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsCNAMERecord {
+  export namespace CNAME {
     /**
      * Extra Cloudflare-specific information about the record.
      */
@@ -7819,11 +7819,11 @@ export namespace RecordUpdateResponse {
     }
   }
 
-  export interface DNSRecordsDNSKEYRecord {
+  export interface DNSKEY {
     /**
      * Components of a DNSKEY record.
      */
-    data: DNSRecordsDNSKEYRecord.Data;
+    data: DNSKEY.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -7865,7 +7865,7 @@ export namespace RecordUpdateResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsDNSKEYRecord.Meta;
+    meta?: DNSKEY.Meta;
 
     /**
      * When the record was last modified.
@@ -7900,7 +7900,7 @@ export namespace RecordUpdateResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsDNSKEYRecord {
+  export namespace DNSKEY {
     /**
      * Components of a DNSKEY record.
      */
@@ -7943,11 +7943,11 @@ export namespace RecordUpdateResponse {
     }
   }
 
-  export interface DNSRecordsDSRecord {
+  export interface DS {
     /**
      * Components of a DS record.
      */
-    data: DNSRecordsDSRecord.Data;
+    data: DS.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -7989,7 +7989,7 @@ export namespace RecordUpdateResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsDSRecord.Meta;
+    meta?: DS.Meta;
 
     /**
      * When the record was last modified.
@@ -8024,7 +8024,7 @@ export namespace RecordUpdateResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsDSRecord {
+  export namespace DS {
     /**
      * Components of a DS record.
      */
@@ -8067,11 +8067,11 @@ export namespace RecordUpdateResponse {
     }
   }
 
-  export interface DNSRecordsHTTPSRecord {
+  export interface HTTPS {
     /**
      * Components of a HTTPS record.
      */
-    data: DNSRecordsHTTPSRecord.Data;
+    data: HTTPS.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -8113,7 +8113,7 @@ export namespace RecordUpdateResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsHTTPSRecord.Meta;
+    meta?: HTTPS.Meta;
 
     /**
      * When the record was last modified.
@@ -8148,7 +8148,7 @@ export namespace RecordUpdateResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsHTTPSRecord {
+  export namespace HTTPS {
     /**
      * Components of a HTTPS record.
      */
@@ -8186,11 +8186,11 @@ export namespace RecordUpdateResponse {
     }
   }
 
-  export interface DNSRecordsLOCRecord {
+  export interface LOC {
     /**
      * Components of a LOC record.
      */
-    data: DNSRecordsLOCRecord.Data;
+    data: LOC.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -8232,7 +8232,7 @@ export namespace RecordUpdateResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsLOCRecord.Meta;
+    meta?: LOC.Meta;
 
     /**
      * When the record was last modified.
@@ -8267,7 +8267,7 @@ export namespace RecordUpdateResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsLOCRecord {
+  export namespace LOC {
     /**
      * Components of a LOC record.
      */
@@ -8350,7 +8350,7 @@ export namespace RecordUpdateResponse {
     }
   }
 
-  export interface DNSRecordsMXRecord {
+  export interface MX {
     /**
      * A valid mail server hostname.
      */
@@ -8397,7 +8397,7 @@ export namespace RecordUpdateResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsMXRecord.Meta;
+    meta?: MX.Meta;
 
     /**
      * When the record was last modified.
@@ -8432,7 +8432,7 @@ export namespace RecordUpdateResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsMXRecord {
+  export namespace MX {
     /**
      * Extra Cloudflare-specific information about the record.
      */
@@ -8450,11 +8450,11 @@ export namespace RecordUpdateResponse {
     }
   }
 
-  export interface DNSRecordsNAPTRRecord {
+  export interface NAPTR {
     /**
      * Components of a NAPTR record.
      */
-    data: DNSRecordsNAPTRRecord.Data;
+    data: NAPTR.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -8496,7 +8496,7 @@ export namespace RecordUpdateResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsNAPTRRecord.Meta;
+    meta?: NAPTR.Meta;
 
     /**
      * When the record was last modified.
@@ -8531,7 +8531,7 @@ export namespace RecordUpdateResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsNAPTRRecord {
+  export namespace NAPTR {
     /**
      * Components of a NAPTR record.
      */
@@ -8584,7 +8584,7 @@ export namespace RecordUpdateResponse {
     }
   }
 
-  export interface DNSRecordsNSRecord {
+  export interface NS {
     /**
      * A valid name server host name.
      */
@@ -8625,7 +8625,7 @@ export namespace RecordUpdateResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsNSRecord.Meta;
+    meta?: NS.Meta;
 
     /**
      * When the record was last modified.
@@ -8660,7 +8660,7 @@ export namespace RecordUpdateResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsNSRecord {
+  export namespace NS {
     /**
      * Extra Cloudflare-specific information about the record.
      */
@@ -8678,7 +8678,7 @@ export namespace RecordUpdateResponse {
     }
   }
 
-  export interface DNSRecordsPTRRecord {
+  export interface PTR {
     /**
      * Domain name pointing to the address.
      */
@@ -8719,7 +8719,7 @@ export namespace RecordUpdateResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsPTRRecord.Meta;
+    meta?: PTR.Meta;
 
     /**
      * When the record was last modified.
@@ -8754,7 +8754,7 @@ export namespace RecordUpdateResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsPTRRecord {
+  export namespace PTR {
     /**
      * Extra Cloudflare-specific information about the record.
      */
@@ -8772,11 +8772,11 @@ export namespace RecordUpdateResponse {
     }
   }
 
-  export interface DNSRecordsSmimeaRecord {
+  export interface Smimea {
     /**
      * Components of a SMIMEA record.
      */
-    data: DNSRecordsSmimeaRecord.Data;
+    data: Smimea.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -8818,7 +8818,7 @@ export namespace RecordUpdateResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsSmimeaRecord.Meta;
+    meta?: Smimea.Meta;
 
     /**
      * When the record was last modified.
@@ -8853,7 +8853,7 @@ export namespace RecordUpdateResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsSmimeaRecord {
+  export namespace Smimea {
     /**
      * Components of a SMIMEA record.
      */
@@ -8896,11 +8896,11 @@ export namespace RecordUpdateResponse {
     }
   }
 
-  export interface DNSRecordsSRVRecord {
+  export interface SRV {
     /**
      * Components of a SRV record.
      */
-    data: DNSRecordsSRVRecord.Data;
+    data: SRV.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode. For SRV records, the first
@@ -8945,7 +8945,7 @@ export namespace RecordUpdateResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsSRVRecord.Meta;
+    meta?: SRV.Meta;
 
     /**
      * When the record was last modified.
@@ -8980,7 +8980,7 @@ export namespace RecordUpdateResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsSRVRecord {
+  export namespace SRV {
     /**
      * Components of a SRV record.
      */
@@ -9045,11 +9045,11 @@ export namespace RecordUpdateResponse {
     }
   }
 
-  export interface DNSRecordsSSHFPRecord {
+  export interface SSHFP {
     /**
      * Components of a SSHFP record.
      */
-    data: DNSRecordsSSHFPRecord.Data;
+    data: SSHFP.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -9091,7 +9091,7 @@ export namespace RecordUpdateResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsSSHFPRecord.Meta;
+    meta?: SSHFP.Meta;
 
     /**
      * When the record was last modified.
@@ -9126,7 +9126,7 @@ export namespace RecordUpdateResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsSSHFPRecord {
+  export namespace SSHFP {
     /**
      * Components of a SSHFP record.
      */
@@ -9164,11 +9164,11 @@ export namespace RecordUpdateResponse {
     }
   }
 
-  export interface DNSRecordsSVCBRecord {
+  export interface SVCB {
     /**
      * Components of a SVCB record.
      */
-    data: DNSRecordsSVCBRecord.Data;
+    data: SVCB.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -9210,7 +9210,7 @@ export namespace RecordUpdateResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsSVCBRecord.Meta;
+    meta?: SVCB.Meta;
 
     /**
      * When the record was last modified.
@@ -9245,7 +9245,7 @@ export namespace RecordUpdateResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsSVCBRecord {
+  export namespace SVCB {
     /**
      * Components of a SVCB record.
      */
@@ -9283,11 +9283,11 @@ export namespace RecordUpdateResponse {
     }
   }
 
-  export interface DNSRecordsTLSARecord {
+  export interface TLSA {
     /**
      * Components of a TLSA record.
      */
-    data: DNSRecordsTLSARecord.Data;
+    data: TLSA.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -9329,7 +9329,7 @@ export namespace RecordUpdateResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsTLSARecord.Meta;
+    meta?: TLSA.Meta;
 
     /**
      * When the record was last modified.
@@ -9364,7 +9364,7 @@ export namespace RecordUpdateResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsTLSARecord {
+  export namespace TLSA {
     /**
      * Components of a TLSA record.
      */
@@ -9407,7 +9407,7 @@ export namespace RecordUpdateResponse {
     }
   }
 
-  export interface DNSRecordsTXTRecord {
+  export interface TXT {
     /**
      * Text content for the record.
      */
@@ -9448,7 +9448,7 @@ export namespace RecordUpdateResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsTXTRecord.Meta;
+    meta?: TXT.Meta;
 
     /**
      * When the record was last modified.
@@ -9483,7 +9483,7 @@ export namespace RecordUpdateResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsTXTRecord {
+  export namespace TXT {
     /**
      * Extra Cloudflare-specific information about the record.
      */
@@ -9501,11 +9501,11 @@ export namespace RecordUpdateResponse {
     }
   }
 
-  export interface DNSRecordsURIRecord {
+  export interface URI {
     /**
      * Components of a URI record.
      */
-    data: DNSRecordsURIRecord.Data;
+    data: URI.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -9553,7 +9553,7 @@ export namespace RecordUpdateResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsURIRecord.Meta;
+    meta?: URI.Meta;
 
     /**
      * When the record was last modified.
@@ -9588,7 +9588,7 @@ export namespace RecordUpdateResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsURIRecord {
+  export namespace URI {
     /**
      * Components of a URI record.
      */
@@ -9623,29 +9623,29 @@ export namespace RecordUpdateResponse {
 }
 
 export type RecordListResponse =
-  | RecordListResponse.DNSRecordsARecord
-  | RecordListResponse.DNSRecordsAAAARecord
-  | RecordListResponse.DNSRecordsCAARecord
-  | RecordListResponse.DNSRecordsCertRecord
-  | RecordListResponse.DNSRecordsCNAMERecord
-  | RecordListResponse.DNSRecordsDNSKEYRecord
-  | RecordListResponse.DNSRecordsDSRecord
-  | RecordListResponse.DNSRecordsHTTPSRecord
-  | RecordListResponse.DNSRecordsLOCRecord
-  | RecordListResponse.DNSRecordsMXRecord
-  | RecordListResponse.DNSRecordsNAPTRRecord
-  | RecordListResponse.DNSRecordsNSRecord
-  | RecordListResponse.DNSRecordsPTRRecord
-  | RecordListResponse.DNSRecordsSmimeaRecord
-  | RecordListResponse.DNSRecordsSRVRecord
-  | RecordListResponse.DNSRecordsSSHFPRecord
-  | RecordListResponse.DNSRecordsSVCBRecord
-  | RecordListResponse.DNSRecordsTLSARecord
-  | RecordListResponse.DNSRecordsTXTRecord
-  | RecordListResponse.DNSRecordsURIRecord;
+  | RecordListResponse.A
+  | RecordListResponse.AAAA
+  | RecordListResponse.CAA
+  | RecordListResponse.Cert
+  | RecordListResponse.CNAME
+  | RecordListResponse.DNSKEY
+  | RecordListResponse.DS
+  | RecordListResponse.HTTPS
+  | RecordListResponse.LOC
+  | RecordListResponse.MX
+  | RecordListResponse.NAPTR
+  | RecordListResponse.NS
+  | RecordListResponse.PTR
+  | RecordListResponse.Smimea
+  | RecordListResponse.SRV
+  | RecordListResponse.SSHFP
+  | RecordListResponse.SVCB
+  | RecordListResponse.TLSA
+  | RecordListResponse.TXT
+  | RecordListResponse.URI;
 
 export namespace RecordListResponse {
-  export interface DNSRecordsARecord {
+  export interface A {
     /**
      * A valid IPv4 address.
      */
@@ -9686,7 +9686,7 @@ export namespace RecordListResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsARecord.Meta;
+    meta?: A.Meta;
 
     /**
      * When the record was last modified.
@@ -9727,7 +9727,7 @@ export namespace RecordListResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsARecord {
+  export namespace A {
     /**
      * Extra Cloudflare-specific information about the record.
      */
@@ -9745,7 +9745,7 @@ export namespace RecordListResponse {
     }
   }
 
-  export interface DNSRecordsAAAARecord {
+  export interface AAAA {
     /**
      * A valid IPv6 address.
      */
@@ -9786,7 +9786,7 @@ export namespace RecordListResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsAAAARecord.Meta;
+    meta?: AAAA.Meta;
 
     /**
      * When the record was last modified.
@@ -9827,7 +9827,7 @@ export namespace RecordListResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsAAAARecord {
+  export namespace AAAA {
     /**
      * Extra Cloudflare-specific information about the record.
      */
@@ -9845,11 +9845,11 @@ export namespace RecordListResponse {
     }
   }
 
-  export interface DNSRecordsCAARecord {
+  export interface CAA {
     /**
      * Components of a CAA record.
      */
-    data: DNSRecordsCAARecord.Data;
+    data: CAA.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -9891,7 +9891,7 @@ export namespace RecordListResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsCAARecord.Meta;
+    meta?: CAA.Meta;
 
     /**
      * When the record was last modified.
@@ -9926,7 +9926,7 @@ export namespace RecordListResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsCAARecord {
+  export namespace CAA {
     /**
      * Components of a CAA record.
      */
@@ -9964,11 +9964,11 @@ export namespace RecordListResponse {
     }
   }
 
-  export interface DNSRecordsCertRecord {
+  export interface Cert {
     /**
      * Components of a CERT record.
      */
-    data: DNSRecordsCertRecord.Data;
+    data: Cert.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -10010,7 +10010,7 @@ export namespace RecordListResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsCertRecord.Meta;
+    meta?: Cert.Meta;
 
     /**
      * When the record was last modified.
@@ -10045,7 +10045,7 @@ export namespace RecordListResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsCertRecord {
+  export namespace Cert {
     /**
      * Components of a CERT record.
      */
@@ -10088,7 +10088,7 @@ export namespace RecordListResponse {
     }
   }
 
-  export interface DNSRecordsCNAMERecord {
+  export interface CNAME {
     /**
      * A valid hostname. Must not match the record's name.
      */
@@ -10129,7 +10129,7 @@ export namespace RecordListResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsCNAMERecord.Meta;
+    meta?: CNAME.Meta;
 
     /**
      * When the record was last modified.
@@ -10170,7 +10170,7 @@ export namespace RecordListResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsCNAMERecord {
+  export namespace CNAME {
     /**
      * Extra Cloudflare-specific information about the record.
      */
@@ -10188,11 +10188,11 @@ export namespace RecordListResponse {
     }
   }
 
-  export interface DNSRecordsDNSKEYRecord {
+  export interface DNSKEY {
     /**
      * Components of a DNSKEY record.
      */
-    data: DNSRecordsDNSKEYRecord.Data;
+    data: DNSKEY.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -10234,7 +10234,7 @@ export namespace RecordListResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsDNSKEYRecord.Meta;
+    meta?: DNSKEY.Meta;
 
     /**
      * When the record was last modified.
@@ -10269,7 +10269,7 @@ export namespace RecordListResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsDNSKEYRecord {
+  export namespace DNSKEY {
     /**
      * Components of a DNSKEY record.
      */
@@ -10312,11 +10312,11 @@ export namespace RecordListResponse {
     }
   }
 
-  export interface DNSRecordsDSRecord {
+  export interface DS {
     /**
      * Components of a DS record.
      */
-    data: DNSRecordsDSRecord.Data;
+    data: DS.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -10358,7 +10358,7 @@ export namespace RecordListResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsDSRecord.Meta;
+    meta?: DS.Meta;
 
     /**
      * When the record was last modified.
@@ -10393,7 +10393,7 @@ export namespace RecordListResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsDSRecord {
+  export namespace DS {
     /**
      * Components of a DS record.
      */
@@ -10436,11 +10436,11 @@ export namespace RecordListResponse {
     }
   }
 
-  export interface DNSRecordsHTTPSRecord {
+  export interface HTTPS {
     /**
      * Components of a HTTPS record.
      */
-    data: DNSRecordsHTTPSRecord.Data;
+    data: HTTPS.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -10482,7 +10482,7 @@ export namespace RecordListResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsHTTPSRecord.Meta;
+    meta?: HTTPS.Meta;
 
     /**
      * When the record was last modified.
@@ -10517,7 +10517,7 @@ export namespace RecordListResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsHTTPSRecord {
+  export namespace HTTPS {
     /**
      * Components of a HTTPS record.
      */
@@ -10555,11 +10555,11 @@ export namespace RecordListResponse {
     }
   }
 
-  export interface DNSRecordsLOCRecord {
+  export interface LOC {
     /**
      * Components of a LOC record.
      */
-    data: DNSRecordsLOCRecord.Data;
+    data: LOC.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -10601,7 +10601,7 @@ export namespace RecordListResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsLOCRecord.Meta;
+    meta?: LOC.Meta;
 
     /**
      * When the record was last modified.
@@ -10636,7 +10636,7 @@ export namespace RecordListResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsLOCRecord {
+  export namespace LOC {
     /**
      * Components of a LOC record.
      */
@@ -10719,7 +10719,7 @@ export namespace RecordListResponse {
     }
   }
 
-  export interface DNSRecordsMXRecord {
+  export interface MX {
     /**
      * A valid mail server hostname.
      */
@@ -10766,7 +10766,7 @@ export namespace RecordListResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsMXRecord.Meta;
+    meta?: MX.Meta;
 
     /**
      * When the record was last modified.
@@ -10801,7 +10801,7 @@ export namespace RecordListResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsMXRecord {
+  export namespace MX {
     /**
      * Extra Cloudflare-specific information about the record.
      */
@@ -10819,11 +10819,11 @@ export namespace RecordListResponse {
     }
   }
 
-  export interface DNSRecordsNAPTRRecord {
+  export interface NAPTR {
     /**
      * Components of a NAPTR record.
      */
-    data: DNSRecordsNAPTRRecord.Data;
+    data: NAPTR.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -10865,7 +10865,7 @@ export namespace RecordListResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsNAPTRRecord.Meta;
+    meta?: NAPTR.Meta;
 
     /**
      * When the record was last modified.
@@ -10900,7 +10900,7 @@ export namespace RecordListResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsNAPTRRecord {
+  export namespace NAPTR {
     /**
      * Components of a NAPTR record.
      */
@@ -10953,7 +10953,7 @@ export namespace RecordListResponse {
     }
   }
 
-  export interface DNSRecordsNSRecord {
+  export interface NS {
     /**
      * A valid name server host name.
      */
@@ -10994,7 +10994,7 @@ export namespace RecordListResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsNSRecord.Meta;
+    meta?: NS.Meta;
 
     /**
      * When the record was last modified.
@@ -11029,7 +11029,7 @@ export namespace RecordListResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsNSRecord {
+  export namespace NS {
     /**
      * Extra Cloudflare-specific information about the record.
      */
@@ -11047,7 +11047,7 @@ export namespace RecordListResponse {
     }
   }
 
-  export interface DNSRecordsPTRRecord {
+  export interface PTR {
     /**
      * Domain name pointing to the address.
      */
@@ -11088,7 +11088,7 @@ export namespace RecordListResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsPTRRecord.Meta;
+    meta?: PTR.Meta;
 
     /**
      * When the record was last modified.
@@ -11123,7 +11123,7 @@ export namespace RecordListResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsPTRRecord {
+  export namespace PTR {
     /**
      * Extra Cloudflare-specific information about the record.
      */
@@ -11141,11 +11141,11 @@ export namespace RecordListResponse {
     }
   }
 
-  export interface DNSRecordsSmimeaRecord {
+  export interface Smimea {
     /**
      * Components of a SMIMEA record.
      */
-    data: DNSRecordsSmimeaRecord.Data;
+    data: Smimea.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -11187,7 +11187,7 @@ export namespace RecordListResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsSmimeaRecord.Meta;
+    meta?: Smimea.Meta;
 
     /**
      * When the record was last modified.
@@ -11222,7 +11222,7 @@ export namespace RecordListResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsSmimeaRecord {
+  export namespace Smimea {
     /**
      * Components of a SMIMEA record.
      */
@@ -11265,11 +11265,11 @@ export namespace RecordListResponse {
     }
   }
 
-  export interface DNSRecordsSRVRecord {
+  export interface SRV {
     /**
      * Components of a SRV record.
      */
-    data: DNSRecordsSRVRecord.Data;
+    data: SRV.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode. For SRV records, the first
@@ -11314,7 +11314,7 @@ export namespace RecordListResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsSRVRecord.Meta;
+    meta?: SRV.Meta;
 
     /**
      * When the record was last modified.
@@ -11349,7 +11349,7 @@ export namespace RecordListResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsSRVRecord {
+  export namespace SRV {
     /**
      * Components of a SRV record.
      */
@@ -11414,11 +11414,11 @@ export namespace RecordListResponse {
     }
   }
 
-  export interface DNSRecordsSSHFPRecord {
+  export interface SSHFP {
     /**
      * Components of a SSHFP record.
      */
-    data: DNSRecordsSSHFPRecord.Data;
+    data: SSHFP.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -11460,7 +11460,7 @@ export namespace RecordListResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsSSHFPRecord.Meta;
+    meta?: SSHFP.Meta;
 
     /**
      * When the record was last modified.
@@ -11495,7 +11495,7 @@ export namespace RecordListResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsSSHFPRecord {
+  export namespace SSHFP {
     /**
      * Components of a SSHFP record.
      */
@@ -11533,11 +11533,11 @@ export namespace RecordListResponse {
     }
   }
 
-  export interface DNSRecordsSVCBRecord {
+  export interface SVCB {
     /**
      * Components of a SVCB record.
      */
-    data: DNSRecordsSVCBRecord.Data;
+    data: SVCB.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -11579,7 +11579,7 @@ export namespace RecordListResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsSVCBRecord.Meta;
+    meta?: SVCB.Meta;
 
     /**
      * When the record was last modified.
@@ -11614,7 +11614,7 @@ export namespace RecordListResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsSVCBRecord {
+  export namespace SVCB {
     /**
      * Components of a SVCB record.
      */
@@ -11652,11 +11652,11 @@ export namespace RecordListResponse {
     }
   }
 
-  export interface DNSRecordsTLSARecord {
+  export interface TLSA {
     /**
      * Components of a TLSA record.
      */
-    data: DNSRecordsTLSARecord.Data;
+    data: TLSA.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -11698,7 +11698,7 @@ export namespace RecordListResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsTLSARecord.Meta;
+    meta?: TLSA.Meta;
 
     /**
      * When the record was last modified.
@@ -11733,7 +11733,7 @@ export namespace RecordListResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsTLSARecord {
+  export namespace TLSA {
     /**
      * Components of a TLSA record.
      */
@@ -11776,7 +11776,7 @@ export namespace RecordListResponse {
     }
   }
 
-  export interface DNSRecordsTXTRecord {
+  export interface TXT {
     /**
      * Text content for the record.
      */
@@ -11817,7 +11817,7 @@ export namespace RecordListResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsTXTRecord.Meta;
+    meta?: TXT.Meta;
 
     /**
      * When the record was last modified.
@@ -11852,7 +11852,7 @@ export namespace RecordListResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsTXTRecord {
+  export namespace TXT {
     /**
      * Extra Cloudflare-specific information about the record.
      */
@@ -11870,11 +11870,11 @@ export namespace RecordListResponse {
     }
   }
 
-  export interface DNSRecordsURIRecord {
+  export interface URI {
     /**
      * Components of a URI record.
      */
-    data: DNSRecordsURIRecord.Data;
+    data: URI.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -11922,7 +11922,7 @@ export namespace RecordListResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsURIRecord.Meta;
+    meta?: URI.Meta;
 
     /**
      * When the record was last modified.
@@ -11957,7 +11957,7 @@ export namespace RecordListResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsURIRecord {
+  export namespace URI {
     /**
      * Components of a URI record.
      */
@@ -11999,29 +11999,29 @@ export interface RecordDeleteResponse {
 }
 
 export type RecordEditResponse =
-  | RecordEditResponse.DNSRecordsARecord
-  | RecordEditResponse.DNSRecordsAAAARecord
-  | RecordEditResponse.DNSRecordsCAARecord
-  | RecordEditResponse.DNSRecordsCertRecord
-  | RecordEditResponse.DNSRecordsCNAMERecord
-  | RecordEditResponse.DNSRecordsDNSKEYRecord
-  | RecordEditResponse.DNSRecordsDSRecord
-  | RecordEditResponse.DNSRecordsHTTPSRecord
-  | RecordEditResponse.DNSRecordsLOCRecord
-  | RecordEditResponse.DNSRecordsMXRecord
-  | RecordEditResponse.DNSRecordsNAPTRRecord
-  | RecordEditResponse.DNSRecordsNSRecord
-  | RecordEditResponse.DNSRecordsPTRRecord
-  | RecordEditResponse.DNSRecordsSmimeaRecord
-  | RecordEditResponse.DNSRecordsSRVRecord
-  | RecordEditResponse.DNSRecordsSSHFPRecord
-  | RecordEditResponse.DNSRecordsSVCBRecord
-  | RecordEditResponse.DNSRecordsTLSARecord
-  | RecordEditResponse.DNSRecordsTXTRecord
-  | RecordEditResponse.DNSRecordsURIRecord;
+  | RecordEditResponse.A
+  | RecordEditResponse.AAAA
+  | RecordEditResponse.CAA
+  | RecordEditResponse.Cert
+  | RecordEditResponse.CNAME
+  | RecordEditResponse.DNSKEY
+  | RecordEditResponse.DS
+  | RecordEditResponse.HTTPS
+  | RecordEditResponse.LOC
+  | RecordEditResponse.MX
+  | RecordEditResponse.NAPTR
+  | RecordEditResponse.NS
+  | RecordEditResponse.PTR
+  | RecordEditResponse.Smimea
+  | RecordEditResponse.SRV
+  | RecordEditResponse.SSHFP
+  | RecordEditResponse.SVCB
+  | RecordEditResponse.TLSA
+  | RecordEditResponse.TXT
+  | RecordEditResponse.URI;
 
 export namespace RecordEditResponse {
-  export interface DNSRecordsARecord {
+  export interface A {
     /**
      * A valid IPv4 address.
      */
@@ -12062,7 +12062,7 @@ export namespace RecordEditResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsARecord.Meta;
+    meta?: A.Meta;
 
     /**
      * When the record was last modified.
@@ -12103,7 +12103,7 @@ export namespace RecordEditResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsARecord {
+  export namespace A {
     /**
      * Extra Cloudflare-specific information about the record.
      */
@@ -12121,7 +12121,7 @@ export namespace RecordEditResponse {
     }
   }
 
-  export interface DNSRecordsAAAARecord {
+  export interface AAAA {
     /**
      * A valid IPv6 address.
      */
@@ -12162,7 +12162,7 @@ export namespace RecordEditResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsAAAARecord.Meta;
+    meta?: AAAA.Meta;
 
     /**
      * When the record was last modified.
@@ -12203,7 +12203,7 @@ export namespace RecordEditResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsAAAARecord {
+  export namespace AAAA {
     /**
      * Extra Cloudflare-specific information about the record.
      */
@@ -12221,11 +12221,11 @@ export namespace RecordEditResponse {
     }
   }
 
-  export interface DNSRecordsCAARecord {
+  export interface CAA {
     /**
      * Components of a CAA record.
      */
-    data: DNSRecordsCAARecord.Data;
+    data: CAA.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -12267,7 +12267,7 @@ export namespace RecordEditResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsCAARecord.Meta;
+    meta?: CAA.Meta;
 
     /**
      * When the record was last modified.
@@ -12302,7 +12302,7 @@ export namespace RecordEditResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsCAARecord {
+  export namespace CAA {
     /**
      * Components of a CAA record.
      */
@@ -12340,11 +12340,11 @@ export namespace RecordEditResponse {
     }
   }
 
-  export interface DNSRecordsCertRecord {
+  export interface Cert {
     /**
      * Components of a CERT record.
      */
-    data: DNSRecordsCertRecord.Data;
+    data: Cert.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -12386,7 +12386,7 @@ export namespace RecordEditResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsCertRecord.Meta;
+    meta?: Cert.Meta;
 
     /**
      * When the record was last modified.
@@ -12421,7 +12421,7 @@ export namespace RecordEditResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsCertRecord {
+  export namespace Cert {
     /**
      * Components of a CERT record.
      */
@@ -12464,7 +12464,7 @@ export namespace RecordEditResponse {
     }
   }
 
-  export interface DNSRecordsCNAMERecord {
+  export interface CNAME {
     /**
      * A valid hostname. Must not match the record's name.
      */
@@ -12505,7 +12505,7 @@ export namespace RecordEditResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsCNAMERecord.Meta;
+    meta?: CNAME.Meta;
 
     /**
      * When the record was last modified.
@@ -12546,7 +12546,7 @@ export namespace RecordEditResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsCNAMERecord {
+  export namespace CNAME {
     /**
      * Extra Cloudflare-specific information about the record.
      */
@@ -12564,11 +12564,11 @@ export namespace RecordEditResponse {
     }
   }
 
-  export interface DNSRecordsDNSKEYRecord {
+  export interface DNSKEY {
     /**
      * Components of a DNSKEY record.
      */
-    data: DNSRecordsDNSKEYRecord.Data;
+    data: DNSKEY.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -12610,7 +12610,7 @@ export namespace RecordEditResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsDNSKEYRecord.Meta;
+    meta?: DNSKEY.Meta;
 
     /**
      * When the record was last modified.
@@ -12645,7 +12645,7 @@ export namespace RecordEditResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsDNSKEYRecord {
+  export namespace DNSKEY {
     /**
      * Components of a DNSKEY record.
      */
@@ -12688,11 +12688,11 @@ export namespace RecordEditResponse {
     }
   }
 
-  export interface DNSRecordsDSRecord {
+  export interface DS {
     /**
      * Components of a DS record.
      */
-    data: DNSRecordsDSRecord.Data;
+    data: DS.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -12734,7 +12734,7 @@ export namespace RecordEditResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsDSRecord.Meta;
+    meta?: DS.Meta;
 
     /**
      * When the record was last modified.
@@ -12769,7 +12769,7 @@ export namespace RecordEditResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsDSRecord {
+  export namespace DS {
     /**
      * Components of a DS record.
      */
@@ -12812,11 +12812,11 @@ export namespace RecordEditResponse {
     }
   }
 
-  export interface DNSRecordsHTTPSRecord {
+  export interface HTTPS {
     /**
      * Components of a HTTPS record.
      */
-    data: DNSRecordsHTTPSRecord.Data;
+    data: HTTPS.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -12858,7 +12858,7 @@ export namespace RecordEditResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsHTTPSRecord.Meta;
+    meta?: HTTPS.Meta;
 
     /**
      * When the record was last modified.
@@ -12893,7 +12893,7 @@ export namespace RecordEditResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsHTTPSRecord {
+  export namespace HTTPS {
     /**
      * Components of a HTTPS record.
      */
@@ -12931,11 +12931,11 @@ export namespace RecordEditResponse {
     }
   }
 
-  export interface DNSRecordsLOCRecord {
+  export interface LOC {
     /**
      * Components of a LOC record.
      */
-    data: DNSRecordsLOCRecord.Data;
+    data: LOC.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -12977,7 +12977,7 @@ export namespace RecordEditResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsLOCRecord.Meta;
+    meta?: LOC.Meta;
 
     /**
      * When the record was last modified.
@@ -13012,7 +13012,7 @@ export namespace RecordEditResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsLOCRecord {
+  export namespace LOC {
     /**
      * Components of a LOC record.
      */
@@ -13095,7 +13095,7 @@ export namespace RecordEditResponse {
     }
   }
 
-  export interface DNSRecordsMXRecord {
+  export interface MX {
     /**
      * A valid mail server hostname.
      */
@@ -13142,7 +13142,7 @@ export namespace RecordEditResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsMXRecord.Meta;
+    meta?: MX.Meta;
 
     /**
      * When the record was last modified.
@@ -13177,7 +13177,7 @@ export namespace RecordEditResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsMXRecord {
+  export namespace MX {
     /**
      * Extra Cloudflare-specific information about the record.
      */
@@ -13195,11 +13195,11 @@ export namespace RecordEditResponse {
     }
   }
 
-  export interface DNSRecordsNAPTRRecord {
+  export interface NAPTR {
     /**
      * Components of a NAPTR record.
      */
-    data: DNSRecordsNAPTRRecord.Data;
+    data: NAPTR.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -13241,7 +13241,7 @@ export namespace RecordEditResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsNAPTRRecord.Meta;
+    meta?: NAPTR.Meta;
 
     /**
      * When the record was last modified.
@@ -13276,7 +13276,7 @@ export namespace RecordEditResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsNAPTRRecord {
+  export namespace NAPTR {
     /**
      * Components of a NAPTR record.
      */
@@ -13329,7 +13329,7 @@ export namespace RecordEditResponse {
     }
   }
 
-  export interface DNSRecordsNSRecord {
+  export interface NS {
     /**
      * A valid name server host name.
      */
@@ -13370,7 +13370,7 @@ export namespace RecordEditResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsNSRecord.Meta;
+    meta?: NS.Meta;
 
     /**
      * When the record was last modified.
@@ -13405,7 +13405,7 @@ export namespace RecordEditResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsNSRecord {
+  export namespace NS {
     /**
      * Extra Cloudflare-specific information about the record.
      */
@@ -13423,7 +13423,7 @@ export namespace RecordEditResponse {
     }
   }
 
-  export interface DNSRecordsPTRRecord {
+  export interface PTR {
     /**
      * Domain name pointing to the address.
      */
@@ -13464,7 +13464,7 @@ export namespace RecordEditResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsPTRRecord.Meta;
+    meta?: PTR.Meta;
 
     /**
      * When the record was last modified.
@@ -13499,7 +13499,7 @@ export namespace RecordEditResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsPTRRecord {
+  export namespace PTR {
     /**
      * Extra Cloudflare-specific information about the record.
      */
@@ -13517,11 +13517,11 @@ export namespace RecordEditResponse {
     }
   }
 
-  export interface DNSRecordsSmimeaRecord {
+  export interface Smimea {
     /**
      * Components of a SMIMEA record.
      */
-    data: DNSRecordsSmimeaRecord.Data;
+    data: Smimea.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -13563,7 +13563,7 @@ export namespace RecordEditResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsSmimeaRecord.Meta;
+    meta?: Smimea.Meta;
 
     /**
      * When the record was last modified.
@@ -13598,7 +13598,7 @@ export namespace RecordEditResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsSmimeaRecord {
+  export namespace Smimea {
     /**
      * Components of a SMIMEA record.
      */
@@ -13641,11 +13641,11 @@ export namespace RecordEditResponse {
     }
   }
 
-  export interface DNSRecordsSRVRecord {
+  export interface SRV {
     /**
      * Components of a SRV record.
      */
-    data: DNSRecordsSRVRecord.Data;
+    data: SRV.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode. For SRV records, the first
@@ -13690,7 +13690,7 @@ export namespace RecordEditResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsSRVRecord.Meta;
+    meta?: SRV.Meta;
 
     /**
      * When the record was last modified.
@@ -13725,7 +13725,7 @@ export namespace RecordEditResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsSRVRecord {
+  export namespace SRV {
     /**
      * Components of a SRV record.
      */
@@ -13790,11 +13790,11 @@ export namespace RecordEditResponse {
     }
   }
 
-  export interface DNSRecordsSSHFPRecord {
+  export interface SSHFP {
     /**
      * Components of a SSHFP record.
      */
-    data: DNSRecordsSSHFPRecord.Data;
+    data: SSHFP.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -13836,7 +13836,7 @@ export namespace RecordEditResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsSSHFPRecord.Meta;
+    meta?: SSHFP.Meta;
 
     /**
      * When the record was last modified.
@@ -13871,7 +13871,7 @@ export namespace RecordEditResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsSSHFPRecord {
+  export namespace SSHFP {
     /**
      * Components of a SSHFP record.
      */
@@ -13909,11 +13909,11 @@ export namespace RecordEditResponse {
     }
   }
 
-  export interface DNSRecordsSVCBRecord {
+  export interface SVCB {
     /**
      * Components of a SVCB record.
      */
-    data: DNSRecordsSVCBRecord.Data;
+    data: SVCB.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -13955,7 +13955,7 @@ export namespace RecordEditResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsSVCBRecord.Meta;
+    meta?: SVCB.Meta;
 
     /**
      * When the record was last modified.
@@ -13990,7 +13990,7 @@ export namespace RecordEditResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsSVCBRecord {
+  export namespace SVCB {
     /**
      * Components of a SVCB record.
      */
@@ -14028,11 +14028,11 @@ export namespace RecordEditResponse {
     }
   }
 
-  export interface DNSRecordsTLSARecord {
+  export interface TLSA {
     /**
      * Components of a TLSA record.
      */
-    data: DNSRecordsTLSARecord.Data;
+    data: TLSA.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -14074,7 +14074,7 @@ export namespace RecordEditResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsTLSARecord.Meta;
+    meta?: TLSA.Meta;
 
     /**
      * When the record was last modified.
@@ -14109,7 +14109,7 @@ export namespace RecordEditResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsTLSARecord {
+  export namespace TLSA {
     /**
      * Components of a TLSA record.
      */
@@ -14152,7 +14152,7 @@ export namespace RecordEditResponse {
     }
   }
 
-  export interface DNSRecordsTXTRecord {
+  export interface TXT {
     /**
      * Text content for the record.
      */
@@ -14193,7 +14193,7 @@ export namespace RecordEditResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsTXTRecord.Meta;
+    meta?: TXT.Meta;
 
     /**
      * When the record was last modified.
@@ -14228,7 +14228,7 @@ export namespace RecordEditResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsTXTRecord {
+  export namespace TXT {
     /**
      * Extra Cloudflare-specific information about the record.
      */
@@ -14246,11 +14246,11 @@ export namespace RecordEditResponse {
     }
   }
 
-  export interface DNSRecordsURIRecord {
+  export interface URI {
     /**
      * Components of a URI record.
      */
-    data: DNSRecordsURIRecord.Data;
+    data: URI.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -14298,7 +14298,7 @@ export namespace RecordEditResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsURIRecord.Meta;
+    meta?: URI.Meta;
 
     /**
      * When the record was last modified.
@@ -14333,7 +14333,7 @@ export namespace RecordEditResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsURIRecord {
+  export namespace URI {
     /**
      * Components of a URI record.
      */
@@ -14373,29 +14373,29 @@ export namespace RecordEditResponse {
 export type RecordExportResponse = string;
 
 export type RecordGetResponse =
-  | RecordGetResponse.DNSRecordsARecord
-  | RecordGetResponse.DNSRecordsAAAARecord
-  | RecordGetResponse.DNSRecordsCAARecord
-  | RecordGetResponse.DNSRecordsCertRecord
-  | RecordGetResponse.DNSRecordsCNAMERecord
-  | RecordGetResponse.DNSRecordsDNSKEYRecord
-  | RecordGetResponse.DNSRecordsDSRecord
-  | RecordGetResponse.DNSRecordsHTTPSRecord
-  | RecordGetResponse.DNSRecordsLOCRecord
-  | RecordGetResponse.DNSRecordsMXRecord
-  | RecordGetResponse.DNSRecordsNAPTRRecord
-  | RecordGetResponse.DNSRecordsNSRecord
-  | RecordGetResponse.DNSRecordsPTRRecord
-  | RecordGetResponse.DNSRecordsSmimeaRecord
-  | RecordGetResponse.DNSRecordsSRVRecord
-  | RecordGetResponse.DNSRecordsSSHFPRecord
-  | RecordGetResponse.DNSRecordsSVCBRecord
-  | RecordGetResponse.DNSRecordsTLSARecord
-  | RecordGetResponse.DNSRecordsTXTRecord
-  | RecordGetResponse.DNSRecordsURIRecord;
+  | RecordGetResponse.A
+  | RecordGetResponse.AAAA
+  | RecordGetResponse.CAA
+  | RecordGetResponse.Cert
+  | RecordGetResponse.CNAME
+  | RecordGetResponse.DNSKEY
+  | RecordGetResponse.DS
+  | RecordGetResponse.HTTPS
+  | RecordGetResponse.LOC
+  | RecordGetResponse.MX
+  | RecordGetResponse.NAPTR
+  | RecordGetResponse.NS
+  | RecordGetResponse.PTR
+  | RecordGetResponse.Smimea
+  | RecordGetResponse.SRV
+  | RecordGetResponse.SSHFP
+  | RecordGetResponse.SVCB
+  | RecordGetResponse.TLSA
+  | RecordGetResponse.TXT
+  | RecordGetResponse.URI;
 
 export namespace RecordGetResponse {
-  export interface DNSRecordsARecord {
+  export interface A {
     /**
      * A valid IPv4 address.
      */
@@ -14436,7 +14436,7 @@ export namespace RecordGetResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsARecord.Meta;
+    meta?: A.Meta;
 
     /**
      * When the record was last modified.
@@ -14477,7 +14477,7 @@ export namespace RecordGetResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsARecord {
+  export namespace A {
     /**
      * Extra Cloudflare-specific information about the record.
      */
@@ -14495,7 +14495,7 @@ export namespace RecordGetResponse {
     }
   }
 
-  export interface DNSRecordsAAAARecord {
+  export interface AAAA {
     /**
      * A valid IPv6 address.
      */
@@ -14536,7 +14536,7 @@ export namespace RecordGetResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsAAAARecord.Meta;
+    meta?: AAAA.Meta;
 
     /**
      * When the record was last modified.
@@ -14577,7 +14577,7 @@ export namespace RecordGetResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsAAAARecord {
+  export namespace AAAA {
     /**
      * Extra Cloudflare-specific information about the record.
      */
@@ -14595,11 +14595,11 @@ export namespace RecordGetResponse {
     }
   }
 
-  export interface DNSRecordsCAARecord {
+  export interface CAA {
     /**
      * Components of a CAA record.
      */
-    data: DNSRecordsCAARecord.Data;
+    data: CAA.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -14641,7 +14641,7 @@ export namespace RecordGetResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsCAARecord.Meta;
+    meta?: CAA.Meta;
 
     /**
      * When the record was last modified.
@@ -14676,7 +14676,7 @@ export namespace RecordGetResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsCAARecord {
+  export namespace CAA {
     /**
      * Components of a CAA record.
      */
@@ -14714,11 +14714,11 @@ export namespace RecordGetResponse {
     }
   }
 
-  export interface DNSRecordsCertRecord {
+  export interface Cert {
     /**
      * Components of a CERT record.
      */
-    data: DNSRecordsCertRecord.Data;
+    data: Cert.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -14760,7 +14760,7 @@ export namespace RecordGetResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsCertRecord.Meta;
+    meta?: Cert.Meta;
 
     /**
      * When the record was last modified.
@@ -14795,7 +14795,7 @@ export namespace RecordGetResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsCertRecord {
+  export namespace Cert {
     /**
      * Components of a CERT record.
      */
@@ -14838,7 +14838,7 @@ export namespace RecordGetResponse {
     }
   }
 
-  export interface DNSRecordsCNAMERecord {
+  export interface CNAME {
     /**
      * A valid hostname. Must not match the record's name.
      */
@@ -14879,7 +14879,7 @@ export namespace RecordGetResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsCNAMERecord.Meta;
+    meta?: CNAME.Meta;
 
     /**
      * When the record was last modified.
@@ -14920,7 +14920,7 @@ export namespace RecordGetResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsCNAMERecord {
+  export namespace CNAME {
     /**
      * Extra Cloudflare-specific information about the record.
      */
@@ -14938,11 +14938,11 @@ export namespace RecordGetResponse {
     }
   }
 
-  export interface DNSRecordsDNSKEYRecord {
+  export interface DNSKEY {
     /**
      * Components of a DNSKEY record.
      */
-    data: DNSRecordsDNSKEYRecord.Data;
+    data: DNSKEY.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -14984,7 +14984,7 @@ export namespace RecordGetResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsDNSKEYRecord.Meta;
+    meta?: DNSKEY.Meta;
 
     /**
      * When the record was last modified.
@@ -15019,7 +15019,7 @@ export namespace RecordGetResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsDNSKEYRecord {
+  export namespace DNSKEY {
     /**
      * Components of a DNSKEY record.
      */
@@ -15062,11 +15062,11 @@ export namespace RecordGetResponse {
     }
   }
 
-  export interface DNSRecordsDSRecord {
+  export interface DS {
     /**
      * Components of a DS record.
      */
-    data: DNSRecordsDSRecord.Data;
+    data: DS.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -15108,7 +15108,7 @@ export namespace RecordGetResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsDSRecord.Meta;
+    meta?: DS.Meta;
 
     /**
      * When the record was last modified.
@@ -15143,7 +15143,7 @@ export namespace RecordGetResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsDSRecord {
+  export namespace DS {
     /**
      * Components of a DS record.
      */
@@ -15186,11 +15186,11 @@ export namespace RecordGetResponse {
     }
   }
 
-  export interface DNSRecordsHTTPSRecord {
+  export interface HTTPS {
     /**
      * Components of a HTTPS record.
      */
-    data: DNSRecordsHTTPSRecord.Data;
+    data: HTTPS.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -15232,7 +15232,7 @@ export namespace RecordGetResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsHTTPSRecord.Meta;
+    meta?: HTTPS.Meta;
 
     /**
      * When the record was last modified.
@@ -15267,7 +15267,7 @@ export namespace RecordGetResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsHTTPSRecord {
+  export namespace HTTPS {
     /**
      * Components of a HTTPS record.
      */
@@ -15305,11 +15305,11 @@ export namespace RecordGetResponse {
     }
   }
 
-  export interface DNSRecordsLOCRecord {
+  export interface LOC {
     /**
      * Components of a LOC record.
      */
-    data: DNSRecordsLOCRecord.Data;
+    data: LOC.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -15351,7 +15351,7 @@ export namespace RecordGetResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsLOCRecord.Meta;
+    meta?: LOC.Meta;
 
     /**
      * When the record was last modified.
@@ -15386,7 +15386,7 @@ export namespace RecordGetResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsLOCRecord {
+  export namespace LOC {
     /**
      * Components of a LOC record.
      */
@@ -15469,7 +15469,7 @@ export namespace RecordGetResponse {
     }
   }
 
-  export interface DNSRecordsMXRecord {
+  export interface MX {
     /**
      * A valid mail server hostname.
      */
@@ -15516,7 +15516,7 @@ export namespace RecordGetResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsMXRecord.Meta;
+    meta?: MX.Meta;
 
     /**
      * When the record was last modified.
@@ -15551,7 +15551,7 @@ export namespace RecordGetResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsMXRecord {
+  export namespace MX {
     /**
      * Extra Cloudflare-specific information about the record.
      */
@@ -15569,11 +15569,11 @@ export namespace RecordGetResponse {
     }
   }
 
-  export interface DNSRecordsNAPTRRecord {
+  export interface NAPTR {
     /**
      * Components of a NAPTR record.
      */
-    data: DNSRecordsNAPTRRecord.Data;
+    data: NAPTR.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -15615,7 +15615,7 @@ export namespace RecordGetResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsNAPTRRecord.Meta;
+    meta?: NAPTR.Meta;
 
     /**
      * When the record was last modified.
@@ -15650,7 +15650,7 @@ export namespace RecordGetResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsNAPTRRecord {
+  export namespace NAPTR {
     /**
      * Components of a NAPTR record.
      */
@@ -15703,7 +15703,7 @@ export namespace RecordGetResponse {
     }
   }
 
-  export interface DNSRecordsNSRecord {
+  export interface NS {
     /**
      * A valid name server host name.
      */
@@ -15744,7 +15744,7 @@ export namespace RecordGetResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsNSRecord.Meta;
+    meta?: NS.Meta;
 
     /**
      * When the record was last modified.
@@ -15779,7 +15779,7 @@ export namespace RecordGetResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsNSRecord {
+  export namespace NS {
     /**
      * Extra Cloudflare-specific information about the record.
      */
@@ -15797,7 +15797,7 @@ export namespace RecordGetResponse {
     }
   }
 
-  export interface DNSRecordsPTRRecord {
+  export interface PTR {
     /**
      * Domain name pointing to the address.
      */
@@ -15838,7 +15838,7 @@ export namespace RecordGetResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsPTRRecord.Meta;
+    meta?: PTR.Meta;
 
     /**
      * When the record was last modified.
@@ -15873,7 +15873,7 @@ export namespace RecordGetResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsPTRRecord {
+  export namespace PTR {
     /**
      * Extra Cloudflare-specific information about the record.
      */
@@ -15891,11 +15891,11 @@ export namespace RecordGetResponse {
     }
   }
 
-  export interface DNSRecordsSmimeaRecord {
+  export interface Smimea {
     /**
      * Components of a SMIMEA record.
      */
-    data: DNSRecordsSmimeaRecord.Data;
+    data: Smimea.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -15937,7 +15937,7 @@ export namespace RecordGetResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsSmimeaRecord.Meta;
+    meta?: Smimea.Meta;
 
     /**
      * When the record was last modified.
@@ -15972,7 +15972,7 @@ export namespace RecordGetResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsSmimeaRecord {
+  export namespace Smimea {
     /**
      * Components of a SMIMEA record.
      */
@@ -16015,11 +16015,11 @@ export namespace RecordGetResponse {
     }
   }
 
-  export interface DNSRecordsSRVRecord {
+  export interface SRV {
     /**
      * Components of a SRV record.
      */
-    data: DNSRecordsSRVRecord.Data;
+    data: SRV.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode. For SRV records, the first
@@ -16064,7 +16064,7 @@ export namespace RecordGetResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsSRVRecord.Meta;
+    meta?: SRV.Meta;
 
     /**
      * When the record was last modified.
@@ -16099,7 +16099,7 @@ export namespace RecordGetResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsSRVRecord {
+  export namespace SRV {
     /**
      * Components of a SRV record.
      */
@@ -16164,11 +16164,11 @@ export namespace RecordGetResponse {
     }
   }
 
-  export interface DNSRecordsSSHFPRecord {
+  export interface SSHFP {
     /**
      * Components of a SSHFP record.
      */
-    data: DNSRecordsSSHFPRecord.Data;
+    data: SSHFP.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -16210,7 +16210,7 @@ export namespace RecordGetResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsSSHFPRecord.Meta;
+    meta?: SSHFP.Meta;
 
     /**
      * When the record was last modified.
@@ -16245,7 +16245,7 @@ export namespace RecordGetResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsSSHFPRecord {
+  export namespace SSHFP {
     /**
      * Components of a SSHFP record.
      */
@@ -16283,11 +16283,11 @@ export namespace RecordGetResponse {
     }
   }
 
-  export interface DNSRecordsSVCBRecord {
+  export interface SVCB {
     /**
      * Components of a SVCB record.
      */
-    data: DNSRecordsSVCBRecord.Data;
+    data: SVCB.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -16329,7 +16329,7 @@ export namespace RecordGetResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsSVCBRecord.Meta;
+    meta?: SVCB.Meta;
 
     /**
      * When the record was last modified.
@@ -16364,7 +16364,7 @@ export namespace RecordGetResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsSVCBRecord {
+  export namespace SVCB {
     /**
      * Components of a SVCB record.
      */
@@ -16402,11 +16402,11 @@ export namespace RecordGetResponse {
     }
   }
 
-  export interface DNSRecordsTLSARecord {
+  export interface TLSA {
     /**
      * Components of a TLSA record.
      */
-    data: DNSRecordsTLSARecord.Data;
+    data: TLSA.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -16448,7 +16448,7 @@ export namespace RecordGetResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsTLSARecord.Meta;
+    meta?: TLSA.Meta;
 
     /**
      * When the record was last modified.
@@ -16483,7 +16483,7 @@ export namespace RecordGetResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsTLSARecord {
+  export namespace TLSA {
     /**
      * Components of a TLSA record.
      */
@@ -16526,7 +16526,7 @@ export namespace RecordGetResponse {
     }
   }
 
-  export interface DNSRecordsTXTRecord {
+  export interface TXT {
     /**
      * Text content for the record.
      */
@@ -16567,7 +16567,7 @@ export namespace RecordGetResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsTXTRecord.Meta;
+    meta?: TXT.Meta;
 
     /**
      * When the record was last modified.
@@ -16602,7 +16602,7 @@ export namespace RecordGetResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsTXTRecord {
+  export namespace TXT {
     /**
      * Extra Cloudflare-specific information about the record.
      */
@@ -16620,11 +16620,11 @@ export namespace RecordGetResponse {
     }
   }
 
-  export interface DNSRecordsURIRecord {
+  export interface URI {
     /**
      * Components of a URI record.
      */
-    data: DNSRecordsURIRecord.Data;
+    data: URI.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -16672,7 +16672,7 @@ export namespace RecordGetResponse {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: DNSRecordsURIRecord.Meta;
+    meta?: URI.Meta;
 
     /**
      * When the record was last modified.
@@ -16707,7 +16707,7 @@ export namespace RecordGetResponse {
     zone_name?: string;
   }
 
-  export namespace DNSRecordsURIRecord {
+  export namespace URI {
     /**
      * Components of a URI record.
      */
