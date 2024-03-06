@@ -400,6 +400,7 @@ export { Workers } from './workers/workers';
 export { WorkersForPlatforms } from './workers-for-platforms/workers-for-platforms';
 export { ZeroTrust } from './zero-trust/zero-trust';
 export {
+  Zone,
   ZoneCreateResponse,
   ZoneListResponse,
   ZoneDeleteResponse,

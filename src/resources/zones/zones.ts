@@ -91,6 +91,151 @@ export class Zones extends APIResource {
 
 export class ZoneListResponsesV4PagePaginationArray extends V4PagePaginationArray<ZoneListResponse> {}
 
+export interface Zone {
+  /**
+   * Identifier
+   */
+  id: string;
+
+  /**
+   * The account the zone belongs to
+   */
+  account: Zone.Account;
+
+  /**
+   * The last time proof of ownership was detected and the zone was made active
+   */
+  activated_on: string | null;
+
+  /**
+   * When the zone was created
+   */
+  created_on: string;
+
+  /**
+   * The interval (in seconds) from when development mode expires (positive integer)
+   * or last expired (negative integer) for the domain. If development mode has never
+   * been enabled, this value is 0.
+   */
+  development_mode: number;
+
+  /**
+   * Metadata about the zone
+   */
+  meta: Zone.Meta;
+
+  /**
+   * When the zone was last modified
+   */
+  modified_on: string;
+
+  /**
+   * The domain name
+   */
+  name: string;
+
+  /**
+   * DNS host at the time of switching to Cloudflare
+   */
+  original_dnshost: string | null;
+
+  /**
+   * Original name servers before moving to Cloudflare Notes: Is this only available
+   * for full zones?
+   */
+  original_name_servers: Array<string> | null;
+
+  /**
+   * Registrar for the domain at the time of switching to Cloudflare
+   */
+  original_registrar: string | null;
+
+  /**
+   * The owner of the zone
+   */
+  owner: Zone.Owner;
+
+  /**
+   * An array of domains used for custom name servers. This is only available for
+   * Business and Enterprise plans.
+   */
+  vanity_name_servers?: Array<string>;
+}
+
+export namespace Zone {
+  /**
+   * The account the zone belongs to
+   */
+  export interface Account {
+    /**
+     * Identifier
+     */
+    id?: string;
+
+    /**
+     * The name of the account
+     */
+    name?: string;
+  }
+
+  /**
+   * Metadata about the zone
+   */
+  export interface Meta {
+    /**
+     * The zone is only configured for CDN
+     */
+    cdn_only?: boolean;
+
+    /**
+     * Number of Custom Certificates the zone can have
+     */
+    custom_certificate_quota?: number;
+
+    /**
+     * The zone is only configured for DNS
+     */
+    dns_only?: boolean;
+
+    /**
+     * The zone is setup with Foundation DNS
+     */
+    foundation_dns?: boolean;
+
+    /**
+     * Number of Page Rules a zone can have
+     */
+    page_rule_quota?: number;
+
+    /**
+     * The zone has been flagged for phishing
+     */
+    phishing_detected?: boolean;
+
+    step?: number;
+  }
+
+  /**
+   * The owner of the zone
+   */
+  export interface Owner {
+    /**
+     * Identifier
+     */
+    id?: string;
+
+    /**
+     * Name of the owner
+     */
+    name?: string;
+
+    /**
+     * The type of owner
+     */
+    type?: string;
+  }
+}
+
 export interface ZoneCreateResponse {
   /**
    * Identifier
@@ -822,6 +967,7 @@ export interface ZoneGetParams {
 }
 
 export namespace Zones {
+  export import Zone = ZonesAPI.Zone;
   export import ZoneCreateResponse = ZonesAPI.ZoneCreateResponse;
   export import ZoneListResponse = ZonesAPI.ZoneListResponse;
   export import ZoneDeleteResponse = ZonesAPI.ZoneDeleteResponse;

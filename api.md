@@ -312,6 +312,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/zones/zones.ts">Zone</a></code>
 - <code><a href="./src/resources/zones/zones.ts">ZoneCreateResponse</a></code>
 - <code><a href="./src/resources/zones/zones.ts">ZoneListResponse</a></code>
 - <code><a href="./src/resources/zones/zones.ts">ZoneDeleteResponse</a></code>
