@@ -36,7 +36,7 @@ describe('resource scripts', () => {
       ],
       message: 'string',
       metadata: {
-        bindings: [{}, {}, {}],
+        bindings: [{ name: 'MY_ENV_VAR', text: 'my_data', type: 'plain_text' }],
         body_part: 'worker.js',
         compatibility_date: '2023-07-25',
         compatibility_flags: ['string', 'string', 'string'],
