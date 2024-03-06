@@ -37,6 +37,7 @@ export {
 } from './subscriptions';
 export { Workers } from './workers/index';
 export {
+  Zone,
   ZoneCreateResponse,
   ZoneListResponse,
   ZoneDeleteResponse,

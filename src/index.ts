@@ -416,6 +416,7 @@ export namespace Cloudflare {
   export import UserEditParams = API.UserEditParams;
 
   export import Zones = API.Zones;
+  export import Zone = API.Zone;
   export import ZoneCreateResponse = API.ZoneCreateResponse;
   export import ZoneListResponse = API.ZoneListResponse;
   export import ZoneDeleteResponse = API.ZoneDeleteResponse;
