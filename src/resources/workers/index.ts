@@ -9,18 +9,10 @@ export {
   AccountSettings,
 } from './account-settings';
 export { Deployments } from './deployments/index';
-export { Services } from './services/index';
 export {
-  SubdomainUpdateResponse,
-  SubdomainGetResponse,
-  SubdomainUpdateParams,
-  SubdomainGetParams,
-  Subdomains,
-} from './subdomains';
-export { Workers } from './workers';
-export {
-  WorkersDomain,
+  DomainUpdateResponse,
   DomainListResponse,
+  DomainGetResponse,
   DomainUpdateParams,
   DomainListParams,
   DomainDeleteParams,
@@ -28,8 +20,8 @@ export {
   Domains,
 } from './domains';
 export {
-  WorkersFilters,
   FilterCreateResponse,
+  FilterUpdateResponse,
   FilterListResponse,
   FilterDeleteResponse,
   FilterCreateParams,
@@ -39,10 +31,11 @@ export {
   Filters,
 } from './filters';
 export {
-  WorkersRoutes,
   RouteCreateResponse,
+  RouteUpdateResponse,
   RouteListResponse,
   RouteDeleteResponse,
+  RouteGetResponse,
   RouteCreateParams,
   RouteUpdateParams,
   RouteListParams,
@@ -51,7 +44,7 @@ export {
   Routes,
 } from './routes';
 export {
-  WorkersScript,
+  ScriptUpdateResponse,
   ScriptListResponse,
   ScriptUpdateParams,
   ScriptListParams,
@@ -59,3 +52,12 @@ export {
   ScriptGetParams,
   Scripts,
 } from './scripts/index';
+export { Services } from './services/index';
+export {
+  SubdomainUpdateResponse,
+  SubdomainGetResponse,
+  SubdomainUpdateParams,
+  SubdomainGetParams,
+  Subdomains,
+} from './subdomains';
+export { Workers } from './workers';

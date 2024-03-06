@@ -3,29 +3,31 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as StatusAPI from 'cloudflare/resources/secondary-dns/outgoing/status';
-import * as OutgoingAPI from 'cloudflare/resources/secondary-dns/outgoing/outgoing';
 
 export class Status extends APIResource {
   /**
    * Get primary zone transfer status.
    */
-  get(
-    params: StatusGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OutgoingAPI.SecondaryDNSEnableTransferResult> {
+  get(params: StatusGetParams, options?: Core.RequestOptions): Core.APIPromise<StatusGetResponse> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/secondary_dns/outgoing/status`, options) as Core.APIPromise<{
-        result: OutgoingAPI.SecondaryDNSEnableTransferResult;
+        result: StatusGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+/**
+ * The zone transfer status of a primary zone
+ */
+export type StatusGetResponse = string;
 
 export interface StatusGetParams {
   zone_id: unknown;
 }
 
 export namespace Status {
+  export import StatusGetResponse = StatusAPI.StatusGetResponse;
   export import StatusGetParams = StatusAPI.StatusGetParams;
 }

@@ -124,7 +124,7 @@ export namespace Cache {
   export import SmartTieredCachedEditParams = SmartTieredCachedAPI.SmartTieredCachedEditParams;
   export import SmartTieredCachedGetParams = SmartTieredCachedAPI.SmartTieredCachedGetParams;
   export import Variants = VariantsAPI.Variants;
-  export import CacheVariants = VariantsAPI.CacheVariants;
+  export import VariantDeleteResponse = VariantsAPI.VariantDeleteResponse;
   export import VariantEditResponse = VariantsAPI.VariantEditResponse;
   export import VariantGetResponse = VariantsAPI.VariantGetResponse;
   export import VariantDeleteParams = VariantsAPI.VariantDeleteParams;

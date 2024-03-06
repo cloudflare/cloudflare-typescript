@@ -8,10 +8,7 @@ export class Policies extends APIResource {
   /**
    * Create a Page Shield policy.
    */
-  create(
-    params: PolicyCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PageShieldPageshieldPolicy> {
+  create(params: PolicyCreateParams, options?: Core.RequestOptions): Core.APIPromise<PolicyCreateResponse> {
     const { zone_id, ...body } = params;
     return this._client.post(`/zones/${zone_id}/page_shield/policies`, { body, ...options });
   }
@@ -23,7 +20,7 @@ export class Policies extends APIResource {
     policyId: string,
     params: PolicyUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PageShieldPageshieldPolicy> {
+  ): Core.APIPromise<PolicyUpdateResponse> {
     const { zone_id, ...body } = params;
     return this._client.put(`/zones/${zone_id}/page_shield/policies/${policyId}`, { body, ...options });
   }
@@ -58,13 +55,13 @@ export class Policies extends APIResource {
     policyId: string,
     params: PolicyGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PageShieldPageshieldPolicy> {
+  ): Core.APIPromise<PolicyGetResponse> {
     const { zone_id } = params;
     return this._client.get(`/zones/${zone_id}/page_shield/policies/${policyId}`, options);
   }
 }
 
-export interface PageShieldPageshieldPolicy {
+export interface PolicyCreateResponse {
   /**
    * The ID of the policy
    */
@@ -97,7 +94,108 @@ export interface PageShieldPageshieldPolicy {
   value?: string;
 }
 
-export type PolicyListResponse = Array<PageShieldPageshieldPolicy>;
+export interface PolicyUpdateResponse {
+  /**
+   * The ID of the policy
+   */
+  id?: string;
+
+  /**
+   * The action to take if the expression matches
+   */
+  action?: 'allow' | 'log';
+
+  /**
+   * A description for the policy
+   */
+  description?: string;
+
+  /**
+   * Whether the policy is enabled
+   */
+  enabled?: boolean;
+
+  /**
+   * The expression which must match for the policy to be applied, using the
+   * Cloudflare Firewall rule expression syntax
+   */
+  expression?: string;
+
+  /**
+   * The policy which will be applied
+   */
+  value?: string;
+}
+
+export type PolicyListResponse = Array<PolicyListResponse.PolicyListResponseItem>;
+
+export namespace PolicyListResponse {
+  export interface PolicyListResponseItem {
+    /**
+     * The ID of the policy
+     */
+    id?: string;
+
+    /**
+     * The action to take if the expression matches
+     */
+    action?: 'allow' | 'log';
+
+    /**
+     * A description for the policy
+     */
+    description?: string;
+
+    /**
+     * Whether the policy is enabled
+     */
+    enabled?: boolean;
+
+    /**
+     * The expression which must match for the policy to be applied, using the
+     * Cloudflare Firewall rule expression syntax
+     */
+    expression?: string;
+
+    /**
+     * The policy which will be applied
+     */
+    value?: string;
+  }
+}
+
+export interface PolicyGetResponse {
+  /**
+   * The ID of the policy
+   */
+  id?: string;
+
+  /**
+   * The action to take if the expression matches
+   */
+  action?: 'allow' | 'log';
+
+  /**
+   * A description for the policy
+   */
+  description?: string;
+
+  /**
+   * Whether the policy is enabled
+   */
+  enabled?: boolean;
+
+  /**
+   * The expression which must match for the policy to be applied, using the
+   * Cloudflare Firewall rule expression syntax
+   */
+  expression?: string;
+
+  /**
+   * The policy which will be applied
+   */
+  value?: string;
+}
 
 export interface PolicyCreateParams {
   /**
@@ -187,8 +285,10 @@ export interface PolicyGetParams {
 }
 
 export namespace Policies {
-  export import PageShieldPageshieldPolicy = PoliciesAPI.PageShieldPageshieldPolicy;
+  export import PolicyCreateResponse = PoliciesAPI.PolicyCreateResponse;
+  export import PolicyUpdateResponse = PoliciesAPI.PolicyUpdateResponse;
   export import PolicyListResponse = PoliciesAPI.PolicyListResponse;
+  export import PolicyGetResponse = PoliciesAPI.PolicyGetResponse;
   export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
   export import PolicyUpdateParams = PoliciesAPI.PolicyUpdateParams;
   export import PolicyListParams = PoliciesAPI.PolicyListParams;

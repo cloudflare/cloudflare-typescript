@@ -8,17 +8,21 @@ export class LastSeenIdentity extends APIResource {
   /**
    * Get last seen identity for a single user.
    */
-  get(identifier: string, id: string, options?: Core.RequestOptions): Core.APIPromise<AccessIdentity> {
+  get(
+    identifier: string,
+    id: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LastSeenIdentityGetResponse> {
     return (
       this._client.get(
         `/accounts/${identifier}/access/users/${id}/last_seen_identity`,
         options,
-      ) as Core.APIPromise<{ result: AccessIdentity }>
+      ) as Core.APIPromise<{ result: LastSeenIdentityGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface AccessIdentity {
+export interface LastSeenIdentityGetResponse {
   account_id?: string;
 
   auth_status?: string;
@@ -27,17 +31,17 @@ export interface AccessIdentity {
 
   device_id?: string;
 
-  device_sessions?: Record<string, AccessIdentity.DeviceSessions>;
+  device_sessions?: Record<string, LastSeenIdentityGetResponse.DeviceSessions>;
 
-  devicePosture?: Record<string, AccessIdentity.DevicePosture>;
+  devicePosture?: Record<string, LastSeenIdentityGetResponse.DevicePosture>;
 
   email?: string;
 
-  geo?: AccessIdentity.Geo;
+  geo?: LastSeenIdentityGetResponse.Geo;
 
   iat?: number;
 
-  idp?: AccessIdentity.Idp;
+  idp?: LastSeenIdentityGetResponse.Idp;
 
   ip?: string;
 
@@ -45,7 +49,7 @@ export interface AccessIdentity {
 
   is_warp?: boolean;
 
-  mtls_auth?: AccessIdentity.MTLSAuth;
+  mtls_auth?: LastSeenIdentityGetResponse.MTLSAuth;
 
   service_token_id?: string;
 
@@ -56,7 +60,7 @@ export interface AccessIdentity {
   version?: number;
 }
 
-export namespace AccessIdentity {
+export namespace LastSeenIdentityGetResponse {
   export interface DeviceSessions {
     last_authenticated?: number;
   }
@@ -113,5 +117,5 @@ export namespace AccessIdentity {
 }
 
 export namespace LastSeenIdentity {
-  export import AccessIdentity = LastSeenIdentityAPI.AccessIdentity;
+  export import LastSeenIdentityGetResponse = LastSeenIdentityAPI.LastSeenIdentityGetResponse;
 }

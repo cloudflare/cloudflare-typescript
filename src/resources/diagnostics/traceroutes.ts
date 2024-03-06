@@ -22,131 +22,133 @@ export class Traceroutes extends APIResource {
   }
 }
 
-export interface MagicTransitTargetResult {
-  colos?: Array<MagicTransitTargetResult.Colo>;
+export type TracerouteCreateResponse = Array<TracerouteCreateResponse.TracerouteCreateResponseItem>;
 
-  /**
-   * The target hostname, IPv6, or IPv6 address.
-   */
-  target?: string;
-}
-
-export namespace MagicTransitTargetResult {
-  export interface Colo {
-    colo?: Colo.Colo;
+export namespace TracerouteCreateResponse {
+  export interface TracerouteCreateResponseItem {
+    colos?: Array<TracerouteCreateResponseItem.Colo>;
 
     /**
-     * Errors resulting from collecting traceroute from colo to target.
+     * The target hostname, IPv6, or IPv6 address.
      */
-    error?:
-      | ''
-      | 'Could not gather traceroute data: Code 1'
-      | 'Could not gather traceroute data: Code 2'
-      | 'Could not gather traceroute data: Code 3'
-      | 'Could not gather traceroute data: Code 4';
-
-    hops?: Array<Colo.Hop>;
-
-    /**
-     * Aggregated statistics from all hops about the target.
-     */
-    target_summary?: unknown;
-
-    /**
-     * Total time of traceroute in ms.
-     */
-    traceroute_time_ms?: number;
+    target?: string;
   }
 
-  export namespace Colo {
+  export namespace TracerouteCreateResponseItem {
     export interface Colo {
-      /**
-       * Source colo city.
-       */
-      city?: string;
+      colo?: Colo.Colo;
 
       /**
-       * Source colo name.
+       * Errors resulting from collecting traceroute from colo to target.
        */
-      name?: string;
+      error?:
+        | ''
+        | 'Could not gather traceroute data: Code 1'
+        | 'Could not gather traceroute data: Code 2'
+        | 'Could not gather traceroute data: Code 3'
+        | 'Could not gather traceroute data: Code 4';
+
+      hops?: Array<Colo.Hop>;
+
+      /**
+       * Aggregated statistics from all hops about the target.
+       */
+      target_summary?: unknown;
+
+      /**
+       * Total time of traceroute in ms.
+       */
+      traceroute_time_ms?: number;
     }
 
-    export interface Hop {
-      /**
-       * An array of node objects.
-       */
-      nodes?: Array<Hop.Node>;
-
-      /**
-       * Number of packets where no response was received.
-       */
-      packets_lost?: number;
-
-      /**
-       * Number of packets sent with specified TTL.
-       */
-      packets_sent?: number;
-
-      /**
-       * The time to live (TTL).
-       */
-      packets_ttl?: number;
-    }
-
-    export namespace Hop {
-      export interface Node {
+    export namespace Colo {
+      export interface Colo {
         /**
-         * AS number associated with the node object.
+         * Source colo city.
          */
-        asn?: string;
+        city?: string;
 
         /**
-         * IP address of the node.
-         */
-        ip?: string;
-
-        /**
-         * Field appears if there is an additional annotation printed when the probe
-         * returns. Field also appears when running a GRE+ICMP traceroute to denote which
-         * traceroute a node comes from.
-         */
-        labels?: Array<string>;
-
-        /**
-         * Maximum RTT in ms.
-         */
-        max_rtt_ms?: number;
-
-        /**
-         * Mean RTT in ms.
-         */
-        mean_rtt_ms?: number;
-
-        /**
-         * Minimum RTT in ms.
-         */
-        min_rtt_ms?: number;
-
-        /**
-         * Host name of the address, this may be the same as the IP address.
+         * Source colo name.
          */
         name?: string;
+      }
+
+      export interface Hop {
+        /**
+         * An array of node objects.
+         */
+        nodes?: Array<Hop.Node>;
 
         /**
-         * Number of packets with a response from this node.
+         * Number of packets where no response was received.
          */
-        packet_count?: number;
+        packets_lost?: number;
 
         /**
-         * Standard deviation of the RTTs in ms.
+         * Number of packets sent with specified TTL.
          */
-        std_dev_rtt_ms?: number;
+        packets_sent?: number;
+
+        /**
+         * The time to live (TTL).
+         */
+        packets_ttl?: number;
+      }
+
+      export namespace Hop {
+        export interface Node {
+          /**
+           * AS number associated with the node object.
+           */
+          asn?: string;
+
+          /**
+           * IP address of the node.
+           */
+          ip?: string;
+
+          /**
+           * Field appears if there is an additional annotation printed when the probe
+           * returns. Field also appears when running a GRE+ICMP traceroute to denote which
+           * traceroute a node comes from.
+           */
+          labels?: Array<string>;
+
+          /**
+           * Maximum RTT in ms.
+           */
+          max_rtt_ms?: number;
+
+          /**
+           * Mean RTT in ms.
+           */
+          mean_rtt_ms?: number;
+
+          /**
+           * Minimum RTT in ms.
+           */
+          min_rtt_ms?: number;
+
+          /**
+           * Host name of the address, this may be the same as the IP address.
+           */
+          name?: string;
+
+          /**
+           * Number of packets with a response from this node.
+           */
+          packet_count?: number;
+
+          /**
+           * Standard deviation of the RTTs in ms.
+           */
+          std_dev_rtt_ms?: number;
+        }
       }
     }
   }
 }
-
-export type TracerouteCreateResponse = Array<MagicTransitTargetResult>;
 
 export interface TracerouteCreateParams {
   /**
@@ -203,7 +205,6 @@ export namespace TracerouteCreateParams {
 }
 
 export namespace Traceroutes {
-  export import MagicTransitTargetResult = TraceroutesAPI.MagicTransitTargetResult;
   export import TracerouteCreateResponse = TraceroutesAPI.TracerouteCreateResponse;
   export import TracerouteCreateParams = TraceroutesAPI.TracerouteCreateParams;
 }

@@ -13,26 +13,26 @@ export class Percentiles extends APIResource {
     testId: string,
     params: PercentileListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DigitalExperienceMonitoringHTTPDetailsPercentiles> {
+  ): Core.APIPromise<PercentileListResponse> {
     const { account_id, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/dex/http-tests/${testId}/percentiles`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: DigitalExperienceMonitoringHTTPDetailsPercentiles }>
+      }) as Core.APIPromise<{ result: PercentileListResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface DigitalExperienceMonitoringHTTPDetailsPercentiles {
-  dnsResponseTimeMs?: DigitalExperienceMonitoringHTTPDetailsPercentiles.DNSResponseTimeMs;
+export interface PercentileListResponse {
+  dnsResponseTimeMs?: PercentileListResponse.DNSResponseTimeMs;
 
-  resourceFetchTimeMs?: DigitalExperienceMonitoringHTTPDetailsPercentiles.ResourceFetchTimeMs;
+  resourceFetchTimeMs?: PercentileListResponse.ResourceFetchTimeMs;
 
-  serverResponseTimeMs?: DigitalExperienceMonitoringHTTPDetailsPercentiles.ServerResponseTimeMs;
+  serverResponseTimeMs?: PercentileListResponse.ServerResponseTimeMs;
 }
 
-export namespace DigitalExperienceMonitoringHTTPDetailsPercentiles {
+export namespace PercentileListResponse {
   export interface DNSResponseTimeMs {
     /**
      * p50 observed in the time period
@@ -130,6 +130,6 @@ export interface PercentileListParams {
 }
 
 export namespace Percentiles {
-  export import DigitalExperienceMonitoringHTTPDetailsPercentiles = PercentilesAPI.DigitalExperienceMonitoringHTTPDetailsPercentiles;
+  export import PercentileListResponse = PercentilesAPI.PercentileListResponse;
   export import PercentileListParams = PercentilesAPI.PercentileListParams;
 }

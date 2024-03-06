@@ -20,18 +20,18 @@ export class Snippets extends APIResource {
     snippetName: string,
     body?: SnippetUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Snippet>;
+  ): Core.APIPromise<SnippetUpdateResponse>;
   update(
     zoneIdentifier: string,
     snippetName: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Snippet>;
+  ): Core.APIPromise<SnippetUpdateResponse>;
   update(
     zoneIdentifier: string,
     snippetName: string,
     body: SnippetUpdateParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Snippet> {
+  ): Core.APIPromise<SnippetUpdateResponse> {
     if (isRequestOptions(body)) {
       return this.update(zoneIdentifier, snippetName, {}, body);
     }
@@ -39,7 +39,7 @@ export class Snippets extends APIResource {
       this._client.put(
         `/zones/${zoneIdentifier}/snippets/${snippetName}`,
         multipartFormRequestOptions({ body, ...options }),
-      ) as Core.APIPromise<{ result: Snippet }>
+      ) as Core.APIPromise<{ result: SnippetUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -72,10 +72,14 @@ export class Snippets extends APIResource {
   /**
    * Snippet
    */
-  get(zoneIdentifier: string, snippetName: string, options?: Core.RequestOptions): Core.APIPromise<Snippet> {
+  get(
+    zoneIdentifier: string,
+    snippetName: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SnippetGetResponse> {
     return (
       this._client.get(`/zones/${zoneIdentifier}/snippets/${snippetName}`, options) as Core.APIPromise<{
-        result: Snippet;
+        result: SnippetGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -84,7 +88,7 @@ export class Snippets extends APIResource {
 /**
  * Snippet Information
  */
-export interface Snippet {
+export interface SnippetUpdateResponse {
   /**
    * Creation time of the snippet
    */
@@ -104,9 +108,51 @@ export interface Snippet {
 /**
  * List of all zone snippets
  */
-export type SnippetListResponse = Array<Snippet>;
+export type SnippetListResponse = Array<SnippetListResponse.SnippetListResponseItem>;
+
+export namespace SnippetListResponse {
+  /**
+   * Snippet Information
+   */
+  export interface SnippetListResponseItem {
+    /**
+     * Creation time of the snippet
+     */
+    created_on?: string;
+
+    /**
+     * Modification time of the snippet
+     */
+    modified_on?: string;
+
+    /**
+     * Snippet identifying name
+     */
+    snippet_name?: string;
+  }
+}
 
 export type SnippetDeleteResponse = unknown | Array<unknown> | string;
+
+/**
+ * Snippet Information
+ */
+export interface SnippetGetResponse {
+  /**
+   * Creation time of the snippet
+   */
+  created_on?: string;
+
+  /**
+   * Modification time of the snippet
+   */
+  modified_on?: string;
+
+  /**
+   * Snippet identifying name
+   */
+  snippet_name?: string;
+}
 
 export interface SnippetUpdateParams {
   /**
@@ -127,9 +173,10 @@ export namespace SnippetUpdateParams {
 }
 
 export namespace Snippets {
-  export import Snippet = SnippetsAPI.Snippet;
+  export import SnippetUpdateResponse = SnippetsAPI.SnippetUpdateResponse;
   export import SnippetListResponse = SnippetsAPI.SnippetListResponse;
   export import SnippetDeleteResponse = SnippetsAPI.SnippetDeleteResponse;
+  export import SnippetGetResponse = SnippetsAPI.SnippetGetResponse;
   export import SnippetUpdateParams = SnippetsAPI.SnippetUpdateParams;
   export import Content = ContentAPI.Content;
   export import Rules = RulesAPI.Rules;

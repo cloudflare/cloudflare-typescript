@@ -26,17 +26,19 @@ export class Events extends APIResource {
   }
 }
 
-export interface LoadBalancingAnalytics {
-  id?: number;
+export type EventListResponse = Array<EventListResponse.EventListResponseItem>;
 
-  origins?: Array<unknown>;
+export namespace EventListResponse {
+  export interface EventListResponseItem {
+    id?: number;
 
-  pool?: unknown;
+    origins?: Array<unknown>;
 
-  timestamp?: string;
+    pool?: unknown;
+
+    timestamp?: string;
+  }
 }
-
-export type EventListResponse = Array<LoadBalancingAnalytics>;
 
 export interface EventListParams {
   /**
@@ -75,7 +77,6 @@ export interface EventListParams {
 }
 
 export namespace Events {
-  export import LoadBalancingAnalytics = EventsAPI.LoadBalancingAnalytics;
   export import EventListResponse = EventsAPI.EventListResponse;
   export import EventListParams = EventsAPI.EventListParams;
 }

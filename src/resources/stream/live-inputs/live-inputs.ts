@@ -12,13 +12,16 @@ export class LiveInputs extends APIResource {
    * Creates a live input, and returns credentials that you or your users can use to
    * stream live video to Cloudflare Stream.
    */
-  create(params: LiveInputCreateParams, options?: Core.RequestOptions): Core.APIPromise<StreamLiveInput> {
+  create(
+    params: LiveInputCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LiveInputCreateResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/stream/live_inputs`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: StreamLiveInput }>
+      }) as Core.APIPromise<{ result: LiveInputCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -29,13 +32,13 @@ export class LiveInputs extends APIResource {
     liveInputIdentifier: string,
     params: LiveInputUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<StreamLiveInput> {
+  ): Core.APIPromise<LiveInputUpdateResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/stream/live_inputs/${liveInputIdentifier}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: StreamLiveInput }>
+      }) as Core.APIPromise<{ result: LiveInputUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -76,13 +79,13 @@ export class LiveInputs extends APIResource {
     liveInputIdentifier: string,
     params: LiveInputGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<StreamLiveInput> {
+  ): Core.APIPromise<LiveInputGetResponse> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/stream/live_inputs/${liveInputIdentifier}`,
         options,
-      ) as Core.APIPromise<{ result: StreamLiveInput }>
+      ) as Core.APIPromise<{ result: LiveInputGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -90,7 +93,7 @@ export class LiveInputs extends APIResource {
 /**
  * Details about a live input.
  */
-export interface StreamLiveInput {
+export interface LiveInputCreateResponse {
   /**
    * The date and time the live input was created.
    */
@@ -121,27 +124,27 @@ export interface StreamLiveInput {
    * most cases, the video will initially be viewable as a live video and transition
    * to on-demand after a condition is satisfied.
    */
-  recording?: StreamLiveInput.Recording;
+  recording?: LiveInputCreateResponse.Recording;
 
   /**
    * Details for streaming to an live input using RTMPS.
    */
-  rtmps?: StreamLiveInput.Rtmps;
+  rtmps?: LiveInputCreateResponse.Rtmps;
 
   /**
    * Details for playback from an live input using RTMPS.
    */
-  rtmpsPlayback?: StreamLiveInput.RtmpsPlayback;
+  rtmpsPlayback?: LiveInputCreateResponse.RtmpsPlayback;
 
   /**
    * Details for streaming to a live input using SRT.
    */
-  srt?: StreamLiveInput.Srt;
+  srt?: LiveInputCreateResponse.Srt;
 
   /**
    * Details for playback from an live input using SRT.
    */
-  srtPlayback?: StreamLiveInput.SrtPlayback;
+  srtPlayback?: LiveInputCreateResponse.SrtPlayback;
 
   /**
    * The connection status of a live input.
@@ -165,15 +168,228 @@ export interface StreamLiveInput {
   /**
    * Details for streaming to a live input using WebRTC.
    */
-  webRTC?: StreamLiveInput.WebRtc;
+  webRTC?: LiveInputCreateResponse.WebRtc;
 
   /**
    * Details for playback from a live input using WebRTC.
    */
-  webRTCPlayback?: StreamLiveInput.WebRtcPlayback;
+  webRTCPlayback?: LiveInputCreateResponse.WebRtcPlayback;
 }
 
-export namespace StreamLiveInput {
+export namespace LiveInputCreateResponse {
+  /**
+   * Records the input to a Cloudflare Stream video. Behavior depends on the mode. In
+   * most cases, the video will initially be viewable as a live video and transition
+   * to on-demand after a condition is satisfied.
+   */
+  export interface Recording {
+    /**
+     * Lists the origins allowed to display videos created with this input. Enter
+     * allowed origin domains in an array and use `*` for wildcard subdomains. An empty
+     * array allows videos to be viewed on any origin.
+     */
+    allowedOrigins?: Array<string>;
+
+    /**
+     * Specifies the recording behavior for the live input. Set this value to `off` to
+     * prevent a recording. Set the value to `automatic` to begin a recording and
+     * transition to on-demand after Stream Live stops receiving input.
+     */
+    mode?: 'off' | 'automatic';
+
+    /**
+     * Indicates if a video using the live input has the `requireSignedURLs` property
+     * set. Also enforces access controls on any video recording of the livestream with
+     * the live input.
+     */
+    requireSignedURLs?: boolean;
+
+    /**
+     * Determines the amount of time a live input configured in `automatic` mode should
+     * wait before a recording transitions from live to on-demand. `0` is recommended
+     * for most use cases and indicates the platform default should be used.
+     */
+    timeoutSeconds?: number;
+  }
+
+  /**
+   * Details for streaming to an live input using RTMPS.
+   */
+  export interface Rtmps {
+    /**
+     * The secret key to use when streaming via RTMPS to a live input.
+     */
+    streamKey?: string;
+
+    /**
+     * The RTMPS URL you provide to the broadcaster, which they stream live video to.
+     */
+    url?: string;
+  }
+
+  /**
+   * Details for playback from an live input using RTMPS.
+   */
+  export interface RtmpsPlayback {
+    /**
+     * The secret key to use for playback via RTMPS.
+     */
+    streamKey?: string;
+
+    /**
+     * The URL used to play live video over RTMPS.
+     */
+    url?: string;
+  }
+
+  /**
+   * Details for streaming to a live input using SRT.
+   */
+  export interface Srt {
+    /**
+     * The secret key to use when streaming via SRT to a live input.
+     */
+    passphrase?: string;
+
+    /**
+     * The identifier of the live input to use when streaming via SRT.
+     */
+    streamId?: string;
+
+    /**
+     * The SRT URL you provide to the broadcaster, which they stream live video to.
+     */
+    url?: string;
+  }
+
+  /**
+   * Details for playback from an live input using SRT.
+   */
+  export interface SrtPlayback {
+    /**
+     * The secret key to use for playback via SRT.
+     */
+    passphrase?: string;
+
+    /**
+     * The identifier of the live input to use for playback via SRT.
+     */
+    streamId?: string;
+
+    /**
+     * The URL used to play live video over SRT.
+     */
+    url?: string;
+  }
+
+  /**
+   * Details for streaming to a live input using WebRTC.
+   */
+  export interface WebRtc {
+    /**
+     * The WebRTC URL you provide to the broadcaster, which they stream live video to.
+     */
+    url?: string;
+  }
+
+  /**
+   * Details for playback from a live input using WebRTC.
+   */
+  export interface WebRtcPlayback {
+    /**
+     * The URL used to play live video over WebRTC.
+     */
+    url?: string;
+  }
+}
+
+/**
+ * Details about a live input.
+ */
+export interface LiveInputUpdateResponse {
+  /**
+   * The date and time the live input was created.
+   */
+  created?: string;
+
+  /**
+   * Indicates the number of days after which the live inputs recordings will be
+   * deleted. When a stream completes and the recording is ready, the value is used
+   * to calculate a scheduled deletion date for that recording. Omit the field to
+   * indicate no change, or include with a `null` value to remove an existing
+   * scheduled deletion.
+   */
+  deleteRecordingAfterDays?: number;
+
+  /**
+   * A user modifiable key-value store used to reference other systems of record for
+   * managing live inputs.
+   */
+  meta?: unknown;
+
+  /**
+   * The date and time the live input was last modified.
+   */
+  modified?: string;
+
+  /**
+   * Records the input to a Cloudflare Stream video. Behavior depends on the mode. In
+   * most cases, the video will initially be viewable as a live video and transition
+   * to on-demand after a condition is satisfied.
+   */
+  recording?: LiveInputUpdateResponse.Recording;
+
+  /**
+   * Details for streaming to an live input using RTMPS.
+   */
+  rtmps?: LiveInputUpdateResponse.Rtmps;
+
+  /**
+   * Details for playback from an live input using RTMPS.
+   */
+  rtmpsPlayback?: LiveInputUpdateResponse.RtmpsPlayback;
+
+  /**
+   * Details for streaming to a live input using SRT.
+   */
+  srt?: LiveInputUpdateResponse.Srt;
+
+  /**
+   * Details for playback from an live input using SRT.
+   */
+  srtPlayback?: LiveInputUpdateResponse.SrtPlayback;
+
+  /**
+   * The connection status of a live input.
+   */
+  status?:
+    | 'connected'
+    | 'reconnected'
+    | 'reconnecting'
+    | 'client_disconnect'
+    | 'ttl_exceeded'
+    | 'failed_to_connect'
+    | 'failed_to_reconnect'
+    | 'new_configuration_accepted'
+    | null;
+
+  /**
+   * A unique identifier for a live input.
+   */
+  uid?: string;
+
+  /**
+   * Details for streaming to a live input using WebRTC.
+   */
+  webRTC?: LiveInputUpdateResponse.WebRtc;
+
+  /**
+   * Details for playback from a live input using WebRTC.
+   */
+  webRTCPlayback?: LiveInputUpdateResponse.WebRtcPlayback;
+}
+
+export namespace LiveInputUpdateResponse {
   /**
    * Records the input to a Cloudflare Stream video. Behavior depends on the mode. In
    * most cases, the video will initially be viewable as a live video and transition
@@ -348,6 +564,219 @@ export namespace LiveInputListResponse {
   }
 }
 
+/**
+ * Details about a live input.
+ */
+export interface LiveInputGetResponse {
+  /**
+   * The date and time the live input was created.
+   */
+  created?: string;
+
+  /**
+   * Indicates the number of days after which the live inputs recordings will be
+   * deleted. When a stream completes and the recording is ready, the value is used
+   * to calculate a scheduled deletion date for that recording. Omit the field to
+   * indicate no change, or include with a `null` value to remove an existing
+   * scheduled deletion.
+   */
+  deleteRecordingAfterDays?: number;
+
+  /**
+   * A user modifiable key-value store used to reference other systems of record for
+   * managing live inputs.
+   */
+  meta?: unknown;
+
+  /**
+   * The date and time the live input was last modified.
+   */
+  modified?: string;
+
+  /**
+   * Records the input to a Cloudflare Stream video. Behavior depends on the mode. In
+   * most cases, the video will initially be viewable as a live video and transition
+   * to on-demand after a condition is satisfied.
+   */
+  recording?: LiveInputGetResponse.Recording;
+
+  /**
+   * Details for streaming to an live input using RTMPS.
+   */
+  rtmps?: LiveInputGetResponse.Rtmps;
+
+  /**
+   * Details for playback from an live input using RTMPS.
+   */
+  rtmpsPlayback?: LiveInputGetResponse.RtmpsPlayback;
+
+  /**
+   * Details for streaming to a live input using SRT.
+   */
+  srt?: LiveInputGetResponse.Srt;
+
+  /**
+   * Details for playback from an live input using SRT.
+   */
+  srtPlayback?: LiveInputGetResponse.SrtPlayback;
+
+  /**
+   * The connection status of a live input.
+   */
+  status?:
+    | 'connected'
+    | 'reconnected'
+    | 'reconnecting'
+    | 'client_disconnect'
+    | 'ttl_exceeded'
+    | 'failed_to_connect'
+    | 'failed_to_reconnect'
+    | 'new_configuration_accepted'
+    | null;
+
+  /**
+   * A unique identifier for a live input.
+   */
+  uid?: string;
+
+  /**
+   * Details for streaming to a live input using WebRTC.
+   */
+  webRTC?: LiveInputGetResponse.WebRtc;
+
+  /**
+   * Details for playback from a live input using WebRTC.
+   */
+  webRTCPlayback?: LiveInputGetResponse.WebRtcPlayback;
+}
+
+export namespace LiveInputGetResponse {
+  /**
+   * Records the input to a Cloudflare Stream video. Behavior depends on the mode. In
+   * most cases, the video will initially be viewable as a live video and transition
+   * to on-demand after a condition is satisfied.
+   */
+  export interface Recording {
+    /**
+     * Lists the origins allowed to display videos created with this input. Enter
+     * allowed origin domains in an array and use `*` for wildcard subdomains. An empty
+     * array allows videos to be viewed on any origin.
+     */
+    allowedOrigins?: Array<string>;
+
+    /**
+     * Specifies the recording behavior for the live input. Set this value to `off` to
+     * prevent a recording. Set the value to `automatic` to begin a recording and
+     * transition to on-demand after Stream Live stops receiving input.
+     */
+    mode?: 'off' | 'automatic';
+
+    /**
+     * Indicates if a video using the live input has the `requireSignedURLs` property
+     * set. Also enforces access controls on any video recording of the livestream with
+     * the live input.
+     */
+    requireSignedURLs?: boolean;
+
+    /**
+     * Determines the amount of time a live input configured in `automatic` mode should
+     * wait before a recording transitions from live to on-demand. `0` is recommended
+     * for most use cases and indicates the platform default should be used.
+     */
+    timeoutSeconds?: number;
+  }
+
+  /**
+   * Details for streaming to an live input using RTMPS.
+   */
+  export interface Rtmps {
+    /**
+     * The secret key to use when streaming via RTMPS to a live input.
+     */
+    streamKey?: string;
+
+    /**
+     * The RTMPS URL you provide to the broadcaster, which they stream live video to.
+     */
+    url?: string;
+  }
+
+  /**
+   * Details for playback from an live input using RTMPS.
+   */
+  export interface RtmpsPlayback {
+    /**
+     * The secret key to use for playback via RTMPS.
+     */
+    streamKey?: string;
+
+    /**
+     * The URL used to play live video over RTMPS.
+     */
+    url?: string;
+  }
+
+  /**
+   * Details for streaming to a live input using SRT.
+   */
+  export interface Srt {
+    /**
+     * The secret key to use when streaming via SRT to a live input.
+     */
+    passphrase?: string;
+
+    /**
+     * The identifier of the live input to use when streaming via SRT.
+     */
+    streamId?: string;
+
+    /**
+     * The SRT URL you provide to the broadcaster, which they stream live video to.
+     */
+    url?: string;
+  }
+
+  /**
+   * Details for playback from an live input using SRT.
+   */
+  export interface SrtPlayback {
+    /**
+     * The secret key to use for playback via SRT.
+     */
+    passphrase?: string;
+
+    /**
+     * The identifier of the live input to use for playback via SRT.
+     */
+    streamId?: string;
+
+    /**
+     * The URL used to play live video over SRT.
+     */
+    url?: string;
+  }
+
+  /**
+   * Details for streaming to a live input using WebRTC.
+   */
+  export interface WebRtc {
+    /**
+     * The WebRTC URL you provide to the broadcaster, which they stream live video to.
+     */
+    url?: string;
+  }
+
+  /**
+   * Details for playback from a live input using WebRTC.
+   */
+  export interface WebRtcPlayback {
+    /**
+     * The URL used to play live video over WebRTC.
+     */
+    url?: string;
+  }
+}
+
 export interface LiveInputCreateParams {
   /**
    * Path param: Identifier
@@ -518,15 +947,18 @@ export interface LiveInputGetParams {
 }
 
 export namespace LiveInputs {
-  export import StreamLiveInput = LiveInputsAPI.StreamLiveInput;
+  export import LiveInputCreateResponse = LiveInputsAPI.LiveInputCreateResponse;
+  export import LiveInputUpdateResponse = LiveInputsAPI.LiveInputUpdateResponse;
   export import LiveInputListResponse = LiveInputsAPI.LiveInputListResponse;
+  export import LiveInputGetResponse = LiveInputsAPI.LiveInputGetResponse;
   export import LiveInputCreateParams = LiveInputsAPI.LiveInputCreateParams;
   export import LiveInputUpdateParams = LiveInputsAPI.LiveInputUpdateParams;
   export import LiveInputListParams = LiveInputsAPI.LiveInputListParams;
   export import LiveInputDeleteParams = LiveInputsAPI.LiveInputDeleteParams;
   export import LiveInputGetParams = LiveInputsAPI.LiveInputGetParams;
   export import Outputs = OutputsAPI.Outputs;
-  export import StreamOutput = OutputsAPI.StreamOutput;
+  export import OutputCreateResponse = OutputsAPI.OutputCreateResponse;
+  export import OutputUpdateResponse = OutputsAPI.OutputUpdateResponse;
   export import OutputListResponse = OutputsAPI.OutputListResponse;
   export import OutputCreateParams = OutputsAPI.OutputCreateParams;
   export import OutputUpdateParams = OutputsAPI.OutputUpdateParams;

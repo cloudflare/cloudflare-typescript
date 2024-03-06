@@ -13,13 +13,13 @@ export class OriginErrorPagePassThru extends APIResource {
   edit(
     params: OriginErrorPagePassThruEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZonesOriginErrorPagePassThru> {
+  ): Core.APIPromise<OriginErrorPagePassThruEditResponse> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/origin_error_page_pass_thru`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZonesOriginErrorPagePassThru }>
+      }) as Core.APIPromise<{ result: OriginErrorPagePassThruEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -31,11 +31,11 @@ export class OriginErrorPagePassThru extends APIResource {
   get(
     params: OriginErrorPagePassThruGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZonesOriginErrorPagePassThru> {
+  ): Core.APIPromise<OriginErrorPagePassThruGetResponse> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/origin_error_page_pass_thru`, options) as Core.APIPromise<{
-        result: ZonesOriginErrorPagePassThru;
+        result: OriginErrorPagePassThruGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -46,7 +46,35 @@ export class OriginErrorPagePassThru extends APIResource {
  * server instead of showing a default Cloudflare error page. This does not apply
  * to 522 errors and is limited to Enterprise Zones.
  */
-export interface ZonesOriginErrorPagePassThru {
+export interface OriginErrorPagePassThruEditResponse {
+  /**
+   * ID of the zone setting.
+   */
+  id: 'origin_error_page_pass_thru';
+
+  /**
+   * Current value of the zone setting.
+   */
+  value: 'on' | 'off';
+
+  /**
+   * Whether or not this setting can be modified for this zone (based on your
+   * Cloudflare plan level).
+   */
+  editable?: true | false;
+
+  /**
+   * last time this setting was modified.
+   */
+  modified_on?: string | null;
+}
+
+/**
+ * Cloudflare will proxy customer error pages on any 502,504 errors on origin
+ * server instead of showing a default Cloudflare error page. This does not apply
+ * to 522 errors and is limited to Enterprise Zones.
+ */
+export interface OriginErrorPagePassThruGetResponse {
   /**
    * ID of the zone setting.
    */
@@ -89,7 +117,8 @@ export interface OriginErrorPagePassThruGetParams {
 }
 
 export namespace OriginErrorPagePassThru {
-  export import ZonesOriginErrorPagePassThru = OriginErrorPagePassThruAPI.ZonesOriginErrorPagePassThru;
+  export import OriginErrorPagePassThruEditResponse = OriginErrorPagePassThruAPI.OriginErrorPagePassThruEditResponse;
+  export import OriginErrorPagePassThruGetResponse = OriginErrorPagePassThruAPI.OriginErrorPagePassThruGetResponse;
   export import OriginErrorPagePassThruEditParams = OriginErrorPagePassThruAPI.OriginErrorPagePassThruEditParams;
   export import OriginErrorPagePassThruGetParams = OriginErrorPagePassThruAPI.OriginErrorPagePassThruGetParams;
 }

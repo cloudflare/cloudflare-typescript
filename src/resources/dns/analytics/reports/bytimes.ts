@@ -17,13 +17,13 @@ export class Bytimes extends APIResource {
     identifier: string,
     query?: BytimeGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DNSDNSAnalyticsAPIReportBytime>;
-  get(identifier: string, options?: Core.RequestOptions): Core.APIPromise<DNSDNSAnalyticsAPIReportBytime>;
+  ): Core.APIPromise<BytimeGetResponse>;
+  get(identifier: string, options?: Core.RequestOptions): Core.APIPromise<BytimeGetResponse>;
   get(
     identifier: string,
     query: BytimeGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DNSDNSAnalyticsAPIReportBytime> {
+  ): Core.APIPromise<BytimeGetResponse> {
     if (isRequestOptions(query)) {
       return this.get(identifier, {}, query);
     }
@@ -31,16 +31,16 @@ export class Bytimes extends APIResource {
       this._client.get(`/zones/${identifier}/dns_analytics/report/bytime`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: DNSDNSAnalyticsAPIReportBytime }>
+      }) as Core.APIPromise<{ result: BytimeGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface DNSDNSAnalyticsAPIReportBytime {
+export interface BytimeGetResponse {
   /**
    * Array with one row per combination of dimension values.
    */
-  data: Array<DNSDNSAnalyticsAPIReportBytime.Data>;
+  data: Array<BytimeGetResponse.Data>;
 
   /**
    * Number of seconds between current time and last processed event, in another
@@ -60,7 +60,7 @@ export interface DNSDNSAnalyticsAPIReportBytime {
    */
   min: unknown;
 
-  query: DNSDNSAnalyticsAPIReportBytime.Query;
+  query: BytimeGetResponse.Query;
 
   /**
    * Total number of rows in the result.
@@ -80,7 +80,7 @@ export interface DNSDNSAnalyticsAPIReportBytime {
   totals: unknown;
 }
 
-export namespace DNSDNSAnalyticsAPIReportBytime {
+export namespace BytimeGetResponse {
   export interface Data {
     /**
      * Array of dimension values, representing the combination of dimension values
@@ -203,6 +203,6 @@ export interface BytimeGetParams {
 }
 
 export namespace Bytimes {
-  export import DNSDNSAnalyticsAPIReportBytime = BytimesAPI.DNSDNSAnalyticsAPIReportBytime;
+  export import BytimeGetResponse = BytimesAPI.BytimeGetResponse;
   export import BytimeGetParams = BytimesAPI.BytimeGetParams;
 }

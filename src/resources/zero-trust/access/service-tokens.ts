@@ -48,7 +48,7 @@ export class ServiceTokens extends APIResource {
     uuid: string,
     params: ServiceTokenUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessServiceTokens> {
+  ): Core.APIPromise<ServiceTokenUpdateResponse> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -70,7 +70,7 @@ export class ServiceTokens extends APIResource {
       this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/service_tokens/${uuid}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: AccessServiceTokens }>
+      }) as Core.APIPromise<{ result: ServiceTokenUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -121,13 +121,13 @@ export class ServiceTokens extends APIResource {
     uuid: string,
     params?: ServiceTokenDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessServiceTokens>;
-  delete(uuid: string, options?: Core.RequestOptions): Core.APIPromise<AccessServiceTokens>;
+  ): Core.APIPromise<ServiceTokenDeleteResponse>;
+  delete(uuid: string, options?: Core.RequestOptions): Core.APIPromise<ServiceTokenDeleteResponse>;
   delete(
     uuid: string,
     params: ServiceTokenDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessServiceTokens> {
+  ): Core.APIPromise<ServiceTokenDeleteResponse> {
     if (isRequestOptions(params)) {
       return this.delete(uuid, {}, params);
     }
@@ -152,7 +152,7 @@ export class ServiceTokens extends APIResource {
       this._client.delete(
         `/${accountOrZone}/${accountOrZoneId}/access/service_tokens/${uuid}`,
         options,
-      ) as Core.APIPromise<{ result: AccessServiceTokens }>
+      ) as Core.APIPromise<{ result: ServiceTokenDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -163,12 +163,12 @@ export class ServiceTokens extends APIResource {
     identifier: string,
     uuid: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessServiceTokens> {
+  ): Core.APIPromise<ServiceTokenRefreshResponse> {
     return (
       this._client.post(
         `/accounts/${identifier}/access/service_tokens/${uuid}/refresh`,
         options,
-      ) as Core.APIPromise<{ result: AccessServiceTokens }>
+      ) as Core.APIPromise<{ result: ServiceTokenRefreshResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -187,35 +187,6 @@ export class ServiceTokens extends APIResource {
       ) as Core.APIPromise<{ result: ServiceTokenRotateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
-}
-
-export interface AccessServiceTokens {
-  /**
-   * The ID of the service token.
-   */
-  id?: unknown;
-
-  /**
-   * The Client ID for the service token. Access will check for this value in the
-   * `CF-Access-Client-ID` request header.
-   */
-  client_id?: string;
-
-  created_at?: string;
-
-  /**
-   * The duration for how long the service token will be valid. Must be in the format
-   * `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h. The
-   * default is 1 year in hours (8760h).
-   */
-  duration?: string;
-
-  /**
-   * The name of the service token.
-   */
-  name?: string;
-
-  updated_at?: string;
 }
 
 export interface ServiceTokenCreateResponse {
@@ -253,7 +224,125 @@ export interface ServiceTokenCreateResponse {
   updated_at?: string;
 }
 
-export type ServiceTokenListResponse = Array<AccessServiceTokens>;
+export interface ServiceTokenUpdateResponse {
+  /**
+   * The ID of the service token.
+   */
+  id?: unknown;
+
+  /**
+   * The Client ID for the service token. Access will check for this value in the
+   * `CF-Access-Client-ID` request header.
+   */
+  client_id?: string;
+
+  created_at?: string;
+
+  /**
+   * The duration for how long the service token will be valid. Must be in the format
+   * `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h. The
+   * default is 1 year in hours (8760h).
+   */
+  duration?: string;
+
+  /**
+   * The name of the service token.
+   */
+  name?: string;
+
+  updated_at?: string;
+}
+
+export type ServiceTokenListResponse = Array<ServiceTokenListResponse.ServiceTokenListResponseItem>;
+
+export namespace ServiceTokenListResponse {
+  export interface ServiceTokenListResponseItem {
+    /**
+     * The ID of the service token.
+     */
+    id?: unknown;
+
+    /**
+     * The Client ID for the service token. Access will check for this value in the
+     * `CF-Access-Client-ID` request header.
+     */
+    client_id?: string;
+
+    created_at?: string;
+
+    /**
+     * The duration for how long the service token will be valid. Must be in the format
+     * `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h. The
+     * default is 1 year in hours (8760h).
+     */
+    duration?: string;
+
+    /**
+     * The name of the service token.
+     */
+    name?: string;
+
+    updated_at?: string;
+  }
+}
+
+export interface ServiceTokenDeleteResponse {
+  /**
+   * The ID of the service token.
+   */
+  id?: unknown;
+
+  /**
+   * The Client ID for the service token. Access will check for this value in the
+   * `CF-Access-Client-ID` request header.
+   */
+  client_id?: string;
+
+  created_at?: string;
+
+  /**
+   * The duration for how long the service token will be valid. Must be in the format
+   * `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h. The
+   * default is 1 year in hours (8760h).
+   */
+  duration?: string;
+
+  /**
+   * The name of the service token.
+   */
+  name?: string;
+
+  updated_at?: string;
+}
+
+export interface ServiceTokenRefreshResponse {
+  /**
+   * The ID of the service token.
+   */
+  id?: unknown;
+
+  /**
+   * The Client ID for the service token. Access will check for this value in the
+   * `CF-Access-Client-ID` request header.
+   */
+  client_id?: string;
+
+  created_at?: string;
+
+  /**
+   * The duration for how long the service token will be valid. Must be in the format
+   * `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h. The
+   * default is 1 year in hours (8760h).
+   */
+  duration?: string;
+
+  /**
+   * The name of the service token.
+   */
+  name?: string;
+
+  updated_at?: string;
+}
 
 export interface ServiceTokenRotateResponse {
   /**
@@ -367,9 +456,11 @@ export interface ServiceTokenDeleteParams {
 }
 
 export namespace ServiceTokens {
-  export import AccessServiceTokens = ServiceTokensAPI.AccessServiceTokens;
   export import ServiceTokenCreateResponse = ServiceTokensAPI.ServiceTokenCreateResponse;
+  export import ServiceTokenUpdateResponse = ServiceTokensAPI.ServiceTokenUpdateResponse;
   export import ServiceTokenListResponse = ServiceTokensAPI.ServiceTokenListResponse;
+  export import ServiceTokenDeleteResponse = ServiceTokensAPI.ServiceTokenDeleteResponse;
+  export import ServiceTokenRefreshResponse = ServiceTokensAPI.ServiceTokenRefreshResponse;
   export import ServiceTokenRotateResponse = ServiceTokensAPI.ServiceTokenRotateResponse;
   export import ServiceTokenCreateParams = ServiceTokensAPI.ServiceTokenCreateParams;
   export import ServiceTokenUpdateParams = ServiceTokensAPI.ServiceTokenUpdateParams;

@@ -34,13 +34,13 @@ export class Prefixes extends APIResource {
     bgpPrefixId: string,
     params: PrefixEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AddressingIpamBGPPrefixes> {
+  ): Core.APIPromise<PrefixEditResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.patch(
         `/accounts/${account_id}/addressing/prefixes/${prefixId}/bgp/prefixes/${bgpPrefixId}`,
         { body, ...options },
-      ) as Core.APIPromise<{ result: AddressingIpamBGPPrefixes }>
+      ) as Core.APIPromise<{ result: PrefixEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -52,18 +52,89 @@ export class Prefixes extends APIResource {
     bgpPrefixId: string,
     params: PrefixGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AddressingIpamBGPPrefixes> {
+  ): Core.APIPromise<PrefixGetResponse> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/addressing/prefixes/${prefixId}/bgp/prefixes/${bgpPrefixId}`,
         options,
-      ) as Core.APIPromise<{ result: AddressingIpamBGPPrefixes }>
+      ) as Core.APIPromise<{ result: PrefixGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface AddressingIpamBGPPrefixes {
+export type PrefixListResponse = Array<PrefixListResponse.PrefixListResponseItem>;
+
+export namespace PrefixListResponse {
+  export interface PrefixListResponseItem {
+    /**
+     * Identifier
+     */
+    id?: string;
+
+    /**
+     * Autonomous System Number (ASN) the prefix will be advertised under.
+     */
+    asn?: number | null;
+
+    bgp_signal_opts?: PrefixListResponseItem.BGPSignalOpts;
+
+    /**
+     * IP Prefix in Classless Inter-Domain Routing format.
+     */
+    cidr?: string;
+
+    created_at?: string;
+
+    modified_at?: string;
+
+    on_demand?: PrefixListResponseItem.OnDemand;
+  }
+
+  export namespace PrefixListResponseItem {
+    export interface BGPSignalOpts {
+      /**
+       * Whether control of advertisement of the prefix to the Internet is enabled to be
+       * performed via BGP signal
+       */
+      enabled?: boolean;
+
+      /**
+       * Last time BGP signaling control was toggled. This field is null if BGP signaling
+       * has never been enabled.
+       */
+      modified_at?: string | null;
+    }
+
+    export interface OnDemand {
+      /**
+       * Prefix advertisement status to the Internet. This field is only not 'null' if on
+       * demand is enabled.
+       */
+      advertised?: boolean | null;
+
+      /**
+       * Last time the advertisement status was changed. This field is only not 'null' if
+       * on demand is enabled.
+       */
+      advertised_modified_at?: string | null;
+
+      /**
+       * Whether advertisement of the prefix to the Internet may be dynamically enabled
+       * or disabled.
+       */
+      on_demand_enabled?: boolean;
+
+      /**
+       * Whether advertisement status of the prefix is locked, meaning it cannot be
+       * changed.
+       */
+      on_demand_locked?: boolean;
+    }
+  }
+}
+
+export interface PrefixEditResponse {
   /**
    * Identifier
    */
@@ -74,7 +145,7 @@ export interface AddressingIpamBGPPrefixes {
    */
   asn?: number | null;
 
-  bgp_signal_opts?: AddressingIpamBGPPrefixes.BGPSignalOpts;
+  bgp_signal_opts?: PrefixEditResponse.BGPSignalOpts;
 
   /**
    * IP Prefix in Classless Inter-Domain Routing format.
@@ -85,10 +156,10 @@ export interface AddressingIpamBGPPrefixes {
 
   modified_at?: string;
 
-  on_demand?: AddressingIpamBGPPrefixes.OnDemand;
+  on_demand?: PrefixEditResponse.OnDemand;
 }
 
-export namespace AddressingIpamBGPPrefixes {
+export namespace PrefixEditResponse {
   export interface BGPSignalOpts {
     /**
      * Whether control of advertisement of the prefix to the Internet is enabled to be
@@ -130,7 +201,72 @@ export namespace AddressingIpamBGPPrefixes {
   }
 }
 
-export type PrefixListResponse = Array<AddressingIpamBGPPrefixes>;
+export interface PrefixGetResponse {
+  /**
+   * Identifier
+   */
+  id?: string;
+
+  /**
+   * Autonomous System Number (ASN) the prefix will be advertised under.
+   */
+  asn?: number | null;
+
+  bgp_signal_opts?: PrefixGetResponse.BGPSignalOpts;
+
+  /**
+   * IP Prefix in Classless Inter-Domain Routing format.
+   */
+  cidr?: string;
+
+  created_at?: string;
+
+  modified_at?: string;
+
+  on_demand?: PrefixGetResponse.OnDemand;
+}
+
+export namespace PrefixGetResponse {
+  export interface BGPSignalOpts {
+    /**
+     * Whether control of advertisement of the prefix to the Internet is enabled to be
+     * performed via BGP signal
+     */
+    enabled?: boolean;
+
+    /**
+     * Last time BGP signaling control was toggled. This field is null if BGP signaling
+     * has never been enabled.
+     */
+    modified_at?: string | null;
+  }
+
+  export interface OnDemand {
+    /**
+     * Prefix advertisement status to the Internet. This field is only not 'null' if on
+     * demand is enabled.
+     */
+    advertised?: boolean | null;
+
+    /**
+     * Last time the advertisement status was changed. This field is only not 'null' if
+     * on demand is enabled.
+     */
+    advertised_modified_at?: string | null;
+
+    /**
+     * Whether advertisement of the prefix to the Internet may be dynamically enabled
+     * or disabled.
+     */
+    on_demand_enabled?: boolean;
+
+    /**
+     * Whether advertisement status of the prefix is locked, meaning it cannot be
+     * changed.
+     */
+    on_demand_locked?: boolean;
+  }
+}
 
 export interface PrefixListParams {
   /**
@@ -165,8 +301,9 @@ export interface PrefixGetParams {
 }
 
 export namespace Prefixes {
-  export import AddressingIpamBGPPrefixes = PrefixesAPI.AddressingIpamBGPPrefixes;
   export import PrefixListResponse = PrefixesAPI.PrefixListResponse;
+  export import PrefixEditResponse = PrefixesAPI.PrefixEditResponse;
+  export import PrefixGetResponse = PrefixesAPI.PrefixGetResponse;
   export import PrefixListParams = PrefixesAPI.PrefixListParams;
   export import PrefixEditParams = PrefixesAPI.PrefixEditParams;
   export import PrefixGetParams = PrefixesAPI.PrefixGetParams;

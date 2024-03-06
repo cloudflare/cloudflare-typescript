@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as CustomCertificatesAPI from 'cloudflare/resources/custom-certificates/custom-certificates';
-import * as KeylessCertificatesAPI from 'cloudflare/resources/keyless-certificates';
 import * as PrioritizeAPI from 'cloudflare/resources/custom-certificates/prioritize';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
@@ -33,14 +32,11 @@ export class CustomCertificates extends APIResource {
   list(
     params: CustomCertificateListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<
-    TLSCertificatesAndHostnamesCustomCertificatesV4PagePaginationArray,
-    TLSCertificatesAndHostnamesCustomCertificate
-  > {
+  ): Core.PagePromise<CustomCertificateListResponsesV4PagePaginationArray, CustomCertificateListResponse> {
     const { zone_id, ...query } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/custom_certificates`,
-      TLSCertificatesAndHostnamesCustomCertificatesV4PagePaginationArray,
+      CustomCertificateListResponsesV4PagePaginationArray,
       { query, ...options },
     );
   }
@@ -99,9 +95,11 @@ export class CustomCertificates extends APIResource {
   }
 }
 
-export class TLSCertificatesAndHostnamesCustomCertificatesV4PagePaginationArray extends V4PagePaginationArray<TLSCertificatesAndHostnamesCustomCertificate> {}
+export class CustomCertificateListResponsesV4PagePaginationArray extends V4PagePaginationArray<CustomCertificateListResponse> {}
 
-export interface TLSCertificatesAndHostnamesCustomCertificate {
+export type CustomCertificateCreateResponse = unknown | string;
+
+export interface CustomCertificateListResponse {
   /**
    * Identifier
    */
@@ -169,9 +167,9 @@ export interface TLSCertificatesAndHostnamesCustomCertificate {
    * security data centers. Default distribution is to all Cloudflare datacenters,
    * for optimal performance.
    */
-  geo_restrictions?: TLSCertificatesAndHostnamesCustomCertificate.GeoRestrictions;
+  geo_restrictions?: CustomCertificateListResponse.GeoRestrictions;
 
-  keyless_server?: KeylessCertificatesAPI.TLSCertificatesAndHostnamesBase;
+  keyless_server?: CustomCertificateListResponse.KeylessServer;
 
   /**
    * Specify the policy that determines the region where your private key will be
@@ -187,7 +185,7 @@ export interface TLSCertificatesAndHostnamesCustomCertificate {
   policy?: string;
 }
 
-export namespace TLSCertificatesAndHostnamesCustomCertificate {
+export namespace CustomCertificateListResponse {
   /**
    * Specify the region where your private key can be held locally for optimal TLS
    * performance. HTTPS connections to any excluded data center will still be fully
@@ -200,9 +198,78 @@ export namespace TLSCertificatesAndHostnamesCustomCertificate {
   export interface GeoRestrictions {
     label?: 'us' | 'eu' | 'highest_security';
   }
-}
 
-export type CustomCertificateCreateResponse = unknown | string;
+  export interface KeylessServer {
+    /**
+     * Keyless certificate identifier tag.
+     */
+    id: string;
+
+    /**
+     * When the Keyless SSL was created.
+     */
+    created_on: string;
+
+    /**
+     * Whether or not the Keyless SSL is on or off.
+     */
+    enabled: boolean;
+
+    /**
+     * The keyless SSL name.
+     */
+    host: string;
+
+    /**
+     * When the Keyless SSL was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * The keyless SSL name.
+     */
+    name: string;
+
+    /**
+     * Available permissions for the Keyless SSL for the current user requesting the
+     * item.
+     */
+    permissions: Array<unknown>;
+
+    /**
+     * The keyless SSL port used to communicate between Cloudflare and the client's
+     * Keyless SSL server.
+     */
+    port: number;
+
+    /**
+     * Status of the Keyless SSL.
+     */
+    status: 'active' | 'deleted';
+
+    /**
+     * Configuration for using Keyless SSL through a Cloudflare Tunnel
+     */
+    tunnel?: KeylessServer.Tunnel;
+  }
+
+  export namespace KeylessServer {
+    /**
+     * Configuration for using Keyless SSL through a Cloudflare Tunnel
+     */
+    export interface Tunnel {
+      /**
+       * Private IP of the Key Server Host
+       */
+      private_ip: string;
+
+      /**
+       * Cloudflare Tunnel Virtual Network ID
+       */
+      vnet_id: string;
+    }
+  }
+}
 
 export interface CustomCertificateDeleteResponse {
   /**
@@ -376,12 +443,12 @@ export interface CustomCertificateGetParams {
 }
 
 export namespace CustomCertificates {
-  export import TLSCertificatesAndHostnamesCustomCertificate = CustomCertificatesAPI.TLSCertificatesAndHostnamesCustomCertificate;
   export import CustomCertificateCreateResponse = CustomCertificatesAPI.CustomCertificateCreateResponse;
+  export import CustomCertificateListResponse = CustomCertificatesAPI.CustomCertificateListResponse;
   export import CustomCertificateDeleteResponse = CustomCertificatesAPI.CustomCertificateDeleteResponse;
   export import CustomCertificateEditResponse = CustomCertificatesAPI.CustomCertificateEditResponse;
   export import CustomCertificateGetResponse = CustomCertificatesAPI.CustomCertificateGetResponse;
-  export import TLSCertificatesAndHostnamesCustomCertificatesV4PagePaginationArray = CustomCertificatesAPI.TLSCertificatesAndHostnamesCustomCertificatesV4PagePaginationArray;
+  export import CustomCertificateListResponsesV4PagePaginationArray = CustomCertificatesAPI.CustomCertificateListResponsesV4PagePaginationArray;
   export import CustomCertificateCreateParams = CustomCertificatesAPI.CustomCertificateCreateParams;
   export import CustomCertificateListParams = CustomCertificatesAPI.CustomCertificateListParams;
   export import CustomCertificateDeleteParams = CustomCertificatesAPI.CustomCertificateDeleteParams;

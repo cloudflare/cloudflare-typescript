@@ -11,9 +11,12 @@ export class WAF extends APIResource {
 
 export namespace WAF {
   export import Overrides = OverridesAPI.Overrides;
-  export import LegacyJhsOverride = OverridesAPI.LegacyJhsOverride;
+  export import OverrideCreateResponse = OverridesAPI.OverrideCreateResponse;
+  export import OverrideUpdateResponse = OverridesAPI.OverrideUpdateResponse;
+  export import OverrideListResponse = OverridesAPI.OverrideListResponse;
   export import OverrideDeleteResponse = OverridesAPI.OverrideDeleteResponse;
-  export import LegacyJhsOverridesV4PagePaginationArray = OverridesAPI.LegacyJhsOverridesV4PagePaginationArray;
+  export import OverrideGetResponse = OverridesAPI.OverrideGetResponse;
+  export import OverrideListResponsesV4PagePaginationArray = OverridesAPI.OverrideListResponsesV4PagePaginationArray;
   export import OverrideCreateParams = OverridesAPI.OverrideCreateParams;
   export import OverrideUpdateParams = OverridesAPI.OverrideUpdateParams;
   export import OverrideListParams = OverridesAPI.OverrideListParams;

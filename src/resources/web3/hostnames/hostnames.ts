@@ -17,10 +17,10 @@ export class Hostnames extends APIResource {
     zoneIdentifier: string,
     body: HostnameCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DwebConfigWeb3Hostname> {
+  ): Core.APIPromise<HostnameCreateResponse> {
     return (
       this._client.post(`/zones/${zoneIdentifier}/web3/hostnames`, { body, ...options }) as Core.APIPromise<{
-        result: DwebConfigWeb3Hostname;
+        result: HostnameCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -60,12 +60,12 @@ export class Hostnames extends APIResource {
     identifier: string,
     body: HostnameEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DwebConfigWeb3Hostname> {
+  ): Core.APIPromise<HostnameEditResponse> {
     return (
       this._client.patch(`/zones/${zoneIdentifier}/web3/hostnames/${identifier}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: DwebConfigWeb3Hostname }>
+      }) as Core.APIPromise<{ result: HostnameEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -76,16 +76,16 @@ export class Hostnames extends APIResource {
     zoneIdentifier: string,
     identifier: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DwebConfigWeb3Hostname> {
+  ): Core.APIPromise<HostnameGetResponse> {
     return (
       this._client.get(`/zones/${zoneIdentifier}/web3/hostnames/${identifier}`, options) as Core.APIPromise<{
-        result: DwebConfigWeb3Hostname;
+        result: HostnameGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface DwebConfigWeb3Hostname {
+export interface HostnameCreateResponse {
   /**
    * Identifier
    */
@@ -121,13 +121,123 @@ export interface DwebConfigWeb3Hostname {
   target?: 'ethereum' | 'ipfs' | 'ipfs_universal_path';
 }
 
-export type HostnameListResponse = Array<DwebConfigWeb3Hostname>;
+export type HostnameListResponse = Array<HostnameListResponse.HostnameListResponseItem>;
+
+export namespace HostnameListResponse {
+  export interface HostnameListResponseItem {
+    /**
+     * Identifier
+     */
+    id?: string;
+
+    created_on?: string;
+
+    /**
+     * An optional description of the hostname.
+     */
+    description?: string;
+
+    /**
+     * DNSLink value used if the target is ipfs.
+     */
+    dnslink?: string;
+
+    modified_on?: string;
+
+    /**
+     * The hostname that will point to the target gateway via CNAME.
+     */
+    name?: string;
+
+    /**
+     * Status of the hostname's activation.
+     */
+    status?: 'active' | 'pending' | 'deleting' | 'error';
+
+    /**
+     * Target gateway of the hostname.
+     */
+    target?: 'ethereum' | 'ipfs' | 'ipfs_universal_path';
+  }
+}
 
 export interface HostnameDeleteResponse {
   /**
    * Identifier
    */
   id: string;
+}
+
+export interface HostnameEditResponse {
+  /**
+   * Identifier
+   */
+  id?: string;
+
+  created_on?: string;
+
+  /**
+   * An optional description of the hostname.
+   */
+  description?: string;
+
+  /**
+   * DNSLink value used if the target is ipfs.
+   */
+  dnslink?: string;
+
+  modified_on?: string;
+
+  /**
+   * The hostname that will point to the target gateway via CNAME.
+   */
+  name?: string;
+
+  /**
+   * Status of the hostname's activation.
+   */
+  status?: 'active' | 'pending' | 'deleting' | 'error';
+
+  /**
+   * Target gateway of the hostname.
+   */
+  target?: 'ethereum' | 'ipfs' | 'ipfs_universal_path';
+}
+
+export interface HostnameGetResponse {
+  /**
+   * Identifier
+   */
+  id?: string;
+
+  created_on?: string;
+
+  /**
+   * An optional description of the hostname.
+   */
+  description?: string;
+
+  /**
+   * DNSLink value used if the target is ipfs.
+   */
+  dnslink?: string;
+
+  modified_on?: string;
+
+  /**
+   * The hostname that will point to the target gateway via CNAME.
+   */
+  name?: string;
+
+  /**
+   * Status of the hostname's activation.
+   */
+  status?: 'active' | 'pending' | 'deleting' | 'error';
+
+  /**
+   * Target gateway of the hostname.
+   */
+  target?: 'ethereum' | 'ipfs' | 'ipfs_universal_path';
 }
 
 export interface HostnameCreateParams {
@@ -160,9 +270,11 @@ export interface HostnameEditParams {
 }
 
 export namespace Hostnames {
-  export import DwebConfigWeb3Hostname = HostnamesAPI.DwebConfigWeb3Hostname;
+  export import HostnameCreateResponse = HostnamesAPI.HostnameCreateResponse;
   export import HostnameListResponse = HostnamesAPI.HostnameListResponse;
   export import HostnameDeleteResponse = HostnamesAPI.HostnameDeleteResponse;
+  export import HostnameEditResponse = HostnamesAPI.HostnameEditResponse;
+  export import HostnameGetResponse = HostnamesAPI.HostnameGetResponse;
   export import HostnameCreateParams = HostnamesAPI.HostnameCreateParams;
   export import HostnameEditParams = HostnamesAPI.HostnameEditParams;
   export import IPFSUniversalPaths = IPFSUniversalPathsAPI.IPFSUniversalPaths;

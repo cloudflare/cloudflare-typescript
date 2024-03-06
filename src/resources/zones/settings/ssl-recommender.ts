@@ -13,13 +13,13 @@ export class SSLRecommender extends APIResource {
   edit(
     params: SSLRecommenderEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZonesSSLRecommender> {
+  ): Core.APIPromise<SSLRecommenderEditResponse> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/ssl_recommender`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZonesSSLRecommender }>
+      }) as Core.APIPromise<{ result: SSLRecommenderEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -28,11 +28,14 @@ export class SSLRecommender extends APIResource {
    * recommend (by sending periodic emails) the most secure SSL/TLS setting your
    * origin servers support.
    */
-  get(params: SSLRecommenderGetParams, options?: Core.RequestOptions): Core.APIPromise<ZonesSSLRecommender> {
+  get(
+    params: SSLRecommenderGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SSLRecommenderGetResponse> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/ssl_recommender`, options) as Core.APIPromise<{
-        result: ZonesSSLRecommender;
+        result: SSLRecommenderGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -43,7 +46,24 @@ export class SSLRecommender extends APIResource {
  * recommend (by sending periodic emails) the most secure SSL/TLS setting your
  * origin servers support.
  */
-export interface ZonesSSLRecommender {
+export interface SSLRecommenderEditResponse {
+  /**
+   * Enrollment value for SSL/TLS Recommender.
+   */
+  id?: 'ssl_recommender';
+
+  /**
+   * ssl-recommender enrollment setting.
+   */
+  enabled?: boolean;
+}
+
+/**
+ * Enrollment in the SSL/TLS Recommender service which tries to detect and
+ * recommend (by sending periodic emails) the most secure SSL/TLS setting your
+ * origin servers support.
+ */
+export interface SSLRecommenderGetResponse {
   /**
    * Enrollment value for SSL/TLS Recommender.
    */
@@ -66,7 +86,26 @@ export interface SSLRecommenderEditParams {
    * and recommend (by sending periodic emails) the most secure SSL/TLS setting your
    * origin servers support.
    */
-  value: ZonesSSLRecommender;
+  value: SSLRecommenderEditParams.Value;
+}
+
+export namespace SSLRecommenderEditParams {
+  /**
+   * Enrollment in the SSL/TLS Recommender service which tries to detect and
+   * recommend (by sending periodic emails) the most secure SSL/TLS setting your
+   * origin servers support.
+   */
+  export interface Value {
+    /**
+     * Enrollment value for SSL/TLS Recommender.
+     */
+    id?: 'ssl_recommender';
+
+    /**
+     * ssl-recommender enrollment setting.
+     */
+    enabled?: boolean;
+  }
 }
 
 export interface SSLRecommenderGetParams {
@@ -77,7 +116,8 @@ export interface SSLRecommenderGetParams {
 }
 
 export namespace SSLRecommender {
-  export import ZonesSSLRecommender = SSLRecommenderAPI.ZonesSSLRecommender;
+  export import SSLRecommenderEditResponse = SSLRecommenderAPI.SSLRecommenderEditResponse;
+  export import SSLRecommenderGetResponse = SSLRecommenderAPI.SSLRecommenderGetResponse;
   export import SSLRecommenderEditParams = SSLRecommenderAPI.SSLRecommenderEditParams;
   export import SSLRecommenderGetParams = SSLRecommenderAPI.SSLRecommenderGetParams;
 }

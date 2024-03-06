@@ -14,11 +14,11 @@ export class Routes extends APIResource {
   /**
    * Routes a private network through a Cloudflare Tunnel.
    */
-  create(params: RouteCreateParams, options?: Core.RequestOptions): Core.APIPromise<TunnelRoute> {
+  create(params: RouteCreateParams, options?: Core.RequestOptions): Core.APIPromise<RouteCreateResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/teamnet/routes`, { body, ...options }) as Core.APIPromise<{
-        result: TunnelRoute;
+        result: RouteCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -29,11 +29,11 @@ export class Routes extends APIResource {
   list(
     params: RouteListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<TunnelTeamnetsV4PagePaginationArray, TunnelTeamnet> {
+  ): Core.PagePromise<RouteListResponsesV4PagePaginationArray, RouteListResponse> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/teamnet/routes`,
-      TunnelTeamnetsV4PagePaginationArray,
+      RouteListResponsesV4PagePaginationArray,
       { query, ...options },
     );
   }
@@ -45,11 +45,11 @@ export class Routes extends APIResource {
     routeId: string,
     params: RouteDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TunnelRoute> {
+  ): Core.APIPromise<RouteDeleteResponse> {
     const { account_id } = params;
     return (
       this._client.delete(`/accounts/${account_id}/teamnet/routes/${routeId}`, options) as Core.APIPromise<{
-        result: TunnelRoute;
+        result: RouteDeleteResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -62,20 +62,20 @@ export class Routes extends APIResource {
     routeId: string,
     params: RouteEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TunnelRoute> {
+  ): Core.APIPromise<RouteEditResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/teamnet/routes/${routeId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: TunnelRoute }>
+      }) as Core.APIPromise<{ result: RouteEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class TunnelTeamnetsV4PagePaginationArray extends V4PagePaginationArray<TunnelTeamnet> {}
+export class RouteListResponsesV4PagePaginationArray extends V4PagePaginationArray<RouteListResponse> {}
 
-export interface TunnelRoute {
+export interface RouteCreateResponse {
   /**
    * UUID of the route.
    */
@@ -115,7 +115,7 @@ export interface TunnelRoute {
   virtual_network_id?: unknown;
 }
 
-export interface TunnelTeamnet {
+export interface RouteListResponse {
   /**
    * UUID of the route.
    */
@@ -168,6 +168,86 @@ export interface TunnelTeamnet {
    * A user-friendly name for the virtual network.
    */
   virtual_network_name?: string;
+}
+
+export interface RouteDeleteResponse {
+  /**
+   * UUID of the route.
+   */
+  id?: string;
+
+  /**
+   * Optional remark describing the route.
+   */
+  comment?: string;
+
+  /**
+   * Timestamp of when the route was created.
+   */
+  created_at?: unknown;
+
+  /**
+   * Timestamp of when the route was deleted. If `null`, the route has not been
+   * deleted.
+   */
+  deleted_at?: string | null;
+
+  /**
+   * The private IPv4 or IPv6 range connected by the route, in CIDR notation.
+   */
+  network?: string;
+
+  /**
+   * UUID of the Cloudflare Tunnel serving the route.
+   */
+  tunnel_id?: unknown;
+
+  /**
+   * UUID of the Tunnel Virtual Network this route belongs to. If no virtual networks
+   * are configured, the route is assigned to the default virtual network of the
+   * account.
+   */
+  virtual_network_id?: unknown;
+}
+
+export interface RouteEditResponse {
+  /**
+   * UUID of the route.
+   */
+  id?: string;
+
+  /**
+   * Optional remark describing the route.
+   */
+  comment?: string;
+
+  /**
+   * Timestamp of when the route was created.
+   */
+  created_at?: unknown;
+
+  /**
+   * Timestamp of when the route was deleted. If `null`, the route has not been
+   * deleted.
+   */
+  deleted_at?: string | null;
+
+  /**
+   * The private IPv4 or IPv6 range connected by the route, in CIDR notation.
+   */
+  network?: string;
+
+  /**
+   * UUID of the Cloudflare Tunnel serving the route.
+   */
+  tunnel_id?: unknown;
+
+  /**
+   * UUID of the Tunnel Virtual Network this route belongs to. If no virtual networks
+   * are configured, the route is assigned to the default virtual network of the
+   * account.
+   */
+  virtual_network_id?: unknown;
 }
 
 export interface RouteCreateParams {
@@ -289,16 +369,22 @@ export interface RouteEditParams {
 }
 
 export namespace Routes {
-  export import TunnelRoute = RoutesAPI.TunnelRoute;
-  export import TunnelTeamnet = RoutesAPI.TunnelTeamnet;
-  export import TunnelTeamnetsV4PagePaginationArray = RoutesAPI.TunnelTeamnetsV4PagePaginationArray;
+  export import RouteCreateResponse = RoutesAPI.RouteCreateResponse;
+  export import RouteListResponse = RoutesAPI.RouteListResponse;
+  export import RouteDeleteResponse = RoutesAPI.RouteDeleteResponse;
+  export import RouteEditResponse = RoutesAPI.RouteEditResponse;
+  export import RouteListResponsesV4PagePaginationArray = RoutesAPI.RouteListResponsesV4PagePaginationArray;
   export import RouteCreateParams = RoutesAPI.RouteCreateParams;
   export import RouteListParams = RoutesAPI.RouteListParams;
   export import RouteDeleteParams = RoutesAPI.RouteDeleteParams;
   export import RouteEditParams = RoutesAPI.RouteEditParams;
   export import IPs = IPsAPI.IPs;
+  export import IPGetResponse = IPsAPI.IPGetResponse;
   export import IPGetParams = IPsAPI.IPGetParams;
   export import Networks = NetworksAPI.Networks;
+  export import NetworkCreateResponse = NetworksAPI.NetworkCreateResponse;
+  export import NetworkDeleteResponse = NetworksAPI.NetworkDeleteResponse;
+  export import NetworkEditResponse = NetworksAPI.NetworkEditResponse;
   export import NetworkCreateParams = NetworksAPI.NetworkCreateParams;
   export import NetworkDeleteParams = NetworksAPI.NetworkDeleteParams;
   export import NetworkEditParams = NetworksAPI.NetworkEditParams;

@@ -13,11 +13,14 @@ export class Lists extends APIResource {
   /**
    * Creates a new list of the specified type.
    */
-  create(params: ListCreateParams, options?: Core.RequestOptions): Core.APIPromise<ListsList | null> {
+  create(
+    params: ListCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ListCreateResponse | null> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/rules/lists`, { body, ...options }) as Core.APIPromise<{
-        result: ListsList | null;
+        result: ListCreateResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -29,13 +32,13 @@ export class Lists extends APIResource {
     listId: string,
     params: ListUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ListsList | null> {
+  ): Core.APIPromise<ListUpdateResponse | null> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/rules/lists/${listId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ListsList | null }>
+      }) as Core.APIPromise<{ result: ListUpdateResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -74,60 +77,66 @@ export class Lists extends APIResource {
     listId: string,
     params: ListGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ListsList | null> {
+  ): Core.APIPromise<ListGetResponse | null> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/rules/lists/${listId}`, options) as Core.APIPromise<{
-        result: ListsList | null;
+        result: ListGetResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface ListsList {
-  /**
-   * The unique ID of the list.
-   */
-  id?: string;
+export type ListCreateResponse = Array<unknown>;
 
-  /**
-   * The RFC 3339 timestamp of when the list was created.
-   */
-  created_on?: string;
+export type ListUpdateResponse = Array<unknown>;
 
-  /**
-   * An informative summary of the list.
-   */
-  description?: string;
+export type ListListResponse = Array<ListListResponse.ListListResponseItem>;
 
-  /**
-   * The type of the list. Each type supports specific list items (IP addresses,
-   * ASNs, hostnames or redirects).
-   */
-  kind?: 'ip' | 'redirect' | 'hostname' | 'asn';
+export namespace ListListResponse {
+  export interface ListListResponseItem {
+    /**
+     * The unique ID of the list.
+     */
+    id: string;
 
-  /**
-   * The RFC 3339 timestamp of when the list was last modified.
-   */
-  modified_on?: string;
+    /**
+     * The RFC 3339 timestamp of when the list was created.
+     */
+    created_on: string;
 
-  /**
-   * An informative name for the list. Use this name in filter and rule expressions.
-   */
-  name?: string;
+    /**
+     * The type of the list. Each type supports specific list items (IP addresses,
+     * ASNs, hostnames or redirects).
+     */
+    kind: 'ip' | 'redirect' | 'hostname' | 'asn';
 
-  /**
-   * The number of items in the list.
-   */
-  num_items?: number;
+    /**
+     * The RFC 3339 timestamp of when the list was last modified.
+     */
+    modified_on: string;
 
-  /**
-   * The number of [filters](/operations/filters-list-filters) referencing the list.
-   */
-  num_referencing_filters?: number;
+    /**
+     * An informative name for the list. Use this name in filter and rule expressions.
+     */
+    name: string;
+
+    /**
+     * The number of items in the list.
+     */
+    num_items: number;
+
+    /**
+     * An informative summary of the list.
+     */
+    description?: string;
+
+    /**
+     * The number of [filters](/operations/filters-list-filters) referencing the list.
+     */
+    num_referencing_filters?: number;
+  }
 }
-
-export type ListListResponse = Array<ListsList>;
 
 export interface ListDeleteResponse {
   /**
@@ -135,6 +144,8 @@ export interface ListDeleteResponse {
    */
   id?: string;
 }
+
+export type ListGetResponse = Array<unknown>;
 
 export interface ListCreateParams {
   /**
@@ -194,9 +205,11 @@ export interface ListGetParams {
 }
 
 export namespace Lists {
-  export import ListsList = ListsAPI.ListsList;
+  export import ListCreateResponse = ListsAPI.ListCreateResponse;
+  export import ListUpdateResponse = ListsAPI.ListUpdateResponse;
   export import ListListResponse = ListsAPI.ListListResponse;
   export import ListDeleteResponse = ListsAPI.ListDeleteResponse;
+  export import ListGetResponse = ListsAPI.ListGetResponse;
   export import ListCreateParams = ListsAPI.ListCreateParams;
   export import ListUpdateParams = ListsAPI.ListUpdateParams;
   export import ListListParams = ListsAPI.ListListParams;

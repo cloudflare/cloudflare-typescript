@@ -15,12 +15,12 @@ export class Message extends APIResource {
     requestIdentifier: string,
     body: MessageCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CloudforceOneRequestMessageItem> {
+  ): Core.APIPromise<MessageCreateResponse> {
     return (
       this._client.post(
         `/accounts/${accountIdentifier}/cloudforce-one/requests/${requestIdentifier}/message/new`,
         { body, ...options },
-      ) as Core.APIPromise<{ result: CloudforceOneRequestMessageItem }>
+      ) as Core.APIPromise<{ result: MessageCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -33,12 +33,12 @@ export class Message extends APIResource {
     messageIdentifer: number,
     body: MessageUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CloudforceOneRequestMessageItem> {
+  ): Core.APIPromise<MessageUpdateResponse> {
     return (
       this._client.put(
         `/accounts/${accountIdentifier}/cloudforce-one/requests/${requestIdentifier}/message/${messageIdentifer}`,
         { body, ...options },
-      ) as Core.APIPromise<{ result: CloudforceOneRequestMessageItem }>
+      ) as Core.APIPromise<{ result: MessageUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -77,7 +77,39 @@ export class Message extends APIResource {
   }
 }
 
-export interface CloudforceOneRequestMessageItem {
+export interface MessageCreateResponse {
+  /**
+   * Message ID
+   */
+  id: number;
+
+  /**
+   * Author of message
+   */
+  author: string;
+
+  /**
+   * Content of message
+   */
+  content: string;
+
+  /**
+   * Message is a follow-on request
+   */
+  is_follow_on_request: boolean;
+
+  /**
+   * Message last updated time
+   */
+  updated: string;
+
+  /**
+   * Message creation time
+   */
+  created?: string;
+}
+
+export interface MessageUpdateResponse {
   /**
    * Message ID
    */
@@ -111,7 +143,41 @@ export interface CloudforceOneRequestMessageItem {
 
 export type MessageDeleteResponse = unknown | Array<unknown> | string;
 
-export type MessageGetResponse = Array<CloudforceOneRequestMessageItem>;
+export type MessageGetResponse = Array<MessageGetResponse.MessageGetResponseItem>;
+
+export namespace MessageGetResponse {
+  export interface MessageGetResponseItem {
+    /**
+     * Message ID
+     */
+    id: number;
+
+    /**
+     * Author of message
+     */
+    author: string;
+
+    /**
+     * Content of message
+     */
+    content: string;
+
+    /**
+     * Message is a follow-on request
+     */
+    is_follow_on_request: boolean;
+
+    /**
+     * Message last updated time
+     */
+    updated: string;
+
+    /**
+     * Message creation time
+     */
+    created?: string;
+  }
+}
 
 export interface MessageCreateParams {
   /**
@@ -180,7 +246,8 @@ export interface MessageGetParams {
 }
 
 export namespace Message {
-  export import CloudforceOneRequestMessageItem = MessageAPI.CloudforceOneRequestMessageItem;
+  export import MessageCreateResponse = MessageAPI.MessageCreateResponse;
+  export import MessageUpdateResponse = MessageAPI.MessageUpdateResponse;
   export import MessageDeleteResponse = MessageAPI.MessageDeleteResponse;
   export import MessageGetResponse = MessageAPI.MessageGetResponse;
   export import MessageCreateParams = MessageAPI.MessageCreateParams;

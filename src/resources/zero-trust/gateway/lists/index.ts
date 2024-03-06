@@ -2,10 +2,12 @@
 
 export { ItemListResponse, ItemListParams, Items } from './items';
 export {
-  ZeroTrustGatewayLists,
   ListCreateResponse,
+  ListUpdateResponse,
   ListListResponse,
   ListDeleteResponse,
+  ListEditResponse,
+  ListGetResponse,
   ListCreateParams,
   ListUpdateParams,
   ListListParams,

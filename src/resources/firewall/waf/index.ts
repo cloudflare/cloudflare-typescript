@@ -1,12 +1,15 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
-  LegacyJhsOverride,
+  OverrideCreateResponse,
+  OverrideUpdateResponse,
+  OverrideListResponse,
   OverrideDeleteResponse,
+  OverrideGetResponse,
   OverrideCreateParams,
   OverrideUpdateParams,
   OverrideListParams,
-  LegacyJhsOverridesV4PagePaginationArray,
+  OverrideListResponsesV4PagePaginationArray,
   Overrides,
 } from './overrides';
 export {

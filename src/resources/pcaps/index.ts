@@ -2,8 +2,9 @@
 
 export { DownloadGetParams, Downloads } from './downloads';
 export {
-  MagicVisibilityPCAPsOwnership,
+  OwnershipCreateResponse,
   OwnershipGetResponse,
+  OwnershipValidateResponse,
   OwnershipCreateParams,
   OwnershipDeleteParams,
   OwnershipGetParams,

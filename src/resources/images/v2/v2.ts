@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as V2API from 'cloudflare/resources/images/v2/v2';
-import * as V1API from 'cloudflare/resources/images/v1/v1';
 import * as DirectUploadsAPI from 'cloudflare/resources/images/v2/direct-uploads';
 
 export class V2 extends APIResource {
@@ -31,7 +30,43 @@ export interface V2ListResponse {
    */
   continuation_token?: string | null;
 
-  images?: Array<V1API.ImagesImage>;
+  images?: Array<V2ListResponse.Image>;
+}
+
+export namespace V2ListResponse {
+  export interface Image {
+    /**
+     * Image unique identifier.
+     */
+    id?: string;
+
+    /**
+     * Image file name.
+     */
+    filename?: string;
+
+    /**
+     * User modifiable key-value store. Can be used for keeping references to another
+     * system of record for managing images. Metadata must not exceed 1024 bytes.
+     */
+    meta?: unknown;
+
+    /**
+     * Indicates whether the image can be a accessed only using it's UID. If set to
+     * true, a signed token needs to be generated with a signing key to view the image.
+     */
+    requireSignedURLs?: boolean;
+
+    /**
+     * When the media item was uploaded.
+     */
+    uploaded?: string;
+
+    /**
+     * Object specifying available variants for an image.
+     */
+    variants?: Array<string | string | string>;
+  }
 }
 
 export interface V2ListParams {

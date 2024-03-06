@@ -16,26 +16,26 @@ export class HTTPTests extends APIResource {
     testId: string,
     params: HTTPTestGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DigitalExperienceMonitoringHTTPDetails> {
+  ): Core.APIPromise<HTTPTestGetResponse> {
     const { account_id, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/dex/http-tests/${testId}`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: DigitalExperienceMonitoringHTTPDetails }>
+      }) as Core.APIPromise<{ result: HTTPTestGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface DigitalExperienceMonitoringHTTPDetails {
+export interface HTTPTestGetResponse {
   /**
    * The url of the HTTP synthetic application test
    */
   host?: string;
 
-  httpStats?: DigitalExperienceMonitoringHTTPDetails.HTTPStats | null;
+  httpStats?: HTTPTestGetResponse.HTTPStats | null;
 
-  httpStatsByColo?: Array<DigitalExperienceMonitoringHTTPDetails.HTTPStatsByColo>;
+  httpStatsByColo?: Array<HTTPTestGetResponse.HTTPStatsByColo>;
 
   /**
    * The interval at which the HTTP synthetic application test is set to run.
@@ -55,7 +55,7 @@ export interface DigitalExperienceMonitoringHTTPDetails {
   name?: string;
 }
 
-export namespace DigitalExperienceMonitoringHTTPDetails {
+export namespace HTTPTestGetResponse {
   export interface HTTPStats {
     dnsResponseTimeMs: HTTPStats.DNSResponseTimeMs;
 
@@ -314,9 +314,9 @@ export interface HTTPTestGetParams {
 }
 
 export namespace HTTPTests {
-  export import DigitalExperienceMonitoringHTTPDetails = HTTPTestsAPI.DigitalExperienceMonitoringHTTPDetails;
+  export import HTTPTestGetResponse = HTTPTestsAPI.HTTPTestGetResponse;
   export import HTTPTestGetParams = HTTPTestsAPI.HTTPTestGetParams;
   export import Percentiles = PercentilesAPI.Percentiles;
-  export import DigitalExperienceMonitoringHTTPDetailsPercentiles = PercentilesAPI.DigitalExperienceMonitoringHTTPDetailsPercentiles;
+  export import PercentileListResponse = PercentilesAPI.PercentileListResponse;
   export import PercentileListParams = PercentilesAPI.PercentileListParams;
 }

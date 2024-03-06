@@ -11,13 +11,13 @@ export class AuditSSHSettings extends APIResource {
   update(
     params: AuditSSHSettingUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZeroTrustGatewaySettings> {
+  ): Core.APIPromise<AuditSSHSettingUpdateResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/gateway/audit_ssh_settings`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZeroTrustGatewaySettings }>
+      }) as Core.APIPromise<{ result: AuditSSHSettingUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -27,17 +27,33 @@ export class AuditSSHSettings extends APIResource {
   get(
     params: AuditSSHSettingGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZeroTrustGatewaySettings> {
+  ): Core.APIPromise<AuditSSHSettingGetResponse> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/gateway/audit_ssh_settings`, options) as Core.APIPromise<{
-        result: ZeroTrustGatewaySettings;
+        result: AuditSSHSettingGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface ZeroTrustGatewaySettings {
+export interface AuditSSHSettingUpdateResponse {
+  created_at?: string;
+
+  /**
+   * SSH encryption public key
+   */
+  public_key?: string;
+
+  /**
+   * Seed ID
+   */
+  seed_id?: string;
+
+  updated_at?: string;
+}
+
+export interface AuditSSHSettingGetResponse {
   created_at?: string;
 
   /**
@@ -75,7 +91,8 @@ export interface AuditSSHSettingGetParams {
 }
 
 export namespace AuditSSHSettings {
-  export import ZeroTrustGatewaySettings = AuditSSHSettingsAPI.ZeroTrustGatewaySettings;
+  export import AuditSSHSettingUpdateResponse = AuditSSHSettingsAPI.AuditSSHSettingUpdateResponse;
+  export import AuditSSHSettingGetResponse = AuditSSHSettingsAPI.AuditSSHSettingGetResponse;
   export import AuditSSHSettingUpdateParams = AuditSSHSettingsAPI.AuditSSHSettingUpdateParams;
   export import AuditSSHSettingGetParams = AuditSSHSettingsAPI.AuditSSHSettingGetParams;
 }

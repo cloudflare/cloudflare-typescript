@@ -1,10 +1,13 @@
 // File generated from our OpenAPI spec by Stainless.
 
-export { WaitingroomEventDetailsResult, Details } from './details';
+export { DetailGetResponse, Details } from './details';
 export {
-  WaitingroomEventResult,
+  EventCreateResponse,
+  EventUpdateResponse,
   EventListResponse,
   EventDeleteResponse,
+  EventEditResponse,
+  EventGetResponse,
   EventCreateParams,
   EventUpdateParams,
   EventEditParams,

@@ -9,7 +9,6 @@ export class Diagnostics extends APIResource {
 
 export namespace Diagnostics {
   export import Traceroutes = TraceroutesAPI.Traceroutes;
-  export import MagicTransitTargetResult = TraceroutesAPI.MagicTransitTargetResult;
   export import TracerouteCreateResponse = TraceroutesAPI.TracerouteCreateResponse;
   export import TracerouteCreateParams = TraceroutesAPI.TracerouteCreateParams;
 }

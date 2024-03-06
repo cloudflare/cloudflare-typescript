@@ -1,9 +1,11 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
-  ListsList,
+  ListCreateResponse,
+  ListUpdateResponse,
   ListListResponse,
   ListDeleteResponse,
+  ListGetResponse,
   ListCreateParams,
   ListUpdateParams,
   ListListParams,

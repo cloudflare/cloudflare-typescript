@@ -22,23 +22,25 @@ export class DomainHistory extends APIResource {
   }
 }
 
-export interface IntelDomainHistory {
-  categorizations?: Array<IntelDomainHistory.Categorization>;
+export type DomainHistoryGetResponse = Array<DomainHistoryGetResponse.DomainHistoryGetResponseItem>;
 
-  domain?: string;
-}
+export namespace DomainHistoryGetResponse {
+  export interface DomainHistoryGetResponseItem {
+    categorizations?: Array<DomainHistoryGetResponseItem.Categorization>;
 
-export namespace IntelDomainHistory {
-  export interface Categorization {
-    categories?: unknown;
+    domain?: string;
+  }
 
-    end?: string;
+  export namespace DomainHistoryGetResponseItem {
+    export interface Categorization {
+      categories?: unknown;
 
-    start?: string;
+      end?: string;
+
+      start?: string;
+    }
   }
 }
-
-export type DomainHistoryGetResponse = Array<IntelDomainHistory>;
 
 export interface DomainHistoryGetParams {
   /**
@@ -53,7 +55,6 @@ export interface DomainHistoryGetParams {
 }
 
 export namespace DomainHistory {
-  export import IntelDomainHistory = DomainHistoryAPI.IntelDomainHistory;
   export import DomainHistoryGetResponse = DomainHistoryAPI.DomainHistoryGetResponse;
   export import DomainHistoryGetParams = DomainHistoryAPI.DomainHistoryGetParams;
 }

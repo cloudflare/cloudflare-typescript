@@ -4,7 +4,6 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as RulesAPI from 'cloudflare/resources/firewall/rules';
-import * as FiltersAPI from 'cloudflare/resources/filters';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class Rules extends APIResource {
@@ -31,12 +30,12 @@ export class Rules extends APIResource {
     id: string,
     body: RuleUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LegacyJhsFilterRule | null> {
+  ): Core.APIPromise<RuleUpdateResponse | null> {
     return (
       this._client.put(`/zones/${zoneIdentifier}/firewall/rules/${id}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: LegacyJhsFilterRule | null }>
+      }) as Core.APIPromise<{ result: RuleUpdateResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -48,22 +47,22 @@ export class Rules extends APIResource {
     zoneIdentifier: string,
     query?: RuleListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<LegacyJhsFilterRulesV4PagePaginationArray, LegacyJhsFilterRule>;
+  ): Core.PagePromise<RuleListResponsesV4PagePaginationArray, RuleListResponse>;
   list(
     zoneIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<LegacyJhsFilterRulesV4PagePaginationArray, LegacyJhsFilterRule>;
+  ): Core.PagePromise<RuleListResponsesV4PagePaginationArray, RuleListResponse>;
   list(
     zoneIdentifier: string,
     query: RuleListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<LegacyJhsFilterRulesV4PagePaginationArray, LegacyJhsFilterRule> {
+  ): Core.PagePromise<RuleListResponsesV4PagePaginationArray, RuleListResponse> {
     if (isRequestOptions(query)) {
       return this.list(zoneIdentifier, {}, query);
     }
     return this._client.getAPIList(
       `/zones/${zoneIdentifier}/firewall/rules`,
-      LegacyJhsFilterRulesV4PagePaginationArray,
+      RuleListResponsesV4PagePaginationArray,
       { query, ...options },
     );
   }
@@ -76,12 +75,12 @@ export class Rules extends APIResource {
     id: string,
     body: RuleDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LegacyJhsFilterRule | null> {
+  ): Core.APIPromise<RuleDeleteResponse | null> {
     return (
       this._client.delete(`/zones/${zoneIdentifier}/firewall/rules/${id}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: LegacyJhsFilterRule | null }>
+      }) as Core.APIPromise<{ result: RuleDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -109,22 +108,269 @@ export class Rules extends APIResource {
     zoneIdentifier: string,
     id: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LegacyJhsFilterRule | null> {
+  ): Core.APIPromise<RuleGetResponse | null> {
     return (
       this._client.get(`/zones/${zoneIdentifier}/firewall/rules/${id}`, options) as Core.APIPromise<{
-        result: LegacyJhsFilterRule | null;
+        result: RuleGetResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class LegacyJhsFilterRulesV4PagePaginationArray extends V4PagePaginationArray<LegacyJhsFilterRule> {}
+export class RuleListResponsesV4PagePaginationArray extends V4PagePaginationArray<RuleListResponse> {}
 
-export interface LegacyJhsFilterRule {
+export type RuleCreateResponse = Array<RuleCreateResponse.RuleCreateResponseItem>;
+
+export namespace RuleCreateResponse {
+  export interface RuleCreateResponseItem {
+    /**
+     * The unique identifier of the firewall rule.
+     */
+    id: string;
+
+    /**
+     * The action to apply to a matched request. The `log` action is only available on
+     * an Enterprise plan.
+     */
+    action: 'block' | 'challenge' | 'js_challenge' | 'managed_challenge' | 'allow' | 'log' | 'bypass';
+
+    filter: RuleCreateResponseItem.LegacyJhsFilter | RuleCreateResponseItem.LegacyJhsDeletedFilter;
+
+    /**
+     * When true, indicates that the firewall rule is currently paused.
+     */
+    paused: boolean;
+
+    /**
+     * An informative summary of the firewall rule.
+     */
+    description?: string;
+
+    /**
+     * The priority of the rule. Optional value used to define the processing order. A
+     * lower number indicates a higher priority. If not provided, rules with a defined
+     * priority will be processed before rules without a priority.
+     */
+    priority?: number;
+
+    products?: Array<'zoneLockdown' | 'uaBlock' | 'bic' | 'hot' | 'securityLevel' | 'rateLimit' | 'waf'>;
+
+    /**
+     * A short reference tag. Allows you to select related firewall rules.
+     */
+    ref?: string;
+  }
+
+  export namespace RuleCreateResponseItem {
+    export interface LegacyJhsFilter {
+      /**
+       * The unique identifier of the filter.
+       */
+      id?: string;
+
+      /**
+       * An informative summary of the filter.
+       */
+      description?: string;
+
+      /**
+       * The filter expression. For more information, refer to
+       * [Expressions](https://developers.cloudflare.com/ruleset-engine/rules-language/expressions/).
+       */
+      expression?: string;
+
+      /**
+       * When true, indicates that the filter is currently paused.
+       */
+      paused?: boolean;
+
+      /**
+       * A short reference tag. Allows you to select related filters.
+       */
+      ref?: string;
+    }
+
+    export interface LegacyJhsDeletedFilter {
+      /**
+       * The unique identifier of the filter.
+       */
+      id: string;
+
+      /**
+       * When true, indicates that the firewall rule was deleted.
+       */
+      deleted: boolean;
+    }
+  }
+}
+
+export interface RuleUpdateResponse {
   /**
    * The unique identifier of the firewall rule.
    */
-  id?: string;
+  id: string;
+
+  /**
+   * The action to apply to a matched request. The `log` action is only available on
+   * an Enterprise plan.
+   */
+  action: 'block' | 'challenge' | 'js_challenge' | 'managed_challenge' | 'allow' | 'log' | 'bypass';
+
+  filter: RuleUpdateResponse.LegacyJhsFilter | RuleUpdateResponse.LegacyJhsDeletedFilter;
+
+  /**
+   * When true, indicates that the firewall rule is currently paused.
+   */
+  paused: boolean;
+
+  /**
+   * An informative summary of the firewall rule.
+   */
+  description?: string;
+
+  /**
+   * The priority of the rule. Optional value used to define the processing order. A
+   * lower number indicates a higher priority. If not provided, rules with a defined
+   * priority will be processed before rules without a priority.
+   */
+  priority?: number;
+
+  products?: Array<'zoneLockdown' | 'uaBlock' | 'bic' | 'hot' | 'securityLevel' | 'rateLimit' | 'waf'>;
+
+  /**
+   * A short reference tag. Allows you to select related firewall rules.
+   */
+  ref?: string;
+}
+
+export namespace RuleUpdateResponse {
+  export interface LegacyJhsFilter {
+    /**
+     * The unique identifier of the filter.
+     */
+    id?: string;
+
+    /**
+     * An informative summary of the filter.
+     */
+    description?: string;
+
+    /**
+     * The filter expression. For more information, refer to
+     * [Expressions](https://developers.cloudflare.com/ruleset-engine/rules-language/expressions/).
+     */
+    expression?: string;
+
+    /**
+     * When true, indicates that the filter is currently paused.
+     */
+    paused?: boolean;
+
+    /**
+     * A short reference tag. Allows you to select related filters.
+     */
+    ref?: string;
+  }
+
+  export interface LegacyJhsDeletedFilter {
+    /**
+     * The unique identifier of the filter.
+     */
+    id: string;
+
+    /**
+     * When true, indicates that the firewall rule was deleted.
+     */
+    deleted: boolean;
+  }
+}
+
+export interface RuleListResponse {
+  /**
+   * The unique identifier of the firewall rule.
+   */
+  id: string;
+
+  /**
+   * The action to apply to a matched request. The `log` action is only available on
+   * an Enterprise plan.
+   */
+  action: 'block' | 'challenge' | 'js_challenge' | 'managed_challenge' | 'allow' | 'log' | 'bypass';
+
+  filter: RuleListResponse.LegacyJhsFilter | RuleListResponse.LegacyJhsDeletedFilter;
+
+  /**
+   * When true, indicates that the firewall rule is currently paused.
+   */
+  paused: boolean;
+
+  /**
+   * An informative summary of the firewall rule.
+   */
+  description?: string;
+
+  /**
+   * The priority of the rule. Optional value used to define the processing order. A
+   * lower number indicates a higher priority. If not provided, rules with a defined
+   * priority will be processed before rules without a priority.
+   */
+  priority?: number;
+
+  products?: Array<'zoneLockdown' | 'uaBlock' | 'bic' | 'hot' | 'securityLevel' | 'rateLimit' | 'waf'>;
+
+  /**
+   * A short reference tag. Allows you to select related firewall rules.
+   */
+  ref?: string;
+}
+
+export namespace RuleListResponse {
+  export interface LegacyJhsFilter {
+    /**
+     * The unique identifier of the filter.
+     */
+    id?: string;
+
+    /**
+     * An informative summary of the filter.
+     */
+    description?: string;
+
+    /**
+     * The filter expression. For more information, refer to
+     * [Expressions](https://developers.cloudflare.com/ruleset-engine/rules-language/expressions/).
+     */
+    expression?: string;
+
+    /**
+     * When true, indicates that the filter is currently paused.
+     */
+    paused?: boolean;
+
+    /**
+     * A short reference tag. Allows you to select related filters.
+     */
+    ref?: string;
+  }
+
+  export interface LegacyJhsDeletedFilter {
+    /**
+     * The unique identifier of the filter.
+     */
+    id: string;
+
+    /**
+     * When true, indicates that the firewall rule was deleted.
+     */
+    deleted: boolean;
+  }
+}
+
+export interface RuleDeleteResponse {
+  /**
+   * The unique identifier of the firewall rule.
+   */
+  id: string;
 
   /**
    * The action to apply to a matched request. The `log` action is only available on
@@ -137,7 +383,7 @@ export interface LegacyJhsFilterRule {
    */
   description?: string;
 
-  filter?: FiltersAPI.LegacyJhsFilter | LegacyJhsFilterRule.LegacyJhsDeletedFilter;
+  filter?: RuleDeleteResponse.LegacyJhsFilter | RuleDeleteResponse.LegacyJhsDeletedFilter;
 
   /**
    * When true, indicates that the firewall rule is currently paused.
@@ -159,7 +405,35 @@ export interface LegacyJhsFilterRule {
   ref?: string;
 }
 
-export namespace LegacyJhsFilterRule {
+export namespace RuleDeleteResponse {
+  export interface LegacyJhsFilter {
+    /**
+     * The unique identifier of the filter.
+     */
+    id?: string;
+
+    /**
+     * An informative summary of the filter.
+     */
+    description?: string;
+
+    /**
+     * The filter expression. For more information, refer to
+     * [Expressions](https://developers.cloudflare.com/ruleset-engine/rules-language/expressions/).
+     */
+    expression?: string;
+
+    /**
+     * When true, indicates that the filter is currently paused.
+     */
+    paused?: boolean;
+
+    /**
+     * A short reference tag. Allows you to select related filters.
+     */
+    ref?: string;
+  }
+
   export interface LegacyJhsDeletedFilter {
     /**
      * The unique identifier of the filter.
@@ -173,9 +447,171 @@ export namespace LegacyJhsFilterRule {
   }
 }
 
-export type RuleCreateResponse = Array<LegacyJhsFilterRule>;
+export type RuleEditResponse = Array<RuleEditResponse.RuleEditResponseItem>;
 
-export type RuleEditResponse = Array<LegacyJhsFilterRule>;
+export namespace RuleEditResponse {
+  export interface RuleEditResponseItem {
+    /**
+     * The unique identifier of the firewall rule.
+     */
+    id: string;
+
+    /**
+     * The action to apply to a matched request. The `log` action is only available on
+     * an Enterprise plan.
+     */
+    action: 'block' | 'challenge' | 'js_challenge' | 'managed_challenge' | 'allow' | 'log' | 'bypass';
+
+    filter: RuleEditResponseItem.LegacyJhsFilter | RuleEditResponseItem.LegacyJhsDeletedFilter;
+
+    /**
+     * When true, indicates that the firewall rule is currently paused.
+     */
+    paused: boolean;
+
+    /**
+     * An informative summary of the firewall rule.
+     */
+    description?: string;
+
+    /**
+     * The priority of the rule. Optional value used to define the processing order. A
+     * lower number indicates a higher priority. If not provided, rules with a defined
+     * priority will be processed before rules without a priority.
+     */
+    priority?: number;
+
+    products?: Array<'zoneLockdown' | 'uaBlock' | 'bic' | 'hot' | 'securityLevel' | 'rateLimit' | 'waf'>;
+
+    /**
+     * A short reference tag. Allows you to select related firewall rules.
+     */
+    ref?: string;
+  }
+
+  export namespace RuleEditResponseItem {
+    export interface LegacyJhsFilter {
+      /**
+       * The unique identifier of the filter.
+       */
+      id?: string;
+
+      /**
+       * An informative summary of the filter.
+       */
+      description?: string;
+
+      /**
+       * The filter expression. For more information, refer to
+       * [Expressions](https://developers.cloudflare.com/ruleset-engine/rules-language/expressions/).
+       */
+      expression?: string;
+
+      /**
+       * When true, indicates that the filter is currently paused.
+       */
+      paused?: boolean;
+
+      /**
+       * A short reference tag. Allows you to select related filters.
+       */
+      ref?: string;
+    }
+
+    export interface LegacyJhsDeletedFilter {
+      /**
+       * The unique identifier of the filter.
+       */
+      id: string;
+
+      /**
+       * When true, indicates that the firewall rule was deleted.
+       */
+      deleted: boolean;
+    }
+  }
+}
+
+export interface RuleGetResponse {
+  /**
+   * The unique identifier of the firewall rule.
+   */
+  id: string;
+
+  /**
+   * The action to apply to a matched request. The `log` action is only available on
+   * an Enterprise plan.
+   */
+  action: 'block' | 'challenge' | 'js_challenge' | 'managed_challenge' | 'allow' | 'log' | 'bypass';
+
+  filter: RuleGetResponse.LegacyJhsFilter | RuleGetResponse.LegacyJhsDeletedFilter;
+
+  /**
+   * When true, indicates that the firewall rule is currently paused.
+   */
+  paused: boolean;
+
+  /**
+   * An informative summary of the firewall rule.
+   */
+  description?: string;
+
+  /**
+   * The priority of the rule. Optional value used to define the processing order. A
+   * lower number indicates a higher priority. If not provided, rules with a defined
+   * priority will be processed before rules without a priority.
+   */
+  priority?: number;
+
+  products?: Array<'zoneLockdown' | 'uaBlock' | 'bic' | 'hot' | 'securityLevel' | 'rateLimit' | 'waf'>;
+
+  /**
+   * A short reference tag. Allows you to select related firewall rules.
+   */
+  ref?: string;
+}
+
+export namespace RuleGetResponse {
+  export interface LegacyJhsFilter {
+    /**
+     * The unique identifier of the filter.
+     */
+    id?: string;
+
+    /**
+     * An informative summary of the filter.
+     */
+    description?: string;
+
+    /**
+     * The filter expression. For more information, refer to
+     * [Expressions](https://developers.cloudflare.com/ruleset-engine/rules-language/expressions/).
+     */
+    expression?: string;
+
+    /**
+     * When true, indicates that the filter is currently paused.
+     */
+    paused?: boolean;
+
+    /**
+     * A short reference tag. Allows you to select related filters.
+     */
+    ref?: string;
+  }
+
+  export interface LegacyJhsDeletedFilter {
+    /**
+     * The unique identifier of the filter.
+     */
+    id: string;
+
+    /**
+     * When true, indicates that the firewall rule was deleted.
+     */
+    deleted: boolean;
+  }
+}
 
 export type RuleCreateParams = unknown;
 
@@ -209,10 +645,13 @@ export interface RuleDeleteParams {
 export type RuleEditParams = unknown;
 
 export namespace Rules {
-  export import LegacyJhsFilterRule = RulesAPI.LegacyJhsFilterRule;
   export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
+  export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
+  export import RuleListResponse = RulesAPI.RuleListResponse;
+  export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
   export import RuleEditResponse = RulesAPI.RuleEditResponse;
-  export import LegacyJhsFilterRulesV4PagePaginationArray = RulesAPI.LegacyJhsFilterRulesV4PagePaginationArray;
+  export import RuleGetResponse = RulesAPI.RuleGetResponse;
+  export import RuleListResponsesV4PagePaginationArray = RulesAPI.RuleListResponsesV4PagePaginationArray;
   export import RuleCreateParams = RulesAPI.RuleCreateParams;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
   export import RuleListParams = RulesAPI.RuleListParams;

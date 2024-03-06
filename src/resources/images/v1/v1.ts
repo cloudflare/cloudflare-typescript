@@ -21,13 +21,13 @@ export class V1 extends APIResource {
    * (multipart/form-data) request. An image can be uploaded by sending an image file
    * or passing an accessible to an API url.
    */
-  create(params: V1CreateParams, options?: Core.RequestOptions): Core.APIPromise<ImagesImage> {
+  create(params: V1CreateParams, options?: Core.RequestOptions): Core.APIPromise<V1CreateResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.post(
         `/accounts/${account_id}/images/v1`,
         multipartFormRequestOptions({ body, ...options }),
-      ) as Core.APIPromise<{ result: ImagesImage }>
+      ) as Core.APIPromise<{ result: V1CreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -67,24 +67,28 @@ export class V1 extends APIResource {
    * Update image access control. On access control change, all copies of the image
    * are purged from cache.
    */
-  edit(imageId: string, params: V1EditParams, options?: Core.RequestOptions): Core.APIPromise<ImagesImage> {
+  edit(
+    imageId: string,
+    params: V1EditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<V1EditResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/images/v1/${imageId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ImagesImage }>
+      }) as Core.APIPromise<{ result: V1EditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetch details for a single image.
    */
-  get(imageId: string, params: V1GetParams, options?: Core.RequestOptions): Core.APIPromise<ImagesImage> {
+  get(imageId: string, params: V1GetParams, options?: Core.RequestOptions): Core.APIPromise<V1GetResponse> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/images/v1/${imageId}`, options) as Core.APIPromise<{
-        result: ImagesImage;
+        result: V1GetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -92,7 +96,7 @@ export class V1 extends APIResource {
 
 export class V1ListResponsesV4PagePagination extends V4PagePagination<V1ListResponse> {}
 
-export interface ImagesImage {
+export interface V1CreateResponse {
   /**
    * Image unique identifier.
    */
@@ -153,11 +157,115 @@ export namespace V1ListResponse {
   }
 
   export interface Result {
-    images?: Array<V1API.ImagesImage>;
+    images?: Array<Result.Image>;
+  }
+
+  export namespace Result {
+    export interface Image {
+      /**
+       * Image unique identifier.
+       */
+      id?: string;
+
+      /**
+       * Image file name.
+       */
+      filename?: string;
+
+      /**
+       * User modifiable key-value store. Can be used for keeping references to another
+       * system of record for managing images. Metadata must not exceed 1024 bytes.
+       */
+      meta?: unknown;
+
+      /**
+       * Indicates whether the image can be a accessed only using it's UID. If set to
+       * true, a signed token needs to be generated with a signing key to view the image.
+       */
+      requireSignedURLs?: boolean;
+
+      /**
+       * When the media item was uploaded.
+       */
+      uploaded?: string;
+
+      /**
+       * Object specifying available variants for an image.
+       */
+      variants?: Array<string | string | string>;
+    }
   }
 }
 
 export type V1DeleteResponse = unknown | string;
+
+export interface V1EditResponse {
+  /**
+   * Image unique identifier.
+   */
+  id?: string;
+
+  /**
+   * Image file name.
+   */
+  filename?: string;
+
+  /**
+   * User modifiable key-value store. Can be used for keeping references to another
+   * system of record for managing images. Metadata must not exceed 1024 bytes.
+   */
+  meta?: unknown;
+
+  /**
+   * Indicates whether the image can be a accessed only using it's UID. If set to
+   * true, a signed token needs to be generated with a signing key to view the image.
+   */
+  requireSignedURLs?: boolean;
+
+  /**
+   * When the media item was uploaded.
+   */
+  uploaded?: string;
+
+  /**
+   * Object specifying available variants for an image.
+   */
+  variants?: Array<string | string | string>;
+}
+
+export interface V1GetResponse {
+  /**
+   * Image unique identifier.
+   */
+  id?: string;
+
+  /**
+   * Image file name.
+   */
+  filename?: string;
+
+  /**
+   * User modifiable key-value store. Can be used for keeping references to another
+   * system of record for managing images. Metadata must not exceed 1024 bytes.
+   */
+  meta?: unknown;
+
+  /**
+   * Indicates whether the image can be a accessed only using it's UID. If set to
+   * true, a signed token needs to be generated with a signing key to view the image.
+   */
+  requireSignedURLs?: boolean;
+
+  /**
+   * When the media item was uploaded.
+   */
+  uploaded?: string;
+
+  /**
+   * Object specifying available variants for an image.
+   */
+  variants?: Array<string | string | string>;
+}
 
 export interface V1CreateParams {
   /**
@@ -219,9 +327,11 @@ export interface V1GetParams {
 }
 
 export namespace V1 {
-  export import ImagesImage = V1API.ImagesImage;
+  export import V1CreateResponse = V1API.V1CreateResponse;
   export import V1ListResponse = V1API.V1ListResponse;
   export import V1DeleteResponse = V1API.V1DeleteResponse;
+  export import V1EditResponse = V1API.V1EditResponse;
+  export import V1GetResponse = V1API.V1GetResponse;
   export import V1ListResponsesV4PagePagination = V1API.V1ListResponsesV4PagePagination;
   export import V1CreateParams = V1API.V1CreateParams;
   export import V1ListParams = V1API.V1ListParams;
@@ -229,15 +339,17 @@ export namespace V1 {
   export import V1EditParams = V1API.V1EditParams;
   export import V1GetParams = V1API.V1GetParams;
   export import Keys = KeysAPI.Keys;
-  export import ImagesImageKeys = KeysAPI.ImagesImageKeys;
+  export import KeyListResponse = KeysAPI.KeyListResponse;
   export import KeyListParams = KeysAPI.KeyListParams;
   export import Stats = StatsAPI.Stats;
-  export import ImagesImagesStats = StatsAPI.ImagesImagesStats;
+  export import StatGetResponse = StatsAPI.StatGetResponse;
   export import StatGetParams = StatsAPI.StatGetParams;
   export import Variants = VariantsAPI.Variants;
-  export import ImageVariant = VariantsAPI.ImageVariant;
-  export import ImageVariants = VariantsAPI.ImageVariants;
+  export import VariantCreateResponse = VariantsAPI.VariantCreateResponse;
+  export import VariantListResponse = VariantsAPI.VariantListResponse;
   export import VariantDeleteResponse = VariantsAPI.VariantDeleteResponse;
+  export import VariantEditResponse = VariantsAPI.VariantEditResponse;
+  export import VariantGetResponse = VariantsAPI.VariantGetResponse;
   export import VariantCreateParams = VariantsAPI.VariantCreateParams;
   export import VariantListParams = VariantsAPI.VariantListParams;
   export import VariantDeleteParams = VariantsAPI.VariantDeleteParams;

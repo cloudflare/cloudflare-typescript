@@ -17,12 +17,12 @@ export class Overrides extends APIResource {
     zoneIdentifier: string,
     body: OverrideCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LegacyJhsOverride | null> {
+  ): Core.APIPromise<OverrideCreateResponse | null> {
     return (
       this._client.post(`/zones/${zoneIdentifier}/firewall/waf/overrides`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: LegacyJhsOverride | null }>
+      }) as Core.APIPromise<{ result: OverrideCreateResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -37,12 +37,12 @@ export class Overrides extends APIResource {
     id: string,
     body: OverrideUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LegacyJhsOverride | null> {
+  ): Core.APIPromise<OverrideUpdateResponse | null> {
     return (
       this._client.put(`/zones/${zoneIdentifier}/firewall/waf/overrides/${id}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: LegacyJhsOverride | null }>
+      }) as Core.APIPromise<{ result: OverrideUpdateResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -56,22 +56,22 @@ export class Overrides extends APIResource {
     zoneIdentifier: string,
     query?: OverrideListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<LegacyJhsOverridesV4PagePaginationArray, LegacyJhsOverride>;
+  ): Core.PagePromise<OverrideListResponsesV4PagePaginationArray, OverrideListResponse>;
   list(
     zoneIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<LegacyJhsOverridesV4PagePaginationArray, LegacyJhsOverride>;
+  ): Core.PagePromise<OverrideListResponsesV4PagePaginationArray, OverrideListResponse>;
   list(
     zoneIdentifier: string,
     query: OverrideListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<LegacyJhsOverridesV4PagePaginationArray, LegacyJhsOverride> {
+  ): Core.PagePromise<OverrideListResponsesV4PagePaginationArray, OverrideListResponse> {
     if (isRequestOptions(query)) {
       return this.list(zoneIdentifier, {}, query);
     }
     return this._client.getAPIList(
       `/zones/${zoneIdentifier}/firewall/waf/overrides`,
-      LegacyJhsOverridesV4PagePaginationArray,
+      OverrideListResponsesV4PagePaginationArray,
       { query, ...options },
     );
   }
@@ -105,18 +105,18 @@ export class Overrides extends APIResource {
     zoneIdentifier: string,
     id: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LegacyJhsOverride | null> {
+  ): Core.APIPromise<OverrideGetResponse | null> {
     return (
       this._client.get(`/zones/${zoneIdentifier}/firewall/waf/overrides/${id}`, options) as Core.APIPromise<{
-        result: LegacyJhsOverride | null;
+        result: OverrideGetResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class LegacyJhsOverridesV4PagePaginationArray extends V4PagePaginationArray<LegacyJhsOverride> {}
+export class OverrideListResponsesV4PagePaginationArray extends V4PagePaginationArray<OverrideListResponse> {}
 
-export interface LegacyJhsOverride {
+export interface OverrideCreateResponse {
   /**
    * The unique identifier of the WAF override.
    */
@@ -152,7 +152,7 @@ export interface LegacyJhsOverride {
    * Specifies that, when a WAF rule matches, its configured action will be replaced
    * by the action configured in this object.
    */
-  rewrite_action?: LegacyJhsOverride.RewriteAction;
+  rewrite_action?: OverrideCreateResponse.RewriteAction;
 
   /**
    * An object that allows you to override the action of specific WAF rules. Each key
@@ -171,7 +171,165 @@ export interface LegacyJhsOverride {
   urls?: Array<string>;
 }
 
-export namespace LegacyJhsOverride {
+export namespace OverrideCreateResponse {
+  /**
+   * Specifies that, when a WAF rule matches, its configured action will be replaced
+   * by the action configured in this object.
+   */
+  export interface RewriteAction {
+    /**
+     * The WAF rule action to apply.
+     */
+    block?: 'challenge' | 'block' | 'simulate' | 'disable' | 'default';
+
+    challenge?: unknown;
+
+    default?: unknown;
+
+    /**
+     * The WAF rule action to apply.
+     */
+    disable?: 'challenge' | 'block' | 'simulate' | 'disable' | 'default';
+
+    simulate?: unknown;
+  }
+}
+
+export interface OverrideUpdateResponse {
+  /**
+   * The unique identifier of the WAF override.
+   */
+  id?: string;
+
+  /**
+   * An informative summary of the current URI-based WAF override.
+   */
+  description?: string | null;
+
+  /**
+   * An object that allows you to enable or disable WAF rule groups for the current
+   * WAF override. Each key of this object must be the ID of a WAF rule group, and
+   * each value must be a valid WAF action (usually `default` or `disable`). When
+   * creating a new URI-based WAF override, you must provide a `groups` object or a
+   * `rules` object.
+   */
+  groups?: Record<string, unknown>;
+
+  /**
+   * When true, indicates that the WAF package is currently paused.
+   */
+  paused?: boolean;
+
+  /**
+   * The relative priority of the current URI-based WAF override when multiple
+   * overrides match a single URL. A lower number indicates higher priority. Higher
+   * priority overrides may overwrite values set by lower priority overrides.
+   */
+  priority?: number;
+
+  /**
+   * Specifies that, when a WAF rule matches, its configured action will be replaced
+   * by the action configured in this object.
+   */
+  rewrite_action?: OverrideUpdateResponse.RewriteAction;
+
+  /**
+   * An object that allows you to override the action of specific WAF rules. Each key
+   * of this object must be the ID of a WAF rule, and each value must be a valid WAF
+   * action. Unless you are disabling a rule, ensure that you also enable the rule
+   * group that this WAF rule belongs to. When creating a new URI-based WAF override,
+   * you must provide a `groups` object or a `rules` object.
+   */
+  rules?: Record<string, 'challenge' | 'block' | 'simulate' | 'disable' | 'default'>;
+
+  /**
+   * The URLs to include in the current WAF override. You can use wildcards. Each
+   * entered URL will be escaped before use, which means you can only use simple
+   * wildcard patterns.
+   */
+  urls?: Array<string>;
+}
+
+export namespace OverrideUpdateResponse {
+  /**
+   * Specifies that, when a WAF rule matches, its configured action will be replaced
+   * by the action configured in this object.
+   */
+  export interface RewriteAction {
+    /**
+     * The WAF rule action to apply.
+     */
+    block?: 'challenge' | 'block' | 'simulate' | 'disable' | 'default';
+
+    challenge?: unknown;
+
+    default?: unknown;
+
+    /**
+     * The WAF rule action to apply.
+     */
+    disable?: 'challenge' | 'block' | 'simulate' | 'disable' | 'default';
+
+    simulate?: unknown;
+  }
+}
+
+export interface OverrideListResponse {
+  /**
+   * The unique identifier of the WAF override.
+   */
+  id: string;
+
+  /**
+   * When true, indicates that the WAF package is currently paused.
+   */
+  paused: boolean;
+
+  /**
+   * The relative priority of the current URI-based WAF override when multiple
+   * overrides match a single URL. A lower number indicates higher priority. Higher
+   * priority overrides may overwrite values set by lower priority overrides.
+   */
+  priority: number;
+
+  /**
+   * The URLs to include in the current WAF override. You can use wildcards. Each
+   * entered URL will be escaped before use, which means you can only use simple
+   * wildcard patterns.
+   */
+  urls: Array<string>;
+
+  /**
+   * An informative summary of the current URI-based WAF override.
+   */
+  description?: string | null;
+
+  /**
+   * An object that allows you to enable or disable WAF rule groups for the current
+   * WAF override. Each key of this object must be the ID of a WAF rule group, and
+   * each value must be a valid WAF action (usually `default` or `disable`). When
+   * creating a new URI-based WAF override, you must provide a `groups` object or a
+   * `rules` object.
+   */
+  groups?: Record<string, unknown>;
+
+  /**
+   * Specifies that, when a WAF rule matches, its configured action will be replaced
+   * by the action configured in this object.
+   */
+  rewrite_action?: OverrideListResponse.RewriteAction;
+
+  /**
+   * An object that allows you to override the action of specific WAF rules. Each key
+   * of this object must be the ID of a WAF rule, and each value must be a valid WAF
+   * action. Unless you are disabling a rule, ensure that you also enable the rule
+   * group that this WAF rule belongs to. When creating a new URI-based WAF override,
+   * you must provide a `groups` object or a `rules` object.
+   */
+  rules?: Record<string, 'challenge' | 'block' | 'simulate' | 'disable' | 'default'>;
+}
+
+export namespace OverrideListResponse {
   /**
    * Specifies that, when a WAF rule matches, its configured action will be replaced
    * by the action configured in this object.
@@ -202,6 +360,85 @@ export interface OverrideDeleteResponse {
   id?: string;
 }
 
+export interface OverrideGetResponse {
+  /**
+   * The unique identifier of the WAF override.
+   */
+  id?: string;
+
+  /**
+   * An informative summary of the current URI-based WAF override.
+   */
+  description?: string | null;
+
+  /**
+   * An object that allows you to enable or disable WAF rule groups for the current
+   * WAF override. Each key of this object must be the ID of a WAF rule group, and
+   * each value must be a valid WAF action (usually `default` or `disable`). When
+   * creating a new URI-based WAF override, you must provide a `groups` object or a
+   * `rules` object.
+   */
+  groups?: Record<string, unknown>;
+
+  /**
+   * When true, indicates that the WAF package is currently paused.
+   */
+  paused?: boolean;
+
+  /**
+   * The relative priority of the current URI-based WAF override when multiple
+   * overrides match a single URL. A lower number indicates higher priority. Higher
+   * priority overrides may overwrite values set by lower priority overrides.
+   */
+  priority?: number;
+
+  /**
+   * Specifies that, when a WAF rule matches, its configured action will be replaced
+   * by the action configured in this object.
+   */
+  rewrite_action?: OverrideGetResponse.RewriteAction;
+
+  /**
+   * An object that allows you to override the action of specific WAF rules. Each key
+   * of this object must be the ID of a WAF rule, and each value must be a valid WAF
+   * action. Unless you are disabling a rule, ensure that you also enable the rule
+   * group that this WAF rule belongs to. When creating a new URI-based WAF override,
+   * you must provide a `groups` object or a `rules` object.
+   */
+  rules?: Record<string, 'challenge' | 'block' | 'simulate' | 'disable' | 'default'>;
+
+  /**
+   * The URLs to include in the current WAF override. You can use wildcards. Each
+   * entered URL will be escaped before use, which means you can only use simple
+   * wildcard patterns.
+   */
+  urls?: Array<string>;
+}
+
+export namespace OverrideGetResponse {
+  /**
+   * Specifies that, when a WAF rule matches, its configured action will be replaced
+   * by the action configured in this object.
+   */
+  export interface RewriteAction {
+    /**
+     * The WAF rule action to apply.
+     */
+    block?: 'challenge' | 'block' | 'simulate' | 'disable' | 'default';
+
+    challenge?: unknown;
+
+    default?: unknown;
+
+    /**
+     * The WAF rule action to apply.
+     */
+    disable?: 'challenge' | 'block' | 'simulate' | 'disable' | 'default';
+
+    simulate?: unknown;
+  }
+}
+
 export type OverrideCreateParams = unknown;
 
 export type OverrideUpdateParams = unknown;
@@ -209,9 +446,12 @@ export type OverrideUpdateParams = unknown;
 export interface OverrideListParams extends V4PagePaginationArrayParams {}
 
 export namespace Overrides {
-  export import LegacyJhsOverride = OverridesAPI.LegacyJhsOverride;
+  export import OverrideCreateResponse = OverridesAPI.OverrideCreateResponse;
+  export import OverrideUpdateResponse = OverridesAPI.OverrideUpdateResponse;
+  export import OverrideListResponse = OverridesAPI.OverrideListResponse;
   export import OverrideDeleteResponse = OverridesAPI.OverrideDeleteResponse;
-  export import LegacyJhsOverridesV4PagePaginationArray = OverridesAPI.LegacyJhsOverridesV4PagePaginationArray;
+  export import OverrideGetResponse = OverridesAPI.OverrideGetResponse;
+  export import OverrideListResponsesV4PagePaginationArray = OverridesAPI.OverrideListResponsesV4PagePaginationArray;
   export import OverrideCreateParams = OverridesAPI.OverrideCreateParams;
   export import OverrideUpdateParams = OverridesAPI.OverrideUpdateParams;
   export import OverrideListParams = OverridesAPI.OverrideListParams;

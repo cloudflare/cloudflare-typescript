@@ -3,8 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { type Response } from 'cloudflare/_shims/index';
-import * as ContentScriptsAPI from 'cloudflare/resources/workers-for-platforms/dispatch/namespaces/scripts/content/scripts';
-import * as ScriptsAPI from 'cloudflare/resources/workers/scripts/scripts';
+import * as ScriptsAPI from 'cloudflare/resources/workers-for-platforms/dispatch/namespaces/scripts/content/scripts';
 import { type Uploadable, multipartFormRequestOptions } from 'cloudflare/core';
 
 export class Scripts extends APIResource {
@@ -16,7 +15,7 @@ export class Scripts extends APIResource {
     scriptName: string,
     params: ScriptUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ScriptsAPI.WorkersScript> {
+  ): Core.APIPromise<ScriptUpdateResponse> {
     const {
       account_id,
       'CF-WORKER-BODY-PART': cfWorkerBodyPart,
@@ -35,7 +34,7 @@ export class Scripts extends APIResource {
             ...options?.headers,
           },
         }),
-      ) as Core.APIPromise<{ result: ScriptsAPI.WorkersScript }>
+      ) as Core.APIPromise<{ result: ScriptUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -54,6 +53,75 @@ export class Scripts extends APIResource {
       `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/content`,
       { ...options, __binaryResponse: true },
     );
+  }
+}
+
+export interface ScriptUpdateResponse {
+  /**
+   * The id of the script in the Workers system. Usually the script name.
+   */
+  id?: string;
+
+  /**
+   * When the script was created.
+   */
+  created_on?: string;
+
+  /**
+   * Hashed script content, can be used in a If-None-Match header when updating.
+   */
+  etag?: string;
+
+  /**
+   * Whether Logpush is turned on for the Worker.
+   */
+  logpush?: boolean;
+
+  /**
+   * When the script was last modified.
+   */
+  modified_on?: string;
+
+  /**
+   * Deprecated. Deployment metadata for internal usage.
+   */
+  pipeline_hash?: string;
+
+  /**
+   * Specifies the placement mode for the Worker (e.g. 'smart').
+   */
+  placement_mode?: string;
+
+  /**
+   * List of Workers that will consume logs from the attached Worker.
+   */
+  tail_consumers?: Array<ScriptUpdateResponse.TailConsumer>;
+
+  /**
+   * Specifies the usage model for the Worker (e.g. 'bundled' or 'unbound').
+   */
+  usage_model?: string;
+}
+
+export namespace ScriptUpdateResponse {
+  /**
+   * A reference to a script that will consume logs from the attached Worker.
+   */
+  export interface TailConsumer {
+    /**
+     * Name of Worker that is to be the consumer.
+     */
+    service: string;
+
+    /**
+     * Optional environment if the Worker utilizes one.
+     */
+    environment?: string;
+
+    /**
+     * Optional dispatch namespace the script belongs to.
+     */
+    namespace?: string;
   }
 }
 
@@ -120,6 +188,7 @@ export interface ScriptGetParams {
 }
 
 export namespace Scripts {
-  export import ScriptUpdateParams = ContentScriptsAPI.ScriptUpdateParams;
-  export import ScriptGetParams = ContentScriptsAPI.ScriptGetParams;
+  export import ScriptUpdateResponse = ScriptsAPI.ScriptUpdateResponse;
+  export import ScriptUpdateParams = ScriptsAPI.ScriptUpdateParams;
+  export import ScriptGetParams = ScriptsAPI.ScriptGetParams;
 }

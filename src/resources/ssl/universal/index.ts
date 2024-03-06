@@ -1,7 +1,8 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
-  TLSCertificatesAndHostnamesUniversal,
+  SettingEditResponse,
+  SettingGetResponse,
   SettingEditParams,
   SettingGetParams,
   Settings,

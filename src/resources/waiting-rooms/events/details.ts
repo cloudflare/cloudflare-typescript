@@ -14,17 +14,17 @@ export class Details extends APIResource {
     waitingRoomId: unknown,
     eventId: unknown,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WaitingroomEventDetailsResult> {
+  ): Core.APIPromise<DetailGetResponse> {
     return (
       this._client.get(
         `/zones/${zoneIdentifier}/waiting_rooms/${waitingRoomId}/events/${eventId}/details`,
         options,
-      ) as Core.APIPromise<{ result: WaitingroomEventDetailsResult }>
+      ) as Core.APIPromise<{ result: DetailGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface WaitingroomEventDetailsResult {
+export interface DetailGetResponse {
   id?: unknown;
 
   created_on?: string;
@@ -91,5 +91,5 @@ export interface WaitingroomEventDetailsResult {
 }
 
 export namespace Details {
-  export import WaitingroomEventDetailsResult = DetailsAPI.WaitingroomEventDetailsResult;
+  export import DetailGetResponse = DetailsAPI.DetailGetResponse;
 }

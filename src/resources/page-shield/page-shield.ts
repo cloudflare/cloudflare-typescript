@@ -18,11 +18,11 @@ export class PageShield extends APIResource {
   update(
     params: PageShieldUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PageShieldUpdateZoneSettings> {
+  ): Core.APIPromise<PageShieldUpdateResponse> {
     const { zone_id, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/page_shield`, { body, ...options }) as Core.APIPromise<{
-        result: PageShieldUpdateZoneSettings;
+        result: PageShieldUpdateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -30,20 +30,17 @@ export class PageShield extends APIResource {
   /**
    * Fetches the Page Shield settings.
    */
-  list(
-    params: PageShieldListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PageShieldGetZoneSettings> {
+  list(params: PageShieldListParams, options?: Core.RequestOptions): Core.APIPromise<PageShieldListResponse> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/page_shield`, options) as Core.APIPromise<{
-        result: PageShieldGetZoneSettings;
+        result: PageShieldListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface PageShieldGetZoneSettings {
+export interface PageShieldUpdateResponse {
   /**
    * When true, indicates that Page Shield is enabled.
    */
@@ -66,7 +63,7 @@ export interface PageShieldGetZoneSettings {
   use_connection_url_path?: boolean;
 }
 
-export interface PageShieldUpdateZoneSettings {
+export interface PageShieldListResponse {
   /**
    * When true, indicates that Page Shield is enabled.
    */
@@ -121,25 +118,26 @@ export interface PageShieldListParams {
 }
 
 export namespace PageShield {
-  export import PageShieldGetZoneSettings = PageShieldAPI.PageShieldGetZoneSettings;
-  export import PageShieldUpdateZoneSettings = PageShieldAPI.PageShieldUpdateZoneSettings;
+  export import PageShieldUpdateResponse = PageShieldAPI.PageShieldUpdateResponse;
+  export import PageShieldListResponse = PageShieldAPI.PageShieldListResponse;
   export import PageShieldUpdateParams = PageShieldAPI.PageShieldUpdateParams;
   export import PageShieldListParams = PageShieldAPI.PageShieldListParams;
   export import Policies = PoliciesAPI.Policies;
-  export import PageShieldPageshieldPolicy = PoliciesAPI.PageShieldPageshieldPolicy;
+  export import PolicyCreateResponse = PoliciesAPI.PolicyCreateResponse;
+  export import PolicyUpdateResponse = PoliciesAPI.PolicyUpdateResponse;
   export import PolicyListResponse = PoliciesAPI.PolicyListResponse;
+  export import PolicyGetResponse = PoliciesAPI.PolicyGetResponse;
   export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
   export import PolicyUpdateParams = PoliciesAPI.PolicyUpdateParams;
   export import PolicyListParams = PoliciesAPI.PolicyListParams;
   export import PolicyDeleteParams = PoliciesAPI.PolicyDeleteParams;
   export import PolicyGetParams = PoliciesAPI.PolicyGetParams;
   export import Connections = ConnectionsAPI.Connections;
-  export import PageShieldConnection = ConnectionsAPI.PageShieldConnection;
   export import ConnectionListResponse = ConnectionsAPI.ConnectionListResponse;
+  export import ConnectionGetResponse = ConnectionsAPI.ConnectionGetResponse;
   export import ConnectionListParams = ConnectionsAPI.ConnectionListParams;
   export import ConnectionGetParams = ConnectionsAPI.ConnectionGetParams;
   export import Scripts = ScriptsAPI.Scripts;
-  export import PageShieldScript = ScriptsAPI.PageShieldScript;
   export import ScriptListResponse = ScriptsAPI.ScriptListResponse;
   export import ScriptGetResponse = ScriptsAPI.ScriptGetResponse;
   export import ScriptListParams = ScriptsAPI.ScriptListParams;

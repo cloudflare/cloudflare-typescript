@@ -35,52 +35,56 @@ export class Hostnames extends APIResource {
     hostname: string,
     params: HostnameGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TLSCertificatesAndHostnamesHostnameCertidObject> {
+  ): Core.APIPromise<HostnameGetResponse> {
     const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/origin_tls_client_auth/hostnames/${hostname}`,
         options,
-      ) as Core.APIPromise<{ result: TLSCertificatesAndHostnamesHostnameCertidObject }>
+      ) as Core.APIPromise<{ result: HostnameGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface TLSCertificatesAndHostnamesHostnameAuthenticatedOriginPull {
-  /**
-   * Identifier
-   */
-  id?: string;
+export type HostnameUpdateResponse = Array<HostnameUpdateResponse.HostnameUpdateResponseItem>;
 
-  /**
-   * Identifier
-   */
-  cert_id?: string;
+export namespace HostnameUpdateResponse {
+  export interface HostnameUpdateResponseItem {
+    /**
+     * Identifier
+     */
+    id?: string;
 
-  /**
-   * The hostname certificate.
-   */
-  certificate?: string;
+    /**
+     * Identifier
+     */
+    cert_id?: string;
 
-  /**
-   * Indicates whether hostname-level authenticated origin pulls is enabled. A null
-   * value voids the association.
-   */
-  enabled?: boolean | null;
+    /**
+     * The hostname certificate.
+     */
+    certificate?: string;
 
-  /**
-   * The hostname on the origin for which the client certificate uploaded will be
-   * used.
-   */
-  hostname?: string;
+    /**
+     * Indicates whether hostname-level authenticated origin pulls is enabled. A null
+     * value voids the association.
+     */
+    enabled?: boolean | null;
 
-  /**
-   * The hostname certificate's private key.
-   */
-  private_key?: string;
+    /**
+     * The hostname on the origin for which the client certificate uploaded will be
+     * used.
+     */
+    hostname?: string;
+
+    /**
+     * The hostname certificate's private key.
+     */
+    private_key?: string;
+  }
 }
 
-export interface TLSCertificatesAndHostnamesHostnameCertidObject {
+export interface HostnameGetResponse {
   /**
    * Identifier
    */
@@ -168,8 +172,6 @@ export interface TLSCertificatesAndHostnamesHostnameCertidObject {
   updated_at?: string;
 }
 
-export type HostnameUpdateResponse = Array<TLSCertificatesAndHostnamesHostnameCertidObject>;
-
 export interface HostnameUpdateParams {
   /**
    * Path param: Identifier
@@ -211,14 +213,15 @@ export interface HostnameGetParams {
 }
 
 export namespace Hostnames {
-  export import TLSCertificatesAndHostnamesHostnameAuthenticatedOriginPull = HostnamesAPI.TLSCertificatesAndHostnamesHostnameAuthenticatedOriginPull;
-  export import TLSCertificatesAndHostnamesHostnameCertidObject = HostnamesAPI.TLSCertificatesAndHostnamesHostnameCertidObject;
   export import HostnameUpdateResponse = HostnamesAPI.HostnameUpdateResponse;
+  export import HostnameGetResponse = HostnamesAPI.HostnameGetResponse;
   export import HostnameUpdateParams = HostnamesAPI.HostnameUpdateParams;
   export import HostnameGetParams = HostnamesAPI.HostnameGetParams;
   export import Certificates = CertificatesAPI.Certificates;
-  export import TLSCertificatesAndHostnamesSchemasCertificateObject = CertificatesAPI.TLSCertificatesAndHostnamesSchemasCertificateObject;
+  export import CertificateCreateResponse = CertificatesAPI.CertificateCreateResponse;
   export import CertificateListResponse = CertificatesAPI.CertificateListResponse;
+  export import CertificateDeleteResponse = CertificatesAPI.CertificateDeleteResponse;
+  export import CertificateGetResponse = CertificatesAPI.CertificateGetResponse;
   export import CertificateCreateParams = CertificatesAPI.CertificateCreateParams;
   export import CertificateListParams = CertificatesAPI.CertificateListParams;
   export import CertificateDeleteParams = CertificatesAPI.CertificateDeleteParams;

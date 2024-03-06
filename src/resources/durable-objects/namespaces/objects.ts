@@ -23,19 +23,21 @@ export class Objects extends APIResource {
   }
 }
 
-export interface WorkersObject {
-  /**
-   * ID of the Durable Object.
-   */
-  id?: string;
+export type ObjectListResponse = Array<ObjectListResponse.ObjectListResponseItem>;
 
-  /**
-   * Whether the Durable Object has stored data.
-   */
-  hasStoredData?: boolean;
+export namespace ObjectListResponse {
+  export interface ObjectListResponseItem {
+    /**
+     * ID of the Durable Object.
+     */
+    id?: string;
+
+    /**
+     * Whether the Durable Object has stored data.
+     */
+    hasStoredData?: boolean;
+  }
 }
-
-export type ObjectListResponse = Array<WorkersObject>;
 
 export interface ObjectListParams {
   /**
@@ -58,7 +60,6 @@ export interface ObjectListParams {
 }
 
 export namespace Objects {
-  export import WorkersObject = ObjectsAPI.WorkersObject;
   export import ObjectListResponse = ObjectsAPI.ObjectListResponse;
   export import ObjectListParams = ObjectsAPI.ObjectListParams;
 }

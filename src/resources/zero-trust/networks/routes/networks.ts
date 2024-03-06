@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as NetworksAPI from 'cloudflare/resources/zero-trust/networks/routes/networks';
-import * as RoutesAPI from 'cloudflare/resources/zero-trust/networks/routes/routes';
 
 export class Networks extends APIResource {
   /**
@@ -14,13 +13,13 @@ export class Networks extends APIResource {
     ipNetworkEncoded: string,
     params: NetworkCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RoutesAPI.TunnelRoute> {
+  ): Core.APIPromise<NetworkCreateResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/teamnet/routes/network/${ipNetworkEncoded}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: RoutesAPI.TunnelRoute }>
+      }) as Core.APIPromise<{ result: NetworkCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -37,13 +36,13 @@ export class Networks extends APIResource {
     ipNetworkEncoded: string,
     params: NetworkDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RoutesAPI.TunnelRoute> {
+  ): Core.APIPromise<NetworkDeleteResponse> {
     const { account_id, tun_type } = params;
     return (
       this._client.delete(`/accounts/${account_id}/teamnet/routes/network/${ipNetworkEncoded}`, {
         query: { tun_type },
         ...options,
-      }) as Core.APIPromise<{ result: RoutesAPI.TunnelRoute }>
+      }) as Core.APIPromise<{ result: NetworkDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -55,15 +54,135 @@ export class Networks extends APIResource {
     ipNetworkEncoded: string,
     params: NetworkEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RoutesAPI.TunnelRoute> {
+  ): Core.APIPromise<NetworkEditResponse> {
     const { account_id } = params;
     return (
       this._client.patch(
         `/accounts/${account_id}/teamnet/routes/network/${ipNetworkEncoded}`,
         options,
-      ) as Core.APIPromise<{ result: RoutesAPI.TunnelRoute }>
+      ) as Core.APIPromise<{ result: NetworkEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+
+export interface NetworkCreateResponse {
+  /**
+   * UUID of the route.
+   */
+  id?: string;
+
+  /**
+   * Optional remark describing the route.
+   */
+  comment?: string;
+
+  /**
+   * Timestamp of when the route was created.
+   */
+  created_at?: unknown;
+
+  /**
+   * Timestamp of when the route was deleted. If `null`, the route has not been
+   * deleted.
+   */
+  deleted_at?: string | null;
+
+  /**
+   * The private IPv4 or IPv6 range connected by the route, in CIDR notation.
+   */
+  network?: string;
+
+  /**
+   * UUID of the Cloudflare Tunnel serving the route.
+   */
+  tunnel_id?: unknown;
+
+  /**
+   * UUID of the Tunnel Virtual Network this route belongs to. If no virtual networks
+   * are configured, the route is assigned to the default virtual network of the
+   * account.
+   */
+  virtual_network_id?: unknown;
+}
+
+export interface NetworkDeleteResponse {
+  /**
+   * UUID of the route.
+   */
+  id?: string;
+
+  /**
+   * Optional remark describing the route.
+   */
+  comment?: string;
+
+  /**
+   * Timestamp of when the route was created.
+   */
+  created_at?: unknown;
+
+  /**
+   * Timestamp of when the route was deleted. If `null`, the route has not been
+   * deleted.
+   */
+  deleted_at?: string | null;
+
+  /**
+   * The private IPv4 or IPv6 range connected by the route, in CIDR notation.
+   */
+  network?: string;
+
+  /**
+   * UUID of the Cloudflare Tunnel serving the route.
+   */
+  tunnel_id?: unknown;
+
+  /**
+   * UUID of the Tunnel Virtual Network this route belongs to. If no virtual networks
+   * are configured, the route is assigned to the default virtual network of the
+   * account.
+   */
+  virtual_network_id?: unknown;
+}
+
+export interface NetworkEditResponse {
+  /**
+   * UUID of the route.
+   */
+  id?: string;
+
+  /**
+   * Optional remark describing the route.
+   */
+  comment?: string;
+
+  /**
+   * Timestamp of when the route was created.
+   */
+  created_at?: unknown;
+
+  /**
+   * Timestamp of when the route was deleted. If `null`, the route has not been
+   * deleted.
+   */
+  deleted_at?: string | null;
+
+  /**
+   * The private IPv4 or IPv6 range connected by the route, in CIDR notation.
+   */
+  network?: string;
+
+  /**
+   * UUID of the Cloudflare Tunnel serving the route.
+   */
+  tunnel_id?: unknown;
+
+  /**
+   * UUID of the Tunnel Virtual Network this route belongs to. If no virtual networks
+   * are configured, the route is assigned to the default virtual network of the
+   * account.
+   */
+  virtual_network_id?: unknown;
 }
 
 export interface NetworkCreateParams {
@@ -105,6 +224,9 @@ export interface NetworkEditParams {
 }
 
 export namespace Networks {
+  export import NetworkCreateResponse = NetworksAPI.NetworkCreateResponse;
+  export import NetworkDeleteResponse = NetworksAPI.NetworkDeleteResponse;
+  export import NetworkEditResponse = NetworksAPI.NetworkEditResponse;
   export import NetworkCreateParams = NetworksAPI.NetworkCreateParams;
   export import NetworkDeleteParams = NetworksAPI.NetworkDeleteParams;
   export import NetworkEditParams = NetworksAPI.NetworkEditParams;

@@ -1,7 +1,8 @@
 // File generated from our OpenAPI spec by Stainless.
 
+export { Destinations } from './destinations';
+export { EligibleGetResponse, EligibleGetParams, Eligible } from './eligible';
 export {
-  AaaPagerduty,
   PagerdutyCreateResponse,
   PagerdutyDeleteResponse,
   PagerdutyGetResponse,
@@ -13,11 +14,11 @@ export {
   Pagerduty,
 } from './pagerduty';
 export {
-  AaaWebhooks,
   WebhookCreateResponse,
   WebhookUpdateResponse,
   WebhookListResponse,
   WebhookDeleteResponse,
+  WebhookGetResponse,
   WebhookCreateParams,
   WebhookUpdateParams,
   WebhookListParams,
@@ -25,5 +26,3 @@ export {
   WebhookGetParams,
   Webhooks,
 } from './webhooks';
-export { Destinations } from './destinations';
-export { EligibleGetResponse, EligibleGetParams, Eligible } from './eligible';

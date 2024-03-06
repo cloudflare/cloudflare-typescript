@@ -14,12 +14,11 @@ export {
 } from './certificate-packs/index';
 export { RecommendationGetResponse, Recommendations } from './recommendations';
 export { SSL } from './ssl';
+export { Universal } from './universal/index';
 export {
-  TLSCertificatesAndHostnamesVerification,
   VerificationEditResponse,
   VerificationGetResponse,
   VerificationEditParams,
   VerificationGetParams,
   Verification,
 } from './verification';
-export { Universal } from './universal/index';

@@ -12,10 +12,10 @@ export class Tags extends APIResource {
     identifier: string,
     body: TagCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessTag> {
+  ): Core.APIPromise<TagCreateResponse> {
     return (
       this._client.post(`/accounts/${identifier}/access/tags`, { body, ...options }) as Core.APIPromise<{
-        result: AccessTag;
+        result: TagCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -28,12 +28,12 @@ export class Tags extends APIResource {
     tagName: string,
     body: TagUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessTag> {
+  ): Core.APIPromise<TagUpdateResponse> {
     return (
       this._client.put(`/accounts/${identifier}/access/tags/${tagName}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: AccessTag }>
+      }) as Core.APIPromise<{ result: TagUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -66,10 +66,10 @@ export class Tags extends APIResource {
   /**
    * Get a tag
    */
-  get(identifier: string, name: string, options?: Core.RequestOptions): Core.APIPromise<AccessTag> {
+  get(identifier: string, name: string, options?: Core.RequestOptions): Core.APIPromise<TagGetResponse> {
     return (
       this._client.get(`/accounts/${identifier}/access/tags/${name}`, options) as Core.APIPromise<{
-        result: AccessTag;
+        result: TagGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -78,7 +78,7 @@ export class Tags extends APIResource {
 /**
  * A tag
  */
-export interface AccessTag {
+export interface TagCreateResponse {
   /**
    * The name of the tag
    */
@@ -94,13 +94,72 @@ export interface AccessTag {
   updated_at?: string;
 }
 
-export type TagListResponse = Array<AccessTag>;
+/**
+ * A tag
+ */
+export interface TagUpdateResponse {
+  /**
+   * The name of the tag
+   */
+  name: string;
+
+  /**
+   * The number of applications that have this tag
+   */
+  app_count?: number;
+
+  created_at?: string;
+
+  updated_at?: string;
+}
+
+export type TagListResponse = Array<TagListResponse.TagListResponseItem>;
+
+export namespace TagListResponse {
+  /**
+   * A tag
+   */
+  export interface TagListResponseItem {
+    /**
+     * The name of the tag
+     */
+    name: string;
+
+    /**
+     * The number of applications that have this tag
+     */
+    app_count?: number;
+
+    created_at?: string;
+
+    updated_at?: string;
+  }
+}
 
 export interface TagDeleteResponse {
   /**
    * The name of the tag
    */
   name?: string;
+}
+
+/**
+ * A tag
+ */
+export interface TagGetResponse {
+  /**
+   * The name of the tag
+   */
+  name: string;
+
+  /**
+   * The number of applications that have this tag
+   */
+  app_count?: number;
+
+  created_at?: string;
+
+  updated_at?: string;
 }
 
 export interface TagCreateParams {
@@ -118,9 +177,11 @@ export interface TagUpdateParams {
 }
 
 export namespace Tags {
-  export import AccessTag = TagsAPI.AccessTag;
+  export import TagCreateResponse = TagsAPI.TagCreateResponse;
+  export import TagUpdateResponse = TagsAPI.TagUpdateResponse;
   export import TagListResponse = TagsAPI.TagListResponse;
   export import TagDeleteResponse = TagsAPI.TagDeleteResponse;
+  export import TagGetResponse = TagsAPI.TagGetResponse;
   export import TagCreateParams = TagsAPI.TagCreateParams;
   export import TagUpdateParams = TagsAPI.TagUpdateParams;
 }

@@ -60,11 +60,11 @@ export class Outgoing extends APIResource {
   disable(
     params: OutgoingDisableParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SecondaryDNSDisableTransferResult> {
+  ): Core.APIPromise<OutgoingDisableResponse> {
     const { zone_id } = params;
     return (
       this._client.post(`/zones/${zone_id}/secondary_dns/outgoing/disable`, options) as Core.APIPromise<{
-        result: SecondaryDNSDisableTransferResult;
+        result: OutgoingDisableResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -75,11 +75,11 @@ export class Outgoing extends APIResource {
   enable(
     params: OutgoingEnableParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SecondaryDNSEnableTransferResult> {
+  ): Core.APIPromise<OutgoingEnableResponse> {
     const { zone_id } = params;
     return (
       this._client.post(`/zones/${zone_id}/secondary_dns/outgoing/enable`, options) as Core.APIPromise<{
-        result: SecondaryDNSEnableTransferResult;
+        result: OutgoingEnableResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -90,11 +90,11 @@ export class Outgoing extends APIResource {
   forceNotify(
     params: OutgoingForceNotifyParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SecondaryDNSSchemasForceResult> {
+  ): Core.APIPromise<OutgoingForceNotifyResponse> {
     const { zone_id } = params;
     return (
       this._client.post(`/zones/${zone_id}/secondary_dns/outgoing/force_notify`, options) as Core.APIPromise<{
-        result: SecondaryDNSSchemasForceResult;
+        result: OutgoingForceNotifyResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -111,22 +111,6 @@ export class Outgoing extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
-
-/**
- * The zone transfer status of a primary zone
- */
-export type SecondaryDNSDisableTransferResult = string;
-
-/**
- * The zone transfer status of a primary zone
- */
-export type SecondaryDNSEnableTransferResult = string;
-
-/**
- * When force_notify query parameter is set to true, the response is a simple
- * string
- */
-export type SecondaryDNSSchemasForceResult = string;
 
 export interface OutgoingCreateResponse {
   id?: unknown;
@@ -199,6 +183,22 @@ export interface OutgoingUpdateResponse {
 export interface OutgoingDeleteResponse {
   id?: unknown;
 }
+
+/**
+ * The zone transfer status of a primary zone
+ */
+export type OutgoingDisableResponse = string;
+
+/**
+ * The zone transfer status of a primary zone
+ */
+export type OutgoingEnableResponse = string;
+
+/**
+ * When force_notify query parameter is set to true, the response is a simple
+ * string
+ */
+export type OutgoingForceNotifyResponse = string;
 
 export interface OutgoingGetResponse {
   id?: unknown;
@@ -289,12 +289,12 @@ export interface OutgoingGetParams {
 }
 
 export namespace Outgoing {
-  export import SecondaryDNSDisableTransferResult = OutgoingAPI.SecondaryDNSDisableTransferResult;
-  export import SecondaryDNSEnableTransferResult = OutgoingAPI.SecondaryDNSEnableTransferResult;
-  export import SecondaryDNSSchemasForceResult = OutgoingAPI.SecondaryDNSSchemasForceResult;
   export import OutgoingCreateResponse = OutgoingAPI.OutgoingCreateResponse;
   export import OutgoingUpdateResponse = OutgoingAPI.OutgoingUpdateResponse;
   export import OutgoingDeleteResponse = OutgoingAPI.OutgoingDeleteResponse;
+  export import OutgoingDisableResponse = OutgoingAPI.OutgoingDisableResponse;
+  export import OutgoingEnableResponse = OutgoingAPI.OutgoingEnableResponse;
+  export import OutgoingForceNotifyResponse = OutgoingAPI.OutgoingForceNotifyResponse;
   export import OutgoingGetResponse = OutgoingAPI.OutgoingGetResponse;
   export import OutgoingCreateParams = OutgoingAPI.OutgoingCreateParams;
   export import OutgoingUpdateParams = OutgoingAPI.OutgoingUpdateParams;
@@ -304,5 +304,6 @@ export namespace Outgoing {
   export import OutgoingForceNotifyParams = OutgoingAPI.OutgoingForceNotifyParams;
   export import OutgoingGetParams = OutgoingAPI.OutgoingGetParams;
   export import Status = StatusAPI.Status;
+  export import StatusGetResponse = StatusAPI.StatusGetResponse;
   export import StatusGetParams = StatusAPI.StatusGetParams;
 }

@@ -34,7 +34,6 @@ export namespace SSL {
   export import RecommendationGetResponse = RecommendationsAPI.RecommendationGetResponse;
   export import Universal = UniversalAPI.Universal;
   export import Verification = VerificationAPI.Verification;
-  export import TLSCertificatesAndHostnamesVerification = VerificationAPI.TLSCertificatesAndHostnamesVerification;
   export import VerificationEditResponse = VerificationAPI.VerificationEditResponse;
   export import VerificationGetResponse = VerificationAPI.VerificationGetResponse;
   export import VerificationEditParams = VerificationAPI.VerificationEditParams;

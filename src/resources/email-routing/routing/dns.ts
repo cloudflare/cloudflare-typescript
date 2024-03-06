@@ -17,59 +17,60 @@ export class DNS extends APIResource {
   }
 }
 
-/**
- * List of records needed to enable an Email Routing zone.
- */
-export interface EmailDNSRecord {
-  /**
-   * DNS record content.
-   */
-  content?: string;
+export type DNSGetResponse = Array<DNSGetResponse.DNSGetResponseItem>;
 
+export namespace DNSGetResponse {
   /**
-   * DNS record name (or @ for the zone apex).
+   * List of records needed to enable an Email Routing zone.
    */
-  name?: string;
+  export interface DNSGetResponseItem {
+    /**
+     * DNS record content.
+     */
+    content?: string;
 
-  /**
-   * Required for MX, SRV and URI records. Unused by other record types. Records with
-   * lower priorities are preferred.
-   */
-  priority?: number;
+    /**
+     * DNS record name (or @ for the zone apex).
+     */
+    name?: string;
 
-  /**
-   * Time to live, in seconds, of the DNS record. Must be between 60 and 86400, or 1
-   * for 'automatic'.
-   */
-  ttl?: number | 1;
+    /**
+     * Required for MX, SRV and URI records. Unused by other record types. Records with
+     * lower priorities are preferred.
+     */
+    priority?: number;
 
-  /**
-   * DNS record type.
-   */
-  type?:
-    | 'A'
-    | 'AAAA'
-    | 'CNAME'
-    | 'HTTPS'
-    | 'TXT'
-    | 'SRV'
-    | 'LOC'
-    | 'MX'
-    | 'NS'
-    | 'CERT'
-    | 'DNSKEY'
-    | 'DS'
-    | 'NAPTR'
-    | 'SMIMEA'
-    | 'SSHFP'
-    | 'SVCB'
-    | 'TLSA'
-    | 'URI';
+    /**
+     * Time to live, in seconds, of the DNS record. Must be between 60 and 86400, or 1
+     * for 'automatic'.
+     */
+    ttl?: number | 1;
+
+    /**
+     * DNS record type.
+     */
+    type?:
+      | 'A'
+      | 'AAAA'
+      | 'CNAME'
+      | 'HTTPS'
+      | 'TXT'
+      | 'SRV'
+      | 'LOC'
+      | 'MX'
+      | 'NS'
+      | 'CERT'
+      | 'DNSKEY'
+      | 'DS'
+      | 'NAPTR'
+      | 'SMIMEA'
+      | 'SSHFP'
+      | 'SVCB'
+      | 'TLSA'
+      | 'URI';
+  }
 }
 
-export type DNSGetResponse = Array<EmailDNSRecord>;
-
 export namespace DNS {
-  export import EmailDNSRecord = DNSAPI.EmailDNSRecord;
   export import DNSGetResponse = DNSAPI.DNSGetResponse;
 }

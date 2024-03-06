@@ -13,8 +13,12 @@ export {
   LoadBalancers,
 } from './load-balancers';
 export {
+  MonitorCreateResponse,
+  MonitorUpdateResponse,
   MonitorListResponse,
   MonitorDeleteResponse,
+  MonitorEditResponse,
+  MonitorGetResponse,
   MonitorCreateParams,
   MonitorUpdateParams,
   MonitorListParams,
@@ -24,8 +28,12 @@ export {
   Monitors,
 } from './monitors/index';
 export {
+  PoolCreateResponse,
+  PoolUpdateResponse,
   PoolListResponse,
   PoolDeleteResponse,
+  PoolEditResponse,
+  PoolGetResponse,
   PoolCreateParams,
   PoolUpdateParams,
   PoolListParams,
@@ -34,6 +42,6 @@ export {
   PoolGetParams,
   Pools,
 } from './pools/index';
-export { PreviewGetParams, Previews } from './previews';
+export { PreviewGetResponse, PreviewGetParams, Previews } from './previews';
 export { RegionListResponse, RegionGetResponse, RegionListParams, RegionGetParams, Regions } from './regions';
 export { SearchGetResponse, SearchGetParams, Searches } from './searches';

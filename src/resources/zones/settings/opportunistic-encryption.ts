@@ -11,13 +11,13 @@ export class OpportunisticEncryption extends APIResource {
   edit(
     params: OpportunisticEncryptionEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZonesOpportunisticEncryption> {
+  ): Core.APIPromise<OpportunisticEncryptionEditResponse> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/opportunistic_encryption`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZonesOpportunisticEncryption }>
+      }) as Core.APIPromise<{ result: OpportunisticEncryptionEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -27,11 +27,11 @@ export class OpportunisticEncryption extends APIResource {
   get(
     params: OpportunisticEncryptionGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZonesOpportunisticEncryption> {
+  ): Core.APIPromise<OpportunisticEncryptionGetResponse> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/opportunistic_encryption`, options) as Core.APIPromise<{
-        result: ZonesOpportunisticEncryption;
+        result: OpportunisticEncryptionGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -40,7 +40,33 @@ export class OpportunisticEncryption extends APIResource {
 /**
  * Enables the Opportunistic Encryption feature for a zone.
  */
-export interface ZonesOpportunisticEncryption {
+export interface OpportunisticEncryptionEditResponse {
+  /**
+   * ID of the zone setting.
+   */
+  id: 'opportunistic_encryption';
+
+  /**
+   * Current value of the zone setting.
+   */
+  value: 'on' | 'off';
+
+  /**
+   * Whether or not this setting can be modified for this zone (based on your
+   * Cloudflare plan level).
+   */
+  editable?: true | false;
+
+  /**
+   * last time this setting was modified.
+   */
+  modified_on?: string | null;
+}
+
+/**
+ * Enables the Opportunistic Encryption feature for a zone.
+ */
+export interface OpportunisticEncryptionGetResponse {
   /**
    * ID of the zone setting.
    */
@@ -84,7 +110,8 @@ export interface OpportunisticEncryptionGetParams {
 }
 
 export namespace OpportunisticEncryption {
-  export import ZonesOpportunisticEncryption = OpportunisticEncryptionAPI.ZonesOpportunisticEncryption;
+  export import OpportunisticEncryptionEditResponse = OpportunisticEncryptionAPI.OpportunisticEncryptionEditResponse;
+  export import OpportunisticEncryptionGetResponse = OpportunisticEncryptionAPI.OpportunisticEncryptionGetResponse;
   export import OpportunisticEncryptionEditParams = OpportunisticEncryptionAPI.OpportunisticEncryptionEditParams;
   export import OpportunisticEncryptionGetParams = OpportunisticEncryptionAPI.OpportunisticEncryptionGetParams;
 }

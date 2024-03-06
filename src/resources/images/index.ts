@@ -2,9 +2,11 @@
 
 export { Images } from './images';
 export {
-  ImagesImage,
+  V1CreateResponse,
   V1ListResponse,
   V1DeleteResponse,
+  V1EditResponse,
+  V1GetResponse,
   V1CreateParams,
   V1ListParams,
   V1DeleteParams,

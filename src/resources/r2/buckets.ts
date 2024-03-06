@@ -8,11 +8,11 @@ export class Buckets extends APIResource {
   /**
    * Creates a new R2 bucket.
    */
-  create(params: BucketCreateParams, options?: Core.RequestOptions): Core.APIPromise<R2Bucket> {
+  create(params: BucketCreateParams, options?: Core.RequestOptions): Core.APIPromise<BucketCreateResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/r2/buckets`, { body, ...options }) as Core.APIPromise<{
-        result: R2Bucket;
+        result: BucketCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -48,11 +48,15 @@ export class Buckets extends APIResource {
   /**
    * Gets metadata for an existing R2 bucket.
    */
-  get(bucketName: string, params: BucketGetParams, options?: Core.RequestOptions): Core.APIPromise<R2Bucket> {
+  get(
+    bucketName: string,
+    params: BucketGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<BucketGetResponse> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/r2/buckets/${bucketName}`, options) as Core.APIPromise<{
-        result: R2Bucket;
+        result: BucketGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -61,7 +65,7 @@ export class Buckets extends APIResource {
 /**
  * A single R2 bucket
  */
-export interface R2Bucket {
+export interface BucketCreateResponse {
   /**
    * Creation timestamp
    */
@@ -78,9 +82,51 @@ export interface R2Bucket {
   name?: string;
 }
 
-export type BucketListResponse = Array<R2Bucket>;
+export type BucketListResponse = Array<BucketListResponse.BucketListResponseItem>;
+
+export namespace BucketListResponse {
+  /**
+   * A single R2 bucket
+   */
+  export interface BucketListResponseItem {
+    /**
+     * Creation timestamp
+     */
+    creation_date?: string;
+
+    /**
+     * Location of the bucket
+     */
+    location?: 'apac' | 'eeur' | 'enam' | 'weur' | 'wnam';
+
+    /**
+     * Name of the bucket
+     */
+    name?: string;
+  }
+}
 
 export type BucketDeleteResponse = unknown;
+
+/**
+ * A single R2 bucket
+ */
+export interface BucketGetResponse {
+  /**
+   * Creation timestamp
+   */
+  creation_date?: string;
+
+  /**
+   * Location of the bucket
+   */
+  location?: 'apac' | 'eeur' | 'enam' | 'weur' | 'wnam';
+
+  /**
+   * Name of the bucket
+   */
+  name?: string;
+}
 
 export interface BucketCreateParams {
   /**
@@ -154,9 +200,10 @@ export interface BucketGetParams {
 }
 
 export namespace Buckets {
-  export import R2Bucket = BucketsAPI.R2Bucket;
+  export import BucketCreateResponse = BucketsAPI.BucketCreateResponse;
   export import BucketListResponse = BucketsAPI.BucketListResponse;
   export import BucketDeleteResponse = BucketsAPI.BucketDeleteResponse;
+  export import BucketGetResponse = BucketsAPI.BucketGetResponse;
   export import BucketCreateParams = BucketsAPI.BucketCreateParams;
   export import BucketListParams = BucketsAPI.BucketListParams;
   export import BucketDeleteParams = BucketsAPI.BucketDeleteParams;

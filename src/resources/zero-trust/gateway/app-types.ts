@@ -21,11 +21,11 @@ export class AppTypes extends APIResource {
   }
 }
 
-export type ZeroTrustGatewayAppTypes =
-  | ZeroTrustGatewayAppTypes.ZeroTrustGatewayApplication
-  | ZeroTrustGatewayAppTypes.ZeroTrustGatewayApplicationType;
+export type AppTypeListResponse = Array<
+  AppTypeListResponse.ZeroTrustGatewayApplication | AppTypeListResponse.ZeroTrustGatewayApplicationType
+>;
 
-export namespace ZeroTrustGatewayAppTypes {
+export namespace AppTypeListResponse {
   export interface ZeroTrustGatewayApplication {
     /**
      * The identifier for this application. There is only one application per ID.
@@ -67,8 +67,6 @@ export namespace ZeroTrustGatewayAppTypes {
   }
 }
 
-export type AppTypeListResponse = Array<ZeroTrustGatewayAppTypes>;
-
 export interface AppTypeListParams {
   /**
    * Identifier
@@ -77,7 +75,6 @@ export interface AppTypeListParams {
 }
 
 export namespace AppTypes {
-  export import ZeroTrustGatewayAppTypes = AppTypesAPI.ZeroTrustGatewayAppTypes;
   export import AppTypeListResponse = AppTypesAPI.AppTypeListResponse;
   export import AppTypeListParams = AppTypesAPI.AppTypeListParams;
 }

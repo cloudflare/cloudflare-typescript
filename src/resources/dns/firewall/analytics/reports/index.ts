@@ -1,4 +1,4 @@
 // File generated from our OpenAPI spec by Stainless.
 
-export { BytimeGetParams, Bytimes } from './bytimes';
-export { ReportGetParams, Reports } from './reports';
+export { BytimeGetResponse, BytimeGetParams, Bytimes } from './bytimes';
+export { ReportGetResponse, ReportGetParams, Reports } from './reports';

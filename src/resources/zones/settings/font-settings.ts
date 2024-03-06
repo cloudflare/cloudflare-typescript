@@ -10,11 +10,14 @@ export class FontSettings extends APIResource {
    * Hosted fonts from your own domain, boost performance, and enhance user privacy.
    * Refer to the Cloudflare Fonts documentation for more information.
    */
-  edit(params: FontSettingEditParams, options?: Core.RequestOptions): Core.APIPromise<SpeedCloudflareFonts> {
+  edit(
+    params: FontSettingEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<FontSettingEditResponse> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/fonts`, { body, ...options }) as Core.APIPromise<{
-        result: SpeedCloudflareFonts;
+        result: FontSettingEditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -24,11 +27,11 @@ export class FontSettings extends APIResource {
    * Hosted fonts from your own domain, boost performance, and enhance user privacy.
    * Refer to the Cloudflare Fonts documentation for more information.
    */
-  get(params: FontSettingGetParams, options?: Core.RequestOptions): Core.APIPromise<SpeedCloudflareFonts> {
+  get(params: FontSettingGetParams, options?: Core.RequestOptions): Core.APIPromise<FontSettingGetResponse> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/fonts`, options) as Core.APIPromise<{
-        result: SpeedCloudflareFonts;
+        result: FontSettingGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -39,7 +42,35 @@ export class FontSettings extends APIResource {
  * Hosted fonts from your own domain, boost performance, and enhance user privacy.
  * Refer to the Cloudflare Fonts documentation for more information.
  */
-export interface SpeedCloudflareFonts {
+export interface FontSettingEditResponse {
+  /**
+   * ID of the zone setting.
+   */
+  id: 'fonts';
+
+  /**
+   * Current value of the zone setting.
+   */
+  value: 'on' | 'off';
+
+  /**
+   * Whether or not this setting can be modified for this zone (based on your
+   * Cloudflare plan level).
+   */
+  editable?: true | false;
+
+  /**
+   * last time this setting was modified.
+   */
+  modified_on?: string | null;
+}
+
+/**
+ * Enhance your website's font delivery with Cloudflare Fonts. Deliver Google
+ * Hosted fonts from your own domain, boost performance, and enhance user privacy.
+ * Refer to the Cloudflare Fonts documentation for more information.
+ */
+export interface FontSettingGetResponse {
   /**
    * ID of the zone setting.
    */
@@ -82,7 +113,8 @@ export interface FontSettingGetParams {
 }
 
 export namespace FontSettings {
-  export import SpeedCloudflareFonts = FontSettingsAPI.SpeedCloudflareFonts;
+  export import FontSettingEditResponse = FontSettingsAPI.FontSettingEditResponse;
+  export import FontSettingGetResponse = FontSettingsAPI.FontSettingGetResponse;
   export import FontSettingEditParams = FontSettingsAPI.FontSettingEditParams;
   export import FontSettingGetParams = FontSettingsAPI.FontSettingGetParams;
 }

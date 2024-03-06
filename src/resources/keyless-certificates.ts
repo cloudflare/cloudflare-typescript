@@ -11,11 +11,11 @@ export class KeylessCertificates extends APIResource {
   create(
     params: KeylessCertificateCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TLSCertificatesAndHostnamesBase> {
+  ): Core.APIPromise<KeylessCertificateCreateResponse> {
     const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/keyless_certificates`, { body, ...options }) as Core.APIPromise<{
-        result: TLSCertificatesAndHostnamesBase;
+        result: KeylessCertificateCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -60,13 +60,13 @@ export class KeylessCertificates extends APIResource {
     keylessCertificateId: string,
     params: KeylessCertificateEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TLSCertificatesAndHostnamesBase> {
+  ): Core.APIPromise<KeylessCertificateEditResponse> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/keyless_certificates/${keylessCertificateId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: TLSCertificatesAndHostnamesBase }>
+      }) as Core.APIPromise<{ result: KeylessCertificateEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -77,18 +77,18 @@ export class KeylessCertificates extends APIResource {
     keylessCertificateId: string,
     params: KeylessCertificateGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TLSCertificatesAndHostnamesBase> {
+  ): Core.APIPromise<KeylessCertificateGetResponse> {
     const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/keyless_certificates/${keylessCertificateId}`,
         options,
-      ) as Core.APIPromise<{ result: TLSCertificatesAndHostnamesBase }>
+      ) as Core.APIPromise<{ result: KeylessCertificateGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface TLSCertificatesAndHostnamesBase {
+export interface KeylessCertificateCreateResponse {
   /**
    * Keyless certificate identifier tag.
    */
@@ -139,10 +139,10 @@ export interface TLSCertificatesAndHostnamesBase {
   /**
    * Configuration for using Keyless SSL through a Cloudflare Tunnel
    */
-  tunnel?: TLSCertificatesAndHostnamesBase.Tunnel;
+  tunnel?: KeylessCertificateCreateResponse.Tunnel;
 }
 
-export namespace TLSCertificatesAndHostnamesBase {
+export namespace KeylessCertificateCreateResponse {
   /**
    * Configuration for using Keyless SSL through a Cloudflare Tunnel
    */
@@ -159,84 +159,229 @@ export namespace TLSCertificatesAndHostnamesBase {
   }
 }
 
-export interface TLSCertificatesAndHostnamesKeylessCertificate {
-  /**
-   * Keyless certificate identifier tag.
-   */
-  id: string;
+export type KeylessCertificateListResponse =
+  Array<KeylessCertificateListResponse.KeylessCertificateListResponseItem>;
 
-  /**
-   * When the Keyless SSL was created.
-   */
-  created_on: string;
-
-  /**
-   * Whether or not the Keyless SSL is on or off.
-   */
-  enabled: boolean;
-
-  /**
-   * The keyless SSL name.
-   */
-  host: string;
-
-  /**
-   * When the Keyless SSL was last modified.
-   */
-  modified_on: string;
-
-  /**
-   * The keyless SSL name.
-   */
-  name: string;
-
-  /**
-   * Available permissions for the Keyless SSL for the current user requesting the
-   * item.
-   */
-  permissions: Array<unknown>;
-
-  /**
-   * The keyless SSL port used to communicate between Cloudflare and the client's
-   * Keyless SSL server.
-   */
-  port: number;
-
-  /**
-   * Status of the Keyless SSL.
-   */
-  status: 'active' | 'deleted';
-
-  /**
-   * Configuration for using Keyless SSL through a Cloudflare Tunnel
-   */
-  tunnel?: TLSCertificatesAndHostnamesKeylessCertificate.Tunnel;
-}
-
-export namespace TLSCertificatesAndHostnamesKeylessCertificate {
-  /**
-   * Configuration for using Keyless SSL through a Cloudflare Tunnel
-   */
-  export interface Tunnel {
+export namespace KeylessCertificateListResponse {
+  export interface KeylessCertificateListResponseItem {
     /**
-     * Private IP of the Key Server Host
+     * Keyless certificate identifier tag.
      */
-    private_ip: string;
+    id: string;
 
     /**
-     * Cloudflare Tunnel Virtual Network ID
+     * When the Keyless SSL was created.
      */
-    vnet_id: string;
+    created_on: string;
+
+    /**
+     * Whether or not the Keyless SSL is on or off.
+     */
+    enabled: boolean;
+
+    /**
+     * The keyless SSL name.
+     */
+    host: string;
+
+    /**
+     * When the Keyless SSL was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * The keyless SSL name.
+     */
+    name: string;
+
+    /**
+     * Available permissions for the Keyless SSL for the current user requesting the
+     * item.
+     */
+    permissions: Array<unknown>;
+
+    /**
+     * The keyless SSL port used to communicate between Cloudflare and the client's
+     * Keyless SSL server.
+     */
+    port: number;
+
+    /**
+     * Status of the Keyless SSL.
+     */
+    status: 'active' | 'deleted';
+
+    /**
+     * Configuration for using Keyless SSL through a Cloudflare Tunnel
+     */
+    tunnel?: KeylessCertificateListResponseItem.Tunnel;
+  }
+
+  export namespace KeylessCertificateListResponseItem {
+    /**
+     * Configuration for using Keyless SSL through a Cloudflare Tunnel
+     */
+    export interface Tunnel {
+      /**
+       * Private IP of the Key Server Host
+       */
+      private_ip: string;
+
+      /**
+       * Cloudflare Tunnel Virtual Network ID
+       */
+      vnet_id: string;
+    }
   }
 }
-
-export type KeylessCertificateListResponse = Array<TLSCertificatesAndHostnamesBase>;
 
 export interface KeylessCertificateDeleteResponse {
   /**
    * Identifier
    */
   id?: string;
+}
+
+export interface KeylessCertificateEditResponse {
+  /**
+   * Keyless certificate identifier tag.
+   */
+  id: string;
+
+  /**
+   * When the Keyless SSL was created.
+   */
+  created_on: string;
+
+  /**
+   * Whether or not the Keyless SSL is on or off.
+   */
+  enabled: boolean;
+
+  /**
+   * The keyless SSL name.
+   */
+  host: string;
+
+  /**
+   * When the Keyless SSL was last modified.
+   */
+  modified_on: string;
+
+  /**
+   * The keyless SSL name.
+   */
+  name: string;
+
+  /**
+   * Available permissions for the Keyless SSL for the current user requesting the
+   * item.
+   */
+  permissions: Array<unknown>;
+
+  /**
+   * The keyless SSL port used to communicate between Cloudflare and the client's
+   * Keyless SSL server.
+   */
+  port: number;
+
+  /**
+   * Status of the Keyless SSL.
+   */
+  status: 'active' | 'deleted';
+
+  /**
+   * Configuration for using Keyless SSL through a Cloudflare Tunnel
+   */
+  tunnel?: KeylessCertificateEditResponse.Tunnel;
+}
+
+export namespace KeylessCertificateEditResponse {
+  /**
+   * Configuration for using Keyless SSL through a Cloudflare Tunnel
+   */
+  export interface Tunnel {
+    /**
+     * Private IP of the Key Server Host
+     */
+    private_ip: string;
+
+    /**
+     * Cloudflare Tunnel Virtual Network ID
+     */
+    vnet_id: string;
+  }
+}
+
+export interface KeylessCertificateGetResponse {
+  /**
+   * Keyless certificate identifier tag.
+   */
+  id: string;
+
+  /**
+   * When the Keyless SSL was created.
+   */
+  created_on: string;
+
+  /**
+   * Whether or not the Keyless SSL is on or off.
+   */
+  enabled: boolean;
+
+  /**
+   * The keyless SSL name.
+   */
+  host: string;
+
+  /**
+   * When the Keyless SSL was last modified.
+   */
+  modified_on: string;
+
+  /**
+   * The keyless SSL name.
+   */
+  name: string;
+
+  /**
+   * Available permissions for the Keyless SSL for the current user requesting the
+   * item.
+   */
+  permissions: Array<unknown>;
+
+  /**
+   * The keyless SSL port used to communicate between Cloudflare and the client's
+   * Keyless SSL server.
+   */
+  port: number;
+
+  /**
+   * Status of the Keyless SSL.
+   */
+  status: 'active' | 'deleted';
+
+  /**
+   * Configuration for using Keyless SSL through a Cloudflare Tunnel
+   */
+  tunnel?: KeylessCertificateGetResponse.Tunnel;
+}
+
+export namespace KeylessCertificateGetResponse {
+  /**
+   * Configuration for using Keyless SSL through a Cloudflare Tunnel
+   */
+  export interface Tunnel {
+    /**
+     * Private IP of the Key Server Host
+     */
+    private_ip: string;
+
+    /**
+     * Cloudflare Tunnel Virtual Network ID
+     */
+    vnet_id: string;
+  }
 }
 
 export interface KeylessCertificateCreateParams {
@@ -369,10 +514,11 @@ export interface KeylessCertificateGetParams {
 }
 
 export namespace KeylessCertificates {
-  export import TLSCertificatesAndHostnamesBase = KeylessCertificatesAPI.TLSCertificatesAndHostnamesBase;
-  export import TLSCertificatesAndHostnamesKeylessCertificate = KeylessCertificatesAPI.TLSCertificatesAndHostnamesKeylessCertificate;
+  export import KeylessCertificateCreateResponse = KeylessCertificatesAPI.KeylessCertificateCreateResponse;
   export import KeylessCertificateListResponse = KeylessCertificatesAPI.KeylessCertificateListResponse;
   export import KeylessCertificateDeleteResponse = KeylessCertificatesAPI.KeylessCertificateDeleteResponse;
+  export import KeylessCertificateEditResponse = KeylessCertificatesAPI.KeylessCertificateEditResponse;
+  export import KeylessCertificateGetResponse = KeylessCertificatesAPI.KeylessCertificateGetResponse;
   export import KeylessCertificateCreateParams = KeylessCertificatesAPI.KeylessCertificateCreateParams;
   export import KeylessCertificateListParams = KeylessCertificatesAPI.KeylessCertificateListParams;
   export import KeylessCertificateDeleteParams = KeylessCertificatesAPI.KeylessCertificateDeleteParams;

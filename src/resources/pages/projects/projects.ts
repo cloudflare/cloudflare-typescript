@@ -71,11 +71,11 @@ export class Projects extends APIResource {
     projectName: string,
     params: ProjectGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PagesProjects> {
+  ): Core.APIPromise<ProjectGetResponse> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/pages/projects/${projectName}`, options) as Core.APIPromise<{
-        result: PagesProjects;
+        result: ProjectGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -96,144 +96,154 @@ export class Projects extends APIResource {
   }
 }
 
-export interface PagesDeployments {
-  /**
-   * Id of the deployment.
-   */
-  id?: string;
+export type ProjectCreateResponse = unknown | Array<unknown> | string;
 
-  /**
-   * A list of alias URLs pointing to this deployment.
-   */
-  aliases?: Array<unknown> | null;
+export type ProjectListResponse = Array<ProjectListResponse.ProjectListResponseItem>;
 
-  build_config?: unknown;
-
-  /**
-   * When the deployment was created.
-   */
-  created_on?: string;
-
-  /**
-   * Info about what caused the deployment.
-   */
-  deployment_trigger?: PagesDeployments.DeploymentTrigger;
-
-  /**
-   * A dict of env variables to build this deploy.
-   */
-  env_vars?: unknown;
-
-  /**
-   * Type of deploy.
-   */
-  environment?: string;
-
-  /**
-   * If the deployment has been skipped.
-   */
-  is_skipped?: boolean;
-
-  latest_stage?: unknown;
-
-  /**
-   * When the deployment was last modified.
-   */
-  modified_on?: string;
-
-  /**
-   * Id of the project.
-   */
-  project_id?: string;
-
-  /**
-   * Name of the project.
-   */
-  project_name?: string;
-
-  /**
-   * Short Id (8 character) of the deployment.
-   */
-  short_id?: string;
-
-  source?: unknown;
-
-  /**
-   * List of past stages.
-   */
-  stages?: Array<PagesDeployments.Stage>;
-
-  /**
-   * The live URL to view this deployment.
-   */
-  url?: string;
-}
-
-export namespace PagesDeployments {
-  /**
-   * Info about what caused the deployment.
-   */
-  export interface DeploymentTrigger {
+export namespace ProjectListResponse {
+  export interface ProjectListResponseItem {
     /**
-     * Additional info about the trigger.
+     * Id of the deployment.
      */
-    metadata?: DeploymentTrigger.Metadata;
+    id?: string;
 
     /**
-     * What caused the deployment.
+     * A list of alias URLs pointing to this deployment.
      */
-    type?: string;
+    aliases?: Array<unknown> | null;
+
+    build_config?: unknown;
+
+    /**
+     * When the deployment was created.
+     */
+    created_on?: string;
+
+    /**
+     * Info about what caused the deployment.
+     */
+    deployment_trigger?: ProjectListResponseItem.DeploymentTrigger;
+
+    /**
+     * A dict of env variables to build this deploy.
+     */
+    env_vars?: unknown;
+
+    /**
+     * Type of deploy.
+     */
+    environment?: string;
+
+    /**
+     * If the deployment has been skipped.
+     */
+    is_skipped?: boolean;
+
+    latest_stage?: unknown;
+
+    /**
+     * When the deployment was last modified.
+     */
+    modified_on?: string;
+
+    /**
+     * Id of the project.
+     */
+    project_id?: string;
+
+    /**
+     * Name of the project.
+     */
+    project_name?: string;
+
+    /**
+     * Short Id (8 character) of the deployment.
+     */
+    short_id?: string;
+
+    source?: unknown;
+
+    /**
+     * List of past stages.
+     */
+    stages?: Array<ProjectListResponseItem.Stage>;
+
+    /**
+     * The live URL to view this deployment.
+     */
+    url?: string;
   }
 
-  export namespace DeploymentTrigger {
+  export namespace ProjectListResponseItem {
     /**
-     * Additional info about the trigger.
+     * Info about what caused the deployment.
      */
-    export interface Metadata {
+    export interface DeploymentTrigger {
       /**
-       * Where the trigger happened.
+       * Additional info about the trigger.
        */
-      branch?: string;
+      metadata?: DeploymentTrigger.Metadata;
 
       /**
-       * Hash of the deployment trigger commit.
+       * What caused the deployment.
        */
-      commit_hash?: string;
+      type?: string;
+    }
+
+    export namespace DeploymentTrigger {
+      /**
+       * Additional info about the trigger.
+       */
+      export interface Metadata {
+        /**
+         * Where the trigger happened.
+         */
+        branch?: string;
+
+        /**
+         * Hash of the deployment trigger commit.
+         */
+        commit_hash?: string;
+
+        /**
+         * Message of the deployment trigger commit.
+         */
+        commit_message?: string;
+      }
+    }
+
+    /**
+     * The status of the deployment.
+     */
+    export interface Stage {
+      /**
+       * When the stage ended.
+       */
+      ended_on?: string | null;
 
       /**
-       * Message of the deployment trigger commit.
+       * The current build stage.
        */
-      commit_message?: string;
+      name?: string;
+
+      /**
+       * When the stage started.
+       */
+      started_on?: string | null;
+
+      /**
+       * State of the current stage.
+       */
+      status?: string;
     }
   }
-
-  /**
-   * The status of the deployment.
-   */
-  export interface Stage {
-    /**
-     * When the stage ended.
-     */
-    ended_on?: string | null;
-
-    /**
-     * The current build stage.
-     */
-    name?: string;
-
-    /**
-     * When the stage started.
-     */
-    started_on?: string | null;
-
-    /**
-     * State of the current stage.
-     */
-    status?: string;
-  }
 }
 
-export interface PagesProjects {
+export type ProjectDeleteResponse = unknown;
+
+export type ProjectEditResponse = unknown | Array<unknown> | string;
+
+export interface ProjectGetResponse {
   /**
    * Id of the project.
    */
@@ -242,9 +252,9 @@ export interface PagesProjects {
   /**
    * Configs for the project build process.
    */
-  build_config?: PagesProjects.BuildConfig;
+  build_config?: ProjectGetResponse.BuildConfig;
 
-  canonical_deployment?: PagesDeployments;
+  canonical_deployment?: ProjectGetResponse.CanonicalDeployment;
 
   /**
    * When the project was created.
@@ -254,14 +264,14 @@ export interface PagesProjects {
   /**
    * Configs for deployments in a project.
    */
-  deployment_configs?: PagesProjects.DeploymentConfigs;
+  deployment_configs?: ProjectGetResponse.DeploymentConfigs;
 
   /**
    * A list of associated custom domains for the project.
    */
   domains?: Array<unknown>;
 
-  latest_deployment?: PagesDeployments;
+  latest_deployment?: ProjectGetResponse.LatestDeployment;
 
   /**
    * Name of the project.
@@ -281,7 +291,7 @@ export interface PagesProjects {
   subdomain?: string;
 }
 
-export namespace PagesProjects {
+export namespace ProjectGetResponse {
   /**
    * Configs for the project build process.
    */
@@ -315,6 +325,143 @@ export namespace PagesProjects {
      * The auth token for analytics.
      */
     web_analytics_token?: string | null;
+  }
+
+  export interface CanonicalDeployment {
+    /**
+     * Id of the deployment.
+     */
+    id?: string;
+
+    /**
+     * A list of alias URLs pointing to this deployment.
+     */
+    aliases?: Array<unknown> | null;
+
+    build_config?: unknown;
+
+    /**
+     * When the deployment was created.
+     */
+    created_on?: string;
+
+    /**
+     * Info about what caused the deployment.
+     */
+    deployment_trigger?: CanonicalDeployment.DeploymentTrigger;
+
+    /**
+     * A dict of env variables to build this deploy.
+     */
+    env_vars?: unknown;
+
+    /**
+     * Type of deploy.
+     */
+    environment?: string;
+
+    /**
+     * If the deployment has been skipped.
+     */
+    is_skipped?: boolean;
+
+    latest_stage?: unknown;
+
+    /**
+     * When the deployment was last modified.
+     */
+    modified_on?: string;
+
+    /**
+     * Id of the project.
+     */
+    project_id?: string;
+
+    /**
+     * Name of the project.
+     */
+    project_name?: string;
+
+    /**
+     * Short Id (8 character) of the deployment.
+     */
+    short_id?: string;
+
+    source?: unknown;
+
+    /**
+     * List of past stages.
+     */
+    stages?: Array<CanonicalDeployment.Stage>;
+
+    /**
+     * The live URL to view this deployment.
+     */
+    url?: string;
+  }
+
+  export namespace CanonicalDeployment {
+    /**
+     * Info about what caused the deployment.
+     */
+    export interface DeploymentTrigger {
+      /**
+       * Additional info about the trigger.
+       */
+      metadata?: DeploymentTrigger.Metadata;
+
+      /**
+       * What caused the deployment.
+       */
+      type?: string;
+    }
+
+    export namespace DeploymentTrigger {
+      /**
+       * Additional info about the trigger.
+       */
+      export interface Metadata {
+        /**
+         * Where the trigger happened.
+         */
+        branch?: string;
+
+        /**
+         * Hash of the deployment trigger commit.
+         */
+        commit_hash?: string;
+
+        /**
+         * Message of the deployment trigger commit.
+         */
+        commit_message?: string;
+      }
+    }
+
+    /**
+     * The status of the deployment.
+     */
+    export interface Stage {
+      /**
+       * When the stage ended.
+       */
+      ended_on?: string | null;
+
+      /**
+       * The current build stage.
+       */
+      name?: string;
+
+      /**
+       * When the stage started.
+       */
+      started_on?: string | null;
+
+      /**
+       * State of the current stage.
+       */
+      status?: string;
+    }
   }
 
   /**
@@ -897,15 +1044,144 @@ export namespace PagesProjects {
       }
     }
   }
+
+  export interface LatestDeployment {
+    /**
+     * Id of the deployment.
+     */
+    id?: string;
+
+    /**
+     * A list of alias URLs pointing to this deployment.
+     */
+    aliases?: Array<unknown> | null;
+
+    build_config?: unknown;
+
+    /**
+     * When the deployment was created.
+     */
+    created_on?: string;
+
+    /**
+     * Info about what caused the deployment.
+     */
+    deployment_trigger?: LatestDeployment.DeploymentTrigger;
+
+    /**
+     * A dict of env variables to build this deploy.
+     */
+    env_vars?: unknown;
+
+    /**
+     * Type of deploy.
+     */
+    environment?: string;
+
+    /**
+     * If the deployment has been skipped.
+     */
+    is_skipped?: boolean;
+
+    latest_stage?: unknown;
+
+    /**
+     * When the deployment was last modified.
+     */
+    modified_on?: string;
+
+    /**
+     * Id of the project.
+     */
+    project_id?: string;
+
+    /**
+     * Name of the project.
+     */
+    project_name?: string;
+
+    /**
+     * Short Id (8 character) of the deployment.
+     */
+    short_id?: string;
+
+    source?: unknown;
+
+    /**
+     * List of past stages.
+     */
+    stages?: Array<LatestDeployment.Stage>;
+
+    /**
+     * The live URL to view this deployment.
+     */
+    url?: string;
+  }
+
+  export namespace LatestDeployment {
+    /**
+     * Info about what caused the deployment.
+     */
+    export interface DeploymentTrigger {
+      /**
+       * Additional info about the trigger.
+       */
+      metadata?: DeploymentTrigger.Metadata;
+
+      /**
+       * What caused the deployment.
+       */
+      type?: string;
+    }
+
+    export namespace DeploymentTrigger {
+      /**
+       * Additional info about the trigger.
+       */
+      export interface Metadata {
+        /**
+         * Where the trigger happened.
+         */
+        branch?: string;
+
+        /**
+         * Hash of the deployment trigger commit.
+         */
+        commit_hash?: string;
+
+        /**
+         * Message of the deployment trigger commit.
+         */
+        commit_message?: string;
+      }
+    }
+
+    /**
+     * The status of the deployment.
+     */
+    export interface Stage {
+      /**
+       * When the stage ended.
+       */
+      ended_on?: string | null;
+
+      /**
+       * The current build stage.
+       */
+      name?: string;
+
+      /**
+       * When the stage started.
+       */
+      started_on?: string | null;
+
+      /**
+       * State of the current stage.
+       */
+      status?: string;
+    }
+  }
 }
-
-export type ProjectCreateResponse = unknown | Array<unknown> | string;
-
-export type ProjectListResponse = Array<PagesDeployments>;
-
-export type ProjectDeleteResponse = unknown;
-
-export type ProjectEditResponse = unknown | Array<unknown> | string;
 
 export type ProjectPurgeBuildCacheResponse = unknown;
 
@@ -923,7 +1199,7 @@ export interface ProjectCreateParams {
   /**
    * Body param:
    */
-  canonical_deployment?: PagesDeployments;
+  canonical_deployment?: ProjectCreateParams.CanonicalDeployment;
 
   /**
    * Body param: Configs for deployments in a project.
@@ -933,7 +1209,7 @@ export interface ProjectCreateParams {
   /**
    * Body param:
    */
-  latest_deployment?: PagesDeployments;
+  latest_deployment?: ProjectCreateParams.LatestDeployment;
 
   /**
    * Body param: Name of the project.
@@ -983,6 +1259,8 @@ export namespace ProjectCreateParams {
     web_analytics_token?: string | null;
   }
 
+  export interface CanonicalDeployment {}
+
   /**
    * Configs for deployments in a project.
    */
@@ -1563,6 +1841,8 @@ export namespace ProjectCreateParams {
       }
     }
   }
+
+  export interface LatestDeployment {}
 }
 
 export interface ProjectListParams {
@@ -1606,12 +1886,11 @@ export interface ProjectPurgeBuildCacheParams {
 }
 
 export namespace Projects {
-  export import PagesDeployments = ProjectsAPI.PagesDeployments;
-  export import PagesProjects = ProjectsAPI.PagesProjects;
   export import ProjectCreateResponse = ProjectsAPI.ProjectCreateResponse;
   export import ProjectListResponse = ProjectsAPI.ProjectListResponse;
   export import ProjectDeleteResponse = ProjectsAPI.ProjectDeleteResponse;
   export import ProjectEditResponse = ProjectsAPI.ProjectEditResponse;
+  export import ProjectGetResponse = ProjectsAPI.ProjectGetResponse;
   export import ProjectPurgeBuildCacheResponse = ProjectsAPI.ProjectPurgeBuildCacheResponse;
   export import ProjectCreateParams = ProjectsAPI.ProjectCreateParams;
   export import ProjectListParams = ProjectsAPI.ProjectListParams;
@@ -1620,8 +1899,12 @@ export namespace Projects {
   export import ProjectGetParams = ProjectsAPI.ProjectGetParams;
   export import ProjectPurgeBuildCacheParams = ProjectsAPI.ProjectPurgeBuildCacheParams;
   export import Deployments = DeploymentsAPI.Deployments;
+  export import DeploymentCreateResponse = DeploymentsAPI.DeploymentCreateResponse;
   export import DeploymentListResponse = DeploymentsAPI.DeploymentListResponse;
   export import DeploymentDeleteResponse = DeploymentsAPI.DeploymentDeleteResponse;
+  export import DeploymentGetResponse = DeploymentsAPI.DeploymentGetResponse;
+  export import DeploymentRetryResponse = DeploymentsAPI.DeploymentRetryResponse;
+  export import DeploymentRollbackResponse = DeploymentsAPI.DeploymentRollbackResponse;
   export import DeploymentCreateParams = DeploymentsAPI.DeploymentCreateParams;
   export import DeploymentListParams = DeploymentsAPI.DeploymentListParams;
   export import DeploymentDeleteParams = DeploymentsAPI.DeploymentDeleteParams;

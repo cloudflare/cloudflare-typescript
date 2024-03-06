@@ -2,28 +2,6 @@
 
 export { DefaultPolicyGetResponse, DefaultPolicyGetParams, DefaultPolicy } from './default-policy';
 export {
-  TeamsDevicesDeviceSettingsPolicy,
-  PolicyListResponse,
-  PolicyDeleteResponse,
-  PolicyCreateParams,
-  PolicyListParams,
-  PolicyDeleteParams,
-  PolicyEditParams,
-  PolicyGetParams,
-  Policies,
-} from './policies';
-export {
-  TeamsDevicesFallbackDomain,
-  FallbackDomainUpdateResponse,
-  FallbackDomainListResponse,
-  FallbackDomainGetResponse,
-  FallbackDomainUpdateParams,
-  FallbackDomainListParams,
-  FallbackDomainGetParams,
-  FallbackDomains,
-} from './fallback-domains';
-export {
-  TeamsDevicesSplitTunnel,
   ExcludeUpdateResponse,
   ExcludeListResponse,
   ExcludeGetResponse,
@@ -33,7 +11,15 @@ export {
   Excludes,
 } from './excludes';
 export {
-  TeamsDevicesSplitTunnelInclude,
+  FallbackDomainUpdateResponse,
+  FallbackDomainListResponse,
+  FallbackDomainGetResponse,
+  FallbackDomainUpdateParams,
+  FallbackDomainListParams,
+  FallbackDomainGetParams,
+  FallbackDomains,
+} from './fallback-domains';
+export {
   IncludeUpdateResponse,
   IncludeListResponse,
   IncludeGetResponse,
@@ -42,3 +28,16 @@ export {
   IncludeGetParams,
   Includes,
 } from './includes';
+export {
+  PolicyCreateResponse,
+  PolicyListResponse,
+  PolicyDeleteResponse,
+  PolicyEditResponse,
+  PolicyGetResponse,
+  PolicyCreateParams,
+  PolicyListParams,
+  PolicyDeleteParams,
+  PolicyEditParams,
+  PolicyGetParams,
+  Policies,
+} from './policies';

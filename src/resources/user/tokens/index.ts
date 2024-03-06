@@ -1,6 +1,5 @@
 // File generated from our OpenAPI spec by Stainless.
 
-export { IamValue, ValueUpdateParams, Value } from './value';
 export { PermissionGroupListResponse, PermissionGroups } from './permission-groups';
 export {
   TokenCreateResponse,
@@ -15,3 +14,4 @@ export {
   TokenListResponsesV4PagePaginationArray,
   Tokens,
 } from './tokens';
+export { ValueUpdateResponse, ValueUpdateParams, Value } from './value';

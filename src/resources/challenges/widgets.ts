@@ -14,14 +14,14 @@ export class Widgets extends APIResource {
     accountIdentifier: string,
     params: WidgetCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<NcChallengesAdminWidgetDetail> {
+  ): Core.APIPromise<WidgetCreateResponse> {
     const { direction, order, page, per_page, ...body } = params;
     return (
       this._client.post(`/accounts/${accountIdentifier}/challenges/widgets`, {
         query: { direction, order, page, per_page },
         body,
         ...options,
-      }) as Core.APIPromise<{ result: NcChallengesAdminWidgetDetail }>
+      }) as Core.APIPromise<{ result: WidgetCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -33,12 +33,12 @@ export class Widgets extends APIResource {
     sitekey: string,
     body: WidgetUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<NcChallengesAdminWidgetDetail> {
+  ): Core.APIPromise<WidgetUpdateResponse> {
     return (
       this._client.put(`/accounts/${accountIdentifier}/challenges/widgets/${sitekey}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: NcChallengesAdminWidgetDetail }>
+      }) as Core.APIPromise<{ result: WidgetUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -49,22 +49,22 @@ export class Widgets extends APIResource {
     accountIdentifier: string,
     query?: WidgetListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<NcChallengesAdminWidgetListsV4PagePaginationArray, NcChallengesAdminWidgetList>;
+  ): Core.PagePromise<WidgetListResponsesV4PagePaginationArray, WidgetListResponse>;
   list(
     accountIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<NcChallengesAdminWidgetListsV4PagePaginationArray, NcChallengesAdminWidgetList>;
+  ): Core.PagePromise<WidgetListResponsesV4PagePaginationArray, WidgetListResponse>;
   list(
     accountIdentifier: string,
     query: WidgetListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<NcChallengesAdminWidgetListsV4PagePaginationArray, NcChallengesAdminWidgetList> {
+  ): Core.PagePromise<WidgetListResponsesV4PagePaginationArray, WidgetListResponse> {
     if (isRequestOptions(query)) {
       return this.list(accountIdentifier, {}, query);
     }
     return this._client.getAPIList(
       `/accounts/${accountIdentifier}/challenges/widgets`,
-      NcChallengesAdminWidgetListsV4PagePaginationArray,
+      WidgetListResponsesV4PagePaginationArray,
       { query, ...options },
     );
   }
@@ -76,12 +76,12 @@ export class Widgets extends APIResource {
     accountIdentifier: string,
     sitekey: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<NcChallengesAdminWidgetDetail> {
+  ): Core.APIPromise<WidgetDeleteResponse> {
     return (
       this._client.delete(
         `/accounts/${accountIdentifier}/challenges/widgets/${sitekey}`,
         options,
-      ) as Core.APIPromise<{ result: NcChallengesAdminWidgetDetail }>
+      ) as Core.APIPromise<{ result: WidgetDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -92,12 +92,12 @@ export class Widgets extends APIResource {
     accountIdentifier: string,
     sitekey: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<NcChallengesAdminWidgetDetail> {
+  ): Core.APIPromise<WidgetGetResponse> {
     return (
       this._client.get(
         `/accounts/${accountIdentifier}/challenges/widgets/${sitekey}`,
         options,
-      ) as Core.APIPromise<{ result: NcChallengesAdminWidgetDetail }>
+      ) as Core.APIPromise<{ result: WidgetGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -112,22 +112,83 @@ export class Widgets extends APIResource {
     sitekey: string,
     body: WidgetRotateSecretParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<NcChallengesAdminWidgetDetail> {
+  ): Core.APIPromise<WidgetRotateSecretResponse> {
     return (
       this._client.post(`/accounts/${accountIdentifier}/challenges/widgets/${sitekey}/rotate_secret`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: NcChallengesAdminWidgetDetail }>
+      }) as Core.APIPromise<{ result: WidgetRotateSecretResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class NcChallengesAdminWidgetListsV4PagePaginationArray extends V4PagePaginationArray<NcChallengesAdminWidgetList> {}
+export class WidgetListResponsesV4PagePaginationArray extends V4PagePaginationArray<WidgetListResponse> {}
 
 /**
  * A Turnstile widget's detailed configuration
  */
-export interface NcChallengesAdminWidgetDetail {
+export interface WidgetCreateResponse {
+  /**
+   * If bot_fight_mode is set to `true`, Cloudflare issues computationally expensive
+   * challenges in response to malicious bots (ENT only).
+   */
+  bot_fight_mode: boolean;
+
+  /**
+   * If Turnstile is embedded on a Cloudflare site and the widget should grant
+   * challenge clearance, this setting can determine the clearance level to be set
+   */
+  clearance_level: 'no_clearance' | 'jschallenge' | 'managed' | 'interactive';
+
+  /**
+   * When the widget was created.
+   */
+  created_on: string;
+
+  domains: Array<string>;
+
+  /**
+   * Widget Mode
+   */
+  mode: 'non-interactive' | 'invisible' | 'managed';
+
+  /**
+   * When the widget was modified.
+   */
+  modified_on: string;
+
+  /**
+   * Human readable widget name. Not unique. Cloudflare suggests that you set this to
+   * a meaningful string to make it easier to identify your widget, and where it is
+   * used.
+   */
+  name: string;
+
+  /**
+   * Do not show any Cloudflare branding on the widget (ENT only).
+   */
+  offlabel: boolean;
+
+  /**
+   * Region where this widget can be used.
+   */
+  region: 'world';
+
+  /**
+   * Secret key for this widget.
+   */
+  secret: string;
+
+  /**
+   * Widget item identifier tag.
+   */
+  sitekey: string;
+}
+
+/**
+ * A Turnstile widget's detailed configuration
+ */
+export interface WidgetUpdateResponse {
   /**
    * If bot_fight_mode is set to `true`, Cloudflare issues computationally expensive
    * challenges in response to malicious bots (ENT only).
@@ -188,7 +249,7 @@ export interface NcChallengesAdminWidgetDetail {
 /**
  * A Turnstile Widgets configuration as it appears in listings
  */
-export interface NcChallengesAdminWidgetList {
+export interface WidgetListResponse {
   /**
    * If bot_fight_mode is set to `true`, Cloudflare issues computationally expensive
    * challenges in response to malicious bots (ENT only).
@@ -234,6 +295,189 @@ export interface NcChallengesAdminWidgetList {
    * Region where this widget can be used.
    */
   region: 'world';
+
+  /**
+   * Widget item identifier tag.
+   */
+  sitekey: string;
+}
+
+/**
+ * A Turnstile widget's detailed configuration
+ */
+export interface WidgetDeleteResponse {
+  /**
+   * If bot_fight_mode is set to `true`, Cloudflare issues computationally expensive
+   * challenges in response to malicious bots (ENT only).
+   */
+  bot_fight_mode: boolean;
+
+  /**
+   * If Turnstile is embedded on a Cloudflare site and the widget should grant
+   * challenge clearance, this setting can determine the clearance level to be set
+   */
+  clearance_level: 'no_clearance' | 'jschallenge' | 'managed' | 'interactive';
+
+  /**
+   * When the widget was created.
+   */
+  created_on: string;
+
+  domains: Array<string>;
+
+  /**
+   * Widget Mode
+   */
+  mode: 'non-interactive' | 'invisible' | 'managed';
+
+  /**
+   * When the widget was modified.
+   */
+  modified_on: string;
+
+  /**
+   * Human readable widget name. Not unique. Cloudflare suggests that you set this to
+   * a meaningful string to make it easier to identify your widget, and where it is
+   * used.
+   */
+  name: string;
+
+  /**
+   * Do not show any Cloudflare branding on the widget (ENT only).
+   */
+  offlabel: boolean;
+
+  /**
+   * Region where this widget can be used.
+   */
+  region: 'world';
+
+  /**
+   * Secret key for this widget.
+   */
+  secret: string;
+
+  /**
+   * Widget item identifier tag.
+   */
+  sitekey: string;
+}
+
+/**
+ * A Turnstile widget's detailed configuration
+ */
+export interface WidgetGetResponse {
+  /**
+   * If bot_fight_mode is set to `true`, Cloudflare issues computationally expensive
+   * challenges in response to malicious bots (ENT only).
+   */
+  bot_fight_mode: boolean;
+
+  /**
+   * If Turnstile is embedded on a Cloudflare site and the widget should grant
+   * challenge clearance, this setting can determine the clearance level to be set
+   */
+  clearance_level: 'no_clearance' | 'jschallenge' | 'managed' | 'interactive';
+
+  /**
+   * When the widget was created.
+   */
+  created_on: string;
+
+  domains: Array<string>;
+
+  /**
+   * Widget Mode
+   */
+  mode: 'non-interactive' | 'invisible' | 'managed';
+
+  /**
+   * When the widget was modified.
+   */
+  modified_on: string;
+
+  /**
+   * Human readable widget name. Not unique. Cloudflare suggests that you set this to
+   * a meaningful string to make it easier to identify your widget, and where it is
+   * used.
+   */
+  name: string;
+
+  /**
+   * Do not show any Cloudflare branding on the widget (ENT only).
+   */
+  offlabel: boolean;
+
+  /**
+   * Region where this widget can be used.
+   */
+  region: 'world';
+
+  /**
+   * Secret key for this widget.
+   */
+  secret: string;
+
+  /**
+   * Widget item identifier tag.
+   */
+  sitekey: string;
+}
+
+/**
+ * A Turnstile widget's detailed configuration
+ */
+export interface WidgetRotateSecretResponse {
+  /**
+   * If bot_fight_mode is set to `true`, Cloudflare issues computationally expensive
+   * challenges in response to malicious bots (ENT only).
+   */
+  bot_fight_mode: boolean;
+
+  /**
+   * If Turnstile is embedded on a Cloudflare site and the widget should grant
+   * challenge clearance, this setting can determine the clearance level to be set
+   */
+  clearance_level: 'no_clearance' | 'jschallenge' | 'managed' | 'interactive';
+
+  /**
+   * When the widget was created.
+   */
+  created_on: string;
+
+  domains: Array<string>;
+
+  /**
+   * Widget Mode
+   */
+  mode: 'non-interactive' | 'invisible' | 'managed';
+
+  /**
+   * When the widget was modified.
+   */
+  modified_on: string;
+
+  /**
+   * Human readable widget name. Not unique. Cloudflare suggests that you set this to
+   * a meaningful string to make it easier to identify your widget, and where it is
+   * used.
+   */
+  name: string;
+
+  /**
+   * Do not show any Cloudflare branding on the widget (ENT only).
+   */
+  offlabel: boolean;
+
+  /**
+   * Region where this widget can be used.
+   */
+  region: 'world';
+
+  /**
+   * Secret key for this widget.
+   */
+  secret: string;
 
   /**
    * Widget item identifier tag.
@@ -358,9 +602,13 @@ export interface WidgetRotateSecretParams {
 }
 
 export namespace Widgets {
-  export import NcChallengesAdminWidgetDetail = WidgetsAPI.NcChallengesAdminWidgetDetail;
-  export import NcChallengesAdminWidgetList = WidgetsAPI.NcChallengesAdminWidgetList;
-  export import NcChallengesAdminWidgetListsV4PagePaginationArray = WidgetsAPI.NcChallengesAdminWidgetListsV4PagePaginationArray;
+  export import WidgetCreateResponse = WidgetsAPI.WidgetCreateResponse;
+  export import WidgetUpdateResponse = WidgetsAPI.WidgetUpdateResponse;
+  export import WidgetListResponse = WidgetsAPI.WidgetListResponse;
+  export import WidgetDeleteResponse = WidgetsAPI.WidgetDeleteResponse;
+  export import WidgetGetResponse = WidgetsAPI.WidgetGetResponse;
+  export import WidgetRotateSecretResponse = WidgetsAPI.WidgetRotateSecretResponse;
+  export import WidgetListResponsesV4PagePaginationArray = WidgetsAPI.WidgetListResponsesV4PagePaginationArray;
   export import WidgetCreateParams = WidgetsAPI.WidgetCreateParams;
   export import WidgetUpdateParams = WidgetsAPI.WidgetUpdateParams;
   export import WidgetListParams = WidgetsAPI.WidgetListParams;

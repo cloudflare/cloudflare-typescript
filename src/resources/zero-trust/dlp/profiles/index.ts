@@ -1,9 +1,10 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
-  DLPCustomProfile,
   CustomCreateResponse,
+  CustomUpdateResponse,
   CustomDeleteResponse,
+  CustomGetResponse,
   CustomCreateParams,
   CustomUpdateParams,
   CustomDeleteParams,
@@ -11,13 +12,13 @@ export {
   Customs,
 } from './customs';
 export {
-  DLPPredefinedProfile,
+  PredefinedUpdateResponse,
+  PredefinedGetResponse,
   PredefinedUpdateParams,
   PredefinedGetParams,
   Predefineds,
 } from './predefineds';
 export {
-  DLPProfiles,
   ProfileListResponse,
   ProfileGetResponse,
   ProfileListParams,

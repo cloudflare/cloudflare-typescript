@@ -18,44 +18,46 @@ export class Sinkholes extends APIResource {
   }
 }
 
-export interface IntelSinkholesSinkholeItem {
-  /**
-   * The unique identifier for the sinkhole
-   */
-  id?: number;
+export type SinkholeListResponse = Array<SinkholeListResponse.SinkholeListResponseItem>;
 
-  /**
-   * The account tag that owns this sinkhole
-   */
-  account_tag?: string;
+export namespace SinkholeListResponse {
+  export interface SinkholeListResponseItem {
+    /**
+     * The unique identifier for the sinkhole
+     */
+    id?: number;
 
-  /**
-   * The date and time when the sinkhole was created
-   */
-  created_on?: string;
+    /**
+     * The account tag that owns this sinkhole
+     */
+    account_tag?: string;
 
-  /**
-   * The date and time when the sinkhole was last modified
-   */
-  modified_on?: string;
+    /**
+     * The date and time when the sinkhole was created
+     */
+    created_on?: string;
 
-  /**
-   * The name of the sinkhole
-   */
-  name?: string;
+    /**
+     * The date and time when the sinkhole was last modified
+     */
+    modified_on?: string;
 
-  /**
-   * The name of the R2 bucket to store results
-   */
-  r2_bucket?: string;
+    /**
+     * The name of the sinkhole
+     */
+    name?: string;
 
-  /**
-   * The id of the R2 instance
-   */
-  r2_id?: string;
+    /**
+     * The name of the R2 bucket to store results
+     */
+    r2_bucket?: string;
+
+    /**
+     * The id of the R2 instance
+     */
+    r2_id?: string;
+  }
 }
-
-export type SinkholeListResponse = Array<IntelSinkholesSinkholeItem>;
 
 export interface SinkholeListParams {
   /**
@@ -65,7 +67,6 @@ export interface SinkholeListParams {
 }
 
 export namespace Sinkholes {
-  export import IntelSinkholesSinkholeItem = SinkholesAPI.IntelSinkholesSinkholeItem;
   export import SinkholeListResponse = SinkholesAPI.SinkholeListResponse;
   export import SinkholeListParams = SinkholesAPI.SinkholeListParams;
 }

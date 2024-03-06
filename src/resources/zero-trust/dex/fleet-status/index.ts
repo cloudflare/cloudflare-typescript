@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
-  DigitalExperienceMonitoringDevice,
+  DeviceListResponse,
   DeviceListParams,
-  DigitalExperienceMonitoringDevicesV4PagePaginationArray,
+  DeviceListResponsesV4PagePaginationArray,
   Devices,
 } from './devices';
 export { FleetStatus } from './fleet-status';

@@ -9,6 +9,6 @@ export class DCVDelegation extends APIResource {
 
 export namespace DCVDelegation {
   export import UUID = UUIDAPI.UUID;
-  export import TLSCertificatesAndHostnamesUUIDObject = UUIDAPI.TLSCertificatesAndHostnamesUUIDObject;
+  export import UUIDGetResponse = UUIDAPI.UUIDGetResponse;
   export import UUIDGetParams = UUIDAPI.UUIDGetParams;
 }

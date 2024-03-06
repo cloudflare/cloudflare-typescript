@@ -1,4 +1,11 @@
 // File generated from our OpenAPI spec by Stainless.
 
-export { Full } from './full';
-export { MagicVisibilityMNMConfig, Configs } from './configs';
+export {
+  ConfigCreateResponse,
+  ConfigUpdateResponse,
+  ConfigDeleteResponse,
+  ConfigEditResponse,
+  ConfigGetResponse,
+  Configs,
+} from './configs';
+export { FullGetResponse, Full } from './full';

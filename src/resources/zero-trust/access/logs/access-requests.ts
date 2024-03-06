@@ -17,53 +17,54 @@ export class AccessRequests extends APIResource {
   }
 }
 
-export interface AccessAccessRequests {
-  /**
-   * The event that occurred, such as a login attempt.
-   */
-  action?: string;
+export type AccessRequestListResponse = Array<AccessRequestListResponse.AccessRequestListResponseItem>;
 
-  /**
-   * The result of the authentication event.
-   */
-  allowed?: boolean;
+export namespace AccessRequestListResponse {
+  export interface AccessRequestListResponseItem {
+    /**
+     * The event that occurred, such as a login attempt.
+     */
+    action?: string;
 
-  /**
-   * The URL of the Access application.
-   */
-  app_domain?: string;
+    /**
+     * The result of the authentication event.
+     */
+    allowed?: boolean;
 
-  /**
-   * The unique identifier for the Access application.
-   */
-  app_uid?: unknown;
+    /**
+     * The URL of the Access application.
+     */
+    app_domain?: string;
 
-  /**
-   * The IdP used to authenticate.
-   */
-  connection?: string;
+    /**
+     * The unique identifier for the Access application.
+     */
+    app_uid?: unknown;
 
-  created_at?: string;
+    /**
+     * The IdP used to authenticate.
+     */
+    connection?: string;
 
-  /**
-   * The IP address of the authenticating user.
-   */
-  ip_address?: string;
+    created_at?: string;
 
-  /**
-   * The unique identifier for the request to Cloudflare.
-   */
-  ray_id?: string;
+    /**
+     * The IP address of the authenticating user.
+     */
+    ip_address?: string;
 
-  /**
-   * The email address of the authenticating user.
-   */
-  user_email?: string;
+    /**
+     * The unique identifier for the request to Cloudflare.
+     */
+    ray_id?: string;
+
+    /**
+     * The email address of the authenticating user.
+     */
+    user_email?: string;
+  }
 }
 
-export type AccessRequestListResponse = Array<AccessAccessRequests>;
-
 export namespace AccessRequests {
-  export import AccessAccessRequests = AccessRequestsAPI.AccessAccessRequests;
   export import AccessRequestListResponse = AccessRequestsAPI.AccessRequestListResponse;
 }

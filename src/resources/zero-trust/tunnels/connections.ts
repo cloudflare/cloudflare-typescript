@@ -41,98 +41,100 @@ export class Connections extends APIResource {
   }
 }
 
-/**
- * A client (typically cloudflared) that maintains connections to a Cloudflare data
- * center.
- */
-export interface TunnelTunnelClient {
-  /**
-   * UUID of the Cloudflare Tunnel connection.
-   */
-  id?: string;
+export type ConnectionDeleteResponse = unknown | Array<unknown> | string;
 
-  /**
-   * The cloudflared OS architecture used to establish this connection.
-   */
-  arch?: string;
+export type ConnectionGetResponse = Array<ConnectionGetResponse.ConnectionGetResponseItem>;
 
+export namespace ConnectionGetResponse {
   /**
-   * The version of the remote tunnel configuration. Used internally to sync
-   * cloudflared with the Zero Trust dashboard.
+   * A client (typically cloudflared) that maintains connections to a Cloudflare data
+   * center.
    */
-  config_version?: number;
-
-  /**
-   * The Cloudflare Tunnel connections between your origin and Cloudflare's edge.
-   */
-  conns?: Array<TunnelTunnelClient.Conn>;
-
-  /**
-   * Features enabled for the Cloudflare Tunnel.
-   */
-  features?: Array<string>;
-
-  /**
-   * Timestamp of when the tunnel connection was started.
-   */
-  run_at?: string;
-
-  /**
-   * The cloudflared version used to establish this connection.
-   */
-  version?: string;
-}
-
-export namespace TunnelTunnelClient {
-  export interface Conn {
+  export interface ConnectionGetResponseItem {
     /**
      * UUID of the Cloudflare Tunnel connection.
      */
     id?: string;
 
     /**
-     * UUID of the cloudflared instance.
+     * The cloudflared OS architecture used to establish this connection.
      */
-    client_id?: unknown;
+    arch?: string;
+
+    /**
+     * The version of the remote tunnel configuration. Used internally to sync
+     * cloudflared with the Zero Trust dashboard.
+     */
+    config_version?: number;
+
+    /**
+     * The Cloudflare Tunnel connections between your origin and Cloudflare's edge.
+     */
+    conns?: Array<ConnectionGetResponseItem.Conn>;
+
+    /**
+     * Features enabled for the Cloudflare Tunnel.
+     */
+    features?: Array<string>;
+
+    /**
+     * Timestamp of when the tunnel connection was started.
+     */
+    run_at?: string;
 
     /**
      * The cloudflared version used to establish this connection.
      */
-    client_version?: string;
+    version?: string;
+  }
 
-    /**
-     * The Cloudflare data center used for this connection.
-     */
-    colo_name?: string;
+  export namespace ConnectionGetResponseItem {
+    export interface Conn {
+      /**
+       * UUID of the Cloudflare Tunnel connection.
+       */
+      id?: string;
 
-    /**
-     * Cloudflare continues to track connections for several minutes after they
-     * disconnect. This is an optimization to improve latency and reliability of
-     * reconnecting. If `true`, the connection has disconnected but is still being
-     * tracked. If `false`, the connection is actively serving traffic.
-     */
-    is_pending_reconnect?: boolean;
+      /**
+       * UUID of the cloudflared instance.
+       */
+      client_id?: unknown;
 
-    /**
-     * Timestamp of when the connection was established.
-     */
-    opened_at?: string;
+      /**
+       * The cloudflared version used to establish this connection.
+       */
+      client_version?: string;
 
-    /**
-     * The public IP address of the host running cloudflared.
-     */
-    origin_ip?: string;
+      /**
+       * The Cloudflare data center used for this connection.
+       */
+      colo_name?: string;
 
-    /**
-     * UUID of the Cloudflare Tunnel connection.
-     */
-    uuid?: string;
+      /**
+       * Cloudflare continues to track connections for several minutes after they
+       * disconnect. This is an optimization to improve latency and reliability of
+       * reconnecting. If `true`, the connection has disconnected but is still being
+       * tracked. If `false`, the connection is actively serving traffic.
+       */
+      is_pending_reconnect?: boolean;
+
+      /**
+       * Timestamp of when the connection was established.
+       */
+      opened_at?: string;
+
+      /**
+       * The public IP address of the host running cloudflared.
+       */
+      origin_ip?: string;
+
+      /**
+       * UUID of the Cloudflare Tunnel connection.
+       */
+      uuid?: string;
+    }
   }
 }
-
-export type ConnectionDeleteResponse = unknown | Array<unknown> | string;
-
-export type ConnectionGetResponse = Array<TunnelTunnelClient>;
 
 export interface ConnectionDeleteParams {
   /**
@@ -154,7 +156,6 @@ export interface ConnectionGetParams {
 }
 
 export namespace Connections {
-  export import TunnelTunnelClient = ConnectionsAPI.TunnelTunnelClient;
   export import ConnectionDeleteResponse = ConnectionsAPI.ConnectionDeleteResponse;
   export import ConnectionGetResponse = ConnectionsAPI.ConnectionGetResponse;
   export import ConnectionDeleteParams = ConnectionsAPI.ConnectionDeleteParams;

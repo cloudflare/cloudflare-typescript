@@ -1,22 +1,24 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
-  PageShieldConnection,
   ConnectionListResponse,
+  ConnectionGetResponse,
   ConnectionListParams,
   ConnectionGetParams,
   Connections,
 } from './connections';
 export {
-  PageShieldGetZoneSettings,
-  PageShieldUpdateZoneSettings,
+  PageShieldUpdateResponse,
+  PageShieldListResponse,
   PageShieldUpdateParams,
   PageShieldListParams,
   PageShield,
 } from './page-shield';
 export {
-  PageShieldPageshieldPolicy,
+  PolicyCreateResponse,
+  PolicyUpdateResponse,
   PolicyListResponse,
+  PolicyGetResponse,
   PolicyCreateParams,
   PolicyUpdateParams,
   PolicyListParams,
@@ -24,11 +26,4 @@ export {
   PolicyGetParams,
   Policies,
 } from './policies';
-export {
-  PageShieldScript,
-  ScriptListResponse,
-  ScriptGetResponse,
-  ScriptListParams,
-  ScriptGetParams,
-  Scripts,
-} from './scripts';
+export { ScriptListResponse, ScriptGetResponse, ScriptListParams, ScriptGetParams, Scripts } from './scripts';

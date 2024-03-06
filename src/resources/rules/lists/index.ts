@@ -14,9 +14,11 @@ export {
   Items,
 } from './items';
 export {
-  ListsList,
+  ListCreateResponse,
+  ListUpdateResponse,
   ListListResponse,
   ListDeleteResponse,
+  ListGetResponse,
   ListCreateParams,
   ListUpdateParams,
   ListListParams,

@@ -1,9 +1,11 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
-  AccessApps,
+  ApplicationCreateResponse,
+  ApplicationUpdateResponse,
   ApplicationListResponse,
   ApplicationDeleteResponse,
+  ApplicationGetResponse,
   ApplicationRevokeTokensResponse,
   ApplicationCreateParams,
   ApplicationUpdateParams,
@@ -14,7 +16,6 @@ export {
   Applications,
 } from './applications';
 export {
-  AccessCA,
   CACreateResponse,
   CAListResponse,
   CADeleteResponse,
@@ -26,9 +27,11 @@ export {
   CAs,
 } from './cas';
 export {
-  AccessPolicies,
+  PolicyCreateResponse,
+  PolicyUpdateResponse,
   PolicyListResponse,
   PolicyDeleteResponse,
+  PolicyGetResponse,
   PolicyCreateParams,
   PolicyUpdateParams,
   PolicyListParams,

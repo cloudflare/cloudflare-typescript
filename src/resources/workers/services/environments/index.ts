@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless.
 
-export { ContentUpdateParams, ContentGetParams, Content } from './content';
+export { ContentUpdateResponse, ContentUpdateParams, ContentGetParams, Content } from './content';
 export { Environments } from './environments';
 export {
   SettingEditResponse,
