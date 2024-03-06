@@ -159,8 +159,6 @@ export namespace ScanGetResponse {
       export interface Processors {
         categories: Processors.Categories;
 
-        google_safe_browsing: Array<string>;
-
         phishing: Array<string>;
 
         rank: Processors.Rank;
@@ -492,11 +490,6 @@ export namespace ScanGetResponse {
     export namespace Verdicts {
       export interface Overall {
         categories: Array<Overall.Category>;
-
-        /**
-         * Please visit https://safebrowsing.google.com/ for more information.
-         */
-        gsb_threat_types: Array<string>;
 
         /**
          * At least one of our subsystems marked the site as potentially malicious at the
