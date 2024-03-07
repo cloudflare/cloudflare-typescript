@@ -65,8 +65,8 @@ export interface RoutingGetResponse {
   status?: 'ready' | 'unconfigured' | 'misconfigured' | 'misconfigured/locked' | 'unlocked';
 
   /**
-   * Email Routing settings tag. (Deprecated, replaced by Email Routing settings
-   * identifier)
+   * @deprecated: Email Routing settings tag. (Deprecated, replaced by Email Routing
+   * settings identifier)
    */
   tag?: string;
 }

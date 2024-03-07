@@ -235,11 +235,11 @@ export interface JobCreateResponse {
   last_error?: string | null;
 
   /**
-   * This field is deprecated. Use `output_options` instead. Configuration string. It
-   * specifies things like requested fields and timestamp formats. If migrating from
-   * the logpull api, copy the url (full url or just the query string) of your call
-   * here, and logpush will keep on making this call for you, setting start and end
-   * times appropriately.
+   * @deprecated: This field is deprecated. Use `output_options` instead.
+   * Configuration string. It specifies things like requested fields and timestamp
+   * formats. If migrating from the logpull api, copy the url (full url or just the
+   * query string) of your call here, and logpush will keep on making this call for
+   * you, setting start and end times appropriately.
    */
   logpull_options?: string | null;
 
@@ -389,11 +389,11 @@ export interface JobUpdateResponse {
   last_error?: string | null;
 
   /**
-   * This field is deprecated. Use `output_options` instead. Configuration string. It
-   * specifies things like requested fields and timestamp formats. If migrating from
-   * the logpull api, copy the url (full url or just the query string) of your call
-   * here, and logpush will keep on making this call for you, setting start and end
-   * times appropriately.
+   * @deprecated: This field is deprecated. Use `output_options` instead.
+   * Configuration string. It specifies things like requested fields and timestamp
+   * formats. If migrating from the logpull api, copy the url (full url or just the
+   * query string) of your call here, and logpush will keep on making this call for
+   * you, setting start and end times appropriately.
    */
   logpull_options?: string | null;
 
@@ -546,11 +546,11 @@ export namespace JobListResponse {
     last_error?: string | null;
 
     /**
-     * This field is deprecated. Use `output_options` instead. Configuration string. It
-     * specifies things like requested fields and timestamp formats. If migrating from
-     * the logpull api, copy the url (full url or just the query string) of your call
-     * here, and logpush will keep on making this call for you, setting start and end
-     * times appropriately.
+     * @deprecated: This field is deprecated. Use `output_options` instead.
+     * Configuration string. It specifies things like requested fields and timestamp
+     * formats. If migrating from the logpull api, copy the url (full url or just the
+     * query string) of your call here, and logpush will keep on making this call for
+     * you, setting start and end times appropriately.
      */
     logpull_options?: string | null;
 
@@ -703,11 +703,11 @@ export interface JobGetResponse {
   last_error?: string | null;
 
   /**
-   * This field is deprecated. Use `output_options` instead. Configuration string. It
-   * specifies things like requested fields and timestamp formats. If migrating from
-   * the logpull api, copy the url (full url or just the query string) of your call
-   * here, and logpush will keep on making this call for you, setting start and end
-   * times appropriately.
+   * @deprecated: This field is deprecated. Use `output_options` instead.
+   * Configuration string. It specifies things like requested fields and timestamp
+   * formats. If migrating from the logpull api, copy the url (full url or just the
+   * query string) of your call here, and logpush will keep on making this call for
+   * you, setting start and end times appropriately.
    */
   logpull_options?: string | null;
 

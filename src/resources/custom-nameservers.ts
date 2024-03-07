@@ -97,7 +97,7 @@ export interface CustomNameserverCreateResponse {
   ns_name: string;
 
   /**
-   * Verification status of the nameserver.
+   * @deprecated: Verification status of the nameserver.
    */
   status: 'moved' | 'pending' | 'verified';
 
@@ -148,7 +148,7 @@ export namespace CustomNameserverGetResponse {
     ns_name: string;
 
     /**
-     * Verification status of the nameserver.
+     * @deprecated: Verification status of the nameserver.
      */
     status: 'moved' | 'pending' | 'verified';
 
@@ -197,7 +197,7 @@ export namespace CustomNameserverVerifyResponse {
     ns_name: string;
 
     /**
-     * Verification status of the nameserver.
+     * @deprecated: Verification status of the nameserver.
      */
     status: 'moved' | 'pending' | 'verified';
 

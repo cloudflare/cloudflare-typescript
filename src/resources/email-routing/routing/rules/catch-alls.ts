@@ -61,7 +61,7 @@ export interface CatchAllUpdateResponse {
   name?: string;
 
   /**
-   * Routing rule tag. (Deprecated, replaced by routing rule identifier)
+   * @deprecated: Routing rule tag. (Deprecated, replaced by routing rule identifier)
    */
   tag?: string;
 }
@@ -117,7 +117,7 @@ export interface CatchAllGetResponse {
   name?: string;
 
   /**
-   * Routing rule tag. (Deprecated, replaced by routing rule identifier)
+   * @deprecated: Routing rule tag. (Deprecated, replaced by routing rule identifier)
    */
   tag?: string;
 }

@@ -108,8 +108,8 @@ export interface AddressCreateResponse {
   modified?: string;
 
   /**
-   * Destination address tag. (Deprecated, replaced by destination address
-   * identifier)
+   * @deprecated: Destination address tag. (Deprecated, replaced by destination
+   * address identifier)
    */
   tag?: string;
 
@@ -142,8 +142,8 @@ export interface AddressListResponse {
   modified?: string;
 
   /**
-   * Destination address tag. (Deprecated, replaced by destination address
-   * identifier)
+   * @deprecated: Destination address tag. (Deprecated, replaced by destination
+   * address identifier)
    */
   tag?: string;
 
@@ -176,8 +176,8 @@ export interface AddressDeleteResponse {
   modified?: string;
 
   /**
-   * Destination address tag. (Deprecated, replaced by destination address
-   * identifier)
+   * @deprecated: Destination address tag. (Deprecated, replaced by destination
+   * address identifier)
    */
   tag?: string;
 
@@ -210,8 +210,8 @@ export interface AddressGetResponse {
   modified?: string;
 
   /**
-   * Destination address tag. (Deprecated, replaced by destination address
-   * identifier)
+   * @deprecated: Destination address tag. (Deprecated, replaced by destination
+   * address identifier)
    */
   tag?: string;
 

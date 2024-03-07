@@ -139,7 +139,7 @@ export interface RuleCreateResponse {
   priority?: number;
 
   /**
-   * Routing rule tag. (Deprecated, replaced by routing rule identifier)
+   * @deprecated: Routing rule tag. (Deprecated, replaced by routing rule identifier)
    */
   tag?: string;
 }
@@ -210,7 +210,7 @@ export interface RuleUpdateResponse {
   priority?: number;
 
   /**
-   * Routing rule tag. (Deprecated, replaced by routing rule identifier)
+   * @deprecated: Routing rule tag. (Deprecated, replaced by routing rule identifier)
    */
   tag?: string;
 }
@@ -281,7 +281,7 @@ export interface RuleListResponse {
   priority?: number;
 
   /**
-   * Routing rule tag. (Deprecated, replaced by routing rule identifier)
+   * @deprecated: Routing rule tag. (Deprecated, replaced by routing rule identifier)
    */
   tag?: string;
 }
@@ -352,7 +352,7 @@ export interface RuleDeleteResponse {
   priority?: number;
 
   /**
-   * Routing rule tag. (Deprecated, replaced by routing rule identifier)
+   * @deprecated: Routing rule tag. (Deprecated, replaced by routing rule identifier)
    */
   tag?: string;
 }
@@ -423,7 +423,7 @@ export interface RuleGetResponse {
   priority?: number;
 
   /**
-   * Routing rule tag. (Deprecated, replaced by routing rule identifier)
+   * @deprecated: Routing rule tag. (Deprecated, replaced by routing rule identifier)
    */
   tag?: string;
 }
