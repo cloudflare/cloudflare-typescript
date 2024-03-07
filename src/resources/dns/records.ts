@@ -3399,9 +3399,9 @@ export namespace DNSRecord {
      */
     export interface Data {
       /**
-       * A valid hostname. Deprecated in favor of the regular 'name' outside the data
-       * map. This data map field represents the remainder of the full 'name' after the
-       * service and protocol.
+       * @deprecated: A valid hostname. Deprecated in favor of the regular 'name' outside
+       * the data map. This data map field represents the remainder of the full 'name'
+       * after the service and protocol.
        */
       name?: string;
 
@@ -3417,16 +3417,16 @@ export namespace DNSRecord {
       priority?: number;
 
       /**
-       * A valid protocol, prefixed with an underscore. Deprecated in favor of the
-       * regular 'name' outside the data map. This data map field normally represents the
-       * second label of that 'name'.
+       * @deprecated: A valid protocol, prefixed with an underscore. Deprecated in favor
+       * of the regular 'name' outside the data map. This data map field normally
+       * represents the second label of that 'name'.
        */
       proto?: string;
 
       /**
-       * A service type, prefixed with an underscore. Deprecated in favor of the regular
-       * 'name' outside the data map. This data map field normally represents the first
-       * label of that 'name'.
+       * @deprecated: A service type, prefixed with an underscore. Deprecated in favor of
+       * the regular 'name' outside the data map. This data map field normally represents
+       * the first label of that 'name'.
        */
       service?: string;
 
@@ -4249,9 +4249,9 @@ export namespace DNSSRVRecord {
    */
   export interface Data {
     /**
-     * A valid hostname. Deprecated in favor of the regular 'name' outside the data
-     * map. This data map field represents the remainder of the full 'name' after the
-     * service and protocol.
+     * @deprecated: A valid hostname. Deprecated in favor of the regular 'name' outside
+     * the data map. This data map field represents the remainder of the full 'name'
+     * after the service and protocol.
      */
     name?: string;
 
@@ -4267,16 +4267,16 @@ export namespace DNSSRVRecord {
     priority?: number;
 
     /**
-     * A valid protocol, prefixed with an underscore. Deprecated in favor of the
-     * regular 'name' outside the data map. This data map field normally represents the
-     * second label of that 'name'.
+     * @deprecated: A valid protocol, prefixed with an underscore. Deprecated in favor
+     * of the regular 'name' outside the data map. This data map field normally
+     * represents the second label of that 'name'.
      */
     proto?: string;
 
     /**
-     * A service type, prefixed with an underscore. Deprecated in favor of the regular
-     * 'name' outside the data map. This data map field normally represents the first
-     * label of that 'name'.
+     * @deprecated: A service type, prefixed with an underscore. Deprecated in favor of
+     * the regular 'name' outside the data map. This data map field normally represents
+     * the first label of that 'name'.
      */
     service?: string;
 
@@ -6617,9 +6617,9 @@ export namespace RecordCreateResponse {
      */
     export interface Data {
       /**
-       * A valid hostname. Deprecated in favor of the regular 'name' outside the data
-       * map. This data map field represents the remainder of the full 'name' after the
-       * service and protocol.
+       * @deprecated: A valid hostname. Deprecated in favor of the regular 'name' outside
+       * the data map. This data map field represents the remainder of the full 'name'
+       * after the service and protocol.
        */
       name?: string;
 
@@ -6635,16 +6635,16 @@ export namespace RecordCreateResponse {
       priority?: number;
 
       /**
-       * A valid protocol, prefixed with an underscore. Deprecated in favor of the
-       * regular 'name' outside the data map. This data map field normally represents the
-       * second label of that 'name'.
+       * @deprecated: A valid protocol, prefixed with an underscore. Deprecated in favor
+       * of the regular 'name' outside the data map. This data map field normally
+       * represents the second label of that 'name'.
        */
       proto?: string;
 
       /**
-       * A service type, prefixed with an underscore. Deprecated in favor of the regular
-       * 'name' outside the data map. This data map field normally represents the first
-       * label of that 'name'.
+       * @deprecated: A service type, prefixed with an underscore. Deprecated in favor of
+       * the regular 'name' outside the data map. This data map field normally represents
+       * the first label of that 'name'.
        */
       service?: string;
 
@@ -8986,9 +8986,9 @@ export namespace RecordUpdateResponse {
      */
     export interface Data {
       /**
-       * A valid hostname. Deprecated in favor of the regular 'name' outside the data
-       * map. This data map field represents the remainder of the full 'name' after the
-       * service and protocol.
+       * @deprecated: A valid hostname. Deprecated in favor of the regular 'name' outside
+       * the data map. This data map field represents the remainder of the full 'name'
+       * after the service and protocol.
        */
       name?: string;
 
@@ -9004,16 +9004,16 @@ export namespace RecordUpdateResponse {
       priority?: number;
 
       /**
-       * A valid protocol, prefixed with an underscore. Deprecated in favor of the
-       * regular 'name' outside the data map. This data map field normally represents the
-       * second label of that 'name'.
+       * @deprecated: A valid protocol, prefixed with an underscore. Deprecated in favor
+       * of the regular 'name' outside the data map. This data map field normally
+       * represents the second label of that 'name'.
        */
       proto?: string;
 
       /**
-       * A service type, prefixed with an underscore. Deprecated in favor of the regular
-       * 'name' outside the data map. This data map field normally represents the first
-       * label of that 'name'.
+       * @deprecated: A service type, prefixed with an underscore. Deprecated in favor of
+       * the regular 'name' outside the data map. This data map field normally represents
+       * the first label of that 'name'.
        */
       service?: string;
 
@@ -11355,9 +11355,9 @@ export namespace RecordListResponse {
      */
     export interface Data {
       /**
-       * A valid hostname. Deprecated in favor of the regular 'name' outside the data
-       * map. This data map field represents the remainder of the full 'name' after the
-       * service and protocol.
+       * @deprecated: A valid hostname. Deprecated in favor of the regular 'name' outside
+       * the data map. This data map field represents the remainder of the full 'name'
+       * after the service and protocol.
        */
       name?: string;
 
@@ -11373,16 +11373,16 @@ export namespace RecordListResponse {
       priority?: number;
 
       /**
-       * A valid protocol, prefixed with an underscore. Deprecated in favor of the
-       * regular 'name' outside the data map. This data map field normally represents the
-       * second label of that 'name'.
+       * @deprecated: A valid protocol, prefixed with an underscore. Deprecated in favor
+       * of the regular 'name' outside the data map. This data map field normally
+       * represents the second label of that 'name'.
        */
       proto?: string;
 
       /**
-       * A service type, prefixed with an underscore. Deprecated in favor of the regular
-       * 'name' outside the data map. This data map field normally represents the first
-       * label of that 'name'.
+       * @deprecated: A service type, prefixed with an underscore. Deprecated in favor of
+       * the regular 'name' outside the data map. This data map field normally represents
+       * the first label of that 'name'.
        */
       service?: string;
 
@@ -13731,9 +13731,9 @@ export namespace RecordEditResponse {
      */
     export interface Data {
       /**
-       * A valid hostname. Deprecated in favor of the regular 'name' outside the data
-       * map. This data map field represents the remainder of the full 'name' after the
-       * service and protocol.
+       * @deprecated: A valid hostname. Deprecated in favor of the regular 'name' outside
+       * the data map. This data map field represents the remainder of the full 'name'
+       * after the service and protocol.
        */
       name?: string;
 
@@ -13749,16 +13749,16 @@ export namespace RecordEditResponse {
       priority?: number;
 
       /**
-       * A valid protocol, prefixed with an underscore. Deprecated in favor of the
-       * regular 'name' outside the data map. This data map field normally represents the
-       * second label of that 'name'.
+       * @deprecated: A valid protocol, prefixed with an underscore. Deprecated in favor
+       * of the regular 'name' outside the data map. This data map field normally
+       * represents the second label of that 'name'.
        */
       proto?: string;
 
       /**
-       * A service type, prefixed with an underscore. Deprecated in favor of the regular
-       * 'name' outside the data map. This data map field normally represents the first
-       * label of that 'name'.
+       * @deprecated: A service type, prefixed with an underscore. Deprecated in favor of
+       * the regular 'name' outside the data map. This data map field normally represents
+       * the first label of that 'name'.
        */
       service?: string;
 
@@ -16105,9 +16105,9 @@ export namespace RecordGetResponse {
      */
     export interface Data {
       /**
-       * A valid hostname. Deprecated in favor of the regular 'name' outside the data
-       * map. This data map field represents the remainder of the full 'name' after the
-       * service and protocol.
+       * @deprecated: A valid hostname. Deprecated in favor of the regular 'name' outside
+       * the data map. This data map field represents the remainder of the full 'name'
+       * after the service and protocol.
        */
       name?: string;
 
@@ -16123,16 +16123,16 @@ export namespace RecordGetResponse {
       priority?: number;
 
       /**
-       * A valid protocol, prefixed with an underscore. Deprecated in favor of the
-       * regular 'name' outside the data map. This data map field normally represents the
-       * second label of that 'name'.
+       * @deprecated: A valid protocol, prefixed with an underscore. Deprecated in favor
+       * of the regular 'name' outside the data map. This data map field normally
+       * represents the second label of that 'name'.
        */
       proto?: string;
 
       /**
-       * A service type, prefixed with an underscore. Deprecated in favor of the regular
-       * 'name' outside the data map. This data map field normally represents the first
-       * label of that 'name'.
+       * @deprecated: A service type, prefixed with an underscore. Deprecated in favor of
+       * the regular 'name' outside the data map. This data map field normally represents
+       * the first label of that 'name'.
        */
       service?: string;
 
@@ -16916,9 +16916,9 @@ export namespace RecordCreateParams {
     matching_type?: number;
 
     /**
-     * A valid hostname. Deprecated in favor of the regular 'name' outside the data
-     * map. This data map field represents the remainder of the full 'name' after the
-     * service and protocol.
+     * @deprecated: A valid hostname. Deprecated in favor of the regular 'name' outside
+     * the data map. This data map field represents the remainder of the full 'name'
+     * after the service and protocol.
      */
     name?: string;
 
@@ -16953,9 +16953,9 @@ export namespace RecordCreateParams {
     priority?: number;
 
     /**
-     * A valid protocol, prefixed with an underscore. Deprecated in favor of the
-     * regular 'name' outside the data map. This data map field normally represents the
-     * second label of that 'name'.
+     * @deprecated: A valid protocol, prefixed with an underscore. Deprecated in favor
+     * of the regular 'name' outside the data map. This data map field normally
+     * represents the second label of that 'name'.
      */
     proto?: string;
 
@@ -16985,9 +16985,9 @@ export namespace RecordCreateParams {
     selector?: number;
 
     /**
-     * A service type, prefixed with an underscore. Deprecated in favor of the regular
-     * 'name' outside the data map. This data map field normally represents the first
-     * label of that 'name'.
+     * @deprecated: A service type, prefixed with an underscore. Deprecated in favor of
+     * the regular 'name' outside the data map. This data map field normally represents
+     * the first label of that 'name'.
      */
     service?: string;
 
@@ -17192,9 +17192,9 @@ export namespace RecordUpdateParams {
     matching_type?: number;
 
     /**
-     * A valid hostname. Deprecated in favor of the regular 'name' outside the data
-     * map. This data map field represents the remainder of the full 'name' after the
-     * service and protocol.
+     * @deprecated: A valid hostname. Deprecated in favor of the regular 'name' outside
+     * the data map. This data map field represents the remainder of the full 'name'
+     * after the service and protocol.
      */
     name?: string;
 
@@ -17229,9 +17229,9 @@ export namespace RecordUpdateParams {
     priority?: number;
 
     /**
-     * A valid protocol, prefixed with an underscore. Deprecated in favor of the
-     * regular 'name' outside the data map. This data map field normally represents the
-     * second label of that 'name'.
+     * @deprecated: A valid protocol, prefixed with an underscore. Deprecated in favor
+     * of the regular 'name' outside the data map. This data map field normally
+     * represents the second label of that 'name'.
      */
     proto?: string;
 
@@ -17261,9 +17261,9 @@ export namespace RecordUpdateParams {
     selector?: number;
 
     /**
-     * A service type, prefixed with an underscore. Deprecated in favor of the regular
-     * 'name' outside the data map. This data map field normally represents the first
-     * label of that 'name'.
+     * @deprecated: A service type, prefixed with an underscore. Deprecated in favor of
+     * the regular 'name' outside the data map. This data map field normally represents
+     * the first label of that 'name'.
      */
     service?: string;
 
@@ -17645,9 +17645,9 @@ export namespace RecordEditParams {
     matching_type?: number;
 
     /**
-     * A valid hostname. Deprecated in favor of the regular 'name' outside the data
-     * map. This data map field represents the remainder of the full 'name' after the
-     * service and protocol.
+     * @deprecated: A valid hostname. Deprecated in favor of the regular 'name' outside
+     * the data map. This data map field represents the remainder of the full 'name'
+     * after the service and protocol.
      */
     name?: string;
 
@@ -17682,9 +17682,9 @@ export namespace RecordEditParams {
     priority?: number;
 
     /**
-     * A valid protocol, prefixed with an underscore. Deprecated in favor of the
-     * regular 'name' outside the data map. This data map field normally represents the
-     * second label of that 'name'.
+     * @deprecated: A valid protocol, prefixed with an underscore. Deprecated in favor
+     * of the regular 'name' outside the data map. This data map field normally
+     * represents the second label of that 'name'.
      */
     proto?: string;
 
@@ -17714,9 +17714,9 @@ export namespace RecordEditParams {
     selector?: number;
 
     /**
-     * A service type, prefixed with an underscore. Deprecated in favor of the regular
-     * 'name' outside the data map. This data map field normally represents the first
-     * label of that 'name'.
+     * @deprecated: A service type, prefixed with an underscore. Deprecated in favor of
+     * the regular 'name' outside the data map. This data map field normally represents
+     * the first label of that 'name'.
      */
     service?: string;
 

@@ -108,8 +108,8 @@ export namespace Account {
     enforce_twofactor?: boolean;
 
     /**
-     * Indicates whether new zones should use the account-level custom nameservers by
-     * default.
+     * @deprecated: Indicates whether new zones should use the account-level custom
+     * nameservers by default.
      *
      * Deprecated in favor of `default_nameservers`.
      */
@@ -166,8 +166,8 @@ export namespace AccountUpdateParams {
     enforce_twofactor?: boolean;
 
     /**
-     * Indicates whether new zones should use the account-level custom nameservers by
-     * default.
+     * @deprecated: Indicates whether new zones should use the account-level custom
+     * nameservers by default.
      *
      * Deprecated in favor of `default_nameservers`.
      */

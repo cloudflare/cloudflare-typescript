@@ -143,7 +143,7 @@ export interface FirewallCreateResponse {
   negative_cache_ttl?: number | null;
 
   /**
-   * Deprecated alias for "upstream_ips".
+   * @deprecated: Deprecated alias for "upstream_ips".
    */
   origin_ips?: unknown;
 
@@ -172,7 +172,7 @@ export namespace FirewallCreateResponse {
     enabled?: boolean;
 
     /**
-     * Deprecated alias for "only_when_upstream_unhealthy".
+     * @deprecated: Deprecated alias for "only_when_upstream_unhealthy".
      */
     only_when_origin_unhealthy?: unknown;
 
@@ -234,7 +234,7 @@ export interface FirewallListResponse {
   negative_cache_ttl?: number | null;
 
   /**
-   * Deprecated alias for "upstream_ips".
+   * @deprecated: Deprecated alias for "upstream_ips".
    */
   origin_ips?: unknown;
 
@@ -263,7 +263,7 @@ export namespace FirewallListResponse {
     enabled?: boolean;
 
     /**
-     * Deprecated alias for "only_when_upstream_unhealthy".
+     * @deprecated: Deprecated alias for "only_when_upstream_unhealthy".
      */
     only_when_origin_unhealthy?: unknown;
 
@@ -332,7 +332,7 @@ export interface FirewallEditResponse {
   negative_cache_ttl?: number | null;
 
   /**
-   * Deprecated alias for "upstream_ips".
+   * @deprecated: Deprecated alias for "upstream_ips".
    */
   origin_ips?: unknown;
 
@@ -361,7 +361,7 @@ export namespace FirewallEditResponse {
     enabled?: boolean;
 
     /**
-     * Deprecated alias for "only_when_upstream_unhealthy".
+     * @deprecated: Deprecated alias for "only_when_upstream_unhealthy".
      */
     only_when_origin_unhealthy?: unknown;
 
@@ -423,7 +423,7 @@ export interface FirewallGetResponse {
   negative_cache_ttl?: number | null;
 
   /**
-   * Deprecated alias for "upstream_ips".
+   * @deprecated: Deprecated alias for "upstream_ips".
    */
   origin_ips?: unknown;
 
@@ -452,7 +452,7 @@ export namespace FirewallGetResponse {
     enabled?: boolean;
 
     /**
-     * Deprecated alias for "only_when_upstream_unhealthy".
+     * @deprecated: Deprecated alias for "only_when_upstream_unhealthy".
      */
     only_when_origin_unhealthy?: unknown;
 
@@ -540,7 +540,7 @@ export namespace FirewallCreateParams {
     enabled?: boolean;
 
     /**
-     * Deprecated alias for "only_when_upstream_unhealthy".
+     * @deprecated: Deprecated alias for "only_when_upstream_unhealthy".
      */
     only_when_origin_unhealthy?: unknown;
 
@@ -647,7 +647,7 @@ export namespace FirewallEditParams {
     enabled?: boolean;
 
     /**
-     * Deprecated alias for "only_when_upstream_unhealthy".
+     * @deprecated: Deprecated alias for "only_when_upstream_unhealthy".
      */
     only_when_origin_unhealthy?: unknown;
 
