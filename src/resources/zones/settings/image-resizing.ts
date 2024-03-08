@@ -11,16 +11,13 @@ export class ImageResizing extends APIResource {
    * [Image Resizing documentation](https://developers.cloudflare.com/images/) for
    * more information.
    */
-  edit(
-    params: ImageResizingEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ImageResizingEditResponse> {
+  edit(params: ImageResizingEditParams, options?: Core.RequestOptions): Core.APIPromise<ZonesImageResizing> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/image_resizing`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ImageResizingEditResponse }>
+      }) as Core.APIPromise<{ result: ZonesImageResizing }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -30,14 +27,11 @@ export class ImageResizing extends APIResource {
    * [Image Resizing documentation](https://developers.cloudflare.com/images/) for
    * more information.
    */
-  get(
-    params: ImageResizingGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ImageResizingGetResponse> {
+  get(params: ImageResizingGetParams, options?: Core.RequestOptions): Core.APIPromise<ZonesImageResizing> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/image_resizing`, options) as Core.APIPromise<{
-        result: ImageResizingGetResponse;
+        result: ZonesImageResizing;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -49,36 +43,7 @@ export class ImageResizing extends APIResource {
  * [Image Resizing documentation](https://developers.cloudflare.com/images/) for
  * more information.
  */
-export interface ImageResizingEditResponse {
-  /**
-   * ID of the zone setting.
-   */
-  id: 'image_resizing';
-
-  /**
-   * Current value of the zone setting.
-   */
-  value: 'on' | 'off' | 'open';
-
-  /**
-   * Whether or not this setting can be modified for this zone (based on your
-   * Cloudflare plan level).
-   */
-  editable?: true | false;
-
-  /**
-   * last time this setting was modified.
-   */
-  modified_on?: string | null;
-}
-
-/**
- * Image Resizing provides on-demand resizing, conversion and optimisation for
- * images served through Cloudflare's network. Refer to the
- * [Image Resizing documentation](https://developers.cloudflare.com/images/) for
- * more information.
- */
-export interface ImageResizingGetResponse {
+export interface ZonesImageResizing {
   /**
    * ID of the zone setting.
    */
@@ -113,27 +78,7 @@ export interface ImageResizingEditParams {
    * [Image Resizing documentation](https://developers.cloudflare.com/images/) for
    * more information.
    */
-  value: ImageResizingEditParams.Value;
-}
-
-export namespace ImageResizingEditParams {
-  /**
-   * Image Resizing provides on-demand resizing, conversion and optimisation for
-   * images served through Cloudflare's network. Refer to the
-   * [Image Resizing documentation](https://developers.cloudflare.com/images/) for
-   * more information.
-   */
-  export interface Value {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'image_resizing';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: 'on' | 'off' | 'open';
-  }
+  value: ZonesImageResizing;
 }
 
 export interface ImageResizingGetParams {
@@ -144,8 +89,7 @@ export interface ImageResizingGetParams {
 }
 
 export namespace ImageResizing {
-  export import ImageResizingEditResponse = ImageResizingAPI.ImageResizingEditResponse;
-  export import ImageResizingGetResponse = ImageResizingAPI.ImageResizingGetResponse;
+  export import ZonesImageResizing = ImageResizingAPI.ZonesImageResizing;
   export import ImageResizingEditParams = ImageResizingAPI.ImageResizingEditParams;
   export import ImageResizingGetParams = ImageResizingAPI.ImageResizingGetParams;
 }

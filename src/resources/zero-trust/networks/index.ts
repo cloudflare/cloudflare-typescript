@@ -2,18 +2,17 @@
 
 export { Networks } from './networks';
 export {
-  RouteCreateResponse,
-  RouteListResponse,
-  RouteDeleteResponse,
-  RouteEditResponse,
+  TunnelRoute,
+  TunnelTeamnet,
   RouteCreateParams,
   RouteListParams,
   RouteDeleteParams,
   RouteEditParams,
-  RouteListResponsesV4PagePaginationArray,
+  TunnelTeamnetsV4PagePaginationArray,
   Routes,
 } from './routes/index';
 export {
+  TunnelVirtualNetwork,
   VirtualNetworkCreateResponse,
   VirtualNetworkListResponse,
   VirtualNetworkDeleteResponse,

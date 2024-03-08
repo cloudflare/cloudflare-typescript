@@ -15,13 +15,13 @@ export class IndicatorFeeds extends APIResource {
   create(
     params: IndicatorFeedCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<IndicatorFeedCreateResponse> {
+  ): Core.APIPromise<IntelIndicatorFeedItem> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/intel/indicator-feeds`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: IndicatorFeedCreateResponse }>
+      }) as Core.APIPromise<{ result: IntelIndicatorFeedItem }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -32,13 +32,13 @@ export class IndicatorFeeds extends APIResource {
     feedId: number,
     params: IndicatorFeedUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<IndicatorFeedUpdateResponse> {
+  ): Core.APIPromise<IntelUpdateFeed> {
     const { account_id, ...body } = params;
     return (
       this._client.put(
         `/accounts/${account_id}/intel/indicator-feeds/${feedId}/snapshot`,
         multipartFormRequestOptions({ body, ...options }),
-      ) as Core.APIPromise<{ result: IndicatorFeedUpdateResponse }>
+      ) as Core.APIPromise<{ result: IntelUpdateFeed }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -79,18 +79,18 @@ export class IndicatorFeeds extends APIResource {
     feedId: number,
     params: IndicatorFeedGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<IndicatorFeedGetResponse> {
+  ): Core.APIPromise<IntelIndicatorFeedMetadata> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/intel/indicator-feeds/${feedId}`,
         options,
-      ) as Core.APIPromise<{ result: IndicatorFeedGetResponse }>
+      ) as Core.APIPromise<{ result: IntelIndicatorFeedMetadata }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface IndicatorFeedCreateResponse {
+export interface IntelIndicatorFeedItem {
   /**
    * The unique identifier for the indicator feed
    */
@@ -117,57 +117,7 @@ export interface IndicatorFeedCreateResponse {
   name?: string;
 }
 
-export interface IndicatorFeedUpdateResponse {
-  /**
-   * Feed id
-   */
-  file_id?: number;
-
-  /**
-   * Name of the file unified in our system
-   */
-  filename?: string;
-
-  /**
-   * Current status of upload, should be unified
-   */
-  status?: string;
-}
-
-export type IndicatorFeedListResponse = Array<IndicatorFeedListResponse.IndicatorFeedListResponseItem>;
-
-export namespace IndicatorFeedListResponse {
-  export interface IndicatorFeedListResponseItem {
-    /**
-     * The unique identifier for the indicator feed
-     */
-    id?: number;
-
-    /**
-     * The date and time when the data entry was created
-     */
-    created_on?: string;
-
-    /**
-     * The description of the example test
-     */
-    description?: string;
-
-    /**
-     * The date and time when the data entry was last modified
-     */
-    modified_on?: string;
-
-    /**
-     * The name of the indicator feed
-     */
-    name?: string;
-  }
-}
-
-export type IndicatorFeedDataResponse = string;
-
-export interface IndicatorFeedGetResponse {
+export interface IntelIndicatorFeedMetadata {
   /**
    * The unique identifier for the indicator feed
    */
@@ -198,6 +148,27 @@ export interface IndicatorFeedGetResponse {
    */
   name?: string;
 }
+
+export interface IntelUpdateFeed {
+  /**
+   * Feed id
+   */
+  file_id?: number;
+
+  /**
+   * Name of the file unified in our system
+   */
+  filename?: string;
+
+  /**
+   * Current status of upload, should be unified
+   */
+  status?: string;
+}
+
+export type IndicatorFeedListResponse = Array<IntelIndicatorFeedItem>;
+
+export type IndicatorFeedDataResponse = string;
 
 export interface IndicatorFeedCreateParams {
   /**
@@ -250,20 +221,20 @@ export interface IndicatorFeedGetParams {
 }
 
 export namespace IndicatorFeeds {
-  export import IndicatorFeedCreateResponse = IndicatorFeedsAPI.IndicatorFeedCreateResponse;
-  export import IndicatorFeedUpdateResponse = IndicatorFeedsAPI.IndicatorFeedUpdateResponse;
+  export import IntelIndicatorFeedItem = IndicatorFeedsAPI.IntelIndicatorFeedItem;
+  export import IntelIndicatorFeedMetadata = IndicatorFeedsAPI.IntelIndicatorFeedMetadata;
+  export import IntelUpdateFeed = IndicatorFeedsAPI.IntelUpdateFeed;
   export import IndicatorFeedListResponse = IndicatorFeedsAPI.IndicatorFeedListResponse;
   export import IndicatorFeedDataResponse = IndicatorFeedsAPI.IndicatorFeedDataResponse;
-  export import IndicatorFeedGetResponse = IndicatorFeedsAPI.IndicatorFeedGetResponse;
   export import IndicatorFeedCreateParams = IndicatorFeedsAPI.IndicatorFeedCreateParams;
   export import IndicatorFeedUpdateParams = IndicatorFeedsAPI.IndicatorFeedUpdateParams;
   export import IndicatorFeedListParams = IndicatorFeedsAPI.IndicatorFeedListParams;
   export import IndicatorFeedDataParams = IndicatorFeedsAPI.IndicatorFeedDataParams;
   export import IndicatorFeedGetParams = IndicatorFeedsAPI.IndicatorFeedGetParams;
   export import Permissions = PermissionsAPI.Permissions;
-  export import PermissionCreateResponse = PermissionsAPI.PermissionCreateResponse;
+  export import IntelPermissionListItem = PermissionsAPI.IntelPermissionListItem;
+  export import IntelPermissionsUpdate = PermissionsAPI.IntelPermissionsUpdate;
   export import PermissionListResponse = PermissionsAPI.PermissionListResponse;
-  export import PermissionDeleteResponse = PermissionsAPI.PermissionDeleteResponse;
   export import PermissionCreateParams = PermissionsAPI.PermissionCreateParams;
   export import PermissionListParams = PermissionsAPI.PermissionListParams;
   export import PermissionDeleteParams = PermissionsAPI.PermissionDeleteParams;

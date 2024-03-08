@@ -2,8 +2,7 @@
 
 export { Namespaces } from './namespaces';
 export {
-  ScriptUpdateResponse,
-  ScriptGetResponse,
+  WorkersNamespaceScript,
   ScriptUpdateParams,
   ScriptDeleteParams,
   ScriptGetParams,

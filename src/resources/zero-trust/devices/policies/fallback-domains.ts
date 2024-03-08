@@ -61,69 +61,28 @@ export class FallbackDomains extends APIResource {
   }
 }
 
-export type FallbackDomainUpdateResponse =
-  Array<FallbackDomainUpdateResponse.FallbackDomainUpdateResponseItem>;
+export interface TeamsDevicesFallbackDomain {
+  /**
+   * The domain suffix to match when resolving locally.
+   */
+  suffix: string;
 
-export namespace FallbackDomainUpdateResponse {
-  export interface FallbackDomainUpdateResponseItem {
-    /**
-     * The domain suffix to match when resolving locally.
-     */
-    suffix: string;
+  /**
+   * A description of the fallback domain, displayed in the client UI.
+   */
+  description?: string;
 
-    /**
-     * A description of the fallback domain, displayed in the client UI.
-     */
-    description?: string;
-
-    /**
-     * A list of IP addresses to handle domain resolution.
-     */
-    dns_server?: Array<unknown>;
-  }
+  /**
+   * A list of IP addresses to handle domain resolution.
+   */
+  dns_server?: Array<unknown>;
 }
 
-export type FallbackDomainListResponse = Array<FallbackDomainListResponse.FallbackDomainListResponseItem>;
+export type FallbackDomainUpdateResponse = Array<TeamsDevicesFallbackDomain>;
 
-export namespace FallbackDomainListResponse {
-  export interface FallbackDomainListResponseItem {
-    /**
-     * The domain suffix to match when resolving locally.
-     */
-    suffix: string;
+export type FallbackDomainListResponse = Array<TeamsDevicesFallbackDomain>;
 
-    /**
-     * A description of the fallback domain, displayed in the client UI.
-     */
-    description?: string;
-
-    /**
-     * A list of IP addresses to handle domain resolution.
-     */
-    dns_server?: Array<unknown>;
-  }
-}
-
-export type FallbackDomainGetResponse = Array<FallbackDomainGetResponse.FallbackDomainGetResponseItem>;
-
-export namespace FallbackDomainGetResponse {
-  export interface FallbackDomainGetResponseItem {
-    /**
-     * The domain suffix to match when resolving locally.
-     */
-    suffix: string;
-
-    /**
-     * A description of the fallback domain, displayed in the client UI.
-     */
-    description?: string;
-
-    /**
-     * A list of IP addresses to handle domain resolution.
-     */
-    dns_server?: Array<unknown>;
-  }
-}
+export type FallbackDomainGetResponse = Array<TeamsDevicesFallbackDomain>;
 
 export interface FallbackDomainUpdateParams {
   /**
@@ -134,26 +93,7 @@ export interface FallbackDomainUpdateParams {
   /**
    * Body param:
    */
-  body: Array<FallbackDomainUpdateParams.Body>;
-}
-
-export namespace FallbackDomainUpdateParams {
-  export interface Body {
-    /**
-     * The domain suffix to match when resolving locally.
-     */
-    suffix: string;
-
-    /**
-     * A description of the fallback domain, displayed in the client UI.
-     */
-    description?: string;
-
-    /**
-     * A list of IP addresses to handle domain resolution.
-     */
-    dns_server?: Array<unknown>;
-  }
+  body: Array<TeamsDevicesFallbackDomain>;
 }
 
 export interface FallbackDomainListParams {
@@ -165,6 +105,7 @@ export interface FallbackDomainGetParams {
 }
 
 export namespace FallbackDomains {
+  export import TeamsDevicesFallbackDomain = FallbackDomainsAPI.TeamsDevicesFallbackDomain;
   export import FallbackDomainUpdateResponse = FallbackDomainsAPI.FallbackDomainUpdateResponse;
   export import FallbackDomainListResponse = FallbackDomainsAPI.FallbackDomainListResponse;
   export import FallbackDomainGetResponse = FallbackDomainsAPI.FallbackDomainGetResponse;

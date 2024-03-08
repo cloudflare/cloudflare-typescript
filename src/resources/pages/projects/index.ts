@@ -1,12 +1,8 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
-  DeploymentCreateResponse,
   DeploymentListResponse,
   DeploymentDeleteResponse,
-  DeploymentGetResponse,
-  DeploymentRetryResponse,
-  DeploymentRollbackResponse,
   DeploymentCreateParams,
   DeploymentListParams,
   DeploymentDeleteParams,
@@ -29,11 +25,12 @@ export {
   Domains,
 } from './domains';
 export {
+  PagesDeployments,
+  PagesProjects,
   ProjectCreateResponse,
   ProjectListResponse,
   ProjectDeleteResponse,
   ProjectEditResponse,
-  ProjectGetResponse,
   ProjectPurgeBuildCacheResponse,
   ProjectCreateParams,
   ProjectListParams,

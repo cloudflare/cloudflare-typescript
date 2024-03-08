@@ -42,227 +42,12 @@ export class Profiles extends APIResource {
   }
 }
 
-export type ProfileListResponse = Array<
-  | ProfileListResponse.DLPPredefinedProfile
-  | ProfileListResponse.DLPCustomProfile
-  | ProfileListResponse.DLPIntegrationProfile
->;
+export type DLPProfiles =
+  | PredefinedsAPI.DLPPredefinedProfile
+  | CustomsAPI.DLPCustomProfile
+  | DLPProfiles.DLPIntegrationProfile;
 
-export namespace ProfileListResponse {
-  export interface DLPPredefinedProfile {
-    /**
-     * The ID for this profile
-     */
-    id?: string;
-
-    /**
-     * Related DLP policies will trigger when the match count exceeds the number set.
-     */
-    allowed_match_count?: number;
-
-    /**
-     * Scan the context of predefined entries to only return matches surrounded by
-     * keywords.
-     */
-    context_awareness?: DLPPredefinedProfile.ContextAwareness;
-
-    /**
-     * The entries for this profile.
-     */
-    entries?: Array<DLPPredefinedProfile.Entry>;
-
-    /**
-     * The name of the profile.
-     */
-    name?: string;
-
-    /**
-     * The type of the profile.
-     */
-    type?: 'predefined';
-  }
-
-  export namespace DLPPredefinedProfile {
-    /**
-     * Scan the context of predefined entries to only return matches surrounded by
-     * keywords.
-     */
-    export interface ContextAwareness {
-      /**
-       * If true, scan the context of predefined entries to only return matches
-       * surrounded by keywords.
-       */
-      enabled: boolean;
-
-      /**
-       * Content types to exclude from context analysis and return all matches.
-       */
-      skip: ContextAwareness.Skip;
-    }
-
-    export namespace ContextAwareness {
-      /**
-       * Content types to exclude from context analysis and return all matches.
-       */
-      export interface Skip {
-        /**
-         * If the content type is a file, skip context analysis and return all matches.
-         */
-        files: boolean;
-      }
-    }
-
-    /**
-     * A predefined entry that matches a profile
-     */
-    export interface Entry {
-      /**
-       * The ID for this entry
-       */
-      id?: string;
-
-      /**
-       * Whether the entry is enabled or not.
-       */
-      enabled?: boolean;
-
-      /**
-       * The name of the entry.
-       */
-      name?: string;
-
-      /**
-       * ID of the parent profile
-       */
-      profile_id?: unknown;
-    }
-  }
-
-  export interface DLPCustomProfile {
-    /**
-     * The ID for this profile
-     */
-    id?: string;
-
-    /**
-     * Related DLP policies will trigger when the match count exceeds the number set.
-     */
-    allowed_match_count?: number;
-
-    /**
-     * Scan the context of predefined entries to only return matches surrounded by
-     * keywords.
-     */
-    context_awareness?: DLPCustomProfile.ContextAwareness;
-
-    created_at?: string;
-
-    /**
-     * The description of the profile.
-     */
-    description?: string;
-
-    /**
-     * The entries for this profile.
-     */
-    entries?: Array<DLPCustomProfile.Entry>;
-
-    /**
-     * The name of the profile.
-     */
-    name?: string;
-
-    /**
-     * The type of the profile.
-     */
-    type?: 'custom';
-
-    updated_at?: string;
-  }
-
-  export namespace DLPCustomProfile {
-    /**
-     * Scan the context of predefined entries to only return matches surrounded by
-     * keywords.
-     */
-    export interface ContextAwareness {
-      /**
-       * If true, scan the context of predefined entries to only return matches
-       * surrounded by keywords.
-       */
-      enabled: boolean;
-
-      /**
-       * Content types to exclude from context analysis and return all matches.
-       */
-      skip: ContextAwareness.Skip;
-    }
-
-    export namespace ContextAwareness {
-      /**
-       * Content types to exclude from context analysis and return all matches.
-       */
-      export interface Skip {
-        /**
-         * If the content type is a file, skip context analysis and return all matches.
-         */
-        files: boolean;
-      }
-    }
-
-    /**
-     * A custom entry that matches a profile
-     */
-    export interface Entry {
-      /**
-       * The ID for this entry
-       */
-      id?: string;
-
-      created_at?: string;
-
-      /**
-       * Whether the entry is enabled or not.
-       */
-      enabled?: boolean;
-
-      /**
-       * The name of the entry.
-       */
-      name?: string;
-
-      /**
-       * A pattern that matches an entry
-       */
-      pattern?: Entry.Pattern;
-
-      /**
-       * ID of the parent profile
-       */
-      profile_id?: unknown;
-
-      updated_at?: string;
-    }
-
-    export namespace Entry {
-      /**
-       * A pattern that matches an entry
-       */
-      export interface Pattern {
-        /**
-         * The regex pattern.
-         */
-        regex: string;
-
-        /**
-         * Validation algorithm for the pattern. This algorithm will get run on potential
-         * matches, and if it returns false, the entry will not be matched.
-         */
-        validation?: 'luhn';
-      }
-    }
-  }
-
+export namespace DLPProfiles {
   export interface DLPIntegrationProfile {
     /**
      * The ID for this profile
@@ -326,226 +111,14 @@ export namespace ProfileListResponse {
   }
 }
 
+export type ProfileListResponse = Array<DLPProfiles>;
+
 export type ProfileGetResponse =
-  | ProfileGetResponse.DLPPredefinedProfile
-  | ProfileGetResponse.DLPCustomProfile
+  | PredefinedsAPI.DLPPredefinedProfile
+  | CustomsAPI.DLPCustomProfile
   | ProfileGetResponse.DLPIntegrationProfile;
 
 export namespace ProfileGetResponse {
-  export interface DLPPredefinedProfile {
-    /**
-     * The ID for this profile
-     */
-    id?: string;
-
-    /**
-     * Related DLP policies will trigger when the match count exceeds the number set.
-     */
-    allowed_match_count?: number;
-
-    /**
-     * Scan the context of predefined entries to only return matches surrounded by
-     * keywords.
-     */
-    context_awareness?: DLPPredefinedProfile.ContextAwareness;
-
-    /**
-     * The entries for this profile.
-     */
-    entries?: Array<DLPPredefinedProfile.Entry>;
-
-    /**
-     * The name of the profile.
-     */
-    name?: string;
-
-    /**
-     * The type of the profile.
-     */
-    type?: 'predefined';
-  }
-
-  export namespace DLPPredefinedProfile {
-    /**
-     * Scan the context of predefined entries to only return matches surrounded by
-     * keywords.
-     */
-    export interface ContextAwareness {
-      /**
-       * If true, scan the context of predefined entries to only return matches
-       * surrounded by keywords.
-       */
-      enabled: boolean;
-
-      /**
-       * Content types to exclude from context analysis and return all matches.
-       */
-      skip: ContextAwareness.Skip;
-    }
-
-    export namespace ContextAwareness {
-      /**
-       * Content types to exclude from context analysis and return all matches.
-       */
-      export interface Skip {
-        /**
-         * If the content type is a file, skip context analysis and return all matches.
-         */
-        files: boolean;
-      }
-    }
-
-    /**
-     * A predefined entry that matches a profile
-     */
-    export interface Entry {
-      /**
-       * The ID for this entry
-       */
-      id?: string;
-
-      /**
-       * Whether the entry is enabled or not.
-       */
-      enabled?: boolean;
-
-      /**
-       * The name of the entry.
-       */
-      name?: string;
-
-      /**
-       * ID of the parent profile
-       */
-      profile_id?: unknown;
-    }
-  }
-
-  export interface DLPCustomProfile {
-    /**
-     * The ID for this profile
-     */
-    id?: string;
-
-    /**
-     * Related DLP policies will trigger when the match count exceeds the number set.
-     */
-    allowed_match_count?: number;
-
-    /**
-     * Scan the context of predefined entries to only return matches surrounded by
-     * keywords.
-     */
-    context_awareness?: DLPCustomProfile.ContextAwareness;
-
-    created_at?: string;
-
-    /**
-     * The description of the profile.
-     */
-    description?: string;
-
-    /**
-     * The entries for this profile.
-     */
-    entries?: Array<DLPCustomProfile.Entry>;
-
-    /**
-     * The name of the profile.
-     */
-    name?: string;
-
-    /**
-     * The type of the profile.
-     */
-    type?: 'custom';
-
-    updated_at?: string;
-  }
-
-  export namespace DLPCustomProfile {
-    /**
-     * Scan the context of predefined entries to only return matches surrounded by
-     * keywords.
-     */
-    export interface ContextAwareness {
-      /**
-       * If true, scan the context of predefined entries to only return matches
-       * surrounded by keywords.
-       */
-      enabled: boolean;
-
-      /**
-       * Content types to exclude from context analysis and return all matches.
-       */
-      skip: ContextAwareness.Skip;
-    }
-
-    export namespace ContextAwareness {
-      /**
-       * Content types to exclude from context analysis and return all matches.
-       */
-      export interface Skip {
-        /**
-         * If the content type is a file, skip context analysis and return all matches.
-         */
-        files: boolean;
-      }
-    }
-
-    /**
-     * A custom entry that matches a profile
-     */
-    export interface Entry {
-      /**
-       * The ID for this entry
-       */
-      id?: string;
-
-      created_at?: string;
-
-      /**
-       * Whether the entry is enabled or not.
-       */
-      enabled?: boolean;
-
-      /**
-       * The name of the entry.
-       */
-      name?: string;
-
-      /**
-       * A pattern that matches an entry
-       */
-      pattern?: Entry.Pattern;
-
-      /**
-       * ID of the parent profile
-       */
-      profile_id?: unknown;
-
-      updated_at?: string;
-    }
-
-    export namespace Entry {
-      /**
-       * A pattern that matches an entry
-       */
-      export interface Pattern {
-        /**
-         * The regex pattern.
-         */
-        regex: string;
-
-        /**
-         * Validation algorithm for the pattern. This algorithm will get run on potential
-         * matches, and if it returns false, the entry will not be matched.
-         */
-        validation?: 'luhn';
-      }
-    }
-  }
-
   export interface DLPIntegrationProfile {
     /**
      * The ID for this profile
@@ -624,22 +197,21 @@ export interface ProfileGetParams {
 }
 
 export namespace Profiles {
+  export import DLPProfiles = ProfilesAPI.DLPProfiles;
   export import ProfileListResponse = ProfilesAPI.ProfileListResponse;
   export import ProfileGetResponse = ProfilesAPI.ProfileGetResponse;
   export import ProfileListParams = ProfilesAPI.ProfileListParams;
   export import ProfileGetParams = ProfilesAPI.ProfileGetParams;
   export import Customs = CustomsAPI.Customs;
+  export import DLPCustomProfile = CustomsAPI.DLPCustomProfile;
   export import CustomCreateResponse = CustomsAPI.CustomCreateResponse;
-  export import CustomUpdateResponse = CustomsAPI.CustomUpdateResponse;
   export import CustomDeleteResponse = CustomsAPI.CustomDeleteResponse;
-  export import CustomGetResponse = CustomsAPI.CustomGetResponse;
   export import CustomCreateParams = CustomsAPI.CustomCreateParams;
   export import CustomUpdateParams = CustomsAPI.CustomUpdateParams;
   export import CustomDeleteParams = CustomsAPI.CustomDeleteParams;
   export import CustomGetParams = CustomsAPI.CustomGetParams;
   export import Predefineds = PredefinedsAPI.Predefineds;
-  export import PredefinedUpdateResponse = PredefinedsAPI.PredefinedUpdateResponse;
-  export import PredefinedGetResponse = PredefinedsAPI.PredefinedGetResponse;
+  export import DLPPredefinedProfile = PredefinedsAPI.DLPPredefinedProfile;
   export import PredefinedUpdateParams = PredefinedsAPI.PredefinedUpdateParams;
   export import PredefinedGetParams = PredefinedsAPI.PredefinedGetParams;
 }

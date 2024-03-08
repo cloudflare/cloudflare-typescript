@@ -2,8 +2,7 @@
 
 export { Content } from './content/index';
 export {
-  ScriptUpdateResponse,
-  ScriptGetResponse,
+  WorkersNamespaceScript,
   ScriptUpdateParams,
   ScriptDeleteParams,
   ScriptGetParams,

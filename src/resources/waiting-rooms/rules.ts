@@ -93,195 +93,49 @@ export class Rules extends APIResource {
   }
 }
 
-export type RuleCreateResponse = Array<RuleCreateResponse.RuleCreateResponseItem>;
+export interface WaitingroomRuleResult {
+  /**
+   * The ID of the rule.
+   */
+  id?: string;
 
-export namespace RuleCreateResponse {
-  export interface RuleCreateResponseItem {
-    /**
-     * The ID of the rule.
-     */
-    id?: string;
+  /**
+   * The action to take when the expression matches.
+   */
+  action?: 'bypass_waiting_room';
 
-    /**
-     * The action to take when the expression matches.
-     */
-    action?: 'bypass_waiting_room';
+  /**
+   * The description of the rule.
+   */
+  description?: string;
 
-    /**
-     * The description of the rule.
-     */
-    description?: string;
+  /**
+   * When set to true, the rule is enabled.
+   */
+  enabled?: boolean;
 
-    /**
-     * When set to true, the rule is enabled.
-     */
-    enabled?: boolean;
+  /**
+   * Criteria defining when there is a match for the current rule.
+   */
+  expression?: string;
 
-    /**
-     * Criteria defining when there is a match for the current rule.
-     */
-    expression?: string;
+  last_updated?: string;
 
-    last_updated?: string;
-
-    /**
-     * The version of the rule.
-     */
-    version?: string;
-  }
+  /**
+   * The version of the rule.
+   */
+  version?: string;
 }
 
-export type RuleUpdateResponse = Array<RuleUpdateResponse.RuleUpdateResponseItem>;
+export type RuleCreateResponse = Array<WaitingroomRuleResult>;
 
-export namespace RuleUpdateResponse {
-  export interface RuleUpdateResponseItem {
-    /**
-     * The ID of the rule.
-     */
-    id?: string;
+export type RuleUpdateResponse = Array<WaitingroomRuleResult>;
 
-    /**
-     * The action to take when the expression matches.
-     */
-    action?: 'bypass_waiting_room';
+export type RuleListResponse = Array<WaitingroomRuleResult>;
 
-    /**
-     * The description of the rule.
-     */
-    description?: string;
+export type RuleDeleteResponse = Array<WaitingroomRuleResult>;
 
-    /**
-     * When set to true, the rule is enabled.
-     */
-    enabled?: boolean;
-
-    /**
-     * Criteria defining when there is a match for the current rule.
-     */
-    expression?: string;
-
-    last_updated?: string;
-
-    /**
-     * The version of the rule.
-     */
-    version?: string;
-  }
-}
-
-export type RuleListResponse = Array<RuleListResponse.RuleListResponseItem>;
-
-export namespace RuleListResponse {
-  export interface RuleListResponseItem {
-    /**
-     * The ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to take when the expression matches.
-     */
-    action?: 'bypass_waiting_room';
-
-    /**
-     * The description of the rule.
-     */
-    description?: string;
-
-    /**
-     * When set to true, the rule is enabled.
-     */
-    enabled?: boolean;
-
-    /**
-     * Criteria defining when there is a match for the current rule.
-     */
-    expression?: string;
-
-    last_updated?: string;
-
-    /**
-     * The version of the rule.
-     */
-    version?: string;
-  }
-}
-
-export type RuleDeleteResponse = Array<RuleDeleteResponse.RuleDeleteResponseItem>;
-
-export namespace RuleDeleteResponse {
-  export interface RuleDeleteResponseItem {
-    /**
-     * The ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to take when the expression matches.
-     */
-    action?: 'bypass_waiting_room';
-
-    /**
-     * The description of the rule.
-     */
-    description?: string;
-
-    /**
-     * When set to true, the rule is enabled.
-     */
-    enabled?: boolean;
-
-    /**
-     * Criteria defining when there is a match for the current rule.
-     */
-    expression?: string;
-
-    last_updated?: string;
-
-    /**
-     * The version of the rule.
-     */
-    version?: string;
-  }
-}
-
-export type RuleEditResponse = Array<RuleEditResponse.RuleEditResponseItem>;
-
-export namespace RuleEditResponse {
-  export interface RuleEditResponseItem {
-    /**
-     * The ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to take when the expression matches.
-     */
-    action?: 'bypass_waiting_room';
-
-    /**
-     * The description of the rule.
-     */
-    description?: string;
-
-    /**
-     * When set to true, the rule is enabled.
-     */
-    enabled?: boolean;
-
-    /**
-     * Criteria defining when there is a match for the current rule.
-     */
-    expression?: string;
-
-    last_updated?: string;
-
-    /**
-     * The version of the rule.
-     */
-    version?: string;
-  }
-}
+export type RuleEditResponse = Array<WaitingroomRuleResult>;
 
 export interface RuleCreateParams {
   /**
@@ -387,6 +241,7 @@ export namespace RuleEditParams {
 }
 
 export namespace Rules {
+  export import WaitingroomRuleResult = RulesAPI.WaitingroomRuleResult;
   export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
   export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
   export import RuleListResponse = RulesAPI.RuleListResponse;

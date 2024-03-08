@@ -1,10 +1,8 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
-  LiveInputCreateResponse,
-  LiveInputUpdateResponse,
+  StreamLiveInput,
   LiveInputListResponse,
-  LiveInputGetResponse,
   LiveInputCreateParams,
   LiveInputUpdateParams,
   LiveInputListParams,
@@ -13,8 +11,7 @@ export {
   LiveInputs,
 } from './live-inputs';
 export {
-  OutputCreateResponse,
-  OutputUpdateResponse,
+  StreamOutput,
   OutputListResponse,
   OutputCreateParams,
   OutputUpdateParams,

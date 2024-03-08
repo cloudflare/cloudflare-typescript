@@ -1,11 +1,9 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export {
-  HostnameCreateResponse,
+  DwebConfigWeb3Hostname,
   HostnameListResponse,
   HostnameDeleteResponse,
-  HostnameEditResponse,
-  HostnameGetResponse,
   HostnameCreateParams,
   HostnameEditParams,
   Hostnames,

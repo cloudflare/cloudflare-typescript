@@ -2,16 +2,22 @@
 
 export { ColoListResponse, ColoListParams, Colos } from './colos';
 export { DEX } from './dex';
-export { FleetStatus } from './fleet-status/index';
-export { HTTPTestGetResponse, HTTPTestGetParams, HTTPTests } from './http-tests/index';
-export { TestListResponse, TestListParams, TestListResponsesV4PagePagination, Tests } from './tests/index';
+export { DigitalExperienceMonitoringHTTPDetails, HTTPTestGetParams, HTTPTests } from './http-tests/index';
 export {
-  TracerouteTestGetResponse,
-  TracerouteTestNetworkPathResponse,
-  TracerouteTestPercentilesResponse,
+  DigitalExperienceMonitoringTests,
+  TestListResponse,
+  TestListParams,
+  TestListResponsesV4PagePagination,
+  Tests,
+} from './tests/index';
+export {
+  DigitalExperienceMonitoringTracerouteDetails,
+  DigitalExperienceMonitoringTracerouteDetailsPercentiles,
+  DigitalExperienceMonitoringTracerouteTestNetworkPath,
   TracerouteTestGetParams,
   TracerouteTestNetworkPathParams,
   TracerouteTestPercentilesParams,
   TracerouteTests,
 } from './traceroute-tests';
+export { FleetStatus } from './fleet-status/index';
 export { TracerouteTestResults } from './traceroute-test-results/index';

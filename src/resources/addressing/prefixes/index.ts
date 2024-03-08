@@ -1,8 +1,7 @@
 // File generated from our OpenAPI spec by Stainless.
 
-export { BGP } from './bgp/index';
 export {
-  DelegationCreateResponse,
+  AddressingIpamDelegations,
   DelegationListResponse,
   DelegationDeleteResponse,
   DelegationCreateParams,
@@ -11,11 +10,9 @@ export {
   Delegations,
 } from './delegations';
 export {
-  PrefixCreateResponse,
+  AddressingIpamPrefixes,
   PrefixListResponse,
   PrefixDeleteResponse,
-  PrefixEditResponse,
-  PrefixGetResponse,
   PrefixCreateParams,
   PrefixListParams,
   PrefixDeleteParams,
@@ -23,3 +20,4 @@ export {
   PrefixGetParams,
   Prefixes,
 } from './prefixes';
+export { BGP } from './bgp/index';

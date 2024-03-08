@@ -18,42 +18,40 @@ export class IPs extends APIResource {
   }
 }
 
-export type IPGetResponse = Array<IPGetResponse.IPGetResponseItem>;
+export interface IntelSchemasIP {
+  /**
+   * Specifies a reference to the autonomous systems (AS) that the IP address belongs
+   * to.
+   */
+  belongs_to_ref?: IntelSchemasIP.BelongsToRef;
 
-export namespace IPGetResponse {
-  export interface IPGetResponseItem {
+  ip?: string | string;
+
+  risk_types?: unknown;
+}
+
+export namespace IntelSchemasIP {
+  /**
+   * Specifies a reference to the autonomous systems (AS) that the IP address belongs
+   * to.
+   */
+  export interface BelongsToRef {
+    id?: unknown;
+
+    country?: string;
+
+    description?: string;
+
     /**
-     * Specifies a reference to the autonomous systems (AS) that the IP address belongs
-     * to.
+     * Infrastructure type of this ASN.
      */
-    belongs_to_ref?: IPGetResponseItem.BelongsToRef;
+    type?: 'hosting_provider' | 'isp' | 'organization';
 
-    ip?: string | string;
-
-    risk_types?: unknown;
-  }
-
-  export namespace IPGetResponseItem {
-    /**
-     * Specifies a reference to the autonomous systems (AS) that the IP address belongs
-     * to.
-     */
-    export interface BelongsToRef {
-      id?: unknown;
-
-      country?: string;
-
-      description?: string;
-
-      /**
-       * Infrastructure type of this ASN.
-       */
-      type?: 'hosting_provider' | 'isp' | 'organization';
-
-      value?: string;
-    }
+    value?: string;
   }
 }
+
+export type IPGetResponse = Array<IntelSchemasIP>;
 
 export interface IPGetParams {
   /**
@@ -73,6 +71,7 @@ export interface IPGetParams {
 }
 
 export namespace IPs {
+  export import IntelSchemasIP = IPsAPI.IntelSchemasIP;
   export import IPGetResponse = IPsAPI.IPGetResponse;
   export import IPGetParams = IPsAPI.IPGetParams;
 }

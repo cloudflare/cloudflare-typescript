@@ -2,7 +2,8 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as ScriptsAPI from 'cloudflare/resources/workers-for-platforms/dispatch/namespaces/scripts/scripts';
+import * as ScriptsScriptsAPI from 'cloudflare/resources/workers-for-platforms/dispatch/namespaces/scripts/scripts';
+import * as ScriptsAPI from 'cloudflare/resources/workers/scripts/scripts';
 import * as ContentAPI from 'cloudflare/resources/workers-for-platforms/dispatch/namespaces/scripts/content/content';
 import { type Uploadable, maybeMultipartFormRequestOptions } from 'cloudflare/core';
 
@@ -17,13 +18,13 @@ export class Scripts extends APIResource {
     scriptName: string,
     params: ScriptUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ScriptUpdateResponse> {
+  ): Core.APIPromise<ScriptsAPI.WorkersScript> {
     const { account_id, ...body } = params;
     return (
       this._client.put(
         `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}`,
         maybeMultipartFormRequestOptions({ body, ...options }),
-      ) as Core.APIPromise<{ result: ScriptUpdateResponse }>
+      ) as Core.APIPromise<{ result: ScriptsAPI.WorkersScript }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -52,90 +53,21 @@ export class Scripts extends APIResource {
     scriptName: string,
     params: ScriptGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ScriptGetResponse> {
+  ): Core.APIPromise<WorkersNamespaceScript> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}`,
         options,
-      ) as Core.APIPromise<{ result: ScriptGetResponse }>
+      ) as Core.APIPromise<{ result: WorkersNamespaceScript }>
     )._thenUnwrap((obj) => obj.result);
-  }
-}
-
-export interface ScriptUpdateResponse {
-  /**
-   * The id of the script in the Workers system. Usually the script name.
-   */
-  id?: string;
-
-  /**
-   * When the script was created.
-   */
-  created_on?: string;
-
-  /**
-   * Hashed script content, can be used in a If-None-Match header when updating.
-   */
-  etag?: string;
-
-  /**
-   * Whether Logpush is turned on for the Worker.
-   */
-  logpush?: boolean;
-
-  /**
-   * When the script was last modified.
-   */
-  modified_on?: string;
-
-  /**
-   * Deprecated. Deployment metadata for internal usage.
-   */
-  pipeline_hash?: string;
-
-  /**
-   * Specifies the placement mode for the Worker (e.g. 'smart').
-   */
-  placement_mode?: string;
-
-  /**
-   * List of Workers that will consume logs from the attached Worker.
-   */
-  tail_consumers?: Array<ScriptUpdateResponse.TailConsumer>;
-
-  /**
-   * Specifies the usage model for the Worker (e.g. 'bundled' or 'unbound').
-   */
-  usage_model?: string;
-}
-
-export namespace ScriptUpdateResponse {
-  /**
-   * A reference to a script that will consume logs from the attached Worker.
-   */
-  export interface TailConsumer {
-    /**
-     * Name of Worker that is to be the consumer.
-     */
-    service: string;
-
-    /**
-     * Optional environment if the Worker utilizes one.
-     */
-    environment?: string;
-
-    /**
-     * Optional dispatch namespace the script belongs to.
-     */
-    namespace?: string;
   }
 }
 
 /**
  * Details about a worker uploaded to a Workers for Platforms namespace.
  */
-export interface ScriptGetResponse {
+export interface WorkersNamespaceScript {
   /**
    * When the script was created.
    */
@@ -151,78 +83,7 @@ export interface ScriptGetResponse {
    */
   modified_on?: string;
 
-  script?: ScriptGetResponse.Script;
-}
-
-export namespace ScriptGetResponse {
-  export interface Script {
-    /**
-     * The id of the script in the Workers system. Usually the script name.
-     */
-    id?: string;
-
-    /**
-     * When the script was created.
-     */
-    created_on?: string;
-
-    /**
-     * Hashed script content, can be used in a If-None-Match header when updating.
-     */
-    etag?: string;
-
-    /**
-     * Whether Logpush is turned on for the Worker.
-     */
-    logpush?: boolean;
-
-    /**
-     * When the script was last modified.
-     */
-    modified_on?: string;
-
-    /**
-     * Deprecated. Deployment metadata for internal usage.
-     */
-    pipeline_hash?: string;
-
-    /**
-     * Specifies the placement mode for the Worker (e.g. 'smart').
-     */
-    placement_mode?: string;
-
-    /**
-     * List of Workers that will consume logs from the attached Worker.
-     */
-    tail_consumers?: Array<Script.TailConsumer>;
-
-    /**
-     * Specifies the usage model for the Worker (e.g. 'bundled' or 'unbound').
-     */
-    usage_model?: string;
-  }
-
-  export namespace Script {
-    /**
-     * A reference to a script that will consume logs from the attached Worker.
-     */
-    export interface TailConsumer {
-      /**
-       * Name of Worker that is to be the consumer.
-       */
-      service: string;
-
-      /**
-       * Optional environment if the Worker utilizes one.
-       */
-      environment?: string;
-
-      /**
-       * Optional dispatch namespace the script belongs to.
-       */
-      namespace?: string;
-    }
-  }
+  script?: ScriptsAPI.WorkersScript;
 }
 
 export interface ScriptUpdateParams {
@@ -492,10 +353,9 @@ export interface ScriptGetParams {
 }
 
 export namespace Scripts {
-  export import ScriptUpdateResponse = ScriptsAPI.ScriptUpdateResponse;
-  export import ScriptGetResponse = ScriptsAPI.ScriptGetResponse;
-  export import ScriptUpdateParams = ScriptsAPI.ScriptUpdateParams;
-  export import ScriptDeleteParams = ScriptsAPI.ScriptDeleteParams;
-  export import ScriptGetParams = ScriptsAPI.ScriptGetParams;
+  export import WorkersNamespaceScript = ScriptsScriptsAPI.WorkersNamespaceScript;
+  export import ScriptUpdateParams = ScriptsScriptsAPI.ScriptUpdateParams;
+  export import ScriptDeleteParams = ScriptsScriptsAPI.ScriptDeleteParams;
+  export import ScriptGetParams = ScriptsScriptsAPI.ScriptGetParams;
   export import Content = ContentAPI.Content;
 }

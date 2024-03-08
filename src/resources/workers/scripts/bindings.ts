@@ -18,11 +18,11 @@ export class Bindings extends APIResource {
   }
 }
 
-export type BindingGetResponse = Array<
-  BindingGetResponse.WorkersKVNamespaceBinding | BindingGetResponse.WorkersWasmModuleBinding
->;
+export type WorkersSchemasBinding =
+  | WorkersSchemasBinding.WorkersKVNamespaceBinding
+  | WorkersSchemasBinding.WorkersWasmModuleBinding;
 
-export namespace BindingGetResponse {
+export namespace WorkersSchemasBinding {
   export interface WorkersKVNamespaceBinding {
     /**
      * A JavaScript variable name for the binding.
@@ -53,6 +53,8 @@ export namespace BindingGetResponse {
   }
 }
 
+export type BindingGetResponse = Array<WorkersSchemasBinding>;
+
 export interface BindingGetParams {
   /**
    * Identifier
@@ -61,6 +63,7 @@ export interface BindingGetParams {
 }
 
 export namespace Bindings {
+  export import WorkersSchemasBinding = BindingsAPI.WorkersSchemasBinding;
   export import BindingGetResponse = BindingsAPI.BindingGetResponse;
   export import BindingGetParams = BindingsAPI.BindingGetParams;
 }

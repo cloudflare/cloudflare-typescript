@@ -16,6 +16,7 @@ export namespace Destinations {
   export import EligibleGetResponse = EligibleAPI.EligibleGetResponse;
   export import EligibleGetParams = EligibleAPI.EligibleGetParams;
   export import Pagerduty = PagerdutyAPI.Pagerduty;
+  export import AaaPagerduty = PagerdutyAPI.AaaPagerduty;
   export import PagerdutyCreateResponse = PagerdutyAPI.PagerdutyCreateResponse;
   export import PagerdutyDeleteResponse = PagerdutyAPI.PagerdutyDeleteResponse;
   export import PagerdutyGetResponse = PagerdutyAPI.PagerdutyGetResponse;
@@ -25,11 +26,11 @@ export namespace Destinations {
   export import PagerdutyGetParams = PagerdutyAPI.PagerdutyGetParams;
   export import PagerdutyLinkParams = PagerdutyAPI.PagerdutyLinkParams;
   export import Webhooks = WebhooksAPI.Webhooks;
+  export import AaaWebhooks = WebhooksAPI.AaaWebhooks;
   export import WebhookCreateResponse = WebhooksAPI.WebhookCreateResponse;
   export import WebhookUpdateResponse = WebhooksAPI.WebhookUpdateResponse;
   export import WebhookListResponse = WebhooksAPI.WebhookListResponse;
   export import WebhookDeleteResponse = WebhooksAPI.WebhookDeleteResponse;
-  export import WebhookGetResponse = WebhooksAPI.WebhookGetResponse;
   export import WebhookCreateParams = WebhooksAPI.WebhookCreateParams;
   export import WebhookUpdateParams = WebhooksAPI.WebhookUpdateParams;
   export import WebhookListParams = WebhooksAPI.WebhookListParams;

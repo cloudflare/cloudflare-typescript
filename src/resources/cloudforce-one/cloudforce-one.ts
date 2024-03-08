@@ -9,15 +9,13 @@ export class CloudforceOne extends APIResource {
 
 export namespace CloudforceOne {
   export import Requests = RequestsAPI.Requests;
-  export import RequestCreateResponse = RequestsAPI.RequestCreateResponse;
-  export import RequestUpdateResponse = RequestsAPI.RequestUpdateResponse;
-  export import RequestListResponse = RequestsAPI.RequestListResponse;
+  export import CloudforceOneQuota = RequestsAPI.CloudforceOneQuota;
+  export import CloudforceOneRequestConstants = RequestsAPI.CloudforceOneRequestConstants;
+  export import CloudforceOneRequestItem = RequestsAPI.CloudforceOneRequestItem;
+  export import CloudforceOneRequestListItem = RequestsAPI.CloudforceOneRequestListItem;
+  export import CloudforceOneRequestTypes = RequestsAPI.CloudforceOneRequestTypes;
   export import RequestDeleteResponse = RequestsAPI.RequestDeleteResponse;
-  export import RequestConstantsResponse = RequestsAPI.RequestConstantsResponse;
-  export import RequestGetResponse = RequestsAPI.RequestGetResponse;
-  export import RequestQuotaResponse = RequestsAPI.RequestQuotaResponse;
-  export import RequestTypesResponse = RequestsAPI.RequestTypesResponse;
-  export import RequestListResponsesV4PagePaginationArray = RequestsAPI.RequestListResponsesV4PagePaginationArray;
+  export import CloudforceOneRequestListItemsV4PagePaginationArray = RequestsAPI.CloudforceOneRequestListItemsV4PagePaginationArray;
   export import RequestCreateParams = RequestsAPI.RequestCreateParams;
   export import RequestUpdateParams = RequestsAPI.RequestUpdateParams;
   export import RequestListParams = RequestsAPI.RequestListParams;

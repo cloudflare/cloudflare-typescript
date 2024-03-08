@@ -1,14 +1,5 @@
 // File generated from our OpenAPI spec by Stainless.
 
-export { AppTypeListResponse, AppTypeListParams, AppTypes } from './app-types';
-export {
-  AuditSSHSettingUpdateResponse,
-  AuditSSHSettingGetResponse,
-  AuditSSHSettingUpdateParams,
-  AuditSSHSettingGetParams,
-  AuditSSHSettings,
-} from './audit-ssh-settings';
-export { CategoryListResponse, CategoryListParams, Categories } from './categories';
 export {
   ConfigurationUpdateResponse,
   ConfigurationEditResponse,
@@ -25,13 +16,24 @@ export {
   GatewayListParams,
   Gateway,
 } from './gateway';
+export { ZeroTrustGatewayAppTypes, AppTypeListResponse, AppTypeListParams, AppTypes } from './app-types';
 export {
+  ZeroTrustGatewayCategories,
+  CategoryListResponse,
+  CategoryListParams,
+  Categories,
+} from './categories';
+export {
+  ZeroTrustGatewayGatewayAccountLoggingSettings,
+  LoggingUpdateParams,
+  LoggingGetParams,
+  Loggings,
+} from './loggings';
+export {
+  ZeroTrustGatewayLists,
   ListCreateResponse,
-  ListUpdateResponse,
   ListListResponse,
   ListDeleteResponse,
-  ListEditResponse,
-  ListGetResponse,
   ListCreateParams,
   ListUpdateParams,
   ListListParams,
@@ -41,11 +43,9 @@ export {
   Lists,
 } from './lists/index';
 export {
-  LocationCreateResponse,
-  LocationUpdateResponse,
+  ZeroTrustGatewayLocations,
   LocationListResponse,
   LocationDeleteResponse,
-  LocationGetResponse,
   LocationCreateParams,
   LocationUpdateParams,
   LocationListParams,
@@ -54,18 +54,9 @@ export {
   Locations,
 } from './locations';
 export {
-  LoggingUpdateResponse,
-  LoggingGetResponse,
-  LoggingUpdateParams,
-  LoggingGetParams,
-  Loggings,
-} from './loggings';
-export {
-  ProxyEndpointCreateResponse,
+  ZeroTrustGatewayProxyEndpoints,
   ProxyEndpointListResponse,
   ProxyEndpointDeleteResponse,
-  ProxyEndpointEditResponse,
-  ProxyEndpointGetResponse,
   ProxyEndpointCreateParams,
   ProxyEndpointListParams,
   ProxyEndpointDeleteParams,
@@ -74,11 +65,9 @@ export {
   ProxyEndpoints,
 } from './proxy-endpoints';
 export {
-  RuleCreateResponse,
-  RuleUpdateResponse,
+  ZeroTrustGatewayRules,
   RuleListResponse,
   RuleDeleteResponse,
-  RuleGetResponse,
   RuleCreateParams,
   RuleUpdateParams,
   RuleListParams,
@@ -86,3 +75,9 @@ export {
   RuleGetParams,
   Rules,
 } from './rules';
+export {
+  ZeroTrustGatewaySettings,
+  AuditSSHSettingUpdateParams,
+  AuditSSHSettingGetParams,
+  AuditSSHSettings,
+} from './audit-ssh-settings';

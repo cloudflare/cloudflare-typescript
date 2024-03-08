@@ -11,16 +11,13 @@ export class ResponseBuffering extends APIResource {
    * it to be delivered in chunks. By default, the proxied server streams directly
    * and is not buffered by Cloudflare. This is limited to Enterprise Zones.
    */
-  edit(
-    params: ResponseBufferingEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ResponseBufferingEditResponse> {
+  edit(params: ResponseBufferingEditParams, options?: Core.RequestOptions): Core.APIPromise<ZonesBuffering> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/response_buffering`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ResponseBufferingEditResponse }>
+      }) as Core.APIPromise<{ result: ZonesBuffering }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -30,14 +27,11 @@ export class ResponseBuffering extends APIResource {
    * it to be delivered in chunks. By default, the proxied server streams directly
    * and is not buffered by Cloudflare. This is limited to Enterprise Zones.
    */
-  get(
-    params: ResponseBufferingGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ResponseBufferingGetResponse> {
+  get(params: ResponseBufferingGetParams, options?: Core.RequestOptions): Core.APIPromise<ZonesBuffering> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/response_buffering`, options) as Core.APIPromise<{
-        result: ResponseBufferingGetResponse;
+        result: ZonesBuffering;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -49,36 +43,7 @@ export class ResponseBuffering extends APIResource {
  * it to be delivered in chunks. By default, the proxied server streams directly
  * and is not buffered by Cloudflare. This is limited to Enterprise Zones.
  */
-export interface ResponseBufferingEditResponse {
-  /**
-   * ID of the zone setting.
-   */
-  id: 'response_buffering';
-
-  /**
-   * Current value of the zone setting.
-   */
-  value: 'on' | 'off';
-
-  /**
-   * Whether or not this setting can be modified for this zone (based on your
-   * Cloudflare plan level).
-   */
-  editable?: true | false;
-
-  /**
-   * last time this setting was modified.
-   */
-  modified_on?: string | null;
-}
-
-/**
- * Enables or disables buffering of responses from the proxied server. Cloudflare
- * may buffer the whole payload to deliver it at once to the client versus allowing
- * it to be delivered in chunks. By default, the proxied server streams directly
- * and is not buffered by Cloudflare. This is limited to Enterprise Zones.
- */
-export interface ResponseBufferingGetResponse {
+export interface ZonesBuffering {
   /**
    * ID of the zone setting.
    */
@@ -121,8 +86,7 @@ export interface ResponseBufferingGetParams {
 }
 
 export namespace ResponseBuffering {
-  export import ResponseBufferingEditResponse = ResponseBufferingAPI.ResponseBufferingEditResponse;
-  export import ResponseBufferingGetResponse = ResponseBufferingAPI.ResponseBufferingGetResponse;
+  export import ZonesBuffering = ResponseBufferingAPI.ZonesBuffering;
   export import ResponseBufferingEditParams = ResponseBufferingAPI.ResponseBufferingEditParams;
   export import ResponseBufferingGetParams = ResponseBufferingAPI.ResponseBufferingGetParams;
 }

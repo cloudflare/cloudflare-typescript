@@ -10,14 +10,11 @@ export class AdvancedDDOS extends APIResource {
    * website. This is an uneditable value that is 'on' in the case of Business and
    * Enterprise zones.
    */
-  get(
-    params: AdvancedDDOSGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AdvancedDDOSGetResponse> {
+  get(params: AdvancedDDOSGetParams, options?: Core.RequestOptions): Core.APIPromise<ZonesAdvancedDDOS> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/advanced_ddos`, options) as Core.APIPromise<{
-        result: AdvancedDDOSGetResponse;
+        result: ZonesAdvancedDDOS;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -28,7 +25,7 @@ export class AdvancedDDOS extends APIResource {
  * website. This is an uneditable value that is 'on' in the case of Business and
  * Enterprise zones.
  */
-export interface AdvancedDDOSGetResponse {
+export interface ZonesAdvancedDDOS {
   /**
    * ID of the zone setting.
    */
@@ -59,6 +56,6 @@ export interface AdvancedDDOSGetParams {
 }
 
 export namespace AdvancedDDOS {
-  export import AdvancedDDOSGetResponse = AdvancedDDOSAPI.AdvancedDDOSGetResponse;
+  export import ZonesAdvancedDDOS = AdvancedDDOSAPI.ZonesAdvancedDDOS;
   export import AdvancedDDOSGetParams = AdvancedDDOSAPI.AdvancedDDOSGetParams;
 }

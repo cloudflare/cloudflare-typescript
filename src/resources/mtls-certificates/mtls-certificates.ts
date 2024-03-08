@@ -14,13 +14,13 @@ export class MTLSCertificates extends APIResource {
   create(
     params: MTLSCertificateCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MTLSCertificateCreateResponse> {
+  ): Core.APIPromise<TLSCertificatesAndHostnamesCertificateObjectPost> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/mtls_certificates`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: MTLSCertificateCreateResponse }>
+      }) as Core.APIPromise<{ result: TLSCertificatesAndHostnamesCertificateObjectPost }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -47,13 +47,13 @@ export class MTLSCertificates extends APIResource {
     mtlsCertificateId: string,
     params: MTLSCertificateDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MTLSCertificateDeleteResponse> {
+  ): Core.APIPromise<TLSCertificatesAndHostnamesComponentsSchemasCertificateObject> {
     const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/mtls_certificates/${mtlsCertificateId}`,
         options,
-      ) as Core.APIPromise<{ result: MTLSCertificateDeleteResponse }>
+      ) as Core.APIPromise<{ result: TLSCertificatesAndHostnamesComponentsSchemasCertificateObject }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -64,18 +64,18 @@ export class MTLSCertificates extends APIResource {
     mtlsCertificateId: string,
     params: MTLSCertificateGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MTLSCertificateGetResponse> {
+  ): Core.APIPromise<TLSCertificatesAndHostnamesComponentsSchemasCertificateObject> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/mtls_certificates/${mtlsCertificateId}`,
         options,
-      ) as Core.APIPromise<{ result: MTLSCertificateGetResponse }>
+      ) as Core.APIPromise<{ result: TLSCertificatesAndHostnamesComponentsSchemasCertificateObject }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface MTLSCertificateCreateResponse {
+export interface TLSCertificatesAndHostnamesCertificateObjectPost {
   /**
    * Identifier
    */
@@ -127,58 +127,7 @@ export interface MTLSCertificateCreateResponse {
   uploaded_on?: string;
 }
 
-export type MTLSCertificateListResponse = Array<MTLSCertificateListResponse.MTLSCertificateListResponseItem>;
-
-export namespace MTLSCertificateListResponse {
-  export interface MTLSCertificateListResponseItem {
-    /**
-     * Identifier
-     */
-    id?: string;
-
-    /**
-     * Indicates whether the certificate is a CA or leaf certificate.
-     */
-    ca?: boolean;
-
-    /**
-     * The uploaded root CA certificate.
-     */
-    certificates?: string;
-
-    /**
-     * When the certificate expires.
-     */
-    expires_on?: string;
-
-    /**
-     * The certificate authority that issued the certificate.
-     */
-    issuer?: string;
-
-    /**
-     * Optional unique name for the certificate. Only used for human readability.
-     */
-    name?: string;
-
-    /**
-     * The certificate serial number.
-     */
-    serial_number?: string;
-
-    /**
-     * The type of hash used for the certificate.
-     */
-    signature?: string;
-
-    /**
-     * This is the time the certificate was uploaded.
-     */
-    uploaded_on?: string;
-  }
-}
-
-export interface MTLSCertificateDeleteResponse {
+export interface TLSCertificatesAndHostnamesComponentsSchemasCertificateObject {
   /**
    * Identifier
    */
@@ -225,52 +174,8 @@ export interface MTLSCertificateDeleteResponse {
   uploaded_on?: string;
 }
 
-export interface MTLSCertificateGetResponse {
-  /**
-   * Identifier
-   */
-  id?: string;
-
-  /**
-   * Indicates whether the certificate is a CA or leaf certificate.
-   */
-  ca?: boolean;
-
-  /**
-   * The uploaded root CA certificate.
-   */
-  certificates?: string;
-
-  /**
-   * When the certificate expires.
-   */
-  expires_on?: string;
-
-  /**
-   * The certificate authority that issued the certificate.
-   */
-  issuer?: string;
-
-  /**
-   * Optional unique name for the certificate. Only used for human readability.
-   */
-  name?: string;
-
-  /**
-   * The certificate serial number.
-   */
-  serial_number?: string;
-
-  /**
-   * The type of hash used for the certificate.
-   */
-  signature?: string;
-
-  /**
-   * This is the time the certificate was uploaded.
-   */
-  uploaded_on?: string;
-}
+export type MTLSCertificateListResponse =
+  Array<TLSCertificatesAndHostnamesComponentsSchemasCertificateObject>;
 
 export interface MTLSCertificateCreateParams {
   /**
@@ -322,15 +227,15 @@ export interface MTLSCertificateGetParams {
 }
 
 export namespace MTLSCertificates {
-  export import MTLSCertificateCreateResponse = MTLSCertificatesAPI.MTLSCertificateCreateResponse;
+  export import TLSCertificatesAndHostnamesCertificateObjectPost = MTLSCertificatesAPI.TLSCertificatesAndHostnamesCertificateObjectPost;
+  export import TLSCertificatesAndHostnamesComponentsSchemasCertificateObject = MTLSCertificatesAPI.TLSCertificatesAndHostnamesComponentsSchemasCertificateObject;
   export import MTLSCertificateListResponse = MTLSCertificatesAPI.MTLSCertificateListResponse;
-  export import MTLSCertificateDeleteResponse = MTLSCertificatesAPI.MTLSCertificateDeleteResponse;
-  export import MTLSCertificateGetResponse = MTLSCertificatesAPI.MTLSCertificateGetResponse;
   export import MTLSCertificateCreateParams = MTLSCertificatesAPI.MTLSCertificateCreateParams;
   export import MTLSCertificateListParams = MTLSCertificatesAPI.MTLSCertificateListParams;
   export import MTLSCertificateDeleteParams = MTLSCertificatesAPI.MTLSCertificateDeleteParams;
   export import MTLSCertificateGetParams = MTLSCertificatesAPI.MTLSCertificateGetParams;
   export import Associations = AssociationsAPI.Associations;
+  export import TLSCertificatesAndHostnamesAssociationObject = AssociationsAPI.TLSCertificatesAndHostnamesAssociationObject;
   export import AssociationGetResponse = AssociationsAPI.AssociationGetResponse;
   export import AssociationGetParams = AssociationsAPI.AssociationGetParams;
 }

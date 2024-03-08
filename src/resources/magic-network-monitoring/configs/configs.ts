@@ -11,10 +11,13 @@ export class Configs extends APIResource {
   /**
    * Create a new network monitoring configuration.
    */
-  create(accountIdentifier: unknown, options?: Core.RequestOptions): Core.APIPromise<ConfigCreateResponse> {
+  create(
+    accountIdentifier: unknown,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MagicVisibilityMNMConfig> {
     return (
       this._client.post(`/accounts/${accountIdentifier}/mnm/config`, options) as Core.APIPromise<{
-        result: ConfigCreateResponse;
+        result: MagicVisibilityMNMConfig;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -23,10 +26,13 @@ export class Configs extends APIResource {
    * Update an existing network monitoring configuration, requires the entire
    * configuration to be updated at once.
    */
-  update(accountIdentifier: unknown, options?: Core.RequestOptions): Core.APIPromise<ConfigUpdateResponse> {
+  update(
+    accountIdentifier: unknown,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MagicVisibilityMNMConfig> {
     return (
       this._client.put(`/accounts/${accountIdentifier}/mnm/config`, options) as Core.APIPromise<{
-        result: ConfigUpdateResponse;
+        result: MagicVisibilityMNMConfig;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -34,10 +40,13 @@ export class Configs extends APIResource {
   /**
    * Delete an existing network monitoring configuration.
    */
-  delete(accountIdentifier: unknown, options?: Core.RequestOptions): Core.APIPromise<ConfigDeleteResponse> {
+  delete(
+    accountIdentifier: unknown,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MagicVisibilityMNMConfig> {
     return (
       this._client.delete(`/accounts/${accountIdentifier}/mnm/config`, options) as Core.APIPromise<{
-        result: ConfigDeleteResponse;
+        result: MagicVisibilityMNMConfig;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -45,10 +54,10 @@ export class Configs extends APIResource {
   /**
    * Update fields in an existing network monitoring configuration.
    */
-  edit(accountIdentifier: unknown, options?: Core.RequestOptions): Core.APIPromise<ConfigEditResponse> {
+  edit(accountIdentifier: unknown, options?: Core.RequestOptions): Core.APIPromise<MagicVisibilityMNMConfig> {
     return (
       this._client.patch(`/accounts/${accountIdentifier}/mnm/config`, options) as Core.APIPromise<{
-        result: ConfigEditResponse;
+        result: MagicVisibilityMNMConfig;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -56,76 +65,16 @@ export class Configs extends APIResource {
   /**
    * Lists default sampling and router IPs for account.
    */
-  get(accountIdentifier: unknown, options?: Core.RequestOptions): Core.APIPromise<ConfigGetResponse> {
+  get(accountIdentifier: unknown, options?: Core.RequestOptions): Core.APIPromise<MagicVisibilityMNMConfig> {
     return (
       this._client.get(`/accounts/${accountIdentifier}/mnm/config`, options) as Core.APIPromise<{
-        result: ConfigGetResponse;
+        result: MagicVisibilityMNMConfig;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface ConfigCreateResponse {
-  /**
-   * Fallback sampling rate of flow messages being sent in packets per second. This
-   * should match the packet sampling rate configured on the router.
-   */
-  default_sampling: number;
-
-  /**
-   * The account name.
-   */
-  name: string;
-
-  router_ips: Array<string>;
-}
-
-export interface ConfigUpdateResponse {
-  /**
-   * Fallback sampling rate of flow messages being sent in packets per second. This
-   * should match the packet sampling rate configured on the router.
-   */
-  default_sampling: number;
-
-  /**
-   * The account name.
-   */
-  name: string;
-
-  router_ips: Array<string>;
-}
-
-export interface ConfigDeleteResponse {
-  /**
-   * Fallback sampling rate of flow messages being sent in packets per second. This
-   * should match the packet sampling rate configured on the router.
-   */
-  default_sampling: number;
-
-  /**
-   * The account name.
-   */
-  name: string;
-
-  router_ips: Array<string>;
-}
-
-export interface ConfigEditResponse {
-  /**
-   * Fallback sampling rate of flow messages being sent in packets per second. This
-   * should match the packet sampling rate configured on the router.
-   */
-  default_sampling: number;
-
-  /**
-   * The account name.
-   */
-  name: string;
-
-  router_ips: Array<string>;
-}
-
-export interface ConfigGetResponse {
+export interface MagicVisibilityMNMConfig {
   /**
    * Fallback sampling rate of flow messages being sent in packets per second. This
    * should match the packet sampling rate configured on the router.
@@ -141,11 +90,6 @@ export interface ConfigGetResponse {
 }
 
 export namespace Configs {
-  export import ConfigCreateResponse = ConfigsAPI.ConfigCreateResponse;
-  export import ConfigUpdateResponse = ConfigsAPI.ConfigUpdateResponse;
-  export import ConfigDeleteResponse = ConfigsAPI.ConfigDeleteResponse;
-  export import ConfigEditResponse = ConfigsAPI.ConfigEditResponse;
-  export import ConfigGetResponse = ConfigsAPI.ConfigGetResponse;
+  export import MagicVisibilityMNMConfig = ConfigsAPI.MagicVisibilityMNMConfig;
   export import Full = FullAPI.Full;
-  export import FullGetResponse = FullAPI.FullGetResponse;
 }

@@ -12,13 +12,13 @@ export class Delegations extends APIResource {
     prefixId: string,
     params: DelegationCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DelegationCreateResponse> {
+  ): Core.APIPromise<AddressingIpamDelegations> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/addressing/prefixes/${prefixId}/delegations`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: DelegationCreateResponse }>
+      }) as Core.APIPromise<{ result: AddressingIpamDelegations }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -58,7 +58,7 @@ export class Delegations extends APIResource {
   }
 }
 
-export interface DelegationCreateResponse {
+export interface AddressingIpamDelegations {
   /**
    * Delegation identifier tag.
    */
@@ -84,35 +84,7 @@ export interface DelegationCreateResponse {
   parent_prefix_id?: string;
 }
 
-export type DelegationListResponse = Array<DelegationListResponse.DelegationListResponseItem>;
-
-export namespace DelegationListResponse {
-  export interface DelegationListResponseItem {
-    /**
-     * Delegation identifier tag.
-     */
-    id?: string;
-
-    /**
-     * IP Prefix in Classless Inter-Domain Routing format.
-     */
-    cidr?: string;
-
-    created_at?: string;
-
-    /**
-     * Account identifier for the account to which prefix is being delegated.
-     */
-    delegated_account_id?: string;
-
-    modified_at?: string;
-
-    /**
-     * Identifier
-     */
-    parent_prefix_id?: string;
-  }
-}
+export type DelegationListResponse = Array<AddressingIpamDelegations>;
 
 export interface DelegationDeleteResponse {
   /**
@@ -154,7 +126,7 @@ export interface DelegationDeleteParams {
 }
 
 export namespace Delegations {
-  export import DelegationCreateResponse = DelegationsAPI.DelegationCreateResponse;
+  export import AddressingIpamDelegations = DelegationsAPI.AddressingIpamDelegations;
   export import DelegationListResponse = DelegationsAPI.DelegationListResponse;
   export import DelegationDeleteResponse = DelegationsAPI.DelegationDeleteResponse;
   export import DelegationCreateParams = DelegationsAPI.DelegationCreateParams;

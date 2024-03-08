@@ -41,6 +41,73 @@ export class Verification extends APIResource {
   }
 }
 
+export interface TLSCertificatesAndHostnamesVerification {
+  /**
+   * Current status of certificate.
+   */
+  certificate_status:
+    | 'initializing'
+    | 'authorizing'
+    | 'active'
+    | 'expired'
+    | 'issuing'
+    | 'timing_out'
+    | 'pending_deployment';
+
+  /**
+   * Certificate Authority is manually reviewing the order.
+   */
+  brand_check?: boolean;
+
+  /**
+   * Certificate Pack UUID.
+   */
+  cert_pack_uuid?: string;
+
+  /**
+   * Certificate's signature algorithm.
+   */
+  signature?: 'ECDSAWithSHA256' | 'SHA1WithRSA' | 'SHA256WithRSA';
+
+  /**
+   * Validation method in use for a certificate pack order.
+   */
+  validation_method?: 'http' | 'cname' | 'txt';
+
+  /**
+   * Certificate's required verification information.
+   */
+  verification_info?: TLSCertificatesAndHostnamesVerification.VerificationInfo;
+
+  /**
+   * Status of the required verification information, omitted if verification status
+   * is unknown.
+   */
+  verification_status?: boolean;
+
+  /**
+   * Method of verification.
+   */
+  verification_type?: 'cname' | 'meta tag';
+}
+
+export namespace TLSCertificatesAndHostnamesVerification {
+  /**
+   * Certificate's required verification information.
+   */
+  export interface VerificationInfo {
+    /**
+     * Name of CNAME record.
+     */
+    record_name?: 'record_name' | 'http_url' | 'cname' | 'txt_name';
+
+    /**
+     * Target of CNAME record.
+     */
+    record_target?: 'record_value' | 'http_body' | 'cname_target' | 'txt_value';
+  }
+}
+
 export interface VerificationEditResponse {
   /**
    * Result status.
@@ -53,76 +120,7 @@ export interface VerificationEditResponse {
   validation_method?: 'http' | 'cname' | 'txt' | 'email';
 }
 
-export type VerificationGetResponse = Array<VerificationGetResponse.VerificationGetResponseItem>;
-
-export namespace VerificationGetResponse {
-  export interface VerificationGetResponseItem {
-    /**
-     * Current status of certificate.
-     */
-    certificate_status:
-      | 'initializing'
-      | 'authorizing'
-      | 'active'
-      | 'expired'
-      | 'issuing'
-      | 'timing_out'
-      | 'pending_deployment';
-
-    /**
-     * Certificate Authority is manually reviewing the order.
-     */
-    brand_check?: boolean;
-
-    /**
-     * Certificate Pack UUID.
-     */
-    cert_pack_uuid?: string;
-
-    /**
-     * Certificate's signature algorithm.
-     */
-    signature?: 'ECDSAWithSHA256' | 'SHA1WithRSA' | 'SHA256WithRSA';
-
-    /**
-     * Validation method in use for a certificate pack order.
-     */
-    validation_method?: 'http' | 'cname' | 'txt';
-
-    /**
-     * Certificate's required verification information.
-     */
-    verification_info?: VerificationGetResponseItem.VerificationInfo;
-
-    /**
-     * Status of the required verification information, omitted if verification status
-     * is unknown.
-     */
-    verification_status?: boolean;
-
-    /**
-     * Method of verification.
-     */
-    verification_type?: 'cname' | 'meta tag';
-  }
-
-  export namespace VerificationGetResponseItem {
-    /**
-     * Certificate's required verification information.
-     */
-    export interface VerificationInfo {
-      /**
-       * Name of CNAME record.
-       */
-      record_name?: 'record_name' | 'http_url' | 'cname' | 'txt_name';
-
-      /**
-       * Target of CNAME record.
-       */
-      record_target?: 'record_value' | 'http_body' | 'cname_target' | 'txt_value';
-    }
-  }
-}
+export type VerificationGetResponse = Array<TLSCertificatesAndHostnamesVerification>;
 
 export interface VerificationEditParams {
   /**
@@ -149,6 +147,7 @@ export interface VerificationGetParams {
 }
 
 export namespace Verification {
+  export import TLSCertificatesAndHostnamesVerification = VerificationAPI.TLSCertificatesAndHostnamesVerification;
   export import VerificationEditResponse = VerificationAPI.VerificationEditResponse;
   export import VerificationGetResponse = VerificationAPI.VerificationGetResponse;
   export import VerificationEditParams = VerificationAPI.VerificationEditParams;

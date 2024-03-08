@@ -10,11 +10,11 @@ export class Keys extends APIResource {
    * once after creation. Keys are created, used, and deleted independently of
    * videos, and every key can sign any video.
    */
-  create(params: KeyCreateParams, options?: Core.RequestOptions): Core.APIPromise<KeyCreateResponse> {
+  create(params: KeyCreateParams, options?: Core.RequestOptions): Core.APIPromise<StreamKeys> {
     const { account_id } = params;
     return (
       this._client.post(`/accounts/${account_id}/stream/keys`, options) as Core.APIPromise<{
-        result: KeyCreateResponse;
+        result: StreamKeys;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -48,7 +48,7 @@ export class Keys extends APIResource {
   }
 }
 
-export interface KeyCreateResponse {
+export interface StreamKeys {
   /**
    * Identifier
    */
@@ -110,7 +110,7 @@ export interface KeyGetParams {
 }
 
 export namespace Keys {
-  export import KeyCreateResponse = KeysAPI.KeyCreateResponse;
+  export import StreamKeys = KeysAPI.StreamKeys;
   export import KeyDeleteResponse = KeysAPI.KeyDeleteResponse;
   export import KeyGetResponse = KeysAPI.KeyGetResponse;
   export import KeyCreateParams = KeysAPI.KeyCreateParams;

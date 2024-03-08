@@ -8,11 +8,11 @@ export class HTTP3 extends APIResource {
   /**
    * Value of the HTTP3 setting.
    */
-  edit(params: HTTP3EditParams, options?: Core.RequestOptions): Core.APIPromise<HTTP3EditResponse> {
+  edit(params: HTTP3EditParams, options?: Core.RequestOptions): Core.APIPromise<ZonesHTTP3> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/http3`, { body, ...options }) as Core.APIPromise<{
-        result: HTTP3EditResponse;
+        result: ZonesHTTP3;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -20,12 +20,10 @@ export class HTTP3 extends APIResource {
   /**
    * Value of the HTTP3 setting.
    */
-  get(params: HTTP3GetParams, options?: Core.RequestOptions): Core.APIPromise<HTTP3GetResponse> {
+  get(params: HTTP3GetParams, options?: Core.RequestOptions): Core.APIPromise<ZonesHTTP3> {
     const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zone_id}/settings/http3`, options) as Core.APIPromise<{
-        result: HTTP3GetResponse;
-      }>
+      this._client.get(`/zones/${zone_id}/settings/http3`, options) as Core.APIPromise<{ result: ZonesHTTP3 }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -33,33 +31,7 @@ export class HTTP3 extends APIResource {
 /**
  * HTTP3 enabled for this zone.
  */
-export interface HTTP3EditResponse {
-  /**
-   * ID of the zone setting.
-   */
-  id: 'http3';
-
-  /**
-   * Current value of the zone setting.
-   */
-  value: 'on' | 'off';
-
-  /**
-   * Whether or not this setting can be modified for this zone (based on your
-   * Cloudflare plan level).
-   */
-  editable?: true | false;
-
-  /**
-   * last time this setting was modified.
-   */
-  modified_on?: string | null;
-}
-
-/**
- * HTTP3 enabled for this zone.
- */
-export interface HTTP3GetResponse {
+export interface ZonesHTTP3 {
   /**
    * ID of the zone setting.
    */
@@ -102,8 +74,7 @@ export interface HTTP3GetParams {
 }
 
 export namespace HTTP3 {
-  export import HTTP3EditResponse = HTTP3API.HTTP3EditResponse;
-  export import HTTP3GetResponse = HTTP3API.HTTP3GetResponse;
+  export import ZonesHTTP3 = HTTP3API.ZonesHTTP3;
   export import HTTP3EditParams = HTTP3API.HTTP3EditParams;
   export import HTTP3GetParams = HTTP3API.HTTP3GetParams;
 }

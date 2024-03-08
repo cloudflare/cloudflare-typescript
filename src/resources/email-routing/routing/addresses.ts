@@ -86,6 +86,40 @@ export class Addresses extends APIResource {
 
 export class AddressListResponsesV4PagePaginationArray extends V4PagePaginationArray<AddressListResponse> {}
 
+export interface EmailAddresses {
+  /**
+   * Destination address identifier.
+   */
+  id?: string;
+
+  /**
+   * The date and time the destination address has been created.
+   */
+  created?: string;
+
+  /**
+   * The contact email address of the user.
+   */
+  email?: string;
+
+  /**
+   * The date and time the destination address was last modified.
+   */
+  modified?: string;
+
+  /**
+   * @deprecated: Destination address tag. (Deprecated, replaced by destination
+   * address identifier)
+   */
+  tag?: string;
+
+  /**
+   * The date and time the destination address has been verified. Null means not
+   * verified yet.
+   */
+  verified?: string;
+}
+
 export interface AddressCreateResponse {
   /**
    * Destination address identifier.
@@ -242,6 +276,7 @@ export interface AddressListParams extends V4PagePaginationArrayParams {
 }
 
 export namespace Addresses {
+  export import EmailAddresses = AddressesAPI.EmailAddresses;
   export import AddressCreateResponse = AddressesAPI.AddressCreateResponse;
   export import AddressListResponse = AddressesAPI.AddressListResponse;
   export import AddressDeleteResponse = AddressesAPI.AddressDeleteResponse;

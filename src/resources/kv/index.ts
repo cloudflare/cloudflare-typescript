@@ -2,14 +2,13 @@
 
 export { KV } from './kv';
 export {
-  NamespaceCreateResponse,
+  WorkersKVNamespace,
   NamespaceUpdateResponse,
-  NamespaceListResponse,
   NamespaceDeleteResponse,
   NamespaceCreateParams,
   NamespaceUpdateParams,
   NamespaceListParams,
   NamespaceDeleteParams,
-  NamespaceListResponsesV4PagePaginationArray,
+  WorkersKVNamespacesV4PagePaginationArray,
   Namespaces,
 } from './namespaces/index';

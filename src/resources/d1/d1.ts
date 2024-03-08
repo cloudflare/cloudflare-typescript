@@ -9,12 +9,12 @@ export class D1 extends APIResource {
 
 export namespace D1 {
   export import Database = DatabaseAPI.Database;
-  export import DatabaseCreateResponse = DatabaseAPI.DatabaseCreateResponse;
-  export import DatabaseListResponse = DatabaseAPI.DatabaseListResponse;
+  export import D1CreateDatabase = DatabaseAPI.D1CreateDatabase;
+  export import D1DatabaseDetails = DatabaseAPI.D1DatabaseDetails;
+  export import D1QueryResult = DatabaseAPI.D1QueryResult;
   export import DatabaseDeleteResponse = DatabaseAPI.DatabaseDeleteResponse;
-  export import DatabaseGetResponse = DatabaseAPI.DatabaseGetResponse;
   export import DatabaseQueryResponse = DatabaseAPI.DatabaseQueryResponse;
-  export import DatabaseListResponsesV4PagePaginationArray = DatabaseAPI.DatabaseListResponsesV4PagePaginationArray;
+  export import D1CreateDatabasesV4PagePaginationArray = DatabaseAPI.D1CreateDatabasesV4PagePaginationArray;
   export import DatabaseCreateParams = DatabaseAPI.DatabaseCreateParams;
   export import DatabaseListParams = DatabaseAPI.DatabaseListParams;
   export import DatabaseQueryParams = DatabaseAPI.DatabaseQueryParams;

@@ -25,19 +25,17 @@ export class Namespaces extends APIResource {
   }
 }
 
-export type NamespaceListResponse = Array<NamespaceListResponse.NamespaceListResponseItem>;
+export interface WorkersNamespace {
+  id?: unknown;
 
-export namespace NamespaceListResponse {
-  export interface NamespaceListResponseItem {
-    id?: unknown;
+  class?: unknown;
 
-    class?: unknown;
+  name?: unknown;
 
-    name?: unknown;
-
-    script?: unknown;
-  }
+  script?: unknown;
 }
+
+export type NamespaceListResponse = Array<WorkersNamespace>;
 
 export interface NamespaceListParams {
   /**
@@ -47,9 +45,11 @@ export interface NamespaceListParams {
 }
 
 export namespace Namespaces {
+  export import WorkersNamespace = NamespacesAPI.WorkersNamespace;
   export import NamespaceListResponse = NamespacesAPI.NamespaceListResponse;
   export import NamespaceListParams = NamespacesAPI.NamespaceListParams;
   export import Objects = ObjectsAPI.Objects;
+  export import WorkersObject = ObjectsAPI.WorkersObject;
   export import ObjectListResponse = ObjectsAPI.ObjectListResponse;
   export import ObjectListParams = ObjectsAPI.ObjectListParams;
 }
