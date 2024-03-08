@@ -18,17 +18,15 @@ export class IPLists extends APIResource {
   }
 }
 
-export type IPListGetResponse = Array<IPListGetResponse.IPListGetResponseItem>;
+export interface IntelIPList {
+  id?: number;
 
-export namespace IPListGetResponse {
-  export interface IPListGetResponseItem {
-    id?: number;
+  description?: string;
 
-    description?: string;
-
-    name?: string;
-  }
+  name?: string;
 }
+
+export type IPListGetResponse = Array<IntelIPList>;
 
 export interface IPListGetParams {
   /**
@@ -38,6 +36,7 @@ export interface IPListGetParams {
 }
 
 export namespace IPLists {
+  export import IntelIPList = IPListsAPI.IntelIPList;
   export import IPListGetResponse = IPListsAPI.IPListGetResponse;
   export import IPListGetParams = IPListsAPI.IPListGetParams;
 }

@@ -2,8 +2,7 @@
 
 export { RUM } from './rum';
 export {
-  RuleCreateResponse,
-  RuleUpdateResponse,
+  RUMRule,
   RuleListResponse,
   RuleDeleteResponse,
   RuleCreateParams,
@@ -13,16 +12,13 @@ export {
   Rules,
 } from './rules';
 export {
-  SiteInfoCreateResponse,
-  SiteInfoUpdateResponse,
-  SiteInfoListResponse,
+  RUMSite,
   SiteInfoDeleteResponse,
-  SiteInfoGetResponse,
   SiteInfoCreateParams,
   SiteInfoUpdateParams,
   SiteInfoListParams,
   SiteInfoDeleteParams,
   SiteInfoGetParams,
-  SiteInfoListResponsesV4PagePaginationArray,
+  RUMSitesV4PagePaginationArray,
   SiteInfos,
 } from './site-infos';

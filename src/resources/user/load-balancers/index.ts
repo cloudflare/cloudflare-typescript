@@ -3,12 +3,9 @@
 export { Analytics } from './analytics/index';
 export { LoadBalancers } from './load-balancers';
 export {
-  MonitorCreateResponse,
-  MonitorUpdateResponse,
+  LoadBalancingMonitor,
   MonitorListResponse,
   MonitorDeleteResponse,
-  MonitorEditResponse,
-  MonitorGetResponse,
   MonitorPreviewResponse,
   MonitorReferencesResponse,
   MonitorCreateParams,
@@ -18,12 +15,9 @@ export {
   Monitors,
 } from './monitors';
 export {
-  PoolCreateResponse,
-  PoolUpdateResponse,
+  LoadBalancingPool,
   PoolListResponse,
   PoolDeleteResponse,
-  PoolEditResponse,
-  PoolGetResponse,
   PoolHealthResponse,
   PoolPreviewResponse,
   PoolReferencesResponse,
@@ -34,4 +28,4 @@ export {
   PoolPreviewParams,
   Pools,
 } from './pools';
-export { PreviewGetResponse, Preview } from './preview';
+export { LoadBalancingPreviewResult, Preview } from './preview';

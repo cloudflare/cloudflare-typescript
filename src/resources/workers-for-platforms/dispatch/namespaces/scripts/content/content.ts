@@ -13,7 +13,6 @@ export class Content extends APIResource {
 
 export namespace Content {
   export import Scripts = ScriptsAPI.Scripts;
-  export import ScriptUpdateResponse = ScriptsAPI.ScriptUpdateResponse;
   export import ScriptUpdateParams = ScriptsAPI.ScriptUpdateParams;
   export import ScriptGetParams = ScriptsAPI.ScriptGetParams;
   export import Settings = SettingsAPI.Settings;

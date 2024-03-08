@@ -20,13 +20,13 @@ export class Reports extends APIResource {
     identifier: string,
     query?: ReportGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ReportGetResponse>;
-  get(identifier: string, options?: Core.RequestOptions): Core.APIPromise<ReportGetResponse>;
+  ): Core.APIPromise<DNSDNSAnalyticsAPIReport>;
+  get(identifier: string, options?: Core.RequestOptions): Core.APIPromise<DNSDNSAnalyticsAPIReport>;
   get(
     identifier: string,
     query: ReportGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ReportGetResponse> {
+  ): Core.APIPromise<DNSDNSAnalyticsAPIReport> {
     if (isRequestOptions(query)) {
       return this.get(identifier, {}, query);
     }
@@ -34,16 +34,16 @@ export class Reports extends APIResource {
       this._client.get(`/zones/${identifier}/dns_analytics/report`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: ReportGetResponse }>
+      }) as Core.APIPromise<{ result: DNSDNSAnalyticsAPIReport }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface ReportGetResponse {
+export interface DNSDNSAnalyticsAPIReport {
   /**
    * Array with one row per combination of dimension values.
    */
-  data: Array<ReportGetResponse.Data>;
+  data: Array<DNSDNSAnalyticsAPIReport.Data>;
 
   /**
    * Number of seconds between current time and last processed event, in another
@@ -63,7 +63,7 @@ export interface ReportGetResponse {
    */
   min: unknown;
 
-  query: ReportGetResponse.Query;
+  query: DNSDNSAnalyticsAPIReport.Query;
 
   /**
    * Total number of rows in the result.
@@ -77,7 +77,7 @@ export interface ReportGetResponse {
   totals: unknown;
 }
 
-export namespace ReportGetResponse {
+export namespace DNSDNSAnalyticsAPIReport {
   export interface Data {
     /**
      * Array of dimension values, representing the combination of dimension values
@@ -169,9 +169,9 @@ export interface ReportGetParams {
 }
 
 export namespace Reports {
-  export import ReportGetResponse = ReportsAPI.ReportGetResponse;
+  export import DNSDNSAnalyticsAPIReport = ReportsAPI.DNSDNSAnalyticsAPIReport;
   export import ReportGetParams = ReportsAPI.ReportGetParams;
   export import Bytimes = BytimesAPI.Bytimes;
-  export import BytimeGetResponse = BytimesAPI.BytimeGetResponse;
+  export import DNSDNSAnalyticsAPIReportBytime = BytimesAPI.DNSDNSAnalyticsAPIReportBytime;
   export import BytimeGetParams = BytimesAPI.BytimeGetParams;
 }

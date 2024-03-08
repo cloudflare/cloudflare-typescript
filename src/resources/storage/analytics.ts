@@ -8,13 +8,13 @@ export class Analytics extends APIResource {
   /**
    * Retrieves Workers KV request metrics for the given account.
    */
-  list(params: AnalyticsListParams, options?: Core.RequestOptions): Core.APIPromise<AnalyticsListResponse> {
+  list(params: AnalyticsListParams, options?: Core.RequestOptions): Core.APIPromise<WorkersKVSchemasResult> {
     const { account_id, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/storage/analytics`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: AnalyticsListResponse }>
+      }) as Core.APIPromise<{ result: WorkersKVSchemasResult }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -24,13 +24,13 @@ export class Analytics extends APIResource {
   stored(
     params: AnalyticsStoredParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AnalyticsStoredResponse> {
+  ): Core.APIPromise<WorkersKVComponentsSchemasResult> {
     const { account_id, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/storage/analytics/stored`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: AnalyticsStoredResponse }>
+      }) as Core.APIPromise<{ result: WorkersKVComponentsSchemasResult }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -38,8 +38,8 @@ export class Analytics extends APIResource {
 /**
  * Metrics on Workers KV requests.
  */
-export interface AnalyticsListResponse {
-  data: Array<AnalyticsListResponse.Data> | null;
+export interface WorkersKVComponentsSchemasResult {
+  data: Array<WorkersKVComponentsSchemasResult.Data> | null;
 
   /**
    * Number of seconds between current time and last processed event, i.e. how many
@@ -60,7 +60,7 @@ export interface AnalyticsListResponse {
   /**
    * For specifying result metrics.
    */
-  query: AnalyticsListResponse.Query;
+  query: WorkersKVComponentsSchemasResult.Query;
 
   /**
    * Total number of rows in the result.
@@ -73,7 +73,7 @@ export interface AnalyticsListResponse {
   totals: unknown;
 }
 
-export namespace AnalyticsListResponse {
+export namespace WorkersKVComponentsSchemasResult {
   export interface Data {
     /**
      * List of metrics returned by the query.
@@ -140,8 +140,8 @@ export namespace AnalyticsListResponse {
 /**
  * Metrics on Workers KV requests.
  */
-export interface AnalyticsStoredResponse {
-  data: Array<AnalyticsStoredResponse.Data> | null;
+export interface WorkersKVSchemasResult {
+  data: Array<WorkersKVSchemasResult.Data> | null;
 
   /**
    * Number of seconds between current time and last processed event, i.e. how many
@@ -162,7 +162,7 @@ export interface AnalyticsStoredResponse {
   /**
    * For specifying result metrics.
    */
-  query: AnalyticsStoredResponse.Query;
+  query: WorkersKVSchemasResult.Query;
 
   /**
    * Total number of rows in the result.
@@ -175,7 +175,7 @@ export interface AnalyticsStoredResponse {
   totals: unknown;
 }
 
-export namespace AnalyticsStoredResponse {
+export namespace WorkersKVSchemasResult {
   export interface Data {
     /**
      * List of metrics returned by the query.
@@ -378,8 +378,8 @@ export namespace AnalyticsStoredParams {
 }
 
 export namespace Analytics {
-  export import AnalyticsListResponse = AnalyticsAPI.AnalyticsListResponse;
-  export import AnalyticsStoredResponse = AnalyticsAPI.AnalyticsStoredResponse;
+  export import WorkersKVComponentsSchemasResult = AnalyticsAPI.WorkersKVComponentsSchemasResult;
+  export import WorkersKVSchemasResult = AnalyticsAPI.WorkersKVSchemasResult;
   export import AnalyticsListParams = AnalyticsAPI.AnalyticsListParams;
   export import AnalyticsStoredParams = AnalyticsAPI.AnalyticsStoredParams;
 }

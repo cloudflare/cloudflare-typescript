@@ -11,6 +11,7 @@ export class Billing extends APIResource {
 
 export namespace Billing {
   export import History = HistoryAPI.History;
+  export import BillSubsAPIBillingHistory = HistoryAPI.BillSubsAPIBillingHistory;
   export import HistoryGetResponse = HistoryAPI.HistoryGetResponse;
   export import HistoryGetParams = HistoryAPI.HistoryGetParams;
   export import Profiles = ProfilesAPI.Profiles;

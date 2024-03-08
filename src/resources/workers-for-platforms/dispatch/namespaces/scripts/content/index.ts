@@ -2,7 +2,7 @@
 
 export { BindingGetResponse, BindingGetParams, Bindings } from './bindings';
 export { Content } from './content';
-export { ScriptUpdateResponse, ScriptUpdateParams, ScriptGetParams, Scripts } from './scripts';
+export { ScriptUpdateParams, ScriptGetParams, Scripts } from './scripts';
 export {
   SettingEditResponse,
   SettingGetResponse,

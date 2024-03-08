@@ -26,68 +26,67 @@ export class Users extends APIResource {
   }
 }
 
-export type UserListResponse = Array<UserListResponse.UserListResponseItem>;
+export interface AccessUsers {
+  /**
+   * UUID
+   */
+  id?: string;
 
-export namespace UserListResponse {
-  export interface UserListResponseItem {
-    /**
-     * UUID
-     */
-    id?: string;
+  /**
+   * True if the user has authenticated with Cloudflare Access.
+   */
+  access_seat?: boolean;
 
-    /**
-     * True if the user has authenticated with Cloudflare Access.
-     */
-    access_seat?: boolean;
+  /**
+   * The number of active devices registered to the user.
+   */
+  active_device_count?: number;
 
-    /**
-     * The number of active devices registered to the user.
-     */
-    active_device_count?: number;
+  created_at?: string;
 
-    created_at?: string;
+  /**
+   * The email of the user.
+   */
+  email?: string;
 
-    /**
-     * The email of the user.
-     */
-    email?: string;
+  /**
+   * True if the user has logged into the WARP client.
+   */
+  gateway_seat?: boolean;
 
-    /**
-     * True if the user has logged into the WARP client.
-     */
-    gateway_seat?: boolean;
+  /**
+   * The time at which the user last successfully logged in.
+   */
+  last_successful_login?: string;
 
-    /**
-     * The time at which the user last successfully logged in.
-     */
-    last_successful_login?: string;
+  /**
+   * The name of the user.
+   */
+  name?: string;
 
-    /**
-     * The name of the user.
-     */
-    name?: string;
+  /**
+   * The unique API identifier for the Zero Trust seat.
+   */
+  seat_uid?: unknown;
 
-    /**
-     * The unique API identifier for the Zero Trust seat.
-     */
-    seat_uid?: unknown;
+  /**
+   * The unique API identifier for the user.
+   */
+  uid?: unknown;
 
-    /**
-     * The unique API identifier for the user.
-     */
-    uid?: unknown;
-
-    updated_at?: string;
-  }
+  updated_at?: string;
 }
 
+export type UserListResponse = Array<AccessUsers>;
+
 export namespace Users {
+  export import AccessUsers = UsersAPI.AccessUsers;
   export import UserListResponse = UsersAPI.UserListResponse;
   export import ActiveSessions = ActiveSessionsAPI.ActiveSessions;
   export import ActiveSessionListResponse = ActiveSessionsAPI.ActiveSessionListResponse;
   export import ActiveSessionGetResponse = ActiveSessionsAPI.ActiveSessionGetResponse;
   export import LastSeenIdentity = LastSeenIdentityAPI.LastSeenIdentity;
-  export import LastSeenIdentityGetResponse = LastSeenIdentityAPI.LastSeenIdentityGetResponse;
+  export import AccessIdentity = LastSeenIdentityAPI.AccessIdentity;
   export import FailedLogins = FailedLoginsAPI.FailedLogins;
   export import FailedLoginListResponse = FailedLoginsAPI.FailedLoginListResponse;
 }

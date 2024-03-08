@@ -20,16 +20,13 @@ export class Namespaces extends APIResource {
    * already owns a namespace with this title. A namespace must be explicitly deleted
    * to be replaced.
    */
-  create(
-    params: NamespaceCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<NamespaceCreateResponse> {
+  create(params: NamespaceCreateParams, options?: Core.RequestOptions): Core.APIPromise<WorkersKVNamespace> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/storage/kv/namespaces`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: NamespaceCreateResponse }>
+      }) as Core.APIPromise<{ result: WorkersKVNamespace }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -56,11 +53,11 @@ export class Namespaces extends APIResource {
   list(
     params: NamespaceListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<NamespaceListResponsesV4PagePaginationArray, NamespaceListResponse> {
+  ): Core.PagePromise<WorkersKVNamespacesV4PagePaginationArray, WorkersKVNamespace> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/storage/kv/namespaces`,
-      NamespaceListResponsesV4PagePaginationArray,
+      WorkersKVNamespacesV4PagePaginationArray,
       { query, ...options },
     );
   }
@@ -83,9 +80,9 @@ export class Namespaces extends APIResource {
   }
 }
 
-export class NamespaceListResponsesV4PagePaginationArray extends V4PagePaginationArray<NamespaceListResponse> {}
+export class WorkersKVNamespacesV4PagePaginationArray extends V4PagePaginationArray<WorkersKVNamespace> {}
 
-export interface NamespaceCreateResponse {
+export interface WorkersKVNamespace {
   /**
    * Namespace identifier tag.
    */
@@ -104,24 +101,6 @@ export interface NamespaceCreateResponse {
 }
 
 export type NamespaceUpdateResponse = unknown | string;
-
-export interface NamespaceListResponse {
-  /**
-   * Namespace identifier tag.
-   */
-  id: string;
-
-  /**
-   * A human-readable string name for a Namespace.
-   */
-  title: string;
-
-  /**
-   * True if keys written on the URL will be URL-decoded before storing. For example,
-   * if set to "true", a key written on the URL as "%3F" will be stored as "?".
-   */
-  supports_url_encoding?: boolean;
-}
 
 export type NamespaceDeleteResponse = unknown | string;
 
@@ -174,11 +153,10 @@ export interface NamespaceDeleteParams {
 }
 
 export namespace Namespaces {
-  export import NamespaceCreateResponse = NamespacesAPI.NamespaceCreateResponse;
+  export import WorkersKVNamespace = NamespacesAPI.WorkersKVNamespace;
   export import NamespaceUpdateResponse = NamespacesAPI.NamespaceUpdateResponse;
-  export import NamespaceListResponse = NamespacesAPI.NamespaceListResponse;
   export import NamespaceDeleteResponse = NamespacesAPI.NamespaceDeleteResponse;
-  export import NamespaceListResponsesV4PagePaginationArray = NamespacesAPI.NamespaceListResponsesV4PagePaginationArray;
+  export import WorkersKVNamespacesV4PagePaginationArray = NamespacesAPI.WorkersKVNamespacesV4PagePaginationArray;
   export import NamespaceCreateParams = NamespacesAPI.NamespaceCreateParams;
   export import NamespaceUpdateParams = NamespacesAPI.NamespaceUpdateParams;
   export import NamespaceListParams = NamespacesAPI.NamespaceListParams;
@@ -189,6 +167,7 @@ export namespace Namespaces {
   export import BulkUpdateParams = BulkAPI.BulkUpdateParams;
   export import BulkDeleteParams = BulkAPI.BulkDeleteParams;
   export import Keys = KeysAPI.Keys;
+  export import WorkersKVKey = KeysAPI.WorkersKVKey;
   export import KeyListResponse = KeysAPI.KeyListResponse;
   export import KeyListParams = KeysAPI.KeyListParams;
   export import Metadata = MetadataAPI.Metadata;

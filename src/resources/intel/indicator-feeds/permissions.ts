@@ -11,13 +11,13 @@ export class Permissions extends APIResource {
   create(
     params: PermissionCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PermissionCreateResponse> {
+  ): Core.APIPromise<IntelPermissionsUpdate> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/intel/indicator-feeds/permissions/add`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: PermissionCreateResponse }>
+      }) as Core.APIPromise<{ result: IntelPermissionsUpdate }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -40,51 +40,42 @@ export class Permissions extends APIResource {
   delete(
     params: PermissionDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PermissionDeleteResponse> {
+  ): Core.APIPromise<IntelPermissionsUpdate> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/intel/indicator-feeds/permissions/remove`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: PermissionDeleteResponse }>
+      }) as Core.APIPromise<{ result: IntelPermissionsUpdate }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface PermissionCreateResponse {
+export interface IntelPermissionListItem {
+  /**
+   * The unique identifier for the indicator feed
+   */
+  id?: number;
+
+  /**
+   * The description of the example test
+   */
+  description?: string;
+
+  /**
+   * The name of the indicator feed
+   */
+  name?: string;
+}
+
+export interface IntelPermissionsUpdate {
   /**
    * Whether the update succeeded or not
    */
   success?: boolean;
 }
 
-export type PermissionListResponse = Array<PermissionListResponse.PermissionListResponseItem>;
-
-export namespace PermissionListResponse {
-  export interface PermissionListResponseItem {
-    /**
-     * The unique identifier for the indicator feed
-     */
-    id?: number;
-
-    /**
-     * The description of the example test
-     */
-    description?: string;
-
-    /**
-     * The name of the indicator feed
-     */
-    name?: string;
-  }
-}
-
-export interface PermissionDeleteResponse {
-  /**
-   * Whether the update succeeded or not
-   */
-  success?: boolean;
-}
+export type PermissionListResponse = Array<IntelPermissionListItem>;
 
 export interface PermissionCreateParams {
   /**
@@ -128,9 +119,9 @@ export interface PermissionDeleteParams {
 }
 
 export namespace Permissions {
-  export import PermissionCreateResponse = PermissionsAPI.PermissionCreateResponse;
+  export import IntelPermissionListItem = PermissionsAPI.IntelPermissionListItem;
+  export import IntelPermissionsUpdate = PermissionsAPI.IntelPermissionsUpdate;
   export import PermissionListResponse = PermissionsAPI.PermissionListResponse;
-  export import PermissionDeleteResponse = PermissionsAPI.PermissionDeleteResponse;
   export import PermissionCreateParams = PermissionsAPI.PermissionCreateParams;
   export import PermissionListParams = PermissionsAPI.PermissionListParams;
   export import PermissionDeleteParams = PermissionsAPI.PermissionDeleteParams;

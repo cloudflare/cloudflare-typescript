@@ -8,17 +8,17 @@ export class Clips extends APIResource {
   /**
    * Clips a video based on the specified start and end times provided in seconds.
    */
-  create(params: ClipCreateParams, options?: Core.RequestOptions): Core.APIPromise<ClipCreateResponse> {
+  create(params: ClipCreateParams, options?: Core.RequestOptions): Core.APIPromise<StreamClipping> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/stream/clip`, { body, ...options }) as Core.APIPromise<{
-        result: ClipCreateResponse;
+        result: StreamClipping;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface ClipCreateResponse {
+export interface StreamClipping {
   /**
    * Lists the origins allowed to display the video. Enter allowed origin domains in
    * an array and use `*` for wildcard subdomains. Empty arrays allow the video to be
@@ -65,7 +65,7 @@ export interface ClipCreateResponse {
    */
   modified?: string;
 
-  playback?: ClipCreateResponse.Playback;
+  playback?: StreamClipping.Playback;
 
   /**
    * The video's preview page URI. This field is omitted until encoding is complete.
@@ -96,10 +96,10 @@ export interface ClipCreateResponse {
    */
   thumbnailTimestampPct?: number;
 
-  watermark?: ClipCreateResponse.Watermark;
+  watermark?: StreamClipping.Watermark;
 }
 
-export namespace ClipCreateResponse {
+export namespace StreamClipping {
   export interface Playback {
     /**
      * DASH Media Presentation Description for the video.
@@ -193,6 +193,6 @@ export namespace ClipCreateParams {
 }
 
 export namespace Clips {
-  export import ClipCreateResponse = ClipsAPI.ClipCreateResponse;
+  export import StreamClipping = ClipsAPI.StreamClipping;
   export import ClipCreateParams = ClipsAPI.ClipCreateParams;
 }

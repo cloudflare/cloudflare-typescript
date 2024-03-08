@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless.
 
+export { Storage } from './storage';
 export {
-  AnalyticsListResponse,
-  AnalyticsStoredResponse,
+  WorkersKVComponentsSchemasResult,
+  WorkersKVSchemasResult,
   AnalyticsListParams,
   AnalyticsStoredParams,
   Analytics,
 } from './analytics';
-export { Storage } from './storage';

@@ -55,74 +55,30 @@ export class Excludes extends APIResource {
   }
 }
 
-export type ExcludeUpdateResponse = Array<ExcludeUpdateResponse.ExcludeUpdateResponseItem>;
+export interface TeamsDevicesSplitTunnel {
+  /**
+   * The address in CIDR format to exclude from the tunnel. If `address` is present,
+   * `host` must not be present.
+   */
+  address: string;
 
-export namespace ExcludeUpdateResponse {
-  export interface ExcludeUpdateResponseItem {
-    /**
-     * The address in CIDR format to exclude from the tunnel. If `address` is present,
-     * `host` must not be present.
-     */
-    address: string;
+  /**
+   * A description of the Split Tunnel item, displayed in the client UI.
+   */
+  description: string;
 
-    /**
-     * A description of the Split Tunnel item, displayed in the client UI.
-     */
-    description: string;
-
-    /**
-     * The domain name to exclude from the tunnel. If `host` is present, `address` must
-     * not be present.
-     */
-    host?: string;
-  }
+  /**
+   * The domain name to exclude from the tunnel. If `host` is present, `address` must
+   * not be present.
+   */
+  host?: string;
 }
 
-export type ExcludeListResponse = Array<ExcludeListResponse.ExcludeListResponseItem>;
+export type ExcludeUpdateResponse = Array<TeamsDevicesSplitTunnel>;
 
-export namespace ExcludeListResponse {
-  export interface ExcludeListResponseItem {
-    /**
-     * The address in CIDR format to exclude from the tunnel. If `address` is present,
-     * `host` must not be present.
-     */
-    address: string;
+export type ExcludeListResponse = Array<TeamsDevicesSplitTunnel>;
 
-    /**
-     * A description of the Split Tunnel item, displayed in the client UI.
-     */
-    description: string;
-
-    /**
-     * The domain name to exclude from the tunnel. If `host` is present, `address` must
-     * not be present.
-     */
-    host?: string;
-  }
-}
-
-export type ExcludeGetResponse = Array<ExcludeGetResponse.ExcludeGetResponseItem>;
-
-export namespace ExcludeGetResponse {
-  export interface ExcludeGetResponseItem {
-    /**
-     * The address in CIDR format to exclude from the tunnel. If `address` is present,
-     * `host` must not be present.
-     */
-    address: string;
-
-    /**
-     * A description of the Split Tunnel item, displayed in the client UI.
-     */
-    description: string;
-
-    /**
-     * The domain name to exclude from the tunnel. If `host` is present, `address` must
-     * not be present.
-     */
-    host?: string;
-  }
-}
+export type ExcludeGetResponse = Array<TeamsDevicesSplitTunnel>;
 
 export interface ExcludeUpdateParams {
   /**
@@ -133,28 +89,7 @@ export interface ExcludeUpdateParams {
   /**
    * Body param:
    */
-  body: Array<ExcludeUpdateParams.Body>;
-}
-
-export namespace ExcludeUpdateParams {
-  export interface Body {
-    /**
-     * The address in CIDR format to exclude from the tunnel. If `address` is present,
-     * `host` must not be present.
-     */
-    address: string;
-
-    /**
-     * A description of the Split Tunnel item, displayed in the client UI.
-     */
-    description: string;
-
-    /**
-     * The domain name to exclude from the tunnel. If `host` is present, `address` must
-     * not be present.
-     */
-    host?: string;
-  }
+  body: Array<TeamsDevicesSplitTunnel>;
 }
 
 export interface ExcludeListParams {
@@ -166,6 +101,7 @@ export interface ExcludeGetParams {
 }
 
 export namespace Excludes {
+  export import TeamsDevicesSplitTunnel = ExcludesAPI.TeamsDevicesSplitTunnel;
   export import ExcludeUpdateResponse = ExcludesAPI.ExcludeUpdateResponse;
   export import ExcludeListResponse = ExcludesAPI.ExcludeListResponse;
   export import ExcludeGetResponse = ExcludesAPI.ExcludeGetResponse;

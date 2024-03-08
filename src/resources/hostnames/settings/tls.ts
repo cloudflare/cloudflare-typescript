@@ -13,13 +13,13 @@ export class TLS extends APIResource {
     hostname: string,
     params: TLSUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TLSUpdateResponse> {
+  ): Core.APIPromise<TLSCertificatesAndHostnamesSettingObject> {
     const { zone_id, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/hostnames/settings/${settingId}/${hostname}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: TLSUpdateResponse }>
+      }) as Core.APIPromise<{ result: TLSCertificatesAndHostnamesSettingObject }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -31,13 +31,13 @@ export class TLS extends APIResource {
     hostname: string,
     params: TLSDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TLSDeleteResponse> {
+  ): Core.APIPromise<TLSCertificatesAndHostnamesSettingObjectDelete> {
     const { zone_id } = params;
     return (
       this._client.delete(
         `/zones/${zone_id}/hostnames/settings/${settingId}/${hostname}`,
         options,
-      ) as Core.APIPromise<{ result: TLSDeleteResponse }>
+      ) as Core.APIPromise<{ result: TLSCertificatesAndHostnamesSettingObjectDelete }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -58,7 +58,7 @@ export class TLS extends APIResource {
   }
 }
 
-export interface TLSUpdateResponse {
+export interface TLSCertificatesAndHostnamesSettingObject {
   /**
    * This is the time the tls setting was originally created for this hostname.
    */
@@ -85,7 +85,7 @@ export interface TLSUpdateResponse {
   value?: number | string | Array<string>;
 }
 
-export interface TLSDeleteResponse {
+export interface TLSCertificatesAndHostnamesSettingObjectDelete {
   /**
    * This is the time the tls setting was originally created for this hostname.
    */
@@ -164,8 +164,8 @@ export interface TLSGetParams {
 }
 
 export namespace TLS {
-  export import TLSUpdateResponse = TLSAPI.TLSUpdateResponse;
-  export import TLSDeleteResponse = TLSAPI.TLSDeleteResponse;
+  export import TLSCertificatesAndHostnamesSettingObject = TLSAPI.TLSCertificatesAndHostnamesSettingObject;
+  export import TLSCertificatesAndHostnamesSettingObjectDelete = TLSAPI.TLSCertificatesAndHostnamesSettingObjectDelete;
   export import TLSGetResponse = TLSAPI.TLSGetResponse;
   export import TLSUpdateParams = TLSAPI.TLSUpdateParams;
   export import TLSDeleteParams = TLSAPI.TLSDeleteParams;

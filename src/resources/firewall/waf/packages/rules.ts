@@ -16,11 +16,11 @@ export class Rules extends APIResource {
     packageId: string,
     params: RuleListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<RuleListResponsesV4PagePaginationArray, RuleListResponse> {
+  ): Core.PagePromise<WAFManagedRulesRulesV4PagePaginationArray, WAFManagedRulesRule> {
     const { zone_id, ...query } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/firewall/waf/packages/${packageId}/rules`,
-      RuleListResponsesV4PagePaginationArray,
+      WAFManagedRulesRulesV4PagePaginationArray,
       { query, ...options },
     );
   }
@@ -68,7 +68,7 @@ export class Rules extends APIResource {
   }
 }
 
-export class RuleListResponsesV4PagePaginationArray extends V4PagePaginationArray<RuleListResponse> {}
+export class WAFManagedRulesRulesV4PagePaginationArray extends V4PagePaginationArray<WAFManagedRulesRule> {}
 
 /**
  * When triggered, anomaly detection WAF rules contribute to an overall threat
@@ -76,12 +76,12 @@ export class RuleListResponsesV4PagePaginationArray extends V4PagePaginationArra
  * configure the total scoring threshold through the 'sensitivity' property of the
  * WAF package.
  */
-export type RuleListResponse =
-  | RuleListResponse.WAFManagedRulesAnomalyRule
-  | RuleListResponse.WAFManagedRulesTraditionalDenyRule
-  | RuleListResponse.WAFManagedRulesTraditionalAllowRule;
+export type WAFManagedRulesRule =
+  | WAFManagedRulesRule.WAFManagedRulesAnomalyRule
+  | WAFManagedRulesRule.WAFManagedRulesTraditionalDenyRule
+  | WAFManagedRulesRule.WAFManagedRulesTraditionalAllowRule;
 
-export namespace RuleListResponse {
+export namespace WAFManagedRulesRule {
   /**
    * When triggered, anomaly detection WAF rules contribute to an overall threat
    * score that will determine if a request is considered malicious. You can
@@ -523,10 +523,10 @@ export interface RuleGetParams {
 }
 
 export namespace Rules {
-  export import RuleListResponse = RulesAPI.RuleListResponse;
+  export import WAFManagedRulesRule = RulesAPI.WAFManagedRulesRule;
   export import RuleEditResponse = RulesAPI.RuleEditResponse;
   export import RuleGetResponse = RulesAPI.RuleGetResponse;
-  export import RuleListResponsesV4PagePaginationArray = RulesAPI.RuleListResponsesV4PagePaginationArray;
+  export import WAFManagedRulesRulesV4PagePaginationArray = RulesAPI.WAFManagedRulesRulesV4PagePaginationArray;
   export import RuleListParams = RulesAPI.RuleListParams;
   export import RuleEditParams = RulesAPI.RuleEditParams;
   export import RuleGetParams = RulesAPI.RuleGetParams;

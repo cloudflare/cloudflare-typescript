@@ -11,16 +11,8 @@ export class MagicNetworkMonitoring extends APIResource {
 
 export namespace MagicNetworkMonitoring {
   export import Configs = ConfigsAPI.Configs;
-  export import ConfigCreateResponse = ConfigsAPI.ConfigCreateResponse;
-  export import ConfigUpdateResponse = ConfigsAPI.ConfigUpdateResponse;
-  export import ConfigDeleteResponse = ConfigsAPI.ConfigDeleteResponse;
-  export import ConfigEditResponse = ConfigsAPI.ConfigEditResponse;
-  export import ConfigGetResponse = ConfigsAPI.ConfigGetResponse;
+  export import MagicVisibilityMNMConfig = ConfigsAPI.MagicVisibilityMNMConfig;
   export import Rules = RulesAPI.Rules;
-  export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
-  export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
+  export import MagicVisibilityMNMRule = RulesAPI.MagicVisibilityMNMRule;
   export import RuleListResponse = RulesAPI.RuleListResponse;
-  export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
-  export import RuleEditResponse = RulesAPI.RuleEditResponse;
-  export import RuleGetResponse = RulesAPI.RuleGetResponse;
 }

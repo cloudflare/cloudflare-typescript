@@ -166,29 +166,27 @@ export class CAs extends APIResource {
   }
 }
 
+export interface AccessCA {
+  /**
+   * The ID of the CA.
+   */
+  id?: string;
+
+  /**
+   * The Application Audience (AUD) tag. Identifies the application associated with
+   * the CA.
+   */
+  aud?: string;
+
+  /**
+   * The public key to add to your SSH server configuration.
+   */
+  public_key?: string;
+}
+
 export type CACreateResponse = unknown | string;
 
-export type CAListResponse = Array<CAListResponse.CAListResponseItem>;
-
-export namespace CAListResponse {
-  export interface CAListResponseItem {
-    /**
-     * The ID of the CA.
-     */
-    id?: string;
-
-    /**
-     * The Application Audience (AUD) tag. Identifies the application associated with
-     * the CA.
-     */
-    aud?: string;
-
-    /**
-     * The public key to add to your SSH server configuration.
-     */
-    public_key?: string;
-  }
-}
+export type CAListResponse = Array<AccessCA>;
 
 export interface CADeleteResponse {
   /**
@@ -248,6 +246,7 @@ export interface CAGetParams {
 }
 
 export namespace CAs {
+  export import AccessCA = CAsAPI.AccessCA;
   export import CACreateResponse = CAsAPI.CACreateResponse;
   export import CAListResponse = CAsAPI.CAListResponse;
   export import CADeleteResponse = CAsAPI.CADeleteResponse;

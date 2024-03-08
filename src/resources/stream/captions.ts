@@ -60,25 +60,23 @@ export class Captions extends APIResource {
   }
 }
 
+export interface StreamCaptions {
+  /**
+   * The language label displayed in the native language to users.
+   */
+  label?: string;
+
+  /**
+   * The language tag in BCP 47 format.
+   */
+  language?: string;
+}
+
 export type CaptionUpdateResponse = unknown | string;
 
 export type CaptionDeleteResponse = unknown | Array<unknown> | string;
 
-export type CaptionGetResponse = Array<CaptionGetResponse.CaptionGetResponseItem>;
-
-export namespace CaptionGetResponse {
-  export interface CaptionGetResponseItem {
-    /**
-     * The language label displayed in the native language to users.
-     */
-    label?: string;
-
-    /**
-     * The language tag in BCP 47 format.
-     */
-    language?: string;
-  }
-}
+export type CaptionGetResponse = Array<StreamCaptions>;
 
 export interface CaptionUpdateParams {
   /**
@@ -107,6 +105,7 @@ export interface CaptionGetParams {
 }
 
 export namespace Captions {
+  export import StreamCaptions = CaptionsAPI.StreamCaptions;
   export import CaptionUpdateResponse = CaptionsAPI.CaptionUpdateResponse;
   export import CaptionDeleteResponse = CaptionsAPI.CaptionDeleteResponse;
   export import CaptionGetResponse = CaptionsAPI.CaptionGetResponse;

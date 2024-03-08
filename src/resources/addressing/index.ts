@@ -1,10 +1,11 @@
 // File generated from our OpenAPI spec by Stainless.
 
+export { Addressing } from './addressing';
 export {
+  AddressingAddressMaps,
   AddressMapCreateResponse,
   AddressMapListResponse,
   AddressMapDeleteResponse,
-  AddressMapEditResponse,
   AddressMapGetResponse,
   AddressMapCreateParams,
   AddressMapListParams,
@@ -13,14 +14,10 @@ export {
   AddressMapGetParams,
   AddressMaps,
 } from './address-maps/index';
-export { Addressing } from './addressing';
-export { LOADocumentCreateResponse, LOADocumentCreateParams, LOADocuments } from './loa-documents/index';
 export {
-  PrefixCreateResponse,
+  AddressingIpamPrefixes,
   PrefixListResponse,
   PrefixDeleteResponse,
-  PrefixEditResponse,
-  PrefixGetResponse,
   PrefixCreateParams,
   PrefixListParams,
   PrefixDeleteParams,
@@ -28,4 +25,5 @@ export {
   PrefixGetParams,
   Prefixes,
 } from './prefixes/index';
+export { LOADocumentCreateResponse, LOADocumentCreateParams, LOADocuments } from './loa-documents/index';
 export { ServiceListResponse, ServiceListParams, Services } from './services';

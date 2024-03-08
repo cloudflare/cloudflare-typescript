@@ -31,13 +31,13 @@ export class AudioTracks extends APIResource {
     identifier: string,
     params: AudioTrackCopyParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AudioTrackCopyResponse> {
+  ): Core.APIPromise<StreamAdditionalAudio> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/stream/${identifier}/audio/copy`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: AudioTrackCopyResponse }>
+      }) as Core.APIPromise<{ result: StreamAdditionalAudio }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -51,13 +51,13 @@ export class AudioTracks extends APIResource {
     audioIdentifier: string,
     params: AudioTrackEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AudioTrackEditResponse> {
+  ): Core.APIPromise<StreamAdditionalAudio> {
     const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/stream/${identifier}/audio/${audioIdentifier}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: AudioTrackEditResponse }>
+      }) as Core.APIPromise<{ result: StreamAdditionalAudio }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -79,80 +79,32 @@ export class AudioTracks extends APIResource {
   }
 }
 
+export interface StreamAdditionalAudio {
+  /**
+   * Denotes whether the audio track will be played by default in a player.
+   */
+  default?: boolean;
+
+  /**
+   * A string to uniquely identify the track amongst other audio track labels for the
+   * specified video.
+   */
+  label?: string;
+
+  /**
+   * Specifies the processing status of the video.
+   */
+  status?: 'queued' | 'ready' | 'error';
+
+  /**
+   * A Cloudflare-generated unique identifier for a media item.
+   */
+  uid?: string;
+}
+
 export type AudioTrackDeleteResponse = unknown | string;
 
-export interface AudioTrackCopyResponse {
-  /**
-   * Denotes whether the audio track will be played by default in a player.
-   */
-  default?: boolean;
-
-  /**
-   * A string to uniquely identify the track amongst other audio track labels for the
-   * specified video.
-   */
-  label?: string;
-
-  /**
-   * Specifies the processing status of the video.
-   */
-  status?: 'queued' | 'ready' | 'error';
-
-  /**
-   * A Cloudflare-generated unique identifier for a media item.
-   */
-  uid?: string;
-}
-
-export interface AudioTrackEditResponse {
-  /**
-   * Denotes whether the audio track will be played by default in a player.
-   */
-  default?: boolean;
-
-  /**
-   * A string to uniquely identify the track amongst other audio track labels for the
-   * specified video.
-   */
-  label?: string;
-
-  /**
-   * Specifies the processing status of the video.
-   */
-  status?: 'queued' | 'ready' | 'error';
-
-  /**
-   * A Cloudflare-generated unique identifier for a media item.
-   */
-  uid?: string;
-}
-
-export type AudioTrackGetResponse = Array<AudioTrackGetResponse.AudioTrackGetResponseItem>;
-
-export namespace AudioTrackGetResponse {
-  export interface AudioTrackGetResponseItem {
-    /**
-     * Denotes whether the audio track will be played by default in a player.
-     */
-    default?: boolean;
-
-    /**
-     * A string to uniquely identify the track amongst other audio track labels for the
-     * specified video.
-     */
-    label?: string;
-
-    /**
-     * Specifies the processing status of the video.
-     */
-    status?: 'queued' | 'ready' | 'error';
-
-    /**
-     * A Cloudflare-generated unique identifier for a media item.
-     */
-    uid?: string;
-  }
-}
+export type AudioTrackGetResponse = Array<StreamAdditionalAudio>;
 
 export interface AudioTrackDeleteParams {
   /**
@@ -209,9 +161,8 @@ export interface AudioTrackGetParams {
 }
 
 export namespace AudioTracks {
+  export import StreamAdditionalAudio = AudioTracksAPI.StreamAdditionalAudio;
   export import AudioTrackDeleteResponse = AudioTracksAPI.AudioTrackDeleteResponse;
-  export import AudioTrackCopyResponse = AudioTracksAPI.AudioTrackCopyResponse;
-  export import AudioTrackEditResponse = AudioTracksAPI.AudioTrackEditResponse;
   export import AudioTrackGetResponse = AudioTracksAPI.AudioTrackGetResponse;
   export import AudioTrackDeleteParams = AudioTracksAPI.AudioTrackDeleteParams;
   export import AudioTrackCopyParams = AudioTracksAPI.AudioTrackCopyParams;

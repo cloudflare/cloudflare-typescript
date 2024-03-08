@@ -11,11 +11,11 @@ export class Settings extends APIResource {
   update(
     params: SettingUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SettingUpdateResponse | null> {
+  ): Core.APIPromise<TeamsDevicesZeroTrustAccountDeviceSettings | null> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/devices/settings`, { body, ...options }) as Core.APIPromise<{
-        result: SettingUpdateResponse | null;
+        result: TeamsDevicesZeroTrustAccountDeviceSettings | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -26,39 +26,17 @@ export class Settings extends APIResource {
   list(
     params: SettingListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SettingListResponse | null> {
+  ): Core.APIPromise<TeamsDevicesZeroTrustAccountDeviceSettings | null> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/devices/settings`, options) as Core.APIPromise<{
-        result: SettingListResponse | null;
+        result: TeamsDevicesZeroTrustAccountDeviceSettings | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface SettingUpdateResponse {
-  /**
-   * Enable gateway proxy filtering on TCP.
-   */
-  gateway_proxy_enabled?: boolean;
-
-  /**
-   * Enable gateway proxy filtering on UDP.
-   */
-  gateway_udp_proxy_enabled?: boolean;
-
-  /**
-   * Enable installation of cloudflare managed root certificate.
-   */
-  root_certificate_installation_enabled?: boolean;
-
-  /**
-   * Enable using CGNAT virtual IPv4.
-   */
-  use_zt_virtual_ip?: boolean;
-}
-
-export interface SettingListResponse {
+export interface TeamsDevicesZeroTrustAccountDeviceSettings {
   /**
    * Enable gateway proxy filtering on TCP.
    */
@@ -112,8 +90,7 @@ export interface SettingListParams {
 }
 
 export namespace Settings {
-  export import SettingUpdateResponse = SettingsAPI.SettingUpdateResponse;
-  export import SettingListResponse = SettingsAPI.SettingListResponse;
+  export import TeamsDevicesZeroTrustAccountDeviceSettings = SettingsAPI.TeamsDevicesZeroTrustAccountDeviceSettings;
   export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;
   export import SettingListParams = SettingsAPI.SettingListParams;
 }

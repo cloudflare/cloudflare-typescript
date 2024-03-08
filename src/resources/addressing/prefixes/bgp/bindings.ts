@@ -15,13 +15,13 @@ export class Bindings extends APIResource {
     prefixId: string,
     params: BindingCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<BindingCreateResponse> {
+  ): Core.APIPromise<AddressingServiceBinding> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/addressing/prefixes/${prefixId}/bindings`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: BindingCreateResponse }>
+      }) as Core.APIPromise<{ result: AddressingServiceBinding }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -73,18 +73,18 @@ export class Bindings extends APIResource {
     bindingId: string,
     params: BindingGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<BindingGetResponse> {
+  ): Core.APIPromise<AddressingServiceBinding> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/addressing/prefixes/${prefixId}/bindings/${bindingId}`,
         options,
-      ) as Core.APIPromise<{ result: BindingGetResponse }>
+      ) as Core.APIPromise<{ result: AddressingServiceBinding }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface BindingCreateResponse {
+export interface AddressingServiceBinding {
   /**
    * Identifier
    */
@@ -98,7 +98,7 @@ export interface BindingCreateResponse {
   /**
    * Status of a Service Binding's deployment to the Cloudflare network
    */
-  provisioning?: BindingCreateResponse.Provisioning;
+  provisioning?: AddressingServiceBinding.Provisioning;
 
   /**
    * Identifier
@@ -111,7 +111,7 @@ export interface BindingCreateResponse {
   service_name?: string;
 }
 
-export namespace BindingCreateResponse {
+export namespace AddressingServiceBinding {
   /**
    * Status of a Service Binding's deployment to the Cloudflare network
    */
@@ -124,91 +124,9 @@ export namespace BindingCreateResponse {
   }
 }
 
-export type BindingListResponse = Array<BindingListResponse.BindingListResponseItem>;
-
-export namespace BindingListResponse {
-  export interface BindingListResponseItem {
-    /**
-     * Identifier
-     */
-    id?: string;
-
-    /**
-     * IP Prefix in Classless Inter-Domain Routing format.
-     */
-    cidr?: string;
-
-    /**
-     * Status of a Service Binding's deployment to the Cloudflare network
-     */
-    provisioning?: BindingListResponseItem.Provisioning;
-
-    /**
-     * Identifier
-     */
-    service_id?: string;
-
-    /**
-     * Name of a service running on the Cloudflare network
-     */
-    service_name?: string;
-  }
-
-  export namespace BindingListResponseItem {
-    /**
-     * Status of a Service Binding's deployment to the Cloudflare network
-     */
-    export interface Provisioning {
-      /**
-       * When a binding has been deployed to a majority of Cloudflare datacenters, the
-       * binding will become active and can be used with its associated service.
-       */
-      state?: 'provisioning' | 'active';
-    }
-  }
-}
+export type BindingListResponse = Array<AddressingServiceBinding>;
 
 export type BindingDeleteResponse = unknown | Array<unknown> | string;
-
-export interface BindingGetResponse {
-  /**
-   * Identifier
-   */
-  id?: string;
-
-  /**
-   * IP Prefix in Classless Inter-Domain Routing format.
-   */
-  cidr?: string;
-
-  /**
-   * Status of a Service Binding's deployment to the Cloudflare network
-   */
-  provisioning?: BindingGetResponse.Provisioning;
-
-  /**
-   * Identifier
-   */
-  service_id?: string;
-
-  /**
-   * Name of a service running on the Cloudflare network
-   */
-  service_name?: string;
-}
-
-export namespace BindingGetResponse {
-  /**
-   * Status of a Service Binding's deployment to the Cloudflare network
-   */
-  export interface Provisioning {
-    /**
-     * When a binding has been deployed to a majority of Cloudflare datacenters, the
-     * binding will become active and can be used with its associated service.
-     */
-    state?: 'provisioning' | 'active';
-  }
-}
 
 export interface BindingCreateParams {
   /**
@@ -249,10 +167,9 @@ export interface BindingGetParams {
 }
 
 export namespace Bindings {
-  export import BindingCreateResponse = BindingsAPI.BindingCreateResponse;
+  export import AddressingServiceBinding = BindingsAPI.AddressingServiceBinding;
   export import BindingListResponse = BindingsAPI.BindingListResponse;
   export import BindingDeleteResponse = BindingsAPI.BindingDeleteResponse;
-  export import BindingGetResponse = BindingsAPI.BindingGetResponse;
   export import BindingCreateParams = BindingsAPI.BindingCreateParams;
   export import BindingListParams = BindingsAPI.BindingListParams;
   export import BindingDeleteParams = BindingsAPI.BindingDeleteParams;

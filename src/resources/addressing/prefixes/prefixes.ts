@@ -13,13 +13,13 @@ export class Prefixes extends APIResource {
   /**
    * Add a new prefix under the account.
    */
-  create(params: PrefixCreateParams, options?: Core.RequestOptions): Core.APIPromise<PrefixCreateResponse> {
+  create(params: PrefixCreateParams, options?: Core.RequestOptions): Core.APIPromise<AddressingIpamPrefixes> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/addressing/prefixes`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: PrefixCreateResponse }>
+      }) as Core.APIPromise<{ result: AddressingIpamPrefixes }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -59,13 +59,13 @@ export class Prefixes extends APIResource {
     prefixId: string,
     params: PrefixEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PrefixEditResponse> {
+  ): Core.APIPromise<AddressingIpamPrefixes> {
     const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/addressing/prefixes/${prefixId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: PrefixEditResponse }>
+      }) as Core.APIPromise<{ result: AddressingIpamPrefixes }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -76,18 +76,18 @@ export class Prefixes extends APIResource {
     prefixId: string,
     params: PrefixGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PrefixGetResponse> {
+  ): Core.APIPromise<AddressingIpamPrefixes> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/addressing/prefixes/${prefixId}`,
         options,
-      ) as Core.APIPromise<{ result: PrefixGetResponse }>
+      ) as Core.APIPromise<{ result: AddressingIpamPrefixes }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface PrefixCreateResponse {
+export interface AddressingIpamPrefixes {
   /**
    * Identifier
    */
@@ -152,206 +152,9 @@ export interface PrefixCreateResponse {
   on_demand_locked?: boolean;
 }
 
-export type PrefixListResponse = Array<PrefixListResponse.PrefixListResponseItem>;
-
-export namespace PrefixListResponse {
-  export interface PrefixListResponseItem {
-    /**
-     * Identifier
-     */
-    id?: string;
-
-    /**
-     * Identifier
-     */
-    account_id?: string;
-
-    /**
-     * Prefix advertisement status to the Internet. This field is only not 'null' if on
-     * demand is enabled.
-     */
-    advertised?: boolean | null;
-
-    /**
-     * Last time the advertisement status was changed. This field is only not 'null' if
-     * on demand is enabled.
-     */
-    advertised_modified_at?: string | null;
-
-    /**
-     * Approval state of the prefix (P = pending, V = active).
-     */
-    approved?: string;
-
-    /**
-     * Autonomous System Number (ASN) the prefix will be advertised under.
-     */
-    asn?: number | null;
-
-    /**
-     * IP Prefix in Classless Inter-Domain Routing format.
-     */
-    cidr?: string;
-
-    created_at?: string;
-
-    /**
-     * Description of the prefix.
-     */
-    description?: string;
-
-    /**
-     * Identifier for the uploaded LOA document.
-     */
-    loa_document_id?: string | null;
-
-    modified_at?: string;
-
-    /**
-     * Whether advertisement of the prefix to the Internet may be dynamically enabled
-     * or disabled.
-     */
-    on_demand_enabled?: boolean;
-
-    /**
-     * Whether advertisement status of the prefix is locked, meaning it cannot be
-     * changed.
-     */
-    on_demand_locked?: boolean;
-  }
-}
+export type PrefixListResponse = Array<AddressingIpamPrefixes>;
 
 export type PrefixDeleteResponse = unknown | Array<unknown> | string;
-
-export interface PrefixEditResponse {
-  /**
-   * Identifier
-   */
-  id?: string;
-
-  /**
-   * Identifier
-   */
-  account_id?: string;
-
-  /**
-   * Prefix advertisement status to the Internet. This field is only not 'null' if on
-   * demand is enabled.
-   */
-  advertised?: boolean | null;
-
-  /**
-   * Last time the advertisement status was changed. This field is only not 'null' if
-   * on demand is enabled.
-   */
-  advertised_modified_at?: string | null;
-
-  /**
-   * Approval state of the prefix (P = pending, V = active).
-   */
-  approved?: string;
-
-  /**
-   * Autonomous System Number (ASN) the prefix will be advertised under.
-   */
-  asn?: number | null;
-
-  /**
-   * IP Prefix in Classless Inter-Domain Routing format.
-   */
-  cidr?: string;
-
-  created_at?: string;
-
-  /**
-   * Description of the prefix.
-   */
-  description?: string;
-
-  /**
-   * Identifier for the uploaded LOA document.
-   */
-  loa_document_id?: string | null;
-
-  modified_at?: string;
-
-  /**
-   * Whether advertisement of the prefix to the Internet may be dynamically enabled
-   * or disabled.
-   */
-  on_demand_enabled?: boolean;
-
-  /**
-   * Whether advertisement status of the prefix is locked, meaning it cannot be
-   * changed.
-   */
-  on_demand_locked?: boolean;
-}
-
-export interface PrefixGetResponse {
-  /**
-   * Identifier
-   */
-  id?: string;
-
-  /**
-   * Identifier
-   */
-  account_id?: string;
-
-  /**
-   * Prefix advertisement status to the Internet. This field is only not 'null' if on
-   * demand is enabled.
-   */
-  advertised?: boolean | null;
-
-  /**
-   * Last time the advertisement status was changed. This field is only not 'null' if
-   * on demand is enabled.
-   */
-  advertised_modified_at?: string | null;
-
-  /**
-   * Approval state of the prefix (P = pending, V = active).
-   */
-  approved?: string;
-
-  /**
-   * Autonomous System Number (ASN) the prefix will be advertised under.
-   */
-  asn?: number | null;
-
-  /**
-   * IP Prefix in Classless Inter-Domain Routing format.
-   */
-  cidr?: string;
-
-  created_at?: string;
-
-  /**
-   * Description of the prefix.
-   */
-  description?: string;
-
-  /**
-   * Identifier for the uploaded LOA document.
-   */
-  loa_document_id?: string | null;
-
-  modified_at?: string;
-
-  /**
-   * Whether advertisement of the prefix to the Internet may be dynamically enabled
-   * or disabled.
-   */
-  on_demand_enabled?: boolean;
-
-  /**
-   * Whether advertisement status of the prefix is locked, meaning it cannot be
-   * changed.
-   */
-  on_demand_locked?: boolean;
-}
 
 export interface PrefixCreateParams {
   /**
@@ -409,11 +212,9 @@ export interface PrefixGetParams {
 }
 
 export namespace Prefixes {
-  export import PrefixCreateResponse = PrefixesAPI.PrefixCreateResponse;
+  export import AddressingIpamPrefixes = PrefixesAPI.AddressingIpamPrefixes;
   export import PrefixListResponse = PrefixesAPI.PrefixListResponse;
   export import PrefixDeleteResponse = PrefixesAPI.PrefixDeleteResponse;
-  export import PrefixEditResponse = PrefixesAPI.PrefixEditResponse;
-  export import PrefixGetResponse = PrefixesAPI.PrefixGetResponse;
   export import PrefixCreateParams = PrefixesAPI.PrefixCreateParams;
   export import PrefixListParams = PrefixesAPI.PrefixListParams;
   export import PrefixDeleteParams = PrefixesAPI.PrefixDeleteParams;
@@ -421,7 +222,7 @@ export namespace Prefixes {
   export import PrefixGetParams = PrefixesAPI.PrefixGetParams;
   export import BGP = BGPAPI.BGP;
   export import Delegations = DelegationsAPI.Delegations;
-  export import DelegationCreateResponse = DelegationsAPI.DelegationCreateResponse;
+  export import AddressingIpamDelegations = DelegationsAPI.AddressingIpamDelegations;
   export import DelegationListResponse = DelegationsAPI.DelegationListResponse;
   export import DelegationDeleteResponse = DelegationsAPI.DelegationDeleteResponse;
   export import DelegationCreateParams = DelegationsAPI.DelegationCreateParams;

@@ -11,13 +11,13 @@ export class HostnameAssociations extends APIResource {
   update(
     params: HostnameAssociationUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<HostnameAssociationUpdateResponse> {
+  ): Core.APIPromise<TLSCertificatesAndHostnamesHostnameAssociation> {
     const { zone_id, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/certificate_authorities/hostname_associations`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: HostnameAssociationUpdateResponse }>
+      }) as Core.APIPromise<{ result: TLSCertificatesAndHostnamesHostnameAssociation }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -27,29 +27,18 @@ export class HostnameAssociations extends APIResource {
   get(
     params: HostnameAssociationGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<HostnameAssociationGetResponse> {
+  ): Core.APIPromise<TLSCertificatesAndHostnamesHostnameAssociation> {
     const { zone_id, ...query } = params;
     return (
       this._client.get(`/zones/${zone_id}/certificate_authorities/hostname_associations`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: HostnameAssociationGetResponse }>
+      }) as Core.APIPromise<{ result: TLSCertificatesAndHostnamesHostnameAssociation }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface HostnameAssociationUpdateResponse {
-  hostnames?: Array<string>;
-
-  /**
-   * The UUID for a certificate that was uploaded to the mTLS Certificate Management
-   * endpoint. If no mtls_certificate_id is given, the hostnames will be associated
-   * to your active Cloudflare Managed CA.
-   */
-  mtls_certificate_id?: string;
-}
-
-export interface HostnameAssociationGetResponse {
+export interface TLSCertificatesAndHostnamesHostnameAssociation {
   hostnames?: Array<string>;
 
   /**
@@ -95,8 +84,7 @@ export interface HostnameAssociationGetParams {
 }
 
 export namespace HostnameAssociations {
-  export import HostnameAssociationUpdateResponse = HostnameAssociationsAPI.HostnameAssociationUpdateResponse;
-  export import HostnameAssociationGetResponse = HostnameAssociationsAPI.HostnameAssociationGetResponse;
+  export import TLSCertificatesAndHostnamesHostnameAssociation = HostnameAssociationsAPI.TLSCertificatesAndHostnamesHostnameAssociation;
   export import HostnameAssociationUpdateParams = HostnameAssociationsAPI.HostnameAssociationUpdateParams;
   export import HostnameAssociationGetParams = HostnameAssociationsAPI.HostnameAssociationGetParams;
 }

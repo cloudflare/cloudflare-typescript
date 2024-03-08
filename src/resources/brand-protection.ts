@@ -11,13 +11,13 @@ export class BrandProtection extends APIResource {
   submit(
     params: BrandProtectionSubmitParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<BrandProtectionSubmitResponse> {
+  ): Core.APIPromise<IntelPhishingURLSubmit> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/brand-protection/submit`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: BrandProtectionSubmitResponse }>
+      }) as Core.APIPromise<{ result: IntelPhishingURLSubmit }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -27,89 +27,38 @@ export class BrandProtection extends APIResource {
   urlInfo(
     params: BrandProtectionURLInfoParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<BrandProtectionURLInfoResponse> {
+  ): Core.APIPromise<IntelPhishingURLInfo> {
     const { account_id, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/brand-protection/url-info`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: BrandProtectionURLInfoResponse }>
+      }) as Core.APIPromise<{ result: IntelPhishingURLInfo }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface BrandProtectionSubmitResponse {
-  /**
-   * URLs that were excluded from scanning because their domain is in our no-scan
-   * list.
-   */
-  excluded_urls?: Array<BrandProtectionSubmitResponse.ExcludedURL>;
-
-  /**
-   * URLs that were skipped because the same URL is currently being scanned
-   */
-  skipped_urls?: Array<BrandProtectionSubmitResponse.SkippedURL>;
-
-  /**
-   * URLs that were successfully submitted for scanning.
-   */
-  submitted_urls?: Array<BrandProtectionSubmitResponse.SubmittedURL>;
-}
-
-export namespace BrandProtectionSubmitResponse {
-  export interface ExcludedURL {
-    /**
-     * URL that was excluded.
-     */
-    url?: string;
-  }
-
-  export interface SkippedURL {
-    /**
-     * URL that was skipped.
-     */
-    url?: string;
-
-    /**
-     * ID of the submission of that URL that is currently scanning.
-     */
-    url_id?: number;
-  }
-
-  export interface SubmittedURL {
-    /**
-     * URL that was submitted.
-     */
-    url?: string;
-
-    /**
-     * ID assigned to this URL submission. Used to retrieve scanning results.
-     */
-    url_id?: number;
-  }
-}
-
-export interface BrandProtectionURLInfoResponse {
+export interface IntelPhishingURLInfo {
   /**
    * List of categorizations applied to this submission.
    */
-  categorizations?: Array<BrandProtectionURLInfoResponse.Categorization>;
+  categorizations?: Array<IntelPhishingURLInfo.Categorization>;
 
   /**
    * List of model results for completed scans.
    */
-  model_results?: Array<BrandProtectionURLInfoResponse.ModelResult>;
+  model_results?: Array<IntelPhishingURLInfo.ModelResult>;
 
   /**
    * List of signatures that matched against site content found when crawling the
    * URL.
    */
-  rule_matches?: Array<BrandProtectionURLInfoResponse.RuleMatch>;
+  rule_matches?: Array<IntelPhishingURLInfo.RuleMatch>;
 
   /**
    * Status of the most recent scan found.
    */
-  scan_status?: BrandProtectionURLInfoResponse.ScanStatus;
+  scan_status?: IntelPhishingURLInfo.ScanStatus;
 
   /**
    * For internal use.
@@ -127,7 +76,7 @@ export interface BrandProtectionURLInfoResponse {
   url?: string;
 }
 
-export namespace BrandProtectionURLInfoResponse {
+export namespace IntelPhishingURLInfo {
   export interface Categorization {
     /**
      * Name of the category applied.
@@ -200,6 +149,57 @@ export namespace BrandProtectionURLInfoResponse {
   }
 }
 
+export interface IntelPhishingURLSubmit {
+  /**
+   * URLs that were excluded from scanning because their domain is in our no-scan
+   * list.
+   */
+  excluded_urls?: Array<IntelPhishingURLSubmit.ExcludedURL>;
+
+  /**
+   * URLs that were skipped because the same URL is currently being scanned
+   */
+  skipped_urls?: Array<IntelPhishingURLSubmit.SkippedURL>;
+
+  /**
+   * URLs that were successfully submitted for scanning.
+   */
+  submitted_urls?: Array<IntelPhishingURLSubmit.SubmittedURL>;
+}
+
+export namespace IntelPhishingURLSubmit {
+  export interface ExcludedURL {
+    /**
+     * URL that was excluded.
+     */
+    url?: string;
+  }
+
+  export interface SkippedURL {
+    /**
+     * URL that was skipped.
+     */
+    url?: string;
+
+    /**
+     * ID of the submission of that URL that is currently scanning.
+     */
+    url_id?: number;
+  }
+
+  export interface SubmittedURL {
+    /**
+     * URL that was submitted.
+     */
+    url?: string;
+
+    /**
+     * ID assigned to this URL submission. Used to retrieve scanning results.
+     */
+    url_id?: number;
+  }
+}
+
 export interface BrandProtectionSubmitParams {
   /**
    * Path param: Identifier
@@ -239,8 +239,8 @@ export namespace BrandProtectionURLInfoParams {
 }
 
 export namespace BrandProtection {
-  export import BrandProtectionSubmitResponse = BrandProtectionAPI.BrandProtectionSubmitResponse;
-  export import BrandProtectionURLInfoResponse = BrandProtectionAPI.BrandProtectionURLInfoResponse;
+  export import IntelPhishingURLInfo = BrandProtectionAPI.IntelPhishingURLInfo;
+  export import IntelPhishingURLSubmit = BrandProtectionAPI.IntelPhishingURLSubmit;
   export import BrandProtectionSubmitParams = BrandProtectionAPI.BrandProtectionSubmitParams;
   export import BrandProtectionURLInfoParams = BrandProtectionAPI.BrandProtectionURLInfoParams;
 }
