@@ -71,28 +71,30 @@ export class Pagerduty extends APIResource {
   }
 }
 
-export interface AaaPagerduty {
-  /**
-   * UUID
-   */
-  id?: string;
-
-  /**
-   * The name of the pagerduty service.
-   */
-  name?: string;
-}
-
 export interface PagerdutyCreateResponse {
   /**
-   * UUID
+   * token in form of UUID
    */
   id?: string;
 }
 
 export type PagerdutyDeleteResponse = unknown | Array<unknown> | string;
 
-export type PagerdutyGetResponse = Array<AaaPagerduty>;
+export type PagerdutyGetResponse = Array<PagerdutyGetResponse.PagerdutyGetResponseItem>;
+
+export namespace PagerdutyGetResponse {
+  export interface PagerdutyGetResponseItem {
+    /**
+     * UUID
+     */
+    id?: string;
+
+    /**
+     * The name of the pagerduty service.
+     */
+    name?: string;
+  }
+}
 
 export interface PagerdutyLinkResponse {
   /**
@@ -130,7 +132,6 @@ export interface PagerdutyLinkParams {
 }
 
 export namespace Pagerduty {
-  export import AaaPagerduty = PagerdutyAPI.AaaPagerduty;
   export import PagerdutyCreateResponse = PagerdutyAPI.PagerdutyCreateResponse;
   export import PagerdutyDeleteResponse = PagerdutyAPI.PagerdutyDeleteResponse;
   export import PagerdutyGetResponse = PagerdutyAPI.PagerdutyGetResponse;
