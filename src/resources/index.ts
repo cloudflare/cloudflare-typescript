@@ -15,12 +15,7 @@ export {
 export { Addressing } from './addressing/addressing';
 export { Alerting } from './alerting/alerting';
 export { Argo } from './argo/argo';
-export {
-  AuditLogListResponse,
-  AuditLogListParams,
-  AuditLogListResponsesV4PagePaginationArray,
-  AuditLogs,
-} from './audit-logs';
+export { AuditLogs } from './audit-logs';
 export { BillSubsAPIAvailableRatePlan, AvailablePlanListResponse, AvailablePlans } from './available-plans';
 export { BillSubsRatePlan, AvailableRatePlanGetResponse, AvailableRatePlans } from './available-rate-plans';
 export { Billing } from './billing/billing';
