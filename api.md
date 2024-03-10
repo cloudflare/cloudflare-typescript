@@ -2954,6 +2954,14 @@ Methods:
 
 # AuditLogs
 
+Types:
+
+- <code><a href="./src/resources/audit-logs.ts">AuditLogListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/audit_logs">client.auditLogs.<a href="./src/resources/audit-logs.ts">list</a>({ ...params }) -> AuditLogListResponsesV4PagePaginationArray</code>
+
 # Billing
 
 ## Profiles
@@ -3017,7 +3025,9 @@ Types:
 
 Methods:
 
+- <code title="put /accounts/{account_id}/images/v1/keys/{signing_key_name}">client.images.v1.keys.<a href="./src/resources/images/v1/keys.ts">update</a>(signingKeyName, { ...params }) -> ImagesImageKeys</code>
 - <code title="get /accounts/{account_id}/images/v1/keys">client.images.v1.keys.<a href="./src/resources/images/v1/keys.ts">list</a>({ ...params }) -> ImagesImageKeys</code>
+- <code title="delete /accounts/{account_id}/images/v1/keys/{signing_key_name}">client.images.v1.keys.<a href="./src/resources/images/v1/keys.ts">delete</a>(signingKeyName, { ...params }) -> ImagesImageKeys</code>
 
 ### Stats
 
@@ -3219,6 +3229,36 @@ Methods:
 
 - <code title="get /accounts/{account_id}/intel/sinkholes">client.intel.sinkholes.<a href="./src/resources/intel/sinkholes.ts">list</a>({ ...params }) -> SinkholeListResponse</code>
 
+## AttackSurfaceReport
+
+### IssueTypes
+
+Types:
+
+- <code><a href="./src/resources/intel/attack-surface-report/issue-types.ts">IssueTypeGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/intel/attack-surface-report/issue-types">client.intel.attackSurfaceReport.issueTypes.<a href="./src/resources/intel/attack-surface-report/issue-types.ts">get</a>({ ...params }) -> IssueTypeGetResponse</code>
+
+### Issues
+
+Types:
+
+- <code><a href="./src/resources/intel/attack-surface-report/issues.ts">IssueListResponse</a></code>
+- <code><a href="./src/resources/intel/attack-surface-report/issues.ts">IssueClassResponse</a></code>
+- <code><a href="./src/resources/intel/attack-surface-report/issues.ts">IssueDismissResponse</a></code>
+- <code><a href="./src/resources/intel/attack-surface-report/issues.ts">IssueSeverityResponse</a></code>
+- <code><a href="./src/resources/intel/attack-surface-report/issues.ts">IssueTypeResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/intel/attack-surface-report/issues">client.intel.attackSurfaceReport.issues.<a href="./src/resources/intel/attack-surface-report/issues.ts">list</a>({ ...params }) -> IssueListResponsesV4PagePagination</code>
+- <code title="get /accounts/{account_id}/intel/attack-surface-report/issues/class">client.intel.attackSurfaceReport.issues.<a href="./src/resources/intel/attack-surface-report/issues.ts">class</a>({ ...params }) -> IssueClassResponse</code>
+- <code title="put /accounts/{account_id}/intel/attack-surface-report/{issue_id}/dismiss">client.intel.attackSurfaceReport.issues.<a href="./src/resources/intel/attack-surface-report/issues.ts">dismiss</a>(issueId, { ...params }) -> IssueDismissResponse</code>
+- <code title="get /accounts/{account_id}/intel/attack-surface-report/issues/severity">client.intel.attackSurfaceReport.issues.<a href="./src/resources/intel/attack-surface-report/issues.ts">severity</a>({ ...params }) -> IssueSeverityResponse</code>
+- <code title="get /accounts/{account_id}/intel/attack-surface-report/issues/type">client.intel.attackSurfaceReport.issues.<a href="./src/resources/intel/attack-surface-report/issues.ts">type</a>({ ...params }) -> IssueTypeResponse</code>
+
 # MagicTransit
 
 ## CfInterconnects
@@ -3292,6 +3332,78 @@ Methods:
 - <code title="delete /accounts/{account_identifier}/magic/routes/{route_identifier}">client.magicTransit.routes.<a href="./src/resources/magic-transit/routes.ts">delete</a>(accountIdentifier, routeIdentifier) -> RouteDeleteResponse</code>
 - <code title="delete /accounts/{account_identifier}/magic/routes">client.magicTransit.routes.<a href="./src/resources/magic-transit/routes.ts">empty</a>(accountIdentifier, { ...params }) -> RouteEmptyResponse</code>
 - <code title="get /accounts/{account_identifier}/magic/routes/{route_identifier}">client.magicTransit.routes.<a href="./src/resources/magic-transit/routes.ts">get</a>(accountIdentifier, routeIdentifier) -> RouteGetResponse</code>
+
+## Sites
+
+Types:
+
+- <code><a href="./src/resources/magic-transit/sites/sites.ts">SiteCreateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/sites/sites.ts">SiteUpdateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/sites/sites.ts">SiteListResponse</a></code>
+- <code><a href="./src/resources/magic-transit/sites/sites.ts">SiteDeleteResponse</a></code>
+- <code><a href="./src/resources/magic-transit/sites/sites.ts">SiteGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_identifier}/magic/sites">client.magicTransit.sites.<a href="./src/resources/magic-transit/sites/sites.ts">create</a>(accountIdentifier, { ...params }) -> SiteCreateResponse</code>
+- <code title="put /accounts/{account_identifier}/magic/sites/{site_identifier}">client.magicTransit.sites.<a href="./src/resources/magic-transit/sites/sites.ts">update</a>(accountIdentifier, siteIdentifier, { ...params }) -> SiteUpdateResponse</code>
+- <code title="get /accounts/{account_identifier}/magic/sites">client.magicTransit.sites.<a href="./src/resources/magic-transit/sites/sites.ts">list</a>(accountIdentifier) -> SiteListResponse</code>
+- <code title="delete /accounts/{account_identifier}/magic/sites/{site_identifier}">client.magicTransit.sites.<a href="./src/resources/magic-transit/sites/sites.ts">delete</a>(accountIdentifier, siteIdentifier) -> SiteDeleteResponse</code>
+- <code title="get /accounts/{account_identifier}/magic/sites/{site_identifier}">client.magicTransit.sites.<a href="./src/resources/magic-transit/sites/sites.ts">get</a>(accountIdentifier, siteIdentifier) -> SiteGetResponse</code>
+
+### ACLs
+
+Types:
+
+- <code><a href="./src/resources/magic-transit/sites/acls.ts">ACLCreateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/sites/acls.ts">ACLUpdateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/sites/acls.ts">ACLListResponse</a></code>
+- <code><a href="./src/resources/magic-transit/sites/acls.ts">ACLDeleteResponse</a></code>
+- <code><a href="./src/resources/magic-transit/sites/acls.ts">ACLGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_identifier}/magic/sites/{site_identifier}/acls">client.magicTransit.sites.acls.<a href="./src/resources/magic-transit/sites/acls.ts">create</a>(accountIdentifier, siteIdentifier, { ...params }) -> ACLCreateResponse</code>
+- <code title="put /accounts/{account_identifier}/magic/sites/{site_identifier}/acls/{acl_identifier}">client.magicTransit.sites.acls.<a href="./src/resources/magic-transit/sites/acls.ts">update</a>(accountIdentifier, siteIdentifier, aclIdentifier, { ...params }) -> ACLUpdateResponse</code>
+- <code title="get /accounts/{account_identifier}/magic/sites/{site_identifier}/acls">client.magicTransit.sites.acls.<a href="./src/resources/magic-transit/sites/acls.ts">list</a>(accountIdentifier, siteIdentifier) -> ACLListResponse</code>
+- <code title="delete /accounts/{account_identifier}/magic/sites/{site_identifier}/acls/{acl_identifier}">client.magicTransit.sites.acls.<a href="./src/resources/magic-transit/sites/acls.ts">delete</a>(accountIdentifier, siteIdentifier, aclIdentifier) -> ACLDeleteResponse</code>
+- <code title="get /accounts/{account_identifier}/magic/sites/{site_identifier}/acls/{acl_identifier}">client.magicTransit.sites.acls.<a href="./src/resources/magic-transit/sites/acls.ts">get</a>(accountIdentifier, siteIdentifier, aclIdentifier) -> ACLGetResponse</code>
+
+### Lans
+
+Types:
+
+- <code><a href="./src/resources/magic-transit/sites/lans.ts">LanCreateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/sites/lans.ts">LanUpdateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/sites/lans.ts">LanListResponse</a></code>
+- <code><a href="./src/resources/magic-transit/sites/lans.ts">LanDeleteResponse</a></code>
+- <code><a href="./src/resources/magic-transit/sites/lans.ts">LanGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_identifier}/magic/sites/{site_identifier}/lans">client.magicTransit.sites.lans.<a href="./src/resources/magic-transit/sites/lans.ts">create</a>(accountIdentifier, siteIdentifier, { ...params }) -> LanCreateResponse</code>
+- <code title="put /accounts/{account_identifier}/magic/sites/{site_identifier}/lans/{lan_identifier}">client.magicTransit.sites.lans.<a href="./src/resources/magic-transit/sites/lans.ts">update</a>(accountIdentifier, siteIdentifier, lanIdentifier, { ...params }) -> LanUpdateResponse</code>
+- <code title="get /accounts/{account_identifier}/magic/sites/{site_identifier}/lans">client.magicTransit.sites.lans.<a href="./src/resources/magic-transit/sites/lans.ts">list</a>(accountIdentifier, siteIdentifier) -> LanListResponse</code>
+- <code title="delete /accounts/{account_identifier}/magic/sites/{site_identifier}/lans/{lan_identifier}">client.magicTransit.sites.lans.<a href="./src/resources/magic-transit/sites/lans.ts">delete</a>(accountIdentifier, siteIdentifier, lanIdentifier) -> LanDeleteResponse</code>
+- <code title="get /accounts/{account_identifier}/magic/sites/{site_identifier}/lans/{lan_identifier}">client.magicTransit.sites.lans.<a href="./src/resources/magic-transit/sites/lans.ts">get</a>(accountIdentifier, siteIdentifier, lanIdentifier) -> LanGetResponse</code>
+
+### Wans
+
+Types:
+
+- <code><a href="./src/resources/magic-transit/sites/wans.ts">WanCreateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/sites/wans.ts">WanUpdateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/sites/wans.ts">WanListResponse</a></code>
+- <code><a href="./src/resources/magic-transit/sites/wans.ts">WanDeleteResponse</a></code>
+- <code><a href="./src/resources/magic-transit/sites/wans.ts">WanGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_identifier}/magic/sites/{site_identifier}/wans">client.magicTransit.sites.wans.<a href="./src/resources/magic-transit/sites/wans.ts">create</a>(accountIdentifier, siteIdentifier, { ...params }) -> WanCreateResponse</code>
+- <code title="put /accounts/{account_identifier}/magic/sites/{site_identifier}/wans/{wan_identifier}">client.magicTransit.sites.wans.<a href="./src/resources/magic-transit/sites/wans.ts">update</a>(accountIdentifier, siteIdentifier, wanIdentifier, { ...params }) -> WanUpdateResponse</code>
+- <code title="get /accounts/{account_identifier}/magic/sites/{site_identifier}/wans">client.magicTransit.sites.wans.<a href="./src/resources/magic-transit/sites/wans.ts">list</a>(accountIdentifier, siteIdentifier) -> WanListResponse</code>
+- <code title="delete /accounts/{account_identifier}/magic/sites/{site_identifier}/wans/{wan_identifier}">client.magicTransit.sites.wans.<a href="./src/resources/magic-transit/sites/wans.ts">delete</a>(accountIdentifier, siteIdentifier, wanIdentifier) -> WanDeleteResponse</code>
+- <code title="get /accounts/{account_identifier}/magic/sites/{site_identifier}/wans/{wan_identifier}">client.magicTransit.sites.wans.<a href="./src/resources/magic-transit/sites/wans.ts">get</a>(accountIdentifier, siteIdentifier, wanIdentifier) -> WanGetResponse</code>
 
 # MagicNetworkMonitoring
 
@@ -3908,6 +4020,20 @@ Methods:
 ## Dispatch
 
 ### Namespaces
+
+Types:
+
+- <code><a href="./src/resources/workers-for-platforms/dispatch/namespaces/namespaces.ts">NamespaceCreateResponse</a></code>
+- <code><a href="./src/resources/workers-for-platforms/dispatch/namespaces/namespaces.ts">NamespaceListResponse</a></code>
+- <code><a href="./src/resources/workers-for-platforms/dispatch/namespaces/namespaces.ts">NamespaceDeleteResponse</a></code>
+- <code><a href="./src/resources/workers-for-platforms/dispatch/namespaces/namespaces.ts">NamespaceGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/workers/dispatch/namespaces">client.workersForPlatforms.dispatch.namespaces.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/namespaces.ts">create</a>({ ...params }) -> NamespaceCreateResponse</code>
+- <code title="get /accounts/{account_id}/workers/dispatch/namespaces">client.workersForPlatforms.dispatch.namespaces.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/namespaces.ts">list</a>({ ...params }) -> NamespaceListResponse</code>
+- <code title="delete /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}">client.workersForPlatforms.dispatch.namespaces.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/namespaces.ts">delete</a>(dispatchNamespace, { ...params }) -> NamespaceDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}">client.workersForPlatforms.dispatch.namespaces.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/namespaces.ts">get</a>(dispatchNamespace, { ...params }) -> NamespaceGetResponse</code>
 
 #### Scripts
 

@@ -230,7 +230,9 @@ export namespace V1 {
   export import V1GetParams = V1API.V1GetParams;
   export import Keys = KeysAPI.Keys;
   export import ImagesImageKeys = KeysAPI.ImagesImageKeys;
+  export import KeyUpdateParams = KeysAPI.KeyUpdateParams;
   export import KeyListParams = KeysAPI.KeyListParams;
+  export import KeyDeleteParams = KeysAPI.KeyDeleteParams;
   export import Stats = StatsAPI.Stats;
   export import ImagesImagesStats = StatsAPI.ImagesImagesStats;
   export import StatGetParams = StatsAPI.StatGetParams;

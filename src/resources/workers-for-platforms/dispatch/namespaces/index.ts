@@ -1,6 +1,16 @@
 // File generated from our OpenAPI spec by Stainless.
 
-export { Namespaces } from './namespaces';
+export {
+  NamespaceCreateResponse,
+  NamespaceListResponse,
+  NamespaceDeleteResponse,
+  NamespaceGetResponse,
+  NamespaceCreateParams,
+  NamespaceListParams,
+  NamespaceDeleteParams,
+  NamespaceGetParams,
+  Namespaces,
+} from './namespaces';
 export {
   WorkersNamespaceScript,
   ScriptUpdateParams,

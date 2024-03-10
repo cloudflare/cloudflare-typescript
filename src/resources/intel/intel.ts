@@ -9,6 +9,7 @@ import * as MiscategorizationsAPI from 'cloudflare/resources/intel/miscategoriza
 import * as SinkholesAPI from 'cloudflare/resources/intel/sinkholes';
 import * as WhoisAPI from 'cloudflare/resources/intel/whois';
 import * as ASNAPI from 'cloudflare/resources/intel/asn/asn';
+import * as AttackSurfaceReportAPI from 'cloudflare/resources/intel/attack-surface-report/attack-surface-report';
 import * as DomainsAPI from 'cloudflare/resources/intel/domains/domains';
 import * as IndicatorFeedsAPI from 'cloudflare/resources/intel/indicator-feeds/indicator-feeds';
 
@@ -25,6 +26,8 @@ export class Intel extends APIResource {
   whois: WhoisAPI.Whois = new WhoisAPI.Whois(this._client);
   indicatorFeeds: IndicatorFeedsAPI.IndicatorFeeds = new IndicatorFeedsAPI.IndicatorFeeds(this._client);
   sinkholes: SinkholesAPI.Sinkholes = new SinkholesAPI.Sinkholes(this._client);
+  attackSurfaceReport: AttackSurfaceReportAPI.AttackSurfaceReport =
+    new AttackSurfaceReportAPI.AttackSurfaceReport(this._client);
 }
 
 export namespace Intel {
@@ -70,4 +73,5 @@ export namespace Intel {
   export import IntelSinkholesSinkholeItem = SinkholesAPI.IntelSinkholesSinkholeItem;
   export import SinkholeListResponse = SinkholesAPI.SinkholeListResponse;
   export import SinkholeListParams = SinkholesAPI.SinkholeListParams;
+  export import AttackSurfaceReport = AttackSurfaceReportAPI.AttackSurfaceReport;
 }

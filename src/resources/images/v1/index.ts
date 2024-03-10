@@ -24,5 +24,5 @@ export {
   V1ListResponsesV4PagePagination,
   V1,
 } from './v1';
-export { ImagesImageKeys, KeyListParams, Keys } from './keys';
+export { ImagesImageKeys, KeyUpdateParams, KeyListParams, KeyDeleteParams, Keys } from './keys';
 export { ImagesImagesStats, StatGetParams, Stats } from './stats';
