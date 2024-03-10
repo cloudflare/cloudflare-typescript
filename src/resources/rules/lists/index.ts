@@ -11,6 +11,7 @@ export {
   ItemUpdateParams,
   ItemListParams,
   ItemDeleteParams,
+  ItemListResponsesCursorPagination,
   Items,
 } from './items';
 export {

@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ItemsAPI from 'cloudflare/resources/rules/lists/items';
+import { CursorPagination, type CursorPaginationParams } from 'cloudflare/pagination';
 
 export class Items extends APIResource {
   /**
@@ -55,14 +56,13 @@ export class Items extends APIResource {
     listId: string,
     params: ItemListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ItemListResponse | null> {
+  ): Core.PagePromise<ItemListResponsesCursorPagination, ItemListResponse> {
     const { account_id, ...query } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/rules/lists/${listId}/items`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: ItemListResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/rules/lists/${listId}/items`,
+      ItemListResponsesCursorPagination,
+      { query, ...options },
+    );
   }
 
   /**
@@ -104,6 +104,8 @@ export class Items extends APIResource {
   }
 }
 
+export class ItemListResponsesCursorPagination extends CursorPagination<ItemListResponse> {}
+
 export interface ItemCreateResponse {
   /**
    * The unique operation ID of the asynchronous action.
@@ -118,7 +120,7 @@ export interface ItemUpdateResponse {
   operation_id?: string;
 }
 
-export type ItemListResponse = Array<unknown>;
+export type ItemListResponse = unknown;
 
 export interface ItemDeleteResponse {
   /**
@@ -310,25 +312,11 @@ export namespace ItemUpdateParams {
   }
 }
 
-export interface ItemListParams {
+export interface ItemListParams extends CursorPaginationParams {
   /**
    * Path param: Identifier
    */
   account_id: string;
-
-  /**
-   * Query param: The pagination cursor. An opaque string token indicating the
-   * position from which to continue when requesting the next/previous set of
-   * records. Cursor values are provided under `result_info.cursors` in the response.
-   * You should make no assumptions about a cursor's content or length.
-   */
-  cursor?: string;
-
-  /**
-   * Query param: Amount of results to include in each paginated response. A
-   * non-negative 32 bit integer.
-   */
-  per_page?: number;
 
   /**
    * Query param: A search query to filter returned items. Its meaning depends on the
@@ -365,6 +353,7 @@ export namespace Items {
   export import ItemListResponse = ItemsAPI.ItemListResponse;
   export import ItemDeleteResponse = ItemsAPI.ItemDeleteResponse;
   export import ItemGetResponse = ItemsAPI.ItemGetResponse;
+  export import ItemListResponsesCursorPagination = ItemsAPI.ItemListResponsesCursorPagination;
   export import ItemCreateParams = ItemsAPI.ItemCreateParams;
   export import ItemUpdateParams = ItemsAPI.ItemUpdateParams;
   export import ItemListParams = ItemsAPI.ItemListParams;

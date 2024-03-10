@@ -3,7 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as KeysAPI from 'cloudflare/resources/kv/namespaces/keys';
-import { CursorPagination, type CursorPaginationParams } from 'cloudflare/pagination';
+import { CursorLimitPagination, type CursorLimitPaginationParams } from 'cloudflare/pagination';
 
 export class Keys extends APIResource {
   /**
@@ -13,17 +13,17 @@ export class Keys extends APIResource {
     namespaceId: string,
     params: KeyListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<WorkersKVKeysCursorPagination, WorkersKVKey> {
+  ): Core.PagePromise<WorkersKVKeysCursorLimitPagination, WorkersKVKey> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/keys`,
-      WorkersKVKeysCursorPagination,
+      WorkersKVKeysCursorLimitPagination,
       { query, ...options },
     );
   }
 }
 
-export class WorkersKVKeysCursorPagination extends CursorPagination<WorkersKVKey> {}
+export class WorkersKVKeysCursorLimitPagination extends CursorLimitPagination<WorkersKVKey> {}
 
 /**
  * A name for a value. A value stored under a given key may be retrieved via the
@@ -48,7 +48,7 @@ export interface WorkersKVKey {
   metadata?: unknown;
 }
 
-export interface KeyListParams extends CursorPaginationParams {
+export interface KeyListParams extends CursorLimitPaginationParams {
   /**
    * Path param: Identifier
    */
@@ -63,6 +63,6 @@ export interface KeyListParams extends CursorPaginationParams {
 
 export namespace Keys {
   export import WorkersKVKey = KeysAPI.WorkersKVKey;
-  export import WorkersKVKeysCursorPagination = KeysAPI.WorkersKVKeysCursorPagination;
+  export import WorkersKVKeysCursorLimitPagination = KeysAPI.WorkersKVKeysCursorLimitPagination;
   export import KeyListParams = KeysAPI.KeyListParams;
 }

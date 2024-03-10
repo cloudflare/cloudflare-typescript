@@ -144,7 +144,7 @@ export namespace CursorPaginationResponse {
 }
 
 export interface CursorPaginationParams {
-  limit?: number;
+  per_page?: number;
 
   cursor?: string;
 }
@@ -172,6 +172,76 @@ export class CursorPagination<Item> extends AbstractPage<Item> implements Cursor
 
   // @deprecated Please use `nextPageInfo()` instead
   nextPageParams(): Partial<CursorPaginationParams> | null {
+    const info = this.nextPageInfo();
+    if (!info) return null;
+    if ('params' in info) return info.params;
+    const params = Object.fromEntries(info.url.searchParams);
+    if (!Object.keys(params).length) return null;
+    return params;
+  }
+
+  nextPageInfo(): PageInfo | null {
+    const cursor = this.result_info?.cursor;
+    if (!cursor) {
+      return null;
+    }
+
+    return {
+      params: {
+        cursor: cursor,
+      },
+    };
+  }
+}
+
+export interface CursorLimitPaginationResponse<Item> {
+  result: Array<Item>;
+
+  result_info: CursorLimitPaginationResponse.ResultInfo;
+}
+
+export namespace CursorLimitPaginationResponse {
+  export interface ResultInfo {
+    count?: number;
+
+    cursor?: string;
+
+    per_page?: number;
+  }
+}
+
+export interface CursorLimitPaginationParams {
+  limit?: number;
+
+  cursor?: string;
+}
+
+export class CursorLimitPagination<Item>
+  extends AbstractPage<Item>
+  implements CursorLimitPaginationResponse<Item>
+{
+  result: Array<Item>;
+
+  result_info: CursorLimitPaginationResponse.ResultInfo;
+
+  constructor(
+    client: APIClient,
+    response: Response,
+    body: CursorLimitPaginationResponse<Item>,
+    options: FinalRequestOptions,
+  ) {
+    super(client, response, body, options);
+
+    this.result = body.result || [];
+    this.result_info = body.result_info || {};
+  }
+
+  getPaginatedItems(): Item[] {
+    return this.result ?? [];
+  }
+
+  // @deprecated Please use `nextPageInfo()` instead
+  nextPageParams(): Partial<CursorLimitPaginationParams> | null {
     const info = this.nextPageInfo();
     if (!info) return null;
     if ('params' in info) return info.params;
