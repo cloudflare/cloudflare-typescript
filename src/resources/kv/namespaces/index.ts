@@ -11,7 +11,7 @@ export {
   ValueGetParams,
   Values,
 } from './values';
-export { WorkersKVKey, KeyListResponse, KeyListParams, Keys } from './keys';
+export { WorkersKVKey, KeyListParams, WorkersKVKeysCursorPagination, Keys } from './keys';
 export {
   WorkersKVNamespace,
   NamespaceUpdateResponse,

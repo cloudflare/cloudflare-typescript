@@ -50,6 +50,6 @@ export namespace Namespaces {
   export import NamespaceListParams = NamespacesAPI.NamespaceListParams;
   export import Objects = ObjectsAPI.Objects;
   export import WorkersObject = ObjectsAPI.WorkersObject;
-  export import ObjectListResponse = ObjectsAPI.ObjectListResponse;
+  export import WorkersObjectsCursorPagination = ObjectsAPI.WorkersObjectsCursorPagination;
   export import ObjectListParams = ObjectsAPI.ObjectListParams;
 }
