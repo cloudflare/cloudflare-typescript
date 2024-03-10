@@ -3,7 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ObjectsAPI from 'cloudflare/resources/durable-objects/namespaces/objects';
-import { CursorPagination, type CursorPaginationParams } from 'cloudflare/pagination';
+import { CursorLimitPagination, type CursorLimitPaginationParams } from 'cloudflare/pagination';
 
 export class Objects extends APIResource {
   /**
@@ -13,17 +13,17 @@ export class Objects extends APIResource {
     id: string,
     params: ObjectListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<WorkersObjectsCursorPagination, WorkersObject> {
+  ): Core.PagePromise<WorkersObjectsCursorLimitPagination, WorkersObject> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/workers/durable_objects/namespaces/${id}/objects`,
-      WorkersObjectsCursorPagination,
+      WorkersObjectsCursorLimitPagination,
       { query, ...options },
     );
   }
 }
 
-export class WorkersObjectsCursorPagination extends CursorPagination<WorkersObject> {}
+export class WorkersObjectsCursorLimitPagination extends CursorLimitPagination<WorkersObject> {}
 
 export interface WorkersObject {
   /**
@@ -37,7 +37,7 @@ export interface WorkersObject {
   hasStoredData?: boolean;
 }
 
-export interface ObjectListParams extends CursorPaginationParams {
+export interface ObjectListParams extends CursorLimitPaginationParams {
   /**
    * Path param: Identifier
    */
@@ -46,6 +46,6 @@ export interface ObjectListParams extends CursorPaginationParams {
 
 export namespace Objects {
   export import WorkersObject = ObjectsAPI.WorkersObject;
-  export import WorkersObjectsCursorPagination = ObjectsAPI.WorkersObjectsCursorPagination;
+  export import WorkersObjectsCursorLimitPagination = ObjectsAPI.WorkersObjectsCursorLimitPagination;
   export import ObjectListParams = ObjectsAPI.ObjectListParams;
 }

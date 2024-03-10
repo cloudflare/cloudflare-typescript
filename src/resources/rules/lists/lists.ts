@@ -210,6 +210,7 @@ export namespace Lists {
   export import ItemListResponse = ItemsAPI.ItemListResponse;
   export import ItemDeleteResponse = ItemsAPI.ItemDeleteResponse;
   export import ItemGetResponse = ItemsAPI.ItemGetResponse;
+  export import ItemListResponsesCursorPagination = ItemsAPI.ItemListResponsesCursorPagination;
   export import ItemCreateParams = ItemsAPI.ItemCreateParams;
   export import ItemUpdateParams = ItemsAPI.ItemUpdateParams;
   export import ItemListParams = ItemsAPI.ItemListParams;

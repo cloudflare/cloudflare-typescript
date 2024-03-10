@@ -3,12 +3,12 @@
 export { R2 } from './r2';
 export {
   R2Bucket,
-  BucketListResponse,
   BucketDeleteResponse,
   BucketCreateParams,
   BucketListParams,
   BucketDeleteParams,
   BucketGetParams,
+  R2BucketsCursorPagination,
   Buckets,
 } from './buckets';
 export {

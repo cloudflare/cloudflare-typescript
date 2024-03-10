@@ -382,6 +382,10 @@ export namespace Cloudflare {
   export import CursorPaginationParams = Pagination.CursorPaginationParams;
   export import CursorPaginationResponse = Pagination.CursorPaginationResponse;
 
+  export import CursorLimitPagination = Pagination.CursorLimitPagination;
+  export import CursorLimitPaginationParams = Pagination.CursorLimitPaginationParams;
+  export import CursorLimitPaginationResponse = Pagination.CursorLimitPaginationResponse;
+
   export import Accounts = API.Accounts;
   export import Account = API.Account;
   export import AccountUpdateResponse = API.AccountUpdateResponse;
