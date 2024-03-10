@@ -1,5 +1,6 @@
 // File generated from our OpenAPI spec by Stainless.
 
+export { AttackSurfaceReport } from './attack-surface-report/index';
 export { Intel } from './intel';
 export { IntelASN, ASNGetParams, ASN } from './asn/index';
 export { IntelDomain, DomainGetParams, Domains } from './domains/index';

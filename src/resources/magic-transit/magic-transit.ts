@@ -5,12 +5,14 @@ import * as CfInterconnectsAPI from 'cloudflare/resources/magic-transit/cf-inter
 import * as GRETunnelsAPI from 'cloudflare/resources/magic-transit/gre-tunnels';
 import * as IPSECTunnelsAPI from 'cloudflare/resources/magic-transit/ipsec-tunnels';
 import * as RoutesAPI from 'cloudflare/resources/magic-transit/routes';
+import * as SitesAPI from 'cloudflare/resources/magic-transit/sites/sites';
 
 export class MagicTransit extends APIResource {
   cfInterconnects: CfInterconnectsAPI.CfInterconnects = new CfInterconnectsAPI.CfInterconnects(this._client);
   greTunnels: GRETunnelsAPI.GRETunnels = new GRETunnelsAPI.GRETunnels(this._client);
   ipsecTunnels: IPSECTunnelsAPI.IPSECTunnels = new IPSECTunnelsAPI.IPSECTunnels(this._client);
   routes: RoutesAPI.Routes = new RoutesAPI.Routes(this._client);
+  sites: SitesAPI.Sites = new SitesAPI.Sites(this._client);
 }
 
 export namespace MagicTransit {
@@ -46,4 +48,12 @@ export namespace MagicTransit {
   export import RouteCreateParams = RoutesAPI.RouteCreateParams;
   export import RouteUpdateParams = RoutesAPI.RouteUpdateParams;
   export import RouteEmptyParams = RoutesAPI.RouteEmptyParams;
+  export import Sites = SitesAPI.Sites;
+  export import SiteCreateResponse = SitesAPI.SiteCreateResponse;
+  export import SiteUpdateResponse = SitesAPI.SiteUpdateResponse;
+  export import SiteListResponse = SitesAPI.SiteListResponse;
+  export import SiteDeleteResponse = SitesAPI.SiteDeleteResponse;
+  export import SiteGetResponse = SitesAPI.SiteGetResponse;
+  export import SiteCreateParams = SitesAPI.SiteCreateParams;
+  export import SiteUpdateParams = SitesAPI.SiteUpdateParams;
 }

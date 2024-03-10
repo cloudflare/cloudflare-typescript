@@ -672,6 +672,9 @@ export namespace Cloudflare {
   export import Addressing = API.Addressing;
 
   export import AuditLogs = API.AuditLogs;
+  export import AuditLogListResponse = API.AuditLogListResponse;
+  export import AuditLogListResponsesV4PagePaginationArray = API.AuditLogListResponsesV4PagePaginationArray;
+  export import AuditLogListParams = API.AuditLogListParams;
 
   export import Billing = API.Billing;
 
