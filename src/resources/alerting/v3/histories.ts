@@ -14,19 +14,19 @@ export class Histories extends APIResource {
   list(
     params: HistoryListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<AaaHistoriesV4PagePaginationArray, AaaHistory> {
+  ): Core.PagePromise<HistoryListResponsesV4PagePaginationArray, HistoryListResponse> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/alerting/v3/history`,
-      AaaHistoriesV4PagePaginationArray,
+      HistoryListResponsesV4PagePaginationArray,
       { query, ...options },
     );
   }
 }
 
-export class AaaHistoriesV4PagePaginationArray extends V4PagePaginationArray<AaaHistory> {}
+export class HistoryListResponsesV4PagePaginationArray extends V4PagePaginationArray<HistoryListResponse> {}
 
-export interface AaaHistory {
+export interface HistoryListResponse {
   /**
    * UUID
    */
@@ -94,7 +94,7 @@ export interface HistoryListParams extends V4PagePaginationArrayParams {
 }
 
 export namespace Histories {
-  export import AaaHistory = HistoriesAPI.AaaHistory;
-  export import AaaHistoriesV4PagePaginationArray = HistoriesAPI.AaaHistoriesV4PagePaginationArray;
+  export import HistoryListResponse = HistoriesAPI.HistoryListResponse;
+  export import HistoryListResponsesV4PagePaginationArray = HistoriesAPI.HistoryListResponsesV4PagePaginationArray;
   export import HistoryListParams = HistoriesAPI.HistoryListParams;
 }

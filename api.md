@@ -2954,14 +2954,6 @@ Methods:
 
 # AuditLogs
 
-Types:
-
-- <code><a href="./src/resources/audit-logs.ts">AuditLogListResponse</a></code>
-
-Methods:
-
-- <code title="get /accounts/{account_identifier}/audit_logs">client.auditLogs.<a href="./src/resources/audit-logs.ts">list</a>(accountIdentifier, { ...params }) -> AuditLogListResponsesV4PagePaginationArray</code>
-
 # Billing
 
 ## Profiles
@@ -3784,7 +3776,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/alerting/v3/destinations/pagerduty.ts">AaaPagerduty</a></code>
 - <code><a href="./src/resources/alerting/v3/destinations/pagerduty.ts">PagerdutyCreateResponse</a></code>
 - <code><a href="./src/resources/alerting/v3/destinations/pagerduty.ts">PagerdutyDeleteResponse</a></code>
 - <code><a href="./src/resources/alerting/v3/destinations/pagerduty.ts">PagerdutyGetResponse</a></code>
@@ -3801,11 +3792,11 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/alerting/v3/destinations/webhooks.ts">AaaWebhooks</a></code>
 - <code><a href="./src/resources/alerting/v3/destinations/webhooks.ts">WebhookCreateResponse</a></code>
 - <code><a href="./src/resources/alerting/v3/destinations/webhooks.ts">WebhookUpdateResponse</a></code>
 - <code><a href="./src/resources/alerting/v3/destinations/webhooks.ts">WebhookListResponse</a></code>
 - <code><a href="./src/resources/alerting/v3/destinations/webhooks.ts">WebhookDeleteResponse</a></code>
+- <code><a href="./src/resources/alerting/v3/destinations/webhooks.ts">WebhookGetResponse</a></code>
 
 Methods:
 
@@ -3813,27 +3804,27 @@ Methods:
 - <code title="put /accounts/{account_id}/alerting/v3/destinations/webhooks/{webhook_id}">client.alerting.v3.destinations.webhooks.<a href="./src/resources/alerting/v3/destinations/webhooks.ts">update</a>(webhookId, { ...params }) -> WebhookUpdateResponse</code>
 - <code title="get /accounts/{account_id}/alerting/v3/destinations/webhooks">client.alerting.v3.destinations.webhooks.<a href="./src/resources/alerting/v3/destinations/webhooks.ts">list</a>({ ...params }) -> WebhookListResponse | null</code>
 - <code title="delete /accounts/{account_id}/alerting/v3/destinations/webhooks/{webhook_id}">client.alerting.v3.destinations.webhooks.<a href="./src/resources/alerting/v3/destinations/webhooks.ts">delete</a>(webhookId, { ...params }) -> WebhookDeleteResponse | null</code>
-- <code title="get /accounts/{account_id}/alerting/v3/destinations/webhooks/{webhook_id}">client.alerting.v3.destinations.webhooks.<a href="./src/resources/alerting/v3/destinations/webhooks.ts">get</a>(webhookId, { ...params }) -> AaaWebhooks</code>
+- <code title="get /accounts/{account_id}/alerting/v3/destinations/webhooks/{webhook_id}">client.alerting.v3.destinations.webhooks.<a href="./src/resources/alerting/v3/destinations/webhooks.ts">get</a>(webhookId, { ...params }) -> WebhookGetResponse</code>
 
 ### Histories
 
 Types:
 
-- <code><a href="./src/resources/alerting/v3/histories.ts">AaaHistory</a></code>
+- <code><a href="./src/resources/alerting/v3/histories.ts">HistoryListResponse</a></code>
 
 Methods:
 
-- <code title="get /accounts/{account_id}/alerting/v3/history">client.alerting.v3.histories.<a href="./src/resources/alerting/v3/histories.ts">list</a>({ ...params }) -> AaaHistoriesV4PagePaginationArray</code>
+- <code title="get /accounts/{account_id}/alerting/v3/history">client.alerting.v3.histories.<a href="./src/resources/alerting/v3/histories.ts">list</a>({ ...params }) -> HistoryListResponsesV4PagePaginationArray</code>
 
 ### Policies
 
 Types:
 
-- <code><a href="./src/resources/alerting/v3/policies.ts">AaaPolicies</a></code>
 - <code><a href="./src/resources/alerting/v3/policies.ts">PolicyCreateResponse</a></code>
 - <code><a href="./src/resources/alerting/v3/policies.ts">PolicyUpdateResponse</a></code>
 - <code><a href="./src/resources/alerting/v3/policies.ts">PolicyListResponse</a></code>
 - <code><a href="./src/resources/alerting/v3/policies.ts">PolicyDeleteResponse</a></code>
+- <code><a href="./src/resources/alerting/v3/policies.ts">PolicyGetResponse</a></code>
 
 Methods:
 
@@ -3841,7 +3832,7 @@ Methods:
 - <code title="put /accounts/{account_id}/alerting/v3/policies/{policy_id}">client.alerting.v3.policies.<a href="./src/resources/alerting/v3/policies.ts">update</a>(policyId, { ...params }) -> PolicyUpdateResponse</code>
 - <code title="get /accounts/{account_id}/alerting/v3/policies">client.alerting.v3.policies.<a href="./src/resources/alerting/v3/policies.ts">list</a>({ ...params }) -> PolicyListResponse | null</code>
 - <code title="delete /accounts/{account_id}/alerting/v3/policies/{policy_id}">client.alerting.v3.policies.<a href="./src/resources/alerting/v3/policies.ts">delete</a>(policyId, { ...params }) -> PolicyDeleteResponse | null</code>
-- <code title="get /accounts/{account_id}/alerting/v3/policies/{policy_id}">client.alerting.v3.policies.<a href="./src/resources/alerting/v3/policies.ts">get</a>(policyId, { ...params }) -> AaaPolicies</code>
+- <code title="get /accounts/{account_id}/alerting/v3/policies/{policy_id}">client.alerting.v3.policies.<a href="./src/resources/alerting/v3/policies.ts">get</a>(policyId, { ...params }) -> PolicyGetResponse</code>
 
 # D1
 
