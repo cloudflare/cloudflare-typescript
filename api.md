@@ -2524,11 +2524,10 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/kv/namespaces/keys.ts">WorkersKVKey</a></code>
-- <code><a href="./src/resources/kv/namespaces/keys.ts">KeyListResponse</a></code>
 
 Methods:
 
-- <code title="get /accounts/{account_id}/storage/kv/namespaces/{namespace_id}/keys">client.kv.namespaces.keys.<a href="./src/resources/kv/namespaces/keys.ts">list</a>(namespaceId, { ...params }) -> KeyListResponse</code>
+- <code title="get /accounts/{account_id}/storage/kv/namespaces/{namespace_id}/keys">client.kv.namespaces.keys.<a href="./src/resources/kv/namespaces/keys.ts">list</a>(namespaceId, { ...params }) -> WorkersKVKeysCursorPagination</code>
 
 ### Metadata
 
@@ -2572,11 +2571,10 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/durable-objects/namespaces/objects.ts">WorkersObject</a></code>
-- <code><a href="./src/resources/durable-objects/namespaces/objects.ts">ObjectListResponse</a></code>
 
 Methods:
 
-- <code title="get /accounts/{account_id}/workers/durable_objects/namespaces/{id}/objects">client.durableObjects.namespaces.objects.<a href="./src/resources/durable-objects/namespaces/objects.ts">list</a>(id, { ...params }) -> ObjectListResponse | null</code>
+- <code title="get /accounts/{account_id}/workers/durable_objects/namespaces/{id}/objects">client.durableObjects.namespaces.objects.<a href="./src/resources/durable-objects/namespaces/objects.ts">list</a>(id, { ...params }) -> WorkersObjectsCursorPagination</code>
 
 # Queues
 

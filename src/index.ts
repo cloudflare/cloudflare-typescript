@@ -378,6 +378,10 @@ export namespace Cloudflare {
   export import V4PagePaginationArrayParams = Pagination.V4PagePaginationArrayParams;
   export import V4PagePaginationArrayResponse = Pagination.V4PagePaginationArrayResponse;
 
+  export import CursorPagination = Pagination.CursorPagination;
+  export import CursorPaginationParams = Pagination.CursorPaginationParams;
+  export import CursorPaginationResponse = Pagination.CursorPaginationResponse;
+
   export import Accounts = API.Accounts;
   export import Account = API.Account;
   export import AccountUpdateResponse = API.AccountUpdateResponse;

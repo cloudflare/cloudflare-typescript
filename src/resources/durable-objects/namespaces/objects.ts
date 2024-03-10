@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ObjectsAPI from 'cloudflare/resources/durable-objects/namespaces/objects';
+import { CursorPagination, type CursorPaginationParams } from 'cloudflare/pagination';
 
 export class Objects extends APIResource {
   /**
@@ -12,16 +13,17 @@ export class Objects extends APIResource {
     id: string,
     params: ObjectListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ObjectListResponse | null> {
+  ): Core.PagePromise<WorkersObjectsCursorPagination, WorkersObject> {
     const { account_id, ...query } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/workers/durable_objects/namespaces/${id}/objects`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: ObjectListResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/workers/durable_objects/namespaces/${id}/objects`,
+      WorkersObjectsCursorPagination,
+      { query, ...options },
+    );
   }
 }
+
+export class WorkersObjectsCursorPagination extends CursorPagination<WorkersObject> {}
 
 export interface WorkersObject {
   /**
@@ -35,30 +37,15 @@ export interface WorkersObject {
   hasStoredData?: boolean;
 }
 
-export type ObjectListResponse = Array<WorkersObject>;
-
-export interface ObjectListParams {
+export interface ObjectListParams extends CursorPaginationParams {
   /**
    * Path param: Identifier
    */
   account_id: string;
-
-  /**
-   * Query param: Opaque token indicating the position from which to continue when
-   * requesting the next set of records. A valid value for the cursor can be obtained
-   * from the cursors object in the result_info structure.
-   */
-  cursor?: string;
-
-  /**
-   * Query param: The number of objects to return. The cursor attribute may be used
-   * to iterate over the next batch of objects if there are more than the limit.
-   */
-  limit?: number;
 }
 
 export namespace Objects {
   export import WorkersObject = ObjectsAPI.WorkersObject;
-  export import ObjectListResponse = ObjectsAPI.ObjectListResponse;
+  export import WorkersObjectsCursorPagination = ObjectsAPI.WorkersObjectsCursorPagination;
   export import ObjectListParams = ObjectsAPI.ObjectListParams;
 }

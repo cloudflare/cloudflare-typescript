@@ -168,7 +168,7 @@ export namespace Namespaces {
   export import BulkDeleteParams = BulkAPI.BulkDeleteParams;
   export import Keys = KeysAPI.Keys;
   export import WorkersKVKey = KeysAPI.WorkersKVKey;
-  export import KeyListResponse = KeysAPI.KeyListResponse;
+  export import WorkersKVKeysCursorPagination = KeysAPI.WorkersKVKeysCursorPagination;
   export import KeyListParams = KeysAPI.KeyListParams;
   export import Metadata = MetadataAPI.Metadata;
   export import MetadataGetResponse = MetadataAPI.MetadataGetResponse;

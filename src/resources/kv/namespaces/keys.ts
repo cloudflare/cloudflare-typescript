@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as KeysAPI from 'cloudflare/resources/kv/namespaces/keys';
+import { CursorPagination, type CursorPaginationParams } from 'cloudflare/pagination';
 
 export class Keys extends APIResource {
   /**
@@ -12,16 +13,17 @@ export class Keys extends APIResource {
     namespaceId: string,
     params: KeyListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<KeyListResponse> {
+  ): Core.PagePromise<WorkersKVKeysCursorPagination, WorkersKVKey> {
     const { account_id, ...query } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/keys`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: KeyListResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/keys`,
+      WorkersKVKeysCursorPagination,
+      { query, ...options },
+    );
   }
 }
+
+export class WorkersKVKeysCursorPagination extends CursorPagination<WorkersKVKey> {}
 
 /**
  * A name for a value. A value stored under a given key may be retrieved via the
@@ -46,27 +48,11 @@ export interface WorkersKVKey {
   metadata?: unknown;
 }
 
-export type KeyListResponse = Array<WorkersKVKey>;
-
-export interface KeyListParams {
+export interface KeyListParams extends CursorPaginationParams {
   /**
    * Path param: Identifier
    */
   account_id: string;
-
-  /**
-   * Query param: Opaque token indicating the position from which to continue when
-   * requesting the next set of records if the amount of list results was limited by
-   * the limit parameter. A valid value for the cursor can be obtained from the
-   * `cursors` object in the `result_info` structure.
-   */
-  cursor?: string;
-
-  /**
-   * Query param: The number of keys to return. The cursor attribute may be used to
-   * iterate over the next batch of keys if there are more than the limit.
-   */
-  limit?: number;
 
   /**
    * Query param: A string prefix used to filter down which keys will be returned.
@@ -77,6 +63,6 @@ export interface KeyListParams {
 
 export namespace Keys {
   export import WorkersKVKey = KeysAPI.WorkersKVKey;
-  export import KeyListResponse = KeysAPI.KeyListResponse;
+  export import WorkersKVKeysCursorPagination = KeysAPI.WorkersKVKeysCursorPagination;
   export import KeyListParams = KeysAPI.KeyListParams;
 }
