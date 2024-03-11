@@ -114,7 +114,7 @@ export interface LegacyJhsZonelockdown {
    */
   configurations:
     | LegacyJhsZonelockdown.LegacyJhsSchemasIPConfiguration
-    | LegacyJhsZonelockdown.LegacyJhsSchemasCidrConfiguration;
+    | LegacyJhsZonelockdown.LegacyJhsSchemasCIDRConfiguration;
 
   /**
    * The timestamp of when the rule was created.
@@ -159,7 +159,7 @@ export namespace LegacyJhsZonelockdown {
     value?: string;
   }
 
-  export interface LegacyJhsSchemasCidrConfiguration {
+  export interface LegacyJhsSchemasCIDRConfiguration {
     /**
      * The configuration target. You must set the target to `ip_range` when specifying
      * an IP address range in the Zone Lockdown rule.
