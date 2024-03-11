@@ -614,11 +614,9 @@ export namespace Cloudflare {
   export import WaitingroomWaitingroom = API.WaitingroomWaitingroom;
   export import WaitingRoomListResponse = API.WaitingRoomListResponse;
   export import WaitingRoomDeleteResponse = API.WaitingRoomDeleteResponse;
-  export import WaitingRoomPreviewResponse = API.WaitingRoomPreviewResponse;
   export import WaitingRoomCreateParams = API.WaitingRoomCreateParams;
   export import WaitingRoomUpdateParams = API.WaitingRoomUpdateParams;
   export import WaitingRoomEditParams = API.WaitingRoomEditParams;
-  export import WaitingRoomPreviewParams = API.WaitingRoomPreviewParams;
 
   export import Web3 = API.Web3;
 

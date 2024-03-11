@@ -20,5 +20,5 @@ export {
   PostureListParams,
   PostureDeleteParams,
   PostureGetParams,
-  Postures,
-} from './postures';
+  Posture,
+} from './posture';

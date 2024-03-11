@@ -33,8 +33,8 @@ export {
   PostureListParams,
   PostureDeleteParams,
   PostureGetParams,
-  Postures,
-} from './postures/index';
+  Posture,
+} from './posture/index';
 export {
   TeamsDevicesDeviceSettingsPolicy,
   PolicyListResponse,

@@ -1,5 +1,6 @@
 // File generated from our OpenAPI spec by Stainless.
 
+export { PagePreviewResponse, PagePreviewParams, Page } from './page';
 export {
   SettingUpdateResponse,
   SettingEditResponse,
@@ -34,10 +35,8 @@ export {
   WaitingroomWaitingroom,
   WaitingRoomListResponse,
   WaitingRoomDeleteResponse,
-  WaitingRoomPreviewResponse,
   WaitingRoomCreateParams,
   WaitingRoomUpdateParams,
   WaitingRoomEditParams,
-  WaitingRoomPreviewParams,
   WaitingRooms,
 } from './waiting-rooms';

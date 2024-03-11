@@ -2,10 +2,10 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as PosturesAPI from 'cloudflare/resources/zero-trust/devices/postures/postures';
-import * as IntegrationsAPI from 'cloudflare/resources/zero-trust/devices/postures/integrations';
+import * as PostureAPI from 'cloudflare/resources/zero-trust/devices/posture/posture';
+import * as IntegrationsAPI from 'cloudflare/resources/zero-trust/devices/posture/integrations';
 
-export class Postures extends APIResource {
+export class Posture extends APIResource {
   integrations: IntegrationsAPI.Integrations = new IntegrationsAPI.Integrations(this._client);
 
   /**
@@ -1378,15 +1378,15 @@ export interface PostureGetParams {
   account_id: unknown;
 }
 
-export namespace Postures {
-  export import TeamsDevicesDevicePostureRules = PosturesAPI.TeamsDevicesDevicePostureRules;
-  export import PostureListResponse = PosturesAPI.PostureListResponse;
-  export import PostureDeleteResponse = PosturesAPI.PostureDeleteResponse;
-  export import PostureCreateParams = PosturesAPI.PostureCreateParams;
-  export import PostureUpdateParams = PosturesAPI.PostureUpdateParams;
-  export import PostureListParams = PosturesAPI.PostureListParams;
-  export import PostureDeleteParams = PosturesAPI.PostureDeleteParams;
-  export import PostureGetParams = PosturesAPI.PostureGetParams;
+export namespace Posture {
+  export import TeamsDevicesDevicePostureRules = PostureAPI.TeamsDevicesDevicePostureRules;
+  export import PostureListResponse = PostureAPI.PostureListResponse;
+  export import PostureDeleteResponse = PostureAPI.PostureDeleteResponse;
+  export import PostureCreateParams = PostureAPI.PostureCreateParams;
+  export import PostureUpdateParams = PostureAPI.PostureUpdateParams;
+  export import PostureListParams = PostureAPI.PostureListParams;
+  export import PostureDeleteParams = PostureAPI.PostureDeleteParams;
+  export import PostureGetParams = PostureAPI.PostureGetParams;
   export import Integrations = IntegrationsAPI.Integrations;
   export import TeamsDevicesDevicePostureIntegrations = IntegrationsAPI.TeamsDevicesDevicePostureIntegrations;
   export import IntegrationListResponse = IntegrationsAPI.IntegrationListResponse;

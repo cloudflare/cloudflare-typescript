@@ -342,11 +342,9 @@ export {
   WaitingroomWaitingroom,
   WaitingRoomListResponse,
   WaitingRoomDeleteResponse,
-  WaitingRoomPreviewResponse,
   WaitingRoomCreateParams,
   WaitingRoomUpdateParams,
   WaitingRoomEditParams,
-  WaitingRoomPreviewParams,
   WaitingRooms,
 } from './waiting-rooms/waiting-rooms';
 export { Web3 } from './web3/web3';
