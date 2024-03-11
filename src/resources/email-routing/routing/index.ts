@@ -1,6 +1,5 @@
 // File generated from our OpenAPI spec by Stainless.
 
-export { DisableCreateResponse, Disables } from './disables';
 export {
   EmailAddresses,
   AddressCreateResponse,
@@ -26,5 +25,10 @@ export {
   RuleListResponsesV4PagePaginationArray,
   Rules,
 } from './rules/index';
-export { EmailSettings, RoutingGetResponse, Routing } from './routing';
-export { EnableCreateResponse, Enables } from './enables';
+export {
+  EmailSettings,
+  RoutingDisableResponse,
+  RoutingEnableResponse,
+  RoutingGetResponse,
+  Routing,
+} from './routing';
