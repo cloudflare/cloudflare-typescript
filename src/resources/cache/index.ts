@@ -29,11 +29,11 @@ export {
   RegionalTieredCache,
 } from './regional-tiered-cache';
 export {
-  SmartTieredCachedDeleteResponse,
-  SmartTieredCachedEditResponse,
-  SmartTieredCachedGetResponse,
-  SmartTieredCachedDeleteParams,
-  SmartTieredCachedEditParams,
-  SmartTieredCachedGetParams,
-  SmartTieredCached,
-} from './smart-tiered-cached';
+  SmartTieredCacheDeleteResponse,
+  SmartTieredCacheEditResponse,
+  SmartTieredCacheGetResponse,
+  SmartTieredCacheDeleteParams,
+  SmartTieredCacheEditParams,
+  SmartTieredCacheGetParams,
+  SmartTieredCache,
+} from './smart-tiered-cache';

@@ -5,12 +5,12 @@ import { APIResource } from 'cloudflare/resource';
 import * as CacheAPI from 'cloudflare/resources/cache/cache';
 import * as CacheReserveAPI from 'cloudflare/resources/cache/cache-reserve';
 import * as RegionalTieredCacheAPI from 'cloudflare/resources/cache/regional-tiered-cache';
-import * as SmartTieredCachedAPI from 'cloudflare/resources/cache/smart-tiered-cached';
+import * as SmartTieredCacheAPI from 'cloudflare/resources/cache/smart-tiered-cache';
 import * as VariantsAPI from 'cloudflare/resources/cache/variants';
 
 export class Cache extends APIResource {
   cacheReserve: CacheReserveAPI.CacheReserve = new CacheReserveAPI.CacheReserve(this._client);
-  smartTieredCached: SmartTieredCachedAPI.SmartTieredCached = new SmartTieredCachedAPI.SmartTieredCached(
+  smartTieredCache: SmartTieredCacheAPI.SmartTieredCache = new SmartTieredCacheAPI.SmartTieredCache(
     this._client,
   );
   variants: VariantsAPI.Variants = new VariantsAPI.Variants(this._client);
@@ -116,13 +116,13 @@ export namespace Cache {
   export import CacheReserveEditParams = CacheReserveAPI.CacheReserveEditParams;
   export import CacheReserveGetParams = CacheReserveAPI.CacheReserveGetParams;
   export import CacheReserveStatusParams = CacheReserveAPI.CacheReserveStatusParams;
-  export import SmartTieredCached = SmartTieredCachedAPI.SmartTieredCached;
-  export import SmartTieredCachedDeleteResponse = SmartTieredCachedAPI.SmartTieredCachedDeleteResponse;
-  export import SmartTieredCachedEditResponse = SmartTieredCachedAPI.SmartTieredCachedEditResponse;
-  export import SmartTieredCachedGetResponse = SmartTieredCachedAPI.SmartTieredCachedGetResponse;
-  export import SmartTieredCachedDeleteParams = SmartTieredCachedAPI.SmartTieredCachedDeleteParams;
-  export import SmartTieredCachedEditParams = SmartTieredCachedAPI.SmartTieredCachedEditParams;
-  export import SmartTieredCachedGetParams = SmartTieredCachedAPI.SmartTieredCachedGetParams;
+  export import SmartTieredCache = SmartTieredCacheAPI.SmartTieredCache;
+  export import SmartTieredCacheDeleteResponse = SmartTieredCacheAPI.SmartTieredCacheDeleteResponse;
+  export import SmartTieredCacheEditResponse = SmartTieredCacheAPI.SmartTieredCacheEditResponse;
+  export import SmartTieredCacheGetResponse = SmartTieredCacheAPI.SmartTieredCacheGetResponse;
+  export import SmartTieredCacheDeleteParams = SmartTieredCacheAPI.SmartTieredCacheDeleteParams;
+  export import SmartTieredCacheEditParams = SmartTieredCacheAPI.SmartTieredCacheEditParams;
+  export import SmartTieredCacheGetParams = SmartTieredCacheAPI.SmartTieredCacheGetParams;
   export import Variants = VariantsAPI.Variants;
   export import CacheVariants = VariantsAPI.CacheVariants;
   export import VariantEditResponse = VariantsAPI.VariantEditResponse;
