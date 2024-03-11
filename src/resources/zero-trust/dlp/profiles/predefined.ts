@@ -2,9 +2,9 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as PredefinedsAPI from 'cloudflare/resources/zero-trust/dlp/profiles/predefineds';
+import * as PredefinedAPI from 'cloudflare/resources/zero-trust/dlp/profiles/predefined';
 
-export class Predefineds extends APIResource {
+export class Predefined extends APIResource {
   /**
    * Updates a DLP predefined profile. Only supports enabling/disabling entries.
    */
@@ -196,8 +196,8 @@ export interface PredefinedGetParams {
   account_id: string;
 }
 
-export namespace Predefineds {
-  export import DLPPredefinedProfile = PredefinedsAPI.DLPPredefinedProfile;
-  export import PredefinedUpdateParams = PredefinedsAPI.PredefinedUpdateParams;
-  export import PredefinedGetParams = PredefinedsAPI.PredefinedGetParams;
+export namespace Predefined {
+  export import DLPPredefinedProfile = PredefinedAPI.DLPPredefinedProfile;
+  export import PredefinedUpdateParams = PredefinedAPI.PredefinedUpdateParams;
+  export import PredefinedGetParams = PredefinedAPI.PredefinedGetParams;
 }

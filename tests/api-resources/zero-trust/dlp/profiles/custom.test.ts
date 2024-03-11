@@ -9,10 +9,10 @@ const cloudflare = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource customs', () => {
+describe('resource custom', () => {
   // skipped: tests are disabled for the time being
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.dlp.profiles.customs.create({
+    const responsePromise = cloudflare.zeroTrust.dlp.profiles.custom.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       profiles: [{}, {}, {}],
     });
@@ -27,7 +27,7 @@ describe('resource customs', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.dlp.profiles.customs.create({
+    const response = await cloudflare.zeroTrust.dlp.profiles.custom.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       profiles: [
         {
@@ -105,7 +105,7 @@ describe('resource customs', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.dlp.profiles.customs.update(
+    const responsePromise = cloudflare.zeroTrust.dlp.profiles.custom.update(
       '384e129d-25bd-403c-8019-bc19eb7a8a5f',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
@@ -120,7 +120,7 @@ describe('resource customs', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.dlp.profiles.customs.update(
+    const response = await cloudflare.zeroTrust.dlp.profiles.custom.update(
       '384e129d-25bd-403c-8019-bc19eb7a8a5f',
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -155,7 +155,7 @@ describe('resource customs', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('delete: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.dlp.profiles.customs.delete(
+    const responsePromise = cloudflare.zeroTrust.dlp.profiles.custom.delete(
       '384e129d-25bd-403c-8019-bc19eb7a8a5f',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
@@ -170,7 +170,7 @@ describe('resource customs', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('delete: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.dlp.profiles.customs.delete(
+    const response = await cloudflare.zeroTrust.dlp.profiles.custom.delete(
       '384e129d-25bd-403c-8019-bc19eb7a8a5f',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
@@ -178,7 +178,7 @@ describe('resource customs', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('get: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.dlp.profiles.customs.get(
+    const responsePromise = cloudflare.zeroTrust.dlp.profiles.custom.get(
       '384e129d-25bd-403c-8019-bc19eb7a8a5f',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
@@ -193,7 +193,7 @@ describe('resource customs', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('get: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.dlp.profiles.customs.get(
+    const response = await cloudflare.zeroTrust.dlp.profiles.custom.get(
       '384e129d-25bd-403c-8019-bc19eb7a8a5f',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );

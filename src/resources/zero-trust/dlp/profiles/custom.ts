@@ -2,9 +2,9 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as CustomsAPI from 'cloudflare/resources/zero-trust/dlp/profiles/customs';
+import * as CustomAPI from 'cloudflare/resources/zero-trust/dlp/profiles/custom';
 
-export class Customs extends APIResource {
+export class Custom extends APIResource {
   /**
    * Creates a set of DLP custom profiles.
    */
@@ -460,12 +460,12 @@ export interface CustomGetParams {
   account_id: string;
 }
 
-export namespace Customs {
-  export import DLPCustomProfile = CustomsAPI.DLPCustomProfile;
-  export import CustomCreateResponse = CustomsAPI.CustomCreateResponse;
-  export import CustomDeleteResponse = CustomsAPI.CustomDeleteResponse;
-  export import CustomCreateParams = CustomsAPI.CustomCreateParams;
-  export import CustomUpdateParams = CustomsAPI.CustomUpdateParams;
-  export import CustomDeleteParams = CustomsAPI.CustomDeleteParams;
-  export import CustomGetParams = CustomsAPI.CustomGetParams;
+export namespace Custom {
+  export import DLPCustomProfile = CustomAPI.DLPCustomProfile;
+  export import CustomCreateResponse = CustomAPI.CustomCreateResponse;
+  export import CustomDeleteResponse = CustomAPI.CustomDeleteResponse;
+  export import CustomCreateParams = CustomAPI.CustomCreateParams;
+  export import CustomUpdateParams = CustomAPI.CustomUpdateParams;
+  export import CustomDeleteParams = CustomAPI.CustomDeleteParams;
+  export import CustomGetParams = CustomAPI.CustomGetParams;
 }
