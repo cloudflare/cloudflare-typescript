@@ -96,7 +96,7 @@ export interface LegacyJhsRule {
   configuration:
     | LegacyJhsRule.LegacyJhsIPConfiguration
     | LegacyJhsRule.LegacyJhsIPV6Configuration
-    | LegacyJhsRule.LegacyJhsCidrConfiguration
+    | LegacyJhsRule.LegacyJhsCIDRConfiguration
     | LegacyJhsRule.LegacyJhsASNConfiguration
     | LegacyJhsRule.LegacyJhsCountryConfiguration;
 
@@ -149,7 +149,7 @@ export namespace LegacyJhsRule {
     value?: string;
   }
 
-  export interface LegacyJhsCidrConfiguration {
+  export interface LegacyJhsCIDRConfiguration {
     /**
      * The configuration target. You must set the target to `ip_range` when specifying
      * an IP address range in the rule.
@@ -205,7 +205,7 @@ export interface AccessRuleCreateParams {
   configuration:
     | AccessRuleCreateParams.LegacyJhsIPConfiguration
     | AccessRuleCreateParams.LegacyJhsIPV6Configuration
-    | AccessRuleCreateParams.LegacyJhsCidrConfiguration
+    | AccessRuleCreateParams.LegacyJhsCIDRConfiguration
     | AccessRuleCreateParams.LegacyJhsASNConfiguration
     | AccessRuleCreateParams.LegacyJhsCountryConfiguration;
 
@@ -248,7 +248,7 @@ export namespace AccessRuleCreateParams {
     value?: string;
   }
 
-  export interface LegacyJhsCidrConfiguration {
+  export interface LegacyJhsCIDRConfiguration {
     /**
      * The configuration target. You must set the target to `ip_range` when specifying
      * an IP address range in the rule.
