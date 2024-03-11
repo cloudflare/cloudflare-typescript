@@ -2,9 +2,9 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as ProfilesAPI from 'cloudflare/resources/user/billing/profiles';
+import * as ProfileAPI from 'cloudflare/resources/user/billing/profile';
 
-export class Profiles extends APIResource {
+export class Profile extends APIResource {
   /**
    * Accesses your billing profile object.
    */
@@ -17,6 +17,6 @@ export class Profiles extends APIResource {
 
 export type ProfileGetResponse = unknown | string | null;
 
-export namespace Profiles {
-  export import ProfileGetResponse = ProfilesAPI.ProfileGetResponse;
+export namespace Profile {
+  export import ProfileGetResponse = ProfileAPI.ProfileGetResponse;
 }

@@ -143,7 +143,7 @@ export class Cloudflare extends Core.APIClient {
   }
 
   accounts: API.Accounts = new API.Accounts(this);
-  certificates: API.Certificates = new API.Certificates(this);
+  originCACertificates: API.OriginCACertificates = new API.OriginCACertificates(this);
   ips: API.IPs = new API.IPs(this);
   memberships: API.Memberships = new API.Memberships(this);
   user: API.UserResource = new API.UserResource(this);
@@ -396,13 +396,13 @@ export namespace Cloudflare {
   export import AccountListParams = API.AccountListParams;
   export import AccountGetParams = API.AccountGetParams;
 
-  export import Certificates = API.Certificates;
+  export import OriginCACertificates = API.OriginCACertificates;
   export import OriginCACertificate = API.OriginCACertificate;
-  export import CertificateCreateResponse = API.CertificateCreateResponse;
-  export import CertificateListResponse = API.CertificateListResponse;
-  export import CertificateDeleteResponse = API.CertificateDeleteResponse;
-  export import CertificateGetResponse = API.CertificateGetResponse;
-  export import CertificateCreateParams = API.CertificateCreateParams;
+  export import OriginCACertificateCreateResponse = API.OriginCACertificateCreateResponse;
+  export import OriginCACertificateListResponse = API.OriginCACertificateListResponse;
+  export import OriginCACertificateDeleteResponse = API.OriginCACertificateDeleteResponse;
+  export import OriginCACertificateGetResponse = API.OriginCACertificateGetResponse;
+  export import OriginCACertificateCreateParams = API.OriginCACertificateCreateParams;
 
   export import IPs = API.IPs;
   export import JdcloudIPs = API.JdcloudIPs;

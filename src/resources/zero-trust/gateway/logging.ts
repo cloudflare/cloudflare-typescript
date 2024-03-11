@@ -2,9 +2,9 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as LoggingsAPI from 'cloudflare/resources/zero-trust/gateway/loggings';
+import * as LoggingAPI from 'cloudflare/resources/zero-trust/gateway/logging';
 
-export class Loggings extends APIResource {
+export class Logging extends APIResource {
   /**
    * Updates logging settings for the current Zero Trust account.
    */
@@ -116,8 +116,8 @@ export interface LoggingGetParams {
   account_id: unknown;
 }
 
-export namespace Loggings {
-  export import ZeroTrustGatewayGatewayAccountLoggingSettings = LoggingsAPI.ZeroTrustGatewayGatewayAccountLoggingSettings;
-  export import LoggingUpdateParams = LoggingsAPI.LoggingUpdateParams;
-  export import LoggingGetParams = LoggingsAPI.LoggingGetParams;
+export namespace Logging {
+  export import ZeroTrustGatewayGatewayAccountLoggingSettings = LoggingAPI.ZeroTrustGatewayGatewayAccountLoggingSettings;
+  export import LoggingUpdateParams = LoggingAPI.LoggingUpdateParams;
+  export import LoggingGetParams = LoggingAPI.LoggingGetParams;
 }
