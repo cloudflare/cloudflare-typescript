@@ -9,10 +9,10 @@ const cloudflare = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource smartTieredCached', () => {
+describe('resource smartTieredCache', () => {
   // skipped: tests are disabled for the time being
   test.skip('delete: only required params', async () => {
-    const responsePromise = cloudflare.cache.smartTieredCached.delete({
+    const responsePromise = cloudflare.cache.smartTieredCache.delete({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -26,14 +26,14 @@ describe('resource smartTieredCached', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('delete: required and optional params', async () => {
-    const response = await cloudflare.cache.smartTieredCached.delete({
+    const response = await cloudflare.cache.smartTieredCache.delete({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('edit: only required params', async () => {
-    const responsePromise = cloudflare.cache.smartTieredCached.edit({
+    const responsePromise = cloudflare.cache.smartTieredCache.edit({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       value: 'on',
     });
@@ -48,7 +48,7 @@ describe('resource smartTieredCached', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('edit: required and optional params', async () => {
-    const response = await cloudflare.cache.smartTieredCached.edit({
+    const response = await cloudflare.cache.smartTieredCache.edit({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       value: 'on',
     });
@@ -56,7 +56,7 @@ describe('resource smartTieredCached', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('get: only required params', async () => {
-    const responsePromise = cloudflare.cache.smartTieredCached.get({
+    const responsePromise = cloudflare.cache.smartTieredCache.get({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -70,7 +70,7 @@ describe('resource smartTieredCached', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('get: required and optional params', async () => {
-    const response = await cloudflare.cache.smartTieredCached.get({
+    const response = await cloudflare.cache.smartTieredCache.get({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

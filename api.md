@@ -1106,19 +1106,19 @@ Methods:
 - <code title="get /zones/{zone_id}/cache/cache_reserve">client.cache.cacheReserve.<a href="./src/resources/cache/cache-reserve.ts">get</a>({ ...params }) -> CacheReserveGetResponse</code>
 - <code title="get /zones/{zone_id}/cache/cache_reserve_clear">client.cache.cacheReserve.<a href="./src/resources/cache/cache-reserve.ts">status</a>({ ...params }) -> CacheReserveStatusResponse</code>
 
-## SmartTieredCached
+## SmartTieredCache
 
 Types:
 
-- <code><a href="./src/resources/cache/smart-tiered-cached.ts">SmartTieredCachedDeleteResponse</a></code>
-- <code><a href="./src/resources/cache/smart-tiered-cached.ts">SmartTieredCachedEditResponse</a></code>
-- <code><a href="./src/resources/cache/smart-tiered-cached.ts">SmartTieredCachedGetResponse</a></code>
+- <code><a href="./src/resources/cache/smart-tiered-cache.ts">SmartTieredCacheDeleteResponse</a></code>
+- <code><a href="./src/resources/cache/smart-tiered-cache.ts">SmartTieredCacheEditResponse</a></code>
+- <code><a href="./src/resources/cache/smart-tiered-cache.ts">SmartTieredCacheGetResponse</a></code>
 
 Methods:
 
-- <code title="delete /zones/{zone_id}/cache/tiered_cache_smart_topology_enable">client.cache.smartTieredCached.<a href="./src/resources/cache/smart-tiered-cached.ts">delete</a>({ ...params }) -> SmartTieredCachedDeleteResponse</code>
-- <code title="patch /zones/{zone_id}/cache/tiered_cache_smart_topology_enable">client.cache.smartTieredCached.<a href="./src/resources/cache/smart-tiered-cached.ts">edit</a>({ ...params }) -> SmartTieredCachedEditResponse</code>
-- <code title="get /zones/{zone_id}/cache/tiered_cache_smart_topology_enable">client.cache.smartTieredCached.<a href="./src/resources/cache/smart-tiered-cached.ts">get</a>({ ...params }) -> SmartTieredCachedGetResponse</code>
+- <code title="delete /zones/{zone_id}/cache/tiered_cache_smart_topology_enable">client.cache.smartTieredCache.<a href="./src/resources/cache/smart-tiered-cache.ts">delete</a>({ ...params }) -> SmartTieredCacheDeleteResponse</code>
+- <code title="patch /zones/{zone_id}/cache/tiered_cache_smart_topology_enable">client.cache.smartTieredCache.<a href="./src/resources/cache/smart-tiered-cache.ts">edit</a>({ ...params }) -> SmartTieredCacheEditResponse</code>
+- <code title="get /zones/{zone_id}/cache/tiered_cache_smart_topology_enable">client.cache.smartTieredCache.<a href="./src/resources/cache/smart-tiered-cache.ts">get</a>({ ...params }) -> SmartTieredCacheGetResponse</code>
 
 ## Variants
 
