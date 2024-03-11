@@ -2,7 +2,7 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as IntegrationsAPI from 'cloudflare/resources/zero-trust/devices/postures/integrations';
+import * as IntegrationsAPI from 'cloudflare/resources/zero-trust/devices/posture/integrations';
 
 export class Integrations extends APIResource {
   /**

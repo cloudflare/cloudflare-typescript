@@ -2146,7 +2146,6 @@ Types:
 - <code><a href="./src/resources/waiting-rooms/waiting-rooms.ts">WaitingroomWaitingroom</a></code>
 - <code><a href="./src/resources/waiting-rooms/waiting-rooms.ts">WaitingRoomListResponse</a></code>
 - <code><a href="./src/resources/waiting-rooms/waiting-rooms.ts">WaitingRoomDeleteResponse</a></code>
-- <code><a href="./src/resources/waiting-rooms/waiting-rooms.ts">WaitingRoomPreviewResponse</a></code>
 
 Methods:
 
@@ -2156,7 +2155,16 @@ Methods:
 - <code title="delete /zones/{zone_identifier}/waiting_rooms/{waiting_room_id}">client.waitingRooms.<a href="./src/resources/waiting-rooms/waiting-rooms.ts">delete</a>(zoneIdentifier, waitingRoomId) -> WaitingRoomDeleteResponse</code>
 - <code title="patch /zones/{zone_identifier}/waiting_rooms/{waiting_room_id}">client.waitingRooms.<a href="./src/resources/waiting-rooms/waiting-rooms.ts">edit</a>(zoneIdentifier, waitingRoomId, { ...params }) -> WaitingroomWaitingroom</code>
 - <code title="get /zones/{zone_identifier}/waiting_rooms/{waiting_room_id}">client.waitingRooms.<a href="./src/resources/waiting-rooms/waiting-rooms.ts">get</a>(zoneIdentifier, waitingRoomId) -> WaitingroomWaitingroom</code>
-- <code title="post /zones/{zone_identifier}/waiting_rooms/preview">client.waitingRooms.<a href="./src/resources/waiting-rooms/waiting-rooms.ts">preview</a>(zoneIdentifier, { ...params }) -> WaitingRoomPreviewResponse</code>
+
+## Page
+
+Types:
+
+- <code><a href="./src/resources/waiting-rooms/page.ts">PagePreviewResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_identifier}/waiting_rooms/preview">client.waitingRooms.page.<a href="./src/resources/waiting-rooms/page.ts">preview</a>(zoneIdentifier, { ...params }) -> PagePreviewResponse</code>
 
 ## Events
 
@@ -4196,37 +4204,37 @@ Methods:
 - <code title="get /accounts/{account_id}/devices/policy/include">client.zeroTrust.devices.policies.includes.<a href="./src/resources/zero-trust/devices/policies/includes.ts">list</a>({ ...params }) -> IncludeListResponse | null</code>
 - <code title="get /accounts/{account_id}/devices/policy/{policy_id}/include">client.zeroTrust.devices.policies.includes.<a href="./src/resources/zero-trust/devices/policies/includes.ts">get</a>(policyId, { ...params }) -> IncludeGetResponse | null</code>
 
-### Postures
+### Posture
 
 Types:
 
-- <code><a href="./src/resources/zero-trust/devices/postures/postures.ts">TeamsDevicesDevicePostureRules</a></code>
-- <code><a href="./src/resources/zero-trust/devices/postures/postures.ts">PostureListResponse</a></code>
-- <code><a href="./src/resources/zero-trust/devices/postures/postures.ts">PostureDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">TeamsDevicesDevicePostureRules</a></code>
+- <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">PostureListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">PostureDeleteResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/devices/posture">client.zeroTrust.devices.postures.<a href="./src/resources/zero-trust/devices/postures/postures.ts">create</a>({ ...params }) -> TeamsDevicesDevicePostureRules | null</code>
-- <code title="put /accounts/{account_id}/devices/posture/{rule_id}">client.zeroTrust.devices.postures.<a href="./src/resources/zero-trust/devices/postures/postures.ts">update</a>(ruleId, { ...params }) -> TeamsDevicesDevicePostureRules | null</code>
-- <code title="get /accounts/{account_id}/devices/posture">client.zeroTrust.devices.postures.<a href="./src/resources/zero-trust/devices/postures/postures.ts">list</a>({ ...params }) -> PostureListResponse | null</code>
-- <code title="delete /accounts/{account_id}/devices/posture/{rule_id}">client.zeroTrust.devices.postures.<a href="./src/resources/zero-trust/devices/postures/postures.ts">delete</a>(ruleId, { ...params }) -> PostureDeleteResponse | null</code>
-- <code title="get /accounts/{account_id}/devices/posture/{rule_id}">client.zeroTrust.devices.postures.<a href="./src/resources/zero-trust/devices/postures/postures.ts">get</a>(ruleId, { ...params }) -> TeamsDevicesDevicePostureRules | null</code>
+- <code title="post /accounts/{account_id}/devices/posture">client.zeroTrust.devices.posture.<a href="./src/resources/zero-trust/devices/posture/posture.ts">create</a>({ ...params }) -> TeamsDevicesDevicePostureRules | null</code>
+- <code title="put /accounts/{account_id}/devices/posture/{rule_id}">client.zeroTrust.devices.posture.<a href="./src/resources/zero-trust/devices/posture/posture.ts">update</a>(ruleId, { ...params }) -> TeamsDevicesDevicePostureRules | null</code>
+- <code title="get /accounts/{account_id}/devices/posture">client.zeroTrust.devices.posture.<a href="./src/resources/zero-trust/devices/posture/posture.ts">list</a>({ ...params }) -> PostureListResponse | null</code>
+- <code title="delete /accounts/{account_id}/devices/posture/{rule_id}">client.zeroTrust.devices.posture.<a href="./src/resources/zero-trust/devices/posture/posture.ts">delete</a>(ruleId, { ...params }) -> PostureDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/devices/posture/{rule_id}">client.zeroTrust.devices.posture.<a href="./src/resources/zero-trust/devices/posture/posture.ts">get</a>(ruleId, { ...params }) -> TeamsDevicesDevicePostureRules | null</code>
 
 #### Integrations
 
 Types:
 
-- <code><a href="./src/resources/zero-trust/devices/postures/integrations.ts">TeamsDevicesDevicePostureIntegrations</a></code>
-- <code><a href="./src/resources/zero-trust/devices/postures/integrations.ts">IntegrationListResponse</a></code>
-- <code><a href="./src/resources/zero-trust/devices/postures/integrations.ts">IntegrationDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/posture/integrations.ts">TeamsDevicesDevicePostureIntegrations</a></code>
+- <code><a href="./src/resources/zero-trust/devices/posture/integrations.ts">IntegrationListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/posture/integrations.ts">IntegrationDeleteResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/devices/posture/integration">client.zeroTrust.devices.postures.integrations.<a href="./src/resources/zero-trust/devices/postures/integrations.ts">create</a>({ ...params }) -> TeamsDevicesDevicePostureIntegrations | null</code>
-- <code title="get /accounts/{account_id}/devices/posture/integration">client.zeroTrust.devices.postures.integrations.<a href="./src/resources/zero-trust/devices/postures/integrations.ts">list</a>({ ...params }) -> IntegrationListResponse | null</code>
-- <code title="delete /accounts/{account_id}/devices/posture/integration/{integration_id}">client.zeroTrust.devices.postures.integrations.<a href="./src/resources/zero-trust/devices/postures/integrations.ts">delete</a>(integrationId, { ...params }) -> IntegrationDeleteResponse | null</code>
-- <code title="patch /accounts/{account_id}/devices/posture/integration/{integration_id}">client.zeroTrust.devices.postures.integrations.<a href="./src/resources/zero-trust/devices/postures/integrations.ts">edit</a>(integrationId, { ...params }) -> TeamsDevicesDevicePostureIntegrations | null</code>
-- <code title="get /accounts/{account_id}/devices/posture/integration/{integration_id}">client.zeroTrust.devices.postures.integrations.<a href="./src/resources/zero-trust/devices/postures/integrations.ts">get</a>(integrationId, { ...params }) -> TeamsDevicesDevicePostureIntegrations | null</code>
+- <code title="post /accounts/{account_id}/devices/posture/integration">client.zeroTrust.devices.posture.integrations.<a href="./src/resources/zero-trust/devices/posture/integrations.ts">create</a>({ ...params }) -> TeamsDevicesDevicePostureIntegrations | null</code>
+- <code title="get /accounts/{account_id}/devices/posture/integration">client.zeroTrust.devices.posture.integrations.<a href="./src/resources/zero-trust/devices/posture/integrations.ts">list</a>({ ...params }) -> IntegrationListResponse | null</code>
+- <code title="delete /accounts/{account_id}/devices/posture/integration/{integration_id}">client.zeroTrust.devices.posture.integrations.<a href="./src/resources/zero-trust/devices/posture/integrations.ts">delete</a>(integrationId, { ...params }) -> IntegrationDeleteResponse | null</code>
+- <code title="patch /accounts/{account_id}/devices/posture/integration/{integration_id}">client.zeroTrust.devices.posture.integrations.<a href="./src/resources/zero-trust/devices/posture/integrations.ts">edit</a>(integrationId, { ...params }) -> TeamsDevicesDevicePostureIntegrations | null</code>
+- <code title="get /accounts/{account_id}/devices/posture/integration/{integration_id}">client.zeroTrust.devices.posture.integrations.<a href="./src/resources/zero-trust/devices/posture/integrations.ts">get</a>(integrationId, { ...params }) -> TeamsDevicesDevicePostureIntegrations | null</code>
 
 ### Revokes
 
