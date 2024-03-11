@@ -348,6 +348,11 @@ export namespace PagesProjects {
       analytics_engine_datasets?: Preview.AnalyticsEngineDatasets | null;
 
       /**
+       * Browser bindings used for Pages Functions.
+       */
+      browsers?: Preview.Browsers | null;
+
+      /**
        * Compatibility date used for Pages Functions.
        */
       compatibility_date?: string;
@@ -373,9 +378,19 @@ export namespace PagesProjects {
       env_vars?: Preview.EnvVars | null;
 
       /**
+       * Hyperdrive bindings used for Pages Functions.
+       */
+      hyperdrive_bindings?: Preview.HyperdriveBindings | null;
+
+      /**
        * KV namespaces used for Pages Functions.
        */
       kv_namespaces?: Preview.KVNamespaces;
+
+      /**
+       * mTLS bindings used for Pages Functions.
+       */
+      mtls_certificates?: Preview.MTLSCertificates | null;
 
       /**
        * Placement setting used for Pages Functions.
@@ -395,7 +410,12 @@ export namespace PagesProjects {
       /**
        * Services used for Pages Functions.
        */
-      service_bindings?: Preview.ServiceBindings | null;
+      services?: Preview.Services | null;
+
+      /**
+       * Vectorize bindings used for Pages Functions.
+       */
+      vectorize_bindings?: Preview.VectorizeBindings | null;
     }
 
     export namespace Preview {
@@ -441,6 +461,16 @@ export namespace PagesProjects {
       }
 
       /**
+       * Browser bindings used for Pages Functions.
+       */
+      export interface Browsers {
+        /**
+         * Browser binding.
+         */
+        BROWSER?: unknown;
+      }
+
+      /**
        * D1 databases used for Pages Functions.
        */
       export interface D1Databases {
@@ -512,6 +542,25 @@ export namespace PagesProjects {
       }
 
       /**
+       * Hyperdrive bindings used for Pages Functions.
+       */
+      export interface HyperdriveBindings {
+        /**
+         * Hyperdrive binding.
+         */
+        HYPERDRIVE?: HyperdriveBindings.Hyperdrive;
+      }
+
+      export namespace HyperdriveBindings {
+        /**
+         * Hyperdrive binding.
+         */
+        export interface Hyperdrive {
+          id?: string;
+        }
+      }
+
+      /**
        * KV namespaces used for Pages Functions.
        */
       export interface KVNamespaces {
@@ -530,6 +579,25 @@ export namespace PagesProjects {
            * ID of the KV namespace.
            */
           namespace_id?: string;
+        }
+      }
+
+      /**
+       * mTLS bindings used for Pages Functions.
+       */
+      export interface MTLSCertificates {
+        /**
+         * mTLS binding.
+         */
+        MTLS?: MTLSCertificates.MTLS;
+      }
+
+      export namespace MTLSCertificates {
+        /**
+         * mTLS binding.
+         */
+        export interface MTLS {
+          certificate_id?: string;
         }
       }
 
@@ -590,14 +658,14 @@ export namespace PagesProjects {
       /**
        * Services used for Pages Functions.
        */
-      export interface ServiceBindings {
+      export interface Services {
         /**
          * Service binding.
          */
-        SERVICE_BINDING?: ServiceBindings.ServiceBinding;
+        SERVICE_BINDING?: Services.ServiceBinding;
       }
 
-      export namespace ServiceBindings {
+      export namespace Services {
         /**
          * Service binding.
          */
@@ -611,6 +679,25 @@ export namespace PagesProjects {
            * The Service name.
            */
           service?: string;
+        }
+      }
+
+      /**
+       * Vectorize bindings used for Pages Functions.
+       */
+      export interface VectorizeBindings {
+        /**
+         * Vectorize binding.
+         */
+        VECTORIZE?: VectorizeBindings.Vectorize;
+      }
+
+      export namespace VectorizeBindings {
+        /**
+         * Vectorize binding.
+         */
+        export interface Vectorize {
+          index_name?: string;
         }
       }
     }
@@ -628,6 +715,11 @@ export namespace PagesProjects {
        * Analytics Engine bindings used for Pages Functions.
        */
       analytics_engine_datasets?: Production.AnalyticsEngineDatasets | null;
+
+      /**
+       * Browser bindings used for Pages Functions.
+       */
+      browsers?: Production.Browsers | null;
 
       /**
        * Compatibility date used for Pages Functions.
@@ -655,9 +747,19 @@ export namespace PagesProjects {
       env_vars?: Production.EnvVars | null;
 
       /**
+       * Hyperdrive bindings used for Pages Functions.
+       */
+      hyperdrive_bindings?: Production.HyperdriveBindings | null;
+
+      /**
        * KV namespaces used for Pages Functions.
        */
       kv_namespaces?: Production.KVNamespaces;
+
+      /**
+       * mTLS bindings used for Pages Functions.
+       */
+      mtls_certificates?: Production.MTLSCertificates | null;
 
       /**
        * Placement setting used for Pages Functions.
@@ -677,7 +779,12 @@ export namespace PagesProjects {
       /**
        * Services used for Pages Functions.
        */
-      service_bindings?: Production.ServiceBindings | null;
+      services?: Production.Services | null;
+
+      /**
+       * Vectorize bindings used for Pages Functions.
+       */
+      vectorize_bindings?: Production.VectorizeBindings | null;
     }
 
     export namespace Production {
@@ -723,6 +830,16 @@ export namespace PagesProjects {
       }
 
       /**
+       * Browser bindings used for Pages Functions.
+       */
+      export interface Browsers {
+        /**
+         * Browser binding.
+         */
+        BROWSER?: unknown;
+      }
+
+      /**
        * D1 databases used for Pages Functions.
        */
       export interface D1Databases {
@@ -794,6 +911,25 @@ export namespace PagesProjects {
       }
 
       /**
+       * Hyperdrive bindings used for Pages Functions.
+       */
+      export interface HyperdriveBindings {
+        /**
+         * Hyperdrive binding.
+         */
+        HYPERDRIVE?: HyperdriveBindings.Hyperdrive;
+      }
+
+      export namespace HyperdriveBindings {
+        /**
+         * Hyperdrive binding.
+         */
+        export interface Hyperdrive {
+          id?: string;
+        }
+      }
+
+      /**
        * KV namespaces used for Pages Functions.
        */
       export interface KVNamespaces {
@@ -812,6 +948,25 @@ export namespace PagesProjects {
            * ID of the KV namespace.
            */
           namespace_id?: string;
+        }
+      }
+
+      /**
+       * mTLS bindings used for Pages Functions.
+       */
+      export interface MTLSCertificates {
+        /**
+         * mTLS binding.
+         */
+        MTLS?: MTLSCertificates.MTLS;
+      }
+
+      export namespace MTLSCertificates {
+        /**
+         * mTLS binding.
+         */
+        export interface MTLS {
+          certificate_id?: string;
         }
       }
 
@@ -872,14 +1027,14 @@ export namespace PagesProjects {
       /**
        * Services used for Pages Functions.
        */
-      export interface ServiceBindings {
+      export interface Services {
         /**
          * Service binding.
          */
-        SERVICE_BINDING?: ServiceBindings.ServiceBinding;
+        SERVICE_BINDING?: Services.ServiceBinding;
       }
 
-      export namespace ServiceBindings {
+      export namespace Services {
         /**
          * Service binding.
          */
@@ -893,6 +1048,25 @@ export namespace PagesProjects {
            * The Service name.
            */
           service?: string;
+        }
+      }
+
+      /**
+       * Vectorize bindings used for Pages Functions.
+       */
+      export interface VectorizeBindings {
+        /**
+         * Vectorize binding.
+         */
+        VECTORIZE?: VectorizeBindings.Vectorize;
+      }
+
+      export namespace VectorizeBindings {
+        /**
+         * Vectorize binding.
+         */
+        export interface Vectorize {
+          index_name?: string;
         }
       }
     }
@@ -1014,6 +1188,11 @@ export namespace ProjectCreateParams {
       analytics_engine_datasets?: Preview.AnalyticsEngineDatasets | null;
 
       /**
+       * Browser bindings used for Pages Functions.
+       */
+      browsers?: Preview.Browsers | null;
+
+      /**
        * Compatibility date used for Pages Functions.
        */
       compatibility_date?: string;
@@ -1039,9 +1218,19 @@ export namespace ProjectCreateParams {
       env_vars?: Preview.EnvVars | null;
 
       /**
+       * Hyperdrive bindings used for Pages Functions.
+       */
+      hyperdrive_bindings?: Preview.HyperdriveBindings | null;
+
+      /**
        * KV namespaces used for Pages Functions.
        */
       kv_namespaces?: Preview.KVNamespaces;
+
+      /**
+       * mTLS bindings used for Pages Functions.
+       */
+      mtls_certificates?: Preview.MTLSCertificates | null;
 
       /**
        * Placement setting used for Pages Functions.
@@ -1061,7 +1250,12 @@ export namespace ProjectCreateParams {
       /**
        * Services used for Pages Functions.
        */
-      service_bindings?: Preview.ServiceBindings | null;
+      services?: Preview.Services | null;
+
+      /**
+       * Vectorize bindings used for Pages Functions.
+       */
+      vectorize_bindings?: Preview.VectorizeBindings | null;
     }
 
     export namespace Preview {
@@ -1107,6 +1301,16 @@ export namespace ProjectCreateParams {
       }
 
       /**
+       * Browser bindings used for Pages Functions.
+       */
+      export interface Browsers {
+        /**
+         * Browser binding.
+         */
+        BROWSER?: unknown;
+      }
+
+      /**
        * D1 databases used for Pages Functions.
        */
       export interface D1Databases {
@@ -1178,6 +1382,25 @@ export namespace ProjectCreateParams {
       }
 
       /**
+       * Hyperdrive bindings used for Pages Functions.
+       */
+      export interface HyperdriveBindings {
+        /**
+         * Hyperdrive binding.
+         */
+        HYPERDRIVE?: HyperdriveBindings.Hyperdrive;
+      }
+
+      export namespace HyperdriveBindings {
+        /**
+         * Hyperdrive binding.
+         */
+        export interface Hyperdrive {
+          id?: string;
+        }
+      }
+
+      /**
        * KV namespaces used for Pages Functions.
        */
       export interface KVNamespaces {
@@ -1196,6 +1419,25 @@ export namespace ProjectCreateParams {
            * ID of the KV namespace.
            */
           namespace_id?: string;
+        }
+      }
+
+      /**
+       * mTLS bindings used for Pages Functions.
+       */
+      export interface MTLSCertificates {
+        /**
+         * mTLS binding.
+         */
+        MTLS?: MTLSCertificates.MTLS;
+      }
+
+      export namespace MTLSCertificates {
+        /**
+         * mTLS binding.
+         */
+        export interface MTLS {
+          certificate_id?: string;
         }
       }
 
@@ -1256,14 +1498,14 @@ export namespace ProjectCreateParams {
       /**
        * Services used for Pages Functions.
        */
-      export interface ServiceBindings {
+      export interface Services {
         /**
          * Service binding.
          */
-        SERVICE_BINDING?: ServiceBindings.ServiceBinding;
+        SERVICE_BINDING?: Services.ServiceBinding;
       }
 
-      export namespace ServiceBindings {
+      export namespace Services {
         /**
          * Service binding.
          */
@@ -1277,6 +1519,25 @@ export namespace ProjectCreateParams {
            * The Service name.
            */
           service?: string;
+        }
+      }
+
+      /**
+       * Vectorize bindings used for Pages Functions.
+       */
+      export interface VectorizeBindings {
+        /**
+         * Vectorize binding.
+         */
+        VECTORIZE?: VectorizeBindings.Vectorize;
+      }
+
+      export namespace VectorizeBindings {
+        /**
+         * Vectorize binding.
+         */
+        export interface Vectorize {
+          index_name?: string;
         }
       }
     }
@@ -1294,6 +1555,11 @@ export namespace ProjectCreateParams {
        * Analytics Engine bindings used for Pages Functions.
        */
       analytics_engine_datasets?: Production.AnalyticsEngineDatasets | null;
+
+      /**
+       * Browser bindings used for Pages Functions.
+       */
+      browsers?: Production.Browsers | null;
 
       /**
        * Compatibility date used for Pages Functions.
@@ -1321,9 +1587,19 @@ export namespace ProjectCreateParams {
       env_vars?: Production.EnvVars | null;
 
       /**
+       * Hyperdrive bindings used for Pages Functions.
+       */
+      hyperdrive_bindings?: Production.HyperdriveBindings | null;
+
+      /**
        * KV namespaces used for Pages Functions.
        */
       kv_namespaces?: Production.KVNamespaces;
+
+      /**
+       * mTLS bindings used for Pages Functions.
+       */
+      mtls_certificates?: Production.MTLSCertificates | null;
 
       /**
        * Placement setting used for Pages Functions.
@@ -1343,7 +1619,12 @@ export namespace ProjectCreateParams {
       /**
        * Services used for Pages Functions.
        */
-      service_bindings?: Production.ServiceBindings | null;
+      services?: Production.Services | null;
+
+      /**
+       * Vectorize bindings used for Pages Functions.
+       */
+      vectorize_bindings?: Production.VectorizeBindings | null;
     }
 
     export namespace Production {
@@ -1389,6 +1670,16 @@ export namespace ProjectCreateParams {
       }
 
       /**
+       * Browser bindings used for Pages Functions.
+       */
+      export interface Browsers {
+        /**
+         * Browser binding.
+         */
+        BROWSER?: unknown;
+      }
+
+      /**
        * D1 databases used for Pages Functions.
        */
       export interface D1Databases {
@@ -1460,6 +1751,25 @@ export namespace ProjectCreateParams {
       }
 
       /**
+       * Hyperdrive bindings used for Pages Functions.
+       */
+      export interface HyperdriveBindings {
+        /**
+         * Hyperdrive binding.
+         */
+        HYPERDRIVE?: HyperdriveBindings.Hyperdrive;
+      }
+
+      export namespace HyperdriveBindings {
+        /**
+         * Hyperdrive binding.
+         */
+        export interface Hyperdrive {
+          id?: string;
+        }
+      }
+
+      /**
        * KV namespaces used for Pages Functions.
        */
       export interface KVNamespaces {
@@ -1478,6 +1788,25 @@ export namespace ProjectCreateParams {
            * ID of the KV namespace.
            */
           namespace_id?: string;
+        }
+      }
+
+      /**
+       * mTLS bindings used for Pages Functions.
+       */
+      export interface MTLSCertificates {
+        /**
+         * mTLS binding.
+         */
+        MTLS?: MTLSCertificates.MTLS;
+      }
+
+      export namespace MTLSCertificates {
+        /**
+         * mTLS binding.
+         */
+        export interface MTLS {
+          certificate_id?: string;
         }
       }
 
@@ -1538,14 +1867,14 @@ export namespace ProjectCreateParams {
       /**
        * Services used for Pages Functions.
        */
-      export interface ServiceBindings {
+      export interface Services {
         /**
          * Service binding.
          */
-        SERVICE_BINDING?: ServiceBindings.ServiceBinding;
+        SERVICE_BINDING?: Services.ServiceBinding;
       }
 
-      export namespace ServiceBindings {
+      export namespace Services {
         /**
          * Service binding.
          */
@@ -1559,6 +1888,25 @@ export namespace ProjectCreateParams {
            * The Service name.
            */
           service?: string;
+        }
+      }
+
+      /**
+       * Vectorize bindings used for Pages Functions.
+       */
+      export interface VectorizeBindings {
+        /**
+         * Vectorize binding.
+         */
+        VECTORIZE?: VectorizeBindings.Vectorize;
+      }
+
+      export namespace VectorizeBindings {
+        /**
+         * Vectorize binding.
+         */
+        export interface Vectorize {
+          index_name?: string;
         }
       }
     }
