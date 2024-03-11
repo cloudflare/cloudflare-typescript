@@ -648,7 +648,7 @@ export namespace Cloudflare {
   export import PageShieldGetZoneSettings = API.PageShieldGetZoneSettings;
   export import PageShieldUpdateZoneSettings = API.PageShieldUpdateZoneSettings;
   export import PageShieldUpdateParams = API.PageShieldUpdateParams;
-  export import PageShieldListParams = API.PageShieldListParams;
+  export import PageShieldGetParams = API.PageShieldGetParams;
 
   export import Rulesets = API.Rulesets;
   export import RulesetsRulesetResponse = API.RulesetsRulesetResponse;

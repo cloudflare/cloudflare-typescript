@@ -11,7 +11,7 @@ export {
   PageShieldGetZoneSettings,
   PageShieldUpdateZoneSettings,
   PageShieldUpdateParams,
-  PageShieldListParams,
+  PageShieldGetParams,
   PageShield,
 } from './page-shield';
 export {

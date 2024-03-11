@@ -189,7 +189,7 @@ export {
   PageShieldGetZoneSettings,
   PageShieldUpdateZoneSettings,
   PageShieldUpdateParams,
-  PageShieldListParams,
+  PageShieldGetParams,
   PageShield,
 } from './page-shield/page-shield';
 export { Pages } from './pages/pages';

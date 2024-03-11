@@ -1517,21 +1517,15 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/email-routing/routing/routing.ts">EmailSettings</a></code>
+- <code><a href="./src/resources/email-routing/routing/routing.ts">RoutingDisableResponse</a></code>
+- <code><a href="./src/resources/email-routing/routing/routing.ts">RoutingEnableResponse</a></code>
 - <code><a href="./src/resources/email-routing/routing/routing.ts">RoutingGetResponse</a></code>
 
 Methods:
 
+- <code title="post /zones/{zone_identifier}/email/routing/disable">client.emailRouting.routing.<a href="./src/resources/email-routing/routing/routing.ts">disable</a>(zoneIdentifier) -> RoutingDisableResponse</code>
+- <code title="post /zones/{zone_identifier}/email/routing/enable">client.emailRouting.routing.<a href="./src/resources/email-routing/routing/routing.ts">enable</a>(zoneIdentifier) -> RoutingEnableResponse</code>
 - <code title="get /zones/{zone_identifier}/email/routing">client.emailRouting.routing.<a href="./src/resources/email-routing/routing/routing.ts">get</a>(zoneIdentifier) -> RoutingGetResponse</code>
-
-### Disables
-
-Types:
-
-- <code><a href="./src/resources/email-routing/routing/disables.ts">DisableCreateResponse</a></code>
-
-Methods:
-
-- <code title="post /zones/{zone_identifier}/email/routing/disable">client.emailRouting.routing.disables.<a href="./src/resources/email-routing/routing/disables.ts">create</a>(zoneIdentifier) -> DisableCreateResponse</code>
 
 ### DNS
 
@@ -1543,16 +1537,6 @@ Types:
 Methods:
 
 - <code title="get /zones/{zone_identifier}/email/routing/dns">client.emailRouting.routing.dns.<a href="./src/resources/email-routing/routing/dns.ts">get</a>(zoneIdentifier) -> DNSGetResponse | null</code>
-
-### Enables
-
-Types:
-
-- <code><a href="./src/resources/email-routing/routing/enables.ts">EnableCreateResponse</a></code>
-
-Methods:
-
-- <code title="post /zones/{zone_identifier}/email/routing/enable">client.emailRouting.routing.enables.<a href="./src/resources/email-routing/routing/enables.ts">create</a>(zoneIdentifier) -> EnableCreateResponse</code>
 
 ### Rules
 
@@ -2641,7 +2625,7 @@ Types:
 Methods:
 
 - <code title="put /zones/{zone_id}/page_shield">client.pageShield.<a href="./src/resources/page-shield/page-shield.ts">update</a>({ ...params }) -> PageShieldUpdateZoneSettings</code>
-- <code title="get /zones/{zone_id}/page_shield">client.pageShield.<a href="./src/resources/page-shield/page-shield.ts">list</a>({ ...params }) -> PageShieldGetZoneSettings</code>
+- <code title="get /zones/{zone_id}/page_shield">client.pageShield.<a href="./src/resources/page-shield/page-shield.ts">get</a>({ ...params }) -> PageShieldGetZoneSettings</code>
 
 ## Policies
 

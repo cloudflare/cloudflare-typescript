@@ -30,8 +30,8 @@ export class PageShield extends APIResource {
   /**
    * Fetches the Page Shield settings.
    */
-  list(
-    params: PageShieldListParams,
+  get(
+    params: PageShieldGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PageShieldGetZoneSettings> {
     const { zone_id } = params;
@@ -113,7 +113,7 @@ export interface PageShieldUpdateParams {
   use_connection_url_path?: boolean;
 }
 
-export interface PageShieldListParams {
+export interface PageShieldGetParams {
   /**
    * Identifier
    */
@@ -124,7 +124,7 @@ export namespace PageShield {
   export import PageShieldGetZoneSettings = PageShieldAPI.PageShieldGetZoneSettings;
   export import PageShieldUpdateZoneSettings = PageShieldAPI.PageShieldUpdateZoneSettings;
   export import PageShieldUpdateParams = PageShieldAPI.PageShieldUpdateParams;
-  export import PageShieldListParams = PageShieldAPI.PageShieldListParams;
+  export import PageShieldGetParams = PageShieldAPI.PageShieldGetParams;
   export import Policies = PoliciesAPI.Policies;
   export import PageShieldPageshieldPolicy = PoliciesAPI.PageShieldPageshieldPolicy;
   export import PolicyListResponse = PoliciesAPI.PolicyListResponse;
