@@ -4813,31 +4813,31 @@ Methods:
 - <code title="get /accounts/{account_id}/dlp/profiles">client.zeroTrust.dlp.profiles.<a href="./src/resources/zero-trust/dlp/profiles/profiles.ts">list</a>({ ...params }) -> ProfileListResponse | null</code>
 - <code title="get /accounts/{account_id}/dlp/profiles/{profile_id}">client.zeroTrust.dlp.profiles.<a href="./src/resources/zero-trust/dlp/profiles/profiles.ts">get</a>(profileId, { ...params }) -> ProfileGetResponse</code>
 
-#### Customs
+#### Custom
 
 Types:
 
-- <code><a href="./src/resources/zero-trust/dlp/profiles/customs.ts">DLPCustomProfile</a></code>
-- <code><a href="./src/resources/zero-trust/dlp/profiles/customs.ts">CustomCreateResponse</a></code>
-- <code><a href="./src/resources/zero-trust/dlp/profiles/customs.ts">CustomDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/profiles/custom.ts">DLPCustomProfile</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/profiles/custom.ts">CustomCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/profiles/custom.ts">CustomDeleteResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/dlp/profiles/custom">client.zeroTrust.dlp.profiles.customs.<a href="./src/resources/zero-trust/dlp/profiles/customs.ts">create</a>({ ...params }) -> CustomCreateResponse | null</code>
-- <code title="put /accounts/{account_id}/dlp/profiles/custom/{profile_id}">client.zeroTrust.dlp.profiles.customs.<a href="./src/resources/zero-trust/dlp/profiles/customs.ts">update</a>(profileId, { ...params }) -> DLPCustomProfile</code>
-- <code title="delete /accounts/{account_id}/dlp/profiles/custom/{profile_id}">client.zeroTrust.dlp.profiles.customs.<a href="./src/resources/zero-trust/dlp/profiles/customs.ts">delete</a>(profileId, { ...params }) -> CustomDeleteResponse</code>
-- <code title="get /accounts/{account_id}/dlp/profiles/custom/{profile_id}">client.zeroTrust.dlp.profiles.customs.<a href="./src/resources/zero-trust/dlp/profiles/customs.ts">get</a>(profileId, { ...params }) -> DLPCustomProfile</code>
+- <code title="post /accounts/{account_id}/dlp/profiles/custom">client.zeroTrust.dlp.profiles.custom.<a href="./src/resources/zero-trust/dlp/profiles/custom.ts">create</a>({ ...params }) -> CustomCreateResponse | null</code>
+- <code title="put /accounts/{account_id}/dlp/profiles/custom/{profile_id}">client.zeroTrust.dlp.profiles.custom.<a href="./src/resources/zero-trust/dlp/profiles/custom.ts">update</a>(profileId, { ...params }) -> DLPCustomProfile</code>
+- <code title="delete /accounts/{account_id}/dlp/profiles/custom/{profile_id}">client.zeroTrust.dlp.profiles.custom.<a href="./src/resources/zero-trust/dlp/profiles/custom.ts">delete</a>(profileId, { ...params }) -> CustomDeleteResponse</code>
+- <code title="get /accounts/{account_id}/dlp/profiles/custom/{profile_id}">client.zeroTrust.dlp.profiles.custom.<a href="./src/resources/zero-trust/dlp/profiles/custom.ts">get</a>(profileId, { ...params }) -> DLPCustomProfile</code>
 
-#### Predefineds
+#### Predefined
 
 Types:
 
-- <code><a href="./src/resources/zero-trust/dlp/profiles/predefineds.ts">DLPPredefinedProfile</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/profiles/predefined.ts">DLPPredefinedProfile</a></code>
 
 Methods:
 
-- <code title="put /accounts/{account_id}/dlp/profiles/predefined/{profile_id}">client.zeroTrust.dlp.profiles.predefineds.<a href="./src/resources/zero-trust/dlp/profiles/predefineds.ts">update</a>(profileId, { ...params }) -> DLPPredefinedProfile</code>
-- <code title="get /accounts/{account_id}/dlp/profiles/predefined/{profile_id}">client.zeroTrust.dlp.profiles.predefineds.<a href="./src/resources/zero-trust/dlp/profiles/predefineds.ts">get</a>(profileId, { ...params }) -> DLPPredefinedProfile</code>
+- <code title="put /accounts/{account_id}/dlp/profiles/predefined/{profile_id}">client.zeroTrust.dlp.profiles.predefined.<a href="./src/resources/zero-trust/dlp/profiles/predefined.ts">update</a>(profileId, { ...params }) -> DLPPredefinedProfile</code>
+- <code title="get /accounts/{account_id}/dlp/profiles/predefined/{profile_id}">client.zeroTrust.dlp.profiles.predefined.<a href="./src/resources/zero-trust/dlp/profiles/predefined.ts">get</a>(profileId, { ...params }) -> DLPPredefinedProfile</code>
 
 ## Gateway
 

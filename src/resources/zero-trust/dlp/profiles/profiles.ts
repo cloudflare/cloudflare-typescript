@@ -3,12 +3,12 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ProfilesAPI from 'cloudflare/resources/zero-trust/dlp/profiles/profiles';
-import * as CustomsAPI from 'cloudflare/resources/zero-trust/dlp/profiles/customs';
-import * as PredefinedsAPI from 'cloudflare/resources/zero-trust/dlp/profiles/predefineds';
+import * as CustomAPI from 'cloudflare/resources/zero-trust/dlp/profiles/custom';
+import * as PredefinedAPI from 'cloudflare/resources/zero-trust/dlp/profiles/predefined';
 
 export class Profiles extends APIResource {
-  customs: CustomsAPI.Customs = new CustomsAPI.Customs(this._client);
-  predefineds: PredefinedsAPI.Predefineds = new PredefinedsAPI.Predefineds(this._client);
+  custom: CustomAPI.Custom = new CustomAPI.Custom(this._client);
+  predefined: PredefinedAPI.Predefined = new PredefinedAPI.Predefined(this._client);
 
   /**
    * Lists all DLP profiles in an account.
@@ -43,8 +43,8 @@ export class Profiles extends APIResource {
 }
 
 export type DLPProfiles =
-  | PredefinedsAPI.DLPPredefinedProfile
-  | CustomsAPI.DLPCustomProfile
+  | PredefinedAPI.DLPPredefinedProfile
+  | CustomAPI.DLPCustomProfile
   | DLPProfiles.DLPIntegrationProfile;
 
 export namespace DLPProfiles {
@@ -114,8 +114,8 @@ export namespace DLPProfiles {
 export type ProfileListResponse = Array<DLPProfiles>;
 
 export type ProfileGetResponse =
-  | PredefinedsAPI.DLPPredefinedProfile
-  | CustomsAPI.DLPCustomProfile
+  | PredefinedAPI.DLPPredefinedProfile
+  | CustomAPI.DLPCustomProfile
   | ProfileGetResponse.DLPIntegrationProfile;
 
 export namespace ProfileGetResponse {
@@ -202,16 +202,16 @@ export namespace Profiles {
   export import ProfileGetResponse = ProfilesAPI.ProfileGetResponse;
   export import ProfileListParams = ProfilesAPI.ProfileListParams;
   export import ProfileGetParams = ProfilesAPI.ProfileGetParams;
-  export import Customs = CustomsAPI.Customs;
-  export import DLPCustomProfile = CustomsAPI.DLPCustomProfile;
-  export import CustomCreateResponse = CustomsAPI.CustomCreateResponse;
-  export import CustomDeleteResponse = CustomsAPI.CustomDeleteResponse;
-  export import CustomCreateParams = CustomsAPI.CustomCreateParams;
-  export import CustomUpdateParams = CustomsAPI.CustomUpdateParams;
-  export import CustomDeleteParams = CustomsAPI.CustomDeleteParams;
-  export import CustomGetParams = CustomsAPI.CustomGetParams;
-  export import Predefineds = PredefinedsAPI.Predefineds;
-  export import DLPPredefinedProfile = PredefinedsAPI.DLPPredefinedProfile;
-  export import PredefinedUpdateParams = PredefinedsAPI.PredefinedUpdateParams;
-  export import PredefinedGetParams = PredefinedsAPI.PredefinedGetParams;
+  export import Custom = CustomAPI.Custom;
+  export import DLPCustomProfile = CustomAPI.DLPCustomProfile;
+  export import CustomCreateResponse = CustomAPI.CustomCreateResponse;
+  export import CustomDeleteResponse = CustomAPI.CustomDeleteResponse;
+  export import CustomCreateParams = CustomAPI.CustomCreateParams;
+  export import CustomUpdateParams = CustomAPI.CustomUpdateParams;
+  export import CustomDeleteParams = CustomAPI.CustomDeleteParams;
+  export import CustomGetParams = CustomAPI.CustomGetParams;
+  export import Predefined = PredefinedAPI.Predefined;
+  export import DLPPredefinedProfile = PredefinedAPI.DLPPredefinedProfile;
+  export import PredefinedUpdateParams = PredefinedAPI.PredefinedUpdateParams;
+  export import PredefinedGetParams = PredefinedAPI.PredefinedGetParams;
 }

@@ -8,14 +8,9 @@ export {
   CustomUpdateParams,
   CustomDeleteParams,
   CustomGetParams,
-  Customs,
-} from './customs';
-export {
-  DLPPredefinedProfile,
-  PredefinedUpdateParams,
-  PredefinedGetParams,
-  Predefineds,
-} from './predefineds';
+  Custom,
+} from './custom';
+export { DLPPredefinedProfile, PredefinedUpdateParams, PredefinedGetParams, Predefined } from './predefined';
 export {
   DLPProfiles,
   ProfileListResponse,
