@@ -2,14 +2,14 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as ForceAxfrsAPI from 'cloudflare/resources/secondary-dns/force-axfrs';
+import * as ForceAXFRAPI from 'cloudflare/resources/secondary-dns/force-axfr';
 
-export class ForceAxfrs extends APIResource {
+export class ForceAXFR extends APIResource {
   /**
    * Sends AXFR zone transfer request to primary nameserver(s).
    */
   create(
-    params: ForceAxfrCreateParams,
+    params: ForceAXFRCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SecondaryDNSForceResult> {
     const { zone_id } = params;
@@ -26,11 +26,11 @@ export class ForceAxfrs extends APIResource {
  */
 export type SecondaryDNSForceResult = string;
 
-export interface ForceAxfrCreateParams {
+export interface ForceAXFRCreateParams {
   zone_id: unknown;
 }
 
-export namespace ForceAxfrs {
-  export import SecondaryDNSForceResult = ForceAxfrsAPI.SecondaryDNSForceResult;
-  export import ForceAxfrCreateParams = ForceAxfrsAPI.ForceAxfrCreateParams;
+export namespace ForceAXFR {
+  export import SecondaryDNSForceResult = ForceAXFRAPI.SecondaryDNSForceResult;
+  export import ForceAXFRCreateParams = ForceAXFRAPI.ForceAXFRCreateParams;
 }
