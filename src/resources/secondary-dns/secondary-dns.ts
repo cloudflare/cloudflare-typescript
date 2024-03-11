@@ -2,14 +2,14 @@
 
 import { APIResource } from 'cloudflare/resource';
 import * as ACLsAPI from 'cloudflare/resources/secondary-dns/acls';
-import * as ForceAxfrsAPI from 'cloudflare/resources/secondary-dns/force-axfrs';
+import * as ForceAXFRAPI from 'cloudflare/resources/secondary-dns/force-axfr';
 import * as IncomingAPI from 'cloudflare/resources/secondary-dns/incoming';
 import * as PeersAPI from 'cloudflare/resources/secondary-dns/peers';
 import * as TSIGsAPI from 'cloudflare/resources/secondary-dns/tsigs';
 import * as OutgoingAPI from 'cloudflare/resources/secondary-dns/outgoing/outgoing';
 
 export class SecondaryDNS extends APIResource {
-  forceAxfrs: ForceAxfrsAPI.ForceAxfrs = new ForceAxfrsAPI.ForceAxfrs(this._client);
+  forceAXFR: ForceAXFRAPI.ForceAXFR = new ForceAXFRAPI.ForceAXFR(this._client);
   incoming: IncomingAPI.Incoming = new IncomingAPI.Incoming(this._client);
   outgoing: OutgoingAPI.Outgoing = new OutgoingAPI.Outgoing(this._client);
   acls: ACLsAPI.ACLs = new ACLsAPI.ACLs(this._client);
@@ -18,9 +18,9 @@ export class SecondaryDNS extends APIResource {
 }
 
 export namespace SecondaryDNS {
-  export import ForceAxfrs = ForceAxfrsAPI.ForceAxfrs;
-  export import SecondaryDNSForceResult = ForceAxfrsAPI.SecondaryDNSForceResult;
-  export import ForceAxfrCreateParams = ForceAxfrsAPI.ForceAxfrCreateParams;
+  export import ForceAXFR = ForceAXFRAPI.ForceAXFR;
+  export import SecondaryDNSForceResult = ForceAXFRAPI.SecondaryDNSForceResult;
+  export import ForceAXFRCreateParams = ForceAXFRAPI.ForceAXFRCreateParams;
   export import Incoming = IncomingAPI.Incoming;
   export import IncomingCreateResponse = IncomingAPI.IncomingCreateResponse;
   export import IncomingUpdateResponse = IncomingAPI.IncomingUpdateResponse;

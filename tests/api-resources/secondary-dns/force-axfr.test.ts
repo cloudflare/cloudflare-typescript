@@ -9,10 +9,10 @@ const cloudflare = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource forceAxfrs', () => {
+describe('resource forceAXFR', () => {
   // skipped: tests are disabled for the time being
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.secondaryDNS.forceAxfrs.create({
+    const responsePromise = cloudflare.secondaryDNS.forceAXFR.create({
       zone_id: '269d8f4853475ca241c4e730be286b20',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -26,7 +26,7 @@ describe('resource forceAxfrs', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.secondaryDNS.forceAxfrs.create({
+    const response = await cloudflare.secondaryDNS.forceAXFR.create({
       zone_id: '269d8f4853475ca241c4e730be286b20',
     });
   });

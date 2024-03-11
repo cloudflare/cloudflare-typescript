@@ -2021,15 +2021,15 @@ Methods:
 
 # SecondaryDNS
 
-## ForceAxfrs
+## ForceAXFR
 
 Types:
 
-- <code><a href="./src/resources/secondary-dns/force-axfrs.ts">SecondaryDNSForceResult</a></code>
+- <code><a href="./src/resources/secondary-dns/force-axfr.ts">SecondaryDNSForceResult</a></code>
 
 Methods:
 
-- <code title="post /zones/{zone_id}/secondary_dns/force_axfr">client.secondaryDNS.forceAxfrs.<a href="./src/resources/secondary-dns/force-axfrs.ts">create</a>({ ...params }) -> SecondaryDNSForceResult</code>
+- <code title="post /zones/{zone_id}/secondary_dns/force_axfr">client.secondaryDNS.forceAXFR.<a href="./src/resources/secondary-dns/force-axfr.ts">create</a>({ ...params }) -> SecondaryDNSForceResult</code>
 
 ## Incoming
 

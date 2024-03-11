@@ -40,7 +40,7 @@ export {
   OutgoingGetParams,
   Outgoing,
 } from './outgoing/index';
-export { SecondaryDNSForceResult, ForceAxfrCreateParams, ForceAxfrs } from './force-axfrs';
+export { SecondaryDNSForceResult, ForceAXFRCreateParams, ForceAXFR } from './force-axfr';
 export {
   SecondaryDNSPeer,
   PeerListResponse,
