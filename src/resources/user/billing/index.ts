@@ -2,4 +2,4 @@
 
 export { BillSubsAPIBillingHistory, HistoryGetResponse, HistoryGetParams, History } from './history';
 export { Billing } from './billing';
-export { ProfileGetResponse, Profiles } from './profiles';
+export { ProfileGetResponse, Profile } from './profile';

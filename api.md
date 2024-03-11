@@ -43,22 +43,22 @@ Methods:
 - <code title="get /accounts/{account_id}/roles">client.accounts.roles.<a href="./src/resources/accounts/roles.ts">list</a>({ ...params }) -> RoleListResponse | null</code>
 - <code title="get /accounts/{account_id}/roles/{role_id}">client.accounts.roles.<a href="./src/resources/accounts/roles.ts">get</a>(roleId, { ...params }) -> RoleGetResponse</code>
 
-# Certificates
+# OriginCACertificates
 
 Types:
 
-- <code><a href="./src/resources/certificates.ts">OriginCACertificate</a></code>
-- <code><a href="./src/resources/certificates.ts">CertificateCreateResponse</a></code>
-- <code><a href="./src/resources/certificates.ts">CertificateListResponse</a></code>
-- <code><a href="./src/resources/certificates.ts">CertificateDeleteResponse</a></code>
-- <code><a href="./src/resources/certificates.ts">CertificateGetResponse</a></code>
+- <code><a href="./src/resources/origin-ca-certificates.ts">OriginCACertificate</a></code>
+- <code><a href="./src/resources/origin-ca-certificates.ts">OriginCACertificateCreateResponse</a></code>
+- <code><a href="./src/resources/origin-ca-certificates.ts">OriginCACertificateListResponse</a></code>
+- <code><a href="./src/resources/origin-ca-certificates.ts">OriginCACertificateDeleteResponse</a></code>
+- <code><a href="./src/resources/origin-ca-certificates.ts">OriginCACertificateGetResponse</a></code>
 
 Methods:
 
-- <code title="post /certificates">client.certificates.<a href="./src/resources/certificates.ts">create</a>({ ...params }) -> CertificateCreateResponse</code>
-- <code title="get /certificates">client.certificates.<a href="./src/resources/certificates.ts">list</a>() -> CertificateListResponse | null</code>
-- <code title="delete /certificates/{certificate_id}">client.certificates.<a href="./src/resources/certificates.ts">delete</a>(certificateId) -> CertificateDeleteResponse</code>
-- <code title="get /certificates/{certificate_id}">client.certificates.<a href="./src/resources/certificates.ts">get</a>(certificateId) -> CertificateGetResponse</code>
+- <code title="post /certificates">client.originCACertificates.<a href="./src/resources/origin-ca-certificates.ts">create</a>({ ...params }) -> OriginCACertificateCreateResponse</code>
+- <code title="get /certificates">client.originCACertificates.<a href="./src/resources/origin-ca-certificates.ts">list</a>() -> OriginCACertificateListResponse | null</code>
+- <code title="delete /certificates/{certificate_id}">client.originCACertificates.<a href="./src/resources/origin-ca-certificates.ts">delete</a>(certificateId) -> OriginCACertificateDeleteResponse</code>
+- <code title="get /certificates/{certificate_id}">client.originCACertificates.<a href="./src/resources/origin-ca-certificates.ts">get</a>(certificateId) -> OriginCACertificateGetResponse</code>
 
 # IPs
 
@@ -124,15 +124,15 @@ Methods:
 
 - <code title="get /user/billing/history">client.user.billing.history.<a href="./src/resources/user/billing/history.ts">get</a>({ ...params }) -> HistoryGetResponse | null</code>
 
-### Profiles
+### Profile
 
 Types:
 
-- <code><a href="./src/resources/user/billing/profiles.ts">ProfileGetResponse</a></code>
+- <code><a href="./src/resources/user/billing/profile.ts">ProfileGetResponse</a></code>
 
 Methods:
 
-- <code title="get /user/billing/profile">client.user.billing.profiles.<a href="./src/resources/user/billing/profiles.ts">get</a>() -> ProfileGetResponse</code>
+- <code title="get /user/billing/profile">client.user.billing.profile.<a href="./src/resources/user/billing/profile.ts">get</a>() -> ProfileGetResponse</code>
 
 ## Firewall
 
@@ -4926,16 +4926,16 @@ Methods:
 - <code title="delete /accounts/{account_id}/gateway/locations/{location_id}">client.zeroTrust.gateway.locations.<a href="./src/resources/zero-trust/gateway/locations.ts">delete</a>(locationId, { ...params }) -> LocationDeleteResponse</code>
 - <code title="get /accounts/{account_id}/gateway/locations/{location_id}">client.zeroTrust.gateway.locations.<a href="./src/resources/zero-trust/gateway/locations.ts">get</a>(locationId, { ...params }) -> ZeroTrustGatewayLocations</code>
 
-### Loggings
+### Logging
 
 Types:
 
-- <code><a href="./src/resources/zero-trust/gateway/loggings.ts">ZeroTrustGatewayGatewayAccountLoggingSettings</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/logging.ts">ZeroTrustGatewayGatewayAccountLoggingSettings</a></code>
 
 Methods:
 
-- <code title="put /accounts/{account_id}/gateway/logging">client.zeroTrust.gateway.loggings.<a href="./src/resources/zero-trust/gateway/loggings.ts">update</a>({ ...params }) -> ZeroTrustGatewayGatewayAccountLoggingSettings</code>
-- <code title="get /accounts/{account_id}/gateway/logging">client.zeroTrust.gateway.loggings.<a href="./src/resources/zero-trust/gateway/loggings.ts">get</a>({ ...params }) -> ZeroTrustGatewayGatewayAccountLoggingSettings</code>
+- <code title="put /accounts/{account_id}/gateway/logging">client.zeroTrust.gateway.logging.<a href="./src/resources/zero-trust/gateway/logging.ts">update</a>({ ...params }) -> ZeroTrustGatewayGatewayAccountLoggingSettings</code>
+- <code title="get /accounts/{account_id}/gateway/logging">client.zeroTrust.gateway.logging.<a href="./src/resources/zero-trust/gateway/logging.ts">get</a>({ ...params }) -> ZeroTrustGatewayGatewayAccountLoggingSettings</code>
 
 ### ProxyEndpoints
 

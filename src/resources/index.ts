@@ -162,13 +162,13 @@ export {
 } from './speed/speed';
 export {
   OriginCACertificate,
-  CertificateCreateResponse,
-  CertificateListResponse,
-  CertificateDeleteResponse,
-  CertificateGetResponse,
-  CertificateCreateParams,
-  Certificates,
-} from './certificates';
+  OriginCACertificateCreateResponse,
+  OriginCACertificateListResponse,
+  OriginCACertificateDeleteResponse,
+  OriginCACertificateGetResponse,
+  OriginCACertificateCreateParams,
+  OriginCACertificates,
+} from './origin-ca-certificates';
 export {
   OriginPostQuantumEncryptionUpdateResponse,
   OriginPostQuantumEncryptionGetResponse,

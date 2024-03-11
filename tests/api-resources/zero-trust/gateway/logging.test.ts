@@ -9,10 +9,10 @@ const cloudflare = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource loggings', () => {
+describe('resource logging', () => {
   // skipped: tests are disabled for the time being
   test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.gateway.loggings.update({
+    const responsePromise = cloudflare.zeroTrust.gateway.logging.update({
       account_id: '699d98642c564d2e855e9661899b7252',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -26,7 +26,7 @@ describe('resource loggings', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.gateway.loggings.update({
+    const response = await cloudflare.zeroTrust.gateway.logging.update({
       account_id: '699d98642c564d2e855e9661899b7252',
       redact_pii: true,
       settings_by_rule_type: { dns: {}, http: {}, l4: {} },
@@ -35,7 +35,7 @@ describe('resource loggings', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('get: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.gateway.loggings.get({
+    const responsePromise = cloudflare.zeroTrust.gateway.logging.get({
       account_id: '699d98642c564d2e855e9661899b7252',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -49,7 +49,7 @@ describe('resource loggings', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('get: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.gateway.loggings.get({
+    const response = await cloudflare.zeroTrust.gateway.logging.get({
       account_id: '699d98642c564d2e855e9661899b7252',
     });
   });

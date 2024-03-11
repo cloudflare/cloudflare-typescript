@@ -8,7 +8,7 @@ import * as AuditSSHSettingsAPI from 'cloudflare/resources/zero-trust/gateway/au
 import * as CategoriesAPI from 'cloudflare/resources/zero-trust/gateway/categories';
 import * as ConfigurationsAPI from 'cloudflare/resources/zero-trust/gateway/configurations';
 import * as LocationsAPI from 'cloudflare/resources/zero-trust/gateway/locations';
-import * as LoggingsAPI from 'cloudflare/resources/zero-trust/gateway/loggings';
+import * as LoggingAPI from 'cloudflare/resources/zero-trust/gateway/logging';
 import * as ProxyEndpointsAPI from 'cloudflare/resources/zero-trust/gateway/proxy-endpoints';
 import * as RulesAPI from 'cloudflare/resources/zero-trust/gateway/rules';
 import * as ListsAPI from 'cloudflare/resources/zero-trust/gateway/lists/lists';
@@ -22,7 +22,7 @@ export class Gateway extends APIResource {
   configurations: ConfigurationsAPI.Configurations = new ConfigurationsAPI.Configurations(this._client);
   lists: ListsAPI.Lists = new ListsAPI.Lists(this._client);
   locations: LocationsAPI.Locations = new LocationsAPI.Locations(this._client);
-  loggings: LoggingsAPI.Loggings = new LoggingsAPI.Loggings(this._client);
+  logging: LoggingAPI.Logging = new LoggingAPI.Logging(this._client);
   proxyEndpoints: ProxyEndpointsAPI.ProxyEndpoints = new ProxyEndpointsAPI.ProxyEndpoints(this._client);
   rules: RulesAPI.Rules = new RulesAPI.Rules(this._client);
 
@@ -137,10 +137,10 @@ export namespace Gateway {
   export import LocationListParams = LocationsAPI.LocationListParams;
   export import LocationDeleteParams = LocationsAPI.LocationDeleteParams;
   export import LocationGetParams = LocationsAPI.LocationGetParams;
-  export import Loggings = LoggingsAPI.Loggings;
-  export import ZeroTrustGatewayGatewayAccountLoggingSettings = LoggingsAPI.ZeroTrustGatewayGatewayAccountLoggingSettings;
-  export import LoggingUpdateParams = LoggingsAPI.LoggingUpdateParams;
-  export import LoggingGetParams = LoggingsAPI.LoggingGetParams;
+  export import Logging = LoggingAPI.Logging;
+  export import ZeroTrustGatewayGatewayAccountLoggingSettings = LoggingAPI.ZeroTrustGatewayGatewayAccountLoggingSettings;
+  export import LoggingUpdateParams = LoggingAPI.LoggingUpdateParams;
+  export import LoggingGetParams = LoggingAPI.LoggingGetParams;
   export import ProxyEndpoints = ProxyEndpointsAPI.ProxyEndpoints;
   export import ZeroTrustGatewayProxyEndpoints = ProxyEndpointsAPI.ZeroTrustGatewayProxyEndpoints;
   export import ProxyEndpointListResponse = ProxyEndpointsAPI.ProxyEndpointListResponse;

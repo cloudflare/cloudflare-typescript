@@ -27,8 +27,8 @@ export {
   ZeroTrustGatewayGatewayAccountLoggingSettings,
   LoggingUpdateParams,
   LoggingGetParams,
-  Loggings,
-} from './loggings';
+  Logging,
+} from './logging';
 export {
   ZeroTrustGatewayLists,
   ListCreateResponse,
