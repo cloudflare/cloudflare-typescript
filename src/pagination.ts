@@ -263,3 +263,37 @@ export class CursorLimitPagination<Item>
     };
   }
 }
+
+export type SinglePageResponse<Item> = Item[];
+
+export class SinglePage<Item> extends AbstractPage<Item> {
+  items: Array<Item>;
+
+  constructor(
+    client: APIClient,
+    response: Response,
+    body: SinglePageResponse<Item>,
+    options: FinalRequestOptions,
+  ) {
+    super(client, response, body, options);
+
+    this.items = body || [];
+  }
+
+  getPaginatedItems(): Item[] {
+    return this.items ?? [];
+  }
+
+  // @deprecated Please use `nextPageInfo()` instead
+  /**
+   * This page represents a response that isn't actually paginated at the API level
+   * so there will never be any next page params.
+   */
+  nextPageParams(): null {
+    return null;
+  }
+
+  nextPageInfo(): null {
+    return null;
+  }
+}
