@@ -6,36 +6,20 @@ import * as TLSAPI from 'cloudflare/resources/hostnames/settings/tls';
 
 export class TLS extends APIResource {
   /**
-   * List the requested TLS setting for the hostnames under this zone.
-   */
-  retrieve(
-    zoneIdentifier: string,
-    tlsSetting: 'ciphers' | 'min_tls_version' | 'http2',
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TLSRetrieveResponse | null> {
-    return (
-      this._client.get(
-        `/zones/${zoneIdentifier}/hostnames/settings/${tlsSetting}`,
-        options,
-      ) as Core.APIPromise<{ result: TLSRetrieveResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Update the tls setting value for the hostname.
    */
   update(
-    zoneIdentifier: string,
-    tlsSetting: 'ciphers' | 'min_tls_version' | 'http2',
+    settingId: 'ciphers' | 'min_tls_version' | 'http2',
     hostname: string,
-    body: TLSUpdateParams,
+    params: TLSUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TLSUpdateResponse> {
+  ): Core.APIPromise<TLSCertificatesAndHostnamesSettingObject> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.put(`/zones/${zoneIdentifier}/hostnames/settings/${tlsSetting}/${hostname}`, {
+      this._client.put(`/zones/${zone_id}/hostnames/settings/${settingId}/${hostname}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: TLSUpdateResponse }>
+      }) as Core.APIPromise<{ result: TLSCertificatesAndHostnamesSettingObject }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -43,24 +27,89 @@ export class TLS extends APIResource {
    * Delete the tls setting value for the hostname.
    */
   delete(
-    zoneIdentifier: string,
-    tlsSetting: 'ciphers' | 'min_tls_version' | 'http2',
+    settingId: 'ciphers' | 'min_tls_version' | 'http2',
     hostname: string,
+    params: TLSDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TLSDeleteResponse> {
+  ): Core.APIPromise<TLSCertificatesAndHostnamesSettingObjectDelete> {
+    const { zone_id } = params;
     return (
       this._client.delete(
-        `/zones/${zoneIdentifier}/hostnames/settings/${tlsSetting}/${hostname}`,
+        `/zones/${zone_id}/hostnames/settings/${settingId}/${hostname}`,
         options,
-      ) as Core.APIPromise<{ result: TLSDeleteResponse }>
+      ) as Core.APIPromise<{ result: TLSCertificatesAndHostnamesSettingObjectDelete }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * List the requested TLS setting for the hostnames under this zone.
+   */
+  get(
+    settingId: 'ciphers' | 'min_tls_version' | 'http2',
+    params: TLSGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TLSGetResponse | null> {
+    const { zone_id } = params;
+    return (
+      this._client.get(`/zones/${zone_id}/hostnames/settings/${settingId}`, options) as Core.APIPromise<{
+        result: TLSGetResponse | null;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type TLSRetrieveResponse = Array<TLSRetrieveResponse.TLSRetrieveResponseItem>;
+export interface TLSCertificatesAndHostnamesSettingObject {
+  /**
+   * This is the time the tls setting was originally created for this hostname.
+   */
+  created_at?: string;
 
-export namespace TLSRetrieveResponse {
-  export interface TLSRetrieveResponseItem {
+  /**
+   * The hostname for which the tls settings are set.
+   */
+  hostname?: string;
+
+  /**
+   * Deployment status for the given tls setting.
+   */
+  status?: string;
+
+  /**
+   * This is the time the tls setting was updated.
+   */
+  updated_at?: string;
+
+  /**
+   * The tls setting value.
+   */
+  value?: number | string | Array<string>;
+}
+
+export interface TLSCertificatesAndHostnamesSettingObjectDelete {
+  /**
+   * This is the time the tls setting was originally created for this hostname.
+   */
+  created_at?: string;
+
+  /**
+   * The hostname for which the tls settings are set.
+   */
+  hostname?: string;
+
+  status?: unknown;
+
+  /**
+   * This is the time the tls setting was updated.
+   */
+  updated_at?: string;
+
+  value?: unknown;
+}
+
+export type TLSGetResponse = Array<TLSGetResponse.TLSGetResponseItem>;
+
+export namespace TLSGetResponse {
+  export interface TLSGetResponseItem {
     /**
      * This is the time the tls setting was originally created for this hostname.
      */
@@ -88,64 +137,37 @@ export namespace TLSRetrieveResponse {
   }
 }
 
-export interface TLSUpdateResponse {
-  /**
-   * This is the time the tls setting was originally created for this hostname.
-   */
-  created_at?: string;
-
-  /**
-   * The hostname for which the tls settings are set.
-   */
-  hostname?: string;
-
-  /**
-   * Deployment status for the given tls setting.
-   */
-  status?: string;
-
-  /**
-   * This is the time the tls setting was updated.
-   */
-  updated_at?: string;
-
-  /**
-   * The tls setting value.
-   */
-  value?: number | string | Array<string>;
-}
-
-export interface TLSDeleteResponse {
-  /**
-   * This is the time the tls setting was originally created for this hostname.
-   */
-  created_at?: string;
-
-  /**
-   * The hostname for which the tls settings are set.
-   */
-  hostname?: string;
-
-  status?: unknown;
-
-  /**
-   * This is the time the tls setting was updated.
-   */
-  updated_at?: string;
-
-  value?: unknown;
-}
-
 export interface TLSUpdateParams {
   /**
-   * The tls setting value.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: The tls setting value.
    */
   value: number | string | Array<string>;
 }
 
+export interface TLSDeleteParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+export interface TLSGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
 export namespace TLS {
-  export import TLSRetrieveResponse = TLSAPI.TLSRetrieveResponse;
-  export import TLSUpdateResponse = TLSAPI.TLSUpdateResponse;
-  export import TLSDeleteResponse = TLSAPI.TLSDeleteResponse;
+  export import TLSCertificatesAndHostnamesSettingObject = TLSAPI.TLSCertificatesAndHostnamesSettingObject;
+  export import TLSCertificatesAndHostnamesSettingObjectDelete = TLSAPI.TLSCertificatesAndHostnamesSettingObjectDelete;
+  export import TLSGetResponse = TLSAPI.TLSGetResponse;
   export import TLSUpdateParams = TLSAPI.TLSUpdateParams;
+  export import TLSDeleteParams = TLSAPI.TLSDeleteParams;
+  export import TLSGetParams = TLSAPI.TLSGetParams;
 }

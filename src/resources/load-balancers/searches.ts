@@ -2,47 +2,48 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as SearchesAPI from 'cloudflare/resources/load-balancers/searches';
 
 export class Searches extends APIResource {
   /**
    * Search for Load Balancing resources.
    */
-  list(
-    accountIdentifier: string,
-    query?: SearchListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SearchListResponse | null>;
-  list(accountIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<SearchListResponse | null>;
-  list(
-    accountIdentifier: string,
-    query: SearchListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SearchListResponse | null> {
-    if (isRequestOptions(query)) {
-      return this.list(accountIdentifier, {}, query);
-    }
+  get(params: SearchGetParams, options?: Core.RequestOptions): Core.APIPromise<SearchGetResponse | null> {
+    const { account_id, ...query } = params;
     return (
-      this._client.get(`/accounts/${accountIdentifier}/load_balancers/search`, {
+      this._client.get(`/accounts/${account_id}/load_balancers/search`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: SearchListResponse | null }>
+      }) as Core.APIPromise<{ result: SearchGetResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type SearchListResponse = Array<unknown>;
+export type SearchGetResponse = Array<unknown>;
 
-export interface SearchListParams {
+export interface SearchGetParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Query param:
+   */
   page?: unknown;
 
+  /**
+   * Query param:
+   */
   per_page?: unknown;
 
-  search_params?: SearchListParams.SearchParams;
+  /**
+   * Query param:
+   */
+  search_params?: SearchGetParams.SearchParams;
 }
 
-export namespace SearchListParams {
+export namespace SearchGetParams {
   export interface SearchParams {
     /**
      * Search query term.
@@ -57,6 +58,6 @@ export namespace SearchListParams {
 }
 
 export namespace Searches {
-  export import SearchListResponse = SearchesAPI.SearchListResponse;
-  export import SearchListParams = SearchesAPI.SearchListParams;
+  export import SearchGetResponse = SearchesAPI.SearchGetResponse;
+  export import SearchGetParams = SearchesAPI.SearchGetParams;
 }

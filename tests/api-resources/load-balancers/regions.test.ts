@@ -5,19 +5,16 @@ import { Response } from 'node-fetch';
 
 const cloudflare = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
-  apiEmail: 'dev@cloudflare.com',
-  apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY',
-  userServiceKey: 'My User Service Key',
+  apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
 describe('resource regions', () => {
   // skipped: tests are disabled for the time being
-  test.skip('retrieve', async () => {
-    const responsePromise = cloudflare.loadBalancers.regions.retrieve(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'WNAM',
-    );
+  test.skip('list: only required params', async () => {
+    const responsePromise = cloudflare.loadBalancers.regions.list({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -28,20 +25,20 @@ describe('resource regions', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('retrieve: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.loadBalancers.regions.retrieve('023e105f4ecef8ad9ca31a8372d0c353', 'WNAM', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('list: required and optional params', async () => {
+    const response = await cloudflare.loadBalancers.regions.list({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      country_code_a2: 'US',
+      subdivision_code: 'CA',
+      subdivision_code_a2: 'CA',
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('loadBalancerRegionsListRegions', async () => {
-    const responsePromise = cloudflare.loadBalancers.regions.loadBalancerRegionsListRegions(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-    );
+  test.skip('get: only required params', async () => {
+    const responsePromise = cloudflare.loadBalancers.regions.get('WNAM', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -52,24 +49,9 @@ describe('resource regions', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('loadBalancerRegionsListRegions: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.loadBalancers.regions.loadBalancerRegionsListRegions('023e105f4ecef8ad9ca31a8372d0c353', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('loadBalancerRegionsListRegions: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.loadBalancers.regions.loadBalancerRegionsListRegions(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        { country_code_a2: 'US', subdivision_code: 'CA', subdivision_code_a2: 'CA' },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.loadBalancers.regions.get('WNAM', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 });

@@ -5,19 +5,17 @@ import { Response } from 'node-fetch';
 
 const cloudflare = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
-  apiEmail: 'dev@cloudflare.com',
-  apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY',
-  userServiceKey: 'My User Service Key',
+  apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
 describe('resource database', () => {
   // skipped: tests are disabled for the time being
-  test.skip('retrieve', async () => {
-    const responsePromise = cloudflare.d1.database.retrieve(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
-    );
+  test.skip('create: only required params', async () => {
+    const responsePromise = cloudflare.d1.database.create({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      name: 'my-database',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -28,15 +26,33 @@ describe('resource database', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('retrieve: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.d1.database.retrieve(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('create: required and optional params', async () => {
+    const response = await cloudflare.d1.database.create({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      name: 'my-database',
+    });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list: only required params', async () => {
+    const responsePromise = cloudflare.d1.database.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list: required and optional params', async () => {
+    const response = await cloudflare.d1.database.list({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      name: 'string',
+      page: 1,
+      per_page: 10,
+    });
   });
 
   // skipped: tests are disabled for the time being
@@ -63,6 +79,31 @@ describe('resource database', () => {
         'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
         { path: '/_stainless_unknown_path' },
       ),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get', async () => {
+    const responsePromise = cloudflare.d1.database.get(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.d1.database.get('023e105f4ecef8ad9ca31a8372d0c353', 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', {
+        path: '/_stainless_unknown_path',
+      }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 

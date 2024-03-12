@@ -2,6 +2,8 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
+import { isRequestOptions } from 'cloudflare/core';
+import { CloudflareError } from 'cloudflare/error';
 import * as FieldsAPI from 'cloudflare/resources/logpush/datasets/fields';
 
 export class Fields extends APIResource {
@@ -9,23 +11,61 @@ export class Fields extends APIResource {
    * Lists all fields available for a dataset. The response result is an object with
    * key-value pairs, where keys are field names, and values are descriptions.
    */
-  list(
-    accountOrZone: string,
-    accountOrZoneId: string,
+  get(
     datasetId: string | null,
+    params?: FieldGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<FieldListResponse> {
+  ): Core.APIPromise<FieldGetResponse>;
+  get(datasetId: string | null, options?: Core.RequestOptions): Core.APIPromise<FieldGetResponse>;
+  get(
+    datasetId: string | null,
+    params: FieldGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<FieldGetResponse> {
+    if (isRequestOptions(params)) {
+      return this.get(datasetId, {}, params);
+    }
+    const { account_id, zone_id } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
       this._client.get(
         `/${accountOrZone}/${accountOrZoneId}/logpush/datasets/${datasetId}/fields`,
         options,
-      ) as Core.APIPromise<{ result: FieldListResponse }>
+      ) as Core.APIPromise<{ result: FieldGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type FieldListResponse = unknown;
+export type FieldGetResponse = unknown;
+
+export interface FieldGetParams {
+  /**
+   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   */
+  account_id?: string;
+
+  /**
+   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   */
+  zone_id?: string;
+}
 
 export namespace Fields {
-  export import FieldListResponse = FieldsAPI.FieldListResponse;
+  export import FieldGetResponse = FieldsAPI.FieldGetResponse;
+  export import FieldGetParams = FieldsAPI.FieldGetParams;
 }

@@ -46,6 +46,11 @@ export interface URLScannerScanResponse {
 export namespace URLScannerScanResponse {
   export interface Task {
     /**
+     * Alpha-2 country code
+     */
+    country: string;
+
+    /**
      * Whether scan was successful or not
      */
     success: boolean;
@@ -64,6 +69,11 @@ export namespace URLScannerScanResponse {
      * Scan id
      */
     uuid: string;
+
+    /**
+     * Visibility status.
+     */
+    visibility: string;
   }
 }
 
@@ -72,6 +82,12 @@ export interface URLScannerScanParams {
    * Return only scans created by account.
    */
   account_scans?: boolean;
+
+  /**
+   * Filter scans by Autonomous System Number (ASN) of _any_ request made by the
+   * webpage.
+   */
+  asn?: string;
 
   /**
    * Filter scans requested before date (inclusive).
@@ -89,6 +105,16 @@ export interface URLScannerScanParams {
   hostname?: string;
 
   /**
+   * Filter scans by IP address (IPv4 or IPv6) of _any_ request made by the webpage.
+   */
+  ip?: string;
+
+  /**
+   * Filter scans by malicious verdict.
+   */
+  is_malicious?: boolean;
+
+  /**
    * Limit the number of objects in the response.
    */
   limit?: number;
@@ -99,9 +125,19 @@ export interface URLScannerScanParams {
   next_cursor?: string;
 
   /**
+   * Filter scans by main page Autonomous System Number (ASN).
+   */
+  page_asn?: string;
+
+  /**
    * Filter scans by main page hostname .
    */
   page_hostname?: string;
+
+  /**
+   * Filter scans by main page IP address (IPv4 or IPv6).
+   */
+  page_ip?: string;
 
   /**
    * Filter scans by exact match URL path (also supports suffix search).
@@ -134,7 +170,7 @@ export namespace URLScanner {
   export import URLScannerScanParams = URLScannerAPI.URLScannerScanParams;
   export import Scans = ScansAPI.Scans;
   export import ScanCreateResponse = ScansAPI.ScanCreateResponse;
-  export import ScanRetrieveResponse = ScansAPI.ScanRetrieveResponse;
+  export import ScanGetResponse = ScansAPI.ScanGetResponse;
   export import ScanHarResponse = ScansAPI.ScanHarResponse;
   export import ScanCreateParams = ScansAPI.ScanCreateParams;
   export import ScanScreenshotParams = ScansAPI.ScanScreenshotParams;

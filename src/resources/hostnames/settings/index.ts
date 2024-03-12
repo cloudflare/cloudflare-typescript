@@ -1,4 +1,12 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export { Settings } from './settings';
-export { TLSRetrieveResponse, TLSUpdateResponse, TLSDeleteResponse, TLSUpdateParams, TLS } from './tls';
+export {
+  TLSCertificatesAndHostnamesSettingObject,
+  TLSCertificatesAndHostnamesSettingObjectDelete,
+  TLSGetResponse,
+  TLSUpdateParams,
+  TLSDeleteParams,
+  TLSGetParams,
+  TLS,
+} from './tls';

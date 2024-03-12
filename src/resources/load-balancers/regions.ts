@@ -2,16 +2,27 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as RegionsAPI from 'cloudflare/resources/load-balancers/regions';
 
 export class Regions extends APIResource {
   /**
+   * List all region mappings.
+   */
+  list(params: RegionListParams, options?: Core.RequestOptions): Core.APIPromise<RegionListResponse> {
+    const { account_id, ...query } = params;
+    return (
+      this._client.get(`/accounts/${account_id}/load_balancers/regions`, {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: RegionListResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Get a single region mapping.
    */
-  retrieve(
-    accountIdentifier: string,
-    regionCode:
+  get(
+    regionId:
       | 'WNAM'
       | 'ENAM'
       | 'WEU'
@@ -25,71 +36,58 @@ export class Regions extends APIResource {
       | 'SAS'
       | 'SEAS'
       | 'NEAS',
+    params: RegionGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RegionRetrieveResponse> {
+  ): Core.APIPromise<RegionGetResponse> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountIdentifier}/load_balancers/regions/${regionCode}`,
+        `/accounts/${account_id}/load_balancers/regions/${regionId}`,
         options,
-      ) as Core.APIPromise<{ result: RegionRetrieveResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * List all region mappings.
-   */
-  loadBalancerRegionsListRegions(
-    accountIdentifier: string,
-    query?: RegionLoadBalancerRegionsListRegionsParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RegionLoadBalancerRegionsListRegionsResponse>;
-  loadBalancerRegionsListRegions(
-    accountIdentifier: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RegionLoadBalancerRegionsListRegionsResponse>;
-  loadBalancerRegionsListRegions(
-    accountIdentifier: string,
-    query: RegionLoadBalancerRegionsListRegionsParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RegionLoadBalancerRegionsListRegionsResponse> {
-    if (isRequestOptions(query)) {
-      return this.loadBalancerRegionsListRegions(accountIdentifier, {}, query);
-    }
-    return (
-      this._client.get(`/accounts/${accountIdentifier}/load_balancers/regions`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: RegionLoadBalancerRegionsListRegionsResponse }>
+      ) as Core.APIPromise<{ result: RegionGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export type RegionListResponse = unknown | string | null;
 
 /**
  * A list of countries and subdivisions mapped to a region.
  */
-export type RegionRetrieveResponse = unknown | string | null;
+export type RegionGetResponse = unknown | string | null;
 
-export type RegionLoadBalancerRegionsListRegionsResponse = unknown | string | null;
-
-export interface RegionLoadBalancerRegionsListRegionsParams {
+export interface RegionListParams {
   /**
-   * Two-letter alpha-2 country code followed in ISO 3166-1.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Query param: Two-letter alpha-2 country code followed in ISO 3166-1.
    */
   country_code_a2?: string;
 
   /**
-   * Two-letter subdivision code followed in ISO 3166-2.
+   * Query param: Two-letter subdivision code followed in ISO 3166-2.
    */
   subdivision_code?: string;
 
   /**
-   * Two-letter subdivision code followed in ISO 3166-2.
+   * Query param: Two-letter subdivision code followed in ISO 3166-2.
    */
   subdivision_code_a2?: string;
 }
 
+export interface RegionGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export namespace Regions {
-  export import RegionRetrieveResponse = RegionsAPI.RegionRetrieveResponse;
-  export import RegionLoadBalancerRegionsListRegionsResponse = RegionsAPI.RegionLoadBalancerRegionsListRegionsResponse;
-  export import RegionLoadBalancerRegionsListRegionsParams = RegionsAPI.RegionLoadBalancerRegionsListRegionsParams;
+  export import RegionListResponse = RegionsAPI.RegionListResponse;
+  export import RegionGetResponse = RegionsAPI.RegionGetResponse;
+  export import RegionListParams = RegionsAPI.RegionListParams;
+  export import RegionGetParams = RegionsAPI.RegionGetParams;
 }

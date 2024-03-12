@@ -2,29 +2,41 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as UuidAPI from 'cloudflare/resources/dcv-delegation/uuid';
+import * as UUIDAPI from 'cloudflare/resources/dcv-delegation/uuid';
 
-export class Uuid extends APIResource {
+export class UUID extends APIResource {
   /**
    * Retrieve the account and zone specific unique identifier used as part of the
    * CNAME target for DCV Delegation.
    */
-  retrieve(zoneIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<UuidRetrieveResponse> {
+  get(
+    params: UUIDGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TLSCertificatesAndHostnamesUUIDObject> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneIdentifier}/dcv_delegation/uuid`, options) as Core.APIPromise<{
-        result: UuidRetrieveResponse;
+      this._client.get(`/zones/${zone_id}/dcv_delegation/uuid`, options) as Core.APIPromise<{
+        result: TLSCertificatesAndHostnamesUUIDObject;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface UuidRetrieveResponse {
+export interface TLSCertificatesAndHostnamesUUIDObject {
   /**
    * The DCV Delegation unique identifier.
    */
   uuid?: string;
 }
 
-export namespace Uuid {
-  export import UuidRetrieveResponse = UuidAPI.UuidRetrieveResponse;
+export interface UUIDGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+export namespace UUID {
+  export import TLSCertificatesAndHostnamesUUIDObject = UUIDAPI.TLSCertificatesAndHostnamesUUIDObject;
+  export import UUIDGetParams = UUIDAPI.UUIDGetParams;
 }

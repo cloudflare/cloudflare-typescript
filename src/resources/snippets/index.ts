@@ -1,17 +1,11 @@
 // File generated from our OpenAPI spec by Stainless.
 
 export { Content } from './content';
+export { RuleUpdateResponse, RuleListResponse, RuleUpdateParams, Rules } from './rules';
 export {
-  SnippetRetrieveResponse,
-  SnippetUpdateResponse,
+  Snippet,
   SnippetListResponse,
   SnippetDeleteResponse,
   SnippetUpdateParams,
   Snippets,
 } from './snippets';
-export {
-  SnippetRuleUpdateResponse,
-  SnippetRuleListResponse,
-  SnippetRuleUpdateParams,
-  SnippetRules,
-} from './snippet-rules';

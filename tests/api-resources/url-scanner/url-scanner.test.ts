@@ -5,9 +5,7 @@ import { Response } from 'node-fetch';
 
 const cloudflare = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
-  apiEmail: 'dev@cloudflare.com',
-  apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY',
-  userServiceKey: 'My User Service Key',
+  apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
@@ -40,12 +38,17 @@ describe('resource urlScanner', () => {
         'string',
         {
           account_scans: true,
+          asn: '13335',
           date_end: '2019-12-27T18:11:19.117Z',
           date_start: '2019-12-27T18:11:19.117Z',
           hostname: 'example.com',
+          ip: '1.1.1.1',
+          is_malicious: true,
           limit: 100,
           next_cursor: 'string',
+          page_asn: 'string',
           page_hostname: 'string',
+          page_ip: 'string',
           page_path: 'string',
           page_url: 'string',
           path: '/samples/subresource-integrity/',

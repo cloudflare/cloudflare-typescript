@@ -27,48 +27,46 @@ export class IPs extends APIResource {
   }
 }
 
-export type IPListResponse = IPListResponse.AddressingIPs | IPListResponse.AddressingIPsJdcloud;
+export interface IPs {
+  /**
+   * A digest of the IP data. Useful for determining if the data has changed.
+   */
+  etag?: string;
 
-export namespace IPListResponse {
-  export interface AddressingIPs {
-    /**
-     * A digest of the IP data. Useful for determining if the data has changed.
-     */
-    etag?: string;
+  /**
+   * List of Cloudflare IPv4 CIDR addresses.
+   */
+  ipv4_cidrs?: Array<string>;
 
-    /**
-     * List of Cloudflare IPv4 CIDR addresses.
-     */
-    ipv4_cidrs?: Array<string>;
-
-    /**
-     * List of Cloudflare IPv6 CIDR addresses.
-     */
-    ipv6_cidrs?: Array<string>;
-  }
-
-  export interface AddressingIPsJdcloud {
-    /**
-     * A digest of the IP data. Useful for determining if the data has changed.
-     */
-    etag?: string;
-
-    /**
-     * List of Cloudflare IPv4 CIDR addresses.
-     */
-    ipv4_cidrs?: Array<string>;
-
-    /**
-     * List of Cloudflare IPv6 CIDR addresses.
-     */
-    ipv6_cidrs?: Array<string>;
-
-    /**
-     * List IPv4 and IPv6 CIDRs, only populated if `?networks=jdcloud` is used.
-     */
-    jdcloud_cidrs?: Array<string>;
-  }
+  /**
+   * List of Cloudflare IPv6 CIDR addresses.
+   */
+  ipv6_cidrs?: Array<string>;
 }
+
+export interface JdcloudIPs {
+  /**
+   * A digest of the IP data. Useful for determining if the data has changed.
+   */
+  etag?: string;
+
+  /**
+   * List of Cloudflare IPv4 CIDR addresses.
+   */
+  ipv4_cidrs?: Array<string>;
+
+  /**
+   * List of Cloudflare IPv6 CIDR addresses.
+   */
+  ipv6_cidrs?: Array<string>;
+
+  /**
+   * List IPv4 and IPv6 CIDRs, only populated if `?networks=jdcloud` is used.
+   */
+  jdcloud_cidrs?: Array<string>;
+}
+
+export type IPListResponse = IPs | JdcloudIPs;
 
 export interface IPListParams {
   /**
@@ -78,6 +76,8 @@ export interface IPListParams {
 }
 
 export namespace IPs {
+  export import IPs = IPsAPI.IPs;
+  export import JdcloudIPs = IPsAPI.JdcloudIPs;
   export import IPListResponse = IPsAPI.IPListResponse;
   export import IPListParams = IPsAPI.IPListParams;
 }

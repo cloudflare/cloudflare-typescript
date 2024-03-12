@@ -8,18 +8,17 @@ export class References extends APIResource {
   /**
    * Get the list of resources that reference the provided monitor.
    */
-  accountLoadBalancerMonitorsListMonitorReferences(
-    accountIdentifier: string,
-    identifier: string,
+  get(
+    monitorId: string,
+    params: ReferenceGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ReferenceAccountLoadBalancerMonitorsListMonitorReferencesResponse | null> {
+  ): Core.APIPromise<ReferenceGetResponse | null> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountIdentifier}/load_balancers/monitors/${identifier}/references`,
+        `/accounts/${account_id}/load_balancers/monitors/${monitorId}/references`,
         options,
-      ) as Core.APIPromise<{
-        result: ReferenceAccountLoadBalancerMonitorsListMonitorReferencesResponse | null;
-      }>
+      ) as Core.APIPromise<{ result: ReferenceGetResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -27,11 +26,10 @@ export class References extends APIResource {
 /**
  * List of resources that reference a given monitor.
  */
-export type ReferenceAccountLoadBalancerMonitorsListMonitorReferencesResponse =
-  Array<ReferenceAccountLoadBalancerMonitorsListMonitorReferencesResponse.ReferenceAccountLoadBalancerMonitorsListMonitorReferencesResponseItem>;
+export type ReferenceGetResponse = Array<ReferenceGetResponse.ReferenceGetResponseItem>;
 
-export namespace ReferenceAccountLoadBalancerMonitorsListMonitorReferencesResponse {
-  export interface ReferenceAccountLoadBalancerMonitorsListMonitorReferencesResponseItem {
+export namespace ReferenceGetResponse {
+  export interface ReferenceGetResponseItem {
     reference_type?: '*' | 'referral' | 'referrer';
 
     resource_id?: string;
@@ -42,6 +40,14 @@ export namespace ReferenceAccountLoadBalancerMonitorsListMonitorReferencesRespon
   }
 }
 
+export interface ReferenceGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export namespace References {
-  export import ReferenceAccountLoadBalancerMonitorsListMonitorReferencesResponse = ReferencesAPI.ReferenceAccountLoadBalancerMonitorsListMonitorReferencesResponse;
+  export import ReferenceGetResponse = ReferencesAPI.ReferenceGetResponse;
+  export import ReferenceGetParams = ReferencesAPI.ReferenceGetParams;
 }

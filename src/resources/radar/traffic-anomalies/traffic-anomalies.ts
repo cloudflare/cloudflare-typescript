@@ -14,31 +14,31 @@ export class TrafficAnomalies extends APIResource {
    * alerts are automatically detected by Radar and then manually verified by our
    * team. This endpoint returns the latest alerts.
    */
-  list(
-    query?: TrafficAnomalyListParams,
+  get(
+    query?: TrafficAnomalyGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TrafficAnomalyListResponse>;
-  list(options?: Core.RequestOptions): Core.APIPromise<TrafficAnomalyListResponse>;
-  list(
-    query: TrafficAnomalyListParams | Core.RequestOptions = {},
+  ): Core.APIPromise<TrafficAnomalyGetResponse>;
+  get(options?: Core.RequestOptions): Core.APIPromise<TrafficAnomalyGetResponse>;
+  get(
+    query: TrafficAnomalyGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TrafficAnomalyListResponse> {
+  ): Core.APIPromise<TrafficAnomalyGetResponse> {
     if (isRequestOptions(query)) {
-      return this.list({}, query);
+      return this.get({}, query);
     }
     return (
       this._client.get('/radar/traffic_anomalies', { query, ...options }) as Core.APIPromise<{
-        result: TrafficAnomalyListResponse;
+        result: TrafficAnomalyGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface TrafficAnomalyListResponse {
-  trafficAnomalies: Array<TrafficAnomalyListResponse.TrafficAnomaly>;
+export interface TrafficAnomalyGetResponse {
+  trafficAnomalies: Array<TrafficAnomalyGetResponse.TrafficAnomaly>;
 }
 
-export namespace TrafficAnomalyListResponse {
+export namespace TrafficAnomalyGetResponse {
   export interface TrafficAnomaly {
     startDate: string;
 
@@ -48,7 +48,7 @@ export namespace TrafficAnomalyListResponse {
 
     uuid: string;
 
-    asnDetails?: TrafficAnomaly.AsnDetails;
+    asnDetails?: TrafficAnomaly.ASNDetails;
 
     endDate?: string;
 
@@ -58,15 +58,15 @@ export namespace TrafficAnomalyListResponse {
   }
 
   export namespace TrafficAnomaly {
-    export interface AsnDetails {
+    export interface ASNDetails {
       asn: string;
 
       name: string;
 
-      locations?: AsnDetails.Locations;
+      locations?: ASNDetails.Locations;
     }
 
-    export namespace AsnDetails {
+    export namespace ASNDetails {
       export interface Locations {
         code: string;
 
@@ -82,7 +82,7 @@ export namespace TrafficAnomalyListResponse {
   }
 }
 
-export interface TrafficAnomalyListParams {
+export interface TrafficAnomalyGetParams {
   /**
    * Single ASN as integer.
    */
@@ -143,9 +143,9 @@ export interface TrafficAnomalyListParams {
 }
 
 export namespace TrafficAnomalies {
-  export import TrafficAnomalyListResponse = TrafficAnomaliesAPI.TrafficAnomalyListResponse;
-  export import TrafficAnomalyListParams = TrafficAnomaliesAPI.TrafficAnomalyListParams;
+  export import TrafficAnomalyGetResponse = TrafficAnomaliesAPI.TrafficAnomalyGetResponse;
+  export import TrafficAnomalyGetParams = TrafficAnomaliesAPI.TrafficAnomalyGetParams;
   export import Locations = LocationsAPI.Locations;
-  export import LocationListResponse = LocationsAPI.LocationListResponse;
-  export import LocationListParams = LocationsAPI.LocationListParams;
+  export import LocationGetResponse = LocationsAPI.LocationGetResponse;
+  export import LocationGetParams = LocationsAPI.LocationGetParams;
 }

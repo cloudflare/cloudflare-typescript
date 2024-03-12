@@ -5,20 +5,14 @@ import { Response } from 'node-fetch';
 
 const cloudflare = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
-  apiEmail: 'dev@cloudflare.com',
-  apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY',
-  userServiceKey: 'My User Service Key',
+  apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
 describe('resource jobs', () => {
   // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
-    const responsePromise = cloudflare.logpush.datasets.jobs.list(
-      'string',
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'http_requests',
-    );
+  test.skip('get', async () => {
+    const responsePromise = cloudflare.logpush.datasets.jobs.get('http_requests');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -29,12 +23,22 @@ describe('resource jobs', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
+  test.skip('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.logpush.datasets.jobs.list('string', '023e105f4ecef8ad9ca31a8372d0c353', 'http_requests', {
-        path: '/_stainless_unknown_path',
-      }),
+      cloudflare.logpush.datasets.jobs.get('http_requests', { path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.logpush.datasets.jobs.get(
+        'http_requests',
+        { account_id: 'string', zone_id: 'string' },
+        { path: '/_stainless_unknown_path' },
+      ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 });

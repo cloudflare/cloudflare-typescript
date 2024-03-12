@@ -2,22 +2,20 @@
 
 import { APIResource } from 'cloudflare/resource';
 import * as DatabaseAPI from 'cloudflare/resources/d1/database';
-import * as DatabasesAPI from 'cloudflare/resources/d1/databases';
 
 export class D1 extends APIResource {
-  databases: DatabasesAPI.Databases = new DatabasesAPI.Databases(this._client);
   database: DatabaseAPI.Database = new DatabaseAPI.Database(this._client);
 }
 
 export namespace D1 {
-  export import Databases = DatabasesAPI.Databases;
-  export import DatabaseCreateResponse = DatabasesAPI.DatabaseCreateResponse;
-  export import DatabaseListResponse = DatabasesAPI.DatabaseListResponse;
-  export import DatabaseCreateParams = DatabasesAPI.DatabaseCreateParams;
-  export import DatabaseListParams = DatabasesAPI.DatabaseListParams;
   export import Database = DatabaseAPI.Database;
-  export import DatabaseRetrieveResponse = DatabaseAPI.DatabaseRetrieveResponse;
+  export import D1CreateDatabase = DatabaseAPI.D1CreateDatabase;
+  export import D1DatabaseDetails = DatabaseAPI.D1DatabaseDetails;
+  export import D1QueryResult = DatabaseAPI.D1QueryResult;
   export import DatabaseDeleteResponse = DatabaseAPI.DatabaseDeleteResponse;
   export import DatabaseQueryResponse = DatabaseAPI.DatabaseQueryResponse;
+  export import D1CreateDatabasesV4PagePaginationArray = DatabaseAPI.D1CreateDatabasesV4PagePaginationArray;
+  export import DatabaseCreateParams = DatabaseAPI.DatabaseCreateParams;
+  export import DatabaseListParams = DatabaseAPI.DatabaseListParams;
   export import DatabaseQueryParams = DatabaseAPI.DatabaseQueryParams;
 }

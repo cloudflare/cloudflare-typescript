@@ -27,14 +27,10 @@ export class Scans extends APIResource {
   /**
    * Get URL scan by uuid
    */
-  retrieve(
-    accountId: string,
-    scanId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ScanRetrieveResponse> {
+  get(accountId: string, scanId: string, options?: Core.RequestOptions): Core.APIPromise<ScanGetResponse> {
     return (
       this._client.get(`/accounts/${accountId}/urlscanner/scan/${scanId}`, options) as Core.APIPromise<{
-        result: ScanRetrieveResponse;
+        result: ScanGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -100,11 +96,11 @@ export interface ScanCreateResponse {
   visibility: string;
 }
 
-export interface ScanRetrieveResponse {
-  scan: ScanRetrieveResponse.Scan;
+export interface ScanGetResponse {
+  scan: ScanGetResponse.Scan;
 }
 
-export namespace ScanRetrieveResponse {
+export namespace ScanGetResponse {
   export interface Scan {
     certificates: Array<Scan.Certificate>;
 
@@ -123,7 +119,7 @@ export namespace ScanRetrieveResponse {
     /**
      * Dictionary of Autonomous System Numbers where ASN's are the keys
      */
-    asns?: Scan.Asns;
+    asns?: Scan.ASNs;
 
     domains?: Scan.Domains;
 
@@ -162,8 +158,6 @@ export namespace ScanRetrieveResponse {
     export namespace Meta {
       export interface Processors {
         categories: Processors.Categories;
-
-        google_safe_browsing: Array<string>;
 
         phishing: Array<string>;
 
@@ -498,11 +492,6 @@ export namespace ScanRetrieveResponse {
         categories: Array<Overall.Category>;
 
         /**
-         * Please visit https://safebrowsing.google.com/ for more information.
-         */
-        gsb_threat_types: Array<string>;
-
-        /**
          * At least one of our subsystems marked the site as potentially malicious at the
          * time of the scan.
          */
@@ -525,18 +514,18 @@ export namespace ScanRetrieveResponse {
     /**
      * Dictionary of Autonomous System Numbers where ASN's are the keys
      */
-    export interface Asns {
+    export interface ASNs {
       /**
        * ASN's contacted
        */
-      asn?: Asns.Asn;
+      asn?: ASNs.ASN;
     }
 
-    export namespace Asns {
+    export namespace ASNs {
       /**
        * ASN's contacted
        */
-      export interface Asn {
+      export interface ASN {
         asn: string;
 
         description: string;
@@ -870,7 +859,7 @@ export interface ScanScreenshotParams {
 
 export namespace Scans {
   export import ScanCreateResponse = ScansAPI.ScanCreateResponse;
-  export import ScanRetrieveResponse = ScansAPI.ScanRetrieveResponse;
+  export import ScanGetResponse = ScansAPI.ScanGetResponse;
   export import ScanHarResponse = ScansAPI.ScanHarResponse;
   export import ScanCreateParams = ScansAPI.ScanCreateParams;
   export import ScanScreenshotParams = ScansAPI.ScanScreenshotParams;

@@ -8,16 +8,17 @@ export class References extends APIResource {
   /**
    * Get the list of resources that reference the provided pool.
    */
-  accountLoadBalancerPoolsListPoolReferences(
-    accountIdentifier: string,
-    identifier: string,
+  get(
+    poolId: string,
+    params: ReferenceGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ReferenceAccountLoadBalancerPoolsListPoolReferencesResponse | null> {
+  ): Core.APIPromise<ReferenceGetResponse | null> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountIdentifier}/load_balancers/pools/${identifier}/references`,
+        `/accounts/${account_id}/load_balancers/pools/${poolId}/references`,
         options,
-      ) as Core.APIPromise<{ result: ReferenceAccountLoadBalancerPoolsListPoolReferencesResponse | null }>
+      ) as Core.APIPromise<{ result: ReferenceGetResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -25,11 +26,10 @@ export class References extends APIResource {
 /**
  * List of resources that reference a given pool.
  */
-export type ReferenceAccountLoadBalancerPoolsListPoolReferencesResponse =
-  Array<ReferenceAccountLoadBalancerPoolsListPoolReferencesResponse.ReferenceAccountLoadBalancerPoolsListPoolReferencesResponseItem>;
+export type ReferenceGetResponse = Array<ReferenceGetResponse.ReferenceGetResponseItem>;
 
-export namespace ReferenceAccountLoadBalancerPoolsListPoolReferencesResponse {
-  export interface ReferenceAccountLoadBalancerPoolsListPoolReferencesResponseItem {
+export namespace ReferenceGetResponse {
+  export interface ReferenceGetResponseItem {
     reference_type?: '*' | 'referral' | 'referrer';
 
     resource_id?: string;
@@ -40,6 +40,14 @@ export namespace ReferenceAccountLoadBalancerPoolsListPoolReferencesResponse {
   }
 }
 
+export interface ReferenceGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export namespace References {
-  export import ReferenceAccountLoadBalancerPoolsListPoolReferencesResponse = ReferencesAPI.ReferenceAccountLoadBalancerPoolsListPoolReferencesResponse;
+  export import ReferenceGetResponse = ReferencesAPI.ReferenceGetResponse;
+  export import ReferenceGetParams = ReferencesAPI.ReferenceGetParams;
 }

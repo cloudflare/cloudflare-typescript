@@ -5,46 +5,17 @@ import { Response } from 'node-fetch';
 
 const cloudflare = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
-  apiEmail: 'dev@cloudflare.com',
-  apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY',
-  userServiceKey: 'My User Service Key',
+  apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
 describe('resource tls', () => {
   // skipped: tests are disabled for the time being
-  test.skip('retrieve', async () => {
-    const responsePromise = cloudflare.hostnames.settings.tls.retrieve(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'ciphers',
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('retrieve: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.hostnames.settings.tls.retrieve('023e105f4ecef8ad9ca31a8372d0c353', 'ciphers', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
   test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.hostnames.settings.tls.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'ciphers',
-      'app.example.com',
-      { value: ['ECDHE-RSA-AES128-GCM-SHA256', 'AES128-GCM-SHA256'] },
-    );
+    const responsePromise = cloudflare.hostnames.settings.tls.update('ciphers', 'app.example.com', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      value: ['ECDHE-RSA-AES128-GCM-SHA256', 'AES128-GCM-SHA256'],
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -56,21 +27,17 @@ describe('resource tls', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.hostnames.settings.tls.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'ciphers',
-      'app.example.com',
-      { value: ['ECDHE-RSA-AES128-GCM-SHA256', 'AES128-GCM-SHA256'] },
-    );
+    const response = await cloudflare.hostnames.settings.tls.update('ciphers', 'app.example.com', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      value: ['ECDHE-RSA-AES128-GCM-SHA256', 'AES128-GCM-SHA256'],
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
-    const responsePromise = cloudflare.hostnames.settings.tls.delete(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'ciphers',
-      'app.example.com',
-    );
+  test.skip('delete: only required params', async () => {
+    const responsePromise = cloudflare.hostnames.settings.tls.delete('ciphers', 'app.example.com', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -81,15 +48,30 @@ describe('resource tls', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.hostnames.settings.tls.delete(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        'ciphers',
-        'app.example.com',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('delete: required and optional params', async () => {
+    const response = await cloudflare.hostnames.settings.tls.delete('ciphers', 'app.example.com', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get: only required params', async () => {
+    const responsePromise = cloudflare.hostnames.settings.tls.get('ciphers', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.hostnames.settings.tls.get('ciphers', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 });

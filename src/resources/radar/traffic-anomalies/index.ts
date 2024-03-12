@@ -1,4 +1,4 @@
 // File generated from our OpenAPI spec by Stainless.
 
-export { LocationListResponse, LocationListParams, Locations } from './locations';
-export { TrafficAnomalyListResponse, TrafficAnomalyListParams, TrafficAnomalies } from './traffic-anomalies';
+export { LocationGetResponse, LocationGetParams, Locations } from './locations';
+export { TrafficAnomalyGetResponse, TrafficAnomalyGetParams, TrafficAnomalies } from './traffic-anomalies';

@@ -5,16 +5,14 @@ import { Response } from 'node-fetch';
 
 const cloudflare = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
-  apiEmail: 'dev@cloudflare.com',
-  apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY',
-  userServiceKey: 'My User Service Key',
+  apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
 describe('resource entities', () => {
   // skipped: tests are disabled for the time being
-  test.skip('ips: only required params', async () => {
-    const responsePromise = cloudflare.radar.entities.ips({ ip: '8.8.8.8' });
+  test.skip('get: only required params', async () => {
+    const responsePromise = cloudflare.radar.entities.get({ ip: '8.8.8.8' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -25,7 +23,7 @@ describe('resource entities', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('ips: required and optional params', async () => {
-    const response = await cloudflare.radar.entities.ips({ ip: '8.8.8.8', format: 'JSON' });
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.radar.entities.get({ ip: '8.8.8.8', format: 'JSON' });
   });
 });

@@ -5,19 +5,17 @@ import { Response } from 'node-fetch';
 
 const cloudflare = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
-  apiEmail: 'dev@cloudflare.com',
-  apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY',
-  userServiceKey: 'My User Service Key',
+  apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
 describe('resource monitors', () => {
   // skipped: tests are disabled for the time being
-  test.skip('retrieve', async () => {
-    const responsePromise = cloudflare.loadBalancers.monitors.retrieve(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'f1aba936b94213e5b8dca0c0dbf1f9cc',
-    );
+  test.skip('create: only required params', async () => {
+    const responsePromise = cloudflare.loadBalancers.monitors.create({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      expected_codes: '2xx',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -28,24 +26,34 @@ describe('resource monitors', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('retrieve: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.loadBalancers.monitors.retrieve(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        'f1aba936b94213e5b8dca0c0dbf1f9cc',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('create: required and optional params', async () => {
+    const response = await cloudflare.loadBalancers.monitors.create({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      expected_codes: '2xx',
+      allow_insecure: true,
+      consecutive_down: 0,
+      consecutive_up: 0,
+      description: 'Login page monitor',
+      expected_body: 'alive',
+      follow_redirects: true,
+      header: { Host: ['example.com'], 'X-App-ID': ['abc123'] },
+      interval: 0,
+      method: 'GET',
+      path: '/health',
+      port: 0,
+      probe_zone: 'example.com',
+      retries: 0,
+      timeout: 0,
+      type: 'https',
+    });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.loadBalancers.monitors.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'f1aba936b94213e5b8dca0c0dbf1f9cc',
-      { expected_codes: '2xx' },
-    );
+    const responsePromise = cloudflare.loadBalancers.monitors.update('f1aba936b94213e5b8dca0c0dbf1f9cc', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      expected_codes: '2xx',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -57,36 +65,32 @@ describe('resource monitors', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.loadBalancers.monitors.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'f1aba936b94213e5b8dca0c0dbf1f9cc',
-      {
-        expected_codes: '2xx',
-        allow_insecure: true,
-        consecutive_down: 0,
-        consecutive_up: 0,
-        description: 'Login page monitor',
-        expected_body: 'alive',
-        follow_redirects: true,
-        header: { Host: ['example.com'], 'X-App-ID': ['abc123'] },
-        interval: 0,
-        method: 'GET',
-        path: '/health',
-        port: 0,
-        probe_zone: 'example.com',
-        retries: 0,
-        timeout: 0,
-        type: 'https',
-      },
-    );
+    const response = await cloudflare.loadBalancers.monitors.update('f1aba936b94213e5b8dca0c0dbf1f9cc', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      expected_codes: '2xx',
+      allow_insecure: true,
+      consecutive_down: 0,
+      consecutive_up: 0,
+      description: 'Login page monitor',
+      expected_body: 'alive',
+      follow_redirects: true,
+      header: { Host: ['example.com'], 'X-App-ID': ['abc123'] },
+      interval: 0,
+      method: 'GET',
+      path: '/health',
+      port: 0,
+      probe_zone: 'example.com',
+      retries: 0,
+      timeout: 0,
+      type: 'https',
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
-    const responsePromise = cloudflare.loadBalancers.monitors.delete(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'f1aba936b94213e5b8dca0c0dbf1f9cc',
-    );
+  test.skip('list: only required params', async () => {
+    const responsePromise = cloudflare.loadBalancers.monitors.list({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -97,11 +101,17 @@ describe('resource monitors', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('accountLoadBalancerMonitorsCreateMonitor: only required params', async () => {
-    const responsePromise = cloudflare.loadBalancers.monitors.accountLoadBalancerMonitorsCreateMonitor(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      { expected_codes: '2xx' },
-    );
+  test.skip('list: required and optional params', async () => {
+    const response = await cloudflare.loadBalancers.monitors.list({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('delete: only required params', async () => {
+    const responsePromise = cloudflare.loadBalancers.monitors.delete('f1aba936b94213e5b8dca0c0dbf1f9cc', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -112,35 +122,18 @@ describe('resource monitors', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('accountLoadBalancerMonitorsCreateMonitor: required and optional params', async () => {
-    const response = await cloudflare.loadBalancers.monitors.accountLoadBalancerMonitorsCreateMonitor(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      {
-        expected_codes: '2xx',
-        allow_insecure: true,
-        consecutive_down: 0,
-        consecutive_up: 0,
-        description: 'Login page monitor',
-        expected_body: 'alive',
-        follow_redirects: true,
-        header: { Host: ['example.com'], 'X-App-ID': ['abc123'] },
-        interval: 0,
-        method: 'GET',
-        path: '/health',
-        port: 0,
-        probe_zone: 'example.com',
-        retries: 0,
-        timeout: 0,
-        type: 'https',
-      },
-    );
+  test.skip('delete: required and optional params', async () => {
+    const response = await cloudflare.loadBalancers.monitors.delete('f1aba936b94213e5b8dca0c0dbf1f9cc', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('accountLoadBalancerMonitorsListMonitors', async () => {
-    const responsePromise = cloudflare.loadBalancers.monitors.accountLoadBalancerMonitorsListMonitors(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-    );
+  test.skip('edit: only required params', async () => {
+    const responsePromise = cloudflare.loadBalancers.monitors.edit('f1aba936b94213e5b8dca0c0dbf1f9cc', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      expected_codes: '2xx',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -151,13 +144,46 @@ describe('resource monitors', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('accountLoadBalancerMonitorsListMonitors: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.loadBalancers.monitors.accountLoadBalancerMonitorsListMonitors(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('edit: required and optional params', async () => {
+    const response = await cloudflare.loadBalancers.monitors.edit('f1aba936b94213e5b8dca0c0dbf1f9cc', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      expected_codes: '2xx',
+      allow_insecure: true,
+      consecutive_down: 0,
+      consecutive_up: 0,
+      description: 'Login page monitor',
+      expected_body: 'alive',
+      follow_redirects: true,
+      header: { Host: ['example.com'], 'X-App-ID': ['abc123'] },
+      interval: 0,
+      method: 'GET',
+      path: '/health',
+      port: 0,
+      probe_zone: 'example.com',
+      retries: 0,
+      timeout: 0,
+      type: 'https',
+    });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get: only required params', async () => {
+    const responsePromise = cloudflare.loadBalancers.monitors.get('f1aba936b94213e5b8dca0c0dbf1f9cc', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.loadBalancers.monitors.get('f1aba936b94213e5b8dca0c0dbf1f9cc', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 });

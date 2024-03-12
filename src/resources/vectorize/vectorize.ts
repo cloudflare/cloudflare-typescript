@@ -9,5 +9,19 @@ export class Vectorize extends APIResource {
 
 export namespace Vectorize {
   export import Indexes = IndexesAPI.Indexes;
+  export import VectorizeCreateIndex = IndexesAPI.VectorizeCreateIndex;
+  export import VectorizeIndexDeleteVectorsByID = IndexesAPI.VectorizeIndexDeleteVectorsByID;
+  export import VectorizeIndexInsert = IndexesAPI.VectorizeIndexInsert;
+  export import VectorizeIndexQuery = IndexesAPI.VectorizeIndexQuery;
+  export import VectorizeIndexUpsert = IndexesAPI.VectorizeIndexUpsert;
   export import IndexListResponse = IndexesAPI.IndexListResponse;
+  export import IndexDeleteResponse = IndexesAPI.IndexDeleteResponse;
+  export import IndexGetByIDsResponse = IndexesAPI.IndexGetByIDsResponse;
+  export import IndexCreateParams = IndexesAPI.IndexCreateParams;
+  export import IndexUpdateParams = IndexesAPI.IndexUpdateParams;
+  export import IndexDeleteByIDsParams = IndexesAPI.IndexDeleteByIDsParams;
+  export import IndexGetByIDsParams = IndexesAPI.IndexGetByIDsParams;
+  export import IndexInsertParams = IndexesAPI.IndexInsertParams;
+  export import IndexQueryParams = IndexesAPI.IndexQueryParams;
+  export import IndexUpsertParams = IndexesAPI.IndexUpsertParams;
 }

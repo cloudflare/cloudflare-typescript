@@ -5,25 +5,29 @@ import * as Errors from './error';
 import { type Agent } from './_shims/index';
 import * as Uploads from './uploads';
 import * as qs from 'qs';
+import * as Pagination from 'cloudflare/pagination';
 import * as API from 'cloudflare/resources/index';
 
 export interface ClientOptions {
   /**
    * Defaults to process.env['CLOUDFLARE_API_KEY'].
    */
-  apiKey?: string | undefined;
+  apiKey?: string | null | undefined;
 
   /**
    * Defaults to process.env['CLOUDFLARE_EMAIL'].
    */
-  apiEmail?: string | undefined;
+  apiEmail?: string | null | undefined;
 
   /**
    * Defaults to process.env['CLOUDFLARE_API_TOKEN'].
    */
-  apiToken?: string | undefined;
+  apiToken?: string | null | undefined;
 
-  userServiceKey: string;
+  /**
+   * Defaults to process.env['CLOUDFLARE_API_USER_SERVICE_KEY'].
+   */
+  userServiceKey?: string | null | undefined;
 
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
@@ -84,20 +88,20 @@ export interface ClientOptions {
 
 /** API Client for interfacing with the Cloudflare API. */
 export class Cloudflare extends Core.APIClient {
-  apiKey: string;
-  apiEmail: string;
-  apiToken: string;
-  userServiceKey: string;
+  apiKey: string | null;
+  apiEmail: string | null;
+  apiToken: string | null;
+  userServiceKey: string | null;
 
   private _options: ClientOptions;
 
   /**
    * API Client for interfacing with the Cloudflare API.
    *
-   * @param {string | undefined} [opts.apiKey=process.env['CLOUDFLARE_API_KEY'] ?? undefined]
-   * @param {string | undefined} [opts.apiEmail=process.env['CLOUDFLARE_EMAIL'] ?? undefined]
-   * @param {string | undefined} [opts.apiToken=process.env['CLOUDFLARE_API_TOKEN'] ?? undefined]
-   * @param {string} opts.userServiceKey
+   * @param {string | null | undefined} [opts.apiKey=process.env['CLOUDFLARE_API_KEY'] ?? null]
+   * @param {string | null | undefined} [opts.apiEmail=process.env['CLOUDFLARE_EMAIL'] ?? null]
+   * @param {string | null | undefined} [opts.apiToken=process.env['CLOUDFLARE_API_TOKEN'] ?? null]
+   * @param {string | null | undefined} [opts.userServiceKey=process.env['CLOUDFLARE_API_USER_SERVICE_KEY'] ?? null]
    * @param {string} [opts.baseURL=process.env['CLOUDFLARE_BASE_URL'] ?? https://api.cloudflare.com/client/v4] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {number} [opts.httpAgent] - An HTTP agent used to manage HTTP(s) connections.
@@ -108,33 +112,12 @@ export class Cloudflare extends Core.APIClient {
    */
   constructor({
     baseURL = Core.readEnv('CLOUDFLARE_BASE_URL'),
-    apiKey = Core.readEnv('CLOUDFLARE_API_KEY'),
-    apiEmail = Core.readEnv('CLOUDFLARE_EMAIL'),
-    apiToken = Core.readEnv('CLOUDFLARE_API_TOKEN'),
-    userServiceKey,
+    apiKey = Core.readEnv('CLOUDFLARE_API_KEY') ?? null,
+    apiEmail = Core.readEnv('CLOUDFLARE_EMAIL') ?? null,
+    apiToken = Core.readEnv('CLOUDFLARE_API_TOKEN') ?? null,
+    userServiceKey = Core.readEnv('CLOUDFLARE_API_USER_SERVICE_KEY') ?? null,
     ...opts
-  }: ClientOptions) {
-    if (apiKey === undefined) {
-      throw new Errors.CloudflareError(
-        "The CLOUDFLARE_API_KEY environment variable is missing or empty; either provide it, or instantiate the Cloudflare client with an apiKey option, like new Cloudflare({ apiKey: '144c9defac04969c7bfad8efaa8ea194' }).",
-      );
-    }
-    if (apiEmail === undefined) {
-      throw new Errors.CloudflareError(
-        "The CLOUDFLARE_EMAIL environment variable is missing or empty; either provide it, or instantiate the Cloudflare client with an apiEmail option, like new Cloudflare({ apiEmail: 'dev@cloudflare.com' }).",
-      );
-    }
-    if (apiToken === undefined) {
-      throw new Errors.CloudflareError(
-        "The CLOUDFLARE_API_TOKEN environment variable is missing or empty; either provide it, or instantiate the Cloudflare client with an apiToken option, like new Cloudflare({ apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY' }).",
-      );
-    }
-    if (userServiceKey === undefined) {
-      throw new Errors.CloudflareError(
-        "Missing required client option userServiceKey; you need to instantiate the Cloudflare client with an userServiceKey option, like new Cloudflare({ userServiceKey: 'My User Service Key' }).",
-      );
-    }
-
+  }: ClientOptions = {}) {
     const options: ClientOptions = {
       apiKey,
       apiEmail,
@@ -160,52 +143,85 @@ export class Cloudflare extends Core.APIClient {
   }
 
   accounts: API.Accounts = new API.Accounts(this);
+  originCACertificates: API.OriginCACertificates = new API.OriginCACertificates(this);
   ips: API.IPs = new API.IPs(this);
+  memberships: API.Memberships = new API.Memberships(this);
+  user: API.UserResource = new API.UserResource(this);
   zones: API.Zones = new API.Zones(this);
-  ai: API.AI = new API.AI(this);
   loadBalancers: API.LoadBalancers = new API.LoadBalancers(this);
-  access: API.Access = new API.Access(this);
-  dnsRecords: API.DNSRecords = new API.DNSRecords(this);
-  emails: API.Emails = new API.Emails(this);
-  accountMembers: API.AccountMembers = new API.AccountMembers(this);
-  tunnels: API.Tunnels = new API.Tunnels(this);
-  d1: API.D1 = new API.D1(this);
-  dex: API.Dex = new API.Dex(this);
-  r2: API.R2 = new API.R2(this);
-  stream: API.Stream = new API.Stream(this);
-  teamnet: API.Teamnet = new API.Teamnet(this);
-  warpConnector: API.WarpConnector = new API.WarpConnector(this);
-  dispatchers: API.Dispatchers = new API.Dispatchers(this);
-  workersForPlatforms: API.WorkersForPlatforms = new API.WorkersForPlatforms(this);
-  workerDomains: API.WorkerDomains = new API.WorkerDomains(this);
-  workerScripts: API.WorkerScripts = new API.WorkerScripts(this);
-  zerotrust: API.Zerotrust = new API.Zerotrust(this);
+  cache: API.Cache = new API.Cache(this);
+  ssl: API.SSL = new API.SSL(this);
+  subscriptions: API.Subscriptions = new API.Subscriptions(this);
+  acm: API.ACM = new API.ACM(this);
+  argo: API.Argo = new API.Argo(this);
+  availablePlans: API.AvailablePlans = new API.AvailablePlans(this);
+  availableRatePlans: API.AvailableRatePlans = new API.AvailableRatePlans(this);
+  certificateAuthorities: API.CertificateAuthorities = new API.CertificateAuthorities(this);
+  clientCertificates: API.ClientCertificates = new API.ClientCertificates(this);
+  customCertificates: API.CustomCertificates = new API.CustomCertificates(this);
+  customHostnames: API.CustomHostnames = new API.CustomHostnames(this);
+  customNameservers: API.CustomNameservers = new API.CustomNameservers(this);
+  dns: API.DNS = new API.DNS(this);
+  dnssec: API.DNSSEC = new API.DNSSEC(this);
+  emailRouting: API.EmailRouting = new API.EmailRouting(this);
+  filters: API.Filters = new API.Filters(this);
+  firewall: API.Firewall = new API.Firewall(this);
+  healthchecks: API.Healthchecks = new API.Healthchecks(this);
+  keylessCertificates: API.KeylessCertificates = new API.KeylessCertificates(this);
+  logpush: API.Logpush = new API.Logpush(this);
+  logs: API.Logs = new API.Logs(this);
+  originTLSClientAuth: API.OriginTLSClientAuth = new API.OriginTLSClientAuth(this);
+  pagerules: API.Pagerules = new API.Pagerules(this);
+  rateLimits: API.RateLimits = new API.RateLimits(this);
+  secondaryDNS: API.SecondaryDNS = new API.SecondaryDNS(this);
+  waitingRooms: API.WaitingRooms = new API.WaitingRooms(this);
+  web3: API.Web3 = new API.Web3(this);
+  workers: API.Workers = new API.Workers(this);
+  kv: API.KV = new API.KV(this);
+  durableObjects: API.DurableObjects = new API.DurableObjects(this);
+  queues: API.Queues = new API.Queues(this);
+  managedHeaders: API.ManagedHeaders = new API.ManagedHeaders(this);
+  pageShield: API.PageShield = new API.PageShield(this);
+  rulesets: API.Rulesets = new API.Rulesets(this);
+  urlNormalization: API.URLNormalization = new API.URLNormalization(this);
+  spectrum: API.Spectrum = new API.Spectrum(this);
   addressing: API.Addressing = new API.Addressing(this);
+  auditLogs: API.AuditLogs = new API.AuditLogs(this);
+  billing: API.Billing = new API.Billing(this);
+  brandProtection: API.BrandProtection = new API.BrandProtection(this);
+  diagnostics: API.Diagnostics = new API.Diagnostics(this);
+  images: API.Images = new API.Images(this);
+  intel: API.Intel = new API.Intel(this);
+  magicTransit: API.MagicTransit = new API.MagicTransit(this);
+  magicNetworkMonitoring: API.MagicNetworkMonitoring = new API.MagicNetworkMonitoring(this);
+  mtlsCertificates: API.MTLSCertificates = new API.MTLSCertificates(this);
+  pages: API.Pages = new API.Pages(this);
+  pcaps: API.PCAPs = new API.PCAPs(this);
+  registrar: API.Registrar = new API.Registrar(this);
+  requestTracers: API.RequestTracers = new API.RequestTracers(this);
+  rules: API.Rules = new API.Rules(this);
+  storage: API.Storage = new API.Storage(this);
+  stream: API.Stream = new API.Stream(this);
+  alerting: API.Alerting = new API.Alerting(this);
+  d1: API.D1 = new API.D1(this);
+  r2: API.R2 = new API.R2(this);
+  warpConnector: API.WARPConnector = new API.WARPConnector(this);
+  workersForPlatforms: API.WorkersForPlatforms = new API.WorkersForPlatforms(this);
+  zeroTrust: API.ZeroTrust = new API.ZeroTrust(this);
   challenges: API.Challenges = new API.Challenges(this);
   hyperdrive: API.Hyperdrive = new API.Hyperdrive(this);
-  intel: API.Intel = new API.Intel(this);
-  rum: API.Rum = new API.Rum(this);
+  rum: API.RUM = new API.RUM(this);
   vectorize: API.Vectorize = new API.Vectorize(this);
-  vectorizeIndexes: API.VectorizeIndexes = new API.VectorizeIndexes(this);
   urlScanner: API.URLScanner = new API.URLScanner(this);
   radar: API.Radar = new API.Radar(this);
-  botManagements: API.BotManagements = new API.BotManagements(this);
-  cacheReserves: API.CacheReserves = new API.CacheReserves(this);
-  originPostQuantumEncryptions: API.OriginPostQuantumEncryptions = new API.OriginPostQuantumEncryptions(this);
-  cache: API.Cache = new API.Cache(this);
-  firewall: API.Firewall = new API.Firewall(this);
-  zaraz: API.Zaraz = new API.Zaraz(this);
-  speedAPI: API.SpeedAPI = new API.SpeedAPI(this);
-  dcvDelegation: API.DcvDelegation = new API.DcvDelegation(this);
+  botManagement: API.BotManagement = new API.BotManagement(this);
+  originPostQuantumEncryption: API.OriginPostQuantumEncryption = new API.OriginPostQuantumEncryption(this);
+  speed: API.Speed = new API.Speed(this);
+  dcvDelegation: API.DCVDelegation = new API.DCVDelegation(this);
   hostnames: API.Hostnames = new API.Hostnames(this);
-  logpush: API.Logpush = new API.Logpush(this);
-  hold: API.Hold = new API.Hold(this);
-  pageShield: API.PageShield = new API.PageShield(this);
-  fontSettings: API.FontSettings = new API.FontSettings(this);
   snippets: API.Snippets = new API.Snippets(this);
-  dlp: API.Dlp = new API.Dlp(this);
-  gateway: API.Gateway = new API.Gateway(this);
-  accessTags: API.AccessTags = new API.AccessTags(this);
+  calls: API.Calls = new API.Calls(this);
+  cloudforceOne: API.CloudforceOne = new API.CloudforceOne(this);
 
   protected override defaultQuery(): Core.DefaultQuery | undefined {
     return this._options.defaultQuery;
@@ -214,9 +230,44 @@ export class Cloudflare extends Core.APIClient {
   protected override defaultHeaders(opts: Core.FinalRequestOptions): Core.Headers {
     return {
       ...super.defaultHeaders(opts),
-      'x-auth-email': this.apiEmail,
+      'X-Auth-Key': this.apiKey,
+      'X-Auth-Email': this.apiEmail,
       ...this._options.defaultHeaders,
     };
+  }
+
+  protected override validateHeaders(headers: Core.Headers, customHeaders: Core.Headers) {
+    if (this.apiEmail && headers['x-auth-email']) {
+      return;
+    }
+    if (customHeaders['x-auth-email'] === null) {
+      return;
+    }
+
+    if (this.apiKey && headers['x-auth-key']) {
+      return;
+    }
+    if (customHeaders['x-auth-key'] === null) {
+      return;
+    }
+
+    if (this.apiToken && headers['authorization']) {
+      return;
+    }
+    if (customHeaders['authorization'] === null) {
+      return;
+    }
+
+    if (this.userServiceKey && headers['x-auth-user-service-key']) {
+      return;
+    }
+    if (customHeaders['x-auth-user-service-key'] === null) {
+      return;
+    }
+
+    throw new Error(
+      'Could not resolve authentication method. Expected one of apiEmail, apiKey, apiToken or userServiceKey to be set. Or for one of the "X-Auth-Email", "X-Auth-Key", "Authorization" or "X-Auth-User-Service-Key" headers to be explicitly omitted',
+    );
   }
 
   protected override authHeaders(opts: Core.FinalRequestOptions): Core.Headers {
@@ -224,22 +275,51 @@ export class Cloudflare extends Core.APIClient {
     const apiKeyAuth = this.apiKeyAuth(opts);
     const apiTokenAuth = this.apiTokenAuth(opts);
     const userServiceKeyAuth = this.userServiceKeyAuth(opts);
+
+    if (
+      apiEmailAuth != null &&
+      !Core.isEmptyObj(apiEmailAuth) &&
+      apiKeyAuth != null &&
+      !Core.isEmptyObj(apiKeyAuth)
+    ) {
+      return { ...apiEmailAuth, ...apiKeyAuth };
+    }
+
+    if (apiTokenAuth != null && !Core.isEmptyObj(apiTokenAuth)) {
+      return apiTokenAuth;
+    }
+
+    if (userServiceKeyAuth != null && !Core.isEmptyObj(userServiceKeyAuth)) {
+      return userServiceKeyAuth;
+    }
     return {};
   }
 
   protected apiEmailAuth(opts: Core.FinalRequestOptions): Core.Headers {
+    if (this.apiEmail == null) {
+      return {};
+    }
     return { 'X-Auth-Email': this.apiEmail };
   }
 
   protected apiKeyAuth(opts: Core.FinalRequestOptions): Core.Headers {
+    if (this.apiKey == null) {
+      return {};
+    }
     return { 'X-Auth-Key': this.apiKey };
   }
 
   protected apiTokenAuth(opts: Core.FinalRequestOptions): Core.Headers {
+    if (this.apiToken == null) {
+      return {};
+    }
     return { Authorization: `Bearer ${this.apiToken}` };
   }
 
   protected userServiceKeyAuth(opts: Core.FinalRequestOptions): Core.Headers {
+    if (this.userServiceKey == null) {
+      return {};
+    }
     return { 'X-Auth-User-Service-Key': this.userServiceKey };
   }
 
@@ -290,119 +370,398 @@ export namespace Cloudflare {
 
   export import RequestOptions = Core.RequestOptions;
 
+  export import V4PagePagination = Pagination.V4PagePagination;
+  export import V4PagePaginationParams = Pagination.V4PagePaginationParams;
+  export import V4PagePaginationResponse = Pagination.V4PagePaginationResponse;
+
+  export import V4PagePaginationArray = Pagination.V4PagePaginationArray;
+  export import V4PagePaginationArrayParams = Pagination.V4PagePaginationArrayParams;
+  export import V4PagePaginationArrayResponse = Pagination.V4PagePaginationArrayResponse;
+
+  export import CursorPagination = Pagination.CursorPagination;
+  export import CursorPaginationParams = Pagination.CursorPaginationParams;
+  export import CursorPaginationResponse = Pagination.CursorPaginationResponse;
+
+  export import CursorLimitPagination = Pagination.CursorLimitPagination;
+  export import CursorLimitPaginationParams = Pagination.CursorLimitPaginationParams;
+  export import CursorLimitPaginationResponse = Pagination.CursorLimitPaginationResponse;
+
+  export import SinglePage = Pagination.SinglePage;
+  export import SinglePageResponse = Pagination.SinglePageResponse;
+
   export import Accounts = API.Accounts;
+  export import Account = API.Account;
+  export import AccountUpdateResponse = API.AccountUpdateResponse;
   export import AccountListResponse = API.AccountListResponse;
+  export import AccountGetResponse = API.AccountGetResponse;
+  export import AccountListResponsesV4PagePaginationArray = API.AccountListResponsesV4PagePaginationArray;
+  export import AccountUpdateParams = API.AccountUpdateParams;
   export import AccountListParams = API.AccountListParams;
+  export import AccountGetParams = API.AccountGetParams;
+
+  export import OriginCACertificates = API.OriginCACertificates;
+  export import OriginCACertificate = API.OriginCACertificate;
+  export import OriginCACertificateCreateResponse = API.OriginCACertificateCreateResponse;
+  export import OriginCACertificateListResponse = API.OriginCACertificateListResponse;
+  export import OriginCACertificateDeleteResponse = API.OriginCACertificateDeleteResponse;
+  export import OriginCACertificateGetResponse = API.OriginCACertificateGetResponse;
+  export import OriginCACertificateCreateParams = API.OriginCACertificateCreateParams;
 
   export import IPs = API.IPs;
+  export import JdcloudIPs = API.JdcloudIPs;
   export import IPListResponse = API.IPListResponse;
   export import IPListParams = API.IPListParams;
 
+  export import Memberships = API.Memberships;
+  export import Membership = API.Membership;
+  export import MembershipUpdateResponse = API.MembershipUpdateResponse;
+  export import MembershipDeleteResponse = API.MembershipDeleteResponse;
+  export import MembershipGetResponse = API.MembershipGetResponse;
+  export import MembershipsV4PagePaginationArray = API.MembershipsV4PagePaginationArray;
+  export import MembershipUpdateParams = API.MembershipUpdateParams;
+  export import MembershipListParams = API.MembershipListParams;
+
+  export import UserResource = API.UserResource;
+  export import User = API.User;
+  export import UserEditResponse = API.UserEditResponse;
+  export import UserGetResponse = API.UserGetResponse;
+  export import UserEditParams = API.UserEditParams;
+
   export import Zones = API.Zones;
+  export import Zone = API.Zone;
   export import ZoneCreateResponse = API.ZoneCreateResponse;
   export import ZoneListResponse = API.ZoneListResponse;
+  export import ZoneDeleteResponse = API.ZoneDeleteResponse;
+  export import ZoneEditResponse = API.ZoneEditResponse;
+  export import ZoneGetResponse = API.ZoneGetResponse;
+  export import ZoneListResponsesV4PagePaginationArray = API.ZoneListResponsesV4PagePaginationArray;
   export import ZoneCreateParams = API.ZoneCreateParams;
   export import ZoneListParams = API.ZoneListParams;
-
-  export import AI = API.AI;
-  export import AIRunModelResponse = API.AIRunModelResponse;
-  export import AIRunModelParams = API.AIRunModelParams;
+  export import ZoneDeleteParams = API.ZoneDeleteParams;
+  export import ZoneEditParams = API.ZoneEditParams;
+  export import ZoneGetParams = API.ZoneGetParams;
 
   export import LoadBalancers = API.LoadBalancers;
-  export import LoadBalancerCreateResponse = API.LoadBalancerCreateResponse;
-  export import LoadBalancerRetrieveResponse = API.LoadBalancerRetrieveResponse;
-  export import LoadBalancerUpdateResponse = API.LoadBalancerUpdateResponse;
+  export import LoadBalancer = API.LoadBalancer;
   export import LoadBalancerListResponse = API.LoadBalancerListResponse;
   export import LoadBalancerDeleteResponse = API.LoadBalancerDeleteResponse;
   export import LoadBalancerCreateParams = API.LoadBalancerCreateParams;
   export import LoadBalancerUpdateParams = API.LoadBalancerUpdateParams;
+  export import LoadBalancerListParams = API.LoadBalancerListParams;
+  export import LoadBalancerDeleteParams = API.LoadBalancerDeleteParams;
+  export import LoadBalancerEditParams = API.LoadBalancerEditParams;
+  export import LoadBalancerGetParams = API.LoadBalancerGetParams;
 
-  export import Access = API.Access;
+  export import Cache = API.Cache;
+  export import CachePurgeResponse = API.CachePurgeResponse;
+  export import CachePurgeParams = API.CachePurgeParams;
 
-  export import DNSRecords = API.DNSRecords;
-  export import DNSRecordRetrieveResponse = API.DNSRecordRetrieveResponse;
-  export import DNSRecordUpdateResponse = API.DNSRecordUpdateResponse;
-  export import DNSRecordDeleteResponse = API.DNSRecordDeleteResponse;
-  export import DNSRecordDNSRecordsForAZoneCreateDNSRecordResponse = API.DNSRecordDNSRecordsForAZoneCreateDNSRecordResponse;
-  export import DNSRecordDNSRecordsForAZoneListDNSRecordsResponse = API.DNSRecordDNSRecordsForAZoneListDNSRecordsResponse;
-  export import DNSRecordUpdateParams = API.DNSRecordUpdateParams;
-  export import DNSRecordDNSRecordsForAZoneCreateDNSRecordParams = API.DNSRecordDNSRecordsForAZoneCreateDNSRecordParams;
-  export import DNSRecordDNSRecordsForAZoneListDNSRecordsParams = API.DNSRecordDNSRecordsForAZoneListDNSRecordsParams;
+  export import SSL = API.SSL;
 
-  export import Emails = API.Emails;
+  export import Subscriptions = API.Subscriptions;
+  export import SubscriptionCreateResponse = API.SubscriptionCreateResponse;
+  export import SubscriptionUpdateResponse = API.SubscriptionUpdateResponse;
+  export import SubscriptionListResponse = API.SubscriptionListResponse;
+  export import SubscriptionDeleteResponse = API.SubscriptionDeleteResponse;
+  export import SubscriptionGetResponse = API.SubscriptionGetResponse;
+  export import SubscriptionCreateParams = API.SubscriptionCreateParams;
+  export import SubscriptionUpdateParams = API.SubscriptionUpdateParams;
 
-  export import AccountMembers = API.AccountMembers;
+  export import ACM = API.ACM;
 
-  export import Tunnels = API.Tunnels;
-  export import TunnelRetrieveResponse = API.TunnelRetrieveResponse;
-  export import TunnelDeleteResponse = API.TunnelDeleteResponse;
-  export import TunnelArgoTunnelCreateAnArgoTunnelResponse = API.TunnelArgoTunnelCreateAnArgoTunnelResponse;
-  export import TunnelArgoTunnelListArgoTunnelsResponse = API.TunnelArgoTunnelListArgoTunnelsResponse;
-  export import TunnelDeleteParams = API.TunnelDeleteParams;
-  export import TunnelArgoTunnelCreateAnArgoTunnelParams = API.TunnelArgoTunnelCreateAnArgoTunnelParams;
-  export import TunnelArgoTunnelListArgoTunnelsParams = API.TunnelArgoTunnelListArgoTunnelsParams;
+  export import Argo = API.Argo;
+
+  export import AvailablePlans = API.AvailablePlans;
+  export import BillSubsAPIAvailableRatePlan = API.BillSubsAPIAvailableRatePlan;
+  export import AvailablePlanListResponse = API.AvailablePlanListResponse;
+
+  export import AvailableRatePlans = API.AvailableRatePlans;
+  export import BillSubsRatePlan = API.BillSubsRatePlan;
+  export import AvailableRatePlanGetResponse = API.AvailableRatePlanGetResponse;
+
+  export import CertificateAuthorities = API.CertificateAuthorities;
+
+  export import ClientCertificates = API.ClientCertificates;
+  export import TLSCertificatesAndHostnamesClientCertificate = API.TLSCertificatesAndHostnamesClientCertificate;
+  export import TLSCertificatesAndHostnamesClientCertificatesV4PagePaginationArray = API.TLSCertificatesAndHostnamesClientCertificatesV4PagePaginationArray;
+  export import ClientCertificateCreateParams = API.ClientCertificateCreateParams;
+  export import ClientCertificateListParams = API.ClientCertificateListParams;
+  export import ClientCertificateDeleteParams = API.ClientCertificateDeleteParams;
+  export import ClientCertificateEditParams = API.ClientCertificateEditParams;
+  export import ClientCertificateGetParams = API.ClientCertificateGetParams;
+
+  export import CustomCertificates = API.CustomCertificates;
+  export import TLSCertificatesAndHostnamesCustomCertificate = API.TLSCertificatesAndHostnamesCustomCertificate;
+  export import CustomCertificateCreateResponse = API.CustomCertificateCreateResponse;
+  export import CustomCertificateDeleteResponse = API.CustomCertificateDeleteResponse;
+  export import CustomCertificateEditResponse = API.CustomCertificateEditResponse;
+  export import CustomCertificateGetResponse = API.CustomCertificateGetResponse;
+  export import TLSCertificatesAndHostnamesCustomCertificatesV4PagePaginationArray = API.TLSCertificatesAndHostnamesCustomCertificatesV4PagePaginationArray;
+  export import CustomCertificateCreateParams = API.CustomCertificateCreateParams;
+  export import CustomCertificateListParams = API.CustomCertificateListParams;
+  export import CustomCertificateDeleteParams = API.CustomCertificateDeleteParams;
+  export import CustomCertificateEditParams = API.CustomCertificateEditParams;
+  export import CustomCertificateGetParams = API.CustomCertificateGetParams;
+
+  export import CustomHostnames = API.CustomHostnames;
+  export import TLSCertificatesAndHostnamesCustomHostname = API.TLSCertificatesAndHostnamesCustomHostname;
+  export import CustomHostnameCreateResponse = API.CustomHostnameCreateResponse;
+  export import CustomHostnameListResponse = API.CustomHostnameListResponse;
+  export import CustomHostnameDeleteResponse = API.CustomHostnameDeleteResponse;
+  export import CustomHostnameEditResponse = API.CustomHostnameEditResponse;
+  export import CustomHostnameGetResponse = API.CustomHostnameGetResponse;
+  export import CustomHostnameListResponsesV4PagePaginationArray = API.CustomHostnameListResponsesV4PagePaginationArray;
+  export import CustomHostnameCreateParams = API.CustomHostnameCreateParams;
+  export import CustomHostnameListParams = API.CustomHostnameListParams;
+  export import CustomHostnameDeleteParams = API.CustomHostnameDeleteParams;
+  export import CustomHostnameEditParams = API.CustomHostnameEditParams;
+  export import CustomHostnameGetParams = API.CustomHostnameGetParams;
+
+  export import CustomNameservers = API.CustomNameservers;
+  export import DNSCustomNameserversCustomNS = API.DNSCustomNameserversCustomNS;
+  export import CustomNameserverDeleteResponse = API.CustomNameserverDeleteResponse;
+  export import CustomNameserverAvailabiltyResponse = API.CustomNameserverAvailabiltyResponse;
+  export import CustomNameserverGetResponse = API.CustomNameserverGetResponse;
+  export import CustomNameserverVerifyResponse = API.CustomNameserverVerifyResponse;
+  export import CustomNameserverCreateParams = API.CustomNameserverCreateParams;
+  export import CustomNameserverDeleteParams = API.CustomNameserverDeleteParams;
+  export import CustomNameserverAvailabiltyParams = API.CustomNameserverAvailabiltyParams;
+  export import CustomNameserverGetParams = API.CustomNameserverGetParams;
+  export import CustomNameserverVerifyParams = API.CustomNameserverVerifyParams;
+
+  export import DNS = API.DNS;
+
+  export import DNSSEC = API.DNSSEC;
+  export import DNSSECDNSSEC = API.DNSSECDNSSEC;
+  export import DNSSECDeleteResponse = API.DNSSECDeleteResponse;
+  export import DNSSECDeleteParams = API.DNSSECDeleteParams;
+  export import DNSSECEditParams = API.DNSSECEditParams;
+  export import DNSSECGetParams = API.DNSSECGetParams;
+
+  export import EmailRouting = API.EmailRouting;
+
+  export import Filters = API.Filters;
+  export import LegacyJhsFilter = API.LegacyJhsFilter;
+  export import FilterCreateResponse = API.FilterCreateResponse;
+  export import LegacyJhsFiltersV4PagePaginationArray = API.LegacyJhsFiltersV4PagePaginationArray;
+  export import FilterCreateParams = API.FilterCreateParams;
+  export import FilterUpdateParams = API.FilterUpdateParams;
+  export import FilterListParams = API.FilterListParams;
+
+  export import Firewall = API.Firewall;
+
+  export import Healthchecks = API.Healthchecks;
+  export import HealthchecksHealthchecks = API.HealthchecksHealthchecks;
+  export import HealthcheckListResponse = API.HealthcheckListResponse;
+  export import HealthcheckDeleteResponse = API.HealthcheckDeleteResponse;
+  export import HealthcheckCreateParams = API.HealthcheckCreateParams;
+  export import HealthcheckUpdateParams = API.HealthcheckUpdateParams;
+  export import HealthcheckEditParams = API.HealthcheckEditParams;
+
+  export import KeylessCertificates = API.KeylessCertificates;
+  export import TLSCertificatesAndHostnamesBase = API.TLSCertificatesAndHostnamesBase;
+  export import TLSCertificatesAndHostnamesKeylessCertificate = API.TLSCertificatesAndHostnamesKeylessCertificate;
+  export import KeylessCertificateListResponse = API.KeylessCertificateListResponse;
+  export import KeylessCertificateDeleteResponse = API.KeylessCertificateDeleteResponse;
+  export import KeylessCertificateCreateParams = API.KeylessCertificateCreateParams;
+  export import KeylessCertificateListParams = API.KeylessCertificateListParams;
+  export import KeylessCertificateDeleteParams = API.KeylessCertificateDeleteParams;
+  export import KeylessCertificateEditParams = API.KeylessCertificateEditParams;
+  export import KeylessCertificateGetParams = API.KeylessCertificateGetParams;
+
+  export import Logpush = API.Logpush;
+
+  export import Logs = API.Logs;
+
+  export import OriginTLSClientAuth = API.OriginTLSClientAuth;
+  export import TLSCertificatesAndHostnamesZoneAuthenticatedOriginPull = API.TLSCertificatesAndHostnamesZoneAuthenticatedOriginPull;
+  export import OriginTLSClientAuthCreateResponse = API.OriginTLSClientAuthCreateResponse;
+  export import OriginTLSClientAuthListResponse = API.OriginTLSClientAuthListResponse;
+  export import OriginTLSClientAuthDeleteResponse = API.OriginTLSClientAuthDeleteResponse;
+  export import OriginTLSClientAuthGetResponse = API.OriginTLSClientAuthGetResponse;
+  export import OriginTLSClientAuthCreateParams = API.OriginTLSClientAuthCreateParams;
+  export import OriginTLSClientAuthListParams = API.OriginTLSClientAuthListParams;
+  export import OriginTLSClientAuthDeleteParams = API.OriginTLSClientAuthDeleteParams;
+  export import OriginTLSClientAuthGetParams = API.OriginTLSClientAuthGetParams;
+
+  export import Pagerules = API.Pagerules;
+  export import ZonesPageRule = API.ZonesPageRule;
+  export import PageruleCreateResponse = API.PageruleCreateResponse;
+  export import PageruleUpdateResponse = API.PageruleUpdateResponse;
+  export import PageruleListResponse = API.PageruleListResponse;
+  export import PageruleDeleteResponse = API.PageruleDeleteResponse;
+  export import PageruleEditResponse = API.PageruleEditResponse;
+  export import PageruleGetResponse = API.PageruleGetResponse;
+  export import PageruleCreateParams = API.PageruleCreateParams;
+  export import PageruleUpdateParams = API.PageruleUpdateParams;
+  export import PageruleListParams = API.PageruleListParams;
+  export import PageruleDeleteParams = API.PageruleDeleteParams;
+  export import PageruleEditParams = API.PageruleEditParams;
+  export import PageruleGetParams = API.PageruleGetParams;
+
+  export import RateLimits = API.RateLimits;
+  export import LegacyJhsRateLimits = API.LegacyJhsRateLimits;
+  export import RateLimitCreateResponse = API.RateLimitCreateResponse;
+  export import RateLimitListResponse = API.RateLimitListResponse;
+  export import RateLimitDeleteResponse = API.RateLimitDeleteResponse;
+  export import RateLimitEditResponse = API.RateLimitEditResponse;
+  export import RateLimitGetResponse = API.RateLimitGetResponse;
+  export import RateLimitListResponsesV4PagePaginationArray = API.RateLimitListResponsesV4PagePaginationArray;
+  export import RateLimitCreateParams = API.RateLimitCreateParams;
+  export import RateLimitListParams = API.RateLimitListParams;
+  export import RateLimitEditParams = API.RateLimitEditParams;
+
+  export import SecondaryDNS = API.SecondaryDNS;
+
+  export import WaitingRooms = API.WaitingRooms;
+  export import WaitingroomWaitingroom = API.WaitingroomWaitingroom;
+  export import WaitingRoomListResponse = API.WaitingRoomListResponse;
+  export import WaitingRoomDeleteResponse = API.WaitingRoomDeleteResponse;
+  export import WaitingRoomCreateParams = API.WaitingRoomCreateParams;
+  export import WaitingRoomUpdateParams = API.WaitingRoomUpdateParams;
+  export import WaitingRoomEditParams = API.WaitingRoomEditParams;
+
+  export import Web3 = API.Web3;
+
+  export import Workers = API.Workers;
+
+  export import KV = API.KV;
+
+  export import DurableObjects = API.DurableObjects;
+
+  export import Queues = API.Queues;
+  export import WorkersQueue = API.WorkersQueue;
+  export import WorkersQueueCreated = API.WorkersQueueCreated;
+  export import WorkersQueueUpdated = API.WorkersQueueUpdated;
+  export import QueueListResponse = API.QueueListResponse;
+  export import QueueDeleteResponse = API.QueueDeleteResponse;
+  export import QueueCreateParams = API.QueueCreateParams;
+  export import QueueUpdateParams = API.QueueUpdateParams;
+  export import QueueListParams = API.QueueListParams;
+  export import QueueDeleteParams = API.QueueDeleteParams;
+  export import QueueGetParams = API.QueueGetParams;
+
+  export import ManagedHeaders = API.ManagedHeaders;
+  export import ManagedHeaderListResponse = API.ManagedHeaderListResponse;
+  export import ManagedHeaderEditResponse = API.ManagedHeaderEditResponse;
+  export import ManagedHeaderListParams = API.ManagedHeaderListParams;
+  export import ManagedHeaderEditParams = API.ManagedHeaderEditParams;
+
+  export import PageShield = API.PageShield;
+  export import PageShieldGetZoneSettings = API.PageShieldGetZoneSettings;
+  export import PageShieldUpdateZoneSettings = API.PageShieldUpdateZoneSettings;
+  export import PageShieldUpdateParams = API.PageShieldUpdateParams;
+  export import PageShieldGetParams = API.PageShieldGetParams;
+
+  export import Rulesets = API.Rulesets;
+  export import RulesetsRulesetResponse = API.RulesetsRulesetResponse;
+  export import RulesetsRulesetsResponse = API.RulesetsRulesetsResponse;
+  export import RulesetCreateParams = API.RulesetCreateParams;
+  export import RulesetUpdateParams = API.RulesetUpdateParams;
+  export import RulesetListParams = API.RulesetListParams;
+  export import RulesetDeleteParams = API.RulesetDeleteParams;
+  export import RulesetGetParams = API.RulesetGetParams;
+
+  export import URLNormalization = API.URLNormalization;
+  export import URLNormalizationUpdateResponse = API.URLNormalizationUpdateResponse;
+  export import URLNormalizationGetResponse = API.URLNormalizationGetResponse;
+  export import URLNormalizationUpdateParams = API.URLNormalizationUpdateParams;
+  export import URLNormalizationGetParams = API.URLNormalizationGetParams;
+
+  export import Spectrum = API.Spectrum;
+
+  export import Addressing = API.Addressing;
+
+  export import AuditLogs = API.AuditLogs;
+  export import AuditLogListResponse = API.AuditLogListResponse;
+  export import AuditLogListResponsesV4PagePaginationArray = API.AuditLogListResponsesV4PagePaginationArray;
+  export import AuditLogListParams = API.AuditLogListParams;
+
+  export import Billing = API.Billing;
+
+  export import BrandProtection = API.BrandProtection;
+  export import IntelPhishingURLInfo = API.IntelPhishingURLInfo;
+  export import IntelPhishingURLSubmit = API.IntelPhishingURLSubmit;
+  export import BrandProtectionSubmitParams = API.BrandProtectionSubmitParams;
+  export import BrandProtectionURLInfoParams = API.BrandProtectionURLInfoParams;
+
+  export import Diagnostics = API.Diagnostics;
+
+  export import Images = API.Images;
+
+  export import Intel = API.Intel;
+
+  export import MagicTransit = API.MagicTransit;
+
+  export import MagicNetworkMonitoring = API.MagicNetworkMonitoring;
+
+  export import MTLSCertificates = API.MTLSCertificates;
+  export import TLSCertificatesAndHostnamesCertificateObjectPost = API.TLSCertificatesAndHostnamesCertificateObjectPost;
+  export import TLSCertificatesAndHostnamesComponentsSchemasCertificateObject = API.TLSCertificatesAndHostnamesComponentsSchemasCertificateObject;
+  export import MTLSCertificateListResponse = API.MTLSCertificateListResponse;
+  export import MTLSCertificateCreateParams = API.MTLSCertificateCreateParams;
+  export import MTLSCertificateListParams = API.MTLSCertificateListParams;
+  export import MTLSCertificateDeleteParams = API.MTLSCertificateDeleteParams;
+  export import MTLSCertificateGetParams = API.MTLSCertificateGetParams;
+
+  export import Pages = API.Pages;
+
+  export import PCAPs = API.PCAPs;
+  export import PCAPCreateResponse = API.PCAPCreateResponse;
+  export import PCAPListResponse = API.PCAPListResponse;
+  export import PCAPGetResponse = API.PCAPGetResponse;
+  export import PCAPCreateParams = API.PCAPCreateParams;
+  export import PCAPListParams = API.PCAPListParams;
+  export import PCAPGetParams = API.PCAPGetParams;
+
+  export import Registrar = API.Registrar;
+
+  export import RequestTracers = API.RequestTracers;
+
+  export import Rules = API.Rules;
+
+  export import Storage = API.Storage;
+
+  export import Stream = API.Stream;
+  export import StreamVideos = API.StreamVideos;
+  export import StreamListResponse = API.StreamListResponse;
+  export import StreamCreateParams = API.StreamCreateParams;
+  export import StreamListParams = API.StreamListParams;
+  export import StreamDeleteParams = API.StreamDeleteParams;
+  export import StreamGetParams = API.StreamGetParams;
+
+  export import Alerting = API.Alerting;
 
   export import D1 = API.D1;
 
-  export import Dex = API.Dex;
-
   export import R2 = API.R2;
 
-  export import Stream = API.Stream;
-
-  export import Teamnet = API.Teamnet;
-
-  export import WarpConnector = API.WarpConnector;
-  export import WarpConnectorCreateResponse = API.WarpConnectorCreateResponse;
-  export import WarpConnectorRetrieveResponse = API.WarpConnectorRetrieveResponse;
-  export import WarpConnectorUpdateResponse = API.WarpConnectorUpdateResponse;
-  export import WarpConnectorListResponse = API.WarpConnectorListResponse;
-  export import WarpConnectorDeleteResponse = API.WarpConnectorDeleteResponse;
-  export import WarpConnectorCreateParams = API.WarpConnectorCreateParams;
-  export import WarpConnectorUpdateParams = API.WarpConnectorUpdateParams;
-  export import WarpConnectorListParams = API.WarpConnectorListParams;
-  export import WarpConnectorDeleteParams = API.WarpConnectorDeleteParams;
-
-  export import Dispatchers = API.Dispatchers;
+  export import WARPConnector = API.WARPConnector;
+  export import WARPConnectorCreateResponse = API.WARPConnectorCreateResponse;
+  export import WARPConnectorListResponse = API.WARPConnectorListResponse;
+  export import WARPConnectorDeleteResponse = API.WARPConnectorDeleteResponse;
+  export import WARPConnectorEditResponse = API.WARPConnectorEditResponse;
+  export import WARPConnectorGetResponse = API.WARPConnectorGetResponse;
+  export import WARPConnectorTokenResponse = API.WARPConnectorTokenResponse;
+  export import WARPConnectorListResponsesV4PagePaginationArray = API.WARPConnectorListResponsesV4PagePaginationArray;
+  export import WARPConnectorCreateParams = API.WARPConnectorCreateParams;
+  export import WARPConnectorListParams = API.WARPConnectorListParams;
+  export import WARPConnectorDeleteParams = API.WARPConnectorDeleteParams;
+  export import WARPConnectorEditParams = API.WARPConnectorEditParams;
+  export import WARPConnectorGetParams = API.WARPConnectorGetParams;
+  export import WARPConnectorTokenParams = API.WARPConnectorTokenParams;
 
   export import WorkersForPlatforms = API.WorkersForPlatforms;
 
-  export import WorkerDomains = API.WorkerDomains;
-  export import WorkerDomainRetrieveResponse = API.WorkerDomainRetrieveResponse;
-
-  export import WorkerScripts = API.WorkerScripts;
-
-  export import Zerotrust = API.Zerotrust;
-
-  export import Addressing = API.Addressing;
+  export import ZeroTrust = API.ZeroTrust;
 
   export import Challenges = API.Challenges;
 
   export import Hyperdrive = API.Hyperdrive;
 
-  export import Intel = API.Intel;
-
-  export import Rum = API.Rum;
+  export import RUM = API.RUM;
 
   export import Vectorize = API.Vectorize;
-
-  export import VectorizeIndexes = API.VectorizeIndexes;
-  export import VectorizeIndexCreateResponse = API.VectorizeIndexCreateResponse;
-  export import VectorizeIndexRetrieveResponse = API.VectorizeIndexRetrieveResponse;
-  export import VectorizeIndexUpdateResponse = API.VectorizeIndexUpdateResponse;
-  export import VectorizeIndexDeleteResponse = API.VectorizeIndexDeleteResponse;
-  export import VectorizeIndexDeleteByIDsResponse = API.VectorizeIndexDeleteByIDsResponse;
-  export import VectorizeIndexGetByIDsResponse = API.VectorizeIndexGetByIDsResponse;
-  export import VectorizeIndexInsertResponse = API.VectorizeIndexInsertResponse;
-  export import VectorizeIndexQueryResponse = API.VectorizeIndexQueryResponse;
-  export import VectorizeIndexUpsertResponse = API.VectorizeIndexUpsertResponse;
-  export import VectorizeIndexCreateParams = API.VectorizeIndexCreateParams;
-  export import VectorizeIndexUpdateParams = API.VectorizeIndexUpdateParams;
-  export import VectorizeIndexDeleteByIDsParams = API.VectorizeIndexDeleteByIDsParams;
-  export import VectorizeIndexGetByIDsParams = API.VectorizeIndexGetByIDsParams;
-  export import VectorizeIndexInsertParams = API.VectorizeIndexInsertParams;
-  export import VectorizeIndexQueryParams = API.VectorizeIndexQueryParams;
-  export import VectorizeIndexUpsertParams = API.VectorizeIndexUpsertParams;
 
   export import URLScanner = API.URLScanner;
   export import URLScannerScanResponse = API.URLScannerScanResponse;
@@ -410,83 +769,47 @@ export namespace Cloudflare {
 
   export import Radar = API.Radar;
 
-  export import BotManagements = API.BotManagements;
-  export import BotManagementRetrieveResponse = API.BotManagementRetrieveResponse;
+  export import BotManagement = API.BotManagement;
   export import BotManagementUpdateResponse = API.BotManagementUpdateResponse;
+  export import BotManagementGetResponse = API.BotManagementGetResponse;
   export import BotManagementUpdateParams = API.BotManagementUpdateParams;
+  export import BotManagementGetParams = API.BotManagementGetParams;
 
-  export import CacheReserves = API.CacheReserves;
-  export import CacheReserveCreateResponse = API.CacheReserveCreateResponse;
-  export import CacheReserveClearResponse = API.CacheReserveClearResponse;
-
-  export import OriginPostQuantumEncryptions = API.OriginPostQuantumEncryptions;
-  export import OriginPostQuantumEncryptionRetrieveResponse = API.OriginPostQuantumEncryptionRetrieveResponse;
+  export import OriginPostQuantumEncryption = API.OriginPostQuantumEncryption;
   export import OriginPostQuantumEncryptionUpdateResponse = API.OriginPostQuantumEncryptionUpdateResponse;
+  export import OriginPostQuantumEncryptionGetResponse = API.OriginPostQuantumEncryptionGetResponse;
   export import OriginPostQuantumEncryptionUpdateParams = API.OriginPostQuantumEncryptionUpdateParams;
+  export import OriginPostQuantumEncryptionGetParams = API.OriginPostQuantumEncryptionGetParams;
 
-  export import Cache = API.Cache;
-  export import CacheRegionalTieredCachesResponse = API.CacheRegionalTieredCachesResponse;
-  export import CacheUpdateRegionalTieredCacheResponse = API.CacheUpdateRegionalTieredCacheResponse;
-  export import CacheUpdateRegionalTieredCacheParams = API.CacheUpdateRegionalTieredCacheParams;
+  export import Speed = API.Speed;
+  export import ObservatorySchedule = API.ObservatorySchedule;
+  export import ObservatoryTrend = API.ObservatoryTrend;
+  export import SpeedDeleteResponse = API.SpeedDeleteResponse;
+  export import SpeedDeleteParams = API.SpeedDeleteParams;
+  export import SpeedScheduleGetParams = API.SpeedScheduleGetParams;
+  export import SpeedTrendsListParams = API.SpeedTrendsListParams;
 
-  export import Firewall = API.Firewall;
-
-  export import Zaraz = API.Zaraz;
-  export import ZarazWorkflowUpdateResponse = API.ZarazWorkflowUpdateResponse;
-  export import ZarazWorkflowUpdateParams = API.ZarazWorkflowUpdateParams;
-
-  export import SpeedAPI = API.SpeedAPI;
-  export import SpeedAPIAvailabilitiesListResponse = API.SpeedAPIAvailabilitiesListResponse;
-  export import SpeedAPIPagesListResponse = API.SpeedAPIPagesListResponse;
-  export import SpeedAPIScheduleDeleteResponse = API.SpeedAPIScheduleDeleteResponse;
-  export import SpeedAPIScheduleRetrieveResponse = API.SpeedAPIScheduleRetrieveResponse;
-  export import SpeedAPITestsCreateResponse = API.SpeedAPITestsCreateResponse;
-  export import SpeedAPITestsDeleteResponse = API.SpeedAPITestsDeleteResponse;
-  export import SpeedAPITestsListResponse = API.SpeedAPITestsListResponse;
-  export import SpeedAPITestsRetrieveResponse = API.SpeedAPITestsRetrieveResponse;
-  export import SpeedAPITrendsListResponse = API.SpeedAPITrendsListResponse;
-  export import SpeedAPIScheduleDeleteParams = API.SpeedAPIScheduleDeleteParams;
-  export import SpeedAPIScheduleRetrieveParams = API.SpeedAPIScheduleRetrieveParams;
-  export import SpeedAPITestsCreateParams = API.SpeedAPITestsCreateParams;
-  export import SpeedAPITestsDeleteParams = API.SpeedAPITestsDeleteParams;
-  export import SpeedAPITestsListParams = API.SpeedAPITestsListParams;
-  export import SpeedAPITrendsListParams = API.SpeedAPITrendsListParams;
-
-  export import DcvDelegation = API.DcvDelegation;
+  export import DCVDelegation = API.DCVDelegation;
 
   export import Hostnames = API.Hostnames;
 
-  export import Logpush = API.Logpush;
-
-  export import Hold = API.Hold;
-  export import HoldRetrieveResponse = API.HoldRetrieveResponse;
-  export import HoldEnforceResponse = API.HoldEnforceResponse;
-  export import HoldRemoveResponse = API.HoldRemoveResponse;
-  export import HoldEnforceParams = API.HoldEnforceParams;
-  export import HoldRemoveParams = API.HoldRemoveParams;
-
-  export import PageShield = API.PageShield;
-
-  export import FontSettings = API.FontSettings;
-
   export import Snippets = API.Snippets;
-  export import SnippetRetrieveResponse = API.SnippetRetrieveResponse;
-  export import SnippetUpdateResponse = API.SnippetUpdateResponse;
+  export import Snippet = API.Snippet;
   export import SnippetListResponse = API.SnippetListResponse;
   export import SnippetDeleteResponse = API.SnippetDeleteResponse;
   export import SnippetUpdateParams = API.SnippetUpdateParams;
 
-  export import Dlp = API.Dlp;
+  export import Calls = API.Calls;
+  export import CallsApp = API.CallsApp;
+  export import CallsAppWithSecret = API.CallsAppWithSecret;
+  export import CallListResponse = API.CallListResponse;
+  export import CallCreateParams = API.CallCreateParams;
+  export import CallUpdateParams = API.CallUpdateParams;
+  export import CallListParams = API.CallListParams;
+  export import CallDeleteParams = API.CallDeleteParams;
+  export import CallGetParams = API.CallGetParams;
 
-  export import Gateway = API.Gateway;
-
-  export import AccessTags = API.AccessTags;
-  export import AccessTagCreateResponse = API.AccessTagCreateResponse;
-  export import AccessTagRetrieveResponse = API.AccessTagRetrieveResponse;
-  export import AccessTagUpdateResponse = API.AccessTagUpdateResponse;
-  export import AccessTagDeleteResponse = API.AccessTagDeleteResponse;
-  export import AccessTagCreateParams = API.AccessTagCreateParams;
-  export import AccessTagUpdateParams = API.AccessTagUpdateParams;
+  export import CloudforceOne = API.CloudforceOne;
 }
 
 export default Cloudflare;

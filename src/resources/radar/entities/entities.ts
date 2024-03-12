@@ -3,28 +3,30 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as EntitiesAPI from 'cloudflare/resources/radar/entities/entities';
-import * as AsnsAPI from 'cloudflare/resources/radar/entities/asns';
+import * as ASNsAPI from 'cloudflare/resources/radar/entities/asns';
+import * as LocationsAPI from 'cloudflare/resources/radar/entities/locations';
 
 export class Entities extends APIResource {
-  asns: AsnsAPI.Asns = new AsnsAPI.Asns(this._client);
+  asns: ASNsAPI.ASNs = new ASNsAPI.ASNs(this._client);
+  locations: LocationsAPI.Locations = new LocationsAPI.Locations(this._client);
 
   /**
    * Get IP address information.
    */
-  ips(query: EntityIPsParams, options?: Core.RequestOptions): Core.APIPromise<EntityIPsResponse> {
+  get(query: EntityGetParams, options?: Core.RequestOptions): Core.APIPromise<EntityGetResponse> {
     return (
       this._client.get('/radar/entities/ip', { query, ...options }) as Core.APIPromise<{
-        result: EntityIPsResponse;
+        result: EntityGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface EntityIPsResponse {
-  ip: EntityIPsResponse.IP;
+export interface EntityGetResponse {
+  ip: EntityGetResponse.IP;
 }
 
-export namespace EntityIPsResponse {
+export namespace EntityGetResponse {
   export interface IP {
     asn: string;
 
@@ -44,7 +46,7 @@ export namespace EntityIPsResponse {
   }
 }
 
-export interface EntityIPsParams {
+export interface EntityGetParams {
   /**
    * IP address.
    */
@@ -57,9 +59,20 @@ export interface EntityIPsParams {
 }
 
 export namespace Entities {
-  export import EntityIPsResponse = EntitiesAPI.EntityIPsResponse;
-  export import EntityIPsParams = EntitiesAPI.EntityIPsParams;
-  export import Asns = AsnsAPI.Asns;
-  export import AsnRelResponse = AsnsAPI.AsnRelResponse;
-  export import AsnRelParams = AsnsAPI.AsnRelParams;
+  export import EntityGetResponse = EntitiesAPI.EntityGetResponse;
+  export import EntityGetParams = EntitiesAPI.EntityGetParams;
+  export import ASNs = ASNsAPI.ASNs;
+  export import ASNListResponse = ASNsAPI.ASNListResponse;
+  export import ASNGetResponse = ASNsAPI.ASNGetResponse;
+  export import ASNIPResponse = ASNsAPI.ASNIPResponse;
+  export import ASNRelResponse = ASNsAPI.ASNRelResponse;
+  export import ASNListParams = ASNsAPI.ASNListParams;
+  export import ASNGetParams = ASNsAPI.ASNGetParams;
+  export import ASNIPParams = ASNsAPI.ASNIPParams;
+  export import ASNRelParams = ASNsAPI.ASNRelParams;
+  export import Locations = LocationsAPI.Locations;
+  export import LocationListResponse = LocationsAPI.LocationListResponse;
+  export import LocationGetResponse = LocationsAPI.LocationGetResponse;
+  export import LocationListParams = LocationsAPI.LocationListParams;
+  export import LocationGetParams = LocationsAPI.LocationGetParams;
 }

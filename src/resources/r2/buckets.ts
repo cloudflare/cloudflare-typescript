@@ -2,36 +2,18 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as BucketsAPI from 'cloudflare/resources/r2/buckets';
+import { CursorPagination, type CursorPaginationParams } from 'cloudflare/pagination';
 
 export class Buckets extends APIResource {
   /**
    * Creates a new R2 bucket.
    */
-  create(
-    accountId: string,
-    body: BucketCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<BucketCreateResponse> {
+  create(params: BucketCreateParams, options?: Core.RequestOptions): Core.APIPromise<R2Bucket> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountId}/r2/buckets`, { body, ...options }) as Core.APIPromise<{
-        result: BucketCreateResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Gets metadata for an existing R2 bucket.
-   */
-  retrieve(
-    accountId: string,
-    bucketName: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<BucketRetrieveResponse> {
-    return (
-      this._client.get(`/accounts/${accountId}/r2/buckets/${bucketName}`, options) as Core.APIPromise<{
-        result: BucketRetrieveResponse;
+      this._client.post(`/accounts/${account_id}/r2/buckets`, { body, ...options }) as Core.APIPromise<{
+        result: R2Bucket;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -40,46 +22,51 @@ export class Buckets extends APIResource {
    * Lists all R2 buckets on your account
    */
   list(
-    accountId: string,
-    query?: BucketListParams,
+    params: BucketListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<BucketListResponse>;
-  list(accountId: string, options?: Core.RequestOptions): Core.APIPromise<BucketListResponse>;
-  list(
-    accountId: string,
-    query: BucketListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<BucketListResponse> {
-    if (isRequestOptions(query)) {
-      return this.list(accountId, {}, query);
-    }
-    return (
-      this._client.get(`/accounts/${accountId}/r2/buckets`, { query, ...options }) as Core.APIPromise<{
-        result: BucketListResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+  ): Core.PagePromise<R2BucketsCursorPagination, R2Bucket> {
+    const { account_id, ...query } = params;
+    return this._client.getAPIList(`/accounts/${account_id}/r2/buckets`, R2BucketsCursorPagination, {
+      query,
+      ...options,
+    });
   }
 
   /**
    * Deletes an existing R2 bucket.
    */
   delete(
-    accountId: string,
     bucketName: string,
+    params: BucketDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BucketDeleteResponse> {
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${accountId}/r2/buckets/${bucketName}`, options) as Core.APIPromise<{
+      this._client.delete(`/accounts/${account_id}/r2/buckets/${bucketName}`, options) as Core.APIPromise<{
         result: BucketDeleteResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Gets metadata for an existing R2 bucket.
+   */
+  get(bucketName: string, params: BucketGetParams, options?: Core.RequestOptions): Core.APIPromise<R2Bucket> {
+    const { account_id } = params;
+    return (
+      this._client.get(`/accounts/${account_id}/r2/buckets/${bucketName}`, options) as Core.APIPromise<{
+        result: R2Bucket;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
+export class R2BucketsCursorPagination extends CursorPagination<R2Bucket> {}
+
 /**
  * A single R2 bucket
  */
-export interface BucketCreateResponse {
+export interface R2Bucket {
   /**
    * Creation timestamp
    */
@@ -94,105 +81,76 @@ export interface BucketCreateResponse {
    * Name of the bucket
    */
   name?: string;
-}
-
-/**
- * A single R2 bucket
- */
-export interface BucketRetrieveResponse {
-  /**
-   * Creation timestamp
-   */
-  creation_date?: string;
-
-  /**
-   * Location of the bucket
-   */
-  location?: 'apac' | 'eeur' | 'enam' | 'weur' | 'wnam';
-
-  /**
-   * Name of the bucket
-   */
-  name?: string;
-}
-
-export type BucketListResponse = Array<BucketListResponse.BucketListResponseItem>;
-
-export namespace BucketListResponse {
-  /**
-   * A single R2 bucket
-   */
-  export interface BucketListResponseItem {
-    /**
-     * Creation timestamp
-     */
-    creation_date?: string;
-
-    /**
-     * Location of the bucket
-     */
-    location?: 'apac' | 'eeur' | 'enam' | 'weur' | 'wnam';
-
-    /**
-     * Name of the bucket
-     */
-    name?: string;
-  }
 }
 
 export type BucketDeleteResponse = unknown;
 
 export interface BucketCreateParams {
   /**
-   * Name of the bucket
+   * Path param: Account ID
+   */
+  account_id: string;
+
+  /**
+   * Body param: Name of the bucket
    */
   name: string;
 
   /**
-   * Location of the bucket
+   * Body param: Location of the bucket
    */
   locationHint?: 'apac' | 'eeur' | 'enam' | 'weur' | 'wnam';
 }
 
-export interface BucketListParams {
+export interface BucketListParams extends CursorPaginationParams {
   /**
-   * Pagination cursor received during the last List Buckets call. R2 buckets are
-   * paginated using cursors instead of page numbers.
+   * Path param: Account ID
    */
-  cursor?: string;
+  account_id: string;
 
   /**
-   * Direction to order buckets
+   * Query param: Direction to order buckets
    */
   direction?: 'asc' | 'desc';
 
   /**
-   * Bucket names to filter by. Only buckets with this phrase in their name will be
-   * returned.
+   * Query param: Bucket names to filter by. Only buckets with this phrase in their
+   * name will be returned.
    */
   name_contains?: string;
 
   /**
-   * Field to order buckets by
+   * Query param: Field to order buckets by
    */
   order?: 'name';
 
   /**
-   * Maximum number of buckets to return in a single call
-   */
-  per_page?: number;
-
-  /**
-   * Bucket name to start searching after. Buckets are ordered lexicographically.
+   * Query param: Bucket name to start searching after. Buckets are ordered
+   * lexicographically.
    */
   start_after?: string;
 }
 
+export interface BucketDeleteParams {
+  /**
+   * Account ID
+   */
+  account_id: string;
+}
+
+export interface BucketGetParams {
+  /**
+   * Account ID
+   */
+  account_id: string;
+}
+
 export namespace Buckets {
-  export import BucketCreateResponse = BucketsAPI.BucketCreateResponse;
-  export import BucketRetrieveResponse = BucketsAPI.BucketRetrieveResponse;
-  export import BucketListResponse = BucketsAPI.BucketListResponse;
+  export import R2Bucket = BucketsAPI.R2Bucket;
   export import BucketDeleteResponse = BucketsAPI.BucketDeleteResponse;
+  export import R2BucketsCursorPagination = BucketsAPI.R2BucketsCursorPagination;
   export import BucketCreateParams = BucketsAPI.BucketCreateParams;
   export import BucketListParams = BucketsAPI.BucketListParams;
+  export import BucketDeleteParams = BucketsAPI.BucketDeleteParams;
+  export import BucketGetParams = BucketsAPI.BucketGetParams;
 }

@@ -4,14 +4,12 @@
 
 This library provides convenient access to the Cloudflare REST API from server-side TypeScript or JavaScript.
 
-The REST API documentation can be found [on developers.cloudflare.com](https://developers.cloudflare.com/api/). The full API of this library can be found in [api.md](api.md).
+The REST API documentation can be found [on developers.cloudflare.com](https://developers.cloudflare.com/api). The full API of this library can be found in [api.md](api.md).
 
 ## Installation
 
 ```sh
-npm install --save cloudflare
-# or
-yarn add cloudflare
+npm install cloudflare
 ```
 
 ## Usage
@@ -22,7 +20,10 @@ The full API of this library can be found in [api.md](api.md).
 ```js
 import Cloudflare from 'cloudflare';
 
-const cloudflare = new Cloudflare();
+const cloudflare = new Cloudflare({
+  apiEmail: process.env['CLOUDFLARE_EMAIL'], // This is the default and can be omitted
+  apiKey: process.env['CLOUDFLARE_API_KEY'], // This is the default and can be omitted
+});
 
 async function main() {
   const zoneCreateResponse = await cloudflare.zones.create({
@@ -45,7 +46,10 @@ This library includes TypeScript definitions for all request params and response
 ```ts
 import Cloudflare from 'cloudflare';
 
-const cloudflare = new Cloudflare();
+const cloudflare = new Cloudflare({
+  apiEmail: process.env['CLOUDFLARE_EMAIL'], // This is the default and can be omitted
+  apiKey: process.env['CLOUDFLARE_API_KEY'], // This is the default and can be omitted
+});
 
 async function main() {
   const params: Cloudflare.ZoneCreateParams = {
@@ -70,9 +74,9 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 async function main() {
-  const zoneCreateResponse = await cloudflare.zones
-    .create({ account: { id: '023e105f4ecef8ad9ca31a8372d0c353' }, name: 'example.com', type: 'full' })
-    .catch((err) => {
+  const zone = await cloudflare.zones
+    .get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' })
+    .catch(async (err) => {
       if (err instanceof Cloudflare.APIError) {
         console.log(err.status); // 400
         console.log(err.name); // BadRequestError
@@ -115,7 +119,7 @@ const cloudflare = new Cloudflare({
 });
 
 // Or, configure per-request:
-await cloudflare.zones.create({ account: { id: '023e105f4ecef8ad9ca31a8372d0c353' }, name: 'example.com', type: 'full' }, {
+await cloudflare.zones.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' }, {
   maxRetries: 5,
 });
 ```
@@ -132,7 +136,7 @@ const cloudflare = new Cloudflare({
 });
 
 // Override per-request:
-await cloudflare.zones.create({ account: { id: '023e105f4ecef8ad9ca31a8372d0c353' }, name: 'example.com', type: 'full' }, {
+await cloudflare.zones.edit({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -140,6 +144,37 @@ await cloudflare.zones.create({ account: { id: '023e105f4ecef8ad9ca31a8372d0c353
 On timeout, an `APIConnectionTimeoutError` is thrown.
 
 Note that requests which time out will be [retried twice by default](#retries).
+
+## Auto-pagination
+
+List methods in the Cloudflare API are paginated.
+You can use `for await … of` syntax to iterate through items across all pages:
+
+```ts
+async function fetchAllAccounts(params) {
+  const allAccounts = [];
+  // Automatically fetches more pages as needed.
+  for await (const accountListResponse of cloudflare.accounts.list()) {
+    allAccounts.push(accountListResponse);
+  }
+  return allAccounts;
+}
+```
+
+Alternatively, you can make request a single page at a time:
+
+```ts
+let page = await cloudflare.accounts.list();
+for (const accountListResponse of page.result) {
+  console.log(accountListResponse);
+}
+
+// Convenience methods are provided for manually paginating:
+while (page.hasNextPage()) {
+  page = page.getNextPage();
+  // ...
+}
+```
 
 ## Advanced Usage
 
@@ -182,7 +217,7 @@ import Cloudflare from 'cloudflare';
 ```
 
 To do the inverse, add `import "cloudflare/shims/node"` (which does import polyfills).
-This can also be useful if you are getting the wrong TypeScript types for `Response` - more details [here](https://github.com/cloudflare/cloudflare-sdk-node/tree/main/src/_shims#readme).
+This can also be useful if you are getting the wrong TypeScript types for `Response` ([more details](https://github.com/cloudflare/cloudflare-typescript/tree/main/src/_shims#readme)).
 
 You may also provide a custom `fetch` function when instantiating the client,
 which can be used to inspect or alter the `Request` or `Response` before/after each request:
@@ -192,7 +227,7 @@ import { fetch } from 'undici'; // as one example
 import Cloudflare from 'cloudflare';
 
 const client = new Cloudflare({
-  fetch: async (url: RequestInfo, init?: RequestInfo): Promise<Response> => {
+  fetch: async (url: RequestInfo, init?: RequestInit): Promise<Response> => {
     console.log('About to make a request', url, init);
     const response = await fetch(url, init);
     console.log('Got response', response);
@@ -213,7 +248,7 @@ If you would like to disable or customize this behavior, for example to use the 
 <!-- prettier-ignore -->
 ```ts
 import http from 'http';
-import HttpsProxyAgent from 'https-proxy-agent';
+import { HttpsProxyAgent } from 'https-proxy-agent';
 
 // Configure the default for all requests:
 const cloudflare = new Cloudflare({
@@ -221,10 +256,12 @@ const cloudflare = new Cloudflare({
 });
 
 // Override per-request:
-await cloudflare.zones.create({ account: { id: '023e105f4ecef8ad9ca31a8372d0c353' }, name: 'example.com', type: 'full' }, {
-  baseURL: 'http://localhost:8080/test-api',
-  httpAgent: new http.Agent({ keepAlive: false }),
-})
+await cloudflare.zones.delete(
+  { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+  {
+    httpAgent: new http.Agent({ keepAlive: false }),
+  },
+);
 ```
 
 ## Semantic Versioning
@@ -237,7 +274,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/cloudflare/cloudflare-sdk-node/issues) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/cloudflare/cloudflare-typescript/issues) with questions, bugs, or suggestions.
 
 ## Requirements
 
