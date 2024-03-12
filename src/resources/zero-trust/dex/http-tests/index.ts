@@ -3,6 +3,6 @@
 export { DigitalExperienceMonitoringHTTPDetails, HTTPTestGetParams, HTTPTests } from './http-tests';
 export {
   DigitalExperienceMonitoringHTTPDetailsPercentiles,
-  PercentileListParams,
+  PercentileGetParams,
   Percentiles,
 } from './percentiles';

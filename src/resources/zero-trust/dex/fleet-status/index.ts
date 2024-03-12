@@ -6,6 +6,9 @@ export {
   DigitalExperienceMonitoringDevicesV4PagePaginationArray,
   Devices,
 } from './devices';
-export { FleetStatus } from './fleet-status';
-export { LiveListResponse, LiveListParams, Live } from './live';
-export { OverTimeListParams, OverTime } from './over-time';
+export {
+  FleetStatusLiveResponse,
+  FleetStatusLiveParams,
+  FleetStatusOverTimeParams,
+  FleetStatus,
+} from './fleet-status';

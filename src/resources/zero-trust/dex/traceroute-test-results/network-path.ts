@@ -9,9 +9,9 @@ export class NetworkPath extends APIResource {
    * Get a breakdown of hops and performance metrics for a specific traceroute test
    * run
    */
-  list(
+  get(
     testResultId: string,
-    params: NetworkPathListParams,
+    params: NetworkPathGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DigitalExperienceMonitoringTracerouteTestResultNetworkPath> {
     const { account_id } = params;
@@ -88,7 +88,7 @@ export namespace DigitalExperienceMonitoringTracerouteTestResultNetworkPath {
   }
 }
 
-export interface NetworkPathListParams {
+export interface NetworkPathGetParams {
   /**
    * unique identifier linked to an account
    */
@@ -97,5 +97,5 @@ export interface NetworkPathListParams {
 
 export namespace NetworkPath {
   export import DigitalExperienceMonitoringTracerouteTestResultNetworkPath = NetworkPathAPI.DigitalExperienceMonitoringTracerouteTestResultNetworkPath;
-  export import NetworkPathListParams = NetworkPathAPI.NetworkPathListParams;
+  export import NetworkPathGetParams = NetworkPathAPI.NetworkPathGetParams;
 }

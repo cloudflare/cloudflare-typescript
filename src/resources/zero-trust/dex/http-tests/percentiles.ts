@@ -9,9 +9,9 @@ export class Percentiles extends APIResource {
    * Get percentiles for an http test for a given time period between 1 hour and 7
    * days.
    */
-  list(
+  get(
     testId: string,
-    params: PercentileListParams,
+    params: PercentileGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DigitalExperienceMonitoringHTTPDetailsPercentiles> {
     const { account_id, ...query } = params;
@@ -100,7 +100,7 @@ export namespace DigitalExperienceMonitoringHTTPDetailsPercentiles {
   }
 }
 
-export interface PercentileListParams {
+export interface PercentileGetParams {
   /**
    * Path param: unique identifier linked to an account in the API request path.
    */
@@ -131,5 +131,5 @@ export interface PercentileListParams {
 
 export namespace Percentiles {
   export import DigitalExperienceMonitoringHTTPDetailsPercentiles = PercentilesAPI.DigitalExperienceMonitoringHTTPDetailsPercentiles;
-  export import PercentileListParams = PercentilesAPI.PercentileListParams;
+  export import PercentileGetParams = PercentilesAPI.PercentileGetParams;
 }

@@ -23,6 +23,9 @@ export namespace DEX {
   export import ColoListResponse = ColosAPI.ColoListResponse;
   export import ColoListParams = ColosAPI.ColoListParams;
   export import FleetStatus = FleetStatusAPI.FleetStatus;
+  export import FleetStatusLiveResponse = FleetStatusAPI.FleetStatusLiveResponse;
+  export import FleetStatusLiveParams = FleetStatusAPI.FleetStatusLiveParams;
+  export import FleetStatusOverTimeParams = FleetStatusAPI.FleetStatusOverTimeParams;
   export import HTTPTests = HTTPTestsAPI.HTTPTests;
   export import DigitalExperienceMonitoringHTTPDetails = HTTPTestsAPI.DigitalExperienceMonitoringHTTPDetails;
   export import HTTPTestGetParams = HTTPTestsAPI.HTTPTestGetParams;

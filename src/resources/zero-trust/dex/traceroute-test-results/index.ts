@@ -2,7 +2,7 @@
 
 export {
   DigitalExperienceMonitoringTracerouteTestResultNetworkPath,
-  NetworkPathListParams,
+  NetworkPathGetParams,
   NetworkPath,
 } from './network-path';
 export { TracerouteTestResults } from './traceroute-test-results';
