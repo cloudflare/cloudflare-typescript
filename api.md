@@ -5013,20 +5013,6 @@ Methods:
 
 ## Widgets
 
-Types:
-
-- <code><a href="./src/resources/challenges/widgets.ts">NcChallengesAdminWidgetDetail</a></code>
-- <code><a href="./src/resources/challenges/widgets.ts">NcChallengesAdminWidgetList</a></code>
-
-Methods:
-
-- <code title="post /accounts/{account_identifier}/challenges/widgets">client.challenges.widgets.<a href="./src/resources/challenges/widgets.ts">create</a>(accountIdentifier, { ...params }) -> NcChallengesAdminWidgetDetail</code>
-- <code title="put /accounts/{account_identifier}/challenges/widgets/{sitekey}">client.challenges.widgets.<a href="./src/resources/challenges/widgets.ts">update</a>(accountIdentifier, sitekey, { ...params }) -> NcChallengesAdminWidgetDetail</code>
-- <code title="get /accounts/{account_identifier}/challenges/widgets">client.challenges.widgets.<a href="./src/resources/challenges/widgets.ts">list</a>(accountIdentifier, { ...params }) -> NcChallengesAdminWidgetListsV4PagePaginationArray</code>
-- <code title="delete /accounts/{account_identifier}/challenges/widgets/{sitekey}">client.challenges.widgets.<a href="./src/resources/challenges/widgets.ts">delete</a>(accountIdentifier, sitekey) -> NcChallengesAdminWidgetDetail</code>
-- <code title="get /accounts/{account_identifier}/challenges/widgets/{sitekey}">client.challenges.widgets.<a href="./src/resources/challenges/widgets.ts">get</a>(accountIdentifier, sitekey) -> NcChallengesAdminWidgetDetail</code>
-- <code title="post /accounts/{account_identifier}/challenges/widgets/{sitekey}/rotate_secret">client.challenges.widgets.<a href="./src/resources/challenges/widgets.ts">rotateSecret</a>(accountIdentifier, sitekey, { ...params }) -> NcChallengesAdminWidgetDetail</code>
-
 # Hyperdrive
 
 ## Configs
