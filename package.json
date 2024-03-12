@@ -1,6 +1,6 @@
 {
   "name": "cloudflare",
-  "version": "0.0.1",
+  "version": "3.0.0-beta.1",
   "description": "The official TypeScript library for the Cloudflare API",
   "author": "Cloudflare <api@cloudflare.com>",
   "types": "dist/index.d.ts",
