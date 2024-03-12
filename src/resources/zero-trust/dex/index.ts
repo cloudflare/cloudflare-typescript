@@ -19,5 +19,10 @@ export {
   TracerouteTestPercentilesParams,
   TracerouteTests,
 } from './traceroute-tests';
-export { FleetStatus } from './fleet-status/index';
+export {
+  FleetStatusLiveResponse,
+  FleetStatusLiveParams,
+  FleetStatusOverTimeParams,
+  FleetStatus,
+} from './fleet-status/index';
 export { TracerouteTestResults } from './traceroute-test-results/index';

@@ -4561,6 +4561,15 @@ Methods:
 
 ### FleetStatus
 
+Types:
+
+- <code><a href="./src/resources/zero-trust/dex/fleet-status/fleet-status.ts">FleetStatusLiveResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/dex/fleet-status/live">client.zeroTrust.dex.fleetStatus.<a href="./src/resources/zero-trust/dex/fleet-status/fleet-status.ts">live</a>({ ...params }) -> FleetStatusLiveResponse</code>
+- <code title="get /accounts/{account_id}/dex/fleet-status/over-time">client.zeroTrust.dex.fleetStatus.<a href="./src/resources/zero-trust/dex/fleet-status/fleet-status.ts">overTime</a>({ ...params }) -> void</code>
+
 #### Devices
 
 Types:
@@ -4570,22 +4579,6 @@ Types:
 Methods:
 
 - <code title="get /accounts/{account_id}/dex/fleet-status/devices">client.zeroTrust.dex.fleetStatus.devices.<a href="./src/resources/zero-trust/dex/fleet-status/devices.ts">list</a>({ ...params }) -> DigitalExperienceMonitoringDevicesV4PagePaginationArray</code>
-
-#### Live
-
-Types:
-
-- <code><a href="./src/resources/zero-trust/dex/fleet-status/live.ts">LiveListResponse</a></code>
-
-Methods:
-
-- <code title="get /accounts/{account_id}/dex/fleet-status/live">client.zeroTrust.dex.fleetStatus.live.<a href="./src/resources/zero-trust/dex/fleet-status/live.ts">list</a>({ ...params }) -> LiveListResponse</code>
-
-#### OverTime
-
-Methods:
-
-- <code title="get /accounts/{account_id}/dex/fleet-status/over-time">client.zeroTrust.dex.fleetStatus.overTime.<a href="./src/resources/zero-trust/dex/fleet-status/over-time.ts">list</a>({ ...params }) -> void</code>
 
 ### HTTPTests
 
@@ -4605,7 +4598,7 @@ Types:
 
 Methods:
 
-- <code title="get /accounts/{account_id}/dex/http-tests/{test_id}/percentiles">client.zeroTrust.dex.httpTests.percentiles.<a href="./src/resources/zero-trust/dex/http-tests/percentiles.ts">list</a>(testId, { ...params }) -> DigitalExperienceMonitoringHTTPDetailsPercentiles</code>
+- <code title="get /accounts/{account_id}/dex/http-tests/{test_id}/percentiles">client.zeroTrust.dex.httpTests.percentiles.<a href="./src/resources/zero-trust/dex/http-tests/percentiles.ts">get</a>(testId, { ...params }) -> DigitalExperienceMonitoringHTTPDetailsPercentiles</code>
 
 ### Tests
 
@@ -4638,7 +4631,7 @@ Types:
 
 Methods:
 
-- <code title="get /accounts/{account_id}/dex/traceroute-test-results/{test_result_id}/network-path">client.zeroTrust.dex.tracerouteTestResults.networkPath.<a href="./src/resources/zero-trust/dex/traceroute-test-results/network-path.ts">list</a>(testResultId, { ...params }) -> DigitalExperienceMonitoringTracerouteTestResultNetworkPath</code>
+- <code title="get /accounts/{account_id}/dex/traceroute-test-results/{test_result_id}/network-path">client.zeroTrust.dex.tracerouteTestResults.networkPath.<a href="./src/resources/zero-trust/dex/traceroute-test-results/network-path.ts">get</a>(testResultId, { ...params }) -> DigitalExperienceMonitoringTracerouteTestResultNetworkPath</code>
 
 ### TracerouteTests
 

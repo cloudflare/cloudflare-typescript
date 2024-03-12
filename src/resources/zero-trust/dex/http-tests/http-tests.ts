@@ -318,5 +318,5 @@ export namespace HTTPTests {
   export import HTTPTestGetParams = HTTPTestsAPI.HTTPTestGetParams;
   export import Percentiles = PercentilesAPI.Percentiles;
   export import DigitalExperienceMonitoringHTTPDetailsPercentiles = PercentilesAPI.DigitalExperienceMonitoringHTTPDetailsPercentiles;
-  export import PercentileListParams = PercentilesAPI.PercentileListParams;
+  export import PercentileGetParams = PercentilesAPI.PercentileGetParams;
 }
