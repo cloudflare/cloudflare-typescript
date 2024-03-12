@@ -84,6 +84,12 @@ export interface URLScannerScanParams {
   account_scans?: boolean;
 
   /**
+   * Filter scans by Autonomous System Number (ASN) of _any_ request made by the
+   * webpage.
+   */
+  asn?: string;
+
+  /**
    * Filter scans requested before date (inclusive).
    */
   date_end?: string;
@@ -104,6 +110,11 @@ export interface URLScannerScanParams {
   ip?: string;
 
   /**
+   * Filter scans by malicious verdict.
+   */
+  is_malicious?: boolean;
+
+  /**
    * Limit the number of objects in the response.
    */
   limit?: number;
@@ -112,6 +123,11 @@ export interface URLScannerScanParams {
    * Pagination cursor to get the next set of results.
    */
   next_cursor?: string;
+
+  /**
+   * Filter scans by main page Autonomous System Number (ASN).
+   */
+  page_asn?: string;
 
   /**
    * Filter scans by main page hostname .
