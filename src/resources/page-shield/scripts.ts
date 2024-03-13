@@ -35,6 +35,8 @@ export interface PageShieldScript {
 
   added_at?: unknown;
 
+  dataflow_score?: unknown;
+
   domain_reported_malicious?: unknown;
 
   fetched_at?: unknown;
@@ -50,6 +52,8 @@ export interface PageShieldScript {
   js_integrity_score?: unknown;
 
   last_seen_at?: unknown;
+
+  obfuscation_score?: unknown;
 
   page_urls?: unknown;
 
@@ -65,6 +69,8 @@ export interface ScriptGetResponse {
 
   added_at?: unknown;
 
+  dataflow_score?: unknown;
+
   domain_reported_malicious?: unknown;
 
   fetched_at?: unknown;
@@ -80,6 +86,8 @@ export interface ScriptGetResponse {
   js_integrity_score?: unknown;
 
   last_seen_at?: unknown;
+
+  obfuscation_score?: unknown;
 
   page_urls?: unknown;
 
@@ -96,6 +104,11 @@ export namespace ScriptGetResponse {
    */
   export interface Version {
     /**
+     * The dataflow score of the JavaScript content.
+     */
+    dataflow_score?: number | null;
+
+    /**
      * The timestamp of when the script was last fetched.
      */
     fetched_at?: string | null;
@@ -109,6 +122,11 @@ export namespace ScriptGetResponse {
      * The integrity score of the JavaScript content.
      */
     js_integrity_score?: number | null;
+
+    /**
+     * The obfuscation score of the JavaScript content.
+     */
+    obfuscation_score?: number | null;
   }
 }
 
