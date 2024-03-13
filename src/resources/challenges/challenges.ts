@@ -9,4 +9,13 @@ export class Challenges extends APIResource {
 
 export namespace Challenges {
   export import Widgets = WidgetsAPI.Widgets;
+  export import NcChallengesAdminWidgetDetail = WidgetsAPI.NcChallengesAdminWidgetDetail;
+  export import NcChallengesAdminWidgetList = WidgetsAPI.NcChallengesAdminWidgetList;
+  export import NcChallengesAdminWidgetListsV4PagePaginationArray = WidgetsAPI.NcChallengesAdminWidgetListsV4PagePaginationArray;
+  export import WidgetCreateParams = WidgetsAPI.WidgetCreateParams;
+  export import WidgetUpdateParams = WidgetsAPI.WidgetUpdateParams;
+  export import WidgetListParams = WidgetsAPI.WidgetListParams;
+  export import WidgetDeleteParams = WidgetsAPI.WidgetDeleteParams;
+  export import WidgetGetParams = WidgetsAPI.WidgetGetParams;
+  export import WidgetRotateSecretParams = WidgetsAPI.WidgetRotateSecretParams;
 }
