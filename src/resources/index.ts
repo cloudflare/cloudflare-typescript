@@ -85,7 +85,7 @@ export {
 } from './healthchecks/healthchecks';
 export { Hostnames } from './hostnames/hostnames';
 export { Hyperdrive } from './hyperdrive/hyperdrive';
-export { IPs, JdcloudIPs, IPListResponse, IPListParams } from './ips';
+export { IPs, JDCloudIPs, IPListResponse, IPListParams } from './ips';
 export { Images } from './images/images';
 export { Intel } from './intel/intel';
 export {

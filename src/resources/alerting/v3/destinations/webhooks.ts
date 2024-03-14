@@ -75,85 +75,18 @@ export class Webhooks extends APIResource {
     webhookId: string,
     params: WebhookGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WebhookGetResponse> {
+  ): Core.APIPromise<AaaWebhooks> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/alerting/v3/destinations/webhooks/${webhookId}`,
         options,
-      ) as Core.APIPromise<{ result: WebhookGetResponse }>
+      ) as Core.APIPromise<{ result: AaaWebhooks }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface WebhookCreateResponse {
-  /**
-   * UUID
-   */
-  id?: string;
-}
-
-export interface WebhookUpdateResponse {
-  /**
-   * UUID
-   */
-  id?: string;
-}
-
-export type WebhookListResponse = Array<WebhookListResponse.WebhookListResponseItem>;
-
-export namespace WebhookListResponse {
-  export interface WebhookListResponseItem {
-    /**
-     * The unique identifier of a webhook
-     */
-    id?: string;
-
-    /**
-     * Timestamp of when the webhook destination was created.
-     */
-    created_at?: string;
-
-    /**
-     * Timestamp of the last time an attempt to dispatch a notification to this webhook
-     * failed.
-     */
-    last_failure?: string;
-
-    /**
-     * Timestamp of the last time Cloudflare was able to successfully dispatch a
-     * notification using this webhook.
-     */
-    last_success?: string;
-
-    /**
-     * The name of the webhook destination. This will be included in the request body
-     * when you receive a webhook notification.
-     */
-    name?: string;
-
-    /**
-     * Optional secret that will be passed in the `cf-webhook-auth` header when
-     * dispatching generic webhook notifications or formatted for supported
-     * destinations. Secrets are not returned in any API response body.
-     */
-    secret?: string;
-
-    /**
-     * Type of webhook endpoint.
-     */
-    type?: 'slack' | 'generic' | 'gchat';
-
-    /**
-     * The POST endpoint to call when dispatching a notification.
-     */
-    url?: string;
-  }
-}
-
-export type WebhookDeleteResponse = unknown | Array<unknown> | string;
-
-export interface WebhookGetResponse {
+export interface AaaWebhooks {
   /**
    * The unique identifier of a webhook
    */
@@ -199,6 +132,24 @@ export interface WebhookGetResponse {
    */
   url?: string;
 }
+
+export interface WebhookCreateResponse {
+  /**
+   * UUID
+   */
+  id?: string;
+}
+
+export interface WebhookUpdateResponse {
+  /**
+   * UUID
+   */
+  id?: string;
+}
+
+export type WebhookListResponse = Array<AaaWebhooks>;
+
+export type WebhookDeleteResponse = unknown | Array<unknown> | string;
 
 export interface WebhookCreateParams {
   /**
@@ -272,11 +223,11 @@ export interface WebhookGetParams {
 }
 
 export namespace Webhooks {
+  export import AaaWebhooks = WebhooksAPI.AaaWebhooks;
   export import WebhookCreateResponse = WebhooksAPI.WebhookCreateResponse;
   export import WebhookUpdateResponse = WebhooksAPI.WebhookUpdateResponse;
   export import WebhookListResponse = WebhooksAPI.WebhookListResponse;
   export import WebhookDeleteResponse = WebhooksAPI.WebhookDeleteResponse;
-  export import WebhookGetResponse = WebhooksAPI.WebhookGetResponse;
   export import WebhookCreateParams = WebhooksAPI.WebhookCreateParams;
   export import WebhookUpdateParams = WebhooksAPI.WebhookUpdateParams;
   export import WebhookListParams = WebhooksAPI.WebhookListParams;
