@@ -408,7 +408,7 @@ export namespace Cloudflare {
   export import OriginCACertificateCreateParams = API.OriginCACertificateCreateParams;
 
   export import IPs = API.IPs;
-  export import JdcloudIPs = API.JdcloudIPs;
+  export import JDCloudIPs = API.JDCloudIPs;
   export import IPListResponse = API.IPListResponse;
   export import IPListParams = API.IPListParams;
 
