@@ -170,52 +170,29 @@ export class Records extends APIResource {
 
 export class RecordListResponsesV4PagePaginationArray extends V4PagePaginationArray<RecordListResponse> {}
 
-export interface DNSRecord {
-  errors: Array<DNSRecord.Error>;
-
-  messages: Array<DNSRecord.Message>;
-
-  result:
-    | DNSRecord.A
-    | DNSRecord.AAAA
-    | DNSRecord.CAA
-    | DNSRecord.Cert
-    | DNSRecord.CNAME
-    | DNSRecord.DNSKEY
-    | DNSRecord.DS
-    | DNSRecord.HTTPS
-    | DNSRecord.LOC
-    | DNSRecord.MX
-    | DNSRecord.NAPTR
-    | DNSRecord.NS
-    | DNSRecord.PTR
-    | DNSRecord.Smimea
-    | DNSRecord.SRV
-    | DNSRecord.SSHFP
-    | DNSRecord.SVCB
-    | DNSRecord.TLSA
-    | DNSRecord.TXT
-    | DNSRecord.URI;
-
-  /**
-   * Whether the API call was successful
-   */
-  success: true;
-}
+export type DNSRecord =
+  | DNSRecord.A
+  | DNSRecord.AAAA
+  | DNSRecord.CAA
+  | DNSRecord.Cert
+  | DNSRecord.CNAME
+  | DNSRecord.DNSKEY
+  | DNSRecord.DS
+  | DNSRecord.HTTPS
+  | DNSRecord.LOC
+  | DNSRecord.MX
+  | DNSRecord.NAPTR
+  | DNSRecord.NS
+  | DNSRecord.PTR
+  | DNSRecord.Smimea
+  | DNSRecord.SRV
+  | DNSRecord.SSHFP
+  | DNSRecord.SVCB
+  | DNSRecord.TLSA
+  | DNSRecord.TXT
+  | DNSRecord.URI;
 
 export namespace DNSRecord {
-  export interface Error {
-    code: number;
-
-    message: string;
-  }
-
-  export interface Message {
-    code: number;
-
-    message: string;
-  }
-
   export interface A {
     /**
      * A valid IPv4 address.
