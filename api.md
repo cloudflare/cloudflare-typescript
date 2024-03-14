@@ -65,7 +65,7 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/ips.ts">IPs</a></code>
-- <code><a href="./src/resources/ips.ts">JdcloudIPs</a></code>
+- <code><a href="./src/resources/ips.ts">JDCloudIPs</a></code>
 - <code><a href="./src/resources/ips.ts">IPListResponse</a></code>
 
 Methods:
