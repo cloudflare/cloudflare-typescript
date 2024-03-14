@@ -44,7 +44,7 @@ export interface IPs {
   ipv6_cidrs?: Array<string>;
 }
 
-export interface JdcloudIPs {
+export interface JDCloudIPs {
   /**
    * A digest of the IP data. Useful for determining if the data has changed.
    */
@@ -66,7 +66,7 @@ export interface JdcloudIPs {
   jdcloud_cidrs?: Array<string>;
 }
 
-export type IPListResponse = IPs | JdcloudIPs;
+export type IPListResponse = IPs | JDCloudIPs;
 
 export interface IPListParams {
   /**
@@ -77,7 +77,7 @@ export interface IPListParams {
 
 export namespace IPs {
   export import IPs = IPsAPI.IPs;
-  export import JdcloudIPs = IPsAPI.JdcloudIPs;
+  export import JDCloudIPs = IPsAPI.JDCloudIPs;
   export import IPListResponse = IPsAPI.IPListResponse;
   export import IPListParams = IPsAPI.IPListParams;
 }
