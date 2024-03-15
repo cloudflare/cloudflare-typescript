@@ -66,5 +66,5 @@ export {
   Tags,
 } from './tags';
 export { AccessUsers, UserListResponse, Users } from './users/index';
-export { KeyUpdateResponse, KeyListResponse, KeyRotateResponse, KeyUpdateParams, Keys } from './keys';
+export { KeyUpdateResponse, KeyGetResponse, KeyRotateResponse, KeyUpdateParams, Keys } from './keys';
 export { Logs } from './logs/index';

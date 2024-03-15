@@ -42,17 +42,14 @@ export class Settings extends APIResource {
   /**
    * List all mTLS hostname settings for this account or zone.
    */
-  list(
-    params?: SettingListParams,
+  get(params?: SettingGetParams, options?: Core.RequestOptions): Core.APIPromise<SettingGetResponse | null>;
+  get(options?: Core.RequestOptions): Core.APIPromise<SettingGetResponse | null>;
+  get(
+    params: SettingGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SettingListResponse | null>;
-  list(options?: Core.RequestOptions): Core.APIPromise<SettingListResponse | null>;
-  list(
-    params: SettingListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SettingListResponse | null> {
+  ): Core.APIPromise<SettingGetResponse | null> {
     if (isRequestOptions(params)) {
-      return this.list({}, params);
+      return this.get({}, params);
     }
     const { account_id, zone_id } = params;
     if (!account_id && !zone_id) {
@@ -75,7 +72,7 @@ export class Settings extends APIResource {
       this._client.get(
         `/${accountOrZone}/${accountOrZoneId}/access/certificates/settings`,
         options,
-      ) as Core.APIPromise<{ result: SettingListResponse | null }>
+      ) as Core.APIPromise<{ result: SettingGetResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -102,7 +99,7 @@ export interface AccessSettings {
 
 export type SettingUpdateResponse = Array<AccessSettings>;
 
-export type SettingListResponse = Array<AccessSettings>;
+export type SettingGetResponse = Array<AccessSettings>;
 
 export interface SettingUpdateParams {
   /**
@@ -123,7 +120,7 @@ export interface SettingUpdateParams {
   zone_id?: string;
 }
 
-export interface SettingListParams {
+export interface SettingGetParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
    */
@@ -138,7 +135,7 @@ export interface SettingListParams {
 export namespace Settings {
   export import AccessSettings = SettingsAPI.AccessSettings;
   export import SettingUpdateResponse = SettingsAPI.SettingUpdateResponse;
-  export import SettingListResponse = SettingsAPI.SettingListResponse;
+  export import SettingGetResponse = SettingsAPI.SettingGetResponse;
   export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;
-  export import SettingListParams = SettingsAPI.SettingListParams;
+  export import SettingGetParams = SettingsAPI.SettingGetParams;
 }

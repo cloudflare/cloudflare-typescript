@@ -23,10 +23,10 @@ export class Keys extends APIResource {
   /**
    * Gets the Access key rotation settings for an account.
    */
-  list(identifier: string, options?: Core.RequestOptions): Core.APIPromise<KeyListResponse> {
+  get(identifier: string, options?: Core.RequestOptions): Core.APIPromise<KeyGetResponse> {
     return (
       this._client.get(`/accounts/${identifier}/access/keys`, options) as Core.APIPromise<{
-        result: KeyListResponse;
+        result: KeyGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -45,7 +45,7 @@ export class Keys extends APIResource {
 
 export type KeyUpdateResponse = unknown | string;
 
-export type KeyListResponse = unknown | string;
+export type KeyGetResponse = unknown | string;
 
 export type KeyRotateResponse = unknown | string;
 
@@ -58,7 +58,7 @@ export interface KeyUpdateParams {
 
 export namespace Keys {
   export import KeyUpdateResponse = KeysAPI.KeyUpdateResponse;
-  export import KeyListResponse = KeysAPI.KeyListResponse;
+  export import KeyGetResponse = KeysAPI.KeyGetResponse;
   export import KeyRotateResponse = KeysAPI.KeyRotateResponse;
   export import KeyUpdateParams = KeysAPI.KeyUpdateParams;
 }

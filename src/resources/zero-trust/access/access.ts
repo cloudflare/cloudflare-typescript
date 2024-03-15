@@ -70,7 +70,7 @@ export namespace Access {
   export import BookmarkDeleteResponse = BookmarksAPI.BookmarkDeleteResponse;
   export import Keys = KeysAPI.Keys;
   export import KeyUpdateResponse = KeysAPI.KeyUpdateResponse;
-  export import KeyListResponse = KeysAPI.KeyListResponse;
+  export import KeyGetResponse = KeysAPI.KeyGetResponse;
   export import KeyRotateResponse = KeysAPI.KeyRotateResponse;
   export import KeyUpdateParams = KeysAPI.KeyUpdateParams;
   export import Logs = LogsAPI.Logs;
