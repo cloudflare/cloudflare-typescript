@@ -26,7 +26,7 @@ export class Routes extends APIResource {
   }
 
   /**
-   * Lookup prefix-to-origin mapping on global routing tables.
+   * Lookup prefix-to-ASN mapping on global routing tables.
    */
   pfx2as(query?: RoutePfx2asParams, options?: Core.RequestOptions): Core.APIPromise<RoutePfx2asResponse>;
   pfx2as(options?: Core.RequestOptions): Core.APIPromise<RoutePfx2asResponse>;
@@ -268,12 +268,18 @@ export interface RoutePfx2asParams {
   format?: 'JSON' | 'CSV';
 
   /**
+   * Return only results with the longest prefix match for the given prefix. For
+   * example, specify a /32 prefix to lookup the origin ASN for an IPv4 address.
+   */
+  longestPrefixMatch?: boolean;
+
+  /**
    * Lookup prefixes originated by the given ASN
    */
   origin?: number;
 
   /**
-   * Lookup origins of the given prefix
+   * Lookup origin ASNs of the given prefix
    */
   prefix?: string;
 
