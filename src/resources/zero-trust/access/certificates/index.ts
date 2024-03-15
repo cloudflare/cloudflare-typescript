@@ -14,8 +14,8 @@ export {
 export {
   AccessSettings,
   SettingUpdateResponse,
-  SettingListResponse,
+  SettingGetResponse,
   SettingUpdateParams,
-  SettingListParams,
+  SettingGetParams,
   Settings,
 } from './settings';
