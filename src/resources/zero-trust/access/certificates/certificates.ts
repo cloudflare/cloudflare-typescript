@@ -338,7 +338,7 @@ export namespace Certificates {
   export import Settings = SettingsAPI.Settings;
   export import AccessSettings = SettingsAPI.AccessSettings;
   export import SettingUpdateResponse = SettingsAPI.SettingUpdateResponse;
-  export import SettingListResponse = SettingsAPI.SettingListResponse;
+  export import SettingGetResponse = SettingsAPI.SettingGetResponse;
   export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;
-  export import SettingListParams = SettingsAPI.SettingListParams;
+  export import SettingGetParams = SettingsAPI.SettingGetParams;
 }

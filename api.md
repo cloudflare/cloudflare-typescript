@@ -4388,12 +4388,12 @@ Types:
 
 - <code><a href="./src/resources/zero-trust/access/certificates/settings.ts">AccessSettings</a></code>
 - <code><a href="./src/resources/zero-trust/access/certificates/settings.ts">SettingUpdateResponse</a></code>
-- <code><a href="./src/resources/zero-trust/access/certificates/settings.ts">SettingListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/certificates/settings.ts">SettingGetResponse</a></code>
 
 Methods:
 
 - <code title="put /{account_or_zone}/{account_or_zone_id}/access/certificates/settings">client.zeroTrust.access.certificates.settings.<a href="./src/resources/zero-trust/access/certificates/settings.ts">update</a>({ ...params }) -> SettingUpdateResponse | null</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/access/certificates/settings">client.zeroTrust.access.certificates.settings.<a href="./src/resources/zero-trust/access/certificates/settings.ts">list</a>({ ...params }) -> SettingListResponse | null</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/access/certificates/settings">client.zeroTrust.access.certificates.settings.<a href="./src/resources/zero-trust/access/certificates/settings.ts">get</a>({ ...params }) -> SettingGetResponse | null</code>
 
 ### Groups
 
@@ -4450,13 +4450,13 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/zero-trust/access/keys.ts">KeyUpdateResponse</a></code>
-- <code><a href="./src/resources/zero-trust/access/keys.ts">KeyListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/keys.ts">KeyGetResponse</a></code>
 - <code><a href="./src/resources/zero-trust/access/keys.ts">KeyRotateResponse</a></code>
 
 Methods:
 
 - <code title="put /accounts/{identifier}/access/keys">client.zeroTrust.access.keys.<a href="./src/resources/zero-trust/access/keys.ts">update</a>(identifier, { ...params }) -> KeyUpdateResponse</code>
-- <code title="get /accounts/{identifier}/access/keys">client.zeroTrust.access.keys.<a href="./src/resources/zero-trust/access/keys.ts">list</a>(identifier) -> KeyListResponse</code>
+- <code title="get /accounts/{identifier}/access/keys">client.zeroTrust.access.keys.<a href="./src/resources/zero-trust/access/keys.ts">get</a>(identifier) -> KeyGetResponse</code>
 - <code title="post /accounts/{identifier}/access/keys/rotate">client.zeroTrust.access.keys.<a href="./src/resources/zero-trust/access/keys.ts">rotate</a>(identifier) -> KeyRotateResponse</code>
 
 ### Logs
