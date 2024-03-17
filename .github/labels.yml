@@ -198,3 +198,13 @@
 - name: 'workflow: synced'
   description: ''
   color: 006b75
+  
+# autorelease management 
+- name: 'autorelease: custom version'
+  color: ededed
+- name: 'autorelease: pending'
+  color: ededed
+- name: 'autorelease: pre-release'
+  color: ededed
+- name: 'autorelease: tagged' 
+  color: ededed
