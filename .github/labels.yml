@@ -138,8 +138,9 @@
   description: Categorizes issue or PR as related to the Tunnel service.
   color: 98D063
 - name: 'service: turnstile'
-  description: Categorizes issue or PR as related to Turnstile and the Challenge Platform
-  service.
+  description: |
+    Categorizes issue or PR as related to Turnstile and the Challenge Platform
+    service.
   color: 98D063
 - name: 'service: workers'
   description: Categorizes issue or PR as related to the Workers service.
@@ -184,8 +185,9 @@
   description: Indicates an issue or PR requires a response from the original poster.
   color: 006b75
 - name: 'workflow: pending-public-documentation'
-  description: Indicates an issue or PR requires changes to public documentation confirming
-  suitability for use.
+  description: |
+    Indicates an issue or PR requires changes to public documentation confirming
+    suitability for use.
   color: 006b75
 - name: 'workflow: pending-upstream-library'
   description: Indicates an issue or PR requires changes from an upstream library.
