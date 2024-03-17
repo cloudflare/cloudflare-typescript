@@ -48,7 +48,7 @@
   description: Categorizes issue or PR as impacting most users.
   color: F7D2B6
 - name: needs-triage
-  description: Indicates an issue or PR lacks a `triage: foo` label and requires one.
+  description: 'Indicates an issue or PR lacks a `triage: foo` label and requires one.'
   color: ef9ed3
 - name: 'service: access'
   description: Categorizes issue or PR as related to the Access service.
