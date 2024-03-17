@@ -1,4 +1,4 @@
-- name: 'kind: breaking-change'
+﻿- name: 'kind: breaking-change'
   description: ''
   color: e11d21
 - name: 'kind: bug'
@@ -17,7 +17,7 @@
   color: e11d21
 - name: 'kind: flakey'
   description: Categorizes issue or PR as related to a flaky test.
-color: e11d21
+  color: e11d21
 - name: 'kind: question'
   description: Categorizes issue or PR as related to a question about the provider or
   the use of the provider.
