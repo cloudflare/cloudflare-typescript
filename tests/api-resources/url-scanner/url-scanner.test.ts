@@ -41,6 +41,7 @@ describe('resource urlScanner', () => {
           asn: '13335',
           date_end: '2019-12-27T18:11:19.117Z',
           date_start: '2019-12-27T18:11:19.117Z',
+          hash: 'string',
           hostname: 'example.com',
           ip: '1.1.1.1',
           is_malicious: true,

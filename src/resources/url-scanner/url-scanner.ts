@@ -100,6 +100,11 @@ export interface URLScannerScanParams {
   date_start?: string;
 
   /**
+   * Filter scans by hash of any html/js/css request made by the webpage.
+   */
+  hash?: string;
+
+  /**
    * Filter scans by hostname of _any_ request made by the webpage.
    */
   hostname?: string;
