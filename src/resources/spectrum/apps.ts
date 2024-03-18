@@ -120,9 +120,7 @@ export interface AppCreateResponse {
   /**
    * The anycast edge IP configuration for the hostname of this application.
    */
-  edge_ips?:
-    | AppCreateResponse.SpectrumEdgeIPEyeballIPsVariable
-    | AppCreateResponse.SpectrumEdgeIPCustomerOwnedIPsVariable;
+  edge_ips?: AppCreateResponse.SpectrumEdgeIPEyeballIPs | AppCreateResponse.SpectrumEdgeIPCustomerOwnedIPs;
 
   /**
    * Enables IP Access Rules for this application. Notes: Only available for TCP
@@ -194,7 +192,7 @@ export namespace AppCreateResponse {
     type?: 'CNAME' | 'ADDRESS';
   }
 
-  export interface SpectrumEdgeIPEyeballIPsVariable {
+  export interface SpectrumEdgeIPEyeballIPs {
     /**
      * The IP versions supported for inbound connections on Spectrum anycast IPs.
      */
@@ -208,7 +206,7 @@ export namespace AppCreateResponse {
     type?: 'dynamic';
   }
 
-  export interface SpectrumEdgeIPCustomerOwnedIPsVariable {
+  export interface SpectrumEdgeIPCustomerOwnedIPs {
     /**
      * The array of customer owned IPs we broadcast via anycast for this hostname and
      * application.
@@ -270,9 +268,7 @@ export interface AppUpdateResponse {
   /**
    * The anycast edge IP configuration for the hostname of this application.
    */
-  edge_ips?:
-    | AppUpdateResponse.SpectrumEdgeIPEyeballIPsVariable
-    | AppUpdateResponse.SpectrumEdgeIPCustomerOwnedIPsVariable;
+  edge_ips?: AppUpdateResponse.SpectrumEdgeIPEyeballIPs | AppUpdateResponse.SpectrumEdgeIPCustomerOwnedIPs;
 
   /**
    * Enables IP Access Rules for this application. Notes: Only available for TCP
@@ -344,7 +340,7 @@ export namespace AppUpdateResponse {
     type?: 'CNAME' | 'ADDRESS';
   }
 
-  export interface SpectrumEdgeIPEyeballIPsVariable {
+  export interface SpectrumEdgeIPEyeballIPs {
     /**
      * The IP versions supported for inbound connections on Spectrum anycast IPs.
      */
@@ -358,7 +354,7 @@ export namespace AppUpdateResponse {
     type?: 'dynamic';
   }
 
-  export interface SpectrumEdgeIPCustomerOwnedIPsVariable {
+  export interface SpectrumEdgeIPCustomerOwnedIPs {
     /**
      * The array of customer owned IPs we broadcast via anycast for this hostname and
      * application.
@@ -441,9 +437,7 @@ export interface AppCreateParams {
   /**
    * The anycast edge IP configuration for the hostname of this application.
    */
-  edge_ips?:
-    | AppCreateParams.SpectrumEdgeIPEyeballIPsVariable
-    | AppCreateParams.SpectrumEdgeIPCustomerOwnedIPsVariable;
+  edge_ips?: AppCreateParams.SpectrumEdgeIPEyeballIPs | AppCreateParams.SpectrumEdgeIPCustomerOwnedIPs;
 
   /**
    * Enables IP Access Rules for this application. Notes: Only available for TCP
@@ -511,7 +505,7 @@ export namespace AppCreateParams {
     type?: '' | 'A' | 'AAAA' | 'SRV';
   }
 
-  export interface SpectrumEdgeIPEyeballIPsVariable {
+  export interface SpectrumEdgeIPEyeballIPs {
     /**
      * The IP versions supported for inbound connections on Spectrum anycast IPs.
      */
@@ -525,7 +519,7 @@ export namespace AppCreateParams {
     type?: 'dynamic';
   }
 
-  export interface SpectrumEdgeIPCustomerOwnedIPsVariable {
+  export interface SpectrumEdgeIPCustomerOwnedIPs {
     /**
      * The array of customer owned IPs we broadcast via anycast for this hostname and
      * application.
@@ -576,9 +570,7 @@ export interface AppUpdateParams {
   /**
    * The anycast edge IP configuration for the hostname of this application.
    */
-  edge_ips?:
-    | AppUpdateParams.SpectrumEdgeIPEyeballIPsVariable
-    | AppUpdateParams.SpectrumEdgeIPCustomerOwnedIPsVariable;
+  edge_ips?: AppUpdateParams.SpectrumEdgeIPEyeballIPs | AppUpdateParams.SpectrumEdgeIPCustomerOwnedIPs;
 
   /**
    * Enables IP Access Rules for this application. Notes: Only available for TCP
@@ -646,7 +638,7 @@ export namespace AppUpdateParams {
     type?: '' | 'A' | 'AAAA' | 'SRV';
   }
 
-  export interface SpectrumEdgeIPEyeballIPsVariable {
+  export interface SpectrumEdgeIPEyeballIPs {
     /**
      * The IP versions supported for inbound connections on Spectrum anycast IPs.
      */
@@ -660,7 +652,7 @@ export namespace AppUpdateParams {
     type?: 'dynamic';
   }
 
-  export interface SpectrumEdgeIPCustomerOwnedIPsVariable {
+  export interface SpectrumEdgeIPCustomerOwnedIPs {
     /**
      * The array of customer owned IPs we broadcast via anycast for this hostname and
      * application.
