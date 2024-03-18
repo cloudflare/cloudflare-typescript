@@ -1,5 +1,17 @@
 # Changelog
 
+## 3.0.0-beta.4 (2024-03-18)
+
+Full Changelog: [v3.0.0-beta.3...v3.0.0-beta.4](https://github.com/cloudflare/cloudflare-typescript/compare/v3.0.0-beta.3...v3.0.0-beta.4)
+
+### Features
+
+* **api:** OpenAPI spec update via Stainless API ([#155](https://github.com/cloudflare/cloudflare-typescript/issues/155)) ([74bbd97](https://github.com/cloudflare/cloudflare-typescript/commit/74bbd97408d252b275c86d50c7158464e5fc0d5f))
+* **api:** OpenAPI spec update via Stainless API ([#157](https://github.com/cloudflare/cloudflare-typescript/issues/157)) ([f40b1b3](https://github.com/cloudflare/cloudflare-typescript/commit/f40b1b3204eb394944837e647694d5a615306358))
+* **api:** OpenAPI spec update via Stainless API ([#162](https://github.com/cloudflare/cloudflare-typescript/issues/162)) ([a2e5f42](https://github.com/cloudflare/cloudflare-typescript/commit/a2e5f4261f051ed67820ffdeeab5144ccfc4f4fd))
+* **api:** OpenAPI spec update via Stainless API ([#163](https://github.com/cloudflare/cloudflare-typescript/issues/163)) ([b4bb336](https://github.com/cloudflare/cloudflare-typescript/commit/b4bb336b19e109d407ae7d9129558d60d69b1f12))
+* **api:** OpenAPI spec update via Stainless API ([#164](https://github.com/cloudflare/cloudflare-typescript/issues/164)) ([c75c714](https://github.com/cloudflare/cloudflare-typescript/commit/c75c71405d4883abec41f4fa566f8436aadd477b))
+
 ## 3.0.0-beta.3 (2024-03-15)
 
 Full Changelog: [v3.0.0-beta.2...v3.0.0-beta.3](https://github.com/cloudflare/cloudflare-typescript/compare/v3.0.0-beta.2...v3.0.0-beta.3)
