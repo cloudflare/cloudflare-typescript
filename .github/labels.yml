@@ -5,7 +5,7 @@
   description: Categorizes issue or PR as related to a bug.
   color: e11d21
 - name: 'kind: generation-issue'
-  description: Categorizes issue or PR as related to a the generation pipeline.
+  description: Categorizes issue or PR as related to the generation pipeline.
   color: e11d21
 - name: 'kind: documentation'
   description: Categorizes issue or PR as related to documentation.
