@@ -14,9 +14,7 @@ describe('resource records', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.dns.records.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      data: {},
       name: 'example.com',
-      priority: 10,
       type: 'URI',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -32,6 +30,10 @@ describe('resource records', () => {
   test.skip('create: required and optional params', async () => {
     const response = await cloudflare.dns.records.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      name: 'example.com',
+      type: 'URI',
+      comment: 'Domain verification record',
+      content: {},
       data: {
         flags: {},
         tag: 'issue',
@@ -73,11 +75,8 @@ describe('resource records', () => {
         fingerprint: 'string',
         content: 'http://example.com/example.html',
       },
-      name: 'example.com',
-      priority: 10,
-      type: 'URI',
-      comment: 'Domain verification record',
       meta: { auto_added: true, source: 'primary' },
+      priority: 10,
       proxied: false,
       tags: ['owner:dns-team', 'owner:dns-team', 'owner:dns-team'],
       ttl: 3600,
@@ -88,9 +87,7 @@ describe('resource records', () => {
   test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.dns.records.update('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      data: {},
       name: 'example.com',
-      priority: 10,
       type: 'URI',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -106,6 +103,10 @@ describe('resource records', () => {
   test.skip('update: required and optional params', async () => {
     const response = await cloudflare.dns.records.update('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      name: 'example.com',
+      type: 'URI',
+      comment: 'Domain verification record',
+      content: {},
       data: {
         flags: {},
         tag: 'issue',
@@ -147,11 +148,8 @@ describe('resource records', () => {
         fingerprint: 'string',
         content: 'http://example.com/example.html',
       },
-      name: 'example.com',
-      priority: 10,
-      type: 'URI',
-      comment: 'Domain verification record',
       meta: { auto_added: true, source: 'primary' },
+      priority: 10,
       proxied: false,
       tags: ['owner:dns-team', 'owner:dns-team', 'owner:dns-team'],
       ttl: 3600,
@@ -229,9 +227,7 @@ describe('resource records', () => {
   test.skip('edit: only required params', async () => {
     const responsePromise = cloudflare.dns.records.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      data: {},
       name: 'example.com',
-      priority: 10,
       type: 'URI',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -247,6 +243,10 @@ describe('resource records', () => {
   test.skip('edit: required and optional params', async () => {
     const response = await cloudflare.dns.records.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      name: 'example.com',
+      type: 'URI',
+      comment: 'Domain verification record',
+      content: {},
       data: {
         flags: {},
         tag: 'issue',
@@ -288,11 +288,8 @@ describe('resource records', () => {
         fingerprint: 'string',
         content: 'http://example.com/example.html',
       },
-      name: 'example.com',
-      priority: 10,
-      type: 'URI',
-      comment: 'Domain verification record',
       meta: { auto_added: true, source: 'primary' },
+      priority: 10,
       proxied: false,
       tags: ['owner:dns-team', 'owner:dns-team', 'owner:dns-team'],
       ttl: 3600,
