@@ -14427,14 +14427,45 @@ export interface RecordCreateParams {
   zone_id: string;
 
   /**
+   * Body param:
+   */
+  data: RecordCreateParams.Data;
+
+  /**
    * Body param: DNS record name (or @ for the zone apex) in Punycode.
    */
   name: string;
 
   /**
+   * Body param: Required for MX, SRV and URI records; unused by other record types.
+   * Records with lower priorities are preferred.
+   */
+  priority: number;
+
+  /**
    * Body param: Record type.
    */
-  type: 'URI';
+  type:
+    | 'URI'
+    | 'TXT'
+    | 'TLSA'
+    | 'SVCB'
+    | 'SSHFP'
+    | 'SRV'
+    | 'SMIMEA'
+    | 'PTR'
+    | 'NS'
+    | 'NAPTR'
+    | 'MX'
+    | 'LOC'
+    | 'HTTPS'
+    | 'DS'
+    | 'DNSKEY'
+    | 'CNAME'
+    | 'CERT'
+    | 'CAA'
+    | 'AAAA'
+    | 'A';
 
   /**
    * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -14445,18 +14476,7 @@ export interface RecordCreateParams {
   /**
    * Body param:
    */
-  data?: RecordCreateParams.Data;
-
-  /**
-   * Body param:
-   */
   meta?: RecordCreateParams.Meta;
-
-  /**
-   * Body param: Required for MX, SRV and URI records; unused by other record types.
-   * Records with lower priorities are preferred.
-   */
-  priority?: number;
 
   /**
    * Body param: Whether the record is receiving the performance and security
@@ -14518,7 +14538,7 @@ export namespace RecordCreateParams {
     /**
      * Flags.
      */
-    flags?: string;
+    flags?: unknown;
 
     /**
      * Key Tag.
@@ -14703,14 +14723,45 @@ export interface RecordUpdateParams {
   zone_id: string;
 
   /**
+   * Body param:
+   */
+  data: RecordUpdateParams.Data;
+
+  /**
    * Body param: DNS record name (or @ for the zone apex) in Punycode.
    */
   name: string;
 
   /**
+   * Body param: Required for MX, SRV and URI records; unused by other record types.
+   * Records with lower priorities are preferred.
+   */
+  priority: number;
+
+  /**
    * Body param: Record type.
    */
-  type: 'URI';
+  type:
+    | 'URI'
+    | 'TXT'
+    | 'TLSA'
+    | 'SVCB'
+    | 'SSHFP'
+    | 'SRV'
+    | 'SMIMEA'
+    | 'PTR'
+    | 'NS'
+    | 'NAPTR'
+    | 'MX'
+    | 'LOC'
+    | 'HTTPS'
+    | 'DS'
+    | 'DNSKEY'
+    | 'CNAME'
+    | 'CERT'
+    | 'CAA'
+    | 'AAAA'
+    | 'A';
 
   /**
    * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -14721,18 +14772,7 @@ export interface RecordUpdateParams {
   /**
    * Body param:
    */
-  data?: RecordUpdateParams.Data;
-
-  /**
-   * Body param:
-   */
   meta?: RecordUpdateParams.Meta;
-
-  /**
-   * Body param: Required for MX, SRV and URI records; unused by other record types.
-   * Records with lower priorities are preferred.
-   */
-  priority?: number;
 
   /**
    * Body param: Whether the record is receiving the performance and security
@@ -14794,7 +14834,7 @@ export namespace RecordUpdateParams {
     /**
      * Flags.
      */
-    flags?: string;
+    flags?: unknown;
 
     /**
      * Key Tag.
@@ -15156,14 +15196,45 @@ export interface RecordEditParams {
   zone_id: string;
 
   /**
+   * Body param:
+   */
+  data: RecordEditParams.Data;
+
+  /**
    * Body param: DNS record name (or @ for the zone apex) in Punycode.
    */
   name: string;
 
   /**
+   * Body param: Required for MX, SRV and URI records; unused by other record types.
+   * Records with lower priorities are preferred.
+   */
+  priority: number;
+
+  /**
    * Body param: Record type.
    */
-  type: 'URI';
+  type:
+    | 'URI'
+    | 'TXT'
+    | 'TLSA'
+    | 'SVCB'
+    | 'SSHFP'
+    | 'SRV'
+    | 'SMIMEA'
+    | 'PTR'
+    | 'NS'
+    | 'NAPTR'
+    | 'MX'
+    | 'LOC'
+    | 'HTTPS'
+    | 'DS'
+    | 'DNSKEY'
+    | 'CNAME'
+    | 'CERT'
+    | 'CAA'
+    | 'AAAA'
+    | 'A';
 
   /**
    * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -15174,18 +15245,7 @@ export interface RecordEditParams {
   /**
    * Body param:
    */
-  data?: RecordEditParams.Data;
-
-  /**
-   * Body param:
-   */
   meta?: RecordEditParams.Meta;
-
-  /**
-   * Body param: Required for MX, SRV and URI records; unused by other record types.
-   * Records with lower priorities are preferred.
-   */
-  priority?: number;
 
   /**
    * Body param: Whether the record is receiving the performance and security
@@ -15247,7 +15307,7 @@ export namespace RecordEditParams {
     /**
      * Flags.
      */
-    flags?: string;
+    flags?: unknown;
 
     /**
      * Key Tag.
