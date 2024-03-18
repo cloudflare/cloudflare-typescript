@@ -1,5 +1,14 @@
 # Changelog
 
+## 3.0.0-beta.6 (2024-03-18)
+
+Full Changelog: [v3.0.0-beta.5...v3.0.0-beta.6](https://github.com/cloudflare/cloudflare-typescript/compare/v3.0.0-beta.5...v3.0.0-beta.6)
+
+### Features
+
+* **api:** update via SDK Studio ([#166](https://github.com/cloudflare/cloudflare-typescript/issues/166)) ([b805df7](https://github.com/cloudflare/cloudflare-typescript/commit/b805df71bd9356afad0bbc1266d0827fd9a7d527))
+* **api:** update via SDK Studio ([#168](https://github.com/cloudflare/cloudflare-typescript/issues/168)) ([73c72e3](https://github.com/cloudflare/cloudflare-typescript/commit/73c72e367ab005516d28d0c5cb1e7e2f560e4d4d))
+
 ## 3.0.0-beta.5 (2024-03-18)
 
 Full Changelog: [v3.0.0-beta.4...v3.0.0-beta.5](https://github.com/cloudflare/cloudflare-typescript/compare/v3.0.0-beta.4...v3.0.0-beta.5)
