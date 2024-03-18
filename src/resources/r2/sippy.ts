@@ -174,7 +174,7 @@ export namespace SippyUpdateParams {
      */
     privateKey?: string;
 
-    provider?: 'gcs';
+    provider?: 'gcs' | 'aws';
 
     /**
      * Name of the AWS availability zone
