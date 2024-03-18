@@ -1230,6 +1230,16 @@ export type ApplicationRevokeTokensResponse = unknown;
 
 export interface ApplicationCreateParams {
   /**
+   * Body param: The URL or domain of the bookmark.
+   */
+  domain: unknown;
+
+  /**
+   * Body param: The application type.
+   */
+  type: 'self_hosted' | 'saas' | 'ssh' | 'vnc' | 'app_launcher' | 'warp' | 'biso' | 'bookmark' | 'dash_sso';
+
+  /**
    * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
    * Zone ID.
    */
@@ -1294,11 +1304,6 @@ export interface ApplicationCreateParams {
    * application
    */
   custom_pages?: Array<string>;
-
-  /**
-   * Body param: The URL or domain of the bookmark.
-   */
-  domain?: unknown;
 
   /**
    * Body param: Enables the binding cookie, which increases security against
@@ -1367,11 +1372,6 @@ export interface ApplicationCreateParams {
    * filter applications in the App Launcher dashboard.
    */
   tags?: Array<string>;
-
-  /**
-   * Body param: The application type.
-   */
-  type?: string;
 }
 
 export namespace ApplicationCreateParams {
@@ -1555,6 +1555,16 @@ export namespace ApplicationCreateParams {
 
 export interface ApplicationUpdateParams {
   /**
+   * Body param: The URL or domain of the bookmark.
+   */
+  domain: unknown;
+
+  /**
+   * Body param: The application type.
+   */
+  type: 'self_hosted' | 'saas' | 'ssh' | 'vnc' | 'app_launcher' | 'warp' | 'biso' | 'bookmark' | 'dash_sso';
+
+  /**
    * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
    * Zone ID.
    */
@@ -1619,11 +1629,6 @@ export interface ApplicationUpdateParams {
    * application
    */
   custom_pages?: Array<string>;
-
-  /**
-   * Body param: The URL or domain of the bookmark.
-   */
-  domain?: unknown;
 
   /**
    * Body param: Enables the binding cookie, which increases security against
@@ -1692,11 +1697,6 @@ export interface ApplicationUpdateParams {
    * filter applications in the App Launcher dashboard.
    */
   tags?: Array<string>;
-
-  /**
-   * Body param: The application type.
-   */
-  type?: string;
 }
 
 export namespace ApplicationUpdateParams {
