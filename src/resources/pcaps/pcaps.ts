@@ -616,6 +616,24 @@ export interface PCAPCreateParams {
   account_id: string;
 
   /**
+   * Body param: The name of the data center used for the packet capture. This can be
+   * a specific colo (ord02) or a multi-colo name (ORD). This field only applies to
+   * `full` packet captures.
+   */
+  colo_name: string;
+
+  /**
+   * Body param: The full URI for the bucket. This field only applies to `full`
+   * packet captures.
+   */
+  destination_conf: string;
+
+  /**
+   * Body param: The limit of packets contained in a packet capture.
+   */
+  packet_limit: number;
+
+  /**
    * Body param: The system used to collect packet captures.
    */
   system: 'magic-transit';
@@ -638,27 +656,9 @@ export interface PCAPCreateParams {
   byte_limit?: number;
 
   /**
-   * Body param: The name of the data center used for the packet capture. This can be
-   * a specific colo (ord02) or a multi-colo name (ORD). This field only applies to
-   * `full` packet captures.
-   */
-  colo_name?: string;
-
-  /**
-   * Body param: The full URI for the bucket. This field only applies to `full`
-   * packet captures.
-   */
-  destination_conf?: string;
-
-  /**
    * Body param:
    */
   filter_v1?: PCAPCreateParams.FilterV1;
-
-  /**
-   * Body param: The limit of packets contained in a packet capture.
-   */
-  packet_limit?: number;
 }
 
 export namespace PCAPCreateParams {
