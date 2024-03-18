@@ -14427,20 +14427,9 @@ export interface RecordCreateParams {
   zone_id: string;
 
   /**
-   * Body param:
-   */
-  data: RecordCreateParams.Data;
-
-  /**
    * Body param: DNS record name (or @ for the zone apex) in Punycode.
    */
   name: string;
-
-  /**
-   * Body param: Required for MX, SRV and URI records; unused by other record types.
-   * Records with lower priorities are preferred.
-   */
-  priority: number;
 
   /**
    * Body param: Record type.
@@ -14474,9 +14463,25 @@ export interface RecordCreateParams {
   comment?: string;
 
   /**
+   * Body param: Formatted URI content. See 'data' to set URI properties.
+   */
+  content?: unknown;
+
+  /**
+   * Body param:
+   */
+  data?: RecordCreateParams.Data;
+
+  /**
    * Body param:
    */
   meta?: RecordCreateParams.Meta;
+
+  /**
+   * Body param: Required for MX, SRV and URI records; unused by other record types.
+   * Records with lower priorities are preferred.
+   */
+  priority?: number;
 
   /**
    * Body param: Whether the record is receiving the performance and security
@@ -14723,20 +14728,9 @@ export interface RecordUpdateParams {
   zone_id: string;
 
   /**
-   * Body param:
-   */
-  data: RecordUpdateParams.Data;
-
-  /**
    * Body param: DNS record name (or @ for the zone apex) in Punycode.
    */
   name: string;
-
-  /**
-   * Body param: Required for MX, SRV and URI records; unused by other record types.
-   * Records with lower priorities are preferred.
-   */
-  priority: number;
 
   /**
    * Body param: Record type.
@@ -14770,9 +14764,25 @@ export interface RecordUpdateParams {
   comment?: string;
 
   /**
+   * Body param: Formatted URI content. See 'data' to set URI properties.
+   */
+  content?: unknown;
+
+  /**
+   * Body param:
+   */
+  data?: RecordUpdateParams.Data;
+
+  /**
    * Body param:
    */
   meta?: RecordUpdateParams.Meta;
+
+  /**
+   * Body param: Required for MX, SRV and URI records; unused by other record types.
+   * Records with lower priorities are preferred.
+   */
+  priority?: number;
 
   /**
    * Body param: Whether the record is receiving the performance and security
@@ -15196,20 +15206,9 @@ export interface RecordEditParams {
   zone_id: string;
 
   /**
-   * Body param:
-   */
-  data: RecordEditParams.Data;
-
-  /**
    * Body param: DNS record name (or @ for the zone apex) in Punycode.
    */
   name: string;
-
-  /**
-   * Body param: Required for MX, SRV and URI records; unused by other record types.
-   * Records with lower priorities are preferred.
-   */
-  priority: number;
 
   /**
    * Body param: Record type.
@@ -15243,9 +15242,25 @@ export interface RecordEditParams {
   comment?: string;
 
   /**
+   * Body param: Formatted URI content. See 'data' to set URI properties.
+   */
+  content?: unknown;
+
+  /**
+   * Body param:
+   */
+  data?: RecordEditParams.Data;
+
+  /**
    * Body param:
    */
   meta?: RecordEditParams.Meta;
+
+  /**
+   * Body param: Required for MX, SRV and URI records; unused by other record types.
+   * Records with lower priorities are preferred.
+   */
+  priority?: number;
 
   /**
    * Body param: Whether the record is receiving the performance and security
