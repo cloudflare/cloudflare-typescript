@@ -133,9 +133,9 @@ export interface AIRunParams {
     | Uploadable
     | AIRunParams.Audio
     | Uploadable
-    | AIRunParams.WorkersAIImageClassification
+    | AIRunParams.ImageClassification
     | Uploadable
-    | AIRunParams.WorkersAIBodyDetection
+    | AIRunParams.ObjectDetection
     | AIRunParams.UnionMember10
     | AIRunParams.UnionMember11
     | AIRunParams.Translation
@@ -177,11 +177,11 @@ export namespace AIRunParams {
     audio?: Array<number>;
   }
 
-  export interface WorkersAIImageClassification {
+  export interface ImageClassification {
     image?: Array<number>;
   }
 
-  export interface WorkersAIBodyDetection {
+  export interface ObjectDetection {
     image?: Array<number>;
   }
 
