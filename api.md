@@ -1450,7 +1450,23 @@ Methods:
 
 ### Reports
 
+Types:
+
+- <code><a href="./src/resources/dns/analytics/reports/reports.ts">DNSDNSAnalyticsAPIReport</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/dns_analytics/report">client.dns.analytics.reports.<a href="./src/resources/dns/analytics/reports/reports.ts">get</a>({ ...params }) -> DNSDNSAnalyticsAPIReport</code>
+
 #### Bytimes
+
+Types:
+
+- <code><a href="./src/resources/dns/analytics/reports/bytimes.ts">DNSDNSAnalyticsAPIReportBytime</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/dns_analytics/report/bytime">client.dns.analytics.reports.bytimes.<a href="./src/resources/dns/analytics/reports/bytimes.ts">get</a>({ ...params }) -> DNSDNSAnalyticsAPIReportBytime</code>
 
 ## Firewall
 
@@ -1471,7 +1487,15 @@ Methods:
 
 #### Reports
 
+Methods:
+
+- <code title="get /accounts/{account_id}/dns_firewall/{dns_firewall_id}/dns_analytics/report">client.dns.firewall.analytics.reports.<a href="./src/resources/dns/firewall/analytics/reports/reports.ts">get</a>(dnsFirewallId, { ...params }) -> DNSDNSAnalyticsAPIReport</code>
+
 ##### Bytimes
+
+Methods:
+
+- <code title="get /accounts/{account_id}/dns_firewall/{dns_firewall_id}/dns_analytics/report/bytime">client.dns.firewall.analytics.reports.bytimes.<a href="./src/resources/dns/firewall/analytics/reports/bytimes.ts">get</a>(dnsFirewallId, { ...params }) -> DNSDNSAnalyticsAPIReportBytime</code>
 
 # DNSSEC
 
@@ -1709,8 +1733,29 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/healthchecks/healthchecks.ts">HealthchecksHealthchecks</a></code>
+- <code><a href="./src/resources/healthchecks/healthchecks.ts">HealthcheckListResponse</a></code>
+- <code><a href="./src/resources/healthchecks/healthchecks.ts">HealthcheckDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/healthchecks">client.healthchecks.<a href="./src/resources/healthchecks/healthchecks.ts">create</a>({ ...params }) -> HealthchecksHealthchecks</code>
+- <code title="put /zones/{zone_id}/healthchecks/{healthcheck_id}">client.healthchecks.<a href="./src/resources/healthchecks/healthchecks.ts">update</a>(healthcheckId, { ...params }) -> HealthchecksHealthchecks</code>
+- <code title="get /zones/{zone_id}/healthchecks">client.healthchecks.<a href="./src/resources/healthchecks/healthchecks.ts">list</a>({ ...params }) -> HealthcheckListResponse | null</code>
+- <code title="delete /zones/{zone_id}/healthchecks/{healthcheck_id}">client.healthchecks.<a href="./src/resources/healthchecks/healthchecks.ts">delete</a>(healthcheckId, { ...params }) -> HealthcheckDeleteResponse</code>
+- <code title="patch /zones/{zone_id}/healthchecks/{healthcheck_id}">client.healthchecks.<a href="./src/resources/healthchecks/healthchecks.ts">edit</a>(healthcheckId, { ...params }) -> HealthchecksHealthchecks</code>
+- <code title="get /zones/{zone_id}/healthchecks/{healthcheck_id}">client.healthchecks.<a href="./src/resources/healthchecks/healthchecks.ts">get</a>(healthcheckId, { ...params }) -> HealthchecksHealthchecks</code>
 
 ## Previews
+
+Types:
+
+- <code><a href="./src/resources/healthchecks/previews.ts">PreviewDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/healthchecks/preview">client.healthchecks.previews.<a href="./src/resources/healthchecks/previews.ts">create</a>({ ...params }) -> HealthchecksHealthchecks</code>
+- <code title="delete /zones/{zone_id}/healthchecks/preview/{healthcheck_id}">client.healthchecks.previews.<a href="./src/resources/healthchecks/previews.ts">delete</a>(healthcheckId, { ...params }) -> PreviewDeleteResponse</code>
+- <code title="get /zones/{zone_id}/healthchecks/preview/{healthcheck_id}">client.healthchecks.previews.<a href="./src/resources/healthchecks/previews.ts">get</a>(healthcheckId, { ...params }) -> HealthchecksHealthchecks</code>
 
 # KeylessCertificates
 
@@ -3210,19 +3255,147 @@ Methods:
 
 ## CfInterconnects
 
+Types:
+
+- <code><a href="./src/resources/magic-transit/cf-interconnects.ts">CfInterconnectUpdateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/cf-interconnects.ts">CfInterconnectListResponse</a></code>
+- <code><a href="./src/resources/magic-transit/cf-interconnects.ts">CfInterconnectGetResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/magic/cf_interconnects/{tunnel_identifier}">client.magicTransit.cfInterconnects.<a href="./src/resources/magic-transit/cf-interconnects.ts">update</a>(tunnelIdentifier, { ...params }) -> CfInterconnectUpdateResponse</code>
+- <code title="get /accounts/{account_id}/magic/cf_interconnects">client.magicTransit.cfInterconnects.<a href="./src/resources/magic-transit/cf-interconnects.ts">list</a>({ ...params }) -> CfInterconnectListResponse</code>
+- <code title="get /accounts/{account_id}/magic/cf_interconnects/{tunnel_identifier}">client.magicTransit.cfInterconnects.<a href="./src/resources/magic-transit/cf-interconnects.ts">get</a>(tunnelIdentifier, { ...params }) -> CfInterconnectGetResponse</code>
+
 ## GRETunnels
+
+Types:
+
+- <code><a href="./src/resources/magic-transit/gre-tunnels.ts">GRETunnelCreateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/gre-tunnels.ts">GRETunnelUpdateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/gre-tunnels.ts">GRETunnelListResponse</a></code>
+- <code><a href="./src/resources/magic-transit/gre-tunnels.ts">GRETunnelDeleteResponse</a></code>
+- <code><a href="./src/resources/magic-transit/gre-tunnels.ts">GRETunnelGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/magic/gre_tunnels">client.magicTransit.greTunnels.<a href="./src/resources/magic-transit/gre-tunnels.ts">create</a>({ ...params }) -> GRETunnelCreateResponse</code>
+- <code title="put /accounts/{account_id}/magic/gre_tunnels/{tunnel_identifier}">client.magicTransit.greTunnels.<a href="./src/resources/magic-transit/gre-tunnels.ts">update</a>(tunnelIdentifier, { ...params }) -> GRETunnelUpdateResponse</code>
+- <code title="get /accounts/{account_id}/magic/gre_tunnels">client.magicTransit.greTunnels.<a href="./src/resources/magic-transit/gre-tunnels.ts">list</a>({ ...params }) -> GRETunnelListResponse</code>
+- <code title="delete /accounts/{account_id}/magic/gre_tunnels/{tunnel_identifier}">client.magicTransit.greTunnels.<a href="./src/resources/magic-transit/gre-tunnels.ts">delete</a>(tunnelIdentifier, { ...params }) -> GRETunnelDeleteResponse</code>
+- <code title="get /accounts/{account_id}/magic/gre_tunnels/{tunnel_identifier}">client.magicTransit.greTunnels.<a href="./src/resources/magic-transit/gre-tunnels.ts">get</a>(tunnelIdentifier, { ...params }) -> GRETunnelGetResponse</code>
 
 ## IPSECTunnels
 
+Types:
+
+- <code><a href="./src/resources/magic-transit/ipsec-tunnels.ts">IPSECTunnelCreateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/ipsec-tunnels.ts">IPSECTunnelUpdateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/ipsec-tunnels.ts">IPSECTunnelListResponse</a></code>
+- <code><a href="./src/resources/magic-transit/ipsec-tunnels.ts">IPSECTunnelDeleteResponse</a></code>
+- <code><a href="./src/resources/magic-transit/ipsec-tunnels.ts">IPSECTunnelGetResponse</a></code>
+- <code><a href="./src/resources/magic-transit/ipsec-tunnels.ts">IPSECTunnelPSKGenerateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/magic/ipsec_tunnels">client.magicTransit.ipsecTunnels.<a href="./src/resources/magic-transit/ipsec-tunnels.ts">create</a>({ ...params }) -> IPSECTunnelCreateResponse</code>
+- <code title="put /accounts/{account_id}/magic/ipsec_tunnels/{tunnel_identifier}">client.magicTransit.ipsecTunnels.<a href="./src/resources/magic-transit/ipsec-tunnels.ts">update</a>(tunnelIdentifier, { ...params }) -> IPSECTunnelUpdateResponse</code>
+- <code title="get /accounts/{account_id}/magic/ipsec_tunnels">client.magicTransit.ipsecTunnels.<a href="./src/resources/magic-transit/ipsec-tunnels.ts">list</a>({ ...params }) -> IPSECTunnelListResponse</code>
+- <code title="delete /accounts/{account_id}/magic/ipsec_tunnels/{tunnel_identifier}">client.magicTransit.ipsecTunnels.<a href="./src/resources/magic-transit/ipsec-tunnels.ts">delete</a>(tunnelIdentifier, { ...params }) -> IPSECTunnelDeleteResponse</code>
+- <code title="get /accounts/{account_id}/magic/ipsec_tunnels/{tunnel_identifier}">client.magicTransit.ipsecTunnels.<a href="./src/resources/magic-transit/ipsec-tunnels.ts">get</a>(tunnelIdentifier, { ...params }) -> IPSECTunnelGetResponse</code>
+- <code title="post /accounts/{account_id}/magic/ipsec_tunnels/{tunnel_identifier}/psk_generate">client.magicTransit.ipsecTunnels.<a href="./src/resources/magic-transit/ipsec-tunnels.ts">pskGenerate</a>(tunnelIdentifier, { ...params }) -> IPSECTunnelPSKGenerateResponse</code>
+
 ## Routes
+
+Types:
+
+- <code><a href="./src/resources/magic-transit/routes.ts">RouteCreateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/routes.ts">RouteUpdateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/routes.ts">RouteListResponse</a></code>
+- <code><a href="./src/resources/magic-transit/routes.ts">RouteDeleteResponse</a></code>
+- <code><a href="./src/resources/magic-transit/routes.ts">RouteEmptyResponse</a></code>
+- <code><a href="./src/resources/magic-transit/routes.ts">RouteGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/magic/routes">client.magicTransit.routes.<a href="./src/resources/magic-transit/routes.ts">create</a>({ ...params }) -> RouteCreateResponse</code>
+- <code title="put /accounts/{account_id}/magic/routes/{route_identifier}">client.magicTransit.routes.<a href="./src/resources/magic-transit/routes.ts">update</a>(routeIdentifier, { ...params }) -> RouteUpdateResponse</code>
+- <code title="get /accounts/{account_id}/magic/routes">client.magicTransit.routes.<a href="./src/resources/magic-transit/routes.ts">list</a>({ ...params }) -> RouteListResponse</code>
+- <code title="delete /accounts/{account_id}/magic/routes/{route_identifier}">client.magicTransit.routes.<a href="./src/resources/magic-transit/routes.ts">delete</a>(routeIdentifier, { ...params }) -> RouteDeleteResponse</code>
+- <code title="delete /accounts/{account_id}/magic/routes">client.magicTransit.routes.<a href="./src/resources/magic-transit/routes.ts">empty</a>({ ...params }) -> RouteEmptyResponse</code>
+- <code title="get /accounts/{account_id}/magic/routes/{route_identifier}">client.magicTransit.routes.<a href="./src/resources/magic-transit/routes.ts">get</a>(routeIdentifier, { ...params }) -> RouteGetResponse</code>
 
 ## Sites
 
+Types:
+
+- <code><a href="./src/resources/magic-transit/sites/sites.ts">SiteCreateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/sites/sites.ts">SiteUpdateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/sites/sites.ts">SiteListResponse</a></code>
+- <code><a href="./src/resources/magic-transit/sites/sites.ts">SiteDeleteResponse</a></code>
+- <code><a href="./src/resources/magic-transit/sites/sites.ts">SiteGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/magic/sites">client.magicTransit.sites.<a href="./src/resources/magic-transit/sites/sites.ts">create</a>({ ...params }) -> SiteCreateResponse</code>
+- <code title="put /accounts/{account_id}/magic/sites/{site_id}">client.magicTransit.sites.<a href="./src/resources/magic-transit/sites/sites.ts">update</a>(siteId, { ...params }) -> SiteUpdateResponse</code>
+- <code title="get /accounts/{account_id}/magic/sites">client.magicTransit.sites.<a href="./src/resources/magic-transit/sites/sites.ts">list</a>({ ...params }) -> SiteListResponse</code>
+- <code title="delete /accounts/{account_id}/magic/sites/{site_id}">client.magicTransit.sites.<a href="./src/resources/magic-transit/sites/sites.ts">delete</a>(siteId, { ...params }) -> SiteDeleteResponse</code>
+- <code title="get /accounts/{account_id}/magic/sites/{site_id}">client.magicTransit.sites.<a href="./src/resources/magic-transit/sites/sites.ts">get</a>(siteId, { ...params }) -> SiteGetResponse</code>
+
 ### ACLs
+
+Types:
+
+- <code><a href="./src/resources/magic-transit/sites/acls.ts">ACLCreateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/sites/acls.ts">ACLUpdateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/sites/acls.ts">ACLListResponse</a></code>
+- <code><a href="./src/resources/magic-transit/sites/acls.ts">ACLDeleteResponse</a></code>
+- <code><a href="./src/resources/magic-transit/sites/acls.ts">ACLGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/magic/sites/{site_id}/acls">client.magicTransit.sites.acls.<a href="./src/resources/magic-transit/sites/acls.ts">create</a>(siteId, { ...params }) -> ACLCreateResponse</code>
+- <code title="put /accounts/{account_id}/magic/sites/{site_id}/acls/{acl_identifier}">client.magicTransit.sites.acls.<a href="./src/resources/magic-transit/sites/acls.ts">update</a>(siteId, aclIdentifier, { ...params }) -> ACLUpdateResponse</code>
+- <code title="get /accounts/{account_id}/magic/sites/{site_id}/acls">client.magicTransit.sites.acls.<a href="./src/resources/magic-transit/sites/acls.ts">list</a>(siteId, { ...params }) -> ACLListResponse</code>
+- <code title="delete /accounts/{account_id}/magic/sites/{site_id}/acls/{acl_identifier}">client.magicTransit.sites.acls.<a href="./src/resources/magic-transit/sites/acls.ts">delete</a>(siteId, aclIdentifier, { ...params }) -> ACLDeleteResponse</code>
+- <code title="get /accounts/{account_id}/magic/sites/{site_id}/acls/{acl_identifier}">client.magicTransit.sites.acls.<a href="./src/resources/magic-transit/sites/acls.ts">get</a>(siteId, aclIdentifier, { ...params }) -> ACLGetResponse</code>
 
 ### Lans
 
+Types:
+
+- <code><a href="./src/resources/magic-transit/sites/lans.ts">LanCreateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/sites/lans.ts">LanUpdateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/sites/lans.ts">LanListResponse</a></code>
+- <code><a href="./src/resources/magic-transit/sites/lans.ts">LanDeleteResponse</a></code>
+- <code><a href="./src/resources/magic-transit/sites/lans.ts">LanGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/magic/sites/{site_id}/lans">client.magicTransit.sites.lans.<a href="./src/resources/magic-transit/sites/lans.ts">create</a>(siteId, { ...params }) -> LanCreateResponse</code>
+- <code title="put /accounts/{account_id}/magic/sites/{site_id}/lans/{lan_id}">client.magicTransit.sites.lans.<a href="./src/resources/magic-transit/sites/lans.ts">update</a>(siteId, lanId, { ...params }) -> LanUpdateResponse</code>
+- <code title="get /accounts/{account_id}/magic/sites/{site_id}/lans">client.magicTransit.sites.lans.<a href="./src/resources/magic-transit/sites/lans.ts">list</a>(siteId, { ...params }) -> LanListResponse</code>
+- <code title="delete /accounts/{account_id}/magic/sites/{site_id}/lans/{lan_id}">client.magicTransit.sites.lans.<a href="./src/resources/magic-transit/sites/lans.ts">delete</a>(siteId, lanId, { ...params }) -> LanDeleteResponse</code>
+- <code title="get /accounts/{account_id}/magic/sites/{site_id}/lans/{lan_id}">client.magicTransit.sites.lans.<a href="./src/resources/magic-transit/sites/lans.ts">get</a>(siteId, lanId, { ...params }) -> LanGetResponse</code>
+
 ### Wans
+
+Types:
+
+- <code><a href="./src/resources/magic-transit/sites/wans.ts">WanCreateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/sites/wans.ts">WanUpdateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/sites/wans.ts">WanListResponse</a></code>
+- <code><a href="./src/resources/magic-transit/sites/wans.ts">WanDeleteResponse</a></code>
+- <code><a href="./src/resources/magic-transit/sites/wans.ts">WanGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/magic/sites/{site_id}/wans">client.magicTransit.sites.wans.<a href="./src/resources/magic-transit/sites/wans.ts">create</a>(siteId, { ...params }) -> WanCreateResponse</code>
+- <code title="put /accounts/{account_id}/magic/sites/{site_id}/wans/{wan_id}">client.magicTransit.sites.wans.<a href="./src/resources/magic-transit/sites/wans.ts">update</a>(siteId, wanId, { ...params }) -> WanUpdateResponse</code>
+- <code title="get /accounts/{account_id}/magic/sites/{site_id}/wans">client.magicTransit.sites.wans.<a href="./src/resources/magic-transit/sites/wans.ts">list</a>(siteId, { ...params }) -> WanListResponse</code>
+- <code title="delete /accounts/{account_id}/magic/sites/{site_id}/wans/{wan_id}">client.magicTransit.sites.wans.<a href="./src/resources/magic-transit/sites/wans.ts">delete</a>(siteId, wanId, { ...params }) -> WanDeleteResponse</code>
+- <code title="get /accounts/{account_id}/magic/sites/{site_id}/wans/{wan_id}">client.magicTransit.sites.wans.<a href="./src/resources/magic-transit/sites/wans.ts">get</a>(siteId, wanId, { ...params }) -> WanGetResponse</code>
 
 # MagicNetworkMonitoring
 

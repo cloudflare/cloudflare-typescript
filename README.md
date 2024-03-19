@@ -65,36 +65,6 @@ main();
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
 
-## File Uploads
-
-Request parameters that correspond to file uploads can be passed in many different forms:
-
-- `File` (or an object with the same structure)
-- a `fetch` `Response` (or an object with the same structure)
-- an `fs.ReadStream`
-- the return value of our `toFile` helper
-
-```ts
-import fs from 'fs';
-import fetch from 'node-fetch';
-import Cloudflare, { toFile } from 'cloudflare';
-
-const cloudflare = new Cloudflare();
-
-// If you have access to Node `fs` we recommend using `fs.createReadStream()`:
-await cloudflare.images.v1.create({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
-
-// Or if you have the web `File` API you can pass a `File` instance:
-await cloudflare.images.v1.create({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
-
-// You can also pass a `fetch` `Response`:
-await cloudflare.images.v1.create({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
-
-// Finally, if none of the above are convenient, you can use our `toFile` helper:
-await cloudflare.images.v1.create({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
-await cloudflare.images.v1.create({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
-```
-
 ## Handling errors
 
 When the library is unable to connect to the API,
