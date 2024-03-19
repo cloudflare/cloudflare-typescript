@@ -1,4 +1,4 @@
-// File generated from our OpenAPI spec by Stainless.
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export { ColoListResponse, ColoListParams, Colos } from './colos';
 export { DEX } from './dex';

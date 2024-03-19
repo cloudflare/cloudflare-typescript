@@ -1,4 +1,4 @@
-// File generated from our OpenAPI spec by Stainless.
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export { BotClassGetResponse, BotClassGetParams, BotClass } from './bot-class';
 export { DeviceTypeGetResponse, DeviceTypeGetParams, DeviceType } from './device-type';

@@ -1,4 +1,4 @@
-// File generated from our OpenAPI spec by Stainless.
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from 'cloudflare/resource';
 import * as DispatchAPI from 'cloudflare/resources/workers-for-platforms/dispatch/dispatch';
