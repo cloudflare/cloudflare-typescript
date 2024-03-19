@@ -1,4 +1,4 @@
-// File generated from our OpenAPI spec by Stainless.
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from 'cloudflare/resource';
 import * as NamespacesAPI from 'cloudflare/resources/durable-objects/namespaces/namespaces';

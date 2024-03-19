@@ -1,4 +1,4 @@
-// File generated from our OpenAPI spec by Stainless.
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export { Layer3TimeseriesResponse, Layer3TimeseriesParams, Layer3 } from './layer3';
 export {

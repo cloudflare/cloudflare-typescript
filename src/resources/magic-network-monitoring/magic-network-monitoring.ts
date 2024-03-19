@@ -1,4 +1,4 @@
-// File generated from our OpenAPI spec by Stainless.
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from 'cloudflare/resource';
 import * as ConfigsAPI from 'cloudflare/resources/magic-network-monitoring/configs/configs';
