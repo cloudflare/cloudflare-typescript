@@ -1,4 +1,4 @@
-// File generated from our OpenAPI spec by Stainless.
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import * as Core from './core';
 import * as Errors from './error';
@@ -556,7 +556,10 @@ export namespace Cloudflare {
   export import HealthcheckDeleteResponse = API.HealthcheckDeleteResponse;
   export import HealthcheckCreateParams = API.HealthcheckCreateParams;
   export import HealthcheckUpdateParams = API.HealthcheckUpdateParams;
+  export import HealthcheckListParams = API.HealthcheckListParams;
+  export import HealthcheckDeleteParams = API.HealthcheckDeleteParams;
   export import HealthcheckEditParams = API.HealthcheckEditParams;
+  export import HealthcheckGetParams = API.HealthcheckGetParams;
 
   export import KeylessCertificates = API.KeylessCertificates;
   export import TLSCertificatesAndHostnamesBase = API.TLSCertificatesAndHostnamesBase;

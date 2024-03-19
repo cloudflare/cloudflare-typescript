@@ -1,4 +1,4 @@
-// File generated from our OpenAPI spec by Stainless.
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
@@ -9,13 +9,13 @@ export class ACLs extends APIResource {
    * Creates a new Site ACL.
    */
   create(
-    accountIdentifier: string,
-    siteIdentifier: string,
-    body: ACLCreateParams,
+    siteId: string,
+    params: ACLCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ACLCreateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountIdentifier}/magic/sites/${siteIdentifier}/acls`, {
+      this._client.post(`/accounts/${account_id}/magic/sites/${siteId}/acls`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: ACLCreateResponse }>
@@ -26,14 +26,14 @@ export class ACLs extends APIResource {
    * Update a specific Site ACL.
    */
   update(
-    accountIdentifier: string,
-    siteIdentifier: string,
+    siteId: string,
     aclIdentifier: string,
-    body: ACLUpdateParams,
+    params: ACLUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ACLUpdateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.put(`/accounts/${accountIdentifier}/magic/sites/${siteIdentifier}/acls/${aclIdentifier}`, {
+      this._client.put(`/accounts/${account_id}/magic/sites/${siteId}/acls/${aclIdentifier}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: ACLUpdateResponse }>
@@ -44,15 +44,15 @@ export class ACLs extends APIResource {
    * Lists Site ACLs associated with an account.
    */
   list(
-    accountIdentifier: string,
-    siteIdentifier: string,
+    siteId: string,
+    params: ACLListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ACLListResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(
-        `/accounts/${accountIdentifier}/magic/sites/${siteIdentifier}/acls`,
-        options,
-      ) as Core.APIPromise<{ result: ACLListResponse }>
+      this._client.get(`/accounts/${account_id}/magic/sites/${siteId}/acls`, options) as Core.APIPromise<{
+        result: ACLListResponse;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -60,14 +60,15 @@ export class ACLs extends APIResource {
    * Remove a specific Site ACL.
    */
   delete(
-    accountIdentifier: string,
-    siteIdentifier: string,
+    siteId: string,
     aclIdentifier: string,
+    params: ACLDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ACLDeleteResponse> {
+    const { account_id } = params;
     return (
       this._client.delete(
-        `/accounts/${accountIdentifier}/magic/sites/${siteIdentifier}/acls/${aclIdentifier}`,
+        `/accounts/${account_id}/magic/sites/${siteId}/acls/${aclIdentifier}`,
         options,
       ) as Core.APIPromise<{ result: ACLDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -77,14 +78,15 @@ export class ACLs extends APIResource {
    * Get a specific Site ACL.
    */
   get(
-    accountIdentifier: string,
-    siteIdentifier: string,
+    siteId: string,
     aclIdentifier: string,
+    params: ACLGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ACLGetResponse> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountIdentifier}/magic/sites/${siteIdentifier}/acls/${aclIdentifier}`,
+        `/accounts/${account_id}/magic/sites/${siteId}/acls/${aclIdentifier}`,
         options,
       ) as Core.APIPromise<{ result: ACLGetResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -513,6 +515,14 @@ export namespace ACLGetResponse {
 }
 
 export interface ACLCreateParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
   acl?: ACLCreateParams.ACL;
 }
 
@@ -587,6 +597,14 @@ export namespace ACLCreateParams {
 }
 
 export interface ACLUpdateParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
   acl?: ACLUpdateParams.ACL;
 }
 
@@ -660,6 +678,27 @@ export namespace ACLUpdateParams {
   }
 }
 
+export interface ACLListParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface ACLDeleteParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface ACLGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export namespace ACLs {
   export import ACLCreateResponse = ACLsAPI.ACLCreateResponse;
   export import ACLUpdateResponse = ACLsAPI.ACLUpdateResponse;
@@ -668,4 +707,7 @@ export namespace ACLs {
   export import ACLGetResponse = ACLsAPI.ACLGetResponse;
   export import ACLCreateParams = ACLsAPI.ACLCreateParams;
   export import ACLUpdateParams = ACLsAPI.ACLUpdateParams;
+  export import ACLListParams = ACLsAPI.ACLListParams;
+  export import ACLDeleteParams = ACLsAPI.ACLDeleteParams;
+  export import ACLGetParams = ACLsAPI.ACLGetParams;
 }

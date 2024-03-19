@@ -1,4 +1,4 @@
-// File generated from our OpenAPI spec by Stainless.
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
@@ -10,13 +10,13 @@ export class GRETunnels extends APIResource {
    * parameter to only run validation without persisting changes.
    */
   create(
-    accountIdentifier: string,
-    body: GRETunnelCreateParams,
+    params: GRETunnelCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<GRETunnelCreateResponse> {
+    const { account_id, body } = params;
     return (
-      this._client.post(`/accounts/${accountIdentifier}/magic/gre_tunnels`, {
-        body,
+      this._client.post(`/accounts/${account_id}/magic/gre_tunnels`, {
+        body: body,
         ...options,
       }) as Core.APIPromise<{ result: GRETunnelCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -27,13 +27,13 @@ export class GRETunnels extends APIResource {
    * parameter to only run validation without persisting changes.
    */
   update(
-    accountIdentifier: string,
     tunnelIdentifier: string,
-    body: GRETunnelUpdateParams,
+    params: GRETunnelUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<GRETunnelUpdateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.put(`/accounts/${accountIdentifier}/magic/gre_tunnels/${tunnelIdentifier}`, {
+      this._client.put(`/accounts/${account_id}/magic/gre_tunnels/${tunnelIdentifier}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: GRETunnelUpdateResponse }>
@@ -43,9 +43,10 @@ export class GRETunnels extends APIResource {
   /**
    * Lists GRE tunnels associated with an account.
    */
-  list(accountIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<GRETunnelListResponse> {
+  list(params: GRETunnelListParams, options?: Core.RequestOptions): Core.APIPromise<GRETunnelListResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountIdentifier}/magic/gre_tunnels`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/magic/gre_tunnels`, options) as Core.APIPromise<{
         result: GRETunnelListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -56,13 +57,14 @@ export class GRETunnels extends APIResource {
    * an optional query parameter to only run validation without persisting changes.
    */
   delete(
-    accountIdentifier: string,
     tunnelIdentifier: string,
+    params: GRETunnelDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<GRETunnelDeleteResponse> {
+    const { account_id } = params;
     return (
       this._client.delete(
-        `/accounts/${accountIdentifier}/magic/gre_tunnels/${tunnelIdentifier}`,
+        `/accounts/${account_id}/magic/gre_tunnels/${tunnelIdentifier}`,
         options,
       ) as Core.APIPromise<{ result: GRETunnelDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -72,13 +74,14 @@ export class GRETunnels extends APIResource {
    * Lists informtion for a specific GRE tunnel.
    */
   get(
-    accountIdentifier: string,
     tunnelIdentifier: string,
+    params: GRETunnelGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<GRETunnelGetResponse> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountIdentifier}/magic/gre_tunnels/${tunnelIdentifier}`,
+        `/accounts/${account_id}/magic/gre_tunnels/${tunnelIdentifier}`,
         options,
       ) as Core.APIPromise<{ result: GRETunnelGetResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -305,47 +308,66 @@ export interface GRETunnelGetResponse {
   gre_tunnel?: unknown;
 }
 
-export type GRETunnelCreateParams = unknown;
+export interface GRETunnelCreateParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
+}
 
 export interface GRETunnelUpdateParams {
   /**
-   * The IP address assigned to the Cloudflare side of the GRE tunnel.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: The IP address assigned to the Cloudflare side of the GRE tunnel.
    */
   cloudflare_gre_endpoint: string;
 
   /**
-   * The IP address assigned to the customer side of the GRE tunnel.
+   * Body param: The IP address assigned to the customer side of the GRE tunnel.
    */
   customer_gre_endpoint: string;
 
   /**
-   * A 31-bit prefix (/31 in CIDR notation) supporting two hosts, one for each side
-   * of the tunnel. Select the subnet from the following private IP space:
+   * Body param: A 31-bit prefix (/31 in CIDR notation) supporting two hosts, one for
+   * each side of the tunnel. Select the subnet from the following private IP space:
    * 10.0.0.0–10.255.255.255, 172.16.0.0–172.31.255.255, 192.168.0.0–192.168.255.255.
    */
   interface_address: string;
 
   /**
-   * The name of the tunnel. The name cannot contain spaces or special characters,
-   * must be 15 characters or less, and cannot share a name with another GRE tunnel.
+   * Body param: The name of the tunnel. The name cannot contain spaces or special
+   * characters, must be 15 characters or less, and cannot share a name with another
+   * GRE tunnel.
    */
   name: string;
 
   /**
-   * An optional description of the GRE tunnel.
+   * Body param: An optional description of the GRE tunnel.
    */
   description?: string;
 
+  /**
+   * Body param:
+   */
   health_check?: GRETunnelUpdateParams.HealthCheck;
 
   /**
-   * Maximum Transmission Unit (MTU) in bytes for the GRE tunnel. The minimum value
-   * is 576.
+   * Body param: Maximum Transmission Unit (MTU) in bytes for the GRE tunnel. The
+   * minimum value is 576.
    */
   mtu?: number;
 
   /**
-   * Time To Live (TTL) in number of hops of the GRE tunnel.
+   * Body param: Time To Live (TTL) in number of hops of the GRE tunnel.
    */
   ttl?: number;
 }
@@ -388,6 +410,27 @@ export namespace GRETunnelUpdateParams {
   }
 }
 
+export interface GRETunnelListParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface GRETunnelDeleteParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface GRETunnelGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export namespace GRETunnels {
   export import GRETunnelCreateResponse = GRETunnelsAPI.GRETunnelCreateResponse;
   export import GRETunnelUpdateResponse = GRETunnelsAPI.GRETunnelUpdateResponse;
@@ -396,4 +439,7 @@ export namespace GRETunnels {
   export import GRETunnelGetResponse = GRETunnelsAPI.GRETunnelGetResponse;
   export import GRETunnelCreateParams = GRETunnelsAPI.GRETunnelCreateParams;
   export import GRETunnelUpdateParams = GRETunnelsAPI.GRETunnelUpdateParams;
+  export import GRETunnelListParams = GRETunnelsAPI.GRETunnelListParams;
+  export import GRETunnelDeleteParams = GRETunnelsAPI.GRETunnelDeleteParams;
+  export import GRETunnelGetParams = GRETunnelsAPI.GRETunnelGetParams;
 }

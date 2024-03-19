@@ -1,4 +1,4 @@
-// File generated from our OpenAPI spec by Stainless.
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export { ACM } from './acm/acm';
 export {
@@ -80,7 +80,10 @@ export {
   HealthcheckDeleteResponse,
   HealthcheckCreateParams,
   HealthcheckUpdateParams,
+  HealthcheckListParams,
+  HealthcheckDeleteParams,
   HealthcheckEditParams,
+  HealthcheckGetParams,
   Healthchecks,
 } from './healthchecks/healthchecks';
 export { Hostnames } from './hostnames/hostnames';

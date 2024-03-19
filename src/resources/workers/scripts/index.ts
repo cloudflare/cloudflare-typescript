@@ -1,4 +1,4 @@
-// File generated from our OpenAPI spec by Stainless.
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export { ContentUpdateParams, Content } from './content';
 export { ContentV2GetParams, ContentV2 } from './content-v2';

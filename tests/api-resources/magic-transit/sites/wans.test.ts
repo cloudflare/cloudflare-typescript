@@ -1,4 +1,4 @@
-// File generated from our OpenAPI spec by Stainless.
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
@@ -11,12 +11,10 @@ const cloudflare = new Cloudflare({
 
 describe('resource wans', () => {
   // skipped: tests are disabled for the time being
-  test.skip('create', async () => {
-    const responsePromise = cloudflare.magicTransit.sites.wans.create(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      {},
-    );
+  test.skip('create: only required params', async () => {
+    const responsePromise = cloudflare.magicTransit.sites.wans.create('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -27,12 +25,29 @@ describe('resource wans', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('update', async () => {
+  test.skip('create: required and optional params', async () => {
+    const response = await cloudflare.magicTransit.sites.wans.create('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      wan: {
+        description: 'string',
+        physport: 1,
+        priority: 0,
+        static_addressing: {
+          address: '192.0.2.0/24',
+          gateway_address: '192.0.2.1',
+          secondary_address: '192.0.2.0/24',
+        },
+        vlan_tag: 0,
+      },
+    });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.magicTransit.sites.wans.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      {},
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -44,11 +59,32 @@ describe('resource wans', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
-    const responsePromise = cloudflare.magicTransit.sites.wans.list(
+  test.skip('update: required and optional params', async () => {
+    const response = await cloudflare.magicTransit.sites.wans.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        wan: {
+          description: 'string',
+          physport: 1,
+          priority: 0,
+          static_addressing: {
+            address: '192.0.2.0/24',
+            gateway_address: '192.0.2.1',
+            secondary_address: '192.0.2.0/24',
+          },
+          vlan_tag: 0,
+        },
+      },
     );
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list: only required params', async () => {
+    const responsePromise = cloudflare.magicTransit.sites.wans.list('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -59,23 +95,18 @@ describe('resource wans', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.magicTransit.sites.wans.list(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('list: required and optional params', async () => {
+    const response = await cloudflare.magicTransit.sites.wans.list('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
+  test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.magicTransit.sites.wans.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
-      '023e105f4ecef8ad9ca31a8372d0c353',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -87,11 +118,20 @@ describe('resource wans', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
+  test.skip('delete: required and optional params', async () => {
+    const response = await cloudflare.magicTransit.sites.wans.delete(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get: only required params', async () => {
     const responsePromise = cloudflare.magicTransit.sites.wans.get(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
-      '023e105f4ecef8ad9ca31a8372d0c353',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -103,15 +143,11 @@ describe('resource wans', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.magicTransit.sites.wans.get(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.magicTransit.sites.wans.get(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
   });
 });

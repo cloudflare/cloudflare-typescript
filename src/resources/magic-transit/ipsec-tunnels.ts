@@ -1,4 +1,4 @@
-// File generated from our OpenAPI spec by Stainless.
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
@@ -11,12 +11,12 @@ export class IPSECTunnels extends APIResource {
    * changes.
    */
   create(
-    accountIdentifier: string,
-    body: IPSECTunnelCreateParams,
+    params: IPSECTunnelCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IPSECTunnelCreateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountIdentifier}/magic/ipsec_tunnels`, {
+      this._client.post(`/accounts/${account_id}/magic/ipsec_tunnels`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: IPSECTunnelCreateResponse }>
@@ -29,13 +29,13 @@ export class IPSECTunnels extends APIResource {
    * without persisting changes.
    */
   update(
-    accountIdentifier: string,
     tunnelIdentifier: string,
-    body: IPSECTunnelUpdateParams,
+    params: IPSECTunnelUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IPSECTunnelUpdateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.put(`/accounts/${accountIdentifier}/magic/ipsec_tunnels/${tunnelIdentifier}`, {
+      this._client.put(`/accounts/${account_id}/magic/ipsec_tunnels/${tunnelIdentifier}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: IPSECTunnelUpdateResponse }>
@@ -45,9 +45,13 @@ export class IPSECTunnels extends APIResource {
   /**
    * Lists IPsec tunnels associated with an account.
    */
-  list(accountIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<IPSECTunnelListResponse> {
+  list(
+    params: IPSECTunnelListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IPSECTunnelListResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountIdentifier}/magic/ipsec_tunnels`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/magic/ipsec_tunnels`, options) as Core.APIPromise<{
         result: IPSECTunnelListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -59,13 +63,14 @@ export class IPSECTunnels extends APIResource {
    * without persisting changes.
    */
   delete(
-    accountIdentifier: string,
     tunnelIdentifier: string,
+    params: IPSECTunnelDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IPSECTunnelDeleteResponse> {
+    const { account_id } = params;
     return (
       this._client.delete(
-        `/accounts/${accountIdentifier}/magic/ipsec_tunnels/${tunnelIdentifier}`,
+        `/accounts/${account_id}/magic/ipsec_tunnels/${tunnelIdentifier}`,
         options,
       ) as Core.APIPromise<{ result: IPSECTunnelDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -75,13 +80,14 @@ export class IPSECTunnels extends APIResource {
    * Lists details for a specific IPsec tunnel.
    */
   get(
-    accountIdentifier: string,
     tunnelIdentifier: string,
+    params: IPSECTunnelGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IPSECTunnelGetResponse> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountIdentifier}/magic/ipsec_tunnels/${tunnelIdentifier}`,
+        `/accounts/${account_id}/magic/ipsec_tunnels/${tunnelIdentifier}`,
         options,
       ) as Core.APIPromise<{ result: IPSECTunnelGetResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -95,13 +101,14 @@ export class IPSECTunnels extends APIResource {
    * safe place.
    */
   pskGenerate(
-    accountIdentifier: string,
     tunnelIdentifier: string,
+    params: IPSECTunnelPSKGenerateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IPSECTunnelPSKGenerateResponse> {
+    const { account_id } = params;
     return (
       this._client.post(
-        `/accounts/${accountIdentifier}/magic/ipsec_tunnels/${tunnelIdentifier}/psk_generate`,
+        `/accounts/${account_id}/magic/ipsec_tunnels/${tunnelIdentifier}/psk_generate`,
         options,
       ) as Core.APIPromise<{ result: IPSECTunnelPSKGenerateResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -365,41 +372,50 @@ export namespace IPSECTunnelPSKGenerateResponse {
 
 export interface IPSECTunnelCreateParams {
   /**
-   * The IP address assigned to the Cloudflare side of the IPsec tunnel.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: The IP address assigned to the Cloudflare side of the IPsec tunnel.
    */
   cloudflare_endpoint: string;
 
   /**
-   * A 31-bit prefix (/31 in CIDR notation) supporting two hosts, one for each side
-   * of the tunnel. Select the subnet from the following private IP space:
+   * Body param: A 31-bit prefix (/31 in CIDR notation) supporting two hosts, one for
+   * each side of the tunnel. Select the subnet from the following private IP space:
    * 10.0.0.0–10.255.255.255, 172.16.0.0–172.31.255.255, 192.168.0.0–192.168.255.255.
    */
   interface_address: string;
 
   /**
-   * The name of the IPsec tunnel. The name cannot share a name with other tunnels.
+   * Body param: The name of the IPsec tunnel. The name cannot share a name with
+   * other tunnels.
    */
   name: string;
 
   /**
-   * The IP address assigned to the customer side of the IPsec tunnel.
+   * Body param: The IP address assigned to the customer side of the IPsec tunnel.
    */
   customer_endpoint?: string;
 
   /**
-   * An optional description forthe IPsec tunnel.
+   * Body param: An optional description forthe IPsec tunnel.
    */
   description?: string;
 
+  /**
+   * Body param:
+   */
   health_check?: IPSECTunnelCreateParams.HealthCheck;
 
   /**
-   * A randomly generated or provided string for use in the IPsec tunnel.
+   * Body param: A randomly generated or provided string for use in the IPsec tunnel.
    */
   psk?: string;
 
   /**
-   * If `true`, then IPsec replay protection will be supported in the
+   * Body param: If `true`, then IPsec replay protection will be supported in the
    * Cloudflare-to-customer direction.
    */
   replay_protection?: boolean;
@@ -445,41 +461,50 @@ export namespace IPSECTunnelCreateParams {
 
 export interface IPSECTunnelUpdateParams {
   /**
-   * The IP address assigned to the Cloudflare side of the IPsec tunnel.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: The IP address assigned to the Cloudflare side of the IPsec tunnel.
    */
   cloudflare_endpoint: string;
 
   /**
-   * A 31-bit prefix (/31 in CIDR notation) supporting two hosts, one for each side
-   * of the tunnel. Select the subnet from the following private IP space:
+   * Body param: A 31-bit prefix (/31 in CIDR notation) supporting two hosts, one for
+   * each side of the tunnel. Select the subnet from the following private IP space:
    * 10.0.0.0–10.255.255.255, 172.16.0.0–172.31.255.255, 192.168.0.0–192.168.255.255.
    */
   interface_address: string;
 
   /**
-   * The name of the IPsec tunnel. The name cannot share a name with other tunnels.
+   * Body param: The name of the IPsec tunnel. The name cannot share a name with
+   * other tunnels.
    */
   name: string;
 
   /**
-   * The IP address assigned to the customer side of the IPsec tunnel.
+   * Body param: The IP address assigned to the customer side of the IPsec tunnel.
    */
   customer_endpoint?: string;
 
   /**
-   * An optional description forthe IPsec tunnel.
+   * Body param: An optional description forthe IPsec tunnel.
    */
   description?: string;
 
+  /**
+   * Body param:
+   */
   health_check?: IPSECTunnelUpdateParams.HealthCheck;
 
   /**
-   * A randomly generated or provided string for use in the IPsec tunnel.
+   * Body param: A randomly generated or provided string for use in the IPsec tunnel.
    */
   psk?: string;
 
   /**
-   * If `true`, then IPsec replay protection will be supported in the
+   * Body param: If `true`, then IPsec replay protection will be supported in the
    * Cloudflare-to-customer direction.
    */
   replay_protection?: boolean;
@@ -523,6 +548,34 @@ export namespace IPSECTunnelUpdateParams {
   }
 }
 
+export interface IPSECTunnelListParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface IPSECTunnelDeleteParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface IPSECTunnelGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface IPSECTunnelPSKGenerateParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export namespace IPSECTunnels {
   export import IPSECTunnelCreateResponse = IPSECTunnelsAPI.IPSECTunnelCreateResponse;
   export import IPSECTunnelUpdateResponse = IPSECTunnelsAPI.IPSECTunnelUpdateResponse;
@@ -532,4 +585,8 @@ export namespace IPSECTunnels {
   export import IPSECTunnelPSKGenerateResponse = IPSECTunnelsAPI.IPSECTunnelPSKGenerateResponse;
   export import IPSECTunnelCreateParams = IPSECTunnelsAPI.IPSECTunnelCreateParams;
   export import IPSECTunnelUpdateParams = IPSECTunnelsAPI.IPSECTunnelUpdateParams;
+  export import IPSECTunnelListParams = IPSECTunnelsAPI.IPSECTunnelListParams;
+  export import IPSECTunnelDeleteParams = IPSECTunnelsAPI.IPSECTunnelDeleteParams;
+  export import IPSECTunnelGetParams = IPSECTunnelsAPI.IPSECTunnelGetParams;
+  export import IPSECTunnelPSKGenerateParams = IPSECTunnelsAPI.IPSECTunnelPSKGenerateParams;
 }

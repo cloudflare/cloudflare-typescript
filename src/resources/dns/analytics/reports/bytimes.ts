@@ -1,8 +1,7 @@
-// File generated from our OpenAPI spec by Stainless.
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as BytimesAPI from 'cloudflare/resources/dns/analytics/reports/bytimes';
 
 export class Bytimes extends APIResource {
@@ -14,21 +13,12 @@ export class Bytimes extends APIResource {
    * for detailed information about the available query parameters.
    */
   get(
-    identifier: string,
-    query?: BytimeGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DNSDNSAnalyticsAPIReportBytime>;
-  get(identifier: string, options?: Core.RequestOptions): Core.APIPromise<DNSDNSAnalyticsAPIReportBytime>;
-  get(
-    identifier: string,
-    query: BytimeGetParams | Core.RequestOptions = {},
+    params: BytimeGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DNSDNSAnalyticsAPIReportBytime> {
-    if (isRequestOptions(query)) {
-      return this.get(identifier, {}, query);
-    }
+    const { zone_id, ...query } = params;
     return (
-      this._client.get(`/zones/${identifier}/dns_analytics/report/bytime`, {
+      this._client.get(`/zones/${zone_id}/dns_analytics/report/bytime`, {
         query,
         ...options,
       }) as Core.APIPromise<{ result: DNSDNSAnalyticsAPIReportBytime }>
@@ -151,38 +141,43 @@ export namespace DNSDNSAnalyticsAPIReportBytime {
 
 export interface BytimeGetParams {
   /**
-   * A comma-separated list of dimensions to group results by.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Query param: A comma-separated list of dimensions to group results by.
    */
   dimensions?: string;
 
   /**
-   * Segmentation filter in 'attribute operator value' format.
+   * Query param: Segmentation filter in 'attribute operator value' format.
    */
   filters?: string;
 
   /**
-   * Limit number of returned metrics.
+   * Query param: Limit number of returned metrics.
    */
   limit?: number;
 
   /**
-   * A comma-separated list of metrics to query.
+   * Query param: A comma-separated list of metrics to query.
    */
   metrics?: string;
 
   /**
-   * Start date and time of requesting data period in ISO 8601 format.
+   * Query param: Start date and time of requesting data period in ISO 8601 format.
    */
   since?: string;
 
   /**
-   * A comma-separated list of dimensions to sort by, where each dimension may be
-   * prefixed by - (descending) or + (ascending).
+   * Query param: A comma-separated list of dimensions to sort by, where each
+   * dimension may be prefixed by - (descending) or + (ascending).
    */
   sort?: string;
 
   /**
-   * Unit of time to group data by.
+   * Query param: Unit of time to group data by.
    */
   time_delta?:
     | 'all'
@@ -197,7 +192,7 @@ export interface BytimeGetParams {
     | 'minute';
 
   /**
-   * End date and time of requesting data period in ISO 8601 format.
+   * Query param: End date and time of requesting data period in ISO 8601 format.
    */
   until?: string;
 }

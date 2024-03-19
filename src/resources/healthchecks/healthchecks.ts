@@ -1,4 +1,4 @@
-// File generated from our OpenAPI spec by Stainless.
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
@@ -12,12 +12,12 @@ export class Healthchecks extends APIResource {
    * Create a new health check.
    */
   create(
-    zoneIdentifier: string,
-    body: HealthcheckCreateParams,
+    params: HealthcheckCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<HealthchecksHealthchecks> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.post(`/zones/${zoneIdentifier}/healthchecks`, { body, ...options }) as Core.APIPromise<{
+      this._client.post(`/zones/${zone_id}/healthchecks`, { body, ...options }) as Core.APIPromise<{
         result: HealthchecksHealthchecks;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -27,13 +27,13 @@ export class Healthchecks extends APIResource {
    * Update a configured health check.
    */
   update(
-    zoneIdentifier: string,
-    identifier: string,
-    body: HealthcheckUpdateParams,
+    healthcheckId: string,
+    params: HealthcheckUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<HealthchecksHealthchecks> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.put(`/zones/${zoneIdentifier}/healthchecks/${identifier}`, {
+      this._client.put(`/zones/${zone_id}/healthchecks/${healthcheckId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: HealthchecksHealthchecks }>
@@ -44,11 +44,12 @@ export class Healthchecks extends APIResource {
    * List configured health checks.
    */
   list(
-    zoneIdentifier: string,
+    params: HealthcheckListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<HealthcheckListResponse | null> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneIdentifier}/healthchecks`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/healthchecks`, options) as Core.APIPromise<{
         result: HealthcheckListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -58,12 +59,13 @@ export class Healthchecks extends APIResource {
    * Delete a health check.
    */
   delete(
-    zoneIdentifier: string,
-    identifier: string,
+    healthcheckId: string,
+    params: HealthcheckDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<HealthcheckDeleteResponse> {
+    const { zone_id } = params;
     return (
-      this._client.delete(`/zones/${zoneIdentifier}/healthchecks/${identifier}`, options) as Core.APIPromise<{
+      this._client.delete(`/zones/${zone_id}/healthchecks/${healthcheckId}`, options) as Core.APIPromise<{
         result: HealthcheckDeleteResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -73,13 +75,13 @@ export class Healthchecks extends APIResource {
    * Patch a configured health check.
    */
   edit(
-    zoneIdentifier: string,
-    identifier: string,
-    body: HealthcheckEditParams,
+    healthcheckId: string,
+    params: HealthcheckEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<HealthchecksHealthchecks> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zoneIdentifier}/healthchecks/${identifier}`, {
+      this._client.patch(`/zones/${zone_id}/healthchecks/${healthcheckId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: HealthchecksHealthchecks }>
@@ -90,12 +92,13 @@ export class Healthchecks extends APIResource {
    * Fetch a single configured health check.
    */
   get(
-    zoneIdentifier: string,
-    identifier: string,
+    healthcheckId: string,
+    params: HealthcheckGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<HealthchecksHealthchecks> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneIdentifier}/healthchecks/${identifier}`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/healthchecks/${healthcheckId}`, options) as Core.APIPromise<{
         result: HealthchecksHealthchecks;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -288,19 +291,25 @@ export interface HealthcheckDeleteResponse {
 
 export interface HealthcheckCreateParams {
   /**
-   * The hostname or IP address of the origin server to run health checks on.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: The hostname or IP address of the origin server to run health checks
+   * on.
    */
   address: string;
 
   /**
-   * A short name to identify the health check. Only alphanumeric characters, hyphens
-   * and underscores are allowed.
+   * Body param: A short name to identify the health check. Only alphanumeric
+   * characters, hyphens and underscores are allowed.
    */
   name: string;
 
   /**
-   * A list of regions from which to run health checks. Null means Cloudflare will
-   * pick a default region.
+   * Body param: A list of regions from which to run health checks. Null means
+   * Cloudflare will pick a default region.
    */
   check_regions?: Array<
     | 'WNAM'
@@ -320,58 +329,58 @@ export interface HealthcheckCreateParams {
   > | null;
 
   /**
-   * The number of consecutive fails required from a health check before changing the
-   * health to unhealthy.
+   * Body param: The number of consecutive fails required from a health check before
+   * changing the health to unhealthy.
    */
   consecutive_fails?: number;
 
   /**
-   * The number of consecutive successes required from a health check before changing
-   * the health to healthy.
+   * Body param: The number of consecutive successes required from a health check
+   * before changing the health to healthy.
    */
   consecutive_successes?: number;
 
   /**
-   * A human-readable description of the health check.
+   * Body param: A human-readable description of the health check.
    */
   description?: string;
 
   /**
-   * Parameters specific to an HTTP or HTTPS health check.
+   * Body param: Parameters specific to an HTTP or HTTPS health check.
    */
   http_config?: HealthcheckCreateParams.HTTPConfig | null;
 
   /**
-   * The interval between each health check. Shorter intervals may give quicker
-   * notifications if the origin status changes, but will increase load on the origin
-   * as we check from multiple locations.
+   * Body param: The interval between each health check. Shorter intervals may give
+   * quicker notifications if the origin status changes, but will increase load on
+   * the origin as we check from multiple locations.
    */
   interval?: number;
 
   /**
-   * The number of retries to attempt in case of a timeout before marking the origin
-   * as unhealthy. Retries are attempted immediately.
+   * Body param: The number of retries to attempt in case of a timeout before marking
+   * the origin as unhealthy. Retries are attempted immediately.
    */
   retries?: number;
 
   /**
-   * If suspended, no health checks are sent to the origin.
+   * Body param: If suspended, no health checks are sent to the origin.
    */
   suspended?: boolean;
 
   /**
-   * Parameters specific to TCP health check.
+   * Body param: Parameters specific to TCP health check.
    */
   tcp_config?: HealthcheckCreateParams.TcpConfig | null;
 
   /**
-   * The timeout (in seconds) before marking the health check as failed.
+   * Body param: The timeout (in seconds) before marking the health check as failed.
    */
   timeout?: number;
 
   /**
-   * The protocol to use for the health check. Currently supported protocols are
-   * 'HTTP', 'HTTPS' and 'TCP'.
+   * Body param: The protocol to use for the health check. Currently supported
+   * protocols are 'HTTP', 'HTTPS' and 'TCP'.
    */
   type?: string;
 }
@@ -444,19 +453,25 @@ export namespace HealthcheckCreateParams {
 
 export interface HealthcheckUpdateParams {
   /**
-   * The hostname or IP address of the origin server to run health checks on.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: The hostname or IP address of the origin server to run health checks
+   * on.
    */
   address: string;
 
   /**
-   * A short name to identify the health check. Only alphanumeric characters, hyphens
-   * and underscores are allowed.
+   * Body param: A short name to identify the health check. Only alphanumeric
+   * characters, hyphens and underscores are allowed.
    */
   name: string;
 
   /**
-   * A list of regions from which to run health checks. Null means Cloudflare will
-   * pick a default region.
+   * Body param: A list of regions from which to run health checks. Null means
+   * Cloudflare will pick a default region.
    */
   check_regions?: Array<
     | 'WNAM'
@@ -476,58 +491,58 @@ export interface HealthcheckUpdateParams {
   > | null;
 
   /**
-   * The number of consecutive fails required from a health check before changing the
-   * health to unhealthy.
+   * Body param: The number of consecutive fails required from a health check before
+   * changing the health to unhealthy.
    */
   consecutive_fails?: number;
 
   /**
-   * The number of consecutive successes required from a health check before changing
-   * the health to healthy.
+   * Body param: The number of consecutive successes required from a health check
+   * before changing the health to healthy.
    */
   consecutive_successes?: number;
 
   /**
-   * A human-readable description of the health check.
+   * Body param: A human-readable description of the health check.
    */
   description?: string;
 
   /**
-   * Parameters specific to an HTTP or HTTPS health check.
+   * Body param: Parameters specific to an HTTP or HTTPS health check.
    */
   http_config?: HealthcheckUpdateParams.HTTPConfig | null;
 
   /**
-   * The interval between each health check. Shorter intervals may give quicker
-   * notifications if the origin status changes, but will increase load on the origin
-   * as we check from multiple locations.
+   * Body param: The interval between each health check. Shorter intervals may give
+   * quicker notifications if the origin status changes, but will increase load on
+   * the origin as we check from multiple locations.
    */
   interval?: number;
 
   /**
-   * The number of retries to attempt in case of a timeout before marking the origin
-   * as unhealthy. Retries are attempted immediately.
+   * Body param: The number of retries to attempt in case of a timeout before marking
+   * the origin as unhealthy. Retries are attempted immediately.
    */
   retries?: number;
 
   /**
-   * If suspended, no health checks are sent to the origin.
+   * Body param: If suspended, no health checks are sent to the origin.
    */
   suspended?: boolean;
 
   /**
-   * Parameters specific to TCP health check.
+   * Body param: Parameters specific to TCP health check.
    */
   tcp_config?: HealthcheckUpdateParams.TcpConfig | null;
 
   /**
-   * The timeout (in seconds) before marking the health check as failed.
+   * Body param: The timeout (in seconds) before marking the health check as failed.
    */
   timeout?: number;
 
   /**
-   * The protocol to use for the health check. Currently supported protocols are
-   * 'HTTP', 'HTTPS' and 'TCP'.
+   * Body param: The protocol to use for the health check. Currently supported
+   * protocols are 'HTTP', 'HTTPS' and 'TCP'.
    */
   type?: string;
 }
@@ -598,21 +613,41 @@ export namespace HealthcheckUpdateParams {
   }
 }
 
+export interface HealthcheckListParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+export interface HealthcheckDeleteParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
 export interface HealthcheckEditParams {
   /**
-   * The hostname or IP address of the origin server to run health checks on.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: The hostname or IP address of the origin server to run health checks
+   * on.
    */
   address: string;
 
   /**
-   * A short name to identify the health check. Only alphanumeric characters, hyphens
-   * and underscores are allowed.
+   * Body param: A short name to identify the health check. Only alphanumeric
+   * characters, hyphens and underscores are allowed.
    */
   name: string;
 
   /**
-   * A list of regions from which to run health checks. Null means Cloudflare will
-   * pick a default region.
+   * Body param: A list of regions from which to run health checks. Null means
+   * Cloudflare will pick a default region.
    */
   check_regions?: Array<
     | 'WNAM'
@@ -632,58 +667,58 @@ export interface HealthcheckEditParams {
   > | null;
 
   /**
-   * The number of consecutive fails required from a health check before changing the
-   * health to unhealthy.
+   * Body param: The number of consecutive fails required from a health check before
+   * changing the health to unhealthy.
    */
   consecutive_fails?: number;
 
   /**
-   * The number of consecutive successes required from a health check before changing
-   * the health to healthy.
+   * Body param: The number of consecutive successes required from a health check
+   * before changing the health to healthy.
    */
   consecutive_successes?: number;
 
   /**
-   * A human-readable description of the health check.
+   * Body param: A human-readable description of the health check.
    */
   description?: string;
 
   /**
-   * Parameters specific to an HTTP or HTTPS health check.
+   * Body param: Parameters specific to an HTTP or HTTPS health check.
    */
   http_config?: HealthcheckEditParams.HTTPConfig | null;
 
   /**
-   * The interval between each health check. Shorter intervals may give quicker
-   * notifications if the origin status changes, but will increase load on the origin
-   * as we check from multiple locations.
+   * Body param: The interval between each health check. Shorter intervals may give
+   * quicker notifications if the origin status changes, but will increase load on
+   * the origin as we check from multiple locations.
    */
   interval?: number;
 
   /**
-   * The number of retries to attempt in case of a timeout before marking the origin
-   * as unhealthy. Retries are attempted immediately.
+   * Body param: The number of retries to attempt in case of a timeout before marking
+   * the origin as unhealthy. Retries are attempted immediately.
    */
   retries?: number;
 
   /**
-   * If suspended, no health checks are sent to the origin.
+   * Body param: If suspended, no health checks are sent to the origin.
    */
   suspended?: boolean;
 
   /**
-   * Parameters specific to TCP health check.
+   * Body param: Parameters specific to TCP health check.
    */
   tcp_config?: HealthcheckEditParams.TcpConfig | null;
 
   /**
-   * The timeout (in seconds) before marking the health check as failed.
+   * Body param: The timeout (in seconds) before marking the health check as failed.
    */
   timeout?: number;
 
   /**
-   * The protocol to use for the health check. Currently supported protocols are
-   * 'HTTP', 'HTTPS' and 'TCP'.
+   * Body param: The protocol to use for the health check. Currently supported
+   * protocols are 'HTTP', 'HTTPS' and 'TCP'.
    */
   type?: string;
 }
@@ -754,14 +789,26 @@ export namespace HealthcheckEditParams {
   }
 }
 
+export interface HealthcheckGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
 export namespace Healthchecks {
   export import HealthchecksHealthchecks = HealthchecksAPI.HealthchecksHealthchecks;
   export import HealthcheckListResponse = HealthchecksAPI.HealthcheckListResponse;
   export import HealthcheckDeleteResponse = HealthchecksAPI.HealthcheckDeleteResponse;
   export import HealthcheckCreateParams = HealthchecksAPI.HealthcheckCreateParams;
   export import HealthcheckUpdateParams = HealthchecksAPI.HealthcheckUpdateParams;
+  export import HealthcheckListParams = HealthchecksAPI.HealthcheckListParams;
+  export import HealthcheckDeleteParams = HealthchecksAPI.HealthcheckDeleteParams;
   export import HealthcheckEditParams = HealthchecksAPI.HealthcheckEditParams;
+  export import HealthcheckGetParams = HealthchecksAPI.HealthcheckGetParams;
   export import Previews = PreviewsAPI.Previews;
   export import PreviewDeleteResponse = PreviewsAPI.PreviewDeleteResponse;
   export import PreviewCreateParams = PreviewsAPI.PreviewCreateParams;
+  export import PreviewDeleteParams = PreviewsAPI.PreviewDeleteParams;
+  export import PreviewGetParams = PreviewsAPI.PreviewGetParams;
 }

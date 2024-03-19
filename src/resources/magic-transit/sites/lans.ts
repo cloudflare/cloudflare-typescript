@@ -1,4 +1,4 @@
-// File generated from our OpenAPI spec by Stainless.
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
@@ -10,13 +10,13 @@ export class Lans extends APIResource {
    * is required along with secondary and virtual address.
    */
   create(
-    accountIdentifier: string,
-    siteIdentifier: string,
-    body: LanCreateParams,
+    siteId: string,
+    params: LanCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<LanCreateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountIdentifier}/magic/sites/${siteIdentifier}/lans`, {
+      this._client.post(`/accounts/${account_id}/magic/sites/${siteId}/lans`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: LanCreateResponse }>
@@ -27,14 +27,14 @@ export class Lans extends APIResource {
    * Update a specific LAN.
    */
   update(
-    accountIdentifier: string,
-    siteIdentifier: string,
-    lanIdentifier: string,
-    body: LanUpdateParams,
+    siteId: string,
+    lanId: string,
+    params: LanUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<LanUpdateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.put(`/accounts/${accountIdentifier}/magic/sites/${siteIdentifier}/lans/${lanIdentifier}`, {
+      this._client.put(`/accounts/${account_id}/magic/sites/${siteId}/lans/${lanId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: LanUpdateResponse }>
@@ -45,15 +45,15 @@ export class Lans extends APIResource {
    * Lists LANs associated with an account and site.
    */
   list(
-    accountIdentifier: string,
-    siteIdentifier: string,
+    siteId: string,
+    params: LanListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<LanListResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(
-        `/accounts/${accountIdentifier}/magic/sites/${siteIdentifier}/lans`,
-        options,
-      ) as Core.APIPromise<{ result: LanListResponse }>
+      this._client.get(`/accounts/${account_id}/magic/sites/${siteId}/lans`, options) as Core.APIPromise<{
+        result: LanListResponse;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -61,14 +61,15 @@ export class Lans extends APIResource {
    * Remove a specific LAN.
    */
   delete(
-    accountIdentifier: string,
-    siteIdentifier: string,
-    lanIdentifier: string,
+    siteId: string,
+    lanId: string,
+    params: LanDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<LanDeleteResponse> {
+    const { account_id } = params;
     return (
       this._client.delete(
-        `/accounts/${accountIdentifier}/magic/sites/${siteIdentifier}/lans/${lanIdentifier}`,
+        `/accounts/${account_id}/magic/sites/${siteId}/lans/${lanId}`,
         options,
       ) as Core.APIPromise<{ result: LanDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -78,14 +79,15 @@ export class Lans extends APIResource {
    * Get a specific LAN.
    */
   get(
-    accountIdentifier: string,
-    siteIdentifier: string,
-    lanIdentifier: string,
+    siteId: string,
+    lanId: string,
+    params: LanGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<LanGetResponse> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountIdentifier}/magic/sites/${siteIdentifier}/lans/${lanIdentifier}`,
+        `/accounts/${account_id}/magic/sites/${siteId}/lans/${lanId}`,
         options,
       ) as Core.APIPromise<{ result: LanGetResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -760,6 +762,14 @@ export namespace LanGetResponse {
 }
 
 export interface LanCreateParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
   lan?: LanCreateParams.Lan;
 }
 
@@ -883,6 +893,14 @@ export namespace LanCreateParams {
 }
 
 export interface LanUpdateParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
   lan?: LanUpdateParams.Lan;
 }
 
@@ -999,6 +1017,27 @@ export namespace LanUpdateParams {
   }
 }
 
+export interface LanListParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface LanDeleteParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface LanGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export namespace Lans {
   export import LanCreateResponse = LansAPI.LanCreateResponse;
   export import LanUpdateResponse = LansAPI.LanUpdateResponse;
@@ -1007,4 +1046,7 @@ export namespace Lans {
   export import LanGetResponse = LansAPI.LanGetResponse;
   export import LanCreateParams = LansAPI.LanCreateParams;
   export import LanUpdateParams = LansAPI.LanUpdateParams;
+  export import LanListParams = LansAPI.LanListParams;
+  export import LanDeleteParams = LansAPI.LanDeleteParams;
+  export import LanGetParams = LansAPI.LanGetParams;
 }

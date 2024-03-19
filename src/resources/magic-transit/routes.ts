@@ -1,4 +1,4 @@
-// File generated from our OpenAPI spec by Stainless.
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
@@ -9,14 +9,11 @@ export class Routes extends APIResource {
    * Creates a new Magic static route. Use `?validate_only=true` as an optional query
    * parameter to run validation only without persisting changes.
    */
-  create(
-    accountIdentifier: string,
-    body: RouteCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RouteCreateResponse> {
+  create(params: RouteCreateParams, options?: Core.RequestOptions): Core.APIPromise<RouteCreateResponse> {
+    const { account_id, body } = params;
     return (
-      this._client.post(`/accounts/${accountIdentifier}/magic/routes`, {
-        body,
+      this._client.post(`/accounts/${account_id}/magic/routes`, {
+        body: body,
         ...options,
       }) as Core.APIPromise<{ result: RouteCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -27,13 +24,13 @@ export class Routes extends APIResource {
    * query parameter to run validation only without persisting changes.
    */
   update(
-    accountIdentifier: string,
     routeIdentifier: string,
-    body: RouteUpdateParams,
+    params: RouteUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RouteUpdateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.put(`/accounts/${accountIdentifier}/magic/routes/${routeIdentifier}`, {
+      this._client.put(`/accounts/${account_id}/magic/routes/${routeIdentifier}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: RouteUpdateResponse }>
@@ -43,9 +40,10 @@ export class Routes extends APIResource {
   /**
    * List all Magic static routes.
    */
-  list(accountIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<RouteListResponse> {
+  list(params: RouteListParams, options?: Core.RequestOptions): Core.APIPromise<RouteListResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountIdentifier}/magic/routes`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/magic/routes`, options) as Core.APIPromise<{
         result: RouteListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -55,13 +53,14 @@ export class Routes extends APIResource {
    * Disable and remove a specific Magic static route.
    */
   delete(
-    accountIdentifier: string,
     routeIdentifier: string,
+    params: RouteDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RouteDeleteResponse> {
+    const { account_id } = params;
     return (
       this._client.delete(
-        `/accounts/${accountIdentifier}/magic/routes/${routeIdentifier}`,
+        `/accounts/${account_id}/magic/routes/${routeIdentifier}`,
         options,
       ) as Core.APIPromise<{ result: RouteDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -70,16 +69,12 @@ export class Routes extends APIResource {
   /**
    * Delete multiple Magic static routes.
    */
-  empty(
-    accountIdentifier: string,
-    body: RouteEmptyParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RouteEmptyResponse> {
+  empty(params: RouteEmptyParams, options?: Core.RequestOptions): Core.APIPromise<RouteEmptyResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.delete(`/accounts/${accountIdentifier}/magic/routes`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: RouteEmptyResponse }>
+      this._client.delete(`/accounts/${account_id}/magic/routes`, { body, ...options }) as Core.APIPromise<{
+        result: RouteEmptyResponse;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -87,13 +82,14 @@ export class Routes extends APIResource {
    * Get a specific Magic static route.
    */
   get(
-    accountIdentifier: string,
     routeIdentifier: string,
+    params: RouteGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RouteGetResponse> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${accountIdentifier}/magic/routes/${routeIdentifier}`,
+        `/accounts/${account_id}/magic/routes/${routeIdentifier}`,
         options,
       ) as Core.APIPromise<{ result: RouteGetResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -262,36 +258,51 @@ export interface RouteGetResponse {
   route?: unknown;
 }
 
-export type RouteCreateParams = unknown;
+export interface RouteCreateParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
+}
 
 export interface RouteUpdateParams {
   /**
-   * The next-hop IP Address for the static route.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: The next-hop IP Address for the static route.
    */
   nexthop: string;
 
   /**
-   * IP Prefix in Classless Inter-Domain Routing format.
+   * Body param: IP Prefix in Classless Inter-Domain Routing format.
    */
   prefix: string;
 
   /**
-   * Priority of the static route.
+   * Body param: Priority of the static route.
    */
   priority: number;
 
   /**
-   * An optional human provided description of the static route.
+   * Body param: An optional human provided description of the static route.
    */
   description?: string;
 
   /**
-   * Used only for ECMP routes.
+   * Body param: Used only for ECMP routes.
    */
   scope?: RouteUpdateParams.Scope;
 
   /**
-   * Optional weight of the ECMP scope - if provided.
+   * Body param: Optional weight of the ECMP scope - if provided.
    */
   weight?: number;
 }
@@ -313,12 +324,41 @@ export namespace RouteUpdateParams {
   }
 }
 
+export interface RouteListParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface RouteDeleteParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export interface RouteEmptyParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
   routes: Array<RouteEmptyParams.Route>;
 }
 
 export namespace RouteEmptyParams {
   export interface Route {}
+}
+
+export interface RouteGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
 }
 
 export namespace Routes {
@@ -330,5 +370,8 @@ export namespace Routes {
   export import RouteGetResponse = RoutesAPI.RouteGetResponse;
   export import RouteCreateParams = RoutesAPI.RouteCreateParams;
   export import RouteUpdateParams = RoutesAPI.RouteUpdateParams;
+  export import RouteListParams = RoutesAPI.RouteListParams;
+  export import RouteDeleteParams = RoutesAPI.RouteDeleteParams;
   export import RouteEmptyParams = RoutesAPI.RouteEmptyParams;
+  export import RouteGetParams = RoutesAPI.RouteGetParams;
 }

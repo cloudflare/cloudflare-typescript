@@ -1,4 +1,4 @@
-// File generated from our OpenAPI spec by Stainless.
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
@@ -10,15 +10,14 @@ export class Previews extends APIResource {
    * Create a new preview health check.
    */
   create(
-    zoneIdentifier: string,
-    body: PreviewCreateParams,
+    params: PreviewCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<HealthchecksAPI.HealthchecksHealthchecks> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.post(`/zones/${zoneIdentifier}/healthchecks/preview`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: HealthchecksAPI.HealthchecksHealthchecks }>
+      this._client.post(`/zones/${zone_id}/healthchecks/preview`, { body, ...options }) as Core.APIPromise<{
+        result: HealthchecksAPI.HealthchecksHealthchecks;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -26,13 +25,14 @@ export class Previews extends APIResource {
    * Delete a health check.
    */
   delete(
-    zoneIdentifier: string,
-    identifier: string,
+    healthcheckId: string,
+    params: PreviewDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PreviewDeleteResponse> {
+    const { zone_id } = params;
     return (
       this._client.delete(
-        `/zones/${zoneIdentifier}/healthchecks/preview/${identifier}`,
+        `/zones/${zone_id}/healthchecks/preview/${healthcheckId}`,
         options,
       ) as Core.APIPromise<{ result: PreviewDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -42,13 +42,14 @@ export class Previews extends APIResource {
    * Fetch a single configured health check preview.
    */
   get(
-    zoneIdentifier: string,
-    identifier: string,
+    healthcheckId: string,
+    params: PreviewGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<HealthchecksAPI.HealthchecksHealthchecks> {
+    const { zone_id } = params;
     return (
       this._client.get(
-        `/zones/${zoneIdentifier}/healthchecks/preview/${identifier}`,
+        `/zones/${zone_id}/healthchecks/preview/${healthcheckId}`,
         options,
       ) as Core.APIPromise<{ result: HealthchecksAPI.HealthchecksHealthchecks }>
     )._thenUnwrap((obj) => obj.result);
@@ -64,19 +65,25 @@ export interface PreviewDeleteResponse {
 
 export interface PreviewCreateParams {
   /**
-   * The hostname or IP address of the origin server to run health checks on.
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: The hostname or IP address of the origin server to run health checks
+   * on.
    */
   address: string;
 
   /**
-   * A short name to identify the health check. Only alphanumeric characters, hyphens
-   * and underscores are allowed.
+   * Body param: A short name to identify the health check. Only alphanumeric
+   * characters, hyphens and underscores are allowed.
    */
   name: string;
 
   /**
-   * A list of regions from which to run health checks. Null means Cloudflare will
-   * pick a default region.
+   * Body param: A list of regions from which to run health checks. Null means
+   * Cloudflare will pick a default region.
    */
   check_regions?: Array<
     | 'WNAM'
@@ -96,58 +103,58 @@ export interface PreviewCreateParams {
   > | null;
 
   /**
-   * The number of consecutive fails required from a health check before changing the
-   * health to unhealthy.
+   * Body param: The number of consecutive fails required from a health check before
+   * changing the health to unhealthy.
    */
   consecutive_fails?: number;
 
   /**
-   * The number of consecutive successes required from a health check before changing
-   * the health to healthy.
+   * Body param: The number of consecutive successes required from a health check
+   * before changing the health to healthy.
    */
   consecutive_successes?: number;
 
   /**
-   * A human-readable description of the health check.
+   * Body param: A human-readable description of the health check.
    */
   description?: string;
 
   /**
-   * Parameters specific to an HTTP or HTTPS health check.
+   * Body param: Parameters specific to an HTTP or HTTPS health check.
    */
   http_config?: PreviewCreateParams.HTTPConfig | null;
 
   /**
-   * The interval between each health check. Shorter intervals may give quicker
-   * notifications if the origin status changes, but will increase load on the origin
-   * as we check from multiple locations.
+   * Body param: The interval between each health check. Shorter intervals may give
+   * quicker notifications if the origin status changes, but will increase load on
+   * the origin as we check from multiple locations.
    */
   interval?: number;
 
   /**
-   * The number of retries to attempt in case of a timeout before marking the origin
-   * as unhealthy. Retries are attempted immediately.
+   * Body param: The number of retries to attempt in case of a timeout before marking
+   * the origin as unhealthy. Retries are attempted immediately.
    */
   retries?: number;
 
   /**
-   * If suspended, no health checks are sent to the origin.
+   * Body param: If suspended, no health checks are sent to the origin.
    */
   suspended?: boolean;
 
   /**
-   * Parameters specific to TCP health check.
+   * Body param: Parameters specific to TCP health check.
    */
   tcp_config?: PreviewCreateParams.TcpConfig | null;
 
   /**
-   * The timeout (in seconds) before marking the health check as failed.
+   * Body param: The timeout (in seconds) before marking the health check as failed.
    */
   timeout?: number;
 
   /**
-   * The protocol to use for the health check. Currently supported protocols are
-   * 'HTTP', 'HTTPS' and 'TCP'.
+   * Body param: The protocol to use for the health check. Currently supported
+   * protocols are 'HTTP', 'HTTPS' and 'TCP'.
    */
   type?: string;
 }
@@ -218,7 +225,23 @@ export namespace PreviewCreateParams {
   }
 }
 
+export interface PreviewDeleteParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+export interface PreviewGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
 export namespace Previews {
   export import PreviewDeleteResponse = PreviewsAPI.PreviewDeleteResponse;
   export import PreviewCreateParams = PreviewsAPI.PreviewCreateParams;
+  export import PreviewDeleteParams = PreviewsAPI.PreviewDeleteParams;
+  export import PreviewGetParams = PreviewsAPI.PreviewGetParams;
 }

@@ -1,4 +1,4 @@
-// File generated from our OpenAPI spec by Stainless.
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
@@ -15,16 +15,12 @@ export class Sites extends APIResource {
   /**
    * Creates a new Site
    */
-  create(
-    accountIdentifier: string,
-    body: SiteCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SiteCreateResponse> {
+  create(params: SiteCreateParams, options?: Core.RequestOptions): Core.APIPromise<SiteCreateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${accountIdentifier}/magic/sites`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: SiteCreateResponse }>
+      this._client.post(`/accounts/${account_id}/magic/sites`, { body, ...options }) as Core.APIPromise<{
+        result: SiteCreateResponse;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -32,13 +28,13 @@ export class Sites extends APIResource {
    * Update a specific Site.
    */
   update(
-    accountIdentifier: string,
-    siteIdentifier: string,
-    body: SiteUpdateParams,
+    siteId: string,
+    params: SiteUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SiteUpdateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.put(`/accounts/${accountIdentifier}/magic/sites/${siteIdentifier}`, {
+      this._client.put(`/accounts/${account_id}/magic/sites/${siteId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: SiteUpdateResponse }>
@@ -50,9 +46,10 @@ export class Sites extends APIResource {
    * return sites where connector_identifier matches either site.ConnectorID or
    * site.SecondaryConnectorID.
    */
-  list(accountIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<SiteListResponse> {
+  list(params: SiteListParams, options?: Core.RequestOptions): Core.APIPromise<SiteListResponse> {
+    const { account_id, ...query } = params;
     return (
-      this._client.get(`/accounts/${accountIdentifier}/magic/sites`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/magic/sites`, { query, ...options }) as Core.APIPromise<{
         result: SiteListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -62,15 +59,15 @@ export class Sites extends APIResource {
    * Remove a specific Site.
    */
   delete(
-    accountIdentifier: string,
-    siteIdentifier: string,
+    siteId: string,
+    params: SiteDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SiteDeleteResponse> {
+    const { account_id } = params;
     return (
-      this._client.delete(
-        `/accounts/${accountIdentifier}/magic/sites/${siteIdentifier}`,
-        options,
-      ) as Core.APIPromise<{ result: SiteDeleteResponse }>
+      this._client.delete(`/accounts/${account_id}/magic/sites/${siteId}`, options) as Core.APIPromise<{
+        result: SiteDeleteResponse;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -78,15 +75,15 @@ export class Sites extends APIResource {
    * Get a specific Site.
    */
   get(
-    accountIdentifier: string,
-    siteIdentifier: string,
+    siteId: string,
+    params: SiteGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SiteGetResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(
-        `/accounts/${accountIdentifier}/magic/sites/${siteIdentifier}`,
-        options,
-      ) as Core.APIPromise<{ result: SiteGetResponse }>
+      this._client.get(`/accounts/${account_id}/magic/sites/${siteId}`, options) as Core.APIPromise<{
+        result: SiteGetResponse;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -384,6 +381,14 @@ export namespace SiteGetResponse {
 }
 
 export interface SiteCreateParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
   site?: SiteCreateParams.Site;
 }
 
@@ -437,6 +442,14 @@ export namespace SiteCreateParams {
 }
 
 export interface SiteUpdateParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
   site?: SiteUpdateParams.Site;
 }
 
@@ -483,6 +496,27 @@ export namespace SiteUpdateParams {
   }
 }
 
+export interface SiteListParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface SiteDeleteParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface SiteGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export namespace Sites {
   export import SiteCreateResponse = SitesAPI.SiteCreateResponse;
   export import SiteUpdateResponse = SitesAPI.SiteUpdateResponse;
@@ -491,6 +525,9 @@ export namespace Sites {
   export import SiteGetResponse = SitesAPI.SiteGetResponse;
   export import SiteCreateParams = SitesAPI.SiteCreateParams;
   export import SiteUpdateParams = SitesAPI.SiteUpdateParams;
+  export import SiteListParams = SitesAPI.SiteListParams;
+  export import SiteDeleteParams = SitesAPI.SiteDeleteParams;
+  export import SiteGetParams = SitesAPI.SiteGetParams;
   export import ACLs = ACLsAPI.ACLs;
   export import ACLCreateResponse = ACLsAPI.ACLCreateResponse;
   export import ACLUpdateResponse = ACLsAPI.ACLUpdateResponse;
@@ -499,6 +536,9 @@ export namespace Sites {
   export import ACLGetResponse = ACLsAPI.ACLGetResponse;
   export import ACLCreateParams = ACLsAPI.ACLCreateParams;
   export import ACLUpdateParams = ACLsAPI.ACLUpdateParams;
+  export import ACLListParams = ACLsAPI.ACLListParams;
+  export import ACLDeleteParams = ACLsAPI.ACLDeleteParams;
+  export import ACLGetParams = ACLsAPI.ACLGetParams;
   export import Lans = LansAPI.Lans;
   export import LanCreateResponse = LansAPI.LanCreateResponse;
   export import LanUpdateResponse = LansAPI.LanUpdateResponse;
@@ -507,6 +547,9 @@ export namespace Sites {
   export import LanGetResponse = LansAPI.LanGetResponse;
   export import LanCreateParams = LansAPI.LanCreateParams;
   export import LanUpdateParams = LansAPI.LanUpdateParams;
+  export import LanListParams = LansAPI.LanListParams;
+  export import LanDeleteParams = LansAPI.LanDeleteParams;
+  export import LanGetParams = LansAPI.LanGetParams;
   export import Wans = WansAPI.Wans;
   export import WanCreateResponse = WansAPI.WanCreateResponse;
   export import WanUpdateResponse = WansAPI.WanUpdateResponse;
@@ -515,4 +558,7 @@ export namespace Sites {
   export import WanGetResponse = WansAPI.WanGetResponse;
   export import WanCreateParams = WansAPI.WanCreateParams;
   export import WanUpdateParams = WansAPI.WanUpdateParams;
+  export import WanListParams = WansAPI.WanListParams;
+  export import WanDeleteParams = WansAPI.WanDeleteParams;
+  export import WanGetParams = WansAPI.WanGetParams;
 }

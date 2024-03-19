@@ -1,4 +1,4 @@
-// File generated from our OpenAPI spec by Stainless.
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
   HealthchecksHealthchecks,
@@ -6,7 +6,16 @@ export {
   HealthcheckDeleteResponse,
   HealthcheckCreateParams,
   HealthcheckUpdateParams,
+  HealthcheckListParams,
+  HealthcheckDeleteParams,
   HealthcheckEditParams,
+  HealthcheckGetParams,
   Healthchecks,
 } from './healthchecks';
-export { PreviewDeleteResponse, PreviewCreateParams, Previews } from './previews';
+export {
+  PreviewDeleteResponse,
+  PreviewCreateParams,
+  PreviewDeleteParams,
+  PreviewGetParams,
+  Previews,
+} from './previews';

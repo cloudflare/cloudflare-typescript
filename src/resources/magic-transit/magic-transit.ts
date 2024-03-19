@@ -1,4 +1,4 @@
-// File generated from our OpenAPI spec by Stainless.
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from 'cloudflare/resource';
 import * as CfInterconnectsAPI from 'cloudflare/resources/magic-transit/cf-interconnects';
@@ -21,6 +21,8 @@ export namespace MagicTransit {
   export import CfInterconnectListResponse = CfInterconnectsAPI.CfInterconnectListResponse;
   export import CfInterconnectGetResponse = CfInterconnectsAPI.CfInterconnectGetResponse;
   export import CfInterconnectUpdateParams = CfInterconnectsAPI.CfInterconnectUpdateParams;
+  export import CfInterconnectListParams = CfInterconnectsAPI.CfInterconnectListParams;
+  export import CfInterconnectGetParams = CfInterconnectsAPI.CfInterconnectGetParams;
   export import GRETunnels = GRETunnelsAPI.GRETunnels;
   export import GRETunnelCreateResponse = GRETunnelsAPI.GRETunnelCreateResponse;
   export import GRETunnelUpdateResponse = GRETunnelsAPI.GRETunnelUpdateResponse;
@@ -29,6 +31,9 @@ export namespace MagicTransit {
   export import GRETunnelGetResponse = GRETunnelsAPI.GRETunnelGetResponse;
   export import GRETunnelCreateParams = GRETunnelsAPI.GRETunnelCreateParams;
   export import GRETunnelUpdateParams = GRETunnelsAPI.GRETunnelUpdateParams;
+  export import GRETunnelListParams = GRETunnelsAPI.GRETunnelListParams;
+  export import GRETunnelDeleteParams = GRETunnelsAPI.GRETunnelDeleteParams;
+  export import GRETunnelGetParams = GRETunnelsAPI.GRETunnelGetParams;
   export import IPSECTunnels = IPSECTunnelsAPI.IPSECTunnels;
   export import IPSECTunnelCreateResponse = IPSECTunnelsAPI.IPSECTunnelCreateResponse;
   export import IPSECTunnelUpdateResponse = IPSECTunnelsAPI.IPSECTunnelUpdateResponse;
@@ -38,6 +43,10 @@ export namespace MagicTransit {
   export import IPSECTunnelPSKGenerateResponse = IPSECTunnelsAPI.IPSECTunnelPSKGenerateResponse;
   export import IPSECTunnelCreateParams = IPSECTunnelsAPI.IPSECTunnelCreateParams;
   export import IPSECTunnelUpdateParams = IPSECTunnelsAPI.IPSECTunnelUpdateParams;
+  export import IPSECTunnelListParams = IPSECTunnelsAPI.IPSECTunnelListParams;
+  export import IPSECTunnelDeleteParams = IPSECTunnelsAPI.IPSECTunnelDeleteParams;
+  export import IPSECTunnelGetParams = IPSECTunnelsAPI.IPSECTunnelGetParams;
+  export import IPSECTunnelPSKGenerateParams = IPSECTunnelsAPI.IPSECTunnelPSKGenerateParams;
   export import Routes = RoutesAPI.Routes;
   export import RouteCreateResponse = RoutesAPI.RouteCreateResponse;
   export import RouteUpdateResponse = RoutesAPI.RouteUpdateResponse;
@@ -47,7 +56,10 @@ export namespace MagicTransit {
   export import RouteGetResponse = RoutesAPI.RouteGetResponse;
   export import RouteCreateParams = RoutesAPI.RouteCreateParams;
   export import RouteUpdateParams = RoutesAPI.RouteUpdateParams;
+  export import RouteListParams = RoutesAPI.RouteListParams;
+  export import RouteDeleteParams = RoutesAPI.RouteDeleteParams;
   export import RouteEmptyParams = RoutesAPI.RouteEmptyParams;
+  export import RouteGetParams = RoutesAPI.RouteGetParams;
   export import Sites = SitesAPI.Sites;
   export import SiteCreateResponse = SitesAPI.SiteCreateResponse;
   export import SiteUpdateResponse = SitesAPI.SiteUpdateResponse;
@@ -56,4 +68,7 @@ export namespace MagicTransit {
   export import SiteGetResponse = SitesAPI.SiteGetResponse;
   export import SiteCreateParams = SitesAPI.SiteCreateParams;
   export import SiteUpdateParams = SitesAPI.SiteUpdateParams;
+  export import SiteListParams = SitesAPI.SiteListParams;
+  export import SiteDeleteParams = SitesAPI.SiteDeleteParams;
+  export import SiteGetParams = SitesAPI.SiteGetParams;
 }
