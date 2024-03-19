@@ -1,4 +1,4 @@
-// File generated from our OpenAPI spec by Stainless.
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export { PhaseUpdateParams, PhaseGetParams, Phases } from './phases/index';
 export { RuleCreateParams, RuleDeleteParams, RuleEditParams, Rules } from './rules';
