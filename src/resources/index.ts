@@ -74,15 +74,7 @@ export { Diagnostics } from './diagnostics/diagnostics';
 export { DurableObjects } from './durable-objects/durable-objects';
 export { EmailRouting } from './email-routing/email-routing';
 export { Firewall } from './firewall/firewall';
-export {
-  HealthchecksHealthchecks,
-  HealthcheckListResponse,
-  HealthcheckDeleteResponse,
-  HealthcheckCreateParams,
-  HealthcheckUpdateParams,
-  HealthcheckEditParams,
-  Healthchecks,
-} from './healthchecks/healthchecks';
+export { HealthchecksHealthchecks, Healthchecks } from './healthchecks/healthchecks';
 export { Hostnames } from './hostnames/hostnames';
 export { Hyperdrive } from './hyperdrive/hyperdrive';
 export { IPs, JDCloudIPs, IPListResponse, IPListParams } from './ips';
