@@ -1,0 +1,178 @@
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+import Cloudflare from 'cloudflare';
+import { Response } from 'node-fetch';
+
+const cloudflare = new Cloudflare({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+});
+
+describe('resource lans', () => {
+  // skipped: tests are disabled for the time being
+  test.skip('create: only required params', async () => {
+    const responsePromise = cloudflare.magicTransit.sites.lans.create('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('create: required and optional params', async () => {
+    const response = await cloudflare.magicTransit.sites.lans.create('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      lan: {
+        description: 'string',
+        ha_link: true,
+        nat: { static_prefix: '192.0.2.0/24' },
+        physport: 1,
+        routed_subnets: [
+          { nat: { static_prefix: '192.0.2.0/24' }, next_hop: '192.0.2.1', prefix: '192.0.2.0/24' },
+          { nat: { static_prefix: '192.0.2.0/24' }, next_hop: '192.0.2.1', prefix: '192.0.2.0/24' },
+          { nat: { static_prefix: '192.0.2.0/24' }, next_hop: '192.0.2.1', prefix: '192.0.2.0/24' },
+        ],
+        static_addressing: {
+          address: '192.0.2.0/24',
+          dhcp_relay: { server_addresses: ['192.0.2.1', '192.0.2.1', '192.0.2.1'] },
+          dhcp_server: {
+            dhcp_pool_end: '192.0.2.1',
+            dhcp_pool_start: '192.0.2.1',
+            dns_server: '192.0.2.1',
+            reservations: { '00:11:22:33:44:55': '192.0.2.100', 'AA:BB:CC:DD:EE:FF': '192.168.1.101' },
+          },
+          secondary_address: '192.0.2.0/24',
+          virtual_address: '192.0.2.0/24',
+        },
+        vlan_tag: 0,
+      },
+    });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('update: only required params', async () => {
+    const responsePromise = cloudflare.magicTransit.sites.lans.update(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('update: required and optional params', async () => {
+    const response = await cloudflare.magicTransit.sites.lans.update(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        lan: {
+          description: 'string',
+          nat: { static_prefix: '192.0.2.0/24' },
+          physport: 1,
+          routed_subnets: [
+            { nat: { static_prefix: '192.0.2.0/24' }, next_hop: '192.0.2.1', prefix: '192.0.2.0/24' },
+            { nat: { static_prefix: '192.0.2.0/24' }, next_hop: '192.0.2.1', prefix: '192.0.2.0/24' },
+            { nat: { static_prefix: '192.0.2.0/24' }, next_hop: '192.0.2.1', prefix: '192.0.2.0/24' },
+          ],
+          static_addressing: {
+            address: '192.0.2.0/24',
+            dhcp_relay: { server_addresses: ['192.0.2.1', '192.0.2.1', '192.0.2.1'] },
+            dhcp_server: {
+              dhcp_pool_end: '192.0.2.1',
+              dhcp_pool_start: '192.0.2.1',
+              dns_server: '192.0.2.1',
+              reservations: { '00:11:22:33:44:55': '192.0.2.100', 'AA:BB:CC:DD:EE:FF': '192.168.1.101' },
+            },
+            secondary_address: '192.0.2.0/24',
+            virtual_address: '192.0.2.0/24',
+          },
+          vlan_tag: 0,
+        },
+      },
+    );
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list: only required params', async () => {
+    const responsePromise = cloudflare.magicTransit.sites.lans.list('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list: required and optional params', async () => {
+    const response = await cloudflare.magicTransit.sites.lans.list('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('delete: only required params', async () => {
+    const responsePromise = cloudflare.magicTransit.sites.lans.delete(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('delete: required and optional params', async () => {
+    const response = await cloudflare.magicTransit.sites.lans.delete(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get: only required params', async () => {
+    const responsePromise = cloudflare.magicTransit.sites.lans.get(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.magicTransit.sites.lans.get(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
+  });
+});
