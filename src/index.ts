@@ -552,6 +552,14 @@ export namespace Cloudflare {
 
   export import Healthchecks = API.Healthchecks;
   export import HealthchecksHealthchecks = API.HealthchecksHealthchecks;
+  export import HealthcheckListResponse = API.HealthcheckListResponse;
+  export import HealthcheckDeleteResponse = API.HealthcheckDeleteResponse;
+  export import HealthcheckCreateParams = API.HealthcheckCreateParams;
+  export import HealthcheckUpdateParams = API.HealthcheckUpdateParams;
+  export import HealthcheckListParams = API.HealthcheckListParams;
+  export import HealthcheckDeleteParams = API.HealthcheckDeleteParams;
+  export import HealthcheckEditParams = API.HealthcheckEditParams;
+  export import HealthcheckGetParams = API.HealthcheckGetParams;
 
   export import KeylessCertificates = API.KeylessCertificates;
   export import TLSCertificatesAndHostnamesBase = API.TLSCertificatesAndHostnamesBase;
