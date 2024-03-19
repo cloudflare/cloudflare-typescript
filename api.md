@@ -1450,23 +1450,7 @@ Methods:
 
 ### Reports
 
-Types:
-
-- <code><a href="./src/resources/dns/analytics/reports/reports.ts">DNSDNSAnalyticsAPIReport</a></code>
-
-Methods:
-
-- <code title="get /zones/{identifier}/dns_analytics/report">client.dns.analytics.reports.<a href="./src/resources/dns/analytics/reports/reports.ts">get</a>(identifier, { ...params }) -> DNSDNSAnalyticsAPIReport</code>
-
 #### Bytimes
-
-Types:
-
-- <code><a href="./src/resources/dns/analytics/reports/bytimes.ts">DNSDNSAnalyticsAPIReportBytime</a></code>
-
-Methods:
-
-- <code title="get /zones/{identifier}/dns_analytics/report/bytime">client.dns.analytics.reports.bytimes.<a href="./src/resources/dns/analytics/reports/bytimes.ts">get</a>(identifier, { ...params }) -> DNSDNSAnalyticsAPIReportBytime</code>
 
 ## Firewall
 
@@ -1487,15 +1471,7 @@ Methods:
 
 #### Reports
 
-Methods:
-
-- <code title="get /accounts/{account_identifier}/dns_firewall/{identifier}/dns_analytics/report">client.dns.firewall.analytics.reports.<a href="./src/resources/dns/firewall/analytics/reports/reports.ts">get</a>(accountIdentifier, identifier, { ...params }) -> DNSDNSAnalyticsAPIReport</code>
-
 ##### Bytimes
-
-Methods:
-
-- <code title="get /accounts/{account_identifier}/dns_firewall/{identifier}/dns_analytics/report/bytime">client.dns.firewall.analytics.reports.bytimes.<a href="./src/resources/dns/firewall/analytics/reports/bytimes.ts">get</a>(accountIdentifier, identifier, { ...params }) -> DNSDNSAnalyticsAPIReportBytime</code>
 
 # DNSSEC
 
