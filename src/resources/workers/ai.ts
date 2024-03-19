@@ -188,6 +188,8 @@ export namespace AIRunParams {
   export interface UnionMember10 {
     prompt: string;
 
+    lora?: string;
+
     max_tokens?: number;
 
     raw?: boolean;
