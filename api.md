@@ -1709,29 +1709,8 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/healthchecks/healthchecks.ts">HealthchecksHealthchecks</a></code>
-- <code><a href="./src/resources/healthchecks/healthchecks.ts">HealthcheckListResponse</a></code>
-- <code><a href="./src/resources/healthchecks/healthchecks.ts">HealthcheckDeleteResponse</a></code>
-
-Methods:
-
-- <code title="post /zones/{zone_identifier}/healthchecks">client.healthchecks.<a href="./src/resources/healthchecks/healthchecks.ts">create</a>(zoneIdentifier, { ...params }) -> HealthchecksHealthchecks</code>
-- <code title="put /zones/{zone_identifier}/healthchecks/{identifier}">client.healthchecks.<a href="./src/resources/healthchecks/healthchecks.ts">update</a>(zoneIdentifier, identifier, { ...params }) -> HealthchecksHealthchecks</code>
-- <code title="get /zones/{zone_identifier}/healthchecks">client.healthchecks.<a href="./src/resources/healthchecks/healthchecks.ts">list</a>(zoneIdentifier) -> HealthcheckListResponse | null</code>
-- <code title="delete /zones/{zone_identifier}/healthchecks/{identifier}">client.healthchecks.<a href="./src/resources/healthchecks/healthchecks.ts">delete</a>(zoneIdentifier, identifier) -> HealthcheckDeleteResponse</code>
-- <code title="patch /zones/{zone_identifier}/healthchecks/{identifier}">client.healthchecks.<a href="./src/resources/healthchecks/healthchecks.ts">edit</a>(zoneIdentifier, identifier, { ...params }) -> HealthchecksHealthchecks</code>
-- <code title="get /zones/{zone_identifier}/healthchecks/{identifier}">client.healthchecks.<a href="./src/resources/healthchecks/healthchecks.ts">get</a>(zoneIdentifier, identifier) -> HealthchecksHealthchecks</code>
 
 ## Previews
-
-Types:
-
-- <code><a href="./src/resources/healthchecks/previews.ts">PreviewDeleteResponse</a></code>
-
-Methods:
-
-- <code title="post /zones/{zone_identifier}/healthchecks/preview">client.healthchecks.previews.<a href="./src/resources/healthchecks/previews.ts">create</a>(zoneIdentifier, { ...params }) -> HealthchecksHealthchecks</code>
-- <code title="delete /zones/{zone_identifier}/healthchecks/preview/{identifier}">client.healthchecks.previews.<a href="./src/resources/healthchecks/previews.ts">delete</a>(zoneIdentifier, identifier) -> PreviewDeleteResponse</code>
-- <code title="get /zones/{zone_identifier}/healthchecks/preview/{identifier}">client.healthchecks.previews.<a href="./src/resources/healthchecks/previews.ts">get</a>(zoneIdentifier, identifier) -> HealthchecksHealthchecks</code>
 
 # KeylessCertificates
 
