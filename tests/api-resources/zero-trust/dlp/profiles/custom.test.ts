@@ -52,6 +52,7 @@ describe('resource custom', () => {
             },
           ],
           name: 'Generic CVV Card Number',
+          ocr_enabled: true,
         },
         {
           allowed_match_count: 5,
@@ -75,6 +76,7 @@ describe('resource custom', () => {
             },
           ],
           name: 'Generic CVV Card Number',
+          ocr_enabled: true,
         },
         {
           allowed_match_count: 5,
@@ -98,6 +100,7 @@ describe('resource custom', () => {
             },
           ],
           name: 'Generic CVV Card Number',
+          ocr_enabled: true,
         },
       ],
     });
@@ -148,6 +151,7 @@ describe('resource custom', () => {
           },
         ],
         name: 'Generic CVV Card Number',
+        ocr_enabled: true,
         shared_entries: [{ enabled: true }, { enabled: true }, { enabled: true }],
       },
     );

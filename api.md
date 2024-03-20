@@ -310,19 +310,15 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/zones/zones.ts">Zone</a></code>
-- <code><a href="./src/resources/zones/zones.ts">ZoneCreateResponse</a></code>
-- <code><a href="./src/resources/zones/zones.ts">ZoneListResponse</a></code>
 - <code><a href="./src/resources/zones/zones.ts">ZoneDeleteResponse</a></code>
-- <code><a href="./src/resources/zones/zones.ts">ZoneEditResponse</a></code>
-- <code><a href="./src/resources/zones/zones.ts">ZoneGetResponse</a></code>
 
 Methods:
 
-- <code title="post /zones">client.zones.<a href="./src/resources/zones/zones.ts">create</a>({ ...params }) -> ZoneCreateResponse</code>
-- <code title="get /zones">client.zones.<a href="./src/resources/zones/zones.ts">list</a>({ ...params }) -> ZoneListResponsesV4PagePaginationArray</code>
+- <code title="post /zones">client.zones.<a href="./src/resources/zones/zones.ts">create</a>({ ...params }) -> Zone</code>
+- <code title="get /zones">client.zones.<a href="./src/resources/zones/zones.ts">list</a>({ ...params }) -> ZonesV4PagePaginationArray</code>
 - <code title="delete /zones/{zone_id}">client.zones.<a href="./src/resources/zones/zones.ts">delete</a>({ ...params }) -> ZoneDeleteResponse | null</code>
-- <code title="patch /zones/{zone_id}">client.zones.<a href="./src/resources/zones/zones.ts">edit</a>({ ...params }) -> ZoneEditResponse</code>
-- <code title="get /zones/{zone_id}">client.zones.<a href="./src/resources/zones/zones.ts">get</a>({ ...params }) -> ZoneGetResponse</code>
+- <code title="patch /zones/{zone_id}">client.zones.<a href="./src/resources/zones/zones.ts">edit</a>({ ...params }) -> Zone</code>
+- <code title="get /zones/{zone_id}">client.zones.<a href="./src/resources/zones/zones.ts">get</a>({ ...params }) -> Zone</code>
 
 ## ActivationCheck
 
@@ -1424,25 +1420,20 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/dns/records.ts">DNSRecord</a></code>
-- <code><a href="./src/resources/dns/records.ts">RecordCreateResponse</a></code>
-- <code><a href="./src/resources/dns/records.ts">RecordUpdateResponse</a></code>
-- <code><a href="./src/resources/dns/records.ts">RecordListResponse</a></code>
 - <code><a href="./src/resources/dns/records.ts">RecordDeleteResponse</a></code>
-- <code><a href="./src/resources/dns/records.ts">RecordEditResponse</a></code>
 - <code><a href="./src/resources/dns/records.ts">RecordExportResponse</a></code>
-- <code><a href="./src/resources/dns/records.ts">RecordGetResponse</a></code>
 - <code><a href="./src/resources/dns/records.ts">RecordImportResponse</a></code>
 - <code><a href="./src/resources/dns/records.ts">RecordScanResponse</a></code>
 
 Methods:
 
-- <code title="post /zones/{zone_id}/dns_records">client.dns.records.<a href="./src/resources/dns/records.ts">create</a>({ ...params }) -> RecordCreateResponse</code>
-- <code title="put /zones/{zone_id}/dns_records/{dns_record_id}">client.dns.records.<a href="./src/resources/dns/records.ts">update</a>(dnsRecordId, { ...params }) -> RecordUpdateResponse</code>
-- <code title="get /zones/{zone_id}/dns_records">client.dns.records.<a href="./src/resources/dns/records.ts">list</a>({ ...params }) -> RecordListResponsesV4PagePaginationArray</code>
+- <code title="post /zones/{zone_id}/dns_records">client.dns.records.<a href="./src/resources/dns/records.ts">create</a>({ ...params }) -> DNSRecord</code>
+- <code title="put /zones/{zone_id}/dns_records/{dns_record_id}">client.dns.records.<a href="./src/resources/dns/records.ts">update</a>(dnsRecordId, { ...params }) -> DNSRecord</code>
+- <code title="get /zones/{zone_id}/dns_records">client.dns.records.<a href="./src/resources/dns/records.ts">list</a>({ ...params }) -> DNSRecordsV4PagePaginationArray</code>
 - <code title="delete /zones/{zone_id}/dns_records/{dns_record_id}">client.dns.records.<a href="./src/resources/dns/records.ts">delete</a>(dnsRecordId, { ...params }) -> RecordDeleteResponse</code>
-- <code title="patch /zones/{zone_id}/dns_records/{dns_record_id}">client.dns.records.<a href="./src/resources/dns/records.ts">edit</a>(dnsRecordId, { ...params }) -> RecordEditResponse</code>
+- <code title="patch /zones/{zone_id}/dns_records/{dns_record_id}">client.dns.records.<a href="./src/resources/dns/records.ts">edit</a>(dnsRecordId, { ...params }) -> DNSRecord</code>
 - <code title="get /zones/{zone_id}/dns_records/export">client.dns.records.<a href="./src/resources/dns/records.ts">export</a>({ ...params }) -> string</code>
-- <code title="get /zones/{zone_id}/dns_records/{dns_record_id}">client.dns.records.<a href="./src/resources/dns/records.ts">get</a>(dnsRecordId, { ...params }) -> RecordGetResponse</code>
+- <code title="get /zones/{zone_id}/dns_records/{dns_record_id}">client.dns.records.<a href="./src/resources/dns/records.ts">get</a>(dnsRecordId, { ...params }) -> DNSRecord</code>
 - <code title="post /zones/{zone_id}/dns_records/import">client.dns.records.<a href="./src/resources/dns/records.ts">import</a>({ ...params }) -> RecordImportResponse</code>
 - <code title="post /zones/{zone_id}/dns_records/scan">client.dns.records.<a href="./src/resources/dns/records.ts">scan</a>({ ...params }) -> RecordScanResponse</code>
 
