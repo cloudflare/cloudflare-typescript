@@ -66,6 +66,11 @@ export interface DLPPredefinedProfile {
   name?: string;
 
   /**
+   * If true, scan images via OCR to determine if any text present matches filters.
+   */
+  ocr_enabled?: boolean;
+
+  /**
    * The type of the profile.
    */
   type?: 'predefined';
@@ -149,6 +154,12 @@ export interface PredefinedUpdateParams {
    * Body param: The entries for this profile.
    */
   entries?: Array<PredefinedUpdateParams.Entry>;
+
+  /**
+   * Body param: If true, scan images via OCR to determine if any text present
+   * matches filters.
+   */
+  ocr_enabled?: boolean;
 }
 
 export namespace PredefinedUpdateParams {

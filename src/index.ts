@@ -429,12 +429,8 @@ export namespace Cloudflare {
 
   export import Zones = API.Zones;
   export import Zone = API.Zone;
-  export import ZoneCreateResponse = API.ZoneCreateResponse;
-  export import ZoneListResponse = API.ZoneListResponse;
   export import ZoneDeleteResponse = API.ZoneDeleteResponse;
-  export import ZoneEditResponse = API.ZoneEditResponse;
-  export import ZoneGetResponse = API.ZoneGetResponse;
-  export import ZoneListResponsesV4PagePaginationArray = API.ZoneListResponsesV4PagePaginationArray;
+  export import ZonesV4PagePaginationArray = API.ZonesV4PagePaginationArray;
   export import ZoneCreateParams = API.ZoneCreateParams;
   export import ZoneListParams = API.ZoneListParams;
   export import ZoneDeleteParams = API.ZoneDeleteParams;

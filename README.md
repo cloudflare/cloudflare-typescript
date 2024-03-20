@@ -26,13 +26,13 @@ const cloudflare = new Cloudflare({
 });
 
 async function main() {
-  const zoneCreateResponse = await cloudflare.zones.create({
+  const zone = await cloudflare.zones.create({
     account: { id: '023e105f4ecef8ad9ca31a8372d0c353' },
     name: 'example.com',
     type: 'full',
   });
 
-  console.log(zoneCreateResponse.id);
+  console.log(zone.id);
 }
 
 main();
@@ -57,7 +57,7 @@ async function main() {
     name: 'example.com',
     type: 'full',
   };
-  const zoneCreateResponse: Cloudflare.ZoneCreateResponse = await cloudflare.zones.create(params);
+  const zone: Cloudflare.Zone = await cloudflare.zones.create(params);
 }
 
 main();
@@ -194,11 +194,11 @@ const response = await cloudflare.zones
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: zoneCreateResponse, response: raw } = await cloudflare.zones
+const { data: zone, response: raw } = await cloudflare.zones
   .create({ account: { id: '023e105f4ecef8ad9ca31a8372d0c353' }, name: 'example.com', type: 'full' })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(zoneCreateResponse.id);
+console.log(zone.id);
 ```
 
 ## Customizing the fetch client
@@ -264,7 +264,7 @@ await cloudflare.zones.delete(
 );
 ```
 
-## Semantic Versioning
+## Semantic versioning
 
 This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions, though certain backwards-incompatible changes may be released as minor versions:
 

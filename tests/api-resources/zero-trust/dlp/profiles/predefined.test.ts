@@ -34,6 +34,7 @@ describe('resource predefined', () => {
         allowed_match_count: 5,
         context_awareness: { enabled: true, skip: { files: true } },
         entries: [{ enabled: true }, { enabled: true }, { enabled: true }],
+        ocr_enabled: true,
       },
     );
   });
