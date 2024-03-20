@@ -369,17 +369,13 @@ export {
 export { ZeroTrust } from './zero-trust/zero-trust';
 export {
   Zone,
-  ZoneCreateResponse,
-  ZoneListResponse,
   ZoneDeleteResponse,
-  ZoneEditResponse,
-  ZoneGetResponse,
   ZoneCreateParams,
   ZoneListParams,
   ZoneDeleteParams,
   ZoneEditParams,
   ZoneGetParams,
-  ZoneListResponsesV4PagePaginationArray,
+  ZonesV4PagePaginationArray,
   Zones,
 } from './zones/zones';
 export {

@@ -38,16 +38,12 @@ export {
 export { Workers } from './workers/index';
 export {
   Zone,
-  ZoneCreateResponse,
-  ZoneListResponse,
   ZoneDeleteResponse,
-  ZoneEditResponse,
-  ZoneGetResponse,
   ZoneCreateParams,
   ZoneListParams,
   ZoneDeleteParams,
   ZoneEditParams,
   ZoneGetParams,
-  ZoneListResponsesV4PagePaginationArray,
+  ZonesV4PagePaginationArray,
   Zones,
 } from './zones';

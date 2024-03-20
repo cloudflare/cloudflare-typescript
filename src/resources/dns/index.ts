@@ -15,13 +15,8 @@ export {
 } from './firewall/index';
 export {
   DNSRecord,
-  RecordCreateResponse,
-  RecordUpdateResponse,
-  RecordListResponse,
   RecordDeleteResponse,
-  RecordEditResponse,
   RecordExportResponse,
-  RecordGetResponse,
   RecordImportResponse,
   RecordScanResponse,
   RecordCreateParams,
@@ -33,6 +28,6 @@ export {
   RecordGetParams,
   RecordImportParams,
   RecordScanParams,
-  RecordListResponsesV4PagePaginationArray,
+  DNSRecordsV4PagePaginationArray,
   Records,
 } from './records';

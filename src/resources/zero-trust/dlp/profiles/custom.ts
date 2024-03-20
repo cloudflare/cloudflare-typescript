@@ -103,6 +103,11 @@ export interface DLPCustomProfile {
   name?: string;
 
   /**
+   * If true, scan images via OCR to determine if any text present matches filters.
+   */
+  ocr_enabled?: boolean;
+
+  /**
    * The type of the profile.
    */
   type?: 'custom';
@@ -236,6 +241,11 @@ export namespace CustomCreateParams {
      * The name of the profile.
      */
     name?: string;
+
+    /**
+     * If true, scan images via OCR to determine if any text present matches filters.
+     */
+    ocr_enabled?: boolean;
   }
 
   export namespace Profile {
@@ -342,6 +352,12 @@ export interface CustomUpdateParams {
    * Body param: The name of the profile.
    */
   name?: string;
+
+  /**
+   * Body param: If true, scan images via OCR to determine if any text present
+   * matches filters.
+   */
+  ocr_enabled?: boolean;
 
   /**
    * Body param: Entries from other profiles (e.g. pre-defined Cloudflare profiles,
