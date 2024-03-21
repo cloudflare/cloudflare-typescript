@@ -2,4 +2,4 @@
 
 export { MagicNetworkMonitoring } from './magic-network-monitoring';
 export { MagicVisibilityMNMConfig, Configs } from './configs/index';
-export { MagicVisibilityMNMRule, RuleListResponse, Rules } from './rules/index';
+export { MagicVisibilityMNMRule, Rules } from './rules/index';

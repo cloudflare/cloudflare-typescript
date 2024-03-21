@@ -1,100 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as RulesAPI from 'cloudflare/resources/magic-network-monitoring/rules/rules';
 import * as AdvertisementsAPI from 'cloudflare/resources/magic-network-monitoring/rules/advertisements';
 
 export class Rules extends APIResource {
   advertisements: AdvertisementsAPI.Advertisements = new AdvertisementsAPI.Advertisements(this._client);
-
-  /**
-   * Create network monitoring rules for account. Currently only supports creating a
-   * single rule per API request.
-   */
-  create(
-    accountIdentifier: unknown,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<MagicVisibilityMNMRule | null> {
-    return (
-      this._client.post(`/accounts/${accountIdentifier}/mnm/rules`, options) as Core.APIPromise<{
-        result: MagicVisibilityMNMRule | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Update network monitoring rules for account.
-   */
-  update(
-    accountIdentifier: unknown,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<MagicVisibilityMNMRule | null> {
-    return (
-      this._client.put(`/accounts/${accountIdentifier}/mnm/rules`, options) as Core.APIPromise<{
-        result: MagicVisibilityMNMRule | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Lists network monitoring rules for account.
-   */
-  list(accountIdentifier: unknown, options?: Core.RequestOptions): Core.APIPromise<RuleListResponse | null> {
-    return (
-      this._client.get(`/accounts/${accountIdentifier}/mnm/rules`, options) as Core.APIPromise<{
-        result: RuleListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Delete a network monitoring rule for account.
-   */
-  delete(
-    accountIdentifier: unknown,
-    ruleIdentifier: unknown,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<MagicVisibilityMNMRule | null> {
-    return (
-      this._client.delete(
-        `/accounts/${accountIdentifier}/mnm/rules/${ruleIdentifier}`,
-        options,
-      ) as Core.APIPromise<{ result: MagicVisibilityMNMRule | null }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Update a network monitoring rule for account.
-   */
-  edit(
-    accountIdentifier: unknown,
-    ruleIdentifier: unknown,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<MagicVisibilityMNMRule | null> {
-    return (
-      this._client.patch(
-        `/accounts/${accountIdentifier}/mnm/rules/${ruleIdentifier}`,
-        options,
-      ) as Core.APIPromise<{ result: MagicVisibilityMNMRule | null }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * List a single network monitoring rule for account.
-   */
-  get(
-    accountIdentifier: unknown,
-    ruleIdentifier: unknown,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<MagicVisibilityMNMRule | null> {
-    return (
-      this._client.get(
-        `/accounts/${accountIdentifier}/mnm/rules/${ruleIdentifier}`,
-        options,
-      ) as Core.APIPromise<{ result: MagicVisibilityMNMRule | null }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 
 export interface MagicVisibilityMNMRule {
@@ -138,11 +49,8 @@ export interface MagicVisibilityMNMRule {
   packet_threshold?: number;
 }
 
-export type RuleListResponse = Array<MagicVisibilityMNMRule | null>;
-
 export namespace Rules {
   export import MagicVisibilityMNMRule = RulesAPI.MagicVisibilityMNMRule;
-  export import RuleListResponse = RulesAPI.RuleListResponse;
   export import Advertisements = AdvertisementsAPI.Advertisements;
   export import MagicVisibilityMNMRuleAdvertisable = AdvertisementsAPI.MagicVisibilityMNMRuleAdvertisable;
 }
