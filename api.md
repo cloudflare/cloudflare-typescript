@@ -3402,45 +3402,19 @@ Types:
 
 - <code><a href="./src/resources/magic-network-monitoring/configs/configs.ts">MagicVisibilityMNMConfig</a></code>
 
-Methods:
-
-- <code title="post /accounts/{account_identifier}/mnm/config">client.magicNetworkMonitoring.configs.<a href="./src/resources/magic-network-monitoring/configs/configs.ts">create</a>(accountIdentifier) -> MagicVisibilityMNMConfig</code>
-- <code title="put /accounts/{account_identifier}/mnm/config">client.magicNetworkMonitoring.configs.<a href="./src/resources/magic-network-monitoring/configs/configs.ts">update</a>(accountIdentifier) -> MagicVisibilityMNMConfig</code>
-- <code title="delete /accounts/{account_identifier}/mnm/config">client.magicNetworkMonitoring.configs.<a href="./src/resources/magic-network-monitoring/configs/configs.ts">delete</a>(accountIdentifier) -> MagicVisibilityMNMConfig</code>
-- <code title="patch /accounts/{account_identifier}/mnm/config">client.magicNetworkMonitoring.configs.<a href="./src/resources/magic-network-monitoring/configs/configs.ts">edit</a>(accountIdentifier) -> MagicVisibilityMNMConfig</code>
-- <code title="get /accounts/{account_identifier}/mnm/config">client.magicNetworkMonitoring.configs.<a href="./src/resources/magic-network-monitoring/configs/configs.ts">get</a>(accountIdentifier) -> MagicVisibilityMNMConfig</code>
-
 ### Full
-
-Methods:
-
-- <code title="get /accounts/{account_identifier}/mnm/config/full">client.magicNetworkMonitoring.configs.full.<a href="./src/resources/magic-network-monitoring/configs/full.ts">get</a>(accountIdentifier) -> MagicVisibilityMNMConfig</code>
 
 ## Rules
 
 Types:
 
 - <code><a href="./src/resources/magic-network-monitoring/rules/rules.ts">MagicVisibilityMNMRule</a></code>
-- <code><a href="./src/resources/magic-network-monitoring/rules/rules.ts">RuleListResponse</a></code>
-
-Methods:
-
-- <code title="post /accounts/{account_identifier}/mnm/rules">client.magicNetworkMonitoring.rules.<a href="./src/resources/magic-network-monitoring/rules/rules.ts">create</a>(accountIdentifier) -> MagicVisibilityMNMRule | null</code>
-- <code title="put /accounts/{account_identifier}/mnm/rules">client.magicNetworkMonitoring.rules.<a href="./src/resources/magic-network-monitoring/rules/rules.ts">update</a>(accountIdentifier) -> MagicVisibilityMNMRule | null</code>
-- <code title="get /accounts/{account_identifier}/mnm/rules">client.magicNetworkMonitoring.rules.<a href="./src/resources/magic-network-monitoring/rules/rules.ts">list</a>(accountIdentifier) -> RuleListResponse | null</code>
-- <code title="delete /accounts/{account_identifier}/mnm/rules/{rule_identifier}">client.magicNetworkMonitoring.rules.<a href="./src/resources/magic-network-monitoring/rules/rules.ts">delete</a>(accountIdentifier, ruleIdentifier) -> MagicVisibilityMNMRule | null</code>
-- <code title="patch /accounts/{account_identifier}/mnm/rules/{rule_identifier}">client.magicNetworkMonitoring.rules.<a href="./src/resources/magic-network-monitoring/rules/rules.ts">edit</a>(accountIdentifier, ruleIdentifier) -> MagicVisibilityMNMRule | null</code>
-- <code title="get /accounts/{account_identifier}/mnm/rules/{rule_identifier}">client.magicNetworkMonitoring.rules.<a href="./src/resources/magic-network-monitoring/rules/rules.ts">get</a>(accountIdentifier, ruleIdentifier) -> MagicVisibilityMNMRule | null</code>
 
 ### Advertisements
 
 Types:
 
 - <code><a href="./src/resources/magic-network-monitoring/rules/advertisements.ts">MagicVisibilityMNMRuleAdvertisable</a></code>
-
-Methods:
-
-- <code title="patch /accounts/{account_identifier}/mnm/rules/{rule_identifier}/advertisement">client.magicNetworkMonitoring.rules.advertisements.<a href="./src/resources/magic-network-monitoring/rules/advertisements.ts">edit</a>(accountIdentifier, ruleIdentifier) -> MagicVisibilityMNMRuleAdvertisable | null</code>
 
 # MTLSCertificates
 

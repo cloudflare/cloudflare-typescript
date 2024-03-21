@@ -14,5 +14,4 @@ export namespace MagicNetworkMonitoring {
   export import MagicVisibilityMNMConfig = ConfigsAPI.MagicVisibilityMNMConfig;
   export import Rules = RulesAPI.Rules;
   export import MagicVisibilityMNMRule = RulesAPI.MagicVisibilityMNMRule;
-  export import RuleListResponse = RulesAPI.RuleListResponse;
 }
