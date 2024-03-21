@@ -37,7 +37,7 @@ export interface AccessIdentity {
 
   iat?: number;
 
-  idp?: AccessIdentity.Idp;
+  idp?: AccessIdentity.IDP;
 
   ip?: string;
 
@@ -93,7 +93,7 @@ export namespace AccessIdentity {
     country?: string;
   }
 
-  export interface Idp {
+  export interface IDP {
     id?: string;
 
     type?: string;
