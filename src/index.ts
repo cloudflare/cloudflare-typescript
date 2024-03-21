@@ -809,6 +809,8 @@ export namespace Cloudflare {
   export import CallGetParams = API.CallGetParams;
 
   export import CloudforceOne = API.CloudforceOne;
+
+  export import ErrorData = API.ErrorData;
 }
 
 export default Cloudflare;
