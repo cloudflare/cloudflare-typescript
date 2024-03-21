@@ -671,6 +671,11 @@ export namespace PagesProjects {
          */
         export interface ServiceBinding {
           /**
+           * The entrypoint to bind to.
+           */
+          entrypoint?: string | null;
+
+          /**
            * The Service environment.
            */
           environment?: string;
@@ -1039,6 +1044,11 @@ export namespace PagesProjects {
          * Service binding.
          */
         export interface ServiceBinding {
+          /**
+           * The entrypoint to bind to.
+           */
+          entrypoint?: string | null;
+
           /**
            * The Service environment.
            */
@@ -1511,6 +1521,11 @@ export namespace ProjectCreateParams {
          */
         export interface ServiceBinding {
           /**
+           * The entrypoint to bind to.
+           */
+          entrypoint?: string | null;
+
+          /**
            * The Service environment.
            */
           environment?: string;
@@ -1879,6 +1894,11 @@ export namespace ProjectCreateParams {
          * Service binding.
          */
         export interface ServiceBinding {
+          /**
+           * The entrypoint to bind to.
+           */
+          entrypoint?: string | null;
+
           /**
            * The Service environment.
            */
