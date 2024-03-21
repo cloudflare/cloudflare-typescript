@@ -53,13 +53,7 @@ describe('resource projects', () => {
           placement: { mode: 'smart' },
           queue_producers: { QUEUE_PRODUCER_BINDING: { name: 'some-queue' } },
           r2_buckets: { R2_BINDING: { name: 'some-bucket' } },
-          services: {
-            SERVICE_BINDING: {
-              entrypoint: 'MyHandler',
-              environment: 'production',
-              service: 'example-worker',
-            },
-          },
+          services: { SERVICE_BINDING: { environment: 'production', service: 'example-worker' } },
           vectorize_bindings: { VECTORIZE: { index_name: 'my_index' } },
         },
         production: {
@@ -77,13 +71,7 @@ describe('resource projects', () => {
           placement: { mode: 'smart' },
           queue_producers: { QUEUE_PRODUCER_BINDING: { name: 'some-queue' } },
           r2_buckets: { R2_BINDING: { name: 'some-bucket' } },
-          services: {
-            SERVICE_BINDING: {
-              entrypoint: 'MyHandler',
-              environment: 'production',
-              service: 'example-worker',
-            },
-          },
+          services: { SERVICE_BINDING: { environment: 'production', service: 'example-worker' } },
           vectorize_bindings: { VECTORIZE: { index_name: 'my_index' } },
         },
       },
