@@ -59,11 +59,11 @@ export namespace Intel {
   export import IntelWhois = WhoisAPI.IntelWhois;
   export import WhoisGetParams = WhoisAPI.WhoisGetParams;
   export import IndicatorFeeds = IndicatorFeedsAPI.IndicatorFeeds;
-  export import IntelIndicatorFeedItem = IndicatorFeedsAPI.IntelIndicatorFeedItem;
-  export import IntelIndicatorFeedMetadata = IndicatorFeedsAPI.IntelIndicatorFeedMetadata;
-  export import IntelUpdateFeed = IndicatorFeedsAPI.IntelUpdateFeed;
+  export import IndicatorFeedCreateResponse = IndicatorFeedsAPI.IndicatorFeedCreateResponse;
+  export import IndicatorFeedUpdateResponse = IndicatorFeedsAPI.IndicatorFeedUpdateResponse;
   export import IndicatorFeedListResponse = IndicatorFeedsAPI.IndicatorFeedListResponse;
   export import IndicatorFeedDataResponse = IndicatorFeedsAPI.IndicatorFeedDataResponse;
+  export import IndicatorFeedGetResponse = IndicatorFeedsAPI.IndicatorFeedGetResponse;
   export import IndicatorFeedCreateParams = IndicatorFeedsAPI.IndicatorFeedCreateParams;
   export import IndicatorFeedUpdateParams = IndicatorFeedsAPI.IndicatorFeedUpdateParams;
   export import IndicatorFeedListParams = IndicatorFeedsAPI.IndicatorFeedListParams;
