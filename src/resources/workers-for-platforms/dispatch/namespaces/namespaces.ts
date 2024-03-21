@@ -101,6 +101,11 @@ export interface NamespaceCreateResponse {
    * Name of the Workers for Platforms dispatch namespace.
    */
   namespace_name?: string;
+
+  /**
+   * The current number of scripts in this Dispatch Namespace
+   */
+  script_count?: number;
 }
 
 export type NamespaceListResponse = Array<NamespaceListResponse.NamespaceListResponseItem>;
@@ -136,6 +141,11 @@ export namespace NamespaceListResponse {
      * Name of the Workers for Platforms dispatch namespace.
      */
     namespace_name?: string;
+
+    /**
+     * The current number of scripts in this Dispatch Namespace
+     */
+    script_count?: number;
   }
 }
 
@@ -171,6 +181,11 @@ export interface NamespaceGetResponse {
    * Name of the Workers for Platforms dispatch namespace.
    */
   namespace_name?: string;
+
+  /**
+   * The current number of scripts in this Dispatch Namespace
+   */
+  script_count?: number;
 }
 
 export interface NamespaceCreateParams {
