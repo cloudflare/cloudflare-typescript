@@ -50,6 +50,7 @@ describe('resource deployments', () => {
   test.skip('list: required and optional params', async () => {
     const response = await cloudflare.pages.projects.deployments.list('this-is-my-project-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      env: 'preview',
     });
   });
 
