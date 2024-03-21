@@ -26,15 +26,8 @@ describe('resource botManagement', () => {
   test.skip('update: required and optional params', async () => {
     const response = await cloudflare.botManagement.update({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      auto_update_model: true,
       enable_js: true,
       fight_mode: true,
-      optimize_wordpress: true,
-      sbfm_definitely_automated: 'allow',
-      sbfm_likely_automated: 'allow',
-      sbfm_static_resource_protection: true,
-      sbfm_verified_bots: 'allow',
-      suppress_session_score: false,
     });
   });
 

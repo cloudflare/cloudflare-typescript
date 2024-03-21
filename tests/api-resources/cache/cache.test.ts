@@ -24,17 +24,6 @@ describe('resource cache', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('purge: required and optional params', async () => {
-    const response = await cloudflare.cache.purge({
-      zone_id: 'string',
-      files: [
-        'http://www.example.com/css/styles.css',
-        'http://www.example.com/css/styles.css',
-        'http://www.example.com/css/styles.css',
-      ],
-      hosts: ['www.example.com', 'images.example.com'],
-      prefixes: ['www.example.com/foo', 'images.example.com/bar/baz'],
-      purge_everything: true,
-      tags: ['some-tag', 'another-tag'],
-    });
+    const response = await cloudflare.cache.purge({ zone_id: 'string', tags: ['some-tag', 'another-tag'] });
   });
 });

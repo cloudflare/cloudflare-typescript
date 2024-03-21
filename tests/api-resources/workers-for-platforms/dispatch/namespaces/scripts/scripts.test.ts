@@ -38,7 +38,6 @@ describe('resource scripts', () => {
           await toFile(Buffer.from('# my file contents'), 'README.md'),
           await toFile(Buffer.from('# my file contents'), 'README.md'),
         ],
-        message: 'string',
         metadata: {
           bindings: [{ name: 'MY_ENV_VAR', text: 'my_data', type: 'plain_text' }],
           body_part: 'worker.js',

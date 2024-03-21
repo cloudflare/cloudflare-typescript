@@ -307,66 +307,140 @@ export namespace BotManagementGetResponse {
   }
 }
 
-export interface BotManagementUpdateParams {
-  /**
-   * Path param: Identifier
-   */
-  zone_id: string;
+export type BotManagementUpdateParams =
+  | BotManagementUpdateParams.BotManagementBotFightModeConfig
+  | BotManagementUpdateParams.BotManagementSbfmDefinitelyConfig
+  | BotManagementUpdateParams.BotManagementSbfmLikelyConfig
+  | BotManagementUpdateParams.BotManagementBmSubscriptionConfig;
 
-  /**
-   * Body param: Automatically update to the newest bot detection models created by
-   * Cloudflare as they are released.
-   * [Learn more.](https://developers.cloudflare.com/bots/reference/machine-learning-models#model-versions-and-release-notes)
-   */
-  auto_update_model?: boolean;
+export namespace BotManagementUpdateParams {
+  export interface BotManagementBotFightModeConfig {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
 
-  /**
-   * Body param: Use lightweight, invisible JavaScript detections to improve Bot
-   * Management.
-   * [Learn more about JavaScript Detections](https://developers.cloudflare.com/bots/reference/javascript-detections/).
-   */
-  enable_js?: boolean;
+    /**
+     * Body param: Use lightweight, invisible JavaScript detections to improve Bot
+     * Management.
+     * [Learn more about JavaScript Detections](https://developers.cloudflare.com/bots/reference/javascript-detections/).
+     */
+    enable_js?: boolean;
 
-  /**
-   * Body param: Whether to enable Bot Fight Mode.
-   */
-  fight_mode?: boolean;
+    /**
+     * Body param: Whether to enable Bot Fight Mode.
+     */
+    fight_mode?: boolean;
+  }
 
-  /**
-   * Body param: Whether to optimize Super Bot Fight Mode protections for Wordpress.
-   */
-  optimize_wordpress?: boolean;
+  export interface BotManagementSbfmDefinitelyConfig {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
 
-  /**
-   * Body param: Super Bot Fight Mode (SBFM) action to take on definitely automated
-   * requests.
-   */
-  sbfm_definitely_automated?: 'allow' | 'block' | 'managed_challenge';
+    /**
+     * Body param: Use lightweight, invisible JavaScript detections to improve Bot
+     * Management.
+     * [Learn more about JavaScript Detections](https://developers.cloudflare.com/bots/reference/javascript-detections/).
+     */
+    enable_js?: boolean;
 
-  /**
-   * Body param: Super Bot Fight Mode (SBFM) action to take on likely automated
-   * requests.
-   */
-  sbfm_likely_automated?: 'allow' | 'block' | 'managed_challenge';
+    /**
+     * Body param: Whether to optimize Super Bot Fight Mode protections for Wordpress.
+     */
+    optimize_wordpress?: boolean;
 
-  /**
-   * Body param: Super Bot Fight Mode (SBFM) to enable static resource protection.
-   * Enable if static resources on your application need bot protection. Note: Static
-   * resource protection can also result in legitimate traffic being blocked.
-   */
-  sbfm_static_resource_protection?: boolean;
+    /**
+     * Body param: Super Bot Fight Mode (SBFM) action to take on definitely automated
+     * requests.
+     */
+    sbfm_definitely_automated?: 'allow' | 'block' | 'managed_challenge';
 
-  /**
-   * Body param: Super Bot Fight Mode (SBFM) action to take on verified bots
-   * requests.
-   */
-  sbfm_verified_bots?: 'allow' | 'block';
+    /**
+     * Body param: Super Bot Fight Mode (SBFM) to enable static resource protection.
+     * Enable if static resources on your application need bot protection. Note: Static
+     * resource protection can also result in legitimate traffic being blocked.
+     */
+    sbfm_static_resource_protection?: boolean;
 
-  /**
-   * Body param: Whether to disable tracking the highest bot score for a session in
-   * the Bot Management cookie.
-   */
-  suppress_session_score?: boolean;
+    /**
+     * Body param: Super Bot Fight Mode (SBFM) action to take on verified bots
+     * requests.
+     */
+    sbfm_verified_bots?: 'allow' | 'block';
+  }
+
+  export interface BotManagementSbfmLikelyConfig {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: Use lightweight, invisible JavaScript detections to improve Bot
+     * Management.
+     * [Learn more about JavaScript Detections](https://developers.cloudflare.com/bots/reference/javascript-detections/).
+     */
+    enable_js?: boolean;
+
+    /**
+     * Body param: Whether to optimize Super Bot Fight Mode protections for Wordpress.
+     */
+    optimize_wordpress?: boolean;
+
+    /**
+     * Body param: Super Bot Fight Mode (SBFM) action to take on definitely automated
+     * requests.
+     */
+    sbfm_definitely_automated?: 'allow' | 'block' | 'managed_challenge';
+
+    /**
+     * Body param: Super Bot Fight Mode (SBFM) action to take on likely automated
+     * requests.
+     */
+    sbfm_likely_automated?: 'allow' | 'block' | 'managed_challenge';
+
+    /**
+     * Body param: Super Bot Fight Mode (SBFM) to enable static resource protection.
+     * Enable if static resources on your application need bot protection. Note: Static
+     * resource protection can also result in legitimate traffic being blocked.
+     */
+    sbfm_static_resource_protection?: boolean;
+
+    /**
+     * Body param: Super Bot Fight Mode (SBFM) action to take on verified bots
+     * requests.
+     */
+    sbfm_verified_bots?: 'allow' | 'block';
+  }
+
+  export interface BotManagementBmSubscriptionConfig {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: Automatically update to the newest bot detection models created by
+     * Cloudflare as they are released.
+     * [Learn more.](https://developers.cloudflare.com/bots/reference/machine-learning-models#model-versions-and-release-notes)
+     */
+    auto_update_model?: boolean;
+
+    /**
+     * Body param: Use lightweight, invisible JavaScript detections to improve Bot
+     * Management.
+     * [Learn more about JavaScript Detections](https://developers.cloudflare.com/bots/reference/javascript-detections/).
+     */
+    enable_js?: boolean;
+
+    /**
+     * Body param: Whether to disable tracking the highest bot score for a session in
+     * the Bot Management cookie.
+     */
+    suppress_session_score?: boolean;
+  }
 }
 
 export interface BotManagementGetParams {

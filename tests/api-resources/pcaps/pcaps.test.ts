@@ -14,6 +14,7 @@ describe('resource pcaps', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.pcaps.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      packet_limit: 10000,
       system: 'magic-transit',
       time_limit: 300,
       type: 'simple',
@@ -31,12 +32,10 @@ describe('resource pcaps', () => {
   test.skip('create: required and optional params', async () => {
     const response = await cloudflare.pcaps.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      packet_limit: 10000,
       system: 'magic-transit',
       time_limit: 300,
       type: 'simple',
-      byte_limit: 500000,
-      colo_name: 'ord02',
-      destination_conf: 's3://pcaps-bucket?region=us-east-1',
       filter_v1: {
         destination_address: '1.2.3.4',
         destination_port: 80,
@@ -44,7 +43,6 @@ describe('resource pcaps', () => {
         source_address: '1.2.3.4',
         source_port: 123,
       },
-      packet_limit: 10000,
     });
   });
 
