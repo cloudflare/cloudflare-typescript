@@ -36,12 +36,12 @@ export class Deployments extends APIResource {
     params: DeploymentListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DeploymentListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${account_id}/pages/projects/${projectName}/deployments`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: DeploymentListResponse }>
+      this._client.get(
+        `/accounts/${account_id}/pages/projects/${projectName}/deployments`,
+        options,
+      ) as Core.APIPromise<{ result: DeploymentListResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -136,14 +136,9 @@ export interface DeploymentCreateParams {
 
 export interface DeploymentListParams {
   /**
-   * Path param: Identifier
+   * Identifier
    */
   account_id: string;
-
-  /**
-   * Query param: What type of deployments to fetch.
-   */
-  env?: 'production' | 'preview';
 }
 
 export interface DeploymentDeleteParams {
