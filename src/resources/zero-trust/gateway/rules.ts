@@ -282,7 +282,7 @@ export namespace ZeroTrustGatewayRules {
     /**
      * Configure behavior when an upstream cert is invalid or an SSL error occurs.
      */
-    untrusted_cert?: RuleSettings.UntrustedCert;
+    untrusted_cert?: RuleSettings.UntrustedCERT;
   }
 
   export namespace RuleSettings {
@@ -476,7 +476,7 @@ export namespace ZeroTrustGatewayRules {
     /**
      * Configure behavior when an upstream cert is invalid or an SSL error occurs.
      */
-    export interface UntrustedCert {
+    export interface UntrustedCERT {
       /**
        * The action performed when an untrusted certificate is seen. The default action
        * is an error with HTTP code 526.
@@ -750,7 +750,7 @@ export namespace RuleCreateParams {
     /**
      * Configure behavior when an upstream cert is invalid or an SSL error occurs.
      */
-    untrusted_cert?: RuleSettings.UntrustedCert;
+    untrusted_cert?: RuleSettings.UntrustedCERT;
   }
 
   export namespace RuleSettings {
@@ -944,7 +944,7 @@ export namespace RuleCreateParams {
     /**
      * Configure behavior when an upstream cert is invalid or an SSL error occurs.
      */
-    export interface UntrustedCert {
+    export interface UntrustedCERT {
       /**
        * The action performed when an untrusted certificate is seen. The default action
        * is an error with HTTP code 526.
@@ -1214,7 +1214,7 @@ export namespace RuleUpdateParams {
     /**
      * Configure behavior when an upstream cert is invalid or an SSL error occurs.
      */
-    untrusted_cert?: RuleSettings.UntrustedCert;
+    untrusted_cert?: RuleSettings.UntrustedCERT;
   }
 
   export namespace RuleSettings {
@@ -1408,7 +1408,7 @@ export namespace RuleUpdateParams {
     /**
      * Configure behavior when an upstream cert is invalid or an SSL error occurs.
      */
-    export interface UntrustedCert {
+    export interface UntrustedCERT {
       /**
        * The action performed when an untrusted certificate is seen. The default action
        * is an error with HTTP code 526.

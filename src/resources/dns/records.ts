@@ -173,7 +173,7 @@ export type DNSRecord =
   | DNSRecord.A
   | DNSRecord.AAAA
   | DNSRecord.CAA
-  | DNSRecord.Cert
+  | DNSRecord.CERT
   | DNSRecord.CNAME
   | DNSRecord.DNSKEY
   | DNSRecord.DS
@@ -183,7 +183,7 @@ export type DNSRecord =
   | DNSRecord.NAPTR
   | DNSRecord.NS
   | DNSRecord.PTR
-  | DNSRecord.Smimea
+  | DNSRecord.SMIMEA
   | DNSRecord.SRV
   | DNSRecord.SSHFP
   | DNSRecord.SVCB
@@ -511,11 +511,11 @@ export namespace DNSRecord {
     }
   }
 
-  export interface Cert {
+  export interface CERT {
     /**
      * Components of a CERT record.
      */
-    data: Cert.Data;
+    data: CERT.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -557,7 +557,7 @@ export namespace DNSRecord {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: Cert.Meta;
+    meta?: CERT.Meta;
 
     /**
      * When the record was last modified.
@@ -592,7 +592,7 @@ export namespace DNSRecord {
     zone_name?: string;
   }
 
-  export namespace Cert {
+  export namespace CERT {
     /**
      * Components of a CERT record.
      */
@@ -1688,11 +1688,11 @@ export namespace DNSRecord {
     }
   }
 
-  export interface Smimea {
+  export interface SMIMEA {
     /**
      * Components of a SMIMEA record.
      */
-    data: Smimea.Data;
+    data: SMIMEA.Data;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -1734,7 +1734,7 @@ export namespace DNSRecord {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: Smimea.Meta;
+    meta?: SMIMEA.Meta;
 
     /**
      * When the record was last modified.
@@ -1769,7 +1769,7 @@ export namespace DNSRecord {
     zone_name?: string;
   }
 
-  export namespace Smimea {
+  export namespace SMIMEA {
     /**
      * Components of a SMIMEA record.
      */
