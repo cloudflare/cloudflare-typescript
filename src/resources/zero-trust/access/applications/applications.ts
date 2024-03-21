@@ -1228,653 +1228,1883 @@ export interface ApplicationDeleteResponse {
 
 export type ApplicationRevokeTokensResponse = unknown;
 
-export interface ApplicationCreateParams {
-  /**
-   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-   * Zone ID.
-   */
-  account_id?: string;
-
-  /**
-   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-   * Account ID.
-   */
-  zone_id?: string;
-
-  /**
-   * Body param: When set to true, users can authenticate to this application using
-   * their WARP session. When set to false this application will always require
-   * direct IdP authentication. This setting always overrides the organization
-   * setting for WARP authentication.
-   */
-  allow_authenticate_via_warp?: boolean;
-
-  /**
-   * Body param: The identity providers your users can select when connecting to this
-   * application. Defaults to all IdPs configured in your account.
-   */
-  allowed_idps?: Array<string>;
-
-  /**
-   * Body param:
-   */
-  app_launcher_visible?: unknown;
-
-  /**
-   * Body param: When set to `true`, users skip the identity provider selection step
-   * during login. You must specify only one identity provider in allowed_idps.
-   */
-  auto_redirect_to_identity?: boolean;
-
-  /**
-   * Body param:
-   */
-  cors_headers?: ApplicationCreateParams.CorsHeaders;
-
-  /**
-   * Body param: The custom error message shown to a user when they are denied access
-   * to the application.
-   */
-  custom_deny_message?: string;
-
-  /**
-   * Body param: The custom URL a user is redirected to when they are denied access
-   * to the application when failing identity-based rules.
-   */
-  custom_deny_url?: string;
-
-  /**
-   * Body param: The custom URL a user is redirected to when they are denied access
-   * to the application when failing non-identity rules.
-   */
-  custom_non_identity_deny_url?: string;
-
-  /**
-   * Body param: The custom pages that will be displayed when applicable for this
-   * application
-   */
-  custom_pages?: Array<string>;
-
-  /**
-   * Body param: The URL or domain of the bookmark.
-   */
-  domain?: unknown;
-
-  /**
-   * Body param: Enables the binding cookie, which increases security against
-   * compromised authorization tokens and CSRF attacks.
-   */
-  enable_binding_cookie?: boolean;
-
-  /**
-   * Body param: Enables the HttpOnly cookie attribute, which increases security
-   * against XSS attacks.
-   */
-  http_only_cookie_attribute?: boolean;
-
-  /**
-   * Body param: The image URL for the logo shown in the App Launcher dashboard.
-   */
-  logo_url?: string;
-
-  /**
-   * Body param: The name of the application.
-   */
-  name?: string;
-
-  /**
-   * Body param: Enables cookie paths to scope an application's JWT to the
-   * application path. If disabled, the JWT will scope to the hostname by default
-   */
-  path_cookie_attribute?: boolean;
-
-  /**
-   * Body param:
-   */
-  saas_app?: ApplicationCreateParams.AccessSamlSaasApp | ApplicationCreateParams.AccessOidcSaasApp;
-
-  /**
-   * Body param: Sets the SameSite cookie setting, which provides increased security
-   * against CSRF attacks.
-   */
-  same_site_cookie_attribute?: string;
-
-  /**
-   * Body param: List of domains that Access will secure.
-   */
-  self_hosted_domains?: Array<string>;
-
-  /**
-   * Body param: Returns a 401 status code when the request is blocked by a Service
-   * Auth policy.
-   */
-  service_auth_401_redirect?: boolean;
-
-  /**
-   * Body param: The amount of time that tokens issued for this application will be
-   * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
-   * (or µs), ms, s, m, h.
-   */
-  session_duration?: string;
-
-  /**
-   * Body param: Enables automatic authentication through cloudflared.
-   */
-  skip_interstitial?: boolean;
-
-  /**
-   * Body param: The tags you want assigned to an application. Tags are used to
-   * filter applications in the App Launcher dashboard.
-   */
-  tags?: Array<string>;
-
-  /**
-   * Body param: The application type.
-   */
-  type?: 'self_hosted' | 'saas' | 'ssh' | 'vnc' | 'app_launcher' | 'warp' | 'biso' | 'bookmark' | 'dash_sso';
-}
+export type ApplicationCreateParams =
+  | ApplicationCreateParams.SelfHostedApplication
+  | ApplicationCreateParams.SaaSApplication
+  | ApplicationCreateParams.BrowserSSHApplication
+  | ApplicationCreateParams.BrowserVncApplication
+  | ApplicationCreateParams.AppLauncherApplication
+  | ApplicationCreateParams.DeviceEnrollmentPermissionsApplication
+  | ApplicationCreateParams.BrowserIsolationPermissionsApplication
+  | ApplicationCreateParams.BookmarkApplication;
 
 export namespace ApplicationCreateParams {
-  export interface CorsHeaders {
+  export interface SelfHostedApplication {
     /**
-     * Allows all HTTP request headers.
+     * Body param: The primary hostname and path that Access will secure. If the app is
+     * visible in the App Launcher dashboard, this is the domain that will be
+     * displayed.
      */
-    allow_all_headers?: boolean;
+    domain: string;
 
     /**
-     * Allows all HTTP request methods.
+     * Body param: The application type.
      */
-    allow_all_methods?: boolean;
+    type: string;
 
     /**
-     * Allows all origins.
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
      */
-    allow_all_origins?: boolean;
+    account_id?: string;
 
     /**
-     * When set to `true`, includes credentials (cookies, authorization headers, or TLS
-     * client certificates) with requests.
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
      */
-    allow_credentials?: boolean;
+    zone_id?: string;
 
     /**
-     * Allowed HTTP request headers.
+     * Body param: When set to true, users can authenticate to this application using
+     * their WARP session. When set to false this application will always require
+     * direct IdP authentication. This setting always overrides the organization
+     * setting for WARP authentication.
      */
-    allowed_headers?: Array<unknown>;
+    allow_authenticate_via_warp?: boolean;
 
     /**
-     * Allowed HTTP request methods.
+     * Body param: The identity providers your users can select when connecting to this
+     * application. Defaults to all IdPs configured in your account.
      */
-    allowed_methods?: Array<
-      'GET' | 'POST' | 'HEAD' | 'PUT' | 'DELETE' | 'CONNECT' | 'OPTIONS' | 'TRACE' | 'PATCH'
-    >;
+    allowed_idps?: Array<string>;
 
     /**
-     * Allowed origins.
+     * Body param: Displays the application in the App Launcher.
      */
-    allowed_origins?: Array<unknown>;
+    app_launcher_visible?: boolean;
 
     /**
-     * The maximum number of seconds the results of a preflight request can be cached.
+     * Body param: When set to `true`, users skip the identity provider selection step
+     * during login. You must specify only one identity provider in allowed_idps.
      */
-    max_age?: number;
+    auto_redirect_to_identity?: boolean;
+
+    /**
+     * Body param:
+     */
+    cors_headers?: ApplicationCreateParams.SelfHostedApplication.CorsHeaders;
+
+    /**
+     * Body param: The custom error message shown to a user when they are denied access
+     * to the application.
+     */
+    custom_deny_message?: string;
+
+    /**
+     * Body param: The custom URL a user is redirected to when they are denied access
+     * to the application when failing identity-based rules.
+     */
+    custom_deny_url?: string;
+
+    /**
+     * Body param: The custom URL a user is redirected to when they are denied access
+     * to the application when failing non-identity rules.
+     */
+    custom_non_identity_deny_url?: string;
+
+    /**
+     * Body param: The custom pages that will be displayed when applicable for this
+     * application
+     */
+    custom_pages?: Array<string>;
+
+    /**
+     * Body param: Enables the binding cookie, which increases security against
+     * compromised authorization tokens and CSRF attacks.
+     */
+    enable_binding_cookie?: boolean;
+
+    /**
+     * Body param: Enables the HttpOnly cookie attribute, which increases security
+     * against XSS attacks.
+     */
+    http_only_cookie_attribute?: boolean;
+
+    /**
+     * Body param: The image URL for the logo shown in the App Launcher dashboard.
+     */
+    logo_url?: string;
+
+    /**
+     * Body param: The name of the application.
+     */
+    name?: string;
+
+    /**
+     * Body param: Enables cookie paths to scope an application's JWT to the
+     * application path. If disabled, the JWT will scope to the hostname by default
+     */
+    path_cookie_attribute?: boolean;
+
+    /**
+     * Body param: Sets the SameSite cookie setting, which provides increased security
+     * against CSRF attacks.
+     */
+    same_site_cookie_attribute?: string;
+
+    /**
+     * Body param: List of domains that Access will secure.
+     */
+    self_hosted_domains?: Array<string>;
+
+    /**
+     * Body param: Returns a 401 status code when the request is blocked by a Service
+     * Auth policy.
+     */
+    service_auth_401_redirect?: boolean;
+
+    /**
+     * Body param: The amount of time that tokens issued for this application will be
+     * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
+     * (or µs), ms, s, m, h.
+     */
+    session_duration?: string;
+
+    /**
+     * Body param: Enables automatic authentication through cloudflared.
+     */
+    skip_interstitial?: boolean;
+
+    /**
+     * Body param: The tags you want assigned to an application. Tags are used to
+     * filter applications in the App Launcher dashboard.
+     */
+    tags?: Array<string>;
   }
 
-  export interface AccessSamlSaasApp {
-    /**
-     * Optional identifier indicating the authentication protocol used for the saas
-     * app. Required for OIDC. Default if unset is "saml"
-     */
-    auth_type?: 'saml' | 'oidc';
-
-    /**
-     * The service provider's endpoint that is responsible for receiving and parsing a
-     * SAML assertion.
-     */
-    consumer_service_url?: string;
-
-    custom_attributes?: AccessSamlSaasApp.CustomAttributes;
-
-    /**
-     * The URL that the user will be redirected to after a successful login for IDP
-     * initiated logins.
-     */
-    default_relay_state?: string;
-
-    /**
-     * The unique identifier for your SaaS application.
-     */
-    idp_entity_id?: string;
-
-    /**
-     * The format of the name identifier sent to the SaaS application.
-     */
-    name_id_format?: 'id' | 'email';
-
-    /**
-     * A [JSONata](https://jsonata.org/) expression that transforms an application's
-     * user identities into a NameID value for its SAML assertion. This expression
-     * should evaluate to a singular string. The output of this expression can override
-     * the `name_id_format` setting.
-     */
-    name_id_transform_jsonata?: string;
-
-    /**
-     * The Access public certificate that will be used to verify your identity.
-     */
-    public_key?: string;
-
-    /**
-     * A globally unique name for an identity or service provider.
-     */
-    sp_entity_id?: string;
-
-    /**
-     * The endpoint where your SaaS application will send login requests.
-     */
-    sso_endpoint?: string;
-  }
-
-  export namespace AccessSamlSaasApp {
-    export interface CustomAttributes {
+  export namespace SelfHostedApplication {
+    export interface CorsHeaders {
       /**
-       * The name of the attribute.
+       * Allows all HTTP request headers.
        */
-      name?: string;
+      allow_all_headers?: boolean;
+
+      /**
+       * Allows all HTTP request methods.
+       */
+      allow_all_methods?: boolean;
+
+      /**
+       * Allows all origins.
+       */
+      allow_all_origins?: boolean;
+
+      /**
+       * When set to `true`, includes credentials (cookies, authorization headers, or TLS
+       * client certificates) with requests.
+       */
+      allow_credentials?: boolean;
+
+      /**
+       * Allowed HTTP request headers.
+       */
+      allowed_headers?: Array<unknown>;
+
+      /**
+       * Allowed HTTP request methods.
+       */
+      allowed_methods?: Array<
+        'GET' | 'POST' | 'HEAD' | 'PUT' | 'DELETE' | 'CONNECT' | 'OPTIONS' | 'TRACE' | 'PATCH'
+      >;
+
+      /**
+       * Allowed origins.
+       */
+      allowed_origins?: Array<unknown>;
+
+      /**
+       * The maximum number of seconds the results of a preflight request can be cached.
+       */
+      max_age?: number;
+    }
+  }
+
+  export interface SaaSApplication {
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: The identity providers your users can select when connecting to this
+     * application. Defaults to all IdPs configured in your account.
+     */
+    allowed_idps?: Array<string>;
+
+    /**
+     * Body param: Displays the application in the App Launcher.
+     */
+    app_launcher_visible?: boolean;
+
+    /**
+     * Body param: When set to `true`, users skip the identity provider selection step
+     * during login. You must specify only one identity provider in allowed_idps.
+     */
+    auto_redirect_to_identity?: boolean;
+
+    /**
+     * Body param: The custom pages that will be displayed when applicable for this
+     * application
+     */
+    custom_pages?: Array<string>;
+
+    /**
+     * Body param: The image URL for the logo shown in the App Launcher dashboard.
+     */
+    logo_url?: string;
+
+    /**
+     * Body param: The name of the application.
+     */
+    name?: string;
+
+    /**
+     * Body param:
+     */
+    saas_app?:
+      | ApplicationCreateParams.SaaSApplication.AccessSamlSaasApp
+      | ApplicationCreateParams.SaaSApplication.AccessOidcSaasApp;
+
+    /**
+     * Body param: The tags you want assigned to an application. Tags are used to
+     * filter applications in the App Launcher dashboard.
+     */
+    tags?: Array<string>;
+
+    /**
+     * Body param: The application type.
+     */
+    type?: string;
+  }
+
+  export namespace SaaSApplication {
+    export interface AccessSamlSaasApp {
+      /**
+       * Optional identifier indicating the authentication protocol used for the saas
+       * app. Required for OIDC. Default if unset is "saml"
+       */
+      auth_type?: 'saml' | 'oidc';
+
+      /**
+       * The service provider's endpoint that is responsible for receiving and parsing a
+       * SAML assertion.
+       */
+      consumer_service_url?: string;
+
+      custom_attributes?: AccessSamlSaasApp.CustomAttributes;
+
+      /**
+       * The URL that the user will be redirected to after a successful login for IDP
+       * initiated logins.
+       */
+      default_relay_state?: string;
+
+      /**
+       * The unique identifier for your SaaS application.
+       */
+      idp_entity_id?: string;
+
+      /**
+       * The format of the name identifier sent to the SaaS application.
+       */
+      name_id_format?: 'id' | 'email';
+
+      /**
+       * A [JSONata](https://jsonata.org/) expression that transforms an application's
+       * user identities into a NameID value for its SAML assertion. This expression
+       * should evaluate to a singular string. The output of this expression can override
+       * the `name_id_format` setting.
+       */
+      name_id_transform_jsonata?: string;
+
+      /**
+       * The Access public certificate that will be used to verify your identity.
+       */
+      public_key?: string;
 
       /**
        * A globally unique name for an identity or service provider.
        */
-      name_format?:
-        | 'urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified'
-        | 'urn:oasis:names:tc:SAML:2.0:attrname-format:basic'
-        | 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri';
+      sp_entity_id?: string;
 
-      source?: CustomAttributes.Source;
+      /**
+       * The endpoint where your SaaS application will send login requests.
+       */
+      sso_endpoint?: string;
     }
 
-    export namespace CustomAttributes {
-      export interface Source {
+    export namespace AccessSamlSaasApp {
+      export interface CustomAttributes {
         /**
-         * The name of the IdP attribute.
+         * The name of the attribute.
          */
         name?: string;
+
+        /**
+         * A globally unique name for an identity or service provider.
+         */
+        name_format?:
+          | 'urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified'
+          | 'urn:oasis:names:tc:SAML:2.0:attrname-format:basic'
+          | 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri';
+
+        source?: CustomAttributes.Source;
       }
+
+      export namespace CustomAttributes {
+        export interface Source {
+          /**
+           * The name of the IdP attribute.
+           */
+          name?: string;
+        }
+      }
+    }
+
+    export interface AccessOidcSaasApp {
+      /**
+       * The URL where this applications tile redirects users
+       */
+      app_launcher_url?: string;
+
+      /**
+       * Identifier of the authentication protocol used for the saas app. Required for
+       * OIDC.
+       */
+      auth_type?: 'saml' | 'oidc';
+
+      /**
+       * The application client id
+       */
+      client_id?: string;
+
+      /**
+       * The application client secret, only returned on POST request.
+       */
+      client_secret?: string;
+
+      /**
+       * The OIDC flows supported by this application
+       */
+      grant_types?: Array<'authorization_code' | 'authorization_code_with_pkce'>;
+
+      /**
+       * A regex to filter Cloudflare groups returned in ID token and userinfo endpoint
+       */
+      group_filter_regex?: string;
+
+      /**
+       * The Access public certificate that will be used to verify your identity.
+       */
+      public_key?: string;
+
+      /**
+       * The permitted URL's for Cloudflare to return Authorization codes and Access/ID
+       * tokens
+       */
+      redirect_uris?: Array<string>;
+
+      /**
+       * Define the user information shared with access
+       */
+      scopes?: Array<'openid' | 'groups' | 'email' | 'profile'>;
     }
   }
 
-  export interface AccessOidcSaasApp {
+  export interface BrowserSSHApplication {
     /**
-     * The URL where this applications tile redirects users
+     * Body param: The primary hostname and path that Access will secure. If the app is
+     * visible in the App Launcher dashboard, this is the domain that will be
+     * displayed.
      */
-    app_launcher_url?: string;
+    domain: string;
 
     /**
-     * Identifier of the authentication protocol used for the saas app. Required for
-     * OIDC.
+     * Body param: The application type.
      */
-    auth_type?: 'saml' | 'oidc';
+    type: string;
 
     /**
-     * The application client id
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
      */
-    client_id?: string;
+    account_id?: string;
 
     /**
-     * The application client secret, only returned on POST request.
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
      */
-    client_secret?: string;
+    zone_id?: string;
 
     /**
-     * The OIDC flows supported by this application
+     * Body param: When set to true, users can authenticate to this application using
+     * their WARP session. When set to false this application will always require
+     * direct IdP authentication. This setting always overrides the organization
+     * setting for WARP authentication.
      */
-    grant_types?: Array<'authorization_code' | 'authorization_code_with_pkce'>;
+    allow_authenticate_via_warp?: boolean;
 
     /**
-     * A regex to filter Cloudflare groups returned in ID token and userinfo endpoint
+     * Body param: The identity providers your users can select when connecting to this
+     * application. Defaults to all IdPs configured in your account.
      */
-    group_filter_regex?: string;
+    allowed_idps?: Array<string>;
 
     /**
-     * The Access public certificate that will be used to verify your identity.
+     * Body param: Displays the application in the App Launcher.
      */
-    public_key?: string;
+    app_launcher_visible?: boolean;
 
     /**
-     * The permitted URL's for Cloudflare to return Authorization codes and Access/ID
-     * tokens
+     * Body param: When set to `true`, users skip the identity provider selection step
+     * during login. You must specify only one identity provider in allowed_idps.
      */
-    redirect_uris?: Array<string>;
+    auto_redirect_to_identity?: boolean;
 
     /**
-     * Define the user information shared with access
+     * Body param:
      */
-    scopes?: Array<'openid' | 'groups' | 'email' | 'profile'>;
+    cors_headers?: ApplicationCreateParams.BrowserSSHApplication.CorsHeaders;
+
+    /**
+     * Body param: The custom error message shown to a user when they are denied access
+     * to the application.
+     */
+    custom_deny_message?: string;
+
+    /**
+     * Body param: The custom URL a user is redirected to when they are denied access
+     * to the application when failing identity-based rules.
+     */
+    custom_deny_url?: string;
+
+    /**
+     * Body param: The custom URL a user is redirected to when they are denied access
+     * to the application when failing non-identity rules.
+     */
+    custom_non_identity_deny_url?: string;
+
+    /**
+     * Body param: The custom pages that will be displayed when applicable for this
+     * application
+     */
+    custom_pages?: Array<string>;
+
+    /**
+     * Body param: Enables the binding cookie, which increases security against
+     * compromised authorization tokens and CSRF attacks.
+     */
+    enable_binding_cookie?: boolean;
+
+    /**
+     * Body param: Enables the HttpOnly cookie attribute, which increases security
+     * against XSS attacks.
+     */
+    http_only_cookie_attribute?: boolean;
+
+    /**
+     * Body param: The image URL for the logo shown in the App Launcher dashboard.
+     */
+    logo_url?: string;
+
+    /**
+     * Body param: The name of the application.
+     */
+    name?: string;
+
+    /**
+     * Body param: Enables cookie paths to scope an application's JWT to the
+     * application path. If disabled, the JWT will scope to the hostname by default
+     */
+    path_cookie_attribute?: boolean;
+
+    /**
+     * Body param: Sets the SameSite cookie setting, which provides increased security
+     * against CSRF attacks.
+     */
+    same_site_cookie_attribute?: string;
+
+    /**
+     * Body param: List of domains that Access will secure.
+     */
+    self_hosted_domains?: Array<string>;
+
+    /**
+     * Body param: Returns a 401 status code when the request is blocked by a Service
+     * Auth policy.
+     */
+    service_auth_401_redirect?: boolean;
+
+    /**
+     * Body param: The amount of time that tokens issued for this application will be
+     * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
+     * (or µs), ms, s, m, h.
+     */
+    session_duration?: string;
+
+    /**
+     * Body param: Enables automatic authentication through cloudflared.
+     */
+    skip_interstitial?: boolean;
+
+    /**
+     * Body param: The tags you want assigned to an application. Tags are used to
+     * filter applications in the App Launcher dashboard.
+     */
+    tags?: Array<string>;
+  }
+
+  export namespace BrowserSSHApplication {
+    export interface CorsHeaders {
+      /**
+       * Allows all HTTP request headers.
+       */
+      allow_all_headers?: boolean;
+
+      /**
+       * Allows all HTTP request methods.
+       */
+      allow_all_methods?: boolean;
+
+      /**
+       * Allows all origins.
+       */
+      allow_all_origins?: boolean;
+
+      /**
+       * When set to `true`, includes credentials (cookies, authorization headers, or TLS
+       * client certificates) with requests.
+       */
+      allow_credentials?: boolean;
+
+      /**
+       * Allowed HTTP request headers.
+       */
+      allowed_headers?: Array<unknown>;
+
+      /**
+       * Allowed HTTP request methods.
+       */
+      allowed_methods?: Array<
+        'GET' | 'POST' | 'HEAD' | 'PUT' | 'DELETE' | 'CONNECT' | 'OPTIONS' | 'TRACE' | 'PATCH'
+      >;
+
+      /**
+       * Allowed origins.
+       */
+      allowed_origins?: Array<unknown>;
+
+      /**
+       * The maximum number of seconds the results of a preflight request can be cached.
+       */
+      max_age?: number;
+    }
+  }
+
+  export interface BrowserVncApplication {
+    /**
+     * Body param: The primary hostname and path that Access will secure. If the app is
+     * visible in the App Launcher dashboard, this is the domain that will be
+     * displayed.
+     */
+    domain: string;
+
+    /**
+     * Body param: The application type.
+     */
+    type: string;
+
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: When set to true, users can authenticate to this application using
+     * their WARP session. When set to false this application will always require
+     * direct IdP authentication. This setting always overrides the organization
+     * setting for WARP authentication.
+     */
+    allow_authenticate_via_warp?: boolean;
+
+    /**
+     * Body param: The identity providers your users can select when connecting to this
+     * application. Defaults to all IdPs configured in your account.
+     */
+    allowed_idps?: Array<string>;
+
+    /**
+     * Body param: Displays the application in the App Launcher.
+     */
+    app_launcher_visible?: boolean;
+
+    /**
+     * Body param: When set to `true`, users skip the identity provider selection step
+     * during login. You must specify only one identity provider in allowed_idps.
+     */
+    auto_redirect_to_identity?: boolean;
+
+    /**
+     * Body param:
+     */
+    cors_headers?: ApplicationCreateParams.BrowserVncApplication.CorsHeaders;
+
+    /**
+     * Body param: The custom error message shown to a user when they are denied access
+     * to the application.
+     */
+    custom_deny_message?: string;
+
+    /**
+     * Body param: The custom URL a user is redirected to when they are denied access
+     * to the application when failing identity-based rules.
+     */
+    custom_deny_url?: string;
+
+    /**
+     * Body param: The custom URL a user is redirected to when they are denied access
+     * to the application when failing non-identity rules.
+     */
+    custom_non_identity_deny_url?: string;
+
+    /**
+     * Body param: The custom pages that will be displayed when applicable for this
+     * application
+     */
+    custom_pages?: Array<string>;
+
+    /**
+     * Body param: Enables the binding cookie, which increases security against
+     * compromised authorization tokens and CSRF attacks.
+     */
+    enable_binding_cookie?: boolean;
+
+    /**
+     * Body param: Enables the HttpOnly cookie attribute, which increases security
+     * against XSS attacks.
+     */
+    http_only_cookie_attribute?: boolean;
+
+    /**
+     * Body param: The image URL for the logo shown in the App Launcher dashboard.
+     */
+    logo_url?: string;
+
+    /**
+     * Body param: The name of the application.
+     */
+    name?: string;
+
+    /**
+     * Body param: Enables cookie paths to scope an application's JWT to the
+     * application path. If disabled, the JWT will scope to the hostname by default
+     */
+    path_cookie_attribute?: boolean;
+
+    /**
+     * Body param: Sets the SameSite cookie setting, which provides increased security
+     * against CSRF attacks.
+     */
+    same_site_cookie_attribute?: string;
+
+    /**
+     * Body param: List of domains that Access will secure.
+     */
+    self_hosted_domains?: Array<string>;
+
+    /**
+     * Body param: Returns a 401 status code when the request is blocked by a Service
+     * Auth policy.
+     */
+    service_auth_401_redirect?: boolean;
+
+    /**
+     * Body param: The amount of time that tokens issued for this application will be
+     * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
+     * (or µs), ms, s, m, h.
+     */
+    session_duration?: string;
+
+    /**
+     * Body param: Enables automatic authentication through cloudflared.
+     */
+    skip_interstitial?: boolean;
+
+    /**
+     * Body param: The tags you want assigned to an application. Tags are used to
+     * filter applications in the App Launcher dashboard.
+     */
+    tags?: Array<string>;
+  }
+
+  export namespace BrowserVncApplication {
+    export interface CorsHeaders {
+      /**
+       * Allows all HTTP request headers.
+       */
+      allow_all_headers?: boolean;
+
+      /**
+       * Allows all HTTP request methods.
+       */
+      allow_all_methods?: boolean;
+
+      /**
+       * Allows all origins.
+       */
+      allow_all_origins?: boolean;
+
+      /**
+       * When set to `true`, includes credentials (cookies, authorization headers, or TLS
+       * client certificates) with requests.
+       */
+      allow_credentials?: boolean;
+
+      /**
+       * Allowed HTTP request headers.
+       */
+      allowed_headers?: Array<unknown>;
+
+      /**
+       * Allowed HTTP request methods.
+       */
+      allowed_methods?: Array<
+        'GET' | 'POST' | 'HEAD' | 'PUT' | 'DELETE' | 'CONNECT' | 'OPTIONS' | 'TRACE' | 'PATCH'
+      >;
+
+      /**
+       * Allowed origins.
+       */
+      allowed_origins?: Array<unknown>;
+
+      /**
+       * The maximum number of seconds the results of a preflight request can be cached.
+       */
+      max_age?: number;
+    }
+  }
+
+  export interface AppLauncherApplication {
+    /**
+     * Body param: The application type.
+     */
+    type: 'self_hosted' | 'saas' | 'ssh' | 'vnc' | 'app_launcher' | 'warp' | 'biso' | 'bookmark' | 'dash_sso';
+
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: The identity providers your users can select when connecting to this
+     * application. Defaults to all IdPs configured in your account.
+     */
+    allowed_idps?: Array<string>;
+
+    /**
+     * Body param: When set to `true`, users skip the identity provider selection step
+     * during login. You must specify only one identity provider in allowed_idps.
+     */
+    auto_redirect_to_identity?: boolean;
+
+    /**
+     * Body param: The amount of time that tokens issued for this application will be
+     * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
+     * (or µs), ms, s, m, h.
+     */
+    session_duration?: string;
+  }
+
+  export interface DeviceEnrollmentPermissionsApplication {
+    /**
+     * Body param: The application type.
+     */
+    type: 'self_hosted' | 'saas' | 'ssh' | 'vnc' | 'app_launcher' | 'warp' | 'biso' | 'bookmark' | 'dash_sso';
+
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: The identity providers your users can select when connecting to this
+     * application. Defaults to all IdPs configured in your account.
+     */
+    allowed_idps?: Array<string>;
+
+    /**
+     * Body param: When set to `true`, users skip the identity provider selection step
+     * during login. You must specify only one identity provider in allowed_idps.
+     */
+    auto_redirect_to_identity?: boolean;
+
+    /**
+     * Body param: The amount of time that tokens issued for this application will be
+     * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
+     * (or µs), ms, s, m, h.
+     */
+    session_duration?: string;
+  }
+
+  export interface BrowserIsolationPermissionsApplication {
+    /**
+     * Body param: The application type.
+     */
+    type: 'self_hosted' | 'saas' | 'ssh' | 'vnc' | 'app_launcher' | 'warp' | 'biso' | 'bookmark' | 'dash_sso';
+
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: The identity providers your users can select when connecting to this
+     * application. Defaults to all IdPs configured in your account.
+     */
+    allowed_idps?: Array<string>;
+
+    /**
+     * Body param: When set to `true`, users skip the identity provider selection step
+     * during login. You must specify only one identity provider in allowed_idps.
+     */
+    auto_redirect_to_identity?: boolean;
+
+    /**
+     * Body param: The amount of time that tokens issued for this application will be
+     * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
+     * (or µs), ms, s, m, h.
+     */
+    session_duration?: string;
+  }
+
+  export interface BookmarkApplication {
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param:
+     */
+    app_launcher_visible?: unknown;
+
+    /**
+     * Body param: The URL or domain of the bookmark.
+     */
+    domain?: unknown;
+
+    /**
+     * Body param: The image URL for the logo shown in the App Launcher dashboard.
+     */
+    logo_url?: string;
+
+    /**
+     * Body param: The name of the application.
+     */
+    name?: string;
+
+    /**
+     * Body param: The tags you want assigned to an application. Tags are used to
+     * filter applications in the App Launcher dashboard.
+     */
+    tags?: Array<string>;
+
+    /**
+     * Body param: The application type.
+     */
+    type?: string;
   }
 }
 
-export interface ApplicationUpdateParams {
-  /**
-   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-   * Zone ID.
-   */
-  account_id?: string;
-
-  /**
-   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-   * Account ID.
-   */
-  zone_id?: string;
-
-  /**
-   * Body param: When set to true, users can authenticate to this application using
-   * their WARP session. When set to false this application will always require
-   * direct IdP authentication. This setting always overrides the organization
-   * setting for WARP authentication.
-   */
-  allow_authenticate_via_warp?: boolean;
-
-  /**
-   * Body param: The identity providers your users can select when connecting to this
-   * application. Defaults to all IdPs configured in your account.
-   */
-  allowed_idps?: Array<string>;
-
-  /**
-   * Body param:
-   */
-  app_launcher_visible?: unknown;
-
-  /**
-   * Body param: When set to `true`, users skip the identity provider selection step
-   * during login. You must specify only one identity provider in allowed_idps.
-   */
-  auto_redirect_to_identity?: boolean;
-
-  /**
-   * Body param:
-   */
-  cors_headers?: ApplicationUpdateParams.CorsHeaders;
-
-  /**
-   * Body param: The custom error message shown to a user when they are denied access
-   * to the application.
-   */
-  custom_deny_message?: string;
-
-  /**
-   * Body param: The custom URL a user is redirected to when they are denied access
-   * to the application when failing identity-based rules.
-   */
-  custom_deny_url?: string;
-
-  /**
-   * Body param: The custom URL a user is redirected to when they are denied access
-   * to the application when failing non-identity rules.
-   */
-  custom_non_identity_deny_url?: string;
-
-  /**
-   * Body param: The custom pages that will be displayed when applicable for this
-   * application
-   */
-  custom_pages?: Array<string>;
-
-  /**
-   * Body param: The URL or domain of the bookmark.
-   */
-  domain?: unknown;
-
-  /**
-   * Body param: Enables the binding cookie, which increases security against
-   * compromised authorization tokens and CSRF attacks.
-   */
-  enable_binding_cookie?: boolean;
-
-  /**
-   * Body param: Enables the HttpOnly cookie attribute, which increases security
-   * against XSS attacks.
-   */
-  http_only_cookie_attribute?: boolean;
-
-  /**
-   * Body param: The image URL for the logo shown in the App Launcher dashboard.
-   */
-  logo_url?: string;
-
-  /**
-   * Body param: The name of the application.
-   */
-  name?: string;
-
-  /**
-   * Body param: Enables cookie paths to scope an application's JWT to the
-   * application path. If disabled, the JWT will scope to the hostname by default
-   */
-  path_cookie_attribute?: boolean;
-
-  /**
-   * Body param:
-   */
-  saas_app?: ApplicationUpdateParams.AccessSamlSaasApp | ApplicationUpdateParams.AccessOidcSaasApp;
-
-  /**
-   * Body param: Sets the SameSite cookie setting, which provides increased security
-   * against CSRF attacks.
-   */
-  same_site_cookie_attribute?: string;
-
-  /**
-   * Body param: List of domains that Access will secure.
-   */
-  self_hosted_domains?: Array<string>;
-
-  /**
-   * Body param: Returns a 401 status code when the request is blocked by a Service
-   * Auth policy.
-   */
-  service_auth_401_redirect?: boolean;
-
-  /**
-   * Body param: The amount of time that tokens issued for this application will be
-   * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
-   * (or µs), ms, s, m, h.
-   */
-  session_duration?: string;
-
-  /**
-   * Body param: Enables automatic authentication through cloudflared.
-   */
-  skip_interstitial?: boolean;
-
-  /**
-   * Body param: The tags you want assigned to an application. Tags are used to
-   * filter applications in the App Launcher dashboard.
-   */
-  tags?: Array<string>;
-
-  /**
-   * Body param: The application type.
-   */
-  type?: 'self_hosted' | 'saas' | 'ssh' | 'vnc' | 'app_launcher' | 'warp' | 'biso' | 'bookmark' | 'dash_sso';
-}
+export type ApplicationUpdateParams =
+  | ApplicationUpdateParams.SelfHostedApplication
+  | ApplicationUpdateParams.SaaSApplication
+  | ApplicationUpdateParams.BrowserSSHApplication
+  | ApplicationUpdateParams.BrowserVncApplication
+  | ApplicationUpdateParams.AppLauncherApplication
+  | ApplicationUpdateParams.DeviceEnrollmentPermissionsApplication
+  | ApplicationUpdateParams.BrowserIsolationPermissionsApplication
+  | ApplicationUpdateParams.BookmarkApplication;
 
 export namespace ApplicationUpdateParams {
-  export interface CorsHeaders {
+  export interface SelfHostedApplication {
     /**
-     * Allows all HTTP request headers.
+     * Body param: The primary hostname and path that Access will secure. If the app is
+     * visible in the App Launcher dashboard, this is the domain that will be
+     * displayed.
      */
-    allow_all_headers?: boolean;
+    domain: string;
 
     /**
-     * Allows all HTTP request methods.
+     * Body param: The application type.
      */
-    allow_all_methods?: boolean;
+    type: string;
 
     /**
-     * Allows all origins.
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
      */
-    allow_all_origins?: boolean;
+    account_id?: string;
 
     /**
-     * When set to `true`, includes credentials (cookies, authorization headers, or TLS
-     * client certificates) with requests.
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
      */
-    allow_credentials?: boolean;
+    zone_id?: string;
 
     /**
-     * Allowed HTTP request headers.
+     * Body param: When set to true, users can authenticate to this application using
+     * their WARP session. When set to false this application will always require
+     * direct IdP authentication. This setting always overrides the organization
+     * setting for WARP authentication.
      */
-    allowed_headers?: Array<unknown>;
+    allow_authenticate_via_warp?: boolean;
 
     /**
-     * Allowed HTTP request methods.
+     * Body param: The identity providers your users can select when connecting to this
+     * application. Defaults to all IdPs configured in your account.
      */
-    allowed_methods?: Array<
-      'GET' | 'POST' | 'HEAD' | 'PUT' | 'DELETE' | 'CONNECT' | 'OPTIONS' | 'TRACE' | 'PATCH'
-    >;
+    allowed_idps?: Array<string>;
 
     /**
-     * Allowed origins.
+     * Body param: Displays the application in the App Launcher.
      */
-    allowed_origins?: Array<unknown>;
+    app_launcher_visible?: boolean;
 
     /**
-     * The maximum number of seconds the results of a preflight request can be cached.
+     * Body param: When set to `true`, users skip the identity provider selection step
+     * during login. You must specify only one identity provider in allowed_idps.
      */
-    max_age?: number;
+    auto_redirect_to_identity?: boolean;
+
+    /**
+     * Body param:
+     */
+    cors_headers?: ApplicationUpdateParams.SelfHostedApplication.CorsHeaders;
+
+    /**
+     * Body param: The custom error message shown to a user when they are denied access
+     * to the application.
+     */
+    custom_deny_message?: string;
+
+    /**
+     * Body param: The custom URL a user is redirected to when they are denied access
+     * to the application when failing identity-based rules.
+     */
+    custom_deny_url?: string;
+
+    /**
+     * Body param: The custom URL a user is redirected to when they are denied access
+     * to the application when failing non-identity rules.
+     */
+    custom_non_identity_deny_url?: string;
+
+    /**
+     * Body param: The custom pages that will be displayed when applicable for this
+     * application
+     */
+    custom_pages?: Array<string>;
+
+    /**
+     * Body param: Enables the binding cookie, which increases security against
+     * compromised authorization tokens and CSRF attacks.
+     */
+    enable_binding_cookie?: boolean;
+
+    /**
+     * Body param: Enables the HttpOnly cookie attribute, which increases security
+     * against XSS attacks.
+     */
+    http_only_cookie_attribute?: boolean;
+
+    /**
+     * Body param: The image URL for the logo shown in the App Launcher dashboard.
+     */
+    logo_url?: string;
+
+    /**
+     * Body param: The name of the application.
+     */
+    name?: string;
+
+    /**
+     * Body param: Enables cookie paths to scope an application's JWT to the
+     * application path. If disabled, the JWT will scope to the hostname by default
+     */
+    path_cookie_attribute?: boolean;
+
+    /**
+     * Body param: Sets the SameSite cookie setting, which provides increased security
+     * against CSRF attacks.
+     */
+    same_site_cookie_attribute?: string;
+
+    /**
+     * Body param: List of domains that Access will secure.
+     */
+    self_hosted_domains?: Array<string>;
+
+    /**
+     * Body param: Returns a 401 status code when the request is blocked by a Service
+     * Auth policy.
+     */
+    service_auth_401_redirect?: boolean;
+
+    /**
+     * Body param: The amount of time that tokens issued for this application will be
+     * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
+     * (or µs), ms, s, m, h.
+     */
+    session_duration?: string;
+
+    /**
+     * Body param: Enables automatic authentication through cloudflared.
+     */
+    skip_interstitial?: boolean;
+
+    /**
+     * Body param: The tags you want assigned to an application. Tags are used to
+     * filter applications in the App Launcher dashboard.
+     */
+    tags?: Array<string>;
   }
 
-  export interface AccessSamlSaasApp {
-    /**
-     * Optional identifier indicating the authentication protocol used for the saas
-     * app. Required for OIDC. Default if unset is "saml"
-     */
-    auth_type?: 'saml' | 'oidc';
-
-    /**
-     * The service provider's endpoint that is responsible for receiving and parsing a
-     * SAML assertion.
-     */
-    consumer_service_url?: string;
-
-    custom_attributes?: AccessSamlSaasApp.CustomAttributes;
-
-    /**
-     * The URL that the user will be redirected to after a successful login for IDP
-     * initiated logins.
-     */
-    default_relay_state?: string;
-
-    /**
-     * The unique identifier for your SaaS application.
-     */
-    idp_entity_id?: string;
-
-    /**
-     * The format of the name identifier sent to the SaaS application.
-     */
-    name_id_format?: 'id' | 'email';
-
-    /**
-     * A [JSONata](https://jsonata.org/) expression that transforms an application's
-     * user identities into a NameID value for its SAML assertion. This expression
-     * should evaluate to a singular string. The output of this expression can override
-     * the `name_id_format` setting.
-     */
-    name_id_transform_jsonata?: string;
-
-    /**
-     * The Access public certificate that will be used to verify your identity.
-     */
-    public_key?: string;
-
-    /**
-     * A globally unique name for an identity or service provider.
-     */
-    sp_entity_id?: string;
-
-    /**
-     * The endpoint where your SaaS application will send login requests.
-     */
-    sso_endpoint?: string;
-  }
-
-  export namespace AccessSamlSaasApp {
-    export interface CustomAttributes {
+  export namespace SelfHostedApplication {
+    export interface CorsHeaders {
       /**
-       * The name of the attribute.
+       * Allows all HTTP request headers.
        */
-      name?: string;
+      allow_all_headers?: boolean;
+
+      /**
+       * Allows all HTTP request methods.
+       */
+      allow_all_methods?: boolean;
+
+      /**
+       * Allows all origins.
+       */
+      allow_all_origins?: boolean;
+
+      /**
+       * When set to `true`, includes credentials (cookies, authorization headers, or TLS
+       * client certificates) with requests.
+       */
+      allow_credentials?: boolean;
+
+      /**
+       * Allowed HTTP request headers.
+       */
+      allowed_headers?: Array<unknown>;
+
+      /**
+       * Allowed HTTP request methods.
+       */
+      allowed_methods?: Array<
+        'GET' | 'POST' | 'HEAD' | 'PUT' | 'DELETE' | 'CONNECT' | 'OPTIONS' | 'TRACE' | 'PATCH'
+      >;
+
+      /**
+       * Allowed origins.
+       */
+      allowed_origins?: Array<unknown>;
+
+      /**
+       * The maximum number of seconds the results of a preflight request can be cached.
+       */
+      max_age?: number;
+    }
+  }
+
+  export interface SaaSApplication {
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: The identity providers your users can select when connecting to this
+     * application. Defaults to all IdPs configured in your account.
+     */
+    allowed_idps?: Array<string>;
+
+    /**
+     * Body param: Displays the application in the App Launcher.
+     */
+    app_launcher_visible?: boolean;
+
+    /**
+     * Body param: When set to `true`, users skip the identity provider selection step
+     * during login. You must specify only one identity provider in allowed_idps.
+     */
+    auto_redirect_to_identity?: boolean;
+
+    /**
+     * Body param: The custom pages that will be displayed when applicable for this
+     * application
+     */
+    custom_pages?: Array<string>;
+
+    /**
+     * Body param: The image URL for the logo shown in the App Launcher dashboard.
+     */
+    logo_url?: string;
+
+    /**
+     * Body param: The name of the application.
+     */
+    name?: string;
+
+    /**
+     * Body param:
+     */
+    saas_app?:
+      | ApplicationUpdateParams.SaaSApplication.AccessSamlSaasApp
+      | ApplicationUpdateParams.SaaSApplication.AccessOidcSaasApp;
+
+    /**
+     * Body param: The tags you want assigned to an application. Tags are used to
+     * filter applications in the App Launcher dashboard.
+     */
+    tags?: Array<string>;
+
+    /**
+     * Body param: The application type.
+     */
+    type?: string;
+  }
+
+  export namespace SaaSApplication {
+    export interface AccessSamlSaasApp {
+      /**
+       * Optional identifier indicating the authentication protocol used for the saas
+       * app. Required for OIDC. Default if unset is "saml"
+       */
+      auth_type?: 'saml' | 'oidc';
+
+      /**
+       * The service provider's endpoint that is responsible for receiving and parsing a
+       * SAML assertion.
+       */
+      consumer_service_url?: string;
+
+      custom_attributes?: AccessSamlSaasApp.CustomAttributes;
+
+      /**
+       * The URL that the user will be redirected to after a successful login for IDP
+       * initiated logins.
+       */
+      default_relay_state?: string;
+
+      /**
+       * The unique identifier for your SaaS application.
+       */
+      idp_entity_id?: string;
+
+      /**
+       * The format of the name identifier sent to the SaaS application.
+       */
+      name_id_format?: 'id' | 'email';
+
+      /**
+       * A [JSONata](https://jsonata.org/) expression that transforms an application's
+       * user identities into a NameID value for its SAML assertion. This expression
+       * should evaluate to a singular string. The output of this expression can override
+       * the `name_id_format` setting.
+       */
+      name_id_transform_jsonata?: string;
+
+      /**
+       * The Access public certificate that will be used to verify your identity.
+       */
+      public_key?: string;
 
       /**
        * A globally unique name for an identity or service provider.
        */
-      name_format?:
-        | 'urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified'
-        | 'urn:oasis:names:tc:SAML:2.0:attrname-format:basic'
-        | 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri';
+      sp_entity_id?: string;
 
-      source?: CustomAttributes.Source;
+      /**
+       * The endpoint where your SaaS application will send login requests.
+       */
+      sso_endpoint?: string;
     }
 
-    export namespace CustomAttributes {
-      export interface Source {
+    export namespace AccessSamlSaasApp {
+      export interface CustomAttributes {
         /**
-         * The name of the IdP attribute.
+         * The name of the attribute.
          */
         name?: string;
+
+        /**
+         * A globally unique name for an identity or service provider.
+         */
+        name_format?:
+          | 'urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified'
+          | 'urn:oasis:names:tc:SAML:2.0:attrname-format:basic'
+          | 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri';
+
+        source?: CustomAttributes.Source;
       }
+
+      export namespace CustomAttributes {
+        export interface Source {
+          /**
+           * The name of the IdP attribute.
+           */
+          name?: string;
+        }
+      }
+    }
+
+    export interface AccessOidcSaasApp {
+      /**
+       * The URL where this applications tile redirects users
+       */
+      app_launcher_url?: string;
+
+      /**
+       * Identifier of the authentication protocol used for the saas app. Required for
+       * OIDC.
+       */
+      auth_type?: 'saml' | 'oidc';
+
+      /**
+       * The application client id
+       */
+      client_id?: string;
+
+      /**
+       * The application client secret, only returned on POST request.
+       */
+      client_secret?: string;
+
+      /**
+       * The OIDC flows supported by this application
+       */
+      grant_types?: Array<'authorization_code' | 'authorization_code_with_pkce'>;
+
+      /**
+       * A regex to filter Cloudflare groups returned in ID token and userinfo endpoint
+       */
+      group_filter_regex?: string;
+
+      /**
+       * The Access public certificate that will be used to verify your identity.
+       */
+      public_key?: string;
+
+      /**
+       * The permitted URL's for Cloudflare to return Authorization codes and Access/ID
+       * tokens
+       */
+      redirect_uris?: Array<string>;
+
+      /**
+       * Define the user information shared with access
+       */
+      scopes?: Array<'openid' | 'groups' | 'email' | 'profile'>;
     }
   }
 
-  export interface AccessOidcSaasApp {
+  export interface BrowserSSHApplication {
     /**
-     * The URL where this applications tile redirects users
+     * Body param: The primary hostname and path that Access will secure. If the app is
+     * visible in the App Launcher dashboard, this is the domain that will be
+     * displayed.
      */
-    app_launcher_url?: string;
+    domain: string;
 
     /**
-     * Identifier of the authentication protocol used for the saas app. Required for
-     * OIDC.
+     * Body param: The application type.
      */
-    auth_type?: 'saml' | 'oidc';
+    type: string;
 
     /**
-     * The application client id
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
      */
-    client_id?: string;
+    account_id?: string;
 
     /**
-     * The application client secret, only returned on POST request.
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
      */
-    client_secret?: string;
+    zone_id?: string;
 
     /**
-     * The OIDC flows supported by this application
+     * Body param: When set to true, users can authenticate to this application using
+     * their WARP session. When set to false this application will always require
+     * direct IdP authentication. This setting always overrides the organization
+     * setting for WARP authentication.
      */
-    grant_types?: Array<'authorization_code' | 'authorization_code_with_pkce'>;
+    allow_authenticate_via_warp?: boolean;
 
     /**
-     * A regex to filter Cloudflare groups returned in ID token and userinfo endpoint
+     * Body param: The identity providers your users can select when connecting to this
+     * application. Defaults to all IdPs configured in your account.
      */
-    group_filter_regex?: string;
+    allowed_idps?: Array<string>;
 
     /**
-     * The Access public certificate that will be used to verify your identity.
+     * Body param: Displays the application in the App Launcher.
      */
-    public_key?: string;
+    app_launcher_visible?: boolean;
 
     /**
-     * The permitted URL's for Cloudflare to return Authorization codes and Access/ID
-     * tokens
+     * Body param: When set to `true`, users skip the identity provider selection step
+     * during login. You must specify only one identity provider in allowed_idps.
      */
-    redirect_uris?: Array<string>;
+    auto_redirect_to_identity?: boolean;
 
     /**
-     * Define the user information shared with access
+     * Body param:
      */
-    scopes?: Array<'openid' | 'groups' | 'email' | 'profile'>;
+    cors_headers?: ApplicationUpdateParams.BrowserSSHApplication.CorsHeaders;
+
+    /**
+     * Body param: The custom error message shown to a user when they are denied access
+     * to the application.
+     */
+    custom_deny_message?: string;
+
+    /**
+     * Body param: The custom URL a user is redirected to when they are denied access
+     * to the application when failing identity-based rules.
+     */
+    custom_deny_url?: string;
+
+    /**
+     * Body param: The custom URL a user is redirected to when they are denied access
+     * to the application when failing non-identity rules.
+     */
+    custom_non_identity_deny_url?: string;
+
+    /**
+     * Body param: The custom pages that will be displayed when applicable for this
+     * application
+     */
+    custom_pages?: Array<string>;
+
+    /**
+     * Body param: Enables the binding cookie, which increases security against
+     * compromised authorization tokens and CSRF attacks.
+     */
+    enable_binding_cookie?: boolean;
+
+    /**
+     * Body param: Enables the HttpOnly cookie attribute, which increases security
+     * against XSS attacks.
+     */
+    http_only_cookie_attribute?: boolean;
+
+    /**
+     * Body param: The image URL for the logo shown in the App Launcher dashboard.
+     */
+    logo_url?: string;
+
+    /**
+     * Body param: The name of the application.
+     */
+    name?: string;
+
+    /**
+     * Body param: Enables cookie paths to scope an application's JWT to the
+     * application path. If disabled, the JWT will scope to the hostname by default
+     */
+    path_cookie_attribute?: boolean;
+
+    /**
+     * Body param: Sets the SameSite cookie setting, which provides increased security
+     * against CSRF attacks.
+     */
+    same_site_cookie_attribute?: string;
+
+    /**
+     * Body param: List of domains that Access will secure.
+     */
+    self_hosted_domains?: Array<string>;
+
+    /**
+     * Body param: Returns a 401 status code when the request is blocked by a Service
+     * Auth policy.
+     */
+    service_auth_401_redirect?: boolean;
+
+    /**
+     * Body param: The amount of time that tokens issued for this application will be
+     * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
+     * (or µs), ms, s, m, h.
+     */
+    session_duration?: string;
+
+    /**
+     * Body param: Enables automatic authentication through cloudflared.
+     */
+    skip_interstitial?: boolean;
+
+    /**
+     * Body param: The tags you want assigned to an application. Tags are used to
+     * filter applications in the App Launcher dashboard.
+     */
+    tags?: Array<string>;
+  }
+
+  export namespace BrowserSSHApplication {
+    export interface CorsHeaders {
+      /**
+       * Allows all HTTP request headers.
+       */
+      allow_all_headers?: boolean;
+
+      /**
+       * Allows all HTTP request methods.
+       */
+      allow_all_methods?: boolean;
+
+      /**
+       * Allows all origins.
+       */
+      allow_all_origins?: boolean;
+
+      /**
+       * When set to `true`, includes credentials (cookies, authorization headers, or TLS
+       * client certificates) with requests.
+       */
+      allow_credentials?: boolean;
+
+      /**
+       * Allowed HTTP request headers.
+       */
+      allowed_headers?: Array<unknown>;
+
+      /**
+       * Allowed HTTP request methods.
+       */
+      allowed_methods?: Array<
+        'GET' | 'POST' | 'HEAD' | 'PUT' | 'DELETE' | 'CONNECT' | 'OPTIONS' | 'TRACE' | 'PATCH'
+      >;
+
+      /**
+       * Allowed origins.
+       */
+      allowed_origins?: Array<unknown>;
+
+      /**
+       * The maximum number of seconds the results of a preflight request can be cached.
+       */
+      max_age?: number;
+    }
+  }
+
+  export interface BrowserVncApplication {
+    /**
+     * Body param: The primary hostname and path that Access will secure. If the app is
+     * visible in the App Launcher dashboard, this is the domain that will be
+     * displayed.
+     */
+    domain: string;
+
+    /**
+     * Body param: The application type.
+     */
+    type: string;
+
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: When set to true, users can authenticate to this application using
+     * their WARP session. When set to false this application will always require
+     * direct IdP authentication. This setting always overrides the organization
+     * setting for WARP authentication.
+     */
+    allow_authenticate_via_warp?: boolean;
+
+    /**
+     * Body param: The identity providers your users can select when connecting to this
+     * application. Defaults to all IdPs configured in your account.
+     */
+    allowed_idps?: Array<string>;
+
+    /**
+     * Body param: Displays the application in the App Launcher.
+     */
+    app_launcher_visible?: boolean;
+
+    /**
+     * Body param: When set to `true`, users skip the identity provider selection step
+     * during login. You must specify only one identity provider in allowed_idps.
+     */
+    auto_redirect_to_identity?: boolean;
+
+    /**
+     * Body param:
+     */
+    cors_headers?: ApplicationUpdateParams.BrowserVncApplication.CorsHeaders;
+
+    /**
+     * Body param: The custom error message shown to a user when they are denied access
+     * to the application.
+     */
+    custom_deny_message?: string;
+
+    /**
+     * Body param: The custom URL a user is redirected to when they are denied access
+     * to the application when failing identity-based rules.
+     */
+    custom_deny_url?: string;
+
+    /**
+     * Body param: The custom URL a user is redirected to when they are denied access
+     * to the application when failing non-identity rules.
+     */
+    custom_non_identity_deny_url?: string;
+
+    /**
+     * Body param: The custom pages that will be displayed when applicable for this
+     * application
+     */
+    custom_pages?: Array<string>;
+
+    /**
+     * Body param: Enables the binding cookie, which increases security against
+     * compromised authorization tokens and CSRF attacks.
+     */
+    enable_binding_cookie?: boolean;
+
+    /**
+     * Body param: Enables the HttpOnly cookie attribute, which increases security
+     * against XSS attacks.
+     */
+    http_only_cookie_attribute?: boolean;
+
+    /**
+     * Body param: The image URL for the logo shown in the App Launcher dashboard.
+     */
+    logo_url?: string;
+
+    /**
+     * Body param: The name of the application.
+     */
+    name?: string;
+
+    /**
+     * Body param: Enables cookie paths to scope an application's JWT to the
+     * application path. If disabled, the JWT will scope to the hostname by default
+     */
+    path_cookie_attribute?: boolean;
+
+    /**
+     * Body param: Sets the SameSite cookie setting, which provides increased security
+     * against CSRF attacks.
+     */
+    same_site_cookie_attribute?: string;
+
+    /**
+     * Body param: List of domains that Access will secure.
+     */
+    self_hosted_domains?: Array<string>;
+
+    /**
+     * Body param: Returns a 401 status code when the request is blocked by a Service
+     * Auth policy.
+     */
+    service_auth_401_redirect?: boolean;
+
+    /**
+     * Body param: The amount of time that tokens issued for this application will be
+     * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
+     * (or µs), ms, s, m, h.
+     */
+    session_duration?: string;
+
+    /**
+     * Body param: Enables automatic authentication through cloudflared.
+     */
+    skip_interstitial?: boolean;
+
+    /**
+     * Body param: The tags you want assigned to an application. Tags are used to
+     * filter applications in the App Launcher dashboard.
+     */
+    tags?: Array<string>;
+  }
+
+  export namespace BrowserVncApplication {
+    export interface CorsHeaders {
+      /**
+       * Allows all HTTP request headers.
+       */
+      allow_all_headers?: boolean;
+
+      /**
+       * Allows all HTTP request methods.
+       */
+      allow_all_methods?: boolean;
+
+      /**
+       * Allows all origins.
+       */
+      allow_all_origins?: boolean;
+
+      /**
+       * When set to `true`, includes credentials (cookies, authorization headers, or TLS
+       * client certificates) with requests.
+       */
+      allow_credentials?: boolean;
+
+      /**
+       * Allowed HTTP request headers.
+       */
+      allowed_headers?: Array<unknown>;
+
+      /**
+       * Allowed HTTP request methods.
+       */
+      allowed_methods?: Array<
+        'GET' | 'POST' | 'HEAD' | 'PUT' | 'DELETE' | 'CONNECT' | 'OPTIONS' | 'TRACE' | 'PATCH'
+      >;
+
+      /**
+       * Allowed origins.
+       */
+      allowed_origins?: Array<unknown>;
+
+      /**
+       * The maximum number of seconds the results of a preflight request can be cached.
+       */
+      max_age?: number;
+    }
+  }
+
+  export interface AppLauncherApplication {
+    /**
+     * Body param: The application type.
+     */
+    type: 'self_hosted' | 'saas' | 'ssh' | 'vnc' | 'app_launcher' | 'warp' | 'biso' | 'bookmark' | 'dash_sso';
+
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: The identity providers your users can select when connecting to this
+     * application. Defaults to all IdPs configured in your account.
+     */
+    allowed_idps?: Array<string>;
+
+    /**
+     * Body param: When set to `true`, users skip the identity provider selection step
+     * during login. You must specify only one identity provider in allowed_idps.
+     */
+    auto_redirect_to_identity?: boolean;
+
+    /**
+     * Body param: The amount of time that tokens issued for this application will be
+     * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
+     * (or µs), ms, s, m, h.
+     */
+    session_duration?: string;
+  }
+
+  export interface DeviceEnrollmentPermissionsApplication {
+    /**
+     * Body param: The application type.
+     */
+    type: 'self_hosted' | 'saas' | 'ssh' | 'vnc' | 'app_launcher' | 'warp' | 'biso' | 'bookmark' | 'dash_sso';
+
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: The identity providers your users can select when connecting to this
+     * application. Defaults to all IdPs configured in your account.
+     */
+    allowed_idps?: Array<string>;
+
+    /**
+     * Body param: When set to `true`, users skip the identity provider selection step
+     * during login. You must specify only one identity provider in allowed_idps.
+     */
+    auto_redirect_to_identity?: boolean;
+
+    /**
+     * Body param: The amount of time that tokens issued for this application will be
+     * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
+     * (or µs), ms, s, m, h.
+     */
+    session_duration?: string;
+  }
+
+  export interface BrowserIsolationPermissionsApplication {
+    /**
+     * Body param: The application type.
+     */
+    type: 'self_hosted' | 'saas' | 'ssh' | 'vnc' | 'app_launcher' | 'warp' | 'biso' | 'bookmark' | 'dash_sso';
+
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: The identity providers your users can select when connecting to this
+     * application. Defaults to all IdPs configured in your account.
+     */
+    allowed_idps?: Array<string>;
+
+    /**
+     * Body param: When set to `true`, users skip the identity provider selection step
+     * during login. You must specify only one identity provider in allowed_idps.
+     */
+    auto_redirect_to_identity?: boolean;
+
+    /**
+     * Body param: The amount of time that tokens issued for this application will be
+     * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
+     * (or µs), ms, s, m, h.
+     */
+    session_duration?: string;
+  }
+
+  export interface BookmarkApplication {
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param:
+     */
+    app_launcher_visible?: unknown;
+
+    /**
+     * Body param: The URL or domain of the bookmark.
+     */
+    domain?: unknown;
+
+    /**
+     * Body param: The image URL for the logo shown in the App Launcher dashboard.
+     */
+    logo_url?: string;
+
+    /**
+     * Body param: The name of the application.
+     */
+    name?: string;
+
+    /**
+     * Body param: The tags you want assigned to an application. Tags are used to
+     * filter applications in the App Launcher dashboard.
+     */
+    tags?: Array<string>;
+
+    /**
+     * Body param: The application type.
+     */
+    type?: string;
   }
 }
 

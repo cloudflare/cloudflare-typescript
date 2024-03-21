@@ -609,84 +609,160 @@ export namespace PCAPGetResponse {
   }
 }
 
-export interface PCAPCreateParams {
-  /**
-   * Path param: Identifier
-   */
-  account_id: string;
-
-  /**
-   * Body param: The system used to collect packet captures.
-   */
-  system: 'magic-transit';
-
-  /**
-   * Body param: The packet capture duration in seconds.
-   */
-  time_limit: number;
-
-  /**
-   * Body param: The type of packet capture. `Simple` captures sampled packets, and
-   * `full` captures entire payloads and non-sampled packets.
-   */
-  type: 'simple' | 'full';
-
-  /**
-   * Body param: The maximum number of bytes to capture. This field only applies to
-   * `full` packet captures.
-   */
-  byte_limit?: number;
-
-  /**
-   * Body param: The name of the data center used for the packet capture. This can be
-   * a specific colo (ord02) or a multi-colo name (ORD). This field only applies to
-   * `full` packet captures.
-   */
-  colo_name?: string;
-
-  /**
-   * Body param: The full URI for the bucket. This field only applies to `full`
-   * packet captures.
-   */
-  destination_conf?: string;
-
-  /**
-   * Body param:
-   */
-  filter_v1?: PCAPCreateParams.FilterV1;
-
-  /**
-   * Body param: The limit of packets contained in a packet capture.
-   */
-  packet_limit?: number;
-}
+export type PCAPCreateParams =
+  | PCAPCreateParams.MagicVisibilityPCAPsRequestSimple
+  | PCAPCreateParams.MagicVisibilityPCAPsRequestFull;
 
 export namespace PCAPCreateParams {
-  export interface FilterV1 {
+  export interface MagicVisibilityPCAPsRequestSimple {
     /**
-     * The destination IP address of the packet.
+     * Path param: Identifier
      */
-    destination_address?: string;
+    account_id: string;
 
     /**
-     * The destination port of the packet.
+     * Body param: The limit of packets contained in a packet capture.
      */
-    destination_port?: number;
+    packet_limit: number;
 
     /**
-     * The protocol number of the packet.
+     * Body param: The system used to collect packet captures.
      */
-    protocol?: number;
+    system: 'magic-transit';
 
     /**
-     * The source IP address of the packet.
+     * Body param: The packet capture duration in seconds.
      */
-    source_address?: string;
+    time_limit: number;
 
     /**
-     * The source port of the packet.
+     * Body param: The type of packet capture. `Simple` captures sampled packets, and
+     * `full` captures entire payloads and non-sampled packets.
      */
-    source_port?: number;
+    type: 'simple' | 'full';
+
+    /**
+     * Body param: The packet capture filter. When this field is empty, all packets are
+     * captured.
+     */
+    filter_v1?: PCAPCreateParams.MagicVisibilityPCAPsRequestSimple.FilterV1;
+  }
+
+  export namespace MagicVisibilityPCAPsRequestSimple {
+    /**
+     * The packet capture filter. When this field is empty, all packets are captured.
+     */
+    export interface FilterV1 {
+      /**
+       * The destination IP address of the packet.
+       */
+      destination_address?: string;
+
+      /**
+       * The destination port of the packet.
+       */
+      destination_port?: number;
+
+      /**
+       * The protocol number of the packet.
+       */
+      protocol?: number;
+
+      /**
+       * The source IP address of the packet.
+       */
+      source_address?: string;
+
+      /**
+       * The source port of the packet.
+       */
+      source_port?: number;
+    }
+  }
+
+  export interface MagicVisibilityPCAPsRequestFull {
+    /**
+     * Path param: Identifier
+     */
+    account_id: string;
+
+    /**
+     * Body param: The name of the data center used for the packet capture. This can be
+     * a specific colo (ord02) or a multi-colo name (ORD). This field only applies to
+     * `full` packet captures.
+     */
+    colo_name: string;
+
+    /**
+     * Body param: The full URI for the bucket. This field only applies to `full`
+     * packet captures.
+     */
+    destination_conf: string;
+
+    /**
+     * Body param: The system used to collect packet captures.
+     */
+    system: 'magic-transit';
+
+    /**
+     * Body param: The packet capture duration in seconds.
+     */
+    time_limit: number;
+
+    /**
+     * Body param: The type of packet capture. `Simple` captures sampled packets, and
+     * `full` captures entire payloads and non-sampled packets.
+     */
+    type: 'simple' | 'full';
+
+    /**
+     * Body param: The maximum number of bytes to capture. This field only applies to
+     * `full` packet captures.
+     */
+    byte_limit?: number;
+
+    /**
+     * Body param: The packet capture filter. When this field is empty, all packets are
+     * captured.
+     */
+    filter_v1?: PCAPCreateParams.MagicVisibilityPCAPsRequestFull.FilterV1;
+
+    /**
+     * Body param: The limit of packets contained in a packet capture.
+     */
+    packet_limit?: number;
+  }
+
+  export namespace MagicVisibilityPCAPsRequestFull {
+    /**
+     * The packet capture filter. When this field is empty, all packets are captured.
+     */
+    export interface FilterV1 {
+      /**
+       * The destination IP address of the packet.
+       */
+      destination_address?: string;
+
+      /**
+       * The destination port of the packet.
+       */
+      destination_port?: number;
+
+      /**
+       * The protocol number of the packet.
+       */
+      protocol?: number;
+
+      /**
+       * The source IP address of the packet.
+       */
+      source_address?: string;
+
+      /**
+       * The source port of the packet.
+       */
+      source_port?: number;
+    }
   }
 }
 

@@ -12,7 +12,10 @@ const cloudflare = new Cloudflare({
 describe('resource v1', () => {
   // skipped: tests are disabled for the time being
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.images.v1.create({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const responsePromise = cloudflare.images.v1.create({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      file: {},
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -26,8 +29,7 @@ describe('resource v1', () => {
   test.skip('create: required and optional params', async () => {
     const response = await cloudflare.images.v1.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      metadata: {},
-      requireSignedURLs: true,
+      file: {},
     });
   });
 
