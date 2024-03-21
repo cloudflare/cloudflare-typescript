@@ -18,10 +18,10 @@ export class AI extends APIResource {
    * [Cloudflare Docs](https://developers.cloudflare.com/workers-ai/models/).
    */
   run(modelName: string, params: AIRunParams, options?: Core.RequestOptions): Core.APIPromise<AIRunResponse> {
-    const { account_id, body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/ai/run/${modelName}`, {
-        body: body,
+        body,
         ...options,
       }) as Core.APIPromise<{ result: AIRunResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -116,96 +116,230 @@ export namespace AIRunResponse {
   }
 }
 
-export interface AIRunParams {
-  /**
-   * Path param:
-   */
-  account_id: string;
-
-  /**
-   * Body param:
-   */
-  body:
-    | AIRunParams.TextClassification
-    | AIRunParams.TextToImage
-    | AIRunParams.SentenceSimilarity
-    | AIRunParams.TextEmbeddings
-    | Uploadable
-    | AIRunParams.Audio
-    | Uploadable
-    | AIRunParams.ImageClassification
-    | Uploadable
-    | AIRunParams.ObjectDetection
-    | AIRunParams.UnionMember10
-    | AIRunParams.UnionMember11
-    | AIRunParams.Translation
-    | AIRunParams.Summarization
-    | Uploadable
-    | AIRunParams.UnionMember15;
-}
+export type AIRunParams =
+  | AIRunParams.TextClassification
+  | AIRunParams.TextToImage
+  | AIRunParams.SentenceSimilarity
+  | AIRunParams.TextEmbeddings
+  | AIRunParams.Variant4
+  | AIRunParams.Variant5
+  | AIRunParams.Variant6
+  | AIRunParams.Variant7
+  | AIRunParams.Variant8
+  | AIRunParams.Variant9
+  | AIRunParams.Variant10
+  | AIRunParams.Variant11
+  | AIRunParams.Translation
+  | AIRunParams.Summarization
+  | AIRunParams.Variant14
+  | AIRunParams.Variant15;
 
 export namespace AIRunParams {
   export interface TextClassification {
+    /**
+     * Path param:
+     */
+    account_id: string;
+
+    /**
+     * Body param:
+     */
     text: string;
   }
 
   export interface TextToImage {
+    /**
+     * Path param:
+     */
+    account_id: string;
+
+    /**
+     * Body param:
+     */
     prompt: string;
 
+    /**
+     * Body param:
+     */
     guidance?: number;
 
+    /**
+     * Body param:
+     */
     image?: Array<number>;
 
+    /**
+     * Body param:
+     */
     mask?: Array<number>;
 
+    /**
+     * Body param:
+     */
     num_steps?: number;
 
+    /**
+     * Body param:
+     */
     strength?: number;
   }
 
   export interface SentenceSimilarity {
+    /**
+     * Path param:
+     */
+    account_id: string;
+
+    /**
+     * Body param:
+     */
     sentences: Array<string>;
 
+    /**
+     * Body param:
+     */
     source: string;
   }
 
   export interface TextEmbeddings {
+    /**
+     * Path param:
+     */
+    account_id: string;
+
+    /**
+     * Body param:
+     */
     text: string | Array<string>;
   }
 
-  export interface Audio {
+  export interface Variant4 {
+    /**
+     * Path param:
+     */
+    account_id: string;
+
+    /**
+     * Body param:
+     */
+    body: Uploadable;
+  }
+
+  export interface Variant5 {
+    /**
+     * Path param:
+     */
+    account_id: string;
+
+    /**
+     * Body param:
+     */
     audio?: Array<number>;
   }
 
-  export interface ImageClassification {
+  export interface Variant6 {
+    /**
+     * Path param:
+     */
+    account_id: string;
+
+    /**
+     * Body param:
+     */
+    body: Uploadable;
+  }
+
+  export interface Variant7 {
+    /**
+     * Path param:
+     */
+    account_id: string;
+
+    /**
+     * Body param:
+     */
     image?: Array<number>;
   }
 
-  export interface ObjectDetection {
+  export interface Variant8 {
+    /**
+     * Path param:
+     */
+    account_id: string;
+
+    /**
+     * Body param:
+     */
+    body: Uploadable;
+  }
+
+  export interface Variant9 {
+    /**
+     * Path param:
+     */
+    account_id: string;
+
+    /**
+     * Body param:
+     */
     image?: Array<number>;
   }
 
-  export interface UnionMember10 {
+  export interface Variant10 {
+    /**
+     * Path param:
+     */
+    account_id: string;
+
+    /**
+     * Body param:
+     */
     prompt: string;
 
+    /**
+     * Body param:
+     */
     lora?: string;
 
+    /**
+     * Body param:
+     */
     max_tokens?: number;
 
+    /**
+     * Body param:
+     */
     raw?: boolean;
 
+    /**
+     * Body param:
+     */
     stream?: boolean;
   }
 
-  export interface UnionMember11 {
-    messages: Array<UnionMember11.Message>;
+  export interface Variant11 {
+    /**
+     * Path param:
+     */
+    account_id: string;
 
+    /**
+     * Body param:
+     */
+    messages: Array<AIRunParams.Variant11.Message>;
+
+    /**
+     * Body param:
+     */
     max_tokens?: number;
 
+    /**
+     * Body param:
+     */
     stream?: boolean;
   }
 
-  export namespace UnionMember11 {
+  export namespace Variant11 {
     export interface Message {
       content: string;
 
@@ -214,24 +348,75 @@ export namespace AIRunParams {
   }
 
   export interface Translation {
+    /**
+     * Path param:
+     */
+    account_id: string;
+
+    /**
+     * Body param:
+     */
     target_lang: string;
 
+    /**
+     * Body param:
+     */
     text: string;
 
+    /**
+     * Body param:
+     */
     source_lang?: string;
   }
 
   export interface Summarization {
+    /**
+     * Path param:
+     */
+    account_id: string;
+
+    /**
+     * Body param:
+     */
     input_text: string;
 
+    /**
+     * Body param:
+     */
     max_length?: number;
   }
 
-  export interface UnionMember15 {
+  export interface Variant14 {
+    /**
+     * Path param:
+     */
+    account_id: string;
+
+    /**
+     * Body param:
+     */
+    body: Uploadable;
+  }
+
+  export interface Variant15 {
+    /**
+     * Path param:
+     */
+    account_id: string;
+
+    /**
+     * Body param:
+     */
     image?: Array<number>;
 
+    /**
+     * Body param:
+     */
     max_tokens?: number;
 
+    /**
+     * Body param:
+     */
     prompt?: string;
   }
 }

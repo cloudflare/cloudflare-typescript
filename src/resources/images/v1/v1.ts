@@ -159,22 +159,32 @@ export namespace V1ListResponse {
 
 export type V1DeleteResponse = unknown | string;
 
-export interface V1CreateParams {
-  /**
-   * Path param: Account identifier tag.
-   */
-  account_id: string;
+export type V1CreateParams = V1CreateParams.ImagesImageUploadViaFile | V1CreateParams.ImagesImageUploadViaURL;
 
-  /**
-   * Body param:
-   */
-  metadata?: unknown;
+export namespace V1CreateParams {
+  export interface ImagesImageUploadViaFile {
+    /**
+     * Path param: Account identifier tag.
+     */
+    account_id: string;
 
-  /**
-   * Body param: Indicates whether the image requires a signature token for the
-   * access.
-   */
-  requireSignedURLs?: boolean;
+    /**
+     * Body param: An image binary data.
+     */
+    file: unknown;
+  }
+
+  export interface ImagesImageUploadViaURL {
+    /**
+     * Path param: Account identifier tag.
+     */
+    account_id: string;
+
+    /**
+     * Body param: A URL to fetch an image from origin.
+     */
+    url: string;
+  }
 }
 
 export interface V1ListParams extends V4PagePaginationParams {

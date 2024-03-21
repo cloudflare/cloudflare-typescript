@@ -151,188 +151,116 @@ export namespace WorkersScript {
 
 export type ScriptListResponse = Array<WorkersScript>;
 
-export interface ScriptUpdateParams {
-  /**
-   * Path param: Identifier
-   */
-  account_id: string;
-
-  /**
-   * Query param: Rollback to provided deployment based on deployment ID. Request
-   * body will only parse a "message" part. You can learn more about deployments
-   * [here](https://developers.cloudflare.com/workers/platform/deployments/).
-   */
-  rollback_to?: string;
-
-  /**
-   * Body param: A module comprising a Worker script, often a javascript file.
-   * Multiple modules may be provided as separate named parts, but at least one
-   * module must be present and referenced in the metadata as `main_module` or
-   * `body_part` by part name.
-   */
-  '<any part name>'?: Array<Uploadable>;
-
-  /**
-   * Body param: Rollback message to be associated with this deployment. Only parsed
-   * when query param `"rollback_to"` is present.
-   */
-  message?: string;
-
-  /**
-   * Body param: JSON encoded metadata about the uploaded parts and Worker
-   * configuration.
-   */
-  metadata?: ScriptUpdateParams.Metadata;
-}
+export type ScriptUpdateParams = ScriptUpdateParams.Variant0 | ScriptUpdateParams.Variant1;
 
 export namespace ScriptUpdateParams {
-  /**
-   * JSON encoded metadata about the uploaded parts and Worker configuration.
-   */
-  export interface Metadata {
+  export interface Variant0 {
     /**
-     * List of bindings available to the worker.
+     * Path param: Identifier
      */
-    bindings?: Array<unknown>;
+    account_id: string;
 
     /**
-     * Name of the part in the multipart request that contains the script (e.g. the
-     * file adding a listener to the `fetch` event). Indicates a
-     * `service worker syntax` Worker.
+     * Query param: Rollback to provided deployment based on deployment ID. Request
+     * body will only parse a "message" part. You can learn more about deployments
+     * [here](https://developers.cloudflare.com/workers/platform/deployments/).
      */
-    body_part?: string;
+    rollback_to?: string;
 
     /**
-     * Date indicating targeted support in the Workers runtime. Backwards incompatible
-     * fixes to the runtime following this date will not affect this Worker.
+     * Body param: A module comprising a Worker script, often a javascript file.
+     * Multiple modules may be provided as separate named parts, but at least one
+     * module must be present and referenced in the metadata as `main_module` or
+     * `body_part` by part name.
      */
-    compatibility_date?: string;
+    '<any part name>'?: Array<Uploadable>;
 
     /**
-     * Flags that enable or disable certain features in the Workers runtime. Used to
-     * enable upcoming features or opt in or out of specific changes not included in a
-     * `compatibility_date`.
+     * Body param: JSON encoded metadata about the uploaded parts and Worker
+     * configuration.
      */
-    compatibility_flags?: Array<string>;
-
-    /**
-     * List of binding types to keep from previous_upload.
-     */
-    keep_bindings?: Array<string>;
-
-    /**
-     * Whether Logpush is turned on for the Worker.
-     */
-    logpush?: boolean;
-
-    /**
-     * Name of the part in the multipart request that contains the main module (e.g.
-     * the file exporting a `fetch` handler). Indicates a `module syntax` Worker.
-     */
-    main_module?: string;
-
-    /**
-     * Migrations to apply for Durable Objects associated with this Worker.
-     */
-    migrations?: Metadata.WorkersSingleStepMigrations | Metadata.WorkersSteppedMigrations;
-
-    placement?: Metadata.Placement;
-
-    /**
-     * List of strings to use as tags for this Worker
-     */
-    tags?: Array<string>;
-
-    /**
-     * List of Workers that will consume logs from the attached Worker.
-     */
-    tail_consumers?: Array<Metadata.TailConsumer>;
-
-    /**
-     * Usage model to apply to invocations.
-     */
-    usage_model?: 'bundled' | 'unbound';
-
-    /**
-     * Key-value pairs to use as tags for this version of this Worker
-     */
-    version_tags?: unknown;
+    metadata?: ScriptUpdateParams.Variant0.Metadata;
   }
 
-  export namespace Metadata {
+  export namespace Variant0 {
     /**
-     * A single set of migrations to apply.
+     * JSON encoded metadata about the uploaded parts and Worker configuration.
      */
-    export interface WorkersSingleStepMigrations {
+    export interface Metadata {
       /**
-       * A list of classes to delete Durable Object namespaces from.
+       * List of bindings available to the worker.
        */
-      deleted_classes?: Array<string>;
+      bindings?: Array<unknown>;
 
       /**
-       * A list of classes to create Durable Object namespaces from.
+       * Name of the part in the multipart request that contains the script (e.g. the
+       * file adding a listener to the `fetch` event). Indicates a
+       * `service worker syntax` Worker.
        */
-      new_classes?: Array<string>;
+      body_part?: string;
 
       /**
-       * Tag to set as the latest migration tag.
+       * Date indicating targeted support in the Workers runtime. Backwards incompatible
+       * fixes to the runtime following this date will not affect this Worker.
        */
-      new_tag?: string;
+      compatibility_date?: string;
 
       /**
-       * Tag used to verify against the latest migration tag for this Worker. If they
-       * don't match, the upload is rejected.
+       * Flags that enable or disable certain features in the Workers runtime. Used to
+       * enable upcoming features or opt in or out of specific changes not included in a
+       * `compatibility_date`.
        */
-      old_tag?: string;
+      compatibility_flags?: Array<string>;
 
       /**
-       * A list of classes with Durable Object namespaces that were renamed.
+       * List of binding types to keep from previous_upload.
        */
-      renamed_classes?: Array<WorkersSingleStepMigrations.RenamedClass>;
+      keep_bindings?: Array<string>;
 
       /**
-       * A list of transfers for Durable Object namespaces from a different Worker and
-       * class to a class defined in this Worker.
+       * Whether Logpush is turned on for the Worker.
        */
-      transferred_classes?: Array<WorkersSingleStepMigrations.TransferredClass>;
+      logpush?: boolean;
+
+      /**
+       * Name of the part in the multipart request that contains the main module (e.g.
+       * the file exporting a `fetch` handler). Indicates a `module syntax` Worker.
+       */
+      main_module?: string;
+
+      /**
+       * Migrations to apply for Durable Objects associated with this Worker.
+       */
+      migrations?: Metadata.WorkersSingleStepMigrations | Metadata.WorkersSteppedMigrations;
+
+      placement?: Metadata.Placement;
+
+      /**
+       * List of strings to use as tags for this Worker
+       */
+      tags?: Array<string>;
+
+      /**
+       * List of Workers that will consume logs from the attached Worker.
+       */
+      tail_consumers?: Array<Metadata.TailConsumer>;
+
+      /**
+       * Usage model to apply to invocations.
+       */
+      usage_model?: 'bundled' | 'unbound';
+
+      /**
+       * Key-value pairs to use as tags for this version of this Worker
+       */
+      version_tags?: unknown;
     }
 
-    export namespace WorkersSingleStepMigrations {
-      export interface RenamedClass {
-        from?: string;
-
-        to?: string;
-      }
-
-      export interface TransferredClass {
-        from?: string;
-
-        from_script?: string;
-
-        to?: string;
-      }
-    }
-
-    export interface WorkersSteppedMigrations {
+    export namespace Metadata {
       /**
-       * Tag to set as the latest migration tag.
+       * A single set of migrations to apply.
        */
-      new_tag?: string;
-
-      /**
-       * Tag used to verify against the latest migration tag for this Worker. If they
-       * don't match, the upload is rejected.
-       */
-      old_tag?: string;
-
-      /**
-       * Migrations to apply in order.
-       */
-      steps?: Array<WorkersSteppedMigrations.Step>;
-    }
-
-    export namespace WorkersSteppedMigrations {
-      export interface Step {
+      export interface WorkersSingleStepMigrations {
         /**
          * A list of classes to delete Durable Object namespaces from.
          */
@@ -344,18 +272,29 @@ export namespace ScriptUpdateParams {
         new_classes?: Array<string>;
 
         /**
+         * Tag to set as the latest migration tag.
+         */
+        new_tag?: string;
+
+        /**
+         * Tag used to verify against the latest migration tag for this Worker. If they
+         * don't match, the upload is rejected.
+         */
+        old_tag?: string;
+
+        /**
          * A list of classes with Durable Object namespaces that were renamed.
          */
-        renamed_classes?: Array<Step.RenamedClass>;
+        renamed_classes?: Array<WorkersSingleStepMigrations.RenamedClass>;
 
         /**
          * A list of transfers for Durable Object namespaces from a different Worker and
          * class to a class defined in this Worker.
          */
-        transferred_classes?: Array<Step.TransferredClass>;
+        transferred_classes?: Array<WorkersSingleStepMigrations.TransferredClass>;
       }
 
-      export namespace Step {
+      export namespace WorkersSingleStepMigrations {
         export interface RenamedClass {
           from?: string;
 
@@ -370,36 +309,115 @@ export namespace ScriptUpdateParams {
           to?: string;
         }
       }
-    }
 
-    export interface Placement {
+      export interface WorkersSteppedMigrations {
+        /**
+         * Tag to set as the latest migration tag.
+         */
+        new_tag?: string;
+
+        /**
+         * Tag used to verify against the latest migration tag for this Worker. If they
+         * don't match, the upload is rejected.
+         */
+        old_tag?: string;
+
+        /**
+         * Migrations to apply in order.
+         */
+        steps?: Array<WorkersSteppedMigrations.Step>;
+      }
+
+      export namespace WorkersSteppedMigrations {
+        export interface Step {
+          /**
+           * A list of classes to delete Durable Object namespaces from.
+           */
+          deleted_classes?: Array<string>;
+
+          /**
+           * A list of classes to create Durable Object namespaces from.
+           */
+          new_classes?: Array<string>;
+
+          /**
+           * A list of classes with Durable Object namespaces that were renamed.
+           */
+          renamed_classes?: Array<Step.RenamedClass>;
+
+          /**
+           * A list of transfers for Durable Object namespaces from a different Worker and
+           * class to a class defined in this Worker.
+           */
+          transferred_classes?: Array<Step.TransferredClass>;
+        }
+
+        export namespace Step {
+          export interface RenamedClass {
+            from?: string;
+
+            to?: string;
+          }
+
+          export interface TransferredClass {
+            from?: string;
+
+            from_script?: string;
+
+            to?: string;
+          }
+        }
+      }
+
+      export interface Placement {
+        /**
+         * Enables
+         * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+         * Only `"smart"` is currently supported
+         */
+        mode?: 'smart';
+      }
+
       /**
-       * Enables
-       * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
-       * Only `"smart"` is currently supported
+       * A reference to a script that will consume logs from the attached Worker.
        */
-      mode?: 'smart';
+      export interface TailConsumer {
+        /**
+         * Name of Worker that is to be the consumer.
+         */
+        service: string;
+
+        /**
+         * Optional environment if the Worker utilizes one.
+         */
+        environment?: string;
+
+        /**
+         * Optional dispatch namespace the script belongs to.
+         */
+        namespace?: string;
+      }
     }
+  }
+
+  export interface Variant1 {
+    /**
+     * Path param: Identifier
+     */
+    account_id: string;
 
     /**
-     * A reference to a script that will consume logs from the attached Worker.
+     * Query param: Rollback to provided deployment based on deployment ID. Request
+     * body will only parse a "message" part. You can learn more about deployments
+     * [here](https://developers.cloudflare.com/workers/platform/deployments/).
      */
-    export interface TailConsumer {
-      /**
-       * Name of Worker that is to be the consumer.
-       */
-      service: string;
+    rollback_to?: string;
 
-      /**
-       * Optional environment if the Worker utilizes one.
-       */
-      environment?: string;
-
-      /**
-       * Optional dispatch namespace the script belongs to.
-       */
-      namespace?: string;
-    }
+    /**
+     * Body param: Rollback message to be associated with this deployment. Only parsed
+     * when query param `"rollback_to"` is present.
+     */
+    message?: string;
   }
 }
 

@@ -32,11 +32,9 @@ describe('resource sippy', () => {
       source: {
         accessKeyId: 'string',
         bucket: 'string',
-        provider: 'gcs',
+        provider: 'aws',
         region: 'string',
         secretAccessKey: 'string',
-        clientEmail: 'string',
-        privateKey: 'string',
       },
     });
   });
