@@ -1,26 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as AdvertisementsAPI from 'cloudflare/resources/magic-network-monitoring/rules/advertisements';
 
-export class Advertisements extends APIResource {
-  /**
-   * Update advertisement for rule.
-   */
-  edit(
-    accountIdentifier: unknown,
-    ruleIdentifier: unknown,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<MagicVisibilityMNMRuleAdvertisable | null> {
-    return (
-      this._client.patch(
-        `/accounts/${accountIdentifier}/mnm/rules/${ruleIdentifier}/advertisement`,
-        options,
-      ) as Core.APIPromise<{ result: MagicVisibilityMNMRuleAdvertisable | null }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-}
+export class Advertisements extends APIResource {}
 
 export interface MagicVisibilityMNMRuleAdvertisable {
   /**
