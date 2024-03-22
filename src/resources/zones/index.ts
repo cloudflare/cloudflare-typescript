@@ -13,6 +13,13 @@ export {
   CustomNameservers,
 } from './custom-nameservers';
 export {
+  DNSSettingEditResponse,
+  DNSSettingGetResponse,
+  DNSSettingEditParams,
+  DNSSettingGetParams,
+  DNSSettings,
+} from './dns-settings';
+export {
   HoldCreateResponse,
   HoldDeleteResponse,
   HoldGetResponse,
