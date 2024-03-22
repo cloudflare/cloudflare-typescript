@@ -553,6 +553,15 @@ export namespace AccessApps {
       public_key?: string;
 
       /**
+       * A [JSONata] (https://jsonata.org/) expression that transforms an application's
+       * user identities into attribute assertions in the SAML response. The expression
+       * can transform id, email, name, and groups values. It can also transform fields
+       * listed in the saml_attributes or oidc_fields of the identity provider used to
+       * authenticate. The output of this expression must be a JSON object.
+       */
+      saml_attribute_transform_jsonata?: string;
+
+      /**
        * A globally unique name for an identity or service provider.
        */
       sp_entity_id?: string;
@@ -1540,6 +1549,15 @@ export namespace ApplicationCreateParams {
       public_key?: string;
 
       /**
+       * A [JSONata] (https://jsonata.org/) expression that transforms an application's
+       * user identities into attribute assertions in the SAML response. The expression
+       * can transform id, email, name, and groups values. It can also transform fields
+       * listed in the saml_attributes or oidc_fields of the identity provider used to
+       * authenticate. The output of this expression must be a JSON object.
+       */
+      saml_attribute_transform_jsonata?: string;
+
+      /**
        * A globally unique name for an identity or service provider.
        */
       sp_entity_id?: string;
@@ -2478,6 +2496,15 @@ export namespace ApplicationUpdateParams {
        * The Access public certificate that will be used to verify your identity.
        */
       public_key?: string;
+
+      /**
+       * A [JSONata] (https://jsonata.org/) expression that transforms an application's
+       * user identities into attribute assertions in the SAML response. The expression
+       * can transform id, email, name, and groups values. It can also transform fields
+       * listed in the saml_attributes or oidc_fields of the identity provider used to
+       * authenticate. The output of this expression must be a JSON object.
+       */
+      saml_attribute_transform_jsonata?: string;
 
       /**
        * A globally unique name for an identity or service provider.
