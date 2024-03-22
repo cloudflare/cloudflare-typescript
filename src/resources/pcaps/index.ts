@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { DownloadGetParams, Downloads } from './downloads';
+export { DownloadGetParams, Download } from './download';
 export {
   MagicVisibilityPCAPsOwnership,
   OwnershipGetResponse,
@@ -8,8 +8,8 @@ export {
   OwnershipDeleteParams,
   OwnershipGetParams,
   OwnershipValidateParams,
-  Ownerships,
-} from './ownerships';
+  Ownership,
+} from './ownership';
 export {
   PCAPCreateResponse,
   PCAPListResponse,

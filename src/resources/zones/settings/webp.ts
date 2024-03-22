@@ -2,19 +2,19 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as WebpAPI from 'cloudflare/resources/zones/settings/webp';
+import * as WebPAPI from 'cloudflare/resources/zones/settings/webp';
 
-export class Webp extends APIResource {
+export class WebP extends APIResource {
   /**
    * When the client requesting the image supports the WebP image codec, and WebP
    * offers a performance advantage over the original image format, Cloudflare will
    * serve a WebP version of the original image.
    */
-  edit(params: WebpEditParams, options?: Core.RequestOptions): Core.APIPromise<ZonesWebp> {
+  edit(params: WebPEditParams, options?: Core.RequestOptions): Core.APIPromise<ZonesWebP> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/webp`, { body, ...options }) as Core.APIPromise<{
-        result: ZonesWebp;
+        result: ZonesWebP;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -24,10 +24,10 @@ export class Webp extends APIResource {
    * offers a performance advantage over the original image format, Cloudflare will
    * serve a WebP version of the original image.
    */
-  get(params: WebpGetParams, options?: Core.RequestOptions): Core.APIPromise<ZonesWebp> {
+  get(params: WebPGetParams, options?: Core.RequestOptions): Core.APIPromise<ZonesWebP> {
     const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zone_id}/settings/webp`, options) as Core.APIPromise<{ result: ZonesWebp }>
+      this._client.get(`/zones/${zone_id}/settings/webp`, options) as Core.APIPromise<{ result: ZonesWebP }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -37,7 +37,7 @@ export class Webp extends APIResource {
  * offers a performance advantage over the original image format, Cloudflare will
  * serve a WebP version of the original image.
  */
-export interface ZonesWebp {
+export interface ZonesWebP {
   /**
    * ID of the zone setting.
    */
@@ -60,7 +60,7 @@ export interface ZonesWebp {
   modified_on?: string | null;
 }
 
-export interface WebpEditParams {
+export interface WebPEditParams {
   /**
    * Path param: Identifier
    */
@@ -72,15 +72,15 @@ export interface WebpEditParams {
   value: 'off' | 'on';
 }
 
-export interface WebpGetParams {
+export interface WebPGetParams {
   /**
    * Identifier
    */
   zone_id: string;
 }
 
-export namespace Webp {
-  export import ZonesWebp = WebpAPI.ZonesWebp;
-  export import WebpEditParams = WebpAPI.WebpEditParams;
-  export import WebpGetParams = WebpAPI.WebpGetParams;
+export namespace WebP {
+  export import ZonesWebP = WebPAPI.ZonesWebP;
+  export import WebPEditParams = WebPAPI.WebPEditParams;
+  export import WebPGetParams = WebPAPI.WebPGetParams;
 }

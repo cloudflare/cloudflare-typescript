@@ -3,12 +3,12 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as PCAPsAPI from 'cloudflare/resources/pcaps/pcaps';
-import * as DownloadsAPI from 'cloudflare/resources/pcaps/downloads';
-import * as OwnershipsAPI from 'cloudflare/resources/pcaps/ownerships';
+import * as DownloadAPI from 'cloudflare/resources/pcaps/download';
+import * as OwnershipAPI from 'cloudflare/resources/pcaps/ownership';
 
 export class PCAPs extends APIResource {
-  ownerships: OwnershipsAPI.Ownerships = new OwnershipsAPI.Ownerships(this._client);
-  downloads: DownloadsAPI.Downloads = new DownloadsAPI.Downloads(this._client);
+  ownership: OwnershipAPI.Ownership = new OwnershipAPI.Ownership(this._client);
+  download: DownloadAPI.Download = new DownloadAPI.Download(this._client);
 
   /**
    * Create new PCAP request for account.
@@ -787,13 +787,13 @@ export namespace PCAPs {
   export import PCAPCreateParams = PCAPsAPI.PCAPCreateParams;
   export import PCAPListParams = PCAPsAPI.PCAPListParams;
   export import PCAPGetParams = PCAPsAPI.PCAPGetParams;
-  export import Ownerships = OwnershipsAPI.Ownerships;
-  export import MagicVisibilityPCAPsOwnership = OwnershipsAPI.MagicVisibilityPCAPsOwnership;
-  export import OwnershipGetResponse = OwnershipsAPI.OwnershipGetResponse;
-  export import OwnershipCreateParams = OwnershipsAPI.OwnershipCreateParams;
-  export import OwnershipDeleteParams = OwnershipsAPI.OwnershipDeleteParams;
-  export import OwnershipGetParams = OwnershipsAPI.OwnershipGetParams;
-  export import OwnershipValidateParams = OwnershipsAPI.OwnershipValidateParams;
-  export import Downloads = DownloadsAPI.Downloads;
-  export import DownloadGetParams = DownloadsAPI.DownloadGetParams;
+  export import Ownership = OwnershipAPI.Ownership;
+  export import MagicVisibilityPCAPsOwnership = OwnershipAPI.MagicVisibilityPCAPsOwnership;
+  export import OwnershipGetResponse = OwnershipAPI.OwnershipGetResponse;
+  export import OwnershipCreateParams = OwnershipAPI.OwnershipCreateParams;
+  export import OwnershipDeleteParams = OwnershipAPI.OwnershipDeleteParams;
+  export import OwnershipGetParams = OwnershipAPI.OwnershipGetParams;
+  export import OwnershipValidateParams = OwnershipAPI.OwnershipValidateParams;
+  export import Download = DownloadAPI.Download;
+  export import DownloadGetParams = DownloadAPI.DownloadGetParams;
 }

@@ -3,9 +3,9 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
-import * as RayidAPI from 'cloudflare/resources/logs/rayid';
+import * as RayIDAPI from 'cloudflare/resources/logs/rayid';
 
-export class Rayid extends APIResource {
+export class RayID extends APIResource {
   /**
    * The `/rayids` api route allows lookups by specific rayid. The rayids route will
    * return zero, one, or more records (ray ids are not unique).
@@ -13,20 +13,20 @@ export class Rayid extends APIResource {
   get(
     zoneIdentifier: string,
     rayIdentifier: string,
-    query?: RayidGetParams,
+    query?: RayIDGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RayidGetResponse>;
+  ): Core.APIPromise<RayIDGetResponse>;
   get(
     zoneIdentifier: string,
     rayIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RayidGetResponse>;
+  ): Core.APIPromise<RayIDGetResponse>;
   get(
     zoneIdentifier: string,
     rayIdentifier: string,
-    query: RayidGetParams | Core.RequestOptions = {},
+    query: RayIDGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RayidGetResponse> {
+  ): Core.APIPromise<RayIDGetResponse> {
     if (isRequestOptions(query)) {
       return this.get(zoneIdentifier, rayIdentifier, {}, query);
     }
@@ -34,9 +34,9 @@ export class Rayid extends APIResource {
   }
 }
 
-export type RayidGetResponse = string | unknown;
+export type RayIDGetResponse = string | unknown;
 
-export interface RayidGetParams {
+export interface RayIDGetParams {
   /**
    * The `/received` route by default returns a limited set of fields, and allows
    * customers to override the default field set by specifying individual fields. The
@@ -62,7 +62,7 @@ export interface RayidGetParams {
   timestamps?: 'unix' | 'unixnano' | 'rfc3339';
 }
 
-export namespace Rayid {
-  export import RayidGetResponse = RayidAPI.RayidGetResponse;
-  export import RayidGetParams = RayidAPI.RayidGetParams;
+export namespace RayID {
+  export import RayIDGetResponse = RayIDAPI.RayIDGetResponse;
+  export import RayIDGetParams = RayIDAPI.RayIDGetParams;
 }

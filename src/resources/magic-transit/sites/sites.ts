@@ -4,13 +4,13 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as SitesAPI from 'cloudflare/resources/magic-transit/sites/sites';
 import * as ACLsAPI from 'cloudflare/resources/magic-transit/sites/acls';
-import * as LansAPI from 'cloudflare/resources/magic-transit/sites/lans';
-import * as WansAPI from 'cloudflare/resources/magic-transit/sites/wans';
+import * as LANsAPI from 'cloudflare/resources/magic-transit/sites/lans';
+import * as WANsAPI from 'cloudflare/resources/magic-transit/sites/wans';
 
 export class Sites extends APIResource {
   acls: ACLsAPI.ACLs = new ACLsAPI.ACLs(this._client);
-  lans: LansAPI.Lans = new LansAPI.Lans(this._client);
-  wans: WansAPI.Wans = new WansAPI.Wans(this._client);
+  lans: LANsAPI.LANs = new LANsAPI.LANs(this._client);
+  wans: WANsAPI.WANs = new WANsAPI.WANs(this._client);
 
   /**
    * Creates a new Site
@@ -539,26 +539,26 @@ export namespace Sites {
   export import ACLListParams = ACLsAPI.ACLListParams;
   export import ACLDeleteParams = ACLsAPI.ACLDeleteParams;
   export import ACLGetParams = ACLsAPI.ACLGetParams;
-  export import Lans = LansAPI.Lans;
-  export import LanCreateResponse = LansAPI.LanCreateResponse;
-  export import LanUpdateResponse = LansAPI.LanUpdateResponse;
-  export import LanListResponse = LansAPI.LanListResponse;
-  export import LanDeleteResponse = LansAPI.LanDeleteResponse;
-  export import LanGetResponse = LansAPI.LanGetResponse;
-  export import LanCreateParams = LansAPI.LanCreateParams;
-  export import LanUpdateParams = LansAPI.LanUpdateParams;
-  export import LanListParams = LansAPI.LanListParams;
-  export import LanDeleteParams = LansAPI.LanDeleteParams;
-  export import LanGetParams = LansAPI.LanGetParams;
-  export import Wans = WansAPI.Wans;
-  export import WanCreateResponse = WansAPI.WanCreateResponse;
-  export import WanUpdateResponse = WansAPI.WanUpdateResponse;
-  export import WanListResponse = WansAPI.WanListResponse;
-  export import WanDeleteResponse = WansAPI.WanDeleteResponse;
-  export import WanGetResponse = WansAPI.WanGetResponse;
-  export import WanCreateParams = WansAPI.WanCreateParams;
-  export import WanUpdateParams = WansAPI.WanUpdateParams;
-  export import WanListParams = WansAPI.WanListParams;
-  export import WanDeleteParams = WansAPI.WanDeleteParams;
-  export import WanGetParams = WansAPI.WanGetParams;
+  export import LANs = LANsAPI.LANs;
+  export import LANCreateResponse = LANsAPI.LANCreateResponse;
+  export import LANUpdateResponse = LANsAPI.LANUpdateResponse;
+  export import LANListResponse = LANsAPI.LANListResponse;
+  export import LANDeleteResponse = LANsAPI.LANDeleteResponse;
+  export import LANGetResponse = LANsAPI.LANGetResponse;
+  export import LANCreateParams = LANsAPI.LANCreateParams;
+  export import LANUpdateParams = LANsAPI.LANUpdateParams;
+  export import LANListParams = LANsAPI.LANListParams;
+  export import LANDeleteParams = LANsAPI.LANDeleteParams;
+  export import LANGetParams = LANsAPI.LANGetParams;
+  export import WANs = WANsAPI.WANs;
+  export import WANCreateResponse = WANsAPI.WANCreateResponse;
+  export import WANUpdateResponse = WANsAPI.WANUpdateResponse;
+  export import WANListResponse = WANsAPI.WANListResponse;
+  export import WANDeleteResponse = WANsAPI.WANDeleteResponse;
+  export import WANGetResponse = WANsAPI.WANGetResponse;
+  export import WANCreateParams = WANsAPI.WANCreateParams;
+  export import WANUpdateParams = WANsAPI.WANUpdateParams;
+  export import WANListParams = WANsAPI.WANListParams;
+  export import WANDeleteParams = WANsAPI.WANDeleteParams;
+  export import WANGetParams = WANsAPI.WANGetParams;
 }
