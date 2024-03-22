@@ -6,6 +6,7 @@ import { isRequestOptions } from 'cloudflare/core';
 import * as ZonesAPI from 'cloudflare/resources/zones/zones';
 import * as ActivationCheckAPI from 'cloudflare/resources/zones/activation-check';
 import * as CustomNameserversAPI from 'cloudflare/resources/zones/custom-nameservers';
+import * as DNSSettingsAPI from 'cloudflare/resources/zones/dns-settings';
 import * as HoldsAPI from 'cloudflare/resources/zones/holds';
 import * as SubscriptionsAPI from 'cloudflare/resources/zones/subscriptions';
 import * as SettingsAPI from 'cloudflare/resources/zones/settings/settings';
@@ -14,6 +15,7 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudfl
 
 export class Zones extends APIResource {
   activationCheck: ActivationCheckAPI.ActivationCheck = new ActivationCheckAPI.ActivationCheck(this._client);
+  dnsSettings: DNSSettingsAPI.DNSSettings = new DNSSettingsAPI.DNSSettings(this._client);
   settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
   customNameservers: CustomNameserversAPI.CustomNameservers = new CustomNameserversAPI.CustomNameservers(
     this._client,
@@ -394,6 +396,11 @@ export namespace Zones {
   export import ActivationCheck = ActivationCheckAPI.ActivationCheck;
   export import ActivationCheckTriggerResponse = ActivationCheckAPI.ActivationCheckTriggerResponse;
   export import ActivationCheckTriggerParams = ActivationCheckAPI.ActivationCheckTriggerParams;
+  export import DNSSettings = DNSSettingsAPI.DNSSettings;
+  export import DNSSettingEditResponse = DNSSettingsAPI.DNSSettingEditResponse;
+  export import DNSSettingGetResponse = DNSSettingsAPI.DNSSettingGetResponse;
+  export import DNSSettingEditParams = DNSSettingsAPI.DNSSettingEditParams;
+  export import DNSSettingGetParams = DNSSettingsAPI.DNSSettingGetParams;
   export import Settings = SettingsAPI.Settings;
   export import SettingEditResponse = SettingsAPI.SettingEditResponse;
   export import SettingGetResponse = SettingsAPI.SettingGetResponse;
