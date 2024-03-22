@@ -9,13 +9,14 @@ export class Advertisements extends APIResource {
    * Update advertisement for rule.
    */
   edit(
-    accountIdentifier: unknown,
-    ruleIdentifier: unknown,
+    ruleId: unknown,
+    params: AdvertisementEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MagicVisibilityMNMRuleAdvertisable | null> {
+    const { account_id } = params;
     return (
       this._client.patch(
-        `/accounts/${accountIdentifier}/mnm/rules/${ruleIdentifier}/advertisement`,
+        `/accounts/${account_id}/mnm/rules/${ruleId}/advertisement`,
         options,
       ) as Core.APIPromise<{ result: MagicVisibilityMNMRuleAdvertisable | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -31,6 +32,11 @@ export interface MagicVisibilityMNMRuleAdvertisable {
   automatic_advertisement: boolean | null;
 }
 
+export interface AdvertisementEditParams {
+  account_id: unknown;
+}
+
 export namespace Advertisements {
   export import MagicVisibilityMNMRuleAdvertisable = AdvertisementsAPI.MagicVisibilityMNMRuleAdvertisable;
+  export import AdvertisementEditParams = AdvertisementsAPI.AdvertisementEditParams;
 }

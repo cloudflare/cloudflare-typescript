@@ -34,7 +34,7 @@ export type BindingGetResponse =
   | BindingGetResponse.WorkersQueueBinding
   | BindingGetResponse.WorkersD1Binding
   | BindingGetResponse.WorkersDispatchNamespaceBinding
-  | BindingGetResponse.WorkersMTLSCertBinding;
+  | BindingGetResponse.WorkersMTLSCERTBinding;
 
 export namespace BindingGetResponse {
   export interface WorkersKVNamespaceBinding {
@@ -221,7 +221,7 @@ export namespace BindingGetResponse {
     }
   }
 
-  export interface WorkersMTLSCertBinding {
+  export interface WorkersMTLSCERTBinding {
     /**
      * A JavaScript variable name for the binding.
      */

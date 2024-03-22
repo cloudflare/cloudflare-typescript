@@ -13,11 +13,12 @@ export class Rules extends APIResource {
    * single rule per API request.
    */
   create(
-    accountIdentifier: unknown,
+    params: RuleCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MagicVisibilityMNMRule | null> {
+    const { account_id } = params;
     return (
-      this._client.post(`/accounts/${accountIdentifier}/mnm/rules`, options) as Core.APIPromise<{
+      this._client.post(`/accounts/${account_id}/mnm/rules`, options) as Core.APIPromise<{
         result: MagicVisibilityMNMRule | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -27,11 +28,12 @@ export class Rules extends APIResource {
    * Update network monitoring rules for account.
    */
   update(
-    accountIdentifier: unknown,
+    params: RuleUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MagicVisibilityMNMRule | null> {
+    const { account_id } = params;
     return (
-      this._client.put(`/accounts/${accountIdentifier}/mnm/rules`, options) as Core.APIPromise<{
+      this._client.put(`/accounts/${account_id}/mnm/rules`, options) as Core.APIPromise<{
         result: MagicVisibilityMNMRule | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -40,9 +42,10 @@ export class Rules extends APIResource {
   /**
    * Lists network monitoring rules for account.
    */
-  list(accountIdentifier: unknown, options?: Core.RequestOptions): Core.APIPromise<RuleListResponse | null> {
+  list(params: RuleListParams, options?: Core.RequestOptions): Core.APIPromise<RuleListResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountIdentifier}/mnm/rules`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/mnm/rules`, options) as Core.APIPromise<{
         result: RuleListResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -52,15 +55,15 @@ export class Rules extends APIResource {
    * Delete a network monitoring rule for account.
    */
   delete(
-    accountIdentifier: unknown,
-    ruleIdentifier: unknown,
+    ruleId: unknown,
+    params: RuleDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MagicVisibilityMNMRule | null> {
+    const { account_id } = params;
     return (
-      this._client.delete(
-        `/accounts/${accountIdentifier}/mnm/rules/${ruleIdentifier}`,
-        options,
-      ) as Core.APIPromise<{ result: MagicVisibilityMNMRule | null }>
+      this._client.delete(`/accounts/${account_id}/mnm/rules/${ruleId}`, options) as Core.APIPromise<{
+        result: MagicVisibilityMNMRule | null;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -68,15 +71,15 @@ export class Rules extends APIResource {
    * Update a network monitoring rule for account.
    */
   edit(
-    accountIdentifier: unknown,
-    ruleIdentifier: unknown,
+    ruleId: unknown,
+    params: RuleEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MagicVisibilityMNMRule | null> {
+    const { account_id } = params;
     return (
-      this._client.patch(
-        `/accounts/${accountIdentifier}/mnm/rules/${ruleIdentifier}`,
-        options,
-      ) as Core.APIPromise<{ result: MagicVisibilityMNMRule | null }>
+      this._client.patch(`/accounts/${account_id}/mnm/rules/${ruleId}`, options) as Core.APIPromise<{
+        result: MagicVisibilityMNMRule | null;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -84,15 +87,15 @@ export class Rules extends APIResource {
    * List a single network monitoring rule for account.
    */
   get(
-    accountIdentifier: unknown,
-    ruleIdentifier: unknown,
+    ruleId: unknown,
+    params: RuleGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MagicVisibilityMNMRule | null> {
+    const { account_id } = params;
     return (
-      this._client.get(
-        `/accounts/${accountIdentifier}/mnm/rules/${ruleIdentifier}`,
-        options,
-      ) as Core.APIPromise<{ result: MagicVisibilityMNMRule | null }>
+      this._client.get(`/accounts/${account_id}/mnm/rules/${ruleId}`, options) as Core.APIPromise<{
+        result: MagicVisibilityMNMRule | null;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -140,9 +143,40 @@ export interface MagicVisibilityMNMRule {
 
 export type RuleListResponse = Array<MagicVisibilityMNMRule | null>;
 
+export interface RuleCreateParams {
+  account_id: unknown;
+}
+
+export interface RuleUpdateParams {
+  account_id: unknown;
+}
+
+export interface RuleListParams {
+  account_id: unknown;
+}
+
+export interface RuleDeleteParams {
+  account_id: unknown;
+}
+
+export interface RuleEditParams {
+  account_id: unknown;
+}
+
+export interface RuleGetParams {
+  account_id: unknown;
+}
+
 export namespace Rules {
   export import MagicVisibilityMNMRule = RulesAPI.MagicVisibilityMNMRule;
   export import RuleListResponse = RulesAPI.RuleListResponse;
+  export import RuleCreateParams = RulesAPI.RuleCreateParams;
+  export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
+  export import RuleListParams = RulesAPI.RuleListParams;
+  export import RuleDeleteParams = RulesAPI.RuleDeleteParams;
+  export import RuleEditParams = RulesAPI.RuleEditParams;
+  export import RuleGetParams = RulesAPI.RuleGetParams;
   export import Advertisements = AdvertisementsAPI.Advertisements;
   export import MagicVisibilityMNMRuleAdvertisable = AdvertisementsAPI.MagicVisibilityMNMRuleAdvertisable;
+  export import AdvertisementEditParams = AdvertisementsAPI.AdvertisementEditParams;
 }

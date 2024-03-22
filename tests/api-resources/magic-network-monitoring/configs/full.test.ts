@@ -11,10 +11,10 @@ const cloudflare = new Cloudflare({
 
 describe('resource full', () => {
   // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
-    const responsePromise = cloudflare.magicNetworkMonitoring.configs.full.get(
-      '6f91088a406011ed95aed352566e8d4c',
-    );
+  test.skip('get: only required params', async () => {
+    const responsePromise = cloudflare.magicNetworkMonitoring.configs.full.get({
+      account_id: '6f91088a406011ed95aed352566e8d4c',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -25,12 +25,9 @@ describe('resource full', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.magicNetworkMonitoring.configs.full.get('6f91088a406011ed95aed352566e8d4c', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test.skip('get: required and optional params', async () => {
+    const response = await cloudflare.magicNetworkMonitoring.configs.full.get({
+      account_id: '6f91088a406011ed95aed352566e8d4c',
+    });
   });
 });

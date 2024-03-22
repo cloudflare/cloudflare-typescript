@@ -12,11 +12,12 @@ export class Configs extends APIResource {
    * Create a new network monitoring configuration.
    */
   create(
-    accountIdentifier: unknown,
+    params: ConfigCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MagicVisibilityMNMConfig> {
+    const { account_id } = params;
     return (
-      this._client.post(`/accounts/${accountIdentifier}/mnm/config`, options) as Core.APIPromise<{
+      this._client.post(`/accounts/${account_id}/mnm/config`, options) as Core.APIPromise<{
         result: MagicVisibilityMNMConfig;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -27,11 +28,12 @@ export class Configs extends APIResource {
    * configuration to be updated at once.
    */
   update(
-    accountIdentifier: unknown,
+    params: ConfigUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MagicVisibilityMNMConfig> {
+    const { account_id } = params;
     return (
-      this._client.put(`/accounts/${accountIdentifier}/mnm/config`, options) as Core.APIPromise<{
+      this._client.put(`/accounts/${account_id}/mnm/config`, options) as Core.APIPromise<{
         result: MagicVisibilityMNMConfig;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -41,11 +43,12 @@ export class Configs extends APIResource {
    * Delete an existing network monitoring configuration.
    */
   delete(
-    accountIdentifier: unknown,
+    params: ConfigDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MagicVisibilityMNMConfig> {
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${accountIdentifier}/mnm/config`, options) as Core.APIPromise<{
+      this._client.delete(`/accounts/${account_id}/mnm/config`, options) as Core.APIPromise<{
         result: MagicVisibilityMNMConfig;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -54,9 +57,10 @@ export class Configs extends APIResource {
   /**
    * Update fields in an existing network monitoring configuration.
    */
-  edit(accountIdentifier: unknown, options?: Core.RequestOptions): Core.APIPromise<MagicVisibilityMNMConfig> {
+  edit(params: ConfigEditParams, options?: Core.RequestOptions): Core.APIPromise<MagicVisibilityMNMConfig> {
+    const { account_id } = params;
     return (
-      this._client.patch(`/accounts/${accountIdentifier}/mnm/config`, options) as Core.APIPromise<{
+      this._client.patch(`/accounts/${account_id}/mnm/config`, options) as Core.APIPromise<{
         result: MagicVisibilityMNMConfig;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -65,9 +69,10 @@ export class Configs extends APIResource {
   /**
    * Lists default sampling and router IPs for account.
    */
-  get(accountIdentifier: unknown, options?: Core.RequestOptions): Core.APIPromise<MagicVisibilityMNMConfig> {
+  get(params: ConfigGetParams, options?: Core.RequestOptions): Core.APIPromise<MagicVisibilityMNMConfig> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountIdentifier}/mnm/config`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/mnm/config`, options) as Core.APIPromise<{
         result: MagicVisibilityMNMConfig;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -89,7 +94,33 @@ export interface MagicVisibilityMNMConfig {
   router_ips: Array<string>;
 }
 
+export interface ConfigCreateParams {
+  account_id: unknown;
+}
+
+export interface ConfigUpdateParams {
+  account_id: unknown;
+}
+
+export interface ConfigDeleteParams {
+  account_id: unknown;
+}
+
+export interface ConfigEditParams {
+  account_id: unknown;
+}
+
+export interface ConfigGetParams {
+  account_id: unknown;
+}
+
 export namespace Configs {
   export import MagicVisibilityMNMConfig = ConfigsAPI.MagicVisibilityMNMConfig;
+  export import ConfigCreateParams = ConfigsAPI.ConfigCreateParams;
+  export import ConfigUpdateParams = ConfigsAPI.ConfigUpdateParams;
+  export import ConfigDeleteParams = ConfigsAPI.ConfigDeleteParams;
+  export import ConfigEditParams = ConfigsAPI.ConfigEditParams;
+  export import ConfigGetParams = ConfigsAPI.ConfigGetParams;
   export import Full = FullAPI.Full;
+  export import FullGetParams = FullAPI.FullGetParams;
 }

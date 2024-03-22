@@ -53,7 +53,7 @@ export interface SettingEditResponse {
     | SettingEditResponse.WorkersQueueBinding
     | SettingEditResponse.WorkersD1Binding
     | SettingEditResponse.WorkersDispatchNamespaceBinding
-    | SettingEditResponse.WorkersMTLSCertBinding
+    | SettingEditResponse.WorkersMTLSCERTBinding
   >;
 
   /**
@@ -279,7 +279,7 @@ export namespace SettingEditResponse {
     }
   }
 
-  export interface WorkersMTLSCertBinding {
+  export interface WorkersMTLSCERTBinding {
     /**
      * A JavaScript variable name for the binding.
      */
@@ -450,7 +450,7 @@ export interface SettingGetResponse {
     | SettingGetResponse.WorkersQueueBinding
     | SettingGetResponse.WorkersD1Binding
     | SettingGetResponse.WorkersDispatchNamespaceBinding
-    | SettingGetResponse.WorkersMTLSCertBinding
+    | SettingGetResponse.WorkersMTLSCERTBinding
   >;
 
   /**
@@ -676,7 +676,7 @@ export namespace SettingGetResponse {
     }
   }
 
-  export interface WorkersMTLSCertBinding {
+  export interface WorkersMTLSCERTBinding {
     /**
      * A JavaScript variable name for the binding.
      */
@@ -886,7 +886,7 @@ export namespace SettingEditParams {
         | Result.WorkersQueueBinding
         | Result.WorkersD1Binding
         | Result.WorkersDispatchNamespaceBinding
-        | Result.WorkersMTLSCertBinding
+        | Result.WorkersMTLSCERTBinding
       >;
 
       /**
@@ -1067,7 +1067,7 @@ export namespace SettingEditParams {
         }
       }
 
-      export interface WorkersMTLSCertBinding {
+      export interface WorkersMTLSCERTBinding {
         /**
          * The class of resource that the binding provides.
          */

@@ -9,10 +9,12 @@ const cloudflare = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource botManagement', () => {
+describe('resource dnsSettings', () => {
   // skipped: tests are disabled for the time being
-  test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.botManagement.update({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+  test.skip('edit: only required params', async () => {
+    const responsePromise = cloudflare.zones.dnsSettings.edit({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,17 +25,16 @@ describe('resource botManagement', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.botManagement.update({
+  test.skip('edit: required and optional params', async () => {
+    const response = await cloudflare.zones.dnsSettings.edit({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      enable_js: true,
-      fight_mode: true,
+      nameservers: { type: 'cloudflare.standard' },
     });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('get: only required params', async () => {
-    const responsePromise = cloudflare.botManagement.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const responsePromise = cloudflare.zones.dnsSettings.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -45,6 +46,6 @@ describe('resource botManagement', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('get: required and optional params', async () => {
-    const response = await cloudflare.botManagement.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const response = await cloudflare.zones.dnsSettings.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 });

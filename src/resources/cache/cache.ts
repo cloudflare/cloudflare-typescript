@@ -64,43 +64,80 @@ export interface CachePurgeResponse {
   id: string;
 }
 
-export interface CachePurgeParams {
-  /**
-   * Path param:
-   */
-  zone_id: string;
-
-  /**
-   * Body param:
-   */
-  files?: Array<string | CachePurgeParams.CachePurgeURLAndHeaders>;
-
-  /**
-   * Body param:
-   */
-  hosts?: Array<string>;
-
-  /**
-   * Body param:
-   */
-  prefixes?: Array<string>;
-
-  /**
-   * Body param:
-   */
-  purge_everything?: boolean;
-
-  /**
-   * Body param:
-   */
-  tags?: Array<string>;
-}
+export type CachePurgeParams =
+  | CachePurgeParams.CachePurgeTags
+  | CachePurgeParams.CachePurgeHosts
+  | CachePurgeParams.CachePurgePrefixes
+  | CachePurgeParams.CachePurgeEverything
+  | CachePurgeParams.CachePurgeFiles;
 
 export namespace CachePurgeParams {
-  export interface CachePurgeURLAndHeaders {
-    headers?: unknown;
+  export interface CachePurgeTags {
+    /**
+     * Path param:
+     */
+    zone_id: string;
 
-    url?: string;
+    /**
+     * Body param:
+     */
+    tags?: Array<string>;
+  }
+
+  export interface CachePurgeHosts {
+    /**
+     * Path param:
+     */
+    zone_id: string;
+
+    /**
+     * Body param:
+     */
+    hosts?: Array<string>;
+  }
+
+  export interface CachePurgePrefixes {
+    /**
+     * Path param:
+     */
+    zone_id: string;
+
+    /**
+     * Body param:
+     */
+    prefixes?: Array<string>;
+  }
+
+  export interface CachePurgeEverything {
+    /**
+     * Path param:
+     */
+    zone_id: string;
+
+    /**
+     * Body param:
+     */
+    purge_everything?: boolean;
+  }
+
+  export interface CachePurgeFiles {
+    /**
+     * Path param:
+     */
+    zone_id: string;
+
+    /**
+     * Body param:
+     */
+    files?: Array<string | CachePurgeParams.CachePurgeFiles.CachePurgeURLAndHeaders>;
+  }
+
+  export namespace CachePurgeFiles {
+    export interface CachePurgeURLAndHeaders {
+      headers?: unknown;
+
+      url?: string;
+    }
   }
 }
 
