@@ -22,8 +22,8 @@ export {
   AuditLogListResponsesV4PagePaginationArray,
   AuditLogs,
 } from './audit-logs';
-export { BillSubsAPIAvailableRatePlan, AvailablePlanListResponse, AvailablePlans } from './available-plans';
-export { BillSubsRatePlan, AvailableRatePlanGetResponse, AvailableRatePlans } from './available-rate-plans';
+export { BillSubsAPIAvailableRatePlan, PlanListResponse, Plans } from './plans';
+export { BillSubsRatePlan, RatePlanGetResponse, RatePlans } from './rate-plans';
 export { Billing } from './billing/billing';
 export {
   BotManagementUpdateResponse,
@@ -73,7 +73,13 @@ export {
 } from './dnssec';
 export { Diagnostics } from './diagnostics/diagnostics';
 export { DurableObjects } from './durable-objects/durable-objects';
-export { EmailRouting } from './email-routing/email-routing';
+export {
+  EmailSettings,
+  EmailRoutingDisableResponse,
+  EmailRoutingEnableResponse,
+  EmailRoutingGetResponse,
+  EmailRouting,
+} from './email-routing/email-routing';
 export { Firewall } from './firewall/firewall';
 export {
   HealthchecksHealthchecks,

@@ -51,7 +51,7 @@ import * as TLS1_3API from 'cloudflare/resources/zones/settings/tls-1-3';
 import * as TLSClientAuthAPI from 'cloudflare/resources/zones/settings/tls-client-auth';
 import * as TrueClientIPHeaderAPI from 'cloudflare/resources/zones/settings/true-client-ip-header';
 import * as WAFAPI from 'cloudflare/resources/zones/settings/waf';
-import * as WebpAPI from 'cloudflare/resources/zones/settings/webp';
+import * as WebPAPI from 'cloudflare/resources/zones/settings/webp';
 import * as WebsocketAPI from 'cloudflare/resources/zones/settings/websocket';
 import * as ZeroRTTAPI from 'cloudflare/resources/zones/settings/zero-rtt';
 
@@ -126,7 +126,7 @@ export class Settings extends APIResource {
     this._client,
   );
   waf: WAFAPI.WAF = new WAFAPI.WAF(this._client);
-  webp: WebpAPI.Webp = new WebpAPI.Webp(this._client);
+  WebP: WebPAPI.WebP = new WebPAPI.WebP(this._client);
   websocket: WebsocketAPI.Websocket = new WebsocketAPI.Websocket(this._client);
   fontSettings: FontSettingsAPI.FontSettings = new FontSettingsAPI.FontSettings(this._client);
 
@@ -208,7 +208,7 @@ export type SettingEditResponse = Array<
   | TLSClientAuthAPI.ZonesTLSClientAuth
   | TrueClientIPHeaderAPI.ZonesTrueClientIPHeader
   | WAFAPI.ZonesWAF
-  | WebpAPI.ZonesWebp
+  | WebPAPI.ZonesWebP
   | WebsocketAPI.ZonesWebsockets
 >;
 
@@ -447,7 +447,7 @@ export type SettingGetResponse = Array<
   | TLSClientAuthAPI.ZonesTLSClientAuth
   | TrueClientIPHeaderAPI.ZonesTrueClientIPHeader
   | WAFAPI.ZonesWAF
-  | WebpAPI.ZonesWebp
+  | WebPAPI.ZonesWebP
   | WebsocketAPI.ZonesWebsockets
 >;
 
@@ -695,7 +695,7 @@ export interface SettingEditParams {
     | TLSClientAuthAPI.ZonesTLSClientAuth
     | TrueClientIPHeaderAPI.ZonesTrueClientIPHeader
     | WAFAPI.ZonesWAF
-    | WebpAPI.ZonesWebp
+    | WebPAPI.ZonesWebP
     | WebsocketAPI.ZonesWebsockets
   >;
 }
@@ -1020,10 +1020,10 @@ export namespace Settings {
   export import ZonesWAF = WAFAPI.ZonesWAF;
   export import WAFEditParams = WAFAPI.WAFEditParams;
   export import WAFGetParams = WAFAPI.WAFGetParams;
-  export import Webp = WebpAPI.Webp;
-  export import ZonesWebp = WebpAPI.ZonesWebp;
-  export import WebpEditParams = WebpAPI.WebpEditParams;
-  export import WebpGetParams = WebpAPI.WebpGetParams;
+  export import WebP = WebPAPI.WebP;
+  export import ZonesWebP = WebPAPI.ZonesWebP;
+  export import WebPEditParams = WebPAPI.WebPEditParams;
+  export import WebPGetParams = WebPAPI.WebPGetParams;
   export import Websocket = WebsocketAPI.Websocket;
   export import ZonesWebsockets = WebsocketAPI.ZonesWebsockets;
   export import WebsocketEditParams = WebsocketAPI.WebsocketEditParams;

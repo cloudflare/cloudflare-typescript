@@ -112,9 +112,9 @@ export namespace ACLCreateResponse {
      */
     description?: string;
 
-    lan_1?: ACL.Lan1;
+    lan_1?: ACL.LAN1;
 
-    lan_2?: ACL.Lan2;
+    lan_2?: ACL.LAN2;
 
     /**
      * The name of the ACL.
@@ -125,7 +125,7 @@ export namespace ACLCreateResponse {
   }
 
   export namespace ACL {
-    export interface Lan1 {
+    export interface LAN1 {
       /**
        * The identifier for the LAN you want to create an ACL policy with.
        */
@@ -149,7 +149,7 @@ export namespace ACLCreateResponse {
       subnets?: Array<string | string>;
     }
 
-    export interface Lan2 {
+    export interface LAN2 {
       /**
        * The identifier for the LAN you want to create an ACL policy with.
        */
@@ -197,9 +197,9 @@ export namespace ACLUpdateResponse {
      */
     description?: string;
 
-    lan_1?: ACL.Lan1;
+    lan_1?: ACL.LAN1;
 
-    lan_2?: ACL.Lan2;
+    lan_2?: ACL.LAN2;
 
     /**
      * The name of the ACL.
@@ -210,7 +210,7 @@ export namespace ACLUpdateResponse {
   }
 
   export namespace ACL {
-    export interface Lan1 {
+    export interface LAN1 {
       /**
        * The identifier for the LAN you want to create an ACL policy with.
        */
@@ -234,7 +234,7 @@ export namespace ACLUpdateResponse {
       subnets?: Array<string | string>;
     }
 
-    export interface Lan2 {
+    export interface LAN2 {
       /**
        * The identifier for the LAN you want to create an ACL policy with.
        */
@@ -279,9 +279,9 @@ export namespace ACLListResponse {
      */
     description?: string;
 
-    lan_1?: ACL.Lan1;
+    lan_1?: ACL.LAN1;
 
-    lan_2?: ACL.Lan2;
+    lan_2?: ACL.LAN2;
 
     /**
      * The name of the ACL.
@@ -292,7 +292,7 @@ export namespace ACLListResponse {
   }
 
   export namespace ACL {
-    export interface Lan1 {
+    export interface LAN1 {
       /**
        * The identifier for the LAN you want to create an ACL policy with.
        */
@@ -316,7 +316,7 @@ export namespace ACLListResponse {
       subnets?: Array<string | string>;
     }
 
-    export interface Lan2 {
+    export interface LAN2 {
       /**
        * The identifier for the LAN you want to create an ACL policy with.
        */
@@ -366,9 +366,9 @@ export namespace ACLDeleteResponse {
      */
     description?: string;
 
-    lan_1?: DeletedACL.Lan1;
+    lan_1?: DeletedACL.LAN1;
 
-    lan_2?: DeletedACL.Lan2;
+    lan_2?: DeletedACL.LAN2;
 
     /**
      * The name of the ACL.
@@ -379,7 +379,7 @@ export namespace ACLDeleteResponse {
   }
 
   export namespace DeletedACL {
-    export interface Lan1 {
+    export interface LAN1 {
       /**
        * The identifier for the LAN you want to create an ACL policy with.
        */
@@ -403,7 +403,7 @@ export namespace ACLDeleteResponse {
       subnets?: Array<string | string>;
     }
 
-    export interface Lan2 {
+    export interface LAN2 {
       /**
        * The identifier for the LAN you want to create an ACL policy with.
        */
@@ -451,9 +451,9 @@ export namespace ACLGetResponse {
      */
     description?: string;
 
-    lan_1?: ACL.Lan1;
+    lan_1?: ACL.LAN1;
 
-    lan_2?: ACL.Lan2;
+    lan_2?: ACL.LAN2;
 
     /**
      * The name of the ACL.
@@ -464,7 +464,7 @@ export namespace ACLGetResponse {
   }
 
   export namespace ACL {
-    export interface Lan1 {
+    export interface LAN1 {
       /**
        * The identifier for the LAN you want to create an ACL policy with.
        */
@@ -488,7 +488,7 @@ export namespace ACLGetResponse {
       subnets?: Array<string | string>;
     }
 
-    export interface Lan2 {
+    export interface LAN2 {
       /**
        * The identifier for the LAN you want to create an ACL policy with.
        */
@@ -528,9 +528,9 @@ export interface ACLCreateParams {
 
 export namespace ACLCreateParams {
   export interface ACL {
-    lan_1: ACL.Lan1;
+    lan_1: ACL.LAN1;
 
-    lan_2: ACL.Lan2;
+    lan_2: ACL.LAN2;
 
     /**
      * The name of the ACL.
@@ -546,7 +546,7 @@ export namespace ACLCreateParams {
   }
 
   export namespace ACL {
-    export interface Lan1 {
+    export interface LAN1 {
       /**
        * The identifier for the LAN you want to create an ACL policy with.
        */
@@ -570,7 +570,7 @@ export namespace ACLCreateParams {
       subnets?: Array<string | string>;
     }
 
-    export interface Lan2 {
+    export interface LAN2 {
       /**
        * The identifier for the LAN you want to create an ACL policy with.
        */
@@ -615,9 +615,9 @@ export namespace ACLUpdateParams {
      */
     description?: string;
 
-    lan_1?: ACL.Lan1;
+    lan_1?: ACL.LAN1;
 
-    lan_2?: ACL.Lan2;
+    lan_2?: ACL.LAN2;
 
     /**
      * The name of the ACL.
@@ -628,7 +628,7 @@ export namespace ACLUpdateParams {
   }
 
   export namespace ACL {
-    export interface Lan1 {
+    export interface LAN1 {
       /**
        * The identifier for the LAN you want to create an ACL policy with.
        */
@@ -652,7 +652,7 @@ export namespace ACLUpdateParams {
       subnets?: Array<string | string>;
     }
 
-    export interface Lan2 {
+    export interface LAN2 {
       /**
        * The identifier for the LAN you want to create an ACL policy with.
        */

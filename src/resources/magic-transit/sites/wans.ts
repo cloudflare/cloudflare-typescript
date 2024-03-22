@@ -2,23 +2,23 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as WansAPI from 'cloudflare/resources/magic-transit/sites/wans';
+import * as WANsAPI from 'cloudflare/resources/magic-transit/sites/wans';
 
-export class Wans extends APIResource {
+export class WANs extends APIResource {
   /**
    * Creates a new WAN.
    */
   create(
     siteId: string,
-    params: WanCreateParams,
+    params: WANCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WanCreateResponse> {
+  ): Core.APIPromise<WANCreateResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/magic/sites/${siteId}/wans`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: WanCreateResponse }>
+      }) as Core.APIPromise<{ result: WANCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -28,15 +28,15 @@ export class Wans extends APIResource {
   update(
     siteId: string,
     wanId: string,
-    params: WanUpdateParams,
+    params: WANUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WanUpdateResponse> {
+  ): Core.APIPromise<WANUpdateResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/magic/sites/${siteId}/wans/${wanId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: WanUpdateResponse }>
+      }) as Core.APIPromise<{ result: WANUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -45,13 +45,13 @@ export class Wans extends APIResource {
    */
   list(
     siteId: string,
-    params: WanListParams,
+    params: WANListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WanListResponse> {
+  ): Core.APIPromise<WANListResponse> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/magic/sites/${siteId}/wans`, options) as Core.APIPromise<{
-        result: WanListResponse;
+        result: WANListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -62,15 +62,15 @@ export class Wans extends APIResource {
   delete(
     siteId: string,
     wanId: string,
-    params: WanDeleteParams,
+    params: WANDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WanDeleteResponse> {
+  ): Core.APIPromise<WANDeleteResponse> {
     const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/magic/sites/${siteId}/wans/${wanId}`,
         options,
-      ) as Core.APIPromise<{ result: WanDeleteResponse }>
+      ) as Core.APIPromise<{ result: WANDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -80,25 +80,25 @@ export class Wans extends APIResource {
   get(
     siteId: string,
     wanId: string,
-    params: WanGetParams,
+    params: WANGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WanGetResponse> {
+  ): Core.APIPromise<WANGetResponse> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/magic/sites/${siteId}/wans/${wanId}`,
         options,
-      ) as Core.APIPromise<{ result: WanGetResponse }>
+      ) as Core.APIPromise<{ result: WANGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface WanCreateResponse {
-  wans?: Array<WanCreateResponse.Wan>;
+export interface WANCreateResponse {
+  wans?: Array<WANCreateResponse.WAN>;
 }
 
-export namespace WanCreateResponse {
-  export interface Wan {
+export namespace WANCreateResponse {
+  export interface WAN {
     /**
      * Identifier
      */
@@ -122,7 +122,7 @@ export namespace WanCreateResponse {
      * (optional) if omitted, use DHCP. Submit secondary_address when site is in high
      * availability mode.
      */
-    static_addressing?: Wan.StaticAddressing;
+    static_addressing?: WAN.StaticAddressing;
 
     /**
      * VLAN port number.
@@ -130,7 +130,7 @@ export namespace WanCreateResponse {
     vlan_tag?: number;
   }
 
-  export namespace Wan {
+  export namespace WAN {
     /**
      * (optional) if omitted, use DHCP. Submit secondary_address when site is in high
      * availability mode.
@@ -154,12 +154,12 @@ export namespace WanCreateResponse {
   }
 }
 
-export interface WanUpdateResponse {
-  wan?: WanUpdateResponse.Wan;
+export interface WANUpdateResponse {
+  wan?: WANUpdateResponse.WAN;
 }
 
-export namespace WanUpdateResponse {
-  export interface Wan {
+export namespace WANUpdateResponse {
+  export interface WAN {
     /**
      * Identifier
      */
@@ -183,7 +183,7 @@ export namespace WanUpdateResponse {
      * (optional) if omitted, use DHCP. Submit secondary_address when site is in high
      * availability mode.
      */
-    static_addressing?: Wan.StaticAddressing;
+    static_addressing?: WAN.StaticAddressing;
 
     /**
      * VLAN port number.
@@ -191,7 +191,7 @@ export namespace WanUpdateResponse {
     vlan_tag?: number;
   }
 
-  export namespace Wan {
+  export namespace WAN {
     /**
      * (optional) if omitted, use DHCP. Submit secondary_address when site is in high
      * availability mode.
@@ -215,12 +215,12 @@ export namespace WanUpdateResponse {
   }
 }
 
-export interface WanListResponse {
-  wans?: Array<WanListResponse.Wan>;
+export interface WANListResponse {
+  wans?: Array<WANListResponse.WAN>;
 }
 
-export namespace WanListResponse {
-  export interface Wan {
+export namespace WANListResponse {
+  export interface WAN {
     /**
      * Identifier
      */
@@ -244,7 +244,7 @@ export namespace WanListResponse {
      * (optional) if omitted, use DHCP. Submit secondary_address when site is in high
      * availability mode.
      */
-    static_addressing?: Wan.StaticAddressing;
+    static_addressing?: WAN.StaticAddressing;
 
     /**
      * VLAN port number.
@@ -252,7 +252,7 @@ export namespace WanListResponse {
     vlan_tag?: number;
   }
 
-  export namespace Wan {
+  export namespace WAN {
     /**
      * (optional) if omitted, use DHCP. Submit secondary_address when site is in high
      * availability mode.
@@ -276,14 +276,14 @@ export namespace WanListResponse {
   }
 }
 
-export interface WanDeleteResponse {
+export interface WANDeleteResponse {
   deleted?: boolean;
 
-  deleted_wan?: WanDeleteResponse.DeletedWan;
+  deleted_wan?: WANDeleteResponse.DeletedWAN;
 }
 
-export namespace WanDeleteResponse {
-  export interface DeletedWan {
+export namespace WANDeleteResponse {
+  export interface DeletedWAN {
     /**
      * Identifier
      */
@@ -307,7 +307,7 @@ export namespace WanDeleteResponse {
      * (optional) if omitted, use DHCP. Submit secondary_address when site is in high
      * availability mode.
      */
-    static_addressing?: DeletedWan.StaticAddressing;
+    static_addressing?: DeletedWAN.StaticAddressing;
 
     /**
      * VLAN port number.
@@ -315,7 +315,7 @@ export namespace WanDeleteResponse {
     vlan_tag?: number;
   }
 
-  export namespace DeletedWan {
+  export namespace DeletedWAN {
     /**
      * (optional) if omitted, use DHCP. Submit secondary_address when site is in high
      * availability mode.
@@ -339,12 +339,12 @@ export namespace WanDeleteResponse {
   }
 }
 
-export interface WanGetResponse {
-  wan?: WanGetResponse.Wan;
+export interface WANGetResponse {
+  wan?: WANGetResponse.WAN;
 }
 
-export namespace WanGetResponse {
-  export interface Wan {
+export namespace WANGetResponse {
+  export interface WAN {
     /**
      * Identifier
      */
@@ -368,7 +368,7 @@ export namespace WanGetResponse {
      * (optional) if omitted, use DHCP. Submit secondary_address when site is in high
      * availability mode.
      */
-    static_addressing?: Wan.StaticAddressing;
+    static_addressing?: WAN.StaticAddressing;
 
     /**
      * VLAN port number.
@@ -376,7 +376,7 @@ export namespace WanGetResponse {
     vlan_tag?: number;
   }
 
-  export namespace Wan {
+  export namespace WAN {
     /**
      * (optional) if omitted, use DHCP. Submit secondary_address when site is in high
      * availability mode.
@@ -400,7 +400,7 @@ export namespace WanGetResponse {
   }
 }
 
-export interface WanCreateParams {
+export interface WANCreateParams {
   /**
    * Path param: Identifier
    */
@@ -409,11 +409,11 @@ export interface WanCreateParams {
   /**
    * Body param:
    */
-  wan?: WanCreateParams.Wan;
+  wan?: WANCreateParams.WAN;
 }
 
-export namespace WanCreateParams {
-  export interface Wan {
+export namespace WANCreateParams {
+  export interface WAN {
     physport: number;
 
     /**
@@ -429,10 +429,10 @@ export namespace WanCreateParams {
      * (optional) if omitted, use DHCP. Submit secondary_address when site is in high
      * availability mode.
      */
-    static_addressing?: Wan.StaticAddressing;
+    static_addressing?: WAN.StaticAddressing;
   }
 
-  export namespace Wan {
+  export namespace WAN {
     /**
      * (optional) if omitted, use DHCP. Submit secondary_address when site is in high
      * availability mode.
@@ -456,7 +456,7 @@ export namespace WanCreateParams {
   }
 }
 
-export interface WanUpdateParams {
+export interface WANUpdateParams {
   /**
    * Path param: Identifier
    */
@@ -465,11 +465,11 @@ export interface WanUpdateParams {
   /**
    * Body param:
    */
-  wan?: WanUpdateParams.Wan;
+  wan?: WANUpdateParams.WAN;
 }
 
-export namespace WanUpdateParams {
-  export interface Wan {
+export namespace WANUpdateParams {
+  export interface WAN {
     description?: string;
 
     physport?: number;
@@ -480,7 +480,7 @@ export namespace WanUpdateParams {
      * (optional) if omitted, use DHCP. Submit secondary_address when site is in high
      * availability mode.
      */
-    static_addressing?: Wan.StaticAddressing;
+    static_addressing?: WAN.StaticAddressing;
 
     /**
      * VLAN port number.
@@ -488,7 +488,7 @@ export namespace WanUpdateParams {
     vlan_tag?: number;
   }
 
-  export namespace Wan {
+  export namespace WAN {
     /**
      * (optional) if omitted, use DHCP. Submit secondary_address when site is in high
      * availability mode.
@@ -512,36 +512,36 @@ export namespace WanUpdateParams {
   }
 }
 
-export interface WanListParams {
+export interface WANListParams {
   /**
    * Identifier
    */
   account_id: string;
 }
 
-export interface WanDeleteParams {
+export interface WANDeleteParams {
   /**
    * Identifier
    */
   account_id: string;
 }
 
-export interface WanGetParams {
+export interface WANGetParams {
   /**
    * Identifier
    */
   account_id: string;
 }
 
-export namespace Wans {
-  export import WanCreateResponse = WansAPI.WanCreateResponse;
-  export import WanUpdateResponse = WansAPI.WanUpdateResponse;
-  export import WanListResponse = WansAPI.WanListResponse;
-  export import WanDeleteResponse = WansAPI.WanDeleteResponse;
-  export import WanGetResponse = WansAPI.WanGetResponse;
-  export import WanCreateParams = WansAPI.WanCreateParams;
-  export import WanUpdateParams = WansAPI.WanUpdateParams;
-  export import WanListParams = WansAPI.WanListParams;
-  export import WanDeleteParams = WansAPI.WanDeleteParams;
-  export import WanGetParams = WansAPI.WanGetParams;
+export namespace WANs {
+  export import WANCreateResponse = WANsAPI.WANCreateResponse;
+  export import WANUpdateResponse = WANsAPI.WANUpdateResponse;
+  export import WANListResponse = WANsAPI.WANListResponse;
+  export import WANDeleteResponse = WANsAPI.WANDeleteResponse;
+  export import WANGetResponse = WANsAPI.WANGetResponse;
+  export import WANCreateParams = WANsAPI.WANCreateParams;
+  export import WANUpdateParams = WANsAPI.WANUpdateParams;
+  export import WANListParams = WANsAPI.WANListParams;
+  export import WANDeleteParams = WANsAPI.WANDeleteParams;
+  export import WANGetParams = WANsAPI.WANGetParams;
 }

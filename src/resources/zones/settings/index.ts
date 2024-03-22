@@ -217,5 +217,5 @@ export {
   TrueClientIPHeader,
 } from './true-client-ip-header';
 export { ZonesWAF, WAFEditParams, WAFGetParams, WAF } from './waf';
-export { ZonesWebp, WebpEditParams, WebpGetParams, Webp } from './webp';
+export { ZonesWebP, WebPEditParams, WebPGetParams, WebP } from './webp';
 export { ZonesWebsockets, WebsocketEditParams, WebsocketGetParams, Websocket } from './websocket';

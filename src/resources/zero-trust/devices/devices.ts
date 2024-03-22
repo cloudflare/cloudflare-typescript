@@ -6,9 +6,9 @@ import * as DevicesAPI from 'cloudflare/resources/zero-trust/devices/devices';
 import * as DEXTestsAPI from 'cloudflare/resources/zero-trust/devices/dex-tests';
 import * as NetworksAPI from 'cloudflare/resources/zero-trust/devices/networks';
 import * as OverrideCodesAPI from 'cloudflare/resources/zero-trust/devices/override-codes';
-import * as RevokesAPI from 'cloudflare/resources/zero-trust/devices/revokes';
+import * as RevokeAPI from 'cloudflare/resources/zero-trust/devices/revoke';
 import * as SettingsAPI from 'cloudflare/resources/zero-trust/devices/settings';
-import * as UnrevokesAPI from 'cloudflare/resources/zero-trust/devices/unrevokes';
+import * as UnrevokeAPI from 'cloudflare/resources/zero-trust/devices/unrevoke';
 import * as PoliciesAPI from 'cloudflare/resources/zero-trust/devices/policies/policies';
 import * as PostureAPI from 'cloudflare/resources/zero-trust/devices/posture/posture';
 
@@ -17,9 +17,9 @@ export class Devices extends APIResource {
   networks: NetworksAPI.Networks = new NetworksAPI.Networks(this._client);
   policies: PoliciesAPI.Policies = new PoliciesAPI.Policies(this._client);
   posture: PostureAPI.Posture = new PostureAPI.Posture(this._client);
-  revokes: RevokesAPI.Revokes = new RevokesAPI.Revokes(this._client);
+  revoke: RevokeAPI.Revoke = new RevokeAPI.Revoke(this._client);
   settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
-  unrevokes: UnrevokesAPI.Unrevokes = new UnrevokesAPI.Unrevokes(this._client);
+  unrevoke: UnrevokeAPI.Unrevoke = new UnrevokeAPI.Unrevoke(this._client);
   overrideCodes: OverrideCodesAPI.OverrideCodes = new OverrideCodesAPI.OverrideCodes(this._client);
 
   /**
@@ -220,16 +220,16 @@ export namespace Devices {
   export import PostureListParams = PostureAPI.PostureListParams;
   export import PostureDeleteParams = PostureAPI.PostureDeleteParams;
   export import PostureGetParams = PostureAPI.PostureGetParams;
-  export import Revokes = RevokesAPI.Revokes;
-  export import RevokeCreateResponse = RevokesAPI.RevokeCreateResponse;
-  export import RevokeCreateParams = RevokesAPI.RevokeCreateParams;
+  export import Revoke = RevokeAPI.Revoke;
+  export import RevokeCreateResponse = RevokeAPI.RevokeCreateResponse;
+  export import RevokeCreateParams = RevokeAPI.RevokeCreateParams;
   export import Settings = SettingsAPI.Settings;
   export import TeamsDevicesZeroTrustAccountDeviceSettings = SettingsAPI.TeamsDevicesZeroTrustAccountDeviceSettings;
   export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;
   export import SettingListParams = SettingsAPI.SettingListParams;
-  export import Unrevokes = UnrevokesAPI.Unrevokes;
-  export import UnrevokeCreateResponse = UnrevokesAPI.UnrevokeCreateResponse;
-  export import UnrevokeCreateParams = UnrevokesAPI.UnrevokeCreateParams;
+  export import Unrevoke = UnrevokeAPI.Unrevoke;
+  export import UnrevokeCreateResponse = UnrevokeAPI.UnrevokeCreateResponse;
+  export import UnrevokeCreateParams = UnrevokeAPI.UnrevokeCreateParams;
   export import OverrideCodes = OverrideCodesAPI.OverrideCodes;
   export import OverrideCodeListResponse = OverrideCodesAPI.OverrideCodeListResponse;
   export import OverrideCodeListParams = OverrideCodesAPI.OverrideCodeListParams;

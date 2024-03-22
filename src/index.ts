@@ -154,8 +154,8 @@ export class Cloudflare extends Core.APIClient {
   subscriptions: API.Subscriptions = new API.Subscriptions(this);
   acm: API.ACM = new API.ACM(this);
   argo: API.Argo = new API.Argo(this);
-  availablePlans: API.AvailablePlans = new API.AvailablePlans(this);
-  availableRatePlans: API.AvailableRatePlans = new API.AvailableRatePlans(this);
+  plans: API.Plans = new API.Plans(this);
+  ratePlans: API.RatePlans = new API.RatePlans(this);
   certificateAuthorities: API.CertificateAuthorities = new API.CertificateAuthorities(this);
   clientCertificates: API.ClientCertificates = new API.ClientCertificates(this);
   customCertificates: API.CustomCertificates = new API.CustomCertificates(this);
@@ -467,13 +467,13 @@ export namespace Cloudflare {
 
   export import Argo = API.Argo;
 
-  export import AvailablePlans = API.AvailablePlans;
+  export import Plans = API.Plans;
   export import BillSubsAPIAvailableRatePlan = API.BillSubsAPIAvailableRatePlan;
-  export import AvailablePlanListResponse = API.AvailablePlanListResponse;
+  export import PlanListResponse = API.PlanListResponse;
 
-  export import AvailableRatePlans = API.AvailableRatePlans;
+  export import RatePlans = API.RatePlans;
   export import BillSubsRatePlan = API.BillSubsRatePlan;
-  export import AvailableRatePlanGetResponse = API.AvailableRatePlanGetResponse;
+  export import RatePlanGetResponse = API.RatePlanGetResponse;
 
   export import CertificateAuthorities = API.CertificateAuthorities;
 
@@ -535,6 +535,10 @@ export namespace Cloudflare {
   export import DNSSECGetParams = API.DNSSECGetParams;
 
   export import EmailRouting = API.EmailRouting;
+  export import EmailSettings = API.EmailSettings;
+  export import EmailRoutingDisableResponse = API.EmailRoutingDisableResponse;
+  export import EmailRoutingEnableResponse = API.EmailRoutingEnableResponse;
+  export import EmailRoutingGetResponse = API.EmailRoutingGetResponse;
 
   export import Filters = API.Filters;
   export import LegacyJhsFilter = API.LegacyJhsFilter;
