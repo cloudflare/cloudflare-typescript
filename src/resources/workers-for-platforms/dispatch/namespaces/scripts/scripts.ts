@@ -4,11 +4,15 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ScriptsScriptsAPI from 'cloudflare/resources/workers-for-platforms/dispatch/namespaces/scripts/scripts';
 import * as ScriptsAPI from 'cloudflare/resources/workers/scripts/scripts';
-import * as ContentAPI from 'cloudflare/resources/workers-for-platforms/dispatch/namespaces/scripts/content/content';
+import * as BindingsAPI from 'cloudflare/resources/workers-for-platforms/dispatch/namespaces/scripts/bindings';
+import * as ContentAPI from 'cloudflare/resources/workers-for-platforms/dispatch/namespaces/scripts/content';
+import * as SettingsAPI from 'cloudflare/resources/workers-for-platforms/dispatch/namespaces/scripts/settings';
 import { type Uploadable, maybeMultipartFormRequestOptions } from 'cloudflare/core';
 
 export class Scripts extends APIResource {
   content: ContentAPI.Content = new ContentAPI.Content(this._client);
+  settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
+  bindings: BindingsAPI.Bindings = new BindingsAPI.Bindings(this._client);
 
   /**
    * Upload a worker module to a Workers for Platforms namespace.
@@ -369,4 +373,14 @@ export namespace Scripts {
   export import ScriptDeleteParams = ScriptsScriptsAPI.ScriptDeleteParams;
   export import ScriptGetParams = ScriptsScriptsAPI.ScriptGetParams;
   export import Content = ContentAPI.Content;
+  export import ContentUpdateParams = ContentAPI.ContentUpdateParams;
+  export import ContentGetParams = ContentAPI.ContentGetParams;
+  export import Settings = SettingsAPI.Settings;
+  export import SettingEditResponse = SettingsAPI.SettingEditResponse;
+  export import SettingGetResponse = SettingsAPI.SettingGetResponse;
+  export import SettingEditParams = SettingsAPI.SettingEditParams;
+  export import SettingGetParams = SettingsAPI.SettingGetParams;
+  export import Bindings = BindingsAPI.Bindings;
+  export import BindingGetResponse = BindingsAPI.BindingGetResponse;
+  export import BindingGetParams = BindingsAPI.BindingGetParams;
 }

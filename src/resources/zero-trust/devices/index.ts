@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export { OverrideCodeListResponse, OverrideCodeListParams, OverrideCodes } from './override-codes';
-export { RevokeCreateResponse, RevokeCreateParams, Revokes } from './revokes';
+export { RevokeCreateResponse, RevokeCreateParams, Revoke } from './revoke';
 export {
   TeamsDevicesDeviceDEXTestSchemasHTTP,
   DEXTestListResponse,
@@ -60,4 +60,4 @@ export {
   SettingListParams,
   Settings,
 } from './settings';
-export { UnrevokeCreateResponse, UnrevokeCreateParams, Unrevokes } from './unrevokes';
+export { UnrevokeCreateResponse, UnrevokeCreateParams, Unrevoke } from './unrevoke';

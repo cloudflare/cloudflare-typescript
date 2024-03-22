@@ -20,5 +20,5 @@ export {
   SiteInfoDeleteParams,
   SiteInfoGetParams,
   RUMSitesV4PagePaginationArray,
-  SiteInfos,
-} from './site-infos';
+  SiteInfo,
+} from './site-info';

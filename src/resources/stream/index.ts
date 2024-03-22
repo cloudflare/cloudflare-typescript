@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { CopyCreateParams, Copies } from './copies';
-export { DirectUploadCreateResponse, DirectUploadCreateParams, DirectUploads } from './direct-uploads';
+export { CopyCreateParams, Copy } from './copy';
+export { DirectUploadCreateResponse, DirectUploadCreateParams, DirectUpload } from './direct-upload';
 export {
   DownloadCreateResponse,
   DownloadDeleteResponse,
@@ -11,7 +11,7 @@ export {
   DownloadGetParams,
   Downloads,
 } from './downloads';
-export { EmbedGetResponse, EmbedGetParams, Embeds } from './embeds';
+export { EmbedGetResponse, EmbedGetParams, Embed } from './embed';
 export {
   StreamAdditionalAudio,
   AudioTrackDeleteResponse,
@@ -32,7 +32,7 @@ export {
   CaptionGetParams,
   Captions,
 } from './captions';
-export { StreamClipping, ClipCreateParams, Clips } from './clips';
+export { StreamClipping, ClipCreateParams, Clip } from './clip';
 export {
   StreamKeys,
   KeyDeleteResponse,
@@ -73,7 +73,7 @@ export {
   WatermarkGetParams,
   Watermarks,
 } from './watermarks';
-export { TokenCreateResponse, TokenCreateParams, Tokens } from './tokens';
+export { TokenCreateResponse, TokenCreateParams, Token } from './token';
 export { VideoStorageUsageResponse, VideoStorageUsageParams, Videos } from './videos';
 export {
   WebhookUpdateResponse,
