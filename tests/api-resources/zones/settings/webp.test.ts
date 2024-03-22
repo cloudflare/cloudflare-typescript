@@ -9,10 +9,10 @@ const cloudflare = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource webp', () => {
+describe('resource WebP', () => {
   // skipped: tests are disabled for the time being
   test.skip('edit: only required params', async () => {
-    const responsePromise = cloudflare.zones.settings.webp.edit({
+    const responsePromise = cloudflare.zones.settings.WebP.edit({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       value: 'off',
     });
@@ -27,7 +27,7 @@ describe('resource webp', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('edit: required and optional params', async () => {
-    const response = await cloudflare.zones.settings.webp.edit({
+    const response = await cloudflare.zones.settings.WebP.edit({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       value: 'off',
     });
@@ -35,7 +35,7 @@ describe('resource webp', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('get: only required params', async () => {
-    const responsePromise = cloudflare.zones.settings.webp.get({
+    const responsePromise = cloudflare.zones.settings.WebP.get({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -49,7 +49,7 @@ describe('resource webp', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('get: required and optional params', async () => {
-    const response = await cloudflare.zones.settings.webp.get({
+    const response = await cloudflare.zones.settings.WebP.get({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

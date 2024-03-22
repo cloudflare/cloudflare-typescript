@@ -2,24 +2,24 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as LansAPI from 'cloudflare/resources/magic-transit/sites/lans';
+import * as LANsAPI from 'cloudflare/resources/magic-transit/sites/lans';
 
-export class Lans extends APIResource {
+export class LANs extends APIResource {
   /**
    * Creates a new LAN. If the site is in high availability mode, static_addressing
    * is required along with secondary and virtual address.
    */
   create(
     siteId: string,
-    params: LanCreateParams,
+    params: LANCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LanCreateResponse> {
+  ): Core.APIPromise<LANCreateResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/magic/sites/${siteId}/lans`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: LanCreateResponse }>
+      }) as Core.APIPromise<{ result: LANCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -29,15 +29,15 @@ export class Lans extends APIResource {
   update(
     siteId: string,
     lanId: string,
-    params: LanUpdateParams,
+    params: LANUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LanUpdateResponse> {
+  ): Core.APIPromise<LANUpdateResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/magic/sites/${siteId}/lans/${lanId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: LanUpdateResponse }>
+      }) as Core.APIPromise<{ result: LANUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -46,13 +46,13 @@ export class Lans extends APIResource {
    */
   list(
     siteId: string,
-    params: LanListParams,
+    params: LANListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LanListResponse> {
+  ): Core.APIPromise<LANListResponse> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/magic/sites/${siteId}/lans`, options) as Core.APIPromise<{
-        result: LanListResponse;
+        result: LANListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -63,15 +63,15 @@ export class Lans extends APIResource {
   delete(
     siteId: string,
     lanId: string,
-    params: LanDeleteParams,
+    params: LANDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LanDeleteResponse> {
+  ): Core.APIPromise<LANDeleteResponse> {
     const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/magic/sites/${siteId}/lans/${lanId}`,
         options,
-      ) as Core.APIPromise<{ result: LanDeleteResponse }>
+      ) as Core.APIPromise<{ result: LANDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -81,25 +81,25 @@ export class Lans extends APIResource {
   get(
     siteId: string,
     lanId: string,
-    params: LanGetParams,
+    params: LANGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LanGetResponse> {
+  ): Core.APIPromise<LANGetResponse> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/magic/sites/${siteId}/lans/${lanId}`,
         options,
-      ) as Core.APIPromise<{ result: LanGetResponse }>
+      ) as Core.APIPromise<{ result: LANGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface LanCreateResponse {
-  lans?: Array<LanCreateResponse.Lan>;
+export interface LANCreateResponse {
+  lans?: Array<LANCreateResponse.LAN>;
 }
 
-export namespace LanCreateResponse {
-  export interface Lan {
+export namespace LANCreateResponse {
+  export interface LAN {
     /**
      * Identifier
      */
@@ -113,11 +113,11 @@ export namespace LanCreateResponse {
      */
     ha_link?: boolean;
 
-    nat?: Lan.Nat;
+    nat?: LAN.Nat;
 
     physport?: number;
 
-    routed_subnets?: Array<Lan.RoutedSubnet>;
+    routed_subnets?: Array<LAN.RoutedSubnet>;
 
     /**
      * Identifier
@@ -129,7 +129,7 @@ export namespace LanCreateResponse {
      * optional (if omitted, use DHCP). However, if in high availability mode,
      * static_address is required along with secondary and virtual address.
      */
-    static_addressing?: Lan.StaticAddressing;
+    static_addressing?: LAN.StaticAddressing;
 
     /**
      * VLAN port number.
@@ -137,7 +137,7 @@ export namespace LanCreateResponse {
     vlan_tag?: number;
   }
 
-  export namespace Lan {
+  export namespace LAN {
     export interface Nat {
       /**
        * A valid CIDR notation representing an IP range.
@@ -227,12 +227,12 @@ export namespace LanCreateResponse {
   }
 }
 
-export interface LanUpdateResponse {
-  lan?: LanUpdateResponse.Lan;
+export interface LANUpdateResponse {
+  lan?: LANUpdateResponse.LAN;
 }
 
-export namespace LanUpdateResponse {
-  export interface Lan {
+export namespace LANUpdateResponse {
+  export interface LAN {
     /**
      * Identifier
      */
@@ -246,11 +246,11 @@ export namespace LanUpdateResponse {
      */
     ha_link?: boolean;
 
-    nat?: Lan.Nat;
+    nat?: LAN.Nat;
 
     physport?: number;
 
-    routed_subnets?: Array<Lan.RoutedSubnet>;
+    routed_subnets?: Array<LAN.RoutedSubnet>;
 
     /**
      * Identifier
@@ -262,7 +262,7 @@ export namespace LanUpdateResponse {
      * optional (if omitted, use DHCP). However, if in high availability mode,
      * static_address is required along with secondary and virtual address.
      */
-    static_addressing?: Lan.StaticAddressing;
+    static_addressing?: LAN.StaticAddressing;
 
     /**
      * VLAN port number.
@@ -270,7 +270,7 @@ export namespace LanUpdateResponse {
     vlan_tag?: number;
   }
 
-  export namespace Lan {
+  export namespace LAN {
     export interface Nat {
       /**
        * A valid CIDR notation representing an IP range.
@@ -360,12 +360,12 @@ export namespace LanUpdateResponse {
   }
 }
 
-export interface LanListResponse {
-  lans?: Array<LanListResponse.Lan>;
+export interface LANListResponse {
+  lans?: Array<LANListResponse.LAN>;
 }
 
-export namespace LanListResponse {
-  export interface Lan {
+export namespace LANListResponse {
+  export interface LAN {
     /**
      * Identifier
      */
@@ -379,11 +379,11 @@ export namespace LanListResponse {
      */
     ha_link?: boolean;
 
-    nat?: Lan.Nat;
+    nat?: LAN.Nat;
 
     physport?: number;
 
-    routed_subnets?: Array<Lan.RoutedSubnet>;
+    routed_subnets?: Array<LAN.RoutedSubnet>;
 
     /**
      * Identifier
@@ -395,7 +395,7 @@ export namespace LanListResponse {
      * optional (if omitted, use DHCP). However, if in high availability mode,
      * static_address is required along with secondary and virtual address.
      */
-    static_addressing?: Lan.StaticAddressing;
+    static_addressing?: LAN.StaticAddressing;
 
     /**
      * VLAN port number.
@@ -403,7 +403,7 @@ export namespace LanListResponse {
     vlan_tag?: number;
   }
 
-  export namespace Lan {
+  export namespace LAN {
     export interface Nat {
       /**
        * A valid CIDR notation representing an IP range.
@@ -493,14 +493,14 @@ export namespace LanListResponse {
   }
 }
 
-export interface LanDeleteResponse {
+export interface LANDeleteResponse {
   deleted?: boolean;
 
-  deleted_lan?: LanDeleteResponse.DeletedLan;
+  deleted_lan?: LANDeleteResponse.DeletedLAN;
 }
 
-export namespace LanDeleteResponse {
-  export interface DeletedLan {
+export namespace LANDeleteResponse {
+  export interface DeletedLAN {
     /**
      * Identifier
      */
@@ -514,11 +514,11 @@ export namespace LanDeleteResponse {
      */
     ha_link?: boolean;
 
-    nat?: DeletedLan.Nat;
+    nat?: DeletedLAN.Nat;
 
     physport?: number;
 
-    routed_subnets?: Array<DeletedLan.RoutedSubnet>;
+    routed_subnets?: Array<DeletedLAN.RoutedSubnet>;
 
     /**
      * Identifier
@@ -530,7 +530,7 @@ export namespace LanDeleteResponse {
      * optional (if omitted, use DHCP). However, if in high availability mode,
      * static_address is required along with secondary and virtual address.
      */
-    static_addressing?: DeletedLan.StaticAddressing;
+    static_addressing?: DeletedLAN.StaticAddressing;
 
     /**
      * VLAN port number.
@@ -538,7 +538,7 @@ export namespace LanDeleteResponse {
     vlan_tag?: number;
   }
 
-  export namespace DeletedLan {
+  export namespace DeletedLAN {
     export interface Nat {
       /**
        * A valid CIDR notation representing an IP range.
@@ -628,12 +628,12 @@ export namespace LanDeleteResponse {
   }
 }
 
-export interface LanGetResponse {
-  lan?: LanGetResponse.Lan;
+export interface LANGetResponse {
+  lan?: LANGetResponse.LAN;
 }
 
-export namespace LanGetResponse {
-  export interface Lan {
+export namespace LANGetResponse {
+  export interface LAN {
     /**
      * Identifier
      */
@@ -647,11 +647,11 @@ export namespace LanGetResponse {
      */
     ha_link?: boolean;
 
-    nat?: Lan.Nat;
+    nat?: LAN.Nat;
 
     physport?: number;
 
-    routed_subnets?: Array<Lan.RoutedSubnet>;
+    routed_subnets?: Array<LAN.RoutedSubnet>;
 
     /**
      * Identifier
@@ -663,7 +663,7 @@ export namespace LanGetResponse {
      * optional (if omitted, use DHCP). However, if in high availability mode,
      * static_address is required along with secondary and virtual address.
      */
-    static_addressing?: Lan.StaticAddressing;
+    static_addressing?: LAN.StaticAddressing;
 
     /**
      * VLAN port number.
@@ -671,7 +671,7 @@ export namespace LanGetResponse {
     vlan_tag?: number;
   }
 
-  export namespace Lan {
+  export namespace LAN {
     export interface Nat {
       /**
        * A valid CIDR notation representing an IP range.
@@ -761,7 +761,7 @@ export namespace LanGetResponse {
   }
 }
 
-export interface LanCreateParams {
+export interface LANCreateParams {
   /**
    * Path param: Identifier
    */
@@ -770,11 +770,11 @@ export interface LanCreateParams {
   /**
    * Body param:
    */
-  lan?: LanCreateParams.Lan;
+  lan?: LANCreateParams.LAN;
 }
 
-export namespace LanCreateParams {
-  export interface Lan {
+export namespace LANCreateParams {
+  export interface LAN {
     physport: number;
 
     /**
@@ -790,19 +790,19 @@ export namespace LanCreateParams {
      */
     ha_link?: boolean;
 
-    nat?: Lan.Nat;
+    nat?: LAN.Nat;
 
-    routed_subnets?: Array<Lan.RoutedSubnet>;
+    routed_subnets?: Array<LAN.RoutedSubnet>;
 
     /**
      * If the site is not configured in high availability mode, this configuration is
      * optional (if omitted, use DHCP). However, if in high availability mode,
      * static_address is required along with secondary and virtual address.
      */
-    static_addressing?: Lan.StaticAddressing;
+    static_addressing?: LAN.StaticAddressing;
   }
 
-  export namespace Lan {
+  export namespace LAN {
     export interface Nat {
       /**
        * A valid CIDR notation representing an IP range.
@@ -892,7 +892,7 @@ export namespace LanCreateParams {
   }
 }
 
-export interface LanUpdateParams {
+export interface LANUpdateParams {
   /**
    * Path param: Identifier
    */
@@ -901,25 +901,25 @@ export interface LanUpdateParams {
   /**
    * Body param:
    */
-  lan?: LanUpdateParams.Lan;
+  lan?: LANUpdateParams.LAN;
 }
 
-export namespace LanUpdateParams {
-  export interface Lan {
+export namespace LANUpdateParams {
+  export interface LAN {
     description?: string;
 
-    nat?: Lan.Nat;
+    nat?: LAN.Nat;
 
     physport?: number;
 
-    routed_subnets?: Array<Lan.RoutedSubnet>;
+    routed_subnets?: Array<LAN.RoutedSubnet>;
 
     /**
      * If the site is not configured in high availability mode, this configuration is
      * optional (if omitted, use DHCP). However, if in high availability mode,
      * static_address is required along with secondary and virtual address.
      */
-    static_addressing?: Lan.StaticAddressing;
+    static_addressing?: LAN.StaticAddressing;
 
     /**
      * VLAN port number.
@@ -927,7 +927,7 @@ export namespace LanUpdateParams {
     vlan_tag?: number;
   }
 
-  export namespace Lan {
+  export namespace LAN {
     export interface Nat {
       /**
        * A valid CIDR notation representing an IP range.
@@ -1017,36 +1017,36 @@ export namespace LanUpdateParams {
   }
 }
 
-export interface LanListParams {
+export interface LANListParams {
   /**
    * Identifier
    */
   account_id: string;
 }
 
-export interface LanDeleteParams {
+export interface LANDeleteParams {
   /**
    * Identifier
    */
   account_id: string;
 }
 
-export interface LanGetParams {
+export interface LANGetParams {
   /**
    * Identifier
    */
   account_id: string;
 }
 
-export namespace Lans {
-  export import LanCreateResponse = LansAPI.LanCreateResponse;
-  export import LanUpdateResponse = LansAPI.LanUpdateResponse;
-  export import LanListResponse = LansAPI.LanListResponse;
-  export import LanDeleteResponse = LansAPI.LanDeleteResponse;
-  export import LanGetResponse = LansAPI.LanGetResponse;
-  export import LanCreateParams = LansAPI.LanCreateParams;
-  export import LanUpdateParams = LansAPI.LanUpdateParams;
-  export import LanListParams = LansAPI.LanListParams;
-  export import LanDeleteParams = LansAPI.LanDeleteParams;
-  export import LanGetParams = LansAPI.LanGetParams;
+export namespace LANs {
+  export import LANCreateResponse = LANsAPI.LANCreateResponse;
+  export import LANUpdateResponse = LANsAPI.LANUpdateResponse;
+  export import LANListResponse = LANsAPI.LANListResponse;
+  export import LANDeleteResponse = LANsAPI.LANDeleteResponse;
+  export import LANGetResponse = LANsAPI.LANGetResponse;
+  export import LANCreateParams = LANsAPI.LANCreateParams;
+  export import LANUpdateParams = LANsAPI.LANUpdateParams;
+  export import LANListParams = LANsAPI.LANListParams;
+  export import LANDeleteParams = LANsAPI.LANDeleteParams;
+  export import LANGetParams = LANsAPI.LANGetParams;
 }

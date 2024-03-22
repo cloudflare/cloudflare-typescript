@@ -5,13 +5,13 @@ import { APIResource } from 'cloudflare/resource';
 import * as StreamAPI from 'cloudflare/resources/stream/stream';
 import * as AudioTracksAPI from 'cloudflare/resources/stream/audio-tracks';
 import * as CaptionsAPI from 'cloudflare/resources/stream/captions';
-import * as ClipsAPI from 'cloudflare/resources/stream/clips';
-import * as CopiesAPI from 'cloudflare/resources/stream/copies';
-import * as DirectUploadsAPI from 'cloudflare/resources/stream/direct-uploads';
+import * as ClipAPI from 'cloudflare/resources/stream/clip';
+import * as CopyAPI from 'cloudflare/resources/stream/copy';
+import * as DirectUploadAPI from 'cloudflare/resources/stream/direct-upload';
 import * as DownloadsAPI from 'cloudflare/resources/stream/downloads';
-import * as EmbedsAPI from 'cloudflare/resources/stream/embeds';
+import * as EmbedAPI from 'cloudflare/resources/stream/embed';
 import * as KeysAPI from 'cloudflare/resources/stream/keys';
-import * as TokensAPI from 'cloudflare/resources/stream/tokens';
+import * as TokenAPI from 'cloudflare/resources/stream/token';
 import * as VideosAPI from 'cloudflare/resources/stream/videos';
 import * as WatermarksAPI from 'cloudflare/resources/stream/watermarks';
 import * as WebhooksAPI from 'cloudflare/resources/stream/webhooks';
@@ -20,17 +20,17 @@ import * as LiveInputsAPI from 'cloudflare/resources/stream/live-inputs/live-inp
 export class Stream extends APIResource {
   audioTracks: AudioTracksAPI.AudioTracks = new AudioTracksAPI.AudioTracks(this._client);
   videos: VideosAPI.Videos = new VideosAPI.Videos(this._client);
-  clips: ClipsAPI.Clips = new ClipsAPI.Clips(this._client);
-  copies: CopiesAPI.Copies = new CopiesAPI.Copies(this._client);
-  directUploads: DirectUploadsAPI.DirectUploads = new DirectUploadsAPI.DirectUploads(this._client);
+  clip: ClipAPI.Clip = new ClipAPI.Clip(this._client);
+  copy: CopyAPI.Copy = new CopyAPI.Copy(this._client);
+  directUpload: DirectUploadAPI.DirectUpload = new DirectUploadAPI.DirectUpload(this._client);
   keys: KeysAPI.Keys = new KeysAPI.Keys(this._client);
   liveInputs: LiveInputsAPI.LiveInputs = new LiveInputsAPI.LiveInputs(this._client);
   watermarks: WatermarksAPI.Watermarks = new WatermarksAPI.Watermarks(this._client);
   webhooks: WebhooksAPI.Webhooks = new WebhooksAPI.Webhooks(this._client);
   captions: CaptionsAPI.Captions = new CaptionsAPI.Captions(this._client);
   downloads: DownloadsAPI.Downloads = new DownloadsAPI.Downloads(this._client);
-  embeds: EmbedsAPI.Embeds = new EmbedsAPI.Embeds(this._client);
-  tokens: TokensAPI.Tokens = new TokensAPI.Tokens(this._client);
+  embed: EmbedAPI.Embed = new EmbedAPI.Embed(this._client);
+  token: TokenAPI.Token = new TokenAPI.Token(this._client);
 
   /**
    * Initiates a video upload using the TUS protocol. On success, the server responds
@@ -410,14 +410,14 @@ export namespace Stream {
   export import Videos = VideosAPI.Videos;
   export import VideoStorageUsageResponse = VideosAPI.VideoStorageUsageResponse;
   export import VideoStorageUsageParams = VideosAPI.VideoStorageUsageParams;
-  export import Clips = ClipsAPI.Clips;
-  export import StreamClipping = ClipsAPI.StreamClipping;
-  export import ClipCreateParams = ClipsAPI.ClipCreateParams;
-  export import Copies = CopiesAPI.Copies;
-  export import CopyCreateParams = CopiesAPI.CopyCreateParams;
-  export import DirectUploads = DirectUploadsAPI.DirectUploads;
-  export import DirectUploadCreateResponse = DirectUploadsAPI.DirectUploadCreateResponse;
-  export import DirectUploadCreateParams = DirectUploadsAPI.DirectUploadCreateParams;
+  export import Clip = ClipAPI.Clip;
+  export import StreamClipping = ClipAPI.StreamClipping;
+  export import ClipCreateParams = ClipAPI.ClipCreateParams;
+  export import Copy = CopyAPI.Copy;
+  export import CopyCreateParams = CopyAPI.CopyCreateParams;
+  export import DirectUpload = DirectUploadAPI.DirectUpload;
+  export import DirectUploadCreateResponse = DirectUploadAPI.DirectUploadCreateResponse;
+  export import DirectUploadCreateParams = DirectUploadAPI.DirectUploadCreateParams;
   export import Keys = KeysAPI.Keys;
   export import StreamKeys = KeysAPI.StreamKeys;
   export import KeyDeleteResponse = KeysAPI.KeyDeleteResponse;
@@ -465,10 +465,10 @@ export namespace Stream {
   export import DownloadCreateParams = DownloadsAPI.DownloadCreateParams;
   export import DownloadDeleteParams = DownloadsAPI.DownloadDeleteParams;
   export import DownloadGetParams = DownloadsAPI.DownloadGetParams;
-  export import Embeds = EmbedsAPI.Embeds;
-  export import EmbedGetResponse = EmbedsAPI.EmbedGetResponse;
-  export import EmbedGetParams = EmbedsAPI.EmbedGetParams;
-  export import Tokens = TokensAPI.Tokens;
-  export import TokenCreateResponse = TokensAPI.TokenCreateResponse;
-  export import TokenCreateParams = TokensAPI.TokenCreateParams;
+  export import Embed = EmbedAPI.Embed;
+  export import EmbedGetResponse = EmbedAPI.EmbedGetResponse;
+  export import EmbedGetParams = EmbedAPI.EmbedGetParams;
+  export import Token = TokenAPI.Token;
+  export import TokenCreateResponse = TokenAPI.TokenCreateResponse;
+  export import TokenCreateParams = TokenAPI.TokenCreateParams;
 }

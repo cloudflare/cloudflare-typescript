@@ -6,10 +6,10 @@ import { isRequestOptions } from 'cloudflare/core';
 import { CloudflareError } from 'cloudflare/error';
 import * as VersionsAPI from 'cloudflare/resources/rulesets/versions/versions';
 import * as RulesetsAPI from 'cloudflare/resources/rulesets/rulesets';
-import * as ByTagsAPI from 'cloudflare/resources/rulesets/versions/by-tags';
+import * as ByTagAPI from 'cloudflare/resources/rulesets/versions/by-tag';
 
 export class Versions extends APIResource {
-  byTags: ByTagsAPI.ByTags = new ByTagsAPI.ByTags(this._client);
+  byTag: ByTagAPI.ByTag = new ByTagAPI.ByTag(this._client);
 
   /**
    * Fetches the versions of an account or zone ruleset.
@@ -187,6 +187,6 @@ export namespace Versions {
   export import VersionListParams = VersionsAPI.VersionListParams;
   export import VersionDeleteParams = VersionsAPI.VersionDeleteParams;
   export import VersionGetParams = VersionsAPI.VersionGetParams;
-  export import ByTags = ByTagsAPI.ByTags;
-  export import ByTagGetParams = ByTagsAPI.ByTagGetParams;
+  export import ByTag = ByTagAPI.ByTag;
+  export import ByTagGetParams = ByTagAPI.ByTagGetParams;
 }
