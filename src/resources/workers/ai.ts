@@ -58,6 +58,8 @@ export namespace AIRunResponse {
   export interface SpeechRecognition {
     text: string;
 
+    vtt?: string;
+
     word_count?: number;
 
     words?: Array<SpeechRecognition.Word>;
