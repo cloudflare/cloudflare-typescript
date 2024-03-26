@@ -149,7 +149,7 @@ export namespace BillSubsAPISubscription {
     /**
      * The ID of the rate plan.
      */
-    id?: unknown;
+    id?: string;
 
     /**
      * The currency applied to the rate plan subscription.
@@ -307,7 +307,7 @@ export namespace SubscriptionGetResponse {
       /**
        * The ID of the rate plan.
        */
-      id?: unknown;
+      id?: string;
 
       /**
        * The currency applied to the rate plan subscription.
@@ -421,7 +421,7 @@ export namespace SubscriptionUpdateParams {
     /**
      * The ID of the rate plan.
      */
-    id?: unknown;
+    id?: string;
 
     /**
      * The currency applied to the rate plan subscription.
@@ -524,7 +524,7 @@ export namespace SubscriptionEditParams {
     /**
      * The ID of the rate plan.
      */
-    id?: unknown;
+    id?: string;
 
     /**
      * The currency applied to the rate plan subscription.

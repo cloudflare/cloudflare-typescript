@@ -196,12 +196,12 @@ export namespace RegistrarAPIDomains {
     /**
      * Form of authorization has been accepted by the registrant.
      */
-    accept_foa?: unknown;
+    accept_foa?: string;
 
     /**
      * Shows transfer status with the registry.
      */
-    approve_transfer?: unknown;
+    approve_transfer?: string;
 
     /**
      * Indicates if cancellation is still possible.
@@ -216,7 +216,7 @@ export namespace RegistrarAPIDomains {
     /**
      * Auth code has been entered and verified.
      */
-    enter_auth_code?: unknown;
+    enter_auth_code?: string;
 
     /**
      * Domain is unlocked at the foreign registrar.
@@ -374,12 +374,12 @@ export namespace DomainListResponse {
       /**
        * Form of authorization has been accepted by the registrant.
        */
-      accept_foa?: unknown;
+      accept_foa?: string;
 
       /**
        * Shows transfer status with the registry.
        */
-      approve_transfer?: unknown;
+      approve_transfer?: string;
 
       /**
        * Indicates if cancellation is still possible.
@@ -394,7 +394,7 @@ export namespace DomainListResponse {
       /**
        * Auth code has been entered and verified.
        */
-      enter_auth_code?: unknown;
+      enter_auth_code?: string;
 
       /**
        * Domain is unlocked at the foreign registrar.

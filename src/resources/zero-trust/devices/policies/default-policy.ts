@@ -24,7 +24,7 @@ export class DefaultPolicy extends APIResource {
 export type DefaultPolicyGetResponse = Array<unknown>;
 
 export interface DefaultPolicyGetParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export namespace DefaultPolicy {

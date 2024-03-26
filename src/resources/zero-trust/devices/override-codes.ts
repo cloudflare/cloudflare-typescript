@@ -33,32 +33,32 @@ export namespace OverrideCodeListResponse {
     /**
      * Override code that is valid for 1 hour.
      */
-    '1'?: unknown;
+    '1'?: string;
 
     /**
      * Override code that is valid for 12 hour2.
      */
-    '12'?: unknown;
+    '12'?: string;
 
     /**
      * Override code that is valid for 24 hour.2.
      */
-    '24'?: unknown;
+    '24'?: string;
 
     /**
      * Override code that is valid for 3 hours.
      */
-    '3'?: unknown;
+    '3'?: string;
 
     /**
      * Override code that is valid for 6 hours.
      */
-    '6'?: unknown;
+    '6'?: string;
   }
 }
 
 export interface OverrideCodeListParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export namespace OverrideCodes {

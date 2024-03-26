@@ -33,12 +33,12 @@ export interface MiscategorizationCreateParams {
   /**
    * Body param: Content category IDs to add.
    */
-  content_adds?: unknown;
+  content_adds?: Array<number>;
 
   /**
    * Body param: Content category IDs to remove.
    */
-  content_removes?: unknown;
+  content_removes?: Array<number>;
 
   /**
    * Body param:
@@ -53,12 +53,12 @@ export interface MiscategorizationCreateParams {
   /**
    * Body param: Security category IDs to add.
    */
-  security_adds?: unknown;
+  security_adds?: Array<number>;
 
   /**
    * Body param: Security category IDs to remove.
    */
-  security_removes?: unknown;
+  security_removes?: Array<number>;
 
   /**
    * Body param: Provide only if indicator_type is `domain` or `url`. Example if

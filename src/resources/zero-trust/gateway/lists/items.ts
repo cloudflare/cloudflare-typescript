@@ -36,7 +36,7 @@ export namespace ItemListResponse {
 }
 
 export interface ItemListParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export namespace Items {

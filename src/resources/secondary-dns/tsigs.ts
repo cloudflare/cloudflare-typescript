@@ -22,7 +22,7 @@ export class TSIGs extends APIResource {
    * Modify TSIG.
    */
   update(
-    tsigId: unknown,
+    tsigId: string,
     params: TSIGUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SecondaryDNSTSIG> {
@@ -51,7 +51,7 @@ export class TSIGs extends APIResource {
    * Delete TSIG.
    */
   delete(
-    tsigId: unknown,
+    tsigId: string,
     params: TSIGDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TSIGDeleteResponse> {
@@ -68,7 +68,7 @@ export class TSIGs extends APIResource {
    * Get TSIG.
    */
   get(
-    tsigId: unknown,
+    tsigId: string,
     params: TSIGGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SecondaryDNSTSIG> {
@@ -82,7 +82,7 @@ export class TSIGs extends APIResource {
 }
 
 export interface SecondaryDNSTSIG {
-  id: unknown;
+  id: string;
 
   /**
    * TSIG algorithm.
@@ -103,14 +103,14 @@ export interface SecondaryDNSTSIG {
 export type TSIGListResponse = Array<SecondaryDNSTSIG>;
 
 export interface TSIGDeleteResponse {
-  id?: unknown;
+  id?: string;
 }
 
 export interface TSIGCreateParams {
   /**
    * Path param:
    */
-  account_id: unknown;
+  account_id: string;
 
   /**
    * Body param: TSIG algorithm.
@@ -132,7 +132,7 @@ export interface TSIGUpdateParams {
   /**
    * Path param:
    */
-  account_id: unknown;
+  account_id: string;
 
   /**
    * Body param: TSIG algorithm.
@@ -151,15 +151,15 @@ export interface TSIGUpdateParams {
 }
 
 export interface TSIGListParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export interface TSIGDeleteParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export interface TSIGGetParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export namespace TSIGs {

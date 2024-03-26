@@ -36,7 +36,7 @@ export namespace BulkGetResponse {
     /**
      * Current content categories.
      */
-    content_categories?: unknown;
+    content_categories?: Array<unknown>;
 
     domain?: string;
 
@@ -62,7 +62,7 @@ export namespace BulkGetResponse {
      */
     risk_score?: number;
 
-    risk_types?: unknown;
+    risk_types?: Array<unknown>;
   }
 
   export namespace BulkGetResponseItem {

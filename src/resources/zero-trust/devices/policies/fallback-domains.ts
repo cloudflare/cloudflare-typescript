@@ -88,7 +88,7 @@ export interface FallbackDomainUpdateParams {
   /**
    * Path param:
    */
-  account_id: unknown;
+  account_id: string;
 
   /**
    * Body param:
@@ -97,11 +97,11 @@ export interface FallbackDomainUpdateParams {
 }
 
 export interface FallbackDomainListParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export interface FallbackDomainGetParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export namespace FallbackDomains {

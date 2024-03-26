@@ -9,7 +9,7 @@ export class Advertisements extends APIResource {
    * Update advertisement for rule.
    */
   edit(
-    ruleId: unknown,
+    ruleId: string,
     params: AdvertisementEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MagicVisibilityMNMRuleAdvertisable | null> {
@@ -33,7 +33,7 @@ export interface MagicVisibilityMNMRuleAdvertisable {
 }
 
 export interface AdvertisementEditParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export namespace Advertisements {

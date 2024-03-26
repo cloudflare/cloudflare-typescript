@@ -64,7 +64,7 @@ export class Incoming extends APIResource {
 }
 
 export interface IncomingCreateResponse {
-  id?: unknown;
+  id?: string;
 
   /**
    * How often should a secondary zone auto refresh regardless of DNS NOTIFY. Not
@@ -104,7 +104,7 @@ export interface IncomingCreateResponse {
 }
 
 export interface IncomingUpdateResponse {
-  id?: unknown;
+  id?: string;
 
   /**
    * How often should a secondary zone auto refresh regardless of DNS NOTIFY. Not
@@ -144,11 +144,11 @@ export interface IncomingUpdateResponse {
 }
 
 export interface IncomingDeleteResponse {
-  id?: unknown;
+  id?: string;
 }
 
 export interface IncomingGetResponse {
-  id?: unknown;
+  id?: string;
 
   /**
    * How often should a secondary zone auto refresh regardless of DNS NOTIFY. Not
@@ -191,7 +191,7 @@ export interface IncomingCreateParams {
   /**
    * Path param:
    */
-  zone_id: unknown;
+  zone_id: string;
 
   /**
    * Body param: How often should a secondary zone auto refresh regardless of DNS
@@ -214,7 +214,7 @@ export interface IncomingUpdateParams {
   /**
    * Path param:
    */
-  zone_id: unknown;
+  zone_id: string;
 
   /**
    * Body param: How often should a secondary zone auto refresh regardless of DNS
@@ -234,11 +234,11 @@ export interface IncomingUpdateParams {
 }
 
 export interface IncomingDeleteParams {
-  zone_id: unknown;
+  zone_id: string;
 }
 
 export interface IncomingGetParams {
-  zone_id: unknown;
+  zone_id: string;
 }
 
 export namespace Incoming {

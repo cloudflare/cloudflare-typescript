@@ -171,11 +171,11 @@ export type DeviceListResponse = Array<TeamsDevicesDevices>;
 export type DeviceGetResponse = unknown | string;
 
 export interface DeviceListParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export interface DeviceGetParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export namespace Devices {

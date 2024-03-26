@@ -84,7 +84,7 @@ export interface IncludeUpdateParams {
   /**
    * Path param:
    */
-  account_id: unknown;
+  account_id: string;
 
   /**
    * Body param:
@@ -93,11 +93,11 @@ export interface IncludeUpdateParams {
 }
 
 export interface IncludeListParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export interface IncludeGetParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export namespace Includes {

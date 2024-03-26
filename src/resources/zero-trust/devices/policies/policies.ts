@@ -225,7 +225,7 @@ export interface PolicyCreateParams {
   /**
    * Path param:
    */
-  account_id: unknown;
+  account_id: string;
 
   /**
    * Body param: The wirefilter expression to match devices.
@@ -338,18 +338,18 @@ export namespace PolicyCreateParams {
 }
 
 export interface PolicyListParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export interface PolicyDeleteParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export interface PolicyEditParams {
   /**
    * Path param:
    */
-  account_id: unknown;
+  account_id: string;
 
   /**
    * Body param: Whether to allow the user to switch WARP between modes.
@@ -448,7 +448,7 @@ export namespace PolicyEditParams {
 }
 
 export interface PolicyGetParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export namespace Policies {

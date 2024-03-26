@@ -18,7 +18,7 @@ export class Events extends APIResource {
    */
   create(
     zoneIdentifier: string,
-    waitingRoomId: unknown,
+    waitingRoomId: string,
     body: EventCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<WaitingroomEventResult> {
@@ -35,8 +35,8 @@ export class Events extends APIResource {
    */
   update(
     zoneIdentifier: string,
-    waitingRoomId: unknown,
-    eventId: unknown,
+    waitingRoomId: string,
+    eventId: string,
     body: EventUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<WaitingroomEventResult> {
@@ -53,7 +53,7 @@ export class Events extends APIResource {
    */
   list(
     zoneIdentifier: string,
-    waitingRoomId: unknown,
+    waitingRoomId: string,
     options?: Core.RequestOptions,
   ): Core.APIPromise<EventListResponse | null> {
     return (
@@ -69,8 +69,8 @@ export class Events extends APIResource {
    */
   delete(
     zoneIdentifier: string,
-    waitingRoomId: unknown,
-    eventId: unknown,
+    waitingRoomId: string,
+    eventId: string,
     options?: Core.RequestOptions,
   ): Core.APIPromise<EventDeleteResponse> {
     return (
@@ -86,8 +86,8 @@ export class Events extends APIResource {
    */
   edit(
     zoneIdentifier: string,
-    waitingRoomId: unknown,
-    eventId: unknown,
+    waitingRoomId: string,
+    eventId: string,
     body: EventEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<WaitingroomEventResult> {
@@ -104,8 +104,8 @@ export class Events extends APIResource {
    */
   get(
     zoneIdentifier: string,
-    waitingRoomId: unknown,
-    eventId: unknown,
+    waitingRoomId: string,
+    eventId: string,
     options?: Core.RequestOptions,
   ): Core.APIPromise<WaitingroomEventResult> {
     return (
@@ -118,7 +118,7 @@ export class Events extends APIResource {
 }
 
 export interface WaitingroomEventResult {
-  id?: unknown;
+  id?: string;
 
   created_on?: string;
 
@@ -212,7 +212,7 @@ export interface WaitingroomEventResult {
 export type EventListResponse = Array<WaitingroomEventResult>;
 
 export interface EventDeleteResponse {
-  id?: unknown;
+  id?: string;
 }
 
 export interface EventCreateParams {

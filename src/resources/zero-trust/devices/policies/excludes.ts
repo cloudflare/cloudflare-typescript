@@ -84,7 +84,7 @@ export interface ExcludeUpdateParams {
   /**
    * Path param:
    */
-  account_id: unknown;
+  account_id: string;
 
   /**
    * Body param:
@@ -93,11 +93,11 @@ export interface ExcludeUpdateParams {
 }
 
 export interface ExcludeListParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export interface ExcludeGetParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export namespace Excludes {

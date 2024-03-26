@@ -34,7 +34,7 @@ export class Variants extends APIResource {
    * Deleting a variant purges the cache for all images associated with the variant.
    */
   delete(
-    variantId: unknown,
+    variantId: string,
     params: VariantDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<VariantDeleteResponse> {
@@ -51,7 +51,7 @@ export class Variants extends APIResource {
    * Updating a variant purges the cache for all images associated with the variant.
    */
   edit(
-    variantId: unknown,
+    variantId: string,
     params: VariantEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ImageVariant> {
@@ -68,7 +68,7 @@ export class Variants extends APIResource {
    * Fetch details for a single variant.
    */
   get(
-    variantId: unknown,
+    variantId: string,
     params: VariantGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ImageVariant> {
@@ -88,7 +88,7 @@ export interface ImageVariant {
 
 export namespace ImageVariant {
   export interface Variant {
-    id: unknown;
+    id: string;
 
     /**
      * Allows you to define image resizing sizes for different use cases.
@@ -142,7 +142,7 @@ export namespace ImageVariants {
 
   export namespace Variants {
     export interface Hero {
-      id: unknown;
+      id: string;
 
       /**
        * Allows you to define image resizing sizes for different use cases.
@@ -197,7 +197,7 @@ export interface VariantCreateParams {
   /**
    * Body param:
    */
-  id: unknown;
+  id: string;
 
   /**
    * Body param: Allows you to define image resizing sizes for different use cases.

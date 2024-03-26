@@ -11,7 +11,7 @@ export class Rules extends APIResource {
    */
   create(
     zoneIdentifier: string,
-    waitingRoomId: unknown,
+    waitingRoomId: string,
     body: RuleCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RuleCreateResponse | null> {
@@ -29,7 +29,7 @@ export class Rules extends APIResource {
    */
   update(
     zoneIdentifier: string,
-    waitingRoomId: unknown,
+    waitingRoomId: string,
     body: RuleUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RuleUpdateResponse | null> {
@@ -46,7 +46,7 @@ export class Rules extends APIResource {
    */
   list(
     zoneIdentifier: string,
-    waitingRoomId: unknown,
+    waitingRoomId: string,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RuleListResponse | null> {
     return (
@@ -62,7 +62,7 @@ export class Rules extends APIResource {
    */
   delete(
     zoneIdentifier: string,
-    waitingRoomId: unknown,
+    waitingRoomId: string,
     ruleId: string,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RuleDeleteResponse | null> {
@@ -79,7 +79,7 @@ export class Rules extends APIResource {
    */
   edit(
     zoneIdentifier: string,
-    waitingRoomId: unknown,
+    waitingRoomId: string,
     ruleId: string,
     body: RuleEditParams,
     options?: Core.RequestOptions,
