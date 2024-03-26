@@ -86,11 +86,11 @@ export interface GatewayListResponse {
 }
 
 export interface GatewayCreateParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export interface GatewayListParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export namespace Gateway {

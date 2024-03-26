@@ -96,14 +96,14 @@ export interface TLSCertificatesAndHostnamesSettingObjectDelete {
    */
   hostname?: string;
 
-  status?: unknown;
+  status?: string;
 
   /**
    * This is the time the tls setting was updated.
    */
   updated_at?: string;
 
-  value?: unknown;
+  value?: string;
 }
 
 export type TLSGetResponse = Array<TLSGetResponse.TLSGetResponseItem>;

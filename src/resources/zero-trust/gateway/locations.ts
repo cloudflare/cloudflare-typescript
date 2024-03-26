@@ -25,7 +25,7 @@ export class Locations extends APIResource {
    * Updates a configured Zero Trust Gateway location.
    */
   update(
-    locationId: unknown,
+    locationId: string,
     params: LocationUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ZeroTrustGatewayLocations> {
@@ -57,7 +57,7 @@ export class Locations extends APIResource {
    * Deletes a configured Zero Trust Gateway location.
    */
   delete(
-    locationId: unknown,
+    locationId: string,
     params: LocationDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<LocationDeleteResponse> {
@@ -74,7 +74,7 @@ export class Locations extends APIResource {
    * Fetches a single Zero Trust Gateway location.
    */
   get(
-    locationId: unknown,
+    locationId: string,
     params: LocationGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ZeroTrustGatewayLocations> {
@@ -89,7 +89,7 @@ export class Locations extends APIResource {
 }
 
 export interface ZeroTrustGatewayLocations {
-  id?: unknown;
+  id?: string;
 
   /**
    * True if the location is the default location.
@@ -146,7 +146,7 @@ export interface LocationCreateParams {
   /**
    * Path param:
    */
-  account_id: unknown;
+  account_id: string;
 
   /**
    * Body param: The name of the location.
@@ -183,7 +183,7 @@ export interface LocationUpdateParams {
   /**
    * Path param:
    */
-  account_id: unknown;
+  account_id: string;
 
   /**
    * Body param: The name of the location.
@@ -217,15 +217,15 @@ export namespace LocationUpdateParams {
 }
 
 export interface LocationListParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export interface LocationDeleteParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export interface LocationGetParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export namespace Locations {

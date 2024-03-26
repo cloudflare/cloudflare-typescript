@@ -560,7 +560,7 @@ export interface RuleCreateParams {
   /**
    * Path param:
    */
-  account_id: unknown;
+  account_id: string;
 
   /**
    * Body param: The action to preform when the associated traffic, identity, and
@@ -1024,7 +1024,7 @@ export interface RuleUpdateParams {
   /**
    * Path param:
    */
-  account_id: unknown;
+  account_id: string;
 
   /**
    * Body param: The action to preform when the associated traffic, identity, and
@@ -1485,15 +1485,15 @@ export namespace RuleUpdateParams {
 }
 
 export interface RuleListParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export interface RuleDeleteParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export interface RuleGetParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export namespace Rules {

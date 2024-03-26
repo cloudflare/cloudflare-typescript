@@ -75,7 +75,7 @@ export interface LoggingUpdateParams {
   /**
    * Path param:
    */
-  account_id: unknown;
+  account_id: string;
 
   /**
    * Body param: Redact personally identifiable information from activity logging
@@ -113,7 +113,7 @@ export namespace LoggingUpdateParams {
 }
 
 export interface LoggingGetParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export namespace Logging {

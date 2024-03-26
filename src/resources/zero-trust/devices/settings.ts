@@ -62,7 +62,7 @@ export interface SettingUpdateParams {
   /**
    * Path param:
    */
-  account_id: unknown;
+  account_id: string;
 
   /**
    * Body param: Enable gateway proxy filtering on TCP.
@@ -86,7 +86,7 @@ export interface SettingUpdateParams {
 }
 
 export interface SettingListParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export namespace Settings {

@@ -27,7 +27,7 @@ export class ForceAXFR extends APIResource {
 export type SecondaryDNSForceResult = string;
 
 export interface ForceAXFRCreateParams {
-  zone_id: unknown;
+  zone_id: string;
 }
 
 export namespace ForceAXFR {

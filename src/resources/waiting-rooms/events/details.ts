@@ -11,8 +11,8 @@ export class Details extends APIResource {
    */
   get(
     zoneIdentifier: string,
-    waitingRoomId: unknown,
-    eventId: unknown,
+    waitingRoomId: string,
+    eventId: string,
     options?: Core.RequestOptions,
   ): Core.APIPromise<WaitingroomEventDetailsResult> {
     return (
@@ -25,7 +25,7 @@ export class Details extends APIResource {
 }
 
 export interface WaitingroomEventDetailsResult {
-  id?: unknown;
+  id?: string;
 
   created_on?: string;
 

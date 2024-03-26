@@ -175,7 +175,7 @@ export interface VectorizeCreateIndex {
   /**
    * Specifies the timestamp the resource was created as an ISO8601 string.
    */
-  created_on?: unknown;
+  created_on?: string;
 
   /**
    * Specifies the description of the index.
@@ -185,7 +185,7 @@ export interface VectorizeCreateIndex {
   /**
    * Specifies the timestamp the resource was modified as an ISO8601 string.
    */
-  modified_on?: unknown;
+  modified_on?: string;
 
   name?: string;
 }

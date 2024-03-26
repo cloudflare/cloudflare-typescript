@@ -36,7 +36,7 @@ export class WaitingRooms extends APIResource {
    */
   update(
     zoneIdentifier: string,
-    waitingRoomId: unknown,
+    waitingRoomId: string,
     body: WaitingRoomUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<WaitingroomWaitingroom> {
@@ -67,7 +67,7 @@ export class WaitingRooms extends APIResource {
    */
   delete(
     zoneIdentifier: string,
-    waitingRoomId: unknown,
+    waitingRoomId: string,
     options?: Core.RequestOptions,
   ): Core.APIPromise<WaitingRoomDeleteResponse> {
     return (
@@ -83,7 +83,7 @@ export class WaitingRooms extends APIResource {
    */
   edit(
     zoneIdentifier: string,
-    waitingRoomId: unknown,
+    waitingRoomId: string,
     body: WaitingRoomEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<WaitingroomWaitingroom> {
@@ -100,7 +100,7 @@ export class WaitingRooms extends APIResource {
    */
   get(
     zoneIdentifier: string,
-    waitingRoomId: unknown,
+    waitingRoomId: string,
     options?: Core.RequestOptions,
   ): Core.APIPromise<WaitingroomWaitingroom> {
     return (
@@ -113,7 +113,7 @@ export class WaitingRooms extends APIResource {
 }
 
 export interface WaitingroomWaitingroom {
-  id?: unknown;
+  id?: string;
 
   /**
    * Only available for the Waiting Room Advanced subscription. Additional hostname
@@ -501,7 +501,7 @@ export namespace WaitingroomWaitingroom {
 export type WaitingRoomListResponse = Array<WaitingroomWaitingroom>;
 
 export interface WaitingRoomDeleteResponse {
-  id?: unknown;
+  id?: string;
 }
 
 export interface WaitingRoomCreateParams {

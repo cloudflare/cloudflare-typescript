@@ -180,7 +180,7 @@ export interface ListCreateParams {
   /**
    * Path param:
    */
-  account_id: unknown;
+  account_id: string;
 
   /**
    * Body param: The name of the list.
@@ -216,7 +216,7 @@ export interface ListUpdateParams {
   /**
    * Path param:
    */
-  account_id: unknown;
+  account_id: string;
 
   /**
    * Body param: The name of the list.
@@ -230,18 +230,18 @@ export interface ListUpdateParams {
 }
 
 export interface ListListParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export interface ListDeleteParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export interface ListEditParams {
   /**
    * Path param:
    */
-  account_id: unknown;
+  account_id: string;
 
   /**
    * Body param: The items in the list.
@@ -264,7 +264,7 @@ export namespace ListEditParams {
 }
 
 export interface ListGetParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export namespace Lists {

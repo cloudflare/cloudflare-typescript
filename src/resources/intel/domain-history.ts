@@ -30,7 +30,7 @@ export interface IntelDomainHistory {
 
 export namespace IntelDomainHistory {
   export interface Categorization {
-    categories?: unknown;
+    categories?: Array<unknown>;
 
     end?: string;
 
@@ -49,7 +49,7 @@ export interface DomainHistoryGetParams {
   /**
    * Query param:
    */
-  domain?: unknown;
+  domain?: string;
 }
 
 export namespace DomainHistory {

@@ -28,7 +28,7 @@ export interface RevokeCreateParams {
   /**
    * Path param:
    */
-  account_id: unknown;
+  account_id: string;
 
   /**
    * Body param: A list of device ids to revoke.

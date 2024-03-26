@@ -8,7 +8,7 @@ export class Preview extends APIResource {
   /**
    * Get the result of a previous preview operation using the provided preview_id.
    */
-  get(previewId: unknown, options?: Core.RequestOptions): Core.APIPromise<LoadBalancingPreviewResult> {
+  get(previewId: string, options?: Core.RequestOptions): Core.APIPromise<LoadBalancingPreviewResult> {
     return (
       this._client.get(`/user/load_balancers/preview/${previewId}`, options) as Core.APIPromise<{
         result: LoadBalancingPreviewResult;
