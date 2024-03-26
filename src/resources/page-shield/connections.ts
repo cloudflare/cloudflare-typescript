@@ -35,25 +35,25 @@ export class Connections extends APIResource {
 }
 
 export interface PageShieldConnection {
-  id?: unknown;
+  id?: string;
 
-  added_at?: unknown;
+  added_at?: string;
 
-  domain_reported_malicious?: unknown;
+  domain_reported_malicious?: boolean;
 
-  first_page_url?: unknown;
+  first_page_url?: string;
 
-  first_seen_at?: unknown;
+  first_seen_at?: string;
 
-  host?: unknown;
+  host?: string;
 
-  last_seen_at?: unknown;
+  last_seen_at?: string;
 
-  page_urls?: unknown;
+  page_urls?: Array<string>;
 
-  url?: unknown;
+  url?: string;
 
-  url_contains_cdn_cgi_path?: unknown;
+  url_contains_cdn_cgi_path?: boolean;
 }
 
 export type ConnectionListResponse = Array<PageShieldConnection>;

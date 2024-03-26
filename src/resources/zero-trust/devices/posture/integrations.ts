@@ -146,7 +146,7 @@ export interface IntegrationCreateParams {
   /**
    * Path param:
    */
-  account_id: unknown;
+  account_id: string;
 
   /**
    * Body param: The configuration object containing third-party integration
@@ -312,18 +312,18 @@ export namespace IntegrationCreateParams {
 }
 
 export interface IntegrationListParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export interface IntegrationDeleteParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export interface IntegrationEditParams {
   /**
    * Path param:
    */
-  account_id: unknown;
+  account_id: string;
 
   /**
    * Body param: The configuration object containing third-party integration
@@ -489,7 +489,7 @@ export namespace IntegrationEditParams {
 }
 
 export interface IntegrationGetParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export namespace Integrations {

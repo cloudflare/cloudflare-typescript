@@ -10,7 +10,7 @@ export class Previews extends APIResource {
    * Get the result of a previous preview operation using the provided preview_id.
    */
   get(
-    previewId: unknown,
+    previewId: string,
     params: PreviewGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PreviewAPI.LoadBalancingPreviewResult> {

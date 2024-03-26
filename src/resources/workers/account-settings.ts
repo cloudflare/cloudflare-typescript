@@ -58,7 +58,7 @@ export interface AccountSettingUpdateParams {
   /**
    * Body param:
    */
-  body: unknown;
+  body: string;
 }
 
 export interface AccountSettingGetParams {

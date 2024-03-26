@@ -139,7 +139,7 @@ export interface NetworkCreateParams {
   /**
    * Path param:
    */
-  account_id: unknown;
+  account_id: string;
 
   /**
    * Body param: The configuration object containing information for the WARP client
@@ -183,7 +183,7 @@ export interface NetworkUpdateParams {
   /**
    * Path param:
    */
-  account_id: unknown;
+  account_id: string;
 
   /**
    * Body param: The configuration object containing information for the WARP client
@@ -224,15 +224,15 @@ export namespace NetworkUpdateParams {
 }
 
 export interface NetworkListParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export interface NetworkDeleteParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export interface NetworkGetParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export namespace Networks {

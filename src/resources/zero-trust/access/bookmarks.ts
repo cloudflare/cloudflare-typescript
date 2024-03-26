@@ -8,7 +8,7 @@ export class Bookmarks extends APIResource {
   /**
    * Create a new Bookmark application.
    */
-  create(identifier: unknown, uuid: string, options?: Core.RequestOptions): Core.APIPromise<AccessBookmarks> {
+  create(identifier: string, uuid: string, options?: Core.RequestOptions): Core.APIPromise<AccessBookmarks> {
     return (
       this._client.post(`/accounts/${identifier}/access/bookmarks/${uuid}`, options) as Core.APIPromise<{
         result: AccessBookmarks;
@@ -19,7 +19,7 @@ export class Bookmarks extends APIResource {
   /**
    * Updates a configured Bookmark application.
    */
-  update(identifier: unknown, uuid: string, options?: Core.RequestOptions): Core.APIPromise<AccessBookmarks> {
+  update(identifier: string, uuid: string, options?: Core.RequestOptions): Core.APIPromise<AccessBookmarks> {
     return (
       this._client.put(`/accounts/${identifier}/access/bookmarks/${uuid}`, options) as Core.APIPromise<{
         result: AccessBookmarks;
@@ -30,7 +30,7 @@ export class Bookmarks extends APIResource {
   /**
    * Lists Bookmark applications.
    */
-  list(identifier: unknown, options?: Core.RequestOptions): Core.APIPromise<BookmarkListResponse | null> {
+  list(identifier: string, options?: Core.RequestOptions): Core.APIPromise<BookmarkListResponse | null> {
     return (
       this._client.get(`/accounts/${identifier}/access/bookmarks`, options) as Core.APIPromise<{
         result: BookmarkListResponse | null;
@@ -42,7 +42,7 @@ export class Bookmarks extends APIResource {
    * Deletes a Bookmark application.
    */
   delete(
-    identifier: unknown,
+    identifier: string,
     uuid: string,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BookmarkDeleteResponse> {
@@ -56,7 +56,7 @@ export class Bookmarks extends APIResource {
   /**
    * Fetches a single Bookmark application.
    */
-  get(identifier: unknown, uuid: string, options?: Core.RequestOptions): Core.APIPromise<AccessBookmarks> {
+  get(identifier: string, uuid: string, options?: Core.RequestOptions): Core.APIPromise<AccessBookmarks> {
     return (
       this._client.get(`/accounts/${identifier}/access/bookmarks/${uuid}`, options) as Core.APIPromise<{
         result: AccessBookmarks;

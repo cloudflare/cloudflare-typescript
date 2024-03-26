@@ -31,69 +31,69 @@ export class Scripts extends APIResource {
 }
 
 export interface PageShieldScript {
-  id?: unknown;
+  id?: string;
 
-  added_at?: unknown;
+  added_at?: string;
 
-  dataflow_score?: unknown;
+  dataflow_score?: number;
 
-  domain_reported_malicious?: unknown;
+  domain_reported_malicious?: boolean;
 
-  fetched_at?: unknown;
+  fetched_at?: string;
 
-  first_page_url?: unknown;
+  first_page_url?: string;
 
-  first_seen_at?: unknown;
+  first_seen_at?: string;
 
-  hash?: unknown;
+  hash?: string;
 
-  host?: unknown;
+  host?: string;
 
-  js_integrity_score?: unknown;
+  js_integrity_score?: number;
 
-  last_seen_at?: unknown;
+  last_seen_at?: string;
 
-  obfuscation_score?: unknown;
+  obfuscation_score?: number;
 
-  page_urls?: unknown;
+  page_urls?: Array<string>;
 
-  url?: unknown;
+  url?: string;
 
-  url_contains_cdn_cgi_path?: unknown;
+  url_contains_cdn_cgi_path?: boolean;
 }
 
 export type ScriptListResponse = Array<PageShieldScript>;
 
 export interface ScriptGetResponse {
-  id?: unknown;
+  id?: string;
 
-  added_at?: unknown;
+  added_at?: string;
 
-  dataflow_score?: unknown;
+  dataflow_score?: number;
 
-  domain_reported_malicious?: unknown;
+  domain_reported_malicious?: boolean;
 
-  fetched_at?: unknown;
+  fetched_at?: string;
 
-  first_page_url?: unknown;
+  first_page_url?: string;
 
-  first_seen_at?: unknown;
+  first_seen_at?: string;
 
-  hash?: unknown;
+  hash?: string;
 
-  host?: unknown;
+  host?: string;
 
-  js_integrity_score?: unknown;
+  js_integrity_score?: number;
 
-  last_seen_at?: unknown;
+  last_seen_at?: string;
 
-  obfuscation_score?: unknown;
+  obfuscation_score?: number;
 
-  page_urls?: unknown;
+  page_urls?: Array<string>;
 
-  url?: unknown;
+  url?: string;
 
-  url_contains_cdn_cgi_path?: unknown;
+  url_contains_cdn_cgi_path?: boolean;
 
   versions?: Array<ScriptGetResponse.Version> | null;
 }

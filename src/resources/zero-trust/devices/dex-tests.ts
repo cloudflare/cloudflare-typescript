@@ -147,7 +147,7 @@ export interface DEXTestCreateParams {
   /**
    * Path param:
    */
-  account_id: unknown;
+  account_id: string;
 
   /**
    * Body param: The configuration object which contains the details for the WARP
@@ -203,7 +203,7 @@ export interface DEXTestUpdateParams {
   /**
    * Path param:
    */
-  account_id: unknown;
+  account_id: string;
 
   /**
    * Body param: The configuration object which contains the details for the WARP
@@ -256,15 +256,15 @@ export namespace DEXTestUpdateParams {
 }
 
 export interface DEXTestListParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export interface DEXTestDeleteParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export interface DEXTestGetParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export namespace DEXTests {

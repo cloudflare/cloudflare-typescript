@@ -35,7 +35,7 @@ export interface IntelDomain {
   /**
    * Current content categories.
    */
-  content_categories?: unknown;
+  content_categories?: Array<unknown>;
 
   domain?: string;
 
@@ -67,7 +67,7 @@ export interface IntelDomain {
    */
   risk_score?: number;
 
-  risk_types?: unknown;
+  risk_types?: Array<unknown>;
 }
 
 export namespace IntelDomain {

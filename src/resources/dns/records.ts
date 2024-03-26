@@ -1504,7 +1504,7 @@ export namespace DNSRecord {
     /**
      * A valid name server host name.
      */
-    content: unknown;
+    content: string;
 
     /**
      * DNS record name (or @ for the zone apex) in Punycode.
@@ -3310,7 +3310,7 @@ export namespace RecordCreateParams {
     /**
      * Body param: A valid name server host name.
      */
-    content: unknown;
+    content: string;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
@@ -4579,7 +4579,7 @@ export namespace RecordUpdateParams {
     /**
      * Body param: A valid name server host name.
      */
-    content: unknown;
+    content: string;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
@@ -6025,7 +6025,7 @@ export namespace RecordEditParams {
     /**
      * Body param: A valid name server host name.
      */
-    content: unknown;
+    content: string;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
