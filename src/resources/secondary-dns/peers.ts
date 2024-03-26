@@ -22,7 +22,7 @@ export class Peers extends APIResource {
    * Modify Peer.
    */
   update(
-    peerId: unknown,
+    peerId: string,
     params: PeerUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SecondaryDNSPeer> {
@@ -51,7 +51,7 @@ export class Peers extends APIResource {
    * Delete Peer.
    */
   delete(
-    peerId: unknown,
+    peerId: string,
     params: PeerDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PeerDeleteResponse> {
@@ -68,7 +68,7 @@ export class Peers extends APIResource {
    * Get Peer.
    */
   get(
-    peerId: unknown,
+    peerId: string,
     params: PeerGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SecondaryDNSPeer> {
@@ -82,7 +82,7 @@ export class Peers extends APIResource {
 }
 
 export interface SecondaryDNSPeer {
-  id: unknown;
+  id: string;
 
   /**
    * The name of the peer.
@@ -119,14 +119,14 @@ export interface SecondaryDNSPeer {
 export type PeerListResponse = Array<SecondaryDNSPeer>;
 
 export interface PeerDeleteResponse {
-  id?: unknown;
+  id?: string;
 }
 
 export interface PeerCreateParams {
   /**
    * Path param:
    */
-  account_id: unknown;
+  account_id: string;
 
   /**
    * Body param:
@@ -138,7 +138,7 @@ export interface PeerUpdateParams {
   /**
    * Path param:
    */
-  account_id: unknown;
+  account_id: string;
 
   /**
    * Body param: The name of the peer.
@@ -173,15 +173,15 @@ export interface PeerUpdateParams {
 }
 
 export interface PeerListParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export interface PeerDeleteParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export interface PeerGetParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export namespace Peers {

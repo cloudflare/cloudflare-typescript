@@ -182,16 +182,16 @@ export namespace LegacyJhsOverride {
      */
     block?: 'challenge' | 'block' | 'simulate' | 'disable' | 'default';
 
-    challenge?: unknown;
+    challenge?: string;
 
-    default?: unknown;
+    default?: string;
 
     /**
      * The WAF rule action to apply.
      */
     disable?: 'challenge' | 'block' | 'simulate' | 'disable' | 'default';
 
-    simulate?: unknown;
+    simulate?: string;
   }
 }
 

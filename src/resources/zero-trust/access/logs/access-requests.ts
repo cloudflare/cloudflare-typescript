@@ -36,7 +36,7 @@ export interface AccessAccessRequests {
   /**
    * The unique identifier for the Access application.
    */
-  app_uid?: unknown;
+  app_uid?: string;
 
   /**
    * The IdP used to authenticate.

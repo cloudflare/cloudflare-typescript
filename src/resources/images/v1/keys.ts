@@ -9,7 +9,7 @@ export class Keys extends APIResource {
    * Create a new signing key with specified name. Returns all keys available.
    */
   update(
-    signingKeyName: unknown,
+    signingKeyName: string,
     params: KeyUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ImagesImageKeys> {
@@ -39,7 +39,7 @@ export class Keys extends APIResource {
    * key is removed, a new default signing key will be generated.
    */
   delete(
-    signingKeyName: unknown,
+    signingKeyName: string,
     params: KeyDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ImagesImageKeys> {

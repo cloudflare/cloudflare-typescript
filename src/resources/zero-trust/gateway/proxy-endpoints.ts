@@ -40,7 +40,7 @@ export class ProxyEndpoints extends APIResource {
    * Deletes a configured Zero Trust Gateway proxy endpoint.
    */
   delete(
-    proxyEndpointId: unknown,
+    proxyEndpointId: string,
     params: ProxyEndpointDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ProxyEndpointDeleteResponse> {
@@ -57,7 +57,7 @@ export class ProxyEndpoints extends APIResource {
    * Updates a configured Zero Trust Gateway proxy endpoint.
    */
   edit(
-    proxyEndpointId: unknown,
+    proxyEndpointId: string,
     params: ProxyEndpointEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ZeroTrustGatewayProxyEndpoints> {
@@ -74,7 +74,7 @@ export class ProxyEndpoints extends APIResource {
    * Fetches all Zero Trust Gateway proxy endpoints for an account.
    */
   get(
-    proxyEndpointId: unknown,
+    proxyEndpointId: string,
     params: ProxyEndpointGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ZeroTrustGatewayProxyEndpoints> {
@@ -89,7 +89,7 @@ export class ProxyEndpoints extends APIResource {
 }
 
 export interface ZeroTrustGatewayProxyEndpoints {
-  id?: unknown;
+  id?: string;
 
   created_at?: string;
 
@@ -119,7 +119,7 @@ export interface ProxyEndpointCreateParams {
   /**
    * Path param:
    */
-  account_id: unknown;
+  account_id: string;
 
   /**
    * Body param: A list of CIDRs to restrict ingress connections.
@@ -138,18 +138,18 @@ export interface ProxyEndpointCreateParams {
 }
 
 export interface ProxyEndpointListParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export interface ProxyEndpointDeleteParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export interface ProxyEndpointEditParams {
   /**
    * Path param:
    */
-  account_id: unknown;
+  account_id: string;
 
   /**
    * Body param: A list of CIDRs to restrict ingress connections.
@@ -168,7 +168,7 @@ export interface ProxyEndpointEditParams {
 }
 
 export interface ProxyEndpointGetParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export namespace ProxyEndpoints {

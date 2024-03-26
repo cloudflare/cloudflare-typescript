@@ -125,7 +125,7 @@ export namespace WorkersConsumerCreated {
 export interface WorkersConsumerUpdated {
   created_on?: unknown;
 
-  dead_letter_queue?: unknown;
+  dead_letter_queue?: string;
 
   environment?: unknown;
 

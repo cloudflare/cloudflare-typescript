@@ -22,7 +22,7 @@ export class ACLs extends APIResource {
    * Modify ACL.
    */
   update(
-    aclId: unknown,
+    aclId: string,
     params: ACLUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SecondaryDNSACL> {
@@ -51,7 +51,7 @@ export class ACLs extends APIResource {
    * Delete ACL.
    */
   delete(
-    aclId: unknown,
+    aclId: string,
     params: ACLDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ACLDeleteResponse> {
@@ -66,7 +66,7 @@ export class ACLs extends APIResource {
   /**
    * Get ACL.
    */
-  get(aclId: unknown, params: ACLGetParams, options?: Core.RequestOptions): Core.APIPromise<SecondaryDNSACL> {
+  get(aclId: string, params: ACLGetParams, options?: Core.RequestOptions): Core.APIPromise<SecondaryDNSACL> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/secondary_dns/acls/${aclId}`, options) as Core.APIPromise<{
@@ -77,7 +77,7 @@ export class ACLs extends APIResource {
 }
 
 export interface SecondaryDNSACL {
-  id: unknown;
+  id: string;
 
   /**
    * Allowed IPv4/IPv6 address range of primary or secondary nameservers. This will
@@ -97,14 +97,14 @@ export interface SecondaryDNSACL {
 export type ACLListResponse = Array<SecondaryDNSACL>;
 
 export interface ACLDeleteResponse {
-  id?: unknown;
+  id?: string;
 }
 
 export interface ACLCreateParams {
   /**
    * Path param:
    */
-  account_id: unknown;
+  account_id: string;
 
   /**
    * Body param:
@@ -116,7 +116,7 @@ export interface ACLUpdateParams {
   /**
    * Path param:
    */
-  account_id: unknown;
+  account_id: string;
 
   /**
    * Body param: Allowed IPv4/IPv6 address range of primary or secondary nameservers.
@@ -134,15 +134,15 @@ export interface ACLUpdateParams {
 }
 
 export interface ACLListParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export interface ACLDeleteParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export interface ACLGetParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export namespace ACLs {

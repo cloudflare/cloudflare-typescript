@@ -129,7 +129,7 @@ export type SecondaryDNSEnableTransferResult = string;
 export type SecondaryDNSSchemasForceResult = string;
 
 export interface OutgoingCreateResponse {
-  id?: unknown;
+  id?: string;
 
   /**
    * The time for a specific event.
@@ -163,7 +163,7 @@ export interface OutgoingCreateResponse {
 }
 
 export interface OutgoingUpdateResponse {
-  id?: unknown;
+  id?: string;
 
   /**
    * The time for a specific event.
@@ -197,11 +197,11 @@ export interface OutgoingUpdateResponse {
 }
 
 export interface OutgoingDeleteResponse {
-  id?: unknown;
+  id?: string;
 }
 
 export interface OutgoingGetResponse {
-  id?: unknown;
+  id?: string;
 
   /**
    * The time for a specific event.
@@ -238,7 +238,7 @@ export interface OutgoingCreateParams {
   /**
    * Path param:
    */
-  zone_id: unknown;
+  zone_id: string;
 
   /**
    * Body param: Zone name.
@@ -255,7 +255,7 @@ export interface OutgoingUpdateParams {
   /**
    * Path param:
    */
-  zone_id: unknown;
+  zone_id: string;
 
   /**
    * Body param: Zone name.
@@ -269,23 +269,23 @@ export interface OutgoingUpdateParams {
 }
 
 export interface OutgoingDeleteParams {
-  zone_id: unknown;
+  zone_id: string;
 }
 
 export interface OutgoingDisableParams {
-  zone_id: unknown;
+  zone_id: string;
 }
 
 export interface OutgoingEnableParams {
-  zone_id: unknown;
+  zone_id: string;
 }
 
 export interface OutgoingForceNotifyParams {
-  zone_id: unknown;
+  zone_id: string;
 }
 
 export interface OutgoingGetParams {
-  zone_id: unknown;
+  zone_id: string;
 }
 
 export namespace Outgoing {

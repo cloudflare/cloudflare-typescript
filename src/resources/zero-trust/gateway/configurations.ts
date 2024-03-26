@@ -874,7 +874,7 @@ export interface ConfigurationUpdateParams {
   /**
    * Path param:
    */
-  account_id: unknown;
+  account_id: string;
 
   /**
    * Body param: account settings.
@@ -1136,7 +1136,7 @@ export interface ConfigurationEditParams {
   /**
    * Path param:
    */
-  account_id: unknown;
+  account_id: string;
 
   /**
    * Body param: account settings.
@@ -1395,7 +1395,7 @@ export namespace ConfigurationEditParams {
 }
 
 export interface ConfigurationGetParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export namespace Configurations {

@@ -51,7 +51,7 @@ export interface SubdomainUpdateParams {
   /**
    * Body param:
    */
-  body: unknown;
+  body: string;
 }
 
 export interface SubdomainGetParams {

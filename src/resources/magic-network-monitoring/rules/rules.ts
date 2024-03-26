@@ -55,7 +55,7 @@ export class Rules extends APIResource {
    * Delete a network monitoring rule for account.
    */
   delete(
-    ruleId: unknown,
+    ruleId: string,
     params: RuleDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MagicVisibilityMNMRule | null> {
@@ -71,7 +71,7 @@ export class Rules extends APIResource {
    * Update a network monitoring rule for account.
    */
   edit(
-    ruleId: unknown,
+    ruleId: string,
     params: RuleEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MagicVisibilityMNMRule | null> {
@@ -87,7 +87,7 @@ export class Rules extends APIResource {
    * List a single network monitoring rule for account.
    */
   get(
-    ruleId: unknown,
+    ruleId: string,
     params: RuleGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MagicVisibilityMNMRule | null> {
@@ -126,7 +126,7 @@ export interface MagicVisibilityMNMRule {
 
   prefixes: Array<string>;
 
-  id?: unknown;
+  id?: string;
 
   /**
    * The number of bits per second for the rule. When this value is exceeded for the
@@ -144,27 +144,27 @@ export interface MagicVisibilityMNMRule {
 export type RuleListResponse = Array<MagicVisibilityMNMRule | null>;
 
 export interface RuleCreateParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export interface RuleUpdateParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export interface RuleListParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export interface RuleDeleteParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export interface RuleEditParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export interface RuleGetParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export namespace Rules {

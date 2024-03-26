@@ -57,7 +57,7 @@ export interface AuditSSHSettingUpdateParams {
   /**
    * Path param:
    */
-  account_id: unknown;
+  account_id: string;
 
   /**
    * Body param: SSH encryption public key
@@ -71,7 +71,7 @@ export interface AuditSSHSettingUpdateParams {
 }
 
 export interface AuditSSHSettingGetParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export namespace AuditSSHSettings {

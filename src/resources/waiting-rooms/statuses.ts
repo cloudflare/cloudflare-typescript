@@ -27,7 +27,7 @@ export class Statuses extends APIResource {
    */
   get(
     zoneIdentifier: string,
-    waitingRoomId: unknown,
+    waitingRoomId: string,
     options?: Core.RequestOptions,
   ): Core.APIPromise<StatusGetResponse> {
     return (

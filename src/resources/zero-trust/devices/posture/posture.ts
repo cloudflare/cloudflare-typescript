@@ -524,7 +524,7 @@ export interface PostureCreateParams {
   /**
    * Path param:
    */
-  account_id: unknown;
+  account_id: string;
 
   /**
    * Body param: The name of the device posture rule.
@@ -947,7 +947,7 @@ export interface PostureUpdateParams {
   /**
    * Path param:
    */
-  account_id: unknown;
+  account_id: string;
 
   /**
    * Body param: The name of the device posture rule.
@@ -1367,15 +1367,15 @@ export namespace PostureUpdateParams {
 }
 
 export interface PostureListParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export interface PostureDeleteParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export interface PostureGetParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export namespace Posture {

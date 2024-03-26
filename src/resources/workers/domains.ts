@@ -32,11 +32,7 @@ export class Domains extends APIResource {
   /**
    * Detaches a Worker from a zone and hostname.
    */
-  delete(
-    domainId: unknown,
-    params: DomainDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<void> {
+  delete(domainId: string, params: DomainDeleteParams, options?: Core.RequestOptions): Core.APIPromise<void> {
     const { account_id } = params;
     return this._client.delete(`/accounts/${account_id}/workers/domains/${domainId}`, {
       ...options,
@@ -48,7 +44,7 @@ export class Domains extends APIResource {
    * Gets a Worker domain.
    */
   get(
-    domainId: unknown,
+    domainId: string,
     params: DomainGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<WorkersDomain> {
@@ -65,7 +61,7 @@ export interface WorkersDomain {
   /**
    * Identifer of the Worker Domain.
    */
-  id?: unknown;
+  id?: string;
 
   /**
    * Worker environment associated with the zone and hostname.
@@ -85,7 +81,7 @@ export interface WorkersDomain {
   /**
    * Identifier of the zone.
    */
-  zone_id?: unknown;
+  zone_id?: string;
 
   /**
    * Name of the zone.
@@ -99,7 +95,7 @@ export interface DomainUpdateParams {
   /**
    * Path param:
    */
-  account_id: unknown;
+  account_id: string;
 
   /**
    * Body param: Worker environment associated with the zone and hostname.
@@ -119,14 +115,14 @@ export interface DomainUpdateParams {
   /**
    * Body param: Identifier of the zone.
    */
-  zone_id: unknown;
+  zone_id: string;
 }
 
 export interface DomainListParams {
   /**
    * Path param:
    */
-  account_id: unknown;
+  account_id: string;
 
   /**
    * Query param: Worker environment associated with the zone and hostname.
@@ -146,7 +142,7 @@ export interface DomainListParams {
   /**
    * Query param: Identifier of the zone.
    */
-  zone_id?: unknown;
+  zone_id?: string;
 
   /**
    * Query param: Name of the zone.
@@ -155,11 +151,11 @@ export interface DomainListParams {
 }
 
 export interface DomainDeleteParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export interface DomainGetParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export namespace Domains {

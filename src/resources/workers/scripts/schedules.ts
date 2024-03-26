@@ -77,7 +77,7 @@ export interface ScheduleUpdateParams {
   /**
    * Body param:
    */
-  body: unknown;
+  body: string;
 }
 
 export interface ScheduleGetParams {

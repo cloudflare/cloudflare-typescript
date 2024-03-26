@@ -27,7 +27,7 @@ export interface IntelSchemasIP {
 
   ip?: string | string;
 
-  risk_types?: unknown;
+  risk_types?: Array<unknown>;
 }
 
 export namespace IntelSchemasIP {
@@ -36,7 +36,7 @@ export namespace IntelSchemasIP {
    * to.
    */
   export interface BelongsToRef {
-    id?: unknown;
+    id?: string;
 
     country?: string;
 

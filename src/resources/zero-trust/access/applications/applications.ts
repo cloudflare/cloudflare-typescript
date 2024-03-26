@@ -1199,7 +1199,7 @@ export namespace AccessApps {
     /**
      * The URL or domain of the bookmark.
      */
-    domain?: unknown;
+    domain?: string;
 
     /**
      * The image URL for the logo shown in the App Launcher dashboard.
@@ -2161,7 +2161,7 @@ export namespace ApplicationCreateParams {
     /**
      * Body param: The URL or domain of the bookmark.
      */
-    domain?: unknown;
+    domain?: string;
 
     /**
      * Body param: The image URL for the logo shown in the App Launcher dashboard.
@@ -3110,7 +3110,7 @@ export namespace ApplicationUpdateParams {
     /**
      * Body param: The URL or domain of the bookmark.
      */
-    domain?: unknown;
+    domain?: string;
 
     /**
      * Body param: The image URL for the logo shown in the App Launcher dashboard.

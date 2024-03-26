@@ -95,23 +95,23 @@ export interface MagicVisibilityMNMConfig {
 }
 
 export interface ConfigCreateParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export interface ConfigUpdateParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export interface ConfigDeleteParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export interface ConfigEditParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export interface ConfigGetParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export namespace Configs {

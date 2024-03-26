@@ -23,7 +23,7 @@ export class Status extends APIResource {
 }
 
 export interface StatusGetParams {
-  zone_id: unknown;
+  zone_id: string;
 }
 
 export namespace Status {

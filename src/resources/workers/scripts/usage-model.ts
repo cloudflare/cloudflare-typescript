@@ -58,7 +58,7 @@ export interface UsageModelUpdateParams {
   /**
    * Body param:
    */
-  body: unknown;
+  body: string;
 }
 
 export interface UsageModelGetParams {

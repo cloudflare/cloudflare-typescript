@@ -89,7 +89,7 @@ export interface D1CreateDatabase {
   /**
    * Specifies the timestamp the resource was created as an ISO8601 string.
    */
-  created_at?: unknown;
+  created_at?: string;
 
   name?: string;
 
@@ -102,7 +102,7 @@ export interface D1DatabaseDetails {
   /**
    * Specifies the timestamp the resource was created as an ISO8601 string.
    */
-  created_at?: unknown;
+  created_at?: string;
 
   /**
    * The D1 database's size, in bytes.

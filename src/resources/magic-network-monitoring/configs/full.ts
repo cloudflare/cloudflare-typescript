@@ -23,7 +23,7 @@ export class Full extends APIResource {
 }
 
 export interface FullGetParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export namespace Full {
