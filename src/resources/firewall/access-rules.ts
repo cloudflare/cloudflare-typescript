@@ -123,9 +123,9 @@ export class AccessRules extends APIResource {
   }
 
   /**
-   * Updates an IP Access rule defined at the account level.
+   * Updates an IP Access rule defined.
    *
-   * Note: This operation will affect all zones in the account.
+   * Note: This operation will affect all zones in the account or zone.
    */
   edit(
     identifier: unknown,
