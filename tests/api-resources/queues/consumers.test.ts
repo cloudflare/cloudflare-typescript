@@ -12,7 +12,7 @@ const cloudflare = new Cloudflare({
 describe('resource consumers', () => {
   // skipped: tests are disabled for the time being
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.queues.consumers.create('example-queue', {
+    const responsePromise = cloudflare.queues.consumers.create('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: {
         dead_letter_queue: 'example-dlq',
@@ -32,7 +32,7 @@ describe('resource consumers', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.queues.consumers.create('example-queue', {
+    const response = await cloudflare.queues.consumers.create('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: {
         dead_letter_queue: 'example-dlq',
@@ -45,15 +45,19 @@ describe('resource consumers', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.queues.consumers.update('example-queue', 'example-consumer', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: {
-        dead_letter_queue: 'updated-example-dlq',
-        environment: 'production',
-        script_name: 'example-consumer',
-        settings: { batch_size: 100 },
+    const responsePromise = cloudflare.queues.consumers.update(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        body: {
+          dead_letter_queue: 'updated-example-dlq',
+          environment: 'production',
+          script_name: 'example-consumer',
+          settings: { batch_size: 100 },
+        },
       },
-    });
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -65,22 +69,28 @@ describe('resource consumers', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.queues.consumers.update('example-queue', 'example-consumer', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: {
-        dead_letter_queue: 'updated-example-dlq',
-        environment: 'production',
-        script_name: 'example-consumer',
-        settings: { batch_size: 100 },
+    const response = await cloudflare.queues.consumers.update(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        body: {
+          dead_letter_queue: 'updated-example-dlq',
+          environment: 'production',
+          script_name: 'example-consumer',
+          settings: { batch_size: 100 },
+        },
       },
-    });
+    );
   });
 
   // skipped: tests are disabled for the time being
   test.skip('delete: only required params', async () => {
-    const responsePromise = cloudflare.queues.consumers.delete('example-queue', 'example-consumer', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = cloudflare.queues.consumers.delete(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -92,14 +102,16 @@ describe('resource consumers', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('delete: required and optional params', async () => {
-    const response = await cloudflare.queues.consumers.delete('example-queue', 'example-consumer', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const response = await cloudflare.queues.consumers.delete(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
   });
 
   // skipped: tests are disabled for the time being
   test.skip('get: only required params', async () => {
-    const responsePromise = cloudflare.queues.consumers.get('example-queue', {
+    const responsePromise = cloudflare.queues.consumers.get('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -113,7 +125,7 @@ describe('resource consumers', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('get: required and optional params', async () => {
-    const response = await cloudflare.queues.consumers.get('example-queue', {
+    const response = await cloudflare.queues.consumers.get('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

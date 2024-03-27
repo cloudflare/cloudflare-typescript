@@ -2582,33 +2582,50 @@ Types:
 - <code><a href="./src/resources/queues/queues.ts">WorkersQueue</a></code>
 - <code><a href="./src/resources/queues/queues.ts">WorkersQueueCreated</a></code>
 - <code><a href="./src/resources/queues/queues.ts">WorkersQueueUpdated</a></code>
+- <code><a href="./src/resources/queues/queues.ts">QueueCreateResponse</a></code>
+- <code><a href="./src/resources/queues/queues.ts">QueueUpdateResponse</a></code>
 - <code><a href="./src/resources/queues/queues.ts">QueueListResponse</a></code>
 - <code><a href="./src/resources/queues/queues.ts">QueueDeleteResponse</a></code>
+- <code><a href="./src/resources/queues/queues.ts">QueueGetResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/workers/queues">client.queues.<a href="./src/resources/queues/queues.ts">create</a>({ ...params }) -> WorkersQueueCreated | null</code>
-- <code title="put /accounts/{account_id}/workers/queues/{name}">client.queues.<a href="./src/resources/queues/queues.ts">update</a>(name, { ...params }) -> WorkersQueueUpdated | null</code>
-- <code title="get /accounts/{account_id}/workers/queues">client.queues.<a href="./src/resources/queues/queues.ts">list</a>({ ...params }) -> QueueListResponse | null</code>
-- <code title="delete /accounts/{account_id}/workers/queues/{name}">client.queues.<a href="./src/resources/queues/queues.ts">delete</a>(name, { ...params }) -> QueueDeleteResponse | null</code>
-- <code title="get /accounts/{account_id}/workers/queues/{name}">client.queues.<a href="./src/resources/queues/queues.ts">get</a>(name, { ...params }) -> WorkersQueue | null</code>
+- <code title="post /accounts/{account_id}/queues">client.queues.<a href="./src/resources/queues/queues.ts">create</a>({ ...params }) -> QueueCreateResponse | null</code>
+- <code title="put /accounts/{account_id}/queues/{queue_id}">client.queues.<a href="./src/resources/queues/queues.ts">update</a>(queueId, { ...params }) -> QueueUpdateResponse | null</code>
+- <code title="get /accounts/{account_id}/queues">client.queues.<a href="./src/resources/queues/queues.ts">list</a>({ ...params }) -> QueueListResponse | null</code>
+- <code title="delete /accounts/{account_id}/queues/{queue_id}">client.queues.<a href="./src/resources/queues/queues.ts">delete</a>(queueId, { ...params }) -> QueueDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/queues/{queue_id}">client.queues.<a href="./src/resources/queues/queues.ts">get</a>(queueId, { ...params }) -> QueueGetResponse | null</code>
 
 ## Consumers
 
 Types:
 
-- <code><a href="./src/resources/queues/consumers.ts">WorkersConsumer</a></code>
-- <code><a href="./src/resources/queues/consumers.ts">WorkersConsumerCreated</a></code>
-- <code><a href="./src/resources/queues/consumers.ts">WorkersConsumerUpdated</a></code>
+- <code><a href="./src/resources/queues/consumers.ts">ConsumerCreateResponse</a></code>
+- <code><a href="./src/resources/queues/consumers.ts">ConsumerUpdateResponse</a></code>
 - <code><a href="./src/resources/queues/consumers.ts">ConsumerDeleteResponse</a></code>
 - <code><a href="./src/resources/queues/consumers.ts">ConsumerGetResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/workers/queues/{name}/consumers">client.queues.consumers.<a href="./src/resources/queues/consumers.ts">create</a>(name, { ...params }) -> WorkersConsumerCreated | null</code>
-- <code title="put /accounts/{account_id}/workers/queues/{name}/consumers/{consumer_name}">client.queues.consumers.<a href="./src/resources/queues/consumers.ts">update</a>(name, consumerName, { ...params }) -> WorkersConsumerUpdated | null</code>
-- <code title="delete /accounts/{account_id}/workers/queues/{name}/consumers/{consumer_name}">client.queues.consumers.<a href="./src/resources/queues/consumers.ts">delete</a>(name, consumerName, { ...params }) -> ConsumerDeleteResponse | null</code>
-- <code title="get /accounts/{account_id}/workers/queues/{name}/consumers">client.queues.consumers.<a href="./src/resources/queues/consumers.ts">get</a>(name, { ...params }) -> ConsumerGetResponse | null</code>
+- <code title="post /accounts/{account_id}/queues/{queue_id}/consumers">client.queues.consumers.<a href="./src/resources/queues/consumers.ts">create</a>(queueId, { ...params }) -> ConsumerCreateResponse | null</code>
+- <code title="put /accounts/{account_id}/queues/{queue_id}/consumers/{consumer_id}">client.queues.consumers.<a href="./src/resources/queues/consumers.ts">update</a>(queueId, consumerId, { ...params }) -> ConsumerUpdateResponse | null</code>
+- <code title="delete /accounts/{account_id}/queues/{queue_id}/consumers/{consumer_id}">client.queues.consumers.<a href="./src/resources/queues/consumers.ts">delete</a>(queueId, consumerId, { ...params }) -> ConsumerDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/queues/{queue_id}/consumers">client.queues.consumers.<a href="./src/resources/queues/consumers.ts">get</a>(queueId, { ...params }) -> ConsumerGetResponse | null</code>
+
+## Messages
+
+Types:
+
+- <code><a href="./src/resources/queues/messages.ts">WorkersConsumer</a></code>
+- <code><a href="./src/resources/queues/messages.ts">WorkersConsumerCreated</a></code>
+- <code><a href="./src/resources/queues/messages.ts">WorkersConsumerUpdated</a></code>
+- <code><a href="./src/resources/queues/messages.ts">MessageAckResponse</a></code>
+- <code><a href="./src/resources/queues/messages.ts">MessagePullResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/queues/{queue_id}/messages/ack">client.queues.messages.<a href="./src/resources/queues/messages.ts">ack</a>(queueId, { ...params }) -> MessageAckResponse | null</code>
+- <code title="post /accounts/{account_id}/queues/{queue_id}/messages/pull">client.queues.messages.<a href="./src/resources/queues/messages.ts">pull</a>(queueId, { ...params }) -> MessagePullResponse | null</code>
 
 # ManagedHeaders
 
