@@ -35,7 +35,7 @@ describe('resource queues', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.queues.update('example-queue', {
+    const responsePromise = cloudflare.queues.update('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: { queue_name: 'renamed-example-queue' },
     });
@@ -50,7 +50,7 @@ describe('resource queues', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.queues.update('example-queue', {
+    const response = await cloudflare.queues.update('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: { queue_name: 'renamed-example-queue' },
     });
@@ -75,7 +75,7 @@ describe('resource queues', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('delete: only required params', async () => {
-    const responsePromise = cloudflare.queues.delete('example-queue', {
+    const responsePromise = cloudflare.queues.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -89,14 +89,14 @@ describe('resource queues', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('delete: required and optional params', async () => {
-    const response = await cloudflare.queues.delete('example-queue', {
+    const response = await cloudflare.queues.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('get: only required params', async () => {
-    const responsePromise = cloudflare.queues.get('example-queue', {
+    const responsePromise = cloudflare.queues.get('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -110,7 +110,7 @@ describe('resource queues', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('get: required and optional params', async () => {
-    const response = await cloudflare.queues.get('example-queue', {
+    const response = await cloudflare.queues.get('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
