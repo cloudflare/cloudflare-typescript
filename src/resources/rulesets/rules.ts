@@ -91,7 +91,7 @@ export class Rules extends APIResource {
   }
 
   /**
-   * Updates an existing rule in an account ruleset.
+   * Updates an existing rule in an account or zone ruleset.
    */
   edit(
     rulesetId: string,
