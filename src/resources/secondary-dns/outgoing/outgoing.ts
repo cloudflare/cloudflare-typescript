@@ -60,11 +60,11 @@ export class Outgoing extends APIResource {
   disable(
     params: OutgoingDisableParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SecondaryDNSDisableTransferResult> {
+  ): Core.APIPromise<SecondaryDNSDisableTransfer> {
     const { zone_id } = params;
     return (
       this._client.post(`/zones/${zone_id}/secondary_dns/outgoing/disable`, options) as Core.APIPromise<{
-        result: SecondaryDNSDisableTransferResult;
+        result: SecondaryDNSDisableTransfer;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -75,11 +75,11 @@ export class Outgoing extends APIResource {
   enable(
     params: OutgoingEnableParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SecondaryDNSEnableTransferResult> {
+  ): Core.APIPromise<SecondaryDNSEnableTransfer> {
     const { zone_id } = params;
     return (
       this._client.post(`/zones/${zone_id}/secondary_dns/outgoing/enable`, options) as Core.APIPromise<{
-        result: SecondaryDNSEnableTransferResult;
+        result: SecondaryDNSEnableTransfer;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -90,11 +90,11 @@ export class Outgoing extends APIResource {
   forceNotify(
     params: OutgoingForceNotifyParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SecondaryDNSSchemasForceResult> {
+  ): Core.APIPromise<SecondaryDNSForce> {
     const { zone_id } = params;
     return (
       this._client.post(`/zones/${zone_id}/secondary_dns/outgoing/force_notify`, options) as Core.APIPromise<{
-        result: SecondaryDNSSchemasForceResult;
+        result: SecondaryDNSForce;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -115,18 +115,18 @@ export class Outgoing extends APIResource {
 /**
  * The zone transfer status of a primary zone
  */
-export type SecondaryDNSDisableTransferResult = string;
+export type SecondaryDNSDisableTransfer = string;
 
 /**
  * The zone transfer status of a primary zone
  */
-export type SecondaryDNSEnableTransferResult = string;
+export type SecondaryDNSEnableTransfer = string;
 
 /**
  * When force_notify query parameter is set to true, the response is a simple
  * string
  */
-export type SecondaryDNSSchemasForceResult = string;
+export type SecondaryDNSForce = string;
 
 export interface OutgoingCreateResponse {
   id?: string;
@@ -289,9 +289,9 @@ export interface OutgoingGetParams {
 }
 
 export namespace Outgoing {
-  export import SecondaryDNSDisableTransferResult = OutgoingAPI.SecondaryDNSDisableTransferResult;
-  export import SecondaryDNSEnableTransferResult = OutgoingAPI.SecondaryDNSEnableTransferResult;
-  export import SecondaryDNSSchemasForceResult = OutgoingAPI.SecondaryDNSSchemasForceResult;
+  export import SecondaryDNSDisableTransfer = OutgoingAPI.SecondaryDNSDisableTransfer;
+  export import SecondaryDNSEnableTransfer = OutgoingAPI.SecondaryDNSEnableTransfer;
+  export import SecondaryDNSForce = OutgoingAPI.SecondaryDNSForce;
   export import OutgoingCreateResponse = OutgoingAPI.OutgoingCreateResponse;
   export import OutgoingUpdateResponse = OutgoingAPI.OutgoingUpdateResponse;
   export import OutgoingDeleteResponse = OutgoingAPI.OutgoingDeleteResponse;

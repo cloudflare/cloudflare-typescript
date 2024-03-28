@@ -15,11 +15,11 @@ export class Rules extends APIResource {
   create(
     params: RuleCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MagicVisibilityMNMRule | null> {
+  ): Core.APIPromise<MagicNetworkMonitoringRule | null> {
     const { account_id } = params;
     return (
       this._client.post(`/accounts/${account_id}/mnm/rules`, options) as Core.APIPromise<{
-        result: MagicVisibilityMNMRule | null;
+        result: MagicNetworkMonitoringRule | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -30,11 +30,11 @@ export class Rules extends APIResource {
   update(
     params: RuleUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MagicVisibilityMNMRule | null> {
+  ): Core.APIPromise<MagicNetworkMonitoringRule | null> {
     const { account_id } = params;
     return (
       this._client.put(`/accounts/${account_id}/mnm/rules`, options) as Core.APIPromise<{
-        result: MagicVisibilityMNMRule | null;
+        result: MagicNetworkMonitoringRule | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -58,11 +58,11 @@ export class Rules extends APIResource {
     ruleId: string,
     params: RuleDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MagicVisibilityMNMRule | null> {
+  ): Core.APIPromise<MagicNetworkMonitoringRule | null> {
     const { account_id } = params;
     return (
       this._client.delete(`/accounts/${account_id}/mnm/rules/${ruleId}`, options) as Core.APIPromise<{
-        result: MagicVisibilityMNMRule | null;
+        result: MagicNetworkMonitoringRule | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -74,11 +74,11 @@ export class Rules extends APIResource {
     ruleId: string,
     params: RuleEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MagicVisibilityMNMRule | null> {
+  ): Core.APIPromise<MagicNetworkMonitoringRule | null> {
     const { account_id } = params;
     return (
       this._client.patch(`/accounts/${account_id}/mnm/rules/${ruleId}`, options) as Core.APIPromise<{
-        result: MagicVisibilityMNMRule | null;
+        result: MagicNetworkMonitoringRule | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -90,17 +90,17 @@ export class Rules extends APIResource {
     ruleId: string,
     params: RuleGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MagicVisibilityMNMRule | null> {
+  ): Core.APIPromise<MagicNetworkMonitoringRule | null> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/mnm/rules/${ruleId}`, options) as Core.APIPromise<{
-        result: MagicVisibilityMNMRule | null;
+        result: MagicNetworkMonitoringRule | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface MagicVisibilityMNMRule {
+export interface MagicNetworkMonitoringRule {
   /**
    * Toggle on if you would like Cloudflare to automatically advertise the IP
    * Prefixes within the rule via Magic Transit when the rule is triggered. Only
@@ -141,7 +141,7 @@ export interface MagicVisibilityMNMRule {
   packet_threshold?: number;
 }
 
-export type RuleListResponse = Array<MagicVisibilityMNMRule | null>;
+export type RuleListResponse = Array<MagicNetworkMonitoringRule | null>;
 
 export interface RuleCreateParams {
   account_id: string;
@@ -168,7 +168,7 @@ export interface RuleGetParams {
 }
 
 export namespace Rules {
-  export import MagicVisibilityMNMRule = RulesAPI.MagicVisibilityMNMRule;
+  export import MagicNetworkMonitoringRule = RulesAPI.MagicNetworkMonitoringRule;
   export import RuleListResponse = RulesAPI.RuleListResponse;
   export import RuleCreateParams = RulesAPI.RuleCreateParams;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
@@ -177,6 +177,6 @@ export namespace Rules {
   export import RuleEditParams = RulesAPI.RuleEditParams;
   export import RuleGetParams = RulesAPI.RuleGetParams;
   export import Advertisements = AdvertisementsAPI.Advertisements;
-  export import MagicVisibilityMNMRuleAdvertisable = AdvertisementsAPI.MagicVisibilityMNMRuleAdvertisable;
+  export import MagicNetworkMonitoringRuleAdvertisable = AdvertisementsAPI.MagicNetworkMonitoringRuleAdvertisable;
   export import AdvertisementEditParams = AdvertisementsAPI.AdvertisementEditParams;
 }

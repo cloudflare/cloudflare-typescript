@@ -35,7 +35,7 @@ export namespace Workers {
   export import ScriptDeleteParams = ScriptsAPI.ScriptDeleteParams;
   export import ScriptGetParams = ScriptsAPI.ScriptGetParams;
   export import Filters = FiltersAPI.Filters;
-  export import WorkersFilters = FiltersAPI.WorkersFilters;
+  export import WorkersFilter = FiltersAPI.WorkersFilter;
   export import FilterCreateResponse = FiltersAPI.FilterCreateResponse;
   export import FilterListResponse = FiltersAPI.FilterListResponse;
   export import FilterDeleteResponse = FiltersAPI.FilterDeleteResponse;
@@ -44,7 +44,7 @@ export namespace Workers {
   export import FilterListParams = FiltersAPI.FilterListParams;
   export import FilterDeleteParams = FiltersAPI.FilterDeleteParams;
   export import Routes = RoutesAPI.Routes;
-  export import WorkersRoutes = RoutesAPI.WorkersRoutes;
+  export import WorkersRoute = RoutesAPI.WorkersRoute;
   export import RouteCreateResponse = RoutesAPI.RouteCreateResponse;
   export import RouteListResponse = RoutesAPI.RouteListResponse;
   export import RouteDeleteResponse = RoutesAPI.RouteDeleteResponse;

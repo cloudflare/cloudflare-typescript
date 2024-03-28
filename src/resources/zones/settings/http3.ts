@@ -8,11 +8,11 @@ export class HTTP3 extends APIResource {
   /**
    * Value of the HTTP3 setting.
    */
-  edit(params: HTTP3EditParams, options?: Core.RequestOptions): Core.APIPromise<ZonesHTTP3> {
+  edit(params: HTTP3EditParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingHTTP3> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/http3`, { body, ...options }) as Core.APIPromise<{
-        result: ZonesHTTP3;
+        result: ZoneSettingHTTP3;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -20,10 +20,12 @@ export class HTTP3 extends APIResource {
   /**
    * Value of the HTTP3 setting.
    */
-  get(params: HTTP3GetParams, options?: Core.RequestOptions): Core.APIPromise<ZonesHTTP3> {
+  get(params: HTTP3GetParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingHTTP3> {
     const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zone_id}/settings/http3`, options) as Core.APIPromise<{ result: ZonesHTTP3 }>
+      this._client.get(`/zones/${zone_id}/settings/http3`, options) as Core.APIPromise<{
+        result: ZoneSettingHTTP3;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -31,7 +33,7 @@ export class HTTP3 extends APIResource {
 /**
  * HTTP3 enabled for this zone.
  */
-export interface ZonesHTTP3 {
+export interface ZoneSettingHTTP3 {
   /**
    * ID of the zone setting.
    */
@@ -74,7 +76,7 @@ export interface HTTP3GetParams {
 }
 
 export namespace HTTP3 {
-  export import ZonesHTTP3 = HTTP3API.ZonesHTTP3;
+  export import ZoneSettingHTTP3 = HTTP3API.ZoneSettingHTTP3;
   export import HTTP3EditParams = HTTP3API.HTTP3EditParams;
   export import HTTP3GetParams = HTTP3API.HTTP3GetParams;
 }

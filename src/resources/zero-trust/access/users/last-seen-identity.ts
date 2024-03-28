@@ -8,17 +8,17 @@ export class LastSeenIdentity extends APIResource {
   /**
    * Get last seen identity for a single user.
    */
-  get(identifier: string, id: string, options?: Core.RequestOptions): Core.APIPromise<AccessIdentity> {
+  get(identifier: string, id: string, options?: Core.RequestOptions): Core.APIPromise<ZeroTrustIdentity> {
     return (
       this._client.get(
         `/accounts/${identifier}/access/users/${id}/last_seen_identity`,
         options,
-      ) as Core.APIPromise<{ result: AccessIdentity }>
+      ) as Core.APIPromise<{ result: ZeroTrustIdentity }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface AccessIdentity {
+export interface ZeroTrustIdentity {
   account_id?: string;
 
   auth_status?: string;
@@ -27,17 +27,17 @@ export interface AccessIdentity {
 
   device_id?: string;
 
-  device_sessions?: Record<string, AccessIdentity.DeviceSessions>;
+  device_sessions?: Record<string, ZeroTrustIdentity.DeviceSessions>;
 
-  devicePosture?: Record<string, AccessIdentity.DevicePosture>;
+  devicePosture?: Record<string, ZeroTrustIdentity.DevicePosture>;
 
   email?: string;
 
-  geo?: AccessIdentity.Geo;
+  geo?: ZeroTrustIdentity.Geo;
 
   iat?: number;
 
-  idp?: AccessIdentity.IDP;
+  idp?: ZeroTrustIdentity.IDP;
 
   ip?: string;
 
@@ -45,7 +45,7 @@ export interface AccessIdentity {
 
   is_warp?: boolean;
 
-  mtls_auth?: AccessIdentity.MTLSAuth;
+  mtls_auth?: ZeroTrustIdentity.MTLSAuth;
 
   service_token_id?: string;
 
@@ -56,7 +56,7 @@ export interface AccessIdentity {
   version?: number;
 }
 
-export namespace AccessIdentity {
+export namespace ZeroTrustIdentity {
   export interface DeviceSessions {
     last_authenticated?: number;
   }
@@ -113,5 +113,5 @@ export namespace AccessIdentity {
 }
 
 export namespace LastSeenIdentity {
-  export import AccessIdentity = LastSeenIdentityAPI.AccessIdentity;
+  export import ZeroTrustIdentity = LastSeenIdentityAPI.ZeroTrustIdentity;
 }

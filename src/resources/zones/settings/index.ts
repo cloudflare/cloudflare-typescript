@@ -14,208 +14,203 @@ export {
   SettingGetParams,
   Settings,
 } from './settings';
+export { ZoneSetting0rtt, ZeroRTTEditParams, ZeroRTTGetParams, ZeroRTT } from './zero-rtt';
+export { ZoneSettingAdvancedDDOS, AdvancedDDOSGetParams, AdvancedDDOS } from './advanced-ddos';
 export {
-  SpeedCloudflareFonts,
-  FontSettingEditParams,
-  FontSettingGetParams,
-  FontSettings,
-} from './font-settings';
-export { Zones0rtt, ZeroRTTEditParams, ZeroRTTGetParams, ZeroRTT } from './zero-rtt';
-export { ZonesAdvancedDDOS, AdvancedDDOSGetParams, AdvancedDDOS } from './advanced-ddos';
-export {
-  ZonesAlwaysOnline,
+  ZoneSettingAlwaysOnline,
   AlwaysOnlineEditParams,
   AlwaysOnlineGetParams,
   AlwaysOnline,
 } from './always-online';
 export {
-  ZonesAlwaysUseHTTPS,
+  ZoneSettingAlwaysUseHTTPS,
   AlwaysUseHTTPSEditParams,
   AlwaysUseHTTPSGetParams,
   AlwaysUseHTTPS,
 } from './always-use-https';
 export {
-  ZonesAutomaticHTTPSRewrites,
+  ZoneSettingAutomaticHTTPSRewrites,
   AutomaticHTTPSRewriteEditParams,
   AutomaticHTTPSRewriteGetParams,
   AutomaticHTTPSRewrites,
 } from './automatic-https-rewrites';
 export {
-  ZonesAutomaticPlatformOptimization,
+  ZoneSettingAutomaticPlatformOptimization,
   AutomaticPlatformOptimizationEditParams,
   AutomaticPlatformOptimizationGetParams,
   AutomaticPlatformOptimization,
 } from './automatic-platform-optimization';
-export { ZonesBrotli, BrotliEditParams, BrotliGetParams, Brotli } from './brotli';
+export { ZoneSettingBrotli, BrotliEditParams, BrotliGetParams, Brotli } from './brotli';
 export {
-  ZonesBrowserCacheTTL,
+  ZoneSettingBrowserCacheTTL,
   BrowserCacheTTLEditParams,
   BrowserCacheTTLGetParams,
   BrowserCacheTTL,
 } from './browser-cache-ttl';
 export {
-  ZonesBrowserCheck,
+  ZoneSettingBrowserCheck,
   BrowserCheckEditParams,
   BrowserCheckGetParams,
   BrowserCheck,
 } from './browser-check';
 export {
-  ZonesBuffering,
+  ZoneSettingBuffering,
   ResponseBufferingEditParams,
   ResponseBufferingGetParams,
   ResponseBuffering,
 } from './response-buffering';
-export { ZonesCacheLevel, CacheLevelEditParams, CacheLevelGetParams, CacheLevel } from './cache-level';
+export { ZoneSettingCacheLevel, CacheLevelEditParams, CacheLevelGetParams, CacheLevel } from './cache-level';
 export {
-  ZonesChallengeTTL,
+  ZoneSettingChallengeTTL,
   ChallengeTTLEditParams,
   ChallengeTTLGetParams,
   ChallengeTTL,
 } from './challenge-ttl';
-export { ZonesCiphers, CipherEditParams, CipherGetParams, Ciphers } from './ciphers';
+export { ZoneSettingCiphers, CipherEditParams, CipherGetParams, Ciphers } from './ciphers';
 export {
-  ZonesDevelopmentMode,
+  ZoneSettingDevelopmentMode,
   DevelopmentModeEditParams,
   DevelopmentModeGetParams,
   DevelopmentMode,
 } from './development-mode';
-export { ZonesEarlyHints, EarlyHintEditParams, EarlyHintGetParams, EarlyHints } from './early-hints';
+export { ZoneSettingEarlyHints, EarlyHintEditParams, EarlyHintGetParams, EarlyHints } from './early-hints';
 export {
-  ZonesEmailObfuscation,
+  ZoneSettingEmailObfuscation,
   EmailObfuscationEditParams,
   EmailObfuscationGetParams,
   EmailObfuscation,
 } from './email-obfuscation';
+export { ZoneSettingFonts, FontSettingEditParams, FontSettingGetParams, FontSettings } from './font-settings';
 export {
-  ZonesH2Prioritization,
+  ZoneSettingH2Prioritization,
   H2PrioritizationEditParams,
   H2PrioritizationGetParams,
   H2Prioritization,
 } from './h2-prioritization';
-export { ZonesHTTP2, HTTP2EditParams, HTTP2GetParams, HTTP2 } from './http2';
-export { ZonesHTTP3, HTTP3EditParams, HTTP3GetParams, HTTP3 } from './http3';
+export { ZoneSettingHTTP2, HTTP2EditParams, HTTP2GetParams, HTTP2 } from './http2';
+export { ZoneSettingHTTP3, HTTP3EditParams, HTTP3GetParams, HTTP3 } from './http3';
 export {
-  ZonesHotlinkProtection,
+  ZoneSettingHotlinkProtection,
   HotlinkProtectionEditParams,
   HotlinkProtectionGetParams,
   HotlinkProtection,
 } from './hotlink-protection';
 export {
-  ZonesIPGeolocation,
+  ZoneSettingIPGeolocation,
   IPGeolocationEditParams,
   IPGeolocationGetParams,
   IPGeolocation,
 } from './ip-geolocation';
-export { ZonesIPV6, IPV6EditParams, IPV6GetParams, IPV6 } from './ipv6';
+export { ZoneSettingIPV6, IPV6EditParams, IPV6GetParams, IPV6 } from './ipv6';
 export {
-  ZonesImageResizing,
+  ZoneSettingImageResizing,
   ImageResizingEditParams,
   ImageResizingGetParams,
   ImageResizing,
 } from './image-resizing';
 export {
-  ZonesMinTLSVersion,
+  ZoneSettingMinTLSVersion,
   MinTLSVersionEditParams,
   MinTLSVersionGetParams,
   MinTLSVersion,
 } from './min-tls-version';
-export { ZonesMinify, MinifyEditParams, MinifyGetParams, Minify } from './minify';
-export { ZonesMirage, MirageEditParams, MirageGetParams, Mirage } from './mirage';
+export { ZoneSettingMinify, MinifyEditParams, MinifyGetParams, Minify } from './minify';
+export { ZoneSettingMirage, MirageEditParams, MirageGetParams, Mirage } from './mirage';
 export {
-  ZonesMobileRedirect,
+  ZoneSettingMobileRedirect,
   MobileRedirectEditParams,
   MobileRedirectGetParams,
   MobileRedirect,
 } from './mobile-redirect';
-export { ZonesNEL, NELEditParams, NELGetParams, NEL } from './nel';
+export { ZoneSettingNEL, NELEditParams, NELGetParams, NEL } from './nel';
 export {
-  ZonesOpportunisticEncryption,
+  ZoneSettingOpportunisticEncryption,
   OpportunisticEncryptionEditParams,
   OpportunisticEncryptionGetParams,
   OpportunisticEncryption,
 } from './opportunistic-encryption';
 export {
-  ZonesOpportunisticOnion,
+  ZoneSettingOpportunisticOnion,
   OpportunisticOnionEditParams,
   OpportunisticOnionGetParams,
   OpportunisticOnion,
 } from './opportunistic-onion';
 export {
-  ZonesOrangeToOrange,
+  ZoneSettingOrangeToOrange,
   OrangeToOrangeEditParams,
   OrangeToOrangeGetParams,
   OrangeToOrange,
 } from './orange-to-orange';
 export {
-  ZonesOriginErrorPagePassThru,
+  ZoneSettingOriginErrorPagePassThru,
   OriginErrorPagePassThruEditParams,
   OriginErrorPagePassThruGetParams,
   OriginErrorPagePassThru,
 } from './origin-error-page-pass-thru';
-export { ZonesPolish, PolishEditParams, PolishGetParams, Polish } from './polish';
+export { ZoneSettingPolish, PolishEditParams, PolishGetParams, Polish } from './polish';
 export {
-  ZonesPrefetchPreload,
+  ZoneSettingPrefetchPreload,
   PrefetchPreloadEditParams,
   PrefetchPreloadGetParams,
   PrefetchPreload,
 } from './prefetch-preload';
 export {
-  ZonesProxyReadTimeout,
+  ZoneSettingProxyReadTimeout,
   ProxyReadTimeoutEditParams,
   ProxyReadTimeoutGetParams,
   ProxyReadTimeout,
 } from './proxy-read-timeout';
-export { ZonesPseudoIPV4, PseudoIPV4EditParams, PseudoIPV4GetParams, PseudoIPV4 } from './pseudo-ipv4';
+export { ZoneSettingPseudoIPV4, PseudoIPV4EditParams, PseudoIPV4GetParams, PseudoIPV4 } from './pseudo-ipv4';
 export {
-  ZonesRocketLoader,
+  ZoneSettingRocketLoader,
   RocketLoaderEditParams,
   RocketLoaderGetParams,
   RocketLoader,
 } from './rocket-loader';
-export { ZonesSSL, SSLEditParams, SSLGetParams, SSL } from './ssl';
+export { ZoneSettingSSL, SSLEditParams, SSLGetParams, SSL } from './ssl';
 export {
-  ZonesSSLRecommender,
+  ZoneSettingSSLRecommender,
   SSLRecommenderEditParams,
   SSLRecommenderGetParams,
   SSLRecommender,
 } from './ssl-recommender';
 export {
-  ZonesSecurityHeader,
+  ZoneSettingSecurityHeader,
   SecurityHeaderEditParams,
   SecurityHeaderGetParams,
   SecurityHeaders,
 } from './security-headers';
 export {
-  ZonesSecurityLevel,
+  ZoneSettingSecurityLevel,
   SecurityLevelEditParams,
   SecurityLevelGetParams,
   SecurityLevel,
 } from './security-level';
 export {
-  ZonesServerSideExclude,
+  ZoneSettingServerSideExclude,
   ServerSideExcludeEditParams,
   ServerSideExcludeGetParams,
   ServerSideExcludes,
 } from './server-side-excludes';
 export {
-  ZonesSortQueryStringForCache,
+  ZoneSettingSortQueryStringForCache,
   SortQueryStringForCacheEditParams,
   SortQueryStringForCacheGetParams,
   SortQueryStringForCache,
 } from './sort-query-string-for-cache';
-export { ZonesTLS1_3, TLS1_3EditParams, TLS1_3GetParams, TLS1_3 } from './tls-1-3';
+export { ZoneSettingTLS1_3, TLS1_3EditParams, TLS1_3GetParams, TLS1_3 } from './tls-1-3';
 export {
-  ZonesTLSClientAuth,
+  ZoneSettingTLSClientAuth,
   TLSClientAuthEditParams,
   TLSClientAuthGetParams,
   TLSClientAuth,
 } from './tls-client-auth';
 export {
-  ZonesTrueClientIPHeader,
+  ZoneSettingTrueClientIPHeader,
   TrueClientIPHeaderEditParams,
   TrueClientIPHeaderGetParams,
   TrueClientIPHeader,
 } from './true-client-ip-header';
-export { ZonesWAF, WAFEditParams, WAFGetParams, WAF } from './waf';
-export { ZonesWebP, WebPEditParams, WebPGetParams, WebP } from './webp';
-export { ZonesWebsockets, WebsocketEditParams, WebsocketGetParams, Websocket } from './websocket';
+export { ZoneSettingWAF, WAFEditParams, WAFGetParams, WAF } from './waf';
+export { ZoneSettingWebP, WebPEditParams, WebPGetParams, WebP } from './webp';
+export { ZoneSettingWebsockets, WebsocketEditParams, WebsocketGetParams, Websocket } from './websocket';

@@ -3,14 +3,14 @@
 export { Analytics } from './analytics/index';
 export { DNS } from './dns';
 export {
-  DNSFirewallDNSFirewall,
+  DNSFirewall,
   FirewallDeleteResponse,
   FirewallCreateParams,
   FirewallListParams,
   FirewallDeleteParams,
   FirewallEditParams,
   FirewallGetParams,
-  DNSFirewallDNSFirewallsV4PagePaginationArray,
+  DNSFirewallsV4PagePaginationArray,
   Firewall,
 } from './firewall/index';
 export {

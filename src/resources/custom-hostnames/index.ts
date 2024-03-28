@@ -1,16 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  FallbackOriginUpdateResponse,
-  FallbackOriginDeleteResponse,
-  FallbackOriginGetResponse,
-  FallbackOriginUpdateParams,
-  FallbackOriginDeleteParams,
-  FallbackOriginGetParams,
-  FallbackOrigin,
-} from './fallback-origin';
-export {
-  TLSCertificatesAndHostnamesCustomHostname,
+  CustomHostname,
   CustomHostnameCreateResponse,
   CustomHostnameListResponse,
   CustomHostnameDeleteResponse,
@@ -24,3 +15,12 @@ export {
   CustomHostnameListResponsesV4PagePaginationArray,
   CustomHostnames,
 } from './custom-hostnames';
+export {
+  FallbackOriginUpdateResponse,
+  FallbackOriginDeleteResponse,
+  FallbackOriginGetResponse,
+  FallbackOriginUpdateParams,
+  FallbackOriginDeleteParams,
+  FallbackOriginGetParams,
+  FallbackOrigin,
+} from './fallback-origin';

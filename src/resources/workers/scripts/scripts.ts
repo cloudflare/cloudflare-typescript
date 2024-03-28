@@ -457,7 +457,7 @@ export namespace Scripts {
   export import ScriptDeleteParams = ScriptsAPI.ScriptDeleteParams;
   export import ScriptGetParams = ScriptsAPI.ScriptGetParams;
   export import Bindings = BindingsAPI.Bindings;
-  export import WorkersSchemasBinding = BindingsAPI.WorkersSchemasBinding;
+  export import WorkersBinding = BindingsAPI.WorkersBinding;
   export import BindingGetResponse = BindingsAPI.BindingGetResponse;
   export import BindingGetParams = BindingsAPI.BindingGetParams;
   export import Schedules = SchedulesAPI.Schedules;

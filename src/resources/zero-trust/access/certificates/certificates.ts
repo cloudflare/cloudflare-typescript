@@ -16,7 +16,7 @@ export class Certificates extends APIResource {
   create(
     params: CertificateCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessCertificates> {
+  ): Core.APIPromise<ZeroTrustCertificates> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -38,7 +38,7 @@ export class Certificates extends APIResource {
       this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/certificates`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: AccessCertificates }>
+      }) as Core.APIPromise<{ result: ZeroTrustCertificates }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -49,7 +49,7 @@ export class Certificates extends APIResource {
     uuid: string,
     params: CertificateUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessCertificates> {
+  ): Core.APIPromise<ZeroTrustCertificates> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -71,7 +71,7 @@ export class Certificates extends APIResource {
       this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/certificates/${uuid}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: AccessCertificates }>
+      }) as Core.APIPromise<{ result: ZeroTrustCertificates }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -164,13 +164,13 @@ export class Certificates extends APIResource {
     uuid: string,
     params?: CertificateGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessCertificates>;
-  get(uuid: string, options?: Core.RequestOptions): Core.APIPromise<AccessCertificates>;
+  ): Core.APIPromise<ZeroTrustCertificates>;
+  get(uuid: string, options?: Core.RequestOptions): Core.APIPromise<ZeroTrustCertificates>;
   get(
     uuid: string,
     params: CertificateGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessCertificates> {
+  ): Core.APIPromise<ZeroTrustCertificates> {
     if (isRequestOptions(params)) {
       return this.get(uuid, {}, params);
     }
@@ -195,12 +195,12 @@ export class Certificates extends APIResource {
       this._client.get(
         `/${accountOrZone}/${accountOrZoneId}/access/certificates/${uuid}`,
         options,
-      ) as Core.APIPromise<{ result: AccessCertificates }>
+      ) as Core.APIPromise<{ result: ZeroTrustCertificates }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface AccessCertificates {
+export interface ZeroTrustCertificates {
   /**
    * The ID of the application that will use this certificate.
    */
@@ -228,7 +228,7 @@ export interface AccessCertificates {
   updated_at?: string;
 }
 
-export type CertificateListResponse = Array<AccessCertificates>;
+export type CertificateListResponse = Array<ZeroTrustCertificates>;
 
 export interface CertificateDeleteResponse {
   /**
@@ -327,7 +327,7 @@ export interface CertificateGetParams {
 }
 
 export namespace Certificates {
-  export import AccessCertificates = CertificatesAPI.AccessCertificates;
+  export import ZeroTrustCertificates = CertificatesAPI.ZeroTrustCertificates;
   export import CertificateListResponse = CertificatesAPI.CertificateListResponse;
   export import CertificateDeleteResponse = CertificatesAPI.CertificateDeleteResponse;
   export import CertificateCreateParams = CertificatesAPI.CertificateCreateParams;
@@ -336,7 +336,7 @@ export namespace Certificates {
   export import CertificateDeleteParams = CertificatesAPI.CertificateDeleteParams;
   export import CertificateGetParams = CertificatesAPI.CertificateGetParams;
   export import Settings = SettingsAPI.Settings;
-  export import AccessSettings = SettingsAPI.AccessSettings;
+  export import ZeroTrustSettings = SettingsAPI.ZeroTrustSettings;
   export import SettingUpdateResponse = SettingsAPI.SettingUpdateResponse;
   export import SettingGetResponse = SettingsAPI.SettingGetResponse;
   export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;

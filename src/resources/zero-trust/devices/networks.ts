@@ -11,11 +11,11 @@ export class Networks extends APIResource {
   create(
     params: NetworkCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TeamsDevicesDeviceManagedNetworks | null> {
+  ): Core.APIPromise<DeviceManagedNetworks | null> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/devices/networks`, { body, ...options }) as Core.APIPromise<{
-        result: TeamsDevicesDeviceManagedNetworks | null;
+        result: DeviceManagedNetworks | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -27,13 +27,13 @@ export class Networks extends APIResource {
     networkId: string,
     params: NetworkUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TeamsDevicesDeviceManagedNetworks | null> {
+  ): Core.APIPromise<DeviceManagedNetworks | null> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/devices/networks/${networkId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: TeamsDevicesDeviceManagedNetworks | null }>
+      }) as Core.APIPromise<{ result: DeviceManagedNetworks | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -77,22 +77,22 @@ export class Networks extends APIResource {
     networkId: string,
     params: NetworkGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TeamsDevicesDeviceManagedNetworks | null> {
+  ): Core.APIPromise<DeviceManagedNetworks | null> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/devices/networks/${networkId}`, options) as Core.APIPromise<{
-        result: TeamsDevicesDeviceManagedNetworks | null;
+        result: DeviceManagedNetworks | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface TeamsDevicesDeviceManagedNetworks {
+export interface DeviceManagedNetworks {
   /**
    * The configuration object containing information for the WARP client to detect
    * the managed network.
    */
-  config?: TeamsDevicesDeviceManagedNetworks.Config;
+  config?: DeviceManagedNetworks.Config;
 
   /**
    * The name of the device managed network. This name must be unique.
@@ -110,7 +110,7 @@ export interface TeamsDevicesDeviceManagedNetworks {
   type?: 'tls';
 }
 
-export namespace TeamsDevicesDeviceManagedNetworks {
+export namespace DeviceManagedNetworks {
   /**
    * The configuration object containing information for the WARP client to detect
    * the managed network.
@@ -131,9 +131,9 @@ export namespace TeamsDevicesDeviceManagedNetworks {
   }
 }
 
-export type NetworkListResponse = Array<TeamsDevicesDeviceManagedNetworks>;
+export type NetworkListResponse = Array<DeviceManagedNetworks>;
 
-export type NetworkDeleteResponse = Array<TeamsDevicesDeviceManagedNetworks>;
+export type NetworkDeleteResponse = Array<DeviceManagedNetworks>;
 
 export interface NetworkCreateParams {
   /**
@@ -236,7 +236,7 @@ export interface NetworkGetParams {
 }
 
 export namespace Networks {
-  export import TeamsDevicesDeviceManagedNetworks = NetworksAPI.TeamsDevicesDeviceManagedNetworks;
+  export import DeviceManagedNetworks = NetworksAPI.DeviceManagedNetworks;
   export import NetworkListResponse = NetworksAPI.NetworkListResponse;
   export import NetworkDeleteResponse = NetworksAPI.NetworkDeleteResponse;
   export import NetworkCreateParams = NetworksAPI.NetworkCreateParams;

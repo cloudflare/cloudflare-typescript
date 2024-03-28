@@ -11,11 +11,11 @@ export class KeylessCertificates extends APIResource {
   create(
     params: KeylessCertificateCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TLSCertificatesAndHostnamesBase> {
+  ): Core.APIPromise<KeylessCertificateHostname> {
     const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/keyless_certificates`, { body, ...options }) as Core.APIPromise<{
-        result: TLSCertificatesAndHostnamesBase;
+        result: KeylessCertificateHostname;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -60,13 +60,13 @@ export class KeylessCertificates extends APIResource {
     keylessCertificateId: string,
     params: KeylessCertificateEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TLSCertificatesAndHostnamesBase> {
+  ): Core.APIPromise<KeylessCertificateHostname> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/keyless_certificates/${keylessCertificateId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: TLSCertificatesAndHostnamesBase }>
+      }) as Core.APIPromise<{ result: KeylessCertificateHostname }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -77,18 +77,18 @@ export class KeylessCertificates extends APIResource {
     keylessCertificateId: string,
     params: KeylessCertificateGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TLSCertificatesAndHostnamesBase> {
+  ): Core.APIPromise<KeylessCertificateHostname> {
     const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/keyless_certificates/${keylessCertificateId}`,
         options,
-      ) as Core.APIPromise<{ result: TLSCertificatesAndHostnamesBase }>
+      ) as Core.APIPromise<{ result: KeylessCertificateHostname }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface TLSCertificatesAndHostnamesBase {
+export interface KeylessCertificate {
   /**
    * Keyless certificate identifier tag.
    */
@@ -139,10 +139,10 @@ export interface TLSCertificatesAndHostnamesBase {
   /**
    * Configuration for using Keyless SSL through a Cloudflare Tunnel
    */
-  tunnel?: TLSCertificatesAndHostnamesBase.Tunnel;
+  tunnel?: KeylessCertificate.Tunnel;
 }
 
-export namespace TLSCertificatesAndHostnamesBase {
+export namespace KeylessCertificate {
   /**
    * Configuration for using Keyless SSL through a Cloudflare Tunnel
    */
@@ -159,7 +159,7 @@ export namespace TLSCertificatesAndHostnamesBase {
   }
 }
 
-export interface TLSCertificatesAndHostnamesKeylessCertificate {
+export interface KeylessCertificateHostname {
   /**
    * Keyless certificate identifier tag.
    */
@@ -210,10 +210,10 @@ export interface TLSCertificatesAndHostnamesKeylessCertificate {
   /**
    * Configuration for using Keyless SSL through a Cloudflare Tunnel
    */
-  tunnel?: TLSCertificatesAndHostnamesKeylessCertificate.Tunnel;
+  tunnel?: KeylessCertificateHostname.Tunnel;
 }
 
-export namespace TLSCertificatesAndHostnamesKeylessCertificate {
+export namespace KeylessCertificateHostname {
   /**
    * Configuration for using Keyless SSL through a Cloudflare Tunnel
    */
@@ -230,7 +230,7 @@ export namespace TLSCertificatesAndHostnamesKeylessCertificate {
   }
 }
 
-export type KeylessCertificateListResponse = Array<TLSCertificatesAndHostnamesBase>;
+export type KeylessCertificateListResponse = Array<KeylessCertificateHostname>;
 
 export interface KeylessCertificateDeleteResponse {
   /**
@@ -369,8 +369,8 @@ export interface KeylessCertificateGetParams {
 }
 
 export namespace KeylessCertificates {
-  export import TLSCertificatesAndHostnamesBase = KeylessCertificatesAPI.TLSCertificatesAndHostnamesBase;
-  export import TLSCertificatesAndHostnamesKeylessCertificate = KeylessCertificatesAPI.TLSCertificatesAndHostnamesKeylessCertificate;
+  export import KeylessCertificate = KeylessCertificatesAPI.KeylessCertificate;
+  export import KeylessCertificateHostname = KeylessCertificatesAPI.KeylessCertificateHostname;
   export import KeylessCertificateListResponse = KeylessCertificatesAPI.KeylessCertificateListResponse;
   export import KeylessCertificateDeleteResponse = KeylessCertificatesAPI.KeylessCertificateDeleteResponse;
   export import KeylessCertificateCreateParams = KeylessCertificatesAPI.KeylessCertificateCreateParams;

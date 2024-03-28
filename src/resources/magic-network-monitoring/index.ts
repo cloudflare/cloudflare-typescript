@@ -2,7 +2,7 @@
 
 export { MagicNetworkMonitoring } from './magic-network-monitoring';
 export {
-  MagicVisibilityMNMConfig,
+  MagicNetworkMonitoringConfig,
   ConfigCreateParams,
   ConfigUpdateParams,
   ConfigDeleteParams,
@@ -11,7 +11,7 @@ export {
   Configs,
 } from './configs/index';
 export {
-  MagicVisibilityMNMRule,
+  MagicNetworkMonitoringRule,
   RuleListResponse,
   RuleCreateParams,
   RuleUpdateParams,

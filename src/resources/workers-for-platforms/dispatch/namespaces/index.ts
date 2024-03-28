@@ -12,7 +12,7 @@ export {
   Namespaces,
 } from './namespaces';
 export {
-  WorkersNamespaceScript,
+  WorkersForPlatformsNamespaceScript,
   ScriptUpdateParams,
   ScriptDeleteParams,
   ScriptGetParams,

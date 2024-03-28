@@ -19,7 +19,7 @@ export class Applications extends APIResource {
   /**
    * Adds a new application to Access.
    */
-  create(params: ApplicationCreateParams, options?: Core.RequestOptions): Core.APIPromise<AccessApps> {
+  create(params: ApplicationCreateParams, options?: Core.RequestOptions): Core.APIPromise<ZeroTrustApps> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -41,7 +41,7 @@ export class Applications extends APIResource {
       this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/apps`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: AccessApps }>
+      }) as Core.APIPromise<{ result: ZeroTrustApps }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -52,7 +52,7 @@ export class Applications extends APIResource {
     appId: string | string,
     params: ApplicationUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessApps> {
+  ): Core.APIPromise<ZeroTrustApps> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -74,7 +74,7 @@ export class Applications extends APIResource {
       this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/apps/${appId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: AccessApps }>
+      }) as Core.APIPromise<{ result: ZeroTrustApps }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -166,13 +166,13 @@ export class Applications extends APIResource {
     appId: string | string,
     params?: ApplicationGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessApps>;
-  get(appId: string | string, options?: Core.RequestOptions): Core.APIPromise<AccessApps>;
+  ): Core.APIPromise<ZeroTrustApps>;
+  get(appId: string | string, options?: Core.RequestOptions): Core.APIPromise<ZeroTrustApps>;
   get(
     appId: string | string,
     params: ApplicationGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessApps> {
+  ): Core.APIPromise<ZeroTrustApps> {
     if (isRequestOptions(params)) {
       return this.get(appId, {}, params);
     }
@@ -197,7 +197,7 @@ export class Applications extends APIResource {
       this._client.get(
         `/${accountOrZone}/${accountOrZoneId}/access/apps/${appId}`,
         options,
-      ) as Core.APIPromise<{ result: AccessApps }>
+      ) as Core.APIPromise<{ result: ZeroTrustApps }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -247,17 +247,17 @@ export class Applications extends APIResource {
   }
 }
 
-export type AccessApps =
-  | AccessApps.SelfHostedApplication
-  | AccessApps.SaaSApplication
-  | AccessApps.BrowserSSHApplication
-  | AccessApps.BrowserVncApplication
-  | AccessApps.AppLauncherApplication
-  | AccessApps.DeviceEnrollmentPermissionsApplication
-  | AccessApps.BrowserIsolationPermissionsApplication
-  | AccessApps.BookmarkApplication;
+export type ZeroTrustApps =
+  | ZeroTrustApps.SelfHostedApplication
+  | ZeroTrustApps.SaaSApplication
+  | ZeroTrustApps.BrowserSSHApplication
+  | ZeroTrustApps.BrowserVncApplication
+  | ZeroTrustApps.AppLauncherApplication
+  | ZeroTrustApps.DeviceEnrollmentPermissionsApplication
+  | ZeroTrustApps.BrowserIsolationPermissionsApplication
+  | ZeroTrustApps.BookmarkApplication;
 
-export namespace AccessApps {
+export namespace ZeroTrustApps {
   export interface SelfHostedApplication {
     /**
      * The primary hostname and path that Access will secure. If the app is visible in
@@ -1226,7 +1226,7 @@ export namespace AccessApps {
   }
 }
 
-export type ApplicationListResponse = Array<AccessApps>;
+export type ApplicationListResponse = Array<ZeroTrustApps>;
 
 export interface ApplicationDeleteResponse {
   /**
@@ -3184,7 +3184,7 @@ export interface ApplicationRevokeTokensParams {
 }
 
 export namespace Applications {
-  export import AccessApps = ApplicationsAPI.AccessApps;
+  export import ZeroTrustApps = ApplicationsAPI.ZeroTrustApps;
   export import ApplicationListResponse = ApplicationsAPI.ApplicationListResponse;
   export import ApplicationDeleteResponse = ApplicationsAPI.ApplicationDeleteResponse;
   export import ApplicationRevokeTokensResponse = ApplicationsAPI.ApplicationRevokeTokensResponse;
@@ -3195,7 +3195,7 @@ export namespace Applications {
   export import ApplicationGetParams = ApplicationsAPI.ApplicationGetParams;
   export import ApplicationRevokeTokensParams = ApplicationsAPI.ApplicationRevokeTokensParams;
   export import CAs = CAsAPI.CAs;
-  export import AccessCA = CAsAPI.AccessCA;
+  export import ZeroTrustCA = CAsAPI.ZeroTrustCA;
   export import CACreateResponse = CAsAPI.CACreateResponse;
   export import CAListResponse = CAsAPI.CAListResponse;
   export import CADeleteResponse = CAsAPI.CADeleteResponse;
@@ -3208,7 +3208,7 @@ export namespace Applications {
   export import UserPolicyCheckListResponse = UserPolicyChecksAPI.UserPolicyCheckListResponse;
   export import UserPolicyCheckListParams = UserPolicyChecksAPI.UserPolicyCheckListParams;
   export import Policies = PoliciesAPI.Policies;
-  export import AccessPolicies = PoliciesAPI.AccessPolicies;
+  export import ZeroTrustPolicies = PoliciesAPI.ZeroTrustPolicies;
   export import PolicyListResponse = PoliciesAPI.PolicyListResponse;
   export import PolicyDeleteResponse = PoliciesAPI.PolicyDeleteResponse;
   export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;

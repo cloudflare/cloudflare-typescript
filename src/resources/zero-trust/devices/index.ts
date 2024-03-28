@@ -1,9 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { OverrideCodeListResponse, OverrideCodeListParams, OverrideCodes } from './override-codes';
-export { RevokeCreateResponse, RevokeCreateParams, Revoke } from './revoke';
 export {
-  TeamsDevicesDeviceDEXTestSchemasHTTP,
+  DEXTestSchemasHTTP,
   DEXTestListResponse,
   DEXTestDeleteResponse,
   DEXTestCreateParams,
@@ -14,7 +12,7 @@ export {
   DEXTests,
 } from './dex-tests';
 export {
-  TeamsDevicesDeviceManagedNetworks,
+  DeviceManagedNetworks,
   NetworkListResponse,
   NetworkDeleteResponse,
   NetworkCreateParams,
@@ -25,7 +23,7 @@ export {
   Networks,
 } from './networks';
 export {
-  TeamsDevicesDevicePostureRules,
+  DevicePostureRules,
   PostureListResponse,
   PostureDeleteResponse,
   PostureCreateParams,
@@ -36,7 +34,7 @@ export {
   Posture,
 } from './posture/index';
 export {
-  TeamsDevicesDeviceSettingsPolicy,
+  DevicesDeviceSettingsPolicy,
   PolicyListResponse,
   PolicyDeleteResponse,
   PolicyCreateParams,
@@ -46,18 +44,15 @@ export {
   PolicyGetParams,
   Policies,
 } from './policies/index';
+export { OverrideCodeListResponse, OverrideCodeListParams, OverrideCodes } from './override-codes';
+export { RevokeCreateResponse, RevokeCreateParams, Revoke } from './revoke';
+export { UnrevokeCreateResponse, UnrevokeCreateParams, Unrevoke } from './unrevoke';
+export { ZeroTrustAccountDeviceSettings, SettingUpdateParams, SettingListParams, Settings } from './settings';
 export {
-  TeamsDevicesDevices,
+  ZeroTrustDevices,
   DeviceListResponse,
   DeviceGetResponse,
   DeviceListParams,
   DeviceGetParams,
   Devices,
 } from './devices';
-export {
-  TeamsDevicesZeroTrustAccountDeviceSettings,
-  SettingUpdateParams,
-  SettingListParams,
-  Settings,
-} from './settings';
-export { UnrevokeCreateResponse, UnrevokeCreateParams, Unrevoke } from './unrevoke';

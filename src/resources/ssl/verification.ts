@@ -41,7 +41,7 @@ export class Verification extends APIResource {
   }
 }
 
-export interface TLSCertificatesAndHostnamesVerification {
+export interface TLSVerificationSetting {
   /**
    * Current status of certificate.
    */
@@ -77,7 +77,7 @@ export interface TLSCertificatesAndHostnamesVerification {
   /**
    * Certificate's required verification information.
    */
-  verification_info?: TLSCertificatesAndHostnamesVerification.VerificationInfo;
+  verification_info?: TLSVerificationSetting.VerificationInfo;
 
   /**
    * Status of the required verification information, omitted if verification status
@@ -91,7 +91,7 @@ export interface TLSCertificatesAndHostnamesVerification {
   verification_type?: 'cname' | 'meta tag';
 }
 
-export namespace TLSCertificatesAndHostnamesVerification {
+export namespace TLSVerificationSetting {
   /**
    * Certificate's required verification information.
    */
@@ -120,7 +120,7 @@ export interface VerificationEditResponse {
   validation_method?: 'http' | 'cname' | 'txt' | 'email';
 }
 
-export type VerificationGetResponse = Array<TLSCertificatesAndHostnamesVerification>;
+export type VerificationGetResponse = Array<TLSVerificationSetting>;
 
 export interface VerificationEditParams {
   /**
@@ -147,7 +147,7 @@ export interface VerificationGetParams {
 }
 
 export namespace Verification {
-  export import TLSCertificatesAndHostnamesVerification = VerificationAPI.TLSCertificatesAndHostnamesVerification;
+  export import TLSVerificationSetting = VerificationAPI.TLSVerificationSetting;
   export import VerificationEditResponse = VerificationAPI.VerificationEditResponse;
   export import VerificationGetResponse = VerificationAPI.VerificationGetResponse;
   export import VerificationEditParams = VerificationAPI.VerificationEditParams;

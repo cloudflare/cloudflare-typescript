@@ -28,7 +28,7 @@ export {
   Domains,
 } from './domains';
 export {
-  WorkersFilters,
+  WorkersFilter,
   FilterCreateResponse,
   FilterListResponse,
   FilterDeleteResponse,
@@ -39,7 +39,7 @@ export {
   Filters,
 } from './filters';
 export {
-  WorkersRoutes,
+  WorkersRoute,
   RouteCreateResponse,
   RouteListResponse,
   RouteDeleteResponse,

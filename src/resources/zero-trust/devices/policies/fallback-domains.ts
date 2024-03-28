@@ -61,7 +61,7 @@ export class FallbackDomains extends APIResource {
   }
 }
 
-export interface TeamsDevicesFallbackDomain {
+export interface DevicesFallbackDomain {
   /**
    * The domain suffix to match when resolving locally.
    */
@@ -78,11 +78,11 @@ export interface TeamsDevicesFallbackDomain {
   dns_server?: Array<unknown>;
 }
 
-export type FallbackDomainUpdateResponse = Array<TeamsDevicesFallbackDomain>;
+export type FallbackDomainUpdateResponse = Array<DevicesFallbackDomain>;
 
-export type FallbackDomainListResponse = Array<TeamsDevicesFallbackDomain>;
+export type FallbackDomainListResponse = Array<DevicesFallbackDomain>;
 
-export type FallbackDomainGetResponse = Array<TeamsDevicesFallbackDomain>;
+export type FallbackDomainGetResponse = Array<DevicesFallbackDomain>;
 
 export interface FallbackDomainUpdateParams {
   /**
@@ -93,7 +93,7 @@ export interface FallbackDomainUpdateParams {
   /**
    * Body param:
    */
-  body: Array<TeamsDevicesFallbackDomain>;
+  body: Array<DevicesFallbackDomain>;
 }
 
 export interface FallbackDomainListParams {
@@ -105,7 +105,7 @@ export interface FallbackDomainGetParams {
 }
 
 export namespace FallbackDomains {
-  export import TeamsDevicesFallbackDomain = FallbackDomainsAPI.TeamsDevicesFallbackDomain;
+  export import DevicesFallbackDomain = FallbackDomainsAPI.DevicesFallbackDomain;
   export import FallbackDomainUpdateResponse = FallbackDomainsAPI.FallbackDomainUpdateResponse;
   export import FallbackDomainListResponse = FallbackDomainsAPI.FallbackDomainListResponse;
   export import FallbackDomainGetResponse = FallbackDomainsAPI.FallbackDomainGetResponse;

@@ -26,7 +26,7 @@ export class Users extends APIResource {
   }
 }
 
-export interface AccessUsers {
+export interface ZeroTrustUsers {
   /**
    * UUID
    */
@@ -77,16 +77,16 @@ export interface AccessUsers {
   updated_at?: string;
 }
 
-export type UserListResponse = Array<AccessUsers>;
+export type UserListResponse = Array<ZeroTrustUsers>;
 
 export namespace Users {
-  export import AccessUsers = UsersAPI.AccessUsers;
+  export import ZeroTrustUsers = UsersAPI.ZeroTrustUsers;
   export import UserListResponse = UsersAPI.UserListResponse;
   export import ActiveSessions = ActiveSessionsAPI.ActiveSessions;
   export import ActiveSessionListResponse = ActiveSessionsAPI.ActiveSessionListResponse;
   export import ActiveSessionGetResponse = ActiveSessionsAPI.ActiveSessionGetResponse;
   export import LastSeenIdentity = LastSeenIdentityAPI.LastSeenIdentity;
-  export import AccessIdentity = LastSeenIdentityAPI.AccessIdentity;
+  export import ZeroTrustIdentity = LastSeenIdentityAPI.ZeroTrustIdentity;
   export import FailedLogins = FailedLoginsAPI.FailedLogins;
   export import FailedLoginListResponse = FailedLoginsAPI.FailedLoginListResponse;
 }

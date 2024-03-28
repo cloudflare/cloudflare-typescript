@@ -32,13 +32,13 @@ export class ZeroTrust extends APIResource {
 
 export namespace ZeroTrust {
   export import Devices = DevicesAPI.Devices;
-  export import TeamsDevicesDevices = DevicesAPI.TeamsDevicesDevices;
+  export import ZeroTrustDevices = DevicesAPI.ZeroTrustDevices;
   export import DeviceListResponse = DevicesAPI.DeviceListResponse;
   export import DeviceGetResponse = DevicesAPI.DeviceGetResponse;
   export import DeviceListParams = DevicesAPI.DeviceListParams;
   export import DeviceGetParams = DevicesAPI.DeviceGetParams;
   export import IdentityProviders = IdentityProvidersAPI.IdentityProviders;
-  export import AccessIdentityProviders = IdentityProvidersAPI.AccessIdentityProviders;
+  export import ZeroTrustIdentityProviders = IdentityProvidersAPI.ZeroTrustIdentityProviders;
   export import IdentityProviderListResponse = IdentityProvidersAPI.IdentityProviderListResponse;
   export import IdentityProviderDeleteResponse = IdentityProvidersAPI.IdentityProviderDeleteResponse;
   export import IdentityProviderCreateParams = IdentityProvidersAPI.IdentityProviderCreateParams;
@@ -47,14 +47,14 @@ export namespace ZeroTrust {
   export import IdentityProviderDeleteParams = IdentityProvidersAPI.IdentityProviderDeleteParams;
   export import IdentityProviderGetParams = IdentityProvidersAPI.IdentityProviderGetParams;
   export import Organizations = OrganizationsAPI.Organizations;
-  export import AccessOrganizations = OrganizationsAPI.AccessOrganizations;
+  export import ZeroTrustOrganizations = OrganizationsAPI.ZeroTrustOrganizations;
   export import OrganizationRevokeUsersResponse = OrganizationsAPI.OrganizationRevokeUsersResponse;
   export import OrganizationCreateParams = OrganizationsAPI.OrganizationCreateParams;
   export import OrganizationUpdateParams = OrganizationsAPI.OrganizationUpdateParams;
   export import OrganizationListParams = OrganizationsAPI.OrganizationListParams;
   export import OrganizationRevokeUsersParams = OrganizationsAPI.OrganizationRevokeUsersParams;
   export import Seats = SeatsAPI.Seats;
-  export import AccessSeats = SeatsAPI.AccessSeats;
+  export import ZeroTrustSeats = SeatsAPI.ZeroTrustSeats;
   export import SeatEditResponse = SeatsAPI.SeatEditResponse;
   export import SeatEditParams = SeatsAPI.SeatEditParams;
   export import Access = AccessAPI.Access;

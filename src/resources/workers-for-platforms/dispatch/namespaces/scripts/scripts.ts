@@ -57,13 +57,13 @@ export class Scripts extends APIResource {
     scriptName: string,
     params: ScriptGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WorkersNamespaceScript> {
+  ): Core.APIPromise<WorkersForPlatformsNamespaceScript> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}`,
         options,
-      ) as Core.APIPromise<{ result: WorkersNamespaceScript }>
+      ) as Core.APIPromise<{ result: WorkersForPlatformsNamespaceScript }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -71,7 +71,7 @@ export class Scripts extends APIResource {
 /**
  * Details about a worker uploaded to a Workers for Platforms namespace.
  */
-export interface WorkersNamespaceScript {
+export interface WorkersForPlatformsNamespaceScript {
   /**
    * When the script was created.
    */
@@ -368,7 +368,7 @@ export interface ScriptGetParams {
 }
 
 export namespace Scripts {
-  export import WorkersNamespaceScript = ScriptsScriptsAPI.WorkersNamespaceScript;
+  export import WorkersForPlatformsNamespaceScript = ScriptsScriptsAPI.WorkersForPlatformsNamespaceScript;
   export import ScriptUpdateParams = ScriptsScriptsAPI.ScriptUpdateParams;
   export import ScriptDeleteParams = ScriptsScriptsAPI.ScriptDeleteParams;
   export import ScriptGetParams = ScriptsScriptsAPI.ScriptGetParams;

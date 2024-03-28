@@ -17,7 +17,7 @@ export class AccessRequests extends APIResource {
   }
 }
 
-export interface AccessAccessRequests {
+export interface ZeroTrustAccessRequests {
   /**
    * The event that occurred, such as a login attempt.
    */
@@ -61,9 +61,9 @@ export interface AccessAccessRequests {
   user_email?: string;
 }
 
-export type AccessRequestListResponse = Array<AccessAccessRequests>;
+export type AccessRequestListResponse = Array<ZeroTrustAccessRequests>;
 
 export namespace AccessRequests {
-  export import AccessAccessRequests = AccessRequestsAPI.AccessAccessRequests;
+  export import ZeroTrustAccessRequests = AccessRequestsAPI.ZeroTrustAccessRequests;
   export import AccessRequestListResponse = AccessRequestsAPI.AccessRequestListResponse;
 }

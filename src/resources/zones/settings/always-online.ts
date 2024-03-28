@@ -12,13 +12,16 @@ export class AlwaysOnline extends APIResource {
    * [Always Online](https://developers.cloudflare.com/cache/about/always-online) for
    * more information.
    */
-  edit(params: AlwaysOnlineEditParams, options?: Core.RequestOptions): Core.APIPromise<ZonesAlwaysOnline> {
+  edit(
+    params: AlwaysOnlineEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ZoneSettingAlwaysOnline> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/always_online`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZonesAlwaysOnline }>
+      }) as Core.APIPromise<{ result: ZoneSettingAlwaysOnline }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -29,11 +32,14 @@ export class AlwaysOnline extends APIResource {
    * [Always Online](https://developers.cloudflare.com/cache/about/always-online) for
    * more information.
    */
-  get(params: AlwaysOnlineGetParams, options?: Core.RequestOptions): Core.APIPromise<ZonesAlwaysOnline> {
+  get(
+    params: AlwaysOnlineGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ZoneSettingAlwaysOnline> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/always_online`, options) as Core.APIPromise<{
-        result: ZonesAlwaysOnline;
+        result: ZoneSettingAlwaysOnline;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -46,7 +52,7 @@ export class AlwaysOnline extends APIResource {
  * [Always Online](https://developers.cloudflare.com/cache/about/always-online) for
  * more information.
  */
-export interface ZonesAlwaysOnline {
+export interface ZoneSettingAlwaysOnline {
   /**
    * ID of the zone setting.
    */
@@ -89,7 +95,7 @@ export interface AlwaysOnlineGetParams {
 }
 
 export namespace AlwaysOnline {
-  export import ZonesAlwaysOnline = AlwaysOnlineAPI.ZonesAlwaysOnline;
+  export import ZoneSettingAlwaysOnline = AlwaysOnlineAPI.ZoneSettingAlwaysOnline;
   export import AlwaysOnlineEditParams = AlwaysOnlineAPI.AlwaysOnlineEditParams;
   export import AlwaysOnlineGetParams = AlwaysOnlineAPI.AlwaysOnlineGetParams;
 }

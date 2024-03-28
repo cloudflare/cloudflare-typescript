@@ -24,13 +24,13 @@ export class Routes extends APIResource {
     routeId: string,
     params: RouteUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WorkersRoutes> {
+  ): Core.APIPromise<WorkersRoute> {
     const { zone_id, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/workers/routes/${routeId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: WorkersRoutes }>
+      }) as Core.APIPromise<{ result: WorkersRoute }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -65,21 +65,17 @@ export class Routes extends APIResource {
   /**
    * Returns information about a route, including URL pattern and Worker.
    */
-  get(
-    routeId: string,
-    params: RouteGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<WorkersRoutes> {
+  get(routeId: string, params: RouteGetParams, options?: Core.RequestOptions): Core.APIPromise<WorkersRoute> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/workers/routes/${routeId}`, options) as Core.APIPromise<{
-        result: WorkersRoutes;
+        result: WorkersRoute;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface WorkersRoutes {
+export interface WorkersRoute {
   /**
    * Identifier
    */
@@ -95,7 +91,7 @@ export interface WorkersRoutes {
 
 export type RouteCreateResponse = unknown | string;
 
-export type RouteListResponse = Array<WorkersRoutes>;
+export type RouteListResponse = Array<WorkersRoute>;
 
 export type RouteDeleteResponse = unknown | string;
 
@@ -155,7 +151,7 @@ export interface RouteGetParams {
 }
 
 export namespace Routes {
-  export import WorkersRoutes = RoutesAPI.WorkersRoutes;
+  export import WorkersRoute = RoutesAPI.WorkersRoute;
   export import RouteCreateResponse = RoutesAPI.RouteCreateResponse;
   export import RouteListResponse = RoutesAPI.RouteListResponse;
   export import RouteDeleteResponse = RoutesAPI.RouteDeleteResponse;

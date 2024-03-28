@@ -52,7 +52,7 @@ export class Domains extends APIResource {
   }
 }
 
-export interface RegistrarAPIDomains {
+export interface RegistrarDomains {
   /**
    * Domain identifier.
    */
@@ -91,7 +91,7 @@ export interface RegistrarAPIDomains {
   /**
    * Shows contact information for domain registrant.
    */
-  registrant_contact?: RegistrarAPIDomains.RegistrantContact;
+  registrant_contact?: RegistrarDomains.RegistrantContact;
 
   /**
    * A comma-separated list of registry status codes. A full list of status codes can
@@ -110,7 +110,7 @@ export interface RegistrarAPIDomains {
   /**
    * Statuses for domain transfers into Cloudflare Registrar.
    */
-  transfer_in?: RegistrarAPIDomains.TransferIn;
+  transfer_in?: RegistrarDomains.TransferIn;
 
   /**
    * Last updated.
@@ -118,7 +118,7 @@ export interface RegistrarAPIDomains {
   updated_at?: string;
 }
 
-export namespace RegistrarAPIDomains {
+export namespace RegistrarDomains {
   /**
    * Shows contact information for domain registrant.
    */
@@ -444,7 +444,7 @@ export interface DomainGetParams {
 }
 
 export namespace Domains {
-  export import RegistrarAPIDomains = DomainsAPI.RegistrarAPIDomains;
+  export import RegistrarDomains = DomainsAPI.RegistrarDomains;
   export import DomainUpdateResponse = DomainsAPI.DomainUpdateResponse;
   export import DomainListResponse = DomainsAPI.DomainListResponse;
   export import DomainGetResponse = DomainsAPI.DomainGetResponse;

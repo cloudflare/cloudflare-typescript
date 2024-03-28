@@ -11,13 +11,13 @@ export class Integrations extends APIResource {
   create(
     params: IntegrationCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TeamsDevicesDevicePostureIntegrations | null> {
+  ): Core.APIPromise<DevicePostureIntegrations | null> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/devices/posture/integration`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: TeamsDevicesDevicePostureIntegrations | null }>
+      }) as Core.APIPromise<{ result: DevicePostureIntegrations | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -60,13 +60,13 @@ export class Integrations extends APIResource {
     integrationId: string,
     params: IntegrationEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TeamsDevicesDevicePostureIntegrations | null> {
+  ): Core.APIPromise<DevicePostureIntegrations | null> {
     const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/devices/posture/integration/${integrationId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: TeamsDevicesDevicePostureIntegrations | null }>
+      }) as Core.APIPromise<{ result: DevicePostureIntegrations | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -77,18 +77,18 @@ export class Integrations extends APIResource {
     integrationId: string,
     params: IntegrationGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TeamsDevicesDevicePostureIntegrations | null> {
+  ): Core.APIPromise<DevicePostureIntegrations | null> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/devices/posture/integration/${integrationId}`,
         options,
-      ) as Core.APIPromise<{ result: TeamsDevicesDevicePostureIntegrations | null }>
+      ) as Core.APIPromise<{ result: DevicePostureIntegrations | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface TeamsDevicesDevicePostureIntegrations {
+export interface DevicePostureIntegrations {
   /**
    * API UUID.
    */
@@ -97,7 +97,7 @@ export interface TeamsDevicesDevicePostureIntegrations {
   /**
    * The configuration object containing third-party integration information.
    */
-  config?: TeamsDevicesDevicePostureIntegrations.Config;
+  config?: DevicePostureIntegrations.Config;
 
   /**
    * The interval between each posture check with the third-party API. Use `m` for
@@ -116,7 +116,7 @@ export interface TeamsDevicesDevicePostureIntegrations {
   type?: 'workspace_one' | 'crowdstrike_s2s' | 'uptycs' | 'intune' | 'kolide' | 'tanium' | 'sentinelone_s2s';
 }
 
-export namespace TeamsDevicesDevicePostureIntegrations {
+export namespace DevicePostureIntegrations {
   /**
    * The configuration object containing third-party integration information.
    */
@@ -138,7 +138,7 @@ export namespace TeamsDevicesDevicePostureIntegrations {
   }
 }
 
-export type IntegrationListResponse = Array<TeamsDevicesDevicePostureIntegrations>;
+export type IntegrationListResponse = Array<DevicePostureIntegrations>;
 
 export type IntegrationDeleteResponse = unknown | string;
 
@@ -493,7 +493,7 @@ export interface IntegrationGetParams {
 }
 
 export namespace Integrations {
-  export import TeamsDevicesDevicePostureIntegrations = IntegrationsAPI.TeamsDevicesDevicePostureIntegrations;
+  export import DevicePostureIntegrations = IntegrationsAPI.DevicePostureIntegrations;
   export import IntegrationListResponse = IntegrationsAPI.IntegrationListResponse;
   export import IntegrationDeleteResponse = IntegrationsAPI.IntegrationDeleteResponse;
   export import IntegrationCreateParams = IntegrationsAPI.IntegrationCreateParams;

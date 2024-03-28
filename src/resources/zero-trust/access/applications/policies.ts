@@ -14,7 +14,7 @@ export class Policies extends APIResource {
     uuid: string,
     params: PolicyCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessPolicies> {
+  ): Core.APIPromise<ZeroTrustPolicies> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -36,7 +36,7 @@ export class Policies extends APIResource {
       this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/apps/${uuid}/policies`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: AccessPolicies }>
+      }) as Core.APIPromise<{ result: ZeroTrustPolicies }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -48,7 +48,7 @@ export class Policies extends APIResource {
     uuid: string,
     params: PolicyUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessPolicies> {
+  ): Core.APIPromise<ZeroTrustPolicies> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -70,7 +70,7 @@ export class Policies extends APIResource {
       this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/apps/${uuid1}/policies/${uuid}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: AccessPolicies }>
+      }) as Core.APIPromise<{ result: ZeroTrustPolicies }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -168,14 +168,14 @@ export class Policies extends APIResource {
     uuid: string,
     params?: PolicyGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessPolicies>;
-  get(uuid1: string, uuid: string, options?: Core.RequestOptions): Core.APIPromise<AccessPolicies>;
+  ): Core.APIPromise<ZeroTrustPolicies>;
+  get(uuid1: string, uuid: string, options?: Core.RequestOptions): Core.APIPromise<ZeroTrustPolicies>;
   get(
     uuid1: string,
     uuid: string,
     params: PolicyGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessPolicies> {
+  ): Core.APIPromise<ZeroTrustPolicies> {
     if (isRequestOptions(params)) {
       return this.get(uuid1, uuid, {}, params);
     }
@@ -200,12 +200,12 @@ export class Policies extends APIResource {
       this._client.get(
         `/${accountOrZone}/${accountOrZoneId}/access/apps/${uuid1}/policies/${uuid}`,
         options,
-      ) as Core.APIPromise<{ result: AccessPolicies }>
+      ) as Core.APIPromise<{ result: ZeroTrustPolicies }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface AccessPolicies {
+export interface ZeroTrustPolicies {
   /**
    * UUID
    */
@@ -214,7 +214,7 @@ export interface AccessPolicies {
   /**
    * Administrators who can approve a temporary authentication request.
    */
-  approval_groups?: Array<AccessPolicies.ApprovalGroup>;
+  approval_groups?: Array<ZeroTrustPolicies.ApprovalGroup>;
 
   /**
    * Requires the user to request access from an administrator at the start of each
@@ -234,25 +234,25 @@ export interface AccessPolicies {
    * meet any of the Exclude rules.
    */
   exclude?: Array<
-    | AccessPolicies.AccessEmailRule
-    | AccessPolicies.AccessEmailListRule
-    | AccessPolicies.AccessDomainRule
-    | AccessPolicies.AccessEveryoneRule
-    | AccessPolicies.AccessIPRule
-    | AccessPolicies.AccessIPListRule
-    | AccessPolicies.AccessCertificateRule
-    | AccessPolicies.AccessAccessGroupRule
-    | AccessPolicies.AccessAzureGroupRule
-    | AccessPolicies.AccessGitHubOrganizationRule
-    | AccessPolicies.AccessGsuiteGroupRule
-    | AccessPolicies.AccessOktaGroupRule
-    | AccessPolicies.AccessSamlGroupRule
-    | AccessPolicies.AccessServiceTokenRule
-    | AccessPolicies.AccessAnyValidServiceTokenRule
-    | AccessPolicies.AccessExternalEvaluationRule
-    | AccessPolicies.AccessCountryRule
-    | AccessPolicies.AccessAuthenticationMethodRule
-    | AccessPolicies.AccessDevicePostureRule
+    | ZeroTrustPolicies.AccessEmailRule
+    | ZeroTrustPolicies.AccessEmailListRule
+    | ZeroTrustPolicies.AccessDomainRule
+    | ZeroTrustPolicies.AccessEveryoneRule
+    | ZeroTrustPolicies.AccessIPRule
+    | ZeroTrustPolicies.AccessIPListRule
+    | ZeroTrustPolicies.AccessCertificateRule
+    | ZeroTrustPolicies.AccessAccessGroupRule
+    | ZeroTrustPolicies.AccessAzureGroupRule
+    | ZeroTrustPolicies.AccessGitHubOrganizationRule
+    | ZeroTrustPolicies.AccessGsuiteGroupRule
+    | ZeroTrustPolicies.AccessOktaGroupRule
+    | ZeroTrustPolicies.AccessSamlGroupRule
+    | ZeroTrustPolicies.AccessServiceTokenRule
+    | ZeroTrustPolicies.AccessAnyValidServiceTokenRule
+    | ZeroTrustPolicies.AccessExternalEvaluationRule
+    | ZeroTrustPolicies.AccessCountryRule
+    | ZeroTrustPolicies.AccessAuthenticationMethodRule
+    | ZeroTrustPolicies.AccessDevicePostureRule
   >;
 
   /**
@@ -260,25 +260,25 @@ export interface AccessPolicies {
    * the Include rules.
    */
   include?: Array<
-    | AccessPolicies.AccessEmailRule
-    | AccessPolicies.AccessEmailListRule
-    | AccessPolicies.AccessDomainRule
-    | AccessPolicies.AccessEveryoneRule
-    | AccessPolicies.AccessIPRule
-    | AccessPolicies.AccessIPListRule
-    | AccessPolicies.AccessCertificateRule
-    | AccessPolicies.AccessAccessGroupRule
-    | AccessPolicies.AccessAzureGroupRule
-    | AccessPolicies.AccessGitHubOrganizationRule
-    | AccessPolicies.AccessGsuiteGroupRule
-    | AccessPolicies.AccessOktaGroupRule
-    | AccessPolicies.AccessSamlGroupRule
-    | AccessPolicies.AccessServiceTokenRule
-    | AccessPolicies.AccessAnyValidServiceTokenRule
-    | AccessPolicies.AccessExternalEvaluationRule
-    | AccessPolicies.AccessCountryRule
-    | AccessPolicies.AccessAuthenticationMethodRule
-    | AccessPolicies.AccessDevicePostureRule
+    | ZeroTrustPolicies.AccessEmailRule
+    | ZeroTrustPolicies.AccessEmailListRule
+    | ZeroTrustPolicies.AccessDomainRule
+    | ZeroTrustPolicies.AccessEveryoneRule
+    | ZeroTrustPolicies.AccessIPRule
+    | ZeroTrustPolicies.AccessIPListRule
+    | ZeroTrustPolicies.AccessCertificateRule
+    | ZeroTrustPolicies.AccessAccessGroupRule
+    | ZeroTrustPolicies.AccessAzureGroupRule
+    | ZeroTrustPolicies.AccessGitHubOrganizationRule
+    | ZeroTrustPolicies.AccessGsuiteGroupRule
+    | ZeroTrustPolicies.AccessOktaGroupRule
+    | ZeroTrustPolicies.AccessSamlGroupRule
+    | ZeroTrustPolicies.AccessServiceTokenRule
+    | ZeroTrustPolicies.AccessAnyValidServiceTokenRule
+    | ZeroTrustPolicies.AccessExternalEvaluationRule
+    | ZeroTrustPolicies.AccessCountryRule
+    | ZeroTrustPolicies.AccessAuthenticationMethodRule
+    | ZeroTrustPolicies.AccessDevicePostureRule
   >;
 
   /**
@@ -313,25 +313,25 @@ export interface AccessPolicies {
    * meet all of the Require rules.
    */
   require?: Array<
-    | AccessPolicies.AccessEmailRule
-    | AccessPolicies.AccessEmailListRule
-    | AccessPolicies.AccessDomainRule
-    | AccessPolicies.AccessEveryoneRule
-    | AccessPolicies.AccessIPRule
-    | AccessPolicies.AccessIPListRule
-    | AccessPolicies.AccessCertificateRule
-    | AccessPolicies.AccessAccessGroupRule
-    | AccessPolicies.AccessAzureGroupRule
-    | AccessPolicies.AccessGitHubOrganizationRule
-    | AccessPolicies.AccessGsuiteGroupRule
-    | AccessPolicies.AccessOktaGroupRule
-    | AccessPolicies.AccessSamlGroupRule
-    | AccessPolicies.AccessServiceTokenRule
-    | AccessPolicies.AccessAnyValidServiceTokenRule
-    | AccessPolicies.AccessExternalEvaluationRule
-    | AccessPolicies.AccessCountryRule
-    | AccessPolicies.AccessAuthenticationMethodRule
-    | AccessPolicies.AccessDevicePostureRule
+    | ZeroTrustPolicies.AccessEmailRule
+    | ZeroTrustPolicies.AccessEmailListRule
+    | ZeroTrustPolicies.AccessDomainRule
+    | ZeroTrustPolicies.AccessEveryoneRule
+    | ZeroTrustPolicies.AccessIPRule
+    | ZeroTrustPolicies.AccessIPListRule
+    | ZeroTrustPolicies.AccessCertificateRule
+    | ZeroTrustPolicies.AccessAccessGroupRule
+    | ZeroTrustPolicies.AccessAzureGroupRule
+    | ZeroTrustPolicies.AccessGitHubOrganizationRule
+    | ZeroTrustPolicies.AccessGsuiteGroupRule
+    | ZeroTrustPolicies.AccessOktaGroupRule
+    | ZeroTrustPolicies.AccessSamlGroupRule
+    | ZeroTrustPolicies.AccessServiceTokenRule
+    | ZeroTrustPolicies.AccessAnyValidServiceTokenRule
+    | ZeroTrustPolicies.AccessExternalEvaluationRule
+    | ZeroTrustPolicies.AccessCountryRule
+    | ZeroTrustPolicies.AccessAuthenticationMethodRule
+    | ZeroTrustPolicies.AccessDevicePostureRule
   >;
 
   /**
@@ -344,7 +344,7 @@ export interface AccessPolicies {
   updated_at?: string;
 }
 
-export namespace AccessPolicies {
+export namespace ZeroTrustPolicies {
   /**
    * A group of email addresses that can approve a temporary authentication request.
    */
@@ -1311,7 +1311,7 @@ export namespace AccessPolicies {
   }
 }
 
-export type PolicyListResponse = Array<AccessPolicies>;
+export type PolicyListResponse = Array<ZeroTrustPolicies>;
 
 export interface PolicyDeleteResponse {
   /**
@@ -3581,7 +3581,7 @@ export interface PolicyGetParams {
 }
 
 export namespace Policies {
-  export import AccessPolicies = PoliciesAPI.AccessPolicies;
+  export import ZeroTrustPolicies = PoliciesAPI.ZeroTrustPolicies;
   export import PolicyListResponse = PoliciesAPI.PolicyListResponse;
   export import PolicyDeleteResponse = PoliciesAPI.PolicyDeleteResponse;
   export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
