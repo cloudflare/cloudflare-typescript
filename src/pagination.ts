@@ -267,7 +267,7 @@ export class CursorLimitPagination<Item>
 export type SinglePageResponse<Item> = Item[];
 
 export class SinglePage<Item> extends AbstractPage<Item> {
-  items: Array<Item>;
+  result: Array<Item>;
 
   constructor(
     client: APIClient,
@@ -277,11 +277,11 @@ export class SinglePage<Item> extends AbstractPage<Item> {
   ) {
     super(client, response, body, options);
 
-    this.items = body || [];
+    this.result = body || [];
   }
 
   getPaginatedItems(): Item[] {
-    return this.items ?? [];
+    return this.result ?? [];
   }
 
   // @deprecated Please use `nextPageInfo()` instead
