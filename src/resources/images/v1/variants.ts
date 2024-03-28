@@ -8,24 +8,24 @@ export class Variants extends APIResource {
   /**
    * Specify variants that allow you to resize images for different use cases.
    */
-  create(params: VariantCreateParams, options?: Core.RequestOptions): Core.APIPromise<ImageVariant> {
+  create(params: VariantCreateParams, options?: Core.RequestOptions): Core.APIPromise<V1ImageVariant> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/images/v1/variants`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ImageVariant }>
+      }) as Core.APIPromise<{ result: V1ImageVariant }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Lists existing variants.
    */
-  list(params: VariantListParams, options?: Core.RequestOptions): Core.APIPromise<ImageVariants> {
+  list(params: VariantListParams, options?: Core.RequestOptions): Core.APIPromise<V1ImageVariants> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/images/v1/variants`, options) as Core.APIPromise<{
-        result: ImageVariants;
+        result: V1ImageVariants;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -54,13 +54,13 @@ export class Variants extends APIResource {
     variantId: string,
     params: VariantEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ImageVariant> {
+  ): Core.APIPromise<V1ImageVariant> {
     const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/images/v1/variants/${variantId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ImageVariant }>
+      }) as Core.APIPromise<{ result: V1ImageVariant }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -71,22 +71,22 @@ export class Variants extends APIResource {
     variantId: string,
     params: VariantGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ImageVariant> {
+  ): Core.APIPromise<V1ImageVariant> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/images/v1/variants/${variantId}`,
         options,
-      ) as Core.APIPromise<{ result: ImageVariant }>
+      ) as Core.APIPromise<{ result: V1ImageVariant }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface ImageVariant {
-  variant?: ImageVariant.Variant;
+export interface V1ImageVariant {
+  variant?: V1ImageVariant.Variant;
 }
 
-export namespace ImageVariant {
+export namespace V1ImageVariant {
   export interface Variant {
     id: string;
 
@@ -131,11 +131,11 @@ export namespace ImageVariant {
   }
 }
 
-export interface ImageVariants {
-  variants?: ImageVariants.Variants;
+export interface V1ImageVariants {
+  variants?: V1ImageVariants.Variants;
 }
 
-export namespace ImageVariants {
+export namespace V1ImageVariants {
   export interface Variants {
     hero?: Variants.Hero;
   }
@@ -307,8 +307,8 @@ export interface VariantGetParams {
 }
 
 export namespace Variants {
-  export import ImageVariant = VariantsAPI.ImageVariant;
-  export import ImageVariants = VariantsAPI.ImageVariants;
+  export import V1ImageVariant = VariantsAPI.V1ImageVariant;
+  export import V1ImageVariants = VariantsAPI.V1ImageVariants;
   export import VariantDeleteResponse = VariantsAPI.VariantDeleteResponse;
   export import VariantCreateParams = VariantsAPI.VariantCreateParams;
   export import VariantListParams = VariantsAPI.VariantListParams;

@@ -247,8 +247,8 @@ export namespace V1 {
   export import ImagesImagesStats = StatsAPI.ImagesImagesStats;
   export import StatGetParams = StatsAPI.StatGetParams;
   export import Variants = VariantsAPI.Variants;
-  export import ImageVariant = VariantsAPI.ImageVariant;
-  export import ImageVariants = VariantsAPI.ImageVariants;
+  export import V1ImageVariant = VariantsAPI.V1ImageVariant;
+  export import V1ImageVariants = VariantsAPI.V1ImageVariants;
   export import VariantDeleteResponse = VariantsAPI.VariantDeleteResponse;
   export import VariantCreateParams = VariantsAPI.VariantCreateParams;
   export import VariantListParams = VariantsAPI.VariantListParams;
