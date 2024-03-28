@@ -15,7 +15,7 @@ export {
 export { RecommendationGetResponse, Recommendations } from './recommendations';
 export { SSL } from './ssl';
 export {
-  TLSCertificatesAndHostnamesVerification,
+  TLSVerificationSetting,
   VerificationEditResponse,
   VerificationGetResponse,
   VerificationEditParams,

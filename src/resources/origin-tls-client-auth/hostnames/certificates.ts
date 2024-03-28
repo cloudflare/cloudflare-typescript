@@ -13,13 +13,13 @@ export class Certificates extends APIResource {
   create(
     params: CertificateCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TLSCertificatesAndHostnamesSchemasCertificateObject> {
+  ): Core.APIPromise<OriginTLSClientCertificate> {
     const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/origin_tls_client_auth/hostnames/certificates`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: TLSCertificatesAndHostnamesSchemasCertificateObject }>
+      }) as Core.APIPromise<{ result: OriginTLSClientCertificate }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -46,13 +46,13 @@ export class Certificates extends APIResource {
     certificateId: string,
     params: CertificateDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TLSCertificatesAndHostnamesSchemasCertificateObject> {
+  ): Core.APIPromise<OriginTLSClientCertificate> {
     const { zone_id } = params;
     return (
       this._client.delete(
         `/zones/${zone_id}/origin_tls_client_auth/hostnames/certificates/${certificateId}`,
         options,
-      ) as Core.APIPromise<{ result: TLSCertificatesAndHostnamesSchemasCertificateObject }>
+      ) as Core.APIPromise<{ result: OriginTLSClientCertificate }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -63,18 +63,18 @@ export class Certificates extends APIResource {
     certificateId: string,
     params: CertificateGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TLSCertificatesAndHostnamesSchemasCertificateObject> {
+  ): Core.APIPromise<OriginTLSClientCertificate> {
     const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/origin_tls_client_auth/hostnames/certificates/${certificateId}`,
         options,
-      ) as Core.APIPromise<{ result: TLSCertificatesAndHostnamesSchemasCertificateObject }>
+      ) as Core.APIPromise<{ result: OriginTLSClientCertificate }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface TLSCertificatesAndHostnamesSchemasCertificateObject {
+export interface OriginTLSClientCertificate {
   /**
    * Identifier
    */
@@ -123,7 +123,7 @@ export interface TLSCertificatesAndHostnamesSchemasCertificateObject {
   uploaded_on?: string;
 }
 
-export type CertificateListResponse = Array<HostnamesAPI.TLSCertificatesAndHostnamesHostnameCertidObject>;
+export type CertificateListResponse = Array<HostnamesAPI.OriginTLSClientCertificateID>;
 
 export interface CertificateCreateParams {
   /**
@@ -164,7 +164,7 @@ export interface CertificateGetParams {
 }
 
 export namespace Certificates {
-  export import TLSCertificatesAndHostnamesSchemasCertificateObject = CertificatesAPI.TLSCertificatesAndHostnamesSchemasCertificateObject;
+  export import OriginTLSClientCertificate = CertificatesAPI.OriginTLSClientCertificate;
   export import CertificateListResponse = CertificatesAPI.CertificateListResponse;
   export import CertificateCreateParams = CertificatesAPI.CertificateCreateParams;
   export import CertificateListParams = CertificatesAPI.CertificateListParams;

@@ -18,7 +18,7 @@ export class Sinkholes extends APIResource {
   }
 }
 
-export interface IntelSinkholesSinkholeItem {
+export interface IntelSinkholeItem {
   /**
    * The unique identifier for the sinkhole
    */
@@ -55,7 +55,7 @@ export interface IntelSinkholesSinkholeItem {
   r2_id?: string;
 }
 
-export type SinkholeListResponse = Array<IntelSinkholesSinkholeItem>;
+export type SinkholeListResponse = Array<IntelSinkholeItem>;
 
 export interface SinkholeListParams {
   /**
@@ -65,7 +65,7 @@ export interface SinkholeListParams {
 }
 
 export namespace Sinkholes {
-  export import IntelSinkholesSinkholeItem = SinkholesAPI.IntelSinkholesSinkholeItem;
+  export import IntelSinkholeItem = SinkholesAPI.IntelSinkholeItem;
   export import SinkholeListResponse = SinkholesAPI.SinkholeListResponse;
   export import SinkholeListParams = SinkholesAPI.SinkholeListParams;
 }

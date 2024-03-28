@@ -37,6 +37,6 @@ export namespace LoadBalancers {
   export import PoolEditParams = PoolsAPI.PoolEditParams;
   export import PoolPreviewParams = PoolsAPI.PoolPreviewParams;
   export import Preview = PreviewAPI.Preview;
-  export import LoadBalancingPreviewResult = PreviewAPI.LoadBalancingPreviewResult;
+  export import LoadBalancingPreview = PreviewAPI.LoadBalancingPreview;
   export import Analytics = AnalyticsAPI.Analytics;
 }

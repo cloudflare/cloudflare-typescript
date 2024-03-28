@@ -400,7 +400,7 @@ export namespace Stream {
   export import StreamDeleteParams = StreamAPI.StreamDeleteParams;
   export import StreamGetParams = StreamAPI.StreamGetParams;
   export import AudioTracks = AudioTracksAPI.AudioTracks;
-  export import StreamAdditionalAudio = AudioTracksAPI.StreamAdditionalAudio;
+  export import StreamAudio = AudioTracksAPI.StreamAudio;
   export import AudioTrackDeleteResponse = AudioTracksAPI.AudioTrackDeleteResponse;
   export import AudioTrackGetResponse = AudioTracksAPI.AudioTrackGetResponse;
   export import AudioTrackDeleteParams = AudioTracksAPI.AudioTrackDeleteParams;

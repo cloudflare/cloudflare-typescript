@@ -23,17 +23,17 @@ export class Plans extends APIResource {
     zoneIdentifier: string,
     planIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<BillSubsAPIAvailableRatePlan> {
+  ): Core.APIPromise<AvailableRatePlan> {
     return (
       this._client.get(
         `/zones/${zoneIdentifier}/available_plans/${planIdentifier}`,
         options,
-      ) as Core.APIPromise<{ result: BillSubsAPIAvailableRatePlan }>
+      ) as Core.APIPromise<{ result: AvailableRatePlan }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface BillSubsAPIAvailableRatePlan {
+export interface AvailableRatePlan {
   /**
    * Identifier
    */
@@ -85,9 +85,9 @@ export interface BillSubsAPIAvailableRatePlan {
   price?: number;
 }
 
-export type PlanListResponse = Array<BillSubsAPIAvailableRatePlan>;
+export type PlanListResponse = Array<AvailableRatePlan>;
 
 export namespace Plans {
-  export import BillSubsAPIAvailableRatePlan = PlansAPI.BillSubsAPIAvailableRatePlan;
+  export import AvailableRatePlan = PlansAPI.AvailableRatePlan;
   export import PlanListResponse = PlansAPI.PlanListResponse;
 }

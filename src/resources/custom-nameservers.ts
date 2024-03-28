@@ -11,11 +11,11 @@ export class CustomNameservers extends APIResource {
   create(
     params: CustomNameserverCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DNSCustomNameserversCustomNS> {
+  ): Core.APIPromise<CustomNameserver> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/custom_ns`, { body, ...options }) as Core.APIPromise<{
-        result: DNSCustomNameserversCustomNS;
+        result: CustomNameserver;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -85,11 +85,11 @@ export class CustomNameservers extends APIResource {
 /**
  * A single account custom nameserver.
  */
-export interface DNSCustomNameserversCustomNS {
+export interface CustomNameserver {
   /**
    * A and AAAA records associated with the nameserver.
    */
-  dns_records: Array<DNSCustomNameserversCustomNS.DNSRecord>;
+  dns_records: Array<CustomNameserver.DNSRecord>;
 
   /**
    * The FQDN of the name server.
@@ -112,7 +112,7 @@ export interface DNSCustomNameserversCustomNS {
   ns_set?: number;
 }
 
-export namespace DNSCustomNameserversCustomNS {
+export namespace CustomNameserver {
   export interface DNSRecord {
     /**
      * DNS record type.
@@ -130,9 +130,9 @@ export type CustomNameserverDeleteResponse = unknown | Array<unknown> | string;
 
 export type CustomNameserverAvailabiltyResponse = Array<string>;
 
-export type CustomNameserverGetResponse = Array<DNSCustomNameserversCustomNS>;
+export type CustomNameserverGetResponse = Array<CustomNameserver>;
 
-export type CustomNameserverVerifyResponse = Array<DNSCustomNameserversCustomNS>;
+export type CustomNameserverVerifyResponse = Array<CustomNameserver>;
 
 export interface CustomNameserverCreateParams {
   /**
@@ -180,7 +180,7 @@ export interface CustomNameserverVerifyParams {
 }
 
 export namespace CustomNameservers {
-  export import DNSCustomNameserversCustomNS = CustomNameserversAPI.DNSCustomNameserversCustomNS;
+  export import CustomNameserver = CustomNameserversAPI.CustomNameserver;
   export import CustomNameserverDeleteResponse = CustomNameserversAPI.CustomNameserverDeleteResponse;
   export import CustomNameserverAvailabiltyResponse = CustomNameserversAPI.CustomNameserverAvailabiltyResponse;
   export import CustomNameserverGetResponse = CustomNameserversAPI.CustomNameserverGetResponse;

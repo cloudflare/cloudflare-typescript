@@ -13,7 +13,7 @@ export {
 } from './downloads';
 export { EmbedGetResponse, EmbedGetParams, Embed } from './embed';
 export {
-  StreamAdditionalAudio,
+  StreamAudio,
   AudioTrackDeleteResponse,
   AudioTrackGetResponse,
   AudioTrackDeleteParams,

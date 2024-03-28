@@ -21,12 +21,12 @@ export class Events extends APIResource {
     waitingRoomId: string,
     body: EventCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WaitingroomEventResult> {
+  ): Core.APIPromise<WaitingroomEvent> {
     return (
       this._client.post(`/zones/${zoneIdentifier}/waiting_rooms/${waitingRoomId}/events`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: WaitingroomEventResult }>
+      }) as Core.APIPromise<{ result: WaitingroomEvent }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -39,12 +39,12 @@ export class Events extends APIResource {
     eventId: string,
     body: EventUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WaitingroomEventResult> {
+  ): Core.APIPromise<WaitingroomEvent> {
     return (
       this._client.put(`/zones/${zoneIdentifier}/waiting_rooms/${waitingRoomId}/events/${eventId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: WaitingroomEventResult }>
+      }) as Core.APIPromise<{ result: WaitingroomEvent }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -90,12 +90,12 @@ export class Events extends APIResource {
     eventId: string,
     body: EventEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WaitingroomEventResult> {
+  ): Core.APIPromise<WaitingroomEvent> {
     return (
       this._client.patch(`/zones/${zoneIdentifier}/waiting_rooms/${waitingRoomId}/events/${eventId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: WaitingroomEventResult }>
+      }) as Core.APIPromise<{ result: WaitingroomEvent }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -107,17 +107,17 @@ export class Events extends APIResource {
     waitingRoomId: string,
     eventId: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WaitingroomEventResult> {
+  ): Core.APIPromise<WaitingroomEvent> {
     return (
       this._client.get(
         `/zones/${zoneIdentifier}/waiting_rooms/${waitingRoomId}/events/${eventId}`,
         options,
-      ) as Core.APIPromise<{ result: WaitingroomEventResult }>
+      ) as Core.APIPromise<{ result: WaitingroomEvent }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface WaitingroomEventResult {
+export interface WaitingroomEvent {
   id?: string;
 
   created_on?: string;
@@ -209,7 +209,7 @@ export interface WaitingroomEventResult {
   total_active_users?: number | null;
 }
 
-export type EventListResponse = Array<WaitingroomEventResult>;
+export type EventListResponse = Array<WaitingroomEvent>;
 
 export interface EventDeleteResponse {
   id?: string;
@@ -474,12 +474,12 @@ export interface EventEditParams {
 }
 
 export namespace Events {
-  export import WaitingroomEventResult = EventsAPI.WaitingroomEventResult;
+  export import WaitingroomEvent = EventsAPI.WaitingroomEvent;
   export import EventListResponse = EventsAPI.EventListResponse;
   export import EventDeleteResponse = EventsAPI.EventDeleteResponse;
   export import EventCreateParams = EventsAPI.EventCreateParams;
   export import EventUpdateParams = EventsAPI.EventUpdateParams;
   export import EventEditParams = EventsAPI.EventEditParams;
   export import Details = DetailsAPI.Details;
-  export import WaitingroomEventDetailsResult = DetailsAPI.WaitingroomEventDetailsResult;
+  export import WaitingroomEventDetails = DetailsAPI.WaitingroomEventDetails;
 }

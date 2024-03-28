@@ -2,11 +2,11 @@
 
 export { Firewall } from './firewall';
 export {
-  LegacyJhsRule,
+  FirewallRule,
   AccessRuleDeleteResponse,
   AccessRuleCreateParams,
   AccessRuleListParams,
   AccessRuleEditParams,
-  LegacyJhsRulesV4PagePaginationArray,
+  FirewallRulesV4PagePaginationArray,
   AccessRules,
 } from './access-rules';

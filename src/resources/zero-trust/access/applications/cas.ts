@@ -166,7 +166,7 @@ export class CAs extends APIResource {
   }
 }
 
-export interface AccessCA {
+export interface ZeroTrustCA {
   /**
    * The ID of the CA.
    */
@@ -186,7 +186,7 @@ export interface AccessCA {
 
 export type CACreateResponse = unknown | string;
 
-export type CAListResponse = Array<AccessCA>;
+export type CAListResponse = Array<ZeroTrustCA>;
 
 export interface CADeleteResponse {
   /**
@@ -246,7 +246,7 @@ export interface CAGetParams {
 }
 
 export namespace CAs {
-  export import AccessCA = CAsAPI.AccessCA;
+  export import ZeroTrustCA = CAsAPI.ZeroTrustCA;
   export import CACreateResponse = CAsAPI.CACreateResponse;
   export import CAListResponse = CAsAPI.CAListResponse;
   export import CADeleteResponse = CAsAPI.CADeleteResponse;

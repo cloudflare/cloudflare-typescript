@@ -2,7 +2,7 @@
 
 export { CertificateAuthorities } from './certificate-authorities';
 export {
-  TLSCertificatesAndHostnamesHostnameAssociation,
+  TLSHostnameAssociation,
   HostnameAssociationUpdateParams,
   HostnameAssociationGetParams,
   HostnameAssociations,

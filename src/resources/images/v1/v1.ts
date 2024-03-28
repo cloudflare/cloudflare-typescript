@@ -21,13 +21,13 @@ export class V1 extends APIResource {
    * (multipart/form-data) request. An image can be uploaded by sending an image file
    * or passing an accessible to an API url.
    */
-  create(params: V1CreateParams, options?: Core.RequestOptions): Core.APIPromise<ImagesImage> {
+  create(params: V1CreateParams, options?: Core.RequestOptions): Core.APIPromise<Image> {
     const { account_id, ...body } = params;
     return (
       this._client.post(
         `/accounts/${account_id}/images/v1`,
         multipartFormRequestOptions({ body, ...options }),
-      ) as Core.APIPromise<{ result: ImagesImage }>
+      ) as Core.APIPromise<{ result: Image }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -67,24 +67,24 @@ export class V1 extends APIResource {
    * Update image access control. On access control change, all copies of the image
    * are purged from cache.
    */
-  edit(imageId: string, params: V1EditParams, options?: Core.RequestOptions): Core.APIPromise<ImagesImage> {
+  edit(imageId: string, params: V1EditParams, options?: Core.RequestOptions): Core.APIPromise<Image> {
     const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/images/v1/${imageId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ImagesImage }>
+      }) as Core.APIPromise<{ result: Image }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetch details for a single image.
    */
-  get(imageId: string, params: V1GetParams, options?: Core.RequestOptions): Core.APIPromise<ImagesImage> {
+  get(imageId: string, params: V1GetParams, options?: Core.RequestOptions): Core.APIPromise<Image> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/images/v1/${imageId}`, options) as Core.APIPromise<{
-        result: ImagesImage;
+        result: Image;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -92,7 +92,7 @@ export class V1 extends APIResource {
 
 export class V1ListResponsesV4PagePagination extends V4PagePagination<V1ListResponse> {}
 
-export interface ImagesImage {
+export interface Image {
   /**
    * Image unique identifier.
    */
@@ -153,7 +153,7 @@ export namespace V1ListResponse {
   }
 
   export interface Result {
-    images?: Array<V1API.ImagesImage>;
+    images?: Array<V1API.Image>;
   }
 }
 
@@ -229,7 +229,7 @@ export interface V1GetParams {
 }
 
 export namespace V1 {
-  export import ImagesImage = V1API.ImagesImage;
+  export import Image = V1API.Image;
   export import V1ListResponse = V1API.V1ListResponse;
   export import V1DeleteResponse = V1API.V1DeleteResponse;
   export import V1ListResponsesV4PagePagination = V1API.V1ListResponsesV4PagePagination;

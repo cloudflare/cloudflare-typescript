@@ -11,13 +11,13 @@ export class AutomaticHTTPSRewrites extends APIResource {
   edit(
     params: AutomaticHTTPSRewriteEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZonesAutomaticHTTPSRewrites> {
+  ): Core.APIPromise<ZoneSettingAutomaticHTTPSRewrites> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/automatic_https_rewrites`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZonesAutomaticHTTPSRewrites }>
+      }) as Core.APIPromise<{ result: ZoneSettingAutomaticHTTPSRewrites }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -27,11 +27,11 @@ export class AutomaticHTTPSRewrites extends APIResource {
   get(
     params: AutomaticHTTPSRewriteGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZonesAutomaticHTTPSRewrites> {
+  ): Core.APIPromise<ZoneSettingAutomaticHTTPSRewrites> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/automatic_https_rewrites`, options) as Core.APIPromise<{
-        result: ZonesAutomaticHTTPSRewrites;
+        result: ZoneSettingAutomaticHTTPSRewrites;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -40,7 +40,7 @@ export class AutomaticHTTPSRewrites extends APIResource {
 /**
  * Enable the Automatic HTTPS Rewrites feature for this zone.
  */
-export interface ZonesAutomaticHTTPSRewrites {
+export interface ZoneSettingAutomaticHTTPSRewrites {
   /**
    * ID of the zone setting.
    */
@@ -84,7 +84,7 @@ export interface AutomaticHTTPSRewriteGetParams {
 }
 
 export namespace AutomaticHTTPSRewrites {
-  export import ZonesAutomaticHTTPSRewrites = AutomaticHTTPSRewritesAPI.ZonesAutomaticHTTPSRewrites;
+  export import ZoneSettingAutomaticHTTPSRewrites = AutomaticHTTPSRewritesAPI.ZoneSettingAutomaticHTTPSRewrites;
   export import AutomaticHTTPSRewriteEditParams = AutomaticHTTPSRewritesAPI.AutomaticHTTPSRewriteEditParams;
   export import AutomaticHTTPSRewriteGetParams = AutomaticHTTPSRewritesAPI.AutomaticHTTPSRewriteGetParams;
 }

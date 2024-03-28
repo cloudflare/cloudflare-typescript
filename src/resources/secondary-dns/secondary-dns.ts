@@ -19,7 +19,7 @@ export class SecondaryDNS extends APIResource {
 
 export namespace SecondaryDNS {
   export import ForceAXFR = ForceAXFRAPI.ForceAXFR;
-  export import SecondaryDNSForceResult = ForceAXFRAPI.SecondaryDNSForceResult;
+  export import SecondaryDNSForce = ForceAXFRAPI.SecondaryDNSForce;
   export import ForceAXFRCreateParams = ForceAXFRAPI.ForceAXFRCreateParams;
   export import Incoming = IncomingAPI.Incoming;
   export import IncomingCreateResponse = IncomingAPI.IncomingCreateResponse;
@@ -31,9 +31,8 @@ export namespace SecondaryDNS {
   export import IncomingDeleteParams = IncomingAPI.IncomingDeleteParams;
   export import IncomingGetParams = IncomingAPI.IncomingGetParams;
   export import Outgoing = OutgoingAPI.Outgoing;
-  export import SecondaryDNSDisableTransferResult = OutgoingAPI.SecondaryDNSDisableTransferResult;
-  export import SecondaryDNSEnableTransferResult = OutgoingAPI.SecondaryDNSEnableTransferResult;
-  export import SecondaryDNSSchemasForceResult = OutgoingAPI.SecondaryDNSSchemasForceResult;
+  export import SecondaryDNSDisableTransfer = OutgoingAPI.SecondaryDNSDisableTransfer;
+  export import SecondaryDNSEnableTransfer = OutgoingAPI.SecondaryDNSEnableTransfer;
   export import OutgoingCreateResponse = OutgoingAPI.OutgoingCreateResponse;
   export import OutgoingUpdateResponse = OutgoingAPI.OutgoingUpdateResponse;
   export import OutgoingDeleteResponse = OutgoingAPI.OutgoingDeleteResponse;

@@ -48,7 +48,7 @@ export class ServiceTokens extends APIResource {
     uuid: string,
     params: ServiceTokenUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessServiceTokens> {
+  ): Core.APIPromise<ZeroTrustServiceTokens> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -70,7 +70,7 @@ export class ServiceTokens extends APIResource {
       this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/service_tokens/${uuid}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: AccessServiceTokens }>
+      }) as Core.APIPromise<{ result: ZeroTrustServiceTokens }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -121,13 +121,13 @@ export class ServiceTokens extends APIResource {
     uuid: string,
     params?: ServiceTokenDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessServiceTokens>;
-  delete(uuid: string, options?: Core.RequestOptions): Core.APIPromise<AccessServiceTokens>;
+  ): Core.APIPromise<ZeroTrustServiceTokens>;
+  delete(uuid: string, options?: Core.RequestOptions): Core.APIPromise<ZeroTrustServiceTokens>;
   delete(
     uuid: string,
     params: ServiceTokenDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessServiceTokens> {
+  ): Core.APIPromise<ZeroTrustServiceTokens> {
     if (isRequestOptions(params)) {
       return this.delete(uuid, {}, params);
     }
@@ -152,7 +152,7 @@ export class ServiceTokens extends APIResource {
       this._client.delete(
         `/${accountOrZone}/${accountOrZoneId}/access/service_tokens/${uuid}`,
         options,
-      ) as Core.APIPromise<{ result: AccessServiceTokens }>
+      ) as Core.APIPromise<{ result: ZeroTrustServiceTokens }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -163,12 +163,12 @@ export class ServiceTokens extends APIResource {
     identifier: string,
     uuid: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessServiceTokens> {
+  ): Core.APIPromise<ZeroTrustServiceTokens> {
     return (
       this._client.post(
         `/accounts/${identifier}/access/service_tokens/${uuid}/refresh`,
         options,
-      ) as Core.APIPromise<{ result: AccessServiceTokens }>
+      ) as Core.APIPromise<{ result: ZeroTrustServiceTokens }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -189,7 +189,7 @@ export class ServiceTokens extends APIResource {
   }
 }
 
-export interface AccessServiceTokens {
+export interface ZeroTrustServiceTokens {
   /**
    * The ID of the service token.
    */
@@ -253,7 +253,7 @@ export interface ServiceTokenCreateResponse {
   updated_at?: string;
 }
 
-export type ServiceTokenListResponse = Array<AccessServiceTokens>;
+export type ServiceTokenListResponse = Array<ZeroTrustServiceTokens>;
 
 export interface ServiceTokenRotateResponse {
   /**
@@ -367,7 +367,7 @@ export interface ServiceTokenDeleteParams {
 }
 
 export namespace ServiceTokens {
-  export import AccessServiceTokens = ServiceTokensAPI.AccessServiceTokens;
+  export import ZeroTrustServiceTokens = ServiceTokensAPI.ZeroTrustServiceTokens;
   export import ServiceTokenCreateResponse = ServiceTokensAPI.ServiceTokenCreateResponse;
   export import ServiceTokenListResponse = ServiceTokensAPI.ServiceTokenListResponse;
   export import ServiceTokenRotateResponse = ServiceTokensAPI.ServiceTokenRotateResponse;

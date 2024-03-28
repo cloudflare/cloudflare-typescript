@@ -2,27 +2,6 @@
 
 export { Access } from './access/index';
 export {
-  AccessIdentityProviders,
-  IdentityProviderListResponse,
-  IdentityProviderDeleteResponse,
-  IdentityProviderCreateParams,
-  IdentityProviderUpdateParams,
-  IdentityProviderListParams,
-  IdentityProviderDeleteParams,
-  IdentityProviderGetParams,
-  IdentityProviders,
-} from './identity-providers';
-export {
-  AccessOrganizations,
-  OrganizationRevokeUsersResponse,
-  OrganizationCreateParams,
-  OrganizationUpdateParams,
-  OrganizationListParams,
-  OrganizationRevokeUsersParams,
-  Organizations,
-} from './organizations';
-export { AccessSeats, SeatEditResponse, SeatEditParams, Seats } from './seats';
-export {
   ConnectivitySettingEditResponse,
   ConnectivitySettingGetResponse,
   ConnectivitySettingEditParams,
@@ -40,14 +19,6 @@ export {
 } from './gateway/index';
 export { Networks } from './networks/index';
 export {
-  TeamsDevicesDevices,
-  DeviceListResponse,
-  DeviceGetResponse,
-  DeviceListParams,
-  DeviceGetParams,
-  Devices,
-} from './devices/index';
-export {
   TunnelArgoTunnel,
   TunnelListResponse,
   TunnelEditResponse,
@@ -60,3 +31,32 @@ export {
   Tunnels,
 } from './tunnels/index';
 export { ZeroTrust } from './zero-trust';
+export {
+  ZeroTrustDevices,
+  DeviceListResponse,
+  DeviceGetResponse,
+  DeviceListParams,
+  DeviceGetParams,
+  Devices,
+} from './devices/index';
+export {
+  ZeroTrustIdentityProviders,
+  IdentityProviderListResponse,
+  IdentityProviderDeleteResponse,
+  IdentityProviderCreateParams,
+  IdentityProviderUpdateParams,
+  IdentityProviderListParams,
+  IdentityProviderDeleteParams,
+  IdentityProviderGetParams,
+  IdentityProviders,
+} from './identity-providers';
+export {
+  ZeroTrustOrganizations,
+  OrganizationRevokeUsersResponse,
+  OrganizationCreateParams,
+  OrganizationUpdateParams,
+  OrganizationListParams,
+  OrganizationRevokeUsersParams,
+  Organizations,
+} from './organizations';
+export { ZeroTrustSeats, SeatEditResponse, SeatEditParams, Seats } from './seats';

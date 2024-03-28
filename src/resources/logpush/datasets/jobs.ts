@@ -50,7 +50,7 @@ export class Jobs extends APIResource {
   }
 }
 
-export interface LogpushLogpushJob {
+export interface LogpushJob {
   /**
    * Unique id of the job.
    */
@@ -123,10 +123,10 @@ export interface LogpushLogpushJob {
    * The structured replacement for `logpull_options`. When including this field, the
    * `logpull_option` field will be ignored.
    */
-  output_options?: LogpushLogpushJob.OutputOptions | null;
+  output_options?: LogpushJob.OutputOptions | null;
 }
 
-export namespace LogpushLogpushJob {
+export namespace LogpushJob {
   /**
    * The structured replacement for `logpull_options`. When including this field, the
    * `logpull_option` field will be ignored.
@@ -204,7 +204,7 @@ export namespace LogpushLogpushJob {
   }
 }
 
-export type JobGetResponse = Array<LogpushLogpushJob | null>;
+export type JobGetResponse = Array<LogpushJob | null>;
 
 export interface JobGetParams {
   /**
@@ -219,7 +219,7 @@ export interface JobGetParams {
 }
 
 export namespace Jobs {
-  export import LogpushLogpushJob = JobsAPI.LogpushLogpushJob;
+  export import LogpushJob = JobsAPI.LogpushJob;
   export import JobGetResponse = JobsAPI.JobGetResponse;
   export import JobGetParams = JobsAPI.JobGetParams;
 }

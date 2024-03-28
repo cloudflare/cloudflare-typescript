@@ -24,9 +24,9 @@ export {
   ACLs,
 } from './acls';
 export {
-  SecondaryDNSDisableTransferResult,
-  SecondaryDNSEnableTransferResult,
-  SecondaryDNSSchemasForceResult,
+  SecondaryDNSDisableTransfer,
+  SecondaryDNSEnableTransfer,
+  SecondaryDNSForce,
   OutgoingCreateResponse,
   OutgoingUpdateResponse,
   OutgoingDeleteResponse,
@@ -40,7 +40,7 @@ export {
   OutgoingGetParams,
   Outgoing,
 } from './outgoing/index';
-export { SecondaryDNSForceResult, ForceAXFRCreateParams, ForceAXFR } from './force-axfr';
+export { SecondaryDNSForce, ForceAXFRCreateParams, ForceAXFR } from './force-axfr';
 export {
   SecondaryDNSPeer,
   PeerListResponse,

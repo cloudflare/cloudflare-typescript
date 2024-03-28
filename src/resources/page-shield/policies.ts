@@ -8,10 +8,7 @@ export class Policies extends APIResource {
   /**
    * Create a Page Shield policy.
    */
-  create(
-    params: PolicyCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PageShieldPageshieldPolicy> {
+  create(params: PolicyCreateParams, options?: Core.RequestOptions): Core.APIPromise<PageShieldPolicy> {
     const { zone_id, ...body } = params;
     return this._client.post(`/zones/${zone_id}/page_shield/policies`, { body, ...options });
   }
@@ -23,7 +20,7 @@ export class Policies extends APIResource {
     policyId: string,
     params: PolicyUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PageShieldPageshieldPolicy> {
+  ): Core.APIPromise<PageShieldPolicy> {
     const { zone_id, ...body } = params;
     return this._client.put(`/zones/${zone_id}/page_shield/policies/${policyId}`, { body, ...options });
   }
@@ -58,13 +55,13 @@ export class Policies extends APIResource {
     policyId: string,
     params: PolicyGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PageShieldPageshieldPolicy> {
+  ): Core.APIPromise<PageShieldPolicy> {
     const { zone_id } = params;
     return this._client.get(`/zones/${zone_id}/page_shield/policies/${policyId}`, options);
   }
 }
 
-export interface PageShieldPageshieldPolicy {
+export interface PageShieldPolicy {
   /**
    * The ID of the policy
    */
@@ -97,7 +94,7 @@ export interface PageShieldPageshieldPolicy {
   value?: string;
 }
 
-export type PolicyListResponse = Array<PageShieldPageshieldPolicy>;
+export type PolicyListResponse = Array<PageShieldPolicy>;
 
 export interface PolicyCreateParams {
   /**
@@ -187,7 +184,7 @@ export interface PolicyGetParams {
 }
 
 export namespace Policies {
-  export import PageShieldPageshieldPolicy = PoliciesAPI.PageShieldPageshieldPolicy;
+  export import PageShieldPolicy = PoliciesAPI.PageShieldPolicy;
   export import PolicyListResponse = PoliciesAPI.PolicyListResponse;
   export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
   export import PolicyUpdateParams = PoliciesAPI.PolicyUpdateParams;

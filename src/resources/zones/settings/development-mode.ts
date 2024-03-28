@@ -16,13 +16,13 @@ export class DevelopmentMode extends APIResource {
   edit(
     params: DevelopmentModeEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZonesDevelopmentMode> {
+  ): Core.APIPromise<ZoneSettingDevelopmentMode> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/development_mode`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZonesDevelopmentMode }>
+      }) as Core.APIPromise<{ result: ZoneSettingDevelopmentMode }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -37,11 +37,11 @@ export class DevelopmentMode extends APIResource {
   get(
     params: DevelopmentModeGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZonesDevelopmentMode> {
+  ): Core.APIPromise<ZoneSettingDevelopmentMode> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/development_mode`, options) as Core.APIPromise<{
-        result: ZonesDevelopmentMode;
+        result: ZoneSettingDevelopmentMode;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -55,7 +55,7 @@ export class DevelopmentMode extends APIResource {
  * see those changes right away. Once entered, development mode will last for 3
  * hours and then automatically toggle off.
  */
-export interface ZonesDevelopmentMode {
+export interface ZoneSettingDevelopmentMode {
   /**
    * ID of the zone setting.
    */
@@ -105,7 +105,7 @@ export interface DevelopmentModeGetParams {
 }
 
 export namespace DevelopmentMode {
-  export import ZonesDevelopmentMode = DevelopmentModeAPI.ZonesDevelopmentMode;
+  export import ZoneSettingDevelopmentMode = DevelopmentModeAPI.ZoneSettingDevelopmentMode;
   export import DevelopmentModeEditParams = DevelopmentModeAPI.DevelopmentModeEditParams;
   export import DevelopmentModeGetParams = DevelopmentModeAPI.DevelopmentModeGetParams;
 }
