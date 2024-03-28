@@ -11,14 +11,14 @@ export class MagicNetworkMonitoring extends APIResource {
 
 export namespace MagicNetworkMonitoring {
   export import Configs = ConfigsAPI.Configs;
-  export import MagicVisibilityMNMConfig = ConfigsAPI.MagicVisibilityMNMConfig;
+  export import MagicNetworkMonitoringConfig = ConfigsAPI.MagicNetworkMonitoringConfig;
   export import ConfigCreateParams = ConfigsAPI.ConfigCreateParams;
   export import ConfigUpdateParams = ConfigsAPI.ConfigUpdateParams;
   export import ConfigDeleteParams = ConfigsAPI.ConfigDeleteParams;
   export import ConfigEditParams = ConfigsAPI.ConfigEditParams;
   export import ConfigGetParams = ConfigsAPI.ConfigGetParams;
   export import Rules = RulesAPI.Rules;
-  export import MagicVisibilityMNMRule = RulesAPI.MagicVisibilityMNMRule;
+  export import MagicNetworkMonitoringRule = RulesAPI.MagicNetworkMonitoringRule;
   export import RuleListResponse = RulesAPI.RuleListResponse;
   export import RuleCreateParams = RulesAPI.RuleCreateParams;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;

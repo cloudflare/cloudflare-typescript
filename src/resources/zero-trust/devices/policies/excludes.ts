@@ -55,7 +55,7 @@ export class Excludes extends APIResource {
   }
 }
 
-export interface TeamsDevicesSplitTunnel {
+export interface DevicesSplitTunnel {
   /**
    * The address in CIDR format to exclude from the tunnel. If `address` is present,
    * `host` must not be present.
@@ -74,11 +74,11 @@ export interface TeamsDevicesSplitTunnel {
   host?: string;
 }
 
-export type ExcludeUpdateResponse = Array<TeamsDevicesSplitTunnel>;
+export type ExcludeUpdateResponse = Array<DevicesSplitTunnel>;
 
-export type ExcludeListResponse = Array<TeamsDevicesSplitTunnel>;
+export type ExcludeListResponse = Array<DevicesSplitTunnel>;
 
-export type ExcludeGetResponse = Array<TeamsDevicesSplitTunnel>;
+export type ExcludeGetResponse = Array<DevicesSplitTunnel>;
 
 export interface ExcludeUpdateParams {
   /**
@@ -89,7 +89,7 @@ export interface ExcludeUpdateParams {
   /**
    * Body param:
    */
-  body: Array<TeamsDevicesSplitTunnel>;
+  body: Array<DevicesSplitTunnel>;
 }
 
 export interface ExcludeListParams {
@@ -101,7 +101,7 @@ export interface ExcludeGetParams {
 }
 
 export namespace Excludes {
-  export import TeamsDevicesSplitTunnel = ExcludesAPI.TeamsDevicesSplitTunnel;
+  export import DevicesSplitTunnel = ExcludesAPI.DevicesSplitTunnel;
   export import ExcludeUpdateResponse = ExcludesAPI.ExcludeUpdateResponse;
   export import ExcludeListResponse = ExcludesAPI.ExcludeListResponse;
   export import ExcludeGetResponse = ExcludesAPI.ExcludeGetResponse;

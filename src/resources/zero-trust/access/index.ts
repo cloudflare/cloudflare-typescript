@@ -1,8 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export { Access } from './access';
+export { KeyUpdateResponse, KeyGetResponse, KeyRotateResponse, KeyUpdateParams, Keys } from './keys';
+export { Logs } from './logs/index';
 export {
-  AccessApps,
+  ZeroTrustApps,
   ApplicationListResponse,
   ApplicationDeleteResponse,
   ApplicationRevokeTokensResponse,
@@ -14,9 +16,9 @@ export {
   ApplicationRevokeTokensParams,
   Applications,
 } from './applications/index';
-export { AccessBookmarks, BookmarkListResponse, BookmarkDeleteResponse, Bookmarks } from './bookmarks';
+export { ZeroTrustBookmarks, BookmarkListResponse, BookmarkDeleteResponse, Bookmarks } from './bookmarks';
 export {
-  AccessCertificates,
+  ZeroTrustCertificates,
   CertificateListResponse,
   CertificateDeleteResponse,
   CertificateCreateParams,
@@ -27,8 +29,8 @@ export {
   Certificates,
 } from './certificates/index';
 export {
-  AccessCustomPage,
-  AccessCustomPageWithoutHTML,
+  ZeroTrustCustomPage,
+  ZeroTrustCustomPageWithoutHTML,
   CustomPageListResponse,
   CustomPageDeleteResponse,
   CustomPageCreateParams,
@@ -36,7 +38,7 @@ export {
   CustomPages,
 } from './custom-pages';
 export {
-  AccessGroups,
+  ZeroTrustGroups,
   GroupListResponse,
   GroupDeleteResponse,
   GroupCreateParams,
@@ -47,7 +49,7 @@ export {
   Groups,
 } from './groups';
 export {
-  AccessServiceTokens,
+  ZeroTrustServiceTokens,
   ServiceTokenCreateResponse,
   ServiceTokenListResponse,
   ServiceTokenRotateResponse,
@@ -58,13 +60,11 @@ export {
   ServiceTokens,
 } from './service-tokens';
 export {
-  AccessTag,
+  ZeroTrustTag,
   TagListResponse,
   TagDeleteResponse,
   TagCreateParams,
   TagUpdateParams,
   Tags,
 } from './tags';
-export { AccessUsers, UserListResponse, Users } from './users/index';
-export { KeyUpdateResponse, KeyGetResponse, KeyRotateResponse, KeyUpdateParams, Keys } from './keys';
-export { Logs } from './logs/index';
+export { ZeroTrustUsers, UserListResponse, Users } from './users/index';

@@ -9,13 +9,16 @@ export class TLSClientAuth extends APIResource {
    * TLS Client Auth requires Cloudflare to connect to your origin server using a
    * client certificate (Enterprise Only).
    */
-  edit(params: TLSClientAuthEditParams, options?: Core.RequestOptions): Core.APIPromise<ZonesTLSClientAuth> {
+  edit(
+    params: TLSClientAuthEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ZoneSettingTLSClientAuth> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/tls_client_auth`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZonesTLSClientAuth }>
+      }) as Core.APIPromise<{ result: ZoneSettingTLSClientAuth }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -23,11 +26,14 @@ export class TLSClientAuth extends APIResource {
    * TLS Client Auth requires Cloudflare to connect to your origin server using a
    * client certificate (Enterprise Only).
    */
-  get(params: TLSClientAuthGetParams, options?: Core.RequestOptions): Core.APIPromise<ZonesTLSClientAuth> {
+  get(
+    params: TLSClientAuthGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ZoneSettingTLSClientAuth> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/tls_client_auth`, options) as Core.APIPromise<{
-        result: ZonesTLSClientAuth;
+        result: ZoneSettingTLSClientAuth;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -37,7 +43,7 @@ export class TLSClientAuth extends APIResource {
  * TLS Client Auth requires Cloudflare to connect to your origin server using a
  * client certificate (Enterprise Only).
  */
-export interface ZonesTLSClientAuth {
+export interface ZoneSettingTLSClientAuth {
   /**
    * ID of the zone setting.
    */
@@ -80,7 +86,7 @@ export interface TLSClientAuthGetParams {
 }
 
 export namespace TLSClientAuth {
-  export import ZonesTLSClientAuth = TLSClientAuthAPI.ZonesTLSClientAuth;
+  export import ZoneSettingTLSClientAuth = TLSClientAuthAPI.ZoneSettingTLSClientAuth;
   export import TLSClientAuthEditParams = TLSClientAuthAPI.TLSClientAuthEditParams;
   export import TLSClientAuthGetParams = TLSClientAuthAPI.TLSClientAuthGetParams;
 }

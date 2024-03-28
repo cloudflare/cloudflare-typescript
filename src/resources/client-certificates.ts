@@ -12,11 +12,11 @@ export class ClientCertificates extends APIResource {
   create(
     params: ClientCertificateCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TLSCertificatesAndHostnamesClientCertificate> {
+  ): Core.APIPromise<ClientCertificate> {
     const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/client_certificates`, { body, ...options }) as Core.APIPromise<{
-        result: TLSCertificatesAndHostnamesClientCertificate;
+        result: ClientCertificate;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -28,14 +28,11 @@ export class ClientCertificates extends APIResource {
   list(
     params: ClientCertificateListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<
-    TLSCertificatesAndHostnamesClientCertificatesV4PagePaginationArray,
-    TLSCertificatesAndHostnamesClientCertificate
-  > {
+  ): Core.PagePromise<ClientCertificatesV4PagePaginationArray, ClientCertificate> {
     const { zone_id, ...query } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/client_certificates`,
-      TLSCertificatesAndHostnamesClientCertificatesV4PagePaginationArray,
+      ClientCertificatesV4PagePaginationArray,
       { query, ...options },
     );
   }
@@ -48,13 +45,13 @@ export class ClientCertificates extends APIResource {
     clientCertificateId: string,
     params: ClientCertificateDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TLSCertificatesAndHostnamesClientCertificate> {
+  ): Core.APIPromise<ClientCertificate> {
     const { zone_id } = params;
     return (
       this._client.delete(
         `/zones/${zone_id}/client_certificates/${clientCertificateId}`,
         options,
-      ) as Core.APIPromise<{ result: TLSCertificatesAndHostnamesClientCertificate }>
+      ) as Core.APIPromise<{ result: ClientCertificate }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -66,13 +63,13 @@ export class ClientCertificates extends APIResource {
     clientCertificateId: string,
     params: ClientCertificateEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TLSCertificatesAndHostnamesClientCertificate> {
+  ): Core.APIPromise<ClientCertificate> {
     const { zone_id } = params;
     return (
       this._client.patch(
         `/zones/${zone_id}/client_certificates/${clientCertificateId}`,
         options,
-      ) as Core.APIPromise<{ result: TLSCertificatesAndHostnamesClientCertificate }>
+      ) as Core.APIPromise<{ result: ClientCertificate }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -83,20 +80,20 @@ export class ClientCertificates extends APIResource {
     clientCertificateId: string,
     params: ClientCertificateGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TLSCertificatesAndHostnamesClientCertificate> {
+  ): Core.APIPromise<ClientCertificate> {
     const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/client_certificates/${clientCertificateId}`,
         options,
-      ) as Core.APIPromise<{ result: TLSCertificatesAndHostnamesClientCertificate }>
+      ) as Core.APIPromise<{ result: ClientCertificate }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class TLSCertificatesAndHostnamesClientCertificatesV4PagePaginationArray extends V4PagePaginationArray<TLSCertificatesAndHostnamesClientCertificate> {}
+export class ClientCertificatesV4PagePaginationArray extends V4PagePaginationArray<ClientCertificate> {}
 
-export interface TLSCertificatesAndHostnamesClientCertificate {
+export interface ClientCertificate {
   /**
    * Identifier
    */
@@ -110,7 +107,7 @@ export interface TLSCertificatesAndHostnamesClientCertificate {
   /**
    * Certificate Authority used to issue the Client Certificate
    */
-  certificate_authority?: TLSCertificatesAndHostnamesClientCertificate.CertificateAuthority;
+  certificate_authority?: ClientCertificate.CertificateAuthority;
 
   /**
    * Common Name of the Client Certificate
@@ -189,7 +186,7 @@ export interface TLSCertificatesAndHostnamesClientCertificate {
   validity_days?: number;
 }
 
-export namespace TLSCertificatesAndHostnamesClientCertificate {
+export namespace ClientCertificate {
   /**
    * Certificate Authority used to issue the Client Certificate
    */
@@ -262,8 +259,8 @@ export interface ClientCertificateGetParams {
 }
 
 export namespace ClientCertificates {
-  export import TLSCertificatesAndHostnamesClientCertificate = ClientCertificatesAPI.TLSCertificatesAndHostnamesClientCertificate;
-  export import TLSCertificatesAndHostnamesClientCertificatesV4PagePaginationArray = ClientCertificatesAPI.TLSCertificatesAndHostnamesClientCertificatesV4PagePaginationArray;
+  export import ClientCertificate = ClientCertificatesAPI.ClientCertificate;
+  export import ClientCertificatesV4PagePaginationArray = ClientCertificatesAPI.ClientCertificatesV4PagePaginationArray;
   export import ClientCertificateCreateParams = ClientCertificatesAPI.ClientCertificateCreateParams;
   export import ClientCertificateListParams = ClientCertificatesAPI.ClientCertificateListParams;
   export import ClientCertificateDeleteParams = ClientCertificatesAPI.ClientCertificateDeleteParams;

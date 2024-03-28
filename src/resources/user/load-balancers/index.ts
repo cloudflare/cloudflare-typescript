@@ -28,4 +28,4 @@ export {
   PoolPreviewParams,
   Pools,
 } from './pools';
-export { LoadBalancingPreviewResult, Preview } from './preview';
+export { LoadBalancingPreview, Preview } from './preview';

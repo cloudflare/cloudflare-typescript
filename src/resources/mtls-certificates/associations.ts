@@ -23,7 +23,7 @@ export class Associations extends APIResource {
   }
 }
 
-export interface TLSCertificatesAndHostnamesAssociationObject {
+export interface MTLSCertificateAsssociation {
   /**
    * The service using the certificate.
    */
@@ -35,7 +35,7 @@ export interface TLSCertificatesAndHostnamesAssociationObject {
   status?: string;
 }
 
-export type AssociationGetResponse = Array<TLSCertificatesAndHostnamesAssociationObject>;
+export type AssociationGetResponse = Array<MTLSCertificateAsssociation>;
 
 export interface AssociationGetParams {
   /**
@@ -45,7 +45,7 @@ export interface AssociationGetParams {
 }
 
 export namespace Associations {
-  export import TLSCertificatesAndHostnamesAssociationObject = AssociationsAPI.TLSCertificatesAndHostnamesAssociationObject;
+  export import MTLSCertificateAsssociation = AssociationsAPI.MTLSCertificateAsssociation;
   export import AssociationGetResponse = AssociationsAPI.AssociationGetResponse;
   export import AssociationGetParams = AssociationsAPI.AssociationGetParams;
 }

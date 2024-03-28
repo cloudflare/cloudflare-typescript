@@ -12,13 +12,13 @@ export class OpportunisticOnion extends APIResource {
   edit(
     params: OpportunisticOnionEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZonesOpportunisticOnion> {
+  ): Core.APIPromise<ZoneSettingOpportunisticOnion> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/opportunistic_onion`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZonesOpportunisticOnion }>
+      }) as Core.APIPromise<{ result: ZoneSettingOpportunisticOnion }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -29,11 +29,11 @@ export class OpportunisticOnion extends APIResource {
   get(
     params: OpportunisticOnionGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZonesOpportunisticOnion> {
+  ): Core.APIPromise<ZoneSettingOpportunisticOnion> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/opportunistic_onion`, options) as Core.APIPromise<{
-        result: ZonesOpportunisticOnion;
+        result: ZoneSettingOpportunisticOnion;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -43,7 +43,7 @@ export class OpportunisticOnion extends APIResource {
  * Add an Alt-Svc header to all legitimate requests from Tor, allowing the
  * connection to use our onion services instead of exit nodes.
  */
-export interface ZonesOpportunisticOnion {
+export interface ZoneSettingOpportunisticOnion {
   /**
    * ID of the zone setting.
    */
@@ -87,7 +87,7 @@ export interface OpportunisticOnionGetParams {
 }
 
 export namespace OpportunisticOnion {
-  export import ZonesOpportunisticOnion = OpportunisticOnionAPI.ZonesOpportunisticOnion;
+  export import ZoneSettingOpportunisticOnion = OpportunisticOnionAPI.ZoneSettingOpportunisticOnion;
   export import OpportunisticOnionEditParams = OpportunisticOnionAPI.OpportunisticOnionEditParams;
   export import OpportunisticOnionGetParams = OpportunisticOnionAPI.OpportunisticOnionGetParams;
 }

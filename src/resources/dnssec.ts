@@ -4,7 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as DNSSECAPI from 'cloudflare/resources/dnssec';
 
-export class DNSSEC extends APIResource {
+export class DNSSECResource extends APIResource {
   /**
    * Delete DNSSEC.
    */
@@ -20,11 +20,11 @@ export class DNSSEC extends APIResource {
   /**
    * Enable or disable DNSSEC.
    */
-  edit(params: DNSSECEditParams, options?: Core.RequestOptions): Core.APIPromise<DNSSECDNSSEC> {
+  edit(params: DNSSECEditParams, options?: Core.RequestOptions): Core.APIPromise<DNSSEC> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/dnssec`, { body, ...options }) as Core.APIPromise<{
-        result: DNSSECDNSSEC;
+        result: DNSSEC;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -32,15 +32,15 @@ export class DNSSEC extends APIResource {
   /**
    * Details about DNSSEC status and configuration.
    */
-  get(params: DNSSECGetParams, options?: Core.RequestOptions): Core.APIPromise<DNSSECDNSSEC> {
+  get(params: DNSSECGetParams, options?: Core.RequestOptions): Core.APIPromise<DNSSEC> {
     const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zone_id}/dnssec`, options) as Core.APIPromise<{ result: DNSSECDNSSEC }>
+      this._client.get(`/zones/${zone_id}/dnssec`, options) as Core.APIPromise<{ result: DNSSEC }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface DNSSECDNSSEC {
+export interface DNSSEC {
   /**
    * Algorithm key code.
    */
@@ -172,8 +172,8 @@ export interface DNSSECGetParams {
   zone_id: string;
 }
 
-export namespace DNSSEC {
-  export import DNSSECDNSSEC = DNSSECAPI.DNSSECDNSSEC;
+export namespace DNSSECResource {
+  export import DNSSEC = DNSSECAPI.DNSSEC;
   export import DNSSECDeleteResponse = DNSSECAPI.DNSSECDeleteResponse;
   export import DNSSECDeleteParams = DNSSECAPI.DNSSECDeleteParams;
   export import DNSSECEditParams = DNSSECAPI.DNSSECEditParams;

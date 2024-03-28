@@ -15,21 +15,21 @@ export class Reports extends APIResource {
    * [Analytics API properties](https://developers.cloudflare.com/dns/reference/analytics-api-properties/)
    * for detailed information about the available query parameters.
    */
-  get(params: ReportGetParams, options?: Core.RequestOptions): Core.APIPromise<DNSDNSAnalyticsAPIReport> {
+  get(params: ReportGetParams, options?: Core.RequestOptions): Core.APIPromise<DNSAnalyticsReport> {
     const { zone_id, ...query } = params;
     return (
       this._client.get(`/zones/${zone_id}/dns_analytics/report`, { query, ...options }) as Core.APIPromise<{
-        result: DNSDNSAnalyticsAPIReport;
+        result: DNSAnalyticsReport;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface DNSDNSAnalyticsAPIReport {
+export interface DNSAnalyticsReport {
   /**
    * Array with one row per combination of dimension values.
    */
-  data: Array<DNSDNSAnalyticsAPIReport.Data>;
+  data: Array<DNSAnalyticsReport.Data>;
 
   /**
    * Number of seconds between current time and last processed event, in another
@@ -49,7 +49,7 @@ export interface DNSDNSAnalyticsAPIReport {
    */
   min: unknown;
 
-  query: DNSDNSAnalyticsAPIReport.Query;
+  query: DNSAnalyticsReport.Query;
 
   /**
    * Total number of rows in the result.
@@ -63,7 +63,7 @@ export interface DNSDNSAnalyticsAPIReport {
   totals: unknown;
 }
 
-export namespace DNSDNSAnalyticsAPIReport {
+export namespace DNSAnalyticsReport {
   export interface Data {
     /**
      * Array of dimension values, representing the combination of dimension values
@@ -160,9 +160,9 @@ export interface ReportGetParams {
 }
 
 export namespace Reports {
-  export import DNSDNSAnalyticsAPIReport = ReportsAPI.DNSDNSAnalyticsAPIReport;
+  export import DNSAnalyticsReport = ReportsAPI.DNSAnalyticsReport;
   export import ReportGetParams = ReportsAPI.ReportGetParams;
   export import Bytimes = BytimesAPI.Bytimes;
-  export import DNSDNSAnalyticsAPIReportBytime = BytimesAPI.DNSDNSAnalyticsAPIReportBytime;
+  export import DNSAnalyticsReportByTime = BytimesAPI.DNSAnalyticsReportByTime;
   export import BytimeGetParams = BytimesAPI.BytimeGetParams;
 }

@@ -267,10 +267,10 @@ export namespace Packages {
   export import PackageListResponsesV4PagePaginationArray = PackagesAPI.PackageListResponsesV4PagePaginationArray;
   export import PackageListParams = PackagesAPI.PackageListParams;
   export import Groups = GroupsAPI.Groups;
-  export import WAFManagedRulesSchemasGroup = GroupsAPI.WAFManagedRulesSchemasGroup;
+  export import WAFManagedRulesGroup = GroupsAPI.WAFManagedRulesGroup;
   export import GroupEditResponse = GroupsAPI.GroupEditResponse;
   export import GroupGetResponse = GroupsAPI.GroupGetResponse;
-  export import WAFManagedRulesSchemasGroupsV4PagePaginationArray = GroupsAPI.WAFManagedRulesSchemasGroupsV4PagePaginationArray;
+  export import WAFManagedRulesGroupsV4PagePaginationArray = GroupsAPI.WAFManagedRulesGroupsV4PagePaginationArray;
   export import GroupListParams = GroupsAPI.GroupListParams;
   export import GroupEditParams = GroupsAPI.GroupEditParams;
   export import GroupGetParams = GroupsAPI.GroupGetParams;

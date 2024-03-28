@@ -10,7 +10,7 @@ export class CertificateAuthorities extends APIResource {
 
 export namespace CertificateAuthorities {
   export import HostnameAssociations = HostnameAssociationsAPI.HostnameAssociations;
-  export import TLSCertificatesAndHostnamesHostnameAssociation = HostnameAssociationsAPI.TLSCertificatesAndHostnamesHostnameAssociation;
+  export import TLSHostnameAssociation = HostnameAssociationsAPI.TLSHostnameAssociation;
   export import HostnameAssociationUpdateParams = HostnameAssociationsAPI.HostnameAssociationUpdateParams;
   export import HostnameAssociationGetParams = HostnameAssociationsAPI.HostnameAssociationGetParams;
 }

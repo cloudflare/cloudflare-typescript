@@ -14,12 +14,12 @@ export class Lockdowns extends APIResource {
     zoneIdentifier: string,
     body: LockdownCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LegacyJhsZonelockdown | null> {
+  ): Core.APIPromise<FirewallZoneLockdown | null> {
     return (
       this._client.post(`/zones/${zoneIdentifier}/firewall/lockdowns`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: LegacyJhsZonelockdown | null }>
+      }) as Core.APIPromise<{ result: FirewallZoneLockdown | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -31,12 +31,12 @@ export class Lockdowns extends APIResource {
     id: string,
     body: LockdownUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LegacyJhsZonelockdown | null> {
+  ): Core.APIPromise<FirewallZoneLockdown | null> {
     return (
       this._client.put(`/zones/${zoneIdentifier}/firewall/lockdowns/${id}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: LegacyJhsZonelockdown | null }>
+      }) as Core.APIPromise<{ result: FirewallZoneLockdown | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -48,22 +48,22 @@ export class Lockdowns extends APIResource {
     zoneIdentifier: string,
     query?: LockdownListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<LegacyJhsZonelockdownsV4PagePaginationArray, LegacyJhsZonelockdown>;
+  ): Core.PagePromise<FirewallZoneLockdownsV4PagePaginationArray, FirewallZoneLockdown>;
   list(
     zoneIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<LegacyJhsZonelockdownsV4PagePaginationArray, LegacyJhsZonelockdown>;
+  ): Core.PagePromise<FirewallZoneLockdownsV4PagePaginationArray, FirewallZoneLockdown>;
   list(
     zoneIdentifier: string,
     query: LockdownListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<LegacyJhsZonelockdownsV4PagePaginationArray, LegacyJhsZonelockdown> {
+  ): Core.PagePromise<FirewallZoneLockdownsV4PagePaginationArray, FirewallZoneLockdown> {
     if (isRequestOptions(query)) {
       return this.list(zoneIdentifier, {}, query);
     }
     return this._client.getAPIList(
       `/zones/${zoneIdentifier}/firewall/lockdowns`,
-      LegacyJhsZonelockdownsV4PagePaginationArray,
+      FirewallZoneLockdownsV4PagePaginationArray,
       { query, ...options },
     );
   }
@@ -90,18 +90,18 @@ export class Lockdowns extends APIResource {
     zoneIdentifier: string,
     id: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LegacyJhsZonelockdown | null> {
+  ): Core.APIPromise<FirewallZoneLockdown | null> {
     return (
       this._client.get(`/zones/${zoneIdentifier}/firewall/lockdowns/${id}`, options) as Core.APIPromise<{
-        result: LegacyJhsZonelockdown | null;
+        result: FirewallZoneLockdown | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class LegacyJhsZonelockdownsV4PagePaginationArray extends V4PagePaginationArray<LegacyJhsZonelockdown> {}
+export class FirewallZoneLockdownsV4PagePaginationArray extends V4PagePaginationArray<FirewallZoneLockdown> {}
 
-export interface LegacyJhsZonelockdown {
+export interface FirewallZoneLockdown {
   /**
    * The unique identifier of the Zone Lockdown rule.
    */
@@ -113,8 +113,8 @@ export interface LegacyJhsZonelockdown {
    * `ip_range` configurations.
    */
   configurations:
-    | LegacyJhsZonelockdown.LegacyJhsSchemasIPConfiguration
-    | LegacyJhsZonelockdown.LegacyJhsSchemasCIDRConfiguration;
+    | FirewallZoneLockdown.LegacyJhsSchemasIPConfiguration
+    | FirewallZoneLockdown.LegacyJhsSchemasCIDRConfiguration;
 
   /**
    * The timestamp of when the rule was created.
@@ -144,7 +144,7 @@ export interface LegacyJhsZonelockdown {
   urls: Array<string>;
 }
 
-export namespace LegacyJhsZonelockdown {
+export namespace FirewallZoneLockdown {
   export interface LegacyJhsSchemasIPConfiguration {
     /**
      * The configuration target. You must set the target to `ip` when specifying an IP
@@ -224,9 +224,9 @@ export interface LockdownListParams extends V4PagePaginationArrayParams {
 }
 
 export namespace Lockdowns {
-  export import LegacyJhsZonelockdown = LockdownsAPI.LegacyJhsZonelockdown;
+  export import FirewallZoneLockdown = LockdownsAPI.FirewallZoneLockdown;
   export import LockdownDeleteResponse = LockdownsAPI.LockdownDeleteResponse;
-  export import LegacyJhsZonelockdownsV4PagePaginationArray = LockdownsAPI.LegacyJhsZonelockdownsV4PagePaginationArray;
+  export import FirewallZoneLockdownsV4PagePaginationArray = LockdownsAPI.FirewallZoneLockdownsV4PagePaginationArray;
   export import LockdownCreateParams = LockdownsAPI.LockdownCreateParams;
   export import LockdownUpdateParams = LockdownsAPI.LockdownUpdateParams;
   export import LockdownListParams = LockdownsAPI.LockdownListParams;

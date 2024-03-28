@@ -156,60 +156,60 @@ export class Settings extends APIResource {
 }
 
 export type SettingEditResponse = Array<
-  | ZeroRTTAPI.Zones0rtt
-  | AdvancedDDOSAPI.ZonesAdvancedDDOS
-  | AlwaysOnlineAPI.ZonesAlwaysOnline
-  | AlwaysUseHTTPSAPI.ZonesAlwaysUseHTTPS
-  | AutomaticHTTPSRewritesAPI.ZonesAutomaticHTTPSRewrites
-  | BrotliAPI.ZonesBrotli
-  | BrowserCacheTTLAPI.ZonesBrowserCacheTTL
-  | BrowserCheckAPI.ZonesBrowserCheck
-  | CacheLevelAPI.ZonesCacheLevel
-  | ChallengeTTLAPI.ZonesChallengeTTL
-  | CiphersAPI.ZonesCiphers
+  | ZeroRTTAPI.ZoneSetting0rtt
+  | AdvancedDDOSAPI.ZoneSettingAdvancedDDOS
+  | AlwaysOnlineAPI.ZoneSettingAlwaysOnline
+  | AlwaysUseHTTPSAPI.ZoneSettingAlwaysUseHTTPS
+  | AutomaticHTTPSRewritesAPI.ZoneSettingAutomaticHTTPSRewrites
+  | BrotliAPI.ZoneSettingBrotli
+  | BrowserCacheTTLAPI.ZoneSettingBrowserCacheTTL
+  | BrowserCheckAPI.ZoneSettingBrowserCheck
+  | CacheLevelAPI.ZoneSettingCacheLevel
+  | ChallengeTTLAPI.ZoneSettingChallengeTTL
+  | CiphersAPI.ZoneSettingCiphers
   | SettingEditResponse.ZonesCNAMEFlattening
-  | DevelopmentModeAPI.ZonesDevelopmentMode
-  | EarlyHintsAPI.ZonesEarlyHints
+  | DevelopmentModeAPI.ZoneSettingDevelopmentMode
+  | EarlyHintsAPI.ZoneSettingEarlyHints
   | SettingEditResponse.ZonesEdgeCacheTTL
-  | EmailObfuscationAPI.ZonesEmailObfuscation
-  | H2PrioritizationAPI.ZonesH2Prioritization
-  | HotlinkProtectionAPI.ZonesHotlinkProtection
-  | HTTP2API.ZonesHTTP2
-  | HTTP3API.ZonesHTTP3
-  | ImageResizingAPI.ZonesImageResizing
-  | IPGeolocationAPI.ZonesIPGeolocation
-  | IPV6API.ZonesIPV6
+  | EmailObfuscationAPI.ZoneSettingEmailObfuscation
+  | H2PrioritizationAPI.ZoneSettingH2Prioritization
+  | HotlinkProtectionAPI.ZoneSettingHotlinkProtection
+  | HTTP2API.ZoneSettingHTTP2
+  | HTTP3API.ZoneSettingHTTP3
+  | ImageResizingAPI.ZoneSettingImageResizing
+  | IPGeolocationAPI.ZoneSettingIPGeolocation
+  | IPV6API.ZoneSettingIPV6
   | SettingEditResponse.ZonesMaxUpload
-  | MinTLSVersionAPI.ZonesMinTLSVersion
-  | MinifyAPI.ZonesMinify
-  | MirageAPI.ZonesMirage
-  | MobileRedirectAPI.ZonesMobileRedirect
-  | NELAPI.ZonesNEL
-  | OpportunisticEncryptionAPI.ZonesOpportunisticEncryption
-  | OpportunisticOnionAPI.ZonesOpportunisticOnion
-  | OrangeToOrangeAPI.ZonesOrangeToOrange
-  | OriginErrorPagePassThruAPI.ZonesOriginErrorPagePassThru
-  | PolishAPI.ZonesPolish
-  | PrefetchPreloadAPI.ZonesPrefetchPreload
-  | ProxyReadTimeoutAPI.ZonesProxyReadTimeout
-  | PseudoIPV4API.ZonesPseudoIPV4
-  | ResponseBufferingAPI.ZonesBuffering
-  | RocketLoaderAPI.ZonesRocketLoader
+  | MinTLSVersionAPI.ZoneSettingMinTLSVersion
+  | MinifyAPI.ZoneSettingMinify
+  | MirageAPI.ZoneSettingMirage
+  | MobileRedirectAPI.ZoneSettingMobileRedirect
+  | NELAPI.ZoneSettingNEL
+  | OpportunisticEncryptionAPI.ZoneSettingOpportunisticEncryption
+  | OpportunisticOnionAPI.ZoneSettingOpportunisticOnion
+  | OrangeToOrangeAPI.ZoneSettingOrangeToOrange
+  | OriginErrorPagePassThruAPI.ZoneSettingOriginErrorPagePassThru
+  | PolishAPI.ZoneSettingPolish
+  | PrefetchPreloadAPI.ZoneSettingPrefetchPreload
+  | ProxyReadTimeoutAPI.ZoneSettingProxyReadTimeout
+  | PseudoIPV4API.ZoneSettingPseudoIPV4
+  | ResponseBufferingAPI.ZoneSettingBuffering
+  | RocketLoaderAPI.ZoneSettingRocketLoader
   | SettingEditResponse.ZonesSchemasAutomaticPlatformOptimization
-  | SecurityHeadersAPI.ZonesSecurityHeader
-  | SecurityLevelAPI.ZonesSecurityLevel
-  | ServerSideExcludesAPI.ZonesServerSideExclude
+  | SecurityHeadersAPI.ZoneSettingSecurityHeader
+  | SecurityLevelAPI.ZoneSettingSecurityLevel
+  | ServerSideExcludesAPI.ZoneSettingServerSideExclude
   | SettingEditResponse.ZonesSha1Support
-  | SortQueryStringForCacheAPI.ZonesSortQueryStringForCache
-  | SSLAPI.ZonesSSL
-  | SSLRecommenderAPI.ZonesSSLRecommender
+  | SortQueryStringForCacheAPI.ZoneSettingSortQueryStringForCache
+  | SSLAPI.ZoneSettingSSL
+  | SSLRecommenderAPI.ZoneSettingSSLRecommender
   | SettingEditResponse.ZonesTLS1_2Only
-  | TLS1_3API.ZonesTLS1_3
-  | TLSClientAuthAPI.ZonesTLSClientAuth
-  | TrueClientIPHeaderAPI.ZonesTrueClientIPHeader
-  | WAFAPI.ZonesWAF
-  | WebPAPI.ZonesWebP
-  | WebsocketAPI.ZonesWebsockets
+  | TLS1_3API.ZoneSettingTLS1_3
+  | TLSClientAuthAPI.ZoneSettingTLSClientAuth
+  | TrueClientIPHeaderAPI.ZoneSettingTrueClientIPHeader
+  | WAFAPI.ZoneSettingWAF
+  | WebPAPI.ZoneSettingWebP
+  | WebsocketAPI.ZoneSettingWebsockets
 >;
 
 export namespace SettingEditResponse {
@@ -327,7 +327,7 @@ export namespace SettingEditResponse {
     /**
      * Current value of the zone setting.
      */
-    value: AutomaticPlatformOptimizationAPI.ZonesAutomaticPlatformOptimization;
+    value: AutomaticPlatformOptimizationAPI.ZoneSettingAutomaticPlatformOptimization;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -395,60 +395,60 @@ export namespace SettingEditResponse {
 }
 
 export type SettingGetResponse = Array<
-  | ZeroRTTAPI.Zones0rtt
-  | AdvancedDDOSAPI.ZonesAdvancedDDOS
-  | AlwaysOnlineAPI.ZonesAlwaysOnline
-  | AlwaysUseHTTPSAPI.ZonesAlwaysUseHTTPS
-  | AutomaticHTTPSRewritesAPI.ZonesAutomaticHTTPSRewrites
-  | BrotliAPI.ZonesBrotli
-  | BrowserCacheTTLAPI.ZonesBrowserCacheTTL
-  | BrowserCheckAPI.ZonesBrowserCheck
-  | CacheLevelAPI.ZonesCacheLevel
-  | ChallengeTTLAPI.ZonesChallengeTTL
-  | CiphersAPI.ZonesCiphers
+  | ZeroRTTAPI.ZoneSetting0rtt
+  | AdvancedDDOSAPI.ZoneSettingAdvancedDDOS
+  | AlwaysOnlineAPI.ZoneSettingAlwaysOnline
+  | AlwaysUseHTTPSAPI.ZoneSettingAlwaysUseHTTPS
+  | AutomaticHTTPSRewritesAPI.ZoneSettingAutomaticHTTPSRewrites
+  | BrotliAPI.ZoneSettingBrotli
+  | BrowserCacheTTLAPI.ZoneSettingBrowserCacheTTL
+  | BrowserCheckAPI.ZoneSettingBrowserCheck
+  | CacheLevelAPI.ZoneSettingCacheLevel
+  | ChallengeTTLAPI.ZoneSettingChallengeTTL
+  | CiphersAPI.ZoneSettingCiphers
   | SettingGetResponse.ZonesCNAMEFlattening
-  | DevelopmentModeAPI.ZonesDevelopmentMode
-  | EarlyHintsAPI.ZonesEarlyHints
+  | DevelopmentModeAPI.ZoneSettingDevelopmentMode
+  | EarlyHintsAPI.ZoneSettingEarlyHints
   | SettingGetResponse.ZonesEdgeCacheTTL
-  | EmailObfuscationAPI.ZonesEmailObfuscation
-  | H2PrioritizationAPI.ZonesH2Prioritization
-  | HotlinkProtectionAPI.ZonesHotlinkProtection
-  | HTTP2API.ZonesHTTP2
-  | HTTP3API.ZonesHTTP3
-  | ImageResizingAPI.ZonesImageResizing
-  | IPGeolocationAPI.ZonesIPGeolocation
-  | IPV6API.ZonesIPV6
+  | EmailObfuscationAPI.ZoneSettingEmailObfuscation
+  | H2PrioritizationAPI.ZoneSettingH2Prioritization
+  | HotlinkProtectionAPI.ZoneSettingHotlinkProtection
+  | HTTP2API.ZoneSettingHTTP2
+  | HTTP3API.ZoneSettingHTTP3
+  | ImageResizingAPI.ZoneSettingImageResizing
+  | IPGeolocationAPI.ZoneSettingIPGeolocation
+  | IPV6API.ZoneSettingIPV6
   | SettingGetResponse.ZonesMaxUpload
-  | MinTLSVersionAPI.ZonesMinTLSVersion
-  | MinifyAPI.ZonesMinify
-  | MirageAPI.ZonesMirage
-  | MobileRedirectAPI.ZonesMobileRedirect
-  | NELAPI.ZonesNEL
-  | OpportunisticEncryptionAPI.ZonesOpportunisticEncryption
-  | OpportunisticOnionAPI.ZonesOpportunisticOnion
-  | OrangeToOrangeAPI.ZonesOrangeToOrange
-  | OriginErrorPagePassThruAPI.ZonesOriginErrorPagePassThru
-  | PolishAPI.ZonesPolish
-  | PrefetchPreloadAPI.ZonesPrefetchPreload
-  | ProxyReadTimeoutAPI.ZonesProxyReadTimeout
-  | PseudoIPV4API.ZonesPseudoIPV4
-  | ResponseBufferingAPI.ZonesBuffering
-  | RocketLoaderAPI.ZonesRocketLoader
+  | MinTLSVersionAPI.ZoneSettingMinTLSVersion
+  | MinifyAPI.ZoneSettingMinify
+  | MirageAPI.ZoneSettingMirage
+  | MobileRedirectAPI.ZoneSettingMobileRedirect
+  | NELAPI.ZoneSettingNEL
+  | OpportunisticEncryptionAPI.ZoneSettingOpportunisticEncryption
+  | OpportunisticOnionAPI.ZoneSettingOpportunisticOnion
+  | OrangeToOrangeAPI.ZoneSettingOrangeToOrange
+  | OriginErrorPagePassThruAPI.ZoneSettingOriginErrorPagePassThru
+  | PolishAPI.ZoneSettingPolish
+  | PrefetchPreloadAPI.ZoneSettingPrefetchPreload
+  | ProxyReadTimeoutAPI.ZoneSettingProxyReadTimeout
+  | PseudoIPV4API.ZoneSettingPseudoIPV4
+  | ResponseBufferingAPI.ZoneSettingBuffering
+  | RocketLoaderAPI.ZoneSettingRocketLoader
   | SettingGetResponse.ZonesSchemasAutomaticPlatformOptimization
-  | SecurityHeadersAPI.ZonesSecurityHeader
-  | SecurityLevelAPI.ZonesSecurityLevel
-  | ServerSideExcludesAPI.ZonesServerSideExclude
+  | SecurityHeadersAPI.ZoneSettingSecurityHeader
+  | SecurityLevelAPI.ZoneSettingSecurityLevel
+  | ServerSideExcludesAPI.ZoneSettingServerSideExclude
   | SettingGetResponse.ZonesSha1Support
-  | SortQueryStringForCacheAPI.ZonesSortQueryStringForCache
-  | SSLAPI.ZonesSSL
-  | SSLRecommenderAPI.ZonesSSLRecommender
+  | SortQueryStringForCacheAPI.ZoneSettingSortQueryStringForCache
+  | SSLAPI.ZoneSettingSSL
+  | SSLRecommenderAPI.ZoneSettingSSLRecommender
   | SettingGetResponse.ZonesTLS1_2Only
-  | TLS1_3API.ZonesTLS1_3
-  | TLSClientAuthAPI.ZonesTLSClientAuth
-  | TrueClientIPHeaderAPI.ZonesTrueClientIPHeader
-  | WAFAPI.ZonesWAF
-  | WebPAPI.ZonesWebP
-  | WebsocketAPI.ZonesWebsockets
+  | TLS1_3API.ZoneSettingTLS1_3
+  | TLSClientAuthAPI.ZoneSettingTLSClientAuth
+  | TrueClientIPHeaderAPI.ZoneSettingTrueClientIPHeader
+  | WAFAPI.ZoneSettingWAF
+  | WebPAPI.ZoneSettingWebP
+  | WebsocketAPI.ZoneSettingWebsockets
 >;
 
 export namespace SettingGetResponse {
@@ -566,7 +566,7 @@ export namespace SettingGetResponse {
     /**
      * Current value of the zone setting.
      */
-    value: AutomaticPlatformOptimizationAPI.ZonesAutomaticPlatformOptimization;
+    value: AutomaticPlatformOptimizationAPI.ZoneSettingAutomaticPlatformOptimization;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -643,60 +643,60 @@ export interface SettingEditParams {
    * Body param: One or more zone setting objects. Must contain an ID and a value.
    */
   items: Array<
-    | ZeroRTTAPI.Zones0rtt
-    | AdvancedDDOSAPI.ZonesAdvancedDDOS
-    | AlwaysOnlineAPI.ZonesAlwaysOnline
-    | AlwaysUseHTTPSAPI.ZonesAlwaysUseHTTPS
-    | AutomaticHTTPSRewritesAPI.ZonesAutomaticHTTPSRewrites
-    | BrotliAPI.ZonesBrotli
-    | BrowserCacheTTLAPI.ZonesBrowserCacheTTL
-    | BrowserCheckAPI.ZonesBrowserCheck
-    | CacheLevelAPI.ZonesCacheLevel
-    | ChallengeTTLAPI.ZonesChallengeTTL
-    | CiphersAPI.ZonesCiphers
+    | ZeroRTTAPI.ZoneSetting0rtt
+    | AdvancedDDOSAPI.ZoneSettingAdvancedDDOS
+    | AlwaysOnlineAPI.ZoneSettingAlwaysOnline
+    | AlwaysUseHTTPSAPI.ZoneSettingAlwaysUseHTTPS
+    | AutomaticHTTPSRewritesAPI.ZoneSettingAutomaticHTTPSRewrites
+    | BrotliAPI.ZoneSettingBrotli
+    | BrowserCacheTTLAPI.ZoneSettingBrowserCacheTTL
+    | BrowserCheckAPI.ZoneSettingBrowserCheck
+    | CacheLevelAPI.ZoneSettingCacheLevel
+    | ChallengeTTLAPI.ZoneSettingChallengeTTL
+    | CiphersAPI.ZoneSettingCiphers
     | SettingEditParams.ZonesCNAMEFlattening
-    | DevelopmentModeAPI.ZonesDevelopmentMode
-    | EarlyHintsAPI.ZonesEarlyHints
+    | DevelopmentModeAPI.ZoneSettingDevelopmentMode
+    | EarlyHintsAPI.ZoneSettingEarlyHints
     | SettingEditParams.ZonesEdgeCacheTTL
-    | EmailObfuscationAPI.ZonesEmailObfuscation
-    | H2PrioritizationAPI.ZonesH2Prioritization
-    | HotlinkProtectionAPI.ZonesHotlinkProtection
-    | HTTP2API.ZonesHTTP2
-    | HTTP3API.ZonesHTTP3
-    | ImageResizingAPI.ZonesImageResizing
-    | IPGeolocationAPI.ZonesIPGeolocation
-    | IPV6API.ZonesIPV6
+    | EmailObfuscationAPI.ZoneSettingEmailObfuscation
+    | H2PrioritizationAPI.ZoneSettingH2Prioritization
+    | HotlinkProtectionAPI.ZoneSettingHotlinkProtection
+    | HTTP2API.ZoneSettingHTTP2
+    | HTTP3API.ZoneSettingHTTP3
+    | ImageResizingAPI.ZoneSettingImageResizing
+    | IPGeolocationAPI.ZoneSettingIPGeolocation
+    | IPV6API.ZoneSettingIPV6
     | SettingEditParams.ZonesMaxUpload
-    | MinTLSVersionAPI.ZonesMinTLSVersion
-    | MinifyAPI.ZonesMinify
-    | MirageAPI.ZonesMirage
-    | MobileRedirectAPI.ZonesMobileRedirect
-    | NELAPI.ZonesNEL
-    | OpportunisticEncryptionAPI.ZonesOpportunisticEncryption
-    | OpportunisticOnionAPI.ZonesOpportunisticOnion
-    | OrangeToOrangeAPI.ZonesOrangeToOrange
-    | OriginErrorPagePassThruAPI.ZonesOriginErrorPagePassThru
-    | PolishAPI.ZonesPolish
-    | PrefetchPreloadAPI.ZonesPrefetchPreload
-    | ProxyReadTimeoutAPI.ZonesProxyReadTimeout
-    | PseudoIPV4API.ZonesPseudoIPV4
-    | ResponseBufferingAPI.ZonesBuffering
-    | RocketLoaderAPI.ZonesRocketLoader
+    | MinTLSVersionAPI.ZoneSettingMinTLSVersion
+    | MinifyAPI.ZoneSettingMinify
+    | MirageAPI.ZoneSettingMirage
+    | MobileRedirectAPI.ZoneSettingMobileRedirect
+    | NELAPI.ZoneSettingNEL
+    | OpportunisticEncryptionAPI.ZoneSettingOpportunisticEncryption
+    | OpportunisticOnionAPI.ZoneSettingOpportunisticOnion
+    | OrangeToOrangeAPI.ZoneSettingOrangeToOrange
+    | OriginErrorPagePassThruAPI.ZoneSettingOriginErrorPagePassThru
+    | PolishAPI.ZoneSettingPolish
+    | PrefetchPreloadAPI.ZoneSettingPrefetchPreload
+    | ProxyReadTimeoutAPI.ZoneSettingProxyReadTimeout
+    | PseudoIPV4API.ZoneSettingPseudoIPV4
+    | ResponseBufferingAPI.ZoneSettingBuffering
+    | RocketLoaderAPI.ZoneSettingRocketLoader
     | SettingEditParams.ZonesSchemasAutomaticPlatformOptimization
-    | SecurityHeadersAPI.ZonesSecurityHeader
-    | SecurityLevelAPI.ZonesSecurityLevel
-    | ServerSideExcludesAPI.ZonesServerSideExclude
+    | SecurityHeadersAPI.ZoneSettingSecurityHeader
+    | SecurityLevelAPI.ZoneSettingSecurityLevel
+    | ServerSideExcludesAPI.ZoneSettingServerSideExclude
     | SettingEditParams.ZonesSha1Support
-    | SortQueryStringForCacheAPI.ZonesSortQueryStringForCache
-    | SSLAPI.ZonesSSL
-    | SSLRecommenderAPI.ZonesSSLRecommender
+    | SortQueryStringForCacheAPI.ZoneSettingSortQueryStringForCache
+    | SSLAPI.ZoneSettingSSL
+    | SSLRecommenderAPI.ZoneSettingSSLRecommender
     | SettingEditParams.ZonesTLS1_2Only
-    | TLS1_3API.ZonesTLS1_3
-    | TLSClientAuthAPI.ZonesTLSClientAuth
-    | TrueClientIPHeaderAPI.ZonesTrueClientIPHeader
-    | WAFAPI.ZonesWAF
-    | WebPAPI.ZonesWebP
-    | WebsocketAPI.ZonesWebsockets
+    | TLS1_3API.ZoneSettingTLS1_3
+    | TLSClientAuthAPI.ZoneSettingTLSClientAuth
+    | TrueClientIPHeaderAPI.ZoneSettingTrueClientIPHeader
+    | WAFAPI.ZoneSettingWAF
+    | WebPAPI.ZoneSettingWebP
+    | WebsocketAPI.ZoneSettingWebsockets
   >;
 }
 
@@ -782,7 +782,7 @@ export namespace SettingEditParams {
     /**
      * Current value of the zone setting.
      */
-    value: AutomaticPlatformOptimizationAPI.ZonesAutomaticPlatformOptimization;
+    value: AutomaticPlatformOptimizationAPI.ZoneSettingAutomaticPlatformOptimization;
   }
 
   /**
@@ -829,126 +829,126 @@ export namespace Settings {
   export import SettingEditParams = SettingsAPI.SettingEditParams;
   export import SettingGetParams = SettingsAPI.SettingGetParams;
   export import ZeroRTT = ZeroRTTAPI.ZeroRTT;
-  export import Zones0rtt = ZeroRTTAPI.Zones0rtt;
+  export import ZoneSetting0rtt = ZeroRTTAPI.ZoneSetting0rtt;
   export import ZeroRTTEditParams = ZeroRTTAPI.ZeroRTTEditParams;
   export import ZeroRTTGetParams = ZeroRTTAPI.ZeroRTTGetParams;
   export import AdvancedDDOS = AdvancedDDOSAPI.AdvancedDDOS;
-  export import ZonesAdvancedDDOS = AdvancedDDOSAPI.ZonesAdvancedDDOS;
+  export import ZoneSettingAdvancedDDOS = AdvancedDDOSAPI.ZoneSettingAdvancedDDOS;
   export import AdvancedDDOSGetParams = AdvancedDDOSAPI.AdvancedDDOSGetParams;
   export import AlwaysOnline = AlwaysOnlineAPI.AlwaysOnline;
-  export import ZonesAlwaysOnline = AlwaysOnlineAPI.ZonesAlwaysOnline;
+  export import ZoneSettingAlwaysOnline = AlwaysOnlineAPI.ZoneSettingAlwaysOnline;
   export import AlwaysOnlineEditParams = AlwaysOnlineAPI.AlwaysOnlineEditParams;
   export import AlwaysOnlineGetParams = AlwaysOnlineAPI.AlwaysOnlineGetParams;
   export import AlwaysUseHTTPS = AlwaysUseHTTPSAPI.AlwaysUseHTTPS;
-  export import ZonesAlwaysUseHTTPS = AlwaysUseHTTPSAPI.ZonesAlwaysUseHTTPS;
+  export import ZoneSettingAlwaysUseHTTPS = AlwaysUseHTTPSAPI.ZoneSettingAlwaysUseHTTPS;
   export import AlwaysUseHTTPSEditParams = AlwaysUseHTTPSAPI.AlwaysUseHTTPSEditParams;
   export import AlwaysUseHTTPSGetParams = AlwaysUseHTTPSAPI.AlwaysUseHTTPSGetParams;
   export import AutomaticHTTPSRewrites = AutomaticHTTPSRewritesAPI.AutomaticHTTPSRewrites;
-  export import ZonesAutomaticHTTPSRewrites = AutomaticHTTPSRewritesAPI.ZonesAutomaticHTTPSRewrites;
+  export import ZoneSettingAutomaticHTTPSRewrites = AutomaticHTTPSRewritesAPI.ZoneSettingAutomaticHTTPSRewrites;
   export import AutomaticHTTPSRewriteEditParams = AutomaticHTTPSRewritesAPI.AutomaticHTTPSRewriteEditParams;
   export import AutomaticHTTPSRewriteGetParams = AutomaticHTTPSRewritesAPI.AutomaticHTTPSRewriteGetParams;
   export import AutomaticPlatformOptimization = AutomaticPlatformOptimizationAPI.AutomaticPlatformOptimization;
-  export import ZonesAutomaticPlatformOptimization = AutomaticPlatformOptimizationAPI.ZonesAutomaticPlatformOptimization;
+  export import ZoneSettingAutomaticPlatformOptimization = AutomaticPlatformOptimizationAPI.ZoneSettingAutomaticPlatformOptimization;
   export import AutomaticPlatformOptimizationEditParams = AutomaticPlatformOptimizationAPI.AutomaticPlatformOptimizationEditParams;
   export import AutomaticPlatformOptimizationGetParams = AutomaticPlatformOptimizationAPI.AutomaticPlatformOptimizationGetParams;
   export import Brotli = BrotliAPI.Brotli;
-  export import ZonesBrotli = BrotliAPI.ZonesBrotli;
+  export import ZoneSettingBrotli = BrotliAPI.ZoneSettingBrotli;
   export import BrotliEditParams = BrotliAPI.BrotliEditParams;
   export import BrotliGetParams = BrotliAPI.BrotliGetParams;
   export import BrowserCacheTTL = BrowserCacheTTLAPI.BrowserCacheTTL;
-  export import ZonesBrowserCacheTTL = BrowserCacheTTLAPI.ZonesBrowserCacheTTL;
+  export import ZoneSettingBrowserCacheTTL = BrowserCacheTTLAPI.ZoneSettingBrowserCacheTTL;
   export import BrowserCacheTTLEditParams = BrowserCacheTTLAPI.BrowserCacheTTLEditParams;
   export import BrowserCacheTTLGetParams = BrowserCacheTTLAPI.BrowserCacheTTLGetParams;
   export import BrowserCheck = BrowserCheckAPI.BrowserCheck;
-  export import ZonesBrowserCheck = BrowserCheckAPI.ZonesBrowserCheck;
+  export import ZoneSettingBrowserCheck = BrowserCheckAPI.ZoneSettingBrowserCheck;
   export import BrowserCheckEditParams = BrowserCheckAPI.BrowserCheckEditParams;
   export import BrowserCheckGetParams = BrowserCheckAPI.BrowserCheckGetParams;
   export import CacheLevel = CacheLevelAPI.CacheLevel;
-  export import ZonesCacheLevel = CacheLevelAPI.ZonesCacheLevel;
+  export import ZoneSettingCacheLevel = CacheLevelAPI.ZoneSettingCacheLevel;
   export import CacheLevelEditParams = CacheLevelAPI.CacheLevelEditParams;
   export import CacheLevelGetParams = CacheLevelAPI.CacheLevelGetParams;
   export import ChallengeTTL = ChallengeTTLAPI.ChallengeTTL;
-  export import ZonesChallengeTTL = ChallengeTTLAPI.ZonesChallengeTTL;
+  export import ZoneSettingChallengeTTL = ChallengeTTLAPI.ZoneSettingChallengeTTL;
   export import ChallengeTTLEditParams = ChallengeTTLAPI.ChallengeTTLEditParams;
   export import ChallengeTTLGetParams = ChallengeTTLAPI.ChallengeTTLGetParams;
   export import Ciphers = CiphersAPI.Ciphers;
-  export import ZonesCiphers = CiphersAPI.ZonesCiphers;
+  export import ZoneSettingCiphers = CiphersAPI.ZoneSettingCiphers;
   export import CipherEditParams = CiphersAPI.CipherEditParams;
   export import CipherGetParams = CiphersAPI.CipherGetParams;
   export import DevelopmentMode = DevelopmentModeAPI.DevelopmentMode;
-  export import ZonesDevelopmentMode = DevelopmentModeAPI.ZonesDevelopmentMode;
+  export import ZoneSettingDevelopmentMode = DevelopmentModeAPI.ZoneSettingDevelopmentMode;
   export import DevelopmentModeEditParams = DevelopmentModeAPI.DevelopmentModeEditParams;
   export import DevelopmentModeGetParams = DevelopmentModeAPI.DevelopmentModeGetParams;
   export import EarlyHints = EarlyHintsAPI.EarlyHints;
-  export import ZonesEarlyHints = EarlyHintsAPI.ZonesEarlyHints;
+  export import ZoneSettingEarlyHints = EarlyHintsAPI.ZoneSettingEarlyHints;
   export import EarlyHintEditParams = EarlyHintsAPI.EarlyHintEditParams;
   export import EarlyHintGetParams = EarlyHintsAPI.EarlyHintGetParams;
   export import EmailObfuscation = EmailObfuscationAPI.EmailObfuscation;
-  export import ZonesEmailObfuscation = EmailObfuscationAPI.ZonesEmailObfuscation;
+  export import ZoneSettingEmailObfuscation = EmailObfuscationAPI.ZoneSettingEmailObfuscation;
   export import EmailObfuscationEditParams = EmailObfuscationAPI.EmailObfuscationEditParams;
   export import EmailObfuscationGetParams = EmailObfuscationAPI.EmailObfuscationGetParams;
   export import H2Prioritization = H2PrioritizationAPI.H2Prioritization;
-  export import ZonesH2Prioritization = H2PrioritizationAPI.ZonesH2Prioritization;
+  export import ZoneSettingH2Prioritization = H2PrioritizationAPI.ZoneSettingH2Prioritization;
   export import H2PrioritizationEditParams = H2PrioritizationAPI.H2PrioritizationEditParams;
   export import H2PrioritizationGetParams = H2PrioritizationAPI.H2PrioritizationGetParams;
   export import HotlinkProtection = HotlinkProtectionAPI.HotlinkProtection;
-  export import ZonesHotlinkProtection = HotlinkProtectionAPI.ZonesHotlinkProtection;
+  export import ZoneSettingHotlinkProtection = HotlinkProtectionAPI.ZoneSettingHotlinkProtection;
   export import HotlinkProtectionEditParams = HotlinkProtectionAPI.HotlinkProtectionEditParams;
   export import HotlinkProtectionGetParams = HotlinkProtectionAPI.HotlinkProtectionGetParams;
   export import HTTP2 = HTTP2API.HTTP2;
-  export import ZonesHTTP2 = HTTP2API.ZonesHTTP2;
+  export import ZoneSettingHTTP2 = HTTP2API.ZoneSettingHTTP2;
   export import HTTP2EditParams = HTTP2API.HTTP2EditParams;
   export import HTTP2GetParams = HTTP2API.HTTP2GetParams;
   export import HTTP3 = HTTP3API.HTTP3;
-  export import ZonesHTTP3 = HTTP3API.ZonesHTTP3;
+  export import ZoneSettingHTTP3 = HTTP3API.ZoneSettingHTTP3;
   export import HTTP3EditParams = HTTP3API.HTTP3EditParams;
   export import HTTP3GetParams = HTTP3API.HTTP3GetParams;
   export import ImageResizing = ImageResizingAPI.ImageResizing;
-  export import ZonesImageResizing = ImageResizingAPI.ZonesImageResizing;
+  export import ZoneSettingImageResizing = ImageResizingAPI.ZoneSettingImageResizing;
   export import ImageResizingEditParams = ImageResizingAPI.ImageResizingEditParams;
   export import ImageResizingGetParams = ImageResizingAPI.ImageResizingGetParams;
   export import IPGeolocation = IPGeolocationAPI.IPGeolocation;
-  export import ZonesIPGeolocation = IPGeolocationAPI.ZonesIPGeolocation;
+  export import ZoneSettingIPGeolocation = IPGeolocationAPI.ZoneSettingIPGeolocation;
   export import IPGeolocationEditParams = IPGeolocationAPI.IPGeolocationEditParams;
   export import IPGeolocationGetParams = IPGeolocationAPI.IPGeolocationGetParams;
   export import IPV6 = IPV6API.IPV6;
-  export import ZonesIPV6 = IPV6API.ZonesIPV6;
+  export import ZoneSettingIPV6 = IPV6API.ZoneSettingIPV6;
   export import IPV6EditParams = IPV6API.IPV6EditParams;
   export import IPV6GetParams = IPV6API.IPV6GetParams;
   export import MinTLSVersion = MinTLSVersionAPI.MinTLSVersion;
-  export import ZonesMinTLSVersion = MinTLSVersionAPI.ZonesMinTLSVersion;
+  export import ZoneSettingMinTLSVersion = MinTLSVersionAPI.ZoneSettingMinTLSVersion;
   export import MinTLSVersionEditParams = MinTLSVersionAPI.MinTLSVersionEditParams;
   export import MinTLSVersionGetParams = MinTLSVersionAPI.MinTLSVersionGetParams;
   export import Minify = MinifyAPI.Minify;
-  export import ZonesMinify = MinifyAPI.ZonesMinify;
+  export import ZoneSettingMinify = MinifyAPI.ZoneSettingMinify;
   export import MinifyEditParams = MinifyAPI.MinifyEditParams;
   export import MinifyGetParams = MinifyAPI.MinifyGetParams;
   export import Mirage = MirageAPI.Mirage;
-  export import ZonesMirage = MirageAPI.ZonesMirage;
+  export import ZoneSettingMirage = MirageAPI.ZoneSettingMirage;
   export import MirageEditParams = MirageAPI.MirageEditParams;
   export import MirageGetParams = MirageAPI.MirageGetParams;
   export import MobileRedirect = MobileRedirectAPI.MobileRedirect;
-  export import ZonesMobileRedirect = MobileRedirectAPI.ZonesMobileRedirect;
+  export import ZoneSettingMobileRedirect = MobileRedirectAPI.ZoneSettingMobileRedirect;
   export import MobileRedirectEditParams = MobileRedirectAPI.MobileRedirectEditParams;
   export import MobileRedirectGetParams = MobileRedirectAPI.MobileRedirectGetParams;
   export import NEL = NELAPI.NEL;
-  export import ZonesNEL = NELAPI.ZonesNEL;
+  export import ZoneSettingNEL = NELAPI.ZoneSettingNEL;
   export import NELEditParams = NELAPI.NELEditParams;
   export import NELGetParams = NELAPI.NELGetParams;
   export import OpportunisticEncryption = OpportunisticEncryptionAPI.OpportunisticEncryption;
-  export import ZonesOpportunisticEncryption = OpportunisticEncryptionAPI.ZonesOpportunisticEncryption;
+  export import ZoneSettingOpportunisticEncryption = OpportunisticEncryptionAPI.ZoneSettingOpportunisticEncryption;
   export import OpportunisticEncryptionEditParams = OpportunisticEncryptionAPI.OpportunisticEncryptionEditParams;
   export import OpportunisticEncryptionGetParams = OpportunisticEncryptionAPI.OpportunisticEncryptionGetParams;
   export import OpportunisticOnion = OpportunisticOnionAPI.OpportunisticOnion;
-  export import ZonesOpportunisticOnion = OpportunisticOnionAPI.ZonesOpportunisticOnion;
+  export import ZoneSettingOpportunisticOnion = OpportunisticOnionAPI.ZoneSettingOpportunisticOnion;
   export import OpportunisticOnionEditParams = OpportunisticOnionAPI.OpportunisticOnionEditParams;
   export import OpportunisticOnionGetParams = OpportunisticOnionAPI.OpportunisticOnionGetParams;
   export import OrangeToOrange = OrangeToOrangeAPI.OrangeToOrange;
-  export import ZonesOrangeToOrange = OrangeToOrangeAPI.ZonesOrangeToOrange;
+  export import ZoneSettingOrangeToOrange = OrangeToOrangeAPI.ZoneSettingOrangeToOrange;
   export import OrangeToOrangeEditParams = OrangeToOrangeAPI.OrangeToOrangeEditParams;
   export import OrangeToOrangeGetParams = OrangeToOrangeAPI.OrangeToOrangeGetParams;
   export import OriginErrorPagePassThru = OriginErrorPagePassThruAPI.OriginErrorPagePassThru;
-  export import ZonesOriginErrorPagePassThru = OriginErrorPagePassThruAPI.ZonesOriginErrorPagePassThru;
+  export import ZoneSettingOriginErrorPagePassThru = OriginErrorPagePassThruAPI.ZoneSettingOriginErrorPagePassThru;
   export import OriginErrorPagePassThruEditParams = OriginErrorPagePassThruAPI.OriginErrorPagePassThruEditParams;
   export import OriginErrorPagePassThruGetParams = OriginErrorPagePassThruAPI.OriginErrorPagePassThruGetParams;
   export import OriginMaxHTTPVersion = OriginMaxHTTPVersionAPI.OriginMaxHTTPVersion;
@@ -957,79 +957,79 @@ export namespace Settings {
   export import OriginMaxHTTPVersionEditParams = OriginMaxHTTPVersionAPI.OriginMaxHTTPVersionEditParams;
   export import OriginMaxHTTPVersionGetParams = OriginMaxHTTPVersionAPI.OriginMaxHTTPVersionGetParams;
   export import Polish = PolishAPI.Polish;
-  export import ZonesPolish = PolishAPI.ZonesPolish;
+  export import ZoneSettingPolish = PolishAPI.ZoneSettingPolish;
   export import PolishEditParams = PolishAPI.PolishEditParams;
   export import PolishGetParams = PolishAPI.PolishGetParams;
   export import PrefetchPreload = PrefetchPreloadAPI.PrefetchPreload;
-  export import ZonesPrefetchPreload = PrefetchPreloadAPI.ZonesPrefetchPreload;
+  export import ZoneSettingPrefetchPreload = PrefetchPreloadAPI.ZoneSettingPrefetchPreload;
   export import PrefetchPreloadEditParams = PrefetchPreloadAPI.PrefetchPreloadEditParams;
   export import PrefetchPreloadGetParams = PrefetchPreloadAPI.PrefetchPreloadGetParams;
   export import ProxyReadTimeout = ProxyReadTimeoutAPI.ProxyReadTimeout;
-  export import ZonesProxyReadTimeout = ProxyReadTimeoutAPI.ZonesProxyReadTimeout;
+  export import ZoneSettingProxyReadTimeout = ProxyReadTimeoutAPI.ZoneSettingProxyReadTimeout;
   export import ProxyReadTimeoutEditParams = ProxyReadTimeoutAPI.ProxyReadTimeoutEditParams;
   export import ProxyReadTimeoutGetParams = ProxyReadTimeoutAPI.ProxyReadTimeoutGetParams;
   export import PseudoIPV4 = PseudoIPV4API.PseudoIPV4;
-  export import ZonesPseudoIPV4 = PseudoIPV4API.ZonesPseudoIPV4;
+  export import ZoneSettingPseudoIPV4 = PseudoIPV4API.ZoneSettingPseudoIPV4;
   export import PseudoIPV4EditParams = PseudoIPV4API.PseudoIPV4EditParams;
   export import PseudoIPV4GetParams = PseudoIPV4API.PseudoIPV4GetParams;
   export import ResponseBuffering = ResponseBufferingAPI.ResponseBuffering;
-  export import ZonesBuffering = ResponseBufferingAPI.ZonesBuffering;
+  export import ZoneSettingBuffering = ResponseBufferingAPI.ZoneSettingBuffering;
   export import ResponseBufferingEditParams = ResponseBufferingAPI.ResponseBufferingEditParams;
   export import ResponseBufferingGetParams = ResponseBufferingAPI.ResponseBufferingGetParams;
   export import RocketLoader = RocketLoaderAPI.RocketLoader;
-  export import ZonesRocketLoader = RocketLoaderAPI.ZonesRocketLoader;
+  export import ZoneSettingRocketLoader = RocketLoaderAPI.ZoneSettingRocketLoader;
   export import RocketLoaderEditParams = RocketLoaderAPI.RocketLoaderEditParams;
   export import RocketLoaderGetParams = RocketLoaderAPI.RocketLoaderGetParams;
   export import SecurityHeaders = SecurityHeadersAPI.SecurityHeaders;
-  export import ZonesSecurityHeader = SecurityHeadersAPI.ZonesSecurityHeader;
+  export import ZoneSettingSecurityHeader = SecurityHeadersAPI.ZoneSettingSecurityHeader;
   export import SecurityHeaderEditParams = SecurityHeadersAPI.SecurityHeaderEditParams;
   export import SecurityHeaderGetParams = SecurityHeadersAPI.SecurityHeaderGetParams;
   export import SecurityLevel = SecurityLevelAPI.SecurityLevel;
-  export import ZonesSecurityLevel = SecurityLevelAPI.ZonesSecurityLevel;
+  export import ZoneSettingSecurityLevel = SecurityLevelAPI.ZoneSettingSecurityLevel;
   export import SecurityLevelEditParams = SecurityLevelAPI.SecurityLevelEditParams;
   export import SecurityLevelGetParams = SecurityLevelAPI.SecurityLevelGetParams;
   export import ServerSideExcludes = ServerSideExcludesAPI.ServerSideExcludes;
-  export import ZonesServerSideExclude = ServerSideExcludesAPI.ZonesServerSideExclude;
+  export import ZoneSettingServerSideExclude = ServerSideExcludesAPI.ZoneSettingServerSideExclude;
   export import ServerSideExcludeEditParams = ServerSideExcludesAPI.ServerSideExcludeEditParams;
   export import ServerSideExcludeGetParams = ServerSideExcludesAPI.ServerSideExcludeGetParams;
   export import SortQueryStringForCache = SortQueryStringForCacheAPI.SortQueryStringForCache;
-  export import ZonesSortQueryStringForCache = SortQueryStringForCacheAPI.ZonesSortQueryStringForCache;
+  export import ZoneSettingSortQueryStringForCache = SortQueryStringForCacheAPI.ZoneSettingSortQueryStringForCache;
   export import SortQueryStringForCacheEditParams = SortQueryStringForCacheAPI.SortQueryStringForCacheEditParams;
   export import SortQueryStringForCacheGetParams = SortQueryStringForCacheAPI.SortQueryStringForCacheGetParams;
   export import SSL = SSLAPI.SSL;
-  export import ZonesSSL = SSLAPI.ZonesSSL;
+  export import ZoneSettingSSL = SSLAPI.ZoneSettingSSL;
   export import SSLEditParams = SSLAPI.SSLEditParams;
   export import SSLGetParams = SSLAPI.SSLGetParams;
   export import SSLRecommender = SSLRecommenderAPI.SSLRecommender;
-  export import ZonesSSLRecommender = SSLRecommenderAPI.ZonesSSLRecommender;
+  export import ZoneSettingSSLRecommender = SSLRecommenderAPI.ZoneSettingSSLRecommender;
   export import SSLRecommenderEditParams = SSLRecommenderAPI.SSLRecommenderEditParams;
   export import SSLRecommenderGetParams = SSLRecommenderAPI.SSLRecommenderGetParams;
   export import TLS1_3 = TLS1_3API.TLS1_3;
-  export import ZonesTLS1_3 = TLS1_3API.ZonesTLS1_3;
+  export import ZoneSettingTLS1_3 = TLS1_3API.ZoneSettingTLS1_3;
   export import TLS1_3EditParams = TLS1_3API.TLS1_3EditParams;
   export import TLS1_3GetParams = TLS1_3API.TLS1_3GetParams;
   export import TLSClientAuth = TLSClientAuthAPI.TLSClientAuth;
-  export import ZonesTLSClientAuth = TLSClientAuthAPI.ZonesTLSClientAuth;
+  export import ZoneSettingTLSClientAuth = TLSClientAuthAPI.ZoneSettingTLSClientAuth;
   export import TLSClientAuthEditParams = TLSClientAuthAPI.TLSClientAuthEditParams;
   export import TLSClientAuthGetParams = TLSClientAuthAPI.TLSClientAuthGetParams;
   export import TrueClientIPHeader = TrueClientIPHeaderAPI.TrueClientIPHeader;
-  export import ZonesTrueClientIPHeader = TrueClientIPHeaderAPI.ZonesTrueClientIPHeader;
+  export import ZoneSettingTrueClientIPHeader = TrueClientIPHeaderAPI.ZoneSettingTrueClientIPHeader;
   export import TrueClientIPHeaderEditParams = TrueClientIPHeaderAPI.TrueClientIPHeaderEditParams;
   export import TrueClientIPHeaderGetParams = TrueClientIPHeaderAPI.TrueClientIPHeaderGetParams;
   export import WAF = WAFAPI.WAF;
-  export import ZonesWAF = WAFAPI.ZonesWAF;
+  export import ZoneSettingWAF = WAFAPI.ZoneSettingWAF;
   export import WAFEditParams = WAFAPI.WAFEditParams;
   export import WAFGetParams = WAFAPI.WAFGetParams;
   export import WebP = WebPAPI.WebP;
-  export import ZonesWebP = WebPAPI.ZonesWebP;
+  export import ZoneSettingWebP = WebPAPI.ZoneSettingWebP;
   export import WebPEditParams = WebPAPI.WebPEditParams;
   export import WebPGetParams = WebPAPI.WebPGetParams;
   export import Websocket = WebsocketAPI.Websocket;
-  export import ZonesWebsockets = WebsocketAPI.ZonesWebsockets;
+  export import ZoneSettingWebsockets = WebsocketAPI.ZoneSettingWebsockets;
   export import WebsocketEditParams = WebsocketAPI.WebsocketEditParams;
   export import WebsocketGetParams = WebsocketAPI.WebsocketGetParams;
   export import FontSettings = FontSettingsAPI.FontSettings;
-  export import SpeedCloudflareFonts = FontSettingsAPI.SpeedCloudflareFonts;
+  export import ZoneSettingFonts = FontSettingsAPI.ZoneSettingFonts;
   export import FontSettingEditParams = FontSettingsAPI.FontSettingEditParams;
   export import FontSettingGetParams = FontSettingsAPI.FontSettingGetParams;
 }

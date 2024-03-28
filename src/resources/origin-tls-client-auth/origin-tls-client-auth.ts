@@ -79,7 +79,7 @@ export class OriginTLSClientAuth extends APIResource {
   }
 }
 
-export interface TLSCertificatesAndHostnamesZoneAuthenticatedOriginPull {
+export interface OriginTLSClientCertificateZoneAuthenticatedOriginPull {
   /**
    * Identifier
    */
@@ -173,7 +173,7 @@ export interface OriginTLSClientAuthGetParams {
 }
 
 export namespace OriginTLSClientAuth {
-  export import TLSCertificatesAndHostnamesZoneAuthenticatedOriginPull = OriginTLSClientAuthAPI.TLSCertificatesAndHostnamesZoneAuthenticatedOriginPull;
+  export import OriginTLSClientCertificateZoneAuthenticatedOriginPull = OriginTLSClientAuthAPI.OriginTLSClientCertificateZoneAuthenticatedOriginPull;
   export import OriginTLSClientAuthCreateResponse = OriginTLSClientAuthAPI.OriginTLSClientAuthCreateResponse;
   export import OriginTLSClientAuthListResponse = OriginTLSClientAuthAPI.OriginTLSClientAuthListResponse;
   export import OriginTLSClientAuthDeleteResponse = OriginTLSClientAuthAPI.OriginTLSClientAuthDeleteResponse;
@@ -183,8 +183,8 @@ export namespace OriginTLSClientAuth {
   export import OriginTLSClientAuthDeleteParams = OriginTLSClientAuthAPI.OriginTLSClientAuthDeleteParams;
   export import OriginTLSClientAuthGetParams = OriginTLSClientAuthAPI.OriginTLSClientAuthGetParams;
   export import Hostnames = HostnamesAPI.Hostnames;
-  export import TLSCertificatesAndHostnamesHostnameAuthenticatedOriginPull = HostnamesAPI.TLSCertificatesAndHostnamesHostnameAuthenticatedOriginPull;
-  export import TLSCertificatesAndHostnamesHostnameCertidObject = HostnamesAPI.TLSCertificatesAndHostnamesHostnameCertidObject;
+  export import OriginTLSClientCertificateAuthenticatedOriginPull = HostnamesAPI.OriginTLSClientCertificateAuthenticatedOriginPull;
+  export import OriginTLSClientCertificateID = HostnamesAPI.OriginTLSClientCertificateID;
   export import HostnameUpdateResponse = HostnamesAPI.HostnameUpdateResponse;
   export import HostnameUpdateParams = HostnamesAPI.HostnameUpdateParams;
   export import HostnameGetParams = HostnamesAPI.HostnameGetParams;

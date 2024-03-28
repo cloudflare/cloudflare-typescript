@@ -21,11 +21,11 @@ export class Policies extends APIResource {
   create(
     params: PolicyCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TeamsDevicesDeviceSettingsPolicy | null> {
+  ): Core.APIPromise<DevicesDeviceSettingsPolicy | null> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/devices/policy`, { body, ...options }) as Core.APIPromise<{
-        result: TeamsDevicesDeviceSettingsPolicy | null;
+        result: DevicesDeviceSettingsPolicy | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -66,13 +66,13 @@ export class Policies extends APIResource {
     policyId: string,
     params: PolicyEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TeamsDevicesDeviceSettingsPolicy | null> {
+  ): Core.APIPromise<DevicesDeviceSettingsPolicy | null> {
     const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/devices/policy/${policyId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: TeamsDevicesDeviceSettingsPolicy | null }>
+      }) as Core.APIPromise<{ result: DevicesDeviceSettingsPolicy | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -83,17 +83,17 @@ export class Policies extends APIResource {
     policyId: string,
     params: PolicyGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TeamsDevicesDeviceSettingsPolicy | null> {
+  ): Core.APIPromise<DevicesDeviceSettingsPolicy | null> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/devices/policy/${policyId}`, options) as Core.APIPromise<{
-        result: TeamsDevicesDeviceSettingsPolicy | null;
+        result: DevicesDeviceSettingsPolicy | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface TeamsDevicesDeviceSettingsPolicy {
+export interface DevicesDeviceSettingsPolicy {
   /**
    * Whether to allow the user to switch WARP between modes.
    */
@@ -142,18 +142,18 @@ export interface TeamsDevicesDeviceSettingsPolicy {
    */
   enabled?: boolean;
 
-  exclude?: Array<ExcludesAPI.TeamsDevicesSplitTunnel>;
+  exclude?: Array<ExcludesAPI.DevicesSplitTunnel>;
 
   /**
    * Whether to add Microsoft IPs to Split Tunnel exclusions.
    */
   exclude_office_ips?: boolean;
 
-  fallback_domains?: Array<FallbackDomainsAPI.TeamsDevicesFallbackDomain>;
+  fallback_domains?: Array<FallbackDomainsAPI.DevicesFallbackDomain>;
 
   gateway_unique_id?: string;
 
-  include?: Array<IncludesAPI.TeamsDevicesSplitTunnelInclude>;
+  include?: Array<IncludesAPI.DevicesSplitTunnelInclude>;
 
   /**
    * The amount of time in minutes a user is allowed access to their LAN. A value of
@@ -190,7 +190,7 @@ export interface TeamsDevicesDeviceSettingsPolicy {
    */
   precedence?: number;
 
-  service_mode_v2?: TeamsDevicesDeviceSettingsPolicy.ServiceModeV2;
+  service_mode_v2?: DevicesDeviceSettingsPolicy.ServiceModeV2;
 
   /**
    * The URL to launch when the Send Feedback button is clicked.
@@ -203,7 +203,7 @@ export interface TeamsDevicesDeviceSettingsPolicy {
   switch_locked?: boolean;
 }
 
-export namespace TeamsDevicesDeviceSettingsPolicy {
+export namespace DevicesDeviceSettingsPolicy {
   export interface ServiceModeV2 {
     /**
      * The mode to run the WARP client under.
@@ -217,9 +217,9 @@ export namespace TeamsDevicesDeviceSettingsPolicy {
   }
 }
 
-export type PolicyListResponse = Array<TeamsDevicesDeviceSettingsPolicy>;
+export type PolicyListResponse = Array<DevicesDeviceSettingsPolicy>;
 
-export type PolicyDeleteResponse = Array<TeamsDevicesDeviceSettingsPolicy>;
+export type PolicyDeleteResponse = Array<DevicesDeviceSettingsPolicy>;
 
 export interface PolicyCreateParams {
   /**
@@ -452,7 +452,7 @@ export interface PolicyGetParams {
 }
 
 export namespace Policies {
-  export import TeamsDevicesDeviceSettingsPolicy = PoliciesAPI.TeamsDevicesDeviceSettingsPolicy;
+  export import DevicesDeviceSettingsPolicy = PoliciesAPI.DevicesDeviceSettingsPolicy;
   export import PolicyListResponse = PoliciesAPI.PolicyListResponse;
   export import PolicyDeleteResponse = PoliciesAPI.PolicyDeleteResponse;
   export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
@@ -464,7 +464,7 @@ export namespace Policies {
   export import DefaultPolicyGetResponse = DefaultPolicyAPI.DefaultPolicyGetResponse;
   export import DefaultPolicyGetParams = DefaultPolicyAPI.DefaultPolicyGetParams;
   export import Excludes = ExcludesAPI.Excludes;
-  export import TeamsDevicesSplitTunnel = ExcludesAPI.TeamsDevicesSplitTunnel;
+  export import DevicesSplitTunnel = ExcludesAPI.DevicesSplitTunnel;
   export import ExcludeUpdateResponse = ExcludesAPI.ExcludeUpdateResponse;
   export import ExcludeListResponse = ExcludesAPI.ExcludeListResponse;
   export import ExcludeGetResponse = ExcludesAPI.ExcludeGetResponse;
@@ -472,7 +472,7 @@ export namespace Policies {
   export import ExcludeListParams = ExcludesAPI.ExcludeListParams;
   export import ExcludeGetParams = ExcludesAPI.ExcludeGetParams;
   export import FallbackDomains = FallbackDomainsAPI.FallbackDomains;
-  export import TeamsDevicesFallbackDomain = FallbackDomainsAPI.TeamsDevicesFallbackDomain;
+  export import DevicesFallbackDomain = FallbackDomainsAPI.DevicesFallbackDomain;
   export import FallbackDomainUpdateResponse = FallbackDomainsAPI.FallbackDomainUpdateResponse;
   export import FallbackDomainListResponse = FallbackDomainsAPI.FallbackDomainListResponse;
   export import FallbackDomainGetResponse = FallbackDomainsAPI.FallbackDomainGetResponse;
@@ -480,7 +480,7 @@ export namespace Policies {
   export import FallbackDomainListParams = FallbackDomainsAPI.FallbackDomainListParams;
   export import FallbackDomainGetParams = FallbackDomainsAPI.FallbackDomainGetParams;
   export import Includes = IncludesAPI.Includes;
-  export import TeamsDevicesSplitTunnelInclude = IncludesAPI.TeamsDevicesSplitTunnelInclude;
+  export import DevicesSplitTunnelInclude = IncludesAPI.DevicesSplitTunnelInclude;
   export import IncludeUpdateResponse = IncludesAPI.IncludeUpdateResponse;
   export import IncludeListResponse = IncludesAPI.IncludeListResponse;
   export import IncludeGetResponse = IncludesAPI.IncludeGetResponse;

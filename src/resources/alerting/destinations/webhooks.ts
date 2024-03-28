@@ -75,18 +75,18 @@ export class Webhooks extends APIResource {
     webhookId: string,
     params: WebhookGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AaaWebhooks> {
+  ): Core.APIPromise<AlertingWebhooks> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/alerting/v3/destinations/webhooks/${webhookId}`,
         options,
-      ) as Core.APIPromise<{ result: AaaWebhooks }>
+      ) as Core.APIPromise<{ result: AlertingWebhooks }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface AaaWebhooks {
+export interface AlertingWebhooks {
   /**
    * The unique identifier of a webhook
    */
@@ -147,7 +147,7 @@ export interface WebhookUpdateResponse {
   id?: string;
 }
 
-export type WebhookListResponse = Array<AaaWebhooks>;
+export type WebhookListResponse = Array<AlertingWebhooks>;
 
 export type WebhookDeleteResponse = unknown | Array<unknown> | string;
 
@@ -223,7 +223,7 @@ export interface WebhookGetParams {
 }
 
 export namespace Webhooks {
-  export import AaaWebhooks = WebhooksAPI.AaaWebhooks;
+  export import AlertingWebhooks = WebhooksAPI.AlertingWebhooks;
   export import WebhookCreateResponse = WebhooksAPI.WebhookCreateResponse;
   export import WebhookUpdateResponse = WebhooksAPI.WebhookUpdateResponse;
   export import WebhookListResponse = WebhooksAPI.WebhookListResponse;

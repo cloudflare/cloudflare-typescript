@@ -12,13 +12,13 @@ export class TrueClientIPHeader extends APIResource {
   edit(
     params: TrueClientIPHeaderEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZonesTrueClientIPHeader> {
+  ): Core.APIPromise<ZoneSettingTrueClientIPHeader> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/true_client_ip_header`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZonesTrueClientIPHeader }>
+      }) as Core.APIPromise<{ result: ZoneSettingTrueClientIPHeader }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -29,11 +29,11 @@ export class TrueClientIPHeader extends APIResource {
   get(
     params: TrueClientIPHeaderGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZonesTrueClientIPHeader> {
+  ): Core.APIPromise<ZoneSettingTrueClientIPHeader> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/true_client_ip_header`, options) as Core.APIPromise<{
-        result: ZonesTrueClientIPHeader;
+        result: ZoneSettingTrueClientIPHeader;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -43,7 +43,7 @@ export class TrueClientIPHeader extends APIResource {
  * Allows customer to continue to use True Client IP (Akamai feature) in the
  * headers we send to the origin. This is limited to Enterprise Zones.
  */
-export interface ZonesTrueClientIPHeader {
+export interface ZoneSettingTrueClientIPHeader {
   /**
    * ID of the zone setting.
    */
@@ -86,7 +86,7 @@ export interface TrueClientIPHeaderGetParams {
 }
 
 export namespace TrueClientIPHeader {
-  export import ZonesTrueClientIPHeader = TrueClientIPHeaderAPI.ZonesTrueClientIPHeader;
+  export import ZoneSettingTrueClientIPHeader = TrueClientIPHeaderAPI.ZoneSettingTrueClientIPHeader;
   export import TrueClientIPHeaderEditParams = TrueClientIPHeaderAPI.TrueClientIPHeaderEditParams;
   export import TrueClientIPHeaderGetParams = TrueClientIPHeaderAPI.TrueClientIPHeaderGetParams;
 }

@@ -55,7 +55,7 @@ export class Includes extends APIResource {
   }
 }
 
-export interface TeamsDevicesSplitTunnelInclude {
+export interface DevicesSplitTunnelInclude {
   /**
    * The address in CIDR format to include in the tunnel. If address is present, host
    * must not be present.
@@ -74,11 +74,11 @@ export interface TeamsDevicesSplitTunnelInclude {
   host?: string;
 }
 
-export type IncludeUpdateResponse = Array<TeamsDevicesSplitTunnelInclude>;
+export type IncludeUpdateResponse = Array<DevicesSplitTunnelInclude>;
 
-export type IncludeListResponse = Array<TeamsDevicesSplitTunnelInclude>;
+export type IncludeListResponse = Array<DevicesSplitTunnelInclude>;
 
-export type IncludeGetResponse = Array<TeamsDevicesSplitTunnelInclude>;
+export type IncludeGetResponse = Array<DevicesSplitTunnelInclude>;
 
 export interface IncludeUpdateParams {
   /**
@@ -89,7 +89,7 @@ export interface IncludeUpdateParams {
   /**
    * Body param:
    */
-  body: Array<TeamsDevicesSplitTunnelInclude>;
+  body: Array<DevicesSplitTunnelInclude>;
 }
 
 export interface IncludeListParams {
@@ -101,7 +101,7 @@ export interface IncludeGetParams {
 }
 
 export namespace Includes {
-  export import TeamsDevicesSplitTunnelInclude = IncludesAPI.TeamsDevicesSplitTunnelInclude;
+  export import DevicesSplitTunnelInclude = IncludesAPI.DevicesSplitTunnelInclude;
   export import IncludeUpdateResponse = IncludesAPI.IncludeUpdateResponse;
   export import IncludeListResponse = IncludesAPI.IncludeListResponse;
   export import IncludeGetResponse = IncludesAPI.IncludeGetResponse;

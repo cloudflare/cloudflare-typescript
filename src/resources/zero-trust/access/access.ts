@@ -27,7 +27,7 @@ export class Access extends APIResource {
 
 export namespace Access {
   export import Applications = ApplicationsAPI.Applications;
-  export import AccessApps = ApplicationsAPI.AccessApps;
+  export import ZeroTrustApps = ApplicationsAPI.ZeroTrustApps;
   export import ApplicationListResponse = ApplicationsAPI.ApplicationListResponse;
   export import ApplicationDeleteResponse = ApplicationsAPI.ApplicationDeleteResponse;
   export import ApplicationRevokeTokensResponse = ApplicationsAPI.ApplicationRevokeTokensResponse;
@@ -38,7 +38,7 @@ export namespace Access {
   export import ApplicationGetParams = ApplicationsAPI.ApplicationGetParams;
   export import ApplicationRevokeTokensParams = ApplicationsAPI.ApplicationRevokeTokensParams;
   export import Certificates = CertificatesAPI.Certificates;
-  export import AccessCertificates = CertificatesAPI.AccessCertificates;
+  export import ZeroTrustCertificates = CertificatesAPI.ZeroTrustCertificates;
   export import CertificateListResponse = CertificatesAPI.CertificateListResponse;
   export import CertificateDeleteResponse = CertificatesAPI.CertificateDeleteResponse;
   export import CertificateCreateParams = CertificatesAPI.CertificateCreateParams;
@@ -47,7 +47,7 @@ export namespace Access {
   export import CertificateDeleteParams = CertificatesAPI.CertificateDeleteParams;
   export import CertificateGetParams = CertificatesAPI.CertificateGetParams;
   export import Groups = GroupsAPI.Groups;
-  export import AccessGroups = GroupsAPI.AccessGroups;
+  export import ZeroTrustGroups = GroupsAPI.ZeroTrustGroups;
   export import GroupListResponse = GroupsAPI.GroupListResponse;
   export import GroupDeleteResponse = GroupsAPI.GroupDeleteResponse;
   export import GroupCreateParams = GroupsAPI.GroupCreateParams;
@@ -56,7 +56,7 @@ export namespace Access {
   export import GroupDeleteParams = GroupsAPI.GroupDeleteParams;
   export import GroupGetParams = GroupsAPI.GroupGetParams;
   export import ServiceTokens = ServiceTokensAPI.ServiceTokens;
-  export import AccessServiceTokens = ServiceTokensAPI.AccessServiceTokens;
+  export import ZeroTrustServiceTokens = ServiceTokensAPI.ZeroTrustServiceTokens;
   export import ServiceTokenCreateResponse = ServiceTokensAPI.ServiceTokenCreateResponse;
   export import ServiceTokenListResponse = ServiceTokensAPI.ServiceTokenListResponse;
   export import ServiceTokenRotateResponse = ServiceTokensAPI.ServiceTokenRotateResponse;
@@ -65,7 +65,7 @@ export namespace Access {
   export import ServiceTokenListParams = ServiceTokensAPI.ServiceTokenListParams;
   export import ServiceTokenDeleteParams = ServiceTokensAPI.ServiceTokenDeleteParams;
   export import Bookmarks = BookmarksAPI.Bookmarks;
-  export import AccessBookmarks = BookmarksAPI.AccessBookmarks;
+  export import ZeroTrustBookmarks = BookmarksAPI.ZeroTrustBookmarks;
   export import BookmarkListResponse = BookmarksAPI.BookmarkListResponse;
   export import BookmarkDeleteResponse = BookmarksAPI.BookmarkDeleteResponse;
   export import Keys = KeysAPI.Keys;
@@ -75,17 +75,17 @@ export namespace Access {
   export import KeyUpdateParams = KeysAPI.KeyUpdateParams;
   export import Logs = LogsAPI.Logs;
   export import Users = UsersAPI.Users;
-  export import AccessUsers = UsersAPI.AccessUsers;
+  export import ZeroTrustUsers = UsersAPI.ZeroTrustUsers;
   export import UserListResponse = UsersAPI.UserListResponse;
   export import CustomPages = CustomPagesAPI.CustomPages;
-  export import AccessCustomPage = CustomPagesAPI.AccessCustomPage;
-  export import AccessCustomPageWithoutHTML = CustomPagesAPI.AccessCustomPageWithoutHTML;
+  export import ZeroTrustCustomPage = CustomPagesAPI.ZeroTrustCustomPage;
+  export import ZeroTrustCustomPageWithoutHTML = CustomPagesAPI.ZeroTrustCustomPageWithoutHTML;
   export import CustomPageListResponse = CustomPagesAPI.CustomPageListResponse;
   export import CustomPageDeleteResponse = CustomPagesAPI.CustomPageDeleteResponse;
   export import CustomPageCreateParams = CustomPagesAPI.CustomPageCreateParams;
   export import CustomPageUpdateParams = CustomPagesAPI.CustomPageUpdateParams;
   export import Tags = TagsAPI.Tags;
-  export import AccessTag = TagsAPI.AccessTag;
+  export import ZeroTrustTag = TagsAPI.ZeroTrustTag;
   export import TagListResponse = TagsAPI.TagListResponse;
   export import TagDeleteResponse = TagsAPI.TagDeleteResponse;
   export import TagCreateParams = TagsAPI.TagCreateParams;

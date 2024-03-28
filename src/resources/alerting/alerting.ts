@@ -19,11 +19,11 @@ export namespace Alerting {
   export import AvailableAlertListParams = AvailableAlertsAPI.AvailableAlertListParams;
   export import Destinations = DestinationsAPI.Destinations;
   export import History = HistoryAPI.History;
-  export import AaaHistory = HistoryAPI.AaaHistory;
-  export import AaaHistoriesV4PagePaginationArray = HistoryAPI.AaaHistoriesV4PagePaginationArray;
+  export import AlertingHistory = HistoryAPI.AlertingHistory;
+  export import AlertingHistoriesV4PagePaginationArray = HistoryAPI.AlertingHistoriesV4PagePaginationArray;
   export import HistoryListParams = HistoryAPI.HistoryListParams;
   export import Policies = PoliciesAPI.Policies;
-  export import AaaPolicies = PoliciesAPI.AaaPolicies;
+  export import AlertingPolicies = PoliciesAPI.AlertingPolicies;
   export import PolicyCreateResponse = PoliciesAPI.PolicyCreateResponse;
   export import PolicyUpdateResponse = PoliciesAPI.PolicyUpdateResponse;
   export import PolicyListResponse = PoliciesAPI.PolicyListResponse;

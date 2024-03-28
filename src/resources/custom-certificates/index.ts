@@ -1,8 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { PrioritizeUpdateResponse, PrioritizeUpdateParams, Prioritize } from './prioritize';
 export {
-  TLSCertificatesAndHostnamesCustomCertificate,
+  CustomCertificate,
   CustomCertificateCreateResponse,
   CustomCertificateDeleteResponse,
   CustomCertificateEditResponse,
@@ -12,6 +11,7 @@ export {
   CustomCertificateDeleteParams,
   CustomCertificateEditParams,
   CustomCertificateGetParams,
-  TLSCertificatesAndHostnamesCustomCertificatesV4PagePaginationArray,
+  CustomCertificatesV4PagePaginationArray,
   CustomCertificates,
 } from './custom-certificates';
+export { PrioritizeUpdateResponse, PrioritizeUpdateParams, Prioritize } from './prioritize';

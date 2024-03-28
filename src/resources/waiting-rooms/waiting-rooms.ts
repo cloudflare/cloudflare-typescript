@@ -23,10 +23,10 @@ export class WaitingRooms extends APIResource {
     zoneIdentifier: string,
     body: WaitingRoomCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WaitingroomWaitingroom> {
+  ): Core.APIPromise<WaitingRoom> {
     return (
       this._client.post(`/zones/${zoneIdentifier}/waiting_rooms`, { body, ...options }) as Core.APIPromise<{
-        result: WaitingroomWaitingroom;
+        result: WaitingRoom;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -39,12 +39,12 @@ export class WaitingRooms extends APIResource {
     waitingRoomId: string,
     body: WaitingRoomUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WaitingroomWaitingroom> {
+  ): Core.APIPromise<WaitingRoom> {
     return (
       this._client.put(`/zones/${zoneIdentifier}/waiting_rooms/${waitingRoomId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: WaitingroomWaitingroom }>
+      }) as Core.APIPromise<{ result: WaitingRoom }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -86,12 +86,12 @@ export class WaitingRooms extends APIResource {
     waitingRoomId: string,
     body: WaitingRoomEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WaitingroomWaitingroom> {
+  ): Core.APIPromise<WaitingRoom> {
     return (
       this._client.patch(`/zones/${zoneIdentifier}/waiting_rooms/${waitingRoomId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: WaitingroomWaitingroom }>
+      }) as Core.APIPromise<{ result: WaitingRoom }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -102,17 +102,17 @@ export class WaitingRooms extends APIResource {
     zoneIdentifier: string,
     waitingRoomId: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WaitingroomWaitingroom> {
+  ): Core.APIPromise<WaitingRoom> {
     return (
       this._client.get(
         `/zones/${zoneIdentifier}/waiting_rooms/${waitingRoomId}`,
         options,
-      ) as Core.APIPromise<{ result: WaitingroomWaitingroom }>
+      ) as Core.APIPromise<{ result: WaitingRoom }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface WaitingroomWaitingroom {
+export interface WaitingRoom {
   id?: string;
 
   /**
@@ -121,13 +121,13 @@ export interface WaitingroomWaitingroom {
    * implied wildcard at the end of the path. The hostname and path combination must
    * be unique to this and all other waiting rooms.
    */
-  additional_routes?: Array<WaitingroomWaitingroom.AdditionalRoute>;
+  additional_routes?: Array<WaitingRoom.AdditionalRoute>;
 
   /**
    * Configures cookie attributes for the waiting room cookie. This encrypted cookie
    * stores a user's status in the waiting room, such as queue position.
    */
-  cookie_attributes?: WaitingroomWaitingroom.CookieAttributes;
+  cookie_attributes?: WaitingRoom.CookieAttributes;
 
   /**
    * Appends a '\_' + a custom suffix to the end of Cloudflare Waiting Room's cookie
@@ -457,7 +457,7 @@ export interface WaitingroomWaitingroom {
   total_active_users?: number;
 }
 
-export namespace WaitingroomWaitingroom {
+export namespace WaitingRoom {
   export interface AdditionalRoute {
     /**
      * The hostname to which this waiting room will be applied (no wildcards). The
@@ -498,7 +498,7 @@ export namespace WaitingroomWaitingroom {
   }
 }
 
-export type WaitingRoomListResponse = Array<WaitingroomWaitingroom>;
+export type WaitingRoomListResponse = Array<WaitingRoom>;
 
 export interface WaitingRoomDeleteResponse {
   id?: string;
@@ -1615,7 +1615,7 @@ export namespace WaitingRoomEditParams {
 }
 
 export namespace WaitingRooms {
-  export import WaitingroomWaitingroom = WaitingRoomsAPI.WaitingroomWaitingroom;
+  export import WaitingRoom = WaitingRoomsAPI.WaitingRoom;
   export import WaitingRoomListResponse = WaitingRoomsAPI.WaitingRoomListResponse;
   export import WaitingRoomDeleteResponse = WaitingRoomsAPI.WaitingRoomDeleteResponse;
   export import WaitingRoomCreateParams = WaitingRoomsAPI.WaitingRoomCreateParams;
@@ -1625,14 +1625,14 @@ export namespace WaitingRooms {
   export import PagePreviewResponse = PageAPI.PagePreviewResponse;
   export import PagePreviewParams = PageAPI.PagePreviewParams;
   export import Events = EventsAPI.Events;
-  export import WaitingroomEventResult = EventsAPI.WaitingroomEventResult;
+  export import WaitingroomEvent = EventsAPI.WaitingroomEvent;
   export import EventListResponse = EventsAPI.EventListResponse;
   export import EventDeleteResponse = EventsAPI.EventDeleteResponse;
   export import EventCreateParams = EventsAPI.EventCreateParams;
   export import EventUpdateParams = EventsAPI.EventUpdateParams;
   export import EventEditParams = EventsAPI.EventEditParams;
   export import Rules = RulesAPI.Rules;
-  export import WaitingroomRuleResult = RulesAPI.WaitingroomRuleResult;
+  export import WaitingroomRule = RulesAPI.WaitingroomRule;
   export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
   export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
   export import RuleListResponse = RulesAPI.RuleListResponse;

@@ -11,13 +11,16 @@ export class SecurityLevel extends APIResource {
    * an individual security setting, the profile will become Custom.
    * (https://support.cloudflare.com/hc/en-us/articles/200170056).
    */
-  edit(params: SecurityLevelEditParams, options?: Core.RequestOptions): Core.APIPromise<ZonesSecurityLevel> {
+  edit(
+    params: SecurityLevelEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ZoneSettingSecurityLevel> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/security_level`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZonesSecurityLevel }>
+      }) as Core.APIPromise<{ result: ZoneSettingSecurityLevel }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -27,11 +30,14 @@ export class SecurityLevel extends APIResource {
    * an individual security setting, the profile will become Custom.
    * (https://support.cloudflare.com/hc/en-us/articles/200170056).
    */
-  get(params: SecurityLevelGetParams, options?: Core.RequestOptions): Core.APIPromise<ZonesSecurityLevel> {
+  get(
+    params: SecurityLevelGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ZoneSettingSecurityLevel> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/security_level`, options) as Core.APIPromise<{
-        result: ZonesSecurityLevel;
+        result: ZoneSettingSecurityLevel;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -43,7 +49,7 @@ export class SecurityLevel extends APIResource {
  * an individual security setting, the profile will become Custom.
  * (https://support.cloudflare.com/hc/en-us/articles/200170056).
  */
-export interface ZonesSecurityLevel {
+export interface ZoneSettingSecurityLevel {
   /**
    * ID of the zone setting.
    */
@@ -86,7 +92,7 @@ export interface SecurityLevelGetParams {
 }
 
 export namespace SecurityLevel {
-  export import ZonesSecurityLevel = SecurityLevelAPI.ZonesSecurityLevel;
+  export import ZoneSettingSecurityLevel = SecurityLevelAPI.ZoneSettingSecurityLevel;
   export import SecurityLevelEditParams = SecurityLevelAPI.SecurityLevelEditParams;
   export import SecurityLevelGetParams = SecurityLevelAPI.SecurityLevelGetParams;
 }

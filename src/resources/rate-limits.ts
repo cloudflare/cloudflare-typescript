@@ -100,7 +100,7 @@ export class RateLimits extends APIResource {
 
 export class RateLimitListResponsesV4PagePaginationArray extends V4PagePaginationArray<RateLimitListResponse> {}
 
-export interface LegacyJhsRateLimits {
+export interface RateLimit {
   /**
    * The unique identifier of the rate limit.
    */
@@ -110,13 +110,13 @@ export interface LegacyJhsRateLimits {
    * The action to perform when the threshold of matched traffic within the
    * configured period is exceeded.
    */
-  action?: LegacyJhsRateLimits.Action;
+  action?: RateLimit.Action;
 
   /**
    * Criteria specifying when the current rate limit should be bypassed. You can
    * specify that the rate limit should not apply to one or more URLs.
    */
-  bypass?: Array<LegacyJhsRateLimits.Bypass>;
+  bypass?: Array<RateLimit.Bypass>;
 
   /**
    * An informative summary of the rate limit. This value is sanitized and any tags
@@ -132,7 +132,7 @@ export interface LegacyJhsRateLimits {
   /**
    * Determines which traffic the rate limit counts towards the threshold.
    */
-  match?: LegacyJhsRateLimits.Match;
+  match?: RateLimit.Match;
 
   /**
    * The time in seconds (an integer value) to count matching traffic. If the count
@@ -148,7 +148,7 @@ export interface LegacyJhsRateLimits {
   threshold?: number;
 }
 
-export namespace LegacyJhsRateLimits {
+export namespace RateLimit {
   /**
    * The action to perform when the threshold of matched traffic within the
    * configured period is exceeded.
@@ -474,7 +474,7 @@ export interface RateLimitListParams extends V4PagePaginationArrayParams {}
 export type RateLimitEditParams = unknown;
 
 export namespace RateLimits {
-  export import LegacyJhsRateLimits = RateLimitsAPI.LegacyJhsRateLimits;
+  export import RateLimit = RateLimitsAPI.RateLimit;
   export import RateLimitCreateResponse = RateLimitsAPI.RateLimitCreateResponse;
   export import RateLimitListResponse = RateLimitsAPI.RateLimitListResponse;
   export import RateLimitDeleteResponse = RateLimitsAPI.RateLimitDeleteResponse;

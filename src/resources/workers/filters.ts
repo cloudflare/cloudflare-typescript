@@ -27,13 +27,13 @@ export class Filters extends APIResource {
     filterId: string,
     params: FilterUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WorkersFilters> {
+  ): Core.APIPromise<WorkersFilter> {
     const { zone_id, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/workers/filters/${filterId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: WorkersFilters }>
+      }) as Core.APIPromise<{ result: WorkersFilter }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -66,7 +66,7 @@ export class Filters extends APIResource {
   }
 }
 
-export interface WorkersFilters {
+export interface WorkersFilter {
   /**
    * Identifier
    */
@@ -84,7 +84,7 @@ export interface FilterCreateResponse {
   id: string;
 }
 
-export type FilterListResponse = Array<WorkersFilters>;
+export type FilterListResponse = Array<WorkersFilter>;
 
 export interface FilterDeleteResponse {
   /**
@@ -142,7 +142,7 @@ export interface FilterDeleteParams {
 }
 
 export namespace Filters {
-  export import WorkersFilters = FiltersAPI.WorkersFilters;
+  export import WorkersFilter = FiltersAPI.WorkersFilter;
   export import FilterCreateResponse = FiltersAPI.FilterCreateResponse;
   export import FilterListResponse = FiltersAPI.FilterListResponse;
   export import FilterDeleteResponse = FiltersAPI.FilterDeleteResponse;
