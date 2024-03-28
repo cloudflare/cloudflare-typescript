@@ -9,7 +9,7 @@ export class Hyperdrive extends APIResource {
 
 export namespace Hyperdrive {
   export import Configs = ConfigsAPI.Configs;
-  export import HyperdriveHyperdriveWithIdentifier = ConfigsAPI.HyperdriveHyperdriveWithIdentifier;
+  export import Hyperdrive = ConfigsAPI.Hyperdrive;
   export import ConfigCreateResponse = ConfigsAPI.ConfigCreateResponse;
   export import ConfigUpdateResponse = ConfigsAPI.ConfigUpdateResponse;
   export import ConfigListResponse = ConfigsAPI.ConfigListResponse;
