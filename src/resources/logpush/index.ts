@@ -3,7 +3,6 @@
 export { Datasets } from './datasets/index';
 export { InstantLogpushJob, EdgeGetResponse, EdgeCreateParams, EdgeGetParams, Edge } from './edge';
 export {
-  JobListResponse,
   JobDeleteResponse,
   JobCreateParams,
   JobUpdateParams,

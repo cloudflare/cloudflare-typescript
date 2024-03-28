@@ -7,7 +7,6 @@ export {
   VectorizeIndexInsert,
   VectorizeIndexQuery,
   VectorizeIndexUpsert,
-  IndexListResponse,
   IndexDeleteResponse,
   IndexGetByIDsResponse,
   IndexCreateParams,
@@ -17,5 +16,6 @@ export {
   IndexInsertParams,
   IndexQueryParams,
   IndexUpsertParams,
+  VectorizeCreateIndicesSinglePage,
   Indexes,
 } from './indexes';

@@ -5,6 +5,7 @@ import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import { CloudflareError } from 'cloudflare/error';
 import * as PoliciesAPI from 'cloudflare/resources/zero-trust/access/applications/policies';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Policies extends APIResource {
   /**
@@ -81,13 +82,16 @@ export class Policies extends APIResource {
     uuid: string,
     params?: PolicyListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PolicyListResponse | null>;
-  list(uuid: string, options?: Core.RequestOptions): Core.APIPromise<PolicyListResponse | null>;
+  ): Core.PagePromise<ZeroTrustPoliciesSinglePage, ZeroTrustPolicies>;
+  list(
+    uuid: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ZeroTrustPoliciesSinglePage, ZeroTrustPolicies>;
   list(
     uuid: string,
     params: PolicyListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PolicyListResponse | null> {
+  ): Core.PagePromise<ZeroTrustPoliciesSinglePage, ZeroTrustPolicies> {
     if (isRequestOptions(params)) {
       return this.list(uuid, {}, params);
     }
@@ -108,12 +112,11 @@ export class Policies extends APIResource {
           accountOrZone: 'zones',
           accountOrZoneId: zone_id,
         };
-    return (
-      this._client.get(
-        `/${accountOrZone}/${accountOrZoneId}/access/apps/${uuid}/policies`,
-        options,
-      ) as Core.APIPromise<{ result: PolicyListResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/${accountOrZone}/${accountOrZoneId}/access/apps/${uuid}/policies`,
+      ZeroTrustPoliciesSinglePage,
+      options,
+    );
   }
 
   /**
@@ -204,6 +207,8 @@ export class Policies extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class ZeroTrustPoliciesSinglePage extends SinglePage<ZeroTrustPolicies> {}
 
 export interface ZeroTrustPolicies {
   /**
@@ -1310,8 +1315,6 @@ export namespace ZeroTrustPolicies {
     }
   }
 }
-
-export type PolicyListResponse = Array<ZeroTrustPolicies>;
 
 export interface PolicyDeleteResponse {
   /**
@@ -3582,8 +3585,8 @@ export interface PolicyGetParams {
 
 export namespace Policies {
   export import ZeroTrustPolicies = PoliciesAPI.ZeroTrustPolicies;
-  export import PolicyListResponse = PoliciesAPI.PolicyListResponse;
   export import PolicyDeleteResponse = PoliciesAPI.PolicyDeleteResponse;
+  export import ZeroTrustPoliciesSinglePage = PoliciesAPI.ZeroTrustPoliciesSinglePage;
   export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
   export import PolicyUpdateParams = PoliciesAPI.PolicyUpdateParams;
   export import PolicyListParams = PoliciesAPI.PolicyListParams;

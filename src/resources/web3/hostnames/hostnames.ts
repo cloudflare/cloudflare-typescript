@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as HostnamesAPI from 'cloudflare/resources/web3/hostnames/hostnames';
 import * as IPFSUniversalPathsAPI from 'cloudflare/resources/web3/hostnames/ipfs-universal-paths/ipfs-universal-paths';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Hostnames extends APIResource {
   ipfsUniversalPaths: IPFSUniversalPathsAPI.IPFSUniversalPaths = new IPFSUniversalPathsAPI.IPFSUniversalPaths(
@@ -28,12 +29,15 @@ export class Hostnames extends APIResource {
   /**
    * List Web3 Hostnames
    */
-  list(zoneIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<HostnameListResponse | null> {
-    return (
-      this._client.get(`/zones/${zoneIdentifier}/web3/hostnames`, options) as Core.APIPromise<{
-        result: HostnameListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+  list(
+    zoneIdentifier: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<DistributedWebHostnamesSinglePage, DistributedWebHostname> {
+    return this._client.getAPIList(
+      `/zones/${zoneIdentifier}/web3/hostnames`,
+      DistributedWebHostnamesSinglePage,
+      options,
+    );
   }
 
   /**
@@ -85,6 +89,8 @@ export class Hostnames extends APIResource {
   }
 }
 
+export class DistributedWebHostnamesSinglePage extends SinglePage<DistributedWebHostname> {}
+
 export interface DistributedWebHostname {
   /**
    * Identifier
@@ -120,8 +126,6 @@ export interface DistributedWebHostname {
    */
   target?: 'ethereum' | 'ipfs' | 'ipfs_universal_path';
 }
-
-export type HostnameListResponse = Array<DistributedWebHostname>;
 
 export interface HostnameDeleteResponse {
   /**
@@ -161,8 +165,8 @@ export interface HostnameEditParams {
 
 export namespace Hostnames {
   export import DistributedWebHostname = HostnamesAPI.DistributedWebHostname;
-  export import HostnameListResponse = HostnamesAPI.HostnameListResponse;
   export import HostnameDeleteResponse = HostnamesAPI.HostnameDeleteResponse;
+  export import DistributedWebHostnamesSinglePage = HostnamesAPI.DistributedWebHostnamesSinglePage;
   export import HostnameCreateParams = HostnamesAPI.HostnameCreateParams;
   export import HostnameEditParams = HostnamesAPI.HostnameEditParams;
   export import IPFSUniversalPaths = IPFSUniversalPathsAPI.IPFSUniversalPaths;

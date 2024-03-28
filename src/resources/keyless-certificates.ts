@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as KeylessCertificatesAPI from 'cloudflare/resources/keyless-certificates';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class KeylessCertificates extends APIResource {
   /**
@@ -26,13 +27,13 @@ export class KeylessCertificates extends APIResource {
   list(
     params: KeylessCertificateListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<KeylessCertificateListResponse | null> {
+  ): Core.PagePromise<KeylessCertificateHostnamesSinglePage, KeylessCertificateHostname> {
     const { zone_id } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/keyless_certificates`, options) as Core.APIPromise<{
-        result: KeylessCertificateListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/zones/${zone_id}/keyless_certificates`,
+      KeylessCertificateHostnamesSinglePage,
+      options,
+    );
   }
 
   /**
@@ -87,6 +88,8 @@ export class KeylessCertificates extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class KeylessCertificateHostnamesSinglePage extends SinglePage<KeylessCertificateHostname> {}
 
 export interface KeylessCertificate {
   /**
@@ -230,8 +233,6 @@ export namespace KeylessCertificateHostname {
   }
 }
 
-export type KeylessCertificateListResponse = Array<KeylessCertificateHostname>;
-
 export interface KeylessCertificateDeleteResponse {
   /**
    * Identifier
@@ -371,8 +372,8 @@ export interface KeylessCertificateGetParams {
 export namespace KeylessCertificates {
   export import KeylessCertificate = KeylessCertificatesAPI.KeylessCertificate;
   export import KeylessCertificateHostname = KeylessCertificatesAPI.KeylessCertificateHostname;
-  export import KeylessCertificateListResponse = KeylessCertificatesAPI.KeylessCertificateListResponse;
   export import KeylessCertificateDeleteResponse = KeylessCertificatesAPI.KeylessCertificateDeleteResponse;
+  export import KeylessCertificateHostnamesSinglePage = KeylessCertificatesAPI.KeylessCertificateHostnamesSinglePage;
   export import KeylessCertificateCreateParams = KeylessCertificatesAPI.KeylessCertificateCreateParams;
   export import KeylessCertificateListParams = KeylessCertificatesAPI.KeylessCertificateListParams;
   export import KeylessCertificateDeleteParams = KeylessCertificatesAPI.KeylessCertificateDeleteParams;

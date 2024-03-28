@@ -2,4 +2,4 @@
 
 export { Datasets } from './datasets';
 export { FieldGetResponse, FieldGetParams, Fields } from './fields';
-export { LogpushJob, JobGetResponse, JobGetParams, Jobs } from './jobs';
+export { LogpushJob, JobGetResponse, JobGetParams, LogpushJobsSinglePage, Jobs } from './jobs';

@@ -21,6 +21,7 @@ export class DEX extends APIResource {
 export namespace DEX {
   export import Colos = ColosAPI.Colos;
   export import ColoListResponse = ColosAPI.ColoListResponse;
+  export import ColoListResponsesSinglePage = ColosAPI.ColoListResponsesSinglePage;
   export import ColoListParams = ColosAPI.ColoListParams;
   export import FleetStatus = FleetStatusAPI.FleetStatus;
   export import FleetStatusLiveResponse = FleetStatusAPI.FleetStatusLiveResponse;

@@ -5,6 +5,7 @@ import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import { CloudflareError } from 'cloudflare/error';
 import * as GroupsAPI from 'cloudflare/resources/zero-trust/access/groups';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Groups extends APIResource {
   /**
@@ -72,12 +73,15 @@ export class Groups extends APIResource {
   /**
    * Lists all Access groups.
    */
-  list(params?: GroupListParams, options?: Core.RequestOptions): Core.APIPromise<GroupListResponse | null>;
-  list(options?: Core.RequestOptions): Core.APIPromise<GroupListResponse | null>;
+  list(
+    params?: GroupListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ZeroTrustGroupsSinglePage, ZeroTrustGroups>;
+  list(options?: Core.RequestOptions): Core.PagePromise<ZeroTrustGroupsSinglePage, ZeroTrustGroups>;
   list(
     params: GroupListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<GroupListResponse | null> {
+  ): Core.PagePromise<ZeroTrustGroupsSinglePage, ZeroTrustGroups> {
     if (isRequestOptions(params)) {
       return this.list({}, params);
     }
@@ -98,11 +102,11 @@ export class Groups extends APIResource {
           accountOrZone: 'zones',
           accountOrZoneId: zone_id,
         };
-    return (
-      this._client.get(`/${accountOrZone}/${accountOrZoneId}/access/groups`, options) as Core.APIPromise<{
-        result: GroupListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/${accountOrZone}/${accountOrZoneId}/access/groups`,
+      ZeroTrustGroupsSinglePage,
+      options,
+    );
   }
 
   /**
@@ -185,6 +189,8 @@ export class Groups extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class ZeroTrustGroupsSinglePage extends SinglePage<ZeroTrustGroups> {}
 
 export interface ZeroTrustGroups {
   /**
@@ -1567,8 +1573,6 @@ export namespace ZeroTrustGroups {
     }
   }
 }
-
-export type GroupListResponse = Array<ZeroTrustGroups>;
 
 export interface GroupDeleteResponse {
   /**
@@ -3713,8 +3717,8 @@ export interface GroupGetParams {
 
 export namespace Groups {
   export import ZeroTrustGroups = GroupsAPI.ZeroTrustGroups;
-  export import GroupListResponse = GroupsAPI.GroupListResponse;
   export import GroupDeleteResponse = GroupsAPI.GroupDeleteResponse;
+  export import ZeroTrustGroupsSinglePage = GroupsAPI.ZeroTrustGroupsSinglePage;
   export import GroupCreateParams = GroupsAPI.GroupCreateParams;
   export import GroupUpdateParams = GroupsAPI.GroupUpdateParams;
   export import GroupListParams = GroupsAPI.GroupListParams;

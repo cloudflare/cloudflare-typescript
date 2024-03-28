@@ -2,23 +2,23 @@
 
 export {
   DevicePostureIntegrations,
-  IntegrationListResponse,
   IntegrationDeleteResponse,
   IntegrationCreateParams,
   IntegrationListParams,
   IntegrationDeleteParams,
   IntegrationEditParams,
   IntegrationGetParams,
+  DevicePostureIntegrationsSinglePage,
   Integrations,
 } from './integrations';
 export {
   DevicePostureRules,
-  PostureListResponse,
   PostureDeleteResponse,
   PostureCreateParams,
   PostureUpdateParams,
   PostureListParams,
   PostureDeleteParams,
   PostureGetParams,
+  DevicePostureRulesSinglePage,
   Posture,
 } from './posture';

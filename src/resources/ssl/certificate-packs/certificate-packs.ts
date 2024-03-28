@@ -5,6 +5,7 @@ import { APIResource } from 'cloudflare/resource';
 import * as CertificatePacksAPI from 'cloudflare/resources/ssl/certificate-packs/certificate-packs';
 import * as OrderAPI from 'cloudflare/resources/ssl/certificate-packs/order';
 import * as QuotaAPI from 'cloudflare/resources/ssl/certificate-packs/quota';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class CertificatePacks extends APIResource {
   order: OrderAPI.Order = new OrderAPI.Order(this._client);
@@ -16,13 +17,13 @@ export class CertificatePacks extends APIResource {
   list(
     params: CertificatePackListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CertificatePackListResponse | null> {
+  ): Core.PagePromise<CertificatePackListResponsesSinglePage, CertificatePackListResponse> {
     const { zone_id, ...query } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/ssl/certificate_packs`, { query, ...options }) as Core.APIPromise<{
-        result: CertificatePackListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/zones/${zone_id}/ssl/certificate_packs`,
+      CertificatePackListResponsesSinglePage,
+      { query, ...options },
+    );
   }
 
   /**
@@ -79,7 +80,9 @@ export class CertificatePacks extends APIResource {
   }
 }
 
-export type CertificatePackListResponse = Array<unknown>;
+export class CertificatePackListResponsesSinglePage extends SinglePage<CertificatePackListResponse> {}
+
+export type CertificatePackListResponse = unknown;
 
 export interface CertificatePackDeleteResponse {
   /**
@@ -195,6 +198,7 @@ export namespace CertificatePacks {
   export import CertificatePackDeleteResponse = CertificatePacksAPI.CertificatePackDeleteResponse;
   export import CertificatePackEditResponse = CertificatePacksAPI.CertificatePackEditResponse;
   export import CertificatePackGetResponse = CertificatePacksAPI.CertificatePackGetResponse;
+  export import CertificatePackListResponsesSinglePage = CertificatePacksAPI.CertificatePackListResponsesSinglePage;
   export import CertificatePackListParams = CertificatePacksAPI.CertificatePackListParams;
   export import CertificatePackDeleteParams = CertificatePacksAPI.CertificatePackDeleteParams;
   export import CertificatePackEditParams = CertificatePacksAPI.CertificatePackEditParams;

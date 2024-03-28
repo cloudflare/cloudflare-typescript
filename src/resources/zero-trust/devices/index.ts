@@ -2,46 +2,46 @@
 
 export {
   DEXTestSchemasHTTP,
-  DEXTestListResponse,
   DEXTestDeleteResponse,
   DEXTestCreateParams,
   DEXTestUpdateParams,
   DEXTestListParams,
   DEXTestDeleteParams,
   DEXTestGetParams,
+  DEXTestSchemasHTTPSSinglePage,
   DEXTests,
 } from './dex-tests';
 export {
   DeviceManagedNetworks,
-  NetworkListResponse,
   NetworkDeleteResponse,
   NetworkCreateParams,
   NetworkUpdateParams,
   NetworkListParams,
   NetworkDeleteParams,
   NetworkGetParams,
+  DeviceManagedNetworksSinglePage,
   Networks,
 } from './networks';
 export {
   DevicePostureRules,
-  PostureListResponse,
   PostureDeleteResponse,
   PostureCreateParams,
   PostureUpdateParams,
   PostureListParams,
   PostureDeleteParams,
   PostureGetParams,
+  DevicePostureRulesSinglePage,
   Posture,
 } from './posture/index';
 export {
   DevicesDeviceSettingsPolicy,
-  PolicyListResponse,
   PolicyDeleteResponse,
   PolicyCreateParams,
   PolicyListParams,
   PolicyDeleteParams,
   PolicyEditParams,
   PolicyGetParams,
+  DevicesDeviceSettingsPoliciesSinglePage,
   Policies,
 } from './policies/index';
 export { OverrideCodeListResponse, OverrideCodeListParams, OverrideCodes } from './override-codes';
@@ -50,9 +50,9 @@ export { UnrevokeCreateResponse, UnrevokeCreateParams, Unrevoke } from './unrevo
 export { ZeroTrustAccountDeviceSettings, SettingUpdateParams, SettingListParams, Settings } from './settings';
 export {
   ZeroTrustDevices,
-  DeviceListResponse,
   DeviceGetResponse,
   DeviceListParams,
   DeviceGetParams,
+  ZeroTrustDevicesSinglePage,
   Devices,
 } from './devices';

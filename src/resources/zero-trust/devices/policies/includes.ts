@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as IncludesAPI from 'cloudflare/resources/zero-trust/devices/policies/includes';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Includes extends APIResource {
   /**
@@ -27,13 +28,13 @@ export class Includes extends APIResource {
   list(
     params: IncludeListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<IncludeListResponse | null> {
+  ): Core.PagePromise<DevicesSplitTunnelIncludesSinglePage, DevicesSplitTunnelInclude> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/devices/policy/include`, options) as Core.APIPromise<{
-        result: IncludeListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/devices/policy/include`,
+      DevicesSplitTunnelIncludesSinglePage,
+      options,
+    );
   }
 
   /**
@@ -55,6 +56,8 @@ export class Includes extends APIResource {
   }
 }
 
+export class DevicesSplitTunnelIncludesSinglePage extends SinglePage<DevicesSplitTunnelInclude> {}
+
 export interface DevicesSplitTunnelInclude {
   /**
    * The address in CIDR format to include in the tunnel. If address is present, host
@@ -75,8 +78,6 @@ export interface DevicesSplitTunnelInclude {
 }
 
 export type IncludeUpdateResponse = Array<DevicesSplitTunnelInclude>;
-
-export type IncludeListResponse = Array<DevicesSplitTunnelInclude>;
 
 export type IncludeGetResponse = Array<DevicesSplitTunnelInclude>;
 
@@ -103,8 +104,8 @@ export interface IncludeGetParams {
 export namespace Includes {
   export import DevicesSplitTunnelInclude = IncludesAPI.DevicesSplitTunnelInclude;
   export import IncludeUpdateResponse = IncludesAPI.IncludeUpdateResponse;
-  export import IncludeListResponse = IncludesAPI.IncludeListResponse;
   export import IncludeGetResponse = IncludesAPI.IncludeGetResponse;
+  export import DevicesSplitTunnelIncludesSinglePage = IncludesAPI.DevicesSplitTunnelIncludesSinglePage;
   export import IncludeUpdateParams = IncludesAPI.IncludeUpdateParams;
   export import IncludeListParams = IncludesAPI.IncludeListParams;
   export import IncludeGetParams = IncludesAPI.IncludeGetParams;

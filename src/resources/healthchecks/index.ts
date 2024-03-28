@@ -2,7 +2,6 @@
 
 export {
   Healthcheck,
-  HealthcheckListResponse,
   HealthcheckDeleteResponse,
   HealthcheckCreateParams,
   HealthcheckUpdateParams,
@@ -10,6 +9,7 @@ export {
   HealthcheckDeleteParams,
   HealthcheckEditParams,
   HealthcheckGetParams,
+  HealthchecksSinglePage,
   Healthchecks,
 } from './healthchecks';
 export {

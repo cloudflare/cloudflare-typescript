@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as EventsAPI from 'cloudflare/resources/waiting-rooms/events/events';
 import * as DetailsAPI from 'cloudflare/resources/waiting-rooms/events/details';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Events extends APIResource {
   details: DetailsAPI.Details = new DetailsAPI.Details(this._client);
@@ -55,13 +56,12 @@ export class Events extends APIResource {
     zoneIdentifier: string,
     waitingRoomId: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<EventListResponse | null> {
-    return (
-      this._client.get(
-        `/zones/${zoneIdentifier}/waiting_rooms/${waitingRoomId}/events`,
-        options,
-      ) as Core.APIPromise<{ result: EventListResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+  ): Core.PagePromise<WaitingroomEventsSinglePage, WaitingroomEvent> {
+    return this._client.getAPIList(
+      `/zones/${zoneIdentifier}/waiting_rooms/${waitingRoomId}/events`,
+      WaitingroomEventsSinglePage,
+      options,
+    );
   }
 
   /**
@@ -116,6 +116,8 @@ export class Events extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class WaitingroomEventsSinglePage extends SinglePage<WaitingroomEvent> {}
 
 export interface WaitingroomEvent {
   id?: string;
@@ -208,8 +210,6 @@ export interface WaitingroomEvent {
    */
   total_active_users?: number | null;
 }
-
-export type EventListResponse = Array<WaitingroomEvent>;
 
 export interface EventDeleteResponse {
   id?: string;
@@ -475,8 +475,8 @@ export interface EventEditParams {
 
 export namespace Events {
   export import WaitingroomEvent = EventsAPI.WaitingroomEvent;
-  export import EventListResponse = EventsAPI.EventListResponse;
   export import EventDeleteResponse = EventsAPI.EventDeleteResponse;
+  export import WaitingroomEventsSinglePage = EventsAPI.WaitingroomEventsSinglePage;
   export import EventCreateParams = EventsAPI.EventCreateParams;
   export import EventUpdateParams = EventsAPI.EventUpdateParams;
   export import EventEditParams = EventsAPI.EventEditParams;

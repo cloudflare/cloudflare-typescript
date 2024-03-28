@@ -16,13 +16,13 @@ export {
   AlertingWebhooks,
   WebhookCreateResponse,
   WebhookUpdateResponse,
-  WebhookListResponse,
   WebhookDeleteResponse,
   WebhookCreateParams,
   WebhookUpdateParams,
   WebhookListParams,
   WebhookDeleteParams,
   WebhookGetParams,
+  AlertingWebhooksSinglePage,
   Webhooks,
 } from './webhooks';
 export { Destinations } from './destinations';

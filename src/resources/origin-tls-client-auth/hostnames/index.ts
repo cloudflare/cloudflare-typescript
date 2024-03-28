@@ -2,7 +2,6 @@
 
 export {
   OriginTLSClientCertificate,
-  CertificateListResponse,
   CertificateCreateParams,
   CertificateListParams,
   CertificateDeleteParams,
@@ -15,5 +14,6 @@ export {
   HostnameUpdateResponse,
   HostnameUpdateParams,
   HostnameGetParams,
+  OriginTLSClientCertificateIDsSinglePage,
   Hostnames,
 } from './hostnames';

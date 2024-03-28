@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  DeploymentListResponse,
   DeploymentDeleteResponse,
   DeploymentCreateParams,
   DeploymentListParams,
@@ -22,13 +21,13 @@ export {
   DomainDeleteParams,
   DomainEditParams,
   DomainGetParams,
+  DomainListResponsesSinglePage,
   Domains,
 } from './domains';
 export {
   PagesDeployments,
   PagesProjects,
   ProjectCreateResponse,
-  ProjectListResponse,
   ProjectDeleteResponse,
   ProjectEditResponse,
   ProjectPurgeBuildCacheResponse,
@@ -38,5 +37,6 @@ export {
   ProjectEditParams,
   ProjectGetParams,
   ProjectPurgeBuildCacheParams,
+  PagesDeploymentsSinglePage,
   Projects,
 } from './projects';

@@ -2,13 +2,13 @@
 
 export {
   ZeroTrustCertificates,
-  CertificateListResponse,
   CertificateDeleteResponse,
   CertificateCreateParams,
   CertificateUpdateParams,
   CertificateListParams,
   CertificateDeleteParams,
   CertificateGetParams,
+  ZeroTrustCertificatesSinglePage,
   Certificates,
 } from './certificates';
 export {

@@ -6,6 +6,7 @@ import * as AddressMapsAPI from 'cloudflare/resources/addressing/address-maps/ad
 import * as AccountsAPI from 'cloudflare/resources/addressing/address-maps/accounts';
 import * as IPsAPI from 'cloudflare/resources/addressing/address-maps/ips';
 import * as ZonesAPI from 'cloudflare/resources/addressing/address-maps/zones';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class AddressMaps extends APIResource {
   accounts: AccountsAPI.Accounts = new AccountsAPI.Accounts(this._client);
@@ -34,13 +35,13 @@ export class AddressMaps extends APIResource {
   list(
     params: AddressMapListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AddressMapListResponse | null> {
+  ): Core.PagePromise<AddressingAddressMapsSinglePage, AddressingAddressMaps> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/addressing/address_maps`, options) as Core.APIPromise<{
-        result: AddressMapListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/addressing/address_maps`,
+      AddressingAddressMapsSinglePage,
+      options,
+    );
   }
 
   /**
@@ -95,6 +96,8 @@ export class AddressMaps extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class AddressingAddressMapsSinglePage extends SinglePage<AddressingAddressMaps> {}
 
 export interface AddressingAddressMaps {
   /**
@@ -224,8 +227,6 @@ export namespace AddressMapCreateResponse {
     kind?: 'zone' | 'account';
   }
 }
-
-export type AddressMapListResponse = Array<AddressingAddressMaps>;
 
 export type AddressMapDeleteResponse = unknown | Array<unknown> | string;
 
@@ -385,9 +386,9 @@ export interface AddressMapGetParams {
 export namespace AddressMaps {
   export import AddressingAddressMaps = AddressMapsAPI.AddressingAddressMaps;
   export import AddressMapCreateResponse = AddressMapsAPI.AddressMapCreateResponse;
-  export import AddressMapListResponse = AddressMapsAPI.AddressMapListResponse;
   export import AddressMapDeleteResponse = AddressMapsAPI.AddressMapDeleteResponse;
   export import AddressMapGetResponse = AddressMapsAPI.AddressMapGetResponse;
+  export import AddressingAddressMapsSinglePage = AddressMapsAPI.AddressingAddressMapsSinglePage;
   export import AddressMapCreateParams = AddressMapsAPI.AddressMapCreateParams;
   export import AddressMapListParams = AddressMapsAPI.AddressMapListParams;
   export import AddressMapDeleteParams = AddressMapsAPI.AddressMapDeleteParams;

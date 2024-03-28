@@ -9,6 +9,7 @@ export {
   NamespaceListParams,
   NamespaceDeleteParams,
   NamespaceGetParams,
+  NamespaceListResponsesSinglePage,
   Namespaces,
 } from './namespaces';
 export {

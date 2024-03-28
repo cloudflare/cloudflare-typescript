@@ -33,10 +33,10 @@ export {
 export { ZeroTrust } from './zero-trust';
 export {
   ZeroTrustDevices,
-  DeviceListResponse,
   DeviceGetResponse,
   DeviceListParams,
   DeviceGetParams,
+  ZeroTrustDevicesSinglePage,
   Devices,
 } from './devices/index';
 export {
@@ -48,6 +48,7 @@ export {
   IdentityProviderListParams,
   IdentityProviderDeleteParams,
   IdentityProviderGetParams,
+  IdentityProviderListResponsesSinglePage,
   IdentityProviders,
 } from './identity-providers';
 export {

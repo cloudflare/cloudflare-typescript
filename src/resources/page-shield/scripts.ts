@@ -3,18 +3,21 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ScriptsAPI from 'cloudflare/resources/page-shield/scripts';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Scripts extends APIResource {
   /**
    * Lists all scripts detected by Page Shield.
    */
-  list(params: ScriptListParams, options?: Core.RequestOptions): Core.APIPromise<ScriptListResponse | null> {
+  list(
+    params: ScriptListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<PageShieldScriptsSinglePage, PageShieldScript> {
     const { zone_id, ...query } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/page_shield/scripts`, { query, ...options }) as Core.APIPromise<{
-        result: ScriptListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(`/zones/${zone_id}/page_shield/scripts`, PageShieldScriptsSinglePage, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -29,6 +32,8 @@ export class Scripts extends APIResource {
     return this._client.get(`/zones/${zone_id}/page_shield/scripts/${scriptId}`, options);
   }
 }
+
+export class PageShieldScriptsSinglePage extends SinglePage<PageShieldScript> {}
 
 export interface PageShieldScript {
   id?: string;
@@ -61,8 +66,6 @@ export interface PageShieldScript {
 
   url_contains_cdn_cgi_path?: boolean;
 }
-
-export type ScriptListResponse = Array<PageShieldScript>;
 
 export interface ScriptGetResponse {
   id?: string;
@@ -236,8 +239,8 @@ export interface ScriptGetParams {
 
 export namespace Scripts {
   export import PageShieldScript = ScriptsAPI.PageShieldScript;
-  export import ScriptListResponse = ScriptsAPI.ScriptListResponse;
   export import ScriptGetResponse = ScriptsAPI.ScriptGetResponse;
+  export import PageShieldScriptsSinglePage = ScriptsAPI.PageShieldScriptsSinglePage;
   export import ScriptListParams = ScriptsAPI.ScriptListParams;
   export import ScriptGetParams = ScriptsAPI.ScriptGetParams;
 }

@@ -8,6 +8,7 @@ import * as ApplicationsAPI from 'cloudflare/resources/zero-trust/access/applica
 import * as CAsAPI from 'cloudflare/resources/zero-trust/access/applications/cas';
 import * as PoliciesAPI from 'cloudflare/resources/zero-trust/access/applications/policies';
 import * as UserPolicyChecksAPI from 'cloudflare/resources/zero-trust/access/applications/user-policy-checks';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Applications extends APIResource {
   cas: CAsAPI.CAs = new CAsAPI.CAs(this._client);
@@ -84,12 +85,12 @@ export class Applications extends APIResource {
   list(
     params?: ApplicationListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ApplicationListResponse | null>;
-  list(options?: Core.RequestOptions): Core.APIPromise<ApplicationListResponse | null>;
+  ): Core.PagePromise<ZeroTrustAppsSinglePage, ZeroTrustApps>;
+  list(options?: Core.RequestOptions): Core.PagePromise<ZeroTrustAppsSinglePage, ZeroTrustApps>;
   list(
     params: ApplicationListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ApplicationListResponse | null> {
+  ): Core.PagePromise<ZeroTrustAppsSinglePage, ZeroTrustApps> {
     if (isRequestOptions(params)) {
       return this.list({}, params);
     }
@@ -110,11 +111,11 @@ export class Applications extends APIResource {
           accountOrZone: 'zones',
           accountOrZoneId: zone_id,
         };
-    return (
-      this._client.get(`/${accountOrZone}/${accountOrZoneId}/access/apps`, options) as Core.APIPromise<{
-        result: ApplicationListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/${accountOrZone}/${accountOrZoneId}/access/apps`,
+      ZeroTrustAppsSinglePage,
+      options,
+    );
   }
 
   /**
@@ -246,6 +247,8 @@ export class Applications extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class ZeroTrustAppsSinglePage extends SinglePage<ZeroTrustApps> {}
 
 export type ZeroTrustApps =
   | ZeroTrustApps.SelfHostedApplication
@@ -1225,8 +1228,6 @@ export namespace ZeroTrustApps {
     updated_at?: string;
   }
 }
-
-export type ApplicationListResponse = Array<ZeroTrustApps>;
 
 export interface ApplicationDeleteResponse {
   /**
@@ -3185,9 +3186,9 @@ export interface ApplicationRevokeTokensParams {
 
 export namespace Applications {
   export import ZeroTrustApps = ApplicationsAPI.ZeroTrustApps;
-  export import ApplicationListResponse = ApplicationsAPI.ApplicationListResponse;
   export import ApplicationDeleteResponse = ApplicationsAPI.ApplicationDeleteResponse;
   export import ApplicationRevokeTokensResponse = ApplicationsAPI.ApplicationRevokeTokensResponse;
+  export import ZeroTrustAppsSinglePage = ApplicationsAPI.ZeroTrustAppsSinglePage;
   export import ApplicationCreateParams = ApplicationsAPI.ApplicationCreateParams;
   export import ApplicationUpdateParams = ApplicationsAPI.ApplicationUpdateParams;
   export import ApplicationListParams = ApplicationsAPI.ApplicationListParams;
@@ -3197,9 +3198,9 @@ export namespace Applications {
   export import CAs = CAsAPI.CAs;
   export import ZeroTrustCA = CAsAPI.ZeroTrustCA;
   export import CACreateResponse = CAsAPI.CACreateResponse;
-  export import CAListResponse = CAsAPI.CAListResponse;
   export import CADeleteResponse = CAsAPI.CADeleteResponse;
   export import CAGetResponse = CAsAPI.CAGetResponse;
+  export import ZeroTrustCAsSinglePage = CAsAPI.ZeroTrustCAsSinglePage;
   export import CACreateParams = CAsAPI.CACreateParams;
   export import CAListParams = CAsAPI.CAListParams;
   export import CADeleteParams = CAsAPI.CADeleteParams;
@@ -3209,8 +3210,8 @@ export namespace Applications {
   export import UserPolicyCheckListParams = UserPolicyChecksAPI.UserPolicyCheckListParams;
   export import Policies = PoliciesAPI.Policies;
   export import ZeroTrustPolicies = PoliciesAPI.ZeroTrustPolicies;
-  export import PolicyListResponse = PoliciesAPI.PolicyListResponse;
   export import PolicyDeleteResponse = PoliciesAPI.PolicyDeleteResponse;
+  export import ZeroTrustPoliciesSinglePage = PoliciesAPI.ZeroTrustPoliciesSinglePage;
   export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
   export import PolicyUpdateParams = PoliciesAPI.PolicyUpdateParams;
   export import PolicyListParams = PoliciesAPI.PolicyListParams;

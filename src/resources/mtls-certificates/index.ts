@@ -3,11 +3,11 @@
 export {
   MTLSCertificate,
   MTLSCertificateUpdate,
-  MTLSCertificateListResponse,
   MTLSCertificateCreateParams,
   MTLSCertificateListParams,
   MTLSCertificateDeleteParams,
   MTLSCertificateGetParams,
+  MTLSCertificatesSinglePage,
   MTLSCertificates,
 } from './mtls-certificates';
 export {

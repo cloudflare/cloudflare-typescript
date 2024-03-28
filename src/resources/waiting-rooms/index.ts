@@ -12,31 +12,31 @@ export {
 export { StatusGetResponse, Statuses } from './statuses';
 export {
   WaitingRoom,
-  WaitingRoomListResponse,
   WaitingRoomDeleteResponse,
   WaitingRoomCreateParams,
   WaitingRoomUpdateParams,
   WaitingRoomEditParams,
+  WaitingRoomsSinglePage,
   WaitingRooms,
 } from './waiting-rooms';
 export {
   WaitingroomEvent,
-  EventListResponse,
   EventDeleteResponse,
   EventCreateParams,
   EventUpdateParams,
   EventEditParams,
+  WaitingroomEventsSinglePage,
   Events,
 } from './events/index';
 export {
   WaitingroomRule,
   RuleCreateResponse,
   RuleUpdateResponse,
-  RuleListResponse,
   RuleDeleteResponse,
   RuleEditResponse,
   RuleCreateParams,
   RuleUpdateParams,
   RuleEditParams,
+  WaitingroomRulesSinglePage,
   Rules,
 } from './rules';

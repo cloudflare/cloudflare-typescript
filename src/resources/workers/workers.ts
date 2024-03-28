@@ -29,7 +29,7 @@ export namespace Workers {
   export import AIRunParams = AIAPI.AIRunParams;
   export import Scripts = ScriptsAPI.Scripts;
   export import WorkersScript = ScriptsAPI.WorkersScript;
-  export import ScriptListResponse = ScriptsAPI.ScriptListResponse;
+  export import WorkersScriptsSinglePage = ScriptsAPI.WorkersScriptsSinglePage;
   export import ScriptUpdateParams = ScriptsAPI.ScriptUpdateParams;
   export import ScriptListParams = ScriptsAPI.ScriptListParams;
   export import ScriptDeleteParams = ScriptsAPI.ScriptDeleteParams;
@@ -37,8 +37,8 @@ export namespace Workers {
   export import Filters = FiltersAPI.Filters;
   export import WorkersFilter = FiltersAPI.WorkersFilter;
   export import FilterCreateResponse = FiltersAPI.FilterCreateResponse;
-  export import FilterListResponse = FiltersAPI.FilterListResponse;
   export import FilterDeleteResponse = FiltersAPI.FilterDeleteResponse;
+  export import WorkersFiltersSinglePage = FiltersAPI.WorkersFiltersSinglePage;
   export import FilterCreateParams = FiltersAPI.FilterCreateParams;
   export import FilterUpdateParams = FiltersAPI.FilterUpdateParams;
   export import FilterListParams = FiltersAPI.FilterListParams;
@@ -46,8 +46,8 @@ export namespace Workers {
   export import Routes = RoutesAPI.Routes;
   export import WorkersRoute = RoutesAPI.WorkersRoute;
   export import RouteCreateResponse = RoutesAPI.RouteCreateResponse;
-  export import RouteListResponse = RoutesAPI.RouteListResponse;
   export import RouteDeleteResponse = RoutesAPI.RouteDeleteResponse;
+  export import WorkersRoutesSinglePage = RoutesAPI.WorkersRoutesSinglePage;
   export import RouteCreateParams = RoutesAPI.RouteCreateParams;
   export import RouteUpdateParams = RoutesAPI.RouteUpdateParams;
   export import RouteListParams = RoutesAPI.RouteListParams;
@@ -61,7 +61,7 @@ export namespace Workers {
   export import Deployments = DeploymentsAPI.Deployments;
   export import Domains = DomainsAPI.Domains;
   export import WorkersDomain = DomainsAPI.WorkersDomain;
-  export import DomainListResponse = DomainsAPI.DomainListResponse;
+  export import WorkersDomainsSinglePage = DomainsAPI.WorkersDomainsSinglePage;
   export import DomainUpdateParams = DomainsAPI.DomainUpdateParams;
   export import DomainListParams = DomainsAPI.DomainListParams;
   export import DomainDeleteParams = DomainsAPI.DomainDeleteParams;

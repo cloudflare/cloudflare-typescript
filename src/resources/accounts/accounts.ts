@@ -208,8 +208,8 @@ export namespace Accounts {
   export import MemberGetParams = MembersAPI.MemberGetParams;
   export import Roles = RolesAPI.Roles;
   export import Role = RolesAPI.Role;
-  export import RoleListResponse = RolesAPI.RoleListResponse;
   export import RoleGetResponse = RolesAPI.RoleGetResponse;
+  export import RolesSinglePage = RolesAPI.RolesSinglePage;
   export import RoleListParams = RolesAPI.RoleListParams;
   export import RoleGetParams = RolesAPI.RoleGetParams;
 }

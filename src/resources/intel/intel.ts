@@ -64,6 +64,7 @@ export namespace Intel {
   export import IndicatorFeedListResponse = IndicatorFeedsAPI.IndicatorFeedListResponse;
   export import IndicatorFeedDataResponse = IndicatorFeedsAPI.IndicatorFeedDataResponse;
   export import IndicatorFeedGetResponse = IndicatorFeedsAPI.IndicatorFeedGetResponse;
+  export import IndicatorFeedListResponsesSinglePage = IndicatorFeedsAPI.IndicatorFeedListResponsesSinglePage;
   export import IndicatorFeedCreateParams = IndicatorFeedsAPI.IndicatorFeedCreateParams;
   export import IndicatorFeedUpdateParams = IndicatorFeedsAPI.IndicatorFeedUpdateParams;
   export import IndicatorFeedListParams = IndicatorFeedsAPI.IndicatorFeedListParams;
@@ -71,7 +72,7 @@ export namespace Intel {
   export import IndicatorFeedGetParams = IndicatorFeedsAPI.IndicatorFeedGetParams;
   export import Sinkholes = SinkholesAPI.Sinkholes;
   export import IntelSinkholeItem = SinkholesAPI.IntelSinkholeItem;
-  export import SinkholeListResponse = SinkholesAPI.SinkholeListResponse;
+  export import IntelSinkholeItemsSinglePage = SinkholesAPI.IntelSinkholeItemsSinglePage;
   export import SinkholeListParams = SinkholesAPI.SinkholeListParams;
   export import AttackSurfaceReport = AttackSurfaceReportAPI.AttackSurfaceReport;
 }

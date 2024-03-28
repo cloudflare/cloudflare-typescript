@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as PoliciesAPI from 'cloudflare/resources/alerting/policies';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Policies extends APIResource {
   /**
@@ -38,13 +39,16 @@ export class Policies extends APIResource {
   /**
    * Get a list of all Notification policies.
    */
-  list(params: PolicyListParams, options?: Core.RequestOptions): Core.APIPromise<PolicyListResponse | null> {
+  list(
+    params: PolicyListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<AlertingPoliciesSinglePage, AlertingPolicies> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/alerting/v3/policies`, options) as Core.APIPromise<{
-        result: PolicyListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/alerting/v3/policies`,
+      AlertingPoliciesSinglePage,
+      options,
+    );
   }
 
   /**
@@ -81,6 +85,8 @@ export class Policies extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class AlertingPoliciesSinglePage extends SinglePage<AlertingPolicies> {}
 
 export interface AlertingPolicies {
   /**
@@ -415,8 +421,6 @@ export interface PolicyUpdateResponse {
    */
   id?: string;
 }
-
-export type PolicyListResponse = Array<AlertingPolicies>;
 
 export type PolicyDeleteResponse = unknown | Array<unknown> | string;
 
@@ -1077,8 +1081,8 @@ export namespace Policies {
   export import AlertingPolicies = PoliciesAPI.AlertingPolicies;
   export import PolicyCreateResponse = PoliciesAPI.PolicyCreateResponse;
   export import PolicyUpdateResponse = PoliciesAPI.PolicyUpdateResponse;
-  export import PolicyListResponse = PoliciesAPI.PolicyListResponse;
   export import PolicyDeleteResponse = PoliciesAPI.PolicyDeleteResponse;
+  export import AlertingPoliciesSinglePage = PoliciesAPI.AlertingPoliciesSinglePage;
   export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
   export import PolicyUpdateParams = PoliciesAPI.PolicyUpdateParams;
   export import PolicyListParams = PoliciesAPI.PolicyListParams;

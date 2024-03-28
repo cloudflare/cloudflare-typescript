@@ -5,6 +5,7 @@ import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import { CloudflareError } from 'cloudflare/error';
 import * as JobsAPI from 'cloudflare/resources/logpush/datasets/jobs';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Jobs extends APIResource {
   /**
@@ -49,6 +50,8 @@ export class Jobs extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class LogpushJobsSinglePage extends SinglePage<LogpushJob | null> {}
 
 export interface LogpushJob {
   /**

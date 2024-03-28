@@ -9,6 +9,7 @@ export {
   DatasetListParams,
   DatasetDeleteParams,
   DatasetGetParams,
+  DLPDatasetsSinglePage,
   Datasets,
 } from './datasets';
 export { DLPDatasetNewVersion, UploadCreateParams, UploadEditParams, Upload } from './upload';

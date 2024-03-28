@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as TagsAPI from 'cloudflare/resources/zero-trust/access/tags';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Tags extends APIResource {
   /**
@@ -40,12 +41,11 @@ export class Tags extends APIResource {
   /**
    * List tags
    */
-  list(identifier: string, options?: Core.RequestOptions): Core.APIPromise<TagListResponse | null> {
-    return (
-      this._client.get(`/accounts/${identifier}/access/tags`, options) as Core.APIPromise<{
-        result: TagListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+  list(
+    identifier: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ZeroTrustTagsSinglePage, ZeroTrustTag> {
+    return this._client.getAPIList(`/accounts/${identifier}/access/tags`, ZeroTrustTagsSinglePage, options);
   }
 
   /**
@@ -75,6 +75,8 @@ export class Tags extends APIResource {
   }
 }
 
+export class ZeroTrustTagsSinglePage extends SinglePage<ZeroTrustTag> {}
+
 /**
  * A tag
  */
@@ -93,8 +95,6 @@ export interface ZeroTrustTag {
 
   updated_at?: string;
 }
-
-export type TagListResponse = Array<ZeroTrustTag>;
 
 export interface TagDeleteResponse {
   /**
@@ -119,8 +119,8 @@ export interface TagUpdateParams {
 
 export namespace Tags {
   export import ZeroTrustTag = TagsAPI.ZeroTrustTag;
-  export import TagListResponse = TagsAPI.TagListResponse;
   export import TagDeleteResponse = TagsAPI.TagDeleteResponse;
+  export import ZeroTrustTagsSinglePage = TagsAPI.ZeroTrustTagsSinglePage;
   export import TagCreateParams = TagsAPI.TagCreateParams;
   export import TagUpdateParams = TagsAPI.TagUpdateParams;
 }

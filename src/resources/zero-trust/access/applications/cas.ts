@@ -5,6 +5,7 @@ import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import { CloudflareError } from 'cloudflare/error';
 import * as CAsAPI from 'cloudflare/resources/zero-trust/access/applications/cas';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class CAs extends APIResource {
   /**
@@ -52,12 +53,15 @@ export class CAs extends APIResource {
   /**
    * Lists short-lived certificate CAs and their public keys.
    */
-  list(params?: CAListParams, options?: Core.RequestOptions): Core.APIPromise<CAListResponse | null>;
-  list(options?: Core.RequestOptions): Core.APIPromise<CAListResponse | null>;
+  list(
+    params?: CAListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ZeroTrustCAsSinglePage, ZeroTrustCA>;
+  list(options?: Core.RequestOptions): Core.PagePromise<ZeroTrustCAsSinglePage, ZeroTrustCA>;
   list(
     params: CAListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CAListResponse | null> {
+  ): Core.PagePromise<ZeroTrustCAsSinglePage, ZeroTrustCA> {
     if (isRequestOptions(params)) {
       return this.list({}, params);
     }
@@ -78,11 +82,11 @@ export class CAs extends APIResource {
           accountOrZone: 'zones',
           accountOrZoneId: zone_id,
         };
-    return (
-      this._client.get(`/${accountOrZone}/${accountOrZoneId}/access/apps/ca`, options) as Core.APIPromise<{
-        result: CAListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/${accountOrZone}/${accountOrZoneId}/access/apps/ca`,
+      ZeroTrustCAsSinglePage,
+      options,
+    );
   }
 
   /**
@@ -166,6 +170,8 @@ export class CAs extends APIResource {
   }
 }
 
+export class ZeroTrustCAsSinglePage extends SinglePage<ZeroTrustCA> {}
+
 export interface ZeroTrustCA {
   /**
    * The ID of the CA.
@@ -185,8 +191,6 @@ export interface ZeroTrustCA {
 }
 
 export type CACreateResponse = unknown | string;
-
-export type CAListResponse = Array<ZeroTrustCA>;
 
 export interface CADeleteResponse {
   /**
@@ -248,9 +252,9 @@ export interface CAGetParams {
 export namespace CAs {
   export import ZeroTrustCA = CAsAPI.ZeroTrustCA;
   export import CACreateResponse = CAsAPI.CACreateResponse;
-  export import CAListResponse = CAsAPI.CAListResponse;
   export import CADeleteResponse = CAsAPI.CADeleteResponse;
   export import CAGetResponse = CAsAPI.CAGetResponse;
+  export import ZeroTrustCAsSinglePage = CAsAPI.ZeroTrustCAsSinglePage;
   export import CACreateParams = CAsAPI.CACreateParams;
   export import CAListParams = CAsAPI.CAListParams;
   export import CADeleteParams = CAsAPI.CADeleteParams;
