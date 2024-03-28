@@ -36,6 +36,7 @@ export namespace SecondaryDNS {
   export import OutgoingCreateResponse = OutgoingAPI.OutgoingCreateResponse;
   export import OutgoingUpdateResponse = OutgoingAPI.OutgoingUpdateResponse;
   export import OutgoingDeleteResponse = OutgoingAPI.OutgoingDeleteResponse;
+  export import OutgoingForceNotifyResponse = OutgoingAPI.OutgoingForceNotifyResponse;
   export import OutgoingGetResponse = OutgoingAPI.OutgoingGetResponse;
   export import OutgoingCreateParams = OutgoingAPI.OutgoingCreateParams;
   export import OutgoingUpdateParams = OutgoingAPI.OutgoingUpdateParams;
