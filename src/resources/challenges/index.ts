@@ -2,14 +2,14 @@
 
 export { Challenges } from './challenges';
 export {
-  NcChallengesAdminWidgetDetail,
-  NcChallengesAdminWidgetList,
+  ChallengesWidget,
+  ChallengesWidgetList,
   WidgetCreateParams,
   WidgetUpdateParams,
   WidgetListParams,
   WidgetDeleteParams,
   WidgetGetParams,
   WidgetRotateSecretParams,
-  NcChallengesAdminWidgetListsV4PagePaginationArray,
+  ChallengesWidgetListsV4PagePaginationArray,
   Widgets,
 } from './widgets';

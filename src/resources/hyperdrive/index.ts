@@ -2,7 +2,7 @@
 
 export { Hyperdrive } from './hyperdrive';
 export {
-  HyperdriveHyperdriveWithIdentifier,
+  Hyperdrive,
   ConfigCreateResponse,
   ConfigUpdateResponse,
   ConfigListResponse,
