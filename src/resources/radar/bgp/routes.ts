@@ -347,6 +347,11 @@ export interface RouteTimeseriesParams {
    * Format results are returned in.
    */
   format?: 'JSON' | 'CSV';
+
+  /**
+   * Location Alpha2 code.
+   */
+  location?: string;
 }
 
 export namespace Routes {
