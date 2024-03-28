@@ -19,7 +19,7 @@ export namespace MagicNetworkMonitoring {
   export import ConfigGetParams = ConfigsAPI.ConfigGetParams;
   export import Rules = RulesAPI.Rules;
   export import MagicNetworkMonitoringRule = RulesAPI.MagicNetworkMonitoringRule;
-  export import RuleListResponse = RulesAPI.RuleListResponse;
+  export import MagicNetworkMonitoringRulesSinglePage = RulesAPI.MagicNetworkMonitoringRulesSinglePage;
   export import RuleCreateParams = RulesAPI.RuleCreateParams;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
   export import RuleListParams = RulesAPI.RuleListParams;

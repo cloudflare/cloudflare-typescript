@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as PeersAPI from 'cloudflare/resources/secondary-dns/peers';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Peers extends APIResource {
   /**
@@ -38,13 +39,16 @@ export class Peers extends APIResource {
   /**
    * List Peers.
    */
-  list(params: PeerListParams, options?: Core.RequestOptions): Core.APIPromise<PeerListResponse | null> {
+  list(
+    params: PeerListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<SecondaryDNSPeersSinglePage, SecondaryDNSPeer> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/secondary_dns/peers`, options) as Core.APIPromise<{
-        result: PeerListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/secondary_dns/peers`,
+      SecondaryDNSPeersSinglePage,
+      options,
+    );
   }
 
   /**
@@ -81,6 +85,8 @@ export class Peers extends APIResource {
   }
 }
 
+export class SecondaryDNSPeersSinglePage extends SinglePage<SecondaryDNSPeer> {}
+
 export interface SecondaryDNSPeer {
   id: string;
 
@@ -115,8 +121,6 @@ export interface SecondaryDNSPeer {
    */
   tsig_id?: string;
 }
-
-export type PeerListResponse = Array<SecondaryDNSPeer>;
 
 export interface PeerDeleteResponse {
   id?: string;
@@ -186,8 +190,8 @@ export interface PeerGetParams {
 
 export namespace Peers {
   export import SecondaryDNSPeer = PeersAPI.SecondaryDNSPeer;
-  export import PeerListResponse = PeersAPI.PeerListResponse;
   export import PeerDeleteResponse = PeersAPI.PeerDeleteResponse;
+  export import SecondaryDNSPeersSinglePage = PeersAPI.SecondaryDNSPeersSinglePage;
   export import PeerCreateParams = PeersAPI.PeerCreateParams;
   export import PeerUpdateParams = PeersAPI.PeerUpdateParams;
   export import PeerListParams = PeersAPI.PeerListParams;

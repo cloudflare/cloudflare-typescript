@@ -47,5 +47,6 @@ export {
   InviteEditResponse,
   InviteGetResponse,
   InviteEditParams,
+  InviteListResponsesSinglePage,
   Invites,
 } from './invites';

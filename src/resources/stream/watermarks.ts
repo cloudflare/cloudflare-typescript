@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as WatermarksAPI from 'cloudflare/resources/stream/watermarks';
 import { multipartFormRequestOptions } from 'cloudflare/core';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Watermarks extends APIResource {
   /**
@@ -26,13 +27,16 @@ export class Watermarks extends APIResource {
   /**
    * Lists all watermark profiles for an account.
    */
-  list(params: WatermarkListParams, options?: Core.RequestOptions): Core.APIPromise<WatermarkListResponse> {
+  list(
+    params: WatermarkListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<StreamWatermarksSinglePage, StreamWatermarks> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/stream/watermarks`, options) as Core.APIPromise<{
-        result: WatermarkListResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/stream/watermarks`,
+      StreamWatermarksSinglePage,
+      options,
+    );
   }
 
   /**
@@ -69,6 +73,8 @@ export class Watermarks extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class StreamWatermarksSinglePage extends SinglePage<StreamWatermarks> {}
 
 export interface StreamWatermarks {
   /**
@@ -138,8 +144,6 @@ export interface StreamWatermarks {
 }
 
 export type WatermarkCreateResponse = unknown | string;
-
-export type WatermarkListResponse = Array<StreamWatermarks>;
 
 export type WatermarkDeleteResponse = unknown | string;
 
@@ -216,9 +220,9 @@ export interface WatermarkGetParams {
 export namespace Watermarks {
   export import StreamWatermarks = WatermarksAPI.StreamWatermarks;
   export import WatermarkCreateResponse = WatermarksAPI.WatermarkCreateResponse;
-  export import WatermarkListResponse = WatermarksAPI.WatermarkListResponse;
   export import WatermarkDeleteResponse = WatermarksAPI.WatermarkDeleteResponse;
   export import WatermarkGetResponse = WatermarksAPI.WatermarkGetResponse;
+  export import StreamWatermarksSinglePage = WatermarksAPI.StreamWatermarksSinglePage;
   export import WatermarkCreateParams = WatermarksAPI.WatermarkCreateParams;
   export import WatermarkListParams = WatermarksAPI.WatermarkListParams;
   export import WatermarkDeleteParams = WatermarksAPI.WatermarkDeleteParams;

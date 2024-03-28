@@ -12,12 +12,12 @@ export {
 } from './configs/index';
 export {
   MagicNetworkMonitoringRule,
-  RuleListResponse,
   RuleCreateParams,
   RuleUpdateParams,
   RuleListParams,
   RuleDeleteParams,
   RuleEditParams,
   RuleGetParams,
+  MagicNetworkMonitoringRulesSinglePage,
   Rules,
 } from './rules/index';

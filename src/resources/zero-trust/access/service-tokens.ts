@@ -5,6 +5,7 @@ import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import { CloudflareError } from 'cloudflare/error';
 import * as ServiceTokensAPI from 'cloudflare/resources/zero-trust/access/service-tokens';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class ServiceTokens extends APIResource {
   /**
@@ -80,12 +81,14 @@ export class ServiceTokens extends APIResource {
   list(
     params?: ServiceTokenListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ServiceTokenListResponse | null>;
-  list(options?: Core.RequestOptions): Core.APIPromise<ServiceTokenListResponse | null>;
+  ): Core.PagePromise<ZeroTrustServiceTokensSinglePage, ZeroTrustServiceTokens>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ZeroTrustServiceTokensSinglePage, ZeroTrustServiceTokens>;
   list(
     params: ServiceTokenListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ServiceTokenListResponse | null> {
+  ): Core.PagePromise<ZeroTrustServiceTokensSinglePage, ZeroTrustServiceTokens> {
     if (isRequestOptions(params)) {
       return this.list({}, params);
     }
@@ -106,12 +109,11 @@ export class ServiceTokens extends APIResource {
           accountOrZone: 'zones',
           accountOrZoneId: zone_id,
         };
-    return (
-      this._client.get(
-        `/${accountOrZone}/${accountOrZoneId}/access/service_tokens`,
-        options,
-      ) as Core.APIPromise<{ result: ServiceTokenListResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/${accountOrZone}/${accountOrZoneId}/access/service_tokens`,
+      ZeroTrustServiceTokensSinglePage,
+      options,
+    );
   }
 
   /**
@@ -189,6 +191,8 @@ export class ServiceTokens extends APIResource {
   }
 }
 
+export class ZeroTrustServiceTokensSinglePage extends SinglePage<ZeroTrustServiceTokens> {}
+
 export interface ZeroTrustServiceTokens {
   /**
    * The ID of the service token.
@@ -252,8 +256,6 @@ export interface ServiceTokenCreateResponse {
 
   updated_at?: string;
 }
-
-export type ServiceTokenListResponse = Array<ZeroTrustServiceTokens>;
 
 export interface ServiceTokenRotateResponse {
   /**
@@ -369,8 +371,8 @@ export interface ServiceTokenDeleteParams {
 export namespace ServiceTokens {
   export import ZeroTrustServiceTokens = ServiceTokensAPI.ZeroTrustServiceTokens;
   export import ServiceTokenCreateResponse = ServiceTokensAPI.ServiceTokenCreateResponse;
-  export import ServiceTokenListResponse = ServiceTokensAPI.ServiceTokenListResponse;
   export import ServiceTokenRotateResponse = ServiceTokensAPI.ServiceTokenRotateResponse;
+  export import ZeroTrustServiceTokensSinglePage = ServiceTokensAPI.ZeroTrustServiceTokensSinglePage;
   export import ServiceTokenCreateParams = ServiceTokensAPI.ServiceTokenCreateParams;
   export import ServiceTokenUpdateParams = ServiceTokensAPI.ServiceTokenUpdateParams;
   export import ServiceTokenListParams = ServiceTokensAPI.ServiceTokenListParams;

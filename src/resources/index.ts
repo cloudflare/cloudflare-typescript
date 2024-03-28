@@ -22,7 +22,7 @@ export {
   AuditLogListResponsesV4PagePaginationArray,
   AuditLogs,
 } from './audit-logs';
-export { AvailableRatePlan, PlanListResponse, Plans } from './plans';
+export { AvailableRatePlan, AvailableRatePlansSinglePage, Plans } from './plans';
 export { Billing } from './billing/billing';
 export {
   BotManagementUpdateResponse,
@@ -35,12 +35,12 @@ export { CachePurgeResponse, CachePurgeParams, Cache } from './cache/cache';
 export {
   CallsApp,
   CallsAppWithSecret,
-  CallListResponse,
   CallCreateParams,
   CallUpdateParams,
   CallListParams,
   CallDeleteParams,
   CallGetParams,
+  CallsAppsSinglePage,
   Calls,
 } from './calls';
 export { CertificateAuthorities } from './certificate-authorities/certificate-authorities';
@@ -130,7 +130,6 @@ export {
 } from './filters';
 export {
   Healthcheck,
-  HealthcheckListResponse,
   HealthcheckDeleteResponse,
   HealthcheckCreateParams,
   HealthcheckUpdateParams,
@@ -138,10 +137,11 @@ export {
   HealthcheckDeleteParams,
   HealthcheckEditParams,
   HealthcheckGetParams,
+  HealthchecksSinglePage,
   Healthchecks,
 } from './healthchecks/healthchecks';
 export { Hostnames } from './hostnames/hostnames';
-export { Hyperdrive } from './hyperdrive/hyperdrive';
+export { Hyperdrive, HyperdriveResource } from './hyperdrive/hyperdrive';
 export { IPs, JDCloudIPs, IPListResponse, IPListParams } from './ips';
 export { Images } from './images/images';
 export { Intel } from './intel/intel';
@@ -156,18 +156,17 @@ export { KV } from './kv/kv';
 export {
   KeylessCertificate,
   KeylessCertificateHostname,
-  KeylessCertificateListResponse,
   KeylessCertificateDeleteResponse,
   KeylessCertificateCreateParams,
   KeylessCertificateListParams,
   KeylessCertificateDeleteParams,
   KeylessCertificateEditParams,
   KeylessCertificateGetParams,
+  KeylessCertificateHostnamesSinglePage,
   KeylessCertificates,
 } from './keyless-certificates';
 export {
   LoadBalancer,
-  LoadBalancerListResponse,
   LoadBalancerDeleteResponse,
   LoadBalancerCreateParams,
   LoadBalancerUpdateParams,
@@ -175,6 +174,7 @@ export {
   LoadBalancerDeleteParams,
   LoadBalancerEditParams,
   LoadBalancerGetParams,
+  LoadBalancersSinglePage,
   LoadBalancers,
 } from './load-balancers/load-balancers';
 export { Logpush } from './logpush/logpush';
@@ -182,11 +182,11 @@ export { Logs } from './logs/logs';
 export {
   MTLSCertificate,
   MTLSCertificateUpdate,
-  MTLSCertificateListResponse,
   MTLSCertificateCreateParams,
   MTLSCertificateListParams,
   MTLSCertificateDeleteParams,
   MTLSCertificateGetParams,
+  MTLSCertificatesSinglePage,
   MTLSCertificates,
 } from './mtls-certificates/mtls-certificates';
 export { MagicNetworkMonitoring } from './magic-network-monitoring/magic-network-monitoring';
@@ -220,10 +220,10 @@ export {
 export {
   OriginCACertificate,
   OriginCACertificateCreateResponse,
-  OriginCACertificateListResponse,
   OriginCACertificateDeleteResponse,
   OriginCACertificateGetResponse,
   OriginCACertificateCreateParams,
+  OriginCACertificatesSinglePage,
   OriginCACertificates,
 } from './origin-ca-certificates';
 export {
@@ -243,6 +243,7 @@ export {
   OriginTLSClientAuthListParams,
   OriginTLSClientAuthDeleteParams,
   OriginTLSClientAuthGetParams,
+  OriginTLSClientAuthListResponsesSinglePage,
   OriginTLSClientAuth,
 } from './origin-tls-client-auth/origin-tls-client-auth';
 export {
@@ -252,6 +253,7 @@ export {
   PCAPCreateParams,
   PCAPListParams,
   PCAPGetParams,
+  PCAPListResponsesSinglePage,
   PCAPs,
 } from './pcaps/pcaps';
 export {
@@ -276,6 +278,7 @@ export {
   QueueListParams,
   QueueDeleteParams,
   QueueGetParams,
+  QueueListResponsesSinglePage,
   Queues,
 } from './queues/queues';
 export { R2 } from './r2/r2';
@@ -299,33 +302,34 @@ export { Registrar } from './registrar/registrar';
 export { RequestTracers } from './request-tracers/request-tracers';
 export { Rules } from './rules/rules';
 export {
-  RulesetsRulesetResponse,
-  RulesetsRulesetsResponse,
+  Ruleset,
+  RulesetListResponse,
   RulesetCreateParams,
   RulesetUpdateParams,
   RulesetListParams,
   RulesetDeleteParams,
   RulesetGetParams,
+  RulesetListResponsesSinglePage,
   Rulesets,
 } from './rulesets/rulesets';
 export { SSL } from './ssl/ssl';
 export { SecondaryDNS } from './secondary-dns/secondary-dns';
 export {
   Snippet,
-  SnippetListResponse,
   SnippetDeleteResponse,
   SnippetUpdateParams,
+  SnippetsSinglePage,
   Snippets,
 } from './snippets/snippets';
 export { Spectrum } from './spectrum/spectrum';
 export { Storage } from './storage/storage';
 export {
   StreamVideos,
-  StreamListResponse,
   StreamCreateParams,
   StreamListParams,
   StreamDeleteParams,
   StreamGetParams,
+  StreamVideosSinglePage,
   Stream,
 } from './stream/stream';
 export {
@@ -336,6 +340,7 @@ export {
   SubscriptionGetResponse,
   SubscriptionCreateParams,
   SubscriptionUpdateParams,
+  SubscriptionListResponsesSinglePage,
   Subscriptions,
 } from './subscriptions';
 export {
@@ -366,11 +371,11 @@ export {
 } from './warp-connector';
 export {
   WaitingRoom,
-  WaitingRoomListResponse,
   WaitingRoomDeleteResponse,
   WaitingRoomCreateParams,
   WaitingRoomUpdateParams,
   WaitingRoomEditParams,
+  WaitingRoomsSinglePage,
   WaitingRooms,
 } from './waiting-rooms/waiting-rooms';
 export { Web3 } from './web3/web3';

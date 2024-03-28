@@ -12,6 +12,7 @@ import * as SettingsAPI from 'cloudflare/resources/workers/scripts/settings';
 import * as TailAPI from 'cloudflare/resources/workers/scripts/tail';
 import * as UsageModelAPI from 'cloudflare/resources/workers/scripts/usage-model';
 import { type Uploadable, maybeMultipartFormRequestOptions } from 'cloudflare/core';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Scripts extends APIResource {
   bindings: BindingsAPI.Bindings = new BindingsAPI.Bindings(this._client);
@@ -42,13 +43,16 @@ export class Scripts extends APIResource {
   /**
    * Fetch a list of uploaded workers.
    */
-  list(params: ScriptListParams, options?: Core.RequestOptions): Core.APIPromise<ScriptListResponse> {
+  list(
+    params: ScriptListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<WorkersScriptsSinglePage, WorkersScript> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/workers/scripts`, options) as Core.APIPromise<{
-        result: ScriptListResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/workers/scripts`,
+      WorkersScriptsSinglePage,
+      options,
+    );
   }
 
   /**
@@ -79,6 +83,8 @@ export class Scripts extends APIResource {
     });
   }
 }
+
+export class WorkersScriptsSinglePage extends SinglePage<WorkersScript> {}
 
 export interface WorkersScript {
   /**
@@ -148,8 +154,6 @@ export namespace WorkersScript {
     namespace?: string;
   }
 }
-
-export type ScriptListResponse = Array<WorkersScript>;
 
 export type ScriptUpdateParams = ScriptUpdateParams.Variant0 | ScriptUpdateParams.Variant1;
 
@@ -451,7 +455,7 @@ export interface ScriptGetParams {
 
 export namespace Scripts {
   export import WorkersScript = ScriptsAPI.WorkersScript;
-  export import ScriptListResponse = ScriptsAPI.ScriptListResponse;
+  export import WorkersScriptsSinglePage = ScriptsAPI.WorkersScriptsSinglePage;
   export import ScriptUpdateParams = ScriptsAPI.ScriptUpdateParams;
   export import ScriptListParams = ScriptsAPI.ScriptListParams;
   export import ScriptDeleteParams = ScriptsAPI.ScriptDeleteParams;

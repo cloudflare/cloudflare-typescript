@@ -6,6 +6,7 @@ import * as UsersAPI from 'cloudflare/resources/zero-trust/access/users/users';
 import * as ActiveSessionsAPI from 'cloudflare/resources/zero-trust/access/users/active-sessions';
 import * as FailedLoginsAPI from 'cloudflare/resources/zero-trust/access/users/failed-logins';
 import * as LastSeenIdentityAPI from 'cloudflare/resources/zero-trust/access/users/last-seen-identity';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Users extends APIResource {
   activeSessions: ActiveSessionsAPI.ActiveSessions = new ActiveSessionsAPI.ActiveSessions(this._client);
@@ -17,14 +18,15 @@ export class Users extends APIResource {
   /**
    * Gets a list of users for an account.
    */
-  list(identifier: string, options?: Core.RequestOptions): Core.APIPromise<UserListResponse | null> {
-    return (
-      this._client.get(`/accounts/${identifier}/access/users`, options) as Core.APIPromise<{
-        result: UserListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+  list(
+    identifier: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ZeroTrustUsersSinglePage, ZeroTrustUsers> {
+    return this._client.getAPIList(`/accounts/${identifier}/access/users`, ZeroTrustUsersSinglePage, options);
   }
 }
+
+export class ZeroTrustUsersSinglePage extends SinglePage<ZeroTrustUsers> {}
 
 export interface ZeroTrustUsers {
   /**
@@ -77,16 +79,16 @@ export interface ZeroTrustUsers {
   updated_at?: string;
 }
 
-export type UserListResponse = Array<ZeroTrustUsers>;
-
 export namespace Users {
   export import ZeroTrustUsers = UsersAPI.ZeroTrustUsers;
-  export import UserListResponse = UsersAPI.UserListResponse;
+  export import ZeroTrustUsersSinglePage = UsersAPI.ZeroTrustUsersSinglePage;
   export import ActiveSessions = ActiveSessionsAPI.ActiveSessions;
   export import ActiveSessionListResponse = ActiveSessionsAPI.ActiveSessionListResponse;
   export import ActiveSessionGetResponse = ActiveSessionsAPI.ActiveSessionGetResponse;
+  export import ActiveSessionListResponsesSinglePage = ActiveSessionsAPI.ActiveSessionListResponsesSinglePage;
   export import LastSeenIdentity = LastSeenIdentityAPI.LastSeenIdentity;
   export import ZeroTrustIdentity = LastSeenIdentityAPI.ZeroTrustIdentity;
   export import FailedLogins = FailedLoginsAPI.FailedLogins;
   export import FailedLoginListResponse = FailedLoginsAPI.FailedLoginListResponse;
+  export import FailedLoginListResponsesSinglePage = FailedLoginsAPI.FailedLoginListResponsesSinglePage;
 }

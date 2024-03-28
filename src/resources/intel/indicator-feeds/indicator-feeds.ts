@@ -5,6 +5,7 @@ import { APIResource } from 'cloudflare/resource';
 import * as IndicatorFeedsAPI from 'cloudflare/resources/intel/indicator-feeds/indicator-feeds';
 import * as PermissionsAPI from 'cloudflare/resources/intel/indicator-feeds/permissions';
 import { multipartFormRequestOptions } from 'cloudflare/core';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class IndicatorFeeds extends APIResource {
   permissions: PermissionsAPI.Permissions = new PermissionsAPI.Permissions(this._client);
@@ -48,13 +49,13 @@ export class IndicatorFeeds extends APIResource {
   list(
     params: IndicatorFeedListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<IndicatorFeedListResponse> {
+  ): Core.PagePromise<IndicatorFeedListResponsesSinglePage, IndicatorFeedListResponse> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/intel/indicator-feeds`, options) as Core.APIPromise<{
-        result: IndicatorFeedListResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/intel/indicator-feeds`,
+      IndicatorFeedListResponsesSinglePage,
+      options,
+    );
   }
 
   /**
@@ -89,6 +90,8 @@ export class IndicatorFeeds extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class IndicatorFeedListResponsesSinglePage extends SinglePage<IndicatorFeedListResponse> {}
 
 export interface IndicatorFeedCreateResponse {
   /**
@@ -134,35 +137,31 @@ export interface IndicatorFeedUpdateResponse {
   status?: string;
 }
 
-export type IndicatorFeedListResponse = Array<IndicatorFeedListResponse.IndicatorFeedListResponseItem>;
+export interface IndicatorFeedListResponse {
+  /**
+   * The unique identifier for the indicator feed
+   */
+  id?: number;
 
-export namespace IndicatorFeedListResponse {
-  export interface IndicatorFeedListResponseItem {
-    /**
-     * The unique identifier for the indicator feed
-     */
-    id?: number;
+  /**
+   * The date and time when the data entry was created
+   */
+  created_on?: string;
 
-    /**
-     * The date and time when the data entry was created
-     */
-    created_on?: string;
+  /**
+   * The description of the example test
+   */
+  description?: string;
 
-    /**
-     * The description of the example test
-     */
-    description?: string;
+  /**
+   * The date and time when the data entry was last modified
+   */
+  modified_on?: string;
 
-    /**
-     * The date and time when the data entry was last modified
-     */
-    modified_on?: string;
-
-    /**
-     * The name of the indicator feed
-     */
-    name?: string;
-  }
+  /**
+   * The name of the indicator feed
+   */
+  name?: string;
 }
 
 export type IndicatorFeedDataResponse = string;
@@ -255,6 +254,7 @@ export namespace IndicatorFeeds {
   export import IndicatorFeedListResponse = IndicatorFeedsAPI.IndicatorFeedListResponse;
   export import IndicatorFeedDataResponse = IndicatorFeedsAPI.IndicatorFeedDataResponse;
   export import IndicatorFeedGetResponse = IndicatorFeedsAPI.IndicatorFeedGetResponse;
+  export import IndicatorFeedListResponsesSinglePage = IndicatorFeedsAPI.IndicatorFeedListResponsesSinglePage;
   export import IndicatorFeedCreateParams = IndicatorFeedsAPI.IndicatorFeedCreateParams;
   export import IndicatorFeedUpdateParams = IndicatorFeedsAPI.IndicatorFeedUpdateParams;
   export import IndicatorFeedListParams = IndicatorFeedsAPI.IndicatorFeedListParams;

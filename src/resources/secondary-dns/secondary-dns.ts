@@ -47,8 +47,8 @@ export namespace SecondaryDNS {
   export import OutgoingGetParams = OutgoingAPI.OutgoingGetParams;
   export import ACLs = ACLsAPI.ACLs;
   export import SecondaryDNSACL = ACLsAPI.SecondaryDNSACL;
-  export import ACLListResponse = ACLsAPI.ACLListResponse;
   export import ACLDeleteResponse = ACLsAPI.ACLDeleteResponse;
+  export import SecondaryDnsaclsSinglePage = ACLsAPI.SecondaryDnsaclsSinglePage;
   export import ACLCreateParams = ACLsAPI.ACLCreateParams;
   export import ACLUpdateParams = ACLsAPI.ACLUpdateParams;
   export import ACLListParams = ACLsAPI.ACLListParams;
@@ -56,8 +56,8 @@ export namespace SecondaryDNS {
   export import ACLGetParams = ACLsAPI.ACLGetParams;
   export import Peers = PeersAPI.Peers;
   export import SecondaryDNSPeer = PeersAPI.SecondaryDNSPeer;
-  export import PeerListResponse = PeersAPI.PeerListResponse;
   export import PeerDeleteResponse = PeersAPI.PeerDeleteResponse;
+  export import SecondaryDNSPeersSinglePage = PeersAPI.SecondaryDNSPeersSinglePage;
   export import PeerCreateParams = PeersAPI.PeerCreateParams;
   export import PeerUpdateParams = PeersAPI.PeerUpdateParams;
   export import PeerListParams = PeersAPI.PeerListParams;
@@ -65,8 +65,8 @@ export namespace SecondaryDNS {
   export import PeerGetParams = PeersAPI.PeerGetParams;
   export import TSIGs = TSIGsAPI.TSIGs;
   export import SecondaryDNSTSIG = TSIGsAPI.SecondaryDNSTSIG;
-  export import TSIGListResponse = TSIGsAPI.TSIGListResponse;
   export import TSIGDeleteResponse = TSIGsAPI.TSIGDeleteResponse;
+  export import SecondaryDnstsigsSinglePage = TSIGsAPI.SecondaryDnstsigsSinglePage;
   export import TSIGCreateParams = TSIGsAPI.TSIGCreateParams;
   export import TSIGUpdateParams = TSIGsAPI.TSIGUpdateParams;
   export import TSIGListParams = TSIGsAPI.TSIGListParams;

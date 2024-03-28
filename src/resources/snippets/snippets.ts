@@ -7,6 +7,7 @@ import * as SnippetsAPI from 'cloudflare/resources/snippets/snippets';
 import * as ContentAPI from 'cloudflare/resources/snippets/content';
 import * as RulesAPI from 'cloudflare/resources/snippets/rules';
 import { multipartFormRequestOptions } from 'cloudflare/core';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Snippets extends APIResource {
   content: ContentAPI.Content = new ContentAPI.Content(this._client);
@@ -46,12 +47,8 @@ export class Snippets extends APIResource {
   /**
    * All Snippets
    */
-  list(zoneIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<SnippetListResponse> {
-    return (
-      this._client.get(`/zones/${zoneIdentifier}/snippets`, options) as Core.APIPromise<{
-        result: SnippetListResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+  list(zoneIdentifier: string, options?: Core.RequestOptions): Core.PagePromise<SnippetsSinglePage, Snippet> {
+    return this._client.getAPIList(`/zones/${zoneIdentifier}/snippets`, SnippetsSinglePage, options);
   }
 
   /**
@@ -81,6 +78,8 @@ export class Snippets extends APIResource {
   }
 }
 
+export class SnippetsSinglePage extends SinglePage<Snippet> {}
+
 /**
  * Snippet Information
  */
@@ -100,11 +99,6 @@ export interface Snippet {
    */
   snippet_name?: string;
 }
-
-/**
- * List of all zone snippets
- */
-export type SnippetListResponse = Array<Snippet>;
 
 export type SnippetDeleteResponse = unknown | Array<unknown> | string;
 
@@ -128,12 +122,13 @@ export namespace SnippetUpdateParams {
 
 export namespace Snippets {
   export import Snippet = SnippetsAPI.Snippet;
-  export import SnippetListResponse = SnippetsAPI.SnippetListResponse;
   export import SnippetDeleteResponse = SnippetsAPI.SnippetDeleteResponse;
+  export import SnippetsSinglePage = SnippetsAPI.SnippetsSinglePage;
   export import SnippetUpdateParams = SnippetsAPI.SnippetUpdateParams;
   export import Content = ContentAPI.Content;
   export import Rules = RulesAPI.Rules;
   export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
   export import RuleListResponse = RulesAPI.RuleListResponse;
+  export import RuleListResponsesSinglePage = RulesAPI.RuleListResponsesSinglePage;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
 }

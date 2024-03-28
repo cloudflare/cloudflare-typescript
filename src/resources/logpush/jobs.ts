@@ -6,6 +6,7 @@ import { isRequestOptions } from 'cloudflare/core';
 import { CloudflareError } from 'cloudflare/error';
 import * as JobsAPI from 'cloudflare/resources/logpush/jobs';
 import * as DatasetsJobsAPI from 'cloudflare/resources/logpush/datasets/jobs';
+import { LogpushJobsSinglePage } from 'cloudflare/resources/logpush/datasets/jobs';
 
 export class Jobs extends APIResource {
   /**
@@ -76,12 +77,17 @@ export class Jobs extends APIResource {
   /**
    * Lists Logpush jobs for an account or zone.
    */
-  list(params?: JobListParams, options?: Core.RequestOptions): Core.APIPromise<JobListResponse>;
-  list(options?: Core.RequestOptions): Core.APIPromise<JobListResponse>;
+  list(
+    params?: JobListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<LogpushJobsSinglePage, DatasetsJobsAPI.LogpushJob | null>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<LogpushJobsSinglePage, DatasetsJobsAPI.LogpushJob | null>;
   list(
     params: JobListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<JobListResponse> {
+  ): Core.PagePromise<LogpushJobsSinglePage, DatasetsJobsAPI.LogpushJob | null> {
     if (isRequestOptions(params)) {
       return this.list({}, params);
     }
@@ -102,11 +108,11 @@ export class Jobs extends APIResource {
           accountOrZone: 'zones',
           accountOrZoneId: zone_id,
         };
-    return (
-      this._client.get(`/${accountOrZone}/${accountOrZoneId}/logpush/jobs`, options) as Core.APIPromise<{
-        result: JobListResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/${accountOrZone}/${accountOrZoneId}/logpush/jobs`,
+      LogpushJobsSinglePage,
+      options,
+    );
   }
 
   /**
@@ -184,8 +190,6 @@ export class Jobs extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
-
-export type JobListResponse = Array<DatasetsJobsAPI.LogpushJob | null>;
 
 export type JobDeleteResponse = unknown | Array<unknown> | string;
 
@@ -502,7 +506,6 @@ export interface JobGetParams {
 }
 
 export namespace Jobs {
-  export import JobListResponse = JobsAPI.JobListResponse;
   export import JobDeleteResponse = JobsAPI.JobDeleteResponse;
   export import JobCreateParams = JobsAPI.JobCreateParams;
   export import JobUpdateParams = JobsAPI.JobUpdateParams;
@@ -510,3 +513,5 @@ export namespace Jobs {
   export import JobDeleteParams = JobsAPI.JobDeleteParams;
   export import JobGetParams = JobsAPI.JobGetParams;
 }
+
+export { LogpushJobsSinglePage };

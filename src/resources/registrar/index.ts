@@ -9,5 +9,6 @@ export {
   DomainUpdateParams,
   DomainListParams,
   DomainGetParams,
+  DomainListResponsesSinglePage,
   Domains,
 } from './domains';

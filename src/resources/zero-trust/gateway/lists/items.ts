@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ItemsAPI from 'cloudflare/resources/zero-trust/gateway/lists/items';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Items extends APIResource {
   /**
@@ -12,17 +13,22 @@ export class Items extends APIResource {
     listId: string,
     params: ItemListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ItemListResponse | null> {
+  ): Core.PagePromise<ItemListResponsesSinglePage, ItemListResponse> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/gateway/lists/${listId}/items`, options) as Core.APIPromise<{
-        result: ItemListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/gateway/lists/${listId}/items`,
+      ItemListResponsesSinglePage,
+      options,
+    );
   }
 }
 
-export type ItemListResponse = Array<Array<ItemListResponse.ItemListResponseItem>>;
+export class ItemListResponsesSinglePage extends SinglePage<ItemListResponse> {}
+
+/**
+ * The items in the list.
+ */
+export type ItemListResponse = Array<ItemListResponse.ItemListResponseItem>;
 
 export namespace ItemListResponse {
   export interface ItemListResponseItem {
@@ -41,5 +47,6 @@ export interface ItemListParams {
 
 export namespace Items {
   export import ItemListResponse = ItemsAPI.ItemListResponse;
+  export import ItemListResponsesSinglePage = ItemsAPI.ItemListResponsesSinglePage;
   export import ItemListParams = ItemsAPI.ItemListParams;
 }

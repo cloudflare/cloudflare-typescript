@@ -155,6 +155,7 @@ export namespace UserResource {
   export import InviteListResponse = InvitesAPI.InviteListResponse;
   export import InviteEditResponse = InvitesAPI.InviteEditResponse;
   export import InviteGetResponse = InvitesAPI.InviteGetResponse;
+  export import InviteListResponsesSinglePage = InvitesAPI.InviteListResponsesSinglePage;
   export import InviteEditParams = InvitesAPI.InviteEditParams;
   export import LoadBalancers = LoadBalancersAPI.LoadBalancers;
   export import Organizations = OrganizationsAPI.Organizations;

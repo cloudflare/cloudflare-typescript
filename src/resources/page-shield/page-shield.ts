@@ -124,7 +124,7 @@ export namespace PageShield {
   export import PageShieldGetParams = PageShieldAPI.PageShieldGetParams;
   export import Policies = PoliciesAPI.Policies;
   export import PageShieldPolicy = PoliciesAPI.PageShieldPolicy;
-  export import PolicyListResponse = PoliciesAPI.PolicyListResponse;
+  export import PageShieldPoliciesSinglePage = PoliciesAPI.PageShieldPoliciesSinglePage;
   export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
   export import PolicyUpdateParams = PoliciesAPI.PolicyUpdateParams;
   export import PolicyListParams = PoliciesAPI.PolicyListParams;
@@ -132,13 +132,13 @@ export namespace PageShield {
   export import PolicyGetParams = PoliciesAPI.PolicyGetParams;
   export import Connections = ConnectionsAPI.Connections;
   export import PageShieldConnection = ConnectionsAPI.PageShieldConnection;
-  export import ConnectionListResponse = ConnectionsAPI.ConnectionListResponse;
+  export import PageShieldConnectionsSinglePage = ConnectionsAPI.PageShieldConnectionsSinglePage;
   export import ConnectionListParams = ConnectionsAPI.ConnectionListParams;
   export import ConnectionGetParams = ConnectionsAPI.ConnectionGetParams;
   export import Scripts = ScriptsAPI.Scripts;
   export import PageShieldScript = ScriptsAPI.PageShieldScript;
-  export import ScriptListResponse = ScriptsAPI.ScriptListResponse;
   export import ScriptGetResponse = ScriptsAPI.ScriptGetResponse;
+  export import PageShieldScriptsSinglePage = ScriptsAPI.PageShieldScriptsSinglePage;
   export import ScriptListParams = ScriptsAPI.ScriptListParams;
   export import ScriptGetParams = ScriptsAPI.ScriptGetParams;
 }

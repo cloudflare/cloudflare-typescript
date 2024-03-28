@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as LocationsAPI from 'cloudflare/resources/zero-trust/gateway/locations';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Locations extends APIResource {
   /**
@@ -44,13 +45,13 @@ export class Locations extends APIResource {
   list(
     params: LocationListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LocationListResponse | null> {
+  ): Core.PagePromise<ZeroTrustGatewayLocationsSinglePage, ZeroTrustGatewayLocations> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/gateway/locations`, options) as Core.APIPromise<{
-        result: LocationListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/gateway/locations`,
+      ZeroTrustGatewayLocationsSinglePage,
+      options,
+    );
   }
 
   /**
@@ -87,6 +88,8 @@ export class Locations extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class ZeroTrustGatewayLocationsSinglePage extends SinglePage<ZeroTrustGatewayLocations> {}
 
 export interface ZeroTrustGatewayLocations {
   id?: string;
@@ -137,8 +140,6 @@ export namespace ZeroTrustGatewayLocations {
     network: string;
   }
 }
-
-export type LocationListResponse = Array<ZeroTrustGatewayLocations>;
 
 export type LocationDeleteResponse = unknown | string;
 
@@ -230,8 +231,8 @@ export interface LocationGetParams {
 
 export namespace Locations {
   export import ZeroTrustGatewayLocations = LocationsAPI.ZeroTrustGatewayLocations;
-  export import LocationListResponse = LocationsAPI.LocationListResponse;
   export import LocationDeleteResponse = LocationsAPI.LocationDeleteResponse;
+  export import ZeroTrustGatewayLocationsSinglePage = LocationsAPI.ZeroTrustGatewayLocationsSinglePage;
   export import LocationCreateParams = LocationsAPI.LocationCreateParams;
   export import LocationUpdateParams = LocationsAPI.LocationUpdateParams;
   export import LocationListParams = LocationsAPI.LocationListParams;

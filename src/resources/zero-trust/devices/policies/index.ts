@@ -3,42 +3,42 @@
 export { DefaultPolicyGetResponse, DefaultPolicyGetParams, DefaultPolicy } from './default-policy';
 export {
   DevicesDeviceSettingsPolicy,
-  PolicyListResponse,
   PolicyDeleteResponse,
   PolicyCreateParams,
   PolicyListParams,
   PolicyDeleteParams,
   PolicyEditParams,
   PolicyGetParams,
+  DevicesDeviceSettingsPoliciesSinglePage,
   Policies,
 } from './policies';
 export {
   DevicesFallbackDomain,
   FallbackDomainUpdateResponse,
-  FallbackDomainListResponse,
   FallbackDomainGetResponse,
   FallbackDomainUpdateParams,
   FallbackDomainListParams,
   FallbackDomainGetParams,
+  DevicesFallbackDomainsSinglePage,
   FallbackDomains,
 } from './fallback-domains';
 export {
   DevicesSplitTunnel,
   ExcludeUpdateResponse,
-  ExcludeListResponse,
   ExcludeGetResponse,
   ExcludeUpdateParams,
   ExcludeListParams,
   ExcludeGetParams,
+  DevicesSplitTunnelsSinglePage,
   Excludes,
 } from './excludes';
 export {
   DevicesSplitTunnelInclude,
   IncludeUpdateResponse,
-  IncludeListResponse,
   IncludeGetResponse,
   IncludeUpdateParams,
   IncludeListParams,
   IncludeGetParams,
+  DevicesSplitTunnelIncludesSinglePage,
   Includes,
 } from './includes';

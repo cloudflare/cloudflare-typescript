@@ -10,6 +10,7 @@ export {
   CertificatePackDeleteParams,
   CertificatePackEditParams,
   CertificatePackGetParams,
+  CertificatePackListResponsesSinglePage,
   CertificatePacks,
 } from './certificate-packs/index';
 export { RecommendationGetResponse, Recommendations } from './recommendations';

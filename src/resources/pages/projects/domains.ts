@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as DomainsAPI from 'cloudflare/resources/pages/projects/domains';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Domains extends APIResource {
   /**
@@ -29,14 +30,13 @@ export class Domains extends APIResource {
     projectName: string,
     params: DomainListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DomainListResponse> {
+  ): Core.PagePromise<DomainListResponsesSinglePage, DomainListResponse> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/pages/projects/${projectName}/domains`,
-        options,
-      ) as Core.APIPromise<{ result: DomainListResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/pages/projects/${projectName}/domains`,
+      DomainListResponsesSinglePage,
+      options,
+    );
   }
 
   /**
@@ -92,9 +92,11 @@ export class Domains extends APIResource {
   }
 }
 
+export class DomainListResponsesSinglePage extends SinglePage<DomainListResponse> {}
+
 export type DomainCreateResponse = unknown | Array<unknown> | string;
 
-export type DomainListResponse = Array<unknown>;
+export type DomainListResponse = unknown;
 
 export type DomainDeleteResponse = unknown;
 
@@ -148,6 +150,7 @@ export namespace Domains {
   export import DomainDeleteResponse = DomainsAPI.DomainDeleteResponse;
   export import DomainEditResponse = DomainsAPI.DomainEditResponse;
   export import DomainGetResponse = DomainsAPI.DomainGetResponse;
+  export import DomainListResponsesSinglePage = DomainsAPI.DomainListResponsesSinglePage;
   export import DomainCreateParams = DomainsAPI.DomainCreateParams;
   export import DomainListParams = DomainsAPI.DomainListParams;
   export import DomainDeleteParams = DomainsAPI.DomainDeleteParams;

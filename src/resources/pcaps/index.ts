@@ -17,5 +17,6 @@ export {
   PCAPCreateParams,
   PCAPListParams,
   PCAPGetParams,
+  PCAPListResponsesSinglePage,
   PCAPs,
 } from './pcaps';

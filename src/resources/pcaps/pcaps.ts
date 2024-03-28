@@ -5,6 +5,7 @@ import { APIResource } from 'cloudflare/resource';
 import * as PCAPsAPI from 'cloudflare/resources/pcaps/pcaps';
 import * as DownloadAPI from 'cloudflare/resources/pcaps/download';
 import * as OwnershipAPI from 'cloudflare/resources/pcaps/ownership';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class PCAPs extends APIResource {
   ownership: OwnershipAPI.Ownership = new OwnershipAPI.Ownership(this._client);
@@ -25,13 +26,12 @@ export class PCAPs extends APIResource {
   /**
    * Lists all packet capture requests for an account.
    */
-  list(params: PCAPListParams, options?: Core.RequestOptions): Core.APIPromise<PCAPListResponse | null> {
+  list(
+    params: PCAPListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<PCAPListResponsesSinglePage, PCAPListResponse> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/pcaps`, options) as Core.APIPromise<{
-        result: PCAPListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(`/accounts/${account_id}/pcaps`, PCAPListResponsesSinglePage, options);
   }
 
   /**
@@ -50,6 +50,8 @@ export class PCAPs extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class PCAPListResponsesSinglePage extends SinglePage<PCAPListResponse> {}
 
 export type PCAPCreateResponse =
   | PCAPCreateResponse.MagicVisibilityPCAPsResponseSimple
@@ -237,9 +239,9 @@ export namespace PCAPCreateResponse {
   }
 }
 
-export type PCAPListResponse = Array<
-  PCAPListResponse.MagicVisibilityPCAPsResponseSimple | PCAPListResponse.MagicVisibilityPCAPsResponseFull
->;
+export type PCAPListResponse =
+  | PCAPListResponse.MagicVisibilityPCAPsResponseSimple
+  | PCAPListResponse.MagicVisibilityPCAPsResponseFull;
 
 export namespace PCAPListResponse {
   export interface MagicVisibilityPCAPsResponseSimple {
@@ -784,6 +786,7 @@ export namespace PCAPs {
   export import PCAPCreateResponse = PCAPsAPI.PCAPCreateResponse;
   export import PCAPListResponse = PCAPsAPI.PCAPListResponse;
   export import PCAPGetResponse = PCAPsAPI.PCAPGetResponse;
+  export import PCAPListResponsesSinglePage = PCAPsAPI.PCAPListResponsesSinglePage;
   export import PCAPCreateParams = PCAPsAPI.PCAPCreateParams;
   export import PCAPListParams = PCAPsAPI.PCAPListParams;
   export import PCAPGetParams = PCAPsAPI.PCAPGetParams;

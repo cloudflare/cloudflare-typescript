@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as PoolsAPI from 'cloudflare/resources/user/load-balancers/pools';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Pools extends APIResource {
   /**
@@ -35,20 +36,22 @@ export class Pools extends APIResource {
   /**
    * List configured pools.
    */
-  list(query?: PoolListParams, options?: Core.RequestOptions): Core.APIPromise<PoolListResponse | null>;
-  list(options?: Core.RequestOptions): Core.APIPromise<PoolListResponse | null>;
+  list(
+    query?: PoolListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<LoadBalancingPoolsSinglePage, LoadBalancingPool>;
+  list(options?: Core.RequestOptions): Core.PagePromise<LoadBalancingPoolsSinglePage, LoadBalancingPool>;
   list(
     query: PoolListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PoolListResponse | null> {
+  ): Core.PagePromise<LoadBalancingPoolsSinglePage, LoadBalancingPool> {
     if (isRequestOptions(query)) {
       return this.list({}, query);
     }
-    return (
-      this._client.get('/user/load_balancers/pools', { query, ...options }) as Core.APIPromise<{
-        result: PoolListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList('/user/load_balancers/pools', LoadBalancingPoolsSinglePage, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -127,6 +130,8 @@ export class Pools extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class LoadBalancingPoolsSinglePage extends SinglePage<LoadBalancingPool> {}
 
 export interface LoadBalancingPool {
   id?: string;
@@ -413,8 +418,6 @@ export namespace LoadBalancingPool {
     }
   }
 }
-
-export type PoolListResponse = Array<LoadBalancingPool>;
 
 export interface PoolDeleteResponse {
   id?: string;
@@ -1365,11 +1368,11 @@ export interface PoolPreviewParams {
 
 export namespace Pools {
   export import LoadBalancingPool = PoolsAPI.LoadBalancingPool;
-  export import PoolListResponse = PoolsAPI.PoolListResponse;
   export import PoolDeleteResponse = PoolsAPI.PoolDeleteResponse;
   export import PoolHealthResponse = PoolsAPI.PoolHealthResponse;
   export import PoolPreviewResponse = PoolsAPI.PoolPreviewResponse;
   export import PoolReferencesResponse = PoolsAPI.PoolReferencesResponse;
+  export import LoadBalancingPoolsSinglePage = PoolsAPI.LoadBalancingPoolsSinglePage;
   export import PoolCreateParams = PoolsAPI.PoolCreateParams;
   export import PoolUpdateParams = PoolsAPI.PoolUpdateParams;
   export import PoolListParams = PoolsAPI.PoolListParams;

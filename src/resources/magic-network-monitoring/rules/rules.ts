@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as RulesAPI from 'cloudflare/resources/magic-network-monitoring/rules/rules';
 import * as AdvertisementsAPI from 'cloudflare/resources/magic-network-monitoring/rules/advertisements';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Rules extends APIResource {
   advertisements: AdvertisementsAPI.Advertisements = new AdvertisementsAPI.Advertisements(this._client);
@@ -42,13 +43,16 @@ export class Rules extends APIResource {
   /**
    * Lists network monitoring rules for account.
    */
-  list(params: RuleListParams, options?: Core.RequestOptions): Core.APIPromise<RuleListResponse | null> {
+  list(
+    params: RuleListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<MagicNetworkMonitoringRulesSinglePage, MagicNetworkMonitoringRule | null> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/mnm/rules`, options) as Core.APIPromise<{
-        result: RuleListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/mnm/rules`,
+      MagicNetworkMonitoringRulesSinglePage,
+      options,
+    );
   }
 
   /**
@@ -100,6 +104,8 @@ export class Rules extends APIResource {
   }
 }
 
+export class MagicNetworkMonitoringRulesSinglePage extends SinglePage<MagicNetworkMonitoringRule | null> {}
+
 export interface MagicNetworkMonitoringRule {
   /**
    * Toggle on if you would like Cloudflare to automatically advertise the IP
@@ -141,8 +147,6 @@ export interface MagicNetworkMonitoringRule {
   packet_threshold?: number;
 }
 
-export type RuleListResponse = Array<MagicNetworkMonitoringRule | null>;
-
 export interface RuleCreateParams {
   account_id: string;
 }
@@ -169,7 +173,7 @@ export interface RuleGetParams {
 
 export namespace Rules {
   export import MagicNetworkMonitoringRule = RulesAPI.MagicNetworkMonitoringRule;
-  export import RuleListResponse = RulesAPI.RuleListResponse;
+  export import MagicNetworkMonitoringRulesSinglePage = RulesAPI.MagicNetworkMonitoringRulesSinglePage;
   export import RuleCreateParams = RulesAPI.RuleCreateParams;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
   export import RuleListParams = RulesAPI.RuleListParams;

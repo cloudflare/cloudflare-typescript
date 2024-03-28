@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as RoutesAPI from 'cloudflare/resources/workers/routes';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Routes extends APIResource {
   /**
@@ -37,13 +38,12 @@ export class Routes extends APIResource {
   /**
    * Returns routes for a zone.
    */
-  list(params: RouteListParams, options?: Core.RequestOptions): Core.APIPromise<RouteListResponse> {
+  list(
+    params: RouteListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<WorkersRoutesSinglePage, WorkersRoute> {
     const { zone_id } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/workers/routes`, options) as Core.APIPromise<{
-        result: RouteListResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(`/zones/${zone_id}/workers/routes`, WorkersRoutesSinglePage, options);
   }
 
   /**
@@ -75,6 +75,8 @@ export class Routes extends APIResource {
   }
 }
 
+export class WorkersRoutesSinglePage extends SinglePage<WorkersRoute> {}
+
 export interface WorkersRoute {
   /**
    * Identifier
@@ -90,8 +92,6 @@ export interface WorkersRoute {
 }
 
 export type RouteCreateResponse = unknown | string;
-
-export type RouteListResponse = Array<WorkersRoute>;
 
 export type RouteDeleteResponse = unknown | string;
 
@@ -153,8 +153,8 @@ export interface RouteGetParams {
 export namespace Routes {
   export import WorkersRoute = RoutesAPI.WorkersRoute;
   export import RouteCreateResponse = RoutesAPI.RouteCreateResponse;
-  export import RouteListResponse = RoutesAPI.RouteListResponse;
   export import RouteDeleteResponse = RoutesAPI.RouteDeleteResponse;
+  export import WorkersRoutesSinglePage = RoutesAPI.WorkersRoutesSinglePage;
   export import RouteCreateParams = RoutesAPI.RouteCreateParams;
   export import RouteUpdateParams = RoutesAPI.RouteUpdateParams;
   export import RouteListParams = RoutesAPI.RouteListParams;

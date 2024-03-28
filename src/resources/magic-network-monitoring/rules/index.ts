@@ -2,13 +2,13 @@
 
 export {
   MagicNetworkMonitoringRule,
-  RuleListResponse,
   RuleCreateParams,
   RuleUpdateParams,
   RuleListParams,
   RuleDeleteParams,
   RuleEditParams,
   RuleGetParams,
+  MagicNetworkMonitoringRulesSinglePage,
   Rules,
 } from './rules';
 export {

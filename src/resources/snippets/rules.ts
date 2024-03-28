@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as RulesAPI from 'cloudflare/resources/snippets/rules';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Rules extends APIResource {
   /**
@@ -34,14 +35,19 @@ export class Rules extends APIResource {
   /**
    * Rules
    */
-  list(zoneIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<RuleListResponse> {
-    return (
-      this._client.get(`/zones/${zoneIdentifier}/snippets/snippet_rules`, options) as Core.APIPromise<{
-        result: RuleListResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+  list(
+    zoneIdentifier: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<RuleListResponsesSinglePage, RuleListResponse> {
+    return this._client.getAPIList(
+      `/zones/${zoneIdentifier}/snippets/snippet_rules`,
+      RuleListResponsesSinglePage,
+      options,
+    );
   }
 }
+
+export class RuleListResponsesSinglePage extends SinglePage<RuleListResponse> {}
 
 /**
  * List of snippet rules
@@ -63,24 +69,17 @@ export namespace RuleUpdateResponse {
   }
 }
 
-/**
- * List of snippet rules
- */
-export type RuleListResponse = Array<RuleListResponse.RuleListResponseItem>;
+export interface RuleListResponse {
+  description?: string;
 
-export namespace RuleListResponse {
-  export interface RuleListResponseItem {
-    description?: string;
+  enabled?: boolean;
 
-    enabled?: boolean;
+  expression?: string;
 
-    expression?: string;
-
-    /**
-     * Snippet identifying name
-     */
-    snippet_name?: string;
-  }
+  /**
+   * Snippet identifying name
+   */
+  snippet_name?: string;
 }
 
 export interface RuleUpdateParams {
@@ -108,5 +107,6 @@ export namespace RuleUpdateParams {
 export namespace Rules {
   export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
   export import RuleListResponse = RulesAPI.RuleListResponse;
+  export import RuleListResponsesSinglePage = RulesAPI.RuleListResponsesSinglePage;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
 }

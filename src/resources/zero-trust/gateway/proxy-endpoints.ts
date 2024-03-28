@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ProxyEndpointsAPI from 'cloudflare/resources/zero-trust/gateway/proxy-endpoints';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class ProxyEndpoints extends APIResource {
   /**
@@ -27,13 +28,13 @@ export class ProxyEndpoints extends APIResource {
   list(
     params: ProxyEndpointListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ProxyEndpointListResponse | null> {
+  ): Core.PagePromise<ZeroTrustGatewayProxyEndpointsSinglePage, ZeroTrustGatewayProxyEndpoints> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/gateway/proxy_endpoints`, options) as Core.APIPromise<{
-        result: ProxyEndpointListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/gateway/proxy_endpoints`,
+      ZeroTrustGatewayProxyEndpointsSinglePage,
+      options,
+    );
   }
 
   /**
@@ -88,6 +89,8 @@ export class ProxyEndpoints extends APIResource {
   }
 }
 
+export class ZeroTrustGatewayProxyEndpointsSinglePage extends SinglePage<ZeroTrustGatewayProxyEndpoints> {}
+
 export interface ZeroTrustGatewayProxyEndpoints {
   id?: string;
 
@@ -110,8 +113,6 @@ export interface ZeroTrustGatewayProxyEndpoints {
 
   updated_at?: string;
 }
-
-export type ProxyEndpointListResponse = Array<ZeroTrustGatewayProxyEndpoints>;
 
 export type ProxyEndpointDeleteResponse = unknown | string;
 
@@ -173,8 +174,8 @@ export interface ProxyEndpointGetParams {
 
 export namespace ProxyEndpoints {
   export import ZeroTrustGatewayProxyEndpoints = ProxyEndpointsAPI.ZeroTrustGatewayProxyEndpoints;
-  export import ProxyEndpointListResponse = ProxyEndpointsAPI.ProxyEndpointListResponse;
   export import ProxyEndpointDeleteResponse = ProxyEndpointsAPI.ProxyEndpointDeleteResponse;
+  export import ZeroTrustGatewayProxyEndpointsSinglePage = ProxyEndpointsAPI.ZeroTrustGatewayProxyEndpointsSinglePage;
   export import ProxyEndpointCreateParams = ProxyEndpointsAPI.ProxyEndpointCreateParams;
   export import ProxyEndpointListParams = ProxyEndpointsAPI.ProxyEndpointListParams;
   export import ProxyEndpointDeleteParams = ProxyEndpointsAPI.ProxyEndpointDeleteParams;

@@ -5,6 +5,7 @@ import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import { CloudflareError } from 'cloudflare/error';
 import * as IdentityProvidersAPI from 'cloudflare/resources/zero-trust/identity-providers';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class IdentityProviders extends APIResource {
   /**
@@ -78,12 +79,14 @@ export class IdentityProviders extends APIResource {
   list(
     params?: IdentityProviderListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<IdentityProviderListResponse | null>;
-  list(options?: Core.RequestOptions): Core.APIPromise<IdentityProviderListResponse | null>;
+  ): Core.PagePromise<IdentityProviderListResponsesSinglePage, IdentityProviderListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<IdentityProviderListResponsesSinglePage, IdentityProviderListResponse>;
   list(
     params: IdentityProviderListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<IdentityProviderListResponse | null> {
+  ): Core.PagePromise<IdentityProviderListResponsesSinglePage, IdentityProviderListResponse> {
     if (isRequestOptions(params)) {
       return this.list({}, params);
     }
@@ -104,12 +107,11 @@ export class IdentityProviders extends APIResource {
           accountOrZone: 'zones',
           accountOrZoneId: zone_id,
         };
-    return (
-      this._client.get(
-        `/${accountOrZone}/${accountOrZoneId}/access/identity_providers`,
-        options,
-      ) as Core.APIPromise<{ result: IdentityProviderListResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/${accountOrZone}/${accountOrZoneId}/access/identity_providers`,
+      IdentityProviderListResponsesSinglePage,
+      options,
+    );
   }
 
   /**
@@ -196,6 +198,8 @@ export class IdentityProviders extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class IdentityProviderListResponsesSinglePage extends SinglePage<IdentityProviderListResponse> {}
 
 export type ZeroTrustIdentityProviders =
   | ZeroTrustIdentityProviders.AccessAzureAd
@@ -1844,7 +1848,7 @@ export namespace ZeroTrustIdentityProviders {
   }
 }
 
-export type IdentityProviderListResponse = Array<
+export type IdentityProviderListResponse =
   | IdentityProviderListResponse.AccessAzureAd
   | IdentityProviderListResponse.AccessCentrify
   | IdentityProviderListResponse.AccessFacebook
@@ -1857,8 +1861,7 @@ export type IdentityProviderListResponse = Array<
   | IdentityProviderListResponse.AccessOnelogin
   | IdentityProviderListResponse.AccessPingone
   | IdentityProviderListResponse.AccessSaml
-  | IdentityProviderListResponse.AccessYandex
->;
+  | IdentityProviderListResponse.AccessYandex;
 
 export namespace IdentityProviderListResponse {
   export interface AccessAzureAd {
@@ -6942,6 +6945,7 @@ export namespace IdentityProviders {
   export import ZeroTrustIdentityProviders = IdentityProvidersAPI.ZeroTrustIdentityProviders;
   export import IdentityProviderListResponse = IdentityProvidersAPI.IdentityProviderListResponse;
   export import IdentityProviderDeleteResponse = IdentityProvidersAPI.IdentityProviderDeleteResponse;
+  export import IdentityProviderListResponsesSinglePage = IdentityProvidersAPI.IdentityProviderListResponsesSinglePage;
   export import IdentityProviderCreateParams = IdentityProvidersAPI.IdentityProviderCreateParams;
   export import IdentityProviderUpdateParams = IdentityProvidersAPI.IdentityProviderUpdateParams;
   export import IdentityProviderListParams = IdentityProvidersAPI.IdentityProviderListParams;

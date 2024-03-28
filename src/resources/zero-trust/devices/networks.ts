@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as NetworksAPI from 'cloudflare/resources/zero-trust/devices/networks';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Networks extends APIResource {
   /**
@@ -43,13 +44,13 @@ export class Networks extends APIResource {
   list(
     params: NetworkListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<NetworkListResponse | null> {
+  ): Core.PagePromise<DeviceManagedNetworksSinglePage, DeviceManagedNetworks> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/devices/networks`, options) as Core.APIPromise<{
-        result: NetworkListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/devices/networks`,
+      DeviceManagedNetworksSinglePage,
+      options,
+    );
   }
 
   /**
@@ -86,6 +87,8 @@ export class Networks extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class DeviceManagedNetworksSinglePage extends SinglePage<DeviceManagedNetworks> {}
 
 export interface DeviceManagedNetworks {
   /**
@@ -130,8 +133,6 @@ export namespace DeviceManagedNetworks {
     sha256?: string;
   }
 }
-
-export type NetworkListResponse = Array<DeviceManagedNetworks>;
 
 export type NetworkDeleteResponse = Array<DeviceManagedNetworks>;
 
@@ -237,8 +238,8 @@ export interface NetworkGetParams {
 
 export namespace Networks {
   export import DeviceManagedNetworks = NetworksAPI.DeviceManagedNetworks;
-  export import NetworkListResponse = NetworksAPI.NetworkListResponse;
   export import NetworkDeleteResponse = NetworksAPI.NetworkDeleteResponse;
+  export import DeviceManagedNetworksSinglePage = NetworksAPI.DeviceManagedNetworksSinglePage;
   export import NetworkCreateParams = NetworksAPI.NetworkCreateParams;
   export import NetworkUpdateParams = NetworksAPI.NetworkUpdateParams;
   export import NetworkListParams = NetworksAPI.NetworkListParams;

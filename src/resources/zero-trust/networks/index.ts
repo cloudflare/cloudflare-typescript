@@ -14,12 +14,12 @@ export {
 export {
   TunnelVirtualNetwork,
   VirtualNetworkCreateResponse,
-  VirtualNetworkListResponse,
   VirtualNetworkDeleteResponse,
   VirtualNetworkEditResponse,
   VirtualNetworkCreateParams,
   VirtualNetworkListParams,
   VirtualNetworkDeleteParams,
   VirtualNetworkEditParams,
+  TunnelVirtualNetworksSinglePage,
   VirtualNetworks,
 } from './virtual-networks';

@@ -26,6 +26,7 @@ export namespace SSL {
   export import CertificatePackDeleteResponse = CertificatePacksAPI.CertificatePackDeleteResponse;
   export import CertificatePackEditResponse = CertificatePacksAPI.CertificatePackEditResponse;
   export import CertificatePackGetResponse = CertificatePacksAPI.CertificatePackGetResponse;
+  export import CertificatePackListResponsesSinglePage = CertificatePacksAPI.CertificatePackListResponsesSinglePage;
   export import CertificatePackListParams = CertificatePacksAPI.CertificatePackListParams;
   export import CertificatePackDeleteParams = CertificatePacksAPI.CertificatePackDeleteParams;
   export import CertificatePackEditParams = CertificatePacksAPI.CertificatePackEditParams;

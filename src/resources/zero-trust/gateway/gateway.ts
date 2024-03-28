@@ -104,11 +104,11 @@ export namespace Gateway {
   export import AuditSSHSettingGetParams = AuditSSHSettingsAPI.AuditSSHSettingGetParams;
   export import Categories = CategoriesAPI.Categories;
   export import ZeroTrustGatewayCategories = CategoriesAPI.ZeroTrustGatewayCategories;
-  export import CategoryListResponse = CategoriesAPI.CategoryListResponse;
+  export import ZeroTrustGatewayCategoriesSinglePage = CategoriesAPI.ZeroTrustGatewayCategoriesSinglePage;
   export import CategoryListParams = CategoriesAPI.CategoryListParams;
   export import AppTypes = AppTypesAPI.AppTypes;
   export import ZeroTrustGatewayAppTypes = AppTypesAPI.ZeroTrustGatewayAppTypes;
-  export import AppTypeListResponse = AppTypesAPI.AppTypeListResponse;
+  export import ZeroTrustGatewayAppTypesSinglePage = AppTypesAPI.ZeroTrustGatewayAppTypesSinglePage;
   export import AppTypeListParams = AppTypesAPI.AppTypeListParams;
   export import Configurations = ConfigurationsAPI.Configurations;
   export import ConfigurationUpdateResponse = ConfigurationsAPI.ConfigurationUpdateResponse;
@@ -120,8 +120,8 @@ export namespace Gateway {
   export import Lists = ListsAPI.Lists;
   export import ZeroTrustGatewayLists = ListsAPI.ZeroTrustGatewayLists;
   export import ListCreateResponse = ListsAPI.ListCreateResponse;
-  export import ListListResponse = ListsAPI.ListListResponse;
   export import ListDeleteResponse = ListsAPI.ListDeleteResponse;
+  export import ZeroTrustGatewayListsSinglePage = ListsAPI.ZeroTrustGatewayListsSinglePage;
   export import ListCreateParams = ListsAPI.ListCreateParams;
   export import ListUpdateParams = ListsAPI.ListUpdateParams;
   export import ListListParams = ListsAPI.ListListParams;
@@ -130,8 +130,8 @@ export namespace Gateway {
   export import ListGetParams = ListsAPI.ListGetParams;
   export import Locations = LocationsAPI.Locations;
   export import ZeroTrustGatewayLocations = LocationsAPI.ZeroTrustGatewayLocations;
-  export import LocationListResponse = LocationsAPI.LocationListResponse;
   export import LocationDeleteResponse = LocationsAPI.LocationDeleteResponse;
+  export import ZeroTrustGatewayLocationsSinglePage = LocationsAPI.ZeroTrustGatewayLocationsSinglePage;
   export import LocationCreateParams = LocationsAPI.LocationCreateParams;
   export import LocationUpdateParams = LocationsAPI.LocationUpdateParams;
   export import LocationListParams = LocationsAPI.LocationListParams;
@@ -143,8 +143,8 @@ export namespace Gateway {
   export import LoggingGetParams = LoggingAPI.LoggingGetParams;
   export import ProxyEndpoints = ProxyEndpointsAPI.ProxyEndpoints;
   export import ZeroTrustGatewayProxyEndpoints = ProxyEndpointsAPI.ZeroTrustGatewayProxyEndpoints;
-  export import ProxyEndpointListResponse = ProxyEndpointsAPI.ProxyEndpointListResponse;
   export import ProxyEndpointDeleteResponse = ProxyEndpointsAPI.ProxyEndpointDeleteResponse;
+  export import ZeroTrustGatewayProxyEndpointsSinglePage = ProxyEndpointsAPI.ZeroTrustGatewayProxyEndpointsSinglePage;
   export import ProxyEndpointCreateParams = ProxyEndpointsAPI.ProxyEndpointCreateParams;
   export import ProxyEndpointListParams = ProxyEndpointsAPI.ProxyEndpointListParams;
   export import ProxyEndpointDeleteParams = ProxyEndpointsAPI.ProxyEndpointDeleteParams;
@@ -152,8 +152,8 @@ export namespace Gateway {
   export import ProxyEndpointGetParams = ProxyEndpointsAPI.ProxyEndpointGetParams;
   export import Rules = RulesAPI.Rules;
   export import ZeroTrustGatewayRules = RulesAPI.ZeroTrustGatewayRules;
-  export import RuleListResponse = RulesAPI.RuleListResponse;
   export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
+  export import ZeroTrustGatewayRulesSinglePage = RulesAPI.ZeroTrustGatewayRulesSinglePage;
   export import RuleCreateParams = RulesAPI.RuleCreateParams;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
   export import RuleListParams = RulesAPI.RuleListParams;

@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { ColoListResponse, ColoListParams, Colos } from './colos';
+export { ColoListResponse, ColoListParams, ColoListResponsesSinglePage, Colos } from './colos';
 export { DEX } from './dex';
 export { DigitalExperienceMonitoringHTTPDetails, HTTPTestGetParams, HTTPTests } from './http-tests/index';
 export {

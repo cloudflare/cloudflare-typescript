@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as DEXTestsAPI from 'cloudflare/resources/zero-trust/devices/dex-tests';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class DEXTests extends APIResource {
   /**
@@ -44,13 +45,13 @@ export class DEXTests extends APIResource {
   list(
     params: DEXTestListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DEXTestListResponse | null> {
+  ): Core.PagePromise<DEXTestSchemasHTTPSSinglePage, DEXTestSchemasHTTP> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/devices/dex_tests`, options) as Core.APIPromise<{
-        result: DEXTestListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/devices/dex_tests`,
+      DEXTestSchemasHTTPSSinglePage,
+      options,
+    );
   }
 
   /**
@@ -87,6 +88,8 @@ export class DEXTests extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class DEXTestSchemasHTTPSSinglePage extends SinglePage<DEXTestSchemasHTTP> {}
 
 export interface DEXTestSchemasHTTP {
   /**
@@ -138,8 +141,6 @@ export namespace DEXTestSchemasHTTP {
     method?: string;
   }
 }
-
-export type DEXTestListResponse = Array<DEXTestSchemasHTTP>;
 
 export type DEXTestDeleteResponse = Array<DEXTestSchemasHTTP>;
 
@@ -269,8 +270,8 @@ export interface DEXTestGetParams {
 
 export namespace DEXTests {
   export import DEXTestSchemasHTTP = DEXTestsAPI.DEXTestSchemasHTTP;
-  export import DEXTestListResponse = DEXTestsAPI.DEXTestListResponse;
   export import DEXTestDeleteResponse = DEXTestsAPI.DEXTestDeleteResponse;
+  export import DEXTestSchemasHTTPSSinglePage = DEXTestsAPI.DEXTestSchemasHTTPSSinglePage;
   export import DEXTestCreateParams = DEXTestsAPI.DEXTestCreateParams;
   export import DEXTestUpdateParams = DEXTestsAPI.DEXTestUpdateParams;
   export import DEXTestListParams = DEXTestsAPI.DEXTestListParams;

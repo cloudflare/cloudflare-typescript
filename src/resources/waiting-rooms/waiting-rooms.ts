@@ -8,6 +8,7 @@ import * as RulesAPI from 'cloudflare/resources/waiting-rooms/rules';
 import * as SettingsAPI from 'cloudflare/resources/waiting-rooms/settings';
 import * as StatusesAPI from 'cloudflare/resources/waiting-rooms/statuses';
 import * as EventsAPI from 'cloudflare/resources/waiting-rooms/events/events';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class WaitingRooms extends APIResource {
   page: PageAPI.Page = new PageAPI.Page(this._client);
@@ -54,12 +55,8 @@ export class WaitingRooms extends APIResource {
   list(
     zoneIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WaitingRoomListResponse | null> {
-    return (
-      this._client.get(`/zones/${zoneIdentifier}/waiting_rooms`, options) as Core.APIPromise<{
-        result: WaitingRoomListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+  ): Core.PagePromise<WaitingRoomsSinglePage, WaitingRoom> {
+    return this._client.getAPIList(`/zones/${zoneIdentifier}/waiting_rooms`, WaitingRoomsSinglePage, options);
   }
 
   /**
@@ -111,6 +108,8 @@ export class WaitingRooms extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class WaitingRoomsSinglePage extends SinglePage<WaitingRoom> {}
 
 export interface WaitingRoom {
   id?: string;
@@ -497,8 +496,6 @@ export namespace WaitingRoom {
     secure?: 'auto' | 'always' | 'never';
   }
 }
-
-export type WaitingRoomListResponse = Array<WaitingRoom>;
 
 export interface WaitingRoomDeleteResponse {
   id?: string;
@@ -1616,8 +1613,8 @@ export namespace WaitingRoomEditParams {
 
 export namespace WaitingRooms {
   export import WaitingRoom = WaitingRoomsAPI.WaitingRoom;
-  export import WaitingRoomListResponse = WaitingRoomsAPI.WaitingRoomListResponse;
   export import WaitingRoomDeleteResponse = WaitingRoomsAPI.WaitingRoomDeleteResponse;
+  export import WaitingRoomsSinglePage = WaitingRoomsAPI.WaitingRoomsSinglePage;
   export import WaitingRoomCreateParams = WaitingRoomsAPI.WaitingRoomCreateParams;
   export import WaitingRoomUpdateParams = WaitingRoomsAPI.WaitingRoomUpdateParams;
   export import WaitingRoomEditParams = WaitingRoomsAPI.WaitingRoomEditParams;
@@ -1626,8 +1623,8 @@ export namespace WaitingRooms {
   export import PagePreviewParams = PageAPI.PagePreviewParams;
   export import Events = EventsAPI.Events;
   export import WaitingroomEvent = EventsAPI.WaitingroomEvent;
-  export import EventListResponse = EventsAPI.EventListResponse;
   export import EventDeleteResponse = EventsAPI.EventDeleteResponse;
+  export import WaitingroomEventsSinglePage = EventsAPI.WaitingroomEventsSinglePage;
   export import EventCreateParams = EventsAPI.EventCreateParams;
   export import EventUpdateParams = EventsAPI.EventUpdateParams;
   export import EventEditParams = EventsAPI.EventEditParams;
@@ -1635,9 +1632,9 @@ export namespace WaitingRooms {
   export import WaitingroomRule = RulesAPI.WaitingroomRule;
   export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
   export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
-  export import RuleListResponse = RulesAPI.RuleListResponse;
   export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
   export import RuleEditResponse = RulesAPI.RuleEditResponse;
+  export import WaitingroomRulesSinglePage = RulesAPI.WaitingroomRulesSinglePage;
   export import RuleCreateParams = RulesAPI.RuleCreateParams;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
   export import RuleEditParams = RulesAPI.RuleEditParams;

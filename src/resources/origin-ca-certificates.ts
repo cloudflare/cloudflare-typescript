@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as OriginCACertificatesAPI from 'cloudflare/resources/origin-ca-certificates';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class OriginCACertificates extends APIResource {
   /**
@@ -25,12 +26,8 @@ export class OriginCACertificates extends APIResource {
    * Key as your User Service Key when calling this endpoint
    * ([see above](#requests)).
    */
-  list(options?: Core.RequestOptions): Core.APIPromise<OriginCACertificateListResponse | null> {
-    return (
-      this._client.get('/certificates', options) as Core.APIPromise<{
-        result: OriginCACertificateListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+  list(options?: Core.RequestOptions): Core.PagePromise<OriginCACertificatesSinglePage, OriginCACertificate> {
+    return this._client.getAPIList('/certificates', OriginCACertificatesSinglePage, options);
   }
 
   /**
@@ -62,6 +59,8 @@ export class OriginCACertificates extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class OriginCACertificatesSinglePage extends SinglePage<OriginCACertificate> {}
 
 export interface OriginCACertificate {
   /**
@@ -104,8 +103,6 @@ export interface OriginCACertificate {
 
 export type OriginCACertificateCreateResponse = unknown | string;
 
-export type OriginCACertificateListResponse = Array<OriginCACertificate>;
-
 export interface OriginCACertificateDeleteResponse {
   /**
    * Identifier
@@ -142,8 +139,8 @@ export interface OriginCACertificateCreateParams {
 export namespace OriginCACertificates {
   export import OriginCACertificate = OriginCACertificatesAPI.OriginCACertificate;
   export import OriginCACertificateCreateResponse = OriginCACertificatesAPI.OriginCACertificateCreateResponse;
-  export import OriginCACertificateListResponse = OriginCACertificatesAPI.OriginCACertificateListResponse;
   export import OriginCACertificateDeleteResponse = OriginCACertificatesAPI.OriginCACertificateDeleteResponse;
   export import OriginCACertificateGetResponse = OriginCACertificatesAPI.OriginCACertificateGetResponse;
+  export import OriginCACertificatesSinglePage = OriginCACertificatesAPI.OriginCACertificatesSinglePage;
   export import OriginCACertificateCreateParams = OriginCACertificatesAPI.OriginCACertificateCreateParams;
 }

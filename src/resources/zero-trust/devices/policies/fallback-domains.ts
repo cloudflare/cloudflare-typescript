@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as FallbackDomainsAPI from 'cloudflare/resources/zero-trust/devices/policies/fallback-domains';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class FallbackDomains extends APIResource {
   /**
@@ -31,14 +32,13 @@ export class FallbackDomains extends APIResource {
   list(
     params: FallbackDomainListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<FallbackDomainListResponse | null> {
+  ): Core.PagePromise<DevicesFallbackDomainsSinglePage, DevicesFallbackDomain> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/devices/policy/fallback_domains`,
-        options,
-      ) as Core.APIPromise<{ result: FallbackDomainListResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/devices/policy/fallback_domains`,
+      DevicesFallbackDomainsSinglePage,
+      options,
+    );
   }
 
   /**
@@ -61,6 +61,8 @@ export class FallbackDomains extends APIResource {
   }
 }
 
+export class DevicesFallbackDomainsSinglePage extends SinglePage<DevicesFallbackDomain> {}
+
 export interface DevicesFallbackDomain {
   /**
    * The domain suffix to match when resolving locally.
@@ -79,8 +81,6 @@ export interface DevicesFallbackDomain {
 }
 
 export type FallbackDomainUpdateResponse = Array<DevicesFallbackDomain>;
-
-export type FallbackDomainListResponse = Array<DevicesFallbackDomain>;
 
 export type FallbackDomainGetResponse = Array<DevicesFallbackDomain>;
 
@@ -107,8 +107,8 @@ export interface FallbackDomainGetParams {
 export namespace FallbackDomains {
   export import DevicesFallbackDomain = FallbackDomainsAPI.DevicesFallbackDomain;
   export import FallbackDomainUpdateResponse = FallbackDomainsAPI.FallbackDomainUpdateResponse;
-  export import FallbackDomainListResponse = FallbackDomainsAPI.FallbackDomainListResponse;
   export import FallbackDomainGetResponse = FallbackDomainsAPI.FallbackDomainGetResponse;
+  export import DevicesFallbackDomainsSinglePage = FallbackDomainsAPI.DevicesFallbackDomainsSinglePage;
   export import FallbackDomainUpdateParams = FallbackDomainsAPI.FallbackDomainUpdateParams;
   export import FallbackDomainListParams = FallbackDomainsAPI.FallbackDomainListParams;
   export import FallbackDomainGetParams = FallbackDomainsAPI.FallbackDomainGetParams;
