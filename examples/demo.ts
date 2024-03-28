@@ -8,7 +8,8 @@ const client = new Cloudflare();
 async function main() {
   const accountId = '<your accound ID>';
 
-  const response = await client.ai.run(accountId, '@cf/meta/llama-2-7b-chat-int8', {
+  const response = await client.workers.ai.run('@cf/meta/llama-2-7b-chat-int8', {
+    account_id: accountId,
     prompt: 'Tell me about Workers AI',
   });
   console.log(response);
