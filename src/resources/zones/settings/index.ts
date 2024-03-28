@@ -15,7 +15,7 @@ export {
   Settings,
 } from './settings';
 export { ZoneSetting0rtt, ZeroRTTEditParams, ZeroRTTGetParams, ZeroRTT } from './zero-rtt';
-export { ZoneSettingAdvancedDDOS, AdvancedDDOSGetParams, AdvancedDDOS } from './advanced-ddos';
+export { ZoneSettingAdvancedDDoS, AdvancedDDoSGetParams, AdvancedDDoS } from './advanced-ddos';
 export {
   ZoneSettingAlwaysOnline,
   AlwaysOnlineEditParams,

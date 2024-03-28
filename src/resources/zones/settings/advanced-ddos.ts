@@ -2,22 +2,22 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as AdvancedDDOSAPI from 'cloudflare/resources/zones/settings/advanced-ddos';
+import * as AdvancedDDoSAPI from 'cloudflare/resources/zones/settings/advanced-ddos';
 
-export class AdvancedDDOS extends APIResource {
+export class AdvancedDDoS extends APIResource {
   /**
    * Advanced protection from Distributed Denial of Service (DDoS) attacks on your
    * website. This is an uneditable value that is 'on' in the case of Business and
    * Enterprise zones.
    */
   get(
-    params: AdvancedDDOSGetParams,
+    params: AdvancedDDoSGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneSettingAdvancedDDOS> {
+  ): Core.APIPromise<ZoneSettingAdvancedDDoS> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/advanced_ddos`, options) as Core.APIPromise<{
-        result: ZoneSettingAdvancedDDOS;
+        result: ZoneSettingAdvancedDDoS;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -28,7 +28,7 @@ export class AdvancedDDOS extends APIResource {
  * website. This is an uneditable value that is 'on' in the case of Business and
  * Enterprise zones.
  */
-export interface ZoneSettingAdvancedDDOS {
+export interface ZoneSettingAdvancedDDoS {
   /**
    * ID of the zone setting.
    */
@@ -51,14 +51,14 @@ export interface ZoneSettingAdvancedDDOS {
   modified_on?: string | null;
 }
 
-export interface AdvancedDDOSGetParams {
+export interface AdvancedDDoSGetParams {
   /**
    * Identifier
    */
   zone_id: string;
 }
 
-export namespace AdvancedDDOS {
-  export import ZoneSettingAdvancedDDOS = AdvancedDDOSAPI.ZoneSettingAdvancedDDOS;
-  export import AdvancedDDOSGetParams = AdvancedDDOSAPI.AdvancedDDOSGetParams;
+export namespace AdvancedDDoS {
+  export import ZoneSettingAdvancedDDoS = AdvancedDDoSAPI.ZoneSettingAdvancedDDoS;
+  export import AdvancedDDoSGetParams = AdvancedDDoSAPI.AdvancedDDoSGetParams;
 }
