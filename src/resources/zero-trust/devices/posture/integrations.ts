@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as IntegrationsAPI from 'cloudflare/resources/zero-trust/devices/posture/integrations';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Integrations extends APIResource {
   /**
@@ -27,13 +28,13 @@ export class Integrations extends APIResource {
   list(
     params: IntegrationListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<IntegrationListResponse | null> {
+  ): Core.PagePromise<DevicePostureIntegrationsSinglePage, DevicePostureIntegrations> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/devices/posture/integration`, options) as Core.APIPromise<{
-        result: IntegrationListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/devices/posture/integration`,
+      DevicePostureIntegrationsSinglePage,
+      options,
+    );
   }
 
   /**
@@ -88,6 +89,8 @@ export class Integrations extends APIResource {
   }
 }
 
+export class DevicePostureIntegrationsSinglePage extends SinglePage<DevicePostureIntegrations> {}
+
 export interface DevicePostureIntegrations {
   /**
    * API UUID.
@@ -137,8 +140,6 @@ export namespace DevicePostureIntegrations {
     client_id: string;
   }
 }
-
-export type IntegrationListResponse = Array<DevicePostureIntegrations>;
 
 export type IntegrationDeleteResponse = unknown | string;
 
@@ -494,8 +495,8 @@ export interface IntegrationGetParams {
 
 export namespace Integrations {
   export import DevicePostureIntegrations = IntegrationsAPI.DevicePostureIntegrations;
-  export import IntegrationListResponse = IntegrationsAPI.IntegrationListResponse;
   export import IntegrationDeleteResponse = IntegrationsAPI.IntegrationDeleteResponse;
+  export import DevicePostureIntegrationsSinglePage = IntegrationsAPI.DevicePostureIntegrationsSinglePage;
   export import IntegrationCreateParams = IntegrationsAPI.IntegrationCreateParams;
   export import IntegrationListParams = IntegrationsAPI.IntegrationListParams;
   export import IntegrationDeleteParams = IntegrationsAPI.IntegrationDeleteParams;

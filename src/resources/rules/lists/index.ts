@@ -16,12 +16,12 @@ export {
 } from './items';
 export {
   ListsList,
-  ListListResponse,
   ListDeleteResponse,
   ListCreateParams,
   ListUpdateParams,
   ListListParams,
   ListDeleteParams,
   ListGetParams,
+  ListsListsSinglePage,
   Lists,
 } from './lists';

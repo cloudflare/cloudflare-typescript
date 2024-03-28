@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as CertificatesAPI from 'cloudflare/resources/origin-tls-client-auth/hostnames/certificates';
 import * as HostnamesAPI from 'cloudflare/resources/origin-tls-client-auth/hostnames/hostnames';
+import { OriginTLSClientCertificateIDsSinglePage } from 'cloudflare/resources/origin-tls-client-auth/hostnames/hostnames';
 
 export class Certificates extends APIResource {
   /**
@@ -29,14 +30,13 @@ export class Certificates extends APIResource {
   list(
     params: CertificateListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CertificateListResponse | null> {
+  ): Core.PagePromise<OriginTLSClientCertificateIDsSinglePage, HostnamesAPI.OriginTLSClientCertificateID> {
     const { zone_id } = params;
-    return (
-      this._client.get(
-        `/zones/${zone_id}/origin_tls_client_auth/hostnames/certificates`,
-        options,
-      ) as Core.APIPromise<{ result: CertificateListResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/zones/${zone_id}/origin_tls_client_auth/hostnames/certificates`,
+      OriginTLSClientCertificateIDsSinglePage,
+      options,
+    );
   }
 
   /**
@@ -123,8 +123,6 @@ export interface OriginTLSClientCertificate {
   uploaded_on?: string;
 }
 
-export type CertificateListResponse = Array<HostnamesAPI.OriginTLSClientCertificateID>;
-
 export interface CertificateCreateParams {
   /**
    * Path param: Identifier
@@ -165,9 +163,10 @@ export interface CertificateGetParams {
 
 export namespace Certificates {
   export import OriginTLSClientCertificate = CertificatesAPI.OriginTLSClientCertificate;
-  export import CertificateListResponse = CertificatesAPI.CertificateListResponse;
   export import CertificateCreateParams = CertificatesAPI.CertificateCreateParams;
   export import CertificateListParams = CertificatesAPI.CertificateListParams;
   export import CertificateDeleteParams = CertificatesAPI.CertificateDeleteParams;
   export import CertificateGetParams = CertificatesAPI.CertificateGetParams;
 }
+
+export { OriginTLSClientCertificateIDsSinglePage };

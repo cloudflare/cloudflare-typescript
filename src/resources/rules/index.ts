@@ -2,13 +2,13 @@
 
 export {
   ListsList,
-  ListListResponse,
   ListDeleteResponse,
   ListCreateParams,
   ListUpdateParams,
   ListListParams,
   ListDeleteParams,
   ListGetParams,
+  ListsListsSinglePage,
   Lists,
 } from './lists/index';
 export { Rules } from './rules';

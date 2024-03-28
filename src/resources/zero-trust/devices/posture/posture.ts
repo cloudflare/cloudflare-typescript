@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as PostureAPI from 'cloudflare/resources/zero-trust/devices/posture/posture';
 import * as IntegrationsAPI from 'cloudflare/resources/zero-trust/devices/posture/integrations';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Posture extends APIResource {
   integrations: IntegrationsAPI.Integrations = new IntegrationsAPI.Integrations(this._client);
@@ -46,13 +47,13 @@ export class Posture extends APIResource {
   list(
     params: PostureListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PostureListResponse | null> {
+  ): Core.PagePromise<DevicePostureRulesSinglePage, DevicePostureRules> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/devices/posture`, options) as Core.APIPromise<{
-        result: PostureListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/devices/posture`,
+      DevicePostureRulesSinglePage,
+      options,
+    );
   }
 
   /**
@@ -87,6 +88,8 @@ export class Posture extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class DevicePostureRulesSinglePage extends SinglePage<DevicePostureRules> {}
 
 export interface DevicePostureRules {
   /**
@@ -510,8 +513,6 @@ export namespace DevicePostureRules {
     platform?: 'windows' | 'mac' | 'linux' | 'android' | 'ios';
   }
 }
-
-export type PostureListResponse = Array<DevicePostureRules>;
 
 export interface PostureDeleteResponse {
   /**
@@ -1380,8 +1381,8 @@ export interface PostureGetParams {
 
 export namespace Posture {
   export import DevicePostureRules = PostureAPI.DevicePostureRules;
-  export import PostureListResponse = PostureAPI.PostureListResponse;
   export import PostureDeleteResponse = PostureAPI.PostureDeleteResponse;
+  export import DevicePostureRulesSinglePage = PostureAPI.DevicePostureRulesSinglePage;
   export import PostureCreateParams = PostureAPI.PostureCreateParams;
   export import PostureUpdateParams = PostureAPI.PostureUpdateParams;
   export import PostureListParams = PostureAPI.PostureListParams;
@@ -1389,8 +1390,8 @@ export namespace Posture {
   export import PostureGetParams = PostureAPI.PostureGetParams;
   export import Integrations = IntegrationsAPI.Integrations;
   export import DevicePostureIntegrations = IntegrationsAPI.DevicePostureIntegrations;
-  export import IntegrationListResponse = IntegrationsAPI.IntegrationListResponse;
   export import IntegrationDeleteResponse = IntegrationsAPI.IntegrationDeleteResponse;
+  export import DevicePostureIntegrationsSinglePage = IntegrationsAPI.DevicePostureIntegrationsSinglePage;
   export import IntegrationCreateParams = IntegrationsAPI.IntegrationCreateParams;
   export import IntegrationListParams = IntegrationsAPI.IntegrationListParams;
   export import IntegrationDeleteParams = IntegrationsAPI.IntegrationDeleteParams;

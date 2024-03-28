@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as OutputsAPI from 'cloudflare/resources/stream/live-inputs/outputs';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Outputs extends APIResource {
   /**
@@ -49,14 +50,13 @@ export class Outputs extends APIResource {
     liveInputIdentifier: string,
     params: OutputListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<OutputListResponse> {
+  ): Core.PagePromise<StreamOutputsSinglePage, StreamOutput> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/stream/live_inputs/${liveInputIdentifier}/outputs`,
-        options,
-      ) as Core.APIPromise<{ result: OutputListResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/stream/live_inputs/${liveInputIdentifier}/outputs`,
+      StreamOutputsSinglePage,
+      options,
+    );
   }
 
   /**
@@ -75,6 +75,8 @@ export class Outputs extends APIResource {
     );
   }
 }
+
+export class StreamOutputsSinglePage extends SinglePage<StreamOutput> {}
 
 export interface StreamOutput {
   /**
@@ -101,8 +103,6 @@ export interface StreamOutput {
    */
   url?: string;
 }
-
-export type OutputListResponse = Array<StreamOutput>;
 
 export interface OutputCreateParams {
   /**
@@ -162,7 +162,7 @@ export interface OutputDeleteParams {
 
 export namespace Outputs {
   export import StreamOutput = OutputsAPI.StreamOutput;
-  export import OutputListResponse = OutputsAPI.OutputListResponse;
+  export import StreamOutputsSinglePage = OutputsAPI.StreamOutputsSinglePage;
   export import OutputCreateParams = OutputsAPI.OutputCreateParams;
   export import OutputUpdateParams = OutputsAPI.OutputUpdateParams;
   export import OutputListParams = OutputsAPI.OutputListParams;

@@ -5,7 +5,6 @@ export {
   PagesDeployments,
   PagesProjects,
   ProjectCreateResponse,
-  ProjectListResponse,
   ProjectDeleteResponse,
   ProjectEditResponse,
   ProjectPurgeBuildCacheResponse,
@@ -15,5 +14,6 @@ export {
   ProjectEditParams,
   ProjectGetParams,
   ProjectPurgeBuildCacheParams,
+  PagesDeploymentsSinglePage,
   Projects,
 } from './projects/index';

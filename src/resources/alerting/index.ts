@@ -11,13 +11,13 @@ export {
   AlertingPolicies,
   PolicyCreateResponse,
   PolicyUpdateResponse,
-  PolicyListResponse,
   PolicyDeleteResponse,
   PolicyCreateParams,
   PolicyUpdateParams,
   PolicyListParams,
   PolicyDeleteParams,
   PolicyGetParams,
+  AlertingPoliciesSinglePage,
   Policies,
 } from './policies';
 export { AvailableAlertListResponse, AvailableAlertListParams, AvailableAlerts } from './available-alerts';

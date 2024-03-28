@@ -29,8 +29,8 @@ export namespace Destinations {
   export import AlertingWebhooks = WebhooksAPI.AlertingWebhooks;
   export import WebhookCreateResponse = WebhooksAPI.WebhookCreateResponse;
   export import WebhookUpdateResponse = WebhooksAPI.WebhookUpdateResponse;
-  export import WebhookListResponse = WebhooksAPI.WebhookListResponse;
   export import WebhookDeleteResponse = WebhooksAPI.WebhookDeleteResponse;
+  export import AlertingWebhooksSinglePage = WebhooksAPI.AlertingWebhooksSinglePage;
   export import WebhookCreateParams = WebhooksAPI.WebhookCreateParams;
   export import WebhookUpdateParams = WebhooksAPI.WebhookUpdateParams;
   export import WebhookListParams = WebhooksAPI.WebhookListParams;

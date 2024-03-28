@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ExcludesAPI from 'cloudflare/resources/zero-trust/devices/policies/excludes';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Excludes extends APIResource {
   /**
@@ -27,13 +28,13 @@ export class Excludes extends APIResource {
   list(
     params: ExcludeListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ExcludeListResponse | null> {
+  ): Core.PagePromise<DevicesSplitTunnelsSinglePage, DevicesSplitTunnel> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/devices/policy/exclude`, options) as Core.APIPromise<{
-        result: ExcludeListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/devices/policy/exclude`,
+      DevicesSplitTunnelsSinglePage,
+      options,
+    );
   }
 
   /**
@@ -55,6 +56,8 @@ export class Excludes extends APIResource {
   }
 }
 
+export class DevicesSplitTunnelsSinglePage extends SinglePage<DevicesSplitTunnel> {}
+
 export interface DevicesSplitTunnel {
   /**
    * The address in CIDR format to exclude from the tunnel. If `address` is present,
@@ -75,8 +78,6 @@ export interface DevicesSplitTunnel {
 }
 
 export type ExcludeUpdateResponse = Array<DevicesSplitTunnel>;
-
-export type ExcludeListResponse = Array<DevicesSplitTunnel>;
 
 export type ExcludeGetResponse = Array<DevicesSplitTunnel>;
 
@@ -103,8 +104,8 @@ export interface ExcludeGetParams {
 export namespace Excludes {
   export import DevicesSplitTunnel = ExcludesAPI.DevicesSplitTunnel;
   export import ExcludeUpdateResponse = ExcludesAPI.ExcludeUpdateResponse;
-  export import ExcludeListResponse = ExcludesAPI.ExcludeListResponse;
   export import ExcludeGetResponse = ExcludesAPI.ExcludeGetResponse;
+  export import DevicesSplitTunnelsSinglePage = ExcludesAPI.DevicesSplitTunnelsSinglePage;
   export import ExcludeUpdateParams = ExcludesAPI.ExcludeUpdateParams;
   export import ExcludeListParams = ExcludesAPI.ExcludeListParams;
   export import ExcludeGetParams = ExcludesAPI.ExcludeGetParams;

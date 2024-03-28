@@ -2,7 +2,6 @@
 
 export {
   LoadBalancer,
-  LoadBalancerListResponse,
   LoadBalancerDeleteResponse,
   LoadBalancerCreateParams,
   LoadBalancerUpdateParams,
@@ -10,10 +9,10 @@ export {
   LoadBalancerDeleteParams,
   LoadBalancerEditParams,
   LoadBalancerGetParams,
+  LoadBalancersSinglePage,
   LoadBalancers,
 } from './load-balancers';
 export {
-  MonitorListResponse,
   MonitorDeleteResponse,
   MonitorCreateParams,
   MonitorUpdateParams,
@@ -24,7 +23,6 @@ export {
   Monitors,
 } from './monitors/index';
 export {
-  PoolListResponse,
   PoolDeleteResponse,
   PoolCreateParams,
   PoolUpdateParams,

@@ -10,5 +10,6 @@ export {
   NamespaceListParams,
   NamespaceDeleteParams,
   NamespaceGetParams,
+  NamespaceListResponsesSinglePage,
   Namespaces,
 } from './namespaces/index';

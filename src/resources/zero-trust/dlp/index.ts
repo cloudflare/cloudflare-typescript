@@ -10,14 +10,15 @@ export {
   DatasetListParams,
   DatasetDeleteParams,
   DatasetGetParams,
+  DLPDatasetsSinglePage,
   Datasets,
 } from './datasets/index';
 export {
   DLPProfiles,
-  ProfileListResponse,
   ProfileGetResponse,
   ProfileListParams,
   ProfileGetParams,
+  DLPProfilesSinglePage,
   Profiles,
 } from './profiles/index';
 export { PatternValidateResponse, PatternValidateParams, Patterns } from './patterns';

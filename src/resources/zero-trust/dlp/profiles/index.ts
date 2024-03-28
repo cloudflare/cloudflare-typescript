@@ -13,9 +13,9 @@ export {
 export { DLPPredefinedProfile, PredefinedUpdateParams, PredefinedGetParams, Predefined } from './predefined';
 export {
   DLPProfiles,
-  ProfileListResponse,
   ProfileGetResponse,
   ProfileListParams,
   ProfileGetParams,
+  DLPProfilesSinglePage,
   Profiles,
 } from './profiles';

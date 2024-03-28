@@ -16,11 +16,16 @@ export {
   GatewayListParams,
   Gateway,
 } from './gateway';
-export { ZeroTrustGatewayAppTypes, AppTypeListResponse, AppTypeListParams, AppTypes } from './app-types';
+export {
+  ZeroTrustGatewayAppTypes,
+  AppTypeListParams,
+  ZeroTrustGatewayAppTypesSinglePage,
+  AppTypes,
+} from './app-types';
 export {
   ZeroTrustGatewayCategories,
-  CategoryListResponse,
   CategoryListParams,
+  ZeroTrustGatewayCategoriesSinglePage,
   Categories,
 } from './categories';
 export {
@@ -32,7 +37,6 @@ export {
 export {
   ZeroTrustGatewayLists,
   ListCreateResponse,
-  ListListResponse,
   ListDeleteResponse,
   ListCreateParams,
   ListUpdateParams,
@@ -40,39 +44,40 @@ export {
   ListDeleteParams,
   ListEditParams,
   ListGetParams,
+  ZeroTrustGatewayListsSinglePage,
   Lists,
 } from './lists/index';
 export {
   ZeroTrustGatewayLocations,
-  LocationListResponse,
   LocationDeleteResponse,
   LocationCreateParams,
   LocationUpdateParams,
   LocationListParams,
   LocationDeleteParams,
   LocationGetParams,
+  ZeroTrustGatewayLocationsSinglePage,
   Locations,
 } from './locations';
 export {
   ZeroTrustGatewayProxyEndpoints,
-  ProxyEndpointListResponse,
   ProxyEndpointDeleteResponse,
   ProxyEndpointCreateParams,
   ProxyEndpointListParams,
   ProxyEndpointDeleteParams,
   ProxyEndpointEditParams,
   ProxyEndpointGetParams,
+  ZeroTrustGatewayProxyEndpointsSinglePage,
   ProxyEndpoints,
 } from './proxy-endpoints';
 export {
   ZeroTrustGatewayRules,
-  RuleListResponse,
   RuleDeleteResponse,
   RuleCreateParams,
   RuleUpdateParams,
   RuleListParams,
   RuleDeleteParams,
   RuleGetParams,
+  ZeroTrustGatewayRulesSinglePage,
   Rules,
 } from './rules';
 export {

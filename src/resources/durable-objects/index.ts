@@ -2,8 +2,8 @@
 
 export {
   DurableObjectNamespace,
-  NamespaceListResponse,
   NamespaceListParams,
+  DurableObjectNamespacesSinglePage,
   Namespaces,
 } from './namespaces/index';
 export { DurableObjects } from './durable-objects';

@@ -14,13 +14,13 @@ export {
 export { SecondaryDNS } from './secondary-dns';
 export {
   SecondaryDNSACL,
-  ACLListResponse,
   ACLDeleteResponse,
   ACLCreateParams,
   ACLUpdateParams,
   ACLListParams,
   ACLDeleteParams,
   ACLGetParams,
+  SecondaryDnsaclsSinglePage,
   ACLs,
 } from './acls';
 export {
@@ -43,23 +43,23 @@ export {
 export { SecondaryDNSForce, ForceAXFRCreateParams, ForceAXFR } from './force-axfr';
 export {
   SecondaryDNSPeer,
-  PeerListResponse,
   PeerDeleteResponse,
   PeerCreateParams,
   PeerUpdateParams,
   PeerListParams,
   PeerDeleteParams,
   PeerGetParams,
+  SecondaryDNSPeersSinglePage,
   Peers,
 } from './peers';
 export {
   SecondaryDNSTSIG,
-  TSIGListResponse,
   TSIGDeleteResponse,
   TSIGCreateParams,
   TSIGUpdateParams,
   TSIGListParams,
   TSIGDeleteParams,
   TSIGGetParams,
+  SecondaryDnstsigsSinglePage,
   TSIGs,
 } from './tsigs';

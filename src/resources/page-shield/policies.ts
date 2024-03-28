@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as PoliciesAPI from 'cloudflare/resources/page-shield/policies';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Policies extends APIResource {
   /**
@@ -28,13 +29,16 @@ export class Policies extends APIResource {
   /**
    * Lists all Page Shield policies.
    */
-  list(params: PolicyListParams, options?: Core.RequestOptions): Core.APIPromise<PolicyListResponse | null> {
+  list(
+    params: PolicyListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<PageShieldPoliciesSinglePage, PageShieldPolicy> {
     const { zone_id } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/page_shield/policies`, options) as Core.APIPromise<{
-        result: PolicyListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/zones/${zone_id}/page_shield/policies`,
+      PageShieldPoliciesSinglePage,
+      options,
+    );
   }
 
   /**
@@ -60,6 +64,8 @@ export class Policies extends APIResource {
     return this._client.get(`/zones/${zone_id}/page_shield/policies/${policyId}`, options);
   }
 }
+
+export class PageShieldPoliciesSinglePage extends SinglePage<PageShieldPolicy> {}
 
 export interface PageShieldPolicy {
   /**
@@ -93,8 +99,6 @@ export interface PageShieldPolicy {
    */
   value?: string;
 }
-
-export type PolicyListResponse = Array<PageShieldPolicy>;
 
 export interface PolicyCreateParams {
   /**
@@ -185,7 +189,7 @@ export interface PolicyGetParams {
 
 export namespace Policies {
   export import PageShieldPolicy = PoliciesAPI.PageShieldPolicy;
-  export import PolicyListResponse = PoliciesAPI.PolicyListResponse;
+  export import PageShieldPoliciesSinglePage = PoliciesAPI.PageShieldPoliciesSinglePage;
   export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
   export import PolicyUpdateParams = PoliciesAPI.PolicyUpdateParams;
   export import PolicyListParams = PoliciesAPI.PolicyListParams;

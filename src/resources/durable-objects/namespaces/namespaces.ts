@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as NamespacesAPI from 'cloudflare/resources/durable-objects/namespaces/namespaces';
 import * as ObjectsAPI from 'cloudflare/resources/durable-objects/namespaces/objects';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Namespaces extends APIResource {
   objects: ObjectsAPI.Objects = new ObjectsAPI.Objects(this._client);
@@ -14,16 +15,17 @@ export class Namespaces extends APIResource {
   list(
     params: NamespaceListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<NamespaceListResponse | null> {
+  ): Core.PagePromise<DurableObjectNamespacesSinglePage, DurableObjectNamespace> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/workers/durable_objects/namespaces`,
-        options,
-      ) as Core.APIPromise<{ result: NamespaceListResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/workers/durable_objects/namespaces`,
+      DurableObjectNamespacesSinglePage,
+      options,
+    );
   }
 }
+
+export class DurableObjectNamespacesSinglePage extends SinglePage<DurableObjectNamespace> {}
 
 export interface DurableObjectNamespace {
   id?: unknown;
@@ -35,8 +37,6 @@ export interface DurableObjectNamespace {
   script?: unknown;
 }
 
-export type NamespaceListResponse = Array<DurableObjectNamespace>;
-
 export interface NamespaceListParams {
   /**
    * Identifier
@@ -46,7 +46,7 @@ export interface NamespaceListParams {
 
 export namespace Namespaces {
   export import DurableObjectNamespace = NamespacesAPI.DurableObjectNamespace;
-  export import NamespaceListResponse = NamespacesAPI.NamespaceListResponse;
+  export import DurableObjectNamespacesSinglePage = NamespacesAPI.DurableObjectNamespacesSinglePage;
   export import NamespaceListParams = NamespacesAPI.NamespaceListParams;
   export import Objects = ObjectsAPI.Objects;
   export import DurableObject = ObjectsAPI.DurableObject;

@@ -7,7 +7,6 @@ export {
 } from './user-policy-checks';
 export {
   ZeroTrustApps,
-  ApplicationListResponse,
   ApplicationDeleteResponse,
   ApplicationRevokeTokensResponse,
   ApplicationCreateParams,
@@ -16,28 +15,29 @@ export {
   ApplicationDeleteParams,
   ApplicationGetParams,
   ApplicationRevokeTokensParams,
+  ZeroTrustAppsSinglePage,
   Applications,
 } from './applications';
 export {
   ZeroTrustCA,
   CACreateResponse,
-  CAListResponse,
   CADeleteResponse,
   CAGetResponse,
   CACreateParams,
   CAListParams,
   CADeleteParams,
   CAGetParams,
+  ZeroTrustCAsSinglePage,
   CAs,
 } from './cas';
 export {
   ZeroTrustPolicies,
-  PolicyListResponse,
   PolicyDeleteResponse,
   PolicyCreateParams,
   PolicyUpdateParams,
   PolicyListParams,
   PolicyDeleteParams,
   PolicyGetParams,
+  ZeroTrustPoliciesSinglePage,
   Policies,
 } from './policies';

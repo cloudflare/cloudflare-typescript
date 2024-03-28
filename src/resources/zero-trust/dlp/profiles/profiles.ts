@@ -5,6 +5,7 @@ import { APIResource } from 'cloudflare/resource';
 import * as ProfilesAPI from 'cloudflare/resources/zero-trust/dlp/profiles/profiles';
 import * as CustomAPI from 'cloudflare/resources/zero-trust/dlp/profiles/custom';
 import * as PredefinedAPI from 'cloudflare/resources/zero-trust/dlp/profiles/predefined';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Profiles extends APIResource {
   custom: CustomAPI.Custom = new CustomAPI.Custom(this._client);
@@ -16,13 +17,9 @@ export class Profiles extends APIResource {
   list(
     params: ProfileListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ProfileListResponse | null> {
+  ): Core.PagePromise<DLPProfilesSinglePage, DLPProfiles> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/dlp/profiles`, options) as Core.APIPromise<{
-        result: ProfileListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(`/accounts/${account_id}/dlp/profiles`, DLPProfilesSinglePage, options);
   }
 
   /**
@@ -41,6 +38,8 @@ export class Profiles extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class DLPProfilesSinglePage extends SinglePage<DLPProfiles> {}
 
 export type DLPProfiles =
   | PredefinedAPI.DLPPredefinedProfile
@@ -110,8 +109,6 @@ export namespace DLPProfiles {
     }
   }
 }
-
-export type ProfileListResponse = Array<DLPProfiles>;
 
 export type ProfileGetResponse =
   | PredefinedAPI.DLPPredefinedProfile
@@ -198,8 +195,8 @@ export interface ProfileGetParams {
 
 export namespace Profiles {
   export import DLPProfiles = ProfilesAPI.DLPProfiles;
-  export import ProfileListResponse = ProfilesAPI.ProfileListResponse;
   export import ProfileGetResponse = ProfilesAPI.ProfileGetResponse;
+  export import DLPProfilesSinglePage = ProfilesAPI.DLPProfilesSinglePage;
   export import ProfileListParams = ProfilesAPI.ProfileListParams;
   export import ProfileGetParams = ProfilesAPI.ProfileGetParams;
   export import Custom = CustomAPI.Custom;

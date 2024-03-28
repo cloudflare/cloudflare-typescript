@@ -12,6 +12,7 @@ export {
   IndicatorFeedListParams,
   IndicatorFeedDataParams,
   IndicatorFeedGetParams,
+  IndicatorFeedListResponsesSinglePage,
   IndicatorFeeds,
 } from './indicator-feeds/index';
 export { Intel } from './intel';
@@ -26,7 +27,7 @@ export {
 export { IntelIPList, IPListGetResponse, IPListGetParams, IPLists } from './ip-lists';
 export { IntelPassiveDNSByIP, DNSGetParams, DNS } from './dns';
 export { IntelSchemasIP, IPGetResponse, IPGetParams, IPs } from './ips';
-export { IntelSinkholeItem, SinkholeListResponse, SinkholeListParams, Sinkholes } from './sinkholes';
+export { IntelSinkholeItem, SinkholeListParams, IntelSinkholeItemsSinglePage, Sinkholes } from './sinkholes';
 export { IntelWhois, WhoisGetParams, Whois } from './whois';
 export {
   MiscategorizationCreateResponse,

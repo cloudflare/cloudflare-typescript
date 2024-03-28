@@ -3,22 +3,28 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as PermissionGroupsAPI from 'cloudflare/resources/user/tokens/permission-groups';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class PermissionGroups extends APIResource {
   /**
    * Find all available permission groups.
    */
-  list(options?: Core.RequestOptions): Core.APIPromise<PermissionGroupListResponse | null> {
-    return (
-      this._client.get('/user/tokens/permission_groups', options) as Core.APIPromise<{
-        result: PermissionGroupListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<PermissionGroupListResponsesSinglePage, PermissionGroupListResponse> {
+    return this._client.getAPIList(
+      '/user/tokens/permission_groups',
+      PermissionGroupListResponsesSinglePage,
+      options,
+    );
   }
 }
 
-export type PermissionGroupListResponse = Array<unknown>;
+export class PermissionGroupListResponsesSinglePage extends SinglePage<PermissionGroupListResponse> {}
+
+export type PermissionGroupListResponse = unknown;
 
 export namespace PermissionGroups {
   export import PermissionGroupListResponse = PermissionGroupsAPI.PermissionGroupListResponse;
+  export import PermissionGroupListResponsesSinglePage = PermissionGroupsAPI.PermissionGroupListResponsesSinglePage;
 }

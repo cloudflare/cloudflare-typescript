@@ -6,6 +6,7 @@ export {
   HostnameUpdateResponse,
   HostnameUpdateParams,
   HostnameGetParams,
+  OriginTLSClientCertificateIDsSinglePage,
   Hostnames,
 } from './hostnames/index';
 export {
@@ -18,6 +19,7 @@ export {
   OriginTLSClientAuthListParams,
   OriginTLSClientAuthDeleteParams,
   OriginTLSClientAuthGetParams,
+  OriginTLSClientAuthListResponsesSinglePage,
   OriginTLSClientAuth,
 } from './origin-tls-client-auth';
 export {
