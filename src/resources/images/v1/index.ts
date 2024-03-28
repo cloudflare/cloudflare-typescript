@@ -13,9 +13,11 @@ export {
   V1ListResponsesV4PagePagination,
   V1,
 } from './v1';
+export { ImagesImageKeys, KeyUpdateParams, KeyListParams, KeyDeleteParams, Keys } from './keys';
+export { ImagesImagesStats, StatGetParams, Stats } from './stats';
 export {
-  ImageVariant,
-  ImageVariants,
+  V1ImageVariant,
+  V1ImageVariants,
   VariantDeleteResponse,
   VariantCreateParams,
   VariantListParams,
@@ -24,5 +26,3 @@ export {
   VariantGetParams,
   Variants,
 } from './variants';
-export { ImagesImageKeys, KeyUpdateParams, KeyListParams, KeyDeleteParams, Keys } from './keys';
-export { ImagesImagesStats, StatGetParams, Stats } from './stats';

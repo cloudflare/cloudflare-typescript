@@ -22,13 +22,13 @@ export class Traces extends APIResource {
   }
 }
 
-export type RequestTrace = Array<RequestTrace.RequestTraceItem>;
+export type RequestTracerTrace = Array<RequestTracerTrace.RequestTracerTraceItem>;
 
-export namespace RequestTrace {
+export namespace RequestTracerTrace {
   /**
    * List of steps acting on request/response
    */
-  export interface RequestTraceItem {
+  export interface RequestTracerTraceItem {
     /**
      * If step type is rule, then action performed by this rule
      */
@@ -69,7 +69,7 @@ export namespace RequestTrace {
      */
     step_name?: string;
 
-    trace?: TracesAPI.RequestTrace;
+    trace?: TracesAPI.RequestTracerTrace;
 
     /**
      * Tracing step type
@@ -87,7 +87,7 @@ export interface TraceCreateResponse {
    */
   status_code?: number;
 
-  trace?: RequestTrace;
+  trace?: RequestTracerTrace;
 }
 
 export interface TraceCreateParams {
@@ -201,7 +201,7 @@ export namespace TraceCreateParams {
 }
 
 export namespace Traces {
-  export import RequestTrace = TracesAPI.RequestTrace;
+  export import RequestTracerTrace = TracesAPI.RequestTracerTrace;
   export import TraceCreateResponse = TracesAPI.TraceCreateResponse;
   export import TraceCreateParams = TracesAPI.TraceCreateParams;
 }

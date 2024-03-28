@@ -90,11 +90,11 @@ export class Outgoing extends APIResource {
   forceNotify(
     params: OutgoingForceNotifyParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SecondaryDNSForce> {
+  ): Core.APIPromise<OutgoingForceNotifyResponse> {
     const { zone_id } = params;
     return (
       this._client.post(`/zones/${zone_id}/secondary_dns/outgoing/force_notify`, options) as Core.APIPromise<{
-        result: SecondaryDNSForce;
+        result: OutgoingForceNotifyResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -121,12 +121,6 @@ export type SecondaryDNSDisableTransfer = string;
  * The zone transfer status of a primary zone
  */
 export type SecondaryDNSEnableTransfer = string;
-
-/**
- * When force_notify query parameter is set to true, the response is a simple
- * string
- */
-export type SecondaryDNSForce = string;
 
 export interface OutgoingCreateResponse {
   id?: string;
@@ -199,6 +193,12 @@ export interface OutgoingUpdateResponse {
 export interface OutgoingDeleteResponse {
   id?: string;
 }
+
+/**
+ * When force_notify query parameter is set to true, the response is a simple
+ * string
+ */
+export type OutgoingForceNotifyResponse = string;
 
 export interface OutgoingGetResponse {
   id?: string;
@@ -291,10 +291,10 @@ export interface OutgoingGetParams {
 export namespace Outgoing {
   export import SecondaryDNSDisableTransfer = OutgoingAPI.SecondaryDNSDisableTransfer;
   export import SecondaryDNSEnableTransfer = OutgoingAPI.SecondaryDNSEnableTransfer;
-  export import SecondaryDNSForce = OutgoingAPI.SecondaryDNSForce;
   export import OutgoingCreateResponse = OutgoingAPI.OutgoingCreateResponse;
   export import OutgoingUpdateResponse = OutgoingAPI.OutgoingUpdateResponse;
   export import OutgoingDeleteResponse = OutgoingAPI.OutgoingDeleteResponse;
+  export import OutgoingForceNotifyResponse = OutgoingAPI.OutgoingForceNotifyResponse;
   export import OutgoingGetResponse = OutgoingAPI.OutgoingGetResponse;
   export import OutgoingCreateParams = OutgoingAPI.OutgoingCreateParams;
   export import OutgoingUpdateParams = OutgoingAPI.OutgoingUpdateParams;

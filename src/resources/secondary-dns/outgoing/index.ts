@@ -3,10 +3,10 @@
 export {
   SecondaryDNSDisableTransfer,
   SecondaryDNSEnableTransfer,
-  SecondaryDNSForce,
   OutgoingCreateResponse,
   OutgoingUpdateResponse,
   OutgoingDeleteResponse,
+  OutgoingForceNotifyResponse,
   OutgoingGetResponse,
   OutgoingCreateParams,
   OutgoingUpdateParams,
