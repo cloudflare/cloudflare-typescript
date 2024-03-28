@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as DomainsAPI from 'cloudflare/resources/workers/domains';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Domains extends APIResource {
   /**
@@ -20,13 +21,15 @@ export class Domains extends APIResource {
   /**
    * Lists all Worker Domains for an account.
    */
-  list(params: DomainListParams, options?: Core.RequestOptions): Core.APIPromise<DomainListResponse> {
+  list(
+    params: DomainListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<WorkersDomainsSinglePage, WorkersDomain> {
     const { account_id, ...query } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/workers/domains`, { query, ...options }) as Core.APIPromise<{
-        result: DomainListResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(`/accounts/${account_id}/workers/domains`, WorkersDomainsSinglePage, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -56,6 +59,8 @@ export class Domains extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class WorkersDomainsSinglePage extends SinglePage<WorkersDomain> {}
 
 export interface WorkersDomain {
   /**
@@ -88,8 +93,6 @@ export interface WorkersDomain {
    */
   zone_name?: string;
 }
-
-export type DomainListResponse = Array<WorkersDomain>;
 
 export interface DomainUpdateParams {
   /**
@@ -160,7 +163,7 @@ export interface DomainGetParams {
 
 export namespace Domains {
   export import WorkersDomain = DomainsAPI.WorkersDomain;
-  export import DomainListResponse = DomainsAPI.DomainListResponse;
+  export import WorkersDomainsSinglePage = DomainsAPI.WorkersDomainsSinglePage;
   export import DomainUpdateParams = DomainsAPI.DomainUpdateParams;
   export import DomainListParams = DomainsAPI.DomainListParams;
   export import DomainDeleteParams = DomainsAPI.DomainDeleteParams;

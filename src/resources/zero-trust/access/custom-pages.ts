@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as CustomPagesAPI from 'cloudflare/resources/zero-trust/access/custom-pages';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class CustomPages extends APIResource {
   /**
@@ -41,12 +42,15 @@ export class CustomPages extends APIResource {
   /**
    * List custom pages
    */
-  list(identifier: string, options?: Core.RequestOptions): Core.APIPromise<CustomPageListResponse | null> {
-    return (
-      this._client.get(`/accounts/${identifier}/access/custom_pages`, options) as Core.APIPromise<{
-        result: CustomPageListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+  list(
+    identifier: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ZeroTrustCustomPageWithoutHTMLsSinglePage, ZeroTrustCustomPageWithoutHTML> {
+    return this._client.getAPIList(
+      `/accounts/${identifier}/access/custom_pages`,
+      ZeroTrustCustomPageWithoutHTMLsSinglePage,
+      options,
+    );
   }
 
   /**
@@ -75,6 +79,8 @@ export class CustomPages extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class ZeroTrustCustomPageWithoutHTMLsSinglePage extends SinglePage<ZeroTrustCustomPageWithoutHTML> {}
 
 export interface ZeroTrustCustomPage {
   /**
@@ -133,8 +139,6 @@ export interface ZeroTrustCustomPageWithoutHTML {
   updated_at?: string;
 }
 
-export type CustomPageListResponse = Array<ZeroTrustCustomPageWithoutHTML>;
-
 export interface CustomPageDeleteResponse {
   /**
    * UUID
@@ -189,8 +193,8 @@ export interface CustomPageUpdateParams {
 export namespace CustomPages {
   export import ZeroTrustCustomPage = CustomPagesAPI.ZeroTrustCustomPage;
   export import ZeroTrustCustomPageWithoutHTML = CustomPagesAPI.ZeroTrustCustomPageWithoutHTML;
-  export import CustomPageListResponse = CustomPagesAPI.CustomPageListResponse;
   export import CustomPageDeleteResponse = CustomPagesAPI.CustomPageDeleteResponse;
+  export import ZeroTrustCustomPageWithoutHTMLsSinglePage = CustomPagesAPI.ZeroTrustCustomPageWithoutHTMLsSinglePage;
   export import CustomPageCreateParams = CustomPagesAPI.CustomPageCreateParams;
   export import CustomPageUpdateParams = CustomPagesAPI.CustomPageUpdateParams;
 }

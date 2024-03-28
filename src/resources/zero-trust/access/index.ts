@@ -5,7 +5,6 @@ export { KeyUpdateResponse, KeyGetResponse, KeyRotateResponse, KeyUpdateParams, 
 export { Logs } from './logs/index';
 export {
   ZeroTrustApps,
-  ApplicationListResponse,
   ApplicationDeleteResponse,
   ApplicationRevokeTokensResponse,
   ApplicationCreateParams,
@@ -14,57 +13,63 @@ export {
   ApplicationDeleteParams,
   ApplicationGetParams,
   ApplicationRevokeTokensParams,
+  ZeroTrustAppsSinglePage,
   Applications,
 } from './applications/index';
-export { ZeroTrustBookmarks, BookmarkListResponse, BookmarkDeleteResponse, Bookmarks } from './bookmarks';
+export {
+  ZeroTrustBookmarks,
+  BookmarkDeleteResponse,
+  ZeroTrustBookmarksSinglePage,
+  Bookmarks,
+} from './bookmarks';
 export {
   ZeroTrustCertificates,
-  CertificateListResponse,
   CertificateDeleteResponse,
   CertificateCreateParams,
   CertificateUpdateParams,
   CertificateListParams,
   CertificateDeleteParams,
   CertificateGetParams,
+  ZeroTrustCertificatesSinglePage,
   Certificates,
 } from './certificates/index';
 export {
   ZeroTrustCustomPage,
   ZeroTrustCustomPageWithoutHTML,
-  CustomPageListResponse,
   CustomPageDeleteResponse,
   CustomPageCreateParams,
   CustomPageUpdateParams,
+  ZeroTrustCustomPageWithoutHTMLsSinglePage,
   CustomPages,
 } from './custom-pages';
 export {
   ZeroTrustGroups,
-  GroupListResponse,
   GroupDeleteResponse,
   GroupCreateParams,
   GroupUpdateParams,
   GroupListParams,
   GroupDeleteParams,
   GroupGetParams,
+  ZeroTrustGroupsSinglePage,
   Groups,
 } from './groups';
 export {
   ZeroTrustServiceTokens,
   ServiceTokenCreateResponse,
-  ServiceTokenListResponse,
   ServiceTokenRotateResponse,
   ServiceTokenCreateParams,
   ServiceTokenUpdateParams,
   ServiceTokenListParams,
   ServiceTokenDeleteParams,
+  ZeroTrustServiceTokensSinglePage,
   ServiceTokens,
 } from './service-tokens';
 export {
   ZeroTrustTag,
-  TagListResponse,
   TagDeleteResponse,
   TagCreateParams,
   TagUpdateParams,
+  ZeroTrustTagsSinglePage,
   Tags,
 } from './tags';
-export { ZeroTrustUsers, UserListResponse, Users } from './users/index';
+export { ZeroTrustUsers, ZeroTrustUsersSinglePage, Users } from './users/index';

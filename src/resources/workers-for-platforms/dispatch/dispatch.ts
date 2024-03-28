@@ -13,6 +13,7 @@ export namespace Dispatch {
   export import NamespaceListResponse = NamespacesAPI.NamespaceListResponse;
   export import NamespaceDeleteResponse = NamespacesAPI.NamespaceDeleteResponse;
   export import NamespaceGetResponse = NamespacesAPI.NamespaceGetResponse;
+  export import NamespaceListResponsesSinglePage = NamespacesAPI.NamespaceListResponsesSinglePage;
   export import NamespaceCreateParams = NamespacesAPI.NamespaceCreateParams;
   export import NamespaceListParams = NamespacesAPI.NamespaceListParams;
   export import NamespaceDeleteParams = NamespacesAPI.NamespaceDeleteParams;

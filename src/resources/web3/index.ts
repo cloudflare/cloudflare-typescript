@@ -2,10 +2,10 @@
 
 export {
   DistributedWebHostname,
-  HostnameListResponse,
   HostnameDeleteResponse,
   HostnameCreateParams,
   HostnameEditParams,
+  DistributedWebHostnamesSinglePage,
   Hostnames,
 } from './hostnames/index';
 export { Web3 } from './web3';

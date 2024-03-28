@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as FiltersAPI from 'cloudflare/resources/workers/filters';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Filters extends APIResource {
   /**
@@ -40,13 +41,12 @@ export class Filters extends APIResource {
   /**
    * List Filters
    */
-  list(params: FilterListParams, options?: Core.RequestOptions): Core.APIPromise<FilterListResponse> {
+  list(
+    params: FilterListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<WorkersFiltersSinglePage, WorkersFilter> {
     const { zone_id } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/workers/filters`, options) as Core.APIPromise<{
-        result: FilterListResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(`/zones/${zone_id}/workers/filters`, WorkersFiltersSinglePage, options);
   }
 
   /**
@@ -66,6 +66,8 @@ export class Filters extends APIResource {
   }
 }
 
+export class WorkersFiltersSinglePage extends SinglePage<WorkersFilter> {}
+
 export interface WorkersFilter {
   /**
    * Identifier
@@ -83,8 +85,6 @@ export interface FilterCreateResponse {
    */
   id: string;
 }
-
-export type FilterListResponse = Array<WorkersFilter>;
 
 export interface FilterDeleteResponse {
   /**
@@ -144,8 +144,8 @@ export interface FilterDeleteParams {
 export namespace Filters {
   export import WorkersFilter = FiltersAPI.WorkersFilter;
   export import FilterCreateResponse = FiltersAPI.FilterCreateResponse;
-  export import FilterListResponse = FiltersAPI.FilterListResponse;
   export import FilterDeleteResponse = FiltersAPI.FilterDeleteResponse;
+  export import WorkersFiltersSinglePage = FiltersAPI.WorkersFiltersSinglePage;
   export import FilterCreateParams = FiltersAPI.FilterCreateParams;
   export import FilterUpdateParams = FiltersAPI.FilterUpdateParams;
   export import FilterListParams = FiltersAPI.FilterListParams;

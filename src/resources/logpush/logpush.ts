@@ -23,7 +23,6 @@ export namespace Logpush {
   export import EdgeCreateParams = EdgeAPI.EdgeCreateParams;
   export import EdgeGetParams = EdgeAPI.EdgeGetParams;
   export import Jobs = JobsAPI.Jobs;
-  export import JobListResponse = JobsAPI.JobListResponse;
   export import JobDeleteResponse = JobsAPI.JobDeleteResponse;
   export import JobCreateParams = JobsAPI.JobCreateParams;
   export import JobUpdateParams = JobsAPI.JobUpdateParams;

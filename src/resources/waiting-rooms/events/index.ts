@@ -2,11 +2,11 @@
 
 export {
   WaitingroomEvent,
-  EventListResponse,
   EventDeleteResponse,
   EventCreateParams,
   EventUpdateParams,
   EventEditParams,
+  WaitingroomEventsSinglePage,
   Events,
 } from './events';
 export { WaitingroomEventDetails, Details } from './details';

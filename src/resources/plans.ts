@@ -3,17 +3,21 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as PlansAPI from 'cloudflare/resources/plans';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Plans extends APIResource {
   /**
    * Lists available plans the zone can subscribe to.
    */
-  list(zoneIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<PlanListResponse | null> {
-    return (
-      this._client.get(`/zones/${zoneIdentifier}/available_plans`, options) as Core.APIPromise<{
-        result: PlanListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+  list(
+    zoneIdentifier: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<AvailableRatePlansSinglePage, AvailableRatePlan> {
+    return this._client.getAPIList(
+      `/zones/${zoneIdentifier}/available_plans`,
+      AvailableRatePlansSinglePage,
+      options,
+    );
   }
 
   /**
@@ -32,6 +36,8 @@ export class Plans extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class AvailableRatePlansSinglePage extends SinglePage<AvailableRatePlan> {}
 
 export interface AvailableRatePlan {
   /**
@@ -85,9 +91,7 @@ export interface AvailableRatePlan {
   price?: number;
 }
 
-export type PlanListResponse = Array<AvailableRatePlan>;
-
 export namespace Plans {
   export import AvailableRatePlan = PlansAPI.AvailableRatePlan;
-  export import PlanListResponse = PlansAPI.PlanListResponse;
+  export import AvailableRatePlansSinglePage = PlansAPI.AvailableRatePlansSinglePage;
 }

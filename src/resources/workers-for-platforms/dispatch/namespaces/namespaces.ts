@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as NamespacesAPI from 'cloudflare/resources/workers-for-platforms/dispatch/namespaces/namespaces';
 import * as ScriptsAPI from 'cloudflare/resources/workers-for-platforms/dispatch/namespaces/scripts/scripts';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Namespaces extends APIResource {
   scripts: ScriptsAPI.Scripts = new ScriptsAPI.Scripts(this._client);
@@ -27,13 +28,16 @@ export class Namespaces extends APIResource {
   /**
    * Fetch a list of Workers for Platforms namespaces.
    */
-  list(params: NamespaceListParams, options?: Core.RequestOptions): Core.APIPromise<NamespaceListResponse> {
+  list(
+    params: NamespaceListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<NamespaceListResponsesSinglePage, NamespaceListResponse> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/workers/dispatch/namespaces`, options) as Core.APIPromise<{
-        result: NamespaceListResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/workers/dispatch/namespaces`,
+      NamespaceListResponsesSinglePage,
+      options,
+    );
   }
 
   /**
@@ -70,6 +74,8 @@ export class Namespaces extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class NamespaceListResponsesSinglePage extends SinglePage<NamespaceListResponse> {}
 
 export interface NamespaceCreateResponse {
   /**
@@ -108,45 +114,41 @@ export interface NamespaceCreateResponse {
   script_count?: number;
 }
 
-export type NamespaceListResponse = Array<NamespaceListResponse.NamespaceListResponseItem>;
+export interface NamespaceListResponse {
+  /**
+   * Identifier
+   */
+  created_by?: string;
 
-export namespace NamespaceListResponse {
-  export interface NamespaceListResponseItem {
-    /**
-     * Identifier
-     */
-    created_by?: string;
+  /**
+   * When the script was created.
+   */
+  created_on?: string;
 
-    /**
-     * When the script was created.
-     */
-    created_on?: string;
+  /**
+   * Identifier
+   */
+  modified_by?: string;
 
-    /**
-     * Identifier
-     */
-    modified_by?: string;
+  /**
+   * When the script was last modified.
+   */
+  modified_on?: string;
 
-    /**
-     * When the script was last modified.
-     */
-    modified_on?: string;
+  /**
+   * API Resource UUID tag.
+   */
+  namespace_id?: string;
 
-    /**
-     * API Resource UUID tag.
-     */
-    namespace_id?: string;
+  /**
+   * Name of the Workers for Platforms dispatch namespace.
+   */
+  namespace_name?: string;
 
-    /**
-     * Name of the Workers for Platforms dispatch namespace.
-     */
-    namespace_name?: string;
-
-    /**
-     * The current number of scripts in this Dispatch Namespace
-     */
-    script_count?: number;
-  }
+  /**
+   * The current number of scripts in this Dispatch Namespace
+   */
+  script_count?: number;
 }
 
 export type NamespaceDeleteResponse = unknown;
@@ -226,6 +228,7 @@ export namespace Namespaces {
   export import NamespaceListResponse = NamespacesAPI.NamespaceListResponse;
   export import NamespaceDeleteResponse = NamespacesAPI.NamespaceDeleteResponse;
   export import NamespaceGetResponse = NamespacesAPI.NamespaceGetResponse;
+  export import NamespaceListResponsesSinglePage = NamespacesAPI.NamespaceListResponsesSinglePage;
   export import NamespaceCreateParams = NamespacesAPI.NamespaceCreateParams;
   export import NamespaceListParams = NamespacesAPI.NamespaceListParams;
   export import NamespaceDeleteParams = NamespacesAPI.NamespaceDeleteParams;

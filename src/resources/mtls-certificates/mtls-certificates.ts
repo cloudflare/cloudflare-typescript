@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as MTLSCertificatesAPI from 'cloudflare/resources/mtls-certificates/mtls-certificates';
 import * as AssociationsAPI from 'cloudflare/resources/mtls-certificates/associations';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class MTLSCertificates extends APIResource {
   associations: AssociationsAPI.Associations = new AssociationsAPI.Associations(this._client);
@@ -30,13 +31,13 @@ export class MTLSCertificates extends APIResource {
   list(
     params: MTLSCertificateListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MTLSCertificateListResponse | null> {
+  ): Core.PagePromise<MTLSCertificatesSinglePage, MTLSCertificate> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/mtls_certificates`, options) as Core.APIPromise<{
-        result: MTLSCertificateListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/mtls_certificates`,
+      MTLSCertificatesSinglePage,
+      options,
+    );
   }
 
   /**
@@ -74,6 +75,8 @@ export class MTLSCertificates extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class MTLSCertificatesSinglePage extends SinglePage<MTLSCertificate> {}
 
 export interface MTLSCertificate {
   /**
@@ -174,8 +177,6 @@ export interface MTLSCertificateUpdate {
   uploaded_on?: string;
 }
 
-export type MTLSCertificateListResponse = Array<MTLSCertificate>;
-
 export interface MTLSCertificateCreateParams {
   /**
    * Path param: Identifier
@@ -228,7 +229,7 @@ export interface MTLSCertificateGetParams {
 export namespace MTLSCertificates {
   export import MTLSCertificate = MTLSCertificatesAPI.MTLSCertificate;
   export import MTLSCertificateUpdate = MTLSCertificatesAPI.MTLSCertificateUpdate;
-  export import MTLSCertificateListResponse = MTLSCertificatesAPI.MTLSCertificateListResponse;
+  export import MTLSCertificatesSinglePage = MTLSCertificatesAPI.MTLSCertificatesSinglePage;
   export import MTLSCertificateCreateParams = MTLSCertificatesAPI.MTLSCertificateCreateParams;
   export import MTLSCertificateListParams = MTLSCertificatesAPI.MTLSCertificateListParams;
   export import MTLSCertificateDeleteParams = MTLSCertificatesAPI.MTLSCertificateDeleteParams;

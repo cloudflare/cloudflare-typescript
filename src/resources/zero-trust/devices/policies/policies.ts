@@ -7,6 +7,7 @@ import * as DefaultPolicyAPI from 'cloudflare/resources/zero-trust/devices/polic
 import * as ExcludesAPI from 'cloudflare/resources/zero-trust/devices/policies/excludes';
 import * as FallbackDomainsAPI from 'cloudflare/resources/zero-trust/devices/policies/fallback-domains';
 import * as IncludesAPI from 'cloudflare/resources/zero-trust/devices/policies/includes';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Policies extends APIResource {
   defaultPolicy: DefaultPolicyAPI.DefaultPolicy = new DefaultPolicyAPI.DefaultPolicy(this._client);
@@ -33,13 +34,16 @@ export class Policies extends APIResource {
   /**
    * Fetches a list of the device settings profiles for an account.
    */
-  list(params: PolicyListParams, options?: Core.RequestOptions): Core.APIPromise<PolicyListResponse | null> {
+  list(
+    params: PolicyListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<DevicesDeviceSettingsPoliciesSinglePage, DevicesDeviceSettingsPolicy> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/devices/policies`, options) as Core.APIPromise<{
-        result: PolicyListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/devices/policies`,
+      DevicesDeviceSettingsPoliciesSinglePage,
+      options,
+    );
   }
 
   /**
@@ -92,6 +96,8 @@ export class Policies extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class DevicesDeviceSettingsPoliciesSinglePage extends SinglePage<DevicesDeviceSettingsPolicy> {}
 
 export interface DevicesDeviceSettingsPolicy {
   /**
@@ -216,8 +222,6 @@ export namespace DevicesDeviceSettingsPolicy {
     port?: number;
   }
 }
-
-export type PolicyListResponse = Array<DevicesDeviceSettingsPolicy>;
 
 export type PolicyDeleteResponse = Array<DevicesDeviceSettingsPolicy>;
 
@@ -453,8 +457,8 @@ export interface PolicyGetParams {
 
 export namespace Policies {
   export import DevicesDeviceSettingsPolicy = PoliciesAPI.DevicesDeviceSettingsPolicy;
-  export import PolicyListResponse = PoliciesAPI.PolicyListResponse;
   export import PolicyDeleteResponse = PoliciesAPI.PolicyDeleteResponse;
+  export import DevicesDeviceSettingsPoliciesSinglePage = PoliciesAPI.DevicesDeviceSettingsPoliciesSinglePage;
   export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
   export import PolicyListParams = PoliciesAPI.PolicyListParams;
   export import PolicyDeleteParams = PoliciesAPI.PolicyDeleteParams;
@@ -466,24 +470,24 @@ export namespace Policies {
   export import Excludes = ExcludesAPI.Excludes;
   export import DevicesSplitTunnel = ExcludesAPI.DevicesSplitTunnel;
   export import ExcludeUpdateResponse = ExcludesAPI.ExcludeUpdateResponse;
-  export import ExcludeListResponse = ExcludesAPI.ExcludeListResponse;
   export import ExcludeGetResponse = ExcludesAPI.ExcludeGetResponse;
+  export import DevicesSplitTunnelsSinglePage = ExcludesAPI.DevicesSplitTunnelsSinglePage;
   export import ExcludeUpdateParams = ExcludesAPI.ExcludeUpdateParams;
   export import ExcludeListParams = ExcludesAPI.ExcludeListParams;
   export import ExcludeGetParams = ExcludesAPI.ExcludeGetParams;
   export import FallbackDomains = FallbackDomainsAPI.FallbackDomains;
   export import DevicesFallbackDomain = FallbackDomainsAPI.DevicesFallbackDomain;
   export import FallbackDomainUpdateResponse = FallbackDomainsAPI.FallbackDomainUpdateResponse;
-  export import FallbackDomainListResponse = FallbackDomainsAPI.FallbackDomainListResponse;
   export import FallbackDomainGetResponse = FallbackDomainsAPI.FallbackDomainGetResponse;
+  export import DevicesFallbackDomainsSinglePage = FallbackDomainsAPI.DevicesFallbackDomainsSinglePage;
   export import FallbackDomainUpdateParams = FallbackDomainsAPI.FallbackDomainUpdateParams;
   export import FallbackDomainListParams = FallbackDomainsAPI.FallbackDomainListParams;
   export import FallbackDomainGetParams = FallbackDomainsAPI.FallbackDomainGetParams;
   export import Includes = IncludesAPI.Includes;
   export import DevicesSplitTunnelInclude = IncludesAPI.DevicesSplitTunnelInclude;
   export import IncludeUpdateResponse = IncludesAPI.IncludeUpdateResponse;
-  export import IncludeListResponse = IncludesAPI.IncludeListResponse;
   export import IncludeGetResponse = IncludesAPI.IncludeGetResponse;
+  export import DevicesSplitTunnelIncludesSinglePage = IncludesAPI.DevicesSplitTunnelIncludesSinglePage;
   export import IncludeUpdateParams = IncludesAPI.IncludeUpdateParams;
   export import IncludeListParams = IncludesAPI.IncludeListParams;
   export import IncludeGetParams = IncludesAPI.IncludeGetParams;

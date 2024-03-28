@@ -16,6 +16,7 @@ import * as VideosAPI from 'cloudflare/resources/stream/videos';
 import * as WatermarksAPI from 'cloudflare/resources/stream/watermarks';
 import * as WebhooksAPI from 'cloudflare/resources/stream/webhooks';
 import * as LiveInputsAPI from 'cloudflare/resources/stream/live-inputs/live-inputs';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Stream extends APIResource {
   audioTracks: AudioTracksAPI.AudioTracks = new AudioTracksAPI.AudioTracks(this._client);
@@ -63,13 +64,15 @@ export class Stream extends APIResource {
    * Lists up to 1000 videos from a single request. For a specific range, refer to
    * the optional parameters.
    */
-  list(params: StreamListParams, options?: Core.RequestOptions): Core.APIPromise<StreamListResponse> {
+  list(
+    params: StreamListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<StreamVideosSinglePage, StreamVideos> {
     const { account_id, ...query } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/stream`, { query, ...options }) as Core.APIPromise<{
-        result: StreamListResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(`/accounts/${account_id}/stream`, StreamVideosSinglePage, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -103,6 +106,8 @@ export class Stream extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class StreamVideosSinglePage extends SinglePage<StreamVideos> {}
 
 export interface StreamVideos {
   /**
@@ -294,8 +299,6 @@ export namespace StreamVideos {
   }
 }
 
-export type StreamListResponse = Array<StreamVideos>;
-
 export interface StreamCreateParams {
   /**
    * Path param: The account identifier tag.
@@ -394,7 +397,7 @@ export interface StreamGetParams {
 
 export namespace Stream {
   export import StreamVideos = StreamAPI.StreamVideos;
-  export import StreamListResponse = StreamAPI.StreamListResponse;
+  export import StreamVideosSinglePage = StreamAPI.StreamVideosSinglePage;
   export import StreamCreateParams = StreamAPI.StreamCreateParams;
   export import StreamListParams = StreamAPI.StreamListParams;
   export import StreamDeleteParams = StreamAPI.StreamDeleteParams;
@@ -436,9 +439,9 @@ export namespace Stream {
   export import Watermarks = WatermarksAPI.Watermarks;
   export import StreamWatermarks = WatermarksAPI.StreamWatermarks;
   export import WatermarkCreateResponse = WatermarksAPI.WatermarkCreateResponse;
-  export import WatermarkListResponse = WatermarksAPI.WatermarkListResponse;
   export import WatermarkDeleteResponse = WatermarksAPI.WatermarkDeleteResponse;
   export import WatermarkGetResponse = WatermarksAPI.WatermarkGetResponse;
+  export import StreamWatermarksSinglePage = WatermarksAPI.StreamWatermarksSinglePage;
   export import WatermarkCreateParams = WatermarksAPI.WatermarkCreateParams;
   export import WatermarkListParams = WatermarksAPI.WatermarkListParams;
   export import WatermarkDeleteParams = WatermarksAPI.WatermarkDeleteParams;

@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as HealthchecksAPI from 'cloudflare/resources/healthchecks/healthchecks';
 import * as PreviewsAPI from 'cloudflare/resources/healthchecks/previews';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Healthchecks extends APIResource {
   previews: PreviewsAPI.Previews = new PreviewsAPI.Previews(this._client);
@@ -43,13 +44,9 @@ export class Healthchecks extends APIResource {
   list(
     params: HealthcheckListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<HealthcheckListResponse | null> {
+  ): Core.PagePromise<HealthchecksSinglePage, Healthcheck> {
     const { zone_id } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/healthchecks`, options) as Core.APIPromise<{
-        result: HealthcheckListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(`/zones/${zone_id}/healthchecks`, HealthchecksSinglePage, options);
   }
 
   /**
@@ -101,6 +98,8 @@ export class Healthchecks extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class HealthchecksSinglePage extends SinglePage<Healthcheck> {}
 
 export interface Healthcheck {
   /**
@@ -276,8 +275,6 @@ export namespace Healthcheck {
     port?: number;
   }
 }
-
-export type HealthcheckListResponse = Array<Healthcheck>;
 
 export interface HealthcheckDeleteResponse {
   /**
@@ -795,8 +792,8 @@ export interface HealthcheckGetParams {
 
 export namespace Healthchecks {
   export import Healthcheck = HealthchecksAPI.Healthcheck;
-  export import HealthcheckListResponse = HealthchecksAPI.HealthcheckListResponse;
   export import HealthcheckDeleteResponse = HealthchecksAPI.HealthcheckDeleteResponse;
+  export import HealthchecksSinglePage = HealthchecksAPI.HealthchecksSinglePage;
   export import HealthcheckCreateParams = HealthchecksAPI.HealthcheckCreateParams;
   export import HealthcheckUpdateParams = HealthchecksAPI.HealthcheckUpdateParams;
   export import HealthcheckListParams = HealthchecksAPI.HealthcheckListParams;

@@ -12,10 +12,10 @@ export {
 } from './live-inputs';
 export {
   StreamOutput,
-  OutputListResponse,
   OutputCreateParams,
   OutputUpdateParams,
   OutputListParams,
   OutputDeleteParams,
+  StreamOutputsSinglePage,
   Outputs,
 } from './outputs';

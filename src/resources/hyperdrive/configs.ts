@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ConfigsAPI from 'cloudflare/resources/hyperdrive/configs';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Configs extends APIResource {
   /**
@@ -41,13 +42,16 @@ export class Configs extends APIResource {
   /**
    * Returns a list of Hyperdrives
    */
-  list(params: ConfigListParams, options?: Core.RequestOptions): Core.APIPromise<ConfigListResponse> {
+  list(
+    params: ConfigListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ConfigListResponsesSinglePage, ConfigListResponse> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/hyperdrive/configs`, options) as Core.APIPromise<{
-        result: ConfigListResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/hyperdrive/configs`,
+      ConfigListResponsesSinglePage,
+      options,
+    );
   }
 
   /**
@@ -103,12 +107,7 @@ export class Configs extends APIResource {
   }
 }
 
-export interface Hyperdrive {
-  /**
-   * Identifier
-   */
-  id?: string;
-}
+export class ConfigListResponsesSinglePage extends SinglePage<ConfigListResponse> {}
 
 export interface ConfigCreateResponse {
   /**
@@ -124,15 +123,11 @@ export interface ConfigUpdateResponse {
   id?: string;
 }
 
-export type ConfigListResponse = Array<ConfigListResponse.ConfigListResponseItem>;
-
-export namespace ConfigListResponse {
-  export interface ConfigListResponseItem {
-    /**
-     * Identifier
-     */
-    id?: string;
-  }
+export interface ConfigListResponse {
+  /**
+   * Identifier
+   */
+  id?: string;
 }
 
 export type ConfigDeleteResponse = unknown | string;
@@ -239,13 +234,13 @@ export interface ConfigGetParams {
 }
 
 export namespace Configs {
-  export import Hyperdrive = ConfigsAPI.Hyperdrive;
   export import ConfigCreateResponse = ConfigsAPI.ConfigCreateResponse;
   export import ConfigUpdateResponse = ConfigsAPI.ConfigUpdateResponse;
   export import ConfigListResponse = ConfigsAPI.ConfigListResponse;
   export import ConfigDeleteResponse = ConfigsAPI.ConfigDeleteResponse;
   export import ConfigEditResponse = ConfigsAPI.ConfigEditResponse;
   export import ConfigGetResponse = ConfigsAPI.ConfigGetResponse;
+  export import ConfigListResponsesSinglePage = ConfigsAPI.ConfigListResponsesSinglePage;
   export import ConfigCreateParams = ConfigsAPI.ConfigCreateParams;
   export import ConfigUpdateParams = ConfigsAPI.ConfigUpdateParams;
   export import ConfigListParams = ConfigsAPI.ConfigListParams;

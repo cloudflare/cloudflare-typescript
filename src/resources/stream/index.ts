@@ -54,23 +54,23 @@ export {
 } from './live-inputs/index';
 export {
   StreamVideos,
-  StreamListResponse,
   StreamCreateParams,
   StreamListParams,
   StreamDeleteParams,
   StreamGetParams,
+  StreamVideosSinglePage,
   Stream,
 } from './stream';
 export {
   StreamWatermarks,
   WatermarkCreateResponse,
-  WatermarkListResponse,
   WatermarkDeleteResponse,
   WatermarkGetResponse,
   WatermarkCreateParams,
   WatermarkListParams,
   WatermarkDeleteParams,
   WatermarkGetParams,
+  StreamWatermarksSinglePage,
   Watermarks,
 } from './watermarks';
 export { TokenCreateResponse, TokenCreateParams, Token } from './token';

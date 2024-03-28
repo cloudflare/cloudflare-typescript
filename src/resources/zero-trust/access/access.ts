@@ -28,9 +28,9 @@ export class Access extends APIResource {
 export namespace Access {
   export import Applications = ApplicationsAPI.Applications;
   export import ZeroTrustApps = ApplicationsAPI.ZeroTrustApps;
-  export import ApplicationListResponse = ApplicationsAPI.ApplicationListResponse;
   export import ApplicationDeleteResponse = ApplicationsAPI.ApplicationDeleteResponse;
   export import ApplicationRevokeTokensResponse = ApplicationsAPI.ApplicationRevokeTokensResponse;
+  export import ZeroTrustAppsSinglePage = ApplicationsAPI.ZeroTrustAppsSinglePage;
   export import ApplicationCreateParams = ApplicationsAPI.ApplicationCreateParams;
   export import ApplicationUpdateParams = ApplicationsAPI.ApplicationUpdateParams;
   export import ApplicationListParams = ApplicationsAPI.ApplicationListParams;
@@ -39,8 +39,8 @@ export namespace Access {
   export import ApplicationRevokeTokensParams = ApplicationsAPI.ApplicationRevokeTokensParams;
   export import Certificates = CertificatesAPI.Certificates;
   export import ZeroTrustCertificates = CertificatesAPI.ZeroTrustCertificates;
-  export import CertificateListResponse = CertificatesAPI.CertificateListResponse;
   export import CertificateDeleteResponse = CertificatesAPI.CertificateDeleteResponse;
+  export import ZeroTrustCertificatesSinglePage = CertificatesAPI.ZeroTrustCertificatesSinglePage;
   export import CertificateCreateParams = CertificatesAPI.CertificateCreateParams;
   export import CertificateUpdateParams = CertificatesAPI.CertificateUpdateParams;
   export import CertificateListParams = CertificatesAPI.CertificateListParams;
@@ -48,8 +48,8 @@ export namespace Access {
   export import CertificateGetParams = CertificatesAPI.CertificateGetParams;
   export import Groups = GroupsAPI.Groups;
   export import ZeroTrustGroups = GroupsAPI.ZeroTrustGroups;
-  export import GroupListResponse = GroupsAPI.GroupListResponse;
   export import GroupDeleteResponse = GroupsAPI.GroupDeleteResponse;
+  export import ZeroTrustGroupsSinglePage = GroupsAPI.ZeroTrustGroupsSinglePage;
   export import GroupCreateParams = GroupsAPI.GroupCreateParams;
   export import GroupUpdateParams = GroupsAPI.GroupUpdateParams;
   export import GroupListParams = GroupsAPI.GroupListParams;
@@ -58,16 +58,16 @@ export namespace Access {
   export import ServiceTokens = ServiceTokensAPI.ServiceTokens;
   export import ZeroTrustServiceTokens = ServiceTokensAPI.ZeroTrustServiceTokens;
   export import ServiceTokenCreateResponse = ServiceTokensAPI.ServiceTokenCreateResponse;
-  export import ServiceTokenListResponse = ServiceTokensAPI.ServiceTokenListResponse;
   export import ServiceTokenRotateResponse = ServiceTokensAPI.ServiceTokenRotateResponse;
+  export import ZeroTrustServiceTokensSinglePage = ServiceTokensAPI.ZeroTrustServiceTokensSinglePage;
   export import ServiceTokenCreateParams = ServiceTokensAPI.ServiceTokenCreateParams;
   export import ServiceTokenUpdateParams = ServiceTokensAPI.ServiceTokenUpdateParams;
   export import ServiceTokenListParams = ServiceTokensAPI.ServiceTokenListParams;
   export import ServiceTokenDeleteParams = ServiceTokensAPI.ServiceTokenDeleteParams;
   export import Bookmarks = BookmarksAPI.Bookmarks;
   export import ZeroTrustBookmarks = BookmarksAPI.ZeroTrustBookmarks;
-  export import BookmarkListResponse = BookmarksAPI.BookmarkListResponse;
   export import BookmarkDeleteResponse = BookmarksAPI.BookmarkDeleteResponse;
+  export import ZeroTrustBookmarksSinglePage = BookmarksAPI.ZeroTrustBookmarksSinglePage;
   export import Keys = KeysAPI.Keys;
   export import KeyUpdateResponse = KeysAPI.KeyUpdateResponse;
   export import KeyGetResponse = KeysAPI.KeyGetResponse;
@@ -76,18 +76,18 @@ export namespace Access {
   export import Logs = LogsAPI.Logs;
   export import Users = UsersAPI.Users;
   export import ZeroTrustUsers = UsersAPI.ZeroTrustUsers;
-  export import UserListResponse = UsersAPI.UserListResponse;
+  export import ZeroTrustUsersSinglePage = UsersAPI.ZeroTrustUsersSinglePage;
   export import CustomPages = CustomPagesAPI.CustomPages;
   export import ZeroTrustCustomPage = CustomPagesAPI.ZeroTrustCustomPage;
   export import ZeroTrustCustomPageWithoutHTML = CustomPagesAPI.ZeroTrustCustomPageWithoutHTML;
-  export import CustomPageListResponse = CustomPagesAPI.CustomPageListResponse;
   export import CustomPageDeleteResponse = CustomPagesAPI.CustomPageDeleteResponse;
+  export import ZeroTrustCustomPageWithoutHTMLsSinglePage = CustomPagesAPI.ZeroTrustCustomPageWithoutHTMLsSinglePage;
   export import CustomPageCreateParams = CustomPagesAPI.CustomPageCreateParams;
   export import CustomPageUpdateParams = CustomPagesAPI.CustomPageUpdateParams;
   export import Tags = TagsAPI.Tags;
   export import ZeroTrustTag = TagsAPI.ZeroTrustTag;
-  export import TagListResponse = TagsAPI.TagListResponse;
   export import TagDeleteResponse = TagsAPI.TagDeleteResponse;
+  export import ZeroTrustTagsSinglePage = TagsAPI.ZeroTrustTagsSinglePage;
   export import TagCreateParams = TagsAPI.TagCreateParams;
   export import TagUpdateParams = TagsAPI.TagUpdateParams;
 }

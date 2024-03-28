@@ -40,6 +40,7 @@ export {
   SubscriptionListResponse,
   SubscriptionGetResponse,
   SubscriptionCreateParams,
+  SubscriptionListResponsesSinglePage,
   Subscriptions,
 } from './subscriptions';
 export { Workers } from './workers/index';

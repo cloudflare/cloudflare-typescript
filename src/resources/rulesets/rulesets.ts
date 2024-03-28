@@ -8,6 +8,7 @@ import * as RulesetsAPI from 'cloudflare/resources/rulesets/rulesets';
 import * as RulesAPI from 'cloudflare/resources/rulesets/rules';
 import * as PhasesAPI from 'cloudflare/resources/rulesets/phases/phases';
 import * as VersionsAPI from 'cloudflare/resources/rulesets/versions/versions';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Rulesets extends APIResource {
   phases: PhasesAPI.Phases = new PhasesAPI.Phases(this._client);
@@ -17,10 +18,7 @@ export class Rulesets extends APIResource {
   /**
    * Creates a ruleset.
    */
-  create(
-    params: RulesetCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RulesetsRulesetResponse> {
+  create(params: RulesetCreateParams, options?: Core.RequestOptions): Core.APIPromise<Ruleset> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -42,7 +40,7 @@ export class Rulesets extends APIResource {
       this._client.post(`/${accountOrZone}/${accountOrZoneId}/rulesets`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: RulesetsRulesetResponse }>
+      }) as Core.APIPromise<{ result: Ruleset }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -53,7 +51,7 @@ export class Rulesets extends APIResource {
     rulesetId: string,
     params: RulesetUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RulesetsRulesetResponse> {
+  ): Core.APIPromise<Ruleset> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -75,19 +73,22 @@ export class Rulesets extends APIResource {
       this._client.put(`/${accountOrZone}/${accountOrZoneId}/rulesets/${rulesetId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: RulesetsRulesetResponse }>
+      }) as Core.APIPromise<{ result: Ruleset }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches all rulesets.
    */
-  list(params?: RulesetListParams, options?: Core.RequestOptions): Core.APIPromise<RulesetsRulesetsResponse>;
-  list(options?: Core.RequestOptions): Core.APIPromise<RulesetsRulesetsResponse>;
+  list(
+    params?: RulesetListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<RulesetListResponsesSinglePage, RulesetListResponse>;
+  list(options?: Core.RequestOptions): Core.PagePromise<RulesetListResponsesSinglePage, RulesetListResponse>;
   list(
     params: RulesetListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RulesetsRulesetsResponse> {
+  ): Core.PagePromise<RulesetListResponsesSinglePage, RulesetListResponse> {
     if (isRequestOptions(params)) {
       return this.list({}, params);
     }
@@ -108,11 +109,11 @@ export class Rulesets extends APIResource {
           accountOrZone: 'zones',
           accountOrZoneId: zone_id,
         };
-    return (
-      this._client.get(`/${accountOrZone}/${accountOrZoneId}/rulesets`, options) as Core.APIPromise<{
-        result: RulesetsRulesetsResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/${accountOrZone}/${accountOrZoneId}/rulesets`,
+      RulesetListResponsesSinglePage,
+      options,
+    );
   }
 
   /**
@@ -158,17 +159,13 @@ export class Rulesets extends APIResource {
   /**
    * Fetches the latest version of an account or zone ruleset.
    */
-  get(
-    rulesetId: string,
-    params?: RulesetGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RulesetsRulesetResponse>;
-  get(rulesetId: string, options?: Core.RequestOptions): Core.APIPromise<RulesetsRulesetResponse>;
+  get(rulesetId: string, params?: RulesetGetParams, options?: Core.RequestOptions): Core.APIPromise<Ruleset>;
+  get(rulesetId: string, options?: Core.RequestOptions): Core.APIPromise<Ruleset>;
   get(
     rulesetId: string,
     params: RulesetGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RulesetsRulesetResponse> {
+  ): Core.APIPromise<Ruleset> {
     if (isRequestOptions(params)) {
       return this.get(rulesetId, {}, params);
     }
@@ -193,15 +190,17 @@ export class Rulesets extends APIResource {
       this._client.get(
         `/${accountOrZone}/${accountOrZoneId}/rulesets/${rulesetId}`,
         options,
-      ) as Core.APIPromise<{ result: RulesetsRulesetResponse }>
+      ) as Core.APIPromise<{ result: Ruleset }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
+export class RulesetListResponsesSinglePage extends SinglePage<RulesetListResponse> {}
+
 /**
  * A ruleset object.
  */
-export interface RulesetsRulesetResponse {
+export interface Ruleset {
   /**
    * The unique ID of the ruleset.
    */
@@ -254,10 +253,10 @@ export interface RulesetsRulesetResponse {
    * The list of rules in the ruleset.
    */
   rules: Array<
-    | RulesetsRulesetResponse.RulesetsBlockRule
-    | RulesetsRulesetResponse.RulesetsExecuteRule
-    | RulesetsRulesetResponse.RulesetsLogRule
-    | RulesetsRulesetResponse.RulesetsSkipRule
+    | Ruleset.RulesetsBlockRule
+    | Ruleset.RulesetsExecuteRule
+    | Ruleset.RulesetsLogRule
+    | Ruleset.RulesetsSkipRule
   >;
 
   /**
@@ -271,7 +270,7 @@ export interface RulesetsRulesetResponse {
   description?: string;
 }
 
-export namespace RulesetsRulesetResponse {
+export namespace Ruleset {
   export interface RulesetsBlockRule {
     /**
      * The timestamp of when the rule was last modified.
@@ -763,74 +762,66 @@ export namespace RulesetsRulesetResponse {
 }
 
 /**
- * A list of rulesets. The returned information will not include the rules in each
- * ruleset.
+ * A ruleset object.
  */
-export type RulesetsRulesetsResponse = Array<RulesetsRulesetsResponse.RulesetsRulesetsResponseItem>;
-
-export namespace RulesetsRulesetsResponse {
+export interface RulesetListResponse {
   /**
-   * A ruleset object.
+   * The kind of the ruleset.
    */
-  export interface RulesetsRulesetsResponseItem {
-    /**
-     * The kind of the ruleset.
-     */
-    kind: 'managed' | 'custom' | 'root' | 'zone';
+  kind: 'managed' | 'custom' | 'root' | 'zone';
 
-    /**
-     * The human-readable name of the ruleset.
-     */
-    name: string;
+  /**
+   * The human-readable name of the ruleset.
+   */
+  name: string;
 
-    /**
-     * The phase of the ruleset.
-     */
-    phase:
-      | 'ddos_l4'
-      | 'ddos_l7'
-      | 'http_config_settings'
-      | 'http_custom_errors'
-      | 'http_log_custom_fields'
-      | 'http_ratelimit'
-      | 'http_request_cache_settings'
-      | 'http_request_dynamic_redirect'
-      | 'http_request_firewall_custom'
-      | 'http_request_firewall_managed'
-      | 'http_request_late_transform'
-      | 'http_request_origin'
-      | 'http_request_redirect'
-      | 'http_request_sanitize'
-      | 'http_request_sbfm'
-      | 'http_request_select_configuration'
-      | 'http_request_transform'
-      | 'http_response_compression'
-      | 'http_response_firewall_managed'
-      | 'http_response_headers_transform'
-      | 'magic_transit'
-      | 'magic_transit_ids_managed'
-      | 'magic_transit_managed';
+  /**
+   * The phase of the ruleset.
+   */
+  phase:
+    | 'ddos_l4'
+    | 'ddos_l7'
+    | 'http_config_settings'
+    | 'http_custom_errors'
+    | 'http_log_custom_fields'
+    | 'http_ratelimit'
+    | 'http_request_cache_settings'
+    | 'http_request_dynamic_redirect'
+    | 'http_request_firewall_custom'
+    | 'http_request_firewall_managed'
+    | 'http_request_late_transform'
+    | 'http_request_origin'
+    | 'http_request_redirect'
+    | 'http_request_sanitize'
+    | 'http_request_sbfm'
+    | 'http_request_select_configuration'
+    | 'http_request_transform'
+    | 'http_response_compression'
+    | 'http_response_firewall_managed'
+    | 'http_response_headers_transform'
+    | 'magic_transit'
+    | 'magic_transit_ids_managed'
+    | 'magic_transit_managed';
 
-    /**
-     * The unique ID of the ruleset.
-     */
-    id?: string;
+  /**
+   * The unique ID of the ruleset.
+   */
+  id?: string;
 
-    /**
-     * An informative description of the ruleset.
-     */
-    description?: string;
+  /**
+   * An informative description of the ruleset.
+   */
+  description?: string;
 
-    /**
-     * The timestamp of when the ruleset was last modified.
-     */
-    last_updated?: string;
+  /**
+   * The timestamp of when the ruleset was last modified.
+   */
+  last_updated?: string;
 
-    /**
-     * The version of the ruleset.
-     */
-    version?: string;
-  }
+  /**
+   * The version of the ruleset.
+   */
+  version?: string;
 }
 
 export interface RulesetCreateParams {
@@ -1871,8 +1862,9 @@ export interface RulesetGetParams {
 }
 
 export namespace Rulesets {
-  export import RulesetsRulesetResponse = RulesetsAPI.RulesetsRulesetResponse;
-  export import RulesetsRulesetsResponse = RulesetsAPI.RulesetsRulesetsResponse;
+  export import Ruleset = RulesetsAPI.Ruleset;
+  export import RulesetListResponse = RulesetsAPI.RulesetListResponse;
+  export import RulesetListResponsesSinglePage = RulesetsAPI.RulesetListResponsesSinglePage;
   export import RulesetCreateParams = RulesetsAPI.RulesetCreateParams;
   export import RulesetUpdateParams = RulesetsAPI.RulesetUpdateParams;
   export import RulesetListParams = RulesetsAPI.RulesetListParams;
@@ -1886,6 +1878,8 @@ export namespace Rulesets {
   export import RuleDeleteParams = RulesAPI.RuleDeleteParams;
   export import RuleEditParams = RulesAPI.RuleEditParams;
   export import Versions = VersionsAPI.Versions;
+  export import VersionListResponse = VersionsAPI.VersionListResponse;
+  export import VersionListResponsesSinglePage = VersionsAPI.VersionListResponsesSinglePage;
   export import VersionListParams = VersionsAPI.VersionListParams;
   export import VersionDeleteParams = VersionsAPI.VersionDeleteParams;
   export import VersionGetParams = VersionsAPI.VersionGetParams;

@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as WebhooksAPI from 'cloudflare/resources/alerting/destinations/webhooks';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Webhooks extends APIResource {
   /**
@@ -41,14 +42,13 @@ export class Webhooks extends APIResource {
   list(
     params: WebhookListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WebhookListResponse | null> {
+  ): Core.PagePromise<AlertingWebhooksSinglePage, AlertingWebhooks> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/alerting/v3/destinations/webhooks`,
-        options,
-      ) as Core.APIPromise<{ result: WebhookListResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/alerting/v3/destinations/webhooks`,
+      AlertingWebhooksSinglePage,
+      options,
+    );
   }
 
   /**
@@ -85,6 +85,8 @@ export class Webhooks extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class AlertingWebhooksSinglePage extends SinglePage<AlertingWebhooks> {}
 
 export interface AlertingWebhooks {
   /**
@@ -146,8 +148,6 @@ export interface WebhookUpdateResponse {
    */
   id?: string;
 }
-
-export type WebhookListResponse = Array<AlertingWebhooks>;
 
 export type WebhookDeleteResponse = unknown | Array<unknown> | string;
 
@@ -226,8 +226,8 @@ export namespace Webhooks {
   export import AlertingWebhooks = WebhooksAPI.AlertingWebhooks;
   export import WebhookCreateResponse = WebhooksAPI.WebhookCreateResponse;
   export import WebhookUpdateResponse = WebhooksAPI.WebhookUpdateResponse;
-  export import WebhookListResponse = WebhooksAPI.WebhookListResponse;
   export import WebhookDeleteResponse = WebhooksAPI.WebhookDeleteResponse;
+  export import AlertingWebhooksSinglePage = WebhooksAPI.AlertingWebhooksSinglePage;
   export import WebhookCreateParams = WebhooksAPI.WebhookCreateParams;
   export import WebhookUpdateParams = WebhooksAPI.WebhookUpdateParams;
   export import WebhookListParams = WebhooksAPI.WebhookListParams;

@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as PrefixesAPI from 'cloudflare/resources/addressing/prefixes/bgp/prefixes';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Prefixes extends APIResource {
   /**
@@ -15,14 +16,13 @@ export class Prefixes extends APIResource {
     prefixId: string,
     params: PrefixListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PrefixListResponse | null> {
+  ): Core.PagePromise<AddressingIpamBGPPrefixesSinglePage, AddressingIpamBGPPrefixes> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/addressing/prefixes/${prefixId}/bgp/prefixes`,
-        options,
-      ) as Core.APIPromise<{ result: PrefixListResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/addressing/prefixes/${prefixId}/bgp/prefixes`,
+      AddressingIpamBGPPrefixesSinglePage,
+      options,
+    );
   }
 
   /**
@@ -62,6 +62,8 @@ export class Prefixes extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class AddressingIpamBGPPrefixesSinglePage extends SinglePage<AddressingIpamBGPPrefixes> {}
 
 export interface AddressingIpamBGPPrefixes {
   /**
@@ -130,8 +132,6 @@ export namespace AddressingIpamBGPPrefixes {
   }
 }
 
-export type PrefixListResponse = Array<AddressingIpamBGPPrefixes>;
-
 export interface PrefixListParams {
   /**
    * Identifier
@@ -166,7 +166,7 @@ export interface PrefixGetParams {
 
 export namespace Prefixes {
   export import AddressingIpamBGPPrefixes = PrefixesAPI.AddressingIpamBGPPrefixes;
-  export import PrefixListResponse = PrefixesAPI.PrefixListResponse;
+  export import AddressingIpamBGPPrefixesSinglePage = PrefixesAPI.AddressingIpamBGPPrefixesSinglePage;
   export import PrefixListParams = PrefixesAPI.PrefixListParams;
   export import PrefixEditParams = PrefixesAPI.PrefixEditParams;
   export import PrefixGetParams = PrefixesAPI.PrefixGetParams;

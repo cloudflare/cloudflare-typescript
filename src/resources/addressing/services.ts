@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ServicesAPI from 'cloudflare/resources/addressing/services';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Services extends APIResource {
   /**
@@ -11,30 +12,31 @@ export class Services extends APIResource {
    * IP addresses. This endpoint can be used as a reference of available services on
    * the Cloudflare network, and their service IDs.
    */
-  list(params: ServiceListParams, options?: Core.RequestOptions): Core.APIPromise<ServiceListResponse> {
+  list(
+    params: ServiceListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ServiceListResponsesSinglePage, ServiceListResponse> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/addressing/services`, options) as Core.APIPromise<{
-        result: ServiceListResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/addressing/services`,
+      ServiceListResponsesSinglePage,
+      options,
+    );
   }
 }
 
-export type ServiceListResponse = Array<ServiceListResponse.ServiceListResponseItem>;
+export class ServiceListResponsesSinglePage extends SinglePage<ServiceListResponse> {}
 
-export namespace ServiceListResponse {
-  export interface ServiceListResponseItem {
-    /**
-     * Identifier
-     */
-    id?: string;
+export interface ServiceListResponse {
+  /**
+   * Identifier
+   */
+  id?: string;
 
-    /**
-     * Name of a service running on the Cloudflare network
-     */
-    name?: string;
-  }
+  /**
+   * Name of a service running on the Cloudflare network
+   */
+  name?: string;
 }
 
 export interface ServiceListParams {
@@ -46,5 +48,6 @@ export interface ServiceListParams {
 
 export namespace Services {
   export import ServiceListResponse = ServicesAPI.ServiceListResponse;
+  export import ServiceListResponsesSinglePage = ServicesAPI.ServiceListResponsesSinglePage;
   export import ServiceListParams = ServicesAPI.ServiceListParams;
 }

@@ -2,10 +2,10 @@
 
 export {
   DistributedWebHostname,
-  HostnameListResponse,
   HostnameDeleteResponse,
   HostnameCreateParams,
   HostnameEditParams,
+  DistributedWebHostnamesSinglePage,
   Hostnames,
 } from './hostnames';
 export { IPFSUniversalPaths } from './ipfs-universal-paths/index';

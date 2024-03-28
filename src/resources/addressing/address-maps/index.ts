@@ -10,7 +10,6 @@ export {
 export {
   AddressingAddressMaps,
   AddressMapCreateResponse,
-  AddressMapListResponse,
   AddressMapDeleteResponse,
   AddressMapGetResponse,
   AddressMapCreateParams,
@@ -18,6 +17,7 @@ export {
   AddressMapDeleteParams,
   AddressMapEditParams,
   AddressMapGetParams,
+  AddressingAddressMapsSinglePage,
   AddressMaps,
 } from './address-maps';
 export { IPUpdateResponse, IPDeleteResponse, IPUpdateParams, IPDeleteParams, IPs } from './ips';

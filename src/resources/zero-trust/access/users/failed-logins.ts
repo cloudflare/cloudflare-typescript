@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as FailedLoginsAPI from 'cloudflare/resources/zero-trust/access/users/failed-logins';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class FailedLogins extends APIResource {
   /**
@@ -12,26 +13,24 @@ export class FailedLogins extends APIResource {
     identifier: string,
     id: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<FailedLoginListResponse | null> {
-    return (
-      this._client.get(
-        `/accounts/${identifier}/access/users/${id}/failed_logins`,
-        options,
-      ) as Core.APIPromise<{ result: FailedLoginListResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+  ): Core.PagePromise<FailedLoginListResponsesSinglePage, FailedLoginListResponse> {
+    return this._client.getAPIList(
+      `/accounts/${identifier}/access/users/${id}/failed_logins`,
+      FailedLoginListResponsesSinglePage,
+      options,
+    );
   }
 }
 
-export type FailedLoginListResponse = Array<FailedLoginListResponse.FailedLoginListResponseItem>;
+export class FailedLoginListResponsesSinglePage extends SinglePage<FailedLoginListResponse> {}
 
-export namespace FailedLoginListResponse {
-  export interface FailedLoginListResponseItem {
-    expiration?: number;
+export interface FailedLoginListResponse {
+  expiration?: number;
 
-    metadata?: unknown;
-  }
+  metadata?: unknown;
 }
 
 export namespace FailedLogins {
   export import FailedLoginListResponse = FailedLoginsAPI.FailedLoginListResponse;
+  export import FailedLoginListResponsesSinglePage = FailedLoginsAPI.FailedLoginListResponsesSinglePage;
 }
