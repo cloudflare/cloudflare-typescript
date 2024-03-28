@@ -3,7 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as SettingsAPI from 'cloudflare/resources/zones/settings/settings';
-import * as AdvancedDDOSAPI from 'cloudflare/resources/zones/settings/advanced-ddos';
+import * as AdvancedDDoSAPI from 'cloudflare/resources/zones/settings/advanced-ddos';
 import * as AlwaysOnlineAPI from 'cloudflare/resources/zones/settings/always-online';
 import * as AlwaysUseHTTPSAPI from 'cloudflare/resources/zones/settings/always-use-https';
 import * as AutomaticHTTPSRewritesAPI from 'cloudflare/resources/zones/settings/automatic-https-rewrites';
@@ -57,7 +57,7 @@ import * as ZeroRTTAPI from 'cloudflare/resources/zones/settings/zero-rtt';
 
 export class Settings extends APIResource {
   zeroRTT: ZeroRTTAPI.ZeroRTT = new ZeroRTTAPI.ZeroRTT(this._client);
-  advancedDDOS: AdvancedDDOSAPI.AdvancedDDOS = new AdvancedDDOSAPI.AdvancedDDOS(this._client);
+  advancedDDoS: AdvancedDDoSAPI.AdvancedDDoS = new AdvancedDDoSAPI.AdvancedDDoS(this._client);
   alwaysOnline: AlwaysOnlineAPI.AlwaysOnline = new AlwaysOnlineAPI.AlwaysOnline(this._client);
   alwaysUseHTTPS: AlwaysUseHTTPSAPI.AlwaysUseHTTPS = new AlwaysUseHTTPSAPI.AlwaysUseHTTPS(this._client);
   automaticHTTPSRewrites: AutomaticHTTPSRewritesAPI.AutomaticHTTPSRewrites =
@@ -157,7 +157,7 @@ export class Settings extends APIResource {
 
 export type SettingEditResponse = Array<
   | ZeroRTTAPI.ZoneSetting0rtt
-  | AdvancedDDOSAPI.ZoneSettingAdvancedDDOS
+  | AdvancedDDoSAPI.ZoneSettingAdvancedDDoS
   | AlwaysOnlineAPI.ZoneSettingAlwaysOnline
   | AlwaysUseHTTPSAPI.ZoneSettingAlwaysUseHTTPS
   | AutomaticHTTPSRewritesAPI.ZoneSettingAutomaticHTTPSRewrites
@@ -396,7 +396,7 @@ export namespace SettingEditResponse {
 
 export type SettingGetResponse = Array<
   | ZeroRTTAPI.ZoneSetting0rtt
-  | AdvancedDDOSAPI.ZoneSettingAdvancedDDOS
+  | AdvancedDDoSAPI.ZoneSettingAdvancedDDoS
   | AlwaysOnlineAPI.ZoneSettingAlwaysOnline
   | AlwaysUseHTTPSAPI.ZoneSettingAlwaysUseHTTPS
   | AutomaticHTTPSRewritesAPI.ZoneSettingAutomaticHTTPSRewrites
@@ -644,7 +644,7 @@ export interface SettingEditParams {
    */
   items: Array<
     | ZeroRTTAPI.ZoneSetting0rtt
-    | AdvancedDDOSAPI.ZoneSettingAdvancedDDOS
+    | AdvancedDDoSAPI.ZoneSettingAdvancedDDoS
     | AlwaysOnlineAPI.ZoneSettingAlwaysOnline
     | AlwaysUseHTTPSAPI.ZoneSettingAlwaysUseHTTPS
     | AutomaticHTTPSRewritesAPI.ZoneSettingAutomaticHTTPSRewrites
@@ -832,9 +832,9 @@ export namespace Settings {
   export import ZoneSetting0rtt = ZeroRTTAPI.ZoneSetting0rtt;
   export import ZeroRTTEditParams = ZeroRTTAPI.ZeroRTTEditParams;
   export import ZeroRTTGetParams = ZeroRTTAPI.ZeroRTTGetParams;
-  export import AdvancedDDOS = AdvancedDDOSAPI.AdvancedDDOS;
-  export import ZoneSettingAdvancedDDOS = AdvancedDDOSAPI.ZoneSettingAdvancedDDOS;
-  export import AdvancedDDOSGetParams = AdvancedDDOSAPI.AdvancedDDOSGetParams;
+  export import AdvancedDDoS = AdvancedDDoSAPI.AdvancedDDoS;
+  export import ZoneSettingAdvancedDDoS = AdvancedDDoSAPI.ZoneSettingAdvancedDDoS;
+  export import AdvancedDDoSGetParams = AdvancedDDoSAPI.AdvancedDDoSGetParams;
   export import AlwaysOnline = AlwaysOnlineAPI.AlwaysOnline;
   export import ZoneSettingAlwaysOnline = AlwaysOnlineAPI.ZoneSettingAlwaysOnline;
   export import AlwaysOnlineEditParams = AlwaysOnlineAPI.AlwaysOnlineEditParams;
