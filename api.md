@@ -5038,17 +5038,17 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/challenges/widgets.ts">NcChallengesAdminWidgetDetail</a></code>
-- <code><a href="./src/resources/challenges/widgets.ts">NcChallengesAdminWidgetList</a></code>
+- <code><a href="./src/resources/challenges/widgets.ts">ChallengesWidget</a></code>
+- <code><a href="./src/resources/challenges/widgets.ts">ChallengesWidgetList</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/challenges/widgets">client.challenges.widgets.<a href="./src/resources/challenges/widgets.ts">create</a>({ ...params }) -> NcChallengesAdminWidgetDetail</code>
-- <code title="put /accounts/{account_id}/challenges/widgets/{sitekey}">client.challenges.widgets.<a href="./src/resources/challenges/widgets.ts">update</a>(sitekey, { ...params }) -> NcChallengesAdminWidgetDetail</code>
-- <code title="get /accounts/{account_id}/challenges/widgets">client.challenges.widgets.<a href="./src/resources/challenges/widgets.ts">list</a>({ ...params }) -> NcChallengesAdminWidgetListsV4PagePaginationArray</code>
-- <code title="delete /accounts/{account_id}/challenges/widgets/{sitekey}">client.challenges.widgets.<a href="./src/resources/challenges/widgets.ts">delete</a>(sitekey, { ...params }) -> NcChallengesAdminWidgetDetail</code>
-- <code title="get /accounts/{account_id}/challenges/widgets/{sitekey}">client.challenges.widgets.<a href="./src/resources/challenges/widgets.ts">get</a>(sitekey, { ...params }) -> NcChallengesAdminWidgetDetail</code>
-- <code title="post /accounts/{account_id}/challenges/widgets/{sitekey}/rotate_secret">client.challenges.widgets.<a href="./src/resources/challenges/widgets.ts">rotateSecret</a>(sitekey, { ...params }) -> NcChallengesAdminWidgetDetail</code>
+- <code title="post /accounts/{account_id}/challenges/widgets">client.challenges.widgets.<a href="./src/resources/challenges/widgets.ts">create</a>({ ...params }) -> ChallengesWidget</code>
+- <code title="put /accounts/{account_id}/challenges/widgets/{sitekey}">client.challenges.widgets.<a href="./src/resources/challenges/widgets.ts">update</a>(sitekey, { ...params }) -> ChallengesWidget</code>
+- <code title="get /accounts/{account_id}/challenges/widgets">client.challenges.widgets.<a href="./src/resources/challenges/widgets.ts">list</a>({ ...params }) -> ChallengesWidgetListsV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/challenges/widgets/{sitekey}">client.challenges.widgets.<a href="./src/resources/challenges/widgets.ts">delete</a>(sitekey, { ...params }) -> ChallengesWidget</code>
+- <code title="get /accounts/{account_id}/challenges/widgets/{sitekey}">client.challenges.widgets.<a href="./src/resources/challenges/widgets.ts">get</a>(sitekey, { ...params }) -> ChallengesWidget</code>
+- <code title="post /accounts/{account_id}/challenges/widgets/{sitekey}/rotate_secret">client.challenges.widgets.<a href="./src/resources/challenges/widgets.ts">rotateSecret</a>(sitekey, { ...params }) -> ChallengesWidget</code>
 
 # Hyperdrive
 
@@ -5056,7 +5056,7 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/hyperdrive/configs.ts">HyperdriveHyperdriveWithIdentifier</a></code>
+- <code><a href="./src/resources/hyperdrive/configs.ts">Hyperdrive</a></code>
 - <code><a href="./src/resources/hyperdrive/configs.ts">ConfigCreateResponse</a></code>
 - <code><a href="./src/resources/hyperdrive/configs.ts">ConfigUpdateResponse</a></code>
 - <code><a href="./src/resources/hyperdrive/configs.ts">ConfigListResponse</a></code>
@@ -6135,11 +6135,11 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/dcv-delegation/uuid.ts">TLSCertificatesAndHostnamesUUIDObject</a></code>
+- <code><a href="./src/resources/dcv-delegation/uuid.ts">DCVDelegationUUID</a></code>
 
 Methods:
 
-- <code title="get /zones/{zone_id}/dcv_delegation/uuid">client.dcvDelegation.uuid.<a href="./src/resources/dcv-delegation/uuid.ts">get</a>({ ...params }) -> TLSCertificatesAndHostnamesUUIDObject</code>
+- <code title="get /zones/{zone_id}/dcv_delegation/uuid">client.dcvDelegation.uuid.<a href="./src/resources/dcv-delegation/uuid.ts">get</a>({ ...params }) -> DCVDelegationUUID</code>
 
 # Hostnames
 
@@ -6149,14 +6149,14 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/hostnames/settings/tls.ts">TLSCertificatesAndHostnamesSettingObject</a></code>
-- <code><a href="./src/resources/hostnames/settings/tls.ts">TLSCertificatesAndHostnamesSettingObjectDelete</a></code>
+- <code><a href="./src/resources/hostnames/settings/tls.ts">HostnameSettingDelete</a></code>
+- <code><a href="./src/resources/hostnames/settings/tls.ts">HostnameStting</a></code>
 - <code><a href="./src/resources/hostnames/settings/tls.ts">TLSGetResponse</a></code>
 
 Methods:
 
-- <code title="put /zones/{zone_id}/hostnames/settings/{setting_id}/{hostname}">client.hostnames.settings.tls.<a href="./src/resources/hostnames/settings/tls.ts">update</a>(settingId, hostname, { ...params }) -> TLSCertificatesAndHostnamesSettingObject</code>
-- <code title="delete /zones/{zone_id}/hostnames/settings/{setting_id}/{hostname}">client.hostnames.settings.tls.<a href="./src/resources/hostnames/settings/tls.ts">delete</a>(settingId, hostname, { ...params }) -> TLSCertificatesAndHostnamesSettingObjectDelete</code>
+- <code title="put /zones/{zone_id}/hostnames/settings/{setting_id}/{hostname}">client.hostnames.settings.tls.<a href="./src/resources/hostnames/settings/tls.ts">update</a>(settingId, hostname, { ...params }) -> HostnameStting</code>
+- <code title="delete /zones/{zone_id}/hostnames/settings/{setting_id}/{hostname}">client.hostnames.settings.tls.<a href="./src/resources/hostnames/settings/tls.ts">delete</a>(settingId, hostname, { ...params }) -> HostnameSettingDelete</code>
 - <code title="get /zones/{zone_id}/hostnames/settings/{setting_id}">client.hostnames.settings.tls.<a href="./src/resources/hostnames/settings/tls.ts">get</a>(settingId, { ...params }) -> TLSGetResponse | null</code>
 
 # Snippets
