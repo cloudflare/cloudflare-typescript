@@ -2,12 +2,13 @@
 
 export { Registrar } from './registrar';
 export {
-  RegistrarAPIDomains,
+  RegistrarDomains,
   DomainUpdateResponse,
   DomainListResponse,
   DomainGetResponse,
   DomainUpdateParams,
   DomainListParams,
   DomainGetParams,
+  DomainListResponsesSinglePage,
   Domains,
 } from './domains';

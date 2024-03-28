@@ -1,18 +1,18 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  AccessCertificates,
-  CertificateListResponse,
+  ZeroTrustCertificates,
   CertificateDeleteResponse,
   CertificateCreateParams,
   CertificateUpdateParams,
   CertificateListParams,
   CertificateDeleteParams,
   CertificateGetParams,
+  ZeroTrustCertificatesSinglePage,
   Certificates,
 } from './certificates';
 export {
-  AccessSettings,
+  ZeroTrustSettings,
   SettingUpdateResponse,
   SettingGetResponse,
   SettingUpdateParams,

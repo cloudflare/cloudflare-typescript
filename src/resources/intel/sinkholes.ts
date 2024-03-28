@@ -3,22 +3,28 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as SinkholesAPI from 'cloudflare/resources/intel/sinkholes';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Sinkholes extends APIResource {
   /**
    * List sinkholes owned by this account
    */
-  list(params: SinkholeListParams, options?: Core.RequestOptions): Core.APIPromise<SinkholeListResponse> {
+  list(
+    params: SinkholeListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<IntelSinkholeItemsSinglePage, IntelSinkholeItem> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/intel/sinkholes`, options) as Core.APIPromise<{
-        result: SinkholeListResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/intel/sinkholes`,
+      IntelSinkholeItemsSinglePage,
+      options,
+    );
   }
 }
 
-export interface IntelSinkholesSinkholeItem {
+export class IntelSinkholeItemsSinglePage extends SinglePage<IntelSinkholeItem> {}
+
+export interface IntelSinkholeItem {
   /**
    * The unique identifier for the sinkhole
    */
@@ -55,8 +61,6 @@ export interface IntelSinkholesSinkholeItem {
   r2_id?: string;
 }
 
-export type SinkholeListResponse = Array<IntelSinkholesSinkholeItem>;
-
 export interface SinkholeListParams {
   /**
    * Identifier
@@ -65,7 +69,7 @@ export interface SinkholeListParams {
 }
 
 export namespace Sinkholes {
-  export import IntelSinkholesSinkholeItem = SinkholesAPI.IntelSinkholesSinkholeItem;
-  export import SinkholeListResponse = SinkholesAPI.SinkholeListResponse;
+  export import IntelSinkholeItem = SinkholesAPI.IntelSinkholeItem;
+  export import IntelSinkholeItemsSinglePage = SinkholesAPI.IntelSinkholeItemsSinglePage;
   export import SinkholeListParams = SinkholesAPI.SinkholeListParams;
 }

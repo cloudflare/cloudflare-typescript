@@ -1,18 +1,18 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  MagicVisibilityMNMRule,
-  RuleListResponse,
+  MagicNetworkMonitoringRule,
   RuleCreateParams,
   RuleUpdateParams,
   RuleListParams,
   RuleDeleteParams,
   RuleEditParams,
   RuleGetParams,
+  MagicNetworkMonitoringRulesSinglePage,
   Rules,
 } from './rules';
 export {
-  MagicVisibilityMNMRuleAdvertisable,
+  MagicNetworkMonitoringRuleAdvertisable,
   AdvertisementEditParams,
   Advertisements,
 } from './advertisements';

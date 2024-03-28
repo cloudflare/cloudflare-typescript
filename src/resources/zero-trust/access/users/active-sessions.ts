@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ActiveSessionsAPI from 'cloudflare/resources/zero-trust/access/users/active-sessions';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class ActiveSessions extends APIResource {
   /**
@@ -12,13 +13,12 @@ export class ActiveSessions extends APIResource {
     identifier: string,
     id: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ActiveSessionListResponse | null> {
-    return (
-      this._client.get(
-        `/accounts/${identifier}/access/users/${id}/active_sessions`,
-        options,
-      ) as Core.APIPromise<{ result: ActiveSessionListResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+  ): Core.PagePromise<ActiveSessionListResponsesSinglePage, ActiveSessionListResponse> {
+    return this._client.getAPIList(
+      `/accounts/${identifier}/access/users/${id}/active_sessions`,
+      ActiveSessionListResponsesSinglePage,
+      options,
+    );
   }
 
   /**
@@ -39,40 +39,38 @@ export class ActiveSessions extends APIResource {
   }
 }
 
-export type ActiveSessionListResponse = Array<ActiveSessionListResponse.ActiveSessionListResponseItem>;
+export class ActiveSessionListResponsesSinglePage extends SinglePage<ActiveSessionListResponse> {}
+
+export interface ActiveSessionListResponse {
+  expiration?: number;
+
+  metadata?: ActiveSessionListResponse.Metadata;
+
+  name?: string;
+}
 
 export namespace ActiveSessionListResponse {
-  export interface ActiveSessionListResponseItem {
-    expiration?: number;
+  export interface Metadata {
+    apps?: Record<string, Metadata.Apps>;
 
-    metadata?: ActiveSessionListResponseItem.Metadata;
+    expires?: number;
 
-    name?: string;
+    iat?: number;
+
+    nonce?: string;
+
+    ttl?: number;
   }
 
-  export namespace ActiveSessionListResponseItem {
-    export interface Metadata {
-      apps?: Record<string, Metadata.Apps>;
+  export namespace Metadata {
+    export interface Apps {
+      hostname?: string;
 
-      expires?: number;
+      name?: string;
 
-      iat?: number;
+      type?: string;
 
-      nonce?: string;
-
-      ttl?: number;
-    }
-
-    export namespace Metadata {
-      export interface Apps {
-        hostname?: string;
-
-        name?: string;
-
-        type?: string;
-
-        uid?: string;
-      }
+      uid?: string;
     }
   }
 }
@@ -176,4 +174,5 @@ export namespace ActiveSessionGetResponse {
 export namespace ActiveSessions {
   export import ActiveSessionListResponse = ActiveSessionsAPI.ActiveSessionListResponse;
   export import ActiveSessionGetResponse = ActiveSessionsAPI.ActiveSessionGetResponse;
+  export import ActiveSessionListResponsesSinglePage = ActiveSessionsAPI.ActiveSessionListResponsesSinglePage;
 }

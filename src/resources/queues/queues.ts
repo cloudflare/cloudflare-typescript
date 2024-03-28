@@ -5,6 +5,7 @@ import { APIResource } from 'cloudflare/resource';
 import * as QueuesAPI from 'cloudflare/resources/queues/queues';
 import * as ConsumersAPI from 'cloudflare/resources/queues/consumers';
 import * as MessagesAPI from 'cloudflare/resources/queues/messages';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Queues extends APIResource {
   consumers: ConsumersAPI.Consumers = new ConsumersAPI.Consumers(this._client);
@@ -45,13 +46,12 @@ export class Queues extends APIResource {
   /**
    * Returns the queues owned by an account.
    */
-  list(params: QueueListParams, options?: Core.RequestOptions): Core.APIPromise<QueueListResponse | null> {
+  list(
+    params: QueueListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<QueueListResponsesSinglePage, QueueListResponse> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/queues`, options) as Core.APIPromise<{
-        result: QueueListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(`/accounts/${account_id}/queues`, QueueListResponsesSinglePage, options);
   }
 
   /**
@@ -87,7 +87,9 @@ export class Queues extends APIResource {
   }
 }
 
-export interface WorkersQueue {
+export class QueueListResponsesSinglePage extends SinglePage<QueueListResponse> {}
+
+export interface Queue {
   consumers?: unknown;
 
   consumers_total_count?: unknown;
@@ -105,7 +107,7 @@ export interface WorkersQueue {
   queue_name?: string;
 }
 
-export interface WorkersQueueCreated {
+export interface QueueCreated {
   created_on?: unknown;
 
   modified_on?: unknown;
@@ -115,7 +117,7 @@ export interface WorkersQueueCreated {
   queue_name?: string;
 }
 
-export interface WorkersQueueUpdated {
+export interface QueueUpdated {
   created_on?: unknown;
 
   modified_on?: unknown;
@@ -145,26 +147,22 @@ export interface QueueUpdateResponse {
   queue_name?: string;
 }
 
-export type QueueListResponse = Array<QueueListResponse.QueueListResponseItem>;
+export interface QueueListResponse {
+  consumers?: unknown;
 
-export namespace QueueListResponse {
-  export interface QueueListResponseItem {
-    consumers?: unknown;
+  consumers_total_count?: unknown;
 
-    consumers_total_count?: unknown;
+  created_on?: unknown;
 
-    created_on?: unknown;
+  modified_on?: unknown;
 
-    modified_on?: unknown;
+  producers?: unknown;
 
-    producers?: unknown;
+  producers_total_count?: unknown;
 
-    producers_total_count?: unknown;
+  queue_id?: string;
 
-    queue_id?: string;
-
-    queue_name?: string;
-  }
+  queue_name?: string;
 }
 
 export type QueueDeleteResponse = unknown | Array<unknown> | string;
@@ -233,14 +231,15 @@ export interface QueueGetParams {
 }
 
 export namespace Queues {
-  export import WorkersQueue = QueuesAPI.WorkersQueue;
-  export import WorkersQueueCreated = QueuesAPI.WorkersQueueCreated;
-  export import WorkersQueueUpdated = QueuesAPI.WorkersQueueUpdated;
+  export import Queue = QueuesAPI.Queue;
+  export import QueueCreated = QueuesAPI.QueueCreated;
+  export import QueueUpdated = QueuesAPI.QueueUpdated;
   export import QueueCreateResponse = QueuesAPI.QueueCreateResponse;
   export import QueueUpdateResponse = QueuesAPI.QueueUpdateResponse;
   export import QueueListResponse = QueuesAPI.QueueListResponse;
   export import QueueDeleteResponse = QueuesAPI.QueueDeleteResponse;
   export import QueueGetResponse = QueuesAPI.QueueGetResponse;
+  export import QueueListResponsesSinglePage = QueuesAPI.QueueListResponsesSinglePage;
   export import QueueCreateParams = QueuesAPI.QueueCreateParams;
   export import QueueUpdateParams = QueuesAPI.QueueUpdateParams;
   export import QueueListParams = QueuesAPI.QueueListParams;
@@ -256,9 +255,9 @@ export namespace Queues {
   export import ConsumerDeleteParams = ConsumersAPI.ConsumerDeleteParams;
   export import ConsumerGetParams = ConsumersAPI.ConsumerGetParams;
   export import Messages = MessagesAPI.Messages;
-  export import WorkersConsumer = MessagesAPI.WorkersConsumer;
-  export import WorkersConsumerCreated = MessagesAPI.WorkersConsumerCreated;
-  export import WorkersConsumerUpdated = MessagesAPI.WorkersConsumerUpdated;
+  export import QueueConsumer = MessagesAPI.QueueConsumer;
+  export import QueueConsumerCreated = MessagesAPI.QueueConsumerCreated;
+  export import QueueConsumerUpdated = MessagesAPI.QueueConsumerUpdated;
   export import MessageAckResponse = MessagesAPI.MessageAckResponse;
   export import MessagePullResponse = MessagesAPI.MessagePullResponse;
   export import MessageAckParams = MessagesAPI.MessageAckParams;

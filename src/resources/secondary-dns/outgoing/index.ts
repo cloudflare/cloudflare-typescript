@@ -1,12 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  SecondaryDNSDisableTransferResult,
-  SecondaryDNSEnableTransferResult,
-  SecondaryDNSSchemasForceResult,
+  SecondaryDNSDisableTransfer,
+  SecondaryDNSEnableTransfer,
   OutgoingCreateResponse,
   OutgoingUpdateResponse,
   OutgoingDeleteResponse,
+  OutgoingForceNotifyResponse,
   OutgoingGetResponse,
   OutgoingCreateParams,
   OutgoingUpdateParams,

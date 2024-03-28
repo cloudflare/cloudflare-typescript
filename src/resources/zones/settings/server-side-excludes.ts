@@ -21,13 +21,13 @@ export class ServerSideExcludes extends APIResource {
   edit(
     params: ServerSideExcludeEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZonesServerSideExclude> {
+  ): Core.APIPromise<ZoneSettingServerSideExclude> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/server_side_exclude`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZonesServerSideExclude }>
+      }) as Core.APIPromise<{ result: ZoneSettingServerSideExclude }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -47,11 +47,11 @@ export class ServerSideExcludes extends APIResource {
   get(
     params: ServerSideExcludeGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZonesServerSideExclude> {
+  ): Core.APIPromise<ZoneSettingServerSideExclude> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/server_side_exclude`, options) as Core.APIPromise<{
-        result: ZonesServerSideExclude;
+        result: ZoneSettingServerSideExclude;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -70,7 +70,7 @@ export class ServerSideExcludes extends APIResource {
  * resource moves through our network to the visitor's computer.
  * (https://support.cloudflare.com/hc/en-us/articles/200170036).
  */
-export interface ZonesServerSideExclude {
+export interface ZoneSettingServerSideExclude {
   /**
    * ID of the zone setting.
    */
@@ -113,7 +113,7 @@ export interface ServerSideExcludeGetParams {
 }
 
 export namespace ServerSideExcludes {
-  export import ZonesServerSideExclude = ServerSideExcludesAPI.ZonesServerSideExclude;
+  export import ZoneSettingServerSideExclude = ServerSideExcludesAPI.ZoneSettingServerSideExclude;
   export import ServerSideExcludeEditParams = ServerSideExcludesAPI.ServerSideExcludeEditParams;
   export import ServerSideExcludeGetParams = ServerSideExcludesAPI.ServerSideExcludeGetParams;
 }

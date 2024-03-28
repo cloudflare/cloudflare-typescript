@@ -10,11 +10,11 @@ export class NEL extends APIResource {
    * Refer to our [blog post](http://blog.cloudflare.com/nel-solving-mobile-speed)
    * for more information.
    */
-  edit(params: NELEditParams, options?: Core.RequestOptions): Core.APIPromise<ZonesNEL> {
+  edit(params: NELEditParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingNEL> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/nel`, { body, ...options }) as Core.APIPromise<{
-        result: ZonesNEL;
+        result: ZoneSettingNEL;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -22,10 +22,12 @@ export class NEL extends APIResource {
   /**
    * Enable Network Error Logging reporting on your zone. (Beta)
    */
-  get(params: NELGetParams, options?: Core.RequestOptions): Core.APIPromise<ZonesNEL> {
+  get(params: NELGetParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingNEL> {
     const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zone_id}/settings/nel`, options) as Core.APIPromise<{ result: ZonesNEL }>
+      this._client.get(`/zones/${zone_id}/settings/nel`, options) as Core.APIPromise<{
+        result: ZoneSettingNEL;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -33,7 +35,7 @@ export class NEL extends APIResource {
 /**
  * Enable Network Error Logging reporting on your zone. (Beta)
  */
-export interface ZonesNEL {
+export interface ZoneSettingNEL {
   /**
    * Zone setting identifier.
    */
@@ -42,7 +44,7 @@ export interface ZonesNEL {
   /**
    * Current value of the zone setting.
    */
-  value: ZonesNEL.Value;
+  value: ZoneSettingNEL.Value;
 
   /**
    * Whether or not this setting can be modified for this zone (based on your
@@ -56,7 +58,7 @@ export interface ZonesNEL {
   modified_on?: string | null;
 }
 
-export namespace ZonesNEL {
+export namespace ZoneSettingNEL {
   /**
    * Current value of the zone setting.
    */
@@ -74,7 +76,7 @@ export interface NELEditParams {
   /**
    * Body param: Enable Network Error Logging reporting on your zone. (Beta)
    */
-  value: ZonesNEL;
+  value: ZoneSettingNEL;
 }
 
 export interface NELGetParams {
@@ -85,7 +87,7 @@ export interface NELGetParams {
 }
 
 export namespace NEL {
-  export import ZonesNEL = NELAPI.ZonesNEL;
+  export import ZoneSettingNEL = NELAPI.ZoneSettingNEL;
   export import NELEditParams = NELAPI.NELEditParams;
   export import NELGetParams = NELAPI.NELGetParams;
 }

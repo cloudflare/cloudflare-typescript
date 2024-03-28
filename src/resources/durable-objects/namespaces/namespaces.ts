@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as NamespacesAPI from 'cloudflare/resources/durable-objects/namespaces/namespaces';
 import * as ObjectsAPI from 'cloudflare/resources/durable-objects/namespaces/objects';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Namespaces extends APIResource {
   objects: ObjectsAPI.Objects = new ObjectsAPI.Objects(this._client);
@@ -14,18 +15,19 @@ export class Namespaces extends APIResource {
   list(
     params: NamespaceListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<NamespaceListResponse | null> {
+  ): Core.PagePromise<DurableObjectNamespacesSinglePage, DurableObjectNamespace> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/workers/durable_objects/namespaces`,
-        options,
-      ) as Core.APIPromise<{ result: NamespaceListResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/workers/durable_objects/namespaces`,
+      DurableObjectNamespacesSinglePage,
+      options,
+    );
   }
 }
 
-export interface WorkersNamespace {
+export class DurableObjectNamespacesSinglePage extends SinglePage<DurableObjectNamespace> {}
+
+export interface DurableObjectNamespace {
   id?: unknown;
 
   class?: unknown;
@@ -35,8 +37,6 @@ export interface WorkersNamespace {
   script?: unknown;
 }
 
-export type NamespaceListResponse = Array<WorkersNamespace>;
-
 export interface NamespaceListParams {
   /**
    * Identifier
@@ -45,11 +45,11 @@ export interface NamespaceListParams {
 }
 
 export namespace Namespaces {
-  export import WorkersNamespace = NamespacesAPI.WorkersNamespace;
-  export import NamespaceListResponse = NamespacesAPI.NamespaceListResponse;
+  export import DurableObjectNamespace = NamespacesAPI.DurableObjectNamespace;
+  export import DurableObjectNamespacesSinglePage = NamespacesAPI.DurableObjectNamespacesSinglePage;
   export import NamespaceListParams = NamespacesAPI.NamespaceListParams;
   export import Objects = ObjectsAPI.Objects;
-  export import WorkersObject = ObjectsAPI.WorkersObject;
-  export import WorkersObjectsCursorLimitPagination = ObjectsAPI.WorkersObjectsCursorLimitPagination;
+  export import DurableObject = ObjectsAPI.DurableObject;
+  export import DurableObjectsCursorLimitPagination = ObjectsAPI.DurableObjectsCursorLimitPagination;
   export import ObjectListParams = ObjectsAPI.ObjectListParams;
 }

@@ -13,10 +13,10 @@ export class AccessRules extends APIResource {
    * Note: To create an IP Access rule that applies to a specific zone, refer to the
    * [IP Access rules for a zone](#ip-access-rules-for-a-zone) endpoints.
    */
-  create(body: AccessRuleCreateParams, options?: Core.RequestOptions): Core.APIPromise<LegacyJhsRule | null> {
+  create(body: AccessRuleCreateParams, options?: Core.RequestOptions): Core.APIPromise<FirewallRule | null> {
     return (
       this._client.post('/user/firewall/access_rules/rules', { body, ...options }) as Core.APIPromise<{
-        result: LegacyJhsRule | null;
+        result: FirewallRule | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -28,16 +28,16 @@ export class AccessRules extends APIResource {
   list(
     query?: AccessRuleListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<LegacyJhsRulesV4PagePaginationArray, LegacyJhsRule>;
-  list(options?: Core.RequestOptions): Core.PagePromise<LegacyJhsRulesV4PagePaginationArray, LegacyJhsRule>;
+  ): Core.PagePromise<FirewallRulesV4PagePaginationArray, FirewallRule>;
+  list(options?: Core.RequestOptions): Core.PagePromise<FirewallRulesV4PagePaginationArray, FirewallRule>;
   list(
     query: AccessRuleListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<LegacyJhsRulesV4PagePaginationArray, LegacyJhsRule> {
+  ): Core.PagePromise<FirewallRulesV4PagePaginationArray, FirewallRule> {
     if (isRequestOptions(query)) {
       return this.list({}, query);
     }
-    return this._client.getAPIList('/user/firewall/access_rules/rules', LegacyJhsRulesV4PagePaginationArray, {
+    return this._client.getAPIList('/user/firewall/access_rules/rules', FirewallRulesV4PagePaginationArray, {
       query,
       ...options,
     });
@@ -67,19 +67,19 @@ export class AccessRules extends APIResource {
     identifier: string,
     body: AccessRuleEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LegacyJhsRule | null> {
+  ): Core.APIPromise<FirewallRule | null> {
     return (
       this._client.patch(`/user/firewall/access_rules/rules/${identifier}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: LegacyJhsRule | null }>
+      }) as Core.APIPromise<{ result: FirewallRule | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class LegacyJhsRulesV4PagePaginationArray extends V4PagePaginationArray<LegacyJhsRule> {}
+export class FirewallRulesV4PagePaginationArray extends V4PagePaginationArray<FirewallRule> {}
 
-export interface LegacyJhsRule {
+export interface FirewallRule {
   /**
    * The unique identifier of the IP Access rule.
    */
@@ -94,11 +94,11 @@ export interface LegacyJhsRule {
    * The rule configuration.
    */
   configuration:
-    | LegacyJhsRule.LegacyJhsIPConfiguration
-    | LegacyJhsRule.LegacyJhsIPV6Configuration
-    | LegacyJhsRule.LegacyJhsCIDRConfiguration
-    | LegacyJhsRule.LegacyJhsASNConfiguration
-    | LegacyJhsRule.LegacyJhsCountryConfiguration;
+    | FirewallRule.LegacyJhsIPConfiguration
+    | FirewallRule.LegacyJhsIPV6Configuration
+    | FirewallRule.LegacyJhsCIDRConfiguration
+    | FirewallRule.LegacyJhsASNConfiguration
+    | FirewallRule.LegacyJhsCountryConfiguration;
 
   /**
    * The action to apply to a matched request.
@@ -121,7 +121,7 @@ export interface LegacyJhsRule {
   notes?: string;
 }
 
-export namespace LegacyJhsRule {
+export namespace FirewallRule {
   export interface LegacyJhsIPConfiguration {
     /**
      * The configuration target. You must set the target to `ip` when specifying an IP
@@ -373,9 +373,9 @@ export interface AccessRuleEditParams {
 }
 
 export namespace AccessRules {
-  export import LegacyJhsRule = AccessRulesAPI.LegacyJhsRule;
+  export import FirewallRule = AccessRulesAPI.FirewallRule;
   export import AccessRuleDeleteResponse = AccessRulesAPI.AccessRuleDeleteResponse;
-  export import LegacyJhsRulesV4PagePaginationArray = AccessRulesAPI.LegacyJhsRulesV4PagePaginationArray;
+  export import FirewallRulesV4PagePaginationArray = AccessRulesAPI.FirewallRulesV4PagePaginationArray;
   export import AccessRuleCreateParams = AccessRulesAPI.AccessRuleCreateParams;
   export import AccessRuleListParams = AccessRulesAPI.AccessRuleListParams;
   export import AccessRuleEditParams = AccessRulesAPI.AccessRuleEditParams;

@@ -6,6 +6,7 @@ import * as MonitorsAPI from 'cloudflare/resources/load-balancers/monitors/monit
 import * as PreviewsAPI from 'cloudflare/resources/load-balancers/monitors/previews';
 import * as ReferencesAPI from 'cloudflare/resources/load-balancers/monitors/references';
 import * as LoadBalancersMonitorsAPI from 'cloudflare/resources/user/load-balancers/monitors';
+import { LoadBalancingMonitorsSinglePage } from 'cloudflare/resources/user/load-balancers/monitors';
 
 export class Monitors extends APIResource {
   previews: PreviewsAPI.Previews = new PreviewsAPI.Previews(this._client);
@@ -50,13 +51,13 @@ export class Monitors extends APIResource {
   list(
     params: MonitorListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MonitorListResponse | null> {
+  ): Core.PagePromise<LoadBalancingMonitorsSinglePage, LoadBalancersMonitorsAPI.LoadBalancingMonitor> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/load_balancers/monitors`, options) as Core.APIPromise<{
-        result: MonitorListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/load_balancers/monitors`,
+      LoadBalancingMonitorsSinglePage,
+      options,
+    );
   }
 
   /**
@@ -110,8 +111,6 @@ export class Monitors extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
-
-export type MonitorListResponse = Array<LoadBalancersMonitorsAPI.LoadBalancingMonitor>;
 
 export interface MonitorDeleteResponse {
   id?: string;
@@ -457,7 +456,6 @@ export interface MonitorGetParams {
 }
 
 export namespace Monitors {
-  export import MonitorListResponse = MonitorsAPI.MonitorListResponse;
   export import MonitorDeleteResponse = MonitorsAPI.MonitorDeleteResponse;
   export import MonitorCreateParams = MonitorsAPI.MonitorCreateParams;
   export import MonitorUpdateParams = MonitorsAPI.MonitorUpdateParams;
@@ -472,3 +470,5 @@ export namespace Monitors {
   export import ReferenceGetResponse = ReferencesAPI.ReferenceGetResponse;
   export import ReferenceGetParams = ReferencesAPI.ReferenceGetParams;
 }
+
+export { LoadBalancingMonitorsSinglePage };

@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as IndexesAPI from 'cloudflare/resources/vectorize/indexes';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Indexes extends APIResource {
   /**
@@ -41,12 +42,15 @@ export class Indexes extends APIResource {
   /**
    * Returns a list of Vectorize Indexes
    */
-  list(accountIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<IndexListResponse> {
-    return (
-      this._client.get(`/accounts/${accountIdentifier}/vectorize/indexes`, options) as Core.APIPromise<{
-        result: IndexListResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+  list(
+    accountIdentifier: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<VectorizeCreateIndicesSinglePage, VectorizeCreateIndex> {
+    return this._client.getAPIList(
+      `/accounts/${accountIdentifier}/vectorize/indexes`,
+      VectorizeCreateIndicesSinglePage,
+      options,
+    );
   }
 
   /**
@@ -169,6 +173,8 @@ export class Indexes extends APIResource {
   }
 }
 
+export class VectorizeCreateIndicesSinglePage extends SinglePage<VectorizeCreateIndex> {}
+
 export interface VectorizeCreateIndex {
   config?: VectorizeCreateIndex.Config;
 
@@ -270,8 +276,6 @@ export interface VectorizeIndexUpsert {
    */
   ids?: Array<string>;
 }
-
-export type IndexListResponse = Array<VectorizeCreateIndex>;
 
 export type IndexDeleteResponse = unknown | string;
 
@@ -375,9 +379,9 @@ export namespace Indexes {
   export import VectorizeIndexInsert = IndexesAPI.VectorizeIndexInsert;
   export import VectorizeIndexQuery = IndexesAPI.VectorizeIndexQuery;
   export import VectorizeIndexUpsert = IndexesAPI.VectorizeIndexUpsert;
-  export import IndexListResponse = IndexesAPI.IndexListResponse;
   export import IndexDeleteResponse = IndexesAPI.IndexDeleteResponse;
   export import IndexGetByIDsResponse = IndexesAPI.IndexGetByIDsResponse;
+  export import VectorizeCreateIndicesSinglePage = IndexesAPI.VectorizeCreateIndicesSinglePage;
   export import IndexCreateParams = IndexesAPI.IndexCreateParams;
   export import IndexUpdateParams = IndexesAPI.IndexUpdateParams;
   export import IndexDeleteByIDsParams = IndexesAPI.IndexDeleteByIDsParams;

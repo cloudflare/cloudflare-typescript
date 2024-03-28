@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as TagsAPI from 'cloudflare/resources/zero-trust/access/tags';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Tags extends APIResource {
   /**
@@ -12,10 +13,10 @@ export class Tags extends APIResource {
     identifier: string,
     body: TagCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessTag> {
+  ): Core.APIPromise<ZeroTrustTag> {
     return (
       this._client.post(`/accounts/${identifier}/access/tags`, { body, ...options }) as Core.APIPromise<{
-        result: AccessTag;
+        result: ZeroTrustTag;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -28,24 +29,23 @@ export class Tags extends APIResource {
     tagName: string,
     body: TagUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessTag> {
+  ): Core.APIPromise<ZeroTrustTag> {
     return (
       this._client.put(`/accounts/${identifier}/access/tags/${tagName}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: AccessTag }>
+      }) as Core.APIPromise<{ result: ZeroTrustTag }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List tags
    */
-  list(identifier: string, options?: Core.RequestOptions): Core.APIPromise<TagListResponse | null> {
-    return (
-      this._client.get(`/accounts/${identifier}/access/tags`, options) as Core.APIPromise<{
-        result: TagListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+  list(
+    identifier: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ZeroTrustTagsSinglePage, ZeroTrustTag> {
+    return this._client.getAPIList(`/accounts/${identifier}/access/tags`, ZeroTrustTagsSinglePage, options);
   }
 
   /**
@@ -66,19 +66,21 @@ export class Tags extends APIResource {
   /**
    * Get a tag
    */
-  get(identifier: string, name: string, options?: Core.RequestOptions): Core.APIPromise<AccessTag> {
+  get(identifier: string, name: string, options?: Core.RequestOptions): Core.APIPromise<ZeroTrustTag> {
     return (
       this._client.get(`/accounts/${identifier}/access/tags/${name}`, options) as Core.APIPromise<{
-        result: AccessTag;
+        result: ZeroTrustTag;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
+export class ZeroTrustTagsSinglePage extends SinglePage<ZeroTrustTag> {}
+
 /**
  * A tag
  */
-export interface AccessTag {
+export interface ZeroTrustTag {
   /**
    * The name of the tag
    */
@@ -93,8 +95,6 @@ export interface AccessTag {
 
   updated_at?: string;
 }
-
-export type TagListResponse = Array<AccessTag>;
 
 export interface TagDeleteResponse {
   /**
@@ -118,9 +118,9 @@ export interface TagUpdateParams {
 }
 
 export namespace Tags {
-  export import AccessTag = TagsAPI.AccessTag;
-  export import TagListResponse = TagsAPI.TagListResponse;
+  export import ZeroTrustTag = TagsAPI.ZeroTrustTag;
   export import TagDeleteResponse = TagsAPI.TagDeleteResponse;
+  export import ZeroTrustTagsSinglePage = TagsAPI.ZeroTrustTagsSinglePage;
   export import TagCreateParams = TagsAPI.TagCreateParams;
   export import TagUpdateParams = TagsAPI.TagUpdateParams;
 }

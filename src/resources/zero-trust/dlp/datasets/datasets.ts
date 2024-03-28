@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as DatasetsAPI from 'cloudflare/resources/zero-trust/dlp/datasets/datasets';
 import * as UploadAPI from 'cloudflare/resources/zero-trust/dlp/datasets/upload';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Datasets extends APIResource {
   upload: UploadAPI.Upload = new UploadAPI.Upload(this._client);
@@ -40,13 +41,12 @@ export class Datasets extends APIResource {
   /**
    * Fetch all datasets with information about available versions.
    */
-  list(params: DatasetListParams, options?: Core.RequestOptions): Core.APIPromise<DLPDatasetArray> {
+  list(
+    params: DatasetListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<DLPDatasetsSinglePage, DLPDataset> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/dlp/datasets`, options) as Core.APIPromise<{
-        result: DLPDatasetArray;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(`/accounts/${account_id}/dlp/datasets`, DLPDatasetsSinglePage, options);
   }
 
   /**
@@ -82,6 +82,8 @@ export class Datasets extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class DLPDatasetsSinglePage extends SinglePage<DLPDataset> {}
 
 export interface DLPDataset {
   id: string;
@@ -190,6 +192,7 @@ export namespace Datasets {
   export import DLPDataset = DatasetsAPI.DLPDataset;
   export import DLPDatasetArray = DatasetsAPI.DLPDatasetArray;
   export import DLPDatasetCreation = DatasetsAPI.DLPDatasetCreation;
+  export import DLPDatasetsSinglePage = DatasetsAPI.DLPDatasetsSinglePage;
   export import DatasetCreateParams = DatasetsAPI.DatasetCreateParams;
   export import DatasetUpdateParams = DatasetsAPI.DatasetUpdateParams;
   export import DatasetListParams = DatasetsAPI.DatasetListParams;

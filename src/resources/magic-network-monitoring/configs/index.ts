@@ -2,7 +2,7 @@
 
 export { FullGetParams, Full } from './full';
 export {
-  MagicVisibilityMNMConfig,
+  MagicNetworkMonitoringConfig,
   ConfigCreateParams,
   ConfigUpdateParams,
   ConfigDeleteParams,

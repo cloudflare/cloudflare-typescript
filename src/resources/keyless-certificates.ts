@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as KeylessCertificatesAPI from 'cloudflare/resources/keyless-certificates';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class KeylessCertificates extends APIResource {
   /**
@@ -11,11 +12,11 @@ export class KeylessCertificates extends APIResource {
   create(
     params: KeylessCertificateCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TLSCertificatesAndHostnamesBase> {
+  ): Core.APIPromise<KeylessCertificateHostname> {
     const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/keyless_certificates`, { body, ...options }) as Core.APIPromise<{
-        result: TLSCertificatesAndHostnamesBase;
+        result: KeylessCertificateHostname;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -26,13 +27,13 @@ export class KeylessCertificates extends APIResource {
   list(
     params: KeylessCertificateListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<KeylessCertificateListResponse | null> {
+  ): Core.PagePromise<KeylessCertificateHostnamesSinglePage, KeylessCertificateHostname> {
     const { zone_id } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/keyless_certificates`, options) as Core.APIPromise<{
-        result: KeylessCertificateListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/zones/${zone_id}/keyless_certificates`,
+      KeylessCertificateHostnamesSinglePage,
+      options,
+    );
   }
 
   /**
@@ -60,13 +61,13 @@ export class KeylessCertificates extends APIResource {
     keylessCertificateId: string,
     params: KeylessCertificateEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TLSCertificatesAndHostnamesBase> {
+  ): Core.APIPromise<KeylessCertificateHostname> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/keyless_certificates/${keylessCertificateId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: TLSCertificatesAndHostnamesBase }>
+      }) as Core.APIPromise<{ result: KeylessCertificateHostname }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -77,18 +78,20 @@ export class KeylessCertificates extends APIResource {
     keylessCertificateId: string,
     params: KeylessCertificateGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TLSCertificatesAndHostnamesBase> {
+  ): Core.APIPromise<KeylessCertificateHostname> {
     const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/keyless_certificates/${keylessCertificateId}`,
         options,
-      ) as Core.APIPromise<{ result: TLSCertificatesAndHostnamesBase }>
+      ) as Core.APIPromise<{ result: KeylessCertificateHostname }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface TLSCertificatesAndHostnamesBase {
+export class KeylessCertificateHostnamesSinglePage extends SinglePage<KeylessCertificateHostname> {}
+
+export interface KeylessCertificate {
   /**
    * Keyless certificate identifier tag.
    */
@@ -139,10 +142,10 @@ export interface TLSCertificatesAndHostnamesBase {
   /**
    * Configuration for using Keyless SSL through a Cloudflare Tunnel
    */
-  tunnel?: TLSCertificatesAndHostnamesBase.Tunnel;
+  tunnel?: KeylessCertificate.Tunnel;
 }
 
-export namespace TLSCertificatesAndHostnamesBase {
+export namespace KeylessCertificate {
   /**
    * Configuration for using Keyless SSL through a Cloudflare Tunnel
    */
@@ -159,7 +162,7 @@ export namespace TLSCertificatesAndHostnamesBase {
   }
 }
 
-export interface TLSCertificatesAndHostnamesKeylessCertificate {
+export interface KeylessCertificateHostname {
   /**
    * Keyless certificate identifier tag.
    */
@@ -210,10 +213,10 @@ export interface TLSCertificatesAndHostnamesKeylessCertificate {
   /**
    * Configuration for using Keyless SSL through a Cloudflare Tunnel
    */
-  tunnel?: TLSCertificatesAndHostnamesKeylessCertificate.Tunnel;
+  tunnel?: KeylessCertificateHostname.Tunnel;
 }
 
-export namespace TLSCertificatesAndHostnamesKeylessCertificate {
+export namespace KeylessCertificateHostname {
   /**
    * Configuration for using Keyless SSL through a Cloudflare Tunnel
    */
@@ -229,8 +232,6 @@ export namespace TLSCertificatesAndHostnamesKeylessCertificate {
     vnet_id: string;
   }
 }
-
-export type KeylessCertificateListResponse = Array<TLSCertificatesAndHostnamesBase>;
 
 export interface KeylessCertificateDeleteResponse {
   /**
@@ -369,10 +370,10 @@ export interface KeylessCertificateGetParams {
 }
 
 export namespace KeylessCertificates {
-  export import TLSCertificatesAndHostnamesBase = KeylessCertificatesAPI.TLSCertificatesAndHostnamesBase;
-  export import TLSCertificatesAndHostnamesKeylessCertificate = KeylessCertificatesAPI.TLSCertificatesAndHostnamesKeylessCertificate;
-  export import KeylessCertificateListResponse = KeylessCertificatesAPI.KeylessCertificateListResponse;
+  export import KeylessCertificate = KeylessCertificatesAPI.KeylessCertificate;
+  export import KeylessCertificateHostname = KeylessCertificatesAPI.KeylessCertificateHostname;
   export import KeylessCertificateDeleteResponse = KeylessCertificatesAPI.KeylessCertificateDeleteResponse;
+  export import KeylessCertificateHostnamesSinglePage = KeylessCertificatesAPI.KeylessCertificateHostnamesSinglePage;
   export import KeylessCertificateCreateParams = KeylessCertificatesAPI.KeylessCertificateCreateParams;
   export import KeylessCertificateListParams = KeylessCertificatesAPI.KeylessCertificateListParams;
   export import KeylessCertificateDeleteParams = KeylessCertificatesAPI.KeylessCertificateDeleteParams;

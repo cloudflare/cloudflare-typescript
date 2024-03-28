@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as VirtualNetworksAPI from 'cloudflare/resources/zero-trust/networks/virtual-networks';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class VirtualNetworks extends APIResource {
   /**
@@ -27,14 +28,13 @@ export class VirtualNetworks extends APIResource {
   list(
     params: VirtualNetworkListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<VirtualNetworkListResponse | null> {
+  ): Core.PagePromise<TunnelVirtualNetworksSinglePage, TunnelVirtualNetwork> {
     const { account_id, ...query } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/teamnet/virtual_networks`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: VirtualNetworkListResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/teamnet/virtual_networks`,
+      TunnelVirtualNetworksSinglePage,
+      { query, ...options },
+    );
   }
 
   /**
@@ -72,6 +72,8 @@ export class VirtualNetworks extends APIResource {
   }
 }
 
+export class TunnelVirtualNetworksSinglePage extends SinglePage<TunnelVirtualNetwork> {}
+
 export interface TunnelVirtualNetwork {
   /**
    * UUID of the virtual network.
@@ -106,8 +108,6 @@ export interface TunnelVirtualNetwork {
 }
 
 export type VirtualNetworkCreateResponse = unknown | Array<unknown> | string;
-
-export type VirtualNetworkListResponse = Array<TunnelVirtualNetwork>;
 
 export type VirtualNetworkDeleteResponse = unknown | Array<unknown> | string;
 
@@ -198,9 +198,9 @@ export interface VirtualNetworkEditParams {
 export namespace VirtualNetworks {
   export import TunnelVirtualNetwork = VirtualNetworksAPI.TunnelVirtualNetwork;
   export import VirtualNetworkCreateResponse = VirtualNetworksAPI.VirtualNetworkCreateResponse;
-  export import VirtualNetworkListResponse = VirtualNetworksAPI.VirtualNetworkListResponse;
   export import VirtualNetworkDeleteResponse = VirtualNetworksAPI.VirtualNetworkDeleteResponse;
   export import VirtualNetworkEditResponse = VirtualNetworksAPI.VirtualNetworkEditResponse;
+  export import TunnelVirtualNetworksSinglePage = VirtualNetworksAPI.TunnelVirtualNetworksSinglePage;
   export import VirtualNetworkCreateParams = VirtualNetworksAPI.VirtualNetworkCreateParams;
   export import VirtualNetworkListParams = VirtualNetworksAPI.VirtualNetworkListParams;
   export import VirtualNetworkDeleteParams = VirtualNetworksAPI.VirtualNetworkDeleteParams;

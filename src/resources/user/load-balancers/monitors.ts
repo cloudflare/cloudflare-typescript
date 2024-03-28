@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as MonitorsAPI from 'cloudflare/resources/user/load-balancers/monitors';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Monitors extends APIResource {
   /**
@@ -35,12 +36,10 @@ export class Monitors extends APIResource {
   /**
    * List configured monitors for a user.
    */
-  list(options?: Core.RequestOptions): Core.APIPromise<MonitorListResponse | null> {
-    return (
-      this._client.get('/user/load_balancers/monitors', options) as Core.APIPromise<{
-        result: MonitorListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<LoadBalancingMonitorsSinglePage, LoadBalancingMonitor> {
+    return this._client.getAPIList('/user/load_balancers/monitors', LoadBalancingMonitorsSinglePage, options);
   }
 
   /**
@@ -112,6 +111,8 @@ export class Monitors extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class LoadBalancingMonitorsSinglePage extends SinglePage<LoadBalancingMonitor> {}
 
 export interface LoadBalancingMonitor {
   id?: string;
@@ -217,8 +218,6 @@ export interface LoadBalancingMonitor {
    */
   type?: 'http' | 'https' | 'tcp' | 'udp_icmp' | 'icmp_ping' | 'smtp';
 }
-
-export type MonitorListResponse = Array<LoadBalancingMonitor>;
 
 export interface MonitorDeleteResponse {
   id?: string;
@@ -648,10 +647,10 @@ export interface MonitorPreviewParams {
 
 export namespace Monitors {
   export import LoadBalancingMonitor = MonitorsAPI.LoadBalancingMonitor;
-  export import MonitorListResponse = MonitorsAPI.MonitorListResponse;
   export import MonitorDeleteResponse = MonitorsAPI.MonitorDeleteResponse;
   export import MonitorPreviewResponse = MonitorsAPI.MonitorPreviewResponse;
   export import MonitorReferencesResponse = MonitorsAPI.MonitorReferencesResponse;
+  export import LoadBalancingMonitorsSinglePage = MonitorsAPI.LoadBalancingMonitorsSinglePage;
   export import MonitorCreateParams = MonitorsAPI.MonitorCreateParams;
   export import MonitorUpdateParams = MonitorsAPI.MonitorUpdateParams;
   export import MonitorEditParams = MonitorsAPI.MonitorEditParams;

@@ -8,11 +8,11 @@ export class PseudoIPV4 extends APIResource {
   /**
    * Value of the Pseudo IPv4 setting.
    */
-  edit(params: PseudoIPV4EditParams, options?: Core.RequestOptions): Core.APIPromise<ZonesPseudoIPV4> {
+  edit(params: PseudoIPV4EditParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingPseudoIPV4> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/pseudo_ipv4`, { body, ...options }) as Core.APIPromise<{
-        result: ZonesPseudoIPV4;
+        result: ZoneSettingPseudoIPV4;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -20,11 +20,11 @@ export class PseudoIPV4 extends APIResource {
   /**
    * Value of the Pseudo IPv4 setting.
    */
-  get(params: PseudoIPV4GetParams, options?: Core.RequestOptions): Core.APIPromise<ZonesPseudoIPV4> {
+  get(params: PseudoIPV4GetParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingPseudoIPV4> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/pseudo_ipv4`, options) as Core.APIPromise<{
-        result: ZonesPseudoIPV4;
+        result: ZoneSettingPseudoIPV4;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -33,7 +33,7 @@ export class PseudoIPV4 extends APIResource {
 /**
  * The value set for the Pseudo IPv4 setting.
  */
-export interface ZonesPseudoIPV4 {
+export interface ZoneSettingPseudoIPV4 {
   /**
    * Value of the Pseudo IPv4 setting.
    */
@@ -76,7 +76,7 @@ export interface PseudoIPV4GetParams {
 }
 
 export namespace PseudoIPV4 {
-  export import ZonesPseudoIPV4 = PseudoIPV4API.ZonesPseudoIPV4;
+  export import ZoneSettingPseudoIPV4 = PseudoIPV4API.ZoneSettingPseudoIPV4;
   export import PseudoIPV4EditParams = PseudoIPV4API.PseudoIPV4EditParams;
   export import PseudoIPV4GetParams = PseudoIPV4API.PseudoIPV4GetParams;
 }

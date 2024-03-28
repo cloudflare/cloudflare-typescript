@@ -2,18 +2,7 @@
 
 export { BlobGetParams, Blobs } from './blobs';
 export {
-  ImageVariant,
-  ImageVariants,
-  VariantDeleteResponse,
-  VariantCreateParams,
-  VariantListParams,
-  VariantDeleteParams,
-  VariantEditParams,
-  VariantGetParams,
-  Variants,
-} from './variants';
-export {
-  ImagesImage,
+  Image,
   V1ListResponse,
   V1DeleteResponse,
   V1CreateParams,
@@ -26,3 +15,14 @@ export {
 } from './v1';
 export { ImagesImageKeys, KeyUpdateParams, KeyListParams, KeyDeleteParams, Keys } from './keys';
 export { ImagesImagesStats, StatGetParams, Stats } from './stats';
+export {
+  V1ImageVariant,
+  V1ImageVariants,
+  VariantDeleteResponse,
+  VariantCreateParams,
+  VariantListParams,
+  VariantDeleteParams,
+  VariantEditParams,
+  VariantGetParams,
+  Variants,
+} from './variants';

@@ -3,17 +3,21 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as PlansAPI from 'cloudflare/resources/plans';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Plans extends APIResource {
   /**
    * Lists available plans the zone can subscribe to.
    */
-  list(zoneIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<PlanListResponse | null> {
-    return (
-      this._client.get(`/zones/${zoneIdentifier}/available_plans`, options) as Core.APIPromise<{
-        result: PlanListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+  list(
+    zoneIdentifier: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<AvailableRatePlansSinglePage, AvailableRatePlan> {
+    return this._client.getAPIList(
+      `/zones/${zoneIdentifier}/available_plans`,
+      AvailableRatePlansSinglePage,
+      options,
+    );
   }
 
   /**
@@ -23,17 +27,19 @@ export class Plans extends APIResource {
     zoneIdentifier: string,
     planIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<BillSubsAPIAvailableRatePlan> {
+  ): Core.APIPromise<AvailableRatePlan> {
     return (
       this._client.get(
         `/zones/${zoneIdentifier}/available_plans/${planIdentifier}`,
         options,
-      ) as Core.APIPromise<{ result: BillSubsAPIAvailableRatePlan }>
+      ) as Core.APIPromise<{ result: AvailableRatePlan }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface BillSubsAPIAvailableRatePlan {
+export class AvailableRatePlansSinglePage extends SinglePage<AvailableRatePlan> {}
+
+export interface AvailableRatePlan {
   /**
    * Identifier
    */
@@ -85,9 +91,7 @@ export interface BillSubsAPIAvailableRatePlan {
   price?: number;
 }
 
-export type PlanListResponse = Array<BillSubsAPIAvailableRatePlan>;
-
 export namespace Plans {
-  export import BillSubsAPIAvailableRatePlan = PlansAPI.BillSubsAPIAvailableRatePlan;
-  export import PlanListResponse = PlansAPI.PlanListResponse;
+  export import AvailableRatePlan = PlansAPI.AvailableRatePlan;
+  export import AvailableRatePlansSinglePage = PlansAPI.AvailableRatePlansSinglePage;
 }

@@ -16,13 +16,14 @@ export class Addressing extends APIResource {
 export namespace Addressing {
   export import Services = ServicesAPI.Services;
   export import ServiceListResponse = ServicesAPI.ServiceListResponse;
+  export import ServiceListResponsesSinglePage = ServicesAPI.ServiceListResponsesSinglePage;
   export import ServiceListParams = ServicesAPI.ServiceListParams;
   export import AddressMaps = AddressMapsAPI.AddressMaps;
   export import AddressingAddressMaps = AddressMapsAPI.AddressingAddressMaps;
   export import AddressMapCreateResponse = AddressMapsAPI.AddressMapCreateResponse;
-  export import AddressMapListResponse = AddressMapsAPI.AddressMapListResponse;
   export import AddressMapDeleteResponse = AddressMapsAPI.AddressMapDeleteResponse;
   export import AddressMapGetResponse = AddressMapsAPI.AddressMapGetResponse;
+  export import AddressingAddressMapsSinglePage = AddressMapsAPI.AddressingAddressMapsSinglePage;
   export import AddressMapCreateParams = AddressMapsAPI.AddressMapCreateParams;
   export import AddressMapListParams = AddressMapsAPI.AddressMapListParams;
   export import AddressMapDeleteParams = AddressMapsAPI.AddressMapDeleteParams;
@@ -33,8 +34,8 @@ export namespace Addressing {
   export import LOADocumentCreateParams = LOADocumentsAPI.LOADocumentCreateParams;
   export import Prefixes = PrefixesAPI.Prefixes;
   export import AddressingIpamPrefixes = PrefixesAPI.AddressingIpamPrefixes;
-  export import PrefixListResponse = PrefixesAPI.PrefixListResponse;
   export import PrefixDeleteResponse = PrefixesAPI.PrefixDeleteResponse;
+  export import AddressingIpamPrefixesSinglePage = PrefixesAPI.AddressingIpamPrefixesSinglePage;
   export import PrefixCreateParams = PrefixesAPI.PrefixCreateParams;
   export import PrefixListParams = PrefixesAPI.PrefixListParams;
   export import PrefixDeleteParams = PrefixesAPI.PrefixDeleteParams;

@@ -12,11 +12,11 @@ export class CacheLevel extends APIResource {
    * aggressive setting will cache all static resources, including ones with a query
    * string. (https://support.cloudflare.com/hc/en-us/articles/200168256).
    */
-  edit(params: CacheLevelEditParams, options?: Core.RequestOptions): Core.APIPromise<ZonesCacheLevel> {
+  edit(params: CacheLevelEditParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingCacheLevel> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/cache_level`, { body, ...options }) as Core.APIPromise<{
-        result: ZonesCacheLevel;
+        result: ZoneSettingCacheLevel;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -28,11 +28,11 @@ export class CacheLevel extends APIResource {
    * aggressive setting will cache all static resources, including ones with a query
    * string. (https://support.cloudflare.com/hc/en-us/articles/200168256).
    */
-  get(params: CacheLevelGetParams, options?: Core.RequestOptions): Core.APIPromise<ZonesCacheLevel> {
+  get(params: CacheLevelGetParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingCacheLevel> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/cache_level`, options) as Core.APIPromise<{
-        result: ZonesCacheLevel;
+        result: ZoneSettingCacheLevel;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -45,7 +45,7 @@ export class CacheLevel extends APIResource {
  * aggressive setting will cache all static resources, including ones with a query
  * string. (https://support.cloudflare.com/hc/en-us/articles/200168256).
  */
-export interface ZonesCacheLevel {
+export interface ZoneSettingCacheLevel {
   /**
    * ID of the zone setting.
    */
@@ -88,7 +88,7 @@ export interface CacheLevelGetParams {
 }
 
 export namespace CacheLevel {
-  export import ZonesCacheLevel = CacheLevelAPI.ZonesCacheLevel;
+  export import ZoneSettingCacheLevel = CacheLevelAPI.ZoneSettingCacheLevel;
   export import CacheLevelEditParams = CacheLevelAPI.CacheLevelEditParams;
   export import CacheLevelGetParams = CacheLevelAPI.CacheLevelGetParams;
 }

@@ -54,18 +54,18 @@ export class Subscriptions extends APIResource {
   }
 }
 
-export interface BillSubsAPISubscription {
+export interface Subscription {
   /**
    * Subscription identifier tag.
    */
   id?: string;
 
-  app?: BillSubsAPISubscription.App;
+  app?: Subscription.App;
 
   /**
    * The list of add-ons subscribed to.
    */
-  component_values?: Array<BillSubsAPISubscription.ComponentValue>;
+  component_values?: Array<Subscription.ComponentValue>;
 
   /**
    * The monetary unit in which pricing information is displayed.
@@ -96,7 +96,7 @@ export interface BillSubsAPISubscription {
   /**
    * The rate plan applied to the subscription.
    */
-  rate_plan?: BillSubsAPISubscription.RatePlan;
+  rate_plan?: Subscription.RatePlan;
 
   /**
    * The state that the subscription is in.
@@ -106,10 +106,10 @@ export interface BillSubsAPISubscription {
   /**
    * A simple zone object. May have null properties if not a zone subscription.
    */
-  zone?: BillSubsAPISubscription.Zone;
+  zone?: Subscription.Zone;
 }
 
-export namespace BillSubsAPISubscription {
+export namespace Subscription {
   export interface App {
     /**
      * app install id.
@@ -564,7 +564,7 @@ export namespace SubscriptionEditParams {
 }
 
 export namespace Subscriptions {
-  export import BillSubsAPISubscription = SubscriptionsAPI.BillSubsAPISubscription;
+  export import Subscription = SubscriptionsAPI.Subscription;
   export import SubscriptionUpdateResponse = SubscriptionsAPI.SubscriptionUpdateResponse;
   export import SubscriptionDeleteResponse = SubscriptionsAPI.SubscriptionDeleteResponse;
   export import SubscriptionEditResponse = SubscriptionsAPI.SubscriptionEditResponse;

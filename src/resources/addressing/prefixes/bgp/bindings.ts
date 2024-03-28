@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as BindingsAPI from 'cloudflare/resources/addressing/prefixes/bgp/bindings';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Bindings extends APIResource {
   /**
@@ -37,14 +38,13 @@ export class Bindings extends APIResource {
     prefixId: string,
     params: BindingListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<BindingListResponse> {
+  ): Core.PagePromise<AddressingServiceBindingsSinglePage, AddressingServiceBinding> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/addressing/prefixes/${prefixId}/bindings`,
-        options,
-      ) as Core.APIPromise<{ result: BindingListResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/addressing/prefixes/${prefixId}/bindings`,
+      AddressingServiceBindingsSinglePage,
+      options,
+    );
   }
 
   /**
@@ -83,6 +83,8 @@ export class Bindings extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class AddressingServiceBindingsSinglePage extends SinglePage<AddressingServiceBinding> {}
 
 export interface AddressingServiceBinding {
   /**
@@ -123,8 +125,6 @@ export namespace AddressingServiceBinding {
     state?: 'provisioning' | 'active';
   }
 }
-
-export type BindingListResponse = Array<AddressingServiceBinding>;
 
 export type BindingDeleteResponse = unknown | Array<unknown> | string;
 
@@ -168,8 +168,8 @@ export interface BindingGetParams {
 
 export namespace Bindings {
   export import AddressingServiceBinding = BindingsAPI.AddressingServiceBinding;
-  export import BindingListResponse = BindingsAPI.BindingListResponse;
   export import BindingDeleteResponse = BindingsAPI.BindingDeleteResponse;
+  export import AddressingServiceBindingsSinglePage = BindingsAPI.AddressingServiceBindingsSinglePage;
   export import BindingCreateParams = BindingsAPI.BindingCreateParams;
   export import BindingListParams = BindingsAPI.BindingListParams;
   export import BindingDeleteParams = BindingsAPI.BindingDeleteParams;

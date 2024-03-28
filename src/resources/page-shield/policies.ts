@@ -3,15 +3,13 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as PoliciesAPI from 'cloudflare/resources/page-shield/policies';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Policies extends APIResource {
   /**
    * Create a Page Shield policy.
    */
-  create(
-    params: PolicyCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PageShieldPageshieldPolicy> {
+  create(params: PolicyCreateParams, options?: Core.RequestOptions): Core.APIPromise<PageShieldPolicy> {
     const { zone_id, ...body } = params;
     return this._client.post(`/zones/${zone_id}/page_shield/policies`, { body, ...options });
   }
@@ -23,7 +21,7 @@ export class Policies extends APIResource {
     policyId: string,
     params: PolicyUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PageShieldPageshieldPolicy> {
+  ): Core.APIPromise<PageShieldPolicy> {
     const { zone_id, ...body } = params;
     return this._client.put(`/zones/${zone_id}/page_shield/policies/${policyId}`, { body, ...options });
   }
@@ -31,13 +29,16 @@ export class Policies extends APIResource {
   /**
    * Lists all Page Shield policies.
    */
-  list(params: PolicyListParams, options?: Core.RequestOptions): Core.APIPromise<PolicyListResponse | null> {
+  list(
+    params: PolicyListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<PageShieldPoliciesSinglePage, PageShieldPolicy> {
     const { zone_id } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/page_shield/policies`, options) as Core.APIPromise<{
-        result: PolicyListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/zones/${zone_id}/page_shield/policies`,
+      PageShieldPoliciesSinglePage,
+      options,
+    );
   }
 
   /**
@@ -58,13 +59,15 @@ export class Policies extends APIResource {
     policyId: string,
     params: PolicyGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PageShieldPageshieldPolicy> {
+  ): Core.APIPromise<PageShieldPolicy> {
     const { zone_id } = params;
     return this._client.get(`/zones/${zone_id}/page_shield/policies/${policyId}`, options);
   }
 }
 
-export interface PageShieldPageshieldPolicy {
+export class PageShieldPoliciesSinglePage extends SinglePage<PageShieldPolicy> {}
+
+export interface PageShieldPolicy {
   /**
    * The ID of the policy
    */
@@ -96,8 +99,6 @@ export interface PageShieldPageshieldPolicy {
    */
   value?: string;
 }
-
-export type PolicyListResponse = Array<PageShieldPageshieldPolicy>;
 
 export interface PolicyCreateParams {
   /**
@@ -187,8 +188,8 @@ export interface PolicyGetParams {
 }
 
 export namespace Policies {
-  export import PageShieldPageshieldPolicy = PoliciesAPI.PageShieldPageshieldPolicy;
-  export import PolicyListResponse = PoliciesAPI.PolicyListResponse;
+  export import PageShieldPolicy = PoliciesAPI.PageShieldPolicy;
+  export import PageShieldPoliciesSinglePage = PoliciesAPI.PageShieldPoliciesSinglePage;
   export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
   export import PolicyUpdateParams = PoliciesAPI.PolicyUpdateParams;
   export import PolicyListParams = PoliciesAPI.PolicyListParams;

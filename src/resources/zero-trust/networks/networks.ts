@@ -21,9 +21,9 @@ export namespace Networks {
   export import VirtualNetworks = VirtualNetworksAPI.VirtualNetworks;
   export import TunnelVirtualNetwork = VirtualNetworksAPI.TunnelVirtualNetwork;
   export import VirtualNetworkCreateResponse = VirtualNetworksAPI.VirtualNetworkCreateResponse;
-  export import VirtualNetworkListResponse = VirtualNetworksAPI.VirtualNetworkListResponse;
   export import VirtualNetworkDeleteResponse = VirtualNetworksAPI.VirtualNetworkDeleteResponse;
   export import VirtualNetworkEditResponse = VirtualNetworksAPI.VirtualNetworkEditResponse;
+  export import TunnelVirtualNetworksSinglePage = VirtualNetworksAPI.TunnelVirtualNetworksSinglePage;
   export import VirtualNetworkCreateParams = VirtualNetworksAPI.VirtualNetworkCreateParams;
   export import VirtualNetworkListParams = VirtualNetworksAPI.VirtualNetworkListParams;
   export import VirtualNetworkDeleteParams = VirtualNetworksAPI.VirtualNetworkDeleteParams;

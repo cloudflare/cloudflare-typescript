@@ -31,12 +31,12 @@ export class Rules extends APIResource {
     id: string,
     body: RuleUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LegacyJhsFilterRule | null> {
+  ): Core.APIPromise<FirewallFilterRule | null> {
     return (
       this._client.put(`/zones/${zoneIdentifier}/firewall/rules/${id}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: LegacyJhsFilterRule | null }>
+      }) as Core.APIPromise<{ result: FirewallFilterRule | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -48,22 +48,22 @@ export class Rules extends APIResource {
     zoneIdentifier: string,
     query?: RuleListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<LegacyJhsFilterRulesV4PagePaginationArray, LegacyJhsFilterRule>;
+  ): Core.PagePromise<FirewallFilterRulesV4PagePaginationArray, FirewallFilterRule>;
   list(
     zoneIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<LegacyJhsFilterRulesV4PagePaginationArray, LegacyJhsFilterRule>;
+  ): Core.PagePromise<FirewallFilterRulesV4PagePaginationArray, FirewallFilterRule>;
   list(
     zoneIdentifier: string,
     query: RuleListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<LegacyJhsFilterRulesV4PagePaginationArray, LegacyJhsFilterRule> {
+  ): Core.PagePromise<FirewallFilterRulesV4PagePaginationArray, FirewallFilterRule> {
     if (isRequestOptions(query)) {
       return this.list(zoneIdentifier, {}, query);
     }
     return this._client.getAPIList(
       `/zones/${zoneIdentifier}/firewall/rules`,
-      LegacyJhsFilterRulesV4PagePaginationArray,
+      FirewallFilterRulesV4PagePaginationArray,
       { query, ...options },
     );
   }
@@ -76,12 +76,12 @@ export class Rules extends APIResource {
     id: string,
     body: RuleDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LegacyJhsFilterRule | null> {
+  ): Core.APIPromise<FirewallFilterRule | null> {
     return (
       this._client.delete(`/zones/${zoneIdentifier}/firewall/rules/${id}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: LegacyJhsFilterRule | null }>
+      }) as Core.APIPromise<{ result: FirewallFilterRule | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -109,18 +109,18 @@ export class Rules extends APIResource {
     zoneIdentifier: string,
     id: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LegacyJhsFilterRule | null> {
+  ): Core.APIPromise<FirewallFilterRule | null> {
     return (
       this._client.get(`/zones/${zoneIdentifier}/firewall/rules/${id}`, options) as Core.APIPromise<{
-        result: LegacyJhsFilterRule | null;
+        result: FirewallFilterRule | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class LegacyJhsFilterRulesV4PagePaginationArray extends V4PagePaginationArray<LegacyJhsFilterRule> {}
+export class FirewallFilterRulesV4PagePaginationArray extends V4PagePaginationArray<FirewallFilterRule> {}
 
-export interface LegacyJhsFilterRule {
+export interface FirewallFilterRule {
   /**
    * The unique identifier of the firewall rule.
    */
@@ -137,7 +137,7 @@ export interface LegacyJhsFilterRule {
    */
   description?: string;
 
-  filter?: FiltersAPI.LegacyJhsFilter | LegacyJhsFilterRule.LegacyJhsDeletedFilter;
+  filter?: FiltersAPI.FirewallFilter | FirewallFilterRule.LegacyJhsDeletedFilter;
 
   /**
    * When true, indicates that the firewall rule is currently paused.
@@ -159,7 +159,7 @@ export interface LegacyJhsFilterRule {
   ref?: string;
 }
 
-export namespace LegacyJhsFilterRule {
+export namespace FirewallFilterRule {
   export interface LegacyJhsDeletedFilter {
     /**
      * The unique identifier of the filter.
@@ -173,9 +173,9 @@ export namespace LegacyJhsFilterRule {
   }
 }
 
-export type RuleCreateResponse = Array<LegacyJhsFilterRule>;
+export type RuleCreateResponse = Array<FirewallFilterRule>;
 
-export type RuleEditResponse = Array<LegacyJhsFilterRule>;
+export type RuleEditResponse = Array<FirewallFilterRule>;
 
 export type RuleCreateParams = unknown;
 
@@ -209,10 +209,10 @@ export interface RuleDeleteParams {
 export type RuleEditParams = unknown;
 
 export namespace Rules {
-  export import LegacyJhsFilterRule = RulesAPI.LegacyJhsFilterRule;
+  export import FirewallFilterRule = RulesAPI.FirewallFilterRule;
   export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
   export import RuleEditResponse = RulesAPI.RuleEditResponse;
-  export import LegacyJhsFilterRulesV4PagePaginationArray = RulesAPI.LegacyJhsFilterRulesV4PagePaginationArray;
+  export import FirewallFilterRulesV4PagePaginationArray = RulesAPI.FirewallFilterRulesV4PagePaginationArray;
   export import RuleCreateParams = RulesAPI.RuleCreateParams;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
   export import RuleListParams = RulesAPI.RuleListParams;

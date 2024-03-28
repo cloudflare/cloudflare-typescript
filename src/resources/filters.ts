@@ -30,10 +30,10 @@ export class Filters extends APIResource {
     id: string,
     body: FilterUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LegacyJhsFilter | null> {
+  ): Core.APIPromise<FirewallFilter | null> {
     return (
       this._client.put(`/zones/${zoneIdentifier}/filters/${id}`, { body, ...options }) as Core.APIPromise<{
-        result: LegacyJhsFilter | null;
+        result: FirewallFilter | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -46,24 +46,23 @@ export class Filters extends APIResource {
     zoneIdentifier: string,
     query?: FilterListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<LegacyJhsFiltersV4PagePaginationArray, LegacyJhsFilter>;
+  ): Core.PagePromise<FirewallFiltersV4PagePaginationArray, FirewallFilter>;
   list(
     zoneIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<LegacyJhsFiltersV4PagePaginationArray, LegacyJhsFilter>;
+  ): Core.PagePromise<FirewallFiltersV4PagePaginationArray, FirewallFilter>;
   list(
     zoneIdentifier: string,
     query: FilterListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<LegacyJhsFiltersV4PagePaginationArray, LegacyJhsFilter> {
+  ): Core.PagePromise<FirewallFiltersV4PagePaginationArray, FirewallFilter> {
     if (isRequestOptions(query)) {
       return this.list(zoneIdentifier, {}, query);
     }
-    return this._client.getAPIList(
-      `/zones/${zoneIdentifier}/filters`,
-      LegacyJhsFiltersV4PagePaginationArray,
-      { query, ...options },
-    );
+    return this._client.getAPIList(`/zones/${zoneIdentifier}/filters`, FirewallFiltersV4PagePaginationArray, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -73,10 +72,10 @@ export class Filters extends APIResource {
     zoneIdentifier: string,
     id: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LegacyJhsFilter | null> {
+  ): Core.APIPromise<FirewallFilter | null> {
     return (
       this._client.delete(`/zones/${zoneIdentifier}/filters/${id}`, options) as Core.APIPromise<{
-        result: LegacyJhsFilter | null;
+        result: FirewallFilter | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -88,18 +87,18 @@ export class Filters extends APIResource {
     zoneIdentifier: string,
     id: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LegacyJhsFilter | null> {
+  ): Core.APIPromise<FirewallFilter | null> {
     return (
       this._client.get(`/zones/${zoneIdentifier}/filters/${id}`, options) as Core.APIPromise<{
-        result: LegacyJhsFilter | null;
+        result: FirewallFilter | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class LegacyJhsFiltersV4PagePaginationArray extends V4PagePaginationArray<LegacyJhsFilter> {}
+export class FirewallFiltersV4PagePaginationArray extends V4PagePaginationArray<FirewallFilter> {}
 
-export interface LegacyJhsFilter {
+export interface FirewallFilter {
   /**
    * The unique identifier of the filter.
    */
@@ -127,7 +126,7 @@ export interface LegacyJhsFilter {
   ref?: string;
 }
 
-export type FilterCreateResponse = Array<LegacyJhsFilter>;
+export type FilterCreateResponse = Array<FirewallFilter>;
 
 export type FilterCreateParams = unknown;
 
@@ -156,9 +155,9 @@ export interface FilterListParams extends V4PagePaginationArrayParams {
 }
 
 export namespace Filters {
-  export import LegacyJhsFilter = FiltersAPI.LegacyJhsFilter;
+  export import FirewallFilter = FiltersAPI.FirewallFilter;
   export import FilterCreateResponse = FiltersAPI.FilterCreateResponse;
-  export import LegacyJhsFiltersV4PagePaginationArray = FiltersAPI.LegacyJhsFiltersV4PagePaginationArray;
+  export import FirewallFiltersV4PagePaginationArray = FiltersAPI.FirewallFiltersV4PagePaginationArray;
   export import FilterCreateParams = FiltersAPI.FilterCreateParams;
   export import FilterUpdateParams = FiltersAPI.FilterUpdateParams;
   export import FilterListParams = FiltersAPI.FilterListParams;

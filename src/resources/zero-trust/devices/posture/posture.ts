@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as PostureAPI from 'cloudflare/resources/zero-trust/devices/posture/posture';
 import * as IntegrationsAPI from 'cloudflare/resources/zero-trust/devices/posture/integrations';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Posture extends APIResource {
   integrations: IntegrationsAPI.Integrations = new IntegrationsAPI.Integrations(this._client);
@@ -14,11 +15,11 @@ export class Posture extends APIResource {
   create(
     params: PostureCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TeamsDevicesDevicePostureRules | null> {
+  ): Core.APIPromise<DevicePostureRules | null> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/devices/posture`, { body, ...options }) as Core.APIPromise<{
-        result: TeamsDevicesDevicePostureRules | null;
+        result: DevicePostureRules | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -30,13 +31,13 @@ export class Posture extends APIResource {
     ruleId: string,
     params: PostureUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TeamsDevicesDevicePostureRules | null> {
+  ): Core.APIPromise<DevicePostureRules | null> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/devices/posture/${ruleId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: TeamsDevicesDevicePostureRules | null }>
+      }) as Core.APIPromise<{ result: DevicePostureRules | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -46,13 +47,13 @@ export class Posture extends APIResource {
   list(
     params: PostureListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PostureListResponse | null> {
+  ): Core.PagePromise<DevicePostureRulesSinglePage, DevicePostureRules> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/devices/posture`, options) as Core.APIPromise<{
-        result: PostureListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/devices/posture`,
+      DevicePostureRulesSinglePage,
+      options,
+    );
   }
 
   /**
@@ -78,17 +79,19 @@ export class Posture extends APIResource {
     ruleId: string,
     params: PostureGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TeamsDevicesDevicePostureRules | null> {
+  ): Core.APIPromise<DevicePostureRules | null> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/devices/posture/${ruleId}`, options) as Core.APIPromise<{
-        result: TeamsDevicesDevicePostureRules | null;
+        result: DevicePostureRules | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface TeamsDevicesDevicePostureRules {
+export class DevicePostureRulesSinglePage extends SinglePage<DevicePostureRules> {}
+
+export interface DevicePostureRules {
   /**
    * API UUID.
    */
@@ -109,27 +112,27 @@ export interface TeamsDevicesDevicePostureRules {
    * The value to be checked against.
    */
   input?:
-    | TeamsDevicesDevicePostureRules.TeamsDevicesFileInputRequest
-    | TeamsDevicesDevicePostureRules.TeamsDevicesUniqueClientIDInputRequest
-    | TeamsDevicesDevicePostureRules.TeamsDevicesDomainJoinedInputRequest
-    | TeamsDevicesDevicePostureRules.TeamsDevicesOSVersionInputRequest
-    | TeamsDevicesDevicePostureRules.TeamsDevicesFirewallInputRequest
-    | TeamsDevicesDevicePostureRules.TeamsDevicesSentineloneInputRequest
-    | TeamsDevicesDevicePostureRules.TeamsDevicesCarbonblackInputRequest
-    | TeamsDevicesDevicePostureRules.TeamsDevicesDiskEncryptionInputRequest
-    | TeamsDevicesDevicePostureRules.TeamsDevicesApplicationInputRequest
-    | TeamsDevicesDevicePostureRules.TeamsDevicesClientCertificateInputRequest
-    | TeamsDevicesDevicePostureRules.TeamsDevicesWorkspaceOneInputRequest
-    | TeamsDevicesDevicePostureRules.TeamsDevicesCrowdstrikeInputRequest
-    | TeamsDevicesDevicePostureRules.TeamsDevicesIntuneInputRequest
-    | TeamsDevicesDevicePostureRules.TeamsDevicesKolideInputRequest
-    | TeamsDevicesDevicePostureRules.TeamsDevicesTaniumInputRequest
-    | TeamsDevicesDevicePostureRules.TeamsDevicesSentineloneS2sInputRequest;
+    | DevicePostureRules.TeamsDevicesFileInputRequest
+    | DevicePostureRules.TeamsDevicesUniqueClientIDInputRequest
+    | DevicePostureRules.TeamsDevicesDomainJoinedInputRequest
+    | DevicePostureRules.TeamsDevicesOSVersionInputRequest
+    | DevicePostureRules.TeamsDevicesFirewallInputRequest
+    | DevicePostureRules.TeamsDevicesSentineloneInputRequest
+    | DevicePostureRules.TeamsDevicesCarbonblackInputRequest
+    | DevicePostureRules.TeamsDevicesDiskEncryptionInputRequest
+    | DevicePostureRules.TeamsDevicesApplicationInputRequest
+    | DevicePostureRules.TeamsDevicesClientCertificateInputRequest
+    | DevicePostureRules.TeamsDevicesWorkspaceOneInputRequest
+    | DevicePostureRules.TeamsDevicesCrowdstrikeInputRequest
+    | DevicePostureRules.TeamsDevicesIntuneInputRequest
+    | DevicePostureRules.TeamsDevicesKolideInputRequest
+    | DevicePostureRules.TeamsDevicesTaniumInputRequest
+    | DevicePostureRules.TeamsDevicesSentineloneS2sInputRequest;
 
   /**
    * The conditions that the client must match to run the rule.
    */
-  match?: Array<TeamsDevicesDevicePostureRules.Match>;
+  match?: Array<DevicePostureRules.Match>;
 
   /**
    * The name of the device posture rule.
@@ -167,7 +170,7 @@ export interface TeamsDevicesDevicePostureRules {
     | 'sentinelone_s2s';
 }
 
-export namespace TeamsDevicesDevicePostureRules {
+export namespace DevicePostureRules {
   export interface TeamsDevicesFileInputRequest {
     /**
      * Operating system
@@ -510,8 +513,6 @@ export namespace TeamsDevicesDevicePostureRules {
     platform?: 'windows' | 'mac' | 'linux' | 'android' | 'ios';
   }
 }
-
-export type PostureListResponse = Array<TeamsDevicesDevicePostureRules>;
 
 export interface PostureDeleteResponse {
   /**
@@ -1379,18 +1380,18 @@ export interface PostureGetParams {
 }
 
 export namespace Posture {
-  export import TeamsDevicesDevicePostureRules = PostureAPI.TeamsDevicesDevicePostureRules;
-  export import PostureListResponse = PostureAPI.PostureListResponse;
+  export import DevicePostureRules = PostureAPI.DevicePostureRules;
   export import PostureDeleteResponse = PostureAPI.PostureDeleteResponse;
+  export import DevicePostureRulesSinglePage = PostureAPI.DevicePostureRulesSinglePage;
   export import PostureCreateParams = PostureAPI.PostureCreateParams;
   export import PostureUpdateParams = PostureAPI.PostureUpdateParams;
   export import PostureListParams = PostureAPI.PostureListParams;
   export import PostureDeleteParams = PostureAPI.PostureDeleteParams;
   export import PostureGetParams = PostureAPI.PostureGetParams;
   export import Integrations = IntegrationsAPI.Integrations;
-  export import TeamsDevicesDevicePostureIntegrations = IntegrationsAPI.TeamsDevicesDevicePostureIntegrations;
-  export import IntegrationListResponse = IntegrationsAPI.IntegrationListResponse;
+  export import DevicePostureIntegrations = IntegrationsAPI.DevicePostureIntegrations;
   export import IntegrationDeleteResponse = IntegrationsAPI.IntegrationDeleteResponse;
+  export import DevicePostureIntegrationsSinglePage = IntegrationsAPI.DevicePostureIntegrationsSinglePage;
   export import IntegrationCreateParams = IntegrationsAPI.IntegrationCreateParams;
   export import IntegrationListParams = IntegrationsAPI.IntegrationListParams;
   export import IntegrationDeleteParams = IntegrationsAPI.IntegrationDeleteParams;

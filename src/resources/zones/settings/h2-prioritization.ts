@@ -11,13 +11,13 @@ export class H2Prioritization extends APIResource {
   edit(
     params: H2PrioritizationEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZonesH2Prioritization> {
+  ): Core.APIPromise<ZoneSettingH2Prioritization> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/h2_prioritization`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZonesH2Prioritization }>
+      }) as Core.APIPromise<{ result: ZoneSettingH2Prioritization }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -27,11 +27,11 @@ export class H2Prioritization extends APIResource {
   get(
     params: H2PrioritizationGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZonesH2Prioritization> {
+  ): Core.APIPromise<ZoneSettingH2Prioritization> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/h2_prioritization`, options) as Core.APIPromise<{
-        result: ZonesH2Prioritization;
+        result: ZoneSettingH2Prioritization;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -42,7 +42,7 @@ export class H2Prioritization extends APIResource {
  * HTTP/2 to improve page load performance. It also supports fine control of
  * content delivery when used in conjunction with Workers.
  */
-export interface ZonesH2Prioritization {
+export interface ZoneSettingH2Prioritization {
   /**
    * ID of the zone setting.
    */
@@ -76,7 +76,7 @@ export interface H2PrioritizationEditParams {
    * served through HTTP/2 to improve page load performance. It also supports fine
    * control of content delivery when used in conjunction with Workers.
    */
-  value: ZonesH2Prioritization;
+  value: ZoneSettingH2Prioritization;
 }
 
 export interface H2PrioritizationGetParams {
@@ -87,7 +87,7 @@ export interface H2PrioritizationGetParams {
 }
 
 export namespace H2Prioritization {
-  export import ZonesH2Prioritization = H2PrioritizationAPI.ZonesH2Prioritization;
+  export import ZoneSettingH2Prioritization = H2PrioritizationAPI.ZoneSettingH2Prioritization;
   export import H2PrioritizationEditParams = H2PrioritizationAPI.H2PrioritizationEditParams;
   export import H2PrioritizationGetParams = H2PrioritizationAPI.H2PrioritizationGetParams;
 }

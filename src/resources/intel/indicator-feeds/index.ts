@@ -11,6 +11,7 @@ export {
   IndicatorFeedListParams,
   IndicatorFeedDataParams,
   IndicatorFeedGetParams,
+  IndicatorFeedListResponsesSinglePage,
   IndicatorFeeds,
 } from './indicator-feeds';
 export {

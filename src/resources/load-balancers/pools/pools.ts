@@ -6,6 +6,7 @@ import * as PoolsAPI from 'cloudflare/resources/load-balancers/pools/pools';
 import * as HealthAPI from 'cloudflare/resources/load-balancers/pools/health';
 import * as ReferencesAPI from 'cloudflare/resources/load-balancers/pools/references';
 import * as LoadBalancersPoolsAPI from 'cloudflare/resources/user/load-balancers/pools';
+import { LoadBalancingPoolsSinglePage } from 'cloudflare/resources/user/load-balancers/pools';
 
 export class Pools extends APIResource {
   health: HealthAPI.Health = new HealthAPI.Health(this._client);
@@ -47,14 +48,16 @@ export class Pools extends APIResource {
   /**
    * List configured pools.
    */
-  list(params: PoolListParams, options?: Core.RequestOptions): Core.APIPromise<PoolListResponse | null> {
+  list(
+    params: PoolListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<LoadBalancingPoolsSinglePage, LoadBalancersPoolsAPI.LoadBalancingPool> {
     const { account_id, ...query } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/load_balancers/pools`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: PoolListResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/load_balancers/pools`,
+      LoadBalancingPoolsSinglePage,
+      { query, ...options },
+    );
   }
 
   /**
@@ -107,8 +110,6 @@ export class Pools extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
-
-export type PoolListResponse = Array<LoadBalancersPoolsAPI.LoadBalancingPool>;
 
 export interface PoolDeleteResponse {
   id?: string;
@@ -943,7 +944,6 @@ export interface PoolGetParams {
 }
 
 export namespace Pools {
-  export import PoolListResponse = PoolsAPI.PoolListResponse;
   export import PoolDeleteResponse = PoolsAPI.PoolDeleteResponse;
   export import PoolCreateParams = PoolsAPI.PoolCreateParams;
   export import PoolUpdateParams = PoolsAPI.PoolUpdateParams;
@@ -960,3 +960,5 @@ export namespace Pools {
   export import ReferenceGetResponse = ReferencesAPI.ReferenceGetResponse;
   export import ReferenceGetParams = ReferencesAPI.ReferenceGetParams;
 }
+
+export { LoadBalancingPoolsSinglePage };

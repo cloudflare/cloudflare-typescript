@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as TSIGsAPI from 'cloudflare/resources/secondary-dns/tsigs';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class TSIGs extends APIResource {
   /**
@@ -38,13 +39,16 @@ export class TSIGs extends APIResource {
   /**
    * List TSIGs.
    */
-  list(params: TSIGListParams, options?: Core.RequestOptions): Core.APIPromise<TSIGListResponse | null> {
+  list(
+    params: TSIGListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<SecondaryDnstsigsSinglePage, SecondaryDNSTSIG> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/secondary_dns/tsigs`, options) as Core.APIPromise<{
-        result: TSIGListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/secondary_dns/tsigs`,
+      SecondaryDnstsigsSinglePage,
+      options,
+    );
   }
 
   /**
@@ -81,6 +85,8 @@ export class TSIGs extends APIResource {
   }
 }
 
+export class SecondaryDnstsigsSinglePage extends SinglePage<SecondaryDNSTSIG> {}
+
 export interface SecondaryDNSTSIG {
   id: string;
 
@@ -99,8 +105,6 @@ export interface SecondaryDNSTSIG {
    */
   secret: string;
 }
-
-export type TSIGListResponse = Array<SecondaryDNSTSIG>;
 
 export interface TSIGDeleteResponse {
   id?: string;
@@ -164,8 +168,8 @@ export interface TSIGGetParams {
 
 export namespace TSIGs {
   export import SecondaryDNSTSIG = TSIGsAPI.SecondaryDNSTSIG;
-  export import TSIGListResponse = TSIGsAPI.TSIGListResponse;
   export import TSIGDeleteResponse = TSIGsAPI.TSIGDeleteResponse;
+  export import SecondaryDnstsigsSinglePage = TSIGsAPI.SecondaryDnstsigsSinglePage;
   export import TSIGCreateParams = TSIGsAPI.TSIGCreateParams;
   export import TSIGUpdateParams = TSIGsAPI.TSIGUpdateParams;
   export import TSIGListParams = TSIGsAPI.TSIGListParams;

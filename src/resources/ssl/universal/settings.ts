@@ -8,36 +8,30 @@ export class Settings extends APIResource {
   /**
    * Patch Universal SSL Settings for a Zone.
    */
-  edit(
-    params: SettingEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TLSCertificatesAndHostnamesUniversal> {
+  edit(params: SettingEditParams, options?: Core.RequestOptions): Core.APIPromise<UniversalSSLSettings> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/ssl/universal/settings`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: TLSCertificatesAndHostnamesUniversal }>
+      }) as Core.APIPromise<{ result: UniversalSSLSettings }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get Universal SSL Settings for a Zone.
    */
-  get(
-    params: SettingGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TLSCertificatesAndHostnamesUniversal> {
+  get(params: SettingGetParams, options?: Core.RequestOptions): Core.APIPromise<UniversalSSLSettings> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/ssl/universal/settings`, options) as Core.APIPromise<{
-        result: TLSCertificatesAndHostnamesUniversal;
+        result: UniversalSSLSettings;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface TLSCertificatesAndHostnamesUniversal {
+export interface UniversalSSLSettings {
   /**
    * Disabling Universal SSL removes any currently active Universal SSL certificates
    * for your zone from the edge and prevents any future Universal SSL certificates
@@ -112,7 +106,7 @@ export interface SettingGetParams {
 }
 
 export namespace Settings {
-  export import TLSCertificatesAndHostnamesUniversal = SettingsAPI.TLSCertificatesAndHostnamesUniversal;
+  export import UniversalSSLSettings = SettingsAPI.UniversalSSLSettings;
   export import SettingEditParams = SettingsAPI.SettingEditParams;
   export import SettingGetParams = SettingsAPI.SettingGetParams;
 }

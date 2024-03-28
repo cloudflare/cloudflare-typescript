@@ -10,11 +10,11 @@ export class Polish extends APIResource {
    * Refer to our [blog post](http://blog.cloudflare.com/polish-solving-mobile-speed)
    * for more information.
    */
-  edit(params: PolishEditParams, options?: Core.RequestOptions): Core.APIPromise<ZonesPolish> {
+  edit(params: PolishEditParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingPolish> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/polish`, { body, ...options }) as Core.APIPromise<{
-        result: ZonesPolish;
+        result: ZoneSettingPolish;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -24,11 +24,11 @@ export class Polish extends APIResource {
    * Refer to our [blog post](http://blog.cloudflare.com/polish-solving-mobile-speed)
    * for more information.
    */
-  get(params: PolishGetParams, options?: Core.RequestOptions): Core.APIPromise<ZonesPolish> {
+  get(params: PolishGetParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingPolish> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/polish`, options) as Core.APIPromise<{
-        result: ZonesPolish;
+        result: ZoneSettingPolish;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -42,7 +42,7 @@ export class Polish extends APIResource {
  * lower-resolution image first and ending in a higher-resolution version. Not
  * recommended for hi-res photography sites.
  */
-export interface ZonesPolish {
+export interface ZoneSettingPolish {
   /**
    * ID of the zone setting.
    */
@@ -79,7 +79,7 @@ export interface PolishEditParams {
    * loading a lower-resolution image first and ending in a higher-resolution
    * version. Not recommended for hi-res photography sites.
    */
-  value: ZonesPolish;
+  value: ZoneSettingPolish;
 }
 
 export interface PolishGetParams {
@@ -90,7 +90,7 @@ export interface PolishGetParams {
 }
 
 export namespace Polish {
-  export import ZonesPolish = PolishAPI.ZonesPolish;
+  export import ZoneSettingPolish = PolishAPI.ZoneSettingPolish;
   export import PolishEditParams = PolishAPI.PolishEditParams;
   export import PolishGetParams = PolishAPI.PolishGetParams;
 }

@@ -30,9 +30,9 @@ export namespace DNS {
   export import RecordScanParams = RecordsAPI.RecordScanParams;
   export import Analytics = AnalyticsAPI.Analytics;
   export import Firewall = FirewallAPI.Firewall;
-  export import DNSFirewallDNSFirewall = FirewallAPI.DNSFirewallDNSFirewall;
+  export import DNSFirewall = FirewallAPI.DNSFirewall;
   export import FirewallDeleteResponse = FirewallAPI.FirewallDeleteResponse;
-  export import DNSFirewallDNSFirewallsV4PagePaginationArray = FirewallAPI.DNSFirewallDNSFirewallsV4PagePaginationArray;
+  export import DNSFirewallsV4PagePaginationArray = FirewallAPI.DNSFirewallsV4PagePaginationArray;
   export import FirewallCreateParams = FirewallAPI.FirewallCreateParams;
   export import FirewallListParams = FirewallAPI.FirewallListParams;
   export import FirewallDeleteParams = FirewallAPI.FirewallDeleteParams;

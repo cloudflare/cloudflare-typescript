@@ -8,16 +8,13 @@ export class Config extends APIResource {
   /**
    * Updates CMB config.
    */
-  create(
-    params: ConfigCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<LogcontrolCmbConfig | null> {
+  create(params: ConfigCreateParams, options?: Core.RequestOptions): Core.APIPromise<CmbConfig | null> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/logs/control/cmb/config`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: LogcontrolCmbConfig | null }>
+      }) as Core.APIPromise<{ result: CmbConfig | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -39,17 +36,17 @@ export class Config extends APIResource {
   /**
    * Gets CMB config.
    */
-  get(params: ConfigGetParams, options?: Core.RequestOptions): Core.APIPromise<LogcontrolCmbConfig | null> {
+  get(params: ConfigGetParams, options?: Core.RequestOptions): Core.APIPromise<CmbConfig | null> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/logs/control/cmb/config`, options) as Core.APIPromise<{
-        result: LogcontrolCmbConfig | null;
+        result: CmbConfig | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface LogcontrolCmbConfig {
+export interface CmbConfig {
   /**
    * Comma-separated list of regions.
    */
@@ -85,7 +82,7 @@ export interface ConfigGetParams {
 }
 
 export namespace Config {
-  export import LogcontrolCmbConfig = ConfigAPI.LogcontrolCmbConfig;
+  export import CmbConfig = ConfigAPI.CmbConfig;
   export import ConfigDeleteResponse = ConfigAPI.ConfigDeleteResponse;
   export import ConfigCreateParams = ConfigAPI.ConfigCreateParams;
   export import ConfigDeleteParams = ConfigAPI.ConfigDeleteParams;

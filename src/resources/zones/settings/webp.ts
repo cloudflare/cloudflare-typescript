@@ -10,11 +10,11 @@ export class WebP extends APIResource {
    * offers a performance advantage over the original image format, Cloudflare will
    * serve a WebP version of the original image.
    */
-  edit(params: WebPEditParams, options?: Core.RequestOptions): Core.APIPromise<ZonesWebP> {
+  edit(params: WebPEditParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingWebP> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/webp`, { body, ...options }) as Core.APIPromise<{
-        result: ZonesWebP;
+        result: ZoneSettingWebP;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -24,10 +24,12 @@ export class WebP extends APIResource {
    * offers a performance advantage over the original image format, Cloudflare will
    * serve a WebP version of the original image.
    */
-  get(params: WebPGetParams, options?: Core.RequestOptions): Core.APIPromise<ZonesWebP> {
+  get(params: WebPGetParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingWebP> {
     const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zone_id}/settings/webp`, options) as Core.APIPromise<{ result: ZonesWebP }>
+      this._client.get(`/zones/${zone_id}/settings/webp`, options) as Core.APIPromise<{
+        result: ZoneSettingWebP;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -37,7 +39,7 @@ export class WebP extends APIResource {
  * offers a performance advantage over the original image format, Cloudflare will
  * serve a WebP version of the original image.
  */
-export interface ZonesWebP {
+export interface ZoneSettingWebP {
   /**
    * ID of the zone setting.
    */
@@ -80,7 +82,7 @@ export interface WebPGetParams {
 }
 
 export namespace WebP {
-  export import ZonesWebP = WebPAPI.ZonesWebP;
+  export import ZoneSettingWebP = WebPAPI.ZoneSettingWebP;
   export import WebPEditParams = WebPAPI.WebPEditParams;
   export import WebPGetParams = WebPAPI.WebPGetParams;
 }

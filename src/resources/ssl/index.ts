@@ -10,12 +10,13 @@ export {
   CertificatePackDeleteParams,
   CertificatePackEditParams,
   CertificatePackGetParams,
+  CertificatePackListResponsesSinglePage,
   CertificatePacks,
 } from './certificate-packs/index';
 export { RecommendationGetResponse, Recommendations } from './recommendations';
 export { SSL } from './ssl';
 export {
-  TLSCertificatesAndHostnamesVerification,
+  TLSVerificationSetting,
   VerificationEditResponse,
   VerificationGetResponse,
   VerificationEditParams,

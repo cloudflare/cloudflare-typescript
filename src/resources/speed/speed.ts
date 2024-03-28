@@ -293,5 +293,6 @@ export namespace Speed {
   export import AvailabilityListParams = AvailabilitiesAPI.AvailabilityListParams;
   export import Pages = PagesAPI.Pages;
   export import PageListResponse = PagesAPI.PageListResponse;
+  export import PageListResponsesSinglePage = PagesAPI.PageListResponsesSinglePage;
   export import PageListParams = PagesAPI.PageListParams;
 }

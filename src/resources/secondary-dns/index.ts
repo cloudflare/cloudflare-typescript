@@ -14,22 +14,22 @@ export {
 export { SecondaryDNS } from './secondary-dns';
 export {
   SecondaryDNSACL,
-  ACLListResponse,
   ACLDeleteResponse,
   ACLCreateParams,
   ACLUpdateParams,
   ACLListParams,
   ACLDeleteParams,
   ACLGetParams,
+  SecondaryDnsaclsSinglePage,
   ACLs,
 } from './acls';
 export {
-  SecondaryDNSDisableTransferResult,
-  SecondaryDNSEnableTransferResult,
-  SecondaryDNSSchemasForceResult,
+  SecondaryDNSDisableTransfer,
+  SecondaryDNSEnableTransfer,
   OutgoingCreateResponse,
   OutgoingUpdateResponse,
   OutgoingDeleteResponse,
+  OutgoingForceNotifyResponse,
   OutgoingGetResponse,
   OutgoingCreateParams,
   OutgoingUpdateParams,
@@ -40,26 +40,26 @@ export {
   OutgoingGetParams,
   Outgoing,
 } from './outgoing/index';
-export { SecondaryDNSForceResult, ForceAXFRCreateParams, ForceAXFR } from './force-axfr';
+export { SecondaryDNSForce, ForceAXFRCreateParams, ForceAXFR } from './force-axfr';
 export {
   SecondaryDNSPeer,
-  PeerListResponse,
   PeerDeleteResponse,
   PeerCreateParams,
   PeerUpdateParams,
   PeerListParams,
   PeerDeleteParams,
   PeerGetParams,
+  SecondaryDNSPeersSinglePage,
   Peers,
 } from './peers';
 export {
   SecondaryDNSTSIG,
-  TSIGListResponse,
   TSIGDeleteResponse,
   TSIGCreateParams,
   TSIGUpdateParams,
   TSIGListParams,
   TSIGDeleteParams,
   TSIGGetParams,
+  SecondaryDnstsigsSinglePage,
   TSIGs,
 } from './tsigs';

@@ -1,19 +1,19 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  TLSCertificatesAndHostnamesHostnameAuthenticatedOriginPull,
-  TLSCertificatesAndHostnamesHostnameCertidObject,
-  HostnameUpdateResponse,
-  HostnameUpdateParams,
-  HostnameGetParams,
-  Hostnames,
-} from './hostnames';
-export {
-  TLSCertificatesAndHostnamesSchemasCertificateObject,
-  CertificateListResponse,
+  OriginTLSClientCertificate,
   CertificateCreateParams,
   CertificateListParams,
   CertificateDeleteParams,
   CertificateGetParams,
   Certificates,
 } from './certificates';
+export {
+  OriginTLSClientCertificateAuthenticatedOriginPull,
+  OriginTLSClientCertificateID,
+  HostnameUpdateResponse,
+  HostnameUpdateParams,
+  HostnameGetParams,
+  OriginTLSClientCertificateIDsSinglePage,
+  Hostnames,
+} from './hostnames';

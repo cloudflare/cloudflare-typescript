@@ -41,7 +41,7 @@ export class Phases extends APIResource {
       | 'magic_transit_managed',
     params: PhaseUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RulesetsAPI.RulesetsRulesetResponse> {
+  ): Core.APIPromise<RulesetsAPI.Ruleset> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -63,7 +63,7 @@ export class Phases extends APIResource {
       this._client.put(`/${accountOrZone}/${accountOrZoneId}/rulesets/phases/${rulesetPhase}/entrypoint`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: RulesetsAPI.RulesetsRulesetResponse }>
+      }) as Core.APIPromise<{ result: RulesetsAPI.Ruleset }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -98,7 +98,7 @@ export class Phases extends APIResource {
       | 'magic_transit_managed',
     params?: PhaseGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RulesetsAPI.RulesetsRulesetResponse>;
+  ): Core.APIPromise<RulesetsAPI.Ruleset>;
   get(
     rulesetPhase:
       | 'ddos_l4'
@@ -125,7 +125,7 @@ export class Phases extends APIResource {
       | 'magic_transit_ids_managed'
       | 'magic_transit_managed',
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RulesetsAPI.RulesetsRulesetResponse>;
+  ): Core.APIPromise<RulesetsAPI.Ruleset>;
   get(
     rulesetPhase:
       | 'ddos_l4'
@@ -153,7 +153,7 @@ export class Phases extends APIResource {
       | 'magic_transit_managed',
     params: PhaseGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RulesetsAPI.RulesetsRulesetResponse> {
+  ): Core.APIPromise<RulesetsAPI.Ruleset> {
     if (isRequestOptions(params)) {
       return this.get(rulesetPhase, {}, params);
     }
@@ -178,7 +178,7 @@ export class Phases extends APIResource {
       this._client.get(
         `/${accountOrZone}/${accountOrZoneId}/rulesets/phases/${rulesetPhase}/entrypoint`,
         options,
-      ) as Core.APIPromise<{ result: RulesetsAPI.RulesetsRulesetResponse }>
+      ) as Core.APIPromise<{ result: RulesetsAPI.Ruleset }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -702,6 +702,8 @@ export namespace Phases {
   export import PhaseUpdateParams = PhasesAPI.PhaseUpdateParams;
   export import PhaseGetParams = PhasesAPI.PhaseGetParams;
   export import Versions = VersionsAPI.Versions;
+  export import VersionListResponse = VersionsAPI.VersionListResponse;
+  export import VersionListResponsesSinglePage = VersionsAPI.VersionListResponsesSinglePage;
   export import VersionListParams = VersionsAPI.VersionListParams;
   export import VersionGetParams = VersionsAPI.VersionGetParams;
 }

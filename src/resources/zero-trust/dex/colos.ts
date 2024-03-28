@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ColosAPI from 'cloudflare/resources/zero-trust/dex/colos';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Colos extends APIResource {
   /**
@@ -10,20 +11,21 @@ export class Colos extends APIResource {
    * period, sorted by usage starting from the most used colo. Colos without traffic
    * are also returned and sorted alphabetically.
    */
-  list(params: ColoListParams, options?: Core.RequestOptions): Core.APIPromise<ColoListResponse | null> {
+  list(
+    params: ColoListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ColoListResponsesSinglePage, ColoListResponse> {
     const { account_id, ...query } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/dex/colos`, { query, ...options }) as Core.APIPromise<{
-        result: ColoListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(`/accounts/${account_id}/dex/colos`, ColoListResponsesSinglePage, {
+      query,
+      ...options,
+    });
   }
 }
 
-/**
- * array of colos.
- */
-export type ColoListResponse = Array<unknown>;
+export class ColoListResponsesSinglePage extends SinglePage<ColoListResponse> {}
+
+export type ColoListResponse = unknown;
 
 export interface ColoListParams {
   /**
@@ -50,5 +52,6 @@ export interface ColoListParams {
 
 export namespace Colos {
   export import ColoListResponse = ColosAPI.ColoListResponse;
+  export import ColoListResponsesSinglePage = ColosAPI.ColoListResponsesSinglePage;
   export import ColoListParams = ColosAPI.ColoListParams;
 }

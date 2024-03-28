@@ -33,14 +33,11 @@ export class CustomCertificates extends APIResource {
   list(
     params: CustomCertificateListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<
-    TLSCertificatesAndHostnamesCustomCertificatesV4PagePaginationArray,
-    TLSCertificatesAndHostnamesCustomCertificate
-  > {
+  ): Core.PagePromise<CustomCertificatesV4PagePaginationArray, CustomCertificate> {
     const { zone_id, ...query } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/custom_certificates`,
-      TLSCertificatesAndHostnamesCustomCertificatesV4PagePaginationArray,
+      CustomCertificatesV4PagePaginationArray,
       { query, ...options },
     );
   }
@@ -99,9 +96,9 @@ export class CustomCertificates extends APIResource {
   }
 }
 
-export class TLSCertificatesAndHostnamesCustomCertificatesV4PagePaginationArray extends V4PagePaginationArray<TLSCertificatesAndHostnamesCustomCertificate> {}
+export class CustomCertificatesV4PagePaginationArray extends V4PagePaginationArray<CustomCertificate> {}
 
-export interface TLSCertificatesAndHostnamesCustomCertificate {
+export interface CustomCertificate {
   /**
    * Identifier
    */
@@ -169,9 +166,9 @@ export interface TLSCertificatesAndHostnamesCustomCertificate {
    * security data centers. Default distribution is to all Cloudflare datacenters,
    * for optimal performance.
    */
-  geo_restrictions?: TLSCertificatesAndHostnamesCustomCertificate.GeoRestrictions;
+  geo_restrictions?: CustomCertificate.GeoRestrictions;
 
-  keyless_server?: KeylessCertificatesAPI.TLSCertificatesAndHostnamesBase;
+  keyless_server?: KeylessCertificatesAPI.KeylessCertificateHostname;
 
   /**
    * Specify the policy that determines the region where your private key will be
@@ -187,7 +184,7 @@ export interface TLSCertificatesAndHostnamesCustomCertificate {
   policy?: string;
 }
 
-export namespace TLSCertificatesAndHostnamesCustomCertificate {
+export namespace CustomCertificate {
   /**
    * Specify the region where your private key can be held locally for optimal TLS
    * performance. HTTPS connections to any excluded data center will still be fully
@@ -376,12 +373,12 @@ export interface CustomCertificateGetParams {
 }
 
 export namespace CustomCertificates {
-  export import TLSCertificatesAndHostnamesCustomCertificate = CustomCertificatesAPI.TLSCertificatesAndHostnamesCustomCertificate;
+  export import CustomCertificate = CustomCertificatesAPI.CustomCertificate;
   export import CustomCertificateCreateResponse = CustomCertificatesAPI.CustomCertificateCreateResponse;
   export import CustomCertificateDeleteResponse = CustomCertificatesAPI.CustomCertificateDeleteResponse;
   export import CustomCertificateEditResponse = CustomCertificatesAPI.CustomCertificateEditResponse;
   export import CustomCertificateGetResponse = CustomCertificatesAPI.CustomCertificateGetResponse;
-  export import TLSCertificatesAndHostnamesCustomCertificatesV4PagePaginationArray = CustomCertificatesAPI.TLSCertificatesAndHostnamesCustomCertificatesV4PagePaginationArray;
+  export import CustomCertificatesV4PagePaginationArray = CustomCertificatesAPI.CustomCertificatesV4PagePaginationArray;
   export import CustomCertificateCreateParams = CustomCertificatesAPI.CustomCertificateCreateParams;
   export import CustomCertificateListParams = CustomCertificatesAPI.CustomCertificateListParams;
   export import CustomCertificateDeleteParams = CustomCertificatesAPI.CustomCertificateDeleteParams;

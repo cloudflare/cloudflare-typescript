@@ -13,19 +13,19 @@ export class Objects extends APIResource {
     id: string,
     params: ObjectListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<WorkersObjectsCursorLimitPagination, WorkersObject> {
+  ): Core.PagePromise<DurableObjectsCursorLimitPagination, DurableObject> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/workers/durable_objects/namespaces/${id}/objects`,
-      WorkersObjectsCursorLimitPagination,
+      DurableObjectsCursorLimitPagination,
       { query, ...options },
     );
   }
 }
 
-export class WorkersObjectsCursorLimitPagination extends CursorLimitPagination<WorkersObject> {}
+export class DurableObjectsCursorLimitPagination extends CursorLimitPagination<DurableObject> {}
 
-export interface WorkersObject {
+export interface DurableObject {
   /**
    * ID of the Durable Object.
    */
@@ -45,7 +45,7 @@ export interface ObjectListParams extends CursorLimitPaginationParams {
 }
 
 export namespace Objects {
-  export import WorkersObject = ObjectsAPI.WorkersObject;
-  export import WorkersObjectsCursorLimitPagination = ObjectsAPI.WorkersObjectsCursorLimitPagination;
+  export import DurableObject = ObjectsAPI.DurableObject;
+  export import DurableObjectsCursorLimitPagination = ObjectsAPI.DurableObjectsCursorLimitPagination;
   export import ObjectListParams = ObjectsAPI.ObjectListParams;
 }

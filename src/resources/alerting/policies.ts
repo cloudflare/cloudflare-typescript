@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as PoliciesAPI from 'cloudflare/resources/alerting/policies';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Policies extends APIResource {
   /**
@@ -38,13 +39,16 @@ export class Policies extends APIResource {
   /**
    * Get a list of all Notification policies.
    */
-  list(params: PolicyListParams, options?: Core.RequestOptions): Core.APIPromise<PolicyListResponse | null> {
+  list(
+    params: PolicyListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<AlertingPoliciesSinglePage, AlertingPolicies> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/alerting/v3/policies`, options) as Core.APIPromise<{
-        result: PolicyListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/alerting/v3/policies`,
+      AlertingPoliciesSinglePage,
+      options,
+    );
   }
 
   /**
@@ -71,18 +75,20 @@ export class Policies extends APIResource {
     policyId: string,
     params: PolicyGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AaaPolicies> {
+  ): Core.APIPromise<AlertingPolicies> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/alerting/v3/policies/${policyId}`,
         options,
-      ) as Core.APIPromise<{ result: AaaPolicies }>
+      ) as Core.APIPromise<{ result: AlertingPolicies }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface AaaPolicies {
+export class AlertingPoliciesSinglePage extends SinglePage<AlertingPolicies> {}
+
+export interface AlertingPolicies {
   /**
    * The unique identifier of a notification policy
    */
@@ -167,13 +173,13 @@ export interface AaaPolicies {
    * that alert type based on some criteria. This is only available for select alert
    * types. See alert type documentation for more details.
    */
-  filters?: AaaPolicies.Filters;
+  filters?: AlertingPolicies.Filters;
 
   /**
    * List of IDs that will be used when dispatching a notification. IDs for email
    * type will be the email address.
    */
-  mechanisms?: Record<string, Array<AaaPolicies.Mechanisms>>;
+  mechanisms?: Record<string, Array<AlertingPolicies.Mechanisms>>;
 
   modified?: string;
 
@@ -183,7 +189,7 @@ export interface AaaPolicies {
   name?: string;
 }
 
-export namespace AaaPolicies {
+export namespace AlertingPolicies {
   /**
    * Optional filters that allow you to be alerted only on a subset of events for
    * that alert type based on some criteria. This is only available for select alert
@@ -415,8 +421,6 @@ export interface PolicyUpdateResponse {
    */
   id?: string;
 }
-
-export type PolicyListResponse = Array<AaaPolicies>;
 
 export type PolicyDeleteResponse = unknown | Array<unknown> | string;
 
@@ -1074,11 +1078,11 @@ export interface PolicyGetParams {
 }
 
 export namespace Policies {
-  export import AaaPolicies = PoliciesAPI.AaaPolicies;
+  export import AlertingPolicies = PoliciesAPI.AlertingPolicies;
   export import PolicyCreateResponse = PoliciesAPI.PolicyCreateResponse;
   export import PolicyUpdateResponse = PoliciesAPI.PolicyUpdateResponse;
-  export import PolicyListResponse = PoliciesAPI.PolicyListResponse;
   export import PolicyDeleteResponse = PoliciesAPI.PolicyDeleteResponse;
+  export import AlertingPoliciesSinglePage = PoliciesAPI.AlertingPoliciesSinglePage;
   export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
   export import PolicyUpdateParams = PoliciesAPI.PolicyUpdateParams;
   export import PolicyListParams = PoliciesAPI.PolicyListParams;

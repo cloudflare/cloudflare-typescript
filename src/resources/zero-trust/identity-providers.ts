@@ -5,6 +5,7 @@ import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import { CloudflareError } from 'cloudflare/error';
 import * as IdentityProvidersAPI from 'cloudflare/resources/zero-trust/identity-providers';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class IdentityProviders extends APIResource {
   /**
@@ -13,7 +14,7 @@ export class IdentityProviders extends APIResource {
   create(
     params: IdentityProviderCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessIdentityProviders> {
+  ): Core.APIPromise<ZeroTrustIdentityProviders> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -35,7 +36,7 @@ export class IdentityProviders extends APIResource {
       this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/identity_providers`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: AccessIdentityProviders }>
+      }) as Core.APIPromise<{ result: ZeroTrustIdentityProviders }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -46,7 +47,7 @@ export class IdentityProviders extends APIResource {
     uuid: string,
     params: IdentityProviderUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessIdentityProviders> {
+  ): Core.APIPromise<ZeroTrustIdentityProviders> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -68,7 +69,7 @@ export class IdentityProviders extends APIResource {
       this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/identity_providers/${uuid}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: AccessIdentityProviders }>
+      }) as Core.APIPromise<{ result: ZeroTrustIdentityProviders }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -78,12 +79,14 @@ export class IdentityProviders extends APIResource {
   list(
     params?: IdentityProviderListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<IdentityProviderListResponse | null>;
-  list(options?: Core.RequestOptions): Core.APIPromise<IdentityProviderListResponse | null>;
+  ): Core.PagePromise<IdentityProviderListResponsesSinglePage, IdentityProviderListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<IdentityProviderListResponsesSinglePage, IdentityProviderListResponse>;
   list(
     params: IdentityProviderListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<IdentityProviderListResponse | null> {
+  ): Core.PagePromise<IdentityProviderListResponsesSinglePage, IdentityProviderListResponse> {
     if (isRequestOptions(params)) {
       return this.list({}, params);
     }
@@ -104,12 +107,11 @@ export class IdentityProviders extends APIResource {
           accountOrZone: 'zones',
           accountOrZoneId: zone_id,
         };
-    return (
-      this._client.get(
-        `/${accountOrZone}/${accountOrZoneId}/access/identity_providers`,
-        options,
-      ) as Core.APIPromise<{ result: IdentityProviderListResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/${accountOrZone}/${accountOrZoneId}/access/identity_providers`,
+      IdentityProviderListResponsesSinglePage,
+      options,
+    );
   }
 
   /**
@@ -161,13 +163,13 @@ export class IdentityProviders extends APIResource {
     uuid: string,
     params?: IdentityProviderGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessIdentityProviders>;
-  get(uuid: string, options?: Core.RequestOptions): Core.APIPromise<AccessIdentityProviders>;
+  ): Core.APIPromise<ZeroTrustIdentityProviders>;
+  get(uuid: string, options?: Core.RequestOptions): Core.APIPromise<ZeroTrustIdentityProviders>;
   get(
     uuid: string,
     params: IdentityProviderGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessIdentityProviders> {
+  ): Core.APIPromise<ZeroTrustIdentityProviders> {
     if (isRequestOptions(params)) {
       return this.get(uuid, {}, params);
     }
@@ -192,28 +194,30 @@ export class IdentityProviders extends APIResource {
       this._client.get(
         `/${accountOrZone}/${accountOrZoneId}/access/identity_providers/${uuid}`,
         options,
-      ) as Core.APIPromise<{ result: AccessIdentityProviders }>
+      ) as Core.APIPromise<{ result: ZeroTrustIdentityProviders }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type AccessIdentityProviders =
-  | AccessIdentityProviders.AccessAzureAd
-  | AccessIdentityProviders.AccessCentrify
-  | AccessIdentityProviders.AccessFacebook
-  | AccessIdentityProviders.AccessGitHub
-  | AccessIdentityProviders.AccessGoogle
-  | AccessIdentityProviders.AccessGoogleApps
-  | AccessIdentityProviders.AccessLinkedin
-  | AccessIdentityProviders.AccessOidc
-  | AccessIdentityProviders.AccessOkta
-  | AccessIdentityProviders.AccessOnelogin
-  | AccessIdentityProviders.AccessPingone
-  | AccessIdentityProviders.AccessSaml
-  | AccessIdentityProviders.AccessYandex
-  | AccessIdentityProviders.AccessOnetimepin;
+export class IdentityProviderListResponsesSinglePage extends SinglePage<IdentityProviderListResponse> {}
 
-export namespace AccessIdentityProviders {
+export type ZeroTrustIdentityProviders =
+  | ZeroTrustIdentityProviders.AccessAzureAd
+  | ZeroTrustIdentityProviders.AccessCentrify
+  | ZeroTrustIdentityProviders.AccessFacebook
+  | ZeroTrustIdentityProviders.AccessGitHub
+  | ZeroTrustIdentityProviders.AccessGoogle
+  | ZeroTrustIdentityProviders.AccessGoogleApps
+  | ZeroTrustIdentityProviders.AccessLinkedin
+  | ZeroTrustIdentityProviders.AccessOidc
+  | ZeroTrustIdentityProviders.AccessOkta
+  | ZeroTrustIdentityProviders.AccessOnelogin
+  | ZeroTrustIdentityProviders.AccessPingone
+  | ZeroTrustIdentityProviders.AccessSaml
+  | ZeroTrustIdentityProviders.AccessYandex
+  | ZeroTrustIdentityProviders.AccessOnetimepin;
+
+export namespace ZeroTrustIdentityProviders {
   export interface AccessAzureAd {
     /**
      * The configuration parameters for the identity provider. To view the required
@@ -1844,7 +1848,7 @@ export namespace AccessIdentityProviders {
   }
 }
 
-export type IdentityProviderListResponse = Array<
+export type IdentityProviderListResponse =
   | IdentityProviderListResponse.AccessAzureAd
   | IdentityProviderListResponse.AccessCentrify
   | IdentityProviderListResponse.AccessFacebook
@@ -1857,8 +1861,7 @@ export type IdentityProviderListResponse = Array<
   | IdentityProviderListResponse.AccessOnelogin
   | IdentityProviderListResponse.AccessPingone
   | IdentityProviderListResponse.AccessSaml
-  | IdentityProviderListResponse.AccessYandex
->;
+  | IdentityProviderListResponse.AccessYandex;
 
 export namespace IdentityProviderListResponse {
   export interface AccessAzureAd {
@@ -6939,9 +6942,10 @@ export interface IdentityProviderGetParams {
 }
 
 export namespace IdentityProviders {
-  export import AccessIdentityProviders = IdentityProvidersAPI.AccessIdentityProviders;
+  export import ZeroTrustIdentityProviders = IdentityProvidersAPI.ZeroTrustIdentityProviders;
   export import IdentityProviderListResponse = IdentityProvidersAPI.IdentityProviderListResponse;
   export import IdentityProviderDeleteResponse = IdentityProvidersAPI.IdentityProviderDeleteResponse;
+  export import IdentityProviderListResponsesSinglePage = IdentityProvidersAPI.IdentityProviderListResponsesSinglePage;
   export import IdentityProviderCreateParams = IdentityProvidersAPI.IdentityProviderCreateParams;
   export import IdentityProviderUpdateParams = IdentityProvidersAPI.IdentityProviderUpdateParams;
   export import IdentityProviderListParams = IdentityProvidersAPI.IdentityProviderListParams;

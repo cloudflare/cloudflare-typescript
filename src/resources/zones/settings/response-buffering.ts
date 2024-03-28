@@ -11,13 +11,16 @@ export class ResponseBuffering extends APIResource {
    * it to be delivered in chunks. By default, the proxied server streams directly
    * and is not buffered by Cloudflare. This is limited to Enterprise Zones.
    */
-  edit(params: ResponseBufferingEditParams, options?: Core.RequestOptions): Core.APIPromise<ZonesBuffering> {
+  edit(
+    params: ResponseBufferingEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ZoneSettingBuffering> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/response_buffering`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZonesBuffering }>
+      }) as Core.APIPromise<{ result: ZoneSettingBuffering }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -27,11 +30,14 @@ export class ResponseBuffering extends APIResource {
    * it to be delivered in chunks. By default, the proxied server streams directly
    * and is not buffered by Cloudflare. This is limited to Enterprise Zones.
    */
-  get(params: ResponseBufferingGetParams, options?: Core.RequestOptions): Core.APIPromise<ZonesBuffering> {
+  get(
+    params: ResponseBufferingGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ZoneSettingBuffering> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/response_buffering`, options) as Core.APIPromise<{
-        result: ZonesBuffering;
+        result: ZoneSettingBuffering;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -43,7 +49,7 @@ export class ResponseBuffering extends APIResource {
  * it to be delivered in chunks. By default, the proxied server streams directly
  * and is not buffered by Cloudflare. This is limited to Enterprise Zones.
  */
-export interface ZonesBuffering {
+export interface ZoneSettingBuffering {
   /**
    * ID of the zone setting.
    */
@@ -86,7 +92,7 @@ export interface ResponseBufferingGetParams {
 }
 
 export namespace ResponseBuffering {
-  export import ZonesBuffering = ResponseBufferingAPI.ZonesBuffering;
+  export import ZoneSettingBuffering = ResponseBufferingAPI.ZoneSettingBuffering;
   export import ResponseBufferingEditParams = ResponseBufferingAPI.ResponseBufferingEditParams;
   export import ResponseBufferingGetParams = ResponseBufferingAPI.ResponseBufferingGetParams;
 }

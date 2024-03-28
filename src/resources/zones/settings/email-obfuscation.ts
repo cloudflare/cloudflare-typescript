@@ -12,13 +12,13 @@ export class EmailObfuscation extends APIResource {
   edit(
     params: EmailObfuscationEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZonesEmailObfuscation> {
+  ): Core.APIPromise<ZoneSettingEmailObfuscation> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/email_obfuscation`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZonesEmailObfuscation }>
+      }) as Core.APIPromise<{ result: ZoneSettingEmailObfuscation }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -29,11 +29,11 @@ export class EmailObfuscation extends APIResource {
   get(
     params: EmailObfuscationGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZonesEmailObfuscation> {
+  ): Core.APIPromise<ZoneSettingEmailObfuscation> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/email_obfuscation`, options) as Core.APIPromise<{
-        result: ZonesEmailObfuscation;
+        result: ZoneSettingEmailObfuscation;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -43,7 +43,7 @@ export class EmailObfuscation extends APIResource {
  * Encrypt email adresses on your web page from bots, while keeping them visible to
  * humans. (https://support.cloudflare.com/hc/en-us/articles/200170016).
  */
-export interface ZonesEmailObfuscation {
+export interface ZoneSettingEmailObfuscation {
   /**
    * ID of the zone setting.
    */
@@ -86,7 +86,7 @@ export interface EmailObfuscationGetParams {
 }
 
 export namespace EmailObfuscation {
-  export import ZonesEmailObfuscation = EmailObfuscationAPI.ZonesEmailObfuscation;
+  export import ZoneSettingEmailObfuscation = EmailObfuscationAPI.ZoneSettingEmailObfuscation;
   export import EmailObfuscationEditParams = EmailObfuscationAPI.EmailObfuscationEditParams;
   export import EmailObfuscationGetParams = EmailObfuscationAPI.EmailObfuscationGetParams;
 }

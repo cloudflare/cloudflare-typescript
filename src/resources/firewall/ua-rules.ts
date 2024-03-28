@@ -101,7 +101,7 @@ export class UARules extends APIResource {
 
 export class UARuleListResponsesV4PagePaginationArray extends V4PagePaginationArray<UARuleListResponse> {}
 
-export interface LegacyJhsUARules {
+export interface FirewallUserAgentRule {
   /**
    * The unique identifier of the User Agent Blocking rule.
    */
@@ -110,7 +110,7 @@ export interface LegacyJhsUARules {
   /**
    * The configuration object for the current rule.
    */
-  configuration?: LegacyJhsUARules.Configuration;
+  configuration?: FirewallUserAgentRule.Configuration;
 
   /**
    * An informative summary of the rule.
@@ -128,7 +128,7 @@ export interface LegacyJhsUARules {
   paused?: boolean;
 }
 
-export namespace LegacyJhsUARules {
+export namespace FirewallUserAgentRule {
   /**
    * The configuration object for the current rule.
    */
@@ -228,7 +228,7 @@ export interface UARuleListParams extends V4PagePaginationArrayParams {
 }
 
 export namespace UARules {
-  export import LegacyJhsUARules = UARulesAPI.LegacyJhsUARules;
+  export import FirewallUserAgentRule = UARulesAPI.FirewallUserAgentRule;
   export import UARuleCreateResponse = UARulesAPI.UARuleCreateResponse;
   export import UARuleUpdateResponse = UARulesAPI.UARuleUpdateResponse;
   export import UARuleListResponse = UARulesAPI.UARuleListResponse;

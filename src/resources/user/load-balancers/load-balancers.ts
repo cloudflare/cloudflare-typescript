@@ -16,27 +16,27 @@ export class LoadBalancers extends APIResource {
 export namespace LoadBalancers {
   export import Monitors = MonitorsAPI.Monitors;
   export import LoadBalancingMonitor = MonitorsAPI.LoadBalancingMonitor;
-  export import MonitorListResponse = MonitorsAPI.MonitorListResponse;
   export import MonitorDeleteResponse = MonitorsAPI.MonitorDeleteResponse;
   export import MonitorPreviewResponse = MonitorsAPI.MonitorPreviewResponse;
   export import MonitorReferencesResponse = MonitorsAPI.MonitorReferencesResponse;
+  export import LoadBalancingMonitorsSinglePage = MonitorsAPI.LoadBalancingMonitorsSinglePage;
   export import MonitorCreateParams = MonitorsAPI.MonitorCreateParams;
   export import MonitorUpdateParams = MonitorsAPI.MonitorUpdateParams;
   export import MonitorEditParams = MonitorsAPI.MonitorEditParams;
   export import MonitorPreviewParams = MonitorsAPI.MonitorPreviewParams;
   export import Pools = PoolsAPI.Pools;
   export import LoadBalancingPool = PoolsAPI.LoadBalancingPool;
-  export import PoolListResponse = PoolsAPI.PoolListResponse;
   export import PoolDeleteResponse = PoolsAPI.PoolDeleteResponse;
   export import PoolHealthResponse = PoolsAPI.PoolHealthResponse;
   export import PoolPreviewResponse = PoolsAPI.PoolPreviewResponse;
   export import PoolReferencesResponse = PoolsAPI.PoolReferencesResponse;
+  export import LoadBalancingPoolsSinglePage = PoolsAPI.LoadBalancingPoolsSinglePage;
   export import PoolCreateParams = PoolsAPI.PoolCreateParams;
   export import PoolUpdateParams = PoolsAPI.PoolUpdateParams;
   export import PoolListParams = PoolsAPI.PoolListParams;
   export import PoolEditParams = PoolsAPI.PoolEditParams;
   export import PoolPreviewParams = PoolsAPI.PoolPreviewParams;
   export import Preview = PreviewAPI.Preview;
-  export import LoadBalancingPreviewResult = PreviewAPI.LoadBalancingPreviewResult;
+  export import LoadBalancingPreview = PreviewAPI.LoadBalancingPreview;
   export import Analytics = AnalyticsAPI.Analytics;
 }

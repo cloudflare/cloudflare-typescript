@@ -11,13 +11,13 @@ export class HostnameAssociations extends APIResource {
   update(
     params: HostnameAssociationUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TLSCertificatesAndHostnamesHostnameAssociation> {
+  ): Core.APIPromise<TLSHostnameAssociation> {
     const { zone_id, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/certificate_authorities/hostname_associations`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: TLSCertificatesAndHostnamesHostnameAssociation }>
+      }) as Core.APIPromise<{ result: TLSHostnameAssociation }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -27,18 +27,18 @@ export class HostnameAssociations extends APIResource {
   get(
     params: HostnameAssociationGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TLSCertificatesAndHostnamesHostnameAssociation> {
+  ): Core.APIPromise<TLSHostnameAssociation> {
     const { zone_id, ...query } = params;
     return (
       this._client.get(`/zones/${zone_id}/certificate_authorities/hostname_associations`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: TLSCertificatesAndHostnamesHostnameAssociation }>
+      }) as Core.APIPromise<{ result: TLSHostnameAssociation }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface TLSCertificatesAndHostnamesHostnameAssociation {
+export interface TLSHostnameAssociation {
   hostnames?: Array<string>;
 
   /**
@@ -84,7 +84,7 @@ export interface HostnameAssociationGetParams {
 }
 
 export namespace HostnameAssociations {
-  export import TLSCertificatesAndHostnamesHostnameAssociation = HostnameAssociationsAPI.TLSCertificatesAndHostnamesHostnameAssociation;
+  export import TLSHostnameAssociation = HostnameAssociationsAPI.TLSHostnameAssociation;
   export import HostnameAssociationUpdateParams = HostnameAssociationsAPI.HostnameAssociationUpdateParams;
   export import HostnameAssociationGetParams = HostnameAssociationsAPI.HostnameAssociationGetParams;
 }

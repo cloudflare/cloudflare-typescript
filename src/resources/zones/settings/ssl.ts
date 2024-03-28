@@ -23,11 +23,11 @@ export class SSL extends APIResource {
    * expiration date in the future, and respond for the request domain name
    * (hostname). (https://support.cloudflare.com/hc/en-us/articles/200170416).
    */
-  edit(params: SSLEditParams, options?: Core.RequestOptions): Core.APIPromise<ZonesSSL> {
+  edit(params: SSLEditParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingSSL> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/ssl`, { body, ...options }) as Core.APIPromise<{
-        result: ZonesSSL;
+        result: ZoneSettingSSL;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -50,10 +50,12 @@ export class SSL extends APIResource {
    * expiration date in the future, and respond for the request domain name
    * (hostname). (https://support.cloudflare.com/hc/en-us/articles/200170416).
    */
-  get(params: SSLGetParams, options?: Core.RequestOptions): Core.APIPromise<ZonesSSL> {
+  get(params: SSLGetParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingSSL> {
     const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zone_id}/settings/ssl`, options) as Core.APIPromise<{ result: ZonesSSL }>
+      this._client.get(`/zones/${zone_id}/settings/ssl`, options) as Core.APIPromise<{
+        result: ZoneSettingSSL;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -76,7 +78,7 @@ export class SSL extends APIResource {
  * expiration date in the future, and respond for the request domain name
  * (hostname). (https://support.cloudflare.com/hc/en-us/articles/200170416).
  */
-export interface ZonesSSL {
+export interface ZoneSettingSSL {
   /**
    * ID of the zone setting.
    */
@@ -119,7 +121,7 @@ export interface SSLGetParams {
 }
 
 export namespace SSL {
-  export import ZonesSSL = SSLAPI.ZonesSSL;
+  export import ZoneSettingSSL = SSLAPI.ZoneSettingSSL;
   export import SSLEditParams = SSLAPI.SSLEditParams;
   export import SSLGetParams = SSLAPI.SSLGetParams;
 }

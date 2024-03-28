@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as EventsAPI from 'cloudflare/resources/waiting-rooms/events/events';
 import * as DetailsAPI from 'cloudflare/resources/waiting-rooms/events/details';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Events extends APIResource {
   details: DetailsAPI.Details = new DetailsAPI.Details(this._client);
@@ -21,12 +22,12 @@ export class Events extends APIResource {
     waitingRoomId: string,
     body: EventCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WaitingroomEventResult> {
+  ): Core.APIPromise<WaitingroomEvent> {
     return (
       this._client.post(`/zones/${zoneIdentifier}/waiting_rooms/${waitingRoomId}/events`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: WaitingroomEventResult }>
+      }) as Core.APIPromise<{ result: WaitingroomEvent }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -39,12 +40,12 @@ export class Events extends APIResource {
     eventId: string,
     body: EventUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WaitingroomEventResult> {
+  ): Core.APIPromise<WaitingroomEvent> {
     return (
       this._client.put(`/zones/${zoneIdentifier}/waiting_rooms/${waitingRoomId}/events/${eventId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: WaitingroomEventResult }>
+      }) as Core.APIPromise<{ result: WaitingroomEvent }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -55,13 +56,12 @@ export class Events extends APIResource {
     zoneIdentifier: string,
     waitingRoomId: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<EventListResponse | null> {
-    return (
-      this._client.get(
-        `/zones/${zoneIdentifier}/waiting_rooms/${waitingRoomId}/events`,
-        options,
-      ) as Core.APIPromise<{ result: EventListResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+  ): Core.PagePromise<WaitingroomEventsSinglePage, WaitingroomEvent> {
+    return this._client.getAPIList(
+      `/zones/${zoneIdentifier}/waiting_rooms/${waitingRoomId}/events`,
+      WaitingroomEventsSinglePage,
+      options,
+    );
   }
 
   /**
@@ -90,12 +90,12 @@ export class Events extends APIResource {
     eventId: string,
     body: EventEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WaitingroomEventResult> {
+  ): Core.APIPromise<WaitingroomEvent> {
     return (
       this._client.patch(`/zones/${zoneIdentifier}/waiting_rooms/${waitingRoomId}/events/${eventId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: WaitingroomEventResult }>
+      }) as Core.APIPromise<{ result: WaitingroomEvent }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -107,17 +107,19 @@ export class Events extends APIResource {
     waitingRoomId: string,
     eventId: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WaitingroomEventResult> {
+  ): Core.APIPromise<WaitingroomEvent> {
     return (
       this._client.get(
         `/zones/${zoneIdentifier}/waiting_rooms/${waitingRoomId}/events/${eventId}`,
         options,
-      ) as Core.APIPromise<{ result: WaitingroomEventResult }>
+      ) as Core.APIPromise<{ result: WaitingroomEvent }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface WaitingroomEventResult {
+export class WaitingroomEventsSinglePage extends SinglePage<WaitingroomEvent> {}
+
+export interface WaitingroomEvent {
   id?: string;
 
   created_on?: string;
@@ -208,8 +210,6 @@ export interface WaitingroomEventResult {
    */
   total_active_users?: number | null;
 }
-
-export type EventListResponse = Array<WaitingroomEventResult>;
 
 export interface EventDeleteResponse {
   id?: string;
@@ -474,12 +474,12 @@ export interface EventEditParams {
 }
 
 export namespace Events {
-  export import WaitingroomEventResult = EventsAPI.WaitingroomEventResult;
-  export import EventListResponse = EventsAPI.EventListResponse;
+  export import WaitingroomEvent = EventsAPI.WaitingroomEvent;
   export import EventDeleteResponse = EventsAPI.EventDeleteResponse;
+  export import WaitingroomEventsSinglePage = EventsAPI.WaitingroomEventsSinglePage;
   export import EventCreateParams = EventsAPI.EventCreateParams;
   export import EventUpdateParams = EventsAPI.EventUpdateParams;
   export import EventEditParams = EventsAPI.EventEditParams;
   export import Details = DetailsAPI.Details;
-  export import WaitingroomEventDetailsResult = DetailsAPI.WaitingroomEventDetailsResult;
+  export import WaitingroomEventDetails = DetailsAPI.WaitingroomEventDetails;
 }

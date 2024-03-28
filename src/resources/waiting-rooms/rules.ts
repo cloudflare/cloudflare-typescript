@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as RulesAPI from 'cloudflare/resources/waiting-rooms/rules';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Rules extends APIResource {
   /**
@@ -48,13 +49,12 @@ export class Rules extends APIResource {
     zoneIdentifier: string,
     waitingRoomId: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleListResponse | null> {
-    return (
-      this._client.get(
-        `/zones/${zoneIdentifier}/waiting_rooms/${waitingRoomId}/rules`,
-        options,
-      ) as Core.APIPromise<{ result: RuleListResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+  ): Core.PagePromise<WaitingroomRulesSinglePage, WaitingroomRule> {
+    return this._client.getAPIList(
+      `/zones/${zoneIdentifier}/waiting_rooms/${waitingRoomId}/rules`,
+      WaitingroomRulesSinglePage,
+      options,
+    );
   }
 
   /**
@@ -93,7 +93,9 @@ export class Rules extends APIResource {
   }
 }
 
-export interface WaitingroomRuleResult {
+export class WaitingroomRulesSinglePage extends SinglePage<WaitingroomRule> {}
+
+export interface WaitingroomRule {
   /**
    * The ID of the rule.
    */
@@ -127,15 +129,13 @@ export interface WaitingroomRuleResult {
   version?: string;
 }
 
-export type RuleCreateResponse = Array<WaitingroomRuleResult>;
+export type RuleCreateResponse = Array<WaitingroomRule>;
 
-export type RuleUpdateResponse = Array<WaitingroomRuleResult>;
+export type RuleUpdateResponse = Array<WaitingroomRule>;
 
-export type RuleListResponse = Array<WaitingroomRuleResult>;
+export type RuleDeleteResponse = Array<WaitingroomRule>;
 
-export type RuleDeleteResponse = Array<WaitingroomRuleResult>;
-
-export type RuleEditResponse = Array<WaitingroomRuleResult>;
+export type RuleEditResponse = Array<WaitingroomRule>;
 
 export interface RuleCreateParams {
   /**
@@ -241,12 +241,12 @@ export namespace RuleEditParams {
 }
 
 export namespace Rules {
-  export import WaitingroomRuleResult = RulesAPI.WaitingroomRuleResult;
+  export import WaitingroomRule = RulesAPI.WaitingroomRule;
   export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
   export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
-  export import RuleListResponse = RulesAPI.RuleListResponse;
   export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
   export import RuleEditResponse = RulesAPI.RuleEditResponse;
+  export import WaitingroomRulesSinglePage = RulesAPI.WaitingroomRulesSinglePage;
   export import RuleCreateParams = RulesAPI.RuleCreateParams;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
   export import RuleEditParams = RulesAPI.RuleEditParams;

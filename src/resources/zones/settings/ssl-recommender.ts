@@ -13,13 +13,13 @@ export class SSLRecommender extends APIResource {
   edit(
     params: SSLRecommenderEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZonesSSLRecommender> {
+  ): Core.APIPromise<ZoneSettingSSLRecommender> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/ssl_recommender`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZonesSSLRecommender }>
+      }) as Core.APIPromise<{ result: ZoneSettingSSLRecommender }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -28,11 +28,14 @@ export class SSLRecommender extends APIResource {
    * recommend (by sending periodic emails) the most secure SSL/TLS setting your
    * origin servers support.
    */
-  get(params: SSLRecommenderGetParams, options?: Core.RequestOptions): Core.APIPromise<ZonesSSLRecommender> {
+  get(
+    params: SSLRecommenderGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ZoneSettingSSLRecommender> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/ssl_recommender`, options) as Core.APIPromise<{
-        result: ZonesSSLRecommender;
+        result: ZoneSettingSSLRecommender;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -43,7 +46,7 @@ export class SSLRecommender extends APIResource {
  * recommend (by sending periodic emails) the most secure SSL/TLS setting your
  * origin servers support.
  */
-export interface ZonesSSLRecommender {
+export interface ZoneSettingSSLRecommender {
   /**
    * Enrollment value for SSL/TLS Recommender.
    */
@@ -66,7 +69,7 @@ export interface SSLRecommenderEditParams {
    * and recommend (by sending periodic emails) the most secure SSL/TLS setting your
    * origin servers support.
    */
-  value: ZonesSSLRecommender;
+  value: ZoneSettingSSLRecommender;
 }
 
 export interface SSLRecommenderGetParams {
@@ -77,7 +80,7 @@ export interface SSLRecommenderGetParams {
 }
 
 export namespace SSLRecommender {
-  export import ZonesSSLRecommender = SSLRecommenderAPI.ZonesSSLRecommender;
+  export import ZoneSettingSSLRecommender = SSLRecommenderAPI.ZoneSettingSSLRecommender;
   export import SSLRecommenderEditParams = SSLRecommenderAPI.SSLRecommenderEditParams;
   export import SSLRecommenderGetParams = SSLRecommenderAPI.SSLRecommenderGetParams;
 }

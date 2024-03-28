@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as HostnamesAPI from 'cloudflare/resources/web3/hostnames/hostnames';
 import * as IPFSUniversalPathsAPI from 'cloudflare/resources/web3/hostnames/ipfs-universal-paths/ipfs-universal-paths';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Hostnames extends APIResource {
   ipfsUniversalPaths: IPFSUniversalPathsAPI.IPFSUniversalPaths = new IPFSUniversalPathsAPI.IPFSUniversalPaths(
@@ -17,10 +18,10 @@ export class Hostnames extends APIResource {
     zoneIdentifier: string,
     body: HostnameCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DwebConfigWeb3Hostname> {
+  ): Core.APIPromise<DistributedWebHostname> {
     return (
       this._client.post(`/zones/${zoneIdentifier}/web3/hostnames`, { body, ...options }) as Core.APIPromise<{
-        result: DwebConfigWeb3Hostname;
+        result: DistributedWebHostname;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -28,12 +29,15 @@ export class Hostnames extends APIResource {
   /**
    * List Web3 Hostnames
    */
-  list(zoneIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<HostnameListResponse | null> {
-    return (
-      this._client.get(`/zones/${zoneIdentifier}/web3/hostnames`, options) as Core.APIPromise<{
-        result: HostnameListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+  list(
+    zoneIdentifier: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<DistributedWebHostnamesSinglePage, DistributedWebHostname> {
+    return this._client.getAPIList(
+      `/zones/${zoneIdentifier}/web3/hostnames`,
+      DistributedWebHostnamesSinglePage,
+      options,
+    );
   }
 
   /**
@@ -60,12 +64,12 @@ export class Hostnames extends APIResource {
     identifier: string,
     body: HostnameEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DwebConfigWeb3Hostname> {
+  ): Core.APIPromise<DistributedWebHostname> {
     return (
       this._client.patch(`/zones/${zoneIdentifier}/web3/hostnames/${identifier}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: DwebConfigWeb3Hostname }>
+      }) as Core.APIPromise<{ result: DistributedWebHostname }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -76,16 +80,18 @@ export class Hostnames extends APIResource {
     zoneIdentifier: string,
     identifier: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DwebConfigWeb3Hostname> {
+  ): Core.APIPromise<DistributedWebHostname> {
     return (
       this._client.get(`/zones/${zoneIdentifier}/web3/hostnames/${identifier}`, options) as Core.APIPromise<{
-        result: DwebConfigWeb3Hostname;
+        result: DistributedWebHostname;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface DwebConfigWeb3Hostname {
+export class DistributedWebHostnamesSinglePage extends SinglePage<DistributedWebHostname> {}
+
+export interface DistributedWebHostname {
   /**
    * Identifier
    */
@@ -120,8 +126,6 @@ export interface DwebConfigWeb3Hostname {
    */
   target?: 'ethereum' | 'ipfs' | 'ipfs_universal_path';
 }
-
-export type HostnameListResponse = Array<DwebConfigWeb3Hostname>;
 
 export interface HostnameDeleteResponse {
   /**
@@ -160,9 +164,9 @@ export interface HostnameEditParams {
 }
 
 export namespace Hostnames {
-  export import DwebConfigWeb3Hostname = HostnamesAPI.DwebConfigWeb3Hostname;
-  export import HostnameListResponse = HostnamesAPI.HostnameListResponse;
+  export import DistributedWebHostname = HostnamesAPI.DistributedWebHostname;
   export import HostnameDeleteResponse = HostnamesAPI.HostnameDeleteResponse;
+  export import DistributedWebHostnamesSinglePage = HostnamesAPI.DistributedWebHostnamesSinglePage;
   export import HostnameCreateParams = HostnamesAPI.HostnameCreateParams;
   export import HostnameEditParams = HostnamesAPI.HostnameEditParams;
   export import IPFSUniversalPaths = IPFSUniversalPathsAPI.IPFSUniversalPaths;

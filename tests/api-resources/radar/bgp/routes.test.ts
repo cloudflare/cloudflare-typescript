@@ -134,6 +134,7 @@ describe('resource routes', () => {
           dateRange: '7d',
           dateStart: '2023-09-01T11:41:33.782Z',
           format: 'JSON',
+          location: 'US',
         },
         { path: '/_stainless_unknown_path' },
       ),

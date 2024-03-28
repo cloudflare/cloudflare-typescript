@@ -5,6 +5,7 @@ import { APIResource } from 'cloudflare/resource';
 import * as OriginTLSClientAuthAPI from 'cloudflare/resources/origin-tls-client-auth/origin-tls-client-auth';
 import * as SettingsAPI from 'cloudflare/resources/origin-tls-client-auth/settings';
 import * as HostnamesAPI from 'cloudflare/resources/origin-tls-client-auth/hostnames/hostnames';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class OriginTLSClientAuth extends APIResource {
   hostnames: HostnamesAPI.Hostnames = new HostnamesAPI.Hostnames(this._client);
@@ -35,13 +36,13 @@ export class OriginTLSClientAuth extends APIResource {
   list(
     params: OriginTLSClientAuthListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<OriginTLSClientAuthListResponse | null> {
+  ): Core.PagePromise<OriginTLSClientAuthListResponsesSinglePage, OriginTLSClientAuthListResponse> {
     const { zone_id } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/origin_tls_client_auth`, options) as Core.APIPromise<{
-        result: OriginTLSClientAuthListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/zones/${zone_id}/origin_tls_client_auth`,
+      OriginTLSClientAuthListResponsesSinglePage,
+      options,
+    );
   }
 
   /**
@@ -79,7 +80,9 @@ export class OriginTLSClientAuth extends APIResource {
   }
 }
 
-export interface TLSCertificatesAndHostnamesZoneAuthenticatedOriginPull {
+export class OriginTLSClientAuthListResponsesSinglePage extends SinglePage<OriginTLSClientAuthListResponse> {}
+
+export interface OriginTLSClientCertificateZoneAuthenticatedOriginPull {
   /**
    * Identifier
    */
@@ -103,31 +106,26 @@ export interface TLSCertificatesAndHostnamesZoneAuthenticatedOriginPull {
 
 export type OriginTLSClientAuthCreateResponse = unknown | string;
 
-export type OriginTLSClientAuthListResponse =
-  Array<OriginTLSClientAuthListResponse.OriginTLSClientAuthListResponseItem>;
+export interface OriginTLSClientAuthListResponse {
+  /**
+   * Identifier
+   */
+  id?: string;
 
-export namespace OriginTLSClientAuthListResponse {
-  export interface OriginTLSClientAuthListResponseItem {
-    /**
-     * Identifier
-     */
-    id?: string;
+  /**
+   * The zone's leaf certificate.
+   */
+  certificate?: string;
 
-    /**
-     * The zone's leaf certificate.
-     */
-    certificate?: string;
+  /**
+   * Indicates whether zone-level authenticated origin pulls is enabled.
+   */
+  enabled?: boolean;
 
-    /**
-     * Indicates whether zone-level authenticated origin pulls is enabled.
-     */
-    enabled?: boolean;
-
-    /**
-     * The zone's private key.
-     */
-    private_key?: string;
-  }
+  /**
+   * The zone's private key.
+   */
+  private_key?: string;
 }
 
 export type OriginTLSClientAuthDeleteResponse = unknown | string;
@@ -173,18 +171,19 @@ export interface OriginTLSClientAuthGetParams {
 }
 
 export namespace OriginTLSClientAuth {
-  export import TLSCertificatesAndHostnamesZoneAuthenticatedOriginPull = OriginTLSClientAuthAPI.TLSCertificatesAndHostnamesZoneAuthenticatedOriginPull;
+  export import OriginTLSClientCertificateZoneAuthenticatedOriginPull = OriginTLSClientAuthAPI.OriginTLSClientCertificateZoneAuthenticatedOriginPull;
   export import OriginTLSClientAuthCreateResponse = OriginTLSClientAuthAPI.OriginTLSClientAuthCreateResponse;
   export import OriginTLSClientAuthListResponse = OriginTLSClientAuthAPI.OriginTLSClientAuthListResponse;
   export import OriginTLSClientAuthDeleteResponse = OriginTLSClientAuthAPI.OriginTLSClientAuthDeleteResponse;
   export import OriginTLSClientAuthGetResponse = OriginTLSClientAuthAPI.OriginTLSClientAuthGetResponse;
+  export import OriginTLSClientAuthListResponsesSinglePage = OriginTLSClientAuthAPI.OriginTLSClientAuthListResponsesSinglePage;
   export import OriginTLSClientAuthCreateParams = OriginTLSClientAuthAPI.OriginTLSClientAuthCreateParams;
   export import OriginTLSClientAuthListParams = OriginTLSClientAuthAPI.OriginTLSClientAuthListParams;
   export import OriginTLSClientAuthDeleteParams = OriginTLSClientAuthAPI.OriginTLSClientAuthDeleteParams;
   export import OriginTLSClientAuthGetParams = OriginTLSClientAuthAPI.OriginTLSClientAuthGetParams;
   export import Hostnames = HostnamesAPI.Hostnames;
-  export import TLSCertificatesAndHostnamesHostnameAuthenticatedOriginPull = HostnamesAPI.TLSCertificatesAndHostnamesHostnameAuthenticatedOriginPull;
-  export import TLSCertificatesAndHostnamesHostnameCertidObject = HostnamesAPI.TLSCertificatesAndHostnamesHostnameCertidObject;
+  export import OriginTLSClientCertificateAuthenticatedOriginPull = HostnamesAPI.OriginTLSClientCertificateAuthenticatedOriginPull;
+  export import OriginTLSClientCertificateID = HostnamesAPI.OriginTLSClientCertificateID;
   export import HostnameUpdateResponse = HostnamesAPI.HostnameUpdateResponse;
   export import HostnameUpdateParams = HostnamesAPI.HostnameUpdateParams;
   export import HostnameGetParams = HostnamesAPI.HostnameGetParams;

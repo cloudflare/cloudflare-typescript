@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ExcludesAPI from 'cloudflare/resources/zero-trust/devices/policies/excludes';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Excludes extends APIResource {
   /**
@@ -27,13 +28,13 @@ export class Excludes extends APIResource {
   list(
     params: ExcludeListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ExcludeListResponse | null> {
+  ): Core.PagePromise<DevicesSplitTunnelsSinglePage, DevicesSplitTunnel> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/devices/policy/exclude`, options) as Core.APIPromise<{
-        result: ExcludeListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/devices/policy/exclude`,
+      DevicesSplitTunnelsSinglePage,
+      options,
+    );
   }
 
   /**
@@ -55,7 +56,9 @@ export class Excludes extends APIResource {
   }
 }
 
-export interface TeamsDevicesSplitTunnel {
+export class DevicesSplitTunnelsSinglePage extends SinglePage<DevicesSplitTunnel> {}
+
+export interface DevicesSplitTunnel {
   /**
    * The address in CIDR format to exclude from the tunnel. If `address` is present,
    * `host` must not be present.
@@ -74,11 +77,9 @@ export interface TeamsDevicesSplitTunnel {
   host?: string;
 }
 
-export type ExcludeUpdateResponse = Array<TeamsDevicesSplitTunnel>;
+export type ExcludeUpdateResponse = Array<DevicesSplitTunnel>;
 
-export type ExcludeListResponse = Array<TeamsDevicesSplitTunnel>;
-
-export type ExcludeGetResponse = Array<TeamsDevicesSplitTunnel>;
+export type ExcludeGetResponse = Array<DevicesSplitTunnel>;
 
 export interface ExcludeUpdateParams {
   /**
@@ -89,7 +90,7 @@ export interface ExcludeUpdateParams {
   /**
    * Body param:
    */
-  body: Array<TeamsDevicesSplitTunnel>;
+  body: Array<DevicesSplitTunnel>;
 }
 
 export interface ExcludeListParams {
@@ -101,10 +102,10 @@ export interface ExcludeGetParams {
 }
 
 export namespace Excludes {
-  export import TeamsDevicesSplitTunnel = ExcludesAPI.TeamsDevicesSplitTunnel;
+  export import DevicesSplitTunnel = ExcludesAPI.DevicesSplitTunnel;
   export import ExcludeUpdateResponse = ExcludesAPI.ExcludeUpdateResponse;
-  export import ExcludeListResponse = ExcludesAPI.ExcludeListResponse;
   export import ExcludeGetResponse = ExcludesAPI.ExcludeGetResponse;
+  export import DevicesSplitTunnelsSinglePage = ExcludesAPI.DevicesSplitTunnelsSinglePage;
   export import ExcludeUpdateParams = ExcludesAPI.ExcludeUpdateParams;
   export import ExcludeListParams = ExcludesAPI.ExcludeListParams;
   export import ExcludeGetParams = ExcludesAPI.ExcludeGetParams;

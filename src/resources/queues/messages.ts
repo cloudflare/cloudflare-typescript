@@ -40,7 +40,7 @@ export class Messages extends APIResource {
   }
 }
 
-export interface WorkersConsumer {
+export interface QueueConsumer {
   created_on?: unknown;
 
   environment?: unknown;
@@ -49,10 +49,10 @@ export interface WorkersConsumer {
 
   service?: unknown;
 
-  settings?: WorkersConsumer.Settings;
+  settings?: QueueConsumer.Settings;
 }
 
-export namespace WorkersConsumer {
+export namespace QueueConsumer {
   export interface Settings {
     batch_size?: number;
 
@@ -62,7 +62,7 @@ export namespace WorkersConsumer {
   }
 }
 
-export interface WorkersConsumerCreated {
+export interface QueueConsumerCreated {
   created_on?: unknown;
 
   dead_letter_queue?: string;
@@ -73,10 +73,10 @@ export interface WorkersConsumerCreated {
 
   script_name?: unknown;
 
-  settings?: WorkersConsumerCreated.Settings;
+  settings?: QueueConsumerCreated.Settings;
 }
 
-export namespace WorkersConsumerCreated {
+export namespace QueueConsumerCreated {
   export interface Settings {
     batch_size?: number;
 
@@ -86,7 +86,7 @@ export namespace WorkersConsumerCreated {
   }
 }
 
-export interface WorkersConsumerUpdated {
+export interface QueueConsumerUpdated {
   created_on?: unknown;
 
   dead_letter_queue?: string;
@@ -97,10 +97,10 @@ export interface WorkersConsumerUpdated {
 
   script_name?: unknown;
 
-  settings?: WorkersConsumerUpdated.Settings;
+  settings?: QueueConsumerUpdated.Settings;
 }
 
-export namespace WorkersConsumerUpdated {
+export namespace QueueConsumerUpdated {
   export interface Settings {
     batch_size?: number;
 
@@ -200,9 +200,9 @@ export interface MessagePullParams {
 }
 
 export namespace Messages {
-  export import WorkersConsumer = MessagesAPI.WorkersConsumer;
-  export import WorkersConsumerCreated = MessagesAPI.WorkersConsumerCreated;
-  export import WorkersConsumerUpdated = MessagesAPI.WorkersConsumerUpdated;
+  export import QueueConsumer = MessagesAPI.QueueConsumer;
+  export import QueueConsumerCreated = MessagesAPI.QueueConsumerCreated;
+  export import QueueConsumerUpdated = MessagesAPI.QueueConsumerUpdated;
   export import MessageAckResponse = MessagesAPI.MessageAckResponse;
   export import MessagePullResponse = MessagesAPI.MessagePullResponse;
   export import MessageAckParams = MessagesAPI.MessageAckParams;

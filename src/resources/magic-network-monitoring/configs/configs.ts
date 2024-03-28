@@ -14,11 +14,11 @@ export class Configs extends APIResource {
   create(
     params: ConfigCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MagicVisibilityMNMConfig> {
+  ): Core.APIPromise<MagicNetworkMonitoringConfig> {
     const { account_id } = params;
     return (
       this._client.post(`/accounts/${account_id}/mnm/config`, options) as Core.APIPromise<{
-        result: MagicVisibilityMNMConfig;
+        result: MagicNetworkMonitoringConfig;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -30,11 +30,11 @@ export class Configs extends APIResource {
   update(
     params: ConfigUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MagicVisibilityMNMConfig> {
+  ): Core.APIPromise<MagicNetworkMonitoringConfig> {
     const { account_id } = params;
     return (
       this._client.put(`/accounts/${account_id}/mnm/config`, options) as Core.APIPromise<{
-        result: MagicVisibilityMNMConfig;
+        result: MagicNetworkMonitoringConfig;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -45,11 +45,11 @@ export class Configs extends APIResource {
   delete(
     params: ConfigDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MagicVisibilityMNMConfig> {
+  ): Core.APIPromise<MagicNetworkMonitoringConfig> {
     const { account_id } = params;
     return (
       this._client.delete(`/accounts/${account_id}/mnm/config`, options) as Core.APIPromise<{
-        result: MagicVisibilityMNMConfig;
+        result: MagicNetworkMonitoringConfig;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -57,11 +57,14 @@ export class Configs extends APIResource {
   /**
    * Update fields in an existing network monitoring configuration.
    */
-  edit(params: ConfigEditParams, options?: Core.RequestOptions): Core.APIPromise<MagicVisibilityMNMConfig> {
+  edit(
+    params: ConfigEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MagicNetworkMonitoringConfig> {
     const { account_id } = params;
     return (
       this._client.patch(`/accounts/${account_id}/mnm/config`, options) as Core.APIPromise<{
-        result: MagicVisibilityMNMConfig;
+        result: MagicNetworkMonitoringConfig;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -69,17 +72,17 @@ export class Configs extends APIResource {
   /**
    * Lists default sampling and router IPs for account.
    */
-  get(params: ConfigGetParams, options?: Core.RequestOptions): Core.APIPromise<MagicVisibilityMNMConfig> {
+  get(params: ConfigGetParams, options?: Core.RequestOptions): Core.APIPromise<MagicNetworkMonitoringConfig> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/mnm/config`, options) as Core.APIPromise<{
-        result: MagicVisibilityMNMConfig;
+        result: MagicNetworkMonitoringConfig;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface MagicVisibilityMNMConfig {
+export interface MagicNetworkMonitoringConfig {
   /**
    * Fallback sampling rate of flow messages being sent in packets per second. This
    * should match the packet sampling rate configured on the router.
@@ -115,7 +118,7 @@ export interface ConfigGetParams {
 }
 
 export namespace Configs {
-  export import MagicVisibilityMNMConfig = ConfigsAPI.MagicVisibilityMNMConfig;
+  export import MagicNetworkMonitoringConfig = ConfigsAPI.MagicNetworkMonitoringConfig;
   export import ConfigCreateParams = ConfigsAPI.ConfigCreateParams;
   export import ConfigUpdateParams = ConfigsAPI.ConfigUpdateParams;
   export import ConfigDeleteParams = ConfigsAPI.ConfigDeleteParams;

@@ -4,27 +4,35 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as EventsAPI from 'cloudflare/resources/user/load-balancers/analytics/events';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Events extends APIResource {
   /**
    * List origin health changes.
    */
-  list(query?: EventListParams, options?: Core.RequestOptions): Core.APIPromise<EventListResponse | null>;
-  list(options?: Core.RequestOptions): Core.APIPromise<EventListResponse | null>;
+  list(
+    query?: EventListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<LoadBalancingAnalyticsSinglePage, LoadBalancingAnalytics>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<LoadBalancingAnalyticsSinglePage, LoadBalancingAnalytics>;
   list(
     query: EventListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<EventListResponse | null> {
+  ): Core.PagePromise<LoadBalancingAnalyticsSinglePage, LoadBalancingAnalytics> {
     if (isRequestOptions(query)) {
       return this.list({}, query);
     }
-    return (
-      this._client.get('/user/load_balancing_analytics/events', { query, ...options }) as Core.APIPromise<{
-        result: EventListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      '/user/load_balancing_analytics/events',
+      LoadBalancingAnalyticsSinglePage,
+      { query, ...options },
+    );
   }
 }
+
+export class LoadBalancingAnalyticsSinglePage extends SinglePage<LoadBalancingAnalytics> {}
 
 export interface LoadBalancingAnalytics {
   id?: number;
@@ -35,8 +43,6 @@ export interface LoadBalancingAnalytics {
 
   timestamp?: string;
 }
-
-export type EventListResponse = Array<LoadBalancingAnalytics>;
 
 export interface EventListParams {
   /**
@@ -76,6 +82,6 @@ export interface EventListParams {
 
 export namespace Events {
   export import LoadBalancingAnalytics = EventsAPI.LoadBalancingAnalytics;
-  export import EventListResponse = EventsAPI.EventListResponse;
+  export import LoadBalancingAnalyticsSinglePage = EventsAPI.LoadBalancingAnalyticsSinglePage;
   export import EventListParams = EventsAPI.EventListParams;
 }

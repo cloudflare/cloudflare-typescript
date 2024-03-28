@@ -17,11 +17,11 @@ export class WAF extends APIResource {
    * reaches your origin web server.
    * (https://support.cloudflare.com/hc/en-us/articles/200172016).
    */
-  edit(params: WAFEditParams, options?: Core.RequestOptions): Core.APIPromise<ZonesWAF> {
+  edit(params: WAFEditParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingWAF> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/waf`, { body, ...options }) as Core.APIPromise<{
-        result: ZonesWAF;
+        result: ZoneSettingWAF;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -38,10 +38,12 @@ export class WAF extends APIResource {
    * reaches your origin web server.
    * (https://support.cloudflare.com/hc/en-us/articles/200172016).
    */
-  get(params: WAFGetParams, options?: Core.RequestOptions): Core.APIPromise<ZonesWAF> {
+  get(params: WAFGetParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingWAF> {
     const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zone_id}/settings/waf`, options) as Core.APIPromise<{ result: ZonesWAF }>
+      this._client.get(`/zones/${zone_id}/settings/waf`, options) as Core.APIPromise<{
+        result: ZoneSettingWAF;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -58,7 +60,7 @@ export class WAF extends APIResource {
  * reaches your origin web server.
  * (https://support.cloudflare.com/hc/en-us/articles/200172016).
  */
-export interface ZonesWAF {
+export interface ZoneSettingWAF {
   /**
    * ID of the zone setting.
    */
@@ -101,7 +103,7 @@ export interface WAFGetParams {
 }
 
 export namespace WAF {
-  export import ZonesWAF = WAFAPI.ZonesWAF;
+  export import ZoneSettingWAF = WAFAPI.ZoneSettingWAF;
   export import WAFEditParams = WAFAPI.WAFEditParams;
   export import WAFGetParams = WAFAPI.WAFGetParams;
 }

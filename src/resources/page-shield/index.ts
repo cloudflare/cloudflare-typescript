@@ -2,33 +2,33 @@
 
 export {
   PageShieldConnection,
-  ConnectionListResponse,
   ConnectionListParams,
   ConnectionGetParams,
+  PageShieldConnectionsSinglePage,
   Connections,
 } from './connections';
 export {
-  PageShieldGetZoneSettings,
-  PageShieldUpdateZoneSettings,
-  PageShieldUpdateParams,
-  PageShieldGetParams,
-  PageShield,
-} from './page-shield';
-export {
-  PageShieldPageshieldPolicy,
-  PolicyListResponse,
+  PageShieldPolicy,
   PolicyCreateParams,
   PolicyUpdateParams,
   PolicyListParams,
   PolicyDeleteParams,
   PolicyGetParams,
+  PageShieldPoliciesSinglePage,
   Policies,
 } from './policies';
 export {
   PageShieldScript,
-  ScriptListResponse,
   ScriptGetResponse,
   ScriptListParams,
   ScriptGetParams,
+  PageShieldScriptsSinglePage,
   Scripts,
 } from './scripts';
+export {
+  PageShieldSetting,
+  PageShieldUpdateResponse,
+  PageShieldUpdateParams,
+  PageShieldGetParams,
+  PageShield,
+} from './page-shield';

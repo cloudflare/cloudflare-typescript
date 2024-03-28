@@ -2,20 +2,20 @@
 
 export {
   AddressingIpamBGPPrefixes,
-  PrefixListResponse,
   PrefixListParams,
   PrefixEditParams,
   PrefixGetParams,
+  AddressingIpamBGPPrefixesSinglePage,
   Prefixes,
 } from './prefixes';
 export {
   AddressingServiceBinding,
-  BindingListResponse,
   BindingDeleteResponse,
   BindingCreateParams,
   BindingListParams,
   BindingDeleteParams,
   BindingGetParams,
+  AddressingServiceBindingsSinglePage,
   Bindings,
 } from './bindings';
 export { BGP } from './bgp';

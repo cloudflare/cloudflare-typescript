@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as RulesAPI from 'cloudflare/resources/zero-trust/gateway/rules';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Rules extends APIResource {
   /**
@@ -37,13 +38,16 @@ export class Rules extends APIResource {
   /**
    * Fetches the Zero Trust Gateway rules for an account.
    */
-  list(params: RuleListParams, options?: Core.RequestOptions): Core.APIPromise<RuleListResponse | null> {
+  list(
+    params: RuleListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ZeroTrustGatewayRulesSinglePage, ZeroTrustGatewayRules> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/gateway/rules`, options) as Core.APIPromise<{
-        result: RuleListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/gateway/rules`,
+      ZeroTrustGatewayRulesSinglePage,
+      options,
+    );
   }
 
   /**
@@ -78,6 +82,8 @@ export class Rules extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class ZeroTrustGatewayRulesSinglePage extends SinglePage<ZeroTrustGatewayRules> {}
 
 export interface ZeroTrustGatewayRules {
   /**
@@ -551,8 +557,6 @@ export namespace ZeroTrustGatewayRules {
     wed?: string;
   }
 }
-
-export type RuleListResponse = Array<ZeroTrustGatewayRules>;
 
 export type RuleDeleteResponse = unknown | string;
 
@@ -1498,8 +1502,8 @@ export interface RuleGetParams {
 
 export namespace Rules {
   export import ZeroTrustGatewayRules = RulesAPI.ZeroTrustGatewayRules;
-  export import RuleListResponse = RulesAPI.RuleListResponse;
   export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
+  export import ZeroTrustGatewayRulesSinglePage = RulesAPI.ZeroTrustGatewayRulesSinglePage;
   export import RuleCreateParams = RulesAPI.RuleCreateParams;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
   export import RuleListParams = RulesAPI.RuleListParams;

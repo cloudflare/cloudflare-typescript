@@ -10,7 +10,7 @@ export {
   Settings,
 } from './settings';
 export {
-  WorkersNamespaceScript,
+  WorkersForPlatformsNamespaceScript,
   ScriptUpdateParams,
   ScriptDeleteParams,
   ScriptGetParams,

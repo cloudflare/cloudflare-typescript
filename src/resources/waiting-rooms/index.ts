@@ -11,32 +11,32 @@ export {
 } from './settings';
 export { StatusGetResponse, Statuses } from './statuses';
 export {
-  WaitingroomEventResult,
-  EventListResponse,
+  WaitingRoom,
+  WaitingRoomDeleteResponse,
+  WaitingRoomCreateParams,
+  WaitingRoomUpdateParams,
+  WaitingRoomEditParams,
+  WaitingRoomsSinglePage,
+  WaitingRooms,
+} from './waiting-rooms';
+export {
+  WaitingroomEvent,
   EventDeleteResponse,
   EventCreateParams,
   EventUpdateParams,
   EventEditParams,
+  WaitingroomEventsSinglePage,
   Events,
 } from './events/index';
 export {
-  WaitingroomRuleResult,
+  WaitingroomRule,
   RuleCreateResponse,
   RuleUpdateResponse,
-  RuleListResponse,
   RuleDeleteResponse,
   RuleEditResponse,
   RuleCreateParams,
   RuleUpdateParams,
   RuleEditParams,
+  WaitingroomRulesSinglePage,
   Rules,
 } from './rules';
-export {
-  WaitingroomWaitingroom,
-  WaitingRoomListResponse,
-  WaitingRoomDeleteResponse,
-  WaitingRoomCreateParams,
-  WaitingRoomUpdateParams,
-  WaitingRoomEditParams,
-  WaitingRooms,
-} from './waiting-rooms';

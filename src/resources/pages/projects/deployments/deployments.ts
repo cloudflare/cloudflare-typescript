@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as DeploymentsAPI from 'cloudflare/resources/pages/projects/deployments/deployments';
 import * as ProjectsAPI from 'cloudflare/resources/pages/projects/projects';
+import { PagesDeploymentsSinglePage } from 'cloudflare/resources/pages/projects/projects';
 import * as HistoryAPI from 'cloudflare/resources/pages/projects/deployments/history/history';
 import { multipartFormRequestOptions } from 'cloudflare/core';
 
@@ -35,14 +36,13 @@ export class Deployments extends APIResource {
     projectName: string,
     params: DeploymentListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DeploymentListResponse> {
+  ): Core.PagePromise<PagesDeploymentsSinglePage, ProjectsAPI.PagesDeployments> {
     const { account_id, ...query } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/pages/projects/${projectName}/deployments`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: DeploymentListResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/pages/projects/${projectName}/deployments`,
+      PagesDeploymentsSinglePage,
+      { query, ...options },
+    );
   }
 
   /**
@@ -117,8 +117,6 @@ export class Deployments extends APIResource {
   }
 }
 
-export type DeploymentListResponse = Array<ProjectsAPI.PagesDeployments>;
-
 export type DeploymentDeleteResponse = unknown;
 
 export interface DeploymentCreateParams {
@@ -175,7 +173,6 @@ export interface DeploymentRollbackParams {
 }
 
 export namespace Deployments {
-  export import DeploymentListResponse = DeploymentsAPI.DeploymentListResponse;
   export import DeploymentDeleteResponse = DeploymentsAPI.DeploymentDeleteResponse;
   export import DeploymentCreateParams = DeploymentsAPI.DeploymentCreateParams;
   export import DeploymentListParams = DeploymentsAPI.DeploymentListParams;
@@ -185,3 +182,5 @@ export namespace Deployments {
   export import DeploymentRollbackParams = DeploymentsAPI.DeploymentRollbackParams;
   export import History = HistoryAPI.History;
 }
+
+export { PagesDeploymentsSinglePage };

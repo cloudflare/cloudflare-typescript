@@ -20,42 +20,42 @@ export {
 export { Workers } from './workers';
 export {
   WorkersDomain,
-  DomainListResponse,
   DomainUpdateParams,
   DomainListParams,
   DomainDeleteParams,
   DomainGetParams,
+  WorkersDomainsSinglePage,
   Domains,
 } from './domains';
 export {
-  WorkersFilters,
+  WorkersFilter,
   FilterCreateResponse,
-  FilterListResponse,
   FilterDeleteResponse,
   FilterCreateParams,
   FilterUpdateParams,
   FilterListParams,
   FilterDeleteParams,
+  WorkersFiltersSinglePage,
   Filters,
 } from './filters';
 export {
-  WorkersRoutes,
+  WorkersRoute,
   RouteCreateResponse,
-  RouteListResponse,
   RouteDeleteResponse,
   RouteCreateParams,
   RouteUpdateParams,
   RouteListParams,
   RouteDeleteParams,
   RouteGetParams,
+  WorkersRoutesSinglePage,
   Routes,
 } from './routes';
 export {
   WorkersScript,
-  ScriptListResponse,
   ScriptUpdateParams,
   ScriptListParams,
   ScriptDeleteParams,
   ScriptGetParams,
+  WorkersScriptsSinglePage,
   Scripts,
 } from './scripts/index';

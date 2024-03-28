@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as CallsAPI from 'cloudflare/resources/calls';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Calls extends APIResource {
   /**
@@ -34,13 +35,12 @@ export class Calls extends APIResource {
   /**
    * Lists all apps in the Cloudflare account
    */
-  list(params: CallListParams, options?: Core.RequestOptions): Core.APIPromise<CallListResponse> {
+  list(
+    params: CallListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<CallsAppsSinglePage, CallsApp> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/calls/apps`, options) as Core.APIPromise<{
-        result: CallListResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(`/accounts/${account_id}/calls/apps`, CallsAppsSinglePage, options);
   }
 
   /**
@@ -67,6 +67,8 @@ export class Calls extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class CallsAppsSinglePage extends SinglePage<CallsApp> {}
 
 export interface CallsApp {
   /**
@@ -117,8 +119,6 @@ export interface CallsAppWithSecret {
   uid?: string;
 }
 
-export type CallListResponse = Array<CallsApp>;
-
 export interface CallCreateParams {
   /**
    * Path param: The account identifier tag.
@@ -167,7 +167,7 @@ export interface CallGetParams {
 export namespace Calls {
   export import CallsApp = CallsAPI.CallsApp;
   export import CallsAppWithSecret = CallsAPI.CallsAppWithSecret;
-  export import CallListResponse = CallsAPI.CallListResponse;
+  export import CallsAppsSinglePage = CallsAPI.CallsAppsSinglePage;
   export import CallCreateParams = CallsAPI.CallCreateParams;
   export import CallUpdateParams = CallsAPI.CallUpdateParams;
   export import CallListParams = CallsAPI.CallListParams;

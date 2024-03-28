@@ -12,19 +12,9 @@ export {
   Consumers,
 } from './consumers';
 export {
-  WorkersConsumer,
-  WorkersConsumerCreated,
-  WorkersConsumerUpdated,
-  MessageAckResponse,
-  MessagePullResponse,
-  MessageAckParams,
-  MessagePullParams,
-  Messages,
-} from './messages';
-export {
-  WorkersQueue,
-  WorkersQueueCreated,
-  WorkersQueueUpdated,
+  Queue,
+  QueueCreated,
+  QueueUpdated,
   QueueCreateResponse,
   QueueUpdateResponse,
   QueueListResponse,
@@ -35,5 +25,16 @@ export {
   QueueListParams,
   QueueDeleteParams,
   QueueGetParams,
+  QueueListResponsesSinglePage,
   Queues,
 } from './queues';
+export {
+  QueueConsumer,
+  QueueConsumerCreated,
+  QueueConsumerUpdated,
+  MessageAckResponse,
+  MessagePullResponse,
+  MessageAckParams,
+  MessagePullParams,
+  Messages,
+} from './messages';

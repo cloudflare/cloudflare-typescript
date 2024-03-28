@@ -9,11 +9,11 @@ export class Brotli extends APIResource {
    * When the client requesting an asset supports the Brotli compression algorithm,
    * Cloudflare will serve a Brotli compressed version of the asset.
    */
-  edit(params: BrotliEditParams, options?: Core.RequestOptions): Core.APIPromise<ZonesBrotli> {
+  edit(params: BrotliEditParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingBrotli> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/brotli`, { body, ...options }) as Core.APIPromise<{
-        result: ZonesBrotli;
+        result: ZoneSettingBrotli;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -22,11 +22,11 @@ export class Brotli extends APIResource {
    * When the client requesting an asset supports the Brotli compression algorithm,
    * Cloudflare will serve a Brotli compressed version of the asset.
    */
-  get(params: BrotliGetParams, options?: Core.RequestOptions): Core.APIPromise<ZonesBrotli> {
+  get(params: BrotliGetParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingBrotli> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/brotli`, options) as Core.APIPromise<{
-        result: ZonesBrotli;
+        result: ZoneSettingBrotli;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -36,7 +36,7 @@ export class Brotli extends APIResource {
  * When the client requesting an asset supports the Brotli compression algorithm,
  * Cloudflare will serve a Brotli compressed version of the asset.
  */
-export interface ZonesBrotli {
+export interface ZoneSettingBrotli {
   /**
    * ID of the zone setting.
    */
@@ -79,7 +79,7 @@ export interface BrotliGetParams {
 }
 
 export namespace Brotli {
-  export import ZonesBrotli = BrotliAPI.ZonesBrotli;
+  export import ZoneSettingBrotli = BrotliAPI.ZoneSettingBrotli;
   export import BrotliEditParams = BrotliAPI.BrotliEditParams;
   export import BrotliGetParams = BrotliAPI.BrotliGetParams;
 }

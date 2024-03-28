@@ -102,7 +102,7 @@ export class Pagerules extends APIResource {
   }
 }
 
-export interface ZonesPageRule {
+export interface ZonesPagerule {
   /**
    * Identifier
    */
@@ -112,7 +112,7 @@ export interface ZonesPageRule {
    * The set of actions to perform if the targets of this rule match the request.
    * Actions can redirect to another URL or override settings, but not both.
    */
-  actions: Array<ZonesPageRule.Action>;
+  actions: Array<ZonesPagerule.Action>;
 
   /**
    * The timestamp of when the Page Rule was created.
@@ -141,10 +141,10 @@ export interface ZonesPageRule {
   /**
    * The rule targets to evaluate on each request.
    */
-  targets: Array<ZonesPageRule.Target>;
+  targets: Array<ZonesPagerule.Target>;
 }
 
-export namespace ZonesPageRule {
+export namespace ZonesPagerule {
   export interface Action {
     /**
      * The timestamp of when the override was last modified.
@@ -212,7 +212,7 @@ export type PageruleCreateResponse = unknown | string;
 
 export type PageruleUpdateResponse = unknown | string;
 
-export type PageruleListResponse = Array<ZonesPageRule>;
+export type PageruleListResponse = Array<ZonesPagerule>;
 
 export interface PageruleDeleteResponse {
   /**
@@ -541,7 +541,7 @@ export interface PageruleGetParams {
 }
 
 export namespace Pagerules {
-  export import ZonesPageRule = PagerulesAPI.ZonesPageRule;
+  export import ZonesPagerule = PagerulesAPI.ZonesPagerule;
   export import PageruleCreateResponse = PagerulesAPI.PageruleCreateResponse;
   export import PageruleUpdateResponse = PagerulesAPI.PageruleUpdateResponse;
   export import PageruleListResponse = PagerulesAPI.PageruleListResponse;
@@ -555,6 +555,6 @@ export namespace Pagerules {
   export import PageruleEditParams = PagerulesAPI.PageruleEditParams;
   export import PageruleGetParams = PagerulesAPI.PageruleGetParams;
   export import Settings = SettingsAPI.Settings;
-  export import ZonesSettings = SettingsAPI.ZonesSettings;
+  export import ZonePageruleSettings = SettingsAPI.ZonePageruleSettings;
   export import SettingListParams = SettingsAPI.SettingListParams;
 }

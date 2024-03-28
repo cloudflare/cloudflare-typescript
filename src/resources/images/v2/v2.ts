@@ -31,7 +31,7 @@ export interface V2ListResponse {
    */
   continuation_token?: string | null;
 
-  images?: Array<V1API.ImagesImage>;
+  images?: Array<V1API.Image>;
 }
 
 export interface V2ListParams {

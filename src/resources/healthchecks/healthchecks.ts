@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as HealthchecksAPI from 'cloudflare/resources/healthchecks/healthchecks';
 import * as PreviewsAPI from 'cloudflare/resources/healthchecks/previews';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Healthchecks extends APIResource {
   previews: PreviewsAPI.Previews = new PreviewsAPI.Previews(this._client);
@@ -11,14 +12,11 @@ export class Healthchecks extends APIResource {
   /**
    * Create a new health check.
    */
-  create(
-    params: HealthcheckCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<HealthchecksHealthchecks> {
+  create(params: HealthcheckCreateParams, options?: Core.RequestOptions): Core.APIPromise<Healthcheck> {
     const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/healthchecks`, { body, ...options }) as Core.APIPromise<{
-        result: HealthchecksHealthchecks;
+        result: Healthcheck;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -30,13 +28,13 @@ export class Healthchecks extends APIResource {
     healthcheckId: string,
     params: HealthcheckUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<HealthchecksHealthchecks> {
+  ): Core.APIPromise<Healthcheck> {
     const { zone_id, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/healthchecks/${healthcheckId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: HealthchecksHealthchecks }>
+      }) as Core.APIPromise<{ result: Healthcheck }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -46,13 +44,9 @@ export class Healthchecks extends APIResource {
   list(
     params: HealthcheckListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<HealthcheckListResponse | null> {
+  ): Core.PagePromise<HealthchecksSinglePage, Healthcheck> {
     const { zone_id } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/healthchecks`, options) as Core.APIPromise<{
-        result: HealthcheckListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(`/zones/${zone_id}/healthchecks`, HealthchecksSinglePage, options);
   }
 
   /**
@@ -78,13 +72,13 @@ export class Healthchecks extends APIResource {
     healthcheckId: string,
     params: HealthcheckEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<HealthchecksHealthchecks> {
+  ): Core.APIPromise<Healthcheck> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/healthchecks/${healthcheckId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: HealthchecksHealthchecks }>
+      }) as Core.APIPromise<{ result: Healthcheck }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -95,17 +89,19 @@ export class Healthchecks extends APIResource {
     healthcheckId: string,
     params: HealthcheckGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<HealthchecksHealthchecks> {
+  ): Core.APIPromise<Healthcheck> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/healthchecks/${healthcheckId}`, options) as Core.APIPromise<{
-        result: HealthchecksHealthchecks;
+        result: Healthcheck;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface HealthchecksHealthchecks {
+export class HealthchecksSinglePage extends SinglePage<Healthcheck> {}
+
+export interface Healthcheck {
   /**
    * Identifier
    */
@@ -164,7 +160,7 @@ export interface HealthchecksHealthchecks {
   /**
    * Parameters specific to an HTTP or HTTPS health check.
    */
-  http_config?: HealthchecksHealthchecks.HTTPConfig | null;
+  http_config?: Healthcheck.HTTPConfig | null;
 
   /**
    * The interval between each health check. Shorter intervals may give quicker
@@ -200,7 +196,7 @@ export interface HealthchecksHealthchecks {
   /**
    * Parameters specific to TCP health check.
    */
-  tcp_config?: HealthchecksHealthchecks.TcpConfig | null;
+  tcp_config?: Healthcheck.TcpConfig | null;
 
   /**
    * The timeout (in seconds) before marking the health check as failed.
@@ -214,7 +210,7 @@ export interface HealthchecksHealthchecks {
   type?: string;
 }
 
-export namespace HealthchecksHealthchecks {
+export namespace Healthcheck {
   /**
    * Parameters specific to an HTTP or HTTPS health check.
    */
@@ -279,8 +275,6 @@ export namespace HealthchecksHealthchecks {
     port?: number;
   }
 }
-
-export type HealthcheckListResponse = Array<HealthchecksHealthchecks>;
 
 export interface HealthcheckDeleteResponse {
   /**
@@ -797,9 +791,9 @@ export interface HealthcheckGetParams {
 }
 
 export namespace Healthchecks {
-  export import HealthchecksHealthchecks = HealthchecksAPI.HealthchecksHealthchecks;
-  export import HealthcheckListResponse = HealthchecksAPI.HealthcheckListResponse;
+  export import Healthcheck = HealthchecksAPI.Healthcheck;
   export import HealthcheckDeleteResponse = HealthchecksAPI.HealthcheckDeleteResponse;
+  export import HealthchecksSinglePage = HealthchecksAPI.HealthchecksSinglePage;
   export import HealthcheckCreateParams = HealthchecksAPI.HealthcheckCreateParams;
   export import HealthcheckUpdateParams = HealthchecksAPI.HealthcheckUpdateParams;
   export import HealthcheckListParams = HealthchecksAPI.HealthcheckListParams;

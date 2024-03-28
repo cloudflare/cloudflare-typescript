@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as RoutesAPI from 'cloudflare/resources/workers/routes';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Routes extends APIResource {
   /**
@@ -24,26 +25,25 @@ export class Routes extends APIResource {
     routeId: string,
     params: RouteUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WorkersRoutes> {
+  ): Core.APIPromise<WorkersRoute> {
     const { zone_id, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/workers/routes/${routeId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: WorkersRoutes }>
+      }) as Core.APIPromise<{ result: WorkersRoute }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Returns routes for a zone.
    */
-  list(params: RouteListParams, options?: Core.RequestOptions): Core.APIPromise<RouteListResponse> {
+  list(
+    params: RouteListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<WorkersRoutesSinglePage, WorkersRoute> {
     const { zone_id } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/workers/routes`, options) as Core.APIPromise<{
-        result: RouteListResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(`/zones/${zone_id}/workers/routes`, WorkersRoutesSinglePage, options);
   }
 
   /**
@@ -65,21 +65,19 @@ export class Routes extends APIResource {
   /**
    * Returns information about a route, including URL pattern and Worker.
    */
-  get(
-    routeId: string,
-    params: RouteGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<WorkersRoutes> {
+  get(routeId: string, params: RouteGetParams, options?: Core.RequestOptions): Core.APIPromise<WorkersRoute> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/workers/routes/${routeId}`, options) as Core.APIPromise<{
-        result: WorkersRoutes;
+        result: WorkersRoute;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface WorkersRoutes {
+export class WorkersRoutesSinglePage extends SinglePage<WorkersRoute> {}
+
+export interface WorkersRoute {
   /**
    * Identifier
    */
@@ -94,8 +92,6 @@ export interface WorkersRoutes {
 }
 
 export type RouteCreateResponse = unknown | string;
-
-export type RouteListResponse = Array<WorkersRoutes>;
 
 export type RouteDeleteResponse = unknown | string;
 
@@ -155,10 +151,10 @@ export interface RouteGetParams {
 }
 
 export namespace Routes {
-  export import WorkersRoutes = RoutesAPI.WorkersRoutes;
+  export import WorkersRoute = RoutesAPI.WorkersRoute;
   export import RouteCreateResponse = RoutesAPI.RouteCreateResponse;
-  export import RouteListResponse = RoutesAPI.RouteListResponse;
   export import RouteDeleteResponse = RoutesAPI.RouteDeleteResponse;
+  export import WorkersRoutesSinglePage = RoutesAPI.WorkersRoutesSinglePage;
   export import RouteCreateParams = RoutesAPI.RouteCreateParams;
   export import RouteUpdateParams = RoutesAPI.RouteUpdateParams;
   export import RouteListParams = RoutesAPI.RouteListParams;

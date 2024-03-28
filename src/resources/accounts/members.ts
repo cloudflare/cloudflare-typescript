@@ -444,7 +444,7 @@ export interface MemberListResponse {
   /**
    * Roles assigned to this Member.
    */
-  roles: Array<RolesAPI.IamSchemasRole>;
+  roles: Array<RolesAPI.Role>;
 
   /**
    * A member's status in the organization.

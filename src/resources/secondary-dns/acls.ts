@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ACLsAPI from 'cloudflare/resources/secondary-dns/acls';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class ACLs extends APIResource {
   /**
@@ -38,13 +39,16 @@ export class ACLs extends APIResource {
   /**
    * List ACLs.
    */
-  list(params: ACLListParams, options?: Core.RequestOptions): Core.APIPromise<ACLListResponse | null> {
+  list(
+    params: ACLListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<SecondaryDnsaclsSinglePage, SecondaryDNSACL> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/secondary_dns/acls`, options) as Core.APIPromise<{
-        result: ACLListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/secondary_dns/acls`,
+      SecondaryDnsaclsSinglePage,
+      options,
+    );
   }
 
   /**
@@ -76,6 +80,8 @@ export class ACLs extends APIResource {
   }
 }
 
+export class SecondaryDnsaclsSinglePage extends SinglePage<SecondaryDNSACL> {}
+
 export interface SecondaryDNSACL {
   id: string;
 
@@ -93,8 +99,6 @@ export interface SecondaryDNSACL {
    */
   name: string;
 }
-
-export type ACLListResponse = Array<SecondaryDNSACL>;
 
 export interface ACLDeleteResponse {
   id?: string;
@@ -147,8 +151,8 @@ export interface ACLGetParams {
 
 export namespace ACLs {
   export import SecondaryDNSACL = ACLsAPI.SecondaryDNSACL;
-  export import ACLListResponse = ACLsAPI.ACLListResponse;
   export import ACLDeleteResponse = ACLsAPI.ACLDeleteResponse;
+  export import SecondaryDnsaclsSinglePage = ACLsAPI.SecondaryDnsaclsSinglePage;
   export import ACLCreateParams = ACLsAPI.ACLCreateParams;
   export import ACLUpdateParams = ACLsAPI.ACLUpdateParams;
   export import ACLListParams = ACLsAPI.ACLListParams;

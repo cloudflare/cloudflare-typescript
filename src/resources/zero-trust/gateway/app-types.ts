@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as AppTypesAPI from 'cloudflare/resources/zero-trust/gateway/app-types';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class AppTypes extends APIResource {
   /**
@@ -11,15 +12,17 @@ export class AppTypes extends APIResource {
   list(
     params: AppTypeListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AppTypeListResponse | null> {
+  ): Core.PagePromise<ZeroTrustGatewayAppTypesSinglePage, ZeroTrustGatewayAppTypes> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/gateway/app_types`, options) as Core.APIPromise<{
-        result: AppTypeListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/gateway/app_types`,
+      ZeroTrustGatewayAppTypesSinglePage,
+      options,
+    );
   }
 }
+
+export class ZeroTrustGatewayAppTypesSinglePage extends SinglePage<ZeroTrustGatewayAppTypes> {}
 
 export type ZeroTrustGatewayAppTypes =
   | ZeroTrustGatewayAppTypes.ZeroTrustGatewayApplication
@@ -67,8 +70,6 @@ export namespace ZeroTrustGatewayAppTypes {
   }
 }
 
-export type AppTypeListResponse = Array<ZeroTrustGatewayAppTypes>;
-
 export interface AppTypeListParams {
   /**
    * Identifier
@@ -78,6 +79,6 @@ export interface AppTypeListParams {
 
 export namespace AppTypes {
   export import ZeroTrustGatewayAppTypes = AppTypesAPI.ZeroTrustGatewayAppTypes;
-  export import AppTypeListResponse = AppTypesAPI.AppTypeListResponse;
+  export import ZeroTrustGatewayAppTypesSinglePage = AppTypesAPI.ZeroTrustGatewayAppTypesSinglePage;
   export import AppTypeListParams = AppTypesAPI.AppTypeListParams;
 }

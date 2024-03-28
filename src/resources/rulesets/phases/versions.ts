@@ -6,6 +6,7 @@ import { isRequestOptions } from 'cloudflare/core';
 import { CloudflareError } from 'cloudflare/error';
 import * as VersionsAPI from 'cloudflare/resources/rulesets/phases/versions';
 import * as RulesetsAPI from 'cloudflare/resources/rulesets/rulesets';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Versions extends APIResource {
   /**
@@ -38,7 +39,7 @@ export class Versions extends APIResource {
       | 'magic_transit_managed',
     params?: VersionListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RulesetsAPI.RulesetsRulesetsResponse>;
+  ): Core.PagePromise<VersionListResponsesSinglePage, VersionListResponse>;
   list(
     rulesetPhase:
       | 'ddos_l4'
@@ -65,7 +66,7 @@ export class Versions extends APIResource {
       | 'magic_transit_ids_managed'
       | 'magic_transit_managed',
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RulesetsAPI.RulesetsRulesetsResponse>;
+  ): Core.PagePromise<VersionListResponsesSinglePage, VersionListResponse>;
   list(
     rulesetPhase:
       | 'ddos_l4'
@@ -93,7 +94,7 @@ export class Versions extends APIResource {
       | 'magic_transit_managed',
     params: VersionListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RulesetsAPI.RulesetsRulesetsResponse> {
+  ): Core.PagePromise<VersionListResponsesSinglePage, VersionListResponse> {
     if (isRequestOptions(params)) {
       return this.list(rulesetPhase, {}, params);
     }
@@ -114,12 +115,11 @@ export class Versions extends APIResource {
           accountOrZone: 'zones',
           accountOrZoneId: zone_id,
         };
-    return (
-      this._client.get(
-        `/${accountOrZone}/${accountOrZoneId}/rulesets/phases/${rulesetPhase}/entrypoint/versions`,
-        options,
-      ) as Core.APIPromise<{ result: RulesetsAPI.RulesetsRulesetsResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/${accountOrZone}/${accountOrZoneId}/rulesets/phases/${rulesetPhase}/entrypoint/versions`,
+      VersionListResponsesSinglePage,
+      options,
+    );
   }
 
   /**
@@ -153,7 +153,7 @@ export class Versions extends APIResource {
     rulesetVersion: string,
     params?: VersionGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RulesetsAPI.RulesetsRulesetResponse>;
+  ): Core.APIPromise<RulesetsAPI.Ruleset>;
   get(
     rulesetPhase:
       | 'ddos_l4'
@@ -181,7 +181,7 @@ export class Versions extends APIResource {
       | 'magic_transit_managed',
     rulesetVersion: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RulesetsAPI.RulesetsRulesetResponse>;
+  ): Core.APIPromise<RulesetsAPI.Ruleset>;
   get(
     rulesetPhase:
       | 'ddos_l4'
@@ -210,7 +210,7 @@ export class Versions extends APIResource {
     rulesetVersion: string,
     params: VersionGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RulesetsAPI.RulesetsRulesetResponse> {
+  ): Core.APIPromise<RulesetsAPI.Ruleset> {
     if (isRequestOptions(params)) {
       return this.get(rulesetPhase, rulesetVersion, {}, params);
     }
@@ -235,9 +235,74 @@ export class Versions extends APIResource {
       this._client.get(
         `/${accountOrZone}/${accountOrZoneId}/rulesets/phases/${rulesetPhase}/entrypoint/versions/${rulesetVersion}`,
         options,
-      ) as Core.APIPromise<{ result: RulesetsAPI.RulesetsRulesetResponse }>
+      ) as Core.APIPromise<{ result: RulesetsAPI.Ruleset }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+
+export class VersionListResponsesSinglePage extends SinglePage<VersionListResponse> {}
+
+/**
+ * A ruleset object.
+ */
+export interface VersionListResponse {
+  /**
+   * The kind of the ruleset.
+   */
+  kind: 'managed' | 'custom' | 'root' | 'zone';
+
+  /**
+   * The human-readable name of the ruleset.
+   */
+  name: string;
+
+  /**
+   * The phase of the ruleset.
+   */
+  phase:
+    | 'ddos_l4'
+    | 'ddos_l7'
+    | 'http_config_settings'
+    | 'http_custom_errors'
+    | 'http_log_custom_fields'
+    | 'http_ratelimit'
+    | 'http_request_cache_settings'
+    | 'http_request_dynamic_redirect'
+    | 'http_request_firewall_custom'
+    | 'http_request_firewall_managed'
+    | 'http_request_late_transform'
+    | 'http_request_origin'
+    | 'http_request_redirect'
+    | 'http_request_sanitize'
+    | 'http_request_sbfm'
+    | 'http_request_select_configuration'
+    | 'http_request_transform'
+    | 'http_response_compression'
+    | 'http_response_firewall_managed'
+    | 'http_response_headers_transform'
+    | 'magic_transit'
+    | 'magic_transit_ids_managed'
+    | 'magic_transit_managed';
+
+  /**
+   * The unique ID of the ruleset.
+   */
+  id?: string;
+
+  /**
+   * An informative description of the ruleset.
+   */
+  description?: string;
+
+  /**
+   * The timestamp of when the ruleset was last modified.
+   */
+  last_updated?: string;
+
+  /**
+   * The version of the ruleset.
+   */
+  version?: string;
 }
 
 export interface VersionListParams {
@@ -265,6 +330,8 @@ export interface VersionGetParams {
 }
 
 export namespace Versions {
+  export import VersionListResponse = VersionsAPI.VersionListResponse;
+  export import VersionListResponsesSinglePage = VersionsAPI.VersionListResponsesSinglePage;
   export import VersionListParams = VersionsAPI.VersionListParams;
   export import VersionGetParams = VersionsAPI.VersionGetParams;
 }

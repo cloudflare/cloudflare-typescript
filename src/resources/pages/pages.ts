@@ -12,10 +12,10 @@ export namespace Pages {
   export import PagesDeployments = ProjectsAPI.PagesDeployments;
   export import PagesProjects = ProjectsAPI.PagesProjects;
   export import ProjectCreateResponse = ProjectsAPI.ProjectCreateResponse;
-  export import ProjectListResponse = ProjectsAPI.ProjectListResponse;
   export import ProjectDeleteResponse = ProjectsAPI.ProjectDeleteResponse;
   export import ProjectEditResponse = ProjectsAPI.ProjectEditResponse;
   export import ProjectPurgeBuildCacheResponse = ProjectsAPI.ProjectPurgeBuildCacheResponse;
+  export import PagesDeploymentsSinglePage = ProjectsAPI.PagesDeploymentsSinglePage;
   export import ProjectCreateParams = ProjectsAPI.ProjectCreateParams;
   export import ProjectListParams = ProjectsAPI.ProjectListParams;
   export import ProjectDeleteParams = ProjectsAPI.ProjectDeleteParams;

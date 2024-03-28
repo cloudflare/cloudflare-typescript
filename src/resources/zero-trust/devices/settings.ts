@@ -11,11 +11,11 @@ export class Settings extends APIResource {
   update(
     params: SettingUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TeamsDevicesZeroTrustAccountDeviceSettings | null> {
+  ): Core.APIPromise<ZeroTrustAccountDeviceSettings | null> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/devices/settings`, { body, ...options }) as Core.APIPromise<{
-        result: TeamsDevicesZeroTrustAccountDeviceSettings | null;
+        result: ZeroTrustAccountDeviceSettings | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -26,17 +26,17 @@ export class Settings extends APIResource {
   list(
     params: SettingListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TeamsDevicesZeroTrustAccountDeviceSettings | null> {
+  ): Core.APIPromise<ZeroTrustAccountDeviceSettings | null> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/devices/settings`, options) as Core.APIPromise<{
-        result: TeamsDevicesZeroTrustAccountDeviceSettings | null;
+        result: ZeroTrustAccountDeviceSettings | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface TeamsDevicesZeroTrustAccountDeviceSettings {
+export interface ZeroTrustAccountDeviceSettings {
   /**
    * Enable gateway proxy filtering on TCP.
    */
@@ -90,7 +90,7 @@ export interface SettingListParams {
 }
 
 export namespace Settings {
-  export import TeamsDevicesZeroTrustAccountDeviceSettings = SettingsAPI.TeamsDevicesZeroTrustAccountDeviceSettings;
+  export import ZeroTrustAccountDeviceSettings = SettingsAPI.ZeroTrustAccountDeviceSettings;
   export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;
   export import SettingListParams = SettingsAPI.SettingListParams;
 }

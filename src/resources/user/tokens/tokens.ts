@@ -99,7 +99,7 @@ export interface TokenCreateResponse {
   /**
    * The token value.
    */
-  value?: ValueAPI.IamValue;
+  value?: ValueAPI.TokenValue;
 }
 
 export type TokenUpdateResponse = unknown | string | null;
@@ -315,7 +315,8 @@ export namespace Tokens {
   export import TokenListParams = TokensAPI.TokenListParams;
   export import PermissionGroups = PermissionGroupsAPI.PermissionGroups;
   export import PermissionGroupListResponse = PermissionGroupsAPI.PermissionGroupListResponse;
+  export import PermissionGroupListResponsesSinglePage = PermissionGroupsAPI.PermissionGroupListResponsesSinglePage;
   export import Value = ValueAPI.Value;
-  export import IamValue = ValueAPI.IamValue;
+  export import TokenValue = ValueAPI.TokenValue;
   export import ValueUpdateParams = ValueAPI.ValueUpdateParams;
 }

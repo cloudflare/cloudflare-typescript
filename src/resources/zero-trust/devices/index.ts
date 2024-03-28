@@ -1,63 +1,58 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { OverrideCodeListResponse, OverrideCodeListParams, OverrideCodes } from './override-codes';
-export { RevokeCreateResponse, RevokeCreateParams, Revoke } from './revoke';
 export {
-  TeamsDevicesDeviceDEXTestSchemasHTTP,
-  DEXTestListResponse,
+  DEXTestSchemasHTTP,
   DEXTestDeleteResponse,
   DEXTestCreateParams,
   DEXTestUpdateParams,
   DEXTestListParams,
   DEXTestDeleteParams,
   DEXTestGetParams,
+  DEXTestSchemasHTTPSSinglePage,
   DEXTests,
 } from './dex-tests';
 export {
-  TeamsDevicesDeviceManagedNetworks,
-  NetworkListResponse,
+  DeviceManagedNetworks,
   NetworkDeleteResponse,
   NetworkCreateParams,
   NetworkUpdateParams,
   NetworkListParams,
   NetworkDeleteParams,
   NetworkGetParams,
+  DeviceManagedNetworksSinglePage,
   Networks,
 } from './networks';
 export {
-  TeamsDevicesDevicePostureRules,
-  PostureListResponse,
+  DevicePostureRules,
   PostureDeleteResponse,
   PostureCreateParams,
   PostureUpdateParams,
   PostureListParams,
   PostureDeleteParams,
   PostureGetParams,
+  DevicePostureRulesSinglePage,
   Posture,
 } from './posture/index';
 export {
-  TeamsDevicesDeviceSettingsPolicy,
-  PolicyListResponse,
+  DevicesDeviceSettingsPolicy,
   PolicyDeleteResponse,
   PolicyCreateParams,
   PolicyListParams,
   PolicyDeleteParams,
   PolicyEditParams,
   PolicyGetParams,
+  DevicesDeviceSettingsPoliciesSinglePage,
   Policies,
 } from './policies/index';
+export { OverrideCodeListResponse, OverrideCodeListParams, OverrideCodes } from './override-codes';
+export { RevokeCreateResponse, RevokeCreateParams, Revoke } from './revoke';
+export { UnrevokeCreateResponse, UnrevokeCreateParams, Unrevoke } from './unrevoke';
+export { ZeroTrustAccountDeviceSettings, SettingUpdateParams, SettingListParams, Settings } from './settings';
 export {
-  TeamsDevicesDevices,
-  DeviceListResponse,
+  ZeroTrustDevices,
   DeviceGetResponse,
   DeviceListParams,
   DeviceGetParams,
+  ZeroTrustDevicesSinglePage,
   Devices,
 } from './devices';
-export {
-  TeamsDevicesZeroTrustAccountDeviceSettings,
-  SettingUpdateParams,
-  SettingListParams,
-  Settings,
-} from './settings';
-export { UnrevokeCreateResponse, UnrevokeCreateParams, Unrevoke } from './unrevoke';

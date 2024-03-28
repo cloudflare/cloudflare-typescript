@@ -8,6 +8,7 @@ import * as RegionsAPI from 'cloudflare/resources/load-balancers/regions';
 import * as SearchesAPI from 'cloudflare/resources/load-balancers/searches';
 import * as MonitorsAPI from 'cloudflare/resources/load-balancers/monitors/monitors';
 import * as PoolsAPI from 'cloudflare/resources/load-balancers/pools/pools';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class LoadBalancers extends APIResource {
   monitors: MonitorsAPI.Monitors = new MonitorsAPI.Monitors(this._client);
@@ -51,13 +52,9 @@ export class LoadBalancers extends APIResource {
   list(
     params: LoadBalancerListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LoadBalancerListResponse | null> {
+  ): Core.PagePromise<LoadBalancersSinglePage, LoadBalancer> {
     const { zone_id } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/load_balancers`, options) as Core.APIPromise<{
-        result: LoadBalancerListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(`/zones/${zone_id}/load_balancers`, LoadBalancersSinglePage, options);
   }
 
   /**
@@ -109,6 +106,8 @@ export class LoadBalancers extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class LoadBalancersSinglePage extends SinglePage<LoadBalancer> {}
 
 export interface LoadBalancer {
   id?: string;
@@ -808,8 +807,6 @@ export namespace LoadBalancer {
     zero_downtime_failover?: 'none' | 'temporary' | 'sticky';
   }
 }
-
-export type LoadBalancerListResponse = Array<LoadBalancer>;
 
 export interface LoadBalancerDeleteResponse {
   id?: string;
@@ -2930,8 +2927,8 @@ export interface LoadBalancerGetParams {
 
 export namespace LoadBalancers {
   export import LoadBalancer = LoadBalancersAPI.LoadBalancer;
-  export import LoadBalancerListResponse = LoadBalancersAPI.LoadBalancerListResponse;
   export import LoadBalancerDeleteResponse = LoadBalancersAPI.LoadBalancerDeleteResponse;
+  export import LoadBalancersSinglePage = LoadBalancersAPI.LoadBalancersSinglePage;
   export import LoadBalancerCreateParams = LoadBalancersAPI.LoadBalancerCreateParams;
   export import LoadBalancerUpdateParams = LoadBalancersAPI.LoadBalancerUpdateParams;
   export import LoadBalancerListParams = LoadBalancersAPI.LoadBalancerListParams;
@@ -2939,7 +2936,6 @@ export namespace LoadBalancers {
   export import LoadBalancerEditParams = LoadBalancersAPI.LoadBalancerEditParams;
   export import LoadBalancerGetParams = LoadBalancersAPI.LoadBalancerGetParams;
   export import Monitors = MonitorsAPI.Monitors;
-  export import MonitorListResponse = MonitorsAPI.MonitorListResponse;
   export import MonitorDeleteResponse = MonitorsAPI.MonitorDeleteResponse;
   export import MonitorCreateParams = MonitorsAPI.MonitorCreateParams;
   export import MonitorUpdateParams = MonitorsAPI.MonitorUpdateParams;
@@ -2948,7 +2944,6 @@ export namespace LoadBalancers {
   export import MonitorEditParams = MonitorsAPI.MonitorEditParams;
   export import MonitorGetParams = MonitorsAPI.MonitorGetParams;
   export import Pools = PoolsAPI.Pools;
-  export import PoolListResponse = PoolsAPI.PoolListResponse;
   export import PoolDeleteResponse = PoolsAPI.PoolDeleteResponse;
   export import PoolCreateParams = PoolsAPI.PoolCreateParams;
   export import PoolUpdateParams = PoolsAPI.PoolUpdateParams;

@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as DEXTestsAPI from 'cloudflare/resources/zero-trust/devices/dex-tests';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class DEXTests extends APIResource {
   /**
@@ -11,13 +12,13 @@ export class DEXTests extends APIResource {
   create(
     params: DEXTestCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TeamsDevicesDeviceDEXTestSchemasHTTP | null> {
+  ): Core.APIPromise<DEXTestSchemasHTTP | null> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/devices/dex_tests`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: TeamsDevicesDeviceDEXTestSchemasHTTP | null }>
+      }) as Core.APIPromise<{ result: DEXTestSchemasHTTP | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -28,13 +29,13 @@ export class DEXTests extends APIResource {
     dexTestId: string,
     params: DEXTestUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TeamsDevicesDeviceDEXTestSchemasHTTP | null> {
+  ): Core.APIPromise<DEXTestSchemasHTTP | null> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/devices/dex_tests/${dexTestId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: TeamsDevicesDeviceDEXTestSchemasHTTP | null }>
+      }) as Core.APIPromise<{ result: DEXTestSchemasHTTP | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -44,13 +45,13 @@ export class DEXTests extends APIResource {
   list(
     params: DEXTestListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DEXTestListResponse | null> {
+  ): Core.PagePromise<DEXTestSchemasHTTPSSinglePage, DEXTestSchemasHTTP> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/devices/dex_tests`, options) as Core.APIPromise<{
-        result: DEXTestListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/devices/dex_tests`,
+      DEXTestSchemasHTTPSSinglePage,
+      options,
+    );
   }
 
   /**
@@ -78,22 +79,24 @@ export class DEXTests extends APIResource {
     dexTestId: string,
     params: DEXTestGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TeamsDevicesDeviceDEXTestSchemasHTTP | null> {
+  ): Core.APIPromise<DEXTestSchemasHTTP | null> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/devices/dex_tests/${dexTestId}`, options) as Core.APIPromise<{
-        result: TeamsDevicesDeviceDEXTestSchemasHTTP | null;
+        result: DEXTestSchemasHTTP | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface TeamsDevicesDeviceDEXTestSchemasHTTP {
+export class DEXTestSchemasHTTPSSinglePage extends SinglePage<DEXTestSchemasHTTP> {}
+
+export interface DEXTestSchemasHTTP {
   /**
    * The configuration object which contains the details for the WARP client to
    * conduct the test.
    */
-  data: TeamsDevicesDeviceDEXTestSchemasHTTP.Data;
+  data: DEXTestSchemasHTTP.Data;
 
   /**
    * Determines whether or not the test is active.
@@ -116,7 +119,7 @@ export interface TeamsDevicesDeviceDEXTestSchemasHTTP {
   description?: string;
 }
 
-export namespace TeamsDevicesDeviceDEXTestSchemasHTTP {
+export namespace DEXTestSchemasHTTP {
   /**
    * The configuration object which contains the details for the WARP client to
    * conduct the test.
@@ -139,9 +142,7 @@ export namespace TeamsDevicesDeviceDEXTestSchemasHTTP {
   }
 }
 
-export type DEXTestListResponse = Array<TeamsDevicesDeviceDEXTestSchemasHTTP>;
-
-export type DEXTestDeleteResponse = Array<TeamsDevicesDeviceDEXTestSchemasHTTP>;
+export type DEXTestDeleteResponse = Array<DEXTestSchemasHTTP>;
 
 export interface DEXTestCreateParams {
   /**
@@ -268,9 +269,9 @@ export interface DEXTestGetParams {
 }
 
 export namespace DEXTests {
-  export import TeamsDevicesDeviceDEXTestSchemasHTTP = DEXTestsAPI.TeamsDevicesDeviceDEXTestSchemasHTTP;
-  export import DEXTestListResponse = DEXTestsAPI.DEXTestListResponse;
+  export import DEXTestSchemasHTTP = DEXTestsAPI.DEXTestSchemasHTTP;
   export import DEXTestDeleteResponse = DEXTestsAPI.DEXTestDeleteResponse;
+  export import DEXTestSchemasHTTPSSinglePage = DEXTestsAPI.DEXTestSchemasHTTPSSinglePage;
   export import DEXTestCreateParams = DEXTestsAPI.DEXTestCreateParams;
   export import DEXTestUpdateParams = DEXTestsAPI.DEXTestUpdateParams;
   export import DEXTestListParams = DEXTestsAPI.DEXTestListParams;

@@ -4,7 +4,6 @@ export { Addressing } from './addressing';
 export {
   AddressingAddressMaps,
   AddressMapCreateResponse,
-  AddressMapListResponse,
   AddressMapDeleteResponse,
   AddressMapGetResponse,
   AddressMapCreateParams,
@@ -12,18 +11,19 @@ export {
   AddressMapDeleteParams,
   AddressMapEditParams,
   AddressMapGetParams,
+  AddressingAddressMapsSinglePage,
   AddressMaps,
 } from './address-maps/index';
 export {
   AddressingIpamPrefixes,
-  PrefixListResponse,
   PrefixDeleteResponse,
   PrefixCreateParams,
   PrefixListParams,
   PrefixDeleteParams,
   PrefixEditParams,
   PrefixGetParams,
+  AddressingIpamPrefixesSinglePage,
   Prefixes,
 } from './prefixes/index';
 export { LOADocumentCreateResponse, LOADocumentCreateParams, LOADocuments } from './loa-documents/index';
-export { ServiceListResponse, ServiceListParams, Services } from './services';
+export { ServiceListResponse, ServiceListParams, ServiceListResponsesSinglePage, Services } from './services';

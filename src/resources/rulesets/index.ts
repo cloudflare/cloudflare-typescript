@@ -3,13 +3,21 @@
 export { PhaseUpdateParams, PhaseGetParams, Phases } from './phases/index';
 export { RuleCreateParams, RuleDeleteParams, RuleEditParams, Rules } from './rules';
 export {
-  RulesetsRulesetResponse,
-  RulesetsRulesetsResponse,
+  Ruleset,
+  RulesetListResponse,
   RulesetCreateParams,
   RulesetUpdateParams,
   RulesetListParams,
   RulesetDeleteParams,
   RulesetGetParams,
+  RulesetListResponsesSinglePage,
   Rulesets,
 } from './rulesets';
-export { VersionListParams, VersionDeleteParams, VersionGetParams, Versions } from './versions/index';
+export {
+  VersionListResponse,
+  VersionListParams,
+  VersionDeleteParams,
+  VersionGetParams,
+  VersionListResponsesSinglePage,
+  Versions,
+} from './versions/index';

@@ -13,7 +13,7 @@ export class Organizations extends APIResource {
   create(
     params: OrganizationCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessOrganizations> {
+  ): Core.APIPromise<ZeroTrustOrganizations> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -35,7 +35,7 @@ export class Organizations extends APIResource {
       this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/organizations`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: AccessOrganizations }>
+      }) as Core.APIPromise<{ result: ZeroTrustOrganizations }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -45,7 +45,7 @@ export class Organizations extends APIResource {
   update(
     params: OrganizationUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessOrganizations> {
+  ): Core.APIPromise<ZeroTrustOrganizations> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -67,19 +67,22 @@ export class Organizations extends APIResource {
       this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/organizations`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: AccessOrganizations }>
+      }) as Core.APIPromise<{ result: ZeroTrustOrganizations }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Returns the configuration for your Zero Trust organization.
    */
-  list(params?: OrganizationListParams, options?: Core.RequestOptions): Core.APIPromise<AccessOrganizations>;
-  list(options?: Core.RequestOptions): Core.APIPromise<AccessOrganizations>;
+  list(
+    params?: OrganizationListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ZeroTrustOrganizations>;
+  list(options?: Core.RequestOptions): Core.APIPromise<ZeroTrustOrganizations>;
   list(
     params: OrganizationListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessOrganizations> {
+  ): Core.APIPromise<ZeroTrustOrganizations> {
     if (isRequestOptions(params)) {
       return this.list({}, params);
     }
@@ -104,7 +107,7 @@ export class Organizations extends APIResource {
       this._client.get(
         `/${accountOrZone}/${accountOrZoneId}/access/organizations`,
         options,
-      ) as Core.APIPromise<{ result: AccessOrganizations }>
+      ) as Core.APIPromise<{ result: ZeroTrustOrganizations }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -141,7 +144,7 @@ export class Organizations extends APIResource {
   }
 }
 
-export interface AccessOrganizations {
+export interface ZeroTrustOrganizations {
   /**
    * When set to true, users can authenticate via WARP for any application in your
    * organization. Application settings will take precedence over this value.
@@ -161,7 +164,7 @@ export interface AccessOrganizations {
 
   created_at?: string;
 
-  custom_pages?: AccessOrganizations.CustomPages;
+  custom_pages?: ZeroTrustOrganizations.CustomPages;
 
   /**
    * Lock all settings as Read-Only in the Dashboard, regardless of user permission.
@@ -169,7 +172,7 @@ export interface AccessOrganizations {
    */
   is_ui_read_only?: boolean;
 
-  login_design?: AccessOrganizations.LoginDesign;
+  login_design?: ZeroTrustOrganizations.LoginDesign;
 
   /**
    * The name of your Zero Trust organization.
@@ -205,7 +208,7 @@ export interface AccessOrganizations {
   warp_auth_session_duration?: string;
 }
 
-export namespace AccessOrganizations {
+export namespace ZeroTrustOrganizations {
   export interface CustomPages {
     /**
      * The uid of the custom page to use when a user is denied access after failing a
@@ -511,7 +514,7 @@ export interface OrganizationRevokeUsersParams {
 }
 
 export namespace Organizations {
-  export import AccessOrganizations = OrganizationsAPI.AccessOrganizations;
+  export import ZeroTrustOrganizations = OrganizationsAPI.ZeroTrustOrganizations;
   export import OrganizationRevokeUsersResponse = OrganizationsAPI.OrganizationRevokeUsersResponse;
   export import OrganizationCreateParams = OrganizationsAPI.OrganizationCreateParams;
   export import OrganizationUpdateParams = OrganizationsAPI.OrganizationUpdateParams;

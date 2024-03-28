@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ConnectionsAPI from 'cloudflare/resources/page-shield/connections';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Connections extends APIResource {
   /**
@@ -11,14 +12,13 @@ export class Connections extends APIResource {
   list(
     params: ConnectionListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ConnectionListResponse | null> {
+  ): Core.PagePromise<PageShieldConnectionsSinglePage, PageShieldConnection> {
     const { zone_id, ...query } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/page_shield/connections`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: ConnectionListResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/zones/${zone_id}/page_shield/connections`,
+      PageShieldConnectionsSinglePage,
+      { query, ...options },
+    );
   }
 
   /**
@@ -33,6 +33,8 @@ export class Connections extends APIResource {
     return this._client.get(`/zones/${zone_id}/page_shield/connections/${connectionId}`, options);
   }
 }
+
+export class PageShieldConnectionsSinglePage extends SinglePage<PageShieldConnection> {}
 
 export interface PageShieldConnection {
   id?: string;
@@ -55,8 +57,6 @@ export interface PageShieldConnection {
 
   url_contains_cdn_cgi_path?: boolean;
 }
-
-export type ConnectionListResponse = Array<PageShieldConnection>;
 
 export interface ConnectionListParams {
   /**
@@ -157,7 +157,7 @@ export interface ConnectionGetParams {
 
 export namespace Connections {
   export import PageShieldConnection = ConnectionsAPI.PageShieldConnection;
-  export import ConnectionListResponse = ConnectionsAPI.ConnectionListResponse;
+  export import PageShieldConnectionsSinglePage = ConnectionsAPI.PageShieldConnectionsSinglePage;
   export import ConnectionListParams = ConnectionsAPI.ConnectionListParams;
   export import ConnectionGetParams = ConnectionsAPI.ConnectionGetParams;
 }

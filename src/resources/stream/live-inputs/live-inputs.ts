@@ -527,7 +527,7 @@ export namespace LiveInputs {
   export import LiveInputGetParams = LiveInputsAPI.LiveInputGetParams;
   export import Outputs = OutputsAPI.Outputs;
   export import StreamOutput = OutputsAPI.StreamOutput;
-  export import OutputListResponse = OutputsAPI.OutputListResponse;
+  export import StreamOutputsSinglePage = OutputsAPI.StreamOutputsSinglePage;
   export import OutputCreateParams = OutputsAPI.OutputCreateParams;
   export import OutputUpdateParams = OutputsAPI.OutputUpdateParams;
   export import OutputListParams = OutputsAPI.OutputListParams;

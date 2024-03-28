@@ -9,17 +9,14 @@ export class Widgets extends APIResource {
   /**
    * Lists challenge widgets.
    */
-  create(
-    params: WidgetCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<NcChallengesAdminWidgetDetail> {
+  create(params: WidgetCreateParams, options?: Core.RequestOptions): Core.APIPromise<ChallengesWidget> {
     const { account_id, direction, order, page, per_page, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/challenges/widgets`, {
         query: { direction, order, page, per_page },
         body,
         ...options,
-      }) as Core.APIPromise<{ result: NcChallengesAdminWidgetDetail }>
+      }) as Core.APIPromise<{ result: ChallengesWidget }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -30,13 +27,13 @@ export class Widgets extends APIResource {
     sitekey: string,
     params: WidgetUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<NcChallengesAdminWidgetDetail> {
+  ): Core.APIPromise<ChallengesWidget> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/challenges/widgets/${sitekey}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: NcChallengesAdminWidgetDetail }>
+      }) as Core.APIPromise<{ result: ChallengesWidget }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -46,11 +43,11 @@ export class Widgets extends APIResource {
   list(
     params: WidgetListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<NcChallengesAdminWidgetListsV4PagePaginationArray, NcChallengesAdminWidgetList> {
+  ): Core.PagePromise<ChallengesWidgetListsV4PagePaginationArray, ChallengesWidgetList> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/challenges/widgets`,
-      NcChallengesAdminWidgetListsV4PagePaginationArray,
+      ChallengesWidgetListsV4PagePaginationArray,
       { query, ...options },
     );
   }
@@ -62,13 +59,13 @@ export class Widgets extends APIResource {
     sitekey: string,
     params: WidgetDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<NcChallengesAdminWidgetDetail> {
+  ): Core.APIPromise<ChallengesWidget> {
     const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/challenges/widgets/${sitekey}`,
         options,
-      ) as Core.APIPromise<{ result: NcChallengesAdminWidgetDetail }>
+      ) as Core.APIPromise<{ result: ChallengesWidget }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -79,11 +76,11 @@ export class Widgets extends APIResource {
     sitekey: string,
     params: WidgetGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<NcChallengesAdminWidgetDetail> {
+  ): Core.APIPromise<ChallengesWidget> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/challenges/widgets/${sitekey}`, options) as Core.APIPromise<{
-        result: NcChallengesAdminWidgetDetail;
+        result: ChallengesWidget;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -98,23 +95,23 @@ export class Widgets extends APIResource {
     sitekey: string,
     params: WidgetRotateSecretParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<NcChallengesAdminWidgetDetail> {
+  ): Core.APIPromise<ChallengesWidget> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/challenges/widgets/${sitekey}/rotate_secret`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: NcChallengesAdminWidgetDetail }>
+      }) as Core.APIPromise<{ result: ChallengesWidget }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class NcChallengesAdminWidgetListsV4PagePaginationArray extends V4PagePaginationArray<NcChallengesAdminWidgetList> {}
+export class ChallengesWidgetListsV4PagePaginationArray extends V4PagePaginationArray<ChallengesWidgetList> {}
 
 /**
  * A Turnstile widget's detailed configuration
  */
-export interface NcChallengesAdminWidgetDetail {
+export interface ChallengesWidget {
   /**
    * If bot_fight_mode is set to `true`, Cloudflare issues computationally expensive
    * challenges in response to malicious bots (ENT only).
@@ -175,7 +172,7 @@ export interface NcChallengesAdminWidgetDetail {
 /**
  * A Turnstile Widgets configuration as it appears in listings
  */
-export interface NcChallengesAdminWidgetList {
+export interface ChallengesWidgetList {
   /**
    * If bot_fight_mode is set to `true`, Cloudflare issues computationally expensive
    * challenges in response to malicious bots (ENT only).
@@ -383,9 +380,9 @@ export interface WidgetRotateSecretParams {
 }
 
 export namespace Widgets {
-  export import NcChallengesAdminWidgetDetail = WidgetsAPI.NcChallengesAdminWidgetDetail;
-  export import NcChallengesAdminWidgetList = WidgetsAPI.NcChallengesAdminWidgetList;
-  export import NcChallengesAdminWidgetListsV4PagePaginationArray = WidgetsAPI.NcChallengesAdminWidgetListsV4PagePaginationArray;
+  export import ChallengesWidget = WidgetsAPI.ChallengesWidget;
+  export import ChallengesWidgetList = WidgetsAPI.ChallengesWidgetList;
+  export import ChallengesWidgetListsV4PagePaginationArray = WidgetsAPI.ChallengesWidgetListsV4PagePaginationArray;
   export import WidgetCreateParams = WidgetsAPI.WidgetCreateParams;
   export import WidgetUpdateParams = WidgetsAPI.WidgetUpdateParams;
   export import WidgetListParams = WidgetsAPI.WidgetListParams;

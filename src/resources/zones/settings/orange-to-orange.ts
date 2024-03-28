@@ -12,13 +12,13 @@ export class OrangeToOrange extends APIResource {
   edit(
     params: OrangeToOrangeEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZonesOrangeToOrange> {
+  ): Core.APIPromise<ZoneSettingOrangeToOrange> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/orange_to_orange`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZonesOrangeToOrange }>
+      }) as Core.APIPromise<{ result: ZoneSettingOrangeToOrange }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -26,11 +26,14 @@ export class OrangeToOrange extends APIResource {
    * Orange to Orange (O2O) allows zones on Cloudflare to CNAME to other zones also
    * on Cloudflare.
    */
-  get(params: OrangeToOrangeGetParams, options?: Core.RequestOptions): Core.APIPromise<ZonesOrangeToOrange> {
+  get(
+    params: OrangeToOrangeGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ZoneSettingOrangeToOrange> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/orange_to_orange`, options) as Core.APIPromise<{
-        result: ZonesOrangeToOrange;
+        result: ZoneSettingOrangeToOrange;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -40,7 +43,7 @@ export class OrangeToOrange extends APIResource {
  * Orange to Orange (O2O) allows zones on Cloudflare to CNAME to other zones also
  * on Cloudflare.
  */
-export interface ZonesOrangeToOrange {
+export interface ZoneSettingOrangeToOrange {
   /**
    * ID of the zone setting.
    */
@@ -73,7 +76,7 @@ export interface OrangeToOrangeEditParams {
    * Body param: Orange to Orange (O2O) allows zones on Cloudflare to CNAME to other
    * zones also on Cloudflare.
    */
-  value: ZonesOrangeToOrange;
+  value: ZoneSettingOrangeToOrange;
 }
 
 export interface OrangeToOrangeGetParams {
@@ -84,7 +87,7 @@ export interface OrangeToOrangeGetParams {
 }
 
 export namespace OrangeToOrange {
-  export import ZonesOrangeToOrange = OrangeToOrangeAPI.ZonesOrangeToOrange;
+  export import ZoneSettingOrangeToOrange = OrangeToOrangeAPI.ZoneSettingOrangeToOrange;
   export import OrangeToOrangeEditParams = OrangeToOrangeAPI.OrangeToOrangeEditParams;
   export import OrangeToOrangeGetParams = OrangeToOrangeAPI.OrangeToOrangeGetParams;
 }

@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as MTLSCertificatesAPI from 'cloudflare/resources/mtls-certificates/mtls-certificates';
 import * as AssociationsAPI from 'cloudflare/resources/mtls-certificates/associations';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class MTLSCertificates extends APIResource {
   associations: AssociationsAPI.Associations = new AssociationsAPI.Associations(this._client);
@@ -14,13 +15,13 @@ export class MTLSCertificates extends APIResource {
   create(
     params: MTLSCertificateCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TLSCertificatesAndHostnamesCertificateObjectPost> {
+  ): Core.APIPromise<MTLSCertificateUpdate> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/mtls_certificates`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: TLSCertificatesAndHostnamesCertificateObjectPost }>
+      }) as Core.APIPromise<{ result: MTLSCertificateUpdate }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -30,13 +31,13 @@ export class MTLSCertificates extends APIResource {
   list(
     params: MTLSCertificateListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MTLSCertificateListResponse | null> {
+  ): Core.PagePromise<MTLSCertificatesSinglePage, MTLSCertificate> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/mtls_certificates`, options) as Core.APIPromise<{
-        result: MTLSCertificateListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/mtls_certificates`,
+      MTLSCertificatesSinglePage,
+      options,
+    );
   }
 
   /**
@@ -47,13 +48,13 @@ export class MTLSCertificates extends APIResource {
     mtlsCertificateId: string,
     params: MTLSCertificateDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TLSCertificatesAndHostnamesComponentsSchemasCertificateObject> {
+  ): Core.APIPromise<MTLSCertificate> {
     const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/mtls_certificates/${mtlsCertificateId}`,
         options,
-      ) as Core.APIPromise<{ result: TLSCertificatesAndHostnamesComponentsSchemasCertificateObject }>
+      ) as Core.APIPromise<{ result: MTLSCertificate }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -64,18 +65,67 @@ export class MTLSCertificates extends APIResource {
     mtlsCertificateId: string,
     params: MTLSCertificateGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TLSCertificatesAndHostnamesComponentsSchemasCertificateObject> {
+  ): Core.APIPromise<MTLSCertificate> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/mtls_certificates/${mtlsCertificateId}`,
         options,
-      ) as Core.APIPromise<{ result: TLSCertificatesAndHostnamesComponentsSchemasCertificateObject }>
+      ) as Core.APIPromise<{ result: MTLSCertificate }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface TLSCertificatesAndHostnamesCertificateObjectPost {
+export class MTLSCertificatesSinglePage extends SinglePage<MTLSCertificate> {}
+
+export interface MTLSCertificate {
+  /**
+   * Identifier
+   */
+  id?: string;
+
+  /**
+   * Indicates whether the certificate is a CA or leaf certificate.
+   */
+  ca?: boolean;
+
+  /**
+   * The uploaded root CA certificate.
+   */
+  certificates?: string;
+
+  /**
+   * When the certificate expires.
+   */
+  expires_on?: string;
+
+  /**
+   * The certificate authority that issued the certificate.
+   */
+  issuer?: string;
+
+  /**
+   * Optional unique name for the certificate. Only used for human readability.
+   */
+  name?: string;
+
+  /**
+   * The certificate serial number.
+   */
+  serial_number?: string;
+
+  /**
+   * The type of hash used for the certificate.
+   */
+  signature?: string;
+
+  /**
+   * This is the time the certificate was uploaded.
+   */
+  uploaded_on?: string;
+}
+
+export interface MTLSCertificateUpdate {
   /**
    * Identifier
    */
@@ -127,56 +177,6 @@ export interface TLSCertificatesAndHostnamesCertificateObjectPost {
   uploaded_on?: string;
 }
 
-export interface TLSCertificatesAndHostnamesComponentsSchemasCertificateObject {
-  /**
-   * Identifier
-   */
-  id?: string;
-
-  /**
-   * Indicates whether the certificate is a CA or leaf certificate.
-   */
-  ca?: boolean;
-
-  /**
-   * The uploaded root CA certificate.
-   */
-  certificates?: string;
-
-  /**
-   * When the certificate expires.
-   */
-  expires_on?: string;
-
-  /**
-   * The certificate authority that issued the certificate.
-   */
-  issuer?: string;
-
-  /**
-   * Optional unique name for the certificate. Only used for human readability.
-   */
-  name?: string;
-
-  /**
-   * The certificate serial number.
-   */
-  serial_number?: string;
-
-  /**
-   * The type of hash used for the certificate.
-   */
-  signature?: string;
-
-  /**
-   * This is the time the certificate was uploaded.
-   */
-  uploaded_on?: string;
-}
-
-export type MTLSCertificateListResponse =
-  Array<TLSCertificatesAndHostnamesComponentsSchemasCertificateObject>;
-
 export interface MTLSCertificateCreateParams {
   /**
    * Path param: Identifier
@@ -227,15 +227,15 @@ export interface MTLSCertificateGetParams {
 }
 
 export namespace MTLSCertificates {
-  export import TLSCertificatesAndHostnamesCertificateObjectPost = MTLSCertificatesAPI.TLSCertificatesAndHostnamesCertificateObjectPost;
-  export import TLSCertificatesAndHostnamesComponentsSchemasCertificateObject = MTLSCertificatesAPI.TLSCertificatesAndHostnamesComponentsSchemasCertificateObject;
-  export import MTLSCertificateListResponse = MTLSCertificatesAPI.MTLSCertificateListResponse;
+  export import MTLSCertificate = MTLSCertificatesAPI.MTLSCertificate;
+  export import MTLSCertificateUpdate = MTLSCertificatesAPI.MTLSCertificateUpdate;
+  export import MTLSCertificatesSinglePage = MTLSCertificatesAPI.MTLSCertificatesSinglePage;
   export import MTLSCertificateCreateParams = MTLSCertificatesAPI.MTLSCertificateCreateParams;
   export import MTLSCertificateListParams = MTLSCertificatesAPI.MTLSCertificateListParams;
   export import MTLSCertificateDeleteParams = MTLSCertificatesAPI.MTLSCertificateDeleteParams;
   export import MTLSCertificateGetParams = MTLSCertificatesAPI.MTLSCertificateGetParams;
   export import Associations = AssociationsAPI.Associations;
-  export import TLSCertificatesAndHostnamesAssociationObject = AssociationsAPI.TLSCertificatesAndHostnamesAssociationObject;
+  export import MTLSCertificateAsssociation = AssociationsAPI.MTLSCertificateAsssociation;
   export import AssociationGetResponse = AssociationsAPI.AssociationGetResponse;
   export import AssociationGetParams = AssociationsAPI.AssociationGetParams;
 }

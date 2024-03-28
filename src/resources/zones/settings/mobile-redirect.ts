@@ -14,13 +14,13 @@ export class MobileRedirect extends APIResource {
   edit(
     params: MobileRedirectEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZonesMobileRedirect> {
+  ): Core.APIPromise<ZoneSettingMobileRedirect> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/mobile_redirect`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZonesMobileRedirect }>
+      }) as Core.APIPromise<{ result: ZoneSettingMobileRedirect }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -30,11 +30,14 @@ export class MobileRedirect extends APIResource {
    * [Understanding Cloudflare Mobile Redirect](https://support.cloudflare.com/hc/articles/200168336)
    * for more information.
    */
-  get(params: MobileRedirectGetParams, options?: Core.RequestOptions): Core.APIPromise<ZonesMobileRedirect> {
+  get(
+    params: MobileRedirectGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ZoneSettingMobileRedirect> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/mobile_redirect`, options) as Core.APIPromise<{
-        result: ZonesMobileRedirect;
+        result: ZoneSettingMobileRedirect;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -46,7 +49,7 @@ export class MobileRedirect extends APIResource {
  * [Understanding Cloudflare Mobile Redirect](https://support.cloudflare.com/hc/articles/200168336)
  * for more information.
  */
-export interface ZonesMobileRedirect {
+export interface ZoneSettingMobileRedirect {
   /**
    * Identifier of the zone setting.
    */
@@ -55,7 +58,7 @@ export interface ZonesMobileRedirect {
   /**
    * Current value of the zone setting.
    */
-  value: ZonesMobileRedirect.Value;
+  value: ZoneSettingMobileRedirect.Value;
 
   /**
    * Whether or not this setting can be modified for this zone (based on your
@@ -69,7 +72,7 @@ export interface ZonesMobileRedirect {
   modified_on?: string | null;
 }
 
-export namespace ZonesMobileRedirect {
+export namespace ZoneSettingMobileRedirect {
   /**
    * Current value of the zone setting.
    */
@@ -137,7 +140,7 @@ export interface MobileRedirectGetParams {
 }
 
 export namespace MobileRedirect {
-  export import ZonesMobileRedirect = MobileRedirectAPI.ZonesMobileRedirect;
+  export import ZoneSettingMobileRedirect = MobileRedirectAPI.ZoneSettingMobileRedirect;
   export import MobileRedirectEditParams = MobileRedirectAPI.MobileRedirectEditParams;
   export import MobileRedirectGetParams = MobileRedirectAPI.MobileRedirectGetParams;
 }

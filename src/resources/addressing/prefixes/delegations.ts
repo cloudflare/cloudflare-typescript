@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as DelegationsAPI from 'cloudflare/resources/addressing/prefixes/delegations';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Delegations extends APIResource {
   /**
@@ -29,14 +30,13 @@ export class Delegations extends APIResource {
     prefixId: string,
     params: DelegationListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DelegationListResponse | null> {
+  ): Core.PagePromise<AddressingIpamDelegationsSinglePage, AddressingIpamDelegations> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/addressing/prefixes/${prefixId}/delegations`,
-        options,
-      ) as Core.APIPromise<{ result: DelegationListResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/addressing/prefixes/${prefixId}/delegations`,
+      AddressingIpamDelegationsSinglePage,
+      options,
+    );
   }
 
   /**
@@ -57,6 +57,8 @@ export class Delegations extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class AddressingIpamDelegationsSinglePage extends SinglePage<AddressingIpamDelegations> {}
 
 export interface AddressingIpamDelegations {
   /**
@@ -83,8 +85,6 @@ export interface AddressingIpamDelegations {
    */
   parent_prefix_id?: string;
 }
-
-export type DelegationListResponse = Array<AddressingIpamDelegations>;
 
 export interface DelegationDeleteResponse {
   /**
@@ -127,8 +127,8 @@ export interface DelegationDeleteParams {
 
 export namespace Delegations {
   export import AddressingIpamDelegations = DelegationsAPI.AddressingIpamDelegations;
-  export import DelegationListResponse = DelegationsAPI.DelegationListResponse;
   export import DelegationDeleteResponse = DelegationsAPI.DelegationDeleteResponse;
+  export import AddressingIpamDelegationsSinglePage = DelegationsAPI.AddressingIpamDelegationsSinglePage;
   export import DelegationCreateParams = DelegationsAPI.DelegationCreateParams;
   export import DelegationListParams = DelegationsAPI.DelegationListParams;
   export import DelegationDeleteParams = DelegationsAPI.DelegationDeleteParams;

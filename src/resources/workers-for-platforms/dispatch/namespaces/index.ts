@@ -9,10 +9,11 @@ export {
   NamespaceListParams,
   NamespaceDeleteParams,
   NamespaceGetParams,
+  NamespaceListResponsesSinglePage,
   Namespaces,
 } from './namespaces';
 export {
-  WorkersNamespaceScript,
+  WorkersForPlatformsNamespaceScript,
   ScriptUpdateParams,
   ScriptDeleteParams,
   ScriptGetParams,

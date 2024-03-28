@@ -5,6 +5,7 @@ import { APIResource } from 'cloudflare/resource';
 import * as ListsAPI from 'cloudflare/resources/rules/lists/lists';
 import * as BulkOperationsAPI from 'cloudflare/resources/rules/lists/bulk-operations';
 import * as ItemsAPI from 'cloudflare/resources/rules/lists/items';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Lists extends APIResource {
   bulkOperations: BulkOperationsAPI.BulkOperations = new BulkOperationsAPI.BulkOperations(this._client);
@@ -42,13 +43,12 @@ export class Lists extends APIResource {
   /**
    * Fetches all lists in the account.
    */
-  list(params: ListListParams, options?: Core.RequestOptions): Core.APIPromise<ListListResponse | null> {
+  list(
+    params: ListListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ListsListsSinglePage, ListsList> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/rules/lists`, options) as Core.APIPromise<{
-        result: ListListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(`/accounts/${account_id}/rules/lists`, ListsListsSinglePage, options);
   }
 
   /**
@@ -83,6 +83,8 @@ export class Lists extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class ListsListsSinglePage extends SinglePage<ListsList> {}
 
 export interface ListsList {
   /**
@@ -126,8 +128,6 @@ export interface ListsList {
    */
   num_referencing_filters?: number;
 }
-
-export type ListListResponse = Array<ListsList>;
 
 export interface ListDeleteResponse {
   /**
@@ -195,8 +195,8 @@ export interface ListGetParams {
 
 export namespace Lists {
   export import ListsList = ListsAPI.ListsList;
-  export import ListListResponse = ListsAPI.ListListResponse;
   export import ListDeleteResponse = ListsAPI.ListDeleteResponse;
+  export import ListsListsSinglePage = ListsAPI.ListsListsSinglePage;
   export import ListCreateParams = ListsAPI.ListCreateParams;
   export import ListUpdateParams = ListsAPI.ListUpdateParams;
   export import ListListParams = ListsAPI.ListListParams;

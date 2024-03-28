@@ -12,11 +12,11 @@ export class Full extends APIResource {
   get(
     params: FullGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ConfigsAPI.MagicVisibilityMNMConfig> {
+  ): Core.APIPromise<ConfigsAPI.MagicNetworkMonitoringConfig> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/mnm/config/full`, options) as Core.APIPromise<{
-        result: ConfigsAPI.MagicVisibilityMNMConfig;
+        result: ConfigsAPI.MagicNetworkMonitoringConfig;
       }>
     )._thenUnwrap((obj) => obj.result);
   }

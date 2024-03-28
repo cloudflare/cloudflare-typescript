@@ -1,8 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  HealthchecksHealthchecks,
-  HealthcheckListResponse,
+  Healthcheck,
   HealthcheckDeleteResponse,
   HealthcheckCreateParams,
   HealthcheckUpdateParams,
@@ -10,6 +9,7 @@ export {
   HealthcheckDeleteParams,
   HealthcheckEditParams,
   HealthcheckGetParams,
+  HealthchecksSinglePage,
   Healthchecks,
 } from './healthchecks';
 export {

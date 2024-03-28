@@ -123,18 +123,13 @@ export type AIRunParams =
   | AIRunParams.TextToImage
   | AIRunParams.SentenceSimilarity
   | AIRunParams.TextEmbeddings
-  | AIRunParams.Variant4
-  | AIRunParams.Variant5
-  | AIRunParams.Variant6
-  | AIRunParams.Variant7
-  | AIRunParams.Variant8
-  | AIRunParams.Variant9
-  | AIRunParams.Variant10
-  | AIRunParams.Variant11
+  | AIRunParams.SpeechRecognition
+  | AIRunParams.ImageClassification
+  | AIRunParams.ObjectDetection
+  | AIRunParams.TextGeneration
   | AIRunParams.Translation
   | AIRunParams.Summarization
-  | AIRunParams.Variant14
-  | AIRunParams.Variant15;
+  | AIRunParams.ImageToText;
 
 export namespace AIRunParams {
   export interface TextClassification {
@@ -215,19 +210,7 @@ export namespace AIRunParams {
     text: string | Array<string>;
   }
 
-  export interface Variant4 {
-    /**
-     * Path param:
-     */
-    account_id: string;
-
-    /**
-     * Body param:
-     */
-    body: Uploadable;
-  }
-
-  export interface Variant5 {
+  export interface SpeechRecognition {
     /**
      * Path param:
      */
@@ -239,19 +222,7 @@ export namespace AIRunParams {
     audio?: Array<number>;
   }
 
-  export interface Variant6 {
-    /**
-     * Path param:
-     */
-    account_id: string;
-
-    /**
-     * Body param:
-     */
-    body: Uploadable;
-  }
-
-  export interface Variant7 {
+  export interface ImageClassification {
     /**
      * Path param:
      */
@@ -263,19 +234,7 @@ export namespace AIRunParams {
     image?: Array<number>;
   }
 
-  export interface Variant8 {
-    /**
-     * Path param:
-     */
-    account_id: string;
-
-    /**
-     * Body param:
-     */
-    body: Uploadable;
-  }
-
-  export interface Variant9 {
+  export interface ObjectDetection {
     /**
      * Path param:
      */
@@ -287,16 +246,11 @@ export namespace AIRunParams {
     image?: Array<number>;
   }
 
-  export interface Variant10 {
+  export interface TextGeneration {
     /**
      * Path param:
      */
     account_id: string;
-
-    /**
-     * Body param:
-     */
-    prompt: string;
 
     /**
      * Body param:
@@ -311,6 +265,16 @@ export namespace AIRunParams {
     /**
      * Body param:
      */
+    messages?: Array<AIRunParams.TextGeneration.Message>;
+
+    /**
+     * Body param:
+     */
+    prompt?: string;
+
+    /**
+     * Body param:
+     */
     raw?: boolean;
 
     /**
@@ -319,29 +283,7 @@ export namespace AIRunParams {
     stream?: boolean;
   }
 
-  export interface Variant11 {
-    /**
-     * Path param:
-     */
-    account_id: string;
-
-    /**
-     * Body param:
-     */
-    messages: Array<AIRunParams.Variant11.Message>;
-
-    /**
-     * Body param:
-     */
-    max_tokens?: number;
-
-    /**
-     * Body param:
-     */
-    stream?: boolean;
-  }
-
-  export namespace Variant11 {
+  export namespace TextGeneration {
     export interface Message {
       content: string;
 
@@ -388,19 +330,7 @@ export namespace AIRunParams {
     max_length?: number;
   }
 
-  export interface Variant14 {
-    /**
-     * Path param:
-     */
-    account_id: string;
-
-    /**
-     * Body param:
-     */
-    body: Uploadable;
-  }
-
-  export interface Variant15 {
+  export interface ImageToText {
     /**
      * Path param:
      */

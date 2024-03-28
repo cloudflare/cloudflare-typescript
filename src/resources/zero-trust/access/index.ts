@@ -1,9 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export { Access } from './access';
+export { KeyUpdateResponse, KeyGetResponse, KeyRotateResponse, KeyUpdateParams, Keys } from './keys';
+export { Logs } from './logs/index';
 export {
-  AccessApps,
-  ApplicationListResponse,
+  ZeroTrustApps,
   ApplicationDeleteResponse,
   ApplicationRevokeTokensResponse,
   ApplicationCreateParams,
@@ -12,59 +13,63 @@ export {
   ApplicationDeleteParams,
   ApplicationGetParams,
   ApplicationRevokeTokensParams,
+  ZeroTrustAppsSinglePage,
   Applications,
 } from './applications/index';
-export { AccessBookmarks, BookmarkListResponse, BookmarkDeleteResponse, Bookmarks } from './bookmarks';
 export {
-  AccessCertificates,
-  CertificateListResponse,
+  ZeroTrustBookmarks,
+  BookmarkDeleteResponse,
+  ZeroTrustBookmarksSinglePage,
+  Bookmarks,
+} from './bookmarks';
+export {
+  ZeroTrustCertificates,
   CertificateDeleteResponse,
   CertificateCreateParams,
   CertificateUpdateParams,
   CertificateListParams,
   CertificateDeleteParams,
   CertificateGetParams,
+  ZeroTrustCertificatesSinglePage,
   Certificates,
 } from './certificates/index';
 export {
-  AccessCustomPage,
-  AccessCustomPageWithoutHTML,
-  CustomPageListResponse,
+  ZeroTrustCustomPage,
+  ZeroTrustCustomPageWithoutHTML,
   CustomPageDeleteResponse,
   CustomPageCreateParams,
   CustomPageUpdateParams,
+  ZeroTrustCustomPageWithoutHTMLsSinglePage,
   CustomPages,
 } from './custom-pages';
 export {
-  AccessGroups,
-  GroupListResponse,
+  ZeroTrustGroups,
   GroupDeleteResponse,
   GroupCreateParams,
   GroupUpdateParams,
   GroupListParams,
   GroupDeleteParams,
   GroupGetParams,
+  ZeroTrustGroupsSinglePage,
   Groups,
 } from './groups';
 export {
-  AccessServiceTokens,
+  ZeroTrustServiceTokens,
   ServiceTokenCreateResponse,
-  ServiceTokenListResponse,
   ServiceTokenRotateResponse,
   ServiceTokenCreateParams,
   ServiceTokenUpdateParams,
   ServiceTokenListParams,
   ServiceTokenDeleteParams,
+  ZeroTrustServiceTokensSinglePage,
   ServiceTokens,
 } from './service-tokens';
 export {
-  AccessTag,
-  TagListResponse,
+  ZeroTrustTag,
   TagDeleteResponse,
   TagCreateParams,
   TagUpdateParams,
+  ZeroTrustTagsSinglePage,
   Tags,
 } from './tags';
-export { AccessUsers, UserListResponse, Users } from './users/index';
-export { KeyUpdateResponse, KeyGetResponse, KeyRotateResponse, KeyUpdateParams, Keys } from './keys';
-export { Logs } from './logs/index';
+export { ZeroTrustUsers, ZeroTrustUsersSinglePage, Users } from './users/index';

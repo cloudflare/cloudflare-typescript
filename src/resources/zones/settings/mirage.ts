@@ -11,11 +11,11 @@ export class Mirage extends APIResource {
    * [blog post](http://blog.cloudflare.com/mirage2-solving-mobile-speed) for more
    * information.
    */
-  edit(params: MirageEditParams, options?: Core.RequestOptions): Core.APIPromise<ZonesMirage> {
+  edit(params: MirageEditParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingMirage> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/mirage`, { body, ...options }) as Core.APIPromise<{
-        result: ZonesMirage;
+        result: ZoneSettingMirage;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -26,11 +26,11 @@ export class Mirage extends APIResource {
    * [blog post](http://blog.cloudflare.com/mirage2-solving-mobile-speed) for more
    * information.
    */
-  get(params: MirageGetParams, options?: Core.RequestOptions): Core.APIPromise<ZonesMirage> {
+  get(params: MirageGetParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingMirage> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/mirage`, options) as Core.APIPromise<{
-        result: ZonesMirage;
+        result: ZoneSettingMirage;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -42,7 +42,7 @@ export class Mirage extends APIResource {
  * [our blog post](http://blog.cloudflare.com/mirage2-solving-mobile-speed) for
  * more information.
  */
-export interface ZonesMirage {
+export interface ZoneSettingMirage {
   /**
    * ID of the zone setting.
    */
@@ -85,7 +85,7 @@ export interface MirageGetParams {
 }
 
 export namespace Mirage {
-  export import ZonesMirage = MirageAPI.ZonesMirage;
+  export import ZoneSettingMirage = MirageAPI.ZoneSettingMirage;
   export import MirageEditParams = MirageAPI.MirageEditParams;
   export import MirageGetParams = MirageAPI.MirageGetParams;
 }

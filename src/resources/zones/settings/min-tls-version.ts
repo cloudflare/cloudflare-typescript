@@ -8,24 +8,30 @@ export class MinTLSVersion extends APIResource {
   /**
    * Changes Minimum TLS Version setting.
    */
-  edit(params: MinTLSVersionEditParams, options?: Core.RequestOptions): Core.APIPromise<ZonesMinTLSVersion> {
+  edit(
+    params: MinTLSVersionEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ZoneSettingMinTLSVersion> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/min_tls_version`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZonesMinTLSVersion }>
+      }) as Core.APIPromise<{ result: ZoneSettingMinTLSVersion }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Gets Minimum TLS Version setting.
    */
-  get(params: MinTLSVersionGetParams, options?: Core.RequestOptions): Core.APIPromise<ZonesMinTLSVersion> {
+  get(
+    params: MinTLSVersionGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ZoneSettingMinTLSVersion> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/min_tls_version`, options) as Core.APIPromise<{
-        result: ZonesMinTLSVersion;
+        result: ZoneSettingMinTLSVersion;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -36,7 +42,7 @@ export class MinTLSVersion extends APIResource {
  * specified. For example, if TLS 1.1 is selected, TLS 1.0 connections will be
  * rejected, while 1.1, 1.2, and 1.3 (if enabled) will be permitted.
  */
-export interface ZonesMinTLSVersion {
+export interface ZoneSettingMinTLSVersion {
   /**
    * ID of the zone setting.
    */
@@ -79,7 +85,7 @@ export interface MinTLSVersionGetParams {
 }
 
 export namespace MinTLSVersion {
-  export import ZonesMinTLSVersion = MinTLSVersionAPI.ZonesMinTLSVersion;
+  export import ZoneSettingMinTLSVersion = MinTLSVersionAPI.ZoneSettingMinTLSVersion;
   export import MinTLSVersionEditParams = MinTLSVersionAPI.MinTLSVersionEditParams;
   export import MinTLSVersionGetParams = MinTLSVersionAPI.MinTLSVersionGetParams;
 }

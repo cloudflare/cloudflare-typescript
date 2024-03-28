@@ -1,24 +1,24 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  TeamsDevicesDevicePostureIntegrations,
-  IntegrationListResponse,
+  DevicePostureIntegrations,
   IntegrationDeleteResponse,
   IntegrationCreateParams,
   IntegrationListParams,
   IntegrationDeleteParams,
   IntegrationEditParams,
   IntegrationGetParams,
+  DevicePostureIntegrationsSinglePage,
   Integrations,
 } from './integrations';
 export {
-  TeamsDevicesDevicePostureRules,
-  PostureListResponse,
+  DevicePostureRules,
   PostureDeleteResponse,
   PostureCreateParams,
   PostureUpdateParams,
   PostureListParams,
   PostureDeleteParams,
   PostureGetParams,
+  DevicePostureRulesSinglePage,
   Posture,
 } from './posture';

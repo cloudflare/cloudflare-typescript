@@ -8,10 +8,10 @@ export class Preview extends APIResource {
   /**
    * Get the result of a previous preview operation using the provided preview_id.
    */
-  get(previewId: string, options?: Core.RequestOptions): Core.APIPromise<LoadBalancingPreviewResult> {
+  get(previewId: string, options?: Core.RequestOptions): Core.APIPromise<LoadBalancingPreview> {
     return (
       this._client.get(`/user/load_balancers/preview/${previewId}`, options) as Core.APIPromise<{
-        result: LoadBalancingPreviewResult;
+        result: LoadBalancingPreview;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -20,12 +20,9 @@ export class Preview extends APIResource {
 /**
  * Resulting health data from a preview operation.
  */
-export type LoadBalancingPreviewResult = Record<
-  string,
-  LoadBalancingPreviewResult.unnamed_schema_with_map_parent_0
->;
+export type LoadBalancingPreview = Record<string, LoadBalancingPreview.unnamed_schema_with_map_parent_0>;
 
-export namespace LoadBalancingPreviewResult {
+export namespace LoadBalancingPreview {
   export interface unnamed_schema_with_map_parent_0 {
     healthy?: boolean;
 
@@ -49,5 +46,5 @@ export namespace LoadBalancingPreviewResult {
 }
 
 export namespace Preview {
-  export import LoadBalancingPreviewResult = PreviewAPI.LoadBalancingPreviewResult;
+  export import LoadBalancingPreview = PreviewAPI.LoadBalancingPreview;
 }

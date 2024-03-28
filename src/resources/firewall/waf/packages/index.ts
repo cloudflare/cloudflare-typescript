@@ -8,6 +8,16 @@ export {
   Packages,
 } from './packages';
 export {
+  WAFManagedRulesGroup,
+  GroupEditResponse,
+  GroupGetResponse,
+  GroupListParams,
+  GroupEditParams,
+  GroupGetParams,
+  WAFManagedRulesGroupsV4PagePaginationArray,
+  Groups,
+} from './groups';
+export {
   WAFManagedRulesRule,
   RuleEditResponse,
   RuleGetResponse,
@@ -17,13 +27,3 @@ export {
   WAFManagedRulesRulesV4PagePaginationArray,
   Rules,
 } from './rules';
-export {
-  WAFManagedRulesSchemasGroup,
-  GroupEditResponse,
-  GroupGetResponse,
-  GroupListParams,
-  GroupEditParams,
-  GroupGetParams,
-  WAFManagedRulesSchemasGroupsV4PagePaginationArray,
-  Groups,
-} from './groups';

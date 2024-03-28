@@ -1,10 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { ItemListResponse, ItemListParams, Items } from './items';
+export { ItemListResponse, ItemListParams, ItemListResponsesSinglePage, Items } from './items';
 export {
   ZeroTrustGatewayLists,
   ListCreateResponse,
-  ListListResponse,
   ListDeleteResponse,
   ListCreateParams,
   ListUpdateParams,
@@ -12,5 +11,6 @@ export {
   ListDeleteParams,
   ListEditParams,
   ListGetParams,
+  ZeroTrustGatewayListsSinglePage,
   Lists,
 } from './lists';

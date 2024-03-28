@@ -11,13 +11,13 @@ export class OpportunisticEncryption extends APIResource {
   edit(
     params: OpportunisticEncryptionEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZonesOpportunisticEncryption> {
+  ): Core.APIPromise<ZoneSettingOpportunisticEncryption> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/opportunistic_encryption`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZonesOpportunisticEncryption }>
+      }) as Core.APIPromise<{ result: ZoneSettingOpportunisticEncryption }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -27,11 +27,11 @@ export class OpportunisticEncryption extends APIResource {
   get(
     params: OpportunisticEncryptionGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZonesOpportunisticEncryption> {
+  ): Core.APIPromise<ZoneSettingOpportunisticEncryption> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/opportunistic_encryption`, options) as Core.APIPromise<{
-        result: ZonesOpportunisticEncryption;
+        result: ZoneSettingOpportunisticEncryption;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -40,7 +40,7 @@ export class OpportunisticEncryption extends APIResource {
 /**
  * Enables the Opportunistic Encryption feature for a zone.
  */
-export interface ZonesOpportunisticEncryption {
+export interface ZoneSettingOpportunisticEncryption {
   /**
    * ID of the zone setting.
    */
@@ -84,7 +84,7 @@ export interface OpportunisticEncryptionGetParams {
 }
 
 export namespace OpportunisticEncryption {
-  export import ZonesOpportunisticEncryption = OpportunisticEncryptionAPI.ZonesOpportunisticEncryption;
+  export import ZoneSettingOpportunisticEncryption = OpportunisticEncryptionAPI.ZoneSettingOpportunisticEncryption;
   export import OpportunisticEncryptionEditParams = OpportunisticEncryptionAPI.OpportunisticEncryptionEditParams;
   export import OpportunisticEncryptionGetParams = OpportunisticEncryptionAPI.OpportunisticEncryptionGetParams;
 }

@@ -5,6 +5,7 @@ import { APIResource } from 'cloudflare/resource';
 import * as PrefixesAPI from 'cloudflare/resources/addressing/prefixes/prefixes';
 import * as DelegationsAPI from 'cloudflare/resources/addressing/prefixes/delegations';
 import * as BGPAPI from 'cloudflare/resources/addressing/prefixes/bgp/bgp';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Prefixes extends APIResource {
   bgp: BGPAPI.BGP = new BGPAPI.BGP(this._client);
@@ -26,13 +27,16 @@ export class Prefixes extends APIResource {
   /**
    * List all prefixes owned by the account.
    */
-  list(params: PrefixListParams, options?: Core.RequestOptions): Core.APIPromise<PrefixListResponse | null> {
+  list(
+    params: PrefixListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<AddressingIpamPrefixesSinglePage, AddressingIpamPrefixes> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/addressing/prefixes`, options) as Core.APIPromise<{
-        result: PrefixListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/addressing/prefixes`,
+      AddressingIpamPrefixesSinglePage,
+      options,
+    );
   }
 
   /**
@@ -86,6 +90,8 @@ export class Prefixes extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class AddressingIpamPrefixesSinglePage extends SinglePage<AddressingIpamPrefixes> {}
 
 export interface AddressingIpamPrefixes {
   /**
@@ -152,8 +158,6 @@ export interface AddressingIpamPrefixes {
   on_demand_locked?: boolean;
 }
 
-export type PrefixListResponse = Array<AddressingIpamPrefixes>;
-
 export type PrefixDeleteResponse = unknown | Array<unknown> | string;
 
 export interface PrefixCreateParams {
@@ -213,8 +217,8 @@ export interface PrefixGetParams {
 
 export namespace Prefixes {
   export import AddressingIpamPrefixes = PrefixesAPI.AddressingIpamPrefixes;
-  export import PrefixListResponse = PrefixesAPI.PrefixListResponse;
   export import PrefixDeleteResponse = PrefixesAPI.PrefixDeleteResponse;
+  export import AddressingIpamPrefixesSinglePage = PrefixesAPI.AddressingIpamPrefixesSinglePage;
   export import PrefixCreateParams = PrefixesAPI.PrefixCreateParams;
   export import PrefixListParams = PrefixesAPI.PrefixListParams;
   export import PrefixDeleteParams = PrefixesAPI.PrefixDeleteParams;
@@ -223,8 +227,8 @@ export namespace Prefixes {
   export import BGP = BGPAPI.BGP;
   export import Delegations = DelegationsAPI.Delegations;
   export import AddressingIpamDelegations = DelegationsAPI.AddressingIpamDelegations;
-  export import DelegationListResponse = DelegationsAPI.DelegationListResponse;
   export import DelegationDeleteResponse = DelegationsAPI.DelegationDeleteResponse;
+  export import AddressingIpamDelegationsSinglePage = DelegationsAPI.AddressingIpamDelegationsSinglePage;
   export import DelegationCreateParams = DelegationsAPI.DelegationCreateParams;
   export import DelegationListParams = DelegationsAPI.DelegationListParams;
   export import DelegationDeleteParams = DelegationsAPI.DelegationDeleteParams;

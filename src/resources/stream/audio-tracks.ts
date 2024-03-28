@@ -31,13 +31,13 @@ export class AudioTracks extends APIResource {
     identifier: string,
     params: AudioTrackCopyParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<StreamAdditionalAudio> {
+  ): Core.APIPromise<StreamAudio> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/stream/${identifier}/audio/copy`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: StreamAdditionalAudio }>
+      }) as Core.APIPromise<{ result: StreamAudio }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -51,13 +51,13 @@ export class AudioTracks extends APIResource {
     audioIdentifier: string,
     params: AudioTrackEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<StreamAdditionalAudio> {
+  ): Core.APIPromise<StreamAudio> {
     const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/stream/${identifier}/audio/${audioIdentifier}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: StreamAdditionalAudio }>
+      }) as Core.APIPromise<{ result: StreamAudio }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -79,7 +79,7 @@ export class AudioTracks extends APIResource {
   }
 }
 
-export interface StreamAdditionalAudio {
+export interface StreamAudio {
   /**
    * Denotes whether the audio track will be played by default in a player.
    */
@@ -104,7 +104,7 @@ export interface StreamAdditionalAudio {
 
 export type AudioTrackDeleteResponse = unknown | string;
 
-export type AudioTrackGetResponse = Array<StreamAdditionalAudio>;
+export type AudioTrackGetResponse = Array<StreamAudio>;
 
 export interface AudioTrackDeleteParams {
   /**
@@ -161,7 +161,7 @@ export interface AudioTrackGetParams {
 }
 
 export namespace AudioTracks {
-  export import StreamAdditionalAudio = AudioTracksAPI.StreamAdditionalAudio;
+  export import StreamAudio = AudioTracksAPI.StreamAudio;
   export import AudioTrackDeleteResponse = AudioTracksAPI.AudioTrackDeleteResponse;
   export import AudioTrackGetResponse = AudioTracksAPI.AudioTrackGetResponse;
   export import AudioTrackDeleteParams = AudioTracksAPI.AudioTrackDeleteParams;

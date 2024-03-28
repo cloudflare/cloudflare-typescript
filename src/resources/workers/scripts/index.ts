@@ -32,13 +32,13 @@ export {
   UsageModelGetParams,
   UsageModel,
 } from './usage-model';
-export { WorkersSchemasBinding, BindingGetResponse, BindingGetParams, Bindings } from './bindings';
+export { WorkersBinding, BindingGetResponse, BindingGetParams, Bindings } from './bindings';
 export {
   WorkersScript,
-  ScriptListResponse,
   ScriptUpdateParams,
   ScriptListParams,
   ScriptDeleteParams,
   ScriptGetParams,
+  WorkersScriptsSinglePage,
   Scripts,
 } from './scripts';

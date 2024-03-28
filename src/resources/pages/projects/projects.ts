@@ -5,6 +5,7 @@ import { APIResource } from 'cloudflare/resource';
 import * as ProjectsAPI from 'cloudflare/resources/pages/projects/projects';
 import * as DomainsAPI from 'cloudflare/resources/pages/projects/domains';
 import * as DeploymentsAPI from 'cloudflare/resources/pages/projects/deployments/deployments';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Projects extends APIResource {
   deployments: DeploymentsAPI.Deployments = new DeploymentsAPI.Deployments(this._client);
@@ -25,13 +26,16 @@ export class Projects extends APIResource {
   /**
    * Fetch a list of all user projects.
    */
-  list(params: ProjectListParams, options?: Core.RequestOptions): Core.APIPromise<ProjectListResponse> {
+  list(
+    params: ProjectListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<PagesDeploymentsSinglePage, PagesDeployments> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/pages/projects`, options) as Core.APIPromise<{
-        result: ProjectListResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/pages/projects`,
+      PagesDeploymentsSinglePage,
+      options,
+    );
   }
 
   /**
@@ -95,6 +99,8 @@ export class Projects extends APIResource {
     );
   }
 }
+
+export class PagesDeploymentsSinglePage extends SinglePage<PagesDeployments> {}
 
 export interface PagesDeployments {
   /**
@@ -1085,8 +1091,6 @@ export namespace PagesProjects {
 
 export type ProjectCreateResponse = unknown | Array<unknown> | string;
 
-export type ProjectListResponse = Array<PagesDeployments>;
-
 export type ProjectDeleteResponse = unknown;
 
 export type ProjectEditResponse = unknown | Array<unknown> | string;
@@ -1977,10 +1981,10 @@ export namespace Projects {
   export import PagesDeployments = ProjectsAPI.PagesDeployments;
   export import PagesProjects = ProjectsAPI.PagesProjects;
   export import ProjectCreateResponse = ProjectsAPI.ProjectCreateResponse;
-  export import ProjectListResponse = ProjectsAPI.ProjectListResponse;
   export import ProjectDeleteResponse = ProjectsAPI.ProjectDeleteResponse;
   export import ProjectEditResponse = ProjectsAPI.ProjectEditResponse;
   export import ProjectPurgeBuildCacheResponse = ProjectsAPI.ProjectPurgeBuildCacheResponse;
+  export import PagesDeploymentsSinglePage = ProjectsAPI.PagesDeploymentsSinglePage;
   export import ProjectCreateParams = ProjectsAPI.ProjectCreateParams;
   export import ProjectListParams = ProjectsAPI.ProjectListParams;
   export import ProjectDeleteParams = ProjectsAPI.ProjectDeleteParams;
@@ -1988,7 +1992,6 @@ export namespace Projects {
   export import ProjectGetParams = ProjectsAPI.ProjectGetParams;
   export import ProjectPurgeBuildCacheParams = ProjectsAPI.ProjectPurgeBuildCacheParams;
   export import Deployments = DeploymentsAPI.Deployments;
-  export import DeploymentListResponse = DeploymentsAPI.DeploymentListResponse;
   export import DeploymentDeleteResponse = DeploymentsAPI.DeploymentDeleteResponse;
   export import DeploymentCreateParams = DeploymentsAPI.DeploymentCreateParams;
   export import DeploymentListParams = DeploymentsAPI.DeploymentListParams;
@@ -2002,6 +2005,7 @@ export namespace Projects {
   export import DomainDeleteResponse = DomainsAPI.DomainDeleteResponse;
   export import DomainEditResponse = DomainsAPI.DomainEditResponse;
   export import DomainGetResponse = DomainsAPI.DomainGetResponse;
+  export import DomainListResponsesSinglePage = DomainsAPI.DomainListResponsesSinglePage;
   export import DomainCreateParams = DomainsAPI.DomainCreateParams;
   export import DomainListParams = DomainsAPI.DomainListParams;
   export import DomainDeleteParams = DomainsAPI.DomainDeleteParams;

@@ -15,13 +15,13 @@ export class ByTag extends APIResource {
     ruleTag: string,
     params: ByTagGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RulesetsAPI.RulesetsRulesetResponse> {
+  ): Core.APIPromise<RulesetsAPI.Ruleset> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/rulesets/${rulesetId}/versions/${rulesetVersion}/by_tag/${ruleTag}`,
         options,
-      ) as Core.APIPromise<{ result: RulesetsAPI.RulesetsRulesetResponse }>
+      ) as Core.APIPromise<{ result: RulesetsAPI.Ruleset }>
     )._thenUnwrap((obj) => obj.result);
   }
 }

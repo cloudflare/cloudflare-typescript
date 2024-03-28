@@ -16,12 +16,12 @@ export class ContentLists extends APIResource {
     identifier: string,
     body: ContentListUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DwebConfigContentListDetails> {
+  ): Core.APIPromise<DistributedWebConfigContentList> {
     return (
       this._client.put(
         `/zones/${zoneIdentifier}/web3/hostnames/${identifier}/ipfs_universal_path/content_list`,
         { body, ...options },
-      ) as Core.APIPromise<{ result: DwebConfigContentListDetails }>
+      ) as Core.APIPromise<{ result: DistributedWebConfigContentList }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -32,17 +32,17 @@ export class ContentLists extends APIResource {
     zoneIdentifier: string,
     identifier: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DwebConfigContentListDetails> {
+  ): Core.APIPromise<DistributedWebConfigContentList> {
     return (
       this._client.get(
         `/zones/${zoneIdentifier}/web3/hostnames/${identifier}/ipfs_universal_path/content_list`,
         options,
-      ) as Core.APIPromise<{ result: DwebConfigContentListDetails }>
+      ) as Core.APIPromise<{ result: DistributedWebConfigContentList }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface DwebConfigContentListDetails {
+export interface DistributedWebConfigContentList {
   /**
    * Behavior of the content list.
    */
@@ -58,14 +58,14 @@ export interface ContentListUpdateParams {
   /**
    * Content list entries.
    */
-  entries: Array<EntriesAPI.DwebConfigContentListEntry>;
+  entries: Array<EntriesAPI.DistributedWebConfigContentListEntry>;
 }
 
 export namespace ContentLists {
-  export import DwebConfigContentListDetails = ContentListsAPI.DwebConfigContentListDetails;
+  export import DistributedWebConfigContentList = ContentListsAPI.DistributedWebConfigContentList;
   export import ContentListUpdateParams = ContentListsAPI.ContentListUpdateParams;
   export import Entries = EntriesAPI.Entries;
-  export import DwebConfigContentListEntry = EntriesAPI.DwebConfigContentListEntry;
+  export import DistributedWebConfigContentListEntry = EntriesAPI.DistributedWebConfigContentListEntry;
   export import EntryListResponse = EntriesAPI.EntryListResponse;
   export import EntryDeleteResponse = EntriesAPI.EntryDeleteResponse;
   export import EntryCreateParams = EntriesAPI.EntryCreateParams;

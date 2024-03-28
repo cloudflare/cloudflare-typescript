@@ -17,12 +17,12 @@ export class Overrides extends APIResource {
     zoneIdentifier: string,
     body: OverrideCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LegacyJhsOverride | null> {
+  ): Core.APIPromise<WAFOverride | null> {
     return (
       this._client.post(`/zones/${zoneIdentifier}/firewall/waf/overrides`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: LegacyJhsOverride | null }>
+      }) as Core.APIPromise<{ result: WAFOverride | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -37,12 +37,12 @@ export class Overrides extends APIResource {
     id: string,
     body: OverrideUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LegacyJhsOverride | null> {
+  ): Core.APIPromise<WAFOverride | null> {
     return (
       this._client.put(`/zones/${zoneIdentifier}/firewall/waf/overrides/${id}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: LegacyJhsOverride | null }>
+      }) as Core.APIPromise<{ result: WAFOverride | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -56,22 +56,22 @@ export class Overrides extends APIResource {
     zoneIdentifier: string,
     query?: OverrideListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<LegacyJhsOverridesV4PagePaginationArray, LegacyJhsOverride>;
+  ): Core.PagePromise<WAFOverridesV4PagePaginationArray, WAFOverride>;
   list(
     zoneIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<LegacyJhsOverridesV4PagePaginationArray, LegacyJhsOverride>;
+  ): Core.PagePromise<WAFOverridesV4PagePaginationArray, WAFOverride>;
   list(
     zoneIdentifier: string,
     query: OverrideListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<LegacyJhsOverridesV4PagePaginationArray, LegacyJhsOverride> {
+  ): Core.PagePromise<WAFOverridesV4PagePaginationArray, WAFOverride> {
     if (isRequestOptions(query)) {
       return this.list(zoneIdentifier, {}, query);
     }
     return this._client.getAPIList(
       `/zones/${zoneIdentifier}/firewall/waf/overrides`,
-      LegacyJhsOverridesV4PagePaginationArray,
+      WAFOverridesV4PagePaginationArray,
       { query, ...options },
     );
   }
@@ -105,18 +105,18 @@ export class Overrides extends APIResource {
     zoneIdentifier: string,
     id: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LegacyJhsOverride | null> {
+  ): Core.APIPromise<WAFOverride | null> {
     return (
       this._client.get(`/zones/${zoneIdentifier}/firewall/waf/overrides/${id}`, options) as Core.APIPromise<{
-        result: LegacyJhsOverride | null;
+        result: WAFOverride | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class LegacyJhsOverridesV4PagePaginationArray extends V4PagePaginationArray<LegacyJhsOverride> {}
+export class WAFOverridesV4PagePaginationArray extends V4PagePaginationArray<WAFOverride> {}
 
-export interface LegacyJhsOverride {
+export interface WAFOverride {
   /**
    * The unique identifier of the WAF override.
    */
@@ -152,7 +152,7 @@ export interface LegacyJhsOverride {
    * Specifies that, when a WAF rule matches, its configured action will be replaced
    * by the action configured in this object.
    */
-  rewrite_action?: LegacyJhsOverride.RewriteAction;
+  rewrite_action?: WAFOverride.RewriteAction;
 
   /**
    * An object that allows you to override the action of specific WAF rules. Each key
@@ -171,7 +171,7 @@ export interface LegacyJhsOverride {
   urls?: Array<string>;
 }
 
-export namespace LegacyJhsOverride {
+export namespace WAFOverride {
   /**
    * Specifies that, when a WAF rule matches, its configured action will be replaced
    * by the action configured in this object.
@@ -209,9 +209,9 @@ export type OverrideUpdateParams = unknown;
 export interface OverrideListParams extends V4PagePaginationArrayParams {}
 
 export namespace Overrides {
-  export import LegacyJhsOverride = OverridesAPI.LegacyJhsOverride;
+  export import WAFOverride = OverridesAPI.WAFOverride;
   export import OverrideDeleteResponse = OverridesAPI.OverrideDeleteResponse;
-  export import LegacyJhsOverridesV4PagePaginationArray = OverridesAPI.LegacyJhsOverridesV4PagePaginationArray;
+  export import WAFOverridesV4PagePaginationArray = OverridesAPI.WAFOverridesV4PagePaginationArray;
   export import OverrideCreateParams = OverridesAPI.OverrideCreateParams;
   export import OverrideUpdateParams = OverridesAPI.OverrideUpdateParams;
   export import OverrideListParams = OverridesAPI.OverrideListParams;

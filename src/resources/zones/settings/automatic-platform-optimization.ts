@@ -13,13 +13,13 @@ export class AutomaticPlatformOptimization extends APIResource {
   edit(
     params: AutomaticPlatformOptimizationEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZonesAutomaticPlatformOptimization> {
+  ): Core.APIPromise<ZoneSettingAutomaticPlatformOptimization> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/automatic_platform_optimization`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZonesAutomaticPlatformOptimization }>
+      }) as Core.APIPromise<{ result: ZoneSettingAutomaticPlatformOptimization }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -31,18 +31,18 @@ export class AutomaticPlatformOptimization extends APIResource {
   get(
     params: AutomaticPlatformOptimizationGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZonesAutomaticPlatformOptimization> {
+  ): Core.APIPromise<ZoneSettingAutomaticPlatformOptimization> {
     const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/settings/automatic_platform_optimization`,
         options,
-      ) as Core.APIPromise<{ result: ZonesAutomaticPlatformOptimization }>
+      ) as Core.APIPromise<{ result: ZoneSettingAutomaticPlatformOptimization }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface ZonesAutomaticPlatformOptimization {
+export interface ZoneSettingAutomaticPlatformOptimization {
   /**
    * Indicates whether or not
    * [cache by device type](https://developers.cloudflare.com/automatic-platform-optimization/reference/cache-device-type/)
@@ -88,7 +88,7 @@ export interface AutomaticPlatformOptimizationEditParams {
   /**
    * Body param:
    */
-  value: ZonesAutomaticPlatformOptimization;
+  value: ZoneSettingAutomaticPlatformOptimization;
 }
 
 export interface AutomaticPlatformOptimizationGetParams {
@@ -99,7 +99,7 @@ export interface AutomaticPlatformOptimizationGetParams {
 }
 
 export namespace AutomaticPlatformOptimization {
-  export import ZonesAutomaticPlatformOptimization = AutomaticPlatformOptimizationAPI.ZonesAutomaticPlatformOptimization;
+  export import ZoneSettingAutomaticPlatformOptimization = AutomaticPlatformOptimizationAPI.ZoneSettingAutomaticPlatformOptimization;
   export import AutomaticPlatformOptimizationEditParams = AutomaticPlatformOptimizationAPI.AutomaticPlatformOptimizationEditParams;
   export import AutomaticPlatformOptimizationGetParams = AutomaticPlatformOptimizationAPI.AutomaticPlatformOptimizationGetParams;
 }

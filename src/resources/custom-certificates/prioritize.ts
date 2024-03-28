@@ -25,8 +25,7 @@ export class Prioritize extends APIResource {
   }
 }
 
-export type PrioritizeUpdateResponse =
-  Array<CustomCertificatesAPI.TLSCertificatesAndHostnamesCustomCertificate>;
+export type PrioritizeUpdateResponse = Array<CustomCertificatesAPI.CustomCertificate>;
 
 export interface PrioritizeUpdateParams {
   /**

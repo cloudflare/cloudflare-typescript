@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ListsAPI from 'cloudflare/resources/zero-trust/gateway/lists/lists';
 import * as ItemsAPI from 'cloudflare/resources/zero-trust/gateway/lists/items';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Lists extends APIResource {
   items: ItemsAPI.Items = new ItemsAPI.Items(this._client);
@@ -40,13 +41,16 @@ export class Lists extends APIResource {
   /**
    * Fetches all Zero Trust lists for an account.
    */
-  list(params: ListListParams, options?: Core.RequestOptions): Core.APIPromise<ListListResponse | null> {
+  list(
+    params: ListListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ZeroTrustGatewayListsSinglePage, ZeroTrustGatewayLists> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/gateway/lists`, options) as Core.APIPromise<{
-        result: ListListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/gateway/lists`,
+      ZeroTrustGatewayListsSinglePage,
+      options,
+    );
   }
 
   /**
@@ -98,6 +102,8 @@ export class Lists extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class ZeroTrustGatewayListsSinglePage extends SinglePage<ZeroTrustGatewayLists> {}
 
 export interface ZeroTrustGatewayLists {
   /**
@@ -171,8 +177,6 @@ export namespace ListCreateResponse {
     value?: string;
   }
 }
-
-export type ListListResponse = Array<ZeroTrustGatewayLists>;
 
 export type ListDeleteResponse = unknown | string;
 
@@ -270,8 +274,8 @@ export interface ListGetParams {
 export namespace Lists {
   export import ZeroTrustGatewayLists = ListsAPI.ZeroTrustGatewayLists;
   export import ListCreateResponse = ListsAPI.ListCreateResponse;
-  export import ListListResponse = ListsAPI.ListListResponse;
   export import ListDeleteResponse = ListsAPI.ListDeleteResponse;
+  export import ZeroTrustGatewayListsSinglePage = ListsAPI.ZeroTrustGatewayListsSinglePage;
   export import ListCreateParams = ListsAPI.ListCreateParams;
   export import ListUpdateParams = ListsAPI.ListUpdateParams;
   export import ListListParams = ListsAPI.ListListParams;
@@ -280,5 +284,6 @@ export namespace Lists {
   export import ListGetParams = ListsAPI.ListGetParams;
   export import Items = ItemsAPI.Items;
   export import ItemListResponse = ItemsAPI.ItemListResponse;
+  export import ItemListResponsesSinglePage = ItemsAPI.ItemListResponsesSinglePage;
   export import ItemListParams = ItemsAPI.ItemListParams;
 }

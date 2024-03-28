@@ -11,13 +11,16 @@ export class ImageResizing extends APIResource {
    * [Image Resizing documentation](https://developers.cloudflare.com/images/) for
    * more information.
    */
-  edit(params: ImageResizingEditParams, options?: Core.RequestOptions): Core.APIPromise<ZonesImageResizing> {
+  edit(
+    params: ImageResizingEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ZoneSettingImageResizing> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/image_resizing`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZonesImageResizing }>
+      }) as Core.APIPromise<{ result: ZoneSettingImageResizing }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -27,11 +30,14 @@ export class ImageResizing extends APIResource {
    * [Image Resizing documentation](https://developers.cloudflare.com/images/) for
    * more information.
    */
-  get(params: ImageResizingGetParams, options?: Core.RequestOptions): Core.APIPromise<ZonesImageResizing> {
+  get(
+    params: ImageResizingGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ZoneSettingImageResizing> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/image_resizing`, options) as Core.APIPromise<{
-        result: ZonesImageResizing;
+        result: ZoneSettingImageResizing;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -43,7 +49,7 @@ export class ImageResizing extends APIResource {
  * [Image Resizing documentation](https://developers.cloudflare.com/images/) for
  * more information.
  */
-export interface ZonesImageResizing {
+export interface ZoneSettingImageResizing {
   /**
    * ID of the zone setting.
    */
@@ -78,7 +84,7 @@ export interface ImageResizingEditParams {
    * [Image Resizing documentation](https://developers.cloudflare.com/images/) for
    * more information.
    */
-  value: ZonesImageResizing;
+  value: ZoneSettingImageResizing;
 }
 
 export interface ImageResizingGetParams {
@@ -89,7 +95,7 @@ export interface ImageResizingGetParams {
 }
 
 export namespace ImageResizing {
-  export import ZonesImageResizing = ImageResizingAPI.ZonesImageResizing;
+  export import ZoneSettingImageResizing = ImageResizingAPI.ZoneSettingImageResizing;
   export import ImageResizingEditParams = ImageResizingAPI.ImageResizingEditParams;
   export import ImageResizingGetParams = ImageResizingAPI.ImageResizingGetParams;
 }

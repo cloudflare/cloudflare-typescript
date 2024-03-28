@@ -13,18 +13,16 @@ export class Organizations extends APIResource {
   list(
     query?: OrganizationListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<IamOrganizationsV4PagePaginationArray, IamOrganization>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<IamOrganizationsV4PagePaginationArray, IamOrganization>;
+  ): Core.PagePromise<OrganizationsV4PagePaginationArray, Organization>;
+  list(options?: Core.RequestOptions): Core.PagePromise<OrganizationsV4PagePaginationArray, Organization>;
   list(
     query: OrganizationListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<IamOrganizationsV4PagePaginationArray, IamOrganization> {
+  ): Core.PagePromise<OrganizationsV4PagePaginationArray, Organization> {
     if (isRequestOptions(query)) {
       return this.list({}, query);
     }
-    return this._client.getAPIList('/user/organizations', IamOrganizationsV4PagePaginationArray, {
+    return this._client.getAPIList('/user/organizations', OrganizationsV4PagePaginationArray, {
       query,
       ...options,
     });
@@ -49,9 +47,9 @@ export class Organizations extends APIResource {
   }
 }
 
-export class IamOrganizationsV4PagePaginationArray extends V4PagePaginationArray<IamOrganization> {}
+export class OrganizationsV4PagePaginationArray extends V4PagePaginationArray<Organization> {}
 
-export interface IamOrganization {
+export interface Organization {
   /**
    * Identifier
    */
@@ -115,9 +113,9 @@ export interface OrganizationListParams extends V4PagePaginationArrayParams {
 }
 
 export namespace Organizations {
-  export import IamOrganization = OrganizationsAPI.IamOrganization;
+  export import Organization = OrganizationsAPI.Organization;
   export import OrganizationDeleteResponse = OrganizationsAPI.OrganizationDeleteResponse;
   export import OrganizationGetResponse = OrganizationsAPI.OrganizationGetResponse;
-  export import IamOrganizationsV4PagePaginationArray = OrganizationsAPI.IamOrganizationsV4PagePaginationArray;
+  export import OrganizationsV4PagePaginationArray = OrganizationsAPI.OrganizationsV4PagePaginationArray;
   export import OrganizationListParams = OrganizationsAPI.OrganizationListParams;
 }

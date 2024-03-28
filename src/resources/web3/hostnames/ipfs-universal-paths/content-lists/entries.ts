@@ -13,12 +13,12 @@ export class Entries extends APIResource {
     identifier: string,
     body: EntryCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DwebConfigContentListEntry> {
+  ): Core.APIPromise<DistributedWebConfigContentListEntry> {
     return (
       this._client.post(
         `/zones/${zoneIdentifier}/web3/hostnames/${identifier}/ipfs_universal_path/content_list/entries`,
         { body, ...options },
-      ) as Core.APIPromise<{ result: DwebConfigContentListEntry }>
+      ) as Core.APIPromise<{ result: DistributedWebConfigContentListEntry }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -31,12 +31,12 @@ export class Entries extends APIResource {
     contentListEntryIdentifier: string,
     body: EntryUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DwebConfigContentListEntry> {
+  ): Core.APIPromise<DistributedWebConfigContentListEntry> {
     return (
       this._client.put(
         `/zones/${zoneIdentifier}/web3/hostnames/${identifier}/ipfs_universal_path/content_list/entries/${contentListEntryIdentifier}`,
         { body, ...options },
-      ) as Core.APIPromise<{ result: DwebConfigContentListEntry }>
+      ) as Core.APIPromise<{ result: DistributedWebConfigContentListEntry }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -81,12 +81,12 @@ export class Entries extends APIResource {
     identifier: string,
     contentListEntryIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DwebConfigContentListEntry> {
+  ): Core.APIPromise<DistributedWebConfigContentListEntry> {
     return (
       this._client.get(
         `/zones/${zoneIdentifier}/web3/hostnames/${identifier}/ipfs_universal_path/content_list/entries/${contentListEntryIdentifier}`,
         options,
-      ) as Core.APIPromise<{ result: DwebConfigContentListEntry }>
+      ) as Core.APIPromise<{ result: DistributedWebConfigContentListEntry }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -94,7 +94,7 @@ export class Entries extends APIResource {
 /**
  * Content list entry to be blocked.
  */
-export interface DwebConfigContentListEntry {
+export interface DistributedWebConfigContentListEntry {
   /**
    * Identifier
    */
@@ -124,7 +124,7 @@ export interface EntryListResponse {
   /**
    * Content list entries.
    */
-  entries?: Array<DwebConfigContentListEntry>;
+  entries?: Array<DistributedWebConfigContentListEntry>;
 }
 
 export interface EntryDeleteResponse {
@@ -169,7 +169,7 @@ export interface EntryUpdateParams {
 }
 
 export namespace Entries {
-  export import DwebConfigContentListEntry = EntriesAPI.DwebConfigContentListEntry;
+  export import DistributedWebConfigContentListEntry = EntriesAPI.DistributedWebConfigContentListEntry;
   export import EntryListResponse = EntriesAPI.EntryListResponse;
   export import EntryDeleteResponse = EntriesAPI.EntryDeleteResponse;
   export import EntryCreateParams = EntriesAPI.EntryCreateParams;

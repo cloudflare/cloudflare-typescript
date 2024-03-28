@@ -14,13 +14,13 @@ export class BrowserCacheTTL extends APIResource {
   edit(
     params: BrowserCacheTTLEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZonesBrowserCacheTTL> {
+  ): Core.APIPromise<ZoneSettingBrowserCacheTTL> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/browser_cache_ttl`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZonesBrowserCacheTTL }>
+      }) as Core.APIPromise<{ result: ZoneSettingBrowserCacheTTL }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -33,11 +33,11 @@ export class BrowserCacheTTL extends APIResource {
   get(
     params: BrowserCacheTTLGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZonesBrowserCacheTTL> {
+  ): Core.APIPromise<ZoneSettingBrowserCacheTTL> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/browser_cache_ttl`, options) as Core.APIPromise<{
-        result: ZonesBrowserCacheTTL;
+        result: ZoneSettingBrowserCacheTTL;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -49,7 +49,7 @@ export class BrowserCacheTTL extends APIResource {
  * specified by your server.
  * (https://support.cloudflare.com/hc/en-us/articles/200168276).
  */
-export interface ZonesBrowserCacheTTL {
+export interface ZoneSettingBrowserCacheTTL {
   /**
    * ID of the zone setting.
    */
@@ -149,7 +149,7 @@ export interface BrowserCacheTTLGetParams {
 }
 
 export namespace BrowserCacheTTL {
-  export import ZonesBrowserCacheTTL = BrowserCacheTTLAPI.ZonesBrowserCacheTTL;
+  export import ZoneSettingBrowserCacheTTL = BrowserCacheTTLAPI.ZoneSettingBrowserCacheTTL;
   export import BrowserCacheTTLEditParams = BrowserCacheTTLAPI.BrowserCacheTTLEditParams;
   export import BrowserCacheTTLGetParams = BrowserCacheTTLAPI.BrowserCacheTTLGetParams;
 }

@@ -20,5 +20,5 @@ export {
   SpeedTrendsListParams,
   Speed,
 } from './speed';
-export { PageListResponse, PageListParams, Pages } from './pages';
+export { PageListResponse, PageListParams, PageListResponsesSinglePage, Pages } from './pages';
 export { ScheduleCreateResponse, ScheduleCreateParams, Schedule } from './schedule';

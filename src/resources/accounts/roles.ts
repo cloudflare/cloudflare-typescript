@@ -3,18 +3,15 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as RolesAPI from 'cloudflare/resources/accounts/roles';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Roles extends APIResource {
   /**
    * Get all available roles for an account.
    */
-  list(params: RoleListParams, options?: Core.RequestOptions): Core.APIPromise<RoleListResponse | null> {
+  list(params: RoleListParams, options?: Core.RequestOptions): Core.PagePromise<RolesSinglePage, Role> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/roles`, options) as Core.APIPromise<{
-        result: RoleListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(`/accounts/${account_id}/roles`, RolesSinglePage, options);
   }
 
   /**
@@ -34,7 +31,9 @@ export class Roles extends APIResource {
   }
 }
 
-export interface IamSchemasRole {
+export class RolesSinglePage extends SinglePage<Role> {}
+
+export interface Role {
   /**
    * Role identifier tag.
    */
@@ -56,8 +55,6 @@ export interface IamSchemasRole {
   permissions: Array<string>;
 }
 
-export type RoleListResponse = Array<IamSchemasRole>;
-
 export type RoleGetResponse = unknown | string | null;
 
 export interface RoleListParams {
@@ -69,9 +66,9 @@ export interface RoleGetParams {
 }
 
 export namespace Roles {
-  export import IamSchemasRole = RolesAPI.IamSchemasRole;
-  export import RoleListResponse = RolesAPI.RoleListResponse;
+  export import Role = RolesAPI.Role;
   export import RoleGetResponse = RolesAPI.RoleGetResponse;
+  export import RolesSinglePage = RolesAPI.RolesSinglePage;
   export import RoleListParams = RolesAPI.RoleListParams;
   export import RoleGetParams = RolesAPI.RoleGetParams;
 }

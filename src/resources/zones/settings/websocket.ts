@@ -10,11 +10,11 @@ export class Websocket extends APIResource {
    * to
    * [Using Cloudflare with WebSockets](https://support.cloudflare.com/hc/en-us/articles/200169466-Using-Cloudflare-with-WebSockets).
    */
-  edit(params: WebsocketEditParams, options?: Core.RequestOptions): Core.APIPromise<ZonesWebsockets> {
+  edit(params: WebsocketEditParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingWebsockets> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/websockets`, { body, ...options }) as Core.APIPromise<{
-        result: ZonesWebsockets;
+        result: ZoneSettingWebsockets;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -23,11 +23,11 @@ export class Websocket extends APIResource {
    * Gets Websockets setting. For more information about Websockets, please refer to
    * [Using Cloudflare with WebSockets](https://support.cloudflare.com/hc/en-us/articles/200169466-Using-Cloudflare-with-WebSockets).
    */
-  get(params: WebsocketGetParams, options?: Core.RequestOptions): Core.APIPromise<ZonesWebsockets> {
+  get(params: WebsocketGetParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingWebsockets> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/websockets`, options) as Core.APIPromise<{
-        result: ZonesWebsockets;
+        result: ZoneSettingWebsockets;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -42,7 +42,7 @@ export class Websocket extends APIResource {
  * to
  * [Can I use Cloudflare with Websockets](https://support.cloudflare.com/hc/en-us/articles/200169466-Can-I-use-Cloudflare-with-WebSockets-).
  */
-export interface ZonesWebsockets {
+export interface ZoneSettingWebsockets {
   /**
    * ID of the zone setting.
    */
@@ -85,7 +85,7 @@ export interface WebsocketGetParams {
 }
 
 export namespace Websocket {
-  export import ZonesWebsockets = WebsocketAPI.ZonesWebsockets;
+  export import ZoneSettingWebsockets = WebsocketAPI.ZoneSettingWebsockets;
   export import WebsocketEditParams = WebsocketAPI.WebsocketEditParams;
   export import WebsocketGetParams = WebsocketAPI.WebsocketGetParams;
 }

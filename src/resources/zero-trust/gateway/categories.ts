@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as CategoriesAPI from 'cloudflare/resources/zero-trust/gateway/categories';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Categories extends APIResource {
   /**
@@ -11,15 +12,17 @@ export class Categories extends APIResource {
   list(
     params: CategoryListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CategoryListResponse | null> {
+  ): Core.PagePromise<ZeroTrustGatewayCategoriesSinglePage, ZeroTrustGatewayCategories> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/gateway/categories`, options) as Core.APIPromise<{
-        result: CategoryListResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/gateway/categories`,
+      ZeroTrustGatewayCategoriesSinglePage,
+      options,
+    );
   }
 }
+
+export class ZeroTrustGatewayCategoriesSinglePage extends SinglePage<ZeroTrustGatewayCategories> {}
 
 export interface ZeroTrustGatewayCategories {
   /**
@@ -88,8 +91,6 @@ export namespace ZeroTrustGatewayCategories {
   }
 }
 
-export type CategoryListResponse = Array<ZeroTrustGatewayCategories>;
-
 export interface CategoryListParams {
   /**
    * Identifier
@@ -99,6 +100,6 @@ export interface CategoryListParams {
 
 export namespace Categories {
   export import ZeroTrustGatewayCategories = CategoriesAPI.ZeroTrustGatewayCategories;
-  export import CategoryListResponse = CategoriesAPI.CategoryListResponse;
+  export import ZeroTrustGatewayCategoriesSinglePage = CategoriesAPI.ZeroTrustGatewayCategoriesSinglePage;
   export import CategoryListParams = CategoriesAPI.CategoryListParams;
 }

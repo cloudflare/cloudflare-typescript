@@ -16,7 +16,7 @@ export class Rules extends APIResource {
     rulesetId: string,
     params: RuleCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RulesetsAPI.RulesetsRulesetResponse> {
+  ): Core.APIPromise<RulesetsAPI.Ruleset> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -38,7 +38,7 @@ export class Rules extends APIResource {
       this._client.post(`/${accountOrZone}/${accountOrZoneId}/rulesets/${rulesetId}/rules`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: RulesetsAPI.RulesetsRulesetResponse }>
+      }) as Core.APIPromise<{ result: RulesetsAPI.Ruleset }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -50,18 +50,18 @@ export class Rules extends APIResource {
     ruleId: string,
     params?: RuleDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RulesetsAPI.RulesetsRulesetResponse>;
+  ): Core.APIPromise<RulesetsAPI.Ruleset>;
   delete(
     rulesetId: string,
     ruleId: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RulesetsAPI.RulesetsRulesetResponse>;
+  ): Core.APIPromise<RulesetsAPI.Ruleset>;
   delete(
     rulesetId: string,
     ruleId: string,
     params: RuleDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RulesetsAPI.RulesetsRulesetResponse> {
+  ): Core.APIPromise<RulesetsAPI.Ruleset> {
     if (isRequestOptions(params)) {
       return this.delete(rulesetId, ruleId, {}, params);
     }
@@ -86,7 +86,7 @@ export class Rules extends APIResource {
       this._client.delete(
         `/${accountOrZone}/${accountOrZoneId}/rulesets/${rulesetId}/rules/${ruleId}`,
         options,
-      ) as Core.APIPromise<{ result: RulesetsAPI.RulesetsRulesetResponse }>
+      ) as Core.APIPromise<{ result: RulesetsAPI.Ruleset }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -98,7 +98,7 @@ export class Rules extends APIResource {
     ruleId: string,
     params: RuleEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RulesetsAPI.RulesetsRulesetResponse> {
+  ): Core.APIPromise<RulesetsAPI.Ruleset> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -120,7 +120,7 @@ export class Rules extends APIResource {
       this._client.patch(`/${accountOrZone}/${accountOrZoneId}/rulesets/${rulesetId}/rules/${ruleId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: RulesetsAPI.RulesetsRulesetResponse }>
+      }) as Core.APIPromise<{ result: RulesetsAPI.Ruleset }>
     )._thenUnwrap((obj) => obj.result);
   }
 }

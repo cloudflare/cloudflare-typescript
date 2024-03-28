@@ -12,11 +12,11 @@ export class Previews extends APIResource {
   create(
     params: PreviewCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<HealthchecksAPI.HealthchecksHealthchecks> {
+  ): Core.APIPromise<HealthchecksAPI.Healthcheck> {
     const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/healthchecks/preview`, { body, ...options }) as Core.APIPromise<{
-        result: HealthchecksAPI.HealthchecksHealthchecks;
+        result: HealthchecksAPI.Healthcheck;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -45,13 +45,13 @@ export class Previews extends APIResource {
     healthcheckId: string,
     params: PreviewGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<HealthchecksAPI.HealthchecksHealthchecks> {
+  ): Core.APIPromise<HealthchecksAPI.Healthcheck> {
     const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/healthchecks/preview/${healthcheckId}`,
         options,
-      ) as Core.APIPromise<{ result: HealthchecksAPI.HealthchecksHealthchecks }>
+      ) as Core.APIPromise<{ result: HealthchecksAPI.Healthcheck }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
