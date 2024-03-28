@@ -12,12 +12,12 @@ export class CustomPages extends APIResource {
     identifier: string,
     body: CustomPageCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessCustomPageWithoutHTML> {
+  ): Core.APIPromise<ZeroTrustCustomPageWithoutHTML> {
     return (
       this._client.post(`/accounts/${identifier}/access/custom_pages`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: AccessCustomPageWithoutHTML }>
+      }) as Core.APIPromise<{ result: ZeroTrustCustomPageWithoutHTML }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -29,12 +29,12 @@ export class CustomPages extends APIResource {
     uuid: string,
     body: CustomPageUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessCustomPageWithoutHTML> {
+  ): Core.APIPromise<ZeroTrustCustomPageWithoutHTML> {
     return (
       this._client.put(`/accounts/${identifier}/access/custom_pages/${uuid}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: AccessCustomPageWithoutHTML }>
+      }) as Core.APIPromise<{ result: ZeroTrustCustomPageWithoutHTML }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -67,16 +67,16 @@ export class CustomPages extends APIResource {
   /**
    * Fetches a custom page and also returns its HTML.
    */
-  get(identifier: string, uuid: string, options?: Core.RequestOptions): Core.APIPromise<AccessCustomPage> {
+  get(identifier: string, uuid: string, options?: Core.RequestOptions): Core.APIPromise<ZeroTrustCustomPage> {
     return (
       this._client.get(`/accounts/${identifier}/access/custom_pages/${uuid}`, options) as Core.APIPromise<{
-        result: AccessCustomPage;
+        result: ZeroTrustCustomPage;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface AccessCustomPage {
+export interface ZeroTrustCustomPage {
   /**
    * Custom page HTML.
    */
@@ -107,7 +107,7 @@ export interface AccessCustomPage {
   updated_at?: string;
 }
 
-export interface AccessCustomPageWithoutHTML {
+export interface ZeroTrustCustomPageWithoutHTML {
   /**
    * Custom page name.
    */
@@ -133,7 +133,7 @@ export interface AccessCustomPageWithoutHTML {
   updated_at?: string;
 }
 
-export type CustomPageListResponse = Array<AccessCustomPageWithoutHTML>;
+export type CustomPageListResponse = Array<ZeroTrustCustomPageWithoutHTML>;
 
 export interface CustomPageDeleteResponse {
   /**
@@ -187,8 +187,8 @@ export interface CustomPageUpdateParams {
 }
 
 export namespace CustomPages {
-  export import AccessCustomPage = CustomPagesAPI.AccessCustomPage;
-  export import AccessCustomPageWithoutHTML = CustomPagesAPI.AccessCustomPageWithoutHTML;
+  export import ZeroTrustCustomPage = CustomPagesAPI.ZeroTrustCustomPage;
+  export import ZeroTrustCustomPageWithoutHTML = CustomPagesAPI.ZeroTrustCustomPageWithoutHTML;
   export import CustomPageListResponse = CustomPagesAPI.CustomPageListResponse;
   export import CustomPageDeleteResponse = CustomPagesAPI.CustomPageDeleteResponse;
   export import CustomPageCreateParams = CustomPagesAPI.CustomPageCreateParams;

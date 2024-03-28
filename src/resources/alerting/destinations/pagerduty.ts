@@ -71,7 +71,7 @@ export class Pagerduty extends APIResource {
   }
 }
 
-export interface AaaPagerduty {
+export interface AlertingPagerduty {
   /**
    * UUID
    */
@@ -92,7 +92,7 @@ export interface PagerdutyCreateResponse {
 
 export type PagerdutyDeleteResponse = unknown | Array<unknown> | string;
 
-export type PagerdutyGetResponse = Array<AaaPagerduty>;
+export type PagerdutyGetResponse = Array<AlertingPagerduty>;
 
 export interface PagerdutyLinkResponse {
   /**
@@ -130,7 +130,7 @@ export interface PagerdutyLinkParams {
 }
 
 export namespace Pagerduty {
-  export import AaaPagerduty = PagerdutyAPI.AaaPagerduty;
+  export import AlertingPagerduty = PagerdutyAPI.AlertingPagerduty;
   export import PagerdutyCreateResponse = PagerdutyAPI.PagerdutyCreateResponse;
   export import PagerdutyDeleteResponse = PagerdutyAPI.PagerdutyDeleteResponse;
   export import PagerdutyGetResponse = PagerdutyAPI.PagerdutyGetResponse;

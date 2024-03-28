@@ -12,25 +12,22 @@ export class Bytimes extends APIResource {
    * [Analytics API properties](https://developers.cloudflare.com/dns/reference/analytics-api-properties/)
    * for detailed information about the available query parameters.
    */
-  get(
-    params: BytimeGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DNSDNSAnalyticsAPIReportBytime> {
+  get(params: BytimeGetParams, options?: Core.RequestOptions): Core.APIPromise<DNSAnalyticsReportByTime> {
     const { zone_id, ...query } = params;
     return (
       this._client.get(`/zones/${zone_id}/dns_analytics/report/bytime`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: DNSDNSAnalyticsAPIReportBytime }>
+      }) as Core.APIPromise<{ result: DNSAnalyticsReportByTime }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface DNSDNSAnalyticsAPIReportBytime {
+export interface DNSAnalyticsReportByTime {
   /**
    * Array with one row per combination of dimension values.
    */
-  data: Array<DNSDNSAnalyticsAPIReportBytime.Data>;
+  data: Array<DNSAnalyticsReportByTime.Data>;
 
   /**
    * Number of seconds between current time and last processed event, in another
@@ -50,7 +47,7 @@ export interface DNSDNSAnalyticsAPIReportBytime {
    */
   min: unknown;
 
-  query: DNSDNSAnalyticsAPIReportBytime.Query;
+  query: DNSAnalyticsReportByTime.Query;
 
   /**
    * Total number of rows in the result.
@@ -70,7 +67,7 @@ export interface DNSDNSAnalyticsAPIReportBytime {
   totals: unknown;
 }
 
-export namespace DNSDNSAnalyticsAPIReportBytime {
+export namespace DNSAnalyticsReportByTime {
   export interface Data {
     /**
      * Array of dimension values, representing the combination of dimension values
@@ -198,6 +195,6 @@ export interface BytimeGetParams {
 }
 
 export namespace Bytimes {
-  export import DNSDNSAnalyticsAPIReportBytime = BytimesAPI.DNSDNSAnalyticsAPIReportBytime;
+  export import DNSAnalyticsReportByTime = BytimesAPI.DNSAnalyticsReportByTime;
   export import BytimeGetParams = BytimesAPI.BytimeGetParams;
 }

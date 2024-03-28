@@ -2,7 +2,7 @@
 
 export { DefaultPolicyGetResponse, DefaultPolicyGetParams, DefaultPolicy } from './default-policy';
 export {
-  TeamsDevicesDeviceSettingsPolicy,
+  DevicesDeviceSettingsPolicy,
   PolicyListResponse,
   PolicyDeleteResponse,
   PolicyCreateParams,
@@ -13,7 +13,7 @@ export {
   Policies,
 } from './policies';
 export {
-  TeamsDevicesFallbackDomain,
+  DevicesFallbackDomain,
   FallbackDomainUpdateResponse,
   FallbackDomainListResponse,
   FallbackDomainGetResponse,
@@ -23,7 +23,7 @@ export {
   FallbackDomains,
 } from './fallback-domains';
 export {
-  TeamsDevicesSplitTunnel,
+  DevicesSplitTunnel,
   ExcludeUpdateResponse,
   ExcludeListResponse,
   ExcludeGetResponse,
@@ -33,7 +33,7 @@ export {
   Excludes,
 } from './excludes';
 export {
-  TeamsDevicesSplitTunnelInclude,
+  DevicesSplitTunnelInclude,
   IncludeUpdateResponse,
   IncludeListResponse,
   IncludeGetResponse,

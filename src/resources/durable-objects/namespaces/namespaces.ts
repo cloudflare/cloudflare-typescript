@@ -25,7 +25,7 @@ export class Namespaces extends APIResource {
   }
 }
 
-export interface WorkersNamespace {
+export interface DurableObjectNamespace {
   id?: unknown;
 
   class?: unknown;
@@ -35,7 +35,7 @@ export interface WorkersNamespace {
   script?: unknown;
 }
 
-export type NamespaceListResponse = Array<WorkersNamespace>;
+export type NamespaceListResponse = Array<DurableObjectNamespace>;
 
 export interface NamespaceListParams {
   /**
@@ -45,11 +45,11 @@ export interface NamespaceListParams {
 }
 
 export namespace Namespaces {
-  export import WorkersNamespace = NamespacesAPI.WorkersNamespace;
+  export import DurableObjectNamespace = NamespacesAPI.DurableObjectNamespace;
   export import NamespaceListResponse = NamespacesAPI.NamespaceListResponse;
   export import NamespaceListParams = NamespacesAPI.NamespaceListParams;
   export import Objects = ObjectsAPI.Objects;
-  export import WorkersObject = ObjectsAPI.WorkersObject;
-  export import WorkersObjectsCursorLimitPagination = ObjectsAPI.WorkersObjectsCursorLimitPagination;
+  export import DurableObject = ObjectsAPI.DurableObject;
+  export import DurableObjectsCursorLimitPagination = ObjectsAPI.DurableObjectsCursorLimitPagination;
   export import ObjectListParams = ObjectsAPI.ObjectListParams;
 }

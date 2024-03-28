@@ -1,15 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  LegacyJhsOverride,
-  OverrideDeleteResponse,
-  OverrideCreateParams,
-  OverrideUpdateParams,
-  OverrideListParams,
-  LegacyJhsOverridesV4PagePaginationArray,
-  Overrides,
-} from './overrides';
-export {
   PackageListResponse,
   PackageGetResponse,
   PackageListParams,
@@ -17,3 +8,12 @@ export {
   Packages,
 } from './packages/index';
 export { WAF } from './waf';
+export {
+  WAFOverride,
+  OverrideDeleteResponse,
+  OverrideCreateParams,
+  OverrideUpdateParams,
+  OverrideListParams,
+  WAFOverridesV4PagePaginationArray,
+  Overrides,
+} from './overrides';

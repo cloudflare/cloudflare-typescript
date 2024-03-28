@@ -14,7 +14,7 @@ export class Jobs extends APIResource {
   create(
     params: JobCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DatasetsJobsAPI.LogpushLogpushJob | null> {
+  ): Core.APIPromise<DatasetsJobsAPI.LogpushJob | null> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -36,7 +36,7 @@ export class Jobs extends APIResource {
       this._client.post(`/${accountOrZone}/${accountOrZoneId}/logpush/jobs`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: DatasetsJobsAPI.LogpushLogpushJob | null }>
+      }) as Core.APIPromise<{ result: DatasetsJobsAPI.LogpushJob | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -47,7 +47,7 @@ export class Jobs extends APIResource {
     jobId: number,
     params: JobUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DatasetsJobsAPI.LogpushLogpushJob | null> {
+  ): Core.APIPromise<DatasetsJobsAPI.LogpushJob | null> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -69,7 +69,7 @@ export class Jobs extends APIResource {
       this._client.put(`/${accountOrZone}/${accountOrZoneId}/logpush/jobs/${jobId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: DatasetsJobsAPI.LogpushLogpushJob | null }>
+      }) as Core.APIPromise<{ result: DatasetsJobsAPI.LogpushJob | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -149,16 +149,13 @@ export class Jobs extends APIResource {
     jobId: number,
     params?: JobGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DatasetsJobsAPI.LogpushLogpushJob | null>;
-  get(
-    jobId: number,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DatasetsJobsAPI.LogpushLogpushJob | null>;
+  ): Core.APIPromise<DatasetsJobsAPI.LogpushJob | null>;
+  get(jobId: number, options?: Core.RequestOptions): Core.APIPromise<DatasetsJobsAPI.LogpushJob | null>;
   get(
     jobId: number,
     params: JobGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DatasetsJobsAPI.LogpushLogpushJob | null> {
+  ): Core.APIPromise<DatasetsJobsAPI.LogpushJob | null> {
     if (isRequestOptions(params)) {
       return this.get(jobId, {}, params);
     }
@@ -183,12 +180,12 @@ export class Jobs extends APIResource {
       this._client.get(
         `/${accountOrZone}/${accountOrZoneId}/logpush/jobs/${jobId}`,
         options,
-      ) as Core.APIPromise<{ result: DatasetsJobsAPI.LogpushLogpushJob | null }>
+      ) as Core.APIPromise<{ result: DatasetsJobsAPI.LogpushJob | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type JobListResponse = Array<DatasetsJobsAPI.LogpushLogpushJob | null>;
+export type JobListResponse = Array<DatasetsJobsAPI.LogpushJob | null>;
 
 export type JobDeleteResponse = unknown | Array<unknown> | string;
 

@@ -17,10 +17,10 @@ export class Hostnames extends APIResource {
     zoneIdentifier: string,
     body: HostnameCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DwebConfigWeb3Hostname> {
+  ): Core.APIPromise<DistributedWebHostname> {
     return (
       this._client.post(`/zones/${zoneIdentifier}/web3/hostnames`, { body, ...options }) as Core.APIPromise<{
-        result: DwebConfigWeb3Hostname;
+        result: DistributedWebHostname;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -60,12 +60,12 @@ export class Hostnames extends APIResource {
     identifier: string,
     body: HostnameEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DwebConfigWeb3Hostname> {
+  ): Core.APIPromise<DistributedWebHostname> {
     return (
       this._client.patch(`/zones/${zoneIdentifier}/web3/hostnames/${identifier}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: DwebConfigWeb3Hostname }>
+      }) as Core.APIPromise<{ result: DistributedWebHostname }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -76,16 +76,16 @@ export class Hostnames extends APIResource {
     zoneIdentifier: string,
     identifier: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DwebConfigWeb3Hostname> {
+  ): Core.APIPromise<DistributedWebHostname> {
     return (
       this._client.get(`/zones/${zoneIdentifier}/web3/hostnames/${identifier}`, options) as Core.APIPromise<{
-        result: DwebConfigWeb3Hostname;
+        result: DistributedWebHostname;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface DwebConfigWeb3Hostname {
+export interface DistributedWebHostname {
   /**
    * Identifier
    */
@@ -121,7 +121,7 @@ export interface DwebConfigWeb3Hostname {
   target?: 'ethereum' | 'ipfs' | 'ipfs_universal_path';
 }
 
-export type HostnameListResponse = Array<DwebConfigWeb3Hostname>;
+export type HostnameListResponse = Array<DistributedWebHostname>;
 
 export interface HostnameDeleteResponse {
   /**
@@ -160,7 +160,7 @@ export interface HostnameEditParams {
 }
 
 export namespace Hostnames {
-  export import DwebConfigWeb3Hostname = HostnamesAPI.DwebConfigWeb3Hostname;
+  export import DistributedWebHostname = HostnamesAPI.DistributedWebHostname;
   export import HostnameListResponse = HostnamesAPI.HostnameListResponse;
   export import HostnameDeleteResponse = HostnamesAPI.HostnameDeleteResponse;
   export import HostnameCreateParams = HostnamesAPI.HostnameCreateParams;

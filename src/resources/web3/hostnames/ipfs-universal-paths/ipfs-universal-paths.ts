@@ -9,6 +9,6 @@ export class IPFSUniversalPaths extends APIResource {
 
 export namespace IPFSUniversalPaths {
   export import ContentLists = ContentListsAPI.ContentLists;
-  export import DwebConfigContentListDetails = ContentListsAPI.DwebConfigContentListDetails;
+  export import DistributedWebConfigContentList = ContentListsAPI.DistributedWebConfigContentList;
   export import ContentListUpdateParams = ContentListsAPI.ContentListUpdateParams;
 }

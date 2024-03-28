@@ -93,7 +93,7 @@ export class Rules extends APIResource {
   }
 }
 
-export interface WaitingroomRuleResult {
+export interface WaitingroomRule {
   /**
    * The ID of the rule.
    */
@@ -127,15 +127,15 @@ export interface WaitingroomRuleResult {
   version?: string;
 }
 
-export type RuleCreateResponse = Array<WaitingroomRuleResult>;
+export type RuleCreateResponse = Array<WaitingroomRule>;
 
-export type RuleUpdateResponse = Array<WaitingroomRuleResult>;
+export type RuleUpdateResponse = Array<WaitingroomRule>;
 
-export type RuleListResponse = Array<WaitingroomRuleResult>;
+export type RuleListResponse = Array<WaitingroomRule>;
 
-export type RuleDeleteResponse = Array<WaitingroomRuleResult>;
+export type RuleDeleteResponse = Array<WaitingroomRule>;
 
-export type RuleEditResponse = Array<WaitingroomRuleResult>;
+export type RuleEditResponse = Array<WaitingroomRule>;
 
 export interface RuleCreateParams {
   /**
@@ -241,7 +241,7 @@ export namespace RuleEditParams {
 }
 
 export namespace Rules {
-  export import WaitingroomRuleResult = RulesAPI.WaitingroomRuleResult;
+  export import WaitingroomRule = RulesAPI.WaitingroomRule;
   export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
   export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
   export import RuleListResponse = RulesAPI.RuleListResponse;

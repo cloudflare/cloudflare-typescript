@@ -1,7 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  AccessApps,
+  UserPolicyCheckListResponse,
+  UserPolicyCheckListParams,
+  UserPolicyChecks,
+} from './user-policy-checks';
+export {
+  ZeroTrustApps,
   ApplicationListResponse,
   ApplicationDeleteResponse,
   ApplicationRevokeTokensResponse,
@@ -14,7 +19,7 @@ export {
   Applications,
 } from './applications';
 export {
-  AccessCA,
+  ZeroTrustCA,
   CACreateResponse,
   CAListResponse,
   CADeleteResponse,
@@ -26,7 +31,7 @@ export {
   CAs,
 } from './cas';
 export {
-  AccessPolicies,
+  ZeroTrustPolicies,
   PolicyListResponse,
   PolicyDeleteResponse,
   PolicyCreateParams,
@@ -36,8 +41,3 @@ export {
   PolicyGetParams,
   Policies,
 } from './policies';
-export {
-  UserPolicyCheckListResponse,
-  UserPolicyCheckListParams,
-  UserPolicyChecks,
-} from './user-policy-checks';

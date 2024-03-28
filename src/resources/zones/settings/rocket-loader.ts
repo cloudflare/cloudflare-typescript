@@ -17,13 +17,16 @@ export class RocketLoader extends APIResource {
    * [Understanding Rocket Loader](https://support.cloudflare.com/hc/articles/200168056)
    * for more information.
    */
-  edit(params: RocketLoaderEditParams, options?: Core.RequestOptions): Core.APIPromise<ZonesRocketLoader> {
+  edit(
+    params: RocketLoaderEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ZoneSettingRocketLoader> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/rocket_loader`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZonesRocketLoader }>
+      }) as Core.APIPromise<{ result: ZoneSettingRocketLoader }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -39,11 +42,14 @@ export class RocketLoader extends APIResource {
    * [Understanding Rocket Loader](https://support.cloudflare.com/hc/articles/200168056)
    * for more information.
    */
-  get(params: RocketLoaderGetParams, options?: Core.RequestOptions): Core.APIPromise<ZonesRocketLoader> {
+  get(
+    params: RocketLoaderGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ZoneSettingRocketLoader> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/rocket_loader`, options) as Core.APIPromise<{
-        result: ZonesRocketLoader;
+        result: ZoneSettingRocketLoader;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -61,7 +67,7 @@ export class RocketLoader extends APIResource {
  * [Understanding Rocket Loader](https://support.cloudflare.com/hc/articles/200168056)
  * for more information.
  */
-export interface ZonesRocketLoader {
+export interface ZoneSettingRocketLoader {
   /**
    * ID of the zone setting.
    */
@@ -102,7 +108,7 @@ export interface RocketLoaderEditParams {
    * [Understanding Rocket Loader](https://support.cloudflare.com/hc/articles/200168056)
    * for more information.
    */
-  value: ZonesRocketLoader;
+  value: ZoneSettingRocketLoader;
 }
 
 export interface RocketLoaderGetParams {
@@ -113,7 +119,7 @@ export interface RocketLoaderGetParams {
 }
 
 export namespace RocketLoader {
-  export import ZonesRocketLoader = RocketLoaderAPI.ZonesRocketLoader;
+  export import ZoneSettingRocketLoader = RocketLoaderAPI.ZoneSettingRocketLoader;
   export import RocketLoaderEditParams = RocketLoaderAPI.RocketLoaderEditParams;
   export import RocketLoaderGetParams = RocketLoaderAPI.RocketLoaderGetParams;
 }

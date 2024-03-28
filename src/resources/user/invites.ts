@@ -40,7 +40,7 @@ export class Invites extends APIResource {
   }
 }
 
-export interface IamSchemasInvite {
+export interface UserInvite {
   /**
    * ID of the user to add to the organization.
    */
@@ -84,7 +84,7 @@ export interface IamSchemasInvite {
   /**
    * Roles to be assigned to this user.
    */
-  roles?: Array<RolesAPI.IamSchemasRole>;
+  roles?: Array<RolesAPI.Role>;
 
   /**
    * Current status of the invitation.
@@ -139,7 +139,7 @@ export namespace InviteListResponse {
     /**
      * Roles to be assigned to this user.
      */
-    roles?: Array<RolesAPI.IamSchemasRole>;
+    roles?: Array<RolesAPI.Role>;
 
     /**
      * Current status of the invitation.
@@ -160,7 +160,7 @@ export interface InviteEditParams {
 }
 
 export namespace Invites {
-  export import IamSchemasInvite = InvitesAPI.IamSchemasInvite;
+  export import UserInvite = InvitesAPI.UserInvite;
   export import InviteListResponse = InvitesAPI.InviteListResponse;
   export import InviteEditResponse = InvitesAPI.InviteEditResponse;
   export import InviteGetResponse = InvitesAPI.InviteGetResponse;

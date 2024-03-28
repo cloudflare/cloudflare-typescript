@@ -34,7 +34,7 @@ export class Roles extends APIResource {
   }
 }
 
-export interface IamSchemasRole {
+export interface Role {
   /**
    * Role identifier tag.
    */
@@ -56,7 +56,7 @@ export interface IamSchemasRole {
   permissions: Array<string>;
 }
 
-export type RoleListResponse = Array<IamSchemasRole>;
+export type RoleListResponse = Array<Role>;
 
 export type RoleGetResponse = unknown | string | null;
 
@@ -69,7 +69,7 @@ export interface RoleGetParams {
 }
 
 export namespace Roles {
-  export import IamSchemasRole = RolesAPI.IamSchemasRole;
+  export import Role = RolesAPI.Role;
   export import RoleListResponse = RolesAPI.RoleListResponse;
   export import RoleGetResponse = RolesAPI.RoleGetResponse;
   export import RoleListParams = RolesAPI.RoleListParams;

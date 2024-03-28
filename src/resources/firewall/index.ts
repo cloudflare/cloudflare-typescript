@@ -16,7 +16,7 @@ export {
 } from './access-rules';
 export { Firewall } from './firewall';
 export {
-  LegacyJhsFilterRule,
+  FirewallFilterRule,
   RuleCreateResponse,
   RuleEditResponse,
   RuleCreateParams,
@@ -24,11 +24,11 @@ export {
   RuleListParams,
   RuleDeleteParams,
   RuleEditParams,
-  LegacyJhsFilterRulesV4PagePaginationArray,
+  FirewallFilterRulesV4PagePaginationArray,
   Rules,
 } from './rules';
 export {
-  LegacyJhsUARules,
+  FirewallUserAgentRule,
   UARuleCreateResponse,
   UARuleUpdateResponse,
   UARuleListResponse,
@@ -41,12 +41,12 @@ export {
   UARules,
 } from './ua-rules';
 export {
-  LegacyJhsZonelockdown,
+  FirewallZoneLockdown,
   LockdownDeleteResponse,
   LockdownCreateParams,
   LockdownUpdateParams,
   LockdownListParams,
-  LegacyJhsZonelockdownsV4PagePaginationArray,
+  FirewallZoneLockdownsV4PagePaginationArray,
   Lockdowns,
 } from './lockdowns';
 export { WAF } from './waf/index';

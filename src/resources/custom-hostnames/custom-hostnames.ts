@@ -96,7 +96,7 @@ export class CustomHostnames extends APIResource {
 
 export class CustomHostnameListResponsesV4PagePaginationArray extends V4PagePaginationArray<CustomHostnameListResponse> {}
 
-export interface TLSCertificatesAndHostnamesCustomHostname {
+export interface CustomHostname {
   /**
    * Identifier
    */
@@ -110,10 +110,10 @@ export interface TLSCertificatesAndHostnamesCustomHostname {
   /**
    * SSL properties for the custom hostname.
    */
-  ssl: TLSCertificatesAndHostnamesCustomHostname.SSL;
+  ssl: CustomHostname.SSL;
 }
 
-export namespace TLSCertificatesAndHostnamesCustomHostname {
+export namespace CustomHostname {
   /**
    * SSL properties for the custom hostname.
    */
@@ -1475,7 +1475,7 @@ export interface CustomHostnameGetParams {
 }
 
 export namespace CustomHostnames {
-  export import TLSCertificatesAndHostnamesCustomHostname = CustomHostnamesAPI.TLSCertificatesAndHostnamesCustomHostname;
+  export import CustomHostname = CustomHostnamesAPI.CustomHostname;
   export import CustomHostnameCreateResponse = CustomHostnamesAPI.CustomHostnameCreateResponse;
   export import CustomHostnameListResponse = CustomHostnamesAPI.CustomHostnameListResponse;
   export import CustomHostnameDeleteResponse = CustomHostnamesAPI.CustomHostnameDeleteResponse;

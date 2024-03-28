@@ -12,13 +12,16 @@ export class ChallengeTTL extends APIResource {
    * setting and will attempt to honor any setting above 45 minutes.
    * (https://support.cloudflare.com/hc/en-us/articles/200170136).
    */
-  edit(params: ChallengeTTLEditParams, options?: Core.RequestOptions): Core.APIPromise<ZonesChallengeTTL> {
+  edit(
+    params: ChallengeTTLEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ZoneSettingChallengeTTL> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/challenge_ttl`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZonesChallengeTTL }>
+      }) as Core.APIPromise<{ result: ZoneSettingChallengeTTL }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -29,11 +32,14 @@ export class ChallengeTTL extends APIResource {
    * setting and will attempt to honor any setting above 45 minutes.
    * (https://support.cloudflare.com/hc/en-us/articles/200170136).
    */
-  get(params: ChallengeTTLGetParams, options?: Core.RequestOptions): Core.APIPromise<ZonesChallengeTTL> {
+  get(
+    params: ChallengeTTLGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ZoneSettingChallengeTTL> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/challenge_ttl`, options) as Core.APIPromise<{
-        result: ZonesChallengeTTL;
+        result: ZoneSettingChallengeTTL;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -46,7 +52,7 @@ export class ChallengeTTL extends APIResource {
  * setting and will attempt to honor any setting above 45 minutes.
  * (https://support.cloudflare.com/hc/en-us/articles/200170136).
  */
-export interface ZonesChallengeTTL {
+export interface ZoneSettingChallengeTTL {
   /**
    * ID of the zone setting.
    */
@@ -117,7 +123,7 @@ export interface ChallengeTTLGetParams {
 }
 
 export namespace ChallengeTTL {
-  export import ZonesChallengeTTL = ChallengeTTLAPI.ZonesChallengeTTL;
+  export import ZoneSettingChallengeTTL = ChallengeTTLAPI.ZoneSettingChallengeTTL;
   export import ChallengeTTLEditParams = ChallengeTTLAPI.ChallengeTTLEditParams;
   export import ChallengeTTLGetParams = ChallengeTTLAPI.ChallengeTTLGetParams;
 }

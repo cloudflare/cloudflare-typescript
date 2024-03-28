@@ -12,13 +12,13 @@ export class PrefetchPreload extends APIResource {
   edit(
     params: PrefetchPreloadEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZonesPrefetchPreload> {
+  ): Core.APIPromise<ZoneSettingPrefetchPreload> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/prefetch_preload`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZonesPrefetchPreload }>
+      }) as Core.APIPromise<{ result: ZoneSettingPrefetchPreload }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -29,11 +29,11 @@ export class PrefetchPreload extends APIResource {
   get(
     params: PrefetchPreloadGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZonesPrefetchPreload> {
+  ): Core.APIPromise<ZoneSettingPrefetchPreload> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/prefetch_preload`, options) as Core.APIPromise<{
-        result: ZonesPrefetchPreload;
+        result: ZoneSettingPrefetchPreload;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -43,7 +43,7 @@ export class PrefetchPreload extends APIResource {
  * Cloudflare will prefetch any URLs that are included in the response headers.
  * This is limited to Enterprise Zones.
  */
-export interface ZonesPrefetchPreload {
+export interface ZoneSettingPrefetchPreload {
   /**
    * ID of the zone setting.
    */
@@ -86,7 +86,7 @@ export interface PrefetchPreloadGetParams {
 }
 
 export namespace PrefetchPreload {
-  export import ZonesPrefetchPreload = PrefetchPreloadAPI.ZonesPrefetchPreload;
+  export import ZoneSettingPrefetchPreload = PrefetchPreloadAPI.ZoneSettingPrefetchPreload;
   export import PrefetchPreloadEditParams = PrefetchPreloadAPI.PrefetchPreloadEditParams;
   export import PrefetchPreloadGetParams = PrefetchPreloadAPI.PrefetchPreloadGetParams;
 }

@@ -6,8 +6,19 @@ export {
   AuditLogListResponsesV4PagePaginationArray,
   AuditLogs,
 } from './audit-logs';
+export { Billing } from './billing/index';
+export { Firewall } from './firewall/index';
+export { LoadBalancers } from './load-balancers/index';
 export {
-  BillSubsAPISubscription,
+  Organization,
+  OrganizationDeleteResponse,
+  OrganizationGetResponse,
+  OrganizationListParams,
+  OrganizationsV4PagePaginationArray,
+  Organizations,
+} from './organizations';
+export {
+  Subscription,
   SubscriptionUpdateResponse,
   SubscriptionDeleteResponse,
   SubscriptionEditResponse,
@@ -16,25 +27,6 @@ export {
   SubscriptionEditParams,
   Subscriptions,
 } from './subscriptions';
-export { Billing } from './billing/index';
-export { Firewall } from './firewall/index';
-export {
-  IamOrganization,
-  OrganizationDeleteResponse,
-  OrganizationGetResponse,
-  OrganizationListParams,
-  IamOrganizationsV4PagePaginationArray,
-  Organizations,
-} from './organizations';
-export {
-  IamSchemasInvite,
-  InviteListResponse,
-  InviteEditResponse,
-  InviteGetResponse,
-  InviteEditParams,
-  Invites,
-} from './invites';
-export { LoadBalancers } from './load-balancers/index';
 export {
   TokenCreateResponse,
   TokenUpdateResponse,
@@ -49,3 +41,11 @@ export {
   Tokens,
 } from './tokens/index';
 export { User, UserEditResponse, UserGetResponse, UserEditParams, UserResource } from './user';
+export {
+  UserInvite,
+  InviteListResponse,
+  InviteEditResponse,
+  InviteGetResponse,
+  InviteEditParams,
+  Invites,
+} from './invites';

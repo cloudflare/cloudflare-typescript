@@ -24,11 +24,4 @@ export {
   MemberListResponsesV4PagePaginationArray,
   Members,
 } from './members';
-export {
-  IamSchemasRole,
-  RoleListResponse,
-  RoleGetResponse,
-  RoleListParams,
-  RoleGetParams,
-  Roles,
-} from './roles';
+export { Role, RoleListResponse, RoleGetResponse, RoleListParams, RoleGetParams, Roles } from './roles';

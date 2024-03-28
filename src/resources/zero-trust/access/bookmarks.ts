@@ -8,10 +8,14 @@ export class Bookmarks extends APIResource {
   /**
    * Create a new Bookmark application.
    */
-  create(identifier: string, uuid: string, options?: Core.RequestOptions): Core.APIPromise<AccessBookmarks> {
+  create(
+    identifier: string,
+    uuid: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ZeroTrustBookmarks> {
     return (
       this._client.post(`/accounts/${identifier}/access/bookmarks/${uuid}`, options) as Core.APIPromise<{
-        result: AccessBookmarks;
+        result: ZeroTrustBookmarks;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -19,10 +23,14 @@ export class Bookmarks extends APIResource {
   /**
    * Updates a configured Bookmark application.
    */
-  update(identifier: string, uuid: string, options?: Core.RequestOptions): Core.APIPromise<AccessBookmarks> {
+  update(
+    identifier: string,
+    uuid: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ZeroTrustBookmarks> {
     return (
       this._client.put(`/accounts/${identifier}/access/bookmarks/${uuid}`, options) as Core.APIPromise<{
-        result: AccessBookmarks;
+        result: ZeroTrustBookmarks;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -56,16 +64,16 @@ export class Bookmarks extends APIResource {
   /**
    * Fetches a single Bookmark application.
    */
-  get(identifier: string, uuid: string, options?: Core.RequestOptions): Core.APIPromise<AccessBookmarks> {
+  get(identifier: string, uuid: string, options?: Core.RequestOptions): Core.APIPromise<ZeroTrustBookmarks> {
     return (
       this._client.get(`/accounts/${identifier}/access/bookmarks/${uuid}`, options) as Core.APIPromise<{
-        result: AccessBookmarks;
+        result: ZeroTrustBookmarks;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface AccessBookmarks {
+export interface ZeroTrustBookmarks {
   /**
    * The unique identifier for the Bookmark application.
    */
@@ -96,7 +104,7 @@ export interface AccessBookmarks {
   updated_at?: string;
 }
 
-export type BookmarkListResponse = Array<AccessBookmarks>;
+export type BookmarkListResponse = Array<ZeroTrustBookmarks>;
 
 export interface BookmarkDeleteResponse {
   /**
@@ -106,7 +114,7 @@ export interface BookmarkDeleteResponse {
 }
 
 export namespace Bookmarks {
-  export import AccessBookmarks = BookmarksAPI.AccessBookmarks;
+  export import ZeroTrustBookmarks = BookmarksAPI.ZeroTrustBookmarks;
   export import BookmarkListResponse = BookmarksAPI.BookmarkListResponse;
   export import BookmarkDeleteResponse = BookmarksAPI.BookmarkDeleteResponse;
 }

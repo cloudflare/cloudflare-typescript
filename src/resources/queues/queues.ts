@@ -87,7 +87,7 @@ export class Queues extends APIResource {
   }
 }
 
-export interface WorkersQueue {
+export interface Queue {
   consumers?: unknown;
 
   consumers_total_count?: unknown;
@@ -105,7 +105,7 @@ export interface WorkersQueue {
   queue_name?: string;
 }
 
-export interface WorkersQueueCreated {
+export interface QueueCreated {
   created_on?: unknown;
 
   modified_on?: unknown;
@@ -115,7 +115,7 @@ export interface WorkersQueueCreated {
   queue_name?: string;
 }
 
-export interface WorkersQueueUpdated {
+export interface QueueUpdated {
   created_on?: unknown;
 
   modified_on?: unknown;
@@ -233,9 +233,9 @@ export interface QueueGetParams {
 }
 
 export namespace Queues {
-  export import WorkersQueue = QueuesAPI.WorkersQueue;
-  export import WorkersQueueCreated = QueuesAPI.WorkersQueueCreated;
-  export import WorkersQueueUpdated = QueuesAPI.WorkersQueueUpdated;
+  export import Queue = QueuesAPI.Queue;
+  export import QueueCreated = QueuesAPI.QueueCreated;
+  export import QueueUpdated = QueuesAPI.QueueUpdated;
   export import QueueCreateResponse = QueuesAPI.QueueCreateResponse;
   export import QueueUpdateResponse = QueuesAPI.QueueUpdateResponse;
   export import QueueListResponse = QueuesAPI.QueueListResponse;
@@ -256,9 +256,9 @@ export namespace Queues {
   export import ConsumerDeleteParams = ConsumersAPI.ConsumerDeleteParams;
   export import ConsumerGetParams = ConsumersAPI.ConsumerGetParams;
   export import Messages = MessagesAPI.Messages;
-  export import WorkersConsumer = MessagesAPI.WorkersConsumer;
-  export import WorkersConsumerCreated = MessagesAPI.WorkersConsumerCreated;
-  export import WorkersConsumerUpdated = MessagesAPI.WorkersConsumerUpdated;
+  export import QueueConsumer = MessagesAPI.QueueConsumer;
+  export import QueueConsumerCreated = MessagesAPI.QueueConsumerCreated;
+  export import QueueConsumerUpdated = MessagesAPI.QueueConsumerUpdated;
   export import MessageAckResponse = MessagesAPI.MessageAckResponse;
   export import MessagePullResponse = MessagesAPI.MessagePullResponse;
   export import MessageAckParams = MessagesAPI.MessageAckParams;

@@ -26,7 +26,7 @@ export class History extends APIResource {
   }
 }
 
-export interface BillSubsAPIBillingHistory {
+export interface BillingHistory {
   /**
    * Billing item identifier tag.
    */
@@ -62,16 +62,16 @@ export interface BillSubsAPIBillingHistory {
    */
   type: string;
 
-  zone: BillSubsAPIBillingHistory.Zone;
+  zone: BillingHistory.Zone;
 }
 
-export namespace BillSubsAPIBillingHistory {
+export namespace BillingHistory {
   export interface Zone {
     name?: unknown;
   }
 }
 
-export type HistoryGetResponse = Array<BillSubsAPIBillingHistory>;
+export type HistoryGetResponse = Array<BillingHistory>;
 
 export interface HistoryGetParams {
   /**
@@ -91,7 +91,7 @@ export interface HistoryGetParams {
 }
 
 export namespace History {
-  export import BillSubsAPIBillingHistory = HistoryAPI.BillSubsAPIBillingHistory;
+  export import BillingHistory = HistoryAPI.BillingHistory;
   export import HistoryGetResponse = HistoryAPI.HistoryGetResponse;
   export import HistoryGetParams = HistoryAPI.HistoryGetParams;
 }

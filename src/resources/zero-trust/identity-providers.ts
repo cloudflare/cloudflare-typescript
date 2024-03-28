@@ -13,7 +13,7 @@ export class IdentityProviders extends APIResource {
   create(
     params: IdentityProviderCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessIdentityProviders> {
+  ): Core.APIPromise<ZeroTrustIdentityProviders> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -35,7 +35,7 @@ export class IdentityProviders extends APIResource {
       this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/identity_providers`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: AccessIdentityProviders }>
+      }) as Core.APIPromise<{ result: ZeroTrustIdentityProviders }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -46,7 +46,7 @@ export class IdentityProviders extends APIResource {
     uuid: string,
     params: IdentityProviderUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessIdentityProviders> {
+  ): Core.APIPromise<ZeroTrustIdentityProviders> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -68,7 +68,7 @@ export class IdentityProviders extends APIResource {
       this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/identity_providers/${uuid}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: AccessIdentityProviders }>
+      }) as Core.APIPromise<{ result: ZeroTrustIdentityProviders }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -161,13 +161,13 @@ export class IdentityProviders extends APIResource {
     uuid: string,
     params?: IdentityProviderGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessIdentityProviders>;
-  get(uuid: string, options?: Core.RequestOptions): Core.APIPromise<AccessIdentityProviders>;
+  ): Core.APIPromise<ZeroTrustIdentityProviders>;
+  get(uuid: string, options?: Core.RequestOptions): Core.APIPromise<ZeroTrustIdentityProviders>;
   get(
     uuid: string,
     params: IdentityProviderGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessIdentityProviders> {
+  ): Core.APIPromise<ZeroTrustIdentityProviders> {
     if (isRequestOptions(params)) {
       return this.get(uuid, {}, params);
     }
@@ -192,28 +192,28 @@ export class IdentityProviders extends APIResource {
       this._client.get(
         `/${accountOrZone}/${accountOrZoneId}/access/identity_providers/${uuid}`,
         options,
-      ) as Core.APIPromise<{ result: AccessIdentityProviders }>
+      ) as Core.APIPromise<{ result: ZeroTrustIdentityProviders }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type AccessIdentityProviders =
-  | AccessIdentityProviders.AccessAzureAd
-  | AccessIdentityProviders.AccessCentrify
-  | AccessIdentityProviders.AccessFacebook
-  | AccessIdentityProviders.AccessGitHub
-  | AccessIdentityProviders.AccessGoogle
-  | AccessIdentityProviders.AccessGoogleApps
-  | AccessIdentityProviders.AccessLinkedin
-  | AccessIdentityProviders.AccessOidc
-  | AccessIdentityProviders.AccessOkta
-  | AccessIdentityProviders.AccessOnelogin
-  | AccessIdentityProviders.AccessPingone
-  | AccessIdentityProviders.AccessSaml
-  | AccessIdentityProviders.AccessYandex
-  | AccessIdentityProviders.AccessOnetimepin;
+export type ZeroTrustIdentityProviders =
+  | ZeroTrustIdentityProviders.AccessAzureAd
+  | ZeroTrustIdentityProviders.AccessCentrify
+  | ZeroTrustIdentityProviders.AccessFacebook
+  | ZeroTrustIdentityProviders.AccessGitHub
+  | ZeroTrustIdentityProviders.AccessGoogle
+  | ZeroTrustIdentityProviders.AccessGoogleApps
+  | ZeroTrustIdentityProviders.AccessLinkedin
+  | ZeroTrustIdentityProviders.AccessOidc
+  | ZeroTrustIdentityProviders.AccessOkta
+  | ZeroTrustIdentityProviders.AccessOnelogin
+  | ZeroTrustIdentityProviders.AccessPingone
+  | ZeroTrustIdentityProviders.AccessSaml
+  | ZeroTrustIdentityProviders.AccessYandex
+  | ZeroTrustIdentityProviders.AccessOnetimepin;
 
-export namespace AccessIdentityProviders {
+export namespace ZeroTrustIdentityProviders {
   export interface AccessAzureAd {
     /**
      * The configuration parameters for the identity provider. To view the required
@@ -6939,7 +6939,7 @@ export interface IdentityProviderGetParams {
 }
 
 export namespace IdentityProviders {
-  export import AccessIdentityProviders = IdentityProvidersAPI.AccessIdentityProviders;
+  export import ZeroTrustIdentityProviders = IdentityProvidersAPI.ZeroTrustIdentityProviders;
   export import IdentityProviderListResponse = IdentityProvidersAPI.IdentityProviderListResponse;
   export import IdentityProviderDeleteResponse = IdentityProvidersAPI.IdentityProviderDeleteResponse;
   export import IdentityProviderCreateParams = IdentityProvidersAPI.IdentityProviderCreateParams;

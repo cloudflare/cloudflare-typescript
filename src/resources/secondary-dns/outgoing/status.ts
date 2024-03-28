@@ -12,11 +12,11 @@ export class Status extends APIResource {
   get(
     params: StatusGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<OutgoingAPI.SecondaryDNSEnableTransferResult> {
+  ): Core.APIPromise<OutgoingAPI.SecondaryDNSEnableTransfer> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/secondary_dns/outgoing/status`, options) as Core.APIPromise<{
-        result: OutgoingAPI.SecondaryDNSEnableTransferResult;
+        result: OutgoingAPI.SecondaryDNSEnableTransfer;
       }>
     )._thenUnwrap((obj) => obj.result);
   }

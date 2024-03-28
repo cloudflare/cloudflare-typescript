@@ -8,14 +8,7 @@ export {
   Connections,
 } from './connections';
 export {
-  PageShieldGetZoneSettings,
-  PageShieldUpdateZoneSettings,
-  PageShieldUpdateParams,
-  PageShieldGetParams,
-  PageShield,
-} from './page-shield';
-export {
-  PageShieldPageshieldPolicy,
+  PageShieldPolicy,
   PolicyListResponse,
   PolicyCreateParams,
   PolicyUpdateParams,
@@ -32,3 +25,10 @@ export {
   ScriptGetParams,
   Scripts,
 } from './scripts';
+export {
+  PageShieldSetting,
+  PageShieldUpdateResponse,
+  PageShieldUpdateParams,
+  PageShieldGetParams,
+  PageShield,
+} from './page-shield';

@@ -17,7 +17,7 @@ export class RatePlans extends APIResource {
   }
 }
 
-export interface BillSubsRatePlan {
+export interface RatePlan {
   /**
    * Plan identifier tag.
    */
@@ -26,7 +26,7 @@ export interface BillSubsRatePlan {
   /**
    * Array of available components values for the plan.
    */
-  components?: Array<BillSubsRatePlan.Component>;
+  components?: Array<RatePlan.Component>;
 
   /**
    * The monetary unit in which pricing information is displayed.
@@ -49,7 +49,7 @@ export interface BillSubsRatePlan {
   name?: string;
 }
 
-export namespace BillSubsRatePlan {
+export namespace RatePlan {
   export interface Component {
     /**
      * The default amount allocated.
@@ -124,6 +124,6 @@ export namespace RatePlanGetResponse {
 }
 
 export namespace RatePlans {
-  export import BillSubsRatePlan = RatePlansAPI.BillSubsRatePlan;
+  export import RatePlan = RatePlansAPI.RatePlan;
   export import RatePlanGetResponse = RatePlansAPI.RatePlanGetResponse;
 }

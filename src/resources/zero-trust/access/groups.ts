@@ -10,7 +10,7 @@ export class Groups extends APIResource {
   /**
    * Creates a new Access group.
    */
-  create(params: GroupCreateParams, options?: Core.RequestOptions): Core.APIPromise<AccessGroups> {
+  create(params: GroupCreateParams, options?: Core.RequestOptions): Core.APIPromise<ZeroTrustGroups> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -32,7 +32,7 @@ export class Groups extends APIResource {
       this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/groups`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: AccessGroups }>
+      }) as Core.APIPromise<{ result: ZeroTrustGroups }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -43,7 +43,7 @@ export class Groups extends APIResource {
     uuid: string,
     params: GroupUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessGroups> {
+  ): Core.APIPromise<ZeroTrustGroups> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -65,7 +65,7 @@ export class Groups extends APIResource {
       this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/groups/${uuid}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: AccessGroups }>
+      }) as Core.APIPromise<{ result: ZeroTrustGroups }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -150,13 +150,13 @@ export class Groups extends APIResource {
   /**
    * Fetches a single Access group.
    */
-  get(uuid: string, params?: GroupGetParams, options?: Core.RequestOptions): Core.APIPromise<AccessGroups>;
-  get(uuid: string, options?: Core.RequestOptions): Core.APIPromise<AccessGroups>;
+  get(uuid: string, params?: GroupGetParams, options?: Core.RequestOptions): Core.APIPromise<ZeroTrustGroups>;
+  get(uuid: string, options?: Core.RequestOptions): Core.APIPromise<ZeroTrustGroups>;
   get(
     uuid: string,
     params: GroupGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessGroups> {
+  ): Core.APIPromise<ZeroTrustGroups> {
     if (isRequestOptions(params)) {
       return this.get(uuid, {}, params);
     }
@@ -181,12 +181,12 @@ export class Groups extends APIResource {
       this._client.get(
         `/${accountOrZone}/${accountOrZoneId}/access/groups/${uuid}`,
         options,
-      ) as Core.APIPromise<{ result: AccessGroups }>
+      ) as Core.APIPromise<{ result: ZeroTrustGroups }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface AccessGroups {
+export interface ZeroTrustGroups {
   /**
    * UUID
    */
@@ -199,25 +199,25 @@ export interface AccessGroups {
    * meet any of the Exclude rules.
    */
   exclude?: Array<
-    | AccessGroups.AccessEmailRule
-    | AccessGroups.AccessEmailListRule
-    | AccessGroups.AccessDomainRule
-    | AccessGroups.AccessEveryoneRule
-    | AccessGroups.AccessIPRule
-    | AccessGroups.AccessIPListRule
-    | AccessGroups.AccessCertificateRule
-    | AccessGroups.AccessAccessGroupRule
-    | AccessGroups.AccessAzureGroupRule
-    | AccessGroups.AccessGitHubOrganizationRule
-    | AccessGroups.AccessGsuiteGroupRule
-    | AccessGroups.AccessOktaGroupRule
-    | AccessGroups.AccessSamlGroupRule
-    | AccessGroups.AccessServiceTokenRule
-    | AccessGroups.AccessAnyValidServiceTokenRule
-    | AccessGroups.AccessExternalEvaluationRule
-    | AccessGroups.AccessCountryRule
-    | AccessGroups.AccessAuthenticationMethodRule
-    | AccessGroups.AccessDevicePostureRule
+    | ZeroTrustGroups.AccessEmailRule
+    | ZeroTrustGroups.AccessEmailListRule
+    | ZeroTrustGroups.AccessDomainRule
+    | ZeroTrustGroups.AccessEveryoneRule
+    | ZeroTrustGroups.AccessIPRule
+    | ZeroTrustGroups.AccessIPListRule
+    | ZeroTrustGroups.AccessCertificateRule
+    | ZeroTrustGroups.AccessAccessGroupRule
+    | ZeroTrustGroups.AccessAzureGroupRule
+    | ZeroTrustGroups.AccessGitHubOrganizationRule
+    | ZeroTrustGroups.AccessGsuiteGroupRule
+    | ZeroTrustGroups.AccessOktaGroupRule
+    | ZeroTrustGroups.AccessSamlGroupRule
+    | ZeroTrustGroups.AccessServiceTokenRule
+    | ZeroTrustGroups.AccessAnyValidServiceTokenRule
+    | ZeroTrustGroups.AccessExternalEvaluationRule
+    | ZeroTrustGroups.AccessCountryRule
+    | ZeroTrustGroups.AccessAuthenticationMethodRule
+    | ZeroTrustGroups.AccessDevicePostureRule
   >;
 
   /**
@@ -225,25 +225,25 @@ export interface AccessGroups {
    * the Include rules.
    */
   include?: Array<
-    | AccessGroups.AccessEmailRule
-    | AccessGroups.AccessEmailListRule
-    | AccessGroups.AccessDomainRule
-    | AccessGroups.AccessEveryoneRule
-    | AccessGroups.AccessIPRule
-    | AccessGroups.AccessIPListRule
-    | AccessGroups.AccessCertificateRule
-    | AccessGroups.AccessAccessGroupRule
-    | AccessGroups.AccessAzureGroupRule
-    | AccessGroups.AccessGitHubOrganizationRule
-    | AccessGroups.AccessGsuiteGroupRule
-    | AccessGroups.AccessOktaGroupRule
-    | AccessGroups.AccessSamlGroupRule
-    | AccessGroups.AccessServiceTokenRule
-    | AccessGroups.AccessAnyValidServiceTokenRule
-    | AccessGroups.AccessExternalEvaluationRule
-    | AccessGroups.AccessCountryRule
-    | AccessGroups.AccessAuthenticationMethodRule
-    | AccessGroups.AccessDevicePostureRule
+    | ZeroTrustGroups.AccessEmailRule
+    | ZeroTrustGroups.AccessEmailListRule
+    | ZeroTrustGroups.AccessDomainRule
+    | ZeroTrustGroups.AccessEveryoneRule
+    | ZeroTrustGroups.AccessIPRule
+    | ZeroTrustGroups.AccessIPListRule
+    | ZeroTrustGroups.AccessCertificateRule
+    | ZeroTrustGroups.AccessAccessGroupRule
+    | ZeroTrustGroups.AccessAzureGroupRule
+    | ZeroTrustGroups.AccessGitHubOrganizationRule
+    | ZeroTrustGroups.AccessGsuiteGroupRule
+    | ZeroTrustGroups.AccessOktaGroupRule
+    | ZeroTrustGroups.AccessSamlGroupRule
+    | ZeroTrustGroups.AccessServiceTokenRule
+    | ZeroTrustGroups.AccessAnyValidServiceTokenRule
+    | ZeroTrustGroups.AccessExternalEvaluationRule
+    | ZeroTrustGroups.AccessCountryRule
+    | ZeroTrustGroups.AccessAuthenticationMethodRule
+    | ZeroTrustGroups.AccessDevicePostureRule
   >;
 
   /**
@@ -251,25 +251,25 @@ export interface AccessGroups {
    * meet all of the Require rules.
    */
   is_default?: Array<
-    | AccessGroups.AccessEmailRule
-    | AccessGroups.AccessEmailListRule
-    | AccessGroups.AccessDomainRule
-    | AccessGroups.AccessEveryoneRule
-    | AccessGroups.AccessIPRule
-    | AccessGroups.AccessIPListRule
-    | AccessGroups.AccessCertificateRule
-    | AccessGroups.AccessAccessGroupRule
-    | AccessGroups.AccessAzureGroupRule
-    | AccessGroups.AccessGitHubOrganizationRule
-    | AccessGroups.AccessGsuiteGroupRule
-    | AccessGroups.AccessOktaGroupRule
-    | AccessGroups.AccessSamlGroupRule
-    | AccessGroups.AccessServiceTokenRule
-    | AccessGroups.AccessAnyValidServiceTokenRule
-    | AccessGroups.AccessExternalEvaluationRule
-    | AccessGroups.AccessCountryRule
-    | AccessGroups.AccessAuthenticationMethodRule
-    | AccessGroups.AccessDevicePostureRule
+    | ZeroTrustGroups.AccessEmailRule
+    | ZeroTrustGroups.AccessEmailListRule
+    | ZeroTrustGroups.AccessDomainRule
+    | ZeroTrustGroups.AccessEveryoneRule
+    | ZeroTrustGroups.AccessIPRule
+    | ZeroTrustGroups.AccessIPListRule
+    | ZeroTrustGroups.AccessCertificateRule
+    | ZeroTrustGroups.AccessAccessGroupRule
+    | ZeroTrustGroups.AccessAzureGroupRule
+    | ZeroTrustGroups.AccessGitHubOrganizationRule
+    | ZeroTrustGroups.AccessGsuiteGroupRule
+    | ZeroTrustGroups.AccessOktaGroupRule
+    | ZeroTrustGroups.AccessSamlGroupRule
+    | ZeroTrustGroups.AccessServiceTokenRule
+    | ZeroTrustGroups.AccessAnyValidServiceTokenRule
+    | ZeroTrustGroups.AccessExternalEvaluationRule
+    | ZeroTrustGroups.AccessCountryRule
+    | ZeroTrustGroups.AccessAuthenticationMethodRule
+    | ZeroTrustGroups.AccessDevicePostureRule
   >;
 
   /**
@@ -282,31 +282,31 @@ export interface AccessGroups {
    * meet all of the Require rules.
    */
   require?: Array<
-    | AccessGroups.AccessEmailRule
-    | AccessGroups.AccessEmailListRule
-    | AccessGroups.AccessDomainRule
-    | AccessGroups.AccessEveryoneRule
-    | AccessGroups.AccessIPRule
-    | AccessGroups.AccessIPListRule
-    | AccessGroups.AccessCertificateRule
-    | AccessGroups.AccessAccessGroupRule
-    | AccessGroups.AccessAzureGroupRule
-    | AccessGroups.AccessGitHubOrganizationRule
-    | AccessGroups.AccessGsuiteGroupRule
-    | AccessGroups.AccessOktaGroupRule
-    | AccessGroups.AccessSamlGroupRule
-    | AccessGroups.AccessServiceTokenRule
-    | AccessGroups.AccessAnyValidServiceTokenRule
-    | AccessGroups.AccessExternalEvaluationRule
-    | AccessGroups.AccessCountryRule
-    | AccessGroups.AccessAuthenticationMethodRule
-    | AccessGroups.AccessDevicePostureRule
+    | ZeroTrustGroups.AccessEmailRule
+    | ZeroTrustGroups.AccessEmailListRule
+    | ZeroTrustGroups.AccessDomainRule
+    | ZeroTrustGroups.AccessEveryoneRule
+    | ZeroTrustGroups.AccessIPRule
+    | ZeroTrustGroups.AccessIPListRule
+    | ZeroTrustGroups.AccessCertificateRule
+    | ZeroTrustGroups.AccessAccessGroupRule
+    | ZeroTrustGroups.AccessAzureGroupRule
+    | ZeroTrustGroups.AccessGitHubOrganizationRule
+    | ZeroTrustGroups.AccessGsuiteGroupRule
+    | ZeroTrustGroups.AccessOktaGroupRule
+    | ZeroTrustGroups.AccessSamlGroupRule
+    | ZeroTrustGroups.AccessServiceTokenRule
+    | ZeroTrustGroups.AccessAnyValidServiceTokenRule
+    | ZeroTrustGroups.AccessExternalEvaluationRule
+    | ZeroTrustGroups.AccessCountryRule
+    | ZeroTrustGroups.AccessAuthenticationMethodRule
+    | ZeroTrustGroups.AccessDevicePostureRule
   >;
 
   updated_at?: string;
 }
 
-export namespace AccessGroups {
+export namespace ZeroTrustGroups {
   /**
    * Matches a specific email.
    */
@@ -1568,7 +1568,7 @@ export namespace AccessGroups {
   }
 }
 
-export type GroupListResponse = Array<AccessGroups>;
+export type GroupListResponse = Array<ZeroTrustGroups>;
 
 export interface GroupDeleteResponse {
   /**
@@ -3712,7 +3712,7 @@ export interface GroupGetParams {
 }
 
 export namespace Groups {
-  export import AccessGroups = GroupsAPI.AccessGroups;
+  export import ZeroTrustGroups = GroupsAPI.ZeroTrustGroups;
   export import GroupListResponse = GroupsAPI.GroupListResponse;
   export import GroupDeleteResponse = GroupsAPI.GroupDeleteResponse;
   export import GroupCreateParams = GroupsAPI.GroupCreateParams;
