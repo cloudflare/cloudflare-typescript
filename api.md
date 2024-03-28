@@ -371,15 +371,15 @@ Methods:
 - <code title="patch /zones/{zone_id}/settings/0rtt">client.zones.settings.zeroRTT.<a href="./src/resources/zones/settings/zero-rtt.ts">edit</a>({ ...params }) -> ZoneSetting0rtt</code>
 - <code title="get /zones/{zone_id}/settings/0rtt">client.zones.settings.zeroRTT.<a href="./src/resources/zones/settings/zero-rtt.ts">get</a>({ ...params }) -> ZoneSetting0rtt</code>
 
-### AdvancedDDOS
+### AdvancedDDoS
 
 Types:
 
-- <code><a href="./src/resources/zones/settings/advanced-ddos.ts">ZoneSettingAdvancedDDOS</a></code>
+- <code><a href="./src/resources/zones/settings/advanced-ddos.ts">ZoneSettingAdvancedDDoS</a></code>
 
 Methods:
 
-- <code title="get /zones/{zone_id}/settings/advanced_ddos">client.zones.settings.advancedDDOS.<a href="./src/resources/zones/settings/advanced-ddos.ts">get</a>({ ...params }) -> ZoneSettingAdvancedDDOS</code>
+- <code title="get /zones/{zone_id}/settings/advanced_ddos">client.zones.settings.advancedDDoS.<a href="./src/resources/zones/settings/advanced-ddos.ts">get</a>({ ...params }) -> ZoneSettingAdvancedDDoS</code>
 
 ### AlwaysOnline
 

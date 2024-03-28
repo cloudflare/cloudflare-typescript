@@ -9,10 +9,10 @@ const cloudflare = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource advancedDDOS', () => {
+describe('resource advancedDDoS', () => {
   // skipped: tests are disabled for the time being
   test.skip('get: only required params', async () => {
-    const responsePromise = cloudflare.zones.settings.advancedDDOS.get({
+    const responsePromise = cloudflare.zones.settings.advancedDDoS.get({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -26,7 +26,7 @@ describe('resource advancedDDOS', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('get: required and optional params', async () => {
-    const response = await cloudflare.zones.settings.advancedDDOS.get({
+    const response = await cloudflare.zones.settings.advancedDDoS.get({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
