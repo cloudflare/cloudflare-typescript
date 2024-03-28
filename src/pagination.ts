@@ -264,9 +264,11 @@ export class CursorLimitPagination<Item>
   }
 }
 
-export type SinglePageResponse<Item> = Item[];
+export interface SinglePageResponse<Item> {
+  items: Array<Item>;
+}
 
-export class SinglePage<Item> extends AbstractPage<Item> {
+export class SinglePage<Item> extends AbstractPage<Item> implements SinglePageResponse<Item> {
   items: Array<Item>;
 
   constructor(
@@ -277,7 +279,7 @@ export class SinglePage<Item> extends AbstractPage<Item> {
   ) {
     super(client, response, body, options);
 
-    this.items = body || [];
+    this.items = body.items || [];
   }
 
   getPaginatedItems(): Item[] {
