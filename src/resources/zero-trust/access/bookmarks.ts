@@ -83,7 +83,7 @@ export interface ZeroTrustBookmarks {
   /**
    * The unique identifier for the Bookmark application.
    */
-  id?: unknown;
+  id?: string;
 
   /**
    * Displays the application in the App Launcher.

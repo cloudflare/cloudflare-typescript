@@ -226,7 +226,7 @@ export interface ServiceTokenCreateResponse {
   /**
    * The ID of the service token.
    */
-  id?: unknown;
+  id?: string;
 
   /**
    * The Client ID for the service token. Access will check for this value in the
@@ -261,7 +261,7 @@ export interface ServiceTokenRotateResponse {
   /**
    * The ID of the service token.
    */
-  id?: unknown;
+  id?: string;
 
   /**
    * The Client ID for the service token. Access will check for this value in the
