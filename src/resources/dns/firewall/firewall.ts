@@ -140,11 +140,6 @@ export interface DNSFirewall {
   negative_cache_ttl?: number | null;
 
   /**
-   * @deprecated: Deprecated alias for "upstream_ips".
-   */
-  origin_ips?: unknown;
-
-  /**
    * Ratelimit in queries per second per datacenter (applies to DNS queries sent to
    * the upstream nameservers configured on the cluster).
    */
@@ -167,11 +162,6 @@ export namespace DNSFirewall {
      * DNS servers protected.
      */
     enabled?: boolean;
-
-    /**
-     * @deprecated: Deprecated alias for "only_when_upstream_unhealthy".
-     */
-    only_when_origin_unhealthy?: unknown;
 
     /**
      * Only mitigate attacks when upstream servers seem unhealthy.
@@ -235,11 +225,6 @@ export interface FirewallCreateParams {
   negative_cache_ttl?: number | null;
 
   /**
-   * Body param: Deprecated alias for "upstream_ips".
-   */
-  origin_ips?: unknown;
-
-  /**
    * Body param: Ratelimit in queries per second per datacenter (applies to DNS
    * queries sent to the upstream nameservers configured on the cluster).
    */
@@ -262,11 +247,6 @@ export namespace FirewallCreateParams {
      * DNS servers protected.
      */
     enabled?: boolean;
-
-    /**
-     * @deprecated: Deprecated alias for "only_when_upstream_unhealthy".
-     */
-    only_when_origin_unhealthy?: unknown;
 
     /**
      * Only mitigate attacks when upstream servers seem unhealthy.
@@ -342,11 +322,6 @@ export interface FirewallEditParams {
   negative_cache_ttl?: number | null;
 
   /**
-   * Body param: Deprecated alias for "upstream_ips".
-   */
-  origin_ips?: unknown;
-
-  /**
    * Body param: Ratelimit in queries per second per datacenter (applies to DNS
    * queries sent to the upstream nameservers configured on the cluster).
    */
@@ -369,11 +344,6 @@ export namespace FirewallEditParams {
      * DNS servers protected.
      */
     enabled?: boolean;
-
-    /**
-     * @deprecated: Deprecated alias for "only_when_upstream_unhealthy".
-     */
-    only_when_origin_unhealthy?: unknown;
 
     /**
      * Only mitigate attacks when upstream servers seem unhealthy.
