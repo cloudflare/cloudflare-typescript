@@ -362,7 +362,7 @@ export namespace ZeroTrustPolicies {
     /**
      * A list of emails that can approve the access request.
      */
-    email_addresses?: Array<unknown>;
+    email_addresses?: Array<string>;
 
     /**
      * The UUID of an re-usable email list.
@@ -1796,7 +1796,7 @@ export namespace PolicyCreateParams {
     /**
      * A list of emails that can approve the access request.
      */
-    email_addresses?: Array<unknown>;
+    email_addresses?: Array<string>;
 
     /**
      * The UUID of an re-usable email list.
@@ -2908,7 +2908,7 @@ export namespace PolicyUpdateParams {
     /**
      * A list of emails that can approve the access request.
      */
-    email_addresses?: Array<unknown>;
+    email_addresses?: Array<string>;
 
     /**
      * The UUID of an re-usable email list.
