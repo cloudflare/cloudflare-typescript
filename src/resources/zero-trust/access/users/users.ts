@@ -69,12 +69,12 @@ export interface ZeroTrustUsers {
   /**
    * The unique API identifier for the Zero Trust seat.
    */
-  seat_uid?: unknown;
+  seat_uid?: string;
 
   /**
    * The unique API identifier for the user.
    */
-  uid?: unknown;
+  uid?: string;
 
   updated_at?: string;
 }

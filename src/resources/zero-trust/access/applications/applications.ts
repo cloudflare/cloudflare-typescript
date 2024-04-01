@@ -426,7 +426,7 @@ export namespace ZeroTrustApps {
       /**
        * Allowed HTTP request headers.
        */
-      allowed_headers?: Array<unknown>;
+      allowed_headers?: Array<string>;
 
       /**
        * Allowed HTTP request methods.
@@ -438,7 +438,7 @@ export namespace ZeroTrustApps {
       /**
        * Allowed origins.
        */
-      allowed_origins?: Array<unknown>;
+      allowed_origins?: Array<string>;
 
       /**
        * The maximum number of seconds the results of a preflight request can be cached.
@@ -824,7 +824,7 @@ export namespace ZeroTrustApps {
       /**
        * Allowed HTTP request headers.
        */
-      allowed_headers?: Array<unknown>;
+      allowed_headers?: Array<string>;
 
       /**
        * Allowed HTTP request methods.
@@ -836,7 +836,7 @@ export namespace ZeroTrustApps {
       /**
        * Allowed origins.
        */
-      allowed_origins?: Array<unknown>;
+      allowed_origins?: Array<string>;
 
       /**
        * The maximum number of seconds the results of a preflight request can be cached.
@@ -1010,7 +1010,7 @@ export namespace ZeroTrustApps {
       /**
        * Allowed HTTP request headers.
        */
-      allowed_headers?: Array<unknown>;
+      allowed_headers?: Array<string>;
 
       /**
        * Allowed HTTP request methods.
@@ -1022,7 +1022,7 @@ export namespace ZeroTrustApps {
       /**
        * Allowed origins.
        */
-      allowed_origins?: Array<unknown>;
+      allowed_origins?: Array<string>;
 
       /**
        * The maximum number of seconds the results of a preflight request can be cached.
@@ -1190,7 +1190,10 @@ export namespace ZeroTrustApps {
      */
     id?: string;
 
-    app_launcher_visible?: unknown;
+    /**
+     * Displays the application in the App Launcher.
+     */
+    app_launcher_visible?: boolean;
 
     /**
      * Audience tag.
@@ -1418,7 +1421,7 @@ export namespace ApplicationCreateParams {
       /**
        * Allowed HTTP request headers.
        */
-      allowed_headers?: Array<unknown>;
+      allowed_headers?: Array<string>;
 
       /**
        * Allowed HTTP request methods.
@@ -1430,7 +1433,7 @@ export namespace ApplicationCreateParams {
       /**
        * Allowed origins.
        */
-      allowed_origins?: Array<unknown>;
+      allowed_origins?: Array<string>;
 
       /**
        * The maximum number of seconds the results of a preflight request can be cached.
@@ -1816,7 +1819,7 @@ export namespace ApplicationCreateParams {
       /**
        * Allowed HTTP request headers.
        */
-      allowed_headers?: Array<unknown>;
+      allowed_headers?: Array<string>;
 
       /**
        * Allowed HTTP request methods.
@@ -1828,7 +1831,7 @@ export namespace ApplicationCreateParams {
       /**
        * Allowed origins.
        */
-      allowed_origins?: Array<unknown>;
+      allowed_origins?: Array<string>;
 
       /**
        * The maximum number of seconds the results of a preflight request can be cached.
@@ -2006,7 +2009,7 @@ export namespace ApplicationCreateParams {
       /**
        * Allowed HTTP request headers.
        */
-      allowed_headers?: Array<unknown>;
+      allowed_headers?: Array<string>;
 
       /**
        * Allowed HTTP request methods.
@@ -2018,7 +2021,7 @@ export namespace ApplicationCreateParams {
       /**
        * Allowed origins.
        */
-      allowed_origins?: Array<unknown>;
+      allowed_origins?: Array<string>;
 
       /**
        * The maximum number of seconds the results of a preflight request can be cached.
@@ -2155,9 +2158,9 @@ export namespace ApplicationCreateParams {
     zone_id?: string;
 
     /**
-     * Body param:
+     * Body param: Displays the application in the App Launcher.
      */
-    app_launcher_visible?: unknown;
+    app_launcher_visible?: boolean;
 
     /**
      * Body param: The URL or domain of the bookmark.
@@ -2367,7 +2370,7 @@ export namespace ApplicationUpdateParams {
       /**
        * Allowed HTTP request headers.
        */
-      allowed_headers?: Array<unknown>;
+      allowed_headers?: Array<string>;
 
       /**
        * Allowed HTTP request methods.
@@ -2379,7 +2382,7 @@ export namespace ApplicationUpdateParams {
       /**
        * Allowed origins.
        */
-      allowed_origins?: Array<unknown>;
+      allowed_origins?: Array<string>;
 
       /**
        * The maximum number of seconds the results of a preflight request can be cached.
@@ -2765,7 +2768,7 @@ export namespace ApplicationUpdateParams {
       /**
        * Allowed HTTP request headers.
        */
-      allowed_headers?: Array<unknown>;
+      allowed_headers?: Array<string>;
 
       /**
        * Allowed HTTP request methods.
@@ -2777,7 +2780,7 @@ export namespace ApplicationUpdateParams {
       /**
        * Allowed origins.
        */
-      allowed_origins?: Array<unknown>;
+      allowed_origins?: Array<string>;
 
       /**
        * The maximum number of seconds the results of a preflight request can be cached.
@@ -2955,7 +2958,7 @@ export namespace ApplicationUpdateParams {
       /**
        * Allowed HTTP request headers.
        */
-      allowed_headers?: Array<unknown>;
+      allowed_headers?: Array<string>;
 
       /**
        * Allowed HTTP request methods.
@@ -2967,7 +2970,7 @@ export namespace ApplicationUpdateParams {
       /**
        * Allowed origins.
        */
-      allowed_origins?: Array<unknown>;
+      allowed_origins?: Array<string>;
 
       /**
        * The maximum number of seconds the results of a preflight request can be cached.
@@ -3104,9 +3107,9 @@ export namespace ApplicationUpdateParams {
     zone_id?: string;
 
     /**
-     * Body param:
+     * Body param: Displays the application in the App Launcher.
      */
-    app_launcher_visible?: unknown;
+    app_launcher_visible?: boolean;
 
     /**
      * Body param: The URL or domain of the bookmark.
