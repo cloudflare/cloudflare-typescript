@@ -208,7 +208,7 @@ export interface ZeroTrustCertificates {
   /**
    * The ID of the application that will use this certificate.
    */
-  id?: unknown;
+  id?: string;
 
   /**
    * The hostnames of the applications that will use this certificate.
