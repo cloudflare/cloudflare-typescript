@@ -25,6 +25,7 @@ Types:
 
 - <code><a href="./src/resources/accounts/members.ts">AccountMember</a></code>
 - <code><a href="./src/resources/accounts/members.ts">AccountMemberWithID</a></code>
+- <code><a href="./src/resources/accounts/members.ts">RolePermissionGrants</a></code>
 - <code><a href="./src/resources/accounts/members.ts">MemberListResponse</a></code>
 - <code><a href="./src/resources/accounts/members.ts">MemberDeleteResponse</a></code>
 

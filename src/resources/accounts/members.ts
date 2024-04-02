@@ -124,103 +124,29 @@ export namespace AccountMember {
 
   export namespace Role {
     export interface Permissions {
-      analytics?: Permissions.Analytics;
+      analytics?: MembersAPI.RolePermissionGrants;
 
-      billing?: Permissions.Billing;
+      billing?: MembersAPI.RolePermissionGrants;
 
-      cache_purge?: Permissions.CachePurge;
+      cache_purge?: MembersAPI.RolePermissionGrants;
 
-      dns?: Permissions.DNS;
+      dns?: MembersAPI.RolePermissionGrants;
 
-      dns_records?: Permissions.DNSRecords;
+      dns_records?: MembersAPI.RolePermissionGrants;
 
-      lb?: Permissions.Lb;
+      lb?: MembersAPI.RolePermissionGrants;
 
-      logs?: Permissions.Logs;
+      logs?: MembersAPI.RolePermissionGrants;
 
-      organization?: Permissions.Organization;
+      organization?: MembersAPI.RolePermissionGrants;
 
-      ssl?: Permissions.SSL;
+      ssl?: MembersAPI.RolePermissionGrants;
 
-      waf?: Permissions.WAF;
+      waf?: MembersAPI.RolePermissionGrants;
 
-      zone_settings?: Permissions.ZoneSettings;
+      zone_settings?: MembersAPI.RolePermissionGrants;
 
-      zones?: Permissions.Zones;
-    }
-
-    export namespace Permissions {
-      export interface Analytics {
-        read?: boolean;
-
-        write?: boolean;
-      }
-
-      export interface Billing {
-        read?: boolean;
-
-        write?: boolean;
-      }
-
-      export interface CachePurge {
-        read?: boolean;
-
-        write?: boolean;
-      }
-
-      export interface DNS {
-        read?: boolean;
-
-        write?: boolean;
-      }
-
-      export interface DNSRecords {
-        read?: boolean;
-
-        write?: boolean;
-      }
-
-      export interface Lb {
-        read?: boolean;
-
-        write?: boolean;
-      }
-
-      export interface Logs {
-        read?: boolean;
-
-        write?: boolean;
-      }
-
-      export interface Organization {
-        read?: boolean;
-
-        write?: boolean;
-      }
-
-      export interface SSL {
-        read?: boolean;
-
-        write?: boolean;
-      }
-
-      export interface WAF {
-        read?: boolean;
-
-        write?: boolean;
-      }
-
-      export interface ZoneSettings {
-        read?: boolean;
-
-        write?: boolean;
-      }
-
-      export interface Zones {
-        read?: boolean;
-
-        write?: boolean;
-      }
+      zones?: MembersAPI.RolePermissionGrants;
     }
   }
 
@@ -296,103 +222,29 @@ export namespace AccountMemberWithID {
 
   export namespace Role {
     export interface Permissions {
-      analytics?: Permissions.Analytics;
+      analytics?: MembersAPI.RolePermissionGrants;
 
-      billing?: Permissions.Billing;
+      billing?: MembersAPI.RolePermissionGrants;
 
-      cache_purge?: Permissions.CachePurge;
+      cache_purge?: MembersAPI.RolePermissionGrants;
 
-      dns?: Permissions.DNS;
+      dns?: MembersAPI.RolePermissionGrants;
 
-      dns_records?: Permissions.DNSRecords;
+      dns_records?: MembersAPI.RolePermissionGrants;
 
-      lb?: Permissions.Lb;
+      lb?: MembersAPI.RolePermissionGrants;
 
-      logs?: Permissions.Logs;
+      logs?: MembersAPI.RolePermissionGrants;
 
-      organization?: Permissions.Organization;
+      organization?: MembersAPI.RolePermissionGrants;
 
-      ssl?: Permissions.SSL;
+      ssl?: MembersAPI.RolePermissionGrants;
 
-      waf?: Permissions.WAF;
+      waf?: MembersAPI.RolePermissionGrants;
 
-      zone_settings?: Permissions.ZoneSettings;
+      zone_settings?: MembersAPI.RolePermissionGrants;
 
-      zones?: Permissions.Zones;
-    }
-
-    export namespace Permissions {
-      export interface Analytics {
-        read?: boolean;
-
-        write?: boolean;
-      }
-
-      export interface Billing {
-        read?: boolean;
-
-        write?: boolean;
-      }
-
-      export interface CachePurge {
-        read?: boolean;
-
-        write?: boolean;
-      }
-
-      export interface DNS {
-        read?: boolean;
-
-        write?: boolean;
-      }
-
-      export interface DNSRecords {
-        read?: boolean;
-
-        write?: boolean;
-      }
-
-      export interface Lb {
-        read?: boolean;
-
-        write?: boolean;
-      }
-
-      export interface Logs {
-        read?: boolean;
-
-        write?: boolean;
-      }
-
-      export interface Organization {
-        read?: boolean;
-
-        write?: boolean;
-      }
-
-      export interface SSL {
-        read?: boolean;
-
-        write?: boolean;
-      }
-
-      export interface WAF {
-        read?: boolean;
-
-        write?: boolean;
-      }
-
-      export interface ZoneSettings {
-        read?: boolean;
-
-        write?: boolean;
-      }
-
-      export interface Zones {
-        read?: boolean;
-
-        write?: boolean;
-      }
+      zones?: MembersAPI.RolePermissionGrants;
     }
   }
 
@@ -423,6 +275,12 @@ export namespace AccountMemberWithID {
      */
     two_factor_authentication_enabled?: boolean;
   }
+}
+
+export interface RolePermissionGrants {
+  read?: boolean;
+
+  write?: boolean;
 }
 
 export interface MemberListResponse {
@@ -535,6 +393,7 @@ export interface MemberGetParams {
 export namespace Members {
   export import AccountMember = MembersAPI.AccountMember;
   export import AccountMemberWithID = MembersAPI.AccountMemberWithID;
+  export import RolePermissionGrants = MembersAPI.RolePermissionGrants;
   export import MemberListResponse = MembersAPI.MemberListResponse;
   export import MemberDeleteResponse = MembersAPI.MemberDeleteResponse;
   export import MemberListResponsesV4PagePaginationArray = MembersAPI.MemberListResponsesV4PagePaginationArray;
