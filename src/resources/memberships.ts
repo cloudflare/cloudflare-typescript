@@ -5,6 +5,7 @@ import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as MembershipsAPI from 'cloudflare/resources/memberships';
 import * as AccountsAPI from 'cloudflare/resources/accounts/accounts';
+import * as MembersAPI from 'cloudflare/resources/accounts/members';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class Memberships extends APIResource {
@@ -106,103 +107,29 @@ export namespace Membership {
    * All access permissions for the user at the account.
    */
   export interface Permissions {
-    analytics?: Permissions.Analytics;
+    analytics?: MembersAPI.RolePermissionGrants;
 
-    billing?: Permissions.Billing;
+    billing?: MembersAPI.RolePermissionGrants;
 
-    cache_purge?: Permissions.CachePurge;
+    cache_purge?: MembersAPI.RolePermissionGrants;
 
-    dns?: Permissions.DNS;
+    dns?: MembersAPI.RolePermissionGrants;
 
-    dns_records?: Permissions.DNSRecords;
+    dns_records?: MembersAPI.RolePermissionGrants;
 
-    lb?: Permissions.Lb;
+    lb?: MembersAPI.RolePermissionGrants;
 
-    logs?: Permissions.Logs;
+    logs?: MembersAPI.RolePermissionGrants;
 
-    organization?: Permissions.Organization;
+    organization?: MembersAPI.RolePermissionGrants;
 
-    ssl?: Permissions.SSL;
+    ssl?: MembersAPI.RolePermissionGrants;
 
-    waf?: Permissions.WAF;
+    waf?: MembersAPI.RolePermissionGrants;
 
-    zone_settings?: Permissions.ZoneSettings;
+    zone_settings?: MembersAPI.RolePermissionGrants;
 
-    zones?: Permissions.Zones;
-  }
-
-  export namespace Permissions {
-    export interface Analytics {
-      read?: boolean;
-
-      write?: boolean;
-    }
-
-    export interface Billing {
-      read?: boolean;
-
-      write?: boolean;
-    }
-
-    export interface CachePurge {
-      read?: boolean;
-
-      write?: boolean;
-    }
-
-    export interface DNS {
-      read?: boolean;
-
-      write?: boolean;
-    }
-
-    export interface DNSRecords {
-      read?: boolean;
-
-      write?: boolean;
-    }
-
-    export interface Lb {
-      read?: boolean;
-
-      write?: boolean;
-    }
-
-    export interface Logs {
-      read?: boolean;
-
-      write?: boolean;
-    }
-
-    export interface Organization {
-      read?: boolean;
-
-      write?: boolean;
-    }
-
-    export interface SSL {
-      read?: boolean;
-
-      write?: boolean;
-    }
-
-    export interface WAF {
-      read?: boolean;
-
-      write?: boolean;
-    }
-
-    export interface ZoneSettings {
-      read?: boolean;
-
-      write?: boolean;
-    }
-
-    export interface Zones {
-      read?: boolean;
-
-      write?: boolean;
-    }
+    zones?: MembersAPI.RolePermissionGrants;
   }
 }
 
