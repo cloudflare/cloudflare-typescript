@@ -43,6 +43,11 @@ export namespace DigitalExperienceMonitoringTests {
     testsTotal: number;
 
     /**
+     * percentage availability for all HTTP test results in response
+     */
+    avgHttpAvailabilityPct?: number | null;
+
+    /**
      * percentage availability for all traceroutes results in response
      */
     avgTracerouteAvailabilityPct?: number | null;
@@ -97,6 +102,10 @@ export namespace DigitalExperienceMonitoringTests {
      * for HTTP, the method to use when running the test
      */
     method?: string;
+
+    target_policies?: Array<Test.TargetPolicy>;
+
+    targeted?: boolean;
 
     tracerouteResults?: Test.TracerouteResults | null;
 
@@ -211,6 +220,17 @@ export namespace DigitalExperienceMonitoringTests {
           }
         }
       }
+    }
+
+    export interface TargetPolicy {
+      id: string;
+
+      /**
+       * Whether the policy is the default for the account
+       */
+      default: boolean;
+
+      name: string;
     }
 
     export interface TracerouteResults {
