@@ -2119,42 +2119,14 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/waiting-rooms/waiting-rooms.ts">WaitingRoom</a></code>
-- <code><a href="./src/resources/waiting-rooms/waiting-rooms.ts">WaitingRoomDeleteResponse</a></code>
-
-Methods:
-
-- <code title="post /zones/{zone_identifier}/waiting_rooms">client.waitingRooms.<a href="./src/resources/waiting-rooms/waiting-rooms.ts">create</a>(zoneIdentifier, { ...params }) -> WaitingRoom</code>
-- <code title="put /zones/{zone_identifier}/waiting_rooms/{waiting_room_id}">client.waitingRooms.<a href="./src/resources/waiting-rooms/waiting-rooms.ts">update</a>(zoneIdentifier, waitingRoomId, { ...params }) -> WaitingRoom</code>
-- <code title="get /zones/{zone_identifier}/waiting_rooms">client.waitingRooms.<a href="./src/resources/waiting-rooms/waiting-rooms.ts">list</a>(zoneIdentifier) -> WaitingRoomsSinglePage</code>
-- <code title="delete /zones/{zone_identifier}/waiting_rooms/{waiting_room_id}">client.waitingRooms.<a href="./src/resources/waiting-rooms/waiting-rooms.ts">delete</a>(zoneIdentifier, waitingRoomId) -> WaitingRoomDeleteResponse</code>
-- <code title="patch /zones/{zone_identifier}/waiting_rooms/{waiting_room_id}">client.waitingRooms.<a href="./src/resources/waiting-rooms/waiting-rooms.ts">edit</a>(zoneIdentifier, waitingRoomId, { ...params }) -> WaitingRoom</code>
-- <code title="get /zones/{zone_identifier}/waiting_rooms/{waiting_room_id}">client.waitingRooms.<a href="./src/resources/waiting-rooms/waiting-rooms.ts">get</a>(zoneIdentifier, waitingRoomId) -> WaitingRoom</code>
 
 ## Page
-
-Types:
-
-- <code><a href="./src/resources/waiting-rooms/page.ts">PagePreviewResponse</a></code>
-
-Methods:
-
-- <code title="post /zones/{zone_identifier}/waiting_rooms/preview">client.waitingRooms.page.<a href="./src/resources/waiting-rooms/page.ts">preview</a>(zoneIdentifier, { ...params }) -> PagePreviewResponse</code>
 
 ## Events
 
 Types:
 
 - <code><a href="./src/resources/waiting-rooms/events/events.ts">WaitingroomEvent</a></code>
-- <code><a href="./src/resources/waiting-rooms/events/events.ts">EventDeleteResponse</a></code>
-
-Methods:
-
-- <code title="post /zones/{zone_identifier}/waiting_rooms/{waiting_room_id}/events">client.waitingRooms.events.<a href="./src/resources/waiting-rooms/events/events.ts">create</a>(zoneIdentifier, waitingRoomId, { ...params }) -> WaitingroomEvent</code>
-- <code title="put /zones/{zone_identifier}/waiting_rooms/{waiting_room_id}/events/{event_id}">client.waitingRooms.events.<a href="./src/resources/waiting-rooms/events/events.ts">update</a>(zoneIdentifier, waitingRoomId, eventId, { ...params }) -> WaitingroomEvent</code>
-- <code title="get /zones/{zone_identifier}/waiting_rooms/{waiting_room_id}/events">client.waitingRooms.events.<a href="./src/resources/waiting-rooms/events/events.ts">list</a>(zoneIdentifier, waitingRoomId) -> WaitingroomEventsSinglePage</code>
-- <code title="delete /zones/{zone_identifier}/waiting_rooms/{waiting_room_id}/events/{event_id}">client.waitingRooms.events.<a href="./src/resources/waiting-rooms/events/events.ts">delete</a>(zoneIdentifier, waitingRoomId, eventId) -> EventDeleteResponse</code>
-- <code title="patch /zones/{zone_identifier}/waiting_rooms/{waiting_room_id}/events/{event_id}">client.waitingRooms.events.<a href="./src/resources/waiting-rooms/events/events.ts">edit</a>(zoneIdentifier, waitingRoomId, eventId, { ...params }) -> WaitingroomEvent</code>
-- <code title="get /zones/{zone_identifier}/waiting_rooms/{waiting_room_id}/events/{event_id}">client.waitingRooms.events.<a href="./src/resources/waiting-rooms/events/events.ts">get</a>(zoneIdentifier, waitingRoomId, eventId) -> WaitingroomEvent</code>
 
 ### Details
 
@@ -2162,51 +2134,15 @@ Types:
 
 - <code><a href="./src/resources/waiting-rooms/events/details.ts">WaitingroomEventDetails</a></code>
 
-Methods:
-
-- <code title="get /zones/{zone_identifier}/waiting_rooms/{waiting_room_id}/events/{event_id}/details">client.waitingRooms.events.details.<a href="./src/resources/waiting-rooms/events/details.ts">get</a>(zoneIdentifier, waitingRoomId, eventId) -> WaitingroomEventDetails</code>
-
 ## Rules
 
 Types:
 
 - <code><a href="./src/resources/waiting-rooms/rules.ts">WaitingroomRule</a></code>
-- <code><a href="./src/resources/waiting-rooms/rules.ts">RuleCreateResponse</a></code>
-- <code><a href="./src/resources/waiting-rooms/rules.ts">RuleUpdateResponse</a></code>
-- <code><a href="./src/resources/waiting-rooms/rules.ts">RuleDeleteResponse</a></code>
-- <code><a href="./src/resources/waiting-rooms/rules.ts">RuleEditResponse</a></code>
-
-Methods:
-
-- <code title="post /zones/{zone_identifier}/waiting_rooms/{waiting_room_id}/rules">client.waitingRooms.rules.<a href="./src/resources/waiting-rooms/rules.ts">create</a>(zoneIdentifier, waitingRoomId, { ...params }) -> RuleCreateResponse | null</code>
-- <code title="put /zones/{zone_identifier}/waiting_rooms/{waiting_room_id}/rules">client.waitingRooms.rules.<a href="./src/resources/waiting-rooms/rules.ts">update</a>(zoneIdentifier, waitingRoomId, [ ...body ]) -> RuleUpdateResponse | null</code>
-- <code title="get /zones/{zone_identifier}/waiting_rooms/{waiting_room_id}/rules">client.waitingRooms.rules.<a href="./src/resources/waiting-rooms/rules.ts">list</a>(zoneIdentifier, waitingRoomId) -> WaitingroomRulesSinglePage</code>
-- <code title="delete /zones/{zone_identifier}/waiting_rooms/{waiting_room_id}/rules/{rule_id}">client.waitingRooms.rules.<a href="./src/resources/waiting-rooms/rules.ts">delete</a>(zoneIdentifier, waitingRoomId, ruleId) -> RuleDeleteResponse | null</code>
-- <code title="patch /zones/{zone_identifier}/waiting_rooms/{waiting_room_id}/rules/{rule_id}">client.waitingRooms.rules.<a href="./src/resources/waiting-rooms/rules.ts">edit</a>(zoneIdentifier, waitingRoomId, ruleId, { ...params }) -> RuleEditResponse | null</code>
 
 ## Statuses
 
-Types:
-
-- <code><a href="./src/resources/waiting-rooms/statuses.ts">StatusGetResponse</a></code>
-
-Methods:
-
-- <code title="get /zones/{zone_identifier}/waiting_rooms/{waiting_room_id}/status">client.waitingRooms.statuses.<a href="./src/resources/waiting-rooms/statuses.ts">get</a>(zoneIdentifier, waitingRoomId) -> StatusGetResponse</code>
-
 ## Settings
-
-Types:
-
-- <code><a href="./src/resources/waiting-rooms/settings.ts">SettingUpdateResponse</a></code>
-- <code><a href="./src/resources/waiting-rooms/settings.ts">SettingEditResponse</a></code>
-- <code><a href="./src/resources/waiting-rooms/settings.ts">SettingGetResponse</a></code>
-
-Methods:
-
-- <code title="put /zones/{zone_identifier}/waiting_rooms/settings">client.waitingRooms.settings.<a href="./src/resources/waiting-rooms/settings.ts">update</a>(zoneIdentifier, { ...params }) -> SettingUpdateResponse</code>
-- <code title="patch /zones/{zone_identifier}/waiting_rooms/settings">client.waitingRooms.settings.<a href="./src/resources/waiting-rooms/settings.ts">edit</a>(zoneIdentifier, { ...params }) -> SettingEditResponse</code>
-- <code title="get /zones/{zone_identifier}/waiting_rooms/settings">client.waitingRooms.settings.<a href="./src/resources/waiting-rooms/settings.ts">get</a>(zoneIdentifier) -> SettingGetResponse</code>
 
 # Web3
 

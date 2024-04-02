@@ -1,28 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as DetailsAPI from 'cloudflare/resources/waiting-rooms/events/details';
 
-export class Details extends APIResource {
-  /**
-   * Previews an event's configuration as if it was active. Inherited fields from the
-   * waiting room will be displayed with their current values.
-   */
-  get(
-    zoneIdentifier: string,
-    waitingRoomId: string,
-    eventId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<WaitingroomEventDetails> {
-    return (
-      this._client.get(
-        `/zones/${zoneIdentifier}/waiting_rooms/${waitingRoomId}/events/${eventId}/details`,
-        options,
-      ) as Core.APIPromise<{ result: WaitingroomEventDetails }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-}
+export class Details extends APIResource {}
 
 export interface WaitingroomEventDetails {
   id?: string;
