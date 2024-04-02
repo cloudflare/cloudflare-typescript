@@ -30,6 +30,7 @@ describe('resource acls', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       acl: {
         description: 'Allows local traffic between PIN pads and cash register.',
+        forward_locally: true,
         lan_1: {
           lan_id: 'string',
           lan_name: 'string',
@@ -73,6 +74,7 @@ describe('resource acls', () => {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
         acl: {
           description: 'Allows local traffic between PIN pads and cash register.',
+          forward_locally: true,
           lan_1: {
             lan_id: 'string',
             lan_name: 'string',
