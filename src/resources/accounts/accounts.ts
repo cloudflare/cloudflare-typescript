@@ -198,6 +198,7 @@ export namespace Accounts {
   export import Members = MembersAPI.Members;
   export import AccountMember = MembersAPI.AccountMember;
   export import AccountMemberWithID = MembersAPI.AccountMemberWithID;
+  export import RolePermissionGrants = MembersAPI.RolePermissionGrants;
   export import MemberListResponse = MembersAPI.MemberListResponse;
   export import MemberDeleteResponse = MembersAPI.MemberDeleteResponse;
   export import MemberListResponsesV4PagePaginationArray = MembersAPI.MemberListResponsesV4PagePaginationArray;
