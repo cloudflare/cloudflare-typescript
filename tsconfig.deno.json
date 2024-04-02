@@ -9,7 +9,6 @@
       "cloudflare/_shims/auto/*": ["deno/_shims/auto/*-deno"],
       "cloudflare/*": ["deno/*"],
       "cloudflare": ["deno/index.ts"],
-      "digest-fetch": ["./typings/digest-fetch"]
     },
     "noEmit": true,
     "declaration": true,
