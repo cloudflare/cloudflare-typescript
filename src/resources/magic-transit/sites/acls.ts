@@ -99,7 +99,7 @@ export interface ACLCreateResponse {
 
 export namespace ACLCreateResponse {
   /**
-   * Bidirectional ACL policy for local network traffic within a site.
+   * Bidirectional ACL policy for network traffic within a site.
    */
   export interface ACL {
     /**
@@ -111,6 +111,14 @@ export namespace ACLCreateResponse {
      * Description for the ACL.
      */
     description?: string;
+
+    /**
+     * The desired forwarding action for this ACL policy. If set to "false", the policy
+     * will forward traffic to Cloudflare. If set to "true", the policy will forward
+     * traffic locally on the Magic WAN Connector. If not included in request, will
+     * default to false.
+     */
+    forward_locally?: boolean;
 
     lan_1?: ACL.LAN1;
 
@@ -177,14 +185,14 @@ export namespace ACLCreateResponse {
 
 export interface ACLUpdateResponse {
   /**
-   * Bidirectional ACL policy for local network traffic within a site.
+   * Bidirectional ACL policy for network traffic within a site.
    */
   acl?: ACLUpdateResponse.ACL;
 }
 
 export namespace ACLUpdateResponse {
   /**
-   * Bidirectional ACL policy for local network traffic within a site.
+   * Bidirectional ACL policy for network traffic within a site.
    */
   export interface ACL {
     /**
@@ -196,6 +204,14 @@ export namespace ACLUpdateResponse {
      * Description for the ACL.
      */
     description?: string;
+
+    /**
+     * The desired forwarding action for this ACL policy. If set to "false", the policy
+     * will forward traffic to Cloudflare. If set to "true", the policy will forward
+     * traffic locally on the Magic WAN Connector. If not included in request, will
+     * default to false.
+     */
+    forward_locally?: boolean;
 
     lan_1?: ACL.LAN1;
 
@@ -266,7 +282,7 @@ export interface ACLListResponse {
 
 export namespace ACLListResponse {
   /**
-   * Bidirectional ACL policy for local network traffic within a site.
+   * Bidirectional ACL policy for network traffic within a site.
    */
   export interface ACL {
     /**
@@ -278,6 +294,14 @@ export namespace ACLListResponse {
      * Description for the ACL.
      */
     description?: string;
+
+    /**
+     * The desired forwarding action for this ACL policy. If set to "false", the policy
+     * will forward traffic to Cloudflare. If set to "true", the policy will forward
+     * traffic locally on the Magic WAN Connector. If not included in request, will
+     * default to false.
+     */
+    forward_locally?: boolean;
 
     lan_1?: ACL.LAN1;
 
@@ -346,14 +370,14 @@ export interface ACLDeleteResponse {
   deleted?: boolean;
 
   /**
-   * Bidirectional ACL policy for local network traffic within a site.
+   * Bidirectional ACL policy for network traffic within a site.
    */
   deleted_acl?: ACLDeleteResponse.DeletedACL;
 }
 
 export namespace ACLDeleteResponse {
   /**
-   * Bidirectional ACL policy for local network traffic within a site.
+   * Bidirectional ACL policy for network traffic within a site.
    */
   export interface DeletedACL {
     /**
@@ -365,6 +389,14 @@ export namespace ACLDeleteResponse {
      * Description for the ACL.
      */
     description?: string;
+
+    /**
+     * The desired forwarding action for this ACL policy. If set to "false", the policy
+     * will forward traffic to Cloudflare. If set to "true", the policy will forward
+     * traffic locally on the Magic WAN Connector. If not included in request, will
+     * default to false.
+     */
+    forward_locally?: boolean;
 
     lan_1?: DeletedACL.LAN1;
 
@@ -431,14 +463,14 @@ export namespace ACLDeleteResponse {
 
 export interface ACLGetResponse {
   /**
-   * Bidirectional ACL policy for local network traffic within a site.
+   * Bidirectional ACL policy for network traffic within a site.
    */
   acl?: ACLGetResponse.ACL;
 }
 
 export namespace ACLGetResponse {
   /**
-   * Bidirectional ACL policy for local network traffic within a site.
+   * Bidirectional ACL policy for network traffic within a site.
    */
   export interface ACL {
     /**
@@ -450,6 +482,14 @@ export namespace ACLGetResponse {
      * Description for the ACL.
      */
     description?: string;
+
+    /**
+     * The desired forwarding action for this ACL policy. If set to "false", the policy
+     * will forward traffic to Cloudflare. If set to "true", the policy will forward
+     * traffic locally on the Magic WAN Connector. If not included in request, will
+     * default to false.
+     */
+    forward_locally?: boolean;
 
     lan_1?: ACL.LAN1;
 
@@ -542,6 +582,14 @@ export namespace ACLCreateParams {
      */
     description?: string;
 
+    /**
+     * The desired forwarding action for this ACL policy. If set to "false", the policy
+     * will forward traffic to Cloudflare. If set to "true", the policy will forward
+     * traffic locally on the Magic WAN Connector. If not included in request, will
+     * default to false.
+     */
+    forward_locally?: boolean;
+
     protocols?: Array<'tcp' | 'udp' | 'icmp'>;
   }
 
@@ -614,6 +662,14 @@ export namespace ACLUpdateParams {
      * Description for the ACL.
      */
     description?: string;
+
+    /**
+     * The desired forwarding action for this ACL policy. If set to "false", the policy
+     * will forward traffic to Cloudflare. If set to "true", the policy will forward
+     * traffic locally on the Magic WAN Connector. If not included in request, will
+     * default to false.
+     */
+    forward_locally?: boolean;
 
     lan_1?: ACL.LAN1;
 
