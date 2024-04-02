@@ -53,16 +53,10 @@ export interface DigitalExperienceMonitoringHTTPDetails {
    * The name of the HTTP synthetic application test
    */
   name?: string;
-
-  target_policies?: Array<DigitalExperienceMonitoringHTTPDetails.TargetPolicy>;
-
-  targeted?: boolean;
 }
 
 export namespace DigitalExperienceMonitoringHTTPDetails {
   export interface HTTPStats {
-    availabilityPct: HTTPStats.AvailabilityPct;
-
     dnsResponseTimeMs: HTTPStats.DNSResponseTimeMs;
 
     httpStatusCode: Array<HTTPStats.HTTPStatusCode>;
@@ -78,33 +72,6 @@ export namespace DigitalExperienceMonitoringHTTPDetails {
   }
 
   export namespace HTTPStats {
-    export interface AvailabilityPct {
-      slots: Array<AvailabilityPct.Slot>;
-
-      /**
-       * average observed in the time period
-       */
-      avg?: number | null;
-
-      /**
-       * highest observed in the time period
-       */
-      max?: number | null;
-
-      /**
-       * lowest observed in the time period
-       */
-      min?: number | null;
-    }
-
-    export namespace AvailabilityPct {
-      export interface Slot {
-        timestamp: string;
-
-        value: number;
-      }
-    }
-
     export interface DNSResponseTimeMs {
       slots: Array<DNSResponseTimeMs.Slot>;
 
@@ -200,8 +167,6 @@ export namespace DigitalExperienceMonitoringHTTPDetails {
   }
 
   export interface HTTPStatsByColo {
-    availabilityPct: HTTPStatsByColo.AvailabilityPct;
-
     colo: string;
 
     dnsResponseTimeMs: HTTPStatsByColo.DNSResponseTimeMs;
@@ -219,33 +184,6 @@ export namespace DigitalExperienceMonitoringHTTPDetails {
   }
 
   export namespace HTTPStatsByColo {
-    export interface AvailabilityPct {
-      slots: Array<AvailabilityPct.Slot>;
-
-      /**
-       * average observed in the time period
-       */
-      avg?: number | null;
-
-      /**
-       * highest observed in the time period
-       */
-      max?: number | null;
-
-      /**
-       * lowest observed in the time period
-       */
-      min?: number | null;
-    }
-
-    export namespace AvailabilityPct {
-      export interface Slot {
-        timestamp: string;
-
-        value: number;
-      }
-    }
-
     export interface DNSResponseTimeMs {
       slots: Array<DNSResponseTimeMs.Slot>;
 
@@ -338,17 +276,6 @@ export namespace DigitalExperienceMonitoringHTTPDetails {
         value: number;
       }
     }
-  }
-
-  export interface TargetPolicy {
-    id: string;
-
-    /**
-     * Whether the policy is the default for the account
-     */
-    default: boolean;
-
-    name: string;
   }
 }
 
