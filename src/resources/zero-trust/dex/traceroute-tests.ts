@@ -77,12 +77,27 @@ export interface DigitalExperienceMonitoringTracerouteDetails {
    */
   name: string;
 
+  target_policies?: Array<DigitalExperienceMonitoringTracerouteDetails.TargetPolicy>;
+
+  targeted?: boolean;
+
   tracerouteStats?: DigitalExperienceMonitoringTracerouteDetails.TracerouteStats | null;
 
   tracerouteStatsByColo?: Array<DigitalExperienceMonitoringTracerouteDetails.TracerouteStatsByColo>;
 }
 
 export namespace DigitalExperienceMonitoringTracerouteDetails {
+  export interface TargetPolicy {
+    id: string;
+
+    /**
+     * Whether the policy is the default for the account
+     */
+    default: boolean;
+
+    name: string;
+  }
+
   export interface TracerouteStats {
     availabilityPct: TracerouteStats.AvailabilityPct;
 
