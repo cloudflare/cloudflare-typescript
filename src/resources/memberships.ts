@@ -4,9 +4,10 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as MembershipsAPI from 'cloudflare/resources/memberships';
-import * as AccountsAPI from 'cloudflare/resources/accounts/accounts';
 import * as MembersAPI from 'cloudflare/resources/accounts/members';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
+import { type Membership, MemberRolesV4PagePaginationArray } from 'cloudflare/resources/accounts/members';
+import * as AccountsAPI from 'cloudflare/resources/accounts/accounts';
+import { type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class Memberships extends APIResource {
   /**
@@ -30,16 +31,18 @@ export class Memberships extends APIResource {
   list(
     query?: MembershipListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<MembershipsV4PagePaginationArray, Membership>;
-  list(options?: Core.RequestOptions): Core.PagePromise<MembershipsV4PagePaginationArray, Membership>;
+  ): Core.PagePromise<MemberRolesV4PagePaginationArray, MembersAPI.MemberRole>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<MemberRolesV4PagePaginationArray, MembersAPI.MemberRole>;
   list(
     query: MembershipListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<MembershipsV4PagePaginationArray, Membership> {
+  ): Core.PagePromise<MemberRolesV4PagePaginationArray, MembersAPI.MemberRole> {
     if (isRequestOptions(query)) {
       return this.list({}, query);
     }
-    return this._client.getAPIList('/memberships', MembershipsV4PagePaginationArray, { query, ...options });
+    return this._client.getAPIList('/memberships', MemberRolesV4PagePaginationArray, { query, ...options });
   }
 
   /**
@@ -65,8 +68,6 @@ export class Memberships extends APIResource {
   }
 }
 
-export class MembershipsV4PagePaginationArray extends V4PagePaginationArray<Membership> {}
-
 export interface Membership {
   /**
    * Membership identifier tag.
@@ -89,7 +90,7 @@ export interface Membership {
   /**
    * All access permissions for the user at the account.
    */
-  permissions?: Membership.Permissions;
+  permissions?: MembersAPI.MemberPermission;
 
   /**
    * List of role names for the user at the account.
@@ -100,37 +101,6 @@ export interface Membership {
    * Status of this membership.
    */
   status?: 'accepted' | 'pending' | 'rejected';
-}
-
-export namespace Membership {
-  /**
-   * All access permissions for the user at the account.
-   */
-  export interface Permissions {
-    analytics?: MembersAPI.RolePermissionGrant;
-
-    billing?: MembersAPI.RolePermissionGrant;
-
-    cache_purge?: MembersAPI.RolePermissionGrant;
-
-    dns?: MembersAPI.RolePermissionGrant;
-
-    dns_records?: MembersAPI.RolePermissionGrant;
-
-    lb?: MembersAPI.RolePermissionGrant;
-
-    logs?: MembersAPI.RolePermissionGrant;
-
-    organization?: MembersAPI.RolePermissionGrant;
-
-    ssl?: MembersAPI.RolePermissionGrant;
-
-    waf?: MembersAPI.RolePermissionGrant;
-
-    zone_settings?: MembersAPI.RolePermissionGrant;
-
-    zones?: MembersAPI.RolePermissionGrant;
-  }
 }
 
 export type MembershipUpdateResponse = unknown | string | null;
@@ -189,7 +159,8 @@ export namespace Memberships {
   export import MembershipUpdateResponse = MembershipsAPI.MembershipUpdateResponse;
   export import MembershipDeleteResponse = MembershipsAPI.MembershipDeleteResponse;
   export import MembershipGetResponse = MembershipsAPI.MembershipGetResponse;
-  export import MembershipsV4PagePaginationArray = MembershipsAPI.MembershipsV4PagePaginationArray;
   export import MembershipUpdateParams = MembershipsAPI.MembershipUpdateParams;
   export import MembershipListParams = MembershipsAPI.MembershipListParams;
 }
+
+export { MemberRolesV4PagePaginationArray };
