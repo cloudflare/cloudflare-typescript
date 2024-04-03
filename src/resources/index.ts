@@ -369,7 +369,18 @@ export {
   WARPConnectorListResponsesV4PagePaginationArray,
   WARPConnector,
 } from './warp-connector';
-export { WaitingRoom, WaitingRooms } from './waiting-rooms/waiting-rooms';
+export {
+  WaitingRoom,
+  WaitingRoomDeleteResponse,
+  WaitingRoomCreateParams,
+  WaitingRoomUpdateParams,
+  WaitingRoomListParams,
+  WaitingRoomDeleteParams,
+  WaitingRoomEditParams,
+  WaitingRoomGetParams,
+  WaitingRoomsSinglePage,
+  WaitingRooms,
+} from './waiting-rooms/waiting-rooms';
 export { Web3 } from './web3/web3';
 export { Workers } from './workers/workers';
 export { WorkersForPlatforms } from './workers-for-platforms/workers-for-platforms';
