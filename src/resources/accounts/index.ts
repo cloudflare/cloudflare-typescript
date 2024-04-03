@@ -14,7 +14,7 @@ export {
 export {
   AccountMember,
   AccountMemberWithID,
-  RolePermissionGrants,
+  RolePermissionGrant,
   MemberListResponse,
   MemberDeleteResponse,
   MemberCreateParams,

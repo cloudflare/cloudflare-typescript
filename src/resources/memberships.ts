@@ -107,29 +107,29 @@ export namespace Membership {
    * All access permissions for the user at the account.
    */
   export interface Permissions {
-    analytics?: MembersAPI.RolePermissionGrants;
+    analytics?: MembersAPI.RolePermissionGrant;
 
-    billing?: MembersAPI.RolePermissionGrants;
+    billing?: MembersAPI.RolePermissionGrant;
 
-    cache_purge?: MembersAPI.RolePermissionGrants;
+    cache_purge?: MembersAPI.RolePermissionGrant;
 
-    dns?: MembersAPI.RolePermissionGrants;
+    dns?: MembersAPI.RolePermissionGrant;
 
-    dns_records?: MembersAPI.RolePermissionGrants;
+    dns_records?: MembersAPI.RolePermissionGrant;
 
-    lb?: MembersAPI.RolePermissionGrants;
+    lb?: MembersAPI.RolePermissionGrant;
 
-    logs?: MembersAPI.RolePermissionGrants;
+    logs?: MembersAPI.RolePermissionGrant;
 
-    organization?: MembersAPI.RolePermissionGrants;
+    organization?: MembersAPI.RolePermissionGrant;
 
-    ssl?: MembersAPI.RolePermissionGrants;
+    ssl?: MembersAPI.RolePermissionGrant;
 
-    waf?: MembersAPI.RolePermissionGrants;
+    waf?: MembersAPI.RolePermissionGrant;
 
-    zone_settings?: MembersAPI.RolePermissionGrants;
+    zone_settings?: MembersAPI.RolePermissionGrant;
 
-    zones?: MembersAPI.RolePermissionGrants;
+    zones?: MembersAPI.RolePermissionGrant;
   }
 }
 

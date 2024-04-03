@@ -1,9 +1,29 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as DetailsAPI from 'cloudflare/resources/waiting-rooms/events/details';
 
-export class Details extends APIResource {}
+export class Details extends APIResource {
+  /**
+   * Previews an event's configuration as if it was active. Inherited fields from the
+   * waiting room will be displayed with their current values.
+   */
+  get(
+    waitingRoomId: string,
+    eventId: string,
+    params: DetailGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<WaitingroomEventDetails> {
+    const { zone_id } = params;
+    return (
+      this._client.get(
+        `/zones/${zone_id}/waiting_rooms/${waitingRoomId}/events/${eventId}/details`,
+        options,
+      ) as Core.APIPromise<{ result: WaitingroomEventDetails }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+}
 
 export interface WaitingroomEventDetails {
   id?: string;
@@ -71,6 +91,14 @@ export interface WaitingroomEventDetails {
   total_active_users?: number;
 }
 
+export interface DetailGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
 export namespace Details {
   export import WaitingroomEventDetails = DetailsAPI.WaitingroomEventDetails;
+  export import DetailGetParams = DetailsAPI.DetailGetParams;
 }
