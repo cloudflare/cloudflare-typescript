@@ -12,7 +12,7 @@ const cloudflare = new Cloudflare({
 describe('resource keys', () => {
   // skipped: tests are disabled for the time being
   test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.images.v1.keys.update('string', {
+    const responsePromise = cloudflare.images.v1.keys.update('someKey', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -26,7 +26,7 @@ describe('resource keys', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.images.v1.keys.update('string', {
+    const response = await cloudflare.images.v1.keys.update('someKey', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
@@ -52,7 +52,7 @@ describe('resource keys', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('delete: only required params', async () => {
-    const responsePromise = cloudflare.images.v1.keys.delete('string', {
+    const responsePromise = cloudflare.images.v1.keys.delete('someKey', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -66,7 +66,7 @@ describe('resource keys', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('delete: required and optional params', async () => {
-    const response = await cloudflare.images.v1.keys.delete('string', {
+    const response = await cloudflare.images.v1.keys.delete('someKey', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
