@@ -278,7 +278,6 @@ export {
   QueueListParams,
   QueueDeleteParams,
   QueueGetParams,
-  QueueListResponsesSinglePage,
   Queues,
 } from './queues/queues';
 export { R2 } from './r2/r2';
