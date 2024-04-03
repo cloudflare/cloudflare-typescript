@@ -45,12 +45,12 @@ export class VirtualNetworks extends APIResource {
     params: VirtualNetworkDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<VirtualNetworkDeleteResponse> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
-      this._client.delete(
-        `/accounts/${account_id}/teamnet/virtual_networks/${virtualNetworkId}`,
-        options,
-      ) as Core.APIPromise<{ result: VirtualNetworkDeleteResponse }>
+      this._client.delete(`/accounts/${account_id}/teamnet/virtual_networks/${virtualNetworkId}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: VirtualNetworkDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -161,6 +161,11 @@ export interface VirtualNetworkListParams {
   name?: string;
 
   /**
+   * Query param: UUID of the virtual network.
+   */
+  vnet_id?: string;
+
+  /**
    * Query param: A user-friendly name for the virtual network.
    */
   vnet_name?: string;
@@ -168,9 +173,14 @@ export interface VirtualNetworkListParams {
 
 export interface VirtualNetworkDeleteParams {
   /**
-   * Cloudflare account ID
+   * Path param: Cloudflare account ID
    */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface VirtualNetworkEditParams {

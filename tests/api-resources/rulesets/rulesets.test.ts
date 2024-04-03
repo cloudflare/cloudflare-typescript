@@ -17,6 +17,7 @@ describe('resource rulesets', () => {
       name: 'My ruleset',
       phase: 'http_request_firewall_custom',
       rules: [{}, {}, {}],
+      account_id: 'string',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -84,7 +85,6 @@ describe('resource rulesets', () => {
         },
       ],
       account_id: 'string',
-      zone_id: 'string',
       description: 'My ruleset to execute managed rulesets',
     });
   });
@@ -92,8 +92,8 @@ describe('resource rulesets', () => {
   // skipped: tests are disabled for the time being
   test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.rulesets.update('2f2feab2026849078ba485f918791bdc', {
-      id: '2f2feab2026849078ba485f918791bdc',
       rules: [{}, {}, {}],
+      account_id: 'string',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -107,7 +107,6 @@ describe('resource rulesets', () => {
   // skipped: tests are disabled for the time being
   test.skip('update: required and optional params', async () => {
     const response = await cloudflare.rulesets.update('2f2feab2026849078ba485f918791bdc', {
-      id: '2f2feab2026849078ba485f918791bdc',
       rules: [
         {
           action: 'block',
@@ -159,7 +158,6 @@ describe('resource rulesets', () => {
         },
       ],
       account_id: 'string',
-      zone_id: 'string',
       description: 'My ruleset to execute managed rulesets',
       kind: 'root',
       name: 'My ruleset',
@@ -169,7 +167,7 @@ describe('resource rulesets', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('list', async () => {
-    const responsePromise = cloudflare.rulesets.list();
+    const responsePromise = cloudflare.rulesets.list({ account_id: 'string' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -177,30 +175,13 @@ describe('resource rulesets', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(cloudflare.rulesets.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
-      Cloudflare.NotFoundError,
-    );
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('list: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.rulesets.list(
-        { account_id: 'string', zone_id: 'string' },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
   test.skip('delete', async () => {
-    const responsePromise = cloudflare.rulesets.delete('2f2feab2026849078ba485f918791bdc');
+    const responsePromise = cloudflare.rulesets.delete('2f2feab2026849078ba485f918791bdc', {
+      account_id: 'string',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -208,31 +189,13 @@ describe('resource rulesets', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('delete: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.rulesets.delete('2f2feab2026849078ba485f918791bdc', { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('delete: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.rulesets.delete(
-        '2f2feab2026849078ba485f918791bdc',
-        { account_id: 'string', zone_id: 'string' },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
   test.skip('get', async () => {
-    const responsePromise = cloudflare.rulesets.get('2f2feab2026849078ba485f918791bdc');
+    const responsePromise = cloudflare.rulesets.get('2f2feab2026849078ba485f918791bdc', {
+      account_id: 'string',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -240,25 +203,5 @@ describe('resource rulesets', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.rulesets.get('2f2feab2026849078ba485f918791bdc', { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('get: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.rulesets.get(
-        '2f2feab2026849078ba485f918791bdc',
-        { account_id: 'string', zone_id: 'string' },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 });

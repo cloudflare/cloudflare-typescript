@@ -13,5 +13,6 @@ export namespace Web3 {
   export import HostnameDeleteResponse = HostnamesAPI.HostnameDeleteResponse;
   export import DistributedWebHostnamesSinglePage = HostnamesAPI.DistributedWebHostnamesSinglePage;
   export import HostnameCreateParams = HostnamesAPI.HostnameCreateParams;
+  export import HostnameDeleteParams = HostnamesAPI.HostnameDeleteParams;
   export import HostnameEditParams = HostnamesAPI.HostnameEditParams;
 }

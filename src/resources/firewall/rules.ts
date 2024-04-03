@@ -107,13 +107,15 @@ export class Rules extends APIResource {
    */
   get(
     zoneIdentifier: string,
-    id: string,
+    params: RuleGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<FirewallFilterRule | null> {
+    const { path_id, query_id, ...query } = params;
     return (
-      this._client.get(`/zones/${zoneIdentifier}/firewall/rules/${id}`, options) as Core.APIPromise<{
-        result: FirewallFilterRule | null;
-      }>
+      this._client.get(`/zones/${zoneIdentifier}/firewall/rules/${path_id}`, {
+        query: { id: query_id, ...query },
+        ...options,
+      }) as Core.APIPromise<{ result: FirewallFilterRule | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -183,6 +185,11 @@ export type RuleUpdateParams = unknown;
 
 export interface RuleListParams extends V4PagePaginationArrayParams {
   /**
+   * The unique identifier of the firewall rule.
+   */
+  id?: string;
+
+  /**
    * The action to search for. Must be an exact match.
    */
   action?: string;
@@ -208,6 +215,18 @@ export interface RuleDeleteParams {
 
 export type RuleEditParams = unknown;
 
+export interface RuleGetParams {
+  /**
+   * Path param: The unique identifier of the firewall rule.
+   */
+  path_id: string;
+
+  /**
+   * Query param: The unique identifier of the firewall rule.
+   */
+  query_id?: string;
+}
+
 export namespace Rules {
   export import FirewallFilterRule = RulesAPI.FirewallFilterRule;
   export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
@@ -218,4 +237,5 @@ export namespace Rules {
   export import RuleListParams = RulesAPI.RuleListParams;
   export import RuleDeleteParams = RulesAPI.RuleDeleteParams;
   export import RuleEditParams = RulesAPI.RuleEditParams;
+  export import RuleGetParams = RulesAPI.RuleGetParams;
 }

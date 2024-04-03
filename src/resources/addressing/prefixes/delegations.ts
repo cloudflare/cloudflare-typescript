@@ -48,11 +48,11 @@ export class Delegations extends APIResource {
     params: DelegationDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DelegationDeleteResponse> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/addressing/prefixes/${prefixId}/delegations/${delegationId}`,
-        options,
+        { body: body, ...options },
       ) as Core.APIPromise<{ result: DelegationDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -120,9 +120,14 @@ export interface DelegationListParams {
 
 export interface DelegationDeleteParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export namespace Delegations {

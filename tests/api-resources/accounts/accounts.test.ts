@@ -60,7 +60,7 @@ describe('resource accounts', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.accounts.list(
-        { direction: 'desc', page: 1, per_page: 5 },
+        { direction: 'desc', name: 'example.com', page: 1, per_page: 5 },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);

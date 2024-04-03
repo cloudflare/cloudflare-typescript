@@ -13,12 +13,12 @@ export class Downloads extends APIResource {
     params: DownloadCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DownloadCreateResponse> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
-      this._client.post(
-        `/accounts/${account_id}/stream/${identifier}/downloads`,
-        options,
-      ) as Core.APIPromise<{ result: DownloadCreateResponse }>
+      this._client.post(`/accounts/${account_id}/stream/${identifier}/downloads`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: DownloadCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -64,9 +64,14 @@ export type DownloadGetResponse = unknown | string;
 
 export interface DownloadCreateParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface DownloadDeleteParams {

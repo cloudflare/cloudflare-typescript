@@ -59,10 +59,11 @@ describe('resource subscriptions', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
+  test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.subscriptions.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '506e3185e9c882d175a2d0cb0093d9f2',
+      {},
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -71,6 +72,15 @@ describe('resource subscriptions', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('delete: required and optional params', async () => {
+    const response = await cloudflare.subscriptions.delete(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '506e3185e9c882d175a2d0cb0093d9f2',
+      {},
+    );
   });
 
   // skipped: tests are disabled for the time being

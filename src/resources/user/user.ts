@@ -164,6 +164,7 @@ export namespace UserResource {
   export import OrganizationGetResponse = OrganizationsAPI.OrganizationGetResponse;
   export import OrganizationsV4PagePaginationArray = OrganizationsAPI.OrganizationsV4PagePaginationArray;
   export import OrganizationListParams = OrganizationsAPI.OrganizationListParams;
+  export import OrganizationDeleteParams = OrganizationsAPI.OrganizationDeleteParams;
   export import Subscriptions = SubscriptionsAPI.Subscriptions;
   export import Subscription = SubscriptionsAPI.Subscription;
   export import SubscriptionUpdateResponse = SubscriptionsAPI.SubscriptionUpdateResponse;
@@ -171,6 +172,7 @@ export namespace UserResource {
   export import SubscriptionEditResponse = SubscriptionsAPI.SubscriptionEditResponse;
   export import SubscriptionGetResponse = SubscriptionsAPI.SubscriptionGetResponse;
   export import SubscriptionUpdateParams = SubscriptionsAPI.SubscriptionUpdateParams;
+  export import SubscriptionDeleteParams = SubscriptionsAPI.SubscriptionDeleteParams;
   export import SubscriptionEditParams = SubscriptionsAPI.SubscriptionEditParams;
   export import Tokens = TokensAPI.Tokens;
   export import TokenCreateResponse = TokensAPI.TokenCreateResponse;
@@ -183,4 +185,5 @@ export namespace UserResource {
   export import TokenCreateParams = TokensAPI.TokenCreateParams;
   export import TokenUpdateParams = TokensAPI.TokenUpdateParams;
   export import TokenListParams = TokensAPI.TokenListParams;
+  export import TokenDeleteParams = TokensAPI.TokenDeleteParams;
 }

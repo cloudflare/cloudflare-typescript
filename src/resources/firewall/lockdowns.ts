@@ -74,12 +74,14 @@ export class Lockdowns extends APIResource {
   delete(
     zoneIdentifier: string,
     id: string,
+    body: LockdownDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<LockdownDeleteResponse> {
     return (
-      this._client.delete(`/zones/${zoneIdentifier}/firewall/lockdowns/${id}`, options) as Core.APIPromise<{
-        result: LockdownDeleteResponse;
-      }>
+      this._client.delete(`/zones/${zoneIdentifier}/firewall/lockdowns/${id}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: LockdownDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -186,6 +188,11 @@ export type LockdownUpdateParams = unknown;
 
 export interface LockdownListParams extends V4PagePaginationArrayParams {
   /**
+   * The timestamp of when the rule was created.
+   */
+  created_on?: string;
+
+  /**
    * A string to search for in the description of existing rules.
    */
   description?: string;
@@ -211,6 +218,11 @@ export interface LockdownListParams extends V4PagePaginationArrayParams {
   ip_search?: string;
 
   /**
+   * The timestamp of when the rule was last modified.
+   */
+  modified_on?: string;
+
+  /**
    * The priority of the rule to control the processing order. A lower number
    * indicates higher priority. If not provided, any rules with a configured priority
    * will be processed before rules without a priority.
@@ -223,6 +235,8 @@ export interface LockdownListParams extends V4PagePaginationArrayParams {
   uri_search?: string;
 }
 
+export type LockdownDeleteParams = unknown;
+
 export namespace Lockdowns {
   export import FirewallZoneLockdown = LockdownsAPI.FirewallZoneLockdown;
   export import LockdownDeleteResponse = LockdownsAPI.LockdownDeleteResponse;
@@ -230,4 +244,5 @@ export namespace Lockdowns {
   export import LockdownCreateParams = LockdownsAPI.LockdownCreateParams;
   export import LockdownUpdateParams = LockdownsAPI.LockdownUpdateParams;
   export import LockdownListParams = LockdownsAPI.LockdownListParams;
+  export import LockdownDeleteParams = LockdownsAPI.LockdownDeleteParams;
 }

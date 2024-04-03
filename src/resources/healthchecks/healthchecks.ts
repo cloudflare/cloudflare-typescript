@@ -57,11 +57,12 @@ export class Healthchecks extends APIResource {
     params: HealthcheckDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<HealthcheckDeleteResponse> {
-    const { zone_id } = params;
+    const { zone_id, body } = params;
     return (
-      this._client.delete(`/zones/${zone_id}/healthchecks/${healthcheckId}`, options) as Core.APIPromise<{
-        result: HealthcheckDeleteResponse;
-      }>
+      this._client.delete(`/zones/${zone_id}/healthchecks/${healthcheckId}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: HealthcheckDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -616,9 +617,14 @@ export interface HealthcheckListParams {
 
 export interface HealthcheckDeleteParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   zone_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface HealthcheckEditParams {

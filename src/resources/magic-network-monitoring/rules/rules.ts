@@ -17,9 +17,9 @@ export class Rules extends APIResource {
     params: RuleCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MagicNetworkMonitoringRule | null> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
-      this._client.post(`/accounts/${account_id}/mnm/rules`, options) as Core.APIPromise<{
+      this._client.post(`/accounts/${account_id}/mnm/rules`, { body: body, ...options }) as Core.APIPromise<{
         result: MagicNetworkMonitoringRule | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -32,9 +32,9 @@ export class Rules extends APIResource {
     params: RuleUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MagicNetworkMonitoringRule | null> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
-      this._client.put(`/accounts/${account_id}/mnm/rules`, options) as Core.APIPromise<{
+      this._client.put(`/accounts/${account_id}/mnm/rules`, { body: body, ...options }) as Core.APIPromise<{
         result: MagicNetworkMonitoringRule | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -63,11 +63,12 @@ export class Rules extends APIResource {
     params: RuleDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MagicNetworkMonitoringRule | null> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/mnm/rules/${ruleId}`, options) as Core.APIPromise<{
-        result: MagicNetworkMonitoringRule | null;
-      }>
+      this._client.delete(`/accounts/${account_id}/mnm/rules/${ruleId}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: MagicNetworkMonitoringRule | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -79,11 +80,12 @@ export class Rules extends APIResource {
     params: RuleEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MagicNetworkMonitoringRule | null> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
-      this._client.patch(`/accounts/${account_id}/mnm/rules/${ruleId}`, options) as Core.APIPromise<{
-        result: MagicNetworkMonitoringRule | null;
-      }>
+      this._client.patch(`/accounts/${account_id}/mnm/rules/${ruleId}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: MagicNetworkMonitoringRule | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -148,11 +150,27 @@ export interface MagicNetworkMonitoringRule {
 }
 
 export interface RuleCreateParams {
+  /**
+   * Path param:
+   */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface RuleUpdateParams {
+  /**
+   * Path param:
+   */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface RuleListParams {
@@ -160,11 +178,27 @@ export interface RuleListParams {
 }
 
 export interface RuleDeleteParams {
+  /**
+   * Path param:
+   */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface RuleEditParams {
+  /**
+   * Path param:
+   */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface RuleGetParams {

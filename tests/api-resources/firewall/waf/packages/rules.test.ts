@@ -28,12 +28,15 @@ describe('resource rules', () => {
   test.skip('list: required and optional params', async () => {
     const response = await cloudflare.firewall.waf.packages.rules.list('a25a9a7e9c00afc1fb2e0245519d725b', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      description: 'SQL injection prevention for SELECT statements',
       direction: 'desc',
+      group_id: 'de677e5818985db1285d0e80225f06e5',
       match: 'any',
       mode: 'CHL',
       order: 'priority',
       page: 1,
       per_page: 5,
+      priority: 'string',
     });
   });
 

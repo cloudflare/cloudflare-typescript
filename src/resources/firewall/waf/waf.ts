@@ -17,6 +17,7 @@ export namespace WAF {
   export import OverrideCreateParams = OverridesAPI.OverrideCreateParams;
   export import OverrideUpdateParams = OverridesAPI.OverrideUpdateParams;
   export import OverrideListParams = OverridesAPI.OverrideListParams;
+  export import OverrideDeleteParams = OverridesAPI.OverrideDeleteParams;
   export import Packages = PackagesAPI.Packages;
   export import PackageListResponse = PackagesAPI.PackageListResponse;
   export import PackageGetResponse = PackagesAPI.PackageGetResponse;

@@ -68,6 +68,9 @@ export namespace Access {
   export import ZeroTrustBookmarks = BookmarksAPI.ZeroTrustBookmarks;
   export import BookmarkDeleteResponse = BookmarksAPI.BookmarkDeleteResponse;
   export import ZeroTrustBookmarksSinglePage = BookmarksAPI.ZeroTrustBookmarksSinglePage;
+  export import BookmarkCreateParams = BookmarksAPI.BookmarkCreateParams;
+  export import BookmarkUpdateParams = BookmarksAPI.BookmarkUpdateParams;
+  export import BookmarkDeleteParams = BookmarksAPI.BookmarkDeleteParams;
   export import Keys = KeysAPI.Keys;
   export import KeyUpdateResponse = KeysAPI.KeyUpdateResponse;
   export import KeyGetResponse = KeysAPI.KeyGetResponse;

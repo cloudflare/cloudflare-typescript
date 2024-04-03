@@ -44,12 +44,12 @@ export class KeylessCertificates extends APIResource {
     params: KeylessCertificateDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<KeylessCertificateDeleteResponse> {
-    const { zone_id } = params;
+    const { zone_id, body } = params;
     return (
-      this._client.delete(
-        `/zones/${zone_id}/keyless_certificates/${keylessCertificateId}`,
-        options,
-      ) as Core.APIPromise<{ result: KeylessCertificateDeleteResponse }>
+      this._client.delete(`/zones/${zone_id}/keyless_certificates/${keylessCertificateId}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: KeylessCertificateDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -307,9 +307,14 @@ export interface KeylessCertificateListParams {
 
 export interface KeylessCertificateDeleteParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   zone_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface KeylessCertificateEditParams {

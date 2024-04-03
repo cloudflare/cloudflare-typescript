@@ -14,6 +14,7 @@ describe('resource jobs', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.logpush.jobs.create({
       destination_conf: 's3://mybucket/logs?region=us-west-2',
+      account_id: 'string',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,7 +30,6 @@ describe('resource jobs', () => {
     const response = await cloudflare.logpush.jobs.create({
       destination_conf: 's3://mybucket/logs?region=us-west-2',
       account_id: 'string',
-      zone_id: 'string',
       dataset: 'http_requests',
       enabled: false,
       frequency: 'high',
@@ -55,7 +55,7 @@ describe('resource jobs', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('update', async () => {
-    const responsePromise = cloudflare.logpush.jobs.update(1, {});
+    const responsePromise = cloudflare.logpush.jobs.update(1, { account_id: 'string' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -67,7 +67,7 @@ describe('resource jobs', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('list', async () => {
-    const responsePromise = cloudflare.logpush.jobs.list();
+    const responsePromise = cloudflare.logpush.jobs.list({ account_id: 'string' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -78,27 +78,8 @@ describe('resource jobs', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(cloudflare.logpush.jobs.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
-      Cloudflare.NotFoundError,
-    );
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('list: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.logpush.jobs.list(
-        { account_id: 'string', zone_id: 'string' },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
-    const responsePromise = cloudflare.logpush.jobs.delete(1, {});
+  test.skip('delete: only required params', async () => {
+    const responsePromise = cloudflare.logpush.jobs.delete(1, { body: {}, account_id: 'string' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -106,11 +87,16 @@ describe('resource jobs', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('delete: required and optional params', async () => {
+    const response = await cloudflare.logpush.jobs.delete(1, { body: {}, account_id: 'string' });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('get', async () => {
-    const responsePromise = cloudflare.logpush.jobs.get(1);
+    const responsePromise = cloudflare.logpush.jobs.get(1, { account_id: 'string' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -118,25 +104,5 @@ describe('resource jobs', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(cloudflare.logpush.jobs.get(1, { path: '/_stainless_unknown_path' })).rejects.toThrow(
-      Cloudflare.NotFoundError,
-    );
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('get: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.logpush.jobs.get(
-        1,
-        { account_id: 'string', zone_id: 'string' },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 });

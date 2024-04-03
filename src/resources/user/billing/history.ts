@@ -75,6 +75,21 @@ export type HistoryGetResponse = Array<BillingHistory>;
 
 export interface HistoryGetParams {
   /**
+   * The billing item action.
+   */
+  action?: string;
+
+  /**
+   * When the billing item was created.
+   */
+  occured_at?: string;
+
+  /**
+   * When the billing item was created.
+   */
+  occurred_at?: string;
+
+  /**
    * Field to order billing history by.
    */
   order?: 'type' | 'occured_at' | 'action';
@@ -88,6 +103,11 @@ export interface HistoryGetParams {
    * Number of items per page.
    */
   per_page?: number;
+
+  /**
+   * The billing item type.
+   */
+  type?: string;
 }
 
 export namespace History {

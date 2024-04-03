@@ -53,12 +53,12 @@ export class AddressMaps extends APIResource {
     params: AddressMapDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AddressMapDeleteResponse | null> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
-      this._client.delete(
-        `/accounts/${account_id}/addressing/address_maps/${addressMapId}`,
-        options,
-      ) as Core.APIPromise<{ result: AddressMapDeleteResponse | null }>
+      this._client.delete(`/accounts/${account_id}/addressing/address_maps/${addressMapId}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: AddressMapDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -343,9 +343,14 @@ export interface AddressMapListParams {
 
 export interface AddressMapDeleteParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface AddressMapEditParams {

@@ -68,12 +68,12 @@ export class Monitors extends APIResource {
     params: MonitorDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MonitorDeleteResponse> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
-      this._client.delete(
-        `/accounts/${account_id}/load_balancers/monitors/${monitorId}`,
-        options,
-      ) as Core.APIPromise<{ result: MonitorDeleteResponse }>
+      this._client.delete(`/accounts/${account_id}/load_balancers/monitors/${monitorId}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: MonitorDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -337,9 +337,14 @@ export interface MonitorListParams {
 
 export interface MonitorDeleteParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface MonitorEditParams {

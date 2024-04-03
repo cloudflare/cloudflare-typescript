@@ -155,6 +155,11 @@ export interface ConfigCreateParams {
   /**
    * Body param:
    */
+  name: unknown;
+
+  /**
+   * Body param:
+   */
   origin: ConfigCreateParams.Origin;
 }
 
@@ -173,6 +178,11 @@ export interface ConfigUpdateParams {
    * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  name: unknown;
 
   /**
    * Body param:

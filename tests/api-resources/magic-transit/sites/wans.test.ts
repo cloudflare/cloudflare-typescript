@@ -106,7 +106,7 @@ describe('resource wans', () => {
     const responsePromise = cloudflare.magicTransit.sites.wans.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', body: {} },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -122,7 +122,7 @@ describe('resource wans', () => {
     const response = await cloudflare.magicTransit.sites.wans.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', body: {} },
     );
   });
 

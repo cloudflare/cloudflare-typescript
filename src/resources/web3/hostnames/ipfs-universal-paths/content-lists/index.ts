@@ -7,5 +7,6 @@ export {
   EntryDeleteResponse,
   EntryCreateParams,
   EntryUpdateParams,
+  EntryDeleteParams,
   Entries,
 } from './entries';

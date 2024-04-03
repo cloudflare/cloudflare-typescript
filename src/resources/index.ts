@@ -116,6 +116,8 @@ export {
   EmailRoutingDisableResponse,
   EmailRoutingEnableResponse,
   EmailRoutingGetResponse,
+  EmailRoutingDisableParams,
+  EmailRoutingEnableParams,
   EmailRouting,
 } from './email-routing/email-routing';
 export { Firewall } from './firewall/firewall';
@@ -125,6 +127,7 @@ export {
   FilterCreateParams,
   FilterUpdateParams,
   FilterListParams,
+  FilterDeleteParams,
   FirewallFiltersV4PagePaginationArray,
   Filters,
 } from './filters';
@@ -205,6 +208,7 @@ export {
   MembershipGetResponse,
   MembershipUpdateParams,
   MembershipListParams,
+  MembershipDeleteParams,
   MembershipsV4PagePaginationArray,
   Memberships,
 } from './memberships';
@@ -223,6 +227,8 @@ export {
   OriginCACertificateDeleteResponse,
   OriginCACertificateGetResponse,
   OriginCACertificateCreateParams,
+  OriginCACertificateListParams,
+  OriginCACertificateDeleteParams,
   OriginCACertificatesSinglePage,
   OriginCACertificates,
 } from './origin-ca-certificates';
@@ -292,6 +298,7 @@ export {
   RateLimitGetResponse,
   RateLimitCreateParams,
   RateLimitListParams,
+  RateLimitDeleteParams,
   RateLimitEditParams,
   RateLimitListResponsesV4PagePaginationArray,
   RateLimits,
@@ -301,8 +308,10 @@ export { Registrar } from './registrar/registrar';
 export { RequestTracers } from './request-tracers/request-tracers';
 export { Rules } from './rules/rules';
 export {
-  Ruleset,
+  RulesetCreateResponse,
+  RulesetUpdateResponse,
   RulesetListResponse,
+  RulesetGetResponse,
   RulesetCreateParams,
   RulesetUpdateParams,
   RulesetListParams,
@@ -339,6 +348,7 @@ export {
   SubscriptionGetResponse,
   SubscriptionCreateParams,
   SubscriptionUpdateParams,
+  SubscriptionDeleteParams,
   SubscriptionListResponsesSinglePage,
   Subscriptions,
 } from './subscriptions';

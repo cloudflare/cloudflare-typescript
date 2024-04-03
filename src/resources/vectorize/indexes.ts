@@ -130,10 +130,10 @@ export class Indexes extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<VectorizeIndexInsert | null> {
     return (
-      this._client.post(
-        `/accounts/${accountIdentifier}/vectorize/indexes/${indexName}/insert`,
-        options,
-      ) as Core.APIPromise<{ result: VectorizeIndexInsert | null }>
+      this._client.post(`/accounts/${accountIdentifier}/vectorize/indexes/${indexName}/insert`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: VectorizeIndexInsert | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -165,10 +165,10 @@ export class Indexes extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<VectorizeIndexUpsert | null> {
     return (
-      this._client.post(
-        `/accounts/${accountIdentifier}/vectorize/indexes/${indexName}/upsert`,
-        options,
-      ) as Core.APIPromise<{ result: VectorizeIndexUpsert | null }>
+      this._client.post(`/accounts/${accountIdentifier}/vectorize/indexes/${indexName}/upsert`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: VectorizeIndexUpsert | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -347,7 +347,7 @@ export interface IndexGetByIDsParams {
   ids?: Array<string>;
 }
 
-export interface IndexInsertParams {}
+export type IndexInsertParams = unknown;
 
 export interface IndexQueryParams {
   /**
@@ -371,7 +371,7 @@ export interface IndexQueryParams {
   vector?: Array<number>;
 }
 
-export interface IndexUpsertParams {}
+export type IndexUpsertParams = unknown;
 
 export namespace Indexes {
   export import VectorizeCreateIndex = IndexesAPI.VectorizeCreateIndex;

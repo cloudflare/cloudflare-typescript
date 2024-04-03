@@ -70,11 +70,12 @@ export class Records extends APIResource {
     params: RecordDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RecordDeleteResponse> {
-    const { zone_id } = params;
+    const { zone_id, body } = params;
     return (
-      this._client.delete(`/zones/${zone_id}/dns_records/${dnsRecordId}`, options) as Core.APIPromise<{
-        result: RecordDeleteResponse;
-      }>
+      this._client.delete(`/zones/${zone_id}/dns_records/${dnsRecordId}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: RecordDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -158,9 +159,9 @@ export class Records extends APIResource {
    * zone. Useful if you haven't updated your nameservers yet.
    */
   scan(params: RecordScanParams, options?: Core.RequestOptions): Core.APIPromise<RecordScanResponse> {
-    const { zone_id } = params;
+    const { zone_id, body } = params;
     return (
-      this._client.post(`/zones/${zone_id}/dns_records/scan`, options) as Core.APIPromise<{
+      this._client.post(`/zones/${zone_id}/dns_records/scan`, { body: body, ...options }) as Core.APIPromise<{
         result: RecordScanResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -5284,9 +5285,14 @@ export namespace RecordListParams {
 
 export interface RecordDeleteParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   zone_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export type RecordEditParams =
@@ -6597,9 +6603,14 @@ export interface RecordImportParams {
 
 export interface RecordScanParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   zone_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export namespace Records {

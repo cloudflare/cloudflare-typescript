@@ -15,6 +15,7 @@ describe('resource organizations', () => {
     const responsePromise = cloudflare.zeroTrust.organizations.create({
       auth_domain: 'test.cloudflareaccess.com',
       name: 'Widget Corps Internal Applications',
+      account_id: 'string',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -31,7 +32,6 @@ describe('resource organizations', () => {
       auth_domain: 'test.cloudflareaccess.com',
       name: 'Widget Corps Internal Applications',
       account_id: 'string',
-      zone_id: 'string',
       allow_authenticate_via_warp: true,
       auto_redirect_to_identity: true,
       is_ui_read_only: true,
@@ -51,7 +51,7 @@ describe('resource organizations', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('update', async () => {
-    const responsePromise = cloudflare.zeroTrust.organizations.update({});
+    const responsePromise = cloudflare.zeroTrust.organizations.update({ account_id: 'string' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -63,7 +63,7 @@ describe('resource organizations', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('list', async () => {
-    const responsePromise = cloudflare.zeroTrust.organizations.list();
+    const responsePromise = cloudflare.zeroTrust.organizations.list({ account_id: 'string' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -74,27 +74,11 @@ describe('resource organizations', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.zeroTrust.organizations.list({ path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('list: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.zeroTrust.organizations.list(
-        { account_id: 'string', zone_id: 'string' },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
   test.skip('revokeUsers: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.organizations.revokeUsers({ email: 'test@example.com' });
+    const responsePromise = cloudflare.zeroTrust.organizations.revokeUsers({
+      email: 'test@example.com',
+      account_id: 'string',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -109,7 +93,6 @@ describe('resource organizations', () => {
     const response = await cloudflare.zeroTrust.organizations.revokeUsers({
       email: 'test@example.com',
       account_id: 'string',
-      zone_id: 'string',
     });
   });
 });

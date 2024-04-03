@@ -15,6 +15,7 @@ export {
   TokenCreateParams,
   TokenUpdateParams,
   TokenListParams,
+  TokenDeleteParams,
   TokenListResponsesV4PagePaginationArray,
   Tokens,
 } from './tokens';

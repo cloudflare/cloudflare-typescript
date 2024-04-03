@@ -43,8 +43,19 @@ describe('resource originCACertificates', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
-    const responsePromise = cloudflare.originCACertificates.delete('023e105f4ecef8ad9ca31a8372d0c353');
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.originCACertificates.list(
+        { identifier: '023e105f4ecef8ad9ca31a8372d0c353' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('delete: only required params', async () => {
+    const responsePromise = cloudflare.originCACertificates.delete('023e105f4ecef8ad9ca31a8372d0c353', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -52,6 +63,11 @@ describe('resource originCACertificates', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('delete: required and optional params', async () => {
+    const response = await cloudflare.originCACertificates.delete('023e105f4ecef8ad9ca31a8372d0c353', {});
   });
 
   // skipped: tests are disabled for the time being

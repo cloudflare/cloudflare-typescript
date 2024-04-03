@@ -45,11 +45,12 @@ export class Outgoing extends APIResource {
     params: OutgoingDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OutgoingDeleteResponse> {
-    const { zone_id } = params;
+    const { zone_id, body } = params;
     return (
-      this._client.delete(`/zones/${zone_id}/secondary_dns/outgoing`, options) as Core.APIPromise<{
-        result: OutgoingDeleteResponse;
-      }>
+      this._client.delete(`/zones/${zone_id}/secondary_dns/outgoing`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: OutgoingDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -61,11 +62,12 @@ export class Outgoing extends APIResource {
     params: OutgoingDisableParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SecondaryDNSDisableTransfer> {
-    const { zone_id } = params;
+    const { zone_id, body } = params;
     return (
-      this._client.post(`/zones/${zone_id}/secondary_dns/outgoing/disable`, options) as Core.APIPromise<{
-        result: SecondaryDNSDisableTransfer;
-      }>
+      this._client.post(`/zones/${zone_id}/secondary_dns/outgoing/disable`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: SecondaryDNSDisableTransfer }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -76,11 +78,12 @@ export class Outgoing extends APIResource {
     params: OutgoingEnableParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SecondaryDNSEnableTransfer> {
-    const { zone_id } = params;
+    const { zone_id, body } = params;
     return (
-      this._client.post(`/zones/${zone_id}/secondary_dns/outgoing/enable`, options) as Core.APIPromise<{
-        result: SecondaryDNSEnableTransfer;
-      }>
+      this._client.post(`/zones/${zone_id}/secondary_dns/outgoing/enable`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: SecondaryDNSEnableTransfer }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -91,11 +94,12 @@ export class Outgoing extends APIResource {
     params: OutgoingForceNotifyParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OutgoingForceNotifyResponse> {
-    const { zone_id } = params;
+    const { zone_id, body } = params;
     return (
-      this._client.post(`/zones/${zone_id}/secondary_dns/outgoing/force_notify`, options) as Core.APIPromise<{
-        result: OutgoingForceNotifyResponse;
-      }>
+      this._client.post(`/zones/${zone_id}/secondary_dns/outgoing/force_notify`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: OutgoingForceNotifyResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -269,19 +273,51 @@ export interface OutgoingUpdateParams {
 }
 
 export interface OutgoingDeleteParams {
+  /**
+   * Path param:
+   */
   zone_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface OutgoingDisableParams {
+  /**
+   * Path param:
+   */
   zone_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface OutgoingEnableParams {
+  /**
+   * Path param:
+   */
   zone_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface OutgoingForceNotifyParams {
+  /**
+   * Path param:
+   */
   zone_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface OutgoingGetParams {

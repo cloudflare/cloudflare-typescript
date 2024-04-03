@@ -42,10 +42,10 @@ export class Scripts extends APIResource {
     params: ScriptDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<void> {
-    const { account_id, force } = params;
+    const { account_id, body, force } = params;
     return this._client.delete(
       `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}`,
-      { query: { force }, ...options, headers: { Accept: '*/*', ...options?.headers } },
+      { query: { force }, body: body, ...options, headers: { Accept: '*/*', ...options?.headers } },
     );
   }
 
@@ -351,6 +351,11 @@ export interface ScriptDeleteParams {
    * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 
   /**
    * Query param: If set to true, delete will not be stopped by associated service

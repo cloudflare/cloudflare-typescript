@@ -50,12 +50,14 @@ export class AccessRules extends APIResource {
    */
   delete(
     identifier: string,
+    body: AccessRuleDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AccessRuleDeleteResponse | null> {
     return (
-      this._client.delete(`/user/firewall/access_rules/rules/${identifier}`, options) as Core.APIPromise<{
-        result: AccessRuleDeleteResponse | null;
-      }>
+      this._client.delete(`/user/firewall/access_rules/rules/${identifier}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: AccessRuleDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -360,6 +362,8 @@ export namespace AccessRuleListParams {
   }
 }
 
+export type AccessRuleDeleteParams = unknown;
+
 export interface AccessRuleEditParams {
   /**
    * The action to apply to a matched request.
@@ -378,5 +382,6 @@ export namespace AccessRules {
   export import FirewallRulesV4PagePaginationArray = AccessRulesAPI.FirewallRulesV4PagePaginationArray;
   export import AccessRuleCreateParams = AccessRulesAPI.AccessRuleCreateParams;
   export import AccessRuleListParams = AccessRulesAPI.AccessRuleListParams;
+  export import AccessRuleDeleteParams = AccessRulesAPI.AccessRuleDeleteParams;
   export import AccessRuleEditParams = AccessRulesAPI.AccessRuleEditParams;
 }

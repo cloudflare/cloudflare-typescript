@@ -229,6 +229,11 @@ export interface RouteListParams extends V4PagePaginationArrayParams {
   network_superset?: unknown;
 
   /**
+   * Query param: UUID of the route.
+   */
+  route_id?: string;
+
+  /**
    * Query param: The types of tunnels to filter separated by a comma.
    */
   tun_types?: string;

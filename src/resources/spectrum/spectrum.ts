@@ -21,4 +21,5 @@ export namespace Spectrum {
   export import AppCreateParams = AppsAPI.AppCreateParams;
   export import AppUpdateParams = AppsAPI.AppUpdateParams;
   export import AppListParams = AppsAPI.AppListParams;
+  export import AppDeleteParams = AppsAPI.AppDeleteParams;
 }

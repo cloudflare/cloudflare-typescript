@@ -59,7 +59,7 @@ describe('resource deployments', () => {
     const responsePromise = cloudflare.pages.projects.deployments.delete(
       'this-is-my-project-01',
       '023e105f4ecef8ad9ca31a8372d0c353',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', body: {} },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -75,7 +75,7 @@ describe('resource deployments', () => {
     const response = await cloudflare.pages.projects.deployments.delete(
       'this-is-my-project-01',
       '023e105f4ecef8ad9ca31a8372d0c353',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', body: {} },
     );
   });
 
@@ -109,7 +109,7 @@ describe('resource deployments', () => {
     const responsePromise = cloudflare.pages.projects.deployments.retry(
       'this-is-my-project-01',
       '023e105f4ecef8ad9ca31a8372d0c353',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', body: {} },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -125,7 +125,7 @@ describe('resource deployments', () => {
     const response = await cloudflare.pages.projects.deployments.retry(
       'this-is-my-project-01',
       '023e105f4ecef8ad9ca31a8372d0c353',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', body: {} },
     );
   });
 
@@ -134,7 +134,7 @@ describe('resource deployments', () => {
     const responsePromise = cloudflare.pages.projects.deployments.rollback(
       'this-is-my-project-01',
       '023e105f4ecef8ad9ca31a8372d0c353',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', body: {} },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -150,7 +150,7 @@ describe('resource deployments', () => {
     const response = await cloudflare.pages.projects.deployments.rollback(
       'this-is-my-project-01',
       '023e105f4ecef8ad9ca31a8372d0c353',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', body: {} },
     );
   });
 });

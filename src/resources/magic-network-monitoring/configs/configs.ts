@@ -15,9 +15,9 @@ export class Configs extends APIResource {
     params: ConfigCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MagicNetworkMonitoringConfig> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
-      this._client.post(`/accounts/${account_id}/mnm/config`, options) as Core.APIPromise<{
+      this._client.post(`/accounts/${account_id}/mnm/config`, { body: body, ...options }) as Core.APIPromise<{
         result: MagicNetworkMonitoringConfig;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -31,9 +31,9 @@ export class Configs extends APIResource {
     params: ConfigUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MagicNetworkMonitoringConfig> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
-      this._client.put(`/accounts/${account_id}/mnm/config`, options) as Core.APIPromise<{
+      this._client.put(`/accounts/${account_id}/mnm/config`, { body: body, ...options }) as Core.APIPromise<{
         result: MagicNetworkMonitoringConfig;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -46,11 +46,12 @@ export class Configs extends APIResource {
     params: ConfigDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MagicNetworkMonitoringConfig> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/mnm/config`, options) as Core.APIPromise<{
-        result: MagicNetworkMonitoringConfig;
-      }>
+      this._client.delete(`/accounts/${account_id}/mnm/config`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: MagicNetworkMonitoringConfig }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -61,11 +62,12 @@ export class Configs extends APIResource {
     params: ConfigEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MagicNetworkMonitoringConfig> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
-      this._client.patch(`/accounts/${account_id}/mnm/config`, options) as Core.APIPromise<{
-        result: MagicNetworkMonitoringConfig;
-      }>
+      this._client.patch(`/accounts/${account_id}/mnm/config`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: MagicNetworkMonitoringConfig }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -98,19 +100,51 @@ export interface MagicNetworkMonitoringConfig {
 }
 
 export interface ConfigCreateParams {
+  /**
+   * Path param:
+   */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface ConfigUpdateParams {
+  /**
+   * Path param:
+   */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface ConfigDeleteParams {
+  /**
+   * Path param:
+   */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface ConfigEditParams {
+  /**
+   * Path param:
+   */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface ConfigGetParams {

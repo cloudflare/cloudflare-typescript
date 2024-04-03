@@ -56,12 +56,14 @@ export class RateLimits extends APIResource {
   delete(
     zoneIdentifier: string,
     id: string,
+    body: RateLimitDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RateLimitDeleteResponse | null> {
     return (
-      this._client.delete(`/zones/${zoneIdentifier}/rate_limits/${id}`, options) as Core.APIPromise<{
-        result: RateLimitDeleteResponse | null;
-      }>
+      this._client.delete(`/zones/${zoneIdentifier}/rate_limits/${id}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: RateLimitDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -471,6 +473,8 @@ export type RateLimitCreateParams = unknown;
 
 export interface RateLimitListParams extends V4PagePaginationArrayParams {}
 
+export type RateLimitDeleteParams = unknown;
+
 export type RateLimitEditParams = unknown;
 
 export namespace RateLimits {
@@ -483,5 +487,6 @@ export namespace RateLimits {
   export import RateLimitListResponsesV4PagePaginationArray = RateLimitsAPI.RateLimitListResponsesV4PagePaginationArray;
   export import RateLimitCreateParams = RateLimitsAPI.RateLimitCreateParams;
   export import RateLimitListParams = RateLimitsAPI.RateLimitListParams;
+  export import RateLimitDeleteParams = RateLimitsAPI.RateLimitDeleteParams;
   export import RateLimitEditParams = RateLimitsAPI.RateLimitEditParams;
 }

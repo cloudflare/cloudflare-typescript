@@ -89,7 +89,7 @@ describe('resource consumers', () => {
     const responsePromise = cloudflare.queues.consumers.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', body: {} },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -105,7 +105,7 @@ describe('resource consumers', () => {
     const response = await cloudflare.queues.consumers.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', body: {} },
     );
   });
 

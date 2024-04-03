@@ -67,12 +67,12 @@ export class IPSECTunnels extends APIResource {
     params: IPSECTunnelDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IPSECTunnelDeleteResponse> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
-      this._client.delete(
-        `/accounts/${account_id}/magic/ipsec_tunnels/${tunnelIdentifier}`,
-        options,
-      ) as Core.APIPromise<{ result: IPSECTunnelDeleteResponse }>
+      this._client.delete(`/accounts/${account_id}/magic/ipsec_tunnels/${tunnelIdentifier}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: IPSECTunnelDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -105,12 +105,12 @@ export class IPSECTunnels extends APIResource {
     params: IPSECTunnelPSKGenerateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IPSECTunnelPSKGenerateResponse> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
-      this._client.post(
-        `/accounts/${account_id}/magic/ipsec_tunnels/${tunnelIdentifier}/psk_generate`,
-        options,
-      ) as Core.APIPromise<{ result: IPSECTunnelPSKGenerateResponse }>
+      this._client.post(`/accounts/${account_id}/magic/ipsec_tunnels/${tunnelIdentifier}/psk_generate`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: IPSECTunnelPSKGenerateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -557,9 +557,14 @@ export interface IPSECTunnelListParams {
 
 export interface IPSECTunnelDeleteParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface IPSECTunnelGetParams {
@@ -571,9 +576,14 @@ export interface IPSECTunnelGetParams {
 
 export interface IPSECTunnelPSKGenerateParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export namespace IPSECTunnels {
