@@ -5,7 +5,6 @@ import { APIResource } from 'cloudflare/resource';
 import * as QueuesAPI from 'cloudflare/resources/queues/queues';
 import * as ConsumersAPI from 'cloudflare/resources/queues/consumers';
 import * as MessagesAPI from 'cloudflare/resources/queues/messages';
-import { SinglePage } from 'cloudflare/pagination';
 
 export class Queues extends APIResource {
   consumers: ConsumersAPI.Consumers = new ConsumersAPI.Consumers(this._client);
@@ -46,12 +45,13 @@ export class Queues extends APIResource {
   /**
    * Returns the queues owned by an account.
    */
-  list(
-    params: QueueListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<QueueListResponsesSinglePage, QueueListResponse> {
+  list(params: QueueListParams, options?: Core.RequestOptions): Core.APIPromise<QueueListResponse | null> {
     const { account_id } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/queues`, QueueListResponsesSinglePage, options);
+    return (
+      this._client.get(`/accounts/${account_id}/queues`, options) as Core.APIPromise<{
+        result: QueueListResponse | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -86,8 +86,6 @@ export class Queues extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
-
-export class QueueListResponsesSinglePage extends SinglePage<QueueListResponse> {}
 
 export interface Queue {
   consumers?: unknown;
@@ -147,22 +145,26 @@ export interface QueueUpdateResponse {
   queue_name?: string;
 }
 
-export interface QueueListResponse {
-  consumers?: unknown;
+export type QueueListResponse = Array<QueueListResponse.QueueListResponseItem>;
 
-  consumers_total_count?: unknown;
+export namespace QueueListResponse {
+  export interface QueueListResponseItem {
+    consumers?: unknown;
 
-  created_on?: unknown;
+    consumers_total_count?: unknown;
 
-  modified_on?: unknown;
+    created_on?: unknown;
 
-  producers?: unknown;
+    modified_on?: unknown;
 
-  producers_total_count?: unknown;
+    producers?: unknown;
 
-  queue_id?: string;
+    producers_total_count?: unknown;
 
-  queue_name?: string;
+    queue_id?: string;
+
+    queue_name?: string;
+  }
 }
 
 export type QueueDeleteResponse = unknown | Array<unknown> | string;
@@ -239,7 +241,6 @@ export namespace Queues {
   export import QueueListResponse = QueuesAPI.QueueListResponse;
   export import QueueDeleteResponse = QueuesAPI.QueueDeleteResponse;
   export import QueueGetResponse = QueuesAPI.QueueGetResponse;
-  export import QueueListResponsesSinglePage = QueuesAPI.QueueListResponsesSinglePage;
   export import QueueCreateParams = QueuesAPI.QueueCreateParams;
   export import QueueUpdateParams = QueuesAPI.QueueUpdateParams;
   export import QueueListParams = QueuesAPI.QueueListParams;
@@ -256,8 +257,6 @@ export namespace Queues {
   export import ConsumerGetParams = ConsumersAPI.ConsumerGetParams;
   export import Messages = MessagesAPI.Messages;
   export import QueueConsumer = MessagesAPI.QueueConsumer;
-  export import QueueConsumerCreated = MessagesAPI.QueueConsumerCreated;
-  export import QueueConsumerUpdated = MessagesAPI.QueueConsumerUpdated;
   export import MessageAckResponse = MessagesAPI.MessageAckResponse;
   export import MessagePullResponse = MessagesAPI.MessagePullResponse;
   export import MessageAckParams = MessagesAPI.MessageAckParams;

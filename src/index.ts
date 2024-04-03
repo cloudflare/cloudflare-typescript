@@ -417,6 +417,7 @@ export namespace Cloudflare {
   export import MembershipUpdateResponse = API.MembershipUpdateResponse;
   export import MembershipDeleteResponse = API.MembershipDeleteResponse;
   export import MembershipGetResponse = API.MembershipGetResponse;
+  export import MembershipsV4PagePaginationArray = API.MembershipsV4PagePaginationArray;
   export import MembershipUpdateParams = API.MembershipUpdateParams;
   export import MembershipListParams = API.MembershipListParams;
 
@@ -645,7 +646,6 @@ export namespace Cloudflare {
   export import QueueListResponse = API.QueueListResponse;
   export import QueueDeleteResponse = API.QueueDeleteResponse;
   export import QueueGetResponse = API.QueueGetResponse;
-  export import QueueListResponsesSinglePage = API.QueueListResponsesSinglePage;
   export import QueueCreateParams = API.QueueCreateParams;
   export import QueueUpdateParams = API.QueueUpdateParams;
   export import QueueListParams = API.QueueListParams;

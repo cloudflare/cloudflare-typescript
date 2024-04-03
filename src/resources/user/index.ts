@@ -8,6 +8,15 @@ export {
 } from './audit-logs';
 export { Billing } from './billing/index';
 export { Firewall } from './firewall/index';
+export {
+  Invite,
+  InviteListResponse,
+  InviteEditResponse,
+  InviteGetResponse,
+  InviteEditParams,
+  InviteListResponsesSinglePage,
+  Invites,
+} from './invites';
 export { LoadBalancers } from './load-balancers/index';
 export {
   Organization,
@@ -41,12 +50,3 @@ export {
   Tokens,
 } from './tokens/index';
 export { User, UserEditResponse, UserGetResponse, UserEditParams, UserResource } from './user';
-export {
-  UserInvite,
-  InviteListResponse,
-  InviteEditResponse,
-  InviteGetResponse,
-  InviteEditParams,
-  InviteListResponsesSinglePage,
-  Invites,
-} from './invites';
