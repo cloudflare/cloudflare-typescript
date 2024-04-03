@@ -62,54 +62,6 @@ export namespace QueueConsumer {
   }
 }
 
-export interface QueueConsumerCreated {
-  created_on?: unknown;
-
-  dead_letter_queue?: string;
-
-  environment?: unknown;
-
-  queue_name?: unknown;
-
-  script_name?: unknown;
-
-  settings?: QueueConsumerCreated.Settings;
-}
-
-export namespace QueueConsumerCreated {
-  export interface Settings {
-    batch_size?: number;
-
-    max_retries?: number;
-
-    max_wait_time_ms?: number;
-  }
-}
-
-export interface QueueConsumerUpdated {
-  created_on?: unknown;
-
-  dead_letter_queue?: string;
-
-  environment?: unknown;
-
-  queue_name?: unknown;
-
-  script_name?: unknown;
-
-  settings?: QueueConsumerUpdated.Settings;
-}
-
-export namespace QueueConsumerUpdated {
-  export interface Settings {
-    batch_size?: number;
-
-    max_retries?: number;
-
-    max_wait_time_ms?: number;
-  }
-}
-
 export interface MessageAckResponse {
   /**
    * The number of messages that were succesfully acknowledged
@@ -201,8 +153,6 @@ export interface MessagePullParams {
 
 export namespace Messages {
   export import QueueConsumer = MessagesAPI.QueueConsumer;
-  export import QueueConsumerCreated = MessagesAPI.QueueConsumerCreated;
-  export import QueueConsumerUpdated = MessagesAPI.QueueConsumerUpdated;
   export import MessageAckResponse = MessagesAPI.MessageAckResponse;
   export import MessagePullResponse = MessagesAPI.MessagePullResponse;
   export import MessageAckParams = MessagesAPI.MessageAckParams;

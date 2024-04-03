@@ -25,13 +25,10 @@ export {
   QueueListParams,
   QueueDeleteParams,
   QueueGetParams,
-  QueueListResponsesSinglePage,
   Queues,
 } from './queues';
 export {
   QueueConsumer,
-  QueueConsumerCreated,
-  QueueConsumerUpdated,
   MessageAckResponse,
   MessagePullResponse,
   MessageAckParams,

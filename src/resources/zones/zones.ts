@@ -397,8 +397,7 @@ export namespace Zones {
   export import ActivationCheckTriggerResponse = ActivationCheckAPI.ActivationCheckTriggerResponse;
   export import ActivationCheckTriggerParams = ActivationCheckAPI.ActivationCheckTriggerParams;
   export import DNSSettings = DNSSettingsAPI.DNSSettings;
-  export import DNSSettingEditResponse = DNSSettingsAPI.DNSSettingEditResponse;
-  export import DNSSettingGetResponse = DNSSettingsAPI.DNSSettingGetResponse;
+  export import DNSSetting = DNSSettingsAPI.DNSSetting;
   export import DNSSettingEditParams = DNSSettingsAPI.DNSSettingEditParams;
   export import DNSSettingGetParams = DNSSettingsAPI.DNSSettingGetParams;
   export import Settings = SettingsAPI.Settings;
