@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as MembersAPI from 'cloudflare/resources/accounts/members';
+import * as AccountsAPI from 'cloudflare/resources/accounts/accounts';
 import * as RolesAPI from 'cloudflare/resources/accounts/roles';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
@@ -10,11 +11,11 @@ export class Members extends APIResource {
   /**
    * Add a user to the list of members for this account.
    */
-  create(params: MemberCreateParams, options?: Core.RequestOptions): Core.APIPromise<AccountMemberWithID> {
+  create(params: MemberCreateParams, options?: Core.RequestOptions): Core.APIPromise<MemberWithCode> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/members`, { body, ...options }) as Core.APIPromise<{
-        result: AccountMemberWithID;
+        result: MemberWithCode;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -26,13 +27,13 @@ export class Members extends APIResource {
     memberId: string,
     params: MemberUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccountMember> {
+  ): Core.APIPromise<Member> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/members/${memberId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: AccountMember }>
+      }) as Core.APIPromise<{ result: Member }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -70,15 +71,11 @@ export class Members extends APIResource {
   /**
    * Get information about a specific member of an account.
    */
-  get(
-    memberId: string,
-    params: MemberGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AccountMember> {
+  get(memberId: string, params: MemberGetParams, options?: Core.RequestOptions): Core.APIPromise<Member> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/members/${memberId}`, options) as Core.APIPromise<{
-        result: AccountMember;
+        result: Member;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -86,7 +83,9 @@ export class Members extends APIResource {
 
 export class MemberListResponsesV4PagePaginationArray extends V4PagePaginationArray<MemberListResponse> {}
 
-export interface AccountMember {
+export class MemberRolesV4PagePaginationArray extends V4PagePaginationArray<MemberRole> {}
+
+export interface Member {
   /**
    * Membership identifier tag.
    */
@@ -95,14 +94,14 @@ export interface AccountMember {
   /**
    * Roles assigned to this member.
    */
-  roles: Array<AccountMember.Role>;
+  roles: Array<Member.Role>;
 
   status: unknown;
 
-  user: AccountMember.User;
+  user: Member.User;
 }
 
-export namespace AccountMember {
+export namespace Member {
   export interface Role {
     /**
      * Role identifier tag.
@@ -119,35 +118,7 @@ export namespace AccountMember {
      */
     name: string;
 
-    permissions: Role.Permissions;
-  }
-
-  export namespace Role {
-    export interface Permissions {
-      analytics?: MembersAPI.RolePermissionGrant;
-
-      billing?: MembersAPI.RolePermissionGrant;
-
-      cache_purge?: MembersAPI.RolePermissionGrant;
-
-      dns?: MembersAPI.RolePermissionGrant;
-
-      dns_records?: MembersAPI.RolePermissionGrant;
-
-      lb?: MembersAPI.RolePermissionGrant;
-
-      logs?: MembersAPI.RolePermissionGrant;
-
-      organization?: MembersAPI.RolePermissionGrant;
-
-      ssl?: MembersAPI.RolePermissionGrant;
-
-      waf?: MembersAPI.RolePermissionGrant;
-
-      zone_settings?: MembersAPI.RolePermissionGrant;
-
-      zones?: MembersAPI.RolePermissionGrant;
-    }
+    permissions: MembersAPI.MemberPermission;
   }
 
   export interface User {
@@ -179,7 +150,68 @@ export namespace AccountMember {
   }
 }
 
-export interface AccountMemberWithID {
+export interface MemberPermission {
+  analytics?: RolesAPI.PermissionGrant;
+
+  billing?: RolesAPI.PermissionGrant;
+
+  cache_purge?: RolesAPI.PermissionGrant;
+
+  dns?: RolesAPI.PermissionGrant;
+
+  dns_records?: RolesAPI.PermissionGrant;
+
+  lb?: RolesAPI.PermissionGrant;
+
+  logs?: RolesAPI.PermissionGrant;
+
+  organization?: RolesAPI.PermissionGrant;
+
+  ssl?: RolesAPI.PermissionGrant;
+
+  waf?: RolesAPI.PermissionGrant;
+
+  zone_settings?: RolesAPI.PermissionGrant;
+
+  zones?: RolesAPI.PermissionGrant;
+}
+
+export interface MemberRole {
+  /**
+   * Membership identifier tag.
+   */
+  id?: string;
+
+  account?: AccountsAPI.Account;
+
+  /**
+   * Enterprise only. Indicates whether or not API access is enabled specifically for
+   * this user on a given account.
+   */
+  api_access_enabled?: boolean | null;
+
+  /**
+   * The unique activation code for the account membership.
+   */
+  code?: string;
+
+  /**
+   * All access permissions for the user at the account.
+   */
+  permissions?: MemberPermission;
+
+  /**
+   * List of role names for the user at the account.
+   */
+  roles?: Array<string>;
+
+  /**
+   * Status of this membership.
+   */
+  status?: 'accepted' | 'pending' | 'rejected';
+}
+
+export interface MemberWithCode {
   /**
    * Membership identifier tag.
    */
@@ -188,11 +220,11 @@ export interface AccountMemberWithID {
   /**
    * Roles assigned to this member.
    */
-  roles: Array<AccountMemberWithID.Role>;
+  roles: Array<MemberWithCode.Role>;
 
   status: unknown;
 
-  user: AccountMemberWithID.User;
+  user: MemberWithCode.User;
 
   /**
    * The unique activation code for the account membership.
@@ -200,7 +232,7 @@ export interface AccountMemberWithID {
   code?: string;
 }
 
-export namespace AccountMemberWithID {
+export namespace MemberWithCode {
   export interface Role {
     /**
      * Role identifier tag.
@@ -217,35 +249,7 @@ export namespace AccountMemberWithID {
      */
     name: string;
 
-    permissions: Role.Permissions;
-  }
-
-  export namespace Role {
-    export interface Permissions {
-      analytics?: MembersAPI.RolePermissionGrant;
-
-      billing?: MembersAPI.RolePermissionGrant;
-
-      cache_purge?: MembersAPI.RolePermissionGrant;
-
-      dns?: MembersAPI.RolePermissionGrant;
-
-      dns_records?: MembersAPI.RolePermissionGrant;
-
-      lb?: MembersAPI.RolePermissionGrant;
-
-      logs?: MembersAPI.RolePermissionGrant;
-
-      organization?: MembersAPI.RolePermissionGrant;
-
-      ssl?: MembersAPI.RolePermissionGrant;
-
-      waf?: MembersAPI.RolePermissionGrant;
-
-      zone_settings?: MembersAPI.RolePermissionGrant;
-
-      zones?: MembersAPI.RolePermissionGrant;
-    }
+    permissions: MembersAPI.MemberPermission;
   }
 
   export interface User {
@@ -275,12 +279,6 @@ export namespace AccountMemberWithID {
      */
     two_factor_authentication_enabled?: boolean;
   }
-}
-
-export interface RolePermissionGrant {
-  read?: boolean;
-
-  write?: boolean;
 }
 
 export interface MemberListResponse {
@@ -391,9 +389,10 @@ export interface MemberGetParams {
 }
 
 export namespace Members {
-  export import AccountMember = MembersAPI.AccountMember;
-  export import AccountMemberWithID = MembersAPI.AccountMemberWithID;
-  export import RolePermissionGrant = MembersAPI.RolePermissionGrant;
+  export import Member = MembersAPI.Member;
+  export import MemberPermission = MembersAPI.MemberPermission;
+  export import MemberRole = MembersAPI.MemberRole;
+  export import MemberWithCode = MembersAPI.MemberWithCode;
   export import MemberListResponse = MembersAPI.MemberListResponse;
   export import MemberDeleteResponse = MembersAPI.MemberDeleteResponse;
   export import MemberListResponsesV4PagePaginationArray = MembersAPI.MemberListResponsesV4PagePaginationArray;

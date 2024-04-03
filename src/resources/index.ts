@@ -205,7 +205,6 @@ export {
   MembershipGetResponse,
   MembershipUpdateParams,
   MembershipListParams,
-  MembershipsV4PagePaginationArray,
   Memberships,
 } from './memberships';
 export {

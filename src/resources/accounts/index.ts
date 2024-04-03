@@ -12,9 +12,10 @@ export {
   Accounts,
 } from './accounts';
 export {
-  AccountMember,
-  AccountMemberWithID,
-  RolePermissionGrant,
+  Member,
+  MemberPermission,
+  MemberRole,
+  MemberWithCode,
   MemberListResponse,
   MemberDeleteResponse,
   MemberCreateParams,
@@ -22,7 +23,16 @@ export {
   MemberListParams,
   MemberDeleteParams,
   MemberGetParams,
+  MemberRolesV4PagePaginationArray,
   MemberListResponsesV4PagePaginationArray,
   Members,
 } from './members';
-export { Role, RoleGetResponse, RoleListParams, RoleGetParams, RolesSinglePage, Roles } from './roles';
+export {
+  PermissionGrant,
+  Role,
+  RoleGetResponse,
+  RoleListParams,
+  RoleGetParams,
+  RolesSinglePage,
+  Roles,
+} from './roles';
