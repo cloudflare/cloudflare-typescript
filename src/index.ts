@@ -646,6 +646,7 @@ export namespace Cloudflare {
   export import QueueListResponse = API.QueueListResponse;
   export import QueueDeleteResponse = API.QueueDeleteResponse;
   export import QueueGetResponse = API.QueueGetResponse;
+  export import QueueListResponsesSinglePage = API.QueueListResponsesSinglePage;
   export import QueueCreateParams = API.QueueCreateParams;
   export import QueueUpdateParams = API.QueueUpdateParams;
   export import QueueListParams = API.QueueListParams;

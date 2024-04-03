@@ -25,6 +25,7 @@ export {
   QueueListParams,
   QueueDeleteParams,
   QueueGetParams,
+  QueueListResponsesSinglePage,
   Queues,
 } from './queues';
 export {
