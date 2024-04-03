@@ -11,13 +11,13 @@ export class HostnameAssociations extends APIResource {
   update(
     params: HostnameAssociationUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TLSHostnameAssociation> {
+  ): Core.APIPromise<HostnameAssociationUpdateResponse> {
     const { zone_id, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/certificate_authorities/hostname_associations`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: TLSHostnameAssociation }>
+      }) as Core.APIPromise<{ result: HostnameAssociationUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -27,13 +27,13 @@ export class HostnameAssociations extends APIResource {
   get(
     params: HostnameAssociationGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TLSHostnameAssociation> {
+  ): Core.APIPromise<HostnameAssociationGetResponse> {
     const { zone_id, ...query } = params;
     return (
       this._client.get(`/zones/${zone_id}/certificate_authorities/hostname_associations`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: TLSHostnameAssociation }>
+      }) as Core.APIPromise<{ result: HostnameAssociationGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -47,6 +47,14 @@ export interface TLSHostnameAssociation {
    * to your active Cloudflare Managed CA.
    */
   mtls_certificate_id?: string;
+}
+
+export interface HostnameAssociationUpdateResponse {
+  hostnames?: Array<string>;
+}
+
+export interface HostnameAssociationGetResponse {
+  hostnames?: Array<string>;
 }
 
 export interface HostnameAssociationUpdateParams {
@@ -85,6 +93,8 @@ export interface HostnameAssociationGetParams {
 
 export namespace HostnameAssociations {
   export import TLSHostnameAssociation = HostnameAssociationsAPI.TLSHostnameAssociation;
+  export import HostnameAssociationUpdateResponse = HostnameAssociationsAPI.HostnameAssociationUpdateResponse;
+  export import HostnameAssociationGetResponse = HostnameAssociationsAPI.HostnameAssociationGetResponse;
   export import HostnameAssociationUpdateParams = HostnameAssociationsAPI.HostnameAssociationUpdateParams;
   export import HostnameAssociationGetParams = HostnameAssociationsAPI.HostnameAssociationGetParams;
 }
