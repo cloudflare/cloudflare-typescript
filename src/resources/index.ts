@@ -205,6 +205,7 @@ export {
   MembershipGetResponse,
   MembershipUpdateParams,
   MembershipListParams,
+  MembershipsV4PagePaginationArray,
   Memberships,
 } from './memberships';
 export {
@@ -277,7 +278,6 @@ export {
   QueueListParams,
   QueueDeleteParams,
   QueueGetParams,
-  QueueListResponsesSinglePage,
   Queues,
 } from './queues/queues';
 export { R2 } from './r2/r2';

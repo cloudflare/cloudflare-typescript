@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as MembersAPI from 'cloudflare/resources/accounts/members';
-import * as AccountsAPI from 'cloudflare/resources/accounts/accounts';
 import * as RolesAPI from 'cloudflare/resources/accounts/roles';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
@@ -83,8 +82,6 @@ export class Members extends APIResource {
 
 export class MemberListResponsesV4PagePaginationArray extends V4PagePaginationArray<MemberListResponse> {}
 
-export class MemberRolesV4PagePaginationArray extends V4PagePaginationArray<MemberRole> {}
-
 export interface Member {
   /**
    * Membership identifier tag.
@@ -94,7 +91,7 @@ export interface Member {
   /**
    * Roles assigned to this member.
    */
-  roles: Array<Member.Role>;
+  roles: Array<RolesAPI.Role>;
 
   status: unknown;
 
@@ -102,25 +99,6 @@ export interface Member {
 }
 
 export namespace Member {
-  export interface Role {
-    /**
-     * Role identifier tag.
-     */
-    id: string;
-
-    /**
-     * Description of role's permissions.
-     */
-    description: string;
-
-    /**
-     * Role name.
-     */
-    name: string;
-
-    permissions: MembersAPI.MemberPermission;
-  }
-
   export interface User {
     /**
      * The contact email address of the user.
@@ -176,41 +154,6 @@ export interface MemberPermission {
   zones?: RolesAPI.PermissionGrant;
 }
 
-export interface MemberRole {
-  /**
-   * Membership identifier tag.
-   */
-  id?: string;
-
-  account?: AccountsAPI.Account;
-
-  /**
-   * Enterprise only. Indicates whether or not API access is enabled specifically for
-   * this user on a given account.
-   */
-  api_access_enabled?: boolean | null;
-
-  /**
-   * The unique activation code for the account membership.
-   */
-  code?: string;
-
-  /**
-   * All access permissions for the user at the account.
-   */
-  permissions?: MemberPermission;
-
-  /**
-   * List of role names for the user at the account.
-   */
-  roles?: Array<string>;
-
-  /**
-   * Status of this membership.
-   */
-  status?: 'accepted' | 'pending' | 'rejected';
-}
-
 export interface MemberWithCode {
   /**
    * Membership identifier tag.
@@ -220,7 +163,7 @@ export interface MemberWithCode {
   /**
    * Roles assigned to this member.
    */
-  roles: Array<MemberWithCode.Role>;
+  roles: Array<RolesAPI.Role>;
 
   status: unknown;
 
@@ -233,25 +176,6 @@ export interface MemberWithCode {
 }
 
 export namespace MemberWithCode {
-  export interface Role {
-    /**
-     * Role identifier tag.
-     */
-    id: string;
-
-    /**
-     * Description of role's permissions.
-     */
-    description: string;
-
-    /**
-     * Role name.
-     */
-    name: string;
-
-    permissions: MembersAPI.MemberPermission;
-  }
-
   export interface User {
     /**
      * The contact email address of the user.
@@ -300,12 +224,36 @@ export interface MemberListResponse {
   /**
    * Roles assigned to this Member.
    */
-  roles: Array<RolesAPI.Role>;
+  roles: Array<MemberListResponse.Role>;
 
   /**
    * A member's status in the organization.
    */
   status: 'accepted' | 'invited';
+}
+
+export namespace MemberListResponse {
+  export interface Role {
+    /**
+     * Role identifier tag.
+     */
+    id: string;
+
+    /**
+     * Description of role's permissions.
+     */
+    description: string;
+
+    /**
+     * Role Name.
+     */
+    name: string;
+
+    /**
+     * Access permissions for this User.
+     */
+    permissions: Array<string>;
+  }
 }
 
 export interface MemberDeleteResponse {
@@ -346,16 +294,7 @@ export interface MemberUpdateParams {
   /**
    * Body param: Roles assigned to this member.
    */
-  roles: Array<MemberUpdateParams.Role>;
-}
-
-export namespace MemberUpdateParams {
-  export interface Role {
-    /**
-     * Role identifier tag.
-     */
-    id: string;
-  }
+  roles: Array<RolesAPI.Role>;
 }
 
 export interface MemberListParams extends V4PagePaginationArrayParams {
@@ -391,7 +330,6 @@ export interface MemberGetParams {
 export namespace Members {
   export import Member = MembersAPI.Member;
   export import MemberPermission = MembersAPI.MemberPermission;
-  export import MemberRole = MembersAPI.MemberRole;
   export import MemberWithCode = MembersAPI.MemberWithCode;
   export import MemberListResponse = MembersAPI.MemberListResponse;
   export import MemberDeleteResponse = MembersAPI.MemberDeleteResponse;

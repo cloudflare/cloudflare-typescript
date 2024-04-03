@@ -14,7 +14,6 @@ export {
 export {
   Member,
   MemberPermission,
-  MemberRole,
   MemberWithCode,
   MemberListResponse,
   MemberDeleteResponse,
@@ -23,16 +22,16 @@ export {
   MemberListParams,
   MemberDeleteParams,
   MemberGetParams,
-  MemberRolesV4PagePaginationArray,
   MemberListResponsesV4PagePaginationArray,
   Members,
 } from './members';
 export {
   PermissionGrant,
   Role,
+  RoleListResponse,
   RoleGetResponse,
   RoleListParams,
   RoleGetParams,
-  RolesSinglePage,
+  RoleListResponsesSinglePage,
   Roles,
 } from './roles';

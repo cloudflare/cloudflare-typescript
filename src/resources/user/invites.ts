@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as InvitesAPI from 'cloudflare/resources/user/invites';
-import * as RolesAPI from 'cloudflare/resources/accounts/roles';
 import { SinglePage } from 'cloudflare/pagination';
 
 export class Invites extends APIResource {
@@ -41,7 +40,7 @@ export class Invites extends APIResource {
 
 export class InviteListResponsesSinglePage extends SinglePage<InviteListResponse> {}
 
-export interface UserInvite {
+export interface Invite {
   /**
    * ID of the user to add to the organization.
    */
@@ -85,12 +84,36 @@ export interface UserInvite {
   /**
    * Roles to be assigned to this user.
    */
-  roles?: Array<RolesAPI.Role>;
+  roles?: Array<Invite.Role>;
 
   /**
    * Current status of the invitation.
    */
   status?: 'pending' | 'accepted' | 'rejected' | 'expired';
+}
+
+export namespace Invite {
+  export interface Role {
+    /**
+     * Role identifier tag.
+     */
+    id: string;
+
+    /**
+     * Description of role's permissions.
+     */
+    description: string;
+
+    /**
+     * Role Name.
+     */
+    name: string;
+
+    /**
+     * Access permissions for this User.
+     */
+    permissions: Array<string>;
+  }
 }
 
 export interface InviteListResponse {
@@ -137,12 +160,36 @@ export interface InviteListResponse {
   /**
    * Roles to be assigned to this user.
    */
-  roles?: Array<RolesAPI.Role>;
+  roles?: Array<InviteListResponse.Role>;
 
   /**
    * Current status of the invitation.
    */
   status?: 'pending' | 'accepted' | 'rejected' | 'expired';
+}
+
+export namespace InviteListResponse {
+  export interface Role {
+    /**
+     * Role identifier tag.
+     */
+    id: string;
+
+    /**
+     * Description of role's permissions.
+     */
+    description: string;
+
+    /**
+     * Role Name.
+     */
+    name: string;
+
+    /**
+     * Access permissions for this User.
+     */
+    permissions: Array<string>;
+  }
 }
 
 export type InviteEditResponse = unknown | string | null;
@@ -157,7 +204,7 @@ export interface InviteEditParams {
 }
 
 export namespace Invites {
-  export import UserInvite = InvitesAPI.UserInvite;
+  export import Invite = InvitesAPI.Invite;
   export import InviteListResponse = InvitesAPI.InviteListResponse;
   export import InviteEditResponse = InvitesAPI.InviteEditResponse;
   export import InviteGetResponse = InvitesAPI.InviteGetResponse;

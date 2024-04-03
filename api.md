@@ -25,7 +25,6 @@ Types:
 
 - <code><a href="./src/resources/accounts/members.ts">Member</a></code>
 - <code><a href="./src/resources/accounts/members.ts">MemberPermission</a></code>
-- <code><a href="./src/resources/accounts/members.ts">MemberRole</a></code>
 - <code><a href="./src/resources/accounts/members.ts">MemberWithCode</a></code>
 - <code><a href="./src/resources/accounts/members.ts">MemberListResponse</a></code>
 - <code><a href="./src/resources/accounts/members.ts">MemberDeleteResponse</a></code>
@@ -44,11 +43,12 @@ Types:
 
 - <code><a href="./src/resources/accounts/roles.ts">PermissionGrant</a></code>
 - <code><a href="./src/resources/accounts/roles.ts">Role</a></code>
+- <code><a href="./src/resources/accounts/roles.ts">RoleListResponse</a></code>
 - <code><a href="./src/resources/accounts/roles.ts">RoleGetResponse</a></code>
 
 Methods:
 
-- <code title="get /accounts/{account_id}/roles">client.accounts.roles.<a href="./src/resources/accounts/roles.ts">list</a>({ ...params }) -> RolesSinglePage</code>
+- <code title="get /accounts/{account_id}/roles">client.accounts.roles.<a href="./src/resources/accounts/roles.ts">list</a>({ ...params }) -> RoleListResponsesSinglePage</code>
 - <code title="get /accounts/{account_id}/roles/{role_id}">client.accounts.roles.<a href="./src/resources/accounts/roles.ts">get</a>(roleId, { ...params }) -> RoleGetResponse</code>
 
 # OriginCACertificates
@@ -91,7 +91,7 @@ Types:
 Methods:
 
 - <code title="put /memberships/{membership_id}">client.memberships.<a href="./src/resources/memberships.ts">update</a>(membershipId, { ...params }) -> MembershipUpdateResponse</code>
-- <code title="get /memberships">client.memberships.<a href="./src/resources/memberships.ts">list</a>({ ...params }) -> MemberRolesV4PagePaginationArray</code>
+- <code title="get /memberships">client.memberships.<a href="./src/resources/memberships.ts">list</a>({ ...params }) -> MembershipsV4PagePaginationArray</code>
 - <code title="delete /memberships/{membership_id}">client.memberships.<a href="./src/resources/memberships.ts">delete</a>(membershipId) -> MembershipDeleteResponse</code>
 - <code title="get /memberships/{membership_id}">client.memberships.<a href="./src/resources/memberships.ts">get</a>(membershipId) -> MembershipGetResponse</code>
 
@@ -161,7 +161,7 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/user/invites.ts">UserInvite</a></code>
+- <code><a href="./src/resources/user/invites.ts">Invite</a></code>
 - <code><a href="./src/resources/user/invites.ts">InviteListResponse</a></code>
 - <code><a href="./src/resources/user/invites.ts">InviteEditResponse</a></code>
 - <code><a href="./src/resources/user/invites.ts">InviteGetResponse</a></code>
@@ -338,13 +338,12 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/zones/dns-settings.ts">DNSSettingEditResponse</a></code>
-- <code><a href="./src/resources/zones/dns-settings.ts">DNSSettingGetResponse</a></code>
+- <code><a href="./src/resources/zones/dns-settings.ts">DNSSetting</a></code>
 
 Methods:
 
-- <code title="patch /zones/{zone_id}/dns_settings">client.zones.dnsSettings.<a href="./src/resources/zones/dns-settings.ts">edit</a>({ ...params }) -> DNSSettingEditResponse</code>
-- <code title="get /zones/{zone_id}/dns_settings">client.zones.dnsSettings.<a href="./src/resources/zones/dns-settings.ts">get</a>({ ...params }) -> DNSSettingGetResponse</code>
+- <code title="patch /zones/{zone_id}/dns_settings">client.zones.dnsSettings.<a href="./src/resources/zones/dns-settings.ts">edit</a>({ ...params }) -> DNSSetting</code>
+- <code title="get /zones/{zone_id}/dns_settings">client.zones.dnsSettings.<a href="./src/resources/zones/dns-settings.ts">get</a>({ ...params }) -> DNSSetting</code>
 
 ## Settings
 
@@ -2570,7 +2569,7 @@ Methods:
 
 - <code title="post /accounts/{account_id}/queues">client.queues.<a href="./src/resources/queues/queues.ts">create</a>({ ...params }) -> QueueCreateResponse | null</code>
 - <code title="put /accounts/{account_id}/queues/{queue_id}">client.queues.<a href="./src/resources/queues/queues.ts">update</a>(queueId, { ...params }) -> QueueUpdateResponse | null</code>
-- <code title="get /accounts/{account_id}/queues">client.queues.<a href="./src/resources/queues/queues.ts">list</a>({ ...params }) -> QueueListResponsesSinglePage</code>
+- <code title="get /accounts/{account_id}/queues">client.queues.<a href="./src/resources/queues/queues.ts">list</a>({ ...params }) -> QueueListResponse | null</code>
 - <code title="delete /accounts/{account_id}/queues/{queue_id}">client.queues.<a href="./src/resources/queues/queues.ts">delete</a>(queueId, { ...params }) -> QueueDeleteResponse | null</code>
 - <code title="get /accounts/{account_id}/queues/{queue_id}">client.queues.<a href="./src/resources/queues/queues.ts">get</a>(queueId, { ...params }) -> QueueGetResponse | null</code>
 
@@ -2595,8 +2594,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/queues/messages.ts">QueueConsumer</a></code>
-- <code><a href="./src/resources/queues/messages.ts">QueueConsumerCreated</a></code>
-- <code><a href="./src/resources/queues/messages.ts">QueueConsumerUpdated</a></code>
 - <code><a href="./src/resources/queues/messages.ts">MessageAckResponse</a></code>
 - <code><a href="./src/resources/queues/messages.ts">MessagePullResponse</a></code>
 
