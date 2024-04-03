@@ -29,51 +29,38 @@ describe('resource settings', () => {
     const response = await cloudflare.workers.scripts.settings.edit('this-is_my_script-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       settings: {
-        errors: [
-          { code: 1000, message: 'string' },
-          { code: 1000, message: 'string' },
-          { code: 1000, message: 'string' },
+        bindings: [{ type: 'kv_namespace' }, { type: 'kv_namespace' }, { type: 'kv_namespace' }],
+        compatibility_date: '2022-04-05',
+        compatibility_flags: [
+          'formdata_parser_supports_files',
+          'formdata_parser_supports_files',
+          'formdata_parser_supports_files',
         ],
-        messages: [
-          { code: 1000, message: 'string' },
-          { code: 1000, message: 'string' },
-          { code: 1000, message: 'string' },
-        ],
-        result: {
-          bindings: [{ type: 'kv_namespace' }, { type: 'kv_namespace' }, { type: 'kv_namespace' }],
-          compatibility_date: '2022-04-05',
-          compatibility_flags: [
-            'formdata_parser_supports_files',
-            'formdata_parser_supports_files',
-            'formdata_parser_supports_files',
+        logpush: false,
+        migrations: {
+          new_tag: 'v2',
+          old_tag: 'v1',
+          deleted_classes: ['string', 'string', 'string'],
+          new_classes: ['string', 'string', 'string'],
+          renamed_classes: [
+            { from: 'string', to: 'string' },
+            { from: 'string', to: 'string' },
+            { from: 'string', to: 'string' },
           ],
-          logpush: false,
-          migrations: {
-            new_tag: 'v2',
-            old_tag: 'v1',
-            deleted_classes: ['string', 'string', 'string'],
-            new_classes: ['string', 'string', 'string'],
-            renamed_classes: [
-              { from: 'string', to: 'string' },
-              { from: 'string', to: 'string' },
-              { from: 'string', to: 'string' },
-            ],
-            transferred_classes: [
-              { from: 'string', from_script: 'string', to: 'string' },
-              { from: 'string', from_script: 'string', to: 'string' },
-              { from: 'string', from_script: 'string', to: 'string' },
-            ],
-          },
-          placement: { mode: 'smart' },
-          tags: ['my-tag', 'my-tag', 'my-tag'],
-          tail_consumers: [
-            { environment: 'production', namespace: 'my-namespace', service: 'my-log-consumer' },
-            { environment: 'production', namespace: 'my-namespace', service: 'my-log-consumer' },
-            { environment: 'production', namespace: 'my-namespace', service: 'my-log-consumer' },
+          transferred_classes: [
+            { from: 'string', from_script: 'string', to: 'string' },
+            { from: 'string', from_script: 'string', to: 'string' },
+            { from: 'string', from_script: 'string', to: 'string' },
           ],
-          usage_model: 'unbound',
         },
-        success: true,
+        placement: { mode: 'smart' },
+        tags: ['my-tag', 'my-tag', 'my-tag'],
+        tail_consumers: [
+          { environment: 'production', namespace: 'my-namespace', service: 'my-log-consumer' },
+          { environment: 'production', namespace: 'my-namespace', service: 'my-log-consumer' },
+          { environment: 'production', namespace: 'my-namespace', service: 'my-log-consumer' },
+        ],
+        usage_model: 'unbound',
       },
     });
   });
