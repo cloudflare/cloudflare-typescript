@@ -7,7 +7,7 @@ import { multipartFormRequestOptions } from 'cloudflare/core';
 
 export class Settings extends APIResource {
   /**
-   * Patch script metadata or config, such as bindings or usage model
+   * Patch metadata or config, such as bindings or usage model
    */
   edit(
     scriptName: string,
@@ -24,7 +24,7 @@ export class Settings extends APIResource {
   }
 
   /**
-   * Get script metadata and config, such as bindings or usage model
+   * Get metadata and config, such as bindings or usage model
    */
   get(
     scriptName: string,
@@ -853,242 +853,285 @@ export interface SettingEditParams {
 
 export namespace SettingEditParams {
   export interface Settings {
-    errors: Array<Settings.Error>;
-
-    messages: Array<Settings.Message>;
-
-    result: Settings.Result;
+    /**
+     * List of bindings attached to this Worker
+     */
+    bindings?: Array<
+      | Settings.WorkersKVNamespaceBinding
+      | Settings.WorkersServiceBinding
+      | Settings.WorkersDoBinding
+      | Settings.WorkersR2Binding
+      | Settings.WorkersQueueBinding
+      | Settings.WorkersD1Binding
+      | Settings.WorkersDispatchNamespaceBinding
+      | Settings.WorkersMTLSCERTBinding
+    >;
 
     /**
-     * Whether the API call was successful
+     * Opt your Worker into changes after this date
      */
-    success: true;
+    compatibility_date?: string;
+
+    /**
+     * Opt your Worker into specific changes
+     */
+    compatibility_flags?: Array<string>;
+
+    /**
+     * Whether Logpush is turned on for the Worker.
+     */
+    logpush?: boolean;
+
+    /**
+     * Migrations to apply for Durable Objects associated with this Worker.
+     */
+    migrations?: Settings.WorkersSingleStepMigrations | Settings.WorkersSteppedMigrations;
+
+    placement?: Settings.Placement;
+
+    /**
+     * Tags to help you manage your Workers
+     */
+    tags?: Array<string>;
+
+    /**
+     * List of Workers that will consume logs from the attached Worker.
+     */
+    tail_consumers?: Array<Settings.TailConsumer>;
+
+    /**
+     * Specifies the usage model for the Worker (e.g. 'bundled' or 'unbound').
+     */
+    usage_model?: string;
   }
 
   export namespace Settings {
-    export interface Error {
-      code: number;
-
-      message: string;
+    export interface WorkersKVNamespaceBinding {
+      /**
+       * The class of resource that the binding provides.
+       */
+      type: 'kv_namespace';
     }
 
-    export interface Message {
-      code: number;
+    export interface WorkersServiceBinding {
+      /**
+       * Optional environment if the Worker utilizes one.
+       */
+      environment: string;
 
-      message: string;
+      /**
+       * Name of Worker to bind to
+       */
+      service: string;
+
+      /**
+       * The class of resource that the binding provides.
+       */
+      type: 'service';
     }
 
-    export interface Result {
+    export interface WorkersDoBinding {
       /**
-       * List of bindings attached to this Worker
+       * The exported class name of the Durable Object
        */
-      bindings?: Array<
-        | Result.WorkersKVNamespaceBinding
-        | Result.WorkersServiceBinding
-        | Result.WorkersDoBinding
-        | Result.WorkersR2Binding
-        | Result.WorkersQueueBinding
-        | Result.WorkersD1Binding
-        | Result.WorkersDispatchNamespaceBinding
-        | Result.WorkersMTLSCERTBinding
-      >;
+      class_name: string;
 
       /**
-       * Opt your Worker into changes after this date
+       * The class of resource that the binding provides.
        */
-      compatibility_date?: string;
+      type: 'durable_object_namespace';
 
       /**
-       * Opt your Worker into specific changes
+       * The environment of the script_name to bind to
        */
-      compatibility_flags?: Array<string>;
+      environment?: string;
 
       /**
-       * Whether Logpush is turned on for the Worker.
+       * The script where the Durable Object is defined, if it is external to this Worker
        */
-      logpush?: boolean;
-
-      /**
-       * Migrations to apply for Durable Objects associated with this Worker.
-       */
-      migrations?: Result.WorkersSingleStepMigrations | Result.WorkersSteppedMigrations;
-
-      placement?: Result.Placement;
-
-      /**
-       * Tags to help you manage your Workers
-       */
-      tags?: Array<string>;
-
-      /**
-       * List of Workers that will consume logs from the attached Worker.
-       */
-      tail_consumers?: Array<Result.TailConsumer>;
-
-      /**
-       * Specifies the usage model for the Worker (e.g. 'bundled' or 'unbound').
-       */
-      usage_model?: string;
+      script_name?: string;
     }
 
-    export namespace Result {
-      export interface WorkersKVNamespaceBinding {
-        /**
-         * The class of resource that the binding provides.
-         */
-        type: 'kv_namespace';
-      }
+    export interface WorkersR2Binding {
+      /**
+       * R2 bucket to bind to
+       */
+      bucket_name: string;
 
-      export interface WorkersServiceBinding {
-        /**
-         * Optional environment if the Worker utilizes one.
-         */
-        environment: string;
+      /**
+       * The class of resource that the binding provides.
+       */
+      type: 'r2_bucket';
+    }
 
-        /**
-         * Name of Worker to bind to
-         */
-        service: string;
+    export interface WorkersQueueBinding {
+      /**
+       * Name of the Queue to bind to
+       */
+      queue_name: string;
 
-        /**
-         * The class of resource that the binding provides.
-         */
-        type: 'service';
-      }
+      /**
+       * The class of resource that the binding provides.
+       */
+      type: 'queue';
+    }
 
-      export interface WorkersDoBinding {
-        /**
-         * The exported class name of the Durable Object
-         */
-        class_name: string;
+    export interface WorkersD1Binding {
+      /**
+       * ID of the D1 database to bind to
+       */
+      id: string;
 
-        /**
-         * The class of resource that the binding provides.
-         */
-        type: 'durable_object_namespace';
+      /**
+       * The name of the D1 database associated with the 'id' provided.
+       */
+      name: string;
 
-        /**
-         * The environment of the script_name to bind to
-         */
-        environment?: string;
+      /**
+       * The class of resource that the binding provides.
+       */
+      type: 'd1';
+    }
 
-        /**
-         * The script where the Durable Object is defined, if it is external to this Worker
-         */
-        script_name?: string;
-      }
+    export interface WorkersDispatchNamespaceBinding {
+      /**
+       * Namespace to bind to
+       */
+      namespace: string;
 
-      export interface WorkersR2Binding {
-        /**
-         * R2 bucket to bind to
-         */
-        bucket_name: string;
+      /**
+       * The class of resource that the binding provides.
+       */
+      type: 'dispatch_namespace';
 
-        /**
-         * The class of resource that the binding provides.
-         */
-        type: 'r2_bucket';
-      }
+      /**
+       * Outbound worker
+       */
+      outbound?: WorkersDispatchNamespaceBinding.Outbound;
+    }
 
-      export interface WorkersQueueBinding {
+    export namespace WorkersDispatchNamespaceBinding {
+      /**
+       * Outbound worker
+       */
+      export interface Outbound {
         /**
-         * Name of the Queue to bind to
+         * Pass information from the Dispatch Worker to the Outbound Worker through the
+         * parameters
          */
-        queue_name: string;
-
-        /**
-         * The class of resource that the binding provides.
-         */
-        type: 'queue';
-      }
-
-      export interface WorkersD1Binding {
-        /**
-         * ID of the D1 database to bind to
-         */
-        id: string;
-
-        /**
-         * The name of the D1 database associated with the 'id' provided.
-         */
-        name: string;
-
-        /**
-         * The class of resource that the binding provides.
-         */
-        type: 'd1';
-      }
-
-      export interface WorkersDispatchNamespaceBinding {
-        /**
-         * Namespace to bind to
-         */
-        namespace: string;
-
-        /**
-         * The class of resource that the binding provides.
-         */
-        type: 'dispatch_namespace';
+        params?: Array<string>;
 
         /**
          * Outbound worker
          */
-        outbound?: WorkersDispatchNamespaceBinding.Outbound;
+        worker?: Outbound.Worker;
       }
 
-      export namespace WorkersDispatchNamespaceBinding {
+      export namespace Outbound {
         /**
          * Outbound worker
          */
-        export interface Outbound {
+        export interface Worker {
           /**
-           * Pass information from the Dispatch Worker to the Outbound Worker through the
-           * parameters
+           * Environment of the outbound worker
            */
-          params?: Array<string>;
+          environment?: string;
 
           /**
-           * Outbound worker
+           * Name of the outbound worker
            */
-          worker?: Outbound.Worker;
-        }
-
-        export namespace Outbound {
-          /**
-           * Outbound worker
-           */
-          export interface Worker {
-            /**
-             * Environment of the outbound worker
-             */
-            environment?: string;
-
-            /**
-             * Name of the outbound worker
-             */
-            service?: string;
-          }
+          service?: string;
         }
       }
+    }
 
-      export interface WorkersMTLSCERTBinding {
-        certificate: unknown;
-
-        /**
-         * The class of resource that the binding provides.
-         */
-        type: 'mtls_certificate';
-
-        /**
-         * ID of the certificate to bind to
-         */
-        certificate_id?: string;
-      }
+    export interface WorkersMTLSCERTBinding {
+      certificate: unknown;
 
       /**
-       * A single set of migrations to apply.
+       * The class of resource that the binding provides.
        */
-      export interface WorkersSingleStepMigrations {
+      type: 'mtls_certificate';
+
+      /**
+       * ID of the certificate to bind to
+       */
+      certificate_id?: string;
+    }
+
+    /**
+     * A single set of migrations to apply.
+     */
+    export interface WorkersSingleStepMigrations {
+      /**
+       * A list of classes to delete Durable Object namespaces from.
+       */
+      deleted_classes?: Array<string>;
+
+      /**
+       * A list of classes to create Durable Object namespaces from.
+       */
+      new_classes?: Array<string>;
+
+      /**
+       * Tag to set as the latest migration tag.
+       */
+      new_tag?: string;
+
+      /**
+       * Tag used to verify against the latest migration tag for this Worker. If they
+       * don't match, the upload is rejected.
+       */
+      old_tag?: string;
+
+      /**
+       * A list of classes with Durable Object namespaces that were renamed.
+       */
+      renamed_classes?: Array<WorkersSingleStepMigrations.RenamedClass>;
+
+      /**
+       * A list of transfers for Durable Object namespaces from a different Worker and
+       * class to a class defined in this Worker.
+       */
+      transferred_classes?: Array<WorkersSingleStepMigrations.TransferredClass>;
+    }
+
+    export namespace WorkersSingleStepMigrations {
+      export interface RenamedClass {
+        from?: string;
+
+        to?: string;
+      }
+
+      export interface TransferredClass {
+        from?: string;
+
+        from_script?: string;
+
+        to?: string;
+      }
+    }
+
+    export interface WorkersSteppedMigrations {
+      /**
+       * Tag to set as the latest migration tag.
+       */
+      new_tag?: string;
+
+      /**
+       * Tag used to verify against the latest migration tag for this Worker. If they
+       * don't match, the upload is rejected.
+       */
+      old_tag?: string;
+
+      /**
+       * Migrations to apply in order.
+       */
+      steps?: Array<WorkersSteppedMigrations.Step>;
+    }
+
+    export namespace WorkersSteppedMigrations {
+      export interface Step {
         /**
          * A list of classes to delete Durable Object namespaces from.
          */
@@ -1100,29 +1143,18 @@ export namespace SettingEditParams {
         new_classes?: Array<string>;
 
         /**
-         * Tag to set as the latest migration tag.
-         */
-        new_tag?: string;
-
-        /**
-         * Tag used to verify against the latest migration tag for this Worker. If they
-         * don't match, the upload is rejected.
-         */
-        old_tag?: string;
-
-        /**
          * A list of classes with Durable Object namespaces that were renamed.
          */
-        renamed_classes?: Array<WorkersSingleStepMigrations.RenamedClass>;
+        renamed_classes?: Array<Step.RenamedClass>;
 
         /**
          * A list of transfers for Durable Object namespaces from a different Worker and
          * class to a class defined in this Worker.
          */
-        transferred_classes?: Array<WorkersSingleStepMigrations.TransferredClass>;
+        transferred_classes?: Array<Step.TransferredClass>;
       }
 
-      export namespace WorkersSingleStepMigrations {
+      export namespace Step {
         export interface RenamedClass {
           from?: string;
 
@@ -1137,94 +1169,35 @@ export namespace SettingEditParams {
           to?: string;
         }
       }
+    }
 
-      export interface WorkersSteppedMigrations {
-        /**
-         * Tag to set as the latest migration tag.
-         */
-        new_tag?: string;
+    export interface Placement {
+      /**
+       * Enables
+       * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+       * Only `"smart"` is currently supported
+       */
+      mode?: 'smart';
+    }
 
-        /**
-         * Tag used to verify against the latest migration tag for this Worker. If they
-         * don't match, the upload is rejected.
-         */
-        old_tag?: string;
-
-        /**
-         * Migrations to apply in order.
-         */
-        steps?: Array<WorkersSteppedMigrations.Step>;
-      }
-
-      export namespace WorkersSteppedMigrations {
-        export interface Step {
-          /**
-           * A list of classes to delete Durable Object namespaces from.
-           */
-          deleted_classes?: Array<string>;
-
-          /**
-           * A list of classes to create Durable Object namespaces from.
-           */
-          new_classes?: Array<string>;
-
-          /**
-           * A list of classes with Durable Object namespaces that were renamed.
-           */
-          renamed_classes?: Array<Step.RenamedClass>;
-
-          /**
-           * A list of transfers for Durable Object namespaces from a different Worker and
-           * class to a class defined in this Worker.
-           */
-          transferred_classes?: Array<Step.TransferredClass>;
-        }
-
-        export namespace Step {
-          export interface RenamedClass {
-            from?: string;
-
-            to?: string;
-          }
-
-          export interface TransferredClass {
-            from?: string;
-
-            from_script?: string;
-
-            to?: string;
-          }
-        }
-      }
-
-      export interface Placement {
-        /**
-         * Enables
-         * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
-         * Only `"smart"` is currently supported
-         */
-        mode?: 'smart';
-      }
+    /**
+     * A reference to a script that will consume logs from the attached Worker.
+     */
+    export interface TailConsumer {
+      /**
+       * Name of Worker that is to be the consumer.
+       */
+      service: string;
 
       /**
-       * A reference to a script that will consume logs from the attached Worker.
+       * Optional environment if the Worker utilizes one.
        */
-      export interface TailConsumer {
-        /**
-         * Name of Worker that is to be the consumer.
-         */
-        service: string;
+      environment?: string;
 
-        /**
-         * Optional environment if the Worker utilizes one.
-         */
-        environment?: string;
-
-        /**
-         * Optional dispatch namespace the script belongs to.
-         */
-        namespace?: string;
-      }
+      /**
+       * Optional dispatch namespace the script belongs to.
+       */
+      namespace?: string;
     }
   }
 }
