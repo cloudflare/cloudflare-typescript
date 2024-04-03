@@ -70,4 +70,5 @@ export namespace ContentLists {
   export import EntryDeleteResponse = EntriesAPI.EntryDeleteResponse;
   export import EntryCreateParams = EntriesAPI.EntryCreateParams;
   export import EntryUpdateParams = EntriesAPI.EntryUpdateParams;
+  export import EntryDeleteParams = EntriesAPI.EntryDeleteParams;
 }

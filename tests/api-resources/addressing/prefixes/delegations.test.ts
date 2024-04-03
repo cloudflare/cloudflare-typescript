@@ -69,7 +69,7 @@ describe('resource delegations', () => {
     const responsePromise = cloudflare.addressing.prefixes.delegations.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'd933b1530bc56c9953cf8ce166da8004',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', body: {} },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -85,7 +85,7 @@ describe('resource delegations', () => {
     const response = await cloudflare.addressing.prefixes.delegations.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'd933b1530bc56c9953cf8ce166da8004',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', body: {} },
     );
   });
 });

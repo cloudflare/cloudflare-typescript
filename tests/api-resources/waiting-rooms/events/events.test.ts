@@ -120,7 +120,7 @@ describe('resource events', () => {
     const responsePromise = cloudflare.waitingRooms.events.delete(
       '699d98642c564d2e855e9661899b7252',
       '25756b2dfe6e378a06b033b670413757',
-      { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      { zone_id: '023e105f4ecef8ad9ca31a8372d0c353', body: {} },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -136,7 +136,7 @@ describe('resource events', () => {
     const response = await cloudflare.waitingRooms.events.delete(
       '699d98642c564d2e855e9661899b7252',
       '25756b2dfe6e378a06b033b670413757',
-      { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      { zone_id: '023e105f4ecef8ad9ca31a8372d0c353', body: {} },
     );
   });
 

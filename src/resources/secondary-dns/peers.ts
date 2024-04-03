@@ -59,12 +59,12 @@ export class Peers extends APIResource {
     params: PeerDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PeerDeleteResponse> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
-      this._client.delete(
-        `/accounts/${account_id}/secondary_dns/peers/${peerId}`,
-        options,
-      ) as Core.APIPromise<{ result: PeerDeleteResponse }>
+      this._client.delete(`/accounts/${account_id}/secondary_dns/peers/${peerId}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: PeerDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -181,7 +181,15 @@ export interface PeerListParams {
 }
 
 export interface PeerDeleteParams {
+  /**
+   * Path param:
+   */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface PeerGetParams {

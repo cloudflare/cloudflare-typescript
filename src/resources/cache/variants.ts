@@ -13,9 +13,9 @@ export class Variants extends APIResource {
    * be indicated with BYPASS cache status in the response headers.
    */
   delete(params: VariantDeleteParams, options?: Core.RequestOptions): Core.APIPromise<CacheVariants> {
-    const { zone_id } = params;
+    const { zone_id, body } = params;
     return (
-      this._client.delete(`/zones/${zone_id}/cache/variants`, options) as Core.APIPromise<{
+      this._client.delete(`/zones/${zone_id}/cache/variants`, { body: body, ...options }) as Core.APIPromise<{
         result: CacheVariants;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -269,9 +269,14 @@ export namespace VariantGetResponse {
 
 export interface VariantDeleteParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   zone_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface VariantEditParams {

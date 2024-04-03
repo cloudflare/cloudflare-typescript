@@ -68,12 +68,12 @@ export class Pools extends APIResource {
     params: PoolDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PoolDeleteResponse> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
-      this._client.delete(
-        `/accounts/${account_id}/load_balancers/pools/${poolId}`,
-        options,
-      ) as Core.APIPromise<{ result: PoolDeleteResponse }>
+      this._client.delete(`/accounts/${account_id}/load_balancers/pools/${poolId}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: PoolDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -657,9 +657,14 @@ export interface PoolListParams {
 
 export interface PoolDeleteParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface PoolEditParams {

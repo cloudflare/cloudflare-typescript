@@ -10,6 +10,7 @@ export {
   AppCreateParams,
   AppUpdateParams,
   AppListParams,
+  AppDeleteParams,
   AppListResponsesV4PagePaginationArray,
   Apps,
 } from './apps';

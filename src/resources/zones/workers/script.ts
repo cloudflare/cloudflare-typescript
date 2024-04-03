@@ -10,9 +10,9 @@ export class Script extends APIResource {
    * Upload a worker, or a new version of a worker.
    */
   update(params: ScriptUpdateParams, options?: Core.RequestOptions): Core.APIPromise<ScriptUpdateResponse> {
-    const { zone_id } = params;
+    const { zone_id, body } = params;
     return (
-      this._client.put(`/zones/${zone_id}/workers/script`, options) as Core.APIPromise<{
+      this._client.put(`/zones/${zone_id}/workers/script`, { body: body, ...options }) as Core.APIPromise<{
         result: ScriptUpdateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -22,8 +22,9 @@ export class Script extends APIResource {
    * Delete your Worker. This call has no response body on a successful delete.
    */
   delete(params: ScriptDeleteParams, options?: Core.RequestOptions): Core.APIPromise<void> {
-    const { zone_id } = params;
+    const { zone_id, body } = params;
     return this._client.delete(`/zones/${zone_id}/workers/script`, {
+      body: body,
       ...options,
       headers: { Accept: '*/*', ...options?.headers },
     });
@@ -43,16 +44,26 @@ export type ScriptUpdateResponse = unknown | string;
 
 export interface ScriptUpdateParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   zone_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface ScriptDeleteParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   zone_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface ScriptGetParams {

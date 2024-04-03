@@ -42,12 +42,14 @@ export class Stream extends APIResource {
   create(params: StreamCreateParams, options?: Core.RequestOptions): Core.APIPromise<void> {
     const {
       account_id,
+      body,
       'Tus-Resumable': tusResumable,
       'Upload-Length': uploadLength,
       'Upload-Creator': uploadCreator,
       'Upload-Metadata': uploadMetadata,
     } = params;
     return this._client.post(`/accounts/${account_id}/stream`, {
+      body: body,
       ...options,
       headers: {
         Accept: '*/*',
@@ -83,8 +85,9 @@ export class Stream extends APIResource {
     params: StreamDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<void> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return this._client.delete(`/accounts/${account_id}/stream/${identifier}`, {
+      body: body,
       ...options,
       headers: { Accept: '*/*', ...options?.headers },
     });
@@ -306,6 +309,11 @@ export interface StreamCreateParams {
   account_id: string;
 
   /**
+   * Body param:
+   */
+  body: unknown;
+
+  /**
    * Header param: Specifies the TUS protocol version. This value must be included in
    * every upload request. Notes: The only supported version of TUS protocol is
    * 1.0.0.
@@ -383,9 +391,14 @@ export interface StreamListParams {
 
 export interface StreamDeleteParams {
   /**
-   * The account identifier tag.
+   * Path param: The account identifier tag.
    */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface StreamGetParams {

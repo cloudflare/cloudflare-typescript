@@ -265,9 +265,19 @@ export interface SpeedTrendsListParams {
     | 'us-west1';
 
   /**
+   * Query param:
+   */
+  start: string;
+
+  /**
    * Query param: The timezone of the start and end timestamps.
    */
   tz: string;
+
+  /**
+   * Query param:
+   */
+  end?: string;
 }
 
 export namespace Speed {

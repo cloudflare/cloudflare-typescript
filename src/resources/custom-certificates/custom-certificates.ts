@@ -50,12 +50,12 @@ export class CustomCertificates extends APIResource {
     params: CustomCertificateDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomCertificateDeleteResponse> {
-    const { zone_id } = params;
+    const { zone_id, body } = params;
     return (
-      this._client.delete(
-        `/zones/${zone_id}/custom_certificates/${customCertificateId}`,
-        options,
-      ) as Core.APIPromise<{ result: CustomCertificateDeleteResponse }>
+      this._client.delete(`/zones/${zone_id}/custom_certificates/${customCertificateId}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: CustomCertificateDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -292,13 +292,23 @@ export interface CustomCertificateListParams extends V4PagePaginationArrayParams
    * Query param: Whether to match all search requirements or at least one (any).
    */
   match?: 'any' | 'all';
+
+  /**
+   * Query param: Status of the zone's custom SSL.
+   */
+  status?: 'active' | 'expired' | 'deleted' | 'pending' | 'initializing';
 }
 
 export interface CustomCertificateDeleteParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   zone_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface CustomCertificateEditParams {

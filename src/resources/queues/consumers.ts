@@ -49,12 +49,12 @@ export class Consumers extends APIResource {
     params: ConsumerDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConsumerDeleteResponse | null> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
-      this._client.delete(
-        `/accounts/${account_id}/queues/${queueId}/consumers/${consumerId}`,
-        options,
-      ) as Core.APIPromise<{ result: ConsumerDeleteResponse | null }>
+      this._client.delete(`/accounts/${account_id}/queues/${queueId}/consumers/${consumerId}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: ConsumerDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -183,9 +183,14 @@ export interface ConsumerUpdateParams {
 
 export interface ConsumerDeleteParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface ConsumerGetParams {

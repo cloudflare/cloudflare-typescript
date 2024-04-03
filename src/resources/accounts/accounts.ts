@@ -180,6 +180,11 @@ export interface AccountListParams extends V4PagePaginationArrayParams {
    * Direction to order results.
    */
   direction?: 'asc' | 'desc';
+
+  /**
+   * Name of the account.
+   */
+  name?: string;
 }
 
 export interface AccountGetParams {

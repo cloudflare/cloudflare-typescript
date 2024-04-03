@@ -59,11 +59,12 @@ export class Members extends APIResource {
     params: MemberDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MemberDeleteResponse | null> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/members/${memberId}`, options) as Core.APIPromise<{
-        result: MemberDeleteResponse | null;
-      }>
+      this._client.delete(`/accounts/${account_id}/members/${memberId}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: MemberDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -320,7 +321,15 @@ export interface MemberListParams extends V4PagePaginationArrayParams {
 }
 
 export interface MemberDeleteParams {
+  /**
+   * Path param:
+   */
   account_id: unknown;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface MemberGetParams {

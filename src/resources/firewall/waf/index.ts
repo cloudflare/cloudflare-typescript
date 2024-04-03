@@ -14,6 +14,7 @@ export {
   OverrideCreateParams,
   OverrideUpdateParams,
   OverrideListParams,
+  OverrideDeleteParams,
   WAFOverridesV4PagePaginationArray,
   Overrides,
 } from './overrides';

@@ -55,11 +55,12 @@ export class V1 extends APIResource {
     params: V1DeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<V1DeleteResponse> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/images/v1/${imageId}`, options) as Core.APIPromise<{
-        result: V1DeleteResponse;
-      }>
+      this._client.delete(`/accounts/${account_id}/images/v1/${imageId}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: V1DeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -196,9 +197,14 @@ export interface V1ListParams extends V4PagePaginationParams {
 
 export interface V1DeleteParams {
   /**
-   * Account identifier tag.
+   * Path param: Account identifier tag.
    */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface V1EditParams {

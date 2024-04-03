@@ -280,6 +280,8 @@ export namespace SettingEditResponse {
   }
 
   export interface WorkersMTLSCERTBinding {
+    certificate: unknown;
+
     /**
      * A JavaScript variable name for the binding.
      */
@@ -677,6 +679,8 @@ export namespace SettingGetResponse {
   }
 
   export interface WorkersMTLSCERTBinding {
+    certificate: unknown;
+
     /**
      * A JavaScript variable name for the binding.
      */
@@ -1068,6 +1072,8 @@ export namespace SettingEditParams {
       }
 
       export interface WorkersMTLSCERTBinding {
+        certificate: unknown;
+
         /**
          * The class of resource that the binding provides.
          */

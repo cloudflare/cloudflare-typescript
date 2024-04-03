@@ -23,8 +23,12 @@ export class Subscriptions extends APIResource {
   /**
    * Deletes a user's subscription.
    */
-  delete(identifier: string, options?: Core.RequestOptions): Core.APIPromise<SubscriptionDeleteResponse> {
-    return this._client.delete(`/user/subscriptions/${identifier}`, options);
+  delete(
+    identifier: string,
+    body: SubscriptionDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SubscriptionDeleteResponse> {
+    return this._client.delete(`/user/subscriptions/${identifier}`, { body, ...options });
   }
 
   /**
@@ -460,6 +464,8 @@ export namespace SubscriptionUpdateParams {
   export interface Zone {}
 }
 
+export type SubscriptionDeleteParams = unknown;
+
 export interface SubscriptionEditParams {
   app?: SubscriptionEditParams.App;
 
@@ -570,5 +576,6 @@ export namespace Subscriptions {
   export import SubscriptionEditResponse = SubscriptionsAPI.SubscriptionEditResponse;
   export import SubscriptionGetResponse = SubscriptionsAPI.SubscriptionGetResponse;
   export import SubscriptionUpdateParams = SubscriptionsAPI.SubscriptionUpdateParams;
+  export import SubscriptionDeleteParams = SubscriptionsAPI.SubscriptionDeleteParams;
   export import SubscriptionEditParams = SubscriptionsAPI.SubscriptionEditParams;
 }

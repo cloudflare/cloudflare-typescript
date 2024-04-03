@@ -60,6 +60,7 @@ describe('resource routes', () => {
       network_superset: {},
       page: 1,
       per_page: 1,
+      route_id: 'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
       tun_types: 'cfd_tunnel,warp_connector',
       tunnel_id: {},
       virtual_network_id: {},

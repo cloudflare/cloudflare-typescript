@@ -222,6 +222,8 @@ export namespace BindingGetResponse {
   }
 
   export interface WorkersMTLSCERTBinding {
+    certificate: unknown;
+
     /**
      * A JavaScript variable name for the binding.
      */

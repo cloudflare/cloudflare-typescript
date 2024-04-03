@@ -62,12 +62,12 @@ export class Locations extends APIResource {
     params: LocationDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<LocationDeleteResponse> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
-      this._client.delete(
-        `/accounts/${account_id}/gateway/locations/${locationId}`,
-        options,
-      ) as Core.APIPromise<{ result: LocationDeleteResponse }>
+      this._client.delete(`/accounts/${account_id}/gateway/locations/${locationId}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: LocationDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -222,7 +222,15 @@ export interface LocationListParams {
 }
 
 export interface LocationDeleteParams {
+  /**
+   * Path param:
+   */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface LocationGetParams {

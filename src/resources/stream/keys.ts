@@ -11,11 +11,12 @@ export class Keys extends APIResource {
    * videos, and every key can sign any video.
    */
   create(params: KeyCreateParams, options?: Core.RequestOptions): Core.APIPromise<StreamKeys> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
-      this._client.post(`/accounts/${account_id}/stream/keys`, options) as Core.APIPromise<{
-        result: StreamKeys;
-      }>
+      this._client.post(`/accounts/${account_id}/stream/keys`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: StreamKeys }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -27,11 +28,12 @@ export class Keys extends APIResource {
     params: KeyDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<KeyDeleteResponse> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/stream/keys/${identifier}`, options) as Core.APIPromise<{
-        result: KeyDeleteResponse;
-      }>
+      this._client.delete(`/accounts/${account_id}/stream/keys/${identifier}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: KeyDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -90,16 +92,26 @@ export namespace KeyGetResponse {
 
 export interface KeyCreateParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface KeyDeleteParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface KeyGetParams {

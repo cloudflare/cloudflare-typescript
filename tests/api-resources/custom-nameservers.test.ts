@@ -38,6 +38,7 @@ describe('resource customNameservers', () => {
   test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.customNameservers.delete('ns1.example.com', {
       account_id: '372e67954025e0ba6aaa6d586b9e0b59',
+      body: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -52,6 +53,7 @@ describe('resource customNameservers', () => {
   test.skip('delete: required and optional params', async () => {
     const response = await cloudflare.customNameservers.delete('ns1.example.com', {
       account_id: '372e67954025e0ba6aaa6d586b9e0b59',
+      body: {},
     });
   });
 
@@ -101,6 +103,7 @@ describe('resource customNameservers', () => {
   test.skip('verify: only required params', async () => {
     const responsePromise = cloudflare.customNameservers.verify({
       account_id: '372e67954025e0ba6aaa6d586b9e0b59',
+      body: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -115,6 +118,7 @@ describe('resource customNameservers', () => {
   test.skip('verify: required and optional params', async () => {
     const response = await cloudflare.customNameservers.verify({
       account_id: '372e67954025e0ba6aaa6d586b9e0b59',
+      body: {},
     });
   });
 });

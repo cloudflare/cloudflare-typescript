@@ -68,10 +68,10 @@ export class Outputs extends APIResource {
     params: OutputDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<void> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return this._client.delete(
       `/accounts/${account_id}/stream/live_inputs/${liveInputIdentifier}/outputs/${outputIdentifier}`,
-      { ...options, headers: { Accept: '*/*', ...options?.headers } },
+      { body: body, ...options, headers: { Accept: '*/*', ...options?.headers } },
     );
   }
 }
@@ -155,9 +155,14 @@ export interface OutputListParams {
 
 export interface OutputDeleteParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export namespace Outputs {

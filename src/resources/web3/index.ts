@@ -4,6 +4,7 @@ export {
   DistributedWebHostname,
   HostnameDeleteResponse,
   HostnameCreateParams,
+  HostnameDeleteParams,
   HostnameEditParams,
   DistributedWebHostnamesSinglePage,
   Hostnames,

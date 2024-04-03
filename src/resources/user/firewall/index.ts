@@ -6,6 +6,7 @@ export {
   AccessRuleDeleteResponse,
   AccessRuleCreateParams,
   AccessRuleListParams,
+  AccessRuleDeleteParams,
   AccessRuleEditParams,
   FirewallRulesV4PagePaginationArray,
   AccessRules,

@@ -19,6 +19,7 @@ describe('resource groups', () => {
         { email: { email: 'test@example.com' } },
       ],
       name: 'Allow devs',
+      account_id: 'string',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -39,7 +40,6 @@ describe('resource groups', () => {
       ],
       name: 'Allow devs',
       account_id: 'string',
-      zone_id: 'string',
       exclude: [
         { email: { email: 'test@example.com' } },
         { email: { email: 'test@example.com' } },
@@ -65,6 +65,7 @@ describe('resource groups', () => {
           { email: { email: 'test@example.com' } },
         ],
         name: 'Allow devs',
+        account_id: 'string',
       },
     );
     const rawResponse = await responsePromise.asResponse();
@@ -86,7 +87,6 @@ describe('resource groups', () => {
       ],
       name: 'Allow devs',
       account_id: 'string',
-      zone_id: 'string',
       exclude: [
         { email: { email: 'test@example.com' } },
         { email: { email: 'test@example.com' } },
@@ -103,7 +103,7 @@ describe('resource groups', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('list', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.groups.list();
+    const responsePromise = cloudflare.zeroTrust.access.groups.list({ account_id: 'string' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -111,30 +111,14 @@ describe('resource groups', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.zeroTrust.access.groups.list({ path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('list: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.zeroTrust.access.groups.list(
-        { account_id: 'string', zone_id: 'string' },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
   test.skip('delete', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.groups.delete('f174e90a-fafe-4643-bbbc-4a0ed4fc8415');
+    const responsePromise = cloudflare.zeroTrust.access.groups.delete(
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: 'string' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -142,33 +126,13 @@ describe('resource groups', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('delete: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.zeroTrust.access.groups.delete('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('delete: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.zeroTrust.access.groups.delete(
-        'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-        { account_id: 'string', zone_id: 'string' },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
   test.skip('get', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.groups.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415');
+    const responsePromise = cloudflare.zeroTrust.access.groups.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+      account_id: 'string',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -176,27 +140,5 @@ describe('resource groups', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.zeroTrust.access.groups.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('get: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.zeroTrust.access.groups.get(
-        'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-        { account_id: 'string', zone_id: 'string' },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 });

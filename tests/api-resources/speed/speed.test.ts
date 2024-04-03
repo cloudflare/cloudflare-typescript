@@ -61,6 +61,7 @@ describe('resource speed', () => {
       deviceType: 'DESKTOP',
       metrics: 'performanceScore,ttfb,fcp,si,lcp,tti,tbt,cls',
       region: 'us-central1',
+      start: '2014-01-01T05:20:00.12345Z',
       tz: 'string',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -79,7 +80,9 @@ describe('resource speed', () => {
       deviceType: 'DESKTOP',
       metrics: 'performanceScore,ttfb,fcp,si,lcp,tti,tbt,cls',
       region: 'us-central1',
+      start: '2014-01-01T05:20:00.12345Z',
       tz: 'string',
+      end: '2014-01-01T05:20:00.12345Z',
     });
   });
 });

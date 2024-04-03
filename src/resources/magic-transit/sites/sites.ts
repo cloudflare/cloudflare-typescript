@@ -63,11 +63,12 @@ export class Sites extends APIResource {
     params: SiteDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SiteDeleteResponse> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/magic/sites/${siteId}`, options) as Core.APIPromise<{
-        result: SiteDeleteResponse;
-      }>
+      this._client.delete(`/accounts/${account_id}/magic/sites/${siteId}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: SiteDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -498,16 +499,26 @@ export namespace SiteUpdateParams {
 
 export interface SiteListParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Query param: Identifier
+   */
+  connector_identifier?: string;
 }
 
 export interface SiteDeleteParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface SiteGetParams {

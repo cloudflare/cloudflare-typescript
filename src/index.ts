@@ -406,6 +406,8 @@ export namespace Cloudflare {
   export import OriginCACertificateGetResponse = API.OriginCACertificateGetResponse;
   export import OriginCACertificatesSinglePage = API.OriginCACertificatesSinglePage;
   export import OriginCACertificateCreateParams = API.OriginCACertificateCreateParams;
+  export import OriginCACertificateListParams = API.OriginCACertificateListParams;
+  export import OriginCACertificateDeleteParams = API.OriginCACertificateDeleteParams;
 
   export import IPs = API.IPs;
   export import JDCloudIPs = API.JDCloudIPs;
@@ -420,6 +422,7 @@ export namespace Cloudflare {
   export import MembershipsV4PagePaginationArray = API.MembershipsV4PagePaginationArray;
   export import MembershipUpdateParams = API.MembershipUpdateParams;
   export import MembershipListParams = API.MembershipListParams;
+  export import MembershipDeleteParams = API.MembershipDeleteParams;
 
   export import UserResource = API.UserResource;
   export import User = API.User;
@@ -463,6 +466,7 @@ export namespace Cloudflare {
   export import SubscriptionListResponsesSinglePage = API.SubscriptionListResponsesSinglePage;
   export import SubscriptionCreateParams = API.SubscriptionCreateParams;
   export import SubscriptionUpdateParams = API.SubscriptionUpdateParams;
+  export import SubscriptionDeleteParams = API.SubscriptionDeleteParams;
 
   export import ACM = API.ACM;
 
@@ -540,6 +544,8 @@ export namespace Cloudflare {
   export import EmailRoutingDisableResponse = API.EmailRoutingDisableResponse;
   export import EmailRoutingEnableResponse = API.EmailRoutingEnableResponse;
   export import EmailRoutingGetResponse = API.EmailRoutingGetResponse;
+  export import EmailRoutingDisableParams = API.EmailRoutingDisableParams;
+  export import EmailRoutingEnableParams = API.EmailRoutingEnableParams;
 
   export import Filters = API.Filters;
   export import FirewallFilter = API.FirewallFilter;
@@ -548,6 +554,7 @@ export namespace Cloudflare {
   export import FilterCreateParams = API.FilterCreateParams;
   export import FilterUpdateParams = API.FilterUpdateParams;
   export import FilterListParams = API.FilterListParams;
+  export import FilterDeleteParams = API.FilterDeleteParams;
 
   export import Firewall = API.Firewall;
 
@@ -614,6 +621,7 @@ export namespace Cloudflare {
   export import RateLimitListResponsesV4PagePaginationArray = API.RateLimitListResponsesV4PagePaginationArray;
   export import RateLimitCreateParams = API.RateLimitCreateParams;
   export import RateLimitListParams = API.RateLimitListParams;
+  export import RateLimitDeleteParams = API.RateLimitDeleteParams;
   export import RateLimitEditParams = API.RateLimitEditParams;
 
   export import SecondaryDNS = API.SecondaryDNS;
@@ -665,8 +673,10 @@ export namespace Cloudflare {
   export import PageShieldGetParams = API.PageShieldGetParams;
 
   export import Rulesets = API.Rulesets;
-  export import Ruleset = API.Ruleset;
+  export import RulesetCreateResponse = API.RulesetCreateResponse;
+  export import RulesetUpdateResponse = API.RulesetUpdateResponse;
   export import RulesetListResponse = API.RulesetListResponse;
+  export import RulesetGetResponse = API.RulesetGetResponse;
   export import RulesetListResponsesSinglePage = API.RulesetListResponsesSinglePage;
   export import RulesetCreateParams = API.RulesetCreateParams;
   export import RulesetUpdateParams = API.RulesetUpdateParams;

@@ -65,11 +65,12 @@ export class LoadBalancers extends APIResource {
     params: LoadBalancerDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<LoadBalancerDeleteResponse> {
-    const { zone_id } = params;
+    const { zone_id, body } = params;
     return (
-      this._client.delete(`/zones/${zone_id}/load_balancers/${loadBalancerId}`, options) as Core.APIPromise<{
-        result: LoadBalancerDeleteResponse;
-      }>
+      this._client.delete(`/zones/${zone_id}/load_balancers/${loadBalancerId}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: LoadBalancerDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -2216,7 +2217,15 @@ export interface LoadBalancerListParams {
 }
 
 export interface LoadBalancerDeleteParams {
+  /**
+   * Path param:
+   */
   zone_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface LoadBalancerEditParams {

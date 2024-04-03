@@ -111,6 +111,7 @@ describe('resource ipsecTunnels', () => {
   test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.magicTransit.ipsecTunnels.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -125,6 +126,7 @@ describe('resource ipsecTunnels', () => {
   test.skip('delete: required and optional params', async () => {
     const response = await cloudflare.magicTransit.ipsecTunnels.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: {},
     });
   });
 
@@ -153,7 +155,7 @@ describe('resource ipsecTunnels', () => {
   test.skip('pskGenerate: only required params', async () => {
     const responsePromise = cloudflare.magicTransit.ipsecTunnels.pskGenerate(
       '023e105f4ecef8ad9ca31a8372d0c353',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', body: {} },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -168,7 +170,7 @@ describe('resource ipsecTunnels', () => {
   test.skip('pskGenerate: required and optional params', async () => {
     const response = await cloudflare.magicTransit.ipsecTunnels.pskGenerate(
       '023e105f4ecef8ad9ca31a8372d0c353',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', body: {} },
     );
   });
 });

@@ -54,11 +54,12 @@ export class Routes extends APIResource {
     params: RouteDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RouteDeleteResponse> {
-    const { zone_id } = params;
+    const { zone_id, body } = params;
     return (
-      this._client.delete(`/zones/${zone_id}/workers/routes/${routeId}`, options) as Core.APIPromise<{
-        result: RouteDeleteResponse;
-      }>
+      this._client.delete(`/zones/${zone_id}/workers/routes/${routeId}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: RouteDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -138,9 +139,14 @@ export interface RouteListParams {
 
 export interface RouteDeleteParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   zone_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface RouteGetParams {

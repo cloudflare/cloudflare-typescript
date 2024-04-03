@@ -50,19 +50,19 @@ describe('resource rules', () => {
         dns_resolvers: {
           ipv4: [
             {
-              ip: '2001:DB8::/64',
+              ip: '2.2.2.2',
               port: 5053,
               route_through_private_network: true,
               vnet_id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
             },
             {
-              ip: '2001:DB8::/64',
+              ip: '2.2.2.2',
               port: 5053,
               route_through_private_network: true,
               vnet_id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
             },
             {
-              ip: '2001:DB8::/64',
+              ip: '2.2.2.2',
               port: 5053,
               route_through_private_network: true,
               vnet_id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
@@ -70,19 +70,19 @@ describe('resource rules', () => {
           ],
           ipv6: [
             {
-              ip: '2001:DB8::/64',
+              ip: '2001:DB8::',
               port: 5053,
               route_through_private_network: true,
               vnet_id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
             },
             {
-              ip: '2001:DB8::/64',
+              ip: '2001:DB8::',
               port: 5053,
               route_through_private_network: true,
               vnet_id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
             },
             {
-              ip: '2001:DB8::/64',
+              ip: '2001:DB8::',
               port: 5053,
               route_through_private_network: true,
               vnet_id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
@@ -155,19 +155,19 @@ describe('resource rules', () => {
         dns_resolvers: {
           ipv4: [
             {
-              ip: '2001:DB8::/64',
+              ip: '2.2.2.2',
               port: 5053,
               route_through_private_network: true,
               vnet_id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
             },
             {
-              ip: '2001:DB8::/64',
+              ip: '2.2.2.2',
               port: 5053,
               route_through_private_network: true,
               vnet_id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
             },
             {
-              ip: '2001:DB8::/64',
+              ip: '2.2.2.2',
               port: 5053,
               route_through_private_network: true,
               vnet_id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
@@ -175,19 +175,19 @@ describe('resource rules', () => {
           ],
           ipv6: [
             {
-              ip: '2001:DB8::/64',
+              ip: '2001:DB8::',
               port: 5053,
               route_through_private_network: true,
               vnet_id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
             },
             {
-              ip: '2001:DB8::/64',
+              ip: '2001:DB8::',
               port: 5053,
               route_through_private_network: true,
               vnet_id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
             },
             {
-              ip: '2001:DB8::/64',
+              ip: '2001:DB8::',
               port: 5053,
               route_through_private_network: true,
               vnet_id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
@@ -246,7 +246,7 @@ describe('resource rules', () => {
   test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.gateway.rules.delete(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { account_id: '699d98642c564d2e855e9661899b7252' },
+      { account_id: '699d98642c564d2e855e9661899b7252', body: {} },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -261,6 +261,7 @@ describe('resource rules', () => {
   test.skip('delete: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.gateway.rules.delete('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: '699d98642c564d2e855e9661899b7252',
+      body: {},
     });
   });
 

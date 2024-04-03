@@ -38,6 +38,8 @@ export interface DigitalExperienceMonitoringDevice {
    */
   deviceId: string;
 
+  mode: unknown;
+
   /**
    * Operating system
    */
@@ -47,6 +49,8 @@ export interface DigitalExperienceMonitoringDevice {
    * Network status
    */
   status: string;
+
+  timestamp: unknown;
 
   /**
    * WARP client version

@@ -164,7 +164,7 @@ describe('resource indexes', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('insert', async () => {
+  test.skip('insert: only required params', async () => {
     const responsePromise = cloudflare.vectorize.indexes.insert(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'example-index',
@@ -177,6 +177,15 @@ describe('resource indexes', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('insert: required and optional params', async () => {
+    const response = await cloudflare.vectorize.indexes.insert(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      'example-index',
+      {},
+    );
   });
 
   // skipped: tests are disabled for the time being
@@ -196,7 +205,7 @@ describe('resource indexes', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('upsert', async () => {
+  test.skip('upsert: only required params', async () => {
     const responsePromise = cloudflare.vectorize.indexes.upsert(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'example-index',
@@ -209,5 +218,14 @@ describe('resource indexes', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('upsert: required and optional params', async () => {
+    const response = await cloudflare.vectorize.indexes.upsert(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      'example-index',
+      {},
+    );
   });
 });

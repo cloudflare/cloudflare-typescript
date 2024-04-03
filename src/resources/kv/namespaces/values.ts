@@ -39,12 +39,12 @@ export class Values extends APIResource {
     params: ValueDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ValueDeleteResponse> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
-      this._client.delete(
-        `/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/values/${keyName}`,
-        options,
-      ) as Core.APIPromise<{ result: ValueDeleteResponse }>
+      this._client.delete(`/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/values/${keyName}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: ValueDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -97,9 +97,14 @@ export interface ValueUpdateParams {
 
 export interface ValueDeleteParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface ValueGetParams {

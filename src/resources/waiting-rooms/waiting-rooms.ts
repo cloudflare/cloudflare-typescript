@@ -65,11 +65,12 @@ export class WaitingRooms extends APIResource {
     params: WaitingRoomDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<WaitingRoomDeleteResponse> {
-    const { zone_id } = params;
+    const { zone_id, body } = params;
     return (
-      this._client.delete(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}`, options) as Core.APIPromise<{
-        result: WaitingRoomDeleteResponse;
-      }>
+      this._client.delete(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: WaitingRoomDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -1264,9 +1265,14 @@ export interface WaitingRoomListParams {
 
 export interface WaitingRoomDeleteParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   zone_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface WaitingRoomEditParams {
