@@ -33,6 +33,12 @@ export class Roles extends APIResource {
 
 export class RolesSinglePage extends SinglePage<Role> {}
 
+export interface PermissionGrant {
+  read?: boolean;
+
+  write?: boolean;
+}
+
 export interface Role {
   /**
    * Role identifier tag.
@@ -66,6 +72,7 @@ export interface RoleGetParams {
 }
 
 export namespace Roles {
+  export import PermissionGrant = RolesAPI.PermissionGrant;
   export import Role = RolesAPI.Role;
   export import RoleGetResponse = RolesAPI.RoleGetResponse;
   export import RolesSinglePage = RolesAPI.RolesSinglePage;

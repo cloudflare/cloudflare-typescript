@@ -196,9 +196,10 @@ export namespace Accounts {
   export import AccountListParams = AccountsAPI.AccountListParams;
   export import AccountGetParams = AccountsAPI.AccountGetParams;
   export import Members = MembersAPI.Members;
-  export import AccountMember = MembersAPI.AccountMember;
-  export import AccountMemberWithID = MembersAPI.AccountMemberWithID;
-  export import RolePermissionGrant = MembersAPI.RolePermissionGrant;
+  export import Member = MembersAPI.Member;
+  export import MemberPermission = MembersAPI.MemberPermission;
+  export import MemberRole = MembersAPI.MemberRole;
+  export import MemberWithCode = MembersAPI.MemberWithCode;
   export import MemberListResponse = MembersAPI.MemberListResponse;
   export import MemberDeleteResponse = MembersAPI.MemberDeleteResponse;
   export import MemberListResponsesV4PagePaginationArray = MembersAPI.MemberListResponsesV4PagePaginationArray;
@@ -208,6 +209,7 @@ export namespace Accounts {
   export import MemberDeleteParams = MembersAPI.MemberDeleteParams;
   export import MemberGetParams = MembersAPI.MemberGetParams;
   export import Roles = RolesAPI.Roles;
+  export import PermissionGrant = RolesAPI.PermissionGrant;
   export import Role = RolesAPI.Role;
   export import RoleGetResponse = RolesAPI.RoleGetResponse;
   export import RolesSinglePage = RolesAPI.RolesSinglePage;

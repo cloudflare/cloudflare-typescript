@@ -23,24 +23,26 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/accounts/members.ts">AccountMember</a></code>
-- <code><a href="./src/resources/accounts/members.ts">AccountMemberWithID</a></code>
-- <code><a href="./src/resources/accounts/members.ts">RolePermissionGrant</a></code>
+- <code><a href="./src/resources/accounts/members.ts">Member</a></code>
+- <code><a href="./src/resources/accounts/members.ts">MemberPermission</a></code>
+- <code><a href="./src/resources/accounts/members.ts">MemberRole</a></code>
+- <code><a href="./src/resources/accounts/members.ts">MemberWithCode</a></code>
 - <code><a href="./src/resources/accounts/members.ts">MemberListResponse</a></code>
 - <code><a href="./src/resources/accounts/members.ts">MemberDeleteResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/members">client.accounts.members.<a href="./src/resources/accounts/members.ts">create</a>({ ...params }) -> AccountMemberWithID</code>
-- <code title="put /accounts/{account_id}/members/{member_id}">client.accounts.members.<a href="./src/resources/accounts/members.ts">update</a>(memberId, { ...params }) -> AccountMember</code>
+- <code title="post /accounts/{account_id}/members">client.accounts.members.<a href="./src/resources/accounts/members.ts">create</a>({ ...params }) -> MemberWithCode</code>
+- <code title="put /accounts/{account_id}/members/{member_id}">client.accounts.members.<a href="./src/resources/accounts/members.ts">update</a>(memberId, { ...params }) -> Member</code>
 - <code title="get /accounts/{account_id}/members">client.accounts.members.<a href="./src/resources/accounts/members.ts">list</a>({ ...params }) -> MemberListResponsesV4PagePaginationArray</code>
 - <code title="delete /accounts/{account_id}/members/{member_id}">client.accounts.members.<a href="./src/resources/accounts/members.ts">delete</a>(memberId, { ...params }) -> MemberDeleteResponse | null</code>
-- <code title="get /accounts/{account_id}/members/{member_id}">client.accounts.members.<a href="./src/resources/accounts/members.ts">get</a>(memberId, { ...params }) -> AccountMember</code>
+- <code title="get /accounts/{account_id}/members/{member_id}">client.accounts.members.<a href="./src/resources/accounts/members.ts">get</a>(memberId, { ...params }) -> Member</code>
 
 ## Roles
 
 Types:
 
+- <code><a href="./src/resources/accounts/roles.ts">PermissionGrant</a></code>
 - <code><a href="./src/resources/accounts/roles.ts">Role</a></code>
 - <code><a href="./src/resources/accounts/roles.ts">RoleGetResponse</a></code>
 
@@ -89,7 +91,7 @@ Types:
 Methods:
 
 - <code title="put /memberships/{membership_id}">client.memberships.<a href="./src/resources/memberships.ts">update</a>(membershipId, { ...params }) -> MembershipUpdateResponse</code>
-- <code title="get /memberships">client.memberships.<a href="./src/resources/memberships.ts">list</a>({ ...params }) -> MembershipsV4PagePaginationArray</code>
+- <code title="get /memberships">client.memberships.<a href="./src/resources/memberships.ts">list</a>({ ...params }) -> MemberRolesV4PagePaginationArray</code>
 - <code title="delete /memberships/{membership_id}">client.memberships.<a href="./src/resources/memberships.ts">delete</a>(membershipId) -> MembershipDeleteResponse</code>
 - <code title="get /memberships/{membership_id}">client.memberships.<a href="./src/resources/memberships.ts">get</a>(membershipId) -> MembershipGetResponse</code>
 
