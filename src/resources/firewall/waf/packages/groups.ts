@@ -115,9 +115,9 @@ export interface WAFManagedRulesGroup {
   package_id?: string;
 }
 
-export type GroupEditResponse = unknown | Array<unknown> | string;
+export type GroupEditResponse = unknown | string | null;
 
-export type GroupGetResponse = unknown | Array<unknown> | string;
+export type GroupGetResponse = unknown | string | null;
 
 export interface GroupListParams extends V4PagePaginationArrayParams {
   /**

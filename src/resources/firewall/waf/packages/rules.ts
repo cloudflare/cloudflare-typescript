@@ -476,7 +476,7 @@ export namespace RuleEditResponse {
   }
 }
 
-export type RuleGetResponse = unknown | Array<unknown> | string;
+export type RuleGetResponse = unknown | string | null;
 
 export interface RuleListParams extends V4PagePaginationArrayParams {
   /**
