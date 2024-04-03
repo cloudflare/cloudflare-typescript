@@ -151,7 +151,7 @@ export namespace UserResource {
   export import Billing = BillingAPI.Billing;
   export import Firewall = FirewallAPI.Firewall;
   export import Invites = InvitesAPI.Invites;
-  export import UserInvite = InvitesAPI.UserInvite;
+  export import Invite = InvitesAPI.Invite;
   export import InviteListResponse = InvitesAPI.InviteListResponse;
   export import InviteEditResponse = InvitesAPI.InviteEditResponse;
   export import InviteGetResponse = InvitesAPI.InviteGetResponse;

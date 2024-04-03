@@ -4,10 +4,9 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as MembershipsAPI from 'cloudflare/resources/memberships';
-import * as MembersAPI from 'cloudflare/resources/accounts/members';
-import { type Membership, MemberRolesV4PagePaginationArray } from 'cloudflare/resources/accounts/members';
 import * as AccountsAPI from 'cloudflare/resources/accounts/accounts';
-import { type V4PagePaginationArrayParams } from 'cloudflare/pagination';
+import * as MembersAPI from 'cloudflare/resources/accounts/members';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class Memberships extends APIResource {
   /**
@@ -31,18 +30,16 @@ export class Memberships extends APIResource {
   list(
     query?: MembershipListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<MemberRolesV4PagePaginationArray, MembersAPI.MemberRole>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<MemberRolesV4PagePaginationArray, MembersAPI.MemberRole>;
+  ): Core.PagePromise<MembershipsV4PagePaginationArray, Membership>;
+  list(options?: Core.RequestOptions): Core.PagePromise<MembershipsV4PagePaginationArray, Membership>;
   list(
     query: MembershipListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<MemberRolesV4PagePaginationArray, MembersAPI.MemberRole> {
+  ): Core.PagePromise<MembershipsV4PagePaginationArray, Membership> {
     if (isRequestOptions(query)) {
       return this.list({}, query);
     }
-    return this._client.getAPIList('/memberships', MemberRolesV4PagePaginationArray, { query, ...options });
+    return this._client.getAPIList('/memberships', MembershipsV4PagePaginationArray, { query, ...options });
   }
 
   /**
@@ -67,6 +64,8 @@ export class Memberships extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class MembershipsV4PagePaginationArray extends V4PagePaginationArray<Membership> {}
 
 export interface Membership {
   /**
@@ -159,8 +158,7 @@ export namespace Memberships {
   export import MembershipUpdateResponse = MembershipsAPI.MembershipUpdateResponse;
   export import MembershipDeleteResponse = MembershipsAPI.MembershipDeleteResponse;
   export import MembershipGetResponse = MembershipsAPI.MembershipGetResponse;
+  export import MembershipsV4PagePaginationArray = MembershipsAPI.MembershipsV4PagePaginationArray;
   export import MembershipUpdateParams = MembershipsAPI.MembershipUpdateParams;
   export import MembershipListParams = MembershipsAPI.MembershipListParams;
 }
-
-export { MemberRolesV4PagePaginationArray };

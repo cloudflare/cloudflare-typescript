@@ -8,11 +8,11 @@ export class DNSSettings extends APIResource {
   /**
    * Update DNS settings for a zone
    */
-  edit(params: DNSSettingEditParams, options?: Core.RequestOptions): Core.APIPromise<DNSSettingEditResponse> {
+  edit(params: DNSSettingEditParams, options?: Core.RequestOptions): Core.APIPromise<DNSSetting> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/dns_settings`, { body, ...options }) as Core.APIPromise<{
-        result: DNSSettingEditResponse;
+        result: DNSSetting;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -20,43 +20,22 @@ export class DNSSettings extends APIResource {
   /**
    * Show DNS settings for a zone
    */
-  get(params: DNSSettingGetParams, options?: Core.RequestOptions): Core.APIPromise<DNSSettingGetResponse> {
+  get(params: DNSSettingGetParams, options?: Core.RequestOptions): Core.APIPromise<DNSSetting> {
     const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zone_id}/dns_settings`, options) as Core.APIPromise<{
-        result: DNSSettingGetResponse;
-      }>
+      this._client.get(`/zones/${zone_id}/dns_settings`, options) as Core.APIPromise<{ result: DNSSetting }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface DNSSettingEditResponse {
+export interface DNSSetting {
   /**
    * Settings determining the nameservers through which the zone should be available.
    */
-  nameservers?: DNSSettingEditResponse.Nameservers;
+  nameservers?: DNSSetting.Nameservers;
 }
 
-export namespace DNSSettingEditResponse {
-  /**
-   * Settings determining the nameservers through which the zone should be available.
-   */
-  export interface Nameservers {
-    /**
-     * Nameserver type
-     */
-    type: 'cloudflare.standard' | 'cloudflare.foundation_dns';
-  }
-}
-
-export interface DNSSettingGetResponse {
-  /**
-   * Settings determining the nameservers through which the zone should be available.
-   */
-  nameservers?: DNSSettingGetResponse.Nameservers;
-}
-
-export namespace DNSSettingGetResponse {
+export namespace DNSSetting {
   /**
    * Settings determining the nameservers through which the zone should be available.
    */
@@ -101,8 +80,7 @@ export interface DNSSettingGetParams {
 }
 
 export namespace DNSSettings {
-  export import DNSSettingEditResponse = DNSSettingsAPI.DNSSettingEditResponse;
-  export import DNSSettingGetResponse = DNSSettingsAPI.DNSSettingGetResponse;
+  export import DNSSetting = DNSSettingsAPI.DNSSetting;
   export import DNSSettingEditParams = DNSSettingsAPI.DNSSettingEditParams;
   export import DNSSettingGetParams = DNSSettingsAPI.DNSSettingGetParams;
 }
