@@ -417,7 +417,6 @@ export namespace Cloudflare {
   export import MembershipUpdateResponse = API.MembershipUpdateResponse;
   export import MembershipDeleteResponse = API.MembershipDeleteResponse;
   export import MembershipGetResponse = API.MembershipGetResponse;
-  export import MembershipsV4PagePaginationArray = API.MembershipsV4PagePaginationArray;
   export import MembershipUpdateParams = API.MembershipUpdateParams;
   export import MembershipListParams = API.MembershipListParams;
 
