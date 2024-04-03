@@ -35,7 +35,15 @@ describe('resource history', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.user.billing.history.get(
-        { order: 'occured_at', page: 1, per_page: 5 },
+        {
+          action: 'subscription',
+          occured_at: '2014-03-01T12:21:59.3456Z',
+          occurred_at: '2014-03-01T12:21:59.3456Z',
+          order: 'occured_at',
+          page: 1,
+          per_page: 5,
+          type: 'charge',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);

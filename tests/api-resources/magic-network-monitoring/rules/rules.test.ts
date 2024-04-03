@@ -14,6 +14,7 @@ describe('resource rules', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.magicNetworkMonitoring.rules.create({
       account_id: '6f91088a406011ed95aed352566e8d4c',
+      body: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -28,6 +29,7 @@ describe('resource rules', () => {
   test.skip('create: required and optional params', async () => {
     const response = await cloudflare.magicNetworkMonitoring.rules.create({
       account_id: '6f91088a406011ed95aed352566e8d4c',
+      body: {},
     });
   });
 
@@ -35,6 +37,7 @@ describe('resource rules', () => {
   test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.magicNetworkMonitoring.rules.update({
       account_id: '6f91088a406011ed95aed352566e8d4c',
+      body: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -49,6 +52,7 @@ describe('resource rules', () => {
   test.skip('update: required and optional params', async () => {
     const response = await cloudflare.magicNetworkMonitoring.rules.update({
       account_id: '6f91088a406011ed95aed352566e8d4c',
+      body: {},
     });
   });
 
@@ -77,7 +81,7 @@ describe('resource rules', () => {
   test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.magicNetworkMonitoring.rules.delete(
       '2890e6fa406311ed9b5a23f70f6fb8cf',
-      { account_id: '6f91088a406011ed95aed352566e8d4c' },
+      { account_id: '6f91088a406011ed95aed352566e8d4c', body: {} },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -92,7 +96,7 @@ describe('resource rules', () => {
   test.skip('delete: required and optional params', async () => {
     const response = await cloudflare.magicNetworkMonitoring.rules.delete(
       '2890e6fa406311ed9b5a23f70f6fb8cf',
-      { account_id: '6f91088a406011ed95aed352566e8d4c' },
+      { account_id: '6f91088a406011ed95aed352566e8d4c', body: {} },
     );
   });
 
@@ -100,6 +104,7 @@ describe('resource rules', () => {
   test.skip('edit: only required params', async () => {
     const responsePromise = cloudflare.magicNetworkMonitoring.rules.edit('2890e6fa406311ed9b5a23f70f6fb8cf', {
       account_id: '6f91088a406011ed95aed352566e8d4c',
+      body: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -114,6 +119,7 @@ describe('resource rules', () => {
   test.skip('edit: required and optional params', async () => {
     const response = await cloudflare.magicNetworkMonitoring.rules.edit('2890e6fa406311ed9b5a23f70f6fb8cf', {
       account_id: '6f91088a406011ed95aed352566e8d4c',
+      body: {},
     });
   });
 

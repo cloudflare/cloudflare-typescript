@@ -38,10 +38,10 @@ export class Networks extends APIResource {
     params: NetworkDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RoutesAPI.TunnelRoute> {
-    const { account_id, tun_type } = params;
+    const { account_id, tun_type, tunnel_id, virtual_network_id } = params;
     return (
       this._client.delete(`/accounts/${account_id}/teamnet/routes/network/${ipNetworkEncoded}`, {
-        query: { tun_type },
+        query: { tun_type, tunnel_id, virtual_network_id },
         ...options,
       }) as Core.APIPromise<{ result: RoutesAPI.TunnelRoute }>
     )._thenUnwrap((obj) => obj.result);
@@ -95,6 +95,16 @@ export interface NetworkDeleteParams {
    * Query param: The type of tunnel.
    */
   tun_type?: 'cfd_tunnel' | 'warp_connector' | 'ip_sec' | 'gre' | 'cni';
+
+  /**
+   * Query param: UUID of the tunnel.
+   */
+  tunnel_id?: string;
+
+  /**
+   * Query param: UUID of the virtual network.
+   */
+  virtual_network_id?: string;
 }
 
 export interface NetworkEditParams {

@@ -66,12 +66,12 @@ export class LANs extends APIResource {
     params: LANDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<LANDeleteResponse> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
-      this._client.delete(
-        `/accounts/${account_id}/magic/sites/${siteId}/lans/${lanId}`,
-        options,
-      ) as Core.APIPromise<{ result: LANDeleteResponse }>
+      this._client.delete(`/accounts/${account_id}/magic/sites/${siteId}/lans/${lanId}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: LANDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -1026,9 +1026,14 @@ export interface LANListParams {
 
 export interface LANDeleteParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface LANGetParams {

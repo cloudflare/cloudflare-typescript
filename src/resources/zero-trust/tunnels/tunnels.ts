@@ -686,6 +686,11 @@ export interface TunnelListParams extends V4PagePaginationArrayParams {
   tun_types?: string;
 
   /**
+   * Query param: UUID of the tunnel.
+   */
+  uuid?: string;
+
+  /**
    * Query param:
    */
   was_active_at?: string;

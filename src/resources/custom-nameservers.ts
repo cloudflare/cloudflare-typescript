@@ -28,11 +28,12 @@ export class CustomNameservers extends APIResource {
     params: CustomNameserverDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomNameserverDeleteResponse | null> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/custom_ns/${customNSId}`, options) as Core.APIPromise<{
-        result: CustomNameserverDeleteResponse | null;
-      }>
+      this._client.delete(`/accounts/${account_id}/custom_ns/${customNSId}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: CustomNameserverDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -73,11 +74,12 @@ export class CustomNameservers extends APIResource {
     params: CustomNameserverVerifyParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomNameserverVerifyResponse | null> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
-      this._client.post(`/accounts/${account_id}/custom_ns/verify`, options) as Core.APIPromise<{
-        result: CustomNameserverVerifyResponse | null;
-      }>
+      this._client.post(`/accounts/${account_id}/custom_ns/verify`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: CustomNameserverVerifyResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -153,9 +155,14 @@ export interface CustomNameserverCreateParams {
 
 export interface CustomNameserverDeleteParams {
   /**
-   * Account identifier tag.
+   * Path param: Account identifier tag.
    */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface CustomNameserverAvailabiltyParams {
@@ -174,9 +181,14 @@ export interface CustomNameserverGetParams {
 
 export interface CustomNameserverVerifyParams {
   /**
-   * Account identifier tag.
+   * Path param: Account identifier tag.
    */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export namespace CustomNameservers {

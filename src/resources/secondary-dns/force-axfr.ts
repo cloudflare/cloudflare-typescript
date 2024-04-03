@@ -9,11 +9,12 @@ export class ForceAXFR extends APIResource {
    * Sends AXFR zone transfer request to primary nameserver(s).
    */
   create(params: ForceAXFRCreateParams, options?: Core.RequestOptions): Core.APIPromise<SecondaryDNSForce> {
-    const { zone_id } = params;
+    const { zone_id, body } = params;
     return (
-      this._client.post(`/zones/${zone_id}/secondary_dns/force_axfr`, options) as Core.APIPromise<{
-        result: SecondaryDNSForce;
-      }>
+      this._client.post(`/zones/${zone_id}/secondary_dns/force_axfr`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: SecondaryDNSForce }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -24,7 +25,15 @@ export class ForceAXFR extends APIResource {
 export type SecondaryDNSForce = string;
 
 export interface ForceAXFRCreateParams {
+  /**
+   * Path param:
+   */
   zone_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export namespace ForceAXFR {

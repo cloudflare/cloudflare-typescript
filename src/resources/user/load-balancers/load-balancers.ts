@@ -22,6 +22,7 @@ export namespace LoadBalancers {
   export import LoadBalancingMonitorsSinglePage = MonitorsAPI.LoadBalancingMonitorsSinglePage;
   export import MonitorCreateParams = MonitorsAPI.MonitorCreateParams;
   export import MonitorUpdateParams = MonitorsAPI.MonitorUpdateParams;
+  export import MonitorDeleteParams = MonitorsAPI.MonitorDeleteParams;
   export import MonitorEditParams = MonitorsAPI.MonitorEditParams;
   export import MonitorPreviewParams = MonitorsAPI.MonitorPreviewParams;
   export import Pools = PoolsAPI.Pools;
@@ -34,6 +35,7 @@ export namespace LoadBalancers {
   export import PoolCreateParams = PoolsAPI.PoolCreateParams;
   export import PoolUpdateParams = PoolsAPI.PoolUpdateParams;
   export import PoolListParams = PoolsAPI.PoolListParams;
+  export import PoolDeleteParams = PoolsAPI.PoolDeleteParams;
   export import PoolEditParams = PoolsAPI.PoolEditParams;
   export import PoolPreviewParams = PoolsAPI.PoolPreviewParams;
   export import Preview = PreviewAPI.Preview;

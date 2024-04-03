@@ -143,9 +143,19 @@ export interface GroupListParams extends V4PagePaginationArrayParams {
   mode?: 'on' | 'off';
 
   /**
+   * Query param: The name of the rule group.
+   */
+  name?: string;
+
+  /**
    * Query param: The field used to sort returned rule groups.
    */
   order?: 'mode' | 'rules_count';
+
+  /**
+   * Query param: The number of rules in the current rule group.
+   */
+  rules_count?: number;
 }
 
 export interface GroupEditParams {

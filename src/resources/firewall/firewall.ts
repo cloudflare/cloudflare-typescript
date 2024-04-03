@@ -23,6 +23,7 @@ export namespace Firewall {
   export import LockdownCreateParams = LockdownsAPI.LockdownCreateParams;
   export import LockdownUpdateParams = LockdownsAPI.LockdownUpdateParams;
   export import LockdownListParams = LockdownsAPI.LockdownListParams;
+  export import LockdownDeleteParams = LockdownsAPI.LockdownDeleteParams;
   export import Rules = RulesAPI.Rules;
   export import FirewallFilterRule = RulesAPI.FirewallFilterRule;
   export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
@@ -33,6 +34,7 @@ export namespace Firewall {
   export import RuleListParams = RulesAPI.RuleListParams;
   export import RuleDeleteParams = RulesAPI.RuleDeleteParams;
   export import RuleEditParams = RulesAPI.RuleEditParams;
+  export import RuleGetParams = RulesAPI.RuleGetParams;
   export import AccessRules = AccessRulesAPI.AccessRules;
   export import AccessRuleCreateResponse = AccessRulesAPI.AccessRuleCreateResponse;
   export import AccessRuleListResponse = AccessRulesAPI.AccessRuleListResponse;
@@ -56,5 +58,6 @@ export namespace Firewall {
   export import UARuleCreateParams = UARulesAPI.UARuleCreateParams;
   export import UARuleUpdateParams = UARulesAPI.UARuleUpdateParams;
   export import UARuleListParams = UARulesAPI.UARuleListParams;
+  export import UARuleDeleteParams = UARulesAPI.UARuleDeleteParams;
   export import WAF = WAFAPI.WAF;
 }

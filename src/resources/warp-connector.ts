@@ -1360,6 +1360,11 @@ export interface WARPConnectorListParams extends V4PagePaginationArrayParams {
   name?: string;
 
   /**
+   * Query param: UUID of the tunnel.
+   */
+  uuid?: string;
+
+  /**
    * Query param:
    */
   was_active_at?: string;

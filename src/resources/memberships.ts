@@ -45,9 +45,13 @@ export class Memberships extends APIResource {
   /**
    * Remove the associated member from an account.
    */
-  delete(membershipId: string, options?: Core.RequestOptions): Core.APIPromise<MembershipDeleteResponse> {
+  delete(
+    membershipId: string,
+    body: MembershipDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MembershipDeleteResponse> {
     return (
-      this._client.delete(`/memberships/${membershipId}`, options) as Core.APIPromise<{
+      this._client.delete(`/memberships/${membershipId}`, { body, ...options }) as Core.APIPromise<{
         result: MembershipDeleteResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -153,6 +157,8 @@ export namespace MembershipListParams {
   }
 }
 
+export type MembershipDeleteParams = unknown;
+
 export namespace Memberships {
   export import Membership = MembershipsAPI.Membership;
   export import MembershipUpdateResponse = MembershipsAPI.MembershipUpdateResponse;
@@ -161,4 +167,5 @@ export namespace Memberships {
   export import MembershipsV4PagePaginationArray = MembershipsAPI.MembershipsV4PagePaginationArray;
   export import MembershipUpdateParams = MembershipsAPI.MembershipUpdateParams;
   export import MembershipListParams = MembershipsAPI.MembershipListParams;
+  export import MembershipDeleteParams = MembershipsAPI.MembershipDeleteParams;
 }

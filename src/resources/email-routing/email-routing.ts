@@ -18,23 +18,30 @@ export class EmailRouting extends APIResource {
    */
   disable(
     zoneIdentifier: string,
+    body: EmailRoutingDisableParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<EmailRoutingDisableResponse> {
     return (
-      this._client.post(`/zones/${zoneIdentifier}/email/routing/disable`, options) as Core.APIPromise<{
-        result: EmailRoutingDisableResponse;
-      }>
+      this._client.post(`/zones/${zoneIdentifier}/email/routing/disable`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: EmailRoutingDisableResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Enable you Email Routing zone. Add and lock the necessary MX and SPF records.
    */
-  enable(zoneIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<EmailRoutingEnableResponse> {
+  enable(
+    zoneIdentifier: string,
+    body: EmailRoutingEnableParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<EmailRoutingEnableResponse> {
     return (
-      this._client.post(`/zones/${zoneIdentifier}/email/routing/enable`, options) as Core.APIPromise<{
-        result: EmailRoutingEnableResponse;
-      }>
+      this._client.post(`/zones/${zoneIdentifier}/email/routing/enable`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: EmailRoutingEnableResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -222,11 +229,17 @@ export interface EmailRoutingGetResponse {
   tag?: string;
 }
 
+export type EmailRoutingDisableParams = unknown;
+
+export type EmailRoutingEnableParams = unknown;
+
 export namespace EmailRouting {
   export import EmailSettings = EmailRoutingAPI.EmailSettings;
   export import EmailRoutingDisableResponse = EmailRoutingAPI.EmailRoutingDisableResponse;
   export import EmailRoutingEnableResponse = EmailRoutingAPI.EmailRoutingEnableResponse;
   export import EmailRoutingGetResponse = EmailRoutingAPI.EmailRoutingGetResponse;
+  export import EmailRoutingDisableParams = EmailRoutingAPI.EmailRoutingDisableParams;
+  export import EmailRoutingEnableParams = EmailRoutingAPI.EmailRoutingEnableParams;
   export import DNS = DNSAPI.DNS;
   export import EmailDNSRecord = DNSAPI.EmailDNSRecord;
   export import DNSGetResponse = DNSAPI.DNSGetResponse;

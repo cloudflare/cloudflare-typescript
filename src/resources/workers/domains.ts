@@ -36,8 +36,9 @@ export class Domains extends APIResource {
    * Detaches a Worker from a zone and hostname.
    */
   delete(domainId: string, params: DomainDeleteParams, options?: Core.RequestOptions): Core.APIPromise<void> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return this._client.delete(`/accounts/${account_id}/workers/domains/${domainId}`, {
+      body: body,
       ...options,
       headers: { Accept: '*/*', ...options?.headers },
     });
@@ -154,7 +155,15 @@ export interface DomainListParams {
 }
 
 export interface DomainDeleteParams {
+  /**
+   * Path param:
+   */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface DomainGetParams {

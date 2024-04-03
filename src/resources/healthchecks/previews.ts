@@ -29,12 +29,12 @@ export class Previews extends APIResource {
     params: PreviewDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PreviewDeleteResponse> {
-    const { zone_id } = params;
+    const { zone_id, body } = params;
     return (
-      this._client.delete(
-        `/zones/${zone_id}/healthchecks/preview/${healthcheckId}`,
-        options,
-      ) as Core.APIPromise<{ result: PreviewDeleteResponse }>
+      this._client.delete(`/zones/${zone_id}/healthchecks/preview/${healthcheckId}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: PreviewDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -227,9 +227,14 @@ export namespace PreviewCreateParams {
 
 export interface PreviewDeleteParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   zone_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface PreviewGetParams {

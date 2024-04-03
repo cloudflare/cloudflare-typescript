@@ -97,7 +97,7 @@ export class AccessRules extends APIResource {
     params: AccessRuleDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AccessRuleDeleteResponse | null> {
-    const { account_id, zone_id } = params;
+    const { body, account_id, zone_id } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -115,10 +115,10 @@ export class AccessRules extends APIResource {
           accountOrZoneId: zone_id,
         };
     return (
-      this._client.delete(
-        `/${accountOrZone}/${accountOrZoneId}/firewall/access_rules/rules/${identifier}`,
-        options,
-      ) as Core.APIPromise<{ result: AccessRuleDeleteResponse | null }>
+      this._client.delete(`/${accountOrZone}/${accountOrZoneId}/firewall/access_rules/rules/${identifier}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: AccessRuleDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -412,12 +412,19 @@ export namespace AccessRuleListParams {
 
 export interface AccessRuleDeleteParams {
   /**
-   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   * Body param:
+   */
+  body: unknown;
+
+  /**
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
    */
   account_id?: string;
 
   /**
-   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
    */
   zone_id?: string;
 }

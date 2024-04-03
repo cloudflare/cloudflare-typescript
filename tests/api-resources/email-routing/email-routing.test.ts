@@ -11,8 +11,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource emailRouting', () => {
   // skipped: tests are disabled for the time being
-  test.skip('disable', async () => {
-    const responsePromise = cloudflare.emailRouting.disable('023e105f4ecef8ad9ca31a8372d0c353');
+  test.skip('disable: only required params', async () => {
+    const responsePromise = cloudflare.emailRouting.disable('023e105f4ecef8ad9ca31a8372d0c353', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,8 +23,13 @@ describe('resource emailRouting', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('enable', async () => {
-    const responsePromise = cloudflare.emailRouting.enable('023e105f4ecef8ad9ca31a8372d0c353');
+  test.skip('disable: required and optional params', async () => {
+    const response = await cloudflare.emailRouting.disable('023e105f4ecef8ad9ca31a8372d0c353', {});
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('enable: only required params', async () => {
+    const responsePromise = cloudflare.emailRouting.enable('023e105f4ecef8ad9ca31a8372d0c353', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -32,6 +37,11 @@ describe('resource emailRouting', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('enable: required and optional params', async () => {
+    const response = await cloudflare.emailRouting.enable('023e105f4ecef8ad9ca31a8372d0c353', {});
   });
 
   // skipped: tests are disabled for the time being

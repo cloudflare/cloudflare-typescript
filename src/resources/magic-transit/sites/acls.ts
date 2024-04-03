@@ -65,12 +65,12 @@ export class ACLs extends APIResource {
     params: ACLDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ACLDeleteResponse> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
-      this._client.delete(
-        `/accounts/${account_id}/magic/sites/${siteId}/acls/${aclIdentifier}`,
-        options,
-      ) as Core.APIPromise<{ result: ACLDeleteResponse }>
+      this._client.delete(`/accounts/${account_id}/magic/sites/${siteId}/acls/${aclIdentifier}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: ACLDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -743,9 +743,14 @@ export interface ACLListParams {
 
 export interface ACLDeleteParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface ACLGetParams {

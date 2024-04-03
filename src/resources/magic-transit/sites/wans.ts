@@ -65,12 +65,12 @@ export class WANs extends APIResource {
     params: WANDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<WANDeleteResponse> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
-      this._client.delete(
-        `/accounts/${account_id}/magic/sites/${siteId}/wans/${wanId}`,
-        options,
-      ) as Core.APIPromise<{ result: WANDeleteResponse }>
+      this._client.delete(`/accounts/${account_id}/magic/sites/${siteId}/wans/${wanId}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: WANDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -521,9 +521,14 @@ export interface WANListParams {
 
 export interface WANDeleteParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface WANGetParams {

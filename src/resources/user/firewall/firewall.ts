@@ -14,5 +14,6 @@ export namespace Firewall {
   export import FirewallRulesV4PagePaginationArray = AccessRulesAPI.FirewallRulesV4PagePaginationArray;
   export import AccessRuleCreateParams = AccessRulesAPI.AccessRuleCreateParams;
   export import AccessRuleListParams = AccessRulesAPI.AccessRuleListParams;
+  export import AccessRuleDeleteParams = AccessRulesAPI.AccessRuleDeleteParams;
   export import AccessRuleEditParams = AccessRulesAPI.AccessRuleEditParams;
 }

@@ -13,11 +13,11 @@ export class Accounts extends APIResource {
     params: AccountUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AccountUpdateResponse | null> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
       this._client.put(
         `/accounts/${account_id}/addressing/address_maps/${addressMapId}/accounts/${account_id}`,
-        options,
+        { body: body, ...options },
       ) as Core.APIPromise<{ result: AccountUpdateResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -30,11 +30,11 @@ export class Accounts extends APIResource {
     params: AccountDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AccountDeleteResponse | null> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/addressing/address_maps/${addressMapId}/accounts/${account_id}`,
-        options,
+        { body: body, ...options },
       ) as Core.APIPromise<{ result: AccountDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -46,16 +46,26 @@ export type AccountDeleteResponse = unknown | Array<unknown> | string;
 
 export interface AccountUpdateParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface AccountDeleteParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export namespace Accounts {

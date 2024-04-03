@@ -83,6 +83,7 @@ describe('resource namespaces', () => {
   test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.kv.namespaces.delete('0f2ac74b498b48028cb68387c421e279', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -97,6 +98,7 @@ describe('resource namespaces', () => {
   test.skip('delete: required and optional params', async () => {
     const response = await cloudflare.kv.namespaces.delete('0f2ac74b498b48028cb68387c421e279', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: {},
     });
   });
 });

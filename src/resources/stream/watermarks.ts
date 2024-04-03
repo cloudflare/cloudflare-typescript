@@ -47,12 +47,12 @@ export class Watermarks extends APIResource {
     params: WatermarkDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<WatermarkDeleteResponse> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
-      this._client.delete(
-        `/accounts/${account_id}/stream/watermarks/${identifier}`,
-        options,
-      ) as Core.APIPromise<{ result: WatermarkDeleteResponse }>
+      this._client.delete(`/accounts/${account_id}/stream/watermarks/${identifier}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: WatermarkDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -205,9 +205,14 @@ export interface WatermarkListParams {
 
 export interface WatermarkDeleteParams {
   /**
-   * The account identifier tag.
+   * Path param: The account identifier tag.
    */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface WatermarkGetParams {

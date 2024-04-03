@@ -56,6 +56,7 @@ describe('resource virtualNetworks', () => {
       is_default: {},
       is_deleted: {},
       name: 'us-east-1-vpc',
+      vnet_id: 'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
       vnet_name: 'us-east-1-vpc',
     });
   });
@@ -64,7 +65,7 @@ describe('resource virtualNetworks', () => {
   test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.networks.virtualNetworks.delete(
       'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
-      { account_id: '699d98642c564d2e855e9661899b7252' },
+      { account_id: '699d98642c564d2e855e9661899b7252', body: {} },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -79,7 +80,7 @@ describe('resource virtualNetworks', () => {
   test.skip('delete: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.networks.virtualNetworks.delete(
       'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
-      { account_id: '699d98642c564d2e855e9661899b7252' },
+      { account_id: '699d98642c564d2e855e9661899b7252', body: {} },
     );
   });
 

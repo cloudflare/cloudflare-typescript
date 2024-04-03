@@ -38,12 +38,12 @@ export class Variants extends APIResource {
     params: VariantDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<VariantDeleteResponse> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
-      this._client.delete(
-        `/accounts/${account_id}/images/v1/variants/${variantId}`,
-        options,
-      ) as Core.APIPromise<{ result: VariantDeleteResponse }>
+      this._client.delete(`/accounts/${account_id}/images/v1/variants/${variantId}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: VariantDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -248,9 +248,14 @@ export interface VariantListParams {
 
 export interface VariantDeleteParams {
   /**
-   * Account identifier tag.
+   * Path param: Account identifier tag.
    */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface VariantEditParams {

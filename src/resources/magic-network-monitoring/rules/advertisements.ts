@@ -13,12 +13,12 @@ export class Advertisements extends APIResource {
     params: AdvertisementEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MagicNetworkMonitoringRuleAdvertisable | null> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
-      this._client.patch(
-        `/accounts/${account_id}/mnm/rules/${ruleId}/advertisement`,
-        options,
-      ) as Core.APIPromise<{ result: MagicNetworkMonitoringRuleAdvertisable | null }>
+      this._client.patch(`/accounts/${account_id}/mnm/rules/${ruleId}/advertisement`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: MagicNetworkMonitoringRuleAdvertisable | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -33,7 +33,15 @@ export interface MagicNetworkMonitoringRuleAdvertisable {
 }
 
 export interface AdvertisementEditParams {
+  /**
+   * Path param:
+   */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export namespace Advertisements {

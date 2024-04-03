@@ -14,12 +14,12 @@ export class IPs extends APIResource {
     params: IPUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IPUpdateResponse | null> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
-      this._client.put(
-        `/accounts/${account_id}/addressing/address_maps/${addressMapId}/ips/${ipAddress}`,
-        options,
-      ) as Core.APIPromise<{ result: IPUpdateResponse | null }>
+      this._client.put(`/accounts/${account_id}/addressing/address_maps/${addressMapId}/ips/${ipAddress}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: IPUpdateResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -32,11 +32,11 @@ export class IPs extends APIResource {
     params: IPDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IPDeleteResponse | null> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/addressing/address_maps/${addressMapId}/ips/${ipAddress}`,
-        options,
+        { body: body, ...options },
       ) as Core.APIPromise<{ result: IPDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -48,16 +48,26 @@ export type IPDeleteResponse = unknown | Array<unknown> | string;
 
 export interface IPUpdateParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface IPDeleteParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export namespace IPs {

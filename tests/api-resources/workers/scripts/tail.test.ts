@@ -14,6 +14,7 @@ describe('resource tail', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.workers.scripts.tail.create('this-is_my_script-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -28,6 +29,7 @@ describe('resource tail', () => {
   test.skip('create: required and optional params', async () => {
     const response = await cloudflare.workers.scripts.tail.create('this-is_my_script-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: {},
     });
   });
 
@@ -36,7 +38,7 @@ describe('resource tail', () => {
     const responsePromise = cloudflare.workers.scripts.tail.delete(
       'this-is_my_script-01',
       '03dc9f77817b488fb26c5861ec18f791',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', body: {} },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -52,7 +54,7 @@ describe('resource tail', () => {
     const response = await cloudflare.workers.scripts.tail.delete(
       'this-is_my_script-01',
       '03dc9f77817b488fb26c5861ec18f791',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', body: {} },
     );
   });
 

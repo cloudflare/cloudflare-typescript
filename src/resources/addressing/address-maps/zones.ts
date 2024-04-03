@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { CloudflareError } from 'cloudflare/error';
 import * as ZonesAPI from 'cloudflare/resources/addressing/address-maps/zones';
 
 export class Zones extends APIResource {
@@ -14,28 +13,12 @@ export class Zones extends APIResource {
     params: ZoneUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ZoneUpdateResponse | null> {
-    const { zone_id, account_id } = params;
-    if (!account_id && !zone_id) {
-      throw new CloudflareError('You must provide either account_id or zone_id.');
-    }
-    if (account_id && zone_id) {
-      throw new CloudflareError('You cannot provide both account_id and zone_id.');
-    }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
+    const { zone_id, account_id, body } = params;
     return (
-      this._client.put(
-        `/accounts/${accountOrZone}/addressing/address_maps/${addressMapId}/zones/${accountOrZoneId}`,
-        options,
-      ) as Core.APIPromise<{ result: ZoneUpdateResponse | null }>
+      this._client.put(`/accounts/${account_id}/addressing/address_maps/${addressMapId}/zones/${zone_id}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: ZoneUpdateResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -47,27 +30,11 @@ export class Zones extends APIResource {
     params: ZoneDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ZoneDeleteResponse | null> {
-    const { zone_id, account_id } = params;
-    if (!account_id && !zone_id) {
-      throw new CloudflareError('You must provide either account_id or zone_id.');
-    }
-    if (account_id && zone_id) {
-      throw new CloudflareError('You cannot provide both account_id and zone_id.');
-    }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
+    const { zone_id, account_id, body } = params;
     return (
       this._client.delete(
-        `/accounts/${accountOrZone}/addressing/address_maps/${addressMapId}/zones/${accountOrZoneId}`,
-        options,
+        `/accounts/${account_id}/addressing/address_maps/${addressMapId}/zones/${zone_id}`,
+        { body: body, ...options },
       ) as Core.APIPromise<{ result: ZoneDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -79,26 +46,36 @@ export type ZoneDeleteResponse = unknown | Array<unknown> | string;
 
 export interface ZoneUpdateParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   zone_id: string;
 
   /**
-   * Identifier
+   * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface ZoneDeleteParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   zone_id: string;
 
   /**
-   * Identifier
+   * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export namespace Zones {

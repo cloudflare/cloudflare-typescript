@@ -54,10 +54,10 @@ export class Deployments extends APIResource {
     params: DeploymentDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<unknown> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return this._client.delete(
       `/accounts/${account_id}/pages/projects/${projectName}/deployments/${deploymentId}`,
-      options,
+      { body: body, ...options },
     );
   }
 
@@ -88,11 +88,11 @@ export class Deployments extends APIResource {
     params: DeploymentRetryParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ProjectsAPI.PagesDeployments> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
       this._client.post(
         `/accounts/${account_id}/pages/projects/${projectName}/deployments/${deploymentId}/retry`,
-        options,
+        { body: body, ...options },
       ) as Core.APIPromise<{ result: ProjectsAPI.PagesDeployments }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -107,11 +107,11 @@ export class Deployments extends APIResource {
     params: DeploymentRollbackParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ProjectsAPI.PagesDeployments> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
       this._client.post(
         `/accounts/${account_id}/pages/projects/${projectName}/deployments/${deploymentId}/rollback`,
-        options,
+        { body: body, ...options },
       ) as Core.APIPromise<{ result: ProjectsAPI.PagesDeployments }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -146,9 +146,14 @@ export interface DeploymentListParams {
 
 export interface DeploymentDeleteParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface DeploymentGetParams {
@@ -160,16 +165,26 @@ export interface DeploymentGetParams {
 
 export interface DeploymentRetryParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface DeploymentRollbackParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export namespace Deployments {

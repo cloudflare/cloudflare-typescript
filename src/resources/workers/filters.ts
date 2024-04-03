@@ -57,11 +57,12 @@ export class Filters extends APIResource {
     params: FilterDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<FilterDeleteResponse | null> {
-    const { zone_id } = params;
+    const { zone_id, body } = params;
     return (
-      this._client.delete(`/zones/${zone_id}/workers/filters/${filterId}`, options) as Core.APIPromise<{
-        result: FilterDeleteResponse | null;
-      }>
+      this._client.delete(`/zones/${zone_id}/workers/filters/${filterId}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: FilterDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -136,9 +137,14 @@ export interface FilterListParams {
 
 export interface FilterDeleteParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   zone_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export namespace Filters {

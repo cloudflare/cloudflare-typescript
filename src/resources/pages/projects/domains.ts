@@ -48,10 +48,10 @@ export class Domains extends APIResource {
     params: DomainDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<unknown> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return this._client.delete(
       `/accounts/${account_id}/pages/projects/${projectName}/domains/${domainName}`,
-      options,
+      { body: body, ...options },
     );
   }
 
@@ -64,12 +64,12 @@ export class Domains extends APIResource {
     params: DomainEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DomainEditResponse | null> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
-      this._client.patch(
-        `/accounts/${account_id}/pages/projects/${projectName}/domains/${domainName}`,
-        options,
-      ) as Core.APIPromise<{ result: DomainEditResponse | null }>
+      this._client.patch(`/accounts/${account_id}/pages/projects/${projectName}/domains/${domainName}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: DomainEditResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -125,16 +125,26 @@ export interface DomainListParams {
 
 export interface DomainDeleteParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface DomainEditParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface DomainGetParams {

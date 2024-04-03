@@ -58,6 +58,7 @@ describe('resource domains', () => {
   test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.pages.projects.domains.delete('this-is-my-project-01', 'string', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -72,6 +73,7 @@ describe('resource domains', () => {
   test.skip('delete: required and optional params', async () => {
     const response = await cloudflare.pages.projects.domains.delete('this-is-my-project-01', 'string', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: {},
     });
   });
 
@@ -79,6 +81,7 @@ describe('resource domains', () => {
   test.skip('edit: only required params', async () => {
     const responsePromise = cloudflare.pages.projects.domains.edit('this-is-my-project-01', 'string', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -93,6 +96,7 @@ describe('resource domains', () => {
   test.skip('edit: required and optional params', async () => {
     const response = await cloudflare.pages.projects.domains.edit('this-is-my-project-01', 'string', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: {},
     });
   });
 

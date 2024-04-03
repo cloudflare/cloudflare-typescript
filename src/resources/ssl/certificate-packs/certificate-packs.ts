@@ -34,12 +34,12 @@ export class CertificatePacks extends APIResource {
     params: CertificatePackDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CertificatePackDeleteResponse> {
-    const { zone_id } = params;
+    const { zone_id, body } = params;
     return (
-      this._client.delete(
-        `/zones/${zone_id}/ssl/certificate_packs/${certificatePackId}`,
-        options,
-      ) as Core.APIPromise<{ result: CertificatePackDeleteResponse }>
+      this._client.delete(`/zones/${zone_id}/ssl/certificate_packs/${certificatePackId}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: CertificatePackDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -53,12 +53,12 @@ export class CertificatePacks extends APIResource {
     params: CertificatePackEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CertificatePackEditResponse> {
-    const { zone_id } = params;
+    const { zone_id, body } = params;
     return (
-      this._client.patch(
-        `/zones/${zone_id}/ssl/certificate_packs/${certificatePackId}`,
-        options,
-      ) as Core.APIPromise<{ result: CertificatePackEditResponse }>
+      this._client.patch(`/zones/${zone_id}/ssl/certificate_packs/${certificatePackId}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: CertificatePackEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -174,16 +174,26 @@ export interface CertificatePackListParams {
 
 export interface CertificatePackDeleteParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   zone_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface CertificatePackEditParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   zone_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface CertificatePackGetParams {

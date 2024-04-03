@@ -58,6 +58,7 @@ describe('resource v1', () => {
   test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.images.v1.delete('string', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -72,6 +73,7 @@ describe('resource v1', () => {
   test.skip('delete: required and optional params', async () => {
     const response = await cloudflare.images.v1.delete('string', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: {},
     });
   });
 

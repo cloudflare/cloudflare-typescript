@@ -59,11 +59,12 @@ export class Lists extends APIResource {
     params: ListDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ListDeleteResponse | null> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/rules/lists/${listId}`, options) as Core.APIPromise<{
-        result: ListDeleteResponse | null;
-      }>
+      this._client.delete(`/accounts/${account_id}/rules/lists/${listId}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: ListDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -181,9 +182,14 @@ export interface ListListParams {
 
 export interface ListDeleteParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface ListGetParams {

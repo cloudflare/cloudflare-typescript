@@ -60,11 +60,12 @@ export class Pagerules extends APIResource {
     params: PageruleDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PageruleDeleteResponse | null> {
-    const { zone_id } = params;
+    const { zone_id, body } = params;
     return (
-      this._client.delete(`/zones/${zone_id}/pagerules/${pageruleId}`, options) as Core.APIPromise<{
-        result: PageruleDeleteResponse | null;
-      }>
+      this._client.delete(`/zones/${zone_id}/pagerules/${pageruleId}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: PageruleDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -437,9 +438,14 @@ export interface PageruleListParams {
 
 export interface PageruleDeleteParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   zone_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface PageruleEditParams {

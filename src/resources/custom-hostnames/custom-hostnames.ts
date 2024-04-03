@@ -53,8 +53,11 @@ export class CustomHostnames extends APIResource {
     params: CustomHostnameDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomHostnameDeleteResponse> {
-    const { zone_id } = params;
-    return this._client.delete(`/zones/${zone_id}/custom_hostnames/${customHostnameId}`, options);
+    const { zone_id, body } = params;
+    return this._client.delete(`/zones/${zone_id}/custom_hostnames/${customHostnameId}`, {
+      body: body,
+      ...options,
+    });
   }
 
   /**
@@ -1336,9 +1339,14 @@ export interface CustomHostnameListParams extends V4PagePaginationArrayParams {
 
 export interface CustomHostnameDeleteParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   zone_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface CustomHostnameEditParams {

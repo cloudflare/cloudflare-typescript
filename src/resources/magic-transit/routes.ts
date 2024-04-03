@@ -57,12 +57,12 @@ export class Routes extends APIResource {
     params: RouteDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RouteDeleteResponse> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
-      this._client.delete(
-        `/accounts/${account_id}/magic/routes/${routeIdentifier}`,
-        options,
-      ) as Core.APIPromise<{ result: RouteDeleteResponse }>
+      this._client.delete(`/accounts/${account_id}/magic/routes/${routeIdentifier}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: RouteDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -333,9 +333,14 @@ export interface RouteListParams {
 
 export interface RouteDeleteParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface RouteEmptyParams {

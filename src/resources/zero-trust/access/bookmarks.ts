@@ -12,12 +12,14 @@ export class Bookmarks extends APIResource {
   create(
     identifier: string,
     uuid: string,
+    body: BookmarkCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ZeroTrustBookmarks> {
     return (
-      this._client.post(`/accounts/${identifier}/access/bookmarks/${uuid}`, options) as Core.APIPromise<{
-        result: ZeroTrustBookmarks;
-      }>
+      this._client.post(`/accounts/${identifier}/access/bookmarks/${uuid}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: ZeroTrustBookmarks }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -27,12 +29,14 @@ export class Bookmarks extends APIResource {
   update(
     identifier: string,
     uuid: string,
+    body: BookmarkUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ZeroTrustBookmarks> {
     return (
-      this._client.put(`/accounts/${identifier}/access/bookmarks/${uuid}`, options) as Core.APIPromise<{
-        result: ZeroTrustBookmarks;
-      }>
+      this._client.put(`/accounts/${identifier}/access/bookmarks/${uuid}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: ZeroTrustBookmarks }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -56,12 +60,14 @@ export class Bookmarks extends APIResource {
   delete(
     identifier: string,
     uuid: string,
+    body: BookmarkDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BookmarkDeleteResponse> {
     return (
-      this._client.delete(`/accounts/${identifier}/access/bookmarks/${uuid}`, options) as Core.APIPromise<{
-        result: BookmarkDeleteResponse;
-      }>
+      this._client.delete(`/accounts/${identifier}/access/bookmarks/${uuid}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: BookmarkDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -117,8 +123,17 @@ export interface BookmarkDeleteResponse {
   id?: string;
 }
 
+export type BookmarkCreateParams = unknown;
+
+export type BookmarkUpdateParams = unknown;
+
+export type BookmarkDeleteParams = unknown;
+
 export namespace Bookmarks {
   export import ZeroTrustBookmarks = BookmarksAPI.ZeroTrustBookmarks;
   export import BookmarkDeleteResponse = BookmarksAPI.BookmarkDeleteResponse;
   export import ZeroTrustBookmarksSinglePage = BookmarksAPI.ZeroTrustBookmarksSinglePage;
+  export import BookmarkCreateParams = BookmarksAPI.BookmarkCreateParams;
+  export import BookmarkUpdateParams = BookmarksAPI.BookmarkUpdateParams;
+  export import BookmarkDeleteParams = BookmarksAPI.BookmarkDeleteParams;
 }
