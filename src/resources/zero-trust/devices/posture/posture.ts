@@ -64,11 +64,12 @@ export class Posture extends APIResource {
     params: PostureDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PostureDeleteResponse | null> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/devices/posture/${ruleId}`, options) as Core.APIPromise<{
-        result: PostureDeleteResponse | null;
-      }>
+      this._client.delete(`/accounts/${account_id}/devices/posture/${ruleId}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: PostureDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -1372,7 +1373,15 @@ export interface PostureListParams {
 }
 
 export interface PostureDeleteParams {
+  /**
+   * Path param:
+   */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface PostureGetParams {

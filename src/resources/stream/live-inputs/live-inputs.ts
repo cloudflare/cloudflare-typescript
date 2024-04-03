@@ -62,8 +62,9 @@ export class LiveInputs extends APIResource {
     params: LiveInputDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<void> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return this._client.delete(`/accounts/${account_id}/stream/live_inputs/${liveInputIdentifier}`, {
+      body: body,
       ...options,
       headers: { Accept: '*/*', ...options?.headers },
     });
@@ -505,9 +506,14 @@ export interface LiveInputListParams {
 
 export interface LiveInputDeleteParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface LiveInputGetParams {

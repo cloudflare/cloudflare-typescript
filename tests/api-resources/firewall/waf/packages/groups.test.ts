@@ -31,9 +31,11 @@ describe('resource groups', () => {
       direction: 'desc',
       match: 'any',
       mode: 'on',
+      name: 'Project Honey Pot',
       order: 'mode',
       page: 1,
       per_page: 5,
+      rules_count: 10,
     });
   });
 

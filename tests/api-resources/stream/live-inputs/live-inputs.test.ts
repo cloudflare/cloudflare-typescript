@@ -96,6 +96,7 @@ describe('resource liveInputs', () => {
   test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.stream.liveInputs.delete('66be4bf738797e01e1fca35a7bdecdcd', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -110,6 +111,7 @@ describe('resource liveInputs', () => {
   test.skip('delete: required and optional params', async () => {
     const response = await cloudflare.stream.liveInputs.delete('66be4bf738797e01e1fca35a7bdecdcd', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: {},
     });
   });
 

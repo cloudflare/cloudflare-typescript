@@ -32,7 +32,6 @@ describe('resource proxyEndpoints', () => {
       account_id: '699d98642c564d2e855e9661899b7252',
       ips: ['192.0.2.1/32', '192.0.2.1/32', '192.0.2.1/32'],
       name: 'Devops team',
-      subdomain: 'oli3n9zkz5.proxy.cloudflare-gateway.com',
     });
   });
 
@@ -61,7 +60,7 @@ describe('resource proxyEndpoints', () => {
   test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.gateway.proxyEndpoints.delete(
       'ed35569b41ce4d1facfe683550f54086',
-      { account_id: '699d98642c564d2e855e9661899b7252' },
+      { account_id: '699d98642c564d2e855e9661899b7252', body: {} },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -76,7 +75,7 @@ describe('resource proxyEndpoints', () => {
   test.skip('delete: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.gateway.proxyEndpoints.delete(
       'ed35569b41ce4d1facfe683550f54086',
-      { account_id: '699d98642c564d2e855e9661899b7252' },
+      { account_id: '699d98642c564d2e855e9661899b7252', body: {} },
     );
   });
 
@@ -103,7 +102,6 @@ describe('resource proxyEndpoints', () => {
         account_id: '699d98642c564d2e855e9661899b7252',
         ips: ['192.0.2.1/32', '192.0.2.1/32', '192.0.2.1/32'],
         name: 'Devops team',
-        subdomain: 'oli3n9zkz5.proxy.cloudflare-gateway.com',
       },
     );
   });

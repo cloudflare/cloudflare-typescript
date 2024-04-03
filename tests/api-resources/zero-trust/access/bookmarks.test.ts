@@ -11,10 +11,11 @@ const cloudflare = new Cloudflare({
 
 describe('resource bookmarks', () => {
   // skipped: tests are disabled for the time being
-  test.skip('create', async () => {
+  test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.access.bookmarks.create(
       '699d98642c564d2e855e9661899b7252',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      {},
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -26,10 +27,20 @@ describe('resource bookmarks', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('update', async () => {
+  test.skip('create: required and optional params', async () => {
+    const response = await cloudflare.zeroTrust.access.bookmarks.create(
+      '699d98642c564d2e855e9661899b7252',
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      {},
+    );
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.access.bookmarks.update(
       '699d98642c564d2e855e9661899b7252',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      {},
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -38,6 +49,15 @@ describe('resource bookmarks', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('update: required and optional params', async () => {
+    const response = await cloudflare.zeroTrust.access.bookmarks.update(
+      '699d98642c564d2e855e9661899b7252',
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      {},
+    );
   });
 
   // skipped: tests are disabled for the time being
@@ -63,10 +83,11 @@ describe('resource bookmarks', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
+  test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.access.bookmarks.delete(
       '699d98642c564d2e855e9661899b7252',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      {},
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -75,6 +96,15 @@ describe('resource bookmarks', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('delete: required and optional params', async () => {
+    const response = await cloudflare.zeroTrust.access.bookmarks.delete(
+      '699d98642c564d2e855e9661899b7252',
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      {},
+    );
   });
 
   // skipped: tests are disabled for the time being

@@ -49,12 +49,12 @@ export class MTLSCertificates extends APIResource {
     params: MTLSCertificateDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MTLSCertificate> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
-      this._client.delete(
-        `/accounts/${account_id}/mtls_certificates/${mtlsCertificateId}`,
-        options,
-      ) as Core.APIPromise<{ result: MTLSCertificate }>
+      this._client.delete(`/accounts/${account_id}/mtls_certificates/${mtlsCertificateId}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: MTLSCertificate }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -214,9 +214,14 @@ export interface MTLSCertificateListParams {
 
 export interface MTLSCertificateDeleteParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface MTLSCertificateGetParams {

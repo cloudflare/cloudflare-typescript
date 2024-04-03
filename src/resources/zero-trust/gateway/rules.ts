@@ -58,11 +58,12 @@ export class Rules extends APIResource {
     params: RuleDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RuleDeleteResponse> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/gateway/rules/${ruleId}`, options) as Core.APIPromise<{
-        result: RuleDeleteResponse;
-      }>
+      this._client.delete(`/accounts/${account_id}/gateway/rules/${ruleId}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: RuleDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -109,7 +110,8 @@ export interface ZeroTrustGatewayRules {
     | 'override'
     | 'l4_override'
     | 'egress'
-    | 'audit_ssh';
+    | 'audit_ssh'
+    | 'resolve';
 
   created_at?: string;
 
@@ -225,7 +227,8 @@ export namespace ZeroTrustGatewayRules {
     /**
      * Add your own custom resolvers to route queries that match the resolver policy.
      * Cannot be used when resolve_dns_through_cloudflare is set. DNS queries will
-     * route to the address closest to their origin.
+     * route to the address closest to their origin. Only valid when a rule's action is
+     * set to 'resolve'.
      */
     dns_resolvers?: RuleSettings.DNSResolvers;
 
@@ -281,7 +284,8 @@ export namespace ZeroTrustGatewayRules {
 
     /**
      * Enable to send queries that match the policy to Cloudflare's default 1.1.1.1 DNS
-     * resolver. Cannot be set when dns_resolvers are specified.
+     * resolver. Cannot be set when dns_resolvers are specified. Only valid when a
+     * rule's action is set to 'resolve'.
      */
     resolve_dns_through_cloudflare?: boolean;
 
@@ -350,7 +354,8 @@ export namespace ZeroTrustGatewayRules {
     /**
      * Add your own custom resolvers to route queries that match the resolver policy.
      * Cannot be used when resolve_dns_through_cloudflare is set. DNS queries will
-     * route to the address closest to their origin.
+     * route to the address closest to their origin. Only valid when a rule's action is
+     * set to 'resolve'.
      */
     export interface DNSResolvers {
       ipv4?: Array<DNSResolvers.IPV4>;
@@ -361,12 +366,12 @@ export namespace ZeroTrustGatewayRules {
     export namespace DNSResolvers {
       export interface IPV4 {
         /**
-         * IP address of upstream resolver.
+         * IPv4 address of upstream resolver.
          */
         ip: string;
 
         /**
-         * A port number to use for upstream resolver.
+         * A port number to use for upstream resolver. Defaults to 53 if unspecified.
          */
         port?: number;
 
@@ -385,12 +390,12 @@ export namespace ZeroTrustGatewayRules {
 
       export interface IPV6 {
         /**
-         * IP address of upstream resolver.
+         * IPv6 address of upstream resolver.
          */
         ip: string;
 
         /**
-         * A port number to use for upstream resolver.
+         * A port number to use for upstream resolver. Defaults to 53 if unspecified.
          */
         port?: number;
 
@@ -584,7 +589,8 @@ export interface RuleCreateParams {
     | 'override'
     | 'l4_override'
     | 'egress'
-    | 'audit_ssh';
+    | 'audit_ssh'
+    | 'resolve';
 
   /**
    * Body param: The name of the rule.
@@ -691,7 +697,8 @@ export namespace RuleCreateParams {
     /**
      * Add your own custom resolvers to route queries that match the resolver policy.
      * Cannot be used when resolve_dns_through_cloudflare is set. DNS queries will
-     * route to the address closest to their origin.
+     * route to the address closest to their origin. Only valid when a rule's action is
+     * set to 'resolve'.
      */
     dns_resolvers?: RuleSettings.DNSResolvers;
 
@@ -747,7 +754,8 @@ export namespace RuleCreateParams {
 
     /**
      * Enable to send queries that match the policy to Cloudflare's default 1.1.1.1 DNS
-     * resolver. Cannot be set when dns_resolvers are specified.
+     * resolver. Cannot be set when dns_resolvers are specified. Only valid when a
+     * rule's action is set to 'resolve'.
      */
     resolve_dns_through_cloudflare?: boolean;
 
@@ -816,7 +824,8 @@ export namespace RuleCreateParams {
     /**
      * Add your own custom resolvers to route queries that match the resolver policy.
      * Cannot be used when resolve_dns_through_cloudflare is set. DNS queries will
-     * route to the address closest to their origin.
+     * route to the address closest to their origin. Only valid when a rule's action is
+     * set to 'resolve'.
      */
     export interface DNSResolvers {
       ipv4?: Array<DNSResolvers.IPV4>;
@@ -827,12 +836,12 @@ export namespace RuleCreateParams {
     export namespace DNSResolvers {
       export interface IPV4 {
         /**
-         * IP address of upstream resolver.
+         * IPv4 address of upstream resolver.
          */
         ip: string;
 
         /**
-         * A port number to use for upstream resolver.
+         * A port number to use for upstream resolver. Defaults to 53 if unspecified.
          */
         port?: number;
 
@@ -851,12 +860,12 @@ export namespace RuleCreateParams {
 
       export interface IPV6 {
         /**
-         * IP address of upstream resolver.
+         * IPv6 address of upstream resolver.
          */
         ip: string;
 
         /**
-         * A port number to use for upstream resolver.
+         * A port number to use for upstream resolver. Defaults to 53 if unspecified.
          */
         port?: number;
 
@@ -1048,7 +1057,8 @@ export interface RuleUpdateParams {
     | 'override'
     | 'l4_override'
     | 'egress'
-    | 'audit_ssh';
+    | 'audit_ssh'
+    | 'resolve';
 
   /**
    * Body param: The name of the rule.
@@ -1155,7 +1165,8 @@ export namespace RuleUpdateParams {
     /**
      * Add your own custom resolvers to route queries that match the resolver policy.
      * Cannot be used when resolve_dns_through_cloudflare is set. DNS queries will
-     * route to the address closest to their origin.
+     * route to the address closest to their origin. Only valid when a rule's action is
+     * set to 'resolve'.
      */
     dns_resolvers?: RuleSettings.DNSResolvers;
 
@@ -1211,7 +1222,8 @@ export namespace RuleUpdateParams {
 
     /**
      * Enable to send queries that match the policy to Cloudflare's default 1.1.1.1 DNS
-     * resolver. Cannot be set when dns_resolvers are specified.
+     * resolver. Cannot be set when dns_resolvers are specified. Only valid when a
+     * rule's action is set to 'resolve'.
      */
     resolve_dns_through_cloudflare?: boolean;
 
@@ -1280,7 +1292,8 @@ export namespace RuleUpdateParams {
     /**
      * Add your own custom resolvers to route queries that match the resolver policy.
      * Cannot be used when resolve_dns_through_cloudflare is set. DNS queries will
-     * route to the address closest to their origin.
+     * route to the address closest to their origin. Only valid when a rule's action is
+     * set to 'resolve'.
      */
     export interface DNSResolvers {
       ipv4?: Array<DNSResolvers.IPV4>;
@@ -1291,12 +1304,12 @@ export namespace RuleUpdateParams {
     export namespace DNSResolvers {
       export interface IPV4 {
         /**
-         * IP address of upstream resolver.
+         * IPv4 address of upstream resolver.
          */
         ip: string;
 
         /**
-         * A port number to use for upstream resolver.
+         * A port number to use for upstream resolver. Defaults to 53 if unspecified.
          */
         port?: number;
 
@@ -1315,12 +1328,12 @@ export namespace RuleUpdateParams {
 
       export interface IPV6 {
         /**
-         * IP address of upstream resolver.
+         * IPv6 address of upstream resolver.
          */
         ip: string;
 
         /**
-         * A port number to use for upstream resolver.
+         * A port number to use for upstream resolver. Defaults to 53 if unspecified.
          */
         port?: number;
 
@@ -1493,7 +1506,15 @@ export interface RuleListParams {
 }
 
 export interface RuleDeleteParams {
+  /**
+   * Path param:
+   */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface RuleGetParams {

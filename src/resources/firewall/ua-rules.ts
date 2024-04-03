@@ -74,12 +74,14 @@ export class UARules extends APIResource {
   delete(
     zoneIdentifier: string,
     id: string,
+    body: UARuleDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<UARuleDeleteResponse | null> {
     return (
-      this._client.delete(`/zones/${zoneIdentifier}/firewall/ua_rules/${id}`, options) as Core.APIPromise<{
-        result: UARuleDeleteResponse | null;
-      }>
+      this._client.delete(`/zones/${zoneIdentifier}/firewall/ua_rules/${id}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: UARuleDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -227,6 +229,8 @@ export interface UARuleListParams extends V4PagePaginationArrayParams {
   ua_search?: string;
 }
 
+export type UARuleDeleteParams = unknown;
+
 export namespace UARules {
   export import FirewallUserAgentRule = UARulesAPI.FirewallUserAgentRule;
   export import UARuleCreateResponse = UARulesAPI.UARuleCreateResponse;
@@ -238,4 +242,5 @@ export namespace UARules {
   export import UARuleCreateParams = UARulesAPI.UARuleCreateParams;
   export import UARuleUpdateParams = UARulesAPI.UARuleUpdateParams;
   export import UARuleListParams = UARulesAPI.UARuleListParams;
+  export import UARuleDeleteParams = UARulesAPI.UARuleDeleteParams;
 }

@@ -46,8 +46,11 @@ export class Projects extends APIResource {
     params: ProjectDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<unknown> {
-    const { account_id } = params;
-    return this._client.delete(`/accounts/${account_id}/pages/projects/${projectName}`, options);
+    const { account_id, body } = params;
+    return this._client.delete(`/accounts/${account_id}/pages/projects/${projectName}`, {
+      body: body,
+      ...options,
+    });
   }
 
   /**
@@ -1946,9 +1949,14 @@ export interface ProjectListParams {
 
 export interface ProjectDeleteParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface ProjectEditParams {

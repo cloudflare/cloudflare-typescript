@@ -226,6 +226,8 @@ export namespace WAFManagedRulesRule {
      */
     allowed_modes: Array<'on' | 'off'>;
 
+    default_mode: unknown;
+
     /**
      * The public description of the WAF rule.
      */
@@ -427,6 +429,8 @@ export namespace RuleEditResponse {
      */
     allowed_modes: Array<'on' | 'off'>;
 
+    default_mode: unknown;
+
     /**
      * The public description of the WAF rule.
      */
@@ -481,9 +485,19 @@ export interface RuleListParams extends V4PagePaginationArrayParams {
   zone_id: string;
 
   /**
+   * Query param: The public description of the WAF rule.
+   */
+  description?: string;
+
+  /**
    * Query param: The direction used to sort returned rules.
    */
   direction?: 'asc' | 'desc';
+
+  /**
+   * Query param: The unique identifier of the rule group.
+   */
+  group_id?: string;
 
   /**
    * Query param: When set to `all`, all the search requirements must match. When set
@@ -500,6 +514,12 @@ export interface RuleListParams extends V4PagePaginationArrayParams {
    * Query param: The field used to sort returned rules.
    */
   order?: 'priority' | 'group_id' | 'description';
+
+  /**
+   * Query param: The order in which the individual WAF rule is executed within its
+   * rule group.
+   */
+  priority?: string;
 }
 
 export interface RuleEditParams {

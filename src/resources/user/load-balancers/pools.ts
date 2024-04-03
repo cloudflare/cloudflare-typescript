@@ -57,9 +57,13 @@ export class Pools extends APIResource {
   /**
    * Delete a configured pool.
    */
-  delete(poolId: string, options?: Core.RequestOptions): Core.APIPromise<PoolDeleteResponse> {
+  delete(
+    poolId: string,
+    body: PoolDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PoolDeleteResponse> {
     return (
-      this._client.delete(`/user/load_balancers/pools/${poolId}`, options) as Core.APIPromise<{
+      this._client.delete(`/user/load_balancers/pools/${poolId}`, { body, ...options }) as Core.APIPromise<{
         result: PoolDeleteResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -999,6 +1003,8 @@ export interface PoolListParams {
   monitor?: unknown;
 }
 
+export type PoolDeleteParams = unknown;
+
 export interface PoolEditParams {
   /**
    * A list of regions from which to run health checks. Null means every Cloudflare
@@ -1376,6 +1382,7 @@ export namespace Pools {
   export import PoolCreateParams = PoolsAPI.PoolCreateParams;
   export import PoolUpdateParams = PoolsAPI.PoolUpdateParams;
   export import PoolListParams = PoolsAPI.PoolListParams;
+  export import PoolDeleteParams = PoolsAPI.PoolDeleteParams;
   export import PoolEditParams = PoolsAPI.PoolEditParams;
   export import PoolPreviewParams = PoolsAPI.PoolPreviewParams;
 }

@@ -14,6 +14,7 @@ describe('resource script', () => {
   test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.zones.workers.script.update({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -28,6 +29,7 @@ describe('resource script', () => {
   test.skip('update: required and optional params', async () => {
     const response = await cloudflare.zones.workers.script.update({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: {},
     });
   });
 
@@ -35,6 +37,7 @@ describe('resource script', () => {
   test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.zones.workers.script.delete({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -49,6 +52,7 @@ describe('resource script', () => {
   test.skip('delete: required and optional params', async () => {
     const response = await cloudflare.zones.workers.script.delete({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: {},
     });
   });
 

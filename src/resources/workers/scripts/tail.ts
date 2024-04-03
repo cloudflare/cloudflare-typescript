@@ -13,12 +13,12 @@ export class Tail extends APIResource {
     params: TailCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TailCreateResponse> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
-      this._client.post(
-        `/accounts/${account_id}/workers/scripts/${scriptName}/tails`,
-        options,
-      ) as Core.APIPromise<{ result: TailCreateResponse }>
+      this._client.post(`/accounts/${account_id}/workers/scripts/${scriptName}/tails`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: TailCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -31,12 +31,12 @@ export class Tail extends APIResource {
     params: TailDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TailDeleteResponse> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
-      this._client.delete(
-        `/accounts/${account_id}/workers/scripts/${scriptName}/tails/${id}`,
-        options,
-      ) as Core.APIPromise<{ result: TailDeleteResponse }>
+      this._client.delete(`/accounts/${account_id}/workers/scripts/${scriptName}/tails/${id}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: TailDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -78,16 +78,26 @@ export interface TailGetResponse {
 
 export interface TailCreateParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface TailDeleteParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface TailGetParams {

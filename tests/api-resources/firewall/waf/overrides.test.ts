@@ -87,10 +87,11 @@ describe('resource overrides', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
+  test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.firewall.waf.overrides.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'de677e5818985db1285d0e80225f06e5',
+      {},
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -99,6 +100,15 @@ describe('resource overrides', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('delete: required and optional params', async () => {
+    const response = await cloudflare.firewall.waf.overrides.delete(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      'de677e5818985db1285d0e80225f06e5',
+      {},
+    );
   });
 
   // skipped: tests are disabled for the time being

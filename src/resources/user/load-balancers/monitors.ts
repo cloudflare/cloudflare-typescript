@@ -45,11 +45,16 @@ export class Monitors extends APIResource {
   /**
    * Delete a configured monitor.
    */
-  delete(monitorId: string, options?: Core.RequestOptions): Core.APIPromise<MonitorDeleteResponse> {
+  delete(
+    monitorId: string,
+    body: MonitorDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MonitorDeleteResponse> {
     return (
-      this._client.delete(`/user/load_balancers/monitors/${monitorId}`, options) as Core.APIPromise<{
-        result: MonitorDeleteResponse;
-      }>
+      this._client.delete(`/user/load_balancers/monitors/${monitorId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: MonitorDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -447,6 +452,8 @@ export interface MonitorUpdateParams {
   type?: 'http' | 'https' | 'tcp' | 'udp_icmp' | 'icmp_ping' | 'smtp';
 }
 
+export type MonitorDeleteParams = unknown;
+
 export interface MonitorEditParams {
   /**
    * The expected HTTP response code or code range of the health check. This
@@ -653,6 +660,7 @@ export namespace Monitors {
   export import LoadBalancingMonitorsSinglePage = MonitorsAPI.LoadBalancingMonitorsSinglePage;
   export import MonitorCreateParams = MonitorsAPI.MonitorCreateParams;
   export import MonitorUpdateParams = MonitorsAPI.MonitorUpdateParams;
+  export import MonitorDeleteParams = MonitorsAPI.MonitorDeleteParams;
   export import MonitorEditParams = MonitorsAPI.MonitorEditParams;
   export import MonitorPreviewParams = MonitorsAPI.MonitorPreviewParams;
 }

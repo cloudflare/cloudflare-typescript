@@ -15,11 +15,12 @@ export class CacheReserve extends APIResource {
     params: CacheReserveClearParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CacheReserveClearResponse> {
-    const { zone_id } = params;
+    const { zone_id, body } = params;
     return (
-      this._client.post(`/zones/${zone_id}/cache/cache_reserve_clear`, options) as Core.APIPromise<{
-        result: CacheReserveClearResponse;
-      }>
+      this._client.post(`/zones/${zone_id}/cache/cache_reserve_clear`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: CacheReserveClearResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -200,9 +201,14 @@ export interface CacheReserveStatusResponse {
 
 export interface CacheReserveClearParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   zone_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface CacheReserveEditParams {

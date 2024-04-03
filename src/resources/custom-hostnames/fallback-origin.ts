@@ -28,11 +28,12 @@ export class FallbackOrigin extends APIResource {
     params: FallbackOriginDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<FallbackOriginDeleteResponse> {
-    const { zone_id } = params;
+    const { zone_id, body } = params;
     return (
-      this._client.delete(`/zones/${zone_id}/custom_hostnames/fallback_origin`, options) as Core.APIPromise<{
-        result: FallbackOriginDeleteResponse;
-      }>
+      this._client.delete(`/zones/${zone_id}/custom_hostnames/fallback_origin`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: FallbackOriginDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -73,9 +74,14 @@ export interface FallbackOriginUpdateParams {
 
 export interface FallbackOriginDeleteParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   zone_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface FallbackOriginGetParams {

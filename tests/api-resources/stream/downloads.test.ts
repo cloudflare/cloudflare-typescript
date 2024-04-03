@@ -14,6 +14,7 @@ describe('resource downloads', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.stream.downloads.create('ea95132c15732412d22c1476fa83f27a', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -28,6 +29,7 @@ describe('resource downloads', () => {
   test.skip('create: required and optional params', async () => {
     const response = await cloudflare.stream.downloads.create('ea95132c15732412d22c1476fa83f27a', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: {},
     });
   });
 

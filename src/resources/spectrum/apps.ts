@@ -72,10 +72,11 @@ export class Apps extends APIResource {
   delete(
     zone: string,
     appId: string,
+    body: AppDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AppDeleteResponse | null> {
     return (
-      this._client.delete(`/zones/${zone}/spectrum/apps/${appId}`, options) as Core.APIPromise<{
+      this._client.delete(`/zones/${zone}/spectrum/apps/${appId}`, { body, ...options }) as Core.APIPromise<{
         result: AppDeleteResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -680,6 +681,8 @@ export interface AppListParams extends V4PagePaginationArrayParams {
   order?: 'protocol' | 'app_id' | 'created_on' | 'modified_on' | 'dns';
 }
 
+export type AppDeleteParams = unknown;
+
 export namespace Apps {
   export import AppCreateResponse = AppsAPI.AppCreateResponse;
   export import AppUpdateResponse = AppsAPI.AppUpdateResponse;
@@ -690,4 +693,5 @@ export namespace Apps {
   export import AppCreateParams = AppsAPI.AppCreateParams;
   export import AppUpdateParams = AppsAPI.AppUpdateParams;
   export import AppListParams = AppsAPI.AppListParams;
+  export import AppDeleteParams = AppsAPI.AppDeleteParams;
 }

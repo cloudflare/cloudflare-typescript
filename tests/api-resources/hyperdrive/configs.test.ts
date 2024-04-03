@@ -14,6 +14,7 @@ describe('resource configs', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.hyperdrive.configs.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      name: {},
       origin: { password: 'password1234!' },
     });
     const rawResponse = await responsePromise.asResponse();
@@ -29,6 +30,7 @@ describe('resource configs', () => {
   test.skip('create: required and optional params', async () => {
     const response = await cloudflare.hyperdrive.configs.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      name: {},
       origin: { password: 'password1234!' },
     });
   });
@@ -37,6 +39,7 @@ describe('resource configs', () => {
   test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.hyperdrive.configs.update('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      name: {},
       origin: { password: 'password1234!' },
     });
     const rawResponse = await responsePromise.asResponse();
@@ -52,6 +55,7 @@ describe('resource configs', () => {
   test.skip('update: required and optional params', async () => {
     const response = await cloudflare.hyperdrive.configs.update('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      name: {},
       origin: { password: 'password1234!' },
     });
   });

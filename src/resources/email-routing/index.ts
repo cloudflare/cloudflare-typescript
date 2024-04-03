@@ -30,5 +30,7 @@ export {
   EmailRoutingDisableResponse,
   EmailRoutingEnableResponse,
   EmailRoutingGetResponse,
+  EmailRoutingDisableParams,
+  EmailRoutingEnableParams,
   EmailRouting,
 } from './email-routing';

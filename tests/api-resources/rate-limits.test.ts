@@ -60,10 +60,11 @@ describe('resource rateLimits', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
+  test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.rateLimits.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '372e67954025e0ba6aaa6d586b9e0b59',
+      {},
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -72,6 +73,15 @@ describe('resource rateLimits', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('delete: required and optional params', async () => {
+    const response = await cloudflare.rateLimits.delete(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '372e67954025e0ba6aaa6d586b9e0b59',
+      {},
+    );
   });
 
   // skipped: tests are disabled for the time being

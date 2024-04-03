@@ -256,6 +256,11 @@ export interface PackageListParams extends V4PagePaginationArrayParams {
   match?: 'any' | 'all';
 
   /**
+   * The name of the WAF package.
+   */
+  name?: string;
+
+  /**
    * The field used to sort returned packages.
    */
   order?: 'name';

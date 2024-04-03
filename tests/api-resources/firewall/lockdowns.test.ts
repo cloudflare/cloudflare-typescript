@@ -81,11 +81,13 @@ describe('resource lockdowns', () => {
       cloudflare.firewall.lockdowns.list(
         '023e105f4ecef8ad9ca31a8372d0c353',
         {
+          created_on: '2014-01-01T05:20:00.12345Z',
           description: 'endpoints',
           description_search: 'endpoints',
           ip: '1.2.3.4',
           ip_range_search: '1.2.3.0/16',
           ip_search: '1.2.3.4',
+          modified_on: '2014-01-01T05:20:00.12345Z',
           page: 1,
           per_page: 1,
           priority: 5,
@@ -97,10 +99,11 @@ describe('resource lockdowns', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
+  test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.firewall.lockdowns.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '372e67954025e0ba6aaa6d586b9e0b59',
+      {},
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -109,6 +112,15 @@ describe('resource lockdowns', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('delete: required and optional params', async () => {
+    const response = await cloudflare.firewall.lockdowns.delete(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '372e67954025e0ba6aaa6d586b9e0b59',
+      {},
+    );
   });
 
   // skipped: tests are disabled for the time being

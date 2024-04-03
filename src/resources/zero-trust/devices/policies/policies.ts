@@ -55,11 +55,12 @@ export class Policies extends APIResource {
     params: PolicyDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PolicyDeleteResponse | null> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/devices/policy/${policyId}`, options) as Core.APIPromise<{
-        result: PolicyDeleteResponse | null;
-      }>
+      this._client.delete(`/accounts/${account_id}/devices/policy/${policyId}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: PolicyDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -346,7 +347,15 @@ export interface PolicyListParams {
 }
 
 export interface PolicyDeleteParams {
+  /**
+   * Path param:
+   */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface PolicyEditParams {

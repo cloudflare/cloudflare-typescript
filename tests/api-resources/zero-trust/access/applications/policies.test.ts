@@ -22,6 +22,7 @@ describe('resource policies', () => {
           { email: { email: 'test@example.com' } },
         ],
         name: 'Allow devs',
+        account_id: 'string',
       },
     );
     const rawResponse = await responsePromise.asResponse();
@@ -46,7 +47,6 @@ describe('resource policies', () => {
         ],
         name: 'Allow devs',
         account_id: 'string',
-        zone_id: 'string',
         approval_groups: [
           {
             approvals_needed: 1,
@@ -92,6 +92,7 @@ describe('resource policies', () => {
           { email: { email: 'test@example.com' } },
         ],
         name: 'Allow devs',
+        account_id: 'string',
       },
     );
     const rawResponse = await responsePromise.asResponse();
@@ -117,7 +118,6 @@ describe('resource policies', () => {
         ],
         name: 'Allow devs',
         account_id: 'string',
-        zone_id: 'string',
         approval_groups: [
           {
             approvals_needed: 1,
@@ -154,6 +154,7 @@ describe('resource policies', () => {
   test.skip('list', async () => {
     const responsePromise = cloudflare.zeroTrust.access.applications.policies.list(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: 'string' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -162,28 +163,6 @@ describe('resource policies', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.zeroTrust.access.applications.policies.list('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('list: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.zeroTrust.access.applications.policies.list(
-        'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-        { account_id: 'string', zone_id: 'string' },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
@@ -191,6 +170,7 @@ describe('resource policies', () => {
     const responsePromise = cloudflare.zeroTrust.access.applications.policies.delete(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: 'string' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -199,31 +179,6 @@ describe('resource policies', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('delete: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.zeroTrust.access.applications.policies.delete(
-        'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-        'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('delete: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.zeroTrust.access.applications.policies.delete(
-        'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-        'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-        { account_id: 'string', zone_id: 'string' },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
@@ -231,6 +186,7 @@ describe('resource policies', () => {
     const responsePromise = cloudflare.zeroTrust.access.applications.policies.get(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: 'string' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -239,30 +195,5 @@ describe('resource policies', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.zeroTrust.access.applications.policies.get(
-        'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-        'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('get: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.zeroTrust.access.applications.policies.get(
-        'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-        'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-        { account_id: 'string', zone_id: 'string' },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 });

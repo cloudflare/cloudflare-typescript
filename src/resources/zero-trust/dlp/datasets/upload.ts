@@ -32,12 +32,12 @@ export class Upload extends APIResource {
     params: UploadEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DatasetsAPI.DLPDataset> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
-      this._client.post(
-        `/accounts/${account_id}/dlp/datasets/${datasetId}/upload/${version}`,
-        options,
-      ) as Core.APIPromise<{ result: DatasetsAPI.DLPDataset }>
+      this._client.post(`/accounts/${account_id}/dlp/datasets/${datasetId}/upload/${version}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: DatasetsAPI.DLPDataset }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -55,7 +55,15 @@ export interface UploadCreateParams {
 }
 
 export interface UploadEditParams {
+  /**
+   * Path param:
+   */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export namespace Upload {

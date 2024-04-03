@@ -66,9 +66,13 @@ export class Tokens extends APIResource {
   /**
    * Destroy a token.
    */
-  delete(tokenId: unknown, options?: Core.RequestOptions): Core.APIPromise<TokenDeleteResponse | null> {
+  delete(
+    tokenId: unknown,
+    body: TokenDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TokenDeleteResponse | null> {
     return (
-      this._client.delete(`/user/tokens/${tokenId}`, options) as Core.APIPromise<{
+      this._client.delete(`/user/tokens/${tokenId}`, { body, ...options }) as Core.APIPromise<{
         result: TokenDeleteResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -302,6 +306,8 @@ export interface TokenListParams extends V4PagePaginationArrayParams {
   direction?: 'asc' | 'desc';
 }
 
+export type TokenDeleteParams = unknown;
+
 export namespace Tokens {
   export import TokenCreateResponse = TokensAPI.TokenCreateResponse;
   export import TokenUpdateResponse = TokensAPI.TokenUpdateResponse;
@@ -313,6 +319,7 @@ export namespace Tokens {
   export import TokenCreateParams = TokensAPI.TokenCreateParams;
   export import TokenUpdateParams = TokensAPI.TokenUpdateParams;
   export import TokenListParams = TokensAPI.TokenListParams;
+  export import TokenDeleteParams = TokensAPI.TokenDeleteParams;
   export import PermissionGroups = PermissionGroupsAPI.PermissionGroups;
   export import PermissionGroupListResponse = PermissionGroupsAPI.PermissionGroupListResponse;
   export import PermissionGroupListResponsesSinglePage = PermissionGroupsAPI.PermissionGroupListResponsesSinglePage;

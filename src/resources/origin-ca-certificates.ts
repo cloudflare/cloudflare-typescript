@@ -2,6 +2,7 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
+import { isRequestOptions } from 'cloudflare/core';
 import * as OriginCACertificatesAPI from 'cloudflare/resources/origin-ca-certificates';
 import { SinglePage } from 'cloudflare/pagination';
 
@@ -26,8 +27,19 @@ export class OriginCACertificates extends APIResource {
    * Key as your User Service Key when calling this endpoint
    * ([see above](#requests)).
    */
-  list(options?: Core.RequestOptions): Core.PagePromise<OriginCACertificatesSinglePage, OriginCACertificate> {
-    return this._client.getAPIList('/certificates', OriginCACertificatesSinglePage, options);
+  list(
+    query?: OriginCACertificateListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<OriginCACertificatesSinglePage, OriginCACertificate>;
+  list(options?: Core.RequestOptions): Core.PagePromise<OriginCACertificatesSinglePage, OriginCACertificate>;
+  list(
+    query: OriginCACertificateListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<OriginCACertificatesSinglePage, OriginCACertificate> {
+    if (isRequestOptions(query)) {
+      return this.list({}, query);
+    }
+    return this._client.getAPIList('/certificates', OriginCACertificatesSinglePage, { query, ...options });
   }
 
   /**
@@ -37,10 +49,11 @@ export class OriginCACertificates extends APIResource {
    */
   delete(
     certificateId: string,
+    body: OriginCACertificateDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OriginCACertificateDeleteResponse> {
     return (
-      this._client.delete(`/certificates/${certificateId}`, options) as Core.APIPromise<{
+      this._client.delete(`/certificates/${certificateId}`, { body, ...options }) as Core.APIPromise<{
         result: OriginCACertificateDeleteResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -136,6 +149,15 @@ export interface OriginCACertificateCreateParams {
   requested_validity?: 7 | 30 | 90 | 365 | 730 | 1095 | 5475;
 }
 
+export interface OriginCACertificateListParams {
+  /**
+   * Identifier
+   */
+  identifier?: string;
+}
+
+export type OriginCACertificateDeleteParams = unknown;
+
 export namespace OriginCACertificates {
   export import OriginCACertificate = OriginCACertificatesAPI.OriginCACertificate;
   export import OriginCACertificateCreateResponse = OriginCACertificatesAPI.OriginCACertificateCreateResponse;
@@ -143,4 +165,6 @@ export namespace OriginCACertificates {
   export import OriginCACertificateGetResponse = OriginCACertificatesAPI.OriginCACertificateGetResponse;
   export import OriginCACertificatesSinglePage = OriginCACertificatesAPI.OriginCACertificatesSinglePage;
   export import OriginCACertificateCreateParams = OriginCACertificatesAPI.OriginCACertificateCreateParams;
+  export import OriginCACertificateListParams = OriginCACertificatesAPI.OriginCACertificateListParams;
+  export import OriginCACertificateDeleteParams = OriginCACertificatesAPI.OriginCACertificateDeleteParams;
 }

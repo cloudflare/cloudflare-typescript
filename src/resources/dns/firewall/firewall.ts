@@ -44,12 +44,12 @@ export class Firewall extends APIResource {
     params: FirewallDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<FirewallDeleteResponse> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
-      this._client.delete(
-        `/accounts/${account_id}/dns_firewall/${dnsFirewallId}`,
-        options,
-      ) as Core.APIPromise<{ result: FirewallDeleteResponse }>
+      this._client.delete(`/accounts/${account_id}/dns_firewall/${dnsFirewallId}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: FirewallDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -264,9 +264,14 @@ export interface FirewallListParams extends V4PagePaginationArrayParams {
 
 export interface FirewallDeleteParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface FirewallEditParams {

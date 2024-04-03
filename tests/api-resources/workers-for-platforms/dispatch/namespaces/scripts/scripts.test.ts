@@ -81,7 +81,7 @@ describe('resource scripts', () => {
     const responsePromise = cloudflare.workersForPlatforms.dispatch.namespaces.scripts.delete(
       'my-dispatch-namespace',
       'this-is_my_script-01',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', body: {} },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -97,7 +97,7 @@ describe('resource scripts', () => {
     const response = await cloudflare.workersForPlatforms.dispatch.namespaces.scripts.delete(
       'my-dispatch-namespace',
       'this-is_my_script-01',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', force: true },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', body: {}, force: true },
     );
   });
 

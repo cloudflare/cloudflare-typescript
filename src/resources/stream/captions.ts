@@ -34,12 +34,12 @@ export class Captions extends APIResource {
     params: CaptionDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CaptionDeleteResponse> {
-    const { account_id } = params;
+    const { account_id, body } = params;
     return (
-      this._client.delete(
-        `/accounts/${account_id}/stream/${identifier}/captions/${language}`,
-        options,
-      ) as Core.APIPromise<{ result: CaptionDeleteResponse }>
+      this._client.delete(`/accounts/${account_id}/stream/${identifier}/captions/${language}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: CaptionDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -92,9 +92,14 @@ export interface CaptionUpdateParams {
 
 export interface CaptionDeleteParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface CaptionGetParams {

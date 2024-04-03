@@ -123,7 +123,7 @@ export class Jobs extends APIResource {
     params: JobDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<JobDeleteResponse | null> {
-    const { account_id, zone_id } = params;
+    const { body, account_id, zone_id } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -141,10 +141,10 @@ export class Jobs extends APIResource {
           accountOrZoneId: zone_id,
         };
     return (
-      this._client.delete(
-        `/${accountOrZone}/${accountOrZoneId}/logpush/jobs/${jobId}`,
-        options,
-      ) as Core.APIPromise<{ result: JobDeleteResponse | null }>
+      this._client.delete(`/${accountOrZone}/${accountOrZoneId}/logpush/jobs/${jobId}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: JobDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -483,12 +483,19 @@ export interface JobListParams {
 
 export interface JobDeleteParams {
   /**
-   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   * Body param:
+   */
+  body: unknown;
+
+  /**
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
    */
   account_id?: string;
 
   /**
-   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
    */
   zone_id?: string;
 }

@@ -19,6 +19,9 @@ export {
 export {
   ZeroTrustBookmarks,
   BookmarkDeleteResponse,
+  BookmarkCreateParams,
+  BookmarkUpdateParams,
+  BookmarkDeleteParams,
   ZeroTrustBookmarksSinglePage,
   Bookmarks,
 } from './bookmarks';

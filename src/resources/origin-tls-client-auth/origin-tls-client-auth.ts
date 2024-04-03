@@ -53,12 +53,12 @@ export class OriginTLSClientAuth extends APIResource {
     params: OriginTLSClientAuthDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OriginTLSClientAuthDeleteResponse> {
-    const { zone_id } = params;
+    const { zone_id, body } = params;
     return (
-      this._client.delete(
-        `/zones/${zone_id}/origin_tls_client_auth/${certificateId}`,
-        options,
-      ) as Core.APIPromise<{ result: OriginTLSClientAuthDeleteResponse }>
+      this._client.delete(`/zones/${zone_id}/origin_tls_client_auth/${certificateId}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: OriginTLSClientAuthDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -158,9 +158,14 @@ export interface OriginTLSClientAuthListParams {
 
 export interface OriginTLSClientAuthDeleteParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   zone_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface OriginTLSClientAuthGetParams {

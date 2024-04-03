@@ -67,12 +67,12 @@ export class Rules extends APIResource {
     params: RuleDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RuleDeleteResponse | null> {
-    const { zone_id } = params;
+    const { zone_id, body } = params;
     return (
-      this._client.delete(
-        `/zones/${zone_id}/waiting_rooms/${waitingRoomId}/rules/${ruleId}`,
-        options,
-      ) as Core.APIPromise<{ result: RuleDeleteResponse | null }>
+      this._client.delete(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}/rules/${ruleId}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: RuleDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -211,9 +211,14 @@ export interface RuleListParams {
 
 export interface RuleDeleteParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   zone_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
 }
 
 export interface RuleEditParams {
