@@ -4,7 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as TrueClientIPHeaderAPI from 'cloudflare/resources/zones/settings/true-client-ip-header';
 
-export class TrueClientIPHeader extends APIResource {
+export class TrueClientIPHeaderResource extends APIResource {
   /**
    * Allows customer to continue to use True Client IP (Akamai feature) in the
    * headers we send to the origin. This is limited to Enterprise Zones.
@@ -12,13 +12,13 @@ export class TrueClientIPHeader extends APIResource {
   edit(
     params: TrueClientIPHeaderEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneSettingTrueClientIPHeader> {
+  ): Core.APIPromise<TrueClientIPHeader> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/true_client_ip_header`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZoneSettingTrueClientIPHeader }>
+      }) as Core.APIPromise<{ result: TrueClientIPHeader }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -29,11 +29,11 @@ export class TrueClientIPHeader extends APIResource {
   get(
     params: TrueClientIPHeaderGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneSettingTrueClientIPHeader> {
+  ): Core.APIPromise<TrueClientIPHeader> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/true_client_ip_header`, options) as Core.APIPromise<{
-        result: ZoneSettingTrueClientIPHeader;
+        result: TrueClientIPHeader;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -43,7 +43,7 @@ export class TrueClientIPHeader extends APIResource {
  * Allows customer to continue to use True Client IP (Akamai feature) in the
  * headers we send to the origin. This is limited to Enterprise Zones.
  */
-export interface ZoneSettingTrueClientIPHeader {
+export interface TrueClientIPHeader {
   /**
    * ID of the zone setting.
    */
@@ -85,8 +85,8 @@ export interface TrueClientIPHeaderGetParams {
   zone_id: string;
 }
 
-export namespace TrueClientIPHeader {
-  export import ZoneSettingTrueClientIPHeader = TrueClientIPHeaderAPI.ZoneSettingTrueClientIPHeader;
+export namespace TrueClientIPHeaderResource {
+  export import TrueClientIPHeader = TrueClientIPHeaderAPI.TrueClientIPHeader;
   export import TrueClientIPHeaderEditParams = TrueClientIPHeaderAPI.TrueClientIPHeaderEditParams;
   export import TrueClientIPHeaderGetParams = TrueClientIPHeaderAPI.TrueClientIPHeaderGetParams;
 }

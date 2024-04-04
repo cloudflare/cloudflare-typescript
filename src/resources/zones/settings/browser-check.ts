@@ -4,7 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as BrowserCheckAPI from 'cloudflare/resources/zones/settings/browser-check';
 
-export class BrowserCheck extends APIResource {
+export class BrowserCheckResource extends APIResource {
   /**
    * Browser Integrity Check is similar to Bad Behavior and looks for common HTTP
    * headers abused most commonly by spammers and denies access to your page. It will
@@ -12,16 +12,13 @@ export class BrowserCheck extends APIResource {
    * agent (also commonly used by abuse bots, crawlers or visitors).
    * (https://support.cloudflare.com/hc/en-us/articles/200170086).
    */
-  edit(
-    params: BrowserCheckEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneSettingBrowserCheck> {
+  edit(params: BrowserCheckEditParams, options?: Core.RequestOptions): Core.APIPromise<BrowserCheck> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/browser_check`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZoneSettingBrowserCheck }>
+      }) as Core.APIPromise<{ result: BrowserCheck }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -32,14 +29,11 @@ export class BrowserCheck extends APIResource {
    * agent (also commonly used by abuse bots, crawlers or visitors).
    * (https://support.cloudflare.com/hc/en-us/articles/200170086).
    */
-  get(
-    params: BrowserCheckGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneSettingBrowserCheck> {
+  get(params: BrowserCheckGetParams, options?: Core.RequestOptions): Core.APIPromise<BrowserCheck> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/browser_check`, options) as Core.APIPromise<{
-        result: ZoneSettingBrowserCheck;
+        result: BrowserCheck;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -52,7 +46,7 @@ export class BrowserCheck extends APIResource {
  * agent (also commonly used by abuse bots, crawlers or visitors).
  * (https://support.cloudflare.com/hc/en-us/articles/200170086).
  */
-export interface ZoneSettingBrowserCheck {
+export interface BrowserCheck {
   /**
    * ID of the zone setting.
    */
@@ -94,8 +88,8 @@ export interface BrowserCheckGetParams {
   zone_id: string;
 }
 
-export namespace BrowserCheck {
-  export import ZoneSettingBrowserCheck = BrowserCheckAPI.ZoneSettingBrowserCheck;
+export namespace BrowserCheckResource {
+  export import BrowserCheck = BrowserCheckAPI.BrowserCheck;
   export import BrowserCheckEditParams = BrowserCheckAPI.BrowserCheckEditParams;
   export import BrowserCheckGetParams = BrowserCheckAPI.BrowserCheckGetParams;
 }

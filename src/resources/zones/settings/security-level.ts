@@ -4,23 +4,20 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as SecurityLevelAPI from 'cloudflare/resources/zones/settings/security-level';
 
-export class SecurityLevel extends APIResource {
+export class SecurityLevelResource extends APIResource {
   /**
    * Choose the appropriate security profile for your website, which will
    * automatically adjust each of the security settings. If you choose to customize
    * an individual security setting, the profile will become Custom.
    * (https://support.cloudflare.com/hc/en-us/articles/200170056).
    */
-  edit(
-    params: SecurityLevelEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneSettingSecurityLevel> {
+  edit(params: SecurityLevelEditParams, options?: Core.RequestOptions): Core.APIPromise<SecurityLevel> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/security_level`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZoneSettingSecurityLevel }>
+      }) as Core.APIPromise<{ result: SecurityLevel }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -30,14 +27,11 @@ export class SecurityLevel extends APIResource {
    * an individual security setting, the profile will become Custom.
    * (https://support.cloudflare.com/hc/en-us/articles/200170056).
    */
-  get(
-    params: SecurityLevelGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneSettingSecurityLevel> {
+  get(params: SecurityLevelGetParams, options?: Core.RequestOptions): Core.APIPromise<SecurityLevel> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/security_level`, options) as Core.APIPromise<{
-        result: ZoneSettingSecurityLevel;
+        result: SecurityLevel;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -49,7 +43,7 @@ export class SecurityLevel extends APIResource {
  * an individual security setting, the profile will become Custom.
  * (https://support.cloudflare.com/hc/en-us/articles/200170056).
  */
-export interface ZoneSettingSecurityLevel {
+export interface SecurityLevel {
   /**
    * ID of the zone setting.
    */
@@ -91,8 +85,8 @@ export interface SecurityLevelGetParams {
   zone_id: string;
 }
 
-export namespace SecurityLevel {
-  export import ZoneSettingSecurityLevel = SecurityLevelAPI.ZoneSettingSecurityLevel;
+export namespace SecurityLevelResource {
+  export import SecurityLevel = SecurityLevelAPI.SecurityLevel;
   export import SecurityLevelEditParams = SecurityLevelAPI.SecurityLevelEditParams;
   export import SecurityLevelGetParams = SecurityLevelAPI.SecurityLevelGetParams;
 }

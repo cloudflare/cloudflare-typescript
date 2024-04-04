@@ -4,7 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as AutomaticPlatformOptimizationAPI from 'cloudflare/resources/zones/settings/automatic-platform-optimization';
 
-export class AutomaticPlatformOptimization extends APIResource {
+export class AutomaticPlatformOptimizationResource extends APIResource {
   /**
    * [Automatic Platform Optimization for WordPress](https://developers.cloudflare.com/automatic-platform-optimization/)
    * serves your WordPress site from Cloudflare's edge network and caches third-party
@@ -13,13 +13,13 @@ export class AutomaticPlatformOptimization extends APIResource {
   edit(
     params: AutomaticPlatformOptimizationEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneSettingAutomaticPlatformOptimization> {
+  ): Core.APIPromise<AutomaticPlatformOptimization> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/automatic_platform_optimization`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZoneSettingAutomaticPlatformOptimization }>
+      }) as Core.APIPromise<{ result: AutomaticPlatformOptimization }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -31,18 +31,18 @@ export class AutomaticPlatformOptimization extends APIResource {
   get(
     params: AutomaticPlatformOptimizationGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneSettingAutomaticPlatformOptimization> {
+  ): Core.APIPromise<AutomaticPlatformOptimization> {
     const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/settings/automatic_platform_optimization`,
         options,
-      ) as Core.APIPromise<{ result: ZoneSettingAutomaticPlatformOptimization }>
+      ) as Core.APIPromise<{ result: AutomaticPlatformOptimization }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface ZoneSettingAutomaticPlatformOptimization {
+export interface AutomaticPlatformOptimization {
   /**
    * Indicates whether or not
    * [cache by device type](https://developers.cloudflare.com/automatic-platform-optimization/reference/cache-device-type/)
@@ -88,7 +88,7 @@ export interface AutomaticPlatformOptimizationEditParams {
   /**
    * Body param:
    */
-  value: ZoneSettingAutomaticPlatformOptimization;
+  value: AutomaticPlatformOptimization;
 }
 
 export interface AutomaticPlatformOptimizationGetParams {
@@ -98,8 +98,8 @@ export interface AutomaticPlatformOptimizationGetParams {
   zone_id: string;
 }
 
-export namespace AutomaticPlatformOptimization {
-  export import ZoneSettingAutomaticPlatformOptimization = AutomaticPlatformOptimizationAPI.ZoneSettingAutomaticPlatformOptimization;
+export namespace AutomaticPlatformOptimizationResource {
+  export import AutomaticPlatformOptimization = AutomaticPlatformOptimizationAPI.AutomaticPlatformOptimization;
   export import AutomaticPlatformOptimizationEditParams = AutomaticPlatformOptimizationAPI.AutomaticPlatformOptimizationEditParams;
   export import AutomaticPlatformOptimizationGetParams = AutomaticPlatformOptimizationAPI.AutomaticPlatformOptimizationGetParams;
 }

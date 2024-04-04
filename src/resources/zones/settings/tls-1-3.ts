@@ -4,15 +4,15 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as TLS1_3API from 'cloudflare/resources/zones/settings/tls-1-3';
 
-export class TLS1_3 extends APIResource {
+export class TLS1_3Resource extends APIResource {
   /**
    * Changes TLS 1.3 setting.
    */
-  edit(params: TLS1_3EditParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingTLS1_3> {
+  edit(params: TLS1_3EditParams, options?: Core.RequestOptions): Core.APIPromise<TLS1_3> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/tls_1_3`, { body, ...options }) as Core.APIPromise<{
-        result: ZoneSettingTLS1_3;
+        result: TLS1_3;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -20,12 +20,10 @@ export class TLS1_3 extends APIResource {
   /**
    * Gets TLS 1.3 setting enabled for a zone.
    */
-  get(params: TLS1_3GetParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingTLS1_3> {
+  get(params: TLS1_3GetParams, options?: Core.RequestOptions): Core.APIPromise<TLS1_3> {
     const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zone_id}/settings/tls_1_3`, options) as Core.APIPromise<{
-        result: ZoneSettingTLS1_3;
-      }>
+      this._client.get(`/zones/${zone_id}/settings/tls_1_3`, options) as Core.APIPromise<{ result: TLS1_3 }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -33,7 +31,7 @@ export class TLS1_3 extends APIResource {
 /**
  * Enables Crypto TLS 1.3 feature for a zone.
  */
-export interface ZoneSettingTLS1_3 {
+export interface TLS1_3 {
   /**
    * ID of the zone setting.
    */
@@ -76,8 +74,8 @@ export interface TLS1_3GetParams {
   zone_id: string;
 }
 
-export namespace TLS1_3 {
-  export import ZoneSettingTLS1_3 = TLS1_3API.ZoneSettingTLS1_3;
+export namespace TLS1_3Resource {
+  export import TLS1_3 = TLS1_3API.TLS1_3;
   export import TLS1_3EditParams = TLS1_3API.TLS1_3EditParams;
   export import TLS1_3GetParams = TLS1_3API.TLS1_3GetParams;
 }

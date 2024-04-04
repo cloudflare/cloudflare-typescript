@@ -4,21 +4,18 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as TLSClientAuthAPI from 'cloudflare/resources/zones/settings/tls-client-auth';
 
-export class TLSClientAuth extends APIResource {
+export class TLSClientAuthResource extends APIResource {
   /**
    * TLS Client Auth requires Cloudflare to connect to your origin server using a
    * client certificate (Enterprise Only).
    */
-  edit(
-    params: TLSClientAuthEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneSettingTLSClientAuth> {
+  edit(params: TLSClientAuthEditParams, options?: Core.RequestOptions): Core.APIPromise<TLSClientAuth> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/tls_client_auth`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZoneSettingTLSClientAuth }>
+      }) as Core.APIPromise<{ result: TLSClientAuth }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -26,14 +23,11 @@ export class TLSClientAuth extends APIResource {
    * TLS Client Auth requires Cloudflare to connect to your origin server using a
    * client certificate (Enterprise Only).
    */
-  get(
-    params: TLSClientAuthGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneSettingTLSClientAuth> {
+  get(params: TLSClientAuthGetParams, options?: Core.RequestOptions): Core.APIPromise<TLSClientAuth> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/tls_client_auth`, options) as Core.APIPromise<{
-        result: ZoneSettingTLSClientAuth;
+        result: TLSClientAuth;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -43,7 +37,7 @@ export class TLSClientAuth extends APIResource {
  * TLS Client Auth requires Cloudflare to connect to your origin server using a
  * client certificate (Enterprise Only).
  */
-export interface ZoneSettingTLSClientAuth {
+export interface TLSClientAuth {
   /**
    * ID of the zone setting.
    */
@@ -85,8 +79,8 @@ export interface TLSClientAuthGetParams {
   zone_id: string;
 }
 
-export namespace TLSClientAuth {
-  export import ZoneSettingTLSClientAuth = TLSClientAuthAPI.ZoneSettingTLSClientAuth;
+export namespace TLSClientAuthResource {
+  export import TLSClientAuth = TLSClientAuthAPI.TLSClientAuth;
   export import TLSClientAuthEditParams = TLSClientAuthAPI.TLSClientAuthEditParams;
   export import TLSClientAuthGetParams = TLSClientAuthAPI.TLSClientAuthGetParams;
 }

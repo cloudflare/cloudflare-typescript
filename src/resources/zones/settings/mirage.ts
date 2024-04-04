@@ -4,18 +4,18 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as MirageAPI from 'cloudflare/resources/zones/settings/mirage';
 
-export class Mirage extends APIResource {
+export class MirageResource extends APIResource {
   /**
    * Automatically optimize image loading for website visitors on mobile devices.
    * Refer to our
    * [blog post](http://blog.cloudflare.com/mirage2-solving-mobile-speed) for more
    * information.
    */
-  edit(params: MirageEditParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingMirage> {
+  edit(params: MirageEditParams, options?: Core.RequestOptions): Core.APIPromise<Mirage> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/mirage`, { body, ...options }) as Core.APIPromise<{
-        result: ZoneSettingMirage;
+        result: Mirage;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -26,12 +26,10 @@ export class Mirage extends APIResource {
    * [blog post](http://blog.cloudflare.com/mirage2-solving-mobile-speed) for more
    * information.
    */
-  get(params: MirageGetParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingMirage> {
+  get(params: MirageGetParams, options?: Core.RequestOptions): Core.APIPromise<Mirage> {
     const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zone_id}/settings/mirage`, options) as Core.APIPromise<{
-        result: ZoneSettingMirage;
-      }>
+      this._client.get(`/zones/${zone_id}/settings/mirage`, options) as Core.APIPromise<{ result: Mirage }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -42,7 +40,7 @@ export class Mirage extends APIResource {
  * [our blog post](http://blog.cloudflare.com/mirage2-solving-mobile-speed) for
  * more information.
  */
-export interface ZoneSettingMirage {
+export interface Mirage {
   /**
    * ID of the zone setting.
    */
@@ -84,8 +82,8 @@ export interface MirageGetParams {
   zone_id: string;
 }
 
-export namespace Mirage {
-  export import ZoneSettingMirage = MirageAPI.ZoneSettingMirage;
+export namespace MirageResource {
+  export import Mirage = MirageAPI.Mirage;
   export import MirageEditParams = MirageAPI.MirageEditParams;
   export import MirageGetParams = MirageAPI.MirageGetParams;
 }
