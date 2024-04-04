@@ -1391,10 +1391,32 @@ Types:
 
 Types:
 
-- <code><a href="./src/resources/dns/records.ts">DNSRecord</a></code>
+- <code><a href="./src/resources/dns/records.ts">ARecord</a></code>
+- <code><a href="./src/resources/dns/records.ts">AAAARecord</a></code>
+- <code><a href="./src/resources/dns/records.ts">CAARecord</a></code>
+- <code><a href="./src/resources/dns/records.ts">CERTRecord</a></code>
+- <code><a href="./src/resources/dns/records.ts">CNAMERecord</a></code>
+- <code><a href="./src/resources/dns/records.ts">DNSKEYRecord</a></code>
+- <code><a href="./src/resources/dns/records.ts">DSRecord</a></code>
+- <code><a href="./src/resources/dns/records.ts">HTTPSRecord</a></code>
+- <code><a href="./src/resources/dns/records.ts">LOCRecord</a></code>
+- <code><a href="./src/resources/dns/records.ts">MXRecord</a></code>
+- <code><a href="./src/resources/dns/records.ts">NAPTRRecord</a></code>
+- <code><a href="./src/resources/dns/records.ts">NSRecord</a></code>
+- <code><a href="./src/resources/dns/records.ts">PTRRecord</a></code>
+- <code><a href="./src/resources/dns/records.ts">Record</a></code>
+- <code><a href="./src/resources/dns/records.ts">RecordTagsItem</a></code>
+- <code><a href="./src/resources/dns/records.ts">SMIMEARecord</a></code>
+- <code><a href="./src/resources/dns/records.ts">SRVRecord</a></code>
+- <code><a href="./src/resources/dns/records.ts">SSHFPRecord</a></code>
+- <code><a href="./src/resources/dns/records.ts">SVCBRecord</a></code>
+- <code><a href="./src/resources/dns/records.ts">TLSARecord</a></code>
+- <code><a href="./src/resources/dns/records.ts">TTL</a></code>
+- <code><a href="./src/resources/dns/records.ts">TXTRecord</a></code>
 - <code><a href="./src/resources/dns/records.ts">UnnamedSchemaRef1391721bdb8938d5420a8bc738a44deb</a></code>
 - <code><a href="./src/resources/dns/records.ts">UnnamedSchemaRef186756a742f85f535cb7bfb2d03b2b8c</a></code>
 - <code><a href="./src/resources/dns/records.ts">UnnamedSchemaRef2f895e023ae55b55d2f5925449b819cd</a></code>
+- <code><a href="./src/resources/dns/records.ts">URIRecord</a></code>
 - <code><a href="./src/resources/dns/records.ts">RecordDeleteResponse</a></code>
 - <code><a href="./src/resources/dns/records.ts">RecordExportResponse</a></code>
 - <code><a href="./src/resources/dns/records.ts">RecordImportResponse</a></code>
@@ -1402,13 +1424,13 @@ Types:
 
 Methods:
 
-- <code title="post /zones/{zone_id}/dns_records">client.dns.records.<a href="./src/resources/dns/records.ts">create</a>({ ...params }) -> DNSRecord</code>
-- <code title="put /zones/{zone_id}/dns_records/{dns_record_id}">client.dns.records.<a href="./src/resources/dns/records.ts">update</a>(dnsRecordId, { ...params }) -> DNSRecord</code>
-- <code title="get /zones/{zone_id}/dns_records">client.dns.records.<a href="./src/resources/dns/records.ts">list</a>({ ...params }) -> DNSRecordsV4PagePaginationArray</code>
+- <code title="post /zones/{zone_id}/dns_records">client.dns.records.<a href="./src/resources/dns/records.ts">create</a>({ ...params }) -> Record</code>
+- <code title="put /zones/{zone_id}/dns_records/{dns_record_id}">client.dns.records.<a href="./src/resources/dns/records.ts">update</a>(dnsRecordId, { ...params }) -> Record</code>
+- <code title="get /zones/{zone_id}/dns_records">client.dns.records.<a href="./src/resources/dns/records.ts">list</a>({ ...params }) -> RecordsV4PagePaginationArray</code>
 - <code title="delete /zones/{zone_id}/dns_records/{dns_record_id}">client.dns.records.<a href="./src/resources/dns/records.ts">delete</a>(dnsRecordId, { ...params }) -> RecordDeleteResponse</code>
-- <code title="patch /zones/{zone_id}/dns_records/{dns_record_id}">client.dns.records.<a href="./src/resources/dns/records.ts">edit</a>(dnsRecordId, { ...params }) -> DNSRecord</code>
+- <code title="patch /zones/{zone_id}/dns_records/{dns_record_id}">client.dns.records.<a href="./src/resources/dns/records.ts">edit</a>(dnsRecordId, { ...params }) -> Record</code>
 - <code title="get /zones/{zone_id}/dns_records/export">client.dns.records.<a href="./src/resources/dns/records.ts">export</a>({ ...params }) -> string</code>
-- <code title="get /zones/{zone_id}/dns_records/{dns_record_id}">client.dns.records.<a href="./src/resources/dns/records.ts">get</a>(dnsRecordId, { ...params }) -> DNSRecord</code>
+- <code title="get /zones/{zone_id}/dns_records/{dns_record_id}">client.dns.records.<a href="./src/resources/dns/records.ts">get</a>(dnsRecordId, { ...params }) -> Record</code>
 - <code title="post /zones/{zone_id}/dns_records/import">client.dns.records.<a href="./src/resources/dns/records.ts">import</a>({ ...params }) -> RecordImportResponse</code>
 - <code title="post /zones/{zone_id}/dns_records/scan">client.dns.records.<a href="./src/resources/dns/records.ts">scan</a>({ ...params }) -> RecordScanResponse</code>
 
