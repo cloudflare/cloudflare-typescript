@@ -654,11 +654,16 @@ export namespace Cloudflare {
   export import PageShieldGetParams = API.PageShieldGetParams;
 
   export import Rulesets = API.Rulesets;
+  export import BlockRule = API.BlockRule;
+  export import ExecuteRule = API.ExecuteRule;
+  export import LogRule = API.LogRule;
+  export import RequestRule = API.RequestRule;
+  export import Ruleset = API.Ruleset;
+  export import SkipRule = API.SkipRule;
   export import RulesetCreateResponse = API.RulesetCreateResponse;
   export import RulesetUpdateResponse = API.RulesetUpdateResponse;
-  export import RulesetListResponse = API.RulesetListResponse;
   export import RulesetGetResponse = API.RulesetGetResponse;
-  export import RulesetListResponsesSinglePage = API.RulesetListResponsesSinglePage;
+  export import RulesetsSinglePage = API.RulesetsSinglePage;
   export import RulesetCreateParams = API.RulesetCreateParams;
   export import RulesetUpdateParams = API.RulesetUpdateParams;
   export import RulesetListParams = API.RulesetListParams;

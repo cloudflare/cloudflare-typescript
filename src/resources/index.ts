@@ -22,6 +22,24 @@ export {
 export { AvailableRatePlan, AvailableRatePlansSinglePage, Plans } from './plans';
 export { Billing } from './billing/billing';
 export {
+  BlockRule,
+  ExecuteRule,
+  LogRule,
+  RequestRule,
+  Ruleset,
+  SkipRule,
+  RulesetCreateResponse,
+  RulesetUpdateResponse,
+  RulesetGetResponse,
+  RulesetCreateParams,
+  RulesetUpdateParams,
+  RulesetListParams,
+  RulesetDeleteParams,
+  RulesetGetParams,
+  RulesetsSinglePage,
+  Rulesets,
+} from './rulesets/rulesets';
+export {
   BotManagementUpdateResponse,
   BotManagementGetResponse,
   BotManagementUpdateParams,
@@ -288,19 +306,6 @@ export { RatePlan, RatePlanGetResponse, RatePlans } from './rate-plans';
 export { Registrar } from './registrar/registrar';
 export { RequestTracers } from './request-tracers/request-tracers';
 export { Rules } from './rules/rules';
-export {
-  RulesetCreateResponse,
-  RulesetUpdateResponse,
-  RulesetListResponse,
-  RulesetGetResponse,
-  RulesetCreateParams,
-  RulesetUpdateParams,
-  RulesetListParams,
-  RulesetDeleteParams,
-  RulesetGetParams,
-  RulesetListResponsesSinglePage,
-  Rulesets,
-} from './rulesets/rulesets';
 export { SSL } from './ssl/ssl';
 export { SecondaryDNS } from './secondary-dns/secondary-dns';
 export { Snippet, SnippetUpdateParams, SnippetsSinglePage, Snippets } from './snippets/snippets';
