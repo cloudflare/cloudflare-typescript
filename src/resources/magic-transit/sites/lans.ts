@@ -179,9 +179,9 @@ export namespace LANCreateResponse {
        */
       address: string;
 
-      dhcp_relay?: StaticAddressing.DhcpRelay;
+      dhcp_relay?: StaticAddressing.DHCPRelay;
 
-      dhcp_server?: StaticAddressing.DhcpServer;
+      dhcp_server?: StaticAddressing.DHCPServer;
 
       /**
        * A valid CIDR notation representing an IP range.
@@ -195,14 +195,14 @@ export namespace LANCreateResponse {
     }
 
     export namespace StaticAddressing {
-      export interface DhcpRelay {
+      export interface DHCPRelay {
         /**
          * List of DHCP server IPs.
          */
         server_addresses?: Array<string>;
       }
 
-      export interface DhcpServer {
+      export interface DHCPServer {
         /**
          * A valid IPv4 address.
          */
@@ -312,9 +312,9 @@ export namespace LANUpdateResponse {
        */
       address: string;
 
-      dhcp_relay?: StaticAddressing.DhcpRelay;
+      dhcp_relay?: StaticAddressing.DHCPRelay;
 
-      dhcp_server?: StaticAddressing.DhcpServer;
+      dhcp_server?: StaticAddressing.DHCPServer;
 
       /**
        * A valid CIDR notation representing an IP range.
@@ -328,14 +328,14 @@ export namespace LANUpdateResponse {
     }
 
     export namespace StaticAddressing {
-      export interface DhcpRelay {
+      export interface DHCPRelay {
         /**
          * List of DHCP server IPs.
          */
         server_addresses?: Array<string>;
       }
 
-      export interface DhcpServer {
+      export interface DHCPServer {
         /**
          * A valid IPv4 address.
          */
@@ -445,9 +445,9 @@ export namespace LANListResponse {
        */
       address: string;
 
-      dhcp_relay?: StaticAddressing.DhcpRelay;
+      dhcp_relay?: StaticAddressing.DHCPRelay;
 
-      dhcp_server?: StaticAddressing.DhcpServer;
+      dhcp_server?: StaticAddressing.DHCPServer;
 
       /**
        * A valid CIDR notation representing an IP range.
@@ -461,14 +461,14 @@ export namespace LANListResponse {
     }
 
     export namespace StaticAddressing {
-      export interface DhcpRelay {
+      export interface DHCPRelay {
         /**
          * List of DHCP server IPs.
          */
         server_addresses?: Array<string>;
       }
 
-      export interface DhcpServer {
+      export interface DHCPServer {
         /**
          * A valid IPv4 address.
          */
@@ -580,9 +580,9 @@ export namespace LANDeleteResponse {
        */
       address: string;
 
-      dhcp_relay?: StaticAddressing.DhcpRelay;
+      dhcp_relay?: StaticAddressing.DHCPRelay;
 
-      dhcp_server?: StaticAddressing.DhcpServer;
+      dhcp_server?: StaticAddressing.DHCPServer;
 
       /**
        * A valid CIDR notation representing an IP range.
@@ -596,14 +596,14 @@ export namespace LANDeleteResponse {
     }
 
     export namespace StaticAddressing {
-      export interface DhcpRelay {
+      export interface DHCPRelay {
         /**
          * List of DHCP server IPs.
          */
         server_addresses?: Array<string>;
       }
 
-      export interface DhcpServer {
+      export interface DHCPServer {
         /**
          * A valid IPv4 address.
          */
@@ -713,9 +713,9 @@ export namespace LANGetResponse {
        */
       address: string;
 
-      dhcp_relay?: StaticAddressing.DhcpRelay;
+      dhcp_relay?: StaticAddressing.DHCPRelay;
 
-      dhcp_server?: StaticAddressing.DhcpServer;
+      dhcp_server?: StaticAddressing.DHCPServer;
 
       /**
        * A valid CIDR notation representing an IP range.
@@ -729,14 +729,14 @@ export namespace LANGetResponse {
     }
 
     export namespace StaticAddressing {
-      export interface DhcpRelay {
+      export interface DHCPRelay {
         /**
          * List of DHCP server IPs.
          */
         server_addresses?: Array<string>;
       }
 
-      export interface DhcpServer {
+      export interface DHCPServer {
         /**
          * A valid IPv4 address.
          */
@@ -844,9 +844,9 @@ export namespace LANCreateParams {
        */
       address: string;
 
-      dhcp_relay?: StaticAddressing.DhcpRelay;
+      dhcp_relay?: StaticAddressing.DHCPRelay;
 
-      dhcp_server?: StaticAddressing.DhcpServer;
+      dhcp_server?: StaticAddressing.DHCPServer;
 
       /**
        * A valid CIDR notation representing an IP range.
@@ -860,14 +860,14 @@ export namespace LANCreateParams {
     }
 
     export namespace StaticAddressing {
-      export interface DhcpRelay {
+      export interface DHCPRelay {
         /**
          * List of DHCP server IPs.
          */
         server_addresses?: Array<string>;
       }
 
-      export interface DhcpServer {
+      export interface DHCPServer {
         /**
          * A valid IPv4 address.
          */
@@ -969,9 +969,9 @@ export namespace LANUpdateParams {
        */
       address: string;
 
-      dhcp_relay?: StaticAddressing.DhcpRelay;
+      dhcp_relay?: StaticAddressing.DHCPRelay;
 
-      dhcp_server?: StaticAddressing.DhcpServer;
+      dhcp_server?: StaticAddressing.DHCPServer;
 
       /**
        * A valid CIDR notation representing an IP range.
@@ -985,14 +985,14 @@ export namespace LANUpdateParams {
     }
 
     export namespace StaticAddressing {
-      export interface DhcpRelay {
+      export interface DHCPRelay {
         /**
          * List of DHCP server IPs.
          */
         server_addresses?: Array<string>;
       }
 
-      export interface DhcpServer {
+      export interface DHCPServer {
         /**
          * A valid IPv4 address.
          */
