@@ -156,7 +156,8 @@ export namespace IPSECTunnelCreateResponse {
     created_on?: string;
 
     /**
-     * The IP address assigned to the customer side of the IPsec tunnel.
+     * The IP address assigned to the customer side of the IPsec tunnel. Not required,
+     * but must be set for proactive traceroutes to work.
      */
     customer_endpoint?: string;
 
@@ -267,7 +268,8 @@ export namespace IPSECTunnelListResponse {
     created_on?: string;
 
     /**
-     * The IP address assigned to the customer side of the IPsec tunnel.
+     * The IP address assigned to the customer side of the IPsec tunnel. Not required,
+     * but must be set for proactive traceroutes to work.
      */
     customer_endpoint?: string;
 
@@ -397,6 +399,7 @@ export interface IPSECTunnelCreateParams {
 
   /**
    * Body param: The IP address assigned to the customer side of the IPsec tunnel.
+   * Not required, but must be set for proactive traceroutes to work.
    */
   customer_endpoint?: string;
 
@@ -486,6 +489,7 @@ export interface IPSECTunnelUpdateParams {
 
   /**
    * Body param: The IP address assigned to the customer side of the IPsec tunnel.
+   * Not required, but must be set for proactive traceroutes to work.
    */
   customer_endpoint?: string;
 
