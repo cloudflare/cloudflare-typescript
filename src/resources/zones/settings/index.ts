@@ -1,12 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export {
-  SettingEditResponse,
-  SettingGetResponse,
-  SettingEditParams,
-  SettingGetParams,
-  Settings,
-} from './settings';
+export { Settings } from './settings';
 export {
   UnnamedSchemaRefB234e6a28c1a1c7c29213787c0621eaa,
   OriginMaxHTTPVersionEditResponse,

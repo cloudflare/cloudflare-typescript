@@ -351,16 +351,6 @@ Methods:
 
 ## Settings
 
-Types:
-
-- <code><a href="./src/resources/zones/settings/settings.ts">SettingEditResponse</a></code>
-- <code><a href="./src/resources/zones/settings/settings.ts">SettingGetResponse</a></code>
-
-Methods:
-
-- <code title="patch /zones/{zone_id}/settings">client.zones.settings.<a href="./src/resources/zones/settings/settings.ts">edit</a>({ ...params }) -> SettingEditResponse</code>
-- <code title="get /zones/{zone_id}/settings">client.zones.settings.<a href="./src/resources/zones/settings/settings.ts">get</a>({ ...params }) -> SettingGetResponse</code>
-
 ### ZeroRTT
 
 Types:
