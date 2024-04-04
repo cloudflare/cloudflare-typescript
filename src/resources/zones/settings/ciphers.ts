@@ -8,11 +8,11 @@ export class Ciphers extends APIResource {
   /**
    * Changes ciphers setting.
    */
-  edit(params: CipherEditParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingCiphers> {
+  edit(params: CipherEditParams, options?: Core.RequestOptions): Core.APIPromise<Ciphers> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/ciphers`, { body, ...options }) as Core.APIPromise<{
-        result: ZoneSettingCiphers;
+        result: Ciphers;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -20,12 +20,10 @@ export class Ciphers extends APIResource {
   /**
    * Gets ciphers setting.
    */
-  get(params: CipherGetParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingCiphers> {
+  get(params: CipherGetParams, options?: Core.RequestOptions): Core.APIPromise<Ciphers> {
     const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zone_id}/settings/ciphers`, options) as Core.APIPromise<{
-        result: ZoneSettingCiphers;
-      }>
+      this._client.get(`/zones/${zone_id}/settings/ciphers`, options) as Core.APIPromise<{ result: Ciphers }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -34,7 +32,7 @@ export class Ciphers extends APIResource {
  * An allowlist of ciphers for TLS termination. These ciphers must be in the
  * BoringSSL format.
  */
-export interface ZoneSettingCiphers {
+export interface Ciphers {
   /**
    * ID of the zone setting.
    */
@@ -77,7 +75,7 @@ export interface CipherGetParams {
 }
 
 export namespace Ciphers {
-  export import ZoneSettingCiphers = CiphersAPI.ZoneSettingCiphers;
+  export import Ciphers = CiphersAPI.Ciphers;
   export import CipherEditParams = CiphersAPI.CipherEditParams;
   export import CipherGetParams = CiphersAPI.CipherGetParams;
 }

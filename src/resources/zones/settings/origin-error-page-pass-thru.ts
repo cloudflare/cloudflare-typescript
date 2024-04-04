@@ -4,7 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as OriginErrorPagePassThruAPI from 'cloudflare/resources/zones/settings/origin-error-page-pass-thru';
 
-export class OriginErrorPagePassThru extends APIResource {
+export class OriginErrorPagePassThruResource extends APIResource {
   /**
    * Cloudflare will proxy customer error pages on any 502,504 errors on origin
    * server instead of showing a default Cloudflare error page. This does not apply
@@ -13,13 +13,13 @@ export class OriginErrorPagePassThru extends APIResource {
   edit(
     params: OriginErrorPagePassThruEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneSettingOriginErrorPagePassThru> {
+  ): Core.APIPromise<OriginErrorPagePassThru> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/origin_error_page_pass_thru`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZoneSettingOriginErrorPagePassThru }>
+      }) as Core.APIPromise<{ result: OriginErrorPagePassThru }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -31,11 +31,11 @@ export class OriginErrorPagePassThru extends APIResource {
   get(
     params: OriginErrorPagePassThruGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneSettingOriginErrorPagePassThru> {
+  ): Core.APIPromise<OriginErrorPagePassThru> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/origin_error_page_pass_thru`, options) as Core.APIPromise<{
-        result: ZoneSettingOriginErrorPagePassThru;
+        result: OriginErrorPagePassThru;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -46,7 +46,7 @@ export class OriginErrorPagePassThru extends APIResource {
  * server instead of showing a default Cloudflare error page. This does not apply
  * to 522 errors and is limited to Enterprise Zones.
  */
-export interface ZoneSettingOriginErrorPagePassThru {
+export interface OriginErrorPagePassThru {
   /**
    * ID of the zone setting.
    */
@@ -88,8 +88,8 @@ export interface OriginErrorPagePassThruGetParams {
   zone_id: string;
 }
 
-export namespace OriginErrorPagePassThru {
-  export import ZoneSettingOriginErrorPagePassThru = OriginErrorPagePassThruAPI.ZoneSettingOriginErrorPagePassThru;
+export namespace OriginErrorPagePassThruResource {
+  export import OriginErrorPagePassThru = OriginErrorPagePassThruAPI.OriginErrorPagePassThru;
   export import OriginErrorPagePassThruEditParams = OriginErrorPagePassThruAPI.OriginErrorPagePassThruEditParams;
   export import OriginErrorPagePassThruGetParams = OriginErrorPagePassThruAPI.OriginErrorPagePassThruGetParams;
 }

@@ -4,15 +4,15 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as PseudoIPV4API from 'cloudflare/resources/zones/settings/pseudo-ipv4';
 
-export class PseudoIPV4 extends APIResource {
+export class PseudoIPV4Resource extends APIResource {
   /**
    * Value of the Pseudo IPv4 setting.
    */
-  edit(params: PseudoIPV4EditParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingPseudoIPV4> {
+  edit(params: PseudoIPV4EditParams, options?: Core.RequestOptions): Core.APIPromise<PseudoIPV4> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/pseudo_ipv4`, { body, ...options }) as Core.APIPromise<{
-        result: ZoneSettingPseudoIPV4;
+        result: PseudoIPV4;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -20,11 +20,11 @@ export class PseudoIPV4 extends APIResource {
   /**
    * Value of the Pseudo IPv4 setting.
    */
-  get(params: PseudoIPV4GetParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingPseudoIPV4> {
+  get(params: PseudoIPV4GetParams, options?: Core.RequestOptions): Core.APIPromise<PseudoIPV4> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/pseudo_ipv4`, options) as Core.APIPromise<{
-        result: ZoneSettingPseudoIPV4;
+        result: PseudoIPV4;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -33,7 +33,7 @@ export class PseudoIPV4 extends APIResource {
 /**
  * The value set for the Pseudo IPv4 setting.
  */
-export interface ZoneSettingPseudoIPV4 {
+export interface PseudoIPV4 {
   /**
    * Value of the Pseudo IPv4 setting.
    */
@@ -75,8 +75,8 @@ export interface PseudoIPV4GetParams {
   zone_id: string;
 }
 
-export namespace PseudoIPV4 {
-  export import ZoneSettingPseudoIPV4 = PseudoIPV4API.ZoneSettingPseudoIPV4;
+export namespace PseudoIPV4Resource {
+  export import PseudoIPV4 = PseudoIPV4API.PseudoIPV4;
   export import PseudoIPV4EditParams = PseudoIPV4API.PseudoIPV4EditParams;
   export import PseudoIPV4GetParams = PseudoIPV4API.PseudoIPV4GetParams;
 }

@@ -4,7 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as WAFAPI from 'cloudflare/resources/zones/settings/waf';
 
-export class WAF extends APIResource {
+export class WAFResource extends APIResource {
   /**
    * The WAF examines HTTP requests to your website. It inspects both GET and POST
    * requests and applies rules to help filter out illegitimate traffic from
@@ -17,11 +17,11 @@ export class WAF extends APIResource {
    * reaches your origin web server.
    * (https://support.cloudflare.com/hc/en-us/articles/200172016).
    */
-  edit(params: WAFEditParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingWAF> {
+  edit(params: WAFEditParams, options?: Core.RequestOptions): Core.APIPromise<WAF> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/waf`, { body, ...options }) as Core.APIPromise<{
-        result: ZoneSettingWAF;
+        result: WAF;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -38,12 +38,10 @@ export class WAF extends APIResource {
    * reaches your origin web server.
    * (https://support.cloudflare.com/hc/en-us/articles/200172016).
    */
-  get(params: WAFGetParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingWAF> {
+  get(params: WAFGetParams, options?: Core.RequestOptions): Core.APIPromise<WAF> {
     const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zone_id}/settings/waf`, options) as Core.APIPromise<{
-        result: ZoneSettingWAF;
-      }>
+      this._client.get(`/zones/${zone_id}/settings/waf`, options) as Core.APIPromise<{ result: WAF }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -60,7 +58,7 @@ export class WAF extends APIResource {
  * reaches your origin web server.
  * (https://support.cloudflare.com/hc/en-us/articles/200172016).
  */
-export interface ZoneSettingWAF {
+export interface WAF {
   /**
    * ID of the zone setting.
    */
@@ -102,8 +100,8 @@ export interface WAFGetParams {
   zone_id: string;
 }
 
-export namespace WAF {
-  export import ZoneSettingWAF = WAFAPI.ZoneSettingWAF;
+export namespace WAFResource {
+  export import WAF = WAFAPI.WAF;
   export import WAFEditParams = WAFAPI.WAFEditParams;
   export import WAFGetParams = WAFAPI.WAFGetParams;
 }

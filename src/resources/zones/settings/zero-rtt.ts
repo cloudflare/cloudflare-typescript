@@ -4,15 +4,15 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ZeroRTTAPI from 'cloudflare/resources/zones/settings/zero-rtt';
 
-export class ZeroRTT extends APIResource {
+export class ZeroRTTResource extends APIResource {
   /**
    * Changes the 0-RTT session resumption setting.
    */
-  edit(params: ZeroRTTEditParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSetting0rtt> {
+  edit(params: ZeroRTTEditParams, options?: Core.RequestOptions): Core.APIPromise<ZeroRTT> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/0rtt`, { body, ...options }) as Core.APIPromise<{
-        result: ZoneSetting0rtt;
+        result: ZeroRTT;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -20,12 +20,10 @@ export class ZeroRTT extends APIResource {
   /**
    * Gets 0-RTT session resumption setting.
    */
-  get(params: ZeroRTTGetParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSetting0rtt> {
+  get(params: ZeroRTTGetParams, options?: Core.RequestOptions): Core.APIPromise<ZeroRTT> {
     const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zone_id}/settings/0rtt`, options) as Core.APIPromise<{
-        result: ZoneSetting0rtt;
-      }>
+      this._client.get(`/zones/${zone_id}/settings/0rtt`, options) as Core.APIPromise<{ result: ZeroRTT }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -33,7 +31,7 @@ export class ZeroRTT extends APIResource {
 /**
  * 0-RTT session resumption enabled for this zone.
  */
-export interface ZoneSetting0rtt {
+export interface ZeroRTT {
   /**
    * ID of the zone setting.
    */
@@ -75,8 +73,8 @@ export interface ZeroRTTGetParams {
   zone_id: string;
 }
 
-export namespace ZeroRTT {
-  export import ZoneSetting0rtt = ZeroRTTAPI.ZoneSetting0rtt;
+export namespace ZeroRTTResource {
+  export import ZeroRTT = ZeroRTTAPI.ZeroRTT;
   export import ZeroRTTEditParams = ZeroRTTAPI.ZeroRTTEditParams;
   export import ZeroRTTGetParams = ZeroRTTAPI.ZeroRTTGetParams;
 }

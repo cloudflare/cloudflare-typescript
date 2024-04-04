@@ -4,21 +4,18 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as PrefetchPreloadAPI from 'cloudflare/resources/zones/settings/prefetch-preload';
 
-export class PrefetchPreload extends APIResource {
+export class PrefetchPreloadResource extends APIResource {
   /**
    * Cloudflare will prefetch any URLs that are included in the response headers.
    * This is limited to Enterprise Zones.
    */
-  edit(
-    params: PrefetchPreloadEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneSettingPrefetchPreload> {
+  edit(params: PrefetchPreloadEditParams, options?: Core.RequestOptions): Core.APIPromise<PrefetchPreload> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/prefetch_preload`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZoneSettingPrefetchPreload }>
+      }) as Core.APIPromise<{ result: PrefetchPreload }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -26,14 +23,11 @@ export class PrefetchPreload extends APIResource {
    * Cloudflare will prefetch any URLs that are included in the response headers.
    * This is limited to Enterprise Zones.
    */
-  get(
-    params: PrefetchPreloadGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneSettingPrefetchPreload> {
+  get(params: PrefetchPreloadGetParams, options?: Core.RequestOptions): Core.APIPromise<PrefetchPreload> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/prefetch_preload`, options) as Core.APIPromise<{
-        result: ZoneSettingPrefetchPreload;
+        result: PrefetchPreload;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -43,7 +37,7 @@ export class PrefetchPreload extends APIResource {
  * Cloudflare will prefetch any URLs that are included in the response headers.
  * This is limited to Enterprise Zones.
  */
-export interface ZoneSettingPrefetchPreload {
+export interface PrefetchPreload {
   /**
    * ID of the zone setting.
    */
@@ -85,8 +79,8 @@ export interface PrefetchPreloadGetParams {
   zone_id: string;
 }
 
-export namespace PrefetchPreload {
-  export import ZoneSettingPrefetchPreload = PrefetchPreloadAPI.ZoneSettingPrefetchPreload;
+export namespace PrefetchPreloadResource {
+  export import PrefetchPreload = PrefetchPreloadAPI.PrefetchPreload;
   export import PrefetchPreloadEditParams = PrefetchPreloadAPI.PrefetchPreloadEditParams;
   export import PrefetchPreloadGetParams = PrefetchPreloadAPI.PrefetchPreloadGetParams;
 }
