@@ -401,10 +401,6 @@ export namespace Zones {
   export import DNSSettingEditParams = DNSSettingsAPI.DNSSettingEditParams;
   export import DNSSettingGetParams = DNSSettingsAPI.DNSSettingGetParams;
   export import Settings = SettingsAPI.Settings;
-  export import SettingEditResponse = SettingsAPI.SettingEditResponse;
-  export import SettingGetResponse = SettingsAPI.SettingGetResponse;
-  export import SettingEditParams = SettingsAPI.SettingEditParams;
-  export import SettingGetParams = SettingsAPI.SettingGetParams;
   export import CustomNameservers = CustomNameserversAPI.CustomNameservers;
   export import CustomNameserverUpdateParams = CustomNameserversAPI.CustomNameserverUpdateParams;
   export import CustomNameserverGetParams = CustomNameserversAPI.CustomNameserverGetParams;
