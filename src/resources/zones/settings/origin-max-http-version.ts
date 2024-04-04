@@ -48,6 +48,11 @@ export class OriginMaxHTTPVersion extends APIResource {
 }
 
 /**
+ * Value of the zone setting.
+ */
+export type UnnamedSchemaRefB234e6a28c1a1c7c29213787c0621eaa = 'origin_max_http_version';
+
+/**
  * Origin Max HTTP Setting Version sets the highest HTTP version Cloudflare will
  * attempt to use with your origin. This setting allows Cloudflare to make HTTP/2
  * requests to your origin. (Refer to
@@ -59,7 +64,7 @@ export interface OriginMaxHTTPVersionEditResponse {
   /**
    * Value of the zone setting.
    */
-  id: 'origin_max_http_version';
+  id: UnnamedSchemaRefB234e6a28c1a1c7c29213787c0621eaa;
 
   /**
    * last time this setting was modified.
@@ -84,7 +89,7 @@ export interface OriginMaxHTTPVersionGetResponse {
   /**
    * Value of the zone setting.
    */
-  id: 'origin_max_http_version';
+  id: UnnamedSchemaRefB234e6a28c1a1c7c29213787c0621eaa;
 
   /**
    * last time this setting was modified.
@@ -117,6 +122,7 @@ export interface OriginMaxHTTPVersionGetParams {
 }
 
 export namespace OriginMaxHTTPVersion {
+  export import UnnamedSchemaRefB234e6a28c1a1c7c29213787c0621eaa = OriginMaxHTTPVersionAPI.UnnamedSchemaRefB234e6a28c1a1c7c29213787c0621eaa;
   export import OriginMaxHTTPVersionEditResponse = OriginMaxHTTPVersionAPI.OriginMaxHTTPVersionEditResponse;
   export import OriginMaxHTTPVersionGetResponse = OriginMaxHTTPVersionAPI.OriginMaxHTTPVersionGetResponse;
   export import OriginMaxHTTPVersionEditParams = OriginMaxHTTPVersionAPI.OriginMaxHTTPVersionEditParams;

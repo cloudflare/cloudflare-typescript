@@ -1,19 +1,20 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  OriginMaxHTTPVersionEditResponse,
-  OriginMaxHTTPVersionGetResponse,
-  OriginMaxHTTPVersionEditParams,
-  OriginMaxHTTPVersionGetParams,
-  OriginMaxHTTPVersion,
-} from './origin-max-http-version';
-export {
   SettingEditResponse,
   SettingGetResponse,
   SettingEditParams,
   SettingGetParams,
   Settings,
 } from './settings';
+export {
+  UnnamedSchemaRefB234e6a28c1a1c7c29213787c0621eaa,
+  OriginMaxHTTPVersionEditResponse,
+  OriginMaxHTTPVersionGetResponse,
+  OriginMaxHTTPVersionEditParams,
+  OriginMaxHTTPVersionGetParams,
+  OriginMaxHTTPVersion,
+} from './origin-max-http-version';
 export { ZoneSetting0rtt, ZeroRTTEditParams, ZeroRTTGetParams, ZeroRTT } from './zero-rtt';
 export { ZoneSettingAdvancedDDoS, AdvancedDDoSGetParams, AdvancedDDoS } from './advanced-ddos';
 export {

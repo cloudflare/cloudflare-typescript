@@ -11,6 +11,7 @@ export class WAF extends APIResource {
 
 export namespace WAF {
   export import Overrides = OverridesAPI.Overrides;
+  export import UnnamedSchemaRefA9cc7506f87ce3d646e3794e609120a1 = OverridesAPI.UnnamedSchemaRefA9cc7506f87ce3d646e3794e609120a1;
   export import WAFOverride = OverridesAPI.WAFOverride;
   export import OverrideDeleteResponse = OverridesAPI.OverrideDeleteResponse;
   export import WAFOverridesV4PagePaginationArray = OverridesAPI.WAFOverridesV4PagePaginationArray;

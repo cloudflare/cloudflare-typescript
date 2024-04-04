@@ -2,6 +2,7 @@
 
 export { Storage } from './storage';
 export {
+  UnnamedSchemaRef608bee5065f7314d6fa572b89a1910f7,
   WorkersKVComponentsSchemasResult,
   WorkersKVSchemasResult,
   AnalyticsListParams,

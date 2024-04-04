@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as IssuesAPI from 'cloudflare/resources/intel/attack-surface-report/issues';
+import * as Shared from 'cloudflare/resources/shared';
 import { V4PagePagination, type V4PagePaginationParams } from 'cloudflare/pagination';
 
 export class Issues extends APIResource {
@@ -41,13 +42,13 @@ export class Issues extends APIResource {
     issueId: string,
     params: IssueDismissParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<IssueDismissResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/intel/attack-surface-report/${issueId}/dismiss`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: IssueDismissResponse }>
+      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -84,9 +85,9 @@ export class Issues extends APIResource {
 export class IssueListResponsesV4PagePagination extends V4PagePagination<IssueListResponse> {}
 
 export interface IssueListResponse {
-  errors: Array<IssueListResponse.Error>;
+  errors: Array<Shared.UnnamedSchemaRef3248f24329456e19dfa042fff9986f72>;
 
-  messages: Array<IssueListResponse.Message>;
+  messages: Array<Shared.UnnamedSchemaRef3248f24329456e19dfa042fff9986f72>;
 
   result: IssueListResponse.Result;
 
@@ -97,18 +98,6 @@ export interface IssueListResponse {
 }
 
 export namespace IssueListResponse {
-  export interface Error {
-    code: number;
-
-    message: string;
-  }
-
-  export interface Message {
-    code: number;
-
-    message: string;
-  }
-
   export interface Result {
     /**
      * Total number of results
@@ -169,8 +158,6 @@ export namespace IssueClassResponse {
     value?: string;
   }
 }
-
-export type IssueDismissResponse = unknown | string;
 
 export type IssueSeverityResponse = Array<IssueSeverityResponse.IssueSeverityResponseItem>;
 
@@ -503,7 +490,6 @@ export interface IssueTypeParams {
 export namespace Issues {
   export import IssueListResponse = IssuesAPI.IssueListResponse;
   export import IssueClassResponse = IssuesAPI.IssueClassResponse;
-  export import IssueDismissResponse = IssuesAPI.IssueDismissResponse;
   export import IssueSeverityResponse = IssuesAPI.IssueSeverityResponse;
   export import IssueTypeResponse = IssuesAPI.IssueTypeResponse;
   export import IssueListResponsesV4PagePagination = IssuesAPI.IssueListResponsesV4PagePagination;

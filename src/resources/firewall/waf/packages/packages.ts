@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as PackagesAPI from 'cloudflare/resources/firewall/waf/packages/packages';
+import * as Shared from 'cloudflare/resources/shared';
 import * as GroupsAPI from 'cloudflare/resources/firewall/waf/packages/groups';
 import * as RulesAPI from 'cloudflare/resources/firewall/waf/packages/rules';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
@@ -65,11 +66,11 @@ export type PackageListResponse =
 
 export namespace PackageListResponse {
   export interface LegacyJhsAPIResponseCollection {
-    errors: Array<LegacyJhsAPIResponseCollection.Error>;
+    errors: Array<Shared.UnnamedSchemaRef3248f24329456e19dfa042fff9986f72>;
 
-    messages: Array<LegacyJhsAPIResponseCollection.Message>;
+    messages: Array<Shared.UnnamedSchemaRef3248f24329456e19dfa042fff9986f72>;
 
-    result: unknown | Array<unknown> | string | null;
+    result: Shared.UnnamedSchemaRef67bbb1ccdd42c3e2937b9fd19f791151 | null;
 
     /**
      * Whether the API call was successful
@@ -80,18 +81,6 @@ export namespace PackageListResponse {
   }
 
   export namespace LegacyJhsAPIResponseCollection {
-    export interface Error {
-      code: number;
-
-      message: string;
-    }
-
-    export interface Message {
-      code: number;
-
-      message: string;
-    }
-
     export interface ResultInfo {
       /**
        * Total number of results for the requested service
@@ -212,30 +201,16 @@ export type PackageGetResponse = PackageGetResponse.LegacyJhsAPIResponseSingle |
 
 export namespace PackageGetResponse {
   export interface LegacyJhsAPIResponseSingle {
-    errors: Array<LegacyJhsAPIResponseSingle.Error>;
+    errors: Array<Shared.UnnamedSchemaRef3248f24329456e19dfa042fff9986f72>;
 
-    messages: Array<LegacyJhsAPIResponseSingle.Message>;
+    messages: Array<Shared.UnnamedSchemaRef3248f24329456e19dfa042fff9986f72>;
 
-    result: unknown | string | null;
+    result: Shared.UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f;
 
     /**
      * Whether the API call was successful
      */
     success: true;
-  }
-
-  export namespace LegacyJhsAPIResponseSingle {
-    export interface Error {
-      code: number;
-
-      message: string;
-    }
-
-    export interface Message {
-      code: number;
-
-      message: string;
-    }
   }
 
   export interface Result {
@@ -273,16 +248,14 @@ export namespace Packages {
   export import PackageListParams = PackagesAPI.PackageListParams;
   export import Groups = GroupsAPI.Groups;
   export import WAFManagedRulesGroup = GroupsAPI.WAFManagedRulesGroup;
-  export import GroupEditResponse = GroupsAPI.GroupEditResponse;
-  export import GroupGetResponse = GroupsAPI.GroupGetResponse;
   export import WAFManagedRulesGroupsV4PagePaginationArray = GroupsAPI.WAFManagedRulesGroupsV4PagePaginationArray;
   export import GroupListParams = GroupsAPI.GroupListParams;
   export import GroupEditParams = GroupsAPI.GroupEditParams;
   export import GroupGetParams = GroupsAPI.GroupGetParams;
   export import Rules = RulesAPI.Rules;
+  export import UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5 = RulesAPI.UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5;
   export import WAFManagedRulesRule = RulesAPI.WAFManagedRulesRule;
   export import RuleEditResponse = RulesAPI.RuleEditResponse;
-  export import RuleGetResponse = RulesAPI.RuleGetResponse;
   export import WAFManagedRulesRulesV4PagePaginationArray = RulesAPI.WAFManagedRulesRulesV4PagePaginationArray;
   export import RuleListParams = RulesAPI.RuleListParams;
   export import RuleEditParams = RulesAPI.RuleEditParams;

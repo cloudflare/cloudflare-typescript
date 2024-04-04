@@ -11,13 +11,9 @@ export class Argo extends APIResource {
 
 export namespace Argo {
   export import SmartRouting = SmartRoutingAPI.SmartRouting;
-  export import SmartRoutingEditResponse = SmartRoutingAPI.SmartRoutingEditResponse;
-  export import SmartRoutingGetResponse = SmartRoutingAPI.SmartRoutingGetResponse;
   export import SmartRoutingEditParams = SmartRoutingAPI.SmartRoutingEditParams;
   export import SmartRoutingGetParams = SmartRoutingAPI.SmartRoutingGetParams;
   export import TieredCaching = TieredCachingAPI.TieredCaching;
-  export import TieredCachingEditResponse = TieredCachingAPI.TieredCachingEditResponse;
-  export import TieredCachingGetResponse = TieredCachingAPI.TieredCachingGetResponse;
   export import TieredCachingEditParams = TieredCachingAPI.TieredCachingEditParams;
   export import TieredCachingGetParams = TieredCachingAPI.TieredCachingGetParams;
 }

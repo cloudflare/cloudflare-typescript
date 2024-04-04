@@ -13,6 +13,7 @@ export namespace Networks {
   export import Routes = RoutesAPI.Routes;
   export import TunnelRoute = RoutesAPI.TunnelRoute;
   export import TunnelTeamnet = RoutesAPI.TunnelTeamnet;
+  export import UnnamedSchemaRefC125d35cbb7f93aab989cd19bd764ed6 = RoutesAPI.UnnamedSchemaRefC125d35cbb7f93aab989cd19bd764ed6;
   export import TunnelTeamnetsV4PagePaginationArray = RoutesAPI.TunnelTeamnetsV4PagePaginationArray;
   export import RouteCreateParams = RoutesAPI.RouteCreateParams;
   export import RouteListParams = RoutesAPI.RouteListParams;
@@ -20,9 +21,6 @@ export namespace Networks {
   export import RouteEditParams = RoutesAPI.RouteEditParams;
   export import VirtualNetworks = VirtualNetworksAPI.VirtualNetworks;
   export import TunnelVirtualNetwork = VirtualNetworksAPI.TunnelVirtualNetwork;
-  export import VirtualNetworkCreateResponse = VirtualNetworksAPI.VirtualNetworkCreateResponse;
-  export import VirtualNetworkDeleteResponse = VirtualNetworksAPI.VirtualNetworkDeleteResponse;
-  export import VirtualNetworkEditResponse = VirtualNetworksAPI.VirtualNetworkEditResponse;
   export import TunnelVirtualNetworksSinglePage = VirtualNetworksAPI.TunnelVirtualNetworksSinglePage;
   export import VirtualNetworkCreateParams = VirtualNetworksAPI.VirtualNetworkCreateParams;
   export import VirtualNetworkListParams = VirtualNetworksAPI.VirtualNetworkListParams;

@@ -170,6 +170,87 @@ export namespace DNSFirewall {
   }
 }
 
+export interface UnnamedSchemaRef7a0f93d9e1afc3221d2a57b7bab16955 {
+  /**
+   * Identifier
+   */
+  id: string;
+
+  /**
+   * Deprecate the response to ANY requests.
+   */
+  deprecate_any_requests: boolean;
+
+  dns_firewall_ips: Array<string | string>;
+
+  /**
+   * Forward client IP (resolver) subnet if no EDNS Client Subnet is sent.
+   */
+  ecs_fallback: boolean;
+
+  /**
+   * Maximum DNS Cache TTL.
+   */
+  maximum_cache_ttl: number;
+
+  /**
+   * Minimum DNS Cache TTL.
+   */
+  minimum_cache_ttl: number;
+
+  /**
+   * Last modification of DNS Firewall cluster.
+   */
+  modified_on: string;
+
+  /**
+   * DNS Firewall Cluster Name.
+   */
+  name: string;
+
+  upstream_ips: Array<string | string>;
+
+  /**
+   * Attack mitigation settings.
+   */
+  attack_mitigation?: UnnamedSchemaRef7a0f93d9e1afc3221d2a57b7bab16955.AttackMitigation | null;
+
+  /**
+   * Negative DNS Cache TTL.
+   */
+  negative_cache_ttl?: number | null;
+
+  /**
+   * Ratelimit in queries per second per datacenter (applies to DNS queries sent to
+   * the upstream nameservers configured on the cluster).
+   */
+  ratelimit?: number | null;
+
+  /**
+   * Number of retries for fetching DNS responses from upstream nameservers (not
+   * counting the initial attempt).
+   */
+  retries?: number;
+}
+
+export namespace UnnamedSchemaRef7a0f93d9e1afc3221d2a57b7bab16955 {
+  /**
+   * Attack mitigation settings.
+   */
+  export interface AttackMitigation {
+    /**
+     * When enabled, random-prefix attacks are automatically mitigated and the upstream
+     * DNS servers protected.
+     */
+    enabled?: boolean;
+
+    /**
+     * Only mitigate attacks when upstream servers seem unhealthy.
+     */
+    only_when_upstream_unhealthy?: boolean;
+  }
+}
+
 export interface FirewallDeleteResponse {
   /**
    * Identifier
@@ -366,6 +447,7 @@ export interface FirewallGetParams {
 
 export namespace Firewall {
   export import DNSFirewall = FirewallAPI.DNSFirewall;
+  export import UnnamedSchemaRef7a0f93d9e1afc3221d2a57b7bab16955 = FirewallAPI.UnnamedSchemaRef7a0f93d9e1afc3221d2a57b7bab16955;
   export import FirewallDeleteResponse = FirewallAPI.FirewallDeleteResponse;
   export import DNSFirewallsV4PagePaginationArray = FirewallAPI.DNSFirewallsV4PagePaginationArray;
   export import FirewallCreateParams = FirewallAPI.FirewallCreateParams;

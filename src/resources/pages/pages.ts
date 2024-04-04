@@ -11,9 +11,7 @@ export namespace Pages {
   export import Projects = ProjectsAPI.Projects;
   export import PagesDeployments = ProjectsAPI.PagesDeployments;
   export import PagesProjects = ProjectsAPI.PagesProjects;
-  export import ProjectCreateResponse = ProjectsAPI.ProjectCreateResponse;
   export import ProjectDeleteResponse = ProjectsAPI.ProjectDeleteResponse;
-  export import ProjectEditResponse = ProjectsAPI.ProjectEditResponse;
   export import ProjectPurgeBuildCacheResponse = ProjectsAPI.ProjectPurgeBuildCacheResponse;
   export import PagesDeploymentsSinglePage = ProjectsAPI.PagesDeploymentsSinglePage;
   export import ProjectCreateParams = ProjectsAPI.ProjectCreateParams;

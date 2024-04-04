@@ -13,6 +13,7 @@ export {
 } from './buckets';
 export {
   R2Sippy,
+  UnnamedSchemaRef6430970563db310f19d39aafe3debd27,
   SippyDeleteResponse,
   SippyUpdateParams,
   SippyDeleteParams,

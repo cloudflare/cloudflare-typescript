@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as AccountsAPI from 'cloudflare/resources/addressing/address-maps/accounts';
+import * as Shared from 'cloudflare/resources/shared';
 
 export class Accounts extends APIResource {
   /**
@@ -12,13 +13,13 @@ export class Accounts extends APIResource {
     addressMapId: string,
     params: AccountUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccountUpdateResponse | null> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef67bbb1ccdd42c3e2937b9fd19f791151 | null> {
     const { account_id, body } = params;
     return (
       this._client.put(
         `/accounts/${account_id}/addressing/address_maps/${addressMapId}/accounts/${account_id}`,
         { body: body, ...options },
-      ) as Core.APIPromise<{ result: AccountUpdateResponse | null }>
+      ) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef67bbb1ccdd42c3e2937b9fd19f791151 | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -29,20 +30,16 @@ export class Accounts extends APIResource {
     addressMapId: string,
     params: AccountDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccountDeleteResponse | null> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef67bbb1ccdd42c3e2937b9fd19f791151 | null> {
     const { account_id, body } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/addressing/address_maps/${addressMapId}/accounts/${account_id}`,
         { body: body, ...options },
-      ) as Core.APIPromise<{ result: AccountDeleteResponse | null }>
+      ) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef67bbb1ccdd42c3e2937b9fd19f791151 | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
-
-export type AccountUpdateResponse = unknown | Array<unknown> | string;
-
-export type AccountDeleteResponse = unknown | Array<unknown> | string;
 
 export interface AccountUpdateParams {
   /**
@@ -69,8 +66,6 @@ export interface AccountDeleteParams {
 }
 
 export namespace Accounts {
-  export import AccountUpdateResponse = AccountsAPI.AccountUpdateResponse;
-  export import AccountDeleteResponse = AccountsAPI.AccountDeleteResponse;
   export import AccountUpdateParams = AccountsAPI.AccountUpdateParams;
   export import AccountDeleteParams = AccountsAPI.AccountDeleteParams;
 }

@@ -123,6 +123,55 @@ export interface OriginTLSClientCertificate {
   uploaded_on?: string;
 }
 
+export interface UnnamedSchemaRefD182888b36f93a765d9ce5aefa3009e9 {
+  /**
+   * Identifier
+   */
+  id?: string;
+
+  /**
+   * The hostname certificate.
+   */
+  certificate?: string;
+
+  /**
+   * The date when the certificate expires.
+   */
+  expires_on?: string;
+
+  /**
+   * The certificate authority that issued the certificate.
+   */
+  issuer?: string;
+
+  /**
+   * The serial number on the uploaded certificate.
+   */
+  serial_number?: string;
+
+  /**
+   * The type of hash used for the certificate.
+   */
+  signature?: string;
+
+  /**
+   * Status of the certificate or the association.
+   */
+  status?:
+    | 'initializing'
+    | 'pending_deployment'
+    | 'pending_deletion'
+    | 'active'
+    | 'deleted'
+    | 'deployment_timed_out'
+    | 'deletion_timed_out';
+
+  /**
+   * The time when the certificate was uploaded.
+   */
+  uploaded_on?: string;
+}
+
 export interface CertificateCreateParams {
   /**
    * Path param: Identifier
@@ -168,6 +217,7 @@ export interface CertificateGetParams {
 
 export namespace Certificates {
   export import OriginTLSClientCertificate = CertificatesAPI.OriginTLSClientCertificate;
+  export import UnnamedSchemaRefD182888b36f93a765d9ce5aefa3009e9 = CertificatesAPI.UnnamedSchemaRefD182888b36f93a765d9ce5aefa3009e9;
   export import CertificateCreateParams = CertificatesAPI.CertificateCreateParams;
   export import CertificateListParams = CertificatesAPI.CertificateListParams;
   export import CertificateDeleteParams = CertificatesAPI.CertificateDeleteParams;

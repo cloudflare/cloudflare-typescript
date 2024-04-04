@@ -6,7 +6,6 @@ export {
   AppUpdateResponse,
   AppListResponse,
   AppDeleteResponse,
-  AppGetResponse,
   AppCreateParams,
   AppUpdateParams,
   AppListParams,

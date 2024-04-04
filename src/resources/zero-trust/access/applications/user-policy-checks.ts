@@ -50,6 +50,10 @@ export class UserPolicyChecks extends APIResource {
   }
 }
 
+export interface UnnamedSchemaRef6a02fe18089d53b52b2cd3949b717919 {
+  country?: string;
+}
+
 export interface UserPolicyCheckListResponse {
   app_state?: UserPolicyCheckListResponse.AppState;
 
@@ -83,7 +87,7 @@ export namespace UserPolicyCheckListResponse {
 
     email?: string;
 
-    geo?: UserIdentity.Geo;
+    geo?: UserPolicyChecksAPI.UnnamedSchemaRef6a02fe18089d53b52b2cd3949b717919;
 
     iat?: number;
 
@@ -100,12 +104,6 @@ export namespace UserPolicyCheckListResponse {
 
     version?: number;
   }
-
-  export namespace UserIdentity {
-    export interface Geo {
-      country?: string;
-    }
-  }
 }
 
 export interface UserPolicyCheckListParams {
@@ -121,6 +119,7 @@ export interface UserPolicyCheckListParams {
 }
 
 export namespace UserPolicyChecks {
+  export import UnnamedSchemaRef6a02fe18089d53b52b2cd3949b717919 = UserPolicyChecksAPI.UnnamedSchemaRef6a02fe18089d53b52b2cd3949b717919;
   export import UserPolicyCheckListResponse = UserPolicyChecksAPI.UserPolicyCheckListResponse;
   export import UserPolicyCheckListParams = UserPolicyChecksAPI.UserPolicyCheckListParams;
 }

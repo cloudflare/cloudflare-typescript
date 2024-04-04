@@ -7,10 +7,8 @@ export {
 } from './permission-groups';
 export {
   TokenCreateResponse,
-  TokenUpdateResponse,
   TokenListResponse,
   TokenDeleteResponse,
-  TokenGetResponse,
   TokenVerifyResponse,
   TokenCreateParams,
   TokenUpdateParams,

@@ -37,26 +37,24 @@ export interface IntelPassiveDNSByIP {
   /**
    * Reverse DNS look-ups observed during the time period.
    */
-  reverse_records?: Array<IntelPassiveDNSByIP.ReverseRecord>;
+  reverse_records?: Array<UnnamedSchemaRefB5e16cee4f32382c294201aedb9fc050>;
 }
 
-export namespace IntelPassiveDNSByIP {
-  export interface ReverseRecord {
-    /**
-     * First seen date of the DNS record during the time period.
-     */
-    first_seen?: string;
+export interface UnnamedSchemaRefB5e16cee4f32382c294201aedb9fc050 {
+  /**
+   * First seen date of the DNS record during the time period.
+   */
+  first_seen?: string;
 
-    /**
-     * Hostname that the IP was observed resolving to.
-     */
-    hostname?: unknown;
+  /**
+   * Hostname that the IP was observed resolving to.
+   */
+  hostname?: unknown;
 
-    /**
-     * Last seen date of the DNS record during the time period.
-     */
-    last_seen?: string;
-  }
+  /**
+   * Last seen date of the DNS record during the time period.
+   */
+  last_seen?: string;
 }
 
 export interface DNSGetParams {
@@ -102,5 +100,6 @@ export namespace DNSGetParams {
 
 export namespace DNS {
   export import IntelPassiveDNSByIP = DNSAPI.IntelPassiveDNSByIP;
+  export import UnnamedSchemaRefB5e16cee4f32382c294201aedb9fc050 = DNSAPI.UnnamedSchemaRefB5e16cee4f32382c294201aedb9fc050;
   export import DNSGetParams = DNSAPI.DNSGetParams;
 }

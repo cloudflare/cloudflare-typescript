@@ -37,7 +37,6 @@ export {
   IPSECTunnelPSKGenerateParams,
   IPSECTunnels,
 } from './ipsec-tunnels';
-export { MagicTransit } from './magic-transit';
 export {
   RouteCreateResponse,
   RouteUpdateResponse,
@@ -66,3 +65,8 @@ export {
   SiteGetParams,
   Sites,
 } from './sites/index';
+export {
+  UnnamedSchemaRef3b1a76a5e4a139b72ed7d93834773d39,
+  UnnamedSchemaRefEebdc868ce7f7ae92e23438caa84e7b5,
+  MagicTransit,
+} from './magic-transit';

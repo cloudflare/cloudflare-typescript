@@ -5,7 +5,6 @@ export {
   D1CreateDatabase,
   D1DatabaseDetails,
   D1QueryResult,
-  DatabaseDeleteResponse,
   DatabaseQueryResponse,
   DatabaseCreateParams,
   DatabaseListParams,

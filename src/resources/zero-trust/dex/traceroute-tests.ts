@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as TracerouteTestsAPI from 'cloudflare/resources/zero-trust/dex/traceroute-tests';
+import * as DEXAPI from 'cloudflare/resources/zero-trust/dex/dex';
 
 export class TracerouteTests extends APIResource {
   /**
@@ -77,7 +78,7 @@ export interface DigitalExperienceMonitoringTracerouteDetails {
    */
   name: string;
 
-  target_policies?: Array<DigitalExperienceMonitoringTracerouteDetails.TargetPolicy>;
+  target_policies?: Array<DEXAPI.UnnamedSchemaRefBf9e2abcf1b78a6cab8e6e29e2228a11>;
 
   targeted?: boolean;
 
@@ -87,17 +88,6 @@ export interface DigitalExperienceMonitoringTracerouteDetails {
 }
 
 export namespace DigitalExperienceMonitoringTracerouteDetails {
-  export interface TargetPolicy {
-    id: string;
-
-    /**
-     * Whether the policy is the default for the account
-     */
-    default: boolean;
-
-    name: string;
-  }
-
   export interface TracerouteStats {
     availabilityPct: TracerouteStats.AvailabilityPct;
 

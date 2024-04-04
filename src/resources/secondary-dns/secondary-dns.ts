@@ -22,6 +22,7 @@ export namespace SecondaryDNS {
   export import SecondaryDNSForce = ForceAXFRAPI.SecondaryDNSForce;
   export import ForceAXFRCreateParams = ForceAXFRAPI.ForceAXFRCreateParams;
   export import Incoming = IncomingAPI.Incoming;
+  export import UnnamedSchemaRef150c555e27f53dbb40cdce4d6644ff0a = IncomingAPI.UnnamedSchemaRef150c555e27f53dbb40cdce4d6644ff0a;
   export import IncomingCreateResponse = IncomingAPI.IncomingCreateResponse;
   export import IncomingUpdateResponse = IncomingAPI.IncomingUpdateResponse;
   export import IncomingDeleteResponse = IncomingAPI.IncomingDeleteResponse;
@@ -33,6 +34,8 @@ export namespace SecondaryDNS {
   export import Outgoing = OutgoingAPI.Outgoing;
   export import SecondaryDNSDisableTransfer = OutgoingAPI.SecondaryDNSDisableTransfer;
   export import SecondaryDNSEnableTransfer = OutgoingAPI.SecondaryDNSEnableTransfer;
+  export import UnnamedSchemaRef0e152c3e4c55b8a0ca6531578a42c564 = OutgoingAPI.UnnamedSchemaRef0e152c3e4c55b8a0ca6531578a42c564;
+  export import UnnamedSchemaRefBf34e74a34c9a2f63d85505dc69d4adc = OutgoingAPI.UnnamedSchemaRefBf34e74a34c9a2f63d85505dc69d4adc;
   export import OutgoingCreateResponse = OutgoingAPI.OutgoingCreateResponse;
   export import OutgoingUpdateResponse = OutgoingAPI.OutgoingUpdateResponse;
   export import OutgoingDeleteResponse = OutgoingAPI.OutgoingDeleteResponse;
@@ -47,6 +50,7 @@ export namespace SecondaryDNS {
   export import OutgoingGetParams = OutgoingAPI.OutgoingGetParams;
   export import ACLs = ACLsAPI.ACLs;
   export import SecondaryDNSACL = ACLsAPI.SecondaryDNSACL;
+  export import UnnamedSchemaRef08eaa2f22bb9ce0f80063d710d4edafd = ACLsAPI.UnnamedSchemaRef08eaa2f22bb9ce0f80063d710d4edafd;
   export import ACLDeleteResponse = ACLsAPI.ACLDeleteResponse;
   export import SecondaryDnsaclsSinglePage = ACLsAPI.SecondaryDnsaclsSinglePage;
   export import ACLCreateParams = ACLsAPI.ACLCreateParams;
@@ -56,6 +60,7 @@ export namespace SecondaryDNS {
   export import ACLGetParams = ACLsAPI.ACLGetParams;
   export import Peers = PeersAPI.Peers;
   export import SecondaryDNSPeer = PeersAPI.SecondaryDNSPeer;
+  export import UnnamedSchemaRefBc727f0a53d75f2b531245a82603fbe0 = PeersAPI.UnnamedSchemaRefBc727f0a53d75f2b531245a82603fbe0;
   export import PeerDeleteResponse = PeersAPI.PeerDeleteResponse;
   export import SecondaryDNSPeersSinglePage = PeersAPI.SecondaryDNSPeersSinglePage;
   export import PeerCreateParams = PeersAPI.PeerCreateParams;
@@ -65,6 +70,7 @@ export namespace SecondaryDNS {
   export import PeerGetParams = PeersAPI.PeerGetParams;
   export import TSIGs = TSIGsAPI.TSIGs;
   export import SecondaryDNSTSIG = TSIGsAPI.SecondaryDNSTSIG;
+  export import UnnamedSchemaRefC3d6ffaf5dde0c570eaa72462c2ee738 = TSIGsAPI.UnnamedSchemaRefC3d6ffaf5dde0c570eaa72462c2ee738;
   export import TSIGDeleteResponse = TSIGsAPI.TSIGDeleteResponse;
   export import SecondaryDnstsigsSinglePage = TSIGsAPI.SecondaryDnstsigsSinglePage;
   export import TSIGCreateParams = TSIGsAPI.TSIGCreateParams;

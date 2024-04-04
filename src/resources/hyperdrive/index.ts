@@ -4,7 +4,6 @@ export {
   ConfigCreateResponse,
   ConfigUpdateResponse,
   ConfigListResponse,
-  ConfigDeleteResponse,
   ConfigEditResponse,
   ConfigGetResponse,
   ConfigCreateParams,

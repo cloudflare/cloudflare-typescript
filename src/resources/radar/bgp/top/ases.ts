@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as AsesAPI from 'cloudflare/resources/radar/bgp/top/ases';
+import * as RadarAPI from 'cloudflare/resources/radar/radar';
 
 export class Ases extends APIResource {
   /**
@@ -56,21 +57,7 @@ export interface AseGetResponse {
 
 export namespace AseGetResponse {
   export interface Meta {
-    dateRange: Array<Meta.DateRange>;
-  }
-
-  export namespace Meta {
-    export interface DateRange {
-      /**
-       * Adjusted end of date range.
-       */
-      endTime: string;
-
-      /**
-       * Adjusted start of date range.
-       */
-      startTime: string;
-    }
+    dateRange: Array<RadarAPI.UnnamedSchemaRefBaac9d7da12de53e99142f8ecd3982e5>;
   }
 
   export interface Top0 {
@@ -89,7 +76,7 @@ export namespace AseGetResponse {
 export interface AsePrefixesResponse {
   asns: Array<AsePrefixesResponse.ASN>;
 
-  meta: AsePrefixesResponse.Meta;
+  meta: RadarAPI.UnnamedSchemaRefC5858f1f916a921846e0b6159af470a7;
 }
 
 export namespace AsePrefixesResponse {
@@ -101,14 +88,6 @@ export namespace AsePrefixesResponse {
     name: string;
 
     pfxs_count: number;
-  }
-
-  export interface Meta {
-    data_time: string;
-
-    query_time: string;
-
-    total_peers: number;
   }
 }
 

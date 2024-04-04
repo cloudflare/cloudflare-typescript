@@ -10,7 +10,6 @@ export {
 } from './prefixes';
 export {
   AddressingServiceBinding,
-  BindingDeleteResponse,
   BindingCreateParams,
   BindingListParams,
   BindingDeleteParams,

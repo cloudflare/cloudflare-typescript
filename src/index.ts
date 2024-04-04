@@ -391,9 +391,7 @@ export namespace Cloudflare {
 
   export import Accounts = API.Accounts;
   export import Account = API.Account;
-  export import AccountUpdateResponse = API.AccountUpdateResponse;
   export import AccountListResponse = API.AccountListResponse;
-  export import AccountGetResponse = API.AccountGetResponse;
   export import AccountListResponsesV4PagePaginationArray = API.AccountListResponsesV4PagePaginationArray;
   export import AccountUpdateParams = API.AccountUpdateParams;
   export import AccountListParams = API.AccountListParams;
@@ -401,9 +399,6 @@ export namespace Cloudflare {
 
   export import OriginCACertificates = API.OriginCACertificates;
   export import OriginCACertificate = API.OriginCACertificate;
-  export import OriginCACertificateCreateResponse = API.OriginCACertificateCreateResponse;
-  export import OriginCACertificateDeleteResponse = API.OriginCACertificateDeleteResponse;
-  export import OriginCACertificateGetResponse = API.OriginCACertificateGetResponse;
   export import OriginCACertificatesSinglePage = API.OriginCACertificatesSinglePage;
   export import OriginCACertificateCreateParams = API.OriginCACertificateCreateParams;
   export import OriginCACertificateListParams = API.OriginCACertificateListParams;
@@ -416,9 +411,7 @@ export namespace Cloudflare {
 
   export import Memberships = API.Memberships;
   export import Membership = API.Membership;
-  export import MembershipUpdateResponse = API.MembershipUpdateResponse;
   export import MembershipDeleteResponse = API.MembershipDeleteResponse;
-  export import MembershipGetResponse = API.MembershipGetResponse;
   export import MembershipsV4PagePaginationArray = API.MembershipsV4PagePaginationArray;
   export import MembershipUpdateParams = API.MembershipUpdateParams;
   export import MembershipListParams = API.MembershipListParams;
@@ -426,8 +419,6 @@ export namespace Cloudflare {
 
   export import UserResource = API.UserResource;
   export import User = API.User;
-  export import UserEditResponse = API.UserEditResponse;
-  export import UserGetResponse = API.UserGetResponse;
   export import UserEditParams = API.UserEditParams;
 
   export import Zones = API.Zones;
@@ -442,6 +433,7 @@ export namespace Cloudflare {
 
   export import LoadBalancers = API.LoadBalancers;
   export import LoadBalancer = API.LoadBalancer;
+  export import UnnamedSchemaRef06ba14ec7860c091efc98fd9af30f382 = API.UnnamedSchemaRef06ba14ec7860c091efc98fd9af30f382;
   export import LoadBalancerDeleteResponse = API.LoadBalancerDeleteResponse;
   export import LoadBalancersSinglePage = API.LoadBalancersSinglePage;
   export import LoadBalancerCreateParams = API.LoadBalancerCreateParams;
@@ -458,11 +450,8 @@ export namespace Cloudflare {
   export import SSL = API.SSL;
 
   export import Subscriptions = API.Subscriptions;
-  export import SubscriptionCreateResponse = API.SubscriptionCreateResponse;
-  export import SubscriptionUpdateResponse = API.SubscriptionUpdateResponse;
   export import SubscriptionListResponse = API.SubscriptionListResponse;
   export import SubscriptionDeleteResponse = API.SubscriptionDeleteResponse;
-  export import SubscriptionGetResponse = API.SubscriptionGetResponse;
   export import SubscriptionListResponsesSinglePage = API.SubscriptionListResponsesSinglePage;
   export import SubscriptionCreateParams = API.SubscriptionCreateParams;
   export import SubscriptionUpdateParams = API.SubscriptionUpdateParams;
@@ -493,10 +482,6 @@ export namespace Cloudflare {
 
   export import CustomCertificates = API.CustomCertificates;
   export import CustomCertificate = API.CustomCertificate;
-  export import CustomCertificateCreateResponse = API.CustomCertificateCreateResponse;
-  export import CustomCertificateDeleteResponse = API.CustomCertificateDeleteResponse;
-  export import CustomCertificateEditResponse = API.CustomCertificateEditResponse;
-  export import CustomCertificateGetResponse = API.CustomCertificateGetResponse;
   export import CustomCertificatesV4PagePaginationArray = API.CustomCertificatesV4PagePaginationArray;
   export import CustomCertificateCreateParams = API.CustomCertificateCreateParams;
   export import CustomCertificateListParams = API.CustomCertificateListParams;
@@ -506,9 +491,12 @@ export namespace Cloudflare {
 
   export import CustomHostnames = API.CustomHostnames;
   export import CustomHostname = API.CustomHostname;
+  export import UnnamedSchemaRef16aca57bde2963201c7e6e895436c1c1 = API.UnnamedSchemaRef16aca57bde2963201c7e6e895436c1c1;
+  export import UnnamedSchemaRef78adb375f06c6d462dd92b99e2ecf510 = API.UnnamedSchemaRef78adb375f06c6d462dd92b99e2ecf510;
+  export import UnnamedSchemaRef9a9935a9a770967bb604ae41a81e42e1 = API.UnnamedSchemaRef9a9935a9a770967bb604ae41a81e42e1;
+  export import UnnamedSchemaRefD2a16d7ee1ad3a888dd5821c918d51fd = API.UnnamedSchemaRefD2a16d7ee1ad3a888dd5821c918d51fd;
   export import CustomHostnameCreateResponse = API.CustomHostnameCreateResponse;
   export import CustomHostnameListResponse = API.CustomHostnameListResponse;
-  export import CustomHostnameDeleteResponse = API.CustomHostnameDeleteResponse;
   export import CustomHostnameEditResponse = API.CustomHostnameEditResponse;
   export import CustomHostnameGetResponse = API.CustomHostnameGetResponse;
   export import CustomHostnameListResponsesV4PagePaginationArray = API.CustomHostnameListResponsesV4PagePaginationArray;
@@ -520,7 +508,6 @@ export namespace Cloudflare {
 
   export import CustomNameservers = API.CustomNameservers;
   export import CustomNameserver = API.CustomNameserver;
-  export import CustomNameserverDeleteResponse = API.CustomNameserverDeleteResponse;
   export import CustomNameserverAvailabiltyResponse = API.CustomNameserverAvailabiltyResponse;
   export import CustomNameserverGetResponse = API.CustomNameserverGetResponse;
   export import CustomNameserverVerifyResponse = API.CustomNameserverVerifyResponse;
@@ -531,10 +518,12 @@ export namespace Cloudflare {
   export import CustomNameserverVerifyParams = API.CustomNameserverVerifyParams;
 
   export import DNS = API.DNS;
+  export import UnnamedSchemaRef6595695ff25b0614667b25f66b7bbaba = API.UnnamedSchemaRef6595695ff25b0614667b25f66b7bbaba;
+  export import UnnamedSchemaRef65be9614de145bf4a58d0fddf46df7ca = API.UnnamedSchemaRef65be9614de145bf4a58d0fddf46df7ca;
+  export import UnnamedSchemaRef85b45d163202bbab7456da6b346d9fe2 = API.UnnamedSchemaRef85b45d163202bbab7456da6b346d9fe2;
 
   export import DNSSECResource = API.DNSSECResource;
   export import DNSSEC = API.DNSSEC;
-  export import DNSSECDeleteResponse = API.DNSSECDeleteResponse;
   export import DNSSECDeleteParams = API.DNSSECDeleteParams;
   export import DNSSECEditParams = API.DNSSECEditParams;
   export import DNSSECGetParams = API.DNSSECGetParams;
@@ -549,6 +538,7 @@ export namespace Cloudflare {
 
   export import Filters = API.Filters;
   export import FirewallFilter = API.FirewallFilter;
+  export import UnnamedSchemaRef39af4f78d23244e2595fb47c811221df = API.UnnamedSchemaRef39af4f78d23244e2595fb47c811221df;
   export import FilterCreateResponse = API.FilterCreateResponse;
   export import FirewallFiltersV4PagePaginationArray = API.FirewallFiltersV4PagePaginationArray;
   export import FilterCreateParams = API.FilterCreateParams;
@@ -560,6 +550,7 @@ export namespace Cloudflare {
 
   export import Healthchecks = API.Healthchecks;
   export import Healthcheck = API.Healthcheck;
+  export import UnnamedSchemaRefAaa560acadcbf1ae1dc619ba1ea5948e = API.UnnamedSchemaRefAaa560acadcbf1ae1dc619ba1ea5948e;
   export import HealthcheckDeleteResponse = API.HealthcheckDeleteResponse;
   export import HealthchecksSinglePage = API.HealthchecksSinglePage;
   export import HealthcheckCreateParams = API.HealthcheckCreateParams;
@@ -572,7 +563,7 @@ export namespace Cloudflare {
   export import KeylessCertificates = API.KeylessCertificates;
   export import KeylessCertificate = API.KeylessCertificate;
   export import KeylessCertificateHostname = API.KeylessCertificateHostname;
-  export import KeylessCertificateDeleteResponse = API.KeylessCertificateDeleteResponse;
+  export import UnnamedSchemaRefA91f0bd72ee433f010eecfdc94ccf298 = API.UnnamedSchemaRefA91f0bd72ee433f010eecfdc94ccf298;
   export import KeylessCertificateHostnamesSinglePage = API.KeylessCertificateHostnamesSinglePage;
   export import KeylessCertificateCreateParams = API.KeylessCertificateCreateParams;
   export import KeylessCertificateListParams = API.KeylessCertificateListParams;
@@ -586,10 +577,7 @@ export namespace Cloudflare {
 
   export import OriginTLSClientAuth = API.OriginTLSClientAuth;
   export import OriginTLSClientCertificateZoneAuthenticatedOriginPull = API.OriginTLSClientCertificateZoneAuthenticatedOriginPull;
-  export import OriginTLSClientAuthCreateResponse = API.OriginTLSClientAuthCreateResponse;
   export import OriginTLSClientAuthListResponse = API.OriginTLSClientAuthListResponse;
-  export import OriginTLSClientAuthDeleteResponse = API.OriginTLSClientAuthDeleteResponse;
-  export import OriginTLSClientAuthGetResponse = API.OriginTLSClientAuthGetResponse;
   export import OriginTLSClientAuthListResponsesSinglePage = API.OriginTLSClientAuthListResponsesSinglePage;
   export import OriginTLSClientAuthCreateParams = API.OriginTLSClientAuthCreateParams;
   export import OriginTLSClientAuthListParams = API.OriginTLSClientAuthListParams;
@@ -598,12 +586,8 @@ export namespace Cloudflare {
 
   export import Pagerules = API.Pagerules;
   export import ZonesPagerule = API.ZonesPagerule;
-  export import PageruleCreateResponse = API.PageruleCreateResponse;
-  export import PageruleUpdateResponse = API.PageruleUpdateResponse;
   export import PageruleListResponse = API.PageruleListResponse;
   export import PageruleDeleteResponse = API.PageruleDeleteResponse;
-  export import PageruleEditResponse = API.PageruleEditResponse;
-  export import PageruleGetResponse = API.PageruleGetResponse;
   export import PageruleCreateParams = API.PageruleCreateParams;
   export import PageruleUpdateParams = API.PageruleUpdateParams;
   export import PageruleListParams = API.PageruleListParams;
@@ -613,11 +597,8 @@ export namespace Cloudflare {
 
   export import RateLimits = API.RateLimits;
   export import RateLimit = API.RateLimit;
-  export import RateLimitCreateResponse = API.RateLimitCreateResponse;
   export import RateLimitListResponse = API.RateLimitListResponse;
   export import RateLimitDeleteResponse = API.RateLimitDeleteResponse;
-  export import RateLimitEditResponse = API.RateLimitEditResponse;
-  export import RateLimitGetResponse = API.RateLimitGetResponse;
   export import RateLimitListResponsesV4PagePaginationArray = API.RateLimitListResponsesV4PagePaginationArray;
   export import RateLimitCreateParams = API.RateLimitCreateParams;
   export import RateLimitListParams = API.RateLimitListParams;
@@ -627,6 +608,7 @@ export namespace Cloudflare {
   export import SecondaryDNS = API.SecondaryDNS;
 
   export import WaitingRooms = API.WaitingRooms;
+  export import UnnamedSchemaRefA282afe149b2cf60a204505bd4c53324 = API.UnnamedSchemaRefA282afe149b2cf60a204505bd4c53324;
   export import WaitingRoom = API.WaitingRoom;
   export import WaitingRoomDeleteResponse = API.WaitingRoomDeleteResponse;
   export import WaitingRoomsSinglePage = API.WaitingRoomsSinglePage;
@@ -652,7 +634,6 @@ export namespace Cloudflare {
   export import QueueCreateResponse = API.QueueCreateResponse;
   export import QueueUpdateResponse = API.QueueUpdateResponse;
   export import QueueListResponse = API.QueueListResponse;
-  export import QueueDeleteResponse = API.QueueDeleteResponse;
   export import QueueGetResponse = API.QueueGetResponse;
   export import QueueCreateParams = API.QueueCreateParams;
   export import QueueUpdateParams = API.QueueUpdateParams;
@@ -704,6 +685,13 @@ export namespace Cloudflare {
   export import BrandProtection = API.BrandProtection;
   export import IntelPhishingURLInfo = API.IntelPhishingURLInfo;
   export import IntelPhishingURLSubmit = API.IntelPhishingURLSubmit;
+  export import UnnamedSchemaRef209db30ed499548152d6f3bccf720b54 = API.UnnamedSchemaRef209db30ed499548152d6f3bccf720b54;
+  export import UnnamedSchemaRef39419d70e2399b28b15cd660afd342fb = API.UnnamedSchemaRef39419d70e2399b28b15cd660afd342fb;
+  export import UnnamedSchemaRef3e10ea08deb8102a27500f986488c1e8 = API.UnnamedSchemaRef3e10ea08deb8102a27500f986488c1e8;
+  export import UnnamedSchemaRef44e66100b948bfe723054c56b6144766 = API.UnnamedSchemaRef44e66100b948bfe723054c56b6144766;
+  export import UnnamedSchemaRef767c0981cf47f45f0c766253dbd18669 = API.UnnamedSchemaRef767c0981cf47f45f0c766253dbd18669;
+  export import UnnamedSchemaRef9b4c9779a35b172cb69c71389ebc7014 = API.UnnamedSchemaRef9b4c9779a35b172cb69c71389ebc7014;
+  export import UnnamedSchemaRefA64e2a18a86750b6bd72cdf37ecfd869 = API.UnnamedSchemaRefA64e2a18a86750b6bd72cdf37ecfd869;
   export import BrandProtectionSubmitParams = API.BrandProtectionSubmitParams;
   export import BrandProtectionURLInfoParams = API.BrandProtectionURLInfoParams;
 
@@ -714,6 +702,8 @@ export namespace Cloudflare {
   export import Intel = API.Intel;
 
   export import MagicTransit = API.MagicTransit;
+  export import UnnamedSchemaRef3b1a76a5e4a139b72ed7d93834773d39 = API.UnnamedSchemaRef3b1a76a5e4a139b72ed7d93834773d39;
+  export import UnnamedSchemaRefEebdc868ce7f7ae92e23438caa84e7b5 = API.UnnamedSchemaRefEebdc868ce7f7ae92e23438caa84e7b5;
 
   export import MagicNetworkMonitoring = API.MagicNetworkMonitoring;
 
@@ -754,19 +744,14 @@ export namespace Cloudflare {
   export import StreamGetParams = API.StreamGetParams;
 
   export import Alerting = API.Alerting;
+  export import UnnamedSchemaRefD6e23adacaca017802aaa484a8b3f405 = API.UnnamedSchemaRefD6e23adacaca017802aaa484a8b3f405;
 
   export import D1 = API.D1;
 
   export import R2 = API.R2;
 
   export import WARPConnector = API.WARPConnector;
-  export import WARPConnectorCreateResponse = API.WARPConnectorCreateResponse;
-  export import WARPConnectorListResponse = API.WARPConnectorListResponse;
-  export import WARPConnectorDeleteResponse = API.WARPConnectorDeleteResponse;
-  export import WARPConnectorEditResponse = API.WARPConnectorEditResponse;
-  export import WARPConnectorGetResponse = API.WARPConnectorGetResponse;
   export import WARPConnectorTokenResponse = API.WARPConnectorTokenResponse;
-  export import WARPConnectorListResponsesV4PagePaginationArray = API.WARPConnectorListResponsesV4PagePaginationArray;
   export import WARPConnectorCreateParams = API.WARPConnectorCreateParams;
   export import WARPConnectorListParams = API.WARPConnectorListParams;
   export import WARPConnectorDeleteParams = API.WARPConnectorDeleteParams;
@@ -792,6 +777,17 @@ export namespace Cloudflare {
   export import URLScannerScanParams = API.URLScannerScanParams;
 
   export import Radar = API.Radar;
+  export import UnnamedSchemaRef16e559c45a31db5480e21fbe904b2e42 = API.UnnamedSchemaRef16e559c45a31db5480e21fbe904b2e42;
+  export import UnnamedSchemaRef4124a22436f90127c7fa2c4543219752 = API.UnnamedSchemaRef4124a22436f90127c7fa2c4543219752;
+  export import UnnamedSchemaRef73de8b634bb48667e28a6c6c56080c51 = API.UnnamedSchemaRef73de8b634bb48667e28a6c6c56080c51;
+  export import UnnamedSchemaRef75bae70cf28e6bcef364b9840db3bdeb = API.UnnamedSchemaRef75bae70cf28e6bcef364b9840db3bdeb;
+  export import UnnamedSchemaRef7826220e105d84352ba1108d9ed88e55 = API.UnnamedSchemaRef7826220e105d84352ba1108d9ed88e55;
+  export import UnnamedSchemaRef83a14d589e799bc901b9ccc870251d09 = API.UnnamedSchemaRef83a14d589e799bc901b9ccc870251d09;
+  export import UnnamedSchemaRef8b383e904d9fb02521257ef9cc77d297 = API.UnnamedSchemaRef8b383e904d9fb02521257ef9cc77d297;
+  export import UnnamedSchemaRef9002274ed7cb7f3dc567421e31529a3a = API.UnnamedSchemaRef9002274ed7cb7f3dc567421e31529a3a;
+  export import UnnamedSchemaRefB5f3bd1840490bc487ffef84567807b1 = API.UnnamedSchemaRefB5f3bd1840490bc487ffef84567807b1;
+  export import UnnamedSchemaRefBaac9d7da12de53e99142f8ecd3982e5 = API.UnnamedSchemaRefBaac9d7da12de53e99142f8ecd3982e5;
+  export import UnnamedSchemaRefC5858f1f916a921846e0b6159af470a7 = API.UnnamedSchemaRefC5858f1f916a921846e0b6159af470a7;
 
   export import BotManagement = API.BotManagement;
   export import BotManagementUpdateResponse = API.BotManagementUpdateResponse;
@@ -800,8 +796,6 @@ export namespace Cloudflare {
   export import BotManagementGetParams = API.BotManagementGetParams;
 
   export import OriginPostQuantumEncryption = API.OriginPostQuantumEncryption;
-  export import OriginPostQuantumEncryptionUpdateResponse = API.OriginPostQuantumEncryptionUpdateResponse;
-  export import OriginPostQuantumEncryptionGetResponse = API.OriginPostQuantumEncryptionGetResponse;
   export import OriginPostQuantumEncryptionUpdateParams = API.OriginPostQuantumEncryptionUpdateParams;
   export import OriginPostQuantumEncryptionGetParams = API.OriginPostQuantumEncryptionGetParams;
 
@@ -819,7 +813,6 @@ export namespace Cloudflare {
 
   export import Snippets = API.Snippets;
   export import Snippet = API.Snippet;
-  export import SnippetDeleteResponse = API.SnippetDeleteResponse;
   export import SnippetsSinglePage = API.SnippetsSinglePage;
   export import SnippetUpdateParams = API.SnippetUpdateParams;
 
@@ -836,6 +829,31 @@ export namespace Cloudflare {
   export import CloudforceOne = API.CloudforceOne;
 
   export import ErrorData = API.ErrorData;
+  export import UnnamedSchemaRef025497b7e63379c31929636b5186e45c = API.UnnamedSchemaRef025497b7e63379c31929636b5186e45c;
+  export import UnnamedSchemaRef2173d81a0b2d332c9e2ac46900fe8bb9 = API.UnnamedSchemaRef2173d81a0b2d332c9e2ac46900fe8bb9;
+  export import UnnamedSchemaRef23001f1f0b697900e282236466a95fa3 = API.UnnamedSchemaRef23001f1f0b697900e282236466a95fa3;
+  export import UnnamedSchemaRef3248f24329456e19dfa042fff9986f72 = API.UnnamedSchemaRef3248f24329456e19dfa042fff9986f72;
+  export import UnnamedSchemaRef33f2e3917f3fe46ad98af0acbb1d9a19 = API.UnnamedSchemaRef33f2e3917f3fe46ad98af0acbb1d9a19;
+  export import UnnamedSchemaRef413ab4522f0bb93f63444799121fe2f8 = API.UnnamedSchemaRef413ab4522f0bb93f63444799121fe2f8;
+  export import UnnamedSchemaRef5cf232a1d651060af6450ae882932776 = API.UnnamedSchemaRef5cf232a1d651060af6450ae882932776;
+  export import UnnamedSchemaRef602dd5f63eab958d53da61434dec08f0 = API.UnnamedSchemaRef602dd5f63eab958d53da61434dec08f0;
+  export import UnnamedSchemaRef619309774d07ec6904f1e354560d6028 = API.UnnamedSchemaRef619309774d07ec6904f1e354560d6028;
+  export import UnnamedSchemaRef65e3c8c1a9c4638ec25cdbbaca7165c1 = API.UnnamedSchemaRef65e3c8c1a9c4638ec25cdbbaca7165c1;
+  export import UnnamedSchemaRef67bbb1ccdd42c3e2937b9fd19f791151 = API.UnnamedSchemaRef67bbb1ccdd42c3e2937b9fd19f791151;
+  export import UnnamedSchemaRef70f2c6ccd8a405358ac7ef8fc3d6751c = API.UnnamedSchemaRef70f2c6ccd8a405358ac7ef8fc3d6751c;
+  export import UnnamedSchemaRef8900f4cb9dca9b9ed0ac41ad571e6837 = API.UnnamedSchemaRef8900f4cb9dca9b9ed0ac41ad571e6837;
+  export import UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f = API.UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f;
+  export import UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a = API.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
+  export import UnnamedSchemaRefB0ec5cc02c98b665099a5707a2db4ea6 = API.UnnamedSchemaRefB0ec5cc02c98b665099a5707a2db4ea6;
+  export import UnnamedSchemaRefB52ad7cf99890d19f16edcd84d16ef5b = API.UnnamedSchemaRefB52ad7cf99890d19f16edcd84d16ef5b;
+  export import UnnamedSchemaRefB92f86eb861cd3dee83c40884802fda6 = API.UnnamedSchemaRefB92f86eb861cd3dee83c40884802fda6;
+  export import UnnamedSchemaRefCc2ac1a037e5d6702fc77b3bcb527854 = API.UnnamedSchemaRefCc2ac1a037e5d6702fc77b3bcb527854;
+  export import UnnamedSchemaRefD8600eb4758b3ae35607a0327bcd691b = API.UnnamedSchemaRefD8600eb4758b3ae35607a0327bcd691b;
+  export import UnnamedSchemaRefDfef9380cb53cc7d4bda9f75e109d7a2 = API.UnnamedSchemaRefDfef9380cb53cc7d4bda9f75e109d7a2;
+  export import UnnamedSchemaRefE7c61ebe06ebfc3861ae8b9db4ba152b = API.UnnamedSchemaRefE7c61ebe06ebfc3861ae8b9db4ba152b;
+  export import UnnamedSchemaRefEc4d85c3d1bcc6b3b7e99c199ae99846 = API.UnnamedSchemaRefEc4d85c3d1bcc6b3b7e99c199ae99846;
+  export import UnnamedSchemaRefEe1e79edcb234d14c4dd266880f2fd24 = API.UnnamedSchemaRefEe1e79edcb234d14c4dd266880f2fd24;
+  export import UnnamedSchemaRefFb1dc8bb871d835b75bd0c2f50bd8572 = API.UnnamedSchemaRefFb1dc8bb871d835b75bd0c2f50bd8572;
 }
 
 export default Cloudflare;

@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as BytimesAPI from 'cloudflare/resources/dns/analytics/reports/bytimes';
+import * as DNSAPI from 'cloudflare/resources/dns/dns';
 
 export class Bytimes extends APIResource {
   /**
@@ -47,7 +48,7 @@ export interface DNSAnalyticsReportByTime {
    */
   min: unknown;
 
-  query: DNSAnalyticsReportByTime.Query;
+  query: DNSAPI.UnnamedSchemaRef85b45d163202bbab7456da6b346d9fe2;
 
   /**
    * Total number of rows in the result.
@@ -79,60 +80,7 @@ export namespace DNSAnalyticsReportByTime {
      * Array with one item per requested metric. Each item is an array of values,
      * broken down by time interval.
      */
-    metrics: Array<Array<unknown>>;
-  }
-
-  export interface Query {
-    /**
-     * Array of dimension names.
-     */
-    dimensions: Array<string>;
-
-    /**
-     * Limit number of returned metrics.
-     */
-    limit: number;
-
-    /**
-     * Array of metric names.
-     */
-    metrics: Array<string>;
-
-    /**
-     * Start date and time of requesting data period in ISO 8601 format.
-     */
-    since: string;
-
-    /**
-     * Unit of time to group data by.
-     */
-    time_delta:
-      | 'all'
-      | 'auto'
-      | 'year'
-      | 'quarter'
-      | 'month'
-      | 'week'
-      | 'day'
-      | 'hour'
-      | 'dekaminute'
-      | 'minute';
-
-    /**
-     * End date and time of requesting data period in ISO 8601 format.
-     */
-    until: string;
-
-    /**
-     * Segmentation filter in 'attribute operator value' format.
-     */
-    filters?: string;
-
-    /**
-     * Array of dimensions to sort by, where each dimension may be prefixed by -
-     * (descending) or + (ascending).
-     */
-    sort?: Array<string>;
+    metrics: Array<DNSAPI.UnnamedSchemaRef65be9614de145bf4a58d0fddf46df7ca>;
   }
 }
 

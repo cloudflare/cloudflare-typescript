@@ -64,6 +64,46 @@ export class Incoming extends APIResource {
   }
 }
 
+export interface UnnamedSchemaRef150c555e27f53dbb40cdce4d6644ff0a {
+  id?: string;
+
+  /**
+   * How often should a secondary zone auto refresh regardless of DNS NOTIFY. Not
+   * applicable for primary zones.
+   */
+  auto_refresh_seconds?: number;
+
+  /**
+   * The time for a specific event.
+   */
+  checked_time?: string;
+
+  /**
+   * The time for a specific event.
+   */
+  created_time?: string;
+
+  /**
+   * The time for a specific event.
+   */
+  modified_time?: string;
+
+  /**
+   * Zone name.
+   */
+  name?: string;
+
+  /**
+   * A list of peer tags.
+   */
+  peers?: Array<unknown>;
+
+  /**
+   * The serial number of the SOA for the given zone.
+   */
+  soa_serial?: number;
+}
+
 export interface IncomingCreateResponse {
   id?: string;
 
@@ -251,6 +291,7 @@ export interface IncomingGetParams {
 }
 
 export namespace Incoming {
+  export import UnnamedSchemaRef150c555e27f53dbb40cdce4d6644ff0a = IncomingAPI.UnnamedSchemaRef150c555e27f53dbb40cdce4d6644ff0a;
   export import IncomingCreateResponse = IncomingAPI.IncomingCreateResponse;
   export import IncomingUpdateResponse = IncomingAPI.IncomingUpdateResponse;
   export import IncomingDeleteResponse = IncomingAPI.IncomingDeleteResponse;

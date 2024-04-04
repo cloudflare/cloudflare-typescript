@@ -5,6 +5,7 @@ import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import { CloudflareError } from 'cloudflare/error';
 import * as VersionsAPI from 'cloudflare/resources/rulesets/phases/versions';
+import * as Shared from 'cloudflare/resources/shared';
 import { SinglePage } from 'cloudflare/pagination';
 
 export class Versions extends APIResource {
@@ -427,7 +428,7 @@ export namespace VersionGetResponse {
     /**
      * An object configuring the rule's logging behavior.
      */
-    logging?: RulesetsBlockRule.Logging;
+    logging?: Shared.UnnamedSchemaRef70f2c6ccd8a405358ac7ef8fc3d6751c;
 
     /**
      * The reference of the rule (the rule ID by default).
@@ -466,16 +467,6 @@ export namespace VersionGetResponse {
          */
         status_code: number;
       }
-    }
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    export interface Logging {
-      /**
-       * Whether to generate a log when the rule matches.
-       */
-      enabled: boolean;
     }
   }
 
@@ -528,7 +519,7 @@ export namespace VersionGetResponse {
     /**
      * An object configuring the rule's logging behavior.
      */
-    logging?: RulesetsExecuteRule.Logging;
+    logging?: Shared.UnnamedSchemaRef70f2c6ccd8a405358ac7ef8fc3d6751c;
 
     /**
      * The reference of the rule (the rule ID by default).
@@ -659,16 +650,6 @@ export namespace VersionGetResponse {
         }
       }
     }
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    export interface Logging {
-      /**
-       * Whether to generate a log when the rule matches.
-       */
-      enabled: boolean;
-    }
   }
 
   export interface RulesetsLogRule {
@@ -720,24 +701,12 @@ export namespace VersionGetResponse {
     /**
      * An object configuring the rule's logging behavior.
      */
-    logging?: RulesetsLogRule.Logging;
+    logging?: Shared.UnnamedSchemaRef70f2c6ccd8a405358ac7ef8fc3d6751c;
 
     /**
      * The reference of the rule (the rule ID by default).
      */
     ref?: string;
-  }
-
-  export namespace RulesetsLogRule {
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    export interface Logging {
-      /**
-       * Whether to generate a log when the rule matches.
-       */
-      enabled: boolean;
-    }
   }
 
   export interface RulesetsSkipRule {
@@ -789,7 +758,7 @@ export namespace VersionGetResponse {
     /**
      * An object configuring the rule's logging behavior.
      */
-    logging?: RulesetsSkipRule.Logging;
+    logging?: Shared.UnnamedSchemaRef70f2c6ccd8a405358ac7ef8fc3d6751c;
 
     /**
      * The reference of the rule (the rule ID by default).
@@ -854,16 +823,6 @@ export namespace VersionGetResponse {
        * the ruleset and phases options.
        */
       rulesets?: Array<string>;
-    }
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    export interface Logging {
-      /**
-       * Whether to generate a log when the rule matches.
-       */
-      enabled: boolean;
     }
   }
 }

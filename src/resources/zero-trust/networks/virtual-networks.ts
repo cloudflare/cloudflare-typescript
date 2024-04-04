@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as VirtualNetworksAPI from 'cloudflare/resources/zero-trust/networks/virtual-networks';
+import * as Shared from 'cloudflare/resources/shared';
 import { SinglePage } from 'cloudflare/pagination';
 
 export class VirtualNetworks extends APIResource {
@@ -12,13 +13,13 @@ export class VirtualNetworks extends APIResource {
   create(
     params: VirtualNetworkCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<VirtualNetworkCreateResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef65e3c8c1a9c4638ec25cdbbaca7165c1 | null> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/teamnet/virtual_networks`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: VirtualNetworkCreateResponse }>
+      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef65e3c8c1a9c4638ec25cdbbaca7165c1 | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -44,13 +45,13 @@ export class VirtualNetworks extends APIResource {
     virtualNetworkId: string,
     params: VirtualNetworkDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<VirtualNetworkDeleteResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef65e3c8c1a9c4638ec25cdbbaca7165c1 | null> {
     const { account_id, body } = params;
     return (
       this._client.delete(`/accounts/${account_id}/teamnet/virtual_networks/${virtualNetworkId}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: VirtualNetworkDeleteResponse }>
+      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef65e3c8c1a9c4638ec25cdbbaca7165c1 | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -61,13 +62,13 @@ export class VirtualNetworks extends APIResource {
     virtualNetworkId: string,
     params: VirtualNetworkEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<VirtualNetworkEditResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef65e3c8c1a9c4638ec25cdbbaca7165c1 | null> {
     const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/teamnet/virtual_networks/${virtualNetworkId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: VirtualNetworkEditResponse }>
+      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef65e3c8c1a9c4638ec25cdbbaca7165c1 | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -106,12 +107,6 @@ export interface TunnelVirtualNetwork {
    */
   deleted_at?: unknown;
 }
-
-export type VirtualNetworkCreateResponse = unknown | Array<unknown> | string;
-
-export type VirtualNetworkDeleteResponse = unknown | Array<unknown> | string;
-
-export type VirtualNetworkEditResponse = unknown | Array<unknown> | string;
 
 export interface VirtualNetworkCreateParams {
   /**
@@ -207,9 +202,6 @@ export interface VirtualNetworkEditParams {
 
 export namespace VirtualNetworks {
   export import TunnelVirtualNetwork = VirtualNetworksAPI.TunnelVirtualNetwork;
-  export import VirtualNetworkCreateResponse = VirtualNetworksAPI.VirtualNetworkCreateResponse;
-  export import VirtualNetworkDeleteResponse = VirtualNetworksAPI.VirtualNetworkDeleteResponse;
-  export import VirtualNetworkEditResponse = VirtualNetworksAPI.VirtualNetworkEditResponse;
   export import TunnelVirtualNetworksSinglePage = VirtualNetworksAPI.TunnelVirtualNetworksSinglePage;
   export import VirtualNetworkCreateParams = VirtualNetworksAPI.VirtualNetworkCreateParams;
   export import VirtualNetworkListParams = VirtualNetworksAPI.VirtualNetworkListParams;

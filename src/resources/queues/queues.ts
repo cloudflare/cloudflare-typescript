@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as QueuesAPI from 'cloudflare/resources/queues/queues';
+import * as Shared from 'cloudflare/resources/shared';
 import * as ConsumersAPI from 'cloudflare/resources/queues/consumers';
 import * as MessagesAPI from 'cloudflare/resources/queues/messages';
 
@@ -61,13 +62,13 @@ export class Queues extends APIResource {
     queueId: string,
     params: QueueDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<QueueDeleteResponse | null> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef67bbb1ccdd42c3e2937b9fd19f791151 | null> {
     const { account_id, body } = params;
     return (
       this._client.delete(`/accounts/${account_id}/queues/${queueId}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: QueueDeleteResponse | null }>
+      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef67bbb1ccdd42c3e2937b9fd19f791151 | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -168,8 +169,6 @@ export namespace QueueListResponse {
   }
 }
 
-export type QueueDeleteResponse = unknown | Array<unknown> | string;
-
 export interface QueueGetResponse {
   consumers?: unknown;
 
@@ -245,7 +244,6 @@ export namespace Queues {
   export import QueueCreateResponse = QueuesAPI.QueueCreateResponse;
   export import QueueUpdateResponse = QueuesAPI.QueueUpdateResponse;
   export import QueueListResponse = QueuesAPI.QueueListResponse;
-  export import QueueDeleteResponse = QueuesAPI.QueueDeleteResponse;
   export import QueueGetResponse = QueuesAPI.QueueGetResponse;
   export import QueueCreateParams = QueuesAPI.QueueCreateParams;
   export import QueueUpdateParams = QueuesAPI.QueueUpdateParams;
@@ -253,16 +251,16 @@ export namespace Queues {
   export import QueueDeleteParams = QueuesAPI.QueueDeleteParams;
   export import QueueGetParams = QueuesAPI.QueueGetParams;
   export import Consumers = ConsumersAPI.Consumers;
+  export import Consumer = ConsumersAPI.Consumer;
+  export import UnnamedSchemaRefFbd3a4642487e41594e9af0ccb9a5ca5 = ConsumersAPI.UnnamedSchemaRefFbd3a4642487e41594e9af0ccb9a5ca5;
   export import ConsumerCreateResponse = ConsumersAPI.ConsumerCreateResponse;
   export import ConsumerUpdateResponse = ConsumersAPI.ConsumerUpdateResponse;
-  export import ConsumerDeleteResponse = ConsumersAPI.ConsumerDeleteResponse;
   export import ConsumerGetResponse = ConsumersAPI.ConsumerGetResponse;
   export import ConsumerCreateParams = ConsumersAPI.ConsumerCreateParams;
   export import ConsumerUpdateParams = ConsumersAPI.ConsumerUpdateParams;
   export import ConsumerDeleteParams = ConsumersAPI.ConsumerDeleteParams;
   export import ConsumerGetParams = ConsumersAPI.ConsumerGetParams;
   export import Messages = MessagesAPI.Messages;
-  export import QueueConsumer = MessagesAPI.QueueConsumer;
   export import MessageAckResponse = MessagesAPI.MessageAckResponse;
   export import MessagePullResponse = MessagesAPI.MessagePullResponse;
   export import MessageAckParams = MessagesAPI.MessageAckParams;

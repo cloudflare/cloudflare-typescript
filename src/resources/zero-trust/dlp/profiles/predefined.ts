@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as PredefinedAPI from 'cloudflare/resources/zero-trust/dlp/profiles/predefined';
+import * as ProfilesAPI from 'cloudflare/resources/zero-trust/dlp/profiles/profiles';
 
 export class Predefined extends APIResource {
   /**
@@ -73,7 +74,7 @@ export interface DLPPredefinedProfile {
   /**
    * The type of the profile.
    */
-  type?: 'predefined';
+  type?: ProfilesAPI.UnnamedSchemaRefE38bfdf1acf5a4bfada6779c79528bc0;
 }
 
 export namespace DLPPredefinedProfile {

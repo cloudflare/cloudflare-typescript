@@ -117,6 +117,85 @@ export class Overrides extends APIResource {
 
 export class WAFOverridesV4PagePaginationArray extends V4PagePaginationArray<WAFOverride> {}
 
+export interface UnnamedSchemaRefA9cc7506f87ce3d646e3794e609120a1 {
+  /**
+   * The unique identifier of the WAF override.
+   */
+  id?: string;
+
+  /**
+   * An informative summary of the current URI-based WAF override.
+   */
+  description?: string | null;
+
+  /**
+   * An object that allows you to enable or disable WAF rule groups for the current
+   * WAF override. Each key of this object must be the ID of a WAF rule group, and
+   * each value must be a valid WAF action (usually `default` or `disable`). When
+   * creating a new URI-based WAF override, you must provide a `groups` object or a
+   * `rules` object.
+   */
+  groups?: Record<string, unknown>;
+
+  /**
+   * When true, indicates that the WAF package is currently paused.
+   */
+  paused?: boolean;
+
+  /**
+   * The relative priority of the current URI-based WAF override when multiple
+   * overrides match a single URL. A lower number indicates higher priority. Higher
+   * priority overrides may overwrite values set by lower priority overrides.
+   */
+  priority?: number;
+
+  /**
+   * Specifies that, when a WAF rule matches, its configured action will be replaced
+   * by the action configured in this object.
+   */
+  rewrite_action?: UnnamedSchemaRefA9cc7506f87ce3d646e3794e609120a1.RewriteAction;
+
+  /**
+   * An object that allows you to override the action of specific WAF rules. Each key
+   * of this object must be the ID of a WAF rule, and each value must be a valid WAF
+   * action. Unless you are disabling a rule, ensure that you also enable the rule
+   * group that this WAF rule belongs to. When creating a new URI-based WAF override,
+   * you must provide a `groups` object or a `rules` object.
+   */
+  rules?: Record<string, 'challenge' | 'block' | 'simulate' | 'disable' | 'default'>;
+
+  /**
+   * The URLs to include in the current WAF override. You can use wildcards. Each
+   * entered URL will be escaped before use, which means you can only use simple
+   * wildcard patterns.
+   */
+  urls?: Array<string>;
+}
+
+export namespace UnnamedSchemaRefA9cc7506f87ce3d646e3794e609120a1 {
+  /**
+   * Specifies that, when a WAF rule matches, its configured action will be replaced
+   * by the action configured in this object.
+   */
+  export interface RewriteAction {
+    /**
+     * The WAF rule action to apply.
+     */
+    block?: 'challenge' | 'block' | 'simulate' | 'disable' | 'default';
+
+    challenge?: string;
+
+    default?: string;
+
+    /**
+     * The WAF rule action to apply.
+     */
+    disable?: 'challenge' | 'block' | 'simulate' | 'disable' | 'default';
+
+    simulate?: string;
+  }
+}
+
 export interface WAFOverride {
   /**
    * The unique identifier of the WAF override.
@@ -212,6 +291,7 @@ export interface OverrideListParams extends V4PagePaginationArrayParams {}
 export type OverrideDeleteParams = unknown;
 
 export namespace Overrides {
+  export import UnnamedSchemaRefA9cc7506f87ce3d646e3794e609120a1 = OverridesAPI.UnnamedSchemaRefA9cc7506f87ce3d646e3794e609120a1;
   export import WAFOverride = OverridesAPI.WAFOverride;
   export import OverrideDeleteResponse = OverridesAPI.OverrideDeleteResponse;
   export import WAFOverridesV4PagePaginationArray = OverridesAPI.WAFOverridesV4PagePaginationArray;

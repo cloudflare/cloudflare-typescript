@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as TailAPI from 'cloudflare/resources/workers/scripts/tail';
+import * as Shared from 'cloudflare/resources/shared';
 
 export class Tail extends APIResource {
   /**
@@ -30,13 +31,13 @@ export class Tail extends APIResource {
     id: string,
     params: TailDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TailDeleteResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRefEc4d85c3d1bcc6b3b7e99c199ae99846> {
     const { account_id, body } = params;
     return (
       this._client.delete(`/accounts/${account_id}/workers/scripts/${scriptName}/tails/${id}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: TailDeleteResponse }>
+      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRefEc4d85c3d1bcc6b3b7e99c199ae99846 }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -65,8 +66,6 @@ export interface TailCreateResponse {
 
   url?: unknown;
 }
-
-export type TailDeleteResponse = unknown | Array<unknown> | string;
 
 export interface TailGetResponse {
   id?: unknown;
@@ -109,7 +108,6 @@ export interface TailGetParams {
 
 export namespace Tail {
   export import TailCreateResponse = TailAPI.TailCreateResponse;
-  export import TailDeleteResponse = TailAPI.TailDeleteResponse;
   export import TailGetResponse = TailAPI.TailGetResponse;
   export import TailCreateParams = TailAPI.TailCreateParams;
   export import TailDeleteParams = TailAPI.TailDeleteParams;

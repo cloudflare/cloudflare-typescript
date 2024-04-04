@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as DomainsAPI from 'cloudflare/resources/registrar/domains';
+import * as Shared from 'cloudflare/resources/shared';
 import { SinglePage } from 'cloudflare/pagination';
 
 export class Domains extends APIResource {
@@ -13,13 +14,13 @@ export class Domains extends APIResource {
     domainName: string,
     params: DomainUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DomainUpdateResponse | null> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef65e3c8c1a9c4638ec25cdbbaca7165c1 | null> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/registrar/domains/${domainName}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: DomainUpdateResponse | null }>
+      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef65e3c8c1a9c4638ec25cdbbaca7165c1 | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -45,13 +46,13 @@ export class Domains extends APIResource {
     domainName: string,
     params: DomainGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DomainGetResponse | null> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef65e3c8c1a9c4638ec25cdbbaca7165c1 | null> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/registrar/domains/${domainName}`,
         options,
-      ) as Core.APIPromise<{ result: DomainGetResponse | null }>
+      ) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef65e3c8c1a9c4638ec25cdbbaca7165c1 | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -231,8 +232,6 @@ export namespace RegistrarDomains {
   }
 }
 
-export type DomainUpdateResponse = unknown | Array<unknown> | string;
-
 export interface DomainListResponse {
   /**
    * Domain identifier.
@@ -406,8 +405,6 @@ export namespace DomainListResponse {
   }
 }
 
-export type DomainGetResponse = unknown | Array<unknown> | string;
-
 export interface DomainUpdateParams {
   /**
    * Path param: Identifier
@@ -447,9 +444,7 @@ export interface DomainGetParams {
 
 export namespace Domains {
   export import RegistrarDomains = DomainsAPI.RegistrarDomains;
-  export import DomainUpdateResponse = DomainsAPI.DomainUpdateResponse;
   export import DomainListResponse = DomainsAPI.DomainListResponse;
-  export import DomainGetResponse = DomainsAPI.DomainGetResponse;
   export import DomainListResponsesSinglePage = DomainsAPI.DomainListResponsesSinglePage;
   export import DomainUpdateParams = DomainsAPI.DomainUpdateParams;
   export import DomainListParams = DomainsAPI.DomainListParams;

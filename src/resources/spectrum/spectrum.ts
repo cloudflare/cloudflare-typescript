@@ -16,7 +16,6 @@ export namespace Spectrum {
   export import AppUpdateResponse = AppsAPI.AppUpdateResponse;
   export import AppListResponse = AppsAPI.AppListResponse;
   export import AppDeleteResponse = AppsAPI.AppDeleteResponse;
-  export import AppGetResponse = AppsAPI.AppGetResponse;
   export import AppListResponsesV4PagePaginationArray = AppsAPI.AppListResponsesV4PagePaginationArray;
   export import AppCreateParams = AppsAPI.AppCreateParams;
   export import AppUpdateParams = AppsAPI.AppUpdateParams;

@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as UARulesAPI from 'cloudflare/resources/firewall/ua-rules';
+import * as Shared from 'cloudflare/resources/shared';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class UARules extends APIResource {
@@ -14,12 +15,12 @@ export class UARules extends APIResource {
     zoneIdentifier: string,
     body: UARuleCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<UARuleCreateResponse | null> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     return (
       this._client.post(`/zones/${zoneIdentifier}/firewall/ua_rules`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: UARuleCreateResponse | null }>
+      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -31,12 +32,12 @@ export class UARules extends APIResource {
     id: string,
     body: UARuleUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<UARuleUpdateResponse | null> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     return (
       this._client.put(`/zones/${zoneIdentifier}/firewall/ua_rules/${id}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: UARuleUpdateResponse | null }>
+      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -92,10 +93,10 @@ export class UARules extends APIResource {
     zoneIdentifier: string,
     id: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<UARuleGetResponse | null> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     return (
       this._client.get(`/zones/${zoneIdentifier}/firewall/ua_rules/${id}`, options) as Core.APIPromise<{
-        result: UARuleGetResponse | null;
+        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -148,10 +149,6 @@ export namespace FirewallUserAgentRule {
     value?: string;
   }
 }
-
-export type UARuleCreateResponse = unknown | string;
-
-export type UARuleUpdateResponse = unknown | string;
 
 export interface UARuleListResponse {
   /**
@@ -206,8 +203,6 @@ export interface UARuleDeleteResponse {
   id?: string;
 }
 
-export type UARuleGetResponse = unknown | string;
-
 export type UARuleCreateParams = unknown;
 
 export type UARuleUpdateParams = unknown;
@@ -233,11 +228,8 @@ export type UARuleDeleteParams = unknown;
 
 export namespace UARules {
   export import FirewallUserAgentRule = UARulesAPI.FirewallUserAgentRule;
-  export import UARuleCreateResponse = UARulesAPI.UARuleCreateResponse;
-  export import UARuleUpdateResponse = UARulesAPI.UARuleUpdateResponse;
   export import UARuleListResponse = UARulesAPI.UARuleListResponse;
   export import UARuleDeleteResponse = UARulesAPI.UARuleDeleteResponse;
-  export import UARuleGetResponse = UARulesAPI.UARuleGetResponse;
   export import UARuleListResponsesV4PagePaginationArray = UARulesAPI.UARuleListResponsesV4PagePaginationArray;
   export import UARuleCreateParams = UARulesAPI.UARuleCreateParams;
   export import UARuleUpdateParams = UARulesAPI.UARuleUpdateParams;

@@ -127,6 +127,8 @@ export interface FirewallFilter {
   ref?: string;
 }
 
+export type UnnamedSchemaRef39af4f78d23244e2595fb47c811221df = Array<FirewallFilter>;
+
 export type FilterCreateResponse = Array<FirewallFilter>;
 
 export type FilterCreateParams = unknown;
@@ -164,6 +166,7 @@ export type FilterDeleteParams = unknown;
 
 export namespace Filters {
   export import FirewallFilter = FiltersAPI.FirewallFilter;
+  export import UnnamedSchemaRef39af4f78d23244e2595fb47c811221df = FiltersAPI.UnnamedSchemaRef39af4f78d23244e2595fb47c811221df;
   export import FilterCreateResponse = FiltersAPI.FilterCreateResponse;
   export import FirewallFiltersV4PagePaginationArray = FiltersAPI.FirewallFiltersV4PagePaginationArray;
   export import FilterCreateParams = FiltersAPI.FilterCreateParams;

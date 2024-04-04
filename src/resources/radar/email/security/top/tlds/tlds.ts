@@ -4,6 +4,8 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as TldsAPI from 'cloudflare/resources/radar/email/security/top/tlds/tlds';
+import * as Shared from 'cloudflare/resources/shared';
+import * as RadarAPI from 'cloudflare/resources/radar/radar';
 import * as MaliciousAPI from 'cloudflare/resources/radar/email/security/top/tlds/malicious';
 import * as SpamAPI from 'cloudflare/resources/radar/email/security/top/tlds/spam';
 import * as SpoofAPI from 'cloudflare/resources/radar/email/security/top/tlds/spoof';
@@ -37,12 +39,12 @@ export class Tlds extends APIResource {
 export interface TldGetResponse {
   meta: TldGetResponse.Meta;
 
-  top_0: Array<TldGetResponse.Top0>;
+  top_0: Array<Shared.UnnamedSchemaRef2173d81a0b2d332c9e2ac46900fe8bb9>;
 }
 
 export namespace TldGetResponse {
   export interface Meta {
-    dateRange: Array<Meta.DateRange>;
+    dateRange: Array<RadarAPI.UnnamedSchemaRefBaac9d7da12de53e99142f8ecd3982e5>;
 
     lastUpdated: string;
 
@@ -50,47 +52,11 @@ export namespace TldGetResponse {
   }
 
   export namespace Meta {
-    export interface DateRange {
-      /**
-       * Adjusted end of date range.
-       */
-      endTime: string;
-
-      /**
-       * Adjusted start of date range.
-       */
-      startTime: string;
-    }
-
     export interface ConfidenceInfo {
-      annotations?: Array<ConfidenceInfo.Annotation>;
+      annotations?: Array<RadarAPI.UnnamedSchemaRefB5f3bd1840490bc487ffef84567807b1>;
 
       level?: number;
     }
-
-    export namespace ConfidenceInfo {
-      export interface Annotation {
-        dataSource: string;
-
-        description: string;
-
-        eventType: string;
-
-        isInstantaneous: unknown;
-
-        endTime?: string;
-
-        linkedUrl?: string;
-
-        startTime?: string;
-      }
-    }
-  }
-
-  export interface Top0 {
-    name: string;
-
-    value: string;
   }
 }
 

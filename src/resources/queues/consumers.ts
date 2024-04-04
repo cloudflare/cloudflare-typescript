@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ConsumersAPI from 'cloudflare/resources/queues/consumers';
+import * as Shared from 'cloudflare/resources/shared';
 
 export class Consumers extends APIResource {
   /**
@@ -48,13 +49,13 @@ export class Consumers extends APIResource {
     consumerId: string,
     params: ConsumerDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ConsumerDeleteResponse | null> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef67bbb1ccdd42c3e2937b9fd19f791151 | null> {
     const { account_id, body } = params;
     return (
       this._client.delete(`/accounts/${account_id}/queues/${queueId}/consumers/${consumerId}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: ConsumerDeleteResponse | null }>
+      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef67bbb1ccdd42c3e2937b9fd19f791151 | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -75,6 +76,29 @@ export class Consumers extends APIResource {
   }
 }
 
+export interface Consumer {
+  created_on?: unknown;
+
+  environment?: unknown;
+
+  queue_name?: unknown;
+
+  service?: unknown;
+
+  settings?: Shared.UnnamedSchemaRef23001f1f0b697900e282236466a95fa3;
+}
+
+export interface UnnamedSchemaRefFbd3a4642487e41594e9af0ccb9a5ca5 {
+  /**
+   * The maximum number of messages to include in a batch
+   */
+  batch_size?: number;
+
+  max_retries?: number;
+
+  max_wait_time_ms?: number;
+}
+
 export interface ConsumerCreateResponse {
   created_on?: unknown;
 
@@ -86,20 +110,7 @@ export interface ConsumerCreateResponse {
 
   script_name?: unknown;
 
-  settings?: ConsumerCreateResponse.Settings;
-}
-
-export namespace ConsumerCreateResponse {
-  export interface Settings {
-    /**
-     * The maximum number of messages to include in a batch
-     */
-    batch_size?: number;
-
-    max_retries?: number;
-
-    max_wait_time_ms?: number;
-  }
+  settings?: UnnamedSchemaRefFbd3a4642487e41594e9af0ccb9a5ca5;
 }
 
 export interface ConsumerUpdateResponse {
@@ -126,8 +137,6 @@ export namespace ConsumerUpdateResponse {
   }
 }
 
-export type ConsumerDeleteResponse = unknown | Array<unknown> | string;
-
 export type ConsumerGetResponse = Array<ConsumerGetResponse.ConsumerGetResponseItem>;
 
 export namespace ConsumerGetResponse {
@@ -140,20 +149,7 @@ export namespace ConsumerGetResponse {
 
     service?: unknown;
 
-    settings?: ConsumerGetResponseItem.Settings;
-  }
-
-  export namespace ConsumerGetResponseItem {
-    export interface Settings {
-      /**
-       * The maximum number of messages to include in a batch
-       */
-      batch_size?: number;
-
-      max_retries?: number;
-
-      max_wait_time_ms?: number;
-    }
+    settings?: ConsumersAPI.UnnamedSchemaRefFbd3a4642487e41594e9af0ccb9a5ca5;
   }
 }
 
@@ -201,9 +197,10 @@ export interface ConsumerGetParams {
 }
 
 export namespace Consumers {
+  export import Consumer = ConsumersAPI.Consumer;
+  export import UnnamedSchemaRefFbd3a4642487e41594e9af0ccb9a5ca5 = ConsumersAPI.UnnamedSchemaRefFbd3a4642487e41594e9af0ccb9a5ca5;
   export import ConsumerCreateResponse = ConsumersAPI.ConsumerCreateResponse;
   export import ConsumerUpdateResponse = ConsumersAPI.ConsumerUpdateResponse;
-  export import ConsumerDeleteResponse = ConsumersAPI.ConsumerDeleteResponse;
   export import ConsumerGetResponse = ConsumersAPI.ConsumerGetResponse;
   export import ConsumerCreateParams = ConsumersAPI.ConsumerCreateParams;
   export import ConsumerUpdateParams = ConsumersAPI.ConsumerUpdateParams;

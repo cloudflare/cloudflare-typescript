@@ -19,13 +19,10 @@ export class SSL extends APIResource {
 
 export namespace SSL {
   export import Analyze = AnalyzeAPI.Analyze;
-  export import AnalyzeCreateResponse = AnalyzeAPI.AnalyzeCreateResponse;
   export import AnalyzeCreateParams = AnalyzeAPI.AnalyzeCreateParams;
   export import CertificatePacks = CertificatePacksAPI.CertificatePacks;
   export import CertificatePackListResponse = CertificatePacksAPI.CertificatePackListResponse;
-  export import CertificatePackDeleteResponse = CertificatePacksAPI.CertificatePackDeleteResponse;
   export import CertificatePackEditResponse = CertificatePacksAPI.CertificatePackEditResponse;
-  export import CertificatePackGetResponse = CertificatePacksAPI.CertificatePackGetResponse;
   export import CertificatePackListResponsesSinglePage = CertificatePacksAPI.CertificatePackListResponsesSinglePage;
   export import CertificatePackListParams = CertificatePacksAPI.CertificatePackListParams;
   export import CertificatePackDeleteParams = CertificatePacksAPI.CertificatePackDeleteParams;

@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as CustomNameserversAPI from 'cloudflare/resources/zones/custom-nameservers';
+import * as Shared from 'cloudflare/resources/shared';
 
 export class CustomNameservers extends APIResource {
   /**
@@ -15,11 +16,11 @@ export class CustomNameservers extends APIResource {
   update(
     params: CustomNameserverUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomNameserverUpdateResponse | null> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef67bbb1ccdd42c3e2937b9fd19f791151 | null> {
     const { zone_id, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/custom_ns`, { body, ...options }) as Core.APIPromise<{
-        result: CustomNameserverUpdateResponse | null;
+        result: Shared.UnnamedSchemaRef67bbb1ccdd42c3e2937b9fd19f791151 | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -30,19 +31,15 @@ export class CustomNameservers extends APIResource {
   get(
     params: CustomNameserverGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomNameserverGetResponse | null> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef67bbb1ccdd42c3e2937b9fd19f791151 | null> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/custom_ns`, options) as Core.APIPromise<{
-        result: CustomNameserverGetResponse | null;
+        result: Shared.UnnamedSchemaRef67bbb1ccdd42c3e2937b9fd19f791151 | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
-
-export type CustomNameserverUpdateResponse = unknown | Array<unknown> | string;
-
-export type CustomNameserverGetResponse = unknown | Array<unknown> | string;
 
 export interface CustomNameserverUpdateParams {
   /**
@@ -69,8 +66,6 @@ export interface CustomNameserverGetParams {
 }
 
 export namespace CustomNameservers {
-  export import CustomNameserverUpdateResponse = CustomNameserversAPI.CustomNameserverUpdateResponse;
-  export import CustomNameserverGetResponse = CustomNameserversAPI.CustomNameserverGetResponse;
   export import CustomNameserverUpdateParams = CustomNameserversAPI.CustomNameserverUpdateParams;
   export import CustomNameserverGetParams = CustomNameserversAPI.CustomNameserverGetParams;
 }

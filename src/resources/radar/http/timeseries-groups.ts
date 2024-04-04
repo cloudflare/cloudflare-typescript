@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as TimeseriesGroupsAPI from 'cloudflare/resources/radar/http/timeseries-groups';
+import * as RadarAPI from 'cloudflare/resources/radar/radar';
 
 export class TimeseriesGroups extends APIResource {
   /**
@@ -238,27 +239,13 @@ export namespace TimeseriesGroupBotClassResponse {
 export interface TimeseriesGroupBrowserResponse {
   meta: unknown;
 
-  serie_0: TimeseriesGroupBrowserResponse.Serie0;
-}
-
-export namespace TimeseriesGroupBrowserResponse {
-  export interface Serie0 {
-    timestamps: Array<string>;
-    [k: string]: Array<string>;
-  }
+  serie_0: RadarAPI.UnnamedSchemaRef7826220e105d84352ba1108d9ed88e55;
 }
 
 export interface TimeseriesGroupBrowserFamilyResponse {
   meta: unknown;
 
-  serie_0: TimeseriesGroupBrowserFamilyResponse.Serie0;
-}
-
-export namespace TimeseriesGroupBrowserFamilyResponse {
-  export interface Serie0 {
-    timestamps: Array<string>;
-    [k: string]: Array<string>;
-  }
+  serie_0: RadarAPI.UnnamedSchemaRef7826220e105d84352ba1108d9ed88e55;
 }
 
 export interface TimeseriesGroupDeviceTypeResponse {
@@ -316,30 +303,13 @@ export namespace TimeseriesGroupHTTPVersionResponse {
 export interface TimeseriesGroupIPVersionResponse {
   meta: unknown;
 
-  serie_0: TimeseriesGroupIPVersionResponse.Serie0;
-}
-
-export namespace TimeseriesGroupIPVersionResponse {
-  export interface Serie0 {
-    IPv4: Array<string>;
-
-    IPv6: Array<string>;
-
-    timestamps: Array<string>;
-  }
+  serie_0: RadarAPI.UnnamedSchemaRef9002274ed7cb7f3dc567421e31529a3a;
 }
 
 export interface TimeseriesGroupOSResponse {
   meta: unknown;
 
-  serie_0: TimeseriesGroupOSResponse.Serie0;
-}
-
-export namespace TimeseriesGroupOSResponse {
-  export interface Serie0 {
-    timestamps: Array<string>;
-    [k: string]: Array<string>;
-  }
+  serie_0: RadarAPI.UnnamedSchemaRef7826220e105d84352ba1108d9ed88e55;
 }
 
 export interface TimeseriesGroupTLSVersionResponse {

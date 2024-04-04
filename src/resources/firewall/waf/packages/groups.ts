@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as GroupsAPI from 'cloudflare/resources/firewall/waf/packages/groups';
+import * as Shared from 'cloudflare/resources/shared';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class Groups extends APIResource {
@@ -37,13 +38,13 @@ export class Groups extends APIResource {
     groupId: string,
     params: GroupEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<GroupEditResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/firewall/waf/packages/${packageId}/groups/${groupId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: GroupEditResponse }>
+      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -58,13 +59,13 @@ export class Groups extends APIResource {
     groupId: string,
     params: GroupGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<GroupGetResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/firewall/waf/packages/${packageId}/groups/${groupId}`,
         options,
-      ) as Core.APIPromise<{ result: GroupGetResponse }>
+      ) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -114,10 +115,6 @@ export interface WAFManagedRulesGroup {
    */
   package_id?: string;
 }
-
-export type GroupEditResponse = unknown | string | null;
-
-export type GroupGetResponse = unknown | string | null;
 
 export interface GroupListParams extends V4PagePaginationArrayParams {
   /**
@@ -180,8 +177,6 @@ export interface GroupGetParams {
 
 export namespace Groups {
   export import WAFManagedRulesGroup = GroupsAPI.WAFManagedRulesGroup;
-  export import GroupEditResponse = GroupsAPI.GroupEditResponse;
-  export import GroupGetResponse = GroupsAPI.GroupGetResponse;
   export import WAFManagedRulesGroupsV4PagePaginationArray = GroupsAPI.WAFManagedRulesGroupsV4PagePaginationArray;
   export import GroupListParams = GroupsAPI.GroupListParams;
   export import GroupEditParams = GroupsAPI.GroupEditParams;

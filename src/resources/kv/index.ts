@@ -3,8 +3,6 @@
 export { KV } from './kv';
 export {
   WorkersKVNamespace,
-  NamespaceUpdateResponse,
-  NamespaceDeleteResponse,
   NamespaceCreateParams,
   NamespaceUpdateParams,
   NamespaceListParams,

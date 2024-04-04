@@ -35,11 +35,18 @@ export class Analytics extends APIResource {
   }
 }
 
+export interface UnnamedSchemaRef608bee5065f7314d6fa572b89a1910f7 {
+  /**
+   * List of metrics returned by the query.
+   */
+  metrics: Array<unknown>;
+}
+
 /**
  * Metrics on Workers KV requests.
  */
 export interface WorkersKVComponentsSchemasResult {
-  data: Array<WorkersKVComponentsSchemasResult.Data> | null;
+  data: Array<UnnamedSchemaRef608bee5065f7314d6fa572b89a1910f7> | null;
 
   /**
    * Number of seconds between current time and last processed event, i.e. how many
@@ -74,13 +81,6 @@ export interface WorkersKVComponentsSchemasResult {
 }
 
 export namespace WorkersKVComponentsSchemasResult {
-  export interface Data {
-    /**
-     * List of metrics returned by the query.
-     */
-    metrics: Array<unknown>;
-  }
-
   /**
    * For specifying result metrics.
    */
@@ -141,7 +141,7 @@ export namespace WorkersKVComponentsSchemasResult {
  * Metrics on Workers KV requests.
  */
 export interface WorkersKVSchemasResult {
-  data: Array<WorkersKVSchemasResult.Data> | null;
+  data: Array<UnnamedSchemaRef608bee5065f7314d6fa572b89a1910f7> | null;
 
   /**
    * Number of seconds between current time and last processed event, i.e. how many
@@ -176,13 +176,6 @@ export interface WorkersKVSchemasResult {
 }
 
 export namespace WorkersKVSchemasResult {
-  export interface Data {
-    /**
-     * List of metrics returned by the query.
-     */
-    metrics: Array<unknown>;
-  }
-
   /**
    * For specifying result metrics.
    */
@@ -378,6 +371,7 @@ export namespace AnalyticsStoredParams {
 }
 
 export namespace Analytics {
+  export import UnnamedSchemaRef608bee5065f7314d6fa572b89a1910f7 = AnalyticsAPI.UnnamedSchemaRef608bee5065f7314d6fa572b89a1910f7;
   export import WorkersKVComponentsSchemasResult = AnalyticsAPI.WorkersKVComponentsSchemasResult;
   export import WorkersKVSchemasResult = AnalyticsAPI.WorkersKVSchemasResult;
   export import AnalyticsListParams = AnalyticsAPI.AnalyticsListParams;

@@ -3,9 +3,7 @@
 export { Registrar } from './registrar';
 export {
   RegistrarDomains,
-  DomainUpdateResponse,
   DomainListResponse,
-  DomainGetResponse,
   DomainUpdateParams,
   DomainListParams,
   DomainGetParams,
