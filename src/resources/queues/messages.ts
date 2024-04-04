@@ -40,28 +40,6 @@ export class Messages extends APIResource {
   }
 }
 
-export interface QueueConsumer {
-  created_on?: unknown;
-
-  environment?: unknown;
-
-  queue_name?: unknown;
-
-  service?: unknown;
-
-  settings?: QueueConsumer.Settings;
-}
-
-export namespace QueueConsumer {
-  export interface Settings {
-    batch_size?: number;
-
-    max_retries?: number;
-
-    max_wait_time_ms?: number;
-  }
-}
-
 export interface MessageAckResponse {
   /**
    * The number of messages that were succesfully acknowledged
@@ -152,7 +130,6 @@ export interface MessagePullParams {
 }
 
 export namespace Messages {
-  export import QueueConsumer = MessagesAPI.QueueConsumer;
   export import MessageAckResponse = MessagesAPI.MessageAckResponse;
   export import MessagePullResponse = MessagesAPI.MessagePullResponse;
   export import MessageAckParams = MessagesAPI.MessageAckParams;

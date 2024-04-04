@@ -4,7 +4,6 @@ export { AttackSurfaceReport } from './attack-surface-report';
 export {
   IssueListResponse,
   IssueClassResponse,
-  IssueDismissResponse,
   IssueSeverityResponse,
   IssueTypeResponse,
   IssueListParams,

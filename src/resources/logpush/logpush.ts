@@ -23,7 +23,7 @@ export namespace Logpush {
   export import EdgeCreateParams = EdgeAPI.EdgeCreateParams;
   export import EdgeGetParams = EdgeAPI.EdgeGetParams;
   export import Jobs = JobsAPI.Jobs;
-  export import JobDeleteResponse = JobsAPI.JobDeleteResponse;
+  export import UnnamedSchemaRef2f2e9d7fbcc0e6856257a03a1dbbdfb5 = JobsAPI.UnnamedSchemaRef2f2e9d7fbcc0e6856257a03a1dbbdfb5;
   export import JobCreateParams = JobsAPI.JobCreateParams;
   export import JobUpdateParams = JobsAPI.JobUpdateParams;
   export import JobListParams = JobsAPI.JobListParams;
@@ -31,7 +31,6 @@ export namespace Logpush {
   export import JobGetParams = JobsAPI.JobGetParams;
   export import Ownership = OwnershipAPI.Ownership;
   export import OwnershipCreateResponse = OwnershipAPI.OwnershipCreateResponse;
-  export import OwnershipValidateResponse = OwnershipAPI.OwnershipValidateResponse;
   export import OwnershipCreateParams = OwnershipAPI.OwnershipCreateParams;
   export import OwnershipValidateParams = OwnershipAPI.OwnershipValidateParams;
   export import Validate = ValidateAPI.Validate;

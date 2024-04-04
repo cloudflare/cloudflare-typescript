@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from 'cloudflare/resource';
+import * as AlertingAPI from 'cloudflare/resources/alerting/alerting';
 import * as AvailableAlertsAPI from 'cloudflare/resources/alerting/available-alerts';
 import * as HistoryAPI from 'cloudflare/resources/alerting/history';
 import * as PoliciesAPI from 'cloudflare/resources/alerting/policies';
@@ -13,7 +14,15 @@ export class Alerting extends APIResource {
   policies: PoliciesAPI.Policies = new PoliciesAPI.Policies(this._client);
 }
 
+export interface UnnamedSchemaRefD6e23adacaca017802aaa484a8b3f405 {
+  /**
+   * UUID
+   */
+  id?: string;
+}
+
 export namespace Alerting {
+  export import UnnamedSchemaRefD6e23adacaca017802aaa484a8b3f405 = AlertingAPI.UnnamedSchemaRefD6e23adacaca017802aaa484a8b3f405;
   export import AvailableAlerts = AvailableAlertsAPI.AvailableAlerts;
   export import AvailableAlertListResponse = AvailableAlertsAPI.AvailableAlertListResponse;
   export import AvailableAlertListParams = AvailableAlertsAPI.AvailableAlertListParams;
@@ -26,7 +35,6 @@ export namespace Alerting {
   export import AlertingPolicies = PoliciesAPI.AlertingPolicies;
   export import PolicyCreateResponse = PoliciesAPI.PolicyCreateResponse;
   export import PolicyUpdateResponse = PoliciesAPI.PolicyUpdateResponse;
-  export import PolicyDeleteResponse = PoliciesAPI.PolicyDeleteResponse;
   export import AlertingPoliciesSinglePage = PoliciesAPI.AlertingPoliciesSinglePage;
   export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
   export import PolicyUpdateParams = PoliciesAPI.PolicyUpdateParams;

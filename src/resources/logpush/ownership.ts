@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { CloudflareError } from 'cloudflare/error';
 import * as OwnershipAPI from 'cloudflare/resources/logpush/ownership';
+import * as Shared from 'cloudflare/resources/shared';
 
 export class Ownership extends APIResource {
   /**
@@ -44,7 +45,7 @@ export class Ownership extends APIResource {
   validate(
     params: OwnershipValidateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<OwnershipValidateResponse | null> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRefCc2ac1a037e5d6702fc77b3bcb527854 | null> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -66,7 +67,7 @@ export class Ownership extends APIResource {
       this._client.post(`/${accountOrZone}/${accountOrZoneId}/logpush/ownership/validate`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: OwnershipValidateResponse | null }>
+      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRefCc2ac1a037e5d6702fc77b3bcb527854 | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -76,10 +77,6 @@ export interface OwnershipCreateResponse {
 
   message?: string;
 
-  valid?: boolean;
-}
-
-export interface OwnershipValidateResponse {
   valid?: boolean;
 }
 
@@ -132,7 +129,6 @@ export interface OwnershipValidateParams {
 
 export namespace Ownership {
   export import OwnershipCreateResponse = OwnershipAPI.OwnershipCreateResponse;
-  export import OwnershipValidateResponse = OwnershipAPI.OwnershipValidateResponse;
   export import OwnershipCreateParams = OwnershipAPI.OwnershipCreateParams;
   export import OwnershipValidateParams = OwnershipAPI.OwnershipValidateParams;
 }

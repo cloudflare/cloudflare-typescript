@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as RequestsAPI from 'cloudflare/resources/cloudforce-one/requests/requests';
+import * as Shared from 'cloudflare/resources/shared';
 import * as MessageAPI from 'cloudflare/resources/cloudforce-one/requests/message';
 import * as PriorityAPI from 'cloudflare/resources/cloudforce-one/requests/priority';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
@@ -70,12 +71,12 @@ export class Requests extends APIResource {
     accountIdentifier: string,
     requestIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RequestDeleteResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRefEc4d85c3d1bcc6b3b7e99c199ae99846> {
     return (
       this._client.delete(
         `/accounts/${accountIdentifier}/cloudforce-one/requests/${requestIdentifier}`,
         options,
-      ) as Core.APIPromise<{ result: RequestDeleteResponse }>
+      ) as Core.APIPromise<{ result: Shared.UnnamedSchemaRefEc4d85c3d1bcc6b3b7e99c199ae99846 }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -286,8 +287,6 @@ export interface CloudforceOneRequestListItem {
 
 export type CloudforceOneRequestTypes = Array<string>;
 
-export type RequestDeleteResponse = unknown | Array<unknown> | string;
-
 export interface RequestCreateParams {
   /**
    * Request content
@@ -390,21 +389,18 @@ export namespace Requests {
   export import CloudforceOneRequestItem = RequestsAPI.CloudforceOneRequestItem;
   export import CloudforceOneRequestListItem = RequestsAPI.CloudforceOneRequestListItem;
   export import CloudforceOneRequestTypes = RequestsAPI.CloudforceOneRequestTypes;
-  export import RequestDeleteResponse = RequestsAPI.RequestDeleteResponse;
   export import CloudforceOneRequestListItemsV4PagePaginationArray = RequestsAPI.CloudforceOneRequestListItemsV4PagePaginationArray;
   export import RequestCreateParams = RequestsAPI.RequestCreateParams;
   export import RequestUpdateParams = RequestsAPI.RequestUpdateParams;
   export import RequestListParams = RequestsAPI.RequestListParams;
   export import Message = MessageAPI.Message;
   export import CloudforceOneRequestMessageItem = MessageAPI.CloudforceOneRequestMessageItem;
-  export import MessageDeleteResponse = MessageAPI.MessageDeleteResponse;
   export import MessageGetResponse = MessageAPI.MessageGetResponse;
   export import MessageCreateParams = MessageAPI.MessageCreateParams;
   export import MessageUpdateParams = MessageAPI.MessageUpdateParams;
   export import MessageGetParams = MessageAPI.MessageGetParams;
   export import Priority = PriorityAPI.Priority;
   export import CloudforceOnePriorityItem = PriorityAPI.CloudforceOnePriorityItem;
-  export import PriorityDeleteResponse = PriorityAPI.PriorityDeleteResponse;
   export import PriorityCreateParams = PriorityAPI.PriorityCreateParams;
   export import PriorityUpdateParams = PriorityAPI.PriorityUpdateParams;
 }

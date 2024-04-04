@@ -25,12 +25,13 @@ export {
   DomainHistory,
 } from './domain-history';
 export { IntelIPList, IPListGetResponse, IPListGetParams, IPLists } from './ip-lists';
-export { IntelPassiveDNSByIP, DNSGetParams, DNS } from './dns';
+export {
+  IntelPassiveDNSByIP,
+  UnnamedSchemaRefB5e16cee4f32382c294201aedb9fc050,
+  DNSGetParams,
+  DNS,
+} from './dns';
 export { IntelSchemasIP, IPGetResponse, IPGetParams, IPs } from './ips';
 export { IntelSinkholeItem, SinkholeListParams, IntelSinkholeItemsSinglePage, Sinkholes } from './sinkholes';
 export { IntelWhois, WhoisGetParams, Whois } from './whois';
-export {
-  MiscategorizationCreateResponse,
-  MiscategorizationCreateParams,
-  Miscategorizations,
-} from './miscategorizations';
+export { MiscategorizationCreateParams, Miscategorizations } from './miscategorizations';

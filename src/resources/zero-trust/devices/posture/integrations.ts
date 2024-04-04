@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as IntegrationsAPI from 'cloudflare/resources/zero-trust/devices/posture/integrations';
+import * as Shared from 'cloudflare/resources/shared';
 import { SinglePage } from 'cloudflare/pagination';
 
 export class Integrations extends APIResource {
@@ -44,13 +45,13 @@ export class Integrations extends APIResource {
     integrationId: string,
     params: IntegrationDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<IntegrationDeleteResponse | null> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     const { account_id, body } = params;
     return (
       this._client.delete(`/accounts/${account_id}/devices/posture/integration/${integrationId}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: IntegrationDeleteResponse | null }>
+      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -141,7 +142,55 @@ export namespace DevicePostureIntegrations {
   }
 }
 
-export type IntegrationDeleteResponse = unknown | string;
+export interface UnnamedSchemaRefB84b377dfc9454d455b646d4bc9ab507 {
+  /**
+   * API UUID.
+   */
+  id?: string;
+
+  /**
+   * The configuration object containing third-party integration information.
+   */
+  config?: UnnamedSchemaRefB84b377dfc9454d455b646d4bc9ab507.Config;
+
+  /**
+   * The interval between each posture check with the third-party API. Use `m` for
+   * minutes (e.g. `5m`) and `h` for hours (e.g. `12h`).
+   */
+  interval?: string;
+
+  /**
+   * The name of the device posture integration.
+   */
+  name?: string;
+
+  /**
+   * The type of device posture integration.
+   */
+  type?: 'workspace_one' | 'crowdstrike_s2s' | 'uptycs' | 'intune' | 'kolide' | 'tanium' | 'sentinelone_s2s';
+}
+
+export namespace UnnamedSchemaRefB84b377dfc9454d455b646d4bc9ab507 {
+  /**
+   * The configuration object containing third-party integration information.
+   */
+  export interface Config {
+    /**
+     * The Workspace One API URL provided in the Workspace One Admin Dashboard.
+     */
+    api_url: string;
+
+    /**
+     * The Workspace One Authorization URL depending on your region.
+     */
+    auth_url: string;
+
+    /**
+     * The Workspace One client ID provided in the Workspace One Admin Dashboard.
+     */
+    client_id: string;
+  }
+}
 
 export interface IntegrationCreateParams {
   /**
@@ -503,7 +552,7 @@ export interface IntegrationGetParams {
 
 export namespace Integrations {
   export import DevicePostureIntegrations = IntegrationsAPI.DevicePostureIntegrations;
-  export import IntegrationDeleteResponse = IntegrationsAPI.IntegrationDeleteResponse;
+  export import UnnamedSchemaRefB84b377dfc9454d455b646d4bc9ab507 = IntegrationsAPI.UnnamedSchemaRefB84b377dfc9454d455b646d4bc9ab507;
   export import DevicePostureIntegrationsSinglePage = IntegrationsAPI.DevicePostureIntegrationsSinglePage;
   export import IntegrationCreateParams = IntegrationsAPI.IntegrationCreateParams;
   export import IntegrationListParams = IntegrationsAPI.IntegrationListParams;

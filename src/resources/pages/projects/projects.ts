@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ProjectsAPI from 'cloudflare/resources/pages/projects/projects';
+import * as Shared from 'cloudflare/resources/shared';
 import * as DomainsAPI from 'cloudflare/resources/pages/projects/domains';
 import * as DeploymentsAPI from 'cloudflare/resources/pages/projects/deployments/deployments';
 import { SinglePage } from 'cloudflare/pagination';
@@ -14,11 +15,14 @@ export class Projects extends APIResource {
   /**
    * Create a new project.
    */
-  create(params: ProjectCreateParams, options?: Core.RequestOptions): Core.APIPromise<ProjectCreateResponse> {
+  create(
+    params: ProjectCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Shared.UnnamedSchemaRef65e3c8c1a9c4638ec25cdbbaca7165c1 | null> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/pages/projects`, { body, ...options }) as Core.APIPromise<{
-        result: ProjectCreateResponse;
+        result: Shared.UnnamedSchemaRef65e3c8c1a9c4638ec25cdbbaca7165c1 | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -61,13 +65,13 @@ export class Projects extends APIResource {
     projectName: string,
     params: ProjectEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ProjectEditResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef65e3c8c1a9c4638ec25cdbbaca7165c1 | null> {
     const { account_id, body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/pages/projects/${projectName}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: ProjectEditResponse }>
+      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef65e3c8c1a9c4638ec25cdbbaca7165c1 | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -1092,11 +1096,7 @@ export namespace PagesProjects {
   }
 }
 
-export type ProjectCreateResponse = unknown | Array<unknown> | string;
-
 export type ProjectDeleteResponse = unknown;
-
-export type ProjectEditResponse = unknown | Array<unknown> | string;
 
 export type ProjectPurgeBuildCacheResponse = unknown;
 
@@ -1988,9 +1988,7 @@ export interface ProjectPurgeBuildCacheParams {
 export namespace Projects {
   export import PagesDeployments = ProjectsAPI.PagesDeployments;
   export import PagesProjects = ProjectsAPI.PagesProjects;
-  export import ProjectCreateResponse = ProjectsAPI.ProjectCreateResponse;
   export import ProjectDeleteResponse = ProjectsAPI.ProjectDeleteResponse;
-  export import ProjectEditResponse = ProjectsAPI.ProjectEditResponse;
   export import ProjectPurgeBuildCacheResponse = ProjectsAPI.ProjectPurgeBuildCacheResponse;
   export import PagesDeploymentsSinglePage = ProjectsAPI.PagesDeploymentsSinglePage;
   export import ProjectCreateParams = ProjectsAPI.ProjectCreateParams;
@@ -2008,11 +2006,8 @@ export namespace Projects {
   export import DeploymentRetryParams = DeploymentsAPI.DeploymentRetryParams;
   export import DeploymentRollbackParams = DeploymentsAPI.DeploymentRollbackParams;
   export import Domains = DomainsAPI.Domains;
-  export import DomainCreateResponse = DomainsAPI.DomainCreateResponse;
   export import DomainListResponse = DomainsAPI.DomainListResponse;
   export import DomainDeleteResponse = DomainsAPI.DomainDeleteResponse;
-  export import DomainEditResponse = DomainsAPI.DomainEditResponse;
-  export import DomainGetResponse = DomainsAPI.DomainGetResponse;
   export import DomainListResponsesSinglePage = DomainsAPI.DomainListResponsesSinglePage;
   export import DomainCreateParams = DomainsAPI.DomainCreateParams;
   export import DomainListParams = DomainsAPI.DomainListParams;

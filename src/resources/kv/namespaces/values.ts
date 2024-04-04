@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ValuesAPI from 'cloudflare/resources/kv/namespaces/values';
+import * as Shared from 'cloudflare/resources/shared';
 import { multipartFormRequestOptions } from 'cloudflare/core';
 
 export class Values extends APIResource {
@@ -19,13 +20,13 @@ export class Values extends APIResource {
     keyName: string,
     params: ValueUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ValueUpdateResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f> {
     const { account_id, ...body } = params;
     return (
       this._client.put(
         `/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/values/${keyName}`,
         multipartFormRequestOptions({ body, ...options }),
-      ) as Core.APIPromise<{ result: ValueUpdateResponse }>
+      ) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -38,13 +39,13 @@ export class Values extends APIResource {
     keyName: string,
     params: ValueDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ValueDeleteResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f> {
     const { account_id, body } = params;
     return (
       this._client.delete(`/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/values/${keyName}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: ValueDeleteResponse }>
+      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -68,10 +69,6 @@ export class Values extends APIResource {
     );
   }
 }
-
-export type ValueUpdateResponse = unknown | string;
-
-export type ValueDeleteResponse = unknown | string;
 
 /**
  * A byte sequence to be stored, up to 25 MiB in length.
@@ -115,8 +112,6 @@ export interface ValueGetParams {
 }
 
 export namespace Values {
-  export import ValueUpdateResponse = ValuesAPI.ValueUpdateResponse;
-  export import ValueDeleteResponse = ValuesAPI.ValueDeleteResponse;
   export import ValueGetResponse = ValuesAPI.ValueGetResponse;
   export import ValueUpdateParams = ValuesAPI.ValueUpdateParams;
   export import ValueDeleteParams = ValuesAPI.ValueDeleteParams;

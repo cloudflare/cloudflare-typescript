@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ZonesAPI from 'cloudflare/resources/addressing/address-maps/zones';
+import * as Shared from 'cloudflare/resources/shared';
 
 export class Zones extends APIResource {
   /**
@@ -12,13 +13,13 @@ export class Zones extends APIResource {
     addressMapId: string,
     params: ZoneUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneUpdateResponse | null> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef67bbb1ccdd42c3e2937b9fd19f791151 | null> {
     const { zone_id, account_id, body } = params;
     return (
       this._client.put(`/accounts/${account_id}/addressing/address_maps/${addressMapId}/zones/${zone_id}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: ZoneUpdateResponse | null }>
+      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef67bbb1ccdd42c3e2937b9fd19f791151 | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -29,20 +30,16 @@ export class Zones extends APIResource {
     addressMapId: string,
     params: ZoneDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneDeleteResponse | null> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef67bbb1ccdd42c3e2937b9fd19f791151 | null> {
     const { zone_id, account_id, body } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/addressing/address_maps/${addressMapId}/zones/${zone_id}`,
         { body: body, ...options },
-      ) as Core.APIPromise<{ result: ZoneDeleteResponse | null }>
+      ) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef67bbb1ccdd42c3e2937b9fd19f791151 | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
-
-export type ZoneUpdateResponse = unknown | Array<unknown> | string;
-
-export type ZoneDeleteResponse = unknown | Array<unknown> | string;
 
 export interface ZoneUpdateParams {
   /**
@@ -79,8 +76,6 @@ export interface ZoneDeleteParams {
 }
 
 export namespace Zones {
-  export import ZoneUpdateResponse = ZonesAPI.ZoneUpdateResponse;
-  export import ZoneDeleteResponse = ZonesAPI.ZoneDeleteResponse;
   export import ZoneUpdateParams = ZonesAPI.ZoneUpdateParams;
   export import ZoneDeleteParams = ZonesAPI.ZoneDeleteParams;
 }

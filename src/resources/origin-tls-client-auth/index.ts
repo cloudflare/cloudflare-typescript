@@ -11,10 +11,7 @@ export {
 } from './hostnames/index';
 export {
   OriginTLSClientCertificateZoneAuthenticatedOriginPull,
-  OriginTLSClientAuthCreateResponse,
   OriginTLSClientAuthListResponse,
-  OriginTLSClientAuthDeleteResponse,
-  OriginTLSClientAuthGetResponse,
   OriginTLSClientAuthCreateParams,
   OriginTLSClientAuthListParams,
   OriginTLSClientAuthDeleteParams,

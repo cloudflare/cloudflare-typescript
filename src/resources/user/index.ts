@@ -11,8 +11,6 @@ export { Firewall } from './firewall/index';
 export {
   Invite,
   InviteListResponse,
-  InviteEditResponse,
-  InviteGetResponse,
   InviteEditParams,
   InviteListResponsesSinglePage,
   Invites,
@@ -21,7 +19,6 @@ export { LoadBalancers } from './load-balancers/index';
 export {
   Organization,
   OrganizationDeleteResponse,
-  OrganizationGetResponse,
   OrganizationListParams,
   OrganizationDeleteParams,
   OrganizationsV4PagePaginationArray,
@@ -29,9 +26,7 @@ export {
 } from './organizations';
 export {
   Subscription,
-  SubscriptionUpdateResponse,
   SubscriptionDeleteResponse,
-  SubscriptionEditResponse,
   SubscriptionGetResponse,
   SubscriptionUpdateParams,
   SubscriptionDeleteParams,
@@ -40,10 +35,8 @@ export {
 } from './subscriptions';
 export {
   TokenCreateResponse,
-  TokenUpdateResponse,
   TokenListResponse,
   TokenDeleteResponse,
-  TokenGetResponse,
   TokenVerifyResponse,
   TokenCreateParams,
   TokenUpdateParams,
@@ -52,4 +45,4 @@ export {
   TokenListResponsesV4PagePaginationArray,
   Tokens,
 } from './tokens/index';
-export { User, UserEditResponse, UserGetResponse, UserEditParams, UserResource } from './user';
+export { User, UserEditParams, UserResource } from './user';

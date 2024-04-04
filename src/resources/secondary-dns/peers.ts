@@ -122,6 +122,41 @@ export interface SecondaryDNSPeer {
   tsig_id?: string;
 }
 
+export interface UnnamedSchemaRefBc727f0a53d75f2b531245a82603fbe0 {
+  id: string;
+
+  /**
+   * The name of the peer.
+   */
+  name: string;
+
+  /**
+   * IPv4/IPv6 address of primary or secondary nameserver, depending on what zone
+   * this peer is linked to. For primary zones this IP defines the IP of the
+   * secondary nameserver Cloudflare will NOTIFY upon zone changes. For secondary
+   * zones this IP defines the IP of the primary nameserver Cloudflare will send
+   * AXFR/IXFR requests to.
+   */
+  ip?: string;
+
+  /**
+   * Enable IXFR transfer protocol, default is AXFR. Only applicable to secondary
+   * zones.
+   */
+  ixfr_enable?: boolean;
+
+  /**
+   * DNS port of primary or secondary nameserver, depending on what zone this peer is
+   * linked to.
+   */
+  port?: number;
+
+  /**
+   * TSIG authentication will be used for zone transfer if configured.
+   */
+  tsig_id?: string;
+}
+
 export interface PeerDeleteResponse {
   id?: string;
 }
@@ -198,6 +233,7 @@ export interface PeerGetParams {
 
 export namespace Peers {
   export import SecondaryDNSPeer = PeersAPI.SecondaryDNSPeer;
+  export import UnnamedSchemaRefBc727f0a53d75f2b531245a82603fbe0 = PeersAPI.UnnamedSchemaRefBc727f0a53d75f2b531245a82603fbe0;
   export import PeerDeleteResponse = PeersAPI.PeerDeleteResponse;
   export import SecondaryDNSPeersSinglePage = PeersAPI.SecondaryDNSPeersSinglePage;
   export import PeerCreateParams = PeersAPI.PeerCreateParams;

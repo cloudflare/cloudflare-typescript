@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as OriginTLSClientAuthAPI from 'cloudflare/resources/origin-tls-client-auth/origin-tls-client-auth';
+import * as Shared from 'cloudflare/resources/shared';
 import * as SettingsAPI from 'cloudflare/resources/origin-tls-client-auth/settings';
 import * as HostnamesAPI from 'cloudflare/resources/origin-tls-client-auth/hostnames/hostnames';
 import { SinglePage } from 'cloudflare/pagination';
@@ -21,11 +22,11 @@ export class OriginTLSClientAuth extends APIResource {
   create(
     params: OriginTLSClientAuthCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<OriginTLSClientAuthCreateResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/origin_tls_client_auth`, { body, ...options }) as Core.APIPromise<{
-        result: OriginTLSClientAuthCreateResponse;
+        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -52,13 +53,13 @@ export class OriginTLSClientAuth extends APIResource {
     certificateId: string,
     params: OriginTLSClientAuthDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<OriginTLSClientAuthDeleteResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     const { zone_id, body } = params;
     return (
       this._client.delete(`/zones/${zone_id}/origin_tls_client_auth/${certificateId}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: OriginTLSClientAuthDeleteResponse }>
+      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -69,13 +70,13 @@ export class OriginTLSClientAuth extends APIResource {
     certificateId: string,
     params: OriginTLSClientAuthGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<OriginTLSClientAuthGetResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/origin_tls_client_auth/${certificateId}`,
         options,
-      ) as Core.APIPromise<{ result: OriginTLSClientAuthGetResponse }>
+      ) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -104,8 +105,6 @@ export interface OriginTLSClientCertificateZoneAuthenticatedOriginPull {
   private_key?: string;
 }
 
-export type OriginTLSClientAuthCreateResponse = unknown | string;
-
 export interface OriginTLSClientAuthListResponse {
   /**
    * Identifier
@@ -127,10 +126,6 @@ export interface OriginTLSClientAuthListResponse {
    */
   private_key?: string;
 }
-
-export type OriginTLSClientAuthDeleteResponse = unknown | string;
-
-export type OriginTLSClientAuthGetResponse = unknown | string;
 
 export interface OriginTLSClientAuthCreateParams {
   /**
@@ -177,10 +172,7 @@ export interface OriginTLSClientAuthGetParams {
 
 export namespace OriginTLSClientAuth {
   export import OriginTLSClientCertificateZoneAuthenticatedOriginPull = OriginTLSClientAuthAPI.OriginTLSClientCertificateZoneAuthenticatedOriginPull;
-  export import OriginTLSClientAuthCreateResponse = OriginTLSClientAuthAPI.OriginTLSClientAuthCreateResponse;
   export import OriginTLSClientAuthListResponse = OriginTLSClientAuthAPI.OriginTLSClientAuthListResponse;
-  export import OriginTLSClientAuthDeleteResponse = OriginTLSClientAuthAPI.OriginTLSClientAuthDeleteResponse;
-  export import OriginTLSClientAuthGetResponse = OriginTLSClientAuthAPI.OriginTLSClientAuthGetResponse;
   export import OriginTLSClientAuthListResponsesSinglePage = OriginTLSClientAuthAPI.OriginTLSClientAuthListResponsesSinglePage;
   export import OriginTLSClientAuthCreateParams = OriginTLSClientAuthAPI.OriginTLSClientAuthCreateParams;
   export import OriginTLSClientAuthListParams = OriginTLSClientAuthAPI.OriginTLSClientAuthListParams;

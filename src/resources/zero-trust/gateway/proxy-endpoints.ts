@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ProxyEndpointsAPI from 'cloudflare/resources/zero-trust/gateway/proxy-endpoints';
+import * as Shared from 'cloudflare/resources/shared';
 import { SinglePage } from 'cloudflare/pagination';
 
 export class ProxyEndpoints extends APIResource {
@@ -44,13 +45,13 @@ export class ProxyEndpoints extends APIResource {
     proxyEndpointId: string,
     params: ProxyEndpointDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ProxyEndpointDeleteResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     const { account_id, body } = params;
     return (
       this._client.delete(`/accounts/${account_id}/gateway/proxy_endpoints/${proxyEndpointId}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: ProxyEndpointDeleteResponse }>
+      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -91,7 +92,7 @@ export class ProxyEndpoints extends APIResource {
 
 export class ZeroTrustGatewayProxyEndpointsSinglePage extends SinglePage<ZeroTrustGatewayProxyEndpoints> {}
 
-export interface ZeroTrustGatewayProxyEndpoints {
+export interface UnnamedSchemaRef4753ee81779d0e57189420079abab61e {
   id?: string;
 
   created_at?: string;
@@ -114,7 +115,28 @@ export interface ZeroTrustGatewayProxyEndpoints {
   updated_at?: string;
 }
 
-export type ProxyEndpointDeleteResponse = unknown | string;
+export interface ZeroTrustGatewayProxyEndpoints {
+  id?: string;
+
+  created_at?: string;
+
+  /**
+   * A list of CIDRs to restrict ingress connections.
+   */
+  ips?: Array<string>;
+
+  /**
+   * The name of the proxy endpoint.
+   */
+  name?: string;
+
+  /**
+   * The subdomain to be used as the destination in the proxy client.
+   */
+  subdomain?: string;
+
+  updated_at?: string;
+}
 
 export interface ProxyEndpointCreateParams {
   /**
@@ -171,8 +193,8 @@ export interface ProxyEndpointGetParams {
 }
 
 export namespace ProxyEndpoints {
+  export import UnnamedSchemaRef4753ee81779d0e57189420079abab61e = ProxyEndpointsAPI.UnnamedSchemaRef4753ee81779d0e57189420079abab61e;
   export import ZeroTrustGatewayProxyEndpoints = ProxyEndpointsAPI.ZeroTrustGatewayProxyEndpoints;
-  export import ProxyEndpointDeleteResponse = ProxyEndpointsAPI.ProxyEndpointDeleteResponse;
   export import ZeroTrustGatewayProxyEndpointsSinglePage = ProxyEndpointsAPI.ZeroTrustGatewayProxyEndpointsSinglePage;
   export import ProxyEndpointCreateParams = ProxyEndpointsAPI.ProxyEndpointCreateParams;
   export import ProxyEndpointListParams = ProxyEndpointsAPI.ProxyEndpointListParams;

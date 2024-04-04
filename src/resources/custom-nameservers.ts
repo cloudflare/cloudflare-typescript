@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as CustomNameserversAPI from 'cloudflare/resources/custom-nameservers';
+import * as Shared from 'cloudflare/resources/shared';
 
 export class CustomNameservers extends APIResource {
   /**
@@ -27,13 +28,13 @@ export class CustomNameservers extends APIResource {
     customNSId: string,
     params: CustomNameserverDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomNameserverDeleteResponse | null> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef67bbb1ccdd42c3e2937b9fd19f791151 | null> {
     const { account_id, body } = params;
     return (
       this._client.delete(`/accounts/${account_id}/custom_ns/${customNSId}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: CustomNameserverDeleteResponse | null }>
+      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef67bbb1ccdd42c3e2937b9fd19f791151 | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -128,8 +129,6 @@ export namespace CustomNameserver {
   }
 }
 
-export type CustomNameserverDeleteResponse = unknown | Array<unknown> | string;
-
 export type CustomNameserverAvailabiltyResponse = Array<string>;
 
 export type CustomNameserverGetResponse = Array<CustomNameserver>;
@@ -193,7 +192,6 @@ export interface CustomNameserverVerifyParams {
 
 export namespace CustomNameservers {
   export import CustomNameserver = CustomNameserversAPI.CustomNameserver;
-  export import CustomNameserverDeleteResponse = CustomNameserversAPI.CustomNameserverDeleteResponse;
   export import CustomNameserverAvailabiltyResponse = CustomNameserversAPI.CustomNameserverAvailabiltyResponse;
   export import CustomNameserverGetResponse = CustomNameserversAPI.CustomNameserverGetResponse;
   export import CustomNameserverVerifyResponse = CustomNameserversAPI.CustomNameserverVerifyResponse;

@@ -27,6 +27,9 @@ export class Access extends APIResource {
 
 export namespace Access {
   export import Applications = ApplicationsAPI.Applications;
+  export import UnnamedSchemaRef6ed9646890b9be79e16f1cfff86ec832 = ApplicationsAPI.UnnamedSchemaRef6ed9646890b9be79e16f1cfff86ec832;
+  export import UnnamedSchemaRefC335ce55d4fdf132c942dfce6e45dcb9 = ApplicationsAPI.UnnamedSchemaRefC335ce55d4fdf132c942dfce6e45dcb9;
+  export import UnnamedSchemaRefC6200e37c458aaa3c42e6e5b999bc419 = ApplicationsAPI.UnnamedSchemaRefC6200e37c458aaa3c42e6e5b999bc419;
   export import ZeroTrustApps = ApplicationsAPI.ZeroTrustApps;
   export import ApplicationDeleteResponse = ApplicationsAPI.ApplicationDeleteResponse;
   export import ApplicationRevokeTokensResponse = ApplicationsAPI.ApplicationRevokeTokensResponse;
@@ -72,9 +75,6 @@ export namespace Access {
   export import BookmarkUpdateParams = BookmarksAPI.BookmarkUpdateParams;
   export import BookmarkDeleteParams = BookmarksAPI.BookmarkDeleteParams;
   export import Keys = KeysAPI.Keys;
-  export import KeyUpdateResponse = KeysAPI.KeyUpdateResponse;
-  export import KeyGetResponse = KeysAPI.KeyGetResponse;
-  export import KeyRotateResponse = KeysAPI.KeyRotateResponse;
   export import KeyUpdateParams = KeysAPI.KeyUpdateParams;
   export import Logs = LogsAPI.Logs;
   export import Users = UsersAPI.Users;

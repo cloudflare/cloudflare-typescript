@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as PrefixesAPI from 'cloudflare/resources/addressing/prefixes/prefixes';
+import * as Shared from 'cloudflare/resources/shared';
 import * as DelegationsAPI from 'cloudflare/resources/addressing/prefixes/delegations';
 import * as BGPAPI from 'cloudflare/resources/addressing/prefixes/bgp/bgp';
 import { SinglePage } from 'cloudflare/pagination';
@@ -46,13 +47,13 @@ export class Prefixes extends APIResource {
     prefixId: string,
     params: PrefixDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PrefixDeleteResponse | null> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef67bbb1ccdd42c3e2937b9fd19f791151 | null> {
     const { account_id, body } = params;
     return (
       this._client.delete(`/accounts/${account_id}/addressing/prefixes/${prefixId}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: PrefixDeleteResponse | null }>
+      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef67bbb1ccdd42c3e2937b9fd19f791151 | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -158,7 +159,70 @@ export interface AddressingIpamPrefixes {
   on_demand_locked?: boolean;
 }
 
-export type PrefixDeleteResponse = unknown | Array<unknown> | string;
+export interface UnnamedSchemaRefE358666e049bf8f9281c0a4f89b5fe46 {
+  /**
+   * Identifier
+   */
+  id?: string;
+
+  /**
+   * Identifier
+   */
+  account_id?: string;
+
+  /**
+   * Prefix advertisement status to the Internet. This field is only not 'null' if on
+   * demand is enabled.
+   */
+  advertised?: boolean | null;
+
+  /**
+   * Last time the advertisement status was changed. This field is only not 'null' if
+   * on demand is enabled.
+   */
+  advertised_modified_at?: string | null;
+
+  /**
+   * Approval state of the prefix (P = pending, V = active).
+   */
+  approved?: string;
+
+  /**
+   * Autonomous System Number (ASN) the prefix will be advertised under.
+   */
+  asn?: number | null;
+
+  /**
+   * IP Prefix in Classless Inter-Domain Routing format.
+   */
+  cidr?: string;
+
+  created_at?: string;
+
+  /**
+   * Description of the prefix.
+   */
+  description?: string;
+
+  /**
+   * Identifier for the uploaded LOA document.
+   */
+  loa_document_id?: string | null;
+
+  modified_at?: string;
+
+  /**
+   * Whether advertisement of the prefix to the Internet may be dynamically enabled
+   * or disabled.
+   */
+  on_demand_enabled?: boolean;
+
+  /**
+   * Whether advertisement status of the prefix is locked, meaning it cannot be
+   * changed.
+   */
+  on_demand_locked?: boolean;
+}
 
 export interface PrefixCreateParams {
   /**
@@ -222,7 +286,7 @@ export interface PrefixGetParams {
 
 export namespace Prefixes {
   export import AddressingIpamPrefixes = PrefixesAPI.AddressingIpamPrefixes;
-  export import PrefixDeleteResponse = PrefixesAPI.PrefixDeleteResponse;
+  export import UnnamedSchemaRefE358666e049bf8f9281c0a4f89b5fe46 = PrefixesAPI.UnnamedSchemaRefE358666e049bf8f9281c0a4f89b5fe46;
   export import AddressingIpamPrefixesSinglePage = PrefixesAPI.AddressingIpamPrefixesSinglePage;
   export import PrefixCreateParams = PrefixesAPI.PrefixCreateParams;
   export import PrefixListParams = PrefixesAPI.PrefixListParams;

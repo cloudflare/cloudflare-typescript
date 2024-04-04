@@ -5,6 +5,7 @@ import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import { type Response } from 'cloudflare/_shims/index';
 import * as ScansAPI from 'cloudflare/resources/url-scanner/scans';
+import * as Shared from 'cloudflare/resources/shared';
 
 export class Scans extends APIResource {
   /**
@@ -72,6 +73,42 @@ export class Scans extends APIResource {
       __binaryResponse: true,
     });
   }
+}
+
+export interface UnnamedSchemaRef3750739f772bbdf0bb00d6634ccc0631 {
+  effectiveUrl: string;
+
+  errors: Array<UnnamedSchemaRef3750739f772bbdf0bb00d6634ccc0631.Error>;
+
+  location: string;
+
+  region: string;
+
+  status: string;
+
+  success: boolean;
+
+  time: string;
+
+  url: string;
+
+  uuid: string;
+
+  visibility: string;
+}
+
+export namespace UnnamedSchemaRef3750739f772bbdf0bb00d6634ccc0631 {
+  export interface Error {
+    message: string;
+  }
+}
+
+export interface UnnamedSchemaRef6d7a78acccfc753a8e931b1c4e72b6a6 {
+  id: number;
+
+  name: string;
+
+  super_category_id?: number;
 }
 
 export interface ScanCreateResponse {
@@ -168,20 +205,12 @@ export namespace ScanGetResponse {
 
       export namespace Processors {
         export interface Categories {
-          content: Array<Categories.Content>;
+          content: Array<ScansAPI.UnnamedSchemaRef6d7a78acccfc753a8e931b1c4e72b6a6>;
 
           risks: Array<Categories.Risk>;
         }
 
         export namespace Categories {
-          export interface Content {
-            id: number;
-
-            name: string;
-
-            super_category_id?: number;
-          }
-
           export interface Risk {
             id: number;
 
@@ -285,7 +314,7 @@ export namespace ScanGetResponse {
 
       domain: string;
 
-      headers: Array<Page.Header>;
+      headers: Array<Shared.UnnamedSchemaRef2173d81a0b2d332c9e2ac46900fe8bb9>;
 
       ip: string;
 
@@ -339,12 +368,6 @@ export namespace ScanGetResponse {
         value: string;
 
         priority?: string;
-      }
-
-      export interface Header {
-        name: string;
-
-        value: string;
       }
 
       export interface Js {
@@ -559,52 +582,18 @@ export namespace ScanGetResponse {
         export interface Categories {
           inherited: Categories.Inherited;
 
-          content?: Array<Categories.Content>;
+          content?: Array<ScansAPI.UnnamedSchemaRef6d7a78acccfc753a8e931b1c4e72b6a6>;
 
-          risks?: Array<Categories.Risk>;
+          risks?: Array<ScansAPI.UnnamedSchemaRef6d7a78acccfc753a8e931b1c4e72b6a6>;
         }
 
         export namespace Categories {
           export interface Inherited {
-            content?: Array<Inherited.Content>;
+            content?: Array<ScansAPI.UnnamedSchemaRef6d7a78acccfc753a8e931b1c4e72b6a6>;
 
             from?: string;
 
-            risks?: Array<Inherited.Risk>;
-          }
-
-          export namespace Inherited {
-            export interface Content {
-              id: number;
-
-              name: string;
-
-              super_category_id?: number;
-            }
-
-            export interface Risk {
-              id: number;
-
-              name: string;
-
-              super_category_id?: number;
-            }
-          }
-
-          export interface Content {
-            id: number;
-
-            name: string;
-
-            super_category_id?: number;
-          }
-
-          export interface Risk {
-            id: number;
-
-            name: string;
-
-            super_category_id?: number;
+            risks?: Array<ScansAPI.UnnamedSchemaRef6d7a78acccfc753a8e931b1c4e72b6a6>;
           }
         }
 
@@ -750,7 +739,7 @@ export namespace ScanHarResponse {
         export interface Request {
           bodySize: number;
 
-          headers: Array<Request.Header>;
+          headers: Array<Shared.UnnamedSchemaRef2173d81a0b2d332c9e2ac46900fe8bb9>;
 
           headersSize: number;
 
@@ -761,14 +750,6 @@ export namespace ScanHarResponse {
           url: string;
         }
 
-        export namespace Request {
-          export interface Header {
-            name: string;
-
-            value: string;
-          }
-        }
-
         export interface Response {
           _transferSize: number;
 
@@ -776,7 +757,7 @@ export namespace ScanHarResponse {
 
           content: Response.Content;
 
-          headers: Array<Response.Header>;
+          headers: Array<Shared.UnnamedSchemaRef2173d81a0b2d332c9e2ac46900fe8bb9>;
 
           headersSize: number;
 
@@ -796,12 +777,6 @@ export namespace ScanHarResponse {
             size: number;
 
             compression?: number;
-          }
-
-          export interface Header {
-            name: string;
-
-            value: string;
           }
         }
       }
@@ -858,6 +833,8 @@ export interface ScanScreenshotParams {
 }
 
 export namespace Scans {
+  export import UnnamedSchemaRef3750739f772bbdf0bb00d6634ccc0631 = ScansAPI.UnnamedSchemaRef3750739f772bbdf0bb00d6634ccc0631;
+  export import UnnamedSchemaRef6d7a78acccfc753a8e931b1c4e72b6a6 = ScansAPI.UnnamedSchemaRef6d7a78acccfc753a8e931b1c4e72b6a6;
   export import ScanCreateResponse = ScansAPI.ScanCreateResponse;
   export import ScanGetResponse = ScansAPI.ScanGetResponse;
   export import ScanHarResponse = ScansAPI.ScanHarResponse;

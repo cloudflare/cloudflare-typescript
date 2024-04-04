@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as SmartTieredCacheAPI from 'cloudflare/resources/cache/smart-tiered-cache';
+import * as Shared from 'cloudflare/resources/shared';
 
 export class SmartTieredCache extends APIResource {
   /**
@@ -11,13 +12,13 @@ export class SmartTieredCache extends APIResource {
   delete(
     params: SmartTieredCacheDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SmartTieredCacheDeleteResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     const { zone_id, body } = params;
     return (
       this._client.delete(`/zones/${zone_id}/cache/tiered_cache_smart_topology_enable`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: SmartTieredCacheDeleteResponse }>
+      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -27,13 +28,13 @@ export class SmartTieredCache extends APIResource {
   edit(
     params: SmartTieredCacheEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SmartTieredCacheEditResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/cache/tiered_cache_smart_topology_enable`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: SmartTieredCacheEditResponse }>
+      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -43,22 +44,16 @@ export class SmartTieredCache extends APIResource {
   get(
     params: SmartTieredCacheGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SmartTieredCacheGetResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/cache/tiered_cache_smart_topology_enable`,
         options,
-      ) as Core.APIPromise<{ result: SmartTieredCacheGetResponse }>
+      ) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
-
-export type SmartTieredCacheDeleteResponse = unknown | string | null;
-
-export type SmartTieredCacheEditResponse = unknown | string | null;
-
-export type SmartTieredCacheGetResponse = unknown | string | null;
 
 export interface SmartTieredCacheDeleteParams {
   /**
@@ -92,9 +87,6 @@ export interface SmartTieredCacheGetParams {
 }
 
 export namespace SmartTieredCache {
-  export import SmartTieredCacheDeleteResponse = SmartTieredCacheAPI.SmartTieredCacheDeleteResponse;
-  export import SmartTieredCacheEditResponse = SmartTieredCacheAPI.SmartTieredCacheEditResponse;
-  export import SmartTieredCacheGetResponse = SmartTieredCacheAPI.SmartTieredCacheGetResponse;
   export import SmartTieredCacheDeleteParams = SmartTieredCacheAPI.SmartTieredCacheDeleteParams;
   export import SmartTieredCacheEditParams = SmartTieredCacheAPI.SmartTieredCacheEditParams;
   export import SmartTieredCacheGetParams = SmartTieredCacheAPI.SmartTieredCacheGetParams;

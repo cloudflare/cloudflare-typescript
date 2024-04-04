@@ -201,6 +201,65 @@ export class IdentityProviders extends APIResource {
 
 export class IdentityProviderListResponsesSinglePage extends SinglePage<IdentityProviderListResponse> {}
 
+/**
+ * The type of identity provider. To determine the value for a specific provider,
+ * refer to our
+ * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+ */
+export type UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb =
+  | 'onetimepin'
+  | 'azureAD'
+  | 'saml'
+  | 'centrify'
+  | 'facebook'
+  | 'github'
+  | 'google-apps'
+  | 'google'
+  | 'linkedin'
+  | 'oidc'
+  | 'okta'
+  | 'onelogin'
+  | 'pingone'
+  | 'yandex';
+
+/**
+ * The configuration settings for enabling a System for Cross-Domain Identity
+ * Management (SCIM) with the identity provider.
+ */
+export interface UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1 {
+  /**
+   * A flag to enable or disable SCIM for the identity provider.
+   */
+  enabled?: boolean;
+
+  /**
+   * A flag to revoke a user's session in Access and force a reauthentication on the
+   * user's Gateway session when they have been added or removed from a group in the
+   * Identity Provider.
+   */
+  group_member_deprovision?: boolean;
+
+  /**
+   * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
+   * in the Identity Provider. This cannot be enabled unless user_deprovision is also
+   * enabled.
+   */
+  seat_deprovision?: boolean;
+
+  /**
+   * A read-only token generated when the SCIM integration is enabled for the first
+   * time. It is redacted on subsequent requests. If you lose this you will need to
+   * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+   */
+  secret?: string;
+
+  /**
+   * A flag to enable revoking a user's session in Access and Gateway when they have
+   * been deprovisioned in the Identity Provider.
+   */
+  user_deprovision?: boolean;
+}
+
 export type ZeroTrustIdentityProviders =
   | ZeroTrustIdentityProviders.AccessAzureAd
   | ZeroTrustIdentityProviders.AccessCentrify
@@ -236,21 +295,7 @@ export namespace ZeroTrustIdentityProviders {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * UUID
@@ -261,7 +306,7 @@ export namespace ZeroTrustIdentityProviders {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: AccessAzureAd.ScimConfig;
+    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessAzureAd {
@@ -318,44 +363,6 @@ export namespace ZeroTrustIdentityProviders {
        */
       support_groups?: boolean;
     }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
   }
 
   export interface AccessCentrify {
@@ -376,21 +383,7 @@ export namespace ZeroTrustIdentityProviders {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * UUID
@@ -401,7 +394,7 @@ export namespace ZeroTrustIdentityProviders {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: AccessCentrify.ScimConfig;
+    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessCentrify {
@@ -441,44 +434,6 @@ export namespace ZeroTrustIdentityProviders {
        */
       email_claim_name?: string;
     }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
   }
 
   export interface AccessFacebook {
@@ -499,21 +454,7 @@ export namespace ZeroTrustIdentityProviders {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * UUID
@@ -524,7 +465,7 @@ export namespace ZeroTrustIdentityProviders {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: AccessFacebook.ScimConfig;
+    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessFacebook {
@@ -543,44 +484,6 @@ export namespace ZeroTrustIdentityProviders {
        * Your OAuth Client Secret
        */
       client_secret?: string;
-    }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
     }
   }
 
@@ -602,21 +505,7 @@ export namespace ZeroTrustIdentityProviders {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * UUID
@@ -627,7 +516,7 @@ export namespace ZeroTrustIdentityProviders {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: AccessGitHub.ScimConfig;
+    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessGitHub {
@@ -646,44 +535,6 @@ export namespace ZeroTrustIdentityProviders {
        * Your OAuth Client Secret
        */
       client_secret?: string;
-    }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
     }
   }
 
@@ -705,21 +556,7 @@ export namespace ZeroTrustIdentityProviders {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * UUID
@@ -730,7 +567,7 @@ export namespace ZeroTrustIdentityProviders {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: AccessGoogle.ScimConfig;
+    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessGoogle {
@@ -760,44 +597,6 @@ export namespace ZeroTrustIdentityProviders {
        */
       email_claim_name?: string;
     }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
   }
 
   export interface AccessGoogleApps {
@@ -818,21 +617,7 @@ export namespace ZeroTrustIdentityProviders {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * UUID
@@ -843,7 +628,7 @@ export namespace ZeroTrustIdentityProviders {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: AccessGoogleApps.ScimConfig;
+    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessGoogleApps {
@@ -878,44 +663,6 @@ export namespace ZeroTrustIdentityProviders {
        */
       email_claim_name?: string;
     }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
   }
 
   export interface AccessLinkedin {
@@ -936,21 +683,7 @@ export namespace ZeroTrustIdentityProviders {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * UUID
@@ -961,7 +694,7 @@ export namespace ZeroTrustIdentityProviders {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: AccessLinkedin.ScimConfig;
+    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessLinkedin {
@@ -980,44 +713,6 @@ export namespace ZeroTrustIdentityProviders {
        * Your OAuth Client Secret
        */
       client_secret?: string;
-    }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
     }
   }
 
@@ -1039,21 +734,7 @@ export namespace ZeroTrustIdentityProviders {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * UUID
@@ -1064,7 +745,7 @@ export namespace ZeroTrustIdentityProviders {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: AccessOidc.ScimConfig;
+    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessOidc {
@@ -1114,44 +795,6 @@ export namespace ZeroTrustIdentityProviders {
        */
       token_url?: string;
     }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
   }
 
   export interface AccessOkta {
@@ -1172,21 +815,7 @@ export namespace ZeroTrustIdentityProviders {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * UUID
@@ -1197,7 +826,7 @@ export namespace ZeroTrustIdentityProviders {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: AccessOkta.ScimConfig;
+    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessOkta {
@@ -1237,44 +866,6 @@ export namespace ZeroTrustIdentityProviders {
        */
       okta_account?: string;
     }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
   }
 
   export interface AccessOnelogin {
@@ -1295,21 +886,7 @@ export namespace ZeroTrustIdentityProviders {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * UUID
@@ -1320,7 +897,7 @@ export namespace ZeroTrustIdentityProviders {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: AccessOnelogin.ScimConfig;
+    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessOnelogin {
@@ -1355,44 +932,6 @@ export namespace ZeroTrustIdentityProviders {
        */
       onelogin_account?: string;
     }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
   }
 
   export interface AccessPingone {
@@ -1413,21 +952,7 @@ export namespace ZeroTrustIdentityProviders {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * UUID
@@ -1438,7 +963,7 @@ export namespace ZeroTrustIdentityProviders {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: AccessPingone.ScimConfig;
+    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessPingone {
@@ -1473,44 +998,6 @@ export namespace ZeroTrustIdentityProviders {
        */
       ping_env_id?: string;
     }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
   }
 
   export interface AccessSaml {
@@ -1531,21 +1018,7 @@ export namespace ZeroTrustIdentityProviders {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * UUID
@@ -1556,7 +1029,7 @@ export namespace ZeroTrustIdentityProviders {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: AccessSaml.ScimConfig;
+    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessSaml {
@@ -1618,44 +1091,6 @@ export namespace ZeroTrustIdentityProviders {
         header_name?: string;
       }
     }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
   }
 
   export interface AccessYandex {
@@ -1676,21 +1111,7 @@ export namespace ZeroTrustIdentityProviders {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * UUID
@@ -1701,7 +1122,7 @@ export namespace ZeroTrustIdentityProviders {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: AccessYandex.ScimConfig;
+    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessYandex {
@@ -1720,44 +1141,6 @@ export namespace ZeroTrustIdentityProviders {
        * Your OAuth Client Secret
        */
       client_secret?: string;
-    }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
     }
   }
 
@@ -1779,21 +1162,7 @@ export namespace ZeroTrustIdentityProviders {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * UUID
@@ -1804,47 +1173,7 @@ export namespace ZeroTrustIdentityProviders {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: AccessOnetimepin.ScimConfig;
-  }
-
-  export namespace AccessOnetimepin {
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
+    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 }
 
@@ -1882,21 +1211,7 @@ export namespace IdentityProviderListResponse {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * UUID
@@ -1907,7 +1222,7 @@ export namespace IdentityProviderListResponse {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: AccessAzureAd.ScimConfig;
+    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessAzureAd {
@@ -1964,44 +1279,6 @@ export namespace IdentityProviderListResponse {
        */
       support_groups?: boolean;
     }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
   }
 
   export interface AccessCentrify {
@@ -2022,21 +1299,7 @@ export namespace IdentityProviderListResponse {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * UUID
@@ -2047,7 +1310,7 @@ export namespace IdentityProviderListResponse {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: AccessCentrify.ScimConfig;
+    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessCentrify {
@@ -2087,44 +1350,6 @@ export namespace IdentityProviderListResponse {
        */
       email_claim_name?: string;
     }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
   }
 
   export interface AccessFacebook {
@@ -2145,21 +1370,7 @@ export namespace IdentityProviderListResponse {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * UUID
@@ -2170,7 +1381,7 @@ export namespace IdentityProviderListResponse {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: AccessFacebook.ScimConfig;
+    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessFacebook {
@@ -2189,44 +1400,6 @@ export namespace IdentityProviderListResponse {
        * Your OAuth Client Secret
        */
       client_secret?: string;
-    }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
     }
   }
 
@@ -2248,21 +1421,7 @@ export namespace IdentityProviderListResponse {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * UUID
@@ -2273,7 +1432,7 @@ export namespace IdentityProviderListResponse {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: AccessGitHub.ScimConfig;
+    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessGitHub {
@@ -2292,44 +1451,6 @@ export namespace IdentityProviderListResponse {
        * Your OAuth Client Secret
        */
       client_secret?: string;
-    }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
     }
   }
 
@@ -2351,21 +1472,7 @@ export namespace IdentityProviderListResponse {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * UUID
@@ -2376,7 +1483,7 @@ export namespace IdentityProviderListResponse {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: AccessGoogle.ScimConfig;
+    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessGoogle {
@@ -2406,44 +1513,6 @@ export namespace IdentityProviderListResponse {
        */
       email_claim_name?: string;
     }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
   }
 
   export interface AccessGoogleApps {
@@ -2464,21 +1533,7 @@ export namespace IdentityProviderListResponse {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * UUID
@@ -2489,7 +1544,7 @@ export namespace IdentityProviderListResponse {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: AccessGoogleApps.ScimConfig;
+    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessGoogleApps {
@@ -2524,44 +1579,6 @@ export namespace IdentityProviderListResponse {
        */
       email_claim_name?: string;
     }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
   }
 
   export interface AccessLinkedin {
@@ -2582,21 +1599,7 @@ export namespace IdentityProviderListResponse {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * UUID
@@ -2607,7 +1610,7 @@ export namespace IdentityProviderListResponse {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: AccessLinkedin.ScimConfig;
+    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessLinkedin {
@@ -2626,44 +1629,6 @@ export namespace IdentityProviderListResponse {
        * Your OAuth Client Secret
        */
       client_secret?: string;
-    }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
     }
   }
 
@@ -2685,21 +1650,7 @@ export namespace IdentityProviderListResponse {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * UUID
@@ -2710,7 +1661,7 @@ export namespace IdentityProviderListResponse {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: AccessOidc.ScimConfig;
+    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessOidc {
@@ -2760,44 +1711,6 @@ export namespace IdentityProviderListResponse {
        */
       token_url?: string;
     }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
   }
 
   export interface AccessOkta {
@@ -2818,21 +1731,7 @@ export namespace IdentityProviderListResponse {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * UUID
@@ -2843,7 +1742,7 @@ export namespace IdentityProviderListResponse {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: AccessOkta.ScimConfig;
+    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessOkta {
@@ -2883,44 +1782,6 @@ export namespace IdentityProviderListResponse {
        */
       okta_account?: string;
     }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
   }
 
   export interface AccessOnelogin {
@@ -2941,21 +1802,7 @@ export namespace IdentityProviderListResponse {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * UUID
@@ -2966,7 +1813,7 @@ export namespace IdentityProviderListResponse {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: AccessOnelogin.ScimConfig;
+    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessOnelogin {
@@ -3001,44 +1848,6 @@ export namespace IdentityProviderListResponse {
        */
       onelogin_account?: string;
     }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
   }
 
   export interface AccessPingone {
@@ -3059,21 +1868,7 @@ export namespace IdentityProviderListResponse {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * UUID
@@ -3084,7 +1879,7 @@ export namespace IdentityProviderListResponse {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: AccessPingone.ScimConfig;
+    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessPingone {
@@ -3119,44 +1914,6 @@ export namespace IdentityProviderListResponse {
        */
       ping_env_id?: string;
     }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
   }
 
   export interface AccessSaml {
@@ -3177,21 +1934,7 @@ export namespace IdentityProviderListResponse {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * UUID
@@ -3202,7 +1945,7 @@ export namespace IdentityProviderListResponse {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: AccessSaml.ScimConfig;
+    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessSaml {
@@ -3264,44 +2007,6 @@ export namespace IdentityProviderListResponse {
         header_name?: string;
       }
     }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
   }
 
   export interface AccessYandex {
@@ -3322,21 +2027,7 @@ export namespace IdentityProviderListResponse {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * UUID
@@ -3347,7 +2038,7 @@ export namespace IdentityProviderListResponse {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: AccessYandex.ScimConfig;
+    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessYandex {
@@ -3366,44 +2057,6 @@ export namespace IdentityProviderListResponse {
        * Your OAuth Client Secret
        */
       client_secret?: string;
-    }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
     }
   }
 }
@@ -3450,21 +2103,7 @@ export namespace IdentityProviderCreateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -3482,7 +2121,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderCreateParams.AccessAzureAd.ScimConfig;
+    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessAzureAd {
@@ -3539,44 +2178,6 @@ export namespace IdentityProviderCreateParams {
        */
       support_groups?: boolean;
     }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
   }
 
   export interface AccessCentrify {
@@ -3597,21 +2198,7 @@ export namespace IdentityProviderCreateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -3629,7 +2216,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderCreateParams.AccessCentrify.ScimConfig;
+    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessCentrify {
@@ -3669,44 +2256,6 @@ export namespace IdentityProviderCreateParams {
        */
       email_claim_name?: string;
     }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
   }
 
   export interface AccessFacebook {
@@ -3727,21 +2276,7 @@ export namespace IdentityProviderCreateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -3759,7 +2294,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderCreateParams.AccessFacebook.ScimConfig;
+    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessFacebook {
@@ -3778,44 +2313,6 @@ export namespace IdentityProviderCreateParams {
        * Your OAuth Client Secret
        */
       client_secret?: string;
-    }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
     }
   }
 
@@ -3837,21 +2334,7 @@ export namespace IdentityProviderCreateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -3869,7 +2352,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderCreateParams.AccessGitHub.ScimConfig;
+    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessGitHub {
@@ -3888,44 +2371,6 @@ export namespace IdentityProviderCreateParams {
        * Your OAuth Client Secret
        */
       client_secret?: string;
-    }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
     }
   }
 
@@ -3947,21 +2392,7 @@ export namespace IdentityProviderCreateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -3979,7 +2410,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderCreateParams.AccessGoogle.ScimConfig;
+    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessGoogle {
@@ -4009,44 +2440,6 @@ export namespace IdentityProviderCreateParams {
        */
       email_claim_name?: string;
     }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
   }
 
   export interface AccessGoogleApps {
@@ -4067,21 +2460,7 @@ export namespace IdentityProviderCreateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -4099,7 +2478,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderCreateParams.AccessGoogleApps.ScimConfig;
+    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessGoogleApps {
@@ -4134,44 +2513,6 @@ export namespace IdentityProviderCreateParams {
        */
       email_claim_name?: string;
     }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
   }
 
   export interface AccessLinkedin {
@@ -4192,21 +2533,7 @@ export namespace IdentityProviderCreateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -4224,7 +2551,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderCreateParams.AccessLinkedin.ScimConfig;
+    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessLinkedin {
@@ -4243,44 +2570,6 @@ export namespace IdentityProviderCreateParams {
        * Your OAuth Client Secret
        */
       client_secret?: string;
-    }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
     }
   }
 
@@ -4302,21 +2591,7 @@ export namespace IdentityProviderCreateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -4334,7 +2609,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderCreateParams.AccessOidc.ScimConfig;
+    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessOidc {
@@ -4384,44 +2659,6 @@ export namespace IdentityProviderCreateParams {
        */
       token_url?: string;
     }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
   }
 
   export interface AccessOkta {
@@ -4442,21 +2679,7 @@ export namespace IdentityProviderCreateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -4474,7 +2697,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderCreateParams.AccessOkta.ScimConfig;
+    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessOkta {
@@ -4514,44 +2737,6 @@ export namespace IdentityProviderCreateParams {
        */
       okta_account?: string;
     }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
   }
 
   export interface AccessOnelogin {
@@ -4572,21 +2757,7 @@ export namespace IdentityProviderCreateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -4604,7 +2775,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderCreateParams.AccessOnelogin.ScimConfig;
+    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessOnelogin {
@@ -4639,44 +2810,6 @@ export namespace IdentityProviderCreateParams {
        */
       onelogin_account?: string;
     }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
   }
 
   export interface AccessPingone {
@@ -4697,21 +2830,7 @@ export namespace IdentityProviderCreateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -4729,7 +2848,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderCreateParams.AccessPingone.ScimConfig;
+    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessPingone {
@@ -4764,44 +2883,6 @@ export namespace IdentityProviderCreateParams {
        */
       ping_env_id?: string;
     }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
   }
 
   export interface AccessSaml {
@@ -4822,21 +2903,7 @@ export namespace IdentityProviderCreateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -4854,7 +2921,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderCreateParams.AccessSaml.ScimConfig;
+    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessSaml {
@@ -4916,44 +2983,6 @@ export namespace IdentityProviderCreateParams {
         header_name?: string;
       }
     }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
   }
 
   export interface AccessYandex {
@@ -4974,21 +3003,7 @@ export namespace IdentityProviderCreateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -5006,7 +3021,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderCreateParams.AccessYandex.ScimConfig;
+    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessYandex {
@@ -5025,44 +3040,6 @@ export namespace IdentityProviderCreateParams {
        * Your OAuth Client Secret
        */
       client_secret?: string;
-    }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
     }
   }
 
@@ -5084,21 +3061,7 @@ export namespace IdentityProviderCreateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -5116,47 +3079,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderCreateParams.AccessOnetimepin.ScimConfig;
-  }
-
-  export namespace AccessOnetimepin {
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
+    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 }
 
@@ -5195,21 +3118,7 @@ export namespace IdentityProviderUpdateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -5227,7 +3136,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderUpdateParams.AccessAzureAd.ScimConfig;
+    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessAzureAd {
@@ -5284,44 +3193,6 @@ export namespace IdentityProviderUpdateParams {
        */
       support_groups?: boolean;
     }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
   }
 
   export interface AccessCentrify {
@@ -5342,21 +3213,7 @@ export namespace IdentityProviderUpdateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -5374,7 +3231,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderUpdateParams.AccessCentrify.ScimConfig;
+    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessCentrify {
@@ -5414,44 +3271,6 @@ export namespace IdentityProviderUpdateParams {
        */
       email_claim_name?: string;
     }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
   }
 
   export interface AccessFacebook {
@@ -5472,21 +3291,7 @@ export namespace IdentityProviderUpdateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -5504,7 +3309,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderUpdateParams.AccessFacebook.ScimConfig;
+    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessFacebook {
@@ -5523,44 +3328,6 @@ export namespace IdentityProviderUpdateParams {
        * Your OAuth Client Secret
        */
       client_secret?: string;
-    }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
     }
   }
 
@@ -5582,21 +3349,7 @@ export namespace IdentityProviderUpdateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -5614,7 +3367,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderUpdateParams.AccessGitHub.ScimConfig;
+    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessGitHub {
@@ -5633,44 +3386,6 @@ export namespace IdentityProviderUpdateParams {
        * Your OAuth Client Secret
        */
       client_secret?: string;
-    }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
     }
   }
 
@@ -5692,21 +3407,7 @@ export namespace IdentityProviderUpdateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -5724,7 +3425,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderUpdateParams.AccessGoogle.ScimConfig;
+    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessGoogle {
@@ -5754,44 +3455,6 @@ export namespace IdentityProviderUpdateParams {
        */
       email_claim_name?: string;
     }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
   }
 
   export interface AccessGoogleApps {
@@ -5812,21 +3475,7 @@ export namespace IdentityProviderUpdateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -5844,7 +3493,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderUpdateParams.AccessGoogleApps.ScimConfig;
+    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessGoogleApps {
@@ -5879,44 +3528,6 @@ export namespace IdentityProviderUpdateParams {
        */
       email_claim_name?: string;
     }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
   }
 
   export interface AccessLinkedin {
@@ -5937,21 +3548,7 @@ export namespace IdentityProviderUpdateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -5969,7 +3566,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderUpdateParams.AccessLinkedin.ScimConfig;
+    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessLinkedin {
@@ -5988,44 +3585,6 @@ export namespace IdentityProviderUpdateParams {
        * Your OAuth Client Secret
        */
       client_secret?: string;
-    }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
     }
   }
 
@@ -6047,21 +3606,7 @@ export namespace IdentityProviderUpdateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -6079,7 +3624,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderUpdateParams.AccessOidc.ScimConfig;
+    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessOidc {
@@ -6129,44 +3674,6 @@ export namespace IdentityProviderUpdateParams {
        */
       token_url?: string;
     }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
   }
 
   export interface AccessOkta {
@@ -6187,21 +3694,7 @@ export namespace IdentityProviderUpdateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -6219,7 +3712,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderUpdateParams.AccessOkta.ScimConfig;
+    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessOkta {
@@ -6259,44 +3752,6 @@ export namespace IdentityProviderUpdateParams {
        */
       okta_account?: string;
     }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
   }
 
   export interface AccessOnelogin {
@@ -6317,21 +3772,7 @@ export namespace IdentityProviderUpdateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -6349,7 +3790,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderUpdateParams.AccessOnelogin.ScimConfig;
+    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessOnelogin {
@@ -6384,44 +3825,6 @@ export namespace IdentityProviderUpdateParams {
        */
       onelogin_account?: string;
     }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
   }
 
   export interface AccessPingone {
@@ -6442,21 +3845,7 @@ export namespace IdentityProviderUpdateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -6474,7 +3863,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderUpdateParams.AccessPingone.ScimConfig;
+    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessPingone {
@@ -6509,44 +3898,6 @@ export namespace IdentityProviderUpdateParams {
        */
       ping_env_id?: string;
     }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
   }
 
   export interface AccessSaml {
@@ -6567,21 +3918,7 @@ export namespace IdentityProviderUpdateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -6599,7 +3936,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderUpdateParams.AccessSaml.ScimConfig;
+    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessSaml {
@@ -6661,44 +3998,6 @@ export namespace IdentityProviderUpdateParams {
         header_name?: string;
       }
     }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
   }
 
   export interface AccessYandex {
@@ -6719,21 +4018,7 @@ export namespace IdentityProviderUpdateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -6751,7 +4036,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderUpdateParams.AccessYandex.ScimConfig;
+    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 
   export namespace AccessYandex {
@@ -6770,44 +4055,6 @@ export namespace IdentityProviderUpdateParams {
        * Your OAuth Client Secret
        */
       client_secret?: string;
-    }
-
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
     }
   }
 
@@ -6829,21 +4076,7 @@ export namespace IdentityProviderUpdateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type:
-      | 'onetimepin'
-      | 'azureAD'
-      | 'saml'
-      | 'centrify'
-      | 'facebook'
-      | 'github'
-      | 'google-apps'
-      | 'google'
-      | 'linkedin'
-      | 'oidc'
-      | 'okta'
-      | 'onelogin'
-      | 'pingone'
-      | 'yandex';
+    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -6861,47 +4094,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProviderUpdateParams.AccessOnetimepin.ScimConfig;
-  }
-
-  export namespace AccessOnetimepin {
-    /**
-     * The configuration settings for enabling a System for Cross-Domain Identity
-     * Management (SCIM) with the identity provider.
-     */
-    export interface ScimConfig {
-      /**
-       * A flag to enable or disable SCIM for the identity provider.
-       */
-      enabled?: boolean;
-
-      /**
-       * A flag to revoke a user's session in Access and force a reauthentication on the
-       * user's Gateway session when they have been added or removed from a group in the
-       * Identity Provider.
-       */
-      group_member_deprovision?: boolean;
-
-      /**
-       * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-       * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-       * enabled.
-       */
-      seat_deprovision?: boolean;
-
-      /**
-       * A read-only token generated when the SCIM integration is enabled for the first
-       * time. It is redacted on subsequent requests. If you lose this you will need to
-       * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-       */
-      secret?: string;
-
-      /**
-       * A flag to enable revoking a user's session in Access and Gateway when they have
-       * been deprovisioned in the Identity Provider.
-       */
-      user_deprovision?: boolean;
-    }
+    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   }
 }
 
@@ -6942,6 +4135,8 @@ export interface IdentityProviderGetParams {
 }
 
 export namespace IdentityProviders {
+  export import UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb = IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+  export import UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1 = IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   export import ZeroTrustIdentityProviders = IdentityProvidersAPI.ZeroTrustIdentityProviders;
   export import IdentityProviderListResponse = IdentityProvidersAPI.IdentityProviderListResponse;
   export import IdentityProviderDeleteResponse = IdentityProvidersAPI.IdentityProviderDeleteResponse;

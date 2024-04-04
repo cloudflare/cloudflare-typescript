@@ -40,8 +40,6 @@ export {
 } from './filters';
 export {
   WorkersRoute,
-  RouteCreateResponse,
-  RouteDeleteResponse,
   RouteCreateParams,
   RouteUpdateParams,
   RouteListParams,

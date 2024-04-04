@@ -84,6 +84,16 @@ export class CacheReserve extends APIResource {
 }
 
 /**
+ * ID of the zone setting.
+ */
+export type UnnamedSchemaRef2b5e755404a4bfd7892291ce97c4968d = 'cache_reserve_clear';
+
+/**
+ * ID of the zone setting.
+ */
+export type UnnamedSchemaRef37c385b4ebac5c7a6475b3f81ef9a7ad = 'cache_reserve';
+
+/**
  * You can use Cache Reserve Clear to clear your Cache Reserve, but you must first
  * disable Cache Reserve. In most cases, this will be accomplished within 24 hours.
  * You cannot re-enable Cache Reserve while this process is ongoing. Keep in mind
@@ -93,7 +103,7 @@ export interface CacheReserveClearResponse {
   /**
    * ID of the zone setting.
    */
-  id: 'cache_reserve_clear';
+  id: UnnamedSchemaRef2b5e755404a4bfd7892291ce97c4968d;
 
   /**
    * last time this setting was modified.
@@ -128,7 +138,7 @@ export interface CacheReserveEditResponse {
   /**
    * ID of the zone setting.
    */
-  id: 'cache_reserve';
+  id: UnnamedSchemaRef37c385b4ebac5c7a6475b3f81ef9a7ad;
 
   /**
    * last time this setting was modified.
@@ -153,7 +163,7 @@ export interface CacheReserveGetResponse {
   /**
    * ID of the zone setting.
    */
-  id: 'cache_reserve';
+  id: UnnamedSchemaRef37c385b4ebac5c7a6475b3f81ef9a7ad;
 
   /**
    * last time this setting was modified.
@@ -176,7 +186,7 @@ export interface CacheReserveStatusResponse {
   /**
    * ID of the zone setting.
    */
-  id: 'cache_reserve_clear';
+  id: UnnamedSchemaRef2b5e755404a4bfd7892291ce97c4968d;
 
   /**
    * last time this setting was modified.
@@ -238,6 +248,8 @@ export interface CacheReserveStatusParams {
 }
 
 export namespace CacheReserve {
+  export import UnnamedSchemaRef2b5e755404a4bfd7892291ce97c4968d = CacheReserveAPI.UnnamedSchemaRef2b5e755404a4bfd7892291ce97c4968d;
+  export import UnnamedSchemaRef37c385b4ebac5c7a6475b3f81ef9a7ad = CacheReserveAPI.UnnamedSchemaRef37c385b4ebac5c7a6475b3f81ef9a7ad;
   export import CacheReserveClearResponse = CacheReserveAPI.CacheReserveClearResponse;
   export import CacheReserveEditResponse = CacheReserveAPI.CacheReserveEditResponse;
   export import CacheReserveGetResponse = CacheReserveAPI.CacheReserveGetResponse;

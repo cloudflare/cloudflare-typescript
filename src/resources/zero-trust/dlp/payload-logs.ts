@@ -11,11 +11,11 @@ export class PayloadLogs extends APIResource {
   update(
     params: PayloadLogUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PayloadLogUpdateResponse> {
+  ): Core.APIPromise<UnnamedSchemaRefE31ff4936b1b42746e8cb62bbc87f2e5 | null> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/dlp/payload_log`, { body, ...options }) as Core.APIPromise<{
-        result: PayloadLogUpdateResponse;
+        result: UnnamedSchemaRefE31ff4936b1b42746e8cb62bbc87f2e5 | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -23,21 +23,20 @@ export class PayloadLogs extends APIResource {
   /**
    * Gets the current DLP payload log settings for this account.
    */
-  get(params: PayloadLogGetParams, options?: Core.RequestOptions): Core.APIPromise<PayloadLogGetResponse> {
+  get(
+    params: PayloadLogGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<UnnamedSchemaRefE31ff4936b1b42746e8cb62bbc87f2e5 | null> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/dlp/payload_log`, options) as Core.APIPromise<{
-        result: PayloadLogGetResponse;
+        result: UnnamedSchemaRefE31ff4936b1b42746e8cb62bbc87f2e5 | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface PayloadLogUpdateResponse {
-  public_key: string | null;
-}
-
-export interface PayloadLogGetResponse {
+export interface UnnamedSchemaRefE31ff4936b1b42746e8cb62bbc87f2e5 {
   public_key: string | null;
 }
 
@@ -62,8 +61,7 @@ export interface PayloadLogGetParams {
 }
 
 export namespace PayloadLogs {
-  export import PayloadLogUpdateResponse = PayloadLogsAPI.PayloadLogUpdateResponse;
-  export import PayloadLogGetResponse = PayloadLogsAPI.PayloadLogGetResponse;
+  export import UnnamedSchemaRefE31ff4936b1b42746e8cb62bbc87f2e5 = PayloadLogsAPI.UnnamedSchemaRefE31ff4936b1b42746e8cb62bbc87f2e5;
   export import PayloadLogUpdateParams = PayloadLogsAPI.PayloadLogUpdateParams;
   export import PayloadLogGetParams = PayloadLogsAPI.PayloadLogGetParams;
 }

@@ -6,7 +6,7 @@ import * as PoolsAPI from 'cloudflare/resources/load-balancers/pools/pools';
 import * as HealthAPI from 'cloudflare/resources/load-balancers/pools/health';
 import * as ReferencesAPI from 'cloudflare/resources/load-balancers/pools/references';
 import * as LoadBalancersPoolsAPI from 'cloudflare/resources/user/load-balancers/pools';
-import { LoadBalancingPoolsSinglePage } from 'cloudflare/resources/user/load-balancers/pools';
+import { PoolsSinglePage } from 'cloudflare/resources/user/load-balancers/pools';
 
 export class Pools extends APIResource {
   health: HealthAPI.Health = new HealthAPI.Health(this._client);
@@ -18,13 +18,13 @@ export class Pools extends APIResource {
   create(
     params: PoolCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LoadBalancersPoolsAPI.LoadBalancingPool> {
+  ): Core.APIPromise<LoadBalancersPoolsAPI.Pool> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/load_balancers/pools`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: LoadBalancersPoolsAPI.LoadBalancingPool }>
+      }) as Core.APIPromise<{ result: LoadBalancersPoolsAPI.Pool }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -35,13 +35,13 @@ export class Pools extends APIResource {
     poolId: string,
     params: PoolUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LoadBalancersPoolsAPI.LoadBalancingPool> {
+  ): Core.APIPromise<LoadBalancersPoolsAPI.Pool> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/load_balancers/pools/${poolId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: LoadBalancersPoolsAPI.LoadBalancingPool }>
+      }) as Core.APIPromise<{ result: LoadBalancersPoolsAPI.Pool }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -51,13 +51,12 @@ export class Pools extends APIResource {
   list(
     params: PoolListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<LoadBalancingPoolsSinglePage, LoadBalancersPoolsAPI.LoadBalancingPool> {
+  ): Core.PagePromise<PoolsSinglePage, LoadBalancersPoolsAPI.Pool> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/load_balancers/pools`,
-      LoadBalancingPoolsSinglePage,
-      { query, ...options },
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/load_balancers/pools`, PoolsSinglePage, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -84,13 +83,13 @@ export class Pools extends APIResource {
     poolId: string,
     params: PoolEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LoadBalancersPoolsAPI.LoadBalancingPool> {
+  ): Core.APIPromise<LoadBalancersPoolsAPI.Pool> {
     const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/load_balancers/pools/${poolId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: LoadBalancersPoolsAPI.LoadBalancingPool }>
+      }) as Core.APIPromise<{ result: LoadBalancersPoolsAPI.Pool }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -101,11 +100,11 @@ export class Pools extends APIResource {
     poolId: string,
     params: PoolGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LoadBalancersPoolsAPI.LoadBalancingPool> {
+  ): Core.APIPromise<LoadBalancersPoolsAPI.Pool> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/load_balancers/pools/${poolId}`, options) as Core.APIPromise<{
-        result: LoadBalancersPoolsAPI.LoadBalancingPool;
+        result: LoadBalancersPoolsAPI.Pool;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -966,4 +965,4 @@ export namespace Pools {
   export import ReferenceGetParams = ReferencesAPI.ReferenceGetParams;
 }
 
-export { LoadBalancingPoolsSinglePage };
+export { PoolsSinglePage };

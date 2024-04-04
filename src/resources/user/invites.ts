@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as InvitesAPI from 'cloudflare/resources/user/invites';
+import * as Shared from 'cloudflare/resources/shared';
 import { SinglePage } from 'cloudflare/pagination';
 
 export class Invites extends APIResource {
@@ -20,10 +21,10 @@ export class Invites extends APIResource {
     inviteId: string,
     body: InviteEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<InviteEditResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     return (
       this._client.patch(`/user/invites/${inviteId}`, { body, ...options }) as Core.APIPromise<{
-        result: InviteEditResponse;
+        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -31,9 +32,14 @@ export class Invites extends APIResource {
   /**
    * Gets the details of an invitation.
    */
-  get(inviteId: string, options?: Core.RequestOptions): Core.APIPromise<InviteGetResponse> {
+  get(
+    inviteId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     return (
-      this._client.get(`/user/invites/${inviteId}`, options) as Core.APIPromise<{ result: InviteGetResponse }>
+      this._client.get(`/user/invites/${inviteId}`, options) as Core.APIPromise<{
+        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -192,10 +198,6 @@ export namespace InviteListResponse {
   }
 }
 
-export type InviteEditResponse = unknown | string | null;
-
-export type InviteGetResponse = unknown | string | null;
-
 export interface InviteEditParams {
   /**
    * Status of your response to the invitation (rejected or accepted).
@@ -206,8 +208,6 @@ export interface InviteEditParams {
 export namespace Invites {
   export import Invite = InvitesAPI.Invite;
   export import InviteListResponse = InvitesAPI.InviteListResponse;
-  export import InviteEditResponse = InvitesAPI.InviteEditResponse;
-  export import InviteGetResponse = InvitesAPI.InviteGetResponse;
   export import InviteListResponsesSinglePage = InvitesAPI.InviteListResponsesSinglePage;
   export import InviteEditParams = InvitesAPI.InviteEditParams;
 }

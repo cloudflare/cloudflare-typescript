@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as OutagesAPI from 'cloudflare/resources/radar/annotations/outages';
+import * as RadarAPI from 'cloudflare/resources/radar/radar';
 
 export class Outages extends APIResource {
   /**
@@ -66,7 +67,7 @@ export namespace OutageGetResponse {
 
     locations: Array<string>;
 
-    locationsDetails: Array<Annotation.LocationsDetail>;
+    locationsDetails: Array<RadarAPI.UnnamedSchemaRef16e559c45a31db5480e21fbe904b2e42>;
 
     outage: Annotation.Outage;
 
@@ -87,21 +88,7 @@ export namespace OutageGetResponse {
 
       name: string;
 
-      locations?: ASNsDetail.Locations;
-    }
-
-    export namespace ASNsDetail {
-      export interface Locations {
-        code: string;
-
-        name: string;
-      }
-    }
-
-    export interface LocationsDetail {
-      code: string;
-
-      name: string;
+      locations?: RadarAPI.UnnamedSchemaRef16e559c45a31db5480e21fbe904b2e42;
     }
 
     export interface Outage {
@@ -113,17 +100,7 @@ export namespace OutageGetResponse {
 }
 
 export interface OutageLocationsResponse {
-  annotations: Array<OutageLocationsResponse.Annotation>;
-}
-
-export namespace OutageLocationsResponse {
-  export interface Annotation {
-    clientCountryAlpha2: string;
-
-    clientCountryName: string;
-
-    value: string;
-  }
+  annotations: Array<RadarAPI.UnnamedSchemaRef83a14d589e799bc901b9ccc870251d09>;
 }
 
 export interface OutageGetParams {

@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as MembershipsAPI from 'cloudflare/resources/memberships';
+import * as Shared from 'cloudflare/resources/shared';
 import * as AccountsAPI from 'cloudflare/resources/accounts/accounts';
 import * as MembersAPI from 'cloudflare/resources/accounts/members';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
@@ -16,10 +17,10 @@ export class Memberships extends APIResource {
     membershipId: string,
     body: MembershipUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MembershipUpdateResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     return (
       this._client.put(`/memberships/${membershipId}`, { body, ...options }) as Core.APIPromise<{
-        result: MembershipUpdateResponse;
+        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -60,10 +61,13 @@ export class Memberships extends APIResource {
   /**
    * Get a specific membership.
    */
-  get(membershipId: string, options?: Core.RequestOptions): Core.APIPromise<MembershipGetResponse> {
+  get(
+    membershipId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     return (
       this._client.get(`/memberships/${membershipId}`, options) as Core.APIPromise<{
-        result: MembershipGetResponse;
+        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -106,16 +110,12 @@ export interface Membership {
   status?: 'accepted' | 'pending' | 'rejected';
 }
 
-export type MembershipUpdateResponse = unknown | string | null;
-
 export interface MembershipDeleteResponse {
   /**
    * Membership identifier tag.
    */
   id?: string;
 }
-
-export type MembershipGetResponse = unknown | string | null;
 
 export interface MembershipUpdateParams {
   /**
@@ -161,9 +161,7 @@ export type MembershipDeleteParams = unknown;
 
 export namespace Memberships {
   export import Membership = MembershipsAPI.Membership;
-  export import MembershipUpdateResponse = MembershipsAPI.MembershipUpdateResponse;
   export import MembershipDeleteResponse = MembershipsAPI.MembershipDeleteResponse;
-  export import MembershipGetResponse = MembershipsAPI.MembershipGetResponse;
   export import MembershipsV4PagePaginationArray = MembershipsAPI.MembershipsV4PagePaginationArray;
   export import MembershipUpdateParams = MembershipsAPI.MembershipUpdateParams;
   export import MembershipListParams = MembershipsAPI.MembershipListParams;

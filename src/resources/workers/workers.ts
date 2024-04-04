@@ -45,8 +45,6 @@ export namespace Workers {
   export import FilterDeleteParams = FiltersAPI.FilterDeleteParams;
   export import Routes = RoutesAPI.Routes;
   export import WorkersRoute = RoutesAPI.WorkersRoute;
-  export import RouteCreateResponse = RoutesAPI.RouteCreateResponse;
-  export import RouteDeleteResponse = RoutesAPI.RouteDeleteResponse;
   export import WorkersRoutesSinglePage = RoutesAPI.WorkersRoutesSinglePage;
   export import RouteCreateParams = RoutesAPI.RouteCreateParams;
   export import RouteUpdateParams = RoutesAPI.RouteUpdateParams;

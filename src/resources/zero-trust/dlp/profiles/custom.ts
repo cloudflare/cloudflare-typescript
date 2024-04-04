@@ -3,6 +3,8 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as CustomAPI from 'cloudflare/resources/zero-trust/dlp/profiles/custom';
+import * as Shared from 'cloudflare/resources/shared';
+import * as ProfilesAPI from 'cloudflare/resources/zero-trust/dlp/profiles/profiles';
 
 export class Custom extends APIResource {
   /**
@@ -40,13 +42,13 @@ export class Custom extends APIResource {
     profileId: string,
     params: CustomDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomDeleteResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f> {
     const { account_id, body } = params;
     return (
       this._client.delete(`/accounts/${account_id}/dlp/profiles/custom/${profileId}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: CustomDeleteResponse }>
+      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -110,7 +112,7 @@ export interface DLPCustomProfile {
   /**
    * The type of the profile.
    */
-  type?: 'custom';
+  type?: ProfilesAPI.UnnamedSchemaRefC105db122868c71badeac3b4822ad6b1;
 
   updated_at?: string;
 }
@@ -199,8 +201,6 @@ export namespace DLPCustomProfile {
 }
 
 export type CustomCreateResponse = Array<DLPCustomProfile>;
-
-export type CustomDeleteResponse = unknown | string | null;
 
 export interface CustomCreateParams {
   /**
@@ -484,7 +484,6 @@ export interface CustomGetParams {
 export namespace Custom {
   export import DLPCustomProfile = CustomAPI.DLPCustomProfile;
   export import CustomCreateResponse = CustomAPI.CustomCreateResponse;
-  export import CustomDeleteResponse = CustomAPI.CustomDeleteResponse;
   export import CustomCreateParams = CustomAPI.CustomCreateParams;
   export import CustomUpdateParams = CustomAPI.CustomUpdateParams;
   export import CustomDeleteParams = CustomAPI.CustomDeleteParams;

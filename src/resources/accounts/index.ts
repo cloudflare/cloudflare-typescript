@@ -2,9 +2,7 @@
 
 export {
   Account,
-  AccountUpdateResponse,
   AccountListResponse,
-  AccountGetResponse,
   AccountUpdateParams,
   AccountListParams,
   AccountGetParams,
@@ -29,7 +27,6 @@ export {
   PermissionGrant,
   Role,
   RoleListResponse,
-  RoleGetResponse,
   RoleListParams,
   RoleGetParams,
   RoleListResponsesSinglePage,

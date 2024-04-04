@@ -174,6 +174,8 @@ export namespace URLScanner {
   export import URLScannerScanResponse = URLScannerAPI.URLScannerScanResponse;
   export import URLScannerScanParams = URLScannerAPI.URLScannerScanParams;
   export import Scans = ScansAPI.Scans;
+  export import UnnamedSchemaRef3750739f772bbdf0bb00d6634ccc0631 = ScansAPI.UnnamedSchemaRef3750739f772bbdf0bb00d6634ccc0631;
+  export import UnnamedSchemaRef6d7a78acccfc753a8e931b1c4e72b6a6 = ScansAPI.UnnamedSchemaRef6d7a78acccfc753a8e931b1c4e72b6a6;
   export import ScanCreateResponse = ScansAPI.ScanCreateResponse;
   export import ScanGetResponse = ScansAPI.ScanGetResponse;
   export import ScanHarResponse = ScansAPI.ScanHarResponse;

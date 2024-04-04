@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as DevicesAPI from 'cloudflare/resources/zero-trust/devices/devices';
+import * as Shared from 'cloudflare/resources/shared';
 import * as DEXTestsAPI from 'cloudflare/resources/zero-trust/devices/dex-tests';
 import * as NetworksAPI from 'cloudflare/resources/zero-trust/devices/networks';
 import * as OverrideCodesAPI from 'cloudflare/resources/zero-trust/devices/override-codes';
@@ -41,11 +42,11 @@ export class Devices extends APIResource {
     deviceId: string,
     params: DeviceGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DeviceGetResponse | null> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/devices/${deviceId}`, options) as Core.APIPromise<{
-        result: DeviceGetResponse | null;
+        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -168,8 +169,6 @@ export namespace ZeroTrustDevices {
   }
 }
 
-export type DeviceGetResponse = unknown | string;
-
 export interface DeviceListParams {
   account_id: string;
 }
@@ -180,12 +179,12 @@ export interface DeviceGetParams {
 
 export namespace Devices {
   export import ZeroTrustDevices = DevicesAPI.ZeroTrustDevices;
-  export import DeviceGetResponse = DevicesAPI.DeviceGetResponse;
   export import ZeroTrustDevicesSinglePage = DevicesAPI.ZeroTrustDevicesSinglePage;
   export import DeviceListParams = DevicesAPI.DeviceListParams;
   export import DeviceGetParams = DevicesAPI.DeviceGetParams;
   export import DEXTests = DEXTestsAPI.DEXTests;
   export import DEXTestSchemasHTTP = DEXTestsAPI.DEXTestSchemasHTTP;
+  export import UnnamedSchemaRef15fd6ef0641450fd873ffb71715170c9 = DEXTestsAPI.UnnamedSchemaRef15fd6ef0641450fd873ffb71715170c9;
   export import DEXTestDeleteResponse = DEXTestsAPI.DEXTestDeleteResponse;
   export import DEXTestSchemasHTTPSSinglePage = DEXTestsAPI.DEXTestSchemasHTTPSSinglePage;
   export import DEXTestCreateParams = DEXTestsAPI.DEXTestCreateParams;
@@ -195,6 +194,7 @@ export namespace Devices {
   export import DEXTestGetParams = DEXTestsAPI.DEXTestGetParams;
   export import Networks = NetworksAPI.Networks;
   export import DeviceManagedNetworks = NetworksAPI.DeviceManagedNetworks;
+  export import UnnamedSchemaRefD2b048663faf5e0cd5c90501b71171de = NetworksAPI.UnnamedSchemaRefD2b048663faf5e0cd5c90501b71171de;
   export import NetworkDeleteResponse = NetworksAPI.NetworkDeleteResponse;
   export import DeviceManagedNetworksSinglePage = NetworksAPI.DeviceManagedNetworksSinglePage;
   export import NetworkCreateParams = NetworksAPI.NetworkCreateParams;
@@ -204,6 +204,7 @@ export namespace Devices {
   export import NetworkGetParams = NetworksAPI.NetworkGetParams;
   export import Policies = PoliciesAPI.Policies;
   export import DevicesDeviceSettingsPolicy = PoliciesAPI.DevicesDeviceSettingsPolicy;
+  export import UnnamedSchemaRefF636ff9f2cb41ff4b715cf8ed8515581 = PoliciesAPI.UnnamedSchemaRefF636ff9f2cb41ff4b715cf8ed8515581;
   export import PolicyDeleteResponse = PoliciesAPI.PolicyDeleteResponse;
   export import DevicesDeviceSettingsPoliciesSinglePage = PoliciesAPI.DevicesDeviceSettingsPoliciesSinglePage;
   export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
@@ -213,6 +214,9 @@ export namespace Devices {
   export import PolicyGetParams = PoliciesAPI.PolicyGetParams;
   export import Posture = PostureAPI.Posture;
   export import DevicePostureRules = PostureAPI.DevicePostureRules;
+  export import UnnamedSchemaRef34ef0ad73a63c3f76ed170adca181930 = PostureAPI.UnnamedSchemaRef34ef0ad73a63c3f76ed170adca181930;
+  export import UnnamedSchemaRef41885dd46b9e0294254c49305a273681 = PostureAPI.UnnamedSchemaRef41885dd46b9e0294254c49305a273681;
+  export import UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27 = PostureAPI.UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27;
   export import PostureDeleteResponse = PostureAPI.PostureDeleteResponse;
   export import DevicePostureRulesSinglePage = PostureAPI.DevicePostureRulesSinglePage;
   export import PostureCreateParams = PostureAPI.PostureCreateParams;
@@ -221,14 +225,12 @@ export namespace Devices {
   export import PostureDeleteParams = PostureAPI.PostureDeleteParams;
   export import PostureGetParams = PostureAPI.PostureGetParams;
   export import Revoke = RevokeAPI.Revoke;
-  export import RevokeCreateResponse = RevokeAPI.RevokeCreateResponse;
   export import RevokeCreateParams = RevokeAPI.RevokeCreateParams;
   export import Settings = SettingsAPI.Settings;
   export import ZeroTrustAccountDeviceSettings = SettingsAPI.ZeroTrustAccountDeviceSettings;
   export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;
   export import SettingListParams = SettingsAPI.SettingListParams;
   export import Unrevoke = UnrevokeAPI.Unrevoke;
-  export import UnrevokeCreateResponse = UnrevokeAPI.UnrevokeCreateResponse;
   export import UnrevokeCreateParams = UnrevokeAPI.UnrevokeCreateParams;
   export import OverrideCodes = OverrideCodesAPI.OverrideCodes;
   export import OverrideCodeListResponse = OverrideCodesAPI.OverrideCodeListResponse;

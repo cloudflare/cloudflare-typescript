@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as V1API from 'cloudflare/resources/images/v1/v1';
+import * as Shared from 'cloudflare/resources/shared';
 import * as BlobsAPI from 'cloudflare/resources/images/v1/blobs';
 import * as KeysAPI from 'cloudflare/resources/images/v1/keys';
 import * as StatsAPI from 'cloudflare/resources/images/v1/stats';
@@ -54,13 +55,13 @@ export class V1 extends APIResource {
     imageId: string,
     params: V1DeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<V1DeleteResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     const { account_id, body } = params;
     return (
       this._client.delete(`/accounts/${account_id}/images/v1/${imageId}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: V1DeleteResponse }>
+      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -127,10 +128,44 @@ export interface Image {
   variants?: Array<string | string | string>;
 }
 
-export interface V1ListResponse {
-  errors: Array<V1ListResponse.Error>;
+export interface UnnamedSchemaRefE8461c343d70f42d35d6d68f1a58d05a {
+  /**
+   * Image unique identifier.
+   */
+  id?: string;
 
-  messages: Array<V1ListResponse.Message>;
+  /**
+   * Image file name.
+   */
+  filename?: string;
+
+  /**
+   * User modifiable key-value store. Can be used for keeping references to another
+   * system of record for managing images. Metadata must not exceed 1024 bytes.
+   */
+  meta?: unknown;
+
+  /**
+   * Indicates whether the image can be a accessed only using it's UID. If set to
+   * true, a signed token needs to be generated with a signing key to view the image.
+   */
+  requireSignedURLs?: boolean;
+
+  /**
+   * When the media item was uploaded.
+   */
+  uploaded?: string;
+
+  /**
+   * Object specifying available variants for an image.
+   */
+  variants?: Array<string | string | string>;
+}
+
+export interface V1ListResponse {
+  errors: Array<Shared.UnnamedSchemaRef3248f24329456e19dfa042fff9986f72>;
+
+  messages: Array<Shared.UnnamedSchemaRef3248f24329456e19dfa042fff9986f72>;
 
   result: V1ListResponse.Result;
 
@@ -141,24 +176,10 @@ export interface V1ListResponse {
 }
 
 export namespace V1ListResponse {
-  export interface Error {
-    code: number;
-
-    message: string;
-  }
-
-  export interface Message {
-    code: number;
-
-    message: string;
-  }
-
   export interface Result {
     images?: Array<V1API.Image>;
   }
 }
-
-export type V1DeleteResponse = unknown | string;
 
 export type V1CreateParams = V1CreateParams.ImagesImageUploadViaFile | V1CreateParams.ImagesImageUploadViaURL;
 
@@ -236,8 +257,8 @@ export interface V1GetParams {
 
 export namespace V1 {
   export import Image = V1API.Image;
+  export import UnnamedSchemaRefE8461c343d70f42d35d6d68f1a58d05a = V1API.UnnamedSchemaRefE8461c343d70f42d35d6d68f1a58d05a;
   export import V1ListResponse = V1API.V1ListResponse;
-  export import V1DeleteResponse = V1API.V1DeleteResponse;
   export import V1ListResponsesV4PagePagination = V1API.V1ListResponsesV4PagePagination;
   export import V1CreateParams = V1API.V1CreateParams;
   export import V1ListParams = V1API.V1ListParams;
@@ -246,6 +267,7 @@ export namespace V1 {
   export import V1GetParams = V1API.V1GetParams;
   export import Keys = KeysAPI.Keys;
   export import ImagesImageKeys = KeysAPI.ImagesImageKeys;
+  export import UnnamedSchemaRef918e794287a67b5e85126e00cf2d9a95 = KeysAPI.UnnamedSchemaRef918e794287a67b5e85126e00cf2d9a95;
   export import KeyUpdateParams = KeysAPI.KeyUpdateParams;
   export import KeyListParams = KeysAPI.KeyListParams;
   export import KeyDeleteParams = KeysAPI.KeyDeleteParams;
@@ -253,9 +275,9 @@ export namespace V1 {
   export import ImagesImagesStats = StatsAPI.ImagesImagesStats;
   export import StatGetParams = StatsAPI.StatGetParams;
   export import Variants = VariantsAPI.Variants;
+  export import UnnamedSchemaRefD02195de7dadf27801875f36cddfa3a3 = VariantsAPI.UnnamedSchemaRefD02195de7dadf27801875f36cddfa3a3;
   export import V1ImageVariant = VariantsAPI.V1ImageVariant;
   export import V1ImageVariants = VariantsAPI.V1ImageVariants;
-  export import VariantDeleteResponse = VariantsAPI.VariantDeleteResponse;
   export import VariantCreateParams = VariantsAPI.VariantCreateParams;
   export import VariantListParams = VariantsAPI.VariantListParams;
   export import VariantDeleteParams = VariantsAPI.VariantDeleteParams;

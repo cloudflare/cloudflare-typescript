@@ -3,6 +3,8 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as TestsAPI from 'cloudflare/resources/zero-trust/dex/tests/tests';
+import * as Shared from 'cloudflare/resources/shared';
+import * as DEXAPI from 'cloudflare/resources/zero-trust/dex/dex';
 import * as UniqueDevicesAPI from 'cloudflare/resources/zero-trust/dex/tests/unique-devices';
 import { V4PagePagination, type V4PagePaginationParams } from 'cloudflare/pagination';
 
@@ -103,7 +105,7 @@ export namespace DigitalExperienceMonitoringTests {
      */
     method?: string;
 
-    target_policies?: Array<Test.TargetPolicy>;
+    target_policies?: Array<DEXAPI.UnnamedSchemaRefBf9e2abcf1b78a6cab8e6e29e2228a11>;
 
     targeted?: boolean;
 
@@ -222,17 +224,6 @@ export namespace DigitalExperienceMonitoringTests {
       }
     }
 
-    export interface TargetPolicy {
-      id: string;
-
-      /**
-       * Whether the policy is the default for the account
-       */
-      default: boolean;
-
-      name: string;
-    }
-
     export interface TracerouteResults {
       roundTripTime: TracerouteResults.RoundTripTime;
     }
@@ -345,9 +336,9 @@ export namespace DigitalExperienceMonitoringTests {
 }
 
 export interface TestListResponse {
-  errors: Array<TestListResponse.Error>;
+  errors: Array<Shared.UnnamedSchemaRef3248f24329456e19dfa042fff9986f72>;
 
-  messages: Array<TestListResponse.Message>;
+  messages: Array<Shared.UnnamedSchemaRef3248f24329456e19dfa042fff9986f72>;
 
   result: DigitalExperienceMonitoringTests;
 
@@ -360,18 +351,6 @@ export interface TestListResponse {
 }
 
 export namespace TestListResponse {
-  export interface Error {
-    code: number;
-
-    message: string;
-  }
-
-  export interface Message {
-    code: number;
-
-    message: string;
-  }
-
   export interface ResultInfo {
     /**
      * Total number of results for the requested service

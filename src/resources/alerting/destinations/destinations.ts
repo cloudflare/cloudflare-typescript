@@ -18,7 +18,6 @@ export namespace Destinations {
   export import Pagerduty = PagerdutyAPI.Pagerduty;
   export import AlertingPagerduty = PagerdutyAPI.AlertingPagerduty;
   export import PagerdutyCreateResponse = PagerdutyAPI.PagerdutyCreateResponse;
-  export import PagerdutyDeleteResponse = PagerdutyAPI.PagerdutyDeleteResponse;
   export import PagerdutyGetResponse = PagerdutyAPI.PagerdutyGetResponse;
   export import PagerdutyLinkResponse = PagerdutyAPI.PagerdutyLinkResponse;
   export import PagerdutyCreateParams = PagerdutyAPI.PagerdutyCreateParams;
@@ -29,7 +28,6 @@ export namespace Destinations {
   export import AlertingWebhooks = WebhooksAPI.AlertingWebhooks;
   export import WebhookCreateResponse = WebhooksAPI.WebhookCreateResponse;
   export import WebhookUpdateResponse = WebhooksAPI.WebhookUpdateResponse;
-  export import WebhookDeleteResponse = WebhooksAPI.WebhookDeleteResponse;
   export import AlertingWebhooksSinglePage = WebhooksAPI.AlertingWebhooksSinglePage;
   export import WebhookCreateParams = WebhooksAPI.WebhookCreateParams;
   export import WebhookUpdateParams = WebhooksAPI.WebhookUpdateParams;

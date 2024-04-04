@@ -93,6 +93,12 @@ export class ACLs extends APIResource {
   }
 }
 
+/**
+ * Array of allowed communication protocols between configured LANs. If no
+ * protocols are provided, all protocols are allowed.
+ */
+export type UnnamedSchemaRef87fa9e5fe9f6b8d607be1df57340d916 = 'tcp' | 'udp' | 'icmp';
+
 export interface ACLCreateResponse {
   acls?: Array<ACLCreateResponse.ACL>;
 }
@@ -129,7 +135,7 @@ export namespace ACLCreateResponse {
      */
     name?: string;
 
-    protocols?: Array<'tcp' | 'udp' | 'icmp'>;
+    protocols?: Array<ACLsAPI.UnnamedSchemaRef87fa9e5fe9f6b8d607be1df57340d916>;
   }
 
   export namespace ACL {
@@ -222,7 +228,7 @@ export namespace ACLUpdateResponse {
      */
     name?: string;
 
-    protocols?: Array<'tcp' | 'udp' | 'icmp'>;
+    protocols?: Array<ACLsAPI.UnnamedSchemaRef87fa9e5fe9f6b8d607be1df57340d916>;
   }
 
   export namespace ACL {
@@ -312,7 +318,7 @@ export namespace ACLListResponse {
      */
     name?: string;
 
-    protocols?: Array<'tcp' | 'udp' | 'icmp'>;
+    protocols?: Array<ACLsAPI.UnnamedSchemaRef87fa9e5fe9f6b8d607be1df57340d916>;
   }
 
   export namespace ACL {
@@ -407,7 +413,7 @@ export namespace ACLDeleteResponse {
      */
     name?: string;
 
-    protocols?: Array<'tcp' | 'udp' | 'icmp'>;
+    protocols?: Array<ACLsAPI.UnnamedSchemaRef87fa9e5fe9f6b8d607be1df57340d916>;
   }
 
   export namespace DeletedACL {
@@ -500,7 +506,7 @@ export namespace ACLGetResponse {
      */
     name?: string;
 
-    protocols?: Array<'tcp' | 'udp' | 'icmp'>;
+    protocols?: Array<ACLsAPI.UnnamedSchemaRef87fa9e5fe9f6b8d607be1df57340d916>;
   }
 
   export namespace ACL {
@@ -590,7 +596,7 @@ export namespace ACLCreateParams {
      */
     forward_locally?: boolean;
 
-    protocols?: Array<'tcp' | 'udp' | 'icmp'>;
+    protocols?: Array<ACLsAPI.UnnamedSchemaRef87fa9e5fe9f6b8d607be1df57340d916>;
   }
 
   export namespace ACL {
@@ -680,7 +686,7 @@ export namespace ACLUpdateParams {
      */
     name?: string;
 
-    protocols?: Array<'tcp' | 'udp' | 'icmp'>;
+    protocols?: Array<ACLsAPI.UnnamedSchemaRef87fa9e5fe9f6b8d607be1df57340d916>;
   }
 
   export namespace ACL {
@@ -761,6 +767,7 @@ export interface ACLGetParams {
 }
 
 export namespace ACLs {
+  export import UnnamedSchemaRef87fa9e5fe9f6b8d607be1df57340d916 = ACLsAPI.UnnamedSchemaRef87fa9e5fe9f6b8d607be1df57340d916;
   export import ACLCreateResponse = ACLsAPI.ACLCreateResponse;
   export import ACLUpdateResponse = ACLsAPI.ACLUpdateResponse;
   export import ACLListResponse = ACLsAPI.ACLListResponse;

@@ -15,5 +15,4 @@ export namespace Billing {
   export import HistoryGetResponse = HistoryAPI.HistoryGetResponse;
   export import HistoryGetParams = HistoryAPI.HistoryGetParams;
   export import Profile = ProfileAPI.Profile;
-  export import ProfileGetResponse = ProfileAPI.ProfileGetResponse;
 }

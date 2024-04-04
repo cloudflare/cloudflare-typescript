@@ -2,10 +2,6 @@
 
 export {
   CustomCertificate,
-  CustomCertificateCreateResponse,
-  CustomCertificateDeleteResponse,
-  CustomCertificateEditResponse,
-  CustomCertificateGetResponse,
   CustomCertificateCreateParams,
   CustomCertificateListParams,
   CustomCertificateDeleteParams,

@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as SettingsAPI from 'cloudflare/resources/workers-for-platforms/dispatch/namespaces/scripts/settings';
+import * as Shared from 'cloudflare/resources/shared';
 
 export class Settings extends APIResource {
   /**
@@ -119,12 +120,12 @@ export interface SettingEditParams {
   /**
    * Body param:
    */
-  errors: Array<SettingEditParams.Error>;
+  errors: Array<Shared.UnnamedSchemaRef3248f24329456e19dfa042fff9986f72>;
 
   /**
    * Body param:
    */
-  messages: Array<SettingEditParams.Message>;
+  messages: Array<Shared.UnnamedSchemaRef3248f24329456e19dfa042fff9986f72>;
 
   /**
    * Body param:
@@ -138,18 +139,6 @@ export interface SettingEditParams {
 }
 
 export namespace SettingEditParams {
-  export interface Error {
-    code: number;
-
-    message: string;
-  }
-
-  export interface Message {
-    code: number;
-
-    message: string;
-  }
-
   export interface Result {
     /**
      * Whether Logpush is turned on for the Worker.

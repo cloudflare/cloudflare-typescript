@@ -36,6 +36,7 @@ export namespace Intel {
   export import ASNGetParams = ASNAPI.ASNGetParams;
   export import DNS = DNSAPI.DNS;
   export import IntelPassiveDNSByIP = DNSAPI.IntelPassiveDNSByIP;
+  export import UnnamedSchemaRefB5e16cee4f32382c294201aedb9fc050 = DNSAPI.UnnamedSchemaRefB5e16cee4f32382c294201aedb9fc050;
   export import DNSGetParams = DNSAPI.DNSGetParams;
   export import Domains = DomainsAPI.Domains;
   export import IntelDomain = DomainsAPI.IntelDomain;
@@ -53,7 +54,6 @@ export namespace Intel {
   export import IPListGetResponse = IPListsAPI.IPListGetResponse;
   export import IPListGetParams = IPListsAPI.IPListGetParams;
   export import Miscategorizations = MiscategorizationsAPI.Miscategorizations;
-  export import MiscategorizationCreateResponse = MiscategorizationsAPI.MiscategorizationCreateResponse;
   export import MiscategorizationCreateParams = MiscategorizationsAPI.MiscategorizationCreateParams;
   export import Whois = WhoisAPI.Whois;
   export import IntelWhois = WhoisAPI.IntelWhois;
