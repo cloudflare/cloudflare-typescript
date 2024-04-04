@@ -2671,16 +2671,21 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/rulesets/rulesets.ts">BlockRule</a></code>
+- <code><a href="./src/resources/rulesets/rulesets.ts">ExecuteRule</a></code>
+- <code><a href="./src/resources/rulesets/rulesets.ts">LogRule</a></code>
+- <code><a href="./src/resources/rulesets/rulesets.ts">RequestRule</a></code>
+- <code><a href="./src/resources/rulesets/rulesets.ts">Ruleset</a></code>
+- <code><a href="./src/resources/rulesets/rulesets.ts">SkipRule</a></code>
 - <code><a href="./src/resources/rulesets/rulesets.ts">RulesetCreateResponse</a></code>
 - <code><a href="./src/resources/rulesets/rulesets.ts">RulesetUpdateResponse</a></code>
-- <code><a href="./src/resources/rulesets/rulesets.ts">RulesetListResponse</a></code>
 - <code><a href="./src/resources/rulesets/rulesets.ts">RulesetGetResponse</a></code>
 
 Methods:
 
 - <code title="post /{account_or_zone}/{account_or_zone_id}/rulesets">client.rulesets.<a href="./src/resources/rulesets/rulesets.ts">create</a>({ ...params }) -> RulesetCreateResponse</code>
 - <code title="put /{account_or_zone}/{account_or_zone_id}/rulesets/{ruleset_id}">client.rulesets.<a href="./src/resources/rulesets/rulesets.ts">update</a>(rulesetId, { ...params }) -> RulesetUpdateResponse</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/rulesets">client.rulesets.<a href="./src/resources/rulesets/rulesets.ts">list</a>({ ...params }) -> RulesetListResponsesSinglePage</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/rulesets">client.rulesets.<a href="./src/resources/rulesets/rulesets.ts">list</a>({ ...params }) -> RulesetsSinglePage</code>
 - <code title="delete /{account_or_zone}/{account_or_zone_id}/rulesets/{ruleset_id}">client.rulesets.<a href="./src/resources/rulesets/rulesets.ts">delete</a>(rulesetId, { ...params }) -> void</code>
 - <code title="get /{account_or_zone}/{account_or_zone_id}/rulesets/{ruleset_id}">client.rulesets.<a href="./src/resources/rulesets/rulesets.ts">get</a>(rulesetId, { ...params }) -> RulesetGetResponse</code>
 
@@ -2700,12 +2705,11 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/rulesets/phases/versions.ts">VersionListResponse</a></code>
 - <code><a href="./src/resources/rulesets/phases/versions.ts">VersionGetResponse</a></code>
 
 Methods:
 
-- <code title="get /{account_or_zone}/{account_or_zone_id}/rulesets/phases/{ruleset_phase}/entrypoint/versions">client.rulesets.phases.versions.<a href="./src/resources/rulesets/phases/versions.ts">list</a>(rulesetPhase, { ...params }) -> VersionListResponsesSinglePage</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/rulesets/phases/{ruleset_phase}/entrypoint/versions">client.rulesets.phases.versions.<a href="./src/resources/rulesets/phases/versions.ts">list</a>(rulesetPhase, { ...params }) -> RulesetsSinglePage</code>
 - <code title="get /{account_or_zone}/{account_or_zone_id}/rulesets/phases/{ruleset_phase}/entrypoint/versions/{ruleset_version}">client.rulesets.phases.versions.<a href="./src/resources/rulesets/phases/versions.ts">get</a>(rulesetPhase, rulesetVersion, { ...params }) -> VersionGetResponse</code>
 
 ## Rules
@@ -2726,12 +2730,11 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/rulesets/versions/versions.ts">VersionListResponse</a></code>
 - <code><a href="./src/resources/rulesets/versions/versions.ts">VersionGetResponse</a></code>
 
 Methods:
 
-- <code title="get /{account_or_zone}/{account_or_zone_id}/rulesets/{ruleset_id}/versions">client.rulesets.versions.<a href="./src/resources/rulesets/versions/versions.ts">list</a>(rulesetId, { ...params }) -> VersionListResponsesSinglePage</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/rulesets/{ruleset_id}/versions">client.rulesets.versions.<a href="./src/resources/rulesets/versions/versions.ts">list</a>(rulesetId, { ...params }) -> RulesetsSinglePage</code>
 - <code title="delete /{account_or_zone}/{account_or_zone_id}/rulesets/{ruleset_id}/versions/{ruleset_version}">client.rulesets.versions.<a href="./src/resources/rulesets/versions/versions.ts">delete</a>(rulesetId, rulesetVersion, { ...params }) -> void</code>
 - <code title="get /{account_or_zone}/{account_or_zone_id}/rulesets/{ruleset_id}/versions/{ruleset_version}">client.rulesets.versions.<a href="./src/resources/rulesets/versions/versions.ts">get</a>(rulesetId, rulesetVersion, { ...params }) -> VersionGetResponse</code>
 
