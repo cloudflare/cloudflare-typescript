@@ -8,30 +8,24 @@ export class SecurityHeaders extends APIResource {
   /**
    * Cloudflare security header for a zone.
    */
-  edit(
-    params: SecurityHeaderEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneSettingSecurityHeader> {
+  edit(params: SecurityHeaderEditParams, options?: Core.RequestOptions): Core.APIPromise<SecurityHeaders> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/security_header`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZoneSettingSecurityHeader }>
+      }) as Core.APIPromise<{ result: SecurityHeaders }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Cloudflare security header for a zone.
    */
-  get(
-    params: SecurityHeaderGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneSettingSecurityHeader> {
+  get(params: SecurityHeaderGetParams, options?: Core.RequestOptions): Core.APIPromise<SecurityHeaders> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/security_header`, options) as Core.APIPromise<{
-        result: ZoneSettingSecurityHeader;
+        result: SecurityHeaders;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -40,7 +34,7 @@ export class SecurityHeaders extends APIResource {
 /**
  * Cloudflare security header for a zone.
  */
-export interface ZoneSettingSecurityHeader {
+export interface SecurityHeaders {
   /**
    * ID of the zone's security header.
    */
@@ -49,7 +43,7 @@ export interface ZoneSettingSecurityHeader {
   /**
    * Current value of the zone setting.
    */
-  value: ZoneSettingSecurityHeader.Value;
+  value: SecurityHeaders.Value;
 
   /**
    * Whether or not this setting can be modified for this zone (based on your
@@ -63,7 +57,7 @@ export interface ZoneSettingSecurityHeader {
   modified_on?: string | null;
 }
 
-export namespace ZoneSettingSecurityHeader {
+export namespace SecurityHeaders {
   /**
    * Current value of the zone setting.
    */
@@ -158,7 +152,7 @@ export interface SecurityHeaderGetParams {
 }
 
 export namespace SecurityHeaders {
-  export import ZoneSettingSecurityHeader = SecurityHeadersAPI.ZoneSettingSecurityHeader;
+  export import SecurityHeaders = SecurityHeadersAPI.SecurityHeaders;
   export import SecurityHeaderEditParams = SecurityHeadersAPI.SecurityHeaderEditParams;
   export import SecurityHeaderGetParams = SecurityHeadersAPI.SecurityHeaderGetParams;
 }

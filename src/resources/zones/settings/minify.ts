@@ -4,17 +4,17 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as MinifyAPI from 'cloudflare/resources/zones/settings/minify';
 
-export class Minify extends APIResource {
+export class MinifyResource extends APIResource {
   /**
    * Automatically minify certain assets for your website. Refer to
    * [Using Cloudflare Auto Minify](https://support.cloudflare.com/hc/en-us/articles/200168196)
    * for more information.
    */
-  edit(params: MinifyEditParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingMinify> {
+  edit(params: MinifyEditParams, options?: Core.RequestOptions): Core.APIPromise<Minify> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/minify`, { body, ...options }) as Core.APIPromise<{
-        result: ZoneSettingMinify;
+        result: Minify;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -24,12 +24,10 @@ export class Minify extends APIResource {
    * [Using Cloudflare Auto Minify](https://support.cloudflare.com/hc/en-us/articles/200168196)
    * for more information.
    */
-  get(params: MinifyGetParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingMinify> {
+  get(params: MinifyGetParams, options?: Core.RequestOptions): Core.APIPromise<Minify> {
     const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zone_id}/settings/minify`, options) as Core.APIPromise<{
-        result: ZoneSettingMinify;
-      }>
+      this._client.get(`/zones/${zone_id}/settings/minify`, options) as Core.APIPromise<{ result: Minify }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -39,7 +37,7 @@ export class Minify extends APIResource {
  * [Using Cloudflare Auto Minify](https://support.cloudflare.com/hc/en-us/articles/200168196)
  * for more information.
  */
-export interface ZoneSettingMinify {
+export interface Minify {
   /**
    * Zone setting identifier.
    */
@@ -48,7 +46,7 @@ export interface ZoneSettingMinify {
   /**
    * Current value of the zone setting.
    */
-  value: ZoneSettingMinify.Value;
+  value: Minify.Value;
 
   /**
    * Whether or not this setting can be modified for this zone (based on your
@@ -62,7 +60,7 @@ export interface ZoneSettingMinify {
   modified_on?: string | null;
 }
 
-export namespace ZoneSettingMinify {
+export namespace Minify {
   /**
    * Current value of the zone setting.
    */
@@ -125,8 +123,8 @@ export interface MinifyGetParams {
   zone_id: string;
 }
 
-export namespace Minify {
-  export import ZoneSettingMinify = MinifyAPI.ZoneSettingMinify;
+export namespace MinifyResource {
+  export import Minify = MinifyAPI.Minify;
   export import MinifyEditParams = MinifyAPI.MinifyEditParams;
   export import MinifyGetParams = MinifyAPI.MinifyGetParams;
 }

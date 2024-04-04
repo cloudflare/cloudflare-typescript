@@ -4,7 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ChallengeTTLAPI from 'cloudflare/resources/zones/settings/challenge-ttl';
 
-export class ChallengeTTL extends APIResource {
+export class ChallengeTTLResource extends APIResource {
   /**
    * Specify how long a visitor is allowed access to your site after successfully
    * completing a challenge (such as a CAPTCHA). After the TTL has expired the
@@ -12,16 +12,13 @@ export class ChallengeTTL extends APIResource {
    * setting and will attempt to honor any setting above 45 minutes.
    * (https://support.cloudflare.com/hc/en-us/articles/200170136).
    */
-  edit(
-    params: ChallengeTTLEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneSettingChallengeTTL> {
+  edit(params: ChallengeTTLEditParams, options?: Core.RequestOptions): Core.APIPromise<ChallengeTTL> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/challenge_ttl`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZoneSettingChallengeTTL }>
+      }) as Core.APIPromise<{ result: ChallengeTTL }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -32,14 +29,11 @@ export class ChallengeTTL extends APIResource {
    * setting and will attempt to honor any setting above 45 minutes.
    * (https://support.cloudflare.com/hc/en-us/articles/200170136).
    */
-  get(
-    params: ChallengeTTLGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneSettingChallengeTTL> {
+  get(params: ChallengeTTLGetParams, options?: Core.RequestOptions): Core.APIPromise<ChallengeTTL> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/challenge_ttl`, options) as Core.APIPromise<{
-        result: ZoneSettingChallengeTTL;
+        result: ChallengeTTL;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -52,7 +46,7 @@ export class ChallengeTTL extends APIResource {
  * setting and will attempt to honor any setting above 45 minutes.
  * (https://support.cloudflare.com/hc/en-us/articles/200170136).
  */
-export interface ZoneSettingChallengeTTL {
+export interface ChallengeTTL {
   /**
    * ID of the zone setting.
    */
@@ -122,8 +116,8 @@ export interface ChallengeTTLGetParams {
   zone_id: string;
 }
 
-export namespace ChallengeTTL {
-  export import ZoneSettingChallengeTTL = ChallengeTTLAPI.ZoneSettingChallengeTTL;
+export namespace ChallengeTTLResource {
+  export import ChallengeTTL = ChallengeTTLAPI.ChallengeTTL;
   export import ChallengeTTLEditParams = ChallengeTTLAPI.ChallengeTTLEditParams;
   export import ChallengeTTLGetParams = ChallengeTTLAPI.ChallengeTTLGetParams;
 }

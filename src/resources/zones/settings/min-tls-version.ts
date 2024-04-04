@@ -4,34 +4,28 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as MinTLSVersionAPI from 'cloudflare/resources/zones/settings/min-tls-version';
 
-export class MinTLSVersion extends APIResource {
+export class MinTLSVersionResource extends APIResource {
   /**
    * Changes Minimum TLS Version setting.
    */
-  edit(
-    params: MinTLSVersionEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneSettingMinTLSVersion> {
+  edit(params: MinTLSVersionEditParams, options?: Core.RequestOptions): Core.APIPromise<MinTLSVersion> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/min_tls_version`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZoneSettingMinTLSVersion }>
+      }) as Core.APIPromise<{ result: MinTLSVersion }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Gets Minimum TLS Version setting.
    */
-  get(
-    params: MinTLSVersionGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneSettingMinTLSVersion> {
+  get(params: MinTLSVersionGetParams, options?: Core.RequestOptions): Core.APIPromise<MinTLSVersion> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/min_tls_version`, options) as Core.APIPromise<{
-        result: ZoneSettingMinTLSVersion;
+        result: MinTLSVersion;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -42,7 +36,7 @@ export class MinTLSVersion extends APIResource {
  * specified. For example, if TLS 1.1 is selected, TLS 1.0 connections will be
  * rejected, while 1.1, 1.2, and 1.3 (if enabled) will be permitted.
  */
-export interface ZoneSettingMinTLSVersion {
+export interface MinTLSVersion {
   /**
    * ID of the zone setting.
    */
@@ -84,8 +78,8 @@ export interface MinTLSVersionGetParams {
   zone_id: string;
 }
 
-export namespace MinTLSVersion {
-  export import ZoneSettingMinTLSVersion = MinTLSVersionAPI.ZoneSettingMinTLSVersion;
+export namespace MinTLSVersionResource {
+  export import MinTLSVersion = MinTLSVersionAPI.MinTLSVersion;
   export import MinTLSVersionEditParams = MinTLSVersionAPI.MinTLSVersionEditParams;
   export import MinTLSVersionGetParams = MinTLSVersionAPI.MinTLSVersionGetParams;
 }

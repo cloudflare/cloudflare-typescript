@@ -4,7 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as SortQueryStringForCacheAPI from 'cloudflare/resources/zones/settings/sort-query-string-for-cache';
 
-export class SortQueryStringForCache extends APIResource {
+export class SortQueryStringForCacheResource extends APIResource {
   /**
    * Cloudflare will treat files with the same query strings as the same file in
    * cache, regardless of the order of the query strings. This is limited to
@@ -13,13 +13,13 @@ export class SortQueryStringForCache extends APIResource {
   edit(
     params: SortQueryStringForCacheEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneSettingSortQueryStringForCache> {
+  ): Core.APIPromise<SortQueryStringForCache> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/sort_query_string_for_cache`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZoneSettingSortQueryStringForCache }>
+      }) as Core.APIPromise<{ result: SortQueryStringForCache }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -31,11 +31,11 @@ export class SortQueryStringForCache extends APIResource {
   get(
     params: SortQueryStringForCacheGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneSettingSortQueryStringForCache> {
+  ): Core.APIPromise<SortQueryStringForCache> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/sort_query_string_for_cache`, options) as Core.APIPromise<{
-        result: ZoneSettingSortQueryStringForCache;
+        result: SortQueryStringForCache;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -46,7 +46,7 @@ export class SortQueryStringForCache extends APIResource {
  * cache, regardless of the order of the query strings. This is limited to
  * Enterprise Zones.
  */
-export interface ZoneSettingSortQueryStringForCache {
+export interface SortQueryStringForCache {
   /**
    * ID of the zone setting.
    */
@@ -88,8 +88,8 @@ export interface SortQueryStringForCacheGetParams {
   zone_id: string;
 }
 
-export namespace SortQueryStringForCache {
-  export import ZoneSettingSortQueryStringForCache = SortQueryStringForCacheAPI.ZoneSettingSortQueryStringForCache;
+export namespace SortQueryStringForCacheResource {
+  export import SortQueryStringForCache = SortQueryStringForCacheAPI.SortQueryStringForCache;
   export import SortQueryStringForCacheEditParams = SortQueryStringForCacheAPI.SortQueryStringForCacheEditParams;
   export import SortQueryStringForCacheGetParams = SortQueryStringForCacheAPI.SortQueryStringForCacheGetParams;
 }

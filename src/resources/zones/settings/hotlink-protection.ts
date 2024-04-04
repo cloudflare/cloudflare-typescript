@@ -4,7 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as HotlinkProtectionAPI from 'cloudflare/resources/zones/settings/hotlink-protection';
 
-export class HotlinkProtection extends APIResource {
+export class HotlinkProtectionResource extends APIResource {
   /**
    * When enabled, the Hotlink Protection option ensures that other sites cannot suck
    * up your bandwidth by building pages that use images hosted on your site. Anytime
@@ -17,13 +17,13 @@ export class HotlinkProtection extends APIResource {
   edit(
     params: HotlinkProtectionEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneSettingHotlinkProtection> {
+  ): Core.APIPromise<HotlinkProtection> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/hotlink_protection`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZoneSettingHotlinkProtection }>
+      }) as Core.APIPromise<{ result: HotlinkProtection }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -36,14 +36,11 @@ export class HotlinkProtection extends APIResource {
    * on their own pages.
    * (https://support.cloudflare.com/hc/en-us/articles/200170026).
    */
-  get(
-    params: HotlinkProtectionGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneSettingHotlinkProtection> {
+  get(params: HotlinkProtectionGetParams, options?: Core.RequestOptions): Core.APIPromise<HotlinkProtection> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/hotlink_protection`, options) as Core.APIPromise<{
-        result: ZoneSettingHotlinkProtection;
+        result: HotlinkProtection;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -58,7 +55,7 @@ export class HotlinkProtection extends APIResource {
  * on their own pages.
  * (https://support.cloudflare.com/hc/en-us/articles/200170026).
  */
-export interface ZoneSettingHotlinkProtection {
+export interface HotlinkProtection {
   /**
    * ID of the zone setting.
    */
@@ -100,8 +97,8 @@ export interface HotlinkProtectionGetParams {
   zone_id: string;
 }
 
-export namespace HotlinkProtection {
-  export import ZoneSettingHotlinkProtection = HotlinkProtectionAPI.ZoneSettingHotlinkProtection;
+export namespace HotlinkProtectionResource {
+  export import HotlinkProtection = HotlinkProtectionAPI.HotlinkProtection;
   export import HotlinkProtectionEditParams = HotlinkProtectionAPI.HotlinkProtectionEditParams;
   export import HotlinkProtectionGetParams = HotlinkProtectionAPI.HotlinkProtectionGetParams;
 }

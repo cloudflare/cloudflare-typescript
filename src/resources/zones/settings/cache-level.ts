@@ -4,7 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as CacheLevelAPI from 'cloudflare/resources/zones/settings/cache-level';
 
-export class CacheLevel extends APIResource {
+export class CacheLevelResource extends APIResource {
   /**
    * Cache Level functions based off the setting level. The basic setting will cache
    * most static resources (i.e., css, images, and JavaScript). The simplified
@@ -12,11 +12,11 @@ export class CacheLevel extends APIResource {
    * aggressive setting will cache all static resources, including ones with a query
    * string. (https://support.cloudflare.com/hc/en-us/articles/200168256).
    */
-  edit(params: CacheLevelEditParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingCacheLevel> {
+  edit(params: CacheLevelEditParams, options?: Core.RequestOptions): Core.APIPromise<CacheLevel> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/cache_level`, { body, ...options }) as Core.APIPromise<{
-        result: ZoneSettingCacheLevel;
+        result: CacheLevel;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -28,11 +28,11 @@ export class CacheLevel extends APIResource {
    * aggressive setting will cache all static resources, including ones with a query
    * string. (https://support.cloudflare.com/hc/en-us/articles/200168256).
    */
-  get(params: CacheLevelGetParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingCacheLevel> {
+  get(params: CacheLevelGetParams, options?: Core.RequestOptions): Core.APIPromise<CacheLevel> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/cache_level`, options) as Core.APIPromise<{
-        result: ZoneSettingCacheLevel;
+        result: CacheLevel;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -45,7 +45,7 @@ export class CacheLevel extends APIResource {
  * aggressive setting will cache all static resources, including ones with a query
  * string. (https://support.cloudflare.com/hc/en-us/articles/200168256).
  */
-export interface ZoneSettingCacheLevel {
+export interface CacheLevel {
   /**
    * ID of the zone setting.
    */
@@ -87,8 +87,8 @@ export interface CacheLevelGetParams {
   zone_id: string;
 }
 
-export namespace CacheLevel {
-  export import ZoneSettingCacheLevel = CacheLevelAPI.ZoneSettingCacheLevel;
+export namespace CacheLevelResource {
+  export import CacheLevel = CacheLevelAPI.CacheLevel;
   export import CacheLevelEditParams = CacheLevelAPI.CacheLevelEditParams;
   export import CacheLevelGetParams = CacheLevelAPI.CacheLevelGetParams;
 }

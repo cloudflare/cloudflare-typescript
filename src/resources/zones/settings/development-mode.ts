@@ -4,7 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as DevelopmentModeAPI from 'cloudflare/resources/zones/settings/development-mode';
 
-export class DevelopmentMode extends APIResource {
+export class DevelopmentModeResource extends APIResource {
   /**
    * Development Mode temporarily allows you to enter development mode for your
    * websites if you need to make changes to your site. This will bypass Cloudflare's
@@ -13,16 +13,13 @@ export class DevelopmentMode extends APIResource {
    * see those changes right away. Once entered, development mode will last for 3
    * hours and then automatically toggle off.
    */
-  edit(
-    params: DevelopmentModeEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneSettingDevelopmentMode> {
+  edit(params: DevelopmentModeEditParams, options?: Core.RequestOptions): Core.APIPromise<DevelopmentMode> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/development_mode`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZoneSettingDevelopmentMode }>
+      }) as Core.APIPromise<{ result: DevelopmentMode }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -34,14 +31,11 @@ export class DevelopmentMode extends APIResource {
    * see those changes right away. Once entered, development mode will last for 3
    * hours and then automatically toggle off.
    */
-  get(
-    params: DevelopmentModeGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneSettingDevelopmentMode> {
+  get(params: DevelopmentModeGetParams, options?: Core.RequestOptions): Core.APIPromise<DevelopmentMode> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/development_mode`, options) as Core.APIPromise<{
-        result: ZoneSettingDevelopmentMode;
+        result: DevelopmentMode;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -55,7 +49,7 @@ export class DevelopmentMode extends APIResource {
  * see those changes right away. Once entered, development mode will last for 3
  * hours and then automatically toggle off.
  */
-export interface ZoneSettingDevelopmentMode {
+export interface DevelopmentMode {
   /**
    * ID of the zone setting.
    */
@@ -104,8 +98,8 @@ export interface DevelopmentModeGetParams {
   zone_id: string;
 }
 
-export namespace DevelopmentMode {
-  export import ZoneSettingDevelopmentMode = DevelopmentModeAPI.ZoneSettingDevelopmentMode;
+export namespace DevelopmentModeResource {
+  export import DevelopmentMode = DevelopmentModeAPI.DevelopmentMode;
   export import DevelopmentModeEditParams = DevelopmentModeAPI.DevelopmentModeEditParams;
   export import DevelopmentModeGetParams = DevelopmentModeAPI.DevelopmentModeGetParams;
 }

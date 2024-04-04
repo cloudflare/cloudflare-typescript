@@ -4,16 +4,16 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as IPV6API from 'cloudflare/resources/zones/settings/ipv6';
 
-export class IPV6 extends APIResource {
+export class IPV6Resource extends APIResource {
   /**
    * Enable IPv6 on all subdomains that are Cloudflare enabled.
    * (https://support.cloudflare.com/hc/en-us/articles/200168586).
    */
-  edit(params: IPV6EditParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingIPV6> {
+  edit(params: IPV6EditParams, options?: Core.RequestOptions): Core.APIPromise<IPV6> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/ipv6`, { body, ...options }) as Core.APIPromise<{
-        result: ZoneSettingIPV6;
+        result: IPV6;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -22,12 +22,10 @@ export class IPV6 extends APIResource {
    * Enable IPv6 on all subdomains that are Cloudflare enabled.
    * (https://support.cloudflare.com/hc/en-us/articles/200168586).
    */
-  get(params: IPV6GetParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingIPV6> {
+  get(params: IPV6GetParams, options?: Core.RequestOptions): Core.APIPromise<IPV6> {
     const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zone_id}/settings/ipv6`, options) as Core.APIPromise<{
-        result: ZoneSettingIPV6;
-      }>
+      this._client.get(`/zones/${zone_id}/settings/ipv6`, options) as Core.APIPromise<{ result: IPV6 }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -36,7 +34,7 @@ export class IPV6 extends APIResource {
  * Enable IPv6 on all subdomains that are Cloudflare enabled.
  * (https://support.cloudflare.com/hc/en-us/articles/200168586).
  */
-export interface ZoneSettingIPV6 {
+export interface IPV6 {
   /**
    * ID of the zone setting.
    */
@@ -78,8 +76,8 @@ export interface IPV6GetParams {
   zone_id: string;
 }
 
-export namespace IPV6 {
-  export import ZoneSettingIPV6 = IPV6API.ZoneSettingIPV6;
+export namespace IPV6Resource {
+  export import IPV6 = IPV6API.IPV6;
   export import IPV6EditParams = IPV6API.IPV6EditParams;
   export import IPV6GetParams = IPV6API.IPV6GetParams;
 }
