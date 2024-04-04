@@ -4,16 +4,17 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as PoolsAPI from 'cloudflare/resources/user/load-balancers/pools';
+import * as Shared from 'cloudflare/resources/shared';
 import { SinglePage } from 'cloudflare/pagination';
 
 export class Pools extends APIResource {
   /**
    * Create a new pool.
    */
-  create(body: PoolCreateParams, options?: Core.RequestOptions): Core.APIPromise<LoadBalancingPool> {
+  create(body: PoolCreateParams, options?: Core.RequestOptions): Core.APIPromise<Pool> {
     return (
       this._client.post('/user/load_balancers/pools', { body, ...options }) as Core.APIPromise<{
-        result: LoadBalancingPool;
+        result: Pool;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -21,14 +22,10 @@ export class Pools extends APIResource {
   /**
    * Modify a configured pool.
    */
-  update(
-    poolId: string,
-    body: PoolUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<LoadBalancingPool> {
+  update(poolId: string, body: PoolUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Pool> {
     return (
       this._client.put(`/user/load_balancers/pools/${poolId}`, { body, ...options }) as Core.APIPromise<{
-        result: LoadBalancingPool;
+        result: Pool;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -36,22 +33,16 @@ export class Pools extends APIResource {
   /**
    * List configured pools.
    */
-  list(
-    query?: PoolListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<LoadBalancingPoolsSinglePage, LoadBalancingPool>;
-  list(options?: Core.RequestOptions): Core.PagePromise<LoadBalancingPoolsSinglePage, LoadBalancingPool>;
+  list(query?: PoolListParams, options?: Core.RequestOptions): Core.PagePromise<PoolsSinglePage, Pool>;
+  list(options?: Core.RequestOptions): Core.PagePromise<PoolsSinglePage, Pool>;
   list(
     query: PoolListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<LoadBalancingPoolsSinglePage, LoadBalancingPool> {
+  ): Core.PagePromise<PoolsSinglePage, Pool> {
     if (isRequestOptions(query)) {
       return this.list({}, query);
     }
-    return this._client.getAPIList('/user/load_balancers/pools', LoadBalancingPoolsSinglePage, {
-      query,
-      ...options,
-    });
+    return this._client.getAPIList('/user/load_balancers/pools', PoolsSinglePage, { query, ...options });
   }
 
   /**
@@ -72,14 +63,10 @@ export class Pools extends APIResource {
   /**
    * Apply changes to an existing pool, overwriting the supplied properties.
    */
-  edit(
-    poolId: string,
-    body: PoolEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<LoadBalancingPool> {
+  edit(poolId: string, body: PoolEditParams, options?: Core.RequestOptions): Core.APIPromise<Pool> {
     return (
       this._client.patch(`/user/load_balancers/pools/${poolId}`, { body, ...options }) as Core.APIPromise<{
-        result: LoadBalancingPool;
+        result: Pool;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -87,11 +74,9 @@ export class Pools extends APIResource {
   /**
    * Fetch a single configured pool.
    */
-  get(poolId: string, options?: Core.RequestOptions): Core.APIPromise<LoadBalancingPool> {
+  get(poolId: string, options?: Core.RequestOptions): Core.APIPromise<Pool> {
     return (
-      this._client.get(`/user/load_balancers/pools/${poolId}`, options) as Core.APIPromise<{
-        result: LoadBalancingPool;
-      }>
+      this._client.get(`/user/load_balancers/pools/${poolId}`, options) as Core.APIPromise<{ result: Pool }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -135,9 +120,9 @@ export class Pools extends APIResource {
   }
 }
 
-export class LoadBalancingPoolsSinglePage extends SinglePage<LoadBalancingPool> {}
+export class PoolsSinglePage extends SinglePage<Pool> {}
 
-export interface LoadBalancingPool {
+export interface Pool {
   id?: string;
 
   /**
@@ -190,7 +175,7 @@ export interface LoadBalancingPool {
   /**
    * Configures load shedding policies and percentages for the pool.
    */
-  load_shedding?: LoadBalancingPool.LoadShedding;
+  load_shedding?: Pool.LoadShedding;
 
   /**
    * The longitude of the data center containing the origins used in this pool in
@@ -232,22 +217,22 @@ export interface LoadBalancingPool {
    * Filter pool and origin health notifications by resource type or health status.
    * Use null to reset.
    */
-  notification_filter?: LoadBalancingPool.NotificationFilter | null;
+  notification_filter?: Pool.NotificationFilter | null;
 
   /**
    * Configures origin steering for the pool. Controls how origins are selected for
    * new sessions and traffic without session affinity.
    */
-  origin_steering?: LoadBalancingPool.OriginSteering;
+  origin_steering?: Pool.OriginSteering;
 
   /**
    * The list of origins within this pool. Traffic directed at this pool is balanced
    * across all currently healthy origins, provided the pool itself is healthy.
    */
-  origins?: Array<LoadBalancingPool.Origin>;
+  origins?: Array<Pool.Origin>;
 }
 
-export namespace LoadBalancingPool {
+export namespace Pool {
   /**
    * Configures load shedding policies and percentages for the pool.
    */
@@ -449,7 +434,7 @@ export type PoolReferencesResponse = Array<PoolReferencesResponse.PoolReferences
 
 export namespace PoolReferencesResponse {
   export interface PoolReferencesResponseItem {
-    reference_type?: '*' | 'referral' | 'referrer';
+    reference_type?: Shared.UnnamedSchemaRefD8600eb4758b3ae35607a0327bcd691b;
 
     resource_id?: string;
 
@@ -1373,12 +1358,12 @@ export interface PoolPreviewParams {
 }
 
 export namespace Pools {
-  export import LoadBalancingPool = PoolsAPI.LoadBalancingPool;
+  export import Pool = PoolsAPI.Pool;
   export import PoolDeleteResponse = PoolsAPI.PoolDeleteResponse;
   export import PoolHealthResponse = PoolsAPI.PoolHealthResponse;
   export import PoolPreviewResponse = PoolsAPI.PoolPreviewResponse;
   export import PoolReferencesResponse = PoolsAPI.PoolReferencesResponse;
-  export import LoadBalancingPoolsSinglePage = PoolsAPI.LoadBalancingPoolsSinglePage;
+  export import PoolsSinglePage = PoolsAPI.PoolsSinglePage;
   export import PoolCreateParams = PoolsAPI.PoolCreateParams;
   export import PoolUpdateParams = PoolsAPI.PoolUpdateParams;
   export import PoolListParams = PoolsAPI.PoolListParams;

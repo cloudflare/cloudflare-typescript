@@ -106,6 +106,19 @@ export class Items extends APIResource {
 
 export class ItemListResponsesCursorPagination extends CursorPagination<ItemListResponse> {}
 
+export interface UnnamedSchemaRef34bb6e31800bc0207c083affa12d2775 {
+  after?: string;
+
+  before?: string;
+}
+
+export interface UnnamedSchemaRef46621d4d5b6644caae5c9167b8e28865 {
+  /**
+   * The unique operation ID of the asynchronous action.
+   */
+  operation_id?: string;
+}
+
 export interface ItemCreateResponse {
   /**
    * The unique operation ID of the asynchronous action.
@@ -348,6 +361,8 @@ export namespace ItemDeleteParams {
 }
 
 export namespace Items {
+  export import UnnamedSchemaRef34bb6e31800bc0207c083affa12d2775 = ItemsAPI.UnnamedSchemaRef34bb6e31800bc0207c083affa12d2775;
+  export import UnnamedSchemaRef46621d4d5b6644caae5c9167b8e28865 = ItemsAPI.UnnamedSchemaRef46621d4d5b6644caae5c9167b8e28865;
   export import ItemCreateResponse = ItemsAPI.ItemCreateResponse;
   export import ItemUpdateResponse = ItemsAPI.ItemUpdateResponse;
   export import ItemListResponse = ItemsAPI.ItemListResponse;

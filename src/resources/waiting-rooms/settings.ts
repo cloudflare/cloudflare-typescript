@@ -43,6 +43,15 @@ export class Settings extends APIResource {
   }
 }
 
+export interface UnnamedSchemaRef59ecd22a3d62548e441274daec82ee7a {
+  /**
+   * Whether to allow verified search engine crawlers to bypass all waiting rooms on
+   * this zone. Verified search engine crawlers will not be tracked or counted by the
+   * waiting room system, and will not appear in waiting room analytics.
+   */
+  search_engine_crawler_bypass: boolean;
+}
+
 export interface SettingUpdateResponse {
   /**
    * Whether to allow verified search engine crawlers to bypass all waiting rooms on
@@ -108,6 +117,7 @@ export interface SettingGetParams {
 }
 
 export namespace Settings {
+  export import UnnamedSchemaRef59ecd22a3d62548e441274daec82ee7a = SettingsAPI.UnnamedSchemaRef59ecd22a3d62548e441274daec82ee7a;
   export import SettingUpdateResponse = SettingsAPI.SettingUpdateResponse;
   export import SettingEditResponse = SettingsAPI.SettingEditResponse;
   export import SettingGetResponse = SettingsAPI.SettingGetResponse;

@@ -77,6 +77,8 @@ export interface DevicesSplitTunnelInclude {
   host?: string;
 }
 
+export type UnnamedSchemaRef5e0c6134a624678286f4a424b001870a = Array<DevicesSplitTunnelInclude>;
+
 export type IncludeUpdateResponse = Array<DevicesSplitTunnelInclude>;
 
 export type IncludeGetResponse = Array<DevicesSplitTunnelInclude>;
@@ -103,6 +105,7 @@ export interface IncludeGetParams {
 
 export namespace Includes {
   export import DevicesSplitTunnelInclude = IncludesAPI.DevicesSplitTunnelInclude;
+  export import UnnamedSchemaRef5e0c6134a624678286f4a424b001870a = IncludesAPI.UnnamedSchemaRef5e0c6134a624678286f4a424b001870a;
   export import IncludeUpdateResponse = IncludesAPI.IncludeUpdateResponse;
   export import IncludeGetResponse = IncludesAPI.IncludeGetResponse;
   export import DevicesSplitTunnelIncludesSinglePage = IncludesAPI.DevicesSplitTunnelIncludesSinglePage;

@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ReportsAPI from 'cloudflare/resources/dns/analytics/reports/reports';
+import * as DNSAPI from 'cloudflare/resources/dns/dns';
 import * as BytimesAPI from 'cloudflare/resources/dns/analytics/reports/bytimes';
 
 export class Reports extends APIResource {
@@ -29,7 +30,7 @@ export interface DNSAnalyticsReport {
   /**
    * Array with one row per combination of dimension values.
    */
-  data: Array<DNSAnalyticsReport.Data>;
+  data: Array<DNSAPI.UnnamedSchemaRef6595695ff25b0614667b25f66b7bbaba>;
 
   /**
    * Number of seconds between current time and last processed event, in another
@@ -64,19 +65,6 @@ export interface DNSAnalyticsReport {
 }
 
 export namespace DNSAnalyticsReport {
-  export interface Data {
-    /**
-     * Array of dimension values, representing the combination of dimension values
-     * corresponding to this row.
-     */
-    dimensions: Array<string>;
-
-    /**
-     * Array with one item per requested metric. Each item is a single value.
-     */
-    metrics: Array<number>;
-  }
-
   export interface Query {
     /**
      * Array of dimension names.

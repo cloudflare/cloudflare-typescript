@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as AddressMapsAPI from 'cloudflare/resources/addressing/address-maps/address-maps';
+import * as Shared from 'cloudflare/resources/shared';
 import * as AccountsAPI from 'cloudflare/resources/addressing/address-maps/accounts';
 import * as IPsAPI from 'cloudflare/resources/addressing/address-maps/ips';
 import * as ZonesAPI from 'cloudflare/resources/addressing/address-maps/zones';
@@ -52,13 +53,13 @@ export class AddressMaps extends APIResource {
     addressMapId: string,
     params: AddressMapDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AddressMapDeleteResponse | null> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef67bbb1ccdd42c3e2937b9fd19f791151 | null> {
     const { account_id, body } = params;
     return (
       this._client.delete(`/accounts/${account_id}/addressing/address_maps/${addressMapId}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: AddressMapDeleteResponse | null }>
+      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef67bbb1ccdd42c3e2937b9fd19f791151 | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -228,8 +229,6 @@ export namespace AddressMapCreateResponse {
   }
 }
 
-export type AddressMapDeleteResponse = unknown | Array<unknown> | string;
-
 export interface AddressMapGetResponse {
   /**
    * Identifier
@@ -391,7 +390,6 @@ export interface AddressMapGetParams {
 export namespace AddressMaps {
   export import AddressingAddressMaps = AddressMapsAPI.AddressingAddressMaps;
   export import AddressMapCreateResponse = AddressMapsAPI.AddressMapCreateResponse;
-  export import AddressMapDeleteResponse = AddressMapsAPI.AddressMapDeleteResponse;
   export import AddressMapGetResponse = AddressMapsAPI.AddressMapGetResponse;
   export import AddressingAddressMapsSinglePage = AddressMapsAPI.AddressingAddressMapsSinglePage;
   export import AddressMapCreateParams = AddressMapsAPI.AddressMapCreateParams;
@@ -400,18 +398,12 @@ export namespace AddressMaps {
   export import AddressMapEditParams = AddressMapsAPI.AddressMapEditParams;
   export import AddressMapGetParams = AddressMapsAPI.AddressMapGetParams;
   export import Accounts = AccountsAPI.Accounts;
-  export import AccountUpdateResponse = AccountsAPI.AccountUpdateResponse;
-  export import AccountDeleteResponse = AccountsAPI.AccountDeleteResponse;
   export import AccountUpdateParams = AccountsAPI.AccountUpdateParams;
   export import AccountDeleteParams = AccountsAPI.AccountDeleteParams;
   export import IPs = IPsAPI.IPs;
-  export import IPUpdateResponse = IPsAPI.IPUpdateResponse;
-  export import IPDeleteResponse = IPsAPI.IPDeleteResponse;
   export import IPUpdateParams = IPsAPI.IPUpdateParams;
   export import IPDeleteParams = IPsAPI.IPDeleteParams;
   export import Zones = ZonesAPI.Zones;
-  export import ZoneUpdateResponse = ZonesAPI.ZoneUpdateResponse;
-  export import ZoneDeleteResponse = ZonesAPI.ZoneDeleteResponse;
   export import ZoneUpdateParams = ZonesAPI.ZoneUpdateParams;
   export import ZoneDeleteParams = ZonesAPI.ZoneDeleteParams;
 }

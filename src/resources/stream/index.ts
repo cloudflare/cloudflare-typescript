@@ -2,19 +2,10 @@
 
 export { CopyCreateParams, Copy } from './copy';
 export { DirectUploadCreateResponse, DirectUploadCreateParams, DirectUpload } from './direct-upload';
-export {
-  DownloadCreateResponse,
-  DownloadDeleteResponse,
-  DownloadGetResponse,
-  DownloadCreateParams,
-  DownloadDeleteParams,
-  DownloadGetParams,
-  Downloads,
-} from './downloads';
+export { DownloadCreateParams, DownloadDeleteParams, DownloadGetParams, Downloads } from './downloads';
 export { EmbedGetResponse, EmbedGetParams, Embed } from './embed';
 export {
   StreamAudio,
-  AudioTrackDeleteResponse,
   AudioTrackGetResponse,
   AudioTrackDeleteParams,
   AudioTrackCopyParams,
@@ -24,7 +15,6 @@ export {
 } from './audio-tracks';
 export {
   StreamCaptions,
-  CaptionUpdateResponse,
   CaptionDeleteResponse,
   CaptionGetResponse,
   CaptionUpdateParams,
@@ -33,15 +23,7 @@ export {
   Captions,
 } from './captions';
 export { StreamClipping, ClipCreateParams, Clip } from './clip';
-export {
-  StreamKeys,
-  KeyDeleteResponse,
-  KeyGetResponse,
-  KeyCreateParams,
-  KeyDeleteParams,
-  KeyGetParams,
-  Keys,
-} from './keys';
+export { StreamKeys, KeyGetResponse, KeyCreateParams, KeyDeleteParams, KeyGetParams, Keys } from './keys';
 export {
   StreamLiveInput,
   LiveInputListResponse,
@@ -63,9 +45,6 @@ export {
 } from './stream';
 export {
   StreamWatermarks,
-  WatermarkCreateResponse,
-  WatermarkDeleteResponse,
-  WatermarkGetResponse,
   WatermarkCreateParams,
   WatermarkListParams,
   WatermarkDeleteParams,
@@ -75,12 +54,4 @@ export {
 } from './watermarks';
 export { TokenCreateResponse, TokenCreateParams, Token } from './token';
 export { VideoStorageUsageResponse, VideoStorageUsageParams, Videos } from './videos';
-export {
-  WebhookUpdateResponse,
-  WebhookDeleteResponse,
-  WebhookGetResponse,
-  WebhookUpdateParams,
-  WebhookDeleteParams,
-  WebhookGetParams,
-  Webhooks,
-} from './webhooks';
+export { WebhookUpdateParams, WebhookDeleteParams, WebhookGetParams, Webhooks } from './webhooks';

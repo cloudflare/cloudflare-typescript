@@ -2,8 +2,15 @@
 
 export { Datasets } from './datasets/index';
 export { InstantLogpushJob, EdgeGetResponse, EdgeCreateParams, EdgeGetParams, Edge } from './edge';
+export { Logpush } from './logpush';
 export {
-  JobDeleteResponse,
+  OwnershipCreateResponse,
+  OwnershipCreateParams,
+  OwnershipValidateParams,
+  Ownership,
+} from './ownership';
+export {
+  UnnamedSchemaRef2f2e9d7fbcc0e6856257a03a1dbbdfb5,
   JobCreateParams,
   JobUpdateParams,
   JobListParams,
@@ -11,14 +18,6 @@ export {
   JobGetParams,
   Jobs,
 } from './jobs';
-export { Logpush } from './logpush';
-export {
-  OwnershipCreateResponse,
-  OwnershipValidateResponse,
-  OwnershipCreateParams,
-  OwnershipValidateParams,
-  Ownership,
-} from './ownership';
 export {
   ValidateDestinationResponse,
   ValidateOriginResponse,

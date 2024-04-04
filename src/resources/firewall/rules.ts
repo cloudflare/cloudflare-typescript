@@ -139,7 +139,7 @@ export interface FirewallFilterRule {
    */
   description?: string;
 
-  filter?: FiltersAPI.FirewallFilter | FirewallFilterRule.LegacyJhsDeletedFilter;
+  filter?: UnnamedSchemaRefAb48d2d33259c9107401d174735701c7;
 
   /**
    * When true, indicates that the firewall rule is currently paused.
@@ -161,7 +161,13 @@ export interface FirewallFilterRule {
   ref?: string;
 }
 
-export namespace FirewallFilterRule {
+export type UnnamedSchemaRef6fe6c1eba94d9c3f475fb22f0118bf57 = Array<FirewallFilterRule>;
+
+export type UnnamedSchemaRefAb48d2d33259c9107401d174735701c7 =
+  | FiltersAPI.FirewallFilter
+  | UnnamedSchemaRefAb48d2d33259c9107401d174735701c7.LegacyJhsDeletedFilter;
+
+export namespace UnnamedSchemaRefAb48d2d33259c9107401d174735701c7 {
   export interface LegacyJhsDeletedFilter {
     /**
      * The unique identifier of the filter.
@@ -229,6 +235,8 @@ export interface RuleGetParams {
 
 export namespace Rules {
   export import FirewallFilterRule = RulesAPI.FirewallFilterRule;
+  export import UnnamedSchemaRef6fe6c1eba94d9c3f475fb22f0118bf57 = RulesAPI.UnnamedSchemaRef6fe6c1eba94d9c3f475fb22f0118bf57;
+  export import UnnamedSchemaRefAb48d2d33259c9107401d174735701c7 = RulesAPI.UnnamedSchemaRefAb48d2d33259c9107401d174735701c7;
   export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
   export import RuleEditResponse = RulesAPI.RuleEditResponse;
   export import FirewallFilterRulesV4PagePaginationArray = RulesAPI.FirewallFilterRulesV4PagePaginationArray;

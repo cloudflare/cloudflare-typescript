@@ -3,17 +3,21 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as RoutesAPI from 'cloudflare/resources/workers/routes';
+import * as Shared from 'cloudflare/resources/shared';
 import { SinglePage } from 'cloudflare/pagination';
 
 export class Routes extends APIResource {
   /**
    * Creates a route that maps a URL pattern to a Worker.
    */
-  create(params: RouteCreateParams, options?: Core.RequestOptions): Core.APIPromise<RouteCreateResponse> {
+  create(
+    params: RouteCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Shared.UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f> {
     const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/workers/routes`, { body, ...options }) as Core.APIPromise<{
-        result: RouteCreateResponse;
+        result: Shared.UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -53,13 +57,13 @@ export class Routes extends APIResource {
     routeId: string,
     params: RouteDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RouteDeleteResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f> {
     const { zone_id, body } = params;
     return (
       this._client.delete(`/zones/${zone_id}/workers/routes/${routeId}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: RouteDeleteResponse }>
+      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -91,10 +95,6 @@ export interface WorkersRoute {
    */
   script: string;
 }
-
-export type RouteCreateResponse = unknown | string;
-
-export type RouteDeleteResponse = unknown | string;
 
 export interface RouteCreateParams {
   /**
@@ -158,8 +158,6 @@ export interface RouteGetParams {
 
 export namespace Routes {
   export import WorkersRoute = RoutesAPI.WorkersRoute;
-  export import RouteCreateResponse = RoutesAPI.RouteCreateResponse;
-  export import RouteDeleteResponse = RoutesAPI.RouteDeleteResponse;
   export import WorkersRoutesSinglePage = RoutesAPI.WorkersRoutesSinglePage;
   export import RouteCreateParams = RoutesAPI.RouteCreateParams;
   export import RouteUpdateParams = RoutesAPI.RouteUpdateParams;

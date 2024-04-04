@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as SmartRoutingAPI from 'cloudflare/resources/argo/smart-routing';
+import * as Shared from 'cloudflare/resources/shared';
 
 export class SmartRouting extends APIResource {
   /**
@@ -11,11 +12,11 @@ export class SmartRouting extends APIResource {
   edit(
     params: SmartRoutingEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SmartRoutingEditResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/argo/smart_routing`, { body, ...options }) as Core.APIPromise<{
-        result: SmartRoutingEditResponse;
+        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -26,19 +27,15 @@ export class SmartRouting extends APIResource {
   get(
     params: SmartRoutingGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SmartRoutingGetResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/argo/smart_routing`, options) as Core.APIPromise<{
-        result: SmartRoutingGetResponse;
+        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
-
-export type SmartRoutingEditResponse = unknown | string | null;
-
-export type SmartRoutingGetResponse = unknown | string | null;
 
 export interface SmartRoutingEditParams {
   /**
@@ -60,8 +57,6 @@ export interface SmartRoutingGetParams {
 }
 
 export namespace SmartRouting {
-  export import SmartRoutingEditResponse = SmartRoutingAPI.SmartRoutingEditResponse;
-  export import SmartRoutingGetResponse = SmartRoutingAPI.SmartRoutingGetResponse;
   export import SmartRoutingEditParams = SmartRoutingAPI.SmartRoutingEditParams;
   export import SmartRoutingGetParams = SmartRoutingAPI.SmartRoutingGetParams;
 }

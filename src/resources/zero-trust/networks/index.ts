@@ -4,6 +4,7 @@ export { Networks } from './networks';
 export {
   TunnelRoute,
   TunnelTeamnet,
+  UnnamedSchemaRefC125d35cbb7f93aab989cd19bd764ed6,
   RouteCreateParams,
   RouteListParams,
   RouteDeleteParams,
@@ -13,9 +14,6 @@ export {
 } from './routes/index';
 export {
   TunnelVirtualNetwork,
-  VirtualNetworkCreateResponse,
-  VirtualNetworkDeleteResponse,
-  VirtualNetworkEditResponse,
   VirtualNetworkCreateParams,
   VirtualNetworkListParams,
   VirtualNetworkDeleteParams,

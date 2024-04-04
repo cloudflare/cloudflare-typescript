@@ -36,6 +36,26 @@ export class Logging extends APIResource {
   }
 }
 
+/**
+ * Logging settings by rule type.
+ */
+export interface UnnamedSchemaRefE86eeb84b7e922c35cfb0031a6309f7b {
+  /**
+   * Logging settings for DNS firewall.
+   */
+  dns?: unknown;
+
+  /**
+   * Logging settings for HTTP/HTTPS firewall.
+   */
+  http?: unknown;
+
+  /**
+   * Logging settings for Network firewall.
+   */
+  l4?: unknown;
+}
+
 export interface ZeroTrustGatewayGatewayAccountLoggingSettings {
   /**
    * Redact personally identifiable information from activity logging (PII fields
@@ -46,29 +66,7 @@ export interface ZeroTrustGatewayGatewayAccountLoggingSettings {
   /**
    * Logging settings by rule type.
    */
-  settings_by_rule_type?: ZeroTrustGatewayGatewayAccountLoggingSettings.SettingsByRuleType;
-}
-
-export namespace ZeroTrustGatewayGatewayAccountLoggingSettings {
-  /**
-   * Logging settings by rule type.
-   */
-  export interface SettingsByRuleType {
-    /**
-     * Logging settings for DNS firewall.
-     */
-    dns?: unknown;
-
-    /**
-     * Logging settings for HTTP/HTTPS firewall.
-     */
-    http?: unknown;
-
-    /**
-     * Logging settings for Network firewall.
-     */
-    l4?: unknown;
-  }
+  settings_by_rule_type?: UnnamedSchemaRefE86eeb84b7e922c35cfb0031a6309f7b;
 }
 
 export interface LoggingUpdateParams {
@@ -87,29 +85,7 @@ export interface LoggingUpdateParams {
   /**
    * Body param: Logging settings by rule type.
    */
-  settings_by_rule_type?: LoggingUpdateParams.SettingsByRuleType;
-}
-
-export namespace LoggingUpdateParams {
-  /**
-   * Logging settings by rule type.
-   */
-  export interface SettingsByRuleType {
-    /**
-     * Logging settings for DNS firewall.
-     */
-    dns?: unknown;
-
-    /**
-     * Logging settings for HTTP/HTTPS firewall.
-     */
-    http?: unknown;
-
-    /**
-     * Logging settings for Network firewall.
-     */
-    l4?: unknown;
-  }
+  settings_by_rule_type?: UnnamedSchemaRefE86eeb84b7e922c35cfb0031a6309f7b;
 }
 
 export interface LoggingGetParams {
@@ -117,6 +93,7 @@ export interface LoggingGetParams {
 }
 
 export namespace Logging {
+  export import UnnamedSchemaRefE86eeb84b7e922c35cfb0031a6309f7b = LoggingAPI.UnnamedSchemaRefE86eeb84b7e922c35cfb0031a6309f7b;
   export import ZeroTrustGatewayGatewayAccountLoggingSettings = LoggingAPI.ZeroTrustGatewayGatewayAccountLoggingSettings;
   export import LoggingUpdateParams = LoggingAPI.LoggingUpdateParams;
   export import LoggingGetParams = LoggingAPI.LoggingGetParams;

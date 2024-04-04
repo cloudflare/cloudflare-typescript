@@ -42,23 +42,23 @@ export interface IntelPhishingURLInfo {
   /**
    * List of categorizations applied to this submission.
    */
-  categorizations?: Array<IntelPhishingURLInfo.Categorization>;
+  categorizations?: Array<UnnamedSchemaRef209db30ed499548152d6f3bccf720b54>;
 
   /**
    * List of model results for completed scans.
    */
-  model_results?: Array<IntelPhishingURLInfo.ModelResult>;
+  model_results?: Array<UnnamedSchemaRef9b4c9779a35b172cb69c71389ebc7014>;
 
   /**
    * List of signatures that matched against site content found when crawling the
    * URL.
    */
-  rule_matches?: Array<IntelPhishingURLInfo.RuleMatch>;
+  rule_matches?: Array<UnnamedSchemaRef3e10ea08deb8102a27500f986488c1e8>;
 
   /**
    * Status of the most recent scan found.
    */
-  scan_status?: IntelPhishingURLInfo.ScanStatus;
+  scan_status?: UnnamedSchemaRefA64e2a18a86750b6bd72cdf37ecfd869;
 
   /**
    * For internal use.
@@ -76,128 +76,124 @@ export interface IntelPhishingURLInfo {
   url?: string;
 }
 
-export namespace IntelPhishingURLInfo {
-  export interface Categorization {
-    /**
-     * Name of the category applied.
-     */
-    category?: string;
-
-    /**
-     * Result of human review for this categorization.
-     */
-    verification_status?: string;
-  }
-
-  export interface ModelResult {
-    /**
-     * Name of the model.
-     */
-    model_name?: string;
-
-    /**
-     * Score output by the model for this submission.
-     */
-    model_score?: number;
-  }
-
-  export interface RuleMatch {
-    /**
-     * For internal use.
-     */
-    banning?: boolean;
-
-    /**
-     * For internal use.
-     */
-    blocking?: boolean;
-
-    /**
-     * Description of the signature that matched.
-     */
-    description?: string;
-
-    /**
-     * Name of the signature that matched.
-     */
-    name?: string;
-  }
-
-  /**
-   * Status of the most recent scan found.
-   */
-  export interface ScanStatus {
-    /**
-     * Timestamp of when the submission was processed.
-     */
-    last_processed?: string;
-
-    /**
-     * For internal use.
-     */
-    scan_complete?: boolean;
-
-    /**
-     * Status code that the crawler received when loading the submitted URL.
-     */
-    status_code?: number;
-
-    /**
-     * ID of the most recent submission.
-     */
-    submission_id?: number;
-  }
-}
-
 export interface IntelPhishingURLSubmit {
   /**
    * URLs that were excluded from scanning because their domain is in our no-scan
    * list.
    */
-  excluded_urls?: Array<IntelPhishingURLSubmit.ExcludedURL>;
+  excluded_urls?: Array<UnnamedSchemaRef767c0981cf47f45f0c766253dbd18669>;
 
   /**
    * URLs that were skipped because the same URL is currently being scanned
    */
-  skipped_urls?: Array<IntelPhishingURLSubmit.SkippedURL>;
+  skipped_urls?: Array<UnnamedSchemaRef44e66100b948bfe723054c56b6144766>;
 
   /**
    * URLs that were successfully submitted for scanning.
    */
-  submitted_urls?: Array<IntelPhishingURLSubmit.SubmittedURL>;
+  submitted_urls?: Array<UnnamedSchemaRef39419d70e2399b28b15cd660afd342fb>;
 }
 
-export namespace IntelPhishingURLSubmit {
-  export interface ExcludedURL {
-    /**
-     * URL that was excluded.
-     */
-    url?: string;
-  }
+export interface UnnamedSchemaRef209db30ed499548152d6f3bccf720b54 {
+  /**
+   * Name of the category applied.
+   */
+  category?: string;
 
-  export interface SkippedURL {
-    /**
-     * URL that was skipped.
-     */
-    url?: string;
+  /**
+   * Result of human review for this categorization.
+   */
+  verification_status?: string;
+}
 
-    /**
-     * ID of the submission of that URL that is currently scanning.
-     */
-    url_id?: number;
-  }
+export interface UnnamedSchemaRef39419d70e2399b28b15cd660afd342fb {
+  /**
+   * URL that was submitted.
+   */
+  url?: string;
 
-  export interface SubmittedURL {
-    /**
-     * URL that was submitted.
-     */
-    url?: string;
+  /**
+   * ID assigned to this URL submission. Used to retrieve scanning results.
+   */
+  url_id?: number;
+}
 
-    /**
-     * ID assigned to this URL submission. Used to retrieve scanning results.
-     */
-    url_id?: number;
-  }
+export interface UnnamedSchemaRef3e10ea08deb8102a27500f986488c1e8 {
+  /**
+   * For internal use.
+   */
+  banning?: boolean;
+
+  /**
+   * For internal use.
+   */
+  blocking?: boolean;
+
+  /**
+   * Description of the signature that matched.
+   */
+  description?: string;
+
+  /**
+   * Name of the signature that matched.
+   */
+  name?: string;
+}
+
+export interface UnnamedSchemaRef44e66100b948bfe723054c56b6144766 {
+  /**
+   * URL that was skipped.
+   */
+  url?: string;
+
+  /**
+   * ID of the submission of that URL that is currently scanning.
+   */
+  url_id?: number;
+}
+
+export interface UnnamedSchemaRef767c0981cf47f45f0c766253dbd18669 {
+  /**
+   * URL that was excluded.
+   */
+  url?: string;
+}
+
+export interface UnnamedSchemaRef9b4c9779a35b172cb69c71389ebc7014 {
+  /**
+   * Name of the model.
+   */
+  model_name?: string;
+
+  /**
+   * Score output by the model for this submission.
+   */
+  model_score?: number;
+}
+
+/**
+ * Status of the most recent scan found.
+ */
+export interface UnnamedSchemaRefA64e2a18a86750b6bd72cdf37ecfd869 {
+  /**
+   * Timestamp of when the submission was processed.
+   */
+  last_processed?: string;
+
+  /**
+   * For internal use.
+   */
+  scan_complete?: boolean;
+
+  /**
+   * Status code that the crawler received when loading the submitted URL.
+   */
+  status_code?: number;
+
+  /**
+   * ID of the most recent submission.
+   */
+  submission_id?: number;
 }
 
 export interface BrandProtectionSubmitParams {
@@ -241,6 +237,13 @@ export namespace BrandProtectionURLInfoParams {
 export namespace BrandProtection {
   export import IntelPhishingURLInfo = BrandProtectionAPI.IntelPhishingURLInfo;
   export import IntelPhishingURLSubmit = BrandProtectionAPI.IntelPhishingURLSubmit;
+  export import UnnamedSchemaRef209db30ed499548152d6f3bccf720b54 = BrandProtectionAPI.UnnamedSchemaRef209db30ed499548152d6f3bccf720b54;
+  export import UnnamedSchemaRef39419d70e2399b28b15cd660afd342fb = BrandProtectionAPI.UnnamedSchemaRef39419d70e2399b28b15cd660afd342fb;
+  export import UnnamedSchemaRef3e10ea08deb8102a27500f986488c1e8 = BrandProtectionAPI.UnnamedSchemaRef3e10ea08deb8102a27500f986488c1e8;
+  export import UnnamedSchemaRef44e66100b948bfe723054c56b6144766 = BrandProtectionAPI.UnnamedSchemaRef44e66100b948bfe723054c56b6144766;
+  export import UnnamedSchemaRef767c0981cf47f45f0c766253dbd18669 = BrandProtectionAPI.UnnamedSchemaRef767c0981cf47f45f0c766253dbd18669;
+  export import UnnamedSchemaRef9b4c9779a35b172cb69c71389ebc7014 = BrandProtectionAPI.UnnamedSchemaRef9b4c9779a35b172cb69c71389ebc7014;
+  export import UnnamedSchemaRefA64e2a18a86750b6bd72cdf37ecfd869 = BrandProtectionAPI.UnnamedSchemaRefA64e2a18a86750b6bd72cdf37ecfd869;
   export import BrandProtectionSubmitParams = BrandProtectionAPI.BrandProtectionSubmitParams;
   export import BrandProtectionURLInfoParams = BrandProtectionAPI.BrandProtectionURLInfoParams;
 }

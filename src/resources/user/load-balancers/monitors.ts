@@ -3,16 +3,17 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as MonitorsAPI from 'cloudflare/resources/user/load-balancers/monitors';
+import * as Shared from 'cloudflare/resources/shared';
 import { SinglePage } from 'cloudflare/pagination';
 
 export class Monitors extends APIResource {
   /**
    * Create a configured monitor.
    */
-  create(body: MonitorCreateParams, options?: Core.RequestOptions): Core.APIPromise<LoadBalancingMonitor> {
+  create(body: MonitorCreateParams, options?: Core.RequestOptions): Core.APIPromise<Monitor> {
     return (
       this._client.post('/user/load_balancers/monitors', { body, ...options }) as Core.APIPromise<{
-        result: LoadBalancingMonitor;
+        result: Monitor;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -24,22 +25,20 @@ export class Monitors extends APIResource {
     monitorId: string,
     body: MonitorUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LoadBalancingMonitor> {
+  ): Core.APIPromise<Monitor> {
     return (
       this._client.put(`/user/load_balancers/monitors/${monitorId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: LoadBalancingMonitor }>
+      }) as Core.APIPromise<{ result: Monitor }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List configured monitors for a user.
    */
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<LoadBalancingMonitorsSinglePage, LoadBalancingMonitor> {
-    return this._client.getAPIList('/user/load_balancers/monitors', LoadBalancingMonitorsSinglePage, options);
+  list(options?: Core.RequestOptions): Core.PagePromise<MonitorsSinglePage, Monitor> {
+    return this._client.getAPIList('/user/load_balancers/monitors', MonitorsSinglePage, options);
   }
 
   /**
@@ -61,26 +60,22 @@ export class Monitors extends APIResource {
   /**
    * Apply changes to an existing monitor, overwriting the supplied properties.
    */
-  edit(
-    monitorId: string,
-    body: MonitorEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<LoadBalancingMonitor> {
+  edit(monitorId: string, body: MonitorEditParams, options?: Core.RequestOptions): Core.APIPromise<Monitor> {
     return (
       this._client.patch(`/user/load_balancers/monitors/${monitorId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: LoadBalancingMonitor }>
+      }) as Core.APIPromise<{ result: Monitor }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List a single configured monitor for a user.
    */
-  get(monitorId: string, options?: Core.RequestOptions): Core.APIPromise<LoadBalancingMonitor> {
+  get(monitorId: string, options?: Core.RequestOptions): Core.APIPromise<Monitor> {
     return (
       this._client.get(`/user/load_balancers/monitors/${monitorId}`, options) as Core.APIPromise<{
-        result: LoadBalancingMonitor;
+        result: Monitor;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -117,9 +112,9 @@ export class Monitors extends APIResource {
   }
 }
 
-export class LoadBalancingMonitorsSinglePage extends SinglePage<LoadBalancingMonitor> {}
+export class MonitorsSinglePage extends SinglePage<Monitor> {}
 
-export interface LoadBalancingMonitor {
+export interface Monitor {
   id?: string;
 
   /**
@@ -244,7 +239,7 @@ export type MonitorReferencesResponse = Array<MonitorReferencesResponse.MonitorR
 
 export namespace MonitorReferencesResponse {
   export interface MonitorReferencesResponseItem {
-    reference_type?: '*' | 'referral' | 'referrer';
+    reference_type?: Shared.UnnamedSchemaRefD8600eb4758b3ae35607a0327bcd691b;
 
     resource_id?: string;
 
@@ -653,11 +648,11 @@ export interface MonitorPreviewParams {
 }
 
 export namespace Monitors {
-  export import LoadBalancingMonitor = MonitorsAPI.LoadBalancingMonitor;
+  export import Monitor = MonitorsAPI.Monitor;
   export import MonitorDeleteResponse = MonitorsAPI.MonitorDeleteResponse;
   export import MonitorPreviewResponse = MonitorsAPI.MonitorPreviewResponse;
   export import MonitorReferencesResponse = MonitorsAPI.MonitorReferencesResponse;
-  export import LoadBalancingMonitorsSinglePage = MonitorsAPI.LoadBalancingMonitorsSinglePage;
+  export import MonitorsSinglePage = MonitorsAPI.MonitorsSinglePage;
   export import MonitorCreateParams = MonitorsAPI.MonitorCreateParams;
   export import MonitorUpdateParams = MonitorsAPI.MonitorUpdateParams;
   export import MonitorDeleteParams = MonitorsAPI.MonitorDeleteParams;

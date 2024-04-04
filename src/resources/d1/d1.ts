@@ -12,7 +12,6 @@ export namespace D1 {
   export import D1CreateDatabase = DatabaseAPI.D1CreateDatabase;
   export import D1DatabaseDetails = DatabaseAPI.D1DatabaseDetails;
   export import D1QueryResult = DatabaseAPI.D1QueryResult;
-  export import DatabaseDeleteResponse = DatabaseAPI.DatabaseDeleteResponse;
   export import DatabaseQueryResponse = DatabaseAPI.DatabaseQueryResponse;
   export import D1CreateDatabasesV4PagePaginationArray = DatabaseAPI.D1CreateDatabasesV4PagePaginationArray;
   export import DatabaseCreateParams = DatabaseAPI.DatabaseCreateParams;

@@ -7,10 +7,12 @@ import * as ScriptsAPI from 'cloudflare/resources/workers/scripts/scripts';
 import * as BindingsAPI from 'cloudflare/resources/workers/scripts/bindings';
 import * as ContentAPI from 'cloudflare/resources/workers/scripts/content';
 import * as ContentV2API from 'cloudflare/resources/workers/scripts/content-v2';
+import * as DeploymentsAPI from 'cloudflare/resources/workers/scripts/deployments';
 import * as SchedulesAPI from 'cloudflare/resources/workers/scripts/schedules';
 import * as SettingsAPI from 'cloudflare/resources/workers/scripts/settings';
 import * as TailAPI from 'cloudflare/resources/workers/scripts/tail';
 import * as UsageModelAPI from 'cloudflare/resources/workers/scripts/usage-model';
+import * as VersionsAPI from 'cloudflare/resources/workers/scripts/versions/versions';
 import { type Uploadable, maybeMultipartFormRequestOptions } from 'cloudflare/core';
 import { SinglePage } from 'cloudflare/pagination';
 
@@ -22,6 +24,8 @@ export class Scripts extends APIResource {
   content: ContentAPI.Content = new ContentAPI.Content(this._client);
   contentV2: ContentV2API.ContentV2 = new ContentV2API.ContentV2(this._client);
   settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
+  deployments: DeploymentsAPI.Deployments = new DeploymentsAPI.Deployments(this._client);
+  versions: VersionsAPI.Versions = new VersionsAPI.Versions(this._client);
 
   /**
    * Upload a worker module.
@@ -471,13 +475,13 @@ export namespace Scripts {
   export import BindingGetResponse = BindingsAPI.BindingGetResponse;
   export import BindingGetParams = BindingsAPI.BindingGetParams;
   export import Schedules = SchedulesAPI.Schedules;
+  export import UnnamedSchemaRefC8302c265937f9d6f96fd69644e56b26 = SchedulesAPI.UnnamedSchemaRefC8302c265937f9d6f96fd69644e56b26;
   export import ScheduleUpdateResponse = SchedulesAPI.ScheduleUpdateResponse;
   export import ScheduleGetResponse = SchedulesAPI.ScheduleGetResponse;
   export import ScheduleUpdateParams = SchedulesAPI.ScheduleUpdateParams;
   export import ScheduleGetParams = SchedulesAPI.ScheduleGetParams;
   export import Tail = TailAPI.Tail;
   export import TailCreateResponse = TailAPI.TailCreateResponse;
-  export import TailDeleteResponse = TailAPI.TailDeleteResponse;
   export import TailGetResponse = TailAPI.TailGetResponse;
   export import TailCreateParams = TailAPI.TailCreateParams;
   export import TailDeleteParams = TailAPI.TailDeleteParams;
@@ -496,4 +500,17 @@ export namespace Scripts {
   export import SettingGetResponse = SettingsAPI.SettingGetResponse;
   export import SettingEditParams = SettingsAPI.SettingEditParams;
   export import SettingGetParams = SettingsAPI.SettingGetParams;
+  export import Deployments = DeploymentsAPI.Deployments;
+  export import UnnamedSchemaRefFda1c6f6758e763ae3b2964521f2fdd8 = DeploymentsAPI.UnnamedSchemaRefFda1c6f6758e763ae3b2964521f2fdd8;
+  export import DeploymentCreateResponse = DeploymentsAPI.DeploymentCreateResponse;
+  export import DeploymentGetResponse = DeploymentsAPI.DeploymentGetResponse;
+  export import DeploymentCreateParams = DeploymentsAPI.DeploymentCreateParams;
+  export import DeploymentGetParams = DeploymentsAPI.DeploymentGetParams;
+  export import Versions = VersionsAPI.Versions;
+  export import VersionCreateResponse = VersionsAPI.VersionCreateResponse;
+  export import VersionListResponse = VersionsAPI.VersionListResponse;
+  export import VersionGetResponse = VersionsAPI.VersionGetResponse;
+  export import VersionCreateParams = VersionsAPI.VersionCreateParams;
+  export import VersionListParams = VersionsAPI.VersionListParams;
+  export import VersionGetParams = VersionsAPI.VersionGetParams;
 }

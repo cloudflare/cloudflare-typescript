@@ -221,6 +221,7 @@ export namespace Hostnames {
   export import HostnameGetParams = HostnamesAPI.HostnameGetParams;
   export import Certificates = CertificatesAPI.Certificates;
   export import OriginTLSClientCertificate = CertificatesAPI.OriginTLSClientCertificate;
+  export import UnnamedSchemaRefD182888b36f93a765d9ce5aefa3009e9 = CertificatesAPI.UnnamedSchemaRefD182888b36f93a765d9ce5aefa3009e9;
   export import CertificateCreateParams = CertificatesAPI.CertificateCreateParams;
   export import CertificateListParams = CertificatesAPI.CertificateListParams;
   export import CertificateDeleteParams = CertificatesAPI.CertificateDeleteParams;

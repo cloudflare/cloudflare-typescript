@@ -4,9 +4,7 @@ export * from './shared';
 export { ACM } from './acm/acm';
 export {
   Account,
-  AccountUpdateResponse,
   AccountListResponse,
-  AccountGetResponse,
   AccountUpdateParams,
   AccountListParams,
   AccountGetParams,
@@ -14,7 +12,6 @@ export {
   Accounts,
 } from './accounts/accounts';
 export { Addressing } from './addressing/addressing';
-export { Alerting } from './alerting/alerting';
 export { Argo } from './argo/argo';
 export {
   AuditLogListResponse,
@@ -58,10 +55,6 @@ export {
 export { CloudforceOne } from './cloudforce-one/cloudforce-one';
 export {
   CustomCertificate,
-  CustomCertificateCreateResponse,
-  CustomCertificateDeleteResponse,
-  CustomCertificateEditResponse,
-  CustomCertificateGetResponse,
   CustomCertificateCreateParams,
   CustomCertificateListParams,
   CustomCertificateDeleteParams,
@@ -72,9 +65,12 @@ export {
 } from './custom-certificates/custom-certificates';
 export {
   CustomHostname,
+  UnnamedSchemaRef16aca57bde2963201c7e6e895436c1c1,
+  UnnamedSchemaRef78adb375f06c6d462dd92b99e2ecf510,
+  UnnamedSchemaRef9a9935a9a770967bb604ae41a81e42e1,
+  UnnamedSchemaRefD2a16d7ee1ad3a888dd5821c918d51fd,
   CustomHostnameCreateResponse,
   CustomHostnameListResponse,
-  CustomHostnameDeleteResponse,
   CustomHostnameEditResponse,
   CustomHostnameGetResponse,
   CustomHostnameCreateParams,
@@ -87,7 +83,6 @@ export {
 } from './custom-hostnames/custom-hostnames';
 export {
   CustomNameserver,
-  CustomNameserverDeleteResponse,
   CustomNameserverAvailabiltyResponse,
   CustomNameserverGetResponse,
   CustomNameserverVerifyResponse,
@@ -100,15 +95,7 @@ export {
 } from './custom-nameservers';
 export { D1 } from './d1/d1';
 export { DCVDelegation } from './dcv-delegation/dcv-delegation';
-export { DNS } from './dns/dns';
-export {
-  DNSSEC,
-  DNSSECDeleteResponse,
-  DNSSECDeleteParams,
-  DNSSECEditParams,
-  DNSSECGetParams,
-  DNSSECResource,
-} from './dnssec';
+export { DNSSEC, DNSSECDeleteParams, DNSSECEditParams, DNSSECGetParams, DNSSECResource } from './dnssec';
 export { Diagnostics } from './diagnostics/diagnostics';
 export { DurableObjects } from './durable-objects/durable-objects';
 export {
@@ -123,6 +110,7 @@ export {
 export { Firewall } from './firewall/firewall';
 export {
   FirewallFilter,
+  UnnamedSchemaRef39af4f78d23244e2595fb47c811221df,
   FilterCreateResponse,
   FilterCreateParams,
   FilterUpdateParams,
@@ -133,6 +121,7 @@ export {
 } from './filters';
 export {
   Healthcheck,
+  UnnamedSchemaRefAaa560acadcbf1ae1dc619ba1ea5948e,
   HealthcheckDeleteResponse,
   HealthcheckCreateParams,
   HealthcheckUpdateParams,
@@ -151,6 +140,13 @@ export { Intel } from './intel/intel';
 export {
   IntelPhishingURLInfo,
   IntelPhishingURLSubmit,
+  UnnamedSchemaRef209db30ed499548152d6f3bccf720b54,
+  UnnamedSchemaRef39419d70e2399b28b15cd660afd342fb,
+  UnnamedSchemaRef3e10ea08deb8102a27500f986488c1e8,
+  UnnamedSchemaRef44e66100b948bfe723054c56b6144766,
+  UnnamedSchemaRef767c0981cf47f45f0c766253dbd18669,
+  UnnamedSchemaRef9b4c9779a35b172cb69c71389ebc7014,
+  UnnamedSchemaRefA64e2a18a86750b6bd72cdf37ecfd869,
   BrandProtectionSubmitParams,
   BrandProtectionURLInfoParams,
   BrandProtection,
@@ -159,7 +155,7 @@ export { KV } from './kv/kv';
 export {
   KeylessCertificate,
   KeylessCertificateHostname,
-  KeylessCertificateDeleteResponse,
+  UnnamedSchemaRefA91f0bd72ee433f010eecfdc94ccf298,
   KeylessCertificateCreateParams,
   KeylessCertificateListParams,
   KeylessCertificateDeleteParams,
@@ -170,6 +166,7 @@ export {
 } from './keyless-certificates';
 export {
   LoadBalancer,
+  UnnamedSchemaRef06ba14ec7860c091efc98fd9af30f382,
   LoadBalancerDeleteResponse,
   LoadBalancerCreateParams,
   LoadBalancerUpdateParams,
@@ -193,7 +190,6 @@ export {
   MTLSCertificates,
 } from './mtls-certificates/mtls-certificates';
 export { MagicNetworkMonitoring } from './magic-network-monitoring/magic-network-monitoring';
-export { MagicTransit } from './magic-transit/magic-transit';
 export {
   ManagedHeaderListResponse,
   ManagedHeaderEditResponse,
@@ -203,9 +199,7 @@ export {
 } from './managed-headers';
 export {
   Membership,
-  MembershipUpdateResponse,
   MembershipDeleteResponse,
-  MembershipGetResponse,
   MembershipUpdateParams,
   MembershipListParams,
   MembershipDeleteParams,
@@ -223,9 +217,6 @@ export {
 } from './speed/speed';
 export {
   OriginCACertificate,
-  OriginCACertificateCreateResponse,
-  OriginCACertificateDeleteResponse,
-  OriginCACertificateGetResponse,
   OriginCACertificateCreateParams,
   OriginCACertificateListParams,
   OriginCACertificateDeleteParams,
@@ -233,18 +224,13 @@ export {
   OriginCACertificates,
 } from './origin-ca-certificates';
 export {
-  OriginPostQuantumEncryptionUpdateResponse,
-  OriginPostQuantumEncryptionGetResponse,
   OriginPostQuantumEncryptionUpdateParams,
   OriginPostQuantumEncryptionGetParams,
   OriginPostQuantumEncryption,
 } from './origin-post-quantum-encryption';
 export {
   OriginTLSClientCertificateZoneAuthenticatedOriginPull,
-  OriginTLSClientAuthCreateResponse,
   OriginTLSClientAuthListResponse,
-  OriginTLSClientAuthDeleteResponse,
-  OriginTLSClientAuthGetResponse,
   OriginTLSClientAuthCreateParams,
   OriginTLSClientAuthListParams,
   OriginTLSClientAuthDeleteParams,
@@ -277,7 +263,6 @@ export {
   QueueCreateResponse,
   QueueUpdateResponse,
   QueueListResponse,
-  QueueDeleteResponse,
   QueueGetResponse,
   QueueCreateParams,
   QueueUpdateParams,
@@ -288,14 +273,10 @@ export {
 } from './queues/queues';
 export { R2 } from './r2/r2';
 export { RUM } from './rum/rum';
-export { Radar } from './radar/radar';
 export {
   RateLimit,
-  RateLimitCreateResponse,
   RateLimitListResponse,
   RateLimitDeleteResponse,
-  RateLimitEditResponse,
-  RateLimitGetResponse,
   RateLimitCreateParams,
   RateLimitListParams,
   RateLimitDeleteParams,
@@ -322,13 +303,7 @@ export {
 } from './rulesets/rulesets';
 export { SSL } from './ssl/ssl';
 export { SecondaryDNS } from './secondary-dns/secondary-dns';
-export {
-  Snippet,
-  SnippetDeleteResponse,
-  SnippetUpdateParams,
-  SnippetsSinglePage,
-  Snippets,
-} from './snippets/snippets';
+export { Snippet, SnippetUpdateParams, SnippetsSinglePage, Snippets } from './snippets/snippets';
 export { Spectrum } from './spectrum/spectrum';
 export { Storage } from './storage/storage';
 export {
@@ -341,11 +316,8 @@ export {
   Stream,
 } from './stream/stream';
 export {
-  SubscriptionCreateResponse,
-  SubscriptionUpdateResponse,
   SubscriptionListResponse,
   SubscriptionDeleteResponse,
-  SubscriptionGetResponse,
   SubscriptionCreateParams,
   SubscriptionUpdateParams,
   SubscriptionDeleteParams,
@@ -360,25 +332,33 @@ export {
   URLNormalization,
 } from './url-normalization';
 export { URLScannerScanResponse, URLScannerScanParams, URLScanner } from './url-scanner/url-scanner';
-export { User, UserEditResponse, UserGetResponse, UserEditParams, UserResource } from './user/user';
-export { Vectorize } from './vectorize/vectorize';
 export {
-  WARPConnectorCreateResponse,
-  WARPConnectorListResponse,
-  WARPConnectorDeleteResponse,
-  WARPConnectorEditResponse,
-  WARPConnectorGetResponse,
-  WARPConnectorTokenResponse,
-  WARPConnectorCreateParams,
-  WARPConnectorListParams,
-  WARPConnectorDeleteParams,
-  WARPConnectorEditParams,
-  WARPConnectorGetParams,
-  WARPConnectorTokenParams,
-  WARPConnectorListResponsesV4PagePaginationArray,
-  WARPConnector,
-} from './warp-connector';
+  UnnamedSchemaRef16e559c45a31db5480e21fbe904b2e42,
+  UnnamedSchemaRef4124a22436f90127c7fa2c4543219752,
+  UnnamedSchemaRef73de8b634bb48667e28a6c6c56080c51,
+  UnnamedSchemaRef75bae70cf28e6bcef364b9840db3bdeb,
+  UnnamedSchemaRef7826220e105d84352ba1108d9ed88e55,
+  UnnamedSchemaRef83a14d589e799bc901b9ccc870251d09,
+  UnnamedSchemaRef8b383e904d9fb02521257ef9cc77d297,
+  UnnamedSchemaRef9002274ed7cb7f3dc567421e31529a3a,
+  UnnamedSchemaRefB5f3bd1840490bc487ffef84567807b1,
+  UnnamedSchemaRefBaac9d7da12de53e99142f8ecd3982e5,
+  UnnamedSchemaRefC5858f1f916a921846e0b6159af470a7,
+  Radar,
+} from './radar/radar';
 export {
+  UnnamedSchemaRef3b1a76a5e4a139b72ed7d93834773d39,
+  UnnamedSchemaRefEebdc868ce7f7ae92e23438caa84e7b5,
+  MagicTransit,
+} from './magic-transit/magic-transit';
+export {
+  UnnamedSchemaRef6595695ff25b0614667b25f66b7bbaba,
+  UnnamedSchemaRef65be9614de145bf4a58d0fddf46df7ca,
+  UnnamedSchemaRef85b45d163202bbab7456da6b346d9fe2,
+  DNS,
+} from './dns/dns';
+export {
+  UnnamedSchemaRefA282afe149b2cf60a204505bd4c53324,
   WaitingRoom,
   WaitingRoomDeleteResponse,
   WaitingRoomCreateParams,
@@ -390,6 +370,19 @@ export {
   WaitingRoomsSinglePage,
   WaitingRooms,
 } from './waiting-rooms/waiting-rooms';
+export { UnnamedSchemaRefD6e23adacaca017802aaa484a8b3f405, Alerting } from './alerting/alerting';
+export { User, UserEditParams, UserResource } from './user/user';
+export { Vectorize } from './vectorize/vectorize';
+export {
+  WARPConnectorTokenResponse,
+  WARPConnectorCreateParams,
+  WARPConnectorListParams,
+  WARPConnectorDeleteParams,
+  WARPConnectorEditParams,
+  WARPConnectorGetParams,
+  WARPConnectorTokenParams,
+  WARPConnector,
+} from './warp-connector';
 export { Web3 } from './web3/web3';
 export { Workers } from './workers/workers';
 export { WorkersForPlatforms } from './workers-for-platforms/workers-for-platforms';
@@ -407,12 +400,8 @@ export {
 } from './zones/zones';
 export {
   ZonesPagerule,
-  PageruleCreateResponse,
-  PageruleUpdateResponse,
   PageruleListResponse,
   PageruleDeleteResponse,
-  PageruleEditResponse,
-  PageruleGetResponse,
   PageruleCreateParams,
   PageruleUpdateParams,
   PageruleListParams,

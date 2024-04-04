@@ -10,7 +10,6 @@ export class Cmb extends APIResource {
 export namespace Cmb {
   export import Config = ConfigAPI.Config;
   export import CmbConfig = ConfigAPI.CmbConfig;
-  export import ConfigDeleteResponse = ConfigAPI.ConfigDeleteResponse;
   export import ConfigCreateParams = ConfigAPI.ConfigCreateParams;
   export import ConfigDeleteParams = ConfigAPI.ConfigDeleteParams;
   export import ConfigGetParams = ConfigAPI.ConfigGetParams;

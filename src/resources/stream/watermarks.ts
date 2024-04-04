@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as WatermarksAPI from 'cloudflare/resources/stream/watermarks';
+import * as Shared from 'cloudflare/resources/shared';
 import { multipartFormRequestOptions } from 'cloudflare/core';
 import { SinglePage } from 'cloudflare/pagination';
 
@@ -14,13 +15,13 @@ export class Watermarks extends APIResource {
   create(
     params: WatermarkCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WatermarkCreateResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     const { account_id, ...body } = params;
     return (
       this._client.post(
         `/accounts/${account_id}/stream/watermarks`,
         multipartFormRequestOptions({ body, ...options }),
-      ) as Core.APIPromise<{ result: WatermarkCreateResponse }>
+      ) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -46,13 +47,13 @@ export class Watermarks extends APIResource {
     identifier: string,
     params: WatermarkDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WatermarkDeleteResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef602dd5f63eab958d53da61434dec08f0> {
     const { account_id, body } = params;
     return (
       this._client.delete(`/accounts/${account_id}/stream/watermarks/${identifier}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: WatermarkDeleteResponse }>
+      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef602dd5f63eab958d53da61434dec08f0 }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -63,13 +64,13 @@ export class Watermarks extends APIResource {
     identifier: string,
     params: WatermarkGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WatermarkGetResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/stream/watermarks/${identifier}`,
         options,
-      ) as Core.APIPromise<{ result: WatermarkGetResponse }>
+      ) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -142,12 +143,6 @@ export interface StreamWatermarks {
    */
   width?: number;
 }
-
-export type WatermarkCreateResponse = unknown | string;
-
-export type WatermarkDeleteResponse = unknown | string;
-
-export type WatermarkGetResponse = unknown | string;
 
 export interface WatermarkCreateParams {
   /**
@@ -224,9 +219,6 @@ export interface WatermarkGetParams {
 
 export namespace Watermarks {
   export import StreamWatermarks = WatermarksAPI.StreamWatermarks;
-  export import WatermarkCreateResponse = WatermarksAPI.WatermarkCreateResponse;
-  export import WatermarkDeleteResponse = WatermarksAPI.WatermarkDeleteResponse;
-  export import WatermarkGetResponse = WatermarksAPI.WatermarkGetResponse;
   export import StreamWatermarksSinglePage = WatermarksAPI.StreamWatermarksSinglePage;
   export import WatermarkCreateParams = WatermarksAPI.WatermarkCreateParams;
   export import WatermarkListParams = WatermarksAPI.WatermarkListParams;

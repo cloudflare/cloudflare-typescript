@@ -110,6 +110,16 @@ export namespace DLPProfiles {
   }
 }
 
+/**
+ * The type of the profile.
+ */
+export type UnnamedSchemaRefC105db122868c71badeac3b4822ad6b1 = 'custom';
+
+/**
+ * The type of the profile.
+ */
+export type UnnamedSchemaRefE38bfdf1acf5a4bfada6779c79528bc0 = 'predefined';
+
 export type ProfileGetResponse =
   | PredefinedAPI.DLPPredefinedProfile
   | CustomAPI.DLPCustomProfile
@@ -195,6 +205,8 @@ export interface ProfileGetParams {
 
 export namespace Profiles {
   export import DLPProfiles = ProfilesAPI.DLPProfiles;
+  export import UnnamedSchemaRefC105db122868c71badeac3b4822ad6b1 = ProfilesAPI.UnnamedSchemaRefC105db122868c71badeac3b4822ad6b1;
+  export import UnnamedSchemaRefE38bfdf1acf5a4bfada6779c79528bc0 = ProfilesAPI.UnnamedSchemaRefE38bfdf1acf5a4bfada6779c79528bc0;
   export import ProfileGetResponse = ProfilesAPI.ProfileGetResponse;
   export import DLPProfilesSinglePage = ProfilesAPI.DLPProfilesSinglePage;
   export import ProfileListParams = ProfilesAPI.ProfileListParams;
@@ -202,7 +214,6 @@ export namespace Profiles {
   export import Custom = CustomAPI.Custom;
   export import DLPCustomProfile = CustomAPI.DLPCustomProfile;
   export import CustomCreateResponse = CustomAPI.CustomCreateResponse;
-  export import CustomDeleteResponse = CustomAPI.CustomDeleteResponse;
   export import CustomCreateParams = CustomAPI.CustomCreateParams;
   export import CustomUpdateParams = CustomAPI.CustomUpdateParams;
   export import CustomDeleteParams = CustomAPI.CustomDeleteParams;

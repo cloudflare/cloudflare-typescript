@@ -80,6 +80,8 @@ export interface DevicesFallbackDomain {
   dns_server?: Array<unknown>;
 }
 
+export type UnnamedSchemaRef1fbf91ecd61792c751fead58dc8005e6 = Array<DevicesFallbackDomain>;
+
 export type FallbackDomainUpdateResponse = Array<DevicesFallbackDomain>;
 
 export type FallbackDomainGetResponse = Array<DevicesFallbackDomain>;
@@ -106,6 +108,7 @@ export interface FallbackDomainGetParams {
 
 export namespace FallbackDomains {
   export import DevicesFallbackDomain = FallbackDomainsAPI.DevicesFallbackDomain;
+  export import UnnamedSchemaRef1fbf91ecd61792c751fead58dc8005e6 = FallbackDomainsAPI.UnnamedSchemaRef1fbf91ecd61792c751fead58dc8005e6;
   export import FallbackDomainUpdateResponse = FallbackDomainsAPI.FallbackDomainUpdateResponse;
   export import FallbackDomainGetResponse = FallbackDomainsAPI.FallbackDomainGetResponse;
   export import DevicesFallbackDomainsSinglePage = FallbackDomainsAPI.DevicesFallbackDomainsSinglePage;

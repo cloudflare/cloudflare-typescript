@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as PoliciesAPI from 'cloudflare/resources/alerting/policies';
+import * as Shared from 'cloudflare/resources/shared';
 import { SinglePage } from 'cloudflare/pagination';
 
 export class Policies extends APIResource {
@@ -58,13 +59,13 @@ export class Policies extends APIResource {
     policyId: string,
     params: PolicyDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PolicyDeleteResponse | null> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef67bbb1ccdd42c3e2937b9fd19f791151 | null> {
     const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/alerting/v3/policies/${policyId}`,
         options,
-      ) as Core.APIPromise<{ result: PolicyDeleteResponse | null }>
+      ) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef67bbb1ccdd42c3e2937b9fd19f791151 | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -421,8 +422,6 @@ export interface PolicyUpdateResponse {
    */
   id?: string;
 }
-
-export type PolicyDeleteResponse = unknown | Array<unknown> | string;
 
 export interface PolicyCreateParams {
   /**
@@ -1081,7 +1080,6 @@ export namespace Policies {
   export import AlertingPolicies = PoliciesAPI.AlertingPolicies;
   export import PolicyCreateResponse = PoliciesAPI.PolicyCreateResponse;
   export import PolicyUpdateResponse = PoliciesAPI.PolicyUpdateResponse;
-  export import PolicyDeleteResponse = PoliciesAPI.PolicyDeleteResponse;
   export import AlertingPoliciesSinglePage = PoliciesAPI.AlertingPoliciesSinglePage;
   export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
   export import PolicyUpdateParams = PoliciesAPI.PolicyUpdateParams;

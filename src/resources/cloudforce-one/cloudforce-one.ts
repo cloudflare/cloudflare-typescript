@@ -14,7 +14,6 @@ export namespace CloudforceOne {
   export import CloudforceOneRequestItem = RequestsAPI.CloudforceOneRequestItem;
   export import CloudforceOneRequestListItem = RequestsAPI.CloudforceOneRequestListItem;
   export import CloudforceOneRequestTypes = RequestsAPI.CloudforceOneRequestTypes;
-  export import RequestDeleteResponse = RequestsAPI.RequestDeleteResponse;
   export import CloudforceOneRequestListItemsV4PagePaginationArray = RequestsAPI.CloudforceOneRequestListItemsV4PagePaginationArray;
   export import RequestCreateParams = RequestsAPI.RequestCreateParams;
   export import RequestUpdateParams = RequestsAPI.RequestUpdateParams;

@@ -3,7 +3,6 @@
 export {
   AlertingPagerduty,
   PagerdutyCreateResponse,
-  PagerdutyDeleteResponse,
   PagerdutyGetResponse,
   PagerdutyLinkResponse,
   PagerdutyCreateParams,
@@ -16,7 +15,6 @@ export {
   AlertingWebhooks,
   WebhookCreateResponse,
   WebhookUpdateResponse,
-  WebhookDeleteResponse,
   WebhookCreateParams,
   WebhookUpdateParams,
   WebhookListParams,

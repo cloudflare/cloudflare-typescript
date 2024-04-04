@@ -9,9 +9,9 @@ export class Firewall extends APIResource {
 
 export namespace Firewall {
   export import AccessRules = AccessRulesAPI.AccessRules;
-  export import FirewallRule = AccessRulesAPI.FirewallRule;
+  export import AccessRule = AccessRulesAPI.AccessRule;
   export import AccessRuleDeleteResponse = AccessRulesAPI.AccessRuleDeleteResponse;
-  export import FirewallRulesV4PagePaginationArray = AccessRulesAPI.FirewallRulesV4PagePaginationArray;
+  export import AccessRulesV4PagePaginationArray = AccessRulesAPI.AccessRulesV4PagePaginationArray;
   export import AccessRuleCreateParams = AccessRulesAPI.AccessRuleCreateParams;
   export import AccessRuleListParams = AccessRulesAPI.AccessRuleListParams;
   export import AccessRuleDeleteParams = AccessRulesAPI.AccessRuleDeleteParams;

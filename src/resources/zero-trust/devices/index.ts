@@ -2,6 +2,7 @@
 
 export {
   DEXTestSchemasHTTP,
+  UnnamedSchemaRef15fd6ef0641450fd873ffb71715170c9,
   DEXTestDeleteResponse,
   DEXTestCreateParams,
   DEXTestUpdateParams,
@@ -13,6 +14,7 @@ export {
 } from './dex-tests';
 export {
   DeviceManagedNetworks,
+  UnnamedSchemaRefD2b048663faf5e0cd5c90501b71171de,
   NetworkDeleteResponse,
   NetworkCreateParams,
   NetworkUpdateParams,
@@ -24,6 +26,9 @@ export {
 } from './networks';
 export {
   DevicePostureRules,
+  UnnamedSchemaRef34ef0ad73a63c3f76ed170adca181930,
+  UnnamedSchemaRef41885dd46b9e0294254c49305a273681,
+  UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27,
   PostureDeleteResponse,
   PostureCreateParams,
   PostureUpdateParams,
@@ -35,6 +40,7 @@ export {
 } from './posture/index';
 export {
   DevicesDeviceSettingsPolicy,
+  UnnamedSchemaRefF636ff9f2cb41ff4b715cf8ed8515581,
   PolicyDeleteResponse,
   PolicyCreateParams,
   PolicyListParams,
@@ -45,12 +51,11 @@ export {
   Policies,
 } from './policies/index';
 export { OverrideCodeListResponse, OverrideCodeListParams, OverrideCodes } from './override-codes';
-export { RevokeCreateResponse, RevokeCreateParams, Revoke } from './revoke';
-export { UnrevokeCreateResponse, UnrevokeCreateParams, Unrevoke } from './unrevoke';
+export { RevokeCreateParams, Revoke } from './revoke';
+export { UnrevokeCreateParams, Unrevoke } from './unrevoke';
 export { ZeroTrustAccountDeviceSettings, SettingUpdateParams, SettingListParams, Settings } from './settings';
 export {
   ZeroTrustDevices,
-  DeviceGetResponse,
   DeviceListParams,
   DeviceGetParams,
   ZeroTrustDevicesSinglePage,

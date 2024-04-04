@@ -5,6 +5,7 @@ import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import { CloudflareError } from 'cloudflare/error';
 import * as PhasesAPI from 'cloudflare/resources/rulesets/phases/phases';
+import * as Shared from 'cloudflare/resources/shared';
 import * as VersionsAPI from 'cloudflare/resources/rulesets/phases/versions';
 
 export class Phases extends APIResource {
@@ -305,7 +306,7 @@ export namespace PhaseUpdateResponse {
     /**
      * An object configuring the rule's logging behavior.
      */
-    logging?: RulesetsBlockRule.Logging;
+    logging?: Shared.UnnamedSchemaRef70f2c6ccd8a405358ac7ef8fc3d6751c;
 
     /**
      * The reference of the rule (the rule ID by default).
@@ -344,16 +345,6 @@ export namespace PhaseUpdateResponse {
          */
         status_code: number;
       }
-    }
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    export interface Logging {
-      /**
-       * Whether to generate a log when the rule matches.
-       */
-      enabled: boolean;
     }
   }
 
@@ -406,7 +397,7 @@ export namespace PhaseUpdateResponse {
     /**
      * An object configuring the rule's logging behavior.
      */
-    logging?: RulesetsExecuteRule.Logging;
+    logging?: Shared.UnnamedSchemaRef70f2c6ccd8a405358ac7ef8fc3d6751c;
 
     /**
      * The reference of the rule (the rule ID by default).
@@ -537,16 +528,6 @@ export namespace PhaseUpdateResponse {
         }
       }
     }
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    export interface Logging {
-      /**
-       * Whether to generate a log when the rule matches.
-       */
-      enabled: boolean;
-    }
   }
 
   export interface RulesetsLogRule {
@@ -598,24 +579,12 @@ export namespace PhaseUpdateResponse {
     /**
      * An object configuring the rule's logging behavior.
      */
-    logging?: RulesetsLogRule.Logging;
+    logging?: Shared.UnnamedSchemaRef70f2c6ccd8a405358ac7ef8fc3d6751c;
 
     /**
      * The reference of the rule (the rule ID by default).
      */
     ref?: string;
-  }
-
-  export namespace RulesetsLogRule {
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    export interface Logging {
-      /**
-       * Whether to generate a log when the rule matches.
-       */
-      enabled: boolean;
-    }
   }
 
   export interface RulesetsSkipRule {
@@ -667,7 +636,7 @@ export namespace PhaseUpdateResponse {
     /**
      * An object configuring the rule's logging behavior.
      */
-    logging?: RulesetsSkipRule.Logging;
+    logging?: Shared.UnnamedSchemaRef70f2c6ccd8a405358ac7ef8fc3d6751c;
 
     /**
      * The reference of the rule (the rule ID by default).
@@ -732,16 +701,6 @@ export namespace PhaseUpdateResponse {
        * the ruleset and phases options.
        */
       rulesets?: Array<string>;
-    }
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    export interface Logging {
-      /**
-       * Whether to generate a log when the rule matches.
-       */
-      enabled: boolean;
     }
   }
 }
@@ -869,7 +828,7 @@ export namespace PhaseGetResponse {
     /**
      * An object configuring the rule's logging behavior.
      */
-    logging?: RulesetsBlockRule.Logging;
+    logging?: Shared.UnnamedSchemaRef70f2c6ccd8a405358ac7ef8fc3d6751c;
 
     /**
      * The reference of the rule (the rule ID by default).
@@ -908,16 +867,6 @@ export namespace PhaseGetResponse {
          */
         status_code: number;
       }
-    }
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    export interface Logging {
-      /**
-       * Whether to generate a log when the rule matches.
-       */
-      enabled: boolean;
     }
   }
 
@@ -970,7 +919,7 @@ export namespace PhaseGetResponse {
     /**
      * An object configuring the rule's logging behavior.
      */
-    logging?: RulesetsExecuteRule.Logging;
+    logging?: Shared.UnnamedSchemaRef70f2c6ccd8a405358ac7ef8fc3d6751c;
 
     /**
      * The reference of the rule (the rule ID by default).
@@ -1101,16 +1050,6 @@ export namespace PhaseGetResponse {
         }
       }
     }
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    export interface Logging {
-      /**
-       * Whether to generate a log when the rule matches.
-       */
-      enabled: boolean;
-    }
   }
 
   export interface RulesetsLogRule {
@@ -1162,24 +1101,12 @@ export namespace PhaseGetResponse {
     /**
      * An object configuring the rule's logging behavior.
      */
-    logging?: RulesetsLogRule.Logging;
+    logging?: Shared.UnnamedSchemaRef70f2c6ccd8a405358ac7ef8fc3d6751c;
 
     /**
      * The reference of the rule (the rule ID by default).
      */
     ref?: string;
-  }
-
-  export namespace RulesetsLogRule {
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    export interface Logging {
-      /**
-       * Whether to generate a log when the rule matches.
-       */
-      enabled: boolean;
-    }
   }
 
   export interface RulesetsSkipRule {
@@ -1231,7 +1158,7 @@ export namespace PhaseGetResponse {
     /**
      * An object configuring the rule's logging behavior.
      */
-    logging?: RulesetsSkipRule.Logging;
+    logging?: Shared.UnnamedSchemaRef70f2c6ccd8a405358ac7ef8fc3d6751c;
 
     /**
      * The reference of the rule (the rule ID by default).
@@ -1296,16 +1223,6 @@ export namespace PhaseGetResponse {
        * the ruleset and phases options.
        */
       rulesets?: Array<string>;
-    }
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    export interface Logging {
-      /**
-       * Whether to generate a log when the rule matches.
-       */
-      enabled: boolean;
     }
   }
 }
@@ -1412,7 +1329,7 @@ export namespace PhaseUpdateParams {
     /**
      * An object configuring the rule's logging behavior.
      */
-    logging?: RulesetsBlockRule.Logging;
+    logging?: Shared.UnnamedSchemaRef70f2c6ccd8a405358ac7ef8fc3d6751c;
 
     /**
      * The reference of the rule (the rule ID by default).
@@ -1452,16 +1369,6 @@ export namespace PhaseUpdateParams {
         status_code: number;
       }
     }
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    export interface Logging {
-      /**
-       * Whether to generate a log when the rule matches.
-       */
-      enabled: boolean;
-    }
   }
 
   export interface RulesetsExecuteRule {
@@ -1498,7 +1405,7 @@ export namespace PhaseUpdateParams {
     /**
      * An object configuring the rule's logging behavior.
      */
-    logging?: RulesetsExecuteRule.Logging;
+    logging?: Shared.UnnamedSchemaRef70f2c6ccd8a405358ac7ef8fc3d6751c;
 
     /**
      * The reference of the rule (the rule ID by default).
@@ -1629,16 +1536,6 @@ export namespace PhaseUpdateParams {
         }
       }
     }
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    export interface Logging {
-      /**
-       * Whether to generate a log when the rule matches.
-       */
-      enabled: boolean;
-    }
   }
 
   export interface RulesetsLogRule {
@@ -1675,24 +1572,12 @@ export namespace PhaseUpdateParams {
     /**
      * An object configuring the rule's logging behavior.
      */
-    logging?: RulesetsLogRule.Logging;
+    logging?: Shared.UnnamedSchemaRef70f2c6ccd8a405358ac7ef8fc3d6751c;
 
     /**
      * The reference of the rule (the rule ID by default).
      */
     ref?: string;
-  }
-
-  export namespace RulesetsLogRule {
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    export interface Logging {
-      /**
-       * Whether to generate a log when the rule matches.
-       */
-      enabled: boolean;
-    }
   }
 
   export interface RulesetsSkipRule {
@@ -1729,7 +1614,7 @@ export namespace PhaseUpdateParams {
     /**
      * An object configuring the rule's logging behavior.
      */
-    logging?: RulesetsSkipRule.Logging;
+    logging?: Shared.UnnamedSchemaRef70f2c6ccd8a405358ac7ef8fc3d6751c;
 
     /**
      * The reference of the rule (the rule ID by default).
@@ -1794,16 +1679,6 @@ export namespace PhaseUpdateParams {
        * the ruleset and phases options.
        */
       rulesets?: Array<string>;
-    }
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    export interface Logging {
-      /**
-       * Whether to generate a log when the rule matches.
-       */
-      enabled: boolean;
     }
   }
 }

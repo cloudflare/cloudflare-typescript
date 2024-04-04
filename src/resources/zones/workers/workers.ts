@@ -9,7 +9,6 @@ export class Workers extends APIResource {
 
 export namespace Workers {
   export import Script = ScriptAPI.Script;
-  export import ScriptUpdateResponse = ScriptAPI.ScriptUpdateResponse;
   export import ScriptUpdateParams = ScriptAPI.ScriptUpdateParams;
   export import ScriptDeleteParams = ScriptAPI.ScriptDeleteParams;
   export import ScriptGetParams = ScriptAPI.ScriptGetParams;

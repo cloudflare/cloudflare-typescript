@@ -121,6 +121,35 @@ export interface DistributedWebConfigContentListEntry {
   type?: 'cid' | 'content_path';
 }
 
+/**
+ * Content list entry to be blocked.
+ */
+export interface UnnamedSchemaRef5e618833803e286db9ee7c73727f8b86 {
+  /**
+   * Identifier
+   */
+  id?: string;
+
+  /**
+   * CID or content path of content to block.
+   */
+  content?: string;
+
+  created_on?: string;
+
+  /**
+   * An optional description of the content list entry.
+   */
+  description?: string;
+
+  modified_on?: string;
+
+  /**
+   * Type of content list entry to block.
+   */
+  type?: 'cid' | 'content_path';
+}
+
 export interface EntryListResponse {
   /**
    * Content list entries.
@@ -173,6 +202,7 @@ export type EntryDeleteParams = unknown;
 
 export namespace Entries {
   export import DistributedWebConfigContentListEntry = EntriesAPI.DistributedWebConfigContentListEntry;
+  export import UnnamedSchemaRef5e618833803e286db9ee7c73727f8b86 = EntriesAPI.UnnamedSchemaRef5e618833803e286db9ee7c73727f8b86;
   export import EntryListResponse = EntriesAPI.EntryListResponse;
   export import EntryDeleteResponse = EntriesAPI.EntryDeleteResponse;
   export import EntryCreateParams = EntriesAPI.EntryCreateParams;

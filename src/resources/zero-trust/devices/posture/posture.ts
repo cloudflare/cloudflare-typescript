@@ -176,7 +176,7 @@ export namespace DevicePostureRules {
     /**
      * Operating system
      */
-    operating_system: 'windows' | 'linux' | 'mac';
+    operating_system: PostureAPI.UnnamedSchemaRef41885dd46b9e0294254c49305a273681;
 
     /**
      * File path.
@@ -230,9 +230,9 @@ export namespace DevicePostureRules {
     operating_system: 'windows';
 
     /**
-     * Operator
+     * operator
      */
-    operator: '<' | '<=' | '>' | '>=' | '==';
+    operator: PostureAPI.UnnamedSchemaRef34ef0ad73a63c3f76ed170adca181930;
 
     /**
      * Version of OS
@@ -272,7 +272,7 @@ export namespace DevicePostureRules {
     /**
      * Operating system
      */
-    operating_system: 'windows' | 'linux' | 'mac';
+    operating_system: PostureAPI.UnnamedSchemaRef41885dd46b9e0294254c49305a273681;
 
     /**
      * File path.
@@ -294,7 +294,7 @@ export namespace DevicePostureRules {
     /**
      * Operating system
      */
-    operating_system: 'windows' | 'linux' | 'mac';
+    operating_system: PostureAPI.UnnamedSchemaRef41885dd46b9e0294254c49305a273681;
 
     /**
      * File path.
@@ -328,7 +328,7 @@ export namespace DevicePostureRules {
     /**
      * Operating system
      */
-    operating_system: 'windows' | 'linux' | 'mac';
+    operating_system: PostureAPI.UnnamedSchemaRef41885dd46b9e0294254c49305a273681;
 
     /**
      * Path for the application.
@@ -382,9 +382,9 @@ export namespace DevicePostureRules {
     last_seen?: string;
 
     /**
-     * Operator
+     * operator
      */
-    operator?: '<' | '<=' | '>' | '>=' | '==';
+    operator?: PostureAPI.UnnamedSchemaRef34ef0ad73a63c3f76ed170adca181930;
 
     /**
      * Os Version
@@ -507,7 +507,440 @@ export namespace DevicePostureRules {
     /**
      * operator
      */
+    operator?: PostureAPI.UnnamedSchemaRef34ef0ad73a63c3f76ed170adca181930;
+  }
+
+  export interface Match {
+    platform?: 'windows' | 'mac' | 'linux' | 'android' | 'ios';
+  }
+}
+
+/**
+ * operator
+ */
+export type UnnamedSchemaRef34ef0ad73a63c3f76ed170adca181930 = '<' | '<=' | '>' | '>=' | '==';
+
+/**
+ * Operating system
+ */
+export type UnnamedSchemaRef41885dd46b9e0294254c49305a273681 = 'windows' | 'linux' | 'mac';
+
+export interface UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27 {
+  /**
+   * API UUID.
+   */
+  id?: string;
+
+  /**
+   * The description of the device posture rule.
+   */
+  description?: string;
+
+  /**
+   * Sets the expiration time for a posture check result. If empty, the result
+   * remains valid until it is overwritten by new data from the WARP client.
+   */
+  expiration?: string;
+
+  /**
+   * The value to be checked against.
+   */
+  input?:
+    | UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27.TeamsDevicesFileInputRequest
+    | UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27.TeamsDevicesUniqueClientIDInputRequest
+    | UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27.TeamsDevicesDomainJoinedInputRequest
+    | UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27.TeamsDevicesOSVersionInputRequest
+    | UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27.TeamsDevicesFirewallInputRequest
+    | UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27.TeamsDevicesSentineloneInputRequest
+    | UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27.TeamsDevicesCarbonblackInputRequest
+    | UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27.TeamsDevicesDiskEncryptionInputRequest
+    | UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27.TeamsDevicesApplicationInputRequest
+    | UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27.TeamsDevicesClientCertificateInputRequest
+    | UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27.TeamsDevicesWorkspaceOneInputRequest
+    | UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27.TeamsDevicesCrowdstrikeInputRequest
+    | UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27.TeamsDevicesIntuneInputRequest
+    | UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27.TeamsDevicesKolideInputRequest
+    | UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27.TeamsDevicesTaniumInputRequest
+    | UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27.TeamsDevicesSentineloneS2sInputRequest;
+
+  /**
+   * The conditions that the client must match to run the rule.
+   */
+  match?: Array<UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27.Match>;
+
+  /**
+   * The name of the device posture rule.
+   */
+  name?: string;
+
+  /**
+   * Polling frequency for the WARP client posture check. Default: `5m` (poll every
+   * five minutes). Minimum: `1m`.
+   */
+  schedule?: string;
+
+  /**
+   * The type of device posture rule.
+   */
+  type?:
+    | 'file'
+    | 'application'
+    | 'tanium'
+    | 'gateway'
+    | 'warp'
+    | 'disk_encryption'
+    | 'sentinelone'
+    | 'carbonblack'
+    | 'firewall'
+    | 'os_version'
+    | 'domain_joined'
+    | 'client_certificate'
+    | 'unique_client_id'
+    | 'kolide'
+    | 'tanium_s2s'
+    | 'crowdstrike_s2s'
+    | 'intune'
+    | 'workspace_one'
+    | 'sentinelone_s2s';
+}
+
+export namespace UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27 {
+  export interface TeamsDevicesFileInputRequest {
+    /**
+     * Operating system
+     */
+    operating_system: PostureAPI.UnnamedSchemaRef41885dd46b9e0294254c49305a273681;
+
+    /**
+     * File path.
+     */
+    path: string;
+
+    /**
+     * Whether or not file exists
+     */
+    exists?: boolean;
+
+    /**
+     * SHA-256.
+     */
+    sha256?: string;
+
+    /**
+     * Signing certificate thumbprint.
+     */
+    thumbprint?: string;
+  }
+
+  export interface TeamsDevicesUniqueClientIDInputRequest {
+    /**
+     * List ID.
+     */
+    id: string;
+
+    /**
+     * Operating System
+     */
+    operating_system: 'android' | 'ios' | 'chromeos';
+  }
+
+  export interface TeamsDevicesDomainJoinedInputRequest {
+    /**
+     * Operating System
+     */
+    operating_system: 'windows';
+
+    /**
+     * Domain
+     */
+    domain?: string;
+  }
+
+  export interface TeamsDevicesOSVersionInputRequest {
+    /**
+     * Operating System
+     */
+    operating_system: 'windows';
+
+    /**
+     * operator
+     */
+    operator: PostureAPI.UnnamedSchemaRef34ef0ad73a63c3f76ed170adca181930;
+
+    /**
+     * Version of OS
+     */
+    version: string;
+
+    /**
+     * Operating System Distribution Name (linux only)
+     */
+    os_distro_name?: string;
+
+    /**
+     * Version of OS Distribution (linux only)
+     */
+    os_distro_revision?: string;
+
+    /**
+     * Additional version data. For Mac or iOS, the Product Verison Extra. For Linux,
+     * the kernel release version. (Mac, iOS, and Linux only)
+     */
+    os_version_extra?: string;
+  }
+
+  export interface TeamsDevicesFirewallInputRequest {
+    /**
+     * Enabled
+     */
+    enabled: boolean;
+
+    /**
+     * Operating System
+     */
+    operating_system: 'windows' | 'mac';
+  }
+
+  export interface TeamsDevicesSentineloneInputRequest {
+    /**
+     * Operating system
+     */
+    operating_system: PostureAPI.UnnamedSchemaRef41885dd46b9e0294254c49305a273681;
+
+    /**
+     * File path.
+     */
+    path: string;
+
+    /**
+     * SHA-256.
+     */
+    sha256?: string;
+
+    /**
+     * Signing certificate thumbprint.
+     */
+    thumbprint?: string;
+  }
+
+  export interface TeamsDevicesCarbonblackInputRequest {
+    /**
+     * Operating system
+     */
+    operating_system: PostureAPI.UnnamedSchemaRef41885dd46b9e0294254c49305a273681;
+
+    /**
+     * File path.
+     */
+    path: string;
+
+    /**
+     * SHA-256.
+     */
+    sha256?: string;
+
+    /**
+     * Signing certificate thumbprint.
+     */
+    thumbprint?: string;
+  }
+
+  export interface TeamsDevicesDiskEncryptionInputRequest {
+    /**
+     * List of volume names to be checked for encryption.
+     */
+    checkDisks?: Array<string>;
+
+    /**
+     * Whether to check all disks for encryption.
+     */
+    requireAll?: boolean;
+  }
+
+  export interface TeamsDevicesApplicationInputRequest {
+    /**
+     * Operating system
+     */
+    operating_system: PostureAPI.UnnamedSchemaRef41885dd46b9e0294254c49305a273681;
+
+    /**
+     * Path for the application.
+     */
+    path: string;
+
+    /**
+     * SHA-256.
+     */
+    sha256?: string;
+
+    /**
+     * Signing certificate thumbprint.
+     */
+    thumbprint?: string;
+  }
+
+  export interface TeamsDevicesClientCertificateInputRequest {
+    /**
+     * UUID of Cloudflare managed certificate.
+     */
+    certificate_id: string;
+
+    /**
+     * Common Name that is protected by the certificate
+     */
+    cn: string;
+  }
+
+  export interface TeamsDevicesWorkspaceOneInputRequest {
+    /**
+     * Compliance Status
+     */
+    compliance_status: 'compliant' | 'noncompliant' | 'unknown';
+
+    /**
+     * Posture Integration ID.
+     */
+    connection_id: string;
+  }
+
+  export interface TeamsDevicesCrowdstrikeInputRequest {
+    /**
+     * Posture Integration ID.
+     */
+    connection_id: string;
+
+    /**
+     * For more details on last seen, please refer to the Crowdstrike documentation.
+     */
+    last_seen?: string;
+
+    /**
+     * operator
+     */
+    operator?: PostureAPI.UnnamedSchemaRef34ef0ad73a63c3f76ed170adca181930;
+
+    /**
+     * Os Version
+     */
+    os?: string;
+
+    /**
+     * overall
+     */
+    overall?: string;
+
+    /**
+     * SensorConfig
+     */
+    sensor_config?: string;
+
+    /**
+     * For more details on state, please refer to the Crowdstrike documentation.
+     */
+    state?: 'online' | 'offline' | 'unknown';
+
+    /**
+     * Version
+     */
+    version?: string;
+
+    /**
+     * Version Operator
+     */
+    versionOperator?: '<' | '<=' | '>' | '>=' | '==';
+  }
+
+  export interface TeamsDevicesIntuneInputRequest {
+    /**
+     * Compliance Status
+     */
+    compliance_status: 'compliant' | 'noncompliant' | 'unknown' | 'notapplicable' | 'ingraceperiod' | 'error';
+
+    /**
+     * Posture Integration ID.
+     */
+    connection_id: string;
+  }
+
+  export interface TeamsDevicesKolideInputRequest {
+    /**
+     * Posture Integration ID.
+     */
+    connection_id: string;
+
+    /**
+     * Count Operator
+     */
+    countOperator: '<' | '<=' | '>' | '>=' | '==';
+
+    /**
+     * The Number of Issues.
+     */
+    issue_count: string;
+  }
+
+  export interface TeamsDevicesTaniumInputRequest {
+    /**
+     * Posture Integration ID.
+     */
+    connection_id: string;
+
+    /**
+     * For more details on eid last seen, refer to the Tanium documentation.
+     */
+    eid_last_seen?: string;
+
+    /**
+     * Operator to evaluate risk_level or eid_last_seen.
+     */
     operator?: '<' | '<=' | '>' | '>=' | '==';
+
+    /**
+     * For more details on risk level, refer to the Tanium documentation.
+     */
+    risk_level?: 'low' | 'medium' | 'high' | 'critical';
+
+    /**
+     * Score Operator
+     */
+    scoreOperator?: '<' | '<=' | '>' | '>=' | '==';
+
+    /**
+     * For more details on total score, refer to the Tanium documentation.
+     */
+    total_score?: number;
+  }
+
+  export interface TeamsDevicesSentineloneS2sInputRequest {
+    /**
+     * Posture Integration ID.
+     */
+    connection_id: string;
+
+    /**
+     * The Number of active threats.
+     */
+    active_threats?: number;
+
+    /**
+     * Whether device is infected.
+     */
+    infected?: boolean;
+
+    /**
+     * Whether device is active.
+     */
+    is_active?: boolean;
+
+    /**
+     * Network status of device.
+     */
+    network_status?: 'connected' | 'disconnected' | 'disconnecting' | 'connecting';
+
+    /**
+     * operator
+     */
+    operator?: PostureAPI.UnnamedSchemaRef34ef0ad73a63c3f76ed170adca181930;
   }
 
   export interface Match {
@@ -606,7 +1039,7 @@ export namespace PostureCreateParams {
     /**
      * Operating system
      */
-    operating_system: 'windows' | 'linux' | 'mac';
+    operating_system: PostureAPI.UnnamedSchemaRef41885dd46b9e0294254c49305a273681;
 
     /**
      * File path.
@@ -660,9 +1093,9 @@ export namespace PostureCreateParams {
     operating_system: 'windows';
 
     /**
-     * Operator
+     * operator
      */
-    operator: '<' | '<=' | '>' | '>=' | '==';
+    operator: PostureAPI.UnnamedSchemaRef34ef0ad73a63c3f76ed170adca181930;
 
     /**
      * Version of OS
@@ -702,7 +1135,7 @@ export namespace PostureCreateParams {
     /**
      * Operating system
      */
-    operating_system: 'windows' | 'linux' | 'mac';
+    operating_system: PostureAPI.UnnamedSchemaRef41885dd46b9e0294254c49305a273681;
 
     /**
      * File path.
@@ -724,7 +1157,7 @@ export namespace PostureCreateParams {
     /**
      * Operating system
      */
-    operating_system: 'windows' | 'linux' | 'mac';
+    operating_system: PostureAPI.UnnamedSchemaRef41885dd46b9e0294254c49305a273681;
 
     /**
      * File path.
@@ -758,7 +1191,7 @@ export namespace PostureCreateParams {
     /**
      * Operating system
      */
-    operating_system: 'windows' | 'linux' | 'mac';
+    operating_system: PostureAPI.UnnamedSchemaRef41885dd46b9e0294254c49305a273681;
 
     /**
      * Path for the application.
@@ -812,9 +1245,9 @@ export namespace PostureCreateParams {
     last_seen?: string;
 
     /**
-     * Operator
+     * operator
      */
-    operator?: '<' | '<=' | '>' | '>=' | '==';
+    operator?: PostureAPI.UnnamedSchemaRef34ef0ad73a63c3f76ed170adca181930;
 
     /**
      * Os Version
@@ -937,7 +1370,7 @@ export namespace PostureCreateParams {
     /**
      * operator
      */
-    operator?: '<' | '<=' | '>' | '>=' | '==';
+    operator?: PostureAPI.UnnamedSchemaRef34ef0ad73a63c3f76ed170adca181930;
   }
 
   export interface Match {
@@ -1029,7 +1462,7 @@ export namespace PostureUpdateParams {
     /**
      * Operating system
      */
-    operating_system: 'windows' | 'linux' | 'mac';
+    operating_system: PostureAPI.UnnamedSchemaRef41885dd46b9e0294254c49305a273681;
 
     /**
      * File path.
@@ -1083,9 +1516,9 @@ export namespace PostureUpdateParams {
     operating_system: 'windows';
 
     /**
-     * Operator
+     * operator
      */
-    operator: '<' | '<=' | '>' | '>=' | '==';
+    operator: PostureAPI.UnnamedSchemaRef34ef0ad73a63c3f76ed170adca181930;
 
     /**
      * Version of OS
@@ -1125,7 +1558,7 @@ export namespace PostureUpdateParams {
     /**
      * Operating system
      */
-    operating_system: 'windows' | 'linux' | 'mac';
+    operating_system: PostureAPI.UnnamedSchemaRef41885dd46b9e0294254c49305a273681;
 
     /**
      * File path.
@@ -1147,7 +1580,7 @@ export namespace PostureUpdateParams {
     /**
      * Operating system
      */
-    operating_system: 'windows' | 'linux' | 'mac';
+    operating_system: PostureAPI.UnnamedSchemaRef41885dd46b9e0294254c49305a273681;
 
     /**
      * File path.
@@ -1181,7 +1614,7 @@ export namespace PostureUpdateParams {
     /**
      * Operating system
      */
-    operating_system: 'windows' | 'linux' | 'mac';
+    operating_system: PostureAPI.UnnamedSchemaRef41885dd46b9e0294254c49305a273681;
 
     /**
      * Path for the application.
@@ -1235,9 +1668,9 @@ export namespace PostureUpdateParams {
     last_seen?: string;
 
     /**
-     * Operator
+     * operator
      */
-    operator?: '<' | '<=' | '>' | '>=' | '==';
+    operator?: PostureAPI.UnnamedSchemaRef34ef0ad73a63c3f76ed170adca181930;
 
     /**
      * Os Version
@@ -1360,7 +1793,7 @@ export namespace PostureUpdateParams {
     /**
      * operator
      */
-    operator?: '<' | '<=' | '>' | '>=' | '==';
+    operator?: PostureAPI.UnnamedSchemaRef34ef0ad73a63c3f76ed170adca181930;
   }
 
   export interface Match {
@@ -1390,6 +1823,9 @@ export interface PostureGetParams {
 
 export namespace Posture {
   export import DevicePostureRules = PostureAPI.DevicePostureRules;
+  export import UnnamedSchemaRef34ef0ad73a63c3f76ed170adca181930 = PostureAPI.UnnamedSchemaRef34ef0ad73a63c3f76ed170adca181930;
+  export import UnnamedSchemaRef41885dd46b9e0294254c49305a273681 = PostureAPI.UnnamedSchemaRef41885dd46b9e0294254c49305a273681;
+  export import UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27 = PostureAPI.UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27;
   export import PostureDeleteResponse = PostureAPI.PostureDeleteResponse;
   export import DevicePostureRulesSinglePage = PostureAPI.DevicePostureRulesSinglePage;
   export import PostureCreateParams = PostureAPI.PostureCreateParams;
@@ -1399,7 +1835,7 @@ export namespace Posture {
   export import PostureGetParams = PostureAPI.PostureGetParams;
   export import Integrations = IntegrationsAPI.Integrations;
   export import DevicePostureIntegrations = IntegrationsAPI.DevicePostureIntegrations;
-  export import IntegrationDeleteResponse = IntegrationsAPI.IntegrationDeleteResponse;
+  export import UnnamedSchemaRefB84b377dfc9454d455b646d4bc9ab507 = IntegrationsAPI.UnnamedSchemaRefB84b377dfc9454d455b646d4bc9ab507;
   export import DevicePostureIntegrationsSinglePage = IntegrationsAPI.DevicePostureIntegrationsSinglePage;
   export import IntegrationCreateParams = IntegrationsAPI.IntegrationCreateParams;
   export import IntegrationListParams = IntegrationsAPI.IntegrationListParams;

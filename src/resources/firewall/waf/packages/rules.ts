@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as RulesAPI from 'cloudflare/resources/firewall/waf/packages/rules';
+import * as Shared from 'cloudflare/resources/shared';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class Rules extends APIResource {
@@ -57,18 +58,33 @@ export class Rules extends APIResource {
     ruleId: string,
     params: RuleGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleGetResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/firewall/waf/packages/${packageId}/rules/${ruleId}`,
         options,
-      ) as Core.APIPromise<{ result: RuleGetResponse }>
+      ) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
 export class WAFManagedRulesRulesV4PagePaginationArray extends V4PagePaginationArray<WAFManagedRulesRule> {}
+
+/**
+ * The rule group to which the current WAF rule belongs.
+ */
+export interface UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5 {
+  /**
+   * The unique identifier of the rule group.
+   */
+  id?: string;
+
+  /**
+   * The name of the rule group.
+   */
+  name?: string;
+}
 
 /**
  * When triggered, anomaly detection WAF rules contribute to an overall threat
@@ -108,7 +124,7 @@ export namespace WAFManagedRulesRule {
     /**
      * The rule group to which the current WAF rule belongs.
      */
-    group: WAFManagedRulesAnomalyRule.Group;
+    group: RulesAPI.UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5;
 
     /**
      * When set to `on`, the current WAF rule will be used when evaluating the request.
@@ -125,23 +141,6 @@ export namespace WAFManagedRulesRule {
      * The order in which the individual WAF rule is executed within its rule group.
      */
     priority: string;
-  }
-
-  export namespace WAFManagedRulesAnomalyRule {
-    /**
-     * The rule group to which the current WAF rule belongs.
-     */
-    export interface Group {
-      /**
-       * The unique identifier of the rule group.
-       */
-      id?: string;
-
-      /**
-       * The name of the rule group.
-       */
-      name?: string;
-    }
   }
 
   /**
@@ -174,7 +173,7 @@ export namespace WAFManagedRulesRule {
     /**
      * The rule group to which the current WAF rule belongs.
      */
-    group: WAFManagedRulesTraditionalDenyRule.Group;
+    group: RulesAPI.UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5;
 
     /**
      * The action that the current WAF rule will perform when triggered. Applies to
@@ -191,23 +190,6 @@ export namespace WAFManagedRulesRule {
      * The order in which the individual WAF rule is executed within its rule group.
      */
     priority: string;
-  }
-
-  export namespace WAFManagedRulesTraditionalDenyRule {
-    /**
-     * The rule group to which the current WAF rule belongs.
-     */
-    export interface Group {
-      /**
-       * The unique identifier of the rule group.
-       */
-      id?: string;
-
-      /**
-       * The name of the rule group.
-       */
-      name?: string;
-    }
   }
 
   /**
@@ -236,7 +218,7 @@ export namespace WAFManagedRulesRule {
     /**
      * The rule group to which the current WAF rule belongs.
      */
-    group: WAFManagedRulesTraditionalAllowRule.Group;
+    group: RulesAPI.UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5;
 
     /**
      * When set to `on`, the current rule will be used when evaluating the request.
@@ -253,23 +235,6 @@ export namespace WAFManagedRulesRule {
      * The order in which the individual WAF rule is executed within its rule group.
      */
     priority: string;
-  }
-
-  export namespace WAFManagedRulesTraditionalAllowRule {
-    /**
-     * The rule group to which the current WAF rule belongs.
-     */
-    export interface Group {
-      /**
-       * The unique identifier of the rule group.
-       */
-      id?: string;
-
-      /**
-       * The name of the rule group.
-       */
-      name?: string;
-    }
   }
 }
 
@@ -311,7 +276,7 @@ export namespace RuleEditResponse {
     /**
      * The rule group to which the current WAF rule belongs.
      */
-    group: WAFManagedRulesAnomalyRule.Group;
+    group: RulesAPI.UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5;
 
     /**
      * When set to `on`, the current WAF rule will be used when evaluating the request.
@@ -328,23 +293,6 @@ export namespace RuleEditResponse {
      * The order in which the individual WAF rule is executed within its rule group.
      */
     priority: string;
-  }
-
-  export namespace WAFManagedRulesAnomalyRule {
-    /**
-     * The rule group to which the current WAF rule belongs.
-     */
-    export interface Group {
-      /**
-       * The unique identifier of the rule group.
-       */
-      id?: string;
-
-      /**
-       * The name of the rule group.
-       */
-      name?: string;
-    }
   }
 
   /**
@@ -377,7 +325,7 @@ export namespace RuleEditResponse {
     /**
      * The rule group to which the current WAF rule belongs.
      */
-    group: WAFManagedRulesTraditionalDenyRule.Group;
+    group: RulesAPI.UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5;
 
     /**
      * The action that the current WAF rule will perform when triggered. Applies to
@@ -394,23 +342,6 @@ export namespace RuleEditResponse {
      * The order in which the individual WAF rule is executed within its rule group.
      */
     priority: string;
-  }
-
-  export namespace WAFManagedRulesTraditionalDenyRule {
-    /**
-     * The rule group to which the current WAF rule belongs.
-     */
-    export interface Group {
-      /**
-       * The unique identifier of the rule group.
-       */
-      id?: string;
-
-      /**
-       * The name of the rule group.
-       */
-      name?: string;
-    }
   }
 
   /**
@@ -439,7 +370,7 @@ export namespace RuleEditResponse {
     /**
      * The rule group to which the current WAF rule belongs.
      */
-    group: WAFManagedRulesTraditionalAllowRule.Group;
+    group: RulesAPI.UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5;
 
     /**
      * When set to `on`, the current rule will be used when evaluating the request.
@@ -457,26 +388,7 @@ export namespace RuleEditResponse {
      */
     priority: string;
   }
-
-  export namespace WAFManagedRulesTraditionalAllowRule {
-    /**
-     * The rule group to which the current WAF rule belongs.
-     */
-    export interface Group {
-      /**
-       * The unique identifier of the rule group.
-       */
-      id?: string;
-
-      /**
-       * The name of the rule group.
-       */
-      name?: string;
-    }
-  }
 }
-
-export type RuleGetResponse = unknown | string | null;
 
 export interface RuleListParams extends V4PagePaginationArrayParams {
   /**
@@ -543,9 +455,9 @@ export interface RuleGetParams {
 }
 
 export namespace Rules {
+  export import UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5 = RulesAPI.UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5;
   export import WAFManagedRulesRule = RulesAPI.WAFManagedRulesRule;
   export import RuleEditResponse = RulesAPI.RuleEditResponse;
-  export import RuleGetResponse = RulesAPI.RuleGetResponse;
   export import WAFManagedRulesRulesV4PagePaginationArray = RulesAPI.WAFManagedRulesRulesV4PagePaginationArray;
   export import RuleListParams = RulesAPI.RuleListParams;
   export import RuleEditParams = RulesAPI.RuleEditParams;

@@ -28,40 +28,12 @@ describe('resource settings', () => {
   test.skip('edit: required and optional params', async () => {
     const response = await cloudflare.workers.scripts.settings.edit('this-is_my_script-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      settings: {
-        bindings: [{ type: 'kv_namespace' }, { type: 'kv_namespace' }, { type: 'kv_namespace' }],
-        compatibility_date: '2022-04-05',
-        compatibility_flags: [
-          'formdata_parser_supports_files',
-          'formdata_parser_supports_files',
-          'formdata_parser_supports_files',
-        ],
-        logpush: false,
-        migrations: {
-          new_tag: 'v2',
-          old_tag: 'v1',
-          deleted_classes: ['string', 'string', 'string'],
-          new_classes: ['string', 'string', 'string'],
-          renamed_classes: [
-            { from: 'string', to: 'string' },
-            { from: 'string', to: 'string' },
-            { from: 'string', to: 'string' },
-          ],
-          transferred_classes: [
-            { from: 'string', from_script: 'string', to: 'string' },
-            { from: 'string', from_script: 'string', to: 'string' },
-            { from: 'string', from_script: 'string', to: 'string' },
-          ],
-        },
-        placement: { mode: 'smart' },
-        tags: ['my-tag', 'my-tag', 'my-tag'],
-        tail_consumers: [
-          { environment: 'production', namespace: 'my-namespace', service: 'my-log-consumer' },
-          { environment: 'production', namespace: 'my-namespace', service: 'my-log-consumer' },
-          { environment: 'production', namespace: 'my-namespace', service: 'my-log-consumer' },
-        ],
-        usage_model: 'unbound',
-      },
+      logpush: false,
+      tail_consumers: [
+        { environment: 'production', namespace: 'my-namespace', service: 'my-log-consumer' },
+        { environment: 'production', namespace: 'my-namespace', service: 'my-log-consumer' },
+        { environment: 'production', namespace: 'my-namespace', service: 'my-log-consumer' },
+      ],
     });
   });
 

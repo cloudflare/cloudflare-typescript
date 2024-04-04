@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as SnippetsAPI from 'cloudflare/resources/snippets/snippets';
+import * as Shared from 'cloudflare/resources/shared';
 import * as ContentAPI from 'cloudflare/resources/snippets/content';
 import * as RulesAPI from 'cloudflare/resources/snippets/rules';
 import { multipartFormRequestOptions } from 'cloudflare/core';
@@ -58,10 +59,10 @@ export class Snippets extends APIResource {
     zoneIdentifier: string,
     snippetName: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SnippetDeleteResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRefEc4d85c3d1bcc6b3b7e99c199ae99846> {
     return (
       this._client.delete(`/zones/${zoneIdentifier}/snippets/${snippetName}`, options) as Core.APIPromise<{
-        result: SnippetDeleteResponse;
+        result: Shared.UnnamedSchemaRefEc4d85c3d1bcc6b3b7e99c199ae99846;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -100,8 +101,6 @@ export interface Snippet {
   snippet_name?: string;
 }
 
-export type SnippetDeleteResponse = unknown | Array<unknown> | string;
-
 export interface SnippetUpdateParams {
   /**
    * Content files of uploaded snippet
@@ -122,7 +121,6 @@ export namespace SnippetUpdateParams {
 
 export namespace Snippets {
   export import Snippet = SnippetsAPI.Snippet;
-  export import SnippetDeleteResponse = SnippetsAPI.SnippetDeleteResponse;
   export import SnippetsSinglePage = SnippetsAPI.SnippetsSinglePage;
   export import SnippetUpdateParams = SnippetsAPI.SnippetUpdateParams;
   export import Content = ContentAPI.Content;

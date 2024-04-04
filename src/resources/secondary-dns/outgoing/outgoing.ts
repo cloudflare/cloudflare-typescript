@@ -126,6 +126,45 @@ export type SecondaryDNSDisableTransfer = string;
  */
 export type SecondaryDNSEnableTransfer = string;
 
+export interface UnnamedSchemaRef0e152c3e4c55b8a0ca6531578a42c564 {
+  id?: string;
+
+  /**
+   * The time for a specific event.
+   */
+  checked_time?: string;
+
+  /**
+   * The time for a specific event.
+   */
+  created_time?: string;
+
+  /**
+   * The time for a specific event.
+   */
+  last_transferred_time?: string;
+
+  /**
+   * Zone name.
+   */
+  name?: string;
+
+  /**
+   * A list of peer tags.
+   */
+  peers?: Array<unknown>;
+
+  /**
+   * The serial number of the SOA for the given zone.
+   */
+  soa_serial?: number;
+}
+
+/**
+ * The zone transfer status of a primary zone
+ */
+export type UnnamedSchemaRefBf34e74a34c9a2f63d85505dc69d4adc = string | null;
+
 export interface OutgoingCreateResponse {
   id?: string;
 
@@ -327,6 +366,8 @@ export interface OutgoingGetParams {
 export namespace Outgoing {
   export import SecondaryDNSDisableTransfer = OutgoingAPI.SecondaryDNSDisableTransfer;
   export import SecondaryDNSEnableTransfer = OutgoingAPI.SecondaryDNSEnableTransfer;
+  export import UnnamedSchemaRef0e152c3e4c55b8a0ca6531578a42c564 = OutgoingAPI.UnnamedSchemaRef0e152c3e4c55b8a0ca6531578a42c564;
+  export import UnnamedSchemaRefBf34e74a34c9a2f63d85505dc69d4adc = OutgoingAPI.UnnamedSchemaRefBf34e74a34c9a2f63d85505dc69d4adc;
   export import OutgoingCreateResponse = OutgoingAPI.OutgoingCreateResponse;
   export import OutgoingUpdateResponse = OutgoingAPI.OutgoingUpdateResponse;
   export import OutgoingDeleteResponse = OutgoingAPI.OutgoingDeleteResponse;

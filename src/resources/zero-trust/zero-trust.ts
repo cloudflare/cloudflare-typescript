@@ -33,11 +33,12 @@ export class ZeroTrust extends APIResource {
 export namespace ZeroTrust {
   export import Devices = DevicesAPI.Devices;
   export import ZeroTrustDevices = DevicesAPI.ZeroTrustDevices;
-  export import DeviceGetResponse = DevicesAPI.DeviceGetResponse;
   export import ZeroTrustDevicesSinglePage = DevicesAPI.ZeroTrustDevicesSinglePage;
   export import DeviceListParams = DevicesAPI.DeviceListParams;
   export import DeviceGetParams = DevicesAPI.DeviceGetParams;
   export import IdentityProviders = IdentityProvidersAPI.IdentityProviders;
+  export import UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb = IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+  export import UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1 = IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
   export import ZeroTrustIdentityProviders = IdentityProvidersAPI.ZeroTrustIdentityProviders;
   export import IdentityProviderListResponse = IdentityProvidersAPI.IdentityProviderListResponse;
   export import IdentityProviderDeleteResponse = IdentityProvidersAPI.IdentityProviderDeleteResponse;
@@ -60,11 +61,10 @@ export namespace ZeroTrust {
   export import SeatEditParams = SeatsAPI.SeatEditParams;
   export import Access = AccessAPI.Access;
   export import DEX = DEXAPI.DEX;
+  export import UnnamedSchemaRefBf9e2abcf1b78a6cab8e6e29e2228a11 = DEXAPI.UnnamedSchemaRefBf9e2abcf1b78a6cab8e6e29e2228a11;
   export import Tunnels = TunnelsAPI.Tunnels;
   export import TunnelArgoTunnel = TunnelsAPI.TunnelArgoTunnel;
-  export import TunnelListResponse = TunnelsAPI.TunnelListResponse;
-  export import TunnelEditResponse = TunnelsAPI.TunnelEditResponse;
-  export import TunnelListResponsesV4PagePaginationArray = TunnelsAPI.TunnelListResponsesV4PagePaginationArray;
+  export import UnnamedSchemaRefA9c0e0a8cc5fd0e244f41ea806cd954a = TunnelsAPI.UnnamedSchemaRefA9c0e0a8cc5fd0e244f41ea806cd954a;
   export import TunnelCreateParams = TunnelsAPI.TunnelCreateParams;
   export import TunnelListParams = TunnelsAPI.TunnelListParams;
   export import TunnelDeleteParams = TunnelsAPI.TunnelDeleteParams;

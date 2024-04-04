@@ -3,6 +3,8 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as KeylessCertificatesAPI from 'cloudflare/resources/keyless-certificates';
+import * as Shared from 'cloudflare/resources/shared';
+import * as CustomHostnamesAPI from 'cloudflare/resources/custom-hostnames/custom-hostnames';
 import { SinglePage } from 'cloudflare/pagination';
 
 export class KeylessCertificates extends APIResource {
@@ -43,13 +45,13 @@ export class KeylessCertificates extends APIResource {
     keylessCertificateId: string,
     params: KeylessCertificateDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<KeylessCertificateDeleteResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef8900f4cb9dca9b9ed0ac41ad571e6837> {
     const { zone_id, body } = params;
     return (
       this._client.delete(`/zones/${zone_id}/keyless_certificates/${keylessCertificateId}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: KeylessCertificateDeleteResponse }>
+      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef8900f4cb9dca9b9ed0ac41ad571e6837 }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -233,11 +235,75 @@ export namespace KeylessCertificateHostname {
   }
 }
 
-export interface KeylessCertificateDeleteResponse {
+export interface UnnamedSchemaRefA91f0bd72ee433f010eecfdc94ccf298 {
   /**
-   * Identifier
+   * Keyless certificate identifier tag.
    */
-  id?: string;
+  id: string;
+
+  /**
+   * When the Keyless SSL was created.
+   */
+  created_on: string;
+
+  /**
+   * Whether or not the Keyless SSL is on or off.
+   */
+  enabled: boolean;
+
+  /**
+   * The keyless SSL name.
+   */
+  host: string;
+
+  /**
+   * When the Keyless SSL was last modified.
+   */
+  modified_on: string;
+
+  /**
+   * The keyless SSL name.
+   */
+  name: string;
+
+  /**
+   * Available permissions for the Keyless SSL for the current user requesting the
+   * item.
+   */
+  permissions: Array<unknown>;
+
+  /**
+   * The keyless SSL port used to communicate between Cloudflare and the client's
+   * Keyless SSL server.
+   */
+  port: number;
+
+  /**
+   * Status of the Keyless SSL.
+   */
+  status: 'active' | 'deleted';
+
+  /**
+   * Configuration for using Keyless SSL through a Cloudflare Tunnel
+   */
+  tunnel?: UnnamedSchemaRefA91f0bd72ee433f010eecfdc94ccf298.Tunnel;
+}
+
+export namespace UnnamedSchemaRefA91f0bd72ee433f010eecfdc94ccf298 {
+  /**
+   * Configuration for using Keyless SSL through a Cloudflare Tunnel
+   */
+  export interface Tunnel {
+    /**
+     * Private IP of the Key Server Host
+     */
+    private_ip: string;
+
+    /**
+     * Cloudflare Tunnel Virtual Network ID
+     */
+    vnet_id: string;
+  }
 }
 
 export interface KeylessCertificateCreateParams {
@@ -268,7 +334,7 @@ export interface KeylessCertificateCreateParams {
    * bundle uses the shortest chain and newest intermediates. And the force bundle
    * verifies the chain, but does not otherwise modify it.
    */
-  bundle_method?: 'ubiquitous' | 'optimal' | 'force';
+  bundle_method?: CustomHostnamesAPI.UnnamedSchemaRef16aca57bde2963201c7e6e895436c1c1;
 
   /**
    * Body param: The keyless SSL name.
@@ -377,7 +443,7 @@ export interface KeylessCertificateGetParams {
 export namespace KeylessCertificates {
   export import KeylessCertificate = KeylessCertificatesAPI.KeylessCertificate;
   export import KeylessCertificateHostname = KeylessCertificatesAPI.KeylessCertificateHostname;
-  export import KeylessCertificateDeleteResponse = KeylessCertificatesAPI.KeylessCertificateDeleteResponse;
+  export import UnnamedSchemaRefA91f0bd72ee433f010eecfdc94ccf298 = KeylessCertificatesAPI.UnnamedSchemaRefA91f0bd72ee433f010eecfdc94ccf298;
   export import KeylessCertificateHostnamesSinglePage = KeylessCertificatesAPI.KeylessCertificateHostnamesSinglePage;
   export import KeylessCertificateCreateParams = KeylessCertificatesAPI.KeylessCertificateCreateParams;
   export import KeylessCertificateListParams = KeylessCertificatesAPI.KeylessCertificateListParams;

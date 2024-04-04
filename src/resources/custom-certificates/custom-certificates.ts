@@ -4,7 +4,9 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as CustomCertificatesAPI from 'cloudflare/resources/custom-certificates/custom-certificates';
 import * as KeylessCertificatesAPI from 'cloudflare/resources/keyless-certificates';
+import * as Shared from 'cloudflare/resources/shared';
 import * as PrioritizeAPI from 'cloudflare/resources/custom-certificates/prioritize';
+import * as CustomHostnamesAPI from 'cloudflare/resources/custom-hostnames/custom-hostnames';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class CustomCertificates extends APIResource {
@@ -16,11 +18,11 @@ export class CustomCertificates extends APIResource {
   create(
     params: CustomCertificateCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomCertificateCreateResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/custom_certificates`, { body, ...options }) as Core.APIPromise<{
-        result: CustomCertificateCreateResponse;
+        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -49,13 +51,13 @@ export class CustomCertificates extends APIResource {
     customCertificateId: string,
     params: CustomCertificateDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomCertificateDeleteResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef8900f4cb9dca9b9ed0ac41ad571e6837> {
     const { zone_id, body } = params;
     return (
       this._client.delete(`/zones/${zone_id}/custom_certificates/${customCertificateId}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: CustomCertificateDeleteResponse }>
+      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef8900f4cb9dca9b9ed0ac41ad571e6837 }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -68,13 +70,13 @@ export class CustomCertificates extends APIResource {
     customCertificateId: string,
     params: CustomCertificateEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomCertificateEditResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/custom_certificates/${customCertificateId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: CustomCertificateEditResponse }>
+      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -85,13 +87,13 @@ export class CustomCertificates extends APIResource {
     customCertificateId: string,
     params: CustomCertificateGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomCertificateGetResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/custom_certificates/${customCertificateId}`,
         options,
-      ) as Core.APIPromise<{ result: CustomCertificateGetResponse }>
+      ) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -110,7 +112,7 @@ export interface CustomCertificate {
    * the shortest chain and newest intermediates. And the force bundle verifies the
    * chain, but does not otherwise modify it.
    */
-  bundle_method: 'ubiquitous' | 'optimal' | 'force';
+  bundle_method: CustomHostnamesAPI.UnnamedSchemaRef16aca57bde2963201c7e6e895436c1c1;
 
   /**
    * When the certificate from the authority expires.
@@ -199,19 +201,6 @@ export namespace CustomCertificate {
   }
 }
 
-export type CustomCertificateCreateResponse = unknown | string;
-
-export interface CustomCertificateDeleteResponse {
-  /**
-   * Identifier
-   */
-  id?: string;
-}
-
-export type CustomCertificateEditResponse = unknown | string;
-
-export type CustomCertificateGetResponse = unknown | string;
-
 export interface CustomCertificateCreateParams {
   /**
    * Path param: Identifier
@@ -234,7 +223,7 @@ export interface CustomCertificateCreateParams {
    * bundle uses the shortest chain and newest intermediates. And the force bundle
    * verifies the chain, but does not otherwise modify it.
    */
-  bundle_method?: 'ubiquitous' | 'optimal' | 'force';
+  bundle_method?: CustomHostnamesAPI.UnnamedSchemaRef16aca57bde2963201c7e6e895436c1c1;
 
   /**
    * Body param: Specify the region where your private key can be held locally for
@@ -323,7 +312,7 @@ export interface CustomCertificateEditParams {
    * bundle uses the shortest chain and newest intermediates. And the force bundle
    * verifies the chain, but does not otherwise modify it.
    */
-  bundle_method?: 'ubiquitous' | 'optimal' | 'force';
+  bundle_method?: CustomHostnamesAPI.UnnamedSchemaRef16aca57bde2963201c7e6e895436c1c1;
 
   /**
    * Body param: The zone's SSL certificate or certificate and the intermediate(s).
@@ -384,10 +373,6 @@ export interface CustomCertificateGetParams {
 
 export namespace CustomCertificates {
   export import CustomCertificate = CustomCertificatesAPI.CustomCertificate;
-  export import CustomCertificateCreateResponse = CustomCertificatesAPI.CustomCertificateCreateResponse;
-  export import CustomCertificateDeleteResponse = CustomCertificatesAPI.CustomCertificateDeleteResponse;
-  export import CustomCertificateEditResponse = CustomCertificatesAPI.CustomCertificateEditResponse;
-  export import CustomCertificateGetResponse = CustomCertificatesAPI.CustomCertificateGetResponse;
   export import CustomCertificatesV4PagePaginationArray = CustomCertificatesAPI.CustomCertificatesV4PagePaginationArray;
   export import CustomCertificateCreateParams = CustomCertificatesAPI.CustomCertificateCreateParams;
   export import CustomCertificateListParams = CustomCertificatesAPI.CustomCertificateListParams;

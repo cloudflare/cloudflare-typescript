@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as OriginCACertificatesAPI from 'cloudflare/resources/origin-ca-certificates';
+import * as Shared from 'cloudflare/resources/shared';
 import { SinglePage } from 'cloudflare/pagination';
 
 export class OriginCACertificates extends APIResource {
@@ -14,10 +15,10 @@ export class OriginCACertificates extends APIResource {
   create(
     body: OriginCACertificateCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<OriginCACertificateCreateResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     return (
       this._client.post('/certificates', { body, ...options }) as Core.APIPromise<{
-        result: OriginCACertificateCreateResponse;
+        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -51,10 +52,10 @@ export class OriginCACertificates extends APIResource {
     certificateId: string,
     body: OriginCACertificateDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<OriginCACertificateDeleteResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef8900f4cb9dca9b9ed0ac41ad571e6837> {
     return (
       this._client.delete(`/certificates/${certificateId}`, { body, ...options }) as Core.APIPromise<{
-        result: OriginCACertificateDeleteResponse;
+        result: Shared.UnnamedSchemaRef8900f4cb9dca9b9ed0ac41ad571e6837;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -64,10 +65,13 @@ export class OriginCACertificates extends APIResource {
    * Key as your User Service Key when calling this endpoint
    * ([see above](#requests)).
    */
-  get(certificateId: string, options?: Core.RequestOptions): Core.APIPromise<OriginCACertificateGetResponse> {
+  get(
+    certificateId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     return (
       this._client.get(`/certificates/${certificateId}`, options) as Core.APIPromise<{
-        result: OriginCACertificateGetResponse;
+        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -114,17 +118,6 @@ export interface OriginCACertificate {
   expires_on?: string;
 }
 
-export type OriginCACertificateCreateResponse = unknown | string;
-
-export interface OriginCACertificateDeleteResponse {
-  /**
-   * Identifier
-   */
-  id?: string;
-}
-
-export type OriginCACertificateGetResponse = unknown | string;
-
 export interface OriginCACertificateCreateParams {
   /**
    * The Certificate Signing Request (CSR). Must be newline-encoded.
@@ -160,9 +153,6 @@ export type OriginCACertificateDeleteParams = unknown;
 
 export namespace OriginCACertificates {
   export import OriginCACertificate = OriginCACertificatesAPI.OriginCACertificate;
-  export import OriginCACertificateCreateResponse = OriginCACertificatesAPI.OriginCACertificateCreateResponse;
-  export import OriginCACertificateDeleteResponse = OriginCACertificatesAPI.OriginCACertificateDeleteResponse;
-  export import OriginCACertificateGetResponse = OriginCACertificatesAPI.OriginCACertificateGetResponse;
   export import OriginCACertificatesSinglePage = OriginCACertificatesAPI.OriginCACertificatesSinglePage;
   export import OriginCACertificateCreateParams = OriginCACertificatesAPI.OriginCACertificateCreateParams;
   export import OriginCACertificateListParams = OriginCACertificatesAPI.OriginCACertificateListParams;

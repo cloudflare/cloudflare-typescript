@@ -66,6 +66,7 @@ export namespace ContentLists {
   export import ContentListUpdateParams = ContentListsAPI.ContentListUpdateParams;
   export import Entries = EntriesAPI.Entries;
   export import DistributedWebConfigContentListEntry = EntriesAPI.DistributedWebConfigContentListEntry;
+  export import UnnamedSchemaRef5e618833803e286db9ee7c73727f8b86 = EntriesAPI.UnnamedSchemaRef5e618833803e286db9ee7c73727f8b86;
   export import EntryListResponse = EntriesAPI.EntryListResponse;
   export import EntryDeleteResponse = EntriesAPI.EntryDeleteResponse;
   export import EntryCreateParams = EntriesAPI.EntryCreateParams;

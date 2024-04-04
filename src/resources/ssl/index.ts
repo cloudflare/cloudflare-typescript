@@ -1,11 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { AnalyzeCreateResponse, AnalyzeCreateParams, Analyze } from './analyze';
+export { AnalyzeCreateParams, Analyze } from './analyze';
 export {
   CertificatePackListResponse,
-  CertificatePackDeleteResponse,
   CertificatePackEditResponse,
-  CertificatePackGetResponse,
   CertificatePackListParams,
   CertificatePackDeleteParams,
   CertificatePackEditParams,

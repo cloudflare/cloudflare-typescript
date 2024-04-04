@@ -2,6 +2,7 @@
 
 export {
   OriginTLSClientCertificate,
+  UnnamedSchemaRefD182888b36f93a765d9ce5aefa3009e9,
   CertificateCreateParams,
   CertificateListParams,
   CertificateDeleteParams,

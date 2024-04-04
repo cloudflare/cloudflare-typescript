@@ -8,22 +8,20 @@ export {
   Packages,
 } from './packages';
 export {
-  WAFManagedRulesGroup,
-  GroupEditResponse,
-  GroupGetResponse,
-  GroupListParams,
-  GroupEditParams,
-  GroupGetParams,
-  WAFManagedRulesGroupsV4PagePaginationArray,
-  Groups,
-} from './groups';
-export {
+  UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5,
   WAFManagedRulesRule,
   RuleEditResponse,
-  RuleGetResponse,
   RuleListParams,
   RuleEditParams,
   RuleGetParams,
   WAFManagedRulesRulesV4PagePaginationArray,
   Rules,
 } from './rules';
+export {
+  WAFManagedRulesGroup,
+  GroupListParams,
+  GroupEditParams,
+  GroupGetParams,
+  WAFManagedRulesGroupsV4PagePaginationArray,
+  Groups,
+} from './groups';
