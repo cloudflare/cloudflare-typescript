@@ -4,34 +4,28 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ProxyReadTimeoutAPI from 'cloudflare/resources/zones/settings/proxy-read-timeout';
 
-export class ProxyReadTimeout extends APIResource {
+export class ProxyReadTimeoutResource extends APIResource {
   /**
    * Maximum time between two read operations from origin.
    */
-  edit(
-    params: ProxyReadTimeoutEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneSettingProxyReadTimeout> {
+  edit(params: ProxyReadTimeoutEditParams, options?: Core.RequestOptions): Core.APIPromise<ProxyReadTimeout> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/proxy_read_timeout`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZoneSettingProxyReadTimeout }>
+      }) as Core.APIPromise<{ result: ProxyReadTimeout }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Maximum time between two read operations from origin.
    */
-  get(
-    params: ProxyReadTimeoutGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneSettingProxyReadTimeout> {
+  get(params: ProxyReadTimeoutGetParams, options?: Core.RequestOptions): Core.APIPromise<ProxyReadTimeout> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/proxy_read_timeout`, options) as Core.APIPromise<{
-        result: ZoneSettingProxyReadTimeout;
+        result: ProxyReadTimeout;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -40,7 +34,7 @@ export class ProxyReadTimeout extends APIResource {
 /**
  * Maximum time between two read operations from origin.
  */
-export interface ZoneSettingProxyReadTimeout {
+export interface ProxyReadTimeout {
   /**
    * ID of the zone setting.
    */
@@ -72,7 +66,7 @@ export interface ProxyReadTimeoutEditParams {
   /**
    * Body param: Maximum time between two read operations from origin.
    */
-  value: ZoneSettingProxyReadTimeout;
+  value: ProxyReadTimeout;
 }
 
 export interface ProxyReadTimeoutGetParams {
@@ -82,8 +76,8 @@ export interface ProxyReadTimeoutGetParams {
   zone_id: string;
 }
 
-export namespace ProxyReadTimeout {
-  export import ZoneSettingProxyReadTimeout = ProxyReadTimeoutAPI.ZoneSettingProxyReadTimeout;
+export namespace ProxyReadTimeoutResource {
+  export import ProxyReadTimeout = ProxyReadTimeoutAPI.ProxyReadTimeout;
   export import ProxyReadTimeoutEditParams = ProxyReadTimeoutAPI.ProxyReadTimeoutEditParams;
   export import ProxyReadTimeoutGetParams = ProxyReadTimeoutAPI.ProxyReadTimeoutGetParams;
 }

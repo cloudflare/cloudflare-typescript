@@ -4,7 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as SSLAPI from 'cloudflare/resources/zones/settings/ssl';
 
-export class SSL extends APIResource {
+export class SSLResource extends APIResource {
   /**
    * SSL encrypts your visitor's connection and safeguards credit card numbers and
    * other personal data to and from your website. SSL can take up to 5 minutes to
@@ -23,11 +23,11 @@ export class SSL extends APIResource {
    * expiration date in the future, and respond for the request domain name
    * (hostname). (https://support.cloudflare.com/hc/en-us/articles/200170416).
    */
-  edit(params: SSLEditParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingSSL> {
+  edit(params: SSLEditParams, options?: Core.RequestOptions): Core.APIPromise<SSL> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/ssl`, { body, ...options }) as Core.APIPromise<{
-        result: ZoneSettingSSL;
+        result: SSL;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -50,12 +50,10 @@ export class SSL extends APIResource {
    * expiration date in the future, and respond for the request domain name
    * (hostname). (https://support.cloudflare.com/hc/en-us/articles/200170416).
    */
-  get(params: SSLGetParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingSSL> {
+  get(params: SSLGetParams, options?: Core.RequestOptions): Core.APIPromise<SSL> {
     const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zone_id}/settings/ssl`, options) as Core.APIPromise<{
-        result: ZoneSettingSSL;
-      }>
+      this._client.get(`/zones/${zone_id}/settings/ssl`, options) as Core.APIPromise<{ result: SSL }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -78,7 +76,7 @@ export class SSL extends APIResource {
  * expiration date in the future, and respond for the request domain name
  * (hostname). (https://support.cloudflare.com/hc/en-us/articles/200170416).
  */
-export interface ZoneSettingSSL {
+export interface SSL {
   /**
    * ID of the zone setting.
    */
@@ -120,8 +118,8 @@ export interface SSLGetParams {
   zone_id: string;
 }
 
-export namespace SSL {
-  export import ZoneSettingSSL = SSLAPI.ZoneSettingSSL;
+export namespace SSLResource {
+  export import SSL = SSLAPI.SSL;
   export import SSLEditParams = SSLAPI.SSLEditParams;
   export import SSLGetParams = SSLAPI.SSLGetParams;
 }

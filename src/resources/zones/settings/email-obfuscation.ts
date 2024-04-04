@@ -4,21 +4,18 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as EmailObfuscationAPI from 'cloudflare/resources/zones/settings/email-obfuscation';
 
-export class EmailObfuscation extends APIResource {
+export class EmailObfuscationResource extends APIResource {
   /**
    * Encrypt email adresses on your web page from bots, while keeping them visible to
    * humans. (https://support.cloudflare.com/hc/en-us/articles/200170016).
    */
-  edit(
-    params: EmailObfuscationEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneSettingEmailObfuscation> {
+  edit(params: EmailObfuscationEditParams, options?: Core.RequestOptions): Core.APIPromise<EmailObfuscation> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/email_obfuscation`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZoneSettingEmailObfuscation }>
+      }) as Core.APIPromise<{ result: EmailObfuscation }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -26,14 +23,11 @@ export class EmailObfuscation extends APIResource {
    * Encrypt email adresses on your web page from bots, while keeping them visible to
    * humans. (https://support.cloudflare.com/hc/en-us/articles/200170016).
    */
-  get(
-    params: EmailObfuscationGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneSettingEmailObfuscation> {
+  get(params: EmailObfuscationGetParams, options?: Core.RequestOptions): Core.APIPromise<EmailObfuscation> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/email_obfuscation`, options) as Core.APIPromise<{
-        result: ZoneSettingEmailObfuscation;
+        result: EmailObfuscation;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -43,7 +37,7 @@ export class EmailObfuscation extends APIResource {
  * Encrypt email adresses on your web page from bots, while keeping them visible to
  * humans. (https://support.cloudflare.com/hc/en-us/articles/200170016).
  */
-export interface ZoneSettingEmailObfuscation {
+export interface EmailObfuscation {
   /**
    * ID of the zone setting.
    */
@@ -85,8 +79,8 @@ export interface EmailObfuscationGetParams {
   zone_id: string;
 }
 
-export namespace EmailObfuscation {
-  export import ZoneSettingEmailObfuscation = EmailObfuscationAPI.ZoneSettingEmailObfuscation;
+export namespace EmailObfuscationResource {
+  export import EmailObfuscation = EmailObfuscationAPI.EmailObfuscation;
   export import EmailObfuscationEditParams = EmailObfuscationAPI.EmailObfuscationEditParams;
   export import EmailObfuscationGetParams = EmailObfuscationAPI.EmailObfuscationGetParams;
 }

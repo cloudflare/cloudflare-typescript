@@ -4,7 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as RocketLoaderAPI from 'cloudflare/resources/zones/settings/rocket-loader';
 
-export class RocketLoader extends APIResource {
+export class RocketLoaderResource extends APIResource {
   /**
    * Rocket Loader is a general-purpose asynchronous JavaScript optimisation that
    * prioritises rendering your content while loading your site's Javascript
@@ -17,16 +17,13 @@ export class RocketLoader extends APIResource {
    * [Understanding Rocket Loader](https://support.cloudflare.com/hc/articles/200168056)
    * for more information.
    */
-  edit(
-    params: RocketLoaderEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneSettingRocketLoader> {
+  edit(params: RocketLoaderEditParams, options?: Core.RequestOptions): Core.APIPromise<RocketLoader> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/rocket_loader`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZoneSettingRocketLoader }>
+      }) as Core.APIPromise<{ result: RocketLoader }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -42,14 +39,11 @@ export class RocketLoader extends APIResource {
    * [Understanding Rocket Loader](https://support.cloudflare.com/hc/articles/200168056)
    * for more information.
    */
-  get(
-    params: RocketLoaderGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneSettingRocketLoader> {
+  get(params: RocketLoaderGetParams, options?: Core.RequestOptions): Core.APIPromise<RocketLoader> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/rocket_loader`, options) as Core.APIPromise<{
-        result: ZoneSettingRocketLoader;
+        result: RocketLoader;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -67,7 +61,7 @@ export class RocketLoader extends APIResource {
  * [Understanding Rocket Loader](https://support.cloudflare.com/hc/articles/200168056)
  * for more information.
  */
-export interface ZoneSettingRocketLoader {
+export interface RocketLoader {
   /**
    * ID of the zone setting.
    */
@@ -108,7 +102,7 @@ export interface RocketLoaderEditParams {
    * [Understanding Rocket Loader](https://support.cloudflare.com/hc/articles/200168056)
    * for more information.
    */
-  value: ZoneSettingRocketLoader;
+  value: RocketLoader;
 }
 
 export interface RocketLoaderGetParams {
@@ -118,8 +112,8 @@ export interface RocketLoaderGetParams {
   zone_id: string;
 }
 
-export namespace RocketLoader {
-  export import ZoneSettingRocketLoader = RocketLoaderAPI.ZoneSettingRocketLoader;
+export namespace RocketLoaderResource {
+  export import RocketLoader = RocketLoaderAPI.RocketLoader;
   export import RocketLoaderEditParams = RocketLoaderAPI.RocketLoaderEditParams;
   export import RocketLoaderGetParams = RocketLoaderAPI.RocketLoaderGetParams;
 }

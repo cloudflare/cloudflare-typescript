@@ -4,17 +4,17 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as NELAPI from 'cloudflare/resources/zones/settings/nel';
 
-export class NEL extends APIResource {
+export class NELResource extends APIResource {
   /**
    * Automatically optimize image loading for website visitors on mobile devices.
    * Refer to our [blog post](http://blog.cloudflare.com/nel-solving-mobile-speed)
    * for more information.
    */
-  edit(params: NELEditParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingNEL> {
+  edit(params: NELEditParams, options?: Core.RequestOptions): Core.APIPromise<NEL> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/nel`, { body, ...options }) as Core.APIPromise<{
-        result: ZoneSettingNEL;
+        result: NEL;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -22,12 +22,10 @@ export class NEL extends APIResource {
   /**
    * Enable Network Error Logging reporting on your zone. (Beta)
    */
-  get(params: NELGetParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingNEL> {
+  get(params: NELGetParams, options?: Core.RequestOptions): Core.APIPromise<NEL> {
     const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zone_id}/settings/nel`, options) as Core.APIPromise<{
-        result: ZoneSettingNEL;
-      }>
+      this._client.get(`/zones/${zone_id}/settings/nel`, options) as Core.APIPromise<{ result: NEL }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -35,7 +33,7 @@ export class NEL extends APIResource {
 /**
  * Enable Network Error Logging reporting on your zone. (Beta)
  */
-export interface ZoneSettingNEL {
+export interface NEL {
   /**
    * Zone setting identifier.
    */
@@ -44,7 +42,7 @@ export interface ZoneSettingNEL {
   /**
    * Current value of the zone setting.
    */
-  value: ZoneSettingNEL.Value;
+  value: NEL.Value;
 
   /**
    * Whether or not this setting can be modified for this zone (based on your
@@ -58,7 +56,7 @@ export interface ZoneSettingNEL {
   modified_on?: string | null;
 }
 
-export namespace ZoneSettingNEL {
+export namespace NEL {
   /**
    * Current value of the zone setting.
    */
@@ -76,7 +74,7 @@ export interface NELEditParams {
   /**
    * Body param: Enable Network Error Logging reporting on your zone. (Beta)
    */
-  value: ZoneSettingNEL;
+  value: NEL;
 }
 
 export interface NELGetParams {
@@ -86,8 +84,8 @@ export interface NELGetParams {
   zone_id: string;
 }
 
-export namespace NEL {
-  export import ZoneSettingNEL = NELAPI.ZoneSettingNEL;
+export namespace NELResource {
+  export import NEL = NELAPI.NEL;
   export import NELEditParams = NELAPI.NELEditParams;
   export import NELGetParams = NELAPI.NELGetParams;
 }

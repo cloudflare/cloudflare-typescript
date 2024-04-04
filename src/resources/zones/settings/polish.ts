@@ -4,17 +4,17 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as PolishAPI from 'cloudflare/resources/zones/settings/polish';
 
-export class Polish extends APIResource {
+export class PolishResource extends APIResource {
   /**
    * Automatically optimize image loading for website visitors on mobile devices.
    * Refer to our [blog post](http://blog.cloudflare.com/polish-solving-mobile-speed)
    * for more information.
    */
-  edit(params: PolishEditParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingPolish> {
+  edit(params: PolishEditParams, options?: Core.RequestOptions): Core.APIPromise<Polish> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/polish`, { body, ...options }) as Core.APIPromise<{
-        result: ZoneSettingPolish;
+        result: Polish;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -24,12 +24,10 @@ export class Polish extends APIResource {
    * Refer to our [blog post](http://blog.cloudflare.com/polish-solving-mobile-speed)
    * for more information.
    */
-  get(params: PolishGetParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingPolish> {
+  get(params: PolishGetParams, options?: Core.RequestOptions): Core.APIPromise<Polish> {
     const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zone_id}/settings/polish`, options) as Core.APIPromise<{
-        result: ZoneSettingPolish;
-      }>
+      this._client.get(`/zones/${zone_id}/settings/polish`, options) as Core.APIPromise<{ result: Polish }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -42,7 +40,7 @@ export class Polish extends APIResource {
  * lower-resolution image first and ending in a higher-resolution version. Not
  * recommended for hi-res photography sites.
  */
-export interface ZoneSettingPolish {
+export interface Polish {
   /**
    * ID of the zone setting.
    */
@@ -79,7 +77,7 @@ export interface PolishEditParams {
    * loading a lower-resolution image first and ending in a higher-resolution
    * version. Not recommended for hi-res photography sites.
    */
-  value: ZoneSettingPolish;
+  value: Polish;
 }
 
 export interface PolishGetParams {
@@ -89,8 +87,8 @@ export interface PolishGetParams {
   zone_id: string;
 }
 
-export namespace Polish {
-  export import ZoneSettingPolish = PolishAPI.ZoneSettingPolish;
+export namespace PolishResource {
+  export import Polish = PolishAPI.Polish;
   export import PolishEditParams = PolishAPI.PolishEditParams;
   export import PolishGetParams = PolishAPI.PolishGetParams;
 }

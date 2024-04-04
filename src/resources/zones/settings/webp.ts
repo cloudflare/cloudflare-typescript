@@ -4,17 +4,17 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as WebPAPI from 'cloudflare/resources/zones/settings/webp';
 
-export class WebP extends APIResource {
+export class WebPResource extends APIResource {
   /**
    * When the client requesting the image supports the WebP image codec, and WebP
    * offers a performance advantage over the original image format, Cloudflare will
    * serve a WebP version of the original image.
    */
-  edit(params: WebPEditParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingWebP> {
+  edit(params: WebPEditParams, options?: Core.RequestOptions): Core.APIPromise<WebP> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/webp`, { body, ...options }) as Core.APIPromise<{
-        result: ZoneSettingWebP;
+        result: WebP;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -24,12 +24,10 @@ export class WebP extends APIResource {
    * offers a performance advantage over the original image format, Cloudflare will
    * serve a WebP version of the original image.
    */
-  get(params: WebPGetParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingWebP> {
+  get(params: WebPGetParams, options?: Core.RequestOptions): Core.APIPromise<WebP> {
     const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zone_id}/settings/webp`, options) as Core.APIPromise<{
-        result: ZoneSettingWebP;
-      }>
+      this._client.get(`/zones/${zone_id}/settings/webp`, options) as Core.APIPromise<{ result: WebP }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -39,7 +37,7 @@ export class WebP extends APIResource {
  * offers a performance advantage over the original image format, Cloudflare will
  * serve a WebP version of the original image.
  */
-export interface ZoneSettingWebP {
+export interface WebP {
   /**
    * ID of the zone setting.
    */
@@ -81,8 +79,8 @@ export interface WebPGetParams {
   zone_id: string;
 }
 
-export namespace WebP {
-  export import ZoneSettingWebP = WebPAPI.ZoneSettingWebP;
+export namespace WebPResource {
+  export import WebP = WebPAPI.WebP;
   export import WebPEditParams = WebPAPI.WebPEditParams;
   export import WebPGetParams = WebPAPI.WebPGetParams;
 }

@@ -4,7 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as AlwaysOnlineAPI from 'cloudflare/resources/zones/settings/always-online';
 
-export class AlwaysOnline extends APIResource {
+export class AlwaysOnlineResource extends APIResource {
   /**
    * When enabled, Cloudflare serves limited copies of web pages available from the
    * [Internet Archive's Wayback Machine](https://archive.org/web/) if your server is
@@ -12,16 +12,13 @@ export class AlwaysOnline extends APIResource {
    * [Always Online](https://developers.cloudflare.com/cache/about/always-online) for
    * more information.
    */
-  edit(
-    params: AlwaysOnlineEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneSettingAlwaysOnline> {
+  edit(params: AlwaysOnlineEditParams, options?: Core.RequestOptions): Core.APIPromise<AlwaysOnline> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/always_online`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZoneSettingAlwaysOnline }>
+      }) as Core.APIPromise<{ result: AlwaysOnline }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -32,14 +29,11 @@ export class AlwaysOnline extends APIResource {
    * [Always Online](https://developers.cloudflare.com/cache/about/always-online) for
    * more information.
    */
-  get(
-    params: AlwaysOnlineGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneSettingAlwaysOnline> {
+  get(params: AlwaysOnlineGetParams, options?: Core.RequestOptions): Core.APIPromise<AlwaysOnline> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/always_online`, options) as Core.APIPromise<{
-        result: ZoneSettingAlwaysOnline;
+        result: AlwaysOnline;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -52,7 +46,7 @@ export class AlwaysOnline extends APIResource {
  * [Always Online](https://developers.cloudflare.com/cache/about/always-online) for
  * more information.
  */
-export interface ZoneSettingAlwaysOnline {
+export interface AlwaysOnline {
   /**
    * ID of the zone setting.
    */
@@ -94,8 +88,8 @@ export interface AlwaysOnlineGetParams {
   zone_id: string;
 }
 
-export namespace AlwaysOnline {
-  export import ZoneSettingAlwaysOnline = AlwaysOnlineAPI.ZoneSettingAlwaysOnline;
+export namespace AlwaysOnlineResource {
+  export import AlwaysOnline = AlwaysOnlineAPI.AlwaysOnline;
   export import AlwaysOnlineEditParams = AlwaysOnlineAPI.AlwaysOnlineEditParams;
   export import AlwaysOnlineGetParams = AlwaysOnlineAPI.AlwaysOnlineGetParams;
 }

@@ -4,15 +4,15 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as HTTP2API from 'cloudflare/resources/zones/settings/http2';
 
-export class HTTP2 extends APIResource {
+export class HTTP2Resource extends APIResource {
   /**
    * Value of the HTTP2 setting.
    */
-  edit(params: HTTP2EditParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingHTTP2> {
+  edit(params: HTTP2EditParams, options?: Core.RequestOptions): Core.APIPromise<HTTP2> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/http2`, { body, ...options }) as Core.APIPromise<{
-        result: ZoneSettingHTTP2;
+        result: HTTP2;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -20,12 +20,10 @@ export class HTTP2 extends APIResource {
   /**
    * Value of the HTTP2 setting.
    */
-  get(params: HTTP2GetParams, options?: Core.RequestOptions): Core.APIPromise<ZoneSettingHTTP2> {
+  get(params: HTTP2GetParams, options?: Core.RequestOptions): Core.APIPromise<HTTP2> {
     const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zone_id}/settings/http2`, options) as Core.APIPromise<{
-        result: ZoneSettingHTTP2;
-      }>
+      this._client.get(`/zones/${zone_id}/settings/http2`, options) as Core.APIPromise<{ result: HTTP2 }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -33,7 +31,7 @@ export class HTTP2 extends APIResource {
 /**
  * HTTP2 enabled for this zone.
  */
-export interface ZoneSettingHTTP2 {
+export interface HTTP2 {
   /**
    * ID of the zone setting.
    */
@@ -75,8 +73,8 @@ export interface HTTP2GetParams {
   zone_id: string;
 }
 
-export namespace HTTP2 {
-  export import ZoneSettingHTTP2 = HTTP2API.ZoneSettingHTTP2;
+export namespace HTTP2Resource {
+  export import HTTP2 = HTTP2API.HTTP2;
   export import HTTP2EditParams = HTTP2API.HTTP2EditParams;
   export import HTTP2GetParams = HTTP2API.HTTP2GetParams;
 }

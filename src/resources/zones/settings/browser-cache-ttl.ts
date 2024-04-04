@@ -4,23 +4,20 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as BrowserCacheTTLAPI from 'cloudflare/resources/zones/settings/browser-cache-ttl';
 
-export class BrowserCacheTTL extends APIResource {
+export class BrowserCacheTTLResource extends APIResource {
   /**
    * Browser Cache TTL (in seconds) specifies how long Cloudflare-cached resources
    * will remain on your visitors' computers. Cloudflare will honor any larger times
    * specified by your server.
    * (https://support.cloudflare.com/hc/en-us/articles/200168276).
    */
-  edit(
-    params: BrowserCacheTTLEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneSettingBrowserCacheTTL> {
+  edit(params: BrowserCacheTTLEditParams, options?: Core.RequestOptions): Core.APIPromise<BrowserCacheTTL> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/settings/browser_cache_ttl`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZoneSettingBrowserCacheTTL }>
+      }) as Core.APIPromise<{ result: BrowserCacheTTL }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -30,14 +27,11 @@ export class BrowserCacheTTL extends APIResource {
    * specified by your server.
    * (https://support.cloudflare.com/hc/en-us/articles/200168276).
    */
-  get(
-    params: BrowserCacheTTLGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneSettingBrowserCacheTTL> {
+  get(params: BrowserCacheTTLGetParams, options?: Core.RequestOptions): Core.APIPromise<BrowserCacheTTL> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/browser_cache_ttl`, options) as Core.APIPromise<{
-        result: ZoneSettingBrowserCacheTTL;
+        result: BrowserCacheTTL;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -49,7 +43,7 @@ export class BrowserCacheTTL extends APIResource {
  * specified by your server.
  * (https://support.cloudflare.com/hc/en-us/articles/200168276).
  */
-export interface ZoneSettingBrowserCacheTTL {
+export interface BrowserCacheTTL {
   /**
    * ID of the zone setting.
    */
@@ -148,8 +142,8 @@ export interface BrowserCacheTTLGetParams {
   zone_id: string;
 }
 
-export namespace BrowserCacheTTL {
-  export import ZoneSettingBrowserCacheTTL = BrowserCacheTTLAPI.ZoneSettingBrowserCacheTTL;
+export namespace BrowserCacheTTLResource {
+  export import BrowserCacheTTL = BrowserCacheTTLAPI.BrowserCacheTTL;
   export import BrowserCacheTTLEditParams = BrowserCacheTTLAPI.BrowserCacheTTLEditParams;
   export import BrowserCacheTTLGetParams = BrowserCacheTTLAPI.BrowserCacheTTLGetParams;
 }
