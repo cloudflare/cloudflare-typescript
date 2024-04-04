@@ -20,6 +20,7 @@ export namespace R2 {
   export import BucketGetParams = BucketsAPI.BucketGetParams;
   export import Sippy = SippyAPI.Sippy;
   export import R2Sippy = SippyAPI.R2Sippy;
+  export import UnnamedSchemaRef6430970563db310f19d39aafe3debd27 = SippyAPI.UnnamedSchemaRef6430970563db310f19d39aafe3debd27;
   export import SippyDeleteResponse = SippyAPI.SippyDeleteResponse;
   export import SippyUpdateParams = SippyAPI.SippyUpdateParams;
   export import SippyDeleteParams = SippyAPI.SippyDeleteParams;

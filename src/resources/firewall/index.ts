@@ -1,11 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  AccessRuleCreateResponse,
   AccessRuleListResponse,
   AccessRuleDeleteResponse,
-  AccessRuleEditResponse,
-  AccessRuleGetResponse,
   AccessRuleCreateParams,
   AccessRuleListParams,
   AccessRuleDeleteParams,
@@ -17,6 +14,8 @@ export {
 export { Firewall } from './firewall';
 export {
   FirewallFilterRule,
+  UnnamedSchemaRef6fe6c1eba94d9c3f475fb22f0118bf57,
+  UnnamedSchemaRefAb48d2d33259c9107401d174735701c7,
   RuleCreateResponse,
   RuleEditResponse,
   RuleCreateParams,
@@ -30,11 +29,8 @@ export {
 } from './rules';
 export {
   FirewallUserAgentRule,
-  UARuleCreateResponse,
-  UARuleUpdateResponse,
   UARuleListResponse,
   UARuleDeleteResponse,
-  UARuleGetResponse,
   UARuleCreateParams,
   UARuleUpdateParams,
   UARuleListParams,
@@ -44,6 +40,7 @@ export {
 } from './ua-rules';
 export {
   FirewallZoneLockdown,
+  UnnamedSchemaRefA4044d3c73ad1e6c8fff4dc05f922ab5,
   LockdownDeleteResponse,
   LockdownCreateParams,
   LockdownUpdateParams,

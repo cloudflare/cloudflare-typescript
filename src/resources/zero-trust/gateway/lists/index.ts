@@ -2,9 +2,9 @@
 
 export { ItemListResponse, ItemListParams, ItemListResponsesSinglePage, Items } from './items';
 export {
+  UnnamedSchemaRef30ecd0f5ce68fc07dbb7760deda3d707,
   ZeroTrustGatewayLists,
   ListCreateResponse,
-  ListDeleteResponse,
   ListCreateParams,
   ListUpdateParams,
   ListListParams,

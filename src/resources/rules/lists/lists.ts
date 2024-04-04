@@ -130,6 +130,49 @@ export interface ListsList {
   num_referencing_filters?: number;
 }
 
+export interface UnnamedSchemaRefE706d5e8367564544e2991af82ebb07a {
+  /**
+   * The unique ID of the list.
+   */
+  id?: string;
+
+  /**
+   * The RFC 3339 timestamp of when the list was created.
+   */
+  created_on?: string;
+
+  /**
+   * An informative summary of the list.
+   */
+  description?: string;
+
+  /**
+   * The type of the list. Each type supports specific list items (IP addresses,
+   * ASNs, hostnames or redirects).
+   */
+  kind?: 'ip' | 'redirect' | 'hostname' | 'asn';
+
+  /**
+   * The RFC 3339 timestamp of when the list was last modified.
+   */
+  modified_on?: string;
+
+  /**
+   * An informative name for the list. Use this name in filter and rule expressions.
+   */
+  name?: string;
+
+  /**
+   * The number of items in the list.
+   */
+  num_items?: number;
+
+  /**
+   * The number of [filters](/operations/filters-list-filters) referencing the list.
+   */
+  num_referencing_filters?: number;
+}
+
 export interface ListDeleteResponse {
   /**
    * The unique ID of the item in the List.
@@ -201,6 +244,7 @@ export interface ListGetParams {
 
 export namespace Lists {
   export import ListsList = ListsAPI.ListsList;
+  export import UnnamedSchemaRefE706d5e8367564544e2991af82ebb07a = ListsAPI.UnnamedSchemaRefE706d5e8367564544e2991af82ebb07a;
   export import ListDeleteResponse = ListsAPI.ListDeleteResponse;
   export import ListsListsSinglePage = ListsAPI.ListsListsSinglePage;
   export import ListCreateParams = ListsAPI.ListCreateParams;
@@ -209,8 +253,11 @@ export namespace Lists {
   export import ListDeleteParams = ListsAPI.ListDeleteParams;
   export import ListGetParams = ListsAPI.ListGetParams;
   export import BulkOperations = BulkOperationsAPI.BulkOperations;
+  export import UnnamedSchemaRefCc279fb99baf6a166db5c4e790a8c6cd = BulkOperationsAPI.UnnamedSchemaRefCc279fb99baf6a166db5c4e790a8c6cd;
   export import BulkOperationGetResponse = BulkOperationsAPI.BulkOperationGetResponse;
   export import Items = ItemsAPI.Items;
+  export import UnnamedSchemaRef34bb6e31800bc0207c083affa12d2775 = ItemsAPI.UnnamedSchemaRef34bb6e31800bc0207c083affa12d2775;
+  export import UnnamedSchemaRef46621d4d5b6644caae5c9167b8e28865 = ItemsAPI.UnnamedSchemaRef46621d4d5b6644caae5c9167b8e28865;
   export import ItemCreateResponse = ItemsAPI.ItemCreateResponse;
   export import ItemUpdateResponse = ItemsAPI.ItemUpdateResponse;
   export import ItemListResponse = ItemsAPI.ItemListResponse;

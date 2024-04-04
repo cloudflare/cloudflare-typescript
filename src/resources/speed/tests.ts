@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as TestsAPI from 'cloudflare/resources/speed/tests';
+import * as Shared from 'cloudflare/resources/shared';
 
 export class Tests extends APIResource {
   /**
@@ -303,9 +304,9 @@ export namespace ObservatoryPageTest {
 }
 
 export interface TestListResponse {
-  errors: Array<TestListResponse.Error>;
+  errors: Array<Shared.UnnamedSchemaRef3248f24329456e19dfa042fff9986f72>;
 
-  messages: Array<TestListResponse.Message>;
+  messages: Array<Shared.UnnamedSchemaRef3248f24329456e19dfa042fff9986f72>;
 
   /**
    * Whether the API call was successful.
@@ -316,18 +317,6 @@ export interface TestListResponse {
 }
 
 export namespace TestListResponse {
-  export interface Error {
-    code: number;
-
-    message: string;
-  }
-
-  export interface Message {
-    code: number;
-
-    message: string;
-  }
-
   export interface ResultInfo {
     count?: number;
 

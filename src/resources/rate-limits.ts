@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as RateLimitsAPI from 'cloudflare/resources/rate-limits';
+import * as Shared from 'cloudflare/resources/shared';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class RateLimits extends APIResource {
@@ -15,10 +16,10 @@ export class RateLimits extends APIResource {
     zoneIdentifier: string,
     body: RateLimitCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RateLimitCreateResponse | null> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     return (
       this._client.post(`/zones/${zoneIdentifier}/rate_limits`, { body, ...options }) as Core.APIPromise<{
-        result: RateLimitCreateResponse | null;
+        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -75,12 +76,12 @@ export class RateLimits extends APIResource {
     id: string,
     body: RateLimitEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RateLimitEditResponse | null> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     return (
       this._client.put(`/zones/${zoneIdentifier}/rate_limits/${id}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: RateLimitEditResponse | null }>
+      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -91,10 +92,10 @@ export class RateLimits extends APIResource {
     zoneIdentifier: string,
     id: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RateLimitGetResponse | null> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     return (
       this._client.get(`/zones/${zoneIdentifier}/rate_limits/${id}`, options) as Core.APIPromise<{
-        result: RateLimitGetResponse | null;
+        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -278,8 +279,6 @@ export namespace RateLimit {
     }
   }
 }
-
-export type RateLimitCreateResponse = unknown | string;
 
 export interface RateLimitListResponse {
   /**
@@ -465,10 +464,6 @@ export interface RateLimitDeleteResponse {
   id?: string;
 }
 
-export type RateLimitEditResponse = unknown | string;
-
-export type RateLimitGetResponse = unknown | string;
-
 export type RateLimitCreateParams = unknown;
 
 export interface RateLimitListParams extends V4PagePaginationArrayParams {}
@@ -479,11 +474,8 @@ export type RateLimitEditParams = unknown;
 
 export namespace RateLimits {
   export import RateLimit = RateLimitsAPI.RateLimit;
-  export import RateLimitCreateResponse = RateLimitsAPI.RateLimitCreateResponse;
   export import RateLimitListResponse = RateLimitsAPI.RateLimitListResponse;
   export import RateLimitDeleteResponse = RateLimitsAPI.RateLimitDeleteResponse;
-  export import RateLimitEditResponse = RateLimitsAPI.RateLimitEditResponse;
-  export import RateLimitGetResponse = RateLimitsAPI.RateLimitGetResponse;
   export import RateLimitListResponsesV4PagePaginationArray = RateLimitsAPI.RateLimitListResponsesV4PagePaginationArray;
   export import RateLimitCreateParams = RateLimitsAPI.RateLimitCreateParams;
   export import RateLimitListParams = RateLimitsAPI.RateLimitListParams;

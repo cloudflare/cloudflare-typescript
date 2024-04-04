@@ -7,7 +7,6 @@ export {
   CloudforceOneRequestItem,
   CloudforceOneRequestListItem,
   CloudforceOneRequestTypes,
-  RequestDeleteResponse,
   RequestCreateParams,
   RequestUpdateParams,
   RequestListParams,

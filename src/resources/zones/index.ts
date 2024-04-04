@@ -6,22 +6,11 @@ export {
   ActivationCheck,
 } from './activation-check';
 export {
-  CustomNameserverUpdateResponse,
-  CustomNameserverGetResponse,
   CustomNameserverUpdateParams,
   CustomNameserverGetParams,
   CustomNameservers,
 } from './custom-nameservers';
 export { DNSSetting, DNSSettingEditParams, DNSSettingGetParams, DNSSettings } from './dns-settings';
-export {
-  HoldCreateResponse,
-  HoldDeleteResponse,
-  HoldGetResponse,
-  HoldCreateParams,
-  HoldDeleteParams,
-  HoldGetParams,
-  Holds,
-} from './holds';
 export {
   SettingEditResponse,
   SettingGetResponse,
@@ -30,13 +19,18 @@ export {
   Settings,
 } from './settings/index';
 export {
-  SubscriptionCreateResponse,
   SubscriptionListResponse,
-  SubscriptionGetResponse,
   SubscriptionCreateParams,
   SubscriptionListResponsesSinglePage,
   Subscriptions,
 } from './subscriptions';
+export {
+  UnnamedSchemaRef45004a9444b6da9f88158ed2fb9a5820,
+  HoldCreateParams,
+  HoldDeleteParams,
+  HoldGetParams,
+  Holds,
+} from './holds';
 export { Workers } from './workers/index';
 export {
   Zone,

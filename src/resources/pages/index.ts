@@ -4,9 +4,7 @@ export { Pages } from './pages';
 export {
   PagesDeployments,
   PagesProjects,
-  ProjectCreateResponse,
   ProjectDeleteResponse,
-  ProjectEditResponse,
   ProjectPurgeBuildCacheResponse,
   ProjectCreateParams,
   ProjectListParams,

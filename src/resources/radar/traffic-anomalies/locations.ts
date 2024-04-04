@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as LocationsAPI from 'cloudflare/resources/radar/traffic-anomalies/locations';
+import * as RadarAPI from 'cloudflare/resources/radar/radar';
 
 export class Locations extends APIResource {
   /**
@@ -29,17 +30,7 @@ export class Locations extends APIResource {
 }
 
 export interface LocationGetResponse {
-  trafficAnomalies: Array<LocationGetResponse.TrafficAnomaly>;
-}
-
-export namespace LocationGetResponse {
-  export interface TrafficAnomaly {
-    clientCountryAlpha2: string;
-
-    clientCountryName: string;
-
-    value: string;
-  }
+  trafficAnomalies: Array<RadarAPI.UnnamedSchemaRef83a14d589e799bc901b9ccc870251d09>;
 }
 
 export interface LocationGetParams {

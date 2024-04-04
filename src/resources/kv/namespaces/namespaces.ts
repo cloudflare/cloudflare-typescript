@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as NamespacesAPI from 'cloudflare/resources/kv/namespaces/namespaces';
+import * as Shared from 'cloudflare/resources/shared';
 import * as BulkAPI from 'cloudflare/resources/kv/namespaces/bulk';
 import * as KeysAPI from 'cloudflare/resources/kv/namespaces/keys';
 import * as MetadataAPI from 'cloudflare/resources/kv/namespaces/metadata';
@@ -37,13 +38,13 @@ export class Namespaces extends APIResource {
     namespaceId: string,
     params: NamespaceUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<NamespaceUpdateResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/storage/kv/namespaces/${namespaceId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: NamespaceUpdateResponse }>
+      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -69,13 +70,13 @@ export class Namespaces extends APIResource {
     namespaceId: string,
     params: NamespaceDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<NamespaceDeleteResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f> {
     const { account_id, body } = params;
     return (
       this._client.delete(`/accounts/${account_id}/storage/kv/namespaces/${namespaceId}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: NamespaceDeleteResponse }>
+      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -99,10 +100,6 @@ export interface WorkersKVNamespace {
    */
   supports_url_encoding?: boolean;
 }
-
-export type NamespaceUpdateResponse = unknown | string;
-
-export type NamespaceDeleteResponse = unknown | string;
 
 export interface NamespaceCreateParams {
   /**
@@ -159,16 +156,12 @@ export interface NamespaceDeleteParams {
 
 export namespace Namespaces {
   export import WorkersKVNamespace = NamespacesAPI.WorkersKVNamespace;
-  export import NamespaceUpdateResponse = NamespacesAPI.NamespaceUpdateResponse;
-  export import NamespaceDeleteResponse = NamespacesAPI.NamespaceDeleteResponse;
   export import WorkersKVNamespacesV4PagePaginationArray = NamespacesAPI.WorkersKVNamespacesV4PagePaginationArray;
   export import NamespaceCreateParams = NamespacesAPI.NamespaceCreateParams;
   export import NamespaceUpdateParams = NamespacesAPI.NamespaceUpdateParams;
   export import NamespaceListParams = NamespacesAPI.NamespaceListParams;
   export import NamespaceDeleteParams = NamespacesAPI.NamespaceDeleteParams;
   export import Bulk = BulkAPI.Bulk;
-  export import BulkUpdateResponse = BulkAPI.BulkUpdateResponse;
-  export import BulkDeleteResponse = BulkAPI.BulkDeleteResponse;
   export import BulkUpdateParams = BulkAPI.BulkUpdateParams;
   export import BulkDeleteParams = BulkAPI.BulkDeleteParams;
   export import Keys = KeysAPI.Keys;
@@ -179,8 +172,6 @@ export namespace Namespaces {
   export import MetadataGetResponse = MetadataAPI.MetadataGetResponse;
   export import MetadataGetParams = MetadataAPI.MetadataGetParams;
   export import Values = ValuesAPI.Values;
-  export import ValueUpdateResponse = ValuesAPI.ValueUpdateResponse;
-  export import ValueDeleteResponse = ValuesAPI.ValueDeleteResponse;
   export import ValueGetResponse = ValuesAPI.ValueGetResponse;
   export import ValueUpdateParams = ValuesAPI.ValueUpdateParams;
   export import ValueDeleteParams = ValuesAPI.ValueDeleteParams;

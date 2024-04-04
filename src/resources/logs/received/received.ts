@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ReceivedAPI from 'cloudflare/resources/logs/received/received';
+import * as Shared from 'cloudflare/resources/shared';
 import * as FieldsAPI from 'cloudflare/resources/logs/received/fields';
 
 export class Received extends APIResource {
@@ -22,12 +23,10 @@ export class Received extends APIResource {
     zoneIdentifier: string,
     query: ReceivedGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ReceivedGetResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f> {
     return this._client.get(`/zones/${zoneIdentifier}/logs/received`, { query, ...options });
   }
 }
-
-export type ReceivedGetResponse = string | unknown;
 
 export interface ReceivedGetParams {
   /**
@@ -92,7 +91,6 @@ export interface ReceivedGetParams {
 }
 
 export namespace Received {
-  export import ReceivedGetResponse = ReceivedAPI.ReceivedGetResponse;
   export import ReceivedGetParams = ReceivedAPI.ReceivedGetParams;
   export import Fields = FieldsAPI.Fields;
   export import FieldGetResponse = FieldsAPI.FieldGetResponse;

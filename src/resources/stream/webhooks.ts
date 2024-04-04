@@ -3,16 +3,20 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as WebhooksAPI from 'cloudflare/resources/stream/webhooks';
+import * as Shared from 'cloudflare/resources/shared';
 
 export class Webhooks extends APIResource {
   /**
    * Creates a webhook notification.
    */
-  update(params: WebhookUpdateParams, options?: Core.RequestOptions): Core.APIPromise<WebhookUpdateResponse> {
+  update(
+    params: WebhookUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/stream/webhook`, { body, ...options }) as Core.APIPromise<{
-        result: WebhookUpdateResponse;
+        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -20,34 +24,34 @@ export class Webhooks extends APIResource {
   /**
    * Deletes a webhook.
    */
-  delete(params: WebhookDeleteParams, options?: Core.RequestOptions): Core.APIPromise<WebhookDeleteResponse> {
+  delete(
+    params: WebhookDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Shared.UnnamedSchemaRef602dd5f63eab958d53da61434dec08f0> {
     const { account_id, body } = params;
     return (
       this._client.delete(`/accounts/${account_id}/stream/webhook`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: WebhookDeleteResponse }>
+      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef602dd5f63eab958d53da61434dec08f0 }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Retrieves a list of webhooks.
    */
-  get(params: WebhookGetParams, options?: Core.RequestOptions): Core.APIPromise<WebhookGetResponse> {
+  get(
+    params: WebhookGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/stream/webhook`, options) as Core.APIPromise<{
-        result: WebhookGetResponse;
+        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
-
-export type WebhookUpdateResponse = unknown | string;
-
-export type WebhookDeleteResponse = unknown | string;
-
-export type WebhookGetResponse = unknown | string;
 
 export interface WebhookUpdateParams {
   /**
@@ -81,9 +85,6 @@ export interface WebhookGetParams {
 }
 
 export namespace Webhooks {
-  export import WebhookUpdateResponse = WebhooksAPI.WebhookUpdateResponse;
-  export import WebhookDeleteResponse = WebhooksAPI.WebhookDeleteResponse;
-  export import WebhookGetResponse = WebhooksAPI.WebhookGetResponse;
   export import WebhookUpdateParams = WebhooksAPI.WebhookUpdateParams;
   export import WebhookDeleteParams = WebhooksAPI.WebhookDeleteParams;
   export import WebhookGetParams = WebhooksAPI.WebhookGetParams;

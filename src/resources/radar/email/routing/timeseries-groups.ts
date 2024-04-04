@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as TimeseriesGroupsAPI from 'cloudflare/resources/radar/email/routing/timeseries-groups';
+import * as EmailAPI from 'cloudflare/resources/radar/email/email';
 
 export class TimeseriesGroups extends APIResource {
   /**
@@ -148,49 +149,19 @@ export class TimeseriesGroups extends APIResource {
 export interface TimeseriesGroupARCResponse {
   meta: unknown;
 
-  serie_0: TimeseriesGroupARCResponse.Serie0;
-}
-
-export namespace TimeseriesGroupARCResponse {
-  export interface Serie0 {
-    FAIL: Array<string>;
-
-    NONE: Array<string>;
-
-    PASS: Array<string>;
-  }
+  serie_0: EmailAPI.UnnamedSchemaRef67c73d4742566cab0909f71b1822e88c;
 }
 
 export interface TimeseriesGroupDKIMResponse {
   meta: unknown;
 
-  serie_0: TimeseriesGroupDKIMResponse.Serie0;
-}
-
-export namespace TimeseriesGroupDKIMResponse {
-  export interface Serie0 {
-    FAIL: Array<string>;
-
-    NONE: Array<string>;
-
-    PASS: Array<string>;
-  }
+  serie_0: EmailAPI.UnnamedSchemaRef67c73d4742566cab0909f71b1822e88c;
 }
 
 export interface TimeseriesGroupDMARCResponse {
   meta: unknown;
 
-  serie_0: TimeseriesGroupDMARCResponse.Serie0;
-}
-
-export namespace TimeseriesGroupDMARCResponse {
-  export interface Serie0 {
-    FAIL: Array<string>;
-
-    NONE: Array<string>;
-
-    PASS: Array<string>;
-  }
+  serie_0: EmailAPI.UnnamedSchemaRef67c73d4742566cab0909f71b1822e88c;
 }
 
 export interface TimeseriesGroupEncryptedResponse {
@@ -224,17 +195,7 @@ export namespace TimeseriesGroupIPVersionResponse {
 export interface TimeseriesGroupSPFResponse {
   meta: unknown;
 
-  serie_0: TimeseriesGroupSPFResponse.Serie0;
-}
-
-export namespace TimeseriesGroupSPFResponse {
-  export interface Serie0 {
-    FAIL: Array<string>;
-
-    NONE: Array<string>;
-
-    PASS: Array<string>;
-  }
+  serie_0: EmailAPI.UnnamedSchemaRef67c73d4742566cab0909f71b1822e88c;
 }
 
 export interface TimeseriesGroupARCParams {

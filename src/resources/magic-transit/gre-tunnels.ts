@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as GRETunnelsAPI from 'cloudflare/resources/magic-transit/gre-tunnels';
+import * as MagicTransitAPI from 'cloudflare/resources/magic-transit/magic-transit';
 
 export class GRETunnels extends APIResource {
   /**
@@ -171,7 +172,7 @@ export namespace GRETunnelCreateResponse {
       /**
        * How frequent the health check is run. The default value is `mid`.
        */
-      rate?: 'low' | 'mid' | 'high';
+      rate?: MagicTransitAPI.UnnamedSchemaRefEebdc868ce7f7ae92e23438caa84e7b5;
 
       /**
        * The destination address in a request type health check. After the healthcheck is
@@ -185,7 +186,7 @@ export namespace GRETunnelCreateResponse {
       /**
        * The type of healthcheck to run, reply or request. The default value is `reply`.
        */
-      type?: 'reply' | 'request';
+      type?: MagicTransitAPI.UnnamedSchemaRef3b1a76a5e4a139b72ed7d93834773d39;
     }
   }
 }
@@ -279,7 +280,7 @@ export namespace GRETunnelListResponse {
       /**
        * How frequent the health check is run. The default value is `mid`.
        */
-      rate?: 'low' | 'mid' | 'high';
+      rate?: MagicTransitAPI.UnnamedSchemaRefEebdc868ce7f7ae92e23438caa84e7b5;
 
       /**
        * The destination address in a request type health check. After the healthcheck is
@@ -293,7 +294,7 @@ export namespace GRETunnelListResponse {
       /**
        * The type of healthcheck to run, reply or request. The default value is `reply`.
        */
-      type?: 'reply' | 'request';
+      type?: MagicTransitAPI.UnnamedSchemaRef3b1a76a5e4a139b72ed7d93834773d39;
     }
   }
 }
@@ -392,7 +393,7 @@ export namespace GRETunnelUpdateParams {
     /**
      * How frequent the health check is run. The default value is `mid`.
      */
-    rate?: 'low' | 'mid' | 'high';
+    rate?: MagicTransitAPI.UnnamedSchemaRefEebdc868ce7f7ae92e23438caa84e7b5;
 
     /**
      * The destination address in a request type health check. After the healthcheck is
@@ -406,7 +407,7 @@ export namespace GRETunnelUpdateParams {
     /**
      * The type of healthcheck to run, reply or request. The default value is `reply`.
      */
-    type?: 'reply' | 'request';
+    type?: MagicTransitAPI.UnnamedSchemaRef3b1a76a5e4a139b72ed7d93834773d39;
   }
 }
 

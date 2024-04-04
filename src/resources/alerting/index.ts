@@ -1,6 +1,5 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Alerting } from './alerting';
 export {
   AlertingHistory,
   HistoryListParams,
@@ -11,7 +10,6 @@ export {
   AlertingPolicies,
   PolicyCreateResponse,
   PolicyUpdateResponse,
-  PolicyDeleteResponse,
   PolicyCreateParams,
   PolicyUpdateParams,
   PolicyListParams,
@@ -22,3 +20,4 @@ export {
 } from './policies';
 export { AvailableAlertListResponse, AvailableAlertListParams, AvailableAlerts } from './available-alerts';
 export { Destinations } from './destinations/index';
+export { UnnamedSchemaRefD6e23adacaca017802aaa484a8b3f405, Alerting } from './alerting';

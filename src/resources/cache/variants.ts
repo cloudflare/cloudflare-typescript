@@ -65,13 +65,18 @@ export interface CacheVariants {
   /**
    * ID of the zone setting.
    */
-  id: 'variants';
+  id: UnnamedSchemaRef669bfbb16c0913af7077c3c194fbfcd0;
 
   /**
    * last time this setting was modified.
    */
   modified_on: string | null;
 }
+
+/**
+ * ID of the zone setting.
+ */
+export type UnnamedSchemaRef669bfbb16c0913af7077c3c194fbfcd0 = 'variants';
 
 /**
  * Variant support enables caching variants of images with certain file extensions
@@ -84,7 +89,7 @@ export interface VariantEditResponse {
   /**
    * ID of the zone setting.
    */
-  id: 'variants';
+  id: UnnamedSchemaRef669bfbb16c0913af7077c3c194fbfcd0;
 
   /**
    * last time this setting was modified.
@@ -181,7 +186,7 @@ export interface VariantGetResponse {
   /**
    * ID of the zone setting.
    */
-  id: 'variants';
+  id: UnnamedSchemaRef669bfbb16c0913af7077c3c194fbfcd0;
 
   /**
    * last time this setting was modified.
@@ -373,6 +378,7 @@ export interface VariantGetParams {
 
 export namespace Variants {
   export import CacheVariants = VariantsAPI.CacheVariants;
+  export import UnnamedSchemaRef669bfbb16c0913af7077c3c194fbfcd0 = VariantsAPI.UnnamedSchemaRef669bfbb16c0913af7077c3c194fbfcd0;
   export import VariantEditResponse = VariantsAPI.VariantEditResponse;
   export import VariantGetResponse = VariantsAPI.VariantGetResponse;
   export import VariantDeleteParams = VariantsAPI.VariantDeleteParams;

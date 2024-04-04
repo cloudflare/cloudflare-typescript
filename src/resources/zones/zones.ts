@@ -406,22 +406,16 @@ export namespace Zones {
   export import SettingEditParams = SettingsAPI.SettingEditParams;
   export import SettingGetParams = SettingsAPI.SettingGetParams;
   export import CustomNameservers = CustomNameserversAPI.CustomNameservers;
-  export import CustomNameserverUpdateResponse = CustomNameserversAPI.CustomNameserverUpdateResponse;
-  export import CustomNameserverGetResponse = CustomNameserversAPI.CustomNameserverGetResponse;
   export import CustomNameserverUpdateParams = CustomNameserversAPI.CustomNameserverUpdateParams;
   export import CustomNameserverGetParams = CustomNameserversAPI.CustomNameserverGetParams;
   export import Holds = HoldsAPI.Holds;
-  export import HoldCreateResponse = HoldsAPI.HoldCreateResponse;
-  export import HoldDeleteResponse = HoldsAPI.HoldDeleteResponse;
-  export import HoldGetResponse = HoldsAPI.HoldGetResponse;
+  export import UnnamedSchemaRef45004a9444b6da9f88158ed2fb9a5820 = HoldsAPI.UnnamedSchemaRef45004a9444b6da9f88158ed2fb9a5820;
   export import HoldCreateParams = HoldsAPI.HoldCreateParams;
   export import HoldDeleteParams = HoldsAPI.HoldDeleteParams;
   export import HoldGetParams = HoldsAPI.HoldGetParams;
   export import Workers = WorkersAPI.Workers;
   export import Subscriptions = SubscriptionsAPI.Subscriptions;
-  export import SubscriptionCreateResponse = SubscriptionsAPI.SubscriptionCreateResponse;
   export import SubscriptionListResponse = SubscriptionsAPI.SubscriptionListResponse;
-  export import SubscriptionGetResponse = SubscriptionsAPI.SubscriptionGetResponse;
   export import SubscriptionListResponsesSinglePage = SubscriptionsAPI.SubscriptionListResponsesSinglePage;
   export import SubscriptionCreateParams = SubscriptionsAPI.SubscriptionCreateParams;
 }

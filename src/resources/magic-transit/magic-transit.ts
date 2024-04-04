@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from 'cloudflare/resource';
+import * as MagicTransitAPI from 'cloudflare/resources/magic-transit/magic-transit';
 import * as CfInterconnectsAPI from 'cloudflare/resources/magic-transit/cf-interconnects';
 import * as GRETunnelsAPI from 'cloudflare/resources/magic-transit/gre-tunnels';
 import * as IPSECTunnelsAPI from 'cloudflare/resources/magic-transit/ipsec-tunnels';
@@ -15,7 +16,19 @@ export class MagicTransit extends APIResource {
   sites: SitesAPI.Sites = new SitesAPI.Sites(this._client);
 }
 
+/**
+ * The type of healthcheck to run, reply or request. The default value is `reply`.
+ */
+export type UnnamedSchemaRef3b1a76a5e4a139b72ed7d93834773d39 = 'reply' | 'request';
+
+/**
+ * How frequent the health check is run. The default value is `mid`.
+ */
+export type UnnamedSchemaRefEebdc868ce7f7ae92e23438caa84e7b5 = 'low' | 'mid' | 'high';
+
 export namespace MagicTransit {
+  export import UnnamedSchemaRef3b1a76a5e4a139b72ed7d93834773d39 = MagicTransitAPI.UnnamedSchemaRef3b1a76a5e4a139b72ed7d93834773d39;
+  export import UnnamedSchemaRefEebdc868ce7f7ae92e23438caa84e7b5 = MagicTransitAPI.UnnamedSchemaRefEebdc868ce7f7ae92e23438caa84e7b5;
   export import CfInterconnects = CfInterconnectsAPI.CfInterconnects;
   export import CfInterconnectUpdateResponse = CfInterconnectsAPI.CfInterconnectUpdateResponse;
   export import CfInterconnectListResponse = CfInterconnectsAPI.CfInterconnectListResponse;

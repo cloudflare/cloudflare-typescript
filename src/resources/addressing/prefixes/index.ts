@@ -11,7 +11,7 @@ export {
 } from './delegations';
 export {
   AddressingIpamPrefixes,
-  PrefixDeleteResponse,
+  UnnamedSchemaRefE358666e049bf8f9281c0a4f89b5fe46,
   PrefixCreateParams,
   PrefixListParams,
   PrefixDeleteParams,

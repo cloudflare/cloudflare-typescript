@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as HTTPTestsAPI from 'cloudflare/resources/zero-trust/dex/http-tests/http-tests';
+import * as DEXAPI from 'cloudflare/resources/zero-trust/dex/dex';
 import * as PercentilesAPI from 'cloudflare/resources/zero-trust/dex/http-tests/percentiles';
 
 export class HTTPTests extends APIResource {
@@ -54,7 +55,7 @@ export interface DigitalExperienceMonitoringHTTPDetails {
    */
   name?: string;
 
-  target_policies?: Array<DigitalExperienceMonitoringHTTPDetails.TargetPolicy>;
+  target_policies?: Array<DEXAPI.UnnamedSchemaRefBf9e2abcf1b78a6cab8e6e29e2228a11>;
 
   targeted?: boolean;
 }
@@ -338,17 +339,6 @@ export namespace DigitalExperienceMonitoringHTTPDetails {
         value: number;
       }
     }
-  }
-
-  export interface TargetPolicy {
-    id: string;
-
-    /**
-     * Whether the policy is the default for the account
-     */
-    default: boolean;
-
-    name: string;
   }
 }
 

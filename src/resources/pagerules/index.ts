@@ -3,12 +3,8 @@
 export { ZonePageruleSettings, SettingListParams, Settings } from './settings';
 export {
   ZonesPagerule,
-  PageruleCreateResponse,
-  PageruleUpdateResponse,
   PageruleListResponse,
   PageruleDeleteResponse,
-  PageruleEditResponse,
-  PageruleGetResponse,
   PageruleCreateParams,
   PageruleUpdateParams,
   PageruleListParams,

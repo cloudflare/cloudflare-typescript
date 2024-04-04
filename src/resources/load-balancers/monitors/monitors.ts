@@ -6,7 +6,7 @@ import * as MonitorsAPI from 'cloudflare/resources/load-balancers/monitors/monit
 import * as PreviewsAPI from 'cloudflare/resources/load-balancers/monitors/previews';
 import * as ReferencesAPI from 'cloudflare/resources/load-balancers/monitors/references';
 import * as LoadBalancersMonitorsAPI from 'cloudflare/resources/user/load-balancers/monitors';
-import { LoadBalancingMonitorsSinglePage } from 'cloudflare/resources/user/load-balancers/monitors';
+import { MonitorsSinglePage } from 'cloudflare/resources/user/load-balancers/monitors';
 
 export class Monitors extends APIResource {
   previews: PreviewsAPI.Previews = new PreviewsAPI.Previews(this._client);
@@ -18,13 +18,13 @@ export class Monitors extends APIResource {
   create(
     params: MonitorCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LoadBalancersMonitorsAPI.LoadBalancingMonitor> {
+  ): Core.APIPromise<LoadBalancersMonitorsAPI.Monitor> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/load_balancers/monitors`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: LoadBalancersMonitorsAPI.LoadBalancingMonitor }>
+      }) as Core.APIPromise<{ result: LoadBalancersMonitorsAPI.Monitor }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -35,13 +35,13 @@ export class Monitors extends APIResource {
     monitorId: string,
     params: MonitorUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LoadBalancersMonitorsAPI.LoadBalancingMonitor> {
+  ): Core.APIPromise<LoadBalancersMonitorsAPI.Monitor> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/load_balancers/monitors/${monitorId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: LoadBalancersMonitorsAPI.LoadBalancingMonitor }>
+      }) as Core.APIPromise<{ result: LoadBalancersMonitorsAPI.Monitor }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -51,11 +51,11 @@ export class Monitors extends APIResource {
   list(
     params: MonitorListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<LoadBalancingMonitorsSinglePage, LoadBalancersMonitorsAPI.LoadBalancingMonitor> {
+  ): Core.PagePromise<MonitorsSinglePage, LoadBalancersMonitorsAPI.Monitor> {
     const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/load_balancers/monitors`,
-      LoadBalancingMonitorsSinglePage,
+      MonitorsSinglePage,
       options,
     );
   }
@@ -84,13 +84,13 @@ export class Monitors extends APIResource {
     monitorId: string,
     params: MonitorEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LoadBalancersMonitorsAPI.LoadBalancingMonitor> {
+  ): Core.APIPromise<LoadBalancersMonitorsAPI.Monitor> {
     const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/load_balancers/monitors/${monitorId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: LoadBalancersMonitorsAPI.LoadBalancingMonitor }>
+      }) as Core.APIPromise<{ result: LoadBalancersMonitorsAPI.Monitor }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -101,13 +101,13 @@ export class Monitors extends APIResource {
     monitorId: string,
     params: MonitorGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LoadBalancersMonitorsAPI.LoadBalancingMonitor> {
+  ): Core.APIPromise<LoadBalancersMonitorsAPI.Monitor> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/load_balancers/monitors/${monitorId}`,
         options,
-      ) as Core.APIPromise<{ result: LoadBalancersMonitorsAPI.LoadBalancingMonitor }>
+      ) as Core.APIPromise<{ result: LoadBalancersMonitorsAPI.Monitor }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -476,4 +476,4 @@ export namespace Monitors {
   export import ReferenceGetParams = ReferencesAPI.ReferenceGetParams;
 }
 
-export { LoadBalancingMonitorsSinglePage };
+export { MonitorsSinglePage };

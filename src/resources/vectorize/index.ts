@@ -7,7 +7,6 @@ export {
   VectorizeIndexInsert,
   VectorizeIndexQuery,
   VectorizeIndexUpsert,
-  IndexDeleteResponse,
   IndexGetByIDsResponse,
   IndexCreateParams,
   IndexUpdateParams,

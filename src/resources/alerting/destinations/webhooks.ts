@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as WebhooksAPI from 'cloudflare/resources/alerting/destinations/webhooks';
+import * as Shared from 'cloudflare/resources/shared';
 import { SinglePage } from 'cloudflare/pagination';
 
 export class Webhooks extends APIResource {
@@ -58,13 +59,13 @@ export class Webhooks extends APIResource {
     webhookId: string,
     params: WebhookDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WebhookDeleteResponse | null> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef67bbb1ccdd42c3e2937b9fd19f791151 | null> {
     const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/alerting/v3/destinations/webhooks/${webhookId}`,
         options,
-      ) as Core.APIPromise<{ result: WebhookDeleteResponse | null }>
+      ) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef67bbb1ccdd42c3e2937b9fd19f791151 | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -149,8 +150,6 @@ export interface WebhookUpdateResponse {
   id?: string;
 }
 
-export type WebhookDeleteResponse = unknown | Array<unknown> | string;
-
 export interface WebhookCreateParams {
   /**
    * Path param: The account id
@@ -226,7 +225,6 @@ export namespace Webhooks {
   export import AlertingWebhooks = WebhooksAPI.AlertingWebhooks;
   export import WebhookCreateResponse = WebhooksAPI.WebhookCreateResponse;
   export import WebhookUpdateResponse = WebhooksAPI.WebhookUpdateResponse;
-  export import WebhookDeleteResponse = WebhooksAPI.WebhookDeleteResponse;
   export import AlertingWebhooksSinglePage = WebhooksAPI.AlertingWebhooksSinglePage;
   export import WebhookCreateParams = WebhooksAPI.WebhookCreateParams;
   export import WebhookUpdateParams = WebhooksAPI.WebhookUpdateParams;

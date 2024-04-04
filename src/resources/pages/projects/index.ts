@@ -11,11 +11,8 @@ export {
   Deployments,
 } from './deployments/index';
 export {
-  DomainCreateResponse,
   DomainListResponse,
   DomainDeleteResponse,
-  DomainEditResponse,
-  DomainGetResponse,
   DomainCreateParams,
   DomainListParams,
   DomainDeleteParams,
@@ -27,9 +24,7 @@ export {
 export {
   PagesDeployments,
   PagesProjects,
-  ProjectCreateResponse,
   ProjectDeleteResponse,
-  ProjectEditResponse,
   ProjectPurgeBuildCacheResponse,
   ProjectCreateParams,
   ProjectListParams,

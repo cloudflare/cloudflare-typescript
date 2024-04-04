@@ -60,272 +60,270 @@ export class Configurations extends APIResource {
 /**
  * account settings.
  */
+export interface UnnamedSchemaRef055aaf3918bf29f81c09d394a864182e {
+  /**
+   * Activity log settings.
+   */
+  activity_log?: UnnamedSchemaRef055aaf3918bf29f81c09d394a864182e.ActivityLog;
+
+  /**
+   * Anti-virus settings.
+   */
+  antivirus?: UnnamedSchemaRef055aaf3918bf29f81c09d394a864182e.Antivirus;
+
+  /**
+   * Block page layout settings.
+   */
+  block_page?: UnnamedSchemaRef055aaf3918bf29f81c09d394a864182e.BlockPage;
+
+  /**
+   * DLP body scanning settings.
+   */
+  body_scanning?: UnnamedSchemaRef055aaf3918bf29f81c09d394a864182e.BodyScanning;
+
+  /**
+   * Browser isolation settings.
+   */
+  browser_isolation?: UnnamedSchemaRef055aaf3918bf29f81c09d394a864182e.BrowserIsolation;
+
+  /**
+   * Custom certificate settings for BYO-PKI.
+   */
+  custom_certificate?: UnnamedSchemaRef055aaf3918bf29f81c09d394a864182e.CustomCertificate;
+
+  /**
+   * Extended e-mail matching settings.
+   */
+  extended_email_matching?: UnnamedSchemaRef055aaf3918bf29f81c09d394a864182e.ExtendedEmailMatching;
+
+  /**
+   * FIPS settings.
+   */
+  fips?: UnnamedSchemaRef055aaf3918bf29f81c09d394a864182e.Fips;
+
+  /**
+   * Protocol Detection settings.
+   */
+  protocol_detection?: UnnamedSchemaRef055aaf3918bf29f81c09d394a864182e.ProtocolDetection;
+
+  /**
+   * TLS interception settings.
+   */
+  tls_decrypt?: UnnamedSchemaRef055aaf3918bf29f81c09d394a864182e.TLSDecrypt;
+}
+
+export namespace UnnamedSchemaRef055aaf3918bf29f81c09d394a864182e {
+  /**
+   * Activity log settings.
+   */
+  export interface ActivityLog {
+    /**
+     * Enable activity logging.
+     */
+    enabled?: boolean;
+  }
+
+  /**
+   * Anti-virus settings.
+   */
+  export interface Antivirus {
+    /**
+     * Enable anti-virus scanning on downloads.
+     */
+    enabled_download_phase?: boolean;
+
+    /**
+     * Enable anti-virus scanning on uploads.
+     */
+    enabled_upload_phase?: boolean;
+
+    /**
+     * Block requests for files that cannot be scanned.
+     */
+    fail_closed?: boolean;
+
+    /**
+     * Configure a message to display on the user's device when an antivirus search is
+     * performed.
+     */
+    notification_settings?: Antivirus.NotificationSettings;
+  }
+
+  export namespace Antivirus {
+    /**
+     * Configure a message to display on the user's device when an antivirus search is
+     * performed.
+     */
+    export interface NotificationSettings {
+      /**
+       * Set notification on
+       */
+      enabled?: boolean;
+
+      /**
+       * Customize the message shown in the notification.
+       */
+      msg?: string;
+
+      /**
+       * Optional URL to direct users to additional information. If not set, the
+       * notification will open a block page.
+       */
+      support_url?: string;
+    }
+  }
+
+  /**
+   * Block page layout settings.
+   */
+  export interface BlockPage {
+    /**
+     * Block page background color in #rrggbb format.
+     */
+    background_color?: string;
+
+    /**
+     * Enable only cipher suites and TLS versions compliant with FIPS 140-2.
+     */
+    enabled?: boolean;
+
+    /**
+     * Block page footer text.
+     */
+    footer_text?: string;
+
+    /**
+     * Block page header text.
+     */
+    header_text?: string;
+
+    /**
+     * Full URL to the logo file.
+     */
+    logo_path?: string;
+
+    /**
+     * Admin email for users to contact.
+     */
+    mailto_address?: string;
+
+    /**
+     * Subject line for emails created from block page.
+     */
+    mailto_subject?: string;
+
+    /**
+     * Block page title.
+     */
+    name?: string;
+
+    /**
+     * Suppress detailed info at the bottom of the block page.
+     */
+    suppress_footer?: boolean;
+  }
+
+  /**
+   * DLP body scanning settings.
+   */
+  export interface BodyScanning {
+    /**
+     * Set the inspection mode to either `deep` or `shallow`.
+     */
+    inspection_mode?: string;
+  }
+
+  /**
+   * Browser isolation settings.
+   */
+  export interface BrowserIsolation {
+    /**
+     * Enable non-identity onramp support for Browser Isolation.
+     */
+    non_identity_enabled?: boolean;
+
+    /**
+     * Enable Clientless Browser Isolation.
+     */
+    url_browser_isolation_enabled?: boolean;
+  }
+
+  /**
+   * Custom certificate settings for BYO-PKI.
+   */
+  export interface CustomCertificate {
+    /**
+     * Enable use of custom certificate authority for signing Gateway traffic.
+     */
+    enabled: boolean;
+
+    /**
+     * UUID of certificate (ID from MTLS certificate store).
+     */
+    id?: string;
+
+    /**
+     * Certificate status (internal).
+     */
+    binding_status?: string;
+
+    updated_at?: string;
+  }
+
+  /**
+   * Extended e-mail matching settings.
+   */
+  export interface ExtendedEmailMatching {
+    /**
+     * Enable matching all variants of user emails (with + or . modifiers) used as
+     * criteria in Firewall policies.
+     */
+    enabled?: boolean;
+  }
+
+  /**
+   * FIPS settings.
+   */
+  export interface Fips {
+    /**
+     * Enable only cipher suites and TLS versions compliant with FIPS 140-2.
+     */
+    tls?: boolean;
+  }
+
+  /**
+   * Protocol Detection settings.
+   */
+  export interface ProtocolDetection {
+    /**
+     * Enable detecting protocol on initial bytes of client traffic.
+     */
+    enabled?: boolean;
+  }
+
+  /**
+   * TLS interception settings.
+   */
+  export interface TLSDecrypt {
+    /**
+     * Enable inspecting encrypted HTTP traffic.
+     */
+    enabled?: boolean;
+  }
+}
+
+/**
+ * account settings.
+ */
 export interface ConfigurationUpdateResponse {
   created_at?: string;
 
   /**
    * account settings.
    */
-  settings?: ConfigurationUpdateResponse.Settings;
+  settings?: UnnamedSchemaRef055aaf3918bf29f81c09d394a864182e;
 
   updated_at?: string;
-}
-
-export namespace ConfigurationUpdateResponse {
-  /**
-   * account settings.
-   */
-  export interface Settings {
-    /**
-     * Activity log settings.
-     */
-    activity_log?: Settings.ActivityLog;
-
-    /**
-     * Anti-virus settings.
-     */
-    antivirus?: Settings.Antivirus;
-
-    /**
-     * Block page layout settings.
-     */
-    block_page?: Settings.BlockPage;
-
-    /**
-     * DLP body scanning settings.
-     */
-    body_scanning?: Settings.BodyScanning;
-
-    /**
-     * Browser isolation settings.
-     */
-    browser_isolation?: Settings.BrowserIsolation;
-
-    /**
-     * Custom certificate settings for BYO-PKI.
-     */
-    custom_certificate?: Settings.CustomCertificate;
-
-    /**
-     * Extended e-mail matching settings.
-     */
-    extended_email_matching?: Settings.ExtendedEmailMatching;
-
-    /**
-     * FIPS settings.
-     */
-    fips?: Settings.Fips;
-
-    /**
-     * Protocol Detection settings.
-     */
-    protocol_detection?: Settings.ProtocolDetection;
-
-    /**
-     * TLS interception settings.
-     */
-    tls_decrypt?: Settings.TLSDecrypt;
-  }
-
-  export namespace Settings {
-    /**
-     * Activity log settings.
-     */
-    export interface ActivityLog {
-      /**
-       * Enable activity logging.
-       */
-      enabled?: boolean;
-    }
-
-    /**
-     * Anti-virus settings.
-     */
-    export interface Antivirus {
-      /**
-       * Enable anti-virus scanning on downloads.
-       */
-      enabled_download_phase?: boolean;
-
-      /**
-       * Enable anti-virus scanning on uploads.
-       */
-      enabled_upload_phase?: boolean;
-
-      /**
-       * Block requests for files that cannot be scanned.
-       */
-      fail_closed?: boolean;
-
-      /**
-       * Configure a message to display on the user's device when an antivirus search is
-       * performed.
-       */
-      notification_settings?: Antivirus.NotificationSettings;
-    }
-
-    export namespace Antivirus {
-      /**
-       * Configure a message to display on the user's device when an antivirus search is
-       * performed.
-       */
-      export interface NotificationSettings {
-        /**
-         * Set notification on
-         */
-        enabled?: boolean;
-
-        /**
-         * Customize the message shown in the notification.
-         */
-        msg?: string;
-
-        /**
-         * Optional URL to direct users to additional information. If not set, the
-         * notification will open a block page.
-         */
-        support_url?: string;
-      }
-    }
-
-    /**
-     * Block page layout settings.
-     */
-    export interface BlockPage {
-      /**
-       * Block page background color in #rrggbb format.
-       */
-      background_color?: string;
-
-      /**
-       * Enable only cipher suites and TLS versions compliant with FIPS 140-2.
-       */
-      enabled?: boolean;
-
-      /**
-       * Block page footer text.
-       */
-      footer_text?: string;
-
-      /**
-       * Block page header text.
-       */
-      header_text?: string;
-
-      /**
-       * Full URL to the logo file.
-       */
-      logo_path?: string;
-
-      /**
-       * Admin email for users to contact.
-       */
-      mailto_address?: string;
-
-      /**
-       * Subject line for emails created from block page.
-       */
-      mailto_subject?: string;
-
-      /**
-       * Block page title.
-       */
-      name?: string;
-
-      /**
-       * Suppress detailed info at the bottom of the block page.
-       */
-      suppress_footer?: boolean;
-    }
-
-    /**
-     * DLP body scanning settings.
-     */
-    export interface BodyScanning {
-      /**
-       * Set the inspection mode to either `deep` or `shallow`.
-       */
-      inspection_mode?: string;
-    }
-
-    /**
-     * Browser isolation settings.
-     */
-    export interface BrowserIsolation {
-      /**
-       * Enable non-identity onramp support for Browser Isolation.
-       */
-      non_identity_enabled?: boolean;
-
-      /**
-       * Enable Clientless Browser Isolation.
-       */
-      url_browser_isolation_enabled?: boolean;
-    }
-
-    /**
-     * Custom certificate settings for BYO-PKI.
-     */
-    export interface CustomCertificate {
-      /**
-       * Enable use of custom certificate authority for signing Gateway traffic.
-       */
-      enabled: boolean;
-
-      /**
-       * UUID of certificate (ID from MTLS certificate store).
-       */
-      id?: string;
-
-      /**
-       * Certificate status (internal).
-       */
-      binding_status?: string;
-
-      updated_at?: string;
-    }
-
-    /**
-     * Extended e-mail matching settings.
-     */
-    export interface ExtendedEmailMatching {
-      /**
-       * Enable matching all variants of user emails (with + or . modifiers) used as
-       * criteria in Firewall policies.
-       */
-      enabled?: boolean;
-    }
-
-    /**
-     * FIPS settings.
-     */
-    export interface Fips {
-      /**
-       * Enable only cipher suites and TLS versions compliant with FIPS 140-2.
-       */
-      tls?: boolean;
-    }
-
-    /**
-     * Protocol Detection settings.
-     */
-    export interface ProtocolDetection {
-      /**
-       * Enable detecting protocol on initial bytes of client traffic.
-       */
-      enabled?: boolean;
-    }
-
-    /**
-     * TLS interception settings.
-     */
-    export interface TLSDecrypt {
-      /**
-       * Enable inspecting encrypted HTTP traffic.
-       */
-      enabled?: boolean;
-    }
-  }
 }
 
 /**
@@ -337,266 +335,9 @@ export interface ConfigurationEditResponse {
   /**
    * account settings.
    */
-  settings?: ConfigurationEditResponse.Settings;
+  settings?: UnnamedSchemaRef055aaf3918bf29f81c09d394a864182e;
 
   updated_at?: string;
-}
-
-export namespace ConfigurationEditResponse {
-  /**
-   * account settings.
-   */
-  export interface Settings {
-    /**
-     * Activity log settings.
-     */
-    activity_log?: Settings.ActivityLog;
-
-    /**
-     * Anti-virus settings.
-     */
-    antivirus?: Settings.Antivirus;
-
-    /**
-     * Block page layout settings.
-     */
-    block_page?: Settings.BlockPage;
-
-    /**
-     * DLP body scanning settings.
-     */
-    body_scanning?: Settings.BodyScanning;
-
-    /**
-     * Browser isolation settings.
-     */
-    browser_isolation?: Settings.BrowserIsolation;
-
-    /**
-     * Custom certificate settings for BYO-PKI.
-     */
-    custom_certificate?: Settings.CustomCertificate;
-
-    /**
-     * Extended e-mail matching settings.
-     */
-    extended_email_matching?: Settings.ExtendedEmailMatching;
-
-    /**
-     * FIPS settings.
-     */
-    fips?: Settings.Fips;
-
-    /**
-     * Protocol Detection settings.
-     */
-    protocol_detection?: Settings.ProtocolDetection;
-
-    /**
-     * TLS interception settings.
-     */
-    tls_decrypt?: Settings.TLSDecrypt;
-  }
-
-  export namespace Settings {
-    /**
-     * Activity log settings.
-     */
-    export interface ActivityLog {
-      /**
-       * Enable activity logging.
-       */
-      enabled?: boolean;
-    }
-
-    /**
-     * Anti-virus settings.
-     */
-    export interface Antivirus {
-      /**
-       * Enable anti-virus scanning on downloads.
-       */
-      enabled_download_phase?: boolean;
-
-      /**
-       * Enable anti-virus scanning on uploads.
-       */
-      enabled_upload_phase?: boolean;
-
-      /**
-       * Block requests for files that cannot be scanned.
-       */
-      fail_closed?: boolean;
-
-      /**
-       * Configure a message to display on the user's device when an antivirus search is
-       * performed.
-       */
-      notification_settings?: Antivirus.NotificationSettings;
-    }
-
-    export namespace Antivirus {
-      /**
-       * Configure a message to display on the user's device when an antivirus search is
-       * performed.
-       */
-      export interface NotificationSettings {
-        /**
-         * Set notification on
-         */
-        enabled?: boolean;
-
-        /**
-         * Customize the message shown in the notification.
-         */
-        msg?: string;
-
-        /**
-         * Optional URL to direct users to additional information. If not set, the
-         * notification will open a block page.
-         */
-        support_url?: string;
-      }
-    }
-
-    /**
-     * Block page layout settings.
-     */
-    export interface BlockPage {
-      /**
-       * Block page background color in #rrggbb format.
-       */
-      background_color?: string;
-
-      /**
-       * Enable only cipher suites and TLS versions compliant with FIPS 140-2.
-       */
-      enabled?: boolean;
-
-      /**
-       * Block page footer text.
-       */
-      footer_text?: string;
-
-      /**
-       * Block page header text.
-       */
-      header_text?: string;
-
-      /**
-       * Full URL to the logo file.
-       */
-      logo_path?: string;
-
-      /**
-       * Admin email for users to contact.
-       */
-      mailto_address?: string;
-
-      /**
-       * Subject line for emails created from block page.
-       */
-      mailto_subject?: string;
-
-      /**
-       * Block page title.
-       */
-      name?: string;
-
-      /**
-       * Suppress detailed info at the bottom of the block page.
-       */
-      suppress_footer?: boolean;
-    }
-
-    /**
-     * DLP body scanning settings.
-     */
-    export interface BodyScanning {
-      /**
-       * Set the inspection mode to either `deep` or `shallow`.
-       */
-      inspection_mode?: string;
-    }
-
-    /**
-     * Browser isolation settings.
-     */
-    export interface BrowserIsolation {
-      /**
-       * Enable non-identity onramp support for Browser Isolation.
-       */
-      non_identity_enabled?: boolean;
-
-      /**
-       * Enable Clientless Browser Isolation.
-       */
-      url_browser_isolation_enabled?: boolean;
-    }
-
-    /**
-     * Custom certificate settings for BYO-PKI.
-     */
-    export interface CustomCertificate {
-      /**
-       * Enable use of custom certificate authority for signing Gateway traffic.
-       */
-      enabled: boolean;
-
-      /**
-       * UUID of certificate (ID from MTLS certificate store).
-       */
-      id?: string;
-
-      /**
-       * Certificate status (internal).
-       */
-      binding_status?: string;
-
-      updated_at?: string;
-    }
-
-    /**
-     * Extended e-mail matching settings.
-     */
-    export interface ExtendedEmailMatching {
-      /**
-       * Enable matching all variants of user emails (with + or . modifiers) used as
-       * criteria in Firewall policies.
-       */
-      enabled?: boolean;
-    }
-
-    /**
-     * FIPS settings.
-     */
-    export interface Fips {
-      /**
-       * Enable only cipher suites and TLS versions compliant with FIPS 140-2.
-       */
-      tls?: boolean;
-    }
-
-    /**
-     * Protocol Detection settings.
-     */
-    export interface ProtocolDetection {
-      /**
-       * Enable detecting protocol on initial bytes of client traffic.
-       */
-      enabled?: boolean;
-    }
-
-    /**
-     * TLS interception settings.
-     */
-    export interface TLSDecrypt {
-      /**
-       * Enable inspecting encrypted HTTP traffic.
-       */
-      enabled?: boolean;
-    }
-  }
 }
 
 /**
@@ -608,266 +349,9 @@ export interface ConfigurationGetResponse {
   /**
    * account settings.
    */
-  settings?: ConfigurationGetResponse.Settings;
+  settings?: UnnamedSchemaRef055aaf3918bf29f81c09d394a864182e;
 
   updated_at?: string;
-}
-
-export namespace ConfigurationGetResponse {
-  /**
-   * account settings.
-   */
-  export interface Settings {
-    /**
-     * Activity log settings.
-     */
-    activity_log?: Settings.ActivityLog;
-
-    /**
-     * Anti-virus settings.
-     */
-    antivirus?: Settings.Antivirus;
-
-    /**
-     * Block page layout settings.
-     */
-    block_page?: Settings.BlockPage;
-
-    /**
-     * DLP body scanning settings.
-     */
-    body_scanning?: Settings.BodyScanning;
-
-    /**
-     * Browser isolation settings.
-     */
-    browser_isolation?: Settings.BrowserIsolation;
-
-    /**
-     * Custom certificate settings for BYO-PKI.
-     */
-    custom_certificate?: Settings.CustomCertificate;
-
-    /**
-     * Extended e-mail matching settings.
-     */
-    extended_email_matching?: Settings.ExtendedEmailMatching;
-
-    /**
-     * FIPS settings.
-     */
-    fips?: Settings.Fips;
-
-    /**
-     * Protocol Detection settings.
-     */
-    protocol_detection?: Settings.ProtocolDetection;
-
-    /**
-     * TLS interception settings.
-     */
-    tls_decrypt?: Settings.TLSDecrypt;
-  }
-
-  export namespace Settings {
-    /**
-     * Activity log settings.
-     */
-    export interface ActivityLog {
-      /**
-       * Enable activity logging.
-       */
-      enabled?: boolean;
-    }
-
-    /**
-     * Anti-virus settings.
-     */
-    export interface Antivirus {
-      /**
-       * Enable anti-virus scanning on downloads.
-       */
-      enabled_download_phase?: boolean;
-
-      /**
-       * Enable anti-virus scanning on uploads.
-       */
-      enabled_upload_phase?: boolean;
-
-      /**
-       * Block requests for files that cannot be scanned.
-       */
-      fail_closed?: boolean;
-
-      /**
-       * Configure a message to display on the user's device when an antivirus search is
-       * performed.
-       */
-      notification_settings?: Antivirus.NotificationSettings;
-    }
-
-    export namespace Antivirus {
-      /**
-       * Configure a message to display on the user's device when an antivirus search is
-       * performed.
-       */
-      export interface NotificationSettings {
-        /**
-         * Set notification on
-         */
-        enabled?: boolean;
-
-        /**
-         * Customize the message shown in the notification.
-         */
-        msg?: string;
-
-        /**
-         * Optional URL to direct users to additional information. If not set, the
-         * notification will open a block page.
-         */
-        support_url?: string;
-      }
-    }
-
-    /**
-     * Block page layout settings.
-     */
-    export interface BlockPage {
-      /**
-       * Block page background color in #rrggbb format.
-       */
-      background_color?: string;
-
-      /**
-       * Enable only cipher suites and TLS versions compliant with FIPS 140-2.
-       */
-      enabled?: boolean;
-
-      /**
-       * Block page footer text.
-       */
-      footer_text?: string;
-
-      /**
-       * Block page header text.
-       */
-      header_text?: string;
-
-      /**
-       * Full URL to the logo file.
-       */
-      logo_path?: string;
-
-      /**
-       * Admin email for users to contact.
-       */
-      mailto_address?: string;
-
-      /**
-       * Subject line for emails created from block page.
-       */
-      mailto_subject?: string;
-
-      /**
-       * Block page title.
-       */
-      name?: string;
-
-      /**
-       * Suppress detailed info at the bottom of the block page.
-       */
-      suppress_footer?: boolean;
-    }
-
-    /**
-     * DLP body scanning settings.
-     */
-    export interface BodyScanning {
-      /**
-       * Set the inspection mode to either `deep` or `shallow`.
-       */
-      inspection_mode?: string;
-    }
-
-    /**
-     * Browser isolation settings.
-     */
-    export interface BrowserIsolation {
-      /**
-       * Enable non-identity onramp support for Browser Isolation.
-       */
-      non_identity_enabled?: boolean;
-
-      /**
-       * Enable Clientless Browser Isolation.
-       */
-      url_browser_isolation_enabled?: boolean;
-    }
-
-    /**
-     * Custom certificate settings for BYO-PKI.
-     */
-    export interface CustomCertificate {
-      /**
-       * Enable use of custom certificate authority for signing Gateway traffic.
-       */
-      enabled: boolean;
-
-      /**
-       * UUID of certificate (ID from MTLS certificate store).
-       */
-      id?: string;
-
-      /**
-       * Certificate status (internal).
-       */
-      binding_status?: string;
-
-      updated_at?: string;
-    }
-
-    /**
-     * Extended e-mail matching settings.
-     */
-    export interface ExtendedEmailMatching {
-      /**
-       * Enable matching all variants of user emails (with + or . modifiers) used as
-       * criteria in Firewall policies.
-       */
-      enabled?: boolean;
-    }
-
-    /**
-     * FIPS settings.
-     */
-    export interface Fips {
-      /**
-       * Enable only cipher suites and TLS versions compliant with FIPS 140-2.
-       */
-      tls?: boolean;
-    }
-
-    /**
-     * Protocol Detection settings.
-     */
-    export interface ProtocolDetection {
-      /**
-       * Enable detecting protocol on initial bytes of client traffic.
-       */
-      enabled?: boolean;
-    }
-
-    /**
-     * TLS interception settings.
-     */
-    export interface TLSDecrypt {
-      /**
-       * Enable inspecting encrypted HTTP traffic.
-       */
-      enabled?: boolean;
-    }
-  }
 }
 
 export interface ConfigurationUpdateParams {
@@ -879,257 +363,7 @@ export interface ConfigurationUpdateParams {
   /**
    * Body param: account settings.
    */
-  settings?: ConfigurationUpdateParams.Settings;
-}
-
-export namespace ConfigurationUpdateParams {
-  /**
-   * account settings.
-   */
-  export interface Settings {
-    /**
-     * Activity log settings.
-     */
-    activity_log?: Settings.ActivityLog;
-
-    /**
-     * Anti-virus settings.
-     */
-    antivirus?: Settings.Antivirus;
-
-    /**
-     * Block page layout settings.
-     */
-    block_page?: Settings.BlockPage;
-
-    /**
-     * DLP body scanning settings.
-     */
-    body_scanning?: Settings.BodyScanning;
-
-    /**
-     * Browser isolation settings.
-     */
-    browser_isolation?: Settings.BrowserIsolation;
-
-    /**
-     * Custom certificate settings for BYO-PKI.
-     */
-    custom_certificate?: Settings.CustomCertificate;
-
-    /**
-     * Extended e-mail matching settings.
-     */
-    extended_email_matching?: Settings.ExtendedEmailMatching;
-
-    /**
-     * FIPS settings.
-     */
-    fips?: Settings.Fips;
-
-    /**
-     * Protocol Detection settings.
-     */
-    protocol_detection?: Settings.ProtocolDetection;
-
-    /**
-     * TLS interception settings.
-     */
-    tls_decrypt?: Settings.TLSDecrypt;
-  }
-
-  export namespace Settings {
-    /**
-     * Activity log settings.
-     */
-    export interface ActivityLog {
-      /**
-       * Enable activity logging.
-       */
-      enabled?: boolean;
-    }
-
-    /**
-     * Anti-virus settings.
-     */
-    export interface Antivirus {
-      /**
-       * Enable anti-virus scanning on downloads.
-       */
-      enabled_download_phase?: boolean;
-
-      /**
-       * Enable anti-virus scanning on uploads.
-       */
-      enabled_upload_phase?: boolean;
-
-      /**
-       * Block requests for files that cannot be scanned.
-       */
-      fail_closed?: boolean;
-
-      /**
-       * Configure a message to display on the user's device when an antivirus search is
-       * performed.
-       */
-      notification_settings?: Antivirus.NotificationSettings;
-    }
-
-    export namespace Antivirus {
-      /**
-       * Configure a message to display on the user's device when an antivirus search is
-       * performed.
-       */
-      export interface NotificationSettings {
-        /**
-         * Set notification on
-         */
-        enabled?: boolean;
-
-        /**
-         * Customize the message shown in the notification.
-         */
-        msg?: string;
-
-        /**
-         * Optional URL to direct users to additional information. If not set, the
-         * notification will open a block page.
-         */
-        support_url?: string;
-      }
-    }
-
-    /**
-     * Block page layout settings.
-     */
-    export interface BlockPage {
-      /**
-       * Block page background color in #rrggbb format.
-       */
-      background_color?: string;
-
-      /**
-       * Enable only cipher suites and TLS versions compliant with FIPS 140-2.
-       */
-      enabled?: boolean;
-
-      /**
-       * Block page footer text.
-       */
-      footer_text?: string;
-
-      /**
-       * Block page header text.
-       */
-      header_text?: string;
-
-      /**
-       * Full URL to the logo file.
-       */
-      logo_path?: string;
-
-      /**
-       * Admin email for users to contact.
-       */
-      mailto_address?: string;
-
-      /**
-       * Subject line for emails created from block page.
-       */
-      mailto_subject?: string;
-
-      /**
-       * Block page title.
-       */
-      name?: string;
-
-      /**
-       * Suppress detailed info at the bottom of the block page.
-       */
-      suppress_footer?: boolean;
-    }
-
-    /**
-     * DLP body scanning settings.
-     */
-    export interface BodyScanning {
-      /**
-       * Set the inspection mode to either `deep` or `shallow`.
-       */
-      inspection_mode?: string;
-    }
-
-    /**
-     * Browser isolation settings.
-     */
-    export interface BrowserIsolation {
-      /**
-       * Enable non-identity onramp support for Browser Isolation.
-       */
-      non_identity_enabled?: boolean;
-
-      /**
-       * Enable Clientless Browser Isolation.
-       */
-      url_browser_isolation_enabled?: boolean;
-    }
-
-    /**
-     * Custom certificate settings for BYO-PKI.
-     */
-    export interface CustomCertificate {
-      /**
-       * Enable use of custom certificate authority for signing Gateway traffic.
-       */
-      enabled: boolean;
-
-      /**
-       * UUID of certificate (ID from MTLS certificate store).
-       */
-      id?: string;
-    }
-
-    /**
-     * Extended e-mail matching settings.
-     */
-    export interface ExtendedEmailMatching {
-      /**
-       * Enable matching all variants of user emails (with + or . modifiers) used as
-       * criteria in Firewall policies.
-       */
-      enabled?: boolean;
-    }
-
-    /**
-     * FIPS settings.
-     */
-    export interface Fips {
-      /**
-       * Enable only cipher suites and TLS versions compliant with FIPS 140-2.
-       */
-      tls?: boolean;
-    }
-
-    /**
-     * Protocol Detection settings.
-     */
-    export interface ProtocolDetection {
-      /**
-       * Enable detecting protocol on initial bytes of client traffic.
-       */
-      enabled?: boolean;
-    }
-
-    /**
-     * TLS interception settings.
-     */
-    export interface TLSDecrypt {
-      /**
-       * Enable inspecting encrypted HTTP traffic.
-       */
-      enabled?: boolean;
-    }
-  }
+  settings?: UnnamedSchemaRef055aaf3918bf29f81c09d394a864182e;
 }
 
 export interface ConfigurationEditParams {
@@ -1141,257 +375,7 @@ export interface ConfigurationEditParams {
   /**
    * Body param: account settings.
    */
-  settings?: ConfigurationEditParams.Settings;
-}
-
-export namespace ConfigurationEditParams {
-  /**
-   * account settings.
-   */
-  export interface Settings {
-    /**
-     * Activity log settings.
-     */
-    activity_log?: Settings.ActivityLog;
-
-    /**
-     * Anti-virus settings.
-     */
-    antivirus?: Settings.Antivirus;
-
-    /**
-     * Block page layout settings.
-     */
-    block_page?: Settings.BlockPage;
-
-    /**
-     * DLP body scanning settings.
-     */
-    body_scanning?: Settings.BodyScanning;
-
-    /**
-     * Browser isolation settings.
-     */
-    browser_isolation?: Settings.BrowserIsolation;
-
-    /**
-     * Custom certificate settings for BYO-PKI.
-     */
-    custom_certificate?: Settings.CustomCertificate;
-
-    /**
-     * Extended e-mail matching settings.
-     */
-    extended_email_matching?: Settings.ExtendedEmailMatching;
-
-    /**
-     * FIPS settings.
-     */
-    fips?: Settings.Fips;
-
-    /**
-     * Protocol Detection settings.
-     */
-    protocol_detection?: Settings.ProtocolDetection;
-
-    /**
-     * TLS interception settings.
-     */
-    tls_decrypt?: Settings.TLSDecrypt;
-  }
-
-  export namespace Settings {
-    /**
-     * Activity log settings.
-     */
-    export interface ActivityLog {
-      /**
-       * Enable activity logging.
-       */
-      enabled?: boolean;
-    }
-
-    /**
-     * Anti-virus settings.
-     */
-    export interface Antivirus {
-      /**
-       * Enable anti-virus scanning on downloads.
-       */
-      enabled_download_phase?: boolean;
-
-      /**
-       * Enable anti-virus scanning on uploads.
-       */
-      enabled_upload_phase?: boolean;
-
-      /**
-       * Block requests for files that cannot be scanned.
-       */
-      fail_closed?: boolean;
-
-      /**
-       * Configure a message to display on the user's device when an antivirus search is
-       * performed.
-       */
-      notification_settings?: Antivirus.NotificationSettings;
-    }
-
-    export namespace Antivirus {
-      /**
-       * Configure a message to display on the user's device when an antivirus search is
-       * performed.
-       */
-      export interface NotificationSettings {
-        /**
-         * Set notification on
-         */
-        enabled?: boolean;
-
-        /**
-         * Customize the message shown in the notification.
-         */
-        msg?: string;
-
-        /**
-         * Optional URL to direct users to additional information. If not set, the
-         * notification will open a block page.
-         */
-        support_url?: string;
-      }
-    }
-
-    /**
-     * Block page layout settings.
-     */
-    export interface BlockPage {
-      /**
-       * Block page background color in #rrggbb format.
-       */
-      background_color?: string;
-
-      /**
-       * Enable only cipher suites and TLS versions compliant with FIPS 140-2.
-       */
-      enabled?: boolean;
-
-      /**
-       * Block page footer text.
-       */
-      footer_text?: string;
-
-      /**
-       * Block page header text.
-       */
-      header_text?: string;
-
-      /**
-       * Full URL to the logo file.
-       */
-      logo_path?: string;
-
-      /**
-       * Admin email for users to contact.
-       */
-      mailto_address?: string;
-
-      /**
-       * Subject line for emails created from block page.
-       */
-      mailto_subject?: string;
-
-      /**
-       * Block page title.
-       */
-      name?: string;
-
-      /**
-       * Suppress detailed info at the bottom of the block page.
-       */
-      suppress_footer?: boolean;
-    }
-
-    /**
-     * DLP body scanning settings.
-     */
-    export interface BodyScanning {
-      /**
-       * Set the inspection mode to either `deep` or `shallow`.
-       */
-      inspection_mode?: string;
-    }
-
-    /**
-     * Browser isolation settings.
-     */
-    export interface BrowserIsolation {
-      /**
-       * Enable non-identity onramp support for Browser Isolation.
-       */
-      non_identity_enabled?: boolean;
-
-      /**
-       * Enable Clientless Browser Isolation.
-       */
-      url_browser_isolation_enabled?: boolean;
-    }
-
-    /**
-     * Custom certificate settings for BYO-PKI.
-     */
-    export interface CustomCertificate {
-      /**
-       * Enable use of custom certificate authority for signing Gateway traffic.
-       */
-      enabled: boolean;
-
-      /**
-       * UUID of certificate (ID from MTLS certificate store).
-       */
-      id?: string;
-    }
-
-    /**
-     * Extended e-mail matching settings.
-     */
-    export interface ExtendedEmailMatching {
-      /**
-       * Enable matching all variants of user emails (with + or . modifiers) used as
-       * criteria in Firewall policies.
-       */
-      enabled?: boolean;
-    }
-
-    /**
-     * FIPS settings.
-     */
-    export interface Fips {
-      /**
-       * Enable only cipher suites and TLS versions compliant with FIPS 140-2.
-       */
-      tls?: boolean;
-    }
-
-    /**
-     * Protocol Detection settings.
-     */
-    export interface ProtocolDetection {
-      /**
-       * Enable detecting protocol on initial bytes of client traffic.
-       */
-      enabled?: boolean;
-    }
-
-    /**
-     * TLS interception settings.
-     */
-    export interface TLSDecrypt {
-      /**
-       * Enable inspecting encrypted HTTP traffic.
-       */
-      enabled?: boolean;
-    }
-  }
+  settings?: UnnamedSchemaRef055aaf3918bf29f81c09d394a864182e;
 }
 
 export interface ConfigurationGetParams {
@@ -1399,6 +383,7 @@ export interface ConfigurationGetParams {
 }
 
 export namespace Configurations {
+  export import UnnamedSchemaRef055aaf3918bf29f81c09d394a864182e = ConfigurationsAPI.UnnamedSchemaRef055aaf3918bf29f81c09d394a864182e;
   export import ConfigurationUpdateResponse = ConfigurationsAPI.ConfigurationUpdateResponse;
   export import ConfigurationEditResponse = ConfigurationsAPI.ConfigurationEditResponse;
   export import ConfigurationGetResponse = ConfigurationsAPI.ConfigurationGetResponse;

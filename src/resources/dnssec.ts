@@ -3,16 +3,20 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as DNSSECAPI from 'cloudflare/resources/dnssec';
+import * as Shared from 'cloudflare/resources/shared';
 
 export class DNSSECResource extends APIResource {
   /**
    * Delete DNSSEC.
    */
-  delete(params: DNSSECDeleteParams, options?: Core.RequestOptions): Core.APIPromise<DNSSECDeleteResponse> {
+  delete(
+    params: DNSSECDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Shared.UnnamedSchemaRef602dd5f63eab958d53da61434dec08f0> {
     const { zone_id, body } = params;
     return (
       this._client.delete(`/zones/${zone_id}/dnssec`, { body: body, ...options }) as Core.APIPromise<{
-        result: DNSSECDeleteResponse;
+        result: Shared.UnnamedSchemaRef602dd5f63eab958d53da61434dec08f0;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -120,8 +124,6 @@ export interface DNSSEC {
   status?: 'active' | 'pending' | 'disabled' | 'pending-disabled' | 'error';
 }
 
-export type DNSSECDeleteResponse = unknown | string;
-
 export interface DNSSECDeleteParams {
   /**
    * Path param: Identifier
@@ -179,7 +181,6 @@ export interface DNSSECGetParams {
 
 export namespace DNSSECResource {
   export import DNSSEC = DNSSECAPI.DNSSEC;
-  export import DNSSECDeleteResponse = DNSSECAPI.DNSSECDeleteResponse;
   export import DNSSECDeleteParams = DNSSECAPI.DNSSECDeleteParams;
   export import DNSSECEditParams = DNSSECAPI.DNSSECEditParams;
   export import DNSSECGetParams = DNSSECAPI.DNSSECGetParams;

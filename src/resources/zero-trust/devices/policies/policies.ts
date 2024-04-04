@@ -224,6 +224,130 @@ export namespace DevicesDeviceSettingsPolicy {
   }
 }
 
+export interface UnnamedSchemaRefF636ff9f2cb41ff4b715cf8ed8515581 {
+  /**
+   * Whether to allow the user to switch WARP between modes.
+   */
+  allow_mode_switch?: boolean;
+
+  /**
+   * Whether to receive update notifications when a new version of the client is
+   * available.
+   */
+  allow_updates?: boolean;
+
+  /**
+   * Whether to allow devices to leave the organization.
+   */
+  allowed_to_leave?: boolean;
+
+  /**
+   * The amount of time in minutes to reconnect after having been disabled.
+   */
+  auto_connect?: number;
+
+  /**
+   * Turn on the captive portal after the specified amount of time.
+   */
+  captive_portal?: number;
+
+  /**
+   * Whether the policy is the default policy for an account.
+   */
+  default?: boolean;
+
+  /**
+   * A description of the policy.
+   */
+  description?: string;
+
+  /**
+   * If the `dns_server` field of a fallback domain is not present, the client will
+   * fall back to a best guess of the default/system DNS resolvers unless this policy
+   * option is set to `true`.
+   */
+  disable_auto_fallback?: boolean;
+
+  /**
+   * Whether the policy will be applied to matching devices.
+   */
+  enabled?: boolean;
+
+  exclude?: Array<ExcludesAPI.DevicesSplitTunnel>;
+
+  /**
+   * Whether to add Microsoft IPs to Split Tunnel exclusions.
+   */
+  exclude_office_ips?: boolean;
+
+  fallback_domains?: Array<FallbackDomainsAPI.DevicesFallbackDomain>;
+
+  gateway_unique_id?: string;
+
+  include?: Array<IncludesAPI.DevicesSplitTunnelInclude>;
+
+  /**
+   * The amount of time in minutes a user is allowed access to their LAN. A value of
+   * 0 will allow LAN access until the next WARP reconnection, such as a reboot or a
+   * laptop waking from sleep. Note that this field is omitted from the response if
+   * null or unset.
+   */
+  lan_allow_minutes?: number;
+
+  /**
+   * The size of the subnet for the local access network. Note that this field is
+   * omitted from the response if null or unset.
+   */
+  lan_allow_subnet_size?: number;
+
+  /**
+   * The wirefilter expression to match devices.
+   */
+  match?: string;
+
+  /**
+   * The name of the device settings profile.
+   */
+  name?: string;
+
+  /**
+   * Device ID.
+   */
+  policy_id?: string;
+
+  /**
+   * The precedence of the policy. Lower values indicate higher precedence. Policies
+   * will be evaluated in ascending order of this field.
+   */
+  precedence?: number;
+
+  service_mode_v2?: UnnamedSchemaRefF636ff9f2cb41ff4b715cf8ed8515581.ServiceModeV2;
+
+  /**
+   * The URL to launch when the Send Feedback button is clicked.
+   */
+  support_url?: string;
+
+  /**
+   * Whether to allow the user to turn off the WARP switch and disconnect the client.
+   */
+  switch_locked?: boolean;
+}
+
+export namespace UnnamedSchemaRefF636ff9f2cb41ff4b715cf8ed8515581 {
+  export interface ServiceModeV2 {
+    /**
+     * The mode to run the WARP client under.
+     */
+    mode?: string;
+
+    /**
+     * The port number when used with proxy mode.
+     */
+    port?: number;
+  }
+}
+
 export type PolicyDeleteResponse = Array<DevicesDeviceSettingsPolicy>;
 
 export interface PolicyCreateParams {
@@ -466,6 +590,7 @@ export interface PolicyGetParams {
 
 export namespace Policies {
   export import DevicesDeviceSettingsPolicy = PoliciesAPI.DevicesDeviceSettingsPolicy;
+  export import UnnamedSchemaRefF636ff9f2cb41ff4b715cf8ed8515581 = PoliciesAPI.UnnamedSchemaRefF636ff9f2cb41ff4b715cf8ed8515581;
   export import PolicyDeleteResponse = PoliciesAPI.PolicyDeleteResponse;
   export import DevicesDeviceSettingsPoliciesSinglePage = PoliciesAPI.DevicesDeviceSettingsPoliciesSinglePage;
   export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
@@ -478,6 +603,7 @@ export namespace Policies {
   export import DefaultPolicyGetParams = DefaultPolicyAPI.DefaultPolicyGetParams;
   export import Excludes = ExcludesAPI.Excludes;
   export import DevicesSplitTunnel = ExcludesAPI.DevicesSplitTunnel;
+  export import UnnamedSchemaRef0462afe1a32ee90b1999d4277af59fa8 = ExcludesAPI.UnnamedSchemaRef0462afe1a32ee90b1999d4277af59fa8;
   export import ExcludeUpdateResponse = ExcludesAPI.ExcludeUpdateResponse;
   export import ExcludeGetResponse = ExcludesAPI.ExcludeGetResponse;
   export import DevicesSplitTunnelsSinglePage = ExcludesAPI.DevicesSplitTunnelsSinglePage;
@@ -486,6 +612,7 @@ export namespace Policies {
   export import ExcludeGetParams = ExcludesAPI.ExcludeGetParams;
   export import FallbackDomains = FallbackDomainsAPI.FallbackDomains;
   export import DevicesFallbackDomain = FallbackDomainsAPI.DevicesFallbackDomain;
+  export import UnnamedSchemaRef1fbf91ecd61792c751fead58dc8005e6 = FallbackDomainsAPI.UnnamedSchemaRef1fbf91ecd61792c751fead58dc8005e6;
   export import FallbackDomainUpdateResponse = FallbackDomainsAPI.FallbackDomainUpdateResponse;
   export import FallbackDomainGetResponse = FallbackDomainsAPI.FallbackDomainGetResponse;
   export import DevicesFallbackDomainsSinglePage = FallbackDomainsAPI.DevicesFallbackDomainsSinglePage;
@@ -494,6 +621,7 @@ export namespace Policies {
   export import FallbackDomainGetParams = FallbackDomainsAPI.FallbackDomainGetParams;
   export import Includes = IncludesAPI.Includes;
   export import DevicesSplitTunnelInclude = IncludesAPI.DevicesSplitTunnelInclude;
+  export import UnnamedSchemaRef5e0c6134a624678286f4a424b001870a = IncludesAPI.UnnamedSchemaRef5e0c6134a624678286f4a424b001870a;
   export import IncludeUpdateResponse = IncludesAPI.IncludeUpdateResponse;
   export import IncludeGetResponse = IncludesAPI.IncludeGetResponse;
   export import DevicesSplitTunnelIncludesSinglePage = IncludesAPI.DevicesSplitTunnelIncludesSinglePage;

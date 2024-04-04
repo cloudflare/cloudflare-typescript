@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as VariantsAPI from 'cloudflare/resources/images/v1/variants';
+import * as Shared from 'cloudflare/resources/shared';
 
 export class Variants extends APIResource {
   /**
@@ -37,13 +38,13 @@ export class Variants extends APIResource {
     variantId: string,
     params: VariantDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<VariantDeleteResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     const { account_id, body } = params;
     return (
       this._client.delete(`/accounts/${account_id}/images/v1/variants/${variantId}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: VariantDeleteResponse }>
+      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -79,6 +80,55 @@ export class Variants extends APIResource {
         options,
       ) as Core.APIPromise<{ result: V1ImageVariant }>
     )._thenUnwrap((obj) => obj.result);
+  }
+}
+
+export interface UnnamedSchemaRefD02195de7dadf27801875f36cddfa3a3 {
+  variant?: UnnamedSchemaRefD02195de7dadf27801875f36cddfa3a3.Variant;
+}
+
+export namespace UnnamedSchemaRefD02195de7dadf27801875f36cddfa3a3 {
+  export interface Variant {
+    id: string;
+
+    /**
+     * Allows you to define image resizing sizes for different use cases.
+     */
+    options: Variant.Options;
+
+    /**
+     * Indicates whether the variant can access an image without a signature,
+     * regardless of image access control.
+     */
+    neverRequireSignedURLs?: boolean;
+  }
+
+  export namespace Variant {
+    /**
+     * Allows you to define image resizing sizes for different use cases.
+     */
+    export interface Options {
+      /**
+       * The fit property describes how the width and height dimensions should be
+       * interpreted.
+       */
+      fit: 'scale-down' | 'contain' | 'cover' | 'crop' | 'pad';
+
+      /**
+       * Maximum height in image pixels.
+       */
+      height: number;
+
+      /**
+       * What EXIF data should be preserved in the output image.
+       */
+      metadata: 'keep' | 'copyright' | 'none';
+
+      /**
+       * Maximum width in image pixels.
+       */
+      width: number;
+    }
   }
 }
 
@@ -185,8 +235,6 @@ export namespace V1ImageVariants {
     }
   }
 }
-
-export type VariantDeleteResponse = unknown | string;
 
 export interface VariantCreateParams {
   /**
@@ -312,9 +360,9 @@ export interface VariantGetParams {
 }
 
 export namespace Variants {
+  export import UnnamedSchemaRefD02195de7dadf27801875f36cddfa3a3 = VariantsAPI.UnnamedSchemaRefD02195de7dadf27801875f36cddfa3a3;
   export import V1ImageVariant = VariantsAPI.V1ImageVariant;
   export import V1ImageVariants = VariantsAPI.V1ImageVariants;
-  export import VariantDeleteResponse = VariantsAPI.VariantDeleteResponse;
   export import VariantCreateParams = VariantsAPI.VariantCreateParams;
   export import VariantListParams = VariantsAPI.VariantListParams;
   export import VariantDeleteParams = VariantsAPI.VariantDeleteParams;

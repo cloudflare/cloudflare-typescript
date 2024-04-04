@@ -175,6 +175,78 @@ export namespace FirewallZoneLockdown {
   }
 }
 
+export interface UnnamedSchemaRefA4044d3c73ad1e6c8fff4dc05f922ab5 {
+  /**
+   * The unique identifier of the Zone Lockdown rule.
+   */
+  id: string;
+
+  /**
+   * A list of IP addresses or CIDR ranges that will be allowed to access the URLs
+   * specified in the Zone Lockdown rule. You can include any number of `ip` or
+   * `ip_range` configurations.
+   */
+  configurations:
+    | UnnamedSchemaRefA4044d3c73ad1e6c8fff4dc05f922ab5.LegacyJhsSchemasIPConfiguration
+    | UnnamedSchemaRefA4044d3c73ad1e6c8fff4dc05f922ab5.LegacyJhsSchemasCIDRConfiguration;
+
+  /**
+   * The timestamp of when the rule was created.
+   */
+  created_on: string;
+
+  /**
+   * An informative summary of the rule.
+   */
+  description: string;
+
+  /**
+   * The timestamp of when the rule was last modified.
+   */
+  modified_on: string;
+
+  /**
+   * When true, indicates that the rule is currently paused.
+   */
+  paused: boolean;
+
+  /**
+   * The URLs to include in the rule definition. You can use wildcards. Each entered
+   * URL will be escaped before use, which means you can only use simple wildcard
+   * patterns.
+   */
+  urls: Array<string>;
+}
+
+export namespace UnnamedSchemaRefA4044d3c73ad1e6c8fff4dc05f922ab5 {
+  export interface LegacyJhsSchemasIPConfiguration {
+    /**
+     * The configuration target. You must set the target to `ip` when specifying an IP
+     * address in the Zone Lockdown rule.
+     */
+    target?: 'ip';
+
+    /**
+     * The IP address to match. This address will be compared to the IP address of
+     * incoming requests.
+     */
+    value?: string;
+  }
+
+  export interface LegacyJhsSchemasCIDRConfiguration {
+    /**
+     * The configuration target. You must set the target to `ip_range` when specifying
+     * an IP address range in the Zone Lockdown rule.
+     */
+    target?: 'ip_range';
+
+    /**
+     * The IP address range to match. You can only use prefix lengths `/16` and `/24`.
+     */
+    value?: string;
+  }
+}
+
 export interface LockdownDeleteResponse {
   /**
    * The unique identifier of the Zone Lockdown rule.
@@ -239,6 +311,7 @@ export type LockdownDeleteParams = unknown;
 
 export namespace Lockdowns {
   export import FirewallZoneLockdown = LockdownsAPI.FirewallZoneLockdown;
+  export import UnnamedSchemaRefA4044d3c73ad1e6c8fff4dc05f922ab5 = LockdownsAPI.UnnamedSchemaRefA4044d3c73ad1e6c8fff4dc05f922ab5;
   export import LockdownDeleteResponse = LockdownsAPI.LockdownDeleteResponse;
   export import FirewallZoneLockdownsV4PagePaginationArray = LockdownsAPI.FirewallZoneLockdownsV4PagePaginationArray;
   export import LockdownCreateParams = LockdownsAPI.LockdownCreateParams;

@@ -5,6 +5,7 @@ import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import { CloudflareError } from 'cloudflare/error';
 import * as AccessRulesAPI from 'cloudflare/resources/firewall/access-rules';
+import * as Shared from 'cloudflare/resources/shared';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class AccessRules extends APIResource {
@@ -18,7 +19,7 @@ export class AccessRules extends APIResource {
   create(
     params: AccessRuleCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessRuleCreateResponse | null> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -40,7 +41,7 @@ export class AccessRules extends APIResource {
       this._client.post(`/${accountOrZone}/${accountOrZoneId}/firewall/access_rules/rules`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: AccessRuleCreateResponse | null }>
+      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -131,7 +132,7 @@ export class AccessRules extends APIResource {
     identifier: unknown,
     params: AccessRuleEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessRuleEditResponse | null> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -153,7 +154,7 @@ export class AccessRules extends APIResource {
       this._client.patch(`/${accountOrZone}/${accountOrZoneId}/firewall/access_rules/rules/${identifier}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: AccessRuleEditResponse | null }>
+      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -164,13 +165,16 @@ export class AccessRules extends APIResource {
     identifier: unknown,
     params?: AccessRuleGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessRuleGetResponse | null>;
-  get(identifier: unknown, options?: Core.RequestOptions): Core.APIPromise<AccessRuleGetResponse | null>;
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a>;
+  get(
+    identifier: unknown,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a>;
   get(
     identifier: unknown,
     params: AccessRuleGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessRuleGetResponse | null> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     if (isRequestOptions(params)) {
       return this.get(identifier, {}, params);
     }
@@ -195,14 +199,12 @@ export class AccessRules extends APIResource {
       this._client.get(
         `/${accountOrZone}/${accountOrZoneId}/firewall/access_rules/rules/${identifier}`,
         options,
-      ) as Core.APIPromise<{ result: AccessRuleGetResponse | null }>
+      ) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
 export class AccessRuleListResponsesV4PagePaginationArray extends V4PagePaginationArray<AccessRuleListResponse> {}
-
-export type AccessRuleCreateResponse = unknown | string;
 
 export type AccessRuleListResponse = unknown;
 
@@ -212,10 +214,6 @@ export interface AccessRuleDeleteResponse {
    */
   id: string;
 }
-
-export type AccessRuleEditResponse = unknown | string;
-
-export type AccessRuleGetResponse = unknown | string;
 
 export interface AccessRuleCreateParams {
   /**
@@ -547,11 +545,8 @@ export interface AccessRuleGetParams {
 }
 
 export namespace AccessRules {
-  export import AccessRuleCreateResponse = AccessRulesAPI.AccessRuleCreateResponse;
   export import AccessRuleListResponse = AccessRulesAPI.AccessRuleListResponse;
   export import AccessRuleDeleteResponse = AccessRulesAPI.AccessRuleDeleteResponse;
-  export import AccessRuleEditResponse = AccessRulesAPI.AccessRuleEditResponse;
-  export import AccessRuleGetResponse = AccessRulesAPI.AccessRuleGetResponse;
   export import AccessRuleListResponsesV4PagePaginationArray = AccessRulesAPI.AccessRuleListResponsesV4PagePaginationArray;
   export import AccessRuleCreateParams = AccessRulesAPI.AccessRuleCreateParams;
   export import AccessRuleListParams = AccessRulesAPI.AccessRuleListParams;

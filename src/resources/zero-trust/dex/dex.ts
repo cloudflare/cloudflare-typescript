@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from 'cloudflare/resource';
+import * as DEXAPI from 'cloudflare/resources/zero-trust/dex/dex';
 import * as ColosAPI from 'cloudflare/resources/zero-trust/dex/colos';
 import * as TracerouteTestsAPI from 'cloudflare/resources/zero-trust/dex/traceroute-tests';
 import * as FleetStatusAPI from 'cloudflare/resources/zero-trust/dex/fleet-status/fleet-status';
@@ -18,7 +19,19 @@ export class DEX extends APIResource {
   tracerouteTests: TracerouteTestsAPI.TracerouteTests = new TracerouteTestsAPI.TracerouteTests(this._client);
 }
 
+export interface UnnamedSchemaRefBf9e2abcf1b78a6cab8e6e29e2228a11 {
+  id: string;
+
+  /**
+   * Whether the policy is the default for the account
+   */
+  default: boolean;
+
+  name: string;
+}
+
 export namespace DEX {
+  export import UnnamedSchemaRefBf9e2abcf1b78a6cab8e6e29e2228a11 = DEXAPI.UnnamedSchemaRefBf9e2abcf1b78a6cab8e6e29e2228a11;
   export import Colos = ColosAPI.Colos;
   export import ColoListResponse = ColosAPI.ColoListResponse;
   export import ColoListResponsesSinglePage = ColosAPI.ColoListResponsesSinglePage;

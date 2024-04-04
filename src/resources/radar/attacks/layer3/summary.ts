@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as SummaryAPI from 'cloudflare/resources/radar/attacks/layer3/summary';
+import * as RadarAPI from 'cloudflare/resources/radar/radar';
 
 export class Summary extends APIResource {
   /**
@@ -142,7 +143,7 @@ export interface SummaryBitrateResponse {
 
 export namespace SummaryBitrateResponse {
   export interface Meta {
-    dateRange: Array<Meta.DateRange>;
+    dateRange: Array<RadarAPI.UnnamedSchemaRefBaac9d7da12de53e99142f8ecd3982e5>;
 
     lastUpdated: string;
 
@@ -152,40 +153,10 @@ export namespace SummaryBitrateResponse {
   }
 
   export namespace Meta {
-    export interface DateRange {
-      /**
-       * Adjusted end of date range.
-       */
-      endTime: string;
-
-      /**
-       * Adjusted start of date range.
-       */
-      startTime: string;
-    }
-
     export interface ConfidenceInfo {
-      annotations?: Array<ConfidenceInfo.Annotation>;
+      annotations?: Array<RadarAPI.UnnamedSchemaRefB5f3bd1840490bc487ffef84567807b1>;
 
       level?: number;
-    }
-
-    export namespace ConfidenceInfo {
-      export interface Annotation {
-        dataSource: string;
-
-        description: string;
-
-        eventType: string;
-
-        isInstantaneous: unknown;
-
-        endTime?: string;
-
-        linkedUrl?: string;
-
-        startTime?: string;
-      }
     }
   }
 
@@ -210,7 +181,7 @@ export interface SummaryDurationResponse {
 
 export namespace SummaryDurationResponse {
   export interface Meta {
-    dateRange: Array<Meta.DateRange>;
+    dateRange: Array<RadarAPI.UnnamedSchemaRefBaac9d7da12de53e99142f8ecd3982e5>;
 
     lastUpdated: string;
 
@@ -220,40 +191,10 @@ export namespace SummaryDurationResponse {
   }
 
   export namespace Meta {
-    export interface DateRange {
-      /**
-       * Adjusted end of date range.
-       */
-      endTime: string;
-
-      /**
-       * Adjusted start of date range.
-       */
-      startTime: string;
-    }
-
     export interface ConfidenceInfo {
-      annotations?: Array<ConfidenceInfo.Annotation>;
+      annotations?: Array<RadarAPI.UnnamedSchemaRefB5f3bd1840490bc487ffef84567807b1>;
 
       level?: number;
-    }
-
-    export namespace ConfidenceInfo {
-      export interface Annotation {
-        dataSource: string;
-
-        description: string;
-
-        eventType: string;
-
-        isInstantaneous: unknown;
-
-        endTime?: string;
-
-        linkedUrl?: string;
-
-        startTime?: string;
-      }
     }
   }
 
@@ -280,46 +221,16 @@ export interface SummaryGetResponse {
 
 export namespace SummaryGetResponse {
   export interface Meta {
-    dateRange: Array<Meta.DateRange>;
+    dateRange: Array<RadarAPI.UnnamedSchemaRefBaac9d7da12de53e99142f8ecd3982e5>;
 
     confidenceInfo?: Meta.ConfidenceInfo;
   }
 
   export namespace Meta {
-    export interface DateRange {
-      /**
-       * Adjusted end of date range.
-       */
-      endTime: string;
-
-      /**
-       * Adjusted start of date range.
-       */
-      startTime: string;
-    }
-
     export interface ConfidenceInfo {
-      annotations?: Array<ConfidenceInfo.Annotation>;
+      annotations?: Array<RadarAPI.UnnamedSchemaRefB5f3bd1840490bc487ffef84567807b1>;
 
       level?: number;
-    }
-
-    export namespace ConfidenceInfo {
-      export interface Annotation {
-        dataSource: string;
-
-        description: string;
-
-        eventType: string;
-
-        isInstantaneous: unknown;
-
-        endTime?: string;
-
-        linkedUrl?: string;
-
-        startTime?: string;
-      }
     }
   }
 
@@ -337,12 +248,12 @@ export namespace SummaryGetResponse {
 export interface SummaryIPVersionResponse {
   meta: SummaryIPVersionResponse.Meta;
 
-  summary_0: SummaryIPVersionResponse.Summary0;
+  summary_0: RadarAPI.UnnamedSchemaRef8b383e904d9fb02521257ef9cc77d297;
 }
 
 export namespace SummaryIPVersionResponse {
   export interface Meta {
-    dateRange: Array<Meta.DateRange>;
+    dateRange: Array<RadarAPI.UnnamedSchemaRefBaac9d7da12de53e99142f8ecd3982e5>;
 
     lastUpdated: string;
 
@@ -352,47 +263,11 @@ export namespace SummaryIPVersionResponse {
   }
 
   export namespace Meta {
-    export interface DateRange {
-      /**
-       * Adjusted end of date range.
-       */
-      endTime: string;
-
-      /**
-       * Adjusted start of date range.
-       */
-      startTime: string;
-    }
-
     export interface ConfidenceInfo {
-      annotations?: Array<ConfidenceInfo.Annotation>;
+      annotations?: Array<RadarAPI.UnnamedSchemaRefB5f3bd1840490bc487ffef84567807b1>;
 
       level?: number;
     }
-
-    export namespace ConfidenceInfo {
-      export interface Annotation {
-        dataSource: string;
-
-        description: string;
-
-        eventType: string;
-
-        isInstantaneous: unknown;
-
-        endTime?: string;
-
-        linkedUrl?: string;
-
-        startTime?: string;
-      }
-    }
-  }
-
-  export interface Summary0 {
-    IPv4: string;
-
-    IPv6: string;
   }
 }
 
@@ -404,7 +279,7 @@ export interface SummaryProtocolResponse {
 
 export namespace SummaryProtocolResponse {
   export interface Meta {
-    dateRange: Array<Meta.DateRange>;
+    dateRange: Array<RadarAPI.UnnamedSchemaRefBaac9d7da12de53e99142f8ecd3982e5>;
 
     lastUpdated: string;
 
@@ -414,40 +289,10 @@ export namespace SummaryProtocolResponse {
   }
 
   export namespace Meta {
-    export interface DateRange {
-      /**
-       * Adjusted end of date range.
-       */
-      endTime: string;
-
-      /**
-       * Adjusted start of date range.
-       */
-      startTime: string;
-    }
-
     export interface ConfidenceInfo {
-      annotations?: Array<ConfidenceInfo.Annotation>;
+      annotations?: Array<RadarAPI.UnnamedSchemaRefB5f3bd1840490bc487ffef84567807b1>;
 
       level?: number;
-    }
-
-    export namespace ConfidenceInfo {
-      export interface Annotation {
-        dataSource: string;
-
-        description: string;
-
-        eventType: string;
-
-        isInstantaneous: unknown;
-
-        endTime?: string;
-
-        linkedUrl?: string;
-
-        startTime?: string;
-      }
     }
   }
 
@@ -470,7 +315,7 @@ export interface SummaryVectorResponse {
 
 export namespace SummaryVectorResponse {
   export interface Meta {
-    dateRange: Array<Meta.DateRange>;
+    dateRange: Array<RadarAPI.UnnamedSchemaRefBaac9d7da12de53e99142f8ecd3982e5>;
 
     lastUpdated: string;
 
@@ -480,40 +325,10 @@ export namespace SummaryVectorResponse {
   }
 
   export namespace Meta {
-    export interface DateRange {
-      /**
-       * Adjusted end of date range.
-       */
-      endTime: string;
-
-      /**
-       * Adjusted start of date range.
-       */
-      startTime: string;
-    }
-
     export interface ConfidenceInfo {
-      annotations?: Array<ConfidenceInfo.Annotation>;
+      annotations?: Array<RadarAPI.UnnamedSchemaRefB5f3bd1840490bc487ffef84567807b1>;
 
       level?: number;
-    }
-
-    export namespace ConfidenceInfo {
-      export interface Annotation {
-        dataSource: string;
-
-        description: string;
-
-        eventType: string;
-
-        isInstantaneous: unknown;
-
-        endTime?: string;
-
-        linkedUrl?: string;
-
-        startTime?: string;
-      }
     }
   }
 }

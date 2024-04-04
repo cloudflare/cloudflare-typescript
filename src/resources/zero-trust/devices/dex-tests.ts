@@ -142,6 +142,57 @@ export namespace DEXTestSchemasHTTP {
   }
 }
 
+export interface UnnamedSchemaRef15fd6ef0641450fd873ffb71715170c9 {
+  /**
+   * The configuration object which contains the details for the WARP client to
+   * conduct the test.
+   */
+  data: UnnamedSchemaRef15fd6ef0641450fd873ffb71715170c9.Data;
+
+  /**
+   * Determines whether or not the test is active.
+   */
+  enabled: boolean;
+
+  /**
+   * How often the test will run.
+   */
+  interval: string;
+
+  /**
+   * The name of the DEX test. Must be unique.
+   */
+  name: string;
+
+  /**
+   * Additional details about the test.
+   */
+  description?: string;
+}
+
+export namespace UnnamedSchemaRef15fd6ef0641450fd873ffb71715170c9 {
+  /**
+   * The configuration object which contains the details for the WARP client to
+   * conduct the test.
+   */
+  export interface Data {
+    /**
+     * The desired endpoint to test.
+     */
+    host?: string;
+
+    /**
+     * The type of test.
+     */
+    kind?: string;
+
+    /**
+     * The HTTP request method type.
+     */
+    method?: string;
+  }
+}
+
 export type DEXTestDeleteResponse = Array<DEXTestSchemasHTTP>;
 
 export interface DEXTestCreateParams {
@@ -270,6 +321,7 @@ export interface DEXTestGetParams {
 
 export namespace DEXTests {
   export import DEXTestSchemasHTTP = DEXTestsAPI.DEXTestSchemasHTTP;
+  export import UnnamedSchemaRef15fd6ef0641450fd873ffb71715170c9 = DEXTestsAPI.UnnamedSchemaRef15fd6ef0641450fd873ffb71715170c9;
   export import DEXTestDeleteResponse = DEXTestsAPI.DEXTestDeleteResponse;
   export import DEXTestSchemasHTTPSSinglePage = DEXTestsAPI.DEXTestSchemasHTTPSSinglePage;
   export import DEXTestCreateParams = DEXTestsAPI.DEXTestCreateParams;

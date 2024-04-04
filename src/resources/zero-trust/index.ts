@@ -8,7 +8,6 @@ export {
   ConnectivitySettingGetParams,
   ConnectivitySettings,
 } from './connectivity-settings';
-export { DEX } from './dex/index';
 export { DLP } from './dlp/index';
 export {
   GatewayCreateResponse,
@@ -20,26 +19,17 @@ export {
 export { Networks } from './networks/index';
 export {
   TunnelArgoTunnel,
-  TunnelListResponse,
-  TunnelEditResponse,
+  UnnamedSchemaRefA9c0e0a8cc5fd0e244f41ea806cd954a,
   TunnelCreateParams,
   TunnelListParams,
   TunnelDeleteParams,
   TunnelEditParams,
   TunnelGetParams,
-  TunnelListResponsesV4PagePaginationArray,
   Tunnels,
 } from './tunnels/index';
-export { ZeroTrust } from './zero-trust';
 export {
-  ZeroTrustDevices,
-  DeviceGetResponse,
-  DeviceListParams,
-  DeviceGetParams,
-  ZeroTrustDevicesSinglePage,
-  Devices,
-} from './devices/index';
-export {
+  UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb,
+  UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1,
   ZeroTrustIdentityProviders,
   IdentityProviderListResponse,
   IdentityProviderDeleteResponse,
@@ -51,6 +41,15 @@ export {
   IdentityProviderListResponsesSinglePage,
   IdentityProviders,
 } from './identity-providers';
+export { UnnamedSchemaRefBf9e2abcf1b78a6cab8e6e29e2228a11, DEX } from './dex/index';
+export { ZeroTrust } from './zero-trust';
+export {
+  ZeroTrustDevices,
+  DeviceListParams,
+  DeviceGetParams,
+  ZeroTrustDevicesSinglePage,
+  Devices,
+} from './devices/index';
 export {
   ZeroTrustOrganizations,
   OrganizationRevokeUsersResponse,

@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ListsAPI from 'cloudflare/resources/zero-trust/gateway/lists/lists';
+import * as Shared from 'cloudflare/resources/shared';
 import * as ItemsAPI from 'cloudflare/resources/zero-trust/gateway/lists/items';
 import { SinglePage } from 'cloudflare/pagination';
 
@@ -60,13 +61,13 @@ export class Lists extends APIResource {
     listId: string,
     params: ListDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ListDeleteResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     const { account_id, body } = params;
     return (
       this._client.delete(`/accounts/${account_id}/gateway/lists/${listId}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: ListDeleteResponse }>
+      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -105,6 +106,37 @@ export class Lists extends APIResource {
 }
 
 export class ZeroTrustGatewayListsSinglePage extends SinglePage<ZeroTrustGatewayLists> {}
+
+export interface UnnamedSchemaRef30ecd0f5ce68fc07dbb7760deda3d707 {
+  /**
+   * API Resource UUID tag.
+   */
+  id?: string;
+
+  /**
+   * The number of items in the list.
+   */
+  count?: number;
+
+  created_at?: string;
+
+  /**
+   * The description of the list.
+   */
+  description?: string;
+
+  /**
+   * The name of the list.
+   */
+  name?: string;
+
+  /**
+   * The type of list.
+   */
+  type?: 'SERIAL' | 'URL' | 'DOMAIN' | 'EMAIL' | 'IP';
+
+  updated_at?: string;
+}
 
 export interface ZeroTrustGatewayLists {
   /**
@@ -178,8 +210,6 @@ export namespace ListCreateResponse {
     value?: string;
   }
 }
-
-export type ListDeleteResponse = unknown | string;
 
 export interface ListCreateParams {
   /**
@@ -281,9 +311,9 @@ export interface ListGetParams {
 }
 
 export namespace Lists {
+  export import UnnamedSchemaRef30ecd0f5ce68fc07dbb7760deda3d707 = ListsAPI.UnnamedSchemaRef30ecd0f5ce68fc07dbb7760deda3d707;
   export import ZeroTrustGatewayLists = ListsAPI.ZeroTrustGatewayLists;
   export import ListCreateResponse = ListsAPI.ListCreateResponse;
-  export import ListDeleteResponse = ListsAPI.ListDeleteResponse;
   export import ZeroTrustGatewayListsSinglePage = ListsAPI.ZeroTrustGatewayListsSinglePage;
   export import ListCreateParams = ListsAPI.ListCreateParams;
   export import ListUpdateParams = ListsAPI.ListUpdateParams;

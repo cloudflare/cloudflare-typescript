@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as TimeseriesGroupsAPI from 'cloudflare/resources/radar/attacks/layer3/timeseries-groups';
+import * as RadarAPI from 'cloudflare/resources/radar/radar';
 
 export class TimeseriesGroups extends APIResource {
   /**
@@ -247,7 +248,7 @@ export namespace TimeseriesGroupGetResponse {
   export interface Meta {
     aggInterval: string;
 
-    dateRange: Array<Meta.DateRange>;
+    dateRange: Array<RadarAPI.UnnamedSchemaRefBaac9d7da12de53e99142f8ecd3982e5>;
 
     lastUpdated: string;
 
@@ -255,40 +256,10 @@ export namespace TimeseriesGroupGetResponse {
   }
 
   export namespace Meta {
-    export interface DateRange {
-      /**
-       * Adjusted end of date range.
-       */
-      endTime: string;
-
-      /**
-       * Adjusted start of date range.
-       */
-      startTime: string;
-    }
-
     export interface ConfidenceInfo {
-      annotations?: Array<ConfidenceInfo.Annotation>;
+      annotations?: Array<RadarAPI.UnnamedSchemaRefB5f3bd1840490bc487ffef84567807b1>;
 
       level?: number;
-    }
-
-    export namespace ConfidenceInfo {
-      export interface Annotation {
-        dataSource: string;
-
-        description: string;
-
-        eventType: string;
-
-        isInstantaneous: unknown;
-
-        endTime?: string;
-
-        linkedUrl?: string;
-
-        startTime?: string;
-      }
     }
   }
 
@@ -308,30 +279,13 @@ export namespace TimeseriesGroupGetResponse {
 export interface TimeseriesGroupIndustryResponse {
   meta: unknown;
 
-  serie_0: TimeseriesGroupIndustryResponse.Serie0;
-}
-
-export namespace TimeseriesGroupIndustryResponse {
-  export interface Serie0 {
-    timestamps: Array<string>;
-    [k: string]: Array<string>;
-  }
+  serie_0: RadarAPI.UnnamedSchemaRef7826220e105d84352ba1108d9ed88e55;
 }
 
 export interface TimeseriesGroupIPVersionResponse {
   meta: unknown;
 
-  serie_0: TimeseriesGroupIPVersionResponse.Serie0;
-}
-
-export namespace TimeseriesGroupIPVersionResponse {
-  export interface Serie0 {
-    IPv4: Array<string>;
-
-    IPv6: Array<string>;
-
-    timestamps: Array<string>;
-  }
+  serie_0: RadarAPI.UnnamedSchemaRef9002274ed7cb7f3dc567421e31529a3a;
 }
 
 export interface TimeseriesGroupProtocolResponse {
@@ -357,27 +311,13 @@ export namespace TimeseriesGroupProtocolResponse {
 export interface TimeseriesGroupVectorResponse {
   meta: unknown;
 
-  serie_0: TimeseriesGroupVectorResponse.Serie0;
-}
-
-export namespace TimeseriesGroupVectorResponse {
-  export interface Serie0 {
-    timestamps: Array<string>;
-    [k: string]: Array<string>;
-  }
+  serie_0: RadarAPI.UnnamedSchemaRef7826220e105d84352ba1108d9ed88e55;
 }
 
 export interface TimeseriesGroupVerticalResponse {
   meta: unknown;
 
-  serie_0: TimeseriesGroupVerticalResponse.Serie0;
-}
-
-export namespace TimeseriesGroupVerticalResponse {
-  export interface Serie0 {
-    timestamps: Array<string>;
-    [k: string]: Array<string>;
-  }
+  serie_0: RadarAPI.UnnamedSchemaRef7826220e105d84352ba1108d9ed88e55;
 }
 
 export interface TimeseriesGroupBitrateParams {

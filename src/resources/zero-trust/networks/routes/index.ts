@@ -5,6 +5,7 @@ export { NetworkCreateParams, NetworkDeleteParams, NetworkEditParams, Networks }
 export {
   TunnelRoute,
   TunnelTeamnet,
+  UnnamedSchemaRefC125d35cbb7f93aab989cd19bd764ed6,
   RouteCreateParams,
   RouteListParams,
   RouteDeleteParams,

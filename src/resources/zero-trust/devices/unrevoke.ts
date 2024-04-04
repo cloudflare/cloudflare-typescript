@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as UnrevokeAPI from 'cloudflare/resources/zero-trust/devices/unrevoke';
+import * as Shared from 'cloudflare/resources/shared';
 
 export class Unrevoke extends APIResource {
   /**
@@ -11,18 +12,16 @@ export class Unrevoke extends APIResource {
   create(
     params: UnrevokeCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<UnrevokeCreateResponse | null> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     const { account_id, body } = params;
     return (
       this._client.post(`/accounts/${account_id}/devices/unrevoke`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: UnrevokeCreateResponse | null }>
+      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
-
-export type UnrevokeCreateResponse = unknown | string;
 
 export interface UnrevokeCreateParams {
   /**
@@ -37,6 +36,5 @@ export interface UnrevokeCreateParams {
 }
 
 export namespace Unrevoke {
-  export import UnrevokeCreateResponse = UnrevokeAPI.UnrevokeCreateResponse;
   export import UnrevokeCreateParams = UnrevokeAPI.UnrevokeCreateParams;
 }

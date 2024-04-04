@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as TokensAPI from 'cloudflare/resources/user/tokens/tokens';
+import * as Shared from 'cloudflare/resources/shared';
 import * as PermissionGroupsAPI from 'cloudflare/resources/user/tokens/permission-groups';
 import * as ValueAPI from 'cloudflare/resources/user/tokens/value';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
@@ -32,10 +33,10 @@ export class Tokens extends APIResource {
     tokenId: unknown,
     body: TokenUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TokenUpdateResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     return (
       this._client.put(`/user/tokens/${tokenId}`, { body, ...options }) as Core.APIPromise<{
-        result: TokenUpdateResponse;
+        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -81,9 +82,14 @@ export class Tokens extends APIResource {
   /**
    * Get information about a specific token.
    */
-  get(tokenId: unknown, options?: Core.RequestOptions): Core.APIPromise<TokenGetResponse> {
+  get(
+    tokenId: unknown,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     return (
-      this._client.get(`/user/tokens/${tokenId}`, options) as Core.APIPromise<{ result: TokenGetResponse }>
+      this._client.get(`/user/tokens/${tokenId}`, options) as Core.APIPromise<{
+        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -106,8 +112,6 @@ export interface TokenCreateResponse {
   value?: ValueAPI.TokenValue;
 }
 
-export type TokenUpdateResponse = unknown | string | null;
-
 export type TokenListResponse = unknown;
 
 export interface TokenDeleteResponse {
@@ -116,8 +120,6 @@ export interface TokenDeleteResponse {
    */
   id: string;
 }
-
-export type TokenGetResponse = unknown | string | null;
 
 export interface TokenVerifyResponse {
   /**
@@ -310,10 +312,8 @@ export type TokenDeleteParams = unknown;
 
 export namespace Tokens {
   export import TokenCreateResponse = TokensAPI.TokenCreateResponse;
-  export import TokenUpdateResponse = TokensAPI.TokenUpdateResponse;
   export import TokenListResponse = TokensAPI.TokenListResponse;
   export import TokenDeleteResponse = TokensAPI.TokenDeleteResponse;
-  export import TokenGetResponse = TokensAPI.TokenGetResponse;
   export import TokenVerifyResponse = TokensAPI.TokenVerifyResponse;
   export import TokenListResponsesV4PagePaginationArray = TokensAPI.TokenListResponsesV4PagePaginationArray;
   export import TokenCreateParams = TokensAPI.TokenCreateParams;

@@ -2,6 +2,7 @@
 
 export {
   MagicNetworkMonitoringRule,
+  UnnamedSchemaRef99ba74ba6027c3c87ca03d4e81cfc16d,
   RuleCreateParams,
   RuleUpdateParams,
   RuleListParams,

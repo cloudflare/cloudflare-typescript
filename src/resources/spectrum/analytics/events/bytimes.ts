@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as BytimesAPI from 'cloudflare/resources/spectrum/analytics/events/bytimes';
+import * as Shared from 'cloudflare/resources/shared';
 
 export class Bytimes extends APIResource {
   /**
@@ -13,13 +14,16 @@ export class Bytimes extends APIResource {
     zone: string,
     query?: BytimeGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<BytimeGetResponse | null>;
-  get(zone: string, options?: Core.RequestOptions): Core.APIPromise<BytimeGetResponse | null>;
+  ): Core.APIPromise<Shared.UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f>;
+  get(
+    zone: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Shared.UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f>;
   get(
     zone: string,
     query: BytimeGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<BytimeGetResponse | null> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f> {
     if (isRequestOptions(query)) {
       return this.get(zone, {}, query);
     }
@@ -27,12 +31,10 @@ export class Bytimes extends APIResource {
       this._client.get(`/zones/${zone}/spectrum/analytics/events/bytime`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: BytimeGetResponse | null }>
+      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
-
-export type BytimeGetResponse = unknown | string;
 
 export interface BytimeGetParams {
   /**
@@ -114,6 +116,5 @@ export interface BytimeGetParams {
 }
 
 export namespace Bytimes {
-  export import BytimeGetResponse = BytimesAPI.BytimeGetResponse;
   export import BytimeGetParams = BytimesAPI.BytimeGetParams;
 }

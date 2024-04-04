@@ -2,6 +2,7 @@
 
 export {
   Healthcheck,
+  UnnamedSchemaRefAaa560acadcbf1ae1dc619ba1ea5948e,
   HealthcheckDeleteResponse,
   HealthcheckCreateParams,
   HealthcheckUpdateParams,

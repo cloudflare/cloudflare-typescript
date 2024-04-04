@@ -250,6 +250,26 @@ export class Applications extends APIResource {
 
 export class ZeroTrustAppsSinglePage extends SinglePage<ZeroTrustApps> {}
 
+export interface UnnamedSchemaRef6ed9646890b9be79e16f1cfff86ec832 {
+  /**
+   * The name of the IdP attribute.
+   */
+  name?: string;
+}
+
+/**
+ * A globally unique name for an identity or service provider.
+ */
+export type UnnamedSchemaRefC335ce55d4fdf132c942dfce6e45dcb9 =
+  | 'urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified'
+  | 'urn:oasis:names:tc:SAML:2.0:attrname-format:basic'
+  | 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri';
+
+/**
+ * The format of the name identifier sent to the SaaS application.
+ */
+export type UnnamedSchemaRefC6200e37c458aaa3c42e6e5b999bc419 = 'id' | 'email';
+
 export type ZeroTrustApps =
   | ZeroTrustApps.SelfHostedApplication
   | ZeroTrustApps.SaaSApplication
@@ -540,7 +560,7 @@ export namespace ZeroTrustApps {
       /**
        * The format of the name identifier sent to the SaaS application.
        */
-      name_id_format?: 'id' | 'email';
+      name_id_format?: ApplicationsAPI.UnnamedSchemaRefC6200e37c458aaa3c42e6e5b999bc419;
 
       /**
        * A [JSONata](https://jsonata.org/) expression that transforms an application's
@@ -587,21 +607,9 @@ export namespace ZeroTrustApps {
         /**
          * A globally unique name for an identity or service provider.
          */
-        name_format?:
-          | 'urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified'
-          | 'urn:oasis:names:tc:SAML:2.0:attrname-format:basic'
-          | 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri';
+        name_format?: ApplicationsAPI.UnnamedSchemaRefC335ce55d4fdf132c942dfce6e45dcb9;
 
-        source?: CustomAttributes.Source;
-      }
-
-      export namespace CustomAttributes {
-        export interface Source {
-          /**
-           * The name of the IdP attribute.
-           */
-          name?: string;
-        }
+        source?: ApplicationsAPI.UnnamedSchemaRef6ed9646890b9be79e16f1cfff86ec832;
       }
     }
 
@@ -1537,7 +1545,7 @@ export namespace ApplicationCreateParams {
       /**
        * The format of the name identifier sent to the SaaS application.
        */
-      name_id_format?: 'id' | 'email';
+      name_id_format?: ApplicationsAPI.UnnamedSchemaRefC6200e37c458aaa3c42e6e5b999bc419;
 
       /**
        * A [JSONata](https://jsonata.org/) expression that transforms an application's
@@ -1582,21 +1590,9 @@ export namespace ApplicationCreateParams {
         /**
          * A globally unique name for an identity or service provider.
          */
-        name_format?:
-          | 'urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified'
-          | 'urn:oasis:names:tc:SAML:2.0:attrname-format:basic'
-          | 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri';
+        name_format?: ApplicationsAPI.UnnamedSchemaRefC335ce55d4fdf132c942dfce6e45dcb9;
 
-        source?: CustomAttributes.Source;
-      }
-
-      export namespace CustomAttributes {
-        export interface Source {
-          /**
-           * The name of the IdP attribute.
-           */
-          name?: string;
-        }
+        source?: ApplicationsAPI.UnnamedSchemaRef6ed9646890b9be79e16f1cfff86ec832;
       }
     }
 
@@ -2486,7 +2482,7 @@ export namespace ApplicationUpdateParams {
       /**
        * The format of the name identifier sent to the SaaS application.
        */
-      name_id_format?: 'id' | 'email';
+      name_id_format?: ApplicationsAPI.UnnamedSchemaRefC6200e37c458aaa3c42e6e5b999bc419;
 
       /**
        * A [JSONata](https://jsonata.org/) expression that transforms an application's
@@ -2531,21 +2527,9 @@ export namespace ApplicationUpdateParams {
         /**
          * A globally unique name for an identity or service provider.
          */
-        name_format?:
-          | 'urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified'
-          | 'urn:oasis:names:tc:SAML:2.0:attrname-format:basic'
-          | 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri';
+        name_format?: ApplicationsAPI.UnnamedSchemaRefC335ce55d4fdf132c942dfce6e45dcb9;
 
-        source?: CustomAttributes.Source;
-      }
-
-      export namespace CustomAttributes {
-        export interface Source {
-          /**
-           * The name of the IdP attribute.
-           */
-          name?: string;
-        }
+        source?: ApplicationsAPI.UnnamedSchemaRef6ed9646890b9be79e16f1cfff86ec832;
       }
     }
 
@@ -3188,6 +3172,9 @@ export interface ApplicationRevokeTokensParams {
 }
 
 export namespace Applications {
+  export import UnnamedSchemaRef6ed9646890b9be79e16f1cfff86ec832 = ApplicationsAPI.UnnamedSchemaRef6ed9646890b9be79e16f1cfff86ec832;
+  export import UnnamedSchemaRefC335ce55d4fdf132c942dfce6e45dcb9 = ApplicationsAPI.UnnamedSchemaRefC335ce55d4fdf132c942dfce6e45dcb9;
+  export import UnnamedSchemaRefC6200e37c458aaa3c42e6e5b999bc419 = ApplicationsAPI.UnnamedSchemaRefC6200e37c458aaa3c42e6e5b999bc419;
   export import ZeroTrustApps = ApplicationsAPI.ZeroTrustApps;
   export import ApplicationDeleteResponse = ApplicationsAPI.ApplicationDeleteResponse;
   export import ApplicationRevokeTokensResponse = ApplicationsAPI.ApplicationRevokeTokensResponse;
@@ -3200,15 +3187,14 @@ export namespace Applications {
   export import ApplicationRevokeTokensParams = ApplicationsAPI.ApplicationRevokeTokensParams;
   export import CAs = CAsAPI.CAs;
   export import ZeroTrustCA = CAsAPI.ZeroTrustCA;
-  export import CACreateResponse = CAsAPI.CACreateResponse;
   export import CADeleteResponse = CAsAPI.CADeleteResponse;
-  export import CAGetResponse = CAsAPI.CAGetResponse;
   export import ZeroTrustCAsSinglePage = CAsAPI.ZeroTrustCAsSinglePage;
   export import CACreateParams = CAsAPI.CACreateParams;
   export import CAListParams = CAsAPI.CAListParams;
   export import CADeleteParams = CAsAPI.CADeleteParams;
   export import CAGetParams = CAsAPI.CAGetParams;
   export import UserPolicyChecks = UserPolicyChecksAPI.UserPolicyChecks;
+  export import UnnamedSchemaRef6a02fe18089d53b52b2cd3949b717919 = UserPolicyChecksAPI.UnnamedSchemaRef6a02fe18089d53b52b2cd3949b717919;
   export import UserPolicyCheckListResponse = UserPolicyChecksAPI.UserPolicyCheckListResponse;
   export import UserPolicyCheckListParams = UserPolicyChecksAPI.UserPolicyCheckListParams;
   export import Policies = PoliciesAPI.Policies;

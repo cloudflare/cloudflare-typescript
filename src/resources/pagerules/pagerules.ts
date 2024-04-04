@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as PagerulesAPI from 'cloudflare/resources/pagerules/pagerules';
+import * as Shared from 'cloudflare/resources/shared';
 import * as SettingsAPI from 'cloudflare/resources/pagerules/settings';
 
 export class Pagerules extends APIResource {
@@ -14,11 +15,11 @@ export class Pagerules extends APIResource {
   create(
     params: PageruleCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PageruleCreateResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/pagerules`, { body, ...options }) as Core.APIPromise<{
-        result: PageruleCreateResponse;
+        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -31,11 +32,11 @@ export class Pagerules extends APIResource {
     pageruleId: string,
     params: PageruleUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PageruleUpdateResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     const { zone_id, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/pagerules/${pageruleId}`, { body, ...options }) as Core.APIPromise<{
-        result: PageruleUpdateResponse;
+        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -76,13 +77,13 @@ export class Pagerules extends APIResource {
     pageruleId: string,
     params: PageruleEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PageruleEditResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/pagerules/${pageruleId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: PageruleEditResponse }>
+      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -93,11 +94,11 @@ export class Pagerules extends APIResource {
     pageruleId: string,
     params: PageruleGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PageruleGetResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/pagerules/${pageruleId}`, options) as Core.APIPromise<{
-        result: PageruleGetResponse;
+        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -209,10 +210,6 @@ export namespace ZonesPagerule {
   }
 }
 
-export type PageruleCreateResponse = unknown | string;
-
-export type PageruleUpdateResponse = unknown | string;
-
 export type PageruleListResponse = Array<ZonesPagerule>;
 
 export interface PageruleDeleteResponse {
@@ -221,10 +218,6 @@ export interface PageruleDeleteResponse {
    */
   id: string;
 }
-
-export type PageruleEditResponse = unknown | string;
-
-export type PageruleGetResponse = unknown | string;
 
 export interface PageruleCreateParams {
   /**
@@ -548,12 +541,8 @@ export interface PageruleGetParams {
 
 export namespace Pagerules {
   export import ZonesPagerule = PagerulesAPI.ZonesPagerule;
-  export import PageruleCreateResponse = PagerulesAPI.PageruleCreateResponse;
-  export import PageruleUpdateResponse = PagerulesAPI.PageruleUpdateResponse;
   export import PageruleListResponse = PagerulesAPI.PageruleListResponse;
   export import PageruleDeleteResponse = PagerulesAPI.PageruleDeleteResponse;
-  export import PageruleEditResponse = PagerulesAPI.PageruleEditResponse;
-  export import PageruleGetResponse = PagerulesAPI.PageruleGetResponse;
   export import PageruleCreateParams = PagerulesAPI.PageruleCreateParams;
   export import PageruleUpdateParams = PagerulesAPI.PageruleUpdateParams;
   export import PageruleListParams = PagerulesAPI.PageruleListParams;

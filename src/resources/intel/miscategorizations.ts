@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as MiscategorizationsAPI from 'cloudflare/resources/intel/miscategorizations';
+import * as Shared from 'cloudflare/resources/shared';
 
 export class Miscategorizations extends APIResource {
   /**
@@ -11,18 +12,16 @@ export class Miscategorizations extends APIResource {
   create(
     params: MiscategorizationCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MiscategorizationCreateResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/intel/miscategorization`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: MiscategorizationCreateResponse }>
+      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
-
-export type MiscategorizationCreateResponse = unknown | string;
 
 export interface MiscategorizationCreateParams {
   /**
@@ -69,6 +68,5 @@ export interface MiscategorizationCreateParams {
 }
 
 export namespace Miscategorizations {
-  export import MiscategorizationCreateResponse = MiscategorizationsAPI.MiscategorizationCreateResponse;
   export import MiscategorizationCreateParams = MiscategorizationsAPI.MiscategorizationCreateParams;
 }

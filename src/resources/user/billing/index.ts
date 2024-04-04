@@ -2,4 +2,4 @@
 
 export { Billing } from './billing';
 export { BillingHistory, HistoryGetResponse, HistoryGetParams, History } from './history';
-export { ProfileGetResponse, Profile } from './profile';
+export { Profile } from './profile';

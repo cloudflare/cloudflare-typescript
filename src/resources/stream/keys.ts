@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as KeysAPI from 'cloudflare/resources/stream/keys';
+import * as Shared from 'cloudflare/resources/shared';
 
 export class Keys extends APIResource {
   /**
@@ -27,13 +28,13 @@ export class Keys extends APIResource {
     identifier: string,
     params: KeyDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<KeyDeleteResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef602dd5f63eab958d53da61434dec08f0> {
     const { account_id, body } = params;
     return (
       this._client.delete(`/accounts/${account_id}/stream/keys/${identifier}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: KeyDeleteResponse }>
+      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef602dd5f63eab958d53da61434dec08f0 }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -71,8 +72,6 @@ export interface StreamKeys {
    */
   pem?: string;
 }
-
-export type KeyDeleteResponse = unknown | string;
 
 export type KeyGetResponse = Array<KeyGetResponse.KeyGetResponseItem>;
 
@@ -123,7 +122,6 @@ export interface KeyGetParams {
 
 export namespace Keys {
   export import StreamKeys = KeysAPI.StreamKeys;
-  export import KeyDeleteResponse = KeysAPI.KeyDeleteResponse;
   export import KeyGetResponse = KeysAPI.KeyGetResponse;
   export import KeyCreateParams = KeysAPI.KeyCreateParams;
   export import KeyDeleteParams = KeysAPI.KeyDeleteParams;

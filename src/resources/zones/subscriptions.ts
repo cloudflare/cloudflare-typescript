@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as SubscriptionsAPI from 'cloudflare/resources/zones/subscriptions';
+import * as Shared from 'cloudflare/resources/shared';
 import { SinglePage } from 'cloudflare/pagination';
 
 export class Subscriptions extends APIResource {
@@ -13,10 +14,10 @@ export class Subscriptions extends APIResource {
     identifier: string,
     body: SubscriptionCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SubscriptionCreateResponse> {
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     return (
       this._client.post(`/zones/${identifier}/subscription`, { body, ...options }) as Core.APIPromise<{
-        result: SubscriptionCreateResponse;
+        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -38,18 +39,19 @@ export class Subscriptions extends APIResource {
   /**
    * Lists zone subscription details.
    */
-  get(identifier: string, options?: Core.RequestOptions): Core.APIPromise<SubscriptionGetResponse> {
+  get(
+    identifier: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
     return (
       this._client.get(`/zones/${identifier}/subscription`, options) as Core.APIPromise<{
-        result: SubscriptionGetResponse;
+        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
 export class SubscriptionListResponsesSinglePage extends SinglePage<SubscriptionListResponse> {}
-
-export type SubscriptionCreateResponse = unknown | string | null;
 
 export interface SubscriptionListResponse {
   /**
@@ -195,8 +197,6 @@ export namespace SubscriptionListResponse {
   }
 }
 
-export type SubscriptionGetResponse = unknown | string | null;
-
 export interface SubscriptionCreateParams {
   app?: SubscriptionCreateParams.App;
 
@@ -301,9 +301,7 @@ export namespace SubscriptionCreateParams {
 }
 
 export namespace Subscriptions {
-  export import SubscriptionCreateResponse = SubscriptionsAPI.SubscriptionCreateResponse;
   export import SubscriptionListResponse = SubscriptionsAPI.SubscriptionListResponse;
-  export import SubscriptionGetResponse = SubscriptionsAPI.SubscriptionGetResponse;
   export import SubscriptionListResponsesSinglePage = SubscriptionsAPI.SubscriptionListResponsesSinglePage;
   export import SubscriptionCreateParams = SubscriptionsAPI.SubscriptionCreateParams;
 }
