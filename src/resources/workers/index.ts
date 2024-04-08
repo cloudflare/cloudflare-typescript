@@ -8,7 +8,20 @@ export {
   AccountSettingGetParams,
   AccountSettings,
 } from './account-settings';
-export { Deployments } from './deployments/index';
+export {
+  BindingItem,
+  CompatibilityFlagsItem,
+  Script,
+  Setting,
+  SettingsItem,
+  TagsItem,
+  ScriptUpdateParams,
+  ScriptListParams,
+  ScriptDeleteParams,
+  ScriptGetParams,
+  ScriptsSinglePage,
+  Scripts,
+} from './scripts/index';
 export {
   Domain,
   DomainUpdateParams,
@@ -18,17 +31,6 @@ export {
   DomainsSinglePage,
   Domains,
 } from './domains';
-export {
-  Script,
-  Setting,
-  SettingsItem,
-  ScriptUpdateParams,
-  ScriptListParams,
-  ScriptDeleteParams,
-  ScriptGetParams,
-  ScriptsSinglePage,
-  Scripts,
-} from './scripts/index';
 export { Services } from './services/index';
 export {
   SubdomainUpdateResponse,
