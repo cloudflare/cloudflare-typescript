@@ -2297,9 +2297,12 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/workers/scripts/scripts.ts">BindingItem</a></code>
+- <code><a href="./src/resources/workers/scripts/scripts.ts">CompatibilityFlagsItem</a></code>
 - <code><a href="./src/resources/workers/scripts/scripts.ts">Script</a></code>
 - <code><a href="./src/resources/workers/scripts/scripts.ts">Setting</a></code>
 - <code><a href="./src/resources/workers/scripts/scripts.ts">SettingsItem</a></code>
+- <code><a href="./src/resources/workers/scripts/scripts.ts">TagsItem</a></code>
 
 Methods:
 
@@ -2364,12 +2367,7 @@ Methods:
 Methods:
 
 - <code title="put /accounts/{account_id}/workers/scripts/{script_name}/content">client.workers.scripts.content.<a href="./src/resources/workers/scripts/content.ts">update</a>(scriptName, { ...params }) -> Script</code>
-
-### ContentV2
-
-Methods:
-
-- <code title="get /accounts/{account_id}/workers/scripts/{script_name}/content/v2">client.workers.scripts.contentV2.<a href="./src/resources/workers/scripts/content-v2.ts">get</a>(scriptName, { ...params }) -> Response</code>
+- <code title="get /accounts/{account_id}/workers/scripts/{script_name}/content/v2">client.workers.scripts.content.<a href="./src/resources/workers/scripts/content.ts">get</a>(scriptName, { ...params }) -> Response</code>
 
 ### Settings
 
@@ -2395,29 +2393,15 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/workers/scripts/versions/versions.ts">VersionCreateResponse</a></code>
-- <code><a href="./src/resources/workers/scripts/versions/versions.ts">VersionListResponse</a></code>
-- <code><a href="./src/resources/workers/scripts/versions/versions.ts">VersionGetResponse</a></code>
+- <code><a href="./src/resources/workers/scripts/versions.ts">VersionCreateResponse</a></code>
+- <code><a href="./src/resources/workers/scripts/versions.ts">VersionListResponse</a></code>
+- <code><a href="./src/resources/workers/scripts/versions.ts">VersionGetResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/workers/scripts/{script_name}/versions">client.workers.scripts.versions.<a href="./src/resources/workers/scripts/versions/versions.ts">create</a>(scriptName, { ...params }) -> VersionCreateResponse</code>
-- <code title="get /accounts/{account_id}/workers/scripts/{script_name}/versions">client.workers.scripts.versions.<a href="./src/resources/workers/scripts/versions/versions.ts">list</a>(scriptName, { ...params }) -> VersionListResponse</code>
-- <code title="get /accounts/{account_id}/workers/scripts/{script_name}/versions/{version_id}">client.workers.scripts.versions.<a href="./src/resources/workers/scripts/versions/versions.ts">get</a>(scriptName, versionId, { ...params }) -> VersionGetResponse</code>
-
-#### Settings
-
-Types:
-
-- <code><a href="./src/resources/workers/scripts/versions/settings.ts">BindingItem</a></code>
-- <code><a href="./src/resources/workers/scripts/versions/settings.ts">CompatibilityFlagsItem</a></code>
-- <code><a href="./src/resources/workers/scripts/versions/settings.ts">SettingsItem</a></code>
-- <code><a href="./src/resources/workers/scripts/versions/settings.ts">TagsItem</a></code>
-
-Methods:
-
-- <code title="patch /accounts/{account_id}/workers/scripts/{script_name}/settings">client.workers.scripts.versions.settings.<a href="./src/resources/workers/scripts/versions/settings.ts">edit</a>(scriptName, { ...params }) -> SettingsItem</code>
-- <code title="get /accounts/{account_id}/workers/scripts/{script_name}/settings">client.workers.scripts.versions.settings.<a href="./src/resources/workers/scripts/versions/settings.ts">get</a>(scriptName, { ...params }) -> SettingsItem</code>
+- <code title="post /accounts/{account_id}/workers/scripts/{script_name}/versions">client.workers.scripts.versions.<a href="./src/resources/workers/scripts/versions.ts">create</a>(scriptName, { ...params }) -> VersionCreateResponse</code>
+- <code title="get /accounts/{account_id}/workers/scripts/{script_name}/versions">client.workers.scripts.versions.<a href="./src/resources/workers/scripts/versions.ts">list</a>(scriptName, { ...params }) -> VersionListResponse</code>
+- <code title="get /accounts/{account_id}/workers/scripts/{script_name}/versions/{version_id}">client.workers.scripts.versions.<a href="./src/resources/workers/scripts/versions.ts">get</a>(scriptName, versionId, { ...params }) -> VersionGetResponse</code>
 
 ## Filters
 
@@ -2459,28 +2443,6 @@ Methods:
 
 - <code title="put /accounts/{account_id}/workers/account-settings">client.workers.accountSettings.<a href="./src/resources/workers/account-settings.ts">update</a>({ ...params }) -> AccountSettingUpdateResponse</code>
 - <code title="get /accounts/{account_id}/workers/account-settings">client.workers.accountSettings.<a href="./src/resources/workers/account-settings.ts">get</a>({ ...params }) -> AccountSettingGetResponse</code>
-
-## Deployments
-
-### ByScripts
-
-Types:
-
-- <code><a href="./src/resources/workers/deployments/by-scripts/by-scripts.ts">ByScriptGetResponse</a></code>
-
-Methods:
-
-- <code title="get /accounts/{account_id}/workers/deployments/by-script/{script_id}">client.workers.deployments.byScripts.<a href="./src/resources/workers/deployments/by-scripts/by-scripts.ts">get</a>(scriptId, { ...params }) -> ByScriptGetResponse</code>
-
-#### Details
-
-Types:
-
-- <code><a href="./src/resources/workers/deployments/by-scripts/details.ts">DetailGetResponse</a></code>
-
-Methods:
-
-- <code title="get /accounts/{account_id}/workers/deployments/by-script/{script_id}/detail/{deployment_id}">client.workers.deployments.byScripts.details.<a href="./src/resources/workers/deployments/by-scripts/details.ts">get</a>(scriptId, deploymentId, { ...params }) -> DetailGetResponse</code>
 
 ## Domains
 

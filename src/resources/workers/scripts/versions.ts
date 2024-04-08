@@ -2,13 +2,10 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as VersionsAPI from 'cloudflare/resources/workers/scripts/versions/versions';
-import * as SettingsAPI from 'cloudflare/resources/workers/scripts/versions/settings';
+import * as VersionsAPI from 'cloudflare/resources/workers/scripts/versions';
 import { type Uploadable, multipartFormRequestOptions } from 'cloudflare/core';
 
 export class Versions extends APIResource {
-  settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
-
   /**
    * Upload a Worker Version without deploying to Cloudflare's network.
    */
@@ -194,11 +191,4 @@ export namespace Versions {
   export import VersionCreateParams = VersionsAPI.VersionCreateParams;
   export import VersionListParams = VersionsAPI.VersionListParams;
   export import VersionGetParams = VersionsAPI.VersionGetParams;
-  export import Settings = SettingsAPI.Settings;
-  export import BindingItem = SettingsAPI.BindingItem;
-  export import CompatibilityFlagsItem = SettingsAPI.CompatibilityFlagsItem;
-  export import SettingsItem = SettingsAPI.SettingsItem;
-  export import TagsItem = SettingsAPI.TagsItem;
-  export import SettingEditParams = SettingsAPI.SettingEditParams;
-  export import SettingGetParams = SettingsAPI.SettingGetParams;
 }

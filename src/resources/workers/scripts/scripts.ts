@@ -8,13 +8,12 @@ import * as Shared from 'cloudflare/resources/shared';
 import * as WorkersAPI from 'cloudflare/resources/workers/workers';
 import * as BindingsAPI from 'cloudflare/resources/workers/scripts/bindings';
 import * as ContentAPI from 'cloudflare/resources/workers/scripts/content';
-import * as ContentV2API from 'cloudflare/resources/workers/scripts/content-v2';
 import * as DeploymentsAPI from 'cloudflare/resources/workers/scripts/deployments';
 import * as SchedulesAPI from 'cloudflare/resources/workers/scripts/schedules';
 import * as SettingsAPI from 'cloudflare/resources/workers/scripts/settings';
 import * as TailAPI from 'cloudflare/resources/workers/scripts/tail';
 import * as UsageModelAPI from 'cloudflare/resources/workers/scripts/usage-model';
-import * as VersionsAPI from 'cloudflare/resources/workers/scripts/versions/versions';
+import * as VersionsAPI from 'cloudflare/resources/workers/scripts/versions';
 import { type Uploadable, maybeMultipartFormRequestOptions } from 'cloudflare/core';
 import { SinglePage } from 'cloudflare/pagination';
 
@@ -24,7 +23,6 @@ export class Scripts extends APIResource {
   tail: TailAPI.Tail = new TailAPI.Tail(this._client);
   usageModel: UsageModelAPI.UsageModel = new UsageModelAPI.UsageModel(this._client);
   content: ContentAPI.Content = new ContentAPI.Content(this._client);
-  contentV2: ContentV2API.ContentV2 = new ContentV2API.ContentV2(this._client);
   settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
   deployments: DeploymentsAPI.Deployments = new DeploymentsAPI.Deployments(this._client);
   versions: VersionsAPI.Versions = new VersionsAPI.Versions(this._client);
@@ -85,6 +83,43 @@ export class Scripts extends APIResource {
 }
 
 export class ScriptsSinglePage extends SinglePage<Script> {}
+
+/**
+ * A binding to allow the Worker to communicate with resources
+ */
+export type BindingItem =
+  | WorkersAPI.KVNamespaceBinding
+  | WorkersAPI.ServiceBinding
+  | WorkersAPI.DurableObjectBinding
+  | WorkersAPI.R2Binding
+  | BindingItem.WorkersQueueBinding
+  | WorkersAPI.D1Binding
+  | WorkersAPI.DispatchNamespaceBinding
+  | WorkersAPI.MTLSCERTBinding;
+
+export namespace BindingItem {
+  export interface WorkersQueueBinding {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * Name of the Queue to bind to
+     */
+    queue_name: string;
+
+    /**
+     * The class of resource that the binding provides.
+     */
+    type: 'queue';
+  }
+}
+
+/**
+ * A flag to opt into a specific change
+ */
+export type CompatibilityFlagsItem = string;
 
 export interface Script {
   /**
@@ -157,6 +192,11 @@ export interface SettingsItem {
    */
   tail_consumers?: Array<TailAPI.ConsumerScriptItem>;
 }
+
+/**
+ * Tag to help you manage your Worker
+ */
+export type TagsItem = string;
 
 export type ScriptUpdateParams = ScriptUpdateParams.Variant0 | ScriptUpdateParams.Variant1;
 
@@ -319,9 +359,12 @@ export interface ScriptGetParams {
 }
 
 export namespace Scripts {
+  export import BindingItem = ScriptsAPI.BindingItem;
+  export import CompatibilityFlagsItem = ScriptsAPI.CompatibilityFlagsItem;
   export import Script = ScriptsAPI.Script;
   export import Setting = ScriptsAPI.Setting;
   export import SettingsItem = ScriptsAPI.SettingsItem;
+  export import TagsItem = ScriptsAPI.TagsItem;
   export import ScriptsSinglePage = ScriptsAPI.ScriptsSinglePage;
   export import ScriptUpdateParams = ScriptsAPI.ScriptUpdateParams;
   export import ScriptListParams = ScriptsAPI.ScriptListParams;
@@ -352,8 +395,7 @@ export namespace Scripts {
   export import UsageModelGetParams = UsageModelAPI.UsageModelGetParams;
   export import Content = ContentAPI.Content;
   export import ContentUpdateParams = ContentAPI.ContentUpdateParams;
-  export import ContentV2 = ContentV2API.ContentV2;
-  export import ContentV2GetParams = ContentV2API.ContentV2GetParams;
+  export import ContentGetParams = ContentAPI.ContentGetParams;
   export import Settings = SettingsAPI.Settings;
   export import SettingEditParams = SettingsAPI.SettingEditParams;
   export import SettingGetParams = SettingsAPI.SettingGetParams;
