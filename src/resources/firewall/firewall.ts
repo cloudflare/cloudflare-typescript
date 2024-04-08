@@ -17,24 +17,24 @@ export class Firewall extends APIResource {
 
 export namespace Firewall {
   export import Lockdowns = LockdownsAPI.Lockdowns;
-  export import LockdownCreateResponse = LockdownsAPI.LockdownCreateResponse;
-  export import LockdownUpdateResponse = LockdownsAPI.LockdownUpdateResponse;
-  export import LockdownListResponse = LockdownsAPI.LockdownListResponse;
+  export import CIDRConfiguration = LockdownsAPI.CIDRConfiguration;
+  export import Configuration = LockdownsAPI.Configuration;
+  export import IPConfiguration = LockdownsAPI.IPConfiguration;
+  export import Lockdown = LockdownsAPI.Lockdown;
+  export import URLsItem = LockdownsAPI.URLsItem;
   export import LockdownDeleteResponse = LockdownsAPI.LockdownDeleteResponse;
-  export import LockdownGetResponse = LockdownsAPI.LockdownGetResponse;
-  export import LockdownListResponsesV4PagePaginationArray = LockdownsAPI.LockdownListResponsesV4PagePaginationArray;
+  export import LockdownsV4PagePaginationArray = LockdownsAPI.LockdownsV4PagePaginationArray;
   export import LockdownCreateParams = LockdownsAPI.LockdownCreateParams;
   export import LockdownUpdateParams = LockdownsAPI.LockdownUpdateParams;
   export import LockdownListParams = LockdownsAPI.LockdownListParams;
   export import LockdownDeleteParams = LockdownsAPI.LockdownDeleteParams;
   export import Rules = RulesAPI.Rules;
+  export import ProductsItem = RulesAPI.ProductsItem;
+  export import Rule = RulesAPI.Rule;
+  export import DeletedFilter = RulesAPI.DeletedFilter;
   export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
-  export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
-  export import RuleListResponse = RulesAPI.RuleListResponse;
-  export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
   export import RuleEditResponse = RulesAPI.RuleEditResponse;
-  export import RuleGetResponse = RulesAPI.RuleGetResponse;
-  export import RuleListResponsesV4PagePaginationArray = RulesAPI.RuleListResponsesV4PagePaginationArray;
+  export import RulesV4PagePaginationArray = RulesAPI.RulesV4PagePaginationArray;
   export import RuleCreateParams = RulesAPI.RuleCreateParams;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
   export import RuleListParams = RulesAPI.RuleListParams;
