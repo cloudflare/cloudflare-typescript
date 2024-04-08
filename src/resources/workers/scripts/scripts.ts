@@ -6,22 +6,18 @@ import { type Response } from 'cloudflare/_shims/index';
 import * as ScriptsAPI from 'cloudflare/resources/workers/scripts/scripts';
 import * as Shared from 'cloudflare/resources/shared';
 import * as WorkersAPI from 'cloudflare/resources/workers/workers';
-import * as BindingsAPI from 'cloudflare/resources/workers/scripts/bindings';
 import * as ContentAPI from 'cloudflare/resources/workers/scripts/content';
 import * as DeploymentsAPI from 'cloudflare/resources/workers/scripts/deployments';
 import * as SchedulesAPI from 'cloudflare/resources/workers/scripts/schedules';
 import * as SettingsAPI from 'cloudflare/resources/workers/scripts/settings';
 import * as TailAPI from 'cloudflare/resources/workers/scripts/tail';
-import * as UsageModelAPI from 'cloudflare/resources/workers/scripts/usage-model';
 import * as VersionsAPI from 'cloudflare/resources/workers/scripts/versions';
 import { type Uploadable, maybeMultipartFormRequestOptions } from 'cloudflare/core';
 import { SinglePage } from 'cloudflare/pagination';
 
 export class Scripts extends APIResource {
-  bindings: BindingsAPI.Bindings = new BindingsAPI.Bindings(this._client);
   schedules: SchedulesAPI.Schedules = new SchedulesAPI.Schedules(this._client);
   tail: TailAPI.Tail = new TailAPI.Tail(this._client);
-  usageModel: UsageModelAPI.UsageModel = new UsageModelAPI.UsageModel(this._client);
   content: ContentAPI.Content = new ContentAPI.Content(this._client);
   settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
   deployments: DeploymentsAPI.Deployments = new DeploymentsAPI.Deployments(this._client);
@@ -370,10 +366,6 @@ export namespace Scripts {
   export import ScriptListParams = ScriptsAPI.ScriptListParams;
   export import ScriptDeleteParams = ScriptsAPI.ScriptDeleteParams;
   export import ScriptGetParams = ScriptsAPI.ScriptGetParams;
-  export import Bindings = BindingsAPI.Bindings;
-  export import Binding = BindingsAPI.Binding;
-  export import BindingGetResponse = BindingsAPI.BindingGetResponse;
-  export import BindingGetParams = BindingsAPI.BindingGetParams;
   export import Schedules = SchedulesAPI.Schedules;
   export import UnnamedSchemaRefC8302c265937f9d6f96fd69644e56b26 = SchedulesAPI.UnnamedSchemaRefC8302c265937f9d6f96fd69644e56b26;
   export import ScheduleUpdateResponse = SchedulesAPI.ScheduleUpdateResponse;
@@ -388,11 +380,6 @@ export namespace Scripts {
   export import TailCreateParams = TailAPI.TailCreateParams;
   export import TailDeleteParams = TailAPI.TailDeleteParams;
   export import TailGetParams = TailAPI.TailGetParams;
-  export import UsageModel = UsageModelAPI.UsageModel;
-  export import UsageModelUpdateResponse = UsageModelAPI.UsageModelUpdateResponse;
-  export import UsageModelGetResponse = UsageModelAPI.UsageModelGetResponse;
-  export import UsageModelUpdateParams = UsageModelAPI.UsageModelUpdateParams;
-  export import UsageModelGetParams = UsageModelAPI.UsageModelGetParams;
   export import Content = ContentAPI.Content;
   export import ContentUpdateParams = ContentAPI.ContentUpdateParams;
   export import ContentGetParams = ContentAPI.ContentGetParams;

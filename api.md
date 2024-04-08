@@ -931,16 +931,6 @@ Methods:
 - <code title="delete /zones/{zone_id}/hold">client.zones.holds.<a href="./src/resources/zones/holds.ts">delete</a>({ ...params }) -> ZoneHold</code>
 - <code title="get /zones/{zone_id}/hold">client.zones.holds.<a href="./src/resources/zones/holds.ts">get</a>({ ...params }) -> ZoneHold</code>
 
-## Workers
-
-### Script
-
-Methods:
-
-- <code title="put /zones/{zone_id}/workers/script">client.zones.workers.script.<a href="./src/resources/zones/workers/script.ts">update</a>({ ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
-- <code title="delete /zones/{zone_id}/workers/script">client.zones.workers.script.<a href="./src/resources/zones/workers/script.ts">delete</a>({ ...params }) -> void</code>
-- <code title="get /zones/{zone_id}/workers/script">client.zones.workers.script.<a href="./src/resources/zones/workers/script.ts">get</a>({ ...params }) -> Response</code>
-
 ## Subscriptions
 
 Methods:
@@ -2311,17 +2301,6 @@ Methods:
 - <code title="delete /accounts/{account_id}/workers/scripts/{script_name}">client.workers.scripts.<a href="./src/resources/workers/scripts/scripts.ts">delete</a>(scriptName, { ...params }) -> void</code>
 - <code title="get /accounts/{account_id}/workers/scripts/{script_name}">client.workers.scripts.<a href="./src/resources/workers/scripts/scripts.ts">get</a>(scriptName, { ...params }) -> Response</code>
 
-### Bindings
-
-Types:
-
-- <code><a href="./src/resources/workers/scripts/bindings.ts">Binding</a></code>
-- <code><a href="./src/resources/workers/scripts/bindings.ts">BindingGetResponse</a></code>
-
-Methods:
-
-- <code title="get /zones/{zone_id}/workers/script/bindings">client.workers.scripts.bindings.<a href="./src/resources/workers/scripts/bindings.ts">get</a>({ ...params }) -> BindingGetResponse</code>
-
 ### Schedules
 
 Types:
@@ -2349,18 +2328,6 @@ Methods:
 - <code title="post /accounts/{account_id}/workers/scripts/{script_name}/tails">client.workers.scripts.tail.<a href="./src/resources/workers/scripts/tail.ts">create</a>(scriptName, { ...params }) -> TailCreateResponse</code>
 - <code title="delete /accounts/{account_id}/workers/scripts/{script_name}/tails/{id}">client.workers.scripts.tail.<a href="./src/resources/workers/scripts/tail.ts">delete</a>(scriptName, id, { ...params }) -> UnnamedSchemaRefEc4d85c3d1bcc6b3b7e99c199ae99846</code>
 - <code title="get /accounts/{account_id}/workers/scripts/{script_name}/tails">client.workers.scripts.tail.<a href="./src/resources/workers/scripts/tail.ts">get</a>(scriptName, { ...params }) -> TailGetResponse</code>
-
-### UsageModel
-
-Types:
-
-- <code><a href="./src/resources/workers/scripts/usage-model.ts">UsageModelUpdateResponse</a></code>
-- <code><a href="./src/resources/workers/scripts/usage-model.ts">UsageModelGetResponse</a></code>
-
-Methods:
-
-- <code title="put /accounts/{account_id}/workers/scripts/{script_name}/usage-model">client.workers.scripts.usageModel.<a href="./src/resources/workers/scripts/usage-model.ts">update</a>(scriptName, { ...params }) -> UsageModelUpdateResponse</code>
-- <code title="get /accounts/{account_id}/workers/scripts/{script_name}/usage-model">client.workers.scripts.usageModel.<a href="./src/resources/workers/scripts/usage-model.ts">get</a>(scriptName, { ...params }) -> UsageModelGetResponse</code>
 
 ### Content
 
@@ -2403,35 +2370,6 @@ Methods:
 - <code title="get /accounts/{account_id}/workers/scripts/{script_name}/versions">client.workers.scripts.versions.<a href="./src/resources/workers/scripts/versions.ts">list</a>(scriptName, { ...params }) -> VersionListResponse</code>
 - <code title="get /accounts/{account_id}/workers/scripts/{script_name}/versions/{version_id}">client.workers.scripts.versions.<a href="./src/resources/workers/scripts/versions.ts">get</a>(scriptName, versionId, { ...params }) -> VersionGetResponse</code>
 
-## Filters
-
-Types:
-
-- <code><a href="./src/resources/workers/filters.ts">WorkersFilter</a></code>
-- <code><a href="./src/resources/workers/filters.ts">FilterCreateResponse</a></code>
-- <code><a href="./src/resources/workers/filters.ts">FilterDeleteResponse</a></code>
-
-Methods:
-
-- <code title="post /zones/{zone_id}/workers/filters">client.workers.filters.<a href="./src/resources/workers/filters.ts">create</a>({ ...params }) -> FilterCreateResponse | null</code>
-- <code title="put /zones/{zone_id}/workers/filters/{filter_id}">client.workers.filters.<a href="./src/resources/workers/filters.ts">update</a>(filterId, { ...params }) -> WorkersFilter</code>
-- <code title="get /zones/{zone_id}/workers/filters">client.workers.filters.<a href="./src/resources/workers/filters.ts">list</a>({ ...params }) -> WorkersFiltersSinglePage</code>
-- <code title="delete /zones/{zone_id}/workers/filters/{filter_id}">client.workers.filters.<a href="./src/resources/workers/filters.ts">delete</a>(filterId, { ...params }) -> FilterDeleteResponse | null</code>
-
-## Routes
-
-Types:
-
-- <code><a href="./src/resources/workers/routes.ts">WorkersRoute</a></code>
-
-Methods:
-
-- <code title="post /zones/{zone_id}/workers/routes">client.workers.routes.<a href="./src/resources/workers/routes.ts">create</a>({ ...params }) -> UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f</code>
-- <code title="put /zones/{zone_id}/workers/routes/{route_id}">client.workers.routes.<a href="./src/resources/workers/routes.ts">update</a>(routeId, { ...params }) -> WorkersRoute</code>
-- <code title="get /zones/{zone_id}/workers/routes">client.workers.routes.<a href="./src/resources/workers/routes.ts">list</a>({ ...params }) -> WorkersRoutesSinglePage</code>
-- <code title="delete /zones/{zone_id}/workers/routes/{route_id}">client.workers.routes.<a href="./src/resources/workers/routes.ts">delete</a>(routeId, { ...params }) -> UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f</code>
-- <code title="get /zones/{zone_id}/workers/routes/{route_id}">client.workers.routes.<a href="./src/resources/workers/routes.ts">get</a>(routeId, { ...params }) -> WorkersRoute</code>
-
 ## AccountSettings
 
 Types:
@@ -2468,24 +2406,6 @@ Methods:
 
 - <code title="put /accounts/{account_id}/workers/subdomain">client.workers.subdomains.<a href="./src/resources/workers/subdomains.ts">update</a>({ ...params }) -> SubdomainUpdateResponse</code>
 - <code title="get /accounts/{account_id}/workers/subdomain">client.workers.subdomains.<a href="./src/resources/workers/subdomains.ts">get</a>({ ...params }) -> SubdomainGetResponse</code>
-
-## Services
-
-### Environments
-
-#### Content
-
-Methods:
-
-- <code title="put /accounts/{account_id}/workers/services/{service_name}/environments/{environment_name}/content">client.workers.services.environments.content.<a href="./src/resources/workers/services/environments/content.ts">update</a>(serviceName, environmentName, { ...params }) -> Script</code>
-- <code title="get /accounts/{account_id}/workers/services/{service_name}/environments/{environment_name}/content">client.workers.services.environments.content.<a href="./src/resources/workers/services/environments/content.ts">get</a>(serviceName, environmentName, { ...params }) -> Response</code>
-
-#### Settings
-
-Methods:
-
-- <code title="patch /accounts/{account_id}/workers/services/{service_name}/environments/{environment_name}/settings">client.workers.services.environments.settings.<a href="./src/resources/workers/services/environments/settings.ts">edit</a>(serviceName, environmentName, { ...params }) -> SettingsItem</code>
-- <code title="get /accounts/{account_id}/workers/services/{service_name}/environments/{environment_name}/settings">client.workers.services.environments.settings.<a href="./src/resources/workers/services/environments/settings.ts">get</a>(serviceName, environmentName, { ...params }) -> SettingsItem</code>
 
 # KV
 
