@@ -30,12 +30,12 @@ export class Rules extends APIResource {
     id: string,
     body: RuleUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleUpdateResponse> {
+  ): Core.APIPromise<Rule> {
     return (
       this._client.put(`/zones/${zoneIdentifier}/firewall/rules/${id}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: RuleUpdateResponse }>
+      }) as Core.APIPromise<{ result: Rule }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -47,24 +47,23 @@ export class Rules extends APIResource {
     zoneIdentifier: string,
     query?: RuleListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<RuleListResponsesV4PagePaginationArray, RuleListResponse>;
+  ): Core.PagePromise<RulesV4PagePaginationArray, Rule>;
   list(
     zoneIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<RuleListResponsesV4PagePaginationArray, RuleListResponse>;
+  ): Core.PagePromise<RulesV4PagePaginationArray, Rule>;
   list(
     zoneIdentifier: string,
     query: RuleListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<RuleListResponsesV4PagePaginationArray, RuleListResponse> {
+  ): Core.PagePromise<RulesV4PagePaginationArray, Rule> {
     if (isRequestOptions(query)) {
       return this.list(zoneIdentifier, {}, query);
     }
-    return this._client.getAPIList(
-      `/zones/${zoneIdentifier}/firewall/rules`,
-      RuleListResponsesV4PagePaginationArray,
-      { query, ...options },
-    );
+    return this._client.getAPIList(`/zones/${zoneIdentifier}/firewall/rules`, RulesV4PagePaginationArray, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -75,12 +74,12 @@ export class Rules extends APIResource {
     id: string,
     body: RuleDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleDeleteResponse> {
+  ): Core.APIPromise<Rule> {
     return (
       this._client.delete(`/zones/${zoneIdentifier}/firewall/rules/${id}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: RuleDeleteResponse }>
+      }) as Core.APIPromise<{ result: Rule }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -104,275 +103,29 @@ export class Rules extends APIResource {
   /**
    * Fetches the details of a firewall rule.
    */
-  get(
-    zoneIdentifier: string,
-    params: RuleGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleGetResponse> {
+  get(zoneIdentifier: string, params: RuleGetParams, options?: Core.RequestOptions): Core.APIPromise<Rule> {
     const { path_id, query_id, ...query } = params;
     return (
       this._client.get(`/zones/${zoneIdentifier}/firewall/rules/${path_id}`, {
         query: { id: query_id, ...query },
         ...options,
-      }) as Core.APIPromise<{ result: RuleGetResponse }>
+      }) as Core.APIPromise<{ result: Rule }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class RuleListResponsesV4PagePaginationArray extends V4PagePaginationArray<RuleListResponse> {}
+export class RulesV4PagePaginationArray extends V4PagePaginationArray<Rule> {}
 
-export type RuleCreateResponse = Array<RuleCreateResponse.RuleCreateResponseItem>;
+/**
+ * A list of products to bypass for a request when using the `bypass` action.
+ */
+export type ProductsItem = 'zoneLockdown' | 'uaBlock' | 'bic' | 'hot' | 'securityLevel' | 'rateLimit' | 'waf';
 
-export namespace RuleCreateResponse {
-  export interface RuleCreateResponseItem {
-    /**
-     * The unique identifier of the firewall rule.
-     */
-    id: string;
-
-    /**
-     * The action to apply to a matched request. The `log` action is only available on
-     * an Enterprise plan.
-     */
-    action: 'block' | 'challenge' | 'js_challenge' | 'managed_challenge' | 'allow' | 'log' | 'bypass';
-
-    filter: RuleCreateResponseItem.FirewallFilter | RuleCreateResponseItem.FirewallDeletedFilter;
-
-    /**
-     * When true, indicates that the firewall rule is currently paused.
-     */
-    paused: boolean;
-
-    /**
-     * An informative summary of the firewall rule.
-     */
-    description?: string;
-
-    /**
-     * The priority of the rule. Optional value used to define the processing order. A
-     * lower number indicates a higher priority. If not provided, rules with a defined
-     * priority will be processed before rules without a priority.
-     */
-    priority?: number;
-
-    products?: Array<'zoneLockdown' | 'uaBlock' | 'bic' | 'hot' | 'securityLevel' | 'rateLimit' | 'waf'>;
-
-    /**
-     * A short reference tag. Allows you to select related firewall rules.
-     */
-    ref?: string;
-  }
-
-  export namespace RuleCreateResponseItem {
-    export interface FirewallFilter {
-      /**
-       * The unique identifier of the filter.
-       */
-      id?: string;
-
-      /**
-       * An informative summary of the filter.
-       */
-      description?: string;
-
-      /**
-       * The filter expression. For more information, refer to
-       * [Expressions](https://developers.cloudflare.com/ruleset-engine/rules-language/expressions/).
-       */
-      expression?: string;
-
-      /**
-       * When true, indicates that the filter is currently paused.
-       */
-      paused?: boolean;
-
-      /**
-       * A short reference tag. Allows you to select related filters.
-       */
-      ref?: string;
-    }
-
-    export interface FirewallDeletedFilter {
-      /**
-       * The unique identifier of the filter.
-       */
-      id: string;
-
-      /**
-       * When true, indicates that the firewall rule was deleted.
-       */
-      deleted: boolean;
-    }
-  }
-}
-
-export interface RuleUpdateResponse {
+export interface Rule {
   /**
    * The unique identifier of the firewall rule.
    */
-  id: string;
-
-  /**
-   * The action to apply to a matched request. The `log` action is only available on
-   * an Enterprise plan.
-   */
-  action: 'block' | 'challenge' | 'js_challenge' | 'managed_challenge' | 'allow' | 'log' | 'bypass';
-
-  filter: RuleUpdateResponse.FirewallFilter | RuleUpdateResponse.FirewallDeletedFilter;
-
-  /**
-   * When true, indicates that the firewall rule is currently paused.
-   */
-  paused: boolean;
-
-  /**
-   * An informative summary of the firewall rule.
-   */
-  description?: string;
-
-  /**
-   * The priority of the rule. Optional value used to define the processing order. A
-   * lower number indicates a higher priority. If not provided, rules with a defined
-   * priority will be processed before rules without a priority.
-   */
-  priority?: number;
-
-  products?: Array<'zoneLockdown' | 'uaBlock' | 'bic' | 'hot' | 'securityLevel' | 'rateLimit' | 'waf'>;
-
-  /**
-   * A short reference tag. Allows you to select related firewall rules.
-   */
-  ref?: string;
-}
-
-export namespace RuleUpdateResponse {
-  export interface FirewallFilter {
-    /**
-     * The unique identifier of the filter.
-     */
-    id?: string;
-
-    /**
-     * An informative summary of the filter.
-     */
-    description?: string;
-
-    /**
-     * The filter expression. For more information, refer to
-     * [Expressions](https://developers.cloudflare.com/ruleset-engine/rules-language/expressions/).
-     */
-    expression?: string;
-
-    /**
-     * When true, indicates that the filter is currently paused.
-     */
-    paused?: boolean;
-
-    /**
-     * A short reference tag. Allows you to select related filters.
-     */
-    ref?: string;
-  }
-
-  export interface FirewallDeletedFilter {
-    /**
-     * The unique identifier of the filter.
-     */
-    id: string;
-
-    /**
-     * When true, indicates that the firewall rule was deleted.
-     */
-    deleted: boolean;
-  }
-}
-
-export interface RuleListResponse {
-  /**
-   * The unique identifier of the firewall rule.
-   */
-  id: string;
-
-  /**
-   * The action to apply to a matched request. The `log` action is only available on
-   * an Enterprise plan.
-   */
-  action: 'block' | 'challenge' | 'js_challenge' | 'managed_challenge' | 'allow' | 'log' | 'bypass';
-
-  filter: RuleListResponse.FirewallFilter | RuleListResponse.FirewallDeletedFilter;
-
-  /**
-   * When true, indicates that the firewall rule is currently paused.
-   */
-  paused: boolean;
-
-  /**
-   * An informative summary of the firewall rule.
-   */
-  description?: string;
-
-  /**
-   * The priority of the rule. Optional value used to define the processing order. A
-   * lower number indicates a higher priority. If not provided, rules with a defined
-   * priority will be processed before rules without a priority.
-   */
-  priority?: number;
-
-  products?: Array<'zoneLockdown' | 'uaBlock' | 'bic' | 'hot' | 'securityLevel' | 'rateLimit' | 'waf'>;
-
-  /**
-   * A short reference tag. Allows you to select related firewall rules.
-   */
-  ref?: string;
-}
-
-export namespace RuleListResponse {
-  export interface FirewallFilter {
-    /**
-     * The unique identifier of the filter.
-     */
-    id?: string;
-
-    /**
-     * An informative summary of the filter.
-     */
-    description?: string;
-
-    /**
-     * The filter expression. For more information, refer to
-     * [Expressions](https://developers.cloudflare.com/ruleset-engine/rules-language/expressions/).
-     */
-    expression?: string;
-
-    /**
-     * When true, indicates that the filter is currently paused.
-     */
-    paused?: boolean;
-
-    /**
-     * A short reference tag. Allows you to select related filters.
-     */
-    ref?: string;
-  }
-
-  export interface FirewallDeletedFilter {
-    /**
-     * The unique identifier of the filter.
-     */
-    id: string;
-
-    /**
-     * When true, indicates that the firewall rule was deleted.
-     */
-    deleted: boolean;
-  }
-}
-
-export interface RuleDeleteResponse {
-  /**
-   * The unique identifier of the firewall rule.
-   */
-  id: string;
+  id?: string;
 
   /**
    * The action to apply to a matched request. The `log` action is only available on
@@ -385,7 +138,7 @@ export interface RuleDeleteResponse {
    */
   description?: string;
 
-  filter?: RuleDeleteResponse.FirewallFilter | RuleDeleteResponse.FirewallDeletedFilter;
+  filter?: Rule.FirewallFilter | DeletedFilter;
 
   /**
    * When true, indicates that the firewall rule is currently paused.
@@ -399,7 +152,7 @@ export interface RuleDeleteResponse {
    */
   priority?: number;
 
-  products?: Array<'zoneLockdown' | 'uaBlock' | 'bic' | 'hot' | 'securityLevel' | 'rateLimit' | 'waf'>;
+  products?: Array<ProductsItem>;
 
   /**
    * A short reference tag. Allows you to select related firewall rules.
@@ -407,7 +160,7 @@ export interface RuleDeleteResponse {
   ref?: string;
 }
 
-export namespace RuleDeleteResponse {
+export namespace Rule {
   export interface FirewallFilter {
     /**
      * The unique identifier of the filter.
@@ -435,185 +188,23 @@ export namespace RuleDeleteResponse {
      */
     ref?: string;
   }
-
-  export interface FirewallDeletedFilter {
-    /**
-     * The unique identifier of the filter.
-     */
-    id: string;
-
-    /**
-     * When true, indicates that the firewall rule was deleted.
-     */
-    deleted: boolean;
-  }
 }
 
-export type RuleEditResponse = Array<RuleEditResponse.RuleEditResponseItem>;
-
-export namespace RuleEditResponse {
-  export interface RuleEditResponseItem {
-    /**
-     * The unique identifier of the firewall rule.
-     */
-    id: string;
-
-    /**
-     * The action to apply to a matched request. The `log` action is only available on
-     * an Enterprise plan.
-     */
-    action: 'block' | 'challenge' | 'js_challenge' | 'managed_challenge' | 'allow' | 'log' | 'bypass';
-
-    filter: RuleEditResponseItem.FirewallFilter | RuleEditResponseItem.FirewallDeletedFilter;
-
-    /**
-     * When true, indicates that the firewall rule is currently paused.
-     */
-    paused: boolean;
-
-    /**
-     * An informative summary of the firewall rule.
-     */
-    description?: string;
-
-    /**
-     * The priority of the rule. Optional value used to define the processing order. A
-     * lower number indicates a higher priority. If not provided, rules with a defined
-     * priority will be processed before rules without a priority.
-     */
-    priority?: number;
-
-    products?: Array<'zoneLockdown' | 'uaBlock' | 'bic' | 'hot' | 'securityLevel' | 'rateLimit' | 'waf'>;
-
-    /**
-     * A short reference tag. Allows you to select related firewall rules.
-     */
-    ref?: string;
-  }
-
-  export namespace RuleEditResponseItem {
-    export interface FirewallFilter {
-      /**
-       * The unique identifier of the filter.
-       */
-      id?: string;
-
-      /**
-       * An informative summary of the filter.
-       */
-      description?: string;
-
-      /**
-       * The filter expression. For more information, refer to
-       * [Expressions](https://developers.cloudflare.com/ruleset-engine/rules-language/expressions/).
-       */
-      expression?: string;
-
-      /**
-       * When true, indicates that the filter is currently paused.
-       */
-      paused?: boolean;
-
-      /**
-       * A short reference tag. Allows you to select related filters.
-       */
-      ref?: string;
-    }
-
-    export interface FirewallDeletedFilter {
-      /**
-       * The unique identifier of the filter.
-       */
-      id: string;
-
-      /**
-       * When true, indicates that the firewall rule was deleted.
-       */
-      deleted: boolean;
-    }
-  }
-}
-
-export interface RuleGetResponse {
+export interface DeletedFilter {
   /**
-   * The unique identifier of the firewall rule.
+   * The unique identifier of the filter.
    */
   id: string;
 
   /**
-   * The action to apply to a matched request. The `log` action is only available on
-   * an Enterprise plan.
+   * When true, indicates that the firewall rule was deleted.
    */
-  action: 'block' | 'challenge' | 'js_challenge' | 'managed_challenge' | 'allow' | 'log' | 'bypass';
-
-  filter: RuleGetResponse.FirewallFilter | RuleGetResponse.FirewallDeletedFilter;
-
-  /**
-   * When true, indicates that the firewall rule is currently paused.
-   */
-  paused: boolean;
-
-  /**
-   * An informative summary of the firewall rule.
-   */
-  description?: string;
-
-  /**
-   * The priority of the rule. Optional value used to define the processing order. A
-   * lower number indicates a higher priority. If not provided, rules with a defined
-   * priority will be processed before rules without a priority.
-   */
-  priority?: number;
-
-  products?: Array<'zoneLockdown' | 'uaBlock' | 'bic' | 'hot' | 'securityLevel' | 'rateLimit' | 'waf'>;
-
-  /**
-   * A short reference tag. Allows you to select related firewall rules.
-   */
-  ref?: string;
+  deleted: boolean;
 }
 
-export namespace RuleGetResponse {
-  export interface FirewallFilter {
-    /**
-     * The unique identifier of the filter.
-     */
-    id?: string;
+export type RuleCreateResponse = Array<Rule>;
 
-    /**
-     * An informative summary of the filter.
-     */
-    description?: string;
-
-    /**
-     * The filter expression. For more information, refer to
-     * [Expressions](https://developers.cloudflare.com/ruleset-engine/rules-language/expressions/).
-     */
-    expression?: string;
-
-    /**
-     * When true, indicates that the filter is currently paused.
-     */
-    paused?: boolean;
-
-    /**
-     * A short reference tag. Allows you to select related filters.
-     */
-    ref?: string;
-  }
-
-  export interface FirewallDeletedFilter {
-    /**
-     * The unique identifier of the filter.
-     */
-    id: string;
-
-    /**
-     * When true, indicates that the firewall rule was deleted.
-     */
-    deleted: boolean;
-  }
-}
+export type RuleEditResponse = Array<Rule>;
 
 export type RuleCreateParams = unknown;
 
@@ -664,13 +255,12 @@ export interface RuleGetParams {
 }
 
 export namespace Rules {
+  export import ProductsItem = RulesAPI.ProductsItem;
+  export import Rule = RulesAPI.Rule;
+  export import DeletedFilter = RulesAPI.DeletedFilter;
   export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
-  export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
-  export import RuleListResponse = RulesAPI.RuleListResponse;
-  export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
   export import RuleEditResponse = RulesAPI.RuleEditResponse;
-  export import RuleGetResponse = RulesAPI.RuleGetResponse;
-  export import RuleListResponsesV4PagePaginationArray = RulesAPI.RuleListResponsesV4PagePaginationArray;
+  export import RulesV4PagePaginationArray = RulesAPI.RulesV4PagePaginationArray;
   export import RuleCreateParams = RulesAPI.RuleCreateParams;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
   export import RuleListParams = RulesAPI.RuleListParams;

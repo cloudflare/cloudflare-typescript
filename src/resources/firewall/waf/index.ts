@@ -1,16 +1,16 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  OverrideCreateResponse,
-  OverrideUpdateResponse,
-  OverrideListResponse,
+  Override,
+  RewriteAction,
+  Rules,
+  URLsItems,
   OverrideDeleteResponse,
-  OverrideGetResponse,
   OverrideCreateParams,
   OverrideUpdateParams,
   OverrideListParams,
   OverrideDeleteParams,
-  OverrideListResponsesV4PagePaginationArray,
+  OverridesV4PagePaginationArray,
   Overrides,
 } from './overrides';
 export {
