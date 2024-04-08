@@ -2,6 +2,20 @@
 
 export { Binding, BindingGetResponse, BindingGetParams, Bindings } from './bindings';
 export {
+  BindingItem,
+  CompatibilityFlagsItem,
+  Script,
+  Setting,
+  SettingsItem,
+  TagsItem,
+  ScriptUpdateParams,
+  ScriptListParams,
+  ScriptDeleteParams,
+  ScriptGetParams,
+  ScriptsSinglePage,
+  Scripts,
+} from './scripts';
+export {
   ConsumerScript,
   ConsumerScriptItem,
   TailCreateResponse,
@@ -11,19 +25,7 @@ export {
   TailGetParams,
   Tail,
 } from './tail';
-export { ContentUpdateParams, Content } from './content';
-export { ContentV2GetParams, ContentV2 } from './content-v2';
-export {
-  Script,
-  Setting,
-  SettingsItem,
-  ScriptUpdateParams,
-  ScriptListParams,
-  ScriptDeleteParams,
-  ScriptGetParams,
-  ScriptsSinglePage,
-  Scripts,
-} from './scripts';
+export { ContentUpdateParams, ContentGetParams, Content } from './content';
 export { SettingEditParams, SettingGetParams, Settings } from './settings';
 export {
   UnnamedSchemaRefC8302c265937f9d6f96fd69644e56b26,
@@ -56,4 +58,4 @@ export {
   VersionListParams,
   VersionGetParams,
   Versions,
-} from './versions/index';
+} from './versions';

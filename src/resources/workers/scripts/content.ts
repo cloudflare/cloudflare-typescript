@@ -2,6 +2,7 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
+import { type Response } from 'cloudflare/_shims/index';
 import * as ContentAPI from 'cloudflare/resources/workers/scripts/content';
 import * as Shared from 'cloudflare/resources/shared';
 import * as ScriptsAPI from 'cloudflare/resources/workers/scripts/scripts';
@@ -36,6 +37,21 @@ export class Content extends APIResource {
         }),
       ) as Core.APIPromise<{ result: ScriptsAPI.Script }>
     )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Fetch script content only
+   */
+  get(
+    scriptName: string,
+    params: ContentGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Response> {
+    const { account_id } = params;
+    return this._client.get(`/accounts/${account_id}/workers/scripts/${scriptName}/content/v2`, {
+      ...options,
+      __binaryResponse: true,
+    });
   }
 }
 
@@ -74,6 +90,14 @@ export interface ContentUpdateParams {
   'CF-WORKER-MAIN-MODULE-PART'?: string;
 }
 
+export interface ContentGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export namespace Content {
   export import ContentUpdateParams = ContentAPI.ContentUpdateParams;
+  export import ContentGetParams = ContentAPI.ContentGetParams;
 }
