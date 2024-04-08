@@ -9,46 +9,35 @@ export class TSIGs extends APIResource {
   /**
    * Create TSIG.
    */
-  create(params: TSIGCreateParams, options?: Core.RequestOptions): Core.APIPromise<SecondaryDNSTSIG> {
+  create(params: TSIGCreateParams, options?: Core.RequestOptions): Core.APIPromise<TSIG> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/secondary_dns/tsigs`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: SecondaryDNSTSIG }>
+      }) as Core.APIPromise<{ result: TSIG }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Modify TSIG.
    */
-  update(
-    tsigId: string,
-    params: TSIGUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SecondaryDNSTSIG> {
+  update(tsigId: string, params: TSIGUpdateParams, options?: Core.RequestOptions): Core.APIPromise<TSIG> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/secondary_dns/tsigs/${tsigId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: SecondaryDNSTSIG }>
+      }) as Core.APIPromise<{ result: TSIG }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List TSIGs.
    */
-  list(
-    params: TSIGListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<SecondaryDnstsigsSinglePage, SecondaryDNSTSIG> {
+  list(params: TSIGListParams, options?: Core.RequestOptions): Core.PagePromise<TSIGsSinglePage, TSIG> {
     const { account_id } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/secondary_dns/tsigs`,
-      SecondaryDnstsigsSinglePage,
-      options,
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/secondary_dns/tsigs`, TSIGsSinglePage, options);
   }
 
   /**
@@ -71,23 +60,19 @@ export class TSIGs extends APIResource {
   /**
    * Get TSIG.
    */
-  get(
-    tsigId: string,
-    params: TSIGGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SecondaryDNSTSIG> {
+  get(tsigId: string, params: TSIGGetParams, options?: Core.RequestOptions): Core.APIPromise<TSIG> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/secondary_dns/tsigs/${tsigId}`, options) as Core.APIPromise<{
-        result: SecondaryDNSTSIG;
+        result: TSIG;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class SecondaryDnstsigsSinglePage extends SinglePage<SecondaryDNSTSIG> {}
+export class TSIGsSinglePage extends SinglePage<TSIG> {}
 
-export interface SecondaryDNSTSIG {
+export interface TSIG {
   id: string;
 
   /**
@@ -194,10 +179,10 @@ export interface TSIGGetParams {
 }
 
 export namespace TSIGs {
-  export import SecondaryDNSTSIG = TSIGsAPI.SecondaryDNSTSIG;
+  export import TSIG = TSIGsAPI.TSIG;
   export import UnnamedSchemaRefC3d6ffaf5dde0c570eaa72462c2ee738 = TSIGsAPI.UnnamedSchemaRefC3d6ffaf5dde0c570eaa72462c2ee738;
   export import TSIGDeleteResponse = TSIGsAPI.TSIGDeleteResponse;
-  export import SecondaryDnstsigsSinglePage = TSIGsAPI.SecondaryDnstsigsSinglePage;
+  export import TSIGsSinglePage = TSIGsAPI.TSIGsSinglePage;
   export import TSIGCreateParams = TSIGsAPI.TSIGCreateParams;
   export import TSIGUpdateParams = TSIGsAPI.TSIGUpdateParams;
   export import TSIGListParams = TSIGsAPI.TSIGListParams;

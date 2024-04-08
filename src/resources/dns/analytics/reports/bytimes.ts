@@ -13,22 +13,22 @@ export class Bytimes extends APIResource {
    * [Analytics API properties](https://developers.cloudflare.com/dns/reference/analytics-api-properties/)
    * for detailed information about the available query parameters.
    */
-  get(params: BytimeGetParams, options?: Core.RequestOptions): Core.APIPromise<DNSAnalyticsReportByTime> {
+  get(params: BytimeGetParams, options?: Core.RequestOptions): Core.APIPromise<ByTime> {
     const { zone_id, ...query } = params;
     return (
       this._client.get(`/zones/${zone_id}/dns_analytics/report/bytime`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: DNSAnalyticsReportByTime }>
+      }) as Core.APIPromise<{ result: ByTime }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface DNSAnalyticsReportByTime {
+export interface ByTime {
   /**
    * Array with one row per combination of dimension values.
    */
-  data: Array<DNSAnalyticsReportByTime.Data>;
+  data: Array<ByTime.Data>;
 
   /**
    * Number of seconds between current time and last processed event, in another
@@ -68,7 +68,7 @@ export interface DNSAnalyticsReportByTime {
   totals: unknown;
 }
 
-export namespace DNSAnalyticsReportByTime {
+export namespace ByTime {
   export interface Data {
     /**
      * Array of dimension values, representing the combination of dimension values
@@ -143,6 +143,6 @@ export interface BytimeGetParams {
 }
 
 export namespace Bytimes {
-  export import DNSAnalyticsReportByTime = BytimesAPI.DNSAnalyticsReportByTime;
+  export import ByTime = BytimesAPI.ByTime;
   export import BytimeGetParams = BytimesAPI.BytimeGetParams;
 }

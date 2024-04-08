@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
-import * as IPsAPI from 'cloudflare/resources/ips';
 
 export class IPs extends APIResource {
   /**
@@ -73,11 +72,4 @@ export interface IPListParams {
    * Specified as `jdcloud` to list IPs used by JD Cloud data centers.
    */
   networks?: string;
-}
-
-export namespace IPs {
-  export import IPs = IPsAPI.IPs;
-  export import JDCloudIPs = IPsAPI.JDCloudIPs;
-  export import IPListResponse = IPsAPI.IPListResponse;
-  export import IPListParams = IPsAPI.IPListParams;
 }

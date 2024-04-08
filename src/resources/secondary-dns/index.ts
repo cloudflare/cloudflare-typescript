@@ -1,8 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { SecondaryDNS } from './secondary-dns';
 export {
-  SecondaryDNSACL,
+  ACL,
   UnnamedSchemaRef08eaa2f22bb9ce0f80063d710d4edafd,
   ACLDeleteResponse,
   ACLCreateParams,
@@ -10,12 +9,12 @@ export {
   ACLListParams,
   ACLDeleteParams,
   ACLGetParams,
-  SecondaryDnsaclsSinglePage,
+  ACLsSinglePage,
   ACLs,
 } from './acls';
 export {
-  SecondaryDNSDisableTransfer,
-  SecondaryDNSEnableTransfer,
+  DisableTransfer,
+  EnableTransfer,
   UnnamedSchemaRef0e152c3e4c55b8a0ca6531578a42c564,
   UnnamedSchemaRefBf34e74a34c9a2f63d85505dc69d4adc,
   OutgoingCreateResponse,
@@ -32,9 +31,9 @@ export {
   OutgoingGetParams,
   Outgoing,
 } from './outgoing/index';
-export { SecondaryDNSForce, ForceAXFRCreateParams, ForceAXFR } from './force-axfr';
+export { ForceAXFR, ForceAXFRCreateParams, ForceAXFRResource } from './force-axfr';
 export {
-  SecondaryDNSPeer,
+  Peer,
   UnnamedSchemaRefBc727f0a53d75f2b531245a82603fbe0,
   PeerDeleteResponse,
   PeerCreateParams,
@@ -42,11 +41,12 @@ export {
   PeerListParams,
   PeerDeleteParams,
   PeerGetParams,
-  SecondaryDNSPeersSinglePage,
+  PeersSinglePage,
   Peers,
 } from './peers';
+export { SecondaryDNS } from './secondary-dns';
 export {
-  SecondaryDNSTSIG,
+  TSIG,
   UnnamedSchemaRefC3d6ffaf5dde0c570eaa72462c2ee738,
   TSIGDeleteResponse,
   TSIGCreateParams,
@@ -54,7 +54,7 @@ export {
   TSIGListParams,
   TSIGDeleteParams,
   TSIGGetParams,
-  SecondaryDnstsigsSinglePage,
+  TSIGsSinglePage,
   TSIGs,
 } from './tsigs';
 export {

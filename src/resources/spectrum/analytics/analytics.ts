@@ -12,4 +12,5 @@ export class Analytics extends APIResource {
 export namespace Analytics {
   export import Aggregates = AggregatesAPI.Aggregates;
   export import Events = EventsAPI.Events;
+  export import DimensionItem = EventsAPI.DimensionItem;
 }

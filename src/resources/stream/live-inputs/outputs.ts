@@ -15,13 +15,13 @@ export class Outputs extends APIResource {
     liveInputIdentifier: string,
     params: OutputCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<StreamOutput> {
+  ): Core.APIPromise<Output> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/stream/live_inputs/${liveInputIdentifier}/outputs`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: StreamOutput }>
+      }) as Core.APIPromise<{ result: Output }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -33,13 +33,13 @@ export class Outputs extends APIResource {
     outputIdentifier: string,
     params: OutputUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<StreamOutput> {
+  ): Core.APIPromise<Output> {
     const { account_id, ...body } = params;
     return (
       this._client.put(
         `/accounts/${account_id}/stream/live_inputs/${liveInputIdentifier}/outputs/${outputIdentifier}`,
         { body, ...options },
-      ) as Core.APIPromise<{ result: StreamOutput }>
+      ) as Core.APIPromise<{ result: Output }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -50,11 +50,11 @@ export class Outputs extends APIResource {
     liveInputIdentifier: string,
     params: OutputListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<StreamOutputsSinglePage, StreamOutput> {
+  ): Core.PagePromise<OutputsSinglePage, Output> {
     const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/stream/live_inputs/${liveInputIdentifier}/outputs`,
-      StreamOutputsSinglePage,
+      OutputsSinglePage,
       options,
     );
   }
@@ -76,9 +76,9 @@ export class Outputs extends APIResource {
   }
 }
 
-export class StreamOutputsSinglePage extends SinglePage<StreamOutput> {}
+export class OutputsSinglePage extends SinglePage<Output> {}
 
-export interface StreamOutput {
+export interface Output {
   /**
    * When enabled, live video streamed to the associated live input will be sent to
    * the output URL. When disabled, live video will not be sent to the output URL,
@@ -166,8 +166,8 @@ export interface OutputDeleteParams {
 }
 
 export namespace Outputs {
-  export import StreamOutput = OutputsAPI.StreamOutput;
-  export import StreamOutputsSinglePage = OutputsAPI.StreamOutputsSinglePage;
+  export import Output = OutputsAPI.Output;
+  export import OutputsSinglePage = OutputsAPI.OutputsSinglePage;
   export import OutputCreateParams = OutputsAPI.OutputCreateParams;
   export import OutputUpdateParams = OutputsAPI.OutputUpdateParams;
   export import OutputListParams = OutputsAPI.OutputListParams;

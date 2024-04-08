@@ -1,23 +1,30 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { CloudforceOnePriorityItem, PriorityCreateParams, PriorityUpdateParams, Priority } from './priority';
 export {
-  CloudforceOneQuota,
-  CloudforceOneRequestConstants,
-  CloudforceOneRequestItem,
-  CloudforceOneRequestListItem,
-  CloudforceOneRequestTypes,
+  Item,
+  ListItem,
+  Quota,
+  RequestConstants,
+  RequestTypes,
   RequestCreateParams,
   RequestUpdateParams,
   RequestListParams,
-  CloudforceOneRequestListItemsV4PagePaginationArray,
+  ListItemsV4PagePaginationArray,
   Requests,
 } from './requests';
 export {
-  CloudforceOneRequestMessageItem,
+  LabelItem,
+  Priority,
+  PriorityEdit,
+  PriorityCreateParams,
+  PriorityUpdateParams,
+  PriorityResource,
+} from './priority';
+export {
+  Message,
   MessageGetResponse,
   MessageCreateParams,
   MessageUpdateParams,
   MessageGetParams,
-  Message,
+  MessageResource,
 } from './message';

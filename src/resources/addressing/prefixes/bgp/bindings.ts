@@ -17,13 +17,13 @@ export class Bindings extends APIResource {
     prefixId: string,
     params: BindingCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AddressingServiceBinding> {
+  ): Core.APIPromise<ServiceBinding> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/addressing/prefixes/${prefixId}/bindings`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: AddressingServiceBinding }>
+      }) as Core.APIPromise<{ result: ServiceBinding }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -39,11 +39,11 @@ export class Bindings extends APIResource {
     prefixId: string,
     params: BindingListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<AddressingServiceBindingsSinglePage, AddressingServiceBinding> {
+  ): Core.PagePromise<ServiceBindingsSinglePage, ServiceBinding> {
     const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/addressing/prefixes/${prefixId}/bindings`,
-      AddressingServiceBindingsSinglePage,
+      ServiceBindingsSinglePage,
       options,
     );
   }
@@ -74,20 +74,20 @@ export class Bindings extends APIResource {
     bindingId: string,
     params: BindingGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AddressingServiceBinding> {
+  ): Core.APIPromise<ServiceBinding> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/addressing/prefixes/${prefixId}/bindings/${bindingId}`,
         options,
-      ) as Core.APIPromise<{ result: AddressingServiceBinding }>
+      ) as Core.APIPromise<{ result: ServiceBinding }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class AddressingServiceBindingsSinglePage extends SinglePage<AddressingServiceBinding> {}
+export class ServiceBindingsSinglePage extends SinglePage<ServiceBinding> {}
 
-export interface AddressingServiceBinding {
+export interface ServiceBinding {
   /**
    * Identifier
    */
@@ -101,7 +101,7 @@ export interface AddressingServiceBinding {
   /**
    * Status of a Service Binding's deployment to the Cloudflare network
    */
-  provisioning?: AddressingServiceBinding.Provisioning;
+  provisioning?: ServiceBinding.Provisioning;
 
   /**
    * Identifier
@@ -114,7 +114,7 @@ export interface AddressingServiceBinding {
   service_name?: string;
 }
 
-export namespace AddressingServiceBinding {
+export namespace ServiceBinding {
   /**
    * Status of a Service Binding's deployment to the Cloudflare network
    */
@@ -166,8 +166,8 @@ export interface BindingGetParams {
 }
 
 export namespace Bindings {
-  export import AddressingServiceBinding = BindingsAPI.AddressingServiceBinding;
-  export import AddressingServiceBindingsSinglePage = BindingsAPI.AddressingServiceBindingsSinglePage;
+  export import ServiceBinding = BindingsAPI.ServiceBinding;
+  export import ServiceBindingsSinglePage = BindingsAPI.ServiceBindingsSinglePage;
   export import BindingCreateParams = BindingsAPI.BindingCreateParams;
   export import BindingListParams = BindingsAPI.BindingListParams;
   export import BindingDeleteParams = BindingsAPI.BindingDeleteParams;

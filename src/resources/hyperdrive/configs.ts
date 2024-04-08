@@ -4,7 +4,8 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ConfigsAPI from 'cloudflare/resources/hyperdrive/configs';
 import * as Shared from 'cloudflare/resources/shared';
-import { SinglePage } from 'cloudflare/pagination';
+import * as HyperdriveAPI from 'cloudflare/resources/hyperdrive/hyperdrive';
+import { HyperdrivesSinglePage } from 'cloudflare/resources/hyperdrive/hyperdrive';
 
 export class Configs extends APIResource {
   /**
@@ -13,13 +14,13 @@ export class Configs extends APIResource {
   create(
     params: ConfigCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ConfigCreateResponse | null> {
+  ): Core.APIPromise<HyperdriveAPI.Hyperdrive | null> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/hyperdrive/configs`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ConfigCreateResponse | null }>
+      }) as Core.APIPromise<{ result: HyperdriveAPI.Hyperdrive | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -30,13 +31,13 @@ export class Configs extends APIResource {
     hyperdriveId: string,
     params: ConfigUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ConfigUpdateResponse | null> {
+  ): Core.APIPromise<HyperdriveAPI.Hyperdrive | null> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/hyperdrive/configs/${hyperdriveId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ConfigUpdateResponse | null }>
+      }) as Core.APIPromise<{ result: HyperdriveAPI.Hyperdrive | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -46,11 +47,11 @@ export class Configs extends APIResource {
   list(
     params: ConfigListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<ConfigListResponsesSinglePage, ConfigListResponse> {
+  ): Core.PagePromise<HyperdrivesSinglePage, HyperdriveAPI.Hyperdrive> {
     const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/hyperdrive/configs`,
-      ConfigListResponsesSinglePage,
+      HyperdrivesSinglePage,
       options,
     );
   }
@@ -80,13 +81,13 @@ export class Configs extends APIResource {
     hyperdriveId: string,
     params: ConfigEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ConfigEditResponse | null> {
+  ): Core.APIPromise<HyperdriveAPI.Hyperdrive | null> {
     const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/hyperdrive/configs/${hyperdriveId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ConfigEditResponse | null }>
+      }) as Core.APIPromise<{ result: HyperdriveAPI.Hyperdrive | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -97,52 +98,15 @@ export class Configs extends APIResource {
     hyperdriveId: string,
     params: ConfigGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ConfigGetResponse | null> {
+  ): Core.APIPromise<HyperdriveAPI.Hyperdrive | null> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/hyperdrive/configs/${hyperdriveId}`,
         options,
-      ) as Core.APIPromise<{ result: ConfigGetResponse | null }>
+      ) as Core.APIPromise<{ result: HyperdriveAPI.Hyperdrive | null }>
     )._thenUnwrap((obj) => obj.result);
   }
-}
-
-export class ConfigListResponsesSinglePage extends SinglePage<ConfigListResponse> {}
-
-export interface ConfigCreateResponse {
-  /**
-   * Identifier
-   */
-  id?: string;
-}
-
-export interface ConfigUpdateResponse {
-  /**
-   * Identifier
-   */
-  id?: string;
-}
-
-export interface ConfigListResponse {
-  /**
-   * Identifier
-   */
-  id?: string;
-}
-
-export interface ConfigEditResponse {
-  /**
-   * Identifier
-   */
-  id?: string;
-}
-
-export interface ConfigGetResponse {
-  /**
-   * Identifier
-   */
-  id?: string;
 }
 
 export interface ConfigCreateParams {
@@ -159,17 +123,7 @@ export interface ConfigCreateParams {
   /**
    * Body param:
    */
-  origin: ConfigCreateParams.Origin;
-}
-
-export namespace ConfigCreateParams {
-  export interface Origin {
-    /**
-     * The password required to access your origin database. This value is write-only
-     * and never returned by the API.
-     */
-    password: string;
-  }
+  origin: HyperdriveAPI.Configuration;
 }
 
 export interface ConfigUpdateParams {
@@ -186,17 +140,7 @@ export interface ConfigUpdateParams {
   /**
    * Body param:
    */
-  origin: ConfigUpdateParams.Origin;
-}
-
-export namespace ConfigUpdateParams {
-  export interface Origin {
-    /**
-     * The password required to access your origin database. This value is write-only
-     * and never returned by the API.
-     */
-    password: string;
-  }
+  origin: HyperdriveAPI.Configuration;
 }
 
 export interface ConfigListParams {
@@ -222,17 +166,7 @@ export interface ConfigEditParams {
   /**
    * Body param:
    */
-  origin?: ConfigEditParams.Origin;
-}
-
-export namespace ConfigEditParams {
-  export interface Origin {
-    /**
-     * The password required to access your origin database. This value is write-only
-     * and never returned by the API.
-     */
-    password: string;
-  }
+  origin?: HyperdriveAPI.Configuration;
 }
 
 export interface ConfigGetParams {
@@ -243,12 +177,6 @@ export interface ConfigGetParams {
 }
 
 export namespace Configs {
-  export import ConfigCreateResponse = ConfigsAPI.ConfigCreateResponse;
-  export import ConfigUpdateResponse = ConfigsAPI.ConfigUpdateResponse;
-  export import ConfigListResponse = ConfigsAPI.ConfigListResponse;
-  export import ConfigEditResponse = ConfigsAPI.ConfigEditResponse;
-  export import ConfigGetResponse = ConfigsAPI.ConfigGetResponse;
-  export import ConfigListResponsesSinglePage = ConfigsAPI.ConfigListResponsesSinglePage;
   export import ConfigCreateParams = ConfigsAPI.ConfigCreateParams;
   export import ConfigUpdateParams = ConfigsAPI.ConfigUpdateParams;
   export import ConfigListParams = ConfigsAPI.ConfigListParams;
@@ -256,3 +184,5 @@ export namespace Configs {
   export import ConfigEditParams = ConfigsAPI.ConfigEditParams;
   export import ConfigGetParams = ConfigsAPI.ConfigGetParams;
 }
+
+export { HyperdrivesSinglePage };

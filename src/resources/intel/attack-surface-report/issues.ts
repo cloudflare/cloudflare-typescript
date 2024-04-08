@@ -84,6 +84,21 @@ export class Issues extends APIResource {
 
 export class IssueListResponsesV4PagePagination extends V4PagePagination<IssueListResponse> {}
 
+export type IssueClassItem = string;
+
+export type IssueTypeItem =
+  | 'compliance_violation'
+  | 'email_security'
+  | 'exposed_infrastructure'
+  | 'insecure_configuration'
+  | 'weak_authentication';
+
+export type ProductItem = string;
+
+export type SeverityQueryParamItem = 'low' | 'moderate' | 'critical';
+
+export type SubjectsItem = string;
+
 export interface IssueListResponse {
   errors: Array<Shared.UnnamedSchemaRef3248f24329456e19dfa042fff9986f72>;
 
@@ -193,64 +208,52 @@ export interface IssueListParams extends V4PagePaginationParams {
   /**
    * Query param:
    */
-  issue_class?: Array<string>;
+  issue_class?: Array<IssueClassItem>;
 
   /**
    * Query param:
    */
-  'issue_class~neq'?: Array<string>;
+  'issue_class~neq'?: Array<IssueClassItem>;
 
   /**
    * Query param:
    */
-  issue_type?: Array<
-    | 'compliance_violation'
-    | 'email_security'
-    | 'exposed_infrastructure'
-    | 'insecure_configuration'
-    | 'weak_authentication'
-  >;
+  issue_type?: Array<IssueTypeItem>;
 
   /**
    * Query param:
    */
-  'issue_type~neq'?: Array<
-    | 'compliance_violation'
-    | 'email_security'
-    | 'exposed_infrastructure'
-    | 'insecure_configuration'
-    | 'weak_authentication'
-  >;
+  'issue_type~neq'?: Array<IssueTypeItem>;
 
   /**
    * Query param:
    */
-  product?: Array<string>;
+  product?: Array<ProductItem>;
 
   /**
    * Query param:
    */
-  'product~neq'?: Array<string>;
+  'product~neq'?: Array<ProductItem>;
 
   /**
    * Query param:
    */
-  severity?: Array<'low' | 'moderate' | 'critical'>;
+  severity?: Array<SeverityQueryParamItem>;
 
   /**
    * Query param:
    */
-  'severity~neq'?: Array<'low' | 'moderate' | 'critical'>;
+  'severity~neq'?: Array<SeverityQueryParamItem>;
 
   /**
    * Query param:
    */
-  subject?: Array<string>;
+  subject?: Array<SubjectsItem>;
 
   /**
    * Query param:
    */
-  'subject~neq'?: Array<string>;
+  'subject~neq'?: Array<SubjectsItem>;
 }
 
 export interface IssueClassParams {
@@ -267,64 +270,52 @@ export interface IssueClassParams {
   /**
    * Query param:
    */
-  issue_class?: Array<string>;
+  issue_class?: Array<IssueClassItem>;
 
   /**
    * Query param:
    */
-  'issue_class~neq'?: Array<string>;
+  'issue_class~neq'?: Array<IssueClassItem>;
 
   /**
    * Query param:
    */
-  issue_type?: Array<
-    | 'compliance_violation'
-    | 'email_security'
-    | 'exposed_infrastructure'
-    | 'insecure_configuration'
-    | 'weak_authentication'
-  >;
+  issue_type?: Array<IssueTypeItem>;
 
   /**
    * Query param:
    */
-  'issue_type~neq'?: Array<
-    | 'compliance_violation'
-    | 'email_security'
-    | 'exposed_infrastructure'
-    | 'insecure_configuration'
-    | 'weak_authentication'
-  >;
+  'issue_type~neq'?: Array<IssueTypeItem>;
 
   /**
    * Query param:
    */
-  product?: Array<string>;
+  product?: Array<ProductItem>;
 
   /**
    * Query param:
    */
-  'product~neq'?: Array<string>;
+  'product~neq'?: Array<ProductItem>;
 
   /**
    * Query param:
    */
-  severity?: Array<'low' | 'moderate' | 'critical'>;
+  severity?: Array<SeverityQueryParamItem>;
 
   /**
    * Query param:
    */
-  'severity~neq'?: Array<'low' | 'moderate' | 'critical'>;
+  'severity~neq'?: Array<SeverityQueryParamItem>;
 
   /**
    * Query param:
    */
-  subject?: Array<string>;
+  subject?: Array<SubjectsItem>;
 
   /**
    * Query param:
    */
-  'subject~neq'?: Array<string>;
+  'subject~neq'?: Array<SubjectsItem>;
 }
 
 export interface IssueDismissParams {
@@ -353,64 +344,52 @@ export interface IssueSeverityParams {
   /**
    * Query param:
    */
-  issue_class?: Array<string>;
+  issue_class?: Array<IssueClassItem>;
 
   /**
    * Query param:
    */
-  'issue_class~neq'?: Array<string>;
+  'issue_class~neq'?: Array<IssueClassItem>;
 
   /**
    * Query param:
    */
-  issue_type?: Array<
-    | 'compliance_violation'
-    | 'email_security'
-    | 'exposed_infrastructure'
-    | 'insecure_configuration'
-    | 'weak_authentication'
-  >;
+  issue_type?: Array<IssueTypeItem>;
 
   /**
    * Query param:
    */
-  'issue_type~neq'?: Array<
-    | 'compliance_violation'
-    | 'email_security'
-    | 'exposed_infrastructure'
-    | 'insecure_configuration'
-    | 'weak_authentication'
-  >;
+  'issue_type~neq'?: Array<IssueTypeItem>;
 
   /**
    * Query param:
    */
-  product?: Array<string>;
+  product?: Array<ProductItem>;
 
   /**
    * Query param:
    */
-  'product~neq'?: Array<string>;
+  'product~neq'?: Array<ProductItem>;
 
   /**
    * Query param:
    */
-  severity?: Array<'low' | 'moderate' | 'critical'>;
+  severity?: Array<SeverityQueryParamItem>;
 
   /**
    * Query param:
    */
-  'severity~neq'?: Array<'low' | 'moderate' | 'critical'>;
+  'severity~neq'?: Array<SeverityQueryParamItem>;
 
   /**
    * Query param:
    */
-  subject?: Array<string>;
+  subject?: Array<SubjectsItem>;
 
   /**
    * Query param:
    */
-  'subject~neq'?: Array<string>;
+  'subject~neq'?: Array<SubjectsItem>;
 }
 
 export interface IssueTypeParams {
@@ -427,67 +406,60 @@ export interface IssueTypeParams {
   /**
    * Query param:
    */
-  issue_class?: Array<string>;
+  issue_class?: Array<IssueClassItem>;
 
   /**
    * Query param:
    */
-  'issue_class~neq'?: Array<string>;
+  'issue_class~neq'?: Array<IssueClassItem>;
 
   /**
    * Query param:
    */
-  issue_type?: Array<
-    | 'compliance_violation'
-    | 'email_security'
-    | 'exposed_infrastructure'
-    | 'insecure_configuration'
-    | 'weak_authentication'
-  >;
+  issue_type?: Array<IssueTypeItem>;
 
   /**
    * Query param:
    */
-  'issue_type~neq'?: Array<
-    | 'compliance_violation'
-    | 'email_security'
-    | 'exposed_infrastructure'
-    | 'insecure_configuration'
-    | 'weak_authentication'
-  >;
+  'issue_type~neq'?: Array<IssueTypeItem>;
 
   /**
    * Query param:
    */
-  product?: Array<string>;
+  product?: Array<ProductItem>;
 
   /**
    * Query param:
    */
-  'product~neq'?: Array<string>;
+  'product~neq'?: Array<ProductItem>;
 
   /**
    * Query param:
    */
-  severity?: Array<'low' | 'moderate' | 'critical'>;
+  severity?: Array<SeverityQueryParamItem>;
 
   /**
    * Query param:
    */
-  'severity~neq'?: Array<'low' | 'moderate' | 'critical'>;
+  'severity~neq'?: Array<SeverityQueryParamItem>;
 
   /**
    * Query param:
    */
-  subject?: Array<string>;
+  subject?: Array<SubjectsItem>;
 
   /**
    * Query param:
    */
-  'subject~neq'?: Array<string>;
+  'subject~neq'?: Array<SubjectsItem>;
 }
 
 export namespace Issues {
+  export import IssueClassItem = IssuesAPI.IssueClassItem;
+  export import IssueTypeItem = IssuesAPI.IssueTypeItem;
+  export import ProductItem = IssuesAPI.ProductItem;
+  export import SeverityQueryParamItem = IssuesAPI.SeverityQueryParamItem;
+  export import SubjectsItem = IssuesAPI.SubjectsItem;
   export import IssueListResponse = IssuesAPI.IssueListResponse;
   export import IssueClassResponse = IssuesAPI.IssueClassResponse;
   export import IssueSeverityResponse = IssuesAPI.IssueSeverityResponse;

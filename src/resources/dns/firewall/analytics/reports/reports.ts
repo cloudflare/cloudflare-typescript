@@ -20,13 +20,13 @@ export class Reports extends APIResource {
     dnsFirewallId: string,
     params: ReportGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ReportsAPI.DNSAnalyticsReport> {
+  ): Core.APIPromise<ReportsAPI.Report> {
     const { account_id, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/dns_firewall/${dnsFirewallId}/dns_analytics/report`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: ReportsAPI.DNSAnalyticsReport }>
+      }) as Core.APIPromise<{ result: ReportsAPI.Report }>
     )._thenUnwrap((obj) => obj.result);
   }
 }

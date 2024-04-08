@@ -13,13 +13,13 @@ export class Upload extends APIResource {
     datasetId: string,
     params: UploadCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DLPDatasetNewVersion> {
+  ): Core.APIPromise<NewVersion> {
     const { account_id } = params;
     return (
       this._client.post(
         `/accounts/${account_id}/dlp/datasets/${datasetId}/upload`,
         options,
-      ) as Core.APIPromise<{ result: DLPDatasetNewVersion }>
+      ) as Core.APIPromise<{ result: NewVersion }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -31,18 +31,18 @@ export class Upload extends APIResource {
     version: number,
     params: UploadEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DatasetsAPI.DLPDataset> {
+  ): Core.APIPromise<DatasetsAPI.Dataset> {
     const { account_id, body } = params;
     return (
       this._client.post(`/accounts/${account_id}/dlp/datasets/${datasetId}/upload/${version}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: DatasetsAPI.DLPDataset }>
+      }) as Core.APIPromise<{ result: DatasetsAPI.Dataset }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface DLPDatasetNewVersion {
+export interface NewVersion {
   max_cells: number;
 
   version: number;
@@ -67,7 +67,7 @@ export interface UploadEditParams {
 }
 
 export namespace Upload {
-  export import DLPDatasetNewVersion = UploadAPI.DLPDatasetNewVersion;
+  export import NewVersion = UploadAPI.NewVersion;
   export import UploadCreateParams = UploadAPI.UploadCreateParams;
   export import UploadEditParams = UploadAPI.UploadEditParams;
 }

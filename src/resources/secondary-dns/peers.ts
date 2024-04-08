@@ -9,46 +9,35 @@ export class Peers extends APIResource {
   /**
    * Create Peer.
    */
-  create(params: PeerCreateParams, options?: Core.RequestOptions): Core.APIPromise<SecondaryDNSPeer> {
+  create(params: PeerCreateParams, options?: Core.RequestOptions): Core.APIPromise<Peer> {
     const { account_id, body } = params;
     return (
       this._client.post(`/accounts/${account_id}/secondary_dns/peers`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: SecondaryDNSPeer }>
+      }) as Core.APIPromise<{ result: Peer }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Modify Peer.
    */
-  update(
-    peerId: string,
-    params: PeerUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SecondaryDNSPeer> {
+  update(peerId: string, params: PeerUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Peer> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/secondary_dns/peers/${peerId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: SecondaryDNSPeer }>
+      }) as Core.APIPromise<{ result: Peer }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List Peers.
    */
-  list(
-    params: PeerListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<SecondaryDNSPeersSinglePage, SecondaryDNSPeer> {
+  list(params: PeerListParams, options?: Core.RequestOptions): Core.PagePromise<PeersSinglePage, Peer> {
     const { account_id } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/secondary_dns/peers`,
-      SecondaryDNSPeersSinglePage,
-      options,
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/secondary_dns/peers`, PeersSinglePage, options);
   }
 
   /**
@@ -71,23 +60,19 @@ export class Peers extends APIResource {
   /**
    * Get Peer.
    */
-  get(
-    peerId: string,
-    params: PeerGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SecondaryDNSPeer> {
+  get(peerId: string, params: PeerGetParams, options?: Core.RequestOptions): Core.APIPromise<Peer> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/secondary_dns/peers/${peerId}`, options) as Core.APIPromise<{
-        result: SecondaryDNSPeer;
+        result: Peer;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class SecondaryDNSPeersSinglePage extends SinglePage<SecondaryDNSPeer> {}
+export class PeersSinglePage extends SinglePage<Peer> {}
 
-export interface SecondaryDNSPeer {
+export interface Peer {
   id: string;
 
   /**
@@ -232,10 +217,10 @@ export interface PeerGetParams {
 }
 
 export namespace Peers {
-  export import SecondaryDNSPeer = PeersAPI.SecondaryDNSPeer;
+  export import Peer = PeersAPI.Peer;
   export import UnnamedSchemaRefBc727f0a53d75f2b531245a82603fbe0 = PeersAPI.UnnamedSchemaRefBc727f0a53d75f2b531245a82603fbe0;
   export import PeerDeleteResponse = PeersAPI.PeerDeleteResponse;
-  export import SecondaryDNSPeersSinglePage = PeersAPI.SecondaryDNSPeersSinglePage;
+  export import PeersSinglePage = PeersAPI.PeersSinglePage;
   export import PeerCreateParams = PeersAPI.PeerCreateParams;
   export import PeerUpdateParams = PeersAPI.PeerUpdateParams;
   export import PeerListParams = PeersAPI.PeerListParams;

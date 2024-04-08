@@ -3,23 +3,22 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as LastSeenIdentityAPI from 'cloudflare/resources/zero-trust/access/users/last-seen-identity';
-import * as UserPolicyChecksAPI from 'cloudflare/resources/zero-trust/access/applications/user-policy-checks';
 
 export class LastSeenIdentity extends APIResource {
   /**
    * Get last seen identity for a single user.
    */
-  get(identifier: string, id: string, options?: Core.RequestOptions): Core.APIPromise<ZeroTrustIdentity> {
+  get(identifier: string, id: string, options?: Core.RequestOptions): Core.APIPromise<Identity> {
     return (
       this._client.get(
         `/accounts/${identifier}/access/users/${id}/last_seen_identity`,
         options,
-      ) as Core.APIPromise<{ result: ZeroTrustIdentity }>
+      ) as Core.APIPromise<{ result: Identity }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface ZeroTrustIdentity {
+export interface Identity {
   account_id?: string;
 
   auth_status?: string;
@@ -28,17 +27,17 @@ export interface ZeroTrustIdentity {
 
   device_id?: string;
 
-  device_sessions?: Record<string, ZeroTrustIdentity.DeviceSessions>;
+  device_sessions?: Record<string, Identity.DeviceSessions>;
 
-  devicePosture?: Record<string, ZeroTrustIdentity.DevicePosture>;
+  devicePosture?: Record<string, Identity.DevicePosture>;
 
   email?: string;
 
-  geo?: UserPolicyChecksAPI.UnnamedSchemaRef6a02fe18089d53b52b2cd3949b717919;
+  geo?: Identity.Geo;
 
   iat?: number;
 
-  idp?: ZeroTrustIdentity.IDP;
+  idp?: Identity.IDP;
 
   ip?: string;
 
@@ -46,7 +45,7 @@ export interface ZeroTrustIdentity {
 
   is_warp?: boolean;
 
-  mtls_auth?: ZeroTrustIdentity.MTLSAuth;
+  mtls_auth?: Identity.MTLSAuth;
 
   service_token_id?: string;
 
@@ -57,7 +56,7 @@ export interface ZeroTrustIdentity {
   version?: number;
 }
 
-export namespace ZeroTrustIdentity {
+export namespace Identity {
   export interface DeviceSessions {
     last_authenticated?: number;
   }
@@ -90,6 +89,10 @@ export namespace ZeroTrustIdentity {
     }
   }
 
+  export interface Geo {
+    country?: string;
+  }
+
   export interface IDP {
     id?: string;
 
@@ -110,5 +113,5 @@ export namespace ZeroTrustIdentity {
 }
 
 export namespace LastSeenIdentity {
-  export import ZeroTrustIdentity = LastSeenIdentityAPI.ZeroTrustIdentity;
+  export import Identity = LastSeenIdentityAPI.Identity;
 }

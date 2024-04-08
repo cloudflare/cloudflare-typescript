@@ -3,28 +3,29 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ClipAPI from 'cloudflare/resources/stream/clip';
+import * as StreamAPI from 'cloudflare/resources/stream/stream';
 
-export class Clip extends APIResource {
+export class ClipResource extends APIResource {
   /**
    * Clips a video based on the specified start and end times provided in seconds.
    */
-  create(params: ClipCreateParams, options?: Core.RequestOptions): Core.APIPromise<StreamClipping> {
+  create(params: ClipCreateParams, options?: Core.RequestOptions): Core.APIPromise<Clip> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/stream/clip`, { body, ...options }) as Core.APIPromise<{
-        result: StreamClipping;
+        result: Clip;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface StreamClipping {
+export interface Clip {
   /**
    * Lists the origins allowed to display the video. Enter allowed origin domains in
    * an array and use `*` for wildcard subdomains. Empty arrays allow the video to be
    * viewed on any origin.
    */
-  allowedOrigins?: Array<string>;
+  allowedOrigins?: Array<StreamAPI.AllowedOriginsItem>;
 
   /**
    * The unique video identifier (UID).
@@ -65,7 +66,7 @@ export interface StreamClipping {
    */
   modified?: string;
 
-  playback?: StreamClipping.Playback;
+  playback?: Clip.Playback;
 
   /**
    * The video's preview page URI. This field is omitted until encoding is complete.
@@ -96,10 +97,10 @@ export interface StreamClipping {
    */
   thumbnailTimestampPct?: number;
 
-  watermark?: StreamClipping.Watermark;
+  watermark?: Clip.Watermark;
 }
 
-export namespace StreamClipping {
+export namespace Clip {
   export interface Playback {
     /**
      * DASH Media Presentation Description for the video.
@@ -146,7 +147,7 @@ export interface ClipCreateParams {
    * domains in an array and use `*` for wildcard subdomains. Empty arrays allow the
    * video to be viewed on any origin.
    */
-  allowedOrigins?: Array<string>;
+  allowedOrigins?: Array<StreamAPI.AllowedOriginsItem>;
 
   /**
    * Body param: A user-defined identifier for the media creator.
@@ -192,7 +193,7 @@ export namespace ClipCreateParams {
   }
 }
 
-export namespace Clip {
-  export import StreamClipping = ClipAPI.StreamClipping;
+export namespace ClipResource {
+  export import Clip = ClipAPI.Clip;
   export import ClipCreateParams = ClipAPI.ClipCreateParams;
 }

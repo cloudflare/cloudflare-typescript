@@ -10,11 +10,11 @@ export class SiteInfo extends APIResource {
   /**
    * Creates a new Web Analytics site.
    */
-  create(params: SiteInfoCreateParams, options?: Core.RequestOptions): Core.APIPromise<RUMSite> {
+  create(params: SiteInfoCreateParams, options?: Core.RequestOptions): Core.APIPromise<Site> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/rum/site_info`, { body, ...options }) as Core.APIPromise<{
-        result: RUMSite;
+        result: Site;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -22,17 +22,13 @@ export class SiteInfo extends APIResource {
   /**
    * Updates an existing Web Analytics site.
    */
-  update(
-    siteId: string,
-    params: SiteInfoUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RUMSite> {
+  update(siteId: string, params: SiteInfoUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Site> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/rum/site_info/${siteId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: RUMSite }>
+      }) as Core.APIPromise<{ result: Site }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -42,13 +38,12 @@ export class SiteInfo extends APIResource {
   list(
     params: SiteInfoListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<RUMSitesV4PagePaginationArray, RUMSite> {
+  ): Core.PagePromise<SitesV4PagePaginationArray, Site> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/rum/site_info/list`,
-      RUMSitesV4PagePaginationArray,
-      { query, ...options },
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/rum/site_info/list`, SitesV4PagePaginationArray, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -70,19 +65,19 @@ export class SiteInfo extends APIResource {
   /**
    * Retrieves a Web Analytics site.
    */
-  get(siteId: string, params: SiteInfoGetParams, options?: Core.RequestOptions): Core.APIPromise<RUMSite> {
+  get(siteId: string, params: SiteInfoGetParams, options?: Core.RequestOptions): Core.APIPromise<Site> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/rum/site_info/${siteId}`, options) as Core.APIPromise<{
-        result: RUMSite;
+        result: Site;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class RUMSitesV4PagePaginationArray extends V4PagePaginationArray<RUMSite> {}
+export class SitesV4PagePaginationArray extends V4PagePaginationArray<Site> {}
 
-export interface RUMSite {
+export interface Site {
   /**
    * If enabled, the JavaScript snippet is automatically injected for orange-clouded
    * sites.
@@ -94,9 +89,9 @@ export interface RUMSite {
   /**
    * A list of rules.
    */
-  rules?: Array<RulesAPI.RUMRule>;
+  rules?: Array<RulesAPI.Rule>;
 
-  ruleset?: RUMSite.Ruleset;
+  ruleset?: Site.Ruleset;
 
   /**
    * The Web Analytics site identifier.
@@ -114,7 +109,7 @@ export interface RUMSite {
   snippet?: string;
 }
 
-export namespace RUMSite {
+export namespace Site {
   export interface Ruleset {
     /**
      * The Web Analytics ruleset identifier.
@@ -215,9 +210,9 @@ export interface SiteInfoGetParams {
 }
 
 export namespace SiteInfo {
-  export import RUMSite = SiteInfoAPI.RUMSite;
+  export import Site = SiteInfoAPI.Site;
   export import SiteInfoDeleteResponse = SiteInfoAPI.SiteInfoDeleteResponse;
-  export import RUMSitesV4PagePaginationArray = SiteInfoAPI.RUMSitesV4PagePaginationArray;
+  export import SitesV4PagePaginationArray = SiteInfoAPI.SitesV4PagePaginationArray;
   export import SiteInfoCreateParams = SiteInfoAPI.SiteInfoCreateParams;
   export import SiteInfoUpdateParams = SiteInfoAPI.SiteInfoUpdateParams;
   export import SiteInfoListParams = SiteInfoAPI.SiteInfoListParams;

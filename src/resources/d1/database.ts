@@ -10,11 +10,14 @@ export class Database extends APIResource {
   /**
    * Returns the created D1 database.
    */
-  create(params: DatabaseCreateParams, options?: Core.RequestOptions): Core.APIPromise<D1CreateDatabase> {
+  create(
+    params: DatabaseCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DatabaseCreateResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/d1/database`, { body, ...options }) as Core.APIPromise<{
-        result: D1CreateDatabase;
+        result: DatabaseCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -25,11 +28,11 @@ export class Database extends APIResource {
   list(
     params: DatabaseListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<D1CreateDatabasesV4PagePaginationArray, D1CreateDatabase> {
+  ): Core.PagePromise<DatabaseListResponsesV4PagePaginationArray, DatabaseListResponse> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/d1/database`,
-      D1CreateDatabasesV4PagePaginationArray,
+      DatabaseListResponsesV4PagePaginationArray,
       { query, ...options },
     );
   }
@@ -57,12 +60,12 @@ export class Database extends APIResource {
     accountIdentifier: string,
     databaseIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<D1DatabaseDetails> {
+  ): Core.APIPromise<D1> {
     return (
       this._client.get(
         `/accounts/${accountIdentifier}/d1/database/${databaseIdentifier}`,
         options,
-      ) as Core.APIPromise<{ result: D1DatabaseDetails }>
+      ) as Core.APIPromise<{ result: D1 }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -84,22 +87,9 @@ export class Database extends APIResource {
   }
 }
 
-export class D1CreateDatabasesV4PagePaginationArray extends V4PagePaginationArray<D1CreateDatabase> {}
+export class DatabaseListResponsesV4PagePaginationArray extends V4PagePaginationArray<DatabaseListResponse> {}
 
-export interface D1CreateDatabase {
-  /**
-   * Specifies the timestamp the resource was created as an ISO8601 string.
-   */
-  created_at?: string;
-
-  name?: string;
-
-  uuid?: string;
-
-  version?: string;
-}
-
-export interface D1DatabaseDetails {
+export interface D1 {
   /**
    * Specifies the timestamp the resource was created as an ISO8601 string.
    */
@@ -119,15 +109,15 @@ export interface D1DatabaseDetails {
   version?: string;
 }
 
-export interface D1QueryResult {
-  meta?: D1QueryResult.Meta;
+export interface QueryResult {
+  meta?: QueryResult.Meta;
 
   results?: Array<unknown>;
 
   success?: boolean;
 }
 
-export namespace D1QueryResult {
+export namespace QueryResult {
   export interface Meta {
     changed_db?: boolean;
 
@@ -145,7 +135,33 @@ export namespace D1QueryResult {
   }
 }
 
-export type DatabaseQueryResponse = Array<D1QueryResult>;
+export interface DatabaseCreateResponse {
+  /**
+   * Specifies the timestamp the resource was created as an ISO8601 string.
+   */
+  created_at?: string;
+
+  name?: string;
+
+  uuid?: string;
+
+  version?: string;
+}
+
+export interface DatabaseListResponse {
+  /**
+   * Specifies the timestamp the resource was created as an ISO8601 string.
+   */
+  created_at?: string;
+
+  name?: string;
+
+  uuid?: string;
+
+  version?: string;
+}
+
+export type DatabaseQueryResponse = Array<QueryResult>;
 
 export interface DatabaseCreateParams {
   /**
@@ -178,11 +194,12 @@ export interface DatabaseQueryParams {
 }
 
 export namespace Database {
-  export import D1CreateDatabase = DatabaseAPI.D1CreateDatabase;
-  export import D1DatabaseDetails = DatabaseAPI.D1DatabaseDetails;
-  export import D1QueryResult = DatabaseAPI.D1QueryResult;
+  export import D1 = DatabaseAPI.D1;
+  export import QueryResult = DatabaseAPI.QueryResult;
+  export import DatabaseCreateResponse = DatabaseAPI.DatabaseCreateResponse;
+  export import DatabaseListResponse = DatabaseAPI.DatabaseListResponse;
   export import DatabaseQueryResponse = DatabaseAPI.DatabaseQueryResponse;
-  export import D1CreateDatabasesV4PagePaginationArray = DatabaseAPI.D1CreateDatabasesV4PagePaginationArray;
+  export import DatabaseListResponsesV4PagePaginationArray = DatabaseAPI.DatabaseListResponsesV4PagePaginationArray;
   export import DatabaseCreateParams = DatabaseAPI.DatabaseCreateParams;
   export import DatabaseListParams = DatabaseAPI.DatabaseListParams;
   export import DatabaseQueryParams = DatabaseAPI.DatabaseQueryParams;

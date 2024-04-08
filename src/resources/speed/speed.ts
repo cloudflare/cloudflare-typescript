@@ -2,7 +2,7 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as SpeedAPI from 'cloudflare/resources/speed/speed';
+import { Schedule } from './schedule';
 import * as AvailabilitiesAPI from 'cloudflare/resources/speed/availabilities';
 import * as PagesAPI from 'cloudflare/resources/speed/pages';
 import * as ScheduleAPI from 'cloudflare/resources/speed/schedule';
@@ -38,13 +38,13 @@ export class Speed extends APIResource {
     url: string,
     params: SpeedScheduleGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ObservatorySchedule> {
+  ): Core.APIPromise<Schedule> {
     const { zone_id, ...query } = params;
     return (
       this._client.get(`/zones/${zone_id}/speed_api/schedule/${url}`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: ObservatorySchedule }>
+      }) as Core.APIPromise<{ result: Schedule }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -55,21 +55,135 @@ export class Speed extends APIResource {
     url: string,
     params: SpeedTrendsListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ObservatoryTrend> {
+  ): Core.APIPromise<Trend> {
     const { zone_id, ...query } = params;
     return (
       this._client.get(`/zones/${zone_id}/speed_api/pages/${url}/trend`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: ObservatoryTrend }>
+      }) as Core.APIPromise<{ result: Trend }>
     )._thenUnwrap((obj) => obj.result);
+  }
+}
+
+/**
+ * A test region with a label.
+ */
+export interface LabeledRegion {
+  label?: string;
+
+  /**
+   * A test region.
+   */
+  value?:
+    | 'asia-east1'
+    | 'asia-northeast1'
+    | 'asia-northeast2'
+    | 'asia-south1'
+    | 'asia-southeast1'
+    | 'australia-southeast1'
+    | 'europe-north1'
+    | 'europe-southwest1'
+    | 'europe-west1'
+    | 'europe-west2'
+    | 'europe-west3'
+    | 'europe-west4'
+    | 'europe-west8'
+    | 'europe-west9'
+    | 'me-west1'
+    | 'southamerica-east1'
+    | 'us-central1'
+    | 'us-east1'
+    | 'us-east4'
+    | 'us-south1'
+    | 'us-west1';
+}
+
+/**
+ * The Lighthouse report.
+ */
+export interface LighthouseReport {
+  /**
+   * Cumulative Layout Shift.
+   */
+  cls?: number;
+
+  /**
+   * The type of device.
+   */
+  deviceType?: 'DESKTOP' | 'MOBILE';
+
+  error?: LighthouseReport.Error;
+
+  /**
+   * First Contentful Paint.
+   */
+  fcp?: number;
+
+  /**
+   * The URL to the full Lighthouse JSON report.
+   */
+  jsonReportUrl?: string;
+
+  /**
+   * Largest Contentful Paint.
+   */
+  lcp?: number;
+
+  /**
+   * The Lighthouse performance score.
+   */
+  performanceScore?: number;
+
+  /**
+   * Speed Index.
+   */
+  si?: number;
+
+  /**
+   * The state of the Lighthouse report.
+   */
+  state?: 'RUNNING' | 'COMPLETE' | 'FAILED';
+
+  /**
+   * Total Blocking Time.
+   */
+  tbt?: number;
+
+  /**
+   * Time To First Byte.
+   */
+  ttfb?: number;
+
+  /**
+   * Time To Interactive.
+   */
+  tti?: number;
+}
+
+export namespace LighthouseReport {
+  export interface Error {
+    /**
+     * The error code of the Lighthouse result.
+     */
+    code?: 'NOT_REACHABLE' | 'DNS_FAILURE' | 'NOT_HTML' | 'LIGHTHOUSE_TIMEOUT' | 'UNKNOWN';
+
+    /**
+     * Detailed error message.
+     */
+    detail?: string;
+
+    /**
+     * The final URL displayed to the user.
+     */
+    finalDisplayedUrl?: string;
   }
 }
 
 /**
  * The test schedule.
  */
-export interface ObservatorySchedule {
+export interface Schedule {
   /**
    * The frequency of the test.
    */
@@ -107,7 +221,7 @@ export interface ObservatorySchedule {
   url?: string;
 }
 
-export interface ObservatoryTrend {
+export interface Trend {
   /**
    * Cumulative Layout Shift trend.
    */
@@ -281,14 +395,8 @@ export interface SpeedTrendsListParams {
 }
 
 export namespace Speed {
-  export import ObservatorySchedule = SpeedAPI.ObservatorySchedule;
-  export import ObservatoryTrend = SpeedAPI.ObservatoryTrend;
-  export import SpeedDeleteResponse = SpeedAPI.SpeedDeleteResponse;
-  export import SpeedDeleteParams = SpeedAPI.SpeedDeleteParams;
-  export import SpeedScheduleGetParams = SpeedAPI.SpeedScheduleGetParams;
-  export import SpeedTrendsListParams = SpeedAPI.SpeedTrendsListParams;
   export import Tests = TestsAPI.Tests;
-  export import ObservatoryPageTest = TestsAPI.ObservatoryPageTest;
+  export import Test = TestsAPI.Test;
   export import TestListResponse = TestsAPI.TestListResponse;
   export import TestDeleteResponse = TestsAPI.TestDeleteResponse;
   export import TestCreateParams = TestsAPI.TestCreateParams;
@@ -299,7 +407,7 @@ export namespace Speed {
   export import ScheduleCreateResponse = ScheduleAPI.ScheduleCreateResponse;
   export import ScheduleCreateParams = ScheduleAPI.ScheduleCreateParams;
   export import Availabilities = AvailabilitiesAPI.Availabilities;
-  export import ObservatoryAvailabilities = AvailabilitiesAPI.ObservatoryAvailabilities;
+  export import Availability = AvailabilitiesAPI.Availability;
   export import AvailabilityListParams = AvailabilitiesAPI.AvailabilityListParams;
   export import Pages = PagesAPI.Pages;
   export import PageListResponse = PagesAPI.PageListResponse;

@@ -15,13 +15,13 @@ export class Prefixes extends APIResource {
   /**
    * Add a new prefix under the account.
    */
-  create(params: PrefixCreateParams, options?: Core.RequestOptions): Core.APIPromise<AddressingIpamPrefixes> {
+  create(params: PrefixCreateParams, options?: Core.RequestOptions): Core.APIPromise<Prefix> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/addressing/prefixes`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: AddressingIpamPrefixes }>
+      }) as Core.APIPromise<{ result: Prefix }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -31,11 +31,11 @@ export class Prefixes extends APIResource {
   list(
     params: PrefixListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<AddressingIpamPrefixesSinglePage, AddressingIpamPrefixes> {
+  ): Core.PagePromise<PrefixesSinglePage, Prefix> {
     const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/addressing/prefixes`,
-      AddressingIpamPrefixesSinglePage,
+      PrefixesSinglePage,
       options,
     );
   }
@@ -60,41 +60,33 @@ export class Prefixes extends APIResource {
   /**
    * Modify the description for a prefix owned by the account.
    */
-  edit(
-    prefixId: string,
-    params: PrefixEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AddressingIpamPrefixes> {
+  edit(prefixId: string, params: PrefixEditParams, options?: Core.RequestOptions): Core.APIPromise<Prefix> {
     const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/addressing/prefixes/${prefixId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: AddressingIpamPrefixes }>
+      }) as Core.APIPromise<{ result: Prefix }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List a particular prefix owned by the account.
    */
-  get(
-    prefixId: string,
-    params: PrefixGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AddressingIpamPrefixes> {
+  get(prefixId: string, params: PrefixGetParams, options?: Core.RequestOptions): Core.APIPromise<Prefix> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/addressing/prefixes/${prefixId}`,
         options,
-      ) as Core.APIPromise<{ result: AddressingIpamPrefixes }>
+      ) as Core.APIPromise<{ result: Prefix }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class AddressingIpamPrefixesSinglePage extends SinglePage<AddressingIpamPrefixes> {}
+export class PrefixesSinglePage extends SinglePage<Prefix> {}
 
-export interface AddressingIpamPrefixes {
+export interface Prefix {
   /**
    * Identifier
    */
@@ -285,9 +277,9 @@ export interface PrefixGetParams {
 }
 
 export namespace Prefixes {
-  export import AddressingIpamPrefixes = PrefixesAPI.AddressingIpamPrefixes;
+  export import Prefix = PrefixesAPI.Prefix;
   export import UnnamedSchemaRefE358666e049bf8f9281c0a4f89b5fe46 = PrefixesAPI.UnnamedSchemaRefE358666e049bf8f9281c0a4f89b5fe46;
-  export import AddressingIpamPrefixesSinglePage = PrefixesAPI.AddressingIpamPrefixesSinglePage;
+  export import PrefixesSinglePage = PrefixesAPI.PrefixesSinglePage;
   export import PrefixCreateParams = PrefixesAPI.PrefixCreateParams;
   export import PrefixListParams = PrefixesAPI.PrefixListParams;
   export import PrefixDeleteParams = PrefixesAPI.PrefixDeleteParams;
@@ -295,9 +287,8 @@ export namespace Prefixes {
   export import PrefixGetParams = PrefixesAPI.PrefixGetParams;
   export import BGP = BGPAPI.BGP;
   export import Delegations = DelegationsAPI.Delegations;
-  export import AddressingIpamDelegations = DelegationsAPI.AddressingIpamDelegations;
   export import DelegationDeleteResponse = DelegationsAPI.DelegationDeleteResponse;
-  export import AddressingIpamDelegationsSinglePage = DelegationsAPI.AddressingIpamDelegationsSinglePage;
+  export import DelegationsSinglePage = DelegationsAPI.DelegationsSinglePage;
   export import DelegationCreateParams = DelegationsAPI.DelegationCreateParams;
   export import DelegationListParams = DelegationsAPI.DelegationListParams;
   export import DelegationDeleteParams = DelegationsAPI.DelegationDeleteParams;

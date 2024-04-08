@@ -16,17 +16,17 @@ export class Reports extends APIResource {
    * [Analytics API properties](https://developers.cloudflare.com/dns/reference/analytics-api-properties/)
    * for detailed information about the available query parameters.
    */
-  get(params: ReportGetParams, options?: Core.RequestOptions): Core.APIPromise<DNSAnalyticsReport> {
+  get(params: ReportGetParams, options?: Core.RequestOptions): Core.APIPromise<Report> {
     const { zone_id, ...query } = params;
     return (
       this._client.get(`/zones/${zone_id}/dns_analytics/report`, { query, ...options }) as Core.APIPromise<{
-        result: DNSAnalyticsReport;
+        result: Report;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface DNSAnalyticsReport {
+export interface Report {
   /**
    * Array with one row per combination of dimension values.
    */
@@ -50,7 +50,7 @@ export interface DNSAnalyticsReport {
    */
   min: unknown;
 
-  query: DNSAnalyticsReport.Query;
+  query: Report.Query;
 
   /**
    * Total number of rows in the result.
@@ -64,7 +64,7 @@ export interface DNSAnalyticsReport {
   totals: unknown;
 }
 
-export namespace DNSAnalyticsReport {
+export namespace Report {
   export interface Query {
     /**
      * Array of dimension names.
@@ -148,9 +148,9 @@ export interface ReportGetParams {
 }
 
 export namespace Reports {
-  export import DNSAnalyticsReport = ReportsAPI.DNSAnalyticsReport;
+  export import Report = ReportsAPI.Report;
   export import ReportGetParams = ReportsAPI.ReportGetParams;
   export import Bytimes = BytimesAPI.Bytimes;
-  export import DNSAnalyticsReportByTime = BytimesAPI.DNSAnalyticsReportByTime;
+  export import ByTime = BytimesAPI.ByTime;
   export import BytimeGetParams = BytimesAPI.BytimeGetParams;
 }

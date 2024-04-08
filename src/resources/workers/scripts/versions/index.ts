@@ -1,8 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  SettingEditResponse,
-  SettingGetResponse,
+  BindingItem,
+  CompatibilityFlagsItem,
+  SettingsItem,
+  TagsItem,
   SettingEditParams,
   SettingGetParams,
   Settings,

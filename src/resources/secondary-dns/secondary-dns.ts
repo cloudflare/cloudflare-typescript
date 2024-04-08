@@ -9,7 +9,7 @@ import * as TSIGsAPI from 'cloudflare/resources/secondary-dns/tsigs';
 import * as OutgoingAPI from 'cloudflare/resources/secondary-dns/outgoing/outgoing';
 
 export class SecondaryDNS extends APIResource {
-  forceAXFR: ForceAXFRAPI.ForceAXFR = new ForceAXFRAPI.ForceAXFR(this._client);
+  forceAXFR: ForceAXFRAPI.ForceAXFRResource = new ForceAXFRAPI.ForceAXFRResource(this._client);
   incoming: IncomingAPI.Incoming = new IncomingAPI.Incoming(this._client);
   outgoing: OutgoingAPI.Outgoing = new OutgoingAPI.Outgoing(this._client);
   acls: ACLsAPI.ACLs = new ACLsAPI.ACLs(this._client);
@@ -18,8 +18,8 @@ export class SecondaryDNS extends APIResource {
 }
 
 export namespace SecondaryDNS {
+  export import ForceAXFRResource = ForceAXFRAPI.ForceAXFRResource;
   export import ForceAXFR = ForceAXFRAPI.ForceAXFR;
-  export import SecondaryDNSForce = ForceAXFRAPI.SecondaryDNSForce;
   export import ForceAXFRCreateParams = ForceAXFRAPI.ForceAXFRCreateParams;
   export import Incoming = IncomingAPI.Incoming;
   export import UnnamedSchemaRef150c555e27f53dbb40cdce4d6644ff0a = IncomingAPI.UnnamedSchemaRef150c555e27f53dbb40cdce4d6644ff0a;
@@ -32,8 +32,8 @@ export namespace SecondaryDNS {
   export import IncomingDeleteParams = IncomingAPI.IncomingDeleteParams;
   export import IncomingGetParams = IncomingAPI.IncomingGetParams;
   export import Outgoing = OutgoingAPI.Outgoing;
-  export import SecondaryDNSDisableTransfer = OutgoingAPI.SecondaryDNSDisableTransfer;
-  export import SecondaryDNSEnableTransfer = OutgoingAPI.SecondaryDNSEnableTransfer;
+  export import DisableTransfer = OutgoingAPI.DisableTransfer;
+  export import EnableTransfer = OutgoingAPI.EnableTransfer;
   export import UnnamedSchemaRef0e152c3e4c55b8a0ca6531578a42c564 = OutgoingAPI.UnnamedSchemaRef0e152c3e4c55b8a0ca6531578a42c564;
   export import UnnamedSchemaRefBf34e74a34c9a2f63d85505dc69d4adc = OutgoingAPI.UnnamedSchemaRefBf34e74a34c9a2f63d85505dc69d4adc;
   export import OutgoingCreateResponse = OutgoingAPI.OutgoingCreateResponse;
@@ -49,30 +49,30 @@ export namespace SecondaryDNS {
   export import OutgoingForceNotifyParams = OutgoingAPI.OutgoingForceNotifyParams;
   export import OutgoingGetParams = OutgoingAPI.OutgoingGetParams;
   export import ACLs = ACLsAPI.ACLs;
-  export import SecondaryDNSACL = ACLsAPI.SecondaryDNSACL;
+  export import ACL = ACLsAPI.ACL;
   export import UnnamedSchemaRef08eaa2f22bb9ce0f80063d710d4edafd = ACLsAPI.UnnamedSchemaRef08eaa2f22bb9ce0f80063d710d4edafd;
   export import ACLDeleteResponse = ACLsAPI.ACLDeleteResponse;
-  export import SecondaryDnsaclsSinglePage = ACLsAPI.SecondaryDnsaclsSinglePage;
+  export import ACLsSinglePage = ACLsAPI.ACLsSinglePage;
   export import ACLCreateParams = ACLsAPI.ACLCreateParams;
   export import ACLUpdateParams = ACLsAPI.ACLUpdateParams;
   export import ACLListParams = ACLsAPI.ACLListParams;
   export import ACLDeleteParams = ACLsAPI.ACLDeleteParams;
   export import ACLGetParams = ACLsAPI.ACLGetParams;
   export import Peers = PeersAPI.Peers;
-  export import SecondaryDNSPeer = PeersAPI.SecondaryDNSPeer;
+  export import Peer = PeersAPI.Peer;
   export import UnnamedSchemaRefBc727f0a53d75f2b531245a82603fbe0 = PeersAPI.UnnamedSchemaRefBc727f0a53d75f2b531245a82603fbe0;
   export import PeerDeleteResponse = PeersAPI.PeerDeleteResponse;
-  export import SecondaryDNSPeersSinglePage = PeersAPI.SecondaryDNSPeersSinglePage;
+  export import PeersSinglePage = PeersAPI.PeersSinglePage;
   export import PeerCreateParams = PeersAPI.PeerCreateParams;
   export import PeerUpdateParams = PeersAPI.PeerUpdateParams;
   export import PeerListParams = PeersAPI.PeerListParams;
   export import PeerDeleteParams = PeersAPI.PeerDeleteParams;
   export import PeerGetParams = PeersAPI.PeerGetParams;
   export import TSIGs = TSIGsAPI.TSIGs;
-  export import SecondaryDNSTSIG = TSIGsAPI.SecondaryDNSTSIG;
+  export import TSIG = TSIGsAPI.TSIG;
   export import UnnamedSchemaRefC3d6ffaf5dde0c570eaa72462c2ee738 = TSIGsAPI.UnnamedSchemaRefC3d6ffaf5dde0c570eaa72462c2ee738;
   export import TSIGDeleteResponse = TSIGsAPI.TSIGDeleteResponse;
-  export import SecondaryDnstsigsSinglePage = TSIGsAPI.SecondaryDnstsigsSinglePage;
+  export import TSIGsSinglePage = TSIGsAPI.TSIGsSinglePage;
   export import TSIGCreateParams = TSIGsAPI.TSIGCreateParams;
   export import TSIGUpdateParams = TSIGsAPI.TSIGUpdateParams;
   export import TSIGListParams = TSIGsAPI.TSIGListParams;

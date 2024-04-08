@@ -13,13 +13,13 @@ export class TLS extends APIResource {
     hostname: string,
     params: TLSUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<HostnameStting> {
+  ): Core.APIPromise<Setting> {
     const { zone_id, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/hostnames/settings/${settingId}/${hostname}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: HostnameStting }>
+      }) as Core.APIPromise<{ result: Setting }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -31,13 +31,13 @@ export class TLS extends APIResource {
     hostname: string,
     params: TLSDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<HostnameSettingDelete> {
+  ): Core.APIPromise<TLSDeleteResponse> {
     const { zone_id } = params;
     return (
       this._client.delete(
         `/zones/${zone_id}/hostnames/settings/${settingId}/${hostname}`,
         options,
-      ) as Core.APIPromise<{ result: HostnameSettingDelete }>
+      ) as Core.APIPromise<{ result: TLSDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -58,28 +58,7 @@ export class TLS extends APIResource {
   }
 }
 
-export interface HostnameSettingDelete {
-  /**
-   * This is the time the tls setting was originally created for this hostname.
-   */
-  created_at?: string;
-
-  /**
-   * The hostname for which the tls settings are set.
-   */
-  hostname?: string;
-
-  status?: string;
-
-  /**
-   * This is the time the tls setting was updated.
-   */
-  updated_at?: string;
-
-  value?: string;
-}
-
-export interface HostnameStting {
+export interface Setting {
   /**
    * This is the time the tls setting was originally created for this hostname.
    */
@@ -103,7 +82,33 @@ export interface HostnameStting {
   /**
    * The tls setting value.
    */
-  value?: number | string | Array<string>;
+  value?: SettingValue;
+}
+
+/**
+ * The tls setting value.
+ */
+export type SettingValue = number | string | Array<string>;
+
+export interface TLSDeleteResponse {
+  /**
+   * This is the time the tls setting was originally created for this hostname.
+   */
+  created_at?: string;
+
+  /**
+   * The hostname for which the tls settings are set.
+   */
+  hostname?: string;
+
+  status?: string;
+
+  /**
+   * This is the time the tls setting was updated.
+   */
+  updated_at?: string;
+
+  value?: string;
 }
 
 export type TLSGetResponse = Array<TLSGetResponse.TLSGetResponseItem>;
@@ -133,7 +138,7 @@ export namespace TLSGetResponse {
     /**
      * The tls setting value.
      */
-    value?: number | string | Array<string>;
+    value?: TLSAPI.SettingValue;
   }
 }
 
@@ -146,7 +151,7 @@ export interface TLSUpdateParams {
   /**
    * Body param: The tls setting value.
    */
-  value: number | string | Array<string>;
+  value: SettingValue;
 }
 
 export interface TLSDeleteParams {
@@ -164,8 +169,9 @@ export interface TLSGetParams {
 }
 
 export namespace TLS {
-  export import HostnameSettingDelete = TLSAPI.HostnameSettingDelete;
-  export import HostnameStting = TLSAPI.HostnameStting;
+  export import Setting = TLSAPI.Setting;
+  export import SettingValue = TLSAPI.SettingValue;
+  export import TLSDeleteResponse = TLSAPI.TLSDeleteResponse;
   export import TLSGetResponse = TLSAPI.TLSGetResponse;
   export import TLSUpdateParams = TLSAPI.TLSUpdateParams;
   export import TLSDeleteParams = TLSAPI.TLSDeleteParams;

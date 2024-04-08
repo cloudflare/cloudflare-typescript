@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
-import * as URLScannerAPI from 'cloudflare/resources/url-scanner/url-scanner';
 import * as ScansAPI from 'cloudflare/resources/url-scanner/scans';
 
 export class URLScanner extends APIResource {
@@ -171,8 +170,6 @@ export interface URLScannerScanParams {
 }
 
 export namespace URLScanner {
-  export import URLScannerScanResponse = URLScannerAPI.URLScannerScanResponse;
-  export import URLScannerScanParams = URLScannerAPI.URLScannerScanParams;
   export import Scans = ScansAPI.Scans;
   export import UnnamedSchemaRef3750739f772bbdf0bb00d6634ccc0631 = ScansAPI.UnnamedSchemaRef3750739f772bbdf0bb00d6634ccc0631;
   export import UnnamedSchemaRef6d7a78acccfc753a8e931b1c4e72b6a6 = ScansAPI.UnnamedSchemaRef6d7a78acccfc753a8e931b1c4e72b6a6;

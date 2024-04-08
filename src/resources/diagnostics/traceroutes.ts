@@ -22,8 +22,8 @@ export class Traceroutes extends APIResource {
   }
 }
 
-export interface MagicTransitTargetResult {
-  colos?: Array<MagicTransitTargetResult.Colo>;
+export interface Traceroute {
+  colos?: Array<Traceroute.Colo>;
 
   /**
    * The target hostname, IPv6, or IPv6 address.
@@ -31,7 +31,7 @@ export interface MagicTransitTargetResult {
   target?: string;
 }
 
-export namespace MagicTransitTargetResult {
+export namespace Traceroute {
   export interface Colo {
     colo?: Colo.Colo;
 
@@ -146,7 +146,7 @@ export namespace MagicTransitTargetResult {
   }
 }
 
-export type TracerouteCreateResponse = Array<MagicTransitTargetResult>;
+export type TracerouteCreateResponse = Array<Traceroute>;
 
 export interface TracerouteCreateParams {
   /**
@@ -203,7 +203,7 @@ export namespace TracerouteCreateParams {
 }
 
 export namespace Traceroutes {
-  export import MagicTransitTargetResult = TraceroutesAPI.MagicTransitTargetResult;
+  export import Traceroute = TraceroutesAPI.Traceroute;
   export import TracerouteCreateResponse = TraceroutesAPI.TracerouteCreateResponse;
   export import TracerouteCreateParams = TraceroutesAPI.TracerouteCreateParams;
 }

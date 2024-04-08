@@ -12,10 +12,4 @@ export {
   NamespaceListResponsesSinglePage,
   Namespaces,
 } from './namespaces';
-export {
-  WorkersForPlatformsNamespaceScript,
-  ScriptUpdateParams,
-  ScriptDeleteParams,
-  ScriptGetParams,
-  Scripts,
-} from './scripts/index';
+export { Script, ScriptUpdateParams, ScriptDeleteParams, ScriptGetParams, Scripts } from './scripts/index';

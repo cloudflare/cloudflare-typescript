@@ -27,12 +27,9 @@ export class Devices extends APIResource {
   /**
    * Fetches a list of enrolled devices.
    */
-  list(
-    params: DeviceListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<ZeroTrustDevicesSinglePage, ZeroTrustDevices> {
+  list(params: DeviceListParams, options?: Core.RequestOptions): Core.PagePromise<DevicesSinglePage, Device> {
     const { account_id } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/devices`, ZeroTrustDevicesSinglePage, options);
+    return this._client.getAPIList(`/accounts/${account_id}/devices`, DevicesSinglePage, options);
   }
 
   /**
@@ -52,9 +49,9 @@ export class Devices extends APIResource {
   }
 }
 
-export class ZeroTrustDevicesSinglePage extends SinglePage<ZeroTrustDevices> {}
+export class DevicesSinglePage extends SinglePage<Device> {}
 
-export interface ZeroTrustDevices {
+export interface Device {
   /**
    * Device ID.
    */
@@ -142,7 +139,7 @@ export interface ZeroTrustDevices {
    */
   updated?: string;
 
-  user?: ZeroTrustDevices.User;
+  user?: Device.User;
 
   /**
    * The WARP client version.
@@ -150,7 +147,7 @@ export interface ZeroTrustDevices {
   version?: string;
 }
 
-export namespace ZeroTrustDevices {
+export namespace Device {
   export interface User {
     /**
      * UUID
@@ -178,42 +175,45 @@ export interface DeviceGetParams {
 }
 
 export namespace Devices {
-  export import ZeroTrustDevices = DevicesAPI.ZeroTrustDevices;
-  export import ZeroTrustDevicesSinglePage = DevicesAPI.ZeroTrustDevicesSinglePage;
+  export import Device = DevicesAPI.Device;
+  export import DevicesSinglePage = DevicesAPI.DevicesSinglePage;
   export import DeviceListParams = DevicesAPI.DeviceListParams;
   export import DeviceGetParams = DevicesAPI.DeviceGetParams;
   export import DEXTests = DEXTestsAPI.DEXTests;
-  export import DEXTestSchemasHTTP = DEXTestsAPI.DEXTestSchemasHTTP;
+  export import SchemaData = DEXTestsAPI.SchemaData;
+  export import SchemaHTTP = DEXTestsAPI.SchemaHTTP;
   export import UnnamedSchemaRef15fd6ef0641450fd873ffb71715170c9 = DEXTestsAPI.UnnamedSchemaRef15fd6ef0641450fd873ffb71715170c9;
   export import DEXTestDeleteResponse = DEXTestsAPI.DEXTestDeleteResponse;
-  export import DEXTestSchemasHTTPSSinglePage = DEXTestsAPI.DEXTestSchemasHTTPSSinglePage;
+  export import SchemaHTTPSSinglePage = DEXTestsAPI.SchemaHTTPSSinglePage;
   export import DEXTestCreateParams = DEXTestsAPI.DEXTestCreateParams;
   export import DEXTestUpdateParams = DEXTestsAPI.DEXTestUpdateParams;
   export import DEXTestListParams = DEXTestsAPI.DEXTestListParams;
   export import DEXTestDeleteParams = DEXTestsAPI.DEXTestDeleteParams;
   export import DEXTestGetParams = DEXTestsAPI.DEXTestGetParams;
   export import Networks = NetworksAPI.Networks;
-  export import DeviceManagedNetworks = NetworksAPI.DeviceManagedNetworks;
+  export import Network = NetworksAPI.Network;
   export import UnnamedSchemaRefD2b048663faf5e0cd5c90501b71171de = NetworksAPI.UnnamedSchemaRefD2b048663faf5e0cd5c90501b71171de;
   export import NetworkDeleteResponse = NetworksAPI.NetworkDeleteResponse;
-  export import DeviceManagedNetworksSinglePage = NetworksAPI.DeviceManagedNetworksSinglePage;
+  export import NetworksSinglePage = NetworksAPI.NetworksSinglePage;
   export import NetworkCreateParams = NetworksAPI.NetworkCreateParams;
   export import NetworkUpdateParams = NetworksAPI.NetworkUpdateParams;
   export import NetworkListParams = NetworksAPI.NetworkListParams;
   export import NetworkDeleteParams = NetworksAPI.NetworkDeleteParams;
   export import NetworkGetParams = NetworksAPI.NetworkGetParams;
   export import Policies = PoliciesAPI.Policies;
-  export import DevicesDeviceSettingsPolicy = PoliciesAPI.DevicesDeviceSettingsPolicy;
+  export import SettingsPolicy = PoliciesAPI.SettingsPolicy;
   export import UnnamedSchemaRefF636ff9f2cb41ff4b715cf8ed8515581 = PoliciesAPI.UnnamedSchemaRefF636ff9f2cb41ff4b715cf8ed8515581;
   export import PolicyDeleteResponse = PoliciesAPI.PolicyDeleteResponse;
-  export import DevicesDeviceSettingsPoliciesSinglePage = PoliciesAPI.DevicesDeviceSettingsPoliciesSinglePage;
+  export import SettingsPoliciesSinglePage = PoliciesAPI.SettingsPoliciesSinglePage;
   export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
   export import PolicyListParams = PoliciesAPI.PolicyListParams;
   export import PolicyDeleteParams = PoliciesAPI.PolicyDeleteParams;
   export import PolicyEditParams = PoliciesAPI.PolicyEditParams;
   export import PolicyGetParams = PoliciesAPI.PolicyGetParams;
   export import Posture = PostureAPI.Posture;
-  export import DevicePostureRules = PostureAPI.DevicePostureRules;
+  export import DevicePostureRule = PostureAPI.DevicePostureRule;
+  export import Input = PostureAPI.Input;
+  export import MatchItem = PostureAPI.MatchItem;
   export import UnnamedSchemaRef34ef0ad73a63c3f76ed170adca181930 = PostureAPI.UnnamedSchemaRef34ef0ad73a63c3f76ed170adca181930;
   export import UnnamedSchemaRef41885dd46b9e0294254c49305a273681 = PostureAPI.UnnamedSchemaRef41885dd46b9e0294254c49305a273681;
   export import UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27 = PostureAPI.UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27;
@@ -227,7 +227,6 @@ export namespace Devices {
   export import Revoke = RevokeAPI.Revoke;
   export import RevokeCreateParams = RevokeAPI.RevokeCreateParams;
   export import Settings = SettingsAPI.Settings;
-  export import ZeroTrustAccountDeviceSettings = SettingsAPI.ZeroTrustAccountDeviceSettings;
   export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;
   export import SettingListParams = SettingsAPI.SettingListParams;
   export import Unrevoke = UnrevokeAPI.Unrevoke;

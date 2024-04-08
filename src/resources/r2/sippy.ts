@@ -4,7 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as SippyAPI from 'cloudflare/resources/r2/sippy';
 
-export class Sippy extends APIResource {
+export class SippyResource extends APIResource {
   /**
    * Sets configuration for Sippy for an existing R2 bucket.
    */
@@ -12,13 +12,13 @@ export class Sippy extends APIResource {
     bucketName: string,
     params: SippyUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<R2Sippy> {
+  ): Core.APIPromise<Sippy> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/r2/buckets/${bucketName}/sippy`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: R2Sippy }>
+      }) as Core.APIPromise<{ result: Sippy }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -42,21 +42,21 @@ export class Sippy extends APIResource {
   /**
    * Gets configuration for Sippy for an existing R2 bucket.
    */
-  get(bucketName: string, params: SippyGetParams, options?: Core.RequestOptions): Core.APIPromise<R2Sippy> {
+  get(bucketName: string, params: SippyGetParams, options?: Core.RequestOptions): Core.APIPromise<Sippy> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/r2/buckets/${bucketName}/sippy`, options) as Core.APIPromise<{
-        result: R2Sippy;
+        result: Sippy;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface R2Sippy {
+export interface Sippy {
   /**
    * Details about the configured destination bucket
    */
-  destination?: R2Sippy.Destination;
+  destination?: Sippy.Destination;
 
   /**
    * State of Sippy for this bucket
@@ -66,10 +66,10 @@ export interface R2Sippy {
   /**
    * Details about the configured source bucket
    */
-  source?: R2Sippy.Source;
+  source?: Sippy.Source;
 }
 
-export namespace R2Sippy {
+export namespace Sippy {
   /**
    * Details about the configured destination bucket
    */
@@ -272,8 +272,8 @@ export interface SippyGetParams {
   account_id: string;
 }
 
-export namespace Sippy {
-  export import R2Sippy = SippyAPI.R2Sippy;
+export namespace SippyResource {
+  export import Sippy = SippyAPI.Sippy;
   export import UnnamedSchemaRef6430970563db310f19d39aafe3debd27 = SippyAPI.UnnamedSchemaRef6430970563db310f19d39aafe3debd27;
   export import SippyDeleteResponse = SippyAPI.SippyDeleteResponse;
   export import SippyUpdateParams = SippyAPI.SippyUpdateParams;

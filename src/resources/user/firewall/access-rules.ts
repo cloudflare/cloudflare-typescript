@@ -13,10 +13,13 @@ export class AccessRules extends APIResource {
    * Note: To create an IP Access rule that applies to a specific zone, refer to the
    * [IP Access rules for a zone](#ip-access-rules-for-a-zone) endpoints.
    */
-  create(body: AccessRuleCreateParams, options?: Core.RequestOptions): Core.APIPromise<AccessRule | null> {
+  create(
+    body: AccessRuleCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AccessRuleCreateResponse> {
     return (
       this._client.post('/user/firewall/access_rules/rules', { body, ...options }) as Core.APIPromise<{
-        result: AccessRule | null;
+        result: AccessRuleCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -28,19 +31,22 @@ export class AccessRules extends APIResource {
   list(
     query?: AccessRuleListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<AccessRulesV4PagePaginationArray, AccessRule>;
-  list(options?: Core.RequestOptions): Core.PagePromise<AccessRulesV4PagePaginationArray, AccessRule>;
+  ): Core.PagePromise<AccessRuleListResponsesV4PagePaginationArray, AccessRuleListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<AccessRuleListResponsesV4PagePaginationArray, AccessRuleListResponse>;
   list(
     query: AccessRuleListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<AccessRulesV4PagePaginationArray, AccessRule> {
+  ): Core.PagePromise<AccessRuleListResponsesV4PagePaginationArray, AccessRuleListResponse> {
     if (isRequestOptions(query)) {
       return this.list({}, query);
     }
-    return this._client.getAPIList('/user/firewall/access_rules/rules', AccessRulesV4PagePaginationArray, {
-      query,
-      ...options,
-    });
+    return this._client.getAPIList(
+      '/user/firewall/access_rules/rules',
+      AccessRuleListResponsesV4PagePaginationArray,
+      { query, ...options },
+    );
   }
 
   /**
@@ -52,12 +58,12 @@ export class AccessRules extends APIResource {
     identifier: string,
     body: AccessRuleDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessRuleDeleteResponse | null> {
+  ): Core.APIPromise<AccessRuleDeleteResponse> {
     return (
       this._client.delete(`/user/firewall/access_rules/rules/${identifier}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: AccessRuleDeleteResponse | null }>
+      }) as Core.APIPromise<{ result: AccessRuleDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -69,19 +75,19 @@ export class AccessRules extends APIResource {
     identifier: string,
     body: AccessRuleEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessRule | null> {
+  ): Core.APIPromise<AccessRuleEditResponse> {
     return (
       this._client.patch(`/user/firewall/access_rules/rules/${identifier}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: AccessRule | null }>
+      }) as Core.APIPromise<{ result: AccessRuleEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class AccessRulesV4PagePaginationArray extends V4PagePaginationArray<AccessRule> {}
+export class AccessRuleListResponsesV4PagePaginationArray extends V4PagePaginationArray<AccessRuleListResponse> {}
 
-export interface AccessRule {
+export interface AccessRuleCreateResponse {
   /**
    * The unique identifier of the IP Access rule.
    */
@@ -96,11 +102,11 @@ export interface AccessRule {
    * The rule configuration.
    */
   configuration:
-    | AccessRule.LegacyJhsIPConfiguration
-    | AccessRule.LegacyJhsIPV6Configuration
-    | AccessRule.LegacyJhsCIDRConfiguration
-    | AccessRule.LegacyJhsASNConfiguration
-    | AccessRule.LegacyJhsCountryConfiguration;
+    | AccessRuleCreateResponse.FirewallIPConfiguration
+    | AccessRuleCreateResponse.FirewallIPV6Configuration
+    | AccessRuleCreateResponse.FirewallCIDRConfiguration
+    | AccessRuleCreateResponse.FirewallASNConfiguration
+    | AccessRuleCreateResponse.FirewallCountryConfiguration;
 
   /**
    * The action to apply to a matched request.
@@ -123,8 +129,8 @@ export interface AccessRule {
   notes?: string;
 }
 
-export namespace AccessRule {
-  export interface LegacyJhsIPConfiguration {
+export namespace AccessRuleCreateResponse {
+  export interface FirewallIPConfiguration {
     /**
      * The configuration target. You must set the target to `ip` when specifying an IP
      * address in the rule.
@@ -138,7 +144,7 @@ export namespace AccessRule {
     value?: string;
   }
 
-  export interface LegacyJhsIPV6Configuration {
+  export interface FirewallIPV6Configuration {
     /**
      * The configuration target. You must set the target to `ip6` when specifying an
      * IPv6 address in the rule.
@@ -151,7 +157,7 @@ export namespace AccessRule {
     value?: string;
   }
 
-  export interface LegacyJhsCIDRConfiguration {
+  export interface FirewallCIDRConfiguration {
     /**
      * The configuration target. You must set the target to `ip_range` when specifying
      * an IP address range in the rule.
@@ -165,7 +171,7 @@ export namespace AccessRule {
     value?: string;
   }
 
-  export interface LegacyJhsASNConfiguration {
+  export interface FirewallASNConfiguration {
     /**
      * The configuration target. You must set the target to `asn` when specifying an
      * Autonomous System Number (ASN) in the rule.
@@ -178,7 +184,119 @@ export namespace AccessRule {
     value?: string;
   }
 
-  export interface LegacyJhsCountryConfiguration {
+  export interface FirewallCountryConfiguration {
+    /**
+     * The configuration target. You must set the target to `country` when specifying a
+     * country code in the rule.
+     */
+    target?: 'country';
+
+    /**
+     * The two-letter ISO-3166-1 alpha-2 code to match. For more information, refer to
+     * [IP Access rules: Parameters](https://developers.cloudflare.com/waf/tools/ip-access-rules/parameters/#country).
+     */
+    value?: string;
+  }
+}
+
+export interface AccessRuleListResponse {
+  /**
+   * The unique identifier of the IP Access rule.
+   */
+  id: string;
+
+  /**
+   * The available actions that a rule can apply to a matched request.
+   */
+  allowed_modes: Array<'block' | 'challenge' | 'whitelist' | 'js_challenge' | 'managed_challenge'>;
+
+  /**
+   * The rule configuration.
+   */
+  configuration:
+    | AccessRuleListResponse.FirewallIPConfiguration
+    | AccessRuleListResponse.FirewallIPV6Configuration
+    | AccessRuleListResponse.FirewallCIDRConfiguration
+    | AccessRuleListResponse.FirewallASNConfiguration
+    | AccessRuleListResponse.FirewallCountryConfiguration;
+
+  /**
+   * The action to apply to a matched request.
+   */
+  mode: 'block' | 'challenge' | 'whitelist' | 'js_challenge' | 'managed_challenge';
+
+  /**
+   * The timestamp of when the rule was created.
+   */
+  created_on?: string;
+
+  /**
+   * The timestamp of when the rule was last modified.
+   */
+  modified_on?: string;
+
+  /**
+   * An informative summary of the rule, typically used as a reminder or explanation.
+   */
+  notes?: string;
+}
+
+export namespace AccessRuleListResponse {
+  export interface FirewallIPConfiguration {
+    /**
+     * The configuration target. You must set the target to `ip` when specifying an IP
+     * address in the rule.
+     */
+    target?: 'ip';
+
+    /**
+     * The IP address to match. This address will be compared to the IP address of
+     * incoming requests.
+     */
+    value?: string;
+  }
+
+  export interface FirewallIPV6Configuration {
+    /**
+     * The configuration target. You must set the target to `ip6` when specifying an
+     * IPv6 address in the rule.
+     */
+    target?: 'ip6';
+
+    /**
+     * The IPv6 address to match.
+     */
+    value?: string;
+  }
+
+  export interface FirewallCIDRConfiguration {
+    /**
+     * The configuration target. You must set the target to `ip_range` when specifying
+     * an IP address range in the rule.
+     */
+    target?: 'ip_range';
+
+    /**
+     * The IP address range to match. You can only use prefix lengths `/16` and `/24`
+     * for IPv4 ranges, and prefix lengths `/32`, `/48`, and `/64` for IPv6 ranges.
+     */
+    value?: string;
+  }
+
+  export interface FirewallASNConfiguration {
+    /**
+     * The configuration target. You must set the target to `asn` when specifying an
+     * Autonomous System Number (ASN) in the rule.
+     */
+    target?: 'asn';
+
+    /**
+     * The AS number to match.
+     */
+    value?: string;
+  }
+
+  export interface FirewallCountryConfiguration {
     /**
      * The configuration target. You must set the target to `country` when specifying a
      * country code in the rule.
@@ -200,16 +318,26 @@ export interface AccessRuleDeleteResponse {
   id?: string;
 }
 
-export interface AccessRuleCreateParams {
+export interface AccessRuleEditResponse {
+  /**
+   * The unique identifier of the IP Access rule.
+   */
+  id: string;
+
+  /**
+   * The available actions that a rule can apply to a matched request.
+   */
+  allowed_modes: Array<'block' | 'challenge' | 'whitelist' | 'js_challenge' | 'managed_challenge'>;
+
   /**
    * The rule configuration.
    */
   configuration:
-    | AccessRuleCreateParams.LegacyJhsIPConfiguration
-    | AccessRuleCreateParams.LegacyJhsIPV6Configuration
-    | AccessRuleCreateParams.LegacyJhsCIDRConfiguration
-    | AccessRuleCreateParams.LegacyJhsASNConfiguration
-    | AccessRuleCreateParams.LegacyJhsCountryConfiguration;
+    | AccessRuleEditResponse.FirewallIPConfiguration
+    | AccessRuleEditResponse.FirewallIPV6Configuration
+    | AccessRuleEditResponse.FirewallCIDRConfiguration
+    | AccessRuleEditResponse.FirewallASNConfiguration
+    | AccessRuleEditResponse.FirewallCountryConfiguration;
 
   /**
    * The action to apply to a matched request.
@@ -217,13 +345,23 @@ export interface AccessRuleCreateParams {
   mode: 'block' | 'challenge' | 'whitelist' | 'js_challenge' | 'managed_challenge';
 
   /**
+   * The timestamp of when the rule was created.
+   */
+  created_on?: string;
+
+  /**
+   * The timestamp of when the rule was last modified.
+   */
+  modified_on?: string;
+
+  /**
    * An informative summary of the rule, typically used as a reminder or explanation.
    */
   notes?: string;
 }
 
-export namespace AccessRuleCreateParams {
-  export interface LegacyJhsIPConfiguration {
+export namespace AccessRuleEditResponse {
+  export interface FirewallIPConfiguration {
     /**
      * The configuration target. You must set the target to `ip` when specifying an IP
      * address in the rule.
@@ -237,7 +375,7 @@ export namespace AccessRuleCreateParams {
     value?: string;
   }
 
-  export interface LegacyJhsIPV6Configuration {
+  export interface FirewallIPV6Configuration {
     /**
      * The configuration target. You must set the target to `ip6` when specifying an
      * IPv6 address in the rule.
@@ -250,7 +388,7 @@ export namespace AccessRuleCreateParams {
     value?: string;
   }
 
-  export interface LegacyJhsCIDRConfiguration {
+  export interface FirewallCIDRConfiguration {
     /**
      * The configuration target. You must set the target to `ip_range` when specifying
      * an IP address range in the rule.
@@ -264,7 +402,7 @@ export namespace AccessRuleCreateParams {
     value?: string;
   }
 
-  export interface LegacyJhsASNConfiguration {
+  export interface FirewallASNConfiguration {
     /**
      * The configuration target. You must set the target to `asn` when specifying an
      * Autonomous System Number (ASN) in the rule.
@@ -277,7 +415,99 @@ export namespace AccessRuleCreateParams {
     value?: string;
   }
 
-  export interface LegacyJhsCountryConfiguration {
+  export interface FirewallCountryConfiguration {
+    /**
+     * The configuration target. You must set the target to `country` when specifying a
+     * country code in the rule.
+     */
+    target?: 'country';
+
+    /**
+     * The two-letter ISO-3166-1 alpha-2 code to match. For more information, refer to
+     * [IP Access rules: Parameters](https://developers.cloudflare.com/waf/tools/ip-access-rules/parameters/#country).
+     */
+    value?: string;
+  }
+}
+
+export interface AccessRuleCreateParams {
+  /**
+   * The rule configuration.
+   */
+  configuration:
+    | AccessRuleCreateParams.FirewallIPConfiguration
+    | AccessRuleCreateParams.FirewallIPV6Configuration
+    | AccessRuleCreateParams.FirewallCIDRConfiguration
+    | AccessRuleCreateParams.FirewallASNConfiguration
+    | AccessRuleCreateParams.FirewallCountryConfiguration;
+
+  /**
+   * The action to apply to a matched request.
+   */
+  mode: 'block' | 'challenge' | 'whitelist' | 'js_challenge' | 'managed_challenge';
+
+  /**
+   * An informative summary of the rule, typically used as a reminder or explanation.
+   */
+  notes?: string;
+}
+
+export namespace AccessRuleCreateParams {
+  export interface FirewallIPConfiguration {
+    /**
+     * The configuration target. You must set the target to `ip` when specifying an IP
+     * address in the rule.
+     */
+    target?: 'ip';
+
+    /**
+     * The IP address to match. This address will be compared to the IP address of
+     * incoming requests.
+     */
+    value?: string;
+  }
+
+  export interface FirewallIPV6Configuration {
+    /**
+     * The configuration target. You must set the target to `ip6` when specifying an
+     * IPv6 address in the rule.
+     */
+    target?: 'ip6';
+
+    /**
+     * The IPv6 address to match.
+     */
+    value?: string;
+  }
+
+  export interface FirewallCIDRConfiguration {
+    /**
+     * The configuration target. You must set the target to `ip_range` when specifying
+     * an IP address range in the rule.
+     */
+    target?: 'ip_range';
+
+    /**
+     * The IP address range to match. You can only use prefix lengths `/16` and `/24`
+     * for IPv4 ranges, and prefix lengths `/32`, `/48`, and `/64` for IPv6 ranges.
+     */
+    value?: string;
+  }
+
+  export interface FirewallASNConfiguration {
+    /**
+     * The configuration target. You must set the target to `asn` when specifying an
+     * Autonomous System Number (ASN) in the rule.
+     */
+    target?: 'asn';
+
+    /**
+     * The AS number to match.
+     */
+    value?: string;
+  }
+
+  export interface FirewallCountryConfiguration {
     /**
      * The configuration target. You must set the target to `country` when specifying a
      * country code in the rule.
@@ -377,9 +607,11 @@ export interface AccessRuleEditParams {
 }
 
 export namespace AccessRules {
-  export import AccessRule = AccessRulesAPI.AccessRule;
+  export import AccessRuleCreateResponse = AccessRulesAPI.AccessRuleCreateResponse;
+  export import AccessRuleListResponse = AccessRulesAPI.AccessRuleListResponse;
   export import AccessRuleDeleteResponse = AccessRulesAPI.AccessRuleDeleteResponse;
-  export import AccessRulesV4PagePaginationArray = AccessRulesAPI.AccessRulesV4PagePaginationArray;
+  export import AccessRuleEditResponse = AccessRulesAPI.AccessRuleEditResponse;
+  export import AccessRuleListResponsesV4PagePaginationArray = AccessRulesAPI.AccessRuleListResponsesV4PagePaginationArray;
   export import AccessRuleCreateParams = AccessRulesAPI.AccessRuleCreateParams;
   export import AccessRuleListParams = AccessRulesAPI.AccessRuleListParams;
   export import AccessRuleDeleteParams = AccessRulesAPI.AccessRuleDeleteParams;

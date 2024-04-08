@@ -17,11 +17,11 @@ export class Groups extends APIResource {
     packageId: string,
     params: GroupListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<WAFManagedRulesGroupsV4PagePaginationArray, WAFManagedRulesGroup> {
+  ): Core.PagePromise<GroupsV4PagePaginationArray, Group> {
     const { zone_id, ...query } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/firewall/waf/packages/${packageId}/groups`,
-      WAFManagedRulesGroupsV4PagePaginationArray,
+      GroupsV4PagePaginationArray,
       { query, ...options },
     );
   }
@@ -70,9 +70,9 @@ export class Groups extends APIResource {
   }
 }
 
-export class WAFManagedRulesGroupsV4PagePaginationArray extends V4PagePaginationArray<WAFManagedRulesGroup> {}
+export class GroupsV4PagePaginationArray extends V4PagePaginationArray<Group> {}
 
-export interface WAFManagedRulesGroup {
+export interface Group {
   /**
    * The unique identifier of the rule group.
    */
@@ -176,8 +176,8 @@ export interface GroupGetParams {
 }
 
 export namespace Groups {
-  export import WAFManagedRulesGroup = GroupsAPI.WAFManagedRulesGroup;
-  export import WAFManagedRulesGroupsV4PagePaginationArray = GroupsAPI.WAFManagedRulesGroupsV4PagePaginationArray;
+  export import Group = GroupsAPI.Group;
+  export import GroupsV4PagePaginationArray = GroupsAPI.GroupsV4PagePaginationArray;
   export import GroupListParams = GroupsAPI.GroupListParams;
   export import GroupEditParams = GroupsAPI.GroupEditParams;
   export import GroupGetParams = GroupsAPI.GroupGetParams;

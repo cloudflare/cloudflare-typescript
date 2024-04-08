@@ -19,18 +19,4 @@ export {
   MessagePullParams,
   Messages,
 } from './messages';
-export {
-  Queue,
-  QueueCreated,
-  QueueUpdated,
-  QueueCreateResponse,
-  QueueUpdateResponse,
-  QueueListResponse,
-  QueueGetResponse,
-  QueueCreateParams,
-  QueueUpdateParams,
-  QueueListParams,
-  QueueDeleteParams,
-  QueueGetParams,
-  Queues,
-} from './queues';
+export { Queues } from './queues';

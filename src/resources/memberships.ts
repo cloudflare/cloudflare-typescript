@@ -3,10 +3,9 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
-import * as MembershipsAPI from 'cloudflare/resources/memberships';
 import * as Shared from 'cloudflare/resources/shared';
 import * as AccountsAPI from 'cloudflare/resources/accounts/accounts';
-import * as MembersAPI from 'cloudflare/resources/accounts/members';
+import * as PermissionGroupsAPI from 'cloudflare/resources/user/tokens/permission-groups';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class Memberships extends APIResource {
@@ -97,7 +96,7 @@ export interface Membership {
   /**
    * All access permissions for the user at the account.
    */
-  permissions?: MembersAPI.MemberPermission;
+  permissions?: PermissionGroupsAPI.Permission;
 
   /**
    * List of role names for the user at the account.
@@ -158,12 +157,3 @@ export namespace MembershipListParams {
 }
 
 export type MembershipDeleteParams = unknown;
-
-export namespace Memberships {
-  export import Membership = MembershipsAPI.Membership;
-  export import MembershipDeleteResponse = MembershipsAPI.MembershipDeleteResponse;
-  export import MembershipsV4PagePaginationArray = MembershipsAPI.MembershipsV4PagePaginationArray;
-  export import MembershipUpdateParams = MembershipsAPI.MembershipUpdateParams;
-  export import MembershipListParams = MembershipsAPI.MembershipListParams;
-  export import MembershipDeleteParams = MembershipsAPI.MembershipDeleteParams;
-}

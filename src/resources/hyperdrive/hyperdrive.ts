@@ -1,11 +1,21 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from 'cloudflare/resource';
-import * as HyperdriveAPI from 'cloudflare/resources/hyperdrive/hyperdrive';
 import * as ConfigsAPI from 'cloudflare/resources/hyperdrive/configs';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class HyperdriveResource extends APIResource {
   configs: ConfigsAPI.Configs = new ConfigsAPI.Configs(this._client);
+}
+
+export class HyperdrivesSinglePage extends SinglePage<Hyperdrive> {}
+
+export interface Configuration {
+  /**
+   * The password required to access your origin database. This value is write-only
+   * and never returned by the API.
+   */
+  password: string;
 }
 
 export interface Hyperdrive {
@@ -16,14 +26,7 @@ export interface Hyperdrive {
 }
 
 export namespace HyperdriveResource {
-  export import Hyperdrive = HyperdriveAPI.Hyperdrive;
   export import Configs = ConfigsAPI.Configs;
-  export import ConfigCreateResponse = ConfigsAPI.ConfigCreateResponse;
-  export import ConfigUpdateResponse = ConfigsAPI.ConfigUpdateResponse;
-  export import ConfigListResponse = ConfigsAPI.ConfigListResponse;
-  export import ConfigEditResponse = ConfigsAPI.ConfigEditResponse;
-  export import ConfigGetResponse = ConfigsAPI.ConfigGetResponse;
-  export import ConfigListResponsesSinglePage = ConfigsAPI.ConfigListResponsesSinglePage;
   export import ConfigCreateParams = ConfigsAPI.ConfigCreateParams;
   export import ConfigUpdateParams = ConfigsAPI.ConfigUpdateParams;
   export import ConfigListParams = ConfigsAPI.ConfigListParams;

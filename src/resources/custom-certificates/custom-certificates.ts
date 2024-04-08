@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as CustomCertificatesAPI from 'cloudflare/resources/custom-certificates/custom-certificates';
 import * as KeylessCertificatesAPI from 'cloudflare/resources/keyless-certificates';
 import * as Shared from 'cloudflare/resources/shared';
 import * as PrioritizeAPI from 'cloudflare/resources/custom-certificates/prioritize';
@@ -168,9 +167,9 @@ export interface CustomCertificate {
    * security data centers. Default distribution is to all Cloudflare datacenters,
    * for optimal performance.
    */
-  geo_restrictions?: CustomCertificate.GeoRestrictions;
+  geo_restrictions?: GeoRestrictions;
 
-  keyless_server?: KeylessCertificatesAPI.KeylessCertificateHostname;
+  keyless_server?: KeylessCertificatesAPI.KeylessCertificate;
 
   /**
    * Specify the policy that determines the region where your private key will be
@@ -186,19 +185,17 @@ export interface CustomCertificate {
   policy?: string;
 }
 
-export namespace CustomCertificate {
-  /**
-   * Specify the region where your private key can be held locally for optimal TLS
-   * performance. HTTPS connections to any excluded data center will still be fully
-   * encrypted, but will incur some latency while Keyless SSL is used to complete the
-   * handshake with the nearest allowed data center. Options allow distribution to
-   * only to U.S. data centers, only to E.U. data centers, or only to highest
-   * security data centers. Default distribution is to all Cloudflare datacenters,
-   * for optimal performance.
-   */
-  export interface GeoRestrictions {
-    label?: 'us' | 'eu' | 'highest_security';
-  }
+/**
+ * Specify the region where your private key can be held locally for optimal TLS
+ * performance. HTTPS connections to any excluded data center will still be fully
+ * encrypted, but will incur some latency while Keyless SSL is used to complete the
+ * handshake with the nearest allowed data center. Options allow distribution to
+ * only to U.S. data centers, only to E.U. data centers, or only to highest
+ * security data centers. Default distribution is to all Cloudflare datacenters,
+ * for optimal performance.
+ */
+export interface GeoRestrictions {
+  label?: 'us' | 'eu' | 'highest_security';
 }
 
 export interface CustomCertificateCreateParams {
@@ -234,7 +231,7 @@ export interface CustomCertificateCreateParams {
    * highest security data centers. Default distribution is to all Cloudflare
    * datacenters, for optimal performance.
    */
-  geo_restrictions?: CustomCertificateCreateParams.GeoRestrictions;
+  geo_restrictions?: GeoRestrictions;
 
   /**
    * Body param: Specify the policy that determines the region where your private key
@@ -254,21 +251,6 @@ export interface CustomCertificateCreateParams {
    * not include SNI in the TLS handshake.
    */
   type?: 'legacy_custom' | 'sni_custom';
-}
-
-export namespace CustomCertificateCreateParams {
-  /**
-   * Specify the region where your private key can be held locally for optimal TLS
-   * performance. HTTPS connections to any excluded data center will still be fully
-   * encrypted, but will incur some latency while Keyless SSL is used to complete the
-   * handshake with the nearest allowed data center. Options allow distribution to
-   * only to U.S. data centers, only to E.U. data centers, or only to highest
-   * security data centers. Default distribution is to all Cloudflare datacenters,
-   * for optimal performance.
-   */
-  export interface GeoRestrictions {
-    label?: 'us' | 'eu' | 'highest_security';
-  }
 }
 
 export interface CustomCertificateListParams extends V4PagePaginationArrayParams {
@@ -328,7 +310,7 @@ export interface CustomCertificateEditParams {
    * highest security data centers. Default distribution is to all Cloudflare
    * datacenters, for optimal performance.
    */
-  geo_restrictions?: CustomCertificateEditParams.GeoRestrictions;
+  geo_restrictions?: GeoRestrictions;
 
   /**
    * Body param: Specify the policy that determines the region where your private key
@@ -349,21 +331,6 @@ export interface CustomCertificateEditParams {
   private_key?: string;
 }
 
-export namespace CustomCertificateEditParams {
-  /**
-   * Specify the region where your private key can be held locally for optimal TLS
-   * performance. HTTPS connections to any excluded data center will still be fully
-   * encrypted, but will incur some latency while Keyless SSL is used to complete the
-   * handshake with the nearest allowed data center. Options allow distribution to
-   * only to U.S. data centers, only to E.U. data centers, or only to highest
-   * security data centers. Default distribution is to all Cloudflare datacenters,
-   * for optimal performance.
-   */
-  export interface GeoRestrictions {
-    label?: 'us' | 'eu' | 'highest_security';
-  }
-}
-
 export interface CustomCertificateGetParams {
   /**
    * Identifier
@@ -372,13 +339,6 @@ export interface CustomCertificateGetParams {
 }
 
 export namespace CustomCertificates {
-  export import CustomCertificate = CustomCertificatesAPI.CustomCertificate;
-  export import CustomCertificatesV4PagePaginationArray = CustomCertificatesAPI.CustomCertificatesV4PagePaginationArray;
-  export import CustomCertificateCreateParams = CustomCertificatesAPI.CustomCertificateCreateParams;
-  export import CustomCertificateListParams = CustomCertificatesAPI.CustomCertificateListParams;
-  export import CustomCertificateDeleteParams = CustomCertificatesAPI.CustomCertificateDeleteParams;
-  export import CustomCertificateEditParams = CustomCertificatesAPI.CustomCertificateEditParams;
-  export import CustomCertificateGetParams = CustomCertificatesAPI.CustomCertificateGetParams;
   export import Prioritize = PrioritizeAPI.Prioritize;
   export import PrioritizeUpdateResponse = PrioritizeAPI.PrioritizeUpdateResponse;
   export import PrioritizeUpdateParams = PrioritizeAPI.PrioritizeUpdateParams;

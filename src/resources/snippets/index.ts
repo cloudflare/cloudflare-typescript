@@ -8,4 +8,4 @@ export {
   RuleListResponsesSinglePage,
   Rules,
 } from './rules';
-export { Snippet, SnippetUpdateParams, SnippetsSinglePage, Snippets } from './snippets';
+export { Snippets } from './snippets';

@@ -16,12 +16,12 @@ export class ContentLists extends APIResource {
     identifier: string,
     body: ContentListUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DistributedWebConfigContentList> {
+  ): Core.APIPromise<ContentList> {
     return (
       this._client.put(
         `/zones/${zoneIdentifier}/web3/hostnames/${identifier}/ipfs_universal_path/content_list`,
         { body, ...options },
-      ) as Core.APIPromise<{ result: DistributedWebConfigContentList }>
+      ) as Core.APIPromise<{ result: ContentList }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -32,17 +32,17 @@ export class ContentLists extends APIResource {
     zoneIdentifier: string,
     identifier: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DistributedWebConfigContentList> {
+  ): Core.APIPromise<ContentList> {
     return (
       this._client.get(
         `/zones/${zoneIdentifier}/web3/hostnames/${identifier}/ipfs_universal_path/content_list`,
         options,
-      ) as Core.APIPromise<{ result: DistributedWebConfigContentList }>
+      ) as Core.APIPromise<{ result: ContentList }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface DistributedWebConfigContentList {
+export interface ContentList {
   /**
    * Behavior of the content list.
    */
@@ -58,14 +58,14 @@ export interface ContentListUpdateParams {
   /**
    * Content list entries.
    */
-  entries: Array<EntriesAPI.DistributedWebConfigContentListEntry>;
+  entries: Array<EntriesAPI.ContentListItem>;
 }
 
 export namespace ContentLists {
-  export import DistributedWebConfigContentList = ContentListsAPI.DistributedWebConfigContentList;
+  export import ContentList = ContentListsAPI.ContentList;
   export import ContentListUpdateParams = ContentListsAPI.ContentListUpdateParams;
   export import Entries = EntriesAPI.Entries;
-  export import DistributedWebConfigContentListEntry = EntriesAPI.DistributedWebConfigContentListEntry;
+  export import ContentListItem = EntriesAPI.ContentListItem;
   export import UnnamedSchemaRef5e618833803e286db9ee7c73727f8b86 = EntriesAPI.UnnamedSchemaRef5e618833803e286db9ee7c73727f8b86;
   export import EntryListResponse = EntriesAPI.EntryListResponse;
   export import EntryDeleteResponse = EntriesAPI.EntryDeleteResponse;

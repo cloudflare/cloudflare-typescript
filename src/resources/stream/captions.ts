@@ -61,7 +61,7 @@ export class Captions extends APIResource {
   }
 }
 
-export interface StreamCaptions {
+export interface Caption {
   /**
    * The language label displayed in the native language to users.
    */
@@ -75,7 +75,7 @@ export interface StreamCaptions {
 
 export type CaptionDeleteResponse = unknown | Array<unknown> | string;
 
-export type CaptionGetResponse = Array<StreamCaptions>;
+export type CaptionGetResponse = Array<Caption>;
 
 export interface CaptionUpdateParams {
   /**
@@ -109,7 +109,7 @@ export interface CaptionGetParams {
 }
 
 export namespace Captions {
-  export import StreamCaptions = CaptionsAPI.StreamCaptions;
+  export import Caption = CaptionsAPI.Caption;
   export import CaptionDeleteResponse = CaptionsAPI.CaptionDeleteResponse;
   export import CaptionGetResponse = CaptionsAPI.CaptionGetResponse;
   export import CaptionUpdateParams = CaptionsAPI.CaptionUpdateParams;

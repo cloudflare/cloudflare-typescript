@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as AuditLogsAPI from 'cloudflare/resources/audit-logs';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class AuditLogs extends APIResource {
@@ -205,10 +204,4 @@ export namespace AuditLogListParams {
      */
     name?: string;
   }
-}
-
-export namespace AuditLogs {
-  export import AuditLogListResponse = AuditLogsAPI.AuditLogListResponse;
-  export import AuditLogListResponsesV4PagePaginationArray = AuditLogsAPI.AuditLogListResponsesV4PagePaginationArray;
-  export import AuditLogListParams = AuditLogsAPI.AuditLogListParams;
 }

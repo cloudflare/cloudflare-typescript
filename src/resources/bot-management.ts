@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as BotManagementAPI from 'cloudflare/resources/bot-management';
 
 export class BotManagement extends APIResource {
   /**
@@ -45,276 +44,149 @@ export class BotManagement extends APIResource {
   }
 }
 
-export type BotManagementUpdateResponse =
-  | BotManagementUpdateResponse.BotManagementBotFightModeConfig
-  | BotManagementUpdateResponse.BotManagementSbfmDefinitelyConfig
-  | BotManagementUpdateResponse.BotManagementSbfmLikelyConfig
-  | BotManagementUpdateResponse.BotManagementBmSubscriptionConfig;
+export interface BotFightModeConfiguration {
+  /**
+   * Use lightweight, invisible JavaScript detections to improve Bot Management.
+   * [Learn more about JavaScript Detections](https://developers.cloudflare.com/bots/reference/javascript-detections/).
+   */
+  enable_js?: boolean;
 
-export namespace BotManagementUpdateResponse {
-  export interface BotManagementBotFightModeConfig {
-    /**
-     * Use lightweight, invisible JavaScript detections to improve Bot Management.
-     * [Learn more about JavaScript Detections](https://developers.cloudflare.com/bots/reference/javascript-detections/).
-     */
-    enable_js?: boolean;
+  /**
+   * Whether to enable Bot Fight Mode.
+   */
+  fight_mode?: boolean;
 
-    /**
-     * Whether to enable Bot Fight Mode.
-     */
-    fight_mode?: boolean;
-
-    /**
-     * A read-only field that indicates whether the zone currently is running the
-     * latest ML model.
-     */
-    using_latest_model?: boolean;
-  }
-
-  export interface BotManagementSbfmDefinitelyConfig {
-    /**
-     * Use lightweight, invisible JavaScript detections to improve Bot Management.
-     * [Learn more about JavaScript Detections](https://developers.cloudflare.com/bots/reference/javascript-detections/).
-     */
-    enable_js?: boolean;
-
-    /**
-     * Whether to optimize Super Bot Fight Mode protections for Wordpress.
-     */
-    optimize_wordpress?: boolean;
-
-    /**
-     * Super Bot Fight Mode (SBFM) action to take on definitely automated requests.
-     */
-    sbfm_definitely_automated?: 'allow' | 'block' | 'managed_challenge';
-
-    /**
-     * Super Bot Fight Mode (SBFM) to enable static resource protection. Enable if
-     * static resources on your application need bot protection. Note: Static resource
-     * protection can also result in legitimate traffic being blocked.
-     */
-    sbfm_static_resource_protection?: boolean;
-
-    /**
-     * Super Bot Fight Mode (SBFM) action to take on verified bots requests.
-     */
-    sbfm_verified_bots?: 'allow' | 'block';
-
-    /**
-     * A read-only field that indicates whether the zone currently is running the
-     * latest ML model.
-     */
-    using_latest_model?: boolean;
-  }
-
-  export interface BotManagementSbfmLikelyConfig {
-    /**
-     * Use lightweight, invisible JavaScript detections to improve Bot Management.
-     * [Learn more about JavaScript Detections](https://developers.cloudflare.com/bots/reference/javascript-detections/).
-     */
-    enable_js?: boolean;
-
-    /**
-     * Whether to optimize Super Bot Fight Mode protections for Wordpress.
-     */
-    optimize_wordpress?: boolean;
-
-    /**
-     * Super Bot Fight Mode (SBFM) action to take on definitely automated requests.
-     */
-    sbfm_definitely_automated?: 'allow' | 'block' | 'managed_challenge';
-
-    /**
-     * Super Bot Fight Mode (SBFM) action to take on likely automated requests.
-     */
-    sbfm_likely_automated?: 'allow' | 'block' | 'managed_challenge';
-
-    /**
-     * Super Bot Fight Mode (SBFM) to enable static resource protection. Enable if
-     * static resources on your application need bot protection. Note: Static resource
-     * protection can also result in legitimate traffic being blocked.
-     */
-    sbfm_static_resource_protection?: boolean;
-
-    /**
-     * Super Bot Fight Mode (SBFM) action to take on verified bots requests.
-     */
-    sbfm_verified_bots?: 'allow' | 'block';
-
-    /**
-     * A read-only field that indicates whether the zone currently is running the
-     * latest ML model.
-     */
-    using_latest_model?: boolean;
-  }
-
-  export interface BotManagementBmSubscriptionConfig {
-    /**
-     * Automatically update to the newest bot detection models created by Cloudflare as
-     * they are released.
-     * [Learn more.](https://developers.cloudflare.com/bots/reference/machine-learning-models#model-versions-and-release-notes)
-     */
-    auto_update_model?: boolean;
-
-    /**
-     * Use lightweight, invisible JavaScript detections to improve Bot Management.
-     * [Learn more about JavaScript Detections](https://developers.cloudflare.com/bots/reference/javascript-detections/).
-     */
-    enable_js?: boolean;
-
-    /**
-     * Whether to disable tracking the highest bot score for a session in the Bot
-     * Management cookie.
-     */
-    suppress_session_score?: boolean;
-
-    /**
-     * A read-only field that indicates whether the zone currently is running the
-     * latest ML model.
-     */
-    using_latest_model?: boolean;
-  }
+  /**
+   * A read-only field that indicates whether the zone currently is running the
+   * latest ML model.
+   */
+  using_latest_model?: boolean;
 }
+
+export interface SubscriptionConfiguration {
+  /**
+   * Automatically update to the newest bot detection models created by Cloudflare as
+   * they are released.
+   * [Learn more.](https://developers.cloudflare.com/bots/reference/machine-learning-models#model-versions-and-release-notes)
+   */
+  auto_update_model?: boolean;
+
+  /**
+   * Use lightweight, invisible JavaScript detections to improve Bot Management.
+   * [Learn more about JavaScript Detections](https://developers.cloudflare.com/bots/reference/javascript-detections/).
+   */
+  enable_js?: boolean;
+
+  /**
+   * Whether to disable tracking the highest bot score for a session in the Bot
+   * Management cookie.
+   */
+  suppress_session_score?: boolean;
+
+  /**
+   * A read-only field that indicates whether the zone currently is running the
+   * latest ML model.
+   */
+  using_latest_model?: boolean;
+}
+
+export interface SuperBotFightModeDefinitelyConfiguration {
+  /**
+   * Use lightweight, invisible JavaScript detections to improve Bot Management.
+   * [Learn more about JavaScript Detections](https://developers.cloudflare.com/bots/reference/javascript-detections/).
+   */
+  enable_js?: boolean;
+
+  /**
+   * Whether to optimize Super Bot Fight Mode protections for Wordpress.
+   */
+  optimize_wordpress?: boolean;
+
+  /**
+   * Super Bot Fight Mode (SBFM) action to take on definitely automated requests.
+   */
+  sbfm_definitely_automated?: 'allow' | 'block' | 'managed_challenge';
+
+  /**
+   * Super Bot Fight Mode (SBFM) to enable static resource protection. Enable if
+   * static resources on your application need bot protection. Note: Static resource
+   * protection can also result in legitimate traffic being blocked.
+   */
+  sbfm_static_resource_protection?: boolean;
+
+  /**
+   * Super Bot Fight Mode (SBFM) action to take on verified bots requests.
+   */
+  sbfm_verified_bots?: 'allow' | 'block';
+
+  /**
+   * A read-only field that indicates whether the zone currently is running the
+   * latest ML model.
+   */
+  using_latest_model?: boolean;
+}
+
+export interface SuperBotFightModeLikelyConfig {
+  /**
+   * Use lightweight, invisible JavaScript detections to improve Bot Management.
+   * [Learn more about JavaScript Detections](https://developers.cloudflare.com/bots/reference/javascript-detections/).
+   */
+  enable_js?: boolean;
+
+  /**
+   * Whether to optimize Super Bot Fight Mode protections for Wordpress.
+   */
+  optimize_wordpress?: boolean;
+
+  /**
+   * Super Bot Fight Mode (SBFM) action to take on definitely automated requests.
+   */
+  sbfm_definitely_automated?: 'allow' | 'block' | 'managed_challenge';
+
+  /**
+   * Super Bot Fight Mode (SBFM) action to take on likely automated requests.
+   */
+  sbfm_likely_automated?: 'allow' | 'block' | 'managed_challenge';
+
+  /**
+   * Super Bot Fight Mode (SBFM) to enable static resource protection. Enable if
+   * static resources on your application need bot protection. Note: Static resource
+   * protection can also result in legitimate traffic being blocked.
+   */
+  sbfm_static_resource_protection?: boolean;
+
+  /**
+   * Super Bot Fight Mode (SBFM) action to take on verified bots requests.
+   */
+  sbfm_verified_bots?: 'allow' | 'block';
+
+  /**
+   * A read-only field that indicates whether the zone currently is running the
+   * latest ML model.
+   */
+  using_latest_model?: boolean;
+}
+
+export type BotManagementUpdateResponse =
+  | BotFightModeConfiguration
+  | SuperBotFightModeDefinitelyConfiguration
+  | SuperBotFightModeLikelyConfig
+  | SubscriptionConfiguration;
 
 export type BotManagementGetResponse =
-  | BotManagementGetResponse.BotManagementBotFightModeConfig
-  | BotManagementGetResponse.BotManagementSbfmDefinitelyConfig
-  | BotManagementGetResponse.BotManagementSbfmLikelyConfig
-  | BotManagementGetResponse.BotManagementBmSubscriptionConfig;
-
-export namespace BotManagementGetResponse {
-  export interface BotManagementBotFightModeConfig {
-    /**
-     * Use lightweight, invisible JavaScript detections to improve Bot Management.
-     * [Learn more about JavaScript Detections](https://developers.cloudflare.com/bots/reference/javascript-detections/).
-     */
-    enable_js?: boolean;
-
-    /**
-     * Whether to enable Bot Fight Mode.
-     */
-    fight_mode?: boolean;
-
-    /**
-     * A read-only field that indicates whether the zone currently is running the
-     * latest ML model.
-     */
-    using_latest_model?: boolean;
-  }
-
-  export interface BotManagementSbfmDefinitelyConfig {
-    /**
-     * Use lightweight, invisible JavaScript detections to improve Bot Management.
-     * [Learn more about JavaScript Detections](https://developers.cloudflare.com/bots/reference/javascript-detections/).
-     */
-    enable_js?: boolean;
-
-    /**
-     * Whether to optimize Super Bot Fight Mode protections for Wordpress.
-     */
-    optimize_wordpress?: boolean;
-
-    /**
-     * Super Bot Fight Mode (SBFM) action to take on definitely automated requests.
-     */
-    sbfm_definitely_automated?: 'allow' | 'block' | 'managed_challenge';
-
-    /**
-     * Super Bot Fight Mode (SBFM) to enable static resource protection. Enable if
-     * static resources on your application need bot protection. Note: Static resource
-     * protection can also result in legitimate traffic being blocked.
-     */
-    sbfm_static_resource_protection?: boolean;
-
-    /**
-     * Super Bot Fight Mode (SBFM) action to take on verified bots requests.
-     */
-    sbfm_verified_bots?: 'allow' | 'block';
-
-    /**
-     * A read-only field that indicates whether the zone currently is running the
-     * latest ML model.
-     */
-    using_latest_model?: boolean;
-  }
-
-  export interface BotManagementSbfmLikelyConfig {
-    /**
-     * Use lightweight, invisible JavaScript detections to improve Bot Management.
-     * [Learn more about JavaScript Detections](https://developers.cloudflare.com/bots/reference/javascript-detections/).
-     */
-    enable_js?: boolean;
-
-    /**
-     * Whether to optimize Super Bot Fight Mode protections for Wordpress.
-     */
-    optimize_wordpress?: boolean;
-
-    /**
-     * Super Bot Fight Mode (SBFM) action to take on definitely automated requests.
-     */
-    sbfm_definitely_automated?: 'allow' | 'block' | 'managed_challenge';
-
-    /**
-     * Super Bot Fight Mode (SBFM) action to take on likely automated requests.
-     */
-    sbfm_likely_automated?: 'allow' | 'block' | 'managed_challenge';
-
-    /**
-     * Super Bot Fight Mode (SBFM) to enable static resource protection. Enable if
-     * static resources on your application need bot protection. Note: Static resource
-     * protection can also result in legitimate traffic being blocked.
-     */
-    sbfm_static_resource_protection?: boolean;
-
-    /**
-     * Super Bot Fight Mode (SBFM) action to take on verified bots requests.
-     */
-    sbfm_verified_bots?: 'allow' | 'block';
-
-    /**
-     * A read-only field that indicates whether the zone currently is running the
-     * latest ML model.
-     */
-    using_latest_model?: boolean;
-  }
-
-  export interface BotManagementBmSubscriptionConfig {
-    /**
-     * Automatically update to the newest bot detection models created by Cloudflare as
-     * they are released.
-     * [Learn more.](https://developers.cloudflare.com/bots/reference/machine-learning-models#model-versions-and-release-notes)
-     */
-    auto_update_model?: boolean;
-
-    /**
-     * Use lightweight, invisible JavaScript detections to improve Bot Management.
-     * [Learn more about JavaScript Detections](https://developers.cloudflare.com/bots/reference/javascript-detections/).
-     */
-    enable_js?: boolean;
-
-    /**
-     * Whether to disable tracking the highest bot score for a session in the Bot
-     * Management cookie.
-     */
-    suppress_session_score?: boolean;
-
-    /**
-     * A read-only field that indicates whether the zone currently is running the
-     * latest ML model.
-     */
-    using_latest_model?: boolean;
-  }
-}
+  | BotFightModeConfiguration
+  | SuperBotFightModeDefinitelyConfiguration
+  | SuperBotFightModeLikelyConfig
+  | SubscriptionConfiguration;
 
 export type BotManagementUpdateParams =
-  | BotManagementUpdateParams.BotManagementBotFightModeConfig
-  | BotManagementUpdateParams.BotManagementSbfmDefinitelyConfig
-  | BotManagementUpdateParams.BotManagementSbfmLikelyConfig
-  | BotManagementUpdateParams.BotManagementBmSubscriptionConfig;
+  | BotManagementUpdateParams.BotFightModeConfiguration
+  | BotManagementUpdateParams.SuperBotFightModeDefinitelyConfiguration
+  | BotManagementUpdateParams.SuperBotFightModeLikelyConfig
+  | BotManagementUpdateParams.SubscriptionConfiguration;
 
 export namespace BotManagementUpdateParams {
-  export interface BotManagementBotFightModeConfig {
+  export interface BotFightModeConfiguration {
     /**
      * Path param: Identifier
      */
@@ -333,7 +205,7 @@ export namespace BotManagementUpdateParams {
     fight_mode?: boolean;
   }
 
-  export interface BotManagementSbfmDefinitelyConfig {
+  export interface SuperBotFightModeDefinitelyConfiguration {
     /**
      * Path param: Identifier
      */
@@ -371,7 +243,7 @@ export namespace BotManagementUpdateParams {
     sbfm_verified_bots?: 'allow' | 'block';
   }
 
-  export interface BotManagementSbfmLikelyConfig {
+  export interface SuperBotFightModeLikelyConfig {
     /**
      * Path param: Identifier
      */
@@ -415,7 +287,7 @@ export namespace BotManagementUpdateParams {
     sbfm_verified_bots?: 'allow' | 'block';
   }
 
-  export interface BotManagementBmSubscriptionConfig {
+  export interface SubscriptionConfiguration {
     /**
      * Path param: Identifier
      */
@@ -448,11 +320,4 @@ export interface BotManagementGetParams {
    * Identifier
    */
   zone_id: string;
-}
-
-export namespace BotManagement {
-  export import BotManagementUpdateResponse = BotManagementAPI.BotManagementUpdateResponse;
-  export import BotManagementGetResponse = BotManagementAPI.BotManagementGetResponse;
-  export import BotManagementUpdateParams = BotManagementAPI.BotManagementUpdateParams;
-  export import BotManagementGetParams = BotManagementAPI.BotManagementGetParams;
 }

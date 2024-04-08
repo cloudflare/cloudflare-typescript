@@ -116,6 +116,16 @@ export class IPSECTunnels extends APIResource {
   }
 }
 
+/**
+ * The PSK metadata that includes when the PSK was generated.
+ */
+export interface PSKMetadata {
+  /**
+   * The date and time the tunnel was last modified.
+   */
+  last_generated_on?: string;
+}
+
 export interface IPSECTunnelCreateResponse {
   ipsec_tunnels?: Array<IPSECTunnelCreateResponse.IPSECTunnel>;
 }
@@ -174,7 +184,7 @@ export namespace IPSECTunnelCreateResponse {
     /**
      * The PSK metadata that includes when the PSK was generated.
      */
-    psk_metadata?: IPSECTunnel.PSKMetadata;
+    psk_metadata?: IPSECTunnelsAPI.PSKMetadata;
 
     /**
      * If `true`, then IPsec replay protection will be supported in the
@@ -186,16 +196,6 @@ export namespace IPSECTunnelCreateResponse {
   }
 
   export namespace IPSECTunnel {
-    /**
-     * The PSK metadata that includes when the PSK was generated.
-     */
-    export interface PSKMetadata {
-      /**
-       * The date and time the tunnel was last modified.
-       */
-      last_generated_on?: string;
-    }
-
     export interface TunnelHealthCheck {
       /**
        * Determines whether to run healthchecks for a tunnel.
@@ -286,7 +286,7 @@ export namespace IPSECTunnelListResponse {
     /**
      * The PSK metadata that includes when the PSK was generated.
      */
-    psk_metadata?: IPSECTunnel.PSKMetadata;
+    psk_metadata?: IPSECTunnelsAPI.PSKMetadata;
 
     /**
      * If `true`, then IPsec replay protection will be supported in the
@@ -298,16 +298,6 @@ export namespace IPSECTunnelListResponse {
   }
 
   export namespace IPSECTunnel {
-    /**
-     * The PSK metadata that includes when the PSK was generated.
-     */
-    export interface PSKMetadata {
-      /**
-       * The date and time the tunnel was last modified.
-       */
-      last_generated_on?: string;
-    }
-
     export interface TunnelHealthCheck {
       /**
        * Determines whether to run healthchecks for a tunnel.
@@ -358,19 +348,7 @@ export interface IPSECTunnelPSKGenerateResponse {
   /**
    * The PSK metadata that includes when the PSK was generated.
    */
-  psk_metadata?: IPSECTunnelPSKGenerateResponse.PSKMetadata;
-}
-
-export namespace IPSECTunnelPSKGenerateResponse {
-  /**
-   * The PSK metadata that includes when the PSK was generated.
-   */
-  export interface PSKMetadata {
-    /**
-     * The date and time the tunnel was last modified.
-     */
-    last_generated_on?: string;
-  }
+  psk_metadata?: PSKMetadata;
 }
 
 export interface IPSECTunnelCreateParams {
@@ -411,7 +389,7 @@ export interface IPSECTunnelCreateParams {
   /**
    * Body param:
    */
-  health_check?: IPSECTunnelCreateParams.HealthCheck;
+  health_check?: MagicTransitAPI.HealthCheck;
 
   /**
    * Body param: A randomly generated or provided string for use in the IPsec tunnel.
@@ -423,44 +401,6 @@ export interface IPSECTunnelCreateParams {
    * Cloudflare-to-customer direction.
    */
   replay_protection?: boolean;
-}
-
-export namespace IPSECTunnelCreateParams {
-  export interface HealthCheck {
-    /**
-     * The direction of the flow of the healthcheck. Either unidirectional, where the
-     * probe comes to you via the tunnel and the result comes back to Cloudflare via
-     * the open Internet, or bidirectional where both the probe and result come and go
-     * via the tunnel. Note in the case of bidirecitonal healthchecks, the target field
-     * in health_check is ignored as the interface_address is used to send traffic into
-     * the tunnel.
-     */
-    direction?: 'unidirectional' | 'bidirectional';
-
-    /**
-     * Determines whether to run healthchecks for a tunnel.
-     */
-    enabled?: boolean;
-
-    /**
-     * How frequent the health check is run. The default value is `mid`.
-     */
-    rate?: MagicTransitAPI.UnnamedSchemaRefEebdc868ce7f7ae92e23438caa84e7b5;
-
-    /**
-     * The destination address in a request type health check. After the healthcheck is
-     * decapsulated at the customer end of the tunnel, the ICMP echo will be forwarded
-     * to this address. This field defaults to `customer_gre_endpoint address`. This
-     * field is ignored for bidirectional healthchecks as the interface_address (not
-     * assigned to the Cloudflare side of the tunnel) is used as the target.
-     */
-    target?: string;
-
-    /**
-     * The type of healthcheck to run, reply or request. The default value is `reply`.
-     */
-    type?: MagicTransitAPI.UnnamedSchemaRef3b1a76a5e4a139b72ed7d93834773d39;
-  }
 }
 
 export interface IPSECTunnelUpdateParams {
@@ -501,7 +441,7 @@ export interface IPSECTunnelUpdateParams {
   /**
    * Body param:
    */
-  health_check?: IPSECTunnelUpdateParams.HealthCheck;
+  health_check?: MagicTransitAPI.HealthCheck;
 
   /**
    * Body param: A randomly generated or provided string for use in the IPsec tunnel.
@@ -513,44 +453,6 @@ export interface IPSECTunnelUpdateParams {
    * Cloudflare-to-customer direction.
    */
   replay_protection?: boolean;
-}
-
-export namespace IPSECTunnelUpdateParams {
-  export interface HealthCheck {
-    /**
-     * The direction of the flow of the healthcheck. Either unidirectional, where the
-     * probe comes to you via the tunnel and the result comes back to Cloudflare via
-     * the open Internet, or bidirectional where both the probe and result come and go
-     * via the tunnel. Note in the case of bidirecitonal healthchecks, the target field
-     * in health_check is ignored as the interface_address is used to send traffic into
-     * the tunnel.
-     */
-    direction?: 'unidirectional' | 'bidirectional';
-
-    /**
-     * Determines whether to run healthchecks for a tunnel.
-     */
-    enabled?: boolean;
-
-    /**
-     * How frequent the health check is run. The default value is `mid`.
-     */
-    rate?: MagicTransitAPI.UnnamedSchemaRefEebdc868ce7f7ae92e23438caa84e7b5;
-
-    /**
-     * The destination address in a request type health check. After the healthcheck is
-     * decapsulated at the customer end of the tunnel, the ICMP echo will be forwarded
-     * to this address. This field defaults to `customer_gre_endpoint address`. This
-     * field is ignored for bidirectional healthchecks as the interface_address (not
-     * assigned to the Cloudflare side of the tunnel) is used as the target.
-     */
-    target?: string;
-
-    /**
-     * The type of healthcheck to run, reply or request. The default value is `reply`.
-     */
-    type?: MagicTransitAPI.UnnamedSchemaRef3b1a76a5e4a139b72ed7d93834773d39;
-  }
 }
 
 export interface IPSECTunnelListParams {
@@ -592,6 +494,7 @@ export interface IPSECTunnelPSKGenerateParams {
 }
 
 export namespace IPSECTunnels {
+  export import PSKMetadata = IPSECTunnelsAPI.PSKMetadata;
   export import IPSECTunnelCreateResponse = IPSECTunnelsAPI.IPSECTunnelCreateResponse;
   export import IPSECTunnelUpdateResponse = IPSECTunnelsAPI.IPSECTunnelUpdateResponse;
   export import IPSECTunnelListResponse = IPSECTunnelsAPI.IPSECTunnelListResponse;

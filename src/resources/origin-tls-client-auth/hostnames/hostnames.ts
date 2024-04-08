@@ -32,24 +32,20 @@ export class Hostnames extends APIResource {
   /**
    * Get the Hostname Status for Client Authentication
    */
-  get(
-    hostname: string,
-    params: HostnameGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OriginTLSClientCertificateID> {
+  get(hostname: string, params: HostnameGetParams, options?: Core.RequestOptions): Core.APIPromise<ID> {
     const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/origin_tls_client_auth/hostnames/${hostname}`,
         options,
-      ) as Core.APIPromise<{ result: OriginTLSClientCertificateID }>
+      ) as Core.APIPromise<{ result: ID }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class OriginTLSClientCertificateIDsSinglePage extends SinglePage<OriginTLSClientCertificateID> {}
+export class AuthenticatedOriginPullsSinglePage extends SinglePage<AuthenticatedOriginPull> {}
 
-export interface OriginTLSClientCertificateAuthenticatedOriginPull {
+export interface AuthenticatedOriginPull {
   /**
    * Identifier
    */
@@ -83,7 +79,7 @@ export interface OriginTLSClientCertificateAuthenticatedOriginPull {
   private_key?: string;
 }
 
-export interface OriginTLSClientCertificateID {
+export interface ID {
   /**
    * Identifier
    */
@@ -171,7 +167,7 @@ export interface OriginTLSClientCertificateID {
   updated_at?: string;
 }
 
-export type HostnameUpdateResponse = Array<OriginTLSClientCertificateID>;
+export type HostnameUpdateResponse = Array<AuthenticatedOriginPull>;
 
 export interface HostnameUpdateParams {
   /**
@@ -214,13 +210,13 @@ export interface HostnameGetParams {
 }
 
 export namespace Hostnames {
-  export import OriginTLSClientCertificateAuthenticatedOriginPull = HostnamesAPI.OriginTLSClientCertificateAuthenticatedOriginPull;
-  export import OriginTLSClientCertificateID = HostnamesAPI.OriginTLSClientCertificateID;
+  export import AuthenticatedOriginPull = HostnamesAPI.AuthenticatedOriginPull;
+  export import ID = HostnamesAPI.ID;
   export import HostnameUpdateResponse = HostnamesAPI.HostnameUpdateResponse;
   export import HostnameUpdateParams = HostnamesAPI.HostnameUpdateParams;
   export import HostnameGetParams = HostnamesAPI.HostnameGetParams;
   export import Certificates = CertificatesAPI.Certificates;
-  export import OriginTLSClientCertificate = CertificatesAPI.OriginTLSClientCertificate;
+  export import Certificate = CertificatesAPI.Certificate;
   export import UnnamedSchemaRefD182888b36f93a765d9ce5aefa3009e9 = CertificatesAPI.UnnamedSchemaRefD182888b36f93a765d9ce5aefa3009e9;
   export import CertificateCreateParams = CertificatesAPI.CertificateCreateParams;
   export import CertificateListParams = CertificatesAPI.CertificateListParams;

@@ -32,11 +32,11 @@ export class FallbackDomains extends APIResource {
   list(
     params: FallbackDomainListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<DevicesFallbackDomainsSinglePage, DevicesFallbackDomain> {
+  ): Core.PagePromise<FallbackDomainsSinglePage, FallbackDomain> {
     const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/devices/policy/fallback_domains`,
-      DevicesFallbackDomainsSinglePage,
+      FallbackDomainsSinglePage,
       options,
     );
   }
@@ -61,9 +61,9 @@ export class FallbackDomains extends APIResource {
   }
 }
 
-export class DevicesFallbackDomainsSinglePage extends SinglePage<DevicesFallbackDomain> {}
+export class FallbackDomainsSinglePage extends SinglePage<FallbackDomain> {}
 
-export interface DevicesFallbackDomain {
+export interface FallbackDomain {
   /**
    * The domain suffix to match when resolving locally.
    */
@@ -80,11 +80,11 @@ export interface DevicesFallbackDomain {
   dns_server?: Array<unknown>;
 }
 
-export type UnnamedSchemaRef1fbf91ecd61792c751fead58dc8005e6 = Array<DevicesFallbackDomain>;
+export type UnnamedSchemaRef1fbf91ecd61792c751fead58dc8005e6 = Array<FallbackDomain>;
 
-export type FallbackDomainUpdateResponse = Array<DevicesFallbackDomain>;
+export type FallbackDomainUpdateResponse = Array<FallbackDomain>;
 
-export type FallbackDomainGetResponse = Array<DevicesFallbackDomain>;
+export type FallbackDomainGetResponse = Array<FallbackDomain>;
 
 export interface FallbackDomainUpdateParams {
   /**
@@ -95,7 +95,7 @@ export interface FallbackDomainUpdateParams {
   /**
    * Body param:
    */
-  body: Array<DevicesFallbackDomain>;
+  body: Array<FallbackDomain>;
 }
 
 export interface FallbackDomainListParams {
@@ -107,11 +107,11 @@ export interface FallbackDomainGetParams {
 }
 
 export namespace FallbackDomains {
-  export import DevicesFallbackDomain = FallbackDomainsAPI.DevicesFallbackDomain;
+  export import FallbackDomain = FallbackDomainsAPI.FallbackDomain;
   export import UnnamedSchemaRef1fbf91ecd61792c751fead58dc8005e6 = FallbackDomainsAPI.UnnamedSchemaRef1fbf91ecd61792c751fead58dc8005e6;
   export import FallbackDomainUpdateResponse = FallbackDomainsAPI.FallbackDomainUpdateResponse;
   export import FallbackDomainGetResponse = FallbackDomainsAPI.FallbackDomainGetResponse;
-  export import DevicesFallbackDomainsSinglePage = FallbackDomainsAPI.DevicesFallbackDomainsSinglePage;
+  export import FallbackDomainsSinglePage = FallbackDomainsAPI.FallbackDomainsSinglePage;
   export import FallbackDomainUpdateParams = FallbackDomainsAPI.FallbackDomainUpdateParams;
   export import FallbackDomainListParams = FallbackDomainsAPI.FallbackDomainListParams;
   export import FallbackDomainGetParams = FallbackDomainsAPI.FallbackDomainGetParams;

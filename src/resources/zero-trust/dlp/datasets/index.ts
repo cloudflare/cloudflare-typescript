@@ -1,15 +1,15 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  DLPDataset,
-  DLPDatasetArray,
-  DLPDatasetCreation,
+  Dataset,
+  DatasetArray,
+  DatasetCreation,
   DatasetCreateParams,
   DatasetUpdateParams,
   DatasetListParams,
   DatasetDeleteParams,
   DatasetGetParams,
-  DLPDatasetsSinglePage,
+  DatasetsSinglePage,
   Datasets,
 } from './datasets';
-export { DLPDatasetNewVersion, UploadCreateParams, UploadEditParams, Upload } from './upload';
+export { NewVersion, UploadCreateParams, UploadEditParams, Upload } from './upload';

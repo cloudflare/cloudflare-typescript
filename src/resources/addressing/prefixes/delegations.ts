@@ -13,13 +13,13 @@ export class Delegations extends APIResource {
     prefixId: string,
     params: DelegationCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AddressingIpamDelegations> {
+  ): Core.APIPromise<Delegations> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/addressing/prefixes/${prefixId}/delegations`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: AddressingIpamDelegations }>
+      }) as Core.APIPromise<{ result: Delegations }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -30,11 +30,11 @@ export class Delegations extends APIResource {
     prefixId: string,
     params: DelegationListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<AddressingIpamDelegationsSinglePage, AddressingIpamDelegations> {
+  ): Core.PagePromise<DelegationsSinglePage, Delegations> {
     const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/addressing/prefixes/${prefixId}/delegations`,
-      AddressingIpamDelegationsSinglePage,
+      DelegationsSinglePage,
       options,
     );
   }
@@ -58,9 +58,9 @@ export class Delegations extends APIResource {
   }
 }
 
-export class AddressingIpamDelegationsSinglePage extends SinglePage<AddressingIpamDelegations> {}
+export class DelegationsSinglePage extends SinglePage<Delegations> {}
 
-export interface AddressingIpamDelegations {
+export interface Delegations {
   /**
    * Delegation identifier tag.
    */
@@ -131,9 +131,9 @@ export interface DelegationDeleteParams {
 }
 
 export namespace Delegations {
-  export import AddressingIpamDelegations = DelegationsAPI.AddressingIpamDelegations;
+  export import Delegations = DelegationsAPI.Delegations;
   export import DelegationDeleteResponse = DelegationsAPI.DelegationDeleteResponse;
-  export import AddressingIpamDelegationsSinglePage = DelegationsAPI.AddressingIpamDelegationsSinglePage;
+  export import DelegationsSinglePage = DelegationsAPI.DelegationsSinglePage;
   export import DelegationCreateParams = DelegationsAPI.DelegationCreateParams;
   export import DelegationListParams = DelegationsAPI.DelegationListParams;
   export import DelegationDeleteParams = DelegationsAPI.DelegationDeleteParams;

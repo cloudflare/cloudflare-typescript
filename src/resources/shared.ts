@@ -1,7 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import * as Shared from 'cloudflare/resources/shared';
+import * as LoadBalancersAPI from 'cloudflare/resources/load-balancers/load-balancers';
 import * as PoolsAPI from 'cloudflare/resources/user/load-balancers/pools';
+import * as TunnelsAPI from 'cloudflare/resources/zero-trust/tunnels/tunnels';
 import { V4PagePaginationArray } from 'cloudflare/pagination';
 
 export interface ErrorData {
@@ -44,7 +46,7 @@ export interface UnnamedSchemaRef3248f24329456e19dfa042fff9986f72 {
  */
 export type UnnamedSchemaRef33f2e3917f3fe46ad98af0acbb1d9a19 =
   | UnnamedSchemaRef33f2e3917f3fe46ad98af0acbb1d9a19.TunnelCfdTunnel
-  | UnnamedSchemaRef33f2e3917f3fe46ad98af0acbb1d9a19.TunnelWARPConnectorTunnel;
+  | TunnelsAPI.WARPConnectorTunnel;
 
 export namespace UnnamedSchemaRef33f2e3917f3fe46ad98af0acbb1d9a19 {
   /**
@@ -165,119 +167,6 @@ export namespace UnnamedSchemaRef33f2e3917f3fe46ad98af0acbb1d9a19 {
       uuid?: string;
     }
   }
-
-  /**
-   * A Warp Connector Tunnel that connects your origin to Cloudflare's edge.
-   */
-  export interface TunnelWARPConnectorTunnel {
-    /**
-     * UUID of the tunnel.
-     */
-    id?: string;
-
-    /**
-     * Cloudflare account ID
-     */
-    account_tag?: string;
-
-    /**
-     * The Cloudflare Tunnel connections between your origin and Cloudflare's edge.
-     */
-    connections?: Array<TunnelWARPConnectorTunnel.Connection>;
-
-    /**
-     * Timestamp of when the tunnel established at least one connection to Cloudflare's
-     * edge. If `null`, the tunnel is inactive.
-     */
-    conns_active_at?: string | null;
-
-    /**
-     * Timestamp of when the tunnel became inactive (no connections to Cloudflare's
-     * edge). If `null`, the tunnel is active.
-     */
-    conns_inactive_at?: string | null;
-
-    /**
-     * Timestamp of when the tunnel was created.
-     */
-    created_at?: string;
-
-    /**
-     * Timestamp of when the tunnel was deleted. If `null`, the tunnel has not been
-     * deleted.
-     */
-    deleted_at?: string | null;
-
-    /**
-     * Metadata associated with the tunnel.
-     */
-    metadata?: unknown;
-
-    /**
-     * A user-friendly name for the tunnel.
-     */
-    name?: string;
-
-    /**
-     * The status of the tunnel. Valid values are `inactive` (tunnel has never been
-     * run), `degraded` (tunnel is active and able to serve traffic but in an unhealthy
-     * state), `healthy` (tunnel is active and able to serve traffic), or `down`
-     * (tunnel can not serve traffic as it has no connections to the Cloudflare Edge).
-     */
-    status?: string;
-
-    /**
-     * The type of tunnel.
-     */
-    tun_type?: 'cfd_tunnel' | 'warp_connector' | 'ip_sec' | 'gre' | 'cni';
-  }
-
-  export namespace TunnelWARPConnectorTunnel {
-    export interface Connection {
-      /**
-       * UUID of the Cloudflare Tunnel connection.
-       */
-      id?: string;
-
-      /**
-       * UUID of the cloudflared instance.
-       */
-      client_id?: unknown;
-
-      /**
-       * The cloudflared version used to establish this connection.
-       */
-      client_version?: string;
-
-      /**
-       * The Cloudflare data center used for this connection.
-       */
-      colo_name?: string;
-
-      /**
-       * Cloudflare continues to track connections for several minutes after they
-       * disconnect. This is an optimization to improve latency and reliability of
-       * reconnecting. If `true`, the connection has disconnected but is still being
-       * tracked. If `false`, the connection is actively serving traffic.
-       */
-      is_pending_reconnect?: boolean;
-
-      /**
-       * Timestamp of when the connection was established.
-       */
-      opened_at?: string;
-
-      /**
-       * The public IP address of the host running cloudflared.
-       */
-      origin_ip?: string;
-
-      /**
-       * UUID of the Cloudflare Tunnel connection.
-       */
-      uuid?: string;
-    }
-  }
 }
 
 /**
@@ -285,7 +174,7 @@ export namespace UnnamedSchemaRef33f2e3917f3fe46ad98af0acbb1d9a19 {
  */
 export type UnnamedSchemaRef413ab4522f0bb93f63444799121fe2f8 =
   | UnnamedSchemaRef413ab4522f0bb93f63444799121fe2f8.TunnelCfdTunnel
-  | UnnamedSchemaRef413ab4522f0bb93f63444799121fe2f8.TunnelWARPConnectorTunnel;
+  | TunnelsAPI.WARPConnectorTunnel;
 
 export namespace UnnamedSchemaRef413ab4522f0bb93f63444799121fe2f8 {
   /**
@@ -361,119 +250,6 @@ export namespace UnnamedSchemaRef413ab4522f0bb93f63444799121fe2f8 {
   }
 
   export namespace TunnelCfdTunnel {
-    export interface Connection {
-      /**
-       * UUID of the Cloudflare Tunnel connection.
-       */
-      id?: string;
-
-      /**
-       * UUID of the cloudflared instance.
-       */
-      client_id?: unknown;
-
-      /**
-       * The cloudflared version used to establish this connection.
-       */
-      client_version?: string;
-
-      /**
-       * The Cloudflare data center used for this connection.
-       */
-      colo_name?: string;
-
-      /**
-       * Cloudflare continues to track connections for several minutes after they
-       * disconnect. This is an optimization to improve latency and reliability of
-       * reconnecting. If `true`, the connection has disconnected but is still being
-       * tracked. If `false`, the connection is actively serving traffic.
-       */
-      is_pending_reconnect?: boolean;
-
-      /**
-       * Timestamp of when the connection was established.
-       */
-      opened_at?: string;
-
-      /**
-       * The public IP address of the host running cloudflared.
-       */
-      origin_ip?: string;
-
-      /**
-       * UUID of the Cloudflare Tunnel connection.
-       */
-      uuid?: string;
-    }
-  }
-
-  /**
-   * A Warp Connector Tunnel that connects your origin to Cloudflare's edge.
-   */
-  export interface TunnelWARPConnectorTunnel {
-    /**
-     * UUID of the tunnel.
-     */
-    id?: string;
-
-    /**
-     * Cloudflare account ID
-     */
-    account_tag?: string;
-
-    /**
-     * The Cloudflare Tunnel connections between your origin and Cloudflare's edge.
-     */
-    connections?: Array<TunnelWARPConnectorTunnel.Connection>;
-
-    /**
-     * Timestamp of when the tunnel established at least one connection to Cloudflare's
-     * edge. If `null`, the tunnel is inactive.
-     */
-    conns_active_at?: string | null;
-
-    /**
-     * Timestamp of when the tunnel became inactive (no connections to Cloudflare's
-     * edge). If `null`, the tunnel is active.
-     */
-    conns_inactive_at?: string | null;
-
-    /**
-     * Timestamp of when the tunnel was created.
-     */
-    created_at?: string;
-
-    /**
-     * Timestamp of when the tunnel was deleted. If `null`, the tunnel has not been
-     * deleted.
-     */
-    deleted_at?: string | null;
-
-    /**
-     * Metadata associated with the tunnel.
-     */
-    metadata?: unknown;
-
-    /**
-     * A user-friendly name for the tunnel.
-     */
-    name?: string;
-
-    /**
-     * The status of the tunnel. Valid values are `inactive` (tunnel has never been
-     * run), `degraded` (tunnel is active and able to serve traffic but in an unhealthy
-     * state), `healthy` (tunnel is active and able to serve traffic), or `down`
-     * (tunnel can not serve traffic as it has no connections to the Cloudflare Edge).
-     */
-    status?: string;
-
-    /**
-     * The type of tunnel.
-     */
-    tun_type?: 'cfd_tunnel' | 'warp_connector' | 'ip_sec' | 'gre' | 'cni';
-  }
-
-  export namespace TunnelWARPConnectorTunnel {
     export interface Connection {
       /**
        * UUID of the Cloudflare Tunnel connection.
@@ -671,22 +447,7 @@ export interface UnnamedSchemaRefB92f86eb861cd3dee83c40884802fda6 {
    * A list of regions from which to run health checks. Null means every Cloudflare
    * data center.
    */
-  check_regions?: Array<
-    | 'WNAM'
-    | 'ENAM'
-    | 'WEU'
-    | 'EEU'
-    | 'NSAM'
-    | 'SSAM'
-    | 'OC'
-    | 'ME'
-    | 'NAF'
-    | 'SAF'
-    | 'SAS'
-    | 'SEAS'
-    | 'NEAS'
-    | 'ALL_REGIONS'
-  > | null;
+  check_regions?: Array<LoadBalancersAPI.CheckRegion> | null;
 
   created_on?: string;
 
@@ -717,7 +478,7 @@ export interface UnnamedSchemaRefB92f86eb861cd3dee83c40884802fda6 {
   /**
    * Configures load shedding policies and percentages for the pool.
    */
-  load_shedding?: UnnamedSchemaRefB92f86eb861cd3dee83c40884802fda6.LoadShedding;
+  load_shedding?: LoadBalancersAPI.LoadShedding;
 
   /**
    * The longitude of the data center containing the origins used in this pool in
@@ -759,195 +520,19 @@ export interface UnnamedSchemaRefB92f86eb861cd3dee83c40884802fda6 {
    * Filter pool and origin health notifications by resource type or health status.
    * Use null to reset.
    */
-  notification_filter?: UnnamedSchemaRefB92f86eb861cd3dee83c40884802fda6.NotificationFilter | null;
+  notification_filter?: LoadBalancersAPI.NotificationFilter | null;
 
   /**
    * Configures origin steering for the pool. Controls how origins are selected for
    * new sessions and traffic without session affinity.
    */
-  origin_steering?: UnnamedSchemaRefB92f86eb861cd3dee83c40884802fda6.OriginSteering;
+  origin_steering?: LoadBalancersAPI.OriginSteering;
 
   /**
    * The list of origins within this pool. Traffic directed at this pool is balanced
    * across all currently healthy origins, provided the pool itself is healthy.
    */
-  origins?: Array<UnnamedSchemaRefB92f86eb861cd3dee83c40884802fda6.Origin>;
-}
-
-export namespace UnnamedSchemaRefB92f86eb861cd3dee83c40884802fda6 {
-  /**
-   * Configures load shedding policies and percentages for the pool.
-   */
-  export interface LoadShedding {
-    /**
-     * The percent of traffic to shed from the pool, according to the default policy.
-     * Applies to new sessions and traffic without session affinity.
-     */
-    default_percent?: number;
-
-    /**
-     * The default policy to use when load shedding. A random policy randomly sheds a
-     * given percent of requests. A hash policy computes a hash over the
-     * CF-Connecting-IP address and sheds all requests originating from a percent of
-     * IPs.
-     */
-    default_policy?: 'random' | 'hash';
-
-    /**
-     * The percent of existing sessions to shed from the pool, according to the session
-     * policy.
-     */
-    session_percent?: number;
-
-    /**
-     * Only the hash policy is supported for existing sessions (to avoid exponential
-     * decay).
-     */
-    session_policy?: 'hash';
-  }
-
-  /**
-   * Filter pool and origin health notifications by resource type or health status.
-   * Use null to reset.
-   */
-  export interface NotificationFilter {
-    /**
-     * Filter options for a particular resource type (pool or origin). Use null to
-     * reset.
-     */
-    origin?: NotificationFilter.Origin | null;
-
-    /**
-     * Filter options for a particular resource type (pool or origin). Use null to
-     * reset.
-     */
-    pool?: NotificationFilter.Pool | null;
-  }
-
-  export namespace NotificationFilter {
-    /**
-     * Filter options for a particular resource type (pool or origin). Use null to
-     * reset.
-     */
-    export interface Origin {
-      /**
-       * If set true, disable notifications for this type of resource (pool or origin).
-       */
-      disable?: boolean;
-
-      /**
-       * If present, send notifications only for this health status (e.g. false for only
-       * DOWN events). Use null to reset (all events).
-       */
-      healthy?: boolean | null;
-    }
-
-    /**
-     * Filter options for a particular resource type (pool or origin). Use null to
-     * reset.
-     */
-    export interface Pool {
-      /**
-       * If set true, disable notifications for this type of resource (pool or origin).
-       */
-      disable?: boolean;
-
-      /**
-       * If present, send notifications only for this health status (e.g. false for only
-       * DOWN events). Use null to reset (all events).
-       */
-      healthy?: boolean | null;
-    }
-  }
-
-  /**
-   * Configures origin steering for the pool. Controls how origins are selected for
-   * new sessions and traffic without session affinity.
-   */
-  export interface OriginSteering {
-    /**
-     * The type of origin steering policy to use.
-     *
-     * - `"random"`: Select an origin randomly.
-     * - `"hash"`: Select an origin by computing a hash over the CF-Connecting-IP
-     *   address.
-     * - `"least_outstanding_requests"`: Select an origin by taking into consideration
-     *   origin weights, as well as each origin's number of outstanding requests.
-     *   Origins with more pending requests are weighted proportionately less relative
-     *   to others.
-     * - `"least_connections"`: Select an origin by taking into consideration origin
-     *   weights, as well as each origin's number of open connections. Origins with
-     *   more open connections are weighted proportionately less relative to others.
-     *   Supported for HTTP/1 and HTTP/2 connections.
-     */
-    policy?: 'random' | 'hash' | 'least_outstanding_requests' | 'least_connections';
-  }
-
-  export interface Origin {
-    /**
-     * The IP address (IPv4 or IPv6) of the origin, or its publicly addressable
-     * hostname. Hostnames entered here should resolve directly to the origin, and not
-     * be a hostname proxied by Cloudflare. To set an internal/reserved address,
-     * virtual_network_id must also be set.
-     */
-    address?: string;
-
-    /**
-     * This field shows up only if the origin is disabled. This field is set with the
-     * time the origin was disabled.
-     */
-    disabled_at?: string;
-
-    /**
-     * Whether to enable (the default) this origin within the pool. Disabled origins
-     * will not receive traffic and are excluded from health checks. The origin will
-     * only be disabled for the current pool.
-     */
-    enabled?: boolean;
-
-    /**
-     * The request header is used to pass additional information with an HTTP request.
-     * Currently supported header is 'Host'.
-     */
-    header?: Origin.Header;
-
-    /**
-     * A human-identifiable name for the origin.
-     */
-    name?: string;
-
-    /**
-     * The virtual network subnet ID the origin belongs in. Virtual network must also
-     * belong to the account.
-     */
-    virtual_network_id?: string;
-
-    /**
-     * The weight of this origin relative to other origins in the pool. Based on the
-     * configured weight the total traffic is distributed among origins within the
-     * pool.
-     *
-     * - `origin_steering.policy="least_outstanding_requests"`: Use weight to scale the
-     *   origin's outstanding requests.
-     * - `origin_steering.policy="least_connections"`: Use weight to scale the origin's
-     *   open connections.
-     */
-    weight?: number;
-  }
-
-  export namespace Origin {
-    /**
-     * The request header is used to pass additional information with an HTTP request.
-     * Currently supported header is 'Host'.
-     */
-    export interface Header {
-      /**
-       * The 'Host' header allows to override the hostname set in the HTTP request.
-       * Current support is 1 'Host' header override per origin.
-       */
-      Host?: Array<string>;
-    }
-  }
+  origins?: Array<LoadBalancersAPI.OriginItem>;
 }
 
 export interface UnnamedSchemaRefCc2ac1a037e5d6702fc77b3bcb527854 {
@@ -955,8 +540,6 @@ export interface UnnamedSchemaRefCc2ac1a037e5d6702fc77b3bcb527854 {
 }
 
 export type UnnamedSchemaRefD8600eb4758b3ae35607a0327bcd691b = '*' | 'referral' | 'referrer';
-
-export type UnnamedSchemaRefDfef9380cb53cc7d4bda9f75e109d7a2 = Array<unknown>;
 
 export type UnnamedSchemaRefE7c61ebe06ebfc3861ae8b9db4ba152b =
   | UnnamedSchemaRefE7c61ebe06ebfc3861ae8b9db4ba152b.UnionMember0
@@ -1105,14 +688,5 @@ export interface UnnamedSchemaRefEe1e79edcb234d14c4dd266880f2fd24 {
    */
   main_module?: string;
 }
-
-export interface UnnamedSchemaRefFb1dc8bb871d835b75bd0c2f50bd8572 {
-  /**
-   * UUID
-   */
-  id?: string;
-}
-
-export class UnnamedSchemaRef413ab4522f0bb93f63444799121fe2f8sV4PagePaginationArray extends V4PagePaginationArray<UnnamedSchemaRef413ab4522f0bb93f63444799121fe2f8> {}
 
 export class UnnamedSchemaRef413ab4522f0bb93f63444799121fe2f8sV4PagePaginationArray extends V4PagePaginationArray<UnnamedSchemaRef413ab4522f0bb93f63444799121fe2f8> {}

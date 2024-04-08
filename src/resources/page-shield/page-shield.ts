@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as PageShieldAPI from 'cloudflare/resources/page-shield/page-shield';
 import * as ConnectionsAPI from 'cloudflare/resources/page-shield/connections';
 import * as PoliciesAPI from 'cloudflare/resources/page-shield/policies';
 import * as ScriptsAPI from 'cloudflare/resources/page-shield/scripts';
@@ -30,17 +29,15 @@ export class PageShield extends APIResource {
   /**
    * Fetches the Page Shield settings.
    */
-  get(params: PageShieldGetParams, options?: Core.RequestOptions): Core.APIPromise<PageShieldSetting> {
+  get(params: PageShieldGetParams, options?: Core.RequestOptions): Core.APIPromise<Setting> {
     const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zone_id}/page_shield`, options) as Core.APIPromise<{
-        result: PageShieldSetting;
-      }>
+      this._client.get(`/zones/${zone_id}/page_shield`, options) as Core.APIPromise<{ result: Setting }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface PageShieldSetting {
+export interface Setting {
   /**
    * When true, indicates that Page Shield is enabled.
    */
@@ -118,27 +115,23 @@ export interface PageShieldGetParams {
 }
 
 export namespace PageShield {
-  export import PageShieldSetting = PageShieldAPI.PageShieldSetting;
-  export import PageShieldUpdateResponse = PageShieldAPI.PageShieldUpdateResponse;
-  export import PageShieldUpdateParams = PageShieldAPI.PageShieldUpdateParams;
-  export import PageShieldGetParams = PageShieldAPI.PageShieldGetParams;
   export import Policies = PoliciesAPI.Policies;
-  export import PageShieldPolicy = PoliciesAPI.PageShieldPolicy;
-  export import PageShieldPoliciesSinglePage = PoliciesAPI.PageShieldPoliciesSinglePage;
+  export import Policy = PoliciesAPI.Policy;
+  export import PoliciesSinglePage = PoliciesAPI.PoliciesSinglePage;
   export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
   export import PolicyUpdateParams = PoliciesAPI.PolicyUpdateParams;
   export import PolicyListParams = PoliciesAPI.PolicyListParams;
   export import PolicyDeleteParams = PoliciesAPI.PolicyDeleteParams;
   export import PolicyGetParams = PoliciesAPI.PolicyGetParams;
   export import Connections = ConnectionsAPI.Connections;
-  export import PageShieldConnection = ConnectionsAPI.PageShieldConnection;
-  export import PageShieldConnectionsSinglePage = ConnectionsAPI.PageShieldConnectionsSinglePage;
+  export import Connection = ConnectionsAPI.Connection;
+  export import ConnectionsSinglePage = ConnectionsAPI.ConnectionsSinglePage;
   export import ConnectionListParams = ConnectionsAPI.ConnectionListParams;
   export import ConnectionGetParams = ConnectionsAPI.ConnectionGetParams;
   export import Scripts = ScriptsAPI.Scripts;
-  export import PageShieldScript = ScriptsAPI.PageShieldScript;
+  export import Script = ScriptsAPI.Script;
   export import ScriptGetResponse = ScriptsAPI.ScriptGetResponse;
-  export import PageShieldScriptsSinglePage = ScriptsAPI.PageShieldScriptsSinglePage;
+  export import ScriptsSinglePage = ScriptsAPI.ScriptsSinglePage;
   export import ScriptListParams = ScriptsAPI.ScriptListParams;
   export import ScriptGetParams = ScriptsAPI.ScriptGetParams;
 }

@@ -7,5 +7,5 @@ export {
   ActiveSessions,
 } from './active-sessions';
 export { FailedLoginListResponse, FailedLoginListResponsesSinglePage, FailedLogins } from './failed-logins';
-export { ZeroTrustIdentity, LastSeenIdentity } from './last-seen-identity';
-export { ZeroTrustUsers, ZeroTrustUsersSinglePage, Users } from './users';
+export { Identity, LastSeenIdentity } from './last-seen-identity';
+export { User, UsersSinglePage, Users } from './users';

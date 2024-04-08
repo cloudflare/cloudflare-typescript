@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as StreamAPI from 'cloudflare/resources/stream/stream';
 import * as AudioTracksAPI from 'cloudflare/resources/stream/audio-tracks';
 import * as CaptionsAPI from 'cloudflare/resources/stream/captions';
 import * as ClipAPI from 'cloudflare/resources/stream/clip';
@@ -21,7 +20,7 @@ import { SinglePage } from 'cloudflare/pagination';
 export class Stream extends APIResource {
   audioTracks: AudioTracksAPI.AudioTracks = new AudioTracksAPI.AudioTracks(this._client);
   videos: VideosAPI.Videos = new VideosAPI.Videos(this._client);
-  clip: ClipAPI.Clip = new ClipAPI.Clip(this._client);
+  clip: ClipAPI.ClipResource = new ClipAPI.ClipResource(this._client);
   copy: CopyAPI.Copy = new CopyAPI.Copy(this._client);
   directUpload: DirectUploadAPI.DirectUpload = new DirectUploadAPI.DirectUpload(this._client);
   keys: KeysAPI.Keys = new KeysAPI.Keys(this._client);
@@ -66,15 +65,9 @@ export class Stream extends APIResource {
    * Lists up to 1000 videos from a single request. For a specific range, refer to
    * the optional parameters.
    */
-  list(
-    params: StreamListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<StreamVideosSinglePage, StreamVideos> {
+  list(params: StreamListParams, options?: Core.RequestOptions): Core.PagePromise<VideosSinglePage, Video> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/stream`, StreamVideosSinglePage, {
-      query,
-      ...options,
-    });
+    return this._client.getAPIList(`/accounts/${account_id}/stream`, VideosSinglePage, { query, ...options });
   }
 
   /**
@@ -96,29 +89,27 @@ export class Stream extends APIResource {
   /**
    * Fetches details for a single video.
    */
-  get(
-    identifier: string,
-    params: StreamGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<StreamVideos> {
+  get(identifier: string, params: StreamGetParams, options?: Core.RequestOptions): Core.APIPromise<Video> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/stream/${identifier}`, options) as Core.APIPromise<{
-        result: StreamVideos;
+        result: Video;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class StreamVideosSinglePage extends SinglePage<StreamVideos> {}
+export class VideosSinglePage extends SinglePage<Video> {}
 
-export interface StreamVideos {
+export type AllowedOriginsItem = string;
+
+export interface Video {
   /**
    * Lists the origins allowed to display the video. Enter allowed origin domains in
    * an array and use `*` for wildcard subdomains. Empty arrays allow the video to be
    * viewed on any origin.
    */
-  allowedOrigins?: Array<string>;
+  allowedOrigins?: Array<AllowedOriginsItem>;
 
   /**
    * The date and time the media item was created.
@@ -137,7 +128,7 @@ export interface StreamVideos {
    */
   duration?: number;
 
-  input?: StreamVideos.Input;
+  input?: Video.Input;
 
   /**
    * The live input ID used to upload a video with Stream Live.
@@ -163,7 +154,7 @@ export interface StreamVideos {
    */
   modified?: string;
 
-  playback?: StreamVideos.Playback;
+  playback?: Video.Playback;
 
   /**
    * The video's preview page URI. This field is omitted until encoding is complete.
@@ -207,7 +198,7 @@ export interface StreamVideos {
    * approximate percent of completion. If the `state` is `error`, `errorReasonCode`
    * and `errorReasonText` provide additional details.
    */
-  status?: StreamVideos.Status;
+  status?: Video.Status;
 
   /**
    * The media item's thumbnail URI. This field is omitted until encoding is
@@ -239,10 +230,10 @@ export interface StreamVideos {
    */
   uploadExpiry?: string;
 
-  watermark?: WatermarksAPI.StreamWatermarks;
+  watermark?: WatermarksAPI.Watermaks;
 }
 
-export namespace StreamVideos {
+export namespace Video {
   export interface Input {
     /**
      * The video height in pixels. A value of `-1` means the height is unknown. The
@@ -409,14 +400,8 @@ export interface StreamGetParams {
 }
 
 export namespace Stream {
-  export import StreamVideos = StreamAPI.StreamVideos;
-  export import StreamVideosSinglePage = StreamAPI.StreamVideosSinglePage;
-  export import StreamCreateParams = StreamAPI.StreamCreateParams;
-  export import StreamListParams = StreamAPI.StreamListParams;
-  export import StreamDeleteParams = StreamAPI.StreamDeleteParams;
-  export import StreamGetParams = StreamAPI.StreamGetParams;
   export import AudioTracks = AudioTracksAPI.AudioTracks;
-  export import StreamAudio = AudioTracksAPI.StreamAudio;
+  export import Audio = AudioTracksAPI.Audio;
   export import AudioTrackGetResponse = AudioTracksAPI.AudioTrackGetResponse;
   export import AudioTrackDeleteParams = AudioTracksAPI.AudioTrackDeleteParams;
   export import AudioTrackCopyParams = AudioTracksAPI.AudioTrackCopyParams;
@@ -425,8 +410,8 @@ export namespace Stream {
   export import Videos = VideosAPI.Videos;
   export import VideoStorageUsageResponse = VideosAPI.VideoStorageUsageResponse;
   export import VideoStorageUsageParams = VideosAPI.VideoStorageUsageParams;
+  export import ClipResource = ClipAPI.ClipResource;
   export import Clip = ClipAPI.Clip;
-  export import StreamClipping = ClipAPI.StreamClipping;
   export import ClipCreateParams = ClipAPI.ClipCreateParams;
   export import Copy = CopyAPI.Copy;
   export import CopyCreateParams = CopyAPI.CopyCreateParams;
@@ -434,13 +419,12 @@ export namespace Stream {
   export import DirectUploadCreateResponse = DirectUploadAPI.DirectUploadCreateResponse;
   export import DirectUploadCreateParams = DirectUploadAPI.DirectUploadCreateParams;
   export import Keys = KeysAPI.Keys;
-  export import StreamKeys = KeysAPI.StreamKeys;
   export import KeyGetResponse = KeysAPI.KeyGetResponse;
   export import KeyCreateParams = KeysAPI.KeyCreateParams;
   export import KeyDeleteParams = KeysAPI.KeyDeleteParams;
   export import KeyGetParams = KeysAPI.KeyGetParams;
   export import LiveInputs = LiveInputsAPI.LiveInputs;
-  export import StreamLiveInput = LiveInputsAPI.StreamLiveInput;
+  export import LiveInput = LiveInputsAPI.LiveInput;
   export import LiveInputListResponse = LiveInputsAPI.LiveInputListResponse;
   export import LiveInputCreateParams = LiveInputsAPI.LiveInputCreateParams;
   export import LiveInputUpdateParams = LiveInputsAPI.LiveInputUpdateParams;
@@ -448,8 +432,8 @@ export namespace Stream {
   export import LiveInputDeleteParams = LiveInputsAPI.LiveInputDeleteParams;
   export import LiveInputGetParams = LiveInputsAPI.LiveInputGetParams;
   export import Watermarks = WatermarksAPI.Watermarks;
-  export import StreamWatermarks = WatermarksAPI.StreamWatermarks;
-  export import StreamWatermarksSinglePage = WatermarksAPI.StreamWatermarksSinglePage;
+  export import Watermaks = WatermarksAPI.Watermaks;
+  export import WatermaksSinglePage = WatermarksAPI.WatermaksSinglePage;
   export import WatermarkCreateParams = WatermarksAPI.WatermarkCreateParams;
   export import WatermarkListParams = WatermarksAPI.WatermarkListParams;
   export import WatermarkDeleteParams = WatermarksAPI.WatermarkDeleteParams;
@@ -459,7 +443,7 @@ export namespace Stream {
   export import WebhookDeleteParams = WebhooksAPI.WebhookDeleteParams;
   export import WebhookGetParams = WebhooksAPI.WebhookGetParams;
   export import Captions = CaptionsAPI.Captions;
-  export import StreamCaptions = CaptionsAPI.StreamCaptions;
+  export import Caption = CaptionsAPI.Caption;
   export import CaptionDeleteResponse = CaptionsAPI.CaptionDeleteResponse;
   export import CaptionGetResponse = CaptionsAPI.CaptionGetResponse;
   export import CaptionUpdateParams = CaptionsAPI.CaptionUpdateParams;

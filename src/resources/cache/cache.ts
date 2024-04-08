@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as CacheAPI from 'cloudflare/resources/cache/cache';
 import * as CacheReserveAPI from 'cloudflare/resources/cache/cache-reserve';
 import * as RegionalTieredCacheAPI from 'cloudflare/resources/cache/regional-tiered-cache';
 import * as SmartTieredCacheAPI from 'cloudflare/resources/cache/smart-tiered-cache';
@@ -144,8 +143,6 @@ export namespace CachePurgeParams {
 }
 
 export namespace Cache {
-  export import CachePurgeResponse = CacheAPI.CachePurgeResponse;
-  export import CachePurgeParams = CacheAPI.CachePurgeParams;
   export import CacheReserve = CacheReserveAPI.CacheReserve;
   export import UnnamedSchemaRef2b5e755404a4bfd7892291ce97c4968d = CacheReserveAPI.UnnamedSchemaRef2b5e755404a4bfd7892291ce97c4968d;
   export import UnnamedSchemaRef37c385b4ebac5c7a6475b3f81ef9a7ad = CacheReserveAPI.UnnamedSchemaRef37c385b4ebac5c7a6475b3f81ef9a7ad;

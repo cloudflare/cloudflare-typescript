@@ -19,14 +19,11 @@ export class Policies extends APIResource {
    * Creates a device settings profile to be applied to certain devices matching the
    * criteria.
    */
-  create(
-    params: PolicyCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DevicesDeviceSettingsPolicy | null> {
+  create(params: PolicyCreateParams, options?: Core.RequestOptions): Core.APIPromise<SettingsPolicy | null> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/devices/policy`, { body, ...options }) as Core.APIPromise<{
-        result: DevicesDeviceSettingsPolicy | null;
+        result: SettingsPolicy | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -37,11 +34,11 @@ export class Policies extends APIResource {
   list(
     params: PolicyListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<DevicesDeviceSettingsPoliciesSinglePage, DevicesDeviceSettingsPolicy> {
+  ): Core.PagePromise<SettingsPoliciesSinglePage, SettingsPolicy> {
     const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/devices/policies`,
-      DevicesDeviceSettingsPoliciesSinglePage,
+      SettingsPoliciesSinglePage,
       options,
     );
   }
@@ -71,13 +68,13 @@ export class Policies extends APIResource {
     policyId: string,
     params: PolicyEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DevicesDeviceSettingsPolicy | null> {
+  ): Core.APIPromise<SettingsPolicy | null> {
     const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/devices/policy/${policyId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: DevicesDeviceSettingsPolicy | null }>
+      }) as Core.APIPromise<{ result: SettingsPolicy | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -88,19 +85,19 @@ export class Policies extends APIResource {
     policyId: string,
     params: PolicyGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DevicesDeviceSettingsPolicy | null> {
+  ): Core.APIPromise<SettingsPolicy | null> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/devices/policy/${policyId}`, options) as Core.APIPromise<{
-        result: DevicesDeviceSettingsPolicy | null;
+        result: SettingsPolicy | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class DevicesDeviceSettingsPoliciesSinglePage extends SinglePage<DevicesDeviceSettingsPolicy> {}
+export class SettingsPoliciesSinglePage extends SinglePage<SettingsPolicy> {}
 
-export interface DevicesDeviceSettingsPolicy {
+export interface SettingsPolicy {
   /**
    * Whether to allow the user to switch WARP between modes.
    */
@@ -149,18 +146,18 @@ export interface DevicesDeviceSettingsPolicy {
    */
   enabled?: boolean;
 
-  exclude?: Array<ExcludesAPI.DevicesSplitTunnel>;
+  exclude?: Array<ExcludesAPI.SplitTunnelExclude>;
 
   /**
    * Whether to add Microsoft IPs to Split Tunnel exclusions.
    */
   exclude_office_ips?: boolean;
 
-  fallback_domains?: Array<FallbackDomainsAPI.DevicesFallbackDomain>;
+  fallback_domains?: Array<FallbackDomainsAPI.FallbackDomain>;
 
   gateway_unique_id?: string;
 
-  include?: Array<IncludesAPI.DevicesSplitTunnelInclude>;
+  include?: Array<IncludesAPI.SplitTunnelInclude>;
 
   /**
    * The amount of time in minutes a user is allowed access to their LAN. A value of
@@ -197,7 +194,7 @@ export interface DevicesDeviceSettingsPolicy {
    */
   precedence?: number;
 
-  service_mode_v2?: DevicesDeviceSettingsPolicy.ServiceModeV2;
+  service_mode_v2?: SettingsPolicy.ServiceModeV2;
 
   /**
    * The URL to launch when the Send Feedback button is clicked.
@@ -208,9 +205,11 @@ export interface DevicesDeviceSettingsPolicy {
    * Whether to allow the user to turn off the WARP switch and disconnect the client.
    */
   switch_locked?: boolean;
+
+  target_tests?: Array<SettingsPolicy.TargetTest>;
 }
 
-export namespace DevicesDeviceSettingsPolicy {
+export namespace SettingsPolicy {
   export interface ServiceModeV2 {
     /**
      * The mode to run the WARP client under.
@@ -221,6 +220,18 @@ export namespace DevicesDeviceSettingsPolicy {
      * The port number when used with proxy mode.
      */
     port?: number;
+  }
+
+  export interface TargetTest {
+    /**
+     * The id of the DEX test targeting this policy
+     */
+    id?: string;
+
+    /**
+     * The name of the DEX test targeting this policy
+     */
+    name?: string;
   }
 }
 
@@ -273,18 +284,18 @@ export interface UnnamedSchemaRefF636ff9f2cb41ff4b715cf8ed8515581 {
    */
   enabled?: boolean;
 
-  exclude?: Array<ExcludesAPI.DevicesSplitTunnel>;
+  exclude?: Array<ExcludesAPI.SplitTunnelExclude>;
 
   /**
    * Whether to add Microsoft IPs to Split Tunnel exclusions.
    */
   exclude_office_ips?: boolean;
 
-  fallback_domains?: Array<FallbackDomainsAPI.DevicesFallbackDomain>;
+  fallback_domains?: Array<FallbackDomainsAPI.FallbackDomain>;
 
   gateway_unique_id?: string;
 
-  include?: Array<IncludesAPI.DevicesSplitTunnelInclude>;
+  include?: Array<IncludesAPI.SplitTunnelInclude>;
 
   /**
    * The amount of time in minutes a user is allowed access to their LAN. A value of
@@ -332,6 +343,8 @@ export interface UnnamedSchemaRefF636ff9f2cb41ff4b715cf8ed8515581 {
    * Whether to allow the user to turn off the WARP switch and disconnect the client.
    */
   switch_locked?: boolean;
+
+  target_tests?: Array<UnnamedSchemaRefF636ff9f2cb41ff4b715cf8ed8515581.TargetTest>;
 }
 
 export namespace UnnamedSchemaRefF636ff9f2cb41ff4b715cf8ed8515581 {
@@ -346,9 +359,21 @@ export namespace UnnamedSchemaRefF636ff9f2cb41ff4b715cf8ed8515581 {
      */
     port?: number;
   }
+
+  export interface TargetTest {
+    /**
+     * The id of the DEX test targeting this policy
+     */
+    id?: string;
+
+    /**
+     * The name of the DEX test targeting this policy
+     */
+    name?: string;
+  }
 }
 
-export type PolicyDeleteResponse = Array<DevicesDeviceSettingsPolicy>;
+export type PolicyDeleteResponse = Array<SettingsPolicy>;
 
 export interface PolicyCreateParams {
   /**
@@ -589,10 +614,10 @@ export interface PolicyGetParams {
 }
 
 export namespace Policies {
-  export import DevicesDeviceSettingsPolicy = PoliciesAPI.DevicesDeviceSettingsPolicy;
+  export import SettingsPolicy = PoliciesAPI.SettingsPolicy;
   export import UnnamedSchemaRefF636ff9f2cb41ff4b715cf8ed8515581 = PoliciesAPI.UnnamedSchemaRefF636ff9f2cb41ff4b715cf8ed8515581;
   export import PolicyDeleteResponse = PoliciesAPI.PolicyDeleteResponse;
-  export import DevicesDeviceSettingsPoliciesSinglePage = PoliciesAPI.DevicesDeviceSettingsPoliciesSinglePage;
+  export import SettingsPoliciesSinglePage = PoliciesAPI.SettingsPoliciesSinglePage;
   export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
   export import PolicyListParams = PoliciesAPI.PolicyListParams;
   export import PolicyDeleteParams = PoliciesAPI.PolicyDeleteParams;
@@ -602,29 +627,29 @@ export namespace Policies {
   export import DefaultPolicyGetResponse = DefaultPolicyAPI.DefaultPolicyGetResponse;
   export import DefaultPolicyGetParams = DefaultPolicyAPI.DefaultPolicyGetParams;
   export import Excludes = ExcludesAPI.Excludes;
-  export import DevicesSplitTunnel = ExcludesAPI.DevicesSplitTunnel;
+  export import SplitTunnelExclude = ExcludesAPI.SplitTunnelExclude;
   export import UnnamedSchemaRef0462afe1a32ee90b1999d4277af59fa8 = ExcludesAPI.UnnamedSchemaRef0462afe1a32ee90b1999d4277af59fa8;
   export import ExcludeUpdateResponse = ExcludesAPI.ExcludeUpdateResponse;
   export import ExcludeGetResponse = ExcludesAPI.ExcludeGetResponse;
-  export import DevicesSplitTunnelsSinglePage = ExcludesAPI.DevicesSplitTunnelsSinglePage;
+  export import SplitTunnelExcludesSinglePage = ExcludesAPI.SplitTunnelExcludesSinglePage;
   export import ExcludeUpdateParams = ExcludesAPI.ExcludeUpdateParams;
   export import ExcludeListParams = ExcludesAPI.ExcludeListParams;
   export import ExcludeGetParams = ExcludesAPI.ExcludeGetParams;
   export import FallbackDomains = FallbackDomainsAPI.FallbackDomains;
-  export import DevicesFallbackDomain = FallbackDomainsAPI.DevicesFallbackDomain;
+  export import FallbackDomain = FallbackDomainsAPI.FallbackDomain;
   export import UnnamedSchemaRef1fbf91ecd61792c751fead58dc8005e6 = FallbackDomainsAPI.UnnamedSchemaRef1fbf91ecd61792c751fead58dc8005e6;
   export import FallbackDomainUpdateResponse = FallbackDomainsAPI.FallbackDomainUpdateResponse;
   export import FallbackDomainGetResponse = FallbackDomainsAPI.FallbackDomainGetResponse;
-  export import DevicesFallbackDomainsSinglePage = FallbackDomainsAPI.DevicesFallbackDomainsSinglePage;
+  export import FallbackDomainsSinglePage = FallbackDomainsAPI.FallbackDomainsSinglePage;
   export import FallbackDomainUpdateParams = FallbackDomainsAPI.FallbackDomainUpdateParams;
   export import FallbackDomainListParams = FallbackDomainsAPI.FallbackDomainListParams;
   export import FallbackDomainGetParams = FallbackDomainsAPI.FallbackDomainGetParams;
   export import Includes = IncludesAPI.Includes;
-  export import DevicesSplitTunnelInclude = IncludesAPI.DevicesSplitTunnelInclude;
+  export import SplitTunnelInclude = IncludesAPI.SplitTunnelInclude;
   export import UnnamedSchemaRef5e0c6134a624678286f4a424b001870a = IncludesAPI.UnnamedSchemaRef5e0c6134a624678286f4a424b001870a;
   export import IncludeUpdateResponse = IncludesAPI.IncludeUpdateResponse;
   export import IncludeGetResponse = IncludesAPI.IncludeGetResponse;
-  export import DevicesSplitTunnelIncludesSinglePage = IncludesAPI.DevicesSplitTunnelIncludesSinglePage;
+  export import SplitTunnelIncludesSinglePage = IncludesAPI.SplitTunnelIncludesSinglePage;
   export import IncludeUpdateParams = IncludesAPI.IncludeUpdateParams;
   export import IncludeListParams = IncludesAPI.IncludeListParams;
   export import IncludeGetParams = IncludesAPI.IncludeGetParams;
