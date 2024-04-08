@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as OriginTLSClientAuthAPI from 'cloudflare/resources/origin-tls-client-auth/origin-tls-client-auth';
 import * as Shared from 'cloudflare/resources/shared';
 import * as SettingsAPI from 'cloudflare/resources/origin-tls-client-auth/settings';
 import * as HostnamesAPI from 'cloudflare/resources/origin-tls-client-auth/hostnames/hostnames';
@@ -37,11 +36,11 @@ export class OriginTLSClientAuth extends APIResource {
   list(
     params: OriginTLSClientAuthListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<OriginTLSClientAuthListResponsesSinglePage, OriginTLSClientAuthListResponse> {
+  ): Core.PagePromise<ZoneAuthenticatedOriginPullsSinglePage, ZoneAuthenticatedOriginPull> {
     const { zone_id } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/origin_tls_client_auth`,
-      OriginTLSClientAuthListResponsesSinglePage,
+      ZoneAuthenticatedOriginPullsSinglePage,
       options,
     );
   }
@@ -81,31 +80,9 @@ export class OriginTLSClientAuth extends APIResource {
   }
 }
 
-export class OriginTLSClientAuthListResponsesSinglePage extends SinglePage<OriginTLSClientAuthListResponse> {}
+export class ZoneAuthenticatedOriginPullsSinglePage extends SinglePage<ZoneAuthenticatedOriginPull> {}
 
-export interface OriginTLSClientCertificateZoneAuthenticatedOriginPull {
-  /**
-   * Identifier
-   */
-  id?: string;
-
-  /**
-   * The zone's leaf certificate.
-   */
-  certificate?: string;
-
-  /**
-   * Indicates whether zone-level authenticated origin pulls is enabled.
-   */
-  enabled?: boolean;
-
-  /**
-   * The zone's private key.
-   */
-  private_key?: string;
-}
-
-export interface OriginTLSClientAuthListResponse {
+export interface ZoneAuthenticatedOriginPull {
   /**
    * Identifier
    */
@@ -171,16 +148,9 @@ export interface OriginTLSClientAuthGetParams {
 }
 
 export namespace OriginTLSClientAuth {
-  export import OriginTLSClientCertificateZoneAuthenticatedOriginPull = OriginTLSClientAuthAPI.OriginTLSClientCertificateZoneAuthenticatedOriginPull;
-  export import OriginTLSClientAuthListResponse = OriginTLSClientAuthAPI.OriginTLSClientAuthListResponse;
-  export import OriginTLSClientAuthListResponsesSinglePage = OriginTLSClientAuthAPI.OriginTLSClientAuthListResponsesSinglePage;
-  export import OriginTLSClientAuthCreateParams = OriginTLSClientAuthAPI.OriginTLSClientAuthCreateParams;
-  export import OriginTLSClientAuthListParams = OriginTLSClientAuthAPI.OriginTLSClientAuthListParams;
-  export import OriginTLSClientAuthDeleteParams = OriginTLSClientAuthAPI.OriginTLSClientAuthDeleteParams;
-  export import OriginTLSClientAuthGetParams = OriginTLSClientAuthAPI.OriginTLSClientAuthGetParams;
   export import Hostnames = HostnamesAPI.Hostnames;
-  export import OriginTLSClientCertificateAuthenticatedOriginPull = HostnamesAPI.OriginTLSClientCertificateAuthenticatedOriginPull;
-  export import OriginTLSClientCertificateID = HostnamesAPI.OriginTLSClientCertificateID;
+  export import AuthenticatedOriginPull = HostnamesAPI.AuthenticatedOriginPull;
+  export import ID = HostnamesAPI.ID;
   export import HostnameUpdateResponse = HostnamesAPI.HostnameUpdateResponse;
   export import HostnameUpdateParams = HostnamesAPI.HostnameUpdateParams;
   export import HostnameGetParams = HostnamesAPI.HostnameGetParams;

@@ -10,16 +10,13 @@ export class ProxyEndpoints extends APIResource {
   /**
    * Creates a new Zero Trust Gateway proxy endpoint.
    */
-  create(
-    params: ProxyEndpointCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZeroTrustGatewayProxyEndpoints> {
+  create(params: ProxyEndpointCreateParams, options?: Core.RequestOptions): Core.APIPromise<ProxyEndpoint> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/gateway/proxy_endpoints`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZeroTrustGatewayProxyEndpoints }>
+      }) as Core.APIPromise<{ result: ProxyEndpoint }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -29,11 +26,11 @@ export class ProxyEndpoints extends APIResource {
   list(
     params: ProxyEndpointListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<ZeroTrustGatewayProxyEndpointsSinglePage, ZeroTrustGatewayProxyEndpoints> {
+  ): Core.PagePromise<ProxyEndpointsSinglePage, ProxyEndpoint> {
     const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/gateway/proxy_endpoints`,
-      ZeroTrustGatewayProxyEndpointsSinglePage,
+      ProxyEndpointsSinglePage,
       options,
     );
   }
@@ -62,13 +59,13 @@ export class ProxyEndpoints extends APIResource {
     proxyEndpointId: string,
     params: ProxyEndpointEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZeroTrustGatewayProxyEndpoints> {
+  ): Core.APIPromise<ProxyEndpoint> {
     const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/gateway/proxy_endpoints/${proxyEndpointId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZeroTrustGatewayProxyEndpoints }>
+      }) as Core.APIPromise<{ result: ProxyEndpoint }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -79,20 +76,26 @@ export class ProxyEndpoints extends APIResource {
     proxyEndpointId: string,
     params: ProxyEndpointGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZeroTrustGatewayProxyEndpoints> {
+  ): Core.APIPromise<ProxyEndpoint> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/gateway/proxy_endpoints/${proxyEndpointId}`,
         options,
-      ) as Core.APIPromise<{ result: ZeroTrustGatewayProxyEndpoints }>
+      ) as Core.APIPromise<{ result: ProxyEndpoint }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class ZeroTrustGatewayProxyEndpointsSinglePage extends SinglePage<ZeroTrustGatewayProxyEndpoints> {}
+export class ProxyEndpointsSinglePage extends SinglePage<ProxyEndpoint> {}
 
-export interface UnnamedSchemaRef4753ee81779d0e57189420079abab61e {
+/**
+ * The IPv4 CIDR or IPv6 CIDR. IPv6 CIDRs are limited to a maximum of /109. IPv4
+ * CIDRs are limited to a maximum of /25.
+ */
+export type GatewayIPsItem = string;
+
+export interface ProxyEndpoint {
   id?: string;
 
   created_at?: string;
@@ -100,7 +103,7 @@ export interface UnnamedSchemaRef4753ee81779d0e57189420079abab61e {
   /**
    * A list of CIDRs to restrict ingress connections.
    */
-  ips?: Array<string>;
+  ips?: Array<GatewayIPsItem>;
 
   /**
    * The name of the proxy endpoint.
@@ -115,7 +118,7 @@ export interface UnnamedSchemaRef4753ee81779d0e57189420079abab61e {
   updated_at?: string;
 }
 
-export interface ZeroTrustGatewayProxyEndpoints {
+export interface UnnamedSchemaRef4753ee81779d0e57189420079abab61e {
   id?: string;
 
   created_at?: string;
@@ -123,7 +126,7 @@ export interface ZeroTrustGatewayProxyEndpoints {
   /**
    * A list of CIDRs to restrict ingress connections.
    */
-  ips?: Array<string>;
+  ips?: Array<GatewayIPsItem>;
 
   /**
    * The name of the proxy endpoint.
@@ -147,7 +150,7 @@ export interface ProxyEndpointCreateParams {
   /**
    * Body param: A list of CIDRs to restrict ingress connections.
    */
-  ips: Array<string>;
+  ips: Array<GatewayIPsItem>;
 
   /**
    * Body param: The name of the proxy endpoint.
@@ -180,7 +183,7 @@ export interface ProxyEndpointEditParams {
   /**
    * Body param: A list of CIDRs to restrict ingress connections.
    */
-  ips?: Array<string>;
+  ips?: Array<GatewayIPsItem>;
 
   /**
    * Body param: The name of the proxy endpoint.
@@ -193,9 +196,10 @@ export interface ProxyEndpointGetParams {
 }
 
 export namespace ProxyEndpoints {
+  export import GatewayIPsItem = ProxyEndpointsAPI.GatewayIPsItem;
+  export import ProxyEndpoint = ProxyEndpointsAPI.ProxyEndpoint;
   export import UnnamedSchemaRef4753ee81779d0e57189420079abab61e = ProxyEndpointsAPI.UnnamedSchemaRef4753ee81779d0e57189420079abab61e;
-  export import ZeroTrustGatewayProxyEndpoints = ProxyEndpointsAPI.ZeroTrustGatewayProxyEndpoints;
-  export import ZeroTrustGatewayProxyEndpointsSinglePage = ProxyEndpointsAPI.ZeroTrustGatewayProxyEndpointsSinglePage;
+  export import ProxyEndpointsSinglePage = ProxyEndpointsAPI.ProxyEndpointsSinglePage;
   export import ProxyEndpointCreateParams = ProxyEndpointsAPI.ProxyEndpointCreateParams;
   export import ProxyEndpointListParams = ProxyEndpointsAPI.ProxyEndpointListParams;
   export import ProxyEndpointDeleteParams = ProxyEndpointsAPI.ProxyEndpointDeleteParams;

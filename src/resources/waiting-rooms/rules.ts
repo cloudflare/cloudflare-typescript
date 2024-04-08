@@ -3,7 +3,8 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as RulesAPI from 'cloudflare/resources/waiting-rooms/rules';
-import { SinglePage } from 'cloudflare/pagination';
+import * as EventsAPI from 'cloudflare/resources/waiting-rooms/events/events';
+import { EventsSinglePage } from 'cloudflare/resources/waiting-rooms/events/events';
 
 export class Rules extends APIResource {
   /**
@@ -49,11 +50,11 @@ export class Rules extends APIResource {
     waitingRoomId: string,
     params: RuleListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<WaitingroomRulesSinglePage, WaitingroomRule> {
+  ): Core.PagePromise<EventsSinglePage, EventsAPI.Event> {
     const { zone_id } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/waiting_rooms/${waitingRoomId}/rules`,
-      WaitingroomRulesSinglePage,
+      EventsSinglePage,
       options,
     );
   }
@@ -95,20 +96,16 @@ export class Rules extends APIResource {
   }
 }
 
-export class WaitingroomRulesSinglePage extends SinglePage<WaitingroomRule> {}
-
-export type UnnamedSchemaRefF1c0ba8f44601f2db2e07b9397b6c430 = Array<WaitingroomRule>;
-
-export interface WaitingroomRule {
-  /**
-   * The ID of the rule.
-   */
-  id?: string;
-
+export interface Rule {
   /**
    * The action to take when the expression matches.
    */
-  action?: 'bypass_waiting_room';
+  action: 'bypass_waiting_room';
+
+  /**
+   * Criteria defining when there is a match for the current rule.
+   */
+  expression: string;
 
   /**
    * The description of the rule.
@@ -119,27 +116,17 @@ export interface WaitingroomRule {
    * When set to true, the rule is enabled.
    */
   enabled?: boolean;
-
-  /**
-   * Criteria defining when there is a match for the current rule.
-   */
-  expression?: string;
-
-  last_updated?: string;
-
-  /**
-   * The version of the rule.
-   */
-  version?: string;
 }
 
-export type RuleCreateResponse = Array<WaitingroomRule>;
+export type UnnamedSchemaRefF1c0ba8f44601f2db2e07b9397b6c430 = Array<EventsAPI.Event>;
 
-export type RuleUpdateResponse = Array<WaitingroomRule>;
+export type RuleCreateResponse = Array<EventsAPI.Event>;
 
-export type RuleDeleteResponse = Array<WaitingroomRule>;
+export type RuleUpdateResponse = Array<EventsAPI.Event>;
 
-export type RuleEditResponse = Array<WaitingroomRule>;
+export type RuleDeleteResponse = Array<EventsAPI.Event>;
+
+export type RuleEditResponse = Array<EventsAPI.Event>;
 
 export interface RuleCreateParams {
   /**
@@ -177,31 +164,7 @@ export interface RuleUpdateParams {
   /**
    * Body param:
    */
-  body: Array<RuleUpdateParams.Body>;
-}
-
-export namespace RuleUpdateParams {
-  export interface Body {
-    /**
-     * The action to take when the expression matches.
-     */
-    action: 'bypass_waiting_room';
-
-    /**
-     * Criteria defining when there is a match for the current rule.
-     */
-    expression: string;
-
-    /**
-     * The description of the rule.
-     */
-    description?: string;
-
-    /**
-     * When set to true, the rule is enabled.
-     */
-    enabled?: boolean;
-  }
+  body: Array<Rule>;
 }
 
 export interface RuleListParams {
@@ -284,16 +247,17 @@ export namespace RuleEditParams {
 }
 
 export namespace Rules {
+  export import Rule = RulesAPI.Rule;
   export import UnnamedSchemaRefF1c0ba8f44601f2db2e07b9397b6c430 = RulesAPI.UnnamedSchemaRefF1c0ba8f44601f2db2e07b9397b6c430;
-  export import WaitingroomRule = RulesAPI.WaitingroomRule;
   export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
   export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
   export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
   export import RuleEditResponse = RulesAPI.RuleEditResponse;
-  export import WaitingroomRulesSinglePage = RulesAPI.WaitingroomRulesSinglePage;
   export import RuleCreateParams = RulesAPI.RuleCreateParams;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
   export import RuleListParams = RulesAPI.RuleListParams;
   export import RuleDeleteParams = RulesAPI.RuleDeleteParams;
   export import RuleEditParams = RulesAPI.RuleEditParams;
 }
+
+export { EventsSinglePage };

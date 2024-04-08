@@ -1,15 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { ContentUpdateParams, Content } from './content';
-export { ContentV2GetParams, ContentV2 } from './content-v2';
+export { Binding, BindingGetResponse, BindingGetParams, Bindings } from './bindings';
 export {
-  SettingEditResponse,
-  SettingGetResponse,
-  SettingEditParams,
-  SettingGetParams,
-  Settings,
-} from './settings';
-export {
+  ConsumerScript,
+  ConsumerScriptItem,
   TailCreateResponse,
   TailGetResponse,
   TailCreateParams,
@@ -17,6 +11,20 @@ export {
   TailGetParams,
   Tail,
 } from './tail';
+export { ContentUpdateParams, Content } from './content';
+export { ContentV2GetParams, ContentV2 } from './content-v2';
+export {
+  Script,
+  Setting,
+  SettingsItem,
+  ScriptUpdateParams,
+  ScriptListParams,
+  ScriptDeleteParams,
+  ScriptGetParams,
+  ScriptsSinglePage,
+  Scripts,
+} from './scripts';
+export { SettingEditParams, SettingGetParams, Settings } from './settings';
 export {
   UnnamedSchemaRefC8302c265937f9d6f96fd69644e56b26,
   ScheduleUpdateResponse,
@@ -49,13 +57,3 @@ export {
   VersionGetParams,
   Versions,
 } from './versions/index';
-export { WorkersBinding, BindingGetResponse, BindingGetParams, Bindings } from './bindings';
-export {
-  WorkersScript,
-  ScriptUpdateParams,
-  ScriptListParams,
-  ScriptDeleteParams,
-  ScriptGetParams,
-  WorkersScriptsSinglePage,
-  Scripts,
-} from './scripts';

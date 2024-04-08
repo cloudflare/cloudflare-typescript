@@ -5,7 +5,7 @@ import { APIResource } from 'cloudflare/resource';
 import * as PagerdutyAPI from 'cloudflare/resources/alerting/destinations/pagerduty';
 import * as Shared from 'cloudflare/resources/shared';
 
-export class Pagerduty extends APIResource {
+export class PagerdutyResource extends APIResource {
   /**
    * Creates a new token for integrating with PagerDuty.
    */
@@ -72,7 +72,7 @@ export class Pagerduty extends APIResource {
   }
 }
 
-export interface AlertingPagerduty {
+export interface Pagerduty {
   /**
    * UUID
    */
@@ -91,7 +91,7 @@ export interface PagerdutyCreateResponse {
   id?: string;
 }
 
-export type PagerdutyGetResponse = Array<AlertingPagerduty>;
+export type PagerdutyGetResponse = Array<Pagerduty>;
 
 export interface PagerdutyLinkResponse {
   /**
@@ -128,8 +128,8 @@ export interface PagerdutyLinkParams {
   account_id: string;
 }
 
-export namespace Pagerduty {
-  export import AlertingPagerduty = PagerdutyAPI.AlertingPagerduty;
+export namespace PagerdutyResource {
+  export import Pagerduty = PagerdutyAPI.Pagerduty;
   export import PagerdutyCreateResponse = PagerdutyAPI.PagerdutyCreateResponse;
   export import PagerdutyGetResponse = PagerdutyAPI.PagerdutyGetResponse;
   export import PagerdutyLinkResponse = PagerdutyAPI.PagerdutyLinkResponse;

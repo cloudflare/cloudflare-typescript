@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
-import * as FiltersAPI from 'cloudflare/resources/filters';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class Filters extends APIResource {
@@ -30,10 +29,10 @@ export class Filters extends APIResource {
     id: string,
     body: FilterUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<FirewallFilter | null> {
+  ): Core.APIPromise<FilterUpdateResponse> {
     return (
       this._client.put(`/zones/${zoneIdentifier}/filters/${id}`, { body, ...options }) as Core.APIPromise<{
-        result: FirewallFilter | null;
+        result: FilterUpdateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -46,23 +45,24 @@ export class Filters extends APIResource {
     zoneIdentifier: string,
     query?: FilterListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<FirewallFiltersV4PagePaginationArray, FirewallFilter>;
+  ): Core.PagePromise<FilterListResponsesV4PagePaginationArray, FilterListResponse>;
   list(
     zoneIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<FirewallFiltersV4PagePaginationArray, FirewallFilter>;
+  ): Core.PagePromise<FilterListResponsesV4PagePaginationArray, FilterListResponse>;
   list(
     zoneIdentifier: string,
     query: FilterListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<FirewallFiltersV4PagePaginationArray, FirewallFilter> {
+  ): Core.PagePromise<FilterListResponsesV4PagePaginationArray, FilterListResponse> {
     if (isRequestOptions(query)) {
       return this.list(zoneIdentifier, {}, query);
     }
-    return this._client.getAPIList(`/zones/${zoneIdentifier}/filters`, FirewallFiltersV4PagePaginationArray, {
-      query,
-      ...options,
-    });
+    return this._client.getAPIList(
+      `/zones/${zoneIdentifier}/filters`,
+      FilterListResponsesV4PagePaginationArray,
+      { query, ...options },
+    );
   }
 
   /**
@@ -73,10 +73,10 @@ export class Filters extends APIResource {
     id: string,
     body: FilterDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<FirewallFilter | null> {
+  ): Core.APIPromise<FilterDeleteResponse> {
     return (
       this._client.delete(`/zones/${zoneIdentifier}/filters/${id}`, { body, ...options }) as Core.APIPromise<{
-        result: FirewallFilter | null;
+        result: FilterDeleteResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -84,22 +84,50 @@ export class Filters extends APIResource {
   /**
    * Fetches the details of a filter.
    */
-  get(
-    zoneIdentifier: string,
-    id: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<FirewallFilter | null> {
+  get(zoneIdentifier: string, id: string, options?: Core.RequestOptions): Core.APIPromise<FilterGetResponse> {
     return (
       this._client.get(`/zones/${zoneIdentifier}/filters/${id}`, options) as Core.APIPromise<{
-        result: FirewallFilter | null;
+        result: FilterGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class FirewallFiltersV4PagePaginationArray extends V4PagePaginationArray<FirewallFilter> {}
+export class FilterListResponsesV4PagePaginationArray extends V4PagePaginationArray<FilterListResponse> {}
 
-export interface FirewallFilter {
+export type FilterCreateResponse = Array<FilterCreateResponse.FilterCreateResponseItem>;
+
+export namespace FilterCreateResponse {
+  export interface FilterCreateResponseItem {
+    /**
+     * The unique identifier of the filter.
+     */
+    id: string;
+
+    /**
+     * The filter expression. For more information, refer to
+     * [Expressions](https://developers.cloudflare.com/ruleset-engine/rules-language/expressions/).
+     */
+    expression: string;
+
+    /**
+     * When true, indicates that the filter is currently paused.
+     */
+    paused: boolean;
+
+    /**
+     * An informative summary of the filter.
+     */
+    description?: string;
+
+    /**
+     * A short reference tag. Allows you to select related filters.
+     */
+    ref?: string;
+  }
+}
+
+export interface FilterUpdateResponse {
   /**
    * The unique identifier of the filter.
    */
@@ -127,9 +155,89 @@ export interface FirewallFilter {
   ref?: string;
 }
 
-export type UnnamedSchemaRef39af4f78d23244e2595fb47c811221df = Array<FirewallFilter>;
+export interface FilterListResponse {
+  /**
+   * The unique identifier of the filter.
+   */
+  id: string;
 
-export type FilterCreateResponse = Array<FirewallFilter>;
+  /**
+   * The filter expression. For more information, refer to
+   * [Expressions](https://developers.cloudflare.com/ruleset-engine/rules-language/expressions/).
+   */
+  expression: string;
+
+  /**
+   * When true, indicates that the filter is currently paused.
+   */
+  paused: boolean;
+
+  /**
+   * An informative summary of the filter.
+   */
+  description?: string;
+
+  /**
+   * A short reference tag. Allows you to select related filters.
+   */
+  ref?: string;
+}
+
+export interface FilterDeleteResponse {
+  /**
+   * The unique identifier of the filter.
+   */
+  id: string;
+
+  /**
+   * An informative summary of the filter.
+   */
+  description?: string;
+
+  /**
+   * The filter expression. For more information, refer to
+   * [Expressions](https://developers.cloudflare.com/ruleset-engine/rules-language/expressions/).
+   */
+  expression?: string;
+
+  /**
+   * When true, indicates that the filter is currently paused.
+   */
+  paused?: boolean;
+
+  /**
+   * A short reference tag. Allows you to select related filters.
+   */
+  ref?: string;
+}
+
+export interface FilterGetResponse {
+  /**
+   * The unique identifier of the filter.
+   */
+  id?: string;
+
+  /**
+   * An informative summary of the filter.
+   */
+  description?: string;
+
+  /**
+   * The filter expression. For more information, refer to
+   * [Expressions](https://developers.cloudflare.com/ruleset-engine/rules-language/expressions/).
+   */
+  expression?: string;
+
+  /**
+   * When true, indicates that the filter is currently paused.
+   */
+  paused?: boolean;
+
+  /**
+   * A short reference tag. Allows you to select related filters.
+   */
+  ref?: string;
+}
 
 export type FilterCreateParams = unknown;
 
@@ -163,14 +271,3 @@ export interface FilterListParams extends V4PagePaginationArrayParams {
 }
 
 export type FilterDeleteParams = unknown;
-
-export namespace Filters {
-  export import FirewallFilter = FiltersAPI.FirewallFilter;
-  export import UnnamedSchemaRef39af4f78d23244e2595fb47c811221df = FiltersAPI.UnnamedSchemaRef39af4f78d23244e2595fb47c811221df;
-  export import FilterCreateResponse = FiltersAPI.FilterCreateResponse;
-  export import FirewallFiltersV4PagePaginationArray = FiltersAPI.FirewallFiltersV4PagePaginationArray;
-  export import FilterCreateParams = FiltersAPI.FilterCreateParams;
-  export import FilterUpdateParams = FiltersAPI.FilterUpdateParams;
-  export import FilterListParams = FiltersAPI.FilterListParams;
-  export import FilterDeleteParams = FiltersAPI.FilterDeleteParams;
-}

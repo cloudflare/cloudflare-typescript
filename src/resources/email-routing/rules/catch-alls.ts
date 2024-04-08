@@ -13,28 +13,40 @@ export class CatchAlls extends APIResource {
     zoneIdentifier: string,
     body: CatchAllUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<EmailCatchAllRule> {
+  ): Core.APIPromise<CatchAllRule> {
     return (
       this._client.put(`/zones/${zoneIdentifier}/email/routing/rules/catch_all`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: EmailCatchAllRule }>
+      }) as Core.APIPromise<{ result: CatchAllRule }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get information on the default catch-all routing rule.
    */
-  get(zoneIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<EmailCatchAllRule> {
+  get(zoneIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<CatchAllRule> {
     return (
       this._client.get(`/zones/${zoneIdentifier}/email/routing/rules/catch_all`, options) as Core.APIPromise<{
-        result: EmailCatchAllRule;
+        result: CatchAllRule;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface EmailCatchAllRule {
+/**
+ * Action for the catch-all routing rule.
+ */
+export interface Action {
+  /**
+   * Type of action for catch-all rule.
+   */
+  type: 'drop' | 'forward' | 'worker';
+
+  value?: Array<string>;
+}
+
+export interface CatchAllRule {
   /**
    * Routing rule identifier.
    */
@@ -43,7 +55,7 @@ export interface EmailCatchAllRule {
   /**
    * List actions for the catch-all routing rule.
    */
-  actions?: Array<EmailCatchAllRule.Action>;
+  actions?: Array<Action>;
 
   /**
    * Routing rule status.
@@ -53,7 +65,7 @@ export interface EmailCatchAllRule {
   /**
    * List of matchers for the catch-all routing rule.
    */
-  matchers?: Array<EmailCatchAllRule.Matcher>;
+  matchers?: Array<Matcher>;
 
   /**
    * Routing rule name.
@@ -66,40 +78,26 @@ export interface EmailCatchAllRule {
   tag?: string;
 }
 
-export namespace EmailCatchAllRule {
+/**
+ * Matcher for catch-all routing rule.
+ */
+export interface Matcher {
   /**
-   * Action for the catch-all routing rule.
+   * Type of matcher. Default is 'all'.
    */
-  export interface Action {
-    /**
-     * Type of action for catch-all rule.
-     */
-    type: 'drop' | 'forward' | 'worker';
-
-    value?: Array<string>;
-  }
-
-  /**
-   * Matcher for catch-all routing rule.
-   */
-  export interface Matcher {
-    /**
-     * Type of matcher. Default is 'all'.
-     */
-    type: 'all';
-  }
+  type: 'all';
 }
 
 export interface CatchAllUpdateParams {
   /**
    * List actions for the catch-all routing rule.
    */
-  actions: Array<CatchAllUpdateParams.Action>;
+  actions: Array<Action>;
 
   /**
    * List of matchers for the catch-all routing rule.
    */
-  matchers: Array<CatchAllUpdateParams.Matcher>;
+  matchers: Array<Matcher>;
 
   /**
    * Routing rule status.
@@ -112,31 +110,9 @@ export interface CatchAllUpdateParams {
   name?: string;
 }
 
-export namespace CatchAllUpdateParams {
-  /**
-   * Action for the catch-all routing rule.
-   */
-  export interface Action {
-    /**
-     * Type of action for catch-all rule.
-     */
-    type: 'drop' | 'forward' | 'worker';
-
-    value?: Array<string>;
-  }
-
-  /**
-   * Matcher for catch-all routing rule.
-   */
-  export interface Matcher {
-    /**
-     * Type of matcher. Default is 'all'.
-     */
-    type: 'all';
-  }
-}
-
 export namespace CatchAlls {
-  export import EmailCatchAllRule = CatchAllsAPI.EmailCatchAllRule;
+  export import Action = CatchAllsAPI.Action;
+  export import CatchAllRule = CatchAllsAPI.CatchAllRule;
+  export import Matcher = CatchAllsAPI.Matcher;
   export import CatchAllUpdateParams = CatchAllsAPI.CatchAllUpdateParams;
 }

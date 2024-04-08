@@ -46,7 +46,7 @@ export class Connections extends APIResource {
  * A client (typically cloudflared) that maintains connections to a Cloudflare data
  * center.
  */
-export interface TunnelTunnelClient {
+export interface Client {
   /**
    * UUID of the Cloudflare Tunnel connection.
    */
@@ -66,7 +66,7 @@ export interface TunnelTunnelClient {
   /**
    * The Cloudflare Tunnel connections between your origin and Cloudflare's edge.
    */
-  conns?: Array<TunnelTunnelClient.Conn>;
+  conns?: Array<Client.Conn>;
 
   /**
    * Features enabled for the Cloudflare Tunnel.
@@ -84,7 +84,7 @@ export interface TunnelTunnelClient {
   version?: string;
 }
 
-export namespace TunnelTunnelClient {
+export namespace Client {
   export interface Conn {
     /**
      * UUID of the Cloudflare Tunnel connection.
@@ -131,7 +131,7 @@ export namespace TunnelTunnelClient {
   }
 }
 
-export type ConnectionGetResponse = Array<TunnelTunnelClient>;
+export type ConnectionGetResponse = Array<Client>;
 
 export interface ConnectionDeleteParams {
   /**
@@ -153,7 +153,7 @@ export interface ConnectionGetParams {
 }
 
 export namespace Connections {
-  export import TunnelTunnelClient = ConnectionsAPI.TunnelTunnelClient;
+  export import Client = ConnectionsAPI.Client;
   export import ConnectionGetResponse = ConnectionsAPI.ConnectionGetResponse;
   export import ConnectionDeleteParams = ConnectionsAPI.ConnectionDeleteParams;
   export import ConnectionGetParams = ConnectionsAPI.ConnectionGetParams;

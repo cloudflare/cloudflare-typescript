@@ -6,7 +6,7 @@ import * as PriorityAPI from 'cloudflare/resources/cloudforce-one/requests/prior
 import * as Shared from 'cloudflare/resources/shared';
 import * as RequestsAPI from 'cloudflare/resources/cloudforce-one/requests/requests';
 
-export class Priority extends APIResource {
+export class PriorityResource extends APIResource {
   /**
    * Create a New Priority Requirement
    */
@@ -14,12 +14,12 @@ export class Priority extends APIResource {
     accountIdentifier: string,
     body: PriorityCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CloudforceOnePriorityItem> {
+  ): Core.APIPromise<Priority> {
     return (
       this._client.post(`/accounts/${accountIdentifier}/cloudforce-one/requests/priority/new`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: CloudforceOnePriorityItem }>
+      }) as Core.APIPromise<{ result: Priority }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -31,12 +31,12 @@ export class Priority extends APIResource {
     priorityIdentifer: string,
     body: PriorityUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RequestsAPI.CloudforceOneRequestItem> {
+  ): Core.APIPromise<RequestsAPI.Item> {
     return (
       this._client.put(
         `/accounts/${accountIdentifier}/cloudforce-one/requests/priority/${priorityIdentifer}`,
         { body, ...options },
-      ) as Core.APIPromise<{ result: RequestsAPI.CloudforceOneRequestItem }>
+      ) as Core.APIPromise<{ result: RequestsAPI.Item }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -63,32 +63,31 @@ export class Priority extends APIResource {
     accountIdentifier: string,
     priorityIdentifer: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RequestsAPI.CloudforceOneRequestItem> {
+  ): Core.APIPromise<RequestsAPI.Item> {
     return (
       this._client.get(
         `/accounts/${accountIdentifier}/cloudforce-one/requests/priority/${priorityIdentifer}`,
         options,
-      ) as Core.APIPromise<{ result: RequestsAPI.CloudforceOneRequestItem }>
+      ) as Core.APIPromise<{ result: RequestsAPI.Item }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get Priority Intelligence Requirement Quota
    */
-  quota(
-    accountIdentifier: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RequestsAPI.CloudforceOneQuota> {
+  quota(accountIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<RequestsAPI.Quota> {
     return (
       this._client.get(
         `/accounts/${accountIdentifier}/cloudforce-one/requests/priority/quota`,
         options,
-      ) as Core.APIPromise<{ result: RequestsAPI.CloudforceOneQuota }>
+      ) as Core.APIPromise<{ result: RequestsAPI.Quota }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface CloudforceOnePriorityItem {
+export type LabelItem = string;
+
+export interface Priority {
   /**
    * UUID
    */
@@ -102,7 +101,7 @@ export interface CloudforceOnePriorityItem {
   /**
    * List of labels
    */
-  labels: Array<string>;
+  labels: Array<LabelItem>;
 
   /**
    * Priority
@@ -125,11 +124,33 @@ export interface CloudforceOnePriorityItem {
   updated: string;
 }
 
+export interface PriorityEdit {
+  /**
+   * List of labels
+   */
+  labels: Array<LabelItem>;
+
+  /**
+   * Priority
+   */
+  priority: number;
+
+  /**
+   * Requirement
+   */
+  requirement: string;
+
+  /**
+   * The CISA defined Traffic Light Protocol (TLP)
+   */
+  tlp: 'clear' | 'amber' | 'amber-strict' | 'green' | 'red';
+}
+
 export interface PriorityCreateParams {
   /**
    * List of labels
    */
-  labels: Array<string>;
+  labels: Array<LabelItem>;
 
   /**
    * Priority
@@ -151,7 +172,7 @@ export interface PriorityUpdateParams {
   /**
    * List of labels
    */
-  labels: Array<string>;
+  labels: Array<LabelItem>;
 
   /**
    * Priority
@@ -169,8 +190,10 @@ export interface PriorityUpdateParams {
   tlp: 'clear' | 'amber' | 'amber-strict' | 'green' | 'red';
 }
 
-export namespace Priority {
-  export import CloudforceOnePriorityItem = PriorityAPI.CloudforceOnePriorityItem;
+export namespace PriorityResource {
+  export import LabelItem = PriorityAPI.LabelItem;
+  export import Priority = PriorityAPI.Priority;
+  export import PriorityEdit = PriorityAPI.PriorityEdit;
   export import PriorityCreateParams = PriorityAPI.PriorityCreateParams;
   export import PriorityUpdateParams = PriorityAPI.PriorityUpdateParams;
 }

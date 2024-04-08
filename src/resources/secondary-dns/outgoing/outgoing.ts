@@ -58,32 +58,26 @@ export class Outgoing extends APIResource {
    * Disable outgoing zone transfers for primary zone and clears IXFR backlog of
    * primary zone.
    */
-  disable(
-    params: OutgoingDisableParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SecondaryDNSDisableTransfer> {
+  disable(params: OutgoingDisableParams, options?: Core.RequestOptions): Core.APIPromise<DisableTransfer> {
     const { zone_id, body } = params;
     return (
       this._client.post(`/zones/${zone_id}/secondary_dns/outgoing/disable`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: SecondaryDNSDisableTransfer }>
+      }) as Core.APIPromise<{ result: DisableTransfer }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Enable outgoing zone transfers for primary zone.
    */
-  enable(
-    params: OutgoingEnableParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SecondaryDNSEnableTransfer> {
+  enable(params: OutgoingEnableParams, options?: Core.RequestOptions): Core.APIPromise<EnableTransfer> {
     const { zone_id, body } = params;
     return (
       this._client.post(`/zones/${zone_id}/secondary_dns/outgoing/enable`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: SecondaryDNSEnableTransfer }>
+      }) as Core.APIPromise<{ result: EnableTransfer }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -119,12 +113,12 @@ export class Outgoing extends APIResource {
 /**
  * The zone transfer status of a primary zone
  */
-export type SecondaryDNSDisableTransfer = string;
+export type DisableTransfer = string;
 
 /**
  * The zone transfer status of a primary zone
  */
-export type SecondaryDNSEnableTransfer = string;
+export type EnableTransfer = string;
 
 export interface UnnamedSchemaRef0e152c3e4c55b8a0ca6531578a42c564 {
   id?: string;
@@ -364,8 +358,8 @@ export interface OutgoingGetParams {
 }
 
 export namespace Outgoing {
-  export import SecondaryDNSDisableTransfer = OutgoingAPI.SecondaryDNSDisableTransfer;
-  export import SecondaryDNSEnableTransfer = OutgoingAPI.SecondaryDNSEnableTransfer;
+  export import DisableTransfer = OutgoingAPI.DisableTransfer;
+  export import EnableTransfer = OutgoingAPI.EnableTransfer;
   export import UnnamedSchemaRef0e152c3e4c55b8a0ca6531578a42c564 = OutgoingAPI.UnnamedSchemaRef0e152c3e4c55b8a0ca6531578a42c564;
   export import UnnamedSchemaRefBf34e74a34c9a2f63d85505dc69d4adc = OutgoingAPI.UnnamedSchemaRefBf34e74a34c9a2f63d85505dc69d4adc;
   export import OutgoingCreateResponse = OutgoingAPI.OutgoingCreateResponse;

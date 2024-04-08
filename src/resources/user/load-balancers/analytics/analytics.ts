@@ -9,7 +9,7 @@ export class Analytics extends APIResource {
 
 export namespace Analytics {
   export import Events = EventsAPI.Events;
-  export import LoadBalancingAnalytics = EventsAPI.LoadBalancingAnalytics;
-  export import LoadBalancingAnalyticsSinglePage = EventsAPI.LoadBalancingAnalyticsSinglePage;
+  export import Analytics = EventsAPI.Analytics;
+  export import AnalyticsSinglePage = EventsAPI.AnalyticsSinglePage;
   export import EventListParams = EventsAPI.EventListParams;
 }

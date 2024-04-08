@@ -2,4 +2,4 @@
 
 export { Aggregates } from './aggregates/index';
 export { Analytics } from './analytics';
-export { Events } from './events/index';
+export { DimensionItem, Events } from './events/index';

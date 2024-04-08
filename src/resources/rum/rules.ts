@@ -8,17 +8,13 @@ export class Rules extends APIResource {
   /**
    * Creates a new rule in a Web Analytics ruleset.
    */
-  create(
-    rulesetId: string,
-    params: RuleCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RUMRule> {
+  create(rulesetId: string, params: RuleCreateParams, options?: Core.RequestOptions): Core.APIPromise<Rule> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/rum/v2/${rulesetId}/rule`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: RUMRule }>
+      }) as Core.APIPromise<{ result: Rule }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -30,13 +26,13 @@ export class Rules extends APIResource {
     ruleId: string,
     params: RuleUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RUMRule> {
+  ): Core.APIPromise<Rule> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/rum/v2/${rulesetId}/rule/${ruleId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: RUMRule }>
+      }) as Core.APIPromise<{ result: Rule }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -75,7 +71,7 @@ export class Rules extends APIResource {
   }
 }
 
-export interface RUMRule {
+export interface Rule {
   /**
    * The Web Analytics rule identifier.
    */
@@ -110,7 +106,7 @@ export interface RuleListResponse {
   /**
    * A list of rules.
    */
-  rules?: Array<RUMRule>;
+  rules?: Array<Rule>;
 
   ruleset?: RuleListResponse.Ruleset;
 }
@@ -212,7 +208,7 @@ export interface RuleDeleteParams {
 }
 
 export namespace Rules {
-  export import RUMRule = RulesAPI.RUMRule;
+  export import Rule = RulesAPI.Rule;
   export import RuleListResponse = RulesAPI.RuleListResponse;
   export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
   export import RuleCreateParams = RulesAPI.RuleCreateParams;

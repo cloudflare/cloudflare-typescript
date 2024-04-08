@@ -3,6 +3,8 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as SettingsAPI from 'cloudflare/resources/workers/scripts/settings';
+import * as ScriptsAPI from 'cloudflare/resources/workers/scripts/scripts';
+import * as TailAPI from 'cloudflare/resources/workers/scripts/tail';
 
 export class Settings extends APIResource {
   /**
@@ -14,13 +16,13 @@ export class Settings extends APIResource {
     scriptName: string,
     params: SettingEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SettingEditResponse> {
+  ): Core.APIPromise<ScriptsAPI.SettingsItem> {
     const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/workers/scripts/${scriptName}/script-settings`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: SettingEditResponse }>
+      }) as Core.APIPromise<{ result: ScriptsAPI.SettingsItem }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -33,82 +35,14 @@ export class Settings extends APIResource {
     scriptName: string,
     params: SettingGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SettingGetResponse> {
+  ): Core.APIPromise<ScriptsAPI.SettingsItem> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/workers/scripts/${scriptName}/script-settings`,
         options,
-      ) as Core.APIPromise<{ result: SettingGetResponse }>
+      ) as Core.APIPromise<{ result: ScriptsAPI.SettingsItem }>
     )._thenUnwrap((obj) => obj.result);
-  }
-}
-
-export interface SettingEditResponse {
-  /**
-   * Whether Logpush is turned on for the Worker.
-   */
-  logpush?: boolean;
-
-  /**
-   * List of Workers that will consume logs from the attached Worker.
-   */
-  tail_consumers?: Array<SettingEditResponse.TailConsumer>;
-}
-
-export namespace SettingEditResponse {
-  /**
-   * A reference to a script that will consume logs from the attached Worker.
-   */
-  export interface TailConsumer {
-    /**
-     * Name of Worker that is to be the consumer.
-     */
-    service: string;
-
-    /**
-     * Optional environment if the Worker utilizes one.
-     */
-    environment?: string;
-
-    /**
-     * Optional dispatch namespace the script belongs to.
-     */
-    namespace?: string;
-  }
-}
-
-export interface SettingGetResponse {
-  /**
-   * Whether Logpush is turned on for the Worker.
-   */
-  logpush?: boolean;
-
-  /**
-   * List of Workers that will consume logs from the attached Worker.
-   */
-  tail_consumers?: Array<SettingGetResponse.TailConsumer>;
-}
-
-export namespace SettingGetResponse {
-  /**
-   * A reference to a script that will consume logs from the attached Worker.
-   */
-  export interface TailConsumer {
-    /**
-     * Name of Worker that is to be the consumer.
-     */
-    service: string;
-
-    /**
-     * Optional environment if the Worker utilizes one.
-     */
-    environment?: string;
-
-    /**
-     * Optional dispatch namespace the script belongs to.
-     */
-    namespace?: string;
   }
 }
 
@@ -126,29 +60,7 @@ export interface SettingEditParams {
   /**
    * Body param: List of Workers that will consume logs from the attached Worker.
    */
-  tail_consumers?: Array<SettingEditParams.TailConsumer>;
-}
-
-export namespace SettingEditParams {
-  /**
-   * A reference to a script that will consume logs from the attached Worker.
-   */
-  export interface TailConsumer {
-    /**
-     * Name of Worker that is to be the consumer.
-     */
-    service: string;
-
-    /**
-     * Optional environment if the Worker utilizes one.
-     */
-    environment?: string;
-
-    /**
-     * Optional dispatch namespace the script belongs to.
-     */
-    namespace?: string;
-  }
+  tail_consumers?: Array<TailAPI.ConsumerScriptItem>;
 }
 
 export interface SettingGetParams {
@@ -159,8 +71,6 @@ export interface SettingGetParams {
 }
 
 export namespace Settings {
-  export import SettingEditResponse = SettingsAPI.SettingEditResponse;
-  export import SettingGetResponse = SettingsAPI.SettingGetResponse;
   export import SettingEditParams = SettingsAPI.SettingEditParams;
   export import SettingGetParams = SettingsAPI.SettingGetParams;
 }

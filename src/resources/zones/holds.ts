@@ -9,16 +9,13 @@ export class Holds extends APIResource {
    * Enforce a zone hold on the zone, blocking the creation and activation of zones
    * with this zone's hostname.
    */
-  create(
-    params: HoldCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<UnnamedSchemaRef45004a9444b6da9f88158ed2fb9a5820> {
+  create(params: HoldCreateParams, options?: Core.RequestOptions): Core.APIPromise<ZoneHold> {
     const { zone_id, include_subdomains } = params;
     return (
       this._client.post(`/zones/${zone_id}/hold`, {
         query: { include_subdomains },
         ...options,
-      }) as Core.APIPromise<{ result: UnnamedSchemaRef45004a9444b6da9f88158ed2fb9a5820 }>
+      }) as Core.APIPromise<{ result: ZoneHold }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -26,16 +23,13 @@ export class Holds extends APIResource {
    * Stop enforcement of a zone hold on the zone, permanently or temporarily,
    * allowing the creation and activation of zones with this zone's hostname.
    */
-  delete(
-    params: HoldDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<UnnamedSchemaRef45004a9444b6da9f88158ed2fb9a5820> {
+  delete(params: HoldDeleteParams, options?: Core.RequestOptions): Core.APIPromise<ZoneHold> {
     const { zone_id, hold_after } = params;
     return (
       this._client.delete(`/zones/${zone_id}/hold`, {
         query: { hold_after },
         ...options,
-      }) as Core.APIPromise<{ result: UnnamedSchemaRef45004a9444b6da9f88158ed2fb9a5820 }>
+      }) as Core.APIPromise<{ result: ZoneHold }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -43,20 +37,15 @@ export class Holds extends APIResource {
    * Retrieve whether the zone is subject to a zone hold, and metadata about the
    * hold.
    */
-  get(
-    params: HoldGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<UnnamedSchemaRef45004a9444b6da9f88158ed2fb9a5820> {
+  get(params: HoldGetParams, options?: Core.RequestOptions): Core.APIPromise<ZoneHold> {
     const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zone_id}/hold`, options) as Core.APIPromise<{
-        result: UnnamedSchemaRef45004a9444b6da9f88158ed2fb9a5820;
-      }>
+      this._client.get(`/zones/${zone_id}/hold`, options) as Core.APIPromise<{ result: ZoneHold }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface UnnamedSchemaRef45004a9444b6da9f88158ed2fb9a5820 {
+export interface ZoneHold {
   hold?: boolean;
 
   hold_after?: string;
@@ -101,7 +90,7 @@ export interface HoldGetParams {
 }
 
 export namespace Holds {
-  export import UnnamedSchemaRef45004a9444b6da9f88158ed2fb9a5820 = HoldsAPI.UnnamedSchemaRef45004a9444b6da9f88158ed2fb9a5820;
+  export import ZoneHold = HoldsAPI.ZoneHold;
   export import HoldCreateParams = HoldsAPI.HoldCreateParams;
   export import HoldDeleteParams = HoldsAPI.HoldDeleteParams;
   export import HoldGetParams = HoldsAPI.HoldGetParams;

@@ -57,15 +57,12 @@ export class CAs extends APIResource {
   /**
    * Lists short-lived certificate CAs and their public keys.
    */
-  list(
-    params?: CAListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<ZeroTrustCAsSinglePage, ZeroTrustCA>;
-  list(options?: Core.RequestOptions): Core.PagePromise<ZeroTrustCAsSinglePage, ZeroTrustCA>;
+  list(params?: CAListParams, options?: Core.RequestOptions): Core.PagePromise<CAsSinglePage, CA>;
+  list(options?: Core.RequestOptions): Core.PagePromise<CAsSinglePage, CA>;
   list(
     params: CAListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<ZeroTrustCAsSinglePage, ZeroTrustCA> {
+  ): Core.PagePromise<CAsSinglePage, CA> {
     if (isRequestOptions(params)) {
       return this.list({}, params);
     }
@@ -88,7 +85,7 @@ export class CAs extends APIResource {
         };
     return this._client.getAPIList(
       `/${accountOrZone}/${accountOrZoneId}/access/apps/ca`,
-      ZeroTrustCAsSinglePage,
+      CAsSinglePage,
       options,
     );
   }
@@ -181,9 +178,9 @@ export class CAs extends APIResource {
   }
 }
 
-export class ZeroTrustCAsSinglePage extends SinglePage<ZeroTrustCA> {}
+export class CAsSinglePage extends SinglePage<CA> {}
 
-export interface ZeroTrustCA {
+export interface CA {
   /**
    * The ID of the CA.
    */
@@ -257,9 +254,9 @@ export interface CAGetParams {
 }
 
 export namespace CAs {
-  export import ZeroTrustCA = CAsAPI.ZeroTrustCA;
+  export import CA = CAsAPI.CA;
   export import CADeleteResponse = CAsAPI.CADeleteResponse;
-  export import ZeroTrustCAsSinglePage = CAsAPI.ZeroTrustCAsSinglePage;
+  export import CAsSinglePage = CAsAPI.CAsSinglePage;
   export import CACreateParams = CAsAPI.CACreateParams;
   export import CAListParams = CAsAPI.CAListParams;
   export import CADeleteParams = CAsAPI.CADeleteParams;

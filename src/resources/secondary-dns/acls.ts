@@ -9,46 +9,35 @@ export class ACLs extends APIResource {
   /**
    * Create ACL.
    */
-  create(params: ACLCreateParams, options?: Core.RequestOptions): Core.APIPromise<SecondaryDNSACL> {
+  create(params: ACLCreateParams, options?: Core.RequestOptions): Core.APIPromise<ACL> {
     const { account_id, body } = params;
     return (
       this._client.post(`/accounts/${account_id}/secondary_dns/acls`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: SecondaryDNSACL }>
+      }) as Core.APIPromise<{ result: ACL }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Modify ACL.
    */
-  update(
-    aclId: string,
-    params: ACLUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SecondaryDNSACL> {
+  update(aclId: string, params: ACLUpdateParams, options?: Core.RequestOptions): Core.APIPromise<ACL> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/secondary_dns/acls/${aclId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: SecondaryDNSACL }>
+      }) as Core.APIPromise<{ result: ACL }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List ACLs.
    */
-  list(
-    params: ACLListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<SecondaryDnsaclsSinglePage, SecondaryDNSACL> {
+  list(params: ACLListParams, options?: Core.RequestOptions): Core.PagePromise<ACLsSinglePage, ACL> {
     const { account_id } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/secondary_dns/acls`,
-      SecondaryDnsaclsSinglePage,
-      options,
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/secondary_dns/acls`, ACLsSinglePage, options);
   }
 
   /**
@@ -71,19 +60,19 @@ export class ACLs extends APIResource {
   /**
    * Get ACL.
    */
-  get(aclId: string, params: ACLGetParams, options?: Core.RequestOptions): Core.APIPromise<SecondaryDNSACL> {
+  get(aclId: string, params: ACLGetParams, options?: Core.RequestOptions): Core.APIPromise<ACL> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/secondary_dns/acls/${aclId}`, options) as Core.APIPromise<{
-        result: SecondaryDNSACL;
+        result: ACL;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class SecondaryDnsaclsSinglePage extends SinglePage<SecondaryDNSACL> {}
+export class ACLsSinglePage extends SinglePage<ACL> {}
 
-export interface SecondaryDNSACL {
+export interface ACL {
   id: string;
 
   /**
@@ -177,10 +166,10 @@ export interface ACLGetParams {
 }
 
 export namespace ACLs {
-  export import SecondaryDNSACL = ACLsAPI.SecondaryDNSACL;
+  export import ACL = ACLsAPI.ACL;
   export import UnnamedSchemaRef08eaa2f22bb9ce0f80063d710d4edafd = ACLsAPI.UnnamedSchemaRef08eaa2f22bb9ce0f80063d710d4edafd;
   export import ACLDeleteResponse = ACLsAPI.ACLDeleteResponse;
-  export import SecondaryDnsaclsSinglePage = ACLsAPI.SecondaryDnsaclsSinglePage;
+  export import ACLsSinglePage = ACLsAPI.ACLsSinglePage;
   export import ACLCreateParams = ACLsAPI.ACLCreateParams;
   export import ACLUpdateParams = ACLsAPI.ACLUpdateParams;
   export import ACLListParams = ACLsAPI.ACLListParams;

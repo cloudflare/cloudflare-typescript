@@ -195,8 +195,10 @@ export namespace Versions {
   export import VersionListParams = VersionsAPI.VersionListParams;
   export import VersionGetParams = VersionsAPI.VersionGetParams;
   export import Settings = SettingsAPI.Settings;
-  export import SettingEditResponse = SettingsAPI.SettingEditResponse;
-  export import SettingGetResponse = SettingsAPI.SettingGetResponse;
+  export import BindingItem = SettingsAPI.BindingItem;
+  export import CompatibilityFlagsItem = SettingsAPI.CompatibilityFlagsItem;
+  export import SettingsItem = SettingsAPI.SettingsItem;
+  export import TagsItem = SettingsAPI.TagsItem;
   export import SettingEditParams = SettingsAPI.SettingEditParams;
   export import SettingGetParams = SettingsAPI.SettingGetParams;
 }

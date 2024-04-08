@@ -4,7 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as NetworkPathAPI from 'cloudflare/resources/zero-trust/dex/traceroute-test-results/network-path';
 
-export class NetworkPath extends APIResource {
+export class NetworkPathResource extends APIResource {
   /**
    * Get a breakdown of hops and performance metrics for a specific traceroute test
    * run
@@ -13,22 +13,22 @@ export class NetworkPath extends APIResource {
     testResultId: string,
     params: NetworkPathGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DigitalExperienceMonitoringTracerouteTestResultNetworkPath> {
+  ): Core.APIPromise<NetworkPath> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/dex/traceroute-test-results/${testResultId}/network-path`,
         options,
-      ) as Core.APIPromise<{ result: DigitalExperienceMonitoringTracerouteTestResultNetworkPath }>
+      ) as Core.APIPromise<{ result: NetworkPath }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface DigitalExperienceMonitoringTracerouteTestResultNetworkPath {
+export interface NetworkPath {
   /**
    * an array of the hops taken by the device to reach the end destination
    */
-  hops: Array<DigitalExperienceMonitoringTracerouteTestResultNetworkPath.Hop>;
+  hops: Array<NetworkPath.Hop>;
 
   /**
    * API Resource UUID tag.
@@ -56,7 +56,7 @@ export interface DigitalExperienceMonitoringTracerouteTestResultNetworkPath {
   testName?: string;
 }
 
-export namespace DigitalExperienceMonitoringTracerouteTestResultNetworkPath {
+export namespace NetworkPath {
   export interface Hop {
     ttl: number;
 
@@ -95,7 +95,7 @@ export interface NetworkPathGetParams {
   account_id: string;
 }
 
-export namespace NetworkPath {
-  export import DigitalExperienceMonitoringTracerouteTestResultNetworkPath = NetworkPathAPI.DigitalExperienceMonitoringTracerouteTestResultNetworkPath;
+export namespace NetworkPathResource {
+  export import NetworkPath = NetworkPathAPI.NetworkPath;
   export import NetworkPathGetParams = NetworkPathAPI.NetworkPathGetParams;
 }

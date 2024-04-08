@@ -9,8 +9,8 @@ export class KV extends APIResource {
 
 export namespace KV {
   export import Namespaces = NamespacesAPI.Namespaces;
-  export import WorkersKVNamespace = NamespacesAPI.WorkersKVNamespace;
-  export import WorkersKVNamespacesV4PagePaginationArray = NamespacesAPI.WorkersKVNamespacesV4PagePaginationArray;
+  export import Namespace = NamespacesAPI.Namespace;
+  export import NamespacesV4PagePaginationArray = NamespacesAPI.NamespacesV4PagePaginationArray;
   export import NamespaceCreateParams = NamespacesAPI.NamespaceCreateParams;
   export import NamespaceUpdateParams = NamespacesAPI.NamespaceUpdateParams;
   export import NamespaceListParams = NamespacesAPI.NamespaceListParams;

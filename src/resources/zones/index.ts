@@ -10,30 +10,15 @@ export {
   CustomNameserverGetParams,
   CustomNameservers,
 } from './custom-nameservers';
-export { DNSSetting, DNSSettingEditParams, DNSSettingGetParams, DNSSettings } from './dns-settings';
+export {
+  DNSSetting,
+  Nameserver,
+  DNSSettingEditParams,
+  DNSSettingGetParams,
+  DNSSettings,
+} from './dns-settings';
 export { Settings } from './settings/index';
-export {
-  SubscriptionListResponse,
-  SubscriptionCreateParams,
-  SubscriptionListResponsesSinglePage,
-  Subscriptions,
-} from './subscriptions';
-export {
-  UnnamedSchemaRef45004a9444b6da9f88158ed2fb9a5820,
-  HoldCreateParams,
-  HoldDeleteParams,
-  HoldGetParams,
-  Holds,
-} from './holds';
+export { SubscriptionCreateParams, Subscriptions } from './subscriptions';
 export { Workers } from './workers/index';
-export {
-  Zone,
-  ZoneDeleteResponse,
-  ZoneCreateParams,
-  ZoneListParams,
-  ZoneDeleteParams,
-  ZoneEditParams,
-  ZoneGetParams,
-  ZonesV4PagePaginationArray,
-  Zones,
-} from './zones';
+export { ZoneHold, HoldCreateParams, HoldDeleteParams, HoldGetParams, Holds } from './holds';
+export { Zones } from './zones';

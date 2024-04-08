@@ -13,28 +13,25 @@ export class Events extends APIResource {
   list(
     query?: EventListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<LoadBalancingAnalyticsSinglePage, LoadBalancingAnalytics>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<LoadBalancingAnalyticsSinglePage, LoadBalancingAnalytics>;
+  ): Core.PagePromise<AnalyticsSinglePage, Analytics>;
+  list(options?: Core.RequestOptions): Core.PagePromise<AnalyticsSinglePage, Analytics>;
   list(
     query: EventListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<LoadBalancingAnalyticsSinglePage, LoadBalancingAnalytics> {
+  ): Core.PagePromise<AnalyticsSinglePage, Analytics> {
     if (isRequestOptions(query)) {
       return this.list({}, query);
     }
-    return this._client.getAPIList(
-      '/user/load_balancing_analytics/events',
-      LoadBalancingAnalyticsSinglePage,
-      { query, ...options },
-    );
+    return this._client.getAPIList('/user/load_balancing_analytics/events', AnalyticsSinglePage, {
+      query,
+      ...options,
+    });
   }
 }
 
-export class LoadBalancingAnalyticsSinglePage extends SinglePage<LoadBalancingAnalytics> {}
+export class AnalyticsSinglePage extends SinglePage<Analytics> {}
 
-export interface LoadBalancingAnalytics {
+export interface Analytics {
   id?: number;
 
   origins?: Array<unknown>;
@@ -81,7 +78,7 @@ export interface EventListParams {
 }
 
 export namespace Events {
-  export import LoadBalancingAnalytics = EventsAPI.LoadBalancingAnalytics;
-  export import LoadBalancingAnalyticsSinglePage = EventsAPI.LoadBalancingAnalyticsSinglePage;
+  export import Analytics = EventsAPI.Analytics;
+  export import AnalyticsSinglePage = EventsAPI.AnalyticsSinglePage;
   export import EventListParams = EventsAPI.EventListParams;
 }

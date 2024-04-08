@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as DNSSECAPI from 'cloudflare/resources/dnssec';
 import * as Shared from 'cloudflare/resources/shared';
 
 export class DNSSECResource extends APIResource {
@@ -177,11 +176,4 @@ export interface DNSSECGetParams {
    * Identifier
    */
   zone_id: string;
-}
-
-export namespace DNSSECResource {
-  export import DNSSEC = DNSSECAPI.DNSSEC;
-  export import DNSSECDeleteParams = DNSSECAPI.DNSSECDeleteParams;
-  export import DNSSECEditParams = DNSSECAPI.DNSSECEditParams;
-  export import DNSSECGetParams = DNSSECAPI.DNSSECGetParams;
 }

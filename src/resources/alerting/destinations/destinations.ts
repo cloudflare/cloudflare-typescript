@@ -7,7 +7,7 @@ import * as WebhooksAPI from 'cloudflare/resources/alerting/destinations/webhook
 
 export class Destinations extends APIResource {
   eligible: EligibleAPI.Eligible = new EligibleAPI.Eligible(this._client);
-  pagerduty: PagerdutyAPI.Pagerduty = new PagerdutyAPI.Pagerduty(this._client);
+  pagerduty: PagerdutyAPI.PagerdutyResource = new PagerdutyAPI.PagerdutyResource(this._client);
   webhooks: WebhooksAPI.Webhooks = new WebhooksAPI.Webhooks(this._client);
 }
 
@@ -15,8 +15,8 @@ export namespace Destinations {
   export import Eligible = EligibleAPI.Eligible;
   export import EligibleGetResponse = EligibleAPI.EligibleGetResponse;
   export import EligibleGetParams = EligibleAPI.EligibleGetParams;
+  export import PagerdutyResource = PagerdutyAPI.PagerdutyResource;
   export import Pagerduty = PagerdutyAPI.Pagerduty;
-  export import AlertingPagerduty = PagerdutyAPI.AlertingPagerduty;
   export import PagerdutyCreateResponse = PagerdutyAPI.PagerdutyCreateResponse;
   export import PagerdutyGetResponse = PagerdutyAPI.PagerdutyGetResponse;
   export import PagerdutyLinkResponse = PagerdutyAPI.PagerdutyLinkResponse;
@@ -25,10 +25,9 @@ export namespace Destinations {
   export import PagerdutyGetParams = PagerdutyAPI.PagerdutyGetParams;
   export import PagerdutyLinkParams = PagerdutyAPI.PagerdutyLinkParams;
   export import Webhooks = WebhooksAPI.Webhooks;
-  export import AlertingWebhooks = WebhooksAPI.AlertingWebhooks;
   export import WebhookCreateResponse = WebhooksAPI.WebhookCreateResponse;
   export import WebhookUpdateResponse = WebhooksAPI.WebhookUpdateResponse;
-  export import AlertingWebhooksSinglePage = WebhooksAPI.AlertingWebhooksSinglePage;
+  export import WebhooksSinglePage = WebhooksAPI.WebhooksSinglePage;
   export import WebhookCreateParams = WebhooksAPI.WebhookCreateParams;
   export import WebhookUpdateParams = WebhooksAPI.WebhookUpdateParams;
   export import WebhookListParams = WebhooksAPI.WebhookListParams;

@@ -5,7 +5,7 @@ import { APIResource } from 'cloudflare/resource';
 import * as HistoryAPI from 'cloudflare/resources/alerting/history';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
-export class History extends APIResource {
+export class HistoryResource extends APIResource {
   /**
    * Gets a list of history records for notifications sent to an account. The records
    * are displayed for last `x` number of days based on the zone plan (free = 30, pro
@@ -14,19 +14,19 @@ export class History extends APIResource {
   list(
     params: HistoryListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<AlertingHistoriesV4PagePaginationArray, AlertingHistory> {
+  ): Core.PagePromise<HistoriesV4PagePaginationArray, History> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/alerting/v3/history`,
-      AlertingHistoriesV4PagePaginationArray,
+      HistoriesV4PagePaginationArray,
       { query, ...options },
     );
   }
 }
 
-export class AlertingHistoriesV4PagePaginationArray extends V4PagePaginationArray<AlertingHistory> {}
+export class HistoriesV4PagePaginationArray extends V4PagePaginationArray<History> {}
 
-export interface AlertingHistory {
+export interface History {
   /**
    * UUID
    */
@@ -93,8 +93,8 @@ export interface HistoryListParams extends V4PagePaginationArrayParams {
   since?: string;
 }
 
-export namespace History {
-  export import AlertingHistory = HistoryAPI.AlertingHistory;
-  export import AlertingHistoriesV4PagePaginationArray = HistoryAPI.AlertingHistoriesV4PagePaginationArray;
+export namespace HistoryResource {
+  export import History = HistoryAPI.History;
+  export import HistoriesV4PagePaginationArray = HistoryAPI.HistoriesV4PagePaginationArray;
   export import HistoryListParams = HistoryAPI.HistoryListParams;
 }

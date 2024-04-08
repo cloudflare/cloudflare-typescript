@@ -5,6 +5,7 @@ import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as AppsAPI from 'cloudflare/resources/spectrum/apps';
 import * as Shared from 'cloudflare/resources/shared';
+import * as SpectrumAPI from 'cloudflare/resources/spectrum/spectrum';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class Apps extends APIResource {
@@ -121,12 +122,12 @@ export interface AppCreateResponse {
   /**
    * The name and type of DNS record for the Spectrum application.
    */
-  dns?: AppCreateResponse.DNS;
+  dns?: SpectrumAPI.DNS;
 
   /**
    * The anycast edge IP configuration for the hostname of this application.
    */
-  edge_ips?: AppCreateResponse.EyeballIPs | AppCreateResponse.CustomerOwnedIPs;
+  edge_ips?: SpectrumAPI.EdgeIPs;
 
   /**
    * Enables IP Access Rules for this application. Notes: Only available for TCP
@@ -142,7 +143,7 @@ export interface AppCreateResponse {
   /**
    * The name and type of DNS record for the Spectrum application.
    */
-  origin_dns?: AppCreateResponse.OriginDNS;
+  origin_dns?: SpectrumAPI.OriginDNS;
 
   /**
    * The destination port at the origin. Only specified in conjunction with
@@ -151,7 +152,7 @@ export interface AppCreateResponse {
    * `"1000-2000"`. Notes: If specifying a port range, the number of ports in the
    * range must match the number of ports specified in the "protocol" field.
    */
-  origin_port?: number | string;
+  origin_port?: SpectrumAPI.OriginPort;
 
   /**
    * The port configuration at Cloudflare’s edge. May specify a single port, for
@@ -180,73 +181,6 @@ export interface AppCreateResponse {
    * the application type matches this property exactly.
    */
   traffic_type?: 'direct' | 'http' | 'https';
-}
-
-export namespace AppCreateResponse {
-  /**
-   * The name and type of DNS record for the Spectrum application.
-   */
-  export interface DNS {
-    /**
-     * The name of the DNS record associated with the application.
-     */
-    name?: string;
-
-    /**
-     * The type of DNS record associated with the application.
-     */
-    type?: 'CNAME' | 'ADDRESS';
-  }
-
-  export interface EyeballIPs {
-    /**
-     * The IP versions supported for inbound connections on Spectrum anycast IPs.
-     */
-    connectivity?: 'all' | 'ipv4' | 'ipv6';
-
-    /**
-     * The type of edge IP configuration specified. Dynamically allocated edge IPs use
-     * Spectrum anycast IPs in accordance with the connectivity you specify. Only valid
-     * with CNAME DNS names.
-     */
-    type?: 'dynamic';
-  }
-
-  export interface CustomerOwnedIPs {
-    /**
-     * The array of customer owned IPs we broadcast via anycast for this hostname and
-     * application.
-     */
-    ips?: Array<string>;
-
-    /**
-     * The type of edge IP configuration specified. Statically allocated edge IPs use
-     * customer IPs in accordance with the ips array you specify. Only valid with
-     * ADDRESS DNS names.
-     */
-    type?: 'static';
-  }
-
-  /**
-   * The name and type of DNS record for the Spectrum application.
-   */
-  export interface OriginDNS {
-    /**
-     * The name of the DNS record associated with the origin.
-     */
-    name?: string;
-
-    /**
-     * The TTL of our resolution of your DNS record in seconds.
-     */
-    ttl?: number;
-
-    /**
-     * The type of DNS record associated with the origin. "" is used to specify a
-     * combination of A/AAAA records.
-     */
-    type?: '' | 'A' | 'AAAA' | 'SRV';
-  }
 }
 
 export interface AppUpdateResponse {
@@ -269,12 +203,12 @@ export interface AppUpdateResponse {
   /**
    * The name and type of DNS record for the Spectrum application.
    */
-  dns?: AppUpdateResponse.DNS;
+  dns?: SpectrumAPI.DNS;
 
   /**
    * The anycast edge IP configuration for the hostname of this application.
    */
-  edge_ips?: AppUpdateResponse.EyeballIPs | AppUpdateResponse.CustomerOwnedIPs;
+  edge_ips?: SpectrumAPI.EdgeIPs;
 
   /**
    * Enables IP Access Rules for this application. Notes: Only available for TCP
@@ -290,7 +224,7 @@ export interface AppUpdateResponse {
   /**
    * The name and type of DNS record for the Spectrum application.
    */
-  origin_dns?: AppUpdateResponse.OriginDNS;
+  origin_dns?: SpectrumAPI.OriginDNS;
 
   /**
    * The destination port at the origin. Only specified in conjunction with
@@ -299,7 +233,7 @@ export interface AppUpdateResponse {
    * `"1000-2000"`. Notes: If specifying a port range, the number of ports in the
    * range must match the number of ports specified in the "protocol" field.
    */
-  origin_port?: number | string;
+  origin_port?: SpectrumAPI.OriginPort;
 
   /**
    * The port configuration at Cloudflare’s edge. May specify a single port, for
@@ -330,73 +264,6 @@ export interface AppUpdateResponse {
   traffic_type?: 'direct' | 'http' | 'https';
 }
 
-export namespace AppUpdateResponse {
-  /**
-   * The name and type of DNS record for the Spectrum application.
-   */
-  export interface DNS {
-    /**
-     * The name of the DNS record associated with the application.
-     */
-    name?: string;
-
-    /**
-     * The type of DNS record associated with the application.
-     */
-    type?: 'CNAME' | 'ADDRESS';
-  }
-
-  export interface EyeballIPs {
-    /**
-     * The IP versions supported for inbound connections on Spectrum anycast IPs.
-     */
-    connectivity?: 'all' | 'ipv4' | 'ipv6';
-
-    /**
-     * The type of edge IP configuration specified. Dynamically allocated edge IPs use
-     * Spectrum anycast IPs in accordance with the connectivity you specify. Only valid
-     * with CNAME DNS names.
-     */
-    type?: 'dynamic';
-  }
-
-  export interface CustomerOwnedIPs {
-    /**
-     * The array of customer owned IPs we broadcast via anycast for this hostname and
-     * application.
-     */
-    ips?: Array<string>;
-
-    /**
-     * The type of edge IP configuration specified. Statically allocated edge IPs use
-     * customer IPs in accordance with the ips array you specify. Only valid with
-     * ADDRESS DNS names.
-     */
-    type?: 'static';
-  }
-
-  /**
-   * The name and type of DNS record for the Spectrum application.
-   */
-  export interface OriginDNS {
-    /**
-     * The name of the DNS record associated with the origin.
-     */
-    name?: string;
-
-    /**
-     * The TTL of our resolution of your DNS record in seconds.
-     */
-    ttl?: number;
-
-    /**
-     * The type of DNS record associated with the origin. "" is used to specify a
-     * combination of A/AAAA records.
-     */
-    type?: '' | 'A' | 'AAAA' | 'SRV';
-  }
-}
-
 export type AppListResponse = unknown;
 
 export interface AppDeleteResponse {
@@ -410,12 +277,12 @@ export interface AppCreateParams {
   /**
    * The name and type of DNS record for the Spectrum application.
    */
-  dns: AppCreateParams.DNS;
+  dns: SpectrumAPI.DNS;
 
   /**
    * The name and type of DNS record for the Spectrum application.
    */
-  origin_dns: AppCreateParams.OriginDNS;
+  origin_dns: SpectrumAPI.OriginDNS;
 
   /**
    * The destination port at the origin. Only specified in conjunction with
@@ -424,7 +291,7 @@ export interface AppCreateParams {
    * `"1000-2000"`. Notes: If specifying a port range, the number of ports in the
    * range must match the number of ports specified in the "protocol" field.
    */
-  origin_port: number | string;
+  origin_port: SpectrumAPI.OriginPort;
 
   /**
    * The port configuration at Cloudflare’s edge. May specify a single port, for
@@ -441,7 +308,7 @@ export interface AppCreateParams {
   /**
    * The anycast edge IP configuration for the hostname of this application.
    */
-  edge_ips?: AppCreateParams.EyeballIPs | AppCreateParams.CustomerOwnedIPs;
+  edge_ips?: SpectrumAPI.EdgeIPs;
 
   /**
    * Enables IP Access Rules for this application. Notes: Only available for TCP
@@ -470,85 +337,18 @@ export interface AppCreateParams {
    * the application type matches this property exactly.
    */
   traffic_type?: 'direct' | 'http' | 'https';
-}
-
-export namespace AppCreateParams {
-  /**
-   * The name and type of DNS record for the Spectrum application.
-   */
-  export interface DNS {
-    /**
-     * The name of the DNS record associated with the application.
-     */
-    name?: string;
-
-    /**
-     * The type of DNS record associated with the application.
-     */
-    type?: 'CNAME' | 'ADDRESS';
-  }
-
-  /**
-   * The name and type of DNS record for the Spectrum application.
-   */
-  export interface OriginDNS {
-    /**
-     * The name of the DNS record associated with the origin.
-     */
-    name?: string;
-
-    /**
-     * The TTL of our resolution of your DNS record in seconds.
-     */
-    ttl?: number;
-
-    /**
-     * The type of DNS record associated with the origin. "" is used to specify a
-     * combination of A/AAAA records.
-     */
-    type?: '' | 'A' | 'AAAA' | 'SRV';
-  }
-
-  export interface EyeballIPs {
-    /**
-     * The IP versions supported for inbound connections on Spectrum anycast IPs.
-     */
-    connectivity?: 'all' | 'ipv4' | 'ipv6';
-
-    /**
-     * The type of edge IP configuration specified. Dynamically allocated edge IPs use
-     * Spectrum anycast IPs in accordance with the connectivity you specify. Only valid
-     * with CNAME DNS names.
-     */
-    type?: 'dynamic';
-  }
-
-  export interface CustomerOwnedIPs {
-    /**
-     * The array of customer owned IPs we broadcast via anycast for this hostname and
-     * application.
-     */
-    ips?: Array<string>;
-
-    /**
-     * The type of edge IP configuration specified. Statically allocated edge IPs use
-     * customer IPs in accordance with the ips array you specify. Only valid with
-     * ADDRESS DNS names.
-     */
-    type?: 'static';
-  }
 }
 
 export interface AppUpdateParams {
   /**
    * The name and type of DNS record for the Spectrum application.
    */
-  dns: AppUpdateParams.DNS;
+  dns: SpectrumAPI.DNS;
 
   /**
    * The name and type of DNS record for the Spectrum application.
    */
-  origin_dns: AppUpdateParams.OriginDNS;
+  origin_dns: SpectrumAPI.OriginDNS;
 
   /**
    * The destination port at the origin. Only specified in conjunction with
@@ -557,7 +357,7 @@ export interface AppUpdateParams {
    * `"1000-2000"`. Notes: If specifying a port range, the number of ports in the
    * range must match the number of ports specified in the "protocol" field.
    */
-  origin_port: number | string;
+  origin_port: SpectrumAPI.OriginPort;
 
   /**
    * The port configuration at Cloudflare’s edge. May specify a single port, for
@@ -574,7 +374,7 @@ export interface AppUpdateParams {
   /**
    * The anycast edge IP configuration for the hostname of this application.
    */
-  edge_ips?: AppUpdateParams.EyeballIPs | AppUpdateParams.CustomerOwnedIPs;
+  edge_ips?: SpectrumAPI.EdgeIPs;
 
   /**
    * Enables IP Access Rules for this application. Notes: Only available for TCP
@@ -603,73 +403,6 @@ export interface AppUpdateParams {
    * the application type matches this property exactly.
    */
   traffic_type?: 'direct' | 'http' | 'https';
-}
-
-export namespace AppUpdateParams {
-  /**
-   * The name and type of DNS record for the Spectrum application.
-   */
-  export interface DNS {
-    /**
-     * The name of the DNS record associated with the application.
-     */
-    name?: string;
-
-    /**
-     * The type of DNS record associated with the application.
-     */
-    type?: 'CNAME' | 'ADDRESS';
-  }
-
-  /**
-   * The name and type of DNS record for the Spectrum application.
-   */
-  export interface OriginDNS {
-    /**
-     * The name of the DNS record associated with the origin.
-     */
-    name?: string;
-
-    /**
-     * The TTL of our resolution of your DNS record in seconds.
-     */
-    ttl?: number;
-
-    /**
-     * The type of DNS record associated with the origin. "" is used to specify a
-     * combination of A/AAAA records.
-     */
-    type?: '' | 'A' | 'AAAA' | 'SRV';
-  }
-
-  export interface EyeballIPs {
-    /**
-     * The IP versions supported for inbound connections on Spectrum anycast IPs.
-     */
-    connectivity?: 'all' | 'ipv4' | 'ipv6';
-
-    /**
-     * The type of edge IP configuration specified. Dynamically allocated edge IPs use
-     * Spectrum anycast IPs in accordance with the connectivity you specify. Only valid
-     * with CNAME DNS names.
-     */
-    type?: 'dynamic';
-  }
-
-  export interface CustomerOwnedIPs {
-    /**
-     * The array of customer owned IPs we broadcast via anycast for this hostname and
-     * application.
-     */
-    ips?: Array<string>;
-
-    /**
-     * The type of edge IP configuration specified. Statically allocated edge IPs use
-     * customer IPs in accordance with the ips array you specify. Only valid with
-     * ADDRESS DNS names.
-     */
-    type?: 'static';
-  }
 }
 
 export interface AppListParams extends V4PagePaginationArrayParams {

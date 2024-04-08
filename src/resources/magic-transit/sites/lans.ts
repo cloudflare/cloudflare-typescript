@@ -94,671 +94,140 @@ export class LANs extends APIResource {
   }
 }
 
-export interface LANCreateResponse {
-  lans?: Array<LANCreateResponse.LAN>;
+export interface DHCPRelay {
+  /**
+   * List of DHCP server IPs.
+   */
+  server_addresses?: Array<string>;
 }
 
-export namespace LANCreateResponse {
-  export interface LAN {
-    /**
-     * Identifier
-     */
-    id?: string;
+export interface DHCPServer {
+  /**
+   * A valid IPv4 address.
+   */
+  dhcp_pool_end?: string;
 
-    description?: string;
+  /**
+   * A valid IPv4 address.
+   */
+  dhcp_pool_start?: string;
 
-    /**
-     * mark true to use this LAN for HA probing. only works for site with HA turned on.
-     * only one LAN can be set as the ha_link.
-     */
-    ha_link?: boolean;
+  /**
+   * A valid IPv4 address.
+   */
+  dns_server?: string;
 
-    nat?: LAN.Nat;
+  /**
+   * Mapping of MAC addresses to IP addresses
+   */
+  reservations?: Record<string, string>;
+}
 
-    physport?: number;
+export interface LAN {
+  /**
+   * Identifier
+   */
+  id?: string;
 
-    routed_subnets?: Array<LAN.RoutedSubnet>;
+  description?: string;
 
-    /**
-     * Identifier
-     */
-    site_id?: string;
+  /**
+   * mark true to use this LAN for HA probing. only works for site with HA turned on.
+   * only one LAN can be set as the ha_link.
+   */
+  ha_link?: boolean;
 
-    /**
-     * If the site is not configured in high availability mode, this configuration is
-     * optional (if omitted, use DHCP). However, if in high availability mode,
-     * static_address is required along with secondary and virtual address.
-     */
-    static_addressing?: LAN.StaticAddressing;
+  nat?: Nat;
 
-    /**
-     * VLAN port number.
-     */
-    vlan_tag?: number;
-  }
+  physport?: number;
 
-  export namespace LAN {
-    export interface Nat {
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      static_prefix?: string;
-    }
+  routed_subnets?: Array<RoutedSubnet>;
 
-    export interface RoutedSubnet {
-      /**
-       * A valid IPv4 address.
-       */
-      next_hop: string;
+  /**
+   * Identifier
+   */
+  site_id?: string;
 
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      prefix: string;
+  /**
+   * If the site is not configured in high availability mode, this configuration is
+   * optional (if omitted, use DHCP). However, if in high availability mode,
+   * static_address is required along with secondary and virtual address.
+   */
+  static_addressing?: StaticAddressing;
 
-      nat?: RoutedSubnet.Nat;
-    }
+  /**
+   * VLAN port number.
+   */
+  vlan_tag?: number;
+}
 
-    export namespace RoutedSubnet {
-      export interface Nat {
-        /**
-         * A valid CIDR notation representing an IP range.
-         */
-        static_prefix?: string;
-      }
-    }
+export interface Nat {
+  /**
+   * A valid CIDR notation representing an IP range.
+   */
+  static_prefix?: string;
+}
 
-    /**
-     * If the site is not configured in high availability mode, this configuration is
-     * optional (if omitted, use DHCP). However, if in high availability mode,
-     * static_address is required along with secondary and virtual address.
-     */
-    export interface StaticAddressing {
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      address: string;
+export interface RoutedSubnet {
+  /**
+   * A valid IPv4 address.
+   */
+  next_hop: string;
 
-      dhcp_relay?: StaticAddressing.DHCPRelay;
+  /**
+   * A valid CIDR notation representing an IP range.
+   */
+  prefix: string;
 
-      dhcp_server?: StaticAddressing.DHCPServer;
+  nat?: Nat;
+}
 
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      secondary_address?: string;
+/**
+ * If the site is not configured in high availability mode, this configuration is
+ * optional (if omitted, use DHCP). However, if in high availability mode,
+ * static_address is required along with secondary and virtual address.
+ */
+export interface StaticAddressing {
+  /**
+   * A valid CIDR notation representing an IP range.
+   */
+  address: string;
 
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      virtual_address?: string;
-    }
+  dhcp_relay?: DHCPRelay;
 
-    export namespace StaticAddressing {
-      export interface DHCPRelay {
-        /**
-         * List of DHCP server IPs.
-         */
-        server_addresses?: Array<string>;
-      }
+  dhcp_server?: DHCPServer;
 
-      export interface DHCPServer {
-        /**
-         * A valid IPv4 address.
-         */
-        dhcp_pool_end?: string;
+  /**
+   * A valid CIDR notation representing an IP range.
+   */
+  secondary_address?: string;
 
-        /**
-         * A valid IPv4 address.
-         */
-        dhcp_pool_start?: string;
+  /**
+   * A valid CIDR notation representing an IP range.
+   */
+  virtual_address?: string;
+}
 
-        /**
-         * A valid IPv4 address.
-         */
-        dns_server?: string;
-
-        /**
-         * Mapping of MAC addresses to IP addresses
-         */
-        reservations?: Record<string, string>;
-      }
-    }
-  }
+export interface LANCreateResponse {
+  lans?: Array<LAN>;
 }
 
 export interface LANUpdateResponse {
-  lan?: LANUpdateResponse.LAN;
-}
-
-export namespace LANUpdateResponse {
-  export interface LAN {
-    /**
-     * Identifier
-     */
-    id?: string;
-
-    description?: string;
-
-    /**
-     * mark true to use this LAN for HA probing. only works for site with HA turned on.
-     * only one LAN can be set as the ha_link.
-     */
-    ha_link?: boolean;
-
-    nat?: LAN.Nat;
-
-    physport?: number;
-
-    routed_subnets?: Array<LAN.RoutedSubnet>;
-
-    /**
-     * Identifier
-     */
-    site_id?: string;
-
-    /**
-     * If the site is not configured in high availability mode, this configuration is
-     * optional (if omitted, use DHCP). However, if in high availability mode,
-     * static_address is required along with secondary and virtual address.
-     */
-    static_addressing?: LAN.StaticAddressing;
-
-    /**
-     * VLAN port number.
-     */
-    vlan_tag?: number;
-  }
-
-  export namespace LAN {
-    export interface Nat {
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      static_prefix?: string;
-    }
-
-    export interface RoutedSubnet {
-      /**
-       * A valid IPv4 address.
-       */
-      next_hop: string;
-
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      prefix: string;
-
-      nat?: RoutedSubnet.Nat;
-    }
-
-    export namespace RoutedSubnet {
-      export interface Nat {
-        /**
-         * A valid CIDR notation representing an IP range.
-         */
-        static_prefix?: string;
-      }
-    }
-
-    /**
-     * If the site is not configured in high availability mode, this configuration is
-     * optional (if omitted, use DHCP). However, if in high availability mode,
-     * static_address is required along with secondary and virtual address.
-     */
-    export interface StaticAddressing {
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      address: string;
-
-      dhcp_relay?: StaticAddressing.DHCPRelay;
-
-      dhcp_server?: StaticAddressing.DHCPServer;
-
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      secondary_address?: string;
-
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      virtual_address?: string;
-    }
-
-    export namespace StaticAddressing {
-      export interface DHCPRelay {
-        /**
-         * List of DHCP server IPs.
-         */
-        server_addresses?: Array<string>;
-      }
-
-      export interface DHCPServer {
-        /**
-         * A valid IPv4 address.
-         */
-        dhcp_pool_end?: string;
-
-        /**
-         * A valid IPv4 address.
-         */
-        dhcp_pool_start?: string;
-
-        /**
-         * A valid IPv4 address.
-         */
-        dns_server?: string;
-
-        /**
-         * Mapping of MAC addresses to IP addresses
-         */
-        reservations?: Record<string, string>;
-      }
-    }
-  }
+  lan?: LAN;
 }
 
 export interface LANListResponse {
-  lans?: Array<LANListResponse.LAN>;
-}
-
-export namespace LANListResponse {
-  export interface LAN {
-    /**
-     * Identifier
-     */
-    id?: string;
-
-    description?: string;
-
-    /**
-     * mark true to use this LAN for HA probing. only works for site with HA turned on.
-     * only one LAN can be set as the ha_link.
-     */
-    ha_link?: boolean;
-
-    nat?: LAN.Nat;
-
-    physport?: number;
-
-    routed_subnets?: Array<LAN.RoutedSubnet>;
-
-    /**
-     * Identifier
-     */
-    site_id?: string;
-
-    /**
-     * If the site is not configured in high availability mode, this configuration is
-     * optional (if omitted, use DHCP). However, if in high availability mode,
-     * static_address is required along with secondary and virtual address.
-     */
-    static_addressing?: LAN.StaticAddressing;
-
-    /**
-     * VLAN port number.
-     */
-    vlan_tag?: number;
-  }
-
-  export namespace LAN {
-    export interface Nat {
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      static_prefix?: string;
-    }
-
-    export interface RoutedSubnet {
-      /**
-       * A valid IPv4 address.
-       */
-      next_hop: string;
-
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      prefix: string;
-
-      nat?: RoutedSubnet.Nat;
-    }
-
-    export namespace RoutedSubnet {
-      export interface Nat {
-        /**
-         * A valid CIDR notation representing an IP range.
-         */
-        static_prefix?: string;
-      }
-    }
-
-    /**
-     * If the site is not configured in high availability mode, this configuration is
-     * optional (if omitted, use DHCP). However, if in high availability mode,
-     * static_address is required along with secondary and virtual address.
-     */
-    export interface StaticAddressing {
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      address: string;
-
-      dhcp_relay?: StaticAddressing.DHCPRelay;
-
-      dhcp_server?: StaticAddressing.DHCPServer;
-
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      secondary_address?: string;
-
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      virtual_address?: string;
-    }
-
-    export namespace StaticAddressing {
-      export interface DHCPRelay {
-        /**
-         * List of DHCP server IPs.
-         */
-        server_addresses?: Array<string>;
-      }
-
-      export interface DHCPServer {
-        /**
-         * A valid IPv4 address.
-         */
-        dhcp_pool_end?: string;
-
-        /**
-         * A valid IPv4 address.
-         */
-        dhcp_pool_start?: string;
-
-        /**
-         * A valid IPv4 address.
-         */
-        dns_server?: string;
-
-        /**
-         * Mapping of MAC addresses to IP addresses
-         */
-        reservations?: Record<string, string>;
-      }
-    }
-  }
+  lans?: Array<LAN>;
 }
 
 export interface LANDeleteResponse {
   deleted?: boolean;
 
-  deleted_lan?: LANDeleteResponse.DeletedLAN;
-}
-
-export namespace LANDeleteResponse {
-  export interface DeletedLAN {
-    /**
-     * Identifier
-     */
-    id?: string;
-
-    description?: string;
-
-    /**
-     * mark true to use this LAN for HA probing. only works for site with HA turned on.
-     * only one LAN can be set as the ha_link.
-     */
-    ha_link?: boolean;
-
-    nat?: DeletedLAN.Nat;
-
-    physport?: number;
-
-    routed_subnets?: Array<DeletedLAN.RoutedSubnet>;
-
-    /**
-     * Identifier
-     */
-    site_id?: string;
-
-    /**
-     * If the site is not configured in high availability mode, this configuration is
-     * optional (if omitted, use DHCP). However, if in high availability mode,
-     * static_address is required along with secondary and virtual address.
-     */
-    static_addressing?: DeletedLAN.StaticAddressing;
-
-    /**
-     * VLAN port number.
-     */
-    vlan_tag?: number;
-  }
-
-  export namespace DeletedLAN {
-    export interface Nat {
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      static_prefix?: string;
-    }
-
-    export interface RoutedSubnet {
-      /**
-       * A valid IPv4 address.
-       */
-      next_hop: string;
-
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      prefix: string;
-
-      nat?: RoutedSubnet.Nat;
-    }
-
-    export namespace RoutedSubnet {
-      export interface Nat {
-        /**
-         * A valid CIDR notation representing an IP range.
-         */
-        static_prefix?: string;
-      }
-    }
-
-    /**
-     * If the site is not configured in high availability mode, this configuration is
-     * optional (if omitted, use DHCP). However, if in high availability mode,
-     * static_address is required along with secondary and virtual address.
-     */
-    export interface StaticAddressing {
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      address: string;
-
-      dhcp_relay?: StaticAddressing.DHCPRelay;
-
-      dhcp_server?: StaticAddressing.DHCPServer;
-
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      secondary_address?: string;
-
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      virtual_address?: string;
-    }
-
-    export namespace StaticAddressing {
-      export interface DHCPRelay {
-        /**
-         * List of DHCP server IPs.
-         */
-        server_addresses?: Array<string>;
-      }
-
-      export interface DHCPServer {
-        /**
-         * A valid IPv4 address.
-         */
-        dhcp_pool_end?: string;
-
-        /**
-         * A valid IPv4 address.
-         */
-        dhcp_pool_start?: string;
-
-        /**
-         * A valid IPv4 address.
-         */
-        dns_server?: string;
-
-        /**
-         * Mapping of MAC addresses to IP addresses
-         */
-        reservations?: Record<string, string>;
-      }
-    }
-  }
+  deleted_lan?: LAN;
 }
 
 export interface LANGetResponse {
-  lan?: LANGetResponse.LAN;
-}
-
-export namespace LANGetResponse {
-  export interface LAN {
-    /**
-     * Identifier
-     */
-    id?: string;
-
-    description?: string;
-
-    /**
-     * mark true to use this LAN for HA probing. only works for site with HA turned on.
-     * only one LAN can be set as the ha_link.
-     */
-    ha_link?: boolean;
-
-    nat?: LAN.Nat;
-
-    physport?: number;
-
-    routed_subnets?: Array<LAN.RoutedSubnet>;
-
-    /**
-     * Identifier
-     */
-    site_id?: string;
-
-    /**
-     * If the site is not configured in high availability mode, this configuration is
-     * optional (if omitted, use DHCP). However, if in high availability mode,
-     * static_address is required along with secondary and virtual address.
-     */
-    static_addressing?: LAN.StaticAddressing;
-
-    /**
-     * VLAN port number.
-     */
-    vlan_tag?: number;
-  }
-
-  export namespace LAN {
-    export interface Nat {
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      static_prefix?: string;
-    }
-
-    export interface RoutedSubnet {
-      /**
-       * A valid IPv4 address.
-       */
-      next_hop: string;
-
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      prefix: string;
-
-      nat?: RoutedSubnet.Nat;
-    }
-
-    export namespace RoutedSubnet {
-      export interface Nat {
-        /**
-         * A valid CIDR notation representing an IP range.
-         */
-        static_prefix?: string;
-      }
-    }
-
-    /**
-     * If the site is not configured in high availability mode, this configuration is
-     * optional (if omitted, use DHCP). However, if in high availability mode,
-     * static_address is required along with secondary and virtual address.
-     */
-    export interface StaticAddressing {
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      address: string;
-
-      dhcp_relay?: StaticAddressing.DHCPRelay;
-
-      dhcp_server?: StaticAddressing.DHCPServer;
-
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      secondary_address?: string;
-
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      virtual_address?: string;
-    }
-
-    export namespace StaticAddressing {
-      export interface DHCPRelay {
-        /**
-         * List of DHCP server IPs.
-         */
-        server_addresses?: Array<string>;
-      }
-
-      export interface DHCPServer {
-        /**
-         * A valid IPv4 address.
-         */
-        dhcp_pool_end?: string;
-
-        /**
-         * A valid IPv4 address.
-         */
-        dhcp_pool_start?: string;
-
-        /**
-         * A valid IPv4 address.
-         */
-        dns_server?: string;
-
-        /**
-         * Mapping of MAC addresses to IP addresses
-         */
-        reservations?: Record<string, string>;
-      }
-    }
-  }
+  lan?: LAN;
 }
 
 export interface LANCreateParams {
@@ -790,105 +259,16 @@ export namespace LANCreateParams {
      */
     ha_link?: boolean;
 
-    nat?: LAN.Nat;
+    nat?: LANsAPI.Nat;
 
-    routed_subnets?: Array<LAN.RoutedSubnet>;
-
-    /**
-     * If the site is not configured in high availability mode, this configuration is
-     * optional (if omitted, use DHCP). However, if in high availability mode,
-     * static_address is required along with secondary and virtual address.
-     */
-    static_addressing?: LAN.StaticAddressing;
-  }
-
-  export namespace LAN {
-    export interface Nat {
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      static_prefix?: string;
-    }
-
-    export interface RoutedSubnet {
-      /**
-       * A valid IPv4 address.
-       */
-      next_hop: string;
-
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      prefix: string;
-
-      nat?: RoutedSubnet.Nat;
-    }
-
-    export namespace RoutedSubnet {
-      export interface Nat {
-        /**
-         * A valid CIDR notation representing an IP range.
-         */
-        static_prefix?: string;
-      }
-    }
+    routed_subnets?: Array<LANsAPI.RoutedSubnet>;
 
     /**
      * If the site is not configured in high availability mode, this configuration is
      * optional (if omitted, use DHCP). However, if in high availability mode,
      * static_address is required along with secondary and virtual address.
      */
-    export interface StaticAddressing {
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      address: string;
-
-      dhcp_relay?: StaticAddressing.DHCPRelay;
-
-      dhcp_server?: StaticAddressing.DHCPServer;
-
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      secondary_address?: string;
-
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      virtual_address?: string;
-    }
-
-    export namespace StaticAddressing {
-      export interface DHCPRelay {
-        /**
-         * List of DHCP server IPs.
-         */
-        server_addresses?: Array<string>;
-      }
-
-      export interface DHCPServer {
-        /**
-         * A valid IPv4 address.
-         */
-        dhcp_pool_end?: string;
-
-        /**
-         * A valid IPv4 address.
-         */
-        dhcp_pool_start?: string;
-
-        /**
-         * A valid IPv4 address.
-         */
-        dns_server?: string;
-
-        /**
-         * Mapping of MAC addresses to IP addresses
-         */
-        reservations?: Record<string, string>;
-      }
-    }
+    static_addressing?: LANsAPI.StaticAddressing;
   }
 }
 
@@ -908,112 +288,23 @@ export namespace LANUpdateParams {
   export interface LAN {
     description?: string;
 
-    nat?: LAN.Nat;
+    nat?: LANsAPI.Nat;
 
     physport?: number;
 
-    routed_subnets?: Array<LAN.RoutedSubnet>;
+    routed_subnets?: Array<LANsAPI.RoutedSubnet>;
 
     /**
      * If the site is not configured in high availability mode, this configuration is
      * optional (if omitted, use DHCP). However, if in high availability mode,
      * static_address is required along with secondary and virtual address.
      */
-    static_addressing?: LAN.StaticAddressing;
+    static_addressing?: LANsAPI.StaticAddressing;
 
     /**
      * VLAN port number.
      */
     vlan_tag?: number;
-  }
-
-  export namespace LAN {
-    export interface Nat {
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      static_prefix?: string;
-    }
-
-    export interface RoutedSubnet {
-      /**
-       * A valid IPv4 address.
-       */
-      next_hop: string;
-
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      prefix: string;
-
-      nat?: RoutedSubnet.Nat;
-    }
-
-    export namespace RoutedSubnet {
-      export interface Nat {
-        /**
-         * A valid CIDR notation representing an IP range.
-         */
-        static_prefix?: string;
-      }
-    }
-
-    /**
-     * If the site is not configured in high availability mode, this configuration is
-     * optional (if omitted, use DHCP). However, if in high availability mode,
-     * static_address is required along with secondary and virtual address.
-     */
-    export interface StaticAddressing {
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      address: string;
-
-      dhcp_relay?: StaticAddressing.DHCPRelay;
-
-      dhcp_server?: StaticAddressing.DHCPServer;
-
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      secondary_address?: string;
-
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      virtual_address?: string;
-    }
-
-    export namespace StaticAddressing {
-      export interface DHCPRelay {
-        /**
-         * List of DHCP server IPs.
-         */
-        server_addresses?: Array<string>;
-      }
-
-      export interface DHCPServer {
-        /**
-         * A valid IPv4 address.
-         */
-        dhcp_pool_end?: string;
-
-        /**
-         * A valid IPv4 address.
-         */
-        dhcp_pool_start?: string;
-
-        /**
-         * A valid IPv4 address.
-         */
-        dns_server?: string;
-
-        /**
-         * Mapping of MAC addresses to IP addresses
-         */
-        reservations?: Record<string, string>;
-      }
-    }
   }
 }
 
@@ -1044,6 +335,12 @@ export interface LANGetParams {
 }
 
 export namespace LANs {
+  export import DHCPRelay = LANsAPI.DHCPRelay;
+  export import DHCPServer = LANsAPI.DHCPServer;
+  export import LAN = LANsAPI.LAN;
+  export import Nat = LANsAPI.Nat;
+  export import RoutedSubnet = LANsAPI.RoutedSubnet;
+  export import StaticAddressing = LANsAPI.StaticAddressing;
   export import LANCreateResponse = LANsAPI.LANCreateResponse;
   export import LANUpdateResponse = LANsAPI.LANUpdateResponse;
   export import LANListResponse = LANsAPI.LANListResponse;

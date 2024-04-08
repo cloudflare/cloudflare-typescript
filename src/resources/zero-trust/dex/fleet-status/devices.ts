@@ -12,22 +12,19 @@ export class Devices extends APIResource {
   list(
     params: DeviceListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<
-    DigitalExperienceMonitoringDevicesV4PagePaginationArray,
-    DigitalExperienceMonitoringDevice
-  > {
+  ): Core.PagePromise<DevicesV4PagePaginationArray, Device> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/dex/fleet-status/devices`,
-      DigitalExperienceMonitoringDevicesV4PagePaginationArray,
+      DevicesV4PagePaginationArray,
       { query, ...options },
     );
   }
 }
 
-export class DigitalExperienceMonitoringDevicesV4PagePaginationArray extends V4PagePaginationArray<DigitalExperienceMonitoringDevice> {}
+export class DevicesV4PagePaginationArray extends V4PagePaginationArray<Device> {}
 
-export interface DigitalExperienceMonitoringDevice {
+export interface Device {
   /**
    * Cloudflare colo
    */
@@ -121,7 +118,7 @@ export interface DeviceListParams extends V4PagePaginationArrayParams {
 }
 
 export namespace Devices {
-  export import DigitalExperienceMonitoringDevice = DevicesAPI.DigitalExperienceMonitoringDevice;
-  export import DigitalExperienceMonitoringDevicesV4PagePaginationArray = DevicesAPI.DigitalExperienceMonitoringDevicesV4PagePaginationArray;
+  export import Device = DevicesAPI.Device;
+  export import DevicesV4PagePaginationArray = DevicesAPI.DevicesV4PagePaginationArray;
   export import DeviceListParams = DevicesAPI.DeviceListParams;
 }

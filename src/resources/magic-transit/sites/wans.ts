@@ -93,311 +93,79 @@ export class WANs extends APIResource {
   }
 }
 
-export interface WANCreateResponse {
-  wans?: Array<WANCreateResponse.WAN>;
+/**
+ * (optional) if omitted, use DHCP. Submit secondary_address when site is in high
+ * availability mode.
+ */
+export interface StaticAddressing {
+  /**
+   * A valid CIDR notation representing an IP range.
+   */
+  address: string;
+
+  /**
+   * A valid IPv4 address.
+   */
+  gateway_address: string;
+
+  /**
+   * A valid CIDR notation representing an IP range.
+   */
+  secondary_address?: string;
 }
 
-export namespace WANCreateResponse {
-  export interface WAN {
-    /**
-     * Identifier
-     */
-    id?: string;
+export interface WAN {
+  /**
+   * Identifier
+   */
+  id?: string;
 
-    description?: string;
+  description?: string;
 
-    physport?: number;
+  physport?: number;
 
-    /**
-     * Priority of WAN for traffic loadbalancing.
-     */
-    priority?: number;
+  /**
+   * Priority of WAN for traffic loadbalancing.
+   */
+  priority?: number;
 
-    /**
-     * Identifier
-     */
-    site_id?: string;
+  /**
+   * Identifier
+   */
+  site_id?: string;
 
-    /**
-     * (optional) if omitted, use DHCP. Submit secondary_address when site is in high
-     * availability mode.
-     */
-    static_addressing?: WAN.StaticAddressing;
+  /**
+   * (optional) if omitted, use DHCP. Submit secondary_address when site is in high
+   * availability mode.
+   */
+  static_addressing?: StaticAddressing;
 
-    /**
-     * VLAN port number.
-     */
-    vlan_tag?: number;
-  }
+  /**
+   * VLAN port number.
+   */
+  vlan_tag?: number;
+}
 
-  export namespace WAN {
-    /**
-     * (optional) if omitted, use DHCP. Submit secondary_address when site is in high
-     * availability mode.
-     */
-    export interface StaticAddressing {
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      address: string;
-
-      /**
-       * A valid IPv4 address.
-       */
-      gateway_address: string;
-
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      secondary_address?: string;
-    }
-  }
+export interface WANCreateResponse {
+  wans?: Array<WAN>;
 }
 
 export interface WANUpdateResponse {
-  wan?: WANUpdateResponse.WAN;
-}
-
-export namespace WANUpdateResponse {
-  export interface WAN {
-    /**
-     * Identifier
-     */
-    id?: string;
-
-    description?: string;
-
-    physport?: number;
-
-    /**
-     * Priority of WAN for traffic loadbalancing.
-     */
-    priority?: number;
-
-    /**
-     * Identifier
-     */
-    site_id?: string;
-
-    /**
-     * (optional) if omitted, use DHCP. Submit secondary_address when site is in high
-     * availability mode.
-     */
-    static_addressing?: WAN.StaticAddressing;
-
-    /**
-     * VLAN port number.
-     */
-    vlan_tag?: number;
-  }
-
-  export namespace WAN {
-    /**
-     * (optional) if omitted, use DHCP. Submit secondary_address when site is in high
-     * availability mode.
-     */
-    export interface StaticAddressing {
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      address: string;
-
-      /**
-       * A valid IPv4 address.
-       */
-      gateway_address: string;
-
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      secondary_address?: string;
-    }
-  }
+  wan?: WAN;
 }
 
 export interface WANListResponse {
-  wans?: Array<WANListResponse.WAN>;
-}
-
-export namespace WANListResponse {
-  export interface WAN {
-    /**
-     * Identifier
-     */
-    id?: string;
-
-    description?: string;
-
-    physport?: number;
-
-    /**
-     * Priority of WAN for traffic loadbalancing.
-     */
-    priority?: number;
-
-    /**
-     * Identifier
-     */
-    site_id?: string;
-
-    /**
-     * (optional) if omitted, use DHCP. Submit secondary_address when site is in high
-     * availability mode.
-     */
-    static_addressing?: WAN.StaticAddressing;
-
-    /**
-     * VLAN port number.
-     */
-    vlan_tag?: number;
-  }
-
-  export namespace WAN {
-    /**
-     * (optional) if omitted, use DHCP. Submit secondary_address when site is in high
-     * availability mode.
-     */
-    export interface StaticAddressing {
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      address: string;
-
-      /**
-       * A valid IPv4 address.
-       */
-      gateway_address: string;
-
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      secondary_address?: string;
-    }
-  }
+  wans?: Array<WAN>;
 }
 
 export interface WANDeleteResponse {
   deleted?: boolean;
 
-  deleted_wan?: WANDeleteResponse.DeletedWAN;
-}
-
-export namespace WANDeleteResponse {
-  export interface DeletedWAN {
-    /**
-     * Identifier
-     */
-    id?: string;
-
-    description?: string;
-
-    physport?: number;
-
-    /**
-     * Priority of WAN for traffic loadbalancing.
-     */
-    priority?: number;
-
-    /**
-     * Identifier
-     */
-    site_id?: string;
-
-    /**
-     * (optional) if omitted, use DHCP. Submit secondary_address when site is in high
-     * availability mode.
-     */
-    static_addressing?: DeletedWAN.StaticAddressing;
-
-    /**
-     * VLAN port number.
-     */
-    vlan_tag?: number;
-  }
-
-  export namespace DeletedWAN {
-    /**
-     * (optional) if omitted, use DHCP. Submit secondary_address when site is in high
-     * availability mode.
-     */
-    export interface StaticAddressing {
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      address: string;
-
-      /**
-       * A valid IPv4 address.
-       */
-      gateway_address: string;
-
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      secondary_address?: string;
-    }
-  }
+  deleted_wan?: WAN;
 }
 
 export interface WANGetResponse {
-  wan?: WANGetResponse.WAN;
-}
-
-export namespace WANGetResponse {
-  export interface WAN {
-    /**
-     * Identifier
-     */
-    id?: string;
-
-    description?: string;
-
-    physport?: number;
-
-    /**
-     * Priority of WAN for traffic loadbalancing.
-     */
-    priority?: number;
-
-    /**
-     * Identifier
-     */
-    site_id?: string;
-
-    /**
-     * (optional) if omitted, use DHCP. Submit secondary_address when site is in high
-     * availability mode.
-     */
-    static_addressing?: WAN.StaticAddressing;
-
-    /**
-     * VLAN port number.
-     */
-    vlan_tag?: number;
-  }
-
-  export namespace WAN {
-    /**
-     * (optional) if omitted, use DHCP. Submit secondary_address when site is in high
-     * availability mode.
-     */
-    export interface StaticAddressing {
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      address: string;
-
-      /**
-       * A valid IPv4 address.
-       */
-      gateway_address: string;
-
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      secondary_address?: string;
-    }
-  }
+  wan?: WAN;
 }
 
 export interface WANCreateParams {
@@ -429,30 +197,7 @@ export namespace WANCreateParams {
      * (optional) if omitted, use DHCP. Submit secondary_address when site is in high
      * availability mode.
      */
-    static_addressing?: WAN.StaticAddressing;
-  }
-
-  export namespace WAN {
-    /**
-     * (optional) if omitted, use DHCP. Submit secondary_address when site is in high
-     * availability mode.
-     */
-    export interface StaticAddressing {
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      address: string;
-
-      /**
-       * A valid IPv4 address.
-       */
-      gateway_address: string;
-
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      secondary_address?: string;
-    }
+    static_addressing?: WANsAPI.StaticAddressing;
   }
 }
 
@@ -480,35 +225,12 @@ export namespace WANUpdateParams {
      * (optional) if omitted, use DHCP. Submit secondary_address when site is in high
      * availability mode.
      */
-    static_addressing?: WAN.StaticAddressing;
+    static_addressing?: WANsAPI.StaticAddressing;
 
     /**
      * VLAN port number.
      */
     vlan_tag?: number;
-  }
-
-  export namespace WAN {
-    /**
-     * (optional) if omitted, use DHCP. Submit secondary_address when site is in high
-     * availability mode.
-     */
-    export interface StaticAddressing {
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      address: string;
-
-      /**
-       * A valid IPv4 address.
-       */
-      gateway_address: string;
-
-      /**
-       * A valid CIDR notation representing an IP range.
-       */
-      secondary_address?: string;
-    }
   }
 }
 
@@ -539,6 +261,8 @@ export interface WANGetParams {
 }
 
 export namespace WANs {
+  export import StaticAddressing = WANsAPI.StaticAddressing;
+  export import WAN = WANsAPI.WAN;
   export import WANCreateResponse = WANsAPI.WANCreateResponse;
   export import WANUpdateResponse = WANsAPI.WANUpdateResponse;
   export import WANListResponse = WANsAPI.WANListResponse;

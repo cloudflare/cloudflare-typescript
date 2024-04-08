@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
-import * as AccountsAPI from 'cloudflare/resources/accounts/accounts';
 import * as Shared from 'cloudflare/resources/shared';
 import * as MembersAPI from 'cloudflare/resources/accounts/members';
 import * as RolesAPI from 'cloudflare/resources/accounts/roles';
@@ -197,16 +196,10 @@ export interface AccountGetParams {
 }
 
 export namespace Accounts {
-  export import Account = AccountsAPI.Account;
-  export import AccountListResponse = AccountsAPI.AccountListResponse;
-  export import AccountListResponsesV4PagePaginationArray = AccountsAPI.AccountListResponsesV4PagePaginationArray;
-  export import AccountUpdateParams = AccountsAPI.AccountUpdateParams;
-  export import AccountListParams = AccountsAPI.AccountListParams;
-  export import AccountGetParams = AccountsAPI.AccountGetParams;
   export import Members = MembersAPI.Members;
   export import Member = MembersAPI.Member;
-  export import MemberPermission = MembersAPI.MemberPermission;
-  export import MemberWithCode = MembersAPI.MemberWithCode;
+  export import MemberWithInviteCode = MembersAPI.MemberWithInviteCode;
+  export import Role = MembersAPI.Role;
   export import MemberListResponse = MembersAPI.MemberListResponse;
   export import MemberDeleteResponse = MembersAPI.MemberDeleteResponse;
   export import MemberListResponsesV4PagePaginationArray = MembersAPI.MemberListResponsesV4PagePaginationArray;
@@ -217,9 +210,7 @@ export namespace Accounts {
   export import MemberGetParams = MembersAPI.MemberGetParams;
   export import Roles = RolesAPI.Roles;
   export import PermissionGrant = RolesAPI.PermissionGrant;
-  export import Role = RolesAPI.Role;
-  export import RoleListResponse = RolesAPI.RoleListResponse;
-  export import RoleListResponsesSinglePage = RolesAPI.RoleListResponsesSinglePage;
+  export import RolesSinglePage = RolesAPI.RolesSinglePage;
   export import RoleListParams = RolesAPI.RoleListParams;
   export import RoleGetParams = RolesAPI.RoleGetParams;
 }

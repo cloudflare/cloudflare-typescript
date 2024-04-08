@@ -94,282 +94,87 @@ export class ACLs extends APIResource {
 }
 
 /**
+ * Bidirectional ACL policy for network traffic within a site.
+ */
+export interface ACL {
+  /**
+   * Identifier
+   */
+  id?: string;
+
+  /**
+   * Description for the ACL.
+   */
+  description?: string;
+
+  /**
+   * The desired forwarding action for this ACL policy. If set to "false", the policy
+   * will forward traffic to Cloudflare. If set to "true", the policy will forward
+   * traffic locally on the Magic WAN Connector. If not included in request, will
+   * default to false.
+   */
+  forward_locally?: boolean;
+
+  lan_1?: ACLConfiguration;
+
+  lan_2?: ACLConfiguration;
+
+  /**
+   * The name of the ACL.
+   */
+  name?: string;
+
+  protocols?: Array<UnnamedSchemaRef87fa9e5fe9f6b8d607be1df57340d916>;
+}
+
+export interface ACLConfiguration {
+  /**
+   * The identifier for the LAN you want to create an ACL policy with.
+   */
+  lan_id: string;
+
+  /**
+   * The name of the LAN based on the provided lan_id.
+   */
+  lan_name?: string;
+
+  /**
+   * Array of ports on the provided LAN that will be included in the ACL. If no ports
+   * are provided, communication on any port on this LAN is allowed.
+   */
+  ports?: Array<number>;
+
+  /**
+   * Array of subnet IPs within the LAN that will be included in the ACL. If no
+   * subnets are provided, communication on any subnets on this LAN are allowed.
+   */
+  subnets?: Array<Subnet>;
+}
+
+/**
+ * A valid IPv4 address.
+ */
+export type Subnet = string | string;
+
+/**
  * Array of allowed communication protocols between configured LANs. If no
  * protocols are provided, all protocols are allowed.
  */
 export type UnnamedSchemaRef87fa9e5fe9f6b8d607be1df57340d916 = 'tcp' | 'udp' | 'icmp';
 
 export interface ACLCreateResponse {
-  acls?: Array<ACLCreateResponse.ACL>;
-}
-
-export namespace ACLCreateResponse {
-  /**
-   * Bidirectional ACL policy for network traffic within a site.
-   */
-  export interface ACL {
-    /**
-     * Identifier
-     */
-    id?: string;
-
-    /**
-     * Description for the ACL.
-     */
-    description?: string;
-
-    /**
-     * The desired forwarding action for this ACL policy. If set to "false", the policy
-     * will forward traffic to Cloudflare. If set to "true", the policy will forward
-     * traffic locally on the Magic WAN Connector. If not included in request, will
-     * default to false.
-     */
-    forward_locally?: boolean;
-
-    lan_1?: ACL.LAN1;
-
-    lan_2?: ACL.LAN2;
-
-    /**
-     * The name of the ACL.
-     */
-    name?: string;
-
-    protocols?: Array<ACLsAPI.UnnamedSchemaRef87fa9e5fe9f6b8d607be1df57340d916>;
-  }
-
-  export namespace ACL {
-    export interface LAN1 {
-      /**
-       * The identifier for the LAN you want to create an ACL policy with.
-       */
-      lan_id: string;
-
-      /**
-       * The name of the LAN based on the provided lan_id.
-       */
-      lan_name?: string;
-
-      /**
-       * Array of ports on the provided LAN that will be included in the ACL. If no ports
-       * are provided, communication on any port on this LAN is allowed.
-       */
-      ports?: Array<number>;
-
-      /**
-       * Array of subnet IPs within the LAN that will be included in the ACL. If no
-       * subnets are provided, communication on any subnets on this LAN are allowed.
-       */
-      subnets?: Array<string | string>;
-    }
-
-    export interface LAN2 {
-      /**
-       * The identifier for the LAN you want to create an ACL policy with.
-       */
-      lan_id: string;
-
-      /**
-       * The name of the LAN based on the provided lan_id.
-       */
-      lan_name?: string;
-
-      /**
-       * Array of ports on the provided LAN that will be included in the ACL. If no ports
-       * are provided, communication on any port on this LAN is allowed.
-       */
-      ports?: Array<number>;
-
-      /**
-       * Array of subnet IPs within the LAN that will be included in the ACL. If no
-       * subnets are provided, communication on any subnets on this LAN are allowed.
-       */
-      subnets?: Array<string | string>;
-    }
-  }
+  acls?: Array<ACL>;
 }
 
 export interface ACLUpdateResponse {
   /**
    * Bidirectional ACL policy for network traffic within a site.
    */
-  acl?: ACLUpdateResponse.ACL;
-}
-
-export namespace ACLUpdateResponse {
-  /**
-   * Bidirectional ACL policy for network traffic within a site.
-   */
-  export interface ACL {
-    /**
-     * Identifier
-     */
-    id?: string;
-
-    /**
-     * Description for the ACL.
-     */
-    description?: string;
-
-    /**
-     * The desired forwarding action for this ACL policy. If set to "false", the policy
-     * will forward traffic to Cloudflare. If set to "true", the policy will forward
-     * traffic locally on the Magic WAN Connector. If not included in request, will
-     * default to false.
-     */
-    forward_locally?: boolean;
-
-    lan_1?: ACL.LAN1;
-
-    lan_2?: ACL.LAN2;
-
-    /**
-     * The name of the ACL.
-     */
-    name?: string;
-
-    protocols?: Array<ACLsAPI.UnnamedSchemaRef87fa9e5fe9f6b8d607be1df57340d916>;
-  }
-
-  export namespace ACL {
-    export interface LAN1 {
-      /**
-       * The identifier for the LAN you want to create an ACL policy with.
-       */
-      lan_id: string;
-
-      /**
-       * The name of the LAN based on the provided lan_id.
-       */
-      lan_name?: string;
-
-      /**
-       * Array of ports on the provided LAN that will be included in the ACL. If no ports
-       * are provided, communication on any port on this LAN is allowed.
-       */
-      ports?: Array<number>;
-
-      /**
-       * Array of subnet IPs within the LAN that will be included in the ACL. If no
-       * subnets are provided, communication on any subnets on this LAN are allowed.
-       */
-      subnets?: Array<string | string>;
-    }
-
-    export interface LAN2 {
-      /**
-       * The identifier for the LAN you want to create an ACL policy with.
-       */
-      lan_id: string;
-
-      /**
-       * The name of the LAN based on the provided lan_id.
-       */
-      lan_name?: string;
-
-      /**
-       * Array of ports on the provided LAN that will be included in the ACL. If no ports
-       * are provided, communication on any port on this LAN is allowed.
-       */
-      ports?: Array<number>;
-
-      /**
-       * Array of subnet IPs within the LAN that will be included in the ACL. If no
-       * subnets are provided, communication on any subnets on this LAN are allowed.
-       */
-      subnets?: Array<string | string>;
-    }
-  }
+  acl?: ACL;
 }
 
 export interface ACLListResponse {
-  acls?: Array<ACLListResponse.ACL>;
-}
-
-export namespace ACLListResponse {
-  /**
-   * Bidirectional ACL policy for network traffic within a site.
-   */
-  export interface ACL {
-    /**
-     * Identifier
-     */
-    id?: string;
-
-    /**
-     * Description for the ACL.
-     */
-    description?: string;
-
-    /**
-     * The desired forwarding action for this ACL policy. If set to "false", the policy
-     * will forward traffic to Cloudflare. If set to "true", the policy will forward
-     * traffic locally on the Magic WAN Connector. If not included in request, will
-     * default to false.
-     */
-    forward_locally?: boolean;
-
-    lan_1?: ACL.LAN1;
-
-    lan_2?: ACL.LAN2;
-
-    /**
-     * The name of the ACL.
-     */
-    name?: string;
-
-    protocols?: Array<ACLsAPI.UnnamedSchemaRef87fa9e5fe9f6b8d607be1df57340d916>;
-  }
-
-  export namespace ACL {
-    export interface LAN1 {
-      /**
-       * The identifier for the LAN you want to create an ACL policy with.
-       */
-      lan_id: string;
-
-      /**
-       * The name of the LAN based on the provided lan_id.
-       */
-      lan_name?: string;
-
-      /**
-       * Array of ports on the provided LAN that will be included in the ACL. If no ports
-       * are provided, communication on any port on this LAN is allowed.
-       */
-      ports?: Array<number>;
-
-      /**
-       * Array of subnet IPs within the LAN that will be included in the ACL. If no
-       * subnets are provided, communication on any subnets on this LAN are allowed.
-       */
-      subnets?: Array<string | string>;
-    }
-
-    export interface LAN2 {
-      /**
-       * The identifier for the LAN you want to create an ACL policy with.
-       */
-      lan_id: string;
-
-      /**
-       * The name of the LAN based on the provided lan_id.
-       */
-      lan_name?: string;
-
-      /**
-       * Array of ports on the provided LAN that will be included in the ACL. If no ports
-       * are provided, communication on any port on this LAN is allowed.
-       */
-      ports?: Array<number>;
-
-      /**
-       * Array of subnet IPs within the LAN that will be included in the ACL. If no
-       * subnets are provided, communication on any subnets on this LAN are allowed.
-       */
-      subnets?: Array<string | string>;
-    }
-  }
+  acls?: Array<ACL>;
 }
 
 export interface ACLDeleteResponse {
@@ -378,186 +183,14 @@ export interface ACLDeleteResponse {
   /**
    * Bidirectional ACL policy for network traffic within a site.
    */
-  deleted_acl?: ACLDeleteResponse.DeletedACL;
-}
-
-export namespace ACLDeleteResponse {
-  /**
-   * Bidirectional ACL policy for network traffic within a site.
-   */
-  export interface DeletedACL {
-    /**
-     * Identifier
-     */
-    id?: string;
-
-    /**
-     * Description for the ACL.
-     */
-    description?: string;
-
-    /**
-     * The desired forwarding action for this ACL policy. If set to "false", the policy
-     * will forward traffic to Cloudflare. If set to "true", the policy will forward
-     * traffic locally on the Magic WAN Connector. If not included in request, will
-     * default to false.
-     */
-    forward_locally?: boolean;
-
-    lan_1?: DeletedACL.LAN1;
-
-    lan_2?: DeletedACL.LAN2;
-
-    /**
-     * The name of the ACL.
-     */
-    name?: string;
-
-    protocols?: Array<ACLsAPI.UnnamedSchemaRef87fa9e5fe9f6b8d607be1df57340d916>;
-  }
-
-  export namespace DeletedACL {
-    export interface LAN1 {
-      /**
-       * The identifier for the LAN you want to create an ACL policy with.
-       */
-      lan_id: string;
-
-      /**
-       * The name of the LAN based on the provided lan_id.
-       */
-      lan_name?: string;
-
-      /**
-       * Array of ports on the provided LAN that will be included in the ACL. If no ports
-       * are provided, communication on any port on this LAN is allowed.
-       */
-      ports?: Array<number>;
-
-      /**
-       * Array of subnet IPs within the LAN that will be included in the ACL. If no
-       * subnets are provided, communication on any subnets on this LAN are allowed.
-       */
-      subnets?: Array<string | string>;
-    }
-
-    export interface LAN2 {
-      /**
-       * The identifier for the LAN you want to create an ACL policy with.
-       */
-      lan_id: string;
-
-      /**
-       * The name of the LAN based on the provided lan_id.
-       */
-      lan_name?: string;
-
-      /**
-       * Array of ports on the provided LAN that will be included in the ACL. If no ports
-       * are provided, communication on any port on this LAN is allowed.
-       */
-      ports?: Array<number>;
-
-      /**
-       * Array of subnet IPs within the LAN that will be included in the ACL. If no
-       * subnets are provided, communication on any subnets on this LAN are allowed.
-       */
-      subnets?: Array<string | string>;
-    }
-  }
+  deleted_acl?: ACL;
 }
 
 export interface ACLGetResponse {
   /**
    * Bidirectional ACL policy for network traffic within a site.
    */
-  acl?: ACLGetResponse.ACL;
-}
-
-export namespace ACLGetResponse {
-  /**
-   * Bidirectional ACL policy for network traffic within a site.
-   */
-  export interface ACL {
-    /**
-     * Identifier
-     */
-    id?: string;
-
-    /**
-     * Description for the ACL.
-     */
-    description?: string;
-
-    /**
-     * The desired forwarding action for this ACL policy. If set to "false", the policy
-     * will forward traffic to Cloudflare. If set to "true", the policy will forward
-     * traffic locally on the Magic WAN Connector. If not included in request, will
-     * default to false.
-     */
-    forward_locally?: boolean;
-
-    lan_1?: ACL.LAN1;
-
-    lan_2?: ACL.LAN2;
-
-    /**
-     * The name of the ACL.
-     */
-    name?: string;
-
-    protocols?: Array<ACLsAPI.UnnamedSchemaRef87fa9e5fe9f6b8d607be1df57340d916>;
-  }
-
-  export namespace ACL {
-    export interface LAN1 {
-      /**
-       * The identifier for the LAN you want to create an ACL policy with.
-       */
-      lan_id: string;
-
-      /**
-       * The name of the LAN based on the provided lan_id.
-       */
-      lan_name?: string;
-
-      /**
-       * Array of ports on the provided LAN that will be included in the ACL. If no ports
-       * are provided, communication on any port on this LAN is allowed.
-       */
-      ports?: Array<number>;
-
-      /**
-       * Array of subnet IPs within the LAN that will be included in the ACL. If no
-       * subnets are provided, communication on any subnets on this LAN are allowed.
-       */
-      subnets?: Array<string | string>;
-    }
-
-    export interface LAN2 {
-      /**
-       * The identifier for the LAN you want to create an ACL policy with.
-       */
-      lan_id: string;
-
-      /**
-       * The name of the LAN based on the provided lan_id.
-       */
-      lan_name?: string;
-
-      /**
-       * Array of ports on the provided LAN that will be included in the ACL. If no ports
-       * are provided, communication on any port on this LAN is allowed.
-       */
-      ports?: Array<number>;
-
-      /**
-       * Array of subnet IPs within the LAN that will be included in the ACL. If no
-       * subnets are provided, communication on any subnets on this LAN are allowed.
-       */
-      subnets?: Array<string | string>;
-    }
-  }
+  acl?: ACL;
 }
 
 export interface ACLCreateParams {
@@ -574,9 +207,9 @@ export interface ACLCreateParams {
 
 export namespace ACLCreateParams {
   export interface ACL {
-    lan_1: ACL.LAN1;
+    lan_1: ACLsAPI.ACLConfiguration;
 
-    lan_2: ACL.LAN2;
+    lan_2: ACLsAPI.ACLConfiguration;
 
     /**
      * The name of the ACL.
@@ -597,56 +230,6 @@ export namespace ACLCreateParams {
     forward_locally?: boolean;
 
     protocols?: Array<ACLsAPI.UnnamedSchemaRef87fa9e5fe9f6b8d607be1df57340d916>;
-  }
-
-  export namespace ACL {
-    export interface LAN1 {
-      /**
-       * The identifier for the LAN you want to create an ACL policy with.
-       */
-      lan_id: string;
-
-      /**
-       * The name of the LAN based on the provided lan_id.
-       */
-      lan_name?: string;
-
-      /**
-       * Array of ports on the provided LAN that will be included in the ACL. If no ports
-       * are provided, communication on any port on this LAN is allowed.
-       */
-      ports?: Array<number>;
-
-      /**
-       * Array of subnet IPs within the LAN that will be included in the ACL. If no
-       * subnets are provided, communication on any subnets on this LAN are allowed.
-       */
-      subnets?: Array<string | string>;
-    }
-
-    export interface LAN2 {
-      /**
-       * The identifier for the LAN you want to create an ACL policy with.
-       */
-      lan_id: string;
-
-      /**
-       * The name of the LAN based on the provided lan_id.
-       */
-      lan_name?: string;
-
-      /**
-       * Array of ports on the provided LAN that will be included in the ACL. If no ports
-       * are provided, communication on any port on this LAN is allowed.
-       */
-      ports?: Array<number>;
-
-      /**
-       * Array of subnet IPs within the LAN that will be included in the ACL. If no
-       * subnets are provided, communication on any subnets on this LAN are allowed.
-       */
-      subnets?: Array<string | string>;
-    }
   }
 }
 
@@ -677,9 +260,9 @@ export namespace ACLUpdateParams {
      */
     forward_locally?: boolean;
 
-    lan_1?: ACL.LAN1;
+    lan_1?: ACLsAPI.ACLConfiguration;
 
-    lan_2?: ACL.LAN2;
+    lan_2?: ACLsAPI.ACLConfiguration;
 
     /**
      * The name of the ACL.
@@ -687,56 +270,6 @@ export namespace ACLUpdateParams {
     name?: string;
 
     protocols?: Array<ACLsAPI.UnnamedSchemaRef87fa9e5fe9f6b8d607be1df57340d916>;
-  }
-
-  export namespace ACL {
-    export interface LAN1 {
-      /**
-       * The identifier for the LAN you want to create an ACL policy with.
-       */
-      lan_id: string;
-
-      /**
-       * The name of the LAN based on the provided lan_id.
-       */
-      lan_name?: string;
-
-      /**
-       * Array of ports on the provided LAN that will be included in the ACL. If no ports
-       * are provided, communication on any port on this LAN is allowed.
-       */
-      ports?: Array<number>;
-
-      /**
-       * Array of subnet IPs within the LAN that will be included in the ACL. If no
-       * subnets are provided, communication on any subnets on this LAN are allowed.
-       */
-      subnets?: Array<string | string>;
-    }
-
-    export interface LAN2 {
-      /**
-       * The identifier for the LAN you want to create an ACL policy with.
-       */
-      lan_id: string;
-
-      /**
-       * The name of the LAN based on the provided lan_id.
-       */
-      lan_name?: string;
-
-      /**
-       * Array of ports on the provided LAN that will be included in the ACL. If no ports
-       * are provided, communication on any port on this LAN is allowed.
-       */
-      ports?: Array<number>;
-
-      /**
-       * Array of subnet IPs within the LAN that will be included in the ACL. If no
-       * subnets are provided, communication on any subnets on this LAN are allowed.
-       */
-      subnets?: Array<string | string>;
-    }
   }
 }
 
@@ -767,6 +300,9 @@ export interface ACLGetParams {
 }
 
 export namespace ACLs {
+  export import ACL = ACLsAPI.ACL;
+  export import ACLConfiguration = ACLsAPI.ACLConfiguration;
+  export import Subnet = ACLsAPI.Subnet;
   export import UnnamedSchemaRef87fa9e5fe9f6b8d607be1df57340d916 = ACLsAPI.UnnamedSchemaRef87fa9e5fe9f6b8d607be1df57340d916;
   export import ACLCreateResponse = ACLsAPI.ACLCreateResponse;
   export import ACLUpdateResponse = ACLsAPI.ACLUpdateResponse;

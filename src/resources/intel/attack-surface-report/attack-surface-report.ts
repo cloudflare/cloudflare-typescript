@@ -14,6 +14,11 @@ export namespace AttackSurfaceReport {
   export import IssueTypeGetResponse = IssueTypesAPI.IssueTypeGetResponse;
   export import IssueTypeGetParams = IssueTypesAPI.IssueTypeGetParams;
   export import Issues = IssuesAPI.Issues;
+  export import IssueClassItem = IssuesAPI.IssueClassItem;
+  export import IssueTypeItem = IssuesAPI.IssueTypeItem;
+  export import ProductItem = IssuesAPI.ProductItem;
+  export import SeverityQueryParamItem = IssuesAPI.SeverityQueryParamItem;
+  export import SubjectsItem = IssuesAPI.SubjectsItem;
   export import IssueListResponse = IssuesAPI.IssueListResponse;
   export import IssueClassResponse = IssuesAPI.IssueClassResponse;
   export import IssueSeverityResponse = IssuesAPI.IssueSeverityResponse;

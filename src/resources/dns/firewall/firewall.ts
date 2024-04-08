@@ -6,17 +6,17 @@ import * as FirewallAPI from 'cloudflare/resources/dns/firewall/firewall';
 import * as AnalyticsAPI from 'cloudflare/resources/dns/firewall/analytics/analytics';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
-export class Firewall extends APIResource {
+export class FirewallResource extends APIResource {
   analytics: AnalyticsAPI.Analytics = new AnalyticsAPI.Analytics(this._client);
 
   /**
    * Create a configured DNS Firewall Cluster.
    */
-  create(params: FirewallCreateParams, options?: Core.RequestOptions): Core.APIPromise<DNSFirewall> {
+  create(params: FirewallCreateParams, options?: Core.RequestOptions): Core.APIPromise<Firewall> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/dns_firewall`, { body, ...options }) as Core.APIPromise<{
-        result: DNSFirewall;
+        result: Firewall;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -27,13 +27,12 @@ export class Firewall extends APIResource {
   list(
     params: FirewallListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<DNSFirewallsV4PagePaginationArray, DNSFirewall> {
+  ): Core.PagePromise<FirewallsV4PagePaginationArray, Firewall> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/dns_firewall`,
-      DNSFirewallsV4PagePaginationArray,
-      { query, ...options },
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/dns_firewall`, FirewallsV4PagePaginationArray, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -60,13 +59,13 @@ export class Firewall extends APIResource {
     dnsFirewallId: string,
     params: FirewallEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DNSFirewall> {
+  ): Core.APIPromise<Firewall> {
     const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/dns_firewall/${dnsFirewallId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: DNSFirewall }>
+      }) as Core.APIPromise<{ result: Firewall }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -77,19 +76,35 @@ export class Firewall extends APIResource {
     dnsFirewallId: string,
     params: FirewallGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DNSFirewall> {
+  ): Core.APIPromise<Firewall> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/dns_firewall/${dnsFirewallId}`, options) as Core.APIPromise<{
-        result: DNSFirewall;
+        result: Firewall;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class DNSFirewallsV4PagePaginationArray extends V4PagePaginationArray<DNSFirewall> {}
+export class FirewallsV4PagePaginationArray extends V4PagePaginationArray<Firewall> {}
 
-export interface DNSFirewall {
+/**
+ * Attack mitigation settings.
+ */
+export interface AttackMitigation {
+  /**
+   * When enabled, random-prefix attacks are automatically mitigated and the upstream
+   * DNS servers protected.
+   */
+  enabled?: boolean;
+
+  /**
+   * Only mitigate attacks when upstream servers seem unhealthy.
+   */
+  only_when_upstream_unhealthy?: boolean;
+}
+
+export interface Firewall {
   /**
    * Identifier
    */
@@ -100,7 +115,7 @@ export interface DNSFirewall {
    */
   deprecate_any_requests: boolean;
 
-  dns_firewall_ips: Array<string | string>;
+  dns_firewall_ips: Array<FirewallIPsItem>;
 
   /**
    * Forward client IP (resolver) subnet if no EDNS Client Subnet is sent.
@@ -127,12 +142,12 @@ export interface DNSFirewall {
    */
   name: string;
 
-  upstream_ips: Array<string | string>;
+  upstream_ips: Array<UpstreamIPsItems>;
 
   /**
    * Attack mitigation settings.
    */
-  attack_mitigation?: DNSFirewall.AttackMitigation | null;
+  attack_mitigation?: AttackMitigation | null;
 
   /**
    * Negative DNS Cache TTL.
@@ -152,23 +167,10 @@ export interface DNSFirewall {
   retries?: number;
 }
 
-export namespace DNSFirewall {
-  /**
-   * Attack mitigation settings.
-   */
-  export interface AttackMitigation {
-    /**
-     * When enabled, random-prefix attacks are automatically mitigated and the upstream
-     * DNS servers protected.
-     */
-    enabled?: boolean;
-
-    /**
-     * Only mitigate attacks when upstream servers seem unhealthy.
-     */
-    only_when_upstream_unhealthy?: boolean;
-  }
-}
+/**
+ * Cloudflare-assigned DNS IPv4 Address.
+ */
+export type FirewallIPsItem = string | string;
 
 export interface UnnamedSchemaRef7a0f93d9e1afc3221d2a57b7bab16955 {
   /**
@@ -181,7 +183,7 @@ export interface UnnamedSchemaRef7a0f93d9e1afc3221d2a57b7bab16955 {
    */
   deprecate_any_requests: boolean;
 
-  dns_firewall_ips: Array<string | string>;
+  dns_firewall_ips: Array<FirewallIPsItem>;
 
   /**
    * Forward client IP (resolver) subnet if no EDNS Client Subnet is sent.
@@ -208,12 +210,12 @@ export interface UnnamedSchemaRef7a0f93d9e1afc3221d2a57b7bab16955 {
    */
   name: string;
 
-  upstream_ips: Array<string | string>;
+  upstream_ips: Array<UpstreamIPsItems>;
 
   /**
    * Attack mitigation settings.
    */
-  attack_mitigation?: UnnamedSchemaRef7a0f93d9e1afc3221d2a57b7bab16955.AttackMitigation | null;
+  attack_mitigation?: AttackMitigation | null;
 
   /**
    * Negative DNS Cache TTL.
@@ -233,23 +235,10 @@ export interface UnnamedSchemaRef7a0f93d9e1afc3221d2a57b7bab16955 {
   retries?: number;
 }
 
-export namespace UnnamedSchemaRef7a0f93d9e1afc3221d2a57b7bab16955 {
-  /**
-   * Attack mitigation settings.
-   */
-  export interface AttackMitigation {
-    /**
-     * When enabled, random-prefix attacks are automatically mitigated and the upstream
-     * DNS servers protected.
-     */
-    enabled?: boolean;
-
-    /**
-     * Only mitigate attacks when upstream servers seem unhealthy.
-     */
-    only_when_upstream_unhealthy?: boolean;
-  }
-}
+/**
+ * Upstream DNS Server IPv4 Address.
+ */
+export type UpstreamIPsItems = string | string;
 
 export interface FirewallDeleteResponse {
   /**
@@ -272,12 +261,12 @@ export interface FirewallCreateParams {
   /**
    * Body param:
    */
-  upstream_ips: Array<string | string>;
+  upstream_ips: Array<UpstreamIPsItems>;
 
   /**
    * Body param: Attack mitigation settings.
    */
-  attack_mitigation?: FirewallCreateParams.AttackMitigation | null;
+  attack_mitigation?: AttackMitigation | null;
 
   /**
    * Body param: Deprecate the response to ANY requests.
@@ -318,24 +307,6 @@ export interface FirewallCreateParams {
   retries?: number;
 }
 
-export namespace FirewallCreateParams {
-  /**
-   * Attack mitigation settings.
-   */
-  export interface AttackMitigation {
-    /**
-     * When enabled, random-prefix attacks are automatically mitigated and the upstream
-     * DNS servers protected.
-     */
-    enabled?: boolean;
-
-    /**
-     * Only mitigate attacks when upstream servers seem unhealthy.
-     */
-    only_when_upstream_unhealthy?: boolean;
-  }
-}
-
 export interface FirewallListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier
@@ -369,7 +340,7 @@ export interface FirewallEditParams {
   /**
    * Body param:
    */
-  dns_firewall_ips: Array<string | string>;
+  dns_firewall_ips: Array<FirewallIPsItem>;
 
   /**
    * Body param: Forward client IP (resolver) subnet if no EDNS Client Subnet is
@@ -395,12 +366,12 @@ export interface FirewallEditParams {
   /**
    * Body param:
    */
-  upstream_ips: Array<string | string>;
+  upstream_ips: Array<UpstreamIPsItems>;
 
   /**
    * Body param: Attack mitigation settings.
    */
-  attack_mitigation?: FirewallEditParams.AttackMitigation | null;
+  attack_mitigation?: AttackMitigation | null;
 
   /**
    * Body param: Negative DNS Cache TTL.
@@ -420,24 +391,6 @@ export interface FirewallEditParams {
   retries?: number;
 }
 
-export namespace FirewallEditParams {
-  /**
-   * Attack mitigation settings.
-   */
-  export interface AttackMitigation {
-    /**
-     * When enabled, random-prefix attacks are automatically mitigated and the upstream
-     * DNS servers protected.
-     */
-    enabled?: boolean;
-
-    /**
-     * Only mitigate attacks when upstream servers seem unhealthy.
-     */
-    only_when_upstream_unhealthy?: boolean;
-  }
-}
-
 export interface FirewallGetParams {
   /**
    * Identifier
@@ -445,11 +398,14 @@ export interface FirewallGetParams {
   account_id: string;
 }
 
-export namespace Firewall {
-  export import DNSFirewall = FirewallAPI.DNSFirewall;
+export namespace FirewallResource {
+  export import AttackMitigation = FirewallAPI.AttackMitigation;
+  export import Firewall = FirewallAPI.Firewall;
+  export import FirewallIPsItem = FirewallAPI.FirewallIPsItem;
   export import UnnamedSchemaRef7a0f93d9e1afc3221d2a57b7bab16955 = FirewallAPI.UnnamedSchemaRef7a0f93d9e1afc3221d2a57b7bab16955;
+  export import UpstreamIPsItems = FirewallAPI.UpstreamIPsItems;
   export import FirewallDeleteResponse = FirewallAPI.FirewallDeleteResponse;
-  export import DNSFirewallsV4PagePaginationArray = FirewallAPI.DNSFirewallsV4PagePaginationArray;
+  export import FirewallsV4PagePaginationArray = FirewallAPI.FirewallsV4PagePaginationArray;
   export import FirewallCreateParams = FirewallAPI.FirewallCreateParams;
   export import FirewallListParams = FirewallAPI.FirewallListParams;
   export import FirewallDeleteParams = FirewallAPI.FirewallDeleteParams;

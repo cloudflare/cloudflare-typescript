@@ -11,17 +11,16 @@ export class Networks extends APIResource {
 
 export namespace Networks {
   export import Routes = RoutesAPI.Routes;
-  export import TunnelRoute = RoutesAPI.TunnelRoute;
-  export import TunnelTeamnet = RoutesAPI.TunnelTeamnet;
+  export import Network = RoutesAPI.Network;
+  export import Route = RoutesAPI.Route;
   export import UnnamedSchemaRefC125d35cbb7f93aab989cd19bd764ed6 = RoutesAPI.UnnamedSchemaRefC125d35cbb7f93aab989cd19bd764ed6;
-  export import TunnelTeamnetsV4PagePaginationArray = RoutesAPI.TunnelTeamnetsV4PagePaginationArray;
+  export import NetworksV4PagePaginationArray = RoutesAPI.NetworksV4PagePaginationArray;
   export import RouteCreateParams = RoutesAPI.RouteCreateParams;
   export import RouteListParams = RoutesAPI.RouteListParams;
   export import RouteDeleteParams = RoutesAPI.RouteDeleteParams;
   export import RouteEditParams = RoutesAPI.RouteEditParams;
   export import VirtualNetworks = VirtualNetworksAPI.VirtualNetworks;
-  export import TunnelVirtualNetwork = VirtualNetworksAPI.TunnelVirtualNetwork;
-  export import TunnelVirtualNetworksSinglePage = VirtualNetworksAPI.TunnelVirtualNetworksSinglePage;
+  export import NetworksSinglePage = VirtualNetworksAPI.NetworksSinglePage;
   export import VirtualNetworkCreateParams = VirtualNetworksAPI.VirtualNetworkCreateParams;
   export import VirtualNetworkListParams = VirtualNetworksAPI.VirtualNetworkListParams;
   export import VirtualNetworkDeleteParams = VirtualNetworksAPI.VirtualNetworkDeleteParams;

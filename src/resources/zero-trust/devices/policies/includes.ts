@@ -28,11 +28,11 @@ export class Includes extends APIResource {
   list(
     params: IncludeListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<DevicesSplitTunnelIncludesSinglePage, DevicesSplitTunnelInclude> {
+  ): Core.PagePromise<SplitTunnelIncludesSinglePage, SplitTunnelInclude> {
     const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/devices/policy/include`,
-      DevicesSplitTunnelIncludesSinglePage,
+      SplitTunnelIncludesSinglePage,
       options,
     );
   }
@@ -56,9 +56,9 @@ export class Includes extends APIResource {
   }
 }
 
-export class DevicesSplitTunnelIncludesSinglePage extends SinglePage<DevicesSplitTunnelInclude> {}
+export class SplitTunnelIncludesSinglePage extends SinglePage<SplitTunnelInclude> {}
 
-export interface DevicesSplitTunnelInclude {
+export interface SplitTunnelInclude {
   /**
    * The address in CIDR format to include in the tunnel. If address is present, host
    * must not be present.
@@ -77,11 +77,11 @@ export interface DevicesSplitTunnelInclude {
   host?: string;
 }
 
-export type UnnamedSchemaRef5e0c6134a624678286f4a424b001870a = Array<DevicesSplitTunnelInclude>;
+export type UnnamedSchemaRef5e0c6134a624678286f4a424b001870a = Array<SplitTunnelInclude>;
 
-export type IncludeUpdateResponse = Array<DevicesSplitTunnelInclude>;
+export type IncludeUpdateResponse = Array<SplitTunnelInclude>;
 
-export type IncludeGetResponse = Array<DevicesSplitTunnelInclude>;
+export type IncludeGetResponse = Array<SplitTunnelInclude>;
 
 export interface IncludeUpdateParams {
   /**
@@ -92,7 +92,7 @@ export interface IncludeUpdateParams {
   /**
    * Body param:
    */
-  body: Array<DevicesSplitTunnelInclude>;
+  body: Array<SplitTunnelInclude>;
 }
 
 export interface IncludeListParams {
@@ -104,11 +104,11 @@ export interface IncludeGetParams {
 }
 
 export namespace Includes {
-  export import DevicesSplitTunnelInclude = IncludesAPI.DevicesSplitTunnelInclude;
+  export import SplitTunnelInclude = IncludesAPI.SplitTunnelInclude;
   export import UnnamedSchemaRef5e0c6134a624678286f4a424b001870a = IncludesAPI.UnnamedSchemaRef5e0c6134a624678286f4a424b001870a;
   export import IncludeUpdateResponse = IncludesAPI.IncludeUpdateResponse;
   export import IncludeGetResponse = IncludesAPI.IncludeGetResponse;
-  export import DevicesSplitTunnelIncludesSinglePage = IncludesAPI.DevicesSplitTunnelIncludesSinglePage;
+  export import SplitTunnelIncludesSinglePage = IncludesAPI.SplitTunnelIncludesSinglePage;
   export import IncludeUpdateParams = IncludesAPI.IncludeUpdateParams;
   export import IncludeListParams = IncludesAPI.IncludeListParams;
   export import IncludeGetParams = IncludesAPI.IncludeGetParams;

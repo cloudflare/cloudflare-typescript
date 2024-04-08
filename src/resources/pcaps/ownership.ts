@@ -4,18 +4,15 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as OwnershipAPI from 'cloudflare/resources/pcaps/ownership';
 
-export class Ownership extends APIResource {
+export class OwnershipResource extends APIResource {
   /**
    * Adds an AWS or GCP bucket to use with full packet captures.
    */
-  create(
-    params: OwnershipCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<MagicVisibilityPCAPsOwnership> {
+  create(params: OwnershipCreateParams, options?: Core.RequestOptions): Core.APIPromise<Ownership> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/pcaps/ownership`, { body, ...options }) as Core.APIPromise<{
-        result: MagicVisibilityPCAPsOwnership;
+        result: Ownership;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -53,21 +50,18 @@ export class Ownership extends APIResource {
   /**
    * Validates buckets added to the packet captures API.
    */
-  validate(
-    params: OwnershipValidateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<MagicVisibilityPCAPsOwnership> {
+  validate(params: OwnershipValidateParams, options?: Core.RequestOptions): Core.APIPromise<Ownership> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/pcaps/ownership/validate`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: MagicVisibilityPCAPsOwnership }>
+      }) as Core.APIPromise<{ result: Ownership }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface MagicVisibilityPCAPsOwnership {
+export interface Ownership {
   /**
    * The bucket ID associated with the packet captures API.
    */
@@ -99,7 +93,7 @@ export interface MagicVisibilityPCAPsOwnership {
   validated?: string;
 }
 
-export type OwnershipGetResponse = Array<MagicVisibilityPCAPsOwnership>;
+export type OwnershipGetResponse = Array<Ownership>;
 
 export interface OwnershipCreateParams {
   /**
@@ -146,8 +140,8 @@ export interface OwnershipValidateParams {
   ownership_challenge: string;
 }
 
-export namespace Ownership {
-  export import MagicVisibilityPCAPsOwnership = OwnershipAPI.MagicVisibilityPCAPsOwnership;
+export namespace OwnershipResource {
+  export import Ownership = OwnershipAPI.Ownership;
   export import OwnershipGetResponse = OwnershipAPI.OwnershipGetResponse;
   export import OwnershipCreateParams = OwnershipAPI.OwnershipCreateParams;
   export import OwnershipDeleteParams = OwnershipAPI.OwnershipDeleteParams;

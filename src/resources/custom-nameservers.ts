@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as CustomNameserversAPI from 'cloudflare/resources/custom-nameservers';
 import * as Shared from 'cloudflare/resources/shared';
 
 export class CustomNameservers extends APIResource {
@@ -188,16 +187,4 @@ export interface CustomNameserverVerifyParams {
    * Body param:
    */
   body: unknown;
-}
-
-export namespace CustomNameservers {
-  export import CustomNameserver = CustomNameserversAPI.CustomNameserver;
-  export import CustomNameserverAvailabiltyResponse = CustomNameserversAPI.CustomNameserverAvailabiltyResponse;
-  export import CustomNameserverGetResponse = CustomNameserversAPI.CustomNameserverGetResponse;
-  export import CustomNameserverVerifyResponse = CustomNameserversAPI.CustomNameserverVerifyResponse;
-  export import CustomNameserverCreateParams = CustomNameserversAPI.CustomNameserverCreateParams;
-  export import CustomNameserverDeleteParams = CustomNameserversAPI.CustomNameserverDeleteParams;
-  export import CustomNameserverAvailabiltyParams = CustomNameserversAPI.CustomNameserverAvailabiltyParams;
-  export import CustomNameserverGetParams = CustomNameserversAPI.CustomNameserverGetParams;
-  export import CustomNameserverVerifyParams = CustomNameserversAPI.CustomNameserverVerifyParams;
 }

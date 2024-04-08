@@ -5,6 +5,7 @@ import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as SummariesAPI from 'cloudflare/resources/spectrum/analytics/events/summaries';
 import * as Shared from 'cloudflare/resources/shared';
+import * as EventsAPI from 'cloudflare/resources/spectrum/analytics/events/events';
 
 export class Summaries extends APIResource {
   /**
@@ -47,7 +48,7 @@ export interface SummaryGetParams {
    * | coloName  | Colo Name                     | SFO                                                        |
    * | ipVersion | IP version used by the client | 4, 6.                                                      |
    */
-  dimensions?: Array<'event' | 'appID' | 'coloName' | 'ipVersion'>;
+  dimensions?: Array<EventsAPI.DimensionItem>;
 
   /**
    * Used to filter rows by one or more dimensions. Filters can be combined using OR

@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as OrderAPI from 'cloudflare/resources/ssl/certificate-packs/order';
+import * as CertificatePacksAPI from 'cloudflare/resources/ssl/certificate-packs/certificate-packs';
 
 export class Order extends APIResource {
   /**
@@ -42,7 +43,7 @@ export interface OrderCreateResponse {
    * Comma separated list of valid host names for the certificate packs. Must contain
    * the zone apex, may not contain more than 50 hosts, and may not be empty.
    */
-  hosts?: Array<string>;
+  hosts?: Array<CertificatePacksAPI.HostItem>;
 
   /**
    * Status of certificate pack.
@@ -104,7 +105,7 @@ export interface OrderCreateParams {
    * Must contain the zone apex, may not contain more than 50 hosts, and may not be
    * empty.
    */
-  hosts: Array<string>;
+  hosts: Array<CertificatePacksAPI.HostItem>;
 
   /**
    * Body param: Type of certificate pack.

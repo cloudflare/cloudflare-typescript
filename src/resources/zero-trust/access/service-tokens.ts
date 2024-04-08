@@ -49,7 +49,7 @@ export class ServiceTokens extends APIResource {
     uuid: string,
     params: ServiceTokenUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZeroTrustServiceTokens> {
+  ): Core.APIPromise<ErviceToken> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -71,7 +71,7 @@ export class ServiceTokens extends APIResource {
       this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/service_tokens/${uuid}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZeroTrustServiceTokens }>
+      }) as Core.APIPromise<{ result: ErviceToken }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -81,14 +81,12 @@ export class ServiceTokens extends APIResource {
   list(
     params?: ServiceTokenListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<ZeroTrustServiceTokensSinglePage, ZeroTrustServiceTokens>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<ZeroTrustServiceTokensSinglePage, ZeroTrustServiceTokens>;
+  ): Core.PagePromise<ErviceTokensSinglePage, ErviceToken>;
+  list(options?: Core.RequestOptions): Core.PagePromise<ErviceTokensSinglePage, ErviceToken>;
   list(
     params: ServiceTokenListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<ZeroTrustServiceTokensSinglePage, ZeroTrustServiceTokens> {
+  ): Core.PagePromise<ErviceTokensSinglePage, ErviceToken> {
     if (isRequestOptions(params)) {
       return this.list({}, params);
     }
@@ -111,7 +109,7 @@ export class ServiceTokens extends APIResource {
         };
     return this._client.getAPIList(
       `/${accountOrZone}/${accountOrZoneId}/access/service_tokens`,
-      ZeroTrustServiceTokensSinglePage,
+      ErviceTokensSinglePage,
       options,
     );
   }
@@ -123,13 +121,13 @@ export class ServiceTokens extends APIResource {
     uuid: string,
     params?: ServiceTokenDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZeroTrustServiceTokens>;
-  delete(uuid: string, options?: Core.RequestOptions): Core.APIPromise<ZeroTrustServiceTokens>;
+  ): Core.APIPromise<ErviceToken>;
+  delete(uuid: string, options?: Core.RequestOptions): Core.APIPromise<ErviceToken>;
   delete(
     uuid: string,
     params: ServiceTokenDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZeroTrustServiceTokens> {
+  ): Core.APIPromise<ErviceToken> {
     if (isRequestOptions(params)) {
       return this.delete(uuid, {}, params);
     }
@@ -154,23 +152,19 @@ export class ServiceTokens extends APIResource {
       this._client.delete(
         `/${accountOrZone}/${accountOrZoneId}/access/service_tokens/${uuid}`,
         options,
-      ) as Core.APIPromise<{ result: ZeroTrustServiceTokens }>
+      ) as Core.APIPromise<{ result: ErviceToken }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Refreshes the expiration of a service token.
    */
-  refresh(
-    identifier: string,
-    uuid: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZeroTrustServiceTokens> {
+  refresh(identifier: string, uuid: string, options?: Core.RequestOptions): Core.APIPromise<ErviceToken> {
     return (
       this._client.post(
         `/accounts/${identifier}/access/service_tokens/${uuid}/refresh`,
         options,
-      ) as Core.APIPromise<{ result: ZeroTrustServiceTokens }>
+      ) as Core.APIPromise<{ result: ErviceToken }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -191,9 +185,9 @@ export class ServiceTokens extends APIResource {
   }
 }
 
-export class ZeroTrustServiceTokensSinglePage extends SinglePage<ZeroTrustServiceTokens> {}
+export class ErviceTokensSinglePage extends SinglePage<ErviceToken> {}
 
-export interface ZeroTrustServiceTokens {
+export interface ErviceToken {
   /**
    * The ID of the service token.
    */
@@ -369,10 +363,10 @@ export interface ServiceTokenDeleteParams {
 }
 
 export namespace ServiceTokens {
-  export import ZeroTrustServiceTokens = ServiceTokensAPI.ZeroTrustServiceTokens;
+  export import ErviceToken = ServiceTokensAPI.ErviceToken;
   export import ServiceTokenCreateResponse = ServiceTokensAPI.ServiceTokenCreateResponse;
   export import ServiceTokenRotateResponse = ServiceTokensAPI.ServiceTokenRotateResponse;
-  export import ZeroTrustServiceTokensSinglePage = ServiceTokensAPI.ZeroTrustServiceTokensSinglePage;
+  export import ErviceTokensSinglePage = ServiceTokensAPI.ErviceTokensSinglePage;
   export import ServiceTokenCreateParams = ServiceTokensAPI.ServiceTokenCreateParams;
   export import ServiceTokenUpdateParams = ServiceTokensAPI.ServiceTokenUpdateParams;
   export import ServiceTokenListParams = ServiceTokensAPI.ServiceTokenListParams;

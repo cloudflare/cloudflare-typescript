@@ -9,14 +9,11 @@ export class Full extends APIResource {
   /**
    * Lists default sampling, router IPs, and rules for account.
    */
-  get(
-    params: FullGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ConfigsAPI.MagicNetworkMonitoringConfig> {
+  get(params: FullGetParams, options?: Core.RequestOptions): Core.APIPromise<ConfigsAPI.Configuration> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/mnm/config/full`, options) as Core.APIPromise<{
-        result: ConfigsAPI.MagicNetworkMonitoringConfig;
+        result: ConfigsAPI.Configuration;
       }>
     )._thenUnwrap((obj) => obj.result);
   }

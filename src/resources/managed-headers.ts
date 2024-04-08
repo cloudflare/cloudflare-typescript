@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as ManagedHeadersAPI from 'cloudflare/resources/managed-headers';
 
 export class ManagedHeaders extends APIResource {
   /**
@@ -28,36 +27,34 @@ export class ManagedHeaders extends APIResource {
   }
 }
 
-export interface ManagedHeaderListResponse {
-  managed_request_headers?: Array<ManagedHeaderListResponse.ManagedRequestHeader>;
+export interface RequestListItem {
+  /**
+   * Human-readable identifier of the Managed Transform.
+   */
+  id?: string;
 
-  managed_response_headers?: Array<ManagedHeaderListResponse.ManagedResponseHeader>;
+  /**
+   * When true, the Managed Transform is enabled.
+   */
+  enabled?: boolean;
 }
 
-export namespace ManagedHeaderListResponse {
-  export interface ManagedRequestHeader {
-    /**
-     * Human-readable identifier of the Managed Transform.
-     */
-    id?: string;
+export interface RequestModel {
+  /**
+   * Human-readable identifier of the Managed Transform.
+   */
+  id?: string;
 
-    /**
-     * When true, the Managed Transform is enabled.
-     */
-    enabled?: boolean;
-  }
+  /**
+   * When true, the Managed Transform is enabled.
+   */
+  enabled?: boolean;
+}
 
-  export interface ManagedResponseHeader {
-    /**
-     * Human-readable identifier of the Managed Transform.
-     */
-    id?: string;
+export interface ManagedHeaderListResponse {
+  managed_request_headers?: Array<RequestListItem>;
 
-    /**
-     * When true, the Managed Transform is enabled.
-     */
-    enabled?: boolean;
-  }
+  managed_response_headers?: Array<RequestListItem>;
 }
 
 export interface ManagedHeaderEditResponse {
@@ -118,43 +115,10 @@ export interface ManagedHeaderEditParams {
   /**
    * Body param:
    */
-  managed_request_headers: Array<ManagedHeaderEditParams.ManagedRequestHeader>;
+  managed_request_headers: Array<RequestListItem>;
 
   /**
    * Body param:
    */
-  managed_response_headers: Array<ManagedHeaderEditParams.ManagedResponseHeader>;
-}
-
-export namespace ManagedHeaderEditParams {
-  export interface ManagedRequestHeader {
-    /**
-     * Human-readable identifier of the Managed Transform.
-     */
-    id?: string;
-
-    /**
-     * When true, the Managed Transform is enabled.
-     */
-    enabled?: boolean;
-  }
-
-  export interface ManagedResponseHeader {
-    /**
-     * Human-readable identifier of the Managed Transform.
-     */
-    id?: string;
-
-    /**
-     * When true, the Managed Transform is enabled.
-     */
-    enabled?: boolean;
-  }
-}
-
-export namespace ManagedHeaders {
-  export import ManagedHeaderListResponse = ManagedHeadersAPI.ManagedHeaderListResponse;
-  export import ManagedHeaderEditResponse = ManagedHeadersAPI.ManagedHeaderEditResponse;
-  export import ManagedHeaderListParams = ManagedHeadersAPI.ManagedHeaderListParams;
-  export import ManagedHeaderEditParams = ManagedHeadersAPI.ManagedHeaderEditParams;
+  managed_response_headers: Array<RequestListItem>;
 }

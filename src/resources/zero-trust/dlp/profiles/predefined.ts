@@ -13,7 +13,7 @@ export class Predefined extends APIResource {
     profileId: string,
     params: PredefinedUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DLPPredefinedProfile> {
+  ): Core.APIPromise<PredefinedProfile> {
     const { account_id, ...body } = params;
     return this._client.put(`/accounts/${account_id}/dlp/profiles/predefined/${profileId}`, {
       body,
@@ -28,18 +28,18 @@ export class Predefined extends APIResource {
     profileId: string,
     params: PredefinedGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DLPPredefinedProfile> {
+  ): Core.APIPromise<PredefinedProfile> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/dlp/profiles/predefined/${profileId}`,
         options,
-      ) as Core.APIPromise<{ result: DLPPredefinedProfile }>
+      ) as Core.APIPromise<{ result: PredefinedProfile }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface DLPPredefinedProfile {
+export interface PredefinedProfile {
   /**
    * The ID for this profile
    */
@@ -54,12 +54,12 @@ export interface DLPPredefinedProfile {
    * Scan the context of predefined entries to only return matches surrounded by
    * keywords.
    */
-  context_awareness?: DLPPredefinedProfile.ContextAwareness;
+  context_awareness?: ProfilesAPI.ContextAwareness;
 
   /**
    * The entries for this profile.
    */
-  entries?: Array<DLPPredefinedProfile.Entry>;
+  entries?: Array<PredefinedProfile.Entry>;
 
   /**
    * The name of the profile.
@@ -77,36 +77,7 @@ export interface DLPPredefinedProfile {
   type?: ProfilesAPI.UnnamedSchemaRefE38bfdf1acf5a4bfada6779c79528bc0;
 }
 
-export namespace DLPPredefinedProfile {
-  /**
-   * Scan the context of predefined entries to only return matches surrounded by
-   * keywords.
-   */
-  export interface ContextAwareness {
-    /**
-     * If true, scan the context of predefined entries to only return matches
-     * surrounded by keywords.
-     */
-    enabled: boolean;
-
-    /**
-     * Content types to exclude from context analysis and return all matches.
-     */
-    skip: ContextAwareness.Skip;
-  }
-
-  export namespace ContextAwareness {
-    /**
-     * Content types to exclude from context analysis and return all matches.
-     */
-    export interface Skip {
-      /**
-       * If the content type is a file, skip context analysis and return all matches.
-       */
-      files: boolean;
-    }
-  }
-
+export namespace PredefinedProfile {
   /**
    * A predefined entry that matches a profile
    */
@@ -149,7 +120,7 @@ export interface PredefinedUpdateParams {
    * Body param: Scan the context of predefined entries to only return matches
    * surrounded by keywords.
    */
-  context_awareness?: PredefinedUpdateParams.ContextAwareness;
+  context_awareness?: ProfilesAPI.ContextAwareness;
 
   /**
    * Body param: The entries for this profile.
@@ -164,35 +135,6 @@ export interface PredefinedUpdateParams {
 }
 
 export namespace PredefinedUpdateParams {
-  /**
-   * Scan the context of predefined entries to only return matches surrounded by
-   * keywords.
-   */
-  export interface ContextAwareness {
-    /**
-     * If true, scan the context of predefined entries to only return matches
-     * surrounded by keywords.
-     */
-    enabled: boolean;
-
-    /**
-     * Content types to exclude from context analysis and return all matches.
-     */
-    skip: ContextAwareness.Skip;
-  }
-
-  export namespace ContextAwareness {
-    /**
-     * Content types to exclude from context analysis and return all matches.
-     */
-    export interface Skip {
-      /**
-       * If the content type is a file, skip context analysis and return all matches.
-       */
-      files: boolean;
-    }
-  }
-
   export interface Entry {
     /**
      * Whether the entry is enabled or not.
@@ -209,7 +151,7 @@ export interface PredefinedGetParams {
 }
 
 export namespace Predefined {
-  export import DLPPredefinedProfile = PredefinedAPI.DLPPredefinedProfile;
+  export import PredefinedProfile = PredefinedAPI.PredefinedProfile;
   export import PredefinedUpdateParams = PredefinedAPI.PredefinedUpdateParams;
   export import PredefinedGetParams = PredefinedAPI.PredefinedGetParams;
 }

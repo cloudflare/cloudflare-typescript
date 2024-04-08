@@ -14,13 +14,13 @@ export class Networks extends APIResource {
     ipNetworkEncoded: string,
     params: NetworkCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RoutesAPI.TunnelRoute> {
+  ): Core.APIPromise<RoutesAPI.Route> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/teamnet/routes/network/${ipNetworkEncoded}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: RoutesAPI.TunnelRoute }>
+      }) as Core.APIPromise<{ result: RoutesAPI.Route }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -37,13 +37,13 @@ export class Networks extends APIResource {
     ipNetworkEncoded: string,
     params: NetworkDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RoutesAPI.TunnelRoute> {
+  ): Core.APIPromise<RoutesAPI.Route> {
     const { account_id, tun_type, tunnel_id, virtual_network_id } = params;
     return (
       this._client.delete(`/accounts/${account_id}/teamnet/routes/network/${ipNetworkEncoded}`, {
         query: { tun_type, tunnel_id, virtual_network_id },
         ...options,
-      }) as Core.APIPromise<{ result: RoutesAPI.TunnelRoute }>
+      }) as Core.APIPromise<{ result: RoutesAPI.Route }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -55,13 +55,13 @@ export class Networks extends APIResource {
     ipNetworkEncoded: string,
     params: NetworkEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RoutesAPI.TunnelRoute> {
+  ): Core.APIPromise<RoutesAPI.Route> {
     const { account_id } = params;
     return (
       this._client.patch(
         `/accounts/${account_id}/teamnet/routes/network/${ipNetworkEncoded}`,
         options,
-      ) as Core.APIPromise<{ result: RoutesAPI.TunnelRoute }>
+      ) as Core.APIPromise<{ result: RoutesAPI.Route }>
     )._thenUnwrap((obj) => obj.result);
   }
 }

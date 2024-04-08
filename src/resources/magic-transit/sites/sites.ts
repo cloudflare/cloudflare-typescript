@@ -89,296 +89,76 @@ export class Sites extends APIResource {
   }
 }
 
-export interface SiteCreateResponse {
-  site?: SiteCreateResponse.Site;
+export interface Site {
+  /**
+   * Identifier
+   */
+  id?: string;
+
+  /**
+   * Magic WAN Connector identifier tag.
+   */
+  connector_id?: string;
+
+  description?: string;
+
+  /**
+   * Site high availability mode. If set to true, the site can have two connectors
+   * and runs in high availability mode.
+   */
+  ha_mode?: boolean;
+
+  /**
+   * Location of site in latitude and longitude.
+   */
+  location?: SiteLocation;
+
+  /**
+   * The name of the site.
+   */
+  name?: string;
+
+  /**
+   * Magic WAN Connector identifier tag. Used when high availability mode is on.
+   */
+  secondary_connector_id?: string;
 }
 
-export namespace SiteCreateResponse {
-  export interface Site {
-    /**
-     * Identifier
-     */
-    id?: string;
+/**
+ * Location of site in latitude and longitude.
+ */
+export interface SiteLocation {
+  /**
+   * Latitude
+   */
+  lat?: string;
 
-    /**
-     * Magic WAN Connector identifier tag.
-     */
-    connector_id?: string;
+  /**
+   * Longitude
+   */
+  lon?: string;
+}
 
-    description?: string;
-
-    /**
-     * Site high availability mode. If set to true, the site can have two connectors
-     * and runs in high availability mode.
-     */
-    ha_mode?: boolean;
-
-    /**
-     * Location of site in latitude and longitude.
-     */
-    location?: Site.Location;
-
-    /**
-     * The name of the site.
-     */
-    name?: string;
-
-    /**
-     * Magic WAN Connector identifier tag. Used when high availability mode is on.
-     */
-    secondary_connector_id?: string;
-  }
-
-  export namespace Site {
-    /**
-     * Location of site in latitude and longitude.
-     */
-    export interface Location {
-      /**
-       * Latitude
-       */
-      lat?: string;
-
-      /**
-       * Longitude
-       */
-      lon?: string;
-    }
-  }
+export interface SiteCreateResponse {
+  site?: Site;
 }
 
 export interface SiteUpdateResponse {
-  site?: SiteUpdateResponse.Site;
-}
-
-export namespace SiteUpdateResponse {
-  export interface Site {
-    /**
-     * Identifier
-     */
-    id?: string;
-
-    /**
-     * Magic WAN Connector identifier tag.
-     */
-    connector_id?: string;
-
-    description?: string;
-
-    /**
-     * Site high availability mode. If set to true, the site can have two connectors
-     * and runs in high availability mode.
-     */
-    ha_mode?: boolean;
-
-    /**
-     * Location of site in latitude and longitude.
-     */
-    location?: Site.Location;
-
-    /**
-     * The name of the site.
-     */
-    name?: string;
-
-    /**
-     * Magic WAN Connector identifier tag. Used when high availability mode is on.
-     */
-    secondary_connector_id?: string;
-  }
-
-  export namespace Site {
-    /**
-     * Location of site in latitude and longitude.
-     */
-    export interface Location {
-      /**
-       * Latitude
-       */
-      lat?: string;
-
-      /**
-       * Longitude
-       */
-      lon?: string;
-    }
-  }
+  site?: Site;
 }
 
 export interface SiteListResponse {
-  sites?: Array<SiteListResponse.Site>;
-}
-
-export namespace SiteListResponse {
-  export interface Site {
-    /**
-     * Identifier
-     */
-    id?: string;
-
-    /**
-     * Magic WAN Connector identifier tag.
-     */
-    connector_id?: string;
-
-    description?: string;
-
-    /**
-     * Site high availability mode. If set to true, the site can have two connectors
-     * and runs in high availability mode.
-     */
-    ha_mode?: boolean;
-
-    /**
-     * Location of site in latitude and longitude.
-     */
-    location?: Site.Location;
-
-    /**
-     * The name of the site.
-     */
-    name?: string;
-
-    /**
-     * Magic WAN Connector identifier tag. Used when high availability mode is on.
-     */
-    secondary_connector_id?: string;
-  }
-
-  export namespace Site {
-    /**
-     * Location of site in latitude and longitude.
-     */
-    export interface Location {
-      /**
-       * Latitude
-       */
-      lat?: string;
-
-      /**
-       * Longitude
-       */
-      lon?: string;
-    }
-  }
+  sites?: Array<Site>;
 }
 
 export interface SiteDeleteResponse {
   deleted?: boolean;
 
-  deleted_site?: SiteDeleteResponse.DeletedSite;
-}
-
-export namespace SiteDeleteResponse {
-  export interface DeletedSite {
-    /**
-     * Identifier
-     */
-    id?: string;
-
-    /**
-     * Magic WAN Connector identifier tag.
-     */
-    connector_id?: string;
-
-    description?: string;
-
-    /**
-     * Site high availability mode. If set to true, the site can have two connectors
-     * and runs in high availability mode.
-     */
-    ha_mode?: boolean;
-
-    /**
-     * Location of site in latitude and longitude.
-     */
-    location?: DeletedSite.Location;
-
-    /**
-     * The name of the site.
-     */
-    name?: string;
-
-    /**
-     * Magic WAN Connector identifier tag. Used when high availability mode is on.
-     */
-    secondary_connector_id?: string;
-  }
-
-  export namespace DeletedSite {
-    /**
-     * Location of site in latitude and longitude.
-     */
-    export interface Location {
-      /**
-       * Latitude
-       */
-      lat?: string;
-
-      /**
-       * Longitude
-       */
-      lon?: string;
-    }
-  }
+  deleted_site?: Site;
 }
 
 export interface SiteGetResponse {
-  site?: SiteGetResponse.Site;
-}
-
-export namespace SiteGetResponse {
-  export interface Site {
-    /**
-     * Identifier
-     */
-    id?: string;
-
-    /**
-     * Magic WAN Connector identifier tag.
-     */
-    connector_id?: string;
-
-    description?: string;
-
-    /**
-     * Site high availability mode. If set to true, the site can have two connectors
-     * and runs in high availability mode.
-     */
-    ha_mode?: boolean;
-
-    /**
-     * Location of site in latitude and longitude.
-     */
-    location?: Site.Location;
-
-    /**
-     * The name of the site.
-     */
-    name?: string;
-
-    /**
-     * Magic WAN Connector identifier tag. Used when high availability mode is on.
-     */
-    secondary_connector_id?: string;
-  }
-
-  export namespace Site {
-    /**
-     * Location of site in latitude and longitude.
-     */
-    export interface Location {
-      /**
-       * Latitude
-       */
-      lat?: string;
-
-      /**
-       * Longitude
-       */
-      lon?: string;
-    }
-  }
+  site?: Site;
 }
 
 export interface SiteCreateParams {
@@ -416,29 +196,12 @@ export namespace SiteCreateParams {
     /**
      * Location of site in latitude and longitude.
      */
-    location?: Site.Location;
+    location?: SitesAPI.SiteLocation;
 
     /**
      * Magic WAN Connector identifier tag. Used when high availability mode is on.
      */
     secondary_connector_id?: string;
-  }
-
-  export namespace Site {
-    /**
-     * Location of site in latitude and longitude.
-     */
-    export interface Location {
-      /**
-       * Latitude
-       */
-      lat?: string;
-
-      /**
-       * Longitude
-       */
-      lon?: string;
-    }
   }
 }
 
@@ -466,7 +229,7 @@ export namespace SiteUpdateParams {
     /**
      * Location of site in latitude and longitude.
      */
-    location?: Site.Location;
+    location?: SitesAPI.SiteLocation;
 
     /**
      * The name of the site.
@@ -477,23 +240,6 @@ export namespace SiteUpdateParams {
      * Magic WAN Connector identifier tag. Used when high availability mode is on.
      */
     secondary_connector_id?: string;
-  }
-
-  export namespace Site {
-    /**
-     * Location of site in latitude and longitude.
-     */
-    export interface Location {
-      /**
-       * Latitude
-       */
-      lat?: string;
-
-      /**
-       * Longitude
-       */
-      lon?: string;
-    }
   }
 }
 
@@ -529,6 +275,8 @@ export interface SiteGetParams {
 }
 
 export namespace Sites {
+  export import Site = SitesAPI.Site;
+  export import SiteLocation = SitesAPI.SiteLocation;
   export import SiteCreateResponse = SitesAPI.SiteCreateResponse;
   export import SiteUpdateResponse = SitesAPI.SiteUpdateResponse;
   export import SiteListResponse = SitesAPI.SiteListResponse;
@@ -540,6 +288,9 @@ export namespace Sites {
   export import SiteDeleteParams = SitesAPI.SiteDeleteParams;
   export import SiteGetParams = SitesAPI.SiteGetParams;
   export import ACLs = ACLsAPI.ACLs;
+  export import ACL = ACLsAPI.ACL;
+  export import ACLConfiguration = ACLsAPI.ACLConfiguration;
+  export import Subnet = ACLsAPI.Subnet;
   export import UnnamedSchemaRef87fa9e5fe9f6b8d607be1df57340d916 = ACLsAPI.UnnamedSchemaRef87fa9e5fe9f6b8d607be1df57340d916;
   export import ACLCreateResponse = ACLsAPI.ACLCreateResponse;
   export import ACLUpdateResponse = ACLsAPI.ACLUpdateResponse;
@@ -552,6 +303,12 @@ export namespace Sites {
   export import ACLDeleteParams = ACLsAPI.ACLDeleteParams;
   export import ACLGetParams = ACLsAPI.ACLGetParams;
   export import LANs = LANsAPI.LANs;
+  export import DHCPRelay = LANsAPI.DHCPRelay;
+  export import DHCPServer = LANsAPI.DHCPServer;
+  export import LAN = LANsAPI.LAN;
+  export import Nat = LANsAPI.Nat;
+  export import RoutedSubnet = LANsAPI.RoutedSubnet;
+  export import StaticAddressing = LANsAPI.StaticAddressing;
   export import LANCreateResponse = LANsAPI.LANCreateResponse;
   export import LANUpdateResponse = LANsAPI.LANUpdateResponse;
   export import LANListResponse = LANsAPI.LANListResponse;
@@ -563,6 +320,7 @@ export namespace Sites {
   export import LANDeleteParams = LANsAPI.LANDeleteParams;
   export import LANGetParams = LANsAPI.LANGetParams;
   export import WANs = WANsAPI.WANs;
+  export import WAN = WANsAPI.WAN;
   export import WANCreateResponse = WANsAPI.WANCreateResponse;
   export import WANUpdateResponse = WANsAPI.WANUpdateResponse;
   export import WANListResponse = WANsAPI.WANListResponse;

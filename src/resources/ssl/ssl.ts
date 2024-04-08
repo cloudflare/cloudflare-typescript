@@ -14,13 +14,14 @@ export class SSL extends APIResource {
   );
   recommendations: RecommendationsAPI.Recommendations = new RecommendationsAPI.Recommendations(this._client);
   universal: UniversalAPI.Universal = new UniversalAPI.Universal(this._client);
-  verification: VerificationAPI.Verification = new VerificationAPI.Verification(this._client);
+  verification: VerificationAPI.VerificationResource = new VerificationAPI.VerificationResource(this._client);
 }
 
 export namespace SSL {
   export import Analyze = AnalyzeAPI.Analyze;
   export import AnalyzeCreateParams = AnalyzeAPI.AnalyzeCreateParams;
   export import CertificatePacks = CertificatePacksAPI.CertificatePacks;
+  export import HostItem = CertificatePacksAPI.HostItem;
   export import CertificatePackListResponse = CertificatePacksAPI.CertificatePackListResponse;
   export import CertificatePackEditResponse = CertificatePacksAPI.CertificatePackEditResponse;
   export import CertificatePackListResponsesSinglePage = CertificatePacksAPI.CertificatePackListResponsesSinglePage;
@@ -31,8 +32,8 @@ export namespace SSL {
   export import Recommendations = RecommendationsAPI.Recommendations;
   export import RecommendationGetResponse = RecommendationsAPI.RecommendationGetResponse;
   export import Universal = UniversalAPI.Universal;
+  export import VerificationResource = VerificationAPI.VerificationResource;
   export import Verification = VerificationAPI.Verification;
-  export import TLSVerificationSetting = VerificationAPI.TLSVerificationSetting;
   export import VerificationEditResponse = VerificationAPI.VerificationEditResponse;
   export import VerificationGetResponse = VerificationAPI.VerificationGetResponse;
   export import VerificationEditParams = VerificationAPI.VerificationEditParams;

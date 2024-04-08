@@ -15,12 +15,12 @@ export class Addresses extends APIResource {
     accountIdentifier: string,
     body: AddressCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AddressCreateResponse> {
+  ): Core.APIPromise<Address> {
     return (
       this._client.post(`/accounts/${accountIdentifier}/email/routing/addresses`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: AddressCreateResponse }>
+      }) as Core.APIPromise<{ result: Address }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -31,22 +31,22 @@ export class Addresses extends APIResource {
     accountIdentifier: string,
     query?: AddressListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<AddressListResponsesV4PagePaginationArray, AddressListResponse>;
+  ): Core.PagePromise<AddressesV4PagePaginationArray, Address>;
   list(
     accountIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<AddressListResponsesV4PagePaginationArray, AddressListResponse>;
+  ): Core.PagePromise<AddressesV4PagePaginationArray, Address>;
   list(
     accountIdentifier: string,
     query: AddressListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<AddressListResponsesV4PagePaginationArray, AddressListResponse> {
+  ): Core.PagePromise<AddressesV4PagePaginationArray, Address> {
     if (isRequestOptions(query)) {
       return this.list(accountIdentifier, {}, query);
     }
     return this._client.getAPIList(
       `/accounts/${accountIdentifier}/email/routing/addresses`,
-      AddressListResponsesV4PagePaginationArray,
+      AddressesV4PagePaginationArray,
       { query, ...options },
     );
   }
@@ -58,12 +58,12 @@ export class Addresses extends APIResource {
     accountIdentifier: string,
     destinationAddressIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AddressDeleteResponse> {
+  ): Core.APIPromise<Address> {
     return (
       this._client.delete(
         `/accounts/${accountIdentifier}/email/routing/addresses/${destinationAddressIdentifier}`,
         options,
-      ) as Core.APIPromise<{ result: AddressDeleteResponse }>
+      ) as Core.APIPromise<{ result: Address }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -74,19 +74,19 @@ export class Addresses extends APIResource {
     accountIdentifier: string,
     destinationAddressIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AddressGetResponse> {
+  ): Core.APIPromise<Address> {
     return (
       this._client.get(
         `/accounts/${accountIdentifier}/email/routing/addresses/${destinationAddressIdentifier}`,
         options,
-      ) as Core.APIPromise<{ result: AddressGetResponse }>
+      ) as Core.APIPromise<{ result: Address }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class AddressListResponsesV4PagePaginationArray extends V4PagePaginationArray<AddressListResponse> {}
+export class AddressesV4PagePaginationArray extends V4PagePaginationArray<Address> {}
 
-export interface EmailAddresses {
+export interface Address {
   /**
    * Destination address identifier.
    */
@@ -120,109 +120,7 @@ export interface EmailAddresses {
   verified?: string;
 }
 
-export interface AddressCreateResponse {
-  /**
-   * Destination address identifier.
-   */
-  id?: string;
-
-  /**
-   * The date and time the destination address has been created.
-   */
-  created?: string;
-
-  /**
-   * The contact email address of the user.
-   */
-  email?: string;
-
-  /**
-   * The date and time the destination address was last modified.
-   */
-  modified?: string;
-
-  /**
-   * @deprecated: Destination address tag. (Deprecated, replaced by destination
-   * address identifier)
-   */
-  tag?: string;
-
-  /**
-   * The date and time the destination address has been verified. Null means not
-   * verified yet.
-   */
-  verified?: string;
-}
-
-export interface AddressListResponse {
-  /**
-   * Destination address identifier.
-   */
-  id?: string;
-
-  /**
-   * The date and time the destination address has been created.
-   */
-  created?: string;
-
-  /**
-   * The contact email address of the user.
-   */
-  email?: string;
-
-  /**
-   * The date and time the destination address was last modified.
-   */
-  modified?: string;
-
-  /**
-   * @deprecated: Destination address tag. (Deprecated, replaced by destination
-   * address identifier)
-   */
-  tag?: string;
-
-  /**
-   * The date and time the destination address has been verified. Null means not
-   * verified yet.
-   */
-  verified?: string;
-}
-
-export interface AddressDeleteResponse {
-  /**
-   * Destination address identifier.
-   */
-  id?: string;
-
-  /**
-   * The date and time the destination address has been created.
-   */
-  created?: string;
-
-  /**
-   * The contact email address of the user.
-   */
-  email?: string;
-
-  /**
-   * The date and time the destination address was last modified.
-   */
-  modified?: string;
-
-  /**
-   * @deprecated: Destination address tag. (Deprecated, replaced by destination
-   * address identifier)
-   */
-  tag?: string;
-
-  /**
-   * The date and time the destination address has been verified. Null means not
-   * verified yet.
-   */
-  verified?: string;
-}
-
-export interface AddressGetResponse {
+export interface DestinationAddress {
   /**
    * Destination address identifier.
    */
@@ -276,12 +174,9 @@ export interface AddressListParams extends V4PagePaginationArrayParams {
 }
 
 export namespace Addresses {
-  export import EmailAddresses = AddressesAPI.EmailAddresses;
-  export import AddressCreateResponse = AddressesAPI.AddressCreateResponse;
-  export import AddressListResponse = AddressesAPI.AddressListResponse;
-  export import AddressDeleteResponse = AddressesAPI.AddressDeleteResponse;
-  export import AddressGetResponse = AddressesAPI.AddressGetResponse;
-  export import AddressListResponsesV4PagePaginationArray = AddressesAPI.AddressListResponsesV4PagePaginationArray;
+  export import Address = AddressesAPI.Address;
+  export import DestinationAddress = AddressesAPI.DestinationAddress;
+  export import AddressesV4PagePaginationArray = AddressesAPI.AddressesV4PagePaginationArray;
   export import AddressCreateParams = AddressesAPI.AddressCreateParams;
   export import AddressListParams = AddressesAPI.AddressListParams;
 }

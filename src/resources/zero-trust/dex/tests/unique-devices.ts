@@ -9,21 +9,18 @@ export class UniqueDevices extends APIResource {
    * Returns unique count of devices that have run synthetic application monitoring
    * tests in the past 7 days.
    */
-  list(
-    params: UniqueDeviceListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DigitalExperienceMonitoringUniqueDevices> {
+  list(params: UniqueDeviceListParams, options?: Core.RequestOptions): Core.APIPromise<UniqueDevices> {
     const { account_id, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/dex/tests/unique-devices`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: DigitalExperienceMonitoringUniqueDevices }>
+      }) as Core.APIPromise<{ result: UniqueDevices }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface DigitalExperienceMonitoringUniqueDevices {
+export interface UniqueDevices {
   /**
    * total number of unique devices
    */
@@ -49,6 +46,6 @@ export interface UniqueDeviceListParams {
 }
 
 export namespace UniqueDevices {
-  export import DigitalExperienceMonitoringUniqueDevices = UniqueDevicesAPI.DigitalExperienceMonitoringUniqueDevices;
+  export import UniqueDevices = UniqueDevicesAPI.UniqueDevices;
   export import UniqueDeviceListParams = UniqueDevicesAPI.UniqueDeviceListParams;
 }

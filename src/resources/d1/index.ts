@@ -2,13 +2,14 @@
 
 export { D1 } from './d1';
 export {
-  D1CreateDatabase,
-  D1DatabaseDetails,
-  D1QueryResult,
+  D1,
+  QueryResult,
+  DatabaseCreateResponse,
+  DatabaseListResponse,
   DatabaseQueryResponse,
   DatabaseCreateParams,
   DatabaseListParams,
   DatabaseQueryParams,
-  D1CreateDatabasesV4PagePaginationArray,
+  DatabaseListResponsesV4PagePaginationArray,
   Database,
 } from './database';

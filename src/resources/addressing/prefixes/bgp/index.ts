@@ -1,23 +1,23 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+export { BGP } from './bgp';
 export {
-  AddressingIpamBGPPrefixes,
+  BGPPrefix,
   PrefixListParams,
   PrefixEditParams,
   PrefixGetParams,
-  AddressingIpamBGPPrefixesSinglePage,
+  BGPPrefixesSinglePage,
   Prefixes,
 } from './prefixes';
 export {
-  AddressingServiceBinding,
+  ServiceBinding,
   BindingCreateParams,
   BindingListParams,
   BindingDeleteParams,
   BindingGetParams,
-  AddressingServiceBindingsSinglePage,
+  ServiceBindingsSinglePage,
   Bindings,
 } from './bindings';
-export { BGP } from './bgp';
 export {
   StatusEditResponse,
   StatusGetResponse,

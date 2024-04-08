@@ -17,9 +17,9 @@ export class Profiles extends APIResource {
   list(
     params: ProfileListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<DLPProfilesSinglePage, DLPProfiles> {
+  ): Core.PagePromise<ProfilesSinglePage, Profile> {
     const { account_id } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/dlp/profiles`, DLPProfilesSinglePage, options);
+    return this._client.getAPIList(`/accounts/${account_id}/dlp/profiles`, ProfilesSinglePage, options);
   }
 
   /**
@@ -39,14 +39,31 @@ export class Profiles extends APIResource {
   }
 }
 
-export class DLPProfilesSinglePage extends SinglePage<DLPProfiles> {}
+export class ProfilesSinglePage extends SinglePage<Profile> {}
 
-export type DLPProfiles =
-  | PredefinedAPI.DLPPredefinedProfile
-  | CustomAPI.DLPCustomProfile
-  | DLPProfiles.DLPIntegrationProfile;
+/**
+ * Scan the context of predefined entries to only return matches surrounded by
+ * keywords.
+ */
+export interface ContextAwareness {
+  /**
+   * If true, scan the context of predefined entries to only return matches
+   * surrounded by keywords.
+   */
+  enabled: boolean;
 
-export namespace DLPProfiles {
+  /**
+   * Content types to exclude from context analysis and return all matches.
+   */
+  skip: SkipConfiguration;
+}
+
+export type Profile =
+  | PredefinedAPI.PredefinedProfile
+  | CustomAPI.CustomProfile
+  | Profile.DLPIntegrationProfile;
+
+export namespace Profile {
   export interface DLPIntegrationProfile {
     /**
      * The ID for this profile
@@ -111,6 +128,16 @@ export namespace DLPProfiles {
 }
 
 /**
+ * Content types to exclude from context analysis and return all matches.
+ */
+export interface SkipConfiguration {
+  /**
+   * If the content type is a file, skip context analysis and return all matches.
+   */
+  files: boolean;
+}
+
+/**
  * The type of the profile.
  */
 export type UnnamedSchemaRefC105db122868c71badeac3b4822ad6b1 = 'custom';
@@ -121,8 +148,8 @@ export type UnnamedSchemaRefC105db122868c71badeac3b4822ad6b1 = 'custom';
 export type UnnamedSchemaRefE38bfdf1acf5a4bfada6779c79528bc0 = 'predefined';
 
 export type ProfileGetResponse =
-  | PredefinedAPI.DLPPredefinedProfile
-  | CustomAPI.DLPCustomProfile
+  | PredefinedAPI.PredefinedProfile
+  | CustomAPI.CustomProfile
   | ProfileGetResponse.DLPIntegrationProfile;
 
 export namespace ProfileGetResponse {
@@ -204,22 +231,25 @@ export interface ProfileGetParams {
 }
 
 export namespace Profiles {
-  export import DLPProfiles = ProfilesAPI.DLPProfiles;
+  export import ContextAwareness = ProfilesAPI.ContextAwareness;
+  export import Profile = ProfilesAPI.Profile;
+  export import SkipConfiguration = ProfilesAPI.SkipConfiguration;
   export import UnnamedSchemaRefC105db122868c71badeac3b4822ad6b1 = ProfilesAPI.UnnamedSchemaRefC105db122868c71badeac3b4822ad6b1;
   export import UnnamedSchemaRefE38bfdf1acf5a4bfada6779c79528bc0 = ProfilesAPI.UnnamedSchemaRefE38bfdf1acf5a4bfada6779c79528bc0;
   export import ProfileGetResponse = ProfilesAPI.ProfileGetResponse;
-  export import DLPProfilesSinglePage = ProfilesAPI.DLPProfilesSinglePage;
+  export import ProfilesSinglePage = ProfilesAPI.ProfilesSinglePage;
   export import ProfileListParams = ProfilesAPI.ProfileListParams;
   export import ProfileGetParams = ProfilesAPI.ProfileGetParams;
   export import Custom = CustomAPI.Custom;
-  export import DLPCustomProfile = CustomAPI.DLPCustomProfile;
+  export import CustomProfile = CustomAPI.CustomProfile;
+  export import Pattern = CustomAPI.Pattern;
   export import CustomCreateResponse = CustomAPI.CustomCreateResponse;
   export import CustomCreateParams = CustomAPI.CustomCreateParams;
   export import CustomUpdateParams = CustomAPI.CustomUpdateParams;
   export import CustomDeleteParams = CustomAPI.CustomDeleteParams;
   export import CustomGetParams = CustomAPI.CustomGetParams;
   export import Predefined = PredefinedAPI.Predefined;
-  export import DLPPredefinedProfile = PredefinedAPI.DLPPredefinedProfile;
+  export import PredefinedProfile = PredefinedAPI.PredefinedProfile;
   export import PredefinedUpdateParams = PredefinedAPI.PredefinedUpdateParams;
   export import PredefinedGetParams = PredefinedAPI.PredefinedGetParams;
 }

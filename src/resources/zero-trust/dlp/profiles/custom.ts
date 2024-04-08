@@ -30,7 +30,7 @@ export class Custom extends APIResource {
     profileId: string,
     params: CustomUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DLPCustomProfile> {
+  ): Core.APIPromise<CustomProfile> {
     const { account_id, ...body } = params;
     return this._client.put(`/accounts/${account_id}/dlp/profiles/custom/${profileId}`, { body, ...options });
   }
@@ -59,18 +59,18 @@ export class Custom extends APIResource {
     profileId: string,
     params: CustomGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DLPCustomProfile> {
+  ): Core.APIPromise<CustomProfile> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/dlp/profiles/custom/${profileId}`,
         options,
-      ) as Core.APIPromise<{ result: DLPCustomProfile }>
+      ) as Core.APIPromise<{ result: CustomProfile }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface DLPCustomProfile {
+export interface CustomProfile {
   /**
    * The ID for this profile
    */
@@ -85,7 +85,7 @@ export interface DLPCustomProfile {
    * Scan the context of predefined entries to only return matches surrounded by
    * keywords.
    */
-  context_awareness?: DLPCustomProfile.ContextAwareness;
+  context_awareness?: ProfilesAPI.ContextAwareness;
 
   created_at?: string;
 
@@ -97,7 +97,7 @@ export interface DLPCustomProfile {
   /**
    * The entries for this profile.
    */
-  entries?: Array<DLPCustomProfile.Entry>;
+  entries?: Array<CustomProfile.Entry>;
 
   /**
    * The name of the profile.
@@ -117,36 +117,7 @@ export interface DLPCustomProfile {
   updated_at?: string;
 }
 
-export namespace DLPCustomProfile {
-  /**
-   * Scan the context of predefined entries to only return matches surrounded by
-   * keywords.
-   */
-  export interface ContextAwareness {
-    /**
-     * If true, scan the context of predefined entries to only return matches
-     * surrounded by keywords.
-     */
-    enabled: boolean;
-
-    /**
-     * Content types to exclude from context analysis and return all matches.
-     */
-    skip: ContextAwareness.Skip;
-  }
-
-  export namespace ContextAwareness {
-    /**
-     * Content types to exclude from context analysis and return all matches.
-     */
-    export interface Skip {
-      /**
-       * If the content type is a file, skip context analysis and return all matches.
-       */
-      files: boolean;
-    }
-  }
-
+export namespace CustomProfile {
   /**
    * A custom entry that matches a profile
    */
@@ -171,7 +142,7 @@ export namespace DLPCustomProfile {
     /**
      * A pattern that matches an entry
      */
-    pattern?: Entry.Pattern;
+    pattern?: CustomAPI.Pattern;
 
     /**
      * ID of the parent profile
@@ -180,27 +151,25 @@ export namespace DLPCustomProfile {
 
     updated_at?: string;
   }
-
-  export namespace Entry {
-    /**
-     * A pattern that matches an entry
-     */
-    export interface Pattern {
-      /**
-       * The regex pattern.
-       */
-      regex: string;
-
-      /**
-       * Validation algorithm for the pattern. This algorithm will get run on potential
-       * matches, and if it returns false, the entry will not be matched.
-       */
-      validation?: 'luhn';
-    }
-  }
 }
 
-export type CustomCreateResponse = Array<DLPCustomProfile>;
+/**
+ * A pattern that matches an entry
+ */
+export interface Pattern {
+  /**
+   * The regex pattern.
+   */
+  regex: string;
+
+  /**
+   * Validation algorithm for the pattern. This algorithm will get run on potential
+   * matches, and if it returns false, the entry will not be matched.
+   */
+  validation?: 'luhn';
+}
+
+export type CustomCreateResponse = Array<CustomProfile>;
 
 export interface CustomCreateParams {
   /**
@@ -225,7 +194,7 @@ export namespace CustomCreateParams {
      * Scan the context of predefined entries to only return matches surrounded by
      * keywords.
      */
-    context_awareness?: Profile.ContextAwareness;
+    context_awareness?: ProfilesAPI.ContextAwareness;
 
     /**
      * The description of the profile.
@@ -250,35 +219,6 @@ export namespace CustomCreateParams {
 
   export namespace Profile {
     /**
-     * Scan the context of predefined entries to only return matches surrounded by
-     * keywords.
-     */
-    export interface ContextAwareness {
-      /**
-       * If true, scan the context of predefined entries to only return matches
-       * surrounded by keywords.
-       */
-      enabled: boolean;
-
-      /**
-       * Content types to exclude from context analysis and return all matches.
-       */
-      skip: ContextAwareness.Skip;
-    }
-
-    export namespace ContextAwareness {
-      /**
-       * Content types to exclude from context analysis and return all matches.
-       */
-      export interface Skip {
-        /**
-         * If the content type is a file, skip context analysis and return all matches.
-         */
-        files: boolean;
-      }
-    }
-
-    /**
      * A custom entry create payload
      */
     export interface Entry {
@@ -295,25 +235,7 @@ export namespace CustomCreateParams {
       /**
        * A pattern that matches an entry
        */
-      pattern: Entry.Pattern;
-    }
-
-    export namespace Entry {
-      /**
-       * A pattern that matches an entry
-       */
-      export interface Pattern {
-        /**
-         * The regex pattern.
-         */
-        regex: string;
-
-        /**
-         * Validation algorithm for the pattern. This algorithm will get run on potential
-         * matches, and if it returns false, the entry will not be matched.
-         */
-        validation?: 'luhn';
-      }
+      pattern: CustomAPI.Pattern;
     }
   }
 }
@@ -334,7 +256,7 @@ export interface CustomUpdateParams {
    * Body param: Scan the context of predefined entries to only return matches
    * surrounded by keywords.
    */
-  context_awareness?: CustomUpdateParams.ContextAwareness;
+  context_awareness?: ProfilesAPI.ContextAwareness;
 
   /**
    * Body param: The description of the profile.
@@ -370,35 +292,6 @@ export interface CustomUpdateParams {
 
 export namespace CustomUpdateParams {
   /**
-   * Scan the context of predefined entries to only return matches surrounded by
-   * keywords.
-   */
-  export interface ContextAwareness {
-    /**
-     * If true, scan the context of predefined entries to only return matches
-     * surrounded by keywords.
-     */
-    enabled: boolean;
-
-    /**
-     * Content types to exclude from context analysis and return all matches.
-     */
-    skip: ContextAwareness.Skip;
-  }
-
-  export namespace ContextAwareness {
-    /**
-     * Content types to exclude from context analysis and return all matches.
-     */
-    export interface Skip {
-      /**
-       * If the content type is a file, skip context analysis and return all matches.
-       */
-      files: boolean;
-    }
-  }
-
-  /**
    * A custom entry that matches a profile
    */
   export interface Entry {
@@ -415,30 +308,12 @@ export namespace CustomUpdateParams {
     /**
      * A pattern that matches an entry
      */
-    pattern?: Entry.Pattern;
+    pattern?: CustomAPI.Pattern;
 
     /**
      * ID of the parent profile
      */
     profile_id?: unknown;
-  }
-
-  export namespace Entry {
-    /**
-     * A pattern that matches an entry
-     */
-    export interface Pattern {
-      /**
-       * The regex pattern.
-       */
-      regex: string;
-
-      /**
-       * Validation algorithm for the pattern. This algorithm will get run on potential
-       * matches, and if it returns false, the entry will not be matched.
-       */
-      validation?: 'luhn';
-    }
   }
 
   /**
@@ -482,7 +357,8 @@ export interface CustomGetParams {
 }
 
 export namespace Custom {
-  export import DLPCustomProfile = CustomAPI.DLPCustomProfile;
+  export import CustomProfile = CustomAPI.CustomProfile;
+  export import Pattern = CustomAPI.Pattern;
   export import CustomCreateResponse = CustomAPI.CustomCreateResponse;
   export import CustomCreateParams = CustomAPI.CustomCreateParams;
   export import CustomUpdateParams = CustomAPI.CustomUpdateParams;

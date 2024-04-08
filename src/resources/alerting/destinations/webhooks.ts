@@ -43,11 +43,11 @@ export class Webhooks extends APIResource {
   list(
     params: WebhookListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<AlertingWebhooksSinglePage, AlertingWebhooks> {
+  ): Core.PagePromise<WebhooksSinglePage, Webhooks> {
     const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/alerting/v3/destinations/webhooks`,
-      AlertingWebhooksSinglePage,
+      WebhooksSinglePage,
       options,
     );
   }
@@ -72,24 +72,20 @@ export class Webhooks extends APIResource {
   /**
    * Get details for a single webhooks destination.
    */
-  get(
-    webhookId: string,
-    params: WebhookGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AlertingWebhooks> {
+  get(webhookId: string, params: WebhookGetParams, options?: Core.RequestOptions): Core.APIPromise<Webhooks> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/alerting/v3/destinations/webhooks/${webhookId}`,
         options,
-      ) as Core.APIPromise<{ result: AlertingWebhooks }>
+      ) as Core.APIPromise<{ result: Webhooks }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class AlertingWebhooksSinglePage extends SinglePage<AlertingWebhooks> {}
+export class WebhooksSinglePage extends SinglePage<Webhooks> {}
 
-export interface AlertingWebhooks {
+export interface Webhooks {
   /**
    * The unique identifier of a webhook
    */
@@ -222,10 +218,10 @@ export interface WebhookGetParams {
 }
 
 export namespace Webhooks {
-  export import AlertingWebhooks = WebhooksAPI.AlertingWebhooks;
+  export import Webhooks = WebhooksAPI.Webhooks;
   export import WebhookCreateResponse = WebhooksAPI.WebhookCreateResponse;
   export import WebhookUpdateResponse = WebhooksAPI.WebhookUpdateResponse;
-  export import AlertingWebhooksSinglePage = WebhooksAPI.AlertingWebhooksSinglePage;
+  export import WebhooksSinglePage = WebhooksAPI.WebhooksSinglePage;
   export import WebhookCreateParams = WebhooksAPI.WebhookCreateParams;
   export import WebhookUpdateParams = WebhooksAPI.WebhookUpdateParams;
   export import WebhookListParams = WebhooksAPI.WebhookListParams;

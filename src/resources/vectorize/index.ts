@@ -1,12 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Vectorize } from './vectorize';
 export {
-  VectorizeCreateIndex,
-  VectorizeIndexDeleteVectorsByID,
-  VectorizeIndexInsert,
-  VectorizeIndexQuery,
-  VectorizeIndexUpsert,
+  CreateIndex,
+  IndexDeleteVectorsByID,
+  IndexDimensionConfiguration,
+  IndexInsert,
+  IndexQuery,
+  IndexUpsert,
   IndexGetByIDsResponse,
   IndexCreateParams,
   IndexUpdateParams,
@@ -15,6 +15,7 @@ export {
   IndexInsertParams,
   IndexQueryParams,
   IndexUpsertParams,
-  VectorizeCreateIndicesSinglePage,
+  CreateIndicesSinglePage,
   Indexes,
 } from './indexes';
+export { Vectorize } from './vectorize';

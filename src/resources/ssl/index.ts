@@ -2,6 +2,7 @@
 
 export { AnalyzeCreateParams, Analyze } from './analyze';
 export {
+  HostItem,
   CertificatePackListResponse,
   CertificatePackEditResponse,
   CertificatePackListParams,
@@ -13,12 +14,12 @@ export {
 } from './certificate-packs/index';
 export { RecommendationGetResponse, Recommendations } from './recommendations';
 export { SSL } from './ssl';
+export { Universal } from './universal/index';
 export {
-  TLSVerificationSetting,
+  Verification,
   VerificationEditResponse,
   VerificationGetResponse,
   VerificationEditParams,
   VerificationGetParams,
-  Verification,
+  VerificationResource,
 } from './verification';
-export { Universal } from './universal/index';

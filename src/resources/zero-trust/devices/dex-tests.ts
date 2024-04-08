@@ -9,16 +9,13 @@ export class DEXTests extends APIResource {
   /**
    * Create a DEX test.
    */
-  create(
-    params: DEXTestCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DEXTestSchemasHTTP | null> {
+  create(params: DEXTestCreateParams, options?: Core.RequestOptions): Core.APIPromise<SchemaHTTP | null> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/devices/dex_tests`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: DEXTestSchemasHTTP | null }>
+      }) as Core.APIPromise<{ result: SchemaHTTP | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -29,13 +26,13 @@ export class DEXTests extends APIResource {
     dexTestId: string,
     params: DEXTestUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DEXTestSchemasHTTP | null> {
+  ): Core.APIPromise<SchemaHTTP | null> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/devices/dex_tests/${dexTestId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: DEXTestSchemasHTTP | null }>
+      }) as Core.APIPromise<{ result: SchemaHTTP | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -45,11 +42,11 @@ export class DEXTests extends APIResource {
   list(
     params: DEXTestListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<DEXTestSchemasHTTPSSinglePage, DEXTestSchemasHTTP> {
+  ): Core.PagePromise<SchemaHTTPSSinglePage, SchemaHTTP> {
     const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/devices/dex_tests`,
-      DEXTestSchemasHTTPSSinglePage,
+      SchemaHTTPSSinglePage,
       options,
     );
   }
@@ -79,24 +76,45 @@ export class DEXTests extends APIResource {
     dexTestId: string,
     params: DEXTestGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DEXTestSchemasHTTP | null> {
+  ): Core.APIPromise<SchemaHTTP | null> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/devices/dex_tests/${dexTestId}`, options) as Core.APIPromise<{
-        result: DEXTestSchemasHTTP | null;
+        result: SchemaHTTP | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class DEXTestSchemasHTTPSSinglePage extends SinglePage<DEXTestSchemasHTTP> {}
+export class SchemaHTTPSSinglePage extends SinglePage<SchemaHTTP> {}
 
-export interface DEXTestSchemasHTTP {
+/**
+ * The configuration object which contains the details for the WARP client to
+ * conduct the test.
+ */
+export interface SchemaData {
+  /**
+   * The desired endpoint to test.
+   */
+  host?: string;
+
+  /**
+   * The type of test.
+   */
+  kind?: string;
+
+  /**
+   * The HTTP request method type.
+   */
+  method?: string;
+}
+
+export interface SchemaHTTP {
   /**
    * The configuration object which contains the details for the WARP client to
    * conduct the test.
    */
-  data: DEXTestSchemasHTTP.Data;
+  data: SchemaData;
 
   /**
    * Determines whether or not the test is active.
@@ -117,28 +135,31 @@ export interface DEXTestSchemasHTTP {
    * Additional details about the test.
    */
   description?: string;
+
+  /**
+   * Device settings profiles targeted by this test
+   */
+  target_policies?: Array<SchemaHTTP.TargetPolicy>;
+
+  targeted?: boolean;
 }
 
-export namespace DEXTestSchemasHTTP {
-  /**
-   * The configuration object which contains the details for the WARP client to
-   * conduct the test.
-   */
-  export interface Data {
+export namespace SchemaHTTP {
+  export interface TargetPolicy {
     /**
-     * The desired endpoint to test.
+     * The id of the device settings profile
      */
-    host?: string;
+    id?: string;
 
     /**
-     * The type of test.
+     * Whether the profile is the account default
      */
-    kind?: string;
+    default?: boolean;
 
     /**
-     * The HTTP request method type.
+     * The name of the device settings profile
      */
-    method?: string;
+    name?: string;
   }
 }
 
@@ -147,7 +168,7 @@ export interface UnnamedSchemaRef15fd6ef0641450fd873ffb71715170c9 {
    * The configuration object which contains the details for the WARP client to
    * conduct the test.
    */
-  data: UnnamedSchemaRef15fd6ef0641450fd873ffb71715170c9.Data;
+  data: SchemaData;
 
   /**
    * Determines whether or not the test is active.
@@ -168,32 +189,35 @@ export interface UnnamedSchemaRef15fd6ef0641450fd873ffb71715170c9 {
    * Additional details about the test.
    */
   description?: string;
+
+  /**
+   * Device settings profiles targeted by this test
+   */
+  target_policies?: Array<UnnamedSchemaRef15fd6ef0641450fd873ffb71715170c9.TargetPolicy>;
+
+  targeted?: boolean;
 }
 
 export namespace UnnamedSchemaRef15fd6ef0641450fd873ffb71715170c9 {
-  /**
-   * The configuration object which contains the details for the WARP client to
-   * conduct the test.
-   */
-  export interface Data {
+  export interface TargetPolicy {
     /**
-     * The desired endpoint to test.
+     * The id of the device settings profile
      */
-    host?: string;
+    id?: string;
 
     /**
-     * The type of test.
+     * Whether the profile is the account default
      */
-    kind?: string;
+    default?: boolean;
 
     /**
-     * The HTTP request method type.
+     * The name of the device settings profile
      */
-    method?: string;
+    name?: string;
   }
 }
 
-export type DEXTestDeleteResponse = Array<DEXTestSchemasHTTP>;
+export type DEXTestDeleteResponse = Array<SchemaHTTP>;
 
 export interface DEXTestCreateParams {
   /**
@@ -205,7 +229,7 @@ export interface DEXTestCreateParams {
    * Body param: The configuration object which contains the details for the WARP
    * client to conduct the test.
    */
-  data: DEXTestCreateParams.Data;
+  data: SchemaData;
 
   /**
    * Body param: Determines whether or not the test is active.
@@ -226,28 +250,34 @@ export interface DEXTestCreateParams {
    * Body param: Additional details about the test.
    */
   description?: string;
+
+  /**
+   * Body param: Device settings profiles targeted by this test
+   */
+  target_policies?: Array<DEXTestCreateParams.TargetPolicy>;
+
+  /**
+   * Body param:
+   */
+  targeted?: boolean;
 }
 
 export namespace DEXTestCreateParams {
-  /**
-   * The configuration object which contains the details for the WARP client to
-   * conduct the test.
-   */
-  export interface Data {
+  export interface TargetPolicy {
     /**
-     * The desired endpoint to test.
+     * The id of the device settings profile
      */
-    host?: string;
+    id?: string;
 
     /**
-     * The type of test.
+     * Whether the profile is the account default
      */
-    kind?: string;
+    default?: boolean;
 
     /**
-     * The HTTP request method type.
+     * The name of the device settings profile
      */
-    method?: string;
+    name?: string;
   }
 }
 
@@ -261,7 +291,7 @@ export interface DEXTestUpdateParams {
    * Body param: The configuration object which contains the details for the WARP
    * client to conduct the test.
    */
-  data: DEXTestUpdateParams.Data;
+  data: SchemaData;
 
   /**
    * Body param: Determines whether or not the test is active.
@@ -282,28 +312,34 @@ export interface DEXTestUpdateParams {
    * Body param: Additional details about the test.
    */
   description?: string;
+
+  /**
+   * Body param: Device settings profiles targeted by this test
+   */
+  target_policies?: Array<DEXTestUpdateParams.TargetPolicy>;
+
+  /**
+   * Body param:
+   */
+  targeted?: boolean;
 }
 
 export namespace DEXTestUpdateParams {
-  /**
-   * The configuration object which contains the details for the WARP client to
-   * conduct the test.
-   */
-  export interface Data {
+  export interface TargetPolicy {
     /**
-     * The desired endpoint to test.
+     * The id of the device settings profile
      */
-    host?: string;
+    id?: string;
 
     /**
-     * The type of test.
+     * Whether the profile is the account default
      */
-    kind?: string;
+    default?: boolean;
 
     /**
-     * The HTTP request method type.
+     * The name of the device settings profile
      */
-    method?: string;
+    name?: string;
   }
 }
 
@@ -320,10 +356,11 @@ export interface DEXTestGetParams {
 }
 
 export namespace DEXTests {
-  export import DEXTestSchemasHTTP = DEXTestsAPI.DEXTestSchemasHTTP;
+  export import SchemaData = DEXTestsAPI.SchemaData;
+  export import SchemaHTTP = DEXTestsAPI.SchemaHTTP;
   export import UnnamedSchemaRef15fd6ef0641450fd873ffb71715170c9 = DEXTestsAPI.UnnamedSchemaRef15fd6ef0641450fd873ffb71715170c9;
   export import DEXTestDeleteResponse = DEXTestsAPI.DEXTestDeleteResponse;
-  export import DEXTestSchemasHTTPSSinglePage = DEXTestsAPI.DEXTestSchemasHTTPSSinglePage;
+  export import SchemaHTTPSSinglePage = DEXTestsAPI.SchemaHTTPSSinglePage;
   export import DEXTestCreateParams = DEXTestsAPI.DEXTestCreateParams;
   export import DEXTestUpdateParams = DEXTestsAPI.DEXTestUpdateParams;
   export import DEXTestListParams = DEXTestsAPI.DEXTestListParams;

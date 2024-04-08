@@ -1,24 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  BlockRule,
-  ExecuteRule,
-  LogRule,
-  RequestRule,
-  Ruleset,
-  SkipRule,
-  RulesetCreateResponse,
-  RulesetUpdateResponse,
-  RulesetGetResponse,
-  RulesetCreateParams,
-  RulesetUpdateParams,
-  RulesetListParams,
-  RulesetDeleteParams,
-  RulesetGetParams,
-  RulesetsSinglePage,
-  Rulesets,
-} from './rulesets';
-export {
   PhaseUpdateResponse,
   PhaseGetResponse,
   PhaseUpdateParams,
@@ -34,6 +16,7 @@ export {
   RuleEditParams,
   Rules,
 } from './rules';
+export { Rulesets } from './rulesets';
 export {
   VersionGetResponse,
   VersionListParams,

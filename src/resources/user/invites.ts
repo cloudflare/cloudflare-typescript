@@ -4,14 +4,15 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as InvitesAPI from 'cloudflare/resources/user/invites';
 import * as Shared from 'cloudflare/resources/shared';
+import * as RolesAPI from 'cloudflare/resources/accounts/roles';
 import { SinglePage } from 'cloudflare/pagination';
 
 export class Invites extends APIResource {
   /**
    * Lists all invitations associated with my user.
    */
-  list(options?: Core.RequestOptions): Core.PagePromise<InviteListResponsesSinglePage, InviteListResponse> {
-    return this._client.getAPIList('/user/invites', InviteListResponsesSinglePage, options);
+  list(options?: Core.RequestOptions): Core.PagePromise<InvitesSinglePage, Invite> {
+    return this._client.getAPIList('/user/invites', InvitesSinglePage, options);
   }
 
   /**
@@ -44,7 +45,7 @@ export class Invites extends APIResource {
   }
 }
 
-export class InviteListResponsesSinglePage extends SinglePage<InviteListResponse> {}
+export class InvitesSinglePage extends SinglePage<Invite> {}
 
 export interface Invite {
   /**
@@ -90,112 +91,12 @@ export interface Invite {
   /**
    * Roles to be assigned to this user.
    */
-  roles?: Array<Invite.Role>;
+  roles?: Array<RolesAPI.Role>;
 
   /**
    * Current status of the invitation.
    */
   status?: 'pending' | 'accepted' | 'rejected' | 'expired';
-}
-
-export namespace Invite {
-  export interface Role {
-    /**
-     * Role identifier tag.
-     */
-    id: string;
-
-    /**
-     * Description of role's permissions.
-     */
-    description: string;
-
-    /**
-     * Role Name.
-     */
-    name: string;
-
-    /**
-     * Access permissions for this User.
-     */
-    permissions: Array<string>;
-  }
-}
-
-export interface InviteListResponse {
-  /**
-   * ID of the user to add to the organization.
-   */
-  invited_member_id: string | null;
-
-  /**
-   * ID of the organization the user will be added to.
-   */
-  organization_id: string;
-
-  /**
-   * Invite identifier tag.
-   */
-  id?: string;
-
-  /**
-   * When the invite is no longer active.
-   */
-  expires_on?: string;
-
-  /**
-   * The email address of the user who created the invite.
-   */
-  invited_by?: string;
-
-  /**
-   * Email address of the user to add to the organization.
-   */
-  invited_member_email?: string;
-
-  /**
-   * When the invite was sent.
-   */
-  invited_on?: string;
-
-  /**
-   * Organization name.
-   */
-  organization_name?: string;
-
-  /**
-   * Roles to be assigned to this user.
-   */
-  roles?: Array<InviteListResponse.Role>;
-
-  /**
-   * Current status of the invitation.
-   */
-  status?: 'pending' | 'accepted' | 'rejected' | 'expired';
-}
-
-export namespace InviteListResponse {
-  export interface Role {
-    /**
-     * Role identifier tag.
-     */
-    id: string;
-
-    /**
-     * Description of role's permissions.
-     */
-    description: string;
-
-    /**
-     * Role Name.
-     */
-    name: string;
-
-    /**
-     * Access permissions for this User.
-     */
-    permissions: Array<string>;
-  }
 }
 
 export interface InviteEditParams {
@@ -207,7 +108,6 @@ export interface InviteEditParams {
 
 export namespace Invites {
   export import Invite = InvitesAPI.Invite;
-  export import InviteListResponse = InvitesAPI.InviteListResponse;
-  export import InviteListResponsesSinglePage = InvitesAPI.InviteListResponsesSinglePage;
+  export import InvitesSinglePage = InvitesAPI.InvitesSinglePage;
   export import InviteEditParams = InvitesAPI.InviteEditParams;
 }
