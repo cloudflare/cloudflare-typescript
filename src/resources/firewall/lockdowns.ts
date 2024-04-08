@@ -14,12 +14,12 @@ export class Lockdowns extends APIResource {
     zoneIdentifier: string,
     body: LockdownCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LockdownCreateResponse> {
+  ): Core.APIPromise<Lockdown> {
     return (
       this._client.post(`/zones/${zoneIdentifier}/firewall/lockdowns`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: LockdownCreateResponse }>
+      }) as Core.APIPromise<{ result: Lockdown }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -31,12 +31,12 @@ export class Lockdowns extends APIResource {
     id: string,
     body: LockdownUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LockdownUpdateResponse> {
+  ): Core.APIPromise<Lockdown> {
     return (
       this._client.put(`/zones/${zoneIdentifier}/firewall/lockdowns/${id}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: LockdownUpdateResponse }>
+      }) as Core.APIPromise<{ result: Lockdown }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -48,22 +48,22 @@ export class Lockdowns extends APIResource {
     zoneIdentifier: string,
     query?: LockdownListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<LockdownListResponsesV4PagePaginationArray, LockdownListResponse>;
+  ): Core.PagePromise<LockdownsV4PagePaginationArray, Lockdown>;
   list(
     zoneIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<LockdownListResponsesV4PagePaginationArray, LockdownListResponse>;
+  ): Core.PagePromise<LockdownsV4PagePaginationArray, Lockdown>;
   list(
     zoneIdentifier: string,
     query: LockdownListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<LockdownListResponsesV4PagePaginationArray, LockdownListResponse> {
+  ): Core.PagePromise<LockdownsV4PagePaginationArray, Lockdown> {
     if (isRequestOptions(query)) {
       return this.list(zoneIdentifier, {}, query);
     }
     return this._client.getAPIList(
       `/zones/${zoneIdentifier}/firewall/lockdowns`,
-      LockdownListResponsesV4PagePaginationArray,
+      LockdownsV4PagePaginationArray,
       { query, ...options },
     );
   }
@@ -88,22 +88,52 @@ export class Lockdowns extends APIResource {
   /**
    * Fetches the details of a Zone Lockdown rule.
    */
-  get(
-    zoneIdentifier: string,
-    id: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<LockdownGetResponse> {
+  get(zoneIdentifier: string, id: string, options?: Core.RequestOptions): Core.APIPromise<Lockdown> {
     return (
       this._client.get(`/zones/${zoneIdentifier}/firewall/lockdowns/${id}`, options) as Core.APIPromise<{
-        result: LockdownGetResponse;
+        result: Lockdown;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class LockdownListResponsesV4PagePaginationArray extends V4PagePaginationArray<LockdownListResponse> {}
+export class LockdownsV4PagePaginationArray extends V4PagePaginationArray<Lockdown> {}
 
-export interface LockdownCreateResponse {
+export interface CIDRConfiguration {
+  /**
+   * The configuration target. You must set the target to `ip_range` when specifying
+   * an IP address range in the Zone Lockdown rule.
+   */
+  target?: 'ip_range';
+
+  /**
+   * The IP address range to match. You can only use prefix lengths `/16` and `/24`.
+   */
+  value?: string;
+}
+
+/**
+ * A list of IP addresses or CIDR ranges that will be allowed to access the URLs
+ * specified in the Zone Lockdown rule. You can include any number of `ip` or
+ * `ip_range` configurations.
+ */
+export type Configuration = IPConfiguration | CIDRConfiguration;
+
+export interface IPConfiguration {
+  /**
+   * The configuration target. You must set the target to `ip` when specifying an IP
+   * address in the Zone Lockdown rule.
+   */
+  target?: 'ip';
+
+  /**
+   * The IP address to match. This address will be compared to the IP address of
+   * incoming requests.
+   */
+  value?: string;
+}
+
+export interface Lockdown {
   /**
    * The unique identifier of the Zone Lockdown rule.
    */
@@ -114,9 +144,7 @@ export interface LockdownCreateResponse {
    * specified in the Zone Lockdown rule. You can include any number of `ip` or
    * `ip_range` configurations.
    */
-  configurations:
-    | LockdownCreateResponse.FirewallSchemasIPConfiguration
-    | LockdownCreateResponse.FirewallSchemasCIDRConfiguration;
+  configurations: Configuration;
 
   /**
    * The timestamp of when the rule was created.
@@ -143,259 +171,16 @@ export interface LockdownCreateResponse {
    * URL will be escaped before use, which means you can only use simple wildcard
    * patterns.
    */
-  urls: Array<string>;
+  urls: Array<URLsItem>;
 }
 
-export namespace LockdownCreateResponse {
-  export interface FirewallSchemasIPConfiguration {
-    /**
-     * The configuration target. You must set the target to `ip` when specifying an IP
-     * address in the Zone Lockdown rule.
-     */
-    target?: 'ip';
-
-    /**
-     * The IP address to match. This address will be compared to the IP address of
-     * incoming requests.
-     */
-    value?: string;
-  }
-
-  export interface FirewallSchemasCIDRConfiguration {
-    /**
-     * The configuration target. You must set the target to `ip_range` when specifying
-     * an IP address range in the Zone Lockdown rule.
-     */
-    target?: 'ip_range';
-
-    /**
-     * The IP address range to match. You can only use prefix lengths `/16` and `/24`.
-     */
-    value?: string;
-  }
-}
-
-export interface LockdownUpdateResponse {
-  /**
-   * The unique identifier of the Zone Lockdown rule.
-   */
-  id: string;
-
-  /**
-   * A list of IP addresses or CIDR ranges that will be allowed to access the URLs
-   * specified in the Zone Lockdown rule. You can include any number of `ip` or
-   * `ip_range` configurations.
-   */
-  configurations:
-    | LockdownUpdateResponse.FirewallSchemasIPConfiguration
-    | LockdownUpdateResponse.FirewallSchemasCIDRConfiguration;
-
-  /**
-   * The timestamp of when the rule was created.
-   */
-  created_on: string;
-
-  /**
-   * An informative summary of the rule.
-   */
-  description: string;
-
-  /**
-   * The timestamp of when the rule was last modified.
-   */
-  modified_on: string;
-
-  /**
-   * When true, indicates that the rule is currently paused.
-   */
-  paused: boolean;
-
-  /**
-   * The URLs to include in the rule definition. You can use wildcards. Each entered
-   * URL will be escaped before use, which means you can only use simple wildcard
-   * patterns.
-   */
-  urls: Array<string>;
-}
-
-export namespace LockdownUpdateResponse {
-  export interface FirewallSchemasIPConfiguration {
-    /**
-     * The configuration target. You must set the target to `ip` when specifying an IP
-     * address in the Zone Lockdown rule.
-     */
-    target?: 'ip';
-
-    /**
-     * The IP address to match. This address will be compared to the IP address of
-     * incoming requests.
-     */
-    value?: string;
-  }
-
-  export interface FirewallSchemasCIDRConfiguration {
-    /**
-     * The configuration target. You must set the target to `ip_range` when specifying
-     * an IP address range in the Zone Lockdown rule.
-     */
-    target?: 'ip_range';
-
-    /**
-     * The IP address range to match. You can only use prefix lengths `/16` and `/24`.
-     */
-    value?: string;
-  }
-}
-
-export interface LockdownListResponse {
-  /**
-   * The unique identifier of the Zone Lockdown rule.
-   */
-  id: string;
-
-  /**
-   * A list of IP addresses or CIDR ranges that will be allowed to access the URLs
-   * specified in the Zone Lockdown rule. You can include any number of `ip` or
-   * `ip_range` configurations.
-   */
-  configurations:
-    | LockdownListResponse.FirewallSchemasIPConfiguration
-    | LockdownListResponse.FirewallSchemasCIDRConfiguration;
-
-  /**
-   * The timestamp of when the rule was created.
-   */
-  created_on: string;
-
-  /**
-   * An informative summary of the rule.
-   */
-  description: string;
-
-  /**
-   * The timestamp of when the rule was last modified.
-   */
-  modified_on: string;
-
-  /**
-   * When true, indicates that the rule is currently paused.
-   */
-  paused: boolean;
-
-  /**
-   * The URLs to include in the rule definition. You can use wildcards. Each entered
-   * URL will be escaped before use, which means you can only use simple wildcard
-   * patterns.
-   */
-  urls: Array<string>;
-}
-
-export namespace LockdownListResponse {
-  export interface FirewallSchemasIPConfiguration {
-    /**
-     * The configuration target. You must set the target to `ip` when specifying an IP
-     * address in the Zone Lockdown rule.
-     */
-    target?: 'ip';
-
-    /**
-     * The IP address to match. This address will be compared to the IP address of
-     * incoming requests.
-     */
-    value?: string;
-  }
-
-  export interface FirewallSchemasCIDRConfiguration {
-    /**
-     * The configuration target. You must set the target to `ip_range` when specifying
-     * an IP address range in the Zone Lockdown rule.
-     */
-    target?: 'ip_range';
-
-    /**
-     * The IP address range to match. You can only use prefix lengths `/16` and `/24`.
-     */
-    value?: string;
-  }
-}
+export type URLsItem = string;
 
 export interface LockdownDeleteResponse {
   /**
    * The unique identifier of the Zone Lockdown rule.
    */
   id?: string;
-}
-
-export interface LockdownGetResponse {
-  /**
-   * The unique identifier of the Zone Lockdown rule.
-   */
-  id: string;
-
-  /**
-   * A list of IP addresses or CIDR ranges that will be allowed to access the URLs
-   * specified in the Zone Lockdown rule. You can include any number of `ip` or
-   * `ip_range` configurations.
-   */
-  configurations:
-    | LockdownGetResponse.FirewallSchemasIPConfiguration
-    | LockdownGetResponse.FirewallSchemasCIDRConfiguration;
-
-  /**
-   * The timestamp of when the rule was created.
-   */
-  created_on: string;
-
-  /**
-   * An informative summary of the rule.
-   */
-  description: string;
-
-  /**
-   * The timestamp of when the rule was last modified.
-   */
-  modified_on: string;
-
-  /**
-   * When true, indicates that the rule is currently paused.
-   */
-  paused: boolean;
-
-  /**
-   * The URLs to include in the rule definition. You can use wildcards. Each entered
-   * URL will be escaped before use, which means you can only use simple wildcard
-   * patterns.
-   */
-  urls: Array<string>;
-}
-
-export namespace LockdownGetResponse {
-  export interface FirewallSchemasIPConfiguration {
-    /**
-     * The configuration target. You must set the target to `ip` when specifying an IP
-     * address in the Zone Lockdown rule.
-     */
-    target?: 'ip';
-
-    /**
-     * The IP address to match. This address will be compared to the IP address of
-     * incoming requests.
-     */
-    value?: string;
-  }
-
-  export interface FirewallSchemasCIDRConfiguration {
-    /**
-     * The configuration target. You must set the target to `ip_range` when specifying
-     * an IP address range in the Zone Lockdown rule.
-     */
-    target?: 'ip_range';
-
-    /**
-     * The IP address range to match. You can only use prefix lengths `/16` and `/24`.
-     */
-    value?: string;
-  }
 }
 
 export type LockdownCreateParams = unknown;
@@ -454,12 +239,13 @@ export interface LockdownListParams extends V4PagePaginationArrayParams {
 export type LockdownDeleteParams = unknown;
 
 export namespace Lockdowns {
-  export import LockdownCreateResponse = LockdownsAPI.LockdownCreateResponse;
-  export import LockdownUpdateResponse = LockdownsAPI.LockdownUpdateResponse;
-  export import LockdownListResponse = LockdownsAPI.LockdownListResponse;
+  export import CIDRConfiguration = LockdownsAPI.CIDRConfiguration;
+  export import Configuration = LockdownsAPI.Configuration;
+  export import IPConfiguration = LockdownsAPI.IPConfiguration;
+  export import Lockdown = LockdownsAPI.Lockdown;
+  export import URLsItem = LockdownsAPI.URLsItem;
   export import LockdownDeleteResponse = LockdownsAPI.LockdownDeleteResponse;
-  export import LockdownGetResponse = LockdownsAPI.LockdownGetResponse;
-  export import LockdownListResponsesV4PagePaginationArray = LockdownsAPI.LockdownListResponsesV4PagePaginationArray;
+  export import LockdownsV4PagePaginationArray = LockdownsAPI.LockdownsV4PagePaginationArray;
   export import LockdownCreateParams = LockdownsAPI.LockdownCreateParams;
   export import LockdownUpdateParams = LockdownsAPI.LockdownUpdateParams;
   export import LockdownListParams = LockdownsAPI.LockdownListParams;
