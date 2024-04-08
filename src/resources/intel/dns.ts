@@ -8,17 +8,17 @@ export class DNS extends APIResource {
   /**
    * Get Passive DNS by IP
    */
-  get(params: DNSGetParams, options?: Core.RequestOptions): Core.APIPromise<IntelPassiveDNSByIP> {
+  get(params: DNSGetParams, options?: Core.RequestOptions): Core.APIPromise<DNS> {
     const { account_id, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/intel/dns`, { query, ...options }) as Core.APIPromise<{
-        result: IntelPassiveDNSByIP;
+        result: DNS;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface IntelPassiveDNSByIP {
+export interface DNS {
   /**
    * Total results returned based on your search parameters.
    */
@@ -99,7 +99,7 @@ export namespace DNSGetParams {
 }
 
 export namespace DNS {
-  export import IntelPassiveDNSByIP = DNSAPI.IntelPassiveDNSByIP;
+  export import DNS = DNSAPI.DNS;
   export import UnnamedSchemaRefB5e16cee4f32382c294201aedb9fc050 = DNSAPI.UnnamedSchemaRefB5e16cee4f32382c294201aedb9fc050;
   export import DNSGetParams = DNSAPI.DNSGetParams;
 }

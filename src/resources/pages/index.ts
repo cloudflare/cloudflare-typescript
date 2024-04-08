@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Pages } from './pages';
 export {
-  PagesDeployments,
-  PagesProjects,
+  Deployment,
+  Project,
+  Stage,
   ProjectDeleteResponse,
   ProjectPurgeBuildCacheResponse,
   ProjectCreateParams,
@@ -12,6 +12,7 @@ export {
   ProjectEditParams,
   ProjectGetParams,
   ProjectPurgeBuildCacheParams,
-  PagesDeploymentsSinglePage,
+  DeploymentsSinglePage,
   Projects,
 } from './projects/index';
+export { Pages } from './pages';

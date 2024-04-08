@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { URLScannerScanResponse, URLScannerScanParams, URLScanner } from './url-scanner';
+export { URLScanner } from './url-scanner';
 export {
   UnnamedSchemaRef3750739f772bbdf0bb00d6634ccc0631,
   UnnamedSchemaRef6d7a78acccfc753a8e931b1c4e72b6a6,

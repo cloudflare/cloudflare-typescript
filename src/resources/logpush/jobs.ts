@@ -7,7 +7,7 @@ import { CloudflareError } from 'cloudflare/error';
 import * as JobsAPI from 'cloudflare/resources/logpush/jobs';
 import * as Shared from 'cloudflare/resources/shared';
 import * as DatasetsJobsAPI from 'cloudflare/resources/logpush/datasets/jobs';
-import { LogpushJobsSinglePage } from 'cloudflare/resources/logpush/datasets/jobs';
+import { JobsSinglePage } from 'cloudflare/resources/logpush/datasets/jobs';
 
 export class Jobs extends APIResource {
   /**
@@ -16,7 +16,7 @@ export class Jobs extends APIResource {
   create(
     params: JobCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DatasetsJobsAPI.LogpushJob | null> {
+  ): Core.APIPromise<DatasetsJobsAPI.Job | null> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -38,7 +38,7 @@ export class Jobs extends APIResource {
       this._client.post(`/${accountOrZone}/${accountOrZoneId}/logpush/jobs`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: DatasetsJobsAPI.LogpushJob | null }>
+      }) as Core.APIPromise<{ result: DatasetsJobsAPI.Job | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -49,7 +49,7 @@ export class Jobs extends APIResource {
     jobId: number,
     params: JobUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DatasetsJobsAPI.LogpushJob | null> {
+  ): Core.APIPromise<DatasetsJobsAPI.Job | null> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -71,7 +71,7 @@ export class Jobs extends APIResource {
       this._client.put(`/${accountOrZone}/${accountOrZoneId}/logpush/jobs/${jobId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: DatasetsJobsAPI.LogpushJob | null }>
+      }) as Core.APIPromise<{ result: DatasetsJobsAPI.Job | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -81,14 +81,12 @@ export class Jobs extends APIResource {
   list(
     params?: JobListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<LogpushJobsSinglePage, DatasetsJobsAPI.LogpushJob | null>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<LogpushJobsSinglePage, DatasetsJobsAPI.LogpushJob | null>;
+  ): Core.PagePromise<JobsSinglePage, DatasetsJobsAPI.Job | null>;
+  list(options?: Core.RequestOptions): Core.PagePromise<JobsSinglePage, DatasetsJobsAPI.Job | null>;
   list(
     params: JobListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<LogpushJobsSinglePage, DatasetsJobsAPI.LogpushJob | null> {
+  ): Core.PagePromise<JobsSinglePage, DatasetsJobsAPI.Job | null> {
     if (isRequestOptions(params)) {
       return this.list({}, params);
     }
@@ -111,7 +109,7 @@ export class Jobs extends APIResource {
         };
     return this._client.getAPIList(
       `/${accountOrZone}/${accountOrZoneId}/logpush/jobs`,
-      LogpushJobsSinglePage,
+      JobsSinglePage,
       options,
     );
   }
@@ -156,13 +154,13 @@ export class Jobs extends APIResource {
     jobId: number,
     params?: JobGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DatasetsJobsAPI.LogpushJob | null>;
-  get(jobId: number, options?: Core.RequestOptions): Core.APIPromise<DatasetsJobsAPI.LogpushJob | null>;
+  ): Core.APIPromise<DatasetsJobsAPI.Job | null>;
+  get(jobId: number, options?: Core.RequestOptions): Core.APIPromise<DatasetsJobsAPI.Job | null>;
   get(
     jobId: number,
     params: JobGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DatasetsJobsAPI.LogpushJob | null> {
+  ): Core.APIPromise<DatasetsJobsAPI.Job | null> {
     if (isRequestOptions(params)) {
       return this.get(jobId, {}, params);
     }
@@ -187,7 +185,7 @@ export class Jobs extends APIResource {
       this._client.get(
         `/${accountOrZone}/${accountOrZoneId}/logpush/jobs/${jobId}`,
         options,
-      ) as Core.APIPromise<{ result: DatasetsJobsAPI.LogpushJob | null }>
+      ) as Core.APIPromise<{ result: DatasetsJobsAPI.Job | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -265,85 +263,7 @@ export interface UnnamedSchemaRef2f2e9d7fbcc0e6856257a03a1dbbdfb5 {
    * The structured replacement for `logpull_options`. When including this field, the
    * `logpull_option` field will be ignored.
    */
-  output_options?: UnnamedSchemaRef2f2e9d7fbcc0e6856257a03a1dbbdfb5.OutputOptions | null;
-}
-
-export namespace UnnamedSchemaRef2f2e9d7fbcc0e6856257a03a1dbbdfb5 {
-  /**
-   * The structured replacement for `logpull_options`. When including this field, the
-   * `logpull_option` field will be ignored.
-   */
-  export interface OutputOptions {
-    /**
-     * String to be prepended before each batch.
-     */
-    batch_prefix?: string | null;
-
-    /**
-     * String to be appended after each batch.
-     */
-    batch_suffix?: string | null;
-
-    /**
-     * If set to true, will cause all occurrences of `${` in the generated files to be
-     * replaced with `x{`.
-     */
-    'CVE-2021-4428'?: boolean | null;
-
-    /**
-     * String to join fields. This field be ignored when `record_template` is set.
-     */
-    field_delimiter?: string | null;
-
-    /**
-     * List of field names to be included in the Logpush output. For the moment, there
-     * is no option to add all fields at once, so you must specify all the fields names
-     * you are interested in.
-     */
-    field_names?: Array<string>;
-
-    /**
-     * Specifies the output type, such as `ndjson` or `csv`. This sets default values
-     * for the rest of the settings, depending on the chosen output type. Some
-     * formatting rules, like string quoting, are different between output types.
-     */
-    output_type?: 'ndjson' | 'csv';
-
-    /**
-     * String to be inserted in-between the records as separator.
-     */
-    record_delimiter?: string | null;
-
-    /**
-     * String to be prepended before each record.
-     */
-    record_prefix?: string | null;
-
-    /**
-     * String to be appended after each record.
-     */
-    record_suffix?: string | null;
-
-    /**
-     * String to use as template for each record instead of the default comma-separated
-     * list. All fields used in the template must be present in `field_names` as well,
-     * otherwise they will end up as null. Format as a Go `text/template` without any
-     * standard functions, like conditionals, loops, sub-templates, etc.
-     */
-    record_template?: string | null;
-
-    /**
-     * Floating number to specify sampling rate. Sampling is applied on top of
-     * filtering, and regardless of the current `sample_interval` of the data.
-     */
-    sample_rate?: number | null;
-
-    /**
-     * String to specify the format for timestamps, such as `unixnano`, `unix`, or
-     * `rfc3339`.
-     */
-    timestamp_format?: 'unixnano' | 'unix' | 'rfc3339';
-  }
+  output_options?: DatasetsJobsAPI.OutputOptions | null;
 }
 
 export interface JobCreateParams {
@@ -404,90 +324,12 @@ export interface JobCreateParams {
    * Body param: The structured replacement for `logpull_options`. When including
    * this field, the `logpull_option` field will be ignored.
    */
-  output_options?: JobCreateParams.OutputOptions | null;
+  output_options?: DatasetsJobsAPI.OutputOptions | null;
 
   /**
    * Body param: Ownership challenge token to prove destination ownership.
    */
   ownership_challenge?: string;
-}
-
-export namespace JobCreateParams {
-  /**
-   * The structured replacement for `logpull_options`. When including this field, the
-   * `logpull_option` field will be ignored.
-   */
-  export interface OutputOptions {
-    /**
-     * String to be prepended before each batch.
-     */
-    batch_prefix?: string | null;
-
-    /**
-     * String to be appended after each batch.
-     */
-    batch_suffix?: string | null;
-
-    /**
-     * If set to true, will cause all occurrences of `${` in the generated files to be
-     * replaced with `x{`.
-     */
-    'CVE-2021-4428'?: boolean | null;
-
-    /**
-     * String to join fields. This field be ignored when `record_template` is set.
-     */
-    field_delimiter?: string | null;
-
-    /**
-     * List of field names to be included in the Logpush output. For the moment, there
-     * is no option to add all fields at once, so you must specify all the fields names
-     * you are interested in.
-     */
-    field_names?: Array<string>;
-
-    /**
-     * Specifies the output type, such as `ndjson` or `csv`. This sets default values
-     * for the rest of the settings, depending on the chosen output type. Some
-     * formatting rules, like string quoting, are different between output types.
-     */
-    output_type?: 'ndjson' | 'csv';
-
-    /**
-     * String to be inserted in-between the records as separator.
-     */
-    record_delimiter?: string | null;
-
-    /**
-     * String to be prepended before each record.
-     */
-    record_prefix?: string | null;
-
-    /**
-     * String to be appended after each record.
-     */
-    record_suffix?: string | null;
-
-    /**
-     * String to use as template for each record instead of the default comma-separated
-     * list. All fields used in the template must be present in `field_names` as well,
-     * otherwise they will end up as null. Format as a Go `text/template` without any
-     * standard functions, like conditionals, loops, sub-templates, etc.
-     */
-    record_template?: string | null;
-
-    /**
-     * Floating number to specify sampling rate. Sampling is applied on top of
-     * filtering, and regardless of the current `sample_interval` of the data.
-     */
-    sample_rate?: number | null;
-
-    /**
-     * String to specify the format for timestamps, such as `unixnano`, `unix`, or
-     * `rfc3339`.
-     */
-    timestamp_format?: 'unixnano' | 'unix' | 'rfc3339';
-  }
 }
 
 export interface JobUpdateParams {
@@ -536,90 +378,12 @@ export interface JobUpdateParams {
    * Body param: The structured replacement for `logpull_options`. When including
    * this field, the `logpull_option` field will be ignored.
    */
-  output_options?: JobUpdateParams.OutputOptions | null;
+  output_options?: DatasetsJobsAPI.OutputOptions | null;
 
   /**
    * Body param: Ownership challenge token to prove destination ownership.
    */
   ownership_challenge?: string;
-}
-
-export namespace JobUpdateParams {
-  /**
-   * The structured replacement for `logpull_options`. When including this field, the
-   * `logpull_option` field will be ignored.
-   */
-  export interface OutputOptions {
-    /**
-     * String to be prepended before each batch.
-     */
-    batch_prefix?: string | null;
-
-    /**
-     * String to be appended after each batch.
-     */
-    batch_suffix?: string | null;
-
-    /**
-     * If set to true, will cause all occurrences of `${` in the generated files to be
-     * replaced with `x{`.
-     */
-    'CVE-2021-4428'?: boolean | null;
-
-    /**
-     * String to join fields. This field be ignored when `record_template` is set.
-     */
-    field_delimiter?: string | null;
-
-    /**
-     * List of field names to be included in the Logpush output. For the moment, there
-     * is no option to add all fields at once, so you must specify all the fields names
-     * you are interested in.
-     */
-    field_names?: Array<string>;
-
-    /**
-     * Specifies the output type, such as `ndjson` or `csv`. This sets default values
-     * for the rest of the settings, depending on the chosen output type. Some
-     * formatting rules, like string quoting, are different between output types.
-     */
-    output_type?: 'ndjson' | 'csv';
-
-    /**
-     * String to be inserted in-between the records as separator.
-     */
-    record_delimiter?: string | null;
-
-    /**
-     * String to be prepended before each record.
-     */
-    record_prefix?: string | null;
-
-    /**
-     * String to be appended after each record.
-     */
-    record_suffix?: string | null;
-
-    /**
-     * String to use as template for each record instead of the default comma-separated
-     * list. All fields used in the template must be present in `field_names` as well,
-     * otherwise they will end up as null. Format as a Go `text/template` without any
-     * standard functions, like conditionals, loops, sub-templates, etc.
-     */
-    record_template?: string | null;
-
-    /**
-     * Floating number to specify sampling rate. Sampling is applied on top of
-     * filtering, and regardless of the current `sample_interval` of the data.
-     */
-    sample_rate?: number | null;
-
-    /**
-     * String to specify the format for timestamps, such as `unixnano`, `unix`, or
-     * `rfc3339`.
-     */
-    timestamp_format?: 'unixnano' | 'unix' | 'rfc3339';
-  }
 }
 
 export interface JobListParams {
@@ -674,4 +438,4 @@ export namespace Jobs {
   export import JobGetParams = JobsAPI.JobGetParams;
 }
 
-export { LogpushJobsSinglePage };
+export { JobsSinglePage };

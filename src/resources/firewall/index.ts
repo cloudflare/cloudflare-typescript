@@ -13,22 +13,35 @@ export {
 } from './access-rules';
 export { Firewall } from './firewall';
 export {
-  FirewallFilterRule,
-  UnnamedSchemaRef6fe6c1eba94d9c3f475fb22f0118bf57,
-  UnnamedSchemaRefAb48d2d33259c9107401d174735701c7,
+  LockdownCreateResponse,
+  LockdownUpdateResponse,
+  LockdownListResponse,
+  LockdownDeleteResponse,
+  LockdownGetResponse,
+  LockdownCreateParams,
+  LockdownUpdateParams,
+  LockdownListParams,
+  LockdownDeleteParams,
+  LockdownListResponsesV4PagePaginationArray,
+  Lockdowns,
+} from './lockdowns';
+export {
   RuleCreateResponse,
+  RuleUpdateResponse,
+  RuleListResponse,
+  RuleDeleteResponse,
   RuleEditResponse,
+  RuleGetResponse,
   RuleCreateParams,
   RuleUpdateParams,
   RuleListParams,
   RuleDeleteParams,
   RuleEditParams,
   RuleGetParams,
-  FirewallFilterRulesV4PagePaginationArray,
+  RuleListResponsesV4PagePaginationArray,
   Rules,
 } from './rules';
 export {
-  FirewallUserAgentRule,
   UARuleListResponse,
   UARuleDeleteResponse,
   UARuleCreateParams,
@@ -38,15 +51,4 @@ export {
   UARuleListResponsesV4PagePaginationArray,
   UARules,
 } from './ua-rules';
-export {
-  FirewallZoneLockdown,
-  UnnamedSchemaRefA4044d3c73ad1e6c8fff4dc05f922ab5,
-  LockdownDeleteResponse,
-  LockdownCreateParams,
-  LockdownUpdateParams,
-  LockdownListParams,
-  LockdownDeleteParams,
-  FirewallZoneLockdownsV4PagePaginationArray,
-  Lockdowns,
-} from './lockdowns';
 export { WAF } from './waf/index';

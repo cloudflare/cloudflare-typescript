@@ -59,6 +59,46 @@ export class Tail extends APIResource {
   }
 }
 
+/**
+ * A reference to a script that will consume logs from the attached Worker.
+ */
+export interface ConsumerScript {
+  /**
+   * Name of Worker that is to be the consumer.
+   */
+  service: string;
+
+  /**
+   * Optional environment if the Worker utilizes one.
+   */
+  environment?: string;
+
+  /**
+   * Optional dispatch namespace the script belongs to.
+   */
+  namespace?: string;
+}
+
+/**
+ * A reference to a script that will consume logs from the attached Worker.
+ */
+export interface ConsumerScriptItem {
+  /**
+   * Name of Worker that is to be the consumer.
+   */
+  service: string;
+
+  /**
+   * Optional environment if the Worker utilizes one.
+   */
+  environment?: string;
+
+  /**
+   * Optional dispatch namespace the script belongs to.
+   */
+  namespace?: string;
+}
+
 export interface TailCreateResponse {
   id?: unknown;
 
@@ -107,6 +147,8 @@ export interface TailGetParams {
 }
 
 export namespace Tail {
+  export import ConsumerScript = TailAPI.ConsumerScript;
+  export import ConsumerScriptItem = TailAPI.ConsumerScriptItem;
   export import TailCreateResponse = TailAPI.TailCreateResponse;
   export import TailGetResponse = TailAPI.TailGetResponse;
   export import TailCreateParams = TailAPI.TailCreateParams;

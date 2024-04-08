@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as BindingsAPI from 'cloudflare/resources/workers/scripts/bindings';
+import * as WorkersAPI from 'cloudflare/resources/workers/workers';
 
 export class Bindings extends APIResource {
   /**
@@ -18,28 +19,9 @@ export class Bindings extends APIResource {
   }
 }
 
-export type WorkersBinding =
-  | WorkersBinding.WorkersKVNamespaceBinding
-  | WorkersBinding.WorkersWasmModuleBinding;
+export type Binding = WorkersAPI.KVNamespaceBinding | Binding.WorkersWasmModuleBinding;
 
-export namespace WorkersBinding {
-  export interface WorkersKVNamespaceBinding {
-    /**
-     * A JavaScript variable name for the binding.
-     */
-    name: string;
-
-    /**
-     * Namespace identifier tag.
-     */
-    namespace_id: string;
-
-    /**
-     * The class of resource that the binding provides.
-     */
-    type: 'kv_namespace';
-  }
-
+export namespace Binding {
   export interface WorkersWasmModuleBinding {
     /**
      * A JavaScript variable name for the binding.
@@ -53,7 +35,7 @@ export namespace WorkersBinding {
   }
 }
 
-export type BindingGetResponse = Array<WorkersBinding>;
+export type BindingGetResponse = Array<Binding>;
 
 export interface BindingGetParams {
   /**
@@ -63,7 +45,7 @@ export interface BindingGetParams {
 }
 
 export namespace Bindings {
-  export import WorkersBinding = BindingsAPI.WorkersBinding;
+  export import Binding = BindingsAPI.Binding;
   export import BindingGetResponse = BindingsAPI.BindingGetResponse;
   export import BindingGetParams = BindingsAPI.BindingGetParams;
 }

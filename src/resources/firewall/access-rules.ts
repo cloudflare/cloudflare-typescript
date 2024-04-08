@@ -220,11 +220,11 @@ export interface AccessRuleCreateParams {
    * Body param: The rule configuration.
    */
   configuration:
-    | AccessRuleCreateParams.LegacyJhsIPConfiguration
-    | AccessRuleCreateParams.LegacyJhsIPV6Configuration
-    | AccessRuleCreateParams.LegacyJhsCIDRConfiguration
-    | AccessRuleCreateParams.LegacyJhsASNConfiguration
-    | AccessRuleCreateParams.LegacyJhsCountryConfiguration;
+    | AccessRuleCreateParams.FirewallIPConfiguration
+    | AccessRuleCreateParams.FirewallIPV6Configuration
+    | AccessRuleCreateParams.FirewallCIDRConfiguration
+    | AccessRuleCreateParams.FirewallASNConfiguration
+    | AccessRuleCreateParams.FirewallCountryConfiguration;
 
   /**
    * Body param: The action to apply to a matched request.
@@ -251,7 +251,7 @@ export interface AccessRuleCreateParams {
 }
 
 export namespace AccessRuleCreateParams {
-  export interface LegacyJhsIPConfiguration {
+  export interface FirewallIPConfiguration {
     /**
      * The configuration target. You must set the target to `ip` when specifying an IP
      * address in the rule.
@@ -265,7 +265,7 @@ export namespace AccessRuleCreateParams {
     value?: string;
   }
 
-  export interface LegacyJhsIPV6Configuration {
+  export interface FirewallIPV6Configuration {
     /**
      * The configuration target. You must set the target to `ip6` when specifying an
      * IPv6 address in the rule.
@@ -278,7 +278,7 @@ export namespace AccessRuleCreateParams {
     value?: string;
   }
 
-  export interface LegacyJhsCIDRConfiguration {
+  export interface FirewallCIDRConfiguration {
     /**
      * The configuration target. You must set the target to `ip_range` when specifying
      * an IP address range in the rule.
@@ -292,7 +292,7 @@ export namespace AccessRuleCreateParams {
     value?: string;
   }
 
-  export interface LegacyJhsASNConfiguration {
+  export interface FirewallASNConfiguration {
     /**
      * The configuration target. You must set the target to `asn` when specifying an
      * Autonomous System Number (ASN) in the rule.
@@ -305,7 +305,7 @@ export namespace AccessRuleCreateParams {
     value?: string;
   }
 
-  export interface LegacyJhsCountryConfiguration {
+  export interface FirewallCountryConfiguration {
     /**
      * The configuration target. You must set the target to `country` when specifying a
      * country code in the rule.
@@ -432,11 +432,11 @@ export interface AccessRuleEditParams {
    * Body param: The rule configuration.
    */
   configuration:
-    | AccessRuleEditParams.LegacyJhsIPConfiguration
-    | AccessRuleEditParams.LegacyJhsIPV6Configuration
-    | AccessRuleEditParams.LegacyJhsCIDRConfiguration
-    | AccessRuleEditParams.LegacyJhsASNConfiguration
-    | AccessRuleEditParams.LegacyJhsCountryConfiguration;
+    | AccessRuleEditParams.FirewallIPConfiguration
+    | AccessRuleEditParams.FirewallIPV6Configuration
+    | AccessRuleEditParams.FirewallCIDRConfiguration
+    | AccessRuleEditParams.FirewallASNConfiguration
+    | AccessRuleEditParams.FirewallCountryConfiguration;
 
   /**
    * Body param: The action to apply to a matched request.
@@ -463,7 +463,7 @@ export interface AccessRuleEditParams {
 }
 
 export namespace AccessRuleEditParams {
-  export interface LegacyJhsIPConfiguration {
+  export interface FirewallIPConfiguration {
     /**
      * The configuration target. You must set the target to `ip` when specifying an IP
      * address in the rule.
@@ -477,7 +477,7 @@ export namespace AccessRuleEditParams {
     value?: string;
   }
 
-  export interface LegacyJhsIPV6Configuration {
+  export interface FirewallIPV6Configuration {
     /**
      * The configuration target. You must set the target to `ip6` when specifying an
      * IPv6 address in the rule.
@@ -490,7 +490,7 @@ export namespace AccessRuleEditParams {
     value?: string;
   }
 
-  export interface LegacyJhsCIDRConfiguration {
+  export interface FirewallCIDRConfiguration {
     /**
      * The configuration target. You must set the target to `ip_range` when specifying
      * an IP address range in the rule.
@@ -504,7 +504,7 @@ export namespace AccessRuleEditParams {
     value?: string;
   }
 
-  export interface LegacyJhsASNConfiguration {
+  export interface FirewallASNConfiguration {
     /**
      * The configuration target. You must set the target to `asn` when specifying an
      * Autonomous System Number (ASN) in the rule.
@@ -517,7 +517,7 @@ export namespace AccessRuleEditParams {
     value?: string;
   }
 
-  export interface LegacyJhsCountryConfiguration {
+  export interface FirewallCountryConfiguration {
     /**
      * The configuration target. You must set the target to `country` when specifying a
      * country code in the rule.

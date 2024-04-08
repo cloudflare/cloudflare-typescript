@@ -61,11 +61,11 @@ export class Packages extends APIResource {
 export class PackageListResponsesV4PagePaginationArray extends V4PagePaginationArray<PackageListResponse> {}
 
 export type PackageListResponse =
-  | PackageListResponse.LegacyJhsAPIResponseCollection
+  | PackageListResponse.FirewallAPIResponseCollection
   | PackageListResponse.Result;
 
 export namespace PackageListResponse {
-  export interface LegacyJhsAPIResponseCollection {
+  export interface FirewallAPIResponseCollection {
     errors: Array<Shared.UnnamedSchemaRef3248f24329456e19dfa042fff9986f72>;
 
     messages: Array<Shared.UnnamedSchemaRef3248f24329456e19dfa042fff9986f72>;
@@ -77,10 +77,10 @@ export namespace PackageListResponse {
      */
     success: true;
 
-    result_info?: LegacyJhsAPIResponseCollection.ResultInfo;
+    result_info?: FirewallAPIResponseCollection.ResultInfo;
   }
 
-  export namespace LegacyJhsAPIResponseCollection {
+  export namespace FirewallAPIResponseCollection {
     export interface ResultInfo {
       /**
        * Total number of results for the requested service
@@ -105,13 +105,13 @@ export namespace PackageListResponse {
   }
 
   export interface Result {
-    result?: Array<Result.LegacyJhsPackageDefinition | Result.LegacyJhsAnomalyPackage>;
+    result?: Array<Result.FirewallPackageDefinition | Result.FirewallAnomalyPackage>;
   }
 
   export namespace Result {
-    export interface LegacyJhsPackageDefinition {
+    export interface FirewallPackageDefinition {
       /**
-       * The unique identifier of a WAF package.
+       * Identifier
        */
       id: string;
 
@@ -150,9 +150,9 @@ export namespace PackageListResponse {
       status?: 'active';
     }
 
-    export interface LegacyJhsAnomalyPackage {
+    export interface FirewallAnomalyPackage {
       /**
-       * The unique identifier of a WAF package.
+       * Identifier
        */
       id: string;
 
@@ -197,10 +197,10 @@ export namespace PackageListResponse {
   }
 }
 
-export type PackageGetResponse = PackageGetResponse.LegacyJhsAPIResponseSingle | PackageGetResponse.Result;
+export type PackageGetResponse = PackageGetResponse.FirewallAPIResponseSingle | PackageGetResponse.Result;
 
 export namespace PackageGetResponse {
-  export interface LegacyJhsAPIResponseSingle {
+  export interface FirewallAPIResponseSingle {
     errors: Array<Shared.UnnamedSchemaRef3248f24329456e19dfa042fff9986f72>;
 
     messages: Array<Shared.UnnamedSchemaRef3248f24329456e19dfa042fff9986f72>;
@@ -247,16 +247,17 @@ export namespace Packages {
   export import PackageListResponsesV4PagePaginationArray = PackagesAPI.PackageListResponsesV4PagePaginationArray;
   export import PackageListParams = PackagesAPI.PackageListParams;
   export import Groups = GroupsAPI.Groups;
-  export import WAFManagedRulesGroup = GroupsAPI.WAFManagedRulesGroup;
-  export import WAFManagedRulesGroupsV4PagePaginationArray = GroupsAPI.WAFManagedRulesGroupsV4PagePaginationArray;
+  export import Group = GroupsAPI.Group;
+  export import GroupsV4PagePaginationArray = GroupsAPI.GroupsV4PagePaginationArray;
   export import GroupListParams = GroupsAPI.GroupListParams;
   export import GroupEditParams = GroupsAPI.GroupEditParams;
   export import GroupGetParams = GroupsAPI.GroupGetParams;
   export import Rules = RulesAPI.Rules;
+  export import AllowedModesAnomalyItem = RulesAPI.AllowedModesAnomalyItem;
+  export import Rule = RulesAPI.Rule;
   export import UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5 = RulesAPI.UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5;
-  export import WAFManagedRulesRule = RulesAPI.WAFManagedRulesRule;
   export import RuleEditResponse = RulesAPI.RuleEditResponse;
-  export import WAFManagedRulesRulesV4PagePaginationArray = RulesAPI.WAFManagedRulesRulesV4PagePaginationArray;
+  export import RulesV4PagePaginationArray = RulesAPI.RulesV4PagePaginationArray;
   export import RuleListParams = RulesAPI.RuleListParams;
   export import RuleEditParams = RulesAPI.RuleEditParams;
   export import RuleGetParams = RulesAPI.RuleGetParams;

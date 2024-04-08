@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from 'cloudflare/resource';
-import * as RadarAPI from 'cloudflare/resources/radar/radar';
 import * as ConnectionTamperingAPI from 'cloudflare/resources/radar/connection-tampering';
 import * as DatasetsAPI from 'cloudflare/resources/radar/datasets';
 import * as SearchAPI from 'cloudflare/resources/radar/search';
@@ -129,17 +128,6 @@ export interface UnnamedSchemaRefC5858f1f916a921846e0b6159af470a7 {
 }
 
 export namespace Radar {
-  export import UnnamedSchemaRef16e559c45a31db5480e21fbe904b2e42 = RadarAPI.UnnamedSchemaRef16e559c45a31db5480e21fbe904b2e42;
-  export import UnnamedSchemaRef4124a22436f90127c7fa2c4543219752 = RadarAPI.UnnamedSchemaRef4124a22436f90127c7fa2c4543219752;
-  export import UnnamedSchemaRef73de8b634bb48667e28a6c6c56080c51 = RadarAPI.UnnamedSchemaRef73de8b634bb48667e28a6c6c56080c51;
-  export import UnnamedSchemaRef75bae70cf28e6bcef364b9840db3bdeb = RadarAPI.UnnamedSchemaRef75bae70cf28e6bcef364b9840db3bdeb;
-  export import UnnamedSchemaRef7826220e105d84352ba1108d9ed88e55 = RadarAPI.UnnamedSchemaRef7826220e105d84352ba1108d9ed88e55;
-  export import UnnamedSchemaRef83a14d589e799bc901b9ccc870251d09 = RadarAPI.UnnamedSchemaRef83a14d589e799bc901b9ccc870251d09;
-  export import UnnamedSchemaRef8b383e904d9fb02521257ef9cc77d297 = RadarAPI.UnnamedSchemaRef8b383e904d9fb02521257ef9cc77d297;
-  export import UnnamedSchemaRef9002274ed7cb7f3dc567421e31529a3a = RadarAPI.UnnamedSchemaRef9002274ed7cb7f3dc567421e31529a3a;
-  export import UnnamedSchemaRefB5f3bd1840490bc487ffef84567807b1 = RadarAPI.UnnamedSchemaRefB5f3bd1840490bc487ffef84567807b1;
-  export import UnnamedSchemaRefBaac9d7da12de53e99142f8ecd3982e5 = RadarAPI.UnnamedSchemaRefBaac9d7da12de53e99142f8ecd3982e5;
-  export import UnnamedSchemaRefC5858f1f916a921846e0b6159af470a7 = RadarAPI.UnnamedSchemaRefC5858f1f916a921846e0b6159af470a7;
   export import Annotations = AnnotationsAPI.Annotations;
   export import BGP = BGPAPI.BGP;
   export import BGPTimeseriesResponse = BGPAPI.BGPTimeseriesResponse;

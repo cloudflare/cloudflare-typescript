@@ -4,6 +4,8 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { type Response } from 'cloudflare/_shims/index';
 import * as ScriptsAPI from 'cloudflare/resources/workers/scripts/scripts';
+import * as Shared from 'cloudflare/resources/shared';
+import * as WorkersAPI from 'cloudflare/resources/workers/workers';
 import * as BindingsAPI from 'cloudflare/resources/workers/scripts/bindings';
 import * as ContentAPI from 'cloudflare/resources/workers/scripts/content';
 import * as ContentV2API from 'cloudflare/resources/workers/scripts/content-v2';
@@ -34,29 +36,22 @@ export class Scripts extends APIResource {
     scriptName: string,
     params: ScriptUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WorkersScript> {
+  ): Core.APIPromise<Script> {
     const { account_id, rollback_to, ...body } = params;
     return (
       this._client.put(
         `/accounts/${account_id}/workers/scripts/${scriptName}`,
         maybeMultipartFormRequestOptions({ query: { rollback_to }, body, ...options }),
-      ) as Core.APIPromise<{ result: WorkersScript }>
+      ) as Core.APIPromise<{ result: Script }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetch a list of uploaded workers.
    */
-  list(
-    params: ScriptListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<WorkersScriptsSinglePage, WorkersScript> {
+  list(params: ScriptListParams, options?: Core.RequestOptions): Core.PagePromise<ScriptsSinglePage, Script> {
     const { account_id } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/workers/scripts`,
-      WorkersScriptsSinglePage,
-      options,
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/workers/scripts`, ScriptsSinglePage, options);
   }
 
   /**
@@ -89,9 +84,9 @@ export class Scripts extends APIResource {
   }
 }
 
-export class WorkersScriptsSinglePage extends SinglePage<WorkersScript> {}
+export class ScriptsSinglePage extends SinglePage<Script> {}
 
-export interface WorkersScript {
+export interface Script {
   /**
    * The id of the script in the Workers system. Usually the script name.
    */
@@ -130,7 +125,7 @@ export interface WorkersScript {
   /**
    * List of Workers that will consume logs from the attached Worker.
    */
-  tail_consumers?: Array<WorkersScript.TailConsumer>;
+  tail_consumers?: Array<TailAPI.ConsumerScriptItem>;
 
   /**
    * Specifies the usage model for the Worker (e.g. 'bundled' or 'unbound').
@@ -138,26 +133,29 @@ export interface WorkersScript {
   usage_model?: string;
 }
 
-export namespace WorkersScript {
+export interface Setting {
+  errors: Array<Shared.UnnamedSchemaRef3248f24329456e19dfa042fff9986f72>;
+
+  messages: Array<Shared.UnnamedSchemaRef3248f24329456e19dfa042fff9986f72>;
+
+  result: SettingsItem;
+
   /**
-   * A reference to a script that will consume logs from the attached Worker.
+   * Whether the API call was successful
    */
-  export interface TailConsumer {
-    /**
-     * Name of Worker that is to be the consumer.
-     */
-    service: string;
+  success: true;
+}
 
-    /**
-     * Optional environment if the Worker utilizes one.
-     */
-    environment?: string;
+export interface SettingsItem {
+  /**
+   * Whether Logpush is turned on for the Worker.
+   */
+  logpush?: boolean;
 
-    /**
-     * Optional dispatch namespace the script belongs to.
-     */
-    namespace?: string;
-  }
+  /**
+   * List of Workers that will consume logs from the attached Worker.
+   */
+  tail_consumers?: Array<TailAPI.ConsumerScriptItem>;
 }
 
 export type ScriptUpdateParams = ScriptUpdateParams.Variant0 | ScriptUpdateParams.Variant1;
@@ -240,9 +238,9 @@ export namespace ScriptUpdateParams {
       /**
        * Migrations to apply for Durable Objects associated with this Worker.
        */
-      migrations?: Metadata.WorkersSingleStepMigrations | Metadata.WorkersSteppedMigrations;
+      migrations?: WorkersAPI.SingleStepMigration | WorkersAPI.SteppedMigration;
 
-      placement?: Metadata.Placement;
+      placement?: WorkersAPI.PlacementConfiguration;
 
       /**
        * List of strings to use as tags for this Worker
@@ -252,7 +250,7 @@ export namespace ScriptUpdateParams {
       /**
        * List of Workers that will consume logs from the attached Worker.
        */
-      tail_consumers?: Array<Metadata.TailConsumer>;
+      tail_consumers?: Array<TailAPI.ConsumerScriptItem>;
 
       /**
        * Usage model to apply to invocations.
@@ -263,149 +261,6 @@ export namespace ScriptUpdateParams {
        * Key-value pairs to use as tags for this version of this Worker
        */
       version_tags?: unknown;
-    }
-
-    export namespace Metadata {
-      /**
-       * A single set of migrations to apply.
-       */
-      export interface WorkersSingleStepMigrations {
-        /**
-         * A list of classes to delete Durable Object namespaces from.
-         */
-        deleted_classes?: Array<string>;
-
-        /**
-         * A list of classes to create Durable Object namespaces from.
-         */
-        new_classes?: Array<string>;
-
-        /**
-         * Tag to set as the latest migration tag.
-         */
-        new_tag?: string;
-
-        /**
-         * Tag used to verify against the latest migration tag for this Worker. If they
-         * don't match, the upload is rejected.
-         */
-        old_tag?: string;
-
-        /**
-         * A list of classes with Durable Object namespaces that were renamed.
-         */
-        renamed_classes?: Array<WorkersSingleStepMigrations.RenamedClass>;
-
-        /**
-         * A list of transfers for Durable Object namespaces from a different Worker and
-         * class to a class defined in this Worker.
-         */
-        transferred_classes?: Array<WorkersSingleStepMigrations.TransferredClass>;
-      }
-
-      export namespace WorkersSingleStepMigrations {
-        export interface RenamedClass {
-          from?: string;
-
-          to?: string;
-        }
-
-        export interface TransferredClass {
-          from?: string;
-
-          from_script?: string;
-
-          to?: string;
-        }
-      }
-
-      export interface WorkersSteppedMigrations {
-        /**
-         * Tag to set as the latest migration tag.
-         */
-        new_tag?: string;
-
-        /**
-         * Tag used to verify against the latest migration tag for this Worker. If they
-         * don't match, the upload is rejected.
-         */
-        old_tag?: string;
-
-        /**
-         * Migrations to apply in order.
-         */
-        steps?: Array<WorkersSteppedMigrations.Step>;
-      }
-
-      export namespace WorkersSteppedMigrations {
-        export interface Step {
-          /**
-           * A list of classes to delete Durable Object namespaces from.
-           */
-          deleted_classes?: Array<string>;
-
-          /**
-           * A list of classes to create Durable Object namespaces from.
-           */
-          new_classes?: Array<string>;
-
-          /**
-           * A list of classes with Durable Object namespaces that were renamed.
-           */
-          renamed_classes?: Array<Step.RenamedClass>;
-
-          /**
-           * A list of transfers for Durable Object namespaces from a different Worker and
-           * class to a class defined in this Worker.
-           */
-          transferred_classes?: Array<Step.TransferredClass>;
-        }
-
-        export namespace Step {
-          export interface RenamedClass {
-            from?: string;
-
-            to?: string;
-          }
-
-          export interface TransferredClass {
-            from?: string;
-
-            from_script?: string;
-
-            to?: string;
-          }
-        }
-      }
-
-      export interface Placement {
-        /**
-         * Enables
-         * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
-         * Only `"smart"` is currently supported
-         */
-        mode?: 'smart';
-      }
-
-      /**
-       * A reference to a script that will consume logs from the attached Worker.
-       */
-      export interface TailConsumer {
-        /**
-         * Name of Worker that is to be the consumer.
-         */
-        service: string;
-
-        /**
-         * Optional environment if the Worker utilizes one.
-         */
-        environment?: string;
-
-        /**
-         * Optional dispatch namespace the script belongs to.
-         */
-        namespace?: string;
-      }
     }
   }
 
@@ -464,14 +319,16 @@ export interface ScriptGetParams {
 }
 
 export namespace Scripts {
-  export import WorkersScript = ScriptsAPI.WorkersScript;
-  export import WorkersScriptsSinglePage = ScriptsAPI.WorkersScriptsSinglePage;
+  export import Script = ScriptsAPI.Script;
+  export import Setting = ScriptsAPI.Setting;
+  export import SettingsItem = ScriptsAPI.SettingsItem;
+  export import ScriptsSinglePage = ScriptsAPI.ScriptsSinglePage;
   export import ScriptUpdateParams = ScriptsAPI.ScriptUpdateParams;
   export import ScriptListParams = ScriptsAPI.ScriptListParams;
   export import ScriptDeleteParams = ScriptsAPI.ScriptDeleteParams;
   export import ScriptGetParams = ScriptsAPI.ScriptGetParams;
   export import Bindings = BindingsAPI.Bindings;
-  export import WorkersBinding = BindingsAPI.WorkersBinding;
+  export import Binding = BindingsAPI.Binding;
   export import BindingGetResponse = BindingsAPI.BindingGetResponse;
   export import BindingGetParams = BindingsAPI.BindingGetParams;
   export import Schedules = SchedulesAPI.Schedules;
@@ -481,6 +338,8 @@ export namespace Scripts {
   export import ScheduleUpdateParams = SchedulesAPI.ScheduleUpdateParams;
   export import ScheduleGetParams = SchedulesAPI.ScheduleGetParams;
   export import Tail = TailAPI.Tail;
+  export import ConsumerScript = TailAPI.ConsumerScript;
+  export import ConsumerScriptItem = TailAPI.ConsumerScriptItem;
   export import TailCreateResponse = TailAPI.TailCreateResponse;
   export import TailGetResponse = TailAPI.TailGetResponse;
   export import TailCreateParams = TailAPI.TailCreateParams;
@@ -496,8 +355,6 @@ export namespace Scripts {
   export import ContentV2 = ContentV2API.ContentV2;
   export import ContentV2GetParams = ContentV2API.ContentV2GetParams;
   export import Settings = SettingsAPI.Settings;
-  export import SettingEditResponse = SettingsAPI.SettingEditResponse;
-  export import SettingGetResponse = SettingsAPI.SettingGetResponse;
   export import SettingEditParams = SettingsAPI.SettingEditParams;
   export import SettingGetParams = SettingsAPI.SettingGetParams;
   export import Deployments = DeploymentsAPI.Deployments;

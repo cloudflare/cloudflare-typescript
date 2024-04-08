@@ -12,13 +12,13 @@ export class LiveInputs extends APIResource {
    * Creates a live input, and returns credentials that you or your users can use to
    * stream live video to Cloudflare Stream.
    */
-  create(params: LiveInputCreateParams, options?: Core.RequestOptions): Core.APIPromise<StreamLiveInput> {
+  create(params: LiveInputCreateParams, options?: Core.RequestOptions): Core.APIPromise<LiveInput> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/stream/live_inputs`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: StreamLiveInput }>
+      }) as Core.APIPromise<{ result: LiveInput }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -29,13 +29,13 @@ export class LiveInputs extends APIResource {
     liveInputIdentifier: string,
     params: LiveInputUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<StreamLiveInput> {
+  ): Core.APIPromise<LiveInput> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/stream/live_inputs/${liveInputIdentifier}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: StreamLiveInput }>
+      }) as Core.APIPromise<{ result: LiveInput }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -77,13 +77,13 @@ export class LiveInputs extends APIResource {
     liveInputIdentifier: string,
     params: LiveInputGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<StreamLiveInput> {
+  ): Core.APIPromise<LiveInput> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/stream/live_inputs/${liveInputIdentifier}`,
         options,
-      ) as Core.APIPromise<{ result: StreamLiveInput }>
+      ) as Core.APIPromise<{ result: LiveInput }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -91,7 +91,7 @@ export class LiveInputs extends APIResource {
 /**
  * Details about a live input.
  */
-export interface StreamLiveInput {
+export interface LiveInput {
   /**
    * The date and time the live input was created.
    */
@@ -122,27 +122,27 @@ export interface StreamLiveInput {
    * most cases, the video will initially be viewable as a live video and transition
    * to on-demand after a condition is satisfied.
    */
-  recording?: StreamLiveInput.Recording;
+  recording?: LiveInput.Recording;
 
   /**
    * Details for streaming to an live input using RTMPS.
    */
-  rtmps?: StreamLiveInput.Rtmps;
+  rtmps?: LiveInput.Rtmps;
 
   /**
    * Details for playback from an live input using RTMPS.
    */
-  rtmpsPlayback?: StreamLiveInput.RtmpsPlayback;
+  rtmpsPlayback?: LiveInput.RtmpsPlayback;
 
   /**
    * Details for streaming to a live input using SRT.
    */
-  srt?: StreamLiveInput.Srt;
+  srt?: LiveInput.Srt;
 
   /**
    * Details for playback from an live input using SRT.
    */
-  srtPlayback?: StreamLiveInput.SrtPlayback;
+  srtPlayback?: LiveInput.SrtPlayback;
 
   /**
    * The connection status of a live input.
@@ -166,15 +166,15 @@ export interface StreamLiveInput {
   /**
    * Details for streaming to a live input using WebRTC.
    */
-  webRTC?: StreamLiveInput.WebRtc;
+  webRTC?: LiveInput.WebRtc;
 
   /**
    * Details for playback from a live input using WebRTC.
    */
-  webRTCPlayback?: StreamLiveInput.WebRtcPlayback;
+  webRTCPlayback?: LiveInput.WebRtcPlayback;
 }
 
-export namespace StreamLiveInput {
+export namespace LiveInput {
   /**
    * Records the input to a Cloudflare Stream video. Behavior depends on the mode. In
    * most cases, the video will initially be viewable as a live video and transition
@@ -524,7 +524,7 @@ export interface LiveInputGetParams {
 }
 
 export namespace LiveInputs {
-  export import StreamLiveInput = LiveInputsAPI.StreamLiveInput;
+  export import LiveInput = LiveInputsAPI.LiveInput;
   export import LiveInputListResponse = LiveInputsAPI.LiveInputListResponse;
   export import LiveInputCreateParams = LiveInputsAPI.LiveInputCreateParams;
   export import LiveInputUpdateParams = LiveInputsAPI.LiveInputUpdateParams;
@@ -532,8 +532,8 @@ export namespace LiveInputs {
   export import LiveInputDeleteParams = LiveInputsAPI.LiveInputDeleteParams;
   export import LiveInputGetParams = LiveInputsAPI.LiveInputGetParams;
   export import Outputs = OutputsAPI.Outputs;
-  export import StreamOutput = OutputsAPI.StreamOutput;
-  export import StreamOutputsSinglePage = OutputsAPI.StreamOutputsSinglePage;
+  export import Output = OutputsAPI.Output;
+  export import OutputsSinglePage = OutputsAPI.OutputsSinglePage;
   export import OutputCreateParams = OutputsAPI.OutputCreateParams;
   export import OutputUpdateParams = OutputsAPI.OutputUpdateParams;
   export import OutputListParams = OutputsAPI.OutputListParams;

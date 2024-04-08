@@ -77,12 +77,12 @@ export class UARules extends APIResource {
     id: string,
     body: UARuleDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<UARuleDeleteResponse | null> {
+  ): Core.APIPromise<UARuleDeleteResponse> {
     return (
       this._client.delete(`/zones/${zoneIdentifier}/firewall/ua_rules/${id}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: UARuleDeleteResponse | null }>
+      }) as Core.APIPromise<{ result: UARuleDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -103,52 +103,6 @@ export class UARules extends APIResource {
 }
 
 export class UARuleListResponsesV4PagePaginationArray extends V4PagePaginationArray<UARuleListResponse> {}
-
-export interface FirewallUserAgentRule {
-  /**
-   * The unique identifier of the User Agent Blocking rule.
-   */
-  id?: string;
-
-  /**
-   * The configuration object for the current rule.
-   */
-  configuration?: FirewallUserAgentRule.Configuration;
-
-  /**
-   * An informative summary of the rule.
-   */
-  description?: string;
-
-  /**
-   * The action to apply to a matched request.
-   */
-  mode?: 'block' | 'challenge' | 'js_challenge' | 'managed_challenge';
-
-  /**
-   * When true, indicates that the rule is currently paused.
-   */
-  paused?: boolean;
-}
-
-export namespace FirewallUserAgentRule {
-  /**
-   * The configuration object for the current rule.
-   */
-  export interface Configuration {
-    /**
-     * The configuration target for this rule. You must set the target to `ua` for User
-     * Agent Blocking rules.
-     */
-    target?: string;
-
-    /**
-     * The exact user agent string to match. This value will be compared to the
-     * received `User-Agent` HTTP header value.
-     */
-    value?: string;
-  }
-}
 
 export interface UARuleListResponse {
   /**
@@ -227,7 +181,6 @@ export interface UARuleListParams extends V4PagePaginationArrayParams {
 export type UARuleDeleteParams = unknown;
 
 export namespace UARules {
-  export import FirewallUserAgentRule = UARulesAPI.FirewallUserAgentRule;
   export import UARuleListResponse = UARulesAPI.UARuleListResponse;
   export import UARuleDeleteResponse = UARulesAPI.UARuleDeleteResponse;
   export import UARuleListResponsesV4PagePaginationArray = UARulesAPI.UARuleListResponsesV4PagePaginationArray;

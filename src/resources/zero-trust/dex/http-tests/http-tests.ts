@@ -17,26 +17,26 @@ export class HTTPTests extends APIResource {
     testId: string,
     params: HTTPTestGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DigitalExperienceMonitoringHTTPDetails> {
+  ): Core.APIPromise<HTTPDetails> {
     const { account_id, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/dex/http-tests/${testId}`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: DigitalExperienceMonitoringHTTPDetails }>
+      }) as Core.APIPromise<{ result: HTTPDetails }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface DigitalExperienceMonitoringHTTPDetails {
+export interface HTTPDetails {
   /**
    * The url of the HTTP synthetic application test
    */
   host?: string;
 
-  httpStats?: DigitalExperienceMonitoringHTTPDetails.HTTPStats | null;
+  httpStats?: HTTPDetails.HTTPStats | null;
 
-  httpStatsByColo?: Array<DigitalExperienceMonitoringHTTPDetails.HTTPStatsByColo>;
+  httpStatsByColo?: Array<HTTPDetails.HTTPStatsByColo>;
 
   /**
    * The interval at which the HTTP synthetic application test is set to run.
@@ -60,17 +60,17 @@ export interface DigitalExperienceMonitoringHTTPDetails {
   targeted?: boolean;
 }
 
-export namespace DigitalExperienceMonitoringHTTPDetails {
+export namespace HTTPDetails {
   export interface HTTPStats {
     availabilityPct: HTTPStats.AvailabilityPct;
 
-    dnsResponseTimeMs: HTTPStats.DNSResponseTimeMs;
+    dnsResponseTimeMs: PercentilesAPI.TestStatOverTime;
 
     httpStatusCode: Array<HTTPStats.HTTPStatusCode>;
 
-    resourceFetchTimeMs: HTTPStats.ResourceFetchTimeMs;
+    resourceFetchTimeMs: PercentilesAPI.TestStatOverTime;
 
-    serverResponseTimeMs: HTTPStats.ServerResponseTimeMs;
+    serverResponseTimeMs: PercentilesAPI.TestStatOverTime;
 
     /**
      * Count of unique devices that have run this test in the given time period
@@ -106,33 +106,6 @@ export namespace DigitalExperienceMonitoringHTTPDetails {
       }
     }
 
-    export interface DNSResponseTimeMs {
-      slots: Array<DNSResponseTimeMs.Slot>;
-
-      /**
-       * average observed in the time period
-       */
-      avg?: number | null;
-
-      /**
-       * highest observed in the time period
-       */
-      max?: number | null;
-
-      /**
-       * lowest observed in the time period
-       */
-      min?: number | null;
-    }
-
-    export namespace DNSResponseTimeMs {
-      export interface Slot {
-        timestamp: string;
-
-        value: number;
-      }
-    }
-
     export interface HTTPStatusCode {
       status200: number;
 
@@ -144,60 +117,6 @@ export namespace DigitalExperienceMonitoringHTTPDetails {
 
       timestamp: string;
     }
-
-    export interface ResourceFetchTimeMs {
-      slots: Array<ResourceFetchTimeMs.Slot>;
-
-      /**
-       * average observed in the time period
-       */
-      avg?: number | null;
-
-      /**
-       * highest observed in the time period
-       */
-      max?: number | null;
-
-      /**
-       * lowest observed in the time period
-       */
-      min?: number | null;
-    }
-
-    export namespace ResourceFetchTimeMs {
-      export interface Slot {
-        timestamp: string;
-
-        value: number;
-      }
-    }
-
-    export interface ServerResponseTimeMs {
-      slots: Array<ServerResponseTimeMs.Slot>;
-
-      /**
-       * average observed in the time period
-       */
-      avg?: number | null;
-
-      /**
-       * highest observed in the time period
-       */
-      max?: number | null;
-
-      /**
-       * lowest observed in the time period
-       */
-      min?: number | null;
-    }
-
-    export namespace ServerResponseTimeMs {
-      export interface Slot {
-        timestamp: string;
-
-        value: number;
-      }
-    }
   }
 
   export interface HTTPStatsByColo {
@@ -205,13 +124,13 @@ export namespace DigitalExperienceMonitoringHTTPDetails {
 
     colo: string;
 
-    dnsResponseTimeMs: HTTPStatsByColo.DNSResponseTimeMs;
+    dnsResponseTimeMs: PercentilesAPI.TestStatOverTime;
 
     httpStatusCode: Array<HTTPStatsByColo.HTTPStatusCode>;
 
-    resourceFetchTimeMs: HTTPStatsByColo.ResourceFetchTimeMs;
+    resourceFetchTimeMs: PercentilesAPI.TestStatOverTime;
 
-    serverResponseTimeMs: HTTPStatsByColo.ServerResponseTimeMs;
+    serverResponseTimeMs: PercentilesAPI.TestStatOverTime;
 
     /**
      * Count of unique devices that have run this test in the given time period
@@ -247,33 +166,6 @@ export namespace DigitalExperienceMonitoringHTTPDetails {
       }
     }
 
-    export interface DNSResponseTimeMs {
-      slots: Array<DNSResponseTimeMs.Slot>;
-
-      /**
-       * average observed in the time period
-       */
-      avg?: number | null;
-
-      /**
-       * highest observed in the time period
-       */
-      max?: number | null;
-
-      /**
-       * lowest observed in the time period
-       */
-      min?: number | null;
-    }
-
-    export namespace DNSResponseTimeMs {
-      export interface Slot {
-        timestamp: string;
-
-        value: number;
-      }
-    }
-
     export interface HTTPStatusCode {
       status200: number;
 
@@ -284,60 +176,6 @@ export namespace DigitalExperienceMonitoringHTTPDetails {
       status500: number;
 
       timestamp: string;
-    }
-
-    export interface ResourceFetchTimeMs {
-      slots: Array<ResourceFetchTimeMs.Slot>;
-
-      /**
-       * average observed in the time period
-       */
-      avg?: number | null;
-
-      /**
-       * highest observed in the time period
-       */
-      max?: number | null;
-
-      /**
-       * lowest observed in the time period
-       */
-      min?: number | null;
-    }
-
-    export namespace ResourceFetchTimeMs {
-      export interface Slot {
-        timestamp: string;
-
-        value: number;
-      }
-    }
-
-    export interface ServerResponseTimeMs {
-      slots: Array<ServerResponseTimeMs.Slot>;
-
-      /**
-       * average observed in the time period
-       */
-      avg?: number | null;
-
-      /**
-       * highest observed in the time period
-       */
-      max?: number | null;
-
-      /**
-       * lowest observed in the time period
-       */
-      min?: number | null;
-    }
-
-    export namespace ServerResponseTimeMs {
-      export interface Slot {
-        timestamp: string;
-
-        value: number;
-      }
     }
   }
 }
@@ -377,9 +215,10 @@ export interface HTTPTestGetParams {
 }
 
 export namespace HTTPTests {
-  export import DigitalExperienceMonitoringHTTPDetails = HTTPTestsAPI.DigitalExperienceMonitoringHTTPDetails;
+  export import HTTPDetails = HTTPTestsAPI.HTTPDetails;
   export import HTTPTestGetParams = HTTPTestsAPI.HTTPTestGetParams;
   export import Percentiles = PercentilesAPI.Percentiles;
-  export import DigitalExperienceMonitoringHTTPDetailsPercentiles = PercentilesAPI.DigitalExperienceMonitoringHTTPDetailsPercentiles;
+  export import HTTPDetailsPercentiles = PercentilesAPI.HTTPDetailsPercentiles;
+  export import TestStatOverTime = PercentilesAPI.TestStatOverTime;
   export import PercentileGetParams = PercentilesAPI.PercentileGetParams;
 }

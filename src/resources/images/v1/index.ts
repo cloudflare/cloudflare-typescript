@@ -14,18 +14,20 @@ export {
   V1,
 } from './v1';
 export {
-  ImagesImageKeys,
+  Key,
   UnnamedSchemaRef918e794287a67b5e85126e00cf2d9a95,
   KeyUpdateParams,
   KeyListParams,
   KeyDeleteParams,
   Keys,
 } from './keys';
-export { ImagesImagesStats, StatGetParams, Stats } from './stats';
+export { Stat, StatGetParams, Stats } from './stats';
 export {
   UnnamedSchemaRefD02195de7dadf27801875f36cddfa3a3,
-  V1ImageVariant,
-  V1ImageVariants,
+  Variant,
+  VariantCreateResponse,
+  VariantEditResponse,
+  VariantGetResponse,
   VariantCreateParams,
   VariantListParams,
   VariantDeleteParams,

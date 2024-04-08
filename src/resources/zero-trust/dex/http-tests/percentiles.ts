@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as PercentilesAPI from 'cloudflare/resources/zero-trust/dex/http-tests/percentiles';
+import * as DEXAPI from 'cloudflare/resources/zero-trust/dex/dex';
 
 export class Percentiles extends APIResource {
   /**
@@ -13,90 +14,49 @@ export class Percentiles extends APIResource {
     testId: string,
     params: PercentileGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DigitalExperienceMonitoringHTTPDetailsPercentiles> {
+  ): Core.APIPromise<HTTPDetailsPercentiles> {
     const { account_id, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/dex/http-tests/${testId}/percentiles`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: DigitalExperienceMonitoringHTTPDetailsPercentiles }>
+      }) as Core.APIPromise<{ result: HTTPDetailsPercentiles }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface DigitalExperienceMonitoringHTTPDetailsPercentiles {
-  dnsResponseTimeMs?: DigitalExperienceMonitoringHTTPDetailsPercentiles.DNSResponseTimeMs;
+export interface HTTPDetailsPercentiles {
+  dnsResponseTimeMs?: DEXAPI.Percentiles;
 
-  resourceFetchTimeMs?: DigitalExperienceMonitoringHTTPDetailsPercentiles.ResourceFetchTimeMs;
+  resourceFetchTimeMs?: DEXAPI.Percentiles;
 
-  serverResponseTimeMs?: DigitalExperienceMonitoringHTTPDetailsPercentiles.ServerResponseTimeMs;
+  serverResponseTimeMs?: DEXAPI.Percentiles;
 }
 
-export namespace DigitalExperienceMonitoringHTTPDetailsPercentiles {
-  export interface DNSResponseTimeMs {
-    /**
-     * p50 observed in the time period
-     */
-    p50?: number | null;
+export interface TestStatOverTime {
+  slots: Array<TestStatOverTime.Slot>;
 
-    /**
-     * p90 observed in the time period
-     */
-    p90?: number | null;
+  /**
+   * average observed in the time period
+   */
+  avg?: number | null;
 
-    /**
-     * p95 observed in the time period
-     */
-    p95?: number | null;
+  /**
+   * highest observed in the time period
+   */
+  max?: number | null;
 
-    /**
-     * p99 observed in the time period
-     */
-    p99?: number | null;
-  }
+  /**
+   * lowest observed in the time period
+   */
+  min?: number | null;
+}
 
-  export interface ResourceFetchTimeMs {
-    /**
-     * p50 observed in the time period
-     */
-    p50?: number | null;
+export namespace TestStatOverTime {
+  export interface Slot {
+    timestamp: string;
 
-    /**
-     * p90 observed in the time period
-     */
-    p90?: number | null;
-
-    /**
-     * p95 observed in the time period
-     */
-    p95?: number | null;
-
-    /**
-     * p99 observed in the time period
-     */
-    p99?: number | null;
-  }
-
-  export interface ServerResponseTimeMs {
-    /**
-     * p50 observed in the time period
-     */
-    p50?: number | null;
-
-    /**
-     * p90 observed in the time period
-     */
-    p90?: number | null;
-
-    /**
-     * p95 observed in the time period
-     */
-    p95?: number | null;
-
-    /**
-     * p99 observed in the time period
-     */
-    p99?: number | null;
+    value: number;
   }
 }
 
@@ -130,6 +90,7 @@ export interface PercentileGetParams {
 }
 
 export namespace Percentiles {
-  export import DigitalExperienceMonitoringHTTPDetailsPercentiles = PercentilesAPI.DigitalExperienceMonitoringHTTPDetailsPercentiles;
+  export import HTTPDetailsPercentiles = PercentilesAPI.HTTPDetailsPercentiles;
+  export import TestStatOverTime = PercentilesAPI.TestStatOverTime;
   export import PercentileGetParams = PercentilesAPI.PercentileGetParams;
 }

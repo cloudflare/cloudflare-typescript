@@ -9,7 +9,7 @@ export class Policies extends APIResource {
   /**
    * Create a Page Shield policy.
    */
-  create(params: PolicyCreateParams, options?: Core.RequestOptions): Core.APIPromise<PageShieldPolicy> {
+  create(params: PolicyCreateParams, options?: Core.RequestOptions): Core.APIPromise<Policy> {
     const { zone_id, ...body } = params;
     return this._client.post(`/zones/${zone_id}/page_shield/policies`, { body, ...options });
   }
@@ -21,7 +21,7 @@ export class Policies extends APIResource {
     policyId: string,
     params: PolicyUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PageShieldPolicy> {
+  ): Core.APIPromise<Policy> {
     const { zone_id, ...body } = params;
     return this._client.put(`/zones/${zone_id}/page_shield/policies/${policyId}`, { body, ...options });
   }
@@ -32,13 +32,9 @@ export class Policies extends APIResource {
   list(
     params: PolicyListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<PageShieldPoliciesSinglePage, PageShieldPolicy> {
+  ): Core.PagePromise<PoliciesSinglePage, Policy> {
     const { zone_id } = params;
-    return this._client.getAPIList(
-      `/zones/${zone_id}/page_shield/policies`,
-      PageShieldPoliciesSinglePage,
-      options,
-    );
+    return this._client.getAPIList(`/zones/${zone_id}/page_shield/policies`, PoliciesSinglePage, options);
   }
 
   /**
@@ -55,19 +51,15 @@ export class Policies extends APIResource {
   /**
    * Fetches a Page Shield policy by ID.
    */
-  get(
-    policyId: string,
-    params: PolicyGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PageShieldPolicy> {
+  get(policyId: string, params: PolicyGetParams, options?: Core.RequestOptions): Core.APIPromise<Policy> {
     const { zone_id } = params;
     return this._client.get(`/zones/${zone_id}/page_shield/policies/${policyId}`, options);
   }
 }
 
-export class PageShieldPoliciesSinglePage extends SinglePage<PageShieldPolicy> {}
+export class PoliciesSinglePage extends SinglePage<Policy> {}
 
-export interface PageShieldPolicy {
+export interface Policy {
   /**
    * The ID of the policy
    */
@@ -188,8 +180,8 @@ export interface PolicyGetParams {
 }
 
 export namespace Policies {
-  export import PageShieldPolicy = PoliciesAPI.PageShieldPolicy;
-  export import PageShieldPoliciesSinglePage = PoliciesAPI.PageShieldPoliciesSinglePage;
+  export import Policy = PoliciesAPI.Policy;
+  export import PoliciesSinglePage = PoliciesAPI.PoliciesSinglePage;
   export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
   export import PolicyUpdateParams = PoliciesAPI.PolicyUpdateParams;
   export import PolicyListParams = PoliciesAPI.PolicyListParams;

@@ -4,7 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as DomainHistoryAPI from 'cloudflare/resources/intel/domain-history';
 
-export class DomainHistory extends APIResource {
+export class DomainHistoryResource extends APIResource {
   /**
    * Get Domain History
    */
@@ -22,13 +22,13 @@ export class DomainHistory extends APIResource {
   }
 }
 
-export interface IntelDomainHistory {
-  categorizations?: Array<IntelDomainHistory.Categorization>;
+export interface DomainHistory {
+  categorizations?: Array<DomainHistory.Categorization>;
 
   domain?: string;
 }
 
-export namespace IntelDomainHistory {
+export namespace DomainHistory {
   export interface Categorization {
     categories?: Array<unknown>;
 
@@ -38,7 +38,7 @@ export namespace IntelDomainHistory {
   }
 }
 
-export type DomainHistoryGetResponse = Array<IntelDomainHistory>;
+export type DomainHistoryGetResponse = Array<DomainHistory>;
 
 export interface DomainHistoryGetParams {
   /**
@@ -52,8 +52,8 @@ export interface DomainHistoryGetParams {
   domain?: string;
 }
 
-export namespace DomainHistory {
-  export import IntelDomainHistory = DomainHistoryAPI.IntelDomainHistory;
+export namespace DomainHistoryResource {
+  export import DomainHistory = DomainHistoryAPI.DomainHistory;
   export import DomainHistoryGetResponse = DomainHistoryAPI.DomainHistoryGetResponse;
   export import DomainHistoryGetParams = DomainHistoryAPI.DomainHistoryGetParams;
 }

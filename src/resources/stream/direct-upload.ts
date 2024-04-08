@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as DirectUploadAPI from 'cloudflare/resources/stream/direct-upload';
+import * as StreamAPI from 'cloudflare/resources/stream/stream';
 import * as WatermarksAPI from 'cloudflare/resources/stream/watermarks';
 
 export class DirectUpload extends APIResource {
@@ -43,7 +44,7 @@ export interface DirectUploadCreateResponse {
    */
   uploadURL?: string;
 
-  watermark?: WatermarksAPI.StreamWatermarks;
+  watermark?: WatermarksAPI.Watermaks;
 }
 
 export interface DirectUploadCreateParams {
@@ -65,7 +66,7 @@ export interface DirectUploadCreateParams {
    * domains in an array and use `*` for wildcard subdomains. Empty arrays allow the
    * video to be viewed on any origin.
    */
-  allowedOrigins?: Array<string>;
+  allowedOrigins?: Array<StreamAPI.AllowedOriginsItem>;
 
   /**
    * Body param: A user-defined identifier for the media creator.

@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
-import * as SnippetsAPI from 'cloudflare/resources/snippets/snippets';
 import * as Shared from 'cloudflare/resources/shared';
 import * as ContentAPI from 'cloudflare/resources/snippets/content';
 import * as RulesAPI from 'cloudflare/resources/snippets/rules';
@@ -120,9 +119,6 @@ export namespace SnippetUpdateParams {
 }
 
 export namespace Snippets {
-  export import Snippet = SnippetsAPI.Snippet;
-  export import SnippetsSinglePage = SnippetsAPI.SnippetsSinglePage;
-  export import SnippetUpdateParams = SnippetsAPI.SnippetUpdateParams;
   export import Content = ContentAPI.Content;
   export import Rules = RulesAPI.Rules;
   export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;

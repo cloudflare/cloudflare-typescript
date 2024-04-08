@@ -48,7 +48,7 @@ describe('resource packages', () => {
   test.skip('get', async () => {
     const responsePromise = cloudflare.firewall.waf.packages.get(
       '023e105f4ecef8ad9ca31a8372d0c353',
-      'a25a9a7e9c00afc1fb2e0245519d725b',
+      '023e105f4ecef8ad9ca31a8372d0c353',
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -65,7 +65,7 @@ describe('resource packages', () => {
     await expect(
       cloudflare.firewall.waf.packages.get(
         '023e105f4ecef8ad9ca31a8372d0c353',
-        'a25a9a7e9c00afc1fb2e0245519d725b',
+        '023e105f4ecef8ad9ca31a8372d0c353',
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);

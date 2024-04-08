@@ -12,23 +12,17 @@ export class AppTypes extends APIResource {
   list(
     params: AppTypeListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<ZeroTrustGatewayAppTypesSinglePage, ZeroTrustGatewayAppTypes> {
+  ): Core.PagePromise<AppTypesSinglePage, AppType> {
     const { account_id } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/gateway/app_types`,
-      ZeroTrustGatewayAppTypesSinglePage,
-      options,
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/gateway/app_types`, AppTypesSinglePage, options);
   }
 }
 
-export class ZeroTrustGatewayAppTypesSinglePage extends SinglePage<ZeroTrustGatewayAppTypes> {}
+export class AppTypesSinglePage extends SinglePage<AppType> {}
 
-export type ZeroTrustGatewayAppTypes =
-  | ZeroTrustGatewayAppTypes.ZeroTrustGatewayApplication
-  | ZeroTrustGatewayAppTypes.ZeroTrustGatewayApplicationType;
+export type AppType = AppType.ZeroTrustGatewayApplication | AppType.ZeroTrustGatewayApplicationType;
 
-export namespace ZeroTrustGatewayAppTypes {
+export namespace AppType {
   export interface ZeroTrustGatewayApplication {
     /**
      * The identifier for this application. There is only one application per ID.
@@ -78,7 +72,7 @@ export interface AppTypeListParams {
 }
 
 export namespace AppTypes {
-  export import ZeroTrustGatewayAppTypes = AppTypesAPI.ZeroTrustGatewayAppTypes;
-  export import ZeroTrustGatewayAppTypesSinglePage = AppTypesAPI.ZeroTrustGatewayAppTypesSinglePage;
+  export import AppType = AppTypesAPI.AppType;
+  export import AppTypesSinglePage = AppTypesAPI.AppTypesSinglePage;
   export import AppTypeListParams = AppTypesAPI.AppTypeListParams;
 }

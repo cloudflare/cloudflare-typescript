@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as PagerulesAPI from 'cloudflare/resources/pagerules/pagerules';
 import * as Shared from 'cloudflare/resources/shared';
 import * as SettingsAPI from 'cloudflare/resources/pagerules/settings';
 
@@ -104,7 +103,36 @@ export class Pagerules extends APIResource {
   }
 }
 
-export interface ZonesPagerule {
+export interface ActionItem {
+  /**
+   * The timestamp of when the override was last modified.
+   */
+  modified_on?: string;
+
+  /**
+   * The type of route.
+   */
+  name?: 'forward_url';
+
+  value?: ActionItem.Value;
+}
+
+export namespace ActionItem {
+  export interface Value {
+    /**
+     * The response type for the URL redirect.
+     */
+    type?: 'temporary' | 'permanent';
+
+    /**
+     * The URL to redirect the request to. Notes: ${num} refers to the position of '\*'
+     * in the constraint value.
+     */
+    url?: string;
+  }
+}
+
+export interface PageRule {
   /**
    * Identifier
    */
@@ -114,7 +142,7 @@ export interface ZonesPagerule {
    * The set of actions to perform if the targets of this rule match the request.
    * Actions can redirect to another URL or override settings, but not both.
    */
-  actions: Array<ZonesPagerule.Action>;
+  actions: Array<ActionItem>;
 
   /**
    * The timestamp of when the Page Rule was created.
@@ -143,74 +171,105 @@ export interface ZonesPagerule {
   /**
    * The rule targets to evaluate on each request.
    */
-  targets: Array<ZonesPagerule.Target>;
+  targets: Array<TargesItem>;
 }
 
-export namespace ZonesPagerule {
-  export interface Action {
-    /**
-     * The timestamp of when the override was last modified.
-     */
-    modified_on?: string;
-
-    /**
-     * The type of route.
-     */
-    name?: 'forward_url';
-
-    value?: Action.Value;
-  }
-
-  export namespace Action {
-    export interface Value {
-      /**
-       * The response type for the URL redirect.
-       */
-      type?: 'temporary' | 'permanent';
-
-      /**
-       * The URL to redirect the request to. Notes: ${num} refers to the position of '\*'
-       * in the constraint value.
-       */
-      url?: string;
-    }
-  }
+export interface Route {
+  /**
+   * The timestamp of when the override was last modified.
+   */
+  modified_on?: string;
 
   /**
-   * A request condition target.
+   * The type of route.
    */
-  export interface Target {
+  name?: 'forward_url';
+
+  value?: Route.Value;
+}
+
+export namespace Route {
+  export interface Value {
     /**
-     * String constraint.
+     * The response type for the URL redirect.
      */
-    constraint: Target.Constraint;
+    type?: 'temporary' | 'permanent';
 
     /**
-     * A target based on the URL of the request.
+     * The URL to redirect the request to. Notes: ${num} refers to the position of '\*'
+     * in the constraint value.
      */
-    target: 'url';
-  }
-
-  export namespace Target {
-    /**
-     * String constraint.
-     */
-    export interface Constraint {
-      /**
-       * The matches operator can use asterisks and pipes as wildcard and 'or' operators.
-       */
-      operator: 'matches' | 'contains' | 'equals' | 'not_equal' | 'not_contain';
-
-      /**
-       * The URL pattern to match against the current request. The pattern may contain up
-       * to four asterisks ('\*') as placeholders.
-       */
-      value: string;
-    }
+    url?: string;
   }
 }
 
-export type PageruleListResponse = Array<ZonesPagerule>;
+/**
+ * A request condition target.
+ */
+export interface TargesItem {
+  /**
+   * String constraint.
+   */
+  constraint: TargesItem.Constraint;
+
+  /**
+   * A target based on the URL of the request.
+   */
+  target: 'url';
+}
+
+export namespace TargesItem {
+  /**
+   * String constraint.
+   */
+  export interface Constraint {
+    /**
+     * The matches operator can use asterisks and pipes as wildcard and 'or' operators.
+     */
+    operator: 'matches' | 'contains' | 'equals' | 'not_equal' | 'not_contain';
+
+    /**
+     * The URL pattern to match against the current request. The pattern may contain up
+     * to four asterisks ('\*') as placeholders.
+     */
+    value: string;
+  }
+}
+
+/**
+ * URL target.
+ */
+export interface URLTarget {
+  /**
+   * String constraint.
+   */
+  constraint?: URLTarget.Constraint;
+
+  /**
+   * A target based on the URL of the request.
+   */
+  target?: 'url';
+}
+
+export namespace URLTarget {
+  /**
+   * String constraint.
+   */
+  export interface Constraint {
+    /**
+     * The matches operator can use asterisks and pipes as wildcard and 'or' operators.
+     */
+    operator: 'matches' | 'contains' | 'equals' | 'not_equal' | 'not_contain';
+
+    /**
+     * The URL pattern to match against the current request. The pattern may contain up
+     * to four asterisks ('\*') as placeholders.
+     */
+    value: string;
+  }
+}
+
+export type PageruleListResponse = Array<PageRule>;
 
 export interface PageruleDeleteResponse {
   /**
@@ -229,12 +288,12 @@ export interface PageruleCreateParams {
    * Body param: The set of actions to perform if the targets of this rule match the
    * request. Actions can redirect to another URL or override settings, but not both.
    */
-  actions: Array<PageruleCreateParams.Action>;
+  actions: Array<ActionItem>;
 
   /**
    * Body param: The rule targets to evaluate on each request.
    */
-  targets: Array<PageruleCreateParams.Target>;
+  targets: Array<TargesItem>;
 
   /**
    * Body param: The priority of the rule, used to define which Page Rule is
@@ -249,65 +308,6 @@ export interface PageruleCreateParams {
    * Body param: The status of the Page Rule.
    */
   status?: 'active' | 'disabled';
-}
-
-export namespace PageruleCreateParams {
-  export interface Action {
-    /**
-     * The type of route.
-     */
-    name?: 'forward_url';
-
-    value?: Action.Value;
-  }
-
-  export namespace Action {
-    export interface Value {
-      /**
-       * The response type for the URL redirect.
-       */
-      type?: 'temporary' | 'permanent';
-
-      /**
-       * The URL to redirect the request to. Notes: ${num} refers to the position of '\*'
-       * in the constraint value.
-       */
-      url?: string;
-    }
-  }
-
-  /**
-   * A request condition target.
-   */
-  export interface Target {
-    /**
-     * String constraint.
-     */
-    constraint: Target.Constraint;
-
-    /**
-     * A target based on the URL of the request.
-     */
-    target: 'url';
-  }
-
-  export namespace Target {
-    /**
-     * String constraint.
-     */
-    export interface Constraint {
-      /**
-       * The matches operator can use asterisks and pipes as wildcard and 'or' operators.
-       */
-      operator: 'matches' | 'contains' | 'equals' | 'not_equal' | 'not_contain';
-
-      /**
-       * The URL pattern to match against the current request. The pattern may contain up
-       * to four asterisks ('\*') as placeholders.
-       */
-      value: string;
-    }
-  }
 }
 
 export interface PageruleUpdateParams {
@@ -320,12 +320,12 @@ export interface PageruleUpdateParams {
    * Body param: The set of actions to perform if the targets of this rule match the
    * request. Actions can redirect to another URL or override settings, but not both.
    */
-  actions: Array<PageruleUpdateParams.Action>;
+  actions: Array<ActionItem>;
 
   /**
    * Body param: The rule targets to evaluate on each request.
    */
-  targets: Array<PageruleUpdateParams.Target>;
+  targets: Array<TargesItem>;
 
   /**
    * Body param: The priority of the rule, used to define which Page Rule is
@@ -340,65 +340,6 @@ export interface PageruleUpdateParams {
    * Body param: The status of the Page Rule.
    */
   status?: 'active' | 'disabled';
-}
-
-export namespace PageruleUpdateParams {
-  export interface Action {
-    /**
-     * The type of route.
-     */
-    name?: 'forward_url';
-
-    value?: Action.Value;
-  }
-
-  export namespace Action {
-    export interface Value {
-      /**
-       * The response type for the URL redirect.
-       */
-      type?: 'temporary' | 'permanent';
-
-      /**
-       * The URL to redirect the request to. Notes: ${num} refers to the position of '\*'
-       * in the constraint value.
-       */
-      url?: string;
-    }
-  }
-
-  /**
-   * A request condition target.
-   */
-  export interface Target {
-    /**
-     * String constraint.
-     */
-    constraint: Target.Constraint;
-
-    /**
-     * A target based on the URL of the request.
-     */
-    target: 'url';
-  }
-
-  export namespace Target {
-    /**
-     * String constraint.
-     */
-    export interface Constraint {
-      /**
-       * The matches operator can use asterisks and pipes as wildcard and 'or' operators.
-       */
-      operator: 'matches' | 'contains' | 'equals' | 'not_equal' | 'not_contain';
-
-      /**
-       * The URL pattern to match against the current request. The pattern may contain up
-       * to four asterisks ('\*') as placeholders.
-       */
-      value: string;
-    }
-  }
 }
 
 export interface PageruleListParams {
@@ -451,7 +392,7 @@ export interface PageruleEditParams {
    * Body param: The set of actions to perform if the targets of this rule match the
    * request. Actions can redirect to another URL or override settings, but not both.
    */
-  actions?: Array<PageruleEditParams.Action>;
+  actions?: Array<ActionItem>;
 
   /**
    * Body param: The priority of the rule, used to define which Page Rule is
@@ -470,66 +411,7 @@ export interface PageruleEditParams {
   /**
    * Body param: The rule targets to evaluate on each request.
    */
-  targets?: Array<PageruleEditParams.Target>;
-}
-
-export namespace PageruleEditParams {
-  export interface Action {
-    /**
-     * The type of route.
-     */
-    name?: 'forward_url';
-
-    value?: Action.Value;
-  }
-
-  export namespace Action {
-    export interface Value {
-      /**
-       * The response type for the URL redirect.
-       */
-      type?: 'temporary' | 'permanent';
-
-      /**
-       * The URL to redirect the request to. Notes: ${num} refers to the position of '\*'
-       * in the constraint value.
-       */
-      url?: string;
-    }
-  }
-
-  /**
-   * A request condition target.
-   */
-  export interface Target {
-    /**
-     * String constraint.
-     */
-    constraint: Target.Constraint;
-
-    /**
-     * A target based on the URL of the request.
-     */
-    target: 'url';
-  }
-
-  export namespace Target {
-    /**
-     * String constraint.
-     */
-    export interface Constraint {
-      /**
-       * The matches operator can use asterisks and pipes as wildcard and 'or' operators.
-       */
-      operator: 'matches' | 'contains' | 'equals' | 'not_equal' | 'not_contain';
-
-      /**
-       * The URL pattern to match against the current request. The pattern may contain up
-       * to four asterisks ('\*') as placeholders.
-       */
-      value: string;
-    }
-  }
+  targets?: Array<TargesItem>;
 }
 
 export interface PageruleGetParams {
@@ -540,16 +422,6 @@ export interface PageruleGetParams {
 }
 
 export namespace Pagerules {
-  export import ZonesPagerule = PagerulesAPI.ZonesPagerule;
-  export import PageruleListResponse = PagerulesAPI.PageruleListResponse;
-  export import PageruleDeleteResponse = PagerulesAPI.PageruleDeleteResponse;
-  export import PageruleCreateParams = PagerulesAPI.PageruleCreateParams;
-  export import PageruleUpdateParams = PagerulesAPI.PageruleUpdateParams;
-  export import PageruleListParams = PagerulesAPI.PageruleListParams;
-  export import PageruleDeleteParams = PagerulesAPI.PageruleDeleteParams;
-  export import PageruleEditParams = PagerulesAPI.PageruleEditParams;
-  export import PageruleGetParams = PagerulesAPI.PageruleGetParams;
   export import Settings = SettingsAPI.Settings;
-  export import ZonePageruleSettings = SettingsAPI.ZonePageruleSettings;
   export import SettingListParams = SettingsAPI.SettingListParams;
 }

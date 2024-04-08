@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as PoolsAPI from 'cloudflare/resources/load-balancers/pools/pools';
+import * as LoadBalancersAPI from 'cloudflare/resources/load-balancers/load-balancers';
 import * as HealthAPI from 'cloudflare/resources/load-balancers/pools/health';
 import * as ReferencesAPI from 'cloudflare/resources/load-balancers/pools/references';
 import * as LoadBalancersPoolsAPI from 'cloudflare/resources/user/load-balancers/pools';
@@ -131,7 +132,7 @@ export interface PoolCreateParams {
    * is balanced across all currently healthy origins, provided the pool itself is
    * healthy.
    */
-  origins: Array<PoolCreateParams.Origin>;
+  origins: Array<LoadBalancersAPI.OriginItem>;
 
   /**
    * Body param: A human-readable description of the pool.
@@ -154,7 +155,7 @@ export interface PoolCreateParams {
   /**
    * Body param: Configures load shedding policies and percentages for the pool.
    */
-  load_shedding?: PoolCreateParams.LoadShedding;
+  load_shedding?: LoadBalancersAPI.LoadShedding;
 
   /**
    * Body param: The longitude of the data center containing the origins used in this
@@ -188,183 +189,13 @@ export interface PoolCreateParams {
    * Body param: Filter pool and origin health notifications by resource type or
    * health status. Use null to reset.
    */
-  notification_filter?: PoolCreateParams.NotificationFilter | null;
+  notification_filter?: LoadBalancersAPI.NotificationFilter | null;
 
   /**
    * Body param: Configures origin steering for the pool. Controls how origins are
    * selected for new sessions and traffic without session affinity.
    */
-  origin_steering?: PoolCreateParams.OriginSteering;
-}
-
-export namespace PoolCreateParams {
-  export interface Origin {
-    /**
-     * The IP address (IPv4 or IPv6) of the origin, or its publicly addressable
-     * hostname. Hostnames entered here should resolve directly to the origin, and not
-     * be a hostname proxied by Cloudflare. To set an internal/reserved address,
-     * virtual_network_id must also be set.
-     */
-    address?: string;
-
-    /**
-     * Whether to enable (the default) this origin within the pool. Disabled origins
-     * will not receive traffic and are excluded from health checks. The origin will
-     * only be disabled for the current pool.
-     */
-    enabled?: boolean;
-
-    /**
-     * The request header is used to pass additional information with an HTTP request.
-     * Currently supported header is 'Host'.
-     */
-    header?: Origin.Header;
-
-    /**
-     * A human-identifiable name for the origin.
-     */
-    name?: string;
-
-    /**
-     * The virtual network subnet ID the origin belongs in. Virtual network must also
-     * belong to the account.
-     */
-    virtual_network_id?: string;
-
-    /**
-     * The weight of this origin relative to other origins in the pool. Based on the
-     * configured weight the total traffic is distributed among origins within the
-     * pool.
-     *
-     * - `origin_steering.policy="least_outstanding_requests"`: Use weight to scale the
-     *   origin's outstanding requests.
-     * - `origin_steering.policy="least_connections"`: Use weight to scale the origin's
-     *   open connections.
-     */
-    weight?: number;
-  }
-
-  export namespace Origin {
-    /**
-     * The request header is used to pass additional information with an HTTP request.
-     * Currently supported header is 'Host'.
-     */
-    export interface Header {
-      /**
-       * The 'Host' header allows to override the hostname set in the HTTP request.
-       * Current support is 1 'Host' header override per origin.
-       */
-      Host?: Array<string>;
-    }
-  }
-
-  /**
-   * Configures load shedding policies and percentages for the pool.
-   */
-  export interface LoadShedding {
-    /**
-     * The percent of traffic to shed from the pool, according to the default policy.
-     * Applies to new sessions and traffic without session affinity.
-     */
-    default_percent?: number;
-
-    /**
-     * The default policy to use when load shedding. A random policy randomly sheds a
-     * given percent of requests. A hash policy computes a hash over the
-     * CF-Connecting-IP address and sheds all requests originating from a percent of
-     * IPs.
-     */
-    default_policy?: 'random' | 'hash';
-
-    /**
-     * The percent of existing sessions to shed from the pool, according to the session
-     * policy.
-     */
-    session_percent?: number;
-
-    /**
-     * Only the hash policy is supported for existing sessions (to avoid exponential
-     * decay).
-     */
-    session_policy?: 'hash';
-  }
-
-  /**
-   * Filter pool and origin health notifications by resource type or health status.
-   * Use null to reset.
-   */
-  export interface NotificationFilter {
-    /**
-     * Filter options for a particular resource type (pool or origin). Use null to
-     * reset.
-     */
-    origin?: NotificationFilter.Origin | null;
-
-    /**
-     * Filter options for a particular resource type (pool or origin). Use null to
-     * reset.
-     */
-    pool?: NotificationFilter.Pool | null;
-  }
-
-  export namespace NotificationFilter {
-    /**
-     * Filter options for a particular resource type (pool or origin). Use null to
-     * reset.
-     */
-    export interface Origin {
-      /**
-       * If set true, disable notifications for this type of resource (pool or origin).
-       */
-      disable?: boolean;
-
-      /**
-       * If present, send notifications only for this health status (e.g. false for only
-       * DOWN events). Use null to reset (all events).
-       */
-      healthy?: boolean | null;
-    }
-
-    /**
-     * Filter options for a particular resource type (pool or origin). Use null to
-     * reset.
-     */
-    export interface Pool {
-      /**
-       * If set true, disable notifications for this type of resource (pool or origin).
-       */
-      disable?: boolean;
-
-      /**
-       * If present, send notifications only for this health status (e.g. false for only
-       * DOWN events). Use null to reset (all events).
-       */
-      healthy?: boolean | null;
-    }
-  }
-
-  /**
-   * Configures origin steering for the pool. Controls how origins are selected for
-   * new sessions and traffic without session affinity.
-   */
-  export interface OriginSteering {
-    /**
-     * The type of origin steering policy to use.
-     *
-     * - `"random"`: Select an origin randomly.
-     * - `"hash"`: Select an origin by computing a hash over the CF-Connecting-IP
-     *   address.
-     * - `"least_outstanding_requests"`: Select an origin by taking into consideration
-     *   origin weights, as well as each origin's number of outstanding requests.
-     *   Origins with more pending requests are weighted proportionately less relative
-     *   to others.
-     * - `"least_connections"`: Select an origin by taking into consideration origin
-     *   weights, as well as each origin's number of open connections. Origins with
-     *   more open connections are weighted proportionately less relative to others.
-     *   Supported for HTTP/1 and HTTP/2 connections.
-     */
-    policy?: 'random' | 'hash' | 'least_outstanding_requests' | 'least_connections';
-  }
+  origin_steering?: LoadBalancersAPI.OriginSteering;
 }
 
 export interface PoolUpdateParams {
@@ -384,28 +215,13 @@ export interface PoolUpdateParams {
    * is balanced across all currently healthy origins, provided the pool itself is
    * healthy.
    */
-  origins: Array<PoolUpdateParams.Origin>;
+  origins: Array<LoadBalancersAPI.OriginItem>;
 
   /**
    * Body param: A list of regions from which to run health checks. Null means every
    * Cloudflare data center.
    */
-  check_regions?: Array<
-    | 'WNAM'
-    | 'ENAM'
-    | 'WEU'
-    | 'EEU'
-    | 'NSAM'
-    | 'SSAM'
-    | 'OC'
-    | 'ME'
-    | 'NAF'
-    | 'SAF'
-    | 'SAS'
-    | 'SEAS'
-    | 'NEAS'
-    | 'ALL_REGIONS'
-  > | null;
+  check_regions?: Array<LoadBalancersAPI.CheckRegion> | null;
 
   /**
    * Body param: A human-readable description of the pool.
@@ -428,7 +244,7 @@ export interface PoolUpdateParams {
   /**
    * Body param: Configures load shedding policies and percentages for the pool.
    */
-  load_shedding?: PoolUpdateParams.LoadShedding;
+  load_shedding?: LoadBalancersAPI.LoadShedding;
 
   /**
    * Body param: The longitude of the data center containing the origins used in this
@@ -462,183 +278,13 @@ export interface PoolUpdateParams {
    * Body param: Filter pool and origin health notifications by resource type or
    * health status. Use null to reset.
    */
-  notification_filter?: PoolUpdateParams.NotificationFilter | null;
+  notification_filter?: LoadBalancersAPI.NotificationFilter | null;
 
   /**
    * Body param: Configures origin steering for the pool. Controls how origins are
    * selected for new sessions and traffic without session affinity.
    */
-  origin_steering?: PoolUpdateParams.OriginSteering;
-}
-
-export namespace PoolUpdateParams {
-  export interface Origin {
-    /**
-     * The IP address (IPv4 or IPv6) of the origin, or its publicly addressable
-     * hostname. Hostnames entered here should resolve directly to the origin, and not
-     * be a hostname proxied by Cloudflare. To set an internal/reserved address,
-     * virtual_network_id must also be set.
-     */
-    address?: string;
-
-    /**
-     * Whether to enable (the default) this origin within the pool. Disabled origins
-     * will not receive traffic and are excluded from health checks. The origin will
-     * only be disabled for the current pool.
-     */
-    enabled?: boolean;
-
-    /**
-     * The request header is used to pass additional information with an HTTP request.
-     * Currently supported header is 'Host'.
-     */
-    header?: Origin.Header;
-
-    /**
-     * A human-identifiable name for the origin.
-     */
-    name?: string;
-
-    /**
-     * The virtual network subnet ID the origin belongs in. Virtual network must also
-     * belong to the account.
-     */
-    virtual_network_id?: string;
-
-    /**
-     * The weight of this origin relative to other origins in the pool. Based on the
-     * configured weight the total traffic is distributed among origins within the
-     * pool.
-     *
-     * - `origin_steering.policy="least_outstanding_requests"`: Use weight to scale the
-     *   origin's outstanding requests.
-     * - `origin_steering.policy="least_connections"`: Use weight to scale the origin's
-     *   open connections.
-     */
-    weight?: number;
-  }
-
-  export namespace Origin {
-    /**
-     * The request header is used to pass additional information with an HTTP request.
-     * Currently supported header is 'Host'.
-     */
-    export interface Header {
-      /**
-       * The 'Host' header allows to override the hostname set in the HTTP request.
-       * Current support is 1 'Host' header override per origin.
-       */
-      Host?: Array<string>;
-    }
-  }
-
-  /**
-   * Configures load shedding policies and percentages for the pool.
-   */
-  export interface LoadShedding {
-    /**
-     * The percent of traffic to shed from the pool, according to the default policy.
-     * Applies to new sessions and traffic without session affinity.
-     */
-    default_percent?: number;
-
-    /**
-     * The default policy to use when load shedding. A random policy randomly sheds a
-     * given percent of requests. A hash policy computes a hash over the
-     * CF-Connecting-IP address and sheds all requests originating from a percent of
-     * IPs.
-     */
-    default_policy?: 'random' | 'hash';
-
-    /**
-     * The percent of existing sessions to shed from the pool, according to the session
-     * policy.
-     */
-    session_percent?: number;
-
-    /**
-     * Only the hash policy is supported for existing sessions (to avoid exponential
-     * decay).
-     */
-    session_policy?: 'hash';
-  }
-
-  /**
-   * Filter pool and origin health notifications by resource type or health status.
-   * Use null to reset.
-   */
-  export interface NotificationFilter {
-    /**
-     * Filter options for a particular resource type (pool or origin). Use null to
-     * reset.
-     */
-    origin?: NotificationFilter.Origin | null;
-
-    /**
-     * Filter options for a particular resource type (pool or origin). Use null to
-     * reset.
-     */
-    pool?: NotificationFilter.Pool | null;
-  }
-
-  export namespace NotificationFilter {
-    /**
-     * Filter options for a particular resource type (pool or origin). Use null to
-     * reset.
-     */
-    export interface Origin {
-      /**
-       * If set true, disable notifications for this type of resource (pool or origin).
-       */
-      disable?: boolean;
-
-      /**
-       * If present, send notifications only for this health status (e.g. false for only
-       * DOWN events). Use null to reset (all events).
-       */
-      healthy?: boolean | null;
-    }
-
-    /**
-     * Filter options for a particular resource type (pool or origin). Use null to
-     * reset.
-     */
-    export interface Pool {
-      /**
-       * If set true, disable notifications for this type of resource (pool or origin).
-       */
-      disable?: boolean;
-
-      /**
-       * If present, send notifications only for this health status (e.g. false for only
-       * DOWN events). Use null to reset (all events).
-       */
-      healthy?: boolean | null;
-    }
-  }
-
-  /**
-   * Configures origin steering for the pool. Controls how origins are selected for
-   * new sessions and traffic without session affinity.
-   */
-  export interface OriginSteering {
-    /**
-     * The type of origin steering policy to use.
-     *
-     * - `"random"`: Select an origin randomly.
-     * - `"hash"`: Select an origin by computing a hash over the CF-Connecting-IP
-     *   address.
-     * - `"least_outstanding_requests"`: Select an origin by taking into consideration
-     *   origin weights, as well as each origin's number of outstanding requests.
-     *   Origins with more pending requests are weighted proportionately less relative
-     *   to others.
-     * - `"least_connections"`: Select an origin by taking into consideration origin
-     *   weights, as well as each origin's number of open connections. Origins with
-     *   more open connections are weighted proportionately less relative to others.
-     *   Supported for HTTP/1 and HTTP/2 connections.
-     */
-    policy?: 'random' | 'hash' | 'least_outstanding_requests' | 'least_connections';
-  }
+  origin_steering?: LoadBalancersAPI.OriginSteering;
 }
 
 export interface PoolListParams {
@@ -676,22 +322,7 @@ export interface PoolEditParams {
    * Body param: A list of regions from which to run health checks. Null means every
    * Cloudflare data center.
    */
-  check_regions?: Array<
-    | 'WNAM'
-    | 'ENAM'
-    | 'WEU'
-    | 'EEU'
-    | 'NSAM'
-    | 'SSAM'
-    | 'OC'
-    | 'ME'
-    | 'NAF'
-    | 'SAF'
-    | 'SAS'
-    | 'SEAS'
-    | 'NEAS'
-    | 'ALL_REGIONS'
-  > | null;
+  check_regions?: Array<LoadBalancersAPI.CheckRegion> | null;
 
   /**
    * Body param: A human-readable description of the pool.
@@ -714,7 +345,7 @@ export interface PoolEditParams {
   /**
    * Body param: Configures load shedding policies and percentages for the pool.
    */
-  load_shedding?: PoolEditParams.LoadShedding;
+  load_shedding?: LoadBalancersAPI.LoadShedding;
 
   /**
    * Body param: The longitude of the data center containing the origins used in this
@@ -754,190 +385,20 @@ export interface PoolEditParams {
    * Body param: Filter pool and origin health notifications by resource type or
    * health status. Use null to reset.
    */
-  notification_filter?: PoolEditParams.NotificationFilter | null;
+  notification_filter?: LoadBalancersAPI.NotificationFilter | null;
 
   /**
    * Body param: Configures origin steering for the pool. Controls how origins are
    * selected for new sessions and traffic without session affinity.
    */
-  origin_steering?: PoolEditParams.OriginSteering;
+  origin_steering?: LoadBalancersAPI.OriginSteering;
 
   /**
    * Body param: The list of origins within this pool. Traffic directed at this pool
    * is balanced across all currently healthy origins, provided the pool itself is
    * healthy.
    */
-  origins?: Array<PoolEditParams.Origin>;
-}
-
-export namespace PoolEditParams {
-  /**
-   * Configures load shedding policies and percentages for the pool.
-   */
-  export interface LoadShedding {
-    /**
-     * The percent of traffic to shed from the pool, according to the default policy.
-     * Applies to new sessions and traffic without session affinity.
-     */
-    default_percent?: number;
-
-    /**
-     * The default policy to use when load shedding. A random policy randomly sheds a
-     * given percent of requests. A hash policy computes a hash over the
-     * CF-Connecting-IP address and sheds all requests originating from a percent of
-     * IPs.
-     */
-    default_policy?: 'random' | 'hash';
-
-    /**
-     * The percent of existing sessions to shed from the pool, according to the session
-     * policy.
-     */
-    session_percent?: number;
-
-    /**
-     * Only the hash policy is supported for existing sessions (to avoid exponential
-     * decay).
-     */
-    session_policy?: 'hash';
-  }
-
-  /**
-   * Filter pool and origin health notifications by resource type or health status.
-   * Use null to reset.
-   */
-  export interface NotificationFilter {
-    /**
-     * Filter options for a particular resource type (pool or origin). Use null to
-     * reset.
-     */
-    origin?: NotificationFilter.Origin | null;
-
-    /**
-     * Filter options for a particular resource type (pool or origin). Use null to
-     * reset.
-     */
-    pool?: NotificationFilter.Pool | null;
-  }
-
-  export namespace NotificationFilter {
-    /**
-     * Filter options for a particular resource type (pool or origin). Use null to
-     * reset.
-     */
-    export interface Origin {
-      /**
-       * If set true, disable notifications for this type of resource (pool or origin).
-       */
-      disable?: boolean;
-
-      /**
-       * If present, send notifications only for this health status (e.g. false for only
-       * DOWN events). Use null to reset (all events).
-       */
-      healthy?: boolean | null;
-    }
-
-    /**
-     * Filter options for a particular resource type (pool or origin). Use null to
-     * reset.
-     */
-    export interface Pool {
-      /**
-       * If set true, disable notifications for this type of resource (pool or origin).
-       */
-      disable?: boolean;
-
-      /**
-       * If present, send notifications only for this health status (e.g. false for only
-       * DOWN events). Use null to reset (all events).
-       */
-      healthy?: boolean | null;
-    }
-  }
-
-  /**
-   * Configures origin steering for the pool. Controls how origins are selected for
-   * new sessions and traffic without session affinity.
-   */
-  export interface OriginSteering {
-    /**
-     * The type of origin steering policy to use.
-     *
-     * - `"random"`: Select an origin randomly.
-     * - `"hash"`: Select an origin by computing a hash over the CF-Connecting-IP
-     *   address.
-     * - `"least_outstanding_requests"`: Select an origin by taking into consideration
-     *   origin weights, as well as each origin's number of outstanding requests.
-     *   Origins with more pending requests are weighted proportionately less relative
-     *   to others.
-     * - `"least_connections"`: Select an origin by taking into consideration origin
-     *   weights, as well as each origin's number of open connections. Origins with
-     *   more open connections are weighted proportionately less relative to others.
-     *   Supported for HTTP/1 and HTTP/2 connections.
-     */
-    policy?: 'random' | 'hash' | 'least_outstanding_requests' | 'least_connections';
-  }
-
-  export interface Origin {
-    /**
-     * The IP address (IPv4 or IPv6) of the origin, or its publicly addressable
-     * hostname. Hostnames entered here should resolve directly to the origin, and not
-     * be a hostname proxied by Cloudflare. To set an internal/reserved address,
-     * virtual_network_id must also be set.
-     */
-    address?: string;
-
-    /**
-     * Whether to enable (the default) this origin within the pool. Disabled origins
-     * will not receive traffic and are excluded from health checks. The origin will
-     * only be disabled for the current pool.
-     */
-    enabled?: boolean;
-
-    /**
-     * The request header is used to pass additional information with an HTTP request.
-     * Currently supported header is 'Host'.
-     */
-    header?: Origin.Header;
-
-    /**
-     * A human-identifiable name for the origin.
-     */
-    name?: string;
-
-    /**
-     * The virtual network subnet ID the origin belongs in. Virtual network must also
-     * belong to the account.
-     */
-    virtual_network_id?: string;
-
-    /**
-     * The weight of this origin relative to other origins in the pool. Based on the
-     * configured weight the total traffic is distributed among origins within the
-     * pool.
-     *
-     * - `origin_steering.policy="least_outstanding_requests"`: Use weight to scale the
-     *   origin's outstanding requests.
-     * - `origin_steering.policy="least_connections"`: Use weight to scale the origin's
-     *   open connections.
-     */
-    weight?: number;
-  }
-
-  export namespace Origin {
-    /**
-     * The request header is used to pass additional information with an HTTP request.
-     * Currently supported header is 'Host'.
-     */
-    export interface Header {
-      /**
-       * The 'Host' header allows to override the hostname set in the HTTP request.
-       * Current support is 1 'Host' header override per origin.
-       */
-      Host?: Array<string>;
-    }
-  }
+  origins?: Array<LoadBalancersAPI.OriginItem>;
 }
 
 export interface PoolGetParams {

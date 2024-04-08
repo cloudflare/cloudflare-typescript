@@ -1,24 +1,15 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  OriginTLSClientCertificateAuthenticatedOriginPull,
-  OriginTLSClientCertificateID,
+  AuthenticatedOriginPull,
+  ID,
   HostnameUpdateResponse,
   HostnameUpdateParams,
   HostnameGetParams,
-  OriginTLSClientCertificateIDsSinglePage,
+  AuthenticatedOriginPullsSinglePage,
   Hostnames,
 } from './hostnames/index';
-export {
-  OriginTLSClientCertificateZoneAuthenticatedOriginPull,
-  OriginTLSClientAuthListResponse,
-  OriginTLSClientAuthCreateParams,
-  OriginTLSClientAuthListParams,
-  OriginTLSClientAuthDeleteParams,
-  OriginTLSClientAuthGetParams,
-  OriginTLSClientAuthListResponsesSinglePage,
-  OriginTLSClientAuth,
-} from './origin-tls-client-auth';
+export { OriginTLSClientAuth } from './origin-tls-client-auth';
 export {
   SettingUpdateResponse,
   SettingGetResponse,

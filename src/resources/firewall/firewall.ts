@@ -17,21 +17,24 @@ export class Firewall extends APIResource {
 
 export namespace Firewall {
   export import Lockdowns = LockdownsAPI.Lockdowns;
-  export import FirewallZoneLockdown = LockdownsAPI.FirewallZoneLockdown;
-  export import UnnamedSchemaRefA4044d3c73ad1e6c8fff4dc05f922ab5 = LockdownsAPI.UnnamedSchemaRefA4044d3c73ad1e6c8fff4dc05f922ab5;
+  export import LockdownCreateResponse = LockdownsAPI.LockdownCreateResponse;
+  export import LockdownUpdateResponse = LockdownsAPI.LockdownUpdateResponse;
+  export import LockdownListResponse = LockdownsAPI.LockdownListResponse;
   export import LockdownDeleteResponse = LockdownsAPI.LockdownDeleteResponse;
-  export import FirewallZoneLockdownsV4PagePaginationArray = LockdownsAPI.FirewallZoneLockdownsV4PagePaginationArray;
+  export import LockdownGetResponse = LockdownsAPI.LockdownGetResponse;
+  export import LockdownListResponsesV4PagePaginationArray = LockdownsAPI.LockdownListResponsesV4PagePaginationArray;
   export import LockdownCreateParams = LockdownsAPI.LockdownCreateParams;
   export import LockdownUpdateParams = LockdownsAPI.LockdownUpdateParams;
   export import LockdownListParams = LockdownsAPI.LockdownListParams;
   export import LockdownDeleteParams = LockdownsAPI.LockdownDeleteParams;
   export import Rules = RulesAPI.Rules;
-  export import FirewallFilterRule = RulesAPI.FirewallFilterRule;
-  export import UnnamedSchemaRef6fe6c1eba94d9c3f475fb22f0118bf57 = RulesAPI.UnnamedSchemaRef6fe6c1eba94d9c3f475fb22f0118bf57;
-  export import UnnamedSchemaRefAb48d2d33259c9107401d174735701c7 = RulesAPI.UnnamedSchemaRefAb48d2d33259c9107401d174735701c7;
   export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
+  export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
+  export import RuleListResponse = RulesAPI.RuleListResponse;
+  export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
   export import RuleEditResponse = RulesAPI.RuleEditResponse;
-  export import FirewallFilterRulesV4PagePaginationArray = RulesAPI.FirewallFilterRulesV4PagePaginationArray;
+  export import RuleGetResponse = RulesAPI.RuleGetResponse;
+  export import RuleListResponsesV4PagePaginationArray = RulesAPI.RuleListResponsesV4PagePaginationArray;
   export import RuleCreateParams = RulesAPI.RuleCreateParams;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
   export import RuleListParams = RulesAPI.RuleListParams;
@@ -48,7 +51,6 @@ export namespace Firewall {
   export import AccessRuleEditParams = AccessRulesAPI.AccessRuleEditParams;
   export import AccessRuleGetParams = AccessRulesAPI.AccessRuleGetParams;
   export import UARules = UARulesAPI.UARules;
-  export import FirewallUserAgentRule = UARulesAPI.FirewallUserAgentRule;
   export import UARuleListResponse = UARulesAPI.UARuleListResponse;
   export import UARuleDeleteResponse = UARulesAPI.UARuleDeleteResponse;
   export import UARuleListResponsesV4PagePaginationArray = UARulesAPI.UARuleListResponsesV4PagePaginationArray;

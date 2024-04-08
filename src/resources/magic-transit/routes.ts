@@ -96,6 +96,31 @@ export class Routes extends APIResource {
   }
 }
 
+/**
+ * Scope colo name.
+ */
+export type ColoNamesItem = string;
+
+/**
+ * Scope colo region.
+ */
+export type ColoRegionsItem = string;
+
+/**
+ * Used only for ECMP routes.
+ */
+export interface Scope {
+  /**
+   * List of colo names for the ECMP scope.
+   */
+  colo_names?: Array<ColoNamesItem>;
+
+  /**
+   * List of colo regions for the ECMP scope.
+   */
+  colo_regions?: Array<ColoRegionsItem>;
+}
+
 export interface RouteCreateResponse {
   routes?: Array<RouteCreateResponse.Route>;
 }
@@ -140,29 +165,12 @@ export namespace RouteCreateResponse {
     /**
      * Used only for ECMP routes.
      */
-    scope?: Route.Scope;
+    scope?: RoutesAPI.Scope;
 
     /**
      * Optional weight of the ECMP scope - if provided.
      */
     weight?: number;
-  }
-
-  export namespace Route {
-    /**
-     * Used only for ECMP routes.
-     */
-    export interface Scope {
-      /**
-       * List of colo names for the ECMP scope.
-       */
-      colo_names?: Array<string>;
-
-      /**
-       * List of colo regions for the ECMP scope.
-       */
-      colo_regions?: Array<string>;
-    }
   }
 }
 
@@ -216,29 +224,12 @@ export namespace RouteListResponse {
     /**
      * Used only for ECMP routes.
      */
-    scope?: Route.Scope;
+    scope?: RoutesAPI.Scope;
 
     /**
      * Optional weight of the ECMP scope - if provided.
      */
     weight?: number;
-  }
-
-  export namespace Route {
-    /**
-     * Used only for ECMP routes.
-     */
-    export interface Scope {
-      /**
-       * List of colo names for the ECMP scope.
-       */
-      colo_names?: Array<string>;
-
-      /**
-       * List of colo regions for the ECMP scope.
-       */
-      colo_regions?: Array<string>;
-    }
   }
 }
 
@@ -299,29 +290,12 @@ export interface RouteUpdateParams {
   /**
    * Body param: Used only for ECMP routes.
    */
-  scope?: RouteUpdateParams.Scope;
+  scope?: Scope;
 
   /**
    * Body param: Optional weight of the ECMP scope - if provided.
    */
   weight?: number;
-}
-
-export namespace RouteUpdateParams {
-  /**
-   * Used only for ECMP routes.
-   */
-  export interface Scope {
-    /**
-     * List of colo names for the ECMP scope.
-     */
-    colo_names?: Array<string>;
-
-    /**
-     * List of colo regions for the ECMP scope.
-     */
-    colo_regions?: Array<string>;
-  }
 }
 
 export interface RouteListParams {
@@ -367,6 +341,9 @@ export interface RouteGetParams {
 }
 
 export namespace Routes {
+  export import ColoNamesItem = RoutesAPI.ColoNamesItem;
+  export import ColoRegionsItem = RoutesAPI.ColoRegionsItem;
+  export import Scope = RoutesAPI.Scope;
   export import RouteCreateResponse = RoutesAPI.RouteCreateResponse;
   export import RouteUpdateResponse = RoutesAPI.RouteUpdateResponse;
   export import RouteListResponse = RoutesAPI.RouteListResponse;

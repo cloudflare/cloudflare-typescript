@@ -22,7 +22,7 @@ export class Seats extends APIResource {
   }
 }
 
-export interface ZeroTrustSeats {
+export interface Seat {
   /**
    * True if the seat is part of Access.
    */
@@ -43,7 +43,7 @@ export interface ZeroTrustSeats {
   updated_at?: string;
 }
 
-export type SeatEditResponse = Array<ZeroTrustSeats>;
+export type SeatEditResponse = Array<Seat>;
 
 export type SeatEditParams = Array<SeatEditParams.Body>;
 
@@ -62,7 +62,7 @@ export namespace SeatEditParams {
 }
 
 export namespace Seats {
-  export import ZeroTrustSeats = SeatsAPI.ZeroTrustSeats;
+  export import Seat = SeatsAPI.Seat;
   export import SeatEditResponse = SeatsAPI.SeatEditResponse;
   export import SeatEditParams = SeatsAPI.SeatEditParams;
 }

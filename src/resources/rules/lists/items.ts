@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ItemsAPI from 'cloudflare/resources/rules/lists/items';
+import * as ListsAPI from 'cloudflare/resources/rules/lists/lists';
 import { CursorPagination, type CursorPaginationParams } from 'cloudflare/pagination';
 
 export class Items extends APIResource {
@@ -146,40 +147,7 @@ export interface ItemDeleteResponse {
  * An IPv4 address, an IPv4 CIDR, or an IPv6 CIDR. IPv6 CIDRs are limited to a
  * maximum of /64.
  */
-export type ItemGetResponse =
-  | string
-  | ItemGetResponse.ListsItemRedirect
-  | ItemGetResponse.ListsItemHostname
-  | number;
-
-export namespace ItemGetResponse {
-  /**
-   * The definition of the redirect.
-   */
-  export interface ListsItemRedirect {
-    source_url: string;
-
-    target_url: string;
-
-    include_subdomains?: boolean;
-
-    preserve_path_suffix?: boolean;
-
-    preserve_query_string?: boolean;
-
-    status_code?: 301 | 302 | 307 | 308;
-
-    subpath_matching?: boolean;
-  }
-
-  /**
-   * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
-   * 0 to 9, wildcards (\*), and the hyphen (-).
-   */
-  export interface ListsItemHostname {
-    url_hostname: string;
-  }
-}
+export type ItemGetResponse = string | ListsAPI.Redirect | ListsAPI.Hostname | number;
 
 export interface ItemCreateParams {
   /**
@@ -209,7 +177,7 @@ export namespace ItemCreateParams {
      * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
      * 0 to 9, wildcards (\*), and the hyphen (-).
      */
-    hostname?: Body.Hostname;
+    hostname?: ListsAPI.Hostname;
 
     /**
      * An IPv4 address, an IPv4 CIDR, or an IPv6 CIDR. IPv6 CIDRs are limited to a
@@ -220,36 +188,7 @@ export namespace ItemCreateParams {
     /**
      * The definition of the redirect.
      */
-    redirect?: Body.Redirect;
-  }
-
-  export namespace Body {
-    /**
-     * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
-     * 0 to 9, wildcards (\*), and the hyphen (-).
-     */
-    export interface Hostname {
-      url_hostname: string;
-    }
-
-    /**
-     * The definition of the redirect.
-     */
-    export interface Redirect {
-      source_url: string;
-
-      target_url: string;
-
-      include_subdomains?: boolean;
-
-      preserve_path_suffix?: boolean;
-
-      preserve_query_string?: boolean;
-
-      status_code?: 301 | 302 | 307 | 308;
-
-      subpath_matching?: boolean;
-    }
+    redirect?: ListsAPI.Redirect;
   }
 }
 
@@ -281,7 +220,7 @@ export namespace ItemUpdateParams {
      * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
      * 0 to 9, wildcards (\*), and the hyphen (-).
      */
-    hostname?: Body.Hostname;
+    hostname?: ListsAPI.Hostname;
 
     /**
      * An IPv4 address, an IPv4 CIDR, or an IPv6 CIDR. IPv6 CIDRs are limited to a
@@ -292,36 +231,7 @@ export namespace ItemUpdateParams {
     /**
      * The definition of the redirect.
      */
-    redirect?: Body.Redirect;
-  }
-
-  export namespace Body {
-    /**
-     * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
-     * 0 to 9, wildcards (\*), and the hyphen (-).
-     */
-    export interface Hostname {
-      url_hostname: string;
-    }
-
-    /**
-     * The definition of the redirect.
-     */
-    export interface Redirect {
-      source_url: string;
-
-      target_url: string;
-
-      include_subdomains?: boolean;
-
-      preserve_path_suffix?: boolean;
-
-      preserve_query_string?: boolean;
-
-      status_code?: 301 | 302 | 307 | 308;
-
-      subpath_matching?: boolean;
-    }
+    redirect?: ListsAPI.Redirect;
   }
 }
 

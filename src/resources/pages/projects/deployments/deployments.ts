@@ -4,7 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as DeploymentsAPI from 'cloudflare/resources/pages/projects/deployments/deployments';
 import * as ProjectsAPI from 'cloudflare/resources/pages/projects/projects';
-import { PagesDeploymentsSinglePage } from 'cloudflare/resources/pages/projects/projects';
+import { DeploymentsSinglePage } from 'cloudflare/resources/pages/projects/projects';
 import * as HistoryAPI from 'cloudflare/resources/pages/projects/deployments/history/history';
 import { multipartFormRequestOptions } from 'cloudflare/core';
 
@@ -19,13 +19,13 @@ export class Deployments extends APIResource {
     projectName: string,
     params: DeploymentCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ProjectsAPI.PagesDeployments> {
+  ): Core.APIPromise<ProjectsAPI.Deployment> {
     const { account_id, ...body } = params;
     return (
       this._client.post(
         `/accounts/${account_id}/pages/projects/${projectName}/deployments`,
         multipartFormRequestOptions({ body, ...options }),
-      ) as Core.APIPromise<{ result: ProjectsAPI.PagesDeployments }>
+      ) as Core.APIPromise<{ result: ProjectsAPI.Deployment }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -36,11 +36,11 @@ export class Deployments extends APIResource {
     projectName: string,
     params: DeploymentListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<PagesDeploymentsSinglePage, ProjectsAPI.PagesDeployments> {
+  ): Core.PagePromise<DeploymentsSinglePage, ProjectsAPI.Deployment> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/pages/projects/${projectName}/deployments`,
-      PagesDeploymentsSinglePage,
+      DeploymentsSinglePage,
       { query, ...options },
     );
   }
@@ -69,13 +69,13 @@ export class Deployments extends APIResource {
     deploymentId: string,
     params: DeploymentGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ProjectsAPI.PagesDeployments> {
+  ): Core.APIPromise<ProjectsAPI.Deployment> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/pages/projects/${projectName}/deployments/${deploymentId}`,
         options,
-      ) as Core.APIPromise<{ result: ProjectsAPI.PagesDeployments }>
+      ) as Core.APIPromise<{ result: ProjectsAPI.Deployment }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -87,13 +87,13 @@ export class Deployments extends APIResource {
     deploymentId: string,
     params: DeploymentRetryParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ProjectsAPI.PagesDeployments> {
+  ): Core.APIPromise<ProjectsAPI.Deployment> {
     const { account_id, body } = params;
     return (
       this._client.post(
         `/accounts/${account_id}/pages/projects/${projectName}/deployments/${deploymentId}/retry`,
         { body: body, ...options },
-      ) as Core.APIPromise<{ result: ProjectsAPI.PagesDeployments }>
+      ) as Core.APIPromise<{ result: ProjectsAPI.Deployment }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -106,13 +106,13 @@ export class Deployments extends APIResource {
     deploymentId: string,
     params: DeploymentRollbackParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ProjectsAPI.PagesDeployments> {
+  ): Core.APIPromise<ProjectsAPI.Deployment> {
     const { account_id, body } = params;
     return (
       this._client.post(
         `/accounts/${account_id}/pages/projects/${projectName}/deployments/${deploymentId}/rollback`,
         { body: body, ...options },
-      ) as Core.APIPromise<{ result: ProjectsAPI.PagesDeployments }>
+      ) as Core.APIPromise<{ result: ProjectsAPI.Deployment }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -198,4 +198,4 @@ export namespace Deployments {
   export import History = HistoryAPI.History;
 }
 
-export { PagesDeploymentsSinglePage };
+export { DeploymentsSinglePage };

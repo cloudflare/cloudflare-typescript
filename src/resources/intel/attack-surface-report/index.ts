@@ -2,6 +2,11 @@
 
 export { AttackSurfaceReport } from './attack-surface-report';
 export {
+  IssueClassItem,
+  IssueTypeItem,
+  ProductItem,
+  SeverityQueryParamItem,
+  SubjectsItem,
   IssueListResponse,
   IssueClassResponse,
   IssueSeverityResponse,

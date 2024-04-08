@@ -4,11 +4,11 @@ import { APIResource } from 'cloudflare/resource';
 import * as NetworkPathAPI from 'cloudflare/resources/zero-trust/dex/traceroute-test-results/network-path';
 
 export class TracerouteTestResults extends APIResource {
-  networkPath: NetworkPathAPI.NetworkPath = new NetworkPathAPI.NetworkPath(this._client);
+  networkPath: NetworkPathAPI.NetworkPathResource = new NetworkPathAPI.NetworkPathResource(this._client);
 }
 
 export namespace TracerouteTestResults {
+  export import NetworkPathResource = NetworkPathAPI.NetworkPathResource;
   export import NetworkPath = NetworkPathAPI.NetworkPath;
-  export import DigitalExperienceMonitoringTracerouteTestResultNetworkPath = NetworkPathAPI.DigitalExperienceMonitoringTracerouteTestResultNetworkPath;
   export import NetworkPathGetParams = NetworkPathAPI.NetworkPathGetParams;
 }

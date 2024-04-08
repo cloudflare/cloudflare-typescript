@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as UserAPI from 'cloudflare/resources/user/user';
 import * as Shared from 'cloudflare/resources/shared';
 import * as AuditLogsAPI from 'cloudflare/resources/user/audit-logs';
 import * as InvitesAPI from 'cloudflare/resources/user/invites';
@@ -13,7 +12,7 @@ import * as FirewallAPI from 'cloudflare/resources/user/firewall/firewall';
 import * as LoadBalancersAPI from 'cloudflare/resources/user/load-balancers/load-balancers';
 import * as TokensAPI from 'cloudflare/resources/user/tokens/tokens';
 
-export class UserResource extends APIResource {
+export class User extends APIResource {
   auditLogs: AuditLogsAPI.AuditLogs = new AuditLogsAPI.AuditLogs(this._client);
   billing: BillingAPI.Billing = new BillingAPI.Billing(this._client);
   firewall: FirewallAPI.Firewall = new FirewallAPI.Firewall(this._client);
@@ -51,73 +50,6 @@ export class UserResource extends APIResource {
   }
 }
 
-export interface User {
-  /**
-   * Address.
-   */
-  address: string;
-
-  /**
-   * City.
-   */
-  city: string;
-
-  /**
-   * The country in which the user lives.
-   */
-  country: string | null;
-
-  /**
-   * User's first name
-   */
-  first_name: string | null;
-
-  /**
-   * User's last name
-   */
-  last_name: string | null;
-
-  /**
-   * Name of organization.
-   */
-  organization: string;
-
-  /**
-   * User's telephone number
-   */
-  phone: string | null;
-
-  /**
-   * State.
-   */
-  state: string;
-
-  /**
-   * The zipcode or postal code where the user lives.
-   */
-  zip: string | null;
-
-  /**
-   * Contact Identifier.
-   */
-  id?: string;
-
-  /**
-   * Optional address line for unit, floor, suite, etc.
-   */
-  address2?: string;
-
-  /**
-   * The contact email address of the user.
-   */
-  email?: string;
-
-  /**
-   * Contact fax number.
-   */
-  fax?: string;
-}
-
 export interface UserEditParams {
   /**
    * The country in which the user lives.
@@ -145,9 +77,7 @@ export interface UserEditParams {
   zipcode?: string | null;
 }
 
-export namespace UserResource {
-  export import User = UserAPI.User;
-  export import UserEditParams = UserAPI.UserEditParams;
+export namespace User {
   export import AuditLogs = AuditLogsAPI.AuditLogs;
   export import AuditLogListResponse = AuditLogsAPI.AuditLogListResponse;
   export import AuditLogListResponsesV4PagePaginationArray = AuditLogsAPI.AuditLogListResponsesV4PagePaginationArray;
@@ -156,8 +86,7 @@ export namespace UserResource {
   export import Firewall = FirewallAPI.Firewall;
   export import Invites = InvitesAPI.Invites;
   export import Invite = InvitesAPI.Invite;
-  export import InviteListResponse = InvitesAPI.InviteListResponse;
-  export import InviteListResponsesSinglePage = InvitesAPI.InviteListResponsesSinglePage;
+  export import InvitesSinglePage = InvitesAPI.InvitesSinglePage;
   export import InviteEditParams = InvitesAPI.InviteEditParams;
   export import LoadBalancers = LoadBalancersAPI.LoadBalancers;
   export import Organizations = OrganizationsAPI.Organizations;
@@ -174,6 +103,8 @@ export namespace UserResource {
   export import SubscriptionDeleteParams = SubscriptionsAPI.SubscriptionDeleteParams;
   export import SubscriptionEditParams = SubscriptionsAPI.SubscriptionEditParams;
   export import Tokens = TokensAPI.Tokens;
+  export import CIDRListItem = TokensAPI.CIDRListItem;
+  export import Policy = TokensAPI.Policy;
   export import TokenCreateResponse = TokensAPI.TokenCreateResponse;
   export import TokenListResponse = TokensAPI.TokenListResponse;
   export import TokenDeleteResponse = TokensAPI.TokenDeleteResponse;

@@ -33,13 +33,9 @@ export class Projects extends APIResource {
   list(
     params: ProjectListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<PagesDeploymentsSinglePage, PagesDeployments> {
+  ): Core.PagePromise<DeploymentsSinglePage, Deployment> {
     const { account_id } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/pages/projects`,
-      PagesDeploymentsSinglePage,
-      options,
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/pages/projects`, DeploymentsSinglePage, options);
   }
 
   /**
@@ -82,11 +78,11 @@ export class Projects extends APIResource {
     projectName: string,
     params: ProjectGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PagesProjects> {
+  ): Core.APIPromise<Project> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/pages/projects/${projectName}`, options) as Core.APIPromise<{
-        result: PagesProjects;
+        result: Project;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -107,9 +103,9 @@ export class Projects extends APIResource {
   }
 }
 
-export class PagesDeploymentsSinglePage extends SinglePage<PagesDeployments> {}
+export class DeploymentsSinglePage extends SinglePage<Deployment> {}
 
-export interface PagesDeployments {
+export interface Deployment {
   /**
    * Id of the deployment.
    */
@@ -130,7 +126,7 @@ export interface PagesDeployments {
   /**
    * Info about what caused the deployment.
    */
-  deployment_trigger?: PagesDeployments.DeploymentTrigger;
+  deployment_trigger?: Deployment.DeploymentTrigger;
 
   /**
    * A dict of env variables to build this deploy.
@@ -174,7 +170,7 @@ export interface PagesDeployments {
   /**
    * List of past stages.
    */
-  stages?: Array<PagesDeployments.Stage>;
+  stages?: Array<Stage>;
 
   /**
    * The live URL to view this deployment.
@@ -182,7 +178,7 @@ export interface PagesDeployments {
   url?: string;
 }
 
-export namespace PagesDeployments {
+export namespace Deployment {
   /**
    * Info about what caused the deployment.
    */
@@ -219,34 +215,9 @@ export namespace PagesDeployments {
       commit_message?: string;
     }
   }
-
-  /**
-   * The status of the deployment.
-   */
-  export interface Stage {
-    /**
-     * When the stage ended.
-     */
-    ended_on?: string | null;
-
-    /**
-     * The current build stage.
-     */
-    name?: string;
-
-    /**
-     * When the stage started.
-     */
-    started_on?: string | null;
-
-    /**
-     * State of the current stage.
-     */
-    status?: string;
-  }
 }
 
-export interface PagesProjects {
+export interface Project {
   /**
    * Id of the project.
    */
@@ -255,9 +226,9 @@ export interface PagesProjects {
   /**
    * Configs for the project build process.
    */
-  build_config?: PagesProjects.BuildConfig;
+  build_config?: Project.BuildConfig;
 
-  canonical_deployment?: PagesDeployments;
+  canonical_deployment?: Deployment;
 
   /**
    * When the project was created.
@@ -267,14 +238,14 @@ export interface PagesProjects {
   /**
    * Configs for deployments in a project.
    */
-  deployment_configs?: PagesProjects.DeploymentConfigs;
+  deployment_configs?: Project.DeploymentConfigs;
 
   /**
    * A list of associated custom domains for the project.
    */
   domains?: Array<unknown>;
 
-  latest_deployment?: PagesDeployments;
+  latest_deployment?: Deployment;
 
   /**
    * Name of the project.
@@ -294,7 +265,7 @@ export interface PagesProjects {
   subdomain?: string;
 }
 
-export namespace PagesProjects {
+export namespace Project {
   /**
    * Configs for the project build process.
    */
@@ -1096,6 +1067,31 @@ export namespace PagesProjects {
   }
 }
 
+/**
+ * The status of the deployment.
+ */
+export interface Stage {
+  /**
+   * When the stage ended.
+   */
+  ended_on?: string | null;
+
+  /**
+   * The current build stage.
+   */
+  name?: string;
+
+  /**
+   * When the stage started.
+   */
+  started_on?: string | null;
+
+  /**
+   * State of the current stage.
+   */
+  status?: string;
+}
+
 export type ProjectDeleteResponse = unknown;
 
 export type ProjectPurgeBuildCacheResponse = unknown;
@@ -1114,7 +1110,7 @@ export interface ProjectCreateParams {
   /**
    * Body param:
    */
-  canonical_deployment?: PagesDeployments;
+  canonical_deployment?: Deployment;
 
   /**
    * Body param: Configs for deployments in a project.
@@ -1124,7 +1120,7 @@ export interface ProjectCreateParams {
   /**
    * Body param:
    */
-  latest_deployment?: PagesDeployments;
+  latest_deployment?: Deployment;
 
   /**
    * Body param: Name of the project.
@@ -1986,11 +1982,12 @@ export interface ProjectPurgeBuildCacheParams {
 }
 
 export namespace Projects {
-  export import PagesDeployments = ProjectsAPI.PagesDeployments;
-  export import PagesProjects = ProjectsAPI.PagesProjects;
+  export import Deployment = ProjectsAPI.Deployment;
+  export import Project = ProjectsAPI.Project;
+  export import Stage = ProjectsAPI.Stage;
   export import ProjectDeleteResponse = ProjectsAPI.ProjectDeleteResponse;
   export import ProjectPurgeBuildCacheResponse = ProjectsAPI.ProjectPurgeBuildCacheResponse;
-  export import PagesDeploymentsSinglePage = ProjectsAPI.PagesDeploymentsSinglePage;
+  export import DeploymentsSinglePage = ProjectsAPI.DeploymentsSinglePage;
   export import ProjectCreateParams = ProjectsAPI.ProjectCreateParams;
   export import ProjectListParams = ProjectsAPI.ProjectListParams;
   export import ProjectDeleteParams = ProjectsAPI.ProjectDeleteParams;

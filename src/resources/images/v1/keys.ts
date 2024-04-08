@@ -12,25 +12,23 @@ export class Keys extends APIResource {
     signingKeyName: string,
     params: KeyUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ImagesImageKeys> {
+  ): Core.APIPromise<Key> {
     const { account_id } = params;
     return (
       this._client.put(
         `/accounts/${account_id}/images/v1/keys/${signingKeyName}`,
         options,
-      ) as Core.APIPromise<{ result: ImagesImageKeys }>
+      ) as Core.APIPromise<{ result: Key }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Lists your signing keys. These can be found on your Cloudflare Images dashboard.
    */
-  list(params: KeyListParams, options?: Core.RequestOptions): Core.APIPromise<ImagesImageKeys> {
+  list(params: KeyListParams, options?: Core.RequestOptions): Core.APIPromise<Key> {
     const { account_id } = params;
     return (
-      this._client.get(`/accounts/${account_id}/images/v1/keys`, options) as Core.APIPromise<{
-        result: ImagesImageKeys;
-      }>
+      this._client.get(`/accounts/${account_id}/images/v1/keys`, options) as Core.APIPromise<{ result: Key }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -42,22 +40,22 @@ export class Keys extends APIResource {
     signingKeyName: string,
     params: KeyDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ImagesImageKeys> {
+  ): Core.APIPromise<Key> {
     const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/images/v1/keys/${signingKeyName}`,
         options,
-      ) as Core.APIPromise<{ result: ImagesImageKeys }>
+      ) as Core.APIPromise<{ result: Key }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface ImagesImageKeys {
-  keys?: Array<ImagesImageKeys.Key>;
+export interface Key {
+  keys?: Array<Key.Key>;
 }
 
-export namespace ImagesImageKeys {
+export namespace Key {
   export interface Key {
     /**
      * Key name.
@@ -111,7 +109,7 @@ export interface KeyDeleteParams {
 }
 
 export namespace Keys {
-  export import ImagesImageKeys = KeysAPI.ImagesImageKeys;
+  export import Key = KeysAPI.Key;
   export import UnnamedSchemaRef918e794287a67b5e85126e00cf2d9a95 = KeysAPI.UnnamedSchemaRef918e794287a67b5e85126e00cf2d9a95;
   export import KeyUpdateParams = KeysAPI.KeyUpdateParams;
   export import KeyListParams = KeysAPI.KeyListParams;

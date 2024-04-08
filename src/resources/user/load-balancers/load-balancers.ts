@@ -9,7 +9,7 @@ import * as AnalyticsAPI from 'cloudflare/resources/user/load-balancers/analytic
 export class LoadBalancers extends APIResource {
   monitors: MonitorsAPI.Monitors = new MonitorsAPI.Monitors(this._client);
   pools: PoolsAPI.Pools = new PoolsAPI.Pools(this._client);
-  preview: PreviewAPI.Preview = new PreviewAPI.Preview(this._client);
+  preview: PreviewAPI.PreviewResource = new PreviewAPI.PreviewResource(this._client);
   analytics: AnalyticsAPI.Analytics = new AnalyticsAPI.Analytics(this._client);
 }
 
@@ -38,7 +38,7 @@ export namespace LoadBalancers {
   export import PoolDeleteParams = PoolsAPI.PoolDeleteParams;
   export import PoolEditParams = PoolsAPI.PoolEditParams;
   export import PoolPreviewParams = PoolsAPI.PoolPreviewParams;
+  export import PreviewResource = PreviewAPI.PreviewResource;
   export import Preview = PreviewAPI.Preview;
-  export import LoadBalancingPreview = PreviewAPI.LoadBalancingPreview;
   export import Analytics = AnalyticsAPI.Analytics;
 }

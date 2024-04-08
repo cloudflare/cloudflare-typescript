@@ -1,23 +1,22 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+export { BGP } from './bgp/index';
 export {
-  AddressingIpamDelegations,
+  Delegations,
   DelegationDeleteResponse,
   DelegationCreateParams,
   DelegationListParams,
   DelegationDeleteParams,
-  AddressingIpamDelegationsSinglePage,
-  Delegations,
+  DelegationsSinglePage,
 } from './delegations';
 export {
-  AddressingIpamPrefixes,
+  Prefix,
   UnnamedSchemaRefE358666e049bf8f9281c0a4f89b5fe46,
   PrefixCreateParams,
   PrefixListParams,
   PrefixDeleteParams,
   PrefixEditParams,
   PrefixGetParams,
-  AddressingIpamPrefixesSinglePage,
+  PrefixesSinglePage,
   Prefixes,
 } from './prefixes';
-export { BGP } from './bgp/index';

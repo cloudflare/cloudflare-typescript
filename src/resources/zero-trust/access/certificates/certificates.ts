@@ -14,10 +14,7 @@ export class Certificates extends APIResource {
   /**
    * Adds a new mTLS root certificate to Access.
    */
-  create(
-    params: CertificateCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZeroTrustCertificates> {
+  create(params: CertificateCreateParams, options?: Core.RequestOptions): Core.APIPromise<Certificate> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -39,7 +36,7 @@ export class Certificates extends APIResource {
       this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/certificates`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZeroTrustCertificates }>
+      }) as Core.APIPromise<{ result: Certificate }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -50,7 +47,7 @@ export class Certificates extends APIResource {
     uuid: string,
     params: CertificateUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZeroTrustCertificates> {
+  ): Core.APIPromise<Certificate> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -72,7 +69,7 @@ export class Certificates extends APIResource {
       this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/certificates/${uuid}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZeroTrustCertificates }>
+      }) as Core.APIPromise<{ result: Certificate }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -82,14 +79,12 @@ export class Certificates extends APIResource {
   list(
     params?: CertificateListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<ZeroTrustCertificatesSinglePage, ZeroTrustCertificates>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<ZeroTrustCertificatesSinglePage, ZeroTrustCertificates>;
+  ): Core.PagePromise<CertificatesSinglePage, Certificate>;
+  list(options?: Core.RequestOptions): Core.PagePromise<CertificatesSinglePage, Certificate>;
   list(
     params: CertificateListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<ZeroTrustCertificatesSinglePage, ZeroTrustCertificates> {
+  ): Core.PagePromise<CertificatesSinglePage, Certificate> {
     if (isRequestOptions(params)) {
       return this.list({}, params);
     }
@@ -112,7 +107,7 @@ export class Certificates extends APIResource {
         };
     return this._client.getAPIList(
       `/${accountOrZone}/${accountOrZoneId}/access/certificates`,
-      ZeroTrustCertificatesSinglePage,
+      CertificatesSinglePage,
       options,
     );
   }
@@ -166,13 +161,13 @@ export class Certificates extends APIResource {
     uuid: string,
     params?: CertificateGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZeroTrustCertificates>;
-  get(uuid: string, options?: Core.RequestOptions): Core.APIPromise<ZeroTrustCertificates>;
+  ): Core.APIPromise<Certificate>;
+  get(uuid: string, options?: Core.RequestOptions): Core.APIPromise<Certificate>;
   get(
     uuid: string,
     params: CertificateGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZeroTrustCertificates> {
+  ): Core.APIPromise<Certificate> {
     if (isRequestOptions(params)) {
       return this.get(uuid, {}, params);
     }
@@ -197,14 +192,19 @@ export class Certificates extends APIResource {
       this._client.get(
         `/${accountOrZone}/${accountOrZoneId}/access/certificates/${uuid}`,
         options,
-      ) as Core.APIPromise<{ result: ZeroTrustCertificates }>
+      ) as Core.APIPromise<{ result: Certificate }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class ZeroTrustCertificatesSinglePage extends SinglePage<ZeroTrustCertificates> {}
+export class CertificatesSinglePage extends SinglePage<Certificate> {}
 
-export interface ZeroTrustCertificates {
+/**
+ * A fully-qualified domain name (FQDN).
+ */
+export type AssociatedHostnamesItem = string;
+
+export interface Certificate {
   /**
    * The ID of the application that will use this certificate.
    */
@@ -213,7 +213,7 @@ export interface ZeroTrustCertificates {
   /**
    * The hostnames of the applications that will use this certificate.
    */
-  associated_hostnames?: Array<string>;
+  associated_hostnames?: Array<AssociatedHostnamesItem>;
 
   created_at?: string;
 
@@ -265,14 +265,14 @@ export interface CertificateCreateParams {
   /**
    * Body param: The hostnames of the applications that will use this certificate.
    */
-  associated_hostnames?: Array<string>;
+  associated_hostnames?: Array<AssociatedHostnamesItem>;
 }
 
 export interface CertificateUpdateParams {
   /**
    * Body param: The hostnames of the applications that will use this certificate.
    */
-  associated_hostnames: Array<string>;
+  associated_hostnames: Array<AssociatedHostnamesItem>;
 
   /**
    * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -329,16 +329,16 @@ export interface CertificateGetParams {
 }
 
 export namespace Certificates {
-  export import ZeroTrustCertificates = CertificatesAPI.ZeroTrustCertificates;
+  export import AssociatedHostnamesItem = CertificatesAPI.AssociatedHostnamesItem;
+  export import Certificate = CertificatesAPI.Certificate;
   export import CertificateDeleteResponse = CertificatesAPI.CertificateDeleteResponse;
-  export import ZeroTrustCertificatesSinglePage = CertificatesAPI.ZeroTrustCertificatesSinglePage;
+  export import CertificatesSinglePage = CertificatesAPI.CertificatesSinglePage;
   export import CertificateCreateParams = CertificatesAPI.CertificateCreateParams;
   export import CertificateUpdateParams = CertificatesAPI.CertificateUpdateParams;
   export import CertificateListParams = CertificatesAPI.CertificateListParams;
   export import CertificateDeleteParams = CertificatesAPI.CertificateDeleteParams;
   export import CertificateGetParams = CertificatesAPI.CertificateGetParams;
   export import Settings = SettingsAPI.Settings;
-  export import ZeroTrustSettings = SettingsAPI.ZeroTrustSettings;
   export import SettingUpdateResponse = SettingsAPI.SettingUpdateResponse;
   export import SettingGetResponse = SettingsAPI.SettingGetResponse;
   export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;

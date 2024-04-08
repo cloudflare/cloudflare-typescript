@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
-import * as OriginCACertificatesAPI from 'cloudflare/resources/origin-ca-certificates';
 import * as Shared from 'cloudflare/resources/shared';
 import { SinglePage } from 'cloudflare/pagination';
 
@@ -150,11 +149,3 @@ export interface OriginCACertificateListParams {
 }
 
 export type OriginCACertificateDeleteParams = unknown;
-
-export namespace OriginCACertificates {
-  export import OriginCACertificate = OriginCACertificatesAPI.OriginCACertificate;
-  export import OriginCACertificatesSinglePage = OriginCACertificatesAPI.OriginCACertificatesSinglePage;
-  export import OriginCACertificateCreateParams = OriginCACertificatesAPI.OriginCACertificateCreateParams;
-  export import OriginCACertificateListParams = OriginCACertificatesAPI.OriginCACertificateListParams;
-  export import OriginCACertificateDeleteParams = OriginCACertificatesAPI.OriginCACertificateDeleteParams;
-}

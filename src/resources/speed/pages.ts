@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as PagesAPI from 'cloudflare/resources/speed/pages';
+import * as SpeedAPI from 'cloudflare/resources/speed/speed';
 import * as TestsAPI from 'cloudflare/resources/speed/tests';
 import { SinglePage } from 'cloudflare/pagination';
 
@@ -25,54 +26,19 @@ export interface PageListResponse {
   /**
    * A test region with a label.
    */
-  region?: PageListResponse.Region;
+  region?: SpeedAPI.LabeledRegion;
 
   /**
    * The frequency of the test.
    */
   scheduleFrequency?: 'DAILY' | 'WEEKLY';
 
-  tests?: Array<TestsAPI.ObservatoryPageTest>;
+  tests?: Array<TestsAPI.Test>;
 
   /**
    * A URL.
    */
   url?: string;
-}
-
-export namespace PageListResponse {
-  /**
-   * A test region with a label.
-   */
-  export interface Region {
-    label?: string;
-
-    /**
-     * A test region.
-     */
-    value?:
-      | 'asia-east1'
-      | 'asia-northeast1'
-      | 'asia-northeast2'
-      | 'asia-south1'
-      | 'asia-southeast1'
-      | 'australia-southeast1'
-      | 'europe-north1'
-      | 'europe-southwest1'
-      | 'europe-west1'
-      | 'europe-west2'
-      | 'europe-west3'
-      | 'europe-west4'
-      | 'europe-west8'
-      | 'europe-west9'
-      | 'me-west1'
-      | 'southamerica-east1'
-      | 'us-central1'
-      | 'us-east1'
-      | 'us-east4'
-      | 'us-south1'
-      | 'us-west1';
-  }
 }
 
 export interface PageListParams {

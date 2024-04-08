@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  HostnameSettingDelete,
-  HostnameStting,
+  Setting,
+  SettingValue,
+  TLSDeleteResponse,
   TLSGetResponse,
   TLSUpdateParams,
   TLSDeleteParams,

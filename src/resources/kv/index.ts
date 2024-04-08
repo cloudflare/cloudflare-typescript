@@ -2,11 +2,11 @@
 
 export { KV } from './kv';
 export {
-  WorkersKVNamespace,
+  Namespace,
   NamespaceCreateParams,
   NamespaceUpdateParams,
   NamespaceListParams,
   NamespaceDeleteParams,
-  WorkersKVNamespacesV4PagePaginationArray,
+  NamespacesV4PagePaginationArray,
   Namespaces,
 } from './namespaces/index';

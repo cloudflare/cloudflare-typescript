@@ -1,11 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  PermissionGroupListResponse,
-  PermissionGroupListResponsesSinglePage,
-  PermissionGroups,
-} from './permission-groups';
-export {
+  CIDRListItem,
+  Policy,
   TokenCreateResponse,
   TokenListResponse,
   TokenDeleteResponse,
@@ -17,4 +14,11 @@ export {
   TokenListResponsesV4PagePaginationArray,
   Tokens,
 } from './tokens';
-export { TokenValue, ValueUpdateParams, Value } from './value';
+export {
+  Permission,
+  PermissionItem,
+  PermissionGroupListResponse,
+  PermissionGroupListResponsesSinglePage,
+  PermissionGroups,
+} from './permission-groups';
+export { Value, ValueUpdateParams, ValueResource } from './value';

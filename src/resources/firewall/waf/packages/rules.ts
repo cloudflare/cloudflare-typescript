@@ -17,11 +17,11 @@ export class Rules extends APIResource {
     packageId: string,
     params: RuleListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<WAFManagedRulesRulesV4PagePaginationArray, WAFManagedRulesRule> {
+  ): Core.PagePromise<RulesV4PagePaginationArray, Rule> {
     const { zone_id, ...query } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/firewall/waf/packages/${packageId}/rules`,
-      WAFManagedRulesRulesV4PagePaginationArray,
+      RulesV4PagePaginationArray,
       { query, ...options },
     );
   }
@@ -69,22 +69,13 @@ export class Rules extends APIResource {
   }
 }
 
-export class WAFManagedRulesRulesV4PagePaginationArray extends V4PagePaginationArray<WAFManagedRulesRule> {}
+export class RulesV4PagePaginationArray extends V4PagePaginationArray<Rule> {}
 
 /**
- * The rule group to which the current WAF rule belongs.
+ * When set to `on`, the current WAF rule will be used when evaluating the request.
+ * Applies to anomaly detection WAF rules.
  */
-export interface UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5 {
-  /**
-   * The unique identifier of the rule group.
-   */
-  id?: string;
-
-  /**
-   * The name of the rule group.
-   */
-  name?: string;
-}
+export type AllowedModesAnomalyItem = 'on' | 'off';
 
 /**
  * When triggered, anomaly detection WAF rules contribute to an overall threat
@@ -92,12 +83,12 @@ export interface UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5 {
  * configure the total scoring threshold through the 'sensitivity' property of the
  * WAF package.
  */
-export type WAFManagedRulesRule =
-  | WAFManagedRulesRule.WAFManagedRulesAnomalyRule
-  | WAFManagedRulesRule.WAFManagedRulesTraditionalDenyRule
-  | WAFManagedRulesRule.WAFManagedRulesTraditionalAllowRule;
+export type Rule =
+  | Rule.WAFManagedRulesAnomalyRule
+  | Rule.WAFManagedRulesTraditionalDenyRule
+  | Rule.WAFManagedRulesTraditionalAllowRule;
 
-export namespace WAFManagedRulesRule {
+export namespace Rule {
   /**
    * When triggered, anomaly detection WAF rules contribute to an overall threat
    * score that will determine if a request is considered malicious. You can
@@ -114,7 +105,7 @@ export namespace WAFManagedRulesRule {
      * Defines the available modes for the current WAF rule. Applies to anomaly
      * detection WAF rules.
      */
-    allowed_modes: Array<'on' | 'off'>;
+    allowed_modes: Array<RulesAPI.AllowedModesAnomalyItem>;
 
     /**
      * The public description of the WAF rule.
@@ -239,6 +230,21 @@ export namespace WAFManagedRulesRule {
 }
 
 /**
+ * The rule group to which the current WAF rule belongs.
+ */
+export interface UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5 {
+  /**
+   * The unique identifier of the rule group.
+   */
+  id?: string;
+
+  /**
+   * The name of the rule group.
+   */
+  name?: string;
+}
+
+/**
  * When triggered, anomaly detection WAF rules contribute to an overall threat
  * score that will determine if a request is considered malicious. You can
  * configure the total scoring threshold through the 'sensitivity' property of the
@@ -266,7 +272,7 @@ export namespace RuleEditResponse {
      * Defines the available modes for the current WAF rule. Applies to anomaly
      * detection WAF rules.
      */
-    allowed_modes: Array<'on' | 'off'>;
+    allowed_modes: Array<RulesAPI.AllowedModesAnomalyItem>;
 
     /**
      * The public description of the WAF rule.
@@ -455,10 +461,11 @@ export interface RuleGetParams {
 }
 
 export namespace Rules {
+  export import AllowedModesAnomalyItem = RulesAPI.AllowedModesAnomalyItem;
+  export import Rule = RulesAPI.Rule;
   export import UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5 = RulesAPI.UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5;
-  export import WAFManagedRulesRule = RulesAPI.WAFManagedRulesRule;
   export import RuleEditResponse = RulesAPI.RuleEditResponse;
-  export import WAFManagedRulesRulesV4PagePaginationArray = RulesAPI.WAFManagedRulesRulesV4PagePaginationArray;
+  export import RulesV4PagePaginationArray = RulesAPI.RulesV4PagePaginationArray;
   export import RuleListParams = RulesAPI.RuleListParams;
   export import RuleEditParams = RulesAPI.RuleEditParams;
   export import RuleGetParams = RulesAPI.RuleGetParams;

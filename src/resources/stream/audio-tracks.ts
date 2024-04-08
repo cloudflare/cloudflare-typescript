@@ -32,13 +32,13 @@ export class AudioTracks extends APIResource {
     identifier: string,
     params: AudioTrackCopyParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<StreamAudio> {
+  ): Core.APIPromise<Audio> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/stream/${identifier}/audio/copy`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: StreamAudio }>
+      }) as Core.APIPromise<{ result: Audio }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -52,13 +52,13 @@ export class AudioTracks extends APIResource {
     audioIdentifier: string,
     params: AudioTrackEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<StreamAudio> {
+  ): Core.APIPromise<Audio> {
     const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/stream/${identifier}/audio/${audioIdentifier}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: StreamAudio }>
+      }) as Core.APIPromise<{ result: Audio }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -80,7 +80,7 @@ export class AudioTracks extends APIResource {
   }
 }
 
-export interface StreamAudio {
+export interface Audio {
   /**
    * Denotes whether the audio track will be played by default in a player.
    */
@@ -103,7 +103,7 @@ export interface StreamAudio {
   uid?: string;
 }
 
-export type AudioTrackGetResponse = Array<StreamAudio>;
+export type AudioTrackGetResponse = Array<Audio>;
 
 export interface AudioTrackDeleteParams {
   /**
@@ -160,7 +160,7 @@ export interface AudioTrackGetParams {
 }
 
 export namespace AudioTracks {
-  export import StreamAudio = AudioTracksAPI.StreamAudio;
+  export import Audio = AudioTracksAPI.Audio;
   export import AudioTrackGetResponse = AudioTracksAPI.AudioTrackGetResponse;
   export import AudioTrackDeleteParams = AudioTracksAPI.AudioTrackDeleteParams;
   export import AudioTrackCopyParams = AudioTracksAPI.AudioTrackCopyParams;

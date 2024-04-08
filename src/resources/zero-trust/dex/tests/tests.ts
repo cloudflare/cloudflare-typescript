@@ -28,16 +28,22 @@ export class Tests extends APIResource {
 
 export class TestListResponsesV4PagePagination extends V4PagePagination<TestListResponse> {}
 
-export interface DigitalExperienceMonitoringTests {
-  overviewMetrics: DigitalExperienceMonitoringTests.OverviewMetrics;
+export interface AggregateTimePeriod {
+  units: 'hours' | 'days' | 'testRuns';
+
+  value: number;
+}
+
+export interface Tests {
+  overviewMetrics: Tests.OverviewMetrics;
 
   /**
    * array of test results objects.
    */
-  tests: Array<DigitalExperienceMonitoringTests.Test>;
+  tests: Array<Tests.Test>;
 }
 
-export namespace DigitalExperienceMonitoringTests {
+export namespace Tests {
   export interface OverviewMetrics {
     /**
      * number of tests.
@@ -130,34 +136,20 @@ export namespace DigitalExperienceMonitoringTests {
 
       export namespace ResourceFetchTime {
         export interface History {
-          timePeriod: History.TimePeriod;
+          timePeriod: TestsAPI.AggregateTimePeriod;
 
           avgMs?: number | null;
 
           deltaPct?: number | null;
         }
 
-        export namespace History {
-          export interface TimePeriod {
-            units: 'hours' | 'days' | 'testRuns';
-
-            value: number;
-          }
-        }
-
         export interface OverTime {
-          timePeriod: OverTime.TimePeriod;
+          timePeriod: TestsAPI.AggregateTimePeriod;
 
           values: Array<OverTime.Value>;
         }
 
         export namespace OverTime {
-          export interface TimePeriod {
-            units: 'hours' | 'days' | 'testRuns';
-
-            value: number;
-          }
-
           export interface Value {
             avgMs: number;
 
@@ -187,34 +179,20 @@ export namespace DigitalExperienceMonitoringTests {
 
       export namespace ResourceFetchTime {
         export interface History {
-          timePeriod: History.TimePeriod;
+          timePeriod: TestsAPI.AggregateTimePeriod;
 
           avgMs?: number | null;
 
           deltaPct?: number | null;
         }
 
-        export namespace History {
-          export interface TimePeriod {
-            units: 'hours' | 'days' | 'testRuns';
-
-            value: number;
-          }
-        }
-
         export interface OverTime {
-          timePeriod: OverTime.TimePeriod;
+          timePeriod: TestsAPI.AggregateTimePeriod;
 
           values: Array<OverTime.Value>;
         }
 
         export namespace OverTime {
-          export interface TimePeriod {
-            units: 'hours' | 'days' | 'testRuns';
-
-            value: number;
-          }
-
           export interface Value {
             avgMs: number;
 
@@ -239,34 +217,20 @@ export namespace DigitalExperienceMonitoringTests {
 
       export namespace RoundTripTime {
         export interface History {
-          timePeriod: History.TimePeriod;
+          timePeriod: TestsAPI.AggregateTimePeriod;
 
           avgMs?: number | null;
 
           deltaPct?: number | null;
         }
 
-        export namespace History {
-          export interface TimePeriod {
-            units: 'hours' | 'days' | 'testRuns';
-
-            value: number;
-          }
-        }
-
         export interface OverTime {
-          timePeriod: OverTime.TimePeriod;
+          timePeriod: TestsAPI.AggregateTimePeriod;
 
           values: Array<OverTime.Value>;
         }
 
         export namespace OverTime {
-          export interface TimePeriod {
-            units: 'hours' | 'days' | 'testRuns';
-
-            value: number;
-          }
-
           export interface Value {
             avgMs: number;
 
@@ -296,34 +260,20 @@ export namespace DigitalExperienceMonitoringTests {
 
       export namespace RoundTripTime {
         export interface History {
-          timePeriod: History.TimePeriod;
+          timePeriod: TestsAPI.AggregateTimePeriod;
 
           avgMs?: number | null;
 
           deltaPct?: number | null;
         }
 
-        export namespace History {
-          export interface TimePeriod {
-            units: 'hours' | 'days' | 'testRuns';
-
-            value: number;
-          }
-        }
-
         export interface OverTime {
-          timePeriod: OverTime.TimePeriod;
+          timePeriod: TestsAPI.AggregateTimePeriod;
 
           values: Array<OverTime.Value>;
         }
 
         export namespace OverTime {
-          export interface TimePeriod {
-            units: 'hours' | 'days' | 'testRuns';
-
-            value: number;
-          }
-
           export interface Value {
             avgMs: number;
 
@@ -340,7 +290,7 @@ export interface TestListResponse {
 
   messages: Array<Shared.UnnamedSchemaRef3248f24329456e19dfa042fff9986f72>;
 
-  result: DigitalExperienceMonitoringTests;
+  result: Tests;
 
   /**
    * Whether the API call was successful
@@ -399,11 +349,11 @@ export interface TestListParams extends V4PagePaginationParams {
 }
 
 export namespace Tests {
-  export import DigitalExperienceMonitoringTests = TestsAPI.DigitalExperienceMonitoringTests;
+  export import AggregateTimePeriod = TestsAPI.AggregateTimePeriod;
+  export import Tests = TestsAPI.Tests;
   export import TestListResponse = TestsAPI.TestListResponse;
   export import TestListResponsesV4PagePagination = TestsAPI.TestListResponsesV4PagePagination;
   export import TestListParams = TestsAPI.TestListParams;
   export import UniqueDevices = UniqueDevicesAPI.UniqueDevices;
-  export import DigitalExperienceMonitoringUniqueDevices = UniqueDevicesAPI.DigitalExperienceMonitoringUniqueDevices;
   export import UniqueDeviceListParams = UniqueDevicesAPI.UniqueDeviceListParams;
 }

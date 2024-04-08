@@ -1,13 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+export { Alerting } from './alerting';
+export { AvailableAlertListResponse, AvailableAlertListParams, AvailableAlerts } from './available-alerts';
+export { Destinations } from './destinations/index';
 export {
-  AlertingHistory,
-  HistoryListParams,
-  AlertingHistoriesV4PagePaginationArray,
-  History,
-} from './history';
-export {
-  AlertingPolicies,
+  Filter,
+  Mechanism,
+  Policy,
   PolicyCreateResponse,
   PolicyUpdateResponse,
   PolicyCreateParams,
@@ -15,9 +14,7 @@ export {
   PolicyListParams,
   PolicyDeleteParams,
   PolicyGetParams,
-  AlertingPoliciesSinglePage,
+  PoliciesSinglePage,
   Policies,
 } from './policies';
-export { AvailableAlertListResponse, AvailableAlertListParams, AvailableAlerts } from './available-alerts';
-export { Destinations } from './destinations/index';
-export { UnnamedSchemaRefD6e23adacaca017802aaa484a8b3f405, Alerting } from './alerting';
+export { History, HistoryListParams, HistoriesV4PagePaginationArray, HistoryResource } from './history';

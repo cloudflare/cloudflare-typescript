@@ -1,32 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  LANCreateResponse,
-  LANUpdateResponse,
-  LANListResponse,
-  LANDeleteResponse,
-  LANGetResponse,
-  LANCreateParams,
-  LANUpdateParams,
-  LANListParams,
-  LANDeleteParams,
-  LANGetParams,
-  LANs,
-} from './lans';
-export {
-  SiteCreateResponse,
-  SiteUpdateResponse,
-  SiteListResponse,
-  SiteDeleteResponse,
-  SiteGetResponse,
-  SiteCreateParams,
-  SiteUpdateParams,
-  SiteListParams,
-  SiteDeleteParams,
-  SiteGetParams,
-  Sites,
-} from './sites';
-export {
+  ACL,
+  ACLConfiguration,
+  Subnet,
   UnnamedSchemaRef87fa9e5fe9f6b8d607be1df57340d916,
   ACLCreateResponse,
   ACLUpdateResponse,
@@ -41,6 +18,42 @@ export {
   ACLs,
 } from './acls';
 export {
+  DHCPRelay,
+  DHCPServer,
+  LAN,
+  Nat,
+  RoutedSubnet,
+  StaticAddressing,
+  LANCreateResponse,
+  LANUpdateResponse,
+  LANListResponse,
+  LANDeleteResponse,
+  LANGetResponse,
+  LANCreateParams,
+  LANUpdateParams,
+  LANListParams,
+  LANDeleteParams,
+  LANGetParams,
+  LANs,
+} from './lans';
+export {
+  Site,
+  SiteLocation,
+  SiteCreateResponse,
+  SiteUpdateResponse,
+  SiteListResponse,
+  SiteDeleteResponse,
+  SiteGetResponse,
+  SiteCreateParams,
+  SiteUpdateParams,
+  SiteListParams,
+  SiteDeleteParams,
+  SiteGetParams,
+  Sites,
+} from './sites';
+export {
+  StaticAddressing,
+  WAN,
   WANCreateResponse,
   WANUpdateResponse,
   WANListResponse,

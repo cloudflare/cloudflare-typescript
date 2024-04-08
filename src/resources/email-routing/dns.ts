@@ -20,7 +20,7 @@ export class DNS extends APIResource {
 /**
  * List of records needed to enable an Email Routing zone.
  */
-export interface EmailDNSRecord {
+export interface DNSRecord {
   /**
    * DNS record content.
    */
@@ -67,9 +67,9 @@ export interface EmailDNSRecord {
     | 'URI';
 }
 
-export type DNSGetResponse = Array<EmailDNSRecord>;
+export type DNSGetResponse = Array<DNSRecord>;
 
 export namespace DNS {
-  export import EmailDNSRecord = DNSAPI.EmailDNSRecord;
+  export import DNSRecord = DNSAPI.DNSRecord;
   export import DNSGetResponse = DNSAPI.DNSGetResponse;
 }

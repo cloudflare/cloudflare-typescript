@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from 'cloudflare/resource';
-import * as MagicTransitAPI from 'cloudflare/resources/magic-transit/magic-transit';
 import * as CfInterconnectsAPI from 'cloudflare/resources/magic-transit/cf-interconnects';
 import * as GRETunnelsAPI from 'cloudflare/resources/magic-transit/gre-tunnels';
 import * as IPSECTunnelsAPI from 'cloudflare/resources/magic-transit/ipsec-tunnels';
@@ -16,6 +15,42 @@ export class MagicTransit extends APIResource {
   sites: SitesAPI.Sites = new SitesAPI.Sites(this._client);
 }
 
+export interface HealthCheck {
+  /**
+   * The direction of the flow of the healthcheck. Either unidirectional, where the
+   * probe comes to you via the tunnel and the result comes back to Cloudflare via
+   * the open Internet, or bidirectional where both the probe and result come and go
+   * via the tunnel. Note in the case of bidirecitonal healthchecks, the target field
+   * in health_check is ignored as the interface_address is used to send traffic into
+   * the tunnel.
+   */
+  direction?: 'unidirectional' | 'bidirectional';
+
+  /**
+   * Determines whether to run healthchecks for a tunnel.
+   */
+  enabled?: boolean;
+
+  /**
+   * How frequent the health check is run. The default value is `mid`.
+   */
+  rate?: UnnamedSchemaRefEebdc868ce7f7ae92e23438caa84e7b5;
+
+  /**
+   * The destination address in a request type health check. After the healthcheck is
+   * decapsulated at the customer end of the tunnel, the ICMP echo will be forwarded
+   * to this address. This field defaults to `customer_gre_endpoint address`. This
+   * field is ignored for bidirectional healthchecks as the interface_address (not
+   * assigned to the Cloudflare side of the tunnel) is used as the target.
+   */
+  target?: string;
+
+  /**
+   * The type of healthcheck to run, reply or request. The default value is `reply`.
+   */
+  type?: UnnamedSchemaRef3b1a76a5e4a139b72ed7d93834773d39;
+}
+
 /**
  * The type of healthcheck to run, reply or request. The default value is `reply`.
  */
@@ -27,8 +62,6 @@ export type UnnamedSchemaRef3b1a76a5e4a139b72ed7d93834773d39 = 'reply' | 'reques
 export type UnnamedSchemaRefEebdc868ce7f7ae92e23438caa84e7b5 = 'low' | 'mid' | 'high';
 
 export namespace MagicTransit {
-  export import UnnamedSchemaRef3b1a76a5e4a139b72ed7d93834773d39 = MagicTransitAPI.UnnamedSchemaRef3b1a76a5e4a139b72ed7d93834773d39;
-  export import UnnamedSchemaRefEebdc868ce7f7ae92e23438caa84e7b5 = MagicTransitAPI.UnnamedSchemaRefEebdc868ce7f7ae92e23438caa84e7b5;
   export import CfInterconnects = CfInterconnectsAPI.CfInterconnects;
   export import CfInterconnectUpdateResponse = CfInterconnectsAPI.CfInterconnectUpdateResponse;
   export import CfInterconnectListResponse = CfInterconnectsAPI.CfInterconnectListResponse;
@@ -48,6 +81,7 @@ export namespace MagicTransit {
   export import GRETunnelDeleteParams = GRETunnelsAPI.GRETunnelDeleteParams;
   export import GRETunnelGetParams = GRETunnelsAPI.GRETunnelGetParams;
   export import IPSECTunnels = IPSECTunnelsAPI.IPSECTunnels;
+  export import PSKMetadata = IPSECTunnelsAPI.PSKMetadata;
   export import IPSECTunnelCreateResponse = IPSECTunnelsAPI.IPSECTunnelCreateResponse;
   export import IPSECTunnelUpdateResponse = IPSECTunnelsAPI.IPSECTunnelUpdateResponse;
   export import IPSECTunnelListResponse = IPSECTunnelsAPI.IPSECTunnelListResponse;
@@ -61,6 +95,9 @@ export namespace MagicTransit {
   export import IPSECTunnelGetParams = IPSECTunnelsAPI.IPSECTunnelGetParams;
   export import IPSECTunnelPSKGenerateParams = IPSECTunnelsAPI.IPSECTunnelPSKGenerateParams;
   export import Routes = RoutesAPI.Routes;
+  export import ColoNamesItem = RoutesAPI.ColoNamesItem;
+  export import ColoRegionsItem = RoutesAPI.ColoRegionsItem;
+  export import Scope = RoutesAPI.Scope;
   export import RouteCreateResponse = RoutesAPI.RouteCreateResponse;
   export import RouteUpdateResponse = RoutesAPI.RouteUpdateResponse;
   export import RouteListResponse = RoutesAPI.RouteListResponse;
@@ -74,6 +111,8 @@ export namespace MagicTransit {
   export import RouteEmptyParams = RoutesAPI.RouteEmptyParams;
   export import RouteGetParams = RoutesAPI.RouteGetParams;
   export import Sites = SitesAPI.Sites;
+  export import Site = SitesAPI.Site;
+  export import SiteLocation = SitesAPI.SiteLocation;
   export import SiteCreateResponse = SitesAPI.SiteCreateResponse;
   export import SiteUpdateResponse = SitesAPI.SiteUpdateResponse;
   export import SiteListResponse = SitesAPI.SiteListResponse;

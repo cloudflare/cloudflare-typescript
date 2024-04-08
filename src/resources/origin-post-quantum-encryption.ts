@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as OriginPostQuantumEncryptionAPI from 'cloudflare/resources/origin-post-quantum-encryption';
 import * as Shared from 'cloudflare/resources/shared';
 
 export class OriginPostQuantumEncryption extends APIResource {
@@ -65,9 +64,4 @@ export interface OriginPostQuantumEncryptionGetParams {
    * Identifier
    */
   zone_id: string;
-}
-
-export namespace OriginPostQuantumEncryption {
-  export import OriginPostQuantumEncryptionUpdateParams = OriginPostQuantumEncryptionAPI.OriginPostQuantumEncryptionUpdateParams;
-  export import OriginPostQuantumEncryptionGetParams = OriginPostQuantumEncryptionAPI.OriginPostQuantumEncryptionGetParams;
 }

@@ -36,11 +36,11 @@ export class AddressMaps extends APIResource {
   list(
     params: AddressMapListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<AddressingAddressMapsSinglePage, AddressingAddressMaps> {
+  ): Core.PagePromise<AddressMapsSinglePage, AddressMap> {
     const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/addressing/address_maps`,
-      AddressingAddressMapsSinglePage,
+      AddressMapsSinglePage,
       options,
     );
   }
@@ -70,13 +70,13 @@ export class AddressMaps extends APIResource {
     addressMapId: string,
     params: AddressMapEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AddressingAddressMaps> {
+  ): Core.APIPromise<AddressMap> {
     const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/addressing/address_maps/${addressMapId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: AddressingAddressMaps }>
+      }) as Core.APIPromise<{ result: AddressMap }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -98,9 +98,9 @@ export class AddressMaps extends APIResource {
   }
 }
 
-export class AddressingAddressMapsSinglePage extends SinglePage<AddressingAddressMaps> {}
+export class AddressMapsSinglePage extends SinglePage<AddressMap> {}
 
-export interface AddressingAddressMaps {
+export interface AddressMap {
   /**
    * Identifier
    */
@@ -388,10 +388,10 @@ export interface AddressMapGetParams {
 }
 
 export namespace AddressMaps {
-  export import AddressingAddressMaps = AddressMapsAPI.AddressingAddressMaps;
+  export import AddressMap = AddressMapsAPI.AddressMap;
   export import AddressMapCreateResponse = AddressMapsAPI.AddressMapCreateResponse;
   export import AddressMapGetResponse = AddressMapsAPI.AddressMapGetResponse;
-  export import AddressingAddressMapsSinglePage = AddressMapsAPI.AddressingAddressMapsSinglePage;
+  export import AddressMapsSinglePage = AddressMapsAPI.AddressMapsSinglePage;
   export import AddressMapCreateParams = AddressMapsAPI.AddressMapCreateParams;
   export import AddressMapListParams = AddressMapsAPI.AddressMapListParams;
   export import AddressMapDeleteParams = AddressMapsAPI.AddressMapDeleteParams;

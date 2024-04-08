@@ -9,6 +9,6 @@ export class Analytics extends APIResource {
 
 export namespace Analytics {
   export import Reports = ReportsAPI.Reports;
-  export import DNSAnalyticsReport = ReportsAPI.DNSAnalyticsReport;
+  export import Report = ReportsAPI.Report;
   export import ReportGetParams = ReportsAPI.ReportGetParams;
 }
