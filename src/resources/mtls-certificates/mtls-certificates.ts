@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as MTLSCertificatesAPI from 'cloudflare/resources/mtls-certificates/mtls-certificates';
 import * as AssociationsAPI from 'cloudflare/resources/mtls-certificates/associations';
 import { SinglePage } from 'cloudflare/pagination';
 
@@ -15,13 +14,13 @@ export class MTLSCertificates extends APIResource {
   create(
     params: MTLSCertificateCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MTLSCertificateUpdate> {
+  ): Core.APIPromise<MTLSCertificateCreateResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/mtls_certificates`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: MTLSCertificateUpdate }>
+      }) as Core.APIPromise<{ result: MTLSCertificateCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -125,7 +124,7 @@ export interface MTLSCertificate {
   uploaded_on?: string;
 }
 
-export interface MTLSCertificateUpdate {
+export interface MTLSCertificateCreateResponse {
   /**
    * Identifier
    */
@@ -232,15 +231,8 @@ export interface MTLSCertificateGetParams {
 }
 
 export namespace MTLSCertificates {
-  export import MTLSCertificate = MTLSCertificatesAPI.MTLSCertificate;
-  export import MTLSCertificateUpdate = MTLSCertificatesAPI.MTLSCertificateUpdate;
-  export import MTLSCertificatesSinglePage = MTLSCertificatesAPI.MTLSCertificatesSinglePage;
-  export import MTLSCertificateCreateParams = MTLSCertificatesAPI.MTLSCertificateCreateParams;
-  export import MTLSCertificateListParams = MTLSCertificatesAPI.MTLSCertificateListParams;
-  export import MTLSCertificateDeleteParams = MTLSCertificatesAPI.MTLSCertificateDeleteParams;
-  export import MTLSCertificateGetParams = MTLSCertificatesAPI.MTLSCertificateGetParams;
   export import Associations = AssociationsAPI.Associations;
-  export import MTLSCertificateAsssociation = AssociationsAPI.MTLSCertificateAsssociation;
+  export import CertificateAsssociation = AssociationsAPI.CertificateAsssociation;
   export import AssociationGetResponse = AssociationsAPI.AssociationGetResponse;
   export import AssociationGetParams = AssociationsAPI.AssociationGetParams;
 }

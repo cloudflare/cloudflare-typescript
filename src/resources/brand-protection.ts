@@ -2,43 +2,36 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as BrandProtectionAPI from 'cloudflare/resources/brand-protection';
 
 export class BrandProtection extends APIResource {
   /**
    * Submit suspicious URL for scanning
    */
-  submit(
-    params: BrandProtectionSubmitParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<IntelPhishingURLSubmit> {
+  submit(params: BrandProtectionSubmitParams, options?: Core.RequestOptions): Core.APIPromise<Submit> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/brand-protection/submit`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: IntelPhishingURLSubmit }>
+      }) as Core.APIPromise<{ result: Submit }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get results for a URL scan
    */
-  urlInfo(
-    params: BrandProtectionURLInfoParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<IntelPhishingURLInfo> {
+  urlInfo(params: BrandProtectionURLInfoParams, options?: Core.RequestOptions): Core.APIPromise<Info> {
     const { account_id, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/brand-protection/url-info`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: IntelPhishingURLInfo }>
+      }) as Core.APIPromise<{ result: Info }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface IntelPhishingURLInfo {
+export interface Info {
   /**
    * List of categorizations applied to this submission.
    */
@@ -76,7 +69,7 @@ export interface IntelPhishingURLInfo {
   url?: string;
 }
 
-export interface IntelPhishingURLSubmit {
+export interface Submit {
   /**
    * URLs that were excluded from scanning because their domain is in our no-scan
    * list.
@@ -232,18 +225,4 @@ export namespace BrandProtectionURLInfoParams {
      */
     url_id?: number;
   }
-}
-
-export namespace BrandProtection {
-  export import IntelPhishingURLInfo = BrandProtectionAPI.IntelPhishingURLInfo;
-  export import IntelPhishingURLSubmit = BrandProtectionAPI.IntelPhishingURLSubmit;
-  export import UnnamedSchemaRef209db30ed499548152d6f3bccf720b54 = BrandProtectionAPI.UnnamedSchemaRef209db30ed499548152d6f3bccf720b54;
-  export import UnnamedSchemaRef39419d70e2399b28b15cd660afd342fb = BrandProtectionAPI.UnnamedSchemaRef39419d70e2399b28b15cd660afd342fb;
-  export import UnnamedSchemaRef3e10ea08deb8102a27500f986488c1e8 = BrandProtectionAPI.UnnamedSchemaRef3e10ea08deb8102a27500f986488c1e8;
-  export import UnnamedSchemaRef44e66100b948bfe723054c56b6144766 = BrandProtectionAPI.UnnamedSchemaRef44e66100b948bfe723054c56b6144766;
-  export import UnnamedSchemaRef767c0981cf47f45f0c766253dbd18669 = BrandProtectionAPI.UnnamedSchemaRef767c0981cf47f45f0c766253dbd18669;
-  export import UnnamedSchemaRef9b4c9779a35b172cb69c71389ebc7014 = BrandProtectionAPI.UnnamedSchemaRef9b4c9779a35b172cb69c71389ebc7014;
-  export import UnnamedSchemaRefA64e2a18a86750b6bd72cdf37ecfd869 = BrandProtectionAPI.UnnamedSchemaRefA64e2a18a86750b6bd72cdf37ecfd869;
-  export import BrandProtectionSubmitParams = BrandProtectionAPI.BrandProtectionSubmitParams;
-  export import BrandProtectionURLInfoParams = BrandProtectionAPI.BrandProtectionURLInfoParams;
 }

@@ -29,9 +29,9 @@ export interface ScheduleCreateResponse {
   /**
    * The test schedule.
    */
-  schedule?: SpeedAPI.ObservatorySchedule;
+  schedule?: SpeedAPI.Schedule;
 
-  test?: TestsAPI.ObservatoryPageTest;
+  test?: TestsAPI.Test;
 }
 
 export interface ScheduleCreateParams {

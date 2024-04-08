@@ -19,12 +19,12 @@ export class Rules extends APIResource {
     zoneIdentifier: string,
     body: RuleCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleCreateResponse> {
+  ): Core.APIPromise<EmailRule> {
     return (
       this._client.post(`/zones/${zoneIdentifier}/email/routing/rules`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: RuleCreateResponse }>
+      }) as Core.APIPromise<{ result: EmailRule }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -36,12 +36,12 @@ export class Rules extends APIResource {
     ruleIdentifier: string,
     body: RuleUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleUpdateResponse> {
+  ): Core.APIPromise<EmailRule> {
     return (
       this._client.put(`/zones/${zoneIdentifier}/email/routing/rules/${ruleIdentifier}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: RuleUpdateResponse }>
+      }) as Core.APIPromise<{ result: EmailRule }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -52,22 +52,22 @@ export class Rules extends APIResource {
     zoneIdentifier: string,
     query?: RuleListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<RuleListResponsesV4PagePaginationArray, RuleListResponse>;
+  ): Core.PagePromise<EmailRulesV4PagePaginationArray, EmailRule>;
   list(
     zoneIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<RuleListResponsesV4PagePaginationArray, RuleListResponse>;
+  ): Core.PagePromise<EmailRulesV4PagePaginationArray, EmailRule>;
   list(
     zoneIdentifier: string,
     query: RuleListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<RuleListResponsesV4PagePaginationArray, RuleListResponse> {
+  ): Core.PagePromise<EmailRulesV4PagePaginationArray, EmailRule> {
     if (isRequestOptions(query)) {
       return this.list(zoneIdentifier, {}, query);
     }
     return this._client.getAPIList(
       `/zones/${zoneIdentifier}/email/routing/rules`,
-      RuleListResponsesV4PagePaginationArray,
+      EmailRulesV4PagePaginationArray,
       { query, ...options },
     );
   }
@@ -79,12 +79,12 @@ export class Rules extends APIResource {
     zoneIdentifier: string,
     ruleIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleDeleteResponse> {
+  ): Core.APIPromise<EmailRule> {
     return (
       this._client.delete(
         `/zones/${zoneIdentifier}/email/routing/rules/${ruleIdentifier}`,
         options,
-      ) as Core.APIPromise<{ result: RuleDeleteResponse }>
+      ) as Core.APIPromise<{ result: EmailRule }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -95,19 +95,43 @@ export class Rules extends APIResource {
     zoneIdentifier: string,
     ruleIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleGetResponse> {
+  ): Core.APIPromise<EmailRule> {
     return (
       this._client.get(
         `/zones/${zoneIdentifier}/email/routing/rules/${ruleIdentifier}`,
         options,
-      ) as Core.APIPromise<{ result: RuleGetResponse }>
+      ) as Core.APIPromise<{ result: EmailRule }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class RuleListResponsesV4PagePaginationArray extends V4PagePaginationArray<RuleListResponse> {}
+export class EmailRulesV4PagePaginationArray extends V4PagePaginationArray<EmailRule> {}
 
-export interface EmailRules {
+/**
+ * Actions pattern.
+ */
+export interface Action {
+  /**
+   * Type of supported action.
+   */
+  type: 'drop' | 'forward' | 'worker';
+
+  value: Array<string>;
+}
+
+/**
+ * Actions pattern.
+ */
+export interface ActionItem {
+  /**
+   * Type of supported action.
+   */
+  type: 'drop' | 'forward' | 'worker';
+
+  value: Array<string>;
+}
+
+export interface EmailRule {
   /**
    * Routing rule identifier.
    */
@@ -116,7 +140,7 @@ export interface EmailRules {
   /**
    * List actions patterns.
    */
-  actions?: Array<EmailRules.Action>;
+  actions?: Array<ActionItem>;
 
   /**
    * Routing rule status.
@@ -126,7 +150,7 @@ export interface EmailRules {
   /**
    * Matching patterns to forward to your actions.
    */
-  matchers?: Array<EmailRules.Matcher>;
+  matchers?: Array<MatcherItem>;
 
   /**
    * Routing rule name.
@@ -144,41 +168,47 @@ export interface EmailRules {
   tag?: string;
 }
 
-export namespace EmailRules {
+/**
+ * Matching pattern to forward your actions.
+ */
+export interface Matcher {
   /**
-   * Actions pattern.
+   * Field for type matcher.
    */
-  export interface Action {
-    /**
-     * Type of supported action.
-     */
-    type: 'drop' | 'forward' | 'worker';
-
-    value: Array<string>;
-  }
+  field: 'to';
 
   /**
-   * Matching pattern to forward your actions.
+   * Type of matcher.
    */
-  export interface Matcher {
-    /**
-     * Field for type matcher.
-     */
-    field: 'to';
+  type: 'literal';
 
-    /**
-     * Type of matcher.
-     */
-    type: 'literal';
-
-    /**
-     * Value for matcher.
-     */
-    value: string;
-  }
+  /**
+   * Value for matcher.
+   */
+  value: string;
 }
 
-export interface RuleCreateResponse {
+/**
+ * Matching pattern to forward your actions.
+ */
+export interface MatcherItem {
+  /**
+   * Field for type matcher.
+   */
+  field: 'to';
+
+  /**
+   * Type of matcher.
+   */
+  type: 'literal';
+
+  /**
+   * Value for matcher.
+   */
+  value: string;
+}
+
+export interface Properties {
   /**
    * Routing rule identifier.
    */
@@ -187,7 +217,7 @@ export interface RuleCreateResponse {
   /**
    * List actions patterns.
    */
-  actions?: Array<RuleCreateResponse.Action>;
+  actions?: Array<ActionItem>;
 
   /**
    * Routing rule status.
@@ -197,7 +227,7 @@ export interface RuleCreateResponse {
   /**
    * Matching patterns to forward to your actions.
    */
-  matchers?: Array<RuleCreateResponse.Matcher>;
+  matchers?: Array<MatcherItem>;
 
   /**
    * Routing rule name.
@@ -213,336 +243,18 @@ export interface RuleCreateResponse {
    * @deprecated: Routing rule tag. (Deprecated, replaced by routing rule identifier)
    */
   tag?: string;
-}
-
-export namespace RuleCreateResponse {
-  /**
-   * Actions pattern.
-   */
-  export interface Action {
-    /**
-     * Type of supported action.
-     */
-    type: 'drop' | 'forward' | 'worker';
-
-    value: Array<string>;
-  }
-
-  /**
-   * Matching pattern to forward your actions.
-   */
-  export interface Matcher {
-    /**
-     * Field for type matcher.
-     */
-    field: 'to';
-
-    /**
-     * Type of matcher.
-     */
-    type: 'literal';
-
-    /**
-     * Value for matcher.
-     */
-    value: string;
-  }
-}
-
-export interface RuleUpdateResponse {
-  /**
-   * Routing rule identifier.
-   */
-  id?: string;
-
-  /**
-   * List actions patterns.
-   */
-  actions?: Array<RuleUpdateResponse.Action>;
-
-  /**
-   * Routing rule status.
-   */
-  enabled?: true | false;
-
-  /**
-   * Matching patterns to forward to your actions.
-   */
-  matchers?: Array<RuleUpdateResponse.Matcher>;
-
-  /**
-   * Routing rule name.
-   */
-  name?: string;
-
-  /**
-   * Priority of the routing rule.
-   */
-  priority?: number;
-
-  /**
-   * @deprecated: Routing rule tag. (Deprecated, replaced by routing rule identifier)
-   */
-  tag?: string;
-}
-
-export namespace RuleUpdateResponse {
-  /**
-   * Actions pattern.
-   */
-  export interface Action {
-    /**
-     * Type of supported action.
-     */
-    type: 'drop' | 'forward' | 'worker';
-
-    value: Array<string>;
-  }
-
-  /**
-   * Matching pattern to forward your actions.
-   */
-  export interface Matcher {
-    /**
-     * Field for type matcher.
-     */
-    field: 'to';
-
-    /**
-     * Type of matcher.
-     */
-    type: 'literal';
-
-    /**
-     * Value for matcher.
-     */
-    value: string;
-  }
-}
-
-export interface RuleListResponse {
-  /**
-   * Routing rule identifier.
-   */
-  id?: string;
-
-  /**
-   * List actions patterns.
-   */
-  actions?: Array<RuleListResponse.Action>;
-
-  /**
-   * Routing rule status.
-   */
-  enabled?: true | false;
-
-  /**
-   * Matching patterns to forward to your actions.
-   */
-  matchers?: Array<RuleListResponse.Matcher>;
-
-  /**
-   * Routing rule name.
-   */
-  name?: string;
-
-  /**
-   * Priority of the routing rule.
-   */
-  priority?: number;
-
-  /**
-   * @deprecated: Routing rule tag. (Deprecated, replaced by routing rule identifier)
-   */
-  tag?: string;
-}
-
-export namespace RuleListResponse {
-  /**
-   * Actions pattern.
-   */
-  export interface Action {
-    /**
-     * Type of supported action.
-     */
-    type: 'drop' | 'forward' | 'worker';
-
-    value: Array<string>;
-  }
-
-  /**
-   * Matching pattern to forward your actions.
-   */
-  export interface Matcher {
-    /**
-     * Field for type matcher.
-     */
-    field: 'to';
-
-    /**
-     * Type of matcher.
-     */
-    type: 'literal';
-
-    /**
-     * Value for matcher.
-     */
-    value: string;
-  }
-}
-
-export interface RuleDeleteResponse {
-  /**
-   * Routing rule identifier.
-   */
-  id?: string;
-
-  /**
-   * List actions patterns.
-   */
-  actions?: Array<RuleDeleteResponse.Action>;
-
-  /**
-   * Routing rule status.
-   */
-  enabled?: true | false;
-
-  /**
-   * Matching patterns to forward to your actions.
-   */
-  matchers?: Array<RuleDeleteResponse.Matcher>;
-
-  /**
-   * Routing rule name.
-   */
-  name?: string;
-
-  /**
-   * Priority of the routing rule.
-   */
-  priority?: number;
-
-  /**
-   * @deprecated: Routing rule tag. (Deprecated, replaced by routing rule identifier)
-   */
-  tag?: string;
-}
-
-export namespace RuleDeleteResponse {
-  /**
-   * Actions pattern.
-   */
-  export interface Action {
-    /**
-     * Type of supported action.
-     */
-    type: 'drop' | 'forward' | 'worker';
-
-    value: Array<string>;
-  }
-
-  /**
-   * Matching pattern to forward your actions.
-   */
-  export interface Matcher {
-    /**
-     * Field for type matcher.
-     */
-    field: 'to';
-
-    /**
-     * Type of matcher.
-     */
-    type: 'literal';
-
-    /**
-     * Value for matcher.
-     */
-    value: string;
-  }
-}
-
-export interface RuleGetResponse {
-  /**
-   * Routing rule identifier.
-   */
-  id?: string;
-
-  /**
-   * List actions patterns.
-   */
-  actions?: Array<RuleGetResponse.Action>;
-
-  /**
-   * Routing rule status.
-   */
-  enabled?: true | false;
-
-  /**
-   * Matching patterns to forward to your actions.
-   */
-  matchers?: Array<RuleGetResponse.Matcher>;
-
-  /**
-   * Routing rule name.
-   */
-  name?: string;
-
-  /**
-   * Priority of the routing rule.
-   */
-  priority?: number;
-
-  /**
-   * @deprecated: Routing rule tag. (Deprecated, replaced by routing rule identifier)
-   */
-  tag?: string;
-}
-
-export namespace RuleGetResponse {
-  /**
-   * Actions pattern.
-   */
-  export interface Action {
-    /**
-     * Type of supported action.
-     */
-    type: 'drop' | 'forward' | 'worker';
-
-    value: Array<string>;
-  }
-
-  /**
-   * Matching pattern to forward your actions.
-   */
-  export interface Matcher {
-    /**
-     * Field for type matcher.
-     */
-    field: 'to';
-
-    /**
-     * Type of matcher.
-     */
-    type: 'literal';
-
-    /**
-     * Value for matcher.
-     */
-    value: string;
-  }
 }
 
 export interface RuleCreateParams {
   /**
    * List actions patterns.
    */
-  actions: Array<RuleCreateParams.Action>;
+  actions: Array<ActionItem>;
 
   /**
    * Matching patterns to forward to your actions.
    */
-  matchers: Array<RuleCreateParams.Matcher>;
+  matchers: Array<MatcherItem>;
 
   /**
    * Routing rule status.
@@ -558,52 +270,18 @@ export interface RuleCreateParams {
    * Priority of the routing rule.
    */
   priority?: number;
-}
-
-export namespace RuleCreateParams {
-  /**
-   * Actions pattern.
-   */
-  export interface Action {
-    /**
-     * Type of supported action.
-     */
-    type: 'drop' | 'forward' | 'worker';
-
-    value: Array<string>;
-  }
-
-  /**
-   * Matching pattern to forward your actions.
-   */
-  export interface Matcher {
-    /**
-     * Field for type matcher.
-     */
-    field: 'to';
-
-    /**
-     * Type of matcher.
-     */
-    type: 'literal';
-
-    /**
-     * Value for matcher.
-     */
-    value: string;
-  }
 }
 
 export interface RuleUpdateParams {
   /**
    * List actions patterns.
    */
-  actions: Array<RuleUpdateParams.Action>;
+  actions: Array<ActionItem>;
 
   /**
    * Matching patterns to forward to your actions.
    */
-  matchers: Array<RuleUpdateParams.Matcher>;
+  matchers: Array<MatcherItem>;
 
   /**
    * Routing rule status.
@@ -619,40 +297,6 @@ export interface RuleUpdateParams {
    * Priority of the routing rule.
    */
   priority?: number;
-}
-
-export namespace RuleUpdateParams {
-  /**
-   * Actions pattern.
-   */
-  export interface Action {
-    /**
-     * Type of supported action.
-     */
-    type: 'drop' | 'forward' | 'worker';
-
-    value: Array<string>;
-  }
-
-  /**
-   * Matching pattern to forward your actions.
-   */
-  export interface Matcher {
-    /**
-     * Field for type matcher.
-     */
-    field: 'to';
-
-    /**
-     * Type of matcher.
-     */
-    type: 'literal';
-
-    /**
-     * Value for matcher.
-     */
-    value: string;
-  }
 }
 
 export interface RuleListParams extends V4PagePaginationArrayParams {
@@ -663,17 +307,17 @@ export interface RuleListParams extends V4PagePaginationArrayParams {
 }
 
 export namespace Rules {
-  export import EmailRules = RulesAPI.EmailRules;
-  export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
-  export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
-  export import RuleListResponse = RulesAPI.RuleListResponse;
-  export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
-  export import RuleGetResponse = RulesAPI.RuleGetResponse;
-  export import RuleListResponsesV4PagePaginationArray = RulesAPI.RuleListResponsesV4PagePaginationArray;
+  export import Action = RulesAPI.Action;
+  export import ActionItem = RulesAPI.ActionItem;
+  export import EmailRule = RulesAPI.EmailRule;
+  export import Matcher = RulesAPI.Matcher;
+  export import MatcherItem = RulesAPI.MatcherItem;
+  export import Properties = RulesAPI.Properties;
+  export import EmailRulesV4PagePaginationArray = RulesAPI.EmailRulesV4PagePaginationArray;
   export import RuleCreateParams = RulesAPI.RuleCreateParams;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
   export import RuleListParams = RulesAPI.RuleListParams;
   export import CatchAlls = CatchAllsAPI.CatchAlls;
-  export import EmailCatchAllRule = CatchAllsAPI.EmailCatchAllRule;
+  export import CatchAllRule = CatchAllsAPI.CatchAllRule;
   export import CatchAllUpdateParams = CatchAllsAPI.CatchAllUpdateParams;
 }

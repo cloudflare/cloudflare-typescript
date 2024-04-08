@@ -4,7 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as VerificationAPI from 'cloudflare/resources/ssl/verification';
 
-export class Verification extends APIResource {
+export class VerificationResource extends APIResource {
   /**
    * Edit SSL validation method for a certificate pack. A PATCH request will request
    * an immediate validation check on any certificate, and return the updated status.
@@ -41,7 +41,7 @@ export class Verification extends APIResource {
   }
 }
 
-export interface TLSVerificationSetting {
+export interface Verification {
   /**
    * Current status of certificate.
    */
@@ -77,7 +77,7 @@ export interface TLSVerificationSetting {
   /**
    * Certificate's required verification information.
    */
-  verification_info?: TLSVerificationSetting.VerificationInfo;
+  verification_info?: Verification.VerificationInfo;
 
   /**
    * Status of the required verification information, omitted if verification status
@@ -91,7 +91,7 @@ export interface TLSVerificationSetting {
   verification_type?: 'cname' | 'meta tag';
 }
 
-export namespace TLSVerificationSetting {
+export namespace Verification {
   /**
    * Certificate's required verification information.
    */
@@ -120,7 +120,7 @@ export interface VerificationEditResponse {
   validation_method?: 'http' | 'cname' | 'txt' | 'email';
 }
 
-export type VerificationGetResponse = Array<TLSVerificationSetting>;
+export type VerificationGetResponse = Array<Verification>;
 
 export interface VerificationEditParams {
   /**
@@ -146,8 +146,8 @@ export interface VerificationGetParams {
   retry?: true;
 }
 
-export namespace Verification {
-  export import TLSVerificationSetting = VerificationAPI.TLSVerificationSetting;
+export namespace VerificationResource {
+  export import Verification = VerificationAPI.Verification;
   export import VerificationEditResponse = VerificationAPI.VerificationEditResponse;
   export import VerificationGetResponse = VerificationAPI.VerificationGetResponse;
   export import VerificationEditParams = VerificationAPI.VerificationEditParams;

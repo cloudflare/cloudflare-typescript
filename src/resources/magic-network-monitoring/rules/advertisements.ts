@@ -12,18 +12,18 @@ export class Advertisements extends APIResource {
     ruleId: string,
     params: AdvertisementEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MagicNetworkMonitoringRuleAdvertisable | null> {
+  ): Core.APIPromise<Advertisement | null> {
     const { account_id, body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/mnm/rules/${ruleId}/advertisement`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: MagicNetworkMonitoringRuleAdvertisable | null }>
+      }) as Core.APIPromise<{ result: Advertisement | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface MagicNetworkMonitoringRuleAdvertisable {
+export interface Advertisement {
   /**
    * Toggle on if you would like Cloudflare to automatically advertise the IP
    * Prefixes within the rule via Magic Transit when the rule is triggered. Only
@@ -45,6 +45,6 @@ export interface AdvertisementEditParams {
 }
 
 export namespace Advertisements {
-  export import MagicNetworkMonitoringRuleAdvertisable = AdvertisementsAPI.MagicNetworkMonitoringRuleAdvertisable;
+  export import Advertisement = AdvertisementsAPI.Advertisement;
   export import AdvertisementEditParams = AdvertisementsAPI.AdvertisementEditParams;
 }

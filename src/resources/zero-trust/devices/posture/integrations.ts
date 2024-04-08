@@ -13,13 +13,13 @@ export class Integrations extends APIResource {
   create(
     params: IntegrationCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DevicePostureIntegrations | null> {
+  ): Core.APIPromise<Integrations | null> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/devices/posture/integration`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: DevicePostureIntegrations | null }>
+      }) as Core.APIPromise<{ result: Integrations | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -29,11 +29,11 @@ export class Integrations extends APIResource {
   list(
     params: IntegrationListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<DevicePostureIntegrationsSinglePage, DevicePostureIntegrations> {
+  ): Core.PagePromise<IntegrationsSinglePage, Integrations> {
     const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/devices/posture/integration`,
-      DevicePostureIntegrationsSinglePage,
+      IntegrationsSinglePage,
       options,
     );
   }
@@ -62,13 +62,13 @@ export class Integrations extends APIResource {
     integrationId: string,
     params: IntegrationEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DevicePostureIntegrations | null> {
+  ): Core.APIPromise<Integrations | null> {
     const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/devices/posture/integration/${integrationId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: DevicePostureIntegrations | null }>
+      }) as Core.APIPromise<{ result: Integrations | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -79,20 +79,20 @@ export class Integrations extends APIResource {
     integrationId: string,
     params: IntegrationGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DevicePostureIntegrations | null> {
+  ): Core.APIPromise<Integrations | null> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/devices/posture/integration/${integrationId}`,
         options,
-      ) as Core.APIPromise<{ result: DevicePostureIntegrations | null }>
+      ) as Core.APIPromise<{ result: Integrations | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class DevicePostureIntegrationsSinglePage extends SinglePage<DevicePostureIntegrations> {}
+export class IntegrationsSinglePage extends SinglePage<Integrations> {}
 
-export interface DevicePostureIntegrations {
+export interface Integrations {
   /**
    * API UUID.
    */
@@ -101,7 +101,7 @@ export interface DevicePostureIntegrations {
   /**
    * The configuration object containing third-party integration information.
    */
-  config?: DevicePostureIntegrations.Config;
+  config?: Integrations.Config;
 
   /**
    * The interval between each posture check with the third-party API. Use `m` for
@@ -120,7 +120,7 @@ export interface DevicePostureIntegrations {
   type?: 'workspace_one' | 'crowdstrike_s2s' | 'uptycs' | 'intune' | 'kolide' | 'tanium' | 'sentinelone_s2s';
 }
 
-export namespace DevicePostureIntegrations {
+export namespace Integrations {
   /**
    * The configuration object containing third-party integration information.
    */
@@ -551,9 +551,9 @@ export interface IntegrationGetParams {
 }
 
 export namespace Integrations {
-  export import DevicePostureIntegrations = IntegrationsAPI.DevicePostureIntegrations;
+  export import Integrations = IntegrationsAPI.Integrations;
   export import UnnamedSchemaRefB84b377dfc9454d455b646d4bc9ab507 = IntegrationsAPI.UnnamedSchemaRefB84b377dfc9454d455b646d4bc9ab507;
-  export import DevicePostureIntegrationsSinglePage = IntegrationsAPI.DevicePostureIntegrationsSinglePage;
+  export import IntegrationsSinglePage = IntegrationsAPI.IntegrationsSinglePage;
   export import IntegrationCreateParams = IntegrationsAPI.IntegrationCreateParams;
   export import IntegrationListParams = IntegrationsAPI.IntegrationListParams;
   export import IntegrationDeleteParams = IntegrationsAPI.IntegrationDeleteParams;

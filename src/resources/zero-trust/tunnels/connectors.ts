@@ -14,13 +14,13 @@ export class Connectors extends APIResource {
     connectorId: string,
     params: ConnectorGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ConnectionsAPI.TunnelTunnelClient> {
+  ): Core.APIPromise<ConnectionsAPI.Client> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/cfd_tunnel/${tunnelId}/connectors/${connectorId}`,
         options,
-      ) as Core.APIPromise<{ result: ConnectionsAPI.TunnelTunnelClient }>
+      ) as Core.APIPromise<{ result: ConnectionsAPI.Client }>
     )._thenUnwrap((obj) => obj.result);
   }
 }

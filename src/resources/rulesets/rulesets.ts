@@ -4,7 +4,6 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import { CloudflareError } from 'cloudflare/error';
-import * as RulesetsAPI from 'cloudflare/resources/rulesets/rulesets';
 import * as Shared from 'cloudflare/resources/shared';
 import * as RulesAPI from 'cloudflare/resources/rulesets/rules';
 import * as PhasesAPI from 'cloudflare/resources/rulesets/phases/phases';
@@ -1079,21 +1078,6 @@ export interface RulesetGetParams {
 }
 
 export namespace Rulesets {
-  export import BlockRule = RulesetsAPI.BlockRule;
-  export import ExecuteRule = RulesetsAPI.ExecuteRule;
-  export import LogRule = RulesetsAPI.LogRule;
-  export import RequestRule = RulesetsAPI.RequestRule;
-  export import Ruleset = RulesetsAPI.Ruleset;
-  export import SkipRule = RulesetsAPI.SkipRule;
-  export import RulesetCreateResponse = RulesetsAPI.RulesetCreateResponse;
-  export import RulesetUpdateResponse = RulesetsAPI.RulesetUpdateResponse;
-  export import RulesetGetResponse = RulesetsAPI.RulesetGetResponse;
-  export import RulesetsSinglePage = RulesetsAPI.RulesetsSinglePage;
-  export import RulesetCreateParams = RulesetsAPI.RulesetCreateParams;
-  export import RulesetUpdateParams = RulesetsAPI.RulesetUpdateParams;
-  export import RulesetListParams = RulesetsAPI.RulesetListParams;
-  export import RulesetDeleteParams = RulesetsAPI.RulesetDeleteParams;
-  export import RulesetGetParams = RulesetsAPI.RulesetGetParams;
   export import Phases = PhasesAPI.Phases;
   export import PhaseUpdateResponse = PhasesAPI.PhaseUpdateResponse;
   export import PhaseGetResponse = PhasesAPI.PhaseGetResponse;

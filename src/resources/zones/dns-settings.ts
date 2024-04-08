@@ -32,19 +32,17 @@ export interface DNSSetting {
   /**
    * Settings determining the nameservers through which the zone should be available.
    */
-  nameservers?: DNSSetting.Nameservers;
+  nameservers?: Nameserver;
 }
 
-export namespace DNSSetting {
+/**
+ * Settings determining the nameservers through which the zone should be available.
+ */
+export interface Nameserver {
   /**
-   * Settings determining the nameservers through which the zone should be available.
+   * Nameserver type
    */
-  export interface Nameservers {
-    /**
-     * Nameserver type
-     */
-    type: 'cloudflare.standard' | 'cloudflare.foundation_dns';
-  }
+  type: 'cloudflare.standard' | 'cloudflare.foundation_dns';
 }
 
 export interface DNSSettingEditParams {
@@ -57,19 +55,7 @@ export interface DNSSettingEditParams {
    * Body param: Settings determining the nameservers through which the zone should
    * be available.
    */
-  nameservers?: DNSSettingEditParams.Nameservers;
-}
-
-export namespace DNSSettingEditParams {
-  /**
-   * Settings determining the nameservers through which the zone should be available.
-   */
-  export interface Nameservers {
-    /**
-     * Nameserver type
-     */
-    type: 'cloudflare.standard' | 'cloudflare.foundation_dns';
-  }
+  nameservers?: Nameserver;
 }
 
 export interface DNSSettingGetParams {
@@ -81,6 +67,7 @@ export interface DNSSettingGetParams {
 
 export namespace DNSSettings {
   export import DNSSetting = DNSSettingsAPI.DNSSetting;
+  export import Nameserver = DNSSettingsAPI.Nameserver;
   export import DNSSettingEditParams = DNSSettingsAPI.DNSSettingEditParams;
   export import DNSSettingGetParams = DNSSettingsAPI.DNSSettingGetParams;
 }

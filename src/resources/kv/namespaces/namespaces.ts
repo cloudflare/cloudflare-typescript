@@ -21,13 +21,13 @@ export class Namespaces extends APIResource {
    * already owns a namespace with this title. A namespace must be explicitly deleted
    * to be replaced.
    */
-  create(params: NamespaceCreateParams, options?: Core.RequestOptions): Core.APIPromise<WorkersKVNamespace> {
+  create(params: NamespaceCreateParams, options?: Core.RequestOptions): Core.APIPromise<Namespace> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/storage/kv/namespaces`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: WorkersKVNamespace }>
+      }) as Core.APIPromise<{ result: Namespace }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -54,11 +54,11 @@ export class Namespaces extends APIResource {
   list(
     params: NamespaceListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<WorkersKVNamespacesV4PagePaginationArray, WorkersKVNamespace> {
+  ): Core.PagePromise<NamespacesV4PagePaginationArray, Namespace> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/storage/kv/namespaces`,
-      WorkersKVNamespacesV4PagePaginationArray,
+      NamespacesV4PagePaginationArray,
       { query, ...options },
     );
   }
@@ -81,9 +81,9 @@ export class Namespaces extends APIResource {
   }
 }
 
-export class WorkersKVNamespacesV4PagePaginationArray extends V4PagePaginationArray<WorkersKVNamespace> {}
+export class NamespacesV4PagePaginationArray extends V4PagePaginationArray<Namespace> {}
 
-export interface WorkersKVNamespace {
+export interface Namespace {
   /**
    * Namespace identifier tag.
    */
@@ -155,8 +155,8 @@ export interface NamespaceDeleteParams {
 }
 
 export namespace Namespaces {
-  export import WorkersKVNamespace = NamespacesAPI.WorkersKVNamespace;
-  export import WorkersKVNamespacesV4PagePaginationArray = NamespacesAPI.WorkersKVNamespacesV4PagePaginationArray;
+  export import Namespace = NamespacesAPI.Namespace;
+  export import NamespacesV4PagePaginationArray = NamespacesAPI.NamespacesV4PagePaginationArray;
   export import NamespaceCreateParams = NamespacesAPI.NamespaceCreateParams;
   export import NamespaceUpdateParams = NamespacesAPI.NamespaceUpdateParams;
   export import NamespaceListParams = NamespacesAPI.NamespaceListParams;
@@ -165,8 +165,8 @@ export namespace Namespaces {
   export import BulkUpdateParams = BulkAPI.BulkUpdateParams;
   export import BulkDeleteParams = BulkAPI.BulkDeleteParams;
   export import Keys = KeysAPI.Keys;
-  export import WorkersKVKey = KeysAPI.WorkersKVKey;
-  export import WorkersKVKeysCursorLimitPagination = KeysAPI.WorkersKVKeysCursorLimitPagination;
+  export import Key = KeysAPI.Key;
+  export import KeysCursorLimitPagination = KeysAPI.KeysCursorLimitPagination;
   export import KeyListParams = KeysAPI.KeyListParams;
   export import Metadata = MetadataAPI.Metadata;
   export import MetadataGetResponse = MetadataAPI.MetadataGetResponse;

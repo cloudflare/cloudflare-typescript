@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as ClientCertificatesAPI from 'cloudflare/resources/client-certificates';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class ClientCertificates extends APIResource {
@@ -256,14 +255,4 @@ export interface ClientCertificateGetParams {
    * Identifier
    */
   zone_id: string;
-}
-
-export namespace ClientCertificates {
-  export import ClientCertificate = ClientCertificatesAPI.ClientCertificate;
-  export import ClientCertificatesV4PagePaginationArray = ClientCertificatesAPI.ClientCertificatesV4PagePaginationArray;
-  export import ClientCertificateCreateParams = ClientCertificatesAPI.ClientCertificateCreateParams;
-  export import ClientCertificateListParams = ClientCertificatesAPI.ClientCertificateListParams;
-  export import ClientCertificateDeleteParams = ClientCertificatesAPI.ClientCertificateDeleteParams;
-  export import ClientCertificateEditParams = ClientCertificatesAPI.ClientCertificateEditParams;
-  export import ClientCertificateGetParams = ClientCertificatesAPI.ClientCertificateGetParams;
 }

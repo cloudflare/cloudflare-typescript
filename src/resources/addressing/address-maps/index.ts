@@ -2,7 +2,7 @@
 
 export { AccountUpdateParams, AccountDeleteParams, Accounts } from './accounts';
 export {
-  AddressingAddressMaps,
+  AddressMap,
   AddressMapCreateResponse,
   AddressMapGetResponse,
   AddressMapCreateParams,
@@ -10,7 +10,7 @@ export {
   AddressMapDeleteParams,
   AddressMapEditParams,
   AddressMapGetParams,
-  AddressingAddressMapsSinglePage,
+  AddressMapsSinglePage,
   AddressMaps,
 } from './address-maps';
 export { IPUpdateParams, IPDeleteParams, IPs } from './ips';

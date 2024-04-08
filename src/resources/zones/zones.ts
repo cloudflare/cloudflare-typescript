@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
-import * as ZonesAPI from 'cloudflare/resources/zones/zones';
 import * as ActivationCheckAPI from 'cloudflare/resources/zones/activation-check';
 import * as CustomNameserversAPI from 'cloudflare/resources/zones/custom-nameservers';
 import * as DNSSettingsAPI from 'cloudflare/resources/zones/dns-settings';
@@ -385,19 +384,12 @@ export interface ZoneGetParams {
 }
 
 export namespace Zones {
-  export import Zone = ZonesAPI.Zone;
-  export import ZoneDeleteResponse = ZonesAPI.ZoneDeleteResponse;
-  export import ZonesV4PagePaginationArray = ZonesAPI.ZonesV4PagePaginationArray;
-  export import ZoneCreateParams = ZonesAPI.ZoneCreateParams;
-  export import ZoneListParams = ZonesAPI.ZoneListParams;
-  export import ZoneDeleteParams = ZonesAPI.ZoneDeleteParams;
-  export import ZoneEditParams = ZonesAPI.ZoneEditParams;
-  export import ZoneGetParams = ZonesAPI.ZoneGetParams;
   export import ActivationCheck = ActivationCheckAPI.ActivationCheck;
   export import ActivationCheckTriggerResponse = ActivationCheckAPI.ActivationCheckTriggerResponse;
   export import ActivationCheckTriggerParams = ActivationCheckAPI.ActivationCheckTriggerParams;
   export import DNSSettings = DNSSettingsAPI.DNSSettings;
   export import DNSSetting = DNSSettingsAPI.DNSSetting;
+  export import Nameserver = DNSSettingsAPI.Nameserver;
   export import DNSSettingEditParams = DNSSettingsAPI.DNSSettingEditParams;
   export import DNSSettingGetParams = DNSSettingsAPI.DNSSettingGetParams;
   export import Settings = SettingsAPI.Settings;
@@ -405,13 +397,11 @@ export namespace Zones {
   export import CustomNameserverUpdateParams = CustomNameserversAPI.CustomNameserverUpdateParams;
   export import CustomNameserverGetParams = CustomNameserversAPI.CustomNameserverGetParams;
   export import Holds = HoldsAPI.Holds;
-  export import UnnamedSchemaRef45004a9444b6da9f88158ed2fb9a5820 = HoldsAPI.UnnamedSchemaRef45004a9444b6da9f88158ed2fb9a5820;
+  export import ZoneHold = HoldsAPI.ZoneHold;
   export import HoldCreateParams = HoldsAPI.HoldCreateParams;
   export import HoldDeleteParams = HoldsAPI.HoldDeleteParams;
   export import HoldGetParams = HoldsAPI.HoldGetParams;
   export import Workers = WorkersAPI.Workers;
   export import Subscriptions = SubscriptionsAPI.Subscriptions;
-  export import SubscriptionListResponse = SubscriptionsAPI.SubscriptionListResponse;
-  export import SubscriptionListResponsesSinglePage = SubscriptionsAPI.SubscriptionListResponsesSinglePage;
   export import SubscriptionCreateParams = SubscriptionsAPI.SubscriptionCreateParams;
 }

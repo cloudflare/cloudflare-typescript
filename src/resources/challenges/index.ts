@@ -2,14 +2,15 @@
 
 export { Challenges } from './challenges';
 export {
-  ChallengesWidget,
-  ChallengesWidgetList,
+  Widget,
+  WidgetDomain,
+  WidgetDomainItem,
   WidgetCreateParams,
   WidgetUpdateParams,
   WidgetListParams,
   WidgetDeleteParams,
   WidgetGetParams,
   WidgetRotateSecretParams,
-  ChallengesWidgetListsV4PagePaginationArray,
+  WidgetDomainsV4PagePaginationArray,
   Widgets,
 } from './widgets';

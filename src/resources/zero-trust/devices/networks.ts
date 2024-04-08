@@ -9,14 +9,11 @@ export class Networks extends APIResource {
   /**
    * Creates a new device managed network.
    */
-  create(
-    params: NetworkCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DeviceManagedNetworks | null> {
+  create(params: NetworkCreateParams, options?: Core.RequestOptions): Core.APIPromise<Network | null> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/devices/networks`, { body, ...options }) as Core.APIPromise<{
-        result: DeviceManagedNetworks | null;
+        result: Network | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -28,13 +25,13 @@ export class Networks extends APIResource {
     networkId: string,
     params: NetworkUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DeviceManagedNetworks | null> {
+  ): Core.APIPromise<Network | null> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/devices/networks/${networkId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: DeviceManagedNetworks | null }>
+      }) as Core.APIPromise<{ result: Network | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -44,13 +41,9 @@ export class Networks extends APIResource {
   list(
     params: NetworkListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<DeviceManagedNetworksSinglePage, DeviceManagedNetworks> {
+  ): Core.PagePromise<NetworksSinglePage, Network> {
     const { account_id } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/devices/networks`,
-      DeviceManagedNetworksSinglePage,
-      options,
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/devices/networks`, NetworksSinglePage, options);
   }
 
   /**
@@ -78,24 +71,24 @@ export class Networks extends APIResource {
     networkId: string,
     params: NetworkGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DeviceManagedNetworks | null> {
+  ): Core.APIPromise<Network | null> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/devices/networks/${networkId}`, options) as Core.APIPromise<{
-        result: DeviceManagedNetworks | null;
+        result: Network | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class DeviceManagedNetworksSinglePage extends SinglePage<DeviceManagedNetworks> {}
+export class NetworksSinglePage extends SinglePage<Network> {}
 
-export interface DeviceManagedNetworks {
+export interface Network {
   /**
    * The configuration object containing information for the WARP client to detect
    * the managed network.
    */
-  config?: DeviceManagedNetworks.Config;
+  config?: Network.Config;
 
   /**
    * The name of the device managed network. This name must be unique.
@@ -113,7 +106,7 @@ export interface DeviceManagedNetworks {
   type?: 'tls';
 }
 
-export namespace DeviceManagedNetworks {
+export namespace Network {
   /**
    * The configuration object containing information for the WARP client to detect
    * the managed network.
@@ -178,7 +171,7 @@ export namespace UnnamedSchemaRefD2b048663faf5e0cd5c90501b71171de {
   }
 }
 
-export type NetworkDeleteResponse = Array<DeviceManagedNetworks>;
+export type NetworkDeleteResponse = Array<Network>;
 
 export interface NetworkCreateParams {
   /**
@@ -289,10 +282,10 @@ export interface NetworkGetParams {
 }
 
 export namespace Networks {
-  export import DeviceManagedNetworks = NetworksAPI.DeviceManagedNetworks;
+  export import Network = NetworksAPI.Network;
   export import UnnamedSchemaRefD2b048663faf5e0cd5c90501b71171de = NetworksAPI.UnnamedSchemaRefD2b048663faf5e0cd5c90501b71171de;
   export import NetworkDeleteResponse = NetworksAPI.NetworkDeleteResponse;
-  export import DeviceManagedNetworksSinglePage = NetworksAPI.DeviceManagedNetworksSinglePage;
+  export import NetworksSinglePage = NetworksAPI.NetworksSinglePage;
   export import NetworkCreateParams = NetworksAPI.NetworkCreateParams;
   export import NetworkUpdateParams = NetworksAPI.NetworkUpdateParams;
   export import NetworkListParams = NetworksAPI.NetworkListParams;

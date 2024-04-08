@@ -18,10 +18,10 @@ export class Hostnames extends APIResource {
     zoneIdentifier: string,
     body: HostnameCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DistributedWebHostname> {
+  ): Core.APIPromise<Hostname> {
     return (
       this._client.post(`/zones/${zoneIdentifier}/web3/hostnames`, { body, ...options }) as Core.APIPromise<{
-        result: DistributedWebHostname;
+        result: Hostname;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -32,12 +32,8 @@ export class Hostnames extends APIResource {
   list(
     zoneIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<DistributedWebHostnamesSinglePage, DistributedWebHostname> {
-    return this._client.getAPIList(
-      `/zones/${zoneIdentifier}/web3/hostnames`,
-      DistributedWebHostnamesSinglePage,
-      options,
-    );
+  ): Core.PagePromise<HostnamesSinglePage, Hostname> {
+    return this._client.getAPIList(`/zones/${zoneIdentifier}/web3/hostnames`, HostnamesSinglePage, options);
   }
 
   /**
@@ -65,34 +61,30 @@ export class Hostnames extends APIResource {
     identifier: string,
     body: HostnameEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DistributedWebHostname> {
+  ): Core.APIPromise<Hostname> {
     return (
       this._client.patch(`/zones/${zoneIdentifier}/web3/hostnames/${identifier}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: DistributedWebHostname }>
+      }) as Core.APIPromise<{ result: Hostname }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Web3 Hostname Details
    */
-  get(
-    zoneIdentifier: string,
-    identifier: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DistributedWebHostname> {
+  get(zoneIdentifier: string, identifier: string, options?: Core.RequestOptions): Core.APIPromise<Hostname> {
     return (
       this._client.get(`/zones/${zoneIdentifier}/web3/hostnames/${identifier}`, options) as Core.APIPromise<{
-        result: DistributedWebHostname;
+        result: Hostname;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class DistributedWebHostnamesSinglePage extends SinglePage<DistributedWebHostname> {}
+export class HostnamesSinglePage extends SinglePage<Hostname> {}
 
-export interface DistributedWebHostname {
+export interface Hostname {
   /**
    * Identifier
    */
@@ -203,10 +195,10 @@ export interface HostnameEditParams {
 }
 
 export namespace Hostnames {
-  export import DistributedWebHostname = HostnamesAPI.DistributedWebHostname;
+  export import Hostname = HostnamesAPI.Hostname;
   export import UnnamedSchemaRef2e420942fb77cd2cd2ba3ca7b5f32e1e = HostnamesAPI.UnnamedSchemaRef2e420942fb77cd2cd2ba3ca7b5f32e1e;
   export import HostnameDeleteResponse = HostnamesAPI.HostnameDeleteResponse;
-  export import DistributedWebHostnamesSinglePage = HostnamesAPI.DistributedWebHostnamesSinglePage;
+  export import HostnamesSinglePage = HostnamesAPI.HostnamesSinglePage;
   export import HostnameCreateParams = HostnamesAPI.HostnameCreateParams;
   export import HostnameDeleteParams = HostnamesAPI.HostnameDeleteParams;
   export import HostnameEditParams = HostnamesAPI.HostnameEditParams;

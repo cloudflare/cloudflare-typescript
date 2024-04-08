@@ -14,10 +14,12 @@ import * as DomainsAPI from 'cloudflare/resources/intel/domains/domains';
 import * as IndicatorFeedsAPI from 'cloudflare/resources/intel/indicator-feeds/indicator-feeds';
 
 export class Intel extends APIResource {
-  asn: ASNAPI.ASN = new ASNAPI.ASN(this._client);
+  asn: ASNAPI.ASNResource = new ASNAPI.ASNResource(this._client);
   dns: DNSAPI.DNS = new DNSAPI.DNS(this._client);
   domains: DomainsAPI.Domains = new DomainsAPI.Domains(this._client);
-  domainHistory: DomainHistoryAPI.DomainHistory = new DomainHistoryAPI.DomainHistory(this._client);
+  domainHistory: DomainHistoryAPI.DomainHistoryResource = new DomainHistoryAPI.DomainHistoryResource(
+    this._client,
+  );
   ips: IPsAPI.IPs = new IPsAPI.IPs(this._client);
   ipLists: IPListsAPI.IPLists = new IPListsAPI.IPLists(this._client);
   miscategorizations: MiscategorizationsAPI.Miscategorizations = new MiscategorizationsAPI.Miscategorizations(
@@ -31,32 +33,30 @@ export class Intel extends APIResource {
 }
 
 export namespace Intel {
+  export import ASNResource = ASNAPI.ASNResource;
   export import ASN = ASNAPI.ASN;
-  export import IntelASN = ASNAPI.IntelASN;
   export import ASNGetParams = ASNAPI.ASNGetParams;
   export import DNS = DNSAPI.DNS;
-  export import IntelPassiveDNSByIP = DNSAPI.IntelPassiveDNSByIP;
   export import UnnamedSchemaRefB5e16cee4f32382c294201aedb9fc050 = DNSAPI.UnnamedSchemaRefB5e16cee4f32382c294201aedb9fc050;
   export import DNSGetParams = DNSAPI.DNSGetParams;
   export import Domains = DomainsAPI.Domains;
-  export import IntelDomain = DomainsAPI.IntelDomain;
+  export import Domain = DomainsAPI.Domain;
   export import DomainGetParams = DomainsAPI.DomainGetParams;
+  export import DomainHistoryResource = DomainHistoryAPI.DomainHistoryResource;
   export import DomainHistory = DomainHistoryAPI.DomainHistory;
-  export import IntelDomainHistory = DomainHistoryAPI.IntelDomainHistory;
   export import DomainHistoryGetResponse = DomainHistoryAPI.DomainHistoryGetResponse;
   export import DomainHistoryGetParams = DomainHistoryAPI.DomainHistoryGetParams;
   export import IPs = IPsAPI.IPs;
-  export import IntelSchemasIP = IPsAPI.IntelSchemasIP;
+  export import IP = IPsAPI.IP;
   export import IPGetResponse = IPsAPI.IPGetResponse;
   export import IPGetParams = IPsAPI.IPGetParams;
   export import IPLists = IPListsAPI.IPLists;
-  export import IntelIPList = IPListsAPI.IntelIPList;
+  export import IPList = IPListsAPI.IPList;
   export import IPListGetResponse = IPListsAPI.IPListGetResponse;
   export import IPListGetParams = IPListsAPI.IPListGetParams;
   export import Miscategorizations = MiscategorizationsAPI.Miscategorizations;
   export import MiscategorizationCreateParams = MiscategorizationsAPI.MiscategorizationCreateParams;
   export import Whois = WhoisAPI.Whois;
-  export import IntelWhois = WhoisAPI.IntelWhois;
   export import WhoisGetParams = WhoisAPI.WhoisGetParams;
   export import IndicatorFeeds = IndicatorFeedsAPI.IndicatorFeeds;
   export import IndicatorFeedCreateResponse = IndicatorFeedsAPI.IndicatorFeedCreateResponse;
@@ -71,8 +71,8 @@ export namespace Intel {
   export import IndicatorFeedDataParams = IndicatorFeedsAPI.IndicatorFeedDataParams;
   export import IndicatorFeedGetParams = IndicatorFeedsAPI.IndicatorFeedGetParams;
   export import Sinkholes = SinkholesAPI.Sinkholes;
-  export import IntelSinkholeItem = SinkholesAPI.IntelSinkholeItem;
-  export import IntelSinkholeItemsSinglePage = SinkholesAPI.IntelSinkholeItemsSinglePage;
+  export import SinkholeItem = SinkholesAPI.SinkholeItem;
+  export import SinkholeItemsSinglePage = SinkholesAPI.SinkholeItemsSinglePage;
   export import SinkholeListParams = SinkholesAPI.SinkholeListParams;
   export import AttackSurfaceReport = AttackSurfaceReportAPI.AttackSurfaceReport;
 }

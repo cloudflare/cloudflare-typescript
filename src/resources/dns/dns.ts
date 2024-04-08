@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from 'cloudflare/resource';
-import * as DNSAPI from 'cloudflare/resources/dns/dns';
 import * as RecordsAPI from 'cloudflare/resources/dns/records';
 import * as AnalyticsAPI from 'cloudflare/resources/dns/analytics/analytics';
 import * as FirewallAPI from 'cloudflare/resources/dns/firewall/firewall';
@@ -9,7 +8,7 @@ import * as FirewallAPI from 'cloudflare/resources/dns/firewall/firewall';
 export class DNS extends APIResource {
   records: RecordsAPI.Records = new RecordsAPI.Records(this._client);
   analytics: AnalyticsAPI.Analytics = new AnalyticsAPI.Analytics(this._client);
-  firewall: FirewallAPI.Firewall = new FirewallAPI.Firewall(this._client);
+  firewall: FirewallAPI.FirewallResource = new FirewallAPI.FirewallResource(this._client);
 }
 
 export interface UnnamedSchemaRef6595695ff25b0614667b25f66b7bbaba {
@@ -84,9 +83,6 @@ export interface UnnamedSchemaRef85b45d163202bbab7456da6b346d9fe2 {
 }
 
 export namespace DNS {
-  export import UnnamedSchemaRef6595695ff25b0614667b25f66b7bbaba = DNSAPI.UnnamedSchemaRef6595695ff25b0614667b25f66b7bbaba;
-  export import UnnamedSchemaRef65be9614de145bf4a58d0fddf46df7ca = DNSAPI.UnnamedSchemaRef65be9614de145bf4a58d0fddf46df7ca;
-  export import UnnamedSchemaRef85b45d163202bbab7456da6b346d9fe2 = DNSAPI.UnnamedSchemaRef85b45d163202bbab7456da6b346d9fe2;
   export import Records = RecordsAPI.Records;
   export import ARecord = RecordsAPI.ARecord;
   export import AAAARecord = RecordsAPI.AAAARecord;
@@ -129,11 +125,14 @@ export namespace DNS {
   export import RecordImportParams = RecordsAPI.RecordImportParams;
   export import RecordScanParams = RecordsAPI.RecordScanParams;
   export import Analytics = AnalyticsAPI.Analytics;
+  export import FirewallResource = FirewallAPI.FirewallResource;
+  export import AttackMitigation = FirewallAPI.AttackMitigation;
   export import Firewall = FirewallAPI.Firewall;
-  export import DNSFirewall = FirewallAPI.DNSFirewall;
+  export import FirewallIPsItem = FirewallAPI.FirewallIPsItem;
   export import UnnamedSchemaRef7a0f93d9e1afc3221d2a57b7bab16955 = FirewallAPI.UnnamedSchemaRef7a0f93d9e1afc3221d2a57b7bab16955;
+  export import UpstreamIPsItems = FirewallAPI.UpstreamIPsItems;
   export import FirewallDeleteResponse = FirewallAPI.FirewallDeleteResponse;
-  export import DNSFirewallsV4PagePaginationArray = FirewallAPI.DNSFirewallsV4PagePaginationArray;
+  export import FirewallsV4PagePaginationArray = FirewallAPI.FirewallsV4PagePaginationArray;
   export import FirewallCreateParams = FirewallAPI.FirewallCreateParams;
   export import FirewallListParams = FirewallAPI.FirewallListParams;
   export import FirewallDeleteParams = FirewallAPI.FirewallDeleteParams;

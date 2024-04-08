@@ -1,36 +1,25 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  EmailAddresses,
-  AddressCreateResponse,
-  AddressListResponse,
-  AddressDeleteResponse,
-  AddressGetResponse,
-  AddressCreateParams,
-  AddressListParams,
-  AddressListResponsesV4PagePaginationArray,
-  Addresses,
-} from './addresses';
-export { EmailDNSRecord, DNSGetResponse, DNS } from './dns';
-export {
-  EmailRules,
-  RuleCreateResponse,
-  RuleUpdateResponse,
-  RuleListResponse,
-  RuleDeleteResponse,
-  RuleGetResponse,
+  Action,
+  ActionItem,
+  EmailRule,
+  Matcher,
+  MatcherItem,
+  Properties,
   RuleCreateParams,
   RuleUpdateParams,
   RuleListParams,
-  RuleListResponsesV4PagePaginationArray,
+  EmailRulesV4PagePaginationArray,
   Rules,
 } from './rules/index';
 export {
-  EmailSettings,
-  EmailRoutingDisableResponse,
-  EmailRoutingEnableResponse,
-  EmailRoutingGetResponse,
-  EmailRoutingDisableParams,
-  EmailRoutingEnableParams,
-  EmailRouting,
-} from './email-routing';
+  Address,
+  DestinationAddress,
+  AddressCreateParams,
+  AddressListParams,
+  AddressesV4PagePaginationArray,
+  Addresses,
+} from './addresses';
+export { DNSRecord, DNSGetResponse, DNS } from './dns';
+export { EmailRouting } from './email-routing';

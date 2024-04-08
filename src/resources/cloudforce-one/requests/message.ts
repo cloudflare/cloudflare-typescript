@@ -5,7 +5,7 @@ import { APIResource } from 'cloudflare/resource';
 import * as MessageAPI from 'cloudflare/resources/cloudforce-one/requests/message';
 import * as Shared from 'cloudflare/resources/shared';
 
-export class Message extends APIResource {
+export class MessageResource extends APIResource {
   /**
    * Creating a request adds the request into the Cloudforce One queue for analysis.
    * In addition to the content, a short title, type, priority, and releasability
@@ -16,12 +16,12 @@ export class Message extends APIResource {
     requestIdentifier: string,
     body: MessageCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CloudforceOneRequestMessageItem> {
+  ): Core.APIPromise<Message> {
     return (
       this._client.post(
         `/accounts/${accountIdentifier}/cloudforce-one/requests/${requestIdentifier}/message/new`,
         { body, ...options },
-      ) as Core.APIPromise<{ result: CloudforceOneRequestMessageItem }>
+      ) as Core.APIPromise<{ result: Message }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -34,12 +34,12 @@ export class Message extends APIResource {
     messageIdentifer: number,
     body: MessageUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CloudforceOneRequestMessageItem> {
+  ): Core.APIPromise<Message> {
     return (
       this._client.put(
         `/accounts/${accountIdentifier}/cloudforce-one/requests/${requestIdentifier}/message/${messageIdentifer}`,
         { body, ...options },
-      ) as Core.APIPromise<{ result: CloudforceOneRequestMessageItem }>
+      ) as Core.APIPromise<{ result: Message }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -78,7 +78,7 @@ export class Message extends APIResource {
   }
 }
 
-export interface CloudforceOneRequestMessageItem {
+export interface Message {
   /**
    * Message ID
    */
@@ -110,7 +110,7 @@ export interface CloudforceOneRequestMessageItem {
   created?: string;
 }
 
-export type MessageGetResponse = Array<CloudforceOneRequestMessageItem>;
+export type MessageGetResponse = Array<Message>;
 
 export interface MessageCreateParams {
   /**
@@ -178,8 +178,8 @@ export interface MessageGetParams {
   sort_order?: 'asc' | 'desc';
 }
 
-export namespace Message {
-  export import CloudforceOneRequestMessageItem = MessageAPI.CloudforceOneRequestMessageItem;
+export namespace MessageResource {
+  export import Message = MessageAPI.Message;
   export import MessageGetResponse = MessageAPI.MessageGetResponse;
   export import MessageCreateParams = MessageAPI.MessageCreateParams;
   export import MessageUpdateParams = MessageAPI.MessageUpdateParams;

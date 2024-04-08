@@ -14,12 +14,12 @@ export class Bookmarks extends APIResource {
     uuid: string,
     body: BookmarkCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZeroTrustBookmarks> {
+  ): Core.APIPromise<Bookmarks> {
     return (
       this._client.post(`/accounts/${identifier}/access/bookmarks/${uuid}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZeroTrustBookmarks }>
+      }) as Core.APIPromise<{ result: Bookmarks }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -31,27 +31,20 @@ export class Bookmarks extends APIResource {
     uuid: string,
     body: BookmarkUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZeroTrustBookmarks> {
+  ): Core.APIPromise<Bookmarks> {
     return (
       this._client.put(`/accounts/${identifier}/access/bookmarks/${uuid}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZeroTrustBookmarks }>
+      }) as Core.APIPromise<{ result: Bookmarks }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Lists Bookmark applications.
    */
-  list(
-    identifier: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<ZeroTrustBookmarksSinglePage, ZeroTrustBookmarks> {
-    return this._client.getAPIList(
-      `/accounts/${identifier}/access/bookmarks`,
-      ZeroTrustBookmarksSinglePage,
-      options,
-    );
+  list(identifier: string, options?: Core.RequestOptions): Core.PagePromise<BookmarksSinglePage, Bookmarks> {
+    return this._client.getAPIList(`/accounts/${identifier}/access/bookmarks`, BookmarksSinglePage, options);
   }
 
   /**
@@ -74,18 +67,18 @@ export class Bookmarks extends APIResource {
   /**
    * Fetches a single Bookmark application.
    */
-  get(identifier: string, uuid: string, options?: Core.RequestOptions): Core.APIPromise<ZeroTrustBookmarks> {
+  get(identifier: string, uuid: string, options?: Core.RequestOptions): Core.APIPromise<Bookmarks> {
     return (
       this._client.get(`/accounts/${identifier}/access/bookmarks/${uuid}`, options) as Core.APIPromise<{
-        result: ZeroTrustBookmarks;
+        result: Bookmarks;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class ZeroTrustBookmarksSinglePage extends SinglePage<ZeroTrustBookmarks> {}
+export class BookmarksSinglePage extends SinglePage<Bookmarks> {}
 
-export interface ZeroTrustBookmarks {
+export interface Bookmarks {
   /**
    * The unique identifier for the Bookmark application.
    */
@@ -130,9 +123,9 @@ export type BookmarkUpdateParams = unknown;
 export type BookmarkDeleteParams = unknown;
 
 export namespace Bookmarks {
-  export import ZeroTrustBookmarks = BookmarksAPI.ZeroTrustBookmarks;
+  export import Bookmarks = BookmarksAPI.Bookmarks;
   export import BookmarkDeleteResponse = BookmarksAPI.BookmarkDeleteResponse;
-  export import ZeroTrustBookmarksSinglePage = BookmarksAPI.ZeroTrustBookmarksSinglePage;
+  export import BookmarksSinglePage = BookmarksAPI.BookmarksSinglePage;
   export import BookmarkCreateParams = BookmarksAPI.BookmarkCreateParams;
   export import BookmarkUpdateParams = BookmarksAPI.BookmarkUpdateParams;
   export import BookmarkDeleteParams = BookmarksAPI.BookmarkDeleteParams;

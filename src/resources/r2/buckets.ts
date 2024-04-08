@@ -9,11 +9,11 @@ export class Buckets extends APIResource {
   /**
    * Creates a new R2 bucket.
    */
-  create(params: BucketCreateParams, options?: Core.RequestOptions): Core.APIPromise<R2Bucket> {
+  create(params: BucketCreateParams, options?: Core.RequestOptions): Core.APIPromise<Bucket> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/r2/buckets`, { body, ...options }) as Core.APIPromise<{
-        result: R2Bucket;
+        result: Bucket;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -24,9 +24,9 @@ export class Buckets extends APIResource {
   list(
     params: BucketListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<R2BucketsCursorPagination, R2Bucket> {
+  ): Core.PagePromise<BucketsCursorPagination, Bucket> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/r2/buckets`, R2BucketsCursorPagination, {
+    return this._client.getAPIList(`/accounts/${account_id}/r2/buckets`, BucketsCursorPagination, {
       query,
       ...options,
     });
@@ -51,22 +51,22 @@ export class Buckets extends APIResource {
   /**
    * Gets metadata for an existing R2 bucket.
    */
-  get(bucketName: string, params: BucketGetParams, options?: Core.RequestOptions): Core.APIPromise<R2Bucket> {
+  get(bucketName: string, params: BucketGetParams, options?: Core.RequestOptions): Core.APIPromise<Bucket> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/r2/buckets/${bucketName}`, options) as Core.APIPromise<{
-        result: R2Bucket;
+        result: Bucket;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class R2BucketsCursorPagination extends CursorPagination<R2Bucket> {}
+export class BucketsCursorPagination extends CursorPagination<Bucket> {}
 
 /**
  * A single R2 bucket
  */
-export interface R2Bucket {
+export interface Bucket {
   /**
    * Creation timestamp
    */
@@ -146,9 +146,9 @@ export interface BucketGetParams {
 }
 
 export namespace Buckets {
-  export import R2Bucket = BucketsAPI.R2Bucket;
+  export import Bucket = BucketsAPI.Bucket;
   export import BucketDeleteResponse = BucketsAPI.BucketDeleteResponse;
-  export import R2BucketsCursorPagination = BucketsAPI.R2BucketsCursorPagination;
+  export import BucketsCursorPagination = BucketsAPI.BucketsCursorPagination;
   export import BucketCreateParams = BucketsAPI.BucketCreateParams;
   export import BucketListParams = BucketsAPI.BucketListParams;
   export import BucketDeleteParams = BucketsAPI.BucketDeleteParams;

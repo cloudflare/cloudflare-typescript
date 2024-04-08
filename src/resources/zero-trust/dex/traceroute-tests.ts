@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as TracerouteTestsAPI from 'cloudflare/resources/zero-trust/dex/traceroute-tests';
 import * as DEXAPI from 'cloudflare/resources/zero-trust/dex/dex';
+import * as PercentilesAPI from 'cloudflare/resources/zero-trust/dex/http-tests/percentiles';
 
 export class TracerouteTests extends APIResource {
   /**
@@ -14,13 +15,13 @@ export class TracerouteTests extends APIResource {
     testId: string,
     params: TracerouteTestGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DigitalExperienceMonitoringTracerouteDetails> {
+  ): Core.APIPromise<Traceroute> {
     const { account_id, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/dex/traceroute-tests/${testId}`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: DigitalExperienceMonitoringTracerouteDetails }>
+      }) as Core.APIPromise<{ result: Traceroute }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -31,13 +32,13 @@ export class TracerouteTests extends APIResource {
     testId: string,
     params: TracerouteTestNetworkPathParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DigitalExperienceMonitoringTracerouteTestNetworkPath> {
+  ): Core.APIPromise<NetworkPath> {
     const { account_id, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/dex/traceroute-tests/${testId}/network-path`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: DigitalExperienceMonitoringTracerouteTestNetworkPath }>
+      }) as Core.APIPromise<{ result: NetworkPath }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -49,375 +50,18 @@ export class TracerouteTests extends APIResource {
     testId: string,
     params: TracerouteTestPercentilesParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DigitalExperienceMonitoringTracerouteDetailsPercentiles> {
+  ): Core.APIPromise<Percentiles> {
     const { account_id, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/dex/traceroute-tests/${testId}/percentiles`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: DigitalExperienceMonitoringTracerouteDetailsPercentiles }>
+      }) as Core.APIPromise<{ result: Percentiles }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface DigitalExperienceMonitoringTracerouteDetails {
-  /**
-   * The host of the Traceroute synthetic application test
-   */
-  host: string;
-
-  /**
-   * The interval at which the Traceroute synthetic application test is set to run.
-   */
-  interval: string;
-
-  kind: 'traceroute';
-
-  /**
-   * The name of the Traceroute synthetic application test
-   */
-  name: string;
-
-  target_policies?: Array<DEXAPI.UnnamedSchemaRefBf9e2abcf1b78a6cab8e6e29e2228a11>;
-
-  targeted?: boolean;
-
-  tracerouteStats?: DigitalExperienceMonitoringTracerouteDetails.TracerouteStats | null;
-
-  tracerouteStatsByColo?: Array<DigitalExperienceMonitoringTracerouteDetails.TracerouteStatsByColo>;
-}
-
-export namespace DigitalExperienceMonitoringTracerouteDetails {
-  export interface TracerouteStats {
-    availabilityPct: TracerouteStats.AvailabilityPct;
-
-    hopsCount: TracerouteStats.HopsCount;
-
-    packetLossPct: TracerouteStats.PacketLossPct;
-
-    roundTripTimeMs: TracerouteStats.RoundTripTimeMs;
-
-    /**
-     * Count of unique devices that have run this test in the given time period
-     */
-    uniqueDevicesTotal: number;
-  }
-
-  export namespace TracerouteStats {
-    export interface AvailabilityPct {
-      slots: Array<AvailabilityPct.Slot>;
-
-      /**
-       * average observed in the time period
-       */
-      avg?: number | null;
-
-      /**
-       * highest observed in the time period
-       */
-      max?: number | null;
-
-      /**
-       * lowest observed in the time period
-       */
-      min?: number | null;
-    }
-
-    export namespace AvailabilityPct {
-      export interface Slot {
-        timestamp: string;
-
-        value: number;
-      }
-    }
-
-    export interface HopsCount {
-      slots: Array<HopsCount.Slot>;
-
-      /**
-       * average observed in the time period
-       */
-      avg?: number | null;
-
-      /**
-       * highest observed in the time period
-       */
-      max?: number | null;
-
-      /**
-       * lowest observed in the time period
-       */
-      min?: number | null;
-    }
-
-    export namespace HopsCount {
-      export interface Slot {
-        timestamp: string;
-
-        value: number;
-      }
-    }
-
-    export interface PacketLossPct {
-      slots: Array<PacketLossPct.Slot>;
-
-      /**
-       * average observed in the time period
-       */
-      avg?: number | null;
-
-      /**
-       * highest observed in the time period
-       */
-      max?: number | null;
-
-      /**
-       * lowest observed in the time period
-       */
-      min?: number | null;
-    }
-
-    export namespace PacketLossPct {
-      export interface Slot {
-        timestamp: string;
-
-        value: number;
-      }
-    }
-
-    export interface RoundTripTimeMs {
-      slots: Array<RoundTripTimeMs.Slot>;
-
-      /**
-       * average observed in the time period
-       */
-      avg?: number | null;
-
-      /**
-       * highest observed in the time period
-       */
-      max?: number | null;
-
-      /**
-       * lowest observed in the time period
-       */
-      min?: number | null;
-    }
-
-    export namespace RoundTripTimeMs {
-      export interface Slot {
-        timestamp: string;
-
-        value: number;
-      }
-    }
-  }
-
-  export interface TracerouteStatsByColo {
-    availabilityPct: TracerouteStatsByColo.AvailabilityPct;
-
-    colo: string;
-
-    hopsCount: TracerouteStatsByColo.HopsCount;
-
-    packetLossPct: TracerouteStatsByColo.PacketLossPct;
-
-    roundTripTimeMs: TracerouteStatsByColo.RoundTripTimeMs;
-
-    /**
-     * Count of unique devices that have run this test in the given time period
-     */
-    uniqueDevicesTotal: number;
-  }
-
-  export namespace TracerouteStatsByColo {
-    export interface AvailabilityPct {
-      slots: Array<AvailabilityPct.Slot>;
-
-      /**
-       * average observed in the time period
-       */
-      avg?: number | null;
-
-      /**
-       * highest observed in the time period
-       */
-      max?: number | null;
-
-      /**
-       * lowest observed in the time period
-       */
-      min?: number | null;
-    }
-
-    export namespace AvailabilityPct {
-      export interface Slot {
-        timestamp: string;
-
-        value: number;
-      }
-    }
-
-    export interface HopsCount {
-      slots: Array<HopsCount.Slot>;
-
-      /**
-       * average observed in the time period
-       */
-      avg?: number | null;
-
-      /**
-       * highest observed in the time period
-       */
-      max?: number | null;
-
-      /**
-       * lowest observed in the time period
-       */
-      min?: number | null;
-    }
-
-    export namespace HopsCount {
-      export interface Slot {
-        timestamp: string;
-
-        value: number;
-      }
-    }
-
-    export interface PacketLossPct {
-      slots: Array<PacketLossPct.Slot>;
-
-      /**
-       * average observed in the time period
-       */
-      avg?: number | null;
-
-      /**
-       * highest observed in the time period
-       */
-      max?: number | null;
-
-      /**
-       * lowest observed in the time period
-       */
-      min?: number | null;
-    }
-
-    export namespace PacketLossPct {
-      export interface Slot {
-        timestamp: string;
-
-        value: number;
-      }
-    }
-
-    export interface RoundTripTimeMs {
-      slots: Array<RoundTripTimeMs.Slot>;
-
-      /**
-       * average observed in the time period
-       */
-      avg?: number | null;
-
-      /**
-       * highest observed in the time period
-       */
-      max?: number | null;
-
-      /**
-       * lowest observed in the time period
-       */
-      min?: number | null;
-    }
-
-    export namespace RoundTripTimeMs {
-      export interface Slot {
-        timestamp: string;
-
-        value: number;
-      }
-    }
-  }
-}
-
-export interface DigitalExperienceMonitoringTracerouteDetailsPercentiles {
-  hopsCount?: DigitalExperienceMonitoringTracerouteDetailsPercentiles.HopsCount;
-
-  packetLossPct?: DigitalExperienceMonitoringTracerouteDetailsPercentiles.PacketLossPct;
-
-  roundTripTimeMs?: DigitalExperienceMonitoringTracerouteDetailsPercentiles.RoundTripTimeMs;
-}
-
-export namespace DigitalExperienceMonitoringTracerouteDetailsPercentiles {
-  export interface HopsCount {
-    /**
-     * p50 observed in the time period
-     */
-    p50?: number | null;
-
-    /**
-     * p90 observed in the time period
-     */
-    p90?: number | null;
-
-    /**
-     * p95 observed in the time period
-     */
-    p95?: number | null;
-
-    /**
-     * p99 observed in the time period
-     */
-    p99?: number | null;
-  }
-
-  export interface PacketLossPct {
-    /**
-     * p50 observed in the time period
-     */
-    p50?: number | null;
-
-    /**
-     * p90 observed in the time period
-     */
-    p90?: number | null;
-
-    /**
-     * p95 observed in the time period
-     */
-    p95?: number | null;
-
-    /**
-     * p99 observed in the time period
-     */
-    p99?: number | null;
-  }
-
-  export interface RoundTripTimeMs {
-    /**
-     * p50 observed in the time period
-     */
-    p50?: number | null;
-
-    /**
-     * p90 observed in the time period
-     */
-    p90?: number | null;
-
-    /**
-     * p95 observed in the time period
-     */
-    p95?: number | null;
-
-    /**
-     * p99 observed in the time period
-     */
-    p99?: number | null;
-  }
-}
-
-export interface DigitalExperienceMonitoringTracerouteTestNetworkPath {
+export interface NetworkPath {
   /**
    * API Resource UUID tag.
    */
@@ -434,7 +78,7 @@ export interface DigitalExperienceMonitoringTracerouteTestNetworkPath {
 
   name?: string;
 
-  networkPath?: DigitalExperienceMonitoringTracerouteTestNetworkPath.NetworkPath | null;
+  networkPath?: NetworkPath.NetworkPath | null;
 
   /**
    * The host of the Traceroute synthetic application test
@@ -442,7 +86,7 @@ export interface DigitalExperienceMonitoringTracerouteTestNetworkPath {
   url?: string;
 }
 
-export namespace DigitalExperienceMonitoringTracerouteTestNetworkPath {
+export namespace NetworkPath {
   export interface NetworkPath {
     slots: Array<NetworkPath.Slot>;
 
@@ -493,6 +137,187 @@ export namespace DigitalExperienceMonitoringTracerouteTestNetworkPath {
       unit: 'hours';
 
       value: number;
+    }
+  }
+}
+
+export interface Percentiles {
+  hopsCount?: DEXAPI.Percentiles;
+
+  packetLossPct?: DEXAPI.Percentiles;
+
+  roundTripTimeMs?: DEXAPI.Percentiles;
+}
+
+export interface Traceroute {
+  /**
+   * The host of the Traceroute synthetic application test
+   */
+  host: string;
+
+  /**
+   * The interval at which the Traceroute synthetic application test is set to run.
+   */
+  interval: string;
+
+  kind: 'traceroute';
+
+  /**
+   * The name of the Traceroute synthetic application test
+   */
+  name: string;
+
+  target_policies?: Array<DEXAPI.UnnamedSchemaRefBf9e2abcf1b78a6cab8e6e29e2228a11>;
+
+  targeted?: boolean;
+
+  tracerouteStats?: Traceroute.TracerouteStats | null;
+
+  tracerouteStatsByColo?: Array<Traceroute.TracerouteStatsByColo>;
+}
+
+export namespace Traceroute {
+  export interface TracerouteStats {
+    availabilityPct: TracerouteStats.AvailabilityPct;
+
+    hopsCount: PercentilesAPI.TestStatOverTime;
+
+    packetLossPct: TracerouteStats.PacketLossPct;
+
+    roundTripTimeMs: PercentilesAPI.TestStatOverTime;
+
+    /**
+     * Count of unique devices that have run this test in the given time period
+     */
+    uniqueDevicesTotal: number;
+  }
+
+  export namespace TracerouteStats {
+    export interface AvailabilityPct {
+      slots: Array<AvailabilityPct.Slot>;
+
+      /**
+       * average observed in the time period
+       */
+      avg?: number | null;
+
+      /**
+       * highest observed in the time period
+       */
+      max?: number | null;
+
+      /**
+       * lowest observed in the time period
+       */
+      min?: number | null;
+    }
+
+    export namespace AvailabilityPct {
+      export interface Slot {
+        timestamp: string;
+
+        value: number;
+      }
+    }
+
+    export interface PacketLossPct {
+      slots: Array<PacketLossPct.Slot>;
+
+      /**
+       * average observed in the time period
+       */
+      avg?: number | null;
+
+      /**
+       * highest observed in the time period
+       */
+      max?: number | null;
+
+      /**
+       * lowest observed in the time period
+       */
+      min?: number | null;
+    }
+
+    export namespace PacketLossPct {
+      export interface Slot {
+        timestamp: string;
+
+        value: number;
+      }
+    }
+  }
+
+  export interface TracerouteStatsByColo {
+    availabilityPct: TracerouteStatsByColo.AvailabilityPct;
+
+    colo: string;
+
+    hopsCount: PercentilesAPI.TestStatOverTime;
+
+    packetLossPct: TracerouteStatsByColo.PacketLossPct;
+
+    roundTripTimeMs: PercentilesAPI.TestStatOverTime;
+
+    /**
+     * Count of unique devices that have run this test in the given time period
+     */
+    uniqueDevicesTotal: number;
+  }
+
+  export namespace TracerouteStatsByColo {
+    export interface AvailabilityPct {
+      slots: Array<AvailabilityPct.Slot>;
+
+      /**
+       * average observed in the time period
+       */
+      avg?: number | null;
+
+      /**
+       * highest observed in the time period
+       */
+      max?: number | null;
+
+      /**
+       * lowest observed in the time period
+       */
+      min?: number | null;
+    }
+
+    export namespace AvailabilityPct {
+      export interface Slot {
+        timestamp: string;
+
+        value: number;
+      }
+    }
+
+    export interface PacketLossPct {
+      slots: Array<PacketLossPct.Slot>;
+
+      /**
+       * average observed in the time period
+       */
+      avg?: number | null;
+
+      /**
+       * highest observed in the time period
+       */
+      max?: number | null;
+
+      /**
+       * lowest observed in the time period
+       */
+      min?: number | null;
+    }
+
+    export namespace PacketLossPct {
+      export interface Slot {
+        timestamp: string;
+
+        value: number;
+      }
     }
   }
 }
@@ -588,9 +413,9 @@ export interface TracerouteTestPercentilesParams {
 }
 
 export namespace TracerouteTests {
-  export import DigitalExperienceMonitoringTracerouteDetails = TracerouteTestsAPI.DigitalExperienceMonitoringTracerouteDetails;
-  export import DigitalExperienceMonitoringTracerouteDetailsPercentiles = TracerouteTestsAPI.DigitalExperienceMonitoringTracerouteDetailsPercentiles;
-  export import DigitalExperienceMonitoringTracerouteTestNetworkPath = TracerouteTestsAPI.DigitalExperienceMonitoringTracerouteTestNetworkPath;
+  export import NetworkPath = TracerouteTestsAPI.NetworkPath;
+  export import Percentiles = TracerouteTestsAPI.Percentiles;
+  export import Traceroute = TracerouteTestsAPI.Traceroute;
   export import TracerouteTestGetParams = TracerouteTestsAPI.TracerouteTestGetParams;
   export import TracerouteTestNetworkPathParams = TracerouteTestsAPI.TracerouteTestNetworkPathParams;
   export import TracerouteTestPercentilesParams = TracerouteTestsAPI.TracerouteTestPercentilesParams;

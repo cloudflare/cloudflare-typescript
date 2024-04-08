@@ -9,12 +9,9 @@ export class Scripts extends APIResource {
   /**
    * Lists all scripts detected by Page Shield.
    */
-  list(
-    params: ScriptListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<PageShieldScriptsSinglePage, PageShieldScript> {
+  list(params: ScriptListParams, options?: Core.RequestOptions): Core.PagePromise<ScriptsSinglePage, Script> {
     const { zone_id, ...query } = params;
-    return this._client.getAPIList(`/zones/${zone_id}/page_shield/scripts`, PageShieldScriptsSinglePage, {
+    return this._client.getAPIList(`/zones/${zone_id}/page_shield/scripts`, ScriptsSinglePage, {
       query,
       ...options,
     });
@@ -33,9 +30,9 @@ export class Scripts extends APIResource {
   }
 }
 
-export class PageShieldScriptsSinglePage extends SinglePage<PageShieldScript> {}
+export class ScriptsSinglePage extends SinglePage<Script> {}
 
-export interface PageShieldScript {
+export interface Script {
   id?: string;
 
   added_at?: string;
@@ -238,9 +235,9 @@ export interface ScriptGetParams {
 }
 
 export namespace Scripts {
-  export import PageShieldScript = ScriptsAPI.PageShieldScript;
+  export import Script = ScriptsAPI.Script;
   export import ScriptGetResponse = ScriptsAPI.ScriptGetResponse;
-  export import PageShieldScriptsSinglePage = ScriptsAPI.PageShieldScriptsSinglePage;
+  export import ScriptsSinglePage = ScriptsAPI.ScriptsSinglePage;
   export import ScriptListParams = ScriptsAPI.ScriptListParams;
   export import ScriptGetParams = ScriptsAPI.ScriptGetParams;
 }

@@ -18,17 +18,14 @@ export class Users extends APIResource {
   /**
    * Gets a list of users for an account.
    */
-  list(
-    identifier: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<ZeroTrustUsersSinglePage, ZeroTrustUsers> {
-    return this._client.getAPIList(`/accounts/${identifier}/access/users`, ZeroTrustUsersSinglePage, options);
+  list(identifier: string, options?: Core.RequestOptions): Core.PagePromise<UsersSinglePage, User> {
+    return this._client.getAPIList(`/accounts/${identifier}/access/users`, UsersSinglePage, options);
   }
 }
 
-export class ZeroTrustUsersSinglePage extends SinglePage<ZeroTrustUsers> {}
+export class UsersSinglePage extends SinglePage<User> {}
 
-export interface ZeroTrustUsers {
+export interface User {
   /**
    * UUID
    */
@@ -80,14 +77,14 @@ export interface ZeroTrustUsers {
 }
 
 export namespace Users {
-  export import ZeroTrustUsers = UsersAPI.ZeroTrustUsers;
-  export import ZeroTrustUsersSinglePage = UsersAPI.ZeroTrustUsersSinglePage;
+  export import User = UsersAPI.User;
+  export import UsersSinglePage = UsersAPI.UsersSinglePage;
   export import ActiveSessions = ActiveSessionsAPI.ActiveSessions;
   export import ActiveSessionListResponse = ActiveSessionsAPI.ActiveSessionListResponse;
   export import ActiveSessionGetResponse = ActiveSessionsAPI.ActiveSessionGetResponse;
   export import ActiveSessionListResponsesSinglePage = ActiveSessionsAPI.ActiveSessionListResponsesSinglePage;
   export import LastSeenIdentity = LastSeenIdentityAPI.LastSeenIdentity;
-  export import ZeroTrustIdentity = LastSeenIdentityAPI.ZeroTrustIdentity;
+  export import Identity = LastSeenIdentityAPI.Identity;
   export import FailedLogins = FailedLoginsAPI.FailedLogins;
   export import FailedLoginListResponse = FailedLoginsAPI.FailedLoginListResponse;
   export import FailedLoginListResponsesSinglePage = FailedLoginsAPI.FailedLoginListResponsesSinglePage;

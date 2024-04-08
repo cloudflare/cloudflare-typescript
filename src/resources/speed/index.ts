@@ -1,8 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { ObservatoryAvailabilities, AvailabilityListParams, Availabilities } from './availabilities';
+export { Availability, AvailabilityListParams, Availabilities } from './availabilities';
+export { PageListResponse, PageListParams, PageListResponsesSinglePage, Pages } from './pages';
+export { ScheduleCreateResponse, ScheduleCreateParams, Schedule } from './schedule';
+export { Speed } from './speed';
 export {
-  ObservatoryPageTest,
+  Test,
   TestListResponse,
   TestDeleteResponse,
   TestCreateParams,
@@ -11,14 +14,3 @@ export {
   TestGetParams,
   Tests,
 } from './tests';
-export {
-  ObservatorySchedule,
-  ObservatoryTrend,
-  SpeedDeleteResponse,
-  SpeedDeleteParams,
-  SpeedScheduleGetParams,
-  SpeedTrendsListParams,
-  Speed,
-} from './speed';
-export { PageListResponse, PageListParams, PageListResponsesSinglePage, Pages } from './pages';
-export { ScheduleCreateResponse, ScheduleCreateParams, Schedule } from './schedule';

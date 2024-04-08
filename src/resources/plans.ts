@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as PlansAPI from 'cloudflare/resources/plans';
 import { SinglePage } from 'cloudflare/pagination';
 
 export class Plans extends APIResource {
@@ -89,9 +88,4 @@ export interface AvailableRatePlan {
    * The amount you will be billed for this plan.
    */
   price?: number;
-}
-
-export namespace Plans {
-  export import AvailableRatePlan = PlansAPI.AvailableRatePlan;
-  export import AvailableRatePlansSinglePage = PlansAPI.AvailableRatePlansSinglePage;
 }

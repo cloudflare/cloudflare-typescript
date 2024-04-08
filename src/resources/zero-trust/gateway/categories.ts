@@ -12,19 +12,19 @@ export class Categories extends APIResource {
   list(
     params: CategoryListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<ZeroTrustGatewayCategoriesSinglePage, ZeroTrustGatewayCategories> {
+  ): Core.PagePromise<CategoriesSinglePage, Category> {
     const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/gateway/categories`,
-      ZeroTrustGatewayCategoriesSinglePage,
+      CategoriesSinglePage,
       options,
     );
   }
 }
 
-export class ZeroTrustGatewayCategoriesSinglePage extends SinglePage<ZeroTrustGatewayCategories> {}
+export class CategoriesSinglePage extends SinglePage<Category> {}
 
-export interface ZeroTrustGatewayCategories {
+export interface Category {
   /**
    * The identifier for this category. There is only one category per ID.
    */
@@ -56,10 +56,10 @@ export interface ZeroTrustGatewayCategories {
   /**
    * All subcategories for this category.
    */
-  subcategories?: Array<ZeroTrustGatewayCategories.Subcategory>;
+  subcategories?: Array<Category.Subcategory>;
 }
 
-export namespace ZeroTrustGatewayCategories {
+export namespace Category {
   export interface Subcategory {
     /**
      * The identifier for this category. There is only one category per ID.
@@ -99,7 +99,7 @@ export interface CategoryListParams {
 }
 
 export namespace Categories {
-  export import ZeroTrustGatewayCategories = CategoriesAPI.ZeroTrustGatewayCategories;
-  export import ZeroTrustGatewayCategoriesSinglePage = CategoriesAPI.ZeroTrustGatewayCategoriesSinglePage;
+  export import Category = CategoriesAPI.Category;
+  export import CategoriesSinglePage = CategoriesAPI.CategoriesSinglePage;
   export import CategoryListParams = CategoriesAPI.CategoryListParams;
 }

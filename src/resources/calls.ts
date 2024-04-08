@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as CallsAPI from 'cloudflare/resources/calls';
 import { SinglePage } from 'cloudflare/pagination';
 
 export class Calls extends APIResource {
@@ -162,15 +161,4 @@ export interface CallGetParams {
    * The account identifier tag.
    */
   account_id: string;
-}
-
-export namespace Calls {
-  export import CallsApp = CallsAPI.CallsApp;
-  export import CallsAppWithSecret = CallsAPI.CallsAppWithSecret;
-  export import CallsAppsSinglePage = CallsAPI.CallsAppsSinglePage;
-  export import CallCreateParams = CallsAPI.CallCreateParams;
-  export import CallUpdateParams = CallsAPI.CallUpdateParams;
-  export import CallListParams = CallsAPI.CallListParams;
-  export import CallDeleteParams = CallsAPI.CallDeleteParams;
-  export import CallGetParams = CallsAPI.CallGetParams;
 }

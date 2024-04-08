@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as QueuesAPI from 'cloudflare/resources/queues/queues';
 import * as Shared from 'cloudflare/resources/shared';
 import * as ConsumersAPI from 'cloudflare/resources/queues/consumers';
 import * as MessagesAPI from 'cloudflare/resources/queues/messages';
@@ -238,18 +237,6 @@ export interface QueueGetParams {
 }
 
 export namespace Queues {
-  export import Queue = QueuesAPI.Queue;
-  export import QueueCreated = QueuesAPI.QueueCreated;
-  export import QueueUpdated = QueuesAPI.QueueUpdated;
-  export import QueueCreateResponse = QueuesAPI.QueueCreateResponse;
-  export import QueueUpdateResponse = QueuesAPI.QueueUpdateResponse;
-  export import QueueListResponse = QueuesAPI.QueueListResponse;
-  export import QueueGetResponse = QueuesAPI.QueueGetResponse;
-  export import QueueCreateParams = QueuesAPI.QueueCreateParams;
-  export import QueueUpdateParams = QueuesAPI.QueueUpdateParams;
-  export import QueueListParams = QueuesAPI.QueueListParams;
-  export import QueueDeleteParams = QueuesAPI.QueueDeleteParams;
-  export import QueueGetParams = QueuesAPI.QueueGetParams;
   export import Consumers = ConsumersAPI.Consumers;
   export import Consumer = ConsumersAPI.Consumer;
   export import UnnamedSchemaRefFbd3a4642487e41594e9af0ccb9a5ca5 = ConsumersAPI.UnnamedSchemaRefFbd3a4642487e41594e9af0ccb9a5ca5;

@@ -10,10 +10,7 @@ export class Organizations extends APIResource {
   /**
    * Sets up a Zero Trust organization for your account or zone.
    */
-  create(
-    params: OrganizationCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZeroTrustOrganizations> {
+  create(params: OrganizationCreateParams, options?: Core.RequestOptions): Core.APIPromise<Organizations> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -35,17 +32,14 @@ export class Organizations extends APIResource {
       this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/organizations`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZeroTrustOrganizations }>
+      }) as Core.APIPromise<{ result: Organizations }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Updates the configuration for your Zero Trust organization.
    */
-  update(
-    params: OrganizationUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZeroTrustOrganizations> {
+  update(params: OrganizationUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Organizations> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -67,22 +61,19 @@ export class Organizations extends APIResource {
       this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/organizations`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZeroTrustOrganizations }>
+      }) as Core.APIPromise<{ result: Organizations }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Returns the configuration for your Zero Trust organization.
    */
-  list(
-    params?: OrganizationListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZeroTrustOrganizations>;
-  list(options?: Core.RequestOptions): Core.APIPromise<ZeroTrustOrganizations>;
+  list(params?: OrganizationListParams, options?: Core.RequestOptions): Core.APIPromise<Organizations>;
+  list(options?: Core.RequestOptions): Core.APIPromise<Organizations>;
   list(
     params: OrganizationListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZeroTrustOrganizations> {
+  ): Core.APIPromise<Organizations> {
     if (isRequestOptions(params)) {
       return this.list({}, params);
     }
@@ -107,7 +98,7 @@ export class Organizations extends APIResource {
       this._client.get(
         `/${accountOrZone}/${accountOrZoneId}/access/organizations`,
         options,
-      ) as Core.APIPromise<{ result: ZeroTrustOrganizations }>
+      ) as Core.APIPromise<{ result: Organizations }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -144,7 +135,34 @@ export class Organizations extends APIResource {
   }
 }
 
-export interface ZeroTrustOrganizations {
+export interface LoginDesign {
+  /**
+   * The background color on your login page.
+   */
+  background_color?: string;
+
+  /**
+   * The text at the bottom of your login page.
+   */
+  footer_text?: string;
+
+  /**
+   * The text at the top of your login page.
+   */
+  header_text?: string;
+
+  /**
+   * The URL of the logo on your login page.
+   */
+  logo_path?: string;
+
+  /**
+   * The text color on your login page.
+   */
+  text_color?: string;
+}
+
+export interface Organizations {
   /**
    * When set to true, users can authenticate via WARP for any application in your
    * organization. Application settings will take precedence over this value.
@@ -164,7 +182,7 @@ export interface ZeroTrustOrganizations {
 
   created_at?: string;
 
-  custom_pages?: ZeroTrustOrganizations.CustomPages;
+  custom_pages?: Organizations.CustomPages;
 
   /**
    * Lock all settings as Read-Only in the Dashboard, regardless of user permission.
@@ -172,7 +190,7 @@ export interface ZeroTrustOrganizations {
    */
   is_ui_read_only?: boolean;
 
-  login_design?: ZeroTrustOrganizations.LoginDesign;
+  login_design?: LoginDesign;
 
   /**
    * The name of your Zero Trust organization.
@@ -208,7 +226,7 @@ export interface ZeroTrustOrganizations {
   warp_auth_session_duration?: string;
 }
 
-export namespace ZeroTrustOrganizations {
+export namespace Organizations {
   export interface CustomPages {
     /**
      * The uid of the custom page to use when a user is denied access after failing a
@@ -220,33 +238,6 @@ export namespace ZeroTrustOrganizations {
      * The uid of the custom page to use when a user is denied access.
      */
     identity_denied?: string;
-  }
-
-  export interface LoginDesign {
-    /**
-     * The background color on your login page.
-     */
-    background_color?: string;
-
-    /**
-     * The text at the bottom of your login page.
-     */
-    footer_text?: string;
-
-    /**
-     * The text at the top of your login page.
-     */
-    header_text?: string;
-
-    /**
-     * The URL of the logo on your login page.
-     */
-    logo_path?: string;
-
-    /**
-     * The text color on your login page.
-     */
-    text_color?: string;
   }
 }
 
@@ -298,7 +289,7 @@ export interface OrganizationCreateParams {
   /**
    * Body param:
    */
-  login_design?: OrganizationCreateParams.LoginDesign;
+  login_design?: LoginDesign;
 
   /**
    * Body param: The amount of time that tokens issued for applications will be
@@ -327,35 +318,6 @@ export interface OrganizationCreateParams {
    * valid. Must be in the format `30m` or `2h45m`. Valid time units are: m, h.
    */
   warp_auth_session_duration?: string;
-}
-
-export namespace OrganizationCreateParams {
-  export interface LoginDesign {
-    /**
-     * The background color on your login page.
-     */
-    background_color?: string;
-
-    /**
-     * The text at the bottom of your login page.
-     */
-    footer_text?: string;
-
-    /**
-     * The text at the top of your login page.
-     */
-    header_text?: string;
-
-    /**
-     * The URL of the logo on your login page.
-     */
-    logo_path?: string;
-
-    /**
-     * The text color on your login page.
-     */
-    text_color?: string;
-  }
 }
 
 export interface OrganizationUpdateParams {
@@ -404,7 +366,7 @@ export interface OrganizationUpdateParams {
   /**
    * Body param:
    */
-  login_design?: OrganizationUpdateParams.LoginDesign;
+  login_design?: LoginDesign;
 
   /**
    * Body param: The name of your Zero Trust organization.
@@ -453,33 +415,6 @@ export namespace OrganizationUpdateParams {
      */
     identity_denied?: string;
   }
-
-  export interface LoginDesign {
-    /**
-     * The background color on your login page.
-     */
-    background_color?: string;
-
-    /**
-     * The text at the bottom of your login page.
-     */
-    footer_text?: string;
-
-    /**
-     * The text at the top of your login page.
-     */
-    header_text?: string;
-
-    /**
-     * The URL of the logo on your login page.
-     */
-    logo_path?: string;
-
-    /**
-     * The text color on your login page.
-     */
-    text_color?: string;
-  }
 }
 
 export interface OrganizationListParams {
@@ -514,7 +449,8 @@ export interface OrganizationRevokeUsersParams {
 }
 
 export namespace Organizations {
-  export import ZeroTrustOrganizations = OrganizationsAPI.ZeroTrustOrganizations;
+  export import LoginDesign = OrganizationsAPI.LoginDesign;
+  export import Organizations = OrganizationsAPI.Organizations;
   export import OrganizationRevokeUsersResponse = OrganizationsAPI.OrganizationRevokeUsersResponse;
   export import OrganizationCreateParams = OrganizationsAPI.OrganizationCreateParams;
   export import OrganizationUpdateParams = OrganizationsAPI.OrganizationUpdateParams;

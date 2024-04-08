@@ -1,13 +1,16 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Access } from './access';
-export { KeyUpdateParams, Keys } from './keys';
-export { Logs } from './logs/index';
 export {
-  UnnamedSchemaRef6ed9646890b9be79e16f1cfff86ec832,
-  UnnamedSchemaRefC335ce55d4fdf132c942dfce6e45dcb9,
-  UnnamedSchemaRefC6200e37c458aaa3c42e6e5b999bc419,
-  ZeroTrustApps,
+  AllowedHeadersItem,
+  AllowedIDPsItem,
+  AllowedMethodsItem,
+  AllowedOriginsItem,
+  AppID,
+  Application,
+  CorsHeaders,
+  CustomPagesItem,
+  SamlSaasApp,
+  SelfHostedDomainsItem,
   ApplicationDeleteResponse,
   ApplicationRevokeTokensResponse,
   ApplicationCreateParams,
@@ -16,40 +19,77 @@ export {
   ApplicationDeleteParams,
   ApplicationGetParams,
   ApplicationRevokeTokensParams,
-  ZeroTrustAppsSinglePage,
+  ApplicationsSinglePage,
   Applications,
 } from './applications/index';
 export {
-  ZeroTrustBookmarks,
-  BookmarkDeleteResponse,
-  BookmarkCreateParams,
-  BookmarkUpdateParams,
-  BookmarkDeleteParams,
-  ZeroTrustBookmarksSinglePage,
-  Bookmarks,
-} from './bookmarks';
+  AnyValidServiceTokenRule,
+  AuthenticationMethodRule,
+  AzureGroupRule,
+  CertificateRule,
+  CountryRule,
+  DevicePostureRule,
+  DomainRule,
+  EmailListRule,
+  EmailRule,
+  EveryoneRule,
+  ExternalEvaluationRule,
+  GitHubOrganizationRule,
+  GroupRule,
+  GsuiteGroupRule,
+  IncludeItem,
+  IPListRule,
+  IPRule,
+  OktaGroupRule,
+  Rule,
+  SamlGroupRule,
+  ServiceTokenRule,
+  Access,
+} from './access';
 export {
-  ZeroTrustCertificates,
+  AssociatedHostnamesItem,
+  Certificate,
   CertificateDeleteResponse,
   CertificateCreateParams,
   CertificateUpdateParams,
   CertificateListParams,
   CertificateDeleteParams,
   CertificateGetParams,
-  ZeroTrustCertificatesSinglePage,
+  CertificatesSinglePage,
   Certificates,
 } from './certificates/index';
 export {
-  ZeroTrustCustomPage,
-  ZeroTrustCustomPageWithoutHTML,
+  Bookmarks,
+  BookmarkDeleteResponse,
+  BookmarkCreateParams,
+  BookmarkUpdateParams,
+  BookmarkDeleteParams,
+  BookmarksSinglePage,
+} from './bookmarks';
+export {
+  CustomPage,
+  CustomPageWithoutHTML,
   CustomPageDeleteResponse,
   CustomPageCreateParams,
   CustomPageUpdateParams,
-  ZeroTrustCustomPageWithoutHTMLsSinglePage,
+  CustomPageWithoutHTMLsSinglePage,
   CustomPages,
 } from './custom-pages';
 export {
-  ZeroTrustGroups,
+  ErviceToken,
+  ServiceTokenCreateResponse,
+  ServiceTokenRotateResponse,
+  ServiceTokenCreateParams,
+  ServiceTokenUpdateParams,
+  ServiceTokenListParams,
+  ServiceTokenDeleteParams,
+  ErviceTokensSinglePage,
+  ServiceTokens,
+} from './service-tokens';
+export {
+  ExcludeItem,
+  RequireItem,
+  ZeroTrustGroup,
   GroupDeleteResponse,
   GroupCreateParams,
   GroupUpdateParams,
@@ -59,23 +99,7 @@ export {
   ZeroTrustGroupsSinglePage,
   Groups,
 } from './groups';
-export {
-  ZeroTrustServiceTokens,
-  ServiceTokenCreateResponse,
-  ServiceTokenRotateResponse,
-  ServiceTokenCreateParams,
-  ServiceTokenUpdateParams,
-  ServiceTokenListParams,
-  ServiceTokenDeleteParams,
-  ZeroTrustServiceTokensSinglePage,
-  ServiceTokens,
-} from './service-tokens';
-export {
-  ZeroTrustTag,
-  TagDeleteResponse,
-  TagCreateParams,
-  TagUpdateParams,
-  ZeroTrustTagsSinglePage,
-  Tags,
-} from './tags';
-export { ZeroTrustUsers, ZeroTrustUsersSinglePage, Users } from './users/index';
+export { KeyUpdateParams, Keys } from './keys';
+export { Logs } from './logs/index';
+export { Tag, TagDeleteResponse, TagCreateParams, TagUpdateParams, TagsSinglePage, Tags } from './tags';
+export { User, UsersSinglePage, Users } from './users/index';

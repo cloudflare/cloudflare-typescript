@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as WARPConnectorAPI from 'cloudflare/resources/warp-connector';
 import * as Shared from 'cloudflare/resources/shared';
 import { UnnamedSchemaRef413ab4522f0bb93f63444799121fe2f8sV4PagePaginationArray } from 'cloudflare/resources/shared';
 import { type V4PagePaginationArrayParams } from 'cloudflare/pagination';
@@ -215,16 +214,6 @@ export interface WARPConnectorTokenParams {
    * Cloudflare account ID
    */
   account_id: string;
-}
-
-export namespace WARPConnector {
-  export import WARPConnectorTokenResponse = WARPConnectorAPI.WARPConnectorTokenResponse;
-  export import WARPConnectorCreateParams = WARPConnectorAPI.WARPConnectorCreateParams;
-  export import WARPConnectorListParams = WARPConnectorAPI.WARPConnectorListParams;
-  export import WARPConnectorDeleteParams = WARPConnectorAPI.WARPConnectorDeleteParams;
-  export import WARPConnectorEditParams = WARPConnectorAPI.WARPConnectorEditParams;
-  export import WARPConnectorGetParams = WARPConnectorAPI.WARPConnectorGetParams;
-  export import WARPConnectorTokenParams = WARPConnectorAPI.WARPConnectorTokenParams;
 }
 
 export { UnnamedSchemaRef413ab4522f0bb93f63444799121fe2f8sV4PagePaginationArray };

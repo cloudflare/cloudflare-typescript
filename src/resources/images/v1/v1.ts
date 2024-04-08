@@ -181,32 +181,34 @@ export namespace V1ListResponse {
   }
 }
 
-export type V1CreateParams = V1CreateParams.ImagesImageUploadViaFile | V1CreateParams.ImagesImageUploadViaURL;
+export interface V1CreateParams {
+  /**
+   * Path param: Account identifier tag.
+   */
+  account_id: string;
 
-export namespace V1CreateParams {
-  export interface ImagesImageUploadViaFile {
-    /**
-     * Path param: Account identifier tag.
-     */
-    account_id: string;
+  /**
+   * Body param: An image binary data. Only needed when type is uploading a file.
+   */
+  file?: unknown;
 
-    /**
-     * Body param: An image binary data.
-     */
-    file: unknown;
-  }
+  /**
+   * Body param: User modifiable key-value store. Can use used for keeping references
+   * to another system of record for managing images.
+   */
+  metadata?: unknown;
 
-  export interface ImagesImageUploadViaURL {
-    /**
-     * Path param: Account identifier tag.
-     */
-    account_id: string;
+  /**
+   * Body param: Indicates whether the image requires a signature token for the
+   * access.
+   */
+  requireSignedURLs?: boolean;
 
-    /**
-     * Body param: A URL to fetch an image from origin.
-     */
-    url: string;
-  }
+  /**
+   * Body param: A URL to fetch an image from origin. Only needed when type is
+   * uploading from a URL.
+   */
+  url?: string;
 }
 
 export interface V1ListParams extends V4PagePaginationParams {
@@ -266,18 +268,20 @@ export namespace V1 {
   export import V1EditParams = V1API.V1EditParams;
   export import V1GetParams = V1API.V1GetParams;
   export import Keys = KeysAPI.Keys;
-  export import ImagesImageKeys = KeysAPI.ImagesImageKeys;
+  export import Key = KeysAPI.Key;
   export import UnnamedSchemaRef918e794287a67b5e85126e00cf2d9a95 = KeysAPI.UnnamedSchemaRef918e794287a67b5e85126e00cf2d9a95;
   export import KeyUpdateParams = KeysAPI.KeyUpdateParams;
   export import KeyListParams = KeysAPI.KeyListParams;
   export import KeyDeleteParams = KeysAPI.KeyDeleteParams;
   export import Stats = StatsAPI.Stats;
-  export import ImagesImagesStats = StatsAPI.ImagesImagesStats;
+  export import Stat = StatsAPI.Stat;
   export import StatGetParams = StatsAPI.StatGetParams;
   export import Variants = VariantsAPI.Variants;
   export import UnnamedSchemaRefD02195de7dadf27801875f36cddfa3a3 = VariantsAPI.UnnamedSchemaRefD02195de7dadf27801875f36cddfa3a3;
-  export import V1ImageVariant = VariantsAPI.V1ImageVariant;
-  export import V1ImageVariants = VariantsAPI.V1ImageVariants;
+  export import Variant = VariantsAPI.Variant;
+  export import VariantCreateResponse = VariantsAPI.VariantCreateResponse;
+  export import VariantEditResponse = VariantsAPI.VariantEditResponse;
+  export import VariantGetResponse = VariantsAPI.VariantGetResponse;
   export import VariantCreateParams = VariantsAPI.VariantCreateParams;
   export import VariantListParams = VariantsAPI.VariantListParams;
   export import VariantDeleteParams = VariantsAPI.VariantDeleteParams;

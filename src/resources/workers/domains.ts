@@ -9,11 +9,11 @@ export class Domains extends APIResource {
   /**
    * Attaches a Worker to a zone and hostname.
    */
-  update(params: DomainUpdateParams, options?: Core.RequestOptions): Core.APIPromise<WorkersDomain> {
+  update(params: DomainUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Domain> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/workers/domains`, { body, ...options }) as Core.APIPromise<{
-        result: WorkersDomain;
+        result: Domain;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -21,12 +21,9 @@ export class Domains extends APIResource {
   /**
    * Lists all Worker Domains for an account.
    */
-  list(
-    params: DomainListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<WorkersDomainsSinglePage, WorkersDomain> {
+  list(params: DomainListParams, options?: Core.RequestOptions): Core.PagePromise<DomainsSinglePage, Domain> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/workers/domains`, WorkersDomainsSinglePage, {
+    return this._client.getAPIList(`/accounts/${account_id}/workers/domains`, DomainsSinglePage, {
       query,
       ...options,
     });
@@ -47,23 +44,19 @@ export class Domains extends APIResource {
   /**
    * Gets a Worker domain.
    */
-  get(
-    domainId: string,
-    params: DomainGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<WorkersDomain> {
+  get(domainId: string, params: DomainGetParams, options?: Core.RequestOptions): Core.APIPromise<Domain> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/workers/domains/${domainId}`, options) as Core.APIPromise<{
-        result: WorkersDomain;
+        result: Domain;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class WorkersDomainsSinglePage extends SinglePage<WorkersDomain> {}
+export class DomainsSinglePage extends SinglePage<Domain> {}
 
-export interface WorkersDomain {
+export interface Domain {
   /**
    * Identifer of the Worker Domain.
    */
@@ -171,8 +164,8 @@ export interface DomainGetParams {
 }
 
 export namespace Domains {
-  export import WorkersDomain = DomainsAPI.WorkersDomain;
-  export import WorkersDomainsSinglePage = DomainsAPI.WorkersDomainsSinglePage;
+  export import Domain = DomainsAPI.Domain;
+  export import DomainsSinglePage = DomainsAPI.DomainsSinglePage;
   export import DomainUpdateParams = DomainsAPI.DomainUpdateParams;
   export import DomainListParams = DomainsAPI.DomainListParams;
   export import DomainDeleteParams = DomainsAPI.DomainDeleteParams;

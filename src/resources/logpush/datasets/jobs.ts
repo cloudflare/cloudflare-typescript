@@ -51,9 +51,9 @@ export class Jobs extends APIResource {
   }
 }
 
-export class LogpushJobsSinglePage extends SinglePage<LogpushJob | null> {}
+export class JobsSinglePage extends SinglePage<Job | null> {}
 
-export interface LogpushJob {
+export interface Job {
   /**
    * Unique id of the job.
    */
@@ -126,88 +126,86 @@ export interface LogpushJob {
    * The structured replacement for `logpull_options`. When including this field, the
    * `logpull_option` field will be ignored.
    */
-  output_options?: LogpushJob.OutputOptions | null;
+  output_options?: OutputOptions | null;
 }
 
-export namespace LogpushJob {
+/**
+ * The structured replacement for `logpull_options`. When including this field, the
+ * `logpull_option` field will be ignored.
+ */
+export interface OutputOptions {
   /**
-   * The structured replacement for `logpull_options`. When including this field, the
-   * `logpull_option` field will be ignored.
+   * String to be prepended before each batch.
    */
-  export interface OutputOptions {
-    /**
-     * String to be prepended before each batch.
-     */
-    batch_prefix?: string | null;
+  batch_prefix?: string | null;
 
-    /**
-     * String to be appended after each batch.
-     */
-    batch_suffix?: string | null;
+  /**
+   * String to be appended after each batch.
+   */
+  batch_suffix?: string | null;
 
-    /**
-     * If set to true, will cause all occurrences of `${` in the generated files to be
-     * replaced with `x{`.
-     */
-    'CVE-2021-4428'?: boolean | null;
+  /**
+   * If set to true, will cause all occurrences of `${` in the generated files to be
+   * replaced with `x{`.
+   */
+  'CVE-2021-4428'?: boolean | null;
 
-    /**
-     * String to join fields. This field be ignored when `record_template` is set.
-     */
-    field_delimiter?: string | null;
+  /**
+   * String to join fields. This field be ignored when `record_template` is set.
+   */
+  field_delimiter?: string | null;
 
-    /**
-     * List of field names to be included in the Logpush output. For the moment, there
-     * is no option to add all fields at once, so you must specify all the fields names
-     * you are interested in.
-     */
-    field_names?: Array<string>;
+  /**
+   * List of field names to be included in the Logpush output. For the moment, there
+   * is no option to add all fields at once, so you must specify all the fields names
+   * you are interested in.
+   */
+  field_names?: Array<string>;
 
-    /**
-     * Specifies the output type, such as `ndjson` or `csv`. This sets default values
-     * for the rest of the settings, depending on the chosen output type. Some
-     * formatting rules, like string quoting, are different between output types.
-     */
-    output_type?: 'ndjson' | 'csv';
+  /**
+   * Specifies the output type, such as `ndjson` or `csv`. This sets default values
+   * for the rest of the settings, depending on the chosen output type. Some
+   * formatting rules, like string quoting, are different between output types.
+   */
+  output_type?: 'ndjson' | 'csv';
 
-    /**
-     * String to be inserted in-between the records as separator.
-     */
-    record_delimiter?: string | null;
+  /**
+   * String to be inserted in-between the records as separator.
+   */
+  record_delimiter?: string | null;
 
-    /**
-     * String to be prepended before each record.
-     */
-    record_prefix?: string | null;
+  /**
+   * String to be prepended before each record.
+   */
+  record_prefix?: string | null;
 
-    /**
-     * String to be appended after each record.
-     */
-    record_suffix?: string | null;
+  /**
+   * String to be appended after each record.
+   */
+  record_suffix?: string | null;
 
-    /**
-     * String to use as template for each record instead of the default comma-separated
-     * list. All fields used in the template must be present in `field_names` as well,
-     * otherwise they will end up as null. Format as a Go `text/template` without any
-     * standard functions, like conditionals, loops, sub-templates, etc.
-     */
-    record_template?: string | null;
+  /**
+   * String to use as template for each record instead of the default comma-separated
+   * list. All fields used in the template must be present in `field_names` as well,
+   * otherwise they will end up as null. Format as a Go `text/template` without any
+   * standard functions, like conditionals, loops, sub-templates, etc.
+   */
+  record_template?: string | null;
 
-    /**
-     * Floating number to specify sampling rate. Sampling is applied on top of
-     * filtering, and regardless of the current `sample_interval` of the data.
-     */
-    sample_rate?: number | null;
+  /**
+   * Floating number to specify sampling rate. Sampling is applied on top of
+   * filtering, and regardless of the current `sample_interval` of the data.
+   */
+  sample_rate?: number | null;
 
-    /**
-     * String to specify the format for timestamps, such as `unixnano`, `unix`, or
-     * `rfc3339`.
-     */
-    timestamp_format?: 'unixnano' | 'unix' | 'rfc3339';
-  }
+  /**
+   * String to specify the format for timestamps, such as `unixnano`, `unix`, or
+   * `rfc3339`.
+   */
+  timestamp_format?: 'unixnano' | 'unix' | 'rfc3339';
 }
 
-export type JobGetResponse = Array<LogpushJob | null>;
+export type JobGetResponse = Array<Job | null>;
 
 export interface JobGetParams {
   /**
@@ -222,7 +220,8 @@ export interface JobGetParams {
 }
 
 export namespace Jobs {
-  export import LogpushJob = JobsAPI.LogpushJob;
+  export import Job = JobsAPI.Job;
+  export import OutputOptions = JobsAPI.OutputOptions;
   export import JobGetResponse = JobsAPI.JobGetResponse;
   export import JobGetParams = JobsAPI.JobGetParams;
 }

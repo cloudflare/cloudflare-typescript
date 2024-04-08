@@ -4,23 +4,20 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as CertificatesAPI from 'cloudflare/resources/origin-tls-client-auth/hostnames/certificates';
 import * as HostnamesAPI from 'cloudflare/resources/origin-tls-client-auth/hostnames/hostnames';
-import { OriginTLSClientCertificateIDsSinglePage } from 'cloudflare/resources/origin-tls-client-auth/hostnames/hostnames';
+import { AuthenticatedOriginPullsSinglePage } from 'cloudflare/resources/origin-tls-client-auth/hostnames/hostnames';
 
 export class Certificates extends APIResource {
   /**
    * Upload a certificate to be used for client authentication on a hostname. 10
    * hostname certificates per zone are allowed.
    */
-  create(
-    params: CertificateCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OriginTLSClientCertificate> {
+  create(params: CertificateCreateParams, options?: Core.RequestOptions): Core.APIPromise<Certificate> {
     const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/origin_tls_client_auth/hostnames/certificates`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: OriginTLSClientCertificate }>
+      }) as Core.APIPromise<{ result: Certificate }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -30,11 +27,11 @@ export class Certificates extends APIResource {
   list(
     params: CertificateListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<OriginTLSClientCertificateIDsSinglePage, HostnamesAPI.OriginTLSClientCertificateID> {
+  ): Core.PagePromise<AuthenticatedOriginPullsSinglePage, HostnamesAPI.AuthenticatedOriginPull> {
     const { zone_id } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/origin_tls_client_auth/hostnames/certificates`,
-      OriginTLSClientCertificateIDsSinglePage,
+      AuthenticatedOriginPullsSinglePage,
       options,
     );
   }
@@ -46,13 +43,13 @@ export class Certificates extends APIResource {
     certificateId: string,
     params: CertificateDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<OriginTLSClientCertificate> {
+  ): Core.APIPromise<Certificate> {
     const { zone_id, body } = params;
     return (
       this._client.delete(
         `/zones/${zone_id}/origin_tls_client_auth/hostnames/certificates/${certificateId}`,
         { body: body, ...options },
-      ) as Core.APIPromise<{ result: OriginTLSClientCertificate }>
+      ) as Core.APIPromise<{ result: Certificate }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -63,18 +60,18 @@ export class Certificates extends APIResource {
     certificateId: string,
     params: CertificateGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<OriginTLSClientCertificate> {
+  ): Core.APIPromise<Certificate> {
     const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/origin_tls_client_auth/hostnames/certificates/${certificateId}`,
         options,
-      ) as Core.APIPromise<{ result: OriginTLSClientCertificate }>
+      ) as Core.APIPromise<{ result: Certificate }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface OriginTLSClientCertificate {
+export interface Certificate {
   /**
    * Identifier
    */
@@ -216,7 +213,7 @@ export interface CertificateGetParams {
 }
 
 export namespace Certificates {
-  export import OriginTLSClientCertificate = CertificatesAPI.OriginTLSClientCertificate;
+  export import Certificate = CertificatesAPI.Certificate;
   export import UnnamedSchemaRefD182888b36f93a765d9ce5aefa3009e9 = CertificatesAPI.UnnamedSchemaRefD182888b36f93a765d9ce5aefa3009e9;
   export import CertificateCreateParams = CertificatesAPI.CertificateCreateParams;
   export import CertificateListParams = CertificatesAPI.CertificateListParams;
@@ -224,4 +221,4 @@ export namespace Certificates {
   export import CertificateGetParams = CertificatesAPI.CertificateGetParams;
 }
 
-export { OriginTLSClientCertificateIDsSinglePage };
+export { AuthenticatedOriginPullsSinglePage };

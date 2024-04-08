@@ -15,19 +15,19 @@ export class Namespaces extends APIResource {
   list(
     params: NamespaceListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<DurableObjectNamespacesSinglePage, DurableObjectNamespace> {
+  ): Core.PagePromise<NamespacesSinglePage, Namespace> {
     const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/workers/durable_objects/namespaces`,
-      DurableObjectNamespacesSinglePage,
+      NamespacesSinglePage,
       options,
     );
   }
 }
 
-export class DurableObjectNamespacesSinglePage extends SinglePage<DurableObjectNamespace> {}
+export class NamespacesSinglePage extends SinglePage<Namespace> {}
 
-export interface DurableObjectNamespace {
+export interface Namespace {
   id?: unknown;
 
   class?: unknown;
@@ -45,8 +45,8 @@ export interface NamespaceListParams {
 }
 
 export namespace Namespaces {
-  export import DurableObjectNamespace = NamespacesAPI.DurableObjectNamespace;
-  export import DurableObjectNamespacesSinglePage = NamespacesAPI.DurableObjectNamespacesSinglePage;
+  export import Namespace = NamespacesAPI.Namespace;
+  export import NamespacesSinglePage = NamespacesAPI.NamespacesSinglePage;
   export import NamespaceListParams = NamespacesAPI.NamespaceListParams;
   export import Objects = ObjectsAPI.Objects;
   export import DurableObject = ObjectsAPI.DurableObject;

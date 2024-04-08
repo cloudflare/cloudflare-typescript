@@ -13,23 +13,23 @@ export class Keys extends APIResource {
     namespaceId: string,
     params: KeyListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<WorkersKVKeysCursorLimitPagination, WorkersKVKey> {
+  ): Core.PagePromise<KeysCursorLimitPagination, Key> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/keys`,
-      WorkersKVKeysCursorLimitPagination,
+      KeysCursorLimitPagination,
       { query, ...options },
     );
   }
 }
 
-export class WorkersKVKeysCursorLimitPagination extends CursorLimitPagination<WorkersKVKey> {}
+export class KeysCursorLimitPagination extends CursorLimitPagination<Key> {}
 
 /**
  * A name for a value. A value stored under a given key may be retrieved via the
  * same key.
  */
-export interface WorkersKVKey {
+export interface Key {
   /**
    * A key's name. The name may be at most 512 bytes. All printable, non-whitespace
    * characters are valid. Use percent-encoding to define key names as part of a URL.
@@ -62,7 +62,7 @@ export interface KeyListParams extends CursorLimitPaginationParams {
 }
 
 export namespace Keys {
-  export import WorkersKVKey = KeysAPI.WorkersKVKey;
-  export import WorkersKVKeysCursorLimitPagination = KeysAPI.WorkersKVKeysCursorLimitPagination;
+  export import Key = KeysAPI.Key;
+  export import KeysCursorLimitPagination = KeysAPI.KeysCursorLimitPagination;
   export import KeyListParams = KeysAPI.KeyListParams;
 }

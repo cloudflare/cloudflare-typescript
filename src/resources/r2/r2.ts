@@ -6,20 +6,20 @@ import * as SippyAPI from 'cloudflare/resources/r2/sippy';
 
 export class R2 extends APIResource {
   buckets: BucketsAPI.Buckets = new BucketsAPI.Buckets(this._client);
-  sippy: SippyAPI.Sippy = new SippyAPI.Sippy(this._client);
+  sippy: SippyAPI.SippyResource = new SippyAPI.SippyResource(this._client);
 }
 
 export namespace R2 {
   export import Buckets = BucketsAPI.Buckets;
-  export import R2Bucket = BucketsAPI.R2Bucket;
+  export import Bucket = BucketsAPI.Bucket;
   export import BucketDeleteResponse = BucketsAPI.BucketDeleteResponse;
-  export import R2BucketsCursorPagination = BucketsAPI.R2BucketsCursorPagination;
+  export import BucketsCursorPagination = BucketsAPI.BucketsCursorPagination;
   export import BucketCreateParams = BucketsAPI.BucketCreateParams;
   export import BucketListParams = BucketsAPI.BucketListParams;
   export import BucketDeleteParams = BucketsAPI.BucketDeleteParams;
   export import BucketGetParams = BucketsAPI.BucketGetParams;
+  export import SippyResource = SippyAPI.SippyResource;
   export import Sippy = SippyAPI.Sippy;
-  export import R2Sippy = SippyAPI.R2Sippy;
   export import UnnamedSchemaRef6430970563db310f19d39aafe3debd27 = SippyAPI.UnnamedSchemaRef6430970563db310f19d39aafe3debd27;
   export import SippyDeleteResponse = SippyAPI.SippyDeleteResponse;
   export import SippyUpdateParams = SippyAPI.SippyUpdateParams;

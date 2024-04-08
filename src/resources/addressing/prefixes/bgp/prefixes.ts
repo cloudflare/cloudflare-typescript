@@ -16,11 +16,11 @@ export class Prefixes extends APIResource {
     prefixId: string,
     params: PrefixListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<AddressingIpamBGPPrefixesSinglePage, AddressingIpamBGPPrefixes> {
+  ): Core.PagePromise<BGPPrefixesSinglePage, BGPPrefix> {
     const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/addressing/prefixes/${prefixId}/bgp/prefixes`,
-      AddressingIpamBGPPrefixesSinglePage,
+      BGPPrefixesSinglePage,
       options,
     );
   }
@@ -34,13 +34,13 @@ export class Prefixes extends APIResource {
     bgpPrefixId: string,
     params: PrefixEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AddressingIpamBGPPrefixes> {
+  ): Core.APIPromise<BGPPrefix> {
     const { account_id, ...body } = params;
     return (
       this._client.patch(
         `/accounts/${account_id}/addressing/prefixes/${prefixId}/bgp/prefixes/${bgpPrefixId}`,
         { body, ...options },
-      ) as Core.APIPromise<{ result: AddressingIpamBGPPrefixes }>
+      ) as Core.APIPromise<{ result: BGPPrefix }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -52,20 +52,20 @@ export class Prefixes extends APIResource {
     bgpPrefixId: string,
     params: PrefixGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AddressingIpamBGPPrefixes> {
+  ): Core.APIPromise<BGPPrefix> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/addressing/prefixes/${prefixId}/bgp/prefixes/${bgpPrefixId}`,
         options,
-      ) as Core.APIPromise<{ result: AddressingIpamBGPPrefixes }>
+      ) as Core.APIPromise<{ result: BGPPrefix }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class AddressingIpamBGPPrefixesSinglePage extends SinglePage<AddressingIpamBGPPrefixes> {}
+export class BGPPrefixesSinglePage extends SinglePage<BGPPrefix> {}
 
-export interface AddressingIpamBGPPrefixes {
+export interface BGPPrefix {
   /**
    * Identifier
    */
@@ -76,7 +76,7 @@ export interface AddressingIpamBGPPrefixes {
    */
   asn?: number | null;
 
-  bgp_signal_opts?: AddressingIpamBGPPrefixes.BGPSignalOpts;
+  bgp_signal_opts?: BGPPrefix.BGPSignalOpts;
 
   /**
    * IP Prefix in Classless Inter-Domain Routing format.
@@ -87,10 +87,10 @@ export interface AddressingIpamBGPPrefixes {
 
   modified_at?: string;
 
-  on_demand?: AddressingIpamBGPPrefixes.OnDemand;
+  on_demand?: BGPPrefix.OnDemand;
 }
 
-export namespace AddressingIpamBGPPrefixes {
+export namespace BGPPrefix {
   export interface BGPSignalOpts {
     /**
      * Whether control of advertisement of the prefix to the Internet is enabled to be
@@ -165,8 +165,8 @@ export interface PrefixGetParams {
 }
 
 export namespace Prefixes {
-  export import AddressingIpamBGPPrefixes = PrefixesAPI.AddressingIpamBGPPrefixes;
-  export import AddressingIpamBGPPrefixesSinglePage = PrefixesAPI.AddressingIpamBGPPrefixesSinglePage;
+  export import BGPPrefix = PrefixesAPI.BGPPrefix;
+  export import BGPPrefixesSinglePage = PrefixesAPI.BGPPrefixesSinglePage;
   export import PrefixListParams = PrefixesAPI.PrefixListParams;
   export import PrefixEditParams = PrefixesAPI.PrefixEditParams;
   export import PrefixGetParams = PrefixesAPI.PrefixGetParams;

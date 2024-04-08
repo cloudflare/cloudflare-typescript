@@ -77,7 +77,7 @@ export class Settings extends APIResource {
   }
 }
 
-export interface ZeroTrustSettings {
+export interface Settings {
   /**
    * Request client certificates for this hostname in China. Can only be set to true
    * if this zone is china network enabled.
@@ -97,15 +97,15 @@ export interface ZeroTrustSettings {
   hostname: string;
 }
 
-export type SettingUpdateResponse = Array<ZeroTrustSettings>;
+export type SettingUpdateResponse = Array<Settings>;
 
-export type SettingGetResponse = Array<ZeroTrustSettings>;
+export type SettingGetResponse = Array<Settings>;
 
 export interface SettingUpdateParams {
   /**
    * Body param:
    */
-  settings: Array<ZeroTrustSettings>;
+  settings: Array<Settings>;
 
   /**
    * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -133,7 +133,7 @@ export interface SettingGetParams {
 }
 
 export namespace Settings {
-  export import ZeroTrustSettings = SettingsAPI.ZeroTrustSettings;
+  export import Settings = SettingsAPI.Settings;
   export import SettingUpdateResponse = SettingsAPI.SettingUpdateResponse;
   export import SettingGetResponse = SettingsAPI.SettingGetResponse;
   export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;

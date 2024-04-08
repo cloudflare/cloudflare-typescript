@@ -9,14 +9,14 @@ export class Widgets extends APIResource {
   /**
    * Lists challenge widgets.
    */
-  create(params: WidgetCreateParams, options?: Core.RequestOptions): Core.APIPromise<ChallengesWidget> {
+  create(params: WidgetCreateParams, options?: Core.RequestOptions): Core.APIPromise<Widget> {
     const { account_id, direction, order, page, per_page, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/challenges/widgets`, {
         query: { direction, order, page, per_page },
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ChallengesWidget }>
+      }) as Core.APIPromise<{ result: Widget }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -27,13 +27,13 @@ export class Widgets extends APIResource {
     sitekey: string,
     params: WidgetUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ChallengesWidget> {
+  ): Core.APIPromise<Widget> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/challenges/widgets/${sitekey}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ChallengesWidget }>
+      }) as Core.APIPromise<{ result: Widget }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -43,11 +43,11 @@ export class Widgets extends APIResource {
   list(
     params: WidgetListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<ChallengesWidgetListsV4PagePaginationArray, ChallengesWidgetList> {
+  ): Core.PagePromise<WidgetDomainsV4PagePaginationArray, WidgetDomain> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/challenges/widgets`,
-      ChallengesWidgetListsV4PagePaginationArray,
+      WidgetDomainsV4PagePaginationArray,
       { query, ...options },
     );
   }
@@ -59,28 +59,24 @@ export class Widgets extends APIResource {
     sitekey: string,
     params: WidgetDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ChallengesWidget> {
+  ): Core.APIPromise<Widget> {
     const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/challenges/widgets/${sitekey}`,
         options,
-      ) as Core.APIPromise<{ result: ChallengesWidget }>
+      ) as Core.APIPromise<{ result: Widget }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Show a single challenge widget configuration.
    */
-  get(
-    sitekey: string,
-    params: WidgetGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ChallengesWidget> {
+  get(sitekey: string, params: WidgetGetParams, options?: Core.RequestOptions): Core.APIPromise<Widget> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/challenges/widgets/${sitekey}`, options) as Core.APIPromise<{
-        result: ChallengesWidget;
+        result: Widget;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -95,23 +91,23 @@ export class Widgets extends APIResource {
     sitekey: string,
     params: WidgetRotateSecretParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ChallengesWidget> {
+  ): Core.APIPromise<Widget> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/challenges/widgets/${sitekey}/rotate_secret`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ChallengesWidget }>
+      }) as Core.APIPromise<{ result: Widget }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class ChallengesWidgetListsV4PagePaginationArray extends V4PagePaginationArray<ChallengesWidgetList> {}
+export class WidgetDomainsV4PagePaginationArray extends V4PagePaginationArray<WidgetDomain> {}
 
 /**
  * A Turnstile widget's detailed configuration
  */
-export interface ChallengesWidget {
+export interface Widget {
   /**
    * If bot_fight_mode is set to `true`, Cloudflare issues computationally expensive
    * challenges in response to malicious bots (ENT only).
@@ -129,7 +125,7 @@ export interface ChallengesWidget {
    */
   created_on: string;
 
-  domains: Array<string>;
+  domains: Array<WidgetDomainItem>;
 
   /**
    * Widget Mode
@@ -172,7 +168,7 @@ export interface ChallengesWidget {
 /**
  * A Turnstile Widgets configuration as it appears in listings
  */
-export interface ChallengesWidgetList {
+export interface WidgetDomain {
   /**
    * If bot_fight_mode is set to `true`, Cloudflare issues computationally expensive
    * challenges in response to malicious bots (ENT only).
@@ -190,7 +186,7 @@ export interface ChallengesWidgetList {
    */
   created_on: string;
 
-  domains: Array<string>;
+  domains: Array<WidgetDomainItem>;
 
   /**
    * Widget Mode
@@ -225,6 +221,12 @@ export interface ChallengesWidgetList {
   sitekey: string;
 }
 
+/**
+ * Hosts as a hostname or IPv4/IPv6 address represented by strings. The widget will
+ * only work on these domains, and their subdomains.
+ */
+export type WidgetDomainItem = string;
+
 export interface WidgetCreateParams {
   /**
    * Path param: Identifier
@@ -234,7 +236,7 @@ export interface WidgetCreateParams {
   /**
    * Body param:
    */
-  domains: Array<string>;
+  domains: Array<WidgetDomainItem>;
 
   /**
    * Body param: Widget Mode
@@ -301,7 +303,7 @@ export interface WidgetUpdateParams {
   /**
    * Body param:
    */
-  domains: Array<string>;
+  domains: Array<WidgetDomainItem>;
 
   /**
    * Body param: Widget Mode
@@ -380,9 +382,10 @@ export interface WidgetRotateSecretParams {
 }
 
 export namespace Widgets {
-  export import ChallengesWidget = WidgetsAPI.ChallengesWidget;
-  export import ChallengesWidgetList = WidgetsAPI.ChallengesWidgetList;
-  export import ChallengesWidgetListsV4PagePaginationArray = WidgetsAPI.ChallengesWidgetListsV4PagePaginationArray;
+  export import Widget = WidgetsAPI.Widget;
+  export import WidgetDomain = WidgetsAPI.WidgetDomain;
+  export import WidgetDomainItem = WidgetsAPI.WidgetDomainItem;
+  export import WidgetDomainsV4PagePaginationArray = WidgetsAPI.WidgetDomainsV4PagePaginationArray;
   export import WidgetCreateParams = WidgetsAPI.WidgetCreateParams;
   export import WidgetUpdateParams = WidgetsAPI.WidgetUpdateParams;
   export import WidgetListParams = WidgetsAPI.WidgetListParams;

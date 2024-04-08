@@ -1,18 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export {
-  LoadBalancer,
-  UnnamedSchemaRef06ba14ec7860c091efc98fd9af30f382,
-  LoadBalancerDeleteResponse,
-  LoadBalancerCreateParams,
-  LoadBalancerUpdateParams,
-  LoadBalancerListParams,
-  LoadBalancerDeleteParams,
-  LoadBalancerEditParams,
-  LoadBalancerGetParams,
-  LoadBalancersSinglePage,
-  LoadBalancers,
-} from './load-balancers';
+export { LoadBalancers } from './load-balancers';
 export {
   MonitorDeleteResponse,
   MonitorCreateParams,

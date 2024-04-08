@@ -13,15 +13,15 @@ export class BGP extends APIResource {
 
 export namespace BGP {
   export import Bindings = BindingsAPI.Bindings;
-  export import AddressingServiceBinding = BindingsAPI.AddressingServiceBinding;
-  export import AddressingServiceBindingsSinglePage = BindingsAPI.AddressingServiceBindingsSinglePage;
+  export import ServiceBinding = BindingsAPI.ServiceBinding;
+  export import ServiceBindingsSinglePage = BindingsAPI.ServiceBindingsSinglePage;
   export import BindingCreateParams = BindingsAPI.BindingCreateParams;
   export import BindingListParams = BindingsAPI.BindingListParams;
   export import BindingDeleteParams = BindingsAPI.BindingDeleteParams;
   export import BindingGetParams = BindingsAPI.BindingGetParams;
   export import Prefixes = PrefixesAPI.Prefixes;
-  export import AddressingIpamBGPPrefixes = PrefixesAPI.AddressingIpamBGPPrefixes;
-  export import AddressingIpamBGPPrefixesSinglePage = PrefixesAPI.AddressingIpamBGPPrefixesSinglePage;
+  export import BGPPrefix = PrefixesAPI.BGPPrefix;
+  export import BGPPrefixesSinglePage = PrefixesAPI.BGPPrefixesSinglePage;
   export import PrefixListParams = PrefixesAPI.PrefixListParams;
   export import PrefixEditParams = PrefixesAPI.PrefixEditParams;
   export import PrefixGetParams = PrefixesAPI.PrefixGetParams;

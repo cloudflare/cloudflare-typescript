@@ -8,14 +8,11 @@ export class Logging extends APIResource {
   /**
    * Updates logging settings for the current Zero Trust account.
    */
-  update(
-    params: LoggingUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZeroTrustGatewayGatewayAccountLoggingSettings> {
+  update(params: LoggingUpdateParams, options?: Core.RequestOptions): Core.APIPromise<LoggingSetting> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/gateway/logging`, { body, ...options }) as Core.APIPromise<{
-        result: ZeroTrustGatewayGatewayAccountLoggingSettings;
+        result: LoggingSetting;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -23,17 +20,27 @@ export class Logging extends APIResource {
   /**
    * Fetches the current logging settings for Zero Trust account.
    */
-  get(
-    params: LoggingGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZeroTrustGatewayGatewayAccountLoggingSettings> {
+  get(params: LoggingGetParams, options?: Core.RequestOptions): Core.APIPromise<LoggingSetting> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/gateway/logging`, options) as Core.APIPromise<{
-        result: ZeroTrustGatewayGatewayAccountLoggingSettings;
+        result: LoggingSetting;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+
+export interface LoggingSetting {
+  /**
+   * Redact personally identifiable information from activity logging (PII fields
+   * are: source IP, user email, user ID, device ID, URL, referrer, user agent).
+   */
+  redact_pii?: boolean;
+
+  /**
+   * Logging settings by rule type.
+   */
+  settings_by_rule_type?: UnnamedSchemaRefE86eeb84b7e922c35cfb0031a6309f7b;
 }
 
 /**
@@ -54,19 +61,6 @@ export interface UnnamedSchemaRefE86eeb84b7e922c35cfb0031a6309f7b {
    * Logging settings for Network firewall.
    */
   l4?: unknown;
-}
-
-export interface ZeroTrustGatewayGatewayAccountLoggingSettings {
-  /**
-   * Redact personally identifiable information from activity logging (PII fields
-   * are: source IP, user email, user ID, device ID, URL, referrer, user agent).
-   */
-  redact_pii?: boolean;
-
-  /**
-   * Logging settings by rule type.
-   */
-  settings_by_rule_type?: UnnamedSchemaRefE86eeb84b7e922c35cfb0031a6309f7b;
 }
 
 export interface LoggingUpdateParams {
@@ -93,8 +87,8 @@ export interface LoggingGetParams {
 }
 
 export namespace Logging {
+  export import LoggingSetting = LoggingAPI.LoggingSetting;
   export import UnnamedSchemaRefE86eeb84b7e922c35cfb0031a6309f7b = LoggingAPI.UnnamedSchemaRefE86eeb84b7e922c35cfb0031a6309f7b;
-  export import ZeroTrustGatewayGatewayAccountLoggingSettings = LoggingAPI.ZeroTrustGatewayGatewayAccountLoggingSettings;
   export import LoggingUpdateParams = LoggingAPI.LoggingUpdateParams;
   export import LoggingGetParams = LoggingAPI.LoggingGetParams;
 }

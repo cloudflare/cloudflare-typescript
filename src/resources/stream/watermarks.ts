@@ -31,13 +31,9 @@ export class Watermarks extends APIResource {
   list(
     params: WatermarkListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<StreamWatermarksSinglePage, StreamWatermarks> {
+  ): Core.PagePromise<WatermaksSinglePage, Watermaks> {
     const { account_id } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/stream/watermarks`,
-      StreamWatermarksSinglePage,
-      options,
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/stream/watermarks`, WatermaksSinglePage, options);
   }
 
   /**
@@ -75,9 +71,9 @@ export class Watermarks extends APIResource {
   }
 }
 
-export class StreamWatermarksSinglePage extends SinglePage<StreamWatermarks> {}
+export class WatermaksSinglePage extends SinglePage<Watermaks> {}
 
-export interface StreamWatermarks {
+export interface Watermaks {
   /**
    * The date and a time a watermark profile was created.
    */
@@ -218,8 +214,8 @@ export interface WatermarkGetParams {
 }
 
 export namespace Watermarks {
-  export import StreamWatermarks = WatermarksAPI.StreamWatermarks;
-  export import StreamWatermarksSinglePage = WatermarksAPI.StreamWatermarksSinglePage;
+  export import Watermaks = WatermarksAPI.Watermaks;
+  export import WatermaksSinglePage = WatermarksAPI.WatermaksSinglePage;
   export import WatermarkCreateParams = WatermarksAPI.WatermarkCreateParams;
   export import WatermarkListParams = WatermarksAPI.WatermarkListParams;
   export import WatermarkDeleteParams = WatermarksAPI.WatermarkDeleteParams;

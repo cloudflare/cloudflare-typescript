@@ -13,13 +13,13 @@ export class Previews extends APIResource {
     previewId: string,
     params: PreviewGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PreviewAPI.LoadBalancingPreview> {
+  ): Core.APIPromise<PreviewAPI.Preview> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/load_balancers/preview/${previewId}`,
         options,
-      ) as Core.APIPromise<{ result: PreviewAPI.LoadBalancingPreview }>
+      ) as Core.APIPromise<{ result: PreviewAPI.Preview }>
     )._thenUnwrap((obj) => obj.result);
   }
 }

@@ -20,7 +20,7 @@ export class Applications extends APIResource {
   /**
    * Adds a new application to Access.
    */
-  create(params: ApplicationCreateParams, options?: Core.RequestOptions): Core.APIPromise<ZeroTrustApps> {
+  create(params: ApplicationCreateParams, options?: Core.RequestOptions): Core.APIPromise<Application> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -42,7 +42,7 @@ export class Applications extends APIResource {
       this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/apps`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZeroTrustApps }>
+      }) as Core.APIPromise<{ result: Application }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -50,10 +50,10 @@ export class Applications extends APIResource {
    * Updates an Access application.
    */
   update(
-    appId: string | string,
+    appId: AppID,
     params: ApplicationUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZeroTrustApps> {
+  ): Core.APIPromise<Application> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -75,7 +75,7 @@ export class Applications extends APIResource {
       this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/apps/${appId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ZeroTrustApps }>
+      }) as Core.APIPromise<{ result: Application }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -85,12 +85,12 @@ export class Applications extends APIResource {
   list(
     params?: ApplicationListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<ZeroTrustAppsSinglePage, ZeroTrustApps>;
-  list(options?: Core.RequestOptions): Core.PagePromise<ZeroTrustAppsSinglePage, ZeroTrustApps>;
+  ): Core.PagePromise<ApplicationsSinglePage, Application>;
+  list(options?: Core.RequestOptions): Core.PagePromise<ApplicationsSinglePage, Application>;
   list(
     params: ApplicationListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<ZeroTrustAppsSinglePage, ZeroTrustApps> {
+  ): Core.PagePromise<ApplicationsSinglePage, Application> {
     if (isRequestOptions(params)) {
       return this.list({}, params);
     }
@@ -113,7 +113,7 @@ export class Applications extends APIResource {
         };
     return this._client.getAPIList(
       `/${accountOrZone}/${accountOrZoneId}/access/apps`,
-      ZeroTrustAppsSinglePage,
+      ApplicationsSinglePage,
       options,
     );
   }
@@ -122,13 +122,13 @@ export class Applications extends APIResource {
    * Deletes an application from Access.
    */
   delete(
-    appId: string | string,
+    appId: AppID,
     params?: ApplicationDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ApplicationDeleteResponse>;
-  delete(appId: string | string, options?: Core.RequestOptions): Core.APIPromise<ApplicationDeleteResponse>;
+  delete(appId: AppID, options?: Core.RequestOptions): Core.APIPromise<ApplicationDeleteResponse>;
   delete(
-    appId: string | string,
+    appId: AppID,
     params: ApplicationDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ApplicationDeleteResponse> {
@@ -164,16 +164,16 @@ export class Applications extends APIResource {
    * Fetches information about an Access application.
    */
   get(
-    appId: string | string,
+    appId: AppID,
     params?: ApplicationGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZeroTrustApps>;
-  get(appId: string | string, options?: Core.RequestOptions): Core.APIPromise<ZeroTrustApps>;
+  ): Core.APIPromise<Application>;
+  get(appId: AppID, options?: Core.RequestOptions): Core.APIPromise<Application>;
   get(
-    appId: string | string,
+    appId: AppID,
     params: ApplicationGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ZeroTrustApps> {
+  ): Core.APIPromise<Application> {
     if (isRequestOptions(params)) {
       return this.get(appId, {}, params);
     }
@@ -198,7 +198,7 @@ export class Applications extends APIResource {
       this._client.get(
         `/${accountOrZone}/${accountOrZoneId}/access/apps/${appId}`,
         options,
-      ) as Core.APIPromise<{ result: ZeroTrustApps }>
+      ) as Core.APIPromise<{ result: Application }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -206,16 +206,16 @@ export class Applications extends APIResource {
    * Revokes all tokens issued for an application.
    */
   revokeTokens(
-    appId: string | string,
+    appId: AppID,
     params?: ApplicationRevokeTokensParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ApplicationRevokeTokensResponse | null>;
   revokeTokens(
-    appId: string | string,
+    appId: AppID,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ApplicationRevokeTokensResponse | null>;
   revokeTokens(
-    appId: string | string,
+    appId: AppID,
     params: ApplicationRevokeTokensParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ApplicationRevokeTokensResponse | null> {
@@ -248,39 +248,44 @@ export class Applications extends APIResource {
   }
 }
 
-export class ZeroTrustAppsSinglePage extends SinglePage<ZeroTrustApps> {}
+export class ApplicationsSinglePage extends SinglePage<Application> {}
 
-export interface UnnamedSchemaRef6ed9646890b9be79e16f1cfff86ec832 {
-  /**
-   * The name of the IdP attribute.
-   */
-  name?: string;
-}
+export type AllowedHeadersItem = string;
 
 /**
- * A globally unique name for an identity or service provider.
+ * The identity providers selected for application.
  */
-export type UnnamedSchemaRefC335ce55d4fdf132c942dfce6e45dcb9 =
-  | 'urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified'
-  | 'urn:oasis:names:tc:SAML:2.0:attrname-format:basic'
-  | 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri';
+export type AllowedIDPsItem = string;
+
+export type AllowedMethodsItem =
+  | 'GET'
+  | 'POST'
+  | 'HEAD'
+  | 'PUT'
+  | 'DELETE'
+  | 'CONNECT'
+  | 'OPTIONS'
+  | 'TRACE'
+  | 'PATCH';
+
+export type AllowedOriginsItem = string;
 
 /**
- * The format of the name identifier sent to the SaaS application.
+ * Identifier
  */
-export type UnnamedSchemaRefC6200e37c458aaa3c42e6e5b999bc419 = 'id' | 'email';
+export type AppID = string | string;
 
-export type ZeroTrustApps =
-  | ZeroTrustApps.SelfHostedApplication
-  | ZeroTrustApps.SaaSApplication
-  | ZeroTrustApps.BrowserSSHApplication
-  | ZeroTrustApps.BrowserVncApplication
-  | ZeroTrustApps.AppLauncherApplication
-  | ZeroTrustApps.DeviceEnrollmentPermissionsApplication
-  | ZeroTrustApps.BrowserIsolationPermissionsApplication
-  | ZeroTrustApps.BookmarkApplication;
+export type Application =
+  | Application.SelfHostedApplication
+  | Application.SaaSApplication
+  | Application.BrowserSSHApplication
+  | Application.BrowserVncApplication
+  | Application.AppLauncherApplication
+  | Application.DeviceEnrollmentPermissionsApplication
+  | Application.BrowserIsolationPermissionsApplication
+  | Application.BookmarkApplication;
 
-export namespace ZeroTrustApps {
+export namespace Application {
   export interface SelfHostedApplication {
     /**
      * The primary hostname and path that Access will secure. If the app is visible in
@@ -310,7 +315,7 @@ export namespace ZeroTrustApps {
      * The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
-    allowed_idps?: Array<string>;
+    allowed_idps?: Array<ApplicationsAPI.AllowedIDPsItem>;
 
     /**
      * Displays the application in the App Launcher.
@@ -328,7 +333,7 @@ export namespace ZeroTrustApps {
      */
     auto_redirect_to_identity?: boolean;
 
-    cors_headers?: SelfHostedApplication.CorsHeaders;
+    cors_headers?: ApplicationsAPI.CorsHeaders;
 
     created_at?: string;
 
@@ -353,7 +358,7 @@ export namespace ZeroTrustApps {
     /**
      * The custom pages that will be displayed when applicable for this application
      */
-    custom_pages?: Array<string>;
+    custom_pages?: Array<ApplicationsAPI.CustomPagesItem>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -392,7 +397,7 @@ export namespace ZeroTrustApps {
     /**
      * List of domains that Access will secure.
      */
-    self_hosted_domains?: Array<string>;
+    self_hosted_domains?: Array<ApplicationsAPI.SelfHostedDomainsItem>;
 
     /**
      * Returns a 401 status code when the request is blocked by a Service Auth policy.
@@ -420,53 +425,6 @@ export namespace ZeroTrustApps {
     updated_at?: string;
   }
 
-  export namespace SelfHostedApplication {
-    export interface CorsHeaders {
-      /**
-       * Allows all HTTP request headers.
-       */
-      allow_all_headers?: boolean;
-
-      /**
-       * Allows all HTTP request methods.
-       */
-      allow_all_methods?: boolean;
-
-      /**
-       * Allows all origins.
-       */
-      allow_all_origins?: boolean;
-
-      /**
-       * When set to `true`, includes credentials (cookies, authorization headers, or TLS
-       * client certificates) with requests.
-       */
-      allow_credentials?: boolean;
-
-      /**
-       * Allowed HTTP request headers.
-       */
-      allowed_headers?: Array<string>;
-
-      /**
-       * Allowed HTTP request methods.
-       */
-      allowed_methods?: Array<
-        'GET' | 'POST' | 'HEAD' | 'PUT' | 'DELETE' | 'CONNECT' | 'OPTIONS' | 'TRACE' | 'PATCH'
-      >;
-
-      /**
-       * Allowed origins.
-       */
-      allowed_origins?: Array<string>;
-
-      /**
-       * The maximum number of seconds the results of a preflight request can be cached.
-       */
-      max_age?: number;
-    }
-  }
-
   export interface SaaSApplication {
     /**
      * UUID
@@ -477,7 +435,7 @@ export namespace ZeroTrustApps {
      * The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
-    allowed_idps?: Array<string>;
+    allowed_idps?: Array<ApplicationsAPI.AllowedIDPsItem>;
 
     /**
      * Displays the application in the App Launcher.
@@ -500,7 +458,7 @@ export namespace ZeroTrustApps {
     /**
      * The custom pages that will be displayed when applicable for this application
      */
-    custom_pages?: Array<string>;
+    custom_pages?: Array<ApplicationsAPI.CustomPagesItem>;
 
     /**
      * The image URL for the logo shown in the App Launcher dashboard.
@@ -512,7 +470,7 @@ export namespace ZeroTrustApps {
      */
     name?: string;
 
-    saas_app?: SaaSApplication.AccessSamlSaasApp | SaaSApplication.AccessOidcSaasApp;
+    saas_app?: ApplicationsAPI.SamlSaasApp | SaaSApplication.AccessOidcSaasApp;
 
     /**
      * The tags you want assigned to an application. Tags are used to filter
@@ -529,90 +487,6 @@ export namespace ZeroTrustApps {
   }
 
   export namespace SaaSApplication {
-    export interface AccessSamlSaasApp {
-      /**
-       * Optional identifier indicating the authentication protocol used for the saas
-       * app. Required for OIDC. Default if unset is "saml"
-       */
-      auth_type?: 'saml' | 'oidc';
-
-      /**
-       * The service provider's endpoint that is responsible for receiving and parsing a
-       * SAML assertion.
-       */
-      consumer_service_url?: string;
-
-      created_at?: string;
-
-      custom_attributes?: AccessSamlSaasApp.CustomAttributes;
-
-      /**
-       * The URL that the user will be redirected to after a successful login for IDP
-       * initiated logins.
-       */
-      default_relay_state?: string;
-
-      /**
-       * The unique identifier for your SaaS application.
-       */
-      idp_entity_id?: string;
-
-      /**
-       * The format of the name identifier sent to the SaaS application.
-       */
-      name_id_format?: ApplicationsAPI.UnnamedSchemaRefC6200e37c458aaa3c42e6e5b999bc419;
-
-      /**
-       * A [JSONata](https://jsonata.org/) expression that transforms an application's
-       * user identities into a NameID value for its SAML assertion. This expression
-       * should evaluate to a singular string. The output of this expression can override
-       * the `name_id_format` setting.
-       */
-      name_id_transform_jsonata?: string;
-
-      /**
-       * The Access public certificate that will be used to verify your identity.
-       */
-      public_key?: string;
-
-      /**
-       * A [JSONata] (https://jsonata.org/) expression that transforms an application's
-       * user identities into attribute assertions in the SAML response. The expression
-       * can transform id, email, name, and groups values. It can also transform fields
-       * listed in the saml_attributes or oidc_fields of the identity provider used to
-       * authenticate. The output of this expression must be a JSON object.
-       */
-      saml_attribute_transform_jsonata?: string;
-
-      /**
-       * A globally unique name for an identity or service provider.
-       */
-      sp_entity_id?: string;
-
-      /**
-       * The endpoint where your SaaS application will send login requests.
-       */
-      sso_endpoint?: string;
-
-      updated_at?: string;
-    }
-
-    export namespace AccessSamlSaasApp {
-      export interface CustomAttributes {
-        /**
-         * The name of the attribute.
-         */
-        name?: string;
-
-        /**
-         * A globally unique name for an identity or service provider.
-         */
-        name_format?: ApplicationsAPI.UnnamedSchemaRefC335ce55d4fdf132c942dfce6e45dcb9;
-
-        source?: ApplicationsAPI.UnnamedSchemaRef6ed9646890b9be79e16f1cfff86ec832;
-      }
-    }
-
     export interface AccessOidcSaasApp {
       /**
        * The URL where this applications tile redirects users
@@ -696,7 +570,7 @@ export namespace ZeroTrustApps {
      * The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
-    allowed_idps?: Array<string>;
+    allowed_idps?: Array<ApplicationsAPI.AllowedIDPsItem>;
 
     /**
      * Displays the application in the App Launcher.
@@ -714,7 +588,7 @@ export namespace ZeroTrustApps {
      */
     auto_redirect_to_identity?: boolean;
 
-    cors_headers?: BrowserSSHApplication.CorsHeaders;
+    cors_headers?: ApplicationsAPI.CorsHeaders;
 
     created_at?: string;
 
@@ -739,7 +613,7 @@ export namespace ZeroTrustApps {
     /**
      * The custom pages that will be displayed when applicable for this application
      */
-    custom_pages?: Array<string>;
+    custom_pages?: Array<ApplicationsAPI.CustomPagesItem>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -778,7 +652,7 @@ export namespace ZeroTrustApps {
     /**
      * List of domains that Access will secure.
      */
-    self_hosted_domains?: Array<string>;
+    self_hosted_domains?: Array<ApplicationsAPI.SelfHostedDomainsItem>;
 
     /**
      * Returns a 401 status code when the request is blocked by a Service Auth policy.
@@ -804,53 +678,6 @@ export namespace ZeroTrustApps {
     tags?: Array<string>;
 
     updated_at?: string;
-  }
-
-  export namespace BrowserSSHApplication {
-    export interface CorsHeaders {
-      /**
-       * Allows all HTTP request headers.
-       */
-      allow_all_headers?: boolean;
-
-      /**
-       * Allows all HTTP request methods.
-       */
-      allow_all_methods?: boolean;
-
-      /**
-       * Allows all origins.
-       */
-      allow_all_origins?: boolean;
-
-      /**
-       * When set to `true`, includes credentials (cookies, authorization headers, or TLS
-       * client certificates) with requests.
-       */
-      allow_credentials?: boolean;
-
-      /**
-       * Allowed HTTP request headers.
-       */
-      allowed_headers?: Array<string>;
-
-      /**
-       * Allowed HTTP request methods.
-       */
-      allowed_methods?: Array<
-        'GET' | 'POST' | 'HEAD' | 'PUT' | 'DELETE' | 'CONNECT' | 'OPTIONS' | 'TRACE' | 'PATCH'
-      >;
-
-      /**
-       * Allowed origins.
-       */
-      allowed_origins?: Array<string>;
-
-      /**
-       * The maximum number of seconds the results of a preflight request can be cached.
-       */
-      max_age?: number;
-    }
   }
 
   export interface BrowserVncApplication {
@@ -882,7 +709,7 @@ export namespace ZeroTrustApps {
      * The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
-    allowed_idps?: Array<string>;
+    allowed_idps?: Array<ApplicationsAPI.AllowedIDPsItem>;
 
     /**
      * Displays the application in the App Launcher.
@@ -900,7 +727,7 @@ export namespace ZeroTrustApps {
      */
     auto_redirect_to_identity?: boolean;
 
-    cors_headers?: BrowserVncApplication.CorsHeaders;
+    cors_headers?: ApplicationsAPI.CorsHeaders;
 
     created_at?: string;
 
@@ -925,7 +752,7 @@ export namespace ZeroTrustApps {
     /**
      * The custom pages that will be displayed when applicable for this application
      */
-    custom_pages?: Array<string>;
+    custom_pages?: Array<ApplicationsAPI.CustomPagesItem>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -964,7 +791,7 @@ export namespace ZeroTrustApps {
     /**
      * List of domains that Access will secure.
      */
-    self_hosted_domains?: Array<string>;
+    self_hosted_domains?: Array<ApplicationsAPI.SelfHostedDomainsItem>;
 
     /**
      * Returns a 401 status code when the request is blocked by a Service Auth policy.
@@ -992,53 +819,6 @@ export namespace ZeroTrustApps {
     updated_at?: string;
   }
 
-  export namespace BrowserVncApplication {
-    export interface CorsHeaders {
-      /**
-       * Allows all HTTP request headers.
-       */
-      allow_all_headers?: boolean;
-
-      /**
-       * Allows all HTTP request methods.
-       */
-      allow_all_methods?: boolean;
-
-      /**
-       * Allows all origins.
-       */
-      allow_all_origins?: boolean;
-
-      /**
-       * When set to `true`, includes credentials (cookies, authorization headers, or TLS
-       * client certificates) with requests.
-       */
-      allow_credentials?: boolean;
-
-      /**
-       * Allowed HTTP request headers.
-       */
-      allowed_headers?: Array<string>;
-
-      /**
-       * Allowed HTTP request methods.
-       */
-      allowed_methods?: Array<
-        'GET' | 'POST' | 'HEAD' | 'PUT' | 'DELETE' | 'CONNECT' | 'OPTIONS' | 'TRACE' | 'PATCH'
-      >;
-
-      /**
-       * Allowed origins.
-       */
-      allowed_origins?: Array<string>;
-
-      /**
-       * The maximum number of seconds the results of a preflight request can be cached.
-       */
-      max_age?: number;
-    }
-  }
-
   export interface AppLauncherApplication {
     /**
      * The application type.
@@ -1054,7 +834,7 @@ export namespace ZeroTrustApps {
      * The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
-    allowed_idps?: Array<string>;
+    allowed_idps?: Array<ApplicationsAPI.AllowedIDPsItem>;
 
     /**
      * Audience tag.
@@ -1105,7 +885,7 @@ export namespace ZeroTrustApps {
      * The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
-    allowed_idps?: Array<string>;
+    allowed_idps?: Array<ApplicationsAPI.AllowedIDPsItem>;
 
     /**
      * Audience tag.
@@ -1156,7 +936,7 @@ export namespace ZeroTrustApps {
      * The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
-    allowed_idps?: Array<string>;
+    allowed_idps?: Array<ApplicationsAPI.AllowedIDPsItem>;
 
     /**
      * Audience tag.
@@ -1240,6 +1020,155 @@ export namespace ZeroTrustApps {
   }
 }
 
+export interface CorsHeaders {
+  /**
+   * Allows all HTTP request headers.
+   */
+  allow_all_headers?: boolean;
+
+  /**
+   * Allows all HTTP request methods.
+   */
+  allow_all_methods?: boolean;
+
+  /**
+   * Allows all origins.
+   */
+  allow_all_origins?: boolean;
+
+  /**
+   * When set to `true`, includes credentials (cookies, authorization headers, or TLS
+   * client certificates) with requests.
+   */
+  allow_credentials?: boolean;
+
+  /**
+   * Allowed HTTP request headers.
+   */
+  allowed_headers?: Array<AllowedHeadersItem>;
+
+  /**
+   * Allowed HTTP request methods.
+   */
+  allowed_methods?: Array<AllowedMethodsItem>;
+
+  /**
+   * Allowed origins.
+   */
+  allowed_origins?: Array<AllowedOriginsItem>;
+
+  /**
+   * The maximum number of seconds the results of a preflight request can be cached.
+   */
+  max_age?: number;
+}
+
+/**
+ * The custom pages selected for application.
+ */
+export type CustomPagesItem = string;
+
+export interface SamlSaasApp {
+  /**
+   * Optional identifier indicating the authentication protocol used for the saas
+   * app. Required for OIDC. Default if unset is "saml"
+   */
+  auth_type?: 'saml' | 'oidc';
+
+  /**
+   * The service provider's endpoint that is responsible for receiving and parsing a
+   * SAML assertion.
+   */
+  consumer_service_url?: string;
+
+  created_at?: string;
+
+  custom_attributes?: SamlSaasApp.CustomAttributes;
+
+  /**
+   * The URL that the user will be redirected to after a successful login for IDP
+   * initiated logins.
+   */
+  default_relay_state?: string;
+
+  /**
+   * The unique identifier for your SaaS application.
+   */
+  idp_entity_id?: string;
+
+  /**
+   * The format of the name identifier sent to the SaaS application.
+   */
+  name_id_format?: 'id' | 'email';
+
+  /**
+   * A [JSONata](https://jsonata.org/) expression that transforms an application's
+   * user identities into a NameID value for its SAML assertion. This expression
+   * should evaluate to a singular string. The output of this expression can override
+   * the `name_id_format` setting.
+   */
+  name_id_transform_jsonata?: string;
+
+  /**
+   * The Access public certificate that will be used to verify your identity.
+   */
+  public_key?: string;
+
+  /**
+   * A [JSONata] (https://jsonata.org/) expression that transforms an application's
+   * user identities into attribute assertions in the SAML response. The expression
+   * can transform id, email, name, and groups values. It can also transform fields
+   * listed in the saml_attributes or oidc_fields of the identity provider used to
+   * authenticate. The output of this expression must be a JSON object.
+   */
+  saml_attribute_transform_jsonata?: string;
+
+  /**
+   * A globally unique name for an identity or service provider.
+   */
+  sp_entity_id?: string;
+
+  /**
+   * The endpoint where your SaaS application will send login requests.
+   */
+  sso_endpoint?: string;
+
+  updated_at?: string;
+}
+
+export namespace SamlSaasApp {
+  export interface CustomAttributes {
+    /**
+     * The name of the attribute.
+     */
+    name?: string;
+
+    /**
+     * A globally unique name for an identity or service provider.
+     */
+    name_format?:
+      | 'urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified'
+      | 'urn:oasis:names:tc:SAML:2.0:attrname-format:basic'
+      | 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri';
+
+    source?: CustomAttributes.Source;
+  }
+
+  export namespace CustomAttributes {
+    export interface Source {
+      /**
+       * The name of the IdP attribute.
+       */
+      name?: string;
+    }
+  }
+}
+
+/**
+ * A domain that Access will secure.
+ */
+export type SelfHostedDomainsItem = string;
+
 export interface ApplicationDeleteResponse {
   /**
    * UUID
@@ -1297,7 +1226,7 @@ export namespace ApplicationCreateParams {
      * Body param: The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
-    allowed_idps?: Array<string>;
+    allowed_idps?: Array<AllowedIDPsItem>;
 
     /**
      * Body param: Displays the application in the App Launcher.
@@ -1313,7 +1242,7 @@ export namespace ApplicationCreateParams {
     /**
      * Body param:
      */
-    cors_headers?: ApplicationCreateParams.SelfHostedApplication.CorsHeaders;
+    cors_headers?: CorsHeaders;
 
     /**
      * Body param: The custom error message shown to a user when they are denied access
@@ -1337,7 +1266,7 @@ export namespace ApplicationCreateParams {
      * Body param: The custom pages that will be displayed when applicable for this
      * application
      */
-    custom_pages?: Array<string>;
+    custom_pages?: Array<CustomPagesItem>;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -1376,7 +1305,7 @@ export namespace ApplicationCreateParams {
     /**
      * Body param: List of domains that Access will secure.
      */
-    self_hosted_domains?: Array<string>;
+    self_hosted_domains?: Array<SelfHostedDomainsItem>;
 
     /**
      * Body param: Returns a 401 status code when the request is blocked by a Service
@@ -1403,53 +1332,6 @@ export namespace ApplicationCreateParams {
     tags?: Array<string>;
   }
 
-  export namespace SelfHostedApplication {
-    export interface CorsHeaders {
-      /**
-       * Allows all HTTP request headers.
-       */
-      allow_all_headers?: boolean;
-
-      /**
-       * Allows all HTTP request methods.
-       */
-      allow_all_methods?: boolean;
-
-      /**
-       * Allows all origins.
-       */
-      allow_all_origins?: boolean;
-
-      /**
-       * When set to `true`, includes credentials (cookies, authorization headers, or TLS
-       * client certificates) with requests.
-       */
-      allow_credentials?: boolean;
-
-      /**
-       * Allowed HTTP request headers.
-       */
-      allowed_headers?: Array<string>;
-
-      /**
-       * Allowed HTTP request methods.
-       */
-      allowed_methods?: Array<
-        'GET' | 'POST' | 'HEAD' | 'PUT' | 'DELETE' | 'CONNECT' | 'OPTIONS' | 'TRACE' | 'PATCH'
-      >;
-
-      /**
-       * Allowed origins.
-       */
-      allowed_origins?: Array<string>;
-
-      /**
-       * The maximum number of seconds the results of a preflight request can be cached.
-       */
-      max_age?: number;
-    }
-  }
-
   export interface SaaSApplication {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -1467,7 +1349,7 @@ export namespace ApplicationCreateParams {
      * Body param: The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
-    allowed_idps?: Array<string>;
+    allowed_idps?: Array<AllowedIDPsItem>;
 
     /**
      * Body param: Displays the application in the App Launcher.
@@ -1484,7 +1366,7 @@ export namespace ApplicationCreateParams {
      * Body param: The custom pages that will be displayed when applicable for this
      * application
      */
-    custom_pages?: Array<string>;
+    custom_pages?: Array<CustomPagesItem>;
 
     /**
      * Body param: The image URL for the logo shown in the App Launcher dashboard.
@@ -1499,9 +1381,7 @@ export namespace ApplicationCreateParams {
     /**
      * Body param:
      */
-    saas_app?:
-      | ApplicationCreateParams.SaaSApplication.AccessSamlSaasApp
-      | ApplicationCreateParams.SaaSApplication.AccessOidcSaasApp;
+    saas_app?: SamlSaasApp | ApplicationCreateParams.SaaSApplication.AccessOidcSaasApp;
 
     /**
      * Body param: The tags you want assigned to an application. Tags are used to
@@ -1516,86 +1396,6 @@ export namespace ApplicationCreateParams {
   }
 
   export namespace SaaSApplication {
-    export interface AccessSamlSaasApp {
-      /**
-       * Optional identifier indicating the authentication protocol used for the saas
-       * app. Required for OIDC. Default if unset is "saml"
-       */
-      auth_type?: 'saml' | 'oidc';
-
-      /**
-       * The service provider's endpoint that is responsible for receiving and parsing a
-       * SAML assertion.
-       */
-      consumer_service_url?: string;
-
-      custom_attributes?: AccessSamlSaasApp.CustomAttributes;
-
-      /**
-       * The URL that the user will be redirected to after a successful login for IDP
-       * initiated logins.
-       */
-      default_relay_state?: string;
-
-      /**
-       * The unique identifier for your SaaS application.
-       */
-      idp_entity_id?: string;
-
-      /**
-       * The format of the name identifier sent to the SaaS application.
-       */
-      name_id_format?: ApplicationsAPI.UnnamedSchemaRefC6200e37c458aaa3c42e6e5b999bc419;
-
-      /**
-       * A [JSONata](https://jsonata.org/) expression that transforms an application's
-       * user identities into a NameID value for its SAML assertion. This expression
-       * should evaluate to a singular string. The output of this expression can override
-       * the `name_id_format` setting.
-       */
-      name_id_transform_jsonata?: string;
-
-      /**
-       * The Access public certificate that will be used to verify your identity.
-       */
-      public_key?: string;
-
-      /**
-       * A [JSONata] (https://jsonata.org/) expression that transforms an application's
-       * user identities into attribute assertions in the SAML response. The expression
-       * can transform id, email, name, and groups values. It can also transform fields
-       * listed in the saml_attributes or oidc_fields of the identity provider used to
-       * authenticate. The output of this expression must be a JSON object.
-       */
-      saml_attribute_transform_jsonata?: string;
-
-      /**
-       * A globally unique name for an identity or service provider.
-       */
-      sp_entity_id?: string;
-
-      /**
-       * The endpoint where your SaaS application will send login requests.
-       */
-      sso_endpoint?: string;
-    }
-
-    export namespace AccessSamlSaasApp {
-      export interface CustomAttributes {
-        /**
-         * The name of the attribute.
-         */
-        name?: string;
-
-        /**
-         * A globally unique name for an identity or service provider.
-         */
-        name_format?: ApplicationsAPI.UnnamedSchemaRefC335ce55d4fdf132c942dfce6e45dcb9;
-
-        source?: ApplicationsAPI.UnnamedSchemaRef6ed9646890b9be79e16f1cfff86ec832;
-      }
-    }
-
     export interface AccessOidcSaasApp {
       /**
        * The URL where this applications tile redirects users
@@ -1683,7 +1483,7 @@ export namespace ApplicationCreateParams {
      * Body param: The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
-    allowed_idps?: Array<string>;
+    allowed_idps?: Array<AllowedIDPsItem>;
 
     /**
      * Body param: Displays the application in the App Launcher.
@@ -1699,7 +1499,7 @@ export namespace ApplicationCreateParams {
     /**
      * Body param:
      */
-    cors_headers?: ApplicationCreateParams.BrowserSSHApplication.CorsHeaders;
+    cors_headers?: CorsHeaders;
 
     /**
      * Body param: The custom error message shown to a user when they are denied access
@@ -1723,7 +1523,7 @@ export namespace ApplicationCreateParams {
      * Body param: The custom pages that will be displayed when applicable for this
      * application
      */
-    custom_pages?: Array<string>;
+    custom_pages?: Array<CustomPagesItem>;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -1762,7 +1562,7 @@ export namespace ApplicationCreateParams {
     /**
      * Body param: List of domains that Access will secure.
      */
-    self_hosted_domains?: Array<string>;
+    self_hosted_domains?: Array<SelfHostedDomainsItem>;
 
     /**
      * Body param: Returns a 401 status code when the request is blocked by a Service
@@ -1787,53 +1587,6 @@ export namespace ApplicationCreateParams {
      * filter applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
-  }
-
-  export namespace BrowserSSHApplication {
-    export interface CorsHeaders {
-      /**
-       * Allows all HTTP request headers.
-       */
-      allow_all_headers?: boolean;
-
-      /**
-       * Allows all HTTP request methods.
-       */
-      allow_all_methods?: boolean;
-
-      /**
-       * Allows all origins.
-       */
-      allow_all_origins?: boolean;
-
-      /**
-       * When set to `true`, includes credentials (cookies, authorization headers, or TLS
-       * client certificates) with requests.
-       */
-      allow_credentials?: boolean;
-
-      /**
-       * Allowed HTTP request headers.
-       */
-      allowed_headers?: Array<string>;
-
-      /**
-       * Allowed HTTP request methods.
-       */
-      allowed_methods?: Array<
-        'GET' | 'POST' | 'HEAD' | 'PUT' | 'DELETE' | 'CONNECT' | 'OPTIONS' | 'TRACE' | 'PATCH'
-      >;
-
-      /**
-       * Allowed origins.
-       */
-      allowed_origins?: Array<string>;
-
-      /**
-       * The maximum number of seconds the results of a preflight request can be cached.
-       */
-      max_age?: number;
-    }
   }
 
   export interface BrowserVncApplication {
@@ -1873,7 +1626,7 @@ export namespace ApplicationCreateParams {
      * Body param: The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
-    allowed_idps?: Array<string>;
+    allowed_idps?: Array<AllowedIDPsItem>;
 
     /**
      * Body param: Displays the application in the App Launcher.
@@ -1889,7 +1642,7 @@ export namespace ApplicationCreateParams {
     /**
      * Body param:
      */
-    cors_headers?: ApplicationCreateParams.BrowserVncApplication.CorsHeaders;
+    cors_headers?: CorsHeaders;
 
     /**
      * Body param: The custom error message shown to a user when they are denied access
@@ -1913,7 +1666,7 @@ export namespace ApplicationCreateParams {
      * Body param: The custom pages that will be displayed when applicable for this
      * application
      */
-    custom_pages?: Array<string>;
+    custom_pages?: Array<CustomPagesItem>;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -1952,7 +1705,7 @@ export namespace ApplicationCreateParams {
     /**
      * Body param: List of domains that Access will secure.
      */
-    self_hosted_domains?: Array<string>;
+    self_hosted_domains?: Array<SelfHostedDomainsItem>;
 
     /**
      * Body param: Returns a 401 status code when the request is blocked by a Service
@@ -1979,53 +1732,6 @@ export namespace ApplicationCreateParams {
     tags?: Array<string>;
   }
 
-  export namespace BrowserVncApplication {
-    export interface CorsHeaders {
-      /**
-       * Allows all HTTP request headers.
-       */
-      allow_all_headers?: boolean;
-
-      /**
-       * Allows all HTTP request methods.
-       */
-      allow_all_methods?: boolean;
-
-      /**
-       * Allows all origins.
-       */
-      allow_all_origins?: boolean;
-
-      /**
-       * When set to `true`, includes credentials (cookies, authorization headers, or TLS
-       * client certificates) with requests.
-       */
-      allow_credentials?: boolean;
-
-      /**
-       * Allowed HTTP request headers.
-       */
-      allowed_headers?: Array<string>;
-
-      /**
-       * Allowed HTTP request methods.
-       */
-      allowed_methods?: Array<
-        'GET' | 'POST' | 'HEAD' | 'PUT' | 'DELETE' | 'CONNECT' | 'OPTIONS' | 'TRACE' | 'PATCH'
-      >;
-
-      /**
-       * Allowed origins.
-       */
-      allowed_origins?: Array<string>;
-
-      /**
-       * The maximum number of seconds the results of a preflight request can be cached.
-       */
-      max_age?: number;
-    }
-  }
-
   export interface AppLauncherApplication {
     /**
      * Body param: The application type.
@@ -2048,7 +1754,7 @@ export namespace ApplicationCreateParams {
      * Body param: The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
-    allowed_idps?: Array<string>;
+    allowed_idps?: Array<AllowedIDPsItem>;
 
     /**
      * Body param: When set to `true`, users skip the identity provider selection step
@@ -2086,7 +1792,7 @@ export namespace ApplicationCreateParams {
      * Body param: The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
-    allowed_idps?: Array<string>;
+    allowed_idps?: Array<AllowedIDPsItem>;
 
     /**
      * Body param: When set to `true`, users skip the identity provider selection step
@@ -2124,7 +1830,7 @@ export namespace ApplicationCreateParams {
      * Body param: The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
-    allowed_idps?: Array<string>;
+    allowed_idps?: Array<AllowedIDPsItem>;
 
     /**
      * Body param: When set to `true`, users skip the identity provider selection step
@@ -2234,7 +1940,7 @@ export namespace ApplicationUpdateParams {
      * Body param: The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
-    allowed_idps?: Array<string>;
+    allowed_idps?: Array<AllowedIDPsItem>;
 
     /**
      * Body param: Displays the application in the App Launcher.
@@ -2250,7 +1956,7 @@ export namespace ApplicationUpdateParams {
     /**
      * Body param:
      */
-    cors_headers?: ApplicationUpdateParams.SelfHostedApplication.CorsHeaders;
+    cors_headers?: CorsHeaders;
 
     /**
      * Body param: The custom error message shown to a user when they are denied access
@@ -2274,7 +1980,7 @@ export namespace ApplicationUpdateParams {
      * Body param: The custom pages that will be displayed when applicable for this
      * application
      */
-    custom_pages?: Array<string>;
+    custom_pages?: Array<CustomPagesItem>;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -2313,7 +2019,7 @@ export namespace ApplicationUpdateParams {
     /**
      * Body param: List of domains that Access will secure.
      */
-    self_hosted_domains?: Array<string>;
+    self_hosted_domains?: Array<SelfHostedDomainsItem>;
 
     /**
      * Body param: Returns a 401 status code when the request is blocked by a Service
@@ -2340,53 +2046,6 @@ export namespace ApplicationUpdateParams {
     tags?: Array<string>;
   }
 
-  export namespace SelfHostedApplication {
-    export interface CorsHeaders {
-      /**
-       * Allows all HTTP request headers.
-       */
-      allow_all_headers?: boolean;
-
-      /**
-       * Allows all HTTP request methods.
-       */
-      allow_all_methods?: boolean;
-
-      /**
-       * Allows all origins.
-       */
-      allow_all_origins?: boolean;
-
-      /**
-       * When set to `true`, includes credentials (cookies, authorization headers, or TLS
-       * client certificates) with requests.
-       */
-      allow_credentials?: boolean;
-
-      /**
-       * Allowed HTTP request headers.
-       */
-      allowed_headers?: Array<string>;
-
-      /**
-       * Allowed HTTP request methods.
-       */
-      allowed_methods?: Array<
-        'GET' | 'POST' | 'HEAD' | 'PUT' | 'DELETE' | 'CONNECT' | 'OPTIONS' | 'TRACE' | 'PATCH'
-      >;
-
-      /**
-       * Allowed origins.
-       */
-      allowed_origins?: Array<string>;
-
-      /**
-       * The maximum number of seconds the results of a preflight request can be cached.
-       */
-      max_age?: number;
-    }
-  }
-
   export interface SaaSApplication {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -2404,7 +2063,7 @@ export namespace ApplicationUpdateParams {
      * Body param: The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
-    allowed_idps?: Array<string>;
+    allowed_idps?: Array<AllowedIDPsItem>;
 
     /**
      * Body param: Displays the application in the App Launcher.
@@ -2421,7 +2080,7 @@ export namespace ApplicationUpdateParams {
      * Body param: The custom pages that will be displayed when applicable for this
      * application
      */
-    custom_pages?: Array<string>;
+    custom_pages?: Array<CustomPagesItem>;
 
     /**
      * Body param: The image URL for the logo shown in the App Launcher dashboard.
@@ -2436,9 +2095,7 @@ export namespace ApplicationUpdateParams {
     /**
      * Body param:
      */
-    saas_app?:
-      | ApplicationUpdateParams.SaaSApplication.AccessSamlSaasApp
-      | ApplicationUpdateParams.SaaSApplication.AccessOidcSaasApp;
+    saas_app?: SamlSaasApp | ApplicationUpdateParams.SaaSApplication.AccessOidcSaasApp;
 
     /**
      * Body param: The tags you want assigned to an application. Tags are used to
@@ -2453,86 +2110,6 @@ export namespace ApplicationUpdateParams {
   }
 
   export namespace SaaSApplication {
-    export interface AccessSamlSaasApp {
-      /**
-       * Optional identifier indicating the authentication protocol used for the saas
-       * app. Required for OIDC. Default if unset is "saml"
-       */
-      auth_type?: 'saml' | 'oidc';
-
-      /**
-       * The service provider's endpoint that is responsible for receiving and parsing a
-       * SAML assertion.
-       */
-      consumer_service_url?: string;
-
-      custom_attributes?: AccessSamlSaasApp.CustomAttributes;
-
-      /**
-       * The URL that the user will be redirected to after a successful login for IDP
-       * initiated logins.
-       */
-      default_relay_state?: string;
-
-      /**
-       * The unique identifier for your SaaS application.
-       */
-      idp_entity_id?: string;
-
-      /**
-       * The format of the name identifier sent to the SaaS application.
-       */
-      name_id_format?: ApplicationsAPI.UnnamedSchemaRefC6200e37c458aaa3c42e6e5b999bc419;
-
-      /**
-       * A [JSONata](https://jsonata.org/) expression that transforms an application's
-       * user identities into a NameID value for its SAML assertion. This expression
-       * should evaluate to a singular string. The output of this expression can override
-       * the `name_id_format` setting.
-       */
-      name_id_transform_jsonata?: string;
-
-      /**
-       * The Access public certificate that will be used to verify your identity.
-       */
-      public_key?: string;
-
-      /**
-       * A [JSONata] (https://jsonata.org/) expression that transforms an application's
-       * user identities into attribute assertions in the SAML response. The expression
-       * can transform id, email, name, and groups values. It can also transform fields
-       * listed in the saml_attributes or oidc_fields of the identity provider used to
-       * authenticate. The output of this expression must be a JSON object.
-       */
-      saml_attribute_transform_jsonata?: string;
-
-      /**
-       * A globally unique name for an identity or service provider.
-       */
-      sp_entity_id?: string;
-
-      /**
-       * The endpoint where your SaaS application will send login requests.
-       */
-      sso_endpoint?: string;
-    }
-
-    export namespace AccessSamlSaasApp {
-      export interface CustomAttributes {
-        /**
-         * The name of the attribute.
-         */
-        name?: string;
-
-        /**
-         * A globally unique name for an identity or service provider.
-         */
-        name_format?: ApplicationsAPI.UnnamedSchemaRefC335ce55d4fdf132c942dfce6e45dcb9;
-
-        source?: ApplicationsAPI.UnnamedSchemaRef6ed9646890b9be79e16f1cfff86ec832;
-      }
-    }
-
     export interface AccessOidcSaasApp {
       /**
        * The URL where this applications tile redirects users
@@ -2620,7 +2197,7 @@ export namespace ApplicationUpdateParams {
      * Body param: The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
-    allowed_idps?: Array<string>;
+    allowed_idps?: Array<AllowedIDPsItem>;
 
     /**
      * Body param: Displays the application in the App Launcher.
@@ -2636,7 +2213,7 @@ export namespace ApplicationUpdateParams {
     /**
      * Body param:
      */
-    cors_headers?: ApplicationUpdateParams.BrowserSSHApplication.CorsHeaders;
+    cors_headers?: CorsHeaders;
 
     /**
      * Body param: The custom error message shown to a user when they are denied access
@@ -2660,7 +2237,7 @@ export namespace ApplicationUpdateParams {
      * Body param: The custom pages that will be displayed when applicable for this
      * application
      */
-    custom_pages?: Array<string>;
+    custom_pages?: Array<CustomPagesItem>;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -2699,7 +2276,7 @@ export namespace ApplicationUpdateParams {
     /**
      * Body param: List of domains that Access will secure.
      */
-    self_hosted_domains?: Array<string>;
+    self_hosted_domains?: Array<SelfHostedDomainsItem>;
 
     /**
      * Body param: Returns a 401 status code when the request is blocked by a Service
@@ -2724,53 +2301,6 @@ export namespace ApplicationUpdateParams {
      * filter applications in the App Launcher dashboard.
      */
     tags?: Array<string>;
-  }
-
-  export namespace BrowserSSHApplication {
-    export interface CorsHeaders {
-      /**
-       * Allows all HTTP request headers.
-       */
-      allow_all_headers?: boolean;
-
-      /**
-       * Allows all HTTP request methods.
-       */
-      allow_all_methods?: boolean;
-
-      /**
-       * Allows all origins.
-       */
-      allow_all_origins?: boolean;
-
-      /**
-       * When set to `true`, includes credentials (cookies, authorization headers, or TLS
-       * client certificates) with requests.
-       */
-      allow_credentials?: boolean;
-
-      /**
-       * Allowed HTTP request headers.
-       */
-      allowed_headers?: Array<string>;
-
-      /**
-       * Allowed HTTP request methods.
-       */
-      allowed_methods?: Array<
-        'GET' | 'POST' | 'HEAD' | 'PUT' | 'DELETE' | 'CONNECT' | 'OPTIONS' | 'TRACE' | 'PATCH'
-      >;
-
-      /**
-       * Allowed origins.
-       */
-      allowed_origins?: Array<string>;
-
-      /**
-       * The maximum number of seconds the results of a preflight request can be cached.
-       */
-      max_age?: number;
-    }
   }
 
   export interface BrowserVncApplication {
@@ -2810,7 +2340,7 @@ export namespace ApplicationUpdateParams {
      * Body param: The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
-    allowed_idps?: Array<string>;
+    allowed_idps?: Array<AllowedIDPsItem>;
 
     /**
      * Body param: Displays the application in the App Launcher.
@@ -2826,7 +2356,7 @@ export namespace ApplicationUpdateParams {
     /**
      * Body param:
      */
-    cors_headers?: ApplicationUpdateParams.BrowserVncApplication.CorsHeaders;
+    cors_headers?: CorsHeaders;
 
     /**
      * Body param: The custom error message shown to a user when they are denied access
@@ -2850,7 +2380,7 @@ export namespace ApplicationUpdateParams {
      * Body param: The custom pages that will be displayed when applicable for this
      * application
      */
-    custom_pages?: Array<string>;
+    custom_pages?: Array<CustomPagesItem>;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -2889,7 +2419,7 @@ export namespace ApplicationUpdateParams {
     /**
      * Body param: List of domains that Access will secure.
      */
-    self_hosted_domains?: Array<string>;
+    self_hosted_domains?: Array<SelfHostedDomainsItem>;
 
     /**
      * Body param: Returns a 401 status code when the request is blocked by a Service
@@ -2916,53 +2446,6 @@ export namespace ApplicationUpdateParams {
     tags?: Array<string>;
   }
 
-  export namespace BrowserVncApplication {
-    export interface CorsHeaders {
-      /**
-       * Allows all HTTP request headers.
-       */
-      allow_all_headers?: boolean;
-
-      /**
-       * Allows all HTTP request methods.
-       */
-      allow_all_methods?: boolean;
-
-      /**
-       * Allows all origins.
-       */
-      allow_all_origins?: boolean;
-
-      /**
-       * When set to `true`, includes credentials (cookies, authorization headers, or TLS
-       * client certificates) with requests.
-       */
-      allow_credentials?: boolean;
-
-      /**
-       * Allowed HTTP request headers.
-       */
-      allowed_headers?: Array<string>;
-
-      /**
-       * Allowed HTTP request methods.
-       */
-      allowed_methods?: Array<
-        'GET' | 'POST' | 'HEAD' | 'PUT' | 'DELETE' | 'CONNECT' | 'OPTIONS' | 'TRACE' | 'PATCH'
-      >;
-
-      /**
-       * Allowed origins.
-       */
-      allowed_origins?: Array<string>;
-
-      /**
-       * The maximum number of seconds the results of a preflight request can be cached.
-       */
-      max_age?: number;
-    }
-  }
-
   export interface AppLauncherApplication {
     /**
      * Body param: The application type.
@@ -2985,7 +2468,7 @@ export namespace ApplicationUpdateParams {
      * Body param: The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
-    allowed_idps?: Array<string>;
+    allowed_idps?: Array<AllowedIDPsItem>;
 
     /**
      * Body param: When set to `true`, users skip the identity provider selection step
@@ -3023,7 +2506,7 @@ export namespace ApplicationUpdateParams {
      * Body param: The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
-    allowed_idps?: Array<string>;
+    allowed_idps?: Array<AllowedIDPsItem>;
 
     /**
      * Body param: When set to `true`, users skip the identity provider selection step
@@ -3061,7 +2544,7 @@ export namespace ApplicationUpdateParams {
      * Body param: The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
-    allowed_idps?: Array<string>;
+    allowed_idps?: Array<AllowedIDPsItem>;
 
     /**
      * Body param: When set to `true`, users skip the identity provider selection step
@@ -3172,13 +2655,19 @@ export interface ApplicationRevokeTokensParams {
 }
 
 export namespace Applications {
-  export import UnnamedSchemaRef6ed9646890b9be79e16f1cfff86ec832 = ApplicationsAPI.UnnamedSchemaRef6ed9646890b9be79e16f1cfff86ec832;
-  export import UnnamedSchemaRefC335ce55d4fdf132c942dfce6e45dcb9 = ApplicationsAPI.UnnamedSchemaRefC335ce55d4fdf132c942dfce6e45dcb9;
-  export import UnnamedSchemaRefC6200e37c458aaa3c42e6e5b999bc419 = ApplicationsAPI.UnnamedSchemaRefC6200e37c458aaa3c42e6e5b999bc419;
-  export import ZeroTrustApps = ApplicationsAPI.ZeroTrustApps;
+  export import AllowedHeadersItem = ApplicationsAPI.AllowedHeadersItem;
+  export import AllowedIDPsItem = ApplicationsAPI.AllowedIDPsItem;
+  export import AllowedMethodsItem = ApplicationsAPI.AllowedMethodsItem;
+  export import AllowedOriginsItem = ApplicationsAPI.AllowedOriginsItem;
+  export import AppID = ApplicationsAPI.AppID;
+  export import Application = ApplicationsAPI.Application;
+  export import CorsHeaders = ApplicationsAPI.CorsHeaders;
+  export import CustomPagesItem = ApplicationsAPI.CustomPagesItem;
+  export import SamlSaasApp = ApplicationsAPI.SamlSaasApp;
+  export import SelfHostedDomainsItem = ApplicationsAPI.SelfHostedDomainsItem;
   export import ApplicationDeleteResponse = ApplicationsAPI.ApplicationDeleteResponse;
   export import ApplicationRevokeTokensResponse = ApplicationsAPI.ApplicationRevokeTokensResponse;
-  export import ZeroTrustAppsSinglePage = ApplicationsAPI.ZeroTrustAppsSinglePage;
+  export import ApplicationsSinglePage = ApplicationsAPI.ApplicationsSinglePage;
   export import ApplicationCreateParams = ApplicationsAPI.ApplicationCreateParams;
   export import ApplicationUpdateParams = ApplicationsAPI.ApplicationUpdateParams;
   export import ApplicationListParams = ApplicationsAPI.ApplicationListParams;
@@ -3186,21 +2675,24 @@ export namespace Applications {
   export import ApplicationGetParams = ApplicationsAPI.ApplicationGetParams;
   export import ApplicationRevokeTokensParams = ApplicationsAPI.ApplicationRevokeTokensParams;
   export import CAs = CAsAPI.CAs;
-  export import ZeroTrustCA = CAsAPI.ZeroTrustCA;
+  export import CA = CAsAPI.CA;
   export import CADeleteResponse = CAsAPI.CADeleteResponse;
-  export import ZeroTrustCAsSinglePage = CAsAPI.ZeroTrustCAsSinglePage;
+  export import CAsSinglePage = CAsAPI.CAsSinglePage;
   export import CACreateParams = CAsAPI.CACreateParams;
   export import CAListParams = CAsAPI.CAListParams;
   export import CADeleteParams = CAsAPI.CADeleteParams;
   export import CAGetParams = CAsAPI.CAGetParams;
   export import UserPolicyChecks = UserPolicyChecksAPI.UserPolicyChecks;
-  export import UnnamedSchemaRef6a02fe18089d53b52b2cd3949b717919 = UserPolicyChecksAPI.UnnamedSchemaRef6a02fe18089d53b52b2cd3949b717919;
   export import UserPolicyCheckListResponse = UserPolicyChecksAPI.UserPolicyCheckListResponse;
   export import UserPolicyCheckListParams = UserPolicyChecksAPI.UserPolicyCheckListParams;
   export import Policies = PoliciesAPI.Policies;
-  export import ZeroTrustPolicies = PoliciesAPI.ZeroTrustPolicies;
+  export import ApprovalGroup = PoliciesAPI.ApprovalGroup;
+  export import ApprovalGroupItem = PoliciesAPI.ApprovalGroupItem;
+  export import ExcludeItem = PoliciesAPI.ExcludeItem;
+  export import Policy = PoliciesAPI.Policy;
+  export import RequireItem = PoliciesAPI.RequireItem;
   export import PolicyDeleteResponse = PoliciesAPI.PolicyDeleteResponse;
-  export import ZeroTrustPoliciesSinglePage = PoliciesAPI.ZeroTrustPoliciesSinglePage;
+  export import PoliciesSinglePage = PoliciesAPI.PoliciesSinglePage;
   export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
   export import PolicyUpdateParams = PoliciesAPI.PolicyUpdateParams;
   export import PolicyListParams = PoliciesAPI.PolicyListParams;

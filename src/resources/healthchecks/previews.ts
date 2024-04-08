@@ -85,22 +85,7 @@ export interface PreviewCreateParams {
    * Body param: A list of regions from which to run health checks. Null means
    * Cloudflare will pick a default region.
    */
-  check_regions?: Array<
-    | 'WNAM'
-    | 'ENAM'
-    | 'WEU'
-    | 'EEU'
-    | 'NSAM'
-    | 'SSAM'
-    | 'OC'
-    | 'ME'
-    | 'NAF'
-    | 'SAF'
-    | 'IN'
-    | 'SEAS'
-    | 'NEAS'
-    | 'ALL_REGIONS'
-  > | null;
+  check_regions?: Array<HealthchecksAPI.CheckRegionItem> | null;
 
   /**
    * Body param: The number of consecutive fails required from a health check before
@@ -122,7 +107,7 @@ export interface PreviewCreateParams {
   /**
    * Body param: Parameters specific to an HTTP or HTTPS health check.
    */
-  http_config?: PreviewCreateParams.HTTPConfig | null;
+  http_config?: HealthchecksAPI.HTTPConfiguration | null;
 
   /**
    * Body param: The interval between each health check. Shorter intervals may give
@@ -145,7 +130,7 @@ export interface PreviewCreateParams {
   /**
    * Body param: Parameters specific to TCP health check.
    */
-  tcp_config?: PreviewCreateParams.TcpConfig | null;
+  tcp_config?: HealthchecksAPI.TCPConfiguration | null;
 
   /**
    * Body param: The timeout (in seconds) before marking the health check as failed.
@@ -157,72 +142,6 @@ export interface PreviewCreateParams {
    * protocols are 'HTTP', 'HTTPS' and 'TCP'.
    */
   type?: string;
-}
-
-export namespace PreviewCreateParams {
-  /**
-   * Parameters specific to an HTTP or HTTPS health check.
-   */
-  export interface HTTPConfig {
-    /**
-     * Do not validate the certificate when the health check uses HTTPS.
-     */
-    allow_insecure?: boolean;
-
-    /**
-     * A case-insensitive sub-string to look for in the response body. If this string
-     * is not found, the origin will be marked as unhealthy.
-     */
-    expected_body?: string;
-
-    /**
-     * The expected HTTP response codes (e.g. "200") or code ranges (e.g. "2xx" for all
-     * codes starting with 2) of the health check.
-     */
-    expected_codes?: Array<string> | null;
-
-    /**
-     * Follow redirects if the origin returns a 3xx status code.
-     */
-    follow_redirects?: boolean;
-
-    /**
-     * The HTTP request headers to send in the health check. It is recommended you set
-     * a Host header by default. The User-Agent header cannot be overridden.
-     */
-    header?: unknown | null;
-
-    /**
-     * The HTTP method to use for the health check.
-     */
-    method?: 'GET' | 'HEAD';
-
-    /**
-     * The endpoint path to health check against.
-     */
-    path?: string;
-
-    /**
-     * Port number to connect to for the health check. Defaults to 80 if type is HTTP
-     * or 443 if type is HTTPS.
-     */
-    port?: number;
-  }
-
-  /**
-   * Parameters specific to TCP health check.
-   */
-  export interface TcpConfig {
-    /**
-     * The TCP connection method to use for the health check.
-     */
-    method?: 'connection_established';
-
-    /**
-     * Port number to connect to for the health check. Defaults to 80.
-     */
-    port?: number;
-  }
 }
 
 export interface PreviewDeleteParams {

@@ -5,6 +5,7 @@ import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as BytimesAPI from 'cloudflare/resources/spectrum/analytics/events/bytimes';
 import * as Shared from 'cloudflare/resources/shared';
+import * as EventsAPI from 'cloudflare/resources/spectrum/analytics/events/events';
 
 export class Bytimes extends APIResource {
   /**
@@ -47,7 +48,7 @@ export interface BytimeGetParams {
    * | coloName  | Colo Name                     | SFO                                                        |
    * | ipVersion | IP version used by the client | 4, 6.                                                      |
    */
-  dimensions?: Array<'event' | 'appID' | 'coloName' | 'ipVersion'>;
+  dimensions?: Array<EventsAPI.DimensionItem>;
 
   /**
    * Used to filter rows by one or more dimensions. Filters can be combined using OR

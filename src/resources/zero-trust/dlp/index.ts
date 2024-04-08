@@ -1,31 +1,34 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { DLP } from './dlp';
 export {
-  DLPDataset,
-  DLPDatasetArray,
-  DLPDatasetCreation,
-  DatasetCreateParams,
-  DatasetUpdateParams,
-  DatasetListParams,
-  DatasetDeleteParams,
-  DatasetGetParams,
-  DLPDatasetsSinglePage,
-  Datasets,
-} from './datasets/index';
-export {
-  DLPProfiles,
+  ContextAwareness,
+  Profile,
+  SkipConfiguration,
   UnnamedSchemaRefC105db122868c71badeac3b4822ad6b1,
   UnnamedSchemaRefE38bfdf1acf5a4bfada6779c79528bc0,
   ProfileGetResponse,
   ProfileListParams,
   ProfileGetParams,
-  DLPProfilesSinglePage,
+  ProfilesSinglePage,
   Profiles,
 } from './profiles/index';
+export { DLP } from './dlp';
+export {
+  Dataset,
+  DatasetArray,
+  DatasetCreation,
+  DatasetCreateParams,
+  DatasetUpdateParams,
+  DatasetListParams,
+  DatasetDeleteParams,
+  DatasetGetParams,
+  DatasetsSinglePage,
+  Datasets,
+} from './datasets/index';
 export { PatternValidateParams, Patterns } from './patterns';
 export {
-  UnnamedSchemaRefE31ff4936b1b42746e8cb62bbc87f2e5,
+  PayloadLogUpdateResponse,
+  PayloadLogGetResponse,
   PayloadLogUpdateParams,
   PayloadLogGetParams,
   PayloadLogs,

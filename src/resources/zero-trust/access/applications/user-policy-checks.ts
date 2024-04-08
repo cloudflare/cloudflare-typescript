@@ -5,19 +5,23 @@ import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import { CloudflareError } from 'cloudflare/error';
 import * as UserPolicyChecksAPI from 'cloudflare/resources/zero-trust/access/applications/user-policy-checks';
+import * as ApplicationsAPI from 'cloudflare/resources/zero-trust/access/applications/applications';
 
 export class UserPolicyChecks extends APIResource {
   /**
    * Tests if a specific user has permission to access an application.
    */
   list(
-    appId: string | string,
+    appId: ApplicationsAPI.AppID,
     params?: UserPolicyCheckListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<UserPolicyCheckListResponse>;
-  list(appId: string | string, options?: Core.RequestOptions): Core.APIPromise<UserPolicyCheckListResponse>;
   list(
-    appId: string | string,
+    appId: ApplicationsAPI.AppID,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<UserPolicyCheckListResponse>;
+  list(
+    appId: ApplicationsAPI.AppID,
     params: UserPolicyCheckListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<UserPolicyCheckListResponse> {
@@ -48,10 +52,6 @@ export class UserPolicyChecks extends APIResource {
       ) as Core.APIPromise<{ result: UserPolicyCheckListResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
-}
-
-export interface UnnamedSchemaRef6a02fe18089d53b52b2cd3949b717919 {
-  country?: string;
 }
 
 export interface UserPolicyCheckListResponse {
@@ -87,7 +87,7 @@ export namespace UserPolicyCheckListResponse {
 
     email?: string;
 
-    geo?: UserPolicyChecksAPI.UnnamedSchemaRef6a02fe18089d53b52b2cd3949b717919;
+    geo?: UserIdentity.Geo;
 
     iat?: number;
 
@@ -104,6 +104,12 @@ export namespace UserPolicyCheckListResponse {
 
     version?: number;
   }
+
+  export namespace UserIdentity {
+    export interface Geo {
+      country?: string;
+    }
+  }
 }
 
 export interface UserPolicyCheckListParams {
@@ -119,7 +125,6 @@ export interface UserPolicyCheckListParams {
 }
 
 export namespace UserPolicyChecks {
-  export import UnnamedSchemaRef6a02fe18089d53b52b2cd3949b717919 = UserPolicyChecksAPI.UnnamedSchemaRef6a02fe18089d53b52b2cd3949b717919;
   export import UserPolicyCheckListResponse = UserPolicyChecksAPI.UserPolicyCheckListResponse;
   export import UserPolicyCheckListParams = UserPolicyChecksAPI.UserPolicyCheckListParams;
 }

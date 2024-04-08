@@ -9,7 +9,7 @@ export class Copy extends APIResource {
   /**
    * Uploads a video to Stream from a provided URL.
    */
-  create(params: CopyCreateParams, options?: Core.RequestOptions): Core.APIPromise<StreamAPI.StreamVideos> {
+  create(params: CopyCreateParams, options?: Core.RequestOptions): Core.APIPromise<StreamAPI.Video> {
     const {
       account_id,
       'Upload-Creator': uploadCreator,
@@ -25,7 +25,7 @@ export class Copy extends APIResource {
           'Upload-Metadata': uploadMetadata || '',
           ...options?.headers,
         },
-      }) as Core.APIPromise<{ result: StreamAPI.StreamVideos }>
+      }) as Core.APIPromise<{ result: StreamAPI.Video }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -49,7 +49,7 @@ export interface CopyCreateParams {
    * domains in an array and use `*` for wildcard subdomains. Empty arrays allow the
    * video to be viewed on any origin.
    */
-  allowedOrigins?: Array<string>;
+  allowedOrigins?: Array<StreamAPI.AllowedOriginsItem>;
 
   /**
    * Body param: A user-defined identifier for the media creator.

@@ -28,11 +28,11 @@ export class Excludes extends APIResource {
   list(
     params: ExcludeListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<DevicesSplitTunnelsSinglePage, DevicesSplitTunnel> {
+  ): Core.PagePromise<SplitTunnelExcludesSinglePage, SplitTunnelExclude> {
     const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/devices/policy/exclude`,
-      DevicesSplitTunnelsSinglePage,
+      SplitTunnelExcludesSinglePage,
       options,
     );
   }
@@ -56,9 +56,9 @@ export class Excludes extends APIResource {
   }
 }
 
-export class DevicesSplitTunnelsSinglePage extends SinglePage<DevicesSplitTunnel> {}
+export class SplitTunnelExcludesSinglePage extends SinglePage<SplitTunnelExclude> {}
 
-export interface DevicesSplitTunnel {
+export interface SplitTunnelExclude {
   /**
    * The address in CIDR format to exclude from the tunnel. If `address` is present,
    * `host` must not be present.
@@ -77,11 +77,11 @@ export interface DevicesSplitTunnel {
   host?: string;
 }
 
-export type UnnamedSchemaRef0462afe1a32ee90b1999d4277af59fa8 = Array<DevicesSplitTunnel>;
+export type UnnamedSchemaRef0462afe1a32ee90b1999d4277af59fa8 = Array<SplitTunnelExclude>;
 
-export type ExcludeUpdateResponse = Array<DevicesSplitTunnel>;
+export type ExcludeUpdateResponse = Array<SplitTunnelExclude>;
 
-export type ExcludeGetResponse = Array<DevicesSplitTunnel>;
+export type ExcludeGetResponse = Array<SplitTunnelExclude>;
 
 export interface ExcludeUpdateParams {
   /**
@@ -92,7 +92,7 @@ export interface ExcludeUpdateParams {
   /**
    * Body param:
    */
-  body: Array<DevicesSplitTunnel>;
+  body: Array<SplitTunnelExclude>;
 }
 
 export interface ExcludeListParams {
@@ -104,11 +104,11 @@ export interface ExcludeGetParams {
 }
 
 export namespace Excludes {
-  export import DevicesSplitTunnel = ExcludesAPI.DevicesSplitTunnel;
+  export import SplitTunnelExclude = ExcludesAPI.SplitTunnelExclude;
   export import UnnamedSchemaRef0462afe1a32ee90b1999d4277af59fa8 = ExcludesAPI.UnnamedSchemaRef0462afe1a32ee90b1999d4277af59fa8;
   export import ExcludeUpdateResponse = ExcludesAPI.ExcludeUpdateResponse;
   export import ExcludeGetResponse = ExcludesAPI.ExcludeGetResponse;
-  export import DevicesSplitTunnelsSinglePage = ExcludesAPI.DevicesSplitTunnelsSinglePage;
+  export import SplitTunnelExcludesSinglePage = ExcludesAPI.SplitTunnelExcludesSinglePage;
   export import ExcludeUpdateParams = ExcludesAPI.ExcludeUpdateParams;
   export import ExcludeListParams = ExcludesAPI.ExcludeListParams;
   export import ExcludeGetParams = ExcludesAPI.ExcludeGetParams;

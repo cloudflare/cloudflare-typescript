@@ -11,14 +11,11 @@ export class Configs extends APIResource {
   /**
    * Create a new network monitoring configuration.
    */
-  create(
-    params: ConfigCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<MagicNetworkMonitoringConfig> {
+  create(params: ConfigCreateParams, options?: Core.RequestOptions): Core.APIPromise<Configuration> {
     const { account_id, body } = params;
     return (
       this._client.post(`/accounts/${account_id}/mnm/config`, { body: body, ...options }) as Core.APIPromise<{
-        result: MagicNetworkMonitoringConfig;
+        result: Configuration;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -27,14 +24,11 @@ export class Configs extends APIResource {
    * Update an existing network monitoring configuration, requires the entire
    * configuration to be updated at once.
    */
-  update(
-    params: ConfigUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<MagicNetworkMonitoringConfig> {
+  update(params: ConfigUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Configuration> {
     const { account_id, body } = params;
     return (
       this._client.put(`/accounts/${account_id}/mnm/config`, { body: body, ...options }) as Core.APIPromise<{
-        result: MagicNetworkMonitoringConfig;
+        result: Configuration;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -42,49 +36,43 @@ export class Configs extends APIResource {
   /**
    * Delete an existing network monitoring configuration.
    */
-  delete(
-    params: ConfigDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<MagicNetworkMonitoringConfig> {
+  delete(params: ConfigDeleteParams, options?: Core.RequestOptions): Core.APIPromise<Configuration> {
     const { account_id, body } = params;
     return (
       this._client.delete(`/accounts/${account_id}/mnm/config`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: MagicNetworkMonitoringConfig }>
+      }) as Core.APIPromise<{ result: Configuration }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Update fields in an existing network monitoring configuration.
    */
-  edit(
-    params: ConfigEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<MagicNetworkMonitoringConfig> {
+  edit(params: ConfigEditParams, options?: Core.RequestOptions): Core.APIPromise<Configuration> {
     const { account_id, body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/mnm/config`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: MagicNetworkMonitoringConfig }>
+      }) as Core.APIPromise<{ result: Configuration }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Lists default sampling and router IPs for account.
    */
-  get(params: ConfigGetParams, options?: Core.RequestOptions): Core.APIPromise<MagicNetworkMonitoringConfig> {
+  get(params: ConfigGetParams, options?: Core.RequestOptions): Core.APIPromise<Configuration> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/mnm/config`, options) as Core.APIPromise<{
-        result: MagicNetworkMonitoringConfig;
+        result: Configuration;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface MagicNetworkMonitoringConfig {
+export interface Configuration {
   /**
    * Fallback sampling rate of flow messages being sent in packets per second. This
    * should match the packet sampling rate configured on the router.
@@ -167,7 +155,7 @@ export interface ConfigGetParams {
 }
 
 export namespace Configs {
-  export import MagicNetworkMonitoringConfig = ConfigsAPI.MagicNetworkMonitoringConfig;
+  export import Configuration = ConfigsAPI.Configuration;
   export import UnnamedSchemaRef621ca3f6ea9a96427c902b0d14279ff8 = ConfigsAPI.UnnamedSchemaRef621ca3f6ea9a96427c902b0d14279ff8;
   export import ConfigCreateParams = ConfigsAPI.ConfigCreateParams;
   export import ConfigUpdateParams = ConfigsAPI.ConfigUpdateParams;

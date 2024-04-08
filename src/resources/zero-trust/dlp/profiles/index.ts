@@ -1,7 +1,20 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  DLPCustomProfile,
+  ContextAwareness,
+  Profile,
+  SkipConfiguration,
+  UnnamedSchemaRefC105db122868c71badeac3b4822ad6b1,
+  UnnamedSchemaRefE38bfdf1acf5a4bfada6779c79528bc0,
+  ProfileGetResponse,
+  ProfileListParams,
+  ProfileGetParams,
+  ProfilesSinglePage,
+  Profiles,
+} from './profiles';
+export {
+  CustomProfile,
+  Pattern,
   CustomCreateResponse,
   CustomCreateParams,
   CustomUpdateParams,
@@ -9,14 +22,4 @@ export {
   CustomGetParams,
   Custom,
 } from './custom';
-export { DLPPredefinedProfile, PredefinedUpdateParams, PredefinedGetParams, Predefined } from './predefined';
-export {
-  DLPProfiles,
-  UnnamedSchemaRefC105db122868c71badeac3b4822ad6b1,
-  UnnamedSchemaRefE38bfdf1acf5a4bfada6779c79528bc0,
-  ProfileGetResponse,
-  ProfileListParams,
-  ProfileGetParams,
-  DLPProfilesSinglePage,
-  Profiles,
-} from './profiles';
+export { PredefinedProfile, PredefinedUpdateParams, PredefinedGetParams, Predefined } from './predefined';

@@ -37,73 +37,35 @@ export class FleetStatus extends APIResource {
   }
 }
 
+export interface LiveStat {
+  /**
+   * Number of unique devices
+   */
+  uniqueDevicesTotal?: number;
+
+  value?: string;
+}
+
 export interface FleetStatusLiveResponse {
   deviceStats?: FleetStatusLiveResponse.DeviceStats;
 }
 
 export namespace FleetStatusLiveResponse {
   export interface DeviceStats {
-    byColo?: Array<DeviceStats.ByColo> | null;
+    byColo?: Array<FleetStatusAPI.LiveStat> | null;
 
-    byMode?: Array<DeviceStats.ByMode> | null;
+    byMode?: Array<FleetStatusAPI.LiveStat> | null;
 
-    byPlatform?: Array<DeviceStats.ByPlatform> | null;
+    byPlatform?: Array<FleetStatusAPI.LiveStat> | null;
 
-    byStatus?: Array<DeviceStats.ByStatus> | null;
+    byStatus?: Array<FleetStatusAPI.LiveStat> | null;
 
-    byVersion?: Array<DeviceStats.ByVersion> | null;
+    byVersion?: Array<FleetStatusAPI.LiveStat> | null;
 
     /**
      * Number of unique devices
      */
     uniqueDevicesTotal?: number;
-  }
-
-  export namespace DeviceStats {
-    export interface ByColo {
-      /**
-       * Number of unique devices
-       */
-      uniqueDevicesTotal?: number;
-
-      value?: string;
-    }
-
-    export interface ByMode {
-      /**
-       * Number of unique devices
-       */
-      uniqueDevicesTotal?: number;
-
-      value?: string;
-    }
-
-    export interface ByPlatform {
-      /**
-       * Number of unique devices
-       */
-      uniqueDevicesTotal?: number;
-
-      value?: string;
-    }
-
-    export interface ByStatus {
-      /**
-       * Number of unique devices
-       */
-      uniqueDevicesTotal?: number;
-
-      value?: string;
-    }
-
-    export interface ByVersion {
-      /**
-       * Number of unique devices
-       */
-      uniqueDevicesTotal?: number;
-
-      value?: string;
-    }
   }
 }
 
@@ -147,11 +109,12 @@ export interface FleetStatusOverTimeParams {
 }
 
 export namespace FleetStatus {
+  export import LiveStat = FleetStatusAPI.LiveStat;
   export import FleetStatusLiveResponse = FleetStatusAPI.FleetStatusLiveResponse;
   export import FleetStatusLiveParams = FleetStatusAPI.FleetStatusLiveParams;
   export import FleetStatusOverTimeParams = FleetStatusAPI.FleetStatusOverTimeParams;
   export import Devices = DevicesAPI.Devices;
-  export import DigitalExperienceMonitoringDevice = DevicesAPI.DigitalExperienceMonitoringDevice;
-  export import DigitalExperienceMonitoringDevicesV4PagePaginationArray = DevicesAPI.DigitalExperienceMonitoringDevicesV4PagePaginationArray;
+  export import Device = DevicesAPI.Device;
+  export import DevicesV4PagePaginationArray = DevicesAPI.DevicesV4PagePaginationArray;
   export import DeviceListParams = DevicesAPI.DeviceListParams;
 }

@@ -2,7 +2,6 @@
 
 export { Analytics } from './analytics/index';
 export { LoadBalancers } from './load-balancers';
-export { LoadBalancingPreview, Preview } from './preview';
 export {
   Monitor,
   MonitorDeleteResponse,
@@ -31,3 +30,4 @@ export {
   PoolsSinglePage,
   Pools,
 } from './pools';
+export { Preview, PreviewResource } from './preview';

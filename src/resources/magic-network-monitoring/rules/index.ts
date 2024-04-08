@@ -1,7 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+export { Advertisement, AdvertisementEditParams, Advertisements } from './advertisements';
 export {
-  MagicNetworkMonitoringRule,
+  Rule,
   UnnamedSchemaRef99ba74ba6027c3c87ca03d4e81cfc16d,
   RuleCreateParams,
   RuleUpdateParams,
@@ -9,11 +10,6 @@ export {
   RuleDeleteParams,
   RuleEditParams,
   RuleGetParams,
-  MagicNetworkMonitoringRulesSinglePage,
+  RulesSinglePage,
   Rules,
 } from './rules';
-export {
-  MagicNetworkMonitoringRuleAdvertisable,
-  AdvertisementEditParams,
-  Advertisements,
-} from './advertisements';

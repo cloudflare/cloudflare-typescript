@@ -5,23 +5,23 @@ import { APIResource } from 'cloudflare/resource';
 import * as ASNAPI from 'cloudflare/resources/intel/asn/asn';
 import * as SubnetsAPI from 'cloudflare/resources/intel/asn/subnets';
 
-export class ASN extends APIResource {
+export class ASNResource extends APIResource {
   subnets: SubnetsAPI.Subnets = new SubnetsAPI.Subnets(this._client);
 
   /**
    * Get ASN Overview
    */
-  get(asn: IntelASN, params: ASNGetParams, options?: Core.RequestOptions): Core.APIPromise<IntelASN> {
+  get(asn: ASN, params: ASNGetParams, options?: Core.RequestOptions): Core.APIPromise<ASN> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/intel/asn/${asn}`, options) as Core.APIPromise<{
-        result: IntelASN;
+        result: ASN;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type IntelASN = number;
+export type ASN = number;
 
 export interface ASNGetParams {
   /**
@@ -30,8 +30,8 @@ export interface ASNGetParams {
   account_id: string;
 }
 
-export namespace ASN {
-  export import IntelASN = ASNAPI.IntelASN;
+export namespace ASNResource {
+  export import ASN = ASNAPI.ASN;
   export import ASNGetParams = ASNAPI.ASNGetParams;
   export import Subnets = SubnetsAPI.Subnets;
   export import SubnetGetResponse = SubnetsAPI.SubnetGetResponse;

@@ -17,7 +17,7 @@ export class Content extends APIResource {
     scriptName: string,
     params: ContentUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ScriptsAPI.WorkersScript> {
+  ): Core.APIPromise<ScriptsAPI.Script> {
     const {
       account_id,
       'CF-WORKER-BODY-PART': cfWorkerBodyPart,
@@ -36,7 +36,7 @@ export class Content extends APIResource {
             ...options?.headers,
           },
         }),
-      ) as Core.APIPromise<{ result: ScriptsAPI.WorkersScript }>
+      ) as Core.APIPromise<{ result: ScriptsAPI.Script }>
     )._thenUnwrap((obj) => obj.result);
   }
 

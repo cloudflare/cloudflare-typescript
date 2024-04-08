@@ -133,7 +133,7 @@ export namespace GRETunnelCreateResponse {
      */
     description?: string;
 
-    health_check?: GRETunnel.HealthCheck;
+    health_check?: MagicTransitAPI.HealthCheck;
 
     /**
      * The date and time the tunnel was last modified.
@@ -150,44 +150,6 @@ export namespace GRETunnelCreateResponse {
      * Time To Live (TTL) in number of hops of the GRE tunnel.
      */
     ttl?: number;
-  }
-
-  export namespace GRETunnel {
-    export interface HealthCheck {
-      /**
-       * The direction of the flow of the healthcheck. Either unidirectional, where the
-       * probe comes to you via the tunnel and the result comes back to Cloudflare via
-       * the open Internet, or bidirectional where both the probe and result come and go
-       * via the tunnel. Note in the case of bidirecitonal healthchecks, the target field
-       * in health_check is ignored as the interface_address is used to send traffic into
-       * the tunnel.
-       */
-      direction?: 'unidirectional' | 'bidirectional';
-
-      /**
-       * Determines whether to run healthchecks for a tunnel.
-       */
-      enabled?: boolean;
-
-      /**
-       * How frequent the health check is run. The default value is `mid`.
-       */
-      rate?: MagicTransitAPI.UnnamedSchemaRefEebdc868ce7f7ae92e23438caa84e7b5;
-
-      /**
-       * The destination address in a request type health check. After the healthcheck is
-       * decapsulated at the customer end of the tunnel, the ICMP echo will be forwarded
-       * to this address. This field defaults to `customer_gre_endpoint address`. This
-       * field is ignored for bidirectional healthchecks as the interface_address (not
-       * assigned to the Cloudflare side of the tunnel) is used as the target.
-       */
-      target?: string;
-
-      /**
-       * The type of healthcheck to run, reply or request. The default value is `reply`.
-       */
-      type?: MagicTransitAPI.UnnamedSchemaRef3b1a76a5e4a139b72ed7d93834773d39;
-    }
   }
 }
 
@@ -241,7 +203,7 @@ export namespace GRETunnelListResponse {
      */
     description?: string;
 
-    health_check?: GRETunnel.HealthCheck;
+    health_check?: MagicTransitAPI.HealthCheck;
 
     /**
      * The date and time the tunnel was last modified.
@@ -258,44 +220,6 @@ export namespace GRETunnelListResponse {
      * Time To Live (TTL) in number of hops of the GRE tunnel.
      */
     ttl?: number;
-  }
-
-  export namespace GRETunnel {
-    export interface HealthCheck {
-      /**
-       * The direction of the flow of the healthcheck. Either unidirectional, where the
-       * probe comes to you via the tunnel and the result comes back to Cloudflare via
-       * the open Internet, or bidirectional where both the probe and result come and go
-       * via the tunnel. Note in the case of bidirecitonal healthchecks, the target field
-       * in health_check is ignored as the interface_address is used to send traffic into
-       * the tunnel.
-       */
-      direction?: 'unidirectional' | 'bidirectional';
-
-      /**
-       * Determines whether to run healthchecks for a tunnel.
-       */
-      enabled?: boolean;
-
-      /**
-       * How frequent the health check is run. The default value is `mid`.
-       */
-      rate?: MagicTransitAPI.UnnamedSchemaRefEebdc868ce7f7ae92e23438caa84e7b5;
-
-      /**
-       * The destination address in a request type health check. After the healthcheck is
-       * decapsulated at the customer end of the tunnel, the ICMP echo will be forwarded
-       * to this address. This field defaults to `customer_gre_endpoint address`. This
-       * field is ignored for bidirectional healthchecks as the interface_address (not
-       * assigned to the Cloudflare side of the tunnel) is used as the target.
-       */
-      target?: string;
-
-      /**
-       * The type of healthcheck to run, reply or request. The default value is `reply`.
-       */
-      type?: MagicTransitAPI.UnnamedSchemaRef3b1a76a5e4a139b72ed7d93834773d39;
-    }
   }
 }
 
@@ -359,7 +283,7 @@ export interface GRETunnelUpdateParams {
   /**
    * Body param:
    */
-  health_check?: GRETunnelUpdateParams.HealthCheck;
+  health_check?: MagicTransitAPI.HealthCheck;
 
   /**
    * Body param: Maximum Transmission Unit (MTU) in bytes for the GRE tunnel. The
@@ -371,44 +295,6 @@ export interface GRETunnelUpdateParams {
    * Body param: Time To Live (TTL) in number of hops of the GRE tunnel.
    */
   ttl?: number;
-}
-
-export namespace GRETunnelUpdateParams {
-  export interface HealthCheck {
-    /**
-     * The direction of the flow of the healthcheck. Either unidirectional, where the
-     * probe comes to you via the tunnel and the result comes back to Cloudflare via
-     * the open Internet, or bidirectional where both the probe and result come and go
-     * via the tunnel. Note in the case of bidirecitonal healthchecks, the target field
-     * in health_check is ignored as the interface_address is used to send traffic into
-     * the tunnel.
-     */
-    direction?: 'unidirectional' | 'bidirectional';
-
-    /**
-     * Determines whether to run healthchecks for a tunnel.
-     */
-    enabled?: boolean;
-
-    /**
-     * How frequent the health check is run. The default value is `mid`.
-     */
-    rate?: MagicTransitAPI.UnnamedSchemaRefEebdc868ce7f7ae92e23438caa84e7b5;
-
-    /**
-     * The destination address in a request type health check. After the healthcheck is
-     * decapsulated at the customer end of the tunnel, the ICMP echo will be forwarded
-     * to this address. This field defaults to `customer_gre_endpoint address`. This
-     * field is ignored for bidirectional healthchecks as the interface_address (not
-     * assigned to the Cloudflare side of the tunnel) is used as the target.
-     */
-    target?: string;
-
-    /**
-     * The type of healthcheck to run, reply or request. The default value is `reply`.
-     */
-    type?: MagicTransitAPI.UnnamedSchemaRef3b1a76a5e4a139b72ed7d93834773d39;
-  }
 }
 
 export interface GRETunnelListParams {

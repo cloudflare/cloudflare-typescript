@@ -18,19 +18,19 @@ export class IPs extends APIResource {
   }
 }
 
-export interface IntelSchemasIP {
+export interface IP {
   /**
    * Specifies a reference to the autonomous systems (AS) that the IP address belongs
    * to.
    */
-  belongs_to_ref?: IntelSchemasIP.BelongsToRef;
+  belongs_to_ref?: IP.BelongsToRef;
 
   ip?: string | string;
 
   risk_types?: Array<unknown>;
 }
 
-export namespace IntelSchemasIP {
+export namespace IP {
   /**
    * Specifies a reference to the autonomous systems (AS) that the IP address belongs
    * to.
@@ -51,7 +51,7 @@ export namespace IntelSchemasIP {
   }
 }
 
-export type IPGetResponse = Array<IntelSchemasIP>;
+export type IPGetResponse = Array<IP>;
 
 export interface IPGetParams {
   /**
@@ -71,7 +71,7 @@ export interface IPGetParams {
 }
 
 export namespace IPs {
-  export import IntelSchemasIP = IPsAPI.IntelSchemasIP;
+  export import IP = IPsAPI.IP;
   export import IPGetResponse = IPsAPI.IPGetResponse;
   export import IPGetParams = IPsAPI.IPGetParams;
 }

@@ -12,13 +12,12 @@ export class Connections extends APIResource {
   list(
     params: ConnectionListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<PageShieldConnectionsSinglePage, PageShieldConnection> {
+  ): Core.PagePromise<ConnectionsSinglePage, Connection> {
     const { zone_id, ...query } = params;
-    return this._client.getAPIList(
-      `/zones/${zone_id}/page_shield/connections`,
-      PageShieldConnectionsSinglePage,
-      { query, ...options },
-    );
+    return this._client.getAPIList(`/zones/${zone_id}/page_shield/connections`, ConnectionsSinglePage, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -28,15 +27,15 @@ export class Connections extends APIResource {
     connectionId: string,
     params: ConnectionGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PageShieldConnection> {
+  ): Core.APIPromise<Connection> {
     const { zone_id } = params;
     return this._client.get(`/zones/${zone_id}/page_shield/connections/${connectionId}`, options);
   }
 }
 
-export class PageShieldConnectionsSinglePage extends SinglePage<PageShieldConnection> {}
+export class ConnectionsSinglePage extends SinglePage<Connection> {}
 
-export interface PageShieldConnection {
+export interface Connection {
   id?: string;
 
   added_at?: string;
@@ -156,8 +155,8 @@ export interface ConnectionGetParams {
 }
 
 export namespace Connections {
-  export import PageShieldConnection = ConnectionsAPI.PageShieldConnection;
-  export import PageShieldConnectionsSinglePage = ConnectionsAPI.PageShieldConnectionsSinglePage;
+  export import Connection = ConnectionsAPI.Connection;
+  export import ConnectionsSinglePage = ConnectionsAPI.ConnectionsSinglePage;
   export import ConnectionListParams = ConnectionsAPI.ConnectionListParams;
   export import ConnectionGetParams = ConnectionsAPI.ConnectionGetParams;
 }

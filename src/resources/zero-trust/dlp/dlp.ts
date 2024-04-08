@@ -15,10 +15,10 @@ export class DLP extends APIResource {
 
 export namespace DLP {
   export import Datasets = DatasetsAPI.Datasets;
-  export import DLPDataset = DatasetsAPI.DLPDataset;
-  export import DLPDatasetArray = DatasetsAPI.DLPDatasetArray;
-  export import DLPDatasetCreation = DatasetsAPI.DLPDatasetCreation;
-  export import DLPDatasetsSinglePage = DatasetsAPI.DLPDatasetsSinglePage;
+  export import Dataset = DatasetsAPI.Dataset;
+  export import DatasetArray = DatasetsAPI.DatasetArray;
+  export import DatasetCreation = DatasetsAPI.DatasetCreation;
+  export import DatasetsSinglePage = DatasetsAPI.DatasetsSinglePage;
   export import DatasetCreateParams = DatasetsAPI.DatasetCreateParams;
   export import DatasetUpdateParams = DatasetsAPI.DatasetUpdateParams;
   export import DatasetListParams = DatasetsAPI.DatasetListParams;
@@ -27,15 +27,18 @@ export namespace DLP {
   export import Patterns = PatternsAPI.Patterns;
   export import PatternValidateParams = PatternsAPI.PatternValidateParams;
   export import PayloadLogs = PayloadLogsAPI.PayloadLogs;
-  export import UnnamedSchemaRefE31ff4936b1b42746e8cb62bbc87f2e5 = PayloadLogsAPI.UnnamedSchemaRefE31ff4936b1b42746e8cb62bbc87f2e5;
+  export import PayloadLogUpdateResponse = PayloadLogsAPI.PayloadLogUpdateResponse;
+  export import PayloadLogGetResponse = PayloadLogsAPI.PayloadLogGetResponse;
   export import PayloadLogUpdateParams = PayloadLogsAPI.PayloadLogUpdateParams;
   export import PayloadLogGetParams = PayloadLogsAPI.PayloadLogGetParams;
   export import Profiles = ProfilesAPI.Profiles;
-  export import DLPProfiles = ProfilesAPI.DLPProfiles;
+  export import ContextAwareness = ProfilesAPI.ContextAwareness;
+  export import Profile = ProfilesAPI.Profile;
+  export import SkipConfiguration = ProfilesAPI.SkipConfiguration;
   export import UnnamedSchemaRefC105db122868c71badeac3b4822ad6b1 = ProfilesAPI.UnnamedSchemaRefC105db122868c71badeac3b4822ad6b1;
   export import UnnamedSchemaRefE38bfdf1acf5a4bfada6779c79528bc0 = ProfilesAPI.UnnamedSchemaRefE38bfdf1acf5a4bfada6779c79528bc0;
   export import ProfileGetResponse = ProfilesAPI.ProfileGetResponse;
-  export import DLPProfilesSinglePage = ProfilesAPI.DLPProfilesSinglePage;
+  export import ProfilesSinglePage = ProfilesAPI.ProfilesSinglePage;
   export import ProfileListParams = ProfilesAPI.ProfileListParams;
   export import ProfileGetParams = ProfilesAPI.ProfileGetParams;
 }

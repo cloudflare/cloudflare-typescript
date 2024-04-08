@@ -25,27 +25,26 @@ export class Items extends APIResource {
 
 export class ItemListResponsesSinglePage extends SinglePage<ItemListResponse> {}
 
+export interface ListsItem {
+  created_at?: string;
+
+  /**
+   * The value of the item in a list.
+   */
+  value?: string;
+}
+
 /**
  * The items in the list.
  */
-export type ItemListResponse = Array<ItemListResponse.ItemListResponseItem>;
-
-export namespace ItemListResponse {
-  export interface ItemListResponseItem {
-    created_at?: string;
-
-    /**
-     * The value of the item in a list.
-     */
-    value?: string;
-  }
-}
+export type ItemListResponse = Array<ListsItem>;
 
 export interface ItemListParams {
   account_id: string;
 }
 
 export namespace Items {
+  export import ListsItem = ItemsAPI.ListsItem;
   export import ItemListResponse = ItemsAPI.ItemListResponse;
   export import ItemListResponsesSinglePage = ItemsAPI.ItemListResponsesSinglePage;
   export import ItemListParams = ItemsAPI.ItemListParams;

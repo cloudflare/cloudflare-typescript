@@ -2,21 +2,12 @@
 
 export { DownloadGetParams, Download } from './download';
 export {
-  MagicVisibilityPCAPsOwnership,
+  Ownership,
   OwnershipGetResponse,
   OwnershipCreateParams,
   OwnershipDeleteParams,
   OwnershipGetParams,
   OwnershipValidateParams,
-  Ownership,
+  OwnershipResource,
 } from './ownership';
-export {
-  PCAPCreateResponse,
-  PCAPListResponse,
-  PCAPGetResponse,
-  PCAPCreateParams,
-  PCAPListParams,
-  PCAPGetParams,
-  PCAPListResponsesSinglePage,
-  PCAPs,
-} from './pcaps';
+export { PCAPs } from './pcaps';
