@@ -1,6 +1,5 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Binding, BindingGetResponse, BindingGetParams, Bindings } from './bindings';
 export {
   BindingItem,
   CompatibilityFlagsItem,
@@ -43,13 +42,6 @@ export {
   DeploymentGetParams,
   Deployments,
 } from './deployments';
-export {
-  UsageModelUpdateResponse,
-  UsageModelGetResponse,
-  UsageModelUpdateParams,
-  UsageModelGetParams,
-  UsageModel,
-} from './usage-model';
 export {
   VersionCreateResponse,
   VersionListResponse,
