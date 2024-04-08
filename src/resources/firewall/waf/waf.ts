@@ -11,12 +11,12 @@ export class WAF extends APIResource {
 
 export namespace WAF {
   export import Overrides = OverridesAPI.Overrides;
-  export import OverrideCreateResponse = OverridesAPI.OverrideCreateResponse;
-  export import OverrideUpdateResponse = OverridesAPI.OverrideUpdateResponse;
-  export import OverrideListResponse = OverridesAPI.OverrideListResponse;
+  export import Override = OverridesAPI.Override;
+  export import RewriteAction = OverridesAPI.RewriteAction;
+  export import Rules = OverridesAPI.Rules;
+  export import URLsItems = OverridesAPI.URLsItems;
   export import OverrideDeleteResponse = OverridesAPI.OverrideDeleteResponse;
-  export import OverrideGetResponse = OverridesAPI.OverrideGetResponse;
-  export import OverrideListResponsesV4PagePaginationArray = OverridesAPI.OverrideListResponsesV4PagePaginationArray;
+  export import OverridesV4PagePaginationArray = OverridesAPI.OverridesV4PagePaginationArray;
   export import OverrideCreateParams = OverridesAPI.OverrideCreateParams;
   export import OverrideUpdateParams = OverridesAPI.OverrideUpdateParams;
   export import OverrideListParams = OverridesAPI.OverrideListParams;
