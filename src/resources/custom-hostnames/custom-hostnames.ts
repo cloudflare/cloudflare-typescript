@@ -110,7 +110,7 @@ export interface CustomHostname {
   /**
    * These are per-hostname (customer) settings.
    */
-  custom_metadata?: CustomMetadata;
+  custom_metadata?: CustomHostname.CustomMetadata;
 
   /**
    * a valid hostname that’s been added to your DNS zone as an A, AAAA, or CNAME
@@ -176,6 +176,16 @@ export interface CustomHostname {
 }
 
 export namespace CustomHostname {
+  /**
+   * These are per-hostname (customer) settings.
+   */
+  export interface CustomMetadata {
+    /**
+     * Unique metadata for this hostname.
+     */
+    key?: string;
+  }
+
   /**
    * This is a record which can be placed to activate a hostname.
    */
@@ -412,16 +422,6 @@ export namespace CustomHostname {
 }
 
 /**
- * These are per-hostname (customer) settings.
- */
-export interface CustomMetadata {
-  /**
-   * Unique metadata for this hostname.
-   */
-  key?: string;
-}
-
-/**
  * A ubiquitous bundle has the highest probability of being verified everywhere,
  * even by clients using outdated or unusual trust stores. An optimal bundle uses
  * the shortest chain and newest intermediates. And the force bundle verifies the
@@ -464,7 +464,7 @@ export interface UnnamedSchemaRefD2a16d7ee1ad3a888dd5821c918d51fd {
   /**
    * These are per-hostname (customer) settings.
    */
-  custom_metadata?: CustomMetadata;
+  custom_metadata?: UnnamedSchemaRefD2a16d7ee1ad3a888dd5821c918d51fd.CustomMetadata;
 
   /**
    * a valid hostname that’s been added to your DNS zone as an A, AAAA, or CNAME
@@ -718,6 +718,16 @@ export namespace UnnamedSchemaRefD2a16d7ee1ad3a888dd5821c918d51fd {
   }
 
   /**
+   * These are per-hostname (customer) settings.
+   */
+  export interface CustomMetadata {
+    /**
+     * Unique metadata for this hostname.
+     */
+    key?: string;
+  }
+
+  /**
    * This is a record which can be placed to activate a hostname.
    */
   export interface OwnershipVerification {
@@ -781,7 +791,7 @@ export interface CustomHostnameCreateParams {
   /**
    * Body param: These are per-hostname (customer) settings.
    */
-  custom_metadata?: CustomMetadata;
+  custom_metadata?: CustomHostnameCreateParams.CustomMetadata;
 }
 
 export namespace CustomHostnameCreateParams {
@@ -866,6 +876,16 @@ export namespace CustomHostnameCreateParams {
       tls_1_3?: 'on' | 'off';
     }
   }
+
+  /**
+   * These are per-hostname (customer) settings.
+   */
+  export interface CustomMetadata {
+    /**
+     * Unique metadata for this hostname.
+     */
+    key?: string;
+  }
 }
 
 export interface CustomHostnameListParams extends V4PagePaginationArrayParams {
@@ -924,7 +944,7 @@ export interface CustomHostnameEditParams {
   /**
    * Body param: These are per-hostname (customer) settings.
    */
-  custom_metadata?: CustomMetadata;
+  custom_metadata?: CustomHostnameEditParams.CustomMetadata;
 
   /**
    * Body param: a valid hostname that’s been added to your DNS zone as an A, AAAA,
@@ -948,6 +968,16 @@ export interface CustomHostnameEditParams {
 }
 
 export namespace CustomHostnameEditParams {
+  /**
+   * These are per-hostname (customer) settings.
+   */
+  export interface CustomMetadata {
+    /**
+     * Unique metadata for this hostname.
+     */
+    key?: string;
+  }
+
   /**
    * SSL properties used when creating the custom hostname.
    */
