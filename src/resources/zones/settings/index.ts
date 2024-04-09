@@ -120,6 +120,14 @@ export {
   OriginErrorPagePassThruGetParams,
   OriginErrorPagePassThruResource,
 } from './origin-error-page-pass-thru';
+export {
+  OriginMaxHTTPVersion,
+  OriginMaxHTTPVersionEditResponse,
+  OriginMaxHTTPVersionGetResponse,
+  OriginMaxHTTPVersionEditParams,
+  OriginMaxHTTPVersionGetParams,
+  OriginMaxHTTPVersionResource,
+} from './origin-max-http-version';
 export { Polish, PolishEditParams, PolishGetParams, PolishResource } from './polish';
 export {
   PrefetchPreload,
@@ -185,14 +193,6 @@ export {
   TrueClientIPHeaderGetParams,
   TrueClientIPHeaderResource,
 } from './true-client-ip-header';
-export {
-  UnnamedSchemaRefB234e6a28c1a1c7c29213787c0621eaa,
-  OriginMaxHTTPVersionEditResponse,
-  OriginMaxHTTPVersionGetResponse,
-  OriginMaxHTTPVersionEditParams,
-  OriginMaxHTTPVersionGetParams,
-  OriginMaxHTTPVersion,
-} from './origin-max-http-version';
 export { WAF, WAFEditParams, WAFGetParams, WAFResource } from './waf';
 export { WebP, WebPEditParams, WebPGetParams, WebPResource } from './webp';
 export { Websocket, WebsocketEditParams, WebsocketGetParams, WebsocketResource } from './websocket';

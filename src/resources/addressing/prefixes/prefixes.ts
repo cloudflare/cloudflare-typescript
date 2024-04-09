@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as PrefixesAPI from 'cloudflare/resources/addressing/prefixes/prefixes';
-import * as Shared from 'cloudflare/resources/shared';
 import * as DelegationsAPI from 'cloudflare/resources/addressing/prefixes/delegations';
 import * as BGPAPI from 'cloudflare/resources/addressing/prefixes/bgp/bgp';
 import { SinglePage } from 'cloudflare/pagination';
@@ -47,13 +46,13 @@ export class Prefixes extends APIResource {
     prefixId: string,
     params: PrefixDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef67bbb1ccdd42c3e2937b9fd19f791151 | null> {
+  ): Core.APIPromise<PrefixDeleteResponse | null> {
     const { account_id, body } = params;
     return (
       this._client.delete(`/accounts/${account_id}/addressing/prefixes/${prefixId}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef67bbb1ccdd42c3e2937b9fd19f791151 | null }>
+      }) as Core.APIPromise<{ result: PrefixDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -216,6 +215,8 @@ export interface UnnamedSchemaRefE358666e049bf8f9281c0a4f89b5fe46 {
   on_demand_locked?: boolean;
 }
 
+export type PrefixDeleteResponse = unknown | Array<unknown> | string;
+
 export interface PrefixCreateParams {
   /**
    * Path param: Identifier
@@ -279,6 +280,7 @@ export interface PrefixGetParams {
 export namespace Prefixes {
   export import Prefix = PrefixesAPI.Prefix;
   export import UnnamedSchemaRefE358666e049bf8f9281c0a4f89b5fe46 = PrefixesAPI.UnnamedSchemaRefE358666e049bf8f9281c0a4f89b5fe46;
+  export import PrefixDeleteResponse = PrefixesAPI.PrefixDeleteResponse;
   export import PrefixesSinglePage = PrefixesAPI.PrefixesSinglePage;
   export import PrefixCreateParams = PrefixesAPI.PrefixCreateParams;
   export import PrefixListParams = PrefixesAPI.PrefixListParams;

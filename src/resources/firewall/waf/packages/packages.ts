@@ -70,7 +70,7 @@ export namespace PackageListResponse {
 
     messages: Array<Shared.ResponseInfo>;
 
-    result: Shared.UnnamedSchemaRef67bbb1ccdd42c3e2937b9fd19f791151 | null;
+    result: unknown | Array<unknown> | string | null;
 
     /**
      * Whether the API call was successful
@@ -205,7 +205,7 @@ export namespace PackageGetResponse {
 
     messages: Array<Shared.ResponseInfo>;
 
-    result: Shared.UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f;
+    result: unknown | string | null;
 
     /**
      * Whether the API call was successful

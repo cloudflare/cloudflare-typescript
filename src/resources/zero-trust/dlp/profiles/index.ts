@@ -2,10 +2,10 @@
 
 export {
   ContextAwareness,
+  CustomProfile,
+  PredefinedProfile,
   Profile,
   SkipConfiguration,
-  UnnamedSchemaRefC105db122868c71badeac3b4822ad6b1,
-  UnnamedSchemaRefE38bfdf1acf5a4bfada6779c79528bc0,
   ProfileGetResponse,
   ProfileListParams,
   ProfileGetParams,
@@ -16,6 +16,7 @@ export {
   CustomProfile,
   Pattern,
   CustomCreateResponse,
+  CustomDeleteResponse,
   CustomCreateParams,
   CustomUpdateParams,
   CustomDeleteParams,

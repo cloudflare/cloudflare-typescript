@@ -16,7 +16,6 @@ export {
   Monitors,
 } from './monitors';
 export {
-  Pool,
   PoolDeleteResponse,
   PoolHealthResponse,
   PoolPreviewResponse,
@@ -27,7 +26,6 @@ export {
   PoolDeleteParams,
   PoolEditParams,
   PoolPreviewParams,
-  PoolsSinglePage,
   Pools,
 } from './pools';
 export { Preview, PreviewResource } from './preview';

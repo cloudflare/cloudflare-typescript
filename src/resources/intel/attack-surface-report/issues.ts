@@ -42,13 +42,13 @@ export class Issues extends APIResource {
     issueId: string,
     params: IssueDismissParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f> {
+  ): Core.APIPromise<IssueDismissResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/intel/attack-surface-report/${issueId}/dismiss`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f }>
+      }) as Core.APIPromise<{ result: IssueDismissResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -173,6 +173,8 @@ export namespace IssueClassResponse {
     value?: string;
   }
 }
+
+export type IssueDismissResponse = unknown | string;
 
 export type IssueSeverityResponse = Array<IssueSeverityResponse.IssueSeverityResponseItem>;
 
@@ -462,6 +464,7 @@ export namespace Issues {
   export import Subject = IssuesAPI.Subject;
   export import IssueListResponse = IssuesAPI.IssueListResponse;
   export import IssueClassResponse = IssuesAPI.IssueClassResponse;
+  export import IssueDismissResponse = IssuesAPI.IssueDismissResponse;
   export import IssueSeverityResponse = IssuesAPI.IssueSeverityResponse;
   export import IssueTypeResponse = IssuesAPI.IssueTypeResponse;
   export import IssueListResponsesV4PagePagination = IssuesAPI.IssueListResponsesV4PagePagination;

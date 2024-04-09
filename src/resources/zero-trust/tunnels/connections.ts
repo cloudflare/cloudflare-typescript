@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ConnectionsAPI from 'cloudflare/resources/zero-trust/tunnels/connections';
-import * as Shared from 'cloudflare/resources/shared';
 
 export class Connections extends APIResource {
   /**
@@ -14,13 +13,13 @@ export class Connections extends APIResource {
     tunnelId: string,
     params: ConnectionDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef65e3c8c1a9c4638ec25cdbbaca7165c1 | null> {
+  ): Core.APIPromise<ConnectionDeleteResponse> {
     const { account_id, body } = params;
     return (
       this._client.delete(`/accounts/${account_id}/tunnels/${tunnelId}/connections`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef65e3c8c1a9c4638ec25cdbbaca7165c1 | null }>
+      }) as Core.APIPromise<{ result: ConnectionDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -131,6 +130,8 @@ export namespace Client {
   }
 }
 
+export type ConnectionDeleteResponse = unknown | Array<unknown> | string;
+
 export type ConnectionGetResponse = Array<Client>;
 
 export interface ConnectionDeleteParams {
@@ -154,6 +155,7 @@ export interface ConnectionGetParams {
 
 export namespace Connections {
   export import Client = ConnectionsAPI.Client;
+  export import ConnectionDeleteResponse = ConnectionsAPI.ConnectionDeleteResponse;
   export import ConnectionGetResponse = ConnectionsAPI.ConnectionGetResponse;
   export import ConnectionDeleteParams = ConnectionsAPI.ConnectionDeleteParams;
   export import ConnectionGetParams = ConnectionsAPI.ConnectionGetParams;

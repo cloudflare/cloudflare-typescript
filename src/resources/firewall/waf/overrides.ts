@@ -165,7 +165,7 @@ export interface Override {
    * entered URL will be escaped before use, which means you can only use simple
    * wildcard patterns.
    */
-  urls?: Array<URLsItems>;
+  urls?: Array<URLs>;
 }
 
 /**
@@ -199,7 +199,7 @@ export interface RewriteAction {
  */
 export type Rules = Record<string, 'challenge' | 'block' | 'simulate' | 'disable' | 'default'>;
 
-export type URLsItems = string;
+export type URLs = string;
 
 export interface OverrideDeleteResponse {
   /**
@@ -220,7 +220,7 @@ export namespace Overrides {
   export import Override = OverridesAPI.Override;
   export import RewriteAction = OverridesAPI.RewriteAction;
   export import Rules = OverridesAPI.Rules;
-  export import URLsItems = OverridesAPI.URLsItems;
+  export import URLs = OverridesAPI.URLs;
   export import OverrideDeleteResponse = OverridesAPI.OverrideDeleteResponse;
   export import OverridesV4PagePaginationArray = OverridesAPI.OverridesV4PagePaginationArray;
   export import OverrideCreateParams = OverridesAPI.OverrideCreateParams;

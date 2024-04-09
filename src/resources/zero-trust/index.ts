@@ -19,16 +19,16 @@ export {
   IPListRule,
   IPRule,
   OktaGroupRule,
-  SamlGroupRule,
+  SAMLGroupRule,
   ServiceTokenRule,
   Access,
 } from './access/index';
 export {
-  AzureAd,
+  AzureAD,
   GenericOAuthConfig,
   IdentityProvider,
-  UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb,
-  UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1,
+  IdentityProviderType,
+  ScimConfig,
   IdentityProviderListResponse,
   IdentityProviderDeleteResponse,
   IdentityProviderCreateParams,
@@ -57,12 +57,13 @@ export {
 } from './gateway/index';
 export {
   LoginDesign,
-  Organizations,
+  Organization,
   OrganizationRevokeUsersResponse,
   OrganizationCreateParams,
   OrganizationUpdateParams,
   OrganizationListParams,
   OrganizationRevokeUsersParams,
+  Organizations,
 } from './organizations';
 export { Networks } from './networks/index';
 export { Percentiles, UnnamedSchemaRefBf9e2abcf1b78a6cab8e6e29e2228a11, DEX } from './dex/index';

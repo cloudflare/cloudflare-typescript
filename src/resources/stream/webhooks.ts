@@ -24,16 +24,13 @@ export class Webhooks extends APIResource {
   /**
    * Deletes a webhook.
    */
-  delete(
-    params: WebhookDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef602dd5f63eab958d53da61434dec08f0> {
+  delete(params: WebhookDeleteParams, options?: Core.RequestOptions): Core.APIPromise<WebhookDeleteResponse> {
     const { account_id, body } = params;
     return (
       this._client.delete(`/accounts/${account_id}/stream/webhook`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef602dd5f63eab958d53da61434dec08f0 }>
+      }) as Core.APIPromise<{ result: WebhookDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -52,6 +49,8 @@ export class Webhooks extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export type WebhookDeleteResponse = unknown | string;
 
 export interface WebhookUpdateParams {
   /**
@@ -85,6 +84,7 @@ export interface WebhookGetParams {
 }
 
 export namespace Webhooks {
+  export import WebhookDeleteResponse = WebhooksAPI.WebhookDeleteResponse;
   export import WebhookUpdateParams = WebhooksAPI.WebhookUpdateParams;
   export import WebhookDeleteParams = WebhooksAPI.WebhookDeleteParams;
   export import WebhookGetParams = WebhooksAPI.WebhookGetParams;

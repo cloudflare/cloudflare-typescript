@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as BulkAPI from 'cloudflare/resources/kv/namespaces/bulk';
-import * as Shared from 'cloudflare/resources/shared';
 
 export class Bulk extends APIResource {
   /**
@@ -18,13 +17,13 @@ export class Bulk extends APIResource {
     namespaceId: string,
     params: BulkUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f> {
+  ): Core.APIPromise<BulkUpdateResponse> {
     const { account_id, body } = params;
     return (
       this._client.put(`/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/bulk`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f }>
+      }) as Core.APIPromise<{ result: BulkUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -36,16 +35,20 @@ export class Bulk extends APIResource {
     namespaceId: string,
     params: BulkDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f> {
+  ): Core.APIPromise<BulkDeleteResponse> {
     const { account_id, body } = params;
     return (
       this._client.delete(`/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/bulk`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f }>
+      }) as Core.APIPromise<{ result: BulkDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export type BulkUpdateResponse = unknown | string;
+
+export type BulkDeleteResponse = unknown | string;
 
 export interface BulkUpdateParams {
   /**
@@ -111,6 +114,8 @@ export interface BulkDeleteParams {
 }
 
 export namespace Bulk {
+  export import BulkUpdateResponse = BulkAPI.BulkUpdateResponse;
+  export import BulkDeleteResponse = BulkAPI.BulkDeleteResponse;
   export import BulkUpdateParams = BulkAPI.BulkUpdateParams;
   export import BulkDeleteParams = BulkAPI.BulkDeleteParams;
 }

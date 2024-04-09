@@ -316,6 +316,7 @@ export namespace Scripts {
   export import ConsumerScript = TailAPI.ConsumerScript;
   export import ConsumerScriptItem = TailAPI.ConsumerScriptItem;
   export import TailCreateResponse = TailAPI.TailCreateResponse;
+  export import TailDeleteResponse = TailAPI.TailDeleteResponse;
   export import TailGetResponse = TailAPI.TailGetResponse;
   export import TailCreateParams = TailAPI.TailCreateParams;
   export import TailDeleteParams = TailAPI.TailDeleteParams;

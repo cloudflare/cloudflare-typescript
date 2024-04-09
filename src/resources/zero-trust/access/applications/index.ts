@@ -1,16 +1,16 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  AllowedHeadersItem,
-  AllowedIDPsItem,
-  AllowedMethodsItem,
-  AllowedOriginsItem,
+  AllowedHeadersh,
+  AllowedIdpsh,
+  AllowedMethodsh,
+  AllowedOriginsh,
   AppID,
   Application,
   CorsHeaders,
-  CustomPagesItem,
-  SamlSaasApp,
-  SelfHostedDomainsItem,
+  CustomPagesh,
+  SAMLSaasApp,
+  SelfHostedDomainsh,
   ApplicationDeleteResponse,
   ApplicationRevokeTokensResponse,
   ApplicationCreateParams,

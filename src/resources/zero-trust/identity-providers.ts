@@ -201,13 +201,13 @@ export class IdentityProviders extends APIResource {
 
 export class IdentityProviderListResponsesSinglePage extends SinglePage<IdentityProviderListResponse> {}
 
-export interface AzureAd {
+export interface AzureAD {
   /**
    * The configuration parameters for the identity provider. To view the required
    * parameters for a specific provider, refer to our
    * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
    */
-  config: AzureAd.Config;
+  config: AzureAD.Config;
 
   /**
    * The name of the identity provider, shown to users on the login page.
@@ -219,7 +219,7 @@ export interface AzureAd {
    * refer to our
    * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
    */
-  type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+  type: IdentityProviderType;
 
   /**
    * UUID
@@ -230,10 +230,10 @@ export interface AzureAd {
    * The configuration settings for enabling a System for Cross-Domain Identity
    * Management (SCIM) with the identity provider.
    */
-  scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+  scim_config?: ScimConfig;
 }
 
-export namespace AzureAd {
+export namespace AzureAD {
   /**
    * The configuration parameters for the identity provider. To view the required
    * parameters for a specific provider, refer to our
@@ -302,18 +302,18 @@ export interface GenericOAuthConfig {
 }
 
 export type IdentityProvider =
-  | AzureAd
+  | AzureAD
   | IdentityProvider.AccessCentrify
   | IdentityProvider.AccessFacebook
   | IdentityProvider.AccessGitHub
   | IdentityProvider.AccessGoogle
   | IdentityProvider.AccessGoogleApps
   | IdentityProvider.AccessLinkedin
-  | IdentityProvider.AccessOidc
+  | IdentityProvider.AccessOIDC
   | IdentityProvider.AccessOkta
   | IdentityProvider.AccessOnelogin
   | IdentityProvider.AccessPingone
-  | IdentityProvider.AccessSaml
+  | IdentityProvider.AccessSAML
   | IdentityProvider.AccessYandex
   | IdentityProvider.AccessOnetimepin;
 
@@ -336,7 +336,7 @@ export namespace IdentityProvider {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
      * UUID
@@ -347,7 +347,7 @@ export namespace IdentityProvider {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: IdentityProvidersAPI.ScimConfig;
   }
 
   export namespace AccessCentrify {
@@ -407,7 +407,7 @@ export namespace IdentityProvider {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
      * UUID
@@ -418,7 +418,7 @@ export namespace IdentityProvider {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: IdentityProvidersAPI.ScimConfig;
   }
 
   export interface AccessGitHub {
@@ -439,7 +439,7 @@ export namespace IdentityProvider {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
      * UUID
@@ -450,7 +450,7 @@ export namespace IdentityProvider {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: IdentityProvidersAPI.ScimConfig;
   }
 
   export interface AccessGoogle {
@@ -471,7 +471,7 @@ export namespace IdentityProvider {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
      * UUID
@@ -482,7 +482,7 @@ export namespace IdentityProvider {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: IdentityProvidersAPI.ScimConfig;
   }
 
   export namespace AccessGoogle {
@@ -532,7 +532,7 @@ export namespace IdentityProvider {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
      * UUID
@@ -543,7 +543,7 @@ export namespace IdentityProvider {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: IdentityProvidersAPI.ScimConfig;
   }
 
   export namespace AccessGoogleApps {
@@ -598,7 +598,7 @@ export namespace IdentityProvider {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
      * UUID
@@ -609,16 +609,16 @@ export namespace IdentityProvider {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: IdentityProvidersAPI.ScimConfig;
   }
 
-  export interface AccessOidc {
+  export interface AccessOIDC {
     /**
      * The configuration parameters for the identity provider. To view the required
      * parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: AccessOidc.Config;
+    config: AccessOIDC.Config;
 
     /**
      * The name of the identity provider, shown to users on the login page.
@@ -630,7 +630,7 @@ export namespace IdentityProvider {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
      * UUID
@@ -641,10 +641,10 @@ export namespace IdentityProvider {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: IdentityProvidersAPI.ScimConfig;
   }
 
-  export namespace AccessOidc {
+  export namespace AccessOIDC {
     /**
      * The configuration parameters for the identity provider. To view the required
      * parameters for a specific provider, refer to our
@@ -711,7 +711,7 @@ export namespace IdentityProvider {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
      * UUID
@@ -722,7 +722,7 @@ export namespace IdentityProvider {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: IdentityProvidersAPI.ScimConfig;
   }
 
   export namespace AccessOkta {
@@ -782,7 +782,7 @@ export namespace IdentityProvider {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
      * UUID
@@ -793,7 +793,7 @@ export namespace IdentityProvider {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: IdentityProvidersAPI.ScimConfig;
   }
 
   export namespace AccessOnelogin {
@@ -848,7 +848,7 @@ export namespace IdentityProvider {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
      * UUID
@@ -859,7 +859,7 @@ export namespace IdentityProvider {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: IdentityProvidersAPI.ScimConfig;
   }
 
   export namespace AccessPingone {
@@ -896,13 +896,13 @@ export namespace IdentityProvider {
     }
   }
 
-  export interface AccessSaml {
+  export interface AccessSAML {
     /**
      * The configuration parameters for the identity provider. To view the required
      * parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: AccessSaml.Config;
+    config: AccessSAML.Config;
 
     /**
      * The name of the identity provider, shown to users on the login page.
@@ -914,7 +914,7 @@ export namespace IdentityProvider {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
      * UUID
@@ -925,10 +925,10 @@ export namespace IdentityProvider {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: IdentityProvidersAPI.ScimConfig;
   }
 
-  export namespace AccessSaml {
+  export namespace AccessSAML {
     /**
      * The configuration parameters for the identity provider. To view the required
      * parameters for a specific provider, refer to our
@@ -1007,7 +1007,7 @@ export namespace IdentityProvider {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
      * UUID
@@ -1018,7 +1018,7 @@ export namespace IdentityProvider {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: IdentityProvidersAPI.ScimConfig;
   }
 
   export interface AccessOnetimepin {
@@ -1039,7 +1039,7 @@ export namespace IdentityProvider {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
      * UUID
@@ -1050,7 +1050,7 @@ export namespace IdentityProvider {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: IdentityProvidersAPI.ScimConfig;
   }
 }
 
@@ -1059,7 +1059,7 @@ export namespace IdentityProvider {
  * refer to our
  * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
  */
-export type UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb =
+export type IdentityProviderType =
   | 'onetimepin'
   | 'azureAD'
   | 'saml'
@@ -1079,7 +1079,7 @@ export type UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb =
  * The configuration settings for enabling a System for Cross-Domain Identity
  * Management (SCIM) with the identity provider.
  */
-export interface UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1 {
+export interface ScimConfig {
   /**
    * A flag to enable or disable SCIM for the identity provider.
    */
@@ -1114,18 +1114,18 @@ export interface UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1 {
 }
 
 export type IdentityProviderListResponse =
-  | AzureAd
+  | AzureAD
   | IdentityProviderListResponse.AccessCentrify
   | IdentityProviderListResponse.AccessFacebook
   | IdentityProviderListResponse.AccessGitHub
   | IdentityProviderListResponse.AccessGoogle
   | IdentityProviderListResponse.AccessGoogleApps
   | IdentityProviderListResponse.AccessLinkedin
-  | IdentityProviderListResponse.AccessOidc
+  | IdentityProviderListResponse.AccessOIDC
   | IdentityProviderListResponse.AccessOkta
   | IdentityProviderListResponse.AccessOnelogin
   | IdentityProviderListResponse.AccessPingone
-  | IdentityProviderListResponse.AccessSaml
+  | IdentityProviderListResponse.AccessSAML
   | IdentityProviderListResponse.AccessYandex;
 
 export namespace IdentityProviderListResponse {
@@ -1147,7 +1147,7 @@ export namespace IdentityProviderListResponse {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
      * UUID
@@ -1158,7 +1158,7 @@ export namespace IdentityProviderListResponse {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: IdentityProvidersAPI.ScimConfig;
   }
 
   export namespace AccessCentrify {
@@ -1218,7 +1218,7 @@ export namespace IdentityProviderListResponse {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
      * UUID
@@ -1229,7 +1229,7 @@ export namespace IdentityProviderListResponse {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: IdentityProvidersAPI.ScimConfig;
   }
 
   export interface AccessGitHub {
@@ -1250,7 +1250,7 @@ export namespace IdentityProviderListResponse {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
      * UUID
@@ -1261,7 +1261,7 @@ export namespace IdentityProviderListResponse {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: IdentityProvidersAPI.ScimConfig;
   }
 
   export interface AccessGoogle {
@@ -1282,7 +1282,7 @@ export namespace IdentityProviderListResponse {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
      * UUID
@@ -1293,7 +1293,7 @@ export namespace IdentityProviderListResponse {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: IdentityProvidersAPI.ScimConfig;
   }
 
   export namespace AccessGoogle {
@@ -1343,7 +1343,7 @@ export namespace IdentityProviderListResponse {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
      * UUID
@@ -1354,7 +1354,7 @@ export namespace IdentityProviderListResponse {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: IdentityProvidersAPI.ScimConfig;
   }
 
   export namespace AccessGoogleApps {
@@ -1409,7 +1409,7 @@ export namespace IdentityProviderListResponse {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
      * UUID
@@ -1420,16 +1420,16 @@ export namespace IdentityProviderListResponse {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: IdentityProvidersAPI.ScimConfig;
   }
 
-  export interface AccessOidc {
+  export interface AccessOIDC {
     /**
      * The configuration parameters for the identity provider. To view the required
      * parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: AccessOidc.Config;
+    config: AccessOIDC.Config;
 
     /**
      * The name of the identity provider, shown to users on the login page.
@@ -1441,7 +1441,7 @@ export namespace IdentityProviderListResponse {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
      * UUID
@@ -1452,10 +1452,10 @@ export namespace IdentityProviderListResponse {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: IdentityProvidersAPI.ScimConfig;
   }
 
-  export namespace AccessOidc {
+  export namespace AccessOIDC {
     /**
      * The configuration parameters for the identity provider. To view the required
      * parameters for a specific provider, refer to our
@@ -1522,7 +1522,7 @@ export namespace IdentityProviderListResponse {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
      * UUID
@@ -1533,7 +1533,7 @@ export namespace IdentityProviderListResponse {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: IdentityProvidersAPI.ScimConfig;
   }
 
   export namespace AccessOkta {
@@ -1593,7 +1593,7 @@ export namespace IdentityProviderListResponse {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
      * UUID
@@ -1604,7 +1604,7 @@ export namespace IdentityProviderListResponse {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: IdentityProvidersAPI.ScimConfig;
   }
 
   export namespace AccessOnelogin {
@@ -1659,7 +1659,7 @@ export namespace IdentityProviderListResponse {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
      * UUID
@@ -1670,7 +1670,7 @@ export namespace IdentityProviderListResponse {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: IdentityProvidersAPI.ScimConfig;
   }
 
   export namespace AccessPingone {
@@ -1707,13 +1707,13 @@ export namespace IdentityProviderListResponse {
     }
   }
 
-  export interface AccessSaml {
+  export interface AccessSAML {
     /**
      * The configuration parameters for the identity provider. To view the required
      * parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: AccessSaml.Config;
+    config: AccessSAML.Config;
 
     /**
      * The name of the identity provider, shown to users on the login page.
@@ -1725,7 +1725,7 @@ export namespace IdentityProviderListResponse {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
      * UUID
@@ -1736,10 +1736,10 @@ export namespace IdentityProviderListResponse {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: IdentityProvidersAPI.ScimConfig;
   }
 
-  export namespace AccessSaml {
+  export namespace AccessSAML {
     /**
      * The configuration parameters for the identity provider. To view the required
      * parameters for a specific provider, refer to our
@@ -1818,7 +1818,7 @@ export namespace IdentityProviderListResponse {
      * refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProvidersAPI.IdentityProviderType;
 
     /**
      * UUID
@@ -1829,7 +1829,7 @@ export namespace IdentityProviderListResponse {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: IdentityProvidersAPI.ScimConfig;
   }
 }
 
@@ -1841,29 +1841,29 @@ export interface IdentityProviderDeleteResponse {
 }
 
 export type IdentityProviderCreateParams =
-  | IdentityProviderCreateParams.AzureAd
+  | IdentityProviderCreateParams.AzureAD
   | IdentityProviderCreateParams.AccessCentrify
   | IdentityProviderCreateParams.AccessFacebook
   | IdentityProviderCreateParams.AccessGitHub
   | IdentityProviderCreateParams.AccessGoogle
   | IdentityProviderCreateParams.AccessGoogleApps
   | IdentityProviderCreateParams.AccessLinkedin
-  | IdentityProviderCreateParams.AccessOidc
+  | IdentityProviderCreateParams.AccessOIDC
   | IdentityProviderCreateParams.AccessOkta
   | IdentityProviderCreateParams.AccessOnelogin
   | IdentityProviderCreateParams.AccessPingone
-  | IdentityProviderCreateParams.AccessSaml
+  | IdentityProviderCreateParams.AccessSAML
   | IdentityProviderCreateParams.AccessYandex
   | IdentityProviderCreateParams.AccessOnetimepin;
 
 export namespace IdentityProviderCreateParams {
-  export interface AzureAd {
+  export interface AzureAD {
     /**
      * Body param: The configuration parameters for the identity provider. To view the
      * required parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderCreateParams.AzureAd.Config;
+    config: IdentityProviderCreateParams.AzureAD.Config;
 
     /**
      * Body param: The name of the identity provider, shown to users on the login page.
@@ -1875,7 +1875,7 @@ export namespace IdentityProviderCreateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProviderType;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -1893,10 +1893,10 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: ScimConfig;
   }
 
-  export namespace AzureAd {
+  export namespace AzureAD {
     /**
      * The configuration parameters for the identity provider. To view the required
      * parameters for a specific provider, refer to our
@@ -1970,7 +1970,7 @@ export namespace IdentityProviderCreateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProviderType;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -1988,7 +1988,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: ScimConfig;
   }
 
   export namespace AccessCentrify {
@@ -2048,7 +2048,7 @@ export namespace IdentityProviderCreateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProviderType;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -2066,7 +2066,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: ScimConfig;
   }
 
   export interface AccessGitHub {
@@ -2087,7 +2087,7 @@ export namespace IdentityProviderCreateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProviderType;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -2105,7 +2105,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: ScimConfig;
   }
 
   export interface AccessGoogle {
@@ -2126,7 +2126,7 @@ export namespace IdentityProviderCreateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProviderType;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -2144,7 +2144,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: ScimConfig;
   }
 
   export namespace AccessGoogle {
@@ -2194,7 +2194,7 @@ export namespace IdentityProviderCreateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProviderType;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -2212,7 +2212,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: ScimConfig;
   }
 
   export namespace AccessGoogleApps {
@@ -2267,7 +2267,7 @@ export namespace IdentityProviderCreateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProviderType;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -2285,16 +2285,16 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: ScimConfig;
   }
 
-  export interface AccessOidc {
+  export interface AccessOIDC {
     /**
      * Body param: The configuration parameters for the identity provider. To view the
      * required parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderCreateParams.AccessOidc.Config;
+    config: IdentityProviderCreateParams.AccessOIDC.Config;
 
     /**
      * Body param: The name of the identity provider, shown to users on the login page.
@@ -2306,7 +2306,7 @@ export namespace IdentityProviderCreateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProviderType;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -2324,10 +2324,10 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: ScimConfig;
   }
 
-  export namespace AccessOidc {
+  export namespace AccessOIDC {
     /**
      * The configuration parameters for the identity provider. To view the required
      * parameters for a specific provider, refer to our
@@ -2394,7 +2394,7 @@ export namespace IdentityProviderCreateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProviderType;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -2412,7 +2412,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: ScimConfig;
   }
 
   export namespace AccessOkta {
@@ -2472,7 +2472,7 @@ export namespace IdentityProviderCreateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProviderType;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -2490,7 +2490,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: ScimConfig;
   }
 
   export namespace AccessOnelogin {
@@ -2545,7 +2545,7 @@ export namespace IdentityProviderCreateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProviderType;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -2563,7 +2563,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: ScimConfig;
   }
 
   export namespace AccessPingone {
@@ -2600,13 +2600,13 @@ export namespace IdentityProviderCreateParams {
     }
   }
 
-  export interface AccessSaml {
+  export interface AccessSAML {
     /**
      * Body param: The configuration parameters for the identity provider. To view the
      * required parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderCreateParams.AccessSaml.Config;
+    config: IdentityProviderCreateParams.AccessSAML.Config;
 
     /**
      * Body param: The name of the identity provider, shown to users on the login page.
@@ -2618,7 +2618,7 @@ export namespace IdentityProviderCreateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProviderType;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -2636,10 +2636,10 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: ScimConfig;
   }
 
-  export namespace AccessSaml {
+  export namespace AccessSAML {
     /**
      * The configuration parameters for the identity provider. To view the required
      * parameters for a specific provider, refer to our
@@ -2718,7 +2718,7 @@ export namespace IdentityProviderCreateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProviderType;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -2736,7 +2736,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: ScimConfig;
   }
 
   export interface AccessOnetimepin {
@@ -2757,7 +2757,7 @@ export namespace IdentityProviderCreateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProviderType;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -2775,34 +2775,34 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: ScimConfig;
   }
 }
 
 export type IdentityProviderUpdateParams =
-  | IdentityProviderUpdateParams.AzureAd
+  | IdentityProviderUpdateParams.AzureAD
   | IdentityProviderUpdateParams.AccessCentrify
   | IdentityProviderUpdateParams.AccessFacebook
   | IdentityProviderUpdateParams.AccessGitHub
   | IdentityProviderUpdateParams.AccessGoogle
   | IdentityProviderUpdateParams.AccessGoogleApps
   | IdentityProviderUpdateParams.AccessLinkedin
-  | IdentityProviderUpdateParams.AccessOidc
+  | IdentityProviderUpdateParams.AccessOIDC
   | IdentityProviderUpdateParams.AccessOkta
   | IdentityProviderUpdateParams.AccessOnelogin
   | IdentityProviderUpdateParams.AccessPingone
-  | IdentityProviderUpdateParams.AccessSaml
+  | IdentityProviderUpdateParams.AccessSAML
   | IdentityProviderUpdateParams.AccessYandex
   | IdentityProviderUpdateParams.AccessOnetimepin;
 
 export namespace IdentityProviderUpdateParams {
-  export interface AzureAd {
+  export interface AzureAD {
     /**
      * Body param: The configuration parameters for the identity provider. To view the
      * required parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderUpdateParams.AzureAd.Config;
+    config: IdentityProviderUpdateParams.AzureAD.Config;
 
     /**
      * Body param: The name of the identity provider, shown to users on the login page.
@@ -2814,7 +2814,7 @@ export namespace IdentityProviderUpdateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProviderType;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -2832,10 +2832,10 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: ScimConfig;
   }
 
-  export namespace AzureAd {
+  export namespace AzureAD {
     /**
      * The configuration parameters for the identity provider. To view the required
      * parameters for a specific provider, refer to our
@@ -2909,7 +2909,7 @@ export namespace IdentityProviderUpdateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProviderType;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -2927,7 +2927,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: ScimConfig;
   }
 
   export namespace AccessCentrify {
@@ -2987,7 +2987,7 @@ export namespace IdentityProviderUpdateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProviderType;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -3005,7 +3005,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: ScimConfig;
   }
 
   export interface AccessGitHub {
@@ -3026,7 +3026,7 @@ export namespace IdentityProviderUpdateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProviderType;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -3044,7 +3044,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: ScimConfig;
   }
 
   export interface AccessGoogle {
@@ -3065,7 +3065,7 @@ export namespace IdentityProviderUpdateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProviderType;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -3083,7 +3083,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: ScimConfig;
   }
 
   export namespace AccessGoogle {
@@ -3133,7 +3133,7 @@ export namespace IdentityProviderUpdateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProviderType;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -3151,7 +3151,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: ScimConfig;
   }
 
   export namespace AccessGoogleApps {
@@ -3206,7 +3206,7 @@ export namespace IdentityProviderUpdateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProviderType;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -3224,16 +3224,16 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: ScimConfig;
   }
 
-  export interface AccessOidc {
+  export interface AccessOIDC {
     /**
      * Body param: The configuration parameters for the identity provider. To view the
      * required parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderUpdateParams.AccessOidc.Config;
+    config: IdentityProviderUpdateParams.AccessOIDC.Config;
 
     /**
      * Body param: The name of the identity provider, shown to users on the login page.
@@ -3245,7 +3245,7 @@ export namespace IdentityProviderUpdateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProviderType;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -3263,10 +3263,10 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: ScimConfig;
   }
 
-  export namespace AccessOidc {
+  export namespace AccessOIDC {
     /**
      * The configuration parameters for the identity provider. To view the required
      * parameters for a specific provider, refer to our
@@ -3333,7 +3333,7 @@ export namespace IdentityProviderUpdateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProviderType;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -3351,7 +3351,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: ScimConfig;
   }
 
   export namespace AccessOkta {
@@ -3411,7 +3411,7 @@ export namespace IdentityProviderUpdateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProviderType;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -3429,7 +3429,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: ScimConfig;
   }
 
   export namespace AccessOnelogin {
@@ -3484,7 +3484,7 @@ export namespace IdentityProviderUpdateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProviderType;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -3502,7 +3502,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: ScimConfig;
   }
 
   export namespace AccessPingone {
@@ -3539,13 +3539,13 @@ export namespace IdentityProviderUpdateParams {
     }
   }
 
-  export interface AccessSaml {
+  export interface AccessSAML {
     /**
      * Body param: The configuration parameters for the identity provider. To view the
      * required parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: IdentityProviderUpdateParams.AccessSaml.Config;
+    config: IdentityProviderUpdateParams.AccessSAML.Config;
 
     /**
      * Body param: The name of the identity provider, shown to users on the login page.
@@ -3557,7 +3557,7 @@ export namespace IdentityProviderUpdateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProviderType;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -3575,10 +3575,10 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: ScimConfig;
   }
 
-  export namespace AccessSaml {
+  export namespace AccessSAML {
     /**
      * The configuration parameters for the identity provider. To view the required
      * parameters for a specific provider, refer to our
@@ -3657,7 +3657,7 @@ export namespace IdentityProviderUpdateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProviderType;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -3675,7 +3675,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: ScimConfig;
   }
 
   export interface AccessOnetimepin {
@@ -3696,7 +3696,7 @@ export namespace IdentityProviderUpdateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
+    type: IdentityProviderType;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -3714,7 +3714,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+    scim_config?: ScimConfig;
   }
 }
 
@@ -3755,11 +3755,11 @@ export interface IdentityProviderGetParams {
 }
 
 export namespace IdentityProviders {
-  export import AzureAd = IdentityProvidersAPI.AzureAd;
+  export import AzureAD = IdentityProvidersAPI.AzureAD;
   export import GenericOAuthConfig = IdentityProvidersAPI.GenericOAuthConfig;
   export import IdentityProvider = IdentityProvidersAPI.IdentityProvider;
-  export import UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb = IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
-  export import UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1 = IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+  export import IdentityProviderType = IdentityProvidersAPI.IdentityProviderType;
+  export import ScimConfig = IdentityProvidersAPI.ScimConfig;
   export import IdentityProviderListResponse = IdentityProvidersAPI.IdentityProviderListResponse;
   export import IdentityProviderDeleteResponse = IdentityProvidersAPI.IdentityProviderDeleteResponse;
   export import IdentityProviderListResponsesSinglePage = IdentityProvidersAPI.IdentityProviderListResponsesSinglePage;

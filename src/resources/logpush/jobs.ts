@@ -5,7 +5,6 @@ import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import { CloudflareError } from 'cloudflare/error';
 import * as JobsAPI from 'cloudflare/resources/logpush/jobs';
-import * as Shared from 'cloudflare/resources/shared';
 import * as DatasetsJobsAPI from 'cloudflare/resources/logpush/datasets/jobs';
 import { JobsSinglePage } from 'cloudflare/resources/logpush/datasets/jobs';
 
@@ -121,7 +120,7 @@ export class Jobs extends APIResource {
     jobId: number,
     params: JobDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef65e3c8c1a9c4638ec25cdbbaca7165c1 | null> {
+  ): Core.APIPromise<JobDeleteResponse | null> {
     const { body, account_id, zone_id } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -143,7 +142,7 @@ export class Jobs extends APIResource {
       this._client.delete(`/${accountOrZone}/${accountOrZoneId}/logpush/jobs/${jobId}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef65e3c8c1a9c4638ec25cdbbaca7165c1 | null }>
+      }) as Core.APIPromise<{ result: JobDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -265,6 +264,8 @@ export interface UnnamedSchemaRef2f2e9d7fbcc0e6856257a03a1dbbdfb5 {
    */
   output_options?: DatasetsJobsAPI.OutputOptions | null;
 }
+
+export type JobDeleteResponse = unknown | Array<unknown> | string;
 
 export interface JobCreateParams {
   /**
@@ -431,6 +432,7 @@ export interface JobGetParams {
 
 export namespace Jobs {
   export import UnnamedSchemaRef2f2e9d7fbcc0e6856257a03a1dbbdfb5 = JobsAPI.UnnamedSchemaRef2f2e9d7fbcc0e6856257a03a1dbbdfb5;
+  export import JobDeleteResponse = JobsAPI.JobDeleteResponse;
   export import JobCreateParams = JobsAPI.JobCreateParams;
   export import JobUpdateParams = JobsAPI.JobUpdateParams;
   export import JobListParams = JobsAPI.JobListParams;

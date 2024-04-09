@@ -27,6 +27,10 @@ export {
   IndicatorFeeds,
 } from './indicator-feeds/index';
 export { Intel } from './intel';
-export { MiscategorizationCreateParams, Miscategorizations } from './miscategorizations';
+export {
+  MiscategorizationCreateResponse,
+  MiscategorizationCreateParams,
+  Miscategorizations,
+} from './miscategorizations';
 export { SinkholeItem, SinkholeListParams, SinkholeItemsSinglePage, Sinkholes } from './sinkholes';
 export { Whois, WhoisGetParams } from './whois';

@@ -4,7 +4,6 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as RayIDAPI from 'cloudflare/resources/logs/rayid';
-import * as Shared from 'cloudflare/resources/shared';
 
 export class RayID extends APIResource {
   /**
@@ -16,24 +15,26 @@ export class RayID extends APIResource {
     rayIdentifier: string,
     query?: RayIDGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f>;
+  ): Core.APIPromise<RayIDGetResponse>;
   get(
     zoneIdentifier: string,
     rayIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f>;
+  ): Core.APIPromise<RayIDGetResponse>;
   get(
     zoneIdentifier: string,
     rayIdentifier: string,
     query: RayIDGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f> {
+  ): Core.APIPromise<RayIDGetResponse> {
     if (isRequestOptions(query)) {
       return this.get(zoneIdentifier, rayIdentifier, {}, query);
     }
     return this._client.get(`/zones/${zoneIdentifier}/logs/rayids/${rayIdentifier}`, { query, ...options });
   }
 }
+
+export type RayIDGetResponse = string | unknown;
 
 export interface RayIDGetParams {
   /**
@@ -62,5 +63,6 @@ export interface RayIDGetParams {
 }
 
 export namespace RayID {
+  export import RayIDGetResponse = RayIDAPI.RayIDGetResponse;
   export import RayIDGetParams = RayIDAPI.RayIDGetParams;
 }

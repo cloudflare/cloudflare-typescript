@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ConfigAPI from 'cloudflare/resources/logs/control/cmb/config';
-import * as Shared from 'cloudflare/resources/shared';
 
 export class Config extends APIResource {
   /**
@@ -25,13 +24,13 @@ export class Config extends APIResource {
   delete(
     params: ConfigDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef65e3c8c1a9c4638ec25cdbbaca7165c1 | null> {
+  ): Core.APIPromise<ConfigDeleteResponse | null> {
     const { account_id, body } = params;
     return (
       this._client.delete(`/accounts/${account_id}/logs/control/cmb/config`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef65e3c8c1a9c4638ec25cdbbaca7165c1 | null }>
+      }) as Core.APIPromise<{ result: ConfigDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -54,6 +53,8 @@ export interface CmbConfig {
    */
   regions?: string;
 }
+
+export type ConfigDeleteResponse = unknown | Array<unknown> | string;
 
 export interface ConfigCreateParams {
   /**
@@ -88,6 +89,7 @@ export interface ConfigGetParams {
 
 export namespace Config {
   export import CmbConfig = ConfigAPI.CmbConfig;
+  export import ConfigDeleteResponse = ConfigAPI.ConfigDeleteResponse;
   export import ConfigCreateParams = ConfigAPI.ConfigCreateParams;
   export import ConfigDeleteParams = ConfigAPI.ConfigDeleteParams;
   export import ConfigGetParams = ConfigAPI.ConfigGetParams;

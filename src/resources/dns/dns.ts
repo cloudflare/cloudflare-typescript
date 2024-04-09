@@ -130,7 +130,7 @@ export namespace DNS {
   export import Firewall = FirewallAPI.Firewall;
   export import FirewallIPsItem = FirewallAPI.FirewallIPsItem;
   export import UnnamedSchemaRef7a0f93d9e1afc3221d2a57b7bab16955 = FirewallAPI.UnnamedSchemaRef7a0f93d9e1afc3221d2a57b7bab16955;
-  export import UpstreamIPsItems = FirewallAPI.UpstreamIPsItems;
+  export import UpstreamIPs = FirewallAPI.UpstreamIPs;
   export import FirewallDeleteResponse = FirewallAPI.FirewallDeleteResponse;
   export import FirewallsV4PagePaginationArray = FirewallAPI.FirewallsV4PagePaginationArray;
   export import FirewallCreateParams = FirewallAPI.FirewallCreateParams;
