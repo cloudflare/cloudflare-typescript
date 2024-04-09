@@ -1,6 +1,14 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export { AseGetResponse, AseGetParams, Ases } from './ases/index';
+export {
+  Browser,
+  TopBrowserFamiliesResponse,
+  TopBrowsersResponse,
+  TopBrowserFamiliesParams,
+  TopBrowsersParams,
+  Top,
+} from './top';
 export { HTTP } from './http';
 export { LocationGetResponse, LocationGetParams, Locations } from './locations/index';
 export {
@@ -41,10 +49,3 @@ export {
   TimeseriesGroupTLSVersionParams,
   TimeseriesGroups,
 } from './timeseries-groups';
-export {
-  TopBrowserFamiliesResponse,
-  TopBrowsersResponse,
-  TopBrowserFamiliesParams,
-  TopBrowsersParams,
-  Top,
-} from './top';

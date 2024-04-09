@@ -31,6 +31,7 @@ export namespace Logpush {
   export import JobDeleteParams = JobsAPI.JobDeleteParams;
   export import JobGetParams = JobsAPI.JobGetParams;
   export import Ownership = OwnershipAPI.Ownership;
+  export import OwnershipValidation = OwnershipAPI.OwnershipValidation;
   export import OwnershipCreateResponse = OwnershipAPI.OwnershipCreateResponse;
   export import OwnershipCreateParams = OwnershipAPI.OwnershipCreateParams;
   export import OwnershipValidateParams = OwnershipAPI.OwnershipValidateParams;

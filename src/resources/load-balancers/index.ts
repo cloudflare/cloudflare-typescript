@@ -2,13 +2,19 @@
 
 export { LoadBalancers } from './load-balancers';
 export {
+  MonitorCreateResponse,
+  MonitorUpdateResponse,
+  MonitorListResponse,
   MonitorDeleteResponse,
+  MonitorEditResponse,
+  MonitorGetResponse,
   MonitorCreateParams,
   MonitorUpdateParams,
   MonitorListParams,
   MonitorDeleteParams,
   MonitorEditParams,
   MonitorGetParams,
+  MonitorListResponsesSinglePage,
   Monitors,
 } from './monitors/index';
 export {
@@ -20,7 +26,6 @@ export {
   PoolDeleteParams,
   PoolEditParams,
   PoolGetParams,
-  PoolsSinglePage,
   Pools,
 } from './pools/index';
 export { PreviewGetParams, Previews } from './previews';

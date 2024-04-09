@@ -5,7 +5,7 @@ import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import { type Response } from 'cloudflare/_shims/index';
 import * as ScansAPI from 'cloudflare/resources/url-scanner/scans';
-import * as Shared from 'cloudflare/resources/shared';
+import * as TopAPI from 'cloudflare/resources/radar/http/top';
 
 export class Scans extends APIResource {
   /**
@@ -314,7 +314,7 @@ export namespace ScanGetResponse {
 
       domain: string;
 
-      headers: Array<Shared.UnnamedSchemaRef2173d81a0b2d332c9e2ac46900fe8bb9>;
+      headers: Array<TopAPI.Browser>;
 
       ip: string;
 
@@ -739,7 +739,7 @@ export namespace ScanHarResponse {
         export interface Request {
           bodySize: number;
 
-          headers: Array<Shared.UnnamedSchemaRef2173d81a0b2d332c9e2ac46900fe8bb9>;
+          headers: Array<TopAPI.Browser>;
 
           headersSize: number;
 
@@ -757,7 +757,7 @@ export namespace ScanHarResponse {
 
           content: Response.Content;
 
-          headers: Array<Shared.UnnamedSchemaRef2173d81a0b2d332c9e2ac46900fe8bb9>;
+          headers: Array<TopAPI.Browser>;
 
           headersSize: number;
 

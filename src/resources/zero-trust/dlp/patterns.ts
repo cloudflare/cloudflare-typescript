@@ -3,7 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as PatternsAPI from 'cloudflare/resources/zero-trust/dlp/patterns';
-import * as Shared from 'cloudflare/resources/shared';
+import * as OwnershipAPI from 'cloudflare/resources/logpush/ownership';
 
 export class Patterns extends APIResource {
   /**
@@ -15,13 +15,13 @@ export class Patterns extends APIResource {
   validate(
     params: PatternValidateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRefCc2ac1a037e5d6702fc77b3bcb527854 | null> {
+  ): Core.APIPromise<OwnershipAPI.OwnershipValidation | null> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/dlp/patterns/validate`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRefCc2ac1a037e5d6702fc77b3bcb527854 | null }>
+      }) as Core.APIPromise<{ result: OwnershipAPI.OwnershipValidation | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }

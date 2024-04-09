@@ -29,9 +29,8 @@ export {
   RulesSinglePage,
   Rules,
 } from './rules';
-export { StatusGetResponse, StatusGetParams, Statuses } from './statuses';
 export {
-  UnnamedSchemaRef59ecd22a3d62548e441274daec82ee7a,
+  Setting,
   SettingUpdateResponse,
   SettingEditResponse,
   SettingGetResponse,
@@ -40,4 +39,5 @@ export {
   SettingGetParams,
   Settings,
 } from './settings';
+export { StatusGetResponse, StatusGetParams, Statuses } from './statuses';
 export { WaitingRooms } from './waiting-rooms';

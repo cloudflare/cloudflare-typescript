@@ -3,8 +3,12 @@
 export { Analytics, AnalyticsSinglePage } from './analytics/index';
 export { LoadBalancers } from './load-balancers';
 export {
-  Monitor,
+  MonitorCreateResponse,
+  MonitorUpdateResponse,
+  MonitorListResponse,
   MonitorDeleteResponse,
+  MonitorEditResponse,
+  MonitorGetResponse,
   MonitorPreviewResponse,
   MonitorReferencesResponse,
   MonitorCreateParams,
@@ -12,10 +16,11 @@ export {
   MonitorDeleteParams,
   MonitorEditParams,
   MonitorPreviewParams,
-  MonitorsSinglePage,
+  MonitorListResponsesSinglePage,
   Monitors,
 } from './monitors';
 export {
+  Pool,
   PoolDeleteResponse,
   PoolHealthResponse,
   PoolPreviewResponse,
@@ -26,6 +31,7 @@ export {
   PoolDeleteParams,
   PoolEditParams,
   PoolPreviewParams,
+  PoolsSinglePage,
   Pools,
 } from './pools';
 export { Preview, PreviewResource } from './preview';
