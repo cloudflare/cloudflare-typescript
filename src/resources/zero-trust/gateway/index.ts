@@ -66,13 +66,17 @@ export {
 export {
   Lists,
   ListCreateResponse,
+  ListUpdateResponse,
+  ListListResponse,
+  ListEditResponse,
+  ListGetResponse,
   ListCreateParams,
   ListUpdateParams,
   ListListParams,
   ListDeleteParams,
   ListEditParams,
   ListGetParams,
-  ListsSinglePage,
+  ListListResponsesSinglePage,
 } from './lists/index';
 export {
   Location,

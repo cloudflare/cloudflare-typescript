@@ -25,22 +25,33 @@ export class Lists extends APIResource {
   /**
    * Updates a configured Zero Trust list.
    */
-  update(listId: string, params: ListUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Lists> {
+  update(
+    listId: string,
+    params: ListUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ListUpdateResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/gateway/lists/${listId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: Lists }>
+      }) as Core.APIPromise<{ result: ListUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches all Zero Trust lists for an account.
    */
-  list(params: ListListParams, options?: Core.RequestOptions): Core.PagePromise<ListsSinglePage, Lists> {
+  list(
+    params: ListListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ListListResponsesSinglePage, ListListResponse> {
     const { account_id } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/gateway/lists`, ListsSinglePage, options);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/gateway/lists`,
+      ListListResponsesSinglePage,
+      options,
+    );
   }
 
   /**
@@ -63,32 +74,80 @@ export class Lists extends APIResource {
   /**
    * Appends or removes an item from a configured Zero Trust list.
    */
-  edit(listId: string, params: ListEditParams, options?: Core.RequestOptions): Core.APIPromise<Lists> {
+  edit(
+    listId: string,
+    params: ListEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ListEditResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/gateway/lists/${listId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: Lists }>
+      }) as Core.APIPromise<{ result: ListEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches a single Zero Trust list.
    */
-  get(listId: string, params: ListGetParams, options?: Core.RequestOptions): Core.APIPromise<Lists> {
+  get(
+    listId: string,
+    params: ListGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ListGetResponse> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/gateway/lists/${listId}`, options) as Core.APIPromise<{
-        result: Lists;
+        result: ListGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class ListsSinglePage extends SinglePage<Lists> {}
+export class ListListResponsesSinglePage extends SinglePage<ListListResponse> {}
 
 export interface Lists {
+  created_at?: string;
+
+  /**
+   * The value of the item in a list.
+   */
+  value?: string;
+}
+
+export interface ListCreateResponse {
+  /**
+   * API Resource UUID tag.
+   */
+  id?: string;
+
+  created_at?: string;
+
+  /**
+   * The description of the list.
+   */
+  description?: string;
+
+  /**
+   * The items in the list.
+   */
+  items?: Array<Lists>;
+
+  /**
+   * The name of the list.
+   */
+  name?: string;
+
+  /**
+   * The type of list.
+   */
+  type?: 'SERIAL' | 'URL' | 'DOMAIN' | 'EMAIL' | 'IP';
+
+  updated_at?: string;
+}
+
+export interface ListUpdateResponse {
   /**
    * API Resource UUID tag.
    */
@@ -119,11 +178,16 @@ export interface Lists {
   updated_at?: string;
 }
 
-export interface ListCreateResponse {
+export interface ListListResponse {
   /**
    * API Resource UUID tag.
    */
   id?: string;
+
+  /**
+   * The number of items in the list.
+   */
+  count?: number;
 
   created_at?: string;
 
@@ -133,9 +197,66 @@ export interface ListCreateResponse {
   description?: string;
 
   /**
-   * The items in the list.
+   * The name of the list.
    */
-  items?: Array<ItemsAPI.Lists>;
+  name?: string;
+
+  /**
+   * The type of list.
+   */
+  type?: 'SERIAL' | 'URL' | 'DOMAIN' | 'EMAIL' | 'IP';
+
+  updated_at?: string;
+}
+
+export interface ListEditResponse {
+  /**
+   * API Resource UUID tag.
+   */
+  id?: string;
+
+  /**
+   * The number of items in the list.
+   */
+  count?: number;
+
+  created_at?: string;
+
+  /**
+   * The description of the list.
+   */
+  description?: string;
+
+  /**
+   * The name of the list.
+   */
+  name?: string;
+
+  /**
+   * The type of list.
+   */
+  type?: 'SERIAL' | 'URL' | 'DOMAIN' | 'EMAIL' | 'IP';
+
+  updated_at?: string;
+}
+
+export interface ListGetResponse {
+  /**
+   * API Resource UUID tag.
+   */
+  id?: string;
+
+  /**
+   * The number of items in the list.
+   */
+  count?: number;
+
+  created_at?: string;
+
+  /**
+   * The description of the list.
+   */
+  description?: string;
 
   /**
    * The name of the list.
@@ -174,7 +295,7 @@ export interface ListCreateParams {
   /**
    * Body param: The items in the list.
    */
-  items?: Array<ItemsAPI.Lists>;
+  items?: Array<Lists>;
 }
 
 export interface ListUpdateParams {
@@ -219,7 +340,7 @@ export interface ListEditParams {
   /**
    * Body param: The items in the list.
    */
-  append?: Array<ItemsAPI.Lists>;
+  append?: Array<Lists>;
 
   /**
    * Body param: A list of the item values you want to remove.
@@ -234,7 +355,11 @@ export interface ListGetParams {
 export namespace Lists {
   export import Lists = ListsAPI.Lists;
   export import ListCreateResponse = ListsAPI.ListCreateResponse;
-  export import ListsSinglePage = ListsAPI.ListsSinglePage;
+  export import ListUpdateResponse = ListsAPI.ListUpdateResponse;
+  export import ListListResponse = ListsAPI.ListListResponse;
+  export import ListEditResponse = ListsAPI.ListEditResponse;
+  export import ListGetResponse = ListsAPI.ListGetResponse;
+  export import ListListResponsesSinglePage = ListsAPI.ListListResponsesSinglePage;
   export import ListCreateParams = ListsAPI.ListCreateParams;
   export import ListUpdateParams = ListsAPI.ListUpdateParams;
   export import ListListParams = ListsAPI.ListListParams;

@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ItemsAPI from 'cloudflare/resources/zero-trust/gateway/lists/items';
+import * as ListsAPI from 'cloudflare/resources/zero-trust/gateway/lists/lists';
 import { SinglePage } from 'cloudflare/pagination';
 
 export class Items extends APIResource {
@@ -25,26 +26,16 @@ export class Items extends APIResource {
 
 export class ItemListResponsesSinglePage extends SinglePage<ItemListResponse> {}
 
-export interface Lists {
-  created_at?: string;
-
-  /**
-   * The value of the item in a list.
-   */
-  value?: string;
-}
-
 /**
  * The items in the list.
  */
-export type ItemListResponse = Array<Lists>;
+export type ItemListResponse = Array<ListsAPI.Lists>;
 
 export interface ItemListParams {
   account_id: string;
 }
 
 export namespace Items {
-  export import Lists = ItemsAPI.Lists;
   export import ItemListResponse = ItemsAPI.ItemListResponse;
   export import ItemListResponsesSinglePage = ItemsAPI.ItemListResponsesSinglePage;
   export import ItemListParams = ItemsAPI.ItemListParams;
