@@ -14,6 +14,9 @@ export {
 } from './routes/index';
 export {
   VirtualNetwork,
+  VirtualNetworkCreateResponse,
+  VirtualNetworkDeleteResponse,
+  VirtualNetworkEditResponse,
   VirtualNetworkCreateParams,
   VirtualNetworkListParams,
   VirtualNetworkDeleteParams,

@@ -43,13 +43,13 @@ export class Watermarks extends APIResource {
     identifier: string,
     params: WatermarkDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef602dd5f63eab958d53da61434dec08f0> {
+  ): Core.APIPromise<WatermarkDeleteResponse> {
     const { account_id, body } = params;
     return (
       this._client.delete(`/accounts/${account_id}/stream/watermarks/${identifier}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef602dd5f63eab958d53da61434dec08f0 }>
+      }) as Core.APIPromise<{ result: WatermarkDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -140,6 +140,8 @@ export interface Watermaks {
   width?: number;
 }
 
+export type WatermarkDeleteResponse = unknown | string;
+
 export interface WatermarkCreateParams {
   /**
    * Path param: The account identifier tag.
@@ -215,6 +217,7 @@ export interface WatermarkGetParams {
 
 export namespace Watermarks {
   export import Watermaks = WatermarksAPI.Watermaks;
+  export import WatermarkDeleteResponse = WatermarksAPI.WatermarkDeleteResponse;
   export import WatermaksSinglePage = WatermarksAPI.WatermaksSinglePage;
   export import WatermarkCreateParams = WatermarksAPI.WatermarkCreateParams;
   export import WatermarkListParams = WatermarksAPI.WatermarkListParams;

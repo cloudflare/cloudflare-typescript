@@ -21,6 +21,7 @@ export namespace Addressing {
   export import AddressMaps = AddressMapsAPI.AddressMaps;
   export import AddressMap = AddressMapsAPI.AddressMap;
   export import AddressMapCreateResponse = AddressMapsAPI.AddressMapCreateResponse;
+  export import AddressMapDeleteResponse = AddressMapsAPI.AddressMapDeleteResponse;
   export import AddressMapGetResponse = AddressMapsAPI.AddressMapGetResponse;
   export import AddressMapsSinglePage = AddressMapsAPI.AddressMapsSinglePage;
   export import AddressMapCreateParams = AddressMapsAPI.AddressMapCreateParams;
@@ -34,6 +35,7 @@ export namespace Addressing {
   export import Prefixes = PrefixesAPI.Prefixes;
   export import Prefix = PrefixesAPI.Prefix;
   export import UnnamedSchemaRefE358666e049bf8f9281c0a4f89b5fe46 = PrefixesAPI.UnnamedSchemaRefE358666e049bf8f9281c0a4f89b5fe46;
+  export import PrefixDeleteResponse = PrefixesAPI.PrefixDeleteResponse;
   export import PrefixesSinglePage = PrefixesAPI.PrefixesSinglePage;
   export import PrefixCreateParams = PrefixesAPI.PrefixCreateParams;
   export import PrefixListParams = PrefixesAPI.PrefixListParams;

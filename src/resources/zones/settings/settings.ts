@@ -105,8 +105,8 @@ export class Settings extends APIResource {
   );
   originErrorPagePassThru: OriginErrorPagePassThruAPI.OriginErrorPagePassThruResource =
     new OriginErrorPagePassThruAPI.OriginErrorPagePassThruResource(this._client);
-  originMaxHTTPVersion: OriginMaxHTTPVersionAPI.OriginMaxHTTPVersion =
-    new OriginMaxHTTPVersionAPI.OriginMaxHTTPVersion(this._client);
+  originMaxHTTPVersion: OriginMaxHTTPVersionAPI.OriginMaxHTTPVersionResource =
+    new OriginMaxHTTPVersionAPI.OriginMaxHTTPVersionResource(this._client);
   polish: PolishAPI.PolishResource = new PolishAPI.PolishResource(this._client);
   prefetchPreload: PrefetchPreloadAPI.PrefetchPreloadResource =
     new PrefetchPreloadAPI.PrefetchPreloadResource(this._client);
@@ -260,8 +260,8 @@ export namespace Settings {
   export import OriginErrorPagePassThru = OriginErrorPagePassThruAPI.OriginErrorPagePassThru;
   export import OriginErrorPagePassThruEditParams = OriginErrorPagePassThruAPI.OriginErrorPagePassThruEditParams;
   export import OriginErrorPagePassThruGetParams = OriginErrorPagePassThruAPI.OriginErrorPagePassThruGetParams;
+  export import OriginMaxHTTPVersionResource = OriginMaxHTTPVersionAPI.OriginMaxHTTPVersionResource;
   export import OriginMaxHTTPVersion = OriginMaxHTTPVersionAPI.OriginMaxHTTPVersion;
-  export import UnnamedSchemaRefB234e6a28c1a1c7c29213787c0621eaa = OriginMaxHTTPVersionAPI.UnnamedSchemaRefB234e6a28c1a1c7c29213787c0621eaa;
   export import OriginMaxHTTPVersionEditResponse = OriginMaxHTTPVersionAPI.OriginMaxHTTPVersionEditResponse;
   export import OriginMaxHTTPVersionGetResponse = OriginMaxHTTPVersionAPI.OriginMaxHTTPVersionGetResponse;
   export import OriginMaxHTTPVersionEditParams = OriginMaxHTTPVersionAPI.OriginMaxHTTPVersionEditParams;

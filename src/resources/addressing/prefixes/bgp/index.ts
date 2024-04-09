@@ -11,6 +11,7 @@ export {
 } from './prefixes';
 export {
   ServiceBinding,
+  BindingDeleteResponse,
   BindingCreateParams,
   BindingListParams,
   BindingDeleteParams,

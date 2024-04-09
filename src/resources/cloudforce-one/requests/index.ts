@@ -6,6 +6,7 @@ export {
   Quota,
   RequestConstants,
   RequestTypes,
+  RequestDeleteResponse,
   RequestCreateParams,
   RequestUpdateParams,
   RequestListParams,
@@ -16,12 +17,14 @@ export {
   LabelItem,
   Priority,
   PriorityEdit,
+  PriorityDeleteResponse,
   PriorityCreateParams,
   PriorityUpdateParams,
   PriorityResource,
 } from './priority';
 export {
   Message,
+  MessageDeleteResponse,
   MessageGetResponse,
   MessageCreateParams,
   MessageUpdateParams,

@@ -4,7 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as OriginMaxHTTPVersionAPI from 'cloudflare/resources/zones/settings/origin-max-http-version';
 
-export class OriginMaxHTTPVersion extends APIResource {
+export class OriginMaxHTTPVersionResource extends APIResource {
   /**
    * Origin Max HTTP Setting Version sets the highest HTTP version Cloudflare will
    * attempt to use with your origin. This setting allows Cloudflare to make HTTP/2
@@ -50,7 +50,7 @@ export class OriginMaxHTTPVersion extends APIResource {
 /**
  * Value of the zone setting.
  */
-export type UnnamedSchemaRefB234e6a28c1a1c7c29213787c0621eaa = 'origin_max_http_version';
+export type OriginMaxHTTPVersion = 'origin_max_http_version';
 
 /**
  * Origin Max HTTP Setting Version sets the highest HTTP version Cloudflare will
@@ -64,7 +64,7 @@ export interface OriginMaxHTTPVersionEditResponse {
   /**
    * Value of the zone setting.
    */
-  id: UnnamedSchemaRefB234e6a28c1a1c7c29213787c0621eaa;
+  id: OriginMaxHTTPVersion;
 
   /**
    * last time this setting was modified.
@@ -89,7 +89,7 @@ export interface OriginMaxHTTPVersionGetResponse {
   /**
    * Value of the zone setting.
    */
-  id: UnnamedSchemaRefB234e6a28c1a1c7c29213787c0621eaa;
+  id: OriginMaxHTTPVersion;
 
   /**
    * last time this setting was modified.
@@ -121,8 +121,8 @@ export interface OriginMaxHTTPVersionGetParams {
   zone_id: string;
 }
 
-export namespace OriginMaxHTTPVersion {
-  export import UnnamedSchemaRefB234e6a28c1a1c7c29213787c0621eaa = OriginMaxHTTPVersionAPI.UnnamedSchemaRefB234e6a28c1a1c7c29213787c0621eaa;
+export namespace OriginMaxHTTPVersionResource {
+  export import OriginMaxHTTPVersion = OriginMaxHTTPVersionAPI.OriginMaxHTTPVersion;
   export import OriginMaxHTTPVersionEditResponse = OriginMaxHTTPVersionAPI.OriginMaxHTTPVersionEditResponse;
   export import OriginMaxHTTPVersionGetResponse = OriginMaxHTTPVersionAPI.OriginMaxHTTPVersionGetResponse;
   export import OriginMaxHTTPVersionEditParams = OriginMaxHTTPVersionAPI.OriginMaxHTTPVersionEditParams;

@@ -4,7 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as RegionalTieredCacheAPI from 'cloudflare/resources/cache/regional-tiered-cache';
 
-export class RegionalTieredCache extends APIResource {
+export class RegionalTieredCacheResource extends APIResource {
   /**
    * Instructs Cloudflare to check a regional hub data center on the way to your
    * upper tier. This can help improve performance for smart and custom tiered cache
@@ -44,7 +44,7 @@ export class RegionalTieredCache extends APIResource {
 /**
  * ID of the zone setting.
  */
-export type UnnamedSchemaRef6535d2df7d4d089d21166bd140651307 = 'tc_regional';
+export type RegionalTieredCache = 'tc_regional';
 
 /**
  * Instructs Cloudflare to check a regional hub data center on the way to your
@@ -55,7 +55,7 @@ export interface RegionalTieredCacheEditResponse {
   /**
    * ID of the zone setting.
    */
-  id: UnnamedSchemaRef6535d2df7d4d089d21166bd140651307;
+  id: RegionalTieredCache;
 
   /**
    * last time this setting was modified.
@@ -80,7 +80,7 @@ export namespace RegionalTieredCacheEditResponse {
     /**
      * ID of the zone setting.
      */
-    id: RegionalTieredCacheAPI.UnnamedSchemaRef6535d2df7d4d089d21166bd140651307;
+    id: RegionalTieredCacheAPI.RegionalTieredCache;
 
     /**
      * last time this setting was modified.
@@ -98,7 +98,7 @@ export interface RegionalTieredCacheGetResponse {
   /**
    * ID of the zone setting.
    */
-  id: UnnamedSchemaRef6535d2df7d4d089d21166bd140651307;
+  id: RegionalTieredCache;
 
   /**
    * last time this setting was modified.
@@ -123,7 +123,7 @@ export namespace RegionalTieredCacheGetResponse {
     /**
      * ID of the zone setting.
      */
-    id: RegionalTieredCacheAPI.UnnamedSchemaRef6535d2df7d4d089d21166bd140651307;
+    id: RegionalTieredCacheAPI.RegionalTieredCache;
 
     /**
      * last time this setting was modified.
@@ -151,8 +151,8 @@ export interface RegionalTieredCacheGetParams {
   zone_id: string;
 }
 
-export namespace RegionalTieredCache {
-  export import UnnamedSchemaRef6535d2df7d4d089d21166bd140651307 = RegionalTieredCacheAPI.UnnamedSchemaRef6535d2df7d4d089d21166bd140651307;
+export namespace RegionalTieredCacheResource {
+  export import RegionalTieredCache = RegionalTieredCacheAPI.RegionalTieredCache;
   export import RegionalTieredCacheEditResponse = RegionalTieredCacheAPI.RegionalTieredCacheEditResponse;
   export import RegionalTieredCacheGetResponse = RegionalTieredCacheAPI.RegionalTieredCacheGetResponse;
   export import RegionalTieredCacheEditParams = RegionalTieredCacheAPI.RegionalTieredCacheEditParams;

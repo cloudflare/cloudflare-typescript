@@ -392,6 +392,8 @@ export namespace Zones {
   export import DNSSettingGetParams = DNSSettingsAPI.DNSSettingGetParams;
   export import Settings = SettingsAPI.Settings;
   export import CustomNameservers = CustomNameserversAPI.CustomNameservers;
+  export import CustomNameserverUpdateResponse = CustomNameserversAPI.CustomNameserverUpdateResponse;
+  export import CustomNameserverGetResponse = CustomNameserversAPI.CustomNameserverGetResponse;
   export import CustomNameserverUpdateParams = CustomNameserversAPI.CustomNameserverUpdateParams;
   export import CustomNameserverGetParams = CustomNameserversAPI.CustomNameserverGetParams;
   export import Holds = HoldsAPI.Holds;

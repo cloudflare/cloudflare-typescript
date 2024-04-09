@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as PriorityAPI from 'cloudflare/resources/cloudforce-one/requests/priority';
-import * as Shared from 'cloudflare/resources/shared';
 import * as RequestsAPI from 'cloudflare/resources/cloudforce-one/requests/requests';
 
 export class PriorityResource extends APIResource {
@@ -47,12 +46,12 @@ export class PriorityResource extends APIResource {
     accountIdentifier: string,
     priorityIdentifer: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRefEc4d85c3d1bcc6b3b7e99c199ae99846> {
+  ): Core.APIPromise<PriorityDeleteResponse> {
     return (
       this._client.delete(
         `/accounts/${accountIdentifier}/cloudforce-one/requests/priority/${priorityIdentifer}`,
         options,
-      ) as Core.APIPromise<{ result: Shared.UnnamedSchemaRefEc4d85c3d1bcc6b3b7e99c199ae99846 }>
+      ) as Core.APIPromise<{ result: PriorityDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -146,6 +145,8 @@ export interface PriorityEdit {
   tlp: 'clear' | 'amber' | 'amber-strict' | 'green' | 'red';
 }
 
+export type PriorityDeleteResponse = unknown | Array<unknown> | string;
+
 export interface PriorityCreateParams {
   /**
    * List of labels
@@ -194,6 +195,7 @@ export namespace PriorityResource {
   export import LabelItem = PriorityAPI.LabelItem;
   export import Priority = PriorityAPI.Priority;
   export import PriorityEdit = PriorityAPI.PriorityEdit;
+  export import PriorityDeleteResponse = PriorityAPI.PriorityDeleteResponse;
   export import PriorityCreateParams = PriorityAPI.PriorityCreateParams;
   export import PriorityUpdateParams = PriorityAPI.PriorityUpdateParams;
 }

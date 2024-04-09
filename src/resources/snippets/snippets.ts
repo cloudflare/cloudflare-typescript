@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
-import * as Shared from 'cloudflare/resources/shared';
 import * as ContentAPI from 'cloudflare/resources/snippets/content';
 import * as RulesAPI from 'cloudflare/resources/snippets/rules';
 import { multipartFormRequestOptions } from 'cloudflare/core';
@@ -58,10 +57,10 @@ export class Snippets extends APIResource {
     zoneIdentifier: string,
     snippetName: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRefEc4d85c3d1bcc6b3b7e99c199ae99846> {
+  ): Core.APIPromise<SnippetDeleteResponse> {
     return (
       this._client.delete(`/zones/${zoneIdentifier}/snippets/${snippetName}`, options) as Core.APIPromise<{
-        result: Shared.UnnamedSchemaRefEc4d85c3d1bcc6b3b7e99c199ae99846;
+        result: SnippetDeleteResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -99,6 +98,8 @@ export interface Snippet {
    */
   snippet_name?: string;
 }
+
+export type SnippetDeleteResponse = unknown | Array<unknown> | string;
 
 export interface SnippetUpdateParams {
   /**

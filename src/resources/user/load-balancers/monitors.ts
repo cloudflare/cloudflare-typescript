@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as MonitorsAPI from 'cloudflare/resources/user/load-balancers/monitors';
-import * as Shared from 'cloudflare/resources/shared';
 import { SinglePage } from 'cloudflare/pagination';
 
 export class Monitors extends APIResource {
@@ -239,7 +238,7 @@ export type MonitorReferencesResponse = Array<MonitorReferencesResponse.MonitorR
 
 export namespace MonitorReferencesResponse {
   export interface MonitorReferencesResponseItem {
-    reference_type?: Shared.UnnamedSchemaRefD8600eb4758b3ae35607a0327bcd691b;
+    reference_type?: '*' | 'referral' | 'referrer';
 
     resource_id?: string;
 

@@ -14,7 +14,7 @@ export namespace WAF {
   export import Override = OverridesAPI.Override;
   export import RewriteAction = OverridesAPI.RewriteAction;
   export import Rules = OverridesAPI.Rules;
-  export import URLsItems = OverridesAPI.URLsItems;
+  export import URLs = OverridesAPI.URLs;
   export import OverrideDeleteResponse = OverridesAPI.OverrideDeleteResponse;
   export import OverridesV4PagePaginationArray = OverridesAPI.OverridesV4PagePaginationArray;
   export import OverrideCreateParams = OverridesAPI.OverrideCreateParams;

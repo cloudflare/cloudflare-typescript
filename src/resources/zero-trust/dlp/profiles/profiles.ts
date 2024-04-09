@@ -58,6 +58,16 @@ export interface ContextAwareness {
   skip: SkipConfiguration;
 }
 
+/**
+ * The type of the profile.
+ */
+export type CustomProfile = 'custom';
+
+/**
+ * The type of the profile.
+ */
+export type PredefinedProfile = 'predefined';
+
 export type Profile =
   | PredefinedAPI.PredefinedProfile
   | CustomAPI.CustomProfile
@@ -136,16 +146,6 @@ export interface SkipConfiguration {
    */
   files: boolean;
 }
-
-/**
- * The type of the profile.
- */
-export type UnnamedSchemaRefC105db122868c71badeac3b4822ad6b1 = 'custom';
-
-/**
- * The type of the profile.
- */
-export type UnnamedSchemaRefE38bfdf1acf5a4bfada6779c79528bc0 = 'predefined';
 
 export type ProfileGetResponse =
   | PredefinedAPI.PredefinedProfile
@@ -232,24 +232,23 @@ export interface ProfileGetParams {
 
 export namespace Profiles {
   export import ContextAwareness = ProfilesAPI.ContextAwareness;
+  export import CustomProfile = ProfilesAPI.CustomProfile;
+  export import PredefinedProfile = ProfilesAPI.PredefinedProfile;
   export import Profile = ProfilesAPI.Profile;
   export import SkipConfiguration = ProfilesAPI.SkipConfiguration;
-  export import UnnamedSchemaRefC105db122868c71badeac3b4822ad6b1 = ProfilesAPI.UnnamedSchemaRefC105db122868c71badeac3b4822ad6b1;
-  export import UnnamedSchemaRefE38bfdf1acf5a4bfada6779c79528bc0 = ProfilesAPI.UnnamedSchemaRefE38bfdf1acf5a4bfada6779c79528bc0;
   export import ProfileGetResponse = ProfilesAPI.ProfileGetResponse;
   export import ProfilesSinglePage = ProfilesAPI.ProfilesSinglePage;
   export import ProfileListParams = ProfilesAPI.ProfileListParams;
   export import ProfileGetParams = ProfilesAPI.ProfileGetParams;
   export import Custom = CustomAPI.Custom;
-  export import CustomProfile = CustomAPI.CustomProfile;
   export import Pattern = CustomAPI.Pattern;
   export import CustomCreateResponse = CustomAPI.CustomCreateResponse;
+  export import CustomDeleteResponse = CustomAPI.CustomDeleteResponse;
   export import CustomCreateParams = CustomAPI.CustomCreateParams;
   export import CustomUpdateParams = CustomAPI.CustomUpdateParams;
   export import CustomDeleteParams = CustomAPI.CustomDeleteParams;
   export import CustomGetParams = CustomAPI.CustomGetParams;
   export import Predefined = PredefinedAPI.Predefined;
-  export import PredefinedProfile = PredefinedAPI.PredefinedProfile;
   export import PredefinedUpdateParams = PredefinedAPI.PredefinedUpdateParams;
   export import PredefinedGetParams = PredefinedAPI.PredefinedGetParams;
 }

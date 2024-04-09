@@ -58,7 +58,7 @@ export type AccessRule =
   | GitHubOrganizationRule
   | GsuiteGroupRule
   | OktaGroupRule
-  | SamlGroupRule
+  | SAMLGroupRule
   | ServiceTokenRule
   | AnyValidServiceTokenRule
   | ExternalEvaluationRule
@@ -96,11 +96,11 @@ export namespace AuthenticationMethodRule {
  * Matches an Azure group. Requires an Azure identity provider.
  */
 export interface AzureGroupRule {
-  azureAD: AzureGroupRule.AzureAd;
+  azureAD: AzureGroupRule.AzureAD;
 }
 
 export namespace AzureGroupRule {
-  export interface AzureAd {
+  export interface AzureAD {
     /**
      * The ID of an Azure group.
      */
@@ -331,12 +331,12 @@ export namespace OktaGroupRule {
 /**
  * Matches a SAML group. Requires a SAML identity provider.
  */
-export interface SamlGroupRule {
-  saml: SamlGroupRule.Saml;
+export interface SAMLGroupRule {
+  saml: SAMLGroupRule.SAML;
 }
 
-export namespace SamlGroupRule {
-  export interface Saml {
+export namespace SAMLGroupRule {
+  export interface SAML {
     /**
      * The name of the SAML attribute.
      */
@@ -384,19 +384,19 @@ export namespace Access {
   export import IPListRule = AccessAPI.IPListRule;
   export import IPRule = AccessAPI.IPRule;
   export import OktaGroupRule = AccessAPI.OktaGroupRule;
-  export import SamlGroupRule = AccessAPI.SamlGroupRule;
+  export import SAMLGroupRule = AccessAPI.SAMLGroupRule;
   export import ServiceTokenRule = AccessAPI.ServiceTokenRule;
   export import Applications = ApplicationsAPI.Applications;
-  export import AllowedHeadersItem = ApplicationsAPI.AllowedHeadersItem;
-  export import AllowedIDPsItem = ApplicationsAPI.AllowedIDPsItem;
-  export import AllowedMethodsItem = ApplicationsAPI.AllowedMethodsItem;
-  export import AllowedOriginsItem = ApplicationsAPI.AllowedOriginsItem;
+  export import AllowedHeadersh = ApplicationsAPI.AllowedHeadersh;
+  export import AllowedIdpsh = ApplicationsAPI.AllowedIdpsh;
+  export import AllowedMethodsh = ApplicationsAPI.AllowedMethodsh;
+  export import AllowedOriginsh = ApplicationsAPI.AllowedOriginsh;
   export import AppID = ApplicationsAPI.AppID;
   export import Application = ApplicationsAPI.Application;
   export import CorsHeaders = ApplicationsAPI.CorsHeaders;
-  export import CustomPagesItem = ApplicationsAPI.CustomPagesItem;
-  export import SamlSaasApp = ApplicationsAPI.SamlSaasApp;
-  export import SelfHostedDomainsItem = ApplicationsAPI.SelfHostedDomainsItem;
+  export import CustomPagesh = ApplicationsAPI.CustomPagesh;
+  export import SAMLSaasApp = ApplicationsAPI.SAMLSaasApp;
+  export import SelfHostedDomainsh = ApplicationsAPI.SelfHostedDomainsh;
   export import ApplicationDeleteResponse = ApplicationsAPI.ApplicationDeleteResponse;
   export import ApplicationRevokeTokensResponse = ApplicationsAPI.ApplicationRevokeTokensResponse;
   export import ApplicationsSinglePage = ApplicationsAPI.ApplicationsSinglePage;
@@ -441,6 +441,9 @@ export namespace Access {
   export import BookmarkUpdateParams = BookmarksAPI.BookmarkUpdateParams;
   export import BookmarkDeleteParams = BookmarksAPI.BookmarkDeleteParams;
   export import Keys = KeysAPI.Keys;
+  export import KeyUpdateResponse = KeysAPI.KeyUpdateResponse;
+  export import KeyGetResponse = KeysAPI.KeyGetResponse;
+  export import KeyRotateResponse = KeysAPI.KeyRotateResponse;
   export import KeyUpdateParams = KeysAPI.KeyUpdateParams;
   export import Logs = LogsAPI.Logs;
   export import Users = UsersAPI.Users;

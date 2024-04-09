@@ -7,6 +7,7 @@ export {
   Quota,
   RequestConstants,
   RequestTypes,
+  RequestDeleteResponse,
   RequestCreateParams,
   RequestUpdateParams,
   RequestListParams,

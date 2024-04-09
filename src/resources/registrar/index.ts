@@ -2,6 +2,8 @@
 
 export {
   Domain,
+  DomainUpdateResponse,
+  DomainGetResponse,
   DomainUpdateParams,
   DomainListParams,
   DomainGetParams,

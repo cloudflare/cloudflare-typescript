@@ -3,8 +3,8 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as TunnelsAPI from 'cloudflare/resources/zero-trust/tunnels/tunnels';
-import * as Shared from 'cloudflare/resources/shared';
-import { UnnamedSchemaRef413ab4522f0bb93f63444799121fe2f8sV4PagePaginationArray } from 'cloudflare/resources/shared';
+import * as WARPConnectorAPI from 'cloudflare/resources/warp-connector';
+import { WARPConnectorsV4PagePaginationArray } from 'cloudflare/resources/warp-connector';
 import * as ConfigurationsAPI from 'cloudflare/resources/zero-trust/tunnels/configurations';
 import * as ConnectionsAPI from 'cloudflare/resources/zero-trust/tunnels/connections';
 import * as ConnectorsAPI from 'cloudflare/resources/zero-trust/tunnels/connectors';
@@ -37,16 +37,12 @@ export class Tunnels extends APIResource {
   list(
     params: TunnelListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<
-    UnnamedSchemaRef413ab4522f0bb93f63444799121fe2f8sV4PagePaginationArray,
-    Shared.UnnamedSchemaRef413ab4522f0bb93f63444799121fe2f8
-  > {
+  ): Core.PagePromise<WARPConnectorsV4PagePaginationArray, WARPConnectorAPI.WARPConnector> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/tunnels`,
-      UnnamedSchemaRef413ab4522f0bb93f63444799121fe2f8sV4PagePaginationArray,
-      { query, ...options },
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/tunnels`, WARPConnectorsV4PagePaginationArray, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -73,13 +69,13 @@ export class Tunnels extends APIResource {
     tunnelId: string,
     params: TunnelEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef413ab4522f0bb93f63444799121fe2f8> {
+  ): Core.APIPromise<WARPConnectorAPI.WARPConnector> {
     const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/cfd_tunnel/${tunnelId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef413ab4522f0bb93f63444799121fe2f8 }>
+      }) as Core.APIPromise<{ result: WARPConnectorAPI.WARPConnector }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -428,10 +424,13 @@ export namespace Tunnels {
   export import TunnelEditParams = TunnelsAPI.TunnelEditParams;
   export import TunnelGetParams = TunnelsAPI.TunnelGetParams;
   export import Configurations = ConfigurationsAPI.Configurations;
+  export import ConfigurationUpdateResponse = ConfigurationsAPI.ConfigurationUpdateResponse;
+  export import ConfigurationGetResponse = ConfigurationsAPI.ConfigurationGetResponse;
   export import ConfigurationUpdateParams = ConfigurationsAPI.ConfigurationUpdateParams;
   export import ConfigurationGetParams = ConfigurationsAPI.ConfigurationGetParams;
   export import Connections = ConnectionsAPI.Connections;
   export import Client = ConnectionsAPI.Client;
+  export import ConnectionDeleteResponse = ConnectionsAPI.ConnectionDeleteResponse;
   export import ConnectionGetResponse = ConnectionsAPI.ConnectionGetResponse;
   export import ConnectionDeleteParams = ConnectionsAPI.ConnectionDeleteParams;
   export import ConnectionGetParams = ConnectionsAPI.ConnectionGetParams;
@@ -445,4 +444,4 @@ export namespace Tunnels {
   export import ManagementCreateParams = ManagementAPI.ManagementCreateParams;
 }
 
-export { UnnamedSchemaRef413ab4522f0bb93f63444799121fe2f8sV4PagePaginationArray };
+export { WARPConnectorsV4PagePaginationArray };

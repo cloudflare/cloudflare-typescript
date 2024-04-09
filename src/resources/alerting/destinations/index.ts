@@ -5,6 +5,7 @@ export { EligibleGetResponse, EligibleGetParams, Eligible } from './eligible';
 export {
   Pagerduty,
   PagerdutyCreateResponse,
+  PagerdutyDeleteResponse,
   PagerdutyGetResponse,
   PagerdutyLinkResponse,
   PagerdutyCreateParams,
@@ -17,6 +18,7 @@ export {
   Webhooks,
   WebhookCreateResponse,
   WebhookUpdateResponse,
+  WebhookDeleteResponse,
   WebhookCreateParams,
   WebhookUpdateParams,
   WebhookListParams,

@@ -4,7 +4,9 @@ export {
   Deployment,
   Project,
   Stage,
+  ProjectCreateResponse,
   ProjectDeleteResponse,
+  ProjectEditResponse,
   ProjectPurgeBuildCacheResponse,
   ProjectCreateParams,
   ProjectListParams,
@@ -26,8 +28,11 @@ export {
   Deployments,
 } from './deployments/index';
 export {
+  DomainCreateResponse,
   DomainListResponse,
   DomainDeleteResponse,
+  DomainEditResponse,
+  DomainGetResponse,
   DomainCreateParams,
   DomainListParams,
   DomainDeleteParams,

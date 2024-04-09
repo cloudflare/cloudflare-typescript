@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ReferencesAPI from 'cloudflare/resources/load-balancers/monitors/references';
-import * as Shared from 'cloudflare/resources/shared';
 
 export class References extends APIResource {
   /**
@@ -31,7 +30,7 @@ export type ReferenceGetResponse = Array<ReferenceGetResponse.ReferenceGetRespon
 
 export namespace ReferenceGetResponse {
   export interface ReferenceGetResponseItem {
-    reference_type?: Shared.UnnamedSchemaRefD8600eb4758b3ae35607a0327bcd691b;
+    reference_type?: '*' | 'referral' | 'referrer';
 
     resource_id?: string;
 

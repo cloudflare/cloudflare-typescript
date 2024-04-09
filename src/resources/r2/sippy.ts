@@ -52,6 +52,8 @@ export class SippyResource extends APIResource {
   }
 }
 
+export type Provider = 'r2';
+
 export interface Sippy {
   /**
    * Details about the configured destination bucket
@@ -86,7 +88,7 @@ export namespace Sippy {
      */
     bucket?: string;
 
-    provider?: SippyAPI.UnnamedSchemaRef6430970563db310f19d39aafe3debd27;
+    provider?: SippyAPI.Provider;
   }
 
   /**
@@ -106,8 +108,6 @@ export namespace Sippy {
     region?: string | null;
   }
 }
-
-export type UnnamedSchemaRef6430970563db310f19d39aafe3debd27 = 'r2';
 
 export interface SippyDeleteResponse {
   enabled?: false;
@@ -148,7 +148,7 @@ export namespace SippyUpdateParams {
        */
       accessKeyId?: string;
 
-      provider?: SippyAPI.UnnamedSchemaRef6430970563db310f19d39aafe3debd27;
+      provider?: SippyAPI.Provider;
 
       /**
        * Value of a Cloudflare API token. This is the value labelled "Secret Access Key"
@@ -221,7 +221,7 @@ export namespace SippyUpdateParams {
        */
       accessKeyId?: string;
 
-      provider?: SippyAPI.UnnamedSchemaRef6430970563db310f19d39aafe3debd27;
+      provider?: SippyAPI.Provider;
 
       /**
        * Value of a Cloudflare API token. This is the value labelled "Secret Access Key"
@@ -273,8 +273,8 @@ export interface SippyGetParams {
 }
 
 export namespace SippyResource {
+  export import Provider = SippyAPI.Provider;
   export import Sippy = SippyAPI.Sippy;
-  export import UnnamedSchemaRef6430970563db310f19d39aafe3debd27 = SippyAPI.UnnamedSchemaRef6430970563db310f19d39aafe3debd27;
   export import SippyDeleteResponse = SippyAPI.SippyDeleteResponse;
   export import SippyUpdateParams = SippyAPI.SippyUpdateParams;
   export import SippyDeleteParams = SippyAPI.SippyDeleteParams;

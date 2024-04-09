@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as RequestsAPI from 'cloudflare/resources/cloudforce-one/requests/requests';
-import * as Shared from 'cloudflare/resources/shared';
 import * as MessageAPI from 'cloudflare/resources/cloudforce-one/requests/message';
 import * as PriorityAPI from 'cloudflare/resources/cloudforce-one/requests/priority';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
@@ -71,12 +70,12 @@ export class Requests extends APIResource {
     accountIdentifier: string,
     requestIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRefEc4d85c3d1bcc6b3b7e99c199ae99846> {
+  ): Core.APIPromise<RequestDeleteResponse> {
     return (
       this._client.delete(
         `/accounts/${accountIdentifier}/cloudforce-one/requests/${requestIdentifier}`,
         options,
-      ) as Core.APIPromise<{ result: Shared.UnnamedSchemaRefEc4d85c3d1bcc6b3b7e99c199ae99846 }>
+      ) as Core.APIPromise<{ result: RequestDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -281,6 +280,8 @@ export interface RequestConstants {
 
 export type RequestTypes = Array<string>;
 
+export type RequestDeleteResponse = unknown | Array<unknown> | string;
+
 export interface RequestCreateParams {
   /**
    * Request content
@@ -383,12 +384,14 @@ export namespace Requests {
   export import Quota = RequestsAPI.Quota;
   export import RequestConstants = RequestsAPI.RequestConstants;
   export import RequestTypes = RequestsAPI.RequestTypes;
+  export import RequestDeleteResponse = RequestsAPI.RequestDeleteResponse;
   export import ListItemsV4PagePaginationArray = RequestsAPI.ListItemsV4PagePaginationArray;
   export import RequestCreateParams = RequestsAPI.RequestCreateParams;
   export import RequestUpdateParams = RequestsAPI.RequestUpdateParams;
   export import RequestListParams = RequestsAPI.RequestListParams;
   export import MessageResource = MessageAPI.MessageResource;
   export import Message = MessageAPI.Message;
+  export import MessageDeleteResponse = MessageAPI.MessageDeleteResponse;
   export import MessageGetResponse = MessageAPI.MessageGetResponse;
   export import MessageCreateParams = MessageAPI.MessageCreateParams;
   export import MessageUpdateParams = MessageAPI.MessageUpdateParams;
@@ -397,6 +400,7 @@ export namespace Requests {
   export import LabelItem = PriorityAPI.LabelItem;
   export import Priority = PriorityAPI.Priority;
   export import PriorityEdit = PriorityAPI.PriorityEdit;
+  export import PriorityDeleteResponse = PriorityAPI.PriorityDeleteResponse;
   export import PriorityCreateParams = PriorityAPI.PriorityCreateParams;
   export import PriorityUpdateParams = PriorityAPI.PriorityUpdateParams;
 }

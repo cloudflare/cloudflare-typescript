@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ConfigurationsAPI from 'cloudflare/resources/zero-trust/tunnels/configurations';
-import * as Shared from 'cloudflare/resources/shared';
 
 export class Configurations extends APIResource {
   /**
@@ -13,13 +12,13 @@ export class Configurations extends APIResource {
     tunnelId: string,
     params: ConfigurationUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef65e3c8c1a9c4638ec25cdbbaca7165c1 | null> {
+  ): Core.APIPromise<ConfigurationUpdateResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/cfd_tunnel/${tunnelId}/configurations`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef65e3c8c1a9c4638ec25cdbbaca7165c1 | null }>
+      }) as Core.APIPromise<{ result: ConfigurationUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -30,16 +29,20 @@ export class Configurations extends APIResource {
     tunnelId: string,
     params: ConfigurationGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef65e3c8c1a9c4638ec25cdbbaca7165c1 | null> {
+  ): Core.APIPromise<ConfigurationGetResponse> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/cfd_tunnel/${tunnelId}/configurations`,
         options,
-      ) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef65e3c8c1a9c4638ec25cdbbaca7165c1 | null }>
+      ) as Core.APIPromise<{ result: ConfigurationGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export type ConfigurationUpdateResponse = unknown | Array<unknown> | string;
+
+export type ConfigurationGetResponse = unknown | Array<unknown> | string;
 
 export interface ConfigurationUpdateParams {
   /**
@@ -337,6 +340,8 @@ export interface ConfigurationGetParams {
 }
 
 export namespace Configurations {
+  export import ConfigurationUpdateResponse = ConfigurationsAPI.ConfigurationUpdateResponse;
+  export import ConfigurationGetResponse = ConfigurationsAPI.ConfigurationGetResponse;
   export import ConfigurationUpdateParams = ConfigurationsAPI.ConfigurationUpdateParams;
   export import ConfigurationGetParams = ConfigurationsAPI.ConfigurationGetParams;
 }

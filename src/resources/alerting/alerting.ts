@@ -35,6 +35,7 @@ export namespace Alerting {
   export import Policy = PoliciesAPI.Policy;
   export import PolicyCreateResponse = PoliciesAPI.PolicyCreateResponse;
   export import PolicyUpdateResponse = PoliciesAPI.PolicyUpdateResponse;
+  export import PolicyDeleteResponse = PoliciesAPI.PolicyDeleteResponse;
   export import PoliciesSinglePage = PoliciesAPI.PoliciesSinglePage;
   export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
   export import PolicyUpdateParams = PoliciesAPI.PolicyUpdateParams;

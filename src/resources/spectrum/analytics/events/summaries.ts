@@ -4,7 +4,6 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as SummariesAPI from 'cloudflare/resources/spectrum/analytics/events/summaries';
-import * as Shared from 'cloudflare/resources/shared';
 import * as EventsAPI from 'cloudflare/resources/spectrum/analytics/events/events';
 
 export class Summaries extends APIResource {
@@ -15,16 +14,13 @@ export class Summaries extends APIResource {
     zone: string,
     query?: SummaryGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f>;
-  get(
-    zone: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f>;
+  ): Core.APIPromise<SummaryGetResponse | null>;
+  get(zone: string, options?: Core.RequestOptions): Core.APIPromise<SummaryGetResponse | null>;
   get(
     zone: string,
     query: SummaryGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f> {
+  ): Core.APIPromise<SummaryGetResponse | null> {
     if (isRequestOptions(query)) {
       return this.get(zone, {}, query);
     }
@@ -32,10 +28,12 @@ export class Summaries extends APIResource {
       this._client.get(`/zones/${zone}/spectrum/analytics/events/summary`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f }>
+      }) as Core.APIPromise<{ result: SummaryGetResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export type SummaryGetResponse = unknown | string;
 
 export interface SummaryGetParams {
   /**
@@ -112,5 +110,6 @@ export interface SummaryGetParams {
 }
 
 export namespace Summaries {
+  export import SummaryGetResponse = SummariesAPI.SummaryGetResponse;
   export import SummaryGetParams = SummariesAPI.SummaryGetParams;
 }

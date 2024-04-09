@@ -12,6 +12,7 @@ export {
   Monitors,
 } from './monitors/index';
 export {
+  Pool,
   PoolDeleteResponse,
   PoolCreateParams,
   PoolUpdateParams,
@@ -19,6 +20,7 @@ export {
   PoolDeleteParams,
   PoolEditParams,
   PoolGetParams,
+  PoolsSinglePage,
   Pools,
 } from './pools/index';
 export { PreviewGetParams, Previews } from './previews';
