@@ -23,6 +23,7 @@ export namespace SSL {
   export import CertificatePacks = CertificatePacksAPI.CertificatePacks;
   export import HostItem = CertificatePacksAPI.HostItem;
   export import CertificatePackListResponse = CertificatePacksAPI.CertificatePackListResponse;
+  export import CertificatePackDeleteResponse = CertificatePacksAPI.CertificatePackDeleteResponse;
   export import CertificatePackEditResponse = CertificatePacksAPI.CertificatePackEditResponse;
   export import CertificatePackListResponsesSinglePage = CertificatePacksAPI.CertificatePackListResponsesSinglePage;
   export import CertificatePackListParams = CertificatePacksAPI.CertificatePackListParams;
