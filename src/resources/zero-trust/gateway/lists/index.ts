@@ -2,7 +2,6 @@
 
 export {
   Lists,
-  UnnamedSchemaRef30ecd0f5ce68fc07dbb7760deda3d707,
   ListCreateResponse,
   ListCreateParams,
   ListUpdateParams,

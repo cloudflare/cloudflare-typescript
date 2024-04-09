@@ -90,24 +90,6 @@ export interface ACL {
   name: string;
 }
 
-export interface UnnamedSchemaRef08eaa2f22bb9ce0f80063d710d4edafd {
-  id: string;
-
-  /**
-   * Allowed IPv4/IPv6 address range of primary or secondary nameservers. This will
-   * be applied for the entire account. The IP range is used to allow additional
-   * NOTIFY IPs for secondary zones and IPs Cloudflare allows AXFR/IXFR requests from
-   * for primary zones. CIDRs are limited to a maximum of /24 for IPv4 and /64 for
-   * IPv6 respectively.
-   */
-  ip_range: string;
-
-  /**
-   * The name of the acl.
-   */
-  name: string;
-}
-
 export interface ACLDeleteResponse {
   id?: string;
 }
@@ -167,7 +149,6 @@ export interface ACLGetParams {
 
 export namespace ACLs {
   export import ACL = ACLsAPI.ACL;
-  export import UnnamedSchemaRef08eaa2f22bb9ce0f80063d710d4edafd = ACLsAPI.UnnamedSchemaRef08eaa2f22bb9ce0f80063d710d4edafd;
   export import ACLDeleteResponse = ACLsAPI.ACLDeleteResponse;
   export import ACLsSinglePage = ACLsAPI.ACLsSinglePage;
   export import ACLCreateParams = ACLsAPI.ACLCreateParams;

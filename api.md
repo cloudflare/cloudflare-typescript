@@ -8,15 +8,11 @@ Types:
 - <code><a href="./src/resources/shared.ts">ResponseInfo</a></code>
 - <code><a href="./src/resources/shared.ts">Result</a></code>
 - <code><a href="./src/resources/shared.ts">UnnamedSchemaRef025497b7e63379c31929636b5186e45c</a></code>
-- <code><a href="./src/resources/shared.ts">UnnamedSchemaRef2173d81a0b2d332c9e2ac46900fe8bb9</a></code>
 - <code><a href="./src/resources/shared.ts">UnnamedSchemaRef23001f1f0b697900e282236466a95fa3</a></code>
 - <code><a href="./src/resources/shared.ts">UnnamedSchemaRef33f2e3917f3fe46ad98af0acbb1d9a19</a></code>
 - <code><a href="./src/resources/shared.ts">UnnamedSchemaRef619309774d07ec6904f1e354560d6028</a></code>
 - <code><a href="./src/resources/shared.ts">UnnamedSchemaRef70f2c6ccd8a405358ac7ef8fc3d6751c</a></code>
 - <code><a href="./src/resources/shared.ts">UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</a></code>
-- <code><a href="./src/resources/shared.ts">UnnamedSchemaRefB0ec5cc02c98b665099a5707a2db4ea6</a></code>
-- <code><a href="./src/resources/shared.ts">UnnamedSchemaRefB52ad7cf99890d19f16edcd84d16ef5b</a></code>
-- <code><a href="./src/resources/shared.ts">UnnamedSchemaRefCc2ac1a037e5d6702fc77b3bcb527854</a></code>
 - <code><a href="./src/resources/shared.ts">UnnamedSchemaRefEe1e79edcb234d14c4dd266880f2fd24</a></code>
 
 # Accounts
@@ -172,19 +168,23 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/user/load-balancers/monitors.ts">Monitor</a></code>
+- <code><a href="./src/resources/user/load-balancers/monitors.ts">MonitorCreateResponse</a></code>
+- <code><a href="./src/resources/user/load-balancers/monitors.ts">MonitorUpdateResponse</a></code>
+- <code><a href="./src/resources/user/load-balancers/monitors.ts">MonitorListResponse</a></code>
 - <code><a href="./src/resources/user/load-balancers/monitors.ts">MonitorDeleteResponse</a></code>
+- <code><a href="./src/resources/user/load-balancers/monitors.ts">MonitorEditResponse</a></code>
+- <code><a href="./src/resources/user/load-balancers/monitors.ts">MonitorGetResponse</a></code>
 - <code><a href="./src/resources/user/load-balancers/monitors.ts">MonitorPreviewResponse</a></code>
 - <code><a href="./src/resources/user/load-balancers/monitors.ts">MonitorReferencesResponse</a></code>
 
 Methods:
 
-- <code title="post /user/load_balancers/monitors">client.user.loadBalancers.monitors.<a href="./src/resources/user/load-balancers/monitors.ts">create</a>({ ...params }) -> Monitor</code>
-- <code title="put /user/load_balancers/monitors/{monitor_id}">client.user.loadBalancers.monitors.<a href="./src/resources/user/load-balancers/monitors.ts">update</a>(monitorId, { ...params }) -> Monitor</code>
-- <code title="get /user/load_balancers/monitors">client.user.loadBalancers.monitors.<a href="./src/resources/user/load-balancers/monitors.ts">list</a>() -> MonitorsSinglePage</code>
+- <code title="post /user/load_balancers/monitors">client.user.loadBalancers.monitors.<a href="./src/resources/user/load-balancers/monitors.ts">create</a>({ ...params }) -> MonitorCreateResponse</code>
+- <code title="put /user/load_balancers/monitors/{monitor_id}">client.user.loadBalancers.monitors.<a href="./src/resources/user/load-balancers/monitors.ts">update</a>(monitorId, { ...params }) -> MonitorUpdateResponse</code>
+- <code title="get /user/load_balancers/monitors">client.user.loadBalancers.monitors.<a href="./src/resources/user/load-balancers/monitors.ts">list</a>() -> MonitorListResponsesSinglePage</code>
 - <code title="delete /user/load_balancers/monitors/{monitor_id}">client.user.loadBalancers.monitors.<a href="./src/resources/user/load-balancers/monitors.ts">delete</a>(monitorId, { ...params }) -> MonitorDeleteResponse</code>
-- <code title="patch /user/load_balancers/monitors/{monitor_id}">client.user.loadBalancers.monitors.<a href="./src/resources/user/load-balancers/monitors.ts">edit</a>(monitorId, { ...params }) -> Monitor</code>
-- <code title="get /user/load_balancers/monitors/{monitor_id}">client.user.loadBalancers.monitors.<a href="./src/resources/user/load-balancers/monitors.ts">get</a>(monitorId) -> Monitor</code>
+- <code title="patch /user/load_balancers/monitors/{monitor_id}">client.user.loadBalancers.monitors.<a href="./src/resources/user/load-balancers/monitors.ts">edit</a>(monitorId, { ...params }) -> MonitorEditResponse</code>
+- <code title="get /user/load_balancers/monitors/{monitor_id}">client.user.loadBalancers.monitors.<a href="./src/resources/user/load-balancers/monitors.ts">get</a>(monitorId) -> MonitorGetResponse</code>
 - <code title="post /user/load_balancers/monitors/{monitor_id}/preview">client.user.loadBalancers.monitors.<a href="./src/resources/user/load-balancers/monitors.ts">preview</a>(monitorId, { ...params }) -> MonitorPreviewResponse</code>
 - <code title="get /user/load_balancers/monitors/{monitor_id}/references">client.user.loadBalancers.monitors.<a href="./src/resources/user/load-balancers/monitors.ts">references</a>(monitorId) -> MonitorReferencesResponse | null</code>
 
@@ -192,6 +192,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/user/load-balancers/pools.ts">Pool</a></code>
 - <code><a href="./src/resources/user/load-balancers/pools.ts">PoolDeleteResponse</a></code>
 - <code><a href="./src/resources/user/load-balancers/pools.ts">PoolHealthResponse</a></code>
 - <code><a href="./src/resources/user/load-balancers/pools.ts">PoolPreviewResponse</a></code>
@@ -953,7 +954,6 @@ Types:
 - <code><a href="./src/resources/load-balancers/load-balancers.ts">RandomSteering</a></code>
 - <code><a href="./src/resources/load-balancers/load-balancers.ts">RulesItem</a></code>
 - <code><a href="./src/resources/load-balancers/load-balancers.ts">SessionAffinityAttributes</a></code>
-- <code><a href="./src/resources/load-balancers/load-balancers.ts">UnnamedSchemaRef06ba14ec7860c091efc98fd9af30f382</a></code>
 - <code><a href="./src/resources/load-balancers/load-balancers.ts">LoadBalancerDeleteResponse</a></code>
 
 Methods:
@@ -969,16 +969,21 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/load-balancers/monitors/monitors.ts">MonitorCreateResponse</a></code>
+- <code><a href="./src/resources/load-balancers/monitors/monitors.ts">MonitorUpdateResponse</a></code>
+- <code><a href="./src/resources/load-balancers/monitors/monitors.ts">MonitorListResponse</a></code>
 - <code><a href="./src/resources/load-balancers/monitors/monitors.ts">MonitorDeleteResponse</a></code>
+- <code><a href="./src/resources/load-balancers/monitors/monitors.ts">MonitorEditResponse</a></code>
+- <code><a href="./src/resources/load-balancers/monitors/monitors.ts">MonitorGetResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/load_balancers/monitors">client.loadBalancers.monitors.<a href="./src/resources/load-balancers/monitors/monitors.ts">create</a>({ ...params }) -> Monitor</code>
-- <code title="put /accounts/{account_id}/load_balancers/monitors/{monitor_id}">client.loadBalancers.monitors.<a href="./src/resources/load-balancers/monitors/monitors.ts">update</a>(monitorId, { ...params }) -> Monitor</code>
-- <code title="get /accounts/{account_id}/load_balancers/monitors">client.loadBalancers.monitors.<a href="./src/resources/load-balancers/monitors/monitors.ts">list</a>({ ...params }) -> MonitorsSinglePage</code>
+- <code title="post /accounts/{account_id}/load_balancers/monitors">client.loadBalancers.monitors.<a href="./src/resources/load-balancers/monitors/monitors.ts">create</a>({ ...params }) -> MonitorCreateResponse</code>
+- <code title="put /accounts/{account_id}/load_balancers/monitors/{monitor_id}">client.loadBalancers.monitors.<a href="./src/resources/load-balancers/monitors/monitors.ts">update</a>(monitorId, { ...params }) -> MonitorUpdateResponse</code>
+- <code title="get /accounts/{account_id}/load_balancers/monitors">client.loadBalancers.monitors.<a href="./src/resources/load-balancers/monitors/monitors.ts">list</a>({ ...params }) -> MonitorListResponsesSinglePage</code>
 - <code title="delete /accounts/{account_id}/load_balancers/monitors/{monitor_id}">client.loadBalancers.monitors.<a href="./src/resources/load-balancers/monitors/monitors.ts">delete</a>(monitorId, { ...params }) -> MonitorDeleteResponse</code>
-- <code title="patch /accounts/{account_id}/load_balancers/monitors/{monitor_id}">client.loadBalancers.monitors.<a href="./src/resources/load-balancers/monitors/monitors.ts">edit</a>(monitorId, { ...params }) -> Monitor</code>
-- <code title="get /accounts/{account_id}/load_balancers/monitors/{monitor_id}">client.loadBalancers.monitors.<a href="./src/resources/load-balancers/monitors/monitors.ts">get</a>(monitorId, { ...params }) -> Monitor</code>
+- <code title="patch /accounts/{account_id}/load_balancers/monitors/{monitor_id}">client.loadBalancers.monitors.<a href="./src/resources/load-balancers/monitors/monitors.ts">edit</a>(monitorId, { ...params }) -> MonitorEditResponse</code>
+- <code title="get /accounts/{account_id}/load_balancers/monitors/{monitor_id}">client.loadBalancers.monitors.<a href="./src/resources/load-balancers/monitors/monitors.ts">get</a>(monitorId, { ...params }) -> MonitorGetResponse</code>
 
 ### Previews
 
@@ -1079,8 +1084,8 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/cache/cache-reserve.ts">CacheReserve</a></code>
 - <code><a href="./src/resources/cache/cache-reserve.ts">UnnamedSchemaRef2b5e755404a4bfd7892291ce97c4968d</a></code>
-- <code><a href="./src/resources/cache/cache-reserve.ts">UnnamedSchemaRef37c385b4ebac5c7a6475b3f81ef9a7ad</a></code>
 - <code><a href="./src/resources/cache/cache-reserve.ts">CacheReserveClearResponse</a></code>
 - <code><a href="./src/resources/cache/cache-reserve.ts">CacheReserveEditResponse</a></code>
 - <code><a href="./src/resources/cache/cache-reserve.ts">CacheReserveGetResponse</a></code>
@@ -1462,7 +1467,6 @@ Types:
 - <code><a href="./src/resources/dns/firewall/firewall.ts">AttackMitigation</a></code>
 - <code><a href="./src/resources/dns/firewall/firewall.ts">Firewall</a></code>
 - <code><a href="./src/resources/dns/firewall/firewall.ts">FirewallIPsItem</a></code>
-- <code><a href="./src/resources/dns/firewall/firewall.ts">UnnamedSchemaRef7a0f93d9e1afc3221d2a57b7bab16955</a></code>
 - <code><a href="./src/resources/dns/firewall/firewall.ts">UpstreamIPs</a></code>
 - <code><a href="./src/resources/dns/firewall/firewall.ts">FirewallDeleteResponse</a></code>
 
@@ -1824,12 +1828,13 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/logpush/ownership.ts">OwnershipValidation</a></code>
 - <code><a href="./src/resources/logpush/ownership.ts">OwnershipCreateResponse</a></code>
 
 Methods:
 
 - <code title="post /{account_or_zone}/{account_or_zone_id}/logpush/ownership">client.logpush.ownership.<a href="./src/resources/logpush/ownership.ts">create</a>({ ...params }) -> OwnershipCreateResponse | null</code>
-- <code title="post /{account_or_zone}/{account_or_zone_id}/logpush/ownership/validate">client.logpush.ownership.<a href="./src/resources/logpush/ownership.ts">validate</a>({ ...params }) -> UnnamedSchemaRefCc2ac1a037e5d6702fc77b3bcb527854 | null</code>
+- <code title="post /{account_or_zone}/{account_or_zone_id}/logpush/ownership/validate">client.logpush.ownership.<a href="./src/resources/logpush/ownership.ts">validate</a>({ ...params }) -> OwnershipValidation | null</code>
 
 ## Validate
 
@@ -2069,7 +2074,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/secondary-dns/acls.ts">ACL</a></code>
-- <code><a href="./src/resources/secondary-dns/acls.ts">UnnamedSchemaRef08eaa2f22bb9ce0f80063d710d4edafd</a></code>
 - <code><a href="./src/resources/secondary-dns/acls.ts">ACLDeleteResponse</a></code>
 
 Methods:
@@ -2101,7 +2105,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/secondary-dns/tsigs.ts">TSIG</a></code>
-- <code><a href="./src/resources/secondary-dns/tsigs.ts">UnnamedSchemaRefC3d6ffaf5dde0c570eaa72462c2ee738</a></code>
 - <code><a href="./src/resources/secondary-dns/tsigs.ts">TSIGDeleteResponse</a></code>
 
 Methods:
@@ -2119,7 +2122,6 @@ Types:
 - <code><a href="./src/resources/waiting-rooms/waiting-rooms.ts">AdditionalRoutesItem</a></code>
 - <code><a href="./src/resources/waiting-rooms/waiting-rooms.ts">CookieAttributes</a></code>
 - <code><a href="./src/resources/waiting-rooms/waiting-rooms.ts">Query</a></code>
-- <code><a href="./src/resources/waiting-rooms/waiting-rooms.ts">UnnamedSchemaRefA282afe149b2cf60a204505bd4c53324</a></code>
 - <code><a href="./src/resources/waiting-rooms/waiting-rooms.ts">WaitingRoom</a></code>
 - <code><a href="./src/resources/waiting-rooms/waiting-rooms.ts">WaitingRoomDeleteResponse</a></code>
 
@@ -2203,7 +2205,7 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/waiting-rooms/settings.ts">UnnamedSchemaRef59ecd22a3d62548e441274daec82ee7a</a></code>
+- <code><a href="./src/resources/waiting-rooms/settings.ts">Setting</a></code>
 - <code><a href="./src/resources/waiting-rooms/settings.ts">SettingUpdateResponse</a></code>
 - <code><a href="./src/resources/waiting-rooms/settings.ts">SettingEditResponse</a></code>
 - <code><a href="./src/resources/waiting-rooms/settings.ts">SettingGetResponse</a></code>
@@ -2350,7 +2352,7 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/workers/scripts/deployments.ts">UnnamedSchemaRefFda1c6f6758e763ae3b2964521f2fdd8</a></code>
+- <code><a href="./src/resources/workers/scripts/deployments.ts">Deployment</a></code>
 - <code><a href="./src/resources/workers/scripts/deployments.ts">DeploymentCreateResponse</a></code>
 - <code><a href="./src/resources/workers/scripts/deployments.ts">DeploymentGetResponse</a></code>
 
@@ -4792,7 +4794,7 @@ Methods:
 
 Methods:
 
-- <code title="post /accounts/{account_id}/dlp/patterns/validate">client.zeroTrust.dlp.patterns.<a href="./src/resources/zero-trust/dlp/patterns.ts">validate</a>({ ...params }) -> UnnamedSchemaRefCc2ac1a037e5d6702fc77b3bcb527854 | null</code>
+- <code title="post /accounts/{account_id}/dlp/patterns/validate">client.zeroTrust.dlp.patterns.<a href="./src/resources/zero-trust/dlp/patterns.ts">validate</a>({ ...params }) -> OwnershipValidation | null</code>
 
 ### PayloadLogs
 
@@ -4923,7 +4925,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/zero-trust/gateway/lists/lists.ts">Lists</a></code>
-- <code><a href="./src/resources/zero-trust/gateway/lists/lists.ts">UnnamedSchemaRef30ecd0f5ce68fc07dbb7760deda3d707</a></code>
 - <code><a href="./src/resources/zero-trust/gateway/lists/lists.ts">ListCreateResponse</a></code>
 
 Methods:
@@ -5000,7 +5001,6 @@ Types:
 - <code><a href="./src/resources/zero-trust/gateway/rules.ts">Rule</a></code>
 - <code><a href="./src/resources/zero-trust/gateway/rules.ts">RuleSetting</a></code>
 - <code><a href="./src/resources/zero-trust/gateway/rules.ts">Schedule</a></code>
-- <code><a href="./src/resources/zero-trust/gateway/rules.ts">UnnamedSchemaRef0b0764cdb06aad66b555fd74c8c78b2a</a></code>
 
 Methods:
 
@@ -5791,6 +5791,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/radar/http/top.ts">Browser</a></code>
 - <code><a href="./src/resources/radar/http/top.ts">TopBrowserFamiliesResponse</a></code>
 - <code><a href="./src/resources/radar/http/top.ts">TopBrowsersResponse</a></code>
 

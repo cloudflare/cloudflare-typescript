@@ -16,7 +16,6 @@ export {
   PoolDeleteParams,
   PoolEditParams,
   PoolGetParams,
-  PoolsSinglePage,
   Pools,
 } from './pools';
 export { ReferenceGetResponse, ReferenceGetParams, References } from './references';
