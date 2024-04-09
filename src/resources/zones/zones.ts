@@ -9,7 +9,6 @@ import * as DNSSettingsAPI from 'cloudflare/resources/zones/dns-settings';
 import * as HoldsAPI from 'cloudflare/resources/zones/holds';
 import * as SubscriptionsAPI from 'cloudflare/resources/zones/subscriptions';
 import * as SettingsAPI from 'cloudflare/resources/zones/settings/settings';
-import * as WorkersAPI from 'cloudflare/resources/zones/workers/workers';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class Zones extends APIResource {
@@ -20,7 +19,6 @@ export class Zones extends APIResource {
     this._client,
   );
   holds: HoldsAPI.Holds = new HoldsAPI.Holds(this._client);
-  workers: WorkersAPI.Workers = new WorkersAPI.Workers(this._client);
   subscriptions: SubscriptionsAPI.Subscriptions = new SubscriptionsAPI.Subscriptions(this._client);
 
   /**
@@ -401,7 +399,6 @@ export namespace Zones {
   export import HoldCreateParams = HoldsAPI.HoldCreateParams;
   export import HoldDeleteParams = HoldsAPI.HoldDeleteParams;
   export import HoldGetParams = HoldsAPI.HoldGetParams;
-  export import Workers = WorkersAPI.Workers;
   export import Subscriptions = SubscriptionsAPI.Subscriptions;
   export import SubscriptionCreateParams = SubscriptionsAPI.SubscriptionCreateParams;
 }
