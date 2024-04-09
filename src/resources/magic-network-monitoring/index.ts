@@ -12,7 +12,7 @@ export {
 } from './configs/index';
 export { MagicNetworkMonitoring } from './magic-network-monitoring';
 export {
-  Rule,
+  MagicNetworkMonitoringRule,
   UnnamedSchemaRef99ba74ba6027c3c87ca03d4e81cfc16d,
   RuleCreateParams,
   RuleUpdateParams,
@@ -20,6 +20,6 @@ export {
   RuleDeleteParams,
   RuleEditParams,
   RuleGetParams,
-  RulesSinglePage,
+  MagicNetworkMonitoringRulesSinglePage,
   Rules,
 } from './rules/index';

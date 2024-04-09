@@ -1879,13 +1879,13 @@ export namespace WaitingRooms {
   export import EventEditParams = EventsAPI.EventEditParams;
   export import EventGetParams = EventsAPI.EventGetParams;
   export import Rules = RulesAPI.Rules;
-  export import Rule = RulesAPI.Rule;
   export import UnnamedSchemaRefF1c0ba8f44601f2db2e07b9397b6c430 = RulesAPI.UnnamedSchemaRefF1c0ba8f44601f2db2e07b9397b6c430;
+  export import WaitingRoomRule = RulesAPI.WaitingRoomRule;
   export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
   export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
   export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
   export import RuleEditResponse = RulesAPI.RuleEditResponse;
-  export import RulesSinglePage = RulesAPI.RulesSinglePage;
+  export import WaitingRoomRulesSinglePage = RulesAPI.WaitingRoomRulesSinglePage;
   export import RuleCreateParams = RulesAPI.RuleCreateParams;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
   export import RuleListParams = RulesAPI.RuleListParams;

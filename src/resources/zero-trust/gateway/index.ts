@@ -27,7 +27,7 @@ export {
   DNSResolverSettingsV4,
   DNSResolverSettingsV6,
   GatewayFilter,
-  Rule,
+  GatewayRule,
   RuleSetting,
   Schedule,
   RuleCreateParams,
@@ -35,7 +35,7 @@ export {
   RuleListParams,
   RuleDeleteParams,
   RuleGetParams,
-  RulesSinglePage,
+  GatewayRulesSinglePage,
   Rules,
 } from './rules';
 export {

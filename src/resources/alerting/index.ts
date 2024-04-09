@@ -3,10 +3,11 @@
 export { Alerting } from './alerting';
 export { AvailableAlertListResponse, AvailableAlertListParams, AvailableAlerts } from './available-alerts';
 export { Destinations } from './destinations/index';
+export { History, HistoryListParams, HistoriesV4PagePaginationArray, HistoryResource } from './history';
 export {
-  Filter,
   Mechanism,
   Policy,
+  PolicyFilter,
   PolicyCreateResponse,
   PolicyUpdateResponse,
   PolicyDeleteResponse,
@@ -18,4 +19,3 @@ export {
   PoliciesSinglePage,
   Policies,
 } from './policies';
-export { History, HistoryListParams, HistoriesV4PagePaginationArray, HistoryResource } from './history';
