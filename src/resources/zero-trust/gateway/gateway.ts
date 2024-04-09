@@ -154,7 +154,7 @@ export namespace Gateway {
   export import LoggingUpdateParams = LoggingAPI.LoggingUpdateParams;
   export import LoggingGetParams = LoggingAPI.LoggingGetParams;
   export import ProxyEndpoints = ProxyEndpointsAPI.ProxyEndpoints;
-  export import GatewayIPsItem = ProxyEndpointsAPI.GatewayIPsItem;
+  export import GatewayIPs = ProxyEndpointsAPI.GatewayIPs;
   export import ProxyEndpoint = ProxyEndpointsAPI.ProxyEndpoint;
   export import UnnamedSchemaRef4753ee81779d0e57189420079abab61e = ProxyEndpointsAPI.UnnamedSchemaRef4753ee81779d0e57189420079abab61e;
   export import ProxyEndpointsSinglePage = ProxyEndpointsAPI.ProxyEndpointsSinglePage;

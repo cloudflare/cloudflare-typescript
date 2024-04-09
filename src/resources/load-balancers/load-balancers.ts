@@ -156,7 +156,7 @@ export type CheckRegion =
 /**
  * A pool ID.
  */
-export type DefaultPoolsItem = string;
+export type DefaultPools = string;
 
 /**
  * Filter options for a particular resource type (pool or origin). Use null to
@@ -184,10 +184,10 @@ export interface Header {
    * The 'Host' header allows to override the hostname set in the HTTP request.
    * Current support is 1 'Host' header override per origin.
    */
-  Host?: Array<HostItem>;
+  Host?: Array<Host>;
 }
 
-export type HostItem = string;
+export type Host = string;
 
 export interface LoadBalancer {
   id?: string;
@@ -216,7 +216,7 @@ export interface LoadBalancer {
    * A list of pool IDs ordered by their failover priority. Pools defined here are
    * used by default, or when region_pools are not configured for a given region.
    */
-  default_pools?: Array<DefaultPoolsItem>;
+  default_pools?: Array<DefaultPools>;
 
   /**
    * Object description.
@@ -284,7 +284,7 @@ export interface LoadBalancer {
    * BETA Field Not General Access: A list of rules for this load balancer to
    * execute.
    */
-  rules?: Array<RulesItem>;
+  rules?: Array<Rules>;
 
   /**
    * Specifies the type of session affinity the load balancer should use unless
@@ -552,7 +552,7 @@ export interface RandomSteering {
  * A rule object containing conditions and overrides for this load balancer to
  * evaluate.
  */
-export interface RulesItem {
+export interface Rules {
   /**
    * The condition expressions to evaluate. If the condition evaluates to true, the
    * overrides or fixed_response in this rule will be applied. An empty condition is
@@ -572,7 +572,7 @@ export interface RulesItem {
    * routing to a pool. If a fixed_response is supplied the rule will be marked as
    * terminates.
    */
-  fixed_response?: RulesItem.FixedResponse;
+  fixed_response?: Rules.FixedResponse;
 
   /**
    * Name of this rule. Only used for human readability.
@@ -583,7 +583,7 @@ export interface RulesItem {
    * A collection of overrides to apply to the load balancer when this rule's
    * condition is true. All fields are optional.
    */
-  overrides?: RulesItem.Overrides;
+  overrides?: Rules.Overrides;
 
   /**
    * The order in which rules should be executed in relation to each other. Lower
@@ -600,7 +600,7 @@ export interface RulesItem {
   terminates?: boolean;
 }
 
-export namespace RulesItem {
+export namespace Rules {
   /**
    * A collection of fields used to directly respond to the eyeball instead of
    * routing to a pool. If a fixed_response is supplied the rule will be marked as
@@ -655,7 +655,7 @@ export namespace RulesItem {
      * A list of pool IDs ordered by their failover priority. Pools defined here are
      * used by default, or when region_pools are not configured for a given region.
      */
-    default_pools?: Array<LoadBalancersAPI.DefaultPoolsItem>;
+    default_pools?: Array<LoadBalancersAPI.DefaultPools>;
 
     /**
      * The pool ID to use when all other pools are detected as unhealthy.
@@ -865,7 +865,7 @@ export interface LoadBalancerCreateParams {
    * here are used by default, or when region_pools are not configured for a given
    * region.
    */
-  default_pools: Array<DefaultPoolsItem>;
+  default_pools: Array<DefaultPools>;
 
   /**
    * Body param: The pool ID to use when all other pools are detected as unhealthy.
@@ -945,7 +945,7 @@ export interface LoadBalancerCreateParams {
    * Body param: BETA Field Not General Access: A list of rules for this load
    * balancer to execute.
    */
-  rules?: Array<RulesItem>;
+  rules?: Array<Rules>;
 
   /**
    * Body param: Specifies the type of session affinity the load balancer should use
@@ -1047,7 +1047,7 @@ export interface LoadBalancerUpdateParams {
    * here are used by default, or when region_pools are not configured for a given
    * region.
    */
-  default_pools: Array<DefaultPoolsItem>;
+  default_pools: Array<DefaultPools>;
 
   /**
    * Body param: The pool ID to use when all other pools are detected as unhealthy.
@@ -1132,7 +1132,7 @@ export interface LoadBalancerUpdateParams {
    * Body param: BETA Field Not General Access: A list of rules for this load
    * balancer to execute.
    */
-  rules?: Array<RulesItem>;
+  rules?: Array<Rules>;
 
   /**
    * Body param: Specifies the type of session affinity the load balancer should use
@@ -1268,7 +1268,7 @@ export interface LoadBalancerEditParams {
    * here are used by default, or when region_pools are not configured for a given
    * region.
    */
-  default_pools?: Array<DefaultPoolsItem>;
+  default_pools?: Array<DefaultPools>;
 
   /**
    * Body param: Object description.
@@ -1335,7 +1335,7 @@ export interface LoadBalancerEditParams {
    * Body param: BETA Field Not General Access: A list of rules for this load
    * balancer to execute.
    */
-  rules?: Array<RulesItem>;
+  rules?: Array<Rules>;
 
   /**
    * Body param: Specifies the type of session affinity the load balancer should use

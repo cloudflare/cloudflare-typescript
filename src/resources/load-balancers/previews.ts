@@ -26,16 +26,16 @@ export class Previews extends APIResource {
 /**
  * Resulting health data from a preview operation.
  */
-export type PreviewGetResponse = Record<string, PreviewGetResponse.unnamed_schema_with_map_parent_1>;
+export type PreviewGetResponse = Record<string, PreviewGetResponse.unnamed_schema_with_map_parent_0>;
 
 export namespace PreviewGetResponse {
-  export interface unnamed_schema_with_map_parent_1 {
+  export interface unnamed_schema_with_map_parent_0 {
     healthy?: boolean;
 
-    origins?: Array<Record<string, unnamed_schema_with_map_parent_1.load_balancing_origin_health_data>>;
+    origins?: Array<Record<string, unnamed_schema_with_map_parent_0.load_balancing_origin_health_data>>;
   }
 
-  export namespace unnamed_schema_with_map_parent_1 {
+  export namespace unnamed_schema_with_map_parent_0 {
     /**
      * The origin ipv4/ipv6 address or domain name mapped to it's health data.
      */

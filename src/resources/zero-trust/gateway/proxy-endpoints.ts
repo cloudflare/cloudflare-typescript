@@ -93,7 +93,7 @@ export class ProxyEndpointsSinglePage extends SinglePage<ProxyEndpoint> {}
  * The IPv4 CIDR or IPv6 CIDR. IPv6 CIDRs are limited to a maximum of /109. IPv4
  * CIDRs are limited to a maximum of /25.
  */
-export type GatewayIPsItem = string;
+export type GatewayIPs = string;
 
 export interface ProxyEndpoint {
   id?: string;
@@ -103,7 +103,7 @@ export interface ProxyEndpoint {
   /**
    * A list of CIDRs to restrict ingress connections.
    */
-  ips?: Array<GatewayIPsItem>;
+  ips?: Array<GatewayIPs>;
 
   /**
    * The name of the proxy endpoint.
@@ -126,7 +126,7 @@ export interface UnnamedSchemaRef4753ee81779d0e57189420079abab61e {
   /**
    * A list of CIDRs to restrict ingress connections.
    */
-  ips?: Array<GatewayIPsItem>;
+  ips?: Array<GatewayIPs>;
 
   /**
    * The name of the proxy endpoint.
@@ -150,7 +150,7 @@ export interface ProxyEndpointCreateParams {
   /**
    * Body param: A list of CIDRs to restrict ingress connections.
    */
-  ips: Array<GatewayIPsItem>;
+  ips: Array<GatewayIPs>;
 
   /**
    * Body param: The name of the proxy endpoint.
@@ -183,7 +183,7 @@ export interface ProxyEndpointEditParams {
   /**
    * Body param: A list of CIDRs to restrict ingress connections.
    */
-  ips?: Array<GatewayIPsItem>;
+  ips?: Array<GatewayIPs>;
 
   /**
    * Body param: The name of the proxy endpoint.
@@ -196,7 +196,7 @@ export interface ProxyEndpointGetParams {
 }
 
 export namespace ProxyEndpoints {
-  export import GatewayIPsItem = ProxyEndpointsAPI.GatewayIPsItem;
+  export import GatewayIPs = ProxyEndpointsAPI.GatewayIPs;
   export import ProxyEndpoint = ProxyEndpointsAPI.ProxyEndpoint;
   export import UnnamedSchemaRef4753ee81779d0e57189420079abab61e = ProxyEndpointsAPI.UnnamedSchemaRef4753ee81779d0e57189420079abab61e;
   export import ProxyEndpointsSinglePage = ProxyEndpointsAPI.ProxyEndpointsSinglePage;

@@ -55,10 +55,10 @@ export class Requests extends APIResource {
     accountIdentifier: string,
     body: RequestListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<ListItemsV4PagePaginationArray, ListItem> {
+  ): Core.PagePromise<ListsV4PagePaginationArray, List> {
     return this._client.getAPIList(
       `/accounts/${accountIdentifier}/cloudforce-one/requests`,
-      ListItemsV4PagePaginationArray,
+      ListsV4PagePaginationArray,
       { body, method: 'post', ...options },
     );
   }
@@ -132,7 +132,7 @@ export class Requests extends APIResource {
   }
 }
 
-export class ListItemsV4PagePaginationArray extends V4PagePaginationArray<ListItem> {}
+export class ListsV4PagePaginationArray extends V4PagePaginationArray<List> {}
 
 export interface Item {
   /**
@@ -189,7 +189,7 @@ export interface Item {
   tokens?: number;
 }
 
-export interface ListItem {
+export interface List {
   /**
    * UUID
    */
@@ -380,12 +380,12 @@ export interface RequestListParams extends V4PagePaginationArrayParams {
 
 export namespace Requests {
   export import Item = RequestsAPI.Item;
-  export import ListItem = RequestsAPI.ListItem;
+  export import List = RequestsAPI.List;
   export import Quota = RequestsAPI.Quota;
   export import RequestConstants = RequestsAPI.RequestConstants;
   export import RequestTypes = RequestsAPI.RequestTypes;
   export import RequestDeleteResponse = RequestsAPI.RequestDeleteResponse;
-  export import ListItemsV4PagePaginationArray = RequestsAPI.ListItemsV4PagePaginationArray;
+  export import ListsV4PagePaginationArray = RequestsAPI.ListsV4PagePaginationArray;
   export import RequestCreateParams = RequestsAPI.RequestCreateParams;
   export import RequestUpdateParams = RequestsAPI.RequestUpdateParams;
   export import RequestListParams = RequestsAPI.RequestListParams;
@@ -397,7 +397,7 @@ export namespace Requests {
   export import MessageUpdateParams = MessageAPI.MessageUpdateParams;
   export import MessageGetParams = MessageAPI.MessageGetParams;
   export import PriorityResource = PriorityAPI.PriorityResource;
-  export import LabelItem = PriorityAPI.LabelItem;
+  export import Label = PriorityAPI.Label;
   export import Priority = PriorityAPI.Priority;
   export import PriorityEdit = PriorityAPI.PriorityEdit;
   export import PriorityDeleteResponse = PriorityAPI.PriorityDeleteResponse;

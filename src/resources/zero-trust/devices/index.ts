@@ -4,7 +4,7 @@ export { Device, DeviceListParams, DeviceGetParams, DevicesSinglePage, Devices }
 export {
   DevicePostureRule,
   Input,
-  MatchItem,
+  Match,
   UnnamedSchemaRef34ef0ad73a63c3f76ed170adca181930,
   UnnamedSchemaRef41885dd46b9e0294254c49305a273681,
   UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27,

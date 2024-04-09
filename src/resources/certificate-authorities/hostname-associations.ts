@@ -38,10 +38,10 @@ export class HostnameAssociations extends APIResource {
   }
 }
 
-export type HostnameAssociationItem = string;
+export type HostnameAssociation = string;
 
 export interface TLSHostnameAssociation {
-  hostnames?: Array<HostnameAssociationItem>;
+  hostnames?: Array<HostnameAssociation>;
 
   /**
    * The UUID for a certificate that was uploaded to the mTLS Certificate Management
@@ -52,11 +52,11 @@ export interface TLSHostnameAssociation {
 }
 
 export interface HostnameAssociationUpdateResponse {
-  hostnames?: Array<HostnameAssociationItem>;
+  hostnames?: Array<HostnameAssociation>;
 }
 
 export interface HostnameAssociationGetResponse {
-  hostnames?: Array<HostnameAssociationItem>;
+  hostnames?: Array<HostnameAssociation>;
 }
 
 export interface HostnameAssociationUpdateParams {
@@ -68,7 +68,7 @@ export interface HostnameAssociationUpdateParams {
   /**
    * Body param:
    */
-  hostnames?: Array<HostnameAssociationItem>;
+  hostnames?: Array<HostnameAssociation>;
 
   /**
    * Body param: The UUID for a certificate that was uploaded to the mTLS Certificate
@@ -94,7 +94,7 @@ export interface HostnameAssociationGetParams {
 }
 
 export namespace HostnameAssociations {
-  export import HostnameAssociationItem = HostnameAssociationsAPI.HostnameAssociationItem;
+  export import HostnameAssociation = HostnameAssociationsAPI.HostnameAssociation;
   export import TLSHostnameAssociation = HostnameAssociationsAPI.TLSHostnameAssociation;
   export import HostnameAssociationUpdateResponse = HostnameAssociationsAPI.HostnameAssociationUpdateResponse;
   export import HostnameAssociationGetResponse = HostnameAssociationsAPI.HostnameAssociationGetResponse;

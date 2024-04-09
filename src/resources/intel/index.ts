@@ -38,5 +38,5 @@ export {
   MiscategorizationCreateParams,
   Miscategorizations,
 } from './miscategorizations';
-export { SinkholeItem, SinkholeListParams, SinkholeItemsSinglePage, Sinkholes } from './sinkholes';
+export { Sinkhole, SinkholeListParams, SinkholesSinglePage, Sinkholes } from './sinkholes';
 export { Whois, WhoisGetParams } from './whois';

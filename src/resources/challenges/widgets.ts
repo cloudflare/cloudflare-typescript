@@ -43,11 +43,11 @@ export class Widgets extends APIResource {
   list(
     params: WidgetListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<WidgetDomainsV4PagePaginationArray, WidgetDomain> {
+  ): Core.PagePromise<WidgetListResponsesV4PagePaginationArray, WidgetListResponse> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/challenges/widgets`,
-      WidgetDomainsV4PagePaginationArray,
+      WidgetListResponsesV4PagePaginationArray,
       { query, ...options },
     );
   }
@@ -102,7 +102,7 @@ export class Widgets extends APIResource {
   }
 }
 
-export class WidgetDomainsV4PagePaginationArray extends V4PagePaginationArray<WidgetDomain> {}
+export class WidgetListResponsesV4PagePaginationArray extends V4PagePaginationArray<WidgetListResponse> {}
 
 /**
  * A Turnstile widget's detailed configuration
@@ -125,7 +125,7 @@ export interface Widget {
    */
   created_on: string;
 
-  domains: Array<WidgetDomainItem>;
+  domains: Array<WidgetDomain>;
 
   /**
    * Widget Mode
@@ -166,9 +166,15 @@ export interface Widget {
 }
 
 /**
+ * Hosts as a hostname or IPv4/IPv6 address represented by strings. The widget will
+ * only work on these domains, and their subdomains.
+ */
+export type WidgetDomain = string;
+
+/**
  * A Turnstile Widgets configuration as it appears in listings
  */
-export interface WidgetDomain {
+export interface WidgetListResponse {
   /**
    * If bot_fight_mode is set to `true`, Cloudflare issues computationally expensive
    * challenges in response to malicious bots (ENT only).
@@ -186,7 +192,7 @@ export interface WidgetDomain {
    */
   created_on: string;
 
-  domains: Array<WidgetDomainItem>;
+  domains: Array<WidgetDomain>;
 
   /**
    * Widget Mode
@@ -221,12 +227,6 @@ export interface WidgetDomain {
   sitekey: string;
 }
 
-/**
- * Hosts as a hostname or IPv4/IPv6 address represented by strings. The widget will
- * only work on these domains, and their subdomains.
- */
-export type WidgetDomainItem = string;
-
 export interface WidgetCreateParams {
   /**
    * Path param: Identifier
@@ -236,7 +236,7 @@ export interface WidgetCreateParams {
   /**
    * Body param:
    */
-  domains: Array<WidgetDomainItem>;
+  domains: Array<WidgetDomain>;
 
   /**
    * Body param: Widget Mode
@@ -303,7 +303,7 @@ export interface WidgetUpdateParams {
   /**
    * Body param:
    */
-  domains: Array<WidgetDomainItem>;
+  domains: Array<WidgetDomain>;
 
   /**
    * Body param: Widget Mode
@@ -384,8 +384,8 @@ export interface WidgetRotateSecretParams {
 export namespace Widgets {
   export import Widget = WidgetsAPI.Widget;
   export import WidgetDomain = WidgetsAPI.WidgetDomain;
-  export import WidgetDomainItem = WidgetsAPI.WidgetDomainItem;
-  export import WidgetDomainsV4PagePaginationArray = WidgetsAPI.WidgetDomainsV4PagePaginationArray;
+  export import WidgetListResponse = WidgetsAPI.WidgetListResponse;
+  export import WidgetListResponsesV4PagePaginationArray = WidgetsAPI.WidgetListResponsesV4PagePaginationArray;
   export import WidgetCreateParams = WidgetsAPI.WidgetCreateParams;
   export import WidgetUpdateParams = WidgetsAPI.WidgetUpdateParams;
   export import WidgetListParams = WidgetsAPI.WidgetListParams;

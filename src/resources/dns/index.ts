@@ -15,7 +15,7 @@ export {
   NSRecord,
   PTRRecord,
   Record,
-  RecordTagsItem,
+  RecordTags,
   SMIMEARecord,
   SRVRecord,
   SSHFPRecord,
@@ -47,7 +47,7 @@ export { Analytics } from './analytics/index';
 export {
   AttackMitigation,
   Firewall,
-  FirewallIPsItem,
+  FirewallIPs,
   UpstreamIPs,
   FirewallDeleteResponse,
   FirewallCreateParams,

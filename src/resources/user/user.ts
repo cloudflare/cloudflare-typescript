@@ -8,16 +8,12 @@ import * as InvitesAPI from 'cloudflare/resources/user/invites';
 import * as OrganizationsAPI from 'cloudflare/resources/user/organizations';
 import * as SubscriptionsAPI from 'cloudflare/resources/user/subscriptions';
 import * as BillingAPI from 'cloudflare/resources/user/billing/billing';
-import * as FirewallAPI from 'cloudflare/resources/user/firewall/firewall';
-import * as LoadBalancingAPI from 'cloudflare/resources/user/load-balancing/load-balancing';
 import * as TokensAPI from 'cloudflare/resources/user/tokens/tokens';
 
 export class User extends APIResource {
   auditLogs: AuditLogsAPI.AuditLogs = new AuditLogsAPI.AuditLogs(this._client);
   billing: BillingAPI.Billing = new BillingAPI.Billing(this._client);
-  firewall: FirewallAPI.Firewall = new FirewallAPI.Firewall(this._client);
   invites: InvitesAPI.Invites = new InvitesAPI.Invites(this._client);
-  loadBalancing: LoadBalancingAPI.LoadBalancing = new LoadBalancingAPI.LoadBalancing(this._client);
   organizations: OrganizationsAPI.Organizations = new OrganizationsAPI.Organizations(this._client);
   subscriptions: SubscriptionsAPI.Subscriptions = new SubscriptionsAPI.Subscriptions(this._client);
   tokens: TokensAPI.Tokens = new TokensAPI.Tokens(this._client);
@@ -83,12 +79,10 @@ export namespace User {
   export import AuditLogListResponsesV4PagePaginationArray = AuditLogsAPI.AuditLogListResponsesV4PagePaginationArray;
   export import AuditLogListParams = AuditLogsAPI.AuditLogListParams;
   export import Billing = BillingAPI.Billing;
-  export import Firewall = FirewallAPI.Firewall;
   export import Invites = InvitesAPI.Invites;
   export import Invite = InvitesAPI.Invite;
   export import InvitesSinglePage = InvitesAPI.InvitesSinglePage;
   export import InviteEditParams = InvitesAPI.InviteEditParams;
-  export import LoadBalancing = LoadBalancingAPI.LoadBalancing;
   export import Organizations = OrganizationsAPI.Organizations;
   export import Organization = OrganizationsAPI.Organization;
   export import OrganizationDeleteResponse = OrganizationsAPI.OrganizationDeleteResponse;
@@ -103,7 +97,7 @@ export namespace User {
   export import SubscriptionDeleteParams = SubscriptionsAPI.SubscriptionDeleteParams;
   export import SubscriptionEditParams = SubscriptionsAPI.SubscriptionEditParams;
   export import Tokens = TokensAPI.Tokens;
-  export import CIDRListItem = TokensAPI.CIDRListItem;
+  export import CIDRList = TokensAPI.CIDRList;
   export import Policy = TokensAPI.Policy;
   export import TokenCreateResponse = TokensAPI.TokenCreateResponse;
   export import TokenListResponse = TokensAPI.TokenListResponse;

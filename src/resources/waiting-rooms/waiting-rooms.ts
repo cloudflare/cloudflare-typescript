@@ -109,7 +109,7 @@ export class WaitingRooms extends APIResource {
 
 export class WaitingRoomsSinglePage extends SinglePage<WaitingRoom> {}
 
-export interface AdditionalRoutesItem {
+export interface AdditionalRoutes {
   /**
    * The hostname to which this waiting room will be applied (no wildcards). The
    * hostname must be the primary domain, subdomain, or custom hostname (if using SSL
@@ -186,7 +186,7 @@ export interface Query {
    * implied wildcard at the end of the path. The hostname and path combination must
    * be unique to this and all other waiting rooms.
    */
-  additional_routes?: Array<AdditionalRoutesItem>;
+  additional_routes?: Array<AdditionalRoutes>;
 
   /**
    * Configures cookie attributes for the waiting room cookie. This encrypted cookie
@@ -486,7 +486,7 @@ export interface WaitingRoom {
    * implied wildcard at the end of the path. The hostname and path combination must
    * be unique to this and all other waiting rooms.
    */
-  additional_routes?: Array<AdditionalRoutesItem>;
+  additional_routes?: Array<AdditionalRoutes>;
 
   /**
    * Configures cookie attributes for the waiting room cookie. This encrypted cookie
@@ -869,7 +869,7 @@ export interface WaitingRoomCreateParams {
    * applied. There is an implied wildcard at the end of the path. The hostname and
    * path combination must be unique to this and all other waiting rooms.
    */
-  additional_routes?: Array<AdditionalRoutesItem>;
+  additional_routes?: Array<AdditionalRoutes>;
 
   /**
    * Body param: Configures cookie attributes for the waiting room cookie. This
@@ -1206,7 +1206,7 @@ export interface WaitingRoomUpdateParams {
    * applied. There is an implied wildcard at the end of the path. The hostname and
    * path combination must be unique to this and all other waiting rooms.
    */
-  additional_routes?: Array<AdditionalRoutesItem>;
+  additional_routes?: Array<AdditionalRoutes>;
 
   /**
    * Body param: Configures cookie attributes for the waiting room cookie. This
@@ -1562,7 +1562,7 @@ export interface WaitingRoomEditParams {
    * applied. There is an implied wildcard at the end of the path. The hostname and
    * path combination must be unique to this and all other waiting rooms.
    */
-  additional_routes?: Array<AdditionalRoutesItem>;
+  additional_routes?: Array<AdditionalRoutes>;
 
   /**
    * Body param: Configures cookie attributes for the waiting room cookie. This

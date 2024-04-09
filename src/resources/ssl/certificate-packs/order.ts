@@ -43,7 +43,7 @@ export interface OrderCreateResponse {
    * Comma separated list of valid host names for the certificate packs. Must contain
    * the zone apex, may not contain more than 50 hosts, and may not be empty.
    */
-  hosts?: Array<CertificatePacksAPI.HostItem>;
+  hosts?: Array<CertificatePacksAPI.Host>;
 
   /**
    * Status of certificate pack.
@@ -105,7 +105,7 @@ export interface OrderCreateParams {
    * Must contain the zone apex, may not contain more than 50 hosts, and may not be
    * empty.
    */
-  hosts: Array<CertificatePacksAPI.HostItem>;
+  hosts: Array<CertificatePacksAPI.Host>;
 
   /**
    * Body param: Type of certificate pack.

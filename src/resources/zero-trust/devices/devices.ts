@@ -213,7 +213,7 @@ export namespace Devices {
   export import Posture = PostureAPI.Posture;
   export import DevicePostureRule = PostureAPI.DevicePostureRule;
   export import Input = PostureAPI.Input;
-  export import MatchItem = PostureAPI.MatchItem;
+  export import Match = PostureAPI.Match;
   export import UnnamedSchemaRef34ef0ad73a63c3f76ed170adca181930 = PostureAPI.UnnamedSchemaRef34ef0ad73a63c3f76ed170adca181930;
   export import UnnamedSchemaRef41885dd46b9e0294254c49305a273681 = PostureAPI.UnnamedSchemaRef41885dd46b9e0294254c49305a273681;
   export import UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27 = PostureAPI.UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27;

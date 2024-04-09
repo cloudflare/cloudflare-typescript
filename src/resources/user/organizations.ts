@@ -72,7 +72,7 @@ export interface Organization {
   /**
    * Access permissions for this User.
    */
-  permissions?: Array<PermissionGroupsAPI.PermissionItem>;
+  permissions?: Array<PermissionGroupsAPI.Permission>;
 
   /**
    * List of roles that a user has within an organization.
