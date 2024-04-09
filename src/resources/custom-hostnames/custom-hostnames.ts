@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as CustomHostnamesAPI from 'cloudflare/resources/custom-hostnames/custom-hostnames';
-import * as Shared from 'cloudflare/resources/shared';
 import * as FallbackOriginAPI from 'cloudflare/resources/custom-hostnames/fallback-origin';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
@@ -50,7 +49,7 @@ export class CustomHostnames extends APIResource {
     customHostnameId: string,
     params: CustomHostnameDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef8900f4cb9dca9b9ed0ac41ad571e6837> {
+  ): Core.APIPromise<CustomHostnameDeleteResponse> {
     const { zone_id, body } = params;
     return this._client.delete(`/zones/${zone_id}/custom_hostnames/${customHostnameId}`, {
       body: body,
@@ -754,6 +753,13 @@ export namespace UnnamedSchemaRefD2a16d7ee1ad3a888dd5821c918d51fd {
      */
     http_url?: string;
   }
+}
+
+export interface CustomHostnameDeleteResponse {
+  /**
+   * Identifier
+   */
+  id?: string;
 }
 
 export interface CustomHostnameCreateParams {

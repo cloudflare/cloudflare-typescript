@@ -3,6 +3,7 @@
 export {
   HostItem,
   CertificatePackListResponse,
+  CertificatePackDeleteResponse,
   CertificatePackEditResponse,
   CertificatePackListParams,
   CertificatePackDeleteParams,

@@ -34,13 +34,13 @@ export class CertificatePacks extends APIResource {
     certificatePackId: string,
     params: CertificatePackDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef8900f4cb9dca9b9ed0ac41ad571e6837> {
+  ): Core.APIPromise<CertificatePackDeleteResponse> {
     const { zone_id, body } = params;
     return (
       this._client.delete(`/zones/${zone_id}/ssl/certificate_packs/${certificatePackId}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef8900f4cb9dca9b9ed0ac41ad571e6837 }>
+      }) as Core.APIPromise<{ result: CertificatePackDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -86,6 +86,13 @@ export class CertificatePackListResponsesSinglePage extends SinglePage<Certifica
 export type HostItem = string;
 
 export type CertificatePackListResponse = unknown;
+
+export interface CertificatePackDeleteResponse {
+  /**
+   * Identifier
+   */
+  id?: string;
+}
 
 export interface CertificatePackEditResponse {
   /**
@@ -200,6 +207,7 @@ export interface CertificatePackGetParams {
 export namespace CertificatePacks {
   export import HostItem = CertificatePacksAPI.HostItem;
   export import CertificatePackListResponse = CertificatePacksAPI.CertificatePackListResponse;
+  export import CertificatePackDeleteResponse = CertificatePacksAPI.CertificatePackDeleteResponse;
   export import CertificatePackEditResponse = CertificatePacksAPI.CertificatePackEditResponse;
   export import CertificatePackListResponsesSinglePage = CertificatePacksAPI.CertificatePackListResponsesSinglePage;
   export import CertificatePackListParams = CertificatePacksAPI.CertificatePackListParams;

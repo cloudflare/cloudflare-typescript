@@ -3,19 +3,19 @@
 Types:
 
 - <code><a href="./src/resources/shared.ts">ErrorData</a></code>
+- <code><a href="./src/resources/shared.ts">Identifier</a></code>
+- <code><a href="./src/resources/shared.ts">ResponseInfo</a></code>
+- <code><a href="./src/resources/shared.ts">Result</a></code>
 - <code><a href="./src/resources/shared.ts">UnnamedSchemaRef025497b7e63379c31929636b5186e45c</a></code>
 - <code><a href="./src/resources/shared.ts">UnnamedSchemaRef2173d81a0b2d332c9e2ac46900fe8bb9</a></code>
 - <code><a href="./src/resources/shared.ts">UnnamedSchemaRef23001f1f0b697900e282236466a95fa3</a></code>
-- <code><a href="./src/resources/shared.ts">UnnamedSchemaRef3248f24329456e19dfa042fff9986f72</a></code>
 - <code><a href="./src/resources/shared.ts">UnnamedSchemaRef33f2e3917f3fe46ad98af0acbb1d9a19</a></code>
 - <code><a href="./src/resources/shared.ts">UnnamedSchemaRef413ab4522f0bb93f63444799121fe2f8</a></code>
-- <code><a href="./src/resources/shared.ts">UnnamedSchemaRef5cf232a1d651060af6450ae882932776</a></code>
 - <code><a href="./src/resources/shared.ts">UnnamedSchemaRef602dd5f63eab958d53da61434dec08f0</a></code>
 - <code><a href="./src/resources/shared.ts">UnnamedSchemaRef619309774d07ec6904f1e354560d6028</a></code>
 - <code><a href="./src/resources/shared.ts">UnnamedSchemaRef65e3c8c1a9c4638ec25cdbbaca7165c1</a></code>
 - <code><a href="./src/resources/shared.ts">UnnamedSchemaRef67bbb1ccdd42c3e2937b9fd19f791151</a></code>
 - <code><a href="./src/resources/shared.ts">UnnamedSchemaRef70f2c6ccd8a405358ac7ef8fc3d6751c</a></code>
-- <code><a href="./src/resources/shared.ts">UnnamedSchemaRef8900f4cb9dca9b9ed0ac41ad571e6837</a></code>
 - <code><a href="./src/resources/shared.ts">UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f</a></code>
 - <code><a href="./src/resources/shared.ts">UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</a></code>
 - <code><a href="./src/resources/shared.ts">UnnamedSchemaRefB0ec5cc02c98b665099a5707a2db4ea6</a></code>
@@ -23,7 +23,6 @@ Types:
 - <code><a href="./src/resources/shared.ts">UnnamedSchemaRefB92f86eb861cd3dee83c40884802fda6</a></code>
 - <code><a href="./src/resources/shared.ts">UnnamedSchemaRefCc2ac1a037e5d6702fc77b3bcb527854</a></code>
 - <code><a href="./src/resources/shared.ts">UnnamedSchemaRefD8600eb4758b3ae35607a0327bcd691b</a></code>
-- <code><a href="./src/resources/shared.ts">UnnamedSchemaRefE7c61ebe06ebfc3861ae8b9db4ba152b</a></code>
 - <code><a href="./src/resources/shared.ts">UnnamedSchemaRefEc4d85c3d1bcc6b3b7e99c199ae99846</a></code>
 - <code><a href="./src/resources/shared.ts">UnnamedSchemaRefEe1e79edcb234d14c4dd266880f2fd24</a></code>
 
@@ -75,12 +74,13 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/origin-ca-certificates.ts">OriginCACertificate</a></code>
+- <code><a href="./src/resources/origin-ca-certificates.ts">OriginCACertificateDeleteResponse</a></code>
 
 Methods:
 
 - <code title="post /certificates">client.originCACertificates.<a href="./src/resources/origin-ca-certificates.ts">create</a>({ ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
 - <code title="get /certificates">client.originCACertificates.<a href="./src/resources/origin-ca-certificates.ts">list</a>({ ...params }) -> OriginCACertificatesSinglePage</code>
-- <code title="delete /certificates/{certificate_id}">client.originCACertificates.<a href="./src/resources/origin-ca-certificates.ts">delete</a>(certificateId, { ...params }) -> UnnamedSchemaRef8900f4cb9dca9b9ed0ac41ad571e6837</code>
+- <code title="delete /certificates/{certificate_id}">client.originCACertificates.<a href="./src/resources/origin-ca-certificates.ts">delete</a>(certificateId, { ...params }) -> OriginCACertificateDeleteResponse</code>
 - <code title="get /certificates/{certificate_id}">client.originCACertificates.<a href="./src/resources/origin-ca-certificates.ts">get</a>(certificateId) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
 
 # IPs
@@ -1145,12 +1145,13 @@ Types:
 
 - <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">HostItem</a></code>
 - <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">CertificatePackListResponse</a></code>
+- <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">CertificatePackDeleteResponse</a></code>
 - <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">CertificatePackEditResponse</a></code>
 
 Methods:
 
 - <code title="get /zones/{zone_id}/ssl/certificate_packs">client.ssl.certificatePacks.<a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">list</a>({ ...params }) -> CertificatePackListResponsesSinglePage</code>
-- <code title="delete /zones/{zone_id}/ssl/certificate_packs/{certificate_pack_id}">client.ssl.certificatePacks.<a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">delete</a>(certificatePackId, { ...params }) -> UnnamedSchemaRef8900f4cb9dca9b9ed0ac41ad571e6837</code>
+- <code title="delete /zones/{zone_id}/ssl/certificate_packs/{certificate_pack_id}">client.ssl.certificatePacks.<a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">delete</a>(certificatePackId, { ...params }) -> CertificatePackDeleteResponse</code>
 - <code title="patch /zones/{zone_id}/ssl/certificate_packs/{certificate_pack_id}">client.ssl.certificatePacks.<a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">edit</a>(certificatePackId, { ...params }) -> CertificatePackEditResponse</code>
 - <code title="get /zones/{zone_id}/ssl/certificate_packs/{certificate_pack_id}">client.ssl.certificatePacks.<a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">get</a>(certificatePackId, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
 
@@ -1313,12 +1314,13 @@ Types:
 
 - <code><a href="./src/resources/custom-certificates/custom-certificates.ts">CustomCertificate</a></code>
 - <code><a href="./src/resources/custom-certificates/custom-certificates.ts">GeoRestrictions</a></code>
+- <code><a href="./src/resources/custom-certificates/custom-certificates.ts">CustomCertificateDeleteResponse</a></code>
 
 Methods:
 
 - <code title="post /zones/{zone_id}/custom_certificates">client.customCertificates.<a href="./src/resources/custom-certificates/custom-certificates.ts">create</a>({ ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
 - <code title="get /zones/{zone_id}/custom_certificates">client.customCertificates.<a href="./src/resources/custom-certificates/custom-certificates.ts">list</a>({ ...params }) -> CustomCertificatesV4PagePaginationArray</code>
-- <code title="delete /zones/{zone_id}/custom_certificates/{custom_certificate_id}">client.customCertificates.<a href="./src/resources/custom-certificates/custom-certificates.ts">delete</a>(customCertificateId, { ...params }) -> UnnamedSchemaRef8900f4cb9dca9b9ed0ac41ad571e6837</code>
+- <code title="delete /zones/{zone_id}/custom_certificates/{custom_certificate_id}">client.customCertificates.<a href="./src/resources/custom-certificates/custom-certificates.ts">delete</a>(customCertificateId, { ...params }) -> CustomCertificateDeleteResponse</code>
 - <code title="patch /zones/{zone_id}/custom_certificates/{custom_certificate_id}">client.customCertificates.<a href="./src/resources/custom-certificates/custom-certificates.ts">edit</a>(customCertificateId, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
 - <code title="get /zones/{zone_id}/custom_certificates/{custom_certificate_id}">client.customCertificates.<a href="./src/resources/custom-certificates/custom-certificates.ts">get</a>(customCertificateId, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
 
@@ -1342,12 +1344,13 @@ Types:
 - <code><a href="./src/resources/custom-hostnames/custom-hostnames.ts">UnnamedSchemaRef78adb375f06c6d462dd92b99e2ecf510</a></code>
 - <code><a href="./src/resources/custom-hostnames/custom-hostnames.ts">UnnamedSchemaRef9a9935a9a770967bb604ae41a81e42e1</a></code>
 - <code><a href="./src/resources/custom-hostnames/custom-hostnames.ts">UnnamedSchemaRefD2a16d7ee1ad3a888dd5821c918d51fd</a></code>
+- <code><a href="./src/resources/custom-hostnames/custom-hostnames.ts">CustomHostnameDeleteResponse</a></code>
 
 Methods:
 
 - <code title="post /zones/{zone_id}/custom_hostnames">client.customHostnames.<a href="./src/resources/custom-hostnames/custom-hostnames.ts">create</a>({ ...params }) -> CustomHostname</code>
 - <code title="get /zones/{zone_id}/custom_hostnames">client.customHostnames.<a href="./src/resources/custom-hostnames/custom-hostnames.ts">list</a>({ ...params }) -> CustomHostnamesV4PagePaginationArray</code>
-- <code title="delete /zones/{zone_id}/custom_hostnames/{custom_hostname_id}">client.customHostnames.<a href="./src/resources/custom-hostnames/custom-hostnames.ts">delete</a>(customHostnameId, { ...params }) -> UnnamedSchemaRef8900f4cb9dca9b9ed0ac41ad571e6837</code>
+- <code title="delete /zones/{zone_id}/custom_hostnames/{custom_hostname_id}">client.customHostnames.<a href="./src/resources/custom-hostnames/custom-hostnames.ts">delete</a>(customHostnameId, { ...params }) -> CustomHostnameDeleteResponse</code>
 - <code title="patch /zones/{zone_id}/custom_hostnames/{custom_hostname_id}">client.customHostnames.<a href="./src/resources/custom-hostnames/custom-hostnames.ts">edit</a>(customHostnameId, { ...params }) -> CustomHostname</code>
 - <code title="get /zones/{zone_id}/custom_hostnames/{custom_hostname_id}">client.customHostnames.<a href="./src/resources/custom-hostnames/custom-hostnames.ts">get</a>(customHostnameId, { ...params }) -> CustomHostname</code>
 
@@ -1754,12 +1757,13 @@ Types:
 - <code><a href="./src/resources/keyless-certificates.ts">KeylessCertificate</a></code>
 - <code><a href="./src/resources/keyless-certificates.ts">Tunnel</a></code>
 - <code><a href="./src/resources/keyless-certificates.ts">UnnamedSchemaRefA91f0bd72ee433f010eecfdc94ccf298</a></code>
+- <code><a href="./src/resources/keyless-certificates.ts">KeylessCertificateDeleteResponse</a></code>
 
 Methods:
 
 - <code title="post /zones/{zone_id}/keyless_certificates">client.keylessCertificates.<a href="./src/resources/keyless-certificates.ts">create</a>({ ...params }) -> Hostname</code>
 - <code title="get /zones/{zone_id}/keyless_certificates">client.keylessCertificates.<a href="./src/resources/keyless-certificates.ts">list</a>({ ...params }) -> KeylessCertificatesSinglePage</code>
-- <code title="delete /zones/{zone_id}/keyless_certificates/{keyless_certificate_id}">client.keylessCertificates.<a href="./src/resources/keyless-certificates.ts">delete</a>(keylessCertificateId, { ...params }) -> UnnamedSchemaRef8900f4cb9dca9b9ed0ac41ad571e6837</code>
+- <code title="delete /zones/{zone_id}/keyless_certificates/{keyless_certificate_id}">client.keylessCertificates.<a href="./src/resources/keyless-certificates.ts">delete</a>(keylessCertificateId, { ...params }) -> KeylessCertificateDeleteResponse</code>
 - <code title="patch /zones/{zone_id}/keyless_certificates/{keyless_certificate_id}">client.keylessCertificates.<a href="./src/resources/keyless-certificates.ts">edit</a>(keylessCertificateId, { ...params }) -> Hostname</code>
 - <code title="get /zones/{zone_id}/keyless_certificates/{keyless_certificate_id}">client.keylessCertificates.<a href="./src/resources/keyless-certificates.ts">get</a>(keylessCertificateId, { ...params }) -> Hostname</code>
 

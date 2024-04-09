@@ -4,6 +4,7 @@ export { AnalyzeCreateParams, Analyze } from './analyze';
 export {
   HostItem,
   CertificatePackListResponse,
+  CertificatePackDeleteResponse,
   CertificatePackEditResponse,
   CertificatePackListParams,
   CertificatePackDeleteParams,

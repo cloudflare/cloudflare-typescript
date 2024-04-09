@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as Shared from 'cloudflare/resources/shared';
 import * as CustomHostnamesAPI from 'cloudflare/resources/custom-hostnames/custom-hostnames';
 import { SinglePage } from 'cloudflare/pagination';
 
@@ -41,13 +40,13 @@ export class KeylessCertificates extends APIResource {
     keylessCertificateId: string,
     params: KeylessCertificateDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef8900f4cb9dca9b9ed0ac41ad571e6837> {
+  ): Core.APIPromise<KeylessCertificateDeleteResponse> {
     const { zone_id, body } = params;
     return (
       this._client.delete(`/zones/${zone_id}/keyless_certificates/${keylessCertificateId}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef8900f4cb9dca9b9ed0ac41ad571e6837 }>
+      }) as Core.APIPromise<{ result: KeylessCertificateDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -264,6 +263,13 @@ export interface UnnamedSchemaRefA91f0bd72ee433f010eecfdc94ccf298 {
    * Configuration for using Keyless SSL through a Cloudflare Tunnel
    */
   tunnel?: Tunnel;
+}
+
+export interface KeylessCertificateDeleteResponse {
+  /**
+   * Identifier
+   */
+  id?: string;
 }
 
 export interface KeylessCertificateCreateParams {

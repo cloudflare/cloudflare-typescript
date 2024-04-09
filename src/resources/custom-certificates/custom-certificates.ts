@@ -50,13 +50,13 @@ export class CustomCertificates extends APIResource {
     customCertificateId: string,
     params: CustomCertificateDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef8900f4cb9dca9b9ed0ac41ad571e6837> {
+  ): Core.APIPromise<CustomCertificateDeleteResponse> {
     const { zone_id, body } = params;
     return (
       this._client.delete(`/zones/${zone_id}/custom_certificates/${customCertificateId}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef8900f4cb9dca9b9ed0ac41ad571e6837 }>
+      }) as Core.APIPromise<{ result: CustomCertificateDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -196,6 +196,13 @@ export interface CustomCertificate {
  */
 export interface GeoRestrictions {
   label?: 'us' | 'eu' | 'highest_security';
+}
+
+export interface CustomCertificateDeleteResponse {
+  /**
+   * Identifier
+   */
+  id?: string;
 }
 
 export interface CustomCertificateCreateParams {

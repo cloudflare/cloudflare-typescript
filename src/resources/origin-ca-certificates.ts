@@ -51,10 +51,10 @@ export class OriginCACertificates extends APIResource {
     certificateId: string,
     body: OriginCACertificateDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef8900f4cb9dca9b9ed0ac41ad571e6837> {
+  ): Core.APIPromise<OriginCACertificateDeleteResponse> {
     return (
       this._client.delete(`/certificates/${certificateId}`, { body, ...options }) as Core.APIPromise<{
-        result: Shared.UnnamedSchemaRef8900f4cb9dca9b9ed0ac41ad571e6837;
+        result: OriginCACertificateDeleteResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -115,6 +115,13 @@ export interface OriginCACertificate {
    * When the certificate will expire.
    */
   expires_on?: string;
+}
+
+export interface OriginCACertificateDeleteResponse {
+  /**
+   * Identifier
+   */
+  id?: string;
 }
 
 export interface OriginCACertificateCreateParams {
