@@ -58,12 +58,13 @@ export {
   Certificates,
 } from './certificates/index';
 export {
-  Bookmarks,
+  Bookmark,
   BookmarkDeleteResponse,
   BookmarkCreateParams,
   BookmarkUpdateParams,
   BookmarkDeleteParams,
   BookmarksSinglePage,
+  Bookmarks,
 } from './bookmarks';
 export {
   CustomPage,
@@ -74,19 +75,19 @@ export {
   CustomPageWithoutHTMLsSinglePage,
   CustomPages,
 } from './custom-pages';
+export { KeyUpdateResponse, KeyGetResponse, KeyRotateResponse, KeyUpdateParams, Keys } from './keys';
+export { Logs } from './logs/index';
 export {
-  ErviceToken,
+  ServiceToken,
   ServiceTokenCreateResponse,
   ServiceTokenRotateResponse,
   ServiceTokenCreateParams,
   ServiceTokenUpdateParams,
   ServiceTokenListParams,
   ServiceTokenDeleteParams,
-  ErviceTokensSinglePage,
+  ServiceTokensSinglePage,
   ServiceTokens,
 } from './service-tokens';
-export { KeyUpdateResponse, KeyGetResponse, KeyRotateResponse, KeyUpdateParams, Keys } from './keys';
-export { Logs } from './logs/index';
 export { Tag, TagDeleteResponse, TagCreateParams, TagUpdateParams, TagsSinglePage, Tags } from './tags';
 export { User, UsersSinglePage, Users } from './users/index';
 export {

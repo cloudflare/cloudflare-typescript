@@ -49,7 +49,7 @@ export class ServiceTokens extends APIResource {
     uuid: string,
     params: ServiceTokenUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ErviceToken> {
+  ): Core.APIPromise<ServiceToken> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -71,7 +71,7 @@ export class ServiceTokens extends APIResource {
       this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/service_tokens/${uuid}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ErviceToken }>
+      }) as Core.APIPromise<{ result: ServiceToken }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -81,12 +81,12 @@ export class ServiceTokens extends APIResource {
   list(
     params?: ServiceTokenListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<ErviceTokensSinglePage, ErviceToken>;
-  list(options?: Core.RequestOptions): Core.PagePromise<ErviceTokensSinglePage, ErviceToken>;
+  ): Core.PagePromise<ServiceTokensSinglePage, ServiceToken>;
+  list(options?: Core.RequestOptions): Core.PagePromise<ServiceTokensSinglePage, ServiceToken>;
   list(
     params: ServiceTokenListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<ErviceTokensSinglePage, ErviceToken> {
+  ): Core.PagePromise<ServiceTokensSinglePage, ServiceToken> {
     if (isRequestOptions(params)) {
       return this.list({}, params);
     }
@@ -109,7 +109,7 @@ export class ServiceTokens extends APIResource {
         };
     return this._client.getAPIList(
       `/${accountOrZone}/${accountOrZoneId}/access/service_tokens`,
-      ErviceTokensSinglePage,
+      ServiceTokensSinglePage,
       options,
     );
   }
@@ -121,13 +121,13 @@ export class ServiceTokens extends APIResource {
     uuid: string,
     params?: ServiceTokenDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ErviceToken>;
-  delete(uuid: string, options?: Core.RequestOptions): Core.APIPromise<ErviceToken>;
+  ): Core.APIPromise<ServiceToken>;
+  delete(uuid: string, options?: Core.RequestOptions): Core.APIPromise<ServiceToken>;
   delete(
     uuid: string,
     params: ServiceTokenDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ErviceToken> {
+  ): Core.APIPromise<ServiceToken> {
     if (isRequestOptions(params)) {
       return this.delete(uuid, {}, params);
     }
@@ -152,19 +152,19 @@ export class ServiceTokens extends APIResource {
       this._client.delete(
         `/${accountOrZone}/${accountOrZoneId}/access/service_tokens/${uuid}`,
         options,
-      ) as Core.APIPromise<{ result: ErviceToken }>
+      ) as Core.APIPromise<{ result: ServiceToken }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Refreshes the expiration of a service token.
    */
-  refresh(identifier: string, uuid: string, options?: Core.RequestOptions): Core.APIPromise<ErviceToken> {
+  refresh(identifier: string, uuid: string, options?: Core.RequestOptions): Core.APIPromise<ServiceToken> {
     return (
       this._client.post(
         `/accounts/${identifier}/access/service_tokens/${uuid}/refresh`,
         options,
-      ) as Core.APIPromise<{ result: ErviceToken }>
+      ) as Core.APIPromise<{ result: ServiceToken }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -185,9 +185,9 @@ export class ServiceTokens extends APIResource {
   }
 }
 
-export class ErviceTokensSinglePage extends SinglePage<ErviceToken> {}
+export class ServiceTokensSinglePage extends SinglePage<ServiceToken> {}
 
-export interface ErviceToken {
+export interface ServiceToken {
   /**
    * The ID of the service token.
    */
@@ -363,10 +363,10 @@ export interface ServiceTokenDeleteParams {
 }
 
 export namespace ServiceTokens {
-  export import ErviceToken = ServiceTokensAPI.ErviceToken;
+  export import ServiceToken = ServiceTokensAPI.ServiceToken;
   export import ServiceTokenCreateResponse = ServiceTokensAPI.ServiceTokenCreateResponse;
   export import ServiceTokenRotateResponse = ServiceTokensAPI.ServiceTokenRotateResponse;
-  export import ErviceTokensSinglePage = ServiceTokensAPI.ErviceTokensSinglePage;
+  export import ServiceTokensSinglePage = ServiceTokensAPI.ServiceTokensSinglePage;
   export import ServiceTokenCreateParams = ServiceTokensAPI.ServiceTokenCreateParams;
   export import ServiceTokenUpdateParams = ServiceTokensAPI.ServiceTokenUpdateParams;
   export import ServiceTokenListParams = ServiceTokensAPI.ServiceTokenListParams;
