@@ -11,9 +11,12 @@ export class Roles extends APIResource {
   /**
    * Get all available roles for an account.
    */
-  list(params: RoleListParams, options?: Core.RequestOptions): Core.PagePromise<RolesSinglePage, Role> {
+  list(
+    params: RoleListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<RoleListResponsesSinglePage, RoleListResponse> {
     const { account_id } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/roles`, RolesSinglePage, options);
+    return this._client.getAPIList(`/accounts/${account_id}/roles`, RoleListResponsesSinglePage, options);
   }
 
   /**
@@ -33,7 +36,7 @@ export class Roles extends APIResource {
   }
 }
 
-export class RolesSinglePage extends SinglePage<Role> {}
+export class RoleListResponsesSinglePage extends SinglePage<RoleListResponse> {}
 
 export interface PermissionGrant {
   read?: boolean;
@@ -41,7 +44,7 @@ export interface PermissionGrant {
   write?: boolean;
 }
 
-export interface Role {
+export interface RoleListResponse {
   /**
    * Role identifier tag.
    */
@@ -73,8 +76,8 @@ export interface RoleGetParams {
 
 export namespace Roles {
   export import PermissionGrant = RolesAPI.PermissionGrant;
-  export import Role = RolesAPI.Role;
-  export import RolesSinglePage = RolesAPI.RolesSinglePage;
+  export import RoleListResponse = RolesAPI.RoleListResponse;
+  export import RoleListResponsesSinglePage = RolesAPI.RoleListResponsesSinglePage;
   export import RoleListParams = RolesAPI.RoleListParams;
   export import RoleGetParams = RolesAPI.RoleGetParams;
 }
