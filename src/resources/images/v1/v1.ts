@@ -163,9 +163,9 @@ export interface UnnamedSchemaRefE8461c343d70f42d35d6d68f1a58d05a {
 }
 
 export interface V1ListResponse {
-  errors: Array<Shared.UnnamedSchemaRef3248f24329456e19dfa042fff9986f72>;
+  errors: Array<Shared.ResponseInfo>;
 
-  messages: Array<Shared.UnnamedSchemaRef3248f24329456e19dfa042fff9986f72>;
+  messages: Array<Shared.ResponseInfo>;
 
   result: V1ListResponse.Result;
 

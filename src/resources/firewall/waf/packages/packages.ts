@@ -66,9 +66,9 @@ export type PackageListResponse =
 
 export namespace PackageListResponse {
   export interface FirewallAPIResponseCollection {
-    errors: Array<Shared.UnnamedSchemaRef3248f24329456e19dfa042fff9986f72>;
+    errors: Array<Shared.ResponseInfo>;
 
-    messages: Array<Shared.UnnamedSchemaRef3248f24329456e19dfa042fff9986f72>;
+    messages: Array<Shared.ResponseInfo>;
 
     result: Shared.UnnamedSchemaRef67bbb1ccdd42c3e2937b9fd19f791151 | null;
 
@@ -201,9 +201,9 @@ export type PackageGetResponse = PackageGetResponse.FirewallAPIResponseSingle | 
 
 export namespace PackageGetResponse {
   export interface FirewallAPIResponseSingle {
-    errors: Array<Shared.UnnamedSchemaRef3248f24329456e19dfa042fff9986f72>;
+    errors: Array<Shared.ResponseInfo>;
 
-    messages: Array<Shared.UnnamedSchemaRef3248f24329456e19dfa042fff9986f72>;
+    messages: Array<Shared.ResponseInfo>;
 
     result: Shared.UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f;
 

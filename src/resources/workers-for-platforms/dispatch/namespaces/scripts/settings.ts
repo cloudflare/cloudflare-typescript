@@ -53,12 +53,12 @@ export interface SettingEditParams {
   /**
    * Body param:
    */
-  errors: Array<Shared.UnnamedSchemaRef3248f24329456e19dfa042fff9986f72>;
+  errors: Array<Shared.ResponseInfo>;
 
   /**
    * Body param:
    */
-  messages: Array<Shared.UnnamedSchemaRef3248f24329456e19dfa042fff9986f72>;
+  messages: Array<Shared.ResponseInfo>;
 
   /**
    * Body param:

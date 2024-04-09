@@ -12,6 +12,145 @@ export interface ErrorData {
   message?: string;
 }
 
+export interface Identifier {
+  /**
+   * Identifier
+   */
+  id?: string;
+}
+
+export interface ResponseInfo {
+  code: number;
+
+  message: string;
+}
+
+export type Result = Result.UnionMember0 | Result.AaaAPIResponseCommon;
+
+export namespace Result {
+  export interface UnionMember0 {
+    errors?: unknown | null;
+
+    messages?: Array<unknown>;
+
+    result?: Array<UnionMember0.Result>;
+
+    success?: boolean;
+  }
+
+  export namespace UnionMember0 {
+    export interface Result {
+      /**
+       * A string that uniquely identifies the audit log.
+       */
+      id?: string;
+
+      action?: Result.Action;
+
+      actor?: Result.Actor;
+
+      /**
+       * The source of the event.
+       */
+      interface?: string;
+
+      /**
+       * An object which can lend more context to the action being logged. This is a
+       * flexible value and varies between different actions.
+       */
+      metadata?: unknown;
+
+      /**
+       * The new value of the resource that was modified.
+       */
+      newValue?: string;
+
+      /**
+       * The value of the resource before it was modified.
+       */
+      oldValue?: string;
+
+      owner?: Result.Owner;
+
+      resource?: Result.Resource;
+
+      /**
+       * A UTC RFC3339 timestamp that specifies when the action being logged occured.
+       */
+      when?: string;
+    }
+
+    export namespace Result {
+      export interface Action {
+        /**
+         * A boolean that indicates if the action attempted was successful.
+         */
+        result?: boolean;
+
+        /**
+         * A short string that describes the action that was performed.
+         */
+        type?: string;
+      }
+
+      export interface Actor {
+        /**
+         * The ID of the actor that performed the action. If a user performed the action,
+         * this will be their User ID.
+         */
+        id?: string;
+
+        /**
+         * The email of the user that performed the action.
+         */
+        email?: string;
+
+        /**
+         * The IP address of the request that performed the action.
+         */
+        ip?: string;
+
+        /**
+         * The type of actor, whether a User, Cloudflare Admin, or an Automated System.
+         */
+        type?: 'user' | 'admin' | 'Cloudflare';
+      }
+
+      export interface Owner {
+        /**
+         * Identifier
+         */
+        id?: string;
+      }
+
+      export interface Resource {
+        /**
+         * An identifier for the resource that was affected by the action.
+         */
+        id?: string;
+
+        /**
+         * A short string that describes the resource that was affected by the action.
+         */
+        type?: string;
+      }
+    }
+  }
+
+  export interface AaaAPIResponseCommon {
+    errors: Array<Shared.ResponseInfo>;
+
+    messages: Array<Shared.ResponseInfo>;
+
+    result: Shared.UnnamedSchemaRefEc4d85c3d1bcc6b3b7e99c199ae99846;
+
+    /**
+     * Whether the API call was successful
+     */
+    success: true;
+  }
+}
+
 export interface UnnamedSchemaRef025497b7e63379c31929636b5186e45c {
   /**
    * Monitored pool IDs mapped to their respective names.
@@ -33,12 +172,6 @@ export interface UnnamedSchemaRef23001f1f0b697900e282236466a95fa3 {
   max_retries?: number;
 
   max_wait_time_ms?: number;
-}
-
-export interface UnnamedSchemaRef3248f24329456e19dfa042fff9986f72 {
-  code: number;
-
-  message: string;
 }
 
 /**
@@ -297,13 +430,6 @@ export namespace UnnamedSchemaRef413ab4522f0bb93f63444799121fe2f8 {
   }
 }
 
-export interface UnnamedSchemaRef5cf232a1d651060af6450ae882932776 {
-  /**
-   * Identifier
-   */
-  id?: string;
-}
-
 export type UnnamedSchemaRef602dd5f63eab958d53da61434dec08f0 = unknown | string;
 
 export type UnnamedSchemaRef619309774d07ec6904f1e354560d6028 = unknown;
@@ -320,13 +446,6 @@ export interface UnnamedSchemaRef70f2c6ccd8a405358ac7ef8fc3d6751c {
    * Whether to generate a log when the rule matches.
    */
   enabled: boolean;
-}
-
-export interface UnnamedSchemaRef8900f4cb9dca9b9ed0ac41ad571e6837 {
-  /**
-   * Identifier
-   */
-  id?: string;
 }
 
 export type UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f = unknown | string;
@@ -540,134 +659,6 @@ export interface UnnamedSchemaRefCc2ac1a037e5d6702fc77b3bcb527854 {
 }
 
 export type UnnamedSchemaRefD8600eb4758b3ae35607a0327bcd691b = '*' | 'referral' | 'referrer';
-
-export type UnnamedSchemaRefE7c61ebe06ebfc3861ae8b9db4ba152b =
-  | UnnamedSchemaRefE7c61ebe06ebfc3861ae8b9db4ba152b.UnionMember0
-  | UnnamedSchemaRefE7c61ebe06ebfc3861ae8b9db4ba152b.AaaAPIResponseCommon;
-
-export namespace UnnamedSchemaRefE7c61ebe06ebfc3861ae8b9db4ba152b {
-  export interface UnionMember0 {
-    errors?: unknown | null;
-
-    messages?: Array<unknown>;
-
-    result?: Array<UnionMember0.Result>;
-
-    success?: boolean;
-  }
-
-  export namespace UnionMember0 {
-    export interface Result {
-      /**
-       * A string that uniquely identifies the audit log.
-       */
-      id?: string;
-
-      action?: Result.Action;
-
-      actor?: Result.Actor;
-
-      /**
-       * The source of the event.
-       */
-      interface?: string;
-
-      /**
-       * An object which can lend more context to the action being logged. This is a
-       * flexible value and varies between different actions.
-       */
-      metadata?: unknown;
-
-      /**
-       * The new value of the resource that was modified.
-       */
-      newValue?: string;
-
-      /**
-       * The value of the resource before it was modified.
-       */
-      oldValue?: string;
-
-      owner?: Result.Owner;
-
-      resource?: Result.Resource;
-
-      /**
-       * A UTC RFC3339 timestamp that specifies when the action being logged occured.
-       */
-      when?: string;
-    }
-
-    export namespace Result {
-      export interface Action {
-        /**
-         * A boolean that indicates if the action attempted was successful.
-         */
-        result?: boolean;
-
-        /**
-         * A short string that describes the action that was performed.
-         */
-        type?: string;
-      }
-
-      export interface Actor {
-        /**
-         * The ID of the actor that performed the action. If a user performed the action,
-         * this will be their User ID.
-         */
-        id?: string;
-
-        /**
-         * The email of the user that performed the action.
-         */
-        email?: string;
-
-        /**
-         * The IP address of the request that performed the action.
-         */
-        ip?: string;
-
-        /**
-         * The type of actor, whether a User, Cloudflare Admin, or an Automated System.
-         */
-        type?: 'user' | 'admin' | 'Cloudflare';
-      }
-
-      export interface Owner {
-        /**
-         * Identifier
-         */
-        id?: string;
-      }
-
-      export interface Resource {
-        /**
-         * An identifier for the resource that was affected by the action.
-         */
-        id?: string;
-
-        /**
-         * A short string that describes the resource that was affected by the action.
-         */
-        type?: string;
-      }
-    }
-  }
-
-  export interface AaaAPIResponseCommon {
-    errors: Array<Shared.UnnamedSchemaRef3248f24329456e19dfa042fff9986f72>;
-
-    messages: Array<Shared.UnnamedSchemaRef3248f24329456e19dfa042fff9986f72>;
-
-    result: Shared.UnnamedSchemaRefEc4d85c3d1bcc6b3b7e99c199ae99846;
-
-    /**
-     * Whether the API call was successful
-     */
-    success: true;
-  }
-}
 
 export type UnnamedSchemaRefEc4d85c3d1bcc6b3b7e99c199ae99846 = unknown | Array<unknown> | string;
 
