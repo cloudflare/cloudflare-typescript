@@ -2530,12 +2530,7 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/rulesets/rulesets.ts">BlockRule</a></code>
-- <code><a href="./src/resources/rulesets/rulesets.ts">ExecuteRule</a></code>
-- <code><a href="./src/resources/rulesets/rulesets.ts">LogRule</a></code>
-- <code><a href="./src/resources/rulesets/rulesets.ts">RequestRule</a></code>
 - <code><a href="./src/resources/rulesets/rulesets.ts">Ruleset</a></code>
-- <code><a href="./src/resources/rulesets/rulesets.ts">SkipRule</a></code>
 - <code><a href="./src/resources/rulesets/rulesets.ts">RulesetCreateResponse</a></code>
 - <code><a href="./src/resources/rulesets/rulesets.ts">RulesetUpdateResponse</a></code>
 - <code><a href="./src/resources/rulesets/rulesets.ts">RulesetGetResponse</a></code>
