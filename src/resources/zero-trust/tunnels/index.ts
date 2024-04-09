@@ -20,7 +20,6 @@ export { ManagementCreateResponse, ManagementCreateParams, Management } from './
 export { TokenGetResponse, TokenGetParams, Token } from './token';
 export {
   Tunnel,
-  UnnamedSchemaRefA9c0e0a8cc5fd0e244f41ea806cd954a,
   WARPConnectorTunnel,
   TunnelCreateParams,
   TunnelListParams,

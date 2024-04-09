@@ -70,7 +70,6 @@ export { Percentiles, UnnamedSchemaRefBf9e2abcf1b78a6cab8e6e29e2228a11, DEX } fr
 export { Seat, SeatEditResponse, SeatEditParams, Seats } from './seats';
 export {
   Tunnel,
-  UnnamedSchemaRefA9c0e0a8cc5fd0e244f41ea806cd954a,
   WARPConnectorTunnel,
   TunnelCreateParams,
   TunnelListParams,

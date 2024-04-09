@@ -3,7 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
-import * as LoadBalancersPoolsAPI from 'cloudflare/resources/user/load-balancers/pools';
+import * as LoadBalancingPoolsAPI from 'cloudflare/resources/user/load-balancing/pools';
 import * as LoadBalancersAPI from 'cloudflare/resources/load-balancers/load-balancers';
 import * as PoolsAPI from 'cloudflare/resources/load-balancers/pools/pools';
 import { PoolsSinglePage } from 'cloudflare/resources/load-balancers/pools/pools';
@@ -525,16 +525,16 @@ export interface PoolPreviewParams {
 }
 
 export namespace Pools {
-  export import PoolDeleteResponse = LoadBalancersPoolsAPI.PoolDeleteResponse;
-  export import PoolHealthResponse = LoadBalancersPoolsAPI.PoolHealthResponse;
-  export import PoolPreviewResponse = LoadBalancersPoolsAPI.PoolPreviewResponse;
-  export import PoolReferencesResponse = LoadBalancersPoolsAPI.PoolReferencesResponse;
-  export import PoolCreateParams = LoadBalancersPoolsAPI.PoolCreateParams;
-  export import PoolUpdateParams = LoadBalancersPoolsAPI.PoolUpdateParams;
-  export import PoolListParams = LoadBalancersPoolsAPI.PoolListParams;
-  export import PoolDeleteParams = LoadBalancersPoolsAPI.PoolDeleteParams;
-  export import PoolEditParams = LoadBalancersPoolsAPI.PoolEditParams;
-  export import PoolPreviewParams = LoadBalancersPoolsAPI.PoolPreviewParams;
+  export import PoolDeleteResponse = LoadBalancingPoolsAPI.PoolDeleteResponse;
+  export import PoolHealthResponse = LoadBalancingPoolsAPI.PoolHealthResponse;
+  export import PoolPreviewResponse = LoadBalancingPoolsAPI.PoolPreviewResponse;
+  export import PoolReferencesResponse = LoadBalancingPoolsAPI.PoolReferencesResponse;
+  export import PoolCreateParams = LoadBalancingPoolsAPI.PoolCreateParams;
+  export import PoolUpdateParams = LoadBalancingPoolsAPI.PoolUpdateParams;
+  export import PoolListParams = LoadBalancingPoolsAPI.PoolListParams;
+  export import PoolDeleteParams = LoadBalancingPoolsAPI.PoolDeleteParams;
+  export import PoolEditParams = LoadBalancingPoolsAPI.PoolEditParams;
+  export import PoolPreviewParams = LoadBalancingPoolsAPI.PoolPreviewParams;
 }
 
 export { PoolsSinglePage };

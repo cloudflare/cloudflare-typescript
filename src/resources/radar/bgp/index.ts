@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export { BGPTimeseriesResponse, BGPTimeseriesParams, BGP } from './bgp';
-export { HijackEventsResponse, HijackEventsParams, Hijacks } from './hijacks';
-export { LeakEventsResponse, LeakEventsParams, Leaks } from './leaks';
+export { Hijacks } from './hijacks/index';
+export { Leaks } from './leaks/index';
 export {
   RouteMoasResponse,
   RoutePfx2asResponse,

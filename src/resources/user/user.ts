@@ -9,7 +9,7 @@ import * as OrganizationsAPI from 'cloudflare/resources/user/organizations';
 import * as SubscriptionsAPI from 'cloudflare/resources/user/subscriptions';
 import * as BillingAPI from 'cloudflare/resources/user/billing/billing';
 import * as FirewallAPI from 'cloudflare/resources/user/firewall/firewall';
-import * as LoadBalancersAPI from 'cloudflare/resources/user/load-balancers/load-balancers';
+import * as LoadBalancingAPI from 'cloudflare/resources/user/load-balancing/load-balancing';
 import * as TokensAPI from 'cloudflare/resources/user/tokens/tokens';
 
 export class User extends APIResource {
@@ -17,7 +17,7 @@ export class User extends APIResource {
   billing: BillingAPI.Billing = new BillingAPI.Billing(this._client);
   firewall: FirewallAPI.Firewall = new FirewallAPI.Firewall(this._client);
   invites: InvitesAPI.Invites = new InvitesAPI.Invites(this._client);
-  loadBalancers: LoadBalancersAPI.LoadBalancers = new LoadBalancersAPI.LoadBalancers(this._client);
+  loadBalancing: LoadBalancingAPI.LoadBalancing = new LoadBalancingAPI.LoadBalancing(this._client);
   organizations: OrganizationsAPI.Organizations = new OrganizationsAPI.Organizations(this._client);
   subscriptions: SubscriptionsAPI.Subscriptions = new SubscriptionsAPI.Subscriptions(this._client);
   tokens: TokensAPI.Tokens = new TokensAPI.Tokens(this._client);
@@ -88,7 +88,7 @@ export namespace User {
   export import Invite = InvitesAPI.Invite;
   export import InvitesSinglePage = InvitesAPI.InvitesSinglePage;
   export import InviteEditParams = InvitesAPI.InviteEditParams;
-  export import LoadBalancers = LoadBalancersAPI.LoadBalancers;
+  export import LoadBalancing = LoadBalancingAPI.LoadBalancing;
   export import Organizations = OrganizationsAPI.Organizations;
   export import Organization = OrganizationsAPI.Organization;
   export import OrganizationDeleteResponse = OrganizationsAPI.OrganizationDeleteResponse;

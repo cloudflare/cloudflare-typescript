@@ -5,9 +5,9 @@ import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as BGPAPI from 'cloudflare/resources/radar/bgp/bgp';
 import * as RadarAPI from 'cloudflare/resources/radar/radar';
-import * as HijacksAPI from 'cloudflare/resources/radar/bgp/hijacks';
-import * as LeaksAPI from 'cloudflare/resources/radar/bgp/leaks';
 import * as RoutesAPI from 'cloudflare/resources/radar/bgp/routes';
+import * as HijacksAPI from 'cloudflare/resources/radar/bgp/hijacks/hijacks';
+import * as LeaksAPI from 'cloudflare/resources/radar/bgp/leaks/leaks';
 import * as TopAPI from 'cloudflare/resources/radar/bgp/top/top';
 
 export class BGP extends APIResource {
@@ -140,14 +140,10 @@ export namespace BGP {
   export import BGPTimeseriesResponse = BGPAPI.BGPTimeseriesResponse;
   export import BGPTimeseriesParams = BGPAPI.BGPTimeseriesParams;
   export import Leaks = LeaksAPI.Leaks;
-  export import LeakEventsResponse = LeaksAPI.LeakEventsResponse;
-  export import LeakEventsParams = LeaksAPI.LeakEventsParams;
   export import Top = TopAPI.Top;
   export import TopPrefixesResponse = TopAPI.TopPrefixesResponse;
   export import TopPrefixesParams = TopAPI.TopPrefixesParams;
   export import Hijacks = HijacksAPI.Hijacks;
-  export import HijackEventsResponse = HijacksAPI.HijackEventsResponse;
-  export import HijackEventsParams = HijacksAPI.HijackEventsParams;
   export import Routes = RoutesAPI.Routes;
   export import RouteMoasResponse = RoutesAPI.RouteMoasResponse;
   export import RoutePfx2asResponse = RoutesAPI.RoutePfx2asResponse;

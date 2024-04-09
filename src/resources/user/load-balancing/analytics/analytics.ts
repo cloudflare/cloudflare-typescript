@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from 'cloudflare/resource';
-import * as AnalyticsAPI from 'cloudflare/resources/user/load-balancers/analytics/analytics';
-import * as EventsAPI from 'cloudflare/resources/user/load-balancers/analytics/events';
+import * as AnalyticsAPI from 'cloudflare/resources/user/load-balancing/analytics/analytics';
+import * as EventsAPI from 'cloudflare/resources/user/load-balancing/analytics/events';
 import { SinglePage } from 'cloudflare/pagination';
 
 export class Analytics extends APIResource {
