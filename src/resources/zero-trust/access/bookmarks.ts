@@ -14,12 +14,12 @@ export class Bookmarks extends APIResource {
     uuid: string,
     body: BookmarkCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Bookmarks> {
+  ): Core.APIPromise<Bookmark> {
     return (
       this._client.post(`/accounts/${identifier}/access/bookmarks/${uuid}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: Bookmarks }>
+      }) as Core.APIPromise<{ result: Bookmark }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -31,19 +31,19 @@ export class Bookmarks extends APIResource {
     uuid: string,
     body: BookmarkUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Bookmarks> {
+  ): Core.APIPromise<Bookmark> {
     return (
       this._client.put(`/accounts/${identifier}/access/bookmarks/${uuid}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: Bookmarks }>
+      }) as Core.APIPromise<{ result: Bookmark }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Lists Bookmark applications.
    */
-  list(identifier: string, options?: Core.RequestOptions): Core.PagePromise<BookmarksSinglePage, Bookmarks> {
+  list(identifier: string, options?: Core.RequestOptions): Core.PagePromise<BookmarksSinglePage, Bookmark> {
     return this._client.getAPIList(`/accounts/${identifier}/access/bookmarks`, BookmarksSinglePage, options);
   }
 
@@ -67,18 +67,18 @@ export class Bookmarks extends APIResource {
   /**
    * Fetches a single Bookmark application.
    */
-  get(identifier: string, uuid: string, options?: Core.RequestOptions): Core.APIPromise<Bookmarks> {
+  get(identifier: string, uuid: string, options?: Core.RequestOptions): Core.APIPromise<Bookmark> {
     return (
       this._client.get(`/accounts/${identifier}/access/bookmarks/${uuid}`, options) as Core.APIPromise<{
-        result: Bookmarks;
+        result: Bookmark;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class BookmarksSinglePage extends SinglePage<Bookmarks> {}
+export class BookmarksSinglePage extends SinglePage<Bookmark> {}
 
-export interface Bookmarks {
+export interface Bookmark {
   /**
    * The unique identifier for the Bookmark application.
    */
@@ -123,7 +123,7 @@ export type BookmarkUpdateParams = unknown;
 export type BookmarkDeleteParams = unknown;
 
 export namespace Bookmarks {
-  export import Bookmarks = BookmarksAPI.Bookmarks;
+  export import Bookmark = BookmarksAPI.Bookmark;
   export import BookmarkDeleteResponse = BookmarksAPI.BookmarkDeleteResponse;
   export import BookmarksSinglePage = BookmarksAPI.BookmarksSinglePage;
   export import BookmarkCreateParams = BookmarksAPI.BookmarkCreateParams;

@@ -9,11 +9,11 @@ export class Networks extends APIResource {
   /**
    * Creates a new device managed network.
    */
-  create(params: NetworkCreateParams, options?: Core.RequestOptions): Core.APIPromise<Network | null> {
+  create(params: NetworkCreateParams, options?: Core.RequestOptions): Core.APIPromise<DeviceNetwork | null> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/devices/networks`, { body, ...options }) as Core.APIPromise<{
-        result: Network | null;
+        result: DeviceNetwork | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -25,13 +25,13 @@ export class Networks extends APIResource {
     networkId: string,
     params: NetworkUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Network | null> {
+  ): Core.APIPromise<DeviceNetwork | null> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/devices/networks/${networkId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: Network | null }>
+      }) as Core.APIPromise<{ result: DeviceNetwork | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -41,9 +41,13 @@ export class Networks extends APIResource {
   list(
     params: NetworkListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<NetworksSinglePage, Network> {
+  ): Core.PagePromise<DeviceNetworksSinglePage, DeviceNetwork> {
     const { account_id } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/devices/networks`, NetworksSinglePage, options);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/devices/networks`,
+      DeviceNetworksSinglePage,
+      options,
+    );
   }
 
   /**
@@ -71,24 +75,24 @@ export class Networks extends APIResource {
     networkId: string,
     params: NetworkGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Network | null> {
+  ): Core.APIPromise<DeviceNetwork | null> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/devices/networks/${networkId}`, options) as Core.APIPromise<{
-        result: Network | null;
+        result: DeviceNetwork | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class NetworksSinglePage extends SinglePage<Network> {}
+export class DeviceNetworksSinglePage extends SinglePage<DeviceNetwork> {}
 
-export interface Network {
+export interface DeviceNetwork {
   /**
    * The configuration object containing information for the WARP client to detect
    * the managed network.
    */
-  config?: Network.Config;
+  config?: DeviceNetwork.Config;
 
   /**
    * The name of the device managed network. This name must be unique.
@@ -106,7 +110,7 @@ export interface Network {
   type?: 'tls';
 }
 
-export namespace Network {
+export namespace DeviceNetwork {
   /**
    * The configuration object containing information for the WARP client to detect
    * the managed network.
@@ -171,7 +175,7 @@ export namespace UnnamedSchemaRefD2b048663faf5e0cd5c90501b71171de {
   }
 }
 
-export type NetworkDeleteResponse = Array<Network>;
+export type NetworkDeleteResponse = Array<DeviceNetwork>;
 
 export interface NetworkCreateParams {
   /**
@@ -282,10 +286,10 @@ export interface NetworkGetParams {
 }
 
 export namespace Networks {
-  export import Network = NetworksAPI.Network;
+  export import DeviceNetwork = NetworksAPI.DeviceNetwork;
   export import UnnamedSchemaRefD2b048663faf5e0cd5c90501b71171de = NetworksAPI.UnnamedSchemaRefD2b048663faf5e0cd5c90501b71171de;
   export import NetworkDeleteResponse = NetworksAPI.NetworkDeleteResponse;
-  export import NetworksSinglePage = NetworksAPI.NetworksSinglePage;
+  export import DeviceNetworksSinglePage = NetworksAPI.DeviceNetworksSinglePage;
   export import NetworkCreateParams = NetworksAPI.NetworkCreateParams;
   export import NetworkUpdateParams = NetworksAPI.NetworkUpdateParams;
   export import NetworkListParams = NetworksAPI.NetworkListParams;

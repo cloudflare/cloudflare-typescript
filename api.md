@@ -4027,17 +4027,17 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/zero-trust/devices/networks.ts">Network</a></code>
+- <code><a href="./src/resources/zero-trust/devices/networks.ts">DeviceNetwork</a></code>
 - <code><a href="./src/resources/zero-trust/devices/networks.ts">UnnamedSchemaRefD2b048663faf5e0cd5c90501b71171de</a></code>
 - <code><a href="./src/resources/zero-trust/devices/networks.ts">NetworkDeleteResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/devices/networks">client.zeroTrust.devices.networks.<a href="./src/resources/zero-trust/devices/networks.ts">create</a>({ ...params }) -> Network | null</code>
-- <code title="put /accounts/{account_id}/devices/networks/{network_id}">client.zeroTrust.devices.networks.<a href="./src/resources/zero-trust/devices/networks.ts">update</a>(networkId, { ...params }) -> Network | null</code>
-- <code title="get /accounts/{account_id}/devices/networks">client.zeroTrust.devices.networks.<a href="./src/resources/zero-trust/devices/networks.ts">list</a>({ ...params }) -> NetworksSinglePage</code>
+- <code title="post /accounts/{account_id}/devices/networks">client.zeroTrust.devices.networks.<a href="./src/resources/zero-trust/devices/networks.ts">create</a>({ ...params }) -> DeviceNetwork | null</code>
+- <code title="put /accounts/{account_id}/devices/networks/{network_id}">client.zeroTrust.devices.networks.<a href="./src/resources/zero-trust/devices/networks.ts">update</a>(networkId, { ...params }) -> DeviceNetwork | null</code>
+- <code title="get /accounts/{account_id}/devices/networks">client.zeroTrust.devices.networks.<a href="./src/resources/zero-trust/devices/networks.ts">list</a>({ ...params }) -> DeviceNetworksSinglePage</code>
 - <code title="delete /accounts/{account_id}/devices/networks/{network_id}">client.zeroTrust.devices.networks.<a href="./src/resources/zero-trust/devices/networks.ts">delete</a>(networkId, { ...params }) -> NetworkDeleteResponse | null</code>
-- <code title="get /accounts/{account_id}/devices/networks/{network_id}">client.zeroTrust.devices.networks.<a href="./src/resources/zero-trust/devices/networks.ts">get</a>(networkId, { ...params }) -> Network | null</code>
+- <code title="get /accounts/{account_id}/devices/networks/{network_id}">client.zeroTrust.devices.networks.<a href="./src/resources/zero-trust/devices/networks.ts">get</a>(networkId, { ...params }) -> DeviceNetwork | null</code>
 
 ### Policies
 
@@ -4114,9 +4114,9 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">DeviceInput</a></code>
+- <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">DeviceMatch</a></code>
 - <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">DevicePostureRule</a></code>
-- <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">Input</a></code>
-- <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">Match</a></code>
 - <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">UnnamedSchemaRef34ef0ad73a63c3f76ed170adca181930</a></code>
 - <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">UnnamedSchemaRef41885dd46b9e0294254c49305a273681</a></code>
 - <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27</a></code>
@@ -4134,16 +4134,16 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/zero-trust/devices/posture/integrations.ts">Integrations</a></code>
+- <code><a href="./src/resources/zero-trust/devices/posture/integrations.ts">Integration</a></code>
 - <code><a href="./src/resources/zero-trust/devices/posture/integrations.ts">UnnamedSchemaRefB84b377dfc9454d455b646d4bc9ab507</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/devices/posture/integration">client.zeroTrust.devices.posture.integrations.<a href="./src/resources/zero-trust/devices/posture/integrations.ts">create</a>({ ...params }) -> Integrations | null</code>
+- <code title="post /accounts/{account_id}/devices/posture/integration">client.zeroTrust.devices.posture.integrations.<a href="./src/resources/zero-trust/devices/posture/integrations.ts">create</a>({ ...params }) -> Integration | null</code>
 - <code title="get /accounts/{account_id}/devices/posture/integration">client.zeroTrust.devices.posture.integrations.<a href="./src/resources/zero-trust/devices/posture/integrations.ts">list</a>({ ...params }) -> IntegrationsSinglePage</code>
 - <code title="delete /accounts/{account_id}/devices/posture/integration/{integration_id}">client.zeroTrust.devices.posture.integrations.<a href="./src/resources/zero-trust/devices/posture/integrations.ts">delete</a>(integrationId, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
-- <code title="patch /accounts/{account_id}/devices/posture/integration/{integration_id}">client.zeroTrust.devices.posture.integrations.<a href="./src/resources/zero-trust/devices/posture/integrations.ts">edit</a>(integrationId, { ...params }) -> Integrations | null</code>
-- <code title="get /accounts/{account_id}/devices/posture/integration/{integration_id}">client.zeroTrust.devices.posture.integrations.<a href="./src/resources/zero-trust/devices/posture/integrations.ts">get</a>(integrationId, { ...params }) -> Integrations | null</code>
+- <code title="patch /accounts/{account_id}/devices/posture/integration/{integration_id}">client.zeroTrust.devices.posture.integrations.<a href="./src/resources/zero-trust/devices/posture/integrations.ts">edit</a>(integrationId, { ...params }) -> Integration | null</code>
+- <code title="get /accounts/{account_id}/devices/posture/integration/{integration_id}">client.zeroTrust.devices.posture.integrations.<a href="./src/resources/zero-trust/devices/posture/integrations.ts">get</a>(integrationId, { ...params }) -> Integration | null</code>
 
 ### Revoke
 
@@ -4363,33 +4363,33 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/zero-trust/access/service-tokens.ts">ErviceToken</a></code>
+- <code><a href="./src/resources/zero-trust/access/service-tokens.ts">ServiceToken</a></code>
 - <code><a href="./src/resources/zero-trust/access/service-tokens.ts">ServiceTokenCreateResponse</a></code>
 - <code><a href="./src/resources/zero-trust/access/service-tokens.ts">ServiceTokenRotateResponse</a></code>
 
 Methods:
 
 - <code title="post /{account_or_zone}/{account_or_zone_id}/access/service_tokens">client.zeroTrust.access.serviceTokens.<a href="./src/resources/zero-trust/access/service-tokens.ts">create</a>({ ...params }) -> ServiceTokenCreateResponse</code>
-- <code title="put /{account_or_zone}/{account_or_zone_id}/access/service_tokens/{uuid}">client.zeroTrust.access.serviceTokens.<a href="./src/resources/zero-trust/access/service-tokens.ts">update</a>(uuid, { ...params }) -> ErviceToken</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/access/service_tokens">client.zeroTrust.access.serviceTokens.<a href="./src/resources/zero-trust/access/service-tokens.ts">list</a>({ ...params }) -> ErviceTokensSinglePage</code>
-- <code title="delete /{account_or_zone}/{account_or_zone_id}/access/service_tokens/{uuid}">client.zeroTrust.access.serviceTokens.<a href="./src/resources/zero-trust/access/service-tokens.ts">delete</a>(uuid, { ...params }) -> ErviceToken</code>
-- <code title="post /accounts/{identifier}/access/service_tokens/{uuid}/refresh">client.zeroTrust.access.serviceTokens.<a href="./src/resources/zero-trust/access/service-tokens.ts">refresh</a>(identifier, uuid) -> ErviceToken</code>
+- <code title="put /{account_or_zone}/{account_or_zone_id}/access/service_tokens/{uuid}">client.zeroTrust.access.serviceTokens.<a href="./src/resources/zero-trust/access/service-tokens.ts">update</a>(uuid, { ...params }) -> ServiceToken</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/access/service_tokens">client.zeroTrust.access.serviceTokens.<a href="./src/resources/zero-trust/access/service-tokens.ts">list</a>({ ...params }) -> ServiceTokensSinglePage</code>
+- <code title="delete /{account_or_zone}/{account_or_zone_id}/access/service_tokens/{uuid}">client.zeroTrust.access.serviceTokens.<a href="./src/resources/zero-trust/access/service-tokens.ts">delete</a>(uuid, { ...params }) -> ServiceToken</code>
+- <code title="post /accounts/{identifier}/access/service_tokens/{uuid}/refresh">client.zeroTrust.access.serviceTokens.<a href="./src/resources/zero-trust/access/service-tokens.ts">refresh</a>(identifier, uuid) -> ServiceToken</code>
 - <code title="post /accounts/{identifier}/access/service_tokens/{uuid}/rotate">client.zeroTrust.access.serviceTokens.<a href="./src/resources/zero-trust/access/service-tokens.ts">rotate</a>(identifier, uuid) -> ServiceTokenRotateResponse</code>
 
 ### Bookmarks
 
 Types:
 
-- <code><a href="./src/resources/zero-trust/access/bookmarks.ts">Bookmarks</a></code>
+- <code><a href="./src/resources/zero-trust/access/bookmarks.ts">Bookmark</a></code>
 - <code><a href="./src/resources/zero-trust/access/bookmarks.ts">BookmarkDeleteResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{identifier}/access/bookmarks/{uuid}">client.zeroTrust.access.bookmarks.<a href="./src/resources/zero-trust/access/bookmarks.ts">create</a>(identifier, uuid, { ...params }) -> Bookmarks</code>
-- <code title="put /accounts/{identifier}/access/bookmarks/{uuid}">client.zeroTrust.access.bookmarks.<a href="./src/resources/zero-trust/access/bookmarks.ts">update</a>(identifier, uuid, { ...params }) -> Bookmarks</code>
+- <code title="post /accounts/{identifier}/access/bookmarks/{uuid}">client.zeroTrust.access.bookmarks.<a href="./src/resources/zero-trust/access/bookmarks.ts">create</a>(identifier, uuid, { ...params }) -> Bookmark</code>
+- <code title="put /accounts/{identifier}/access/bookmarks/{uuid}">client.zeroTrust.access.bookmarks.<a href="./src/resources/zero-trust/access/bookmarks.ts">update</a>(identifier, uuid, { ...params }) -> Bookmark</code>
 - <code title="get /accounts/{identifier}/access/bookmarks">client.zeroTrust.access.bookmarks.<a href="./src/resources/zero-trust/access/bookmarks.ts">list</a>(identifier) -> BookmarksSinglePage</code>
 - <code title="delete /accounts/{identifier}/access/bookmarks/{uuid}">client.zeroTrust.access.bookmarks.<a href="./src/resources/zero-trust/access/bookmarks.ts">delete</a>(identifier, uuid, { ...params }) -> BookmarkDeleteResponse</code>
-- <code title="get /accounts/{identifier}/access/bookmarks/{uuid}">client.zeroTrust.access.bookmarks.<a href="./src/resources/zero-trust/access/bookmarks.ts">get</a>(identifier, uuid) -> Bookmarks</code>
+- <code title="get /accounts/{identifier}/access/bookmarks/{uuid}">client.zeroTrust.access.bookmarks.<a href="./src/resources/zero-trust/access/bookmarks.ts">get</a>(identifier, uuid) -> Bookmark</code>
 
 ### Keys
 
@@ -4495,6 +4495,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/zero-trust/dex/dex.ts">NetworkPath</a></code>
 - <code><a href="./src/resources/zero-trust/dex/dex.ts">Percentiles</a></code>
 - <code><a href="./src/resources/zero-trust/dex/dex.ts">UnnamedSchemaRefBf9e2abcf1b78a6cab8e6e29e2228a11</a></code>
 
@@ -4579,17 +4580,16 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/zero-trust/dex/traceroute-test-results/network-path.ts">NetworkPath</a></code>
+- <code><a href="./src/resources/zero-trust/dex/traceroute-test-results/network-path.ts">NetworkPathGetResponse</a></code>
 
 Methods:
 
-- <code title="get /accounts/{account_id}/dex/traceroute-test-results/{test_result_id}/network-path">client.zeroTrust.dex.tracerouteTestResults.networkPath.<a href="./src/resources/zero-trust/dex/traceroute-test-results/network-path.ts">get</a>(testResultId, { ...params }) -> NetworkPath</code>
+- <code title="get /accounts/{account_id}/dex/traceroute-test-results/{test_result_id}/network-path">client.zeroTrust.dex.tracerouteTestResults.networkPath.<a href="./src/resources/zero-trust/dex/traceroute-test-results/network-path.ts">get</a>(testResultId, { ...params }) -> NetworkPathGetResponse</code>
 
 ### TracerouteTests
 
 Types:
 
-- <code><a href="./src/resources/zero-trust/dex/traceroute-tests.ts">NetworkPath</a></code>
 - <code><a href="./src/resources/zero-trust/dex/traceroute-tests.ts">Traceroute</a></code>
 - <code><a href="./src/resources/zero-trust/dex/traceroute-tests.ts">TracerouteTestPercentilesResponse</a></code>
 

@@ -16,8 +16,8 @@ export {
   FleetStatusOverTimeParams,
   FleetStatus,
 } from './fleet-status/index';
+export { NetworkPath, Percentiles, UnnamedSchemaRefBf9e2abcf1b78a6cab8e6e29e2228a11, DEX } from './dex';
 export {
-  NetworkPath,
   Traceroute,
   TracerouteTestPercentilesResponse,
   TracerouteTestGetParams,
@@ -25,5 +25,4 @@ export {
   TracerouteTestPercentilesParams,
   TracerouteTests,
 } from './traceroute-tests';
-export { Percentiles, UnnamedSchemaRefBf9e2abcf1b78a6cab8e6e29e2228a11, DEX } from './dex';
 export { TracerouteTestResults } from './traceroute-test-results/index';

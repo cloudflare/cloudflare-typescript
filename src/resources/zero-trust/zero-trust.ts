@@ -84,6 +84,7 @@ export namespace ZeroTrust {
   export import SAMLGroupRule = AccessAPI.SAMLGroupRule;
   export import ServiceTokenRule = AccessAPI.ServiceTokenRule;
   export import DEX = DEXAPI.DEX;
+  export import NetworkPath = DEXAPI.NetworkPath;
   export import Percentiles = DEXAPI.Percentiles;
   export import UnnamedSchemaRefBf9e2abcf1b78a6cab8e6e29e2228a11 = DEXAPI.UnnamedSchemaRefBf9e2abcf1b78a6cab8e6e29e2228a11;
   export import Tunnels = TunnelsAPI.Tunnels;

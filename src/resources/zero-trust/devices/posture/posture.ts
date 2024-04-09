@@ -92,91 +92,28 @@ export class Posture extends APIResource {
 
 export class DevicePostureRulesSinglePage extends SinglePage<DevicePostureRule> {}
 
-export interface DevicePostureRule {
-  /**
-   * API UUID.
-   */
-  id?: string;
-
-  /**
-   * The description of the device posture rule.
-   */
-  description?: string;
-
-  /**
-   * Sets the expiration time for a posture check result. If empty, the result
-   * remains valid until it is overwritten by new data from the WARP client.
-   */
-  expiration?: string;
-
-  /**
-   * The value to be checked against.
-   */
-  input?: Input;
-
-  /**
-   * The conditions that the client must match to run the rule.
-   */
-  match?: Array<Match>;
-
-  /**
-   * The name of the device posture rule.
-   */
-  name?: string;
-
-  /**
-   * Polling frequency for the WARP client posture check. Default: `5m` (poll every
-   * five minutes). Minimum: `1m`.
-   */
-  schedule?: string;
-
-  /**
-   * The type of device posture rule.
-   */
-  type?:
-    | 'file'
-    | 'application'
-    | 'tanium'
-    | 'gateway'
-    | 'warp'
-    | 'disk_encryption'
-    | 'sentinelone'
-    | 'carbonblack'
-    | 'firewall'
-    | 'os_version'
-    | 'domain_joined'
-    | 'client_certificate'
-    | 'unique_client_id'
-    | 'kolide'
-    | 'tanium_s2s'
-    | 'crowdstrike_s2s'
-    | 'intune'
-    | 'workspace_one'
-    | 'sentinelone_s2s';
-}
-
 /**
  * The value to be checked against.
  */
-export type Input =
-  | Input.TeamsDevicesFileInputRequest
-  | Input.TeamsDevicesUniqueClientIDInputRequest
-  | Input.TeamsDevicesDomainJoinedInputRequest
-  | Input.TeamsDevicesOSVersionInputRequest
-  | Input.TeamsDevicesFirewallInputRequest
-  | Input.TeamsDevicesSentineloneInputRequest
-  | Input.TeamsDevicesCarbonblackInputRequest
-  | Input.TeamsDevicesDiskEncryptionInputRequest
-  | Input.TeamsDevicesApplicationInputRequest
-  | Input.TeamsDevicesClientCertificateInputRequest
-  | Input.TeamsDevicesWorkspaceOneInputRequest
-  | Input.TeamsDevicesCrowdstrikeInputRequest
-  | Input.TeamsDevicesIntuneInputRequest
-  | Input.TeamsDevicesKolideInputRequest
-  | Input.TeamsDevicesTaniumInputRequest
-  | Input.TeamsDevicesSentineloneS2sInputRequest;
+export type DeviceInput =
+  | DeviceInput.TeamsDevicesFileInputRequest
+  | DeviceInput.TeamsDevicesUniqueClientIDInputRequest
+  | DeviceInput.TeamsDevicesDomainJoinedInputRequest
+  | DeviceInput.TeamsDevicesOSVersionInputRequest
+  | DeviceInput.TeamsDevicesFirewallInputRequest
+  | DeviceInput.TeamsDevicesSentineloneInputRequest
+  | DeviceInput.TeamsDevicesCarbonblackInputRequest
+  | DeviceInput.TeamsDevicesDiskEncryptionInputRequest
+  | DeviceInput.TeamsDevicesApplicationInputRequest
+  | DeviceInput.TeamsDevicesClientCertificateInputRequest
+  | DeviceInput.TeamsDevicesWorkspaceOneInputRequest
+  | DeviceInput.TeamsDevicesCrowdstrikeInputRequest
+  | DeviceInput.TeamsDevicesIntuneInputRequest
+  | DeviceInput.TeamsDevicesKolideInputRequest
+  | DeviceInput.TeamsDevicesTaniumInputRequest
+  | DeviceInput.TeamsDevicesSentineloneS2sInputRequest;
 
-export namespace Input {
+export namespace DeviceInput {
   export interface TeamsDevicesFileInputRequest {
     /**
      * Operating system
@@ -516,8 +453,71 @@ export namespace Input {
   }
 }
 
-export interface Match {
+export interface DeviceMatch {
   platform?: 'windows' | 'mac' | 'linux' | 'android' | 'ios';
+}
+
+export interface DevicePostureRule {
+  /**
+   * API UUID.
+   */
+  id?: string;
+
+  /**
+   * The description of the device posture rule.
+   */
+  description?: string;
+
+  /**
+   * Sets the expiration time for a posture check result. If empty, the result
+   * remains valid until it is overwritten by new data from the WARP client.
+   */
+  expiration?: string;
+
+  /**
+   * The value to be checked against.
+   */
+  input?: DeviceInput;
+
+  /**
+   * The conditions that the client must match to run the rule.
+   */
+  match?: Array<DeviceMatch>;
+
+  /**
+   * The name of the device posture rule.
+   */
+  name?: string;
+
+  /**
+   * Polling frequency for the WARP client posture check. Default: `5m` (poll every
+   * five minutes). Minimum: `1m`.
+   */
+  schedule?: string;
+
+  /**
+   * The type of device posture rule.
+   */
+  type?:
+    | 'file'
+    | 'application'
+    | 'tanium'
+    | 'gateway'
+    | 'warp'
+    | 'disk_encryption'
+    | 'sentinelone'
+    | 'carbonblack'
+    | 'firewall'
+    | 'os_version'
+    | 'domain_joined'
+    | 'client_certificate'
+    | 'unique_client_id'
+    | 'kolide'
+    | 'tanium_s2s'
+    | 'crowdstrike_s2s'
+    | 'intune'
+    | 'workspace_one'
+    | 'sentinelone_s2s';
 }
 
 /**
@@ -550,12 +550,12 @@ export interface UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27 {
   /**
    * The value to be checked against.
    */
-  input?: Input;
+  input?: DeviceInput;
 
   /**
    * The conditions that the client must match to run the rule.
    */
-  match?: Array<Match>;
+  match?: Array<DeviceMatch>;
 
   /**
    * The name of the device posture rule.
@@ -649,12 +649,12 @@ export interface PostureCreateParams {
   /**
    * Body param: The value to be checked against.
    */
-  input?: Input;
+  input?: DeviceInput;
 
   /**
    * Body param: The conditions that the client must match to run the rule.
    */
-  match?: Array<Match>;
+  match?: Array<DeviceMatch>;
 
   /**
    * Body param: Polling frequency for the WARP client posture check. Default: `5m`
@@ -712,12 +712,12 @@ export interface PostureUpdateParams {
   /**
    * Body param: The value to be checked against.
    */
-  input?: Input;
+  input?: DeviceInput;
 
   /**
    * Body param: The conditions that the client must match to run the rule.
    */
-  match?: Array<Match>;
+  match?: Array<DeviceMatch>;
 
   /**
    * Body param: Polling frequency for the WARP client posture check. Default: `5m`
@@ -747,9 +747,9 @@ export interface PostureGetParams {
 }
 
 export namespace Posture {
+  export import DeviceInput = PostureAPI.DeviceInput;
+  export import DeviceMatch = PostureAPI.DeviceMatch;
   export import DevicePostureRule = PostureAPI.DevicePostureRule;
-  export import Input = PostureAPI.Input;
-  export import Match = PostureAPI.Match;
   export import UnnamedSchemaRef34ef0ad73a63c3f76ed170adca181930 = PostureAPI.UnnamedSchemaRef34ef0ad73a63c3f76ed170adca181930;
   export import UnnamedSchemaRef41885dd46b9e0294254c49305a273681 = PostureAPI.UnnamedSchemaRef41885dd46b9e0294254c49305a273681;
   export import UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27 = PostureAPI.UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27;
@@ -761,6 +761,7 @@ export namespace Posture {
   export import PostureDeleteParams = PostureAPI.PostureDeleteParams;
   export import PostureGetParams = PostureAPI.PostureGetParams;
   export import Integrations = IntegrationsAPI.Integrations;
+  export import Integration = IntegrationsAPI.Integration;
   export import UnnamedSchemaRefB84b377dfc9454d455b646d4bc9ab507 = IntegrationsAPI.UnnamedSchemaRefB84b377dfc9454d455b646d4bc9ab507;
   export import IntegrationsSinglePage = IntegrationsAPI.IntegrationsSinglePage;
   export import IntegrationCreateParams = IntegrationsAPI.IntegrationCreateParams;

@@ -4,7 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as NetworkPathAPI from 'cloudflare/resources/zero-trust/dex/traceroute-test-results/network-path';
 
-export class NetworkPathResource extends APIResource {
+export class NetworkPath extends APIResource {
   /**
    * Get a breakdown of hops and performance metrics for a specific traceroute test
    * run
@@ -13,22 +13,22 @@ export class NetworkPathResource extends APIResource {
     testResultId: string,
     params: NetworkPathGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<NetworkPath> {
+  ): Core.APIPromise<NetworkPathGetResponse> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/dex/traceroute-test-results/${testResultId}/network-path`,
         options,
-      ) as Core.APIPromise<{ result: NetworkPath }>
+      ) as Core.APIPromise<{ result: NetworkPathGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface NetworkPath {
+export interface NetworkPathGetResponse {
   /**
    * an array of the hops taken by the device to reach the end destination
    */
-  hops: Array<NetworkPath.Hop>;
+  hops: Array<NetworkPathGetResponse.Hop>;
 
   /**
    * API Resource UUID tag.
@@ -56,7 +56,7 @@ export interface NetworkPath {
   testName?: string;
 }
 
-export namespace NetworkPath {
+export namespace NetworkPathGetResponse {
   export interface Hop {
     ttl: number;
 
@@ -95,7 +95,7 @@ export interface NetworkPathGetParams {
   account_id: string;
 }
 
-export namespace NetworkPathResource {
-  export import NetworkPath = NetworkPathAPI.NetworkPath;
+export namespace NetworkPath {
+  export import NetworkPathGetResponse = NetworkPathAPI.NetworkPathGetResponse;
   export import NetworkPathGetParams = NetworkPathAPI.NetworkPathGetParams;
 }
