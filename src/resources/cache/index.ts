@@ -12,6 +12,14 @@ export {
   Variants,
 } from './variants';
 export {
+  RegionalTieredCache,
+  RegionalTieredCacheEditResponse,
+  RegionalTieredCacheGetResponse,
+  RegionalTieredCacheEditParams,
+  RegionalTieredCacheGetParams,
+  RegionalTieredCacheResource,
+} from './regional-tiered-cache';
+export {
   SmartTieredCacheDeleteParams,
   SmartTieredCacheEditParams,
   SmartTieredCacheGetParams,
@@ -30,11 +38,3 @@ export {
   CacheReserveStatusParams,
   CacheReserve,
 } from './cache-reserve';
-export {
-  UnnamedSchemaRef6535d2df7d4d089d21166bd140651307,
-  RegionalTieredCacheEditResponse,
-  RegionalTieredCacheGetResponse,
-  RegionalTieredCacheEditParams,
-  RegionalTieredCacheGetParams,
-  RegionalTieredCache,
-} from './regional-tiered-cache';

@@ -9,6 +9,7 @@ export {
   Policy,
   PolicyCreateResponse,
   PolicyUpdateResponse,
+  PolicyDeleteResponse,
   PolicyCreateParams,
   PolicyUpdateParams,
   PolicyListParams,

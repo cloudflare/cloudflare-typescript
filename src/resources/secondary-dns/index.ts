@@ -15,8 +15,8 @@ export {
 export {
   DisableTransfer,
   EnableTransfer,
+  OutgoingStatus,
   UnnamedSchemaRef0e152c3e4c55b8a0ca6531578a42c564,
-  UnnamedSchemaRefBf34e74a34c9a2f63d85505dc69d4adc,
   OutgoingCreateResponse,
   OutgoingUpdateResponse,
   OutgoingDeleteResponse,

@@ -37,11 +37,11 @@ export namespace ZeroTrust {
   export import DeviceListParams = DevicesAPI.DeviceListParams;
   export import DeviceGetParams = DevicesAPI.DeviceGetParams;
   export import IdentityProviders = IdentityProvidersAPI.IdentityProviders;
-  export import AzureAd = IdentityProvidersAPI.AzureAd;
+  export import AzureAD = IdentityProvidersAPI.AzureAD;
   export import GenericOAuthConfig = IdentityProvidersAPI.GenericOAuthConfig;
   export import IdentityProvider = IdentityProvidersAPI.IdentityProvider;
-  export import UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb = IdentityProvidersAPI.UnnamedSchemaRef9ab84e842cdf571c8f3898648bcdabcb;
-  export import UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1 = IdentityProvidersAPI.UnnamedSchemaRefDd86d8b7ea73283da7b160ed3f86cae1;
+  export import IdentityProviderType = IdentityProvidersAPI.IdentityProviderType;
+  export import ScimConfig = IdentityProvidersAPI.ScimConfig;
   export import IdentityProviderListResponse = IdentityProvidersAPI.IdentityProviderListResponse;
   export import IdentityProviderDeleteResponse = IdentityProvidersAPI.IdentityProviderDeleteResponse;
   export import IdentityProviderListResponsesSinglePage = IdentityProvidersAPI.IdentityProviderListResponsesSinglePage;
@@ -52,6 +52,7 @@ export namespace ZeroTrust {
   export import IdentityProviderGetParams = IdentityProvidersAPI.IdentityProviderGetParams;
   export import Organizations = OrganizationsAPI.Organizations;
   export import LoginDesign = OrganizationsAPI.LoginDesign;
+  export import Organization = OrganizationsAPI.Organization;
   export import OrganizationRevokeUsersResponse = OrganizationsAPI.OrganizationRevokeUsersResponse;
   export import OrganizationCreateParams = OrganizationsAPI.OrganizationCreateParams;
   export import OrganizationUpdateParams = OrganizationsAPI.OrganizationUpdateParams;
@@ -80,7 +81,7 @@ export namespace ZeroTrust {
   export import IPListRule = AccessAPI.IPListRule;
   export import IPRule = AccessAPI.IPRule;
   export import OktaGroupRule = AccessAPI.OktaGroupRule;
-  export import SamlGroupRule = AccessAPI.SamlGroupRule;
+  export import SAMLGroupRule = AccessAPI.SAMLGroupRule;
   export import ServiceTokenRule = AccessAPI.ServiceTokenRule;
   export import DEX = DEXAPI.DEX;
   export import Percentiles = DEXAPI.Percentiles;

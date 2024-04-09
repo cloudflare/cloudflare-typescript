@@ -49,13 +49,13 @@ export class Consumers extends APIResource {
     consumerId: string,
     params: ConsumerDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef67bbb1ccdd42c3e2937b9fd19f791151 | null> {
+  ): Core.APIPromise<ConsumerDeleteResponse | null> {
     const { account_id, body } = params;
     return (
       this._client.delete(`/accounts/${account_id}/queues/${queueId}/consumers/${consumerId}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef67bbb1ccdd42c3e2937b9fd19f791151 | null }>
+      }) as Core.APIPromise<{ result: ConsumerDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -137,6 +137,8 @@ export namespace ConsumerUpdateResponse {
   }
 }
 
+export type ConsumerDeleteResponse = unknown | Array<unknown> | string;
+
 export type ConsumerGetResponse = Array<ConsumerGetResponse.ConsumerGetResponseItem>;
 
 export namespace ConsumerGetResponse {
@@ -201,6 +203,7 @@ export namespace Consumers {
   export import UnnamedSchemaRefFbd3a4642487e41594e9af0ccb9a5ca5 = ConsumersAPI.UnnamedSchemaRefFbd3a4642487e41594e9af0ccb9a5ca5;
   export import ConsumerCreateResponse = ConsumersAPI.ConsumerCreateResponse;
   export import ConsumerUpdateResponse = ConsumersAPI.ConsumerUpdateResponse;
+  export import ConsumerDeleteResponse = ConsumersAPI.ConsumerDeleteResponse;
   export import ConsumerGetResponse = ConsumersAPI.ConsumerGetResponse;
   export import ConsumerCreateParams = ConsumersAPI.ConsumerCreateParams;
   export import ConsumerUpdateParams = ConsumersAPI.ConsumerUpdateParams;

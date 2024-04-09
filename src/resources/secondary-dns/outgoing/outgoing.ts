@@ -120,6 +120,11 @@ export type DisableTransfer = string;
  */
 export type EnableTransfer = string;
 
+/**
+ * The zone transfer status of a primary zone
+ */
+export type OutgoingStatus = string | null;
+
 export interface UnnamedSchemaRef0e152c3e4c55b8a0ca6531578a42c564 {
   id?: string;
 
@@ -153,11 +158,6 @@ export interface UnnamedSchemaRef0e152c3e4c55b8a0ca6531578a42c564 {
    */
   soa_serial?: number;
 }
-
-/**
- * The zone transfer status of a primary zone
- */
-export type UnnamedSchemaRefBf34e74a34c9a2f63d85505dc69d4adc = string | null;
 
 export interface OutgoingCreateResponse {
   id?: string;
@@ -360,8 +360,8 @@ export interface OutgoingGetParams {
 export namespace Outgoing {
   export import DisableTransfer = OutgoingAPI.DisableTransfer;
   export import EnableTransfer = OutgoingAPI.EnableTransfer;
+  export import OutgoingStatus = OutgoingAPI.OutgoingStatus;
   export import UnnamedSchemaRef0e152c3e4c55b8a0ca6531578a42c564 = OutgoingAPI.UnnamedSchemaRef0e152c3e4c55b8a0ca6531578a42c564;
-  export import UnnamedSchemaRefBf34e74a34c9a2f63d85505dc69d4adc = OutgoingAPI.UnnamedSchemaRefBf34e74a34c9a2f63d85505dc69d4adc;
   export import OutgoingCreateResponse = OutgoingAPI.OutgoingCreateResponse;
   export import OutgoingUpdateResponse = OutgoingAPI.OutgoingUpdateResponse;
   export import OutgoingDeleteResponse = OutgoingAPI.OutgoingDeleteResponse;

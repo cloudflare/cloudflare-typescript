@@ -19,21 +19,21 @@ export {
   IPListRule,
   IPRule,
   OktaGroupRule,
-  SamlGroupRule,
+  SAMLGroupRule,
   ServiceTokenRule,
   Access,
 } from './access';
 export {
-  AllowedHeadersItem,
-  AllowedIDPsItem,
-  AllowedMethodsItem,
-  AllowedOriginsItem,
+  AllowedHeadersh,
+  AllowedIdpsh,
+  AllowedMethodsh,
+  AllowedOriginsh,
   AppID,
   Application,
   CorsHeaders,
-  CustomPagesItem,
-  SamlSaasApp,
-  SelfHostedDomainsItem,
+  CustomPagesh,
+  SAMLSaasApp,
+  SelfHostedDomainsh,
   ApplicationDeleteResponse,
   ApplicationRevokeTokensResponse,
   ApplicationCreateParams,
@@ -85,7 +85,7 @@ export {
   ErviceTokensSinglePage,
   ServiceTokens,
 } from './service-tokens';
-export { KeyUpdateParams, Keys } from './keys';
+export { KeyUpdateResponse, KeyGetResponse, KeyRotateResponse, KeyUpdateParams, Keys } from './keys';
 export { Logs } from './logs/index';
 export { Tag, TagDeleteResponse, TagCreateParams, TagUpdateParams, TagsSinglePage, Tags } from './tags';
 export { User, UsersSinglePage, Users } from './users/index';

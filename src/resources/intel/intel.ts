@@ -55,6 +55,7 @@ export namespace Intel {
   export import IPListGetResponse = IPListsAPI.IPListGetResponse;
   export import IPListGetParams = IPListsAPI.IPListGetParams;
   export import Miscategorizations = MiscategorizationsAPI.Miscategorizations;
+  export import MiscategorizationCreateResponse = MiscategorizationsAPI.MiscategorizationCreateResponse;
   export import MiscategorizationCreateParams = MiscategorizationsAPI.MiscategorizationCreateParams;
   export import Whois = WhoisAPI.Whois;
   export import WhoisGetParams = WhoisAPI.WhoisGetParams;

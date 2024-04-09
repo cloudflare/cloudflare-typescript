@@ -217,7 +217,7 @@ export namespace IPSECTunnelCreateResponse {
       /**
        * The type of healthcheck to run, reply or request. The default value is `reply`.
        */
-      type?: MagicTransitAPI.UnnamedSchemaRef3b1a76a5e4a139b72ed7d93834773d39;
+      type?: MagicTransitAPI.HealthCheckType;
     }
   }
 }
@@ -319,7 +319,7 @@ export namespace IPSECTunnelListResponse {
       /**
        * The type of healthcheck to run, reply or request. The default value is `reply`.
        */
-      type?: MagicTransitAPI.UnnamedSchemaRef3b1a76a5e4a139b72ed7d93834773d39;
+      type?: MagicTransitAPI.HealthCheckType;
     }
   }
 }

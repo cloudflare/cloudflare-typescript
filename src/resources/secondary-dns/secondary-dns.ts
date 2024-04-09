@@ -34,8 +34,8 @@ export namespace SecondaryDNS {
   export import Outgoing = OutgoingAPI.Outgoing;
   export import DisableTransfer = OutgoingAPI.DisableTransfer;
   export import EnableTransfer = OutgoingAPI.EnableTransfer;
+  export import OutgoingStatus = OutgoingAPI.OutgoingStatus;
   export import UnnamedSchemaRef0e152c3e4c55b8a0ca6531578a42c564 = OutgoingAPI.UnnamedSchemaRef0e152c3e4c55b8a0ca6531578a42c564;
-  export import UnnamedSchemaRefBf34e74a34c9a2f63d85505dc69d4adc = OutgoingAPI.UnnamedSchemaRefBf34e74a34c9a2f63d85505dc69d4adc;
   export import OutgoingCreateResponse = OutgoingAPI.OutgoingCreateResponse;
   export import OutgoingUpdateResponse = OutgoingAPI.OutgoingUpdateResponse;
   export import OutgoingDeleteResponse = OutgoingAPI.OutgoingDeleteResponse;

@@ -3,6 +3,8 @@
 export { KV } from './kv';
 export {
   Namespace,
+  NamespaceUpdateResponse,
+  NamespaceDeleteResponse,
   NamespaceCreateParams,
   NamespaceUpdateParams,
   NamespaceListParams,

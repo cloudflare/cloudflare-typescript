@@ -12,6 +12,7 @@ export {
 export {
   Prefix,
   UnnamedSchemaRefE358666e049bf8f9281c0a4f89b5fe46,
+  PrefixDeleteResponse,
   PrefixCreateParams,
   PrefixListParams,
   PrefixDeleteParams,

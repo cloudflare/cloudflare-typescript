@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as AudioTracksAPI from 'cloudflare/resources/stream/audio-tracks';
-import * as Shared from 'cloudflare/resources/shared';
 
 export class AudioTracks extends APIResource {
   /**
@@ -15,13 +14,13 @@ export class AudioTracks extends APIResource {
     audioIdentifier: string,
     params: AudioTrackDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef602dd5f63eab958d53da61434dec08f0> {
+  ): Core.APIPromise<AudioTrackDeleteResponse> {
     const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/stream/${identifier}/audio/${audioIdentifier}`,
         options,
-      ) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef602dd5f63eab958d53da61434dec08f0 }>
+      ) as Core.APIPromise<{ result: AudioTrackDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -103,6 +102,8 @@ export interface Audio {
   uid?: string;
 }
 
+export type AudioTrackDeleteResponse = unknown | string;
+
 export type AudioTrackGetResponse = Array<Audio>;
 
 export interface AudioTrackDeleteParams {
@@ -161,6 +162,7 @@ export interface AudioTrackGetParams {
 
 export namespace AudioTracks {
   export import Audio = AudioTracksAPI.Audio;
+  export import AudioTrackDeleteResponse = AudioTracksAPI.AudioTrackDeleteResponse;
   export import AudioTrackGetResponse = AudioTracksAPI.AudioTrackGetResponse;
   export import AudioTrackDeleteParams = AudioTracksAPI.AudioTrackDeleteParams;
   export import AudioTrackCopyParams = AudioTracksAPI.AudioTrackCopyParams;

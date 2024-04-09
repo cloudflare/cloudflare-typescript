@@ -93,7 +93,7 @@ export interface Member {
   /**
    * Roles assigned to this member.
    */
-  roles: Array<MemberRole>;
+  roles: Array<Member.Role>;
 
   status: unknown;
 
@@ -101,6 +101,25 @@ export interface Member {
 }
 
 export namespace Member {
+  export interface Role {
+    /**
+     * Role identifier tag.
+     */
+    id: string;
+
+    /**
+     * Description of role's permissions.
+     */
+    description: string;
+
+    /**
+     * Role name.
+     */
+    name: string;
+
+    permissions: PermissionGroupsAPI.Permission;
+  }
+
   export interface User {
     /**
      * The contact email address of the user.
@@ -130,25 +149,6 @@ export namespace Member {
   }
 }
 
-export interface MemberRole {
-  /**
-   * Role identifier tag.
-   */
-  id: string;
-
-  /**
-   * Description of role's permissions.
-   */
-  description: string;
-
-  /**
-   * Role name.
-   */
-  name: string;
-
-  permissions: PermissionGroupsAPI.Permission;
-}
-
 export interface MemberWithInviteCode {
   /**
    * Membership identifier tag.
@@ -158,7 +158,7 @@ export interface MemberWithInviteCode {
   /**
    * Roles assigned to this member.
    */
-  roles: Array<MemberRole>;
+  roles: Array<MemberWithInviteCode.Role>;
 
   status: unknown;
 
@@ -171,6 +171,25 @@ export interface MemberWithInviteCode {
 }
 
 export namespace MemberWithInviteCode {
+  export interface Role {
+    /**
+     * Role identifier tag.
+     */
+    id: string;
+
+    /**
+     * Description of role's permissions.
+     */
+    description: string;
+
+    /**
+     * Role name.
+     */
+    name: string;
+
+    permissions: PermissionGroupsAPI.Permission;
+  }
+
   export interface User {
     /**
      * The contact email address of the user.
@@ -199,6 +218,11 @@ export namespace MemberWithInviteCode {
     two_factor_authentication_enabled?: boolean;
   }
 }
+
+/**
+ * List of role names for the user at the account.
+ */
+export type Roles = Array<string>;
 
 export interface MemberListResponse {
   /**
@@ -265,7 +289,16 @@ export interface MemberUpdateParams {
   /**
    * Body param: Roles assigned to this member.
    */
-  roles: Array<MemberRole>;
+  roles: Array<MemberUpdateParams.Role>;
+}
+
+export namespace MemberUpdateParams {
+  export interface Role {
+    /**
+     * Role identifier tag.
+     */
+    id: string;
+  }
 }
 
 export interface MemberListParams extends V4PagePaginationArrayParams {
@@ -308,8 +341,8 @@ export interface MemberGetParams {
 
 export namespace Members {
   export import Member = MembersAPI.Member;
-  export import MemberRole = MembersAPI.MemberRole;
   export import MemberWithInviteCode = MembersAPI.MemberWithInviteCode;
+  export import Roles = MembersAPI.Roles;
   export import MemberListResponse = MembersAPI.MemberListResponse;
   export import MemberDeleteResponse = MembersAPI.MemberDeleteResponse;
   export import MemberListResponsesV4PagePaginationArray = MembersAPI.MemberListResponsesV4PagePaginationArray;

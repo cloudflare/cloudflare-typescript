@@ -15,7 +15,9 @@ export type DimensionItem = 'event' | 'appID' | 'coloName' | 'ipVersion';
 export namespace Events {
   export import DimensionItem = EventsAPI.DimensionItem;
   export import Bytimes = BytimesAPI.Bytimes;
+  export import BytimeGetResponse = BytimesAPI.BytimeGetResponse;
   export import BytimeGetParams = BytimesAPI.BytimeGetParams;
   export import Summaries = SummariesAPI.Summaries;
+  export import SummaryGetResponse = SummariesAPI.SummaryGetResponse;
   export import SummaryGetParams = SummariesAPI.SummaryGetParams;
 }

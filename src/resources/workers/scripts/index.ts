@@ -4,6 +4,7 @@ export {
   ConsumerScript,
   ConsumerScriptItem,
   TailCreateResponse,
+  TailDeleteResponse,
   TailGetResponse,
   TailCreateParams,
   TailDeleteParams,

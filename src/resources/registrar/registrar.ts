@@ -10,6 +10,8 @@ export class Registrar extends APIResource {
 export namespace Registrar {
   export import Domains = DomainsAPI.Domains;
   export import Domain = DomainsAPI.Domain;
+  export import DomainUpdateResponse = DomainsAPI.DomainUpdateResponse;
+  export import DomainGetResponse = DomainsAPI.DomainGetResponse;
   export import DomainsSinglePage = DomainsAPI.DomainsSinglePage;
   export import DomainUpdateParams = DomainsAPI.DomainUpdateParams;
   export import DomainListParams = DomainsAPI.DomainListParams;

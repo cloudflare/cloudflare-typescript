@@ -126,7 +126,7 @@ export interface SuperBotFightModeDefinitelyConfiguration {
   using_latest_model?: boolean;
 }
 
-export interface SuperBotFightModeLikelyConfig {
+export interface SuperBotFightModeLikelyConfiguration {
   /**
    * Use lightweight, invisible JavaScript detections to improve Bot Management.
    * [Learn more about JavaScript Detections](https://developers.cloudflare.com/bots/reference/javascript-detections/).
@@ -170,19 +170,19 @@ export interface SuperBotFightModeLikelyConfig {
 export type BotManagementUpdateResponse =
   | BotFightModeConfiguration
   | SuperBotFightModeDefinitelyConfiguration
-  | SuperBotFightModeLikelyConfig
+  | SuperBotFightModeLikelyConfiguration
   | SubscriptionConfiguration;
 
 export type BotManagementGetResponse =
   | BotFightModeConfiguration
   | SuperBotFightModeDefinitelyConfiguration
-  | SuperBotFightModeLikelyConfig
+  | SuperBotFightModeLikelyConfiguration
   | SubscriptionConfiguration;
 
 export type BotManagementUpdateParams =
   | BotManagementUpdateParams.BotFightModeConfiguration
   | BotManagementUpdateParams.SuperBotFightModeDefinitelyConfiguration
-  | BotManagementUpdateParams.SuperBotFightModeLikelyConfig
+  | BotManagementUpdateParams.SuperBotFightModeLikelyConfiguration
   | BotManagementUpdateParams.SubscriptionConfiguration;
 
 export namespace BotManagementUpdateParams {
@@ -243,7 +243,7 @@ export namespace BotManagementUpdateParams {
     sbfm_verified_bots?: 'allow' | 'block';
   }
 
-  export interface SuperBotFightModeLikelyConfig {
+  export interface SuperBotFightModeLikelyConfiguration {
     /**
      * Path param: Identifier
      */

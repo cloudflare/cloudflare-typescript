@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as BindingsAPI from 'cloudflare/resources/addressing/prefixes/bgp/bindings';
-import * as Shared from 'cloudflare/resources/shared';
 import { SinglePage } from 'cloudflare/pagination';
 
 export class Bindings extends APIResource {
@@ -56,13 +55,13 @@ export class Bindings extends APIResource {
     bindingId: string,
     params: BindingDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRefEc4d85c3d1bcc6b3b7e99c199ae99846> {
+  ): Core.APIPromise<BindingDeleteResponse> {
     const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/addressing/prefixes/${prefixId}/bindings/${bindingId}`,
         options,
-      ) as Core.APIPromise<{ result: Shared.UnnamedSchemaRefEc4d85c3d1bcc6b3b7e99c199ae99846 }>
+      ) as Core.APIPromise<{ result: BindingDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -127,6 +126,8 @@ export namespace ServiceBinding {
   }
 }
 
+export type BindingDeleteResponse = unknown | Array<unknown> | string;
+
 export interface BindingCreateParams {
   /**
    * Path param: Identifier
@@ -167,6 +168,7 @@ export interface BindingGetParams {
 
 export namespace Bindings {
   export import ServiceBinding = BindingsAPI.ServiceBinding;
+  export import BindingDeleteResponse = BindingsAPI.BindingDeleteResponse;
   export import ServiceBindingsSinglePage = BindingsAPI.ServiceBindingsSinglePage;
   export import BindingCreateParams = BindingsAPI.BindingCreateParams;
   export import BindingListParams = BindingsAPI.BindingListParams;

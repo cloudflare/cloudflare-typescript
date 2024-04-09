@@ -14,6 +14,7 @@ export namespace CloudforceOne {
   export import Quota = RequestsAPI.Quota;
   export import RequestConstants = RequestsAPI.RequestConstants;
   export import RequestTypes = RequestsAPI.RequestTypes;
+  export import RequestDeleteResponse = RequestsAPI.RequestDeleteResponse;
   export import ListItemsV4PagePaginationArray = RequestsAPI.ListItemsV4PagePaginationArray;
   export import RequestCreateParams = RequestsAPI.RequestCreateParams;
   export import RequestUpdateParams = RequestsAPI.RequestUpdateParams;
