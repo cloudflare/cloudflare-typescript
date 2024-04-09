@@ -46,7 +46,7 @@ export {
   Gateway,
 } from './gateway';
 export {
-  GatewayIPsItem,
+  GatewayIPs,
   ProxyEndpoint,
   UnnamedSchemaRef4753ee81779d0e57189420079abab61e,
   ProxyEndpointCreateParams,

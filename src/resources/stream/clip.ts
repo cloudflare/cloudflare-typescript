@@ -25,7 +25,7 @@ export interface Clip {
    * an array and use `*` for wildcard subdomains. Empty arrays allow the video to be
    * viewed on any origin.
    */
-  allowedOrigins?: Array<StreamAPI.AllowedOriginsItem>;
+  allowedOrigins?: Array<StreamAPI.AllowedOrigins>;
 
   /**
    * The unique video identifier (UID).
@@ -147,7 +147,7 @@ export interface ClipCreateParams {
    * domains in an array and use `*` for wildcard subdomains. Empty arrays allow the
    * video to be viewed on any origin.
    */
-  allowedOrigins?: Array<StreamAPI.AllowedOriginsItem>;
+  allowedOrigins?: Array<StreamAPI.AllowedOrigins>;
 
   /**
    * Body param: A user-defined identifier for the media creator.

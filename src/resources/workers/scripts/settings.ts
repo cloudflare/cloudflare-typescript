@@ -60,7 +60,7 @@ export interface SettingEditParams {
   /**
    * Body param: List of Workers that will consume logs from the attached Worker.
    */
-  tail_consumers?: Array<TailAPI.ConsumerScriptItem>;
+  tail_consumers?: Array<TailAPI.ConsumerScript>;
 }
 
 export interface SettingGetParams {

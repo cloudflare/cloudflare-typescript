@@ -228,7 +228,7 @@ export interface ARecord {
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
-  tags?: Array<RecordTagsItem>;
+  tags?: Array<RecordTags>;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -310,7 +310,7 @@ export interface AAAARecord {
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
-  tags?: Array<RecordTagsItem>;
+  tags?: Array<RecordTags>;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -391,7 +391,7 @@ export interface CAARecord {
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
-  tags?: Array<RecordTagsItem>;
+  tags?: Array<RecordTags>;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -494,7 +494,7 @@ export interface CERTRecord {
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
-  tags?: Array<RecordTagsItem>;
+  tags?: Array<RecordTags>;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -603,7 +603,7 @@ export interface CNAMERecord {
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
-  tags?: Array<RecordTagsItem>;
+  tags?: Array<RecordTags>;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -684,7 +684,7 @@ export interface DNSKEYRecord {
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
-  tags?: Array<RecordTagsItem>;
+  tags?: Array<RecordTags>;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -792,7 +792,7 @@ export interface DSRecord {
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
-  tags?: Array<RecordTagsItem>;
+  tags?: Array<RecordTags>;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -900,7 +900,7 @@ export interface HTTPSRecord {
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
-  tags?: Array<RecordTagsItem>;
+  tags?: Array<RecordTags>;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -1003,7 +1003,7 @@ export interface LOCRecord {
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
-  tags?: Array<RecordTagsItem>;
+  tags?: Array<RecordTags>;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -1152,7 +1152,7 @@ export interface MXRecord {
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
-  tags?: Array<RecordTagsItem>;
+  tags?: Array<RecordTags>;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -1233,7 +1233,7 @@ export interface NAPTRRecord {
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
-  tags?: Array<RecordTagsItem>;
+  tags?: Array<RecordTags>;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -1346,7 +1346,7 @@ export interface NSRecord {
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
-  tags?: Array<RecordTagsItem>;
+  tags?: Array<RecordTags>;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -1422,7 +1422,7 @@ export interface PTRRecord {
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
-  tags?: Array<RecordTagsItem>;
+  tags?: Array<RecordTags>;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -1468,7 +1468,7 @@ export type Record =
  * Individual tag of the form name:value (the name must consist of only letters,
  * numbers, underscores and hyphens)
  */
-export type RecordTagsItem = string;
+export type RecordTags = string;
 
 export interface SMIMEARecord {
   /**
@@ -1531,7 +1531,7 @@ export interface SMIMEARecord {
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
-  tags?: Array<RecordTagsItem>;
+  tags?: Array<RecordTags>;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -1642,7 +1642,7 @@ export interface SRVRecord {
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
-  tags?: Array<RecordTagsItem>;
+  tags?: Array<RecordTags>;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -1772,7 +1772,7 @@ export interface SSHFPRecord {
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
-  tags?: Array<RecordTagsItem>;
+  tags?: Array<RecordTags>;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -1875,7 +1875,7 @@ export interface SVCBRecord {
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
-  tags?: Array<RecordTagsItem>;
+  tags?: Array<RecordTags>;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -1978,7 +1978,7 @@ export interface TLSARecord {
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
-  tags?: Array<RecordTagsItem>;
+  tags?: Array<RecordTags>;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -2088,7 +2088,7 @@ export interface TXTRecord {
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
-  tags?: Array<RecordTagsItem>;
+  tags?: Array<RecordTags>;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -2230,7 +2230,7 @@ export interface URIRecord {
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
-  tags?: Array<RecordTagsItem>;
+  tags?: Array<RecordTags>;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -2363,7 +2363,7 @@ export namespace RecordCreateParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -2410,7 +2410,7 @@ export namespace RecordCreateParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -2451,7 +2451,7 @@ export namespace RecordCreateParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -2514,7 +2514,7 @@ export namespace RecordCreateParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -2588,7 +2588,7 @@ export namespace RecordCreateParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -2629,7 +2629,7 @@ export namespace RecordCreateParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -2697,7 +2697,7 @@ export namespace RecordCreateParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -2765,7 +2765,7 @@ export namespace RecordCreateParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -2828,7 +2828,7 @@ export namespace RecordCreateParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -2942,7 +2942,7 @@ export namespace RecordCreateParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -2983,7 +2983,7 @@ export namespace RecordCreateParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -3061,7 +3061,7 @@ export namespace RecordCreateParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -3102,7 +3102,7 @@ export namespace RecordCreateParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -3143,7 +3143,7 @@ export namespace RecordCreateParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -3213,7 +3213,7 @@ export namespace RecordCreateParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -3303,7 +3303,7 @@ export namespace RecordCreateParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -3366,7 +3366,7 @@ export namespace RecordCreateParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -3429,7 +3429,7 @@ export namespace RecordCreateParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -3497,7 +3497,7 @@ export namespace RecordCreateParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -3544,7 +3544,7 @@ export namespace RecordCreateParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -3632,7 +3632,7 @@ export namespace RecordUpdateParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -3679,7 +3679,7 @@ export namespace RecordUpdateParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -3720,7 +3720,7 @@ export namespace RecordUpdateParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -3783,7 +3783,7 @@ export namespace RecordUpdateParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -3857,7 +3857,7 @@ export namespace RecordUpdateParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -3898,7 +3898,7 @@ export namespace RecordUpdateParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -3966,7 +3966,7 @@ export namespace RecordUpdateParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -4034,7 +4034,7 @@ export namespace RecordUpdateParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -4097,7 +4097,7 @@ export namespace RecordUpdateParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -4211,7 +4211,7 @@ export namespace RecordUpdateParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -4252,7 +4252,7 @@ export namespace RecordUpdateParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -4330,7 +4330,7 @@ export namespace RecordUpdateParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -4371,7 +4371,7 @@ export namespace RecordUpdateParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -4412,7 +4412,7 @@ export namespace RecordUpdateParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -4482,7 +4482,7 @@ export namespace RecordUpdateParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -4572,7 +4572,7 @@ export namespace RecordUpdateParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -4635,7 +4635,7 @@ export namespace RecordUpdateParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -4698,7 +4698,7 @@ export namespace RecordUpdateParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -4766,7 +4766,7 @@ export namespace RecordUpdateParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -4813,7 +4813,7 @@ export namespace RecordUpdateParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -5083,7 +5083,7 @@ export namespace RecordEditParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -5130,7 +5130,7 @@ export namespace RecordEditParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -5171,7 +5171,7 @@ export namespace RecordEditParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -5234,7 +5234,7 @@ export namespace RecordEditParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -5308,7 +5308,7 @@ export namespace RecordEditParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -5349,7 +5349,7 @@ export namespace RecordEditParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -5417,7 +5417,7 @@ export namespace RecordEditParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -5485,7 +5485,7 @@ export namespace RecordEditParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -5548,7 +5548,7 @@ export namespace RecordEditParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -5662,7 +5662,7 @@ export namespace RecordEditParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -5703,7 +5703,7 @@ export namespace RecordEditParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -5781,7 +5781,7 @@ export namespace RecordEditParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -5822,7 +5822,7 @@ export namespace RecordEditParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -5863,7 +5863,7 @@ export namespace RecordEditParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -5933,7 +5933,7 @@ export namespace RecordEditParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -6023,7 +6023,7 @@ export namespace RecordEditParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -6086,7 +6086,7 @@ export namespace RecordEditParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -6149,7 +6149,7 @@ export namespace RecordEditParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -6217,7 +6217,7 @@ export namespace RecordEditParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -6264,7 +6264,7 @@ export namespace RecordEditParams {
      * Body param: Custom tags for the DNS record. This field has no effect on DNS
      * responses.
      */
-    tags?: Array<RecordTagsItem>;
+    tags?: Array<RecordTags>;
 
     /**
      * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
@@ -6356,7 +6356,7 @@ export namespace Records {
   export import NSRecord = RecordsAPI.NSRecord;
   export import PTRRecord = RecordsAPI.PTRRecord;
   export import Record = RecordsAPI.Record;
-  export import RecordTagsItem = RecordsAPI.RecordTagsItem;
+  export import RecordTags = RecordsAPI.RecordTags;
   export import SMIMEARecord = RecordsAPI.SMIMEARecord;
   export import SRVRecord = RecordsAPI.SRVRecord;
   export import SSHFPRecord = RecordsAPI.SSHFPRecord;

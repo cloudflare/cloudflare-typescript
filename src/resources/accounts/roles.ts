@@ -60,7 +60,7 @@ export interface Role {
   /**
    * Access permissions for this User.
    */
-  permissions: Array<PermissionGroupsAPI.PermissionItem>;
+  permissions: Array<PermissionGroupsAPI.Permission>;
 }
 
 export interface RoleListParams {

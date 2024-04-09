@@ -12,19 +12,15 @@ export class Sinkholes extends APIResource {
   list(
     params: SinkholeListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<SinkholeItemsSinglePage, SinkholeItem> {
+  ): Core.PagePromise<SinkholesSinglePage, Sinkhole> {
     const { account_id } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/intel/sinkholes`,
-      SinkholeItemsSinglePage,
-      options,
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/intel/sinkholes`, SinkholesSinglePage, options);
   }
 }
 
-export class SinkholeItemsSinglePage extends SinglePage<SinkholeItem> {}
+export class SinkholesSinglePage extends SinglePage<Sinkhole> {}
 
-export interface SinkholeItem {
+export interface Sinkhole {
   /**
    * The unique identifier for the sinkhole
    */
@@ -69,7 +65,7 @@ export interface SinkholeListParams {
 }
 
 export namespace Sinkholes {
-  export import SinkholeItem = SinkholesAPI.SinkholeItem;
-  export import SinkholeItemsSinglePage = SinkholesAPI.SinkholeItemsSinglePage;
+  export import Sinkhole = SinkholesAPI.Sinkhole;
+  export import SinkholesSinglePage = SinkholesAPI.SinkholesSinglePage;
   export import SinkholeListParams = SinkholesAPI.SinkholeListParams;
 }

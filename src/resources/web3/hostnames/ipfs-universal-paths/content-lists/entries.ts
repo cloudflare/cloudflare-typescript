@@ -13,12 +13,12 @@ export class Entries extends APIResource {
     identifier: string,
     body: EntryCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ContentListItem> {
+  ): Core.APIPromise<ContentList> {
     return (
       this._client.post(
         `/zones/${zoneIdentifier}/web3/hostnames/${identifier}/ipfs_universal_path/content_list/entries`,
         { body, ...options },
-      ) as Core.APIPromise<{ result: ContentListItem }>
+      ) as Core.APIPromise<{ result: ContentList }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -31,12 +31,12 @@ export class Entries extends APIResource {
     contentListEntryIdentifier: string,
     body: EntryUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ContentListItem> {
+  ): Core.APIPromise<ContentList> {
     return (
       this._client.put(
         `/zones/${zoneIdentifier}/web3/hostnames/${identifier}/ipfs_universal_path/content_list/entries/${contentListEntryIdentifier}`,
         { body, ...options },
-      ) as Core.APIPromise<{ result: ContentListItem }>
+      ) as Core.APIPromise<{ result: ContentList }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -82,12 +82,12 @@ export class Entries extends APIResource {
     identifier: string,
     contentListEntryIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ContentListItem> {
+  ): Core.APIPromise<ContentList> {
     return (
       this._client.get(
         `/zones/${zoneIdentifier}/web3/hostnames/${identifier}/ipfs_universal_path/content_list/entries/${contentListEntryIdentifier}`,
         options,
-      ) as Core.APIPromise<{ result: ContentListItem }>
+      ) as Core.APIPromise<{ result: ContentList }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -95,7 +95,7 @@ export class Entries extends APIResource {
 /**
  * Content list entry to be blocked.
  */
-export interface ContentListItem {
+export interface ContentList {
   /**
    * Identifier
    */
@@ -154,7 +154,7 @@ export interface EntryListResponse {
   /**
    * Content list entries.
    */
-  entries?: Array<ContentListItem>;
+  entries?: Array<ContentList>;
 }
 
 export interface EntryDeleteResponse {
@@ -201,7 +201,7 @@ export interface EntryUpdateParams {
 export type EntryDeleteParams = unknown;
 
 export namespace Entries {
-  export import ContentListItem = EntriesAPI.ContentListItem;
+  export import ContentList = EntriesAPI.ContentList;
   export import UnnamedSchemaRef5e618833803e286db9ee7c73727f8b86 = EntriesAPI.UnnamedSchemaRef5e618833803e286db9ee7c73727f8b86;
   export import EntryListResponse = EntriesAPI.EntryListResponse;
   export import EntryDeleteResponse = EntriesAPI.EntryDeleteResponse;

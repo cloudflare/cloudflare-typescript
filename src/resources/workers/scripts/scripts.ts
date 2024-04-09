@@ -118,7 +118,7 @@ export interface Script {
   /**
    * List of Workers that will consume logs from the attached Worker.
    */
-  tail_consumers?: Array<TailAPI.ConsumerScriptItem>;
+  tail_consumers?: Array<TailAPI.ConsumerScript>;
 
   /**
    * Specifies the usage model for the Worker (e.g. 'bundled' or 'unbound').
@@ -135,7 +135,7 @@ export interface ScriptSetting {
   /**
    * List of Workers that will consume logs from the attached Worker.
    */
-  tail_consumers?: Array<TailAPI.ConsumerScriptItem>;
+  tail_consumers?: Array<TailAPI.ConsumerScript>;
 }
 
 export type ScriptUpdateParams = ScriptUpdateParams.Variant0 | ScriptUpdateParams.Variant1;
@@ -230,7 +230,7 @@ export namespace ScriptUpdateParams {
       /**
        * List of Workers that will consume logs from the attached Worker.
        */
-      tail_consumers?: Array<TailAPI.ConsumerScriptItem>;
+      tail_consumers?: Array<TailAPI.ConsumerScript>;
 
       /**
        * Usage model to apply to invocations.
@@ -314,7 +314,6 @@ export namespace Scripts {
   export import ScheduleGetParams = SchedulesAPI.ScheduleGetParams;
   export import Tail = TailAPI.Tail;
   export import ConsumerScript = TailAPI.ConsumerScript;
-  export import ConsumerScriptItem = TailAPI.ConsumerScriptItem;
   export import TailCreateResponse = TailAPI.TailCreateResponse;
   export import TailDeleteResponse = TailAPI.TailDeleteResponse;
   export import TailGetResponse = TailAPI.TailGetResponse;

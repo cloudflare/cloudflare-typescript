@@ -6,7 +6,7 @@ import { isRequestOptions } from 'cloudflare/core';
 import * as Shared from 'cloudflare/resources/shared';
 import * as AccountsAPI from 'cloudflare/resources/accounts/accounts';
 import * as MembersAPI from 'cloudflare/resources/accounts/members';
-import * as PermissionGroupsAPI from 'cloudflare/resources/user/tokens/permission-groups';
+import * as RolesAPI from 'cloudflare/resources/accounts/roles';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class Memberships extends APIResource {
@@ -97,7 +97,7 @@ export interface Membership {
   /**
    * All access permissions for the user at the account.
    */
-  permissions?: PermissionGroupsAPI.Permission;
+  permissions?: Membership.Permissions;
 
   /**
    * List of role names for the user at the account.
@@ -108,6 +108,37 @@ export interface Membership {
    * Status of this membership.
    */
   status?: 'accepted' | 'pending' | 'rejected';
+}
+
+export namespace Membership {
+  /**
+   * All access permissions for the user at the account.
+   */
+  export interface Permissions {
+    analytics?: RolesAPI.PermissionGrant;
+
+    billing?: RolesAPI.PermissionGrant;
+
+    cache_purge?: RolesAPI.PermissionGrant;
+
+    dns?: RolesAPI.PermissionGrant;
+
+    dns_records?: RolesAPI.PermissionGrant;
+
+    lb?: RolesAPI.PermissionGrant;
+
+    logs?: RolesAPI.PermissionGrant;
+
+    organization?: RolesAPI.PermissionGrant;
+
+    ssl?: RolesAPI.PermissionGrant;
+
+    waf?: RolesAPI.PermissionGrant;
+
+    zone_settings?: RolesAPI.PermissionGrant;
+
+    zones?: RolesAPI.PermissionGrant;
+  }
 }
 
 export interface MembershipDeleteResponse {

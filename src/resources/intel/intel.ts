@@ -74,8 +74,8 @@ export namespace Intel {
   export import IndicatorFeedDataParams = IndicatorFeedsAPI.IndicatorFeedDataParams;
   export import IndicatorFeedGetParams = IndicatorFeedsAPI.IndicatorFeedGetParams;
   export import Sinkholes = SinkholesAPI.Sinkholes;
-  export import SinkholeItem = SinkholesAPI.SinkholeItem;
-  export import SinkholeItemsSinglePage = SinkholesAPI.SinkholeItemsSinglePage;
+  export import Sinkhole = SinkholesAPI.Sinkhole;
+  export import SinkholesSinglePage = SinkholesAPI.SinkholesSinglePage;
   export import SinkholeListParams = SinkholesAPI.SinkholeListParams;
   export import AttackSurfaceReport = AttackSurfaceReportAPI.AttackSurfaceReport;
 }

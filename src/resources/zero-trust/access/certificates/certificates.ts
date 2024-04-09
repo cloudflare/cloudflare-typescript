@@ -202,7 +202,7 @@ export class CertificatesSinglePage extends SinglePage<Certificate> {}
 /**
  * A fully-qualified domain name (FQDN).
  */
-export type AssociatedHostnamesItem = string;
+export type AssociatedHostnames = string;
 
 export interface Certificate {
   /**
@@ -213,7 +213,7 @@ export interface Certificate {
   /**
    * The hostnames of the applications that will use this certificate.
    */
-  associated_hostnames?: Array<AssociatedHostnamesItem>;
+  associated_hostnames?: Array<AssociatedHostnames>;
 
   created_at?: string;
 
@@ -265,14 +265,14 @@ export interface CertificateCreateParams {
   /**
    * Body param: The hostnames of the applications that will use this certificate.
    */
-  associated_hostnames?: Array<AssociatedHostnamesItem>;
+  associated_hostnames?: Array<AssociatedHostnames>;
 }
 
 export interface CertificateUpdateParams {
   /**
    * Body param: The hostnames of the applications that will use this certificate.
    */
-  associated_hostnames: Array<AssociatedHostnamesItem>;
+  associated_hostnames: Array<AssociatedHostnames>;
 
   /**
    * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -329,7 +329,7 @@ export interface CertificateGetParams {
 }
 
 export namespace Certificates {
-  export import AssociatedHostnamesItem = CertificatesAPI.AssociatedHostnamesItem;
+  export import AssociatedHostnames = CertificatesAPI.AssociatedHostnames;
   export import Certificate = CertificatesAPI.Certificate;
   export import CertificateDeleteResponse = CertificatesAPI.CertificateDeleteResponse;
   export import CertificatesSinglePage = CertificatesAPI.CertificatesSinglePage;
