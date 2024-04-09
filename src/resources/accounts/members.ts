@@ -93,7 +93,7 @@ export interface Member {
   /**
    * Roles assigned to this member.
    */
-  roles: Array<Role>;
+  roles: Array<MemberRole>;
 
   status: unknown;
 
@@ -130,6 +130,25 @@ export namespace Member {
   }
 }
 
+export interface MemberRole {
+  /**
+   * Role identifier tag.
+   */
+  id: string;
+
+  /**
+   * Description of role's permissions.
+   */
+  description: string;
+
+  /**
+   * Role name.
+   */
+  name: string;
+
+  permissions: PermissionGroupsAPI.Permission;
+}
+
 export interface MemberWithInviteCode {
   /**
    * Membership identifier tag.
@@ -139,7 +158,7 @@ export interface MemberWithInviteCode {
   /**
    * Roles assigned to this member.
    */
-  roles: Array<Role>;
+  roles: Array<MemberRole>;
 
   status: unknown;
 
@@ -179,25 +198,6 @@ export namespace MemberWithInviteCode {
      */
     two_factor_authentication_enabled?: boolean;
   }
-}
-
-export interface Role {
-  /**
-   * Role identifier tag.
-   */
-  id: string;
-
-  /**
-   * Description of role's permissions.
-   */
-  description: string;
-
-  /**
-   * Role name.
-   */
-  name: string;
-
-  permissions: PermissionGroupsAPI.Permission;
 }
 
 export interface MemberListResponse {
@@ -265,7 +265,7 @@ export interface MemberUpdateParams {
   /**
    * Body param: Roles assigned to this member.
    */
-  roles: Array<Role>;
+  roles: Array<MemberRole>;
 }
 
 export interface MemberListParams extends V4PagePaginationArrayParams {
@@ -308,8 +308,8 @@ export interface MemberGetParams {
 
 export namespace Members {
   export import Member = MembersAPI.Member;
+  export import MemberRole = MembersAPI.MemberRole;
   export import MemberWithInviteCode = MembersAPI.MemberWithInviteCode;
-  export import Role = MembersAPI.Role;
   export import MemberListResponse = MembersAPI.MemberListResponse;
   export import MemberDeleteResponse = MembersAPI.MemberDeleteResponse;
   export import MemberListResponsesV4PagePaginationArray = MembersAPI.MemberListResponsesV4PagePaginationArray;

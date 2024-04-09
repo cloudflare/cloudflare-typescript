@@ -13,9 +13,10 @@ export {
   Certificates,
 } from './certificates';
 export {
-  Settings,
+  CertificateSettings,
   SettingUpdateResponse,
   SettingGetResponse,
   SettingUpdateParams,
   SettingGetParams,
+  Settings,
 } from './settings';

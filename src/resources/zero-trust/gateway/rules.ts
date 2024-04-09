@@ -123,7 +123,7 @@ export interface DNSResolverSettingsV6 {
 /**
  * The protocol or layer to use.
  */
-export type FilterItem = 'http' | 'dns' | 'l4' | 'egress';
+export type GatewayFilter = 'http' | 'dns' | 'l4' | 'egress';
 
 export interface Rule {
   /**
@@ -178,7 +178,7 @@ export interface Rule {
    * The protocol or layer to evaluate the traffic, identity, and device posture
    * expressions.
    */
-  filters?: Array<FilterItem>;
+  filters?: Array<GatewayFilter>;
 
   /**
    * The wirefilter expression used for identity matching.
@@ -603,7 +603,7 @@ export interface UnnamedSchemaRef0b0764cdb06aad66b555fd74c8c78b2a {
    * The protocol or layer to evaluate the traffic, identity, and device posture
    * expressions.
    */
-  filters?: Array<FilterItem>;
+  filters?: Array<GatewayFilter>;
 
   /**
    * The wirefilter expression used for identity matching.
@@ -692,7 +692,7 @@ export interface RuleCreateParams {
    * Body param: The protocol or layer to evaluate the traffic, identity, and device
    * posture expressions.
    */
-  filters?: Array<FilterItem>;
+  filters?: Array<GatewayFilter>;
 
   /**
    * Body param: The wirefilter expression used for identity matching.
@@ -774,7 +774,7 @@ export interface RuleUpdateParams {
    * Body param: The protocol or layer to evaluate the traffic, identity, and device
    * posture expressions.
    */
-  filters?: Array<FilterItem>;
+  filters?: Array<GatewayFilter>;
 
   /**
    * Body param: The wirefilter expression used for identity matching.
@@ -828,7 +828,7 @@ export interface RuleGetParams {
 export namespace Rules {
   export import DNSResolverSettingsV4 = RulesAPI.DNSResolverSettingsV4;
   export import DNSResolverSettingsV6 = RulesAPI.DNSResolverSettingsV6;
-  export import FilterItem = RulesAPI.FilterItem;
+  export import GatewayFilter = RulesAPI.GatewayFilter;
   export import Rule = RulesAPI.Rule;
   export import RuleSetting = RulesAPI.RuleSetting;
   export import Schedule = RulesAPI.Schedule;

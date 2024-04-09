@@ -93,27 +93,6 @@ export class WANs extends APIResource {
   }
 }
 
-/**
- * (optional) if omitted, use DHCP. Submit secondary_address when site is in high
- * availability mode.
- */
-export interface StaticAddressing {
-  /**
-   * A valid CIDR notation representing an IP range.
-   */
-  address: string;
-
-  /**
-   * A valid IPv4 address.
-   */
-  gateway_address: string;
-
-  /**
-   * A valid CIDR notation representing an IP range.
-   */
-  secondary_address?: string;
-}
-
 export interface WAN {
   /**
    * Identifier
@@ -138,12 +117,33 @@ export interface WAN {
    * (optional) if omitted, use DHCP. Submit secondary_address when site is in high
    * availability mode.
    */
-  static_addressing?: StaticAddressing;
+  static_addressing?: WANStaticAddressing;
 
   /**
    * VLAN port number.
    */
   vlan_tag?: number;
+}
+
+/**
+ * (optional) if omitted, use DHCP. Submit secondary_address when site is in high
+ * availability mode.
+ */
+export interface WANStaticAddressing {
+  /**
+   * A valid CIDR notation representing an IP range.
+   */
+  address: string;
+
+  /**
+   * A valid IPv4 address.
+   */
+  gateway_address: string;
+
+  /**
+   * A valid CIDR notation representing an IP range.
+   */
+  secondary_address?: string;
 }
 
 export interface WANCreateResponse {
@@ -197,7 +197,7 @@ export namespace WANCreateParams {
      * (optional) if omitted, use DHCP. Submit secondary_address when site is in high
      * availability mode.
      */
-    static_addressing?: WANsAPI.StaticAddressing;
+    static_addressing?: WANsAPI.WANStaticAddressing;
   }
 }
 
@@ -225,7 +225,7 @@ export namespace WANUpdateParams {
      * (optional) if omitted, use DHCP. Submit secondary_address when site is in high
      * availability mode.
      */
-    static_addressing?: WANsAPI.StaticAddressing;
+    static_addressing?: WANsAPI.WANStaticAddressing;
 
     /**
      * VLAN port number.
@@ -261,8 +261,8 @@ export interface WANGetParams {
 }
 
 export namespace WANs {
-  export import StaticAddressing = WANsAPI.StaticAddressing;
   export import WAN = WANsAPI.WAN;
+  export import WANStaticAddressing = WANsAPI.WANStaticAddressing;
   export import WANCreateResponse = WANsAPI.WANCreateResponse;
   export import WANUpdateResponse = WANsAPI.WANUpdateResponse;
   export import WANListResponse = WANsAPI.WANListResponse;

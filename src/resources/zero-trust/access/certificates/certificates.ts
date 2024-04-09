@@ -339,6 +339,7 @@ export namespace Certificates {
   export import CertificateDeleteParams = CertificatesAPI.CertificateDeleteParams;
   export import CertificateGetParams = CertificatesAPI.CertificateGetParams;
   export import Settings = SettingsAPI.Settings;
+  export import CertificateSettings = SettingsAPI.CertificateSettings;
   export import SettingUpdateResponse = SettingsAPI.SettingUpdateResponse;
   export import SettingGetResponse = SettingsAPI.SettingGetResponse;
   export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;

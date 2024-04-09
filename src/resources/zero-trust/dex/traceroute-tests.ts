@@ -50,13 +50,13 @@ export class TracerouteTests extends APIResource {
     testId: string,
     params: TracerouteTestPercentilesParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Percentiles> {
+  ): Core.APIPromise<TracerouteTestPercentilesResponse> {
     const { account_id, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/dex/traceroute-tests/${testId}/percentiles`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: Percentiles }>
+      }) as Core.APIPromise<{ result: TracerouteTestPercentilesResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -139,14 +139,6 @@ export namespace NetworkPath {
       value: number;
     }
   }
-}
-
-export interface Percentiles {
-  hopsCount?: DEXAPI.Percentiles;
-
-  packetLossPct?: DEXAPI.Percentiles;
-
-  roundTripTimeMs?: DEXAPI.Percentiles;
 }
 
 export interface Traceroute {
@@ -322,6 +314,14 @@ export namespace Traceroute {
   }
 }
 
+export interface TracerouteTestPercentilesResponse {
+  hopsCount?: DEXAPI.Percentiles;
+
+  packetLossPct?: DEXAPI.Percentiles;
+
+  roundTripTimeMs?: DEXAPI.Percentiles;
+}
+
 export interface TracerouteTestGetParams {
   /**
    * Path param: Unique identifier linked to an account
@@ -414,8 +414,8 @@ export interface TracerouteTestPercentilesParams {
 
 export namespace TracerouteTests {
   export import NetworkPath = TracerouteTestsAPI.NetworkPath;
-  export import Percentiles = TracerouteTestsAPI.Percentiles;
   export import Traceroute = TracerouteTestsAPI.Traceroute;
+  export import TracerouteTestPercentilesResponse = TracerouteTestsAPI.TracerouteTestPercentilesResponse;
   export import TracerouteTestGetParams = TracerouteTestsAPI.TracerouteTestGetParams;
   export import TracerouteTestNetworkPathParams = TracerouteTestsAPI.TracerouteTestNetworkPathParams;
   export import TracerouteTestPercentilesParams = TracerouteTestsAPI.TracerouteTestPercentilesParams;

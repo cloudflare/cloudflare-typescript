@@ -119,18 +119,6 @@ export interface Action {
   value: Array<string>;
 }
 
-/**
- * Actions pattern.
- */
-export interface ActionItem {
-  /**
-   * Type of supported action.
-   */
-  type: 'drop' | 'forward' | 'worker';
-
-  value: Array<string>;
-}
-
 export interface EmailRule {
   /**
    * Routing rule identifier.
@@ -140,7 +128,7 @@ export interface EmailRule {
   /**
    * List actions patterns.
    */
-  actions?: Array<ActionItem>;
+  actions?: Array<Action>;
 
   /**
    * Routing rule status.
@@ -150,7 +138,7 @@ export interface EmailRule {
   /**
    * Matching patterns to forward to your actions.
    */
-  matchers?: Array<MatcherItem>;
+  matchers?: Array<Matcher>;
 
   /**
    * Routing rule name.
@@ -188,73 +176,16 @@ export interface Matcher {
   value: string;
 }
 
-/**
- * Matching pattern to forward your actions.
- */
-export interface MatcherItem {
-  /**
-   * Field for type matcher.
-   */
-  field: 'to';
-
-  /**
-   * Type of matcher.
-   */
-  type: 'literal';
-
-  /**
-   * Value for matcher.
-   */
-  value: string;
-}
-
-export interface Properties {
-  /**
-   * Routing rule identifier.
-   */
-  id?: string;
-
-  /**
-   * List actions patterns.
-   */
-  actions?: Array<ActionItem>;
-
-  /**
-   * Routing rule status.
-   */
-  enabled?: true | false;
-
-  /**
-   * Matching patterns to forward to your actions.
-   */
-  matchers?: Array<MatcherItem>;
-
-  /**
-   * Routing rule name.
-   */
-  name?: string;
-
-  /**
-   * Priority of the routing rule.
-   */
-  priority?: number;
-
-  /**
-   * @deprecated: Routing rule tag. (Deprecated, replaced by routing rule identifier)
-   */
-  tag?: string;
-}
-
 export interface RuleCreateParams {
   /**
    * List actions patterns.
    */
-  actions: Array<ActionItem>;
+  actions: Array<Action>;
 
   /**
    * Matching patterns to forward to your actions.
    */
-  matchers: Array<MatcherItem>;
+  matchers: Array<Matcher>;
 
   /**
    * Routing rule status.
@@ -276,12 +207,12 @@ export interface RuleUpdateParams {
   /**
    * List actions patterns.
    */
-  actions: Array<ActionItem>;
+  actions: Array<Action>;
 
   /**
    * Matching patterns to forward to your actions.
    */
-  matchers: Array<MatcherItem>;
+  matchers: Array<Matcher>;
 
   /**
    * Routing rule status.
@@ -308,16 +239,16 @@ export interface RuleListParams extends V4PagePaginationArrayParams {
 
 export namespace Rules {
   export import Action = RulesAPI.Action;
-  export import ActionItem = RulesAPI.ActionItem;
   export import EmailRule = RulesAPI.EmailRule;
   export import Matcher = RulesAPI.Matcher;
-  export import MatcherItem = RulesAPI.MatcherItem;
-  export import Properties = RulesAPI.Properties;
   export import EmailRulesV4PagePaginationArray = RulesAPI.EmailRulesV4PagePaginationArray;
   export import RuleCreateParams = RulesAPI.RuleCreateParams;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
   export import RuleListParams = RulesAPI.RuleListParams;
   export import CatchAlls = CatchAllsAPI.CatchAlls;
-  export import CatchAllRule = CatchAllsAPI.CatchAllRule;
+  export import CatchAllAction = CatchAllsAPI.CatchAllAction;
+  export import CatchAllMatcher = CatchAllsAPI.CatchAllMatcher;
+  export import CatchAllUpdateResponse = CatchAllsAPI.CatchAllUpdateResponse;
+  export import CatchAllGetResponse = CatchAllsAPI.CatchAllGetResponse;
   export import CatchAllUpdateParams = CatchAllsAPI.CatchAllUpdateParams;
 }

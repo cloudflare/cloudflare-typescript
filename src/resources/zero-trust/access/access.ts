@@ -27,6 +27,46 @@ export class Access extends APIResource {
 }
 
 /**
+ * Enforces a device posture rule has run successfully
+ */
+export interface AccessDevicePostureRule {
+  device_posture: AccessDevicePostureRule.DevicePosture;
+}
+
+export namespace AccessDevicePostureRule {
+  export interface DevicePosture {
+    /**
+     * The ID of a device posture integration.
+     */
+    integration_uid: string;
+  }
+}
+
+/**
+ * Matches a specific email.
+ */
+export type AccessRule =
+  | EmailRule
+  | EmailListRule
+  | DomainRule
+  | EveryoneRule
+  | IPRule
+  | IPListRule
+  | CertificateRule
+  | GroupRule
+  | AzureGroupRule
+  | GitHubOrganizationRule
+  | GsuiteGroupRule
+  | OktaGroupRule
+  | SamlGroupRule
+  | ServiceTokenRule
+  | AnyValidServiceTokenRule
+  | ExternalEvaluationRule
+  | CountryRule
+  | AuthenticationMethodRule
+  | AccessDevicePostureRule;
+
+/**
  * Matches any valid Access Service Token
  */
 export interface AnyValidServiceTokenRule {
@@ -93,22 +133,6 @@ export namespace CountryRule {
      * The country code that should be matched.
      */
     country_code: string;
-  }
-}
-
-/**
- * Enforces a device posture rule has run successfully
- */
-export interface DevicePostureRule {
-  device_posture: DevicePostureRule.DevicePosture;
-}
-
-export namespace DevicePostureRule {
-  export interface DevicePosture {
-    /**
-     * The ID of a device posture integration.
-     */
-    integration_uid: string;
   }
 }
 
@@ -252,30 +276,6 @@ export namespace GsuiteGroupRule {
 }
 
 /**
- * Matches a specific email.
- */
-export type IncludeItem =
-  | EmailRule
-  | EmailListRule
-  | DomainRule
-  | EveryoneRule
-  | IPRule
-  | IPListRule
-  | CertificateRule
-  | GroupRule
-  | AzureGroupRule
-  | GitHubOrganizationRule
-  | GsuiteGroupRule
-  | OktaGroupRule
-  | SamlGroupRule
-  | ServiceTokenRule
-  | AnyValidServiceTokenRule
-  | ExternalEvaluationRule
-  | CountryRule
-  | AuthenticationMethodRule
-  | DevicePostureRule;
-
-/**
  * Matches an IP address from a list.
  */
 export interface IPListRule {
@@ -329,30 +329,6 @@ export namespace OktaGroupRule {
 }
 
 /**
- * Matches a specific email.
- */
-export type Rule =
-  | EmailRule
-  | EmailListRule
-  | DomainRule
-  | EveryoneRule
-  | IPRule
-  | IPListRule
-  | CertificateRule
-  | GroupRule
-  | AzureGroupRule
-  | GitHubOrganizationRule
-  | GsuiteGroupRule
-  | OktaGroupRule
-  | SamlGroupRule
-  | ServiceTokenRule
-  | AnyValidServiceTokenRule
-  | ExternalEvaluationRule
-  | CountryRule
-  | AuthenticationMethodRule
-  | DevicePostureRule;
-
-/**
  * Matches a SAML group. Requires a SAML identity provider.
  */
 export interface SamlGroupRule {
@@ -390,12 +366,13 @@ export namespace ServiceTokenRule {
 }
 
 export namespace Access {
+  export import AccessDevicePostureRule = AccessAPI.AccessDevicePostureRule;
+  export import AccessRule = AccessAPI.AccessRule;
   export import AnyValidServiceTokenRule = AccessAPI.AnyValidServiceTokenRule;
   export import AuthenticationMethodRule = AccessAPI.AuthenticationMethodRule;
   export import AzureGroupRule = AccessAPI.AzureGroupRule;
   export import CertificateRule = AccessAPI.CertificateRule;
   export import CountryRule = AccessAPI.CountryRule;
-  export import DevicePostureRule = AccessAPI.DevicePostureRule;
   export import DomainRule = AccessAPI.DomainRule;
   export import EmailListRule = AccessAPI.EmailListRule;
   export import EmailRule = AccessAPI.EmailRule;
@@ -404,11 +381,9 @@ export namespace Access {
   export import GitHubOrganizationRule = AccessAPI.GitHubOrganizationRule;
   export import GroupRule = AccessAPI.GroupRule;
   export import GsuiteGroupRule = AccessAPI.GsuiteGroupRule;
-  export import IncludeItem = AccessAPI.IncludeItem;
   export import IPListRule = AccessAPI.IPListRule;
   export import IPRule = AccessAPI.IPRule;
   export import OktaGroupRule = AccessAPI.OktaGroupRule;
-  export import Rule = AccessAPI.Rule;
   export import SamlGroupRule = AccessAPI.SamlGroupRule;
   export import ServiceTokenRule = AccessAPI.ServiceTokenRule;
   export import Applications = ApplicationsAPI.Applications;
@@ -442,8 +417,6 @@ export namespace Access {
   export import CertificateDeleteParams = CertificatesAPI.CertificateDeleteParams;
   export import CertificateGetParams = CertificatesAPI.CertificateGetParams;
   export import Groups = GroupsAPI.Groups;
-  export import ExcludeItem = GroupsAPI.ExcludeItem;
-  export import RequireItem = GroupsAPI.RequireItem;
   export import ZeroTrustGroup = GroupsAPI.ZeroTrustGroup;
   export import GroupDeleteResponse = GroupsAPI.GroupDeleteResponse;
   export import ZeroTrustGroupsSinglePage = GroupsAPI.ZeroTrustGroupsSinglePage;

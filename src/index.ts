@@ -203,7 +203,7 @@ export class Cloudflare extends Core.APIClient {
   storage: API.Storage = new API.Storage(this);
   stream: API.Stream = new API.Stream(this);
   alerting: API.Alerting = new API.Alerting(this);
-  d1: API.D1 = new API.D1(this);
+  d1: API.D1Resource = new API.D1Resource(this);
   r2: API.R2 = new API.R2(this);
   warpConnector: API.WARPConnector = new API.WARPConnector(this);
   workersForPlatforms: API.WorkersForPlatforms = new API.WorkersForPlatforms(this);
@@ -511,7 +511,7 @@ export namespace Cloudflare {
 
   export import Alerting = API.Alerting;
 
-  export import D1 = API.D1;
+  export import D1Resource = API.D1Resource;
 
   export import R2 = API.R2;
 

@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as DatabaseAPI from 'cloudflare/resources/d1/database';
 import * as Shared from 'cloudflare/resources/shared';
+import * as D1API from 'cloudflare/resources/d1/d1';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class Database extends APIResource {
@@ -60,12 +61,12 @@ export class Database extends APIResource {
     accountIdentifier: string,
     databaseIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<D1> {
+  ): Core.APIPromise<D1API.D1> {
     return (
       this._client.get(
         `/accounts/${accountIdentifier}/d1/database/${databaseIdentifier}`,
         options,
-      ) as Core.APIPromise<{ result: D1 }>
+      ) as Core.APIPromise<{ result: D1API.D1 }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -88,26 +89,6 @@ export class Database extends APIResource {
 }
 
 export class DatabaseListResponsesV4PagePaginationArray extends V4PagePaginationArray<DatabaseListResponse> {}
-
-export interface D1 {
-  /**
-   * Specifies the timestamp the resource was created as an ISO8601 string.
-   */
-  created_at?: string;
-
-  /**
-   * The D1 database's size, in bytes.
-   */
-  file_size?: number;
-
-  name?: string;
-
-  num_tables?: number;
-
-  uuid?: string;
-
-  version?: string;
-}
 
 export interface QueryResult {
   meta?: QueryResult.Meta;
@@ -194,7 +175,6 @@ export interface DatabaseQueryParams {
 }
 
 export namespace Database {
-  export import D1 = DatabaseAPI.D1;
   export import QueryResult = DatabaseAPI.QueryResult;
   export import DatabaseCreateResponse = DatabaseAPI.DatabaseCreateResponse;
   export import DatabaseListResponse = DatabaseAPI.DatabaseListResponse;

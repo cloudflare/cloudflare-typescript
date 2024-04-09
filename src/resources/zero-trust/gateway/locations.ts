@@ -121,19 +121,12 @@ export interface Location {
   /**
    * A list of network ranges that requests from this location would originate from.
    */
-  networks?: Array<NetworkItem>;
+  networks?: Array<LocationNetwork>;
 
   updated_at?: string;
 }
 
-export interface Network {
-  /**
-   * The IPv4 address or IPv4 CIDR. IPv4 CIDRs are limited to a maximum of /24.
-   */
-  network: string;
-}
-
-export interface NetworkItem {
+export interface LocationNetwork {
   /**
    * The IPv4 address or IPv4 CIDR. IPv4 CIDRs are limited to a maximum of /24.
    */
@@ -176,7 +169,7 @@ export interface UnnamedSchemaRef1b37523fdb0ae5806cd8e062492aab66 {
   /**
    * A list of network ranges that requests from this location would originate from.
    */
-  networks?: Array<NetworkItem>;
+  networks?: Array<LocationNetwork>;
 
   updated_at?: string;
 }
@@ -206,7 +199,7 @@ export interface LocationCreateParams {
    * Body param: A list of network ranges that requests from this location would
    * originate from.
    */
-  networks?: Array<NetworkItem>;
+  networks?: Array<LocationNetwork>;
 }
 
 export interface LocationUpdateParams {
@@ -234,7 +227,7 @@ export interface LocationUpdateParams {
    * Body param: A list of network ranges that requests from this location would
    * originate from.
    */
-  networks?: Array<NetworkItem>;
+  networks?: Array<LocationNetwork>;
 }
 
 export interface LocationListParams {
@@ -259,8 +252,7 @@ export interface LocationGetParams {
 
 export namespace Locations {
   export import Location = LocationsAPI.Location;
-  export import Network = LocationsAPI.Network;
-  export import NetworkItem = LocationsAPI.NetworkItem;
+  export import LocationNetwork = LocationsAPI.LocationNetwork;
   export import UnnamedSchemaRef1b37523fdb0ae5806cd8e062492aab66 = LocationsAPI.UnnamedSchemaRef1b37523fdb0ae5806cd8e062492aab66;
   export import LocationsSinglePage = LocationsAPI.LocationsSinglePage;
   export import LocationCreateParams = LocationsAPI.LocationCreateParams;
