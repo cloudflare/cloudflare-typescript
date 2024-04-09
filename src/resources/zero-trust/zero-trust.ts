@@ -77,7 +77,7 @@ export namespace ZeroTrust {
   export import ExternalEvaluationRule = AccessAPI.ExternalEvaluationRule;
   export import GitHubOrganizationRule = AccessAPI.GitHubOrganizationRule;
   export import GroupRule = AccessAPI.GroupRule;
-  export import GsuiteGroupRule = AccessAPI.GsuiteGroupRule;
+  export import GSuiteGroupRule = AccessAPI.GSuiteGroupRule;
   export import IPListRule = AccessAPI.IPListRule;
   export import IPRule = AccessAPI.IPRule;
   export import OktaGroupRule = AccessAPI.OktaGroupRule;
