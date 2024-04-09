@@ -65,8 +65,8 @@ export {
   OrganizationRevokeUsersParams,
   Organizations,
 } from './organizations';
+export { NetworkPath, Percentiles, UnnamedSchemaRefBf9e2abcf1b78a6cab8e6e29e2228a11, DEX } from './dex/index';
 export { Networks } from './networks/index';
-export { Percentiles, UnnamedSchemaRefBf9e2abcf1b78a6cab8e6e29e2228a11, DEX } from './dex/index';
 export { Seat, SeatEditResponse, SeatEditParams, Seats } from './seats';
 export {
   Tunnel,

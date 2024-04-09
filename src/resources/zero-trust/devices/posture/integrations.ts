@@ -13,13 +13,13 @@ export class Integrations extends APIResource {
   create(
     params: IntegrationCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Integrations | null> {
+  ): Core.APIPromise<Integration | null> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/devices/posture/integration`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: Integrations | null }>
+      }) as Core.APIPromise<{ result: Integration | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -29,7 +29,7 @@ export class Integrations extends APIResource {
   list(
     params: IntegrationListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<IntegrationsSinglePage, Integrations> {
+  ): Core.PagePromise<IntegrationsSinglePage, Integration> {
     const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/devices/posture/integration`,
@@ -62,13 +62,13 @@ export class Integrations extends APIResource {
     integrationId: string,
     params: IntegrationEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Integrations | null> {
+  ): Core.APIPromise<Integration | null> {
     const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/devices/posture/integration/${integrationId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: Integrations | null }>
+      }) as Core.APIPromise<{ result: Integration | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -79,20 +79,20 @@ export class Integrations extends APIResource {
     integrationId: string,
     params: IntegrationGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Integrations | null> {
+  ): Core.APIPromise<Integration | null> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/devices/posture/integration/${integrationId}`,
         options,
-      ) as Core.APIPromise<{ result: Integrations | null }>
+      ) as Core.APIPromise<{ result: Integration | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class IntegrationsSinglePage extends SinglePage<Integrations> {}
+export class IntegrationsSinglePage extends SinglePage<Integration> {}
 
-export interface Integrations {
+export interface Integration {
   /**
    * API UUID.
    */
@@ -101,7 +101,7 @@ export interface Integrations {
   /**
    * The configuration object containing third-party integration information.
    */
-  config?: Integrations.Config;
+  config?: Integration.Config;
 
   /**
    * The interval between each posture check with the third-party API. Use `m` for
@@ -120,7 +120,7 @@ export interface Integrations {
   type?: 'workspace_one' | 'crowdstrike_s2s' | 'uptycs' | 'intune' | 'kolide' | 'tanium' | 'sentinelone_s2s';
 }
 
-export namespace Integrations {
+export namespace Integration {
   /**
    * The configuration object containing third-party integration information.
    */
@@ -551,7 +551,7 @@ export interface IntegrationGetParams {
 }
 
 export namespace Integrations {
-  export import Integrations = IntegrationsAPI.Integrations;
+  export import Integration = IntegrationsAPI.Integration;
   export import UnnamedSchemaRefB84b377dfc9454d455b646d4bc9ab507 = IntegrationsAPI.UnnamedSchemaRefB84b377dfc9454d455b646d4bc9ab507;
   export import IntegrationsSinglePage = IntegrationsAPI.IntegrationsSinglePage;
   export import IntegrationCreateParams = IntegrationsAPI.IntegrationCreateParams;

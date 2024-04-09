@@ -32,13 +32,13 @@ export class TracerouteTests extends APIResource {
     testId: string,
     params: TracerouteTestNetworkPathParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<NetworkPath> {
+  ): Core.APIPromise<DEXAPI.NetworkPath> {
     const { account_id, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/dex/traceroute-tests/${testId}/network-path`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: NetworkPath }>
+      }) as Core.APIPromise<{ result: DEXAPI.NetworkPath }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -58,86 +58,6 @@ export class TracerouteTests extends APIResource {
         ...options,
       }) as Core.APIPromise<{ result: TracerouteTestPercentilesResponse }>
     )._thenUnwrap((obj) => obj.result);
-  }
-}
-
-export interface NetworkPath {
-  /**
-   * API Resource UUID tag.
-   */
-  id: string;
-
-  deviceName?: string;
-
-  /**
-   * The interval at which the Traceroute synthetic application test is set to run.
-   */
-  interval?: string;
-
-  kind?: 'traceroute';
-
-  name?: string;
-
-  networkPath?: NetworkPath.NetworkPath | null;
-
-  /**
-   * The host of the Traceroute synthetic application test
-   */
-  url?: string;
-}
-
-export namespace NetworkPath {
-  export interface NetworkPath {
-    slots: Array<NetworkPath.Slot>;
-
-    /**
-     * Specifies the sampling applied, if any, to the slots response. When sampled,
-     * results shown represent the first test run to the start of each sampling
-     * interval.
-     */
-    sampling?: NetworkPath.Sampling | null;
-  }
-
-  export namespace NetworkPath {
-    export interface Slot {
-      /**
-       * API Resource UUID tag.
-       */
-      id: string;
-
-      /**
-       * Round trip time in ms of the client to app mile
-       */
-      clientToAppRttMs: number | null;
-
-      /**
-       * Round trip time in ms of the client to Cloudflare egress mile
-       */
-      clientToCfEgressRttMs: number | null;
-
-      /**
-       * Round trip time in ms of the client to Cloudflare ingress mile
-       */
-      clientToCfIngressRttMs: number | null;
-
-      timestamp: string;
-
-      /**
-       * Round trip time in ms of the client to ISP mile
-       */
-      clientToIspRttMs?: number | null;
-    }
-
-    /**
-     * Specifies the sampling applied, if any, to the slots response. When sampled,
-     * results shown represent the first test run to the start of each sampling
-     * interval.
-     */
-    export interface Sampling {
-      unit: 'hours';
-
-      value: number;
-    }
   }
 }
 
@@ -413,7 +333,6 @@ export interface TracerouteTestPercentilesParams {
 }
 
 export namespace TracerouteTests {
-  export import NetworkPath = TracerouteTestsAPI.NetworkPath;
   export import Traceroute = TracerouteTestsAPI.Traceroute;
   export import TracerouteTestPercentilesResponse = TracerouteTestsAPI.TracerouteTestPercentilesResponse;
   export import TracerouteTestGetParams = TracerouteTestsAPI.TracerouteTestGetParams;

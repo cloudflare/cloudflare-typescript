@@ -191,10 +191,10 @@ export namespace Devices {
   export import DEXTestDeleteParams = DEXTestsAPI.DEXTestDeleteParams;
   export import DEXTestGetParams = DEXTestsAPI.DEXTestGetParams;
   export import Networks = NetworksAPI.Networks;
-  export import Network = NetworksAPI.Network;
+  export import DeviceNetwork = NetworksAPI.DeviceNetwork;
   export import UnnamedSchemaRefD2b048663faf5e0cd5c90501b71171de = NetworksAPI.UnnamedSchemaRefD2b048663faf5e0cd5c90501b71171de;
   export import NetworkDeleteResponse = NetworksAPI.NetworkDeleteResponse;
-  export import NetworksSinglePage = NetworksAPI.NetworksSinglePage;
+  export import DeviceNetworksSinglePage = NetworksAPI.DeviceNetworksSinglePage;
   export import NetworkCreateParams = NetworksAPI.NetworkCreateParams;
   export import NetworkUpdateParams = NetworksAPI.NetworkUpdateParams;
   export import NetworkListParams = NetworksAPI.NetworkListParams;
@@ -211,9 +211,9 @@ export namespace Devices {
   export import PolicyEditParams = PoliciesAPI.PolicyEditParams;
   export import PolicyGetParams = PoliciesAPI.PolicyGetParams;
   export import Posture = PostureAPI.Posture;
+  export import DeviceInput = PostureAPI.DeviceInput;
+  export import DeviceMatch = PostureAPI.DeviceMatch;
   export import DevicePostureRule = PostureAPI.DevicePostureRule;
-  export import Input = PostureAPI.Input;
-  export import Match = PostureAPI.Match;
   export import UnnamedSchemaRef34ef0ad73a63c3f76ed170adca181930 = PostureAPI.UnnamedSchemaRef34ef0ad73a63c3f76ed170adca181930;
   export import UnnamedSchemaRef41885dd46b9e0294254c49305a273681 = PostureAPI.UnnamedSchemaRef41885dd46b9e0294254c49305a273681;
   export import UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27 = PostureAPI.UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27;

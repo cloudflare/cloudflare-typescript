@@ -2,9 +2,9 @@
 
 export { Device, DeviceListParams, DeviceGetParams, DevicesSinglePage, Devices } from './devices';
 export {
+  DeviceInput,
+  DeviceMatch,
   DevicePostureRule,
-  Input,
-  Match,
   UnnamedSchemaRef34ef0ad73a63c3f76ed170adca181930,
   UnnamedSchemaRef41885dd46b9e0294254c49305a273681,
   UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27,
@@ -17,9 +17,8 @@ export {
   DevicePostureRulesSinglePage,
   Posture,
 } from './posture/index';
-export { DeviceSettings, SettingUpdateParams, SettingListParams, Settings } from './settings';
 export {
-  Network,
+  DeviceNetwork,
   UnnamedSchemaRefD2b048663faf5e0cd5c90501b71171de,
   NetworkDeleteResponse,
   NetworkCreateParams,
@@ -27,9 +26,10 @@ export {
   NetworkListParams,
   NetworkDeleteParams,
   NetworkGetParams,
-  NetworksSinglePage,
+  DeviceNetworksSinglePage,
   Networks,
 } from './networks';
+export { DeviceSettings, SettingUpdateParams, SettingListParams, Settings } from './settings';
 export { OverrideCodeListResponse, OverrideCodeListParams, OverrideCodes } from './override-codes';
 export { RevokeCreateParams, Revoke } from './revoke';
 export {
