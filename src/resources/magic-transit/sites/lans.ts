@@ -153,12 +153,38 @@ export interface LAN {
    * optional (if omitted, use DHCP). However, if in high availability mode,
    * static_address is required along with secondary and virtual address.
    */
-  static_addressing?: StaticAddressing;
+  static_addressing?: LANStaticAddressing;
 
   /**
    * VLAN port number.
    */
   vlan_tag?: number;
+}
+
+/**
+ * If the site is not configured in high availability mode, this configuration is
+ * optional (if omitted, use DHCP). However, if in high availability mode,
+ * static_address is required along with secondary and virtual address.
+ */
+export interface LANStaticAddressing {
+  /**
+   * A valid CIDR notation representing an IP range.
+   */
+  address: string;
+
+  dhcp_relay?: DHCPRelay;
+
+  dhcp_server?: DHCPServer;
+
+  /**
+   * A valid CIDR notation representing an IP range.
+   */
+  secondary_address?: string;
+
+  /**
+   * A valid CIDR notation representing an IP range.
+   */
+  virtual_address?: string;
 }
 
 export interface Nat {
@@ -180,32 +206,6 @@ export interface RoutedSubnet {
   prefix: string;
 
   nat?: Nat;
-}
-
-/**
- * If the site is not configured in high availability mode, this configuration is
- * optional (if omitted, use DHCP). However, if in high availability mode,
- * static_address is required along with secondary and virtual address.
- */
-export interface StaticAddressing {
-  /**
-   * A valid CIDR notation representing an IP range.
-   */
-  address: string;
-
-  dhcp_relay?: DHCPRelay;
-
-  dhcp_server?: DHCPServer;
-
-  /**
-   * A valid CIDR notation representing an IP range.
-   */
-  secondary_address?: string;
-
-  /**
-   * A valid CIDR notation representing an IP range.
-   */
-  virtual_address?: string;
 }
 
 export interface LANCreateResponse {
@@ -268,7 +268,7 @@ export namespace LANCreateParams {
      * optional (if omitted, use DHCP). However, if in high availability mode,
      * static_address is required along with secondary and virtual address.
      */
-    static_addressing?: LANsAPI.StaticAddressing;
+    static_addressing?: LANsAPI.LANStaticAddressing;
   }
 }
 
@@ -299,7 +299,7 @@ export namespace LANUpdateParams {
      * optional (if omitted, use DHCP). However, if in high availability mode,
      * static_address is required along with secondary and virtual address.
      */
-    static_addressing?: LANsAPI.StaticAddressing;
+    static_addressing?: LANsAPI.LANStaticAddressing;
 
     /**
      * VLAN port number.
@@ -338,9 +338,9 @@ export namespace LANs {
   export import DHCPRelay = LANsAPI.DHCPRelay;
   export import DHCPServer = LANsAPI.DHCPServer;
   export import LAN = LANsAPI.LAN;
+  export import LANStaticAddressing = LANsAPI.LANStaticAddressing;
   export import Nat = LANsAPI.Nat;
   export import RoutedSubnet = LANsAPI.RoutedSubnet;
-  export import StaticAddressing = LANsAPI.StaticAddressing;
   export import LANCreateResponse = LANsAPI.LANCreateResponse;
   export import LANUpdateResponse = LANsAPI.LANUpdateResponse;
   export import LANListResponse = LANsAPI.LANListResponse;

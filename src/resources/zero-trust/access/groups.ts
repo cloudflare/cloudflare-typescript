@@ -193,54 +193,6 @@ export class Groups extends APIResource {
 
 export class ZeroTrustGroupsSinglePage extends SinglePage<ZeroTrustGroup> {}
 
-/**
- * Matches a specific email.
- */
-export type ExcludeItem =
-  | AccessAPI.EmailRule
-  | AccessAPI.EmailListRule
-  | AccessAPI.DomainRule
-  | AccessAPI.EveryoneRule
-  | AccessAPI.IPRule
-  | AccessAPI.IPListRule
-  | AccessAPI.CertificateRule
-  | AccessAPI.GroupRule
-  | AccessAPI.AzureGroupRule
-  | AccessAPI.GitHubOrganizationRule
-  | AccessAPI.GsuiteGroupRule
-  | AccessAPI.OktaGroupRule
-  | AccessAPI.SamlGroupRule
-  | AccessAPI.ServiceTokenRule
-  | AccessAPI.AnyValidServiceTokenRule
-  | AccessAPI.ExternalEvaluationRule
-  | AccessAPI.CountryRule
-  | AccessAPI.AuthenticationMethodRule
-  | AccessAPI.DevicePostureRule;
-
-/**
- * Matches a specific email.
- */
-export type RequireItem =
-  | AccessAPI.EmailRule
-  | AccessAPI.EmailListRule
-  | AccessAPI.DomainRule
-  | AccessAPI.EveryoneRule
-  | AccessAPI.IPRule
-  | AccessAPI.IPListRule
-  | AccessAPI.CertificateRule
-  | AccessAPI.GroupRule
-  | AccessAPI.AzureGroupRule
-  | AccessAPI.GitHubOrganizationRule
-  | AccessAPI.GsuiteGroupRule
-  | AccessAPI.OktaGroupRule
-  | AccessAPI.SamlGroupRule
-  | AccessAPI.ServiceTokenRule
-  | AccessAPI.AnyValidServiceTokenRule
-  | AccessAPI.ExternalEvaluationRule
-  | AccessAPI.CountryRule
-  | AccessAPI.AuthenticationMethodRule
-  | AccessAPI.DevicePostureRule;
-
 export interface ZeroTrustGroup {
   /**
    * UUID
@@ -253,19 +205,19 @@ export interface ZeroTrustGroup {
    * Rules evaluated with a NOT logical operator. To match a policy, a user cannot
    * meet any of the Exclude rules.
    */
-  exclude?: Array<ExcludeItem>;
+  exclude?: Array<AccessAPI.AccessRule>;
 
   /**
    * Rules evaluated with an OR logical operator. A user needs to meet only one of
    * the Include rules.
    */
-  include?: Array<AccessAPI.IncludeItem>;
+  include?: Array<AccessAPI.AccessRule>;
 
   /**
    * Rules evaluated with an AND logical operator. To match a policy, a user must
    * meet all of the Require rules.
    */
-  is_default?: Array<RequireItem>;
+  is_default?: Array<AccessAPI.AccessRule>;
 
   /**
    * The name of the Access group.
@@ -276,7 +228,7 @@ export interface ZeroTrustGroup {
    * Rules evaluated with an AND logical operator. To match a policy, a user must
    * meet all of the Require rules.
    */
-  require?: Array<RequireItem>;
+  require?: Array<AccessAPI.AccessRule>;
 
   updated_at?: string;
 }
@@ -293,7 +245,7 @@ export interface GroupCreateParams {
    * Body param: Rules evaluated with an OR logical operator. A user needs to meet
    * only one of the Include rules.
    */
-  include: Array<AccessAPI.IncludeItem>;
+  include: Array<AccessAPI.AccessRule>;
 
   /**
    * Body param: The name of the Access group.
@@ -316,7 +268,7 @@ export interface GroupCreateParams {
    * Body param: Rules evaluated with a NOT logical operator. To match a policy, a
    * user cannot meet any of the Exclude rules.
    */
-  exclude?: Array<ExcludeItem>;
+  exclude?: Array<AccessAPI.AccessRule>;
 
   /**
    * Body param: Whether this is the default group
@@ -327,7 +279,7 @@ export interface GroupCreateParams {
    * Body param: Rules evaluated with an AND logical operator. To match a policy, a
    * user must meet all of the Require rules.
    */
-  require?: Array<RequireItem>;
+  require?: Array<AccessAPI.AccessRule>;
 }
 
 export interface GroupUpdateParams {
@@ -335,7 +287,7 @@ export interface GroupUpdateParams {
    * Body param: Rules evaluated with an OR logical operator. A user needs to meet
    * only one of the Include rules.
    */
-  include: Array<AccessAPI.IncludeItem>;
+  include: Array<AccessAPI.AccessRule>;
 
   /**
    * Body param: The name of the Access group.
@@ -358,7 +310,7 @@ export interface GroupUpdateParams {
    * Body param: Rules evaluated with a NOT logical operator. To match a policy, a
    * user cannot meet any of the Exclude rules.
    */
-  exclude?: Array<ExcludeItem>;
+  exclude?: Array<AccessAPI.AccessRule>;
 
   /**
    * Body param: Whether this is the default group
@@ -369,7 +321,7 @@ export interface GroupUpdateParams {
    * Body param: Rules evaluated with an AND logical operator. To match a policy, a
    * user must meet all of the Require rules.
    */
-  require?: Array<RequireItem>;
+  require?: Array<AccessAPI.AccessRule>;
 }
 
 export interface GroupListParams {
@@ -409,8 +361,6 @@ export interface GroupGetParams {
 }
 
 export namespace Groups {
-  export import ExcludeItem = GroupsAPI.ExcludeItem;
-  export import RequireItem = GroupsAPI.RequireItem;
   export import ZeroTrustGroup = GroupsAPI.ZeroTrustGroup;
   export import GroupDeleteResponse = GroupsAPI.GroupDeleteResponse;
   export import ZeroTrustGroupsSinglePage = GroupsAPI.ZeroTrustGroupsSinglePage;

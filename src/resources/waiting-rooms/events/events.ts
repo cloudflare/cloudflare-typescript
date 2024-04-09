@@ -1045,6 +1045,7 @@ export namespace Events {
   export import EventEditParams = EventsAPI.EventEditParams;
   export import EventGetParams = EventsAPI.EventGetParams;
   export import Details = DetailsAPI.Details;
+  export import EventQuery = DetailsAPI.EventQuery;
   export import DetailGetResponse = DetailsAPI.DetailGetResponse;
   export import DetailGetParams = DetailsAPI.DetailGetParams;
 }

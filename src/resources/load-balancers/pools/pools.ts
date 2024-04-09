@@ -132,7 +132,7 @@ export interface PoolCreateParams {
    * is balanced across all currently healthy origins, provided the pool itself is
    * healthy.
    */
-  origins: Array<LoadBalancersAPI.OriginItem>;
+  origins: Array<LoadBalancersAPI.Origin>;
 
   /**
    * Body param: A human-readable description of the pool.
@@ -215,7 +215,7 @@ export interface PoolUpdateParams {
    * is balanced across all currently healthy origins, provided the pool itself is
    * healthy.
    */
-  origins: Array<LoadBalancersAPI.OriginItem>;
+  origins: Array<LoadBalancersAPI.Origin>;
 
   /**
    * Body param: A list of regions from which to run health checks. Null means every
@@ -398,7 +398,7 @@ export interface PoolEditParams {
    * is balanced across all currently healthy origins, provided the pool itself is
    * healthy.
    */
-  origins?: Array<LoadBalancersAPI.OriginItem>;
+  origins?: Array<LoadBalancersAPI.Origin>;
 }
 
 export interface PoolGetParams {

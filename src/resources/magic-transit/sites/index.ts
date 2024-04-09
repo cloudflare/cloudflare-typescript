@@ -21,9 +21,9 @@ export {
   DHCPRelay,
   DHCPServer,
   LAN,
+  LANStaticAddressing,
   Nat,
   RoutedSubnet,
-  StaticAddressing,
   LANCreateResponse,
   LANUpdateResponse,
   LANListResponse,
@@ -52,8 +52,8 @@ export {
   Sites,
 } from './sites';
 export {
-  StaticAddressing,
   WAN,
+  WANStaticAddressing,
   WANCreateResponse,
   WANUpdateResponse,
   WANListResponse,

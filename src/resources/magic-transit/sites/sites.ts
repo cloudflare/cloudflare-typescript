@@ -306,9 +306,9 @@ export namespace Sites {
   export import DHCPRelay = LANsAPI.DHCPRelay;
   export import DHCPServer = LANsAPI.DHCPServer;
   export import LAN = LANsAPI.LAN;
+  export import LANStaticAddressing = LANsAPI.LANStaticAddressing;
   export import Nat = LANsAPI.Nat;
   export import RoutedSubnet = LANsAPI.RoutedSubnet;
-  export import StaticAddressing = LANsAPI.StaticAddressing;
   export import LANCreateResponse = LANsAPI.LANCreateResponse;
   export import LANUpdateResponse = LANsAPI.LANUpdateResponse;
   export import LANListResponse = LANsAPI.LANListResponse;
@@ -321,6 +321,7 @@ export namespace Sites {
   export import LANGetParams = LANsAPI.LANGetParams;
   export import WANs = WANsAPI.WANs;
   export import WAN = WANsAPI.WAN;
+  export import WANStaticAddressing = WANsAPI.WANStaticAddressing;
   export import WANCreateResponse = WANsAPI.WANCreateResponse;
   export import WANUpdateResponse = WANsAPI.WANUpdateResponse;
   export import WANListResponse = WANsAPI.WANListResponse;

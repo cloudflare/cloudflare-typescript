@@ -29,12 +29,13 @@ export class VirtualNetworks extends APIResource {
   list(
     params: VirtualNetworkListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<NetworksSinglePage, Network> {
+  ): Core.PagePromise<VirtualNetworksSinglePage, VirtualNetwork> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/teamnet/virtual_networks`, NetworksSinglePage, {
-      query,
-      ...options,
-    });
+    return this._client.getAPIList(
+      `/accounts/${account_id}/teamnet/virtual_networks`,
+      VirtualNetworksSinglePage,
+      { query, ...options },
+    );
   }
 
   /**
@@ -72,9 +73,9 @@ export class VirtualNetworks extends APIResource {
   }
 }
 
-export class NetworksSinglePage extends SinglePage<Network> {}
+export class VirtualNetworksSinglePage extends SinglePage<VirtualNetwork> {}
 
-export interface Network {
+export interface VirtualNetwork {
   /**
    * UUID of the virtual network.
    */
@@ -200,8 +201,8 @@ export interface VirtualNetworkEditParams {
 }
 
 export namespace VirtualNetworks {
-  export import Network = VirtualNetworksAPI.Network;
-  export import NetworksSinglePage = VirtualNetworksAPI.NetworksSinglePage;
+  export import VirtualNetwork = VirtualNetworksAPI.VirtualNetwork;
+  export import VirtualNetworksSinglePage = VirtualNetworksAPI.VirtualNetworksSinglePage;
   export import VirtualNetworkCreateParams = VirtualNetworksAPI.VirtualNetworkCreateParams;
   export import VirtualNetworkListParams = VirtualNetworksAPI.VirtualNetworkListParams;
   export import VirtualNetworkDeleteParams = VirtualNetworksAPI.VirtualNetworkDeleteParams;

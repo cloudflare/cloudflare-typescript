@@ -10,8 +10,8 @@ export {
   CfInterconnects,
 } from './cf-interconnects';
 export {
-  ColoNamesItem,
-  ColoRegionsItem,
+  ColoName,
+  ColoRegion,
   Scope,
   RouteCreateResponse,
   RouteUpdateResponse,

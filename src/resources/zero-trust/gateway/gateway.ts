@@ -99,7 +99,7 @@ export namespace Gateway {
   export import GatewayCreateParams = GatewayAPI.GatewayCreateParams;
   export import GatewayListParams = GatewayAPI.GatewayListParams;
   export import AuditSSHSettings = AuditSSHSettingsAPI.AuditSSHSettings;
-  export import Settings = AuditSSHSettingsAPI.Settings;
+  export import GatewaySettings = AuditSSHSettingsAPI.GatewaySettings;
   export import AuditSSHSettingUpdateParams = AuditSSHSettingsAPI.AuditSSHSettingUpdateParams;
   export import AuditSSHSettingGetParams = AuditSSHSettingsAPI.AuditSSHSettingGetParams;
   export import Categories = CategoriesAPI.Categories;
@@ -141,8 +141,7 @@ export namespace Gateway {
   export import ListGetParams = ListsAPI.ListGetParams;
   export import Locations = LocationsAPI.Locations;
   export import Location = LocationsAPI.Location;
-  export import Network = LocationsAPI.Network;
-  export import NetworkItem = LocationsAPI.NetworkItem;
+  export import LocationNetwork = LocationsAPI.LocationNetwork;
   export import UnnamedSchemaRef1b37523fdb0ae5806cd8e062492aab66 = LocationsAPI.UnnamedSchemaRef1b37523fdb0ae5806cd8e062492aab66;
   export import LocationsSinglePage = LocationsAPI.LocationsSinglePage;
   export import LocationCreateParams = LocationsAPI.LocationCreateParams;
@@ -168,7 +167,7 @@ export namespace Gateway {
   export import Rules = RulesAPI.Rules;
   export import DNSResolverSettingsV4 = RulesAPI.DNSResolverSettingsV4;
   export import DNSResolverSettingsV6 = RulesAPI.DNSResolverSettingsV6;
-  export import FilterItem = RulesAPI.FilterItem;
+  export import GatewayFilter = RulesAPI.GatewayFilter;
   export import Rule = RulesAPI.Rule;
   export import RuleSetting = RulesAPI.RuleSetting;
   export import Schedule = RulesAPI.Schedule;

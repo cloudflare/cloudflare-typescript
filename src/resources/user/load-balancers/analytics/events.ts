@@ -4,7 +4,8 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as EventsAPI from 'cloudflare/resources/user/load-balancers/analytics/events';
-import { SinglePage } from 'cloudflare/pagination';
+import * as AnalyticsAPI from 'cloudflare/resources/user/load-balancers/analytics/analytics';
+import { AnalyticsSinglePage } from 'cloudflare/resources/user/load-balancers/analytics/analytics';
 
 export class Events extends APIResource {
   /**
@@ -13,12 +14,12 @@ export class Events extends APIResource {
   list(
     query?: EventListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<AnalyticsSinglePage, Analytics>;
-  list(options?: Core.RequestOptions): Core.PagePromise<AnalyticsSinglePage, Analytics>;
+  ): Core.PagePromise<AnalyticsSinglePage, AnalyticsAPI.Analytics>;
+  list(options?: Core.RequestOptions): Core.PagePromise<AnalyticsSinglePage, AnalyticsAPI.Analytics>;
   list(
     query: EventListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<AnalyticsSinglePage, Analytics> {
+  ): Core.PagePromise<AnalyticsSinglePage, AnalyticsAPI.Analytics> {
     if (isRequestOptions(query)) {
       return this.list({}, query);
     }
@@ -27,18 +28,6 @@ export class Events extends APIResource {
       ...options,
     });
   }
-}
-
-export class AnalyticsSinglePage extends SinglePage<Analytics> {}
-
-export interface Analytics {
-  id?: number;
-
-  origins?: Array<unknown>;
-
-  pool?: unknown;
-
-  timestamp?: string;
 }
 
 export interface EventListParams {
@@ -78,7 +67,7 @@ export interface EventListParams {
 }
 
 export namespace Events {
-  export import Analytics = EventsAPI.Analytics;
-  export import AnalyticsSinglePage = EventsAPI.AnalyticsSinglePage;
   export import EventListParams = EventsAPI.EventListParams;
 }
+
+export { AnalyticsSinglePage };

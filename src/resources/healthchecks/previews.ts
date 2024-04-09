@@ -85,7 +85,7 @@ export interface PreviewCreateParams {
    * Body param: A list of regions from which to run health checks. Null means
    * Cloudflare will pick a default region.
    */
-  check_regions?: Array<HealthchecksAPI.CheckRegionItem> | null;
+  check_regions?: Array<HealthchecksAPI.CheckRegion> | null;
 
   /**
    * Body param: The number of consecutive fails required from a health check before

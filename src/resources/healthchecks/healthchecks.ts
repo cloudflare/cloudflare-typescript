@@ -108,7 +108,7 @@ export class HealthchecksSinglePage extends SinglePage<Healthcheck> {}
  * SEAS: South East Asia, NEAS: North East Asia, ALL_REGIONS: all regions (BUSINESS
  * and ENTERPRISE customers only).
  */
-export type CheckRegionItem =
+export type CheckRegion =
   | 'WNAM'
   | 'ENAM'
   | 'WEU'
@@ -139,7 +139,7 @@ export interface Healthcheck {
    * A list of regions from which to run health checks. Null means Cloudflare will
    * pick a default region.
    */
-  check_regions?: Array<CheckRegionItem> | null;
+  check_regions?: Array<CheckRegion> | null;
 
   /**
    * The number of consecutive fails required from a health check before changing the
@@ -283,7 +283,7 @@ export interface QueryHealthcheck {
    * A list of regions from which to run health checks. Null means Cloudflare will
    * pick a default region.
    */
-  check_regions?: Array<CheckRegionItem> | null;
+  check_regions?: Array<CheckRegion> | null;
 
   /**
    * The number of consecutive fails required from a health check before changing the
@@ -372,7 +372,7 @@ export interface UnnamedSchemaRefAaa560acadcbf1ae1dc619ba1ea5948e {
    * A list of regions from which to run health checks. Null means Cloudflare will
    * pick a default region.
    */
-  check_regions?: Array<CheckRegionItem> | null;
+  check_regions?: Array<CheckRegion> | null;
 
   /**
    * The number of consecutive fails required from a health check before changing the
@@ -480,7 +480,7 @@ export interface HealthcheckCreateParams {
    * Body param: A list of regions from which to run health checks. Null means
    * Cloudflare will pick a default region.
    */
-  check_regions?: Array<CheckRegionItem> | null;
+  check_regions?: Array<CheckRegion> | null;
 
   /**
    * Body param: The number of consecutive fails required from a health check before
@@ -561,7 +561,7 @@ export interface HealthcheckUpdateParams {
    * Body param: A list of regions from which to run health checks. Null means
    * Cloudflare will pick a default region.
    */
-  check_regions?: Array<CheckRegionItem> | null;
+  check_regions?: Array<CheckRegion> | null;
 
   /**
    * Body param: The number of consecutive fails required from a health check before
@@ -661,7 +661,7 @@ export interface HealthcheckEditParams {
    * Body param: A list of regions from which to run health checks. Null means
    * Cloudflare will pick a default region.
    */
-  check_regions?: Array<CheckRegionItem> | null;
+  check_regions?: Array<CheckRegion> | null;
 
   /**
    * Body param: The number of consecutive fails required from a health check before
