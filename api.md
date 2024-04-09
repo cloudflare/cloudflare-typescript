@@ -3001,7 +3001,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/intel/dns.ts">DNS</a></code>
-- <code><a href="./src/resources/intel/dns.ts">UnnamedSchemaRefB5e16cee4f32382c294201aedb9fc050</a></code>
 - <code><a href="./src/resources/intel/dns.ts">DNSListResponse</a></code>
 
 Methods:
