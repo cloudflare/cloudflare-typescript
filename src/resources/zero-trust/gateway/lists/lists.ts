@@ -119,37 +119,6 @@ export interface Lists {
   updated_at?: string;
 }
 
-export interface UnnamedSchemaRef30ecd0f5ce68fc07dbb7760deda3d707 {
-  /**
-   * API Resource UUID tag.
-   */
-  id?: string;
-
-  /**
-   * The number of items in the list.
-   */
-  count?: number;
-
-  created_at?: string;
-
-  /**
-   * The description of the list.
-   */
-  description?: string;
-
-  /**
-   * The name of the list.
-   */
-  name?: string;
-
-  /**
-   * The type of list.
-   */
-  type?: 'SERIAL' | 'URL' | 'DOMAIN' | 'EMAIL' | 'IP';
-
-  updated_at?: string;
-}
-
 export interface ListCreateResponse {
   /**
    * API Resource UUID tag.
@@ -264,7 +233,6 @@ export interface ListGetParams {
 
 export namespace Lists {
   export import Lists = ListsAPI.Lists;
-  export import UnnamedSchemaRef30ecd0f5ce68fc07dbb7760deda3d707 = ListsAPI.UnnamedSchemaRef30ecd0f5ce68fc07dbb7760deda3d707;
   export import ListCreateResponse = ListsAPI.ListCreateResponse;
   export import ListsSinglePage = ListsAPI.ListsSinglePage;
   export import ListCreateParams = ListsAPI.ListCreateParams;

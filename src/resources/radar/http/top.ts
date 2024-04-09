@@ -4,7 +4,6 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as TopAPI from 'cloudflare/resources/radar/http/top';
-import * as Shared from 'cloudflare/resources/shared';
 import * as RadarAPI from 'cloudflare/resources/radar/radar';
 
 export class Top extends APIResource {
@@ -52,10 +51,16 @@ export class Top extends APIResource {
   }
 }
 
+export interface Browser {
+  name: string;
+
+  value: string;
+}
+
 export interface TopBrowserFamiliesResponse {
   meta: TopBrowserFamiliesResponse.Meta;
 
-  top_0: Array<Shared.UnnamedSchemaRef2173d81a0b2d332c9e2ac46900fe8bb9>;
+  top_0: Array<Browser>;
 }
 
 export namespace TopBrowserFamiliesResponse {
@@ -79,7 +84,7 @@ export namespace TopBrowserFamiliesResponse {
 export interface TopBrowsersResponse {
   meta: TopBrowsersResponse.Meta;
 
-  top_0: Array<Shared.UnnamedSchemaRef2173d81a0b2d332c9e2ac46900fe8bb9>;
+  top_0: Array<Browser>;
 }
 
 export namespace TopBrowsersResponse {
@@ -315,6 +320,7 @@ export interface TopBrowsersParams {
 }
 
 export namespace Top {
+  export import Browser = TopAPI.Browser;
   export import TopBrowserFamiliesResponse = TopAPI.TopBrowserFamiliesResponse;
   export import TopBrowsersResponse = TopAPI.TopBrowsersResponse;
   export import TopBrowserFamiliesParams = TopAPI.TopBrowserFamiliesParams;

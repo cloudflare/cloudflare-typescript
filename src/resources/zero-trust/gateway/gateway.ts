@@ -130,7 +130,6 @@ export namespace Gateway {
   export import ConfigurationEditParams = ConfigurationsAPI.ConfigurationEditParams;
   export import ConfigurationGetParams = ConfigurationsAPI.ConfigurationGetParams;
   export import Lists = ListsAPI.Lists;
-  export import UnnamedSchemaRef30ecd0f5ce68fc07dbb7760deda3d707 = ListsAPI.UnnamedSchemaRef30ecd0f5ce68fc07dbb7760deda3d707;
   export import ListCreateResponse = ListsAPI.ListCreateResponse;
   export import ListsSinglePage = ListsAPI.ListsSinglePage;
   export import ListCreateParams = ListsAPI.ListCreateParams;
@@ -171,7 +170,6 @@ export namespace Gateway {
   export import Rule = RulesAPI.Rule;
   export import RuleSetting = RulesAPI.RuleSetting;
   export import Schedule = RulesAPI.Schedule;
-  export import UnnamedSchemaRef0b0764cdb06aad66b555fd74c8c78b2a = RulesAPI.UnnamedSchemaRef0b0764cdb06aad66b555fd74c8c78b2a;
   export import RulesSinglePage = RulesAPI.RulesSinglePage;
   export import RuleCreateParams = RulesAPI.RuleCreateParams;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;

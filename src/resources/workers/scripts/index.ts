@@ -13,6 +13,14 @@ export {
 } from './tail';
 export { ContentUpdateParams, ContentGetParams, Content } from './content';
 export {
+  Deployment,
+  DeploymentCreateResponse,
+  DeploymentGetResponse,
+  DeploymentCreateParams,
+  DeploymentGetParams,
+  Deployments,
+} from './deployments';
+export {
   Script,
   ScriptSetting,
   ScriptUpdateParams,
@@ -31,14 +39,6 @@ export {
   ScheduleGetParams,
   Schedules,
 } from './schedules';
-export {
-  UnnamedSchemaRefFda1c6f6758e763ae3b2964521f2fdd8,
-  DeploymentCreateResponse,
-  DeploymentGetResponse,
-  DeploymentCreateParams,
-  DeploymentGetParams,
-  Deployments,
-} from './deployments';
 export {
   VersionCreateResponse,
   VersionListResponse,

@@ -91,25 +91,6 @@ export interface TSIG {
   secret: string;
 }
 
-export interface UnnamedSchemaRefC3d6ffaf5dde0c570eaa72462c2ee738 {
-  id: string;
-
-  /**
-   * TSIG algorithm.
-   */
-  algo: string;
-
-  /**
-   * TSIG key name.
-   */
-  name: string;
-
-  /**
-   * TSIG secret.
-   */
-  secret: string;
-}
-
 export interface TSIGDeleteResponse {
   id?: string;
 }
@@ -180,7 +161,6 @@ export interface TSIGGetParams {
 
 export namespace TSIGs {
   export import TSIG = TSIGsAPI.TSIG;
-  export import UnnamedSchemaRefC3d6ffaf5dde0c570eaa72462c2ee738 = TSIGsAPI.UnnamedSchemaRefC3d6ffaf5dde0c570eaa72462c2ee738;
   export import TSIGDeleteResponse = TSIGsAPI.TSIGDeleteResponse;
   export import TSIGsSinglePage = TSIGsAPI.TSIGsSinglePage;
   export import TSIGCreateParams = TSIGsAPI.TSIGCreateParams;

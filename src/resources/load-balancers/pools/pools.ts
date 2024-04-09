@@ -3,10 +3,11 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as PoolsAPI from 'cloudflare/resources/load-balancers/pools/pools';
+import * as LoadBalancersPoolsAPI from 'cloudflare/resources/user/load-balancers/pools';
+import { Pool, PoolsSinglePage } from 'cloudflare/resources/user/load-balancers/pools';
 import * as LoadBalancersAPI from 'cloudflare/resources/load-balancers/load-balancers';
 import * as HealthAPI from 'cloudflare/resources/load-balancers/pools/health';
 import * as ReferencesAPI from 'cloudflare/resources/load-balancers/pools/references';
-import { SinglePage } from 'cloudflare/pagination';
 
 export class Pools extends APIResource {
   health: HealthAPI.Health = new HealthAPI.Health(this._client);
@@ -15,33 +16,43 @@ export class Pools extends APIResource {
   /**
    * Create a new pool.
    */
-  create(params: PoolCreateParams, options?: Core.RequestOptions): Core.APIPromise<Pool> {
+  create(
+    params: PoolCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LoadBalancersPoolsAPI.Pool> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/load_balancers/pools`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: Pool }>
+      }) as Core.APIPromise<{ result: LoadBalancersPoolsAPI.Pool }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Modify a configured pool.
    */
-  update(poolId: string, params: PoolUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Pool> {
+  update(
+    poolId: string,
+    params: PoolUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LoadBalancersPoolsAPI.Pool> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/load_balancers/pools/${poolId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: Pool }>
+      }) as Core.APIPromise<{ result: LoadBalancersPoolsAPI.Pool }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List configured pools.
    */
-  list(params: PoolListParams, options?: Core.RequestOptions): Core.PagePromise<PoolsSinglePage, Pool> {
+  list(
+    params: PoolListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<PoolsSinglePage, LoadBalancersPoolsAPI.Pool> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(`/accounts/${account_id}/load_balancers/pools`, PoolsSinglePage, {
       query,
@@ -69,30 +80,36 @@ export class Pools extends APIResource {
   /**
    * Apply changes to an existing pool, overwriting the supplied properties.
    */
-  edit(poolId: string, params: PoolEditParams, options?: Core.RequestOptions): Core.APIPromise<Pool> {
+  edit(
+    poolId: string,
+    params: PoolEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LoadBalancersPoolsAPI.Pool> {
     const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/load_balancers/pools/${poolId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: Pool }>
+      }) as Core.APIPromise<{ result: LoadBalancersPoolsAPI.Pool }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetch a single configured pool.
    */
-  get(poolId: string, params: PoolGetParams, options?: Core.RequestOptions): Core.APIPromise<Pool> {
+  get(
+    poolId: string,
+    params: PoolGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LoadBalancersPoolsAPI.Pool> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/load_balancers/pools/${poolId}`, options) as Core.APIPromise<{
-        result: Pool;
+        result: LoadBalancersPoolsAPI.Pool;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
-
-export class PoolsSinglePage extends SinglePage<Pool> {}
 
 export interface Pool {
   id?: string;
@@ -489,7 +506,6 @@ export interface PoolGetParams {
 export namespace Pools {
   export import Pool = PoolsAPI.Pool;
   export import PoolDeleteResponse = PoolsAPI.PoolDeleteResponse;
-  export import PoolsSinglePage = PoolsAPI.PoolsSinglePage;
   export import PoolCreateParams = PoolsAPI.PoolCreateParams;
   export import PoolUpdateParams = PoolsAPI.PoolUpdateParams;
   export import PoolListParams = PoolsAPI.PoolListParams;
@@ -505,3 +521,5 @@ export namespace Pools {
   export import ReferenceGetResponse = ReferencesAPI.ReferenceGetResponse;
   export import ReferenceGetParams = ReferencesAPI.ReferenceGetParams;
 }
+
+export { PoolsSinglePage };

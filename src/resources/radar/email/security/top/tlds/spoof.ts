@@ -4,8 +4,8 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as SpoofAPI from 'cloudflare/resources/radar/email/security/top/tlds/spoof';
-import * as Shared from 'cloudflare/resources/shared';
 import * as RadarAPI from 'cloudflare/resources/radar/radar';
+import * as TopAPI from 'cloudflare/resources/radar/http/top';
 
 export class Spoof extends APIResource {
   /**
@@ -37,7 +37,7 @@ export class Spoof extends APIResource {
 export interface SpoofGetResponse {
   meta: SpoofGetResponse.Meta;
 
-  top_0: Array<Shared.UnnamedSchemaRef2173d81a0b2d332c9e2ac46900fe8bb9>;
+  top_0: Array<TopAPI.Browser>;
 }
 
 export namespace SpoofGetResponse {
