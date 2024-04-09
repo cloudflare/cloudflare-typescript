@@ -22,60 +22,56 @@ export class Traces extends APIResource {
   }
 }
 
-export type RequestTracerTrace = Array<RequestTracerTrace.RequestTracerTraceItem>;
-
-export namespace RequestTracerTrace {
+/**
+ * List of steps acting on request/response
+ */
+export interface Trace {
   /**
-   * List of steps acting on request/response
+   * If step type is rule, then action performed by this rule
    */
-  export interface RequestTracerTraceItem {
-    /**
-     * If step type is rule, then action performed by this rule
-     */
-    action?: string;
+  action?: string;
 
-    /**
-     * If step type is rule, then action parameters of this rule as JSON
-     */
-    action_parameters?: unknown;
+  /**
+   * If step type is rule, then action parameters of this rule as JSON
+   */
+  action_parameters?: unknown;
 
-    /**
-     * If step type is rule or ruleset, the description of this entity
-     */
-    description?: string;
+  /**
+   * If step type is rule or ruleset, the description of this entity
+   */
+  description?: string;
 
-    /**
-     * If step type is rule, then expression used to match for this rule
-     */
-    expression?: string;
+  /**
+   * If step type is rule, then expression used to match for this rule
+   */
+  expression?: string;
 
-    /**
-     * If step type is ruleset, then kind of this ruleset
-     */
-    kind?: string;
+  /**
+   * If step type is ruleset, then kind of this ruleset
+   */
+  kind?: string;
 
-    /**
-     * Whether tracing step affected tracing request/response
-     */
-    matched?: boolean;
+  /**
+   * Whether tracing step affected tracing request/response
+   */
+  matched?: boolean;
 
-    /**
-     * If step type is ruleset, then name of this ruleset
-     */
-    name?: string;
+  /**
+   * If step type is ruleset, then name of this ruleset
+   */
+  name?: string;
 
-    /**
-     * Tracing step identifying name
-     */
-    step_name?: string;
+  /**
+   * Tracing step identifying name
+   */
+  step_name?: string;
 
-    trace?: TracesAPI.RequestTracerTrace;
+  trace?: Array<Trace>;
 
-    /**
-     * Tracing step type
-     */
-    type?: string;
-  }
+  /**
+   * Tracing step type
+   */
+  type?: string;
 }
 
 /**
@@ -87,7 +83,7 @@ export interface TraceCreateResponse {
    */
   status_code?: number;
 
-  trace?: RequestTracerTrace;
+  trace?: Array<Trace>;
 }
 
 export interface TraceCreateParams {
@@ -201,7 +197,7 @@ export namespace TraceCreateParams {
 }
 
 export namespace Traces {
-  export import RequestTracerTrace = TracesAPI.RequestTracerTrace;
+  export import Trace = TracesAPI.Trace;
   export import TraceCreateResponse = TracesAPI.TraceCreateResponse;
   export import TraceCreateParams = TracesAPI.TraceCreateParams;
 }
