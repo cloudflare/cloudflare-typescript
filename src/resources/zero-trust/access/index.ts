@@ -15,7 +15,7 @@ export {
   ExternalEvaluationRule,
   GitHubOrganizationRule,
   GroupRule,
-  GsuiteGroupRule,
+  GSuiteGroupRule,
   IPListRule,
   IPRule,
   OktaGroupRule,
