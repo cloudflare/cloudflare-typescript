@@ -19,7 +19,7 @@ export { CloudforceOne } from './cloudforce-one/cloudforce-one';
 export { CustomCertificates } from './custom-certificates/custom-certificates';
 export { CustomHostnames } from './custom-hostnames/custom-hostnames';
 export { CustomNameservers } from './custom-nameservers';
-export { D1 } from './d1/d1';
+export { D1Resource } from './d1/d1';
 export { DCVDelegation } from './dcv-delegation/dcv-delegation';
 export { DNS } from './dns/dns';
 export { DNSSECResource } from './dnssec';

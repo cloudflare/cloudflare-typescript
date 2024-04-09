@@ -18,8 +18,8 @@ export {
 } from './fleet-status/index';
 export {
   NetworkPath,
-  Percentiles,
   Traceroute,
+  TracerouteTestPercentilesResponse,
   TracerouteTestGetParams,
   TracerouteTestNetworkPathParams,
   TracerouteTestPercentilesParams,

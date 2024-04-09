@@ -17,6 +17,7 @@ export {
   DevicePostureRulesSinglePage,
   Posture,
 } from './posture/index';
+export { DeviceSettings, SettingUpdateParams, SettingListParams, Settings } from './settings';
 export {
   Network,
   UnnamedSchemaRefD2b048663faf5e0cd5c90501b71171de,
@@ -44,7 +45,6 @@ export {
   SchemaHTTPSSinglePage,
   DEXTests,
 } from './dex-tests';
-export { Settings, SettingUpdateParams, SettingListParams } from './settings';
 export {
   SettingsPolicy,
   UnnamedSchemaRefF636ff9f2cb41ff4b715cf8ed8515581,

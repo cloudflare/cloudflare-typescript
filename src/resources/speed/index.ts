@@ -2,7 +2,7 @@
 
 export { Availability, AvailabilityListParams, Availabilities } from './availabilities';
 export { PageListResponse, PageListParams, PageListResponsesSinglePage, Pages } from './pages';
-export { ScheduleCreateResponse, ScheduleCreateParams, Schedule } from './schedule';
+export { Schedule, ScheduleCreateResponse, ScheduleCreateParams, ScheduleResource } from './schedule';
 export { Speed } from './speed';
 export {
   Test,

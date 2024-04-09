@@ -1,12 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
+  AccessDevicePostureRule,
+  AccessRule,
   AnyValidServiceTokenRule,
   AuthenticationMethodRule,
   AzureGroupRule,
   CertificateRule,
   CountryRule,
-  DevicePostureRule,
   DomainRule,
   EmailListRule,
   EmailRule,
@@ -15,11 +16,9 @@ export {
   GitHubOrganizationRule,
   GroupRule,
   GsuiteGroupRule,
-  IncludeItem,
   IPListRule,
   IPRule,
   OktaGroupRule,
-  Rule,
   SamlGroupRule,
   ServiceTokenRule,
   Access,

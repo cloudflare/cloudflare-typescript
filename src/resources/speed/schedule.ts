@@ -3,10 +3,9 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ScheduleAPI from 'cloudflare/resources/speed/schedule';
-import * as SpeedAPI from 'cloudflare/resources/speed/speed';
 import * as TestsAPI from 'cloudflare/resources/speed/tests';
 
-export class Schedule extends APIResource {
+export class ScheduleResource extends APIResource {
   /**
    * Creates a scheduled test for a page.
    */
@@ -25,11 +24,52 @@ export class Schedule extends APIResource {
   }
 }
 
+/**
+ * The test schedule.
+ */
+export interface Schedule {
+  /**
+   * The frequency of the test.
+   */
+  frequency?: 'DAILY' | 'WEEKLY';
+
+  /**
+   * A test region.
+   */
+  region?:
+    | 'asia-east1'
+    | 'asia-northeast1'
+    | 'asia-northeast2'
+    | 'asia-south1'
+    | 'asia-southeast1'
+    | 'australia-southeast1'
+    | 'europe-north1'
+    | 'europe-southwest1'
+    | 'europe-west1'
+    | 'europe-west2'
+    | 'europe-west3'
+    | 'europe-west4'
+    | 'europe-west8'
+    | 'europe-west9'
+    | 'me-west1'
+    | 'southamerica-east1'
+    | 'us-central1'
+    | 'us-east1'
+    | 'us-east4'
+    | 'us-south1'
+    | 'us-west1';
+
+  /**
+   * A URL.
+   */
+  url?: string;
+}
+
 export interface ScheduleCreateResponse {
   /**
    * The test schedule.
    */
-  schedule?: SpeedAPI.Schedule;
+  schedule?: Schedule;
 
   test?: TestsAPI.Test;
 }
@@ -67,7 +107,8 @@ export interface ScheduleCreateParams {
     | 'us-west1';
 }
 
-export namespace Schedule {
+export namespace ScheduleResource {
+  export import Schedule = ScheduleAPI.Schedule;
   export import ScheduleCreateResponse = ScheduleAPI.ScheduleCreateResponse;
   export import ScheduleCreateParams = ScheduleAPI.ScheduleCreateParams;
 }

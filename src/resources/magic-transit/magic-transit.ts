@@ -95,8 +95,8 @@ export namespace MagicTransit {
   export import IPSECTunnelGetParams = IPSECTunnelsAPI.IPSECTunnelGetParams;
   export import IPSECTunnelPSKGenerateParams = IPSECTunnelsAPI.IPSECTunnelPSKGenerateParams;
   export import Routes = RoutesAPI.Routes;
-  export import ColoNamesItem = RoutesAPI.ColoNamesItem;
-  export import ColoRegionsItem = RoutesAPI.ColoRegionsItem;
+  export import ColoName = RoutesAPI.ColoName;
+  export import ColoRegion = RoutesAPI.ColoRegion;
   export import Scope = RoutesAPI.Scope;
   export import RouteCreateResponse = RoutesAPI.RouteCreateResponse;
   export import RouteUpdateResponse = RoutesAPI.RouteUpdateResponse;

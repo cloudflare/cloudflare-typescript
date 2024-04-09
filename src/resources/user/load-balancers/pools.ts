@@ -215,7 +215,7 @@ export interface Pool {
    * The list of origins within this pool. Traffic directed at this pool is balanced
    * across all currently healthy origins, provided the pool itself is healthy.
    */
-  origins?: Array<LoadBalancersAPI.OriginItem>;
+  origins?: Array<LoadBalancersAPI.Origin>;
 }
 
 export interface PoolDeleteResponse {
@@ -265,7 +265,7 @@ export interface PoolCreateParams {
    * The list of origins within this pool. Traffic directed at this pool is balanced
    * across all currently healthy origins, provided the pool itself is healthy.
    */
-  origins: Array<LoadBalancersAPI.OriginItem>;
+  origins: Array<LoadBalancersAPI.Origin>;
 
   /**
    * A list of regions from which to run health checks. Null means every Cloudflare
@@ -348,7 +348,7 @@ export interface PoolUpdateParams {
    * The list of origins within this pool. Traffic directed at this pool is balanced
    * across all currently healthy origins, provided the pool itself is healthy.
    */
-  origins: Array<LoadBalancersAPI.OriginItem>;
+  origins: Array<LoadBalancersAPI.Origin>;
 
   /**
    * A list of regions from which to run health checks. Null means every Cloudflare
@@ -510,7 +510,7 @@ export interface PoolEditParams {
    * The list of origins within this pool. Traffic directed at this pool is balanced
    * across all currently healthy origins, provided the pool itself is healthy.
    */
-  origins?: Array<LoadBalancersAPI.OriginItem>;
+  origins?: Array<LoadBalancersAPI.Origin>;
 }
 
 export interface PoolPreviewParams {

@@ -29,9 +29,9 @@ export class Routes extends APIResource {
   list(
     params: RouteListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<NetworksV4PagePaginationArray, Network> {
+  ): Core.PagePromise<TeamnetsV4PagePaginationArray, Teamnet> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/teamnet/routes`, NetworksV4PagePaginationArray, {
+    return this._client.getAPIList(`/accounts/${account_id}/teamnet/routes`, TeamnetsV4PagePaginationArray, {
       query,
       ...options,
     });
@@ -64,9 +64,49 @@ export class Routes extends APIResource {
   }
 }
 
-export class NetworksV4PagePaginationArray extends V4PagePaginationArray<Network> {}
+export class TeamnetsV4PagePaginationArray extends V4PagePaginationArray<Teamnet> {}
 
-export interface Network {
+export interface Route {
+  /**
+   * UUID of the route.
+   */
+  id?: string;
+
+  /**
+   * Optional remark describing the route.
+   */
+  comment?: string;
+
+  /**
+   * Timestamp of when the route was created.
+   */
+  created_at?: unknown;
+
+  /**
+   * Timestamp of when the route was deleted. If `null`, the route has not been
+   * deleted.
+   */
+  deleted_at?: string | null;
+
+  /**
+   * The private IPv4 or IPv6 range connected by the route, in CIDR notation.
+   */
+  network?: string;
+
+  /**
+   * UUID of the Cloudflare Tunnel serving the route.
+   */
+  tunnel_id?: unknown;
+
+  /**
+   * UUID of the Tunnel Virtual Network this route belongs to. If no virtual networks
+   * are configured, the route is assigned to the default virtual network of the
+   * account.
+   */
+  virtual_network_id?: unknown;
+}
+
+export interface Teamnet {
   /**
    * UUID of the route.
    */
@@ -119,46 +159,6 @@ export interface Network {
    * A user-friendly name for the virtual network.
    */
   virtual_network_name?: string;
-}
-
-export interface Route {
-  /**
-   * UUID of the route.
-   */
-  id?: string;
-
-  /**
-   * Optional remark describing the route.
-   */
-  comment?: string;
-
-  /**
-   * Timestamp of when the route was created.
-   */
-  created_at?: unknown;
-
-  /**
-   * Timestamp of when the route was deleted. If `null`, the route has not been
-   * deleted.
-   */
-  deleted_at?: string | null;
-
-  /**
-   * The private IPv4 or IPv6 range connected by the route, in CIDR notation.
-   */
-  network?: string;
-
-  /**
-   * UUID of the Cloudflare Tunnel serving the route.
-   */
-  tunnel_id?: unknown;
-
-  /**
-   * UUID of the Tunnel Virtual Network this route belongs to. If no virtual networks
-   * are configured, the route is assigned to the default virtual network of the
-   * account.
-   */
-  virtual_network_id?: unknown;
 }
 
 export interface UnnamedSchemaRefC125d35cbb7f93aab989cd19bd764ed6 {
@@ -325,10 +325,10 @@ export interface RouteEditParams {
 }
 
 export namespace Routes {
-  export import Network = RoutesAPI.Network;
   export import Route = RoutesAPI.Route;
+  export import Teamnet = RoutesAPI.Teamnet;
   export import UnnamedSchemaRefC125d35cbb7f93aab989cd19bd764ed6 = RoutesAPI.UnnamedSchemaRefC125d35cbb7f93aab989cd19bd764ed6;
-  export import NetworksV4PagePaginationArray = RoutesAPI.NetworksV4PagePaginationArray;
+  export import TeamnetsV4PagePaginationArray = RoutesAPI.TeamnetsV4PagePaginationArray;
   export import RouteCreateParams = RoutesAPI.RouteCreateParams;
   export import RouteListParams = RoutesAPI.RouteListParams;
   export import RouteDeleteParams = RoutesAPI.RouteDeleteParams;

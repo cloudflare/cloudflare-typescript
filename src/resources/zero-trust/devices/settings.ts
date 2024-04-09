@@ -8,11 +8,11 @@ export class Settings extends APIResource {
   /**
    * Updates the current device settings for a Zero Trust account.
    */
-  update(params: SettingUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Settings | null> {
+  update(params: SettingUpdateParams, options?: Core.RequestOptions): Core.APIPromise<DeviceSettings | null> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/devices/settings`, { body, ...options }) as Core.APIPromise<{
-        result: Settings | null;
+        result: DeviceSettings | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -20,17 +20,17 @@ export class Settings extends APIResource {
   /**
    * Describes the current device settings for a Zero Trust account.
    */
-  list(params: SettingListParams, options?: Core.RequestOptions): Core.APIPromise<Settings | null> {
+  list(params: SettingListParams, options?: Core.RequestOptions): Core.APIPromise<DeviceSettings | null> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/devices/settings`, options) as Core.APIPromise<{
-        result: Settings | null;
+        result: DeviceSettings | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface Settings {
+export interface DeviceSettings {
   /**
    * Enable gateway proxy filtering on TCP.
    */
@@ -84,7 +84,7 @@ export interface SettingListParams {
 }
 
 export namespace Settings {
-  export import Settings = SettingsAPI.Settings;
+  export import DeviceSettings = SettingsAPI.DeviceSettings;
   export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;
   export import SettingListParams = SettingsAPI.SettingListParams;
 }

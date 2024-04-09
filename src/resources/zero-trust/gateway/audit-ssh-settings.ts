@@ -8,30 +8,33 @@ export class AuditSSHSettings extends APIResource {
   /**
    * Updates Zero Trust Audit SSH settings.
    */
-  update(params: AuditSSHSettingUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Settings> {
+  update(
+    params: AuditSSHSettingUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<GatewaySettings> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/gateway/audit_ssh_settings`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: Settings }>
+      }) as Core.APIPromise<{ result: GatewaySettings }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get all Zero Trust Audit SSH settings for an account.
    */
-  get(params: AuditSSHSettingGetParams, options?: Core.RequestOptions): Core.APIPromise<Settings> {
+  get(params: AuditSSHSettingGetParams, options?: Core.RequestOptions): Core.APIPromise<GatewaySettings> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/gateway/audit_ssh_settings`, options) as Core.APIPromise<{
-        result: Settings;
+        result: GatewaySettings;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface Settings {
+export interface GatewaySettings {
   created_at?: string;
 
   /**
@@ -69,7 +72,7 @@ export interface AuditSSHSettingGetParams {
 }
 
 export namespace AuditSSHSettings {
-  export import Settings = AuditSSHSettingsAPI.Settings;
+  export import GatewaySettings = AuditSSHSettingsAPI.GatewaySettings;
   export import AuditSSHSettingUpdateParams = AuditSSHSettingsAPI.AuditSSHSettingUpdateParams;
   export import AuditSSHSettingGetParams = AuditSSHSettingsAPI.AuditSSHSettingGetParams;
 }

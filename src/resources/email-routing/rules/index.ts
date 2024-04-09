@@ -2,15 +2,19 @@
 
 export {
   Action,
-  ActionItem,
   EmailRule,
   Matcher,
-  MatcherItem,
-  Properties,
   RuleCreateParams,
   RuleUpdateParams,
   RuleListParams,
   EmailRulesV4PagePaginationArray,
   Rules,
 } from './rules';
-export { Action, CatchAllRule, Matcher, CatchAllUpdateParams, CatchAlls } from './catch-alls';
+export {
+  CatchAllAction,
+  CatchAllMatcher,
+  CatchAllUpdateResponse,
+  CatchAllGetResponse,
+  CatchAllUpdateParams,
+  CatchAlls,
+} from './catch-alls';

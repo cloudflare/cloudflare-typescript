@@ -76,6 +76,7 @@ export namespace DEX {
   export import TracerouteTests = TracerouteTestsAPI.TracerouteTests;
   export import NetworkPath = TracerouteTestsAPI.NetworkPath;
   export import Traceroute = TracerouteTestsAPI.Traceroute;
+  export import TracerouteTestPercentilesResponse = TracerouteTestsAPI.TracerouteTestPercentilesResponse;
   export import TracerouteTestGetParams = TracerouteTestsAPI.TracerouteTestGetParams;
   export import TracerouteTestNetworkPathParams = TracerouteTestsAPI.TracerouteTestNetworkPathParams;
   export import TracerouteTestPercentilesParams = TracerouteTestsAPI.TracerouteTestPercentilesParams;

@@ -24,10 +24,7 @@ export {
 } from './applications';
 export {
   ApprovalGroup,
-  ApprovalGroupItem,
-  ExcludeItem,
   Policy,
-  RequireItem,
   PolicyDeleteResponse,
   PolicyCreateParams,
   PolicyUpdateParams,

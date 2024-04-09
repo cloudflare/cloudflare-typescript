@@ -227,6 +227,7 @@ export namespace Devices {
   export import Revoke = RevokeAPI.Revoke;
   export import RevokeCreateParams = RevokeAPI.RevokeCreateParams;
   export import Settings = SettingsAPI.Settings;
+  export import DeviceSettings = SettingsAPI.DeviceSettings;
   export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;
   export import SettingListParams = SettingsAPI.SettingListParams;
   export import Unrevoke = UnrevokeAPI.Unrevoke;

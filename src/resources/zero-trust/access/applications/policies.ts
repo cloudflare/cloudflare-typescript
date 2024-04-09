@@ -224,50 +224,6 @@ export interface ApprovalGroup {
   email_list_uuid?: string;
 }
 
-/**
- * A group of email addresses that can approve a temporary authentication request.
- */
-export interface ApprovalGroupItem {
-  /**
-   * The number of approvals needed to obtain access.
-   */
-  approvals_needed: number;
-
-  /**
-   * A list of emails that can approve the access request.
-   */
-  email_addresses?: Array<string>;
-
-  /**
-   * The UUID of an re-usable email list.
-   */
-  email_list_uuid?: string;
-}
-
-/**
- * Matches a specific email.
- */
-export type ExcludeItem =
-  | AccessAPI.EmailRule
-  | AccessAPI.EmailListRule
-  | AccessAPI.DomainRule
-  | AccessAPI.EveryoneRule
-  | AccessAPI.IPRule
-  | AccessAPI.IPListRule
-  | AccessAPI.CertificateRule
-  | AccessAPI.GroupRule
-  | AccessAPI.AzureGroupRule
-  | AccessAPI.GitHubOrganizationRule
-  | AccessAPI.GsuiteGroupRule
-  | AccessAPI.OktaGroupRule
-  | AccessAPI.SamlGroupRule
-  | AccessAPI.ServiceTokenRule
-  | AccessAPI.AnyValidServiceTokenRule
-  | AccessAPI.ExternalEvaluationRule
-  | AccessAPI.CountryRule
-  | AccessAPI.AuthenticationMethodRule
-  | AccessAPI.DevicePostureRule;
-
 export interface Policy {
   /**
    * UUID
@@ -277,7 +233,7 @@ export interface Policy {
   /**
    * Administrators who can approve a temporary authentication request.
    */
-  approval_groups?: Array<ApprovalGroupItem>;
+  approval_groups?: Array<ApprovalGroup>;
 
   /**
    * Requires the user to request access from an administrator at the start of each
@@ -296,13 +252,13 @@ export interface Policy {
    * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
    * meet any of the Exclude rules.
    */
-  exclude?: Array<ExcludeItem>;
+  exclude?: Array<AccessAPI.AccessRule>;
 
   /**
    * Rules evaluated with an OR logical operator. A user needs to meet only one of
    * the Include rules.
    */
-  include?: Array<AccessAPI.IncludeItem>;
+  include?: Array<AccessAPI.AccessRule>;
 
   /**
    * Require this application to be served in an isolated browser for users matching
@@ -335,7 +291,7 @@ export interface Policy {
    * Rules evaluated with an AND logical operator. To match the policy, a user must
    * meet all of the Require rules.
    */
-  require?: Array<RequireItem>;
+  require?: Array<AccessAPI.AccessRule>;
 
   /**
    * The amount of time that tokens issued for the application will be valid. Must be
@@ -346,30 +302,6 @@ export interface Policy {
 
   updated_at?: string;
 }
-
-/**
- * Matches a specific email.
- */
-export type RequireItem =
-  | AccessAPI.EmailRule
-  | AccessAPI.EmailListRule
-  | AccessAPI.DomainRule
-  | AccessAPI.EveryoneRule
-  | AccessAPI.IPRule
-  | AccessAPI.IPListRule
-  | AccessAPI.CertificateRule
-  | AccessAPI.GroupRule
-  | AccessAPI.AzureGroupRule
-  | AccessAPI.GitHubOrganizationRule
-  | AccessAPI.GsuiteGroupRule
-  | AccessAPI.OktaGroupRule
-  | AccessAPI.SamlGroupRule
-  | AccessAPI.ServiceTokenRule
-  | AccessAPI.AnyValidServiceTokenRule
-  | AccessAPI.ExternalEvaluationRule
-  | AccessAPI.CountryRule
-  | AccessAPI.AuthenticationMethodRule
-  | AccessAPI.DevicePostureRule;
 
 export interface PolicyDeleteResponse {
   /**
@@ -388,7 +320,7 @@ export interface PolicyCreateParams {
    * Body param: Rules evaluated with an OR logical operator. A user needs to meet
    * only one of the Include rules.
    */
-  include: Array<AccessAPI.IncludeItem>;
+  include: Array<AccessAPI.AccessRule>;
 
   /**
    * Body param: The name of the Access policy.
@@ -410,7 +342,7 @@ export interface PolicyCreateParams {
   /**
    * Body param: Administrators who can approve a temporary authentication request.
    */
-  approval_groups?: Array<ApprovalGroupItem>;
+  approval_groups?: Array<ApprovalGroup>;
 
   /**
    * Body param: Requires the user to request access from an administrator at the
@@ -422,7 +354,7 @@ export interface PolicyCreateParams {
    * Body param: Rules evaluated with a NOT logical operator. To match the policy, a
    * user cannot meet any of the Exclude rules.
    */
-  exclude?: Array<ExcludeItem>;
+  exclude?: Array<AccessAPI.AccessRule>;
 
   /**
    * Body param: Require this application to be served in an isolated browser for
@@ -453,7 +385,7 @@ export interface PolicyCreateParams {
    * Body param: Rules evaluated with an AND logical operator. To match the policy, a
    * user must meet all of the Require rules.
    */
-  require?: Array<RequireItem>;
+  require?: Array<AccessAPI.AccessRule>;
 
   /**
    * Body param: The amount of time that tokens issued for the application will be
@@ -473,7 +405,7 @@ export interface PolicyUpdateParams {
    * Body param: Rules evaluated with an OR logical operator. A user needs to meet
    * only one of the Include rules.
    */
-  include: Array<AccessAPI.IncludeItem>;
+  include: Array<AccessAPI.AccessRule>;
 
   /**
    * Body param: The name of the Access policy.
@@ -495,7 +427,7 @@ export interface PolicyUpdateParams {
   /**
    * Body param: Administrators who can approve a temporary authentication request.
    */
-  approval_groups?: Array<ApprovalGroupItem>;
+  approval_groups?: Array<ApprovalGroup>;
 
   /**
    * Body param: Requires the user to request access from an administrator at the
@@ -507,7 +439,7 @@ export interface PolicyUpdateParams {
    * Body param: Rules evaluated with a NOT logical operator. To match the policy, a
    * user cannot meet any of the Exclude rules.
    */
-  exclude?: Array<ExcludeItem>;
+  exclude?: Array<AccessAPI.AccessRule>;
 
   /**
    * Body param: Require this application to be served in an isolated browser for
@@ -538,7 +470,7 @@ export interface PolicyUpdateParams {
    * Body param: Rules evaluated with an AND logical operator. To match the policy, a
    * user must meet all of the Require rules.
    */
-  require?: Array<RequireItem>;
+  require?: Array<AccessAPI.AccessRule>;
 
   /**
    * Body param: The amount of time that tokens issued for the application will be
@@ -586,10 +518,7 @@ export interface PolicyGetParams {
 
 export namespace Policies {
   export import ApprovalGroup = PoliciesAPI.ApprovalGroup;
-  export import ApprovalGroupItem = PoliciesAPI.ApprovalGroupItem;
-  export import ExcludeItem = PoliciesAPI.ExcludeItem;
   export import Policy = PoliciesAPI.Policy;
-  export import RequireItem = PoliciesAPI.RequireItem;
   export import PolicyDeleteResponse = PoliciesAPI.PolicyDeleteResponse;
   export import PoliciesSinglePage = PoliciesAPI.PoliciesSinglePage;
   export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;

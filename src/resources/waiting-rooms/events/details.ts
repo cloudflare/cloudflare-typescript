@@ -25,7 +25,7 @@ export class Details extends APIResource {
   }
 }
 
-export interface Event {
+export interface EventQuery {
   /**
    * An ISO 8601 timestamp that marks the end of the event.
    */
@@ -185,7 +185,7 @@ export interface DetailGetParams {
 }
 
 export namespace Details {
-  export import Event = DetailsAPI.Event;
+  export import EventQuery = DetailsAPI.EventQuery;
   export import DetailGetResponse = DetailsAPI.DetailGetResponse;
   export import DetailGetParams = DetailsAPI.DetailGetParams;
 }

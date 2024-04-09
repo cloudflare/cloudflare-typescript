@@ -2687,10 +2687,7 @@ export namespace Applications {
   export import UserPolicyCheckListParams = UserPolicyChecksAPI.UserPolicyCheckListParams;
   export import Policies = PoliciesAPI.Policies;
   export import ApprovalGroup = PoliciesAPI.ApprovalGroup;
-  export import ApprovalGroupItem = PoliciesAPI.ApprovalGroupItem;
-  export import ExcludeItem = PoliciesAPI.ExcludeItem;
   export import Policy = PoliciesAPI.Policy;
-  export import RequireItem = PoliciesAPI.RequireItem;
   export import PolicyDeleteResponse = PoliciesAPI.PolicyDeleteResponse;
   export import PoliciesSinglePage = PoliciesAPI.PoliciesSinglePage;
   export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;

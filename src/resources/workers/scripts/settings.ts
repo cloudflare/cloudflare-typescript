@@ -16,13 +16,13 @@ export class Settings extends APIResource {
     scriptName: string,
     params: SettingEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ScriptsAPI.SettingsItem> {
+  ): Core.APIPromise<ScriptsAPI.ScriptSetting> {
     const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/workers/scripts/${scriptName}/script-settings`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ScriptsAPI.SettingsItem }>
+      }) as Core.APIPromise<{ result: ScriptsAPI.ScriptSetting }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -35,13 +35,13 @@ export class Settings extends APIResource {
     scriptName: string,
     params: SettingGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ScriptsAPI.SettingsItem> {
+  ): Core.APIPromise<ScriptsAPI.ScriptSetting> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/workers/scripts/${scriptName}/script-settings`,
         options,
-      ) as Core.APIPromise<{ result: ScriptsAPI.SettingsItem }>
+      ) as Core.APIPromise<{ result: ScriptsAPI.ScriptSetting }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
