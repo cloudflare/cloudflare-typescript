@@ -26,7 +26,7 @@ export { Category, CategoryListParams, CategoriesSinglePage, Categories } from '
 export {
   DNSResolverSettingsV4,
   DNSResolverSettingsV6,
-  FilterItem,
+  GatewayFilter,
   Rule,
   RuleSetting,
   Schedule,
@@ -59,6 +59,12 @@ export {
   ProxyEndpoints,
 } from './proxy-endpoints';
 export {
+  GatewaySettings,
+  AuditSSHSettingUpdateParams,
+  AuditSSHSettingGetParams,
+  AuditSSHSettings,
+} from './audit-ssh-settings';
+export {
   Lists,
   UnnamedSchemaRef30ecd0f5ce68fc07dbb7760deda3d707,
   ListCreateResponse,
@@ -72,8 +78,7 @@ export {
 } from './lists/index';
 export {
   Location,
-  Network,
-  NetworkItem,
+  LocationNetwork,
   UnnamedSchemaRef1b37523fdb0ae5806cd8e062492aab66,
   LocationCreateParams,
   LocationUpdateParams,
@@ -90,9 +95,3 @@ export {
   LoggingGetParams,
   Logging,
 } from './logging';
-export {
-  Settings,
-  AuditSSHSettingUpdateParams,
-  AuditSSHSettingGetParams,
-  AuditSSHSettings,
-} from './audit-ssh-settings';

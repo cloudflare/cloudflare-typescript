@@ -27,18 +27,6 @@ export class ManagedHeaders extends APIResource {
   }
 }
 
-export interface RequestListItem {
-  /**
-   * Human-readable identifier of the Managed Transform.
-   */
-  id?: string;
-
-  /**
-   * When true, the Managed Transform is enabled.
-   */
-  enabled?: boolean;
-}
-
 export interface RequestModel {
   /**
    * Human-readable identifier of the Managed Transform.
@@ -52,9 +40,9 @@ export interface RequestModel {
 }
 
 export interface ManagedHeaderListResponse {
-  managed_request_headers?: Array<RequestListItem>;
+  managed_request_headers?: Array<RequestModel>;
 
-  managed_response_headers?: Array<RequestListItem>;
+  managed_response_headers?: Array<RequestModel>;
 }
 
 export interface ManagedHeaderEditResponse {
@@ -115,10 +103,10 @@ export interface ManagedHeaderEditParams {
   /**
    * Body param:
    */
-  managed_request_headers: Array<RequestListItem>;
+  managed_request_headers: Array<RequestModel>;
 
   /**
    * Body param:
    */
-  managed_response_headers: Array<RequestListItem>;
+  managed_response_headers: Array<RequestModel>;
 }

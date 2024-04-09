@@ -120,40 +120,6 @@ export interface Address {
   verified?: string;
 }
 
-export interface DestinationAddress {
-  /**
-   * Destination address identifier.
-   */
-  id?: string;
-
-  /**
-   * The date and time the destination address has been created.
-   */
-  created?: string;
-
-  /**
-   * The contact email address of the user.
-   */
-  email?: string;
-
-  /**
-   * The date and time the destination address was last modified.
-   */
-  modified?: string;
-
-  /**
-   * @deprecated: Destination address tag. (Deprecated, replaced by destination
-   * address identifier)
-   */
-  tag?: string;
-
-  /**
-   * The date and time the destination address has been verified. Null means not
-   * verified yet.
-   */
-  verified?: string;
-}
-
 export interface AddressCreateParams {
   /**
    * The contact email address of the user.
@@ -175,7 +141,6 @@ export interface AddressListParams extends V4PagePaginationArrayParams {
 
 export namespace Addresses {
   export import Address = AddressesAPI.Address;
-  export import DestinationAddress = AddressesAPI.DestinationAddress;
   export import AddressesV4PagePaginationArray = AddressesAPI.AddressesV4PagePaginationArray;
   export import AddressCreateParams = AddressesAPI.AddressCreateParams;
   export import AddressListParams = AddressesAPI.AddressListParams;

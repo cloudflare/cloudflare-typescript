@@ -77,7 +77,7 @@ export class Settings extends APIResource {
   }
 }
 
-export interface Settings {
+export interface CertificateSettings {
   /**
    * Request client certificates for this hostname in China. Can only be set to true
    * if this zone is china network enabled.
@@ -97,15 +97,15 @@ export interface Settings {
   hostname: string;
 }
 
-export type SettingUpdateResponse = Array<Settings>;
+export type SettingUpdateResponse = Array<CertificateSettings>;
 
-export type SettingGetResponse = Array<Settings>;
+export type SettingGetResponse = Array<CertificateSettings>;
 
 export interface SettingUpdateParams {
   /**
    * Body param:
    */
-  settings: Array<Settings>;
+  settings: Array<CertificateSettings>;
 
   /**
    * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -133,7 +133,7 @@ export interface SettingGetParams {
 }
 
 export namespace Settings {
-  export import Settings = SettingsAPI.Settings;
+  export import CertificateSettings = SettingsAPI.CertificateSettings;
   export import SettingUpdateResponse = SettingsAPI.SettingUpdateResponse;
   export import SettingGetResponse = SettingsAPI.SettingGetResponse;
   export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;

@@ -62,12 +62,13 @@ export namespace ZeroTrust {
   export import SeatEditResponse = SeatsAPI.SeatEditResponse;
   export import SeatEditParams = SeatsAPI.SeatEditParams;
   export import Access = AccessAPI.Access;
+  export import AccessDevicePostureRule = AccessAPI.AccessDevicePostureRule;
+  export import AccessRule = AccessAPI.AccessRule;
   export import AnyValidServiceTokenRule = AccessAPI.AnyValidServiceTokenRule;
   export import AuthenticationMethodRule = AccessAPI.AuthenticationMethodRule;
   export import AzureGroupRule = AccessAPI.AzureGroupRule;
   export import CertificateRule = AccessAPI.CertificateRule;
   export import CountryRule = AccessAPI.CountryRule;
-  export import DevicePostureRule = AccessAPI.DevicePostureRule;
   export import DomainRule = AccessAPI.DomainRule;
   export import EmailListRule = AccessAPI.EmailListRule;
   export import EmailRule = AccessAPI.EmailRule;
@@ -76,11 +77,9 @@ export namespace ZeroTrust {
   export import GitHubOrganizationRule = AccessAPI.GitHubOrganizationRule;
   export import GroupRule = AccessAPI.GroupRule;
   export import GsuiteGroupRule = AccessAPI.GsuiteGroupRule;
-  export import IncludeItem = AccessAPI.IncludeItem;
   export import IPListRule = AccessAPI.IPListRule;
   export import IPRule = AccessAPI.IPRule;
   export import OktaGroupRule = AccessAPI.OktaGroupRule;
-  export import Rule = AccessAPI.Rule;
   export import SamlGroupRule = AccessAPI.SamlGroupRule;
   export import ServiceTokenRule = AccessAPI.ServiceTokenRule;
   export import DEX = DEXAPI.DEX;

@@ -99,12 +99,12 @@ export class Routes extends APIResource {
 /**
  * Scope colo name.
  */
-export type ColoNamesItem = string;
+export type ColoName = string;
 
 /**
  * Scope colo region.
  */
-export type ColoRegionsItem = string;
+export type ColoRegion = string;
 
 /**
  * Used only for ECMP routes.
@@ -113,12 +113,12 @@ export interface Scope {
   /**
    * List of colo names for the ECMP scope.
    */
-  colo_names?: Array<ColoNamesItem>;
+  colo_names?: Array<ColoName>;
 
   /**
    * List of colo regions for the ECMP scope.
    */
-  colo_regions?: Array<ColoRegionsItem>;
+  colo_regions?: Array<ColoRegion>;
 }
 
 export interface RouteCreateResponse {
@@ -341,8 +341,8 @@ export interface RouteGetParams {
 }
 
 export namespace Routes {
-  export import ColoNamesItem = RoutesAPI.ColoNamesItem;
-  export import ColoRegionsItem = RoutesAPI.ColoRegionsItem;
+  export import ColoName = RoutesAPI.ColoName;
+  export import ColoRegion = RoutesAPI.ColoRegion;
   export import Scope = RoutesAPI.Scope;
   export import RouteCreateResponse = RoutesAPI.RouteCreateResponse;
   export import RouteUpdateResponse = RoutesAPI.RouteUpdateResponse;

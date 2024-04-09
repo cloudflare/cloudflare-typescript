@@ -2,11 +2,8 @@
 
 export {
   Action,
-  ActionItem,
   EmailRule,
   Matcher,
-  MatcherItem,
-  Properties,
   RuleCreateParams,
   RuleUpdateParams,
   RuleListParams,
@@ -15,7 +12,6 @@ export {
 } from './rules/index';
 export {
   Address,
-  DestinationAddress,
   AddressCreateParams,
   AddressListParams,
   AddressesV4PagePaginationArray,

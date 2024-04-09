@@ -72,12 +72,6 @@ export class Rules extends APIResource {
 export class RulesV4PagePaginationArray extends V4PagePaginationArray<Rule> {}
 
 /**
- * When set to `on`, the current WAF rule will be used when evaluating the request.
- * Applies to anomaly detection WAF rules.
- */
-export type AllowedModesAnomalyItem = 'on' | 'off';
-
-/**
  * When triggered, anomaly detection WAF rules contribute to an overall threat
  * score that will determine if a request is considered malicious. You can
  * configure the total scoring threshold through the 'sensitivity' property of the
@@ -105,7 +99,7 @@ export namespace Rule {
      * Defines the available modes for the current WAF rule. Applies to anomaly
      * detection WAF rules.
      */
-    allowed_modes: Array<RulesAPI.AllowedModesAnomalyItem>;
+    allowed_modes: Array<'on' | 'off'>;
 
     /**
      * The public description of the WAF rule.
@@ -272,7 +266,7 @@ export namespace RuleEditResponse {
      * Defines the available modes for the current WAF rule. Applies to anomaly
      * detection WAF rules.
      */
-    allowed_modes: Array<RulesAPI.AllowedModesAnomalyItem>;
+    allowed_modes: Array<'on' | 'off'>;
 
     /**
      * The public description of the WAF rule.
@@ -461,7 +455,6 @@ export interface RuleGetParams {
 }
 
 export namespace Rules {
-  export import AllowedModesAnomalyItem = RulesAPI.AllowedModesAnomalyItem;
   export import Rule = RulesAPI.Rule;
   export import UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5 = RulesAPI.UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5;
   export import RuleEditResponse = RulesAPI.RuleEditResponse;

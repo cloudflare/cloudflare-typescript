@@ -114,7 +114,7 @@ export namespace FleetStatus {
   export import FleetStatusLiveParams = FleetStatusAPI.FleetStatusLiveParams;
   export import FleetStatusOverTimeParams = FleetStatusAPI.FleetStatusOverTimeParams;
   export import Devices = DevicesAPI.Devices;
-  export import Device = DevicesAPI.Device;
-  export import DevicesV4PagePaginationArray = DevicesAPI.DevicesV4PagePaginationArray;
+  export import DeviceListResponse = DevicesAPI.DeviceListResponse;
+  export import DeviceListResponsesV4PagePaginationArray = DevicesAPI.DeviceListResponsesV4PagePaginationArray;
   export import DeviceListParams = DevicesAPI.DeviceListParams;
 }

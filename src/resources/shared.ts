@@ -532,7 +532,7 @@ export interface UnnamedSchemaRefB92f86eb861cd3dee83c40884802fda6 {
    * The list of origins within this pool. Traffic directed at this pool is balanced
    * across all currently healthy origins, provided the pool itself is healthy.
    */
-  origins?: Array<LoadBalancersAPI.OriginItem>;
+  origins?: Array<LoadBalancersAPI.Origin>;
 }
 
 export interface UnnamedSchemaRefCc2ac1a037e5d6702fc77b3bcb527854 {

@@ -103,35 +103,6 @@ export class Pagerules extends APIResource {
   }
 }
 
-export interface ActionItem {
-  /**
-   * The timestamp of when the override was last modified.
-   */
-  modified_on?: string;
-
-  /**
-   * The type of route.
-   */
-  name?: 'forward_url';
-
-  value?: ActionItem.Value;
-}
-
-export namespace ActionItem {
-  export interface Value {
-    /**
-     * The response type for the URL redirect.
-     */
-    type?: 'temporary' | 'permanent';
-
-    /**
-     * The URL to redirect the request to. Notes: ${num} refers to the position of '\*'
-     * in the constraint value.
-     */
-    url?: string;
-  }
-}
-
 export interface PageRule {
   /**
    * Identifier
@@ -142,7 +113,7 @@ export interface PageRule {
    * The set of actions to perform if the targets of this rule match the request.
    * Actions can redirect to another URL or override settings, but not both.
    */
-  actions: Array<ActionItem>;
+  actions: Array<Route>;
 
   /**
    * The timestamp of when the Page Rule was created.
@@ -171,7 +142,7 @@ export interface PageRule {
   /**
    * The rule targets to evaluate on each request.
    */
-  targets: Array<TargesItem>;
+  targets: Array<Targes>;
 }
 
 export interface Route {
@@ -206,11 +177,11 @@ export namespace Route {
 /**
  * A request condition target.
  */
-export interface TargesItem {
+export interface Targes {
   /**
    * String constraint.
    */
-  constraint: TargesItem.Constraint;
+  constraint: Targes.Constraint;
 
   /**
    * A target based on the URL of the request.
@@ -218,7 +189,7 @@ export interface TargesItem {
   target: 'url';
 }
 
-export namespace TargesItem {
+export namespace Targes {
   /**
    * String constraint.
    */
@@ -288,12 +259,12 @@ export interface PageruleCreateParams {
    * Body param: The set of actions to perform if the targets of this rule match the
    * request. Actions can redirect to another URL or override settings, but not both.
    */
-  actions: Array<ActionItem>;
+  actions: Array<Route>;
 
   /**
    * Body param: The rule targets to evaluate on each request.
    */
-  targets: Array<TargesItem>;
+  targets: Array<Targes>;
 
   /**
    * Body param: The priority of the rule, used to define which Page Rule is
@@ -320,12 +291,12 @@ export interface PageruleUpdateParams {
    * Body param: The set of actions to perform if the targets of this rule match the
    * request. Actions can redirect to another URL or override settings, but not both.
    */
-  actions: Array<ActionItem>;
+  actions: Array<Route>;
 
   /**
    * Body param: The rule targets to evaluate on each request.
    */
-  targets: Array<TargesItem>;
+  targets: Array<Targes>;
 
   /**
    * Body param: The priority of the rule, used to define which Page Rule is
@@ -392,7 +363,7 @@ export interface PageruleEditParams {
    * Body param: The set of actions to perform if the targets of this rule match the
    * request. Actions can redirect to another URL or override settings, but not both.
    */
-  actions?: Array<ActionItem>;
+  actions?: Array<Route>;
 
   /**
    * Body param: The priority of the rule, used to define which Page Rule is
@@ -411,7 +382,7 @@ export interface PageruleEditParams {
   /**
    * Body param: The rule targets to evaluate on each request.
    */
-  targets?: Array<TargesItem>;
+  targets?: Array<Targes>;
 }
 
 export interface PageruleGetParams {
@@ -423,5 +394,6 @@ export interface PageruleGetParams {
 
 export namespace Pagerules {
   export import Settings = SettingsAPI.Settings;
+  export import SettingListResponse = SettingsAPI.SettingListResponse;
   export import SettingListParams = SettingsAPI.SettingListParams;
 }

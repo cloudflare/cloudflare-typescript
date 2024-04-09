@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { Schedule } from './schedule';
 import * as AvailabilitiesAPI from 'cloudflare/resources/speed/availabilities';
 import * as PagesAPI from 'cloudflare/resources/speed/pages';
 import * as ScheduleAPI from 'cloudflare/resources/speed/schedule';
@@ -10,7 +9,7 @@ import * as TestsAPI from 'cloudflare/resources/speed/tests';
 
 export class Speed extends APIResource {
   tests: TestsAPI.Tests = new TestsAPI.Tests(this._client);
-  schedule: ScheduleAPI.Schedule = new ScheduleAPI.Schedule(this._client);
+  schedule: ScheduleAPI.ScheduleResource = new ScheduleAPI.ScheduleResource(this._client);
   availabilities: AvailabilitiesAPI.Availabilities = new AvailabilitiesAPI.Availabilities(this._client);
   pages: PagesAPI.Pages = new PagesAPI.Pages(this._client);
 
@@ -38,13 +37,13 @@ export class Speed extends APIResource {
     url: string,
     params: SpeedScheduleGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Schedule> {
+  ): Core.APIPromise<ScheduleAPI.Schedule> {
     const { zone_id, ...query } = params;
     return (
       this._client.get(`/zones/${zone_id}/speed_api/schedule/${url}`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: Schedule }>
+      }) as Core.APIPromise<{ result: ScheduleAPI.Schedule }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -178,47 +177,6 @@ export namespace LighthouseReport {
      */
     finalDisplayedUrl?: string;
   }
-}
-
-/**
- * The test schedule.
- */
-export interface Schedule {
-  /**
-   * The frequency of the test.
-   */
-  frequency?: 'DAILY' | 'WEEKLY';
-
-  /**
-   * A test region.
-   */
-  region?:
-    | 'asia-east1'
-    | 'asia-northeast1'
-    | 'asia-northeast2'
-    | 'asia-south1'
-    | 'asia-southeast1'
-    | 'australia-southeast1'
-    | 'europe-north1'
-    | 'europe-southwest1'
-    | 'europe-west1'
-    | 'europe-west2'
-    | 'europe-west3'
-    | 'europe-west4'
-    | 'europe-west8'
-    | 'europe-west9'
-    | 'me-west1'
-    | 'southamerica-east1'
-    | 'us-central1'
-    | 'us-east1'
-    | 'us-east4'
-    | 'us-south1'
-    | 'us-west1';
-
-  /**
-   * A URL.
-   */
-  url?: string;
 }
 
 export interface Trend {
@@ -403,6 +361,7 @@ export namespace Speed {
   export import TestListParams = TestsAPI.TestListParams;
   export import TestDeleteParams = TestsAPI.TestDeleteParams;
   export import TestGetParams = TestsAPI.TestGetParams;
+  export import ScheduleResource = ScheduleAPI.ScheduleResource;
   export import Schedule = ScheduleAPI.Schedule;
   export import ScheduleCreateResponse = ScheduleAPI.ScheduleCreateResponse;
   export import ScheduleCreateParams = ScheduleAPI.ScheduleCreateParams;
