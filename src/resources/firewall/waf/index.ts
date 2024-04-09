@@ -2,8 +2,8 @@
 
 export {
   Override,
+  OverrideURL,
   RewriteAction,
-  URLs,
   WAFRule,
   OverrideDeleteResponse,
   OverrideCreateParams,
