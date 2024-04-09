@@ -1,14 +1,18 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Lists, ItemListResponse, ItemListParams, ItemListResponsesSinglePage, Items } from './items';
+export { ItemListResponse, ItemListParams, ItemListResponsesSinglePage, Items } from './items';
 export {
   Lists,
   ListCreateResponse,
+  ListUpdateResponse,
+  ListListResponse,
+  ListEditResponse,
+  ListGetResponse,
   ListCreateParams,
   ListUpdateParams,
   ListListParams,
   ListDeleteParams,
   ListEditParams,
   ListGetParams,
-  ListsSinglePage,
+  ListListResponsesSinglePage,
 } from './lists';

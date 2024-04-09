@@ -13,12 +13,12 @@ export class Entries extends APIResource {
     identifier: string,
     body: EntryCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ContentList> {
+  ): Core.APIPromise<EntryCreateResponse> {
     return (
       this._client.post(
         `/zones/${zoneIdentifier}/web3/hostnames/${identifier}/ipfs_universal_path/content_list/entries`,
         { body, ...options },
-      ) as Core.APIPromise<{ result: ContentList }>
+      ) as Core.APIPromise<{ result: EntryCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -31,12 +31,12 @@ export class Entries extends APIResource {
     contentListEntryIdentifier: string,
     body: EntryUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ContentList> {
+  ): Core.APIPromise<EntryUpdateResponse> {
     return (
       this._client.put(
         `/zones/${zoneIdentifier}/web3/hostnames/${identifier}/ipfs_universal_path/content_list/entries/${contentListEntryIdentifier}`,
         { body, ...options },
-      ) as Core.APIPromise<{ result: ContentList }>
+      ) as Core.APIPromise<{ result: EntryUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -82,43 +82,14 @@ export class Entries extends APIResource {
     identifier: string,
     contentListEntryIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ContentList> {
+  ): Core.APIPromise<EntryGetResponse> {
     return (
       this._client.get(
         `/zones/${zoneIdentifier}/web3/hostnames/${identifier}/ipfs_universal_path/content_list/entries/${contentListEntryIdentifier}`,
         options,
-      ) as Core.APIPromise<{ result: ContentList }>
+      ) as Core.APIPromise<{ result: EntryGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
-}
-
-/**
- * Content list entry to be blocked.
- */
-export interface ContentList {
-  /**
-   * Identifier
-   */
-  id?: string;
-
-  /**
-   * CID or content path of content to block.
-   */
-  content?: string;
-
-  created_on?: string;
-
-  /**
-   * An optional description of the content list entry.
-   */
-  description?: string;
-
-  modified_on?: string;
-
-  /**
-   * Type of content list entry to block.
-   */
-  type?: 'cid' | 'content_path';
 }
 
 /**
@@ -150,11 +121,100 @@ export interface UnnamedSchemaRef5e618833803e286db9ee7c73727f8b86 {
   type?: 'cid' | 'content_path';
 }
 
+/**
+ * Content list entry to be blocked.
+ */
+export interface EntryCreateResponse {
+  /**
+   * Identifier
+   */
+  id?: string;
+
+  /**
+   * CID or content path of content to block.
+   */
+  content?: string;
+
+  created_on?: string;
+
+  /**
+   * An optional description of the content list entry.
+   */
+  description?: string;
+
+  modified_on?: string;
+
+  /**
+   * Type of content list entry to block.
+   */
+  type?: 'cid' | 'content_path';
+}
+
+/**
+ * Content list entry to be blocked.
+ */
+export interface EntryUpdateResponse {
+  /**
+   * Identifier
+   */
+  id?: string;
+
+  /**
+   * CID or content path of content to block.
+   */
+  content?: string;
+
+  created_on?: string;
+
+  /**
+   * An optional description of the content list entry.
+   */
+  description?: string;
+
+  modified_on?: string;
+
+  /**
+   * Type of content list entry to block.
+   */
+  type?: 'cid' | 'content_path';
+}
+
 export interface EntryListResponse {
   /**
    * Content list entries.
    */
-  entries?: Array<ContentList>;
+  entries?: Array<EntryListResponse.Entry>;
+}
+
+export namespace EntryListResponse {
+  /**
+   * Content list entry to be blocked.
+   */
+  export interface Entry {
+    /**
+     * Identifier
+     */
+    id?: string;
+
+    /**
+     * CID or content path of content to block.
+     */
+    content?: string;
+
+    created_on?: string;
+
+    /**
+     * An optional description of the content list entry.
+     */
+    description?: string;
+
+    modified_on?: string;
+
+    /**
+     * Type of content list entry to block.
+     */
+    type?: 'cid' | 'content_path';
+  }
 }
 
 export interface EntryDeleteResponse {
@@ -162,6 +222,35 @@ export interface EntryDeleteResponse {
    * Identifier
    */
   id: string;
+}
+
+/**
+ * Content list entry to be blocked.
+ */
+export interface EntryGetResponse {
+  /**
+   * Identifier
+   */
+  id?: string;
+
+  /**
+   * CID or content path of content to block.
+   */
+  content?: string;
+
+  created_on?: string;
+
+  /**
+   * An optional description of the content list entry.
+   */
+  description?: string;
+
+  modified_on?: string;
+
+  /**
+   * Type of content list entry to block.
+   */
+  type?: 'cid' | 'content_path';
 }
 
 export interface EntryCreateParams {
@@ -201,10 +290,12 @@ export interface EntryUpdateParams {
 export type EntryDeleteParams = unknown;
 
 export namespace Entries {
-  export import ContentList = EntriesAPI.ContentList;
   export import UnnamedSchemaRef5e618833803e286db9ee7c73727f8b86 = EntriesAPI.UnnamedSchemaRef5e618833803e286db9ee7c73727f8b86;
+  export import EntryCreateResponse = EntriesAPI.EntryCreateResponse;
+  export import EntryUpdateResponse = EntriesAPI.EntryUpdateResponse;
   export import EntryListResponse = EntriesAPI.EntryListResponse;
   export import EntryDeleteResponse = EntriesAPI.EntryDeleteResponse;
+  export import EntryGetResponse = EntriesAPI.EntryGetResponse;
   export import EntryCreateParams = EntriesAPI.EntryCreateParams;
   export import EntryUpdateParams = EntriesAPI.EntryUpdateParams;
   export import EntryDeleteParams = EntriesAPI.EntryDeleteParams;
