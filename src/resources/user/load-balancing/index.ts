@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export { Analytics, AnalyticsSinglePage } from './analytics/index';
-export { LoadBalancers } from './load-balancers';
+export { LoadBalancing } from './load-balancing';
 export {
   MonitorCreateResponse,
   MonitorUpdateResponse,
@@ -32,4 +32,4 @@ export {
   PoolPreviewParams,
   Pools,
 } from './pools';
-export { Preview, PreviewResource } from './preview';
+export { PreviewGetResponse, Preview } from './preview';

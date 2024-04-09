@@ -122,11 +122,10 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/user/billing/history.ts">BillingHistory</a></code>
-- <code><a href="./src/resources/user/billing/history.ts">HistoryGetResponse</a></code>
 
 Methods:
 
-- <code title="get /user/billing/history">client.user.billing.history.<a href="./src/resources/user/billing/history.ts">get</a>({ ...params }) -> HistoryGetResponse | null</code>
+- <code title="get /user/billing/history">client.user.billing.history.<a href="./src/resources/user/billing/history.ts">list</a>({ ...params }) -> BillingHistoriesV4PagePaginationArray</code>
 
 ### Profile
 
@@ -162,74 +161,74 @@ Methods:
 - <code title="patch /user/invites/{invite_id}">client.user.invites.<a href="./src/resources/user/invites.ts">edit</a>(inviteId, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
 - <code title="get /user/invites/{invite_id}">client.user.invites.<a href="./src/resources/user/invites.ts">get</a>(inviteId) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
 
-## LoadBalancers
+## LoadBalancing
 
 ### Monitors
 
 Types:
 
-- <code><a href="./src/resources/user/load-balancers/monitors.ts">MonitorCreateResponse</a></code>
-- <code><a href="./src/resources/user/load-balancers/monitors.ts">MonitorUpdateResponse</a></code>
-- <code><a href="./src/resources/user/load-balancers/monitors.ts">MonitorListResponse</a></code>
-- <code><a href="./src/resources/user/load-balancers/monitors.ts">MonitorDeleteResponse</a></code>
-- <code><a href="./src/resources/user/load-balancers/monitors.ts">MonitorEditResponse</a></code>
-- <code><a href="./src/resources/user/load-balancers/monitors.ts">MonitorGetResponse</a></code>
-- <code><a href="./src/resources/user/load-balancers/monitors.ts">MonitorPreviewResponse</a></code>
-- <code><a href="./src/resources/user/load-balancers/monitors.ts">MonitorReferencesResponse</a></code>
+- <code><a href="./src/resources/user/load-balancing/monitors.ts">MonitorCreateResponse</a></code>
+- <code><a href="./src/resources/user/load-balancing/monitors.ts">MonitorUpdateResponse</a></code>
+- <code><a href="./src/resources/user/load-balancing/monitors.ts">MonitorListResponse</a></code>
+- <code><a href="./src/resources/user/load-balancing/monitors.ts">MonitorDeleteResponse</a></code>
+- <code><a href="./src/resources/user/load-balancing/monitors.ts">MonitorEditResponse</a></code>
+- <code><a href="./src/resources/user/load-balancing/monitors.ts">MonitorGetResponse</a></code>
+- <code><a href="./src/resources/user/load-balancing/monitors.ts">MonitorPreviewResponse</a></code>
+- <code><a href="./src/resources/user/load-balancing/monitors.ts">MonitorReferencesResponse</a></code>
 
 Methods:
 
-- <code title="post /user/load_balancers/monitors">client.user.loadBalancers.monitors.<a href="./src/resources/user/load-balancers/monitors.ts">create</a>({ ...params }) -> MonitorCreateResponse</code>
-- <code title="put /user/load_balancers/monitors/{monitor_id}">client.user.loadBalancers.monitors.<a href="./src/resources/user/load-balancers/monitors.ts">update</a>(monitorId, { ...params }) -> MonitorUpdateResponse</code>
-- <code title="get /user/load_balancers/monitors">client.user.loadBalancers.monitors.<a href="./src/resources/user/load-balancers/monitors.ts">list</a>() -> MonitorListResponsesSinglePage</code>
-- <code title="delete /user/load_balancers/monitors/{monitor_id}">client.user.loadBalancers.monitors.<a href="./src/resources/user/load-balancers/monitors.ts">delete</a>(monitorId, { ...params }) -> MonitorDeleteResponse</code>
-- <code title="patch /user/load_balancers/monitors/{monitor_id}">client.user.loadBalancers.monitors.<a href="./src/resources/user/load-balancers/monitors.ts">edit</a>(monitorId, { ...params }) -> MonitorEditResponse</code>
-- <code title="get /user/load_balancers/monitors/{monitor_id}">client.user.loadBalancers.monitors.<a href="./src/resources/user/load-balancers/monitors.ts">get</a>(monitorId) -> MonitorGetResponse</code>
-- <code title="post /user/load_balancers/monitors/{monitor_id}/preview">client.user.loadBalancers.monitors.<a href="./src/resources/user/load-balancers/monitors.ts">preview</a>(monitorId, { ...params }) -> MonitorPreviewResponse</code>
-- <code title="get /user/load_balancers/monitors/{monitor_id}/references">client.user.loadBalancers.monitors.<a href="./src/resources/user/load-balancers/monitors.ts">references</a>(monitorId) -> MonitorReferencesResponse | null</code>
+- <code title="post /user/load_balancers/monitors">client.user.loadBalancing.monitors.<a href="./src/resources/user/load-balancing/monitors.ts">create</a>({ ...params }) -> MonitorCreateResponse</code>
+- <code title="put /user/load_balancers/monitors/{monitor_id}">client.user.loadBalancing.monitors.<a href="./src/resources/user/load-balancing/monitors.ts">update</a>(monitorId, { ...params }) -> MonitorUpdateResponse</code>
+- <code title="get /user/load_balancers/monitors">client.user.loadBalancing.monitors.<a href="./src/resources/user/load-balancing/monitors.ts">list</a>() -> MonitorListResponsesSinglePage</code>
+- <code title="delete /user/load_balancers/monitors/{monitor_id}">client.user.loadBalancing.monitors.<a href="./src/resources/user/load-balancing/monitors.ts">delete</a>(monitorId, { ...params }) -> MonitorDeleteResponse</code>
+- <code title="patch /user/load_balancers/monitors/{monitor_id}">client.user.loadBalancing.monitors.<a href="./src/resources/user/load-balancing/monitors.ts">edit</a>(monitorId, { ...params }) -> MonitorEditResponse</code>
+- <code title="get /user/load_balancers/monitors/{monitor_id}">client.user.loadBalancing.monitors.<a href="./src/resources/user/load-balancing/monitors.ts">get</a>(monitorId) -> MonitorGetResponse</code>
+- <code title="post /user/load_balancers/monitors/{monitor_id}/preview">client.user.loadBalancing.monitors.<a href="./src/resources/user/load-balancing/monitors.ts">preview</a>(monitorId, { ...params }) -> MonitorPreviewResponse</code>
+- <code title="get /user/load_balancers/monitors/{monitor_id}/references">client.user.loadBalancing.monitors.<a href="./src/resources/user/load-balancing/monitors.ts">references</a>(monitorId) -> MonitorReferencesResponse | null</code>
 
 ### Pools
 
 Types:
 
-- <code><a href="./src/resources/user/load-balancers/pools.ts">PoolDeleteResponse</a></code>
-- <code><a href="./src/resources/user/load-balancers/pools.ts">PoolHealthResponse</a></code>
-- <code><a href="./src/resources/user/load-balancers/pools.ts">PoolPreviewResponse</a></code>
-- <code><a href="./src/resources/user/load-balancers/pools.ts">PoolReferencesResponse</a></code>
+- <code><a href="./src/resources/user/load-balancing/pools.ts">PoolDeleteResponse</a></code>
+- <code><a href="./src/resources/user/load-balancing/pools.ts">PoolHealthResponse</a></code>
+- <code><a href="./src/resources/user/load-balancing/pools.ts">PoolPreviewResponse</a></code>
+- <code><a href="./src/resources/user/load-balancing/pools.ts">PoolReferencesResponse</a></code>
 
 Methods:
 
-- <code title="post /user/load_balancers/pools">client.user.loadBalancers.pools.<a href="./src/resources/user/load-balancers/pools.ts">create</a>({ ...params }) -> Pool</code>
-- <code title="put /user/load_balancers/pools/{pool_id}">client.user.loadBalancers.pools.<a href="./src/resources/user/load-balancers/pools.ts">update</a>(poolId, { ...params }) -> Pool</code>
-- <code title="get /user/load_balancers/pools">client.user.loadBalancers.pools.<a href="./src/resources/user/load-balancers/pools.ts">list</a>({ ...params }) -> PoolsSinglePage</code>
-- <code title="delete /user/load_balancers/pools/{pool_id}">client.user.loadBalancers.pools.<a href="./src/resources/user/load-balancers/pools.ts">delete</a>(poolId, { ...params }) -> PoolDeleteResponse</code>
-- <code title="patch /user/load_balancers/pools/{pool_id}">client.user.loadBalancers.pools.<a href="./src/resources/user/load-balancers/pools.ts">edit</a>(poolId, { ...params }) -> Pool</code>
-- <code title="get /user/load_balancers/pools/{pool_id}">client.user.loadBalancers.pools.<a href="./src/resources/user/load-balancers/pools.ts">get</a>(poolId) -> Pool</code>
-- <code title="get /user/load_balancers/pools/{pool_id}/health">client.user.loadBalancers.pools.<a href="./src/resources/user/load-balancers/pools.ts">health</a>(poolId) -> PoolHealthResponse</code>
-- <code title="post /user/load_balancers/pools/{pool_id}/preview">client.user.loadBalancers.pools.<a href="./src/resources/user/load-balancers/pools.ts">preview</a>(poolId, { ...params }) -> PoolPreviewResponse</code>
-- <code title="get /user/load_balancers/pools/{pool_id}/references">client.user.loadBalancers.pools.<a href="./src/resources/user/load-balancers/pools.ts">references</a>(poolId) -> PoolReferencesResponse | null</code>
+- <code title="post /user/load_balancers/pools">client.user.loadBalancing.pools.<a href="./src/resources/user/load-balancing/pools.ts">create</a>({ ...params }) -> Pool</code>
+- <code title="put /user/load_balancers/pools/{pool_id}">client.user.loadBalancing.pools.<a href="./src/resources/user/load-balancing/pools.ts">update</a>(poolId, { ...params }) -> Pool</code>
+- <code title="get /user/load_balancers/pools">client.user.loadBalancing.pools.<a href="./src/resources/user/load-balancing/pools.ts">list</a>({ ...params }) -> PoolsSinglePage</code>
+- <code title="delete /user/load_balancers/pools/{pool_id}">client.user.loadBalancing.pools.<a href="./src/resources/user/load-balancing/pools.ts">delete</a>(poolId, { ...params }) -> PoolDeleteResponse</code>
+- <code title="patch /user/load_balancers/pools/{pool_id}">client.user.loadBalancing.pools.<a href="./src/resources/user/load-balancing/pools.ts">edit</a>(poolId, { ...params }) -> Pool</code>
+- <code title="get /user/load_balancers/pools/{pool_id}">client.user.loadBalancing.pools.<a href="./src/resources/user/load-balancing/pools.ts">get</a>(poolId) -> Pool</code>
+- <code title="get /user/load_balancers/pools/{pool_id}/health">client.user.loadBalancing.pools.<a href="./src/resources/user/load-balancing/pools.ts">health</a>(poolId) -> PoolHealthResponse</code>
+- <code title="post /user/load_balancers/pools/{pool_id}/preview">client.user.loadBalancing.pools.<a href="./src/resources/user/load-balancing/pools.ts">preview</a>(poolId, { ...params }) -> PoolPreviewResponse</code>
+- <code title="get /user/load_balancers/pools/{pool_id}/references">client.user.loadBalancing.pools.<a href="./src/resources/user/load-balancing/pools.ts">references</a>(poolId) -> PoolReferencesResponse | null</code>
 
 ### Preview
 
 Types:
 
-- <code><a href="./src/resources/user/load-balancers/preview.ts">Preview</a></code>
+- <code><a href="./src/resources/user/load-balancing/preview.ts">PreviewGetResponse</a></code>
 
 Methods:
 
-- <code title="get /user/load_balancers/preview/{preview_id}">client.user.loadBalancers.preview.<a href="./src/resources/user/load-balancers/preview.ts">get</a>(previewId) -> Preview</code>
+- <code title="get /user/load_balancers/preview/{preview_id}">client.user.loadBalancing.preview.<a href="./src/resources/user/load-balancing/preview.ts">get</a>(previewId) -> PreviewGetResponse</code>
 
 ### Analytics
 
 Types:
 
-- <code><a href="./src/resources/user/load-balancers/analytics/analytics.ts">Analytics</a></code>
+- <code><a href="./src/resources/user/load-balancing/analytics/analytics.ts">Analytics</a></code>
 
 #### Events
 
 Methods:
 
-- <code title="get /user/load_balancing_analytics/events">client.user.loadBalancers.analytics.events.<a href="./src/resources/user/load-balancers/analytics/events.ts">list</a>({ ...params }) -> AnalyticsSinglePage</code>
+- <code title="get /user/load_balancing_analytics/events">client.user.loadBalancing.analytics.events.<a href="./src/resources/user/load-balancing/analytics/events.ts">list</a>({ ...params }) -> AnalyticsSinglePage</code>
 
 ## Organizations
 
@@ -1044,9 +1043,13 @@ Methods:
 
 ## Previews
 
+Types:
+
+- <code><a href="./src/resources/load-balancers/previews.ts">PreviewGetResponse</a></code>
+
 Methods:
 
-- <code title="get /accounts/{account_id}/load_balancers/preview/{preview_id}">client.loadBalancers.previews.<a href="./src/resources/load-balancers/previews.ts">get</a>(previewId, { ...params }) -> Preview</code>
+- <code title="get /accounts/{account_id}/load_balancers/preview/{preview_id}">client.loadBalancers.previews.<a href="./src/resources/load-balancers/previews.ts">get</a>(previewId, { ...params }) -> PreviewGetResponse</code>
 
 ## Regions
 
@@ -3085,10 +3088,11 @@ Types:
 
 - <code><a href="./src/resources/intel/dns.ts">DNS</a></code>
 - <code><a href="./src/resources/intel/dns.ts">UnnamedSchemaRefB5e16cee4f32382c294201aedb9fc050</a></code>
+- <code><a href="./src/resources/intel/dns.ts">DNSListResponse</a></code>
 
 Methods:
 
-- <code title="get /accounts/{account_id}/intel/dns">client.intel.dns.<a href="./src/resources/intel/dns.ts">get</a>({ ...params }) -> DNS</code>
+- <code title="get /accounts/{account_id}/intel/dns">client.intel.dns.<a href="./src/resources/intel/dns.ts">list</a>({ ...params }) -> DNSListResponsesV4PagePagination</code>
 
 ## Domains
 
@@ -4686,7 +4690,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/zero-trust/tunnels/tunnels.ts">Tunnel</a></code>
-- <code><a href="./src/resources/zero-trust/tunnels/tunnels.ts">UnnamedSchemaRefA9c0e0a8cc5fd0e244f41ea806cd954a</a></code>
 - <code><a href="./src/resources/zero-trust/tunnels/tunnels.ts">WARPConnectorTunnel</a></code>
 
 Methods:
@@ -5219,13 +5222,15 @@ Methods:
 
 ### Leaks
 
+#### Events
+
 Types:
 
-- <code><a href="./src/resources/radar/bgp/leaks.ts">LeakEventsResponse</a></code>
+- <code><a href="./src/resources/radar/bgp/leaks/events.ts">EventListResponse</a></code>
 
 Methods:
 
-- <code title="get /radar/bgp/leaks/events">client.radar.bgp.leaks.<a href="./src/resources/radar/bgp/leaks.ts">events</a>({ ...params }) -> LeakEventsResponse</code>
+- <code title="get /radar/bgp/leaks/events">client.radar.bgp.leaks.events.<a href="./src/resources/radar/bgp/leaks/events.ts">list</a>({ ...params }) -> EventListResponsesV4PagePagination</code>
 
 ### Top
 
@@ -5251,13 +5256,15 @@ Methods:
 
 ### Hijacks
 
+#### Events
+
 Types:
 
-- <code><a href="./src/resources/radar/bgp/hijacks.ts">HijackEventsResponse</a></code>
+- <code><a href="./src/resources/radar/bgp/hijacks/events.ts">EventListResponse</a></code>
 
 Methods:
 
-- <code title="get /radar/bgp/hijacks/events">client.radar.bgp.hijacks.<a href="./src/resources/radar/bgp/hijacks.ts">events</a>({ ...params }) -> HijackEventsResponse</code>
+- <code title="get /radar/bgp/hijacks/events">client.radar.bgp.hijacks.events.<a href="./src/resources/radar/bgp/hijacks/events.ts">list</a>({ ...params }) -> EventListResponsesV4PagePagination</code>
 
 ### Routes
 

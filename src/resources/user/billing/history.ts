@@ -4,27 +4,34 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as HistoryAPI from 'cloudflare/resources/user/billing/history';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class History extends APIResource {
   /**
    * Accesses your billing history object.
    */
-  get(query?: HistoryGetParams, options?: Core.RequestOptions): Core.APIPromise<HistoryGetResponse | null>;
-  get(options?: Core.RequestOptions): Core.APIPromise<HistoryGetResponse | null>;
-  get(
-    query: HistoryGetParams | Core.RequestOptions = {},
+  list(
+    query?: HistoryListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<HistoryGetResponse | null> {
+  ): Core.PagePromise<BillingHistoriesV4PagePaginationArray, BillingHistory>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<BillingHistoriesV4PagePaginationArray, BillingHistory>;
+  list(
+    query: HistoryListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<BillingHistoriesV4PagePaginationArray, BillingHistory> {
     if (isRequestOptions(query)) {
-      return this.get({}, query);
+      return this.list({}, query);
     }
-    return (
-      this._client.get('/user/billing/history', { query, ...options }) as Core.APIPromise<{
-        result: HistoryGetResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList('/user/billing/history', BillingHistoriesV4PagePaginationArray, {
+      query,
+      ...options,
+    });
   }
 }
+
+export class BillingHistoriesV4PagePaginationArray extends V4PagePaginationArray<BillingHistory> {}
 
 export interface BillingHistory {
   /**
@@ -71,9 +78,7 @@ export namespace BillingHistory {
   }
 }
 
-export type HistoryGetResponse = Array<BillingHistory>;
-
-export interface HistoryGetParams {
+export interface HistoryListParams extends V4PagePaginationArrayParams {
   /**
    * The billing item action.
    */
@@ -95,16 +100,6 @@ export interface HistoryGetParams {
   order?: 'type' | 'occured_at' | 'action';
 
   /**
-   * Page number of paginated results.
-   */
-  page?: number;
-
-  /**
-   * Number of items per page.
-   */
-  per_page?: number;
-
-  /**
    * The billing item type.
    */
   type?: string;
@@ -112,6 +107,6 @@ export interface HistoryGetParams {
 
 export namespace History {
   export import BillingHistory = HistoryAPI.BillingHistory;
-  export import HistoryGetResponse = HistoryAPI.HistoryGetResponse;
-  export import HistoryGetParams = HistoryAPI.HistoryGetParams;
+  export import BillingHistoriesV4PagePaginationArray = HistoryAPI.BillingHistoriesV4PagePaginationArray;
+  export import HistoryListParams = HistoryAPI.HistoryListParams;
 }

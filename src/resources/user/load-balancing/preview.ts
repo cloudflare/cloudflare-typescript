@@ -2,16 +2,16 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as PreviewAPI from 'cloudflare/resources/user/load-balancers/preview';
+import * as PreviewAPI from 'cloudflare/resources/user/load-balancing/preview';
 
-export class PreviewResource extends APIResource {
+export class Preview extends APIResource {
   /**
    * Get the result of a previous preview operation using the provided preview_id.
    */
-  get(previewId: string, options?: Core.RequestOptions): Core.APIPromise<Preview> {
+  get(previewId: string, options?: Core.RequestOptions): Core.APIPromise<PreviewGetResponse> {
     return (
       this._client.get(`/user/load_balancers/preview/${previewId}`, options) as Core.APIPromise<{
-        result: Preview;
+        result: PreviewGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -20,9 +20,9 @@ export class PreviewResource extends APIResource {
 /**
  * Resulting health data from a preview operation.
  */
-export type Preview = Record<string, Preview.unnamed_schema_with_map_parent_0>;
+export type PreviewGetResponse = Record<string, PreviewGetResponse.unnamed_schema_with_map_parent_0>;
 
-export namespace Preview {
+export namespace PreviewGetResponse {
   export interface unnamed_schema_with_map_parent_0 {
     healthy?: boolean;
 
@@ -45,6 +45,6 @@ export namespace Preview {
   }
 }
 
-export namespace PreviewResource {
-  export import Preview = PreviewAPI.Preview;
+export namespace Preview {
+  export import PreviewGetResponse = PreviewAPI.PreviewGetResponse;
 }
