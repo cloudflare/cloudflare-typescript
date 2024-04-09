@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as DomainsAPI from 'cloudflare/resources/registrar/domains';
-import * as Shared from 'cloudflare/resources/shared';
 import { SinglePage } from 'cloudflare/pagination';
 
 export class Domains extends APIResource {
@@ -14,13 +13,13 @@ export class Domains extends APIResource {
     domainName: string,
     params: DomainUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef65e3c8c1a9c4638ec25cdbbaca7165c1 | null> {
+  ): Core.APIPromise<DomainUpdateResponse | null> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/registrar/domains/${domainName}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef65e3c8c1a9c4638ec25cdbbaca7165c1 | null }>
+      }) as Core.APIPromise<{ result: DomainUpdateResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -39,13 +38,13 @@ export class Domains extends APIResource {
     domainName: string,
     params: DomainGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef65e3c8c1a9c4638ec25cdbbaca7165c1 | null> {
+  ): Core.APIPromise<DomainGetResponse | null> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/registrar/domains/${domainName}`,
         options,
-      ) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef65e3c8c1a9c4638ec25cdbbaca7165c1 | null }>
+      ) as Core.APIPromise<{ result: DomainGetResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -225,6 +224,10 @@ export namespace Domain {
   }
 }
 
+export type DomainUpdateResponse = unknown | Array<unknown> | string;
+
+export type DomainGetResponse = unknown | Array<unknown> | string;
+
 export interface DomainUpdateParams {
   /**
    * Path param: Identifier
@@ -264,6 +267,8 @@ export interface DomainGetParams {
 
 export namespace Domains {
   export import Domain = DomainsAPI.Domain;
+  export import DomainUpdateResponse = DomainsAPI.DomainUpdateResponse;
+  export import DomainGetResponse = DomainsAPI.DomainGetResponse;
   export import DomainsSinglePage = DomainsAPI.DomainsSinglePage;
   export import DomainUpdateParams = DomainsAPI.DomainUpdateParams;
   export import DomainListParams = DomainsAPI.DomainListParams;

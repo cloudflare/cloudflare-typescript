@@ -74,7 +74,7 @@ export interface PredefinedProfile {
   /**
    * The type of the profile.
    */
-  type?: ProfilesAPI.UnnamedSchemaRefE38bfdf1acf5a4bfada6779c79528bc0;
+  type?: ProfilesAPI.PredefinedProfile;
 }
 
 export namespace PredefinedProfile {

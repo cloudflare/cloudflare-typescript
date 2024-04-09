@@ -2,12 +2,19 @@
 
 export {
   Client,
+  ConnectionDeleteResponse,
   ConnectionGetResponse,
   ConnectionDeleteParams,
   ConnectionGetParams,
   Connections,
 } from './connections';
-export { ConfigurationUpdateParams, ConfigurationGetParams, Configurations } from './configurations';
+export {
+  ConfigurationUpdateResponse,
+  ConfigurationGetResponse,
+  ConfigurationUpdateParams,
+  ConfigurationGetParams,
+  Configurations,
+} from './configurations';
 export { ConnectorGetParams, Connectors } from './connectors';
 export { ManagementCreateResponse, ManagementCreateParams, Management } from './management';
 export { TokenGetResponse, TokenGetParams, Token } from './token';

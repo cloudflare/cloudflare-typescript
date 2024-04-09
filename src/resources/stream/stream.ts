@@ -402,6 +402,7 @@ export interface StreamGetParams {
 export namespace Stream {
   export import AudioTracks = AudioTracksAPI.AudioTracks;
   export import Audio = AudioTracksAPI.Audio;
+  export import AudioTrackDeleteResponse = AudioTracksAPI.AudioTrackDeleteResponse;
   export import AudioTrackGetResponse = AudioTracksAPI.AudioTrackGetResponse;
   export import AudioTrackDeleteParams = AudioTracksAPI.AudioTrackDeleteParams;
   export import AudioTrackCopyParams = AudioTracksAPI.AudioTrackCopyParams;
@@ -419,6 +420,7 @@ export namespace Stream {
   export import DirectUploadCreateResponse = DirectUploadAPI.DirectUploadCreateResponse;
   export import DirectUploadCreateParams = DirectUploadAPI.DirectUploadCreateParams;
   export import Keys = KeysAPI.Keys;
+  export import KeyDeleteResponse = KeysAPI.KeyDeleteResponse;
   export import KeyGetResponse = KeysAPI.KeyGetResponse;
   export import KeyCreateParams = KeysAPI.KeyCreateParams;
   export import KeyDeleteParams = KeysAPI.KeyDeleteParams;
@@ -433,12 +435,14 @@ export namespace Stream {
   export import LiveInputGetParams = LiveInputsAPI.LiveInputGetParams;
   export import Watermarks = WatermarksAPI.Watermarks;
   export import Watermaks = WatermarksAPI.Watermaks;
+  export import WatermarkDeleteResponse = WatermarksAPI.WatermarkDeleteResponse;
   export import WatermaksSinglePage = WatermarksAPI.WatermaksSinglePage;
   export import WatermarkCreateParams = WatermarksAPI.WatermarkCreateParams;
   export import WatermarkListParams = WatermarksAPI.WatermarkListParams;
   export import WatermarkDeleteParams = WatermarksAPI.WatermarkDeleteParams;
   export import WatermarkGetParams = WatermarksAPI.WatermarkGetParams;
   export import Webhooks = WebhooksAPI.Webhooks;
+  export import WebhookDeleteResponse = WebhooksAPI.WebhookDeleteResponse;
   export import WebhookUpdateParams = WebhooksAPI.WebhookUpdateParams;
   export import WebhookDeleteParams = WebhooksAPI.WebhookDeleteParams;
   export import WebhookGetParams = WebhooksAPI.WebhookGetParams;
@@ -450,6 +454,7 @@ export namespace Stream {
   export import CaptionDeleteParams = CaptionsAPI.CaptionDeleteParams;
   export import CaptionGetParams = CaptionsAPI.CaptionGetParams;
   export import Downloads = DownloadsAPI.Downloads;
+  export import DownloadDeleteResponse = DownloadsAPI.DownloadDeleteResponse;
   export import DownloadCreateParams = DownloadsAPI.DownloadCreateParams;
   export import DownloadDeleteParams = DownloadsAPI.DownloadDeleteParams;
   export import DownloadGetParams = DownloadsAPI.DownloadGetParams;

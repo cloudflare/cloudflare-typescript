@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as DomainsAPI from 'cloudflare/resources/pages/projects/domains';
-import * as Shared from 'cloudflare/resources/shared';
 import { SinglePage } from 'cloudflare/pagination';
 
 export class Domains extends APIResource {
@@ -14,13 +13,13 @@ export class Domains extends APIResource {
     projectName: string,
     params: DomainCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef65e3c8c1a9c4638ec25cdbbaca7165c1 | null> {
+  ): Core.APIPromise<DomainCreateResponse | null> {
     const { account_id, body } = params;
     return (
       this._client.post(`/accounts/${account_id}/pages/projects/${projectName}/domains`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef65e3c8c1a9c4638ec25cdbbaca7165c1 | null }>
+      }) as Core.APIPromise<{ result: DomainCreateResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -64,13 +63,13 @@ export class Domains extends APIResource {
     domainName: string,
     params: DomainEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef65e3c8c1a9c4638ec25cdbbaca7165c1 | null> {
+  ): Core.APIPromise<DomainEditResponse | null> {
     const { account_id, body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/pages/projects/${projectName}/domains/${domainName}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef65e3c8c1a9c4638ec25cdbbaca7165c1 | null }>
+      }) as Core.APIPromise<{ result: DomainEditResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -82,22 +81,28 @@ export class Domains extends APIResource {
     domainName: string,
     params: DomainGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef65e3c8c1a9c4638ec25cdbbaca7165c1 | null> {
+  ): Core.APIPromise<DomainGetResponse | null> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/pages/projects/${projectName}/domains/${domainName}`,
         options,
-      ) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef65e3c8c1a9c4638ec25cdbbaca7165c1 | null }>
+      ) as Core.APIPromise<{ result: DomainGetResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
 export class DomainListResponsesSinglePage extends SinglePage<DomainListResponse> {}
 
+export type DomainCreateResponse = unknown | Array<unknown> | string;
+
 export type DomainListResponse = unknown;
 
 export type DomainDeleteResponse = unknown;
+
+export type DomainEditResponse = unknown | Array<unknown> | string;
+
+export type DomainGetResponse = unknown | Array<unknown> | string;
 
 export interface DomainCreateParams {
   /**
@@ -150,8 +155,11 @@ export interface DomainGetParams {
 }
 
 export namespace Domains {
+  export import DomainCreateResponse = DomainsAPI.DomainCreateResponse;
   export import DomainListResponse = DomainsAPI.DomainListResponse;
   export import DomainDeleteResponse = DomainsAPI.DomainDeleteResponse;
+  export import DomainEditResponse = DomainsAPI.DomainEditResponse;
+  export import DomainGetResponse = DomainsAPI.DomainGetResponse;
   export import DomainListResponsesSinglePage = DomainsAPI.DomainListResponsesSinglePage;
   export import DomainCreateParams = DomainsAPI.DomainCreateParams;
   export import DomainListParams = DomainsAPI.DomainListParams;

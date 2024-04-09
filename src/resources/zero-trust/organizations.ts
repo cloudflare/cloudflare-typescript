@@ -10,7 +10,7 @@ export class Organizations extends APIResource {
   /**
    * Sets up a Zero Trust organization for your account or zone.
    */
-  create(params: OrganizationCreateParams, options?: Core.RequestOptions): Core.APIPromise<Organizations> {
+  create(params: OrganizationCreateParams, options?: Core.RequestOptions): Core.APIPromise<Organization> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -32,14 +32,14 @@ export class Organizations extends APIResource {
       this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/organizations`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: Organizations }>
+      }) as Core.APIPromise<{ result: Organization }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Updates the configuration for your Zero Trust organization.
    */
-  update(params: OrganizationUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Organizations> {
+  update(params: OrganizationUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Organization> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -61,19 +61,19 @@ export class Organizations extends APIResource {
       this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/organizations`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: Organizations }>
+      }) as Core.APIPromise<{ result: Organization }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Returns the configuration for your Zero Trust organization.
    */
-  list(params?: OrganizationListParams, options?: Core.RequestOptions): Core.APIPromise<Organizations>;
-  list(options?: Core.RequestOptions): Core.APIPromise<Organizations>;
+  list(params?: OrganizationListParams, options?: Core.RequestOptions): Core.APIPromise<Organization>;
+  list(options?: Core.RequestOptions): Core.APIPromise<Organization>;
   list(
     params: OrganizationListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Organizations> {
+  ): Core.APIPromise<Organization> {
     if (isRequestOptions(params)) {
       return this.list({}, params);
     }
@@ -98,7 +98,7 @@ export class Organizations extends APIResource {
       this._client.get(
         `/${accountOrZone}/${accountOrZoneId}/access/organizations`,
         options,
-      ) as Core.APIPromise<{ result: Organizations }>
+      ) as Core.APIPromise<{ result: Organization }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -162,7 +162,7 @@ export interface LoginDesign {
   text_color?: string;
 }
 
-export interface Organizations {
+export interface Organization {
   /**
    * When set to true, users can authenticate via WARP for any application in your
    * organization. Application settings will take precedence over this value.
@@ -182,7 +182,7 @@ export interface Organizations {
 
   created_at?: string;
 
-  custom_pages?: Organizations.CustomPages;
+  custom_pages?: Organization.CustomPages;
 
   /**
    * Lock all settings as Read-Only in the Dashboard, regardless of user permission.
@@ -226,7 +226,7 @@ export interface Organizations {
   warp_auth_session_duration?: string;
 }
 
-export namespace Organizations {
+export namespace Organization {
   export interface CustomPages {
     /**
      * The uid of the custom page to use when a user is denied access after failing a
@@ -450,7 +450,7 @@ export interface OrganizationRevokeUsersParams {
 
 export namespace Organizations {
   export import LoginDesign = OrganizationsAPI.LoginDesign;
-  export import Organizations = OrganizationsAPI.Organizations;
+  export import Organization = OrganizationsAPI.Organization;
   export import OrganizationRevokeUsersResponse = OrganizationsAPI.OrganizationRevokeUsersResponse;
   export import OrganizationCreateParams = OrganizationsAPI.OrganizationCreateParams;
   export import OrganizationUpdateParams = OrganizationsAPI.OrganizationUpdateParams;

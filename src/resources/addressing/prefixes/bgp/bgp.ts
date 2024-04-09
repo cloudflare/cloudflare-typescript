@@ -14,6 +14,7 @@ export class BGP extends APIResource {
 export namespace BGP {
   export import Bindings = BindingsAPI.Bindings;
   export import ServiceBinding = BindingsAPI.ServiceBinding;
+  export import BindingDeleteResponse = BindingsAPI.BindingDeleteResponse;
   export import ServiceBindingsSinglePage = BindingsAPI.ServiceBindingsSinglePage;
   export import BindingCreateParams = BindingsAPI.BindingCreateParams;
   export import BindingListParams = BindingsAPI.BindingListParams;

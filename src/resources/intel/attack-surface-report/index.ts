@@ -9,6 +9,7 @@ export {
   Subject,
   IssueListResponse,
   IssueClassResponse,
+  IssueDismissResponse,
   IssueSeverityResponse,
   IssueTypeResponse,
   IssueListParams,

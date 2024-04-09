@@ -30,13 +30,13 @@ export class Downloads extends APIResource {
     identifier: string,
     params: DownloadDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef602dd5f63eab958d53da61434dec08f0> {
+  ): Core.APIPromise<DownloadDeleteResponse> {
     const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/stream/${identifier}/downloads`,
         options,
-      ) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef602dd5f63eab958d53da61434dec08f0 }>
+      ) as Core.APIPromise<{ result: DownloadDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -56,6 +56,8 @@ export class Downloads extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export type DownloadDeleteResponse = unknown | string;
 
 export interface DownloadCreateParams {
   /**
@@ -84,6 +86,7 @@ export interface DownloadGetParams {
 }
 
 export namespace Downloads {
+  export import DownloadDeleteResponse = DownloadsAPI.DownloadDeleteResponse;
   export import DownloadCreateParams = DownloadsAPI.DownloadCreateParams;
   export import DownloadDeleteParams = DownloadsAPI.DownloadDeleteParams;
   export import DownloadGetParams = DownloadsAPI.DownloadGetParams;

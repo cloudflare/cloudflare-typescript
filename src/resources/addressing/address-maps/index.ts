@@ -1,9 +1,16 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { AccountUpdateParams, AccountDeleteParams, Accounts } from './accounts';
+export {
+  AccountUpdateResponse,
+  AccountDeleteResponse,
+  AccountUpdateParams,
+  AccountDeleteParams,
+  Accounts,
+} from './accounts';
 export {
   AddressMap,
   AddressMapCreateResponse,
+  AddressMapDeleteResponse,
   AddressMapGetResponse,
   AddressMapCreateParams,
   AddressMapListParams,
@@ -13,5 +20,5 @@ export {
   AddressMapsSinglePage,
   AddressMaps,
 } from './address-maps';
-export { IPUpdateParams, IPDeleteParams, IPs } from './ips';
-export { ZoneUpdateParams, ZoneDeleteParams, Zones } from './zones';
+export { IPUpdateResponse, IPDeleteResponse, IPUpdateParams, IPDeleteParams, IPs } from './ips';
+export { ZoneUpdateResponse, ZoneDeleteResponse, ZoneUpdateParams, ZoneDeleteParams, Zones } from './zones';

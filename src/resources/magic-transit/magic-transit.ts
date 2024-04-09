@@ -48,13 +48,13 @@ export interface HealthCheck {
   /**
    * The type of healthcheck to run, reply or request. The default value is `reply`.
    */
-  type?: UnnamedSchemaRef3b1a76a5e4a139b72ed7d93834773d39;
+  type?: HealthCheckType;
 }
 
 /**
  * The type of healthcheck to run, reply or request. The default value is `reply`.
  */
-export type UnnamedSchemaRef3b1a76a5e4a139b72ed7d93834773d39 = 'reply' | 'request';
+export type HealthCheckType = 'reply' | 'request';
 
 /**
  * How frequent the health check is run. The default value is `mid`.

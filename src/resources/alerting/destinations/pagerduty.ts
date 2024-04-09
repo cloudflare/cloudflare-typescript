@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as PagerdutyAPI from 'cloudflare/resources/alerting/destinations/pagerduty';
-import * as Shared from 'cloudflare/resources/shared';
 
 export class PagerdutyResource extends APIResource {
   /**
@@ -28,13 +27,13 @@ export class PagerdutyResource extends APIResource {
   delete(
     params: PagerdutyDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef67bbb1ccdd42c3e2937b9fd19f791151 | null> {
+  ): Core.APIPromise<PagerdutyDeleteResponse | null> {
     const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/alerting/v3/destinations/pagerduty`,
         options,
-      ) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef67bbb1ccdd42c3e2937b9fd19f791151 | null }>
+      ) as Core.APIPromise<{ result: PagerdutyDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -91,6 +90,8 @@ export interface PagerdutyCreateResponse {
   id?: string;
 }
 
+export type PagerdutyDeleteResponse = unknown | Array<unknown> | string;
+
 export type PagerdutyGetResponse = Array<Pagerduty>;
 
 export interface PagerdutyLinkResponse {
@@ -131,6 +132,7 @@ export interface PagerdutyLinkParams {
 export namespace PagerdutyResource {
   export import Pagerduty = PagerdutyAPI.Pagerduty;
   export import PagerdutyCreateResponse = PagerdutyAPI.PagerdutyCreateResponse;
+  export import PagerdutyDeleteResponse = PagerdutyAPI.PagerdutyDeleteResponse;
   export import PagerdutyGetResponse = PagerdutyAPI.PagerdutyGetResponse;
   export import PagerdutyLinkResponse = PagerdutyAPI.PagerdutyLinkResponse;
   export import PagerdutyCreateParams = PagerdutyAPI.PagerdutyCreateParams;

@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as KeysAPI from 'cloudflare/resources/zero-trust/access/keys';
-import * as Shared from 'cloudflare/resources/shared';
 
 export class Keys extends APIResource {
   /**
@@ -13,10 +12,10 @@ export class Keys extends APIResource {
     identifier: string,
     body: KeyUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f> {
+  ): Core.APIPromise<KeyUpdateResponse> {
     return (
       this._client.put(`/accounts/${identifier}/access/keys`, { body, ...options }) as Core.APIPromise<{
-        result: Shared.UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f;
+        result: KeyUpdateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -24,13 +23,10 @@ export class Keys extends APIResource {
   /**
    * Gets the Access key rotation settings for an account.
    */
-  get(
-    identifier: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f> {
+  get(identifier: string, options?: Core.RequestOptions): Core.APIPromise<KeyGetResponse> {
     return (
       this._client.get(`/accounts/${identifier}/access/keys`, options) as Core.APIPromise<{
-        result: Shared.UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f;
+        result: KeyGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -38,17 +34,20 @@ export class Keys extends APIResource {
   /**
    * Perfoms a key rotation for an account.
    */
-  rotate(
-    identifier: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f> {
+  rotate(identifier: string, options?: Core.RequestOptions): Core.APIPromise<KeyRotateResponse> {
     return (
       this._client.post(`/accounts/${identifier}/access/keys/rotate`, options) as Core.APIPromise<{
-        result: Shared.UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f;
+        result: KeyRotateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export type KeyUpdateResponse = unknown | string;
+
+export type KeyGetResponse = unknown | string;
+
+export type KeyRotateResponse = unknown | string;
 
 export interface KeyUpdateParams {
   /**
@@ -58,5 +57,8 @@ export interface KeyUpdateParams {
 }
 
 export namespace Keys {
+  export import KeyUpdateResponse = KeysAPI.KeyUpdateResponse;
+  export import KeyGetResponse = KeysAPI.KeyGetResponse;
+  export import KeyRotateResponse = KeysAPI.KeyRotateResponse;
   export import KeyUpdateParams = KeysAPI.KeyUpdateParams;
 }

@@ -13,8 +13,8 @@ export class Cache extends APIResource {
     this._client,
   );
   variants: VariantsAPI.Variants = new VariantsAPI.Variants(this._client);
-  regionalTieredCache: RegionalTieredCacheAPI.RegionalTieredCache =
-    new RegionalTieredCacheAPI.RegionalTieredCache(this._client);
+  regionalTieredCache: RegionalTieredCacheAPI.RegionalTieredCacheResource =
+    new RegionalTieredCacheAPI.RegionalTieredCacheResource(this._client);
 
   /**
    * ### Purge All Cached Content
@@ -166,8 +166,8 @@ export namespace Cache {
   export import VariantDeleteParams = VariantsAPI.VariantDeleteParams;
   export import VariantEditParams = VariantsAPI.VariantEditParams;
   export import VariantGetParams = VariantsAPI.VariantGetParams;
+  export import RegionalTieredCacheResource = RegionalTieredCacheAPI.RegionalTieredCacheResource;
   export import RegionalTieredCache = RegionalTieredCacheAPI.RegionalTieredCache;
-  export import UnnamedSchemaRef6535d2df7d4d089d21166bd140651307 = RegionalTieredCacheAPI.UnnamedSchemaRef6535d2df7d4d089d21166bd140651307;
   export import RegionalTieredCacheEditResponse = RegionalTieredCacheAPI.RegionalTieredCacheEditResponse;
   export import RegionalTieredCacheGetResponse = RegionalTieredCacheAPI.RegionalTieredCacheGetResponse;
   export import RegionalTieredCacheEditParams = RegionalTieredCacheAPI.RegionalTieredCacheEditParams;

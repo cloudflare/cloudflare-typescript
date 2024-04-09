@@ -4,7 +4,7 @@ export {
   Override,
   RewriteAction,
   Rules,
-  URLsItems,
+  URLs,
   OverrideDeleteResponse,
   OverrideCreateParams,
   OverrideUpdateParams,

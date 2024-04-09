@@ -6,6 +6,8 @@ export {
   ActivationCheck,
 } from './activation-check';
 export {
+  CustomNameserverUpdateResponse,
+  CustomNameserverGetResponse,
   CustomNameserverUpdateParams,
   CustomNameserverGetParams,
   CustomNameservers,

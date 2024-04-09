@@ -2,22 +2,18 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as Shared from 'cloudflare/resources/shared';
-import { UnnamedSchemaRef413ab4522f0bb93f63444799121fe2f8sV4PagePaginationArray } from 'cloudflare/resources/shared';
-import { type V4PagePaginationArrayParams } from 'cloudflare/pagination';
+import * as TunnelsAPI from 'cloudflare/resources/zero-trust/tunnels/tunnels';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
-export class WARPConnector extends APIResource {
+export class WARPConnectorResource extends APIResource {
   /**
    * Creates a new Warp Connector Tunnel in an account.
    */
-  create(
-    params: WARPConnectorCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef413ab4522f0bb93f63444799121fe2f8> {
+  create(params: WARPConnectorCreateParams, options?: Core.RequestOptions): Core.APIPromise<WARPConnector> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/warp_connector`, { body, ...options }) as Core.APIPromise<{
-        result: Shared.UnnamedSchemaRef413ab4522f0bb93f63444799121fe2f8;
+        result: WARPConnector;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -28,14 +24,11 @@ export class WARPConnector extends APIResource {
   list(
     params: WARPConnectorListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<
-    UnnamedSchemaRef413ab4522f0bb93f63444799121fe2f8sV4PagePaginationArray,
-    Shared.UnnamedSchemaRef413ab4522f0bb93f63444799121fe2f8
-  > {
+  ): Core.PagePromise<WARPConnectorsV4PagePaginationArray, WARPConnector> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/warp_connector`,
-      UnnamedSchemaRef413ab4522f0bb93f63444799121fe2f8sV4PagePaginationArray,
+      WARPConnectorsV4PagePaginationArray,
       { query, ...options },
     );
   }
@@ -47,13 +40,13 @@ export class WARPConnector extends APIResource {
     tunnelId: string,
     params: WARPConnectorDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef413ab4522f0bb93f63444799121fe2f8> {
+  ): Core.APIPromise<WARPConnector> {
     const { account_id, body } = params;
     return (
       this._client.delete(`/accounts/${account_id}/warp_connector/${tunnelId}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef413ab4522f0bb93f63444799121fe2f8 }>
+      }) as Core.APIPromise<{ result: WARPConnector }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -64,13 +57,13 @@ export class WARPConnector extends APIResource {
     tunnelId: string,
     params: WARPConnectorEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef413ab4522f0bb93f63444799121fe2f8> {
+  ): Core.APIPromise<WARPConnector> {
     const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/warp_connector/${tunnelId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef413ab4522f0bb93f63444799121fe2f8 }>
+      }) as Core.APIPromise<{ result: WARPConnector }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -81,11 +74,11 @@ export class WARPConnector extends APIResource {
     tunnelId: string,
     params: WARPConnectorGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef413ab4522f0bb93f63444799121fe2f8> {
+  ): Core.APIPromise<WARPConnector> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/warp_connector/${tunnelId}`, options) as Core.APIPromise<{
-        result: Shared.UnnamedSchemaRef413ab4522f0bb93f63444799121fe2f8;
+        result: WARPConnector;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -106,6 +99,134 @@ export class WARPConnector extends APIResource {
         options,
       ) as Core.APIPromise<{ result: WARPConnectorTokenResponse }>
     )._thenUnwrap((obj) => obj.result);
+  }
+}
+
+export class WARPConnectorsV4PagePaginationArray extends V4PagePaginationArray<WARPConnector> {}
+
+/**
+ * A Cloudflare Tunnel that connects your origin to Cloudflare's edge.
+ */
+export type WARPConnector = WARPConnector.TunnelCfdTunnel | TunnelsAPI.WARPConnectorTunnel;
+
+export namespace WARPConnector {
+  /**
+   * A Cloudflare Tunnel that connects your origin to Cloudflare's edge.
+   */
+  export interface TunnelCfdTunnel {
+    /**
+     * UUID of the tunnel.
+     */
+    id?: string;
+
+    /**
+     * Cloudflare account ID
+     */
+    account_tag?: string;
+
+    /**
+     * The Cloudflare Tunnel connections between your origin and Cloudflare's edge.
+     */
+    connections?: Array<TunnelCfdTunnel.Connection>;
+
+    /**
+     * Timestamp of when the tunnel established at least one connection to Cloudflare's
+     * edge. If `null`, the tunnel is inactive.
+     */
+    conns_active_at?: string | null;
+
+    /**
+     * Timestamp of when the tunnel became inactive (no connections to Cloudflare's
+     * edge). If `null`, the tunnel is active.
+     */
+    conns_inactive_at?: string | null;
+
+    /**
+     * Timestamp of when the tunnel was created.
+     */
+    created_at?: string;
+
+    /**
+     * Timestamp of when the tunnel was deleted. If `null`, the tunnel has not been
+     * deleted.
+     */
+    deleted_at?: string | null;
+
+    /**
+     * Metadata associated with the tunnel.
+     */
+    metadata?: unknown;
+
+    /**
+     * A user-friendly name for the tunnel.
+     */
+    name?: string;
+
+    /**
+     * If `true`, the tunnel can be configured remotely from the Zero Trust dashboard.
+     * If `false`, the tunnel must be configured locally on the origin machine.
+     */
+    remote_config?: boolean;
+
+    /**
+     * The status of the tunnel. Valid values are `inactive` (tunnel has never been
+     * run), `degraded` (tunnel is active and able to serve traffic but in an unhealthy
+     * state), `healthy` (tunnel is active and able to serve traffic), or `down`
+     * (tunnel can not serve traffic as it has no connections to the Cloudflare Edge).
+     */
+    status?: string;
+
+    /**
+     * The type of tunnel.
+     */
+    tun_type?: 'cfd_tunnel' | 'warp_connector' | 'ip_sec' | 'gre' | 'cni';
+  }
+
+  export namespace TunnelCfdTunnel {
+    export interface Connection {
+      /**
+       * UUID of the Cloudflare Tunnel connection.
+       */
+      id?: string;
+
+      /**
+       * UUID of the cloudflared instance.
+       */
+      client_id?: unknown;
+
+      /**
+       * The cloudflared version used to establish this connection.
+       */
+      client_version?: string;
+
+      /**
+       * The Cloudflare data center used for this connection.
+       */
+      colo_name?: string;
+
+      /**
+       * Cloudflare continues to track connections for several minutes after they
+       * disconnect. This is an optimization to improve latency and reliability of
+       * reconnecting. If `true`, the connection has disconnected but is still being
+       * tracked. If `false`, the connection is actively serving traffic.
+       */
+      is_pending_reconnect?: boolean;
+
+      /**
+       * Timestamp of when the connection was established.
+       */
+      opened_at?: string;
+
+      /**
+       * The public IP address of the host running cloudflared.
+       */
+      origin_ip?: string;
+
+      /**
+       * UUID of the Cloudflare Tunnel connection.
+       */
+      uuid?: string;
+    }
   }
 }
 
@@ -215,5 +336,3 @@ export interface WARPConnectorTokenParams {
    */
   account_id: string;
 }
-
-export { UnnamedSchemaRef413ab4522f0bb93f63444799121fe2f8sV4PagePaginationArray };

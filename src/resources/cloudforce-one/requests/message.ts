@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as MessageAPI from 'cloudflare/resources/cloudforce-one/requests/message';
-import * as Shared from 'cloudflare/resources/shared';
 
 export class MessageResource extends APIResource {
   /**
@@ -51,12 +50,12 @@ export class MessageResource extends APIResource {
     requestIdentifier: string,
     messageIdentifer: number,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRefEc4d85c3d1bcc6b3b7e99c199ae99846> {
+  ): Core.APIPromise<MessageDeleteResponse> {
     return (
       this._client.delete(
         `/accounts/${accountIdentifier}/cloudforce-one/requests/${requestIdentifier}/message/${messageIdentifer}`,
         options,
-      ) as Core.APIPromise<{ result: Shared.UnnamedSchemaRefEc4d85c3d1bcc6b3b7e99c199ae99846 }>
+      ) as Core.APIPromise<{ result: MessageDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -109,6 +108,8 @@ export interface Message {
    */
   created?: string;
 }
+
+export type MessageDeleteResponse = unknown | Array<unknown> | string;
 
 export type MessageGetResponse = Array<Message>;
 
@@ -180,6 +181,7 @@ export interface MessageGetParams {
 
 export namespace MessageResource {
   export import Message = MessageAPI.Message;
+  export import MessageDeleteResponse = MessageAPI.MessageDeleteResponse;
   export import MessageGetResponse = MessageAPI.MessageGetResponse;
   export import MessageCreateParams = MessageAPI.MessageCreateParams;
   export import MessageUpdateParams = MessageAPI.MessageUpdateParams;

@@ -10,13 +10,13 @@ export {
   BucketsCursorPagination,
   Buckets,
 } from './buckets';
-export { R2 } from './r2';
 export {
+  Provider,
   Sippy,
-  UnnamedSchemaRef6430970563db310f19d39aafe3debd27,
   SippyDeleteResponse,
   SippyUpdateParams,
   SippyDeleteParams,
   SippyGetParams,
   SippyResource,
 } from './sippy';
+export { R2 } from './r2';
