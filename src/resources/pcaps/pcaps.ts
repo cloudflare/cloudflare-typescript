@@ -53,36 +53,6 @@ export class PCAPs extends APIResource {
 
 export class PCAPListResponsesSinglePage extends SinglePage<PCAPListResponse> {}
 
-/**
- * The packet capture filter. When this field is empty, all packets are captured.
- */
-export interface Filter {
-  /**
-   * The destination IP address of the packet.
-   */
-  destination_address?: string;
-
-  /**
-   * The destination port of the packet.
-   */
-  destination_port?: number;
-
-  /**
-   * The protocol number of the packet.
-   */
-  protocol?: number;
-
-  /**
-   * The source IP address of the packet.
-   */
-  source_address?: string;
-
-  /**
-   * The source port of the packet.
-   */
-  source_port?: number;
-}
-
 export interface PCAP {
   /**
    * The ID for the packet capture.
@@ -92,7 +62,7 @@ export interface PCAP {
   /**
    * The packet capture filter. When this field is empty, all packets are captured.
    */
-  filter_v1?: Filter;
+  filter_v1?: PCAPFilter;
 
   /**
    * The status of the packet capture request.
@@ -127,6 +97,36 @@ export interface PCAP {
    * captures entire payloads and non-sampled packets.
    */
   type?: 'simple' | 'full';
+}
+
+/**
+ * The packet capture filter. When this field is empty, all packets are captured.
+ */
+export interface PCAPFilter {
+  /**
+   * The destination IP address of the packet.
+   */
+  destination_address?: string;
+
+  /**
+   * The destination port of the packet.
+   */
+  destination_port?: number;
+
+  /**
+   * The protocol number of the packet.
+   */
+  protocol?: number;
+
+  /**
+   * The source IP address of the packet.
+   */
+  source_address?: string;
+
+  /**
+   * The source port of the packet.
+   */
+  source_port?: number;
 }
 
 export type PCAPCreateResponse = PCAP | PCAPCreateResponse.MagicVisibilityPCAPsResponseFull;
@@ -165,7 +165,7 @@ export namespace PCAPCreateResponse {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: PCAPsAPI.Filter;
+    filter_v1?: PCAPsAPI.PCAPFilter;
 
     /**
      * The status of the packet capture request.
@@ -239,7 +239,7 @@ export namespace PCAPListResponse {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: PCAPsAPI.Filter;
+    filter_v1?: PCAPsAPI.PCAPFilter;
 
     /**
      * The status of the packet capture request.
@@ -313,7 +313,7 @@ export namespace PCAPGetResponse {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: PCAPsAPI.Filter;
+    filter_v1?: PCAPsAPI.PCAPFilter;
 
     /**
      * The status of the packet capture request.
@@ -387,7 +387,7 @@ export namespace PCAPCreateParams {
      * Body param: The packet capture filter. When this field is empty, all packets are
      * captured.
      */
-    filter_v1?: Filter;
+    filter_v1?: PCAPFilter;
   }
 
   export interface MagicVisibilityPCAPsRequestFull {
@@ -435,7 +435,7 @@ export namespace PCAPCreateParams {
      * Body param: The packet capture filter. When this field is empty, all packets are
      * captured.
      */
-    filter_v1?: Filter;
+    filter_v1?: PCAPFilter;
 
     /**
      * Body param: The limit of packets contained in a packet capture.

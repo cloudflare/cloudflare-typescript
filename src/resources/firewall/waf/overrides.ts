@@ -158,7 +158,7 @@ export interface Override {
    * group that this WAF rule belongs to. When creating a new URI-based WAF override,
    * you must provide a `groups` object or a `rules` object.
    */
-  rules?: Rules;
+  rules?: WAFRule;
 
   /**
    * The URLs to include in the current WAF override. You can use wildcards. Each
@@ -190,6 +190,8 @@ export interface RewriteAction {
   simulate?: string;
 }
 
+export type URLs = string;
+
 /**
  * An object that allows you to override the action of specific WAF rules. Each key
  * of this object must be the ID of a WAF rule, and each value must be a valid WAF
@@ -197,9 +199,7 @@ export interface RewriteAction {
  * group that this WAF rule belongs to. When creating a new URI-based WAF override,
  * you must provide a `groups` object or a `rules` object.
  */
-export type Rules = Record<string, 'challenge' | 'block' | 'simulate' | 'disable' | 'default'>;
-
-export type URLs = string;
+export type WAFRule = Record<string, 'challenge' | 'block' | 'simulate' | 'disable' | 'default'>;
 
 export interface OverrideDeleteResponse {
   /**
@@ -219,8 +219,8 @@ export type OverrideDeleteParams = unknown;
 export namespace Overrides {
   export import Override = OverridesAPI.Override;
   export import RewriteAction = OverridesAPI.RewriteAction;
-  export import Rules = OverridesAPI.Rules;
   export import URLs = OverridesAPI.URLs;
+  export import WAFRule = OverridesAPI.WAFRule;
   export import OverrideDeleteResponse = OverridesAPI.OverrideDeleteResponse;
   export import OverridesV4PagePaginationArray = OverridesAPI.OverridesV4PagePaginationArray;
   export import OverrideCreateParams = OverridesAPI.OverrideCreateParams;

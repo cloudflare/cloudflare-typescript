@@ -29,10 +29,10 @@ export class Filters extends APIResource {
     id: string,
     body: FilterUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Filter> {
+  ): Core.APIPromise<FirewallFilter> {
     return (
       this._client.put(`/zones/${zoneIdentifier}/filters/${id}`, { body, ...options }) as Core.APIPromise<{
-        result: Filter;
+        result: FirewallFilter;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -45,20 +45,20 @@ export class Filters extends APIResource {
     zoneIdentifier: string,
     query?: FilterListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<FiltersV4PagePaginationArray, Filter>;
+  ): Core.PagePromise<FirewallFiltersV4PagePaginationArray, FirewallFilter>;
   list(
     zoneIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<FiltersV4PagePaginationArray, Filter>;
+  ): Core.PagePromise<FirewallFiltersV4PagePaginationArray, FirewallFilter>;
   list(
     zoneIdentifier: string,
     query: FilterListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<FiltersV4PagePaginationArray, Filter> {
+  ): Core.PagePromise<FirewallFiltersV4PagePaginationArray, FirewallFilter> {
     if (isRequestOptions(query)) {
       return this.list(zoneIdentifier, {}, query);
     }
-    return this._client.getAPIList(`/zones/${zoneIdentifier}/filters`, FiltersV4PagePaginationArray, {
+    return this._client.getAPIList(`/zones/${zoneIdentifier}/filters`, FirewallFiltersV4PagePaginationArray, {
       query,
       ...options,
     });
@@ -72,10 +72,10 @@ export class Filters extends APIResource {
     id: string,
     body: FilterDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Filter> {
+  ): Core.APIPromise<FirewallFilter> {
     return (
       this._client.delete(`/zones/${zoneIdentifier}/filters/${id}`, { body, ...options }) as Core.APIPromise<{
-        result: Filter;
+        result: FirewallFilter;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -83,18 +83,18 @@ export class Filters extends APIResource {
   /**
    * Fetches the details of a filter.
    */
-  get(zoneIdentifier: string, id: string, options?: Core.RequestOptions): Core.APIPromise<Filter> {
+  get(zoneIdentifier: string, id: string, options?: Core.RequestOptions): Core.APIPromise<FirewallFilter> {
     return (
       this._client.get(`/zones/${zoneIdentifier}/filters/${id}`, options) as Core.APIPromise<{
-        result: Filter;
+        result: FirewallFilter;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class FiltersV4PagePaginationArray extends V4PagePaginationArray<Filter> {}
+export class FirewallFiltersV4PagePaginationArray extends V4PagePaginationArray<FirewallFilter> {}
 
-export interface Filter {
+export interface FirewallFilter {
   /**
    * The unique identifier of the filter.
    */
@@ -122,7 +122,7 @@ export interface Filter {
   ref?: string;
 }
 
-export type FilterCreateResponse = Array<Filter>;
+export type FilterCreateResponse = Array<FirewallFilter>;
 
 export type FilterCreateParams = unknown;
 

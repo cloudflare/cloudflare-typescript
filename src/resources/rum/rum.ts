@@ -20,7 +20,7 @@ export namespace RUM {
   export import SiteInfoDeleteParams = SiteInfoAPI.SiteInfoDeleteParams;
   export import SiteInfoGetParams = SiteInfoAPI.SiteInfoGetParams;
   export import Rules = RulesAPI.Rules;
-  export import Rule = RulesAPI.Rule;
+  export import RUMRule = RulesAPI.RUMRule;
   export import RuleListResponse = RulesAPI.RuleListResponse;
   export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
   export import RuleCreateParams = RulesAPI.RuleCreateParams;

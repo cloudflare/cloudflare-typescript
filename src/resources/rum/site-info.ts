@@ -89,7 +89,7 @@ export interface Site {
   /**
    * A list of rules.
    */
-  rules?: Array<RulesAPI.Rule>;
+  rules?: Array<RulesAPI.RUMRule>;
 
   ruleset?: Site.Ruleset;
 

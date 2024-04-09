@@ -85,11 +85,127 @@ export class Policies extends APIResource {
 export class PoliciesSinglePage extends SinglePage<Policy> {}
 
 /**
+ * List of IDs that will be used when dispatching a notification. IDs for email
+ * type will be the email address.
+ */
+export type Mechanism = Record<string, Array<Mechanism.UnnamedSchemaWithMapParent1>>;
+
+export namespace Mechanism {
+  export interface UnnamedSchemaWithMapParent1 {
+    /**
+     * UUID
+     */
+    id?: string | string;
+  }
+}
+
+export interface Policy {
+  /**
+   * The unique identifier of a notification policy
+   */
+  id?: string;
+
+  /**
+   * Refers to which event will trigger a Notification dispatch. You can use the
+   * endpoint to get available alert types which then will give you a list of
+   * possible values.
+   */
+  alert_type?:
+    | 'access_custom_certificate_expiration_type'
+    | 'advanced_ddos_attack_l4_alert'
+    | 'advanced_ddos_attack_l7_alert'
+    | 'advanced_http_alert_error'
+    | 'bgp_hijack_notification'
+    | 'billing_usage_alert'
+    | 'block_notification_block_removed'
+    | 'block_notification_new_block'
+    | 'block_notification_review_rejected'
+    | 'brand_protection_alert'
+    | 'brand_protection_digest'
+    | 'clickhouse_alert_fw_anomaly'
+    | 'clickhouse_alert_fw_ent_anomaly'
+    | 'custom_ssl_certificate_event_type'
+    | 'dedicated_ssl_certificate_event_type'
+    | 'dos_attack_l4'
+    | 'dos_attack_l7'
+    | 'expiring_service_token_alert'
+    | 'failing_logpush_job_disabled_alert'
+    | 'fbm_auto_advertisement'
+    | 'fbm_dosd_attack'
+    | 'fbm_volumetric_attack'
+    | 'health_check_status_notification'
+    | 'hostname_aop_custom_certificate_expiration_type'
+    | 'http_alert_edge_error'
+    | 'http_alert_origin_error'
+    | 'incident_alert'
+    | 'load_balancing_health_alert'
+    | 'load_balancing_pool_enablement_alert'
+    | 'logo_match_alert'
+    | 'magic_tunnel_health_check_event'
+    | 'maintenance_event_notification'
+    | 'mtls_certificate_store_certificate_expiration_type'
+    | 'pages_event_alert'
+    | 'radar_notification'
+    | 'real_origin_monitoring'
+    | 'scriptmonitor_alert_new_code_change_detections'
+    | 'scriptmonitor_alert_new_hosts'
+    | 'scriptmonitor_alert_new_malicious_hosts'
+    | 'scriptmonitor_alert_new_malicious_scripts'
+    | 'scriptmonitor_alert_new_malicious_url'
+    | 'scriptmonitor_alert_new_max_length_resource_url'
+    | 'scriptmonitor_alert_new_resources'
+    | 'secondary_dns_all_primaries_failing'
+    | 'secondary_dns_primaries_failing'
+    | 'secondary_dns_zone_successfully_updated'
+    | 'secondary_dns_zone_validation_warning'
+    | 'sentinel_alert'
+    | 'stream_live_notifications'
+    | 'traffic_anomalies_alert'
+    | 'tunnel_health_event'
+    | 'tunnel_update_event'
+    | 'universal_ssl_event_type'
+    | 'web_analytics_metrics_update'
+    | 'zone_aop_custom_certificate_expiration_type';
+
+  created?: string;
+
+  /**
+   * Optional description for the Notification policy.
+   */
+  description?: string;
+
+  /**
+   * Whether or not the Notification policy is enabled.
+   */
+  enabled?: boolean;
+
+  /**
+   * Optional filters that allow you to be alerted only on a subset of events for
+   * that alert type based on some criteria. This is only available for select alert
+   * types. See alert type documentation for more details.
+   */
+  filters?: PolicyFilter;
+
+  /**
+   * List of IDs that will be used when dispatching a notification. IDs for email
+   * type will be the email address.
+   */
+  mechanisms?: Mechanism;
+
+  modified?: string;
+
+  /**
+   * Name of the policy.
+   */
+  name?: string;
+}
+
+/**
  * Optional filters that allow you to be alerted only on a subset of events for
  * that alert type based on some criteria. This is only available for select alert
  * types. See alert type documentation for more details.
  */
-export interface Filter {
+export interface PolicyFilter {
   /**
    * Usage depends on specific alert type
    */
@@ -294,122 +410,6 @@ export interface Filter {
   zones?: Array<string>;
 }
 
-/**
- * List of IDs that will be used when dispatching a notification. IDs for email
- * type will be the email address.
- */
-export type Mechanism = Record<string, Array<Mechanism.UnnamedSchemaWithMapParent1>>;
-
-export namespace Mechanism {
-  export interface UnnamedSchemaWithMapParent1 {
-    /**
-     * UUID
-     */
-    id?: string | string;
-  }
-}
-
-export interface Policy {
-  /**
-   * The unique identifier of a notification policy
-   */
-  id?: string;
-
-  /**
-   * Refers to which event will trigger a Notification dispatch. You can use the
-   * endpoint to get available alert types which then will give you a list of
-   * possible values.
-   */
-  alert_type?:
-    | 'access_custom_certificate_expiration_type'
-    | 'advanced_ddos_attack_l4_alert'
-    | 'advanced_ddos_attack_l7_alert'
-    | 'advanced_http_alert_error'
-    | 'bgp_hijack_notification'
-    | 'billing_usage_alert'
-    | 'block_notification_block_removed'
-    | 'block_notification_new_block'
-    | 'block_notification_review_rejected'
-    | 'brand_protection_alert'
-    | 'brand_protection_digest'
-    | 'clickhouse_alert_fw_anomaly'
-    | 'clickhouse_alert_fw_ent_anomaly'
-    | 'custom_ssl_certificate_event_type'
-    | 'dedicated_ssl_certificate_event_type'
-    | 'dos_attack_l4'
-    | 'dos_attack_l7'
-    | 'expiring_service_token_alert'
-    | 'failing_logpush_job_disabled_alert'
-    | 'fbm_auto_advertisement'
-    | 'fbm_dosd_attack'
-    | 'fbm_volumetric_attack'
-    | 'health_check_status_notification'
-    | 'hostname_aop_custom_certificate_expiration_type'
-    | 'http_alert_edge_error'
-    | 'http_alert_origin_error'
-    | 'incident_alert'
-    | 'load_balancing_health_alert'
-    | 'load_balancing_pool_enablement_alert'
-    | 'logo_match_alert'
-    | 'magic_tunnel_health_check_event'
-    | 'maintenance_event_notification'
-    | 'mtls_certificate_store_certificate_expiration_type'
-    | 'pages_event_alert'
-    | 'radar_notification'
-    | 'real_origin_monitoring'
-    | 'scriptmonitor_alert_new_code_change_detections'
-    | 'scriptmonitor_alert_new_hosts'
-    | 'scriptmonitor_alert_new_malicious_hosts'
-    | 'scriptmonitor_alert_new_malicious_scripts'
-    | 'scriptmonitor_alert_new_malicious_url'
-    | 'scriptmonitor_alert_new_max_length_resource_url'
-    | 'scriptmonitor_alert_new_resources'
-    | 'secondary_dns_all_primaries_failing'
-    | 'secondary_dns_primaries_failing'
-    | 'secondary_dns_zone_successfully_updated'
-    | 'secondary_dns_zone_validation_warning'
-    | 'sentinel_alert'
-    | 'stream_live_notifications'
-    | 'traffic_anomalies_alert'
-    | 'tunnel_health_event'
-    | 'tunnel_update_event'
-    | 'universal_ssl_event_type'
-    | 'web_analytics_metrics_update'
-    | 'zone_aop_custom_certificate_expiration_type';
-
-  created?: string;
-
-  /**
-   * Optional description for the Notification policy.
-   */
-  description?: string;
-
-  /**
-   * Whether or not the Notification policy is enabled.
-   */
-  enabled?: boolean;
-
-  /**
-   * Optional filters that allow you to be alerted only on a subset of events for
-   * that alert type based on some criteria. This is only available for select alert
-   * types. See alert type documentation for more details.
-   */
-  filters?: Filter;
-
-  /**
-   * List of IDs that will be used when dispatching a notification. IDs for email
-   * type will be the email address.
-   */
-  mechanisms?: Mechanism;
-
-  modified?: string;
-
-  /**
-   * Name of the policy.
-   */
-  name?: string;
-}
-
 export interface PolicyCreateResponse {
   /**
    * UUID
@@ -520,7 +520,7 @@ export interface PolicyCreateParams {
    * events for that alert type based on some criteria. This is only available for
    * select alert types. See alert type documentation for more details.
    */
-  filters?: Filter;
+  filters?: PolicyFilter;
 }
 
 export interface PolicyUpdateParams {
@@ -606,7 +606,7 @@ export interface PolicyUpdateParams {
    * events for that alert type based on some criteria. This is only available for
    * select alert types. See alert type documentation for more details.
    */
-  filters?: Filter;
+  filters?: PolicyFilter;
 
   /**
    * Body param: List of IDs that will be used when dispatching a notification. IDs
@@ -642,9 +642,9 @@ export interface PolicyGetParams {
 }
 
 export namespace Policies {
-  export import Filter = PoliciesAPI.Filter;
   export import Mechanism = PoliciesAPI.Mechanism;
   export import Policy = PoliciesAPI.Policy;
+  export import PolicyFilter = PoliciesAPI.PolicyFilter;
   export import PolicyCreateResponse = PoliciesAPI.PolicyCreateResponse;
   export import PolicyUpdateResponse = PoliciesAPI.PolicyUpdateResponse;
   export import PolicyDeleteResponse = PoliciesAPI.PolicyDeleteResponse;

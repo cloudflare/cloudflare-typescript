@@ -1491,16 +1491,16 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/filters.ts">Filter</a></code>
+- <code><a href="./src/resources/filters.ts">FirewallFilter</a></code>
 - <code><a href="./src/resources/filters.ts">FilterCreateResponse</a></code>
 
 Methods:
 
 - <code title="post /zones/{zone_identifier}/filters">client.filters.<a href="./src/resources/filters.ts">create</a>(zoneIdentifier, { ...params }) -> FilterCreateResponse | null</code>
-- <code title="put /zones/{zone_identifier}/filters/{id}">client.filters.<a href="./src/resources/filters.ts">update</a>(zoneIdentifier, id, { ...params }) -> Filter</code>
-- <code title="get /zones/{zone_identifier}/filters">client.filters.<a href="./src/resources/filters.ts">list</a>(zoneIdentifier, { ...params }) -> FiltersV4PagePaginationArray</code>
-- <code title="delete /zones/{zone_identifier}/filters/{id}">client.filters.<a href="./src/resources/filters.ts">delete</a>(zoneIdentifier, id, { ...params }) -> Filter</code>
-- <code title="get /zones/{zone_identifier}/filters/{id}">client.filters.<a href="./src/resources/filters.ts">get</a>(zoneIdentifier, id) -> Filter</code>
+- <code title="put /zones/{zone_identifier}/filters/{id}">client.filters.<a href="./src/resources/filters.ts">update</a>(zoneIdentifier, id, { ...params }) -> FirewallFilter</code>
+- <code title="get /zones/{zone_identifier}/filters">client.filters.<a href="./src/resources/filters.ts">list</a>(zoneIdentifier, { ...params }) -> FirewallFiltersV4PagePaginationArray</code>
+- <code title="delete /zones/{zone_identifier}/filters/{id}">client.filters.<a href="./src/resources/filters.ts">delete</a>(zoneIdentifier, id, { ...params }) -> FirewallFilter</code>
+- <code title="get /zones/{zone_identifier}/filters/{id}">client.filters.<a href="./src/resources/filters.ts">get</a>(zoneIdentifier, id) -> FirewallFilter</code>
 
 # Firewall
 
@@ -1527,8 +1527,8 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/firewall/rules.ts">FirewallRule</a></code>
 - <code><a href="./src/resources/firewall/rules.ts">Products</a></code>
-- <code><a href="./src/resources/firewall/rules.ts">Rule</a></code>
 - <code><a href="./src/resources/firewall/rules.ts">DeletedFilter</a></code>
 - <code><a href="./src/resources/firewall/rules.ts">RuleCreateResponse</a></code>
 - <code><a href="./src/resources/firewall/rules.ts">RuleEditResponse</a></code>
@@ -1536,11 +1536,11 @@ Types:
 Methods:
 
 - <code title="post /zones/{zone_identifier}/firewall/rules">client.firewall.rules.<a href="./src/resources/firewall/rules.ts">create</a>(zoneIdentifier, { ...params }) -> RuleCreateResponse | null</code>
-- <code title="put /zones/{zone_identifier}/firewall/rules/{id}">client.firewall.rules.<a href="./src/resources/firewall/rules.ts">update</a>(zoneIdentifier, id, { ...params }) -> Rule</code>
-- <code title="get /zones/{zone_identifier}/firewall/rules">client.firewall.rules.<a href="./src/resources/firewall/rules.ts">list</a>(zoneIdentifier, { ...params }) -> RulesV4PagePaginationArray</code>
-- <code title="delete /zones/{zone_identifier}/firewall/rules/{id}">client.firewall.rules.<a href="./src/resources/firewall/rules.ts">delete</a>(zoneIdentifier, id, { ...params }) -> Rule</code>
+- <code title="put /zones/{zone_identifier}/firewall/rules/{id}">client.firewall.rules.<a href="./src/resources/firewall/rules.ts">update</a>(zoneIdentifier, id, { ...params }) -> FirewallRule</code>
+- <code title="get /zones/{zone_identifier}/firewall/rules">client.firewall.rules.<a href="./src/resources/firewall/rules.ts">list</a>(zoneIdentifier, { ...params }) -> FirewallRulesV4PagePaginationArray</code>
+- <code title="delete /zones/{zone_identifier}/firewall/rules/{id}">client.firewall.rules.<a href="./src/resources/firewall/rules.ts">delete</a>(zoneIdentifier, id, { ...params }) -> FirewallRule</code>
 - <code title="patch /zones/{zone_identifier}/firewall/rules/{id}">client.firewall.rules.<a href="./src/resources/firewall/rules.ts">edit</a>(zoneIdentifier, id, { ...params }) -> RuleEditResponse | null</code>
-- <code title="get /zones/{zone_identifier}/firewall/rules/{id}">client.firewall.rules.<a href="./src/resources/firewall/rules.ts">get</a>(zoneIdentifier, { ...params }) -> Rule</code>
+- <code title="get /zones/{zone_identifier}/firewall/rules/{id}">client.firewall.rules.<a href="./src/resources/firewall/rules.ts">get</a>(zoneIdentifier, { ...params }) -> FirewallRule</code>
 
 ## AccessRules
 
@@ -1585,8 +1585,8 @@ Types:
 
 - <code><a href="./src/resources/firewall/waf/overrides.ts">Override</a></code>
 - <code><a href="./src/resources/firewall/waf/overrides.ts">RewriteAction</a></code>
-- <code><a href="./src/resources/firewall/waf/overrides.ts">Rules</a></code>
 - <code><a href="./src/resources/firewall/waf/overrides.ts">URLs</a></code>
+- <code><a href="./src/resources/firewall/waf/overrides.ts">WAFRule</a></code>
 - <code><a href="./src/resources/firewall/waf/overrides.ts">OverrideDeleteResponse</a></code>
 
 Methods:
@@ -1626,13 +1626,13 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/firewall/waf/packages/rules.ts">AllowedModesAnomaly</a></code>
-- <code><a href="./src/resources/firewall/waf/packages/rules.ts">Rule</a></code>
 - <code><a href="./src/resources/firewall/waf/packages/rules.ts">UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5</a></code>
+- <code><a href="./src/resources/firewall/waf/packages/rules.ts">RuleListResponse</a></code>
 - <code><a href="./src/resources/firewall/waf/packages/rules.ts">RuleEditResponse</a></code>
 
 Methods:
 
-- <code title="get /zones/{zone_id}/firewall/waf/packages/{package_id}/rules">client.firewall.waf.packages.rules.<a href="./src/resources/firewall/waf/packages/rules.ts">list</a>(packageId, { ...params }) -> RulesV4PagePaginationArray</code>
+- <code title="get /zones/{zone_id}/firewall/waf/packages/{package_id}/rules">client.firewall.waf.packages.rules.<a href="./src/resources/firewall/waf/packages/rules.ts">list</a>(packageId, { ...params }) -> RuleListResponsesV4PagePaginationArray</code>
 - <code title="patch /zones/{zone_id}/firewall/waf/packages/{package_id}/rules/{rule_id}">client.firewall.waf.packages.rules.<a href="./src/resources/firewall/waf/packages/rules.ts">edit</a>(packageId, ruleId, { ...params }) -> RuleEditResponse</code>
 - <code title="get /zones/{zone_id}/firewall/waf/packages/{package_id}/rules/{rule_id}">client.firewall.waf.packages.rules.<a href="./src/resources/firewall/waf/packages/rules.ts">get</a>(packageId, ruleId, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
 
@@ -2092,8 +2092,8 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/waiting-rooms/rules.ts">Rule</a></code>
 - <code><a href="./src/resources/waiting-rooms/rules.ts">UnnamedSchemaRefF1c0ba8f44601f2db2e07b9397b6c430</a></code>
+- <code><a href="./src/resources/waiting-rooms/rules.ts">WaitingRoomRule</a></code>
 - <code><a href="./src/resources/waiting-rooms/rules.ts">RuleCreateResponse</a></code>
 - <code><a href="./src/resources/waiting-rooms/rules.ts">RuleUpdateResponse</a></code>
 - <code><a href="./src/resources/waiting-rooms/rules.ts">RuleDeleteResponse</a></code>
@@ -2103,7 +2103,7 @@ Methods:
 
 - <code title="post /zones/{zone_id}/waiting_rooms/{waiting_room_id}/rules">client.waitingRooms.rules.<a href="./src/resources/waiting-rooms/rules.ts">create</a>(waitingRoomId, { ...params }) -> RuleCreateResponse | null</code>
 - <code title="put /zones/{zone_id}/waiting_rooms/{waiting_room_id}/rules">client.waitingRooms.rules.<a href="./src/resources/waiting-rooms/rules.ts">update</a>(waitingRoomId, [ ...body ]) -> RuleUpdateResponse | null</code>
-- <code title="get /zones/{zone_id}/waiting_rooms/{waiting_room_id}/rules">client.waitingRooms.rules.<a href="./src/resources/waiting-rooms/rules.ts">list</a>(waitingRoomId, { ...params }) -> RulesSinglePage</code>
+- <code title="get /zones/{zone_id}/waiting_rooms/{waiting_room_id}/rules">client.waitingRooms.rules.<a href="./src/resources/waiting-rooms/rules.ts">list</a>(waitingRoomId, { ...params }) -> WaitingRoomRulesSinglePage</code>
 - <code title="delete /zones/{zone_id}/waiting_rooms/{waiting_room_id}/rules/{rule_id}">client.waitingRooms.rules.<a href="./src/resources/waiting-rooms/rules.ts">delete</a>(waitingRoomId, ruleId, { ...params }) -> RuleDeleteResponse | null</code>
 - <code title="patch /zones/{zone_id}/waiting_rooms/{waiting_room_id}/rules/{rule_id}">client.waitingRooms.rules.<a href="./src/resources/waiting-rooms/rules.ts">edit</a>(waitingRoomId, ruleId, { ...params }) -> RuleEditResponse | null</code>
 
@@ -3356,17 +3356,17 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/magic-network-monitoring/rules/rules.ts">Rule</a></code>
+- <code><a href="./src/resources/magic-network-monitoring/rules/rules.ts">MagicNetworkMonitoringRule</a></code>
 - <code><a href="./src/resources/magic-network-monitoring/rules/rules.ts">UnnamedSchemaRef99ba74ba6027c3c87ca03d4e81cfc16d</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/mnm/rules">client.magicNetworkMonitoring.rules.<a href="./src/resources/magic-network-monitoring/rules/rules.ts">create</a>({ ...params }) -> Rule | null</code>
-- <code title="put /accounts/{account_id}/mnm/rules">client.magicNetworkMonitoring.rules.<a href="./src/resources/magic-network-monitoring/rules/rules.ts">update</a>({ ...params }) -> Rule | null</code>
-- <code title="get /accounts/{account_id}/mnm/rules">client.magicNetworkMonitoring.rules.<a href="./src/resources/magic-network-monitoring/rules/rules.ts">list</a>({ ...params }) -> RulesSinglePage</code>
-- <code title="delete /accounts/{account_id}/mnm/rules/{rule_id}">client.magicNetworkMonitoring.rules.<a href="./src/resources/magic-network-monitoring/rules/rules.ts">delete</a>(ruleId, { ...params }) -> Rule | null</code>
-- <code title="patch /accounts/{account_id}/mnm/rules/{rule_id}">client.magicNetworkMonitoring.rules.<a href="./src/resources/magic-network-monitoring/rules/rules.ts">edit</a>(ruleId, { ...params }) -> Rule | null</code>
-- <code title="get /accounts/{account_id}/mnm/rules/{rule_id}">client.magicNetworkMonitoring.rules.<a href="./src/resources/magic-network-monitoring/rules/rules.ts">get</a>(ruleId, { ...params }) -> Rule | null</code>
+- <code title="post /accounts/{account_id}/mnm/rules">client.magicNetworkMonitoring.rules.<a href="./src/resources/magic-network-monitoring/rules/rules.ts">create</a>({ ...params }) -> MagicNetworkMonitoringRule | null</code>
+- <code title="put /accounts/{account_id}/mnm/rules">client.magicNetworkMonitoring.rules.<a href="./src/resources/magic-network-monitoring/rules/rules.ts">update</a>({ ...params }) -> MagicNetworkMonitoringRule | null</code>
+- <code title="get /accounts/{account_id}/mnm/rules">client.magicNetworkMonitoring.rules.<a href="./src/resources/magic-network-monitoring/rules/rules.ts">list</a>({ ...params }) -> MagicNetworkMonitoringRulesSinglePage</code>
+- <code title="delete /accounts/{account_id}/mnm/rules/{rule_id}">client.magicNetworkMonitoring.rules.<a href="./src/resources/magic-network-monitoring/rules/rules.ts">delete</a>(ruleId, { ...params }) -> MagicNetworkMonitoringRule | null</code>
+- <code title="patch /accounts/{account_id}/mnm/rules/{rule_id}">client.magicNetworkMonitoring.rules.<a href="./src/resources/magic-network-monitoring/rules/rules.ts">edit</a>(ruleId, { ...params }) -> MagicNetworkMonitoringRule | null</code>
+- <code title="get /accounts/{account_id}/mnm/rules/{rule_id}">client.magicNetworkMonitoring.rules.<a href="./src/resources/magic-network-monitoring/rules/rules.ts">get</a>(ruleId, { ...params }) -> MagicNetworkMonitoringRule | null</code>
 
 ### Advertisements
 
@@ -3475,8 +3475,8 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/pcaps/pcaps.ts">Filter</a></code>
 - <code><a href="./src/resources/pcaps/pcaps.ts">PCAP</a></code>
+- <code><a href="./src/resources/pcaps/pcaps.ts">PCAPFilter</a></code>
 - <code><a href="./src/resources/pcaps/pcaps.ts">PCAPCreateResponse</a></code>
 - <code><a href="./src/resources/pcaps/pcaps.ts">PCAPListResponse</a></code>
 - <code><a href="./src/resources/pcaps/pcaps.ts">PCAPGetResponse</a></code>
@@ -3857,9 +3857,9 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/alerting/policies.ts">Filter</a></code>
 - <code><a href="./src/resources/alerting/policies.ts">Mechanism</a></code>
 - <code><a href="./src/resources/alerting/policies.ts">Policy</a></code>
+- <code><a href="./src/resources/alerting/policies.ts">PolicyFilter</a></code>
 - <code><a href="./src/resources/alerting/policies.ts">PolicyCreateResponse</a></code>
 - <code><a href="./src/resources/alerting/policies.ts">PolicyUpdateResponse</a></code>
 - <code><a href="./src/resources/alerting/policies.ts">PolicyDeleteResponse</a></code>
@@ -4915,17 +4915,17 @@ Types:
 - <code><a href="./src/resources/zero-trust/gateway/rules.ts">DNSResolverSettingsV4</a></code>
 - <code><a href="./src/resources/zero-trust/gateway/rules.ts">DNSResolverSettingsV6</a></code>
 - <code><a href="./src/resources/zero-trust/gateway/rules.ts">GatewayFilter</a></code>
-- <code><a href="./src/resources/zero-trust/gateway/rules.ts">Rule</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/rules.ts">GatewayRule</a></code>
 - <code><a href="./src/resources/zero-trust/gateway/rules.ts">RuleSetting</a></code>
 - <code><a href="./src/resources/zero-trust/gateway/rules.ts">Schedule</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/gateway/rules">client.zeroTrust.gateway.rules.<a href="./src/resources/zero-trust/gateway/rules.ts">create</a>({ ...params }) -> Rule</code>
-- <code title="put /accounts/{account_id}/gateway/rules/{rule_id}">client.zeroTrust.gateway.rules.<a href="./src/resources/zero-trust/gateway/rules.ts">update</a>(ruleId, { ...params }) -> Rule</code>
-- <code title="get /accounts/{account_id}/gateway/rules">client.zeroTrust.gateway.rules.<a href="./src/resources/zero-trust/gateway/rules.ts">list</a>({ ...params }) -> RulesSinglePage</code>
+- <code title="post /accounts/{account_id}/gateway/rules">client.zeroTrust.gateway.rules.<a href="./src/resources/zero-trust/gateway/rules.ts">create</a>({ ...params }) -> GatewayRule</code>
+- <code title="put /accounts/{account_id}/gateway/rules/{rule_id}">client.zeroTrust.gateway.rules.<a href="./src/resources/zero-trust/gateway/rules.ts">update</a>(ruleId, { ...params }) -> GatewayRule</code>
+- <code title="get /accounts/{account_id}/gateway/rules">client.zeroTrust.gateway.rules.<a href="./src/resources/zero-trust/gateway/rules.ts">list</a>({ ...params }) -> GatewayRulesSinglePage</code>
 - <code title="delete /accounts/{account_id}/gateway/rules/{rule_id}">client.zeroTrust.gateway.rules.<a href="./src/resources/zero-trust/gateway/rules.ts">delete</a>(ruleId, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
-- <code title="get /accounts/{account_id}/gateway/rules/{rule_id}">client.zeroTrust.gateway.rules.<a href="./src/resources/zero-trust/gateway/rules.ts">get</a>(ruleId, { ...params }) -> Rule</code>
+- <code title="get /accounts/{account_id}/gateway/rules/{rule_id}">client.zeroTrust.gateway.rules.<a href="./src/resources/zero-trust/gateway/rules.ts">get</a>(ruleId, { ...params }) -> GatewayRule</code>
 
 ## Networks
 
@@ -5032,14 +5032,14 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/rum/rules.ts">Rule</a></code>
+- <code><a href="./src/resources/rum/rules.ts">RUMRule</a></code>
 - <code><a href="./src/resources/rum/rules.ts">RuleListResponse</a></code>
 - <code><a href="./src/resources/rum/rules.ts">RuleDeleteResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/rum/v2/{ruleset_id}/rule">client.rum.rules.<a href="./src/resources/rum/rules.ts">create</a>(rulesetId, { ...params }) -> Rule</code>
-- <code title="put /accounts/{account_id}/rum/v2/{ruleset_id}/rule/{rule_id}">client.rum.rules.<a href="./src/resources/rum/rules.ts">update</a>(rulesetId, ruleId, { ...params }) -> Rule</code>
+- <code title="post /accounts/{account_id}/rum/v2/{ruleset_id}/rule">client.rum.rules.<a href="./src/resources/rum/rules.ts">create</a>(rulesetId, { ...params }) -> RUMRule</code>
+- <code title="put /accounts/{account_id}/rum/v2/{ruleset_id}/rule/{rule_id}">client.rum.rules.<a href="./src/resources/rum/rules.ts">update</a>(rulesetId, ruleId, { ...params }) -> RUMRule</code>
 - <code title="get /accounts/{account_id}/rum/v2/{ruleset_id}/rules">client.rum.rules.<a href="./src/resources/rum/rules.ts">list</a>(rulesetId, { ...params }) -> RuleListResponse</code>
 - <code title="delete /accounts/{account_id}/rum/v2/{ruleset_id}/rule/{rule_id}">client.rum.rules.<a href="./src/resources/rum/rules.ts">delete</a>(rulesetId, ruleId, { ...params }) -> RuleDeleteResponse</code>
 
