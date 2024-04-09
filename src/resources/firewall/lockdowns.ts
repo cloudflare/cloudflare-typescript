@@ -99,39 +99,12 @@ export class Lockdowns extends APIResource {
 
 export class LockdownsV4PagePaginationArray extends V4PagePaginationArray<Lockdown> {}
 
-export interface CIDRConfiguration {
-  /**
-   * The configuration target. You must set the target to `ip_range` when specifying
-   * an IP address range in the Zone Lockdown rule.
-   */
-  target?: 'ip_range';
-
-  /**
-   * The IP address range to match. You can only use prefix lengths `/16` and `/24`.
-   */
-  value?: string;
-}
-
 /**
  * A list of IP addresses or CIDR ranges that will be allowed to access the URLs
  * specified in the Zone Lockdown rule. You can include any number of `ip` or
  * `ip_range` configurations.
  */
-export type Configuration = IPConfiguration | CIDRConfiguration;
-
-export interface IPConfiguration {
-  /**
-   * The configuration target. You must set the target to `ip` when specifying an IP
-   * address in the Zone Lockdown rule.
-   */
-  target?: 'ip';
-
-  /**
-   * The IP address to match. This address will be compared to the IP address of
-   * incoming requests.
-   */
-  value?: string;
-}
+export type Configuration = LockdownIPConfiguration | LockdownCIDRConfiguration;
 
 export interface Lockdown {
   /**
@@ -172,6 +145,33 @@ export interface Lockdown {
    * patterns.
    */
   urls: Array<URLsItem>;
+}
+
+export interface LockdownCIDRConfiguration {
+  /**
+   * The configuration target. You must set the target to `ip_range` when specifying
+   * an IP address range in the Zone Lockdown rule.
+   */
+  target?: 'ip_range';
+
+  /**
+   * The IP address range to match. You can only use prefix lengths `/16` and `/24`.
+   */
+  value?: string;
+}
+
+export interface LockdownIPConfiguration {
+  /**
+   * The configuration target. You must set the target to `ip` when specifying an IP
+   * address in the Zone Lockdown rule.
+   */
+  target?: 'ip';
+
+  /**
+   * The IP address to match. This address will be compared to the IP address of
+   * incoming requests.
+   */
+  value?: string;
 }
 
 export type URLsItem = string;
@@ -239,10 +239,10 @@ export interface LockdownListParams extends V4PagePaginationArrayParams {
 export type LockdownDeleteParams = unknown;
 
 export namespace Lockdowns {
-  export import CIDRConfiguration = LockdownsAPI.CIDRConfiguration;
   export import Configuration = LockdownsAPI.Configuration;
-  export import IPConfiguration = LockdownsAPI.IPConfiguration;
   export import Lockdown = LockdownsAPI.Lockdown;
+  export import LockdownCIDRConfiguration = LockdownsAPI.LockdownCIDRConfiguration;
+  export import LockdownIPConfiguration = LockdownsAPI.LockdownIPConfiguration;
   export import URLsItem = LockdownsAPI.URLsItem;
   export import LockdownDeleteResponse = LockdownsAPI.LockdownDeleteResponse;
   export import LockdownsV4PagePaginationArray = LockdownsAPI.LockdownsV4PagePaginationArray;

@@ -149,6 +149,11 @@ export namespace Member {
   }
 }
 
+/**
+ * List of role names for the user at the account.
+ */
+export type MemberRoles = Array<string>;
+
 export interface MemberWithInviteCode {
   /**
    * Membership identifier tag.
@@ -218,11 +223,6 @@ export namespace MemberWithInviteCode {
     two_factor_authentication_enabled?: boolean;
   }
 }
-
-/**
- * List of role names for the user at the account.
- */
-export type Roles = Array<string>;
 
 export interface MemberListResponse {
   /**
@@ -341,8 +341,8 @@ export interface MemberGetParams {
 
 export namespace Members {
   export import Member = MembersAPI.Member;
+  export import MemberRoles = MembersAPI.MemberRoles;
   export import MemberWithInviteCode = MembersAPI.MemberWithInviteCode;
-  export import Roles = MembersAPI.Roles;
   export import MemberListResponse = MembersAPI.MemberListResponse;
   export import MemberDeleteResponse = MembersAPI.MemberDeleteResponse;
   export import MemberListResponsesV4PagePaginationArray = MembersAPI.MemberListResponsesV4PagePaginationArray;

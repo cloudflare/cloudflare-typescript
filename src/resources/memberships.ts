@@ -102,7 +102,7 @@ export interface Membership {
   /**
    * List of role names for the user at the account.
    */
-  roles?: MembersAPI.Roles;
+  roles?: MembersAPI.MemberRoles;
 
   /**
    * Status of this membership.

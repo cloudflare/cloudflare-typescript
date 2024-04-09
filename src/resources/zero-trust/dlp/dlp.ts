@@ -33,8 +33,6 @@ export namespace DLP {
   export import PayloadLogGetParams = PayloadLogsAPI.PayloadLogGetParams;
   export import Profiles = ProfilesAPI.Profiles;
   export import ContextAwareness = ProfilesAPI.ContextAwareness;
-  export import CustomProfile = ProfilesAPI.CustomProfile;
-  export import PredefinedProfile = ProfilesAPI.PredefinedProfile;
   export import Profile = ProfilesAPI.Profile;
   export import SkipConfiguration = ProfilesAPI.SkipConfiguration;
   export import ProfileGetResponse = ProfilesAPI.ProfileGetResponse;

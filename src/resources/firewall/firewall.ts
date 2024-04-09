@@ -17,10 +17,10 @@ export class Firewall extends APIResource {
 
 export namespace Firewall {
   export import Lockdowns = LockdownsAPI.Lockdowns;
-  export import CIDRConfiguration = LockdownsAPI.CIDRConfiguration;
   export import Configuration = LockdownsAPI.Configuration;
-  export import IPConfiguration = LockdownsAPI.IPConfiguration;
   export import Lockdown = LockdownsAPI.Lockdown;
+  export import LockdownCIDRConfiguration = LockdownsAPI.LockdownCIDRConfiguration;
+  export import LockdownIPConfiguration = LockdownsAPI.LockdownIPConfiguration;
   export import URLsItem = LockdownsAPI.URLsItem;
   export import LockdownDeleteResponse = LockdownsAPI.LockdownDeleteResponse;
   export import LockdownsV4PagePaginationArray = LockdownsAPI.LockdownsV4PagePaginationArray;
@@ -42,6 +42,8 @@ export namespace Firewall {
   export import RuleEditParams = RulesAPI.RuleEditParams;
   export import RuleGetParams = RulesAPI.RuleGetParams;
   export import AccessRules = AccessRulesAPI.AccessRules;
+  export import AccessRuleCIDRConfiguration = AccessRulesAPI.AccessRuleCIDRConfiguration;
+  export import AccessRuleIPConfiguration = AccessRulesAPI.AccessRuleIPConfiguration;
   export import ASNConfiguration = AccessRulesAPI.ASNConfiguration;
   export import CountryConfiguration = AccessRulesAPI.CountryConfiguration;
   export import IPV6Configuration = AccessRulesAPI.IPV6Configuration;
