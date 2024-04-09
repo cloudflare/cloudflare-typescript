@@ -1,19 +1,19 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from 'cloudflare/resource';
-import * as MonitorsAPI from 'cloudflare/resources/user/load-balancers/monitors';
-import * as PoolsAPI from 'cloudflare/resources/user/load-balancers/pools';
-import * as PreviewAPI from 'cloudflare/resources/user/load-balancers/preview';
-import * as AnalyticsAPI from 'cloudflare/resources/user/load-balancers/analytics/analytics';
+import * as MonitorsAPI from 'cloudflare/resources/user/load-balancing/monitors';
+import * as PoolsAPI from 'cloudflare/resources/user/load-balancing/pools';
+import * as PreviewAPI from 'cloudflare/resources/user/load-balancing/preview';
+import * as AnalyticsAPI from 'cloudflare/resources/user/load-balancing/analytics/analytics';
 
-export class LoadBalancers extends APIResource {
+export class LoadBalancing extends APIResource {
   monitors: MonitorsAPI.Monitors = new MonitorsAPI.Monitors(this._client);
   pools: PoolsAPI.Pools = new PoolsAPI.Pools(this._client);
-  preview: PreviewAPI.PreviewResource = new PreviewAPI.PreviewResource(this._client);
+  preview: PreviewAPI.Preview = new PreviewAPI.Preview(this._client);
   analytics: AnalyticsAPI.Analytics = new AnalyticsAPI.Analytics(this._client);
 }
 
-export namespace LoadBalancers {
+export namespace LoadBalancing {
   export import Monitors = MonitorsAPI.Monitors;
   export import MonitorCreateResponse = MonitorsAPI.MonitorCreateResponse;
   export import MonitorUpdateResponse = MonitorsAPI.MonitorUpdateResponse;
@@ -40,7 +40,7 @@ export namespace LoadBalancers {
   export import PoolDeleteParams = PoolsAPI.PoolDeleteParams;
   export import PoolEditParams = PoolsAPI.PoolEditParams;
   export import PoolPreviewParams = PoolsAPI.PoolPreviewParams;
-  export import PreviewResource = PreviewAPI.PreviewResource;
   export import Preview = PreviewAPI.Preview;
+  export import PreviewGetResponse = PreviewAPI.PreviewGetResponse;
   export import Analytics = AnalyticsAPI.Analytics;
 }

@@ -11,8 +11,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource history', () => {
   // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
-    const responsePromise = cloudflare.user.billing.history.get();
+  test.skip('list', async () => {
+    const responsePromise = cloudflare.user.billing.history.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,18 +23,18 @@ describe('resource history', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
+  test.skip('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(cloudflare.user.billing.history.get({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(cloudflare.user.billing.history.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Cloudflare.NotFoundError,
     );
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('get: request options and params are passed correctly', async () => {
+  test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.user.billing.history.get(
+      cloudflare.user.billing.history.list(
         {
           action: 'subscription',
           occured_at: '2014-03-01T12:21:59.3456Z',

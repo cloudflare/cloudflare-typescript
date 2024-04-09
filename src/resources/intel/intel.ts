@@ -38,7 +38,9 @@ export namespace Intel {
   export import ASNGetParams = ASNAPI.ASNGetParams;
   export import DNS = DNSAPI.DNS;
   export import UnnamedSchemaRefB5e16cee4f32382c294201aedb9fc050 = DNSAPI.UnnamedSchemaRefB5e16cee4f32382c294201aedb9fc050;
-  export import DNSGetParams = DNSAPI.DNSGetParams;
+  export import DNSListResponse = DNSAPI.DNSListResponse;
+  export import DNSListResponsesV4PagePagination = DNSAPI.DNSListResponsesV4PagePagination;
+  export import DNSListParams = DNSAPI.DNSListParams;
   export import Domains = DomainsAPI.Domains;
   export import Domain = DomainsAPI.Domain;
   export import DomainGetParams = DomainsAPI.DomainGetParams;

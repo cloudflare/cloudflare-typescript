@@ -88,7 +88,6 @@ export namespace ZeroTrust {
   export import UnnamedSchemaRefBf9e2abcf1b78a6cab8e6e29e2228a11 = DEXAPI.UnnamedSchemaRefBf9e2abcf1b78a6cab8e6e29e2228a11;
   export import Tunnels = TunnelsAPI.Tunnels;
   export import Tunnel = TunnelsAPI.Tunnel;
-  export import UnnamedSchemaRefA9c0e0a8cc5fd0e244f41ea806cd954a = TunnelsAPI.UnnamedSchemaRefA9c0e0a8cc5fd0e244f41ea806cd954a;
   export import WARPConnectorTunnel = TunnelsAPI.WARPConnectorTunnel;
   export import TunnelCreateParams = TunnelsAPI.TunnelCreateParams;
   export import TunnelListParams = TunnelsAPI.TunnelListParams;

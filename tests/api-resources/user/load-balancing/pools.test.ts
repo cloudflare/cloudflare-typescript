@@ -12,7 +12,7 @@ const cloudflare = new Cloudflare({
 describe('resource pools', () => {
   // skipped: tests are disabled for the time being
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.user.loadBalancers.pools.create({
+    const responsePromise = cloudflare.user.loadBalancing.pools.create({
       name: 'primary-dc-1',
       origins: [{}, {}, {}],
     });
@@ -27,7 +27,7 @@ describe('resource pools', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.user.loadBalancers.pools.create({
+    const response = await cloudflare.user.loadBalancing.pools.create({
       name: 'primary-dc-1',
       origins: [
         {
@@ -79,7 +79,7 @@ describe('resource pools', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.user.loadBalancers.pools.update('17b5962d775c646f3f9725cbc7a53df4', {
+    const responsePromise = cloudflare.user.loadBalancing.pools.update('17b5962d775c646f3f9725cbc7a53df4', {
       name: 'primary-dc-1',
       origins: [{}, {}, {}],
     });
@@ -94,7 +94,7 @@ describe('resource pools', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.user.loadBalancers.pools.update('17b5962d775c646f3f9725cbc7a53df4', {
+    const response = await cloudflare.user.loadBalancing.pools.update('17b5962d775c646f3f9725cbc7a53df4', {
       name: 'primary-dc-1',
       origins: [
         {
@@ -146,7 +146,7 @@ describe('resource pools', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('list', async () => {
-    const responsePromise = cloudflare.user.loadBalancers.pools.list();
+    const responsePromise = cloudflare.user.loadBalancing.pools.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -160,7 +160,7 @@ describe('resource pools', () => {
   test.skip('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.user.loadBalancers.pools.list({ path: '/_stainless_unknown_path' }),
+      cloudflare.user.loadBalancing.pools.list({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
@@ -168,13 +168,13 @@ describe('resource pools', () => {
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.user.loadBalancers.pools.list({ monitor: {} }, { path: '/_stainless_unknown_path' }),
+      cloudflare.user.loadBalancing.pools.list({ monitor: {} }, { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
   test.skip('delete: only required params', async () => {
-    const responsePromise = cloudflare.user.loadBalancers.pools.delete(
+    const responsePromise = cloudflare.user.loadBalancing.pools.delete(
       '17b5962d775c646f3f9725cbc7a53df4',
       {},
     );
@@ -189,12 +189,12 @@ describe('resource pools', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('delete: required and optional params', async () => {
-    const response = await cloudflare.user.loadBalancers.pools.delete('17b5962d775c646f3f9725cbc7a53df4', {});
+    const response = await cloudflare.user.loadBalancing.pools.delete('17b5962d775c646f3f9725cbc7a53df4', {});
   });
 
   // skipped: tests are disabled for the time being
   test.skip('edit', async () => {
-    const responsePromise = cloudflare.user.loadBalancers.pools.edit('17b5962d775c646f3f9725cbc7a53df4', {});
+    const responsePromise = cloudflare.user.loadBalancing.pools.edit('17b5962d775c646f3f9725cbc7a53df4', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -206,7 +206,7 @@ describe('resource pools', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('get', async () => {
-    const responsePromise = cloudflare.user.loadBalancers.pools.get('17b5962d775c646f3f9725cbc7a53df4');
+    const responsePromise = cloudflare.user.loadBalancing.pools.get('17b5962d775c646f3f9725cbc7a53df4');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -220,7 +220,7 @@ describe('resource pools', () => {
   test.skip('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.user.loadBalancers.pools.get('17b5962d775c646f3f9725cbc7a53df4', {
+      cloudflare.user.loadBalancing.pools.get('17b5962d775c646f3f9725cbc7a53df4', {
         path: '/_stainless_unknown_path',
       }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
@@ -228,7 +228,7 @@ describe('resource pools', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('health', async () => {
-    const responsePromise = cloudflare.user.loadBalancers.pools.health('17b5962d775c646f3f9725cbc7a53df4');
+    const responsePromise = cloudflare.user.loadBalancing.pools.health('17b5962d775c646f3f9725cbc7a53df4');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -242,7 +242,7 @@ describe('resource pools', () => {
   test.skip('health: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.user.loadBalancers.pools.health('17b5962d775c646f3f9725cbc7a53df4', {
+      cloudflare.user.loadBalancing.pools.health('17b5962d775c646f3f9725cbc7a53df4', {
         path: '/_stainless_unknown_path',
       }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
@@ -250,7 +250,7 @@ describe('resource pools', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('preview: only required params', async () => {
-    const responsePromise = cloudflare.user.loadBalancers.pools.preview('17b5962d775c646f3f9725cbc7a53df4', {
+    const responsePromise = cloudflare.user.loadBalancing.pools.preview('17b5962d775c646f3f9725cbc7a53df4', {
       expected_codes: '2xx',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -264,7 +264,7 @@ describe('resource pools', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('preview: required and optional params', async () => {
-    const response = await cloudflare.user.loadBalancers.pools.preview('17b5962d775c646f3f9725cbc7a53df4', {
+    const response = await cloudflare.user.loadBalancing.pools.preview('17b5962d775c646f3f9725cbc7a53df4', {
       expected_codes: '2xx',
       allow_insecure: true,
       consecutive_down: 0,
@@ -286,7 +286,7 @@ describe('resource pools', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('references', async () => {
-    const responsePromise = cloudflare.user.loadBalancers.pools.references(
+    const responsePromise = cloudflare.user.loadBalancing.pools.references(
       '17b5962d775c646f3f9725cbc7a53df4',
     );
     const rawResponse = await responsePromise.asResponse();
@@ -302,7 +302,7 @@ describe('resource pools', () => {
   test.skip('references: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.user.loadBalancers.pools.references('17b5962d775c646f3f9725cbc7a53df4', {
+      cloudflare.user.loadBalancing.pools.references('17b5962d775c646f3f9725cbc7a53df4', {
         path: '/_stainless_unknown_path',
       }),
     ).rejects.toThrow(Cloudflare.NotFoundError);

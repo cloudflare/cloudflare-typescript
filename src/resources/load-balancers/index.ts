@@ -29,6 +29,6 @@ export {
   PoolsSinglePage,
   Pools,
 } from './pools/index';
-export { PreviewGetParams, Previews } from './previews';
+export { PreviewGetResponse, PreviewGetParams, Previews } from './previews';
 export { RegionGetResponse, RegionListParams, RegionGetParams, Regions } from './regions';
 export { SearchGetResponse, SearchGetParams, Searches } from './searches';

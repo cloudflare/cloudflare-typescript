@@ -23,7 +23,7 @@ export {
 } from './tokens/index';
 export { Firewall } from './firewall/index';
 export { Invite, InviteEditParams, InvitesSinglePage, Invites } from './invites';
-export { LoadBalancers } from './load-balancers/index';
+export { LoadBalancing } from './load-balancing/index';
 export {
   Organization,
   OrganizationDeleteResponse,

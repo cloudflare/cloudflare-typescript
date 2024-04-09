@@ -3,9 +3,9 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
-import * as EventsAPI from 'cloudflare/resources/user/load-balancers/analytics/events';
-import * as AnalyticsAPI from 'cloudflare/resources/user/load-balancers/analytics/analytics';
-import { AnalyticsSinglePage } from 'cloudflare/resources/user/load-balancers/analytics/analytics';
+import * as EventsAPI from 'cloudflare/resources/user/load-balancing/analytics/events';
+import * as AnalyticsAPI from 'cloudflare/resources/user/load-balancing/analytics/analytics';
+import { AnalyticsSinglePage } from 'cloudflare/resources/user/load-balancing/analytics/analytics';
 
 export class Events extends APIResource {
   /**

@@ -12,7 +12,7 @@ export class Billing extends APIResource {
 export namespace Billing {
   export import History = HistoryAPI.History;
   export import BillingHistory = HistoryAPI.BillingHistory;
-  export import HistoryGetResponse = HistoryAPI.HistoryGetResponse;
-  export import HistoryGetParams = HistoryAPI.HistoryGetParams;
+  export import BillingHistoriesV4PagePaginationArray = HistoryAPI.BillingHistoriesV4PagePaginationArray;
+  export import HistoryListParams = HistoryAPI.HistoryListParams;
   export import Profile = ProfileAPI.Profile;
 }

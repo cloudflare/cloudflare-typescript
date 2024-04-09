@@ -2,7 +2,7 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as MonitorsAPI from 'cloudflare/resources/user/load-balancers/monitors';
+import * as MonitorsAPI from 'cloudflare/resources/user/load-balancing/monitors';
 import { SinglePage } from 'cloudflare/pagination';
 
 export class Monitors extends APIResource {
