@@ -1456,6 +1456,7 @@ export namespace LoadBalancers {
   export import PoolEditParams = PoolsAPI.PoolEditParams;
   export import PoolGetParams = PoolsAPI.PoolGetParams;
   export import Previews = PreviewsAPI.Previews;
+  export import PreviewGetResponse = PreviewsAPI.PreviewGetResponse;
   export import PreviewGetParams = PreviewsAPI.PreviewGetParams;
   export import Regions = RegionsAPI.Regions;
   export import RegionGetResponse = RegionsAPI.RegionGetResponse;

@@ -12,7 +12,7 @@ const cloudflare = new Cloudflare({
 describe('resource events', () => {
   // skipped: tests are disabled for the time being
   test.skip('list', async () => {
-    const responsePromise = cloudflare.user.loadBalancers.analytics.events.list();
+    const responsePromise = cloudflare.radar.bgp.leaks.events.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -26,7 +26,7 @@ describe('resource events', () => {
   test.skip('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.user.loadBalancers.analytics.events.list({ path: '/_stainless_unknown_path' }),
+      cloudflare.radar.bgp.leaks.events.list({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
@@ -34,15 +34,20 @@ describe('resource events', () => {
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.user.loadBalancers.analytics.events.list(
+      cloudflare.radar.bgp.leaks.events.list(
         {
-          origin_healthy: true,
-          origin_name: 'primary-dc-1',
-          pool_healthy: true,
-          pool_id: '17b5962d775c646f3f9725cbc7a53df4',
-          pool_name: 'primary-dc',
-          since: '2016-11-11T12:00:00Z',
-          until: '2016-11-11T13:00:00Z',
+          dateEnd: '2023-09-01T11:41:33.782Z',
+          dateRange: '7d',
+          dateStart: '2023-09-01T11:41:33.782Z',
+          eventId: 0,
+          format: 'JSON',
+          involvedAsn: 0,
+          involvedCountry: 'string',
+          leakAsn: 0,
+          page: 0,
+          per_page: 0,
+          sortBy: 'TIME',
+          sortOrder: 'DESC',
         },
         { path: '/_stainless_unknown_path' },
       ),

@@ -3,20 +3,26 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as DNSAPI from 'cloudflare/resources/intel/dns';
+import * as Shared from 'cloudflare/resources/shared';
+import { V4PagePagination, type V4PagePaginationParams } from 'cloudflare/pagination';
 
 export class DNS extends APIResource {
   /**
    * Get Passive DNS by IP
    */
-  get(params: DNSGetParams, options?: Core.RequestOptions): Core.APIPromise<DNS> {
+  list(
+    params: DNSListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<DNSListResponsesV4PagePagination, DNSListResponse> {
     const { account_id, ...query } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/intel/dns`, { query, ...options }) as Core.APIPromise<{
-        result: DNS;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(`/accounts/${account_id}/intel/dns`, DNSListResponsesV4PagePagination, {
+      query,
+      ...options,
+    });
   }
 }
+
+export class DNSListResponsesV4PagePagination extends V4PagePagination<DNSListResponse> {}
 
 export interface DNS {
   /**
@@ -57,7 +63,20 @@ export interface UnnamedSchemaRefB5e16cee4f32382c294201aedb9fc050 {
   last_seen?: string;
 }
 
-export interface DNSGetParams {
+export interface DNSListResponse {
+  errors: Array<Shared.ResponseInfo>;
+
+  messages: Array<Shared.ResponseInfo>;
+
+  result: DNS;
+
+  /**
+   * Whether the API call was successful
+   */
+  success: true;
+}
+
+export interface DNSListParams extends V4PagePaginationParams {
   /**
    * Path param: Identifier
    */
@@ -69,22 +88,12 @@ export interface DNSGetParams {
   ipv4?: string;
 
   /**
-   * Query param: Requested page within paginated list of results.
-   */
-  page?: number;
-
-  /**
-   * Query param: Maximum number of results requested.
-   */
-  per_page?: number;
-
-  /**
    * Query param:
    */
-  start_end_params?: DNSGetParams.StartEndParams;
+  start_end_params?: DNSListParams.StartEndParams;
 }
 
-export namespace DNSGetParams {
+export namespace DNSListParams {
   export interface StartEndParams {
     /**
      * Defaults to the current date.
@@ -101,5 +110,7 @@ export namespace DNSGetParams {
 export namespace DNS {
   export import DNS = DNSAPI.DNS;
   export import UnnamedSchemaRefB5e16cee4f32382c294201aedb9fc050 = DNSAPI.UnnamedSchemaRefB5e16cee4f32382c294201aedb9fc050;
-  export import DNSGetParams = DNSAPI.DNSGetParams;
+  export import DNSListResponse = DNSAPI.DNSListResponse;
+  export import DNSListResponsesV4PagePagination = DNSAPI.DNSListResponsesV4PagePagination;
+  export import DNSListParams = DNSAPI.DNSListParams;
 }

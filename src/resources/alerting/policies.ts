@@ -298,10 +298,10 @@ export interface Filter {
  * List of IDs that will be used when dispatching a notification. IDs for email
  * type will be the email address.
  */
-export type Mechanism = Record<string, Array<Mechanism.UnnamedSchemaWithMapParent1>>;
+export type Mechanism = Record<string, Array<Mechanism.UnnamedSchemaWithMapParent2>>;
 
 export namespace Mechanism {
-  export interface UnnamedSchemaWithMapParent1 {
+  export interface UnnamedSchemaWithMapParent2 {
     /**
      * UUID
      */
