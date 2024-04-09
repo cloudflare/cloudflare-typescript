@@ -32,8 +32,8 @@ export {
 } from './lockdowns';
 export { Firewall } from './firewall';
 export {
+  FirewallRule,
   Products,
-  Rule,
   DeletedFilter,
   RuleCreateResponse,
   RuleEditResponse,
@@ -43,7 +43,7 @@ export {
   RuleDeleteParams,
   RuleEditParams,
   RuleGetParams,
-  RulesV4PagePaginationArray,
+  FirewallRulesV4PagePaginationArray,
   Rules,
 } from './rules';
 export {

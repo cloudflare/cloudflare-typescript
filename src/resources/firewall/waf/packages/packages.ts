@@ -254,10 +254,10 @@ export namespace Packages {
   export import GroupGetParams = GroupsAPI.GroupGetParams;
   export import Rules = RulesAPI.Rules;
   export import AllowedModesAnomaly = RulesAPI.AllowedModesAnomaly;
-  export import Rule = RulesAPI.Rule;
   export import UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5 = RulesAPI.UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5;
+  export import RuleListResponse = RulesAPI.RuleListResponse;
   export import RuleEditResponse = RulesAPI.RuleEditResponse;
-  export import RulesV4PagePaginationArray = RulesAPI.RulesV4PagePaginationArray;
+  export import RuleListResponsesV4PagePaginationArray = RulesAPI.RuleListResponsesV4PagePaginationArray;
   export import RuleListParams = RulesAPI.RuleListParams;
   export import RuleEditParams = RulesAPI.RuleEditParams;
   export import RuleGetParams = RulesAPI.RuleGetParams;

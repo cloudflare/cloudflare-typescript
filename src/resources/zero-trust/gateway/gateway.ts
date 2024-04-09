@@ -171,10 +171,10 @@ export namespace Gateway {
   export import DNSResolverSettingsV4 = RulesAPI.DNSResolverSettingsV4;
   export import DNSResolverSettingsV6 = RulesAPI.DNSResolverSettingsV6;
   export import GatewayFilter = RulesAPI.GatewayFilter;
-  export import Rule = RulesAPI.Rule;
+  export import GatewayRule = RulesAPI.GatewayRule;
   export import RuleSetting = RulesAPI.RuleSetting;
   export import Schedule = RulesAPI.Schedule;
-  export import RulesSinglePage = RulesAPI.RulesSinglePage;
+  export import GatewayRulesSinglePage = RulesAPI.GatewayRulesSinglePage;
   export import RuleCreateParams = RulesAPI.RuleCreateParams;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
   export import RuleListParams = RulesAPI.RuleListParams;

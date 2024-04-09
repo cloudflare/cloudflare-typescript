@@ -32,12 +32,12 @@ export class Rules extends APIResource {
     id: string,
     body: RuleUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Rule> {
+  ): Core.APIPromise<FirewallRule> {
     return (
       this._client.put(`/zones/${zoneIdentifier}/firewall/rules/${id}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: Rule }>
+      }) as Core.APIPromise<{ result: FirewallRule }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -49,23 +49,24 @@ export class Rules extends APIResource {
     zoneIdentifier: string,
     query?: RuleListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<RulesV4PagePaginationArray, Rule>;
+  ): Core.PagePromise<FirewallRulesV4PagePaginationArray, FirewallRule>;
   list(
     zoneIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<RulesV4PagePaginationArray, Rule>;
+  ): Core.PagePromise<FirewallRulesV4PagePaginationArray, FirewallRule>;
   list(
     zoneIdentifier: string,
     query: RuleListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<RulesV4PagePaginationArray, Rule> {
+  ): Core.PagePromise<FirewallRulesV4PagePaginationArray, FirewallRule> {
     if (isRequestOptions(query)) {
       return this.list(zoneIdentifier, {}, query);
     }
-    return this._client.getAPIList(`/zones/${zoneIdentifier}/firewall/rules`, RulesV4PagePaginationArray, {
-      query,
-      ...options,
-    });
+    return this._client.getAPIList(
+      `/zones/${zoneIdentifier}/firewall/rules`,
+      FirewallRulesV4PagePaginationArray,
+      { query, ...options },
+    );
   }
 
   /**
@@ -76,12 +77,12 @@ export class Rules extends APIResource {
     id: string,
     body: RuleDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Rule> {
+  ): Core.APIPromise<FirewallRule> {
     return (
       this._client.delete(`/zones/${zoneIdentifier}/firewall/rules/${id}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: Rule }>
+      }) as Core.APIPromise<{ result: FirewallRule }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -105,25 +106,24 @@ export class Rules extends APIResource {
   /**
    * Fetches the details of a firewall rule.
    */
-  get(zoneIdentifier: string, params: RuleGetParams, options?: Core.RequestOptions): Core.APIPromise<Rule> {
+  get(
+    zoneIdentifier: string,
+    params: RuleGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<FirewallRule> {
     const { path_id, query_id, ...query } = params;
     return (
       this._client.get(`/zones/${zoneIdentifier}/firewall/rules/${path_id}`, {
         query: { id: query_id, ...query },
         ...options,
-      }) as Core.APIPromise<{ result: Rule }>
+      }) as Core.APIPromise<{ result: FirewallRule }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class RulesV4PagePaginationArray extends V4PagePaginationArray<Rule> {}
+export class FirewallRulesV4PagePaginationArray extends V4PagePaginationArray<FirewallRule> {}
 
-/**
- * A list of products to bypass for a request when using the `bypass` action.
- */
-export type Products = 'zoneLockdown' | 'uaBlock' | 'bic' | 'hot' | 'securityLevel' | 'rateLimit' | 'waf';
-
-export interface Rule {
+export interface FirewallRule {
   /**
    * The unique identifier of the firewall rule.
    */
@@ -140,7 +140,7 @@ export interface Rule {
    */
   description?: string;
 
-  filter?: FiltersAPI.Filter | DeletedFilter;
+  filter?: FiltersAPI.FirewallFilter | DeletedFilter;
 
   /**
    * When true, indicates that the firewall rule is currently paused.
@@ -162,6 +162,11 @@ export interface Rule {
   ref?: string;
 }
 
+/**
+ * A list of products to bypass for a request when using the `bypass` action.
+ */
+export type Products = 'zoneLockdown' | 'uaBlock' | 'bic' | 'hot' | 'securityLevel' | 'rateLimit' | 'waf';
+
 export interface DeletedFilter {
   /**
    * The unique identifier of the filter.
@@ -174,9 +179,9 @@ export interface DeletedFilter {
   deleted: boolean;
 }
 
-export type RuleCreateResponse = Array<Rule>;
+export type RuleCreateResponse = Array<FirewallRule>;
 
-export type RuleEditResponse = Array<Rule>;
+export type RuleEditResponse = Array<FirewallRule>;
 
 export type RuleCreateParams = unknown;
 
@@ -227,12 +232,12 @@ export interface RuleGetParams {
 }
 
 export namespace Rules {
+  export import FirewallRule = RulesAPI.FirewallRule;
   export import Products = RulesAPI.Products;
-  export import Rule = RulesAPI.Rule;
   export import DeletedFilter = RulesAPI.DeletedFilter;
   export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
   export import RuleEditResponse = RulesAPI.RuleEditResponse;
-  export import RulesV4PagePaginationArray = RulesAPI.RulesV4PagePaginationArray;
+  export import FirewallRulesV4PagePaginationArray = RulesAPI.FirewallRulesV4PagePaginationArray;
   export import RuleCreateParams = RulesAPI.RuleCreateParams;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
   export import RuleListParams = RulesAPI.RuleListParams;

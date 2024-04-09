@@ -30,9 +30,9 @@ export namespace Alerting {
   export import HistoriesV4PagePaginationArray = HistoryAPI.HistoriesV4PagePaginationArray;
   export import HistoryListParams = HistoryAPI.HistoryListParams;
   export import Policies = PoliciesAPI.Policies;
-  export import Filter = PoliciesAPI.Filter;
   export import Mechanism = PoliciesAPI.Mechanism;
   export import Policy = PoliciesAPI.Policy;
+  export import PolicyFilter = PoliciesAPI.PolicyFilter;
   export import PolicyCreateResponse = PoliciesAPI.PolicyCreateResponse;
   export import PolicyUpdateResponse = PoliciesAPI.PolicyUpdateResponse;
   export import PolicyDeleteResponse = PoliciesAPI.PolicyDeleteResponse;
