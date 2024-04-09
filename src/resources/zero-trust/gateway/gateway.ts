@@ -131,7 +131,11 @@ export namespace Gateway {
   export import ConfigurationGetParams = ConfigurationsAPI.ConfigurationGetParams;
   export import Lists = ListsAPI.Lists;
   export import ListCreateResponse = ListsAPI.ListCreateResponse;
-  export import ListsSinglePage = ListsAPI.ListsSinglePage;
+  export import ListUpdateResponse = ListsAPI.ListUpdateResponse;
+  export import ListListResponse = ListsAPI.ListListResponse;
+  export import ListEditResponse = ListsAPI.ListEditResponse;
+  export import ListGetResponse = ListsAPI.ListGetResponse;
+  export import ListListResponsesSinglePage = ListsAPI.ListListResponsesSinglePage;
   export import ListCreateParams = ListsAPI.ListCreateParams;
   export import ListUpdateParams = ListsAPI.ListUpdateParams;
   export import ListListParams = ListsAPI.ListListParams;
