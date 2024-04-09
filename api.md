@@ -1258,7 +1258,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/custom-hostnames/custom-hostnames.ts">CustomHostname</a></code>
-- <code><a href="./src/resources/custom-hostnames/custom-hostnames.ts">CustomMetadata</a></code>
 - <code><a href="./src/resources/custom-hostnames/custom-hostnames.ts">UnnamedSchemaRef16aca57bde2963201c7e6e895436c1c1</a></code>
 - <code><a href="./src/resources/custom-hostnames/custom-hostnames.ts">UnnamedSchemaRef78adb375f06c6d462dd92b99e2ecf510</a></code>
 - <code><a href="./src/resources/custom-hostnames/custom-hostnames.ts">UnnamedSchemaRef9a9935a9a770967bb604ae41a81e42e1</a></code>
@@ -1449,16 +1448,16 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/email-routing/rules/rules.ts">Action</a></code>
-- <code><a href="./src/resources/email-routing/rules/rules.ts">EmailRule</a></code>
+- <code><a href="./src/resources/email-routing/rules/rules.ts">EmailRoutingRule</a></code>
 - <code><a href="./src/resources/email-routing/rules/rules.ts">Matcher</a></code>
 
 Methods:
 
-- <code title="post /zones/{zone_identifier}/email/routing/rules">client.emailRouting.rules.<a href="./src/resources/email-routing/rules/rules.ts">create</a>(zoneIdentifier, { ...params }) -> EmailRule</code>
-- <code title="put /zones/{zone_identifier}/email/routing/rules/{rule_identifier}">client.emailRouting.rules.<a href="./src/resources/email-routing/rules/rules.ts">update</a>(zoneIdentifier, ruleIdentifier, { ...params }) -> EmailRule</code>
-- <code title="get /zones/{zone_identifier}/email/routing/rules">client.emailRouting.rules.<a href="./src/resources/email-routing/rules/rules.ts">list</a>(zoneIdentifier, { ...params }) -> EmailRulesV4PagePaginationArray</code>
-- <code title="delete /zones/{zone_identifier}/email/routing/rules/{rule_identifier}">client.emailRouting.rules.<a href="./src/resources/email-routing/rules/rules.ts">delete</a>(zoneIdentifier, ruleIdentifier) -> EmailRule</code>
-- <code title="get /zones/{zone_identifier}/email/routing/rules/{rule_identifier}">client.emailRouting.rules.<a href="./src/resources/email-routing/rules/rules.ts">get</a>(zoneIdentifier, ruleIdentifier) -> EmailRule</code>
+- <code title="post /zones/{zone_identifier}/email/routing/rules">client.emailRouting.rules.<a href="./src/resources/email-routing/rules/rules.ts">create</a>(zoneIdentifier, { ...params }) -> EmailRoutingRule</code>
+- <code title="put /zones/{zone_identifier}/email/routing/rules/{rule_identifier}">client.emailRouting.rules.<a href="./src/resources/email-routing/rules/rules.ts">update</a>(zoneIdentifier, ruleIdentifier, { ...params }) -> EmailRoutingRule</code>
+- <code title="get /zones/{zone_identifier}/email/routing/rules">client.emailRouting.rules.<a href="./src/resources/email-routing/rules/rules.ts">list</a>(zoneIdentifier, { ...params }) -> EmailRoutingRulesV4PagePaginationArray</code>
+- <code title="delete /zones/{zone_identifier}/email/routing/rules/{rule_identifier}">client.emailRouting.rules.<a href="./src/resources/email-routing/rules/rules.ts">delete</a>(zoneIdentifier, ruleIdentifier) -> EmailRoutingRule</code>
+- <code title="get /zones/{zone_identifier}/email/routing/rules/{rule_identifier}">client.emailRouting.rules.<a href="./src/resources/email-routing/rules/rules.ts">get</a>(zoneIdentifier, ruleIdentifier) -> EmailRoutingRule</code>
 
 ### CatchAlls
 
