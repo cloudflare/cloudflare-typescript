@@ -3,7 +3,7 @@
 export { Accounts } from './accounts';
 export {
   Member,
-  MemberRoles,
+  MemberRole,
   MemberWithInviteCode,
   MemberListResponse,
   MemberDeleteResponse,
@@ -15,4 +15,11 @@ export {
   MemberListResponsesV4PagePaginationArray,
   Members,
 } from './members';
-export { PermissionGrant, Role, RoleListParams, RoleGetParams, RolesSinglePage, Roles } from './roles';
+export {
+  PermissionGrant,
+  RoleListResponse,
+  RoleListParams,
+  RoleGetParams,
+  RoleListResponsesSinglePage,
+  Roles,
+} from './roles';

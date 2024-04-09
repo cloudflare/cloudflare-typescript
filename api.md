@@ -33,7 +33,7 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/accounts/members.ts">Member</a></code>
-- <code><a href="./src/resources/accounts/members.ts">MemberRoles</a></code>
+- <code><a href="./src/resources/accounts/members.ts">MemberRole</a></code>
 - <code><a href="./src/resources/accounts/members.ts">MemberWithInviteCode</a></code>
 - <code><a href="./src/resources/accounts/members.ts">MemberListResponse</a></code>
 - <code><a href="./src/resources/accounts/members.ts">MemberDeleteResponse</a></code>
@@ -51,11 +51,11 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/accounts/roles.ts">PermissionGrant</a></code>
-- <code><a href="./src/resources/accounts/roles.ts">Role</a></code>
+- <code><a href="./src/resources/accounts/roles.ts">RoleListResponse</a></code>
 
 Methods:
 
-- <code title="get /accounts/{account_id}/roles">client.accounts.roles.<a href="./src/resources/accounts/roles.ts">list</a>({ ...params }) -> RolesSinglePage</code>
+- <code title="get /accounts/{account_id}/roles">client.accounts.roles.<a href="./src/resources/accounts/roles.ts">list</a>({ ...params }) -> RoleListResponsesSinglePage</code>
 - <code title="get /accounts/{account_id}/roles/{role_id}">client.accounts.roles.<a href="./src/resources/accounts/roles.ts">get</a>(roleId, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
 
 # OriginCACertificates
