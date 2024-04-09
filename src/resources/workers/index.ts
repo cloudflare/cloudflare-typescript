@@ -8,7 +8,6 @@ export {
   AccountSettingGetParams,
   AccountSettings,
 } from './account-settings';
-export { Deployments } from './deployments/index';
 export {
   Domain,
   DomainUpdateParams,
@@ -28,7 +27,6 @@ export {
   ScriptsSinglePage,
   Scripts,
 } from './scripts/index';
-export { Services } from './services/index';
 export {
   SubdomainUpdateResponse,
   SubdomainGetResponse,
@@ -37,24 +35,3 @@ export {
   Subdomains,
 } from './subdomains';
 export { Workers } from './workers';
-export {
-  WorkersFilter,
-  FilterCreateResponse,
-  FilterDeleteResponse,
-  FilterCreateParams,
-  FilterUpdateParams,
-  FilterListParams,
-  FilterDeleteParams,
-  WorkersFiltersSinglePage,
-  Filters,
-} from './filters';
-export {
-  WorkersRoute,
-  RouteCreateParams,
-  RouteUpdateParams,
-  RouteListParams,
-  RouteDeleteParams,
-  RouteGetParams,
-  WorkersRoutesSinglePage,
-  Routes,
-} from './routes';

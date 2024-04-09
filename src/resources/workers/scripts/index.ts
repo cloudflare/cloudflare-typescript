@@ -1,6 +1,5 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { BindingGetResponse, BindingGetParams, Bindings } from './bindings';
 export {
   ConsumerScript,
   ConsumerScriptItem,
@@ -11,8 +10,7 @@ export {
   TailGetParams,
   Tail,
 } from './tail';
-export { ContentUpdateParams, Content } from './content';
-export { ContentV2GetParams, ContentV2 } from './content-v2';
+export { ContentUpdateParams, ContentGetParams, Content } from './content';
 export {
   Script,
   ScriptSetting,
@@ -41,13 +39,6 @@ export {
   Deployments,
 } from './deployments';
 export {
-  UsageModelUpdateResponse,
-  UsageModelGetResponse,
-  UsageModelUpdateParams,
-  UsageModelGetParams,
-  UsageModel,
-} from './usage-model';
-export {
   VersionCreateResponse,
   VersionListResponse,
   VersionGetResponse,
@@ -55,4 +46,4 @@ export {
   VersionListParams,
   VersionGetParams,
   Versions,
-} from './versions/index';
+} from './versions';
