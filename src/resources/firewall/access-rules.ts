@@ -206,6 +206,74 @@ export class AccessRules extends APIResource {
 
 export class AccessRuleListResponsesV4PagePaginationArray extends V4PagePaginationArray<AccessRuleListResponse> {}
 
+export interface ASNConfiguration {
+  /**
+   * The configuration target. You must set the target to `asn` when specifying an
+   * Autonomous System Number (ASN) in the rule.
+   */
+  target?: 'asn';
+
+  /**
+   * The AS number to match.
+   */
+  value?: string;
+}
+
+export interface CIDRConfiguration {
+  /**
+   * The configuration target. You must set the target to `ip_range` when specifying
+   * an IP address range in the rule.
+   */
+  target?: 'ip_range';
+
+  /**
+   * The IP address range to match. You can only use prefix lengths `/16` and `/24`
+   * for IPv4 ranges, and prefix lengths `/32`, `/48`, and `/64` for IPv6 ranges.
+   */
+  value?: string;
+}
+
+export interface CountryConfiguration {
+  /**
+   * The configuration target. You must set the target to `country` when specifying a
+   * country code in the rule.
+   */
+  target?: 'country';
+
+  /**
+   * The two-letter ISO-3166-1 alpha-2 code to match. For more information, refer to
+   * [IP Access rules: Parameters](https://developers.cloudflare.com/waf/tools/ip-access-rules/parameters/#country).
+   */
+  value?: string;
+}
+
+export interface IPConfiguration {
+  /**
+   * The configuration target. You must set the target to `ip` when specifying an IP
+   * address in the rule.
+   */
+  target?: 'ip';
+
+  /**
+   * The IP address to match. This address will be compared to the IP address of
+   * incoming requests.
+   */
+  value?: string;
+}
+
+export interface IPV6Configuration {
+  /**
+   * The configuration target. You must set the target to `ip6` when specifying an
+   * IPv6 address in the rule.
+   */
+  target?: 'ip6';
+
+  /**
+   * The IPv6 address to match.
+   */
+  value?: string;
+}
+
 export type AccessRuleListResponse = unknown;
 
 export interface AccessRuleDeleteResponse {
@@ -220,11 +288,11 @@ export interface AccessRuleCreateParams {
    * Body param: The rule configuration.
    */
   configuration:
-    | AccessRuleCreateParams.FirewallIPConfiguration
-    | AccessRuleCreateParams.FirewallIPV6Configuration
-    | AccessRuleCreateParams.FirewallCIDRConfiguration
-    | AccessRuleCreateParams.FirewallASNConfiguration
-    | AccessRuleCreateParams.FirewallCountryConfiguration;
+    | IPConfiguration
+    | IPV6Configuration
+    | CIDRConfiguration
+    | ASNConfiguration
+    | CountryConfiguration;
 
   /**
    * Body param: The action to apply to a matched request.
@@ -248,76 +316,6 @@ export interface AccessRuleCreateParams {
    * explanation.
    */
   notes?: string;
-}
-
-export namespace AccessRuleCreateParams {
-  export interface FirewallIPConfiguration {
-    /**
-     * The configuration target. You must set the target to `ip` when specifying an IP
-     * address in the rule.
-     */
-    target?: 'ip';
-
-    /**
-     * The IP address to match. This address will be compared to the IP address of
-     * incoming requests.
-     */
-    value?: string;
-  }
-
-  export interface FirewallIPV6Configuration {
-    /**
-     * The configuration target. You must set the target to `ip6` when specifying an
-     * IPv6 address in the rule.
-     */
-    target?: 'ip6';
-
-    /**
-     * The IPv6 address to match.
-     */
-    value?: string;
-  }
-
-  export interface FirewallCIDRConfiguration {
-    /**
-     * The configuration target. You must set the target to `ip_range` when specifying
-     * an IP address range in the rule.
-     */
-    target?: 'ip_range';
-
-    /**
-     * The IP address range to match. You can only use prefix lengths `/16` and `/24`
-     * for IPv4 ranges, and prefix lengths `/32`, `/48`, and `/64` for IPv6 ranges.
-     */
-    value?: string;
-  }
-
-  export interface FirewallASNConfiguration {
-    /**
-     * The configuration target. You must set the target to `asn` when specifying an
-     * Autonomous System Number (ASN) in the rule.
-     */
-    target?: 'asn';
-
-    /**
-     * The AS number to match.
-     */
-    value?: string;
-  }
-
-  export interface FirewallCountryConfiguration {
-    /**
-     * The configuration target. You must set the target to `country` when specifying a
-     * country code in the rule.
-     */
-    target?: 'country';
-
-    /**
-     * The two-letter ISO-3166-1 alpha-2 code to match. For more information, refer to
-     * [IP Access rules: Parameters](https://developers.cloudflare.com/waf/tools/ip-access-rules/parameters/#country).
-     */
-    value?: string;
-  }
 }
 
 export interface AccessRuleListParams extends V4PagePaginationArrayParams {
@@ -432,11 +430,11 @@ export interface AccessRuleEditParams {
    * Body param: The rule configuration.
    */
   configuration:
-    | AccessRuleEditParams.FirewallIPConfiguration
-    | AccessRuleEditParams.FirewallIPV6Configuration
-    | AccessRuleEditParams.FirewallCIDRConfiguration
-    | AccessRuleEditParams.FirewallASNConfiguration
-    | AccessRuleEditParams.FirewallCountryConfiguration;
+    | IPConfiguration
+    | IPV6Configuration
+    | CIDRConfiguration
+    | ASNConfiguration
+    | CountryConfiguration;
 
   /**
    * Body param: The action to apply to a matched request.
@@ -462,76 +460,6 @@ export interface AccessRuleEditParams {
   notes?: string;
 }
 
-export namespace AccessRuleEditParams {
-  export interface FirewallIPConfiguration {
-    /**
-     * The configuration target. You must set the target to `ip` when specifying an IP
-     * address in the rule.
-     */
-    target?: 'ip';
-
-    /**
-     * The IP address to match. This address will be compared to the IP address of
-     * incoming requests.
-     */
-    value?: string;
-  }
-
-  export interface FirewallIPV6Configuration {
-    /**
-     * The configuration target. You must set the target to `ip6` when specifying an
-     * IPv6 address in the rule.
-     */
-    target?: 'ip6';
-
-    /**
-     * The IPv6 address to match.
-     */
-    value?: string;
-  }
-
-  export interface FirewallCIDRConfiguration {
-    /**
-     * The configuration target. You must set the target to `ip_range` when specifying
-     * an IP address range in the rule.
-     */
-    target?: 'ip_range';
-
-    /**
-     * The IP address range to match. You can only use prefix lengths `/16` and `/24`
-     * for IPv4 ranges, and prefix lengths `/32`, `/48`, and `/64` for IPv6 ranges.
-     */
-    value?: string;
-  }
-
-  export interface FirewallASNConfiguration {
-    /**
-     * The configuration target. You must set the target to `asn` when specifying an
-     * Autonomous System Number (ASN) in the rule.
-     */
-    target?: 'asn';
-
-    /**
-     * The AS number to match.
-     */
-    value?: string;
-  }
-
-  export interface FirewallCountryConfiguration {
-    /**
-     * The configuration target. You must set the target to `country` when specifying a
-     * country code in the rule.
-     */
-    target?: 'country';
-
-    /**
-     * The two-letter ISO-3166-1 alpha-2 code to match. For more information, refer to
-     * [IP Access rules: Parameters](https://developers.cloudflare.com/waf/tools/ip-access-rules/parameters/#country).
-     */
-    value?: string;
-  }
-}
-
 export interface AccessRuleGetParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
@@ -545,6 +473,11 @@ export interface AccessRuleGetParams {
 }
 
 export namespace AccessRules {
+  export import ASNConfiguration = AccessRulesAPI.ASNConfiguration;
+  export import CIDRConfiguration = AccessRulesAPI.CIDRConfiguration;
+  export import CountryConfiguration = AccessRulesAPI.CountryConfiguration;
+  export import IPConfiguration = AccessRulesAPI.IPConfiguration;
+  export import IPV6Configuration = AccessRulesAPI.IPV6Configuration;
   export import AccessRuleListResponse = AccessRulesAPI.AccessRuleListResponse;
   export import AccessRuleDeleteResponse = AccessRulesAPI.AccessRuleDeleteResponse;
   export import AccessRuleListResponsesV4PagePaginationArray = AccessRulesAPI.AccessRuleListResponsesV4PagePaginationArray;

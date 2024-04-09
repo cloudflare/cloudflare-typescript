@@ -2215,13 +2215,8 @@ export namespace WaitingRooms {
   export import Events = EventsAPI.Events;
   export import Event = EventsAPI.Event;
   export import UnnamedSchemaRef229c159575bc68a9c21f5a1615629cf6 = EventsAPI.UnnamedSchemaRef229c159575bc68a9c21f5a1615629cf6;
-  export import EventCreateResponse = EventsAPI.EventCreateResponse;
-  export import EventUpdateResponse = EventsAPI.EventUpdateResponse;
-  export import EventListResponse = EventsAPI.EventListResponse;
   export import EventDeleteResponse = EventsAPI.EventDeleteResponse;
-  export import EventEditResponse = EventsAPI.EventEditResponse;
-  export import EventGetResponse = EventsAPI.EventGetResponse;
-  export import EventListResponsesSinglePage = EventsAPI.EventListResponsesSinglePage;
+  export import EventsSinglePage = EventsAPI.EventsSinglePage;
   export import EventCreateParams = EventsAPI.EventCreateParams;
   export import EventUpdateParams = EventsAPI.EventUpdateParams;
   export import EventListParams = EventsAPI.EventListParams;
@@ -2235,6 +2230,7 @@ export namespace WaitingRooms {
   export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
   export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
   export import RuleEditResponse = RulesAPI.RuleEditResponse;
+  export import RulesSinglePage = RulesAPI.RulesSinglePage;
   export import RuleCreateParams = RulesAPI.RuleCreateParams;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
   export import RuleListParams = RulesAPI.RuleListParams;
