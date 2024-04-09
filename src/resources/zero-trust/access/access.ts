@@ -56,7 +56,7 @@ export type AccessRule =
   | GroupRule
   | AzureGroupRule
   | GitHubOrganizationRule
-  | GsuiteGroupRule
+  | GSuiteGroupRule
   | OktaGroupRule
   | SAMLGroupRule
   | ServiceTokenRule
@@ -257,12 +257,12 @@ export namespace GroupRule {
  * Matches a group in Google Workspace. Requires a Google Workspace identity
  * provider.
  */
-export interface GsuiteGroupRule {
-  gsuite: GsuiteGroupRule.Gsuite;
+export interface GSuiteGroupRule {
+  gsuite: GSuiteGroupRule.GSuite;
 }
 
-export namespace GsuiteGroupRule {
-  export interface Gsuite {
+export namespace GSuiteGroupRule {
+  export interface GSuite {
     /**
      * The ID of your Google Workspace identity provider.
      */
@@ -380,7 +380,7 @@ export namespace Access {
   export import ExternalEvaluationRule = AccessAPI.ExternalEvaluationRule;
   export import GitHubOrganizationRule = AccessAPI.GitHubOrganizationRule;
   export import GroupRule = AccessAPI.GroupRule;
-  export import GsuiteGroupRule = AccessAPI.GsuiteGroupRule;
+  export import GSuiteGroupRule = AccessAPI.GSuiteGroupRule;
   export import IPListRule = AccessAPI.IPListRule;
   export import IPRule = AccessAPI.IPRule;
   export import OktaGroupRule = AccessAPI.OktaGroupRule;

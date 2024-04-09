@@ -4323,7 +4323,7 @@ Types:
 - <code><a href="./src/resources/zero-trust/access/access.ts">ExternalEvaluationRule</a></code>
 - <code><a href="./src/resources/zero-trust/access/access.ts">GitHubOrganizationRule</a></code>
 - <code><a href="./src/resources/zero-trust/access/access.ts">GroupRule</a></code>
-- <code><a href="./src/resources/zero-trust/access/access.ts">GsuiteGroupRule</a></code>
+- <code><a href="./src/resources/zero-trust/access/access.ts">GSuiteGroupRule</a></code>
 - <code><a href="./src/resources/zero-trust/access/access.ts">IPListRule</a></code>
 - <code><a href="./src/resources/zero-trust/access/access.ts">IPRule</a></code>
 - <code><a href="./src/resources/zero-trust/access/access.ts">OktaGroupRule</a></code>
