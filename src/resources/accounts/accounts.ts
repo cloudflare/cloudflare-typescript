@@ -198,7 +198,7 @@ export interface AccountGetParams {
 export namespace Accounts {
   export import Members = MembersAPI.Members;
   export import Member = MembersAPI.Member;
-  export import MemberRoles = MembersAPI.MemberRoles;
+  export import MemberRole = MembersAPI.MemberRole;
   export import MemberWithInviteCode = MembersAPI.MemberWithInviteCode;
   export import MemberListResponse = MembersAPI.MemberListResponse;
   export import MemberDeleteResponse = MembersAPI.MemberDeleteResponse;
@@ -210,8 +210,8 @@ export namespace Accounts {
   export import MemberGetParams = MembersAPI.MemberGetParams;
   export import Roles = RolesAPI.Roles;
   export import PermissionGrant = RolesAPI.PermissionGrant;
-  export import Role = RolesAPI.Role;
-  export import RolesSinglePage = RolesAPI.RolesSinglePage;
+  export import RoleListResponse = RolesAPI.RoleListResponse;
+  export import RoleListResponsesSinglePage = RolesAPI.RoleListResponsesSinglePage;
   export import RoleListParams = RolesAPI.RoleListParams;
   export import RoleGetParams = RolesAPI.RoleGetParams;
 }

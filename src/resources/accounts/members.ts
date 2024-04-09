@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as MembersAPI from 'cloudflare/resources/accounts/members';
 import * as RolesAPI from 'cloudflare/resources/accounts/roles';
+import * as PermissionGroupsAPI from 'cloudflare/resources/user/tokens/permission-groups';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class Members extends APIResource {
@@ -179,7 +180,7 @@ export namespace Member {
 /**
  * List of role names for the user at the account.
  */
-export type MemberRoles = Array<string>;
+export type MemberRole = Array<string>;
 
 export interface MemberWithInviteCode {
   /**
@@ -298,12 +299,36 @@ export interface MemberListResponse {
   /**
    * Roles assigned to this Member.
    */
-  roles: Array<RolesAPI.Role>;
+  roles: Array<MemberListResponse.Role>;
 
   /**
    * A member's status in the organization.
    */
   status: 'accepted' | 'invited';
+}
+
+export namespace MemberListResponse {
+  export interface Role {
+    /**
+     * Role identifier tag.
+     */
+    id: string;
+
+    /**
+     * Description of role's permissions.
+     */
+    description: string;
+
+    /**
+     * Role Name.
+     */
+    name: string;
+
+    /**
+     * Access permissions for this User.
+     */
+    permissions: Array<PermissionGroupsAPI.Permission>;
+  }
 }
 
 export interface MemberDeleteResponse {
@@ -396,7 +421,7 @@ export interface MemberGetParams {
 
 export namespace Members {
   export import Member = MembersAPI.Member;
-  export import MemberRoles = MembersAPI.MemberRoles;
+  export import MemberRole = MembersAPI.MemberRole;
   export import MemberWithInviteCode = MembersAPI.MemberWithInviteCode;
   export import MemberListResponse = MembersAPI.MemberListResponse;
   export import MemberDeleteResponse = MembersAPI.MemberDeleteResponse;
