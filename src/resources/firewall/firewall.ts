@@ -21,7 +21,7 @@ export namespace Firewall {
   export import Lockdown = LockdownsAPI.Lockdown;
   export import LockdownCIDRConfiguration = LockdownsAPI.LockdownCIDRConfiguration;
   export import LockdownIPConfiguration = LockdownsAPI.LockdownIPConfiguration;
-  export import URLs = LockdownsAPI.URLs;
+  export import LockdownURL = LockdownsAPI.LockdownURL;
   export import LockdownDeleteResponse = LockdownsAPI.LockdownDeleteResponse;
   export import LockdownsV4PagePaginationArray = LockdownsAPI.LockdownsV4PagePaginationArray;
   export import LockdownCreateParams = LockdownsAPI.LockdownCreateParams;

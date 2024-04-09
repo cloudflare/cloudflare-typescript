@@ -1512,7 +1512,7 @@ Types:
 - <code><a href="./src/resources/firewall/lockdowns.ts">Lockdown</a></code>
 - <code><a href="./src/resources/firewall/lockdowns.ts">LockdownCIDRConfiguration</a></code>
 - <code><a href="./src/resources/firewall/lockdowns.ts">LockdownIPConfiguration</a></code>
-- <code><a href="./src/resources/firewall/lockdowns.ts">URLs</a></code>
+- <code><a href="./src/resources/firewall/lockdowns.ts">LockdownURL</a></code>
 - <code><a href="./src/resources/firewall/lockdowns.ts">LockdownDeleteResponse</a></code>
 
 Methods:
@@ -1584,8 +1584,8 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/firewall/waf/overrides.ts">Override</a></code>
+- <code><a href="./src/resources/firewall/waf/overrides.ts">OverrideURL</a></code>
 - <code><a href="./src/resources/firewall/waf/overrides.ts">RewriteAction</a></code>
-- <code><a href="./src/resources/firewall/waf/overrides.ts">URLs</a></code>
 - <code><a href="./src/resources/firewall/waf/overrides.ts">WAFRule</a></code>
 - <code><a href="./src/resources/firewall/waf/overrides.ts">OverrideDeleteResponse</a></code>
 
