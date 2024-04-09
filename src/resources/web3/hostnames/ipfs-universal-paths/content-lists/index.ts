@@ -2,7 +2,7 @@
 
 export { ContentList, ContentListUpdateParams, ContentLists } from './content-lists';
 export {
-  ContentListItem,
+  ContentList,
   UnnamedSchemaRef5e618833803e286db9ee7c73727f8b86,
   EntryListResponse,
   EntryDeleteResponse,

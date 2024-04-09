@@ -4,13 +4,13 @@ export { Challenges } from './challenges';
 export {
   Widget,
   WidgetDomain,
-  WidgetDomainItem,
+  WidgetListResponse,
   WidgetCreateParams,
   WidgetUpdateParams,
   WidgetListParams,
   WidgetDeleteParams,
   WidgetGetParams,
   WidgetRotateSecretParams,
-  WidgetDomainsV4PagePaginationArray,
+  WidgetListResponsesV4PagePaginationArray,
   Widgets,
 } from './widgets';

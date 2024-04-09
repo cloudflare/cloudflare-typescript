@@ -83,7 +83,7 @@ export class CertificatePacks extends APIResource {
 
 export class CertificatePackListResponsesSinglePage extends SinglePage<CertificatePackListResponse> {}
 
-export type HostItem = string;
+export type Host = string;
 
 export type CertificatePackListResponse = unknown;
 
@@ -117,7 +117,7 @@ export interface CertificatePackEditResponse {
    * Comma separated list of valid host names for the certificate packs. Must contain
    * the zone apex, may not contain more than 50 hosts, and may not be empty.
    */
-  hosts?: Array<HostItem>;
+  hosts?: Array<Host>;
 
   /**
    * Status of certificate pack.
@@ -205,7 +205,7 @@ export interface CertificatePackGetParams {
 }
 
 export namespace CertificatePacks {
-  export import HostItem = CertificatePacksAPI.HostItem;
+  export import Host = CertificatePacksAPI.Host;
   export import CertificatePackListResponse = CertificatePacksAPI.CertificatePackListResponse;
   export import CertificatePackDeleteResponse = CertificatePacksAPI.CertificatePackDeleteResponse;
   export import CertificatePackEditResponse = CertificatePacksAPI.CertificatePackEditResponse;

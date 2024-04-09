@@ -115,7 +115,7 @@ export interface Firewall {
    */
   deprecate_any_requests: boolean;
 
-  dns_firewall_ips: Array<FirewallIPsItem>;
+  dns_firewall_ips: Array<FirewallIPs>;
 
   /**
    * Forward client IP (resolver) subnet if no EDNS Client Subnet is sent.
@@ -170,7 +170,7 @@ export interface Firewall {
 /**
  * Cloudflare-assigned DNS IPv4 Address.
  */
-export type FirewallIPsItem = string | string;
+export type FirewallIPs = string | string;
 
 /**
  * Upstream DNS Server IPv4 Address.
@@ -277,7 +277,7 @@ export interface FirewallEditParams {
   /**
    * Body param:
    */
-  dns_firewall_ips: Array<FirewallIPsItem>;
+  dns_firewall_ips: Array<FirewallIPs>;
 
   /**
    * Body param: Forward client IP (resolver) subnet if no EDNS Client Subnet is
@@ -338,7 +338,7 @@ export interface FirewallGetParams {
 export namespace FirewallResource {
   export import AttackMitigation = FirewallAPI.AttackMitigation;
   export import Firewall = FirewallAPI.Firewall;
-  export import FirewallIPsItem = FirewallAPI.FirewallIPsItem;
+  export import FirewallIPs = FirewallAPI.FirewallIPs;
   export import UpstreamIPs = FirewallAPI.UpstreamIPs;
   export import FirewallDeleteResponse = FirewallAPI.FirewallDeleteResponse;
   export import FirewallsV4PagePaginationArray = FirewallAPI.FirewallsV4PagePaginationArray;

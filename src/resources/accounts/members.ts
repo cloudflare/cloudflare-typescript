@@ -4,7 +4,6 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as MembersAPI from 'cloudflare/resources/accounts/members';
 import * as RolesAPI from 'cloudflare/resources/accounts/roles';
-import * as PermissionGroupsAPI from 'cloudflare/resources/user/tokens/permission-groups';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class Members extends APIResource {
@@ -117,7 +116,35 @@ export namespace Member {
      */
     name: string;
 
-    permissions: PermissionGroupsAPI.Permission;
+    permissions: Role.Permissions;
+  }
+
+  export namespace Role {
+    export interface Permissions {
+      analytics?: RolesAPI.PermissionGrant;
+
+      billing?: RolesAPI.PermissionGrant;
+
+      cache_purge?: RolesAPI.PermissionGrant;
+
+      dns?: RolesAPI.PermissionGrant;
+
+      dns_records?: RolesAPI.PermissionGrant;
+
+      lb?: RolesAPI.PermissionGrant;
+
+      logs?: RolesAPI.PermissionGrant;
+
+      organization?: RolesAPI.PermissionGrant;
+
+      ssl?: RolesAPI.PermissionGrant;
+
+      waf?: RolesAPI.PermissionGrant;
+
+      zone_settings?: RolesAPI.PermissionGrant;
+
+      zones?: RolesAPI.PermissionGrant;
+    }
   }
 
   export interface User {
@@ -192,7 +219,35 @@ export namespace MemberWithInviteCode {
      */
     name: string;
 
-    permissions: PermissionGroupsAPI.Permission;
+    permissions: Role.Permissions;
+  }
+
+  export namespace Role {
+    export interface Permissions {
+      analytics?: RolesAPI.PermissionGrant;
+
+      billing?: RolesAPI.PermissionGrant;
+
+      cache_purge?: RolesAPI.PermissionGrant;
+
+      dns?: RolesAPI.PermissionGrant;
+
+      dns_records?: RolesAPI.PermissionGrant;
+
+      lb?: RolesAPI.PermissionGrant;
+
+      logs?: RolesAPI.PermissionGrant;
+
+      organization?: RolesAPI.PermissionGrant;
+
+      ssl?: RolesAPI.PermissionGrant;
+
+      waf?: RolesAPI.PermissionGrant;
+
+      zone_settings?: RolesAPI.PermissionGrant;
+
+      zones?: RolesAPI.PermissionGrant;
+    }
   }
 
   export interface User {

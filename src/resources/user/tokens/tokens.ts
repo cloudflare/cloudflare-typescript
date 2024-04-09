@@ -108,7 +108,7 @@ export class TokenListResponsesV4PagePaginationArray extends V4PagePaginationArr
 /**
  * IPv4/IPv6 CIDR.
  */
-export type CIDRListItem = string;
+export type CIDRList = string;
 
 export interface Policy {
   /**
@@ -230,12 +230,12 @@ export namespace TokenCreateParams {
       /**
        * List of IPv4/IPv6 CIDR addresses.
        */
-      in?: Array<TokensAPI.CIDRListItem>;
+      in?: Array<TokensAPI.CIDRList>;
 
       /**
        * List of IPv4/IPv6 CIDR addresses.
        */
-      not_in?: Array<TokensAPI.CIDRListItem>;
+      not_in?: Array<TokensAPI.CIDRList>;
     }
   }
 }
@@ -286,12 +286,12 @@ export namespace TokenUpdateParams {
       /**
        * List of IPv4/IPv6 CIDR addresses.
        */
-      in?: Array<TokensAPI.CIDRListItem>;
+      in?: Array<TokensAPI.CIDRList>;
 
       /**
        * List of IPv4/IPv6 CIDR addresses.
        */
-      not_in?: Array<TokensAPI.CIDRListItem>;
+      not_in?: Array<TokensAPI.CIDRList>;
     }
   }
 }
@@ -306,7 +306,7 @@ export interface TokenListParams extends V4PagePaginationArrayParams {
 export type TokenDeleteParams = unknown;
 
 export namespace Tokens {
-  export import CIDRListItem = TokensAPI.CIDRListItem;
+  export import CIDRList = TokensAPI.CIDRList;
   export import Policy = TokensAPI.Policy;
   export import TokenCreateResponse = TokensAPI.TokenCreateResponse;
   export import TokenListResponse = TokensAPI.TokenListResponse;
@@ -319,7 +319,6 @@ export namespace Tokens {
   export import TokenDeleteParams = TokensAPI.TokenDeleteParams;
   export import PermissionGroups = PermissionGroupsAPI.PermissionGroups;
   export import Permission = PermissionGroupsAPI.Permission;
-  export import PermissionItem = PermissionGroupsAPI.PermissionItem;
   export import PermissionGroupListResponse = PermissionGroupsAPI.PermissionGroupListResponse;
   export import PermissionGroupListResponsesSinglePage = PermissionGroupsAPI.PermissionGroupListResponsesSinglePage;
   export import ValueResource = ValueAPI.ValueResource;

@@ -135,7 +135,7 @@ export interface ListCreateResponse {
   /**
    * The items in the list.
    */
-  items?: Array<ItemsAPI.ListsItem>;
+  items?: Array<ItemsAPI.Lists>;
 
   /**
    * The name of the list.
@@ -174,7 +174,7 @@ export interface ListCreateParams {
   /**
    * Body param: The items in the list.
    */
-  items?: Array<ItemsAPI.ListsItem>;
+  items?: Array<ItemsAPI.Lists>;
 }
 
 export interface ListUpdateParams {
@@ -219,7 +219,7 @@ export interface ListEditParams {
   /**
    * Body param: The items in the list.
    */
-  append?: Array<ItemsAPI.ListsItem>;
+  append?: Array<ItemsAPI.Lists>;
 
   /**
    * Body param: A list of the item values you want to remove.
@@ -242,7 +242,6 @@ export namespace Lists {
   export import ListEditParams = ListsAPI.ListEditParams;
   export import ListGetParams = ListsAPI.ListGetParams;
   export import Items = ItemsAPI.Items;
-  export import ListsItem = ItemsAPI.ListsItem;
   export import ItemListResponse = ItemsAPI.ItemListResponse;
   export import ItemListResponsesSinglePage = ItemsAPI.ItemListResponsesSinglePage;
   export import ItemListParams = ItemsAPI.ItemListParams;

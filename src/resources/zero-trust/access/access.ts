@@ -407,7 +407,7 @@ export namespace Access {
   export import ApplicationGetParams = ApplicationsAPI.ApplicationGetParams;
   export import ApplicationRevokeTokensParams = ApplicationsAPI.ApplicationRevokeTokensParams;
   export import Certificates = CertificatesAPI.Certificates;
-  export import AssociatedHostnamesItem = CertificatesAPI.AssociatedHostnamesItem;
+  export import AssociatedHostnames = CertificatesAPI.AssociatedHostnames;
   export import Certificate = CertificatesAPI.Certificate;
   export import CertificateDeleteResponse = CertificatesAPI.CertificateDeleteResponse;
   export import CertificatesSinglePage = CertificatesAPI.CertificatesSinglePage;

@@ -121,7 +121,7 @@ export class RulesV4PagePaginationArray extends V4PagePaginationArray<Rule> {}
 /**
  * A list of products to bypass for a request when using the `bypass` action.
  */
-export type ProductsItem = 'zoneLockdown' | 'uaBlock' | 'bic' | 'hot' | 'securityLevel' | 'rateLimit' | 'waf';
+export type Products = 'zoneLockdown' | 'uaBlock' | 'bic' | 'hot' | 'securityLevel' | 'rateLimit' | 'waf';
 
 export interface Rule {
   /**
@@ -154,7 +154,7 @@ export interface Rule {
    */
   priority?: number;
 
-  products?: Array<ProductsItem>;
+  products?: Array<Products>;
 
   /**
    * A short reference tag. Allows you to select related firewall rules.
@@ -227,7 +227,7 @@ export interface RuleGetParams {
 }
 
 export namespace Rules {
-  export import ProductsItem = RulesAPI.ProductsItem;
+  export import Products = RulesAPI.Products;
   export import Rule = RulesAPI.Rule;
   export import DeletedFilter = RulesAPI.DeletedFilter;
   export import RuleCreateResponse = RulesAPI.RuleCreateResponse;

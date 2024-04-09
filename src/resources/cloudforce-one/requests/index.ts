@@ -2,7 +2,7 @@
 
 export {
   Item,
-  ListItem,
+  List,
   Quota,
   RequestConstants,
   RequestTypes,
@@ -10,11 +10,11 @@ export {
   RequestCreateParams,
   RequestUpdateParams,
   RequestListParams,
-  ListItemsV4PagePaginationArray,
+  ListsV4PagePaginationArray,
   Requests,
 } from './requests';
 export {
-  LabelItem,
+  Label,
   Priority,
   PriorityEdit,
   PriorityDeleteResponse,

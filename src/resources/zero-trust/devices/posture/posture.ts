@@ -117,7 +117,7 @@ export interface DevicePostureRule {
   /**
    * The conditions that the client must match to run the rule.
    */
-  match?: Array<MatchItem>;
+  match?: Array<Match>;
 
   /**
    * The name of the device posture rule.
@@ -516,7 +516,7 @@ export namespace Input {
   }
 }
 
-export interface MatchItem {
+export interface Match {
   platform?: 'windows' | 'mac' | 'linux' | 'android' | 'ios';
 }
 
@@ -555,7 +555,7 @@ export interface UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27 {
   /**
    * The conditions that the client must match to run the rule.
    */
-  match?: Array<MatchItem>;
+  match?: Array<Match>;
 
   /**
    * The name of the device posture rule.
@@ -654,7 +654,7 @@ export interface PostureCreateParams {
   /**
    * Body param: The conditions that the client must match to run the rule.
    */
-  match?: Array<MatchItem>;
+  match?: Array<Match>;
 
   /**
    * Body param: Polling frequency for the WARP client posture check. Default: `5m`
@@ -717,7 +717,7 @@ export interface PostureUpdateParams {
   /**
    * Body param: The conditions that the client must match to run the rule.
    */
-  match?: Array<MatchItem>;
+  match?: Array<Match>;
 
   /**
    * Body param: Polling frequency for the WARP client posture check. Default: `5m`
@@ -749,7 +749,7 @@ export interface PostureGetParams {
 export namespace Posture {
   export import DevicePostureRule = PostureAPI.DevicePostureRule;
   export import Input = PostureAPI.Input;
-  export import MatchItem = PostureAPI.MatchItem;
+  export import Match = PostureAPI.Match;
   export import UnnamedSchemaRef34ef0ad73a63c3f76ed170adca181930 = PostureAPI.UnnamedSchemaRef34ef0ad73a63c3f76ed170adca181930;
   export import UnnamedSchemaRef41885dd46b9e0294254c49305a273681 = PostureAPI.UnnamedSchemaRef41885dd46b9e0294254c49305a273681;
   export import UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27 = PostureAPI.UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27;
